@@ -34,5 +34,7 @@ https://widgets.berlinwalk.com/lead-form/
 Use Wix "Embed a Site" / iframe URL instead of "Paste HTML code".
 This keeps the code out of Wix's `usrfiles.com/html/...` iframe hosting.
 
-Suggested desktop height for the lead form: `330px`.
-Suggested mobile height for the lead form: `360px`.
+Suggested Wix embed height for the lead form: `390px`.
+
+Wix blog embeds may use a single fixed height across desktop and mobile.
+Use `390px` as the shared value to avoid iframe-internal scrolling on mobile.
