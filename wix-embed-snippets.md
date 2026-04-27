@@ -14,7 +14,7 @@ Recommended Wix element heights:
 
 ```text
 Desktop: 330px
-Mobile: 520px
+Mobile: 360px
 ```
 
 If Wix asks for full iframe code instead of just a URL:
