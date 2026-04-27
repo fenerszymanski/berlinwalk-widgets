@@ -9,6 +9,7 @@ an iframe URL.
 ## Widgets
 
 - `lead-form/` - Berlin Essentials email capture form.
+- `quick-summary/` - reusable quick summary and optional audio player.
 
 ## Local Preview
 
@@ -39,3 +40,8 @@ Suggested Wix embed height for the lead form: `320px`.
 Wix blog embeds may use a single fixed height across desktop and mobile.
 Use `320px` as the shared value to avoid iframe-internal scrolling on mobile
 without leaving a large blank area on desktop.
+
+Suggested Wix embed height for quick summaries:
+
+- `summary only`: `460px`
+- `summary + audio`: `540px`
