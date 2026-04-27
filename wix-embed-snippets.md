@@ -29,6 +29,12 @@ If Wix asks for full iframe code instead of just a URL:
 
 ## Quick Summary
 
+Preferred short URL format:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=gift-guide
+```
+
 Recommended URL format:
 
 ```text
@@ -44,6 +50,5 @@ Add audio with:
 Recommended Wix element heights:
 
 ```text
-Summary only: 460px
-Summary + audio: 540px
+Audio + summary: 520px
 ```

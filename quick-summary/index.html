@@ -271,6 +271,7 @@
   <script>
     (function () {
       var params = new URLSearchParams(window.location.search);
+      var postSlug = params.get('post');
       var root = document.querySelector('.bw-quick');
       var list = document.querySelector('[data-field="list"]');
       var icon = document.querySelector('[data-field="icon"]');
@@ -303,37 +304,65 @@
         return escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
       }
 
-      icon.textContent = value('icon', '📝');
-      title.textContent = value('title', 'Quick Summary');
-      kicker.textContent = value('kicker', 'BERLINWALK.COM • TOURIST TIPS');
-      audioLabel.textContent = value('audioLabel', 'Listen to the Quick Summary');
-
-      var audioUrl = value('audio', '');
-      if (audioUrl) {
-        audioSource.src = audioUrl;
-        audio.load();
-        audioWrap.classList.add('is-visible');
+      function collectParamItems() {
+        var paramItems = [];
+        for (var i = 1; i <= 7; i += 1) {
+          var item = value('i' + i, '');
+          if (item) paramItems.push(item);
+        }
+        return paramItems;
       }
 
-      var items = [];
-      for (var i = 1; i <= 7; i += 1) {
-        var item = value('i' + i, '');
-        if (item) items.push(item);
+      function render(config) {
+        config = config || {};
+
+        icon.textContent = config.icon || value('icon', '📝');
+        title.textContent = config.title || value('title', 'Quick Summary');
+        kicker.textContent = config.kicker || value('kicker', 'BERLINWALK.COM • TOURIST TIPS');
+        audioLabel.textContent = config.audioLabel || value('audioLabel', 'Listen to the Quick Summary');
+
+        var audioUrl = config.audio || value('audio', '');
+        if (audioUrl) {
+          audioSource.src = audioUrl;
+          audio.load();
+          audioWrap.classList.add('is-visible');
+        }
+
+        var items = Array.isArray(config.items) && config.items.length
+          ? config.items
+          : collectParamItems();
+
+        if (!items.length) {
+          root.innerHTML = '<div class="bw-empty">Add summary items with URL parameters such as <strong>i1</strong>, <strong>i2</strong>, and <strong>i3</strong>, or use <strong>?post=slug</strong>.</div>';
+          return;
+        }
+
+        list.innerHTML = items.map(function (item, index) {
+          return [
+            '<div class="bw-item">',
+            '<div class="bw-number">' + (index + 1) + '</div>',
+            '<div class="bw-text">' + formatSummary(item) + '</div>',
+            '</div>'
+          ].join('');
+        }).join('');
       }
 
-      if (!items.length) {
-        root.innerHTML = '<div class="bw-empty">Add summary items with URL parameters such as <strong>i1</strong>, <strong>i2</strong>, and <strong>i3</strong>.</div>';
+      if (postSlug) {
+        fetch('./data.json')
+          .then(function (response) {
+            if (!response.ok) throw new Error('data_not_found');
+            return response.json();
+          })
+          .then(function (data) {
+            render(data[postSlug]);
+          })
+          .catch(function () {
+            root.innerHTML = '<div class="bw-empty">Quick summary not found for <strong>' + escapeHtml(postSlug) + '</strong>.</div>';
+          });
         return;
       }
 
-      list.innerHTML = items.map(function (item, index) {
-        return [
-          '<div class="bw-item">',
-          '<div class="bw-number">' + (index + 1) + '</div>',
-          '<div class="bw-text">' + formatSummary(item) + '</div>',
-          '</div>'
-        ].join('');
-      }).join('');
+      render();
     })();
   </script>
 </body>

@@ -43,5 +43,4 @@ without leaving a large blank area on desktop.
 
 Suggested Wix embed height for quick summaries:
 
-- `summary only`: `460px`
-- `summary + audio`: `540px`
+- `audio + summary`: `520px`
