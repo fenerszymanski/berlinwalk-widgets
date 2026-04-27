@@ -271,6 +271,11 @@
       border: 1px solid #F5C6C6;
     }
 
+    .bw-signup.is-submitted .bw-input-row,
+    .bw-signup.is-submitted .bw-privacy {
+      display: none;
+    }
+
     .bw-success-detail {
       font-size: 12px;
       font-weight: 500;
@@ -446,14 +451,11 @@
 
           if (response.ok && data.success) {
             form.reset();
-
-            var detail = data.alreadyExists
-              ? 'You are already on the list.'
-              : 'Check your inbox for the PDF.';
+            document.querySelector('.bw-signup').classList.add('is-submitted');
 
             showMessage(
               'success',
-              '<strong>You are in.</strong><div class="bw-success-detail">' + detail + '</div>'
+              '<strong>You are in.</strong> Check your inbox.'
             );
           } else {
             var errorMsg = data.error === 'invalid_email'
