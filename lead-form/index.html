@@ -339,8 +339,14 @@
 
       .bw-message {
         margin-top: 8px;
-        padding: 8px 10px;
-        font-size: 12px;
+        padding: 7px 9px;
+        font-size: 11.5px;
+        line-height: 1.3;
+      }
+
+      .bw-success-detail {
+        font-size: 11.5px;
+        margin-top: 2px;
       }
     }
   </style>
@@ -442,8 +448,8 @@
             form.reset();
 
             var detail = data.alreadyExists
-              ? 'Looks like you are already on the list. Check your inbox for a previous email.'
-              : 'Check your inbox in a minute for the Berlin Essentials PDF.';
+              ? 'You are already on the list.'
+              : 'Check your inbox for the PDF.';
 
             showMessage(
               'success',
