@@ -13,7 +13,7 @@ https://widgets.berlinwalk.com/lead-form/?source=menu-post
 Recommended Wix element height:
 
 ```text
-390px
+320px
 ```
 
 If Wix asks for full iframe code instead of just a URL:
@@ -23,6 +23,6 @@ If Wix asks for full iframe code instead of just a URL:
   src="https://widgets.berlinwalk.com/lead-form/?source=menu-post"
   title="Get the free Berlin Essentials PDF"
   loading="lazy"
-  style="width:100%;height:390px;border:0;display:block;"
+  style="width:100%;height:320px;border:0;display:block;"
 ></iframe>
 ```

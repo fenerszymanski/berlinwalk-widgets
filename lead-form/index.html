@@ -47,6 +47,7 @@
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
       display: grid;
       grid-template-columns: 0.8fr 1.35fr;
+      min-height: 300px;
     }
 
     .bw-visual {
@@ -283,52 +284,15 @@
 
       .bw-wrap {
         grid-template-columns: 1fr;
+        min-height: 0;
       }
 
       .bw-visual {
-        min-height: 88px;
-        padding: 10px 14px;
-      }
-
-      .bw-pdf-mock {
-        width: 58px;
-        height: 74px;
-        transform: rotate(-3deg);
-      }
-
-      .bw-pdf-header {
-        height: 18px;
-        padding: 4px 5px;
-        gap: 2px;
-      }
-
-      .bw-pdf-kicker {
-        height: 3px;
-      }
-
-      .bw-pdf-title {
-        height: 4px;
-      }
-
-      .bw-pdf-lines {
-        padding: 7px 6px;
-        gap: 3px;
-      }
-
-      .bw-pdf-lines span {
-        height: 2px;
-      }
-
-      .bw-pdf-badge {
-        font-size: 7px;
-        letter-spacing: 0.8px;
-        padding: 3px 6px;
-        top: -5px;
-        right: -5px;
+        display: none;
       }
 
       .bw-form {
-        padding: 14px 16px 15px;
+        padding: 16px;
       }
 
       .bw-kicker {
