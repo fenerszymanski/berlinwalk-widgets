@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Berlin Essentials Signup</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    body {
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    .bw-signup {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-error: #C62828;
+
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      color: var(--bw-text);
+      background: transparent;
+    }
+
+    .bw-signup,
+    .bw-signup * {
+      box-sizing: border-box;
+    }
+
+    .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      display: grid;
+      grid-template-columns: 0.8fr 1.35fr;
+    }
+
+    .bw-visual {
+      background: linear-gradient(135deg, #1B5E20 0%, #2d7a32 100%);
+      padding: 20px 18px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 190px;
+      isolation: isolate;
+    }
+
+    .bw-visual::before {
+      content: "";
+      position: absolute;
+      top: -35%;
+      right: -20%;
+      width: 140px;
+      height: 140px;
+      background: var(--bw-yellow);
+      opacity: 0.08;
+      border-radius: 50%;
+    }
+
+    .bw-pdf-wrap {
+      position: relative;
+      z-index: 2;
+    }
+
+    .bw-pdf-mock {
+      width: 96px;
+      height: 124px;
+      background: var(--bw-white);
+      border-radius: 6px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      position: relative;
+      transform: rotate(-4deg);
+      z-index: 2;
+    }
+
+    .bw-pdf-header {
+      background: var(--bw-green);
+      height: 30px;
+      border-radius: 6px 6px 0 0;
+      padding: 6px 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .bw-pdf-kicker {
+      background: var(--bw-yellow);
+      width: 50%;
+      height: 4px;
+      border-radius: 2px;
+    }
+
+    .bw-pdf-title {
+      background: var(--bw-white);
+      width: 80%;
+      height: 6px;
+      border-radius: 2px;
+    }
+
+    .bw-pdf-lines {
+      padding: 10px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .bw-pdf-lines span {
+      height: 3px;
+      background: #E8EEDC;
+      border-radius: 2px;
+    }
+
+    .bw-pdf-lines span:nth-child(1) { width: 90%; }
+    .bw-pdf-lines span:nth-child(2) { width: 75%; }
+    .bw-pdf-lines span:nth-child(3) { width: 85%; }
+    .bw-pdf-lines span:nth-child(4) { width: 60%; }
+    .bw-pdf-lines span:nth-child(5) { width: 80%; }
+    .bw-pdf-lines span:nth-child(6) { width: 70%; }
+    .bw-pdf-lines span:nth-child(7) { width: 65%; }
+
+    .bw-pdf-badge {
+      position: absolute;
+      top: -8px;
+      right: -6px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      padding: 6px 10px;
+      border-radius: 20px;
+      transform: rotate(10deg);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+      z-index: 3;
+      white-space: nowrap;
+    }
+
+    .bw-form {
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .bw-kicker {
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .bw-title {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--bw-text);
+      line-height: 1.22;
+    }
+
+    .bw-desc {
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: var(--bw-muted);
+      line-height: 1.5;
+    }
+
+    .bw-input-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 9px;
+    }
+
+    .bw-input {
+      flex: 1;
+      min-width: 0;
+      padding: 12px 14px;
+      font-size: 14px;
+      font-family: inherit;
+      border: 1.5px solid var(--bw-border);
+      border-radius: 10px;
+      outline: none;
+      background: #FAFAF5;
+      color: var(--bw-text);
+    }
+
+    .bw-input:focus {
+      border-color: var(--bw-lime);
+      background: var(--bw-white);
+    }
+
+    .bw-input::placeholder {
+      color: #9BA59B;
+    }
+
+    .bw-submit {
+      padding: 12px 18px;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .bw-submit:hover {
+      background: var(--bw-green-dark);
+    }
+
+    .bw-submit:active {
+      transform: scale(0.97);
+    }
+
+    .bw-submit:disabled {
+      opacity: 0.6;
+      cursor: wait;
+    }
+
+    .bw-privacy {
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.45;
+    }
+
+    .bw-message {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 10px;
+      display: none;
+      line-height: 1.45;
+    }
+
+    .bw-message.show {
+      display: block;
+    }
+
+    .bw-message.success {
+      background: #EAF3DE;
+      color: #27500A;
+      border: 1px solid #C8D8B0;
+    }
+
+    .bw-message.error {
+      background: #FCEBEB;
+      color: var(--bw-error);
+      border: 1px solid #F5C6C6;
+    }
+
+    .bw-success-detail {
+      font-size: 12px;
+      font-weight: 500;
+      margin-top: 4px;
+    }
+
+    @media (max-width: 600px) {
+      .bw-signup {
+        max-width: 100%;
+      }
+
+      .bw-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-visual {
+        min-height: 132px;
+        padding: 16px;
+      }
+
+      .bw-pdf-mock {
+        width: 78px;
+        height: 102px;
+        transform: rotate(-3deg);
+      }
+
+      .bw-pdf-header {
+        height: 25px;
+        padding: 5px 6px;
+      }
+
+      .bw-pdf-badge {
+        font-size: 8px;
+        padding: 4px 8px;
+        top: -6px;
+        right: -4px;
+      }
+
+      .bw-form {
+        padding: 18px 16px;
+      }
+
+      .bw-title {
+        font-size: 17px;
+      }
+
+      .bw-desc {
+        font-size: 12.5px;
+        margin-bottom: 13px;
+      }
+
+      .bw-input-row {
+        flex-direction: column;
+      }
+
+      .bw-submit {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bw-signup">
+    <div class="bw-wrap">
+      <div class="bw-visual" aria-hidden="true">
+        <div class="bw-pdf-wrap">
+          <div class="bw-pdf-mock">
+            <div class="bw-pdf-header">
+              <div class="bw-pdf-kicker"></div>
+              <div class="bw-pdf-title"></div>
+            </div>
+            <div class="bw-pdf-lines">
+              <span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="bw-pdf-badge">FREE PDF</div>
+        </div>
+      </div>
+
+      <div class="bw-form">
+        <div class="bw-kicker">Before your trip</div>
+        <h3 class="bw-title">Get my free 1-page<br>Berlin Essentials PDF</h3>
+        <p class="bw-desc">Transit hacks, emergency numbers, Sunday shopping tricks, and the scams to skip - everything a local tells their friends before they visit.</p>
+
+        <form class="bw-signup-form" novalidate>
+          <div class="bw-input-row">
+            <input type="email" class="bw-input" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
+            <button type="submit" class="bw-submit">Send it -&gt;</button>
+          </div>
+          <div class="bw-privacy">No spam, unsubscribe anytime.</div>
+          <div class="bw-message" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var API_URL = 'https://www.berlinwalk.com/_functions/subscribe';
+
+      var form = document.querySelector('.bw-signup-form');
+      var input = document.querySelector('.bw-input');
+      var btn = document.querySelector('.bw-submit');
+      var msg = document.querySelector('.bw-message');
+
+      if (!form || !input || !btn || !msg) return;
+
+      var params = new URLSearchParams(window.location.search);
+      var source = params.get('source') || 'blog-post';
+
+      try {
+        var refUrl = (document.referrer || '').toLowerCase();
+        var match = refUrl.match(/\/post\/([^/?#]+)/);
+        if (match) {
+          source = 'post:' + match[1].slice(0, 60);
+        }
+      } catch (e) {}
+
+      function showMessage(type, html) {
+        msg.className = 'bw-message ' + type + ' show';
+        msg.innerHTML = html;
+      }
+
+      function validateEmail(value) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      }
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        var email = input.value.trim();
+        if (!validateEmail(email)) {
+          showMessage('error', 'Please enter a valid email address.');
+          input.focus();
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+        msg.className = 'bw-message';
+
+        try {
+          var response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, source: source })
+          });
+
+          var data = await response.json();
+
+          btn.disabled = false;
+          btn.textContent = 'Send it ->';
+
+          if (response.ok && data.success) {
+            form.reset();
+
+            var detail = data.alreadyExists
+              ? 'Looks like you are already on the list. Check your inbox for a previous email.'
+              : 'Check your inbox in a minute for the Berlin Essentials PDF.';
+
+            showMessage(
+              'success',
+              '<strong>You are in.</strong><div class="bw-success-detail">' + detail + '</div>'
+            );
+          } else {
+            var errorMsg = data.error === 'invalid_email'
+              ? 'Please enter a valid email address.'
+              : 'Something went wrong. Please try again in a moment.';
+
+            showMessage('error', errorMsg);
+          }
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = 'Send it ->';
+          showMessage('error', 'Connection error. Please try again.');
+          console.error('Subscribe fetch error:', err);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
