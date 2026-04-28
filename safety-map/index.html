@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Safety by Neighborhood | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div id="bw-neighborhood-map">
+  <style>
+    #bw-neighborhood-map {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-safe: #2E7D32;
+      --bw-moderate: #F9A825;
+      --bw-caution: #C62828;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-neighborhood-map * { box-sizing: border-box; }
+
+    #bw-neighborhood-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-neighborhood-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-neighborhood-map .bw-head-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    #bw-neighborhood-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-neighborhood-map .bw-body {
+      background: #FAFAF5;
+      padding: 16px 18px;
+    }
+
+    #bw-neighborhood-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-neighborhood-map .bw-legend {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    #bw-neighborhood-map .bw-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--bw-text);
+    }
+
+    #bw-neighborhood-map .bw-legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 2px solid var(--bw-white);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    #bw-neighborhood-map .bw-legend-dot.safe { background: var(--bw-safe); }
+    #bw-neighborhood-map .bw-legend-dot.moderate { background: var(--bw-moderate); }
+    #bw-neighborhood-map .bw-legend-dot.caution { background: var(--bw-caution); }
+
+    #bw-neighborhood-map .bw-map-container {
+      width: 100%;
+      height: 440px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-neighborhood-map .bw-map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #bw-neighborhood-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-neighborhood-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-neighborhood-map .leaflet-popup-content {
+      margin: 0;
+      width: 240px !important;
+      font-family: inherit;
+    }
+
+    #bw-neighborhood-map .leaflet-popup-tip {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    #bw-neighborhood-map .bw-popup-head {
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+    }
+
+    #bw-neighborhood-map .bw-popup-head.safe {
+      background: var(--bw-safe);
+    }
+
+    #bw-neighborhood-map .bw-popup-head.moderate {
+      background: var(--bw-moderate);
+    }
+
+    #bw-neighborhood-map .bw-popup-head.caution {
+      background: var(--bw-caution);
+    }
+
+    #bw-neighborhood-map .bw-popup-level {
+      color: rgba(255,255,255,0.9);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    #bw-neighborhood-map .bw-popup-name {
+      color: var(--bw-white);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-neighborhood-map .bw-popup-body {
+      padding: 12px 14px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      line-height: 1.55;
+    }
+
+    /* Custom markers */
+    #bw-neighborhood-map .bw-marker {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 3px solid var(--bw-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      color: var(--bw-white);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    #bw-neighborhood-map .bw-marker.safe { background: var(--bw-safe); }
+    #bw-neighborhood-map .bw-marker.moderate { background: var(--bw-moderate); }
+    #bw-neighborhood-map .bw-marker.caution { background: var(--bw-caution); }
+
+    #bw-neighborhood-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #bw-neighborhood-map .bw-count strong {
+      color: var(--bw-green);
+      font-weight: 800;
+    }
+
+    /* Mobile */
+    @media (max-width: 520px) {
+      #bw-neighborhood-map { margin: 22px 0; }
+      #bw-neighborhood-map .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-neighborhood-map .bw-head-icon { font-size: 16px; }
+      #bw-neighborhood-map .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-neighborhood-map .bw-body { padding: 14px; }
+      #bw-neighborhood-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-neighborhood-map .bw-legend { gap: 10px; }
+      #bw-neighborhood-map .bw-legend-item { font-size: 10.5px; }
+      #bw-neighborhood-map .bw-map-container { height: 360px; }
+      #bw-neighborhood-map .leaflet-popup-content { width: 210px !important; }
+      #bw-neighborhood-map .bw-popup-name { font-size: 14px; }
+      #bw-neighborhood-map .bw-popup-body { font-size: 12px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🗺️</span>
+      <span class="bw-kicker">Berlin Neighborhoods Safety Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">A local's view on Berlin's main neighborhoods. Tap a pin to see safety notes and what to watch for.</p>
+
+      <div class="bw-legend">
+        <div class="bw-legend-item">
+          <span class="bw-legend-dot safe" aria-hidden="true"></span>
+          Very Safe
+        </div>
+        <div class="bw-legend-item">
+          <span class="bw-legend-dot moderate" aria-hidden="true"></span>
+          Moderate / Watch for Pickpockets
+        </div>
+        <div class="bw-legend-item">
+          <span class="bw-legend-dot caution" aria-hidden="true"></span>
+          Caution After Dark
+        </div>
+      </div>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-safety-map-canvas"></div>
+      </div>
+
+      <p class="bw-count"><strong>12</strong> Berlin neighborhoods mapped</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-neighborhood-map');
+      if (!root) return;
+
+      var neighborhoods = [
+        {
+          name: 'Mitte',
+          level: 'safe',
+          lat: 52.5200, lng: 13.4050,
+          note: "Berlin's historic center — Brandenburg Gate, Museum Island, government quarter. Heavy tourist traffic means pickpocketing around crowded spots, but violent crime is extremely rare. Safe to walk any hour."
+        },
+        {
+          name: 'Charlottenburg',
+          level: 'safe',
+          lat: 52.5075, lng: 13.3050,
+          note: "Elegant West Berlin district with the famous Ku'damm shopping street and Charlottenburg Palace. One of Berlin's safest areas, popular with families and locals. Quiet residential streets, well-lit at night."
+        },
+        {
+          name: 'Prenzlauer Berg',
+          level: 'safe',
+          lat: 52.5400, lng: 13.4230,
+          note: "Berlin's family neighborhood — packed with cafés, playgrounds, and young parents. Leafy, relaxed, very safe day and night. Mauerpark (Sunday flea market) is here."
+        },
+        {
+          name: 'Schöneberg',
+          level: 'safe',
+          lat: 52.4850, lng: 13.3450,
+          note: "Residential and LGBTQ+ friendly, home to Berlin's gay scene around Nollendorfplatz. Very safe, great nightlife, lots of cafés and markets. Winterfeldtplatz Saturday market is a local gem."
+        },
+        {
+          name: 'Friedrichshain',
+          level: 'safe',
+          lat: 52.5150, lng: 13.4540,
+          note: "Young and creative — home to East Side Gallery, Boxhagener Platz, and nightlife around Revaler Straße. Busy and vibrant, generally safe. Watch for pickpockets around Warschauer Straße station."
+        },
+        {
+          name: 'Alexanderplatz area',
+          level: 'moderate',
+          lat: 52.5220, lng: 13.4132,
+          note: "Major transit hub — TV Tower, shopping, tours start here. Very safe overall, but also Berlin's #1 pickpocketing spot. Keep phone in front pocket, bags zipped. Well-lit and policed at all hours."
+        },
+        {
+          name: 'Kreuzberg (Kotti area)',
+          level: 'moderate',
+          lat: 52.4990, lng: 13.4180,
+          note: "Multicultural, artsy, full of life. Kottbusser Tor area gets loud and chaotic at night — mostly harmless but sometimes rough. Stay aware, avoid side streets after midnight."
+        },
+        {
+          name: 'Görlitzer Park',
+          level: 'caution',
+          lat: 52.4975, lng: 13.4300,
+          note: "The one Berlin park tourists are told to avoid after dark. Known for open drug dealing. Safe during daylight if passing through, but don't linger at night. Go around, not through."
+        },
+        {
+          name: 'Northern Neukölln',
+          level: 'moderate',
+          lat: 52.4830, lng: 13.4330,
+          note: "Rapidly gentrifying, vibrant food and bar scene along Weserstraße. Higher petty crime rates than quieter districts. Stay aware on Sonnenallee and around canal area at night."
+        },
+        {
+          name: 'Hackescher Markt',
+          level: 'safe',
+          lat: 52.5225, lng: 13.4020,
+          note: "Shopping, cafés, boutiques, and the Hackesche Höfe courtyards. One of Berlin's most charming tourist areas. Very safe at all hours — well-policed and always busy."
+        },
+        {
+          name: 'Wedding (Leopoldplatz)',
+          level: 'moderate',
+          lat: 52.5480, lng: 13.3580,
+          note: "Working-class residential district. Not a tourist destination. Can feel rough around Leopoldplatz at night but unlikely you'll end up here unless exploring off the beaten path."
+        },
+        {
+          name: 'Tiergarten',
+          level: 'safe',
+          lat: 52.5145, lng: 13.3500,
+          note: "Berlin's central park, Brandenburg Gate, Reichstag, Victory Column. Safe during day — jogging, cycling, family-friendly. Avoid the unlit interior paths late at night as with any big city park."
+        }
+      ];
+
+      var mapEl = document.getElementById('bw-safety-map-canvas');
+
+      var map = L.map(mapEl, {
+        center: [52.513, 13.405],
+        zoom: 11,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      function createMarkerIcon(level) {
+        var icons = { safe: '✓', moderate: '!', caution: '⚠' };
+        var html = '<div class="bw-marker ' + level + '">' + icons[level] + '</div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [28, 28],
+          iconAnchor: [14, 14],
+          popupAnchor: [0, -16]
+        });
+      }
+
+      function createPopup(loc) {
+        var levelLabels = {
+          safe: 'Very Safe',
+          moderate: 'Stay Aware',
+          caution: 'Caution After Dark'
+        };
+        return '<div class="bw-popup-head ' + loc.level + '">' +
+          '<span class="bw-popup-level">' + levelLabels[loc.level] + '</span>' +
+          '<div class="bw-popup-name">' + loc.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' + loc.note + '</div>';
+      }
+
+      neighborhoods.forEach(function (loc) {
+        L.marker([loc.lat, loc.lng], {
+          icon: createMarkerIcon(loc.level)
+        }).bindPopup(createPopup(loc), {
+          closeButton: true,
+          maxWidth: 260
+        }).addTo(map);
+      });
+
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+</div>
+</body>
+</html>

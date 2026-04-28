@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bw-green: #1B5E20;
+  --bw-green-dark: #164a1a;
+  --bw-yellow: #FFE600;
+  --bw-lime: #7CB342;
+  --bw-lime-soft: #F2F8E8;
+  --bw-border: #DCE8C8;
+  --bw-cream: #FAFAF5;
+  --bw-text: #212121;
+  --bw-muted: #4E5A4E;
+  --bw-white: #FFFFFF;
+  --bw-safe: #2E7D32;
+  --bw-moderate: #F9A825;
+  --bw-high: #C62828;
+  --bw-red: #B00020;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: Montserrat, Arial, sans-serif;
+  color: var(--bw-text);
+}

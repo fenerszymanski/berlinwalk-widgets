@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>European Capitals Safety Comparison | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div id="bw-safety-compare">
+  <style>
+    #bw-safety-compare {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-safe: #2E7D32;
+      --bw-moderate: #F9A825;
+      --bw-high: #C62828;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-safety-compare * { box-sizing: border-box; }
+
+    #bw-safety-compare .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-safety-compare .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-safety-compare .bw-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    #bw-safety-compare .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-safety-compare .bw-body {
+      background: var(--bw-white);
+      overflow-x: auto;
+    }
+
+    #bw-safety-compare table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    #bw-safety-compare thead th {
+      background: #FAFAF5;
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--bw-border);
+      border-top: 0.5px solid var(--bw-border);
+    }
+
+    #bw-safety-compare tbody td {
+      padding: 12px 14px;
+      border-bottom: 0.5px solid var(--bw-border);
+      vertical-align: middle;
+      line-height: 1.5;
+    }
+
+    #bw-safety-compare tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    #bw-safety-compare .bw-city {
+      font-weight: 700;
+      color: var(--bw-text);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #bw-safety-compare .bw-flag {
+      font-size: 16px;
+    }
+
+    #bw-safety-compare .bw-score {
+      font-weight: 800;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    #bw-safety-compare .bw-score.safe {
+      color: var(--bw-safe);
+    }
+
+    #bw-safety-compare .bw-score.moderate {
+      color: var(--bw-moderate);
+    }
+
+    #bw-safety-compare .bw-score.high {
+      color: var(--bw-high);
+    }
+
+    #bw-safety-compare .bw-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    #bw-safety-compare .bw-label.safe {
+      background: #EAF3DE;
+      color: #27500A;
+    }
+
+    #bw-safety-compare .bw-label.moderate {
+      background: #FFF3D6;
+      color: #7A5500;
+    }
+
+    #bw-safety-compare .bw-label.high {
+      background: #FCEBEB;
+      color: #791F1F;
+    }
+
+    #bw-safety-compare tbody tr.highlight {
+      background: #F2F8E8;
+    }
+
+    #bw-safety-compare tbody tr.highlight td {
+      border-bottom-color: #C8D8B0;
+    }
+
+    #bw-safety-compare .bw-badge-best {
+      display: inline-block;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    #bw-safety-compare .bw-footer {
+      padding: 12px 20px;
+      background: #FAFAF5;
+      border-top: 1px solid var(--bw-border);
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.5;
+    }
+
+    #bw-safety-compare .bw-footer strong {
+      color: var(--bw-text);
+    }
+
+    /* Mobile — card layout */
+    @media (max-width: 520px) {
+      #bw-safety-compare { margin: 22px 0; }
+      #bw-safety-compare .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-safety-compare .bw-icon { font-size: 16px; }
+      #bw-safety-compare .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-safety-compare .bw-body { padding: 12px 14px; }
+
+      #bw-safety-compare table,
+      #bw-safety-compare thead,
+      #bw-safety-compare tbody,
+      #bw-safety-compare tr,
+      #bw-safety-compare th,
+      #bw-safety-compare td { display: block; }
+
+      #bw-safety-compare thead { display: none; }
+
+      #bw-safety-compare tbody tr {
+        border: 1px solid var(--bw-border);
+        border-radius: 10px;
+        margin-bottom: 10px;
+        padding: 12px 14px;
+      }
+
+      #bw-safety-compare tbody tr:last-child { margin-bottom: 0; }
+
+      #bw-safety-compare tbody tr.highlight {
+        border-color: var(--bw-safe);
+        border-width: 2px;
+      }
+
+      #bw-safety-compare tbody td {
+        border: none;
+        padding: 4px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+
+      #bw-safety-compare tbody td::before {
+        content: attr(data-label);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: var(--bw-muted);
+      }
+
+      #bw-safety-compare tbody td[data-label="City"]::before {
+        display: none;
+      }
+
+      #bw-safety-compare tbody td[data-label="City"] {
+        justify-content: flex-start;
+        padding-bottom: 8px;
+        margin-bottom: 4px;
+        border-bottom: 1px solid var(--bw-border);
+      }
+
+      #bw-safety-compare .bw-footer { padding: 10px 14px; font-size: 10.5px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-icon" aria-hidden="true">📊</span>
+      <span class="bw-kicker">European Capitals Safety Comparison</span>
+    </div>
+    <div class="bw-body">
+      <table>
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Safety Score</th>
+            <th>Crime Level</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="highlight">
+            <td data-label="City">
+              <div class="bw-city">
+                <span class="bw-flag" aria-hidden="true">🇩🇪</span>
+                Berlin
+                <span class="bw-badge-best">Safest</span>
+              </div>
+            </td>
+            <td data-label="Safety Score"><span class="bw-score safe">55.3 / 100</span></td>
+            <td data-label="Crime Level"><span class="bw-label safe">Moderate</span></td>
+          </tr>
+          <tr>
+            <td data-label="City">
+              <div class="bw-city">
+                <span class="bw-flag" aria-hidden="true">🇳🇱</span>
+                Amsterdam
+              </div>
+            </td>
+            <td data-label="Safety Score"><span class="bw-score safe">54.6 / 100</span></td>
+            <td data-label="Crime Level"><span class="bw-label safe">Moderate</span></td>
+          </tr>
+          <tr>
+            <td data-label="City">
+              <div class="bw-city">
+                <span class="bw-flag" aria-hidden="true">🇮🇹</span>
+                Rome
+              </div>
+            </td>
+            <td data-label="Safety Score"><span class="bw-score moderate">47.0 / 100</span></td>
+            <td data-label="Crime Level"><span class="bw-label moderate">Moderate-High</span></td>
+          </tr>
+          <tr>
+            <td data-label="City">
+              <div class="bw-city">
+                <span class="bw-flag" aria-hidden="true">🇬🇧</span>
+                London
+              </div>
+            </td>
+            <td data-label="Safety Score"><span class="bw-score moderate">44.7 / 100</span></td>
+            <td data-label="Crime Level"><span class="bw-label moderate">Moderate-High</span></td>
+          </tr>
+          <tr>
+            <td data-label="City">
+              <div class="bw-city">
+                <span class="bw-flag" aria-hidden="true">🇫🇷</span>
+                Paris
+              </div>
+            </td>
+            <td data-label="Safety Score"><span class="bw-score high">42.0 / 100</span></td>
+            <td data-label="Crime Level"><span class="bw-label high">High</span></td>
+          </tr>
+          <tr>
+            <td data-label="City">
+              <div class="bw-city">
+                <span class="bw-flag" aria-hidden="true">🇧🇪</span>
+                Brussels
+              </div>
+            </td>
+            <td data-label="Safety Score"><span class="bw-score high">44.6 / 100</span></td>
+            <td data-label="Crime Level"><span class="bw-label moderate">Moderate-High</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bw-footer">
+      <strong>Source:</strong> Numbeo Crime & Safety Index 2026. Higher safety score = safer city. Berlin consistently outranks other major European capitals for overall perceived safety.
+    </div>
+  </div>
+</div>
+</body>
+</html>

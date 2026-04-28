@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Sunday Open Stores Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div id="bw-sunday-map">
+  <style>
+    #bw-sunday-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-sunday-map * {
+      box-sizing: border-box;
+    }
+
+    #bw-sunday-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-sunday-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-sunday-map .bw-head-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    #bw-sunday-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-sunday-map .bw-body {
+      background: #FAFAF5;
+      padding: 16px 18px;
+    }
+
+    #bw-sunday-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-sunday-map .bw-filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    #bw-sunday-map .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-sunday-map .bw-filter:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-sunday-map .bw-filter.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-sunday-map .bw-map-container {
+      width: 100%;
+      height: 420px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-sunday-map .bw-map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    /* Leaflet override styles (scoped to our widget) */
+    #bw-sunday-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-sunday-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-sunday-map .leaflet-popup-content {
+      margin: 0;
+      width: 240px !important;
+      font-family: inherit;
+    }
+
+    #bw-sunday-map .leaflet-popup-tip {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    #bw-sunday-map .bw-popup-head {
+      background: var(--bw-green);
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+    }
+
+    #bw-sunday-map .bw-popup-type {
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    #bw-sunday-map .bw-popup-name {
+      color: var(--bw-white);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-sunday-map .bw-popup-body {
+      padding: 12px 14px;
+    }
+
+    #bw-sunday-map .bw-popup-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--bw-text);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    #bw-sunday-map .bw-popup-row:last-child {
+      margin-bottom: 0;
+    }
+
+    #bw-sunday-map .bw-popup-row strong {
+      font-weight: 700;
+    }
+
+    #bw-sunday-map .bw-popup-label {
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      min-width: 46px;
+      padding-top: 1px;
+    }
+
+    #bw-sunday-map .bw-popup-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    #bw-sunday-map .bw-popup-link:hover {
+      background: #FFEF33;
+    }
+
+    /* Custom marker */
+    #bw-sunday-map .bw-marker {
+      width: 30px;
+      height: 30px;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #bw-sunday-map .bw-marker-inner {
+      transform: rotate(45deg);
+      color: var(--bw-yellow);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    #bw-sunday-map .bw-marker.special {
+      background: var(--bw-yellow);
+      border-color: var(--bw-green);
+    }
+
+    #bw-sunday-map .bw-marker.special .bw-marker-inner {
+      color: var(--bw-green);
+    }
+
+    #bw-sunday-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #bw-sunday-map .bw-count strong {
+      color: var(--bw-green);
+      font-weight: 800;
+    }
+
+    /* Mobile tweaks */
+    @media (max-width: 520px) {
+      #bw-sunday-map {
+        margin: 22px 0;
+      }
+
+      #bw-sunday-map .bw-head {
+        padding: 12px 16px;
+        gap: 8px;
+      }
+
+      #bw-sunday-map .bw-head-icon {
+        font-size: 16px;
+      }
+
+      #bw-sunday-map .bw-kicker {
+        font-size: 10px;
+        letter-spacing: 2px;
+      }
+
+      #bw-sunday-map .bw-body {
+        padding: 14px;
+      }
+
+      #bw-sunday-map .bw-hint {
+        font-size: 12px;
+        margin-bottom: 12px;
+      }
+
+      #bw-sunday-map .bw-filter {
+        font-size: 11px;
+        padding: 7px 12px;
+      }
+
+      #bw-sunday-map .bw-map-container {
+        height: 360px;
+      }
+
+      #bw-sunday-map .leaflet-popup-content {
+        width: 210px !important;
+      }
+
+      #bw-sunday-map .bw-popup-name {
+        font-size: 14px;
+      }
+
+      #bw-sunday-map .bw-popup-row {
+        font-size: 11.5px;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🗺️</span>
+      <span class="bw-kicker">Sunday Shopping Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">Tap any pin to see opening hours and store details. Filter by type to find what you need.</p>
+
+      <div class="bw-filters">
+        <button class="bw-filter active" type="button" data-filter="all">All (10)</button>
+        <button class="bw-filter" type="button" data-filter="supermarket">Supermarket</button>
+        <button class="bw-filter" type="button" data-filter="organic">Organic</button>
+        <button class="bw-filter" type="button" data-filter="24h">24/7</button>
+      </div>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-sunday-map-canvas"></div>
+      </div>
+
+      <p class="bw-count"><strong id="bw-count-num">10</strong> locations open 365 days a year</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-sunday-map');
+      if (!root) return;
+
+      var locations = [
+        {
+          name: 'Berlin Hauptbahnhof',
+          type: 'Main Station',
+          store: 'REWE City + Denns Biomarkt',
+          hours: 'Sun 8am–10pm',
+          area: 'Mitte',
+          lat: 52.5253114,
+          lng: 13.3692572,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJO1yL-b1RqEcRZJuytxpzjVI',
+          cats: ['supermarket', 'organic'],
+          special: false
+        },
+        {
+          name: 'Ostbahnhof',
+          type: 'Train Station',
+          store: 'REWE + Penny',
+          hours: 'Sun until midnight',
+          area: 'Friedrichshain',
+          lat: 52.5102757,
+          lng: 13.4351762,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJpw61EkdOqEcRncTXf3KCIxU',
+          cats: ['supermarket'],
+          special: false
+        },
+        {
+          name: 'Friedrichstraße',
+          type: 'Train Station',
+          store: 'Edeka + Go Asia + Vitalia',
+          hours: 'Sun 8am–10pm',
+          area: 'Mitte',
+          lat: 52.5202686,
+          lng: 13.3870955,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJcy1JA8NRqEcRBNy2MNzQTmw',
+          cats: ['supermarket', 'organic'],
+          special: false
+        },
+        {
+          name: 'Gesundbrunnen',
+          type: 'Train Station',
+          store: 'Denns Biomarkt',
+          hours: 'Sun 8am–10pm',
+          area: 'Wedding',
+          lat: 52.548814,
+          lng: 13.388938,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJo2GabhpSqEcReXa1bdoQHCs',
+          cats: ['organic'],
+          special: false
+        },
+        {
+          name: 'Ostkreuz',
+          type: 'Train Station',
+          store: 'Denns Biomarkt',
+          hours: 'Sun 7am–10pm',
+          area: 'Friedrichshain',
+          lat: 52.5031574,
+          lng: 13.4692576,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJubnwoPBOqEcRCmSGhHgqMl8',
+          cats: ['organic'],
+          special: false
+        },
+        {
+          name: 'Südkreuz',
+          type: 'Train Station',
+          store: 'Edeka',
+          hours: 'Sun until 10pm',
+          area: 'Schöneberg',
+          lat: 52.4757535,
+          lng: 13.3654391,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJbzIcJxFQqEcR6rTSmBb1tY8',
+          cats: ['supermarket'],
+          special: false
+        },
+        {
+          name: 'Lichtenberg',
+          type: 'Train Station',
+          store: 'Edeka',
+          hours: 'Sun 8am–10pm',
+          area: 'Lichtenberg',
+          lat: 52.5095552,
+          lng: 13.4970911,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJnyutb8BOqEcRFTQizFjFLVQ',
+          cats: ['supermarket'],
+          special: false
+        },
+        {
+          name: 'Bahnhof Zoo',
+          type: 'Train Station',
+          store: 'Hit-Ullrich + organic options',
+          hours: 'Sun 9am–10pm',
+          area: 'Charlottenburg',
+          lat: 52.5073407,
+          lng: 13.3324447,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJweNzLf5QqEcR9_-BQ7QntcI',
+          cats: ['supermarket', 'organic'],
+          special: false
+        },
+        {
+          name: 'Potsdamer Platz',
+          type: 'Train Station',
+          store: 'SPAR Express + Go Asia',
+          hours: 'Open Sundays',
+          area: 'Mitte',
+          lat: 52.5087398,
+          lng: 13.3761867,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJhwfvW8lRqEcRud4JRZ-d6vQ',
+          cats: ['supermarket'],
+          special: false
+        },
+        {
+          name: 'BER Airport Terminal 1',
+          type: '24/7 Airport',
+          store: 'REWE',
+          hours: 'Open 24/7 — 365 days',
+          area: 'Schönefeld',
+          lat: 52.3640414,
+          lng: 13.5081573,
+          gmaps: 'https://www.google.com/maps/place/?q=place_id:ChIJk0_yv9ZGqEcRzbW4olIjUHY',
+          cats: ['supermarket', '24h'],
+          special: true
+        }
+      ];
+
+      var mapEl = document.getElementById('bw-sunday-map-canvas');
+      var countEl = document.getElementById('bw-count-num');
+      var filterBtns = root.querySelectorAll('.bw-filter');
+
+      // Initialize map centered on Berlin
+      var map = L.map(mapEl, {
+        center: [52.510, 13.400],
+        zoom: 11,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      // Enable scroll zoom after first click (prevents accidental zoom during scroll)
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var markers = [];
+
+      function createMarkerIcon(special) {
+        var html = '<div class="bw-marker' + (special ? ' special' : '') + '"><div class="bw-marker-inner">' + (special ? '24' : '✓') + '</div></div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+      }
+
+      function createPopup(loc) {
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + loc.type + '</span>' +
+          '<div class="bw-popup-name">' + loc.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Store</span><span>' + loc.store + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Hours</span><span><strong>' + loc.hours + '</strong></span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Area</span><span>' + loc.area + '</span></div>' +
+          '<a href="' + loc.gmaps + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Google Maps →</a>' +
+          '</div>';
+      }
+
+      locations.forEach(function (loc) {
+        var marker = L.marker([loc.lat, loc.lng], {
+          icon: createMarkerIcon(loc.special)
+        }).bindPopup(createPopup(loc), {
+          closeButton: true,
+          maxWidth: 260,
+          className: 'bw-popup-wrapper'
+        });
+        marker.addTo(map);
+        marker._cats = loc.cats;
+        markers.push(marker);
+      });
+
+      function applyFilter(filter) {
+        var visibleCount = 0;
+        markers.forEach(function (m) {
+          var show = filter === 'all' || m._cats.indexOf(filter) !== -1;
+          if (show) {
+            if (!map.hasLayer(m)) m.addTo(map);
+            visibleCount++;
+          } else {
+            if (map.hasLayer(m)) map.removeLayer(m);
+          }
+        });
+        countEl.textContent = visibleCount;
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+
+      // Fix map rendering in Wix iframe (sometimes tiles load gray)
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+</div>
+</body>
+</html>

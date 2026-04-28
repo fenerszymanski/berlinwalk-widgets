@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin WelcomeCard Calculator | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div id="bw-wc-calc">
+  <style>
+    #bw-wc-calc {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-lime-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-red: #B00020;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-wc-calc * { box-sizing: border-box; }
+
+    #bw-wc-calc .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-wc-calc .bw-head {
+      background: var(--bw-green);
+      padding: 16px 20px;
+    }
+
+    #bw-wc-calc .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    #bw-wc-calc .bw-title {
+      margin: 0;
+      color: var(--bw-white);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    #bw-wc-calc .bw-body {
+      background: #FAFAF5;
+      padding: 18px 20px;
+    }
+
+    #bw-wc-calc .bw-section {
+      margin-bottom: 18px;
+    }
+
+    #bw-wc-calc .bw-section:last-child {
+      margin-bottom: 0;
+    }
+
+    #bw-wc-calc .bw-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    #bw-wc-calc .bw-duration {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    #bw-wc-calc .bw-duration button {
+      flex: 1;
+      min-width: 70px;
+      padding: 10px 8px;
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    #bw-wc-calc .bw-duration button:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-wc-calc .bw-duration button.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-wc-calc .bw-attractions {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+
+    #bw-wc-calc .bw-attraction {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    #bw-wc-calc .bw-attraction:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-wc-calc .bw-attraction.active {
+      border-color: var(--bw-green);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-wc-calc .bw-checkbox {
+      width: 20px;
+      height: 20px;
+      min-width: 20px;
+      border: 2px solid var(--bw-border);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bw-white);
+      flex-shrink: 0;
+      transition: all 0.15s ease;
+    }
+
+    #bw-wc-calc .bw-attraction.active .bw-checkbox {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+    }
+
+    #bw-wc-calc .bw-checkbox svg {
+      width: 12px;
+      height: 12px;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    #bw-wc-calc .bw-attraction.active .bw-checkbox svg {
+      opacity: 1;
+    }
+
+    #bw-wc-calc .bw-attr-name {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bw-text);
+    }
+
+    #bw-wc-calc .bw-attr-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--bw-green);
+      white-space: nowrap;
+    }
+
+    #bw-wc-calc .bw-toggle {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      user-select: none;
+    }
+
+    #bw-wc-calc .bw-toggle:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-wc-calc .bw-toggle-switch {
+      width: 36px;
+      height: 20px;
+      background: #D0D5C5;
+      border-radius: 999px;
+      position: relative;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+
+    #bw-wc-calc .bw-toggle-switch::after {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      background: var(--bw-white);
+      border-radius: 50%;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }
+
+    #bw-wc-calc .bw-toggle.active .bw-toggle-switch {
+      background: var(--bw-green);
+    }
+
+    #bw-wc-calc .bw-toggle.active .bw-toggle-switch::after {
+      transform: translateX(16px);
+    }
+
+    #bw-wc-calc .bw-toggle-text {
+      flex: 1;
+    }
+
+    #bw-wc-calc .bw-toggle-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bw-text);
+    }
+
+    #bw-wc-calc .bw-toggle-sub {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 1px;
+    }
+
+    /* Result box */
+    #bw-wc-calc .bw-result {
+      margin-top: 22px;
+      padding: 18px 20px;
+      background: var(--bw-green);
+      border-radius: 12px;
+      color: var(--bw-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #bw-wc-calc .bw-result::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80px;
+      height: 80px;
+      background: var(--bw-yellow);
+      opacity: 0.08;
+      border-radius: 50%;
+      transform: translate(30%, -30%);
+    }
+
+    #bw-wc-calc .bw-verdict-kicker {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--bw-yellow);
+      margin-bottom: 6px;
+    }
+
+    #bw-wc-calc .bw-verdict {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 12px;
+    }
+
+    #bw-wc-calc .bw-breakdown {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    #bw-wc-calc .bw-breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.9);
+    }
+
+    #bw-wc-calc .bw-breakdown-row.total {
+      border-top: 1px solid rgba(255,255,255,0.2);
+      margin-top: 6px;
+      padding-top: 6px;
+      font-weight: 800;
+      color: var(--bw-white);
+      font-size: 13px;
+    }
+
+    #bw-wc-calc .bw-breakdown-row.save {
+      font-weight: 800;
+      color: var(--bw-yellow);
+      font-size: 14px;
+    }
+
+    #bw-wc-calc .bw-breakdown-row.negative {
+      color: #FFCDD2;
+    }
+
+    #bw-wc-calc .bw-tip {
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.55;
+    }
+
+    #bw-wc-calc .bw-tip strong {
+      color: var(--bw-yellow);
+    }
+
+    /* Mobile */
+    @media (max-width: 520px) {
+      #bw-wc-calc { margin: 22px 0; }
+      #bw-wc-calc .bw-head { padding: 14px 16px; }
+      #bw-wc-calc .bw-title { font-size: 17px; }
+      #bw-wc-calc .bw-body { padding: 14px 16px; }
+      #bw-wc-calc .bw-section { margin-bottom: 14px; }
+      #bw-wc-calc .bw-label { font-size: 10px; }
+      #bw-wc-calc .bw-duration button { font-size: 11px; padding: 9px 6px; }
+      #bw-wc-calc .bw-attraction { padding: 9px 11px; gap: 10px; }
+      #bw-wc-calc .bw-attr-name { font-size: 12.5px; }
+      #bw-wc-calc .bw-attr-price { font-size: 11px; }
+      #bw-wc-calc .bw-result { padding: 16px; }
+      #bw-wc-calc .bw-verdict { font-size: 16px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <div class="bw-kicker">🧮 Decision Tool</div>
+      <h3 class="bw-title">Is the WelcomeCard Worth It for You?</h3>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-section">
+        <span class="bw-label">Your trip length</span>
+        <div class="bw-duration" id="bw-duration">
+          <button type="button" data-days="2">48 hours</button>
+          <button type="button" data-days="3" class="active">72 hours</button>
+          <button type="button" data-days="4">4 days</button>
+          <button type="button" data-days="5">5 days</button>
+        </div>
+      </div>
+
+      <div class="bw-section">
+        <span class="bw-label">Paid attractions you plan to visit</span>
+        <div class="bw-attractions" id="bw-attractions">
+          <div class="bw-attraction" data-id="museum-island" data-price="24" data-free-with-mi="true">
+            <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="bw-attr-name">Museum Island (day pass)</div>
+            <div class="bw-attr-price">€24</div>
+          </div>
+          <div class="bw-attraction" data-id="tv-tower" data-price="24.50" data-discount="25">
+            <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="bw-attr-name">TV Tower observation deck</div>
+            <div class="bw-attr-price">€24.50</div>
+          </div>
+          <div class="bw-attraction" data-id="ddr-museum" data-price="12.50" data-discount="25">
+            <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="bw-attr-name">DDR Museum</div>
+            <div class="bw-attr-price">€12.50</div>
+          </div>
+          <div class="bw-attraction" data-id="spree-tour" data-price="22" data-discount="25">
+            <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="bw-attr-name">Spree River boat tour</div>
+            <div class="bw-attr-price">€22</div>
+          </div>
+          <div class="bw-attraction" data-id="madame" data-price="29" data-discount="25">
+            <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="bw-attr-name">Madame Tussauds</div>
+            <div class="bw-attr-price">€29</div>
+          </div>
+          <div class="bw-attraction" data-id="aquadom" data-price="20" data-discount="25">
+            <div class="bw-checkbox"><svg viewBox="0 0 16 16"><polyline points="3,8 7,12 13,4" fill="none" stroke="#FFE600" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <div class="bw-attr-name">SEA LIFE Berlin</div>
+            <div class="bw-attr-price">€20</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bw-section">
+        <span class="bw-label">Also consider</span>
+        <div class="bw-toggle" id="bw-toggle-transport">
+          <div class="bw-toggle-switch"></div>
+          <div class="bw-toggle-text">
+            <div class="bw-toggle-name">I'll use public transport daily</div>
+            <div class="bw-toggle-sub">Day pass €11.20 × trip length</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bw-result" id="bw-result">
+        <div class="bw-verdict-kicker" id="bw-verdict-kicker">YOUR VERDICT</div>
+        <div class="bw-verdict" id="bw-verdict-text">Pick your trip length and attractions above.</div>
+        <div class="bw-breakdown" id="bw-breakdown"></div>
+        <div class="bw-tip" id="bw-tip"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-wc-calc');
+      if (!root) return;
+
+      // 2026 prices
+      var PRICES = {
+        classic: { 2: 28.50, 3: 32, 4: 38, 5: 45, 6: 52 },
+        museumIsland: { 3: 62 },
+        basic: { 3: 9 },
+        dayPass: 11.20,
+        museumPass3Day: 36
+      };
+
+      var state = {
+        days: 3,
+        attractions: [],
+        transport: false
+      };
+
+      var durationBtns = root.querySelectorAll('#bw-duration button');
+      var attractionEls = root.querySelectorAll('.bw-attraction');
+      var transportToggle = document.getElementById('bw-toggle-transport');
+      var verdictText = document.getElementById('bw-verdict-text');
+      var verdictKicker = document.getElementById('bw-verdict-kicker');
+      var breakdown = document.getElementById('bw-breakdown');
+      var tip = document.getElementById('bw-tip');
+
+      durationBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          durationBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          state.days = parseInt(btn.getAttribute('data-days'));
+          update();
+        });
+      });
+
+      attractionEls.forEach(function (el) {
+        el.addEventListener('click', function () {
+          var id = el.getAttribute('data-id');
+          el.classList.toggle('active');
+          if (el.classList.contains('active')) {
+            if (state.attractions.indexOf(id) === -1) state.attractions.push(id);
+          } else {
+            state.attractions = state.attractions.filter(function (a) { return a !== id; });
+          }
+          update();
+        });
+      });
+
+      transportToggle.addEventListener('click', function () {
+        transportToggle.classList.toggle('active');
+        state.transport = transportToggle.classList.contains('active');
+        update();
+      });
+
+      function getClassicPrice(days) {
+        if (PRICES.classic[days]) return PRICES.classic[days];
+        return PRICES.classic[5]; // fallback
+      }
+
+      function calculate() {
+        var days = state.days;
+        var attractionTotal = 0;
+        var attractionDiscount = 0;
+        var hasMuseumIsland = state.attractions.indexOf('museum-island') !== -1;
+        var attractionData = [];
+
+        attractionEls.forEach(function (el) {
+          var id = el.getAttribute('data-id');
+          if (state.attractions.indexOf(id) === -1) return;
+          var price = parseFloat(el.getAttribute('data-price'));
+          var discount = parseFloat(el.getAttribute('data-discount') || '0');
+          attractionTotal += price;
+          attractionDiscount += price * (discount / 100);
+          attractionData.push({ id: id, price: price, discount: discount });
+        });
+
+        var transportCost = state.transport ? PRICES.dayPass * days : 0;
+
+        // Scenario A: No card, pay everything
+        var scenarioA = attractionTotal + transportCost;
+
+        // Scenario B: Classic WelcomeCard
+        var classicPrice = getClassicPrice(days);
+        var scenarioB = classicPrice + attractionTotal - attractionDiscount;
+
+        // Scenario C: Museum Island WelcomeCard (only if 3 days and user picked MI)
+        var scenarioC = null;
+        if (days === 3 && hasMuseumIsland) {
+          var miDiscount = attractionDiscount;
+          var miAttractionTotal = attractionTotal - 24; // MI becomes free
+          scenarioC = 62 + miAttractionTotal - miDiscount;
+        }
+
+        // Scenario D: Museum Pass + separate transport (only if 3 days)
+        var scenarioD = null;
+        if (days === 3 && hasMuseumIsland) {
+          // Museum Pass covers Museum Island + 30 other museums
+          var mpAttractions = attractionTotal - 24; // MI is included, but others not
+          scenarioD = 36 + mpAttractions + transportCost;
+        }
+
+        return {
+          scenarioA: scenarioA,
+          scenarioB: scenarioB,
+          scenarioC: scenarioC,
+          scenarioD: scenarioD,
+          classicPrice: classicPrice,
+          attractionCount: state.attractions.length,
+          hasMuseumIsland: hasMuseumIsland,
+          attractionTotal: attractionTotal,
+          transportCost: transportCost
+        };
+      }
+
+      function update() {
+        var r = calculate();
+
+        // No attractions, no transport
+        if (r.attractionCount === 0 && !state.transport) {
+          verdictKicker.textContent = '';
+          verdictText.textContent = 'Pick your attractions and transport choice above.';
+          breakdown.innerHTML = '';
+          tip.innerHTML = '';
+          return;
+        }
+
+        // Find the cheapest option
+        var options = [
+          { name: 'No card (pay separately)', cost: r.scenarioA, key: 'A' },
+          { name: 'Classic WelcomeCard', cost: r.scenarioB, key: 'B' }
+        ];
+        if (r.scenarioC !== null) options.push({ name: 'Museum Island WelcomeCard', cost: r.scenarioC, key: 'C' });
+        if (r.scenarioD !== null) options.push({ name: 'Museum Pass + separate tickets', cost: r.scenarioD, key: 'D' });
+
+        options.sort(function (a, b) { return a.cost - b.cost; });
+        var best = options[0];
+        var noCard = options.filter(function (o) { return o.key === 'A'; })[0];
+        var savings = noCard.cost - best.cost;
+
+        // Verdict
+        if (best.key === 'A') {
+          verdictKicker.textContent = '💡 VERDICT';
+          verdictText.textContent = "Skip the WelcomeCard.";
+          tip.innerHTML = "Based on your plan, <strong>you'll save money by buying tickets as you go</strong>. The WelcomeCard's discounts don't outweigh its cost for this itinerary.";
+        } else if (best.key === 'C') {
+          verdictKicker.textContent = '✅ BEST OPTION';
+          verdictText.textContent = "Get the Museum Island WelcomeCard.";
+          tip.innerHTML = "You save <strong>€" + savings.toFixed(2) + "</strong> vs. buying separately. The €62 card covers transport plus all 5 Museum Island museums — the best deal for your plan.";
+        } else if (best.key === 'B') {
+          verdictKicker.textContent = '✅ BEST OPTION';
+          verdictText.textContent = "Get the Classic WelcomeCard.";
+          tip.innerHTML = "You save <strong>€" + savings.toFixed(2) + "</strong> vs. buying separately. Transport pays for itself, and you get 25–50% off at your chosen attractions.";
+        } else if (best.key === 'D') {
+          verdictKicker.textContent = '✅ BEST OPTION';
+          verdictText.textContent = "Get a 3-Day Museum Pass.";
+          tip.innerHTML = "You save <strong>€" + savings.toFixed(2) + "</strong> vs. WelcomeCard for this plan. Museum Pass covers 30+ museums without the transport cost — better if you won't use transit much.";
+        }
+
+        // Breakdown
+        var html = '';
+        options.forEach(function (opt, idx) {
+          var isBest = idx === 0;
+          html += '<div class="bw-breakdown-row' + (isBest ? ' total' : '') + '">' +
+            '<span>' + (isBest ? '✓ ' : '') + opt.name + '</span>' +
+            '<span>€' + opt.cost.toFixed(2) + '</span>' +
+            '</div>';
+        });
+        if (savings > 0 && best.key !== 'A') {
+          html += '<div class="bw-breakdown-row save">' +
+            '<span>You save</span>' +
+            '<span>€' + savings.toFixed(2) + '</span>' +
+            '</div>';
+        }
+        breakdown.innerHTML = html;
+      }
+
+      update();
+    })();
+  </script>
+</div>
+</body>
+</html>

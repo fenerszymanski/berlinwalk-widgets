@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin WelcomeCard Comparison | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div id="bw-wc-compare">
+  <style>
+    #bw-wc-compare {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-wc-compare * { box-sizing: border-box; }
+
+    #bw-wc-compare .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-wc-compare .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-wc-compare .bw-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    #bw-wc-compare .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-wc-compare .bw-body {
+      background: var(--bw-white);
+      overflow-x: auto;
+    }
+
+    #bw-wc-compare table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    #bw-wc-compare thead th {
+      background: #FAFAF5;
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--bw-border);
+      border-top: 0.5px solid var(--bw-border);
+    }
+
+    #bw-wc-compare tbody td {
+      padding: 14px 14px;
+      border-bottom: 0.5px solid var(--bw-border);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+
+    #bw-wc-compare tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    #bw-wc-compare .bw-variant {
+      font-weight: 800;
+      color: var(--bw-text);
+      font-size: 14px;
+      margin-bottom: 3px;
+    }
+
+    #bw-wc-compare .bw-sub {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    #bw-wc-compare .bw-price {
+      font-weight: 800;
+      color: var(--bw-green);
+      font-size: 15px;
+      white-space: nowrap;
+    }
+
+    #bw-wc-compare .bw-verdict {
+      font-size: 12px;
+      color: var(--bw-text);
+    }
+
+    #bw-wc-compare .bw-best {
+      display: inline-block;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+      vertical-align: middle;
+    }
+
+    #bw-wc-compare .bw-footer {
+      padding: 10px 20px;
+      background: #FAFAF5;
+      border-top: 1px solid var(--bw-border);
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.5;
+    }
+
+    /* Mobile — switch to cards */
+    @media (max-width: 520px) {
+      #bw-wc-compare { margin: 22px 0; }
+      #bw-wc-compare .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-wc-compare .bw-icon { font-size: 16px; }
+      #bw-wc-compare .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-wc-compare .bw-body { padding: 12px 14px; }
+
+      #bw-wc-compare table,
+      #bw-wc-compare thead,
+      #bw-wc-compare tbody,
+      #bw-wc-compare tr,
+      #bw-wc-compare th,
+      #bw-wc-compare td { display: block; }
+
+      #bw-wc-compare thead { display: none; }
+
+      #bw-wc-compare tbody tr {
+        border: 1px solid var(--bw-border);
+        border-radius: 10px;
+        margin-bottom: 10px;
+        padding: 12px 14px;
+      }
+
+      #bw-wc-compare tbody tr:last-child { margin-bottom: 0; }
+
+      #bw-wc-compare tbody td {
+        border: none;
+        padding: 4px 0;
+      }
+
+      #bw-wc-compare tbody td::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: var(--bw-muted);
+        margin-bottom: 2px;
+      }
+
+      #bw-wc-compare tbody td[data-label="Variant"]::before { display: none; }
+
+      #bw-wc-compare .bw-footer { padding: 10px 14px; font-size: 10.5px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-icon" aria-hidden="true">📊</span>
+      <span class="bw-kicker">WelcomeCard Versions Compared</span>
+    </div>
+    <div class="bw-body">
+      <table>
+        <thead>
+          <tr>
+            <th>Variant</th>
+            <th>Starts at</th>
+            <th>Transport</th>
+            <th>Museums</th>
+            <th>Worth it for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Variant">
+              <div class="bw-variant">Basic</div>
+              <div class="bw-sub">Discount-only, 72h</div>
+            </td>
+            <td data-label="Starts at"><span class="bw-price">€9</span></td>
+            <td data-label="Transport">Not included</td>
+            <td data-label="Museums">Up to 50% off</td>
+            <td data-label="Worth it for"><span class="bw-verdict">Walkers & cyclists who already have a transport pass.</span></td>
+          </tr>
+          <tr>
+            <td data-label="Variant">
+              <div class="bw-variant">Classic</div>
+              <div class="bw-sub">48h / 72h / 4-6 days</div>
+            </td>
+            <td data-label="Starts at"><span class="bw-price">€28.50</span></td>
+            <td data-label="Transport">✓ Zone AB or ABC</td>
+            <td data-label="Museums">Up to 50% off 170+ spots</td>
+            <td data-label="Worth it for"><span class="bw-verdict">Most tourists — pays for itself on transport alone over 3+ days.</span></td>
+          </tr>
+          <tr>
+            <td data-label="Variant">
+              <span class="bw-best">Best Value</span>
+              <div class="bw-variant">Museum Island</div>
+              <div class="bw-sub">72h only</div>
+            </td>
+            <td data-label="Starts at"><span class="bw-price">€62</span></td>
+            <td data-label="Transport">✓ Zone AB or ABC</td>
+            <td data-label="Museums"><strong>FREE</strong> entry to all 5 Museum Island museums + 170+ discounts</td>
+            <td data-label="Worth it for"><span class="bw-verdict">Anyone planning to visit Museum Island (day pass alone is €24).</span></td>
+          </tr>
+          <tr>
+            <td data-label="Variant">
+              <div class="bw-variant">All-Inclusive</div>
+              <div class="bw-sub">48h / 72h / 4-6 days</div>
+            </td>
+            <td data-label="Starts at"><span class="bw-price">€99</span></td>
+            <td data-label="Transport">Not included (!)</td>
+            <td data-label="Museums"><strong>FREE</strong> entry to 30+ attractions + hop-on/off bus (1 day)</td>
+            <td data-label="Worth it for"><span class="bw-verdict">Fast sightseers wanting to hit many paid sites in a short trip.</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bw-footer">Prices from visitberlin.de (2026). Exact price depends on duration and zone (AB = Berlin only, ABC = includes Potsdam + BER airport).</div>
+  </div>
+</div>
+</body>
+</html>

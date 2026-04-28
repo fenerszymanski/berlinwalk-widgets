@@ -103,3 +103,32 @@ the-pope-s-revenge-how-east-germany-s-tv-tower-backfired · 46346940-b89b-42dd-9
 - Tool result truncates at ~50KB, but audio + summary live in nodes #0-1, well within the cap.
 - **Extraction approach**: regex `https://static\.wixstatic\.com/mp3/[a-zA-Z0-9_]+\.mp3` for audio; HTML block containing string `QUICK SUMMARY` → strip `<li>` → bullets.
 - Some posts may not have the audio/summary embed (older ones from Feb 2026 cohort) — only verified by fetching rich content.
+
+## Migrations completed (2026-04-28)
+
+### Quick-summary entries in `data.json` (12 total)
+gift-guide, pergamon-closed, berlin-food, best-time, transport, where-to-stay,
+climate, german-phrases, safety, drinking-water, welcomecard, **sunday-shops** (added during HTML embed migration sweep).
+
+### Standalone widgets migrated to GitHub Pages (5)
+- `/welcomecard-calculator/` — interactive WelcomeCard decision tool
+- `/welcomecard-compare/` — variant comparison table
+- `/sunday-map/` — Sunday-open stores Leaflet map (10 markers + filters)
+- `/safety-map/` — neighborhood safety Leaflet map (12 markers, color-coded)
+- `/safety-compare/` — European capitals Numbeo comparison table
+
+Brand colors + Montserrat centralized in `/css/brand.css`. Each widget links it
+but also keeps its own scoped `--bw-*` redefines (zero-risk migration; future
+cleanup can remove redefines once brand.css is the single source of truth).
+
+### Wix-side change required per post
+For each migrated embed: in Wix editor, replace the existing "Paste HTML" embed
+with **Embed a Site / Website Address** pointing to:
+- `https://fenerszymanski.github.io/berlinwalk-widgets/welcomecard-calculator/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/welcomecard-compare/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/sunday-map/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/safety-map/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/safety-compare/`
+
+Plus, if you want sunday post's quick-summary on the new system:
+- `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=sunday-shops`
