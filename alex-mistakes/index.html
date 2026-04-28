@@ -26,10 +26,11 @@
     #bw-alex-mistakes .bw-row:not(:first-child) .bw-label { display:none; }
     #bw-alex-mistakes .bw-footer { padding:10px 20px; background:var(--bw-green); color:var(--bw-yellow); font-size:11px; font-weight:700; letter-spacing:0.5px; text-align:center; }
     @media (max-width: 520px) {
-      #bw-alex-mistakes .bw-row { flex-direction:column; }
-      #bw-alex-mistakes .bw-cell.dont { border-right:none; border-bottom:1px solid var(--bw-border); }
+      #bw-alex-mistakes .bw-row { flex-direction:column; padding:12px 16px; gap:6px; background:transparent; }
+      #bw-alex-mistakes .bw-cell.dont,
+      #bw-alex-mistakes .bw-cell.do { padding:0; background:transparent; border:none; font-size:12.5px; line-height:1.5; }
       #bw-alex-mistakes .bw-row:not(:first-child) .bw-label { display:block; }
-      #bw-alex-mistakes .bw-cell { padding:12px 16px; font-size:12.5px; }
+      #bw-alex-mistakes .bw-label { font-size:9px; letter-spacing:1.2px; margin-bottom:2px; }
     }
   </style>
   <div class="bw-wrap">
