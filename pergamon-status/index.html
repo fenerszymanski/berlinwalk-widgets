@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Museum Island Tickets & Current Status | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div id="bw-pergamon-status">
+  <style>
+    #bw-pergamon-status { --bw-green:#1B5E20;--bw-yellow:#FFE600;--bw-lime:#7CB342;--bw-border:#DCE8C8;--bw-text:#212121;--bw-muted:#4E5A4E;--bw-white:#FFFFFF;--bw-cream:#FAFAF5;font-family:Montserrat,Arial,sans-serif;color:var(--bw-text);margin:28px 0;max-width:100%; }
+    #bw-pergamon-status * { box-sizing: border-box; }
+    #bw-pergamon-status .bw-wrap { border:1px solid var(--bw-border); border-radius:14px; background:var(--bw-white); overflow:hidden; box-shadow:0 4px 16px rgba(0,0,0,0.04); }
+    #bw-pergamon-status .bw-head { background:var(--bw-green); padding:14px 20px; display:flex; align-items:center; gap:10px; }
+    #bw-pergamon-status .bw-kicker { color:var(--bw-yellow); font-size:11px; font-weight:800; letter-spacing:2.5px; text-transform:uppercase; }
+    #bw-pergamon-status .bw-body { padding:18px 20px; background:var(--bw-cream); }
+    #bw-pergamon-status .bw-section-label { font-size:10px; font-weight:800; color:var(--bw-green); letter-spacing:2px; text-transform:uppercase; display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+    #bw-pergamon-status .bw-section-label::before { content:''; display:block; width:4px; height:22px; background:linear-gradient(to bottom, var(--bw-yellow), var(--bw-lime)); border-radius:2px; }
+    #bw-pergamon-status .bw-bundles { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:18px; }
+    #bw-pergamon-status .bw-card { background:var(--bw-white); border:0.5px solid var(--bw-border); border-radius:10px; padding:12px 14px; display:flex; flex-direction:column; }
+    #bw-pergamon-status .bw-card.highlight { border:1.5px solid var(--bw-lime); }
+    #bw-pergamon-status .bw-tag { font-size:9px; font-weight:800; text-transform:uppercase; letter-spacing:1.5px; background:#EAF3DE; color:#27500A; padding:2px 7px; border-radius:20px; align-self:flex-start; margin-bottom:7px; }
+    #bw-pergamon-status .bw-tag.best { background:var(--bw-yellow); color:var(--bw-green); }
+    #bw-pergamon-status .bw-card-name { font-size:13px; font-weight:800; color:var(--bw-green); margin-bottom:4px; line-height:1.3; }
+    #bw-pergamon-status .bw-card-price { font-size:18px; font-weight:800; color:var(--bw-green); margin-bottom:4px; }
+    #bw-pergamon-status .bw-card-price span { font-size:11px; font-weight:600; color:var(--bw-muted); }
+    #bw-pergamon-status .bw-card-desc { font-size:11px; color:var(--bw-muted); line-height:1.5; flex:1; margin-bottom:10px; }
+    #bw-pergamon-status .bw-card-link { display:inline-block; font-size:10px; font-weight:800; color:var(--bw-green); text-decoration:none; border:1px solid var(--bw-lime); border-radius:5px; padding:5px 11px; letter-spacing:0.5px; align-self:flex-start; }
+    #bw-pergamon-status .bw-card-link:hover { background:#EAF3DE; }
+    #bw-pergamon-status .bw-divider { height:0.5px; background:var(--bw-border); margin:18px 0; }
+    #bw-pergamon-status .bw-note { font-size:11px; color:var(--bw-muted); margin-bottom:12px; }
+    #bw-pergamon-status table { width:100%; border-collapse:collapse; table-layout:fixed; background:var(--bw-white); border-radius:10px; overflow:hidden; }
+    #bw-pergamon-status col.c1 { width:25%; } #bw-pergamon-status col.c2 { width:14%; } #bw-pergamon-status col.c3 { width:46%; } #bw-pergamon-status col.c4 { width:15%; }
+    #bw-pergamon-status thead th { padding:11px 12px; font-size:10px; font-weight:800; color:var(--bw-muted); text-align:left; letter-spacing:1px; text-transform:uppercase; background:#FAFAF5; border-bottom:1px solid var(--bw-border); }
+    #bw-pergamon-status tbody td { padding:12px; font-size:12.5px; color:var(--bw-text); vertical-align:top; line-height:1.5; border-bottom:0.5px solid var(--bw-border); }
+    #bw-pergamon-status tbody tr:last-child td { border-bottom:none; }
+    #bw-pergamon-status tbody td:first-child { font-weight:800; color:var(--bw-green); }
+    #bw-pergamon-status tbody tr.closed-row td { background:#FCEBEB; }
+    #bw-pergamon-status .bw-badge { display:inline-block; font-size:10px; font-weight:800; padding:3px 9px; border-radius:20px; white-space:nowrap; }
+    #bw-pergamon-status .bw-badge.open { background:#EAF3DE; color:#27500A; }
+    #bw-pergamon-status .bw-badge.closed { background:#FCEBEB; color:#791F1F; }
+    #bw-pergamon-status .bw-footer { padding:10px 20px; background:#FAFAF5; border-top:1px solid var(--bw-border); font-size:11px; color:var(--bw-muted); line-height:1.5; }
+    @media (max-width: 600px) {
+      #bw-pergamon-status .bw-bundles { grid-template-columns:1fr; }
+      #bw-pergamon-status table, #bw-pergamon-status thead, #bw-pergamon-status tbody, #bw-pergamon-status tr, #bw-pergamon-status th, #bw-pergamon-status td { display:block; }
+      #bw-pergamon-status thead { display:none; }
+      #bw-pergamon-status tbody tr { border:0.5px solid var(--bw-border); border-radius:8px; margin-bottom:8px; padding:10px 12px; background:var(--bw-white); }
+      #bw-pergamon-status tbody tr.closed-row { background:#FCEBEB; }
+      #bw-pergamon-status tbody tr.closed-row td { background:transparent; }
+      #bw-pergamon-status tbody td { border:none; padding:2px 0; font-size:12px; }
+      #bw-pergamon-status tbody td:first-child { font-size:13px; margin-bottom:5px; }
+    }
+  </style>
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-icon" aria-hidden="true">🏛️</span>
+      <span class="bw-kicker">Museum Island — Tickets &amp; Status</span>
+    </div>
+    <div class="bw-body">
+      <div class="bw-section-label">How to Save on Tickets</div>
+      <div class="bw-bundles">
+        <div class="bw-card highlight">
+          <span class="bw-tag best">⭐ Best 1-Day</span>
+          <div class="bw-card-name">Museumsinsel-Ticket</div>
+          <div class="bw-card-price">€24 <span>/ adult · €12 conc.</span></div>
+          <div class="bw-card-desc">All 5 museums + Das Panorama in one day. Same price online or at the door — but online skips the queue.</div>
+          <a class="bw-card-link" href="https://shop.smb.museum/" target="_blank" rel="noopener">Buy on smb.museum →</a>
+        </div>
+        <div class="bw-card">
+          <span class="bw-tag">Best 3-Day</span>
+          <div class="bw-card-name">Museum Pass Berlin</div>
+          <div class="bw-card-price">€32 <span>/ adult · €16 conc.</span></div>
+          <div class="bw-card-desc">30+ museums across Berlin for 3 consecutive days. Includes all of Museum Island. Digital only.</div>
+          <a class="bw-card-link" href="https://www.smb.museum/en/plan-your-visit/prices-tickets/" target="_blank" rel="noopener">Buy on smb.museum →</a>
+        </div>
+        <div class="bw-card">
+          <span class="bw-tag">Transport + Museums</span>
+          <div class="bw-card-name">WelcomeCard Museum Island</div>
+          <div class="bw-card-price">from €49 <span>/ adult</span></div>
+          <div class="bw-card-desc">72h unlimited public transport (AB) + free Museum Island admission for 3 days.</div>
+          <a class="bw-card-link" href="https://www.berlin-welcomecard.de/en/berlin-welcomecard-museum-island" target="_blank" rel="noopener">Buy on berlin-welcomecard.de →</a>
+        </div>
+      </div>
+      <div class="bw-divider"></div>
+      <div class="bw-section-label">Museum Island — Current Status</div>
+      <p class="bw-note">5 museums total — only Pergamon is closed. Children under 18 enter free at all venues.</p>
+      <table>
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+        <thead><tr><th>Museum</th><th>Status</th><th>Highlights</th><th>Ticket</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Museum">Altes Museum</td><td data-label="Status"><span class="bw-badge open">Open</span></td><td data-label="Highlights">Berlin's oldest museum. Greek and Roman sculptures in a stunning neoclassical rotunda.</td><td data-label="Ticket">€12</td></tr>
+          <tr><td data-label="Museum">Neues Museum</td><td data-label="Status"><span class="bw-badge open">Open</span></td><td data-label="Highlights">Nefertiti bust, Troy collection, Egyptian artefacts. The war-scarred building is itself an exhibit.</td><td data-label="Ticket">€14</td></tr>
+          <tr><td data-label="Museum">Alte Nationalgalerie</td><td data-label="Status"><span class="bw-badge open">Open</span></td><td data-label="Highlights">19th-century European paintings. Caspar David Friedrich, Schinkel, early Impressionists.</td><td data-label="Ticket">€12</td></tr>
+          <tr><td data-label="Museum">Bode-Museum</td><td data-label="Status"><span class="bw-badge open">Open</span></td><td data-label="Highlights">Sculpture, Byzantine art, coins. Beautiful building at the island's northern tip.</td><td data-label="Ticket">€12</td></tr>
+          <tr class="closed-row"><td data-label="Museum">Pergamon Museum</td><td data-label="Status"><span class="bw-badge closed">Closed</span></td><td data-label="Highlights">Closed until 2027. Das Panorama open nearby at Am Kupfergraben 2.</td><td data-label="Ticket">€14 (Panorama)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bw-footer">Visiting 2+ museums? The Museumsinsel-Ticket at €24 beats buying separate tickets every time.</div>
+  </div>
+</div>
+</body>
+</html>

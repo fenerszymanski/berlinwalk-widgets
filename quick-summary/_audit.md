@@ -132,3 +132,65 @@ with **Embed a Site / Website Address** pointing to:
 
 Plus, if you want sunday post's quick-summary on the new system:
 - `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=sunday-shops`
+
+## Round 2 — Tier 1 cornerstone widgets (2026-04-28)
+
+### data.json now 14 entries
++ **12-stops** (audio + 5-bullet) — `?post=12-stops`
++ **museum-pass** (5-bullet only, no audio) — `?post=museum-pass`
+
+### 12 standalone widgets migrated
+
+| post | widget URL |
+|---|---|
+| **berlin-public-transport-explained-...** | `transport-calculator/` |
+| ↑ | `transport-compare/` |
+| ↑ | `transport-pdfs/` |
+| **average-temperature-in-berlin-by-month** | `avgtemp-bestmonth/` |
+| ↑ | `avgtemp-chart/` |
+| ↑ | `avgtemp-monthly/` |
+| ↑ | `avgtemp-packing/` |
+| ↑ | `avgtemp-traveler/` |
+| **what-to-buy-in-berlin-12-souvenir-...** | `gift-finder/` |
+| **is-the-pergamon-museum-closed-...** | `pergamon-timeline/` |
+| ↑ | `pergamon-status/` |
+| **5-mistakes-tourists-make-at-alexanderplatz** | `alex-mistakes/` |
+
+Pergamon timeline + status and Alex-mistakes were rewritten fresh in the
+brand.css system (cleaner than copying older inline-styled embeds). The other 9
+wrap existing extracted embeds verbatim.
+
+### Wix-side swap URLs
+
+- `https://fenerszymanski.github.io/berlinwalk-widgets/transport-calculator/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/transport-compare/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/transport-pdfs/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-bestmonth/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-chart/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-monthly/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-packing/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-traveler/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/gift-finder/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/pergamon-timeline/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/pergamon-status/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/alex-mistakes/`
+- `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=12-stops` (520px)
+- `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=museum-pass` (520px)
+
+### Roadmap (still open)
+
+- **Round 2 reusable FAQ widget** — 6 posts (5-mistakes, 7-things-dom,
+  airport-to-alex, pergamon-closed, drinking-water, why-berliners-rude). NOTE:
+  pergamon and alex FAQ embeds carry FAQPage JSON-LD schema. Migrating to
+  iframe widget would lose Google's FAQ-snippet eligibility unless the JSON-LD
+  is also kept inline as a Wix HTML embed on the post itself.
+- **Round 3 reusable BERLIN WALK CTA** — 4 posts (5-best-doner, validate-ticket,
+  tap-water, popes-revenge).
+- **Round 4 trivial Google Maps iframes** — 2 posts (museum-island,
+  drinking-water).
+- **Lead form across all posts** — `/lead-form/` widget already live; user-side
+  Wix work to embed it across remaining ~80 posts. Reference example post:
+  `how-to-read-a-german-menu-without-panicking`.
+- **Skipped (low ROI):** what-to-eat 7 small "where to eat it" cards,
+  where-to-stay neighborhood card, airport-to-alex CTA card, what-to-buy
+  Alexanderplatz card. Stay inline in Wix.

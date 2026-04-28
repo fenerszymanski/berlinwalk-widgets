@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Monthly Climate Cards | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div style="max-width:100%;margin:0 auto 10px;font-family:Montserrat,sans-serif;">
+  <div style="background:#1B5E20;padding:14px 20px;border-radius:12px 12px 0 0;">
+    <span style="font-size:13px;font-weight:700;color:#FFE600;letter-spacing:1px;text-transform:uppercase;">📅 Monthly Climate Cards</span>
+    <div style="font-size:10px;color:rgba(255,255,255,0.5);margin-top:2px;">Tap any month to expand details</div>
+  </div>
+  <div style="border:1px solid #e0e0e0;border-top:none;border-radius:0 0 12px 12px;overflow:hidden;background:#fff;" id="mc-cards"></div>
+</div>
+<script>
+(function(){
+var months=[
+  {name:"January",hi:3,lo:-2,rain:40,rainD:10,sun:2,daylight:"8h 20m",season:"winter",color:"#4A90D9",emoji:"❄️",
+   pack:"Heavy winter coat, thermal layers, warm hat, gloves, scarf, waterproof boots",
+   tip:"Berlin's coldest month. Christmas markets end early January. Great for museums — they're warm and uncrowded."},
+  {name:"February",hi:5,lo:-2,rain:33,rainD:8,sun:3,daylight:"9h 55m",season:"winter",color:"#4A90D9",emoji:"🌨",
+   pack:"Heavy coat, layers, waterproof shoes, warm accessories",
+   tip:"Slightly warmer than January but still cold. Berlinale film festival brings cultural buzz. Days getting noticeably longer."},
+  {name:"March",hi:9,lo:1,rain:38,rainD:9,sun:4,daylight:"11h 55m",season:"spring",color:"#7CB342",emoji:"🌱",
+   pack:"Medium jacket, sweater, layers, umbrella, comfortable walking shoes",
+   tip:"Spring officially begins but expect cold snaps. Snow still possible. Daylight hours jump dramatically."},
+  {name:"April",hi:14,lo:4,rain:32,rainD:8,sun:6,daylight:"13h 55m",season:"spring",color:"#7CB342",emoji:"🌷",
+   pack:"Light jacket, layers, rain jacket, comfortable shoes",
+   tip:"Cherry blossoms appear! Increasingly warm but variable — one day 20°C, next day 8°C. Least rainy month."},
+  {name:"May",hi:19,lo:9,rain:46,rainD:10,sun:8,daylight:"15h 45m",season:"spring",color:"#7CB342",emoji:"🌸",
+   pack:"Light layers, t-shirts, one light jacket, sunglasses, comfortable shoes",
+   tip:"Best spring month. Outdoor cafés open. Nearly 16 hours of daylight. Perfect walking tour weather."},
+  {name:"June",hi:23,lo:13,rain:62,rainD:11,sun:9,daylight:"16h 42m",season:"summer",color:"#E63946",emoji:"☀️",
+   pack:"Light clothing, sunscreen, sunglasses, water bottle, light rain jacket",
+   tip:"Longest days of the year — sunset after 9:30 PM! Fête de la Musique on June 21st. Brief afternoon thunderstorms possible."},
+  {name:"July",hi:25,lo:15,rain:55,rainD:10,sun:8,daylight:"16h 15m",season:"summer",color:"#E63946",emoji:"🌞",
+   pack:"Summer clothes, sunscreen, hat, water bottle, packable rain jacket",
+   tip:"Warmest month along with August. Occasional heat waves (35°C+). Open-air events everywhere. Peak tourist season."},
+  {name:"August",hi:25,lo:15,rain:52,rainD:10,sun:8,daylight:"14h 50m",season:"summer",color:"#E63946",emoji:"🌞",
+   pack:"Summer clothes, sunscreen, hat, water bottle, one light layer for evenings",
+   tip:"Equally warm as July. Evenings start cooling slightly by late August. Many Berliners are on vacation — quieter than July."},
+  {name:"September",hi:20,lo:11,rain:38,rainD:9,sun:6,daylight:"12h 40m",season:"autumn",color:"#F5A623",emoji:"🍂",
+   pack:"Layers, light jacket, jeans, comfortable walking shoes, rain jacket",
+   tip:"Berlin's hidden gem month. Warm enough for outdoor dining, cool enough for comfortable walking. Fewer crowds than summer."},
+  {name:"October",hi:13,lo:6,rain:32,rainD:9,sun:4,daylight:"10h 30m",season:"autumn",color:"#F5A623",emoji:"🍁",
+   pack:"Medium jacket, sweater, layers, umbrella, closed shoes",
+   tip:"Beautiful autumn foliage. Festival of Lights illuminates landmarks. Getting cooler — enjoy it before winter arrives."},
+  {name:"November",hi:7,lo:2,rain:38,rainD:10,sun:2,daylight:"8h 50m",season:"autumn",color:"#F5A623",emoji:"🌫",
+   pack:"Warm jacket, layers, scarf, waterproof shoes, umbrella",
+   tip:"Grey and cool. Early darkness. But Christmas markets start opening late November — a magical transition."},
+  {name:"December",hi:4,lo:0,rain:44,rainD:11,sun:2,daylight:"7h 48m",season:"winter",color:"#4A90D9",emoji:"🎄",
+   pack:"Heavy winter coat, thermal layers, hat, gloves, scarf, waterproof boots",
+   tip:"Christmas markets in full swing! Cold and dark but incredibly atmospheric. Shortest days of the year."}
+];
+var container=document.getElementById("mc-cards");
+months.forEach(function(m,i){
+  var el=document.createElement("details");
+  el.style.cssText="border-bottom:1px solid #e8e8e8;";
+  if(i===months.length-1) el.style.borderBottom="none";
+  var seasonLabel={winter:"Winter",spring:"Spring",summer:"Summer",autumn:"Autumn"}[m.season];
+  el.innerHTML='<summary style="padding:14px 18px;cursor:pointer;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:700;color:#1B5E20;list-style:none;">'+
+    '<span style="font-size:18px;">'+m.emoji+'</span>'+
+    '<span style="flex:1;">'+m.name+'</span>'+
+    '<span style="font-size:12px;font-weight:700;color:#E63946;">'+m.hi+'°</span>'+
+    '<span style="font-size:11px;color:#aaa;">/</span>'+
+    '<span style="font-size:12px;font-weight:700;color:#7CB342;">'+m.lo+'°</span>'+
+    '<span style="font-size:10px;color:'+m.color+';background:'+m.color+'15;padding:2px 8px;border-radius:10px;font-weight:600;margin-left:4px;">'+seasonLabel+'</span>'+
+    '</summary>'+
+    '<div style="padding:0 18px 16px;">'+
+    '<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;">'+
+    '<div style="background:#F5F8F0;border-radius:8px;padding:10px 12px;text-align:center;"><div style="font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Avg High</div><div style="font-size:18px;font-weight:800;color:#E63946;">'+m.hi+'°C</div><div style="font-size:10px;color:#aaa;">'+Math.round(m.hi*9/5+32)+'°F</div></div>'+
+    '<div style="background:#F5F8F0;border-radius:8px;padding:10px 12px;text-align:center;"><div style="font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Avg Low</div><div style="font-size:18px;font-weight:800;color:#7CB342;">'+m.lo+'°C</div><div style="font-size:10px;color:#aaa;">'+Math.round(m.lo*9/5+32)+'°F</div></div>'+
+    '<div style="background:#F5F8F0;border-radius:8px;padding:10px 12px;text-align:center;"><div style="font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Rainfall</div><div style="font-size:18px;font-weight:800;color:#4A90D9;">'+m.rain+'<span style="font-size:11px;">mm</span></div><div style="font-size:10px;color:#aaa;">'+m.rainD+' rainy days</div></div>'+
+    '<div style="background:#F5F8F0;border-radius:8px;padding:10px 12px;text-align:center;"><div style="font-size:9px;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;">Sunshine</div><div style="font-size:18px;font-weight:800;color:#F5A623;">'+m.sun+'<span style="font-size:11px;">h/day</span></div><div style="font-size:10px;color:#aaa;">'+m.daylight+' daylight</div></div>'+
+    '</div>'+
+    '<div style="background:#FFFDF5;border:1px solid #FFE600;border-radius:8px;padding:10px 14px;margin-bottom:8px;">'+
+    '<div style="font-size:10px;font-weight:700;color:#1B5E20;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">🧳 What to Pack</div>'+
+    '<div style="font-size:12px;color:#555;line-height:1.5;">'+m.pack+'</div></div>'+
+    '<div style="font-size:12px;color:#666;line-height:1.5;font-style:italic;">💡 '+m.tip+'</div>'+
+    '</div>';
+  container.appendChild(el);
+});
+})();
+</script>
+</body>
+</html>

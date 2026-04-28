@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Gift Finder | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div id="berlin-gift-finder" style="font-family:Montserrat,Arial,sans-serif;max-width:1100px;margin:28px auto;border:2px solid #1B5E20;border-radius:18px;overflow:hidden;background:#F7F7F2;color:#212121;">
+  
+  <div style="background:#1B5E20;padding:14px 14px;">
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div style="background:#FFE600;color:#1B5E20;font-weight:800;font-size:15px;padding:8px 14px;border-radius:12px;">
+        BerlinWalk
+      </div>
+      <div>
+        <div style="color:#FFFFFF;font-size:24px;font-weight:800;line-height:1.1;">Berlin Gift Finder</div>
+        <div style="color:#C5E1A5;font-size:14px;font-weight:500;margin-top:3px;">
+          12 gift ideas — filter by type or budget
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:12px 14px 6px 14px;background:#F7F7F2;border-bottom:1px solid #D9D9CF;">
+    <div id="gift-filters" style="display:flex;flex-wrap:wrap;gap:8px;">
+      <button class="gift-filter active" data-filter="all">All (12)</button>
+      <button class="gift-filter" data-filter="classic">Classic</button>
+      <button class="gift-filter" data-filter="food">Food</button>
+      <button class="gift-filter" data-filter="culture">Culture</button>
+      <button class="gift-filter" data-filter="design">Design</button>
+      <button class="gift-filter" data-filter="under10">Under €10</button>
+    </div>
+  </div>
+
+  <div style="padding:10px 14px 0 14px;font-size:13px;color:#6B6B63;" id="gift-status">
+    Showing all 12 gift ideas
+  </div>
+
+  <div id="gift-grid" style="display:grid;grid-template-columns:1fr;gap:12px;padding:14px 14px 18px 14px;">
+    
+    <div class="gift-card" data-tags="classic under10" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€5–10</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Ampelmann Mug</h3>
+      <div class="gift-meta">CLASSIC · EAST BERLIN ICON</div>
+      <p class="gift-text">A practical Berlin souvenir built around the former East German traffic-light figure.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Good if you want one classic Berlin item that still feels design-led.</div>
+      <div class="gift-area"><strong>Best area:</strong> Hackescher Markt / Mitte</div>
+    </div>
+
+    <div class="gift-card" data-tags="classic under10" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€3–8</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Berlin Postcard Set</h3>
+      <div class="gift-meta">CLASSIC · EASY TO PACK</div>
+      <p class="gift-text">A better option than a single random postcard. Look for architecture or vintage transport styles.</p>
+      <div class="gift-tip"><strong>Tip:</strong> The best versions usually come from museum shops.</div>
+      <div class="gift-area"><strong>Best area:</strong> Museum Island</div>
+    </div>
+
+    <div class="gift-card" data-tags="food under10" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€8–15</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Berlin Chocolate</h3>
+      <div class="gift-meta">FOOD · SAFE CHOICE</div>
+      <p class="gift-text">Elegant, compact, and much better than novelty souvenir candy.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Perfect for office gifts or people who do not want obvious Berlin merchandise.</div>
+      <div class="gift-area"><strong>Best area:</strong> Mitte / Hackescher Markt</div>
+    </div>
+
+    <div class="gift-card" data-tags="food" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€7–12</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Berlin Honey</h3>
+      <div class="gift-meta">FOOD · LOCAL PRODUCT</div>
+      <p class="gift-text">A more unexpected Berlin souvenir that feels more local than touristy.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Great if you want something Berlin-linked without landmarks printed on it.</div>
+      <div class="gift-area"><strong>Best area:</strong> Curated food shops in Mitte</div>
+    </div>
+
+    <div class="gift-card" data-tags="culture" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€10–25</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Museum Book</h3>
+      <div class="gift-meta">CULTURE · SMART SOUVENIR</div>
+      <p class="gift-text">Ideal for travellers who prefer books and objects with cultural value.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Higher quality, but heavier.</div>
+      <div class="gift-area"><strong>Best area:</strong> Museum Island</div>
+    </div>
+
+    <div class="gift-card" data-tags="culture under10" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€2–8</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Dom Postcards</h3>
+      <div class="gift-meta">CULTURE · ARCHITECTURE</div>
+      <p class="gift-text">A quieter and more tasteful keepsake than generic city magnets.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Good low-budget option if you want something elegant and route-specific.</div>
+      <div class="gift-area"><strong>Best area:</strong> Berliner Dom</div>
+    </div>
+
+    <div class="gift-card" data-tags="design" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€12–30</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Höfe Notebook</h3>
+      <div class="gift-meta">DESIGN · USEFUL OBJECT</div>
+      <p class="gift-text">A well-designed object bought in Berlin often works better than loud souvenir branding.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Best for people who hate touristy gifts.</div>
+      <div class="gift-area"><strong>Best area:</strong> Hackesche Höfe</div>
+    </div>
+
+    <div class="gift-card" data-tags="design" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€15–35</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Berlin Art Print</h3>
+      <div class="gift-meta">DESIGN · WALL DECOR</div>
+      <p class="gift-text">A cleaner and more lasting souvenir than generic photo merchandise.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Packs flat and looks better at home than most novelty souvenirs.</div>
+      <div class="gift-area"><strong>Best area:</strong> Hackescher Markt / Museum shops</div>
+    </div>
+
+    <div class="gift-card" data-tags="classic under10" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€4–9</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Buddy Bear Mini</h3>
+      <div class="gift-meta">CLASSIC · PLAYFUL</div>
+      <p class="gift-text">A visibly Berlin keepsake that works best in smaller, cleaner versions.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Better for cheerful gifting than minimalist design lovers.</div>
+      <div class="gift-area"><strong>Best area:</strong> Central souvenir shops</div>
+    </div>
+
+    <div class="gift-card" data-tags="food under10" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€6–10</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Praline Box</h3>
+      <div class="gift-meta">FOOD · EASY WIN</div>
+      <p class="gift-text">Compact, classy, and easy to share.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Strong choice for friends, hosts, or colleagues.</div>
+      <div class="gift-area"><strong>Best area:</strong> Mitte confectionery shops</div>
+    </div>
+
+    <div class="gift-card" data-tags="culture design" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€8–20</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">History Booklet</h3>
+      <div class="gift-meta">CULTURE · HISTORY</div>
+      <p class="gift-text">A better Berlin-history souvenir than random fake Wall fragments.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Choose factual, well-designed items over gimmicks.</div>
+      <div class="gift-area"><strong>Best area:</strong> Museum Island / cultural bookstores</div>
+    </div>
+
+    <div class="gift-card" data-tags="design under10" style="background:#FFFFFF;border:1px solid #D8D8CE;border-radius:14px;padding:14px;position:relative;">
+      <div class="gift-price">€5–10</div>
+      <h3 style="margin:0 0 6px 0;font-size:20px;color:#1B5E20;line-height:1.2;padding-right:64px;">Berlin Tote Bag</h3>
+      <div class="gift-meta">DESIGN · PRACTICAL</div>
+      <p class="gift-text">Light, useful, and easy to justify later.</p>
+      <div class="gift-tip"><strong>Tip:</strong> Great if you want something affordable and carry-on friendly.</div>
+      <div class="gift-area"><strong>Best area:</strong> Hackescher Markt / museum shops</div>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  #berlin-gift-finder .gift-filter{
+    border:1.5px solid #1B5E20;
+    background:#F7F7F2;
+    color:#1B5E20;
+    border-radius:999px;
+    padding:8px 12px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all .2s ease;
+  }
+  #berlin-gift-finder .gift-filter.active{
+    background:#1B5E20;
+    color:#FFE600;
+  }
+  #berlin-gift-finder .gift-meta{
+    font-size:11px;
+    font-weight:800;
+    letter-spacing:1px;
+    color:#7CB342;
+    text-transform:uppercase;
+    margin-bottom:10px;
+    line-height:1.5;
+  }
+  #berlin-gift-finder .gift-text{
+    font-size:14px;
+    line-height:1.65;
+    margin:0 0 12px 0;
+  }
+  #berlin-gift-finder .gift-tip{
+    background:#EEF5E8;
+    border-left:3px solid #7CB342;
+    border-radius:8px;
+    padding:10px 12px;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:8px;
+  }
+  #berlin-gift-finder .gift-area{
+    font-size:13px;
+    color:#4E4E47;
+    line-height:1.5;
+  }
+  #berlin-gift-finder .gift-price{
+    position:absolute;
+    top:12px;
+    right:12px;
+    background:#FFE600;
+    color:#1B5E20;
+    font-weight:800;
+    font-size:12px;
+    padding:5px 10px;
+    border-radius:999px;
+  }
+  @media (min-width: 900px){
+    #berlin-gift-finder #gift-grid{
+      grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  const container = document.getElementById('berlin-gift-finder');
+  if (!container) return;
+
+  const buttons = container.querySelectorAll('.gift-filter');
+  const cards = container.querySelectorAll('.gift-card');
+  const status = container.querySelector('#gift-status');
+
+  function applyFilter(filter) {
+    cards.forEach(card => {
+      const tags = card.getAttribute('data-tags') || '';
+      const show = filter === 'all' || tags.includes(filter);
+      card.style.display = show ? 'block' : 'none';
+    });
+
+    const labels = {
+      all: 'Showing all 12 gift ideas',
+      classic: 'Showing classic souvenirs',
+      food: 'Showing food gifts',
+      culture: 'Showing museum and culture gifts',
+      design: 'Showing design gifts',
+      under10: 'Showing gifts under €10'
+    };
+
+    status.textContent = labels[filter] || 'Showing filtered gifts';
+  }
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', function() {
+      buttons.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      applyFilter(this.getAttribute('data-filter'));
+    });
+  });
+
+  applyFilter('all');
+})();
+</script>
+</body>
+</html>

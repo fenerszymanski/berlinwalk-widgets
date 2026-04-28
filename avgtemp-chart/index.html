@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Monthly Temperature Chart | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div style="max-width:100%;margin:0 auto 10px;font-family:Montserrat,sans-serif;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e0e0e0;box-shadow:0 2px 10px rgba(0,0,0,0.06);">
+  <div style="background:#1B5E20;padding:16px 20px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+    <div>
+      <div style="font-size:14px;font-weight:800;color:#FFE600;">📊 Berlin Monthly Temperatures</div>
+      <div style="font-size:11px;color:rgba(255,255,255,0.6);margin-top:2px;">Tap any month for details</div>
+    </div>
+    <div style="display:flex;gap:12px;">
+      <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;background:#E63946;border-radius:2px;"></div><span style="font-size:10px;color:rgba(255,255,255,0.7);">High</span></div>
+      <div style="display:flex;align-items:center;gap:4px;"><div style="width:10px;height:10px;background:#7CB342;border-radius:2px;"></div><span style="font-size:10px;color:rgba(255,255,255,0.7);">Low</span></div>
+    </div>
+  </div>
+  <div style="padding:20px 16px 12px;">
+    <div id="tc-chart" style="display:flex;align-items:flex-end;justify-content:space-between;height:200px;gap:4px;"></div>
+    <div id="tc-info" style="margin-top:14px;background:#F5F8F0;border-radius:8px;padding:12px 16px;min-height:44px;display:flex;align-items:center;justify-content:center;">
+      <span style="font-size:12px;color:#888;">👆 Tap a month to see details</span>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  var d=[
+    {m:"Jan",hi:3,lo:-2,rain:40,sun:2,note:"Coldest month. Short days, frequent grey skies."},
+    {m:"Feb",hi:5,lo:-2,rain:33,sun:3,note:"Still cold but days get slightly longer."},
+    {m:"Mar",hi:9,lo:1,rain:38,sun:4,note:"Spring begins. Snow still possible early month."},
+    {m:"Apr",hi:14,lo:4,rain:32,sun:6,note:"Warming up! Cherry blossoms appear."},
+    {m:"May",hi:19,lo:9,rain:46,sun:8,note:"Ideal for sightseeing. Long days, mild temps."},
+    {m:"Jun",hi:23,lo:13,rain:62,sun:9,note:"Peak sunshine. Longest days of the year."},
+    {m:"Jul",hi:25,lo:15,rain:55,sun:8,note:"Warmest month. Brief afternoon thunderstorms."},
+    {m:"Aug",hi:25,lo:15,rain:52,sun:8,note:"Warm and sunny. Perfect walking tour weather."},
+    {m:"Sep",hi:20,lo:11,rain:38,sun:6,note:"Hidden gem month. Warm, fewer crowds."},
+    {m:"Oct",hi:13,lo:6,rain:32,sun:4,note:"Autumn colors. Cooler evenings."},
+    {m:"Nov",hi:7,lo:2,rain:38,sun:2,note:"Grey and cool. Winter approaching."},
+    {m:"Dec",hi:4,lo:0,rain:44,sun:2,note:"Cold and dark. Christmas markets open!"}
+  ];
+  var chart=document.getElementById("tc-chart");
+  var info=document.getElementById("tc-info");
+  var maxT=30;
+  var seasons={Jan:"winter",Feb:"winter",Mar:"spring",Apr:"spring",May:"spring",Jun:"summer",Jul:"summer",Aug:"summer",Sep:"autumn",Oct:"autumn",Nov:"autumn",Dec:"winter"};
+  var sColors={winter:"#4A90D9",spring:"#7CB342",summer:"#E63946",autumn:"#F5A623"};
+
+  d.forEach(function(item,i){
+    var hiH=Math.max((item.hi+5)/maxT*160,8);
+    var loH=Math.max((item.lo+5)/maxT*160,8);
+    var col=document.createElement("div");
+    col.style.cssText="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer;";
+    col.innerHTML='<div style="display:flex;gap:2px;align-items:flex-end;height:170px;">'+
+      '<div style="width:12px;height:'+hiH+'px;background:#E63946;border-radius:3px 3px 0 0;transition:opacity 0.2s;"></div>'+
+      '<div style="width:12px;height:'+loH+'px;background:#7CB342;border-radius:3px 3px 0 0;transition:opacity 0.2s;"></div>'+
+      '</div>'+
+      '<div style="font-size:9px;font-weight:700;color:#555;margin-top:4px;">'+item.m+'</div>'+
+      '<div style="width:24px;height:3px;background:'+sColors[seasons[item.m]]+';border-radius:2px;"></div>';
+    col.onclick=function(){
+      var s=seasons[item.m];
+      var sLabel={winter:"❄️ Winter",spring:"🌸 Spring",summer:"☀️ Summer",autumn:"🍂 Autumn"}[s];
+      info.innerHTML='<div style="width:100%;"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;"><span style="font-size:13px;font-weight:800;color:#1B5E20;">'+item.m+'</span><span style="font-size:10px;font-weight:600;color:'+sColors[s]+';background:'+sColors[s]+'15;padding:2px 8px;border-radius:10px;">'+sLabel+'</span></div>'+
+        '<div style="display:flex;gap:16px;flex-wrap:wrap;">'+
+        '<div style="font-size:11px;color:#555;"><span style="color:#E63946;font-weight:700;">↑'+item.hi+'°C</span> high</div>'+
+        '<div style="font-size:11px;color:#555;"><span style="color:#7CB342;font-weight:700;">↓'+item.lo+'°C</span> low</div>'+
+        '<div style="font-size:11px;color:#555;">🌧 '+item.rain+'mm rain</div>'+
+        '<div style="font-size:11px;color:#555;">☀️ '+item.sun+'h sun/day</div>'+
+        '</div>'+
+        '<div style="font-size:11px;color:#888;margin-top:6px;font-style:italic;">'+item.note+'</div></div>';
+    };
+    chart.appendChild(col);
+  });
+})();
+</script>
+</body>
+</html>

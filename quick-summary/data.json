@@ -154,5 +154,30 @@
       "Spätis, bakeries, gas stations, and restaurants stay open. **Brunch culture is huge** on Sundays.",
       "Sunday in Berlin is better for **museums, flea markets, walking tours, and long brunches** than for shopping."
     ]
+  },
+  "12-stops": {
+    "title": "12-Stop Walking Tour - Quick Summary",
+    "icon": "🚶",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "audio": "https://static.wixstatic.com/mp3/5a08a3_912ee59715534392923679cbda056489.mp3",
+    "items": [
+      "Our free walking tour covers **12 stops from Alexanderplatz to Hackescher Markt** — tracing 800 years of Berlin history through the city's medieval, Prussian, and Cold War layers.",
+      "The route is **~3 km, ~1 hour 45 minutes**, flat and easy. No rushing — every stop has time for photos and questions.",
+      "Highlights include the **\"Pope's Revenge\" TV Tower story**, the Hohenzollern Crypt beneath the Berliner Dom, UNESCO Museum Island, and Berlin's hidden medieval quarter.",
+      "Unlike most Berlin tours that start at Brandenburg Gate, this route covers **the oldest part of Berlin** — where the city was actually founded.",
+      "The tour is **free and tip-based**. Meet at the World Clock, Alexanderplatz. **Book your spot at berlinwalk.com.**"
+    ]
+  },
+  "museum-pass": {
+    "title": "Berlin Museum Pass vs. Single Tickets - Quick Summary",
+    "icon": "🎫",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "Single museum tickets on Museum Island cost **€14–€22** each. If you plan to visit two or more, individual tickets are not worth it.",
+      "The **Museum Island day pass (€25)** covers all five museums in one day — it pays for itself after just two visits.",
+      "The **Museumspass Berlin (€32)** gives you three days of access to 30+ museums city-wide, including all of Museum Island. Best value for serious museum-goers.",
+      "Several major museums are **completely free**, including the Topography of Terror, Humboldt Forum permanent exhibitions, and the Berlin Wall Memorial.",
+      "Our free walking tour passes right by Museum Island — it's the perfect introduction before you decide which museums to visit inside."
+    ]
   }
 }

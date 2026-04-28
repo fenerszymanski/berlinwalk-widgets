@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pergamon Museum Reopening Timeline | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+</head>
+<body>
+<div id="bw-pergamon-timeline">
+  <style>
+    #bw-pergamon-timeline {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-pergamon-timeline * { box-sizing: border-box; }
+    #bw-pergamon-timeline .bw-wrap { border: 1px solid var(--bw-border); border-radius: 14px; background: var(--bw-white); overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+    #bw-pergamon-timeline .bw-head { background: var(--bw-green); padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
+    #bw-pergamon-timeline .bw-icon { font-size: 18px; line-height: 1; }
+    #bw-pergamon-timeline .bw-kicker { color: var(--bw-yellow); font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; }
+    #bw-pergamon-timeline .bw-body { background: var(--bw-white); overflow-x: auto; }
+    #bw-pergamon-timeline table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+    #bw-pergamon-timeline col.c1 { width: 22%; } #bw-pergamon-timeline col.c2 { width: 30%; } #bw-pergamon-timeline col.c3 { width: 48%; }
+    #bw-pergamon-timeline thead th { background: #FAFAF5; color: var(--bw-muted); font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--bw-border); }
+    #bw-pergamon-timeline tbody td { padding: 14px; border-bottom: 0.5px solid var(--bw-border); vertical-align: middle; line-height: 1.55; }
+    #bw-pergamon-timeline tbody tr:last-child td { border-bottom: none; }
+    #bw-pergamon-timeline tbody td:first-child { font-weight: 800; color: var(--bw-green); }
+    #bw-pergamon-timeline .bw-badge { display: inline-block; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 999px; white-space: nowrap; }
+    #bw-pergamon-timeline .bw-badge.closed { background: #FCEBEB; color: #791F1F; }
+    #bw-pergamon-timeline .bw-badge.pending { background: #FFF3D6; color: #7A5500; }
+    #bw-pergamon-timeline .bw-badge.open { background: #EAF3DE; color: #27500A; }
+    #bw-pergamon-timeline .bw-footer { padding: 10px 20px; background: #FAFAF5; border-top: 1px solid var(--bw-border); font-size: 11px; color: var(--bw-muted); line-height: 1.5; }
+    @media (max-width: 520px) {
+      #bw-pergamon-timeline { margin: 22px 0; }
+      #bw-pergamon-timeline .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-pergamon-timeline .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-pergamon-timeline table, #bw-pergamon-timeline thead, #bw-pergamon-timeline tbody, #bw-pergamon-timeline tr, #bw-pergamon-timeline th, #bw-pergamon-timeline td { display: block; }
+      #bw-pergamon-timeline thead { display: none; }
+      #bw-pergamon-timeline tbody tr { border: 1px solid var(--bw-border); border-radius: 10px; margin: 10px 14px; padding: 12px; }
+      #bw-pergamon-timeline tbody td { border: none; padding: 4px 0; }
+      #bw-pergamon-timeline tbody td::before { content: attr(data-label); display: block; font-size: 9px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--bw-muted); margin-bottom: 2px; }
+      #bw-pergamon-timeline tbody td[data-label="Section"]::before { display: none; }
+    }
+  </style>
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-icon" aria-hidden="true">⏳</span>
+      <span class="bw-kicker">Pergamon Museum — Reopening Timeline</span>
+    </div>
+    <div class="bw-body">
+      <table>
+        <colgroup><col class="c1"><col class="c2"><col class="c3"></colgroup>
+        <thead><tr><th>Section</th><th>Status</th><th>What's Inside</th></tr></thead>
+        <tbody>
+          <tr><td data-label="Section">Main Building</td><td data-label="Status"><span class="bw-badge closed">❌ Closed Oct 2023</span></td><td data-label="What's Inside">Entire museum — all halls</td></tr>
+          <tr><td data-label="Section">North Wing</td><td data-label="Status"><span class="bw-badge pending">⏳ Spring 2027</span></td><td data-label="What's Inside">Pergamon Altar + Islamic Art</td></tr>
+          <tr><td data-label="Section">South Wing</td><td data-label="Status"><span class="bw-badge closed">🚫 2030s</span></td><td data-label="What's Inside">Ishtar Gate + Market Gate of Miletus</td></tr>
+          <tr><td data-label="Section">Full Complex</td><td data-label="Status"><span class="bw-badge closed">🏗️ 2037–2043</span></td><td data-label="What's Inside">New 4th wing + Archaeological Promenade</td></tr>
+          <tr><td data-label="Section">Das Panorama</td><td data-label="Status"><span class="bw-badge open">✅ Open now</span></td><td data-label="What's Inside">360° immersive + original sculptures — €14</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bw-footer">Source: Staatliche Museen zu Berlin · Renovation phased through Museum Island Master Plan (€1.5B project)</div>
+  </div>
+</div>
+</body>
+</html>
