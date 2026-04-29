@@ -22,8 +22,13 @@
     if (!body || !body.children || !body.children.length) return 0;
     var max = 0;
     for (var i = 0; i < body.children.length; i++) {
-      var rect = body.children[i].getBoundingClientRect();
-      if (rect.bottom > max) max = rect.bottom;
+      var child = body.children[i];
+      var rect = child.getBoundingClientRect();
+      // getBoundingClientRect ignores margins — add them so iframe doesn't clip
+      var cs = window.getComputedStyle ? window.getComputedStyle(child) : null;
+      var marginBottom = cs ? (parseFloat(cs.marginBottom) || 0) : 0;
+      var bottom = rect.bottom + marginBottom;
+      if (bottom > max) max = bottom;
     }
     return Math.ceil(max);
   }
