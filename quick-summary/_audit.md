@@ -205,18 +205,72 @@ mobile-max heights.
 
 ### Roadmap (still open)
 
-- **Round 2 reusable FAQ widget** — 6 posts (5-mistakes, 7-things-dom,
-  airport-to-alex, pergamon-closed, drinking-water, why-berliners-rude). NOTE:
-  pergamon and alex FAQ embeds carry FAQPage JSON-LD schema. Migrating to
-  iframe widget would lose Google's FAQ-snippet eligibility unless the JSON-LD
-  is also kept inline as a Wix HTML embed on the post itself.
-- **Round 3 reusable BERLIN WALK CTA** — 4 posts (5-best-doner, validate-ticket,
-  tap-water, popes-revenge).
-- **Round 4 trivial Google Maps iframes** — 2 posts (museum-island,
-  drinking-water).
 - **Lead form across all posts** — `/lead-form/` widget already live; user-side
   Wix work to embed it across remaining ~80 posts. Reference example post:
   `how-to-read-a-german-menu-without-panicking`.
 - **Skipped (low ROI):** what-to-eat 7 small "where to eat it" cards,
   where-to-stay neighborhood card, airport-to-alex CTA card, what-to-buy
   Alexanderplatz card. Stay inline in Wix.
+
+## Round 3 + 3.5 + 4 — Reusable widgets (2026-04-29)
+
+### Round 4 — Google Maps (2 posts)
+- `/museum-island-map/` → `is-museum-island-free-...` post
+- `/drinking-water-map/` → `where-to-find-free-drinking-water-...` post
+
+### Round 3.5 — Reusable CTA widget
+- Widget URL: `https://fenerszymanski.github.io/berlinwalk-widgets/cta/?post={slug}`
+- Data source: `/cta/data.json` — add new entries here (no widget rebuild needed)
+- Currently configured slugs: `5-best-doner`, `airport-to-alex`, plus a `default` fallback
+- TODO add data.json entries for: `validate-ticket`, `tap-water`, `popes-revenge`,
+  any other post that needs a custom-copy CTA
+- Each entry: `{ kicker, headline, sub, button, url }`. The `url` defaults to the
+  booking page if omitted.
+
+### Round 3 — Reusable FAQ widget (with JSON-LD pattern)
+- Widget URL: `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post={slug}`
+- Data source: `/faq/data.json` — q/a pairs per post
+- 6 posts configured: `pergamon-closed`, `alex-mistakes`, `drinking-water`,
+  `berliner-dom`, `airport-to-alex`, `why-berliners-rude`
+
+#### CRITICAL — SEO-preserving JSON-LD setup
+
+Iframe content is invisible to Google, so the FAQ widget alone would lose
+"People Also Ask" snippet eligibility. To keep the FAQPage schema discoverable,
+each FAQ post needs **two embeds in Wix**:
+
+1. **Visual FAQ:** Embed-a-Site → `.../faq/?post={slug}` (auto-resizes via
+   brand.js)
+2. **JSON-LD:** Wix HTML embed in **Paste-HTML mode** (NOT Embed-a-Site) →
+   set height to 1px, paste the script-tag content from the relevant URL below.
+   The JSON-LD must live on the parent page DOM, not inside an iframe.
+
+Pre-built JSON-LD pages (open URL → copy the `<script>...</script>` block →
+paste as Wix Paste-HTML embed at 1px height):
+
+| post slug | JSON-LD source |
+|---|---|
+| pergamon-closed | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/pergamon-closed.html` |
+| alex-mistakes | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/alex-mistakes.html` |
+| drinking-water | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/drinking-water.html` |
+| berliner-dom | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/berliner-dom.html` |
+| airport-to-alex | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/airport-to-alex.html` |
+| why-berliners-rude | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/why-berliners-rude.html` |
+
+When you update q/a in `faq/data.json`, regenerate the JSON-LD files by
+re-running the small Python script in this commit (look at the diff for
+`/faq/jsonld/*.html`).
+
+### Wix-side post-by-post swap list
+
+| post | swap |
+|---|---|
+| `is-museum-island-free-...` | replace inline GMaps iframe → `/museum-island-map/` |
+| `where-to-find-free-drinking-water-...` | replace inline GMaps iframe → `/drinking-water-map/` |
+| `5-best-doner-kebab-spots-...` | replace inline CTA → `/cta/?post=5-best-doner` |
+| `how-to-get-from-berlin-airport-to-alex...` | replace inline CTA + FAQ → `/cta/?post=airport-to-alex` and `/faq/?post=airport-to-alex` (+ JSON-LD inline) |
+| `is-the-pergamon-museum-closed-...` | replace inline FAQ → `/faq/?post=pergamon-closed` (+ JSON-LD inline) |
+| `5-mistakes-tourists-make-at-alex...` | replace inline FAQ → `/faq/?post=alex-mistakes` (+ JSON-LD inline) |
+| `where-to-find-free-drinking-water-...` | also replace FAQ → `/faq/?post=drinking-water` (+ JSON-LD inline) |
+| `7-things-most-tourists-dont-know-about-the-berliner-dom` | replace FAQ → `/faq/?post=berliner-dom` (+ JSON-LD inline) |
+| `why-berliners-aren-t-rude-...` | replace FAQ → `/faq/?post=why-berliners-rude` (+ JSON-LD inline) |

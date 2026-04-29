@@ -1,0 +1,20 @@
+{
+  "5-best-doner": {
+    "kicker": "🥙 Hungry for more than döner?",
+    "headline": "Walk Berlin's ancient core with a local — then grab that kebab.",
+    "sub": "12 stops, 800 years of history, ~2 hours. From Alexanderplatz to Hackescher Markt. Tip-based, no fixed price — a perfect appetite builder.",
+    "button": "Reserve your free spot →"
+  },
+  "airport-to-alex": {
+    "kicker": "🚶 Arrived at Alexanderplatz?",
+    "headline": "Let a local show you Berlin's ancient core — free.",
+    "sub": "12 stops, ~2h, starts at the World Clock. Tip-based, no fixed price, no credit card needed.",
+    "button": "Reserve your free spot →"
+  },
+  "default": {
+    "kicker": "BERLIN WALK",
+    "headline": "Discover Berlin with a local — free.",
+    "sub": "12 stops, 800 years of history, ~2 hours. From Alexanderplatz to Hackescher Markt. Tip-based, no fixed price.",
+    "button": "Reserve your free spot →"
+  }
+}
