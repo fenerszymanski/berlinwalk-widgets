@@ -1,12 +1,15 @@
 /* brand.js — common runtime for all BerlinWalk widgets
  *
  * Reports content height to the Wix parent so the surrounding HtmlComponent
- * can auto-resize to fit. Wix Velo listens for { type: 'bw-resize', height: N }
- * messages on its HtmlComponent and sets `c.height = N` accordingly.
+ * can auto-resize to fit. The parent listens for { type: 'bw-resize', height: N }
+ * messages (via Wix Custom Code) and resizes the iframe + its wrappers.
  *
- * This script is fire-and-forget: if Velo isn't wired up on the parent side,
- * the messages are simply ignored — no visual side effect. Adding this script
- * to a widget is therefore non-breaking.
+ * IMPORTANT: We must NOT measure document.documentElement.scrollHeight or body
+ * heights, because those grow to match the iframe's outer size — which causes
+ * a feedback loop (parent grows iframe → html grows → we report bigger → parent
+ * grows iframe again → infinite). Instead we measure the bottom edge of body's
+ * direct children, which reflects actual widget content regardless of the
+ * iframe's outer dimensions.
  */
 (function () {
   if (window.parent === window) return; // not embedded — do nothing
@@ -15,19 +18,20 @@
   var pending = false;
 
   function contentHeight() {
-    var de = document.documentElement;
-    var b = document.body;
-    return Math.max(
-      de ? de.scrollHeight : 0,
-      de ? de.offsetHeight : 0,
-      b ? b.scrollHeight : 0,
-      b ? b.offsetHeight : 0
-    );
+    var body = document.body;
+    if (!body || !body.children || !body.children.length) return 0;
+    var max = 0;
+    for (var i = 0; i < body.children.length; i++) {
+      var rect = body.children[i].getBoundingClientRect();
+      if (rect.bottom > max) max = rect.bottom;
+    }
+    return Math.ceil(max);
   }
 
   function reportNow() {
     var h = contentHeight();
-    if (h > 0 && h !== lastReported) {
+    // Skip tiny drift (sub-pixel rendering, font hinting) to avoid loops
+    if (h > 0 && Math.abs(h - lastReported) > 2) {
       lastReported = h;
       try {
         window.parent.postMessage({ type: 'bw-resize', height: h }, '*');
@@ -51,12 +55,18 @@
     reportThrottled();
   }
   window.addEventListener('load', reportThrottled);
-  window.addEventListener('resize', reportThrottled);
 
-  // Re-report when content changes (expand/collapse, dynamic widgets)
+  // Re-report when widget content changes (clicks, expand/collapse, dynamic).
+  // Observe the BODY, not documentElement — the latter grows with iframe size.
   if (typeof ResizeObserver !== 'undefined') {
-    try { new ResizeObserver(reportThrottled).observe(document.documentElement); } catch (e) {}
+    try { new ResizeObserver(reportThrottled).observe(document.body); } catch (e) {}
   }
+
+  // Re-measure after user interactions (calculator buttons, accordion, etc.)
+  document.addEventListener('click', function () {
+    setTimeout(reportThrottled, 50);
+    setTimeout(reportThrottled, 250);
+  }, true);
 
   // Catch late-loading fonts and images
   setTimeout(reportThrottled, 500);
