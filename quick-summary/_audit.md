@@ -233,33 +233,33 @@ mobile-max heights.
 - 6 posts configured: `pergamon-closed`, `alex-mistakes`, `drinking-water`,
   `berliner-dom`, `airport-to-alex`, `why-berliners-rude`
 
-#### CRITICAL — SEO-preserving JSON-LD setup
+#### SEO-preserving JSON-LD setup — via inject.js + Wix Custom Code
 
-Iframe content is invisible to Google, so the FAQ widget alone would lose
-"People Also Ask" snippet eligibility. To keep the FAQPage schema discoverable,
-each FAQ post needs **two embeds in Wix**:
+The first attempt was per-post Paste-HTML embeds carrying inline JSON-LD, but
+Wix's HTML embed iframes its content, so Google never indexed the FAQPage
+schema (Rich Results Test confirmed: schema absent). Plus Wix's HTML embed
+has a 35px minimum height that produced visible gaps below the FAQ.
 
-1. **Visual FAQ:** Embed-a-Site → `.../faq/?post={slug}` (auto-resizes via
-   brand.js)
-2. **JSON-LD:** Wix HTML embed in **Paste-HTML mode** (NOT Embed-a-Site) →
-   set height to 1px, paste the script-tag content from the relevant URL below.
-   The JSON-LD must live on the parent page DOM, not inside an iframe.
+Replaced with `/faq/inject.js` — a small site-wide script loaded via Wix
+Custom Code. It detects the current post slug from `location.pathname`,
+looks up the matching FAQPage schema (all 6 inlined), and injects it into
+`<head>` of the parent page. Google sees the JSON-LD on the actual post URL.
 
-Pre-built JSON-LD pages (open URL → copy the `<script>...</script>` block →
-paste as Wix Paste-HTML embed at 1px height):
+Wix Custom Code entry to add (Settings → Custom Code → + Add Custom Code):
 
-| post slug | JSON-LD source |
-|---|---|
-| pergamon-closed | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/pergamon-closed.html` |
-| alex-mistakes | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/alex-mistakes.html` |
-| drinking-water | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/drinking-water.html` |
-| berliner-dom | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/berliner-dom.html` |
-| airport-to-alex | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/airport-to-alex.html` |
-| why-berliners-rude | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/jsonld/why-berliners-rude.html` |
+- Name: `BerlinWalk FAQ JSON-LD`
+- Apply to: All pages
+- Place in: Body — end
+- Code:
+  ```html
+  <script src="https://fenerszymanski.github.io/berlinwalk-widgets/faq/inject.js" defer></script>
+  ```
 
-When you update q/a in `faq/data.json`, regenerate the JSON-LD files by
-re-running the small Python script in this commit (look at the diff for
-`/faq/jsonld/*.html`).
+Then on each FAQ post, the user only adds **one** Wix embed: the visual FAQ
+widget (`/faq/?post=slug`). No JSON-LD embed needed.
+
+`inject.js` is auto-generated from `/faq/data.json` via the Python script
+embedded in the commit message of this change. Re-run after editing q/a.
 
 ### Wix-side post-by-post swap list
 
