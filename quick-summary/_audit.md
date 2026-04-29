@@ -177,6 +177,32 @@ wrap existing extracted embeds verbatim.
 - `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=12-stops` (520px)
 - `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=museum-pass` (520px)
 
+## Auto-resize via Wix Velo (2026-04-28)
+
+All widgets now load `/js/brand.js` which posts `{ type: 'bw-resize', height: N }`
+to the parent on load + content change. To activate auto-resize on the Wix
+side, add this to **Velo masterPage.js** (or any post that hosts widgets):
+
+```javascript
+$w.onReady(function () {
+  $w('HtmlComponent').forEach(function (c) {
+    c.onMessage(function (event) {
+      if (event.data && event.data.type === 'bw-resize' && event.data.height) {
+        c.height = event.data.height + 4; // small buffer to avoid scrollbars
+      }
+    });
+  });
+});
+```
+
+Once this is live, every widget — current and future — auto-fits its iframe
+both on desktop and mobile. The fixed-height fields in the Wix design panel
+become irrelevant (still set them as a fallback in case Velo fails).
+
+If `c.height = X` doesn't apply on a particular Wix Studio version, fallback
+options: use `c.expand()` / dynamic dataset binding, or revert to per-widget
+mobile-max heights.
+
 ### Roadmap (still open)
 
 - **Round 2 reusable FAQ widget** — 6 posts (5-mistakes, 7-things-dom,
