@@ -282,5 +282,55 @@
         "a": "Germany has pledged to return its Benin Bronzes to Nigeria. Most have been officially transferred, though around 40 remain on display in the Humboldt Forum as loans, alongside an exhibition explaining the restitution process. It's an ongoing conversation between Germany and Nigeria"
       }
     ]
+  },
+  "validate-ticket": {
+    "subtitle": "Quick answers about ticket validation and inspections on Berlin trains.",
+    "items": [
+      {
+        "q": "What is the fine for riding without a ticket in Berlin?",
+        "a": "The fine is €60, with no warnings or exceptions — including for tourists. You'll need to show ID and either pay on the spot or receive a bill at your home address. If you're caught three times within 12 months, it can become a criminal offense under German law."
+      },
+      {
+        "q": "Where are the ticket validation machines in Berlin?",
+        "a": "The validation machines (Entwerter) are small yellow or red boxes found on U-Bahn and S-Bahn platforms — usually near the stairs, escalators, or platform entrances. They are not inside the trains. Insert your paper ticket and the machine stamps it with the date and time. If you buy a ticket on the BVG app, validation is automatic."
+      },
+      {
+        "q": "Do I need to validate a ticket bought on the BVG app?",
+        "a": "No. Tickets purchased through the BVG Fahrinfo Plus app are validated automatically at the moment of purchase. The app displays a moving QR code and countdown timer as proof of validity. Just make sure your phone is charged — a dead phone means you can't prove you have a ticket."
+      },
+      {
+        "q": "How often do ticket inspectors check on Berlin trains?",
+        "a": "The BVG employs hundreds of plainclothes inspectors who carry out millions of checks per year. There's no fixed schedule or pattern. Central lines like U2, U5, and U8 near Alexanderplatz are checked most frequently. You might go days without a check, then get inspected multiple times in one day."
+      },
+      {
+        "q": "What is the best ticket for tourists visiting Berlin?",
+        "a": "For most visitors, a Tageskarte (day ticket) for zones AB at around €9.50 is the best value if you'll take more than two trips in a day. For longer stays, consider the Berlin WelcomeCard or a 7-day pass. The easiest option overall is buying tickets through the BVG app, which validates automatically and eliminates the risk of forgetting to stamp."
+      }
+    ]
+  },
+  "popes-revenge": {
+    "subtitle": "Quick answers about the Pope's Revenge and Berlin's TV Tower.",
+    "items": [
+      {
+        "q": "Why is it called the Pope’s Revenge?",
+        "a": "Because sunlight reflecting off the TV Tower creates a cross-shaped image on the sphere, which was deeply ironic in officially atheist East Germany. Berliners nicknamed it “the Pope’s Revenge.”"
+      },
+      {
+        "q": "Is there really a cross on the Berlin TV Tower?",
+        "a": "Yes, but it is a reflection effect, not a built-in religious symbol."
+      },
+      {
+        "q": "Can you still see the cross today?",
+        "a": "Sometimes, yes. It depends on sunlight, weather, and viewing angle."
+      },
+      {
+        "q": "Where is the Berlin TV Tower?",
+        "a": "It stands at Alexanderplatz in central Berlin, one of the city’s main transport and sightseeing hubs."
+      },
+      {
+        "q": "Was the cross intentional?",
+        "a": "No. The effect is widely understood as accidental and caused by the way sunlight reflects off the tower’s metal cladding."
+      }
+    ]
   }
 }

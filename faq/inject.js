@@ -15,7 +15,9 @@
   "is-the-berlin-welcomecard-worth-it-in-2026-an-honest-breakdown": "welcomecard",
   "are-shops-open-on-sunday-in-berlin-what-you-need-to-know": "sunday-shops",
   "is-museum-island-free-tickets-prices-and-what-to-actually-skip": "museum-island-free",
-  "humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting": "humboldt-forum"
+  "humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting": "humboldt-forum",
+  "do-you-really-need-to-validate-your-ticket-on-berlin-trains": "validate-ticket",
+  "the-pope-s-revenge-how-east-germany-s-tv-tower-backfired": "popes-revenge"
 };
 
   var SCHEMAS = {
@@ -538,6 +540,98 @@
         }
       }
     ]
+  },
+  "validate-ticket": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the fine for riding without a ticket in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The fine is €60, with no warnings or exceptions — including for tourists. You'll need to show ID and either pay on the spot or receive a bill at your home address. If you're caught three times within 12 months, it can become a criminal offense under German law."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where are the ticket validation machines in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The validation machines (Entwerter) are small yellow or red boxes found on U-Bahn and S-Bahn platforms — usually near the stairs, escalators, or platform entrances. They are not inside the trains. Insert your paper ticket and the machine stamps it with the date and time. If you buy a ticket on the BVG app, validation is automatic."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to validate a ticket bought on the BVG app?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Tickets purchased through the BVG Fahrinfo Plus app are validated automatically at the moment of purchase. The app displays a moving QR code and countdown timer as proof of validity. Just make sure your phone is charged — a dead phone means you can't prove you have a ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How often do ticket inspectors check on Berlin trains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The BVG employs hundreds of plainclothes inspectors who carry out millions of checks per year. There's no fixed schedule or pattern. Central lines like U2, U5, and U8 near Alexanderplatz are checked most frequently. You might go days without a check, then get inspected multiple times in one day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best ticket for tourists visiting Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most visitors, a Tageskarte (day ticket) for zones AB at around €9.50 is the best value if you'll take more than two trips in a day. For longer stays, consider the Berlin WelcomeCard or a 7-day pass. The easiest option overall is buying tickets through the BVG app, which validates automatically and eliminates the risk of forgetting to stamp."
+        }
+      }
+    ]
+  },
+  "popes-revenge": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is it called the Pope’s Revenge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because sunlight reflecting off the TV Tower creates a cross-shaped image on the sphere, which was deeply ironic in officially atheist East Germany. Berliners nicknamed it “the Pope’s Revenge.”"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there really a cross on the Berlin TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but it is a reflection effect, not a built-in religious symbol."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you still see the cross today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes, yes. It depends on sunlight, weather, and viewing angle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the Berlin TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It stands at Alexanderplatz in central Berlin, one of the city’s main transport and sightseeing hubs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was the cross intentional?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The effect is widely understood as accidental and caused by the way sunlight reflects off the tower’s metal cladding."
+        }
+      }
+    ]
   }
 };
 
@@ -546,7 +640,6 @@
   var dataSlug = SLUG_MAP[decodeURIComponent(match[1])];
   if (!dataSlug || !SCHEMAS[dataSlug]) return;
 
-  // Avoid double-injection (in case Wix re-fires the script)
   if (document.querySelector('script[data-bw-faq="' + dataSlug + '"]')) return;
 
   var s = document.createElement('script');

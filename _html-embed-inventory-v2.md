@@ -9,11 +9,12 @@ JSON-LD + `<details>` accordion + `COLLAPSIBLE_LIST` native node detection.
 - Total posts scanned: 81
 - Posts with at least one HTML embed: 22
 - Posts with no HTML embeds: 59
-- **FAQ count: 12 posts** (v1 said 6 — undercounted by 2×)
-  - 10 via legacy HTML embed (FAQPage JSON-LD + `<details>`)
-  - 2 via Wix-native `COLLAPSIBLE_LIST` rich-content node (not visible in v1's HTML-only scan)
+- **FAQ count: 14 posts** (v1 said 6 — undercounted by ~2.3×; v2's first pass said 12, missed 2 more whose FAQ embeds use button-based class styling instead of `<details>`)
+  - 12 via legacy HTML embed (mix of FAQPage JSON-LD, `<details>`, and class-based button accordions)
+  - 2 via Wix-native `COLLAPSIBLE_LIST` rich-content node (invisible to HTML-only scans)
 - Audio embeds: ~18 posts (15 legacy mp3 + 3 migrated)
 - Summary blocks: ~20 posts (17 legacy + 3 migrated)
+- **Standalone CTAs: 2 posts only** (5-best-doner, airport-to-alex — both already migrated). The "BERLIN WALK" string in 4 other posts is the FAQ embed kicker, not a separate CTA. No CTA migration backlog.
 
 ## FAQ inventory — full list
 
