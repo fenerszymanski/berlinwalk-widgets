@@ -17,7 +17,11 @@
   "is-museum-island-free-tickets-prices-and-what-to-actually-skip": "museum-island-free",
   "humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting": "humboldt-forum",
   "do-you-really-need-to-validate-your-ticket-on-berlin-trains": "validate-ticket",
-  "the-pope-s-revenge-how-east-germany-s-tv-tower-backfired": "popes-revenge"
+  "the-pope-s-revenge-how-east-germany-s-tv-tower-backfired": "popes-revenge",
+  "berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus": "transport",
+  "what-to-eat-in-berlin-12-must-try-local-foods": "what-to-eat",
+  "where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist": "where-to-stay",
+  "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour": "12-stops"
 };
 
   var SCHEMAS = {
@@ -629,6 +633,190 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. The effect is widely understood as accidental and caused by the way sunlight reflects off the tower’s metal cladding."
+        }
+      }
+    ]
+  },
+  "transport": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the difference between U-Bahn, S-Bahn, tram, and bus in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "U-Bahn is the underground metro — fastest in central areas. S-Bahn is suburban rail, mostly above ground, covers longer distances and connects BER airport. Tram (Straßenbahn) runs mainly in former East Berlin neighborhoods. Bus fills the gaps where rail doesn't go. All four use the same ticket — no separate fares."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What ticket should I buy as a tourist in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most visitors, the 24-hour day ticket (€11.20 for Zone AB) is the best value — it pays for itself after just 3 rides. Buy a Zone ABC ticket if you're going to BER airport or Potsdam. Use the BVG Fahrinfo Plus app to skip the validation hassle altogether."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to validate my paper ticket on Berlin trains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, always. Stamp paper tickets in the yellow or red validation boxes (Entwerter) on the platform before you board. App tickets validate automatically. The fine for an unvalidated ticket is €60 — no exceptions for tourists."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Berlin public transport run all night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On Friday and Saturday nights, yes. Most U-Bahn and S-Bahn lines run every 30 minutes overnight. On weekday nights, U-Bahn and S-Bahn stop around 1:00 AM and night buses (N-lines) take over until morning service resumes around 4:30 AM."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get from BER airport to central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The S9 S-Bahn runs directly from BER to Alexanderplatz in about 43 minutes — no transfers needed. The faster option is the FEX express train to Hauptbahnhof (23 minutes) plus a quick S-Bahn or U-Bahn to your destination. Both cost €5 with a Zone ABC ticket."
+        }
+      }
+    ]
+  },
+  "what-to-eat": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Currywurst and where should I try it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Currywurst is Berlin's most iconic street food — a grilled pork sausage sliced and drenched in spiced ketchup with curry powder. Eat it standing up at an Imbiss (street stall) for the authentic experience. Budget €3–4 and avoid the tourist traps right on Alexanderplatz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is döner kebab really better in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — Berlin reinvented döner. The city's Turkish community transformed it from a small Turkish snack into a full sandwich meal in the 1970s. Berlin döner is genuinely different from anywhere else in the world. The version with grilled vegetables (Gemüsekebab) is a local specialty."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the most affordable way to try Berlin's local food?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most iconic Berlin foods cost under €5. Currywurst (€3–4), Döner (€7), Laugenbrezel/pretzel (€1–2), Schrippe with butter (€2). The best eating happens at street stalls and market stands — not sit-down restaurants on tourist squares."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's a typical German breakfast in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A proper Berlin breakfast usually includes a fresh Schrippe (bread roll) or Laugenbrezel (pretzel) with butter, cold cuts, cheese, jam, and a soft-boiled egg, plus coffee. Germany has over 300 bread varieties, and Berlin's bakeries take it seriously — find one that opens early."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I eat near Alexanderplatz without getting ripped off?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Don't eat on Alexanderplatz itself — the chains there are tourist traps. Walk 5 minutes to Hackescher Markt (the last stop on our tour) for excellent street food markets, beer gardens, and authentic neighborhood spots. Rosenthaler Platz is another safe bet."
+        }
+      }
+    ]
+  },
+  "where-to-stay": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which Berlin neighborhood is best for first-time visitors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mitte — the historic heart of the city. You'll be walking distance from Brandenburg Gate, Museum Island, and Alexanderplatz, where our free walking tour starts. Most major sights are within 15 minutes on foot. Hotels are pricier here but the convenience is unmatched."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I stay in Berlin on a budget?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Friedrichshain has Berlin's cheapest hostels and a vibrant young-local scene. You're a 15-minute U-Bahn ride from Alexanderplatz, surrounded by the East Side Gallery, cheap restaurants, and the Boxhagener Platz weekend markets. Great value for backpackers and budget travelers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the best Berlin neighborhood for nightlife?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kreuzberg is Berlin's bar and club capital. Around Kottbusser Tor and Schlesisches Tor you'll find an edgy, multicultural mix of late-night spots, Turkish food, art galleries, and some of Europe's most famous techno clubs. Stay here if you plan to be out past midnight."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin safe for families with kids?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — Prenzlauer Berg is the family-friendly choice. Leafy streets, playgrounds on every corner, family cafés, the Mauerpark Sunday flea market, and a calm residential vibe. It's well-connected by tram to central Berlin. Charlottenburg in the west is also a quiet, safe option."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I choose between Mitte, Kreuzberg, and Prenzlauer Berg?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mitte for sightseeing, Kreuzberg for nightlife, Prenzlauer Berg for atmosphere. If you only have 2–3 days in Berlin, Mitte saves you the most travel time. If you want to feel the city's contemporary side, pick Kreuzberg or Friedrichshain. For a longer, more relaxed stay, Prenzlauer Berg is hard to beat."
+        }
+      }
+    ]
+  },
+  "12-stops": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How long is the BerlinWalk free walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tour is approximately 3 km long and takes about 1 hour 45 minutes. The route is flat and easy — no rushing. Every stop has time for photos, questions, and a bit of breathing room before the next part of the city."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the walking tour start and end?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We start at the World Clock (Weltzeituhr) on Alexanderplatz — the rotating globe sculpture in the middle of the square, easy to find. The tour ends at Hackescher Markt, one of Berlin's most charming neighborhoods — perfect for food and drinks afterwards."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the BerlinWalk tour really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — it's tip-based, not free-but-not-really. There's no fixed price and no credit card required. At the end, you tip what the experience was worth to you. Most guests tip €10–20 per person depending on group size and budget, but it's entirely up to you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What will I see on the 12-stop walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The route covers 800 years of Berlin history through the city's oldest quarter — Alexanderplatz, the World Clock, the TV Tower (and the famous \"Pope's Revenge\"), the Hohenzollern Crypt beneath the Berliner Dom, UNESCO Museum Island, and Berlin's hidden medieval neighborhood. Most other Berlin tours skip this part of the city entirely."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book the walking tour in advance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — please book your free spot online so we can plan group sizes. It only takes a minute on berlinwalk.com. Booking is free and doesn't require a credit card. Walk-ups are welcome only if there's space, but on busy days the tour can fill up."
         }
       }
     ]
