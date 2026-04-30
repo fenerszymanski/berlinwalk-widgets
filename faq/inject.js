@@ -9,7 +9,13 @@
   "where-to-find-free-drinking-water-in-berlin": "drinking-water",
   "7-things-most-tourists-dont-know-about-the-berliner-dom": "berliner-dom",
   "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way": "airport-to-alex",
-  "why-berliners-aren-t-rude-they-re-just-honest": "why-berliners-rude"
+  "why-berliners-aren-t-rude-they-re-just-honest": "why-berliners-rude",
+  "5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026": "5-best-doner",
+  "average-temperature-in-berlin-by-month-a-complete-climate-guide": "average-temp",
+  "is-the-berlin-welcomecard-worth-it-in-2026-an-honest-breakdown": "welcomecard",
+  "are-shops-open-on-sunday-in-berlin-what-you-need-to-know": "sunday-shops",
+  "is-museum-island-free-tickets-prices-and-what-to-actually-skip": "museum-island-free",
+  "humboldt-forum-berlin-free-entry-big-controversy-is-it-worth-visiting": "humboldt-forum"
 };
 
   var SCHEMAS = {
@@ -285,6 +291,250 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Stay calm, don't take it personally, and keep your own communication simple and polite. A short answer is not always anger; a neutral face is not always hostility."
+        }
+      }
+    ]
+  },
+  "5-best-doner": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Gemüsekebab and why is it special to Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Gemüsekebab is Berlin's signature döner style that includes grilled or stir-fried vegetables alongside the usual salad and meat. Unlike standard döner in other German cities, the added cooked vegetables give it a richer, more complex flavor. Most of the top-rated spots in Berlin — including Dunya, Oggi's, and Rüyam — are known specifically for their Gemüsekebab."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does a döner kebab cost in Berlin in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At most quality döner shops in Berlin, you can expect to pay around €7 for a classic döner sandwich or dürüm in 2026. Budget spots may offer them for €5–6, while premium or restaurant-style options can go up to €8–9. All five spots recommended in this guide are in the €7 range."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Yaprak döner and how is it different?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yaprak means 'leaf' in Turkish and refers to thinly sliced, layered meat on the spit — as opposed to the more common ground-meat (Hackfleisch) style. Yaprak döner is generally considered higher quality because the meat texture is more natural and tender. Golt'z Kebap and Muca Kebap on this list are particularly known for their Yaprak spits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I get a good döner near Berlin Hauptbahnhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oggi's Gemüsekebab is just a 3-minute walk from Berlin Hauptbahnhof (Central Station) at Döberitzer Str. 1 in Moabit. It scored 93/100 in the Falstaff Streetfood Guide and is one of the most popular kebab spots in the city. Note that it's cash only and usually has a queue."
+        }
+      }
+    ]
+  },
+  "average-temp": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the average temperature in Berlin in summer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin's average summer temperature (June–August) ranges from 15–16°C at night to 23–25°C during the day. July and August are the warmest months with average highs around 25°C (77°F). Occasional heat waves can push temperatures above 35°C."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How cold does Berlin get in winter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin winters (December–February) average 2–4°C during the day and can drop to -2°C at night. January is the coldest month. Wind chill can make it feel significantly colder, and temperatures occasionally drop to -10°C or below during cold snaps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does it rain a lot in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin receives about 570mm of rainfall per year, which is moderate by European standards. Rain is spread fairly evenly, though summer months see slightly more. Summer rain comes as short thunderstorms rather than prolonged drizzle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I wear in Berlin in spring?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For spring visits (March–May), pack layers: a light jacket, comfortable walking shoes, and a packable rain jacket. Temperatures range from 8°C in March to 19°C in May, so mornings can be cold while afternoons warm up considerably."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best month to visit Berlin for good weather?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The best months for good weather are May through September. June offers the longest days (nearly 17 hours of daylight) while August has the warmest temperatures. September provides pleasant warmth with fewer crowds."
+        }
+      }
+    ]
+  },
+  "welcomecard": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does the Berlin WelcomeCard cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Classic version starts at €28.50 for 48 hours, rising to around €52 for 6 days. The Museum Island version (72 hours only) starts at €62. The All-Inclusive card with 30+ free attractions and a hop-on/off bus starts at €99. A Basic discount-only version (no transport) costs €9 for 72 hours. Exact prices depend on zone (AB = Berlin only, ABC = includes Potsdam and BER airport)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berlin WelcomeCard actually worth buying?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your trip. The WelcomeCard is worth it if you plan to visit multiple paid museums (especially Museum Island), use public transport daily, and stay 3+ days. It's not worth it if you focus on free sights (Reichstag, Holocaust Memorial, East Side Gallery), walk most places, or already have a Deutschlandticket. Use the calculator above to run the numbers for your actual plan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the difference between WelcomeCard and Museum Pass?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 3-Day Museum Pass Berlin (€36) gives free entry to 30+ museums (including all of Museum Island) but no transport. The Museum Island WelcomeCard (€62) includes free entry to the 5 Museum Island museums plus unlimited transport plus discounts at 170+ partners. If you're a museum-heavy traveler who won't use much transport, the Museum Pass wins. If you're mixing museums with getting around the city, the WelcomeCard Museum Island version usually wins."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the WelcomeCard cover the BER airport train?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only if you buy the Zone ABC version. BER airport is in Zone C, so the standard Zone AB card (city center only) doesn't cover it. With Zone ABC, your airport transfer is essentially included — a single BER→city ticket normally costs €5. For most travelers, the small price difference between AB and ABC is worth it just for the airport coverage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I buy the Berlin WelcomeCard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Buy it from the official site (berlin-welcomecard.de), visitberlin.de, or at BVG/S-Bahn ticket machines and counters at major stations. Avoid unofficial resellers — the price is the same or higher, and you miss out on the official app. You can choose between a digital ticket or a paper ticket that must be validated before your first ride. Phone screenshots of digital tickets are not accepted as valid tickets."
+        }
+      }
+    ]
+  },
+  "sunday-shops": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are supermarkets open on Sunday in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Regular neighborhood supermarkets like REWE, Edeka, Lidl, and Aldi are closed on Sundays. But supermarkets inside major train stations and at BER airport are open 365 days a year — including REWE at Hauptbahnhof (until 10pm), Edeka at Friedrichstraße, REWE at Ostbahnhof (until midnight), and REWE at BER airport (open 24/7). See the full list in the article above."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is there to do in Berlin on a Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sundays in Berlin are for brunch, museums, flea markets, and long walks. Most museums are open, the famous Mauerpark Flea Market runs every Sunday, and restaurants are fully open. Brunch culture is huge — especially in Kreuzberg and Neukölln. It's also a popular day for free walking tours through the historic center."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are all shops closed, or are there exceptions?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almost all regular retail is closed on Sunday, but there are three main exceptions: train station and airport supermarkets (open 365 days), emergency businesses (pharmacies on rotation, gas stations, Spätis), and Verkaufsoffene Sonntage — 6 to 8 designated Sundays per year when all shops can open from 1pm to 8pm. Dates are announced on Berlin.de."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are restaurants and cafés open on Sunday in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Restaurants, cafés, and bars are fully open on Sundays. In fact, Sunday brunch is a Berlin tradition — especially in Kreuzberg, Neukölln, and Prenzlauer Berg, where many cafés have special Sunday menus. Food delivery services like Lieferando and Wolt also operate normally."
+        }
+      }
+    ]
+  },
+  "museum-island-free": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Museum Island free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The island itself, including the architecture, parks, and riverside walks, is completely free. Entering the museums costs €14 per museum or €24 for a day pass. Under 18 is always free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Pergamon Museum open in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The main Pergamon Museum building has been closed since October 2023. The North Wing may partially reopen in spring 2027. In the meantime, you can visit Pergamonmuseum. Das Panorama across the canal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Museum Island museum is best?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most visitors, the Neues Museum is the highlight — the Nefertiti bust and Egyptian collection are world-famous. The Alte Nationalgalerie is a close second for art lovers. If you only have time for one, choose the Neues Museum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do you need for Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "One museum takes 1.5–2.5 hours. Two museums make a good half-day. Visiting everything takes a full day. If you're combining museums with a walking tour, plan for one or two museums in the morning, then join the tour in the afternoon."
+        }
+      }
+    ]
+  },
+  "humboldt-forum": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Humboldt Forum free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Partially. The Palace Cellar, Sculpture Hall, Video Panorama, Humboldt Lab, and stairwell exhibitions are all free. The main exhibitions (Ethnological Museum, Asian Art, BERLIN GLOBAL) require a €14 day ticket. Under 19 is always free for everything."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does the Humboldt Forum cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "€14 for a day ticket, €18 for a two-day ticket, or €9 for BERLIN GLOBAL only. The Museum Pass Berlin (€32 for 3 days) also covers the Ethnological Museum and Museum of Asian Art."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was the Humboldt Forum built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "To give Berlin's ethnological and Asian art collections a central home (they were previously in suburban Dahlem), to restore the historic city center's architectural identity after the GDR demolished the original palace, and to create a cultural forum for global dialogue. The decision was debated for over a decade before construction began."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happened to the Benin Bronzes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Germany has pledged to return its Benin Bronzes to Nigeria. Most have been officially transferred, though around 40 remain on display in the Humboldt Forum as loans, alongside an exhibition explaining the restitution process. It's an ongoing conversation between Germany and Nigeria"
         }
       }
     ]
