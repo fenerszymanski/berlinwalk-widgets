@@ -1,16 +1,27 @@
 /* lead-form-inject.js — auto-injects the BerlinWalk lead-form widget into every
- * blog post body, around the middle of the post (after a mid-content H2's first
- * paragraph). Loaded site-wide via Wix Custom Code. Skips non-post pages and
- * avoids double-injection on SPA navigation between posts.
+ * blog post body. Loaded site-wide via Wix Custom Code.
  *
- * Detection strategy: try several common Wix post-body selectors, fall back to
- * <article> / <main> if specific hooks aren't found. Prints the chosen selector
- * to the browser console (prefix [BW lead-form]) so you can verify in DevTools.
+ * Wix's blog post body is rendered by React. A naive one-shot injection gets
+ * removed on the next reconciliation (the iframe appears for ~1s and is then
+ * yanked out as "an element React didn't render"). This script handles that:
+ *
+ *   1. Waits a moment for React to hydrate before the first attempt.
+ *   2. Uses a MutationObserver to detect when our iframe disappears and
+ *      re-injects it (debounced).
+ *   3. Caps total re-injections so we don't infinite-loop if Wix is hostile.
+ *   4. Re-runs everything on SPA navigation between posts.
  */
 (function () {
   var LEAD_FORM_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/lead-form/';
   var MARKER = 'data-bw-leadform';
   var LOG = '[BW lead-form]';
+  var MAX_REINJECTS = 12;
+  var REINJECT_DEBOUNCE_MS = 400;
+
+  var injections = 0;
+  var reinjectTimer = null;
+  var observer = null;
+  var lastPath = location.pathname;
 
   function isPostPage() { return location.pathname.indexOf('/post/') === 0; }
 
@@ -27,10 +38,7 @@
     ];
     for (var i = 0; i < candidates.length; i++) {
       var el = document.querySelector(candidates[i]);
-      if (el && el.querySelectorAll('p').length >= 3) {
-        console.log(LOG, 'matched selector:', candidates[i]);
-        return el;
-      }
+      if (el && el.querySelectorAll('p').length >= 3) return el;
     }
     return null;
   }
@@ -39,7 +47,6 @@
     var headings = body.querySelectorAll('h2');
     if (headings.length >= 3) {
       var heading = headings[Math.floor(headings.length / 2)];
-      // Walk forward to find the first <p> after this heading
       var node = heading.nextElementSibling;
       while (node) {
         var tag = (node.tagName || '').toUpperCase();
@@ -56,12 +63,16 @@
   }
 
   function inject() {
-    if (!isPostPage()) return;
-    if (document.querySelector('[' + MARKER + ']')) return;
+    if (!isPostPage()) return false;
+    if (document.querySelector('[' + MARKER + ']')) return false; // already there
+    if (injections >= MAX_REINJECTS) {
+      console.log(LOG, 'gave up after', MAX_REINJECTS, 'attempts');
+      return false;
+    }
     var body = findPostBody();
-    if (!body) { console.log(LOG, 'post body not found yet'); return; }
+    if (!body) return false;
     var anchor = findInsertionAnchor(body);
-    if (!anchor) { console.log(LOG, 'no anchor found — post too short'); return; }
+    if (!anchor) return false;
 
     var wrapper = document.createElement('div');
     wrapper.setAttribute(MARKER, '1');
@@ -77,34 +88,57 @@
     wrapper.appendChild(iframe);
 
     anchor.parentNode.insertBefore(wrapper, anchor.nextSibling);
-    console.log(LOG, 'injected after', anchor.tagName, anchor.textContent.slice(0, 60));
+    injections++;
+    console.log(LOG, 'injected (attempt', injections + ')', 'after', anchor.tagName);
+    return true;
   }
 
-  function tryInjectRepeatedly() {
-    var attempts = 0;
-    var max = 24; // ~6 seconds at 250ms
-    var timer = setInterval(function () {
-      attempts++;
-      inject();
-      if (document.querySelector('[' + MARKER + ']') || attempts >= max) {
-        clearInterval(timer);
+  function scheduleInject() {
+    clearTimeout(reinjectTimer);
+    reinjectTimer = setTimeout(inject, REINJECT_DEBOUNCE_MS);
+  }
+
+  function startObserving() {
+    if (observer) observer.disconnect();
+    observer = new MutationObserver(function () {
+      if (!isPostPage()) return;
+      if (injections >= MAX_REINJECTS) return;
+      // If our marker isn't in the DOM, schedule a re-injection
+      if (!document.querySelector('[' + MARKER + ']')) {
+        scheduleInject();
       }
-    }, 250);
+    });
+    if (document.body) observer.observe(document.body, { childList: true, subtree: true });
+  }
+
+  function bootForCurrentPage() {
+    injections = 0;
+    // Wait for React to hydrate before the first attempt
+    setTimeout(function () {
+      inject();
+      startObserving();
+    }, 800);
+    // A few extra explicit attempts during the first 5s, in case the body
+    // appears late (slow networks / heavy hydration)
+    [1500, 2500, 4000].forEach(function (delay) {
+      setTimeout(function () {
+        if (!document.querySelector('[' + MARKER + ']')) inject();
+      }, delay);
+    });
   }
 
   // Initial run
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tryInjectRepeatedly);
+    document.addEventListener('DOMContentLoaded', bootForCurrentPage);
   } else {
-    tryInjectRepeatedly();
+    bootForCurrentPage();
   }
 
-  // SPA navigation between posts
-  var lastPath = location.pathname;
+  // Detect SPA navigation between posts
   setInterval(function () {
     if (location.pathname !== lastPath) {
       lastPath = location.pathname;
-      tryInjectRepeatedly();
+      bootForCurrentPage();
     }
   }, 300);
 })();
