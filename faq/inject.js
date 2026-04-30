@@ -1,7 +1,4 @@
-/* Auto-generated from /faq/data.json — do not edit by hand.
- * Loaded site-wide via Wix Custom Code. Detects the current blog post slug
- * and injects the matching FAQPage JSON-LD into <head> for Google to index.
- */
+/* Auto-generated from /faq/data.json — do not edit by hand. */
 (function () {
   var SLUG_MAP = {
   "is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026": "pergamon-closed",
@@ -21,7 +18,8 @@
   "berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus": "transport",
   "what-to-eat-in-berlin-12-must-try-local-foods": "what-to-eat",
   "where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist": "where-to-stay",
-  "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour": "12-stops"
+  "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour": "12-stops",
+  "is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists": "berlin-budget"
 };
 
   var SCHEMAS = {
@@ -820,6 +818,52 @@
         }
       }
     ]
+  },
+  "berlin-budget": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does a daily trip to Berlin cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most travelers spend between €120 and €250 per day, not counting flights. Backpackers can manage on €60–90/day; comfort travelers spend €370–500/day. Accommodation is the biggest variable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin still cheap compared to other European capitals?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin is noticeably cheaper than Paris, London, Zurich, Copenhagen, or Amsterdam — but more expensive than Prague, Budapest, or Warsaw. Among German cities, it's similar to Hamburg, cheaper than Munich, but pricier than Leipzig or Dresden."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the cheapest way to get from BER airport to central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The FEX airport express train costs €5 and reaches the city center in about 30 minutes. A taxi for the same trip is €50–65. The Zone ABC ticket (€3.80 single or €12.90 day ticket) covers any train option."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I save money in Berlin without missing the experience?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take a free walking tour (tip-based), eat your big meal at lunch (Mittagstisch menus are dramatically cheaper than dinner), drink at Spätis instead of bars (€2 beers vs. €5+), book the Reichstag dome 2 weeks ahead (free, replaces the €28 TV Tower), and carry a refillable water bottle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the most overrated tourist expense in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The TV Tower observation deck at €28 — the Reichstag dome offers a similar view for free with advance booking. Tourist river cruises (€20–30) are also skippable; the same Spree views are free from any bridge or riverside walk."
+        }
+      }
+    ]
   }
 };
 
@@ -827,9 +871,7 @@
   if (!match) return;
   var dataSlug = SLUG_MAP[decodeURIComponent(match[1])];
   if (!dataSlug || !SCHEMAS[dataSlug]) return;
-
   if (document.querySelector('script[data-bw-faq="' + dataSlug + '"]')) return;
-
   var s = document.createElement('script');
   s.type = 'application/ld+json';
   s.setAttribute('data-bw-faq', dataSlug);

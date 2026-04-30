@@ -432,5 +432,30 @@
         "a": "**Yes — please book your free spot online** so we can plan group sizes. It only takes a minute on **berlinwalk.com**. Booking is free and doesn't require a credit card. Walk-ups are welcome only if there's space, but on busy days the tour can fill up."
       }
     ]
+  },
+  "berlin-budget": {
+    "subtitle": "Quick answers about traveling to Berlin on a budget in 2026.",
+    "items": [
+      {
+        "q": "How much does a daily trip to Berlin cost in 2026?",
+        "a": "Most travelers spend between **€120 and €250 per day**, not counting flights. Backpackers can manage on **€60–90/day**; comfort travelers spend **€370–500/day**. Accommodation is the biggest variable."
+      },
+      {
+        "q": "Is Berlin still cheap compared to other European capitals?",
+        "a": "Berlin is **noticeably cheaper than Paris, London, Zurich, Copenhagen, or Amsterdam** — but more expensive than **Prague, Budapest, or Warsaw**. Among German cities, it's similar to Hamburg, cheaper than Munich, but pricier than Leipzig or Dresden."
+      },
+      {
+        "q": "What's the cheapest way to get from BER airport to central Berlin?",
+        "a": "The **FEX airport express train costs €5** and reaches the city center in about 30 minutes. A taxi for the same trip is €50–65. The Zone ABC ticket (€3.80 single or €12.90 day ticket) covers any train option."
+      },
+      {
+        "q": "How can I save money in Berlin without missing the experience?",
+        "a": "Take a **free walking tour** (tip-based), eat your big meal at lunch (Mittagstisch menus are dramatically cheaper than dinner), drink at Spätis instead of bars (€2 beers vs. €5+), book the **Reichstag dome 2 weeks ahead** (free, replaces the €28 TV Tower), and carry a refillable water bottle."
+      },
+      {
+        "q": "What's the most overrated tourist expense in Berlin?",
+        "a": "The **TV Tower observation deck** at €28 — the Reichstag dome offers a similar view for free with advance booking. **Tourist river cruises** (€20–30) are also skippable; the same Spree views are free from any bridge or riverside walk."
+      }
+    ]
   }
 }
