@@ -36,10 +36,26 @@
     return null;
   }
 
+  function isVisible(el) {
+    // Walk up checking computed style — anchor inside a display:none ancestor
+    // means our injected iframe also gets display:none and never renders.
+    while (el && el !== document.body && el.nodeType === 1) {
+      var s = window.getComputedStyle(el);
+      if (s.display === 'none' || s.visibility === 'hidden') return false;
+      el = el.parentElement;
+    }
+    return true;
+  }
+
   function findInsertionAnchor(body) {
-    // Insert at the very end of the post body — after the last <p>
+    // Insert at the very end of the post body — after the last VISIBLE <p>.
+    // Skipping hidden ancestors avoids landing inside collapsed Wix sections
+    // (e.g. related posts blocks that are display:none until expanded).
     var paragraphs = body.querySelectorAll('p');
-    if (paragraphs.length) return paragraphs[paragraphs.length - 1];
+    for (var i = paragraphs.length - 1; i >= 0; i--) {
+      if (isVisible(paragraphs[i])) return paragraphs[i];
+    }
+    // Last-resort fallback: append to the body itself
     return body.lastElementChild || null;
   }
 

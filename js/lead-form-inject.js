@@ -43,22 +43,42 @@
     return null;
   }
 
+  function isVisible(el) {
+    // Skip anchors trapped inside collapsed Wix sections (display:none).
+    while (el && el !== document.body && el.nodeType === 1) {
+      var s = window.getComputedStyle(el);
+      if (s.display === 'none' || s.visibility === 'hidden') return false;
+      el = el.parentElement;
+    }
+    return true;
+  }
+
   function findInsertionAnchor(body) {
-    var headings = body.querySelectorAll('h2');
+    // Use only visible H2s — a heading inside a hidden Wix section means
+    // our injection also hides.
+    var allHeadings = body.querySelectorAll('h2');
+    var headings = [];
+    for (var hi = 0; hi < allHeadings.length; hi++) {
+      if (isVisible(allHeadings[hi])) headings.push(allHeadings[hi]);
+    }
     if (headings.length >= 3) {
       var heading = headings[Math.floor(headings.length / 2)];
       var node = heading.nextElementSibling;
       while (node) {
         var tag = (node.tagName || '').toUpperCase();
         if (tag === 'H2' || tag === 'H3') break;
-        if (tag === 'P') return node;
+        if (tag === 'P' && isVisible(node)) return node;
         node = node.nextElementSibling;
       }
       return heading;
     }
     if (headings.length > 0) return headings[Math.floor(headings.length / 2)];
     var paragraphs = body.querySelectorAll('p');
-    if (paragraphs.length >= 4) return paragraphs[Math.floor(paragraphs.length / 2)];
+    var visibleP = [];
+    for (var pi = 0; pi < paragraphs.length; pi++) {
+      if (isVisible(paragraphs[pi])) visibleP.push(paragraphs[pi]);
+    }
+    if (visibleP.length >= 4) return visibleP[Math.floor(visibleP.length / 2)];
     return null;
   }
 
