@@ -19,7 +19,9 @@
   "what-to-eat-in-berlin-12-must-try-local-foods": "what-to-eat",
   "where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist": "where-to-stay",
   "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour": "12-stops",
-  "is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists": "berlin-budget"
+  "is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists": "berlin-budget",
+  "berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go": "first-time-mistakes",
+  "berlin-first-time-visitor-mistakes": "first-time-mistakes"
 };
 
   var SCHEMAS = {
@@ -864,17 +866,87 @@
         }
       }
     ]
+  },
+  "first-time-mistakes": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the biggest mistake first-time visitors make in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The biggest mistake is trying to see too much without understanding the city's layout or history. Berlin is spread out, and many sights need context. A walking tour early in your trip helps connect the pieces."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need cash in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it is smart to carry some cash. Card payments are common, but smaller cafes, bakeries, food stalls, markets, toilets, and some bars may still prefer cash."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are shops closed on Sunday in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most normal shops and supermarkets are closed on Sundays. Restaurants, cafes, museums, bars, cinemas, and many tourist attractions are usually open. Some supermarkets at major train stations may be exceptions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin public transport easy for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin's public transport is excellent, but tourists should understand ticket zones, validation, and the lack of barriers. Always buy and validate your ticket before riding."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin safe for first-time visitors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin is generally safe for tourists, but it is still a large city. Watch your belongings in crowded areas, be careful late at night around major stations, and use normal city awareness."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I buy the Berlin WelcomeCard for a first trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your plan. If you will use public transport daily and visit several paid attractions, the Berlin WelcomeCard can be worth it. If you mostly walk, visit free sights, or only enter one museum, check the calculator first."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I take a walking tour in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take a walking tour early in your trip, ideally on your first day. It helps you understand the city's layout, history, and which places you want to revisit later."
+        }
+      }
+    ]
   }
 };
 
-  var match = location.pathname.match(/\/post\/([^\/?#]+)/);
-  if (!match) return;
-  var dataSlug = SLUG_MAP[decodeURIComponent(match[1])];
-  if (!dataSlug || !SCHEMAS[dataSlug]) return;
-  if (document.querySelector('script[data-bw-faq="' + dataSlug + '"]')) return;
-  var s = document.createElement('script');
-  s.type = 'application/ld+json';
-  s.setAttribute('data-bw-faq', dataSlug);
-  s.textContent = JSON.stringify(SCHEMAS[dataSlug]);
-  document.head.appendChild(s);
+  function currentSlug() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    return parts[parts.length - 1] || '';
+  }
+
+  function injectSchema(schemaKey) {
+    var schema = SCHEMAS[schemaKey];
+    if (!schema || document.getElementById('bw-faq-jsonld')) return;
+    var script = document.createElement('script');
+    script.id = 'bw-faq-jsonld';
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(schema);
+    document.head.appendChild(script);
+  }
+
+  var slug = currentSlug();
+  var schemaKey = SLUG_MAP[slug];
+  if (schemaKey) injectSchema(schemaKey);
 })();

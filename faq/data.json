@@ -457,5 +457,38 @@
         "a": "The **TV Tower observation deck** at €28 — the Reichstag dome offers a similar view for free with advance booking. **Tourist river cruises** (€20–30) are also skippable; the same Spree views are free from any bridge or riverside walk."
       }
     ]
+  },
+  "first-time-mistakes": {
+    "subtitle": "Quick answers for first-time visitors planning a Berlin trip.",
+    "items": [
+      {
+        "q": "What is the biggest mistake first-time visitors make in Berlin?",
+        "a": "The biggest mistake is trying to see too much without understanding the city's layout or history. Berlin is spread out, and many sights need context. A walking tour early in your trip helps connect the pieces."
+      },
+      {
+        "q": "Do I need cash in Berlin?",
+        "a": "Yes, it is smart to carry some cash. Card payments are common, but smaller cafes, bakeries, food stalls, markets, toilets, and some bars may still prefer cash."
+      },
+      {
+        "q": "Are shops closed on Sunday in Berlin?",
+        "a": "Most normal shops and supermarkets are closed on Sundays. Restaurants, cafes, museums, bars, cinemas, and many tourist attractions are usually open. Some supermarkets at major train stations may be exceptions."
+      },
+      {
+        "q": "Is Berlin public transport easy for tourists?",
+        "a": "Yes. Berlin's public transport is excellent, but tourists should understand ticket zones, validation, and the lack of barriers. Always buy and validate your ticket before riding."
+      },
+      {
+        "q": "Is Berlin safe for first-time visitors?",
+        "a": "Berlin is generally safe for tourists, but it is still a large city. Watch your belongings in crowded areas, be careful late at night around major stations, and use normal city awareness."
+      },
+      {
+        "q": "Should I buy the Berlin WelcomeCard for a first trip?",
+        "a": "It depends on your plan. If you will use public transport daily and visit several paid attractions, the Berlin WelcomeCard can be worth it. If you mostly walk, visit free sights, or only enter one museum, check the calculator first."
+      },
+      {
+        "q": "When should I take a walking tour in Berlin?",
+        "a": "Take a walking tour early in your trip, ideally on your first day. It helps you understand the city's layout, history, and which places you want to revisit later."
+      }
+    ]
   }
 }
