@@ -17,23 +17,14 @@
   var LOG = '[BW lead-form]';
   var MAX_REINJECTS = 12;
   var REINJECT_DEBOUNCE_MS = 400;
-  var SKIP_SLUGS = {
-    'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go': true,
-    'berlin-first-time-visitor-mistakes': true
-  };
 
   var injections = 0;
   var reinjectTimer = null;
   var observer = null;
   var lastPath = location.pathname;
 
-  function currentSlug() {
-    var parts = location.pathname.split('/').filter(Boolean);
-    return parts[parts.length - 1] || '';
-  }
-
   function isPostPage() {
-    return location.pathname.indexOf('/post/') === 0 && !SKIP_SLUGS[currentSlug()];
+    return location.pathname.indexOf('/post/') === 0;
   }
 
   function findPostBody() {
