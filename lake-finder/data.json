@@ -52,6 +52,7 @@
       "tagline": "Closest real beach to Mitte. Easy half-day.",
       "transit": "U9 to Amrumer Straße — 15 min from Alex",
       "anchor": "plotzensee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Plötzensee+Berlin",
       "tags": ["city", "real_beach", "family_friendly", "very_easy", "free_shore", "strandbad", "textile_norm"]
     },
     {
@@ -60,6 +61,7 @@
       "tagline": "Small lido, family vibe, very local.",
       "transit": "Tram M4 — 25 min from Alex",
       "anchor": "weissensee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Weißensee+Berlin",
       "tags": ["city", "family_friendly", "strandbad", "textile_norm"]
     },
     {
@@ -68,6 +70,7 @@
       "tagline": "Quiet east-side lakes almost no tourists know.",
       "transit": "Tram 12 — 30 min from Alex",
       "anchor": "orankesee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Orankesee+Berlin",
       "tags": ["city", "family_friendly", "quiet", "strandbad", "textile_norm"]
     },
     {
@@ -76,6 +79,7 @@
       "tagline": "Smallest, most central, no beach but a quick dip.",
       "transit": "S-Bahn Halensee — 20 min from Mitte",
       "anchor": "halensee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Halensee+Berlin",
       "tags": ["city", "very_easy", "free_shore", "textile_norm"]
     },
     {
@@ -84,6 +88,7 @@
       "tagline": "The iconic 1920s lido with Baltic sand.",
       "transit": "S7 — 35 min from Hackescher Markt",
       "anchor": "wannsee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Großer+Wannsee+Berlin",
       "tags": ["sbahn", "real_beach", "family_friendly", "strandbad", "textile_norm"]
     },
     {
@@ -92,6 +97,7 @@
       "tagline": "Where Berliners actually swim. Clear water, forest, free.",
       "transit": "S1 — 35 min from Friedrichstraße",
       "anchor": "schlachtensee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Schlachtensee+Berlin",
       "tags": ["sbahn", "clarity", "free_shore", "textile_norm"]
     },
     {
@@ -100,6 +106,7 @@
       "tagline": "Schlachtensee's quieter twin. Same clarity, fewer people.",
       "transit": "U3 to Krumme Lanke — 40 min from Alex",
       "anchor": "krumme-lanke",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Krumme+Lanke+Berlin",
       "tags": ["sbahn", "family_friendly", "quiet", "clarity", "free_shore", "textile_norm"]
     },
     {
@@ -108,6 +115,7 @@
       "tagline": "Berlin's biggest lake. East side. Real scale.",
       "transit": "S3 + tram 60 — 45 min from Alex",
       "anchor": "muggelsee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Großer+Müggelsee+Berlin",
       "tags": ["sbahn", "real_beach", "family_friendly", "fkk_friendly", "free_shore", "strandbad"]
     },
     {
@@ -116,6 +124,7 @@
       "tagline": "Northwest answer to Wannsee. Less crowded, more sailboats.",
       "transit": "U6 to Alt-Tegel — 35 min from Alex",
       "anchor": "tegeler-see",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Tegeler+See+Berlin",
       "tags": ["sbahn", "real_beach", "family_friendly", "strandbad", "textile_norm"]
     },
     {
@@ -124,6 +133,7 @@
       "tagline": "Forest lake, predominantly FKK, decades of counter-culture.",
       "transit": "S-Bahn Grunewald + 20 min walk",
       "anchor": "teufelsee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Teufelssee+Grunewald+Berlin",
       "tags": ["forest", "fkk_dominant", "quiet", "free_shore"]
     },
     {
@@ -132,6 +142,7 @@
       "tagline": "Clear water next to the old Tegel runway. Lesser-known.",
       "transit": "U6 to Otisstraße + walk",
       "anchor": "flughafensee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Flughafensee+Berlin",
       "tags": ["forest", "real_beach", "family_friendly", "quiet", "clarity", "free_shore", "textile_norm"]
     },
     {
@@ -140,6 +151,7 @@
       "tagline": "Flooded quarry. Cleanest water inside city limits.",
       "transit": "S-Bahn Kaulsdorf + 20 min walk",
       "anchor": "habermannsee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Habermannsee+Kaulsdorf+Berlin",
       "tags": ["forest", "quiet", "clarity", "free_shore", "textile_norm"]
     },
     {
@@ -148,6 +160,7 @@
       "tagline": "Far north. Quiet. You'll have space.",
       "transit": "S25 — 50 min from Alex",
       "anchor": "heiligensee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Heiligensee+Berlin",
       "tags": ["forest", "quiet", "free_shore", "textile_norm"]
     },
     {
@@ -156,6 +169,7 @@
       "tagline": "Müggelsee's quieter cousin. Pine forest setting.",
       "transit": "S3 to Friedrichshagen + 15 min walk",
       "anchor": "kleiner-muggelsee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Kleiner+Müggelsee+Berlin",
       "tags": ["sbahn", "quiet", "free_shore", "textile_norm"]
     },
     {
@@ -164,6 +178,7 @@
       "tagline": "Turquoise gem, beech forest, a small island. Worth the trip.",
       "transit": "RB27 from Gesundbrunnen — 1 hr",
       "anchor": "liepnitzsee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Liepnitzsee+Wandlitz",
       "tags": ["trip", "family_friendly", "clarity", "free_shore", "textile_norm"]
     },
     {
@@ -172,6 +187,7 @@
       "tagline": "Cold War border lake, exceptionally clear, lifeguards.",
       "transit": "Bus 638 from S-Wannsee — 1 hr from Mitte",
       "anchor": "gross-glienicker",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Groß+Glienicker+See",
       "tags": ["trip", "real_beach", "family_friendly", "clarity", "free_shore", "textile_norm"]
     },
     {
@@ -180,6 +196,7 @@
       "tagline": "Pine forest shores, white beach, Mediterranean vibe.",
       "transit": "S3 + tram 87 — 1 hr from Alex",
       "anchor": "flakensee",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Flakensee+Woltersdorf",
       "tags": ["trip", "real_beach", "family_friendly", "quiet", "clarity", "free_shore", "textile_norm"]
     }
   ],

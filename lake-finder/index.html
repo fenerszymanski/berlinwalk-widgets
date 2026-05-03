@@ -395,8 +395,8 @@
     });
   }
 
-  function resultLink(anchor) {
-    return postUrl() + '#' + encodeURIComponent(anchor);
+  function mapsLink(lake) {
+    return lake && lake.mapsUrl ? lake.mapsUrl : '';
   }
 
   function renderResult() {
@@ -415,7 +415,7 @@
         '<h3 class="bw-lf-result-name">' + escapeHtml(primary.name) + '</h3>' +
         '<p class="bw-lf-result-tagline">' + escapeHtml(primary.tagline) + '</p>' +
         '<p class="bw-lf-result-transit">🚆 ' + escapeHtml(primary.transit) + '</p>' +
-        '<a class="bw-lf-result-link" href="' + resultLink(primary.anchor) + '" target="_top" rel="noopener">Read more →</a>' +
+        '<a class="bw-lf-result-link" href="' + escapeHtml(mapsLink(primary)) + '" target="_blank" rel="noopener noreferrer">📍 Open in Google Maps →</a>' +
       '</div>';
     if (backup) {
       html +=
@@ -424,7 +424,7 @@
           '<h3 class="bw-lf-result-name">' + escapeHtml(backup.name) + '</h3>' +
           '<p class="bw-lf-result-tagline">' + escapeHtml(backup.tagline) + '</p>' +
           '<p class="bw-lf-result-transit">🚆 ' + escapeHtml(backup.transit) + '</p>' +
-          '<a class="bw-lf-result-link" href="' + resultLink(backup.anchor) + '" target="_top" rel="noopener">Read more →</a>' +
+          '<a class="bw-lf-result-link" href="' + escapeHtml(mapsLink(backup)) + '" target="_blank" rel="noopener noreferrer">📍 Open in Google Maps →</a>' +
         '</div>';
     }
     html +=
