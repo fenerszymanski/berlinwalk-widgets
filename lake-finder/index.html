@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Lake Finder | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    body { background: transparent; padding: 0; margin: 0; }
+
+    #bw-lake-finder {
+      --green: #1B5E20;
+      --green-dark: #164a1a;
+      --yellow: #FFE600;
+      --yellow-soft: #FFF7AE;
+      --cream: #FAFAF5;
+      --border: #DCE8C8;
+      --line: #E5E5DD;
+      --text: #212121;
+      --muted: #4E5A4E;
+      --white: #FFFFFF;
+      --lime: #C5E1A5;
+
+      max-width: 720px;
+      margin: 28px auto;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--cream);
+      overflow: hidden;
+    }
+    #bw-lake-finder *, #bw-lake-finder *::before, #bw-lake-finder *::after { box-sizing: border-box; }
+
+    #bw-lake-finder .bw-lf-head {
+      background: var(--green);
+      padding: 16px 20px;
+    }
+    #bw-lake-finder .bw-lf-kicker {
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    #bw-lake-finder .bw-lf-title {
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    #bw-lake-finder .bw-lf-sub {
+      color: var(--lime);
+      font-size: 13px;
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+    #bw-lake-finder .bw-lf-progress {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      padding: 14px 20px 6px;
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+    }
+    #bw-lake-finder .bw-lf-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #DDDDD4;
+    }
+    #bw-lake-finder .bw-lf-dot.is-active { background: var(--green); }
+    #bw-lake-finder .bw-lf-dot.is-done { background: var(--lime); }
+
+    #bw-lake-finder .bw-lf-body {
+      padding: 22px 20px 24px;
+      background: var(--white);
+    }
+
+    #bw-lake-finder .bw-lf-step {
+      animation: bw-lf-fade 0.25s ease-out;
+    }
+    @keyframes bw-lf-fade {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #bw-lake-finder .bw-lf-q {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 16px;
+      line-height: 1.35;
+    }
+    #bw-lake-finder .bw-lf-step-label {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    #bw-lake-finder .bw-lf-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    #bw-lake-finder .bw-lf-opt {
+      width: 100%;
+      text-align: left;
+      padding: 14px 16px;
+      font: inherit;
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--green);
+      background: var(--white);
+      border: 2px solid var(--green);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, transform 0.05s ease;
+    }
+    #bw-lake-finder .bw-lf-opt:hover {
+      background: var(--green);
+      color: var(--white);
+    }
+    #bw-lake-finder .bw-lf-opt:active { transform: translateY(1px); }
+    #bw-lake-finder .bw-lf-opt.is-selected {
+      background: var(--yellow);
+      color: var(--text);
+      border-color: var(--green-dark);
+    }
+
+    #bw-lake-finder .bw-lf-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    #bw-lake-finder .bw-lf-back,
+    #bw-lake-finder .bw-lf-restart {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      padding: 6px 8px;
+    }
+    #bw-lake-finder .bw-lf-back:hover,
+    #bw-lake-finder .bw-lf-restart:hover { color: var(--green); }
+    #bw-lake-finder .bw-lf-back[disabled] { visibility: hidden; }
+
+    /* Start screen */
+    #bw-lake-finder .bw-lf-start {
+      text-align: center;
+      padding: 8px 0 4px;
+    }
+    #bw-lake-finder .bw-lf-start-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--green);
+      margin: 0 0 8px;
+      line-height: 1.25;
+    }
+    #bw-lake-finder .bw-lf-start-sub {
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 20px;
+      line-height: 1.55;
+    }
+    #bw-lake-finder .bw-lf-start-btn {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--green);
+      border: none;
+      font: inherit;
+      font-weight: 800;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 10px;
+      cursor: pointer;
+      letter-spacing: 0.3px;
+      transition: background 0.15s ease;
+    }
+    #bw-lake-finder .bw-lf-start-btn:hover { background: #FFEF33; }
+
+    /* Result */
+    #bw-lake-finder .bw-lf-result-card {
+      border-left: 4px solid var(--green);
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 18px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+    #bw-lake-finder .bw-lf-result-card.is-backup {
+      border-left-color: var(--lime);
+      padding: 14px 18px;
+    }
+    #bw-lake-finder .bw-lf-result-label {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+    #bw-lake-finder .bw-lf-result-card.is-backup .bw-lf-result-label { color: var(--muted); }
+    #bw-lake-finder .bw-lf-result-name {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text);
+      margin: 0 0 6px;
+      line-height: 1.25;
+    }
+    #bw-lake-finder .bw-lf-result-card.is-backup .bw-lf-result-name { font-size: 17px; }
+    #bw-lake-finder .bw-lf-result-tagline {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+      margin: 0 0 8px;
+    }
+    #bw-lake-finder .bw-lf-result-transit {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 0 0 12px;
+      font-weight: 600;
+    }
+    #bw-lake-finder .bw-lf-result-link {
+      display: inline-block;
+      color: var(--green);
+      font-weight: 800;
+      font-size: 13px;
+      text-decoration: none;
+      letter-spacing: 0.3px;
+      border-bottom: 2px solid var(--yellow);
+      padding-bottom: 1px;
+    }
+    #bw-lake-finder .bw-lf-result-link:hover { color: var(--green-dark); }
+
+    #bw-lake-finder .bw-lf-result-foot {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    #bw-lake-finder .bw-lf-retake {
+      background: var(--white);
+      border: 2px solid var(--green);
+      color: var(--green);
+      font: inherit;
+      font-weight: 800;
+      font-size: 13.5px;
+      padding: 11px 22px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    #bw-lake-finder .bw-lf-retake:hover { background: var(--green); color: var(--white); }
+
+    #bw-lake-finder .bw-lf-empty {
+      padding: 16px;
+      color: var(--muted);
+      font-size: 14px;
+      text-align: center;
+    }
+
+    /* Mobile */
+    @media (max-width: 520px) {
+      #bw-lake-finder { margin: 22px auto; border-radius: 12px; }
+      #bw-lake-finder .bw-lf-head { padding: 14px 16px; }
+      #bw-lake-finder .bw-lf-title { font-size: 17px; }
+      #bw-lake-finder .bw-lf-sub { font-size: 12px; }
+      #bw-lake-finder .bw-lf-progress { padding: 12px 16px 4px; }
+      #bw-lake-finder .bw-lf-body { padding: 18px 16px 20px; }
+      #bw-lake-finder .bw-lf-q { font-size: 15.5px; margin-bottom: 14px; }
+      #bw-lake-finder .bw-lf-opt { padding: 12px 14px; font-size: 13.5px; }
+      #bw-lake-finder .bw-lf-start-title { font-size: 19px; }
+      #bw-lake-finder .bw-lf-start-sub { font-size: 13px; }
+      #bw-lake-finder .bw-lf-start-btn { font-size: 14px; padding: 12px 22px; }
+      #bw-lake-finder .bw-lf-result-card { padding: 14px 16px; }
+      #bw-lake-finder .bw-lf-result-name { font-size: 18px; }
+      #bw-lake-finder .bw-lf-result-card.is-backup .bw-lf-result-name { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+<section id="bw-lake-finder" aria-label="Berlin Lake Finder Quiz">
+  <div class="bw-lf-head">
+    <div class="bw-lf-kicker">BERLIN WALK • LAKE FINDER</div>
+    <div class="bw-lf-title">Find your Berlin lake</div>
+    <div class="bw-lf-sub">Answer 5 quick questions — get a match plus a backup.</div>
+  </div>
+
+  <div class="bw-lf-progress" data-field="progress" hidden></div>
+
+  <div class="bw-lf-body" data-field="body">
+    <div class="bw-lf-empty">Loading…</div>
+  </div>
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-lake-finder');
+  if (!root) return;
+  var bodyEl = root.querySelector('[data-field="body"]');
+  var progressEl = root.querySelector('[data-field="progress"]');
+
+  var data = null;
+  var step = -1; // -1 = start screen
+  var answers = []; // per-question selected option index
+
+  function escapeHtml(t) {
+    return String(t).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c];
+    });
+  }
+
+  function postUrl() {
+    var u = data && data.post && data.post.url;
+    return u || 'https://www.berlinwalk.com/post/berlin-lakes-guide-2026';
+  }
+
+  function renderProgress() {
+    if (!data) return;
+    var n = data.questions.length;
+    if (step < 0 || step >= n) {
+      progressEl.hidden = true;
+      progressEl.innerHTML = '';
+      return;
+    }
+    progressEl.hidden = false;
+    var html = '';
+    for (var i = 0; i < n; i++) {
+      var cls = 'bw-lf-dot';
+      if (i < step) cls += ' is-done';
+      else if (i === step) cls += ' is-active';
+      html += '<div class="' + cls + '"></div>';
+    }
+    progressEl.innerHTML = html;
+  }
+
+  function renderStart() {
+    step = -1;
+    answers = [];
+    renderProgress();
+    bodyEl.innerHTML =
+      '<div class="bw-lf-step bw-lf-start">' +
+        '<h3 class="bw-lf-start-title">Find your Berlin lake</h3>' +
+        '<p class="bw-lf-start-sub">Five quick questions. We pick a primary match plus a backup based on time, company, and water style.</p>' +
+        '<button type="button" class="bw-lf-start-btn" data-action="begin">Start the quiz →</button>' +
+      '</div>';
+  }
+
+  function renderQuestion(idx) {
+    step = idx;
+    var q = data.questions[idx];
+    renderProgress();
+    var opts = q.options.map(function (opt, i) {
+      var sel = answers[idx] === i ? ' is-selected' : '';
+      return '<button type="button" class="bw-lf-opt' + sel + '" data-action="answer" data-i="' + i + '">' + escapeHtml(opt.label) + '</button>';
+    }).join('');
+    var backDisabled = idx === 0 ? ' disabled' : '';
+    bodyEl.innerHTML =
+      '<div class="bw-lf-step">' +
+        '<div class="bw-lf-step-label">Question ' + (idx + 1) + ' of ' + data.questions.length + '</div>' +
+        '<h3 class="bw-lf-q">' + escapeHtml(q.text) + '</h3>' +
+        '<div class="bw-lf-options">' + opts + '</div>' +
+        '<div class="bw-lf-actions">' +
+          '<button type="button" class="bw-lf-back" data-action="back"' + backDisabled + '>← Back</button>' +
+          '<button type="button" class="bw-lf-restart" data-action="restart">Restart</button>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function scoreLakes() {
+    return data.lakes.map(function (lake) {
+      var total = 0;
+      answers.forEach(function (optIdx, qIdx) {
+        var opt = data.questions[qIdx].options[optIdx];
+        if (!opt || !opt.scores) return;
+        lake.tags.forEach(function (tag) {
+          if (opt.scores[tag] != null) total += opt.scores[tag];
+        });
+      });
+      return { lake: lake, score: total };
+    }).sort(function (a, b) {
+      return b.score - a.score;
+    });
+  }
+
+  function resultLink(anchor) {
+    return postUrl() + '#' + encodeURIComponent(anchor);
+  }
+
+  function renderResult() {
+    step = data.questions.length;
+    renderProgress();
+    var ranked = scoreLakes();
+    var primary = ranked[0] && ranked[0].lake;
+    var backup = ranked[1] && ranked[1].lake;
+    if (!primary) {
+      bodyEl.innerHTML = '<div class="bw-lf-empty">No match could be calculated. Please retake.</div>';
+      return;
+    }
+    var html = '<div class="bw-lf-step">' +
+      '<div class="bw-lf-result-card">' +
+        '<div class="bw-lf-result-label">Your match</div>' +
+        '<h3 class="bw-lf-result-name">' + escapeHtml(primary.name) + '</h3>' +
+        '<p class="bw-lf-result-tagline">' + escapeHtml(primary.tagline) + '</p>' +
+        '<p class="bw-lf-result-transit">🚆 ' + escapeHtml(primary.transit) + '</p>' +
+        '<a class="bw-lf-result-link" href="' + resultLink(primary.anchor) + '" target="_top" rel="noopener">Read more →</a>' +
+      '</div>';
+    if (backup) {
+      html +=
+        '<div class="bw-lf-result-card is-backup">' +
+          '<div class="bw-lf-result-label">Or as a backup</div>' +
+          '<h3 class="bw-lf-result-name">' + escapeHtml(backup.name) + '</h3>' +
+          '<p class="bw-lf-result-tagline">' + escapeHtml(backup.tagline) + '</p>' +
+          '<p class="bw-lf-result-transit">🚆 ' + escapeHtml(backup.transit) + '</p>' +
+          '<a class="bw-lf-result-link" href="' + resultLink(backup.anchor) + '" target="_top" rel="noopener">Read more →</a>' +
+        '</div>';
+    }
+    html +=
+      '<div class="bw-lf-result-foot">' +
+        '<button type="button" class="bw-lf-retake" data-action="restart">↺ Retake quiz</button>' +
+      '</div>' +
+    '</div>';
+    bodyEl.innerHTML = html;
+  }
+
+  bodyEl.addEventListener('click', function (e) {
+    var t = e.target;
+    while (t && t !== bodyEl && !t.dataset.action) t = t.parentNode;
+    if (!t || t === bodyEl) return;
+    var act = t.dataset.action;
+    if (act === 'begin') {
+      answers = [];
+      renderQuestion(0);
+    } else if (act === 'answer') {
+      var i = parseInt(t.dataset.i, 10);
+      answers[step] = i;
+      if (step + 1 < data.questions.length) {
+        renderQuestion(step + 1);
+      } else {
+        renderResult();
+      }
+    } else if (act === 'back') {
+      if (step > 0) renderQuestion(step - 1);
+    } else if (act === 'restart') {
+      renderStart();
+    }
+  });
+
+  fetch('./data.json')
+    .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
+    .then(function (d) {
+      data = d;
+      renderStart();
+    })
+    .catch(function () {
+      bodyEl.innerHTML = '<div class="bw-lf-empty">Quiz data unavailable. Please try again later.</div>';
+    });
+})();
+</script>
+</body>
+</html>

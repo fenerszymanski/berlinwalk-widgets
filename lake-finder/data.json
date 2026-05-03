@@ -1,0 +1,189 @@
+{
+  "questions": [
+    {
+      "id": "time",
+      "text": "How much time do you have?",
+      "options": [
+        {"label": "Half a day", "scores": {"city": 5, "sbahn": 1, "trip": -5}},
+        {"label": "A full day", "scores": {"city": 0, "sbahn": 5, "trip": 2}},
+        {"label": "A whole weekend", "scores": {"city": -2, "sbahn": 2, "trip": 5}}
+      ]
+    },
+    {
+      "id": "who",
+      "text": "Who's coming with you?",
+      "options": [
+        {"label": "Just me or my partner", "scores": {}},
+        {"label": "With kids", "scores": {"family_friendly": 5, "real_beach": 2}},
+        {"label": "Group of friends", "scores": {"real_beach": 3, "strandbad": 2}}
+      ]
+    },
+    {
+      "id": "priority",
+      "text": "What matters most to you?",
+      "options": [
+        {"label": "Crystal-clear water", "scores": {"clarity": 5}},
+        {"label": "A real sandy beach", "scores": {"real_beach": 5}},
+        {"label": "Quietest possible", "scores": {"quiet": 5}},
+        {"label": "Easiest to reach", "scores": {"very_easy": 5, "city": 3, "trip": -3}}
+      ]
+    },
+    {
+      "id": "fkk",
+      "text": "How do you feel about FKK (nude bathing)?",
+      "options": [
+        {"label": "Open to it or don't care", "scores": {"fkk_friendly": 1}},
+        {"label": "Prefer textile-only", "scores": {"fkk_dominant": -10, "textile_norm": 2}}
+      ]
+    },
+    {
+      "id": "vibe",
+      "text": "What's your picnic style?",
+      "options": [
+        {"label": "Self-catered, blanket on the grass", "scores": {"free_shore": 4}},
+        {"label": "Strandbad with food and toilets", "scores": {"strandbad": 4}}
+      ]
+    }
+  ],
+  "lakes": [
+    {
+      "id": "plotzensee",
+      "name": "Plötzensee",
+      "tagline": "Closest real beach to Mitte. Easy half-day.",
+      "transit": "U9 to Amrumer Straße — 15 min from Alex",
+      "anchor": "plotzensee",
+      "tags": ["city", "real_beach", "family_friendly", "very_easy", "free_shore", "strandbad", "textile_norm"]
+    },
+    {
+      "id": "weissensee",
+      "name": "Weißensee",
+      "tagline": "Small lido, family vibe, very local.",
+      "transit": "Tram M4 — 25 min from Alex",
+      "anchor": "weissensee",
+      "tags": ["city", "family_friendly", "strandbad", "textile_norm"]
+    },
+    {
+      "id": "orankesee",
+      "name": "Orankesee + Obersee",
+      "tagline": "Quiet east-side lakes almost no tourists know.",
+      "transit": "Tram 12 — 30 min from Alex",
+      "anchor": "orankesee",
+      "tags": ["city", "family_friendly", "quiet", "strandbad", "textile_norm"]
+    },
+    {
+      "id": "halensee",
+      "name": "Halensee",
+      "tagline": "Smallest, most central, no beach but a quick dip.",
+      "transit": "S-Bahn Halensee — 20 min from Mitte",
+      "anchor": "halensee",
+      "tags": ["city", "very_easy", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "wannsee",
+      "name": "Großer Wannsee + Strandbad",
+      "tagline": "The iconic 1920s lido with Baltic sand.",
+      "transit": "S7 — 35 min from Hackescher Markt",
+      "anchor": "wannsee",
+      "tags": ["sbahn", "real_beach", "family_friendly", "strandbad", "textile_norm"]
+    },
+    {
+      "id": "schlachtensee",
+      "name": "Schlachtensee",
+      "tagline": "Where Berliners actually swim. Clear water, forest, free.",
+      "transit": "S1 — 35 min from Friedrichstraße",
+      "anchor": "schlachtensee",
+      "tags": ["sbahn", "clarity", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "krumme-lanke",
+      "name": "Krumme Lanke",
+      "tagline": "Schlachtensee's quieter twin. Same clarity, fewer people.",
+      "transit": "U3 to Krumme Lanke — 40 min from Alex",
+      "anchor": "krumme-lanke",
+      "tags": ["sbahn", "family_friendly", "quiet", "clarity", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "muggelsee",
+      "name": "Großer Müggelsee",
+      "tagline": "Berlin's biggest lake. East side. Real scale.",
+      "transit": "S3 + tram 60 — 45 min from Alex",
+      "anchor": "muggelsee",
+      "tags": ["sbahn", "real_beach", "family_friendly", "fkk_friendly", "free_shore", "strandbad"]
+    },
+    {
+      "id": "tegeler-see",
+      "name": "Tegeler See",
+      "tagline": "Northwest answer to Wannsee. Less crowded, more sailboats.",
+      "transit": "U6 to Alt-Tegel — 35 min from Alex",
+      "anchor": "tegeler-see",
+      "tags": ["sbahn", "real_beach", "family_friendly", "strandbad", "textile_norm"]
+    },
+    {
+      "id": "teufelsee",
+      "name": "Teufelsee (Grunewald)",
+      "tagline": "Forest lake, predominantly FKK, decades of counter-culture.",
+      "transit": "S-Bahn Grunewald + 20 min walk",
+      "anchor": "teufelsee",
+      "tags": ["forest", "fkk_dominant", "quiet", "free_shore"]
+    },
+    {
+      "id": "flughafensee",
+      "name": "Flughafensee",
+      "tagline": "Clear water next to the old Tegel runway. Lesser-known.",
+      "transit": "U6 to Otisstraße + walk",
+      "anchor": "flughafensee",
+      "tags": ["forest", "real_beach", "family_friendly", "quiet", "clarity", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "habermannsee",
+      "name": "Habermannsee",
+      "tagline": "Flooded quarry. Cleanest water inside city limits.",
+      "transit": "S-Bahn Kaulsdorf + 20 min walk",
+      "anchor": "habermannsee",
+      "tags": ["forest", "quiet", "clarity", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "heiligensee",
+      "name": "Heiligensee",
+      "tagline": "Far north. Quiet. You'll have space.",
+      "transit": "S25 — 50 min from Alex",
+      "anchor": "heiligensee",
+      "tags": ["forest", "quiet", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "kleiner-muggelsee",
+      "name": "Kleiner Müggelsee",
+      "tagline": "Müggelsee's quieter cousin. Pine forest setting.",
+      "transit": "S3 to Friedrichshagen + 15 min walk",
+      "anchor": "kleiner-muggelsee",
+      "tags": ["sbahn", "quiet", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "liepnitzsee",
+      "name": "Liepnitzsee",
+      "tagline": "Turquoise gem, beech forest, a small island. Worth the trip.",
+      "transit": "RB27 from Gesundbrunnen — 1 hr",
+      "anchor": "liepnitzsee",
+      "tags": ["trip", "family_friendly", "clarity", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "gross-glienicker-see",
+      "name": "Groß Glienicker See",
+      "tagline": "Cold War border lake, exceptionally clear, lifeguards.",
+      "transit": "Bus 638 from S-Wannsee — 1 hr from Mitte",
+      "anchor": "gross-glienicker",
+      "tags": ["trip", "real_beach", "family_friendly", "clarity", "free_shore", "textile_norm"]
+    },
+    {
+      "id": "flakensee",
+      "name": "Flakensee",
+      "tagline": "Pine forest shores, white beach, Mediterranean vibe.",
+      "transit": "S3 + tram 87 — 1 hr from Alex",
+      "anchor": "flakensee",
+      "tags": ["trip", "real_beach", "family_friendly", "quiet", "clarity", "free_shore", "textile_norm"]
+    }
+  ],
+  "post": {
+    "url": "https://www.berlinwalk.com/post/berlin-lakes-guide-2026"
+  }
+}

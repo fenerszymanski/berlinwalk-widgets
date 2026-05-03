@@ -21,7 +21,9 @@
   "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour": "12-stops",
   "is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists": "berlin-budget",
   "berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go": "first-time-mistakes",
-  "berlin-first-time-visitor-mistakes": "first-time-mistakes"
+  "berlin-first-time-visitor-mistakes": "first-time-mistakes",
+  "berlin-lakes-guide-2026": "berlin-lakes",
+  "berlin-lakes": "berlin-lakes"
 };
 
   var SCHEMAS = {
@@ -925,6 +927,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Take a walking tour early in your trip, ideally on your first day. It helps you understand the city's layout, history, and which places you want to revisit later."
+        }
+      }
+    ]
+  },
+  "berlin-lakes": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I have to pay to swim in Berlin lakes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almost never. Most Berlin lakes have free public shores where you can swim — you walk up, lay down a towel, and get in. The exceptions are the Strandbäder (lidos) like Strandbad Wannsee, Strandbad Müggelsee, and Strandbad Tegelsee, which charge €5–7 for sand, lifeguards, showers, and food kiosks. You're paying for the infrastructure, not the water. Walk a few minutes along the shore in either direction and you'll usually find a free entry point."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin lakes safe to swim in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, with one caveat. Berlin's State Office for Health monitors 39 official bathing sites every two weeks and publishes results at badegewaesser.berlin.de. Almost all sites are rated suitable for swimming throughout the season. The Lower Havel sites occasionally flag for elevated bacteria after heavy rain, and any warm shallow lake can develop a temporary blue-green algae bloom (Blaualgen) in late summer. Lifeguards are present only at the Strandbäder, so if you're swimming from a free shore, common-sense rules apply: don't swim alone, don't go far out, watch for boats."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does FKK mean and is it everywhere in Berlin lakes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "FKK stands for Freikörperkultur — \"free body culture\" — and refers to the German tradition of nude bathing, which has been mainstream here since the 1920s. Some Berlin lakes have official FKK sections (parts of Müggelsee and Wannsee). Teufelsee in the Grunewald forest is predominantly FKK. At most lidos and city lakes, the default is textile (clothed) bathing. You'll never be required to undress, and Germans don't stare. If you wander into a clearly FKK area in clothes, just settle further along the shore."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What's the closest lake to Alexanderplatz for swimming?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plötzensee in Wedding, about 15 minutes by U9 to Amrumer Straße. It has a sandy beach with a wooden jetty, a small lido, free shore access, and the attached Volkspark Rehberge for shade. For a more classic lake experience, Schlachtensee or Großer Wannsee are 35–40 minutes by S-Bahn from central Berlin and well worth the slightly longer trip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I bring food and alcohol to Berlin lakes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes — picnicking is the entire point. Bring a blanket, snacks, and drinks. The rules: no glass bottles (banned at most bathing sites), pack out all your trash, and keep music at low volume after 18:00. Alcohol is legal in public in Germany, but obvious drunkenness draws attention. BBQs and open fires are forbidden everywhere except in designated Grillplätze — the surrounding forests have serious wildfire risk in dry summers, and the fines start at €50."
         }
       }
     ]

@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Lakes Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<div id="bw-lake-map">
+  <style>
+    #bw-lake-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-lake-map * { box-sizing: border-box; }
+
+    #bw-lake-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-lake-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #bw-lake-map .bw-head-icon { font-size: 18px; line-height: 1; }
+    #bw-lake-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-lake-map .bw-body {
+      background: var(--bw-cream);
+      padding: 16px 18px;
+    }
+    #bw-lake-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-lake-map .bw-legend {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    #bw-lake-map .bw-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--bw-text);
+    }
+    #bw-lake-map .bw-legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--bw-white);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    }
+    #bw-lake-map .bw-legend-dot.city  { background: var(--bw-yellow); }
+    #bw-lake-map .bw-legend-dot.sbahn { background: var(--bw-lime); }
+    #bw-lake-map .bw-legend-dot.trip  { background: var(--bw-green); }
+
+    #bw-lake-map .bw-map-container {
+      width: 100%;
+      height: 480px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+    #bw-lake-map .bw-map { width: 100%; height: 100%; z-index: 1; }
+
+    #bw-lake-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+    #bw-lake-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+    #bw-lake-map .leaflet-popup-content {
+      margin: 0;
+      width: 240px !important;
+      font-family: inherit;
+    }
+    #bw-lake-map .leaflet-popup-tip {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    #bw-lake-map .bw-pop-head {
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    #bw-lake-map .bw-pop-head.city  { background: var(--bw-yellow); color: var(--bw-green-dark); }
+    #bw-lake-map .bw-pop-head.sbahn { background: var(--bw-lime); color: var(--bw-white); }
+    #bw-lake-map .bw-pop-head.trip  { background: var(--bw-green); color: var(--bw-white); }
+
+    #bw-lake-map .bw-pop-name {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    #bw-lake-map .bw-pop-tier {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.3);
+      white-space: nowrap;
+    }
+    #bw-lake-map .bw-pop-head.city .bw-pop-tier { background: rgba(0,0,0,0.12); }
+
+    #bw-lake-map .bw-pop-body {
+      padding: 12px 14px 14px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      line-height: 1.55;
+    }
+    #bw-lake-map .bw-pop-tagline {
+      margin: 0 0 8px;
+      color: var(--bw-text);
+    }
+    #bw-lake-map .bw-pop-meta {
+      margin: 0 0 4px;
+      color: var(--bw-muted);
+      font-size: 12px;
+    }
+    #bw-lake-map .bw-pop-meta + .bw-pop-meta { margin-top: 0; }
+    #bw-lake-map .bw-pop-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 10px;
+    }
+    #bw-lake-map .bw-pop-links a {
+      color: var(--bw-green);
+      font-weight: 700;
+      font-size: 12.5px;
+      text-decoration: none;
+    }
+    #bw-lake-map .bw-pop-links a:hover { text-decoration: underline; }
+
+    #bw-lake-map .bw-lake-pin span {
+      display: block;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 3px solid var(--bw-white);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    #bw-lake-map .bw-lake-pin--city span  { background: var(--bw-yellow); }
+    #bw-lake-map .bw-lake-pin--sbahn span { background: var(--bw-lime); }
+    #bw-lake-map .bw-lake-pin--trip span  { background: var(--bw-green); }
+
+    #bw-lake-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+    #bw-lake-map .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      #bw-lake-map { margin: 22px 0; }
+      #bw-lake-map .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-lake-map .bw-head-icon { font-size: 16px; }
+      #bw-lake-map .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-lake-map .bw-body { padding: 14px; }
+      #bw-lake-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-lake-map .bw-legend { gap: 10px; }
+      #bw-lake-map .bw-legend-item { font-size: 10.5px; }
+      #bw-lake-map .bw-map-container { height: 360px; }
+      #bw-lake-map .leaflet-popup-content { width: 220px !important; }
+      #bw-lake-map .bw-pop-name { font-size: 14px; }
+      #bw-lake-map .bw-pop-body { font-size: 12px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🌊</span>
+      <span class="bw-kicker">Berlin Lakes Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">17 swimmable lakes around Berlin. Tap a pin for details, transit, and a live water-quality link.</p>
+
+      <div class="bw-legend">
+        <div class="bw-legend-item">
+          <span class="bw-legend-dot city" aria-hidden="true"></span>
+          City (15–30 min)
+        </div>
+        <div class="bw-legend-item">
+          <span class="bw-legend-dot sbahn" aria-hidden="true"></span>
+          S-Bahn classic (30–50 min)
+        </div>
+        <div class="bw-legend-item">
+          <span class="bw-legend-dot trip" aria-hidden="true"></span>
+          Day trip (1 hr+)
+        </div>
+      </div>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-lake-map-canvas"></div>
+      </div>
+
+      <p class="bw-count"><strong>17</strong> Berlin-area lakes mapped</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-lake-map');
+      if (!root) return;
+
+      var POST_URL = 'https://www.berlinwalk.com/post/berlin-lakes-guide-2026';
+      var BADE_URL = 'https://www.berlin.de/lageso/gesundheit/gesundheitsschutz/badegewaesser/';
+
+      var lakes = [
+        {id: 'plotzensee',          name: 'Plötzensee',          tier: 'city',  lat: 52.5475, lng: 13.3447, tagline: "Closest real beach to Mitte. Easy half-day.",                  transit: 'U9 to Amrumer Straße — 15 min from Alex',         beach: 'Yes',     free: 'Yes (lido extra)', anchor: 'plotzensee'},
+        {id: 'weissensee',          name: 'Weißensee',           tier: 'city',  lat: 52.5547, lng: 13.4569, tagline: "Small lido, family vibe, very local.",                          transit: 'Tram M4 — 25 min from Alex',                       beach: 'Lido',    free: 'Lido only',        anchor: 'weissensee'},
+        {id: 'orankesee',           name: 'Orankesee + Obersee', tier: 'city',  lat: 52.5611, lng: 13.4844, tagline: "Quiet east-side lakes almost no tourists know.",                transit: 'Tram 12 — 30 min from Alex',                       beach: 'Lido',    free: 'Lido + free shore',anchor: 'orankesee'},
+        {id: 'halensee',            name: 'Halensee',            tier: 'city',  lat: 52.4972, lng: 13.2980, tagline: "Smallest, most central, no beach but a quick dip.",            transit: 'S-Bahn Halensee — 20 min from Mitte',              beach: 'No',      free: 'Yes',              anchor: 'halensee'},
+        {id: 'wannsee',             name: 'Großer Wannsee',      tier: 'sbahn', lat: 52.4250, lng: 13.1753, tagline: "The iconic 1920s lido with Baltic sand.",                       transit: 'S7 — 35 min from Hackescher Markt',                beach: 'Yes',     free: 'Lido + free shore',anchor: 'wannsee'},
+        {id: 'schlachtensee',       name: 'Schlachtensee',       tier: 'sbahn', lat: 52.4361, lng: 13.2103, tagline: "Where Berliners actually swim. Clear water, forest, free.",     transit: 'S1 — 35 min from Friedrichstraße',                 beach: 'No',      free: 'Yes',              anchor: 'schlachtensee'},
+        {id: 'krumme-lanke',        name: 'Krumme Lanke',        tier: 'sbahn', lat: 52.4350, lng: 13.2253, tagline: "Schlachtensee's quieter twin. Same clarity, fewer people.",     transit: 'U3 to Krumme Lanke — 40 min from Alex',            beach: 'No',      free: 'Yes',              anchor: 'krumme-lanke'},
+        {id: 'muggelsee',           name: 'Großer Müggelsee',    tier: 'sbahn', lat: 52.4339, lng: 13.6347, tagline: "Berlin's biggest lake. East side. Real scale.",                  transit: 'S3 + tram 60 — 45 min from Alex',                  beach: 'Yes',     free: 'Lido + free shore',anchor: 'muggelsee'},
+        {id: 'tegeler-see',         name: 'Tegeler See',         tier: 'sbahn', lat: 52.5853, lng: 13.2533, tagline: "Northwest answer to Wannsee. Less crowded, more sailboats.",   transit: 'U6 to Alt-Tegel — 35 min from Alex',               beach: 'Yes',     free: 'Lido + free shore',anchor: 'tegeler-see'},
+        {id: 'flughafensee',        name: 'Flughafensee',        tier: 'sbahn', lat: 52.5933, lng: 13.2867, tagline: "Clear water next to the old Tegel runway. Lesser-known.",       transit: 'U6 to Otisstraße + walk',                          beach: 'Yes',     free: 'Yes',              anchor: 'flughafensee'},
+        {id: 'habermannsee',        name: 'Habermannsee',        tier: 'sbahn', lat: 52.5181, lng: 13.5814, tagline: "Flooded quarry. Cleanest water inside city limits.",            transit: 'S-Bahn Kaulsdorf + 20 min walk',                   beach: 'No',      free: 'Yes',              anchor: 'habermannsee'},
+        {id: 'heiligensee',         name: 'Heiligensee',         tier: 'sbahn', lat: 52.6253, lng: 13.2272, tagline: "Far north. Quiet. You'll have space.",                          transit: 'S25 — 50 min from Alex',                           beach: 'No',      free: 'Yes',              anchor: 'heiligensee'},
+        {id: 'kleiner-muggelsee',   name: 'Kleiner Müggelsee',   tier: 'sbahn', lat: 52.4378, lng: 13.6717, tagline: "Müggelsee's quieter cousin. Pine forest setting.",              transit: 'S3 to Friedrichshagen + 15 min walk',              beach: 'No',      free: 'Yes',              anchor: 'kleiner-muggelsee'},
+        {id: 'teufelsee',           name: 'Teufelsee (Grunewald)', tier: 'trip', lat: 52.4972, lng: 13.2400, tagline: "Forest lake, predominantly FKK, decades of counter-culture.",  transit: 'S-Bahn Grunewald + 20 min walk',                   beach: 'No',      free: 'Yes',              anchor: 'teufelsee'},
+        {id: 'liepnitzsee',         name: 'Liepnitzsee',         tier: 'trip',  lat: 52.7522, lng: 13.4972, tagline: "Turquoise gem, beech forest, a small island. Worth the trip.",  transit: 'RB27 from Gesundbrunnen — 1 hr',                   beach: 'Yes',     free: 'Yes',              anchor: 'liepnitzsee'},
+        {id: 'gross-glienicker',    name: 'Groß Glienicker See', tier: 'trip',  lat: 52.4642, lng: 13.1108, tagline: "Cold War border lake, exceptionally clear, lifeguards.",        transit: 'Bus 638 from S-Wannsee — 1 hr from Mitte',         beach: 'Yes',     free: 'Yes',              anchor: 'gross-glienicker'},
+        {id: 'flakensee',           name: 'Flakensee',           tier: 'trip',  lat: 52.4458, lng: 13.7458, tagline: "Pine forest shores, white beach, Mediterranean vibe.",          transit: 'S3 + tram 87 — 1 hr from Alex',                    beach: 'Yes',     free: 'Yes',              anchor: 'flakensee'}
+      ];
+
+      var TIER_LABELS = { city: 'City', sbahn: 'S-Bahn', trip: 'Day trip' };
+
+      function escapeHtml(t) {
+        return String(t).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c];
+        });
+      }
+
+      var mapEl = document.getElementById('bw-lake-map-canvas');
+      var map = L.map(mapEl, {
+        center: [52.520, 13.405],
+        zoom: 10,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      function lakeIcon(tier) {
+        return L.divIcon({
+          className: 'bw-lake-pin bw-lake-pin--' + tier,
+          html: '<span></span>',
+          iconSize: [22, 22],
+          iconAnchor: [11, 11],
+          popupAnchor: [0, -12]
+        });
+      }
+
+      function popupHtml(l) {
+        return '' +
+          '<div class="bw-pop-head ' + l.tier + '">' +
+            '<div class="bw-pop-name">' + escapeHtml(l.name) + '</div>' +
+            '<div class="bw-pop-tier">' + TIER_LABELS[l.tier] + '</div>' +
+          '</div>' +
+          '<div class="bw-pop-body">' +
+            '<p class="bw-pop-tagline">' + escapeHtml(l.tagline) + '</p>' +
+            '<p class="bw-pop-meta">🚆 ' + escapeHtml(l.transit) + '</p>' +
+            '<p class="bw-pop-meta">🏖️ Beach: ' + escapeHtml(l.beach) + ' · 💰 Free: ' + escapeHtml(l.free) + '</p>' +
+            '<div class="bw-pop-links">' +
+              '<a href="' + POST_URL + '#' + encodeURIComponent(l.anchor) + '" target="_top" rel="noopener">🔗 Read full description →</a>' +
+              '<a href="' + BADE_URL + '" target="_blank" rel="noopener">🌊 Live water quality →</a>' +
+            '</div>' +
+          '</div>';
+      }
+
+      lakes.forEach(function (l) {
+        L.marker([l.lat, l.lng], { icon: lakeIcon(l.tier) })
+          .bindPopup(popupHtml(l), { closeButton: true, maxWidth: 260 })
+          .addTo(map);
+      });
+
+      function refreshSize() {
+        try { map.invalidateSize(); } catch (e) {}
+      }
+      window.addEventListener('load', refreshSize);
+      window.addEventListener('resize', refreshSize);
+      setTimeout(refreshSize, 200);
+      setTimeout(refreshSize, 800);
+    })();
+  </script>
+</div>
+</body>
+</html>
