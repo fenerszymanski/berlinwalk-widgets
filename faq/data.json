@@ -491,6 +491,31 @@
       }
     ]
   },
+  "berlin-pools": {
+    "subtitle": "Quick answers about Berlin's public swimming pools — prices, booking, etiquette, and the most beautiful spots.",
+    "items": [
+      {
+        "q": "How much does it cost to swim at a Berlin public pool?",
+        "a": "Single tickets range from about **€4.50 to €11.50** depending on the pool's category (1, 2, or 3 — based on the facilities) and the length of stay you book (90 minutes, 150 minutes, or full day). Outdoor pools sit at the cheaper end; flagship indoor pools like Stadtbad Lankwitz or Stadtbad Neukölln at the higher end. If you're staying 2+ weeks in summer and plan to visit outdoor pools regularly, the **Sommermehrfachkarte** gives you 20 entries for €80 (or €70 pre-season before May 1). All tickets can be booked online up to 7 days in advance via [berlinerbaeder.de](https://www.berlinerbaeder.de/)."
+      },
+      {
+        "q": "Do I need to book a Berlin pool in advance?",
+        "a": "For **indoor pools**, almost never — walk-ins are usually fine. For **outdoor pools** (Sommerbäder) on hot summer weekends, absolutely yes. Sommerbad Kreuzberg (Prinzenbad) regularly has 45-minute queues without a pre-booked ticket on 30°C weekends. Online pre-booking takes two minutes and gives you a QR code that skips the queue. The Berliner Bäder website also shows a real-time crowd indicator (green/yellow/red traffic light) for each Sommerbad — check before you leave the hotel."
+      },
+      {
+        "q": "Which is the most beautiful public pool in Berlin?",
+        "a": "**Stadtbad Neukölln**, by consensus. Opened in 1914, designed in a Roman bath revival style — vaulted ceilings, mosaic tiles, marble columns, statuary along the upper gallery. It's a listed historic monument that you can swim in. The runner-up is **Stadtbad Charlottenburg's Alte Halle** (1898), the oldest still-operating indoor pool in Berlin, with original tile work and a long-hall design that's quieter than Neukölln. Both are far more impressive than the typical tourist itinerary suggests."
+      },
+      {
+        "q": "What are the rules and etiquette at a Berlin pool?",
+        "a": "The big ones: **pre-shower thoroughly with soap** before entering the water — this is non-negotiable and lifeguards will enforce it. No shoes past the changing area. Lockers usually need a **€1 or €2 returnable coin**. Some fast lanes require a swim cap (Badekappe) — bring one if you have long hair. Lap lane direction discipline: swim on the right side, don't stop in the middle. **Sauna areas are FKK** (naked) by default; you sit on a towel, never directly on the wood. Photography in changing rooms or saunas is illegal and gets you ejected immediately."
+      },
+      {
+        "q": "When does the Berlin outdoor pool season start?",
+        "a": "**May 1** each year is when the first batch of Sommerbäder open — typically Strandbad Wannsee, Strandbad Grünau, and Sommerbad Kreuzberg. Most other outdoor pools follow within the next 2–3 weeks. The full official outdoor season runs to **mid-September**, though some pools stay open into late September if weather holds. Indoor pools (Hallenbäder) run year-round. Note for 2026: Sommerbad Spandau Süd and Sommerbad Lichterfelde are both closed for renovation. Always check [berlinerbaeder.de](https://www.berlinerbaeder.de/) for the current schedule before planning a specific trip."
+      }
+    ]
+  },
   "berlin-lakes": {
     "subtitle": "Quick answers about swimming in Berlin's lakes — costs, safety, FKK, and what to know before you go.",
     "items": [

@@ -1,0 +1,143 @@
+{
+  "questions": [
+    {
+      "id": "season",
+      "text": "When are you visiting Berlin?",
+      "options": [
+        {"label": "Winter or shoulder season (Oct–Apr)", "scores": {"indoor": 10, "outdoor": -10}},
+        {"label": "Summer (May–Sep)", "scores": {"outdoor": 5, "indoor": 2}},
+        {"label": "I'm flexible / both options", "scores": {"indoor": 3, "outdoor": 3}}
+      ]
+    },
+    {
+      "id": "priority",
+      "text": "What matters most to you?",
+      "options": [
+        {"label": "Beautiful architecture / historic", "scores": {"architecture": 10}},
+        {"label": "Serious lap swimming", "scores": {"laps": 10}},
+        {"label": "Family / kids", "scores": {"family": 10}},
+        {"label": "Iconic Berlin atmosphere", "scores": {"vibe": 10}},
+        {"label": "Easiest to reach from Mitte", "scores": {"central": 8, "outer": -3}}
+      ]
+    },
+    {
+      "id": "sauna",
+      "text": "Are you interested in the sauna experience?",
+      "options": [
+        {"label": "Yes, that's part of the appeal", "scores": {"sauna": 5}},
+        {"label": "Maybe, if it's there", "scores": {}},
+        {"label": "No, just the pool", "scores": {"no_sauna": 2}}
+      ]
+    },
+    {
+      "id": "crowd",
+      "text": "How do you feel about crowds?",
+      "options": [
+        {"label": "Bring it on — that's part of the experience", "scores": {"vibe": 3, "lively": 5}},
+        {"label": "Prefer it quieter", "scores": {"quiet": 5}},
+        {"label": "Don't care", "scores": {}}
+      ]
+    },
+    {
+      "id": "history",
+      "text": "Architectural / historical context — how much does it matter?",
+      "options": [
+        {"label": "A lot — I'd visit just for the building", "scores": {"architecture": 8, "history": 5}},
+        {"label": "A nice bonus", "scores": {"architecture": 2}},
+        {"label": "Don't care, just want to swim", "scores": {"functional": 3}}
+      ]
+    }
+  ],
+  "pools": [
+    {
+      "id": "stadtbad-neukolln",
+      "name": "Stadtbad Neukölln",
+      "tagline": "1914 Roman bath. Most beautiful public pool in Berlin.",
+      "transit": "U7 to Rathaus Neukölln — 30 min from Alex",
+      "type": "indoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Stadtbad+Neukölln",
+      "tags": ["indoor", "architecture", "history", "sauna", "central"]
+    },
+    {
+      "id": "stadtbad-charlottenburg",
+      "name": "Stadtbad Charlottenburg Alte Halle",
+      "tagline": "Berlin's oldest pool (1898). Quieter, gorgeous, real history.",
+      "transit": "U7 to Wilmersdorfer Straße — 30 min from Alex",
+      "type": "indoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Stadtbad+Charlottenburg+Alte+Halle",
+      "tags": ["indoor", "architecture", "history", "quiet"]
+    },
+    {
+      "id": "sse-europasportpark",
+      "name": "SSE Europasportpark",
+      "tagline": "50m Olympic-spec lap pool. Where Berlin swimmers actually train.",
+      "transit": "S41/S42 to Landsberger Allee — 25 min from Alex",
+      "type": "indoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Schwimm+Sprunghalle+Europasportpark",
+      "tags": ["indoor", "laps", "functional", "no_sauna"]
+    },
+    {
+      "id": "stadtbad-tiergarten",
+      "name": "Stadtbad Tiergarten",
+      "tagline": "Modern, central, no-fuss. Perfect for a quick post-sightseeing swim.",
+      "transit": "U9 to Turmstraße — 20 min from Alex",
+      "type": "indoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Stadtbad+Tiergarten+Berlin",
+      "tags": ["indoor", "central", "functional", "laps"]
+    },
+    {
+      "id": "stadtbad-mitte",
+      "name": "Stadtbad Mitte",
+      "tagline": "Closest to the centre. Family-friendly, smaller, beginner-oriented.",
+      "transit": "Walk from Alexanderplatz — 10 min",
+      "type": "indoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Stadtbad+Mitte+Gartenstraße+Berlin",
+      "tags": ["indoor", "central", "family"]
+    },
+    {
+      "id": "sommerbad-kreuzberg",
+      "name": "Sommerbad Kreuzberg (Prinzenbad)",
+      "tagline": "The legendary Kreuzberg outdoor pool. Iconic Berlin atmosphere.",
+      "transit": "U7 to Prinzenstraße — 25 min from Alex",
+      "type": "outdoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Prinzenbad+Sommerbad+Kreuzberg",
+      "tags": ["outdoor", "vibe", "lively", "central"]
+    },
+    {
+      "id": "sommerbad-olympiastadion",
+      "name": "Sommerbad Olympiastadion",
+      "tagline": "1936 Olympic pool with the original starting blocks. Historically loaded.",
+      "transit": "U2 to Olympia-Stadion — 35 min from Alex",
+      "type": "outdoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Olympia-Schwimmstadion+Berlin",
+      "tags": ["outdoor", "history", "architecture", "laps", "outer"]
+    },
+    {
+      "id": "sommerbad-pankow",
+      "name": "Sommerbad Pankow",
+      "tagline": "Family-friendly East Berlin local. Less crowded than Prinzenbad.",
+      "transit": "Tram M1 — 35 min from Alex",
+      "type": "outdoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Sommerbad+Pankow",
+      "tags": ["outdoor", "family", "quiet", "outer"]
+    },
+    {
+      "id": "strandbad-wannsee-sauna",
+      "name": "Strandbad Wannsee (with sauna)",
+      "tagline": "1920s lido + summer sauna program. Sweat, plunge into the lake, repeat.",
+      "transit": "S7 to Nikolassee — 35 min from Mitte",
+      "type": "outdoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Strandbad+Wannsee",
+      "tags": ["outdoor", "sauna", "history", "vibe", "outer"]
+    },
+    {
+      "id": "strandbad-plotzensee",
+      "name": "Strandbad Plötzensee",
+      "tagline": "Closest pool/lake hybrid to Mitte. Sandy beach + pool infrastructure.",
+      "transit": "U9 to Amrumer Straße — 15 min from Alex",
+      "type": "outdoor",
+      "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Strandbad+Plötzensee+Nordufer",
+      "tags": ["outdoor", "central", "family", "vibe"]
+    }
+  ]
+}
