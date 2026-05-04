@@ -25,7 +25,8 @@
   "berlin-lakes-guide-2026": "berlin-lakes",
   "berlin-lakes": "berlin-lakes",
   "berlin-swimming-pools-guide-2026": "berlin-pools",
-  "berlin-pools": "berlin-pools"
+  "berlin-pools": "berlin-pools",
+  "berlin-in-the-rain": "berlin-in-the-rain"
 };
 
   var SCHEMAS = {
@@ -1021,6 +1022,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes — picnicking is the entire point. Bring a blanket, snacks, and drinks. The rules: no glass bottles (banned at most bathing sites), pack out all your trash, and keep music at low volume after 18:00. Alcohol is legal in public in Germany, but obvious drunkenness draws attention. BBQs and open fires are forbidden everywhere except in designated Grillplätze — the surrounding forests have serious wildfire risk in dry summers, and the fines start at €50."
+        }
+      }
+    ]
+  },
+  "berlin-in-the-rain": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What's the best museum to visit in Berlin on a rainy day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most visitors, the Neues Museum is the strongest single choice. It houses the Bust of Nefertiti, the Egyptian collection, and prehistoric Berlin finds, and the David Chipperfield reconstruction is a building worth visiting in its own right. It's open Tuesday to Sunday, 10:00–18:00, with entry via the James-Simon-Galerie. From there, three more museums on Museum Island are reachable under cover within a few minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there free indoor things to do in Berlin when it rains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. St. Mary's Church (Marienkirche) near Alexanderplatz is free and has a quiet 14th-century interior. The atrium of the Humboldt Forum is also free to enter — you can browse the lobby, see the architecture, and use the cafés without buying an exhibition ticket. The Hackesche Höfe courtyards just off the tour endpoint are covered, lined with cafés and shops, and free to walk through."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does rain in Berlin usually last all day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin rain is typically light and intermittent rather than torrential. Most rainy days have dry windows, especially in spring and autumn. The pattern is usually grey skies with passing showers, which is why most attractions and walking tours operate normally throughout."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I wear in Berlin when it's raining?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A waterproof hooded jacket is much more reliable than an umbrella — Berlin's wind, especially around open squares like Alexanderplatz, destroys most umbrellas within minutes. Wear waterproof shoes or boots because the cobblestones get slick, and dress in layers since temperatures often drop sharply when it's wet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do walking tours in Berlin run in the rain?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The free walking tour from Alexanderplatz to Hackescher Markt runs in light to moderate rain. Only heavy thunderstorms or extreme weather cause cancellations. The route also includes covered spaces — the entrance area of Marienkirche and Hackesche Höfe at the end — that work well as longer-stop shelters when the rain is heavier."
         }
       }
     ]
