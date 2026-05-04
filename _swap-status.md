@@ -40,3 +40,6 @@
 - Migrated: 10
 - Legacy: 10
 - Anomalies: 2
+
+## New post embeds (post-migration)
+- berlin-in-the-rain: rain-outfit widget embedded ✓ (https://fenerszymanski.github.io/berlinwalk-widgets/rain-outfit/)
