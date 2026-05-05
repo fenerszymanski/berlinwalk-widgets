@@ -43,3 +43,4 @@
 
 ## New post embeds (post-migration)
 - berlin-in-the-rain: rain-outfit widget embedded ✓ (https://fenerszymanski.github.io/berlinwalk-widgets/rain-outfit/)
+- east-west-1989: built 2026-05-05, awaiting blog post (https://fenerszymanski.github.io/berlinwalk-widgets/east-west-1989/) — DO NOT embed in any existing post
