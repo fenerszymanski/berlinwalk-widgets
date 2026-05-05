@@ -105,6 +105,9 @@
     #bw-eastwest1989 .bw-legend-swatch.east { background: rgba(230,57,70,0.3); border: 1px solid rgba(230,57,70,0.5); }
     #bw-eastwest1989 .bw-legend-swatch.strip { background: rgba(0,0,0,0.4); border: 1px dashed #444; }
     #bw-eastwest1989 .bw-legend-swatch.wall { background: var(--bw-red); height: 3px; }
+    #bw-eastwest1989 .bw-legend-swatch.wall-zone {
+      background: var(--bw-red); width: 10px; height: 10px; border-radius: 50%;
+    }
 
     #bw-eastwest1989 .bw-locate {
       margin-top: 10px;
@@ -159,6 +162,7 @@
     #bw-eastwest1989 .bw-result-head.west  { background: var(--bw-allied); }
     #bw-eastwest1989 .bw-result-head.east  { background: var(--bw-east-red); }
     #bw-eastwest1989 .bw-result-head.strip { background: var(--bw-death); }
+    #bw-eastwest1989 .bw-result-head.wall  { background: var(--bw-red); }
     #bw-eastwest1989 .bw-result-head.outside { background: #6b6b6b; }
 
     #bw-eastwest1989 .bw-result-kicker {
@@ -289,7 +293,7 @@
     </div>
 
     <div class="bw-body">
-      <p class="bw-hint">Click the map to drop a pin. The widget shows whether that spot was West Berlin, East Berlin, or inside the Wall's death strip in November 1989.</p>
+      <p class="bw-hint">Click the map to drop a pin. The widget shows whether that spot was West Berlin, East Berlin, on the Wall itself, or inside its death strip in November 1989.</p>
 
       <div class="bw-map-container">
         <div class="bw-map" id="bw-ew-map"></div>
@@ -300,6 +304,7 @@
         <div class="bw-legend-item"><span class="bw-legend-swatch east"></span>East Berlin</div>
         <div class="bw-legend-item"><span class="bw-legend-swatch strip"></span>Death strip</div>
         <div class="bw-legend-item"><span class="bw-legend-swatch wall"></span>Wall</div>
+        <div class="bw-legend-item"><span class="bw-legend-swatch wall-zone"></span>On the Wall (≤25m)</div>
       </div>
 
       <div class="bw-locate" id="bw-locate-row" hidden>
@@ -494,12 +499,19 @@
     function analyze(lat, lng) {
       var pt = turf.point([lng, lat]);
 
+      var wallDist = distanceToWall(pt);
+
+      // "On the Wall itself" check runs first — overrides polygon membership
+      // for points within 25m of the Wall trace.
+      var onWall = wallDist <= 25;
+
       var inStrip = pointInFeatureCollection(pt, stripFC);
       var inWest  = pointInFeatureCollection(pt, westFC);
       var inEast  = pointInFeatureCollection(pt, eastFC);
 
       var category;
-      if (inStrip) category = 'strip';
+      if (onWall) category = 'wall';
+      else if (inStrip) category = 'strip';
       else if (inWest) category = 'west';
       else if (inEast) category = 'east';
       else category = 'outside';
@@ -512,12 +524,12 @@
         return;
       }
 
-      var wallDist = Math.round(distanceToWall(pt));
+      var wallDistM = Math.round(wallDist);
       var nc = nearestLandmark(pt, landmarks.checkpoints);
       var nt = nearestLandmark(pt, landmarks.tour_landmarks);
 
       var cells = ''
-        + cell('Distance to the Wall', formatM(wallDist))
+        + cell('Distance to the Wall', formatM(wallDistM))
         + cell('Nearest checkpoint', esc(nc.landmark.name) + ' (' + formatM(Math.round(nc.distance)) + ')')
         + cell('Nearest tour landmark', esc(nt.landmark.name) + ' (' + formatM(Math.round(nt.distance)) + ')');
 
@@ -528,12 +540,15 @@
       } else if (category === 'east') {
         head = headerHTML('east', 'East Berlin', 'Capital of the GDR');
         ctx = '<div class="bw-context amber">In 1989, this point was in East Berlin, capital of the German Democratic Republic. Movement to the West required a permit and a checkpoint crossing — the nearest, ' + esc(nc.landmark.name) + ', was ' + formatM(Math.round(nc.distance)) + ' away.</div>';
+      } else if (category === 'wall') {
+        head = headerHTML('wall', 'On the Wall itself', 'Border fortification zone');
+        ctx = '<div class="bw-context redbox">You’re standing exactly where the Wall ran in 1989. The fortification here was 3.6 meters of concrete on the West-facing side, plus a patrolled corridor up to 100 meters wide on the East side — watchtowers, anti-vehicle trenches, signal fences, and floodlights. Anyone caught inside this zone could be shot on sight.</div>';
       } else { // strip
         head = headerHTML('strip', 'The Death Strip', 'No man’s land');
         ctx = '<div class="bw-context redbox">In 1989, this point sat inside the <em>Mauerstreifen</em> — the patrolled corridor between the inner and outer Wall. Civilians could not enter. Border guards had standing orders to use lethal force on anyone attempting to cross.</div>';
       }
 
-      var cta = '<a class="bw-cta" href="' + TOUR_URL + '" target="_top" rel="noopener">Walk Cold War Berlin with a local →</a>';
+      var cta = '<a class="bw-cta" href="' + TOUR_URL + '" target="_top" rel="noopener">See Berlin’s historic city center with a local →</a>';
 
       renderResult({
         category: category,
