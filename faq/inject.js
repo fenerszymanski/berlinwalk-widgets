@@ -26,7 +26,8 @@
   "berlin-lakes": "berlin-lakes",
   "berlin-swimming-pools-guide-2026": "berlin-pools",
   "berlin-pools": "berlin-pools",
-  "berlin-in-the-rain": "berlin-in-the-rain"
+  "berlin-in-the-rain": "berlin-in-the-rain",
+  "was-your-berlin-address-east-or-west": "east-west-1989"
 };
 
   var SCHEMAS = {
@@ -1068,6 +1069,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The free walking tour from Alexanderplatz to Hackescher Markt runs in light to moderate rain. Only heavy thunderstorms or extreme weather cause cancellations. The route also includes covered spaces — the entrance area of Marienkirche and Hackesche Höfe at the end — that work well as longer-stop shelters when the rain is heavier."
+        }
+      }
+    ]
+  },
+  "east-west-1989": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How accurate is this East/West Berlin map?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Wall geometry on the map is derived from the official Berlin Open Data Portal, which uses the city's own surveying records of the former Wall path. The East and West Berlin polygons are computed from this Wall line plus Berlin's historical city boundary. Boundaries are accurate to within a few meters, which is why the map includes a special 'On the Wall itself' result for any point within 25 meters of the Wall line — at that distance, polygon edges and the actual fortification overlap."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was the Brandenburg Gate in East or West Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Brandenburg Gate stood in East Berlin territory, but it sat directly on the border. The Wall ran in front of it on the western side, placing the Gate inside the death strip from 1961 to 1989. West Berliners could see the Gate from their side of the Wall but could not approach it. East Berliners could not approach it either. It was sealed off from both sides for 28 years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What was the death strip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The death strip, called Mauerstreifen in German, was the patrolled corridor between the outer Wall facing West Berlin and a second inner wall on the East Berlin side. It ran up to 100 meters wide in places and contained anti-vehicle trenches, signal fences, watchtowers, dog patrols, and floodlights. Civilians could not enter it. At least 140 people died trying to cross it between 1961 and 1989."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there any pieces of the Berlin Wall left today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The longest preserved stretch is the East Side Gallery in Friedrichshain, a 1.3-kilometer painted section of the inner Wall along the Spree. The most historically accurate site is the Berlin Wall Memorial at Bernauer Straße, which preserves a full reconstructed section including the death strip, a watchtower, and the original layout. A 1.3-kilometer cobblestone line also marks the outer Wall path through the central city, including past the Brandenburg Gate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I see these former Wall sites in person?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The 2-hour free walking tour from Alexanderplatz to Hackescher Markt covers the historic center on the former East Berlin side of the divide, including spots where the cobblestone Wall line crosses the route and views toward former checkpoint locations. For a focused Wall-only walk, the Bernauer Straße Memorial in the north of the city is the most informative single destination, with a free outdoor exhibition that runs along the original Wall path."
         }
       }
     ]
