@@ -1,4 +1,37 @@
 {
+  "home": {
+    "subtitle": "Common questions about our free walking tour through Berlin's historic city center.",
+    "items": [
+      {
+        "q": "Is the tour really free?",
+        "a": "Yes — there is no fixed price. Berlin Walk operates on a **tip-based model**. You join for free and tip whatever you feel the experience was worth at the end."
+      },
+      {
+        "q": "What does the tour cover?",
+        "a": "**12 stops** through Berlin's historic city center, from Alexanderplatz to Hackescher Markt — TV Tower, Neptune Fountain, Rotes Rathaus, St. Mary's Church, Marienviertel, Marx-Engels Forum, Liebknecht Bridge, Humboldt Forum, Berliner Dom, Museum Island (Altes Museum, Neues Museum & Alte Nationalgalerie), Friedrichsbrücke, and Hackescher Markt. The route covers **800 years of history** — medieval origins, Prussian grandeur, GDR-era urban planning, and modern-day Berlin."
+      },
+      {
+        "q": "How long does the tour last?",
+        "a": "Approximately **2 hours**, covering about **3 kilometers** on foot at a comfortable pace with stops for stories and photos."
+      },
+      {
+        "q": "What language is the tour in?",
+        "a": "The tour is conducted entirely in **English**."
+      },
+      {
+        "q": "Do we go inside the museums or buildings?",
+        "a": "No — this is an **outdoor walking tour**. We stop in front of each landmark and the guide shares the history, architecture, and stories. After the tour, you're welcome to visit any site on your own — your guide can recommend which ones are most worth the entrance fee."
+      },
+      {
+        "q": "Will I see the Berlin Wall on this tour?",
+        "a": "This tour focuses on Berlin's **medieval-to-modern city center**. We discuss the Wall, Cold War, and GDR throughout, but we don't walk past remaining Wall sections. East Side Gallery and Checkpoint Charlie are easily reachable from our start or end points by public transport."
+      },
+      {
+        "q": "How much should I tip?",
+        "a": "There's no right or wrong amount. Most travelers tip between **€5 and €20 per person**. Tips are collected in cash at the end of the tour."
+      }
+    ]
+  },
   "pergamon-closed": {
     "subtitle": "Quick answers about visiting Berlin's Pergamon Museum in 2026.",
     "items": [
