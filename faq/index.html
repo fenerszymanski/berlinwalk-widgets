@@ -217,9 +217,11 @@
       }
 
       function postHeight() {
+        // Matches the parent-side "BerlinWalk widget auto-resize" listener
+        // which expects { type: 'bw-resize', height: N }.
         var h = document.documentElement.getBoundingClientRect().height;
         if (window.parent && window.parent !== window) {
-          window.parent.postMessage({ bwFaqHeight: Math.ceil(h) }, '*');
+          window.parent.postMessage({ type: 'bw-resize', height: Math.ceil(h) }, '*');
         }
       }
       window.addEventListener('load', postHeight);
