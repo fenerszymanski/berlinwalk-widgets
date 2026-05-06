@@ -219,10 +219,25 @@
       function postHeight() {
         // Matches the parent-side "BerlinWalk widget auto-resize" listener
         // which expects { type: 'bw-resize', height: N }.
+        // We include a `src` marker so the listener can match this iframe
+        // by URL substring even when it's nested inside a Wix sandbox where
+        // contentWindow !== e.source.
         var h = document.documentElement.getBoundingClientRect().height;
-        if (window.parent && window.parent !== window) {
-          window.parent.postMessage({ type: 'bw-resize', height: Math.ceil(h) }, '*');
-        }
+        var msg = {
+          type: 'bw-resize',
+          height: Math.ceil(h),
+          src: location.pathname + location.search
+        };
+        // Post to window.top first (reaches the main page even through
+        // a Wix sandbox), then window.parent (works on direct embeds).
+        try {
+          if (window.top && window.top !== window) window.top.postMessage(msg, '*');
+        } catch (e) {}
+        try {
+          if (window.parent && window.parent !== window && window.parent !== window.top) {
+            window.parent.postMessage(msg, '*');
+          }
+        } catch (e) {}
       }
       window.addEventListener('load', postHeight);
       window.addEventListener('resize', postHeight);
