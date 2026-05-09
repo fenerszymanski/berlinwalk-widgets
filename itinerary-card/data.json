@@ -1,0 +1,38 @@
+{
+  "june": {
+    "title": "Three-Day June Itinerary",
+    "subtitle": "Long days, outdoor time, historical depth",
+    "days": [
+      {
+        "dayNumber": 1,
+        "theme": "East Berlin, the historical core",
+        "schedule": [
+          { "time": "Morning", "activity": "Breakfast in Mitte. Walk to Alexanderplatz before 11:30." },
+          { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours. Alexanderplatz to Hackescher Markt via Rotes Rathaus, TV Tower, Marx-Engels-Forum, Museum Island.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+          { "time": "Afternoon", "activity": "Lunch in Hackesche Höfe. Loop back to Museum Island for Neues Museum or Alte Nationalgalerie." },
+          { "time": "Evening", "activity": "Dinner along the Spree. Sunset from a bridge. Light until 21:30+." }
+        ]
+      },
+      {
+        "dayNumber": 2,
+        "theme": "West Berlin and the lakes",
+        "schedule": [
+          { "time": "Morning", "activity": "Brandenburg Gate, Reichstag dome (book ahead), slow walk through Tiergarten." },
+          { "time": "Midday", "activity": "Coffee or beer at Café am Neuen See." },
+          { "time": "Afternoon", "activity": "S-Bahn to Wannsee or Schlachtensee. Swim, lakeside walk, optional ferry." },
+          { "time": "Evening", "activity": "Dinner in Charlottenburg or Mitte." }
+        ]
+      },
+      {
+        "dayNumber": 3,
+        "theme": "The Wall and the alternative city",
+        "schedule": [
+          { "time": "Morning", "activity": "Bernauer Straße Wall Memorial. Walk the preserved death strip." },
+          { "time": "Midday", "activity": "Mauerpark (Sundays: flea market and karaoke)." },
+          { "time": "Afternoon", "activity": "East Side Gallery, then Tempelhofer Feld. Cycling on the runways at golden hour." },
+          { "time": "Evening", "activity": "Outdoor cinema (Freiluftkino) or Friedrichshain beer garden." }
+        ]
+      }
+    ]
+  }
+}
