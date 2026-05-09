@@ -27,7 +27,8 @@
   "berlin-swimming-pools-guide-2026": "berlin-pools",
   "berlin-pools": "berlin-pools",
   "berlin-in-the-rain": "berlin-in-the-rain",
-  "was-your-berlin-address-east-or-west": "east-west-1989"
+  "was-your-berlin-address-east-or-west": "east-west-1989",
+  "visiting-berlin-in-june": "visiting-berlin-in-june"
 };
 
   var SCHEMAS = {
@@ -1115,6 +1116,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The 2-hour free walking tour from Alexanderplatz to Hackescher Markt covers the historic center on the former East Berlin side of the divide, including spots where the cobblestone Wall line crosses the route and views toward former checkpoint locations. For a focused Wall-only walk, the Bernauer Straße Memorial in the north of the city is the most informative single destination, with a free outdoor exhibition that runs along the original Wall path."
+        }
+      }
+    ]
+  },
+  "visiting-berlin-in-june": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is June a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, June is one of the best months to visit Berlin. The weather is mild with average highs around 22°C, the days are extremely long (up to nearly 17 hours of daylight near the summer solstice), and the city's outdoor culture comes fully alive. The first half of June is slightly less crowded than mid-July or August. The main drawback is that hotel prices rise from mid-June onward as peak season begins."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in June?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin in June averages a daytime high of 22°C and an overnight low of around 12°C, though afternoons can occasionally reach 28°C. The month sees nine to twelve days of rain on average, often as short, intense afternoon thunderstorms. Pack a light rain jacket and layers, since mornings and evenings are noticeably cooler than midday."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long are the days in Berlin in June?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Days are extremely long. On the summer solstice around June 21, the sun rises before 5am and sets just after 21:30, giving Berlin nearly 17 hours of daylight. Twilight extends another hour beyond sunset, meaning the sky is still soft blue close to 22:30. June visitors get significantly more usable evening light than they would in southern European cities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What events happen in Berlin in June?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Major recurring June events include Fête de la Musique on June 21, when Berlin hosts free outdoor concerts at over a hundred venues across the city. The Long Night of the Sciences in early June opens dozens of research institutions and laboratories to the public until past midnight. The Berlin Philharmonic gives its annual season-closing open-air concert at the Waldbühne in late June. The Carnival of Cultures occasionally falls in early June depending on when Pentecost lands that year."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I book accommodation in advance for Berlin in June?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, particularly for trips after mid-June. Berlin's peak season ramps up steadily through the month, and hotel prices in central neighborhoods like Mitte, Charlottenburg, and Kreuzberg can run forty to sixty percent higher than in low season. Booking six to eight weeks ahead gives you the widest selection. For walking tours, museum tickets, and popular restaurants, plan at least two weeks in advance."
         }
       }
     ]
