@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monthly Weather in Berlin | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    #bw-monthly-weather {
+      box-sizing: border-box;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      max-width: 640px;
+      margin: 24px auto;
+      padding: 24px;
+      background: var(--bw-white);
+      border: 1px solid #E0E0E0;
+      border-radius: 12px;
+      position: relative;
+    }
+    #bw-monthly-weather *, #bw-monthly-weather *::before, #bw-monthly-weather *::after {
+      box-sizing: border-box;
+    }
+    .mw-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .mw-month {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--bw-green);
+      line-height: 1.1;
+      margin: 0;
+    }
+    .mw-toggle {
+      display: inline-flex;
+      background: #F5F5F5;
+      border-radius: 999px;
+      padding: 3px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      flex-shrink: 0;
+    }
+    .mw-toggle button {
+      border: 0;
+      background: transparent;
+      color: var(--bw-muted);
+      padding: 5px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font: inherit;
+      letter-spacing: inherit;
+    }
+    .mw-toggle button.active {
+      background: var(--bw-green);
+      color: var(--bw-white);
+    }
+    .mw-bigstats {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    .mw-bigstat { flex: 1; }
+    .mw-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #4E6A4E;
+      margin-bottom: 4px;
+    }
+    .mw-bigstat-value {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--bw-green);
+      line-height: 1;
+    }
+    .mw-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      padding: 12px 0;
+      border-top: 1px solid #ECECEC;
+    }
+    .mw-row .mw-stat {
+      flex: 1 1 30%;
+      min-width: 130px;
+      font-size: 13.5px;
+      color: var(--bw-text);
+    }
+    .mw-row .mw-stat strong {
+      color: var(--bw-green);
+      font-weight: 700;
+    }
+    .mw-blurb {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #ECECEC;
+      font-size: 13px;
+      color: var(--bw-muted);
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .mw-watermark {
+      position: absolute;
+      right: 14px;
+      bottom: 10px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--bw-green);
+      opacity: 0.7;
+      letter-spacing: 0.4px;
+      pointer-events: none;
+    }
+    .mw-empty {
+      padding: 18px;
+      text-align: center;
+      color: var(--bw-muted);
+      font-size: 14px;
+    }
+    @media (max-width: 500px) {
+      #bw-monthly-weather { padding: 18px; margin: 18px auto; }
+      .mw-month { font-size: 22px; }
+      .mw-bigstats { flex-direction: column; gap: 14px; }
+      .mw-bigstat-value { font-size: 40px; }
+      .mw-row .mw-stat { flex: 1 1 100%; min-width: 0; }
+      .mw-watermark { font-size: 9px; right: 10px; bottom: 8px; }
+    }
+  </style>
+</head>
+<body>
+<div id="bw-monthly-weather" aria-live="polite">
+  <div class="mw-empty">Loading weather…</div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-monthly-weather');
+  var params = new URLSearchParams(window.location.search);
+  var monthKey = (params.get('month') || 'june').toLowerCase();
+  var unitKey = 'bw-mw-unit';
+  var unit = (function () {
+    try { return sessionStorage.getItem(unitKey) || 'C'; } catch (e) { return 'C'; }
+  })();
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c];
+    });
+  }
+
+  function renderEmpty(label) {
+    root.innerHTML = '<div class="mw-empty">' + escapeHtml(label) + '</div>';
+  }
+
+  function render(d) {
+    if (!d || d.available === false) {
+      renderEmpty(d && d.month ? d.month + ' data coming soon' : 'Data coming soon');
+      return;
+    }
+    var high = unit === 'F' ? d.tempHighF : d.tempHighC;
+    var low = unit === 'F' ? d.tempLowF : d.tempLowC;
+    var unitLabel = unit === 'F' ? '°F' : '°C';
+
+    root.innerHTML =
+      '<div class="mw-top">' +
+        '<h2 class="mw-month">' + escapeHtml(d.month) + '</h2>' +
+        '<div class="mw-toggle" role="group" aria-label="Temperature units">' +
+          '<button type="button" data-unit="C"' + (unit === 'C' ? ' class="active"' : '') + '>°C</button>' +
+          '<button type="button" data-unit="F"' + (unit === 'F' ? ' class="active"' : '') + '>°F</button>' +
+        '</div>' +
+      '</div>' +
+      '<div class="mw-bigstats">' +
+        '<div class="mw-bigstat">' +
+          '<div class="mw-kicker">Avg High</div>' +
+          '<div class="mw-bigstat-value">' + high + unitLabel + '</div>' +
+        '</div>' +
+        '<div class="mw-bigstat">' +
+          '<div class="mw-kicker">Avg Low</div>' +
+          '<div class="mw-bigstat-value">' + low + unitLabel + '</div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="mw-row">' +
+        '<div class="mw-stat"><strong>Rainy days:</strong> ' + escapeHtml(d.rainyDays) + '</div>' +
+        '<div class="mw-stat"><strong>Sunshine hours:</strong> ' + escapeHtml(String(d.sunshineHours)) + '</div>' +
+        '<div class="mw-stat"><strong>Daylight (solstice):</strong> ' + escapeHtml(d.daylightSolstice) + '</div>' +
+      '</div>' +
+      '<div class="mw-row">' +
+        '<div class="mw-stat"><strong>Sunrise:</strong> ' + escapeHtml(d.sunriseEarliest) + '</div>' +
+        '<div class="mw-stat"><strong>Sunset:</strong> ' + escapeHtml(d.sunsetLatest) + '</div>' +
+      '</div>' +
+      '<div class="mw-blurb">' + escapeHtml(d.blurb) + '</div>' +
+      '<div class="mw-watermark" aria-hidden="true">@berlinwalkingtour</div>';
+
+    var btns = root.querySelectorAll('.mw-toggle button');
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].addEventListener('click', function (e) {
+        unit = e.currentTarget.getAttribute('data-unit');
+        try { sessionStorage.setItem(unitKey, unit); } catch (err) {}
+        render(d);
+      });
+    }
+  }
+
+  fetch('./data.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
+    .then(function (d) { render(d[monthKey]); })
+    .catch(function () { renderEmpty('Weather data unavailable'); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+  "january": { "available": false, "month": "January", "monthAbbr": "Jan" },
+  "february": { "available": false, "month": "February", "monthAbbr": "Feb" },
+  "march": { "available": false, "month": "March", "monthAbbr": "Mar" },
+  "april": { "available": false, "month": "April", "monthAbbr": "Apr" },
+  "may": { "available": false, "month": "May", "monthAbbr": "May" },
+  "june": {
+    "available": true,
+    "month": "June",
+    "monthAbbr": "Jun",
+    "tempHighC": 22,
+    "tempLowC": 12,
+    "tempHighF": 72,
+    "tempLowF": 54,
+    "rainyDays": "9-12",
+    "sunshineHours": 220,
+    "sunriseEarliest": "04:43",
+    "sunsetLatest": "21:33",
+    "daylightSolstice": "16h 50m",
+    "season": "early summer",
+    "blurb": "Warm, long days with occasional afternoon thunderstorms"
+  },
+  "july": { "available": false, "month": "July", "monthAbbr": "Jul" },
+  "august": { "available": false, "month": "August", "monthAbbr": "Aug" },
+  "september": { "available": false, "month": "September", "monthAbbr": "Sep" },
+  "october": { "available": false, "month": "October", "monthAbbr": "Oct" },
+  "november": { "available": false, "month": "November", "monthAbbr": "Nov" },
+  "december": { "available": false, "month": "December", "monthAbbr": "Dec" }
+}
