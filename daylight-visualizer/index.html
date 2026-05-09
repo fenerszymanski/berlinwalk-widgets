@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How Long Are the Days in Berlin? | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    #bw-daylight {
+      box-sizing: border-box;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      max-width: 720px;
+      margin: 24px auto;
+      padding: 12px 4px;
+      position: relative;
+    }
+    #bw-daylight *, #bw-daylight *::before, #bw-daylight *::after {
+      box-sizing: border-box;
+    }
+    .dv-kicker {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin: 0 0 18px;
+      text-align: center;
+    }
+    .dv-bar-wrap {
+      margin-bottom: 22px;
+    }
+    .dv-bar-wrap:last-of-type { margin-bottom: 8px; }
+    .dv-bar {
+      height: 72px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      gap: 14px;
+      color: var(--bw-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .dv-bar.summer {
+      background: linear-gradient(90deg, var(--bw-yellow) 0%, var(--bw-lime) 100%);
+      color: #1A2A0F;
+    }
+    .dv-bar.winter {
+      background: #B8B8B8;
+    }
+    .dv-bar-label {
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      flex-shrink: 0;
+    }
+    .dv-bar-value {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      margin-left: auto;
+      text-align: right;
+    }
+    .dv-times {
+      font-size: 12px;
+      color: var(--bw-muted);
+      margin-top: 6px;
+      padding-left: 4px;
+    }
+    .dv-callout {
+      margin-top: 10px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--bw-lime);
+      background: var(--bw-lime-soft);
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--bw-text);
+      line-height: 1.45;
+    }
+    .dv-watermark {
+      position: absolute;
+      right: 8px;
+      bottom: 4px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--bw-green);
+      opacity: 0.7;
+      letter-spacing: 0.4px;
+      pointer-events: none;
+    }
+    .dv-empty {
+      padding: 18px;
+      text-align: center;
+      color: var(--bw-muted);
+      font-size: 14px;
+    }
+    @media (max-width: 500px) {
+      #bw-daylight { padding: 10px 6px; }
+      .dv-kicker { font-size: 13.5px; letter-spacing: 1.2px; }
+      .dv-bar { height: 64px; padding: 0 14px; gap: 10px; }
+      .dv-bar-label { font-size: 12px; letter-spacing: 1px; }
+      .dv-bar-value { font-size: 20px; }
+      .dv-callout { font-size: 12.5px; padding: 14px 14px; }
+      .dv-times { font-size: 11px; }
+      .dv-watermark { font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+<div id="bw-daylight" aria-live="polite">
+  <div class="dv-empty">Loading…</div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-daylight');
+  var params = new URLSearchParams(window.location.search);
+  var monthKey = (params.get('month') || 'june').toLowerCase();
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c];
+    });
+  }
+
+  function renderEmpty(label) {
+    root.innerHTML = '<div class="dv-empty">' + escapeHtml(label) + '</div>';
+  }
+
+  function bar(entry, klass, anchorMinutes) {
+    if (!entry) return '';
+    var pct = Math.max(8, Math.min(100, (entry.daylightMinutes / anchorMinutes) * 100));
+    return (
+      '<div class="dv-bar-wrap">' +
+        '<div class="dv-bar ' + klass + '" style="width:' + pct.toFixed(2) + '%">' +
+          '<span class="dv-bar-label">' + escapeHtml(entry.label) + '</span>' +
+          '<span class="dv-bar-value">' + escapeHtml(entry.daylightDisplay) + '</span>' +
+        '</div>' +
+        '<div class="dv-times">Sunrise ' + escapeHtml(entry.sunrise) + ' &rarr; Sunset ' + escapeHtml(entry.sunset) + '</div>' +
+      '</div>'
+    );
+  }
+
+  function render(data) {
+    var summer = data && data.june;
+    var winter = data && data.december;
+    var compared = data && data[monthKey] ? data[monthKey] : summer;
+
+    if (!compared || !winter) {
+      renderEmpty('Daylight data coming soon');
+      return;
+    }
+
+    // The widest bar (100%) is whichever is longer between compared month and June.
+    var anchor = Math.max(compared.daylightMinutes, summer ? summer.daylightMinutes : 0);
+
+    var topClass = (compared.daylightMinutes >= (winter.daylightMinutes * 1.5)) ? 'summer' : 'summer';
+    // The summer bar uses the gradient, the winter bar uses muted gray.
+    var html =
+      '<h2 class="dv-kicker">How Long Are the Days in Berlin?</h2>' +
+      bar(compared, topClass, anchor) +
+      bar(winter, 'winter', anchor) +
+      '<div class="dv-callout">' + escapeHtml(data.comparisonText || '') + '</div>' +
+      '<div class="dv-watermark" aria-hidden="true">@berlinwalkingtour</div>';
+
+    root.innerHTML = html;
+  }
+
+  fetch('./data.json', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
+    .then(render)
+    .catch(function () { renderEmpty('Daylight data unavailable'); });
+})();
+</script>
+</body>
+</html>
