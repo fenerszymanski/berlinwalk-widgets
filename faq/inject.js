@@ -314,34 +314,42 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is a Gemüsekebab and why is it special to Berlin?",
+        "name": "What is the best döner kebab in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A Gemüsekebab is Berlin's signature döner style that includes grilled or stir-fried vegetables alongside the usual salad and meat. Unlike standard döner in other German cities, the added cooked vegetables give it a richer, more complex flavor. Most of the top-rated spots in Berlin — including Dunya, Oggi's, and Rüyam — are known specifically for their Gemüsekebab."
+          "text": "Berlin has over 1,000 döner shops, but five consistently stand out: Dunya Gemüse Kebab in Friedrichshain, Golt'z Kebap in Charlottenburg, Oggi's Gemüsekebab near Hauptbahnhof, Rüyam Gemüse Kebab in Schöneberg, and Muca Kebap in Kreuzberg. All five serve a kebab around 7 euros and consistently rank above 4.6 stars on Google or Tripadvisor."
         }
       },
       {
         "@type": "Question",
-        "name": "How much does a döner kebab cost in Berlin in 2026?",
+        "name": "How much does a döner kebab cost in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "At most quality döner shops in Berlin, you can expect to pay around €7 for a classic döner sandwich or dürüm in 2026. Budget spots may offer them for €5–6, while premium or restaurant-style options can go up to €8–9. All five spots recommended in this guide are in the €7 range."
+          "text": "A standard döner kebab in Berlin costs around 7 euros in 2026. Prices range from 6 euros at smaller neighborhood shops to 9 euros at premium spots with hand-sliced Yaprak meat. The price has roughly doubled since 2020, when a döner cost around 4 euros, due to inflation, energy costs, and rising meat prices."
         }
       },
       {
         "@type": "Question",
-        "name": "What is Yaprak döner and how is it different?",
+        "name": "What is Gemüsekebab and why is it Berlin's specialty?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yaprak means 'leaf' in Turkish and refers to thinly sliced, layered meat on the spit — as opposed to the more common ground-meat (Hackfleisch) style. Yaprak döner is generally considered higher quality because the meat texture is more natural and tender. Golt'z Kebap and Muca Kebap on this list are particularly known for their Yaprak spits."
+          "text": "Gemüsekebab is döner kebab with grilled or fried vegetables added alongside the usual salad and meat. The dish was popularized in Berlin in the 1990s by a Turkish immigrant named Mehmet Aygün and became the city's signature kebab style. Unlike döner in other German cities, a Berlin Gemüsekebab includes warm vegetables like roasted peppers, courgette, eggplant, and potatoes, giving it a richer, more complex flavor."
         }
       },
       {
         "@type": "Question",
-        "name": "Where can I get a good döner near Berlin Hauptbahnhof?",
+        "name": "Where did döner kebab originate?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Oggi's Gemüsekebab is just a 3-minute walk from Berlin Hauptbahnhof (Central Station) at Döberitzer Str. 1 in Moabit. It scored 93/100 in the Falstaff Streetfood Guide and is one of the most popular kebab spots in the city. Note that it's cash only and usually has a queue."
+          "text": "Döner kebab originated in Turkey in the 19th century, with the vertical spit-roasting method developed in Bursa and Istanbul. The handheld sandwich form most people know today was popularized in Berlin in 1972 by Turkish immigrant Kadir Nurman, who started serving meat in flatbread to busy Berlin commuters. Berlin is now considered the döner capital of Europe with more than 1,000 shops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there vegetarian or vegan döner options in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, vegetarian and vegan döner is widely available across Berlin. Most Gemüsekebab shops offer a meatless version of their kebab using only the grilled vegetables, fresh salad, and sauces. Dedicated vegan döner shops have multiplied since 2020, with Vöner in Friedrichshain being one of the most established. Standard vegetarian Gemüsekebab versions cost around 6 euros."
         }
       }
     ]
