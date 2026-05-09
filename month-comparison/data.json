@@ -1,0 +1,28 @@
+{
+  "visiting-berlin-in-june": {
+    "title": "June at a Glance: Compared to May and July",
+    "subtitle": "How June stacks up against its neighbors",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      {
+        "name": "May",
+        "statusBadge": { "label": "Shoulder", "type": "shoulder" },
+        "highlights": "Mild temps, blooming gardens, lower crowds. Lakes still cold.",
+        "priceTier": "$$"
+      },
+      {
+        "name": "June",
+        "statusBadge": { "label": "Shoulder to Peak", "type": "transitioning" },
+        "highlights": "Long days, beer gardens fill, Fête de la Musique, lakes warm by mid-month.",
+        "priceTier": "$$$",
+        "highlighted": true
+      },
+      {
+        "name": "July",
+        "statusBadge": { "label": "Peak", "type": "peak" },
+        "highlights": "Hottest temps, busiest crowds, festival season, 48 Stunden Neukölln.",
+        "priceTier": "$$$"
+      }
+    ]
+  }
+}
