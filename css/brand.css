@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@400;500;600;700;800&display=swap');
 
 :root {
   --bw-green: #1B5E20;
@@ -15,6 +15,13 @@
   --bw-moderate: #F9A825;
   --bw-high: #C62828;
   --bw-red: #B00020;
+  --brand-green: var(--bw-green);
+  --brand-yellow: var(--bw-yellow);
+  --brand-lime: var(--bw-lime);
+  --light-green: #C5E1A5;
+  --cream: var(--bw-cream);
+  --text: var(--bw-text);
+  --muted: var(--bw-muted);
 }
 
 html, body {
