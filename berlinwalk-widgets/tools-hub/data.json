@@ -1,0 +1,132 @@
+{
+  "categories": [
+    {
+      "key": "Money",
+      "label": "Tickets & Money",
+      "icon": "💰",
+      "blurb": "Figure out the right ticket, the WelcomeCard, and your daily budget."
+    },
+    {
+      "key": "Weather",
+      "label": "Weather & Timing",
+      "icon": "☀️",
+      "blurb": "When to visit, what to pack, and how the months actually compare."
+    },
+    {
+      "key": "Maps",
+      "label": "Maps & Practical",
+      "icon": "🗺️",
+      "blurb": "Drinking water, Sunday shopping, free things, safety by area."
+    },
+    {
+      "key": "Discovery",
+      "label": "Discovery & Planning",
+      "icon": "🔍",
+      "blurb": "Lakes, pools, Berlin Wall history, 3-day itinerary, tourist mistakes."
+    }
+  ],
+  "tools": [
+    {
+      "slug": "welcomecard-calculator",
+      "title": "Berlin WelcomeCard Calculator",
+      "lead": "Is the WelcomeCard worth it for your trip? Find out in 30 seconds.",
+      "category": "Money"
+    },
+    {
+      "slug": "transport-ticket-calculator",
+      "title": "Berlin Transport Ticket Calculator",
+      "lead": "Find the cheapest BVG ticket for your Berlin trip in under 30 seconds.",
+      "category": "Money"
+    },
+    {
+      "slug": "berlin-daily-budget",
+      "title": "Berlin Daily Budget Calculator",
+      "lead": "How much does a day in Berlin actually cost in 2026? Find your number in 30 seconds.",
+      "category": "Money"
+    },
+    {
+      "slug": "best-month-to-visit-berlin",
+      "title": "Best Month to Visit Berlin",
+      "lead": "Find the right month for your Berlin trip in 30 seconds.",
+      "category": "Weather"
+    },
+    {
+      "slug": "berlin-weather-by-month",
+      "title": "Berlin Weather by Month",
+      "lead": "See average temperatures, rainfall, and what to expect for any month in Berlin.",
+      "category": "Weather"
+    },
+    {
+      "slug": "what-to-pack-berlin",
+      "title": "What to Pack for Berlin",
+      "lead": "Get a season-specific Berlin packing list with no fluff.",
+      "category": "Weather"
+    },
+    {
+      "slug": "berlin-daylight-hours",
+      "title": "Berlin Daylight Hours",
+      "lead": "Berlin has 9 more hours of daylight in June than in December. Plan around it.",
+      "category": "Weather"
+    },
+    {
+      "slug": "compare-berlin-months",
+      "title": "Compare Berlin Months",
+      "lead": "Stuck between two months? Compare them on weather, crowds, prices, and events.",
+      "category": "Weather"
+    },
+    {
+      "slug": "berlin-drinking-water",
+      "title": "Berlin Drinking Water Map",
+      "lead": "Find the nearest free public drinking fountain in Berlin in 30 seconds.",
+      "category": "Maps"
+    },
+    {
+      "slug": "berlin-sunday-shopping",
+      "title": "Berlin Sunday Shopping Map",
+      "lead": "Need groceries on a Sunday in Berlin? Find what's open in 30 seconds.",
+      "category": "Maps"
+    },
+    {
+      "slug": "berlin-free-things-to-do",
+      "title": "Free Things to Do in Berlin",
+      "lead": "Berlin has more genuinely free attractions than any other major European capital.",
+      "category": "Maps"
+    },
+    {
+      "slug": "berlin-safety",
+      "title": "Berlin Safety Map",
+      "lead": "How safe is Berlin really? Find out by neighborhood and traveler type.",
+      "category": "Maps"
+    },
+    {
+      "slug": "berlin-lakes",
+      "title": "Berlin Lakes Map",
+      "lead": "Find Berlin's best swimming lakes, water quality, and what locals actually use.",
+      "category": "Discovery"
+    },
+    {
+      "slug": "berlin-pools",
+      "title": "Berlin Swimming Pools Map",
+      "lead": "Find the right Berlin pool — indoor, outdoor, family, lap-swimming.",
+      "category": "Discovery"
+    },
+    {
+      "slug": "east-or-west-1989",
+      "title": "East or West Berlin in 1989?",
+      "lead": "Pick any Berlin landmark and find out which side of the Wall it was on.",
+      "category": "Discovery"
+    },
+    {
+      "slug": "berlin-3-day-itinerary",
+      "title": "Berlin in 3 Days: Perfect Itinerary",
+      "lead": "A real 3-day Berlin plan, organized by neighborhood, designed by a local guide.",
+      "category": "Discovery"
+    },
+    {
+      "slug": "alex-mistakes",
+      "title": "Alexanderplatz Tourist Mistakes",
+      "lead": "Don't waste your time at Alexanderplatz. Here's what locals actually do.",
+      "category": "Discovery"
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Pools Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<div id="bw-pool-map">
+  <style>
+    #bw-pool-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-pool-map * { box-sizing: border-box; }
+
+    #bw-pool-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-pool-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #bw-pool-map .bw-head-icon { font-size: 18px; line-height: 1; }
+    #bw-pool-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-pool-map .bw-body {
+      background: var(--bw-cream);
+      padding: 16px 18px;
+    }
+    #bw-pool-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-pool-map .bw-legend {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+    #bw-pool-map .bw-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--bw-text);
+    }
+    #bw-pool-map .bw-legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 2px solid var(--bw-white);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    }
+    #bw-pool-map .bw-legend-dot.indoor  { background: var(--bw-yellow); }
+    #bw-pool-map .bw-legend-dot.outdoor { background: var(--bw-lime); }
+
+    #bw-pool-map .bw-map-container {
+      width: 100%;
+      height: 480px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+    #bw-pool-map .bw-map { width: 100%; height: 100%; z-index: 1; }
+
+    #bw-pool-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+    #bw-pool-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+    #bw-pool-map .leaflet-popup-content {
+      margin: 0;
+      width: 240px !important;
+      font-family: inherit;
+    }
+    #bw-pool-map .leaflet-popup-tip {
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    #bw-pool-map .bw-pop-head {
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    #bw-pool-map .bw-pop-head.indoor  { background: var(--bw-yellow); color: var(--bw-green-dark); }
+    #bw-pool-map .bw-pop-head.outdoor { background: var(--bw-lime); color: var(--bw-white); }
+
+    #bw-pool-map .bw-pop-name {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    #bw-pool-map .bw-pop-tier {
+      font-size: 9.5px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.3);
+      white-space: nowrap;
+    }
+    #bw-pool-map .bw-pop-head.indoor .bw-pop-tier { background: rgba(0,0,0,0.12); }
+
+    #bw-pool-map .bw-pop-body {
+      padding: 12px 14px 14px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      line-height: 1.55;
+    }
+    #bw-pool-map .bw-pop-tagline {
+      margin: 0 0 8px;
+      color: var(--bw-text);
+    }
+    #bw-pool-map .bw-pop-meta {
+      margin: 0 0 4px;
+      color: var(--bw-muted);
+      font-size: 12px;
+    }
+    #bw-pool-map .bw-pop-meta + .bw-pop-meta { margin-top: 0; }
+    #bw-pool-map .bw-pop-links {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 10px;
+    }
+    #bw-pool-map .bw-pop-links a {
+      color: var(--bw-green);
+      font-weight: 700;
+      font-size: 12.5px;
+      text-decoration: none;
+    }
+    #bw-pool-map .bw-pop-links a:hover { text-decoration: underline; }
+
+    #bw-pool-map .bw-pool-pin span {
+      display: block;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 3px solid var(--bw-white);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    #bw-pool-map .bw-pool-pin--indoor span  { background: var(--bw-yellow); }
+    #bw-pool-map .bw-pool-pin--outdoor span { background: var(--bw-lime); }
+
+    #bw-pool-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+    #bw-pool-map .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      #bw-pool-map { margin: 22px 0; }
+      #bw-pool-map .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-pool-map .bw-head-icon { font-size: 16px; }
+      #bw-pool-map .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-pool-map .bw-body { padding: 14px; }
+      #bw-pool-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-pool-map .bw-legend { gap: 10px; }
+      #bw-pool-map .bw-legend-item { font-size: 10.5px; }
+      #bw-pool-map .bw-map-container { height: 360px; }
+      #bw-pool-map .leaflet-popup-content { width: 220px !important; }
+      #bw-pool-map .bw-pop-name { font-size: 14px; }
+      #bw-pool-map .bw-pop-body { font-size: 12px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🏊</span>
+      <span class="bw-kicker">Berlin Pools Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">10 of Berlin's standout public pools. Tap a pin for details, transit, and a Google Maps link.</p>
+
+      <div class="bw-legend">
+        <div class="bw-legend-item">
+          <span class="bw-legend-dot indoor" aria-hidden="true"></span>
+          Indoor (year-round)
+        </div>
+        <div class="bw-legend-item">
+          <span class="bw-legend-dot outdoor" aria-hidden="true"></span>
+          Outdoor (summer only)
+        </div>
+      </div>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-pool-map-canvas"></div>
+      </div>
+
+      <p class="bw-count"><strong>10</strong> Berlin pools mapped</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-pool-map');
+      if (!root) return;
+
+      var BAEDER_URL = 'https://www.berlinerbaeder.de/';
+
+      // Coordinates verified against OSM Nominatim 2026-05-04
+      var pools = [
+        {id: 'stadtbad-neukolln',        name: 'Stadtbad Neukölln',                  type: 'indoor',  lat: 52.4792, lng: 13.4397, tagline: '1914 Roman bath. Most beautiful public pool in Berlin.',                       transit: 'U7 to Rathaus Neukölln — 30 min from Alex',         price: 'Cat. 2 · ~€6.50–€11.50', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Stadtbad+Neukölln'},
+        {id: 'stadtbad-charlottenburg',  name: 'Stadtbad Charlottenburg Alte Halle', type: 'indoor',  lat: 52.5145, lng: 13.3088, tagline: "Berlin's oldest pool (1898). Quieter, gorgeous, real history.",                  transit: 'U7 to Wilmersdorfer Straße — 30 min from Alex',     price: 'Cat. 2 · ~€6.50–€11.50', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Stadtbad+Charlottenburg+Alte+Halle'},
+        {id: 'sse-europasportpark',      name: 'SSE Europasportpark',                type: 'indoor',  lat: 52.5292, lng: 13.4527, tagline: '50m Olympic-spec lap pool. Where Berlin swimmers actually train.',             transit: 'S41/S42 to Landsberger Allee — 25 min from Alex',   price: 'Cat. 3 · ~€7.00–€11.50', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Schwimm+Sprunghalle+Europasportpark'},
+        {id: 'stadtbad-tiergarten',      name: 'Stadtbad Tiergarten',                type: 'indoor',  lat: 52.5274, lng: 13.3596, tagline: 'Modern, central, no-fuss. Perfect for a quick post-sightseeing swim.',         transit: 'U9 to Turmstraße — 20 min from Alex',               price: 'Cat. 1 · ~€4.50–€9.00',  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Stadtbad+Tiergarten+Berlin'},
+        {id: 'stadtbad-mitte',           name: 'Stadtbad Mitte',                     type: 'indoor',  lat: 52.5295, lng: 13.3935, tagline: 'Closest to the centre. Family-friendly, smaller, beginner-oriented.',          transit: 'Walk from Alexanderplatz — 10 min',                 price: 'Cat. 1 · ~€4.50–€9.00',  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Stadtbad+Mitte+Gartenstraße+Berlin'},
+        {id: 'sommerbad-kreuzberg',      name: 'Sommerbad Kreuzberg (Prinzenbad)',   type: 'outdoor', lat: 52.4976, lng: 13.4026, tagline: 'The legendary Kreuzberg outdoor pool. Iconic Berlin atmosphere.',               transit: 'U7 to Prinzenstraße — 25 min from Alex',            price: 'Cat. 1 · ~€5.50–€7.00',  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Prinzenbad+Sommerbad+Kreuzberg'},
+        {id: 'sommerbad-olympiastadion', name: 'Sommerbad Olympiastadion',           type: 'outdoor', lat: 52.5165, lng: 13.2391, tagline: '1936 Olympic pool with the original starting blocks. Historically loaded.',     transit: 'U2 to Olympia-Stadion — 35 min from Alex',          price: 'Cat. 2 · ~€6.50–€8.00',  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Olympia-Schwimmstadion+Berlin'},
+        {id: 'sommerbad-pankow',         name: 'Sommerbad Pankow',                   type: 'outdoor', lat: 52.5758, lng: 13.4132, tagline: 'Family-friendly East Berlin local. Less crowded than Prinzenbad.',              transit: 'Tram M1 — 35 min from Alex',                        price: 'Cat. 1 · ~€5.50–€7.00',  mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Sommerbad+Pankow'},
+        {id: 'strandbad-wannsee-sauna',  name: 'Strandbad Wannsee',                  type: 'outdoor', lat: 52.4382, lng: 13.1780, tagline: '1920s lido + summer sauna program. Sweat, plunge into the lake, repeat.',       transit: 'S7 to Nikolassee — 35 min from Mitte',              price: 'Lido entry · ~€5.50–€7.00', mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Strandbad+Wannsee'},
+        {id: 'strandbad-plotzensee',     name: 'Strandbad Plötzensee',               type: 'outdoor', lat: 52.5433, lng: 13.3285, tagline: 'Closest pool/lake hybrid to Mitte. Sandy beach + pool infrastructure.',         transit: 'U9 to Amrumer Straße — 15 min from Alex',           price: 'Lido entry · ~€5.50',     mapsUrl: 'https://www.google.com/maps/search/?api=1&query=Strandbad+Plötzensee+Nordufer'}
+      ];
+
+      var TIER_LABELS = { indoor: 'Indoor', outdoor: 'Outdoor' };
+
+      function escapeHtml(t) {
+        return String(t).replace(/[&<>"']/g, function (c) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[c];
+        });
+      }
+
+      var mapEl = document.getElementById('bw-pool-map-canvas');
+      var map = L.map(mapEl, {
+        center: [52.520, 13.405],
+        zoom: 11,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      function poolIcon(type) {
+        return L.divIcon({
+          className: 'bw-pool-pin bw-pool-pin--' + type,
+          html: '<span></span>',
+          iconSize: [22, 22],
+          iconAnchor: [11, 11],
+          popupAnchor: [0, -12]
+        });
+      }
+
+      function popupHtml(p) {
+        return '' +
+          '<div class="bw-pop-head ' + p.type + '">' +
+            '<div class="bw-pop-name">' + escapeHtml(p.name) + '</div>' +
+            '<div class="bw-pop-tier">' + TIER_LABELS[p.type] + '</div>' +
+          '</div>' +
+          '<div class="bw-pop-body">' +
+            '<p class="bw-pop-tagline">' + escapeHtml(p.tagline) + '</p>' +
+            '<p class="bw-pop-meta">🚆 ' + escapeHtml(p.transit) + '</p>' +
+            '<p class="bw-pop-meta">🏊 Type: ' + escapeHtml(TIER_LABELS[p.type]) + ' · 💰 ' + escapeHtml(p.price) + '</p>' +
+            '<div class="bw-pop-links">' +
+              '<a href="' + escapeHtml(p.mapsUrl) + '" target="_blank" rel="noopener noreferrer">📍 Open in Google Maps →</a>' +
+              '<a href="' + BAEDER_URL + '" target="_blank" rel="noopener">🌊 Berliner Bäder website →</a>' +
+            '</div>' +
+          '</div>';
+      }
+
+      pools.forEach(function (p) {
+        L.marker([p.lat, p.lng], { icon: poolIcon(p.type) })
+          .bindPopup(popupHtml(p), { closeButton: true, maxWidth: 260 })
+          .addTo(map);
+      });
+
+      function refreshSize() {
+        try { map.invalidateSize(); } catch (e) {}
+      }
+      window.addEventListener('load', refreshSize);
+      window.addEventListener('resize', refreshSize);
+      setTimeout(refreshSize, 200);
+      setTimeout(refreshSize, 800);
+    })();
+  </script>
+</div>
+</body>
+</html>

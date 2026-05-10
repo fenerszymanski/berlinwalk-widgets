@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Tour CTA</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    body { background: transparent; padding: 0; margin: 0; }
+    .bw-cta {
+      max-width: 100%;
+      margin: 28px auto;
+      background: linear-gradient(135deg, #1B5E20 0%, #2d7a32 100%);
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+      color: #fff;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+    }
+    .bw-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: #FFE600;
+      opacity: 0.08;
+      border-radius: 50%;
+      transform: translate(30%, -30%);
+    }
+    .bw-cta > * { position: relative; }
+    .bw-cta-kicker {
+      color: #FFE600;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .bw-cta-headline {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .bw-cta-sub {
+      color: rgba(255,255,255,0.85);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+    .bw-cta-btn {
+      display: inline-block;
+      background: #FFE600;
+      color: #1B5E20;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.5px;
+      transition: background 0.15s ease;
+    }
+    .bw-cta-btn:hover { background: #FFEF33; }
+    .bw-empty { padding: 16px; color: #4E5A4E; font-size: 14px; }
+    @media (max-width: 520px) {
+      .bw-cta { padding: 20px; margin: 22px auto; border-radius: 10px; }
+      .bw-cta-headline { font-size: 17px; }
+      .bw-cta-sub { font-size: 13px; }
+      .bw-cta-btn { font-size: 13px; padding: 11px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <section class="bw-cta" data-field="root">
+    <div class="bw-cta-kicker" data-field="kicker">BERLIN WALK</div>
+    <div class="bw-cta-headline" data-field="headline">Discover Berlin with a local — free.</div>
+    <div class="bw-cta-sub" data-field="sub">12 stops, 800 years of history, ~2 hours. From Alexanderplatz to Hackescher Markt. Tip-based.</div>
+    <a class="bw-cta-btn" data-field="btn" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Reserve your free spot →</a>
+  </section>
+
+  <script>
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var slug = params.get('post');
+      var root = document.querySelector('[data-field="root"]');
+      var kEl = root.querySelector('[data-field="kicker"]');
+      var hEl = root.querySelector('[data-field="headline"]');
+      var sEl = root.querySelector('[data-field="sub"]');
+      var bEl = root.querySelector('[data-field="btn"]');
+
+      function escapeHtml(t){return t.replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c];});}
+
+      function render(c) {
+        if (!c) return;
+        if (c.kicker) kEl.textContent = c.kicker;
+        if (c.headline) hEl.textContent = c.headline;
+        if (c.sub) sEl.textContent = c.sub;
+        if (c.button) bEl.textContent = c.button;
+        if (c.url) bEl.href = c.url;
+      }
+
+      if (!slug) return; // use defaults
+
+      fetch('./data.json')
+        .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
+        .then(function (d) {
+          if (d[slug]) render(d[slug]);
+          else root.innerHTML = '<div class="bw-empty">CTA not configured for <strong>' + escapeHtml(slug) + '</strong>. Add it to /cta/data.json.</div>';
+        })
+        .catch(function () {
+          root.innerHTML = '<div class="bw-empty">CTA data unavailable.</div>';
+        });
+    })();
+  </script>
+</body>
+</html>

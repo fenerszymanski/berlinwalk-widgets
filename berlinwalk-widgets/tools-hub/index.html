@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Free Tools Directory</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    #bw-tools-hub {
+      --serif: Merriweather, Georgia, serif;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      max-width: 100%;
+      min-height: 100vh;
+    }
+
+    #bw-tools-hub * {
+      box-sizing: border-box;
+    }
+
+    #bw-tools-hub .hub-hero {
+      background: var(--brand-green);
+      color: var(--bw-white);
+      padding: 56px 28px 46px;
+      position: relative;
+      text-align: center;
+    }
+
+    #bw-tools-hub .hub-hero::after,
+    #bw-tools-hub .hub-footer::before,
+    #bw-tools-hub .hub-footer::after {
+      background: linear-gradient(90deg, var(--brand-yellow), var(--brand-lime));
+      content: "";
+      display: block;
+      height: 4px;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+
+    #bw-tools-hub .hub-hero::after {
+      bottom: 0;
+    }
+
+    #bw-tools-hub .hub-hero-inner,
+    #bw-tools-hub .hub-main {
+      margin: 0 auto;
+      max-width: 1120px;
+    }
+
+    #bw-tools-hub h1,
+    #bw-tools-hub h2,
+    #bw-tools-hub h3,
+    #bw-tools-hub p {
+      margin-top: 0;
+    }
+
+    #bw-tools-hub h1 {
+      color: var(--bw-white);
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.14;
+      margin-bottom: 14px;
+    }
+
+    #bw-tools-hub .highlight {
+      color: var(--brand-yellow);
+    }
+
+    #bw-tools-hub .hero-lead {
+      color: rgba(255, 255, 255, 0.9);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.6;
+      margin: 0 auto;
+      max-width: 680px;
+    }
+
+    #bw-tools-hub .hub-main {
+      padding: 44px 24px 48px;
+    }
+
+    #bw-tools-hub .loading {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 16px;
+      padding: 12px 0;
+      text-align: center;
+    }
+
+    #bw-tools-hub .category-section {
+      margin-bottom: 42px;
+    }
+
+    #bw-tools-hub .category-section:last-child {
+      margin-bottom: 0;
+    }
+
+    #bw-tools-hub .category-heading {
+      align-items: center;
+      color: var(--brand-green);
+      display: flex;
+      font-size: 28px;
+      font-weight: 800;
+      gap: 10px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    #bw-tools-hub .category-icon {
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    #bw-tools-hub .category-blurb {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 15.5px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+      max-width: 600px;
+    }
+
+    #bw-tools-hub .tools-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-tools-hub .tool-card {
+      background: var(--bw-white);
+      border: 1px solid var(--light-green);
+      border-radius: 12px;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      min-height: 190px;
+      padding: 22px 24px;
+      text-decoration: none;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    #bw-tools-hub .tool-card:hover,
+    #bw-tools-hub .tool-card:focus-visible {
+      border-color: var(--brand-green);
+      box-shadow: 0 10px 24px rgba(27, 94, 32, 0.12);
+      transform: translateY(-2px);
+    }
+
+    #bw-tools-hub .tool-card:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.9);
+      outline-offset: 2px;
+    }
+
+    #bw-tools-hub .tool-card h3 {
+      color: var(--brand-green);
+      font-size: 19px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 10px;
+    }
+
+    #bw-tools-hub .tool-card p {
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 14.5px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    #bw-tools-hub .tool-cta {
+      color: var(--brand-green);
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      margin-top: auto;
+      text-transform: uppercase;
+    }
+
+    #bw-tools-hub .hub-footer {
+      background: var(--brand-green);
+      color: var(--bw-white);
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 38px 24px 42px;
+      position: relative;
+      text-align: center;
+    }
+
+    #bw-tools-hub .hub-footer::before {
+      top: 0;
+    }
+
+    #bw-tools-hub .hub-footer::after {
+      bottom: 0;
+    }
+
+    #bw-tools-hub .hub-footer h2 {
+      color: var(--bw-white);
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    #bw-tools-hub .hub-footer p {
+      color: rgba(255, 255, 255, 0.88);
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0 auto 20px;
+      max-width: 660px;
+    }
+
+    #bw-tools-hub .btn-primary {
+      background: var(--brand-yellow);
+      border-radius: 10px;
+      color: var(--brand-green);
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      padding: 14px 24px;
+      text-decoration: none;
+      transition: background 0.16s ease, transform 0.16s ease;
+    }
+
+    #bw-tools-hub .btn-primary:hover,
+    #bw-tools-hub .btn-primary:focus-visible {
+      background: #fff04a;
+      transform: translateY(-1px);
+    }
+
+    #bw-tools-hub .btn-primary:focus-visible {
+      outline: 3px solid rgba(255, 255, 255, 0.9);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 1024px) {
+      #bw-tools-hub .tools-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 700px) {
+      #bw-tools-hub .tools-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-tools-hub .hub-hero {
+        padding: 40px 18px 34px;
+      }
+
+      #bw-tools-hub h1 {
+        font-size: 28px;
+      }
+
+      #bw-tools-hub .hero-lead {
+        font-size: 15px;
+      }
+
+      #bw-tools-hub .hub-main {
+        padding: 32px 16px 36px;
+      }
+
+      #bw-tools-hub .category-section {
+        margin-bottom: 34px;
+      }
+
+      #bw-tools-hub .category-heading {
+        font-size: 22px;
+      }
+
+      #bw-tools-hub .category-icon {
+        font-size: 28px;
+      }
+
+      #bw-tools-hub .category-blurb {
+        font-size: 14.5px;
+      }
+
+      #bw-tools-hub .tool-card {
+        min-height: 0;
+        padding: 16px;
+      }
+
+      #bw-tools-hub .tool-card h3 {
+        font-size: 18px;
+      }
+
+      #bw-tools-hub .hub-footer {
+        padding: 32px 18px 36px;
+      }
+
+      #bw-tools-hub .hub-footer h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="bw-tools-hub">
+    <section class="hub-hero" aria-labelledby="tools-hub-title">
+      <div class="hub-hero-inner">
+        <h1 id="tools-hub-title"><span class="highlight">17</span> free Berlin tools for smarter trip planning</h1>
+        <p class="hero-lead">Quick calculators, maps, and planning guides to help you choose tickets, time your visit, and make better Berlin decisions in seconds.</p>
+      </div>
+    </section>
+
+    <main class="hub-main">
+      <div id="tools-root" class="loading" aria-live="polite">Loading tools...</div>
+    </main>
+
+    <section class="hub-footer">
+      <h2>Want a real local with you?</h2>
+      <p>Our 2-hour walking tour covers Berlin's historic center and East Berlin stories. Tip-based, no fixed price.</p>
+      <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" class="btn-primary">Reserve your spot →</a>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('tools-root');
+      var toolsBaseUrl = 'https://www.berlinwalk.com/tools/';
+
+      function createTextElement(tag, className, text) {
+        var element = document.createElement(tag);
+        if (className) element.className = className;
+        element.textContent = text;
+        return element;
+      }
+
+      function renderHub(data) {
+        var fragment = document.createDocumentFragment();
+
+        data.categories.forEach(function (category) {
+          var section = document.createElement('section');
+          section.className = 'category-section';
+          section.setAttribute('aria-labelledby', 'category-' + category.key.toLowerCase());
+
+          var heading = document.createElement('h2');
+          heading.className = 'category-heading';
+          heading.id = 'category-' + category.key.toLowerCase();
+
+          var icon = createTextElement('span', 'category-icon', category.icon);
+          icon.setAttribute('aria-hidden', 'true');
+          heading.appendChild(icon);
+          heading.appendChild(document.createTextNode(category.label));
+
+          var blurb = createTextElement('p', 'category-blurb', category.blurb);
+          var grid = document.createElement('div');
+          grid.className = 'tools-grid';
+
+          data.tools.filter(function (tool) {
+            return tool.category === category.key;
+          }).forEach(function (tool) {
+            var card = document.createElement('a');
+            card.className = 'tool-card';
+            card.href = toolsBaseUrl + tool.slug;
+
+            card.appendChild(createTextElement('h3', '', tool.title));
+            card.appendChild(createTextElement('p', '', tool.lead));
+            card.appendChild(createTextElement('span', 'tool-cta', 'Open tool →'));
+            grid.appendChild(card);
+          });
+
+          section.appendChild(heading);
+          section.appendChild(blurb);
+          section.appendChild(grid);
+          fragment.appendChild(section);
+        });
+
+        root.className = '';
+        root.replaceChildren(fragment);
+      }
+
+      fetch('./data.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Could not load tools');
+          return response.json();
+        })
+        .then(renderHub)
+        .catch(function () {
+          root.textContent = 'Tools could not be loaded. Please refresh the page.';
+        });
+    })();
+  </script>
+</body>
+</html>

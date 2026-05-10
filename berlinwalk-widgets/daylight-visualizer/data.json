@@ -1,0 +1,19 @@
+{
+  "june": {
+    "label": "JUNE 21",
+    "longLabel": "June 21 (summer solstice)",
+    "sunrise": "04:43",
+    "sunset": "21:33",
+    "daylightMinutes": 1010,
+    "daylightDisplay": "16h 50m"
+  },
+  "december": {
+    "label": "DEC 21",
+    "longLabel": "December 21 (winter solstice)",
+    "sunrise": "08:15",
+    "sunset": "15:54",
+    "daylightMinutes": 459,
+    "daylightDisplay": "7h 39m"
+  },
+  "comparisonText": "Berlin gets 9 hours 11 minutes more daylight in June than December."
+}

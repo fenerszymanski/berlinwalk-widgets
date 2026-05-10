@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Things to Do in Berlin: Map of 12 No-Cost Attractions | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-free-map">
+  <style>
+    #bw-free-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-free-map * { box-sizing: border-box; }
+    #bw-free-map .bw-wrap { border: 1px solid var(--bw-border); border-radius: 14px; background: var(--bw-white); overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+    #bw-free-map .bw-head { background: var(--bw-green); padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
+    #bw-free-map .bw-head-icon { font-size: 18px; line-height: 1; }
+    #bw-free-map .bw-kicker { color: var(--bw-yellow); font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; }
+    #bw-free-map .bw-body { background: #FAFAF5; padding: 16px 18px; }
+    #bw-free-map .bw-hint { font-size: 13px; color: var(--bw-muted); margin: 0 0 14px; line-height: 1.55; }
+    #bw-free-map .bw-map-container { width: 100%; height: 460px; border-radius: 10px; overflow: hidden; border: 1px solid var(--bw-border); background: #E8EEDC; position: relative; }
+    #bw-free-map .bw-map { width: 100%; height: 100%; z-index: 1; }
+    #bw-free-map .leaflet-container { font-family: Montserrat, Arial, sans-serif; background: #E8EEDC; }
+    #bw-free-map .leaflet-popup-content-wrapper { border-radius: 12px; padding: 0; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border: 1px solid var(--bw-border); }
+    #bw-free-map .leaflet-popup-content { margin: 0; width: 240px !important; font-family: inherit; }
+    #bw-free-map .bw-popup-head { background: var(--bw-green); padding: 10px 14px; border-radius: 11px 11px 0 0; }
+    #bw-free-map .bw-popup-cat { color: var(--bw-yellow); font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 2px; }
+    #bw-free-map .bw-popup-name { color: var(--bw-white); font-size: 15px; font-weight: 800; line-height: 1.25; }
+    #bw-free-map .bw-popup-body { padding: 12px 14px; font-size: 12.5px; color: var(--bw-text); line-height: 1.55; }
+    #bw-free-map .bw-popup-tip { margin-top: 8px; padding-top: 8px; border-top: 1px solid #E8EEDC; color: var(--bw-muted); font-size: 11.5px; font-style: italic; }
+    #bw-free-map .bw-marker { width: 30px; height: 30px; background: var(--bw-green); border: 3px solid var(--bw-yellow); border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    #bw-free-map .bw-marker-inner { transform: rotate(45deg); color: var(--bw-yellow); font-size: 12px; font-weight: 800; line-height: 1; }
+    #bw-free-map .bw-count { font-size: 11px; color: var(--bw-muted); margin-top: 10px; text-align: center; }
+    #bw-free-map .bw-count strong { color: var(--bw-green); font-weight: 800; }
+    @media (max-width: 520px) {
+      #bw-free-map { margin: 22px 0; }
+      #bw-free-map .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-free-map .bw-head-icon { font-size: 16px; }
+      #bw-free-map .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-free-map .bw-body { padding: 14px; }
+      #bw-free-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-free-map .bw-map-container { height: 380px; }
+      #bw-free-map .leaflet-popup-content { width: 210px !important; }
+      #bw-free-map .bw-popup-name { font-size: 14px; }
+      #bw-free-map .bw-popup-body { font-size: 11.5px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🗺️</span>
+      <span class="bw-kicker">12 Free Things to Do in Central Berlin</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">Tap any pin for the story. Every site below is free of charge — many cluster within 30 minutes' walk of each other in central Berlin.</p>
+      <div class="bw-map-container"><div class="bw-map" id="bw-free-map-canvas"></div></div>
+      <p class="bw-count"><strong>12</strong> free things to see — combined: 2–3 days of zero-attraction-budget Berlin</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-free-map');
+      if (!root) return;
+
+      var attractions = [
+        { name: "Reichstag Dome", cat: "Architecture & view", lat: 52.5186, lng: 13.3762,
+          body: "Free panoramic 360° city view from inside Norman Foster's glass dome over the German parliament.",
+          tip: "Free entry but you must register online 2 weeks ahead at bundestag.de. Bring your passport." },
+        { name: "Brandenburg Gate", cat: "Iconic landmark", lat: 52.5163, lng: 13.3777,
+          body: "Berlin's most photographed monument and a symbol of German reunification — open 24/7, no ticket.",
+          tip: "Best at sunrise for empty photos and warm light." },
+        { name: "Holocaust Memorial", cat: "Memorial", lat: 52.5139, lng: 13.3784,
+          body: "2,711 concrete slabs forming a powerful field-of-stelae memorial. Open day and night, no entry fee.",
+          tip: "The free underground information center closes Mondays — visit Tue–Sun." },
+        { name: "Tiergarten", cat: "Park", lat: 52.5145, lng: 13.3500,
+          body: "Berlin's central park — bigger than Hyde Park. Walking trails, beer gardens, the Victory Column at the heart.",
+          tip: "Rent a bike; the park is huge and loops connect to the Spree riverside." },
+        { name: "East Side Gallery", cat: "Outdoor gallery", lat: 52.5052, lng: 13.4393,
+          body: "1.3 km stretch of the original Berlin Wall painted by 100+ artists in 1990. The largest open-air gallery on Earth.",
+          tip: "Mühlenstraße side has the famous murals; Spree side has photo angles tourists miss." },
+        { name: "Topography of Terror", cat: "Open-air exhibit", lat: 52.5066, lng: 13.3823,
+          body: "Outdoor + indoor exhibition on the site of the former Gestapo and SS headquarters. Powerful and free.",
+          tip: "Plan ~1.5 hours. Combined with the adjacent Berlin Wall section, an essential stop." },
+        { name: "Mauerpark", cat: "Park & flea market", lat: 52.5424, lng: 13.4015,
+          body: "Old border strip turned park. Sundays bring an enormous flea market and the legendary Bearpit Karaoke.",
+          tip: "Sundays only for the full atmosphere — 11 AM onward in summer." },
+        { name: "Berlin Wall Memorial", cat: "Open-air memorial", lat: 52.5359, lng: 13.3893,
+          body: "The most authentic preserved section of the Wall, with watchtower, death strip, and a documentation center.",
+          tip: "Free outdoor exhibit with audio commentary via the smartphone app. Allow 1–2 hours." },
+        { name: "Museum Island (exterior)", cat: "Architecture", lat: 52.5167, lng: 13.3995,
+          body: "UNESCO World Heritage ensemble of five museums on a Spree island. The buildings and surroundings are free to wander.",
+          tip: "The Alte Nationalgalerie's outdoor staircase has one of the city's best free views toward the TV Tower." },
+        { name: "Humboldt Forum (free wings)", cat: "Museum", lat: 52.5176, lng: 13.4019,
+          body: "The Palace Cellar, Sculpture Hall, Video Panorama, Humboldt Lab, and stairwell exhibitions are all free.",
+          tip: "Paid wings are €14 — the free wings alone justify a 1–2 hour visit." },
+        { name: "Alexanderplatz & World Clock", cat: "Square", lat: 52.5219, lng: 13.4133,
+          body: "Berlin's busiest square. The 1969 World Clock (Weltzeituhr) is the meeting point for our free walking tour.",
+          tip: "Stand under the World Clock for the classic Berlin tourist photo — and pick a meeting time." },
+        { name: "Berliner Dom (exterior + steps)", cat: "Cathedral", lat: 52.5191, lng: 13.4006,
+          body: "Berlin's largest church. Inside is paid (€9), but the outside, the Lustgarten, and the riverside steps are free.",
+          tip: "Sunset light on the green dome from Liebknecht Bridge is one of Berlin's best free photo spots." }
+      ];
+
+      var mapEl = document.getElementById('bw-free-map-canvas');
+      var map = L.map(mapEl, { center: [52.519, 13.395], zoom: 13, scrollWheelZoom: false, tap: true });
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      function icon(num) {
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: '<div class="bw-marker"><span class="bw-marker-inner">' + num + '</span></div>',
+          iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -30]
+        });
+      }
+
+      function popup(loc) {
+        var tip = loc.tip ? '<div class="bw-popup-tip">' + loc.tip + '</div>' : '';
+        return '<div class="bw-popup-head">'
+          + '<span class="bw-popup-cat">' + loc.cat + '</span>'
+          + '<div class="bw-popup-name">' + loc.name + '</div></div>'
+          + '<div class="bw-popup-body">' + loc.body + tip + '</div>';
+      }
+
+      attractions.forEach(function (loc, i) {
+        L.marker([loc.lat, loc.lng], { icon: icon(i + 1) })
+          .bindPopup(popup(loc), { closeButton: true, maxWidth: 260 })
+          .addTo(map);
+      });
+
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+</div>
+</body>
+</html>

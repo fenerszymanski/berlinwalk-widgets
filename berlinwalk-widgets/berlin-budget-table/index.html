@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Daily Budget 2026: Backpacker, Mid-range, Comfort | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-budget-table">
+  <style>
+    #bw-budget-table {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-budget-table * { box-sizing: border-box; }
+    #bw-budget-table .bw-wrap { border: 1px solid var(--bw-border); border-radius: 14px; background: var(--bw-white); overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+    #bw-budget-table .bw-head { background: var(--bw-green); padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
+    #bw-budget-table .bw-icon { font-size: 18px; line-height: 1; }
+    #bw-budget-table .bw-kicker { color: var(--bw-yellow); font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; }
+    #bw-budget-table .bw-body { background: var(--bw-white); overflow-x: auto; }
+    #bw-budget-table table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
+    #bw-budget-table col.c1 { width: 22%; } #bw-budget-table col.cc { width: 26%; }
+    #bw-budget-table thead th { padding: 14px 12px; text-align: left; border-bottom: 1px solid var(--bw-border); border-top: 0.5px solid var(--bw-border); background: #FAFAF5; }
+    #bw-budget-table thead th.cat-h { color: var(--bw-muted); font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; }
+    #bw-budget-table thead th.col-h { vertical-align: top; }
+    #bw-budget-table .bw-style { font-size: 13px; font-weight: 800; color: var(--bw-green); display: block; line-height: 1.2; }
+    #bw-budget-table .bw-tag { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; margin-top: 6px; background: #EAF3DE; color: #27500A; }
+    #bw-budget-table .bw-tag.mid { background: #FFF3D6; color: #7A5500; }
+    #bw-budget-table .bw-tag.lux { background: #E0F2F1; color: #00574B; }
+    #bw-budget-table tbody td { padding: 13px 12px; border-bottom: 0.5px solid var(--bw-border); vertical-align: top; line-height: 1.5; font-size: 12.5px; color: var(--bw-text); }
+    #bw-budget-table tbody td:first-child { font-weight: 800; color: var(--bw-green); }
+    #bw-budget-table tbody tr:last-child td { border-bottom: none; }
+    #bw-budget-table tbody tr.total td { background: #F2F8E8; font-weight: 800; }
+    #bw-budget-table tbody tr.total td:first-child { color: var(--bw-green); }
+    #bw-budget-table tbody tr.total .bw-amount { font-size: 16px; color: var(--bw-green); }
+    #bw-budget-table .bw-amount { font-weight: 800; font-size: 13px; }
+    #bw-budget-table .bw-detail { display: block; color: var(--bw-muted); font-size: 11.5px; font-weight: 500; margin-top: 3px; line-height: 1.45; }
+    #bw-budget-table .bw-footer { padding: 11px 20px; background: #FAFAF5; border-top: 1px solid var(--bw-border); font-size: 11px; color: var(--bw-muted); line-height: 1.5; }
+    @media (max-width: 600px) {
+      #bw-budget-table .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-budget-table .bw-icon { font-size: 16px; }
+      #bw-budget-table .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-budget-table table, #bw-budget-table thead, #bw-budget-table tbody, #bw-budget-table tr, #bw-budget-table th, #bw-budget-table td { display: block; }
+      #bw-budget-table thead { display: none; }
+      #bw-budget-table tbody tr { border: 1px solid var(--bw-border); border-radius: 10px; margin: 10px 14px; padding: 10px 12px; background: var(--bw-white); }
+      #bw-budget-table tbody tr.total { background: #F2F8E8; }
+      #bw-budget-table tbody td { border: none; padding: 5px 0; font-size: 12.5px; }
+      #bw-budget-table tbody td::before { content: attr(data-label); display: block; font-size: 9.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--bw-muted); margin-bottom: 2px; }
+      #bw-budget-table tbody td[data-label="Category"]::before { display: none; }
+      #bw-budget-table tbody td[data-label="Category"] { font-size: 14px; margin-bottom: 6px; }
+      #bw-budget-table .bw-footer { padding: 10px 14px; font-size: 10.5px; }
+    }
+  </style>
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-icon" aria-hidden="true">📊</span>
+      <span class="bw-kicker">Berlin Daily Budget — 2026</span>
+    </div>
+    <div class="bw-body">
+      <table>
+        <colgroup><col class="c1"><col class="cc"><col class="cc"><col class="cc"></colgroup>
+        <thead>
+          <tr>
+            <th class="cat-h">Category</th>
+            <th class="col-h"><span class="bw-style">Backpacker</span><span class="bw-tag">€60–90/day</span></th>
+            <th class="col-h"><span class="bw-style">Mid-range</span><span class="bw-tag mid">€120–250/day</span></th>
+            <th class="col-h"><span class="bw-style">Comfort</span><span class="bw-tag lux">€370–500/day</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td data-label="Category">Accommodation</td>
+            <td data-label="Backpacker"><span class="bw-amount">€30–45</span><span class="bw-detail">Hostel dorm bed, central neighborhood</span></td>
+            <td data-label="Mid-range"><span class="bw-amount">€90–130</span><span class="bw-detail">3-star hotel, central</span></td>
+            <td data-label="Comfort"><span class="bw-amount">€160–280</span><span class="bw-detail">4-star or boutique hotel</span></td>
+          </tr>
+          <tr>
+            <td data-label="Category">Food</td>
+            <td data-label="Backpacker"><span class="bw-amount">€15–25</span><span class="bw-detail">Bakery + döner + supermarket cooking</span></td>
+            <td data-label="Mid-range"><span class="bw-amount">€30–45</span><span class="bw-detail">Lunch special + restaurant dinner</span></td>
+            <td data-label="Comfort"><span class="bw-amount">€70–100</span><span class="bw-detail">Restaurants throughout, occasional fine dining</span></td>
+          </tr>
+          <tr>
+            <td data-label="Category">Transport</td>
+            <td data-label="Backpacker"><span class="bw-amount">€5–12</span><span class="bw-detail">Day ticket + a lot of walking</span></td>
+            <td data-label="Mid-range"><span class="bw-amount">€11–15</span><span class="bw-detail">Day ticket, occasional U/S-Bahn</span></td>
+            <td data-label="Comfort"><span class="bw-amount">€15–25</span><span class="bw-detail">Day ticket plus the occasional taxi</span></td>
+          </tr>
+          <tr>
+            <td data-label="Category">Attractions</td>
+            <td data-label="Backpacker"><span class="bw-amount">€0–10</span><span class="bw-detail">Free sights only; one paid museum a few days</span></td>
+            <td data-label="Mid-range"><span class="bw-amount">€15–30</span><span class="bw-detail">1–2 paid museums per day</span></td>
+            <td data-label="Comfort"><span class="bw-amount">€30–60</span><span class="bw-detail">Premium tickets, bundled passes</span></td>
+          </tr>
+          <tr>
+            <td data-label="Category">Drinks &amp; nightlife</td>
+            <td data-label="Backpacker"><span class="bw-amount">€5–10</span><span class="bw-detail">Späti beer or two on a bench</span></td>
+            <td data-label="Mid-range"><span class="bw-amount">€15–30</span><span class="bw-detail">A few beers in a bar, an occasional cocktail</span></td>
+            <td data-label="Comfort"><span class="bw-amount">€40–60</span><span class="bw-detail">Cocktail bars, club entry on weekends</span></td>
+          </tr>
+          <tr class="total">
+            <td data-label="Category">Per-day total</td>
+            <td data-label="Backpacker"><span class="bw-amount">€60–90</span></td>
+            <td data-label="Mid-range"><span class="bw-amount">€120–250</span></td>
+            <td data-label="Comfort"><span class="bw-amount">€370–500</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bw-footer">Numbers reflect honest 2026 averages for a central stay. Off-center neighborhoods (Wedding, Neukölln, Moabit) lower accommodation by 30–50% with the same transport access.</div>
+  </div>
+</div>
+</body>
+</html>
