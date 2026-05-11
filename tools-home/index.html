@@ -346,9 +346,19 @@
 
         try {
           window.top.location.href = link.href;
+          return;
         } catch (error) {
-          window.open(link.href, '_blank', 'noopener');
+          /* Top-frame navigation blocked by sandbox; try the parent frame. */
         }
+
+        try {
+          window.parent.location.href = link.href;
+          return;
+        } catch (error) {
+          /* Parent-frame navigation also blocked; fall back to the iframe itself. */
+        }
+
+        window.location.href = link.href;
       }
 
       function renderTools(data) {
