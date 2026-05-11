@@ -1,0 +1,65 @@
+{
+  "stats": {
+    "rating": "5.0",
+    "countriesCount": "18+"
+  },
+  "links": {
+    "freetour": "https://www.freetour.com/REPLACE"
+  },
+  "reviews": [
+    {
+      "id": "samyukta-india",
+      "quote": "Yusuf the tour guide was EXTRAORDINARY. You must take his tour for a thoughtful, funny and well-timed experience. Bonus: he'll show you great photograph spots.",
+      "author": "Samyukta V.",
+      "country": "India",
+      "flag": "🇮🇳",
+      "rating": 5,
+      "date": "Mar 2026"
+    },
+    {
+      "id": "michal-poland",
+      "quote": "I've done a couple of tours in Berlin before and honestly they all focused on the Wall, Cold War stuff. This one felt completely different. It's more about the real origins of Berlin, where the city actually started and how much of it disappeared.",
+      "author": "Michal D.",
+      "country": "Poland",
+      "flag": "🇵🇱",
+      "rating": 5,
+      "date": "Feb 2026"
+    },
+    {
+      "id": "karen-usa",
+      "quote": "Yusuf managed to navigate through centuries of history, from the Red Town Hall and St. Mary's Church to the futuristic skyline of Alexanderplatz. Every stop felt relevant and engaging.",
+      "author": "Karen Sells Brown",
+      "country": "USA",
+      "flag": "🇺🇸",
+      "rating": 5,
+      "date": "May 2026"
+    },
+    {
+      "id": "casper-denmark",
+      "quote": "Charismatic and knowledgeable guide, capable of drawing comparisons between East Germany and DDR. The use of pictures and maps helped a lot with understanding Berlin's history from the 17th century till today.",
+      "author": "Casper Bollerup Neuer",
+      "country": "Denmark",
+      "flag": "🇩🇰",
+      "rating": 5,
+      "date": "Mar 2026"
+    },
+    {
+      "id": "mikkel-denmark",
+      "quote": "I was traveling solo and decided to try this tour, so glad I did. Yusuf was super knowledgeable and funny, making the walk really enjoyable. If you want interesting stories while wandering Berlin, this is the one.",
+      "author": "Mikkel Sørensen",
+      "country": "Denmark",
+      "flag": "🇩🇰",
+      "rating": 5,
+      "date": "Mar 2026"
+    },
+    {
+      "id": "michal-czechia",
+      "quote": "Yusuf is a kind man, easy going, communication is fluent. I like the guidance through historical Berlin. I recommend it especially for beginners or for those looking for a brief, short tour.",
+      "author": "Michal D.",
+      "country": "Czechia",
+      "flag": "🇨🇿",
+      "rating": 5,
+      "date": "Feb 2026"
+    }
+  ]
+}

@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Traveler Testimonials</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    html,
+    body {
+      background: var(--cream);
+    }
+
+    #bw-testimonials {
+      --serif: Merriweather, Georgia, serif;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 64px 24px;
+    }
+
+    #bw-testimonials * {
+      box-sizing: border-box;
+    }
+
+    #bw-testimonials h2,
+    #bw-testimonials p {
+      margin-top: 0;
+    }
+
+    #bw-testimonials .testimonials-inner {
+      margin: 0 auto;
+      max-width: 1100px;
+      text-align: center;
+    }
+
+    #bw-testimonials .testimonials-header {
+      margin: 0 auto;
+      max-width: 760px;
+    }
+
+    #bw-testimonials .eyebrow {
+      align-items: center;
+      color: var(--brand-green);
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 12px;
+      font-weight: 700;
+      gap: 8px;
+      justify-content: center;
+      letter-spacing: 1.4px;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    #bw-testimonials .eyebrow-stars {
+      color: var(--brand-yellow);
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    #bw-testimonials .eyebrow-text {
+      white-space: nowrap;
+    }
+
+    #bw-testimonials .testimonials-title {
+      color: var(--brand-green);
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 0;
+      margin-top: 12px;
+    }
+
+    #bw-testimonials .testimonials-lead {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.6;
+      margin: 12px auto 0;
+      max-width: 580px;
+    }
+
+    #bw-testimonials .carousel-shell {
+      background: var(--bw-white);
+      border-radius: 20px;
+      box-shadow: 0 4px 24px rgba(27, 94, 32, 0.08);
+      margin-top: 40px;
+      min-height: 360px;
+      overflow: hidden;
+      padding: 56px 64px;
+      position: relative;
+    }
+
+    #bw-testimonials .carousel-shell::before {
+      color: var(--brand-yellow);
+      content: "\"";
+      font-size: 140px;
+      font-weight: 800;
+      left: 32px;
+      line-height: 0.7;
+      position: absolute;
+      top: 20px;
+      z-index: 0;
+    }
+
+    #bw-testimonials .carousel-region {
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-testimonials .review-slide {
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 300ms ease-out, transform 300ms ease-out;
+    }
+
+    #bw-testimonials .review-slide.is-entering {
+      opacity: 0;
+      transform: translateX(12px);
+    }
+
+    #bw-testimonials .review-quote {
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 22px;
+      font-style: italic;
+      line-height: 1.55;
+      margin: 0 auto;
+      max-width: 720px;
+    }
+
+    #bw-testimonials .review-stars {
+      color: var(--brand-yellow);
+      display: flex;
+      font-size: 18px;
+      gap: 4px;
+      justify-content: center;
+      line-height: 1;
+      margin-top: 24px;
+    }
+
+    #bw-testimonials .review-author {
+      margin-top: 16px;
+      text-align: center;
+    }
+
+    #bw-testimonials .review-name {
+      color: var(--brand-green);
+      display: block;
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    #bw-testimonials .review-country {
+      color: var(--muted);
+      display: block;
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-top: 2px;
+    }
+
+    #bw-testimonials .error-message {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 16px;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-testimonials .carousel-dots {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    #bw-testimonials .carousel-dot {
+      align-items: center;
+      appearance: none;
+      background: transparent;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      height: 24px;
+      justify-content: center;
+      padding: 0;
+      transition: width 200ms ease-out;
+      width: 24px;
+    }
+
+    #bw-testimonials .carousel-dot::before {
+      background: var(--light-green);
+      border-radius: 999px;
+      content: "";
+      display: block;
+      height: 10px;
+      transition: background 200ms ease-out, width 200ms ease-out;
+      width: 10px;
+    }
+
+    #bw-testimonials .carousel-dot[aria-current="true"]::before {
+      background: var(--brand-green);
+      width: 28px;
+    }
+
+    #bw-testimonials .carousel-dot[aria-current="true"] {
+      width: 28px;
+    }
+
+    #bw-testimonials .carousel-dot:focus-visible {
+      outline: 3px solid rgba(27, 94, 32, 0.3);
+      outline-offset: 2px;
+    }
+
+    #bw-testimonials .trust-strip {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1.7;
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    #bw-testimonials .trust-strip a {
+      color: var(--brand-green);
+      font-family: Montserrat, Arial, sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    #bw-testimonials .trust-strip a:hover,
+    #bw-testimonials .trust-strip a:focus-visible {
+      text-decoration: underline;
+    }
+
+    #bw-testimonials .trust-strip a:focus-visible,
+    #bw-testimonials .booking-cta:focus-visible {
+      outline: 3px solid rgba(27, 94, 32, 0.3);
+      outline-offset: 3px;
+    }
+
+    #bw-testimonials .cta-row {
+      margin-top: 32px;
+      text-align: center;
+    }
+
+    #bw-testimonials .booking-cta {
+      background: var(--brand-yellow);
+      border-radius: 10px;
+      color: var(--brand-green);
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      padding: 14px 28px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+
+    #bw-testimonials .booking-cta:hover,
+    #bw-testimonials .booking-cta:focus-visible {
+      background: #fff04a;
+      transform: translateY(-1px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #bw-testimonials .review-slide,
+      #bw-testimonials .carousel-dot,
+      #bw-testimonials .carousel-dot::before,
+      #bw-testimonials .booking-cta {
+        transition: none;
+      }
+
+      #bw-testimonials .review-slide.is-entering {
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-testimonials {
+        padding: 40px 16px;
+      }
+
+      #bw-testimonials .eyebrow {
+        gap: 6px;
+        letter-spacing: 1px;
+      }
+
+      #bw-testimonials .testimonials-title {
+        font-size: 26px;
+      }
+
+      #bw-testimonials .testimonials-lead {
+        font-size: 14px;
+      }
+
+      #bw-testimonials .carousel-shell {
+        margin-top: 40px;
+        min-height: 340px;
+        padding: 32px 24px;
+      }
+
+      #bw-testimonials .carousel-shell::before {
+        font-size: 90px;
+        left: 18px;
+        top: 18px;
+      }
+
+      #bw-testimonials .review-quote {
+        font-size: 17px;
+        max-width: 100%;
+      }
+
+      #bw-testimonials .trust-strip {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 300px;
+      }
+
+      #bw-testimonials .booking-cta {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 380px) {
+      #bw-testimonials .booking-cta {
+        display: block;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="bw-testimonials" aria-labelledby="testimonials-title">
+    <div class="testimonials-inner">
+      <header class="testimonials-header">
+        <div class="eyebrow" aria-label="Five star rating and traveler count">
+          <span class="eyebrow-stars" aria-hidden="true">★★★★★</span>
+          <span class="eyebrow-text"><span id="rating-value">5.0</span> rating</span>
+          <span aria-hidden="true">·</span>
+          <span class="eyebrow-text">Travelers from <span id="countries-count">18+</span> countries</span>
+        </div>
+        <h2 id="testimonials-title" class="testimonials-title">Words from people I've walked with</h2>
+        <p class="testimonials-lead">Honest reviews from real travelers. No edits, no filters.</p>
+      </header>
+
+      <div id="carousel-shell" class="carousel-shell">
+        <div
+          id="carousel-region"
+          class="carousel-region"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Traveler reviews"
+          aria-live="polite"
+        >
+          <p class="error-message">Loading reviews...</p>
+        </div>
+      </div>
+
+      <div id="carousel-dots" class="carousel-dots" aria-label="Choose review"></div>
+
+      <div id="trust-strip" class="trust-strip"></div>
+
+      <div class="cta-row">
+        <a
+          class="booking-cta"
+          href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
+          target="_top"
+          rel="noopener"
+        >Reserve your spot →</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var ratingValue = document.getElementById('rating-value');
+      var countriesCount = document.getElementById('countries-count');
+      var shell = document.getElementById('carousel-shell');
+      var region = document.getElementById('carousel-region');
+      var dots = document.getElementById('carousel-dots');
+      var trustStrip = document.getElementById('trust-strip');
+      var reviews = [];
+      var currentIndex = 0;
+      var timer = 0;
+      var isPaused = false;
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var touchStartX = 0;
+      var touchStartY = 0;
+      var lastReported = 0;
+      var pendingResize = false;
+
+      function createTextElement(tag, className, text) {
+        var element = document.createElement(tag);
+        if (className) element.className = className;
+        element.textContent = text;
+        return element;
+      }
+
+      function contentHeight() {
+        var body = document.body;
+        if (!body || !body.children || !body.children.length) return 0;
+
+        var max = 0;
+        for (var i = 0; i < body.children.length; i++) {
+          var child = body.children[i];
+          var rect = child.getBoundingClientRect();
+          var cs = window.getComputedStyle ? window.getComputedStyle(child) : null;
+          var marginBottom = cs ? (parseFloat(cs.marginBottom) || 0) : 0;
+          var bottom = rect.bottom + marginBottom;
+          if (bottom > max) max = bottom;
+        }
+
+        return Math.ceil(max);
+      }
+
+      function reportResize() {
+        var height = contentHeight();
+        if (height <= 0 || Math.abs(height - lastReported) <= 2) return;
+
+        lastReported = height;
+        try {
+          window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
+        } catch (error) {
+          /* Parent is unreachable, so there is nothing to resize. */
+        }
+      }
+
+      function requestResize() {
+        if (pendingResize) return;
+        pendingResize = true;
+        (window.requestAnimationFrame || function (callback) { setTimeout(callback, 16); })(function () {
+          pendingResize = false;
+          reportResize();
+        });
+      }
+
+      function starRow(rating) {
+        var row = document.createElement('div');
+        row.className = 'review-stars';
+        row.setAttribute('aria-label', String(rating || 5) + ' out of 5 stars');
+
+        for (var i = 0; i < 5; i++) {
+          var star = document.createElement('span');
+          star.setAttribute('aria-hidden', 'true');
+          star.textContent = '★';
+          row.appendChild(star);
+        }
+
+        return row;
+      }
+
+      function renderReview(index, animate) {
+        if (!reviews.length) return;
+
+        var review = reviews[index];
+        var article = document.createElement('article');
+        article.className = 'review-slide';
+        article.setAttribute('aria-roledescription', 'slide');
+        article.setAttribute('aria-label', 'Review ' + (index + 1) + ' of ' + reviews.length);
+
+        article.appendChild(createTextElement('p', 'review-quote', review.quote));
+        article.appendChild(starRow(review.rating));
+
+        var author = document.createElement('div');
+        author.className = 'review-author';
+        author.appendChild(createTextElement('span', 'review-name', review.author));
+        author.appendChild(createTextElement('span', 'review-country', review.country + ' ' + review.flag));
+        article.appendChild(author);
+
+        if (animate && !reduceMotion) {
+          article.classList.add('is-entering');
+        }
+
+        region.replaceChildren(article);
+
+        if (animate && !reduceMotion) {
+          article.getBoundingClientRect();
+          article.classList.remove('is-entering');
+        }
+
+        updateDots();
+        requestResize();
+      }
+
+      function updateDots() {
+        Array.prototype.forEach.call(dots.querySelectorAll('button'), function (dot, index) {
+          if (index === currentIndex) {
+            dot.setAttribute('aria-current', 'true');
+          } else {
+            dot.removeAttribute('aria-current');
+          }
+        });
+      }
+
+      function goToReview(index, animate) {
+        if (!reviews.length) return;
+        currentIndex = (index + reviews.length) % reviews.length;
+        renderReview(currentIndex, animate);
+        restartAutoRotate();
+      }
+
+      function nextReview() {
+        goToReview(currentIndex + 1, true);
+      }
+
+      function previousReview() {
+        goToReview(currentIndex - 1, true);
+      }
+
+      function stopAutoRotate() {
+        if (timer) {
+          window.clearInterval(timer);
+          timer = 0;
+        }
+      }
+
+      function startAutoRotate() {
+        if (reduceMotion || isPaused || reviews.length <= 1 || timer) return;
+        timer = window.setInterval(nextReview, 7000);
+      }
+
+      function restartAutoRotate() {
+        stopAutoRotate();
+        startAutoRotate();
+      }
+
+      function renderDots() {
+        var fragment = document.createDocumentFragment();
+
+        reviews.forEach(function (review, index) {
+          var dot = document.createElement('button');
+          dot.className = 'carousel-dot';
+          dot.type = 'button';
+          dot.setAttribute('aria-label', 'Go to review ' + (index + 1) + ' of ' + reviews.length);
+          dot.addEventListener('click', function () {
+            goToReview(index, true);
+          });
+          fragment.appendChild(dot);
+        });
+
+        dots.replaceChildren(fragment);
+      }
+
+      function link(label, href) {
+        var anchor = document.createElement('a');
+        anchor.href = href;
+        anchor.target = '_top';
+        anchor.rel = 'noopener';
+        anchor.textContent = label;
+        return anchor;
+      }
+
+      function renderTrustStrip(links) {
+        trustStrip.appendChild(document.createTextNode('Read all reviews on: '));
+        trustStrip.appendChild(link('FreeTour.com', links.freetour));
+      }
+
+      function renderTestimonials(data) {
+        reviews = Array.isArray(data.reviews) ? data.reviews : [];
+        if (!reviews.length) throw new Error('No reviews found');
+
+        ratingValue.textContent = data.stats && data.stats.rating ? data.stats.rating : '5.0';
+        countriesCount.textContent = data.stats && data.stats.countriesCount ? data.stats.countriesCount : '18+';
+
+        renderDots();
+        renderTrustStrip(data.links || {});
+        renderReview(0, false);
+        startAutoRotate();
+      }
+
+      function renderError() {
+        stopAutoRotate();
+        dots.replaceChildren();
+        trustStrip.replaceChildren();
+        region.replaceChildren(createTextElement('p', 'error-message', 'Reviews could not be loaded.'));
+        requestResize();
+      }
+
+      shell.addEventListener('mouseenter', function () {
+        isPaused = true;
+        stopAutoRotate();
+      });
+
+      shell.addEventListener('mouseleave', function () {
+        isPaused = false;
+        startAutoRotate();
+      });
+
+      shell.addEventListener('focusin', function () {
+        isPaused = true;
+        stopAutoRotate();
+      });
+
+      shell.addEventListener('focusout', function () {
+        isPaused = false;
+        startAutoRotate();
+      });
+
+      dots.addEventListener('focusin', function () {
+        isPaused = true;
+        stopAutoRotate();
+      });
+
+      dots.addEventListener('focusout', function () {
+        isPaused = false;
+        startAutoRotate();
+      });
+
+      dots.addEventListener('keydown', function (event) {
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          nextReview();
+          var nextDot = dots.querySelectorAll('button')[currentIndex];
+          if (nextDot) nextDot.focus();
+        }
+
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          previousReview();
+          var previousDot = dots.querySelectorAll('button')[currentIndex];
+          if (previousDot) previousDot.focus();
+        }
+      });
+
+      shell.addEventListener('touchstart', function (event) {
+        if (!event.changedTouches.length) return;
+        touchStartX = event.changedTouches[0].clientX;
+        touchStartY = event.changedTouches[0].clientY;
+      }, { passive: true });
+
+      shell.addEventListener('touchend', function (event) {
+        if (!event.changedTouches.length) return;
+
+        var deltaX = event.changedTouches[0].clientX - touchStartX;
+        var deltaY = event.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(deltaX) < 40 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+
+        if (deltaX < 0) {
+          nextReview();
+        } else {
+          previousReview();
+        }
+      }, { passive: true });
+
+      if (window.matchMedia) {
+        var motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        var motionListener = function (event) {
+          reduceMotion = event.matches;
+          if (reduceMotion) {
+            stopAutoRotate();
+          } else {
+            startAutoRotate();
+          }
+        };
+
+        if (motionQuery.addEventListener) {
+          motionQuery.addEventListener('change', motionListener);
+        } else if (motionQuery.addListener) {
+          motionQuery.addListener(motionListener);
+        }
+      }
+
+      fetch('./data.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Could not load reviews');
+          return response.json();
+        })
+        .then(renderTestimonials)
+        .catch(renderError);
+
+      window.addEventListener('load', requestResize);
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(requestResize).catch(function () {});
+      }
+
+      if (typeof ResizeObserver !== 'undefined') {
+        try { new ResizeObserver(requestResize).observe(document.body); } catch (error) {}
+      }
+
+      requestResize();
+    })();
+  </script>
+</body>
+</html>
