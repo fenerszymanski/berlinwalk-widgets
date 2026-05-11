@@ -1,0 +1,658 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk How It Works</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    html,
+    body {
+      background: var(--cream);
+    }
+
+    #bw-how-it-works {
+      --serif: Merriweather, Georgia, serif;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    #bw-how-it-works * {
+      box-sizing: border-box;
+    }
+
+    #bw-how-it-works h2,
+    #bw-how-it-works h3,
+    #bw-how-it-works p {
+      margin-top: 0;
+    }
+
+    #bw-how-it-works .how-inner {
+      margin: 0 auto;
+      max-width: 1100px;
+    }
+
+    #bw-how-it-works .how-header {
+      margin: 0 auto 56px;
+      max-width: 760px;
+    }
+
+    #bw-how-it-works .how-eyebrow {
+      color: var(--brand-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      line-height: 1.35;
+      text-transform: uppercase;
+    }
+
+    #bw-how-it-works .how-title {
+      color: var(--brand-green);
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.15;
+      margin: 12px auto 0;
+      max-width: 720px;
+    }
+
+    #bw-how-it-works .how-subtitle {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 17px;
+      font-style: italic;
+      line-height: 1.6;
+      margin: 14px auto 0;
+      max-width: 560px;
+    }
+
+    #bw-how-it-works .how-error {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.6;
+      margin: 0;
+      text-align: center;
+    }
+
+    #bw-how-it-works .timeline {
+      display: grid;
+      gap: 28px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      position: relative;
+    }
+
+    #bw-how-it-works .timeline-path {
+      border-top: 2px dashed var(--brand-green);
+      left: calc(100% / 6);
+      opacity: 0.4;
+      position: absolute;
+      top: 50px;
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 700ms ease-out;
+      width: calc(100% * 2 / 3);
+      z-index: 0;
+    }
+
+    #bw-how-it-works.is-visible .timeline-path {
+      transform: scaleX(1);
+    }
+
+    #bw-how-it-works .step {
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-how-it-works .step-node-wrap {
+      display: inline-flex;
+      height: 100px;
+      justify-content: center;
+      position: relative;
+      width: 100px;
+      z-index: 2;
+    }
+
+    #bw-how-it-works .step-node,
+    #bw-how-it-works .step-copy {
+      opacity: 0;
+      transform: scale(0.85);
+      transition: opacity 350ms ease-out, transform 350ms ease-out;
+    }
+
+    #bw-how-it-works .step-copy {
+      transform: translateY(12px);
+    }
+
+    #bw-how-it-works.is-visible .step-node,
+    #bw-how-it-works.is-visible .step-copy {
+      opacity: 1;
+      transform: none;
+    }
+
+    #bw-how-it-works .step:nth-child(2) .step-node,
+    #bw-how-it-works .step:nth-child(2) .step-copy {
+      transition-delay: 100ms;
+    }
+
+    #bw-how-it-works .step:nth-child(3) .step-node,
+    #bw-how-it-works .step:nth-child(3) .step-copy {
+      transition-delay: 300ms;
+    }
+
+    #bw-how-it-works .step:nth-child(4) .step-node,
+    #bw-how-it-works .step:nth-child(4) .step-copy {
+      transition-delay: 500ms;
+    }
+
+    #bw-how-it-works .step-node {
+      align-items: center;
+      background: var(--brand-green);
+      border: 4px solid var(--bw-white);
+      border-radius: 50%;
+      color: var(--bw-white);
+      display: inline-flex;
+      height: 100px;
+      justify-content: center;
+      position: relative;
+      width: 100px;
+      z-index: 2;
+    }
+
+    #bw-how-it-works .step-badge {
+      align-items: center;
+      background: var(--brand-yellow);
+      border-radius: 50%;
+      color: var(--brand-green);
+      display: inline-flex;
+      font-size: 17px;
+      font-weight: 800;
+      height: 32px;
+      justify-content: center;
+      line-height: 1;
+      position: absolute;
+      right: -6px;
+      top: -6px;
+      transform: scale(0);
+      transition: transform 280ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      width: 32px;
+      z-index: 3;
+    }
+
+    #bw-how-it-works.is-visible .step-badge {
+      transform: scale(1);
+    }
+
+    #bw-how-it-works .step:nth-child(2) .step-badge {
+      transition-delay: 300ms;
+    }
+
+    #bw-how-it-works .step:nth-child(3) .step-badge {
+      transition-delay: 500ms;
+    }
+
+    #bw-how-it-works .step:nth-child(4) .step-badge {
+      transition-delay: 700ms;
+    }
+
+    #bw-how-it-works .step-copy {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #bw-how-it-works .time-chip {
+      background: var(--brand-yellow);
+      border-radius: 14px;
+      color: var(--brand-green);
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.1px;
+      line-height: 1.25;
+      margin-top: 16px;
+      padding: 5px 12px;
+      text-transform: uppercase;
+    }
+
+    #bw-how-it-works .step-title {
+      color: var(--brand-green);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin: 12px 0 0;
+    }
+
+    #bw-how-it-works .step-description {
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.55;
+      margin: 8px auto 0;
+      max-width: 260px;
+    }
+
+    #bw-how-it-works .step-description strong {
+      color: var(--brand-green);
+      font-family: Montserrat, Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    #bw-how-it-works .how-cta-row {
+      margin-top: 56px;
+      text-align: center;
+    }
+
+    #bw-how-it-works .how-cta {
+      background: var(--brand-yellow);
+      border-radius: 10px;
+      color: var(--brand-green);
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      line-height: 1.2;
+      padding: 16px 32px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 160ms ease-out, transform 160ms ease-out;
+    }
+
+    #bw-how-it-works .how-cta:hover,
+    #bw-how-it-works .how-cta:focus-visible {
+      background: #fff04a;
+      transform: translateY(-2px);
+    }
+
+    #bw-how-it-works .how-cta:focus-visible {
+      outline: 3px solid var(--bw-white);
+      outline-offset: 3px;
+    }
+
+    #bw-how-it-works .visually-hidden {
+      clip: rect(0 0 0 0);
+      border: 0;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    @media (max-width: 700px) {
+      #bw-how-it-works {
+        padding: 40px 16px;
+        text-align: left;
+      }
+
+      #bw-how-it-works .how-header {
+        margin-bottom: 36px;
+        text-align: center;
+      }
+
+      #bw-how-it-works .how-title {
+        font-size: 26px;
+      }
+
+      #bw-how-it-works .how-subtitle {
+        font-size: 15px;
+      }
+
+      #bw-how-it-works .timeline {
+        display: block;
+      }
+
+      #bw-how-it-works .timeline-path {
+        border-left: 2px dashed var(--brand-green);
+        border-top: 0;
+        bottom: 50px;
+        height: auto;
+        left: 50px;
+        top: 50px;
+        transform: scaleY(0);
+        transform-origin: center top;
+        width: 0;
+      }
+
+      #bw-how-it-works.is-visible .timeline-path {
+        transform: scaleY(1);
+      }
+
+      #bw-how-it-works .step {
+        align-items: flex-start;
+        display: flex;
+        gap: 20px;
+        margin-bottom: 32px;
+      }
+
+      #bw-how-it-works .step:last-child {
+        margin-bottom: 0;
+      }
+
+      #bw-how-it-works .step-node-wrap {
+        flex: 0 0 100px;
+      }
+
+      #bw-how-it-works .step-copy {
+        align-items: flex-start;
+        flex: 1 1 auto;
+        min-width: 0;
+        padding-top: 4px;
+      }
+
+      #bw-how-it-works .time-chip {
+        margin-top: 10px;
+        order: 2;
+      }
+
+      #bw-how-it-works .step-title {
+        font-size: 18px;
+        margin-top: 0;
+        order: 1;
+      }
+
+      #bw-how-it-works .step-description {
+        font-size: 14px;
+        margin-left: 0;
+        max-width: 100%;
+        order: 3;
+      }
+
+      #bw-how-it-works .how-cta-row {
+        margin-top: 36px;
+        text-align: center;
+      }
+
+      #bw-how-it-works .how-cta {
+        padding: 14px 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #bw-how-it-works .timeline-path,
+      #bw-how-it-works .step-node,
+      #bw-how-it-works .step-copy,
+      #bw-how-it-works .step-badge,
+      #bw-how-it-works .how-cta {
+        transition: none;
+      }
+
+      #bw-how-it-works .timeline-path,
+      #bw-how-it-works.is-visible .timeline-path,
+      #bw-how-it-works .step-node,
+      #bw-how-it-works .step-copy,
+      #bw-how-it-works .step-badge {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="bw-how-it-works" role="region" aria-label="How the tour works">
+    <div class="how-inner">
+      <header class="how-header">
+        <span class="how-eyebrow" data-header-eyebrow>HOW IT WORKS</span>
+        <h2 class="how-title" data-header-title>From booking to walking — in three steps</h2>
+        <p class="how-subtitle" data-header-subtitle>Booking takes 30 seconds. The rest is on me.</p>
+      </header>
+
+      <div id="how-root" aria-live="polite">
+        <p class="how-error">Loading...</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var section = document.getElementById('bw-how-it-works');
+      var root = document.getElementById('how-root');
+      var eyebrow = document.querySelector('[data-header-eyebrow]');
+      var title = document.querySelector('[data-header-title]');
+      var subtitle = document.querySelector('[data-header-subtitle]');
+      var lastReported = 0;
+      var pendingResize = false;
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      var icons = {
+        calendar: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>',
+        umbrella: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44" aria-hidden="true"><path d="M22 12a10.06 10.06 0 0 0-20 0Z"/><path d="M12 12v8a2 2 0 0 0 4 0"/><path d="M12 2v1"/></svg>',
+        walking: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="44" height="44" aria-hidden="true"><circle cx="13" cy="4" r="2"/><path d="m15 21-2-4-3-3 1-6"/><path d="m7 14 1.5-3L11 10"/><path d="M3 16h.01"/><path d="m21 21-2-4-3-3"/></svg>'
+      };
+
+      function createTextElement(tag, className, text) {
+        var element = document.createElement(tag);
+        if (className) element.className = className;
+        element.textContent = text || '';
+        return element;
+      }
+
+      function descriptionFragment(text) {
+        var fragment = document.createDocumentFragment();
+        var source = String(text || '');
+        var pattern = /\*\*([^*]+)\*\*/g;
+        var lastIndex = 0;
+        var match;
+
+        while ((match = pattern.exec(source)) !== null) {
+          if (match.index > lastIndex) {
+            fragment.appendChild(document.createTextNode(source.slice(lastIndex, match.index)));
+          }
+
+          var strong = document.createElement('strong');
+          strong.textContent = match[1];
+          fragment.appendChild(strong);
+          lastIndex = pattern.lastIndex;
+        }
+
+        if (lastIndex < source.length) {
+          fragment.appendChild(document.createTextNode(source.slice(lastIndex)));
+        }
+
+        return fragment;
+      }
+
+      function contentHeight() {
+        var body = document.body;
+        if (!body || !body.children || !body.children.length) return 0;
+
+        var max = 0;
+        for (var i = 0; i < body.children.length; i++) {
+          var child = body.children[i];
+          var rect = child.getBoundingClientRect();
+          var cs = window.getComputedStyle ? window.getComputedStyle(child) : null;
+          var marginBottom = cs ? (parseFloat(cs.marginBottom) || 0) : 0;
+          var bottom = rect.bottom + marginBottom;
+          if (bottom > max) max = bottom;
+        }
+
+        return Math.ceil(max);
+      }
+
+      function reportResize() {
+        var height = contentHeight();
+        if (height <= 0 || Math.abs(height - lastReported) <= 2) return;
+
+        lastReported = height;
+        try {
+          window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
+        } catch (error) {
+          /* Parent is unreachable, so there is nothing to resize. */
+        }
+      }
+
+      function requestResize() {
+        if (pendingResize) return;
+        pendingResize = true;
+        (window.requestAnimationFrame || function (callback) { setTimeout(callback, 16); })(function () {
+          pendingResize = false;
+          reportResize();
+        });
+      }
+
+      function navigateParent(event) {
+        var link = event.target.closest('a[href^="https://www.berlinwalk.com/"]');
+        if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+        event.preventDefault();
+
+        try {
+          window.top.location.href = link.href;
+          return;
+        } catch (error) {
+          /* Top-frame navigation blocked by sandbox; try the parent frame. */
+        }
+
+        try {
+          window.parent.location.href = link.href;
+          return;
+        } catch (error) {
+          /* Parent-frame navigation also blocked; fall back to the iframe itself. */
+        }
+
+        window.location.href = link.href;
+      }
+
+      function renderStep(step, index, total) {
+        var article = document.createElement('article');
+        article.className = 'step';
+
+        var nodeWrap = document.createElement('div');
+        nodeWrap.className = 'step-node-wrap';
+
+        var node = document.createElement('div');
+        node.className = 'step-node';
+        node.innerHTML = icons[step.icon] || icons.calendar;
+
+        var badge = document.createElement('span');
+        badge.className = 'step-badge';
+        badge.setAttribute('aria-hidden', 'true');
+        badge.textContent = String(step.number || index + 1);
+
+        nodeWrap.append(node, badge);
+
+        var copy = document.createElement('div');
+        copy.className = 'step-copy';
+
+        var chip = createTextElement('span', 'time-chip', step.timeChip);
+        var heading = document.createElement('h3');
+        heading.className = 'step-title';
+
+        var hidden = document.createElement('span');
+        hidden.className = 'visually-hidden';
+        hidden.textContent = 'Step ' + (step.number || index + 1) + ' of ' + total + ': ';
+
+        heading.appendChild(hidden);
+        heading.appendChild(document.createTextNode(step.title || ''));
+
+        var description = document.createElement('p');
+        description.className = 'step-description';
+        description.appendChild(descriptionFragment(step.description));
+
+        copy.append(chip, heading, description);
+        article.append(nodeWrap, copy);
+        return article;
+      }
+
+      function revealWhenReady() {
+        if (reduceMotion) {
+          section.classList.add('is-visible');
+          requestResize();
+          return;
+        }
+
+        if (!('IntersectionObserver' in window)) {
+          section.classList.add('is-visible');
+          window.setTimeout(requestResize, 1100);
+          return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            section.classList.add('is-visible');
+            window.setTimeout(requestResize, 1100);
+            observer.unobserve(section);
+          });
+        }, { threshold: 0.2 });
+
+        observer.observe(section);
+      }
+
+      function render(data) {
+        var steps = Array.isArray(data.steps) ? data.steps.slice(0, 3) : [];
+        var fragment = document.createDocumentFragment();
+        var timeline = document.createElement('div');
+        var path = document.createElement('div');
+        var ctaRow = document.createElement('div');
+        var cta = document.createElement('a');
+
+        eyebrow.textContent = data.header && data.header.eyebrow ? data.header.eyebrow : '';
+        title.textContent = data.header && data.header.title ? data.header.title : '';
+        subtitle.textContent = data.header && data.header.subtitle ? data.header.subtitle : '';
+
+        timeline.className = 'timeline';
+        path.className = 'timeline-path';
+        path.setAttribute('aria-hidden', 'true');
+        timeline.appendChild(path);
+
+        steps.forEach(function (step, index) {
+          timeline.appendChild(renderStep(step, index, steps.length));
+        });
+
+        ctaRow.className = 'how-cta-row';
+        cta.className = 'how-cta';
+        cta.href = data.cta && data.cta.url ? data.cta.url : '#';
+        cta.target = '_top';
+        cta.rel = 'noopener';
+        cta.textContent = data.cta && data.cta.text ? data.cta.text : 'Book your free spot →';
+        ctaRow.appendChild(cta);
+
+        fragment.append(timeline, ctaRow);
+        root.removeAttribute('aria-live');
+        root.replaceChildren(fragment);
+        requestResize();
+        revealWhenReady();
+      }
+
+      function renderError() {
+        root.setAttribute('aria-live', 'polite');
+        root.replaceChildren(createTextElement('p', 'how-error', 'Could not load this section.'));
+        requestResize();
+      }
+
+      fetch('./data.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Could not load how-it-works data');
+          return response.json();
+        })
+        .then(render)
+        .catch(renderError);
+
+      document.addEventListener('click', navigateParent);
+      window.addEventListener('load', requestResize);
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(requestResize).catch(function () {});
+      }
+
+      if (typeof ResizeObserver !== 'undefined') {
+        try { new ResizeObserver(requestResize).observe(document.body); } catch (error) {}
+      }
+
+      requestResize();
+    })();
+  </script>
+</body>
+</html>
