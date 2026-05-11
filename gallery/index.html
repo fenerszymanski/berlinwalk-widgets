@@ -1,0 +1,672 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Photo Gallery</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    html,
+    body {
+      background: var(--cream);
+    }
+
+    body.is-gallery-locked {
+      overflow: hidden;
+    }
+
+    #bw-gallery {
+      background: var(--cream);
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 64px 24px;
+    }
+
+    #bw-gallery * {
+      box-sizing: border-box;
+    }
+
+    #bw-gallery h2,
+    #bw-gallery p {
+      margin-top: 0;
+    }
+
+    .gallery-inner {
+      margin: 0 auto;
+      max-width: 1280px;
+    }
+
+    .gallery-header {
+      max-width: 840px;
+    }
+
+    .gallery-eyebrow {
+      color: var(--brand-green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      line-height: 1.35;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .gallery-title {
+      color: var(--brand-green);
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 12px 0 0;
+    }
+
+    .gallery-lead {
+      color: var(--muted);
+      font-family: Merriweather, Georgia, serif;
+      font-size: 16px;
+      font-style: italic;
+      line-height: 1.65;
+      margin: 14px 0 0;
+      max-width: 620px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-areas:
+        "a a b c d"
+        "a a e f f"
+        "g g e h h";
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-rows: repeat(3, minmax(160px, 1fr));
+      margin-top: 36px;
+      min-height: 680px;
+    }
+
+    .tile {
+      appearance: none;
+      background: var(--bw-white);
+      border: 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(27, 94, 32, 0.08);
+      cursor: pointer;
+      display: block;
+      min-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0;
+      position: relative;
+      text-align: left;
+      transform: translateY(18px);
+      transition: box-shadow 220ms ease, opacity 420ms ease, transform 420ms ease;
+      width: 100%;
+    }
+
+    .tile.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .tile:focus-visible {
+      outline: 3px solid var(--brand-yellow);
+      outline-offset: 3px;
+    }
+
+    .tile picture,
+    .tile img {
+      display: block;
+      height: 100%;
+      width: 100%;
+    }
+
+    .tile img {
+      object-fit: cover;
+      transform: scale(1);
+      transition: filter 260ms ease, transform 260ms ease;
+    }
+
+    .tile:hover,
+    .tile:focus-visible {
+      box-shadow: 0 10px 30px rgba(27, 94, 32, 0.16);
+    }
+
+    .tile:hover img,
+    .tile:focus-visible img {
+      filter: brightness(1.05);
+      transform: scale(1.04);
+    }
+
+    .caption {
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.68));
+      bottom: 0;
+      color: var(--bw-white);
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      left: 0;
+      line-height: 1.35;
+      opacity: 0;
+      padding: 42px 16px 14px;
+      position: absolute;
+      right: 0;
+      text-shadow: 0 1px 8px rgba(0, 0, 0, 0.28);
+      transform: translateY(10px);
+      transition: opacity 220ms ease, transform 220ms ease;
+    }
+
+    .tile:hover .caption,
+    .tile:focus-visible .caption {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .placeholder {
+      align-items: center;
+      background: var(--bw-lime-soft);
+      color: var(--brand-green);
+      display: flex;
+      font-size: 13px;
+      font-weight: 800;
+      height: 100%;
+      justify-content: center;
+      min-height: 160px;
+      padding: 16px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .instagram-cta {
+      color: var(--brand-green);
+      display: inline-flex;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.4;
+      margin-top: 26px;
+      text-decoration: none;
+      text-underline-offset: 4px;
+    }
+
+    .instagram-cta:hover {
+      text-decoration: underline;
+    }
+
+    .gallery-error {
+      color: var(--muted);
+      font-family: Merriweather, Georgia, serif;
+      line-height: 1.6;
+      margin: 32px 0 0;
+    }
+
+    .lightbox {
+      align-items: center;
+      background: rgba(12, 20, 12, 0.92);
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr) 64px;
+      grid-template-rows: 64px minmax(0, 1fr) auto;
+      inset: 0;
+      padding: 20px;
+      position: fixed;
+      z-index: 9999;
+    }
+
+    .lightbox[hidden] {
+      display: none;
+    }
+
+    .lightbox-close,
+    .lightbox-nav {
+      align-items: center;
+      appearance: none;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      color: var(--bw-white);
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 28px;
+      height: 44px;
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
+      width: 44px;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-nav:hover,
+    .lightbox-close:focus-visible,
+    .lightbox-nav:focus-visible {
+      background: rgba(255, 255, 255, 0.2);
+      outline: 2px solid var(--brand-yellow);
+      outline-offset: 3px;
+    }
+
+    .lightbox-close {
+      grid-column: 3;
+      justify-self: end;
+    }
+
+    .lightbox-nav.prev {
+      grid-column: 1;
+      grid-row: 2;
+      justify-self: start;
+    }
+
+    .lightbox-nav.next {
+      grid-column: 3;
+      grid-row: 2;
+      justify-self: end;
+    }
+
+    .lightbox-frame {
+      align-self: center;
+      grid-column: 2;
+      grid-row: 2;
+      justify-self: center;
+      max-height: calc(100vh - 180px);
+      max-width: min(100%, 1180px);
+      min-width: 0;
+    }
+
+    .lightbox-picture,
+    .lightbox-picture img {
+      display: block;
+      max-height: calc(100vh - 180px);
+      max-width: 100%;
+    }
+
+    .lightbox-picture img {
+      border-radius: 8px;
+      box-shadow: 0 18px 80px rgba(0, 0, 0, 0.35);
+      height: auto;
+      object-fit: contain;
+      width: auto;
+    }
+
+    .lightbox-meta {
+      color: var(--bw-white);
+      grid-column: 1 / -1;
+      grid-row: 3;
+      justify-self: center;
+      max-width: 720px;
+      padding-top: 18px;
+      text-align: center;
+    }
+
+    .lightbox-caption {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .lightbox-count {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      font-weight: 700;
+      margin: 6px 0 0;
+    }
+
+    .lightbox-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+
+    .lightbox-dot {
+      appearance: none;
+      background: rgba(255, 255, 255, 0.35);
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      height: 9px;
+      padding: 0;
+      width: 9px;
+    }
+
+    .lightbox-dot[aria-current="true"] {
+      background: var(--brand-yellow);
+      width: 28px;
+    }
+
+    .lightbox-dot:focus-visible {
+      outline: 2px solid var(--brand-yellow);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 900px) {
+      #bw-gallery {
+        padding: 56px 20px;
+      }
+
+      .gallery-grid {
+        grid-template-areas:
+          "a a"
+          "a a"
+          "b c"
+          "d e"
+          "f f"
+          "g g"
+          "h h";
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-rows: repeat(7, minmax(170px, 1fr));
+        min-height: 1180px;
+      }
+
+      .lightbox {
+        grid-template-columns: 52px minmax(0, 1fr) 52px;
+        padding: 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-gallery {
+        padding: 40px 16px;
+      }
+
+      .gallery-title {
+        font-size: 31px;
+      }
+
+      .gallery-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-height: 0;
+      }
+
+      .tile {
+        aspect-ratio: 4 / 3;
+        min-height: 0;
+      }
+
+      .caption {
+        opacity: 1;
+        transform: none;
+      }
+
+      .lightbox {
+        grid-template-columns: 48px minmax(0, 1fr) 48px;
+        grid-template-rows: 56px minmax(0, 1fr) auto;
+        padding: 12px;
+      }
+
+      .lightbox-close,
+      .lightbox-nav {
+        height: 40px;
+        width: 40px;
+      }
+
+      .lightbox-frame,
+      .lightbox-picture,
+      .lightbox-picture img {
+        max-height: calc(100vh - 170px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tile,
+      .tile img,
+      .caption {
+        transition: none;
+      }
+
+      .tile,
+      .tile.is-visible,
+      .caption {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="bw-gallery" aria-labelledby="bw-gallery-title">
+    <div class="gallery-inner">
+      <header class="gallery-header">
+        <p class="gallery-eyebrow">BERLINWALK · BERLIN, ON FOOT</p>
+        <h2 class="gallery-title" id="bw-gallery-title">What the walk actually looks like</h2>
+        <p class="gallery-lead">Real photos from recent tours. No stock images, no filters.</p>
+      </header>
+
+      <div class="gallery-grid" data-gallery-grid aria-live="polite"></div>
+
+      <a class="instagram-cta" href="https://www.instagram.com/berlinwalkingtour/" target="_blank" rel="noopener">📷 More moments on Instagram → @berlinwalkingtour</a>
+    </div>
+  </section>
+
+  <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Photo gallery viewer" aria-hidden="true" hidden>
+    <button class="lightbox-close" type="button" data-close aria-label="Close gallery">×</button>
+    <button class="lightbox-nav prev" type="button" data-prev aria-label="Previous photo">‹</button>
+    <div class="lightbox-frame">
+      <picture class="lightbox-picture">
+        <source data-lightbox-source type="image/webp">
+        <img data-lightbox-img src="" alt="">
+      </picture>
+    </div>
+    <button class="lightbox-nav next" type="button" data-next aria-label="Next photo">›</button>
+    <div class="lightbox-meta">
+      <p class="lightbox-caption" data-lightbox-caption></p>
+      <p class="lightbox-count" data-lightbox-count></p>
+      <div class="lightbox-dots" data-lightbox-dots aria-label="Choose photo"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var widths = [400, 800, 1200, 1600];
+      var photos = [];
+      var activeIndex = 0;
+      var lastFocus = null;
+      var touchStartX = 0;
+      var grid = document.querySelector('[data-gallery-grid]');
+      var lightbox = document.querySelector('[data-lightbox]');
+      var lightboxSource = document.querySelector('[data-lightbox-source]');
+      var lightboxImg = document.querySelector('[data-lightbox-img]');
+      var lightboxCaption = document.querySelector('[data-lightbox-caption]');
+      var lightboxCount = document.querySelector('[data-lightbox-count]');
+      var lightboxDots = document.querySelector('[data-lightbox-dots]');
+      var closeBtn = document.querySelector('[data-close]');
+      var prevBtn = document.querySelector('[data-prev]');
+      var nextBtn = document.querySelector('[data-next]');
+
+      window.createPlaceholder = function (photoId) {
+        var fallback = document.createElement('div');
+        fallback.className = 'placeholder';
+        fallback.textContent = 'Photo ' + photoId + ' unavailable';
+        return fallback;
+      };
+
+      function parseRatio(ratio) {
+        var parts = ratio.split('/').map(Number);
+        return { w: parts[0] || 1, h: parts[1] || 1 };
+      }
+
+      function srcsetFor(photo, format) {
+        return widths.map(function (width) {
+          return 'images/' + photo.id + '-' + width + 'w.' + format + ' ' + width + 'w';
+        }).join(', ');
+      }
+
+      function makePicture(photo, index) {
+        var ratio = parseRatio(photo.aspectRatio);
+        var picture = document.createElement('picture');
+        var source = document.createElement('source');
+        var img = document.createElement('img');
+        var isHero = photo.area === 'a';
+
+        source.type = 'image/webp';
+        source.srcset = srcsetFor(photo, 'webp');
+        source.sizes = photo.sizes;
+
+        img.src = 'images/' + photo.id + '-800w.jpg';
+        img.srcset = srcsetFor(photo, 'jpg');
+        img.sizes = photo.sizes;
+        img.alt = photo.alt;
+        img.width = 800;
+        img.height = Math.round(800 * ratio.h / ratio.w);
+        img.loading = isHero ? 'eager' : 'lazy';
+        img.decoding = 'async';
+        if (isHero) {
+          img.setAttribute('fetchpriority', 'high');
+        }
+        img.onerror = function () {
+          img.onerror = null;
+          picture.replaceWith(window.createPlaceholder(photo.id));
+        };
+
+        picture.append(source, img);
+        return picture;
+      }
+
+      function renderTile(photo, index) {
+        var tile = document.createElement('button');
+        var caption = document.createElement('span');
+        tile.className = 'tile';
+        tile.type = 'button';
+        tile.dataset.photoId = photo.id;
+        tile.dataset.index = String(index);
+        tile.style.gridArea = photo.area;
+        tile.setAttribute('aria-label', 'Open photo: ' + photo.caption);
+        tile.appendChild(makePicture(photo, index));
+        caption.className = 'caption';
+        caption.textContent = photo.caption;
+        tile.appendChild(caption);
+        tile.addEventListener('click', function () {
+          openLightbox(index);
+        });
+        return tile;
+      }
+
+      function revealTiles() {
+        var tiles = Array.prototype.slice.call(document.querySelectorAll('.tile'));
+        if (!('IntersectionObserver' in window)) {
+          tiles.forEach(function (tile) { tile.classList.add('is-visible'); });
+          return;
+        }
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          });
+        }, { threshold: 0.16 });
+        tiles.forEach(function (tile, index) {
+          tile.style.transitionDelay = (index * 60) + 'ms';
+          observer.observe(tile);
+        });
+      }
+
+      function renderDots() {
+        lightboxDots.innerHTML = '';
+        photos.forEach(function (photo, index) {
+          var dot = document.createElement('button');
+          dot.className = 'lightbox-dot';
+          dot.type = 'button';
+          dot.setAttribute('aria-label', 'Open photo ' + (index + 1));
+          dot.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
+          dot.addEventListener('click', function () {
+            showPhoto(index);
+          });
+          lightboxDots.appendChild(dot);
+        });
+      }
+
+      function showPhoto(index) {
+        activeIndex = (index + photos.length) % photos.length;
+        var photo = photos[activeIndex];
+        lightboxSource.srcset = 'images/' + photo.id + '-full.webp';
+        lightboxImg.src = 'images/' + photo.id + '-full.jpg';
+        lightboxImg.alt = photo.alt;
+        lightboxCaption.textContent = photo.caption;
+        lightboxCount.textContent = (activeIndex + 1) + ' of ' + photos.length;
+        renderDots();
+      }
+
+      function openLightbox(index) {
+        lastFocus = document.activeElement;
+        showPhoto(index);
+        lightbox.hidden = false;
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('is-gallery-locked');
+        document.addEventListener('keydown', onKeydown);
+        closeBtn.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.hidden = true;
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('is-gallery-locked');
+        document.removeEventListener('keydown', onKeydown);
+        lightboxImg.removeAttribute('src');
+        lightboxSource.removeAttribute('srcset');
+        if (lastFocus && typeof lastFocus.focus === 'function') {
+          lastFocus.focus();
+        }
+      }
+
+      function getFocusable() {
+        return Array.prototype.slice.call(lightbox.querySelectorAll('button, [href], img, [tabindex]:not([tabindex="-1"])'))
+          .filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+      }
+
+      function trapFocus(event) {
+        var focusable = getFocusable();
+        if (!focusable.length) return;
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+
+      function onKeydown(event) {
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') showPhoto(activeIndex - 1);
+        if (event.key === 'ArrowRight') showPhoto(activeIndex + 1);
+        if (event.key === 'Tab') trapFocus(event);
+      }
+
+      closeBtn.addEventListener('click', closeLightbox);
+      prevBtn.addEventListener('click', function () { showPhoto(activeIndex - 1); });
+      nextBtn.addEventListener('click', function () { showPhoto(activeIndex + 1); });
+      lightbox.addEventListener('click', function (event) {
+        if (event.target === lightbox) closeLightbox();
+      });
+      lightbox.addEventListener('touchstart', function (event) {
+        touchStartX = event.changedTouches[0].clientX;
+      }, { passive: true });
+      lightbox.addEventListener('touchend', function (event) {
+        var delta = event.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(delta) < 48) return;
+        showPhoto(activeIndex + (delta < 0 ? 1 : -1));
+      }, { passive: true });
+
+      fetch('./data.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Gallery data unavailable');
+          return response.json();
+        })
+        .then(function (data) {
+          photos = data.photos || [];
+          grid.innerHTML = '';
+          photos.forEach(function (photo, index) {
+            grid.appendChild(renderTile(photo, index));
+          });
+          revealTiles();
+        })
+        .catch(function () {
+          grid.outerHTML = '<p class="gallery-error">Gallery photos are unavailable right now.</p>';
+        });
+    })();
+  </script>
+</body>
+</html>

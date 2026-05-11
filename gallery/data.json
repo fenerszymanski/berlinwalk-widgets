@@ -1,0 +1,68 @@
+{
+  "photos": [
+    {
+      "id": "01",
+      "area": "a",
+      "alt": "Berlin walking tour guests gathered with their guide at Museum Island",
+      "caption": "Museum Island stop on a recent walk",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 50vw, 40vw",
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "02",
+      "area": "b",
+      "alt": "Small Berlin walking tour group smiling on a city street",
+      "caption": "A small group between city stories",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 50vw, 20vw",
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "03",
+      "area": "c",
+      "alt": "Guests smiling during a winter Berlin walking tour",
+      "caption": "Winter morning near Alexanderplatz",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 50vw, 20vw",
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "04",
+      "area": "d",
+      "alt": "Museum Island colonnade in golden light",
+      "caption": "Golden hour on Museum Island",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 50vw, 20vw",
+      "aspectRatio": "1/1"
+    },
+    {
+      "id": "05",
+      "area": "e",
+      "alt": "Guide and guests with the Berlin TV Tower behind them",
+      "caption": "Berlin skyline moments between stops",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 50vw, 20vw",
+      "aspectRatio": "5/8"
+    },
+    {
+      "id": "06",
+      "area": "f",
+      "alt": "Alexanderplatz World Clock under a blue sky",
+      "caption": "Starting point at the World Clock",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 100vw, 40vw",
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "07",
+      "area": "g",
+      "alt": "Berliner Dom and TV Tower at sunset",
+      "caption": "Berliner Dom from the Spree side",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 100vw, 40vw",
+      "aspectRatio": "16/9"
+    },
+    {
+      "id": "08",
+      "area": "h",
+      "alt": "Altes Museum facade glowing at sunset",
+      "caption": "Classic Museum Island perspective",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 100vw, 40vw",
+      "aspectRatio": "16/9"
+    }
+  ]
+}
