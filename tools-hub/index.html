@@ -15,6 +15,7 @@
       margin: 0;
       max-width: 100%;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
     #bw-tools-hub * {
@@ -137,6 +138,7 @@
       color: inherit;
       display: flex;
       flex-direction: column;
+      min-width: 0;
       min-height: 190px;
       padding: 22px 24px;
       text-decoration: none;
@@ -161,6 +163,7 @@
       font-weight: 800;
       line-height: 1.25;
       margin-bottom: 10px;
+      overflow-wrap: break-word;
     }
 
     #bw-tools-hub .tool-card p {
@@ -169,6 +172,7 @@
       font-size: 14.5px;
       line-height: 1.5;
       margin-bottom: 18px;
+      overflow-wrap: break-word;
     }
 
     #bw-tools-hub .tool-cta {
@@ -250,6 +254,10 @@
       #bw-tools-hub .tools-grid {
         grid-template-columns: 1fr;
       }
+
+      #bw-tools-hub .tool-card {
+        min-height: 0;
+      }
     }
 
     @media (max-width: 520px) {
@@ -286,7 +294,6 @@
       }
 
       #bw-tools-hub .tool-card {
-        min-height: 0;
         padding: 16px;
       }
 
