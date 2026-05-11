@@ -89,15 +89,16 @@
     }
 
     #bw-tools-home .tool-card {
+      align-items: flex-start;
       background: var(--bw-white);
       border: 1px solid var(--light-green);
       border-radius: 12px;
       color: inherit;
       display: flex;
-      flex-direction: column;
-      min-height: 170px;
+      flex-direction: row;
+      gap: 16px;
       min-width: 0;
-      padding: 22px 24px;
+      padding: 18px 20px;
       text-align: left;
       text-decoration: none;
       transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
@@ -115,12 +116,44 @@
       outline-offset: 2px;
     }
 
+    #bw-tools-home .tool-card-thumb {
+      border-radius: 8px;
+      flex-shrink: 0;
+      height: 80px;
+      object-fit: cover;
+      width: 80px;
+    }
+
+    #bw-tools-home .tool-card-placeholder {
+      align-items: center;
+      background: linear-gradient(135deg, var(--brand-yellow), var(--brand-lime));
+      border-radius: 8px;
+      color: var(--brand-green);
+      display: flex;
+      flex-shrink: 0;
+      font-family: Montserrat, Arial, sans-serif;
+      font-size: 32px;
+      font-weight: 800;
+      height: 80px;
+      justify-content: center;
+      line-height: 1;
+      text-transform: uppercase;
+      width: 80px;
+    }
+
+    #bw-tools-home .tool-card-content {
+      display: flex;
+      flex: 1 1 auto;
+      flex-direction: column;
+      min-width: 0;
+    }
+
     #bw-tools-home .tool-card h3 {
       color: var(--brand-green);
       font-size: 18px;
       font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       overflow-wrap: break-word;
     }
 
@@ -129,7 +162,7 @@
       font-family: var(--serif);
       font-size: 14.5px;
       line-height: 1.5;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       overflow-wrap: break-word;
     }
 
@@ -205,8 +238,28 @@
       }
 
       #bw-tools-home .tool-card {
-        min-height: 0;
-        padding: 16px;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      #bw-tools-home .tool-card-thumb,
+      #bw-tools-home .tool-card-placeholder {
+        height: 64px;
+        width: 64px;
+      }
+
+      #bw-tools-home .tool-card-placeholder {
+        font-size: 24px;
+      }
+
+      #bw-tools-home .tool-card h3 {
+        font-size: 16px;
+        margin-bottom: 6px;
+      }
+
+      #bw-tools-home .tool-card p {
+        font-size: 13.5px;
+        margin-bottom: 10px;
       }
 
       #bw-tools-home .btn-primary {
@@ -228,7 +281,7 @@
       <div id="tools-root" class="loading" aria-live="polite">Loading tools...</div>
 
       <footer class="tools-home-footer">
-        <a href="https://www.berlinwalk.com/berlin-tools" class="btn-primary" target="_top">See all 17 tools →</a>
+        <a href="https://www.berlinwalk.com/berlin-tools" class="btn-primary" target="_top">See all tools →</a>
       </footer>
     </section>
   </div>
@@ -309,9 +362,30 @@
           card.href = toolsBaseUrl + tool.slug;
           card.target = '_top';
 
-          card.appendChild(createTextElement('h3', '', tool.title));
-          card.appendChild(createTextElement('p', '', tool.lead));
-          card.appendChild(createTextElement('span', 'tool-cta', 'Open tool →'));
+          var image = tool.image && typeof tool.image === 'string' ? tool.image.trim() : '';
+          if (image) {
+            var img = document.createElement('img');
+            img.className = 'tool-card-thumb';
+            img.src = image;
+            img.alt = tool.title;
+            img.loading = 'lazy';
+            img.decoding = 'async';
+            card.appendChild(img);
+          } else {
+            var placeholder = document.createElement('div');
+            placeholder.className = 'tool-card-placeholder';
+            placeholder.setAttribute('aria-hidden', 'true');
+            placeholder.textContent = (tool.title || '').charAt(0);
+            card.appendChild(placeholder);
+          }
+
+          var content = document.createElement('div');
+          content.className = 'tool-card-content';
+          content.appendChild(createTextElement('h3', '', tool.title));
+          content.appendChild(createTextElement('p', '', tool.lead));
+          content.appendChild(createTextElement('span', 'tool-cta', 'Open tool →'));
+          card.appendChild(content);
+
           grid.appendChild(card);
         });
 
