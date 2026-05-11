@@ -73,7 +73,18 @@
     setTimeout(reportThrottled, 250);
   }, true);
 
+  document.addEventListener('input', function () {
+    setTimeout(reportThrottled, 50);
+    setTimeout(reportThrottled, 250);
+  }, true);
+
+  document.addEventListener('change', function () {
+    setTimeout(reportThrottled, 50);
+    setTimeout(reportThrottled, 250);
+  }, true);
+
   // Catch late-loading fonts and images
   setTimeout(reportThrottled, 500);
   setTimeout(reportThrottled, 1500);
+  setTimeout(reportThrottled, 3000);
 })();
