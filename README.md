@@ -10,6 +10,7 @@ an iframe URL.
 
 - `lead-form/` - Berlin Essentials email capture form.
 - `quick-summary/` - reusable quick summary and optional audio player.
+- `how-it-works/` - homepage 3-step walking timeline widget for the Wix Embed-a-Site homepage section. Uses `data.json`, brand CSS, auto-resize postMessage, horizontal/vertical dashed timeline, and final icon set: checkmark circle, map pin, route line.
 
 ## Local Preview
 
