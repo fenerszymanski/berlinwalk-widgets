@@ -11,6 +11,7 @@ an iframe URL.
 - `lead-form/` - Berlin Essentials email capture form.
 - `quick-summary/` - reusable quick summary and optional audio player.
 - `how-it-works/` - homepage 3-step walking timeline widget for the Wix Embed-a-Site homepage section. Uses `data.json`, brand CSS, auto-resize postMessage, horizontal/vertical dashed timeline, and final icon set: checkmark circle, map pin, route line.
+- `stats/` - homepage tour metrics widget replacing the old broken dark-green stats band. Final design: compact brand-green background with white text/icons/dividers, 4-column desktop / 2x2 mobile grid, Lucide icons above each value, count-up animation for numeric stats, reduced-motion support, and auto-resize postMessage.
 
 ## Local Preview
 
