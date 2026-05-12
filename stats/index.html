@@ -20,7 +20,7 @@
       margin: 0;
       max-width: 100%;
       overflow-x: hidden;
-      padding: 64px 24px;
+      padding: 36px 24px;
       text-align: center;
     }
 
@@ -39,34 +39,59 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
-    #bw-stats .stat {
+    #bw-stats .bw-stat {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
       min-width: 0;
       opacity: 0;
+      padding: 8px 16px;
+      position: relative;
+      text-align: center;
       transform: translateY(16px);
       transition: opacity 400ms ease-out, transform 400ms ease-out;
     }
 
-    #bw-stats.is-visible .stat {
+    #bw-stats.is-visible .bw-stat {
       opacity: 1;
       transform: translateY(0);
     }
 
-    #bw-stats .stat:nth-child(2) {
+    #bw-stats .bw-stat:nth-child(2) {
       transition-delay: 80ms;
     }
 
-    #bw-stats .stat:nth-child(3) {
+    #bw-stats .bw-stat:nth-child(3) {
       transition-delay: 160ms;
     }
 
-    #bw-stats .stat:nth-child(4) {
+    #bw-stats .bw-stat:nth-child(4) {
       transition-delay: 240ms;
+    }
+
+    #bw-stats .bw-stat + .bw-stat::before {
+      background: var(--brand-green);
+      bottom: 18%;
+      content: "";
+      left: 0;
+      opacity: 0.22;
+      position: absolute;
+      top: 18%;
+      width: 1px;
+    }
+
+    #bw-stats .bw-stat-icon {
+      color: var(--brand-green);
+      flex-shrink: 0;
+      height: 24px;
+      margin-bottom: 14px;
+      width: 24px;
     }
 
     #bw-stats .value {
       color: var(--brand-green);
       display: block;
-      font-size: 88px;
+      font-size: 48px;
       font-weight: 800;
       letter-spacing: -1px;
       line-height: 1;
@@ -75,24 +100,24 @@
 
     #bw-stats .prefix {
       color: var(--brand-green);
-      font-size: 44px;
+      font-size: 32px;
       font-weight: 700;
       margin-right: 2px;
-      vertical-align: baseline;
+      vertical-align: 4px;
     }
 
     #bw-stats .suffix {
       color: var(--brand-green);
-      font-size: 36px;
-      font-weight: 800;
-      margin-left: 4px;
-      vertical-align: baseline;
+      font-size: 22px;
+      font-weight: 700;
+      margin-left: 3px;
+      vertical-align: 6px;
     }
 
     #bw-stats .label {
       color: var(--brand-green);
       display: block;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 700;
       letter-spacing: 1.4px;
       line-height: 1.35;
@@ -111,7 +136,7 @@
 
     @media (max-width: 700px) {
       #bw-stats {
-        padding: 48px 16px;
+        padding: 28px 16px;
       }
 
       #bw-stats .grid {
@@ -120,41 +145,42 @@
         row-gap: 32px;
       }
 
+      #bw-stats .bw-stat {
+        padding: 6px 8px;
+      }
+
+      #bw-stats .bw-stat + .bw-stat::before {
+        display: none;
+      }
+
+      #bw-stats .bw-stat-icon {
+        height: 22px;
+        margin-bottom: 12px;
+        width: 22px;
+      }
+
       #bw-stats .value {
-        font-size: 56px;
+        font-size: 36px;
       }
 
       #bw-stats .prefix {
-        font-size: 32px;
+        font-size: 24px;
+        vertical-align: 3px;
       }
 
       #bw-stats .suffix {
-        font-size: 26px;
+        font-size: 18px;
+        vertical-align: 4px;
       }
 
       #bw-stats .label {
-        font-size: 12px;
+        font-size: 11px;
         margin-top: 10px;
       }
     }
 
-    @media (max-width: 360px) {
-      #bw-stats .value {
-        font-size: 50px;
-      }
-
-      #bw-stats .prefix {
-        font-size: 29px;
-      }
-
-      #bw-stats .suffix {
-        font-size: 23px;
-        margin-left: 3px;
-      }
-    }
-
     @media (prefers-reduced-motion: reduce) {
-      #bw-stats .stat {
+      #bw-stats .bw-stat {
         opacity: 1;
         transform: none;
         transition: none;
@@ -177,12 +203,18 @@
       var pendingResize = false;
       var hasAnimated = false;
       var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var icons = {
+        'map-pin': '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>',
+        clock: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+        heart: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>',
+        star: '<svg class="bw-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+      };
       var fallbackData = {
         stats: [
-          { id: 'stops', prefix: '', value: 12, suffix: '', label: 'Stops', animation: 'count', decimals: 0 },
-          { id: 'duration', prefix: '~', value: 2, suffix: 'h', label: 'Duration', animation: 'count', decimals: 0 },
-          { id: 'price', prefix: '', value: 'FREE', suffix: '', label: 'Tip-based', animation: 'fade', decimals: 0 },
-          { id: 'rating', prefix: '', value: 9.8, suffix: '/10', label: 'On Freetour', animation: 'count', decimals: 1 }
+          { id: 'stops', icon: 'map-pin', prefix: '', value: 12, suffix: '', label: 'Stops', animation: 'count', decimals: 0 },
+          { id: 'duration', icon: 'clock', prefix: '~', value: 2, suffix: 'h', label: 'Duration', animation: 'count', decimals: 0 },
+          { id: 'price', icon: 'heart', prefix: '', value: 'FREE', suffix: '', label: 'Tip-based', animation: 'fade', decimals: 0 },
+          { id: 'rating', icon: 'star', prefix: '', value: 9.8, suffix: '/10', label: 'On Freetour', animation: 'count', decimals: 1 }
         ]
       };
 
@@ -276,13 +308,16 @@
         var item = document.createElement('div');
         var initialValue = reduceMotion || stat.animation !== 'count' ? formatValue(stat.value, stat.decimals) : formatValue(0, stat.decimals);
 
-        item.className = 'stat';
+        item.className = 'bw-stat';
         item.setAttribute('role', 'group');
         item.setAttribute('aria-label', statLabel(stat));
         item.dataset.animation = stat.animation || 'fade';
         item.dataset.target = String(stat.value);
         item.dataset.decimals = String(stat.decimals || 0);
 
+        if (icons[stat.icon]) {
+          item.insertAdjacentHTML('beforeend', icons[stat.icon]);
+        }
         item.appendChild(renderValue(stat, initialValue));
 
         var label = document.createElement('span');
