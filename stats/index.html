@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Tour Stats</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    html,
+    body {
+      background: var(--brand-yellow);
+    }
+
+    #bw-stats {
+      background: var(--brand-yellow);
+      color: var(--brand-green);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 64px 24px;
+      text-align: center;
+    }
+
+    #bw-stats * {
+      box-sizing: border-box;
+    }
+
+    #bw-stats .stats-inner {
+      margin: 0 auto;
+      max-width: 1100px;
+    }
+
+    #bw-stats .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #bw-stats .stat {
+      min-width: 0;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 400ms ease-out, transform 400ms ease-out;
+    }
+
+    #bw-stats.is-visible .stat {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #bw-stats .stat:nth-child(2) {
+      transition-delay: 80ms;
+    }
+
+    #bw-stats .stat:nth-child(3) {
+      transition-delay: 160ms;
+    }
+
+    #bw-stats .stat:nth-child(4) {
+      transition-delay: 240ms;
+    }
+
+    #bw-stats .value {
+      color: var(--brand-green);
+      display: block;
+      font-size: 88px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    #bw-stats .prefix {
+      color: var(--brand-green);
+      font-size: 44px;
+      font-weight: 700;
+      margin-right: 2px;
+      vertical-align: baseline;
+    }
+
+    #bw-stats .suffix {
+      color: var(--brand-green);
+      font-size: 36px;
+      font-weight: 800;
+      margin-left: 4px;
+      vertical-align: baseline;
+    }
+
+    #bw-stats .label {
+      color: var(--brand-green);
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      line-height: 1.35;
+      margin: 14px auto 0;
+      max-width: 140px;
+      text-transform: uppercase;
+    }
+
+    #bw-stats .error {
+      color: var(--brand-green);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 700px) {
+      #bw-stats {
+        padding: 48px 16px;
+      }
+
+      #bw-stats .grid {
+        column-gap: 24px;
+        grid-template-columns: 1fr 1fr;
+        row-gap: 32px;
+      }
+
+      #bw-stats .value {
+        font-size: 56px;
+      }
+
+      #bw-stats .prefix {
+        font-size: 32px;
+      }
+
+      #bw-stats .suffix {
+        font-size: 26px;
+      }
+
+      #bw-stats .label {
+        font-size: 12px;
+        margin-top: 10px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      #bw-stats .value {
+        font-size: 50px;
+      }
+
+      #bw-stats .prefix {
+        font-size: 29px;
+      }
+
+      #bw-stats .suffix {
+        font-size: 23px;
+        margin-left: 3px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #bw-stats .stat {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section id="bw-stats" role="region" aria-label="Tour at a glance">
+    <div class="stats-inner">
+      <div id="stats-root" class="grid" aria-live="off"></div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var section = document.getElementById('bw-stats');
+      var root = document.getElementById('stats-root');
+      var lastReported = 0;
+      var pendingResize = false;
+      var hasAnimated = false;
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var fallbackData = {
+        stats: [
+          { id: 'stops', prefix: '', value: 12, suffix: '', label: 'Stops', animation: 'count', decimals: 0 },
+          { id: 'duration', prefix: '~', value: 2, suffix: 'h', label: 'Duration', animation: 'count', decimals: 0 },
+          { id: 'price', prefix: '', value: 'FREE', suffix: '', label: 'Tip-based', animation: 'fade', decimals: 0 },
+          { id: 'rating', prefix: '', value: 9.8, suffix: '/10', label: 'On Freetour', animation: 'count', decimals: 1 }
+        ]
+      };
+
+      function contentHeight() {
+        var body = document.body;
+        if (!body || !body.children || !body.children.length) return 0;
+
+        var max = 0;
+        for (var i = 0; i < body.children.length; i++) {
+          var child = body.children[i];
+          var rect = child.getBoundingClientRect();
+          var cs = window.getComputedStyle ? window.getComputedStyle(child) : null;
+          var marginBottom = cs ? (parseFloat(cs.marginBottom) || 0) : 0;
+          var bottom = rect.bottom + marginBottom;
+          if (bottom > max) max = bottom;
+        }
+
+        return Math.ceil(max);
+      }
+
+      function reportResize() {
+        var height = contentHeight();
+        if (height <= 0 || Math.abs(height - lastReported) <= 2) return;
+
+        lastReported = height;
+        try {
+          window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
+        } catch (error) {
+          /* Parent is unreachable, so there is nothing to resize. */
+        }
+      }
+
+      function requestResize() {
+        if (pendingResize) return;
+        pendingResize = true;
+        (window.requestAnimationFrame || function (callback) { setTimeout(callback, 16); })(function () {
+          pendingResize = false;
+          reportResize();
+        });
+      }
+
+      function easeOutCubic(progress) {
+        return 1 - Math.pow(1 - progress, 3);
+      }
+
+      function formatValue(value, decimals) {
+        if (typeof value === 'number') return value.toFixed(decimals || 0);
+        return String(value || '');
+      }
+
+      function accessibleValue(stat) {
+        if (stat.id === 'duration') return 'approximately ' + stat.value + ' hours';
+        if (stat.id === 'rating') return stat.value + ' out of 10';
+        return String(stat.value);
+      }
+
+      function statLabel(stat) {
+        return accessibleValue(stat) + ' ' + String(stat.label || '').toLowerCase();
+      }
+
+      function renderValue(stat, displayValue) {
+        var value = document.createElement('span');
+        value.className = 'value';
+
+        if (stat.prefix) {
+          var prefix = document.createElement('span');
+          prefix.className = 'prefix';
+          prefix.textContent = stat.prefix;
+          value.appendChild(prefix);
+        }
+
+        value.appendChild(document.createTextNode(displayValue));
+
+        if (stat.suffix) {
+          var suffix = document.createElement('span');
+          suffix.className = 'suffix';
+          suffix.textContent = stat.suffix;
+          value.appendChild(suffix);
+        }
+
+        return value;
+      }
+
+      function updateValue(statElement, stat, displayValue) {
+        var oldValue = statElement.querySelector('.value');
+        var newValue = renderValue(stat, displayValue);
+        if (oldValue) oldValue.replaceWith(newValue);
+      }
+
+      function renderStat(stat) {
+        var item = document.createElement('div');
+        var initialValue = reduceMotion || stat.animation !== 'count' ? formatValue(stat.value, stat.decimals) : formatValue(0, stat.decimals);
+
+        item.className = 'stat';
+        item.setAttribute('role', 'group');
+        item.setAttribute('aria-label', statLabel(stat));
+        item.dataset.animation = stat.animation || 'fade';
+        item.dataset.target = String(stat.value);
+        item.dataset.decimals = String(stat.decimals || 0);
+
+        item.appendChild(renderValue(stat, initialValue));
+
+        var label = document.createElement('span');
+        label.className = 'label';
+        label.textContent = stat.label || '';
+        item.appendChild(label);
+
+        return item;
+      }
+
+      function animateCount(statElement, stat) {
+        var startTime = 0;
+        var target = Number(stat.value);
+        var decimals = Number(stat.decimals || 0);
+
+        if (!isFinite(target)) {
+          updateValue(statElement, stat, formatValue(stat.value, decimals));
+          return;
+        }
+
+        function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          var elapsed = timestamp - startTime;
+          var progress = Math.min(elapsed / 1200, 1);
+          var eased = easeOutCubic(progress);
+          var current = target * eased;
+
+          updateValue(statElement, stat, current.toFixed(decimals));
+
+          if (progress < 1) {
+            window.requestAnimationFrame(step);
+          } else {
+            updateValue(statElement, stat, target.toFixed(decimals));
+            requestResize();
+          }
+        }
+
+        window.requestAnimationFrame(step);
+      }
+
+      function startAnimations(stats) {
+        if (hasAnimated) return;
+        hasAnimated = true;
+        section.classList.add('is-visible');
+
+        if (reduceMotion) {
+          stats.forEach(function (stat, index) {
+            updateValue(root.children[index], stat, formatValue(stat.value, stat.decimals));
+          });
+          requestResize();
+          return;
+        }
+
+        window.setTimeout(function () {
+          stats.forEach(function (stat, index) {
+            if (stat.animation === 'count') {
+              animateCount(root.children[index], stat);
+            }
+          });
+          requestResize();
+        }, 400);
+
+        window.setTimeout(requestResize, 1700);
+      }
+
+      function revealWhenReady(stats) {
+        if (reduceMotion) {
+          startAnimations(stats);
+          return;
+        }
+
+        if (!('IntersectionObserver' in window)) {
+          startAnimations(stats);
+          return;
+        }
+
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (!entry.isIntersecting) return;
+            startAnimations(stats);
+            observer.unobserve(section);
+          });
+        }, { threshold: 0.3 });
+
+        observer.observe(section);
+      }
+
+      function render(data) {
+        var stats = data && Array.isArray(data.stats) ? data.stats.slice(0, 4) : fallbackData.stats;
+        var fragment = document.createDocumentFragment();
+
+        stats.forEach(function (stat) {
+          fragment.appendChild(renderStat(stat));
+        });
+
+        root.className = 'grid';
+        root.replaceChildren(fragment);
+        requestResize();
+        revealWhenReady(stats);
+      }
+
+      fetch('./data.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Could not load stats data');
+          return response.json();
+        })
+        .then(render)
+        .catch(function () {
+          render({
+            stats: fallbackData.stats.map(function (stat) {
+              var fallbackStat = {};
+              Object.keys(stat).forEach(function (key) {
+                fallbackStat[key] = stat[key];
+              });
+              fallbackStat.animation = 'fade';
+              return fallbackStat;
+            })
+          });
+        });
+
+      window.addEventListener('load', requestResize);
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(requestResize).catch(function () {});
+      }
+
+      if (typeof ResizeObserver !== 'undefined') {
+        try { new ResizeObserver(requestResize).observe(document.body); } catch (error) {}
+      }
+
+      requestResize();
+    })();
+  </script>
+</body>
+</html>

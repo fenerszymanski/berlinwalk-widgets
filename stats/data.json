@@ -1,0 +1,40 @@
+{
+  "stats": [
+    {
+      "id": "stops",
+      "prefix": "",
+      "value": 12,
+      "suffix": "",
+      "label": "Stops",
+      "animation": "count",
+      "decimals": 0
+    },
+    {
+      "id": "duration",
+      "prefix": "~",
+      "value": 2,
+      "suffix": "h",
+      "label": "Duration",
+      "animation": "count",
+      "decimals": 0
+    },
+    {
+      "id": "price",
+      "prefix": "",
+      "value": "FREE",
+      "suffix": "",
+      "label": "Tip-based",
+      "animation": "fade",
+      "decimals": 0
+    },
+    {
+      "id": "rating",
+      "prefix": "",
+      "value": 9.8,
+      "suffix": "/10",
+      "label": "On Freetour",
+      "animation": "count",
+      "decimals": 1
+    }
+  ]
+}
