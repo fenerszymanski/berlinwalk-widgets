@@ -35,14 +35,22 @@ class BWStatsElement extends HTMLElement {
         }
 
         @media (min-width: 900px) {
-          .bw-stats::before {
+          .bw-stats::before,
+          .bw-stats::after {
             background: #1B5E20;
             content: "";
             height: 12px;
             left: 0;
             position: absolute;
             right: 0;
+          }
+
+          .bw-stats::before {
             top: -12px;
+          }
+
+          .bw-stats::after {
+            bottom: -12px;
           }
         }
 
