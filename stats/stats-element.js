@@ -30,7 +30,20 @@ class BWStatsElement extends HTMLElement {
           max-width: 100%;
           overflow-x: hidden;
           padding: 36px 24px;
+          position: relative;
           text-align: center;
+        }
+
+        @media (min-width: 900px) {
+          .bw-stats::before {
+            background: #1B5E20;
+            content: "";
+            height: 12px;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: -12px;
+          }
         }
 
         .bw-stats *,
