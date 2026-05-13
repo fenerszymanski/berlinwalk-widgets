@@ -31,6 +31,11 @@ class BWGalleryElement extends HTMLElement {
   _renderShell() {
     this.innerHTML = `
       <style>
+        bw-gallery {
+          display: block;
+          width: 100%;
+        }
+
         .bw-gallery {
           background: #FFFFFF;
           color: #212121;

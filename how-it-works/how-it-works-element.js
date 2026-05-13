@@ -23,6 +23,11 @@ class BWHowItWorksElement extends HTMLElement {
 
     this.innerHTML = `
       <style>
+        bw-how-it-works {
+          display: block;
+          width: 100%;
+        }
+
         .bw-how-it-works {
           --serif: Merriweather, Georgia, serif;
           background: #FAFAF5;

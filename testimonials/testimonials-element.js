@@ -34,6 +34,11 @@ class BWTestimonialsElement extends HTMLElement {
   _renderShell() {
     this.innerHTML = `
       <style>
+        bw-testimonials {
+          display: block;
+          width: 100%;
+        }
+
         .bw-testimonials {
           --serif: Merriweather, Georgia, serif;
           background: #FAFAF5;

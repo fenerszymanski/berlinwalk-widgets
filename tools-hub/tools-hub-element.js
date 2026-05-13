@@ -19,6 +19,11 @@ class BWToolsHubElement extends HTMLElement {
   _renderShell() {
     this.innerHTML = `
       <style>
+        bw-tools-hub {
+          display: block;
+          width: 100%;
+        }
+
         .bw-tools-hub {
           --serif: Merriweather, Georgia, serif;
           background: #FAFAF5;

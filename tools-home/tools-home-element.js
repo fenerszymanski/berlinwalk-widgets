@@ -19,6 +19,11 @@ class BWToolsHomeElement extends HTMLElement {
   _renderShell() {
     this.innerHTML = `
       <style>
+        bw-tools-home {
+          display: block;
+          width: 100%;
+        }
+
         .bw-tools-home {
           --serif: Merriweather, Georgia, serif;
           background: #FAFAF5;

@@ -17,6 +17,11 @@ class BWStatsElement extends HTMLElement {
   _render() {
     this.innerHTML = `
       <style>
+        bw-stats {
+          display: block;
+          width: 100%;
+        }
+
         .bw-stats {
           background: #1B5E20;
           color: #FFFFFF;
