@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E1 — Booking confirmation (mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2f5b3c;
+    --green-soft: #ecf2ee;
+    --green-line: #b9cdbf;
+    --cream: #faf7f2;
+    --ink: #2a2a2a;
+    --ink-soft: #4a4a4a;
+    --line: #e6e2d8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #efeae1;
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+  }
+  .inbox-frame {
+    max-width: 720px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+  .inbox-header {
+    font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+  .subject-preview {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .subject-preview .from { color: #888; font-size: 12px; }
+  .subject-preview .subject { font-weight: 600; margin-top: 2px; }
+  .subject-preview .preview { color: #777; margin-top: 4px; font-size: 13px; }
+  .email {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.06);
+  }
+  .hero {
+    width: 100%;
+    height: 320px;
+    background: url('./assets/e1-hero.png') center/cover no-repeat, linear-gradient(135deg, #d4a373 0%, #6b8e5a 100%);
+    position: relative;
+  }
+  .hero-placeholder-note {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.92);
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    color: #555;
+    font-family: monospace;
+  }
+  .body {
+    padding: 40px 48px 48px;
+  }
+  h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .booked-line {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin: 0 0 28px;
+  }
+  .booked-line strong { color: var(--ink); }
+
+  .meeting-card {
+    background: var(--green-soft);
+    border: 1px solid var(--green-line);
+    border-radius: 6px;
+    padding: 22px 24px;
+    margin: 0 0 28px;
+  }
+  .meeting-card-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--green);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .meeting-card-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+  .meeting-row {
+    display: flex;
+    gap: 22px;
+    margin-top: 14px;
+  }
+  .meeting-item {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+  }
+  .meeting-item svg {
+    width: 28px;
+    height: 28px;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .meeting-item-label {
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+  .meeting-item-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--ink);
+    margin: 32px 0 12px;
+  }
+  p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+  .transit-line {
+    font-size: 13px;
+    color: #888;
+    font-style: italic;
+  }
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 32px 0;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    margin: 28px 0 8px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 22px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.15s ease;
+  }
+  .btn-primary {
+    background: var(--green);
+    color: #fff;
+  }
+  .btn-primary:hover { background: #244a31; }
+  .btn-secondary {
+    background: #fff;
+    color: var(--green);
+    border: 1.5px solid var(--green);
+  }
+  .btn-secondary:hover { background: var(--green-soft); }
+
+  .signature {
+    margin-top: 36px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .sig-avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #d4a373 0%, #6b8e5a 100%);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 500;
+  }
+  .sig-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+    margin: 0;
+  }
+  .sig-role {
+    font-size: 12px;
+    color: #888;
+    margin: 2px 0 0;
+    letter-spacing: 0.04em;
+  }
+  .sig-umbrella {
+    margin-left: auto;
+    color: var(--green);
+  }
+
+  .footer {
+    background: #faf7f2;
+    padding: 24px 48px;
+    text-align: center;
+    font-size: 12px;
+    color: #888;
+    line-height: 1.8;
+  }
+  .footer a {
+    color: var(--green);
+    text-decoration: none;
+  }
+  .footer .umbrella-mini {
+    color: var(--green);
+    margin: 0 6px;
+  }
+
+  /* Helpers */
+  .annotation {
+    background: #fff8e1;
+    border-left: 3px solid #f5c842;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #856700;
+    font-family: monospace;
+    margin: 16px auto;
+    max-width: 720px;
+    border-radius: 0 4px 4px 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="annotation">
+  <strong>Mockup viewing notes:</strong> Save the attached Berlin/Alexanderplatz/green-umbrella photo to <code>email-journey/mockups/assets/e1-hero.jpg</code> to see the hero render. Fonts load from Google Fonts. This is a design preview, the real Wix Triggered Email will be assembled in their block editor using these visual elements.
+</div>
+
+<div class="inbox-frame">
+
+  <div class="inbox-header">Inbox preview</div>
+  <div class="subject-preview">
+    <div class="from">Yusuf, Berlin Walking Tour &lt;info@yusufucuz.com&gt;</div>
+    <div class="subject">Your Berlin walking tour is booked for Tuesday, May 19</div>
+    <div class="preview">Meeting point, what to expect, and how the tip-based model works.</div>
+  </div>
+
+  <div class="email">
+
+    <div class="hero">
+    </div>
+
+    <div class="body">
+
+      <h1>You&rsquo;re booked, {{firstName}}.</h1>
+      <p class="booked-line">
+        I&rsquo;ll see you on <strong>Tuesday, May 19</strong> at <strong>11:30</strong> for the Berlin Free Walking Tour.
+      </p>
+
+      <div class="meeting-card">
+        <div class="meeting-card-label">Where to meet me</div>
+        <div class="meeting-card-title">Weltzeituhr (World Clock), Alexanderplatz</div>
+        <p style="margin: 0 0 8px; font-size: 14px;">
+          The large rotating clock with city names on it, in the middle of the square. I&rsquo;ll be the one holding a green umbrella, so I&rsquo;m easy to spot.
+        </p>
+
+        <div class="meeting-row">
+          <div class="meeting-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 7v5l3 2"/>
+            </svg>
+            <div class="meeting-item-label">Time</div>
+            <div class="meeting-item-value">11:30</div>
+          </div>
+          <div class="meeting-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2a8 8 0 0 0-8 8c0 1.5.5 3 1.5 4.5L12 22l6.5-7.5C19.5 13 20 11.5 20 10a8 8 0 0 0-8-8z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+            <div class="meeting-item-label">Meeting point</div>
+            <div class="meeting-item-value">World Clock</div>
+          </div>
+          <div class="meeting-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2C8 8 4 12 4 16a8 8 0 1 0 16 0c0-4-4-8-8-14z"/>
+              <path d="M12 2v20"/>
+            </svg>
+            <div class="meeting-item-label">Look for</div>
+            <div class="meeting-item-value">Green umbrella</div>
+          </div>
+        </div>
+
+        <p class="transit-line" style="margin-top: 18px; margin-bottom: 0;">
+          Please arrive about 5 minutes early. Nearest transit: Alexanderplatz (U2, U5, U8, S5, S7, S75).
+        </p>
+      </div>
+
+      <h2>How the tip-based model works</h2>
+      <p>
+        The tour itself is free to join. There&rsquo;s nothing to pay upfront and nothing to pay if you don&rsquo;t enjoy it. At the end, if the tour was worth your time, you tip what feels fair. Most guests tip between &euro;5 and &euro;20 per person, but it&rsquo;s entirely up to you. I keep the tour free so anyone visiting Berlin can join, regardless of budget.
+      </p>
+
+      <h2>What to expect</h2>
+      <p>
+        We&rsquo;ll walk about 3 kilometres at a comfortable pace over roughly 2 hours, covering 12 stops through Berlin&rsquo;s historic centre, from Alexanderplatz down to Museum Island and finishing at Hackescher Markt. The tour runs outdoors only (no museum entries). It runs rain or shine. I&rsquo;d only cancel for severe weather, and you&rsquo;d hear from me by email if that happens.
+      </p>
+      <p>
+        Bring comfortable shoes, a water bottle, and your curiosity. More practical details coming in the emails ahead.
+      </p>
+
+      <div class="divider"></div>
+
+      <p style="font-size: 14px; margin-bottom: 8px;">
+        If anything comes up, message me on WhatsApp (<a href="https://wa.me/4915228483662" style="color: var(--green); text-decoration: none; font-weight: 500;">+49 152 28483662</a>) or email <a href="mailto:info@yusufucuz.com" style="color: var(--green); text-decoration: none; font-weight: 500;">info@yusufucuz.com</a>. I read every message.
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">View or change my booking</a>
+        <a class="btn btn-secondary" href="https://wa.me/4915228483662">Message me on WhatsApp</a>
+      </div>
+
+      <div class="signature">
+        <div class="sig-avatar">Y</div>
+        <div>
+          <p class="sig-name">Yusuf</p>
+          <p class="sig-role">Your Berlin walking guide</p>
+        </div>
+        <svg class="sig-umbrella" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2C7 2 3 6 3 11h18c0-5-4-9-9-9z"/>
+          <path d="M12 11v9a2 2 0 0 1-4 0"/>
+        </svg>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      <div>
+        <a href="https://www.berlinwalk.com">berlinwalk.com</a>
+        <span class="umbrella-mini">&middot;</span>
+        <a href="https://www.instagram.com/berlinwalkingtour">@berlinwalkingtour</a>
+        <span class="umbrella-mini">&middot;</span>
+        <a href="https://wa.me/4915228483662">WhatsApp</a>
+      </div>
+      <div style="margin-top: 8px;">
+        Berlin Walking Tour &middot; info@yusufucuz.com
+      </div>
+      <div style="margin-top: 12px; font-size: 11px; color: #aaa;">
+        You&rsquo;re receiving this because you booked the Berlin Free Walking Tour. &nbsp;<a href="#" style="color: #aaa; text-decoration: underline;">Unsubscribe</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align: center; margin-top: 24px; font-size: 12px; color: #aaa;">
+    Mockup &middot; E1 of 7 &middot; Berlin Free Walking Tour automation
+  </div>
+
+</div>
+
+</body>
+</html>
