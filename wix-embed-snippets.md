@@ -2,6 +2,40 @@
 
 Use these with Wix "Embed a Site" / iframe URL embeds after deployment.
 
+For homepage SEO sections, use Wix Studio Custom Element instead of an iframe.
+Yusuf handles all Wix Studio canvas placement and publishing manually.
+
+## Homepage Custom Elements
+
+Use these in Wix Studio:
+
+```text
+Element: Custom Element
+Source type: Server URL
+```
+
+| Section | Source URL | Tag Name | Attributes |
+| --- | --- | --- | --- |
+| Stats | `https://fenerszymanski.github.io/berlinwalk-widgets/stats/stats-element.js` | `bw-stats` | none |
+| How It Works | `https://fenerszymanski.github.io/berlinwalk-widgets/how-it-works/how-it-works-element.js` | `bw-how-it-works` | none |
+| Tools Home | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | `bw-tools-home` | none |
+| Testimonials | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | `bw-testimonials` | none |
+| Gallery | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | `bw-gallery` | none |
+| Tools Hub | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tools-hub-element.js` | `bw-tools-hub` | none |
+| Why Walk With Me | `https://fenerszymanski.github.io/berlinwalk-widgets/why/why-element.js` | `bw-why` | none |
+| The Route | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | `bw-route` | none |
+| FAQ | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/faq-element.js` | `bw-faq` | `post="home"` |
+
+FAQ note: `bw-faq` emits homepage FAQPage JSON-LD from `faq/data.json`. Keep the
+old FAQ iframe files and `inject.js` for blog posts until live Rich Results
+testing confirms the homepage Custom Element schema is detected.
+
+Route note: `bw-route` pin coordinates and the dashed path come from
+`route/data.json`, so future coordinate updates should only touch data.
+
+Testimonials note: the trust strip currently shows FreeTour.com only. The listing
+URL is `https://www.freetour.com/company/97387`.
+
 ## Lead Form
 
 Recommended URL:
