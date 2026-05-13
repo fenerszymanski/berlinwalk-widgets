@@ -1,8 +1,9 @@
 # Send what to wear and pack email
-**Trigger timing:** 7 days before session
+**Trigger timing:** 3 days before session
+**Wix action ID:** 9b47a97d-c3c7-4c33-8009-380d668e792c · **messageId:** 57ad1afd-c9f6-45a7-acb6-0d3981d97cd2
 
 ## Subject line
-One week out: what to wear for the tour
+Three days out: what to wear for the tour
 
 ## Preview text
 Shoes, layers, water, and a small cash tip. Quick checklist.
@@ -10,7 +11,7 @@ Shoes, layers, water, and a small cash tip. Quick checklist.
 ## Body
 Hi {{firstName}},
 
-One week until we walk. Here's the practical side.
+Three days until we walk. Here's the practical side.
 
 **Shoes**
 
@@ -32,7 +33,7 @@ The tour only cancels in severe weather (storm warning, extreme cold). If that h
 
 If you have questions, WhatsApp is fastest: [+49 152 28483662](https://wa.me/4915228483662).
 
-See you in a week,
+See you soon,
 Yusuf
 
 ## CTA buttons
@@ -40,5 +41,5 @@ Yusuf
 2. **Message me on WhatsApp** → https://wa.me/4915228483662
 
 ## Notes for Yusuf
-- Maps to Wix Automation Step 7 (ACTION: What to wear and pack email, 7 days before)
-- If you have a specific blog post on Berlin weather or seasonal packing, swap the first CTA to point there directly.
+- New cadence: 3 days before session (moved from 7 days). Closer-in means weather forecasts are more reliable and the email lands while the tour is on the guest's near-term mind.
+- Wix action ID and messageId preserved. Body lives in Triggered Emails (messageId `57ad1afd-...`).

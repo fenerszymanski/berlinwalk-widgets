@@ -1,5 +1,6 @@
-# Send tour day morning email
-**Trigger timing:** Tour day, a few hours before session (INFERRED, Yusuf to confirm exact offset)
+# Send tour day welcome email
+**Trigger timing:** 3 hours before session
+**Wix action ID:** d8385701-0858-4763-9c24-39c034b99d06 · **messageId:** 7c531728-86a9-49f5-ab18-4f62a72f3e85
 
 ## Subject line
 See you at {{sessionTime}} under the World Clock
@@ -20,5 +21,5 @@ Yusuf
 1. **WhatsApp me if you're running late** → https://wa.me/4915228483662
 
 ## Notes for Yusuf
-- Maps to Wix Automation Step (likely) 11 (ACTION: Tour day morning, hours before). INFERRED. Confirm the actual delay (e.g. "3 hours before session" or "morning of session at fixed time").
-- If the automation step is configured as "X hours before session," 3-4 hours before is a good default so the guest sees it as they start their morning.
+- New cadence: 3 hours before session. Position 11 in the 13-step graph.
+- Repurposes the old "Send day-of checklist email" action (ID `d8385701-...`, messageId `7c531728-...`). The template body needs trimming in Triggered Emails to match the shorter welcome tone (60-100 words) rather than the previous longer checklist.

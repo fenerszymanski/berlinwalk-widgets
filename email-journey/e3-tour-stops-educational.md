@@ -1,5 +1,6 @@
 # Send tour stops educational email
-**Trigger timing:** 10 days before session
+**Trigger timing:** 24 hours after booking
+**Wix action ID:** 148eae73-c592-4033-b1b7-941e1b0dbad4 · **messageId:** 784e453d-76c6-45a4-85f6-6a116546bc09
 
 ## Subject line
 Four stories from the Berlin tour, in advance
@@ -10,7 +11,7 @@ A preview of what we'll walk past on {{sessionDate}}.
 ## Body
 Hi {{firstName}},
 
-Ten days out. I thought I'd share a few of the stops we'll visit, with a hook for each one. Not the full story (you'll get that on the walk), just enough to set the scene.
+A day after you booked, a few of the stops we'll visit, with a hook for each one. Not the full story (you'll get that on the walk), just enough to set the scene.
 
 **The TV Tower (Fernsehturm)**
 
@@ -38,5 +39,5 @@ Yusuf
 2. **Find the meeting point** → https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
 
 ## Notes for Yusuf
-- Maps to Wix Automation Step 5 (ACTION: Tour stops educational email, 10 days before)
-- Swap the blog CTA to a specific post (e.g. a "Best Views of Berlin" or "Museum Island" article) if one exists. Default landing on /blog if not.
+- New cadence: fires 24 hours after booking (relative delay). Still feels like an "early" educational email, just no longer tied to "10 days before session."
+- Wix action ID and messageId preserved from existing automation. Body lives in Triggered Emails (messageId `784e453d-...`).

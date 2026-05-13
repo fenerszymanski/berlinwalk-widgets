@@ -1,5 +1,6 @@
 # Send post-tour review request email
-**Trigger timing:** 1 day after session (INFERRED, Yusuf to confirm)
+**Trigger timing:** 1 day after session
+**Wix action ID:** b4348c70-c6d5-4ff6-a4c5-765925e7b54f · **messageId:** ef79e933-6097-42e8-8c3d-bb1657af1337
 
 ## Subject line
 Thanks for walking Berlin with me
@@ -35,6 +36,7 @@ Yusuf
 2. **Follow on Instagram** → https://www.instagram.com/berlinwalkingtour
 
 ## Notes for Yusuf
-- Maps to Wix Automation Step (likely) 13 (ACTION: Post-tour review request, 1 day after). INFERRED. Confirm timing. 1 day after is the standard sweet spot (tour still fresh, but they've slept on it).
+- Position 13 in the new 13-step graph. New role added by repurposing the old "Send Berlin local insider tips email" action (ID `b4348c70-...`, messageId `ef79e933-...`). The Triggered Email template body needs a full rewrite to become a post-tour review ask.
+- The previous "local insider tips" message becomes redundant in the new cadence. Either rewrite that template body, or create a fresh Triggered Email and update the action's `messageId` in the editor.
 - Default order: review first, Instagram second. If you'd rather lead with Instagram (broader funnel), swap the CTAs and reorder the body paragraphs.
 - Optional: add a conditional check in Wix so this email skips if the guest no-showed. Wix Bookings exposes attendance status, worth a 2-min check in the editor.

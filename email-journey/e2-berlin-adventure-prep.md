@@ -1,8 +1,9 @@
 # Send Berlin adventure preparation email
-**Trigger timing:** 14 days before session
+**Trigger timing:** 6 hours after booking
+**Wix action ID:** b039a2ee-7c9b-4a25-9e65-0c0f64bdd462 · **messageId:** be36ef13-9e61-40b2-9414-cf53d25e8141
 
 ## Subject line
-Two weeks until Berlin. Here's what's ahead.
+A few words about Berlin before your tour
 
 ## Preview text
 A short note about the city you're about to walk through.
@@ -10,7 +11,7 @@ A short note about the city you're about to walk through.
 ## Body
 Hi {{firstName}},
 
-Two weeks from {{sessionDate}}, you'll be standing under the World Clock at Alexanderplatz. I wanted to send you a few words about the ground we'll be covering.
+You just booked the tour, so while it's fresh, here are a few words about the ground we'll be covering.
 
 Berlin's historic centre is unusual. In the span of 3 kilometres, we walk past a medieval church that survived the Thirty Years' War, the East German answer to a Western skyscraper, and a Prussian cathedral built to rival St. Peter's in Rome. The streets you'll walk were once divided by a wall, flattened by bombs, and rebuilt twice. Most cities have a layer of history. Berlin has stacks.
 
@@ -20,7 +21,7 @@ Why does a 365-metre TV tower stand right next to a 13th-century church? And why
 
 Both have answers worth the walk.
 
-If you have time before you arrive, planning the rest of your stay can make a real difference. I keep a small set of tools and guides on the website covering weather, what to pack, and how to spend a few days here.
+If you're still planning the rest of your Berlin stay, a small set of tools and guides on the website cover weather, what to pack, and how to spend a few days here.
 
 Talk soon,
 Yusuf
@@ -30,5 +31,5 @@ Yusuf
 2. **Read the blog** → https://www.berlinwalk.com/blog
 
 ## Notes for Yusuf
-- Maps to Wix Automation Step 3 (ACTION: Berlin adventure preparation email, 14 days before)
-- If a guest books closer than 14 days out, this email should be skipped automatically by Wix. Confirm in Automation settings under "skip past delays" or equivalent.
+- New cadence: fires 6 hours after the booking trigger (relative delay, not session-based). Catches the guest while excitement is fresh.
+- Wix action ID and messageId from the existing automation are preserved. Email body content lives in Triggered Emails (messageId `be36ef13-...`) and must be updated manually in the editor.

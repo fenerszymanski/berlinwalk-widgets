@@ -1,5 +1,6 @@
 # Send booking confirmation email
 **Trigger timing:** Immediately after booking (Wix Bookings → Session booked)
+**Wix action ID:** 70c6b9f8-40bc-4984-bc08-efcf8a976c47 (root) · **messageId:** 46b82f1f-d073-4904-af14-bc5c3adafc3e
 
 ## Subject line
 Your Berlin walking tour is booked for {{sessionDate}}
