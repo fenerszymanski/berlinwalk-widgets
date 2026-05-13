@@ -269,7 +269,8 @@ class BWTestimonialsElement extends HTMLElement {
         .bw-testimonials .bw-trust-strip {
           display: grid;
           gap: 12px;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-template-columns: minmax(0, 360px);
+          justify-content: center;
           margin-top: 32px;
         }
 
@@ -468,7 +469,7 @@ class BWTestimonialsElement extends HTMLElement {
           </div>
 
           <div class="bw-carousel-dots" aria-label="Choose review"></div>
-          <div class="bw-trust-strip" aria-label="Review platform ratings"></div>
+          <div class="bw-trust-strip" aria-label="Review platform rating"></div>
 
           <div class="bw-cta-row">
             <a class="bw-booking-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Reserve your spot</a>
@@ -582,11 +583,8 @@ class BWTestimonialsElement extends HTMLElement {
     if (!strip) return;
 
     const freetourHref = links.freetour || 'https://www.freetour.com/berlin/berlin-behind-the-landmarks-a-walk-through-power-faith-change';
-    const rating = stats.rating || '5.0';
     const platforms = [
-      { name: 'FreeTour.com', rating: '9.8/10', href: freetourHref },
-      { name: 'GuruWalk', rating: `${rating}/5`, href: 'https://www.guruwalk.com/' },
-      { name: 'Google', rating: `${rating}/5`, href: 'https://www.google.com/search?q=BerlinWalk+Free+Walking+Tour' }
+      { name: 'FreeTour.com', rating: '9.8/10', href: freetourHref }
     ];
 
     strip.innerHTML = platforms.map(platform => `
