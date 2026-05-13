@@ -1,6 +1,8 @@
 # Berlin Free Walking Tour - 7-Email Booking Journey
 
-Draft content for the 7-email post-booking sequence that fires from the Wix Automation **"Berlin Free Walking Tour - 7-Email Journey"** (Wix Bookings → Session booked, filtered to service `448872c2-...`). Each `.md` file in this folder is one email, ready to paste into its corresponding step in the Wix Automation editor.
+Draft content for the 7-email post-booking sequence that fires from the Wix Automation **"Berlin Free Walking Tour - 7-Email Journey"** (automation ID `16a0d96d-9a1d-4107-ad5c-c3d21c6d8da1`; trigger: Wix Bookings → Session booked, filtered to service `448872c2-...`). Status: INACTIVE pending email-body authoring in the editor. Each `.md` file in this folder is one email, ready to paste into its corresponding Triggered Email template.
+
+> **NOTE:** The original automation `01909883-fa76-4cb3-b0d3-a77958a020ea` was stuck in draft state (invisible to the Wix REST API) and could not be PATCHed. The structure was rebuilt as a fresh non-draft automation via Create Automation, with all 13 action IDs and 7 messageIds preserved verbatim. The old draft is still in the dashboard, **manually delete it from the editor** to avoid two automations sharing the same name. Both reference the same Triggered Email templates, so deletion is non-destructive to the email content.
 
 The voice is first-person (Yusuf), atmospheric, and tip-based-friendly. No em dashes, no marketing fluff. Most emails are 150-300 words; E1 is longer because it has to do confirmation work.
 
@@ -28,30 +30,13 @@ The voice is first-person (Yusuf), atmospheric, and tip-based-friendly. No em da
 
 The previous structure had 7 emails between booking and the morning of the tour, all session-relative delays (14d/10d/7d/3d/1d before, then morning-of). The new structure adds **two near-booking touches** (E2 at +6 h, E3 at +24 h) and **one post-tour touch** (E7 at +1 d after session). E6 ("local insider tips") and the duplicated "final prep / day-of checklist" emails are repurposed, see the per-file Notes sections for which old Triggered Email template each new role inherits and what to rewrite in the editor.
 
-## Wix API rewrite attempt (Phase 2)
+## How the structure was built (Wix API path)
 
-The automation structure was rewritten in a JSON PATCH body and **validated** successfully against the Wix Automations V2 `/automations/validate` endpoint (HTTP 200, status `VALID_WITH_WARNINGS`; only warning was a pre-existing unknown variable on the day-before-reminder action, not introduced by the rewrite).
+The original automation `01909883-fa76-4cb3-b0d3-a77958a020ea` was stuck in draft state. Wix REST API keys return HTTP 404 on any operation (GET / PATCH / DELETE) against a draft automation, even though the dashboard editor can see it fine. Save in the editor did not clear the draft flag; the docs note "Publish draft automations" as a not-yet-exposed feature.
 
-**The PATCH itself was blocked.** GET and PATCH on this specific automation return HTTP 404 from any Wix API key, despite the automation being clearly visible in your browser session. Cause: the automation has a `draftInfo: {}` field present (the Berlin Essentials automation does not), which signals draft state. The Wix REST API explicitly does not expose draft automations to API key auth, the docs even comment out "Publish draft automations" as not yet released.
+**Resolution:** built a fresh non-draft automation via `POST /automations/create` (HTTP 200, revision 1), preserving all 13 action IDs, all 7 messageIds, the trigger filter (`f2ddacf8-...`, service ID `448872c2-...`), and the action chaining in the new clean cadence. Validated cleanly against `/automations/validate` first (same pre-existing `business_contact_phone` warning as before, not introduced by the rewrite).
 
-So the new structure was designed, mapped, and validated, but the actual rewiring needs to happen in the Wix editor. Use the table above as the authoritative spec for what each step should look like.
-
-### How to rewrite the structure in the editor
-
-Each of the 6 delay tiles needs its delay value (and displayName) updated. Use the cadence table above as the source of truth, then map by action ID:
-
-| Action ID | Old delay | New delay |
-| --- | --- | --- |
-| `936e2c73-...` | 14 days before session | **6 hours after previous action** (relative) |
-| `66d26935-...` | 10 days before session | **24 hours after previous action** (relative) |
-| `a78f8afd-...` | 3 days before session | (unchanged) 3 days before session |
-| `fd0be6c4-...` | 1 day before session | (unchanged) 1 day before session |
-| `245bfe04-...` | Morning of tour day | **3 hours before session** |
-| `44bd2aed-...` | 7 days before session | **1 day after session** |
-
-The 7 email tiles keep their action IDs; only their position in the flow changes (the postActionIds wiring is what gets rewired). In the editor, drag tiles to reorder so the chain follows the cadence table (E1 → 6h → E2 → 24h → E3 → 3d before → E4 → 1d before → E5 → 3h before → E6 → 1d after → E7).
-
-For each email tile: paste subject + preview from the corresponding `.md` file, rename the action displayName to match the table, and where the role changed (E5, E6, E7), update the underlying Triggered Email template body via "Edit email" or the Email Marketing dashboard.
+The new automation ID is `16a0d96d-9a1d-4107-ad5c-c3d21c6d8da1`. Status is INACTIVE. The old draft `01909883-...` still sits in the dashboard, awaiting manual deletion from the editor.
 
 ### Triggered Email templates needing rewrite
 
@@ -65,17 +50,18 @@ The other four messages (`46b82f1f`, `be36ef13`, `784e453d`, `57ad1afd`) keep th
 
 ## Paste workflow per email
 
-1. Open the automation in the editor: **Dashboard → Automations → "Berlin Free Walking Tour - 7-Email Journey" → Edit**.
-2. Click an email step. The right-hand panel shows **Subject**, **Preview text**, and the email body editor.
-3. From the corresponding `.md` file:
-   - Copy the **Subject line** into the Subject field.
-   - Copy the **Preview text** into the preview/preheader field.
-   - For body content, **click "Edit email" on the action**. This opens the Triggered Email template editor (separate from the automation flow editor). Paste the body there.
-   - For each `{{firstName}}`, `{{sessionDate}}`, `{{sessionTime}}` token, use Wix's **Add personalization** dropdown and pick the matching Bookings variable. Delete the `{{...}}` placeholder once the real variable is inserted.
+The flow structure is in place. You only need to author email content now.
+
+1. **Delete the old draft automation** in the dashboard: open the original `01909883-...` automation and click delete. The new `16a0d96d-...` already references all the same Triggered Email templates, so this is non-destructive.
+2. Open the new automation: **Dashboard → Automations → "Berlin Free Walking Tour - 7-Email Journey" → Edit**. Confirm the cadence matches the table above (it should, the API built it exactly).
+3. For each of the 7 email steps:
+   - Click the step, then **"Edit email"** to open the Triggered Email template editor.
+   - Paste Subject + Preview + Body from the corresponding `.md` file.
+   - For each `{{firstName}}`, `{{sessionDate}}`, `{{sessionTime}}` token, use Wix's **Add personalization** dropdown to pick the matching Bookings variable. Delete the `{{...}}` placeholder once the real variable is inserted.
    - Add the **CTA buttons** as buttons in the body, using the URLs listed.
-4. Save the Triggered Email template, then go back to the automation editor.
-5. Repeat for all 7 emails. Save the automation (don't activate yet).
-6. When everything's confirmed correct, click **Activate**.
+   - Save the Triggered Email template.
+4. Three Triggered Email templates inherited content from previous roles and need a full rewrite (see [Triggered Email templates needing rewrite](#triggered-email-templates-needing-rewrite) below).
+5. When all 7 templates are updated, click **Activate** on the automation.
 
 ## Short-notice bookings
 
