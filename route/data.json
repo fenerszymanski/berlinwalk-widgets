@@ -1,0 +1,125 @@
+{
+  "image": {
+    "src": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration.png",
+    "src2x": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration@2x.png",
+    "alt": "Illustrated map of central Berlin Mitte showing the BerlinWalk tour route from Alexanderplatz to Hackescher Markt",
+    "aspectRatio": "16:9"
+  },
+  "stops": [
+    {
+      "id": 1,
+      "name": "World Clock",
+      "location": "Alexanderplatz",
+      "x": 97,
+      "y": 36,
+      "hook": "Where the tour begins. A Cold War-era monument under which generations of Berliners have met without giving an address.",
+      "image": null
+    },
+    {
+      "id": 2,
+      "name": "TV Tower",
+      "location": "Fernsehturm",
+      "x": 89,
+      "y": 25,
+      "hook": "East Berlin's tallest statement. Built in 1969 to outshine the West, with a reflective cross the Pope's Revenge story explains.",
+      "image": null
+    },
+    {
+      "id": 3,
+      "name": "Rotes Rathaus",
+      "location": "Berlin's Town Hall",
+      "x": 92,
+      "y": 52,
+      "hook": "Red brick that has watched Berlin become Berlin since 1869. Empire, war, division, reunification — all from one balcony.",
+      "image": null
+    },
+    {
+      "id": 4,
+      "name": "Neptun Brunnen",
+      "location": "Neptune Fountain",
+      "x": 74,
+      "y": 44,
+      "hook": "Four river goddesses around a sea god in the middle of Berlin. The detail no one notices until you stop to look.",
+      "image": null
+    },
+    {
+      "id": 5,
+      "name": "St. Mary's Church",
+      "location": "Marienkirche",
+      "x": 78,
+      "y": 36,
+      "hook": "Berlin's second oldest church, with a medieval dance-of-death fresco inside that survived everything the 20th century threw at it.",
+      "image": null
+    },
+    {
+      "id": 6,
+      "name": "Marx-Engels Forum",
+      "location": "The bronze meeting",
+      "x": 72,
+      "y": 60,
+      "hook": "Two seated philosophers, a bit weathered. The plaza around them tells a longer story than the statue itself.",
+      "image": null
+    },
+    {
+      "id": 7,
+      "name": "Humboldt Forum",
+      "location": "Berlin City Palace",
+      "x": 52,
+      "y": 86,
+      "hook": "Demolished, then rebuilt as a near-replica 60 years later. The most controversial reconstruction in modern Berlin.",
+      "image": null
+    },
+    {
+      "id": 8,
+      "name": "Lustgarten",
+      "location": "Pleasure Garden",
+      "x": 45,
+      "y": 73,
+      "hook": "Royal park, military parade ground, Nazi rally site, and finally a garden again. Same lawn, very different uses.",
+      "image": null
+    },
+    {
+      "id": 9,
+      "name": "Berliner Dom",
+      "location": "Berlin Cathedral",
+      "x": 52,
+      "y": 60,
+      "hook": "Prussian ambition in stone. The Hohenzollern family vault below, the green dome above, the bullet holes still on the facade.",
+      "image": null
+    },
+    {
+      "id": 10,
+      "name": "Altes Museum",
+      "location": "Old Museum",
+      "x": 34,
+      "y": 66,
+      "hook": "Berlin's first public museum, 1830. Eighteen Ionic columns built to convince a young city it deserved to keep ancient treasures.",
+      "image": null
+    },
+    {
+      "id": 11,
+      "name": "Neues Museum & Alte Nationalgalerie",
+      "location": "Museum Island",
+      "x": 24,
+      "y": 48,
+      "hook": "Nefertiti's home and a temple of 19th-century German painting, side by side. UNESCO-protected, hard-won, fully restored.",
+      "image": null
+    },
+    {
+      "id": 12,
+      "name": "Hackescher Markt",
+      "location": "End of the tour",
+      "x": 22,
+      "y": 5,
+      "hook": "Where the tour ends and Berlin's most photogenic courtyards begin. Coffee, S-Bahn, your next adventure.",
+      "image": null
+    }
+  ],
+  "meta": {
+    "stopCount": 12,
+    "duration": "~2 hours",
+    "distance": "~3 km",
+    "startStop": 1,
+    "endStop": 12
+  }
+}
