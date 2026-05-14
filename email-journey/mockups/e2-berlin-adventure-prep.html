@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>E2 - Berlin adventure prep (brand-aligned mockup)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  body { margin: 0; background: #f4f1ea; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; }
+  .frame { max-width: 720px; margin: 32px auto; padding: 0 16px; }
+  .inbox-meta { background: #fff; border: 1px solid #e5e0d3; border-radius: 6px; padding: 12px 16px; margin-bottom: 14px; font-size: 13px; color: #555; line-height: 1.5; }
+  .inbox-meta .from { color: #999; font-size: 12px; }
+  .inbox-meta .subj { font-weight: 600; color: #212121; margin: 2px 0; }
+  .inbox-meta .prev { color: #888; font-size: 12.5px; }
+  .annotation { background: #fffaeb; border-left: 3px solid #FFE600; padding: 10px 14px; font-size: 12px; color: #5a5025; font-family: monospace; margin-bottom: 14px; border-radius: 0 4px 4px 0; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="frame">
+
+  <div class="annotation">
+    <strong>Mockup notes:</strong> E2 fires 6 hours after booking. Editorial-heavy, lighter on UI elements than E1. Merriweather pull-quote anchors the page. Wix-paste version at <code>e2-wix-html-block.html</code>.
+  </div>
+
+  <div class="inbox-meta">
+    <div class="from">Yusuf, Berlin Walk &lt;info@yusufucuz.com&gt;</div>
+    <div class="subj">A few words about Berlin before your tour</div>
+    <div class="prev">A short note about the city you're about to walk through.</div>
+  </div>
+
+  <!-- ============ EMAIL CONTENT BLOCK STARTS HERE ============ -->
+
+  <table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 640px; margin: 0 auto; background: #ffffff; border-collapse: collapse; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;">
+
+    <!-- Hero image -->
+    <tr>
+      <td style="padding: 0;">
+        <img src="https://static.wixstatic.com/media/5a08a3_0c78680ce90b48fa9735897d3fbd8c28~mv2.png" alt="Berlin's historic centre" width="640" style="display: block; width: 100%; max-width: 640px; height: auto; border: 0;">
+      </td>
+    </tr>
+
+    <!-- Yellow brand band with kicker + headline -->
+    <tr>
+      <td style="background: #FFE600; padding: 32px 40px 30px;">
+        <p style="margin: 0 0 6px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #1B5E20;">Before your walk</p>
+        <h1 style="margin: 0; font-family: 'Merriweather', Georgia, serif; font-weight: 700; font-size: 28px; line-height: 1.25; color: #1B5E20;">Most cities have a layer.<br>Berlin has stacks.</h1>
+      </td>
+    </tr>
+
+    <!-- Opening paragraph -->
+    <tr>
+      <td style="padding: 32px 40px 0;">
+        <p style="margin: 0 0 18px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.7; color: #212121;">
+          Hi ${booking_contact_first_name},
+        </p>
+        <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.75; color: #212121;">
+          You just booked the tour, so while it&rsquo;s fresh, here are a few words about the ground we&rsquo;ll be covering.
+        </p>
+      </td>
+    </tr>
+
+    <!-- Main atmospheric paragraph -->
+    <tr>
+      <td style="padding: 22px 40px 0;">
+        <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.75; color: #212121;">
+          Berlin&rsquo;s historic centre is unusual. In the span of <strong style="color: #1B5E20;">3 kilometres</strong>, we walk past a medieval church that survived the Thirty Years&rsquo; War, the East German answer to a Western skyscraper, and a Prussian cathedral built to rival St. Peter&rsquo;s in Rome. The streets you&rsquo;ll walk were once divided by a wall, flattened by bombs, and rebuilt twice.
+        </p>
+      </td>
+    </tr>
+
+    <!-- Setup line for questions -->
+    <tr>
+      <td style="padding: 22px 40px 0;">
+        <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.75; color: #212121;">
+          I won&rsquo;t spoil the stories here. But I&rsquo;ll leave you with two questions to keep in mind on your walk:
+        </p>
+      </td>
+    </tr>
+
+    <!-- Pull-quote block -->
+    <tr>
+      <td style="padding: 28px 40px 12px;">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background: #C5E1A5; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 32px 32px 16px;">
+              <p style="margin: 0; font-family: 'Merriweather', Georgia, serif; font-style: italic; font-weight: 400; font-size: 19px; line-height: 1.55; color: #1B5E20;">
+                &ldquo;Why does a 365-metre TV tower stand right next to a 13th-century church?&rdquo;
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding: 0 32px 32px;">
+              <p style="margin: 0; font-family: 'Merriweather', Georgia, serif; font-style: italic; font-weight: 400; font-size: 19px; line-height: 1.55; color: #1B5E20;">
+                &ldquo;Why is there a giant bronze statue of Karl Marx sitting in a public square in the middle of unified Germany?&rdquo;
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Closing line for questions -->
+    <tr>
+      <td style="padding: 16px 40px 0;">
+        <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.75; color: #212121;">
+          Both have answers worth the walk.
+        </p>
+      </td>
+    </tr>
+
+    <!-- Bridge to Tools hub -->
+    <tr>
+      <td style="padding: 28px 40px 0;">
+        <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.75; color: #212121;">
+          If you&rsquo;re still planning the rest of your Berlin stay, a small set of tools and guides on the website cover weather, what to pack, and how to spend a few days here.
+        </p>
+      </td>
+    </tr>
+
+    <!-- Yellow divider -->
+    <tr>
+      <td style="padding: 32px 40px 0;">
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;">
+          <tr><td style="height: 4px; background: #FFE600; line-height: 4px; font-size: 0;">&nbsp;</td></tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- CTAs -->
+    <tr>
+      <td style="padding: 28px 40px 8px;">
+        <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+          <tr>
+            <td style="padding-right: 10px;">
+              <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+                <tr><td style="background: #1B5E20; border-radius: 2px;">
+                  <a href="https://berlinwalk.com/berlin-tools" style="display: inline-block; padding: 14px 24px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #FFE600; text-decoration: none;">Plan your Berlin stay</a>
+                </td></tr>
+              </table>
+            </td>
+            <td>
+              <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+                <tr><td style="background: #ffffff; border: 2px solid #1B5E20; border-radius: 2px;">
+                  <a href="https://berlinwalk.com/blog" style="display: inline-block; padding: 12px 22px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #1B5E20; text-decoration: none;">Read the blog</a>
+                </td></tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- Sign-off -->
+    <tr>
+      <td style="padding: 36px 40px 8px;">
+        <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">
+          Talk soon,
+        </p>
+      </td>
+    </tr>
+
+    <!-- Signature -->
+    <tr>
+      <td style="padding: 4px 40px 36px;">
+        <p style="margin: 0 0 2px; font-family: 'Merriweather', Georgia, serif; font-size: 18px; font-weight: 700; color: #1B5E20;">Yusuf</p>
+        <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #757575;">Your Berlin walking guide</p>
+      </td>
+    </tr>
+
+    <!-- Footer band -->
+    <tr>
+      <td style="background: #1B5E20; padding: 24px 40px; text-align: center;">
+        <p style="margin: 0 0 10px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: #FFE600; letter-spacing: 0.04em;">
+          <a href="https://berlinwalk.com" style="color: #FFE600; text-decoration: none; font-weight: 600;">berlinwalk.com</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://www.instagram.com/berlinwalkingtour" style="color: #FFE600; text-decoration: none; font-weight: 600;">@berlinwalkingtour</a>
+          &nbsp;&middot;&nbsp;
+          <a href="https://wa.me/4915228483662" style="color: #FFE600; text-decoration: none; font-weight: 600;">WhatsApp</a>
+        </p>
+        <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 11px; color: #C5E1A5;">
+          You&rsquo;re receiving this because you booked the Berlin Free Walking Tour. <a href="#" style="color: #C5E1A5; text-decoration: underline;">Unsubscribe</a>
+        </p>
+      </td>
+    </tr>
+
+  </table>
+
+  <!-- ============ EMAIL CONTENT BLOCK ENDS HERE ============ -->
+
+  <div style="text-align: center; margin-top: 20px; font-family: 'Montserrat', Arial, sans-serif; font-size: 11px; color: #999;">
+    Mockup &middot; E2 of 7 &middot; Berlin Walk 7-Email Journey &middot; Fires +6h after booking
+  </div>
+
+</div>
+</body>
+</html>
