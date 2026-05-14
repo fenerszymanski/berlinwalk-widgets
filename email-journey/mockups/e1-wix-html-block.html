@@ -1,0 +1,175 @@
+<!--
+=============================================================================
+E1 - Booking confirmation
+Paste-ready HTML for the Wix Triggered Email "Customize HTML" block.
+
+BEFORE PASTING:
+1. Upload the Alexanderplatz hero photo to your Wix Media Manager
+   (Wix dashboard -> Media -> upload e1-hero.png from
+   email-journey/mockups/assets/). After upload, copy its hosted URL
+   (looks like https://static.wixstatic.com/media/...).
+2. In the HTML below, find <!-- HERO_IMG_URL --> and replace
+   "REPLACE_WITH_WIX_HOSTED_URL" with that hosted URL.
+3. Copy everything between <!-- HTML BLOCK START --> and <!-- HTML BLOCK END -->
+   into the Wix "Customize HTML" editor.
+4. Save & Continue.
+
+NOTES on Wix constraints applied:
+- No <style> block, no Google Fonts <link>, no SVG, no JavaScript
+- All CSS is inline on each element
+- Table-based layout for email-client + Wix HTML-block safety
+- Font stack falls back gracefully if Montserrat/Merriweather aren't
+  rendered (most modern clients on Mac/iOS already have Montserrat)
+- All Wix Bookings variables use ${var_name} syntax matching the
+  trigger payload schema
+=============================================================================
+-->
+
+<!-- HTML BLOCK START -->
+<table cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width: 640px; margin: 0 auto; background: #ffffff; border-collapse: collapse;">
+
+  <tr>
+    <td style="padding: 0;">
+      <!-- HERO_IMG_URL -->
+      <img src="REPLACE_WITH_WIX_HOSTED_URL" alt="Weltzeituhr at Alexanderplatz, the meeting point" width="640" style="display: block; width: 100%; max-width: 640px; height: auto; border: 0;">
+    </td>
+  </tr>
+
+  <tr>
+    <td style="background: #FFE600; padding: 32px 40px 28px;">
+      <p style="margin: 0 0 6px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #1B5E20;">Booking confirmed</p>
+      <h1 style="margin: 0; font-family: 'Merriweather', Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 30px; line-height: 1.2; color: #1B5E20;">You&rsquo;re booked, ${booking_contact_first_name}.</h1>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 28px 40px 8px;">
+      <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 16px; line-height: 1.6; color: #212121;">
+        I&rsquo;ll see you on <strong style="color: #1B5E20;">${start_date}</strong> for the Berlin Free Walking Tour. Reference <span style="color: #757575; font-size: 14px;">#${order_number}</span>.
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 24px 40px 12px;">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="background: #C5E1A5; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 26px 28px 22px;">
+            <p style="margin: 0 0 4px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Where to meet me</p>
+            <p style="margin: 0 0 14px; font-family: 'Merriweather', Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 20px; line-height: 1.3; color: #1B5E20;">Weltzeituhr, Alexanderplatz</p>
+            <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.6; color: #212121;">
+              The large rotating clock with city names on it, in the middle of the square. I&rsquo;ll be the one holding a <strong>green umbrella</strong>, so I&rsquo;m easy to spot.
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 0 16px 22px;">
+            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;">
+              <tr>
+                <td width="33%" align="center" style="padding: 14px 8px; border-top: 1px solid #1B5E20;">
+                  <p style="margin: 0 0 4px; font-family: 'Merriweather', Georgia, 'Times New Roman', serif; font-size: 22px; font-weight: 700; color: #1B5E20;">${start_time}</p>
+                  <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1B5E20;">Tour starts</p>
+                </td>
+                <td width="34%" align="center" style="padding: 14px 8px; border-top: 1px solid #1B5E20; border-left: 1px solid #1B5E20; border-right: 1px solid #1B5E20;">
+                  <p style="margin: 0 0 4px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 600; color: #1B5E20;">Arrive 5 min early</p>
+                  <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1B5E20;">So we start on time</p>
+                </td>
+                <td width="33%" align="center" style="padding: 14px 8px; border-top: 1px solid #1B5E20;">
+                  <p style="margin: 0 0 4px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 14px; font-weight: 600; color: #1B5E20;">Look for &#9730;</p>
+                  <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1B5E20;">Green umbrella</p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding: 0 28px 22px;">
+            <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 12.5px; line-height: 1.6; color: #1B5E20; font-style: italic;">
+              Nearest transit: Alexanderplatz (U2, U5, U8, S5, S7, S75).
+            </p>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 28px 40px 0;">
+      <h2 style="margin: 0 0 12px; font-family: 'Merriweather', Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 20px; line-height: 1.3; color: #1B5E20;">How the tip-based model works</h2>
+      <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #212121;">
+        The tour itself is free to join. There&rsquo;s nothing to pay upfront and nothing to pay if you don&rsquo;t enjoy it. At the end, if the tour was worth your time, you tip what feels fair. Most guests tip between <strong style="color: #1B5E20;">&euro;5 and &euro;20</strong> per person, but it&rsquo;s entirely up to you. I keep the tour free so anyone visiting Berlin can join, regardless of budget.
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 28px 40px 0;">
+      <h2 style="margin: 0 0 12px; font-family: 'Merriweather', Georgia, 'Times New Roman', serif; font-weight: 700; font-size: 20px; line-height: 1.3; color: #1B5E20;">What to expect</h2>
+      <p style="margin: 0 0 14px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #212121;">
+        We&rsquo;ll walk about <strong style="color: #1B5E20;">3 kilometres at a comfortable pace over roughly 2 hours</strong>, covering 12 stops through Berlin&rsquo;s historic centre, from Alexanderplatz down to Museum Island and finishing at Hackescher Markt. The tour runs outdoors only (no museum entries) and runs rain or shine. I&rsquo;d only cancel for severe weather, and you&rsquo;d hear from me by email if that happens.
+      </p>
+      <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.7; color: #212121;">
+        Bring comfortable shoes, a water bottle, and your curiosity. More practical details coming in the emails ahead.
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 32px 40px 0;">
+      <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse;">
+        <tr><td style="height: 4px; background: #FFE600; line-height: 4px; font-size: 0;">&nbsp;</td></tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 24px 40px 8px;">
+      <p style="margin: 0 0 22px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.7; color: #212121;">
+        If anything comes up, message me on WhatsApp at <a href="https://wa.me/4915228483662" style="color: #1B5E20; font-weight: 600; text-decoration: none;">+49 152 28483662</a> or email <a href="mailto:info@yusufucuz.com" style="color: #1B5E20; font-weight: 600; text-decoration: none;">info@yusufucuz.com</a>. I read every message.
+      </p>
+
+      <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+        <tr>
+          <td style="padding-right: 10px;">
+            <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+              <tr><td style="background: #1B5E20; border-radius: 2px;">
+                <a href="${manage_booking_link}" style="display: inline-block; padding: 14px 24px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #FFE600; text-decoration: none;">View or change booking</a>
+              </td></tr>
+            </table>
+          </td>
+          <td>
+            <table cellpadding="0" cellspacing="0" border="0" style="border-collapse: collapse;">
+              <tr><td style="background: #ffffff; border: 2px solid #1B5E20; border-radius: 2px;">
+                <a href="https://wa.me/4915228483662" style="display: inline-block; padding: 12px 22px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #1B5E20; text-decoration: none;">WhatsApp me</a>
+              </td></tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="padding: 36px 40px 32px;">
+      <p style="margin: 0 0 2px; font-family: 'Merriweather', Georgia, 'Times New Roman', serif; font-size: 18px; font-weight: 700; color: #1B5E20;">Yusuf</p>
+      <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: #757575;">Your Berlin walking guide</p>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="background: #1B5E20; padding: 24px 40px; text-align: center;">
+      <p style="margin: 0 0 10px; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 13px; color: #FFE600; letter-spacing: 0.04em;">
+        <a href="https://berlinwalk.com" style="color: #FFE600; text-decoration: none; font-weight: 600;">berlinwalk.com</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://www.instagram.com/berlinwalkingtour" style="color: #FFE600; text-decoration: none; font-weight: 600;">@berlinwalkingtour</a>
+        &nbsp;&middot;&nbsp;
+        <a href="https://wa.me/4915228483662" style="color: #FFE600; text-decoration: none; font-weight: 600;">WhatsApp</a>
+      </p>
+      <p style="margin: 0; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 11px; color: #C5E1A5;">
+        You&rsquo;re receiving this because you booked the Berlin Free Walking Tour.
+      </p>
+    </td>
+  </tr>
+
+</table>
+<!-- HTML BLOCK END -->
