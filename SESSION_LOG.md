@@ -14,6 +14,7 @@ Format for each entry — see `AGENTS.md` §9.
 - Recorded that Yusuf rotated the leaked Wix API key and deleted the old key
 - Updated local E7 source so the primary CTA points to the per-booking Berlin Walk review form
 - Updated live Wix automation metadata so both E7 actions expose `order_number` and `booking_contact_first_name`
+- Yusuf pasted the updated E7 HTML into both live Wix Triggered Email templates
 
 **Changed:**
 - `AGENTS.md` — removed the completed Wix API key rotation TODO
@@ -22,11 +23,12 @@ Format for each entry — see `AGENTS.md` §9.
 - `email-journey/e7-post-tour-review-request.md` — replaced FreeTour review ask with the Berlin Walk review form URL
 - `email-journey/mockups/e7-wix-html-block.html` — made "Leave a review" the primary CTA using `${order_number}` and `${booking_contact_first_name}`
 - Wix: patched automation `16a0d96d-9a1d-4107-ad5c-c3d21c6d8da1` from revision 6 to 7; both E7 actions now include `{{var("order_number")}}`
+- Wix: Yusuf pasted the updated E7 HTML into both live Triggered Email templates
 
-**Opened:** Paste/publish the updated E7 HTML in both Wix Triggered Email templates (`8a0dcaab-...` and `22ff0a12-...`); REST cannot write Triggered Email body content.
-**Closed:** Wix API key rotation; local E7 content update; E7 automation dynamic params
+**Opened:** none
+**Closed:** Wix API key rotation; local E7 content update; E7 automation dynamic params; E7 Wix template paste
 
-**Next session should:** Paste the updated E7 Wix HTML block into both live E7 Triggered Email templates, then test the cancel-on-cancel automation end-to-end with a real test booking and cancellation.
+**Next session should:** Test the cancel-on-cancel automation end-to-end with a real test booking and cancellation, watching for `cancelEvent status: 200` and confirming E2 does not fire after cancellation.
 
 ## 2026-05-15 — Claude Code
 
