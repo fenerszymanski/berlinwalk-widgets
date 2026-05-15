@@ -94,7 +94,7 @@ When Yusuf is in the Wix automation editor → email step → "Edit email," the 
 Pulled from `SESSION_LOG.md` — see that file for active state. As of the latest session:
 
 1. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug.
-2. **Update E7 email** to point at `berlinwalk.com/leave-review?bid=${order_number}&n=${booking_contact_first_name}` (currently links to Instagram + blog only).
+2. **Paste/publish updated E7 email in Wix.** Local source now points at `berlinwalk.com/leave-review?bid=${order_number}&n=${booking_contact_first_name}` and automation revision 7 exposes both variables. Paste `email-journey/mockups/e7-wix-html-block.html` into both current E7 Triggered Email templates (`messageId 8a0dcaab-...` and `22ff0a12-...`) and verify in the editor.
 3. **Convert homepage `bw-testimonials`** to read from `listReviews` instead of `testimonials/data.json` so site-submitted reviews flow through to the homepage carousel.
 4. **Convert `/leave-review` to a Custom Element** (currently iframe) to fix mobile sizing and match the rest of the site's element pattern. The mobile breakpoint height is the current workaround.
 

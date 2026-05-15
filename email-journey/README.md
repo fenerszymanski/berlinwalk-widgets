@@ -1,6 +1,6 @@
 # Berlin Free Walking Tour - 7-Email Booking Journey
 
-Draft content for the 7-email post-booking sequence that fires from the Wix Automation **"Berlin Free Walking Tour - 7-Email Journey"** (automation ID `16a0d96d-9a1d-4107-ad5c-c3d21c6d8da1`; trigger: Wix Bookings → Session booked, filtered to service `448872c2-...`). Status: INACTIVE pending email-body authoring in the editor. Each `.md` file in this folder is one email, ready to paste into its corresponding Triggered Email template.
+Draft content for the 7-email post-booking sequence that fires from the Wix Automation **"Berlin Free Walking Tour - Smart Email Journey"** (automation ID `16a0d96d-9a1d-4107-ad5c-c3d21c6d8da1`; trigger: Wix Bookings → Session booked, filtered to service `448872c2-...`). Status: ACTIVE as of revision 7. Each `.md` file in this folder is one email, ready to paste into its corresponding Triggered Email template.
 
 > **NOTE:** The original automation `01909883-fa76-4cb3-b0d3-a77958a020ea` was stuck in draft state (invisible to the Wix REST API) and could not be PATCHed. The structure was rebuilt as a fresh non-draft automation via Create Automation, with all 13 action IDs and 7 messageIds preserved verbatim. The old draft is still in the dashboard, **manually delete it from the editor** to avoid two automations sharing the same name. Both reference the same Triggered Email templates, so deletion is non-destructive to the email content.
 
@@ -24,7 +24,9 @@ The voice is first-person (Yusuf), atmospheric, and tip-based-friendly. No em da
 | 10 | (delay) | Wait until 3 hours before session | start_date - 3 h | `245bfe04-...` |
 | 11 | [e6-tour-day-morning.md](e6-tour-day-morning.md) | Send tour day welcome email | After step 10 | `d8385701-...` · `7c531728-...` |
 | 12 | (delay) | Wait until 1 day after session | start_date + 1 d | `44bd2aed-...` |
-| 13 | [e7-post-tour-review-request.md](e7-post-tour-review-request.md) | Send post-tour review request | After step 12 | `b4348c70-...` · `ef79e933-...` |
+| 13 | [e7-post-tour-review-request.md](e7-post-tour-review-request.md) | Send post-tour review request | After step 12 | `b4348c70-...` · `8a0dcaab-...` |
+
+The short-notice branch has a separate E7 action/template: action `99e30db9-...`, messageId `22ff0a12-...`. Paste the same E7 body into both current E7 templates.
 
 ### What changed from the previous cadence
 
@@ -36,7 +38,7 @@ The original automation `01909883-fa76-4cb3-b0d3-a77958a020ea` was stuck in draf
 
 **Resolution:** built a fresh non-draft automation via `POST /automations/create` (HTTP 200, revision 1), preserving all 13 action IDs, all 7 messageIds, the trigger filter (`f2ddacf8-...`, service ID `448872c2-...`), and the action chaining in the new clean cadence. Validated cleanly against `/automations/validate` first (same pre-existing `business_contact_phone` warning as before, not introduced by the rewrite).
 
-The new automation ID is `16a0d96d-9a1d-4107-ad5c-c3d21c6d8da1`. Status is INACTIVE. The old draft `01909883-...` still sits in the dashboard, awaiting manual deletion from the editor.
+The new automation ID is `16a0d96d-9a1d-4107-ad5c-c3d21c6d8da1`. Status is ACTIVE as of revision 7. The old draft `01909883-...` may still sit in the dashboard; delete it from the editor if it is still visible.
 
 ### Triggered Email templates needing rewrite
 
@@ -44,7 +46,8 @@ These three Triggered Email messages still hold content from their previous role
 
 - `bc28230c-a29f-4db6-b300-60aacdea85cb` (was "final prep", now E5 day-before reminder)
 - `7c531728-86a9-49f5-ab18-4f62a72f3e85` (was "day-of checklist", now E6 tour day welcome, trim to 60-100 words)
-- `ef79e933-6097-42e8-8c3d-bb1657af1337` (was "local insider tips", now E7 post-tour review request)
+- `8a0dcaab-20da-4d7e-90cd-a83a7859af9f` (long-branch E7 post-tour review request)
+- `22ff0a12-c590-43cd-b250-c83081eb2f02` (short-branch E7 post-tour review request)
 
 The other four messages (`46b82f1f`, `be36ef13`, `784e453d`, `57ad1afd`) keep their role from the previous automation, so the body content updates are smaller, adjust copy to the new timing (e.g. drop "two weeks until" references in favour of "right after booking").
 
@@ -94,10 +97,11 @@ If a guest books closer than the cadence allows (e.g. 2 days before session, so 
 
 ## Wix MCP findings (compact)
 
-- **Read works for non-draft automations.** Wix API keys can `GET /v2/automations/{id}` and `POST /v2/automations/query` on any non-draft automation. Berlin Essentials (no draftInfo) returned HTTP 200. This one (with `draftInfo: {}`) returned HTTP 404 even though the browser GET shows it fine.
+- **Read works for non-draft automations.** Wix API keys can `GET /automations-service/v2/automations/{id}` and `POST /automations-service/v2/automations/query` on any non-draft automation. Berlin Essentials (no draftInfo) returned HTTP 200. Draft automations return HTTP 404 even when the dashboard editor can see them.
 - **Validate works for draft structure.** The `/automations/validate` endpoint accepts an arbitrary automation body and returns structural errors/warnings without requiring the resource to exist. Useful for designing structures before the editor handoff.
 - **PATCH cannot reach drafts.** Confirmed by multiple endpoint variants and auth header styles. Editor manual rewrite is the only path while the automation remains in draft state.
 - **Email body content is not writable via REST.** The Triggered Emails API (referenced by action `messageId`) is not exposed for body content CRUD. Editor paste is the only path regardless.
+- **E7 uses two live Triggered Email templates.** Revision 7 has long-branch action `b4348c70-...` with messageId `8a0dcaab-...` and short-branch action `99e30db9-...` with messageId `22ff0a12-...`. Both actions expose `order_number` and `booking_contact_first_name` for the review URL.
 
 ## Repo
 
