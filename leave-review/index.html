@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leave a review - Berlin Walk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html, body { margin: 0; padding: 0; background: transparent; }
+    body {
+      font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      color: #212121;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .bw-review {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light-green: #C5E1A5;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #ffffff;
+      --bw-error: #C62828;
+      width: 100%;
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 16px;
+      box-sizing: border-box;
+    }
+    .bw-review * { box-sizing: border-box; }
+
+    .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .bw-band {
+      background: var(--bw-yellow);
+      padding: 28px 32px 26px;
+    }
+    .bw-kicker {
+      margin: 0 0 6px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--bw-green);
+    }
+    .bw-title {
+      margin: 0;
+      font-family: 'Merriweather', Georgia, serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1.2;
+      color: var(--bw-green);
+    }
+
+    .bw-body { padding: 28px 32px 32px; }
+    .bw-greeting {
+      margin: 0 0 18px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--bw-text);
+    }
+
+    .bw-field { margin-bottom: 22px; }
+    .bw-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--bw-green);
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+    .bw-label-hint {
+      font-weight: 400;
+      font-size: 12px;
+      color: var(--bw-muted);
+      margin-left: 6px;
+    }
+
+    /* Star rating */
+    .bw-stars {
+      display: inline-flex;
+      flex-direction: row-reverse;
+      gap: 4px;
+    }
+    .bw-stars input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .bw-stars label {
+      cursor: pointer;
+      font-size: 36px;
+      line-height: 1;
+      color: #d0d0d0;
+      transition: color 0.12s ease;
+      user-select: none;
+    }
+    .bw-stars label::before { content: "\2605"; }
+    .bw-stars input[type="radio"]:checked ~ label,
+    .bw-stars label:hover,
+    .bw-stars label:hover ~ label {
+      color: var(--bw-green);
+    }
+    .bw-stars input[type="radio"]:focus-visible + label {
+      outline: 2px solid var(--bw-green);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+
+    .bw-input,
+    .bw-textarea {
+      width: 100%;
+      padding: 12px 14px;
+      font-family: inherit;
+      font-size: 15px;
+      color: var(--bw-text);
+      background: #fff;
+      border: 1px solid var(--bw-border);
+      border-radius: 6px;
+      transition: border-color 0.15s ease;
+    }
+    .bw-input:focus,
+    .bw-textarea:focus {
+      outline: none;
+      border-color: var(--bw-green);
+    }
+    .bw-textarea {
+      min-height: 140px;
+      resize: vertical;
+      line-height: 1.55;
+    }
+    .bw-input-small { max-width: 100px; }
+
+    .bw-checkbox-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--bw-text);
+    }
+    .bw-checkbox-row input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--bw-green);
+      cursor: pointer;
+    }
+
+    .bw-submit {
+      display: block;
+      width: 100%;
+      padding: 14px 24px;
+      margin-top: 8px;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--bw-yellow);
+      background: var(--bw-green);
+      border: 0;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .bw-submit:hover { background: var(--bw-green-dark); }
+    .bw-submit:disabled { background: #888; cursor: not-allowed; color: #ddd; }
+
+    .bw-message {
+      margin-top: 16px;
+      padding: 12px 16px;
+      border-radius: 6px;
+      font-size: 14px;
+      line-height: 1.55;
+      display: none;
+    }
+    .bw-message.show { display: block; }
+    .bw-message.error {
+      background: #fdecea;
+      color: var(--bw-error);
+      border: 1px solid #f5c2c0;
+    }
+    .bw-message.success {
+      background: var(--bw-light-green);
+      color: var(--bw-green);
+      border: 1px solid var(--bw-green);
+    }
+
+    .bw-thanks {
+      display: none;
+      padding: 36px 32px;
+      text-align: center;
+    }
+    .bw-thanks.show { display: block; }
+    .bw-thanks .bw-checkmark {
+      display: inline-block;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--bw-light-green);
+      color: var(--bw-green);
+      font-size: 28px;
+      line-height: 56px;
+      margin-bottom: 16px;
+    }
+    .bw-thanks h2 {
+      font-family: 'Merriweather', Georgia, serif;
+      font-size: 22px;
+      color: var(--bw-green);
+      margin: 0 0 10px;
+    }
+    .bw-thanks p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--bw-text);
+      margin: 0 0 18px;
+    }
+    .bw-thanks a {
+      color: var(--bw-green);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid var(--bw-green);
+    }
+
+    @media (max-width: 540px) {
+      .bw-band { padding: 22px 22px 20px; }
+      .bw-title { font-size: 24px; }
+      .bw-body { padding: 22px; }
+      .bw-stars label { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bw-review">
+    <div class="bw-card">
+
+      <div class="bw-band">
+        <p class="bw-kicker">After the walk</p>
+        <h1 class="bw-title">Leave a review</h1>
+      </div>
+
+      <div class="bw-body" id="bw-form-wrap">
+        <p class="bw-greeting" id="bw-greeting">
+          Thanks for walking Berlin with me. A few words about the tour go a long way.
+        </p>
+
+        <form class="bw-form" id="bw-form" novalidate>
+          <input type="hidden" name="bookingId" id="bw-bid">
+          <input type="hidden" name="firstName" id="bw-fn">
+
+          <div class="bw-field">
+            <label class="bw-label">How was the tour?</label>
+            <div class="bw-stars" role="radiogroup" aria-label="Rating, 1 to 5 stars">
+              <input type="radio" name="rating" id="r5" value="5"><label for="r5" aria-label="5 stars"></label>
+              <input type="radio" name="rating" id="r4" value="4"><label for="r4" aria-label="4 stars"></label>
+              <input type="radio" name="rating" id="r3" value="3"><label for="r3" aria-label="3 stars"></label>
+              <input type="radio" name="rating" id="r2" value="2"><label for="r2" aria-label="2 stars"></label>
+              <input type="radio" name="rating" id="r1" value="1"><label for="r1" aria-label="1 star"></label>
+            </div>
+          </div>
+
+          <div class="bw-field">
+            <label class="bw-label" for="bw-text">What did you like? Anything I should know? <span class="bw-label-hint">at least a sentence or two</span></label>
+            <textarea class="bw-textarea" id="bw-text" name="reviewText" required minlength="10" maxlength="2000" placeholder="Tell me what stood out from the walk."></textarea>
+          </div>
+
+          <div class="bw-field">
+            <label class="bw-label" for="bw-li">Last initial <span class="bw-label-hint">optional</span></label>
+            <input class="bw-input bw-input-small" id="bw-li" name="lastInitial" type="text" maxlength="1" placeholder="S">
+          </div>
+
+          <div class="bw-field">
+            <label class="bw-checkbox-row">
+              <input type="checkbox" id="bw-show" name="showName">
+              <span>Show my first name and last initial publicly on the reviews page. (If unchecked, your review appears as anonymous.)</span>
+            </label>
+          </div>
+
+          <button type="submit" class="bw-submit" id="bw-submit">Send my review</button>
+
+          <div class="bw-message" id="bw-msg" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+
+      <div class="bw-thanks" id="bw-thanks">
+        <div class="bw-checkmark">&#10003;</div>
+        <h2>Thanks for the review.</h2>
+        <p>I'll read it before it goes up on the site. Until then, you're welcome on any future walk.</p>
+        <a href="https://berlinwalk.com" target="_top">Back to berlinwalk.com</a>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var API_URL = 'https://www.berlinwalk.com/_functions/submitReview';
+
+      var params = new URLSearchParams(window.location.search);
+      var bookingId = params.get('bid') || '';
+      var firstName = params.get('n') || '';
+
+      var bidInput = document.getElementById('bw-bid');
+      var fnInput  = document.getElementById('bw-fn');
+      var greeting = document.getElementById('bw-greeting');
+      var form     = document.getElementById('bw-form');
+      var btn      = document.getElementById('bw-submit');
+      var msg      = document.getElementById('bw-msg');
+      var formWrap = document.getElementById('bw-form-wrap');
+      var thanks   = document.getElementById('bw-thanks');
+
+      if (bidInput) bidInput.value = bookingId;
+      if (fnInput)  fnInput.value  = firstName;
+
+      if (firstName && greeting) {
+        var safe = firstName.replace(/[^\p{L}\p{N}\s\-'\.]/gu, '').slice(0, 60);
+        greeting.textContent = 'Thanks for walking Berlin with me, ' + safe + '. A few words about the tour go a long way.';
+      }
+
+      function showMsg(type, text) {
+        msg.className = 'bw-message show ' + type;
+        msg.textContent = text;
+      }
+      function clearMsg() {
+        msg.className = 'bw-message';
+        msg.textContent = '';
+      }
+
+      function getRating() {
+        var checked = form.querySelector('input[name="rating"]:checked');
+        return checked ? parseInt(checked.value, 10) : 0;
+      }
+
+      form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        clearMsg();
+
+        var rating = getRating();
+        var reviewText = document.getElementById('bw-text').value.trim();
+        var lastInitial = document.getElementById('bw-li').value.trim();
+        var showName = document.getElementById('bw-show').checked;
+
+        if (!rating) {
+          showMsg('error', 'Please pick a star rating.');
+          return;
+        }
+        if (reviewText.length < 10) {
+          showMsg('error', 'Please write at least a sentence about the tour.');
+          return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = 'Sending...';
+
+        var payload = {
+          bookingId: bookingId,
+          firstName: firstName,
+          lastInitial: lastInitial,
+          showName: showName,
+          rating: rating,
+          reviewText: reviewText
+        };
+
+        try {
+          var response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+
+          var data = {};
+          try { data = await response.json(); } catch (e) {}
+
+          if (response.ok && data && data.success) {
+            formWrap.style.display = 'none';
+            thanks.classList.add('show');
+          } else {
+            btn.disabled = false;
+            btn.textContent = 'Send my review';
+            var errCode = data && data.error;
+            var human = errCode === 'rating'      ? 'Please pick a star rating.'
+                      : errCode === 'reviewText'  ? 'Please write at least a sentence about the tour.'
+                      : errCode === 'firstName'   ? 'Missing first name. Please use the link from your post-tour email.'
+                      : 'Something went wrong. Please try again in a moment.';
+            showMsg('error', human);
+          }
+        } catch (err) {
+          btn.disabled = false;
+          btn.textContent = 'Send my review';
+          showMsg('error', 'Connection error. Please try again.');
+          console.error('submitReview error:', err);
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
