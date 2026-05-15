@@ -78,6 +78,7 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - **`created_date` is NOT a valid Wix Bookings trigger variable.** The correct name is `booking_creation_date`.
 - **Wix AI hallucinates messageIds and claims success without committing changes.** Always verify via REST GET after Wix AI claims a change.
 - **The Wix connector can handle reads and smaller REST calls, but large blog draft create payloads with full Ricos JSON + multiple embeds may be unreliable/truncated.** When building rich blog drafts, prefer local REST with `WIX_API_KEY` from Yusuf's clipboard, or create the Wix draft once Yusuf is back on desktop and can provide the key safely.
+- **Wix Blog editor may render consecutive Ricos `PARAGRAPH` nodes with no visible paragraph gap after API import.** For API-created blog drafts, insert blank spacer paragraphs (NBSP text) between adjacent body paragraphs after Markdown-to-Ricos conversion, then verify visually in the editor.
 - **GitHub Pages deploys can sit Queued 5-15 min** during traffic spikes. Last-Modified header on the deployed asset is the source of truth.
 - **Wix Triggered Email templates get garbage-collected** if not referenced. If you delete an automation step, its template may become invisible to subsequent PATCH calls (returns "Message [...] set failed [Deleted]"). Recovery: ask Yusuf for the new messageIds via the Wix dashboard URL trick (the messageId is in the URL when editing a template).
 

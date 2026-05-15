@@ -9,6 +9,24 @@ Format for each entry — see `AGENTS.md` §9.
 ## 2026-05-15 — Codex
 
 **Did:**
+- Fixed paragraph spacing in the four Wix blog drafts created today
+- Verified all affected drafts remain `UNPUBLISHED` and their widget embeds are still present
+
+**Changed:**
+- `AGENTS.md` — documented the Wix Blog paragraph-spacing import gotcha
+- Wix: added blank spacer paragraphs between adjacent body paragraphs in draft `111844a6-5b4d-418e-be34-d651f3adfe9d`
+- Wix: added blank spacer paragraphs between adjacent body paragraphs in draft `e14a0e69-480f-472f-bea5-a5010e3893cb`
+- Wix: added blank spacer paragraphs between adjacent body paragraphs in draft `0da7a350-14e7-4c59-bcb5-ba80fc4654d5`
+- Wix: added blank spacer paragraphs between adjacent body paragraphs in draft `5e1ac42b-7878-4e2b-97de-e75b2458fc49`
+
+**Opened:** Visually confirm the paragraph spacing in the Wix editor, then add/select cover and inline images using `blog-visual-plan.md`
+**Closed:** Paragraph spacing bug in the four current Wix drafts
+
+**Next session should:** Preview the four drafts in Wix editor on desktop/mobile, adjust any over-spaced sections by hand if needed, then add images.
+
+## 2026-05-15 — Codex
+
+**Did:**
 - Created Wix Blog drafts for the July, August, and September 2026 posts
 - Verified each draft is `UNPUBLISHED`, in `Tourist Tips`, and contains the seven June-style embeds in order
 - Recorded the new Wix draft IDs locally
