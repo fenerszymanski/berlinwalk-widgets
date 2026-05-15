@@ -78,5 +78,85 @@
         "priceTier": "$$$"
       }
     ]
+  },
+  "berlin-in-august-2026": {
+    "title": "August at a Glance: Compared to July and September",
+    "subtitle": "How late summer stacks up against its neighbors",
+    "headers": [
+      "Month",
+      "Season",
+      "Key Strengths",
+      "Price Tier"
+    ],
+    "rows": [
+      {
+        "name": "July",
+        "statusBadge": {
+          "label": "Peak",
+          "type": "peak"
+        },
+        "highlights": "Longest summer evenings, CSD, Classic Open Air, high visitor demand.",
+        "priceTier": "$$$$"
+      },
+      {
+        "name": "August",
+        "statusBadge": {
+          "label": "Peak",
+          "type": "peak"
+        },
+        "highlights": "Warmest feel, best lake water, Tanz im August, Long Night of Museums, shorter evenings.",
+        "priceTier": "$$$$",
+        "highlighted": true
+      },
+      {
+        "name": "September",
+        "statusBadge": {
+          "label": "Shoulder",
+          "type": "shoulder"
+        },
+        "highlights": "Better walking weather, fewer peak-season families, Berlin Art Week, Marathon energy.",
+        "priceTier": "$$$"
+      }
+    ]
+  },
+  "berlin-in-september-2026": {
+    "title": "September at a Glance: Compared to August and October",
+    "subtitle": "How early shoulder season changes the trip",
+    "headers": [
+      "Month",
+      "Season",
+      "Key Strengths",
+      "Price Tier"
+    ],
+    "rows": [
+      {
+        "name": "August",
+        "statusBadge": {
+          "label": "Peak",
+          "type": "peak"
+        },
+        "highlights": "Warmest feel, lake weather, school holidays, and higher peak-season pressure.",
+        "priceTier": "$$$$"
+      },
+      {
+        "name": "September",
+        "statusBadge": {
+          "label": "Shoulder",
+          "type": "shoulder"
+        },
+        "highlights": "Best walking weather, Berlin Art Week, Open Monument Day, Marathon energy.",
+        "priceTier": "$$$",
+        "highlighted": true
+      },
+      {
+        "name": "October",
+        "statusBadge": {
+          "label": "Autumn",
+          "type": "transitioning"
+        },
+        "highlights": "Cooler, darker, Festival of Lights, stronger museum-and-cafe rhythm.",
+        "priceTier": "$$"
+      }
+    ]
   }
 }

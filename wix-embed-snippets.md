@@ -111,3 +111,31 @@ https://fenerszymanski.github.io/berlinwalk-widgets/itinerary-card/?month=july
 https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-in-july-2026
 https://fenerszymanski.github.io/berlinwalk-widgets/months-nav/?current=july
 ```
+
+## Berlin in August Post Widgets
+
+Use these URLs for `berlin-in-august-2026`:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-in-august-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/monthly-weather/?month=august
+https://fenerszymanski.github.io/berlinwalk-widgets/daylight-visualizer/?month=august
+https://fenerszymanski.github.io/berlinwalk-widgets/month-comparison/?post=berlin-in-august-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/itinerary-card/?month=august
+https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-in-august-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/months-nav/?current=august
+```
+
+## Berlin in September Post Widgets
+
+Use these URLs for `berlin-in-september-2026`:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-in-september-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/monthly-weather/?month=september
+https://fenerszymanski.github.io/berlinwalk-widgets/daylight-visualizer/?month=september
+https://fenerszymanski.github.io/berlinwalk-widgets/month-comparison/?post=berlin-in-september-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/itinerary-card/?month=september
+https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-in-september-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/months-nav/?current=september
+```

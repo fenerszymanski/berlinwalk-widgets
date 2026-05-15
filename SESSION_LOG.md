@@ -9,6 +9,52 @@ Format for each entry — see `AGENTS.md` §9.
 ## 2026-05-15 — Codex
 
 **Did:**
+- Drafted the Berlin in September 2026 article
+- Matched the live June post's seven-widget stack for September
+- Smoke-tested all September widget URLs locally
+- Added a visual/image plan for today's blog drafts
+
+**Changed:**
+- `AGENTS.md` — added `blog-visual-plan.md` to the repo map
+- `blog-visual-plan.md` — new hero/inline image, alt text, widget placement, and sourcing checklist for free museums, July, August, and September posts
+- `blog-drafts/berlin-in-september-2026.md` — new 2026 September travel guide draft with official weather/event sources
+- `blog-workplan.md` — marked the September article as draft v1 + widgets
+- `quick-summary/data.json` — added `berlin-in-september-2026`
+- `faq/data.json` / `faq/inject.js` — added `berlin-in-september-2026` FAQ and JSON-LD slug mapping
+- `monthly-weather/data.json` / `daylight-visualizer/data.json` / `month-comparison/data.json` / `itinerary-card/data.json` / `months-nav/data.json` — added September data to mirror the June article widgets
+- `wix-embed-snippets.md` — added the full Berlin in September widget URL stack
+- Wix: no remote changes
+
+**Opened:** Create Wix drafts for July, August, and September when Yusuf is back on desktop with the Wix API key available; visually test the seasonal widgets after push/deploy
+**Closed:** Berlin in September article draft v1 plus June-style widget data
+
+**Next session should:** If Yusuf is on desktop, create the July/August/September Wix drafts via REST using the local draft files and widget stacks. Otherwise continue the blog queue with public toilets or luggage storage.
+
+## 2026-05-15 — Codex
+
+**Did:**
+- Drafted the Berlin in August 2026 article
+- Matched the live June post's seven-widget stack for August
+- Smoke-tested all August widget URLs locally
+
+**Changed:**
+- `AGENTS.md` — documented the Wix connector limitation for large rich blog draft payloads
+- `blog-drafts/berlin-in-august-2026.md` — new 2026 August travel guide draft with official weather/event sources
+- `blog-workplan.md` — marked the August article as draft v1 + widgets
+- `quick-summary/data.json` — added `berlin-in-august-2026`
+- `faq/data.json` / `faq/inject.js` — added `berlin-in-august-2026` FAQ and JSON-LD slug mapping
+- `monthly-weather/data.json` / `daylight-visualizer/data.json` / `month-comparison/data.json` / `itinerary-card/data.json` / `months-nav/data.json` — added August data to mirror the June article widgets
+- `wix-embed-snippets.md` — added the full Berlin in August widget URL stack
+- Wix: no remote changes
+
+**Opened:** Create Wix drafts for July and August when Yusuf is back on desktop with the Wix API key available; visually test July/August widgets after push/deploy
+**Closed:** Berlin in August article draft v1 plus June-style widget data
+
+**Next session should:** If Yusuf is on desktop, create the July and August Wix drafts via REST using the local draft files and widget stacks. Otherwise continue the month series with September.
+
+## 2026-05-15 — Codex
+
+**Did:**
 - Added internal/external links to the free Berlin museums draft
 - Created the linked Wix Blog draft with quick summary, map, comparison, and FAQ embeds
 - Verified the draft is `UNPUBLISHED` and all four embed URLs return 200

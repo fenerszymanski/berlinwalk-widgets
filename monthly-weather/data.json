@@ -58,14 +58,38 @@
     "blurb": "Warm peak-summer days, long evenings, occasional heatwaves and short rain showers"
   },
   "august": {
-    "available": false,
+    "available": true,
     "month": "August",
-    "monthAbbr": "Aug"
+    "monthAbbr": "Aug",
+    "tempHighC": 23.4,
+    "tempLowC": 12.1,
+    "tempHighF": 74,
+    "tempLowF": 54,
+    "rainyDays": "8",
+    "sunshineHours": 208,
+    "sunriseEarliest": "05:28",
+    "sunsetLatest": "20:57",
+    "daylightLabel": "Daylight (August 1)",
+    "daylightSolstice": "15h 29m",
+    "season": "late peak summer",
+    "blurb": "Berlin's warmest month, with lake weather, thunderstorms, and evenings that shorten quickly"
   },
   "september": {
-    "available": false,
+    "available": true,
     "month": "September",
-    "monthAbbr": "Sep"
+    "monthAbbr": "Sep",
+    "tempHighC": 19.5,
+    "tempLowC": 9.5,
+    "tempHighF": 67,
+    "tempLowF": 49,
+    "rainyDays": "8",
+    "sunshineHours": 150,
+    "sunriseEarliest": "06:17",
+    "sunsetLatest": "19:54",
+    "daylightLabel": "Daylight (September 1)",
+    "daylightSolstice": "13h 37m",
+    "season": "early shoulder season",
+    "blurb": "Mild late-summer days, cooler evenings, golden light, and a more comfortable walking rhythm"
   },
   "october": {
     "available": false,

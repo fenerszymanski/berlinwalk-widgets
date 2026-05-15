@@ -25,6 +25,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `lead-form/` | Berlin Essentials email capture iframe widget |
 | `free-museums-map/`, `free-museums-compare/` | Post-specific widgets for the free Berlin museums article |
 | `blog-workplan.md` | Prioritized list of new blog post ideas checked against the live sitemap |
+| `blog-visual-plan.md` | Visual/image plan for current blog drafts before moving them into Wix |
 | `blog-drafts/` | Draft blog posts before they are moved into Wix |
 | `_audit.md`, `MIGRATION.md`, `_swap-status.md`, etc. | Historical planning docs — read for context only, mostly stale |
 
@@ -76,6 +77,7 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - **`now()` works in validate but unreliably at runtime** in CONDITION expressions. Use `var('booking_creation_date')` instead.
 - **`created_date` is NOT a valid Wix Bookings trigger variable.** The correct name is `booking_creation_date`.
 - **Wix AI hallucinates messageIds and claims success without committing changes.** Always verify via REST GET after Wix AI claims a change.
+- **The Wix connector can handle reads and smaller REST calls, but large blog draft create payloads with full Ricos JSON + multiple embeds may be unreliable/truncated.** When building rich blog drafts, prefer local REST with `WIX_API_KEY` from Yusuf's clipboard, or create the Wix draft once Yusuf is back on desktop and can provide the key safely.
 - **GitHub Pages deploys can sit Queued 5-15 min** during traffic spikes. Last-Modified header on the deployed asset is the source of truth.
 - **Wix Triggered Email templates get garbage-collected** if not referenced. If you delete an automation step, its template may become invisible to subsequent PATCH calls (returns "Message [...] set failed [Deleted]"). Recovery: ask Yusuf for the new messageIds via the Wix dashboard URL trick (the messageId is in the URL when editing a template).
 

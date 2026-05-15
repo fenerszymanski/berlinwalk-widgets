@@ -24,5 +24,23 @@
     "daylightMinutes": 1005,
     "daylightDisplay": "16h 45m",
     "comparisonText": "Berlin still gets just over 9 hours more daylight on July 1 than around the winter solstice."
+  },
+  "august": {
+    "label": "AUG 1",
+    "longLabel": "August 1",
+    "sunrise": "05:28",
+    "sunset": "20:57",
+    "daylightMinutes": 929,
+    "daylightDisplay": "15h 29m",
+    "comparisonText": "Berlin still gets almost 8 hours more daylight on August 1 than around the winter solstice, but the month loses light quickly."
+  },
+  "september": {
+    "label": "SEP 1",
+    "longLabel": "September 1",
+    "sunrise": "06:17",
+    "sunset": "19:54",
+    "daylightMinutes": 817,
+    "daylightDisplay": "13h 37m",
+    "comparisonText": "Berlin still gets about 6 hours more daylight on September 1 than around the winter solstice, but the month loses more than an hour of evening light."
   }
 }

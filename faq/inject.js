@@ -30,6 +30,8 @@
   "was-your-berlin-address-east-or-west": "east-west-1989",
   "visiting-berlin-in-june": "visiting-berlin-in-june",
   "berlin-in-july-2026": "berlin-in-july-2026",
+  "berlin-in-august-2026": "berlin-in-august-2026",
+  "berlin-in-september-2026": "berlin-in-september-2026",
   "which-berlin-museums-are-free-2026": "free-museums"
 };
 
@@ -1264,6 +1266,98 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Book accommodation early, especially for CSD weekend and central summer weekends. Also book Reichstag Dome slots, specific restaurants, Classic Open Air tickets if you want to attend, and timed tickets for any major museum you absolutely do not want to miss."
+        }
+      }
+    ]
+  },
+  "berlin-in-august-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is August a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, August is a good time to visit Berlin if you want warm weather, lakes, outdoor evenings, and summer events. The tradeoff is that it is still peak season, school holidays run until August 22, and late-August events can make the city busier than visitors expect."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in August?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists August as Berlin's warmest month, with an average daily maximum of 23.4°C, an average minimum of 12.1°C, about 6.7 hours of sunshine per day, 8 rainy days, and 51 mm of rain. Heatwaves and sudden thunderstorms are both realistic."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you swim in Berlin lakes in August?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually, yes. August is one of the best months for Berlin lakes because the water has had all summer to warm up. Check live water quality before you go, avoid swimming alone, and expect the easiest lake routes to be busy on hot weekends."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What major events happen in Berlin in August 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Useful dates include the partial solar eclipse and Long Night of Astronomy on August 12, Tanz im August from August 13-29, and Long Night of Museums on August 29. Event programs can change, so check the official pages before booking around a specific performance or venue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do tourists get wrong about Berlin in August?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They often assume the city is empty, dry, and easy to improvise. In reality, August mixes holiday mood with peak-season tourism, school holidays, hot public transport, thunderstorms, busy lakes, and big late-month cultural events. Book the few things that matter, then keep the rest flexible."
+        }
+      }
+    ]
+  },
+  "berlin-in-september-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is September a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. September is one of Berlin's best months for walking, museums, neighborhoods, and culture. It is usually milder than July and August, less sweaty for sightseeing, and still lively before the darker autumn months arrive."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in September?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists September averages of 19.5°C daytime maximum, 9.5°C minimum, about 5 hours of sunshine per day, 8 rainy days, and 51 mm of rain. Pack layers, because warm afternoons and cool evenings can happen on the same day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What major events happen in Berlin in September 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Useful dates include IFA Berlin from September 4-8, Berlin Art Week from September 9-13, Open Monument Day on September 13, and the BMW Berlin Marathon on September 27. Marathon weekend especially affects hotels, transport, and central routes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I pack for Berlin in September?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bring comfortable walking shoes, T-shirts or light shirts, trousers or jeans, one sweater or fleece, a light jacket, and a rain layer. You probably do not need winter clothing, but you should not pack like it is still August."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin crowded in September?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "September is usually less crowded than peak summer, but it is not empty. Trade fairs, Berlin Art Week, Open Monument Day, and Marathon weekend can all increase hotel demand and pressure on public transport. Book the important anchors early and keep event days flexible."
         }
       }
     ]
