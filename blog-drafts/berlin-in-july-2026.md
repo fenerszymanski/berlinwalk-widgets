@@ -2,6 +2,10 @@
 
 Slug idea: `berlin-in-july-2026`
 
+Wix draft ID: `e14a0e69-480f-472f-bea5-a5010e3893cb`
+
+Wix draft status: `UNPUBLISHED`
+
 Meta title: Berlin in July 2026: Weather, Events, Packing Tips and What to Book
 
 Meta description: Visiting Berlin in July 2026? Here is what the weather is really like, which events to watch, what to pack, and what to book before prices rise.

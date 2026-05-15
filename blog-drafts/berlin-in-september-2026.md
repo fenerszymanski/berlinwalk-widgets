@@ -2,6 +2,10 @@
 
 Slug idea: `berlin-in-september-2026`
 
+Wix draft ID: `5e1ac42b-7878-4e2b-97de-e75b2458fc49`
+
+Wix draft status: `UNPUBLISHED`
+
 Meta title: Berlin in September 2026: Weather, Events, Packing Tips and What to Book
 
 Meta description: Visiting Berlin in September 2026? Here is why September may be the best month, with weather, events, packing advice, and what to book early.

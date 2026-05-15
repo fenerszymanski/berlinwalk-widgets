@@ -9,6 +9,27 @@ Format for each entry — see `AGENTS.md` §9.
 ## 2026-05-15 — Codex
 
 **Did:**
+- Created Wix Blog drafts for the July, August, and September 2026 posts
+- Verified each draft is `UNPUBLISHED`, in `Tourist Tips`, and contains the seven June-style embeds in order
+- Recorded the new Wix draft IDs locally
+
+**Changed:**
+- `blog-drafts/berlin-in-july-2026.md` — added Wix draft ID/status
+- `blog-drafts/berlin-in-august-2026.md` — added Wix draft ID/status
+- `blog-drafts/berlin-in-september-2026.md` — added Wix draft ID/status
+- `blog-workplan.md` — marked July/August/September as Wix drafts with IDs
+- Wix: created draft `e14a0e69-480f-472f-bea5-a5010e3893cb` for `berlin-in-july-2026`
+- Wix: created draft `0da7a350-14e7-4c59-bcb5-ba80fc4654d5` for `berlin-in-august-2026`
+- Wix: created draft `5e1ac42b-7878-4e2b-97de-e75b2458fc49` for `berlin-in-september-2026`
+
+**Opened:** Commit/push the local Wix draft ID/log updates, then visually preview the free museums, July, August, and September drafts on desktop/mobile and add/select images
+**Closed:** July, August, and September moved from local drafts to Wix drafts
+
+**Next session should:** Commit/push the local ID/log updates, then preview all four Wix drafts with the visual plan and add/select cover images.
+
+## 2026-05-15 — Codex
+
+**Did:**
 - Drafted the Berlin in September 2026 article
 - Matched the live June post's seven-widget stack for September
 - Smoke-tested all September widget URLs locally

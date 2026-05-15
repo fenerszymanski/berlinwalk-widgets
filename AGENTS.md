@@ -101,6 +101,7 @@ Pulled from `SESSION_LOG.md` — see that file for active state. As of the lates
 1. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug.
 2. **Convert homepage `bw-testimonials`** to read from `listReviews` instead of `testimonials/data.json` so site-submitted reviews flow through to the homepage carousel.
 3. **Convert `/leave-review` to a Custom Element** (currently iframe) to fix mobile sizing and match the rest of the site's element pattern. The mobile breakpoint height is the current workaround.
+4. **Preview the new Wix blog drafts and add images.** July/August/September Wix drafts exist and GitHub Pages serves their widget data. Commit/push the local ID/log updates, then visually preview the free museums, July, August, and September drafts and add/select cover and inline images using `blog-visual-plan.md`.
 
 ## 9. Protocol for ending a session
 

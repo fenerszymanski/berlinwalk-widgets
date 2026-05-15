@@ -2,6 +2,10 @@
 
 Slug idea: `berlin-in-august-2026`
 
+Wix draft ID: `0da7a350-14e7-4c59-bcb5-ba80fc4654d5`
+
+Wix draft status: `UNPUBLISHED`
+
 Meta title: Berlin in August 2026: Weather, Lakes, Events and What to Book
 
 Meta description: Visiting Berlin in August 2026? Here is what the weather is really like, how to plan lake days, which events matter, and what tourists get wrong.
