@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Berlin Museums Comparison | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-free-museums-compare">
+  <style>
+    #bw-free-museums-compare {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-free-museums-compare * { box-sizing: border-box; }
+
+    #bw-free-museums-compare .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-free-museums-compare .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-free-museums-compare .bw-head-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 24px;
+    }
+
+    #bw-free-museums-compare .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    #bw-free-museums-compare .bw-body {
+      background: var(--bw-cream);
+      padding: 18px 20px;
+    }
+
+    #bw-free-museums-compare .bw-note {
+      margin: 0 0 14px;
+      color: var(--bw-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    #bw-free-museums-compare table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: var(--bw-white);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #bw-free-museums-compare col.c1 { width: 26%; }
+    #bw-free-museums-compare col.c2 { width: 18%; }
+    #bw-free-museums-compare col.c3 { width: 20%; }
+    #bw-free-museums-compare col.c4 { width: 36%; }
+
+    #bw-free-museums-compare thead th {
+      padding: 11px 12px;
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--bw-muted);
+      text-align: left;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--bw-soft);
+      border-bottom: 1px solid var(--bw-border);
+      line-height: 1.25;
+    }
+
+    #bw-free-museums-compare tbody td {
+      padding: 12px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      vertical-align: top;
+      line-height: 1.5;
+      border-bottom: 1px solid #E8E8E8;
+    }
+
+    #bw-free-museums-compare tbody tr:last-child td { border-bottom: none; }
+    #bw-free-museums-compare tbody tr:nth-child(even) td { background: #FCFCF7; }
+
+    #bw-free-museums-compare tbody td:first-child {
+      font-weight: 900;
+      color: var(--bw-green);
+    }
+
+    #bw-free-museums-compare .bw-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    #bw-free-museums-compare .bw-badge.free { background: #EAF3DE; color: #27500A; }
+    #bw-free-museums-compare .bw-badge.partial { background: #FFF3C2; color: #6C4B00; }
+    #bw-free-museums-compare .bw-badge.timed { background: #FCEBEB; color: #791F1F; }
+
+    #bw-free-museums-compare .bw-pick {
+      font-weight: 800;
+      color: var(--bw-green);
+    }
+
+    #bw-free-museums-compare .bw-footer {
+      padding: 10px 20px;
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      #bw-free-museums-compare { margin: 22px 0; }
+      #bw-free-museums-compare .bw-head { padding: 12px 16px; }
+      #bw-free-museums-compare .bw-kicker { font-size: 10px; letter-spacing: 1.7px; }
+      #bw-free-museums-compare .bw-body { padding: 14px; }
+      #bw-free-museums-compare .bw-note { font-size: 12px; margin-bottom: 12px; }
+      #bw-free-museums-compare table, #bw-free-museums-compare thead, #bw-free-museums-compare tbody, #bw-free-museums-compare tr, #bw-free-museums-compare th, #bw-free-museums-compare td { display: block; }
+      #bw-free-museums-compare colgroup, #bw-free-museums-compare thead { display: none; }
+      #bw-free-museums-compare tbody tr {
+        border: 1px solid var(--bw-border);
+        border-radius: 10px;
+        margin-bottom: 8px;
+        background: var(--bw-white);
+        overflow: hidden;
+      }
+      #bw-free-museums-compare tbody tr:nth-child(even) td { background: transparent; }
+      #bw-free-museums-compare tbody td {
+        border: none;
+        padding: 4px 12px;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      #bw-free-museums-compare tbody td:first-child {
+        padding-top: 12px;
+        font-size: 13.5px;
+      }
+      #bw-free-museums-compare tbody td:last-child { padding-bottom: 12px; }
+      #bw-free-museums-compare tbody td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 2px;
+        font-size: 9px;
+        font-weight: 900;
+        color: var(--bw-muted);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      #bw-free-museums-compare tbody td:first-child::before { display: none; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">=</span>
+      <span class="bw-kicker">Which Free Museum Should You Pick?</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-note">Short on time? Use this as a decision table, not a complete museum ranking. The best free stop depends on your mood and where you are in the city.</p>
+      <table>
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+        <thead>
+          <tr>
+            <th>Place</th>
+            <th>Free status</th>
+            <th>Best for</th>
+            <th>Choose it if...</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Topography of Terror</td>
+            <td data-label="Free status"><span class="bw-badge free">Always free</span></td>
+            <td data-label="Best for">Nazi history</td>
+            <td data-label="Choose it if"><span class="bw-pick">You want the strongest central history stop</span>, close to Checkpoint Charlie and Potsdamer Platz.</td>
+          </tr>
+          <tr>
+            <td>Berlin Wall Memorial</td>
+            <td data-label="Free status"><span class="bw-badge free">Always free</span></td>
+            <td data-label="Best for">The Wall</td>
+            <td data-label="Choose it if">You want to understand the border system, not just see painted Wall fragments.</td>
+          </tr>
+          <tr>
+            <td>Tranenpalast</td>
+            <td data-label="Free status"><span class="bw-badge free">Always free</span></td>
+            <td data-label="Best for">Short visit</td>
+            <td data-label="Choose it if">You have 30 to 45 minutes near Friedrichstrasse and want an emotional Cold War story.</td>
+          </tr>
+          <tr>
+            <td>Jewish Museum Berlin</td>
+            <td data-label="Free status"><span class="bw-badge partial">Permanent exhibition</span></td>
+            <td data-label="Best for">Architecture and Jewish history</td>
+            <td data-label="Choose it if">You want a deeper museum visit and can give it at least 90 minutes.</td>
+          </tr>
+          <tr>
+            <td>Futurium</td>
+            <td data-label="Free status"><span class="bw-badge free">Always free</span></td>
+            <td data-label="Best for">Families</td>
+            <td data-label="Choose it if">You want something modern, lighter, and easy near Hauptbahnhof.</td>
+          </tr>
+          <tr>
+            <td>Museum in the Kulturbrauerei</td>
+            <td data-label="Free status"><span class="bw-badge free">Always free</span></td>
+            <td data-label="Best for">GDR daily life</td>
+            <td data-label="Choose it if">You are already in Prenzlauer Berg or want East Germany beyond the Wall itself.</td>
+          </tr>
+          <tr>
+            <td>Neue Nationalgalerie</td>
+            <td data-label="Free status"><span class="bw-badge timed">First Thu, 4-8 pm</span></td>
+            <td data-label="Best for">Modern art</td>
+            <td data-label="Choose it if">Your timing matches the free window and you want a world-class art museum.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bw-footer">Fastest central combination: Tranenpalast plus Topography of Terror. Best Wall context: Berlin Wall Memorial at Bernauer Strasse.</div>
+  </div>
+</div>
+</body>
+</html>

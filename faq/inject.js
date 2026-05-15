@@ -28,7 +28,8 @@
   "berlin-pools": "berlin-pools",
   "berlin-in-the-rain": "berlin-in-the-rain",
   "was-your-berlin-address-east-or-west": "east-west-1989",
-  "visiting-berlin-in-june": "visiting-berlin-in-june"
+  "visiting-berlin-in-june": "visiting-berlin-in-june",
+  "which-berlin-museums-are-free-2026": "free-museums"
 };
 
   var SCHEMAS = {
@@ -1170,6 +1171,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, particularly for trips after mid-June. Berlin's peak season ramps up steadily through the month, and hotel prices in central neighborhoods like Mitte, Charlottenburg, and Kreuzberg can run forty to sixty percent higher than in low season. Booking six to eight weeks ahead gives you the widest selection. For walking tours, museum tickets, and popular restaurants, plan at least two weeks in advance."
+        }
+      }
+    ]
+  },
+  "free-museums": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Museum Sunday still happening in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The official Museumsportal Berlin page says Museum Sunday was abolished, with the last event on December 1, 2024. Older travel advice that tells you to visit museums free on the first Sunday of every month is now outdated."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin museums are always free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Good year-round free choices include Topography of Terror, Berlin Wall Memorial, Tranenpalast, Futurium, Allied Museum, German Resistance Memorial Center, House of the Wannsee Conference, and Museum in the Kulturbrauerei. The permanent exhibition at the Jewish Museum Berlin is also free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Museum Island free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can walk around Museum Island for free, but the main museums usually require paid tickets. Do not assume the Altes Museum, Neues Museum, Bode Museum, or Alte Nationalgalerie are free unless you qualify for a specific discount or free-entry rule."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are any paid Berlin museums free at certain times?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Museumsportal Berlin's May 2026 overview lists examples such as the German Museum of Technology every Friday from 1 pm, Neue Nationalgalerie on the first Thursday of the month from 4 pm to 8 pm, and PalaisPopulaire every Monday. Always check the museum's own site before going."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best free museum in Berlin for first-time visitors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most first-time visitors, Topography of Terror is the strongest central free history stop. If your main interest is the Berlin Wall, go to the Berlin Wall Memorial at Bernauer Strasse. If you only have 30 to 45 minutes near Friedrichstrasse, choose Tranenpalast."
         }
       }
     ]

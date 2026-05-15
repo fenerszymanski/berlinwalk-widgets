@@ -17,13 +17,20 @@ Format for each entry — see `AGENTS.md` §9.
 - Yusuf pasted the updated E7 HTML into both live Wix Triggered Email templates
 - Researched new blog post ideas against the live 88-post sitemap
 - Saved the blog idea queue and drafted the free Berlin museums post
+- Built post-specific map and comparison widgets for the free Berlin museums post
 
 **Changed:**
 - `AGENTS.md` — added `blog-workplan.md` and `blog-drafts/` to the repo map
+- `README.md` / `AGENTS.md` — documented the new free museums widgets
 - `AGENTS.md` — removed the completed Wix API key rotation TODO
 - `SESSION_LOG.md` — added this handoff entry
 - `blog-workplan.md` — new prioritized blog idea plan
 - `blog-drafts/which-berlin-museums-are-free-2026.md` — new draft v1 based on official museum/admission sources
+- `free-museums-map/index.html` — new Leaflet map with filters for always-free, free museum, and free-at-certain-times stops
+- `free-museums-compare/index.html` — new mobile-friendly comparison table for choosing a free museum stop
+- `quick-summary/data.json` — added `free-museums`
+- `faq/data.json` / `faq/inject.js` — added `free-museums` FAQ and JSON-LD slug mapping
+- `wix-embed-snippets.md` — added the four embed URLs for the free museums post
 - `email-journey/README.md` — recorded current E7 action/message IDs and Wix automation revision 7
 - `email-journey/e7-post-tour-review-request.md` — replaced FreeTour review ask with the Berlin Walk review form URL
 - `email-journey/mockups/e7-wix-html-block.html` — made "Leave a review" the primary CTA using `${order_number}` and `${booking_contact_first_name}`
@@ -33,7 +40,7 @@ Format for each entry — see `AGENTS.md` §9.
 **Opened:** none
 **Closed:** Wix API key rotation; local E7 content update; E7 automation dynamic params; E7 Wix template paste
 
-**Next session should:** Test the cancel-on-cancel automation end-to-end with a real test booking and cancellation, watching for `cancelEvent status: 200` and confirming E2 does not fire after cancellation.
+**Next session should:** Preview the new free museums widgets visually after push/deploy, then build the Wix blog post using the URLs in `blog-drafts/which-berlin-museums-are-free-2026.md`. Also test the cancel-on-cancel automation end-to-end when ready.
 
 ## 2026-05-15 — Claude Code
 

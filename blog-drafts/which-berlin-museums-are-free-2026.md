@@ -14,6 +14,22 @@ Secondary keywords: Berlin free museums 2026, Museum Sunday Berlin, free things 
 
 Suggested CTA: Join the Berlin Free Walking Tour before or after visiting one of the free museums in Mitte.
 
+## Widget Plan
+
+Use these embeds when building the post in Wix:
+
+1. Quick summary, near the top:
+   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=free-museums`
+
+2. Interactive map, after "The Short Answer":
+   `https://fenerszymanski.github.io/berlinwalk-widgets/free-museums-map/`
+
+3. Comparison table, before "My Honest Advice" or after the map:
+   `https://fenerszymanski.github.io/berlinwalk-widgets/free-museums-compare/`
+
+4. FAQ, near the bottom:
+   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=free-museums`
+
 ## Quick Summary
 
 - Museum Sunday, the monthly free-entry program, is no longer the simple answer tourists hope for.

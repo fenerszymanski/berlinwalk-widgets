@@ -86,3 +86,14 @@ Recommended Wix element heights:
 ```text
 Audio + summary: 520px
 ```
+
+## Free Museums Post Widgets
+
+Use these URLs for `which-berlin-museums-are-free-2026`:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=free-museums
+https://fenerszymanski.github.io/berlinwalk-widgets/free-museums-map/
+https://fenerszymanski.github.io/berlinwalk-widgets/free-museums-compare/
+https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=free-museums
+```

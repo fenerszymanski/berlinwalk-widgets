@@ -15,6 +15,8 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 
 - `lead-form/` - Berlin Essentials email capture form.
 - `quick-summary/` - reusable quick summary and optional audio player.
+- `free-museums-map/` - post-specific interactive map for free Berlin museum options.
+- `free-museums-compare/` - post-specific comparison table for free Berlin museum picks.
 - `stats/` - `bw-stats` homepage tour metrics Custom Element.
 - `how-it-works/` - `bw-how-it-works` homepage 3-step walking timeline Custom Element.
 - `tools-home/` - `bw-tools-home` homepage tools preview Custom Element.
