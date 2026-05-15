@@ -210,6 +210,24 @@ class BWReviewsElement extends HTMLElement {
           font-weight: 600;
         }
 
+        .bw-review-source {
+          color: #6E7A6E;
+          font-family: var(--serif);
+          font-size: 12px;
+          font-style: italic;
+          margin: -4px 0 0;
+        }
+
+        .bw-review-source a {
+          color: #1B5E20;
+          text-decoration: none;
+          border-bottom: 1px dotted #C5E1A5;
+        }
+
+        .bw-review-source a:hover {
+          border-bottom-color: #1B5E20;
+        }
+
         .bw-reviews-state {
           color: #4E5A4E;
           font-family: var(--serif);
@@ -377,15 +395,27 @@ class BWReviewsElement extends HTMLElement {
       : 'Anonymous';
     const bylineParts = [`<span class="name">${this._escapeHtml(nameStr)}</span>`];
     if (r.country) bylineParts.push(`<span>${this._escapeHtml(r.country)}</span>`);
-    const dateStr = this._formatDate(r.createdDate);
+    const dateStr = this._formatDate(r.tourDate || r.createdDate);
     if (dateStr) bylineParts.push(`<span>${this._escapeHtml(dateStr)}</span>`);
     const byline = bylineParts.join('<span class="sep" aria-hidden="true">&middot;</span>');
+
+    let sourceLine = '';
+    if (r.source && r.source !== 'direct') {
+      const safeSource = this._escapeHtml(r.source);
+      if (r.sourceUrl) {
+        const safeUrl = this._escapeHtml(r.sourceUrl);
+        sourceLine = `<p class="bw-review-source">Originally posted on <a href="${safeUrl}" target="_blank" rel="noopener">${safeSource}</a></p>`;
+      } else {
+        sourceLine = `<p class="bw-review-source">Originally posted on ${safeSource}</p>`;
+      }
+    }
 
     return `
       <article class="bw-review-card">
         <div class="bw-review-stars" aria-label="${rating} out of 5 stars">${stars}</div>
         <p class="bw-review-quote">&ldquo;${quote}&rdquo;</p>
         <p class="bw-review-byline">${byline}</p>
+        ${sourceLine}
       </article>
     `;
   }
