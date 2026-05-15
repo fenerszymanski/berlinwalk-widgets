@@ -23,6 +23,8 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `reviews/` | `bw-reviews` Custom Element + local test page (`berlinwalk.com/reviews`) |
 | `testimonials/`, `stats/`, `route/`, `faq/`, `gallery/`, etc. | Homepage Custom Elements — see `README.md` for the full list |
 | `lead-form/` | Berlin Essentials email capture iframe widget |
+| `blog-workplan.md` | Prioritized list of new blog post ideas checked against the live sitemap |
+| `blog-drafts/` | Draft blog posts before they are moved into Wix |
 | `_audit.md`, `MIGRATION.md`, `_swap-status.md`, etc. | Historical planning docs — read for context only, mostly stale |
 
 ## 3. Key live URLs

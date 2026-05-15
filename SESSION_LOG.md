@@ -15,10 +15,15 @@ Format for each entry — see `AGENTS.md` §9.
 - Updated local E7 source so the primary CTA points to the per-booking Berlin Walk review form
 - Updated live Wix automation metadata so both E7 actions expose `order_number` and `booking_contact_first_name`
 - Yusuf pasted the updated E7 HTML into both live Wix Triggered Email templates
+- Researched new blog post ideas against the live 88-post sitemap
+- Saved the blog idea queue and drafted the free Berlin museums post
 
 **Changed:**
+- `AGENTS.md` — added `blog-workplan.md` and `blog-drafts/` to the repo map
 - `AGENTS.md` — removed the completed Wix API key rotation TODO
 - `SESSION_LOG.md` — added this handoff entry
+- `blog-workplan.md` — new prioritized blog idea plan
+- `blog-drafts/which-berlin-museums-are-free-2026.md` — new draft v1 based on official museum/admission sources
 - `email-journey/README.md` — recorded current E7 action/message IDs and Wix automation revision 7
 - `email-journey/e7-post-tour-review-request.md` — replaced FreeTour review ask with the Berlin Walk review form URL
 - `email-journey/mockups/e7-wix-html-block.html` — made "Leave a review" the primary CTA using `${order_number}` and `${booking_contact_first_name}`
