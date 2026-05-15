@@ -1,9 +1,29 @@
 {
-  "january": { "available": false, "month": "January", "monthAbbr": "Jan" },
-  "february": { "available": false, "month": "February", "monthAbbr": "Feb" },
-  "march": { "available": false, "month": "March", "monthAbbr": "Mar" },
-  "april": { "available": false, "month": "April", "monthAbbr": "Apr" },
-  "may": { "available": false, "month": "May", "monthAbbr": "May" },
+  "january": {
+    "available": false,
+    "month": "January",
+    "monthAbbr": "Jan"
+  },
+  "february": {
+    "available": false,
+    "month": "February",
+    "monthAbbr": "Feb"
+  },
+  "march": {
+    "available": false,
+    "month": "March",
+    "monthAbbr": "Mar"
+  },
+  "april": {
+    "available": false,
+    "month": "April",
+    "monthAbbr": "Apr"
+  },
+  "may": {
+    "available": false,
+    "month": "May",
+    "monthAbbr": "May"
+  },
   "june": {
     "available": true,
     "month": "June",
@@ -20,10 +40,46 @@
     "season": "early summer",
     "blurb": "Warm, long days with occasional afternoon thunderstorms"
   },
-  "july": { "available": false, "month": "July", "monthAbbr": "Jul" },
-  "august": { "available": false, "month": "August", "monthAbbr": "Aug" },
-  "september": { "available": false, "month": "September", "monthAbbr": "Sep" },
-  "october": { "available": false, "month": "October", "monthAbbr": "Oct" },
-  "november": { "available": false, "month": "November", "monthAbbr": "Nov" },
-  "december": { "available": false, "month": "December", "monthAbbr": "Dec" }
+  "july": {
+    "available": true,
+    "month": "July",
+    "monthAbbr": "Jul",
+    "tempHighC": 23,
+    "tempLowC": 12,
+    "tempHighF": 73,
+    "tempLowF": 54,
+    "rainyDays": "8",
+    "sunshineHours": 217,
+    "sunriseEarliest": "04:47",
+    "sunsetLatest": "21:32",
+    "daylightLabel": "Daylight (July 1)",
+    "daylightSolstice": "16h 45m",
+    "season": "peak summer",
+    "blurb": "Warm peak-summer days, long evenings, occasional heatwaves and short rain showers"
+  },
+  "august": {
+    "available": false,
+    "month": "August",
+    "monthAbbr": "Aug"
+  },
+  "september": {
+    "available": false,
+    "month": "September",
+    "monthAbbr": "Sep"
+  },
+  "october": {
+    "available": false,
+    "month": "October",
+    "monthAbbr": "Oct"
+  },
+  "november": {
+    "available": false,
+    "month": "November",
+    "monthAbbr": "Nov"
+  },
+  "december": {
+    "available": false,
+    "month": "December",
+    "monthAbbr": "Dec"
+  }
 }

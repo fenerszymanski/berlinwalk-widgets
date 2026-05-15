@@ -15,5 +15,14 @@
     "daylightMinutes": 459,
     "daylightDisplay": "7h 39m"
   },
-  "comparisonText": "Berlin gets 9 hours 11 minutes more daylight in June than December."
+  "comparisonText": "Berlin gets 9 hours 11 minutes more daylight in June than December.",
+  "july": {
+    "label": "JULY 1",
+    "longLabel": "July 1",
+    "sunrise": "04:47",
+    "sunset": "21:32",
+    "daylightMinutes": 1005,
+    "daylightDisplay": "16h 45m",
+    "comparisonText": "Berlin still gets just over 9 hours more daylight on July 1 than around the winter solstice."
+  }
 }

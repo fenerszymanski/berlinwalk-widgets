@@ -97,3 +97,17 @@ https://fenerszymanski.github.io/berlinwalk-widgets/free-museums-map/
 https://fenerszymanski.github.io/berlinwalk-widgets/free-museums-compare/
 https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=free-museums
 ```
+
+## Berlin in July Post Widgets
+
+Use these URLs for `berlin-in-july-2026`:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-in-july-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/monthly-weather/?month=july
+https://fenerszymanski.github.io/berlinwalk-widgets/daylight-visualizer/?month=july
+https://fenerszymanski.github.io/berlinwalk-widgets/month-comparison/?post=berlin-in-july-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/itinerary-card/?month=july
+https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-in-july-2026
+https://fenerszymanski.github.io/berlinwalk-widgets/months-nav/?current=july
+```

@@ -9,6 +9,30 @@ Format for each entry — see `AGENTS.md` §9.
 ## 2026-05-15 — Codex
 
 **Did:**
+- Added internal/external links to the free Berlin museums draft
+- Created the linked Wix Blog draft with quick summary, map, comparison, and FAQ embeds
+- Verified the draft is `UNPUBLISHED` and all four embed URLs return 200
+- Drafted the Berlin in July 2026 article, matched the live June post's widget stack, and smoke-tested all July widget URLs locally
+
+**Changed:**
+- `blog-drafts/which-berlin-museums-are-free-2026.md` — added links plus Wix draft ID/status
+- `blog-drafts/berlin-in-july-2026.md` — new 2026 July travel guide draft with official weather/event sources
+- `blog-workplan.md` — marked the free museums article as a Wix draft
+- `quick-summary/data.json` — added `berlin-in-july-2026`
+- `faq/data.json` / `faq/inject.js` — added `berlin-in-july-2026` FAQ and JSON-LD slug mapping
+- `monthly-weather/data.json` / `daylight-visualizer/data.json` / `month-comparison/data.json` / `itinerary-card/data.json` / `months-nav/data.json` — added July data to mirror the June article widgets
+- `monthly-weather/index.html` / `daylight-visualizer/index.html` — added optional month-specific labels/callouts while preserving June behavior
+- `wix-embed-snippets.md` — added the full Berlin in July widget URL stack
+- Wix: created draft post `111844a6-5b4d-418e-be34-d651f3adfe9d` in `Tourist Tips` with SEO title, meta description, focus keywords, slug, author, and rich content embeds
+
+**Opened:** Preview the Wix draft visually in the editor before publishing; visually test the July widget stack after push/deploy
+**Closed:** Free museums article moved from local draft to Wix draft; Berlin in July article draft v1 plus June-style widget data
+
+**Next session should:** Open the free museums Wix draft, confirm the embeds resize/look right in the editor, then publish when Yusuf is happy with the final visual pass. For the July article, preview the June-style widgets locally/after deploy, then move it to Wix when approved.
+
+## 2026-05-15 — Codex
+
+**Did:**
 - Read `AGENTS.md` and the latest `SESSION_LOG.md` entry
 - Confirmed the handoff files were committed/pushed and the worktree is clean on `main`
 - Recorded that Yusuf rotated the leaked Wix API key and deleted the old key

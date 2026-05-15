@@ -2,25 +2,79 @@
   "visiting-berlin-in-june": {
     "title": "June at a Glance: Compared to May and July",
     "subtitle": "How June stacks up against its neighbors",
-    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "headers": [
+      "Month",
+      "Season",
+      "Key Strengths",
+      "Price Tier"
+    ],
     "rows": [
       {
         "name": "May",
-        "statusBadge": { "label": "Shoulder", "type": "shoulder" },
+        "statusBadge": {
+          "label": "Shoulder",
+          "type": "shoulder"
+        },
         "highlights": "Mild temps, blooming gardens, lower crowds. Lakes still cold.",
         "priceTier": "$$"
       },
       {
         "name": "June",
-        "statusBadge": { "label": "Shoulder to Peak", "type": "transitioning" },
+        "statusBadge": {
+          "label": "Shoulder to Peak",
+          "type": "transitioning"
+        },
         "highlights": "Long days, beer gardens fill, Fête de la Musique, lakes warm by mid-month.",
         "priceTier": "$$$",
         "highlighted": true
       },
       {
         "name": "July",
-        "statusBadge": { "label": "Peak", "type": "peak" },
+        "statusBadge": {
+          "label": "Peak",
+          "type": "peak"
+        },
         "highlights": "Hottest temps, busiest crowds, festival season, 48 Stunden Neukölln.",
+        "priceTier": "$$$"
+      }
+    ]
+  },
+  "berlin-in-july-2026": {
+    "title": "July at a Glance: Compared to June and August",
+    "subtitle": "How peak summer stacks up against its neighbors",
+    "headers": [
+      "Month",
+      "Season",
+      "Key Strengths",
+      "Price Tier"
+    ],
+    "rows": [
+      {
+        "name": "June",
+        "statusBadge": {
+          "label": "Shoulder to Peak",
+          "type": "transitioning"
+        },
+        "highlights": "Longest days, warm but usually easier, beer gardens and lakes ramp up.",
+        "priceTier": "$$$"
+      },
+      {
+        "name": "July",
+        "statusBadge": {
+          "label": "Peak",
+          "type": "peak"
+        },
+        "highlights": "Warmest feel, long evenings, Fashion Week, Classic Open Air, CSD, school holidays.",
+        "priceTier": "$$$$",
+        "highlighted": true
+      },
+      {
+        "name": "August",
+        "statusBadge": {
+          "label": "Peak",
+          "type": "peak"
+        },
+        "highlights": "Hot lake weather, many locals away, strong summer mood but shorter evenings.",
         "priceTier": "$$$"
       }
     ]

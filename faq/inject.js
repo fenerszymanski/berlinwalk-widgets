@@ -29,6 +29,7 @@
   "berlin-in-the-rain": "berlin-in-the-rain",
   "was-your-berlin-address-east-or-west": "east-west-1989",
   "visiting-berlin-in-june": "visiting-berlin-in-june",
+  "berlin-in-july-2026": "berlin-in-july-2026",
   "which-berlin-museums-are-free-2026": "free-museums"
 };
 
@@ -1217,6 +1218,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "For most first-time visitors, Topography of Terror is the strongest central free history stop. If your main interest is the Berlin Wall, go to the Berlin Wall Memorial at Bernauer Strasse. If you only have 30 to 45 minutes near Friedrichstrasse, choose Tranenpalast."
+        }
+      }
+    ]
+  },
+  "berlin-in-july-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is July a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. July is one of Berlin's best months for outdoor life, long evenings, open-air events, and walking. The tradeoff is that it is also peak summer: hotels cost more, central areas are busier, and short heatwaves over 30°C are realistic."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in July?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists July averages of 23.3°C daytime maximum, 12.3°C minimum, about 7 hours of sunshine per day, 8 rainy days, and 48 mm of rain. In real life, pack for warm days, cooler evenings, and sudden showers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I pack for Berlin in July?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bring comfortable walking shoes, breathable summer clothes, sunglasses, sunscreen, a refillable water bottle, and a light rain jacket or compact umbrella. Add one thin sweater or overshirt for late evenings, especially if you plan to stay out after sunset."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What major events happen in Berlin in July 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Confirmed dates include Berlin Fashion Week from July 2-5, Classic Open Air from July 9-14, Berlin Brettspiel Con from July 10-12, and CSD Berlin on July 24-25. Check official event pages before publishing or booking, because schedules can still change."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I book early for Berlin in July?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Book accommodation early, especially for CSD weekend and central summer weekends. Also book Reichstag Dome slots, specific restaurants, Classic Open Air tickets if you want to attend, and timed tickets for any major museum you absolutely do not want to miss."
         }
       }
     ]

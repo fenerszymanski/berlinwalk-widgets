@@ -188,7 +188,7 @@
       '<div class="mw-row">' +
         '<div class="mw-stat"><strong>Rainy days:</strong> ' + escapeHtml(d.rainyDays) + '</div>' +
         '<div class="mw-stat"><strong>Sunshine hours:</strong> ' + escapeHtml(String(d.sunshineHours)) + '</div>' +
-        '<div class="mw-stat"><strong>Daylight (solstice):</strong> ' + escapeHtml(d.daylightSolstice) + '</div>' +
+        '<div class="mw-stat"><strong>' + escapeHtml(d.daylightLabel || 'Daylight (solstice)') + ':</strong> ' + escapeHtml(d.daylightSolstice) + '</div>' +
       '</div>' +
       '<div class="mw-row">' +
         '<div class="mw-stat"><strong>Sunrise:</strong> ' + escapeHtml(d.sunriseEarliest) + '</div>' +

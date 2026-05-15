@@ -1,17 +1,89 @@
 {
   "linkBase": "https://www.berlinwalk.com/post/",
   "months": [
-    { "key": "january", "name": "January", "tagline": "Quiet, cold, museum season", "slug": "visiting-berlin-in-january", "status": "coming_soon" },
-    { "key": "february", "name": "February", "tagline": "Berlinale film festival, raw winter", "slug": "visiting-berlin-in-february", "status": "coming_soon" },
-    { "key": "march", "name": "March", "tagline": "Light returns, last calm before tourists", "slug": "visiting-berlin-in-march", "status": "coming_soon" },
-    { "key": "april", "name": "April", "tagline": "Beer gardens open, Gallery Weekend", "slug": "visiting-berlin-in-april", "status": "coming_soon" },
-    { "key": "may", "name": "May", "tagline": "Gardens in bloom, Carnival of Cultures", "slug": "visiting-berlin-in-may", "status": "coming_soon" },
-    { "key": "june", "name": "June", "tagline": "Long days, beer gardens, deep history", "slug": "visiting-berlin-in-june", "status": "published" },
-    { "key": "july", "name": "July", "tagline": "Peak summer, festivals, lake weather", "slug": "visiting-berlin-in-july", "status": "coming_soon" },
-    { "key": "august", "name": "August", "tagline": "Hottest, emptiest, half the city is away", "slug": "visiting-berlin-in-august", "status": "coming_soon" },
-    { "key": "september", "name": "September", "tagline": "Late warmth, Berlin Marathon, Art Week", "slug": "visiting-berlin-in-september", "status": "coming_soon" },
-    { "key": "october", "name": "October", "tagline": "Festival of Lights, autumn quiets the city", "slug": "visiting-berlin-in-october", "status": "coming_soon" },
-    { "key": "november", "name": "November", "tagline": "Cheap, indoor, the beer halls win", "slug": "visiting-berlin-in-november", "status": "coming_soon" },
-    { "key": "december", "name": "December", "tagline": "Christmas markets, Glühwein, possible snow", "slug": "visiting-berlin-in-december", "status": "coming_soon" }
+    {
+      "key": "january",
+      "name": "January",
+      "tagline": "Quiet, cold, museum season",
+      "slug": "visiting-berlin-in-january",
+      "status": "coming_soon"
+    },
+    {
+      "key": "february",
+      "name": "February",
+      "tagline": "Berlinale film festival, raw winter",
+      "slug": "visiting-berlin-in-february",
+      "status": "coming_soon"
+    },
+    {
+      "key": "march",
+      "name": "March",
+      "tagline": "Light returns, last calm before tourists",
+      "slug": "visiting-berlin-in-march",
+      "status": "coming_soon"
+    },
+    {
+      "key": "april",
+      "name": "April",
+      "tagline": "Beer gardens open, Gallery Weekend",
+      "slug": "visiting-berlin-in-april",
+      "status": "coming_soon"
+    },
+    {
+      "key": "may",
+      "name": "May",
+      "tagline": "Gardens in bloom, Carnival of Cultures",
+      "slug": "visiting-berlin-in-may",
+      "status": "coming_soon"
+    },
+    {
+      "key": "june",
+      "name": "June",
+      "tagline": "Long days, beer gardens, deep history",
+      "slug": "visiting-berlin-in-june",
+      "status": "published"
+    },
+    {
+      "key": "july",
+      "name": "July",
+      "tagline": "Peak summer, festivals, lake weather",
+      "slug": "berlin-in-july-2026",
+      "status": "draft"
+    },
+    {
+      "key": "august",
+      "name": "August",
+      "tagline": "Hottest, emptiest, half the city is away",
+      "slug": "visiting-berlin-in-august",
+      "status": "coming_soon"
+    },
+    {
+      "key": "september",
+      "name": "September",
+      "tagline": "Late warmth, Berlin Marathon, Art Week",
+      "slug": "visiting-berlin-in-september",
+      "status": "coming_soon"
+    },
+    {
+      "key": "october",
+      "name": "October",
+      "tagline": "Festival of Lights, autumn quiets the city",
+      "slug": "visiting-berlin-in-october",
+      "status": "coming_soon"
+    },
+    {
+      "key": "november",
+      "name": "November",
+      "tagline": "Cheap, indoor, the beer halls win",
+      "slug": "visiting-berlin-in-november",
+      "status": "coming_soon"
+    },
+    {
+      "key": "december",
+      "name": "December",
+      "tagline": "Christmas markets, Glühwein, possible snow",
+      "slug": "visiting-berlin-in-december",
+      "status": "coming_soon"
+    }
   ]
 }

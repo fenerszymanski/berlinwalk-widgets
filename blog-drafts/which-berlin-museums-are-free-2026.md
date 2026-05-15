@@ -2,6 +2,10 @@
 
 Slug idea: `which-berlin-museums-are-free-2026`
 
+Wix draft ID: `111844a6-5b4d-418e-be34-d651f3adfe9d`
+
+Wix draft status: `UNPUBLISHED`
+
 Meta title: Which Berlin Museums Are Free in 2026? A Clear Tourist Guide
 
 Meta description: Some Berlin museums are always free, some are free only on special days, and Museum Sunday has ended. Here is the honest 2026 guide for tourists.
@@ -41,7 +45,7 @@ Use these embeds when building the post in Wix:
 
 ## Draft
 
-Berlin is a good city for free museums, but not in the way visitors usually expect.
+Berlin is a good city for free museums, but not in the way visitors usually expect. If you are trying to keep your trip affordable, pair this guide with my [realistic Berlin daily budget guide](https://www.berlinwalk.com/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists) and the [Berlin WelcomeCard breakdown](https://www.berlinwalk.com/post/is-the-berlin-welcomecard-worth-it-in-2026-an-honest-breakdown).
 
 The old easy answer was Museum Sunday. For a while, many Berlin museums opened for free on the first Sunday of the month. It was simple, popular, and extremely useful for tourists. But that program is no longer something I would tell you to plan a trip around.
 
@@ -73,7 +77,7 @@ Museum Sunday used to be the tourist-friendly shortcut: come on the first Sunday
 
 That is not the dependable system anymore.
 
-As of 2026, do not build your Berlin plan around monthly Museum Sunday. The official Museumsportal Berlin page says Museum Sunday has been abolished, with the last one taking place on December 1, 2024.
+As of 2026, do not build your Berlin plan around monthly Museum Sunday. The official [Museumsportal Berlin Museum Sunday page](https://www.museumsportal-berlin.de/en/plan-your-visit/museumssonntag/) says Museum Sunday has been abolished, with the last one taking place on December 1, 2024.
 
 This is important because a lot of older travel advice still says "go on the first Sunday." That advice can send you to a museum expecting free entry, only to find normal prices, timed ticket rules, or no free slots at all.
 
@@ -83,7 +87,7 @@ The safer strategy is to know the places that are free year-round.
 
 There is one useful middle category: museums that are not always free, but open without admission at specific times.
 
-According to Museumsportal Berlin's May 2026 overview, examples include:
+According to [Museumsportal Berlin's May 2026 free-entry overview](https://www.museumsportal-berlin.de/en/plan-your-visit/all-about-admission-fees/free-entry/), examples include:
 
 - German Museum of Technology: every Friday from 1 pm
 - Neue Nationalgalerie: first Thursday of the month, 4 pm to 8 pm
@@ -104,11 +108,11 @@ Cost: Free
 
 Location: Niederkirchnerstrasse, near Potsdamer Platz and Checkpoint Charlie
 
-The Topography of Terror is one of Berlin's most important free historical sites. It stands on the former grounds of the Gestapo and SS headquarters, which gives the exhibition a weight you feel before you even read the first panel.
+The [Topography of Terror](https://www.topographie.de/en/your-visit/directions-opening-hours) is one of Berlin's most important free historical sites. It stands on the former grounds of the Gestapo and SS headquarters, which gives the exhibition a weight you feel before you even read the first panel.
 
 This is not a decorative museum. It is a documentation center about Nazi power, persecution, bureaucracy, and violence. The permanent exhibition is clear, direct, and heavy.
 
-It is also close to a surviving stretch of the Berlin Wall, so you can combine it with Checkpoint Charlie or a walk toward Potsdamer Platz.
+It is also close to a surviving stretch of the Berlin Wall, so you can combine it with Checkpoint Charlie or a walk toward Potsdamer Platz. If the Wall is your main interest, my [interactive Berlin Wall map](https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map) gives you a better sense of where the border actually ran.
 
 My advice: give it at least 60 to 90 minutes. Do not squeeze it between lunch and a shopping stop. It deserves your attention.
 
@@ -120,9 +124,9 @@ Cost: Free
 
 Location: Bernauer Strasse
 
-If you only see one Berlin Wall site, make it the Berlin Wall Memorial at Bernauer Strasse.
+If you only see one Berlin Wall site, make it the [Berlin Wall Memorial](https://www.berliner-mauer-gedenkstaette.de/en/) at Bernauer Strasse.
 
-The East Side Gallery is more famous visually, but Bernauer Strasse explains the Wall better. You can still see the border strip, watchtower area, preserved foundations, escape stories, and the line where houses once stood directly on the border.
+The East Side Gallery is more famous visually, but Bernauer Strasse explains the Wall better. You can still see the border strip, watchtower area, preserved foundations, escape stories, and the line where houses once stood directly on the border. For the bigger picture, read my guide to [where the Berlin Wall stood and what is left in 2026](https://www.berlinwalk.com/post/the-berlin-wall-where-it-stood-and-what-s-left-in-2026).
 
 This is where visitors usually understand that the Wall was not just one wall. It was a whole border system, with layers, patrol roads, lights, guards, and deadly empty space.
 
@@ -136,13 +140,13 @@ Cost: Free
 
 Location: Friedrichstrasse station
 
-Tranenpalast means "Palace of Tears." The name is not poetic exaggeration. This was the departure hall where people said goodbye when crossing from East Berlin to West Berlin during the Cold War.
+[Tranenpalast](https://www.hdg.de/traenenpalast/) means "Palace of Tears." The name is not poetic exaggeration. This was the departure hall where people said goodbye when crossing from East Berlin to West Berlin during the Cold War.
 
 The museum is small, free, and easy to visit. It is especially good if you do not have time for a huge museum day but still want something meaningful.
 
 What makes it powerful is the scale. You are not looking at abstract Cold War politics. You are standing in the place where families separated, argued with border officials, waited, worried, and cried.
 
-It pairs well with a walk around Friedrichstrasse, Unter den Linden, or the Brandenburg Gate.
+It pairs well with a walk around Friedrichstrasse, Unter den Linden, or the Brandenburg Gate. If you want a simple primer before going, start with my [East vs West Berlin guide](https://www.berlinwalk.com/post/how-berlin-was-divided-a-simple-guide-to-east-vs-west).
 
 ## 4. Jewish Museum Berlin, Permanent Exhibition
 
@@ -152,7 +156,7 @@ Cost: The permanent exhibition is free. Special exhibitions may cost extra.
 
 Location: Kreuzberg
 
-The Jewish Museum Berlin is one of the most important museums in the city, and its permanent exhibition is free.
+The [Jewish Museum Berlin](https://www.jmberlin.de/en/planning-your-visit) is one of the most important museums in the city, and its permanent exhibition is free.
 
 Many visitors know the building because of Daniel Libeskind's architecture: sharp lines, voids, angles, and spaces that deliberately make you feel unsettled. But the museum is not only about the Holocaust. It covers Jewish life, culture, religion, migration, persecution, belonging, and German history across centuries.
 
@@ -168,7 +172,7 @@ Cost: Free
 
 Location: Near Berlin Hauptbahnhof
 
-Futurium is a very different kind of free museum. Instead of Berlin history, it looks at possible futures: cities, energy, food, technology, climate, and daily life.
+[Futurium](https://futurium.de/en/visit) is a very different kind of free museum. Instead of Berlin history, it looks at possible futures: cities, energy, food, technology, climate, and daily life.
 
 It is modern, hands-on, and easier with children than many of Berlin's heavier historical museums.
 
@@ -182,11 +186,11 @@ Cost: Free
 
 Location: Dahlem
 
-The Allied Museum is not as central as the others, but it is worth knowing about if you are interested in postwar Berlin.
+The [Allied Museum](https://www.alliiertenmuseum.de/en/visit/) is not as central as the others, but it is worth knowing about if you are interested in postwar Berlin.
 
 It tells the story of the American, British, and French presence in West Berlin, including the Berlin Airlift and Cold War life in the divided city.
 
-Because it is in Dahlem, I would not send a first-time visitor there before the Berlin Wall Memorial or Tranenpalast. But if you have already seen the central Cold War sites and want more depth, it is a good free option.
+Because it is in Dahlem, I would not send a first-time visitor there before the Berlin Wall Memorial or Tranenpalast. But if you have already seen the central Cold War sites and want more depth, it is a good free option. It also pairs well with my [Cold War Berlin in 5 key locations](https://www.berlinwalk.com/post/cold-war-berlin-in-5-key-locations-you-can-still-visit) guide.
 
 ## 7. German Resistance Memorial Center
 
@@ -196,7 +200,7 @@ Cost: Free
 
 Location: Bendlerblock, near Tiergarten
 
-This memorial center tells the story of Germans who resisted the Nazi regime, including the group connected to the July 20, 1944 assassination attempt against Hitler.
+The [German Resistance Memorial Center](https://www.gdw-berlin.de/en/home/) tells the story of Germans who resisted the Nazi regime, including the group connected to the July 20, 1944 assassination attempt against Hitler.
 
 It is a serious place, and not always on the standard tourist path. That is part of why it is valuable.
 
@@ -210,7 +214,7 @@ Cost: Free
 
 Location: Wannsee
 
-The House of the Wannsee Conference is outside the city center, but historically it is one of the most important free sites in Berlin.
+The [House of the Wannsee Conference](https://www.ghwk.de/en/) is outside the city center, but historically it is one of the most important free sites in Berlin.
 
 This is where senior Nazi officials met in January 1942 to coordinate the genocide of European Jews. Today it is a memorial and educational site.
 
@@ -226,7 +230,7 @@ Cost: Free
 
 Location: Prenzlauer Berg
 
-The Museum in the Kulturbrauerei focuses on everyday life in the GDR. That makes it a good complement to Wall sites, which often focus on borders, escape, and state power.
+The [Museum in the Kulturbrauerei](https://www.hdg.de/museum-in-der-kulturbrauerei/) focuses on everyday life in the GDR. That makes it a good complement to Wall sites, which often focus on borders, escape, and state power.
 
 Here the story is more domestic: work, consumer goods, school, family life, state pressure, and the small negotiations of daily life in East Germany.
 
@@ -236,11 +240,11 @@ It is also in Prenzlauer Berg, a neighborhood many visitors enjoy for cafes, str
 
 Usually, no.
 
-This is where tourists get confused. Museum Island is central, famous, and partly public in the sense that you can walk around it for free. But the major museums themselves, such as the Neues Museum, Altes Museum, Bode Museum, and Alte Nationalgalerie, usually require paid tickets.
+This is where tourists get confused. Museum Island is central, famous, and partly public in the sense that you can walk around it for free. But the major museums themselves, such as the Neues Museum, Altes Museum, Bode Museum, and Alte Nationalgalerie, usually require paid tickets. I cover the paid-ticket decision in more detail in my guide to [Museum Island tickets, prices, and what to skip](https://www.berlinwalk.com/post/is-museum-island-free-tickets-prices-and-what-to-actually-skip).
 
 There are exceptions for certain groups, special programs, children, press, students, or occasional events, but you should not assume Museum Island is free.
 
-If your budget is tight, walk the island, enjoy the architecture, visit the Lustgarten, look at the Berliner Dom from outside, then choose one paid museum only if it really matters to you.
+If your budget is tight, walk the island, enjoy the architecture, visit the Lustgarten, look at the Berliner Dom from outside, then choose one paid museum only if it really matters to you. If Pergamon is the museum you were hoping for, read this first: [Is the Pergamon Museum closed?](https://www.berlinwalk.com/post/is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026)
 
 ## What About Children and Students?
 
@@ -264,7 +268,7 @@ Late afternoon: Topography of Terror
 
 This gives you the Wall, the Cold War border experience, and the Nazi period in one day. It is not light, but it is coherent.
 
-If you want something less heavy, swap Topography of Terror for Futurium or the Museum in the Kulturbrauerei.
+If you want something less heavy, swap Topography of Terror for Futurium or the Museum in the Kulturbrauerei. On a wet day, you can also use my [Berlin in the rain guide](https://www.berlinwalk.com/post/berlin-in-the-rain) to build a softer museum-heavy itinerary.
 
 ## My Honest Advice
 
@@ -276,7 +280,7 @@ If this is your first visit, I would not try to "collect" free museums just beca
 
 Berlin makes more sense when you connect the rooms, streets, stations, bridges, and empty spaces.
 
-That is also why I start my walking tour at Alexanderplatz. The city is not only inside museums. A lot of the story is still outside, in the ground plan, the gaps, the rebuilt facades, and the places people pass without noticing.
+That is also why I start my [Berlin Free Walking Tour](https://www.berlinwalk.com/) at Alexanderplatz. The city is not only inside museums. A lot of the story is still outside, in the ground plan, the gaps, the rebuilt facades, and the places people pass without noticing.
 
 ## Sources to Check Before Publishing
 

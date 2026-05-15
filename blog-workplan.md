@@ -9,8 +9,8 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
 | 1 | Idea | Free Things to Do in Berlin in 2026 | Broad practical guide for budget-conscious visitors. Strong internal links to Reichstag, Museum Island, Wall, drinking water, transport, and the free walking tour. |
-| 2 | Draft v1 + widgets | Which Berlin Museums Are Actually Free in 2026? | Clear answer to free-entry confusion after Museum Sunday ended. Includes quick summary, FAQ, interactive map, and comparison table widgets. |
-| 3 | Idea | Berlin in July: Weather, Events, What to Pack, and What to Book Early | Seasonal traffic, summer heat, lakes, open-air culture, and practical planning. |
+| 2 | Wix draft | Which Berlin Museums Are Actually Free in 2026? | Clear answer to free-entry confusion after Museum Sunday ended. Includes quick summary, FAQ, interactive map, and comparison table widgets. Draft ID: `111844a6-5b4d-418e-be34-d651f3adfe9d`. |
+| 3 | Draft v1 + widgets | Berlin in July: Weather, Events, What to Pack, and What to Book Early | Seasonal traffic, summer heat, lakes, open-air culture, and practical planning. Mirrors the live June post widget stack. |
 | 4 | Idea | Berlin in August: Lakes, Long Evenings, and What Tourists Get Wrong | Summer follow-up with swimming, transport, closures, and realistic crowd advice. |
 | 5 | Idea | Berlin in September: The Best Month Nobody Plans For | Shoulder-season guide with walking weather, fewer crowds, and late-summer atmosphere. |
 | 6 | Idea | Public Toilets in Berlin: What Tourists Need to Know | Highly practical, under-served tourist topic. Good fit for route-area advice. |
@@ -27,6 +27,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 ## Drafts
 
 - `blog-drafts/which-berlin-museums-are-free-2026.md`
+- `blog-drafts/berlin-in-july-2026.md`
 - `free-museums-map/`
 - `free-museums-compare/`
 

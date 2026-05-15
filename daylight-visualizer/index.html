@@ -163,7 +163,7 @@
       '<h2 class="dv-kicker">How Long Are the Days in Berlin?</h2>' +
       bar(compared, topClass, anchor) +
       bar(winter, 'winter', anchor) +
-      '<div class="dv-callout">' + escapeHtml(data.comparisonText || '') + '</div>' +
+      '<div class="dv-callout">' + escapeHtml(compared.comparisonText || data.comparisonText || '') + '</div>' +
       '<div class="dv-watermark" aria-hidden="true">@berlinwalkingtour</div>';
 
     root.innerHTML = html;
