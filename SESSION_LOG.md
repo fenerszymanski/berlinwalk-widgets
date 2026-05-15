@@ -9,6 +9,26 @@ Format for each entry — see `AGENTS.md` §9.
 ## 2026-05-15 — Codex
 
 **Did:**
+- Repaired the four current Wix blog drafts after the paragraph-spacing experiment over-spaced them
+- Restored normal Ricos paragraph structure, added selective bolding for scanability, and re-added free museums images from Wix Media Gallery
+- Verified all four drafts are readable via API, still `UNPUBLISHED`, and retain their widget embeds
+- Added tiny 6px spacer paragraphs between adjacent body paragraphs after visual review showed normal Ricos paragraphs still looked cramped
+
+**Changed:**
+- `AGENTS.md` — corrected the Wix Blog paragraph-spacing gotcha: use only tiny 6px spacer paragraphs, never full-size blank paragraphs
+- Wix: repaired draft `111844a6-5b4d-418e-be34-d651f3adfe9d`; now 6 images, 4 embeds, selective bolding
+- Wix: repaired draft `e14a0e69-480f-472f-bea5-a5010e3893cb`; now 7 embeds, selective bolding
+- Wix: repaired draft `0da7a350-14e7-4c59-bcb5-ba80fc4654d5`; now 7 embeds, selective bolding
+- Wix: repaired draft `5e1ac42b-7878-4e2b-97de-e75b2458fc49`; now 7 embeds, selective bolding
+
+**Opened:** Visually inspect the four Wix drafts in the editor; API verification is clean, but layout/crop still needs human preview
+**Closed:** Over-spaced paragraph state and API-read instability from the spacer paragraph approach
+
+**Next session should:** Preview the four drafts on desktop/mobile, then handle Advanced SEO only after visual layout is stable.
+
+## 2026-05-15 — Codex
+
+**Did:**
 - Fixed paragraph spacing in the four Wix blog drafts created today
 - Verified all affected drafts remain `UNPUBLISHED` and their widget embeds are still present
 
