@@ -97,7 +97,6 @@ Pulled from `SESSION_LOG.md` — see that file for active state. As of the lates
 2. **Update E7 email** to point at `berlinwalk.com/leave-review?bid=${order_number}&n=${booking_contact_first_name}` (currently links to Instagram + blog only).
 3. **Convert homepage `bw-testimonials`** to read from `listReviews` instead of `testimonials/data.json` so site-submitted reviews flow through to the homepage carousel.
 4. **Convert `/leave-review` to a Custom Element** (currently iframe) to fix mobile sizing and match the rest of the site's element pattern. The mobile breakpoint height is the current workaround.
-5. **Rotate Wix API key** — leaked in chat during the May 2026 session. Yusuf hasn't done it yet.
 
 ## 9. Protocol for ending a session
 

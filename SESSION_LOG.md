@@ -6,6 +6,22 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-15 — Codex
+
+**Did:**
+- Read `AGENTS.md` and the latest `SESSION_LOG.md` entry
+- Confirmed the handoff files were committed/pushed and the worktree is clean on `main`
+- Recorded that Yusuf rotated the leaked Wix API key and deleted the old key
+
+**Changed:**
+- `AGENTS.md` — removed the completed Wix API key rotation TODO
+- `SESSION_LOG.md` — added this handoff entry
+
+**Opened:** none
+**Closed:** Wix API key rotation
+
+**Next session should:** Test the cancel-on-cancel automation end-to-end with a real test booking and cancellation, watching for `cancelEvent status: 200`.
+
 ## 2026-05-15 — Claude Code
 
 **Did:**
