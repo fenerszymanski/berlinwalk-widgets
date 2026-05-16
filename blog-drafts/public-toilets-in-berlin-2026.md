@@ -28,6 +28,9 @@ Use these embeds when building the post in Wix:
 2. FAQ, near the bottom:
    `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=public-toilets`
 
+3. Interactive public toilet map, after "The Honest Answer" or before "The Berliner Toilette App":
+   `https://fenerszymanski.github.io/berlinwalk-widgets/public-toilets-map/`
+
 ## Quick Summary
 
 - Berlin has a real public toilet system, not just cafes and luck. The city's network is called Berliner Toiletten and is operated by Wall GmbH on behalf of the State of Berlin.

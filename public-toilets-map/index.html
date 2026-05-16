@@ -1,0 +1,1006 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Public Toilets Near You | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-toilet-map">
+  <style>
+    #bw-toilet-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164A1A;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-blue: #126A8A;
+      --bw-blue-soft: #EAF6F8;
+      --bw-red: #B83E2F;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-toilet-map * {
+      box-sizing: border-box;
+    }
+
+    #bw-toilet-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-toilet-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    #bw-toilet-map .bw-title-group {
+      min-width: 0;
+    }
+
+    #bw-toilet-map .bw-kicker {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    #bw-toilet-map .bw-title {
+      color: var(--bw-white);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-top: 3px;
+    }
+
+    #bw-toilet-map .bw-live {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 999px;
+      color: var(--bw-white);
+      display: inline-flex;
+      flex: 0 0 auto;
+      font-size: 11px;
+      font-weight: 700;
+      gap: 7px;
+      line-height: 1;
+      padding: 8px 10px;
+      white-space: nowrap;
+    }
+
+    #bw-toilet-map .bw-live-dot {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      display: inline-block;
+      height: 7px;
+      width: 7px;
+    }
+
+    #bw-toilet-map .bw-body {
+      background: #FAFAF5;
+      padding: 16px 18px 18px;
+    }
+
+    #bw-toilet-map .bw-controls {
+      align-items: center;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(180px, 1fr) auto;
+      margin-bottom: 12px;
+    }
+
+    #bw-toilet-map .bw-search-wrap {
+      position: relative;
+    }
+
+    #bw-toilet-map .bw-search {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 13px;
+      height: 42px;
+      line-height: 42px;
+      padding: 0 12px;
+      width: 100%;
+    }
+
+    #bw-toilet-map .bw-search:focus {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.18);
+      outline: 0;
+    }
+
+    #bw-toilet-map .bw-locate {
+      align-items: center;
+      background: var(--bw-yellow);
+      border: 1.5px solid var(--bw-yellow);
+      border-radius: 8px;
+      color: var(--bw-green);
+      cursor: pointer;
+      display: inline-flex;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      gap: 8px;
+      height: 42px;
+      justify-content: center;
+      min-width: 148px;
+      padding: 0 14px;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-toilet-map .bw-locate:hover {
+      background: #FFEF33;
+      border-color: #FFEF33;
+      transform: translateY(-1px);
+    }
+
+    #bw-toilet-map .bw-locate:disabled {
+      cursor: wait;
+      opacity: 0.74;
+      transform: none;
+    }
+
+    #bw-toilet-map .bw-locate-icon {
+      display: inline-block;
+      height: 13px;
+      position: relative;
+      width: 13px;
+    }
+
+    #bw-toilet-map .bw-locate-icon::before,
+    #bw-toilet-map .bw-locate-icon::after {
+      content: "";
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    #bw-toilet-map .bw-locate-icon::before {
+      border: 2px solid var(--bw-green);
+      border-radius: 50%;
+      height: 13px;
+      width: 13px;
+    }
+
+    #bw-toilet-map .bw-locate-icon::after {
+      background: var(--bw-green);
+      border-radius: 50%;
+      height: 4px;
+      width: 4px;
+    }
+
+    #bw-toilet-map .bw-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    #bw-toilet-map .bw-filter {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      min-height: 34px;
+      padding: 9px 13px;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-toilet-map .bw-filter:hover {
+      background: var(--bw-lime-soft);
+      border-color: var(--bw-lime);
+    }
+
+    #bw-toilet-map .bw-filter.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-toilet-map .bw-map-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) 280px;
+    }
+
+    #bw-toilet-map .bw-map-container {
+      background: #E8EEDC;
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      height: 470px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    #bw-toilet-map .bw-map {
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+
+    #bw-toilet-map .bw-loading {
+      align-items: center;
+      background: rgba(250, 250, 245, 0.92);
+      color: var(--bw-green);
+      display: flex;
+      font-size: 13px;
+      font-weight: 800;
+      inset: 0;
+      justify-content: center;
+      padding: 22px;
+      position: absolute;
+      text-align: center;
+      z-index: 2;
+    }
+
+    #bw-toilet-map .bw-panel {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    #bw-toilet-map .bw-panel-head {
+      border-bottom: 1px solid var(--bw-border);
+      padding: 12px 13px;
+    }
+
+    #bw-toilet-map .bw-panel-title {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    #bw-toilet-map .bw-panel-sub {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      line-height: 1.45;
+      margin: 4px 0 0;
+    }
+
+    #bw-toilet-map .bw-nearest-list {
+      height: 415px;
+      list-style: none;
+      margin: 0;
+      overflow: auto;
+      padding: 0;
+    }
+
+    #bw-toilet-map .bw-nearest-item {
+      border-bottom: 1px solid #EEF3E6;
+      cursor: pointer;
+      display: block;
+      padding: 12px 13px;
+      text-align: left;
+      width: 100%;
+    }
+
+    #bw-toilet-map .bw-nearest-item:hover,
+    #bw-toilet-map .bw-nearest-item.active {
+      background: var(--bw-blue-soft);
+    }
+
+    #bw-toilet-map .bw-nearest-name {
+      color: var(--bw-text);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    #bw-toilet-map .bw-nearest-meta {
+      color: var(--bw-muted);
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 11px;
+      gap: 5px;
+      line-height: 1.45;
+      margin-top: 6px;
+    }
+
+    #bw-toilet-map .bw-chip {
+      background: #F6F8F2;
+      border: 1px solid #E6EDD9;
+      border-radius: 999px;
+      color: var(--bw-muted);
+      display: inline-flex;
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1;
+      padding: 5px 7px;
+    }
+
+    #bw-toilet-map .bw-chip.free {
+      background: var(--bw-lime-soft);
+      border-color: var(--bw-border);
+      color: var(--bw-green);
+    }
+
+    #bw-toilet-map .bw-chip.paid {
+      background: #FFF6D6;
+      border-color: #F2D981;
+      color: #655400;
+    }
+
+    #bw-toilet-map .bw-empty {
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.55;
+      margin: 0;
+      padding: 14px 13px;
+    }
+
+    #bw-toilet-map .bw-status {
+      align-items: center;
+      color: var(--bw-muted);
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 11.5px;
+      gap: 8px;
+      justify-content: space-between;
+      line-height: 1.45;
+      margin-top: 10px;
+    }
+
+    #bw-toilet-map .bw-status strong {
+      color: var(--bw-green);
+      font-weight: 800;
+    }
+
+    #bw-toilet-map .bw-source {
+      color: var(--bw-muted);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    #bw-toilet-map .leaflet-container {
+      background: #E8EEDC;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    #bw-toilet-map .leaflet-popup-content-wrapper {
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      padding: 0;
+    }
+
+    #bw-toilet-map .leaflet-popup-content {
+      font-family: inherit;
+      margin: 0;
+      width: 255px !important;
+    }
+
+    #bw-toilet-map .bw-popup-head {
+      background: var(--bw-green);
+      border-radius: 11px 11px 0 0;
+      padding: 10px 14px;
+    }
+
+    #bw-toilet-map .bw-popup-type {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      line-height: 1.25;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+
+    #bw-toilet-map .bw-popup-name {
+      color: var(--bw-white);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-toilet-map .bw-popup-body {
+      color: var(--bw-text);
+      font-size: 12px;
+      line-height: 1.5;
+      padding: 12px 14px 14px;
+    }
+
+    #bw-toilet-map .bw-popup-row {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: 72px minmax(0, 1fr);
+      margin-bottom: 6px;
+    }
+
+    #bw-toilet-map .bw-popup-row:last-child {
+      margin-bottom: 0;
+    }
+
+    #bw-toilet-map .bw-popup-label {
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-toilet-map .bw-popup-route {
+      background: var(--bw-yellow);
+      border-radius: 8px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1;
+      margin-top: 9px;
+      padding: 9px 11px;
+      text-decoration: none;
+    }
+
+    #bw-toilet-map .bw-user-marker {
+      align-items: center;
+      background: var(--bw-blue);
+      border: 3px solid var(--bw-white);
+      border-radius: 999px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.28);
+      color: var(--bw-white);
+      display: flex;
+      font-size: 10px;
+      font-weight: 800;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-toilet-map .bw-head {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 13px 16px;
+      }
+
+      #bw-toilet-map .bw-title {
+        font-size: 16px;
+      }
+
+      #bw-toilet-map .bw-body {
+        padding: 14px;
+      }
+
+      #bw-toilet-map .bw-controls {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-toilet-map .bw-locate {
+        width: 100%;
+      }
+
+      #bw-toilet-map .bw-map-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-toilet-map .bw-map-container {
+        height: 380px;
+      }
+
+      #bw-toilet-map .bw-nearest-list {
+        height: 250px;
+      }
+
+      #bw-toilet-map .leaflet-popup-content {
+        width: 220px !important;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <div class="bw-title-group">
+        <span class="bw-kicker">Berlin Public Toilet Finder</span>
+        <div class="bw-title">Find the nearest official toilet</div>
+      </div>
+      <div class="bw-live" aria-live="polite"><span class="bw-live-dot" aria-hidden="true"></span><span id="bw-toilet-live">Loading live data</span></div>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-controls">
+        <div class="bw-search-wrap">
+          <input class="bw-search" id="bw-toilet-search" type="search" placeholder="Search by place, district, or type" autocomplete="off">
+        </div>
+        <button class="bw-locate" id="bw-toilet-locate" type="button">
+          <span class="bw-locate-icon" aria-hidden="true"></span>
+          <span>Use my location</span>
+        </button>
+      </div>
+
+      <div class="bw-filters" aria-label="Toilet filters">
+        <button class="bw-filter active" type="button" data-filter="all">All toilets</button>
+        <button class="bw-filter" type="button" data-filter="free">Free</button>
+        <button class="bw-filter" type="button" data-filter="accessible">Accessible</button>
+        <button class="bw-filter" type="button" data-filter="baby">Baby changing</button>
+      </div>
+
+      <div class="bw-map-grid">
+        <div class="bw-map-container">
+          <div class="bw-map" id="bw-toilet-map-canvas"></div>
+          <div class="bw-loading" id="bw-toilet-loading">Loading Berlin public toilets...</div>
+        </div>
+
+        <aside class="bw-panel" aria-live="polite">
+          <div class="bw-panel-head">
+            <p class="bw-panel-title" id="bw-toilet-panel-title">Closest toilets</p>
+            <p class="bw-panel-sub" id="bw-toilet-panel-sub">Allow location access or tap the map to sort by walking distance.</p>
+          </div>
+          <ul class="bw-nearest-list" id="bw-toilet-list"></ul>
+        </aside>
+      </div>
+
+      <div class="bw-status">
+        <span id="bw-toilet-status">Preparing the map...</span>
+        <span>Source: <a class="bw-source" href="https://daten.berlin.de/datensaetze/offentliche-toiletten-wfs-ad2c0c24" target="_blank" rel="noopener">Berlin Open Data WFS</a></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-toilet-map');
+      if (!root || typeof L === 'undefined') return;
+
+      var DATA_URL = 'https://gdi.berlin.de/services/wfs/toiletten?SERVICE=WFS&VERSION=2.0.0&REQUEST=GetFeature&TYPENAMES=toiletten:toiletten&OUTPUTFORMAT=application/json&SRSNAME=EPSG:4326';
+      var BERLIN_CENTER = [52.5172, 13.3889];
+      var state = {
+        all: [],
+        filtered: [],
+        markers: new Map(),
+        activeFilter: 'all',
+        query: '',
+        userLocation: null,
+        activeId: null
+      };
+
+      var mapEl = document.getElementById('bw-toilet-map-canvas');
+      var loadingEl = document.getElementById('bw-toilet-loading');
+      var listEl = document.getElementById('bw-toilet-list');
+      var statusEl = document.getElementById('bw-toilet-status');
+      var liveEl = document.getElementById('bw-toilet-live');
+      var locateButton = document.getElementById('bw-toilet-locate');
+      var searchInput = document.getElementById('bw-toilet-search');
+      var panelTitle = document.getElementById('bw-toilet-panel-title');
+      var panelSub = document.getElementById('bw-toilet-panel-sub');
+
+      var map = L.map(mapEl, {
+        center: BERLIN_CENTER,
+        zoom: 12,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(map);
+
+      map.once('click', function () {
+        map.scrollWheelZoom.enable();
+      });
+
+      var markerLayer = L.layerGroup().addTo(map);
+      var userMarker = null;
+      var nearestLine = null;
+
+      function escapeHtml(value) {
+        return String(value == null ? '' : value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#039;');
+      }
+
+      function normalize(value) {
+        return String(value == null ? '' : value).toLowerCase();
+      }
+
+      function isYes(value) {
+        return normalize(value) === 'ja' || normalize(value) === 'yes';
+      }
+
+      function isFree(toilet) {
+        return Number(toilet.fee) === 0;
+      }
+
+      function formatFee(toilet) {
+        if (toilet.fee === null || toilet.fee === undefined || toilet.fee === '') return 'Unknown';
+        if (Number(toilet.fee) === 0) return 'Free';
+        return Number(toilet.fee).toLocaleString('en-US', {
+          style: 'currency',
+          currency: 'EUR',
+          minimumFractionDigits: 2
+        });
+      }
+
+      function formatDistance(meters) {
+        if (meters == null || !isFinite(meters)) return '';
+        if (meters < 1000) return Math.round(meters) + ' m';
+        return (meters / 1000).toFixed(meters < 10000 ? 1 : 0) + ' km';
+      }
+
+      function distanceMeters(a, b) {
+        var earth = 6371000;
+        var lat1 = a.lat * Math.PI / 180;
+        var lat2 = b.lat * Math.PI / 180;
+        var dLat = (b.lat - a.lat) * Math.PI / 180;
+        var dLng = (b.lng - a.lng) * Math.PI / 180;
+        var sinLat = Math.sin(dLat / 2);
+        var sinLng = Math.sin(dLng / 2);
+        var h = sinLat * sinLat + Math.cos(lat1) * Math.cos(lat2) * sinLng * sinLng;
+        return 2 * earth * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
+      }
+
+      function googleRouteUrl(toilet) {
+        return 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(toilet.lat + ',' + toilet.lng) + '&travelmode=walking';
+      }
+
+      function markerStyle(toilet) {
+        var selected = state.activeId === toilet.id;
+        return {
+          radius: selected ? 9 : 6,
+          color: selected ? '#126A8A' : (isFree(toilet) ? '#1B5E20' : '#655400'),
+          fillColor: selected ? '#126A8A' : (isFree(toilet) ? '#7CB342' : '#FFE600'),
+          fillOpacity: selected ? 0.95 : 0.82,
+          opacity: 1,
+          weight: selected ? 3 : 2
+        };
+      }
+
+      function popupHtml(toilet) {
+        var distance = state.userLocation ? '<div class="bw-popup-row"><span class="bw-popup-label">Distance</span><span>' + formatDistance(toilet.distance) + ' as the crow flies</span></div>' : '';
+        var hours = toilet.hours ? '<div class="bw-popup-row"><span class="bw-popup-label">Hours</span><span>' + escapeHtml(toilet.hours).replace(/\n/g, '<br>') + '</span></div>' : '';
+        var route = '<a class="bw-popup-route" href="' + googleRouteUrl(toilet) + '" target="_blank" rel="noopener">Open walking route</a>';
+
+        return '<div class="bw-popup-head">'
+          + '<span class="bw-popup-type">' + escapeHtml(toilet.type || toilet.district || 'Public toilet') + '</span>'
+          + '<div class="bw-popup-name">' + escapeHtml(toilet.name) + '</div>'
+          + '</div>'
+          + '<div class="bw-popup-body">'
+          + '<div class="bw-popup-row"><span class="bw-popup-label">Cost</span><span>' + formatFee(toilet) + '</span></div>'
+          + '<div class="bw-popup-row"><span class="bw-popup-label">Access</span><span>' + (toilet.accessible ? 'Accessible' : (toilet.lowBarrier ? 'Low-barrier' : 'Not marked accessible')) + '</span></div>'
+          + '<div class="bw-popup-row"><span class="bw-popup-label">Changing</span><span>' + (toilet.baby ? 'Baby changing table' : 'Not listed') + '</span></div>'
+          + distance
+          + hours
+          + route
+          + '</div>';
+      }
+
+      function toiletFromFeature(feature) {
+        var p = feature.properties || {};
+        var coords = feature.geometry && feature.geometry.coordinates;
+        if (!coords || coords.length < 2) return null;
+
+        return {
+          id: String(p.fid || feature.id || coords.join(',')),
+          name: p.standort || 'Public toilet',
+          district: p.bezirk || '',
+          type: p.modelltyp || p.symbol || 'Public toilet',
+          operator: p.betreiber || '',
+          hours: p.oeffnungszeiten || '',
+          fee: p.nutzungsentgelt,
+          payment: p.zahlungsart || '',
+          accessible: isYes(p.barrierefrei),
+          lowBarrier: isYes(p.barrierearm),
+          baby: isYes(p.wickeltisch),
+          lat: Number(coords[1]),
+          lng: Number(coords[0]),
+          search: normalize([p.standort, p.bezirk, p.modelltyp, p.symbol, p.betreiber].join(' '))
+        };
+      }
+
+      function passesFilter(toilet) {
+        if (state.activeFilter === 'free' && !isFree(toilet)) return false;
+        if (state.activeFilter === 'accessible' && !toilet.accessible && !toilet.lowBarrier) return false;
+        if (state.activeFilter === 'baby' && !toilet.baby) return false;
+        if (state.query && toilet.search.indexOf(state.query) === -1) return false;
+        return true;
+      }
+
+      function sortToilets(items) {
+        var next = items.slice();
+        if (state.userLocation) {
+          next.forEach(function (toilet) {
+            toilet.distance = distanceMeters(state.userLocation, { lat: toilet.lat, lng: toilet.lng });
+          });
+          next.sort(function (a, b) {
+            return a.distance - b.distance;
+          });
+        } else {
+          next.sort(function (a, b) {
+            return a.name.localeCompare(b.name);
+          });
+        }
+        return next;
+      }
+
+      function addMarker(toilet) {
+        var marker = L.circleMarker([toilet.lat, toilet.lng], markerStyle(toilet));
+        marker.bindPopup(popupHtml(toilet), { closeButton: true, maxWidth: 280 });
+        marker.on('click', function () {
+          selectToilet(toilet.id, true);
+        });
+        marker.addTo(markerLayer);
+        state.markers.set(toilet.id, marker);
+      }
+
+      function redrawMarkers() {
+        markerLayer.clearLayers();
+        state.markers.clear();
+        state.filtered.forEach(addMarker);
+      }
+
+      function chip(label, extraClass) {
+        return '<span class="bw-chip ' + (extraClass || '') + '">' + escapeHtml(label) + '</span>';
+      }
+
+      function listItemHtml(toilet) {
+        var distance = state.userLocation ? chip(formatDistance(toilet.distance)) : '';
+        var cost = chip(formatFee(toilet), isFree(toilet) ? 'free' : 'paid');
+        var access = toilet.accessible ? chip('Accessible') : (toilet.lowBarrier ? chip('Low-barrier') : '');
+        var baby = toilet.baby ? chip('Baby table') : '';
+
+        return '<span class="bw-nearest-name">' + escapeHtml(toilet.name) + '</span>'
+          + '<span class="bw-nearest-meta">'
+          + distance
+          + cost
+          + access
+          + baby
+          + chip(toilet.district || toilet.type)
+          + '</span>';
+      }
+
+      function renderList() {
+        var topItems = state.filtered.slice(0, 9);
+        listEl.innerHTML = '';
+
+        if (!topItems.length) {
+          listEl.innerHTML = '<p class="bw-empty">No toilets match these filters. Try clearing the search or switching back to all toilets.</p>';
+          return;
+        }
+
+        topItems.forEach(function (toilet) {
+          var item = document.createElement('li');
+          item.className = 'bw-nearest-item' + (state.activeId === toilet.id ? ' active' : '');
+          item.tabIndex = 0;
+          item.setAttribute('role', 'button');
+          item.innerHTML = listItemHtml(toilet);
+          item.addEventListener('click', function () {
+            selectToilet(toilet.id, true);
+          });
+          item.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              selectToilet(toilet.id, true);
+            }
+          });
+          listEl.appendChild(item);
+        });
+      }
+
+      function updatePanelText() {
+        if (state.userLocation) {
+          panelTitle.textContent = 'Nearest toilets';
+          panelSub.textContent = 'Distances are straight-line estimates. Open the route for walking directions.';
+        } else {
+          panelTitle.textContent = 'Closest toilets';
+          panelSub.textContent = 'Allow location access or tap the map to sort by walking distance.';
+        }
+      }
+
+      function updateNearestLine() {
+        if (nearestLine) {
+          map.removeLayer(nearestLine);
+          nearestLine = null;
+        }
+        if (!state.userLocation || !state.filtered.length) return;
+        var nearest = state.filtered[0];
+        nearestLine = L.polyline([
+          [state.userLocation.lat, state.userLocation.lng],
+          [nearest.lat, nearest.lng]
+        ], {
+          color: '#126A8A',
+          dashArray: '5, 7',
+          opacity: 0.72,
+          weight: 3
+        }).addTo(map);
+      }
+
+      function updateStatus() {
+        var filtered = state.filtered.length;
+        var total = state.all.length;
+        var prefix = state.userLocation && state.filtered[0] ? '<strong>' + formatDistance(state.filtered[0].distance) + '</strong> to the nearest match. ' : '';
+        statusEl.innerHTML = prefix + '<strong>' + filtered + '</strong> shown from <strong>' + total + '</strong> official facilities.';
+        liveEl.textContent = total ? total + ' facilities loaded' : 'Loading live data';
+      }
+
+      function applyFilters() {
+        state.filtered = sortToilets(state.all.filter(passesFilter));
+        redrawMarkers();
+        renderList();
+        updatePanelText();
+        updateNearestLine();
+        updateStatus();
+      }
+
+      function selectToilet(id, openPopup) {
+        state.activeId = id;
+        state.markers.forEach(function (marker, markerId) {
+          var toilet = state.all.find(function (item) { return item.id === markerId; });
+          if (toilet) marker.setStyle(markerStyle(toilet));
+        });
+
+        var selected = state.all.find(function (item) { return item.id === id; });
+        var marker = state.markers.get(id);
+        if (!selected || !marker) return;
+
+        marker.setPopupContent(popupHtml(selected));
+        marker.setStyle(markerStyle(selected));
+        if (openPopup) {
+          map.setView([selected.lat, selected.lng], Math.max(map.getZoom(), 15), { animate: true });
+          marker.openPopup();
+        }
+        renderList();
+      }
+
+      function setUserLocation(lat, lng, source) {
+        state.userLocation = { lat: lat, lng: lng };
+        if (userMarker) {
+          userMarker.setLatLng([lat, lng]);
+        } else {
+          userMarker = L.marker([lat, lng], {
+            icon: L.divIcon({
+              className: 'bw-user-marker-wrap',
+              html: '<div class="bw-user-marker">YOU</div>',
+              iconSize: [28, 28],
+              iconAnchor: [14, 14]
+            })
+          }).addTo(map);
+        }
+
+        applyFilters();
+
+        if (state.filtered.length) {
+          var nearest = state.filtered[0];
+          var bounds = L.latLngBounds([[lat, lng], [nearest.lat, nearest.lng]]).pad(0.4);
+          map.fitBounds(bounds, { maxZoom: 15, animate: true });
+          selectToilet(nearest.id, true);
+        } else {
+          map.setView([lat, lng], 14, { animate: true });
+        }
+
+        if (source === 'map') {
+          panelSub.textContent = 'Using the point you tapped on the map.';
+        }
+      }
+
+      function locateUser() {
+        if (!navigator.geolocation) {
+          panelSub.textContent = 'Your browser does not support location sharing. Tap the map to choose a starting point.';
+          return;
+        }
+
+        locateButton.disabled = true;
+        locateButton.querySelector('span:last-child').textContent = 'Finding you...';
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+          locateButton.disabled = false;
+          locateButton.querySelector('span:last-child').textContent = 'Update location';
+          setUserLocation(position.coords.latitude, position.coords.longitude, 'gps');
+        }, function () {
+          locateButton.disabled = false;
+          locateButton.querySelector('span:last-child').textContent = 'Use my location';
+          panelSub.textContent = 'Location was not shared. Tap the map to choose your starting point instead.';
+        }, {
+          enableHighAccuracy: true,
+          maximumAge: 30000,
+          timeout: 10000
+        });
+      }
+
+      function fitInitialView() {
+        if (!state.filtered.length) return;
+        var bounds = L.latLngBounds(state.filtered.map(function (toilet) {
+          return [toilet.lat, toilet.lng];
+        }));
+        map.fitBounds(bounds.pad(0.05), { maxZoom: 12 });
+      }
+
+      function loadData() {
+        fetch(DATA_URL)
+          .then(function (response) {
+            if (!response.ok) throw new Error('Berlin Open Data request failed');
+            return response.json();
+          })
+          .then(function (geojson) {
+            state.all = (geojson.features || [])
+              .map(toiletFromFeature)
+              .filter(function (toilet) {
+                return toilet && isFinite(toilet.lat) && isFinite(toilet.lng);
+              });
+            loadingEl.style.display = 'none';
+            applyFilters();
+            fitInitialView();
+            setTimeout(function () { map.invalidateSize(); }, 200);
+          })
+          .catch(function () {
+            loadingEl.textContent = 'Could not load the live toilet map. Please try again in a moment.';
+            liveEl.textContent = 'Data unavailable';
+            statusEl.textContent = 'Berlin Open Data did not respond.';
+          });
+      }
+
+      locateButton.addEventListener('click', locateUser);
+
+      searchInput.addEventListener('input', function () {
+        state.query = normalize(searchInput.value.trim());
+        applyFilters();
+      });
+
+      root.querySelectorAll('.bw-filter').forEach(function (button) {
+        button.addEventListener('click', function () {
+          root.querySelectorAll('.bw-filter').forEach(function (item) {
+            item.classList.remove('active');
+          });
+          button.classList.add('active');
+          state.activeFilter = button.getAttribute('data-filter');
+          applyFilters();
+        });
+      });
+
+      map.on('click', function (event) {
+        if (!state.all.length) return;
+        setUserLocation(event.latlng.lat, event.latlng.lng, 'map');
+      });
+
+      loadData();
+    })();
+  </script>
+</div>
+</body>
+</html>
