@@ -31,7 +31,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 
 ## 3. Key live URLs
 
-- `berlinwalk.com/leave-review` — review submission form (iframe of `leave-review/index.html`)
+- `berlinwalk.com/leave-review` — review submission form (Custom Element `bw-leave-review`)
 - `berlinwalk.com/reviews` — public review display (Custom Element `bw-reviews`)
 - `https://www.berlinwalk.com/_functions/subscribe` — Berlin Essentials lead form
 - `https://www.berlinwalk.com/_functions/submitReview` — POST, review submission
@@ -79,6 +79,7 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - **Wix AI hallucinates messageIds and claims success without committing changes.** Always verify via REST GET after Wix AI claims a change.
 - **The Wix connector can handle reads and smaller REST calls, but large blog draft create payloads with full Ricos JSON + multiple embeds may be unreliable/truncated.** When building rich blog drafts, prefer local REST with `WIX_API_KEY` from Yusuf's clipboard, or create the Wix draft once Yusuf is back on desktop and can provide the key safely.
 - **Wix Blog editor may show API-created paragraphs with almost no visual gap.** Full-size blank spacer paragraphs make the editor wildly over-spaced and can destabilize draft reads. If paragraph gaps are needed, use tiny spacer paragraphs only: NBSP text with `FONT_SIZE` 6px between adjacent body paragraphs, then verify visually in the editor.
+- **For the `/reviews` page structured data, use conservative page/service markup.** The page uses `CollectionPage` markup about the Berlin Free Walking Tour service plus social meta tags. Avoid adding `Review` / `AggregateRating` schema for now; Google can treat self-serving review markup as ineligible or spammy.
 - **GitHub Pages deploys can sit Queued 5-15 min** during traffic spikes. Last-Modified header on the deployed asset is the source of truth.
 - **Wix Triggered Email templates get garbage-collected** if not referenced. If you delete an automation step, its template may become invisible to subsequent PATCH calls (returns "Message [...] set failed [Deleted]"). Recovery: ask Yusuf for the new messageIds via the Wix dashboard URL trick (the messageId is in the URL when editing a template).
 - **Wix Data v2 update: prefer `PUT` over `PATCH` for one-off field edits.** `PATCH /wix-data/v2/items/{id}` with a `dataItem.data` body returns `WDE0080 Validation failed — patch.fieldModifications has size 0`; PATCH expects a different shape (`patch.fieldModifications: [{ field, value }]`). `PUT /wix-data/v2/items/{id}` with the full `dataItem.data` block works on the first try — just GET the row first and resend it with the field changed.

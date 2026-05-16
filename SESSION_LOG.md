@@ -6,6 +6,22 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-16 — Codex (reviews SEO markup)
+
+**Did:**
+- Gave Yusuf the GitHub Pages URLs for the reviews widget and Custom Element script
+- Prepared conservative Advanced SEO markup for the Wix `/reviews` page: `CollectionPage` JSON-LD plus Open Graph/Twitter meta tags
+- Advised leaving robots meta unchecked and avoiding `Review` / `AggregateRating` schema for now
+
+**Changed:**
+- `AGENTS.md` — recorded the `/reviews` structured-data convention and fixed `/leave-review` live URL wording to Custom Element
+- Wix: Yusuf manually added reviews page structured data + additional tags in Wix Studio
+
+**Opened:** None
+**Closed:** Reviews page Advanced SEO markup guidance
+
+**Next session should:** Push the latest local handoff edits if desired, then continue with the top open item: move the `public-toilets` draft into Wix when Yusuf provides the Wix API key.
+
 ## 2026-05-16 — Claude Code (Public Toilets blog draft v1)
 
 **Did:**
