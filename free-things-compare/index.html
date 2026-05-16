@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free vs Paid in Berlin Comparison | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-free-things-compare">
+  <style>
+    #bw-free-things-compare {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-free-things-compare * { box-sizing: border-box; }
+
+    #bw-free-things-compare .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-free-things-compare .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-free-things-compare .bw-head-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 24px;
+    }
+
+    #bw-free-things-compare .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    #bw-free-things-compare .bw-body {
+      background: var(--bw-cream);
+      padding: 18px 20px;
+    }
+
+    #bw-free-things-compare .bw-note {
+      margin: 0 0 14px;
+      color: var(--bw-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    #bw-free-things-compare table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: var(--bw-white);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    #bw-free-things-compare col.c1 { width: 26%; }
+    #bw-free-things-compare col.c2 { width: 22%; }
+    #bw-free-things-compare col.c3 { width: 22%; }
+    #bw-free-things-compare col.c4 { width: 30%; }
+
+    #bw-free-things-compare thead th {
+      padding: 11px 12px;
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--bw-muted);
+      text-align: left;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--bw-soft);
+      border-bottom: 1px solid var(--bw-border);
+      line-height: 1.25;
+    }
+
+    #bw-free-things-compare tbody td {
+      padding: 12px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      vertical-align: top;
+      line-height: 1.5;
+      border-bottom: 1px solid #E8E8E8;
+    }
+
+    #bw-free-things-compare tbody tr:last-child td { border-bottom: none; }
+    #bw-free-things-compare tbody tr:nth-child(even) td { background: #FCFCF7; }
+
+    #bw-free-things-compare tbody td:first-child {
+      font-weight: 900;
+      color: var(--bw-green);
+    }
+
+    #bw-free-things-compare .bw-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 3px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      line-height: 1.2;
+    }
+
+    #bw-free-things-compare .bw-badge.free { background: #EAF3DE; color: #27500A; }
+    #bw-free-things-compare .bw-badge.partial { background: #FFF3C2; color: #6C4B00; }
+    #bw-free-things-compare .bw-badge.paid { background: #FCEBEB; color: #791F1F; }
+
+    #bw-free-things-compare .bw-pick {
+      font-weight: 800;
+      color: var(--bw-green);
+    }
+
+    #bw-free-things-compare .bw-footer {
+      padding: 10px 20px;
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      #bw-free-things-compare { margin: 22px 0; }
+      #bw-free-things-compare .bw-head { padding: 12px 16px; }
+      #bw-free-things-compare .bw-kicker { font-size: 10px; letter-spacing: 1.7px; }
+      #bw-free-things-compare .bw-body { padding: 14px; }
+      #bw-free-things-compare .bw-note { font-size: 12px; margin-bottom: 12px; }
+      #bw-free-things-compare table, #bw-free-things-compare thead, #bw-free-things-compare tbody, #bw-free-things-compare tr, #bw-free-things-compare th, #bw-free-things-compare td { display: block; }
+      #bw-free-things-compare colgroup, #bw-free-things-compare thead { display: none; }
+      #bw-free-things-compare tbody tr {
+        border: 1px solid var(--bw-border);
+        border-radius: 10px;
+        margin-bottom: 8px;
+        background: var(--bw-white);
+        overflow: hidden;
+      }
+      #bw-free-things-compare tbody tr:nth-child(even) td { background: transparent; }
+      #bw-free-things-compare tbody td {
+        border: none;
+        padding: 4px 12px;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      #bw-free-things-compare tbody td:first-child {
+        padding-top: 12px;
+        font-size: 13.5px;
+      }
+      #bw-free-things-compare tbody td:last-child { padding-bottom: 12px; }
+      #bw-free-things-compare tbody td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 2px;
+        font-size: 9px;
+        font-weight: 900;
+        color: var(--bw-muted);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      #bw-free-things-compare tbody td:first-child::before { display: none; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">=</span>
+      <span class="bw-kicker">Free vs Paid: What to Pick in Berlin</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-note">Short on time or money? Use this as a quick decision table. For each kind of Berlin experience, here is the free option, the paid alternative, and which one to actually pick.</p>
+      <table>
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+        <thead>
+          <tr>
+            <th>Experience</th>
+            <th>Free option</th>
+            <th>Paid alternative</th>
+            <th>What I'd pick</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>City view from above</td>
+            <td data-label="Free option"><span class="bw-badge free">Reichstag dome (book ahead)</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">TV Tower</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">Reichstag dome.</span> Book a sunset slot. The TV Tower view is higher but costs around 25 euros and almost always has a queue.</td>
+          </tr>
+          <tr>
+            <td>City history walk</td>
+            <td data-label="Free option"><span class="bw-badge free">Tip-based free walking tour</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">Hop-on hop-off bus</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">Free walking tour.</span> A real local explains how the buildings, parties, and walls connect. The bus shows you facades.</td>
+          </tr>
+          <tr>
+            <td>Bus sightseeing route</td>
+            <td data-label="Free option"><span class="bw-badge partial">Bus 100 with day ticket</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">Tourist bus tour</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">Bus 100.</span> Same route past the Reichstag and Brandenburg Gate, no extra cost on a standard transport ticket.</td>
+          </tr>
+          <tr>
+            <td>Cold War history</td>
+            <td data-label="Free option"><span class="bw-badge free">Berlin Wall Memorial, Tranenpalast</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">Checkpoint Charlie Museum</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">The free pair.</span> Better curated, calmer, and more honest than the private Checkpoint Charlie museum.</td>
+          </tr>
+          <tr>
+            <td>Nazi-era history</td>
+            <td data-label="Free option"><span class="bw-badge free">Topography of Terror</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">DDR Museum or similar</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">Topography of Terror.</span> Free, serious, and located on the exact site of the former Gestapo headquarters.</td>
+          </tr>
+          <tr>
+            <td>Big museum visit</td>
+            <td data-label="Free option"><span class="bw-badge free">Futurium, Jewish Museum permanent</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">Pergamon, Neues Museum</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">Depends on interest.</span> Futurium is free and family-friendly. For Museum Island, pay for one museum, not all.</td>
+          </tr>
+          <tr>
+            <td>Modern art</td>
+            <td data-label="Free option"><span class="bw-badge partial">Neue Nationalgalerie, first Thu 4-8 pm</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">Standard Neue Nationalgalerie ticket</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">Free Thursday slot</span> if your dates line up. Otherwise the paid ticket is still worth it.</td>
+          </tr>
+          <tr>
+            <td>Summer afternoon</td>
+            <td data-label="Free option"><span class="bw-badge free">Tempelhofer Feld, Tiergarten, lakes</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">Spree boat tour</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">The free outdoors.</span> The boat tour is pleasant but always paid. A Treptower Park afternoon is better and free.</td>
+          </tr>
+          <tr>
+            <td>Drinking water</td>
+            <td data-label="Free option"><span class="bw-badge free">Tap water and public fountains</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">Bottled water at every stop</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">Refillable bottle.</span> Berlin tap water is safe and good. Saves 10 to 15 euros on a long sightseeing day.</td>
+          </tr>
+          <tr>
+            <td>Public toilets</td>
+            <td data-label="Free option"><span class="bw-badge partial">107 free Berliner Toiletten</span></td>
+            <td data-label="Paid alternative"><span class="bw-badge paid">Station toilets (~1 euro)</span></td>
+            <td data-label="What I'd pick"><span class="bw-pick">Free cabins when nearby</span>, station toilets when you have a suitcase. Install the Berliner Toilette app.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bw-footer">Free entry rules and times can change. Check the official site for the Reichstag dome, museum free days, and BVG ticketing before you go.</div>
+  </div>
+</div>
+</body>
+</html>

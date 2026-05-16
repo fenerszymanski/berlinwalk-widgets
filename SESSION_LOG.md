@@ -6,6 +6,30 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-16 — Claude Code (Free Things to Do in Berlin draft v1 + two new widgets)
+
+**Did:**
+- Drafted workplan #1: "Free Things to Do in Berlin in 2026" (~1700 words, Yusuf voice, no em dashes, internal-linked into the live blog inventory).
+- Built two new post-specific widgets: `free-things-map` (Leaflet, 21 free or near-free stops across memorials, museums, parks, and free views) and `free-things-compare` (free vs paid decision table, 10 rows).
+- Wired the new `free-things-to-do` slug into quick-summary, FAQ data, FAQ slug map, and FAQPage JSON-LD schema.
+
+**Changed:**
+- `blog-drafts/free-things-to-do-in-berlin-2026.md` — new draft v1 with widget plan, quick summary, full draft, and source list.
+- `free-things-map/index.html` — new Leaflet widget with 4 category filters and brand-styled popups.
+- `free-things-compare/index.html` — new responsive comparison table, mobile-card layout below 640px.
+- `quick-summary/data.json` — added `free-things-to-do` entry (6 items).
+- `faq/data.json` — added `free-things-to-do` entry (6 Q/A items).
+- `faq/inject.js` — added `free-things-to-do-in-berlin-2026 → free-things-to-do` to SLUG_MAP and a matching FAQPage schema in SCHEMAS.
+- `blog-workplan.md` — marked #1 as Draft v1, bumped Last updated, added new draft + widget folders to the Drafts list.
+- Wix: no remote changes.
+
+**Opened:** Push the local repo so GitHub Pages serves the new `free-things-map`, `free-things-compare`, and updated quick-summary/FAQ data. Move the draft into Wix as an UNPUBLISHED blog post when Yusuf is on desktop with the Wix API key, embed the four widget URLs (`/quick-summary/?post=free-things-to-do`, `/free-things-map/`, `/free-things-compare/`, `/faq/?post=free-things-to-do`), and pick cover/inline images.
+**Closed:** Free Things to Do draft v1 + widget plumbing for slug `free-things-to-do`.
+
+**Next session should:** Push the local changes so GitHub Pages serves the two new widgets and updated data, then create the Wix blog draft for the Free Things post. After that, the next queued ideas are Luggage Storage (#7) and Nikolaiviertel (#8).
+
+---
+
 ## 2026-05-16 — Codex (public toilets Wix draft + tool icons)
 
 **Did:**

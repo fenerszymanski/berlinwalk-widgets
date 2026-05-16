@@ -33,7 +33,8 @@
   "berlin-in-august-2026": "berlin-in-august-2026",
   "berlin-in-september-2026": "berlin-in-september-2026",
   "which-berlin-museums-are-free-2026": "free-museums",
-  "public-toilets-in-berlin": "public-toilets"
+  "public-toilets-in-berlin": "public-toilets",
+  "free-things-to-do-in-berlin-2026": "free-things-to-do"
 };
 
   var SCHEMAS = {
@@ -1405,6 +1406,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The automatic Berliner Toiletten cabins are barrier-free and include grab rails inside. People with a EuroKey, the European disability key, can open the cabins for free. Train station toilet centers also have accessible cubicles."
+        }
+      }
+    ]
+  },
+  "free-things-to-do": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are the best free things to do in Berlin in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The strongest free combination is the Reichstag dome (free with advance booking), one major memorial site such as the Berlin Wall Memorial at Bernauer Strasse or the Topography of Terror, a walk past the Brandenburg Gate and Holocaust Memorial, and a tip-based free walking tour from a local guide. Parks, lakes, and Bus 100 fill out a full free day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Reichstag dome really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Visiting the glass dome on top of the Reichstag is free, but you must book a time slot in advance through the Bundestag website. Walk-up entry is rarely available in high season, so book it as early as you book your flights."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which museums in Berlin are free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Several are permanently free, including the Topography of Terror, Tranenpalast, the Berlin Wall Memorial documentation centre, Futurium, the German Resistance Memorial Centre, the Museum in the Kulturbrauerei, and the Jewish Museum's permanent exhibition. Others, such as the Neue Nationalgalerie and the German Museum of Technology, offer free entry at specific times. Berlin's old Museum Sunday programme ended in 2024."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I do Berlin on a free day with no entry tickets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A realistic free day looks like this: morning free walking tour from Alexanderplatz, lunch at a cheap kebab or bakery, afternoon at the Holocaust Memorial Information Centre and the Topography of Terror, a walk through the Tiergarten, the Reichstag dome at sunset if booked, and an evening walk back along Unter den Linden. Total entry cost: zero."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Bus 100 really a free sightseeing tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not free in itself, but it runs on a standard BVG transport ticket from Alexanderplatz to Bahnhof Zoo, past the Reichstag, the Brandenburg Gate, the Victory Column, and the Tiergarten. If you already have a day ticket, riding Bus 100 costs no extra. It is the closest thing to a free sightseeing bus in Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berlin TV Tower free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Looking at the TV Tower from Alexanderplatz is free, but going up always costs money. For a free alternative view, book the Reichstag dome or visit a public rooftop such as Klunkerkranich or the upper levels of Galeries Lafayette."
         }
       }
     ]

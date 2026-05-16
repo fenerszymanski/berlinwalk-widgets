@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-05-16
+Last updated: 2026-05-16 (Free Things post drafted)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -8,7 +8,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
-| 1 | Idea | Free Things to Do in Berlin in 2026 | Broad practical guide for budget-conscious visitors. Strong internal links to Reichstag, Museum Island, Wall, drinking water, transport, and the free walking tour. |
+| 1 | Draft v1 | Free Things to Do in Berlin in 2026 | Broad practical guide for budget-conscious visitors. Strong internal links to Reichstag, Museum Island, Wall, drinking water, transport, and the free walking tour. Draft at `blog-drafts/free-things-to-do-in-berlin-2026.md`; quick-summary + FAQ + new `free-things-map` + new `free-things-compare` widgets wired under slug `free-things-to-do`; ready to move to Wix. |
 | 2 | Wix draft | Which Berlin Museums Are Actually Free in 2026? | Clear answer to free-entry confusion after Museum Sunday ended. Includes quick summary, FAQ, interactive map, and comparison table widgets. Draft ID: `111844a6-5b4d-418e-be34-d651f3adfe9d`. |
 | 3 | Wix draft | Berlin in July: Weather, Events, What to Pack, and What to Book Early | Seasonal traffic, summer heat, lakes, open-air culture, and practical planning. Mirrors the live June post widget stack. Draft ID: `e14a0e69-480f-472f-bea5-a5010e3893cb`. |
 | 4 | Wix draft | Berlin in August: Lakes, Long Evenings, and What Tourists Get Wrong | Summer follow-up with swimming, transport, school holidays, events, and realistic crowd advice. Mirrors the live June post widget stack. Draft ID: `0da7a350-14e7-4c59-bcb5-ba80fc4654d5`. |
@@ -31,8 +31,11 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 - `blog-drafts/berlin-in-august-2026.md`
 - `blog-drafts/berlin-in-september-2026.md`
 - `blog-drafts/public-toilets-in-berlin-2026.md`
+- `blog-drafts/free-things-to-do-in-berlin-2026.md`
 - `free-museums-map/`
 - `free-museums-compare/`
+- `free-things-map/`
+- `free-things-compare/`
 
 ## Source Notes
 

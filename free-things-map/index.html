@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Things to Do in Berlin Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-free-things-map">
+  <style>
+    #bw-free-things-map {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-memorial: #1B5E20;
+      --bw-museum: #7CB342;
+      --bw-park: #2E7D32;
+      --bw-view: #F9A825;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-free-things-map * { box-sizing: border-box; }
+
+    #bw-free-things-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-free-things-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-free-things-map .bw-head-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 24px;
+    }
+
+    #bw-free-things-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    #bw-free-things-map .bw-body {
+      background: var(--bw-cream);
+      padding: 16px 18px;
+    }
+
+    #bw-free-things-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-free-things-map .bw-controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    #bw-free-things-map .bw-filter {
+      appearance: none;
+      border: 1px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    #bw-free-things-map .bw-filter.is-active {
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      border-color: var(--bw-green);
+    }
+
+    #bw-free-things-map .bw-map-container {
+      width: 100%;
+      height: 460px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-free-things-map .bw-map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #bw-free-things-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-free-things-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-free-things-map .leaflet-popup-content {
+      margin: 0;
+      width: 252px !important;
+      font-family: inherit;
+    }
+
+    #bw-free-things-map .bw-popup-head {
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+      color: var(--bw-white);
+    }
+
+    #bw-free-things-map .bw-popup-head.memorial { background: var(--bw-memorial); }
+    #bw-free-things-map .bw-popup-head.museum { background: var(--bw-museum); }
+    #bw-free-things-map .bw-popup-head.park { background: var(--bw-park); }
+    #bw-free-things-map .bw-popup-head.view { background: var(--bw-view); color: var(--bw-green); }
+
+    #bw-free-things-map .bw-popup-type {
+      display: block;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 2px;
+    }
+
+    #bw-free-things-map .bw-popup-name {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-free-things-map .bw-popup-body {
+      padding: 12px 14px 14px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      line-height: 1.55;
+    }
+
+    #bw-free-things-map .bw-popup-cost {
+      display: inline-block;
+      margin: 0 0 7px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: var(--bw-soft);
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    #bw-free-things-map .bw-marker {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid var(--bw-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #bw-free-things-map .bw-marker.memorial { background: var(--bw-memorial); color: var(--bw-white); }
+    #bw-free-things-map .bw-marker.museum { background: var(--bw-museum); color: var(--bw-white); }
+    #bw-free-things-map .bw-marker.park { background: var(--bw-park); color: var(--bw-white); }
+    #bw-free-things-map .bw-marker.view { background: var(--bw-view); color: var(--bw-green); }
+
+    #bw-free-things-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin: 10px 0 0;
+      text-align: center;
+    }
+
+    #bw-free-things-map .bw-count strong {
+      color: var(--bw-green);
+      font-weight: 900;
+    }
+
+    #bw-free-things-map .bw-footer {
+      padding: 10px 18px;
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      #bw-free-things-map { margin: 22px 0; }
+      #bw-free-things-map .bw-head { padding: 12px 16px; }
+      #bw-free-things-map .bw-kicker { font-size: 10px; letter-spacing: 1.8px; }
+      #bw-free-things-map .bw-body { padding: 14px; }
+      #bw-free-things-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-free-things-map .bw-filter { flex: 1 1 calc(50% - 8px); min-width: 132px; padding: 9px 8px; font-size: 10px; }
+      #bw-free-things-map .bw-map-container { height: 380px; }
+      #bw-free-things-map .leaflet-popup-content { width: 218px !important; }
+      #bw-free-things-map .bw-popup-name { font-size: 14px; }
+      #bw-free-things-map .bw-popup-body { font-size: 12px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">F</span>
+      <span class="bw-kicker">Free Things to Do in Berlin Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">Tap a pin to see what is free, what type of stop it is, and a one-line note from a local guide. Filter by category to plan a free day.</p>
+      <div class="bw-controls" aria-label="Filter free things to do in Berlin map">
+        <button class="bw-filter is-active" type="button" data-filter="all">All</button>
+        <button class="bw-filter" type="button" data-filter="memorial">Memorials &amp; sites</button>
+        <button class="bw-filter" type="button" data-filter="museum">Free museums</button>
+        <button class="bw-filter" type="button" data-filter="park">Parks &amp; lakes</button>
+        <button class="bw-filter" type="button" data-filter="view">Free views</button>
+      </div>
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-free-things-map-canvas"></div>
+      </div>
+      <p class="bw-count"><strong data-count>0</strong> free or near-free Berlin stops mapped</p>
+    </div>
+    <div class="bw-footer">A few stops require an advance booking (Reichstag dome) or a standard transport ticket (Bus 100). Check the official website before going.</div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-free-things-map');
+      var mapEl = document.getElementById('bw-free-things-map-canvas');
+      if (!root || !mapEl || !window.L) return;
+
+      var places = [
+        {
+          name: 'Brandenburg Gate',
+          type: 'memorial',
+          cost: 'Always free',
+          lat: 52.5163,
+          lng: 13.3777,
+          note: 'The symbol of Berlin. Best seen on foot, twice: once in daylight and once at night when it is lit.'
+        },
+        {
+          name: 'Reichstag Dome',
+          type: 'view',
+          cost: 'Free with booking',
+          lat: 52.5186,
+          lng: 13.3762,
+          note: 'Glass dome on top of the Bundestag, free to visit but book a time slot in advance on the Bundestag website.'
+        },
+        {
+          name: 'Holocaust Memorial',
+          type: 'memorial',
+          cost: 'Always free',
+          lat: 52.5139,
+          lng: 13.3786,
+          note: 'Field of 2,711 concrete stelae. The free underground Information Centre is one of the quietest, most powerful museums in Berlin.'
+        },
+        {
+          name: 'Topography of Terror',
+          type: 'memorial',
+          cost: 'Always free',
+          lat: 52.5063,
+          lng: 13.3828,
+          note: 'Free indoor and outdoor exhibition on the former Gestapo and SS headquarters site. Allow at least 60 minutes.'
+        },
+        {
+          name: 'Berlin Wall Memorial',
+          type: 'memorial',
+          cost: 'Always free',
+          lat: 52.5351,
+          lng: 13.3904,
+          note: 'The clearest place to understand the Wall as a full border system. Outdoor memorial plus documentation centre at Bernauer Strasse.'
+        },
+        {
+          name: 'East Side Gallery',
+          type: 'memorial',
+          cost: 'Always free',
+          lat: 52.5050,
+          lng: 13.4396,
+          note: 'The longest preserved stretch of the Wall, open-air, painted by international artists in 1990. Free to walk along.'
+        },
+        {
+          name: 'Checkpoint Charlie',
+          type: 'memorial',
+          cost: 'Street scene free',
+          lat: 52.5076,
+          lng: 13.3904,
+          note: 'The famous border-crossing replica is free to see. The private museum next door is paid and usually skippable.'
+        },
+        {
+          name: 'Tranenpalast',
+          type: 'memorial',
+          cost: 'Always free',
+          lat: 52.5202,
+          lng: 13.3869,
+          note: 'Small, emotional free Cold War museum at Friedrichstrasse station, where people said goodbye across the East-West border.'
+        },
+        {
+          name: 'Neue Wache',
+          type: 'memorial',
+          cost: 'Always free',
+          lat: 52.5179,
+          lng: 13.3970,
+          note: 'Central memorial to victims of war and tyranny, Unter den Linden. Free, always open, Kathe Kollwitz statue inside.'
+        },
+        {
+          name: 'Soviet War Memorial, Treptower Park',
+          type: 'memorial',
+          cost: 'Always free',
+          lat: 52.4870,
+          lng: 13.4710,
+          note: 'Enormous and sober Soviet memorial in Treptower Park. Free, rarely on a short-stay tourist route, but worth the trip.'
+        },
+        {
+          name: 'Futurium',
+          type: 'museum',
+          cost: 'Always free',
+          lat: 52.5238,
+          lng: 13.3725,
+          note: 'Future-focused free museum near Hauptbahnhof. Good for families, design, climate, and a lighter break from history.'
+        },
+        {
+          name: 'Jewish Museum Berlin',
+          type: 'museum',
+          cost: 'Permanent exhibition free',
+          lat: 52.5020,
+          lng: 13.3954,
+          note: "Free permanent exhibition in Daniel Libeskind's building. Special exhibitions can cost extra, so check before booking."
+        },
+        {
+          name: 'Museum in the Kulturbrauerei',
+          type: 'museum',
+          cost: 'Always free',
+          lat: 52.5398,
+          lng: 13.4138,
+          note: 'Free museum on everyday life in the GDR, set in Prenzlauer Berg. A useful complement to Wall and border sites.'
+        },
+        {
+          name: 'German Resistance Memorial Centre',
+          type: 'museum',
+          cost: 'Always free',
+          lat: 52.5066,
+          lng: 13.3529,
+          note: 'Free museum about resistance to National Socialism, including the July 20 plot. Serious and less crowded than big-name sites.'
+        },
+        {
+          name: 'Tiergarten',
+          type: 'park',
+          cost: 'Always free',
+          lat: 52.5145,
+          lng: 13.3501,
+          note: 'The central park, free, vast, and the right way to walk between Brandenburg Gate and Bahnhof Zoo.'
+        },
+        {
+          name: 'Tempelhofer Feld',
+          type: 'park',
+          cost: 'Always free',
+          lat: 52.4731,
+          lng: 13.4036,
+          note: 'The closed Tempelhof airport, now a free public park. Walk down a real runway, fly a kite, or watch a Berlin sunset.'
+        },
+        {
+          name: 'Treptower Park',
+          type: 'park',
+          cost: 'Always free',
+          lat: 52.4920,
+          lng: 13.4690,
+          note: 'Spree-side park with the Soviet Memorial, rental boats, and one of the best free Sunday afternoons in the city.'
+        },
+        {
+          name: 'Volkspark Friedrichshain',
+          type: 'park',
+          cost: 'Always free',
+          lat: 52.5283,
+          lng: 13.4321,
+          note: "Local-feeling free park with playgrounds, the fairy-tale fountain, and quiet corners away from the tourist route."
+        },
+        {
+          name: 'Wannsee Lake (Strandbad)',
+          type: 'park',
+          cost: 'Lake free, beach paid',
+          lat: 52.4341,
+          lng: 13.1736,
+          note: 'Iconic Berlin lake, reachable on a normal S-Bahn ticket. Free to swim from public spots; the historic Strandbad charges entry.'
+        },
+        {
+          name: 'Klunkerkranich Rooftop',
+          type: 'view',
+          cost: 'Free or low cost',
+          lat: 52.4790,
+          lng: 13.4413,
+          note: 'Rooftop garden and bar in Neukolln above a shopping centre. Entry is a small donation in summer, free off-season.'
+        },
+        {
+          name: 'Lustgarten and Museum Island (outside)',
+          type: 'park',
+          cost: 'Always free',
+          lat: 52.5189,
+          lng: 13.3984,
+          note: "Walk between the Berliner Dom and the Altes Museum. The buildings are paid inside, but the park and riverside are free."
+        }
+      ];
+
+      var map = L.map(mapEl, {
+        center: [52.510, 13.395],
+        zoom: 11,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var typeLabels = {
+        memorial: 'Memorial or historical site',
+        museum: 'Free museum',
+        park: 'Park, lake, or outdoor space',
+        view: 'Free or near-free view'
+      };
+
+      var markerIcons = {
+        memorial: 'H',
+        museum: 'M',
+        park: 'P',
+        view: 'V'
+      };
+
+      function markerIcon(type) {
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: '<div class="bw-marker ' + type + '">' + markerIcons[type] + '</div>',
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
+          popupAnchor: [0, -18]
+        });
+      }
+
+      function popup(place) {
+        return '<div class="bw-popup-head ' + place.type + '">' +
+          '<span class="bw-popup-type">' + typeLabels[place.type] + '</span>' +
+          '<div class="bw-popup-name">' + place.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<span class="bw-popup-cost">' + place.cost + '</span><br>' +
+          place.note +
+          '</div>';
+      }
+
+      var markerLayer = L.layerGroup().addTo(map);
+      var countEl = root.querySelector('[data-count]');
+
+      function render(filter) {
+        var visible = places.filter(function (place) {
+          return filter === 'all' || place.type === filter;
+        });
+        markerLayer.clearLayers();
+        visible.forEach(function (place) {
+          L.marker([place.lat, place.lng], {
+            icon: markerIcon(place.type)
+          }).bindPopup(popup(place), {
+            closeButton: true,
+            maxWidth: 270
+          }).addTo(markerLayer);
+        });
+        if (countEl) countEl.textContent = String(visible.length);
+      }
+
+      root.querySelectorAll('.bw-filter').forEach(function (button) {
+        button.addEventListener('click', function () {
+          root.querySelectorAll('.bw-filter').forEach(function (item) {
+            item.classList.remove('is-active');
+          });
+          button.classList.add('is-active');
+          render(button.getAttribute('data-filter'));
+        });
+      });
+
+      render('all');
+      setTimeout(function () { map.invalidateSize(); }, 250);
+    })();
+  </script>
+</div>
+</body>
+</html>
