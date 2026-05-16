@@ -6,6 +6,43 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-16 — Claude Code (Ethan A. FreeTour review imported)
+
+**Did:**
+- Imported a new FreeTour.com review (Ethan A., United States, 5★, May 14 2026, "Unique Tour of Berlin") into the Reviews collection via Wix Data v2 REST API
+- Preserved the source typo (`thr Humboldt Forum`) per the "no edits, no filters" brand rule
+- Verified `listReviews` now returns 7 reviews (was 6) and Ethan's record is first
+
+**Changed:**
+- Wix: inserted Reviews row `_id 82b528c3-416a-4575-b8fd-9df0763c4f98` with `approved=true`, `source=FreeTour.com`, `sourceUrl=https://www.freetour.com/company/97387`
+
+**Opened:** None
+**Closed:** Ethan A. review import; Karen S. country correction (was wrongly `USA`, actually `United Kingdom` per Yusuf — fixed via Wix Data v2 PUT on item `53e207df-aa54-4c6c-a0f2-b1937df505b3`)
+
+**Next session should:** Pick up whatever Yusuf prioritizes next. Cancel-on-cancel is still deferred far out per Yusuf.
+
+**Wix Data v2 REST quirk learned:** The Reviews collection update path used `PUT /wix-data/v2/items/{id}` with the full `dataItem.data` block. The first attempt with `PATCH` and a `dataItem.data` body returned `WDE0080 Validation failed — patch.fieldModifications has size 0`, so PATCH wants a different shape (`patch.fieldModifications: [{...}]`). For one-off field edits, full-record PUT is the simpler path.
+
+---
+
+## 2026-05-16 — Claude Code (CE swap landed)
+
+**Did:**
+- Yusuf pushed the new `bw-leave-review` element and swapped the Wix `/leave-review` page from the iframe block to a Custom Element block; mobile-height workaround dropped
+- Verified the live page: `curl https://www.berlinwalk.com/leave-review` now contains `<bw-leave-review></bw-leave-review>` in the rendered HTML, so the swap is real
+- Realigned `AGENTS.md` §8: only cancel-on-cancel remains, and that's deferred per Yusuf
+
+**Changed:**
+- `AGENTS.md` §8 — closed the `/leave-review` Wix swap item; cancel-on-cancel is now the sole entry and flagged as deferred
+- Wix: `/leave-review` page swapped from iframe to a `<bw-leave-review>` Custom Element block
+
+**Opened:** None
+**Closed:** `/leave-review` Wix iframe → Custom Element migration
+
+**Next session should:** Smoke-test the live `/leave-review` form on mobile + desktop end-to-end (use the link from a real post-tour email or hand-craft `?bid=...&n=...`), submit a test review, and verify the new row lands in the Reviews CMS with `approved=false`. If healthy, that wraps the review system rebuild for now and we can pick whatever Yusuf prioritizes next (blog queue, FAQ work, etc.).
+
+---
+
 ## 2026-05-16 — Claude Code (continued)
 
 **Did:**

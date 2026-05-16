@@ -81,6 +81,7 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - **Wix Blog editor may show API-created paragraphs with almost no visual gap.** Full-size blank spacer paragraphs make the editor wildly over-spaced and can destabilize draft reads. If paragraph gaps are needed, use tiny spacer paragraphs only: NBSP text with `FONT_SIZE` 6px between adjacent body paragraphs, then verify visually in the editor.
 - **GitHub Pages deploys can sit Queued 5-15 min** during traffic spikes. Last-Modified header on the deployed asset is the source of truth.
 - **Wix Triggered Email templates get garbage-collected** if not referenced. If you delete an automation step, its template may become invisible to subsequent PATCH calls (returns "Message [...] set failed [Deleted]"). Recovery: ask Yusuf for the new messageIds via the Wix dashboard URL trick (the messageId is in the URL when editing a template).
+- **Wix Data v2 update: prefer `PUT` over `PATCH` for one-off field edits.** `PATCH /wix-data/v2/items/{id}` with a `dataItem.data` body returns `WDE0080 Validation failed — patch.fieldModifications has size 0`; PATCH expects a different shape (`patch.fieldModifications: [{ field, value }]`). `PUT /wix-data/v2/items/{id}` with the full `dataItem.data` block works on the first try — just GET the row first and resend it with the field changed.
 
 ### Wix dashboard URL trick to get a template's messageId
 When Yusuf is in the Wix automation editor → email step → "Edit email," the browser URL contains the messageId between `/automations/edit/` and `/content/en`. Example: `…/automations/edit/{MESSAGE_ID}/content/en?...&actionId={ACTION_ID}…`. Ask him for the URL when you need a current messageId.
@@ -99,8 +100,7 @@ When Yusuf is in the Wix automation editor → email step → "Edit email," the 
 
 Pulled from `SESSION_LOG.md` — see that file for active state. As of the latest session:
 
-1. **Swap Wix `/leave-review` page from the iframe block to the `bw-leave-review` Custom Element.** The CE exists at `leave-review/leave-review-element.js`. After the swap, drop the mobile breakpoint height workaround that the iframe needed.
-2. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug. *(Deferred per Yusuf on 2026-05-16.)*
+1. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug. *(Deferred far out per Yusuf on 2026-05-16.)*
 
 ## 9. Protocol for ending a session
 
