@@ -6,6 +6,33 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-16 — Claude Code (Free Things to Do Wix draft + SEO)
+
+**Did:**
+- Created the Wix Blog draft for "Free Things to Do in Berlin in 2026" via local REST with the user-supplied Wix API key.
+- Built the Draft.js body with 80 content blocks plus 80 NBSP `font-size:6px` spacer paragraphs (matches public-toilets convention) so paragraph gaps render correctly in the Wix editor.
+- Embedded all four widgets (quick-summary, `free-things-map`, `free-things-compare`, FAQ) at the planned positions.
+- Set full SEO: meta title, meta description, og:title/og:description, og:type=article, twitter:card=summary_large_image plus twitter:title/twitter:description, primary focus keyword and four secondary keywords. seoSlug `free-things-to-do-in-berlin-2026`.
+- Wiped `/tmp/wix_key.txt` and the local build script after the draft was created.
+
+**Changed:**
+- `blog-drafts/free-things-to-do-in-berlin-2026.md` — added the new Wix draft ID and status.
+- `blog-workplan.md` — bumped #1 from Draft v1 to Wix draft; recorded the new Wix draft ID.
+- `SESSION_LOG.md` — added this handoff entry.
+- Wix: created draft `b9b03f3e-c2c0-4929-8492-5dce2142107b` in `Tourist Tips` (categoryId `6da64e22-3360-42ec-a558-e906e4deeb19`), status `UNPUBLISHED`, member `5a08a3af-4b9b-4403-9de7-3e26eba72dc0`, tags `Top Free Berlin Attractions` + `Berlin Budget Travel 2026` + `Berlin Tourism Tips`. Content: 80 paragraphs/headers/lists + 80 spacers + 4 widget embeds + 18 internal links; minutesToRead 7. SEO tags include 4 custom advanced-SEO tags (og:type, twitter:card, twitter:title, twitter:description).
+
+**Wix idiosyncrasies learned this session:**
+- `draftPost.slugs` is **read-only** on PATCH (returns `INVALID_ARGUMENT: 'slugs' is readonly`). On create, the field is also ignored — Wix populates it server-side, apparently at publish time. To control the live URL, set `seoSlug` only; the auto-generated draft preview path (e.g. `/post/...-in-berlin-in-2026` with a duplicated "in" from the title) is replaced by the seoSlug-derived URL when the post is published.
+- `draftPost.seoData.settings.keywords` is capped at **5 entries** (initial create with 6 returned `MAX_SIZE` error).
+- The `fieldsets` query param on GET `/blog/v3/draft-posts/{id}` only accepts a single value cleanly; some combinations (e.g. `CONTENT_TEXT`) return `Failed to parse JSON or deserialize protobuf message`. `fieldsets=URL` returns the SEO bundle, `fieldsets=CONTENT` returns the rich content blocks.
+
+**Opened:** Visually preview the new Wix draft in the editor — confirm the 4 embed iframes resize correctly, the 6px spacer paragraphs render at the right gap, and cover image/inline images are added before publishing. Push the local repo so GitHub Pages serves the two new widgets (`free-things-map`, `free-things-compare`) and updated quick-summary/FAQ data; the iframe embeds inside the Wix draft are already pointing at those URLs.
+**Closed:** Free Things to Do Wix draft created with full body, embeds, and complete SEO + Advanced SEO meta.
+
+**Next session should:** Open Wix Studio → Blog → Drafts → "Free Things to Do in Berlin in 2026" and visually confirm the layout. Once the GitHub Pages push is live and the embeds render, add a cover image and publish. Then the next queued ideas are Luggage Storage (#7) and Nikolaiviertel (#8).
+
+---
+
 ## 2026-05-16 — Claude Code (Free Things to Do in Berlin draft v1 + two new widgets)
 
 **Did:**

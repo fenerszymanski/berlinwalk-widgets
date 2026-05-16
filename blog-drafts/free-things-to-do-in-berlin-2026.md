@@ -2,9 +2,9 @@
 
 Slug idea: `free-things-to-do-in-berlin-2026`
 
-Wix draft ID: _to be created_
+Wix draft ID: `b9b03f3e-c2c0-4929-8492-5dce2142107b`
 
-Wix draft status: _draft local only_
+Wix draft status: `UNPUBLISHED`
 
 Meta title: Free Things to Do in Berlin (2026): A Local's Honest Guide
 
