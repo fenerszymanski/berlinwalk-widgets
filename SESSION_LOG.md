@@ -6,7 +6,7 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
-## 2026-05-16 — Codex (public toilets Wix draft)
+## 2026-05-16 — Codex (public toilets Wix draft + tool icons)
 
 **Did:**
 - Created the interactive `public-toilets-map` widget with live Berlin Open Data WFS pins, filters, manual map-click location fallback, and nearest-to-user distance.
@@ -14,19 +14,25 @@ Format for each entry — see `AGENTS.md` §9.
 - Set SEO title, meta description, slug, and focus keyword settings in the Wix draft.
 - Repatched the draft body with tiny NBSP spacer paragraphs and stronger bold emphasis after visual review showed paragraphs were too tight.
 - Added the public toilet finder to the tools hub and created its live BerlinTools CMS page.
+- Generated a refreshed 18-icon BerlinTools set, split it into individual 512px and 160px PNGs, uploaded all 18 160px icons to Wix Media, and wired the live `/tools/*` related-card section to use them.
+- Verified the live public-toilets related cards now load the new Drinking Water and Sunday Shopping icons from Wix Media, with the first-letter fallback retained only for future unknown slugs.
 
 **Changed:**
 - `public-toilets-map/index.html` — new Leaflet map widget.
 - `blog-drafts/public-toilets-in-berlin-2026.md` — added the map embed URL and recorded Wix draft ID/status.
 - `tools-hub/data.json` — added `berlin-public-toilets` under Maps & Practical.
+- `tools-home/data.json` — refreshed the six homepage tool icon URLs.
+- `tools-home/icons/` — added the generated 18-tool icon set and manifest with Wix Media URLs.
+- `tools-hub/data.json` — added `image` URLs for all 18 tools.
 - `README.md` — listed the new public toilets map widget.
 - Wix: created draft `bedfc2b9-e64f-41b2-990b-24675c9f5b2b` in `Tourist Tips`, status `UNPUBLISHED`, with quick-summary/map/FAQ embeds.
 - Wix: created BerlinTools item `2efa6553-3a34-4950-9d10-3e7a0d66338d` for `/tools/berlin-public-toilets`, using `https://fenerszymanski.github.io/berlinwalk-widgets/public-toilets-map/`.
+- Wix: updated Custom Embed `BerlinTools Layout Fixes` (`0dd3e5f3-520b-47ae-a995-e767f222265f`) to revision 6 so `More Berlin Tools` uses the refreshed 18-icon map.
 
-**Opened:** Push the tools-hub/data and public-toilets-map files so the Tools Hub GitHub Pages JSON reflects the new card.
+**Opened:** Push the local repo so GitHub Pages reflects the new public-toilets widget/card and refreshed homepage/hub icon data.
 **Closed:** Public Toilets moved from local draft to Wix draft; live BerlinTools page created.
 
-**Next session should:** Push the local widget/draft metadata and tools hub changes so GitHub Pages serves the new map and hub card.
+**Next session should:** If not already pushed, use GitHub Desktop to push the local commits so GitHub Pages serves the new map, hub card, and refreshed icon data.
 
 ---
 
