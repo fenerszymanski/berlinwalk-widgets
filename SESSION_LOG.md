@@ -16,6 +16,7 @@ Format for each entry — see `AGENTS.md` §9.
 - Added the public toilet finder to the tools hub and created its live BerlinTools CMS page.
 - Generated a refreshed 18-icon BerlinTools set, split it into individual 512px and 160px PNGs, uploaded all 18 160px icons to Wix Media, and wired the live `/tools/*` related-card section to use them.
 - Verified the live public-toilets related cards now load the new Drinking Water and Sunday Shopping icons from Wix Media, with the first-letter fallback retained only for future unknown slugs.
+- Added a live mobile hero spacing patch after Safari/narrow mobile showed the secondary hero line colliding with the primary widget on the public-toilets page.
 
 **Changed:**
 - `public-toilets-map/index.html` — new Leaflet map widget.
@@ -24,10 +25,12 @@ Format for each entry — see `AGENTS.md` §9.
 - `tools-home/data.json` — refreshed the six homepage tool icon URLs.
 - `tools-home/icons/` — added the generated 18-tool icon set and manifest with Wix Media URLs.
 - `tools-hub/data.json` — added `image` URLs for all 18 tools.
+- `js/berlintools-mobile-fixes.js` — mirrored the extra mobile spacing between the hero secondary line and the primary widget.
 - `README.md` — listed the new public toilets map widget.
 - Wix: created draft `bedfc2b9-e64f-41b2-990b-24675c9f5b2b` in `Tourist Tips`, status `UNPUBLISHED`, with quick-summary/map/FAQ embeds.
 - Wix: created BerlinTools item `2efa6553-3a34-4950-9d10-3e7a0d66338d` for `/tools/berlin-public-toilets`, using `https://fenerszymanski.github.io/berlinwalk-widgets/public-toilets-map/`.
 - Wix: updated Custom Embed `BerlinTools Layout Fixes` (`0dd3e5f3-520b-47ae-a995-e767f222265f`) to revision 6 so `More Berlin Tools` uses the refreshed 18-icon map.
+- Wix: created Custom Embed `BerlinTools Mobile Hero Spacing` (`2dc09ff7-61f1-476d-8ec9-16da4cfb595e`), revision 1, and verified the live mobile gap between secondary text and widget is ~44px at 390px and 430px viewport widths.
 
 **Opened:** Push the local repo so GitHub Pages reflects the new public-toilets widget/card and refreshed homepage/hub icon data.
 **Closed:** Public Toilets moved from local draft to Wix draft; live BerlinTools page created.
