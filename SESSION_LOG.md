@@ -6,6 +6,28 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-16 — Claude Code (Public Toilets blog draft v1)
+
+**Did:**
+- Drafted the next blog post: "Public Toilets in Berlin: What Tourists Actually Need to Know" (workplan #6)
+- Grounded the factual claims in Berlin.de senate sources and the city's recent announcement of 107 free, gender-neutral cabins
+- Wired the new post slug (`public-toilets`) into both `quick-summary/data.json` and `faq/data.json`, and added the FAQPage JSON-LD entry to `faq/inject.js` SLUG_MAP and SCHEMAS
+
+**Changed:**
+- `blog-drafts/public-toilets-in-berlin-2026.md` — new draft v1, first-person Yusuf voice, no em dashes, links to the live free-museums, daily-budget, and free-tour pages
+- `quick-summary/data.json` — added `public-toilets` entry
+- `faq/data.json` — added `public-toilets` entry with 5 Q/A items
+- `faq/inject.js` — appended `public-toilets-in-berlin → public-toilets` to SLUG_MAP and the matching FAQPage schema to SCHEMAS
+- `blog-workplan.md` — bumped `Last updated` to 2026-05-16, marked Public Toilets as Draft v1, listed the new draft file
+- Wix: no remote changes
+
+**Opened:** Move the draft into Wix as an UNPUBLISHED blog post when Yusuf is on desktop with the Wix API key, embed the two widget URLs (`/quick-summary/?post=public-toilets`, `/faq/?post=public-toilets`), and pick cover/inline images.
+**Closed:** Public Toilets draft v1 + widget plumbing
+
+**Next session should:** Push the local changes so GitHub Pages serves the new quick-summary/FAQ data, then create the Wix blog draft for the public-toilets post. After that, the next two queued ideas are Luggage Storage (#7) and Nikolaiviertel (#8).
+
+---
+
 ## 2026-05-16 — Claude Code (Ethan A. FreeTour review imported)
 
 **Did:**

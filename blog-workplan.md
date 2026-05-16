@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-05-15
+Last updated: 2026-05-16
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -13,7 +13,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 | 3 | Wix draft | Berlin in July: Weather, Events, What to Pack, and What to Book Early | Seasonal traffic, summer heat, lakes, open-air culture, and practical planning. Mirrors the live June post widget stack. Draft ID: `e14a0e69-480f-472f-bea5-a5010e3893cb`. |
 | 4 | Wix draft | Berlin in August: Lakes, Long Evenings, and What Tourists Get Wrong | Summer follow-up with swimming, transport, school holidays, events, and realistic crowd advice. Mirrors the live June post widget stack. Draft ID: `0da7a350-14e7-4c59-bcb5-ba80fc4654d5`. |
 | 5 | Wix draft | Berlin in September: The Best Month Nobody Plans For | Shoulder-season guide with walking weather, Berlin Art Week, Open Monument Day, Marathon logistics, and late-summer atmosphere. Mirrors the live June post widget stack. Draft ID: `5e1ac42b-7878-4e2b-97de-e75b2458fc49`. |
-| 6 | Idea | Public Toilets in Berlin: What Tourists Need to Know | Highly practical, under-served tourist topic. Good fit for route-area advice. |
+| 6 | Draft v1 | Public Toilets in Berlin: What Tourists Need to Know | Highly practical, under-served tourist topic. Good fit for route-area advice. Draft at `blog-drafts/public-toilets-in-berlin-2026.md`; quick-summary + FAQ widget data wired under slug `public-toilets`; ready to move to Wix. |
 | 7 | Idea | Where to Store Luggage in Berlin for a Few Hours | Airport, Hauptbahnhof, Alexanderplatz, locker vs luggage app advice, and whether guests can join the tour with bags. |
 | 8 | Idea | Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange | Route-adjacent history piece. Pairs with existing old-town and GDR demolition content. |
 | 9 | Idea | Bebelplatz and the Nazi Book Burning Memorial: What Tourists Miss | Strong historical storytelling, close to central Berlin routes. |
@@ -30,6 +30,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 - `blog-drafts/berlin-in-july-2026.md`
 - `blog-drafts/berlin-in-august-2026.md`
 - `blog-drafts/berlin-in-september-2026.md`
+- `blog-drafts/public-toilets-in-berlin-2026.md`
 - `free-museums-map/`
 - `free-museums-compare/`
 
