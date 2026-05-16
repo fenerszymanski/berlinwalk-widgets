@@ -16,7 +16,7 @@
       "key": "Maps",
       "label": "Maps & Practical",
       "icon": "🗺️",
-      "blurb": "Drinking water, Sunday shopping, free things, safety by area."
+      "blurb": "Drinking water, public toilets, Sunday shopping, free things, safety by area."
     },
     {
       "key": "Discovery",
@@ -78,6 +78,12 @@
       "slug": "berlin-drinking-water",
       "title": "Berlin Drinking Water Map",
       "lead": "Find the nearest free public drinking fountain in Berlin in 30 seconds.",
+      "category": "Maps"
+    },
+    {
+      "slug": "berlin-public-toilets",
+      "title": "Berlin Public Toilet Finder",
+      "lead": "Find the nearest official public toilet in Berlin, including free and accessible options.",
       "category": "Maps"
     },
     {

@@ -12,17 +12,21 @@ Format for each entry — see `AGENTS.md` §9.
 - Created the interactive `public-toilets-map` widget with live Berlin Open Data WFS pins, filters, manual map-click location fallback, and nearest-to-user distance.
 - Created the Wix Blog draft for "Public Toilets in Berlin: What Tourists Actually Need to Know".
 - Set SEO title, meta description, slug, and focus keyword settings in the Wix draft.
+- Repatched the draft body with tiny NBSP spacer paragraphs and stronger bold emphasis after visual review showed paragraphs were too tight.
+- Added the public toilet finder to the tools hub and created its live BerlinTools CMS page.
 
 **Changed:**
 - `public-toilets-map/index.html` — new Leaflet map widget.
 - `blog-drafts/public-toilets-in-berlin-2026.md` — added the map embed URL and recorded Wix draft ID/status.
+- `tools-hub/data.json` — added `berlin-public-toilets` under Maps & Practical.
 - `README.md` — listed the new public toilets map widget.
 - Wix: created draft `bedfc2b9-e64f-41b2-990b-24675c9f5b2b` in `Tourist Tips`, status `UNPUBLISHED`, with quick-summary/map/FAQ embeds.
+- Wix: created BerlinTools item `2efa6553-3a34-4950-9d10-3e7a0d66338d` for `/tools/berlin-public-toilets`, using `https://fenerszymanski.github.io/berlinwalk-widgets/public-toilets-map/`.
 
-**Opened:** Preview the new Wix draft visually, add/select cover image, and adjust any paragraph spacing by hand if the editor feels too compact.
-**Closed:** Public Toilets moved from local draft to Wix draft.
+**Opened:** Push the tools-hub/data and public-toilets-map files so the Tools Hub GitHub Pages JSON reflects the new card.
+**Closed:** Public Toilets moved from local draft to Wix draft; live BerlinTools page created.
 
-**Next session should:** Push the local widget/draft metadata changes so GitHub Pages serves `public-toilets-map/`, then preview the Wix draft in the editor.
+**Next session should:** Push the local widget/draft metadata and tools hub changes so GitHub Pages serves the new map and hub card.
 
 ---
 
