@@ -6,6 +6,45 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-16 — Claude Code (continued)
+
+**Did:**
+- Built the `bw-leave-review` Custom Element to replace the `/leave-review` iframe
+- Mirrored the iframe's form behavior 1:1 (star rating, validation, submitReview POST, thanks state) but scoped under `.bw-leave-review` with `bw-lr-*` IDs so it survives in light DOM next to Wix styles
+- Added `leave-review/preview.html` so the CE can be eyeballed locally the same way `reviews/index.html` is used
+
+**Changed:**
+- `leave-review/leave-review-element.js` — new file, full CE port of the iframe form; reads `?bid` / `?n` from the host page URL; POSTs to `https://www.berlinwalk.com/_functions/submitReview`
+- `leave-review/preview.html` — new local CE test harness, identical pattern to `reviews/index.html`
+- `leave-review/index.html` — untouched on purpose so the current Wix iframe keeps working until the swap
+- `AGENTS.md` §2 — described the new dual state of the `leave-review/` folder
+- `AGENTS.md` §8 — closed the homepage `bw-testimonials` → `listReviews` item that landed earlier today; reworded the `/leave-review` item to be the Wix-side swap; reordered so the Wix swap is #1 and cancel-on-cancel (deferred) is #2
+- Wix: no remote changes
+
+**Opened:** None new. The Wix migration step is now §8 #1 — Yusuf to swap the `/leave-review` page from the current iframe to a Custom Element block that loads `https://fenerszymanski.github.io/berlinwalk-widgets/leave-review/leave-review-element.js` and embeds `<bw-leave-review></bw-leave-review>`, then remove the mobile-height workaround on that section.
+**Closed:** Homepage `bw-testimonials` carousel rewrite (landed earlier today); local code for the `/leave-review` Custom Element
+
+**Next session should:** Once Yusuf has pushed and swapped Wix to use `bw-leave-review`, smoke-test the form end-to-end on mobile + desktop (rating, validation, submit, thanks state) and confirm the moderation gate still works (new review lands with `approved=false`). After that, the natural next item is the cancel-on-cancel end-to-end test when Yusuf is ready.
+
+---
+
+## 2026-05-16 — Claude Code
+
+**Did:**
+- Confirmed Yusuf published the four Wix blog drafts (free museums + July/August/September 2026)
+- Converted `bw-testimonials` from `data.json` to the `listReviews` API so site-submitted reviews now flow into the homepage carousel
+- Kept `data.json` as an offline fallback for resilience if the API is unreachable
+
+**Changed:**
+- `AGENTS.md` §8 — removed the closed "preview/publish blog drafts" TODO
+- `testimonials/testimonials-element.js` — primary source is now `https://www.berlinwalk.com/_functions/listReviews?limit=100`, with normalization of API fields into the existing carousel shape (`reviewText`→`quote`, `firstName`/`lastInitial`/`showName`→`author`, etc.). Sorts by `tourDate` desc, caps at 12 slides, computes average rating live, hides the source label for `direct` reviews, and falls back to the GitHub Pages `data.json` on API failure
+- Wix: no remote changes
+
+**Opened:** Visually confirm the homepage carousel after Yusuf pushes (cache-bust with `?cb=…`). Make sure the FreeTour reviews still render and that nothing breaks layout when source labels are hidden for future direct reviews.
+**Closed:** Homepage `bw-testimonials` now consumes `listReviews`; blog-draft preview/publish TODO
+
+**Next session should:** Continue down the open TODO list — convert `/leave-review` from iframe to a Custom Element (mobile sizing fix), or test the cancel-on-cancel flow end-to-end with a real test booking.
+
 ## 2026-05-15 — Codex
 
 **Did:**

@@ -1,4 +1,6 @@
-const BW_TESTIMONIALS_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/data.json';
+const BW_TESTIMONIALS_API_URL = 'https://www.berlinwalk.com/_functions/listReviews?limit=100';
+const BW_TESTIMONIALS_FALLBACK_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/data.json';
+const BW_TESTIMONIALS_CAROUSEL_LIMIT = 12;
 
 class BWTestimonialsElement extends HTMLElement {
   constructor() {
@@ -492,14 +494,94 @@ class BWTestimonialsElement extends HTMLElement {
 
   async _loadDataAndRender() {
     try {
-      const response = await fetch(BW_TESTIMONIALS_DATA_URL);
-      if (!response.ok) throw new Error('Could not load reviews');
-      const data = await response.json();
+      const data = await this._fetchFromApi();
       this._renderTestimonials(data);
       this._setupAnimations();
-    } catch (error) {
+      return;
+    } catch (apiError) {
+      if (apiError && apiError.name === 'AbortError') return;
+      console.warn('bw-testimonials: listReviews unavailable, falling back to bundled data', apiError);
+    }
+
+    try {
+      const data = await this._fetchFromFallback();
+      this._renderTestimonials(data);
+      this._setupAnimations();
+    } catch (fallbackError) {
+      if (fallbackError && fallbackError.name === 'AbortError') return;
       this._renderError();
     }
+  }
+
+  async _fetchFromApi() {
+    const signal = this._controller ? this._controller.signal : undefined;
+    const response = await fetch(BW_TESTIMONIALS_API_URL, { signal });
+    if (!response.ok) throw new Error(`listReviews HTTP ${response.status}`);
+    const json = await response.json();
+    if (!json || json.success === false) throw new Error('listReviews returned failure');
+    const apiReviews = Array.isArray(json.reviews) ? json.reviews : [];
+    return this._normalizeApiResponse(apiReviews);
+  }
+
+  async _fetchFromFallback() {
+    const signal = this._controller ? this._controller.signal : undefined;
+    const response = await fetch(BW_TESTIMONIALS_FALLBACK_URL, { signal });
+    if (!response.ok) throw new Error(`Fallback HTTP ${response.status}`);
+    const data = await response.json();
+    if (data && Array.isArray(data.reviews)) {
+      data.reviews = data.reviews.map(r => Object.assign({ source: 'FreeTour.com' }, r));
+    }
+    return data;
+  }
+
+  _normalizeApiResponse(apiReviews) {
+    const ratingSum = apiReviews.reduce((acc, r) => acc + (Number(r.rating) || 0), 0);
+    const avgRating = apiReviews.length ? ratingSum / apiReviews.length : 5;
+    const ratingText = avgRating.toFixed(1);
+
+    const reviews = apiReviews
+      .map(r => this._mapApiReview(r))
+      .filter(r => r.quote && r.author)
+      .sort((a, b) => b._sortKey - a._sortKey)
+      .slice(0, BW_TESTIMONIALS_CAROUSEL_LIMIT);
+
+    return {
+      stats: { rating: ratingText, countriesCount: '18+' },
+      links: { freetour: 'https://www.freetour.com/company/97387' },
+      reviews
+    };
+  }
+
+  _mapApiReview(r) {
+    const safeFirst = (r.firstName || '').trim();
+    const safeInitial = (r.lastInitial || '').trim();
+    const author = (r.showName && safeFirst)
+      ? (safeInitial ? `${safeFirst} ${safeInitial}.` : safeFirst)
+      : 'Anonymous';
+    const dateInput = r.tourDate || r.createdDate || null;
+    const sortKey = dateInput ? new Date(dateInput).getTime() || 0 : 0;
+    const sourceRaw = (r.source || '').trim();
+    const source = sourceRaw && sourceRaw.toLowerCase() !== 'direct' ? sourceRaw : '';
+    return {
+      id: r._id || r.bookingId || '',
+      quote: (r.reviewText || '').trim(),
+      author,
+      country: r.country || '',
+      flag: '',
+      rating: Number(r.rating) || 5,
+      date: this._formatDate(dateInput),
+      source,
+      sourceUrl: r.sourceUrl || '',
+      _sortKey: sortKey
+    };
+  }
+
+  _formatDate(value) {
+    if (!value) return '';
+    const date = new Date(value);
+    if (isNaN(date.getTime())) return '';
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return `${months[date.getMonth()]} ${date.getFullYear()}`;
   }
 
   _renderTestimonials(data) {
@@ -523,20 +605,21 @@ class BWTestimonialsElement extends HTMLElement {
 
     const review = this._testimonials[index];
     const rating = Number(review.rating || 5);
-    const source = review.source || 'FreeTour.com';
+    const source = (review.source || '').trim();
     const slide = document.createElement('article');
     slide.className = 'bw-review-slide';
     slide.setAttribute('aria-roledescription', 'slide');
     slide.setAttribute('aria-label', `Review ${index + 1} of ${this._testimonials.length}`);
 
     if (animate && !this._reduceMotion) slide.classList.add('is-entering');
+    const countryLine = `${review.country || ''} ${review.flag || ''}`.trim();
     slide.innerHTML = `
       <p class="bw-review-quote">${this._escapeHtml(review.quote || '')}</p>
       ${this._renderStars(rating)}
       <div class="bw-review-author">
         <span class="bw-review-name">${this._escapeHtml(review.author || '')}</span>
-        <span class="bw-review-country">${this._escapeHtml(`${review.country || ''} ${review.flag || ''}`.trim())}</span>
-        <span class="bw-review-source">${this._escapeHtml(source)}</span>
+        ${countryLine ? `<span class="bw-review-country">${this._escapeHtml(countryLine)}</span>` : ''}
+        ${source ? `<span class="bw-review-source">${this._escapeHtml(source)}</span>` : ''}
       </div>
     `;
 

@@ -19,7 +19,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | Folder / file | Purpose |
 |---|---|
 | `email-journey/` | Markdown drafts for the 7-email post-booking sequence + `mockups/` with browser preview HTML and Wix-paste HTML |
-| `leave-review/` | Iframe widget for the per-booking review submission form (`berlinwalk.com/leave-review`) |
+| `leave-review/` | Per-booking review submission form for `berlinwalk.com/leave-review`. `leave-review-element.js` is the `bw-leave-review` Custom Element (preferred); `index.html` is the legacy iframe page kept until Wix swaps to the CE; `preview.html` is a local CE test harness |
 | `reviews/` | `bw-reviews` Custom Element + local test page (`berlinwalk.com/reviews`) |
 | `testimonials/`, `stats/`, `route/`, `faq/`, `gallery/`, etc. | Homepage Custom Elements — see `README.md` for the full list |
 | `lead-form/` | Berlin Essentials email capture iframe widget |
@@ -99,10 +99,8 @@ When Yusuf is in the Wix automation editor → email step → "Edit email," the 
 
 Pulled from `SESSION_LOG.md` — see that file for active state. As of the latest session:
 
-1. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug.
-2. **Convert homepage `bw-testimonials`** to read from `listReviews` instead of `testimonials/data.json` so site-submitted reviews flow through to the homepage carousel.
-3. **Convert `/leave-review` to a Custom Element** (currently iframe) to fix mobile sizing and match the rest of the site's element pattern. The mobile breakpoint height is the current workaround.
-4. **Preview the new Wix blog drafts and add images.** July/August/September Wix drafts exist and GitHub Pages serves their widget data. Commit/push the local ID/log updates, then visually preview the free museums, July, August, and September drafts and add/select cover and inline images using `blog-visual-plan.md`.
+1. **Swap Wix `/leave-review` page from the iframe block to the `bw-leave-review` Custom Element.** The CE exists at `leave-review/leave-review-element.js`. After the swap, drop the mobile breakpoint height workaround that the iframe needed.
+2. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug. *(Deferred per Yusuf on 2026-05-16.)*
 
 ## 9. Protocol for ending a session
 
