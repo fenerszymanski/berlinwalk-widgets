@@ -6,6 +6,26 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-16 — Codex (public toilets Wix draft)
+
+**Did:**
+- Created the interactive `public-toilets-map` widget with live Berlin Open Data WFS pins, filters, manual map-click location fallback, and nearest-to-user distance.
+- Created the Wix Blog draft for "Public Toilets in Berlin: What Tourists Actually Need to Know".
+- Set SEO title, meta description, slug, and focus keyword settings in the Wix draft.
+
+**Changed:**
+- `public-toilets-map/index.html` — new Leaflet map widget.
+- `blog-drafts/public-toilets-in-berlin-2026.md` — added the map embed URL and recorded Wix draft ID/status.
+- `README.md` — listed the new public toilets map widget.
+- Wix: created draft `bedfc2b9-e64f-41b2-990b-24675c9f5b2b` in `Tourist Tips`, status `UNPUBLISHED`, with quick-summary/map/FAQ embeds.
+
+**Opened:** Preview the new Wix draft visually, add/select cover image, and adjust any paragraph spacing by hand if the editor feels too compact.
+**Closed:** Public Toilets moved from local draft to Wix draft.
+
+**Next session should:** Push the local widget/draft metadata changes so GitHub Pages serves `public-toilets-map/`, then preview the Wix draft in the editor.
+
+---
+
 ## 2026-05-16 — Codex (reviews SEO markup)
 
 **Did:**

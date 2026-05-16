@@ -2,9 +2,9 @@
 
 Slug idea: `public-toilets-in-berlin`
 
-Wix draft ID: (to be filled once draft is created in Wix)
+Wix draft ID: `bedfc2b9-e64f-41b2-990b-24675c9f5b2b`
 
-Wix draft status: (to be filled, UNPUBLISHED on creation)
+Wix draft status: `UNPUBLISHED`
 
 Meta title: Public Toilets in Berlin (2026): A Practical Tourist Guide
 
