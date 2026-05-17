@@ -398,6 +398,22 @@ Format for each entry — see `AGENTS.md` §9.
 ## 2026-05-17 — Codex
 
 **Did:**
+- Expanded the movie/TV post with stronger, more specific filming-location notes for every film and series
+- Kept cautious wording where locations are contextual, studio-based, or fan-mapped rather than official exact scene claims
+- Refreshed the Wix movie/TV draft and verified the new location terms are present
+
+**Changed:**
+- `/Users/yusufucuz/Documents/New project/famous-movies-tv-shows-filmed-in-berlin-draft.md` — added detailed location notes for Run Lola Run, Wings of Desire, Christiane F., Good Bye Lenin!, The Lives of Others, Victoria, Bourne, Hunger Games, Babylon Berlin, Dark, Homeland, Berlin Station, Sense8, Deutschland 83, The Queen's Gambit, and Unorthodox
+- Wix: updated draft `a026aeb9-6126-4adc-bebd-2dcd5c88fb8b`; verified key location terms including Albrechtstraße, Staatsbibliothek, Gropiusstadt, Hildburghauser Straße, Normannenstraße, Tiergarten Tunnel, Tempelhof Airport, Theater im Delphi, Reinfelder Schule, and Musikinstrumentenmuseum
+
+**Opened:** none
+**Closed:** Movie/TV location-depth pass and Wix draft refresh.
+
+**Next session should:** Visually skim the Wix draft in the editor, then publish when Yusuf is happy.
+
+## 2026-05-17 — Codex
+
+**Did:**
 - Researched and drafted the Berlin parking article with the Alexanderplatz / BerlinWalk tour-start angle
 - Built two new widgets: an Alexanderplatz parking map with Google Maps directions and a Berlin parking cost calculator
 - Added matching quick-summary, FAQ, and tools-hub entries for the parking post/widget stack
