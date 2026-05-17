@@ -6,6 +6,24 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-17 — Claude Code (Widgets program v1.4: Advanced SEO markup + regen script)
+
+**Did:**
+- Drafted `widgets-hub/SEO_ADDITIONAL_TAGS.md` — copy-paste ready Wix Advanced SEO bundle: Additional Tags (Open Graph + Twitter Card + canonical) and a single `@graph` JSON-LD block (CollectionPage + WebSite + TravelAgency + ItemList with all 19 widgets as WebApplication offers @ 0 EUR).
+- Wrote `widgets-hub/_regenerate_seo.py` — re-reads `tools-hub/data.json` and rewrites the ItemList node inside the SEO doc so the schema stays in sync whenever a new widget is added.
+
+**Changed:**
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — new doc with Wix paste-ready blocks.
+- `widgets-hub/_regenerate_seo.py` — new helper that auto-syncs ItemList from tools-hub data.
+
+**Opened:** Paste both blocks into Wix Studio → /widgets page → Advanced SEO. When a new widget is added to `tools-hub/data.json`, run `python3 widgets-hub/_regenerate_seo.py` and re-paste the Structured Data block.
+
+**Closed:** SEO markup + Additional Tags for /widgets page.
+
+**Next session should:** Push, set up the Wix /widgets page with Custom Code + Advanced SEO blocks, visual QA, then blog #9 Bebelplatz.
+
+---
+
 ## 2026-05-17 — Claude Code (Widgets program v1.3: bw-widgets-hub Custom Element for /widgets Wix page)
 
 **Did:**
