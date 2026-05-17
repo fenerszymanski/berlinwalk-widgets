@@ -616,46 +616,52 @@
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
 
-      // Wrapper-only themes for the embed snippet. The iframe content stays
-      // on the widget's own design; only the heading, body text, link colors,
-      // and background of the surrounding <aside> change. Each theme is built
-      // from the BerlinWalk brand palette so embeds always feel on-brand.
+      // Wrapper-only themes for the embed snippet. The iframe content keeps
+      // the widget's own design; only the surrounding <aside> (background,
+      // heading, body text, link colors) changes. Each theme is built from
+      // the BerlinWalk brand palette so embeds always feel on-brand.
       var THEMES = {
-        brand: {
-          label: 'Brand',
-          desc: 'Green heading, yellow accent. Default BerlinWalk look.',
-          asideBg: 'transparent',
+        standard: {
+          label: 'Standard',
+          desc: 'Brand green on transparent. Sits on the host site\'s background.',
           aside: '',
           headingColor: '#1B5E20',
           textColor: '#212121',
           linkColor: '#1B5E20',
-          footerStrong: '#1B5E20'
+          footerStrong: '#1B5E20',
+          footerArrow: '#1B5E20',
+          swatchBg: '#1B5E20',
+          swatchBorder: '#1B5E20'
         },
-        minimal: {
-          label: 'Minimal',
-          desc: 'Neutral dark heading, no green. Blends with any site.',
-          asideBg: 'transparent',
-          aside: '',
-          headingColor: '#212121',
-          textColor: '#3a3a3a',
+        light: {
+          label: 'Light',
+          desc: 'Brand cream card, green heading, yellow accents.',
+          aside: 'background:#FAFAF5; border:1px solid #DCE8C8; border-left:4px solid #FFE600; padding:18px 20px 14px; border-radius:10px;',
+          headingColor: '#1B5E20',
+          textColor: '#212121',
           linkColor: '#1B5E20',
-          footerStrong: '#212121'
+          footerStrong: '#1B5E20',
+          footerArrow: '#C9A500',
+          swatchBg: '#FAFAF5',
+          swatchBorder: '#FFE600'
         },
         dark: {
           label: 'Dark',
-          desc: 'Yellow accent, light text. For dark-mode sites.',
-          asideBg: '#1B5E20',
-          aside: 'background:#1B5E20; padding:18px 18px 14px; border-radius:10px; color:#FAFAF5;',
-          headingColor: '#FFE600',
-          textColor: '#F2F8E8',
+          desc: 'Brand black card, white heading, yellow accents.',
+          aside: 'background:#212121; padding:20px 20px 16px; border-radius:10px; color:#FAFAF5;',
+          headingColor: '#FFFFFF',
+          textColor: '#EFEFEF',
           linkColor: '#FFE600',
-          footerStrong: '#FFE600'
+          footerStrong: '#FFE600',
+          footerArrow: '#FFE600',
+          swatchBg: '#212121',
+          swatchBorder: '#FFE600'
         }
       };
 
       function buildEmbedSnippet(tool, themeKey) {
         var src = tool.widgetUrl;
-        var theme = THEMES[themeKey] || THEMES.brand;
+        var theme = THEMES[themeKey] || THEMES.standard;
         var safeTitle = escapeHtml(tool.title || tool.slug);
         var safeLead = escapeHtml(tool.lead || '');
         var deepLink = 'https://www.berlinwalk.com/tools/' + tool.slug;
@@ -677,9 +683,9 @@
           + '    width="100%" height="480"\n'
           + '    frameborder="0" loading="lazy" scrolling="no"\n'
           + '    style="border:0; width:100%; max-width:100%; transition:height .2s ease;"></iframe>\n'
-          + '  <p style="margin:6px 0 0; font:600 12px/1.4 Arial,sans-serif; text-align:center;">\n'
+          + '  <p style="margin:8px 0 0; font:600 12px/1.4 Arial,sans-serif; text-align:center;">\n'
           + '    <a href="' + utmHome + '" rel="noopener" style="color:' + theme.linkColor + '; text-decoration:none;">\n'
-          + '      Free Berlin widget by <strong style="color:' + theme.footerStrong + ';">BerlinWalk</strong> &rarr;\n'
+          + '      Free Berlin widget by <strong style="color:' + theme.footerStrong + ';">BerlinWalk</strong> <span style="color:' + theme.footerArrow + ';">&rarr;</span>\n'
           + '    </a>\n'
           + '  </p>\n'
           + '</aside>\n'
@@ -747,7 +753,7 @@
         themePills.id = 'th-' + tool.slug;
         themePills.setAttribute('role', 'radiogroup');
         themePills.setAttribute('aria-label', 'Embed theme');
-        var currentTheme = 'brand';
+        var currentTheme = 'standard';
         Object.keys(THEMES).forEach(function (key) {
           var theme = THEMES[key];
           var pill = el('button', 'theme-pill');
@@ -757,10 +763,8 @@
           pill.setAttribute('aria-checked', String(key === currentTheme));
           if (key === currentTheme) pill.classList.add('is-active');
           var sw = el('span', 'theme-swatch');
-          sw.style.background = theme.asideBg !== 'transparent' ? theme.asideBg : theme.headingColor;
-          if (theme.asideBg !== 'transparent') {
-            sw.style.borderColor = theme.headingColor;
-          }
+          sw.style.background = theme.swatchBg;
+          sw.style.borderColor = theme.swatchBorder;
           var lbl = el('span', 'theme-pill-label', theme.label);
           pill.appendChild(sw);
           pill.appendChild(lbl);
