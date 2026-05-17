@@ -6,6 +6,28 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-17 — Claude Code (Widgets program v1.3: bw-widgets-hub Custom Element for /widgets Wix page)
+
+**Did:**
+- Added `widgets-hub/widgets-hub-element.js` — a `<bw-widgets-hub>` Custom Element that mirrors the structural pattern of `<bw-tools-hub>` on `/berlin-tools`. Renders into light DOM (no Shadow), reads `tools-hub/data.json`, builds the sticky category nav + per-widget cards (live auto-resizing preview + Standard/Light/Dark theme picker + copy-to-clipboard) directly in the parent page's DOM. Google indexes every title + lead + backlink as native page content.
+- Element auto-loads `embed-resize.js` on connect so live previews resize themselves without Yusuf doing anything extra in Custom Code.
+- Kept `widgets-hub/index.html` as a standalone iframe-able mirror (handy for direct visits or partner sites that prefer iframe), but the recommended path on Wix is the Custom Element.
+- Updated AGENTS.md to document the `<bw-widgets-hub>` Custom Element as the preferred Wix integration and reframe `index.html` as the iframe fallback, with explicit Custom Code snippet for the `/widgets` Wix page.
+
+**Changed:**
+- `widgets-hub/widgets-hub-element.js` — new file (~900 lines including scoped CSS). Defines `BWWidgetsHubElement`, registers `<bw-widgets-hub>`, auto-loads `embed-resize.js`, builds the entire gallery in light DOM. Mirrors `tools-hub-element.js` naming conventions (`.bw-widgets-hub` class prefix, `_renderShell`, `_loadDataAndRender`, `_renderHub`, `_escapeHtml`, etc.).
+- `AGENTS.md` — `widgets-hub/` row now describes both surfaces; "Hosting the /widgets gallery on Wix" section rewritten to lead with the Custom Element + Custom Code snippet, demote iframe to fallback.
+
+**Opened:**
+- Push and on Wix `/widgets`, add the Custom Code snippet (`<bw-widgets-hub></bw-widgets-hub>` + `<script src="...widgets-hub-element.js">`). Same pattern as `/berlin-tools` uses for `<bw-tools-hub>`.
+- Visual QA after Wix publish: scroll, sticky nav, theme pill switching, copy code, paste-test on a sandbox HTML page.
+
+**Closed:** Custom Element surface for `/widgets` page (matches `/berlin-tools` pattern).
+
+**Next session should:** Push, set up the Wix `/widgets` page with the Custom Element script, visual QA. Then either continue blog workplan (#9 Bebelplatz next) or tackle the per-widget interior theming (multi-week).
+
+---
+
 ## 2026-05-17 — Claude Code (Widgets program v1.2: auto-height + themes + sticky-fix)
 
 **Did:**

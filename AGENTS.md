@@ -28,7 +28,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `blog-visual-plan.md` | Visual/image plan for current blog drafts before moving them into Wix |
 | `blog-drafts/` | Draft blog posts before they are moved into Wix |
 | `tools-hub/` | The `/tools` directory grid. `data.json` is the **single source of truth** for every embeddable BerlinWalk widget: slug, title, lead, category, image, **`widgetUrl`**, **`embedHeight`**. New widgets must be added here. |
-| `widgets-hub/` | The `/widgets` page (third-party embed gallery). Reads from `tools-hub/data.json`; new entries appear automatically. Each card has a lazy-loaded live preview, a height selector, and a "Copy embed code" button. |
+| `widgets-hub/` | The `/widgets` page (third-party embed gallery). Two interchangeable surfaces from the same data: `widgets-hub-element.js` is the `<bw-widgets-hub>` Custom Element used on the live Wix `/widgets` page (light DOM, sticky nav works against parent scroll, Google indexes every title + lead + backlink as native page content); `index.html` is a standalone iframe-able mirror. Both read `tools-hub/data.json`; new entries appear automatically. Each card has a lazy-loaded auto-resizing live preview, a Standard/Light/Dark theme picker, and a "Copy embed code" button. |
 | `tools-home/` | Curated 6-widget grid for the homepage. Separate from tools-hub. |
 | `js/brand.js` | Shared runtime for all widgets. Two responsibilities: (1) post `bw-resize` height messages to the parent (Wix or any embedding site); (2) inject the "by berlinwalk.com" attribution badge into every widget body. Skipped when `?attribution=none` is in the URL (used by the gallery preview iframes). |
 | `embed-resize.js` | Tiny external script loaded by every third-party embed snippet. Listens for `bw-resize` postMessage events from any `iframe[data-bw-frame]` on the host page and resizes the iframe to fit. Makes the third-party embeds auto-height by default. |
@@ -128,7 +128,19 @@ Notes:
 
 ### Hosting the `/widgets` gallery on Wix
 
-`widgets-hub/index.html` deliberately does NOT load `js/brand.js`, so it never posts `bw-resize` messages to its parent. This keeps the iframe at whatever fixed height Wix assigns, which is required for the in-page sticky filter nav (`position: sticky; top: 0`) to actually feel sticky to the user. When embedding on the live `/widgets` Wix page, set the iframe height to `100vh` (or a large fixed value with internal scrolling enabled) so the sticky nav stays visible as users scroll through 19 widget cards.
+**Recommended (matches `/berlin-tools`):** use the `<bw-widgets-hub>` Custom Element. Add to the Wix `/widgets` page via Custom Code (Settings → Custom Code → Body end):
+
+```html
+<bw-widgets-hub></bw-widgets-hub>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/widgets-hub/widgets-hub-element.js"></script>
+```
+
+The element renders into light DOM, so:
+- Google indexes every widget title, lead, and backlink as native page content (same SEO benefit as `<bw-tools-hub>` on `/berlin-tools`).
+- Sticky `.bw-category-nav` works against the parent page scroll (no iframe boundary).
+- The element auto-loads `embed-resize.js` so live previews resize themselves.
+
+**Fallback (iframe):** if Custom Code is unavailable, embed `widgets-hub/index.html` via a Wix HTML iframe with `height: 100vh` and internal scrolling enabled — without that, the in-page sticky nav has no constrained viewport and feels non-sticky to users. Light DOM is still preferred.
 
 ### Wix idiosyncrasies that have bitten us
 - **Wix REST API cannot read or write draft automations** (those with `draftInfo` set). Workaround: create new automation via REST instead of patching the draft.
