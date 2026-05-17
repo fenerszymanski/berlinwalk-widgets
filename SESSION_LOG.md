@@ -6,6 +6,32 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-17 — Claude Code (Luggage Storage + Nikolaiviertel drafts v1 + two new widgets)
+
+**Did:**
+- Drafted workplan #7 "Where to Store Luggage in Berlin" (~1700 words, Yusuf voice, no em dashes) covering DB lockers, the Hauptbahnhof Gepäckcenter, BER airport storage, app-based services (Bounce / Radical / Stasher), and the walking-tour-with-bags question.
+- Drafted workplan #8 "Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange" (~1700 words) explaining the 1980-1987 GDR rebuild by Günter Stahn, what is genuinely old (Nikolaikirche, Knoblauchhaus, Ephraim-Palais salvaged stones) vs. 1980s pastiche, with a 10-stop self-guided walking loop.
+- Built two new post-specific widgets: `luggage-storage-map` (Leaflet, 14 pinned locations across 4 filter categories: station lockers / staffed centres / airport / app pickup zones) and `nikolaiviertel-walk` (Leaflet, 10 numbered self-guided stops with a dashed polyline route and colour-coded "genuinely old / salvaged facade / GDR rebuild / tavern" badges).
+- Wired both new slugs (`luggage-storage`, `nikolaiviertel`) into quick-summary, FAQ data, FAQ slug map, and FAQPage JSON-LD schema.
+
+**Changed:**
+- `blog-drafts/luggage-storage-in-berlin-2026.md` — new draft v1 with widget plan, quick summary, full draft, sample last-day plan, and source list.
+- `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md` — new draft v1 with widget plan, quick summary, full draft, self-guided walking loop, and source list.
+- `luggage-storage-map/index.html` — new Leaflet widget with 4 category filters.
+- `nikolaiviertel-walk/index.html` — new Leaflet widget with numbered markers, dashed polyline route, and legend.
+- `quick-summary/data.json` — added `luggage-storage` and `nikolaiviertel` entries (6 items each).
+- `faq/data.json` — added `luggage-storage` and `nikolaiviertel` entries (5 Q/A items each).
+- `faq/inject.js` — added `luggage-storage-in-berlin-2026 → luggage-storage` and `nikolaiviertel-rebuilt-old-town → nikolaiviertel` to SLUG_MAP and the matching FAQPage schemas in SCHEMAS.
+- `blog-workplan.md` — marked #7 and #8 as Draft v1, bumped Last updated to 2026-05-17, added new draft files and widget folders to the Drafts list.
+- Wix: no remote changes (Yusuf asked for local approval before moving to Wix).
+
+**Opened:** Push the local repo so GitHub Pages serves the two new widgets and updated quick-summary/FAQ data. Move both drafts into Wix as UNPUBLISHED blog posts once Yusuf approves. For each Wix draft, embed the three widget URLs (`/quick-summary/?post=<slug>`, the post-specific map, `/faq/?post=<slug>`), and pick cover/inline images.
+**Closed:** Luggage Storage + Nikolaiviertel drafts v1 plus widget plumbing for slugs `luggage-storage` and `nikolaiviertel`.
+
+**Next session should:** Push the local changes so GitHub Pages serves the two new widgets and updated data, then on Yusuf's approval create the Wix blog drafts for both posts using the same Draft.js + NBSP `font-size:6px` spacer + 4-embed pattern proven on the Free Things draft. After that, the next queued ideas are Bebelplatz (#9), Tränenpalast (#10), and Hackescher Markt After the Tour (#11).
+
+---
+
 ## 2026-05-16 — Claude Code (Free Things to Do Wix draft + SEO)
 
 **Did:**

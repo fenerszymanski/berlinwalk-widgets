@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where to Store Luggage in Berlin Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-luggage-map">
+  <style>
+    #bw-luggage-map {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-station: #1B5E20;
+      --bw-staffed: #7CB342;
+      --bw-airport: #1565C0;
+      --bw-app: #F9A825;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-luggage-map * { box-sizing: border-box; }
+
+    #bw-luggage-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-luggage-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-luggage-map .bw-head-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 24px;
+    }
+
+    #bw-luggage-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    #bw-luggage-map .bw-body {
+      background: var(--bw-cream);
+      padding: 16px 18px;
+    }
+
+    #bw-luggage-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-luggage-map .bw-controls {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    #bw-luggage-map .bw-filter {
+      appearance: none;
+      border: 1px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    #bw-luggage-map .bw-filter.is-active {
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      border-color: var(--bw-green);
+    }
+
+    #bw-luggage-map .bw-map-container {
+      width: 100%;
+      height: 460px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-luggage-map .bw-map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    #bw-luggage-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-luggage-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-luggage-map .leaflet-popup-content {
+      margin: 0;
+      width: 252px !important;
+      font-family: inherit;
+    }
+
+    #bw-luggage-map .bw-popup-head {
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+      color: var(--bw-white);
+    }
+
+    #bw-luggage-map .bw-popup-head.station { background: var(--bw-station); }
+    #bw-luggage-map .bw-popup-head.staffed { background: var(--bw-staffed); }
+    #bw-luggage-map .bw-popup-head.airport { background: var(--bw-airport); }
+    #bw-luggage-map .bw-popup-head.app { background: var(--bw-app); color: var(--bw-green); }
+
+    #bw-luggage-map .bw-popup-type {
+      display: block;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.9;
+      margin-bottom: 2px;
+    }
+
+    #bw-luggage-map .bw-popup-name {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-luggage-map .bw-popup-body {
+      padding: 12px 14px 14px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      line-height: 1.55;
+    }
+
+    #bw-luggage-map .bw-popup-cost {
+      display: inline-block;
+      margin: 0 0 7px;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: var(--bw-soft);
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+    }
+
+    #bw-luggage-map .bw-marker {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 3px solid var(--bw-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #bw-luggage-map .bw-marker.station { background: var(--bw-station); color: var(--bw-white); }
+    #bw-luggage-map .bw-marker.staffed { background: var(--bw-staffed); color: var(--bw-white); }
+    #bw-luggage-map .bw-marker.airport { background: var(--bw-airport); color: var(--bw-white); }
+    #bw-luggage-map .bw-marker.app { background: var(--bw-app); color: var(--bw-green); }
+
+    #bw-luggage-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin: 10px 0 0;
+      text-align: center;
+    }
+
+    #bw-luggage-map .bw-count strong {
+      color: var(--bw-green);
+      font-weight: 900;
+    }
+
+    #bw-luggage-map .bw-footer {
+      padding: 10px 18px;
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 560px) {
+      #bw-luggage-map { margin: 22px 0; }
+      #bw-luggage-map .bw-head { padding: 12px 16px; }
+      #bw-luggage-map .bw-kicker { font-size: 10px; letter-spacing: 1.8px; }
+      #bw-luggage-map .bw-body { padding: 14px; }
+      #bw-luggage-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-luggage-map .bw-filter { flex: 1 1 calc(50% - 8px); min-width: 132px; padding: 9px 8px; font-size: 10px; }
+      #bw-luggage-map .bw-map-container { height: 380px; }
+      #bw-luggage-map .leaflet-popup-content { width: 218px !important; }
+      #bw-luggage-map .bw-popup-name { font-size: 14px; }
+      #bw-luggage-map .bw-popup-body { font-size: 12px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">L</span>
+      <span class="bw-kicker">Where to Store Luggage in Berlin</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-hint">Tap a pin to see what kind of luggage storage it is, the typical price, and a one-line note. Filter by type to find the closest option.</p>
+      <div class="bw-controls" aria-label="Filter Berlin luggage storage map">
+        <button class="bw-filter is-active" type="button" data-filter="all">All</button>
+        <button class="bw-filter" type="button" data-filter="station">Station lockers</button>
+        <button class="bw-filter" type="button" data-filter="staffed">Staffed centres</button>
+        <button class="bw-filter" type="button" data-filter="airport">Airport</button>
+        <button class="bw-filter" type="button" data-filter="app">App pickup zone</button>
+      </div>
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-luggage-map-canvas"></div>
+      </div>
+      <p class="bw-count"><strong data-count>0</strong> Berlin luggage storage options mapped</p>
+    </div>
+    <div class="bw-footer">Prices and hours change. Check the operator's website before going. App zones show neighbourhoods with many partner shops, not single locations.</div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-luggage-map');
+      var mapEl = document.getElementById('bw-luggage-map-canvas');
+      if (!root || !mapEl || !window.L) return;
+
+      var places = [
+        {
+          name: 'Berlin Hauptbahnhof - DB lockers',
+          type: 'station',
+          cost: '~4-6 euro / 24 h',
+          lat: 52.5251,
+          lng: 13.3694,
+          note: 'Largest locker bank in central Berlin, on two floors. Live availability shown on station screens and the DB Bahnhof app.'
+        },
+        {
+          name: 'Berlin Hauptbahnhof - Gepäckcenter',
+          type: 'staffed',
+          cost: '~5-7 euro / piece',
+          lat: 52.5253,
+          lng: 13.3697,
+          note: "Staffed left-luggage centre run by Rail&Fresh inside Hauptbahnhof. Best for oversized, fragile, or valuable bags."
+        },
+        {
+          name: 'Friedrichstrasse Station lockers',
+          type: 'station',
+          cost: '~4-6 euro / 24 h',
+          lat: 52.5202,
+          lng: 13.3869,
+          note: 'Central, very convenient if you are sightseeing along Unter den Linden. Smaller locker bank than Hauptbahnhof.'
+        },
+        {
+          name: 'Zoologischer Garten lockers',
+          type: 'station',
+          cost: '~4-6 euro / 24 h',
+          lat: 52.5070,
+          lng: 13.3326,
+          note: 'Best base for visitors staying in the West around Bahnhof Zoo, KaDeWe, Charlottenburg, and the Tiergarten end.'
+        },
+        {
+          name: 'Ostbahnhof lockers',
+          type: 'station',
+          cost: '~4-6 euro / 24 h',
+          lat: 52.5104,
+          lng: 13.4339,
+          note: 'Useful if you are catching a long-distance train east. Smaller locker hall than Hauptbahnhof.'
+        },
+        {
+          name: 'Suedkreuz lockers',
+          type: 'station',
+          cost: '~4-6 euro / 24 h',
+          lat: 52.4757,
+          lng: 13.3653,
+          note: 'On the southern ring. Quieter than Hauptbahnhof and a good fit if you are heading to BER by train.'
+        },
+        {
+          name: 'Potsdamer Platz lockers',
+          type: 'station',
+          cost: '~4-6 euro / 24 h',
+          lat: 52.5096,
+          lng: 13.3759,
+          note: 'Convenient locker bank between the Sony Center, Mall of Berlin, and the Holocaust Memorial walk.'
+        },
+        {
+          name: 'Alexanderplatz Station lockers',
+          type: 'station',
+          cost: '~4-6 euro / 24 h',
+          lat: 52.5219,
+          lng: 13.4111,
+          note: 'Closest locker bank to where my walking tour begins. Smaller than Hauptbahnhof but central for Mitte.'
+        },
+        {
+          name: 'Gesundbrunnen lockers',
+          type: 'station',
+          cost: '~4-6 euro / 24 h',
+          lat: 52.5489,
+          lng: 13.3884,
+          note: 'Convenient if you are staying north in Wedding or Prenzlauer Berg, or taking long-distance trains.'
+        },
+        {
+          name: 'BER Airport luggage storage',
+          type: 'airport',
+          cost: '~6-12 euro / piece',
+          lat: 52.3650,
+          lng: 13.5097,
+          note: 'Manual storage in Terminal 1. Best if you fly out the same day and want to spend it in central Berlin without the suitcase.'
+        },
+        {
+          name: 'Bounce / Radical / Stasher: Mitte',
+          type: 'app',
+          cost: '~5-8 euro / day',
+          lat: 52.5230,
+          lng: 13.4015,
+          note: 'Dozens of app-partner hotels, cafes, and shops across Mitte. Drop is a 5-minute walk from most central sights.'
+        },
+        {
+          name: 'Bounce / Radical / Stasher: Kreuzberg',
+          type: 'app',
+          cost: '~5-8 euro / day',
+          lat: 52.4990,
+          lng: 13.4030,
+          note: 'Useful if your hotel will not hold bags and you are spending the day around Bergmannkiez or the East Side Gallery.'
+        },
+        {
+          name: 'Bounce / Radical / Stasher: Prenzlauer Berg',
+          type: 'app',
+          cost: '~5-8 euro / day',
+          lat: 52.5400,
+          lng: 13.4150,
+          note: 'Convenient drop zone if you are visiting Mauerpark, the Kulturbrauerei, or the Berlin Wall Memorial at Bernauer Strasse.'
+        },
+        {
+          name: 'Bounce / Radical / Stasher: Charlottenburg',
+          type: 'app',
+          cost: '~5-8 euro / day',
+          lat: 52.5060,
+          lng: 13.3041,
+          note: 'Good fit if you are sightseeing in the West around KaDeWe, the Tiergarten, and the Bahnhof Zoo end.'
+        }
+      ];
+
+      var map = L.map(mapEl, {
+        center: [52.510, 13.395],
+        zoom: 11,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var typeLabels = {
+        station: 'DB station locker',
+        staffed: 'Staffed left-luggage centre',
+        airport: 'Airport luggage storage',
+        app: 'App-based pickup zone'
+      };
+
+      var markerIcons = {
+        station: 'L',
+        staffed: 'S',
+        airport: 'A',
+        app: '@'
+      };
+
+      function markerIcon(type) {
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: '<div class="bw-marker ' + type + '">' + markerIcons[type] + '</div>',
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
+          popupAnchor: [0, -18]
+        });
+      }
+
+      function popup(place) {
+        return '<div class="bw-popup-head ' + place.type + '">' +
+          '<span class="bw-popup-type">' + typeLabels[place.type] + '</span>' +
+          '<div class="bw-popup-name">' + place.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<span class="bw-popup-cost">' + place.cost + '</span><br>' +
+          place.note +
+          '</div>';
+      }
+
+      var markerLayer = L.layerGroup().addTo(map);
+      var countEl = root.querySelector('[data-count]');
+
+      function render(filter) {
+        var visible = places.filter(function (place) {
+          return filter === 'all' || place.type === filter;
+        });
+        markerLayer.clearLayers();
+        visible.forEach(function (place) {
+          L.marker([place.lat, place.lng], {
+            icon: markerIcon(place.type)
+          }).bindPopup(popup(place), {
+            closeButton: true,
+            maxWidth: 270
+          }).addTo(markerLayer);
+        });
+        if (countEl) countEl.textContent = String(visible.length);
+      }
+
+      root.querySelectorAll('.bw-filter').forEach(function (button) {
+        button.addEventListener('click', function () {
+          root.querySelectorAll('.bw-filter').forEach(function (item) {
+            item.classList.remove('is-active');
+          });
+          button.classList.add('is-active');
+          render(button.getAttribute('data-filter'));
+        });
+      });
+
+      render('all');
+      setTimeout(function () { map.invalidateSize(); }, 250);
+    })();
+  </script>
+</div>
+</body>
+</html>

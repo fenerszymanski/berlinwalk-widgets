@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-05-16 (Free Things post drafted)
+Last updated: 2026-05-17 (Luggage Storage and Nikolaiviertel drafted)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -14,8 +14,8 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 | 4 | Wix draft | Berlin in August: Lakes, Long Evenings, and What Tourists Get Wrong | Summer follow-up with swimming, transport, school holidays, events, and realistic crowd advice. Mirrors the live June post widget stack. Draft ID: `0da7a350-14e7-4c59-bcb5-ba80fc4654d5`. |
 | 5 | Wix draft | Berlin in September: The Best Month Nobody Plans For | Shoulder-season guide with walking weather, Berlin Art Week, Open Monument Day, Marathon logistics, and late-summer atmosphere. Mirrors the live June post widget stack. Draft ID: `5e1ac42b-7878-4e2b-97de-e75b2458fc49`. |
 | 6 | Draft v1 | Public Toilets in Berlin: What Tourists Need to Know | Highly practical, under-served tourist topic. Good fit for route-area advice. Draft at `blog-drafts/public-toilets-in-berlin-2026.md`; quick-summary + FAQ widget data wired under slug `public-toilets`; ready to move to Wix. |
-| 7 | Idea | Where to Store Luggage in Berlin for a Few Hours | Airport, Hauptbahnhof, Alexanderplatz, locker vs luggage app advice, and whether guests can join the tour with bags. |
-| 8 | Idea | Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange | Route-adjacent history piece. Pairs with existing old-town and GDR demolition content. |
+| 7 | Draft v1 | Where to Store Luggage in Berlin for a Few Hours | Airport, Hauptbahnhof, Alexanderplatz, locker vs luggage app advice, and whether guests can join the tour with bags. Draft at `blog-drafts/luggage-storage-in-berlin-2026.md`; quick-summary + FAQ + new `luggage-storage-map` widgets wired under slug `luggage-storage`; ready to move to Wix. |
+| 8 | Draft v1 | Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange | Route-adjacent history piece. Pairs with existing old-town and GDR demolition content. Draft at `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`; quick-summary + FAQ + new `nikolaiviertel-walk` self-guided walking-tour widget wired under slug `nikolaiviertel`; ready to move to Wix. |
 | 9 | Idea | Bebelplatz and the Nazi Book Burning Memorial: What Tourists Miss | Strong historical storytelling, close to central Berlin routes. |
 | 10 | Idea | Tranenpalast: The Free Cold War Museum Tourists Shouldn't Skip | Practical and emotional museum guide, especially useful for visitors near Friedrichstrasse. |
 | 11 | Idea | What to Do Near Hackescher Markt After the Tour | Post-tour conversion content: food, courtyards, Museum Island, riverside walks, coffee. |
@@ -32,10 +32,14 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 - `blog-drafts/berlin-in-september-2026.md`
 - `blog-drafts/public-toilets-in-berlin-2026.md`
 - `blog-drafts/free-things-to-do-in-berlin-2026.md`
+- `blog-drafts/luggage-storage-in-berlin-2026.md`
+- `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`
 - `free-museums-map/`
 - `free-museums-compare/`
 - `free-things-map/`
 - `free-things-compare/`
+- `luggage-storage-map/`
+- `nikolaiviertel-walk/`
 
 ## Source Notes
 

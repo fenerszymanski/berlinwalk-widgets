@@ -34,7 +34,9 @@
   "berlin-in-september-2026": "berlin-in-september-2026",
   "which-berlin-museums-are-free-2026": "free-museums",
   "public-toilets-in-berlin": "public-toilets",
-  "free-things-to-do-in-berlin-2026": "free-things-to-do"
+  "free-things-to-do-in-berlin-2026": "free-things-to-do",
+  "luggage-storage-in-berlin-2026": "luggage-storage",
+  "nikolaiviertel-rebuilt-old-town": "nikolaiviertel"
 };
 
   var SCHEMAS = {
@@ -1406,6 +1408,98 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The automatic Berliner Toiletten cabins are barrier-free and include grab rails inside. People with a EuroKey, the European disability key, can open the cabins for free. Train station toilet centers also have accessible cubicles."
+        }
+      }
+    ]
+  },
+  "nikolaiviertel": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the Nikolaiviertel in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Nikolaiviertel is the small medieval quarter around St. Nicholas Church (Nikolaikirche) in central Berlin. The church is the oldest building in the city, founded around 1230. Most of the surrounding houses are 1980s East German reconstructions in a historical style, finished in 1987 for Berlin's 750th anniversary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Nikolaiviertel original or rebuilt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both. The medieval quarter was destroyed by bombing in 1944 and Soviet artillery in 1945. The GDR rebuilt the area between 1980 and 1987 using prefab concrete behind historicising facades. The Nikolaikirche walls, the Knoblauchhaus (1761), and the salvaged stones reassembled in the Ephraim-Palais are genuinely old. The rest is reconstruction or pastiche."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can you see in the Nikolaiviertel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Nikolaikirche (Berlin's oldest church and a Stadtmuseum branch), the Knoblauchhaus (free Baroque townhouse museum), the Ephraim-Palais (rotating Berlin art exhibitions), traditional taverns like Zum Nussbaum and Zum letzten Heller, and the Spree riverside walk toward Museum Island."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Nikolaiviertel free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Walking through the quarter is free. The Knoblauchhaus is free on most days. The Nikolaikirche museum and Ephraim-Palais charge around 5 to 8 euros each. All three are covered by the Berlin Museum Pass and Stadtmuseum combined entry."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do you need to visit the Nikolaiviertel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A relaxed self-guided walking loop through the main streets takes about 45 minutes. Add 30 to 60 minutes if you stop inside the Nikolaikirche or the Knoblauchhaus, and another hour if you sit down for a beer or a meal at one of the taverns."
+        }
+      }
+    ]
+  },
+  "luggage-storage": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can I store my luggage in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Four reliable options: Deutsche Bahn lockers at major stations (Hauptbahnhof, Friedrichstrasse, Zoo, Ostbahnhof, Alexanderplatz, Suedkreuz, Potsdamer Platz, Gesundbrunnen), the staffed Gepäckcenter inside Berlin Hauptbahnhof, the luggage storage at BER airport's Terminal 1, and app-based shop networks like Bounce, Radical Storage, and Stasher."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to store luggage in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "DB lockers cost roughly 4 to 6 euros per 24 hours depending on size. The staffed Gepäckcenter at Hauptbahnhof costs around 5 to 7 euros per piece for a few hours, or 10 to 12 euros for 24 hours. BER airport storage is around 6 to 12 euros per piece. App-based services charge around 5 to 8 euros per bag per day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there luggage lockers at Berlin Hauptbahnhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin Hauptbahnhof has the largest locker bank in central Berlin, spread across two floors, plus the staffed Gepäckcenter for oversized or valuable bags. Live locker availability is shown on station screens and in the DB Bahnhof app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I store luggage at Berlin BER airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BER has a manual luggage storage service in Terminal 1, run by a private operator. It costs around 6 to 12 euros per piece depending on size and duration, and is most useful if you fly out the same day and want to spend it in central Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I bring my suitcase on a Berlin walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A small backpack or day bag is fine on the Berlin Free Walking Tour. A full-size suitcase is not practical because of cobblestones, stairs, and crowded crossings. Drop the suitcase in a Hauptbahnhof locker or at the Gepäckcenter and take the U-Bahn one stop to Alexanderplatz to meet bag-free."
         }
       }
     ]
