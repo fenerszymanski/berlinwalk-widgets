@@ -2,9 +2,9 @@
 
 Slug idea: `nikolaiviertel-rebuilt-old-town`
 
-Wix draft ID: _to be created_
+Wix draft ID: `48bf0945-63d9-46cd-b9af-a8fb87ab3c75`
 
-Wix draft status: _draft local only_
+Wix draft status: `UNPUBLISHED`
 
 Meta title: Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange
 

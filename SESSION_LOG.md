@@ -6,6 +6,53 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-17 — Claude Code (Luggage Storage tool added to BerlinTools hub)
+
+**Did:**
+- Added `berlin-luggage-storage` to the tools hub local data (under Maps & Practical) so the public toilet + drinking water + sunday shopping row gains a luggage-map sibling.
+- Created the BerlinTools CMS item for `/tools/berlin-luggage-storage` via Wix Data v2 INSERT, mirroring the public-toilets row exactly: widgetUrl, h1/title/lead/secondary/intro, SEO title + description, WebApplication JSON-LD, related-tool wiring (public-toilets, drinking-water), related-blog wiring to the just-published luggage storage post, and a Ricos `bodyContent` block with "How to Use", "What the Map Shows", "Berlin Luggage Storage Basics" bulleted list, and "Privacy Note".
+- Left the tool without an `image` so the hub uses the first-letter fallback; a matching icon can be generated and uploaded later if Yusuf wants to refresh the 18-tool set to 19.
+- Did not add to `tools-home/data.json` (the curated 6-item homepage list) — luggage storage is practical but not pillar-traffic-worthy enough to bump an existing entry.
+
+**Changed:**
+- `tools-hub/data.json` — added `berlin-luggage-storage` entry under Maps category (no `image` field, first-letter fallback).
+- Wix: created BerlinTools CMS item `e8fa568f-6f46-44d8-be2c-c79dae0e92f3`, slug `berlin-luggage-storage`, embedUrl `https://fenerszymanski.github.io/berlinwalk-widgets/luggage-storage-map/`.
+
+**Opened:**
+- Push the local `tools-hub/data.json` change so GitHub Pages serves the new entry and the live `/tools` hub grid picks up the 19th tool card.
+- Confirm in Wix Studio that the dynamic `/tools/<slug>` page template auto-renders the new BerlinTools row (no extra Studio work expected — the existing dynamic page should pick it up via the slug field).
+- Optional: generate a matching pastel icon (512px + 160px), upload to Wix Media, and add the `image` URL to the tools-hub entry to match the other 18 tools visually.
+
+**Closed:** Luggage Storage tool added to the BerlinTools hub CMS + tools-hub local data.
+
+**Next session should:** Push the tools-hub change and visually confirm the new card on `/tools` and the new `/tools/berlin-luggage-storage` dynamic page. Then return to the Nikolaiviertel Wix draft when Yusuf takes it off hold.
+
+---
+
+## 2026-05-17 — Claude Code (Luggage Storage + Nikolaiviertel Wix drafts + full SEO)
+
+**Did:**
+- Created both Wix Blog drafts via local REST with the user-supplied Wix API key, using the same Draft.js + NBSP `font-size:6px` spacer + multi-embed pattern proven on the Free Things draft.
+- Embedded all three widgets per post (quick-summary, post-specific map, FAQ) at the planned positions.
+- Set full SEO on each: meta title, meta description, og:title/og:description, og:type=article, twitter:card=summary_large_image plus twitter:title/twitter:description, primary focus keyword and four secondary keywords.
+- Wiped `/tmp/wix_key.txt` and the local build script after both drafts were created and verified.
+
+**Changed:**
+- `blog-drafts/luggage-storage-in-berlin-2026.md` — added Wix draft ID `46951fc3-d0a4-4f8f-9429-92177cb033fd`.
+- `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md` — added Wix draft ID `48bf0945-63d9-46cd-b9af-a8fb87ab3c75`.
+- `blog-workplan.md` — bumped #7 and #8 from Draft v1 to Wix draft and recorded both draft IDs.
+- `SESSION_LOG.md` — added this handoff entry.
+- Wix: created draft `46951fc3-d0a4-4f8f-9429-92177cb033fd` ("Where to Store Luggage in Berlin for a Few Hours (2026)") in `Tourist Tips`, tags `Berlin Tourism Tips` + `Berlin Travel Tips` + `First-Time Berlin Tips`; status UNPUBLISHED, seoSlug `luggage-storage-in-berlin-2026`, 178 blocks (89 spacers), 3 embeds, 4 internal links, 10 H2 sections, 40 list items, minutesToRead 6.
+- Wix: created draft `48bf0945-63d9-46cd-b9af-a8fb87ab3c75` ("Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange") in `Tourist Tips`, tags `Berlin Landmarks` + `Berlin Tourism Tips` + `Berlin Museum Tips`; status UNPUBLISHED, seoSlug `nikolaiviertel-rebuilt-old-town`, 136 blocks (68 spacers), 3 embeds, 8 internal links, 10 H2 sections, 29 list items, minutesToRead 6.
+- Wix: both drafts include the 4 custom advanced-SEO tags (og:type, twitter:card, twitter:title, twitter:description) on top of the standard auto-generated SEO.
+
+**Opened:** Push the local repo so GitHub Pages serves the two new widgets (`luggage-storage-map`, `nikolaiviertel-walk`) and the updated quick-summary/FAQ data; the iframe embeds inside both Wix drafts already point at those URLs. Visually preview both drafts in the Wix editor, add cover/inline images, and publish when Yusuf is happy.
+**Closed:** Luggage Storage Wix draft + complete SEO; Nikolaiviertel Wix draft + complete SEO; workplan #7 and #8 advanced from Draft v1 to Wix draft.
+
+**Next session should:** Once the GitHub Pages push is live, open both new Wix drafts in Wix Studio, confirm all six iframe embeds render correctly, add cover images, and publish. Then the next queued ideas are Bebelplatz (#9), Tränenpalast (#10), and Hackescher Markt After the Tour (#11).
+
+---
+
 ## 2026-05-17 — Claude Code (Luggage Storage + Nikolaiviertel drafts v1 + two new widgets)
 
 **Did:**

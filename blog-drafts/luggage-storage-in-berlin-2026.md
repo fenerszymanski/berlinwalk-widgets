@@ -2,9 +2,9 @@
 
 Slug idea: `luggage-storage-in-berlin-2026`
 
-Wix draft ID: _to be created_
+Wix draft ID: `46951fc3-d0a4-4f8f-9429-92177cb033fd`
 
-Wix draft status: _draft local only_
+Wix draft status: `UNPUBLISHED`
 
 Meta title: Luggage Storage in Berlin (2026): Stations, Lockers, and Apps
 
