@@ -416,6 +416,24 @@ Format for each entry — see `AGENTS.md` §9.
 
 **Next session should:** Preview the new parking widgets after GitHub Pages deploy, then move the parking article into Wix with Quick Summary, map, calculator, and FAQ embeds.
 
+## 2026-05-17 — Codex
+
+**Did:**
+- Cleaned the movie/TV Wix draft so editorial planning sections are no longer visible in the post
+- Moved movie/TV source links into the relevant paragraphs and added more BerlinWalk internal links
+- Updated the parking draft with the same inline-source/internal-link approach and generated a GPT Image 2 low hero image
+
+**Changed:**
+- `/Users/yusufucuz/Documents/New project/famous-movies-tv-shows-filmed-in-berlin-draft.md` — removed the Widget Idea and Sources sections, distributed links into the article, and added more internal links
+- `/Users/yusufucuz/Documents/New project/blog-media/parking-berlin/generated/berlin-parking-alexanderplatz-hero-gpt-image-2-low.png` — new 1536x1024 parking hero image
+- `blog-drafts/where-to-park-in-berlin-alexanderplatz-2026.md` — added hero image, moved external source links into context, and added more BerlinWalk internal links
+- Wix: updated draft `a026aeb9-6126-4adc-bebd-2dcd5c88fb8b`; verified no `Widget Idea` or `Sources and Further Reading` text remains
+
+**Opened:** Parking article is still local only; move it to Wix when Yusuf approves the copy/hero.
+**Closed:** Movie/TV draft cleanup and Wix draft refresh.
+
+**Next session should:** Create the parking Wix draft with hero, Quick Summary, map, calculator, FAQ, SEO settings, and appropriate internal/external link targets.
+
 ## 2026-05-15 — Codex
 
 **Did:**
