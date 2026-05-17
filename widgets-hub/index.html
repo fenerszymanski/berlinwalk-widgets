@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Free Berlin Widgets to Embed on Your Site | BerlinWalk</title>
-  <meta name="description" content="Free embeddable Berlin widgets for travel sites, hotels, and bloggers: weather, transport, maps, calculators. Copy a one-line iframe — no signup, just attribution.">
+  <meta name="description" content="Free embeddable Berlin widgets for travel sites, hotels, and bloggers: weather, transport, maps, calculators. Copy a one-line iframe, no signup, just attribution.">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
   <style>
@@ -93,6 +93,76 @@
 
     #bw-widgets-hub .hub-main {
       padding: 36px 24px 48px;
+    }
+
+    #bw-widgets-hub .category-nav {
+      background: var(--bw-white);
+      border: 1px solid var(--light-green);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin: 0 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      box-shadow: 0 4px 12px rgba(27, 94, 32, 0.06);
+    }
+
+    #bw-widgets-hub .category-nav-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    #bw-widgets-hub .category-nav-label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      margin-right: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-widgets-hub .category-pill {
+      align-items: center;
+      background: var(--cream);
+      border: 1px solid var(--light-green);
+      border-radius: 22px;
+      color: var(--brand-green);
+      cursor: pointer;
+      display: inline-flex;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      gap: 6px;
+      letter-spacing: 0.5px;
+      padding: 8px 14px;
+      text-decoration: none;
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+
+    #bw-widgets-hub .category-pill:hover,
+    #bw-widgets-hub .category-pill:focus-visible {
+      background: var(--brand-green);
+      color: var(--brand-yellow);
+      border-color: var(--brand-green);
+      outline: none;
+    }
+
+    #bw-widgets-hub .category-pill .count {
+      background: var(--brand-yellow);
+      border-radius: 12px;
+      color: var(--brand-green);
+      font-size: 10px;
+      font-weight: 900;
+      padding: 2px 7px;
+      line-height: 1;
+    }
+
+    #bw-widgets-hub .category-pill:hover .count,
+    #bw-widgets-hub .category-pill:focus-visible .count {
+      background: var(--brand-yellow);
+      color: var(--brand-green);
     }
 
     #bw-widgets-hub .terms-card {
@@ -441,7 +511,7 @@
     <section class="hub-hero" aria-labelledby="widgets-hub-title">
       <div class="hub-hero-inner">
         <h1 id="widgets-hub-title">Free Berlin widgets to <span class="highlight">embed anywhere</span></h1>
-        <p class="hero-lead">19 interactive Berlin tools built by a local guide. Copy a one-line iframe and they work on WordPress, Squarespace, Wix, hotel sites, travel blogs — anywhere.</p>
+        <p class="hero-lead">19 interactive Berlin tools built by a local guide. Copy a one-line iframe and they work on WordPress, Squarespace, Wix, hotel sites, travel blogs, anywhere.</p>
         <div class="hero-tags">
           <span class="hero-tag">No signup</span>
           <span class="hero-tag">No tracking</span>
@@ -484,14 +554,37 @@
         return e;
       }
 
+      function escapeHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
       function buildEmbedSnippet(tool, height) {
         var src = tool.widgetUrl;
-        var safeTitle = (tool.title || tool.slug).replace(/"/g, '&quot;');
-        return '<iframe src="' + src + '"\n'
-          + '  title="' + safeTitle + ' by BerlinWalk"\n'
-          + '  width="100%" height="' + height + '"\n'
-          + '  frameborder="0" loading="lazy" scrolling="no"\n'
-          + '  style="border:0; width:100%; max-width:100%;"></iframe>';
+        var safeTitle = escapeHtml(tool.title || tool.slug);
+        var safeLead = escapeHtml(tool.lead || '');
+        var deepLink = 'https://www.berlinwalk.com/tools/' + tool.slug;
+        var utmHome = 'https://www.berlinwalk.com/widgets?utm_source=embed&amp;utm_medium=textlink&amp;utm_campaign=' + tool.slug;
+        // SEO-friendly embed: real <h3> + <p> + iframe + visible backlink. The
+        // surrounding semantic markup gives Google indexable content even
+        // though the iframe content itself is cross-origin. The <a> below the
+        // iframe is the dofollow backlink to berlinwalk.com.
+        return '<!-- ' + safeTitle + ' by BerlinWalk -->\n'
+          + '<aside class="bw-embed" style="margin:1em 0; max-width:100%; font-family:Arial,Helvetica,sans-serif;">\n'
+          + '  <h3 style="font:800 18px/1.3 Arial,sans-serif; color:#1B5E20; margin:0 0 6px;">\n'
+          + '    <a href="' + escapeHtml(deepLink) + '" rel="noopener" style="color:#1B5E20; text-decoration:none;">' + safeTitle + '</a>\n'
+          + '  </h3>\n'
+          + '  <p style="font:14px/1.55 Arial,sans-serif; color:#212121; margin:0 0 10px;">' + safeLead + '</p>\n'
+          + '  <iframe src="' + src + '"\n'
+          + '    title="' + safeTitle + ' by BerlinWalk"\n'
+          + '    width="100%" height="' + height + '"\n'
+          + '    frameborder="0" loading="lazy" scrolling="no"\n'
+          + '    style="border:0; width:100%; max-width:100%;"></iframe>\n'
+          + '  <p style="margin:6px 0 0; font:600 12px/1.4 Arial,sans-serif; text-align:center;">\n'
+          + '    <a href="' + utmHome + '" rel="noopener" style="color:#1B5E20; text-decoration:none;">\n'
+          + '      Free Berlin widget by <strong>BerlinWalk</strong> &rarr;\n'
+          + '    </a>\n'
+          + '  </p>\n'
+          + '</aside>';
       }
 
       function buildCard(tool) {
@@ -628,21 +721,50 @@
 
       function render(data) {
         var frag = document.createDocumentFragment();
-        data.categories.forEach(function (category) {
-          var section = el('section', 'category-section');
-          section.setAttribute('aria-labelledby', 'wcat-' + category.key.toLowerCase());
-          var h2 = el('h2', 'category-heading');
-          h2.id = 'wcat-' + category.key.toLowerCase();
-          var icon = el('span', 'category-icon', category.icon);
-          icon.setAttribute('aria-hidden', 'true');
-          h2.appendChild(icon);
-          h2.appendChild(document.createTextNode(category.label));
-          section.appendChild(h2);
-          section.appendChild(el('p', 'category-blurb', category.blurb));
 
+        // Sticky category jump-nav at the top
+        var nav = el('nav', 'category-nav');
+        nav.setAttribute('aria-label', 'Jump to widget category');
+        var navInner = el('div', 'category-nav-inner');
+        navInner.appendChild(el('span', 'category-nav-label', 'Jump to:'));
+        data.categories.forEach(function (category) {
+          var count = data.tools.filter(function (t) {
+            return t.category === category.key && t.widgetUrl;
+          }).length;
+          if (!count) return;
+          var pill = el('a', 'category-pill');
+          pill.href = '#wcat-' + category.key.toLowerCase();
+          var icon = el('span', 'category-pill-icon', category.icon);
+          icon.setAttribute('aria-hidden', 'true');
+          pill.appendChild(icon);
+          pill.appendChild(document.createTextNode(category.label));
+          var c = el('span', 'count', String(count));
+          c.setAttribute('aria-label', count + ' widgets');
+          pill.appendChild(c);
+          navInner.appendChild(pill);
+        });
+        nav.appendChild(navInner);
+        frag.appendChild(nav);
+
+        // Category sections
+        data.categories.forEach(function (category) {
           var tools = data.tools.filter(function (t) {
             return t.category === category.key && t.widgetUrl;
           });
+          if (!tools.length) return;
+
+          var section = el('section', 'category-section');
+          section.id = 'wcat-' + category.key.toLowerCase();
+          section.setAttribute('aria-labelledby', 'wcat-h-' + category.key.toLowerCase());
+          var h2 = el('h2', 'category-heading');
+          h2.id = 'wcat-h-' + category.key.toLowerCase();
+          var icon = el('span', 'category-icon', category.icon);
+          icon.setAttribute('aria-hidden', 'true');
+          h2.appendChild(icon);
+          h2.appendChild(document.createTextNode(category.label + ' (' + tools.length + ')'));
+          section.appendChild(h2);
+          section.appendChild(el('p', 'category-blurb', category.blurb));
+
           tools.forEach(function (t) {
             section.appendChild(buildCard(t));
           });

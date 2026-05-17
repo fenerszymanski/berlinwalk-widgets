@@ -6,6 +6,27 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-17 — Claude Code (Embeddable widgets program v1.1: backlink + category nav)
+
+**Did:**
+- Added a sticky category jump-nav at the top of the `/widgets` gallery (Money / Weather / Maps / Discovery pills with widget counts). Yusuf noticed the categorisation was rendering but not visible enough as a navigation aid.
+- Rewrote the embed snippet so it includes a visible, crawlable `<a>` link below the iframe pointing to `https://www.berlinwalk.com/widgets`. Search engines ignore iframe `src` for backlink purposes, so the previous iframe-only snippet was sending all SEO juice to `fenerszymanski.github.io`. The text link now gives explicit dofollow backlinks per embed.
+- Embed snippet text link gets its own UTM (`utm_source=embed&utm_medium=textlink&utm_campaign=<slug>`) so analytics can separate (a) badge clicks inside the widget from (b) text-link clicks below the embed.
+- Cleaned the two user-facing em-dashes in `widgets-hub/index.html` (meta description + hero lead) per brand voice convention.
+
+**Changed:**
+- `widgets-hub/index.html` — sticky `.category-nav` CSS + render-time pill nav DOM with per-category widget counts; new `buildEmbedSnippet` emits `<div>` wrapping iframe + visible text backlink; cleaned em-dashes.
+
+**Opened:**
+- Set up `widgets.berlinwalk.com` CNAME → `fenerszymanski.github.io` in Wix DNS, add a `CNAME` file at repo root, then bulk-update `tools-hub/data.json` `widgetUrl` values to use the new subdomain. Once live, iframe `src` carries the BerlinWalk domain too, even though crawlers care about the text link rather than the iframe.
+- Spot-check the sticky nav on mobile after push — it relies on `position: sticky; top: 0;` and may need a `top: 60px` offset if Wix has a fixed header bar above the embed.
+
+**Closed:** Backlink concern (text link in embed snippet); category navigation visibility.
+
+**Next session should:** Push the gallery updates, then set up the CNAME subdomain when Yusuf has 10 minutes with the Wix DNS panel.
+
+---
+
 ## 2026-05-17 — Claude Code (Embeddable widgets program: attribution badge + /widgets gallery + UTM)
 
 **Did:**
