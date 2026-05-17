@@ -30,7 +30,8 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `tools-hub/` | The `/tools` directory grid. `data.json` is the **single source of truth** for every embeddable BerlinWalk widget: slug, title, lead, category, image, **`widgetUrl`**, **`embedHeight`**. New widgets must be added here. |
 | `widgets-hub/` | The `/widgets` page (third-party embed gallery). Reads from `tools-hub/data.json`; new entries appear automatically. Each card has a lazy-loaded live preview, a height selector, and a "Copy embed code" button. |
 | `tools-home/` | Curated 6-widget grid for the homepage. Separate from tools-hub. |
-| `js/brand.js` | Shared runtime for all widgets. Two responsibilities: (1) post `bw-resize` height messages to the Wix parent iframe; (2) inject the "by berlinwalk.com" attribution badge into every widget body. Skipped when `?attribution=none` is in the URL (used by the gallery preview iframes). |
+| `js/brand.js` | Shared runtime for all widgets. Two responsibilities: (1) post `bw-resize` height messages to the parent (Wix or any embedding site); (2) inject the "by berlinwalk.com" attribution badge into every widget body. Skipped when `?attribution=none` is in the URL (used by the gallery preview iframes). |
+| `embed-resize.js` | Tiny external script loaded by every third-party embed snippet. Listens for `bw-resize` postMessage events from any `iframe[data-bw-frame]` on the host page and resizes the iframe to fit. Makes the third-party embeds auto-height by default. |
 | `css/brand.css` | Shared brand tokens + styles for the attribution badge (`.bw-attr-badge`). |
 | `_audit.md`, `MIGRATION.md`, `_swap-status.md`, etc. | Historical planning docs — read for context only, mostly stale |
 
@@ -105,6 +106,29 @@ Every BerlinWalk widget loads `js/brand.js`, which automatically appends an attr
 - **Opt-out:** append `?attribution=none` to the widget URL to suppress the badge. Used by `widgets-hub/` gallery preview iframes (no need for double-badge inside a page that already shows the brand).
 
 This means analytics can distinguish (a) traffic from Yusuf's own Wix site embeds, (b) traffic from third-party embeds of each specific widget, and (c) deep-link `utm_campaign` breakdowns per widget.
+
+### Third-party embed snippet structure
+
+The `/widgets` gallery's copy-paste snippet is intentionally rich for SEO. Each embed produces:
+
+```html
+<aside class="bw-embed" style="...themed...">
+  <h3><a href="https://www.berlinwalk.com/tools/<slug>">{title}</a></h3>     <!-- deep backlink -->
+  <p>{lead}</p>                                                              <!-- indexable content -->
+  <iframe data-bw-frame src=".../<widget-slug>/" ...></iframe>               <!-- interactive UI -->
+  <p><a href="https://www.berlinwalk.com/widgets?utm_...">Free Berlin widget by <strong>BerlinWalk</strong> →</a></p>
+</aside>
+<script src=".../embed-resize.js" async></script>
+```
+
+Notes:
+- Search engines do not crawl cross-origin iframe content. The surrounding `<h3>` + `<p>` give the embedding page real indexable content and the two `<a>` tags act as crawlable dofollow backlinks (one deep to `/tools/<slug>`, one to `/widgets`).
+- `embed-resize.js` matches `iframe[data-bw-frame]` and listens for `bw-resize` postMessage from the widget's `brand.js`, then sets the iframe height. One script tag handles every widget on the page.
+- Three wrapper themes (Brand / Minimal / Dark) only change the surrounding `<aside>` colors. The iframe content keeps the widget's own design. Adding real per-widget theming would require updating each widget HTML to read a `?theme=` URL parameter.
+
+### Hosting the `/widgets` gallery on Wix
+
+`widgets-hub/index.html` deliberately does NOT load `js/brand.js`, so it never posts `bw-resize` messages to its parent. This keeps the iframe at whatever fixed height Wix assigns, which is required for the in-page sticky filter nav (`position: sticky; top: 0`) to actually feel sticky to the user. When embedding on the live `/widgets` Wix page, set the iframe height to `100vh` (or a large fixed value with internal scrolling enabled) so the sticky nav stays visible as users scroll through 19 widget cards.
 
 ### Wix idiosyncrasies that have bitten us
 - **Wix REST API cannot read or write draft automations** (those with `draftInfo` set). Workaround: create new automation via REST instead of patching the draft.

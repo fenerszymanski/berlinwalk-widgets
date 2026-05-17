@@ -6,7 +6,15 @@
   <title>Free Berlin Widgets to Embed on Your Site | BerlinWalk</title>
   <meta name="description" content="Free embeddable Berlin widgets for travel sites, hotels, and bloggers: weather, transport, maps, calculators. Copy a one-line iframe, no signup, just attribution.">
   <link rel="stylesheet" href="../css/brand.css">
-  <script defer src="../js/brand.js"></script>
+  <!-- brand.js intentionally NOT loaded: gallery is a long scrolling page
+       that handles its own height. If brand.js were loaded, it would post
+       bw-resize messages to the Wix parent, the parent would grow the iframe
+       to full content height, and the in-page sticky filter nav would no
+       longer appear sticky to the user (the iframe itself never scrolls,
+       only the Wix outer page does). Embed this page on Wix with a
+       constrained iframe height (e.g. 100vh) so the sticky nav works. -->
+  <!-- Auto-resize for embedded widget iframes inside the preview cards -->
+  <script src="../embed-resize.js" async></script>
   <style>
     #bw-widgets-hub {
       --serif: Merriweather, Georgia, serif;
@@ -287,8 +295,6 @@
       background: var(--cream);
       border-top: 1px solid var(--light-green);
       border-bottom: 1px solid var(--light-green);
-      max-height: 420px;
-      overflow: auto;
       padding: 0;
       position: relative;
     }
@@ -397,6 +403,59 @@
       outline: none;
     }
 
+    #bw-widgets-hub .embed-info {
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.5;
+      margin: 0 0 12px;
+    }
+
+    #bw-widgets-hub .theme-pills {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    #bw-widgets-hub .theme-pill {
+      align-items: center;
+      background: var(--bw-white);
+      border: 1px solid var(--light-green);
+      border-radius: 22px;
+      color: var(--text);
+      cursor: pointer;
+      display: inline-flex;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      gap: 7px;
+      letter-spacing: 0.3px;
+      padding: 6px 12px 6px 6px;
+      transition: border-color .15s ease, background .15s ease, color .15s ease;
+    }
+
+    #bw-widgets-hub .theme-pill:hover {
+      border-color: var(--brand-green);
+    }
+
+    #bw-widgets-hub .theme-pill.is-active {
+      background: var(--brand-green);
+      border-color: var(--brand-green);
+      color: var(--brand-yellow);
+    }
+
+    #bw-widgets-hub .theme-pill.is-active .theme-swatch {
+      border-color: var(--brand-yellow);
+    }
+
+    #bw-widgets-hub .theme-swatch {
+      border: 1px solid rgba(0, 0, 0, 0.18);
+      border-radius: 50%;
+      display: inline-block;
+      flex: 0 0 18px;
+      height: 18px;
+      width: 18px;
+    }
+
     #bw-widgets-hub .embed-code {
       background: var(--bw-white);
       border: 1px solid var(--light-green);
@@ -501,7 +560,6 @@
       #bw-widgets-hub .widget-head { padding: 16px 18px 12px; }
       #bw-widgets-hub .widget-actions { padding: 12px 18px; }
       #bw-widgets-hub .embed-panel { padding: 14px 18px; }
-      #bw-widgets-hub .preview-frame { max-height: 360px; }
       #bw-widgets-hub .preview-hint { padding: 8px 18px; }
     }
   </style>
@@ -558,33 +616,74 @@
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
 
-      function buildEmbedSnippet(tool, height) {
+      // Wrapper-only themes for the embed snippet. The iframe content stays
+      // on the widget's own design; only the heading, body text, link colors,
+      // and background of the surrounding <aside> change. Each theme is built
+      // from the BerlinWalk brand palette so embeds always feel on-brand.
+      var THEMES = {
+        brand: {
+          label: 'Brand',
+          desc: 'Green heading, yellow accent. Default BerlinWalk look.',
+          asideBg: 'transparent',
+          aside: '',
+          headingColor: '#1B5E20',
+          textColor: '#212121',
+          linkColor: '#1B5E20',
+          footerStrong: '#1B5E20'
+        },
+        minimal: {
+          label: 'Minimal',
+          desc: 'Neutral dark heading, no green. Blends with any site.',
+          asideBg: 'transparent',
+          aside: '',
+          headingColor: '#212121',
+          textColor: '#3a3a3a',
+          linkColor: '#1B5E20',
+          footerStrong: '#212121'
+        },
+        dark: {
+          label: 'Dark',
+          desc: 'Yellow accent, light text. For dark-mode sites.',
+          asideBg: '#1B5E20',
+          aside: 'background:#1B5E20; padding:18px 18px 14px; border-radius:10px; color:#FAFAF5;',
+          headingColor: '#FFE600',
+          textColor: '#F2F8E8',
+          linkColor: '#FFE600',
+          footerStrong: '#FFE600'
+        }
+      };
+
+      function buildEmbedSnippet(tool, themeKey) {
         var src = tool.widgetUrl;
+        var theme = THEMES[themeKey] || THEMES.brand;
         var safeTitle = escapeHtml(tool.title || tool.slug);
         var safeLead = escapeHtml(tool.lead || '');
         var deepLink = 'https://www.berlinwalk.com/tools/' + tool.slug;
         var utmHome = 'https://www.berlinwalk.com/widgets?utm_source=embed&amp;utm_medium=textlink&amp;utm_campaign=' + tool.slug;
-        // SEO-friendly embed: real <h3> + <p> + iframe + visible backlink. The
-        // surrounding semantic markup gives Google indexable content even
-        // though the iframe content itself is cross-origin. The <a> below the
-        // iframe is the dofollow backlink to berlinwalk.com.
+        // SEO-friendly embed:
+        //  - <h3> with crawlable deep link to /tools/<slug> for the post-page backlink
+        //  - <p> with the lead text so search engines see content even when the
+        //    iframe is treated as a separate document
+        //  - <iframe data-bw-frame> + embed-resize.js for auto-height on host pages
+        //  - <a> footer for the dofollow backlink to /widgets
         return '<!-- ' + safeTitle + ' by BerlinWalk -->\n'
-          + '<aside class="bw-embed" style="margin:1em 0; max-width:100%; font-family:Arial,Helvetica,sans-serif;">\n'
-          + '  <h3 style="font:800 18px/1.3 Arial,sans-serif; color:#1B5E20; margin:0 0 6px;">\n'
-          + '    <a href="' + escapeHtml(deepLink) + '" rel="noopener" style="color:#1B5E20; text-decoration:none;">' + safeTitle + '</a>\n'
+          + '<aside class="bw-embed" style="margin:1em 0; max-width:100%; font-family:Arial,Helvetica,sans-serif;' + (theme.aside ? ' ' + theme.aside : '') + '">\n'
+          + '  <h3 style="font:800 18px/1.3 Arial,sans-serif; color:' + theme.headingColor + '; margin:0 0 6px;">\n'
+          + '    <a href="' + escapeHtml(deepLink) + '" rel="noopener" style="color:' + theme.headingColor + '; text-decoration:none;">' + safeTitle + '</a>\n'
           + '  </h3>\n'
-          + '  <p style="font:14px/1.55 Arial,sans-serif; color:#212121; margin:0 0 10px;">' + safeLead + '</p>\n'
-          + '  <iframe src="' + src + '"\n'
+          + '  <p style="font:14px/1.55 Arial,sans-serif; color:' + theme.textColor + '; margin:0 0 10px;">' + safeLead + '</p>\n'
+          + '  <iframe data-bw-frame src="' + src + '"\n'
           + '    title="' + safeTitle + ' by BerlinWalk"\n'
-          + '    width="100%" height="' + height + '"\n'
+          + '    width="100%" height="480"\n'
           + '    frameborder="0" loading="lazy" scrolling="no"\n'
-          + '    style="border:0; width:100%; max-width:100%;"></iframe>\n'
+          + '    style="border:0; width:100%; max-width:100%; transition:height .2s ease;"></iframe>\n'
           + '  <p style="margin:6px 0 0; font:600 12px/1.4 Arial,sans-serif; text-align:center;">\n'
-          + '    <a href="' + utmHome + '" rel="noopener" style="color:#1B5E20; text-decoration:none;">\n'
-          + '      Free Berlin widget by <strong>BerlinWalk</strong> &rarr;\n'
+          + '    <a href="' + utmHome + '" rel="noopener" style="color:' + theme.linkColor + '; text-decoration:none;">\n'
+          + '      Free Berlin widget by <strong style="color:' + theme.footerStrong + ';">BerlinWalk</strong> &rarr;\n'
           + '    </a>\n'
           + '  </p>\n'
-          + '</aside>';
+          + '</aside>\n'
+          + '<script src="https://fenerszymanski.github.io/berlinwalk-widgets/embed-resize.js" async></' + 'script>';
       }
 
       function buildCard(tool) {
@@ -596,7 +695,7 @@
         var headLeft = document.createElement('div');
         headLeft.appendChild(el('h3', 'widget-title', tool.title));
         headLeft.appendChild(el('p', 'widget-lead', tool.lead));
-        var meta = el('div', 'widget-meta', 'Recommended height ' + tool.embedHeight + 'px');
+        var meta = el('div', 'widget-meta', 'Auto-height · ' + (tool.category || ''));
         headRow.appendChild(headLeft);
         headRow.appendChild(meta);
         head.appendChild(headRow);
@@ -612,9 +711,12 @@
         iframe.loading = 'lazy';
         iframe.setAttribute('frameborder', '0');
         iframe.setAttribute('scrolling', 'no');
+        iframe.setAttribute('data-bw-frame', '');
         iframe.style.width = '100%';
         iframe.style.border = '0';
-        iframe.height = tool.embedHeight;
+        iframe.style.transition = 'height .2s ease';
+        // Initial height before the widget posts its real size.
+        iframe.height = '420';
         preview.appendChild(iframe);
         card.appendChild(preview);
 
@@ -635,26 +737,44 @@
         var panel = el('div', 'embed-panel');
         panel.hidden = true;
 
-        var heightRow = el('div', 'embed-row');
-        var heightLabel = el('label', null, 'Height');
-        heightLabel.setAttribute('for', 'h-' + tool.slug);
-        var heightSelect = document.createElement('select');
-        heightSelect.id = 'h-' + tool.slug;
-        [480, 560, 640, 720, 820, 920].forEach(function (h) {
-          var opt = document.createElement('option');
-          opt.value = h;
-          opt.textContent = h + 'px';
-          if (h === tool.embedHeight) opt.selected = true;
-          heightSelect.appendChild(opt);
+        var infoRow = el('p', 'embed-info', 'Widget auto-resizes to fit its content on the host page. Pick a theme to match where you embed it.');
+        panel.appendChild(infoRow);
+
+        var themeRow = el('div', 'embed-row');
+        var themeLabel = el('label', null, 'Theme');
+        themeLabel.setAttribute('for', 'th-' + tool.slug);
+        var themePills = el('div', 'theme-pills');
+        themePills.id = 'th-' + tool.slug;
+        themePills.setAttribute('role', 'radiogroup');
+        themePills.setAttribute('aria-label', 'Embed theme');
+        var currentTheme = 'brand';
+        Object.keys(THEMES).forEach(function (key) {
+          var theme = THEMES[key];
+          var pill = el('button', 'theme-pill');
+          pill.type = 'button';
+          pill.dataset.theme = key;
+          pill.setAttribute('role', 'radio');
+          pill.setAttribute('aria-checked', String(key === currentTheme));
+          if (key === currentTheme) pill.classList.add('is-active');
+          var sw = el('span', 'theme-swatch');
+          sw.style.background = theme.asideBg !== 'transparent' ? theme.asideBg : theme.headingColor;
+          if (theme.asideBg !== 'transparent') {
+            sw.style.borderColor = theme.headingColor;
+          }
+          var lbl = el('span', 'theme-pill-label', theme.label);
+          pill.appendChild(sw);
+          pill.appendChild(lbl);
+          pill.title = theme.desc;
+          themePills.appendChild(pill);
         });
-        heightRow.appendChild(heightLabel);
-        heightRow.appendChild(heightSelect);
-        panel.appendChild(heightRow);
+        themeRow.appendChild(themeLabel);
+        themeRow.appendChild(themePills);
+        panel.appendChild(themeRow);
 
         var code = el('textarea', 'embed-code');
         code.readOnly = true;
         code.id = 'code-' + tool.slug;
-        code.value = buildEmbedSnippet(tool, tool.embedHeight);
+        code.value = buildEmbedSnippet(tool, currentTheme);
         panel.appendChild(code);
 
         var actionsRow = el('div', 'embed-actions');
@@ -679,9 +799,18 @@
           }
         });
 
-        heightSelect.addEventListener('change', function () {
-          var newH = parseInt(heightSelect.value, 10) || tool.embedHeight;
-          code.value = buildEmbedSnippet(tool, newH);
+        themePills.addEventListener('click', function (ev) {
+          var pill = ev.target.closest('.theme-pill');
+          if (!pill || !themePills.contains(pill)) return;
+          var key = pill.dataset.theme;
+          if (!key || key === currentTheme) return;
+          currentTheme = key;
+          themePills.querySelectorAll('.theme-pill').forEach(function (p) {
+            var active = p.dataset.theme === key;
+            p.classList.toggle('is-active', active);
+            p.setAttribute('aria-checked', String(active));
+          });
+          code.value = buildEmbedSnippet(tool, currentTheme);
           copyBtn.classList.remove('is-copied');
           copyBtn.textContent = 'Copy code';
           feedback.textContent = '';

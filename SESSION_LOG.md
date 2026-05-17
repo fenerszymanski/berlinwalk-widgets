@@ -6,6 +6,32 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-17 — Claude Code (Widgets program v1.2: auto-height + themes + sticky-fix)
+
+**Did:**
+- Added a tiny new `embed-resize.js` (~20 lines) at the repo root. It listens for `bw-resize` postMessage events from any `iframe[data-bw-frame]` on the host page and resizes the iframe to fit its content. One external `<script>` handles every BerlinWalk widget on the embedding page; nothing per-widget to do.
+- Reworked the embed snippet so it now ships with `<iframe data-bw-frame>` + the resize script automatically appended. Widgets auto-grow / shrink to their natural content height on third-party sites instead of being pinned to a fixed value picked from a dropdown.
+- Replaced the height selector in the embed panel with a Theme picker (3 wrapper-only themes built from BerlinWalk brand colors: Brand / Minimal / Dark). Each pill has a colored swatch. Theme switching live-rebuilds the snippet.
+- Removed `js/brand.js` from the gallery itself (`widgets-hub/index.html`). Without it, the gallery does not post `bw-resize` to its Wix parent — the iframe Wix assigns stays at whatever fixed height Yusuf sets, which is required for the in-page sticky `.category-nav` to actually feel sticky to users.
+- Removed the `max-height: 420px` cap on `.preview-frame` so live previews show the full widget at its natural auto-resized height inside each gallery card.
+- Updated AGENTS.md with: new `embed-resize.js` row in the file map, full snippet structure documentation, and a "Hosting the /widgets gallery on Wix" note explaining the `100vh` iframe height requirement for sticky to work.
+
+**Changed:**
+- `embed-resize.js` — new file. PostMessage listener for cross-origin iframe auto-resize.
+- `widgets-hub/index.html` — removed brand.js link; dropped fixed `max-height` on `.preview-frame` (gallery preview); preview iframes now carry `data-bw-frame` for auto-resize; removed height-selector UI and replaced with theme pills (Brand / Minimal / Dark); `buildEmbedSnippet` now accepts a theme key, outputs themed wrapper colors, and appends the resize `<script>` automatically; widget-meta label changed from "Recommended height Xpx" to "Auto-height · &lt;category&gt;".
+- `AGENTS.md` — file-map row for `embed-resize.js`; full third-party embed snippet structure block; sticky-nav hosting note.
+
+**Opened:**
+- Push and verify on the live `/widgets` page: scroll through the gallery, confirm sticky nav stays visible, click theme pills and verify the embed code updates, copy a snippet and paste it into a test page to confirm auto-resize works.
+- When embedding `widgets-hub` on Wix, set the iframe to `height: 100vh` with internal scrolling so sticky nav has a constrained viewport to be sticky inside.
+- Future: real per-widget theming via a `?theme=light|dark|brand` URL parameter that each widget reads to apply theme classes. Currently only the wrapper is themed.
+
+**Closed:** Auto-height embeds; theme picker; sticky-nav constraint.
+
+**Next session should:** Push + Wix `/widgets` page setup + visual QA. Then revisit whether to deepen theming into widget interiors (multi-week per-widget work) or leave wrapper-only themes as the v1 answer.
+
+---
+
 ## 2026-05-17 — Claude Code (Embeddable widgets program v1.1: backlink + category nav)
 
 **Did:**
