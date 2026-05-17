@@ -88,3 +88,47 @@
   setTimeout(reportThrottled, 1500);
   setTimeout(reportThrottled, 3000);
 })();
+
+/* Attribution badge — injects a "by berlinwalk.com" footer link into every
+ * widget so embeds on third-party sites carry our branding + backlink. Skipped
+ * when ?attribution=none is in the URL (used by gallery preview iframes that
+ * don't need a second badge). Runs in both standalone and iframe contexts.
+ */
+(function () {
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('attribution') === 'none') return;
+  } catch (e) { /* old browser, proceed */ }
+
+  function widgetSlug() {
+    var path = (window.location.pathname || '').replace(/\/(index\.html?)?$/, '');
+    var parts = path.split('/').filter(Boolean);
+    return parts[parts.length - 1] || 'unknown';
+  }
+
+  function inject() {
+    if (document.querySelector('.bw-attr-badge')) return; // idempotent
+    var slug = widgetSlug();
+    var url = 'https://www.berlinwalk.com/'
+      + '?utm_source=embed&utm_medium=widget'
+      + '&utm_campaign=' + encodeURIComponent(slug)
+      + '&utm_content=footer-badge';
+    var a = document.createElement('a');
+    a.className = 'bw-attr-badge';
+    a.href = url;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.setAttribute('aria-label', 'Made by BerlinWalk — open berlinwalk.com');
+    a.innerHTML =
+      '<img class="bw-attr-logo" alt="" src="https://static.wixstatic.com/media/5a08a3_f2d364781904464b9b07840378001c0d~mv2.png" loading="lazy" decoding="async">' +
+      '<span class="bw-attr-text">by <strong>berlinwalk.com</strong></span>' +
+      '<span class="bw-attr-arrow" aria-hidden="true">&rarr;</span>';
+    document.body.appendChild(a);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inject);
+  } else {
+    inject();
+  }
+})();

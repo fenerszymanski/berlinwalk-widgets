@@ -31,132 +31,170 @@
       "title": "Berlin WelcomeCard Calculator",
       "lead": "Is the WelcomeCard worth it for your trip? Find out in 30 seconds.",
       "category": "Money",
-      "image": "https://static.wixstatic.com/media/5a08a3_c9f71bd9540b4b1b8e5bfdae2fb525c4~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_c9f71bd9540b4b1b8e5bfdae2fb525c4~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/welcomecard-calculator/",
+      "embedHeight": 720
     },
     {
       "slug": "transport-ticket-calculator",
       "title": "Berlin Transport Ticket Calculator",
       "lead": "Find the cheapest BVG ticket for your Berlin trip in under 30 seconds.",
       "category": "Money",
-      "image": "https://static.wixstatic.com/media/5a08a3_4cd2d303ff3d4d85b3f87618df5398e8~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_4cd2d303ff3d4d85b3f87618df5398e8~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/transport-calculator/",
+      "embedHeight": 780
     },
     {
       "slug": "berlin-daily-budget",
       "title": "Berlin Daily Budget Calculator",
       "lead": "How much does a day in Berlin actually cost in 2026? Find your number in 30 seconds.",
       "category": "Money",
-      "image": "https://static.wixstatic.com/media/5a08a3_f15d61d688dc4fc49e834ace876bc0f4~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_f15d61d688dc4fc49e834ace876bc0f4~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-budget-table/",
+      "embedHeight": 700
     },
     {
       "slug": "best-month-to-visit-berlin",
       "title": "Best Month to Visit Berlin",
       "lead": "Find the right month for your Berlin trip in 30 seconds.",
       "category": "Weather",
-      "image": "https://static.wixstatic.com/media/5a08a3_4f3077dd9cd94bfaada63262f6260d9e~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_4f3077dd9cd94bfaada63262f6260d9e~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-bestmonth/",
+      "embedHeight": 640
     },
     {
       "slug": "berlin-weather-by-month",
       "title": "Berlin Weather by Month",
       "lead": "See average temperatures, rainfall, and what to expect for any month in Berlin.",
       "category": "Weather",
-      "image": "https://static.wixstatic.com/media/5a08a3_5d9111f9567e4e408069d90fbb9cb9c6~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_5d9111f9567e4e408069d90fbb9cb9c6~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/monthly-weather/",
+      "embedHeight": 680
     },
     {
       "slug": "what-to-pack-berlin",
       "title": "What to Pack for Berlin",
       "lead": "Get a season-specific Berlin packing list with no fluff.",
       "category": "Weather",
-      "image": "https://static.wixstatic.com/media/5a08a3_4dcbc1408ab048fe83b2acd54825c29a~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_4dcbc1408ab048fe83b2acd54825c29a~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-packing/",
+      "embedHeight": 720
     },
     {
       "slug": "berlin-daylight-hours",
       "title": "Berlin Daylight Hours",
       "lead": "Berlin has 9 more hours of daylight in June than in December. Plan around it.",
       "category": "Weather",
-      "image": "https://static.wixstatic.com/media/5a08a3_fee29fc41ada420894c8c952fac88db5~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_fee29fc41ada420894c8c952fac88db5~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/daylight-visualizer/",
+      "embedHeight": 640
     },
     {
       "slug": "compare-berlin-months",
       "title": "Compare Berlin Months",
       "lead": "Stuck between two months? Compare them on weather, crowds, prices, and events.",
       "category": "Weather",
-      "image": "https://static.wixstatic.com/media/5a08a3_093a8e352655427f85bab21199e25d91~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_093a8e352655427f85bab21199e25d91~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/month-comparison/",
+      "embedHeight": 720
     },
     {
       "slug": "berlin-drinking-water",
       "title": "Berlin Drinking Water Map",
       "lead": "Find the nearest free public drinking fountain in Berlin in 30 seconds.",
       "category": "Maps",
-      "image": "https://static.wixstatic.com/media/5a08a3_94cfbe3140c04622b3ba877b47b26d3f~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_94cfbe3140c04622b3ba877b47b26d3f~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/drinking-water-map/",
+      "embedHeight": 640
     },
     {
       "slug": "berlin-public-toilets",
       "title": "Berlin Public Toilet Finder",
       "lead": "Find the nearest official public toilet in Berlin, including free and accessible options.",
       "category": "Maps",
-      "image": "https://static.wixstatic.com/media/5a08a3_ede23d042cea4668987453084fca2d5a~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_ede23d042cea4668987453084fca2d5a~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/public-toilets-map/",
+      "embedHeight": 640
     },
     {
       "slug": "berlin-luggage-storage",
       "title": "Berlin Luggage Storage Map",
       "lead": "Find the nearest place to drop your suitcase in Berlin: stations, the Hauptbahnhof Gepäckcenter, the airport, and app pickup zones.",
-      "category": "Maps"
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/luggage-storage-map/",
+      "embedHeight": 640
     },
     {
       "slug": "berlin-sunday-shopping",
       "title": "Berlin Sunday Shopping Map",
       "lead": "Need groceries on a Sunday in Berlin? Find what's open in 30 seconds.",
       "category": "Maps",
-      "image": "https://static.wixstatic.com/media/5a08a3_4d34b6aa57b349c59db4664ce2cbd737~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_4d34b6aa57b349c59db4664ce2cbd737~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/sunday-map/",
+      "embedHeight": 640
     },
     {
       "slug": "berlin-free-things-to-do",
       "title": "Free Things to Do in Berlin",
       "lead": "Berlin has more genuinely free attractions than any other major European capital.",
       "category": "Maps",
-      "image": "https://static.wixstatic.com/media/5a08a3_775926689892426f9f37584985c14656~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_775926689892426f9f37584985c14656~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/free-things-map/",
+      "embedHeight": 700
     },
     {
       "slug": "berlin-safety",
       "title": "Berlin Safety Map",
       "lead": "How safe is Berlin really? Find out by neighborhood and traveler type.",
       "category": "Maps",
-      "image": "https://static.wixstatic.com/media/5a08a3_943198aa996045d297777557e052bc20~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_943198aa996045d297777557e052bc20~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/safety-map/",
+      "embedHeight": 720
     },
     {
       "slug": "berlin-lakes",
       "title": "Berlin Lakes Map",
       "lead": "Find Berlin's best swimming lakes, water quality, and what locals actually use.",
       "category": "Discovery",
-      "image": "https://static.wixstatic.com/media/5a08a3_8f609087735a46cbbdb59c75a8ad9dca~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_8f609087735a46cbbdb59c75a8ad9dca~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-lakes-map/",
+      "embedHeight": 640
     },
     {
       "slug": "berlin-pools",
       "title": "Berlin Swimming Pools Map",
       "lead": "Find the right Berlin pool — indoor, outdoor, family, lap-swimming.",
       "category": "Discovery",
-      "image": "https://static.wixstatic.com/media/5a08a3_660274d9cff941f09efefd3eb6ba304d~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_660274d9cff941f09efefd3eb6ba304d~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pools-map/",
+      "embedHeight": 640
     },
     {
       "slug": "east-or-west-1989",
       "title": "East or West Berlin in 1989?",
       "lead": "Pick any Berlin landmark and find out which side of the Wall it was on.",
       "category": "Discovery",
-      "image": "https://static.wixstatic.com/media/5a08a3_b8ed77ddadb541b8961b7bff0b5f83cb~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_b8ed77ddadb541b8961b7bff0b5f83cb~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/east-west-1989/",
+      "embedHeight": 700
     },
     {
       "slug": "berlin-3-day-itinerary",
       "title": "Berlin in 3 Days: Perfect Itinerary",
       "lead": "A real 3-day Berlin plan, organized by neighborhood, designed by a local guide.",
       "category": "Discovery",
-      "image": "https://static.wixstatic.com/media/5a08a3_91e8fa260f2148978fad7a7c00cc1727~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_91e8fa260f2148978fad7a7c00cc1727~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/itinerary-card/",
+      "embedHeight": 900
     },
     {
       "slug": "alex-mistakes",
       "title": "Alexanderplatz Tourist Mistakes",
       "lead": "Don't waste your time at Alexanderplatz. Here's what locals actually do.",
       "category": "Discovery",
-      "image": "https://static.wixstatic.com/media/5a08a3_719d8653464944c8a98eccf34f260c4b~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_719d8653464944c8a98eccf34f260c4b~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/alex-mistakes/",
+      "embedHeight": 700
     }
   ]
 }

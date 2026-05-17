@@ -6,6 +6,37 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-17 — Claude Code (Embeddable widgets program: attribution badge + /widgets gallery + UTM)
+
+**Did:**
+- Built a shared "by berlinwalk.com" attribution badge that brand.js auto-injects into every widget body. Green strip, mini logo + text + arrow, links to `berlinwalk.com` with a structured UTM (`utm_source=embed&utm_medium=widget&utm_campaign=<widget-slug>&utm_content=footer-badge`). Suppressible with `?attribution=none` for internal preview embeds.
+- Extended `tools-hub/data.json` so every one of the 19 tool entries now carries `widgetUrl` (full GitHub Pages URL) and `embedHeight` (recommended iframe height). This makes the file the single source of truth for both the `/tools` directory and the new `/widgets` embed gallery; new widgets show up everywhere as soon as a tools-hub entry lands.
+- Built `widgets-hub/` (gallery page modeled on vientapps.com/tools/widgets style, adapted to BerlinWalk's tools-hub design language): grouped by category, each card has a lazy-loaded live iframe preview (`loading="lazy"`, capped at 420 / 360 px overflow scroll), a height selector, an embed code textarea with one-click copy, and an "Open standalone" link. Reads directly from `tools-hub/data.json`, so the gallery auto-grows with every new tool.
+- Updated `AGENTS.md` with: new `tools-hub` / `widgets-hub` / `tools-home` / `js/brand.js` / `css/brand.css` rows in the file map, the new `berlinwalk.com/tools`, `/tools/<slug>`, and `/widgets` live URLs, a full "When adding a new BerlinTools widget" checklist, and the attribution badge + UTM convention.
+
+**Changed:**
+- `js/brand.js` — added a second IIFE that injects `.bw-attr-badge` into every widget body. Idempotent, runs in standalone and iframe contexts, skips when `?attribution=none`.
+- `css/brand.css` — added `.bw-attr-badge` plus `.bw-attr-logo / .bw-attr-text / .bw-attr-arrow` styles and a small-screen variant.
+- `tools-hub/data.json` — added `widgetUrl` and `embedHeight` to all 19 tool entries. Mapping derived from widget folder titles in the repo (`avgtemp-bestmonth` → "Best Month to Visit Berlin", `transport-calculator` → "Berlin Transport Ticket Calculator", etc.).
+- `widgets-hub/index.html` — new self-contained gallery page (HTML + inline CSS + inline JS), fetches `../tools-hub/data.json`, builds one card per tool, exposes embed code with a height picker and copy button.
+- `AGENTS.md` — repo map row additions, new live URLs, new "When adding a new BerlinTools widget" §7 checklist, attribution badge + UTM convention.
+
+**Wix CMS quirk learned this session:**
+- `POST /wix-data/v2/items/query` with `dataCollectionId: BerlinTools` returns 0 items even when items exist (confirmed by working GET on a known item ID). Tried `consistentRead`, `dataOptions.appOptions.environment` (PUBLISHED_AND_VISITORS / LIVE / BACKEND / SANDBOX), and the `wix-data-environment` header — all returned 0. GET by ID still works fine. Worked around by deriving the slug → widgetUrl mapping from local widget folder titles instead of querying the CMS.
+
+**Opened:**
+- Push the local repo so GitHub Pages serves the new `widgets-hub/`, the updated `tools-hub/data.json`, and the new `brand.js` + `brand.css` (the attribution badge will appear on all 19 widgets the moment the push lands).
+- Create the live Wix `/widgets` page in Wix Studio with a Custom HTML embed pointing at `https://fenerszymanski.github.io/berlinwalk-widgets/widgets-hub/`.
+- Confirm SEO for `/widgets`: title "Free Berlin Widgets to Embed on Your Site | BerlinWalk", description from the gallery `<meta>` tag, og + twitter cards (mirror the blog draft Advanced SEO pattern).
+- Spot-check three or four widgets (welcomecard-calculator, free-things-map, luggage-storage-map, daylight-visualizer) after the push — the badge should be visible at the bottom of each.
+- Tune any `embedHeight` values that look wrong in the live gallery — heights are educated guesses (640 default for maps, 720 for calculators, 900 for big tables).
+
+**Closed:** Embeddable widgets program v1 — branding badge, UTM convention, gallery page, AGENTS.md documentation.
+
+**Next session should:** Push, then build the Wix `/widgets` page. After that, consider light outreach (DM a few Berlin hostels / expat blogs) and revisit if Yusuf wants the gallery split into "Available now" vs "Coming soon" sections like vientapps does.
+
+---
+
 ## 2026-05-17 — Claude Code (Luggage Storage tool added to BerlinTools hub)
 
 **Did:**

@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Free Berlin Widgets to Embed on Your Site | BerlinWalk</title>
+  <meta name="description" content="Free embeddable Berlin widgets for travel sites, hotels, and bloggers: weather, transport, maps, calculators. Copy a one-line iframe — no signup, just attribution.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    #bw-widgets-hub {
+      --serif: Merriweather, Georgia, serif;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+
+    #bw-widgets-hub * { box-sizing: border-box; }
+
+    #bw-widgets-hub .hub-hero {
+      background: var(--brand-green);
+      color: var(--bw-white);
+      padding: 56px 28px 46px;
+      position: relative;
+      text-align: center;
+    }
+
+    #bw-widgets-hub .hub-hero::after,
+    #bw-widgets-hub .hub-footer::before,
+    #bw-widgets-hub .hub-footer::after {
+      background: linear-gradient(90deg, var(--brand-yellow), var(--brand-lime));
+      content: "";
+      display: block;
+      height: 4px;
+      left: 0;
+      position: absolute;
+      width: 100%;
+    }
+
+    #bw-widgets-hub .hub-hero::after { bottom: 0; }
+
+    #bw-widgets-hub .hub-hero-inner,
+    #bw-widgets-hub .hub-main {
+      margin: 0 auto;
+      max-width: 980px;
+    }
+
+    #bw-widgets-hub h1,
+    #bw-widgets-hub h2,
+    #bw-widgets-hub h3,
+    #bw-widgets-hub p { margin-top: 0; }
+
+    #bw-widgets-hub h1 {
+      color: var(--bw-white);
+      font-size: 36px;
+      font-weight: 800;
+      line-height: 1.14;
+      margin-bottom: 14px;
+    }
+
+    #bw-widgets-hub .highlight { color: var(--brand-yellow); }
+
+    #bw-widgets-hub .hero-lead {
+      color: rgba(255, 255, 255, 0.92);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.6;
+      margin: 0 auto 18px;
+      max-width: 680px;
+    }
+
+    #bw-widgets-hub .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    #bw-widgets-hub .hero-tag {
+      background: rgba(255, 230, 0, 0.16);
+      border: 1px solid rgba(255, 230, 0, 0.45);
+      border-radius: 22px;
+      color: var(--brand-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      padding: 7px 12px;
+      text-transform: uppercase;
+    }
+
+    #bw-widgets-hub .hub-main {
+      padding: 36px 24px 48px;
+    }
+
+    #bw-widgets-hub .terms-card {
+      background: var(--bw-white);
+      border: 1px solid var(--light-green);
+      border-left: 4px solid var(--brand-green);
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 14.5px;
+      line-height: 1.6;
+      margin: 0 0 36px;
+      padding: 18px 22px;
+    }
+
+    #bw-widgets-hub .terms-card strong { color: var(--brand-green); }
+
+    #bw-widgets-hub .terms-card ul {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+    }
+
+    #bw-widgets-hub .terms-card li {
+      padding: 4px 0 4px 22px;
+      position: relative;
+    }
+
+    #bw-widgets-hub .terms-card li::before {
+      color: var(--brand-green);
+      content: "\2713";
+      font-weight: 900;
+      left: 0;
+      position: absolute;
+    }
+
+    #bw-widgets-hub .loading {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 16px;
+      padding: 12px 0;
+      text-align: center;
+    }
+
+    #bw-widgets-hub .category-section { margin-bottom: 44px; }
+    #bw-widgets-hub .category-section:last-child { margin-bottom: 0; }
+
+    #bw-widgets-hub .category-heading {
+      align-items: center;
+      color: var(--brand-green);
+      display: flex;
+      font-size: 26px;
+      font-weight: 800;
+      gap: 10px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    #bw-widgets-hub .category-icon {
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    #bw-widgets-hub .category-blurb {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 22px;
+      max-width: 640px;
+    }
+
+    #bw-widgets-hub .widget-card {
+      background: var(--bw-white);
+      border: 1px solid var(--light-green);
+      border-radius: 14px;
+      margin: 0 0 22px;
+      overflow: hidden;
+      transition: border-color 0.16s ease;
+    }
+
+    #bw-widgets-hub .widget-card:hover { border-color: var(--brand-green); }
+
+    #bw-widgets-hub .widget-head {
+      padding: 20px 22px 16px;
+    }
+
+    #bw-widgets-hub .widget-head-row {
+      align-items: baseline;
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    #bw-widgets-hub .widget-title {
+      color: var(--brand-green);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin: 0 0 6px;
+    }
+
+    #bw-widgets-hub .widget-meta {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      margin-top: 2px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #bw-widgets-hub .widget-lead {
+      color: var(--text);
+      font-family: var(--serif);
+      font-size: 14.5px;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #bw-widgets-hub .preview-frame {
+      background: var(--cream);
+      border-top: 1px solid var(--light-green);
+      border-bottom: 1px solid var(--light-green);
+      max-height: 420px;
+      overflow: auto;
+      padding: 0;
+      position: relative;
+    }
+
+    #bw-widgets-hub .preview-frame iframe {
+      background: transparent;
+      border: 0;
+      display: block;
+      width: 100%;
+    }
+
+    #bw-widgets-hub .preview-hint {
+      background: rgba(27, 94, 32, 0.04);
+      border-bottom: 1px solid var(--light-green);
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      padding: 8px 22px;
+      text-transform: uppercase;
+    }
+
+    #bw-widgets-hub .widget-actions {
+      align-items: center;
+      background: var(--bw-white);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 14px 22px;
+    }
+
+    #bw-widgets-hub .embed-toggle {
+      align-items: center;
+      background: var(--brand-green);
+      border: 0;
+      border-radius: 8px;
+      color: var(--brand-yellow);
+      cursor: pointer;
+      display: inline-flex;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      gap: 8px;
+      letter-spacing: 0.8px;
+      padding: 11px 16px;
+      text-transform: uppercase;
+      transition: background 0.16s ease;
+    }
+
+    #bw-widgets-hub .embed-toggle:hover,
+    #bw-widgets-hub .embed-toggle:focus-visible {
+      background: var(--bw-green-dark);
+      outline: none;
+    }
+
+    #bw-widgets-hub .open-link {
+      color: var(--brand-green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    #bw-widgets-hub .open-link:hover { text-decoration: underline; }
+
+    #bw-widgets-hub .embed-panel {
+      border-top: 1px solid var(--light-green);
+      background: var(--cream);
+      padding: 16px 22px 18px;
+    }
+
+    #bw-widgets-hub .embed-panel[hidden] { display: none; }
+
+    #bw-widgets-hub .embed-row {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    #bw-widgets-hub .embed-row label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    #bw-widgets-hub .embed-row select,
+    #bw-widgets-hub .embed-row input {
+      background: var(--bw-white);
+      border: 1px solid var(--light-green);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: inherit;
+      font-size: 13px;
+      padding: 7px 10px;
+    }
+
+    #bw-widgets-hub .embed-row select:focus,
+    #bw-widgets-hub .embed-row input:focus {
+      border-color: var(--brand-green);
+      outline: none;
+    }
+
+    #bw-widgets-hub .embed-code {
+      background: var(--bw-white);
+      border: 1px solid var(--light-green);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
+      font-size: 12.5px;
+      line-height: 1.55;
+      padding: 12px 14px;
+      resize: vertical;
+      width: 100%;
+      min-height: 88px;
+    }
+
+    #bw-widgets-hub .embed-actions {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    #bw-widgets-hub .copy-btn {
+      background: var(--brand-yellow);
+      border: 0;
+      border-radius: 8px;
+      color: var(--brand-green);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+      padding: 11px 18px;
+      text-transform: uppercase;
+      transition: background 0.16s ease, transform 0.12s ease;
+    }
+
+    #bw-widgets-hub .copy-btn:hover { background: #fff04a; }
+    #bw-widgets-hub .copy-btn.is-copied {
+      background: var(--brand-lime);
+      color: var(--bw-white);
+    }
+
+    #bw-widgets-hub .copy-feedback {
+      color: var(--muted);
+      font-size: 12px;
+      min-height: 16px;
+    }
+
+    #bw-widgets-hub .copy-feedback.ok { color: var(--brand-green); font-weight: 700; }
+
+    #bw-widgets-hub .hub-footer {
+      background: var(--brand-green);
+      color: var(--bw-white);
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 38px 24px 42px;
+      position: relative;
+      text-align: center;
+    }
+
+    #bw-widgets-hub .hub-footer::before { top: 0; }
+    #bw-widgets-hub .hub-footer::after { bottom: 0; }
+
+    #bw-widgets-hub .hub-footer h2 {
+      color: var(--bw-white);
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    #bw-widgets-hub .hub-footer p {
+      color: rgba(255, 255, 255, 0.88);
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.6;
+      margin: 0 auto 20px;
+      max-width: 640px;
+    }
+
+    #bw-widgets-hub .btn-primary {
+      background: var(--brand-yellow);
+      border-radius: 10px;
+      color: var(--brand-green);
+      display: inline-block;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.6px;
+      padding: 14px 24px;
+      text-decoration: none;
+    }
+
+    #bw-widgets-hub .btn-primary:hover { background: #fff04a; }
+
+    @media (max-width: 700px) {
+      #bw-widgets-hub h1 { font-size: 28px; }
+      #bw-widgets-hub .hero-lead { font-size: 15px; }
+      #bw-widgets-hub .hub-main { padding: 28px 16px 36px; }
+      #bw-widgets-hub .terms-card { padding: 16px 18px; font-size: 14px; }
+      #bw-widgets-hub .category-heading { font-size: 22px; }
+      #bw-widgets-hub .category-icon { font-size: 26px; }
+      #bw-widgets-hub .widget-head { padding: 16px 18px 12px; }
+      #bw-widgets-hub .widget-actions { padding: 12px 18px; }
+      #bw-widgets-hub .embed-panel { padding: 14px 18px; }
+      #bw-widgets-hub .preview-frame { max-height: 360px; }
+      #bw-widgets-hub .preview-hint { padding: 8px 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="bw-widgets-hub">
+    <section class="hub-hero" aria-labelledby="widgets-hub-title">
+      <div class="hub-hero-inner">
+        <h1 id="widgets-hub-title">Free Berlin widgets to <span class="highlight">embed anywhere</span></h1>
+        <p class="hero-lead">19 interactive Berlin tools built by a local guide. Copy a one-line iframe and they work on WordPress, Squarespace, Wix, hotel sites, travel blogs — anywhere.</p>
+        <div class="hero-tags">
+          <span class="hero-tag">No signup</span>
+          <span class="hero-tag">No tracking</span>
+          <span class="hero-tag">Mobile friendly</span>
+          <span class="hero-tag">Lazy loaded</span>
+        </div>
+      </div>
+    </section>
+
+    <main class="hub-main">
+      <div class="terms-card">
+        <strong>How to embed:</strong> open a widget, click "Show embed code", copy the iframe snippet, paste into your site's HTML or a custom HTML block.
+        <ul>
+          <li>Free for any use, including commercial sites and hotels.</li>
+          <li>The "by berlinwalk.com" badge at the bottom of each widget must stay visible.</li>
+          <li>We update the widgets automatically: data, design, mobile fixes. Your embed always loads the latest version.</li>
+          <li>Widgets are lazy-loaded and lightweight. No impact on your page speed score.</li>
+        </ul>
+      </div>
+
+      <div id="widgets-root" class="loading" aria-live="polite">Loading widgets...</div>
+    </main>
+
+    <section class="hub-footer">
+      <h2>Walk Berlin with a real local</h2>
+      <p>If you are visiting Berlin, the widgets are nice. The walking tour is the real thing. Tip-based, 2 hours, from Alexanderplatz, every morning.</p>
+      <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" class="btn-primary" target="_top">Reserve your spot →</a>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('widgets-root');
+      var DATA_URL = '../tools-hub/data.json';
+
+      function el(tag, className, text) {
+        var e = document.createElement(tag);
+        if (className) e.className = className;
+        if (text !== undefined && text !== null) e.textContent = text;
+        return e;
+      }
+
+      function buildEmbedSnippet(tool, height) {
+        var src = tool.widgetUrl;
+        var safeTitle = (tool.title || tool.slug).replace(/"/g, '&quot;');
+        return '<iframe src="' + src + '"\n'
+          + '  title="' + safeTitle + ' by BerlinWalk"\n'
+          + '  width="100%" height="' + height + '"\n'
+          + '  frameborder="0" loading="lazy" scrolling="no"\n'
+          + '  style="border:0; width:100%; max-width:100%;"></iframe>';
+      }
+
+      function buildCard(tool) {
+        var card = el('div', 'widget-card');
+        card.id = 'w-' + tool.slug;
+
+        var head = el('div', 'widget-head');
+        var headRow = el('div', 'widget-head-row');
+        var headLeft = document.createElement('div');
+        headLeft.appendChild(el('h3', 'widget-title', tool.title));
+        headLeft.appendChild(el('p', 'widget-lead', tool.lead));
+        var meta = el('div', 'widget-meta', 'Recommended height ' + tool.embedHeight + 'px');
+        headRow.appendChild(headLeft);
+        headRow.appendChild(meta);
+        head.appendChild(headRow);
+        card.appendChild(head);
+
+        var previewHint = el('div', 'preview-hint', 'Live preview');
+        card.appendChild(previewHint);
+
+        var preview = el('div', 'preview-frame');
+        var iframe = document.createElement('iframe');
+        iframe.src = tool.widgetUrl + '?attribution=none';
+        iframe.title = tool.title + ' live preview';
+        iframe.loading = 'lazy';
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('scrolling', 'no');
+        iframe.style.width = '100%';
+        iframe.style.border = '0';
+        iframe.height = tool.embedHeight;
+        preview.appendChild(iframe);
+        card.appendChild(preview);
+
+        var actions = el('div', 'widget-actions');
+        var toggle = el('button', 'embed-toggle');
+        toggle.type = 'button';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.textContent = 'Show embed code';
+        actions.appendChild(toggle);
+
+        var openLink = el('a', 'open-link', 'Open standalone →');
+        openLink.href = tool.widgetUrl;
+        openLink.target = '_blank';
+        openLink.rel = 'noopener';
+        actions.appendChild(openLink);
+        card.appendChild(actions);
+
+        var panel = el('div', 'embed-panel');
+        panel.hidden = true;
+
+        var heightRow = el('div', 'embed-row');
+        var heightLabel = el('label', null, 'Height');
+        heightLabel.setAttribute('for', 'h-' + tool.slug);
+        var heightSelect = document.createElement('select');
+        heightSelect.id = 'h-' + tool.slug;
+        [480, 560, 640, 720, 820, 920].forEach(function (h) {
+          var opt = document.createElement('option');
+          opt.value = h;
+          opt.textContent = h + 'px';
+          if (h === tool.embedHeight) opt.selected = true;
+          heightSelect.appendChild(opt);
+        });
+        heightRow.appendChild(heightLabel);
+        heightRow.appendChild(heightSelect);
+        panel.appendChild(heightRow);
+
+        var code = el('textarea', 'embed-code');
+        code.readOnly = true;
+        code.id = 'code-' + tool.slug;
+        code.value = buildEmbedSnippet(tool, tool.embedHeight);
+        panel.appendChild(code);
+
+        var actionsRow = el('div', 'embed-actions');
+        var copyBtn = el('button', 'copy-btn');
+        copyBtn.type = 'button';
+        copyBtn.textContent = 'Copy code';
+        var feedback = el('span', 'copy-feedback', '');
+        actionsRow.appendChild(copyBtn);
+        actionsRow.appendChild(feedback);
+        panel.appendChild(actionsRow);
+
+        card.appendChild(panel);
+
+        // Interactions
+        toggle.addEventListener('click', function () {
+          var open = !panel.hidden;
+          panel.hidden = open;
+          toggle.setAttribute('aria-expanded', String(!open));
+          toggle.textContent = open ? 'Show embed code' : 'Hide embed code';
+          if (!open) {
+            setTimeout(function () { code.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); }, 50);
+          }
+        });
+
+        heightSelect.addEventListener('change', function () {
+          var newH = parseInt(heightSelect.value, 10) || tool.embedHeight;
+          code.value = buildEmbedSnippet(tool, newH);
+          copyBtn.classList.remove('is-copied');
+          copyBtn.textContent = 'Copy code';
+          feedback.textContent = '';
+          feedback.classList.remove('ok');
+        });
+
+        copyBtn.addEventListener('click', function () {
+          var done = function () {
+            copyBtn.classList.add('is-copied');
+            copyBtn.textContent = 'Copied ✓';
+            feedback.textContent = 'Iframe copied to clipboard';
+            feedback.classList.add('ok');
+            setTimeout(function () {
+              copyBtn.classList.remove('is-copied');
+              copyBtn.textContent = 'Copy code';
+              feedback.textContent = '';
+              feedback.classList.remove('ok');
+            }, 2400);
+          };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(code.value).then(done, function () {
+              code.select();
+              try { document.execCommand('copy'); done(); } catch (e) {
+                feedback.textContent = 'Press Cmd/Ctrl + C to copy.';
+              }
+            });
+          } else {
+            code.select();
+            try { document.execCommand('copy'); done(); } catch (e) {
+              feedback.textContent = 'Press Cmd/Ctrl + C to copy.';
+            }
+          }
+        });
+
+        return card;
+      }
+
+      function render(data) {
+        var frag = document.createDocumentFragment();
+        data.categories.forEach(function (category) {
+          var section = el('section', 'category-section');
+          section.setAttribute('aria-labelledby', 'wcat-' + category.key.toLowerCase());
+          var h2 = el('h2', 'category-heading');
+          h2.id = 'wcat-' + category.key.toLowerCase();
+          var icon = el('span', 'category-icon', category.icon);
+          icon.setAttribute('aria-hidden', 'true');
+          h2.appendChild(icon);
+          h2.appendChild(document.createTextNode(category.label));
+          section.appendChild(h2);
+          section.appendChild(el('p', 'category-blurb', category.blurb));
+
+          var tools = data.tools.filter(function (t) {
+            return t.category === category.key && t.widgetUrl;
+          });
+          tools.forEach(function (t) {
+            section.appendChild(buildCard(t));
+          });
+          frag.appendChild(section);
+        });
+        root.className = '';
+        root.replaceChildren(frag);
+      }
+
+      fetch(DATA_URL)
+        .then(function (r) {
+          if (!r.ok) throw new Error('Could not load widgets');
+          return r.json();
+        })
+        .then(render)
+        .catch(function () {
+          root.textContent = 'Widgets could not be loaded. Please refresh.';
+        });
+    })();
+  </script>
+</body>
+</html>

@@ -31,3 +31,73 @@ html, body {
   font-family: Montserrat, Arial, sans-serif;
   color: var(--bw-text);
 }
+
+/* Attribution badge injected by brand.js into every widget */
+.bw-attr-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 14px 10px;
+  background: var(--bw-green, #1B5E20);
+  color: var(--bw-yellow, #FFE600);
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin: 14px 0 0;
+  border-radius: 0;
+  line-height: 1;
+  transition: background 0.15s ease;
+}
+
+.bw-attr-badge:hover,
+.bw-attr-badge:focus {
+  background: var(--bw-green-dark, #164a1a);
+  color: var(--bw-yellow, #FFE600);
+  outline: none;
+}
+
+.bw-attr-badge .bw-attr-logo {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #FAFAF5;
+  display: block;
+  flex: 0 0 18px;
+}
+
+.bw-attr-badge .bw-attr-text {
+  display: inline;
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: 1.1px;
+}
+
+.bw-attr-badge .bw-attr-text strong {
+  color: var(--bw-yellow, #FFE600);
+  font-weight: 800;
+}
+
+.bw-attr-badge .bw-attr-arrow {
+  font-weight: 900;
+  font-size: 12px;
+  margin-left: 2px;
+}
+
+@media (max-width: 460px) {
+  .bw-attr-badge {
+    font-size: 10px;
+    letter-spacing: 1.1px;
+    padding: 8px 12px 9px;
+    gap: 7px;
+  }
+  .bw-attr-badge .bw-attr-logo {
+    width: 16px;
+    height: 16px;
+    flex: 0 0 16px;
+  }
+}

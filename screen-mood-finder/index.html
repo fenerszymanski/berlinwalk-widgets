@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Screen Mood Finder | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<section id="bw-screen-mood" aria-labelledby="bw-screen-title">
+  <style>
+    #bw-screen-mood {
+      --green: #1B5E20;
+      --green-dark: #123F16;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --text: #212121;
+      --muted: #C5E1A5;
+      --white: #FFFFFF;
+      --panel: rgba(8, 12, 8, 0.78);
+      --panel-strong: rgba(8, 12, 8, 0.92);
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--white);
+      margin: 24px auto;
+      max-width: 1120px;
+      background: #050805;
+      border: 1px solid rgba(255, 230, 0, 0.32);
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    }
+    #bw-screen-mood * { box-sizing: border-box; }
+    #bw-screen-mood::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.88), rgba(0,0,0,0.52) 42%, rgba(0,0,0,0.76)),
+        url("assets/screen-mood-bg.jpg") center / cover no-repeat;
+      z-index: 0;
+    }
+    #bw-screen-mood::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image:
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 4px);
+      mix-blend-mode: screen;
+      z-index: 1;
+    }
+    #bw-screen-mood .bw-inner {
+      position: relative;
+      z-index: 2;
+      padding: 26px;
+    }
+    #bw-screen-mood .bw-topline {
+      height: 14px;
+      background: linear-gradient(90deg, var(--yellow), var(--lime));
+      border-bottom: 5px solid var(--green);
+      position: relative;
+      z-index: 3;
+    }
+    #bw-screen-mood .bw-header {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+      max-width: 780px;
+    }
+    #bw-screen-mood .bw-kicker {
+      display: inline-flex;
+      width: fit-content;
+      background: var(--green);
+      color: var(--yellow);
+      padding: 8px 12px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+    #bw-screen-mood h2 {
+      margin: 0;
+      color: var(--cream);
+      font-size: clamp(34px, 6vw, 70px);
+      line-height: 0.96;
+      letter-spacing: 0;
+      font-weight: 800;
+      max-width: 760px;
+    }
+    #bw-screen-mood .bw-sub {
+      margin: 0;
+      color: rgba(250, 250, 245, 0.88);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 760px;
+    }
+    #bw-screen-mood .bw-stage {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    #bw-screen-mood .bw-reel {
+      background: rgba(0, 0, 0, 0.52);
+      border: 1px solid rgba(255, 230, 0, 0.24);
+      padding: 14px;
+      min-height: 410px;
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+    #bw-screen-mood .bw-mood {
+      appearance: none;
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-left: 8px solid rgba(255, 230, 0, 0.72);
+      background: rgba(255,255,255,0.08);
+      color: var(--cream);
+      font-family: inherit;
+      text-align: left;
+      padding: 13px 14px;
+      cursor: pointer;
+      transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+    }
+    #bw-screen-mood .bw-mood:hover {
+      transform: translateX(3px);
+      background: rgba(255,255,255,0.14);
+    }
+    #bw-screen-mood .bw-mood.is-active {
+      background: var(--yellow);
+      color: var(--green);
+      border-color: var(--yellow);
+      border-left-color: var(--green);
+    }
+    #bw-screen-mood .bw-mood-title {
+      display: block;
+      font-weight: 800;
+      font-size: 16px;
+      line-height: 1.25;
+    }
+    #bw-screen-mood .bw-mood-note {
+      display: block;
+      margin-top: 3px;
+      font-size: 12px;
+      font-weight: 600;
+      opacity: 0.78;
+      line-height: 1.35;
+    }
+    #bw-screen-mood .bw-panel {
+      background: var(--panel);
+      border: 1px solid rgba(197, 225, 165, 0.24);
+      backdrop-filter: blur(10px);
+      min-height: 410px;
+      position: relative;
+      overflow: hidden;
+    }
+    #bw-screen-mood .bw-panel::before {
+      content: "";
+      position: absolute;
+      left: -20%;
+      top: 0;
+      width: 58%;
+      height: 100%;
+      background: linear-gradient(100deg, rgba(255,230,0,0.22), transparent 70%);
+      transform: skewX(-14deg);
+      pointer-events: none;
+    }
+    #bw-screen-mood .bw-panel-inner {
+      position: relative;
+      z-index: 1;
+      padding: 24px;
+      display: grid;
+      gap: 16px;
+    }
+    #bw-screen-mood .bw-scene {
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    #bw-screen-mood .bw-result-title {
+      margin: 0;
+      color: var(--cream);
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1;
+      font-weight: 800;
+    }
+    #bw-screen-mood .bw-theme {
+      color: rgba(250,250,245,0.9);
+      font-size: 15px;
+      line-height: 1.65;
+      margin: 0;
+      max-width: 620px;
+    }
+    #bw-screen-mood .bw-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    #bw-screen-mood .bw-card {
+      background: rgba(0, 0, 0, 0.42);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 13px;
+    }
+    #bw-screen-mood .bw-label {
+      display: block;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+    #bw-screen-mood .bw-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+      color: var(--cream);
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+    #bw-screen-mood .bw-list li::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      margin-right: 8px;
+      background: var(--yellow);
+      vertical-align: 1px;
+    }
+    #bw-screen-mood .bw-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--green);
+      color: var(--white);
+      padding: 14px;
+      border-top: 5px solid var(--yellow);
+    }
+    #bw-screen-mood .bw-cta-text {
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 600;
+      max-width: 520px;
+    }
+    #bw-screen-mood .bw-cta a {
+      color: var(--green);
+      background: var(--yellow);
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 10px 14px;
+      white-space: nowrap;
+    }
+    @media (max-width: 780px) {
+      #bw-screen-mood .bw-inner { padding: 18px; }
+      #bw-screen-mood .bw-stage { grid-template-columns: 1fr; }
+      #bw-screen-mood .bw-reel,
+      #bw-screen-mood .bw-panel { min-height: auto; }
+      #bw-screen-mood .bw-grid { grid-template-columns: 1fr; }
+      #bw-screen-mood .bw-cta a { width: 100%; text-align: center; }
+    }
+  </style>
+
+  <div class="bw-topline" aria-hidden="true"></div>
+  <div class="bw-inner">
+    <header class="bw-header">
+      <span class="bw-kicker">Berlin Screen Mood Finder</span>
+      <h2 id="bw-screen-title">Choose your Berlin movie mood</h2>
+      <p class="bw-sub">Pick a screen mood and see which films or shows match it, what to notice in the city, and where Berlin's real history sits behind the image.</p>
+    </header>
+
+    <div class="bw-stage">
+      <nav class="bw-reel" aria-label="Choose a Berlin screen mood">
+        <button class="bw-mood is-active" type="button" data-mood="spy">
+          <span class="bw-mood-title">Spy Berlin</span>
+          <span class="bw-mood-note">transit, secrecy, surveillance</span>
+        </button>
+        <button class="bw-mood" type="button" data-mood="weimar">
+          <span class="bw-mood-title">Weimar Noir</span>
+          <span class="bw-mood-note">cabaret, crisis, glamour</span>
+        </button>
+        <button class="bw-mood" type="button" data-mood="coldwar">
+          <span class="bw-mood-title">Cold War Berlin</span>
+          <span class="bw-mood-note">walls, listening rooms, divided lives</span>
+        </button>
+        <button class="bw-mood" type="button" data-mood="dystopian">
+          <span class="bw-mood-title">Dystopian Berlin</span>
+          <span class="bw-mood-note">concrete, scale, fictional power</span>
+        </button>
+        <button class="bw-mood" type="button" data-mood="nightlife">
+          <span class="bw-mood-title">Nightlife Berlin</span>
+          <span class="bw-mood-note">clubs, dawn, unstable freedom</span>
+        </button>
+        <button class="bw-mood" type="button" data-mood="reinvention">
+          <span class="bw-mood-title">Reinvention Berlin</span>
+          <span class="bw-mood-note">escape, identity, new beginnings</span>
+        </button>
+        <button class="bw-mood" type="button" data-mood="poetic">
+          <span class="bw-mood-title">Poetic Berlin</span>
+          <span class="bw-mood-note">angels, memory, vanished city</span>
+        </button>
+      </nav>
+
+      <article class="bw-panel" aria-live="polite">
+        <div class="bw-panel-inner">
+          <span class="bw-scene" id="bw-scene">Scene 01</span>
+          <h3 class="bw-result-title" id="bw-title">Spy Berlin</h3>
+          <p class="bw-theme" id="bw-theme">Berlin works as a spy city because its history already feels layered with secrets: borders, stations, embassies, coded movements, and people watching people.</p>
+          <div class="bw-grid">
+            <div class="bw-card">
+              <span class="bw-label">Watch</span>
+              <ul class="bw-list" id="bw-watch"></ul>
+            </div>
+            <div class="bw-card">
+              <span class="bw-label">Notice</span>
+              <ul class="bw-list" id="bw-notice"></ul>
+            </div>
+            <div class="bw-card">
+              <span class="bw-label">Berlin Places</span>
+              <ul class="bw-list" id="bw-places"></ul>
+            </div>
+            <div class="bw-card">
+              <span class="bw-label">Real Story</span>
+              <ul class="bw-list" id="bw-story"></ul>
+            </div>
+          </div>
+          <div class="bw-cta">
+            <div class="bw-cta-text" id="bw-cta-text">Want the real city behind the spy mood? Walk through the Cold War streets, symbols, and stories that make Berlin feel cinematic.</div>
+            <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Book the walking tour</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const moods = {
+        spy: {
+          scene: "Scene 01",
+          title: "Spy Berlin",
+          theme: "Berlin works as a spy city because its history already feels layered with secrets: borders, stations, embassies, coded movements, and people watching people.",
+          watch: ["The Bourne Supremacy", "Berlin Station", "Homeland Season 5"],
+          notice: ["Crowds that let characters disappear", "Transit hubs as pressure points", "Modern offices beside Cold War memory"],
+          places: ["Alexanderplatz", "Friedrichstrasse", "Government Quarter"],
+          story: ["Cold War intelligence", "Divided-city geography", "Surveillance culture"],
+          cta: "Want the real city behind the spy mood? Walk through the Cold War streets, symbols, and stories that make Berlin feel cinematic."
+        },
+        weimar: {
+          scene: "Scene 02",
+          title: "Weimar Noir",
+          theme: "This is Berlin as glamour under pressure: cabaret light, political crisis, crowded stations, old facades, and a city dancing near the edge.",
+          watch: ["Babylon Berlin", "Cabaret", "The Queen's Gambit"],
+          notice: ["Grand interiors that feel theatrical", "U-Bahn entrances and old civic buildings", "Elegance mixed with instability"],
+          places: ["Rotes Rathaus", "Rathaus Schoneberg", "Hermannplatz"],
+          story: ["Weimar politics", "1920s nightlife", "The fragile years before dictatorship"],
+          cta: "Want to decode the history behind the glamour? Join the walk and see how Berlin's past still shapes its streets."
+        },
+        coldwar: {
+          scene: "Scene 03",
+          title: "Cold War Berlin",
+          theme: "The Cold War screen mood is not only walls and checkpoints. It is private life under pressure: who could speak, who could leave, and who was listening.",
+          watch: ["The Lives of Others", "Deutschland 83", "Good Bye, Lenin!"],
+          notice: ["Plain rooms that feel tense", "Socialist architecture", "Everyday places carrying political weight"],
+          places: ["Karl-Marx-Allee", "Stasi Museum", "Berlin Wall Memorial"],
+          story: ["GDR life", "Stasi surveillance", "The shock of reunification"],
+          cta: "The real Cold War Berlin is more complex than a checkpoint photo. Walk it with a guide who connects the streets to the stories."
+        },
+        dystopian: {
+          scene: "Scene 04",
+          title: "Dystopian Berlin",
+          theme: "Berlin can become a fictional capital because its architecture has scale: concrete, tunnels, exhibition halls, monumental facades, and political weight.",
+          watch: ["The Hunger Games: Mockingjay - Part 2", "Aeon Flux", "Cloud Atlas"],
+          notice: ["Buildings that feel oversized", "Concrete surfaces", "Architecture turned into power"],
+          places: ["Messe / ICC area", "Potsdam-Babelsberg", "Brutalist edges of the city"],
+          story: ["How Berlin doubles for fictional worlds", "Studio Babelsberg's production history", "Architecture as political atmosphere"],
+          cta: "See why Berlin feels bigger than one era. The walking tour connects architecture, power, and memory at street level."
+        },
+        nightlife: {
+          scene: "Scene 05",
+          title: "Nightlife Berlin",
+          theme: "Berlin at night is freedom with a sharp edge: clubs, empty streets, strangers, dawn, and the feeling that the city might change before sunrise.",
+          watch: ["Victoria", "Run Lola Run", "Sense8"],
+          notice: ["Movement instead of monuments", "Neon, bikes, U-Bahn light", "The city as a real-time maze"],
+          places: ["Kreuzberg", "Friedrichshain", "Oberbaumbrucke"],
+          story: ["Post-Wall freedom", "Club culture", "The city after midnight"],
+          cta: "Berlin's nightlife has roots in history, space, and reinvention. Come hear the daytime version behind the night scenes."
+        },
+        reinvention: {
+          scene: "Scene 06",
+          title: "Reinvention Berlin",
+          theme: "Some stories use Berlin as a place to become someone else: to escape, start over, or imagine a life that was not possible before.",
+          watch: ["Unorthodox", "Sense8", "Good Bye, Lenin!"],
+          notice: ["Water, open space, and new social circles", "A city that welcomes unfinished identities", "Freedom beside difficult memory"],
+          places: ["Wannsee", "Kulturforum", "Kreuzberg"],
+          story: ["Migration and identity", "Berlin as refuge", "Personal freedom after political trauma"],
+          cta: "Berlin is full of reinvention stories. Walk with us to understand the city that makes them believable."
+        },
+        poetic: {
+          scene: "Scene 07",
+          title: "Poetic Berlin",
+          theme: "This is the quiet Berlin of memory, angels, libraries, empty lots, ruins, and spaces where history feels almost visible.",
+          watch: ["Wings of Desire", "A Coffee in Berlin", "Good Bye, Lenin!"],
+          notice: ["Silence between landmarks", "Places that changed after the Wall", "Melancholy rather than spectacle"],
+          places: ["Siegessaule", "Potsdamer Platz", "Museum Island"],
+          story: ["Divided Berlin", "Memory after destruction", "How cities keep ghosts without becoming museums"],
+          cta: "Want the poetic version of Berlin without losing the facts? Join the walk and see how memory lives in the streets."
+        }
+      };
+
+      const root = document.getElementById("bw-screen-mood");
+      if (!root) return;
+
+      const fields = {
+        scene: root.querySelector("#bw-scene"),
+        title: root.querySelector("#bw-title"),
+        theme: root.querySelector("#bw-theme"),
+        watch: root.querySelector("#bw-watch"),
+        notice: root.querySelector("#bw-notice"),
+        places: root.querySelector("#bw-places"),
+        story: root.querySelector("#bw-story"),
+        cta: root.querySelector("#bw-cta-text")
+      };
+
+      function renderList(node, items) {
+        node.innerHTML = "";
+        items.forEach((item) => {
+          const li = document.createElement("li");
+          li.textContent = item;
+          node.appendChild(li);
+        });
+      }
+
+      function setMood(key) {
+        const mood = moods[key] || moods.spy;
+        fields.scene.textContent = mood.scene;
+        fields.title.textContent = mood.title;
+        fields.theme.textContent = mood.theme;
+        fields.cta.textContent = mood.cta;
+        renderList(fields.watch, mood.watch);
+        renderList(fields.notice, mood.notice);
+        renderList(fields.places, mood.places);
+        renderList(fields.story, mood.story);
+        root.querySelectorAll(".bw-mood").forEach((button) => {
+          button.classList.toggle("is-active", button.dataset.mood === key);
+        });
+      }
+
+      root.querySelectorAll(".bw-mood").forEach((button) => {
+        button.addEventListener("click", () => setMood(button.dataset.mood));
+      });
+
+      setMood("spy");
+    })();
+  </script>
+</section>
+</body>
+</html>

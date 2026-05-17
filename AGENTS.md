@@ -27,12 +27,20 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `blog-workplan.md` | Prioritized list of new blog post ideas checked against the live sitemap |
 | `blog-visual-plan.md` | Visual/image plan for current blog drafts before moving them into Wix |
 | `blog-drafts/` | Draft blog posts before they are moved into Wix |
+| `tools-hub/` | The `/tools` directory grid. `data.json` is the **single source of truth** for every embeddable BerlinWalk widget: slug, title, lead, category, image, **`widgetUrl`**, **`embedHeight`**. New widgets must be added here. |
+| `widgets-hub/` | The `/widgets` page (third-party embed gallery). Reads from `tools-hub/data.json`; new entries appear automatically. Each card has a lazy-loaded live preview, a height selector, and a "Copy embed code" button. |
+| `tools-home/` | Curated 6-widget grid for the homepage. Separate from tools-hub. |
+| `js/brand.js` | Shared runtime for all widgets. Two responsibilities: (1) post `bw-resize` height messages to the Wix parent iframe; (2) inject the "by berlinwalk.com" attribution badge into every widget body. Skipped when `?attribution=none` is in the URL (used by the gallery preview iframes). |
+| `css/brand.css` | Shared brand tokens + styles for the attribution badge (`.bw-attr-badge`). |
 | `_audit.md`, `MIGRATION.md`, `_swap-status.md`, etc. | Historical planning docs — read for context only, mostly stale |
 
 ## 3. Key live URLs
 
 - `berlinwalk.com/leave-review` — review submission form (Custom Element `bw-leave-review`)
 - `berlinwalk.com/reviews` — public review display (Custom Element `bw-reviews`)
+- `berlinwalk.com/tools` — directory grid of all 19+ free Berlin widgets, rendered from `tools-hub/data.json`
+- `berlinwalk.com/tools/<slug>` — dynamic per-tool page bound to BerlinTools CMS collection
+- `berlinwalk.com/widgets` — third-party embed gallery, rendered from `tools-hub/data.json` via `widgets-hub/`
 - `https://www.berlinwalk.com/_functions/subscribe` — Berlin Essentials lead form
 - `https://www.berlinwalk.com/_functions/submitReview` — POST, review submission
 - `https://www.berlinwalk.com/_functions/listReviews` — GET, approved reviews
@@ -70,6 +78,33 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - Custom Elements use light DOM (no Shadow DOM), scoped CSS by component class prefix, guarded `customElements.define()`
 - Brand-coloured Wix HTML-block emails use inline CSS only — no `<style>`, no Google Fonts `<link>`, no SVG, no JS, table layouts
 - Wix variables in email HTML use `${var_name}` syntax (Wix Bookings trigger payload)
+
+### When adding a new BerlinTools widget (checklist)
+
+Every new tool widget must:
+
+1. **Live as a standalone HTML at `<slug-folder>/index.html`** that links `../css/brand.css` and `../js/brand.js`. brand.js will auto-inject the attribution badge — no per-widget badge code needed.
+2. **Be added to `tools-hub/data.json`** with: `slug`, `title`, `lead`, `category` (Money / Weather / Maps / Discovery), and the two embed fields **`widgetUrl`** (full GitHub Pages URL ending in `/`) and **`embedHeight`** (recommended iframe height in px). This single entry feeds both `/tools` (directory) and `/widgets` (third-party embed gallery).
+3. **Optionally have an `image`** (Wix Media URL of the tool icon). Without one, the directory falls back to a first-letter chip.
+4. **Have a matching BerlinTools CMS item** for the dynamic `/tools/<slug>` page (see public-toilets and luggage-storage as templates). Fields: `slug`, `title`, `h1`, `lead`, `secondary`, `intro`, `seoTitle`, `seoDescription`, `jsonLd` (WebApplication schema), `widgetUrl`, `bodyContent` (Ricos), `relatedTool1*` / `relatedTool2*`, `relatedBlog*`, `link-berlin-tools-title` (= `/tools/<slug>`).
+5. **Optionally be added to a related blog post's FAQ + quick-summary** under matching slugs in `faq/data.json`, `quick-summary/data.json`, and the SLUG_MAP + SCHEMAS in `faq/inject.js`.
+
+The gallery and tools directory pick up the new entry automatically as soon as `tools-hub/data.json` is pushed.
+
+### Attribution badge + UTM convention
+
+Every BerlinWalk widget loads `js/brand.js`, which automatically appends an attribution badge to the body:
+
+- **Label:** mini logo (`https://static.wixstatic.com/media/5a08a3_f2d364781904464b9b07840378001c0d~mv2.png`) + "by berlinwalk.com →"
+- **Style:** green strip, yellow accent — see `.bw-attr-badge` in `css/brand.css`
+- **Link target:** `https://www.berlinwalk.com/` with UTM:
+  - `utm_source=embed`
+  - `utm_medium=widget`
+  - `utm_campaign=<widget-folder-slug>` (e.g. `luggage-storage-map`)
+  - `utm_content=footer-badge`
+- **Opt-out:** append `?attribution=none` to the widget URL to suppress the badge. Used by `widgets-hub/` gallery preview iframes (no need for double-badge inside a page that already shows the brand).
+
+This means analytics can distinguish (a) traffic from Yusuf's own Wix site embeds, (b) traffic from third-party embeds of each specific widget, and (c) deep-link `utm_campaign` breakdowns per widget.
 
 ### Wix idiosyncrasies that have bitten us
 - **Wix REST API cannot read or write draft automations** (those with `draftInfo` set). Workaround: create new automation via REST instead of patching the draft.
