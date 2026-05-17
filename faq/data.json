@@ -911,5 +911,34 @@
         "a": "No. Looking at the TV Tower from Alexanderplatz is free, but going up always costs money. For a free alternative view, book the Reichstag dome or visit a public rooftop such as Klunkerkranich or the upper levels of Galeries Lafayette."
       }
     ]
+  },
+  "movies-tv-berlin": {
+    "subtitle": "Quick answers about Berlin film locations, TV series, and what you can actually visit.",
+    "items": [
+      {
+        "q": "What famous movies were filmed in Berlin?",
+        "a": "Famous movies connected to Berlin include **Run Lola Run**, **Wings of Desire**, **Christiane F.**, **Good Bye, Lenin!**, **The Lives of Others**, **Victoria**, **The Bourne Supremacy**, and parts of **The Hunger Games: Mockingjay - Part 2**. Some use Berlin as itself; others use Berlin or the Berlin-Brandenburg region as a stand-in for another place."
+      },
+      {
+        "q": "Which TV shows were filmed in Berlin?",
+        "a": "Major series connected to Berlin include **Babylon Berlin**, **Dark**, **Homeland** Season 5, **Berlin Station**, **Sense8**, **Deutschland 83**, **The Queen's Gambit**, and **Unorthodox**. In some cases Berlin is the story setting; in others, Berlin and nearby Brandenburg provide architecture, studios, streets, or landscapes."
+      },
+      {
+        "q": "Can I visit the exact filming locations in Berlin?",
+        "a": "Sometimes, but not always. Berlin filming can involve real streets, studio sets, edited-together locations, and places that double for another city. It is better to think in **screen moods** and neighborhoods: Oberbaumbrücke for Run Lola Run energy, Karl-Marx-Allee for socialist architecture, Bahnhof Zoo for West Berlin memory, and Alexanderplatz for modern transit and spy stories."
+      },
+      {
+        "q": "Was The Hunger Games filmed in Berlin?",
+        "a": "Parts of **The Hunger Games: Mockingjay - Part 2** were filmed in the Berlin-Brandenburg region, especially through the production world around **Studio Babelsberg** in Potsdam. Berlin is not simply playing Berlin here; the region becomes part of a dystopian screen world."
+      },
+      {
+        "q": "What are the best Berlin film locations to visit on a first trip?",
+        "a": "Start with **Alexanderplatz**, **Oberbaumbrücke**, **Karl-Marx-Allee**, **Bahnhof Zoo**, and **Wannsee**. If you have extra time, add **Potsdam-Babelsberg** for film production history. These places help you understand why Berlin works so well for stories about surveillance, reinvention, division, nightlife, and escape."
+      },
+      {
+        "q": "Does the BerlinWalk tour cover movie locations?",
+        "a": "The tour is not a pure film-location tour, but it covers the real city layers that make Berlin so cinematic: **Alexanderplatz**, historic Mitte, Museum Island, GDR architecture, Cold War memory, and the streets filmmakers keep returning to. It is a strong starting point if you want to see the real Berlin behind the screen image."
+      }
+    ]
   }
 }
