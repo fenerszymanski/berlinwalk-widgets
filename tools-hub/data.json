@@ -195,6 +195,22 @@
       "image": "https://static.wixstatic.com/media/5a08a3_719d8653464944c8a98eccf34f260c4b~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/alex-mistakes/",
       "embedHeight": 700
+    },
+    {
+      "slug": "alexanderplatz-parking-map",
+      "title": "Alexanderplatz Parking Map",
+      "lead": "Find practical parking near the BerlinWalk tour start, with Google Maps directions to the World Clock.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/alexanderplatz-parking-map/",
+      "embedHeight": 660
+    },
+    {
+      "slug": "berlin-parking-calculator",
+      "title": "Berlin Parking Calculator",
+      "lead": "Compare a central Alexanderplatz garage with Park + Ride and public transport in 30 seconds.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-parking-calculator/",
+      "embedHeight": 720
     }
   ]
 }

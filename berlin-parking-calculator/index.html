@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Parking Calculator | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-parking-calculator">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-parking-calculator {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      overflow-x: hidden;
+      width: 100vw;
+      max-width: 100vw;
+    }
+
+    #bw-parking-calculator * { box-sizing: border-box; }
+
+    #bw-parking-calculator .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    #bw-parking-calculator .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-parking-calculator .bw-head-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 24px;
+    }
+
+    #bw-parking-calculator .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      line-height: 1.35;
+      min-width: 0;
+    }
+
+    #bw-parking-calculator .bw-body {
+      background: var(--bw-cream);
+      padding: 18px 20px;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-parking-calculator .bw-note {
+      margin: 0 0 16px;
+      color: var(--bw-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    #bw-parking-calculator .bw-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    #bw-parking-calculator .bw-grid > *,
+    #bw-parking-calculator .bw-toggle-row > *,
+    #bw-parking-calculator .bw-results > * {
+      min-width: 0;
+    }
+
+    #bw-parking-calculator .bw-field {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      padding: 12px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-parking-calculator label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      line-height: 1.3;
+    }
+
+    #bw-parking-calculator input[type="range"] {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      accent-color: var(--bw-green);
+    }
+
+    #bw-parking-calculator .bw-value {
+      display: inline-block;
+      margin-top: 4px;
+      color: var(--bw-text);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    #bw-parking-calculator .bw-toggle-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    #bw-parking-calculator .bw-choice {
+      appearance: none;
+      border: 2px solid var(--bw-border);
+      border-radius: 9px;
+      background: var(--bw-white);
+      color: var(--bw-green);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    #bw-parking-calculator .bw-choice.is-active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-parking-calculator .bw-results {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    #bw-parking-calculator .bw-result-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      padding: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #bw-parking-calculator .bw-result-card.is-best {
+      border: 2px solid var(--bw-lime);
+      background: #F8FBEF;
+    }
+
+    #bw-parking-calculator .bw-pill {
+      display: inline-block;
+      margin-bottom: 8px;
+      border-radius: 20px;
+      background: var(--bw-soft);
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      padding: 4px 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-parking-calculator .bw-result-card.is-best .bw-pill {
+      background: var(--bw-yellow);
+    }
+
+    #bw-parking-calculator .bw-result-title {
+      margin: 0 0 6px;
+      color: var(--bw-green);
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-parking-calculator .bw-price {
+      margin: 0 0 8px;
+      color: var(--bw-text);
+      font-size: 30px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    #bw-parking-calculator .bw-meta,
+    #bw-parking-calculator .bw-copy {
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-parking-calculator .bw-advice {
+      background: var(--bw-green);
+      border-radius: 12px;
+      color: var(--bw-white);
+      padding: 14px 16px;
+      line-height: 1.55;
+      font-size: 13px;
+    }
+
+    #bw-parking-calculator .bw-advice strong {
+      color: var(--bw-yellow);
+      font-weight: 900;
+    }
+
+    #bw-parking-calculator .bw-footer {
+      padding: 10px 20px;
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 680px) {
+      #bw-parking-calculator { margin: 22px 0; }
+      #bw-parking-calculator .bw-head { padding: 12px 16px; }
+      #bw-parking-calculator .bw-kicker { font-size: 10px; letter-spacing: 1.7px; }
+      #bw-parking-calculator .bw-body { padding: 14px; }
+      #bw-parking-calculator .bw-grid,
+      #bw-parking-calculator .bw-toggle-row,
+      #bw-parking-calculator .bw-results { grid-template-columns: 1fr; }
+      #bw-parking-calculator .bw-note { font-size: 12px; }
+      #bw-parking-calculator .bw-price { font-size: 27px; }
+    }
+
+    @media (max-width: 420px) {
+      #bw-parking-calculator .bw-note,
+      #bw-parking-calculator .bw-field,
+      #bw-parking-calculator .bw-choice,
+      #bw-parking-calculator .bw-result-card,
+      #bw-parking-calculator .bw-advice {
+        width: calc(100vw - 28px);
+        max-width: calc(100vw - 28px);
+      }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">=</span>
+      <span class="bw-kicker">Berlin parking decision calculator</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-note">Use this before driving to the BerlinWalk meeting point at Alexanderplatz. It compares a central garage near the World Clock with leaving the car at Park + Ride and taking public transport into Mitte.</p>
+
+      <div class="bw-grid">
+        <div class="bw-field">
+          <label for="bw-hours">Hours parked</label>
+          <input id="bw-hours" type="range" min="2" max="10" step="1" value="4">
+          <span class="bw-value"><span data-hours>4</span> h</span>
+        </div>
+        <div class="bw-field">
+          <label for="bw-people">Travellers</label>
+          <input id="bw-people" type="range" min="1" max="5" step="1" value="2">
+          <span class="bw-value"><span data-people>2</span></span>
+        </div>
+        <div class="bw-field">
+          <label for="bw-hourly">Garage rate</label>
+          <input id="bw-hourly" type="range" min="2" max="5" step="0.5" value="3">
+          <span class="bw-value">€<span data-hourly>3.00</span> / h</span>
+        </div>
+      </div>
+
+      <div class="bw-toggle-row" aria-label="Parking situation">
+        <button class="bw-choice is-active" type="button" data-mode="tour">I am coming for the walking tour</button>
+        <button class="bw-choice" type="button" data-mode="day">I will stay in the center all day</button>
+        <button class="bw-choice is-active" type="button" data-zone="ab">P+R inside Berlin AB</button>
+        <button class="bw-choice" type="button" data-zone="abc">P+R needs ABC ticket</button>
+      </div>
+
+      <div class="bw-results">
+        <div class="bw-result-card" data-card="central">
+          <span class="bw-pill" data-central-pill>Near Alex</span>
+          <h3 class="bw-result-title">Central garage</h3>
+          <p class="bw-price">€<span data-central-cost>12.00</span></p>
+          <p class="bw-meta" data-central-meta>Approx. 4 h at €3.00/h. Add 10-15 min walking buffer.</p>
+        </div>
+        <div class="bw-result-card" data-card="pr">
+          <span class="bw-pill" data-pr-pill>Park + Ride</span>
+          <h3 class="bw-result-title">P+R + BVG</h3>
+          <p class="bw-price">€<span data-pr-cost>8.00</span></p>
+          <p class="bw-meta" data-pr-meta>2 single AB tickets. Add 30-45 min transit buffer.</p>
+        </div>
+      </div>
+
+      <div class="bw-advice" data-advice></div>
+    </div>
+    <div class="bw-footer">This is a planning estimate, not a live tariff. It uses simple 2026 BVG assumptions and lets you adjust garage hourly cost because operators change prices.</div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-parking-calculator');
+      if (!root) return;
+
+      var state = {
+        mode: 'tour',
+        zone: 'ab'
+      };
+
+      var fares = {
+        ab: { single: 4.00, day: 11.20, label: 'AB' },
+        abc: { single: 5.00, day: 12.90, label: 'ABC' }
+      };
+
+      function money(value) {
+        return value.toFixed(2);
+      }
+
+      function pick(selector) {
+        return root.querySelector(selector);
+      }
+
+      function updateChoices() {
+        root.querySelectorAll('[data-mode]').forEach(function (button) {
+          button.classList.toggle('is-active', button.getAttribute('data-mode') === state.mode);
+        });
+        root.querySelectorAll('[data-zone]').forEach(function (button) {
+          button.classList.toggle('is-active', button.getAttribute('data-zone') === state.zone);
+        });
+      }
+
+      function calculate() {
+        var hours = Number(pick('#bw-hours').value);
+        var people = Number(pick('#bw-people').value);
+        var hourly = Number(pick('#bw-hourly').value);
+        var fare = fares[state.zone];
+
+        pick('[data-hours]').textContent = String(hours);
+        pick('[data-people]').textContent = String(people);
+        pick('[data-hourly]').textContent = money(hourly);
+
+        var centralCost = Math.min(hours * hourly, 24);
+        var ticketMode = state.mode === 'day' ? 'day' : 'single';
+        var transitCost = people * fare[ticketMode];
+        var prParkingCost = state.mode === 'day' ? 2 : 0;
+        var prCost = transitCost + prParkingCost;
+
+        var centralBest = centralCost <= prCost + 2;
+        var centralCard = pick('[data-card="central"]');
+        var prCard = pick('[data-card="pr"]');
+        centralCard.classList.toggle('is-best', centralBest);
+        prCard.classList.toggle('is-best', !centralBest);
+
+        pick('[data-central-cost]').textContent = money(centralCost);
+        pick('[data-pr-cost]').textContent = money(prCost);
+
+        pick('[data-central-pill]').textContent = centralBest ? 'Simpler choice' : 'Convenience pick';
+        pick('[data-pr-pill]').textContent = centralBest ? 'Cheaper only if...' : 'Budget pick';
+
+        pick('[data-central-meta]').textContent = 'Approx. ' + hours + ' h at EUR ' + money(hourly) + '/h. Add 10-15 min walking buffer.';
+        pick('[data-pr-meta]').textContent = people + ' ' + (ticketMode === 'day' ? '24-hour ' : 'single ') + fare.label + ' ticket' + (people > 1 ? 's' : '') + (prParkingCost ? ' plus a small P+R buffer.' : '. Add 30-45 min transit buffer.');
+
+        var advice;
+        if (centralBest && state.mode === 'tour') {
+          advice = '<strong>My pick for the tour:</strong> park near Alexanderplatz. For a short visit, the time and stress saved usually matters more than saving a few euros.';
+        } else if (centralBest) {
+          advice = '<strong>My pick:</strong> central parking is reasonable for your group size and stay length. It keeps the day simpler, especially with children, luggage, or bad weather.';
+        } else if (people <= 2) {
+          advice = '<strong>My pick:</strong> Park + Ride can make sense. It is cheaper for one or two people, but only if you are relaxed about the extra transit time.';
+        } else {
+          advice = '<strong>Close call:</strong> Park + Ride wins on price here, but for a group, central parking may still feel better if everyone is coming straight to the World Clock.';
+        }
+
+        pick('[data-advice]').innerHTML = advice;
+      }
+
+      root.querySelectorAll('input[type="range"]').forEach(function (input) {
+        input.addEventListener('input', calculate);
+      });
+
+      root.querySelectorAll('[data-mode]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.mode = button.getAttribute('data-mode');
+          updateChoices();
+          calculate();
+        });
+      });
+
+      root.querySelectorAll('[data-zone]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.zone = button.getAttribute('data-zone');
+          updateChoices();
+          calculate();
+        });
+      });
+
+      updateChoices();
+      calculate();
+    })();
+  </script>
+</div>
+</body>
+</html>

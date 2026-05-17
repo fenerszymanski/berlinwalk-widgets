@@ -395,6 +395,27 @@ Format for each entry — see `AGENTS.md` §9.
 
 **Next session should:** Continue down the open TODO list — convert `/leave-review` from iframe to a Custom Element (mobile sizing fix), or test the cancel-on-cancel flow end-to-end with a real test booking.
 
+## 2026-05-17 — Codex
+
+**Did:**
+- Researched and drafted the Berlin parking article with the Alexanderplatz / BerlinWalk tour-start angle
+- Built two new widgets: an Alexanderplatz parking map with Google Maps directions and a Berlin parking cost calculator
+- Added matching quick-summary, FAQ, and tools-hub entries for the parking post/widget stack
+
+**Changed:**
+- `blog-drafts/where-to-park-in-berlin-alexanderplatz-2026.md` — new draft v1 with Umweltzone, Mitte street parking, central garages, P+R, and tour-arrival advice
+- `alexanderplatz-parking-map/index.html` — new Leaflet map for central garages and P+R options around the World Clock
+- `berlin-parking-calculator/index.html` — new calculator comparing central garage parking with P+R + BVG
+- `quick-summary/data.json` — added `parking-berlin`
+- `faq/data.json` — added `parking-berlin`
+- `tools-hub/data.json` — added both new parking widgets
+- `blog-workplan.md` — moved the parking idea to Draft v1 and linked the new draft/widgets
+
+**Opened:** Review exact garage copy/rates before Wix publishing if Yusuf wants a stricter price table; create/publish Wix draft after visual approval.
+**Closed:** Parking post initial research, local draft v1, and local widget implementation.
+
+**Next session should:** Preview the new parking widgets after GitHub Pages deploy, then move the parking article into Wix with Quick Summary, map, calculator, and FAQ embeds.
+
 ## 2026-05-15 — Codex
 
 **Did:**
