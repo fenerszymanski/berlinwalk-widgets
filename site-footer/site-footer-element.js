@@ -1,4 +1,5 @@
 const BW_SITE_FOOTER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_SITE_FOOTER_LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_2f62d59b419643c0994771fac5765c79~mv2.png';
 const BW_SITE_FOOTER_LINKS = {
   home: 'https://www.berlinwalk.com/',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
@@ -73,90 +74,9 @@ class BWSiteFooterElement extends HTMLElement {
         .bw-site-footer .bw-footer-inner {
           margin: 0 auto;
           max-width: 1180px;
-          padding: 42px 24px 30px;
+          padding: 46px 24px 30px;
         }
 
-        .bw-site-footer .bw-footer-cta {
-          align-items: center;
-          background:
-            linear-gradient(135deg, rgba(255, 230, 0, 0.13), rgba(124, 179, 66, 0.1)),
-            var(--green-mid);
-          border: 1px solid rgba(255, 230, 0, 0.28);
-          border-radius: 8px;
-          display: grid;
-          gap: 24px;
-          grid-template-columns: minmax(0, 1fr) auto;
-          margin-bottom: 40px;
-          padding: 24px 26px;
-          position: relative;
-        }
-
-        .bw-site-footer .bw-footer-cta::before {
-          background: var(--yellow);
-          content: "";
-          height: calc(100% - 28px);
-          left: 0;
-          position: absolute;
-          top: 14px;
-          width: 5px;
-        }
-
-        .bw-site-footer .bw-footer-kicker {
-          color: var(--yellow);
-          display: block;
-          font-size: 12px;
-          font-weight: 800;
-          letter-spacing: 1.4px;
-          line-height: 1.3;
-          margin-bottom: 8px;
-          text-transform: uppercase;
-        }
-
-        .bw-site-footer .bw-footer-cta h2 {
-          color: var(--white);
-          font-size: 28px;
-          font-weight: 800;
-          letter-spacing: 0;
-          line-height: 1.15;
-          margin-bottom: 8px;
-        }
-
-        .bw-site-footer .bw-footer-cta p {
-          color: var(--muted-on-dark);
-          font-family: var(--serif);
-          font-size: 15px;
-          line-height: 1.6;
-          margin-bottom: 0;
-          max-width: 720px;
-        }
-
-        .bw-site-footer .bw-footer-btn {
-          align-items: center;
-          background: var(--yellow);
-          border: 2px solid var(--yellow);
-          border-radius: 999px;
-          color: var(--green-dark);
-          display: inline-flex;
-          font-size: 13px;
-          font-weight: 800;
-          justify-content: center;
-          letter-spacing: 0.5px;
-          min-height: 48px;
-          padding: 13px 22px;
-          text-decoration: none;
-          text-transform: uppercase;
-          transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
-          white-space: nowrap;
-        }
-
-        .bw-site-footer .bw-footer-btn:hover,
-        .bw-site-footer .bw-footer-btn:focus-visible {
-          background: #fff04a;
-          border-color: #fff04a;
-          transform: translateY(-1px);
-        }
-
-        .bw-site-footer .bw-footer-btn:focus-visible,
         .bw-site-footer a:focus-visible {
           outline: 3px solid rgba(255, 230, 0, 0.75);
           outline-offset: 4px;
@@ -172,35 +92,21 @@ class BWSiteFooterElement extends HTMLElement {
           min-width: 0;
         }
 
-        .bw-site-footer .bw-wordmark {
+        .bw-site-footer .bw-logo-link {
           align-items: center;
-          color: var(--white);
+          background: var(--cream);
+          border-radius: 6px;
           display: inline-flex;
-          font-size: 30px;
-          font-weight: 800;
-          letter-spacing: 0;
-          line-height: 1;
-          margin-bottom: 16px;
+          margin-bottom: 18px;
+          padding: 10px 12px;
           text-decoration: none;
         }
 
-        .bw-site-footer .bw-wordmark-mark {
-          align-items: center;
-          background: var(--yellow);
-          border-radius: 6px;
-          color: var(--green);
-          display: inline-flex;
-          flex: 0 0 44px;
-          font-size: 19px;
-          font-weight: 800;
-          height: 44px;
-          justify-content: center;
-          margin-right: 12px;
-          width: 44px;
-        }
-
-        .bw-site-footer .bw-wordmark span:last-child {
-          color: var(--yellow);
+        .bw-site-footer .bw-logo-img {
+          display: block;
+          height: auto;
+          max-width: min(230px, 100%);
+          width: 230px;
         }
 
         .bw-site-footer .bw-footer-brand p {
@@ -369,19 +275,6 @@ class BWSiteFooterElement extends HTMLElement {
             padding: 32px 18px 26px;
           }
 
-          .bw-site-footer .bw-footer-cta {
-            grid-template-columns: 1fr;
-            padding: 22px 20px;
-          }
-
-          .bw-site-footer .bw-footer-cta h2 {
-            font-size: 24px;
-          }
-
-          .bw-site-footer .bw-footer-btn {
-            justify-self: start;
-          }
-
           .bw-site-footer .bw-footer-main,
           .bw-site-footer .bw-footer-note-grid {
             grid-template-columns: 1fr;
@@ -390,10 +283,6 @@ class BWSiteFooterElement extends HTMLElement {
           .bw-site-footer .bw-footer-col {
             border-top: 1px solid rgba(197, 225, 165, 0.18);
             padding-top: 20px;
-          }
-
-          .bw-site-footer .bw-wordmark {
-            font-size: 27px;
           }
 
           .bw-site-footer .bw-route-stops {
@@ -407,18 +296,8 @@ class BWSiteFooterElement extends HTMLElement {
             padding-right: 14px;
           }
 
-          .bw-site-footer .bw-footer-cta h2 {
-            font-size: 22px;
-          }
-
-          .bw-site-footer .bw-wordmark {
-            font-size: 24px;
-          }
-
-          .bw-site-footer .bw-wordmark-mark {
-            flex-basis: 40px;
-            height: 40px;
-            width: 40px;
+          .bw-site-footer .bw-logo-img {
+            width: 210px;
           }
 
           .bw-site-footer .bw-route-chip {
@@ -430,20 +309,10 @@ class BWSiteFooterElement extends HTMLElement {
       <footer class="bw-site-footer" aria-label="BerlinWalk site footer">
         <div class="bw-footer-accent" aria-hidden="true"></div>
         <div class="bw-footer-inner">
-          <section class="bw-footer-cta" aria-label="Book the BerlinWalk tour">
-            <div>
-              <span class="bw-footer-kicker">Free walking tour - tip based</span>
-              <h2>Ready to walk through Berlin with context?</h2>
-              <p>Join the BerlinWalk route from Alexanderplatz to Hackescher Markt, about 2 hours through the city's historic centre.</p>
-            </div>
-            <a class="bw-footer-btn" href="${BW_SITE_FOOTER_BOOKING_URL}">Book your spot</a>
-          </section>
-
           <div class="bw-footer-main">
             <div class="bw-footer-brand">
-              <a class="bw-wordmark" href="${BW_SITE_FOOTER_LINKS.home}" aria-label="BerlinWalk home">
-                <span class="bw-wordmark-mark" aria-hidden="true">BW</span>
-                <span>Berlin<span>Walk</span></span>
+              <a class="bw-logo-link" href="${BW_SITE_FOOTER_LINKS.home}" aria-label="BerlinWalk home">
+                <img class="bw-logo-img" src="${BW_SITE_FOOTER_LOGO_URL}" alt="BerlinWalk" loading="lazy" decoding="async">
               </a>
               <p>Free tip-based walking tours through Berlin's historic centre, built for travellers who want the city to make sense while they are standing inside it.</p>
               <div class="bw-route-chip" aria-label="BerlinWalk route summary">

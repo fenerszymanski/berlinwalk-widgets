@@ -6,6 +6,18 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-18 — Codex (Footer revision)
+
+**Did:** Revised `bw-site-footer` per Yusuf's feedback: removed the green CTA block and replaced the text/BW mark with the real live-site BerlinWalk logo asset.
+
+**Changed:**
+- `site-footer/site-footer-element.js` — removed CTA section/styles, added real Wix logo image, kept the footer navigation structure intact.
+
+**Opened:** none
+**Closed:** Footer revision QA passed on desktop/mobile with no horizontal overflow and logo loaded correctly.
+
+**Next session should:** Push/deploy and install the footer Custom Element in Wix Studio.
+
 ## 2026-05-18 — Codex (Site footer custom element)
 
 **Did:** Built a new `bw-site-footer` Custom Element with a booking CTA, brand/route summary, tour links, planning/blog links, practical Berlin links, and partner-facing `Embed Berlin Tools` placement.
