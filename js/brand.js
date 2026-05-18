@@ -119,8 +119,10 @@
     a.target = '_blank';
     a.rel = 'noopener';
     a.setAttribute('aria-label', 'Made by BerlinWalk — open berlinwalk.com');
+    // Defensive inline sizing on the logo: if a widget ever ships without
+    // brand.css linked, the unbounded 1.4MB PNG will not blow up the layout.
     a.innerHTML =
-      '<img class="bw-attr-logo" alt="" src="https://static.wixstatic.com/media/5a08a3_f2d364781904464b9b07840378001c0d~mv2.png" loading="lazy" decoding="async">' +
+      '<img class="bw-attr-logo" alt="" style="width:18px;height:18px;border-radius:50%;object-fit:cover;display:block;flex:0 0 18px" src="https://static.wixstatic.com/media/5a08a3_f2d364781904464b9b07840378001c0d~mv2.png" loading="lazy" decoding="async">' +
       '<span class="bw-attr-text">by <strong>berlinwalk.com</strong></span>' +
       '<span class="bw-attr-arrow" aria-hidden="true">&rarr;</span>';
     document.body.appendChild(a);
