@@ -6,6 +6,42 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-18 — Codex (Plan Your Visit + Embed Tools page copy)
+
+**Did:** Reframed `/berlin-tools` as traveler-facing `Plan your Berlin visit` and `/widgets` as publisher-facing `Embed free Berlin planning tools`; added a bridge CTA from the planning/tools page to `/widgets`.
+
+**Changed:**
+- `tools-hub/tools-hub-element.js`, `tools-hub/index.html` — new hero headline, `Embed these tools` CTA card, fallback title update.
+- `widgets-hub/widgets-hub-element.js`, `widgets-hub/index.html` — clearer embed-focused H1/lead and `How it works` language.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md`, `widgets-hub/_regenerate_seo.py` — aligned SEO copy/schema wording with `Embed Free Berlin Planning Tools`; regenerated JSON-LD from current `tools-hub/data.json`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded nav/page positioning decision.
+
+**Opened:** Yusuf still needs to adjust Wix Studio menus: rename `Useful Tools` to `Plan Your Visit`, remove `Widgets` from primary nav, and add footer/resources link as `Embed Berlin Tools`.
+**Closed:** Page-internal copy and `/berlin-tools` → `/widgets` bridge CTA.
+
+**Next session should:** After Yusuf changes Wix menus and pushes/deploys the repo, verify live `/berlin-tools` and `/widgets` with cache-busted URLs.
+
+## 2026-05-18 — Claude Code (attribution badge + FAQ space + months-nav fixes)
+
+**Did:**
+- Diagnosed and fixed the exploding "by berlinwalk.com" attribution badge on blog posts: cause was `quick-summary` and `lead-form` widgets loading `brand.js` but not `brand.css`, so the 1.4MB badge logo rendered at natural size on every Quick Summary embed.
+- Reworked `brand.js` attribution logic: skips the badge entirely when embedded on `berlinwalk.com` (parent referrer check), keeps it for genuine third-party embeds. The 1.4MB PNG no longer loads on internal pages at all.
+- Swapped the badge logo asset to a smaller Wix Media URL Yusuf provided: `5a08a3_4d96e164d26241fd9eb009843ec2084a~mv2.png`.
+- Added defensive inline `width:18px;height:18px` on the badge `<img>` so a missing brand.css can never blow up the layout again.
+- Fixed FAQ-leaves-empty-space bug in `berlinwalk-widget-auto-resize-custom-code.js`: blog-post wrappers were grow-only, leaving stale tall heights from previously expanded accordions. Now shrinks close ancestors (depth ≤ 2) when widget content reports a smaller height. Yusuf updated the Wix Custom Embed and confirmed fixed.
+- Updated `months-nav/data.json` — flipped July/August/September from `draft` to `published` so cards link correctly on the 4 live month posts (June was already published).
+
+**Changed:**
+- `js/brand.js` — parent-origin check, defensive img sizing, logo URL swap
+- `quick-summary/index.html`, `lead-form/index.html` — added `<link rel="stylesheet" href="../css/brand.css">`
+- `months-nav/data.json` — 3 statuses flipped to `published`
+- Project root: `berlinwalk-widget-auto-resize-custom-code.js` — shrink-on-close-ancestor logic. Yusuf updated the Wix Custom Embed (now revision 8); PROJECT_MEMORY.md still references revision 7 and should be bumped on the next memory pass.
+
+**Opened:** Update PROJECT_MEMORY.md auto-resize revision number to 8 next session.
+**Closed:** none
+
+**Next session should:** Watch the Anhalter Bahnhof reel performance (posted today on @berlinwalkingtour) vs the Verkehrsturm baseline. If it lands, run the next Hidden Berlin History topic — Stadtschloss → Palast der Republik → Humboldt Forum three-layer story is the strongest candidate.
+
 ## 2026-05-17 — Claude Code (Widgets program v1.4: Advanced SEO markup + regen script)
 
 **Did:**

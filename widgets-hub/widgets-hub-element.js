@@ -614,8 +614,8 @@ class BWWidgetsHubElement extends HTMLElement {
       <section class="bw-widgets-hub">
         <div class="bw-hub-hero" aria-labelledby="bw-widgets-hub-title">
           <div class="bw-hub-hero-inner">
-            <h1 id="bw-widgets-hub-title">Free Berlin widgets to <span class="bw-highlight">embed anywhere</span></h1>
-            <p class="bw-hero-lead">19 interactive Berlin tools built by a local guide. Copy a one-line snippet and they work on WordPress, Squarespace, Wix, hotel sites, travel blogs, anywhere.</p>
+            <h1 id="bw-widgets-hub-title">Embed free Berlin planning tools <span class="bw-highlight">on your site</span></h1>
+            <p class="bw-hero-lead">Interactive Berlin calculators, maps, and planning widgets built by a local guide. Copy one snippet and use them on WordPress, Squarespace, Wix, hotel sites, travel blogs, anywhere.</p>
             <div class="bw-hero-tags">
               <span class="bw-hero-tag">No signup</span>
               <span class="bw-hero-tag">No tracking</span>
@@ -627,7 +627,7 @@ class BWWidgetsHubElement extends HTMLElement {
 
         <main class="bw-hub-main">
           <div class="bw-terms-card">
-            <strong>How to embed:</strong> open a widget, pick a theme, click "Show embed code", copy the snippet, paste into your site's HTML or a custom HTML block.
+            <strong>How it works:</strong> open a tool, pick a theme, click "Show embed code", copy the snippet, paste into your site's HTML or a custom HTML block.
             <ul>
               <li>Free for any use, including commercial sites and hotels.</li>
               <li>The "by berlinwalk.com" badge at the bottom of each widget must stay visible.</li>

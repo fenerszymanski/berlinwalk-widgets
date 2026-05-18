@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BerlinWalk Free Tools Directory</title>
+  <title>Plan Your Berlin Visit: Free Local Tools | BerlinWalk</title>
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
   <style>
@@ -81,6 +81,59 @@
 
     #bw-tools-hub .hub-main {
       padding: 44px 24px 48px;
+    }
+
+    #bw-tools-hub .embed-cta {
+      align-items: center;
+      background: var(--bw-white);
+      border: 1px solid var(--light-green);
+      border-left: 5px solid var(--brand-green);
+      border-radius: 12px;
+      box-shadow: 0 10px 24px rgba(27, 94, 32, 0.08);
+      display: flex;
+      gap: 22px;
+      justify-content: space-between;
+      margin: 0 0 38px;
+      padding: 22px 24px;
+    }
+
+    #bw-tools-hub .embed-cta h2 {
+      color: var(--brand-green);
+      font-size: 21px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    #bw-tools-hub .embed-cta p {
+      color: var(--muted);
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.55;
+      margin-bottom: 0;
+      max-width: 680px;
+    }
+
+    #bw-tools-hub .btn-secondary {
+      border: 2px solid var(--brand-green);
+      border-radius: 10px;
+      color: var(--brand-green);
+      display: inline-block;
+      flex: 0 0 auto;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.7px;
+      padding: 12px 18px;
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: background 0.16s ease, color 0.16s ease, transform 0.16s ease;
+    }
+
+    #bw-tools-hub .btn-secondary:hover,
+    #bw-tools-hub .btn-secondary:focus-visible {
+      background: var(--brand-green);
+      color: var(--bw-white);
+      transform: translateY(-1px);
     }
 
     #bw-tools-hub .loading {
@@ -243,6 +296,11 @@
       outline-offset: 3px;
     }
 
+    #bw-tools-hub .btn-secondary:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.9);
+      outline-offset: 3px;
+    }
+
     @media (max-width: 1024px) {
       #bw-tools-hub .tools-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -252,6 +310,11 @@
     @media (max-width: 700px) {
       #bw-tools-hub .tools-grid {
         grid-template-columns: 1fr;
+      }
+
+      #bw-tools-hub .embed-cta {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
       #bw-tools-hub .tool-card {
@@ -314,12 +377,20 @@
   <div id="bw-tools-hub">
     <section class="hub-hero" aria-labelledby="tools-hub-title">
       <div class="hub-hero-inner">
-        <h1 id="tools-hub-title">Free Berlin tools for <span class="highlight">smarter trip planning</span></h1>
+        <h1 id="tools-hub-title">Plan your Berlin visit with <span class="highlight">free local tools</span></h1>
         <p class="hero-lead">Quick calculators, maps, and planning guides to help you choose tickets, time your visit, and make better Berlin decisions in seconds.</p>
       </div>
     </section>
 
     <main class="hub-main">
+      <section class="embed-cta" aria-labelledby="embed-tools-title">
+        <div>
+          <h2 id="embed-tools-title">Have a travel site or hotel website?</h2>
+          <p>Embed these Berlin planning tools for free, with auto-height snippets built for WordPress, Squarespace, Wix, hotel sites, and travel blogs.</p>
+        </div>
+        <a href="https://www.berlinwalk.com/widgets" class="btn-secondary" target="_top">Embed these tools</a>
+      </section>
+
       <div id="tools-root" class="loading" aria-live="polite">Loading tools...</div>
     </main>
 

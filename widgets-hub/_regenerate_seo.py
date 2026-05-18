@@ -25,8 +25,8 @@ def build_schema(tools):
         "@context": "https://schema.org",
         "@type": "CollectionPage",
         "url": "https://www.berlinwalk.com/widgets",
-        "name": "Free Berlin Widgets to Embed",
-        "description": "Free embeddable Berlin widgets for travel sites, hotels, and bloggers: interactive tools built by a local walking-tour guide. Auto-resize, mobile-friendly, attribution-only.",
+        "name": "Embed Free Berlin Planning Tools",
+        "description": "Free embeddable Berlin planning tools for travel sites, hotels, and bloggers: interactive tools built by a local walking-tour guide. Auto-resize, mobile-friendly, attribution-only.",
         "inLanguage": "en",
         "publisher": {
             "@type": "TravelAgency",
@@ -35,7 +35,7 @@ def build_schema(tools):
         },
         "mainEntity": {
             "@type": "ItemList",
-            "name": "Free Berlin widgets",
+            "name": "Free Berlin planning tools",
             "numberOfItems": len(tools),
             "itemListOrder": "https://schema.org/ItemListOrderAscending",
             "itemListElement": [

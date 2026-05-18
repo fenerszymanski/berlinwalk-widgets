@@ -102,6 +102,59 @@ class BWToolsHubElement extends HTMLElement {
           padding: 44px 24px 48px;
         }
 
+        .bw-tools-hub .bw-embed-cta {
+          align-items: center;
+          background: #FFFFFF;
+          border: 1px solid #C5E1A5;
+          border-left: 5px solid #1B5E20;
+          border-radius: 12px;
+          box-shadow: 0 10px 24px rgba(27, 94, 32, 0.08);
+          display: flex;
+          gap: 22px;
+          justify-content: space-between;
+          margin: 0 0 38px;
+          padding: 22px 24px;
+        }
+
+        .bw-tools-hub .bw-embed-cta h2 {
+          color: #1B5E20;
+          font-size: 21px;
+          font-weight: 800;
+          line-height: 1.25;
+          margin-bottom: 6px;
+        }
+
+        .bw-tools-hub .bw-embed-cta p {
+          color: #4E5A4E;
+          font-family: var(--serif);
+          font-size: 15px;
+          line-height: 1.55;
+          margin-bottom: 0;
+          max-width: 680px;
+        }
+
+        .bw-tools-hub .bw-btn-secondary {
+          border: 2px solid #1B5E20;
+          border-radius: 10px;
+          color: #1B5E20;
+          display: inline-block;
+          flex: 0 0 auto;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 0.7px;
+          padding: 12px 18px;
+          text-decoration: none;
+          text-transform: uppercase;
+          transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+        }
+
+        .bw-tools-hub .bw-btn-secondary:hover,
+        .bw-tools-hub .bw-btn-secondary:focus-visible {
+          background: #1B5E20;
+          color: #FFFFFF;
+          transform: translateY(-1px);
+        }
+
         .bw-tools-hub .bw-category-section {
           margin-bottom: 42px;
           opacity: 0;
@@ -262,6 +315,11 @@ class BWToolsHubElement extends HTMLElement {
           outline-offset: 3px;
         }
 
+        .bw-tools-hub .bw-btn-secondary:focus-visible {
+          outline: 3px solid rgba(255, 230, 0, 0.9);
+          outline-offset: 3px;
+        }
+
         .bw-tools-hub .bw-tools-error {
           color: #4E5A4E;
           font-family: var(--serif);
@@ -316,6 +374,11 @@ class BWToolsHubElement extends HTMLElement {
         @media (max-width: 700px) {
           .bw-tools-hub .bw-tools-grid {
             grid-template-columns: 1fr;
+          }
+
+          .bw-tools-hub .bw-embed-cta {
+            align-items: flex-start;
+            flex-direction: column;
           }
 
           .bw-tools-hub .bw-tool-card {
@@ -394,12 +457,20 @@ class BWToolsHubElement extends HTMLElement {
       <section class="bw-tools-hub">
         <div class="bw-hub-hero" aria-labelledby="bw-tools-hub-title">
           <div class="bw-hub-hero-inner">
-            <h1 id="bw-tools-hub-title">Free Berlin tools for <span class="bw-highlight">smarter trip planning</span></h1>
+            <h1 id="bw-tools-hub-title">Plan your Berlin visit with <span class="bw-highlight">free local tools</span></h1>
             <p class="bw-hero-lead">Quick calculators, maps, and planning guides to help you choose tickets, time your visit, and make better Berlin decisions in seconds.</p>
           </div>
         </div>
 
         <main class="bw-hub-main">
+          <section class="bw-embed-cta" aria-labelledby="bw-embed-tools-title">
+            <div>
+              <h2 id="bw-embed-tools-title">Have a travel site or hotel website?</h2>
+              <p>Embed these Berlin planning tools for free, with auto-height snippets built for WordPress, Squarespace, Wix, hotel sites, and travel blogs.</p>
+            </div>
+            <a href="https://www.berlinwalk.com/widgets" class="bw-btn-secondary">Embed these tools</a>
+          </section>
+
           <div class="bw-tools-root" aria-live="polite">
             ${this._renderSkeleton()}
           </div>
