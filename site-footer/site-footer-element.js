@@ -6,7 +6,7 @@ const BW_SITE_FOOTER_LINKS = {
   reviews: 'https://www.berlinwalk.com/reviews',
   route: 'https://www.berlinwalk.com/#route',
   faq: 'https://www.berlinwalk.com/#faq',
-  guide: 'https://www.berlinwalk.com/',
+  guide: 'https://www.berlinwalk.com/the-guide',
   blog: 'https://www.berlinwalk.com/blog',
   plan: 'https://www.berlinwalk.com/berlin-tools',
   widgets: 'https://www.berlinwalk.com/widgets',

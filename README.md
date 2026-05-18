@@ -15,6 +15,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 
 - `lead-form/` - Berlin Essentials email capture form.
 - `quick-summary/` - reusable quick summary and optional audio player.
+- `the-guide/` - `bw-the-guide` standalone The Guide page Custom Element.
 - `free-museums-map/` - post-specific interactive map for free Berlin museum options.
 - `free-museums-compare/` - post-specific comparison table for free Berlin museum picks.
 - `public-toilets-map/` - live Berlin Open Data public toilet map with nearest-to-user distance.
@@ -53,6 +54,7 @@ Current homepage Custom Element source URLs:
 | Gallery | `bw-gallery` | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | Homepage image gallery. |
 | Tools Hub | `bw-tools-hub` | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tools-hub-element.js` | Useful tools hub. |
 | Site Footer | `bw-site-footer` | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | Global footer with booking CTA, meeting point, planning links, and partner tools link. |
+| The Guide | `bw-the-guide` | `https://fenerszymanski.github.io/berlinwalk-widgets/the-guide/the-guide-element.js` | Standalone guide profile/trust page for `/the-guide`. |
 | Why Walk With Me | `bw-why` | `https://fenerszymanski.github.io/berlinwalk-widgets/why/why-element.js` | White cards, yellow accent bars, Lucide icons. |
 | The Route | `bw-route` | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | Interactive illustrated map with 12 pins. |
 | FAQ | `bw-faq` | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/faq-element.js` | Use attribute `post="home"`. |

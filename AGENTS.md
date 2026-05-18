@@ -24,6 +24,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `testimonials/`, `stats/`, `route/`, `faq/`, `gallery/`, etc. | Homepage Custom Elements — see `README.md` for the full list |
 | `lead-form/` | Berlin Essentials email capture iframe widget |
 | `meeting-point/` | Custom Element page for `berlinwalk.com/meeting-point`. `meeting-point-element.js` defines `<bw-meeting-point>` with a real World Clock photo, stylized wayfinding map, tour-day details, and booking/map CTAs. `index.html` is the standalone GitHub Pages preview/fallback. |
+| `the-guide/` | Custom Element page for `berlinwalk.com/the-guide`. `the-guide-element.js` defines `<bw-the-guide>` with Yusuf profile copy, real profile photo, tour approach, route logic, reviews, and booking CTAs. `SEO_SETTINGS.md` has Wix-ready SEO tags/schema. |
 | `site-footer/` | Global site footer Custom Element. `site-footer-element.js` defines `<bw-site-footer>` with a booking CTA, meeting point link, route summary, planning/blog links, and partner-facing `Embed Berlin Tools` link. `index.html` is the standalone GitHub Pages preview/fallback. |
 | `free-museums-map/`, `free-museums-compare/` | Post-specific widgets for the free Berlin museums article |
 | `blog-workplan.md` | Prioritized list of new blog post ideas checked against the live sitemap |
@@ -42,6 +43,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 - `berlinwalk.com/leave-review` — review submission form (Custom Element `bw-leave-review`)
 - `berlinwalk.com/reviews` — public review display (Custom Element `bw-reviews`)
 - `berlinwalk.com/meeting-point` — planned dedicated meeting point page (Custom Element `bw-meeting-point`)
+- `berlinwalk.com/the-guide` — planned dedicated guide profile/trust page (Custom Element `bw-the-guide`)
 - `berlinwalk.com/tools` — directory grid of all 19+ free Berlin widgets, rendered from `tools-hub/data.json`
 - `berlinwalk.com/tools/<slug>` — dynamic per-tool page bound to BerlinTools CMS collection
 - `berlinwalk.com/widgets` — third-party embed gallery, rendered from `tools-hub/data.json` via `widgets-hub/`

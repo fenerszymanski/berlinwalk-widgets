@@ -6,6 +6,23 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-18 — Codex (The Guide page)
+
+**Did:** Built a dedicated `bw-the-guide` Custom Element for the planned `/the-guide` page, replacing the old primary-nav anchor idea with a real guide/trust page.
+
+**Changed:**
+- `the-guide/the-guide-element.js` — new standalone The Guide page with Yusuf profile, route logic, approach cards, real photos, reviews, and booking CTAs.
+- `the-guide/index.html` — standalone preview/fallback page.
+- `the-guide/SEO_SETTINGS.md` — Wix-ready SEO title, description, OG/Twitter tags, canonical, and ProfilePage/Person schema.
+- `site-footer/site-footer-element.js` — changed `The Guide` link to `https://www.berlinwalk.com/the-guide`.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md` — documented the new page element.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded page purpose and install snippet.
+
+**Opened:** Yusuf needs to create the Wix `/the-guide` page, add the Custom Element, paste SEO settings, publish, then point the primary nav `THE GUIDE` to `/the-guide`.
+**Closed:** Local design/build and desktop/mobile QA are complete.
+
+**Next session should:** After publish, verify live `/the-guide`, then re-check header/footer links.
+
 ## 2026-05-18 — Codex (Footer revision)
 
 **Did:** Revised `bw-site-footer` per Yusuf's feedback: removed the green CTA block and replaced the text/BW mark with the real live-site BerlinWalk logo asset.
