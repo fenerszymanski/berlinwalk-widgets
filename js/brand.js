@@ -100,6 +100,21 @@
     if (params.get('attribution') === 'none') return;
   } catch (e) { /* old browser, proceed */ }
 
+  // Skip badge when embedded on our own site — "by berlinwalk.com" on
+  // berlinwalk.com is redundant and the 1.4MB PNG should not load at all on
+  // internal pages. Third-party embeds (different parent origin) still get
+  // the badge so external sites carry our branding + backlink.
+  try {
+    if (document.referrer) {
+      var refHost = new URL(document.referrer).hostname.toLowerCase();
+      if (refHost === 'www.berlinwalk.com'
+          || refHost === 'berlinwalk.com'
+          || refHost.endsWith('.berlinwalk.com')) {
+        return;
+      }
+    }
+  } catch (e) { /* if URL parse fails, fall through and show the badge */ }
+
   function widgetSlug() {
     var path = (window.location.pathname || '').replace(/\/(index\.html?)?$/, '');
     var parts = path.split('/').filter(Boolean);
