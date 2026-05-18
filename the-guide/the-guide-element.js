@@ -1,7 +1,7 @@
 const BW_GUIDE_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 const BW_GUIDE_REVIEWS_URL = 'https://www.berlinwalk.com/reviews';
 const BW_GUIDE_MEETING_POINT_URL = 'https://www.berlinwalk.com/meeting-point';
-const BW_GUIDE_PROFILE_IMAGE_URL = 'https://images-wixmp-7ef3383b5fd80a9f5a5cc686.wixmp.com/5a08a3af-4b9b-4403-9de7-3e26eba72dc0/1707471089634/v1/fill/w_640,h_640/file.jpg';
+const BW_GUIDE_PROFILE_IMAGE_URL = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_800,h_1067,al_c,q_85/file.jpg';
 const BW_GUIDE_GROUP_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/05-1200w.webp';
 const BW_GUIDE_WORLD_CLOCK_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.webp';
 
@@ -182,9 +182,10 @@ class BWTheGuideElement extends HTMLElement {
         }
 
         .bw-guide .bw-guide-profile-img {
-          aspect-ratio: 1 / 1;
+          aspect-ratio: 3 / 4;
           display: block;
           object-fit: cover;
+          object-position: center top;
           width: 100%;
         }
 

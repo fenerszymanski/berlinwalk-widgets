@@ -45,7 +45,7 @@ Meet the local guide behind BerlinWalk and see why the tour is built around stor
 ### OG image
 
 ```text
-https://images-wixmp-7ef3383b5fd80a9f5a5cc686.wixmp.com/5a08a3af-4b9b-4403-9de7-3e26eba72dc0/1707471089634/v1/fill/w_640,h_640/file.jpg
+https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_1200,h_1200,al_t,q_85/file.jpg
 ```
 
 ## Advanced SEO - Additional Tags
@@ -56,15 +56,15 @@ https://images-wixmp-7ef3383b5fd80a9f5a5cc686.wixmp.com/5a08a3af-4b9b-4403-9de7-
 <meta property="og:title" content="Meet Yusuf, Your Berlin Guide" />
 <meta property="og:description" content="Meet the local guide behind BerlinWalk and see why the tour is built around stories, context, old maps, and Berlin's historic centre." />
 <meta property="og:url" content="https://www.berlinwalk.com/the-guide" />
-<meta property="og:image" content="https://images-wixmp-7ef3383b5fd80a9f5a5cc686.wixmp.com/5a08a3af-4b9b-4403-9de7-3e26eba72dc0/1707471089634/v1/fill/w_640,h_640/file.jpg" />
+<meta property="og:image" content="https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_1200,h_1200,al_t,q_85/file.jpg" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="Meet Yusuf, Your Berlin Guide" />
 <meta name="twitter:description" content="Meet the local guide behind BerlinWalk and see why the tour is built around stories, context, old maps, and Berlin's historic centre." />
-<meta name="twitter:image" content="https://images-wixmp-7ef3383b5fd80a9f5a5cc686.wixmp.com/5a08a3af-4b9b-4403-9de7-3e26eba72dc0/1707471089634/v1/fill/w_640,h_640/file.jpg" />
+<meta name="twitter:image" content="https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_1200,h_1200,al_t,q_85/file.jpg" />
 ```
 
 ## Advanced SEO - Structured Data
 
 ```json
-{"@context":"https://schema.org","@type":"ProfilePage","url":"https://www.berlinwalk.com/the-guide","name":"Meet Yusuf, Your Berlin Guide","description":"Meet Yusuf Ucuz, the local guide behind BerlinWalk. Learn how the tour connects Berlin's historic centre, stories, maps, and context in about 2 hours.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"BerlinWalk","url":"https://www.berlinwalk.com/"},"publisher":{"@type":"TravelAgency","name":"BerlinWalk","url":"https://www.berlinwalk.com/"},"mainEntity":{"@type":"Person","name":"Yusuf Ucuz","image":"https://images-wixmp-7ef3383b5fd80a9f5a5cc686.wixmp.com/5a08a3af-4b9b-4403-9de7-3e26eba72dc0/1707471089634/v1/fill/w_640,h_640/file.jpg","jobTitle":"Berlin walking tour guide","worksFor":{"@type":"TravelAgency","name":"BerlinWalk","url":"https://www.berlinwalk.com/"},"url":"https://www.berlinwalk.com/the-guide","sameAs":["https://www.instagram.com/berlinwalkingtour/"]}}
+{"@context":"https://schema.org","@type":"ProfilePage","url":"https://www.berlinwalk.com/the-guide","name":"Meet Yusuf, Your Berlin Guide","description":"Meet Yusuf Ucuz, the local guide behind BerlinWalk. Learn how the tour connects Berlin's historic centre, stories, maps, and context in about 2 hours.","inLanguage":"en","isPartOf":{"@type":"WebSite","name":"BerlinWalk","url":"https://www.berlinwalk.com/"},"publisher":{"@type":"TravelAgency","name":"BerlinWalk","url":"https://www.berlinwalk.com/"},"mainEntity":{"@type":"Person","name":"Yusuf Ucuz","image":"https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_1200,h_1200,al_t,q_85/file.jpg","jobTitle":"Berlin walking tour guide","worksFor":{"@type":"TravelAgency","name":"BerlinWalk","url":"https://www.berlinwalk.com/"},"url":"https://www.berlinwalk.com/the-guide","sameAs":["https://www.instagram.com/berlinwalkingtour/"]}}
 ```
