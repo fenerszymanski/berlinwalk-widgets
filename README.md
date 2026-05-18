@@ -24,6 +24,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `testimonials/` - `bw-testimonials` homepage testimonial carousel Custom Element.
 - `gallery/` - `bw-gallery` homepage gallery Custom Element.
 - `tools-hub/` - `bw-tools-hub` tools hub Custom Element.
+- `site-footer/` - `bw-site-footer` site footer Custom Element.
 - `why/` - `bw-why` homepage "Why Walk With Me?" Custom Element.
 - `route/` - `bw-route` homepage interactive illustrated route map Custom Element.
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
@@ -51,6 +52,7 @@ Current homepage Custom Element source URLs:
 | Testimonials | `bw-testimonials` | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | Trust strip shows FreeTour.com only. |
 | Gallery | `bw-gallery` | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | Homepage image gallery. |
 | Tools Hub | `bw-tools-hub` | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tools-hub-element.js` | Useful tools hub. |
+| Site Footer | `bw-site-footer` | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | Global footer with booking CTA, meeting point, planning links, and partner tools link. |
 | Why Walk With Me | `bw-why` | `https://fenerszymanski.github.io/berlinwalk-widgets/why/why-element.js` | White cards, yellow accent bars, Lucide icons. |
 | The Route | `bw-route` | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | Interactive illustrated map with 12 pins. |
 | FAQ | `bw-faq` | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/faq-element.js` | Use attribute `post="home"`. |

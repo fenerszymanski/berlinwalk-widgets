@@ -6,6 +6,21 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-18 — Codex (Site footer custom element)
+
+**Did:** Built a new `bw-site-footer` Custom Element with a booking CTA, brand/route summary, tour links, planning/blog links, practical Berlin links, and partner-facing `Embed Berlin Tools` placement.
+
+**Changed:**
+- `site-footer/site-footer-element.js` — new global footer Custom Element.
+- `site-footer/index.html` — standalone preview/fallback page.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md` — documented the footer source URL, tag name, and usage.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded footer install snippet and positioning guidance.
+
+**Opened:** Yusuf needs to add the Custom Element to the Wix footer and publish after pushing this repo.
+**Closed:** Footer design/build is ready locally; desktop/mobile QA passed with no horizontal overflow.
+
+**Next session should:** After deployment, verify the live footer on desktop/mobile and check the booking, meeting point, planning, and embed links.
+
 ## 2026-05-18 — Codex (Meeting Point custom element)
 
 **Did:** Built a distinctive `bw-meeting-point` Custom Element for the planned `/meeting-point` page: real World Clock photo, stylized wayfinding map, tour-day details, late-arrival guidance, and booking/map CTAs.

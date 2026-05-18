@@ -22,6 +22,7 @@ Source type: Server URL
 | Testimonials | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | `bw-testimonials` | none |
 | Gallery | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | `bw-gallery` | none |
 | Tools Hub | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tools-hub-element.js` | `bw-tools-hub` | none |
+| Site Footer | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | `bw-site-footer` | none |
 | Why Walk With Me | `https://fenerszymanski.github.io/berlinwalk-widgets/why/why-element.js` | `bw-why` | none |
 | The Route | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | `bw-route` | none |
 | FAQ | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/faq-element.js` | `bw-faq` | `post="home"` |
