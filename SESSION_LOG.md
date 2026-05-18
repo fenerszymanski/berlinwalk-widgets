@@ -21,6 +21,18 @@ Format for each entry — see `AGENTS.md` §9.
 
 **Next session should:** Push/deploy, add footer link to `/meeting-point`, then verify live page and the Google Maps button.
 
+## 2026-05-18 — Codex (Meeting Point SEO settings)
+
+**Did:** Prepared Wix-ready SEO settings for the new `/meeting-point` page after checking Wix REST docs; no safe static-page SEO write endpoint surfaced, so settings are documented for Studio entry.
+
+**Changed:**
+- `meeting-point/SEO_SETTINGS.md` — SEO title, meta description, canonical, social tags, OG image, and JSON-LD structured data for `/meeting-point`.
+
+**Opened:** Paste SEO settings into Wix Studio for `/meeting-point`; skip duplicate meta tags if Wix auto-generates them from the basic SEO fields.
+**Closed:** SEO copy/schema package is ready locally.
+
+**Next session should:** After SEO and custom element are installed, publish and verify live source tags for `/meeting-point`.
+
 ## 2026-05-18 — Codex (Plan Your Visit + Embed Tools page copy)
 
 **Did:** Reframed `/berlin-tools` as traveler-facing `Plan your Berlin visit` and `/widgets` as publisher-facing `Embed free Berlin planning tools`; added a bridge CTA from the planning/tools page to `/widgets`.
