@@ -6,6 +6,21 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-18 — Codex (Meeting Point custom element)
+
+**Did:** Built a distinctive `bw-meeting-point` Custom Element for the planned `/meeting-point` page: real World Clock photo, stylized wayfinding map, tour-day details, late-arrival guidance, and booking/map CTAs.
+
+**Changed:**
+- `meeting-point/meeting-point-element.js` — new Custom Element.
+- `meeting-point/index.html` — standalone preview/fallback page.
+- `AGENTS.md` — documented the new folder and planned live URL.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded meeting point details and Wix install snippet.
+
+**Opened:** Yusuf needs to create/publish the Wix `/meeting-point` page and add the custom element snippet after pushing this repo.
+**Closed:** Meeting Point page design/build is ready locally and QA passed on desktop/mobile with no horizontal overflow.
+
+**Next session should:** Push/deploy, add footer link to `/meeting-point`, then verify live page and the Google Maps button.
+
 ## 2026-05-18 — Codex (Plan Your Visit + Embed Tools page copy)
 
 **Did:** Reframed `/berlin-tools` as traveler-facing `Plan your Berlin visit` and `/widgets` as publisher-facing `Embed free Berlin planning tools`; added a bridge CTA from the planning/tools page to `/widgets`.

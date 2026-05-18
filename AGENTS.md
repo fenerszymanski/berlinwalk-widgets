@@ -23,6 +23,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `reviews/` | `bw-reviews` Custom Element + local test page (`berlinwalk.com/reviews`) |
 | `testimonials/`, `stats/`, `route/`, `faq/`, `gallery/`, etc. | Homepage Custom Elements — see `README.md` for the full list |
 | `lead-form/` | Berlin Essentials email capture iframe widget |
+| `meeting-point/` | Custom Element page for `berlinwalk.com/meeting-point`. `meeting-point-element.js` defines `<bw-meeting-point>` with a real World Clock photo, stylized wayfinding map, tour-day details, and booking/map CTAs. `index.html` is the standalone GitHub Pages preview/fallback. |
 | `free-museums-map/`, `free-museums-compare/` | Post-specific widgets for the free Berlin museums article |
 | `blog-workplan.md` | Prioritized list of new blog post ideas checked against the live sitemap |
 | `blog-visual-plan.md` | Visual/image plan for current blog drafts before moving them into Wix |
@@ -39,6 +40,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 
 - `berlinwalk.com/leave-review` — review submission form (Custom Element `bw-leave-review`)
 - `berlinwalk.com/reviews` — public review display (Custom Element `bw-reviews`)
+- `berlinwalk.com/meeting-point` — planned dedicated meeting point page (Custom Element `bw-meeting-point`)
 - `berlinwalk.com/tools` — directory grid of all 19+ free Berlin widgets, rendered from `tools-hub/data.json`
 - `berlinwalk.com/tools/<slug>` — dynamic per-tool page bound to BerlinTools CMS collection
 - `berlinwalk.com/widgets` — third-party embed gallery, rendered from `tools-hub/data.json` via `widgets-hub/`
