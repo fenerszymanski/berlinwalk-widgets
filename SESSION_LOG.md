@@ -4,7 +4,34 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+
 ---
+
+## 2026-05-19 — Codex (Berlin Quiz spacing follow-up)
+
+**Did:** Added the extra breathing room Yusuf requested on the Berlin Quiz start screen.
+
+**Changed:**
+- `berlin-quiz/berlin-quiz-element.js` — increased intro-to-button spacing to 46px and tag-row-to-watermark spacing to 38px; raised selector specificity so the paragraph reset no longer cancels those margins.
+
+**Opened:** Push/deploy widgets repo so the live homepage receives this spacing tweak.
+**Closed:** Local preview measurement confirms the requested gaps now apply.
+
+**Next session should:** After push/GitHub Pages deploy, verify the quiz start screen on the live Wix homepage.
+
+## 2026-05-19 — Claude Code (Booking + Quiz + Testimonials polish)
+
+**Did:** Iterated on three recent rebuilds after Yusuf surfaced live issues — wide-screen hero overflow, quiz spacing/text wrap/empty space, and testimonials carousel page shift.
+
+**Changed:**
+- `book/book-element.js` — `.bw-book-inner` max-width `1120px` with `!important` to beat Wix container overrides; `.bw-book-hero-grid` capped at 1120px with `margin: 0 auto` so wide screens stop stretching the At-a-glance card to the right edge; grid template tightened to `minmax(0, 1fr) minmax(320px, 400px)`.
+- `berlin-quiz/berlin-quiz-element.js` — section padding 80→48/40px; `.bw-quiz-start-inner` max-width 480px to match the original embed layout; explicit `text-align: center` on start + result descs (defensive against Wix inherit); `text-wrap: balance` for start/result descriptions so two-line wraps look balanced not orphan-lined; start desc margin-bottom 24→36px; watermark margin-top 14→26px.
+- `testimonials/testimonials-element.js` — new `_lockShellHeight()` measures every testimonial on mount and locks `.bw-carousel-shell` min-height to the tallest; `_setupResizeRelock()` rAF + 120ms debounce re-measures on resize; `disconnectedCallback` cleans up the resize handler/timer. Carousel rotation no longer makes the page jump up when a shorter review swaps in.
+
+**Opened:** Yusuf to set Wix Custom Element Min H to None for `<bw-berlin-quiz>` (Wix auto-assigned a tall Min H causing extra empty space under the watermark, same pattern as book-hero earlier).
+**Closed:** Testimonials page-shift on auto-rotate; wide-screen hero layout break.
+
+**Next session should:** Verify live after push: (a) booking hero no longer explodes on >1400px screens, (b) quiz description wraps balanced (~equal line lengths) with no orphan tail, (c) testimonial carousel stays stable through all 6 reviews without shifting.
 
 ## 2026-05-19 — Claude Code (Homepage Berlin Quiz)
 
