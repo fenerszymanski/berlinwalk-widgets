@@ -24,6 +24,10 @@ class BWHeaderElement extends HTMLElement {
     if (this._scrollHandler) window.removeEventListener('scroll', this._scrollHandler);
     if (this._keyHandler) document.removeEventListener('keydown', this._keyHandler);
     if (this._docClickHandler) document.removeEventListener('click', this._docClickHandler);
+    if (this._dropdownReposition) {
+      window.removeEventListener('resize', this._dropdownReposition);
+      window.removeEventListener('scroll', this._dropdownReposition);
+    }
     document.body.style.overflow = '';
   }
 
@@ -81,20 +85,43 @@ class BWHeaderElement extends HTMLElement {
     const menu = this.querySelector('.bw-header-submenu');
     const wrap = this.querySelector('.bw-header-dropdown');
     if (!trigger || !menu || !wrap) return;
+    const positionMenu = () => {
+      const rect = trigger.getBoundingClientRect();
+      const menuRect = menu.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const viewportW = window.innerWidth || document.documentElement.clientWidth;
+      let left = cx - menuRect.width / 2;
+      if (left < 12) left = 12;
+      if (left + menuRect.width > viewportW - 12) left = viewportW - 12 - menuRect.width;
+      menu.style.top = (rect.bottom + 10) + 'px';
+      menu.style.left = left + 'px';
+    };
     const setOpen = (open) => {
       wrap.classList.toggle('bw-header-dropdown-open', open);
       trigger.setAttribute('aria-expanded', String(open));
+      if (open) positionMenu();
     };
     trigger.addEventListener('click', (e) => {
       e.preventDefault();
+      e.stopPropagation();
       setOpen(!wrap.classList.contains('bw-header-dropdown-open'));
     });
     this._docClickHandler = (e) => {
-      if (!wrap.contains(e.target)) setOpen(false);
+      if (!wrap.contains(e.target) && !menu.contains(e.target)) setOpen(false);
     };
     document.addEventListener('click', this._docClickHandler);
     wrap.addEventListener('mouseenter', () => setOpen(true));
-    wrap.addEventListener('mouseleave', () => setOpen(false));
+    wrap.addEventListener('mouseleave', (e) => {
+      if (!menu.contains(e.relatedTarget)) setOpen(false);
+    });
+    menu.addEventListener('mouseleave', (e) => {
+      if (!wrap.contains(e.relatedTarget)) setOpen(false);
+    });
+    this._dropdownReposition = () => {
+      if (wrap.classList.contains('bw-header-dropdown-open')) positionMenu();
+    };
+    window.addEventListener('resize', this._dropdownReposition);
+    window.addEventListener('scroll', this._dropdownReposition, { passive: true });
   }
 
   _render() {
@@ -205,7 +232,7 @@ class BWHeaderElement extends HTMLElement {
 
         .bw-header-logo img {
           display: block;
-          height: 44px;
+          height: 56px;
           transition: height 200ms ease;
           width: auto;
         }
@@ -274,24 +301,24 @@ class BWHeaderElement extends HTMLElement {
           border: 1px solid var(--light-green);
           border-radius: 10px;
           box-shadow: 0 18px 44px rgba(27, 94, 32, 0.16);
-          left: 50%;
+          left: 0;
           list-style: none;
           margin: 0;
           min-width: 240px;
           opacity: 0;
           padding: 10px;
           pointer-events: none;
-          position: absolute;
-          top: calc(100% + 10px);
-          transform: translateX(-50%) translateY(-4px);
+          position: fixed;
+          top: 0;
+          transform: translateY(-4px);
           transition: opacity 160ms ease, transform 160ms ease;
-          z-index: 110;
+          z-index: 2147483647;
         }
 
         .bw-header-dropdown-open .bw-header-submenu {
           opacity: 1;
           pointer-events: auto;
-          transform: translateX(-50%) translateY(0);
+          transform: translateY(0);
         }
 
         .bw-header-submenu a {
@@ -321,9 +348,9 @@ class BWHeaderElement extends HTMLElement {
 
         .bw-header-book {
           align-items: center;
-          background: var(--green);
+          background: var(--yellow);
           border-radius: 999px;
-          color: #FFFFFF;
+          color: var(--green);
           display: inline-flex;
           font-size: 13px;
           font-weight: 800;
@@ -333,12 +360,13 @@ class BWHeaderElement extends HTMLElement {
           min-height: 44px;
           padding: 12px 22px;
           text-transform: uppercase;
-          transition: background 160ms ease, transform 160ms ease;
+          transition: background 160ms ease, color 160ms ease, transform 160ms ease;
         }
 
         .bw-header-book:hover,
         .bw-header-book:focus-visible {
-          background: #124516;
+          background: #fff04a;
+          color: var(--green-dark);
           outline: none;
           transform: translateY(-1px);
         }
@@ -405,7 +433,7 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-shrunk .bw-header-logo img {
-          height: 32px;
+          height: 40px;
         }
 
         .bw-header-shrunk .bw-header-book {
@@ -555,6 +583,9 @@ class BWHeaderElement extends HTMLElement {
 
         /* Mobile breakpoint */
         @media (max-width: 880px) {
+          .bw-header-top {
+            display: none;
+          }
           .bw-header-nav {
             display: none;
           }
@@ -565,26 +596,17 @@ class BWHeaderElement extends HTMLElement {
             display: flex;
           }
           .bw-header-main {
-            padding: 14px 18px;
+            gap: 12px;
+            padding: 12px 18px;
           }
           .bw-header-shrunk .bw-header-main {
             padding: 8px 18px;
           }
           .bw-header-logo img {
-            height: 38px;
+            height: 48px;
           }
           .bw-header-shrunk .bw-header-logo img {
-            height: 30px;
-          }
-          .bw-header-top-items {
-            font-size: 11px;
-            gap: 4px 12px;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .bw-header-top-item-hide-sm {
-            display: none;
+            height: 38px;
           }
         }
       </style>
