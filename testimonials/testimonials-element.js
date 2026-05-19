@@ -30,6 +30,8 @@ class BWTestimonialsElement extends HTMLElement {
     if (this._observer) this._observer.disconnect();
     if (this._autoRotateTimer) window.clearInterval(this._autoRotateTimer);
     if (this._resumeTimer) window.clearTimeout(this._resumeTimer);
+    if (this._resizeRelockHandler) window.removeEventListener('resize', this._resizeRelockHandler);
+    if (this._resizeRelockTimer) window.clearTimeout(this._resizeRelockTimer);
     if (this._controller) this._controller.abort();
   }
 
@@ -596,7 +598,39 @@ class BWTestimonialsElement extends HTMLElement {
     this._renderDots();
     this._renderTrustStrip(data.links || {}, data.stats || {});
     this._renderReview(0, false);
+    this._lockShellHeight();
+    this._setupResizeRelock();
     this._startAutoRotate();
+  }
+
+  _lockShellHeight() {
+    const shell = this.querySelector('.bw-carousel-shell');
+    if (!shell || !this._testimonials.length) return;
+    const savedIndex = this._currentIndex || 0;
+    shell.style.minHeight = '';
+    let max = 0;
+    for (let i = 0; i < this._testimonials.length; i++) {
+      this._renderReview(i, false);
+      // Force layout
+      const h = shell.offsetHeight;
+      if (h > max) max = h;
+    }
+    if (max > 0) shell.style.minHeight = max + 'px';
+    this._currentIndex = savedIndex;
+    this._renderReview(savedIndex, false);
+  }
+
+  _setupResizeRelock() {
+    if (this._resizeRelockHandler) return;
+    let raf = 0;
+    this._resizeRelockHandler = () => {
+      if (raf) window.cancelAnimationFrame(raf);
+      raf = window.requestAnimationFrame(() => {
+        clearTimeout(this._resizeRelockTimer);
+        this._resizeRelockTimer = window.setTimeout(() => this._lockShellHeight(), 120);
+      });
+    };
+    window.addEventListener('resize', this._resizeRelockHandler);
   }
 
   _renderReview(index, animate) {

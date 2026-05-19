@@ -280,7 +280,7 @@ class BWBerlinQuizElement extends HTMLElement {
           color: rgba(255, 255, 255, 0.55);
           font-size: 15px;
           line-height: 1.65;
-          margin: 0 auto 24px;
+          margin: 0 auto 36px;
           max-width: 480px;
           padding: 0 4px;
           text-align: center;
@@ -325,7 +325,7 @@ class BWBerlinQuizElement extends HTMLElement {
         .bw-quiz-watermark {
           color: rgba(255, 255, 255, 0.22);
           font-size: 11px;
-          margin-top: 14px;
+          margin-top: 26px;
         }
 
         .bw-quiz-quiz-inner {
