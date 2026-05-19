@@ -6,6 +6,23 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Claude Code (Booking page redesign)
+
+**Did:** Rebuilt `/book-berlin-walking-tour/berlin-free-walking-tour-tip-based` as two custom elements wrapping the Wix-native Bookings widget. Wix Bookings widget itself is unchanged (must stay native — handles availability, checkout, 7-email trigger, calendar sync).
+
+**Changed:**
+- `book/book-element.js` — new file, defines `<bw-book-hero>` (hero + chips + "At a glance" card + scrolls to `#book` anchor) and `<bw-book-details>` (what-you-get grid + 5-stop route preview + meeting point teaser + free/tip explainer + FAQ + ending CTA).
+- `book/index.html` — standalone GitHub Pages preview with a placeholder strip in place of the Wix Bookings widget.
+- `book/SEO_SETTINGS.md` — Wix-ready title/description/OG/Twitter tags + `TouristTrip` JSON-LD with 5-stop `itinerary` and `price: "0" EUR`.
+- `AGENTS.md`, `wix-embed-snippets.md` — new rows for the `bw-book-hero` / `bw-book-details` pair (both load the same JS file).
+- Project root: `PROJECT_MEMORY.md` — new `Booking Page` section with install snippet + page section order; `SESSION_LOG.md` — recorded this session.
+
+**Opened:** Push widgets repo + redesign the Wix Studio booking dynamic page: `<bw-book-hero>` above the Wix Bookings widget, `<bw-book-details>` below it. Paste the new SEO settings into the Wix Studio service-page SEO panel. Replace the old native sections (`Book Your Free Tour`, `Limited Spots — Book Now`, `What to expect`, `Meeting Point`, FAQ, `Ready to Discover Berlin?`) since they are all in the custom elements now.
+
+**Closed:** `Booking page review / conversion audit` open task (superseded by this rebuild).
+
+**Next session should:** Verify the live booking page after Wix publish — anchor scroll works, Bookings widget still loads, automation still triggers on test booking.
+
 ## 2026-05-19 — Codex (Hero follow-up + stats removal)
 
 **Did:** Adjusted the new homepage hero after live placement feedback: removed the duplicate stats strip, changed hero proof to `9.8 on Freetour`, and made the Route section cream.

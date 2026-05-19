@@ -28,6 +28,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `blog-home/` | Homepage Custom Element for the editorial blog teaser. `blog-home-element.js` defines `<bw-blog-home>` with the `Berlin Travel Notes` layout: one featured practical guide, three note cards, image-led design, and a CTA to `/blog`. `data.json` is the curated mini-CMS for the four homepage posts. |
 | `meeting-point/` | Custom Element page for `berlinwalk.com/meeting-point`. `meeting-point-element.js` defines `<bw-meeting-point>` with a real World Clock photo, stylized wayfinding map, tour-day details, and booking/map CTAs. `index.html` is the standalone GitHub Pages preview/fallback. |
 | `the-guide/` | Custom Element page for `berlinwalk.com/the-guide`. `the-guide-element.js` defines `<bw-the-guide>` with Yusuf profile copy, real profile photo, tour approach, route logic, reviews, and booking CTAs. `SEO_SETTINGS.md` has Wix-ready SEO tags/schema. |
+| `book/` | Custom Element page for `berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based`. `book-element.js` defines two elements: `<bw-book-hero>` (hero + key facts + "At a glance" card, scrolls to `#book` anchor) and `<bw-book-details>` (what-you-get grid, 5-stop route preview, meeting point teaser, free/tip-based explainer, FAQ, ending CTA). The Wix-native Bookings service widget stays sandwiched between the two custom elements at the existing position. `SEO_SETTINGS.md` has Wix-ready SEO tags + `TouristTrip` schema. `index.html` is the standalone preview with a placeholder strip in place of the Wix Bookings widget. |
 | `site-footer/` | Global site footer Custom Element. `site-footer-element.js` defines `<bw-site-footer>` with a booking CTA, meeting point link, route summary, planning/blog links, and partner-facing `Embed Berlin Tools` link. `index.html` is the standalone GitHub Pages preview/fallback. |
 | `free-museums-map/`, `free-museums-compare/` | Post-specific widgets for the free Berlin museums article |
 | `blog-workplan.md` | Prioritized list of new blog post ideas checked against the live sitemap |
@@ -156,7 +157,7 @@ The element renders into light DOM, so:
 - **`now()` works in validate but unreliably at runtime** in CONDITION expressions. Use `var('booking_creation_date')` instead.
 - **`created_date` is NOT a valid Wix Bookings trigger variable.** The correct name is `booking_creation_date`.
 - **Wix AI hallucinates messageIds and claims success without committing changes.** Always verify via REST GET after Wix AI claims a change.
-- **The Wix connector can handle reads and smaller REST calls, but large blog draft create payloads with full Ricos JSON + multiple embeds may be unreliable/truncated.** When building rich blog drafts, prefer local REST with `WIX_API_KEY` from Yusuf's clipboard, or create the Wix draft once Yusuf is back on desktop and can provide the key safely.
+- **The Wix connector can handle reads and smaller REST calls, but large blog draft create payloads with full Ricos JSON + multiple embeds may be unreliable/truncated.** When building rich blog drafts, prefer local REST after sourcing `../scripts/load-api-keys.sh` from the workspace root to load `WIX_API_KEY` from macOS Keychain.
 - **Wix Blog editor may show API-created paragraphs with almost no visual gap.** Full-size blank spacer paragraphs make the editor wildly over-spaced and can destabilize draft reads. If paragraph gaps are needed, use tiny spacer paragraphs only: NBSP text with `FONT_SIZE` 6px between adjacent body paragraphs, then verify visually in the editor.
 - **For the `/reviews` page structured data, use conservative page/service markup.** The page uses `CollectionPage` markup about the Berlin Free Walking Tour service plus social meta tags. Avoid adding `Review` / `AggregateRating` schema for now; Google can treat self-serving review markup as ineligible or spammy.
 - **GitHub Pages deploys can sit Queued 5-15 min** during traffic spikes. Last-Modified header on the deployed asset is the source of truth.
@@ -172,9 +173,10 @@ When Yusuf is in the Wix automation editor → email step → "Edit email," the 
 - Cloudflare-style `_headers` file in repo root allows iframe embedding from `berlinwalk.com`
 
 ### Sensitive data
-- The Wix API key (starts with `IST.`) lives in Yusuf's clipboard during sessions that need it, and is pasted into `WIX_API_KEY` constant in `backend/http-functions.js` on the Wix site
-- **Never commit or echo this key in chat.** If it leaks, flag for rotation (Wix Dashboard → Settings → API Keys → revoke + regenerate, then update the `WIX_API_KEY` constant).
-- Wipe any clipboard storage to `/tmp/wix_key.txt` after each use
+- API keys should live in macOS Keychain, not in the repo or chat.
+- From the workspace root, run `source scripts/load-api-keys.sh` before direct API calls. From this repo folder, use `source ../scripts/load-api-keys.sh`.
+- The loader maps Keychain service `berlinwalk-wix-api-key` to `WIX_API_KEY` and `openai-api-key` to `OPENAI_API_KEY`.
+- **Never commit or echo keys in chat.** If a key leaks, flag for rotation.
 
 ## 8. Open items / known TODOs
 

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Book Your Berlin Walking Tour · BerlinWalk</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      html, body { margin: 0; padding: 0; }
+      body { background: #FAFAF5; font-family: Montserrat, Arial, sans-serif; }
+      .bw-book-widget-placeholder {
+        align-items: center;
+        background: repeating-linear-gradient(45deg, #FFFFFF 0 12px, #F2F4EB 12px 24px);
+        border-bottom: 1px solid #E8ECDF;
+        border-top: 1px solid #E8ECDF;
+        color: #4E5A4E;
+        display: flex;
+        font-family: Montserrat, Arial, sans-serif;
+        font-weight: 700;
+        justify-content: center;
+        letter-spacing: 0.6px;
+        min-height: 420px;
+        padding: 32px 24px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .bw-book-widget-placeholder span {
+        background: #FFFFFF;
+        border: 1px dashed #1B5E20;
+        border-radius: 8px;
+        color: #1B5E20;
+        padding: 16px 22px;
+      }
+    </style>
+  </head>
+  <body>
+    <bw-book-hero></bw-book-hero>
+    <div class="bw-book-widget-placeholder" aria-hidden="true">
+      <span>Wix Bookings widget goes here (date picker · time slots · checkout)</span>
+    </div>
+    <bw-book-details></bw-book-details>
+    <script src="./book-element.js"></script>
+  </body>
+</html>
