@@ -50,13 +50,13 @@ Add these through Wix Custom Code, not as iframe embeds. They self-skip when the
 current URL is not a blog post.
 
 ```html
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=2" defer></script>
 ```
 
 `blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from the
 visible H2/H3 headings in the post body and adds compact share buttons. It hides
-below 1180px and only appears when there is enough room to the right of the
-article column.
+below 1500px and falls back to a fixed right rail when Wix wrappers are hard to
+measure.
 
 ## Lead Form
 

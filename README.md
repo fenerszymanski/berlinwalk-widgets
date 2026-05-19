@@ -148,4 +148,5 @@ These are loaded through Wix Custom Code rather than iframe embeds:
 - `js/cta-inject.js` - injects the global tour CTA near the end of posts.
 - `js/blog-sidebar-inject.js` - builds a desktop-only sticky "On this page"
   sidebar from visible H2/H3 headings, with compact share buttons. It hides
-  below 1180px and skips non-`/post/` URLs.
+  below 1500px, falls back to a fixed right rail when Wix wrappers are hard to
+  measure, and skips non-`/post/` URLs.

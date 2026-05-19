@@ -9,15 +9,15 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-05-19 — Codex (Blog sidebar helper)
 
-**Did:** Built a reusable blog right-rail helper matching the reference pattern: sticky “On this page” links, scroll progress, active section highlight, and share buttons. Follow-up hardening prevents the sidebar from falling onto the left side of Wix blog pages.
+**Did:** Built a reusable blog right-rail helper matching the reference pattern: sticky “On this page” links, scroll progress, active section highlight, and share buttons. Follow-up hardening prevents the sidebar from falling onto the left side of Wix blog pages or disappearing when Wix wrappers cannot be measured.
 
 **Changed:**
-- `js/blog-sidebar-inject.js` — new Wix Custom Code script for `/post/` pages; finds visible `h2/h3` headings, assigns IDs, anchors the sidebar to the real article card/rightmost safe container, hides if it would land in the left half or overlap content, and self-heals if Wix/React rerenders the blog DOM.
-- `README.md`, `wix-embed-snippets.md` — documented the helper and install snippet.
+- `js/blog-sidebar-inject.js` — new Wix Custom Code script for `/post/` pages; finds visible `h2/h3` headings, assigns IDs, prefers the real article card/rightmost safe container, falls back to a fixed right rail on wide screens, hides below 1500px, and self-heals if Wix/React rerenders the blog DOM.
+- `README.md`, `wix-embed-snippets.md` — documented the helper, install snippet, and 1500px desktop threshold.
 - Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the new helper URL/behavior and session state.
 
 **Opened:** Push/deploy widgets repo, then add the Custom Code script in Wix (Body end, blog post pages or all pages; it self-skips non-post URLs) and verify on a wide desktop blog post.
-**Closed:** Local syntax check passed; local smoke test generated sidebar links/progress/IDs correctly. Follow-up syntax check passed after live-position hardening.
+**Closed:** Local syntax check passed; local smoke test generated sidebar links/progress/IDs correctly. Follow-up syntax check passed after right-rail fallback.
 
 **Next session should:** Verify live on `berlinwalk.com/post/...`; if Yusuf wants it visible on narrower desktops, reduce sidebar width/gap or allow overlay behavior.
 
