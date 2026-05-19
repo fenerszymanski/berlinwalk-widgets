@@ -241,7 +241,7 @@ class BWHeaderElement extends HTMLElement {
 
         .bw-header-logo img {
           display: block;
-          height: 56px;
+          height: 72px;
           transition: height 200ms ease;
           width: auto;
         }
@@ -442,7 +442,7 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-shrunk .bw-header-logo img {
-          height: 40px;
+          height: 52px;
         }
 
         .bw-header-shrunk .bw-header-book {
@@ -614,7 +614,7 @@ class BWHeaderElement extends HTMLElement {
             flex-direction: row !important;
             gap: 12px;
             justify-content: space-between !important;
-            min-height: 64px;
+            min-height: 76px;
             padding: 10px 18px !important;
           }
           .bw-header-logo {
@@ -623,8 +623,8 @@ class BWHeaderElement extends HTMLElement {
           }
           .bw-header-logo img {
             display: block !important;
-            height: 44px !important;
-            max-width: 180px;
+            height: 56px !important;
+            max-width: 200px;
             width: auto !important;
           }
           .bw-header-cta {
@@ -636,7 +636,7 @@ class BWHeaderElement extends HTMLElement {
             padding: 8px 18px !important;
           }
           .bw-header-shrunk .bw-header-logo img {
-            height: 36px !important;
+            height: 44px !important;
           }
         }
       </style>
