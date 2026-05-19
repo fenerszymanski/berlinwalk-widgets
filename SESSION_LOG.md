@@ -6,6 +6,33 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (Currywurst map viewport)
+
+**Did:** Fixed the Currywurst Finder map initial viewport.
+
+**Changed:**
+- `currywurst-finder/index.html` — added Berlin min zoom/max bounds, fixed all-places bounds, and refit after Leaflet `invalidateSize()` so Wix iframe startup does not show the whole world.
+
+**Opened:** Push/deploy repo so GitHub Pages and the Wix embed receive the fix.
+**Closed:** Local desktop/mobile QA: first load uses Berlin zoom tiles, 8 pins render, vegan filter shows 4 pins, no mobile horizontal overflow.
+
+**Next session should:** Verify the live blog embed after the next GitHub Pages deploy.
+
+## 2026-05-19 — Codex (Currywurst published)
+
+**Did:** Recorded that the currywurst article/tool package is live.
+
+**Changed:**
+- Wix Blog: `Best Currywurst in Berlin: 8 Places to Try in 2026` is published at `https://www.berlinwalk.com/post/best-currywurst-places-in-berlin-2026` (verified 200).
+- Live widget URL `https://fenerszymanski.github.io/berlinwalk-widgets/currywurst-finder/` and Wix Tools URL `/tools/berlin-currywurst-finder` were verified 200.
+- `AGENTS.md` — removed the currywurst publish follow-up from open items.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — updated published status/handoff.
+
+**Opened:** none
+**Closed:** Currywurst article publish follow-up.
+
+**Next session should:** Treat the currywurst post and finder as live; recheck ratings/opening hours only during future content refreshes.
+
 ## 2026-05-19 — Codex (Currywurst Wix draft + CMS)
 
 **Did:** Created the Wix Blog draft and BerlinTools CMS row for the currywurst package.

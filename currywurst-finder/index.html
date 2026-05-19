@@ -640,6 +640,9 @@
       var map = L.map(mapEl, {
         center: [52.515, 13.385],
         zoom: 11,
+        minZoom: 10,
+        maxBounds: [[52.32, 13.05], [52.68, 13.75]],
+        maxBoundsViscosity: 0.6,
         scrollWheelZoom: false,
         tap: true
       });
@@ -656,6 +659,7 @@
       var listEl = root.querySelector('[data-list]');
       var countEl = root.querySelector('[data-count]');
       var activeFilter = 'all';
+      var berlinBounds = L.latLngBounds([[52.43, 13.25], [52.58, 13.48]]);
 
       function escapeHtml(value) {
         return String(value).replace(/[&<>"']/g, function (character) {
@@ -725,7 +729,24 @@
         });
       }
 
-      function render() {
+      function fitVisiblePlaces(visible, options) {
+        var fitOptions = Object.assign({
+          maxZoom: activeFilter === 'tour-end' ? 14 : 12,
+          padding: [22, 22]
+        }, options || {});
+
+        if (activeFilter === 'all') {
+          map.fitBounds(berlinBounds, fitOptions);
+          return;
+        }
+
+        var bounds = L.latLngBounds(visible.map(function (place) {
+          return [place.lat, place.lng];
+        }));
+        map.fitBounds(bounds.pad(0.18), fitOptions);
+      }
+
+      function render(options) {
         var visible = filteredPlaces();
         markerLayer.clearLayers();
         markers = {};
@@ -744,12 +765,7 @@
           markers[place.id] = marker;
         });
 
-        if (visible.length) {
-          var bounds = L.latLngBounds(visible.map(function (place) {
-            return [place.lat, place.lng];
-          }));
-          map.fitBounds(bounds.pad(0.14), { maxZoom: activeFilter === 'tour-end' ? 14 : 12 });
-        }
+        if (visible.length) fitVisiblePlaces(visible, options);
 
         root.querySelectorAll('.bw-place').forEach(function (button) {
           button.addEventListener('click', function () {
@@ -770,12 +786,15 @@
             item.classList.remove('is-active');
           });
           button.classList.add('is-active');
-          render();
+          render({ animate: true });
         });
       });
 
-      render();
-      setTimeout(function () { map.invalidateSize(); }, 250);
+      render({ animate: false });
+      setTimeout(function () {
+        map.invalidateSize();
+        fitVisiblePlaces(filteredPlaces(), { animate: false });
+      }, 250);
     })();
   </script>
 </div>

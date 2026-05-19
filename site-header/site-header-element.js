@@ -101,22 +101,31 @@ class BWHeaderElement extends HTMLElement {
       trigger.setAttribute('aria-expanded', String(open));
       if (open) positionMenu();
     };
+    let closeTimer = null;
+    const cancelClose = () => {
+      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+    };
+    const scheduleClose = () => {
+      cancelClose();
+      closeTimer = setTimeout(() => setOpen(false), 220);
+    };
     trigger.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
+      cancelClose();
       setOpen(!wrap.classList.contains('bw-header-dropdown-open'));
     });
     this._docClickHandler = (e) => {
-      if (!wrap.contains(e.target) && !menu.contains(e.target)) setOpen(false);
+      if (!wrap.contains(e.target) && !menu.contains(e.target)) {
+        cancelClose();
+        setOpen(false);
+      }
     };
     document.addEventListener('click', this._docClickHandler);
-    wrap.addEventListener('mouseenter', () => setOpen(true));
-    wrap.addEventListener('mouseleave', (e) => {
-      if (!menu.contains(e.relatedTarget)) setOpen(false);
-    });
-    menu.addEventListener('mouseleave', (e) => {
-      if (!wrap.contains(e.relatedTarget)) setOpen(false);
-    });
+    wrap.addEventListener('mouseenter', () => { cancelClose(); setOpen(true); });
+    wrap.addEventListener('mouseleave', scheduleClose);
+    menu.addEventListener('mouseenter', cancelClose);
+    menu.addEventListener('mouseleave', scheduleClose);
     this._dropdownReposition = () => {
       if (wrap.classList.contains('bw-header-dropdown-open')) positionMenu();
     };
@@ -584,29 +593,50 @@ class BWHeaderElement extends HTMLElement {
         /* Mobile breakpoint */
         @media (max-width: 880px) {
           .bw-header-top {
-            display: none;
+            display: none !important;
           }
           .bw-header-nav {
-            display: none;
+            display: none !important;
           }
           .bw-header-cta .bw-header-book {
-            display: none;
+            display: none !important;
           }
           .bw-header-hamburger {
-            display: flex;
+            display: flex !important;
+          }
+          .bw-header {
+            background: #FFFFFF !important;
           }
           .bw-header-main {
+            align-items: center !important;
+            background: #FFFFFF !important;
+            display: flex !important;
+            flex-direction: row !important;
             gap: 12px;
-            padding: 12px 18px;
+            justify-content: space-between !important;
+            min-height: 64px;
+            padding: 10px 18px !important;
           }
-          .bw-header-shrunk .bw-header-main {
-            padding: 8px 18px;
+          .bw-header-logo {
+            display: inline-flex !important;
+            flex: 0 0 auto;
           }
           .bw-header-logo img {
-            height: 48px;
+            display: block !important;
+            height: 44px !important;
+            max-width: 180px;
+            width: auto !important;
+          }
+          .bw-header-cta {
+            display: flex !important;
+            flex: 0 0 auto;
+          }
+          .bw-header-shrunk .bw-header-main {
+            min-height: 56px;
+            padding: 8px 18px !important;
           }
           .bw-header-shrunk .bw-header-logo img {
-            height: 38px;
+            height: 36px !important;
           }
         }
       </style>
