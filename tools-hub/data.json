@@ -125,6 +125,14 @@
       "embedHeight": 640
     },
     {
+      "slug": "berlin-currywurst-finder",
+      "title": "Berlin Currywurst Finder",
+      "lead": "Find the right currywurst stand for your Berlin day: historic, local, vegan, spicy, late-night, or closest after the tour.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/currywurst-finder/",
+      "embedHeight": 720
+    },
+    {
       "slug": "berlin-sunday-shopping",
       "title": "Berlin Sunday Shopping Map",
       "lead": "Need groceries on a Sunday in Berlin? Find what's open in 30 seconds.",

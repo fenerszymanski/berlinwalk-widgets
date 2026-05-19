@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Currywurst Finder | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-currywurst-finder">
+  <style>
+    #bw-currywurst-finder {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164A1A;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-lime-soft: #EEF7E6;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #DCE8C8;
+      --bw-red: #B83E2F;
+      --bw-blue: #1565C0;
+      --bw-amber: #B66A00;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-currywurst-finder * {
+      box-sizing: border-box;
+    }
+
+    #bw-currywurst-finder .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
+    }
+
+    #bw-currywurst-finder .bw-head {
+      align-items: flex-start;
+      background: var(--bw-green);
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 18px 20px;
+    }
+
+    #bw-currywurst-finder .bw-kicker {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2.2px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-currywurst-finder .bw-title {
+      color: var(--bw-white);
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.18;
+      margin-top: 4px;
+    }
+
+    #bw-currywurst-finder .bw-meta {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 999px;
+      color: var(--bw-white);
+      display: inline-flex;
+      flex: 0 0 auto;
+      font-size: 11px;
+      font-weight: 800;
+      gap: 7px;
+      line-height: 1;
+      padding: 8px 10px;
+      white-space: nowrap;
+    }
+
+    #bw-currywurst-finder .bw-meta-dot {
+      background: var(--bw-yellow);
+      border-radius: 50%;
+      display: inline-block;
+      height: 7px;
+      width: 7px;
+    }
+
+    #bw-currywurst-finder .bw-body {
+      background: var(--bw-cream);
+      padding: 16px 18px 18px;
+    }
+
+    #bw-currywurst-finder .bw-intro {
+      color: var(--bw-muted);
+      font-size: 13px;
+      line-height: 1.55;
+      margin: 0 0 14px;
+      max-width: 860px;
+    }
+
+    #bw-currywurst-finder .bw-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 14px;
+    }
+
+    #bw-currywurst-finder .bw-filter {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+      min-height: 34px;
+      padding: 9px 13px;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-currywurst-finder .bw-filter:hover {
+      background: var(--bw-lime-soft);
+      border-color: var(--bw-lime);
+    }
+
+    #bw-currywurst-finder .bw-filter.is-active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-currywurst-finder .bw-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) 330px;
+    }
+
+    #bw-currywurst-finder .bw-map-container {
+      background: #E8EEDC;
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      height: 500px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    #bw-currywurst-finder .bw-map {
+      height: 100%;
+      width: 100%;
+      z-index: 1;
+    }
+
+    #bw-currywurst-finder .leaflet-container {
+      background: #E8EEDC;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    #bw-currywurst-finder .leaflet-popup-content-wrapper {
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+      padding: 0;
+    }
+
+    #bw-currywurst-finder .leaflet-popup-content {
+      font-family: inherit;
+      margin: 0;
+      width: 268px !important;
+    }
+
+    #bw-currywurst-finder .bw-marker {
+      align-items: center;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-white);
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+      color: var(--bw-yellow);
+      display: flex;
+      font-size: 12px;
+      font-weight: 900;
+      height: 32px;
+      justify-content: center;
+      line-height: 1;
+      width: 32px;
+    }
+
+    #bw-currywurst-finder .bw-marker.tour-end { background: var(--bw-blue); color: var(--bw-white); }
+    #bw-currywurst-finder .bw-marker.spicy { background: var(--bw-red); color: var(--bw-white); }
+    #bw-currywurst-finder .bw-marker.vegan { background: var(--bw-lime); color: var(--bw-green-dark); }
+    #bw-currywurst-finder .bw-marker.late { background: var(--bw-amber); color: var(--bw-white); }
+
+    #bw-currywurst-finder .bw-popup-head {
+      background: var(--bw-green);
+      border-radius: 11px 11px 0 0;
+      color: var(--bw-white);
+      padding: 11px 14px;
+    }
+
+    #bw-currywurst-finder .bw-popup-rank {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+
+    #bw-currywurst-finder .bw-popup-name {
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-currywurst-finder .bw-popup-body {
+      color: var(--bw-text);
+      font-size: 12.5px;
+      line-height: 1.5;
+      padding: 12px 14px 14px;
+    }
+
+    #bw-currywurst-finder .bw-popup-ratings {
+      display: grid;
+      gap: 6px;
+      grid-template-columns: 1fr 1fr;
+      margin: 0 0 9px;
+    }
+
+    #bw-currywurst-finder .bw-rating {
+      background: var(--bw-lime-soft);
+      border-radius: 8px;
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1.25;
+      padding: 7px 8px;
+    }
+
+    #bw-currywurst-finder .bw-popup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    #bw-currywurst-finder .bw-action {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 6px;
+      color: var(--bw-yellow);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1;
+      padding: 8px 9px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    #bw-currywurst-finder .bw-action.secondary {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      color: var(--bw-green);
+    }
+
+    #bw-currywurst-finder .bw-panel {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      max-height: 500px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-currywurst-finder .bw-panel-head {
+      border-bottom: 1px solid var(--bw-border);
+      padding: 12px 14px;
+    }
+
+    #bw-currywurst-finder .bw-panel-title {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    #bw-currywurst-finder .bw-panel-note {
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.45;
+      margin: 4px 0 0;
+    }
+
+    #bw-currywurst-finder .bw-list {
+      display: grid;
+      gap: 0;
+      overflow: auto;
+    }
+
+    #bw-currywurst-finder .bw-place {
+      background: var(--bw-white);
+      border: 0;
+      border-bottom: 1px solid var(--bw-border);
+      color: inherit;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 8px;
+      padding: 12px 14px;
+      text-align: left;
+      width: 100%;
+    }
+
+    #bw-currywurst-finder .bw-place:hover,
+    #bw-currywurst-finder .bw-place.is-active {
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-currywurst-finder .bw-place-top {
+      align-items: center;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: 28px minmax(0, 1fr);
+    }
+
+    #bw-currywurst-finder .bw-num {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 50%;
+      color: var(--bw-yellow);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
+    }
+
+    #bw-currywurst-finder .bw-place-name {
+      color: var(--bw-text);
+      display: block;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-currywurst-finder .bw-place-area {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    #bw-currywurst-finder .bw-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    #bw-currywurst-finder .bw-badge {
+      background: #F5F8EF;
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      padding: 5px 7px;
+      white-space: nowrap;
+    }
+
+    #bw-currywurst-finder .bw-place-verdict {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-currywurst-finder .bw-footer {
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+      padding: 11px 18px;
+    }
+
+    #bw-currywurst-finder .bw-footer strong {
+      color: var(--bw-green);
+      font-weight: 900;
+    }
+
+    @media (max-width: 760px) {
+      #bw-currywurst-finder { margin: 22px 0; }
+      #bw-currywurst-finder .bw-head {
+        grid-template-columns: 1fr;
+        padding: 15px 16px;
+      }
+      #bw-currywurst-finder .bw-title { font-size: 19px; }
+      #bw-currywurst-finder .bw-meta {
+        justify-self: start;
+      }
+      #bw-currywurst-finder .bw-body { padding: 14px; }
+      #bw-currywurst-finder .bw-intro { font-size: 12.5px; }
+      #bw-currywurst-finder .bw-filter {
+        flex: 1 1 calc(50% - 8px);
+        min-width: 136px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      #bw-currywurst-finder .bw-grid {
+        grid-template-columns: 1fr;
+      }
+      #bw-currywurst-finder .bw-map-container {
+        height: 380px;
+      }
+      #bw-currywurst-finder .bw-panel {
+        max-height: none;
+      }
+      #bw-currywurst-finder .leaflet-popup-content {
+        width: 232px !important;
+      }
+      #bw-currywurst-finder .bw-popup-ratings {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <div>
+        <span class="bw-kicker">Berlin Currywurst Finder</span>
+        <div class="bw-title">Pick the right currywurst stand for your Berlin day</div>
+      </div>
+      <div class="bw-meta"><span class="bw-meta-dot" aria-hidden="true"></span>Ratings checked May 2026</div>
+    </div>
+    <div class="bw-body">
+      <p class="bw-intro">Eight Berlin currywurst places, mapped for visitors. Filter by classic, vegan, spicy, late-night, or closest after the BerlinWalk tour, then open directions in Google Maps.</p>
+
+      <div class="bw-filters" aria-label="Filter Berlin currywurst places">
+        <button class="bw-filter is-active" type="button" data-filter="all">All 8</button>
+        <button class="bw-filter" type="button" data-filter="tour-end">After tour</button>
+        <button class="bw-filter" type="button" data-filter="classic">Classic</button>
+        <button class="bw-filter" type="button" data-filter="local">Local pick</button>
+        <button class="bw-filter" type="button" data-filter="late">Late night</button>
+        <button class="bw-filter" type="button" data-filter="vegan">Vegan option</button>
+        <button class="bw-filter" type="button" data-filter="spicy">Spicy</button>
+      </div>
+
+      <div class="bw-grid">
+        <div class="bw-map-container">
+          <div class="bw-map" id="bw-currywurst-map-canvas"></div>
+        </div>
+        <div class="bw-panel">
+          <div class="bw-panel-head">
+            <p class="bw-panel-title"><span data-count>8</span> places shown</p>
+            <p class="bw-panel-note">Tap a card or map pin for the BerlinWalk verdict, ratings, order tip, and directions.</p>
+          </div>
+          <div class="bw-list" data-list></div>
+        </div>
+      </div>
+    </div>
+    <div class="bw-footer"><strong>Note:</strong> Ratings and hours change. Google ratings are manual snapshots from public listing aggregators, paired with a second source where available. Recheck before publishing or travelling.</div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-currywurst-finder');
+      var mapEl = document.getElementById('bw-currywurst-map-canvas');
+      if (!root || !mapEl || !window.L) return;
+
+      var tourEnd = 'Hackescher Markt, Berlin';
+      var places = [
+        {
+          id: 'curry-baude',
+          name: 'Curry Baude',
+          area: 'Gesundbrunnen',
+          rank: 'Best local pick',
+          lat: 52.5489,
+          lng: 13.3886,
+          google: '4.5 / 4.0k',
+          second: 'Tripadvisor 4.7 / 109',
+          source: 'Wanderlog, Tripadvisor, visitBerlin',
+          tags: ['classic', 'local'],
+          badges: ['Local classic', 'House-made', 'Station stop'],
+          order: 'Currywurst ohne Darm, fries, house sauce if available.',
+          verdict: 'The strongest serious pick if someone asks where locals still send people for currywurst.',
+          maps: 'https://www.google.com/maps/search/?api=1&query=Curry+Baude+Badstrasse+1+Berlin'
+        },
+        {
+          id: 'curry-61',
+          name: 'Curry 61',
+          area: 'Mitte, near Hackescher Markt',
+          rank: 'Best after the tour',
+          lat: 52.5246,
+          lng: 13.3948,
+          google: '4.7 / 8.1k',
+          second: 'Tripadvisor 4.3 / 1.5k',
+          source: 'Wanderlog, Top-Rated Online',
+          tags: ['tour-end', 'vegan', 'classic'],
+          badges: ['After tour', 'Central', 'Vegan option'],
+          order: 'Classic currywurst with fries, spicy powder if you want a little heat.',
+          verdict: 'The easiest recommendation after BerlinWalk ends near Hackescher Markt.',
+          maps: 'https://www.google.com/maps/search/?api=1&query=Curry+61+Oranienburger+Strasse+6+Berlin'
+        },
+        {
+          id: 'zur-bratpfanne',
+          name: 'Zur Bratpfanne',
+          area: 'Steglitz',
+          rank: 'Best old West Berlin classic',
+          lat: 52.4636,
+          lng: 13.3273,
+          google: '4.6 / 3.3k',
+          second: 'Tripadvisor 4.5 / 111',
+          source: 'Wanderlog, restaurant.info',
+          tags: ['classic', 'local', 'late'],
+          badges: ['Since 1949', 'Local detour', 'Late-ish'],
+          order: 'Currywurst with fries and the house ketchup.',
+          verdict: 'Worth the ride if the article needs a connoisseur pick beyond Mitte and Kreuzberg.',
+          maps: 'https://www.google.com/maps/search/?api=1&query=Zur+Bratpfanne+Schlossstrasse+Berlin'
+        },
+        {
+          id: 'curry-und-chili',
+          name: 'Curry & Chili',
+          area: 'Wedding',
+          rank: 'Best spicy challenge',
+          lat: 52.5566,
+          lng: 13.3813,
+          google: '4.6 / 1.5k',
+          second: 'Tripadvisor 4.5 / 29',
+          source: 'Wanderlog, Top-Rated Online',
+          tags: ['spicy', 'local'],
+          badges: ['Spicy', 'Cash likely', 'Local detour'],
+          order: 'Start lower than your ego wants. Level 5 to 7 is already a real decision.',
+          verdict: 'Not the first currywurst for everyone, but perfect for the spicy angle and a memorable widget result.',
+          maps: 'https://www.google.com/maps/search/?api=1&query=Curry+und+Chili+Prinzenallee+Osloer+Strasse+Berlin'
+        },
+        {
+          id: 'konnopkes',
+          name: "Konnopke's Imbiss",
+          area: 'Prenzlauer Berg',
+          rank: 'Most historic East Berlin pick',
+          lat: 52.5415,
+          lng: 13.4129,
+          google: '4.2 / 5.9k',
+          second: 'Tripadvisor 3.9 / 802',
+          source: 'Official site, Wanderlog, Tripadvisor',
+          tags: ['classic', 'vegan'],
+          badges: ['Since 1930', 'East Berlin story', 'Vegan option'],
+          order: 'Currywurst ohne Darm, fries, and a beer if you are staying a while.',
+          verdict: 'Go for the Berlin history and the under-the-U-Bahn setting, not because it is a secret.',
+          maps: 'https://www.google.com/maps/search/?api=1&query=Konnopkes+Imbiss+Schoenhauser+Allee+44b+Berlin'
+        },
+        {
+          id: 'curry-36',
+          name: 'Curry 36 Mehringdamm',
+          area: 'Kreuzberg',
+          rank: 'Most famous late-night classic',
+          lat: 52.4932,
+          lng: 13.3873,
+          google: '4.2 / 13.5k',
+          second: 'Tripadvisor 3.9 / 2.2k',
+          source: 'Wanderlog, Tripadvisor, Tripexpert',
+          tags: ['classic', 'late', 'vegan'],
+          badges: ['Famous', 'Late night', 'Vegan option'],
+          order: 'Currywurst mit Pommes rot-weiss. It is the classic tourist-safe order.',
+          verdict: 'Not hidden, not delicate, still useful because it stays open late and defines the famous Berlin version.',
+          maps: 'https://www.google.com/maps/search/?api=1&query=Curry+36+Mehringdamm+36+Berlin'
+        },
+        {
+          id: 'wittys',
+          name: "Witty's Wittenbergplatz",
+          area: 'Schoeneberg, near KaDeWe',
+          rank: 'Best organic and vegan option',
+          lat: 52.5017,
+          lng: 13.3427,
+          google: '4.0 / 732',
+          second: 'Tripadvisor 4.0 / 226',
+          source: 'Official site, Wanderlog, Tripadvisor, Falstaff',
+          tags: ['vegan', 'late'],
+          badges: ['Organic', 'Vegan option', 'Near KaDeWe'],
+          order: 'Organic currywurst or vegan currywurst with crispy fries.',
+          verdict: 'The right choice for visitors who care about organic sourcing, vegan options, or the KaDeWe area.',
+          maps: 'https://www.google.com/maps/search/?api=1&query=Wittys+Wittenbergplatz+5+Berlin'
+        },
+        {
+          id: 'krasselts',
+          name: "Krasselt's Imbiss",
+          area: 'Steglitz',
+          rank: 'Best deep-cut classic',
+          lat: 52.4564,
+          lng: 13.3435,
+          google: '4.3 / 1.5k',
+          second: 'Tripadvisor 4.5 / 69',
+          source: 'Wanderlog, Tripadvisor, GoLocal',
+          tags: ['classic', 'local'],
+          badges: ['Local deep cut', 'House ketchup', 'Steglitz'],
+          order: 'Try with skin and without skin if you want the full Berlin comparison.',
+          verdict: 'A strong local-name pick for readers who want one place outside the usual tourist loop.',
+          maps: 'https://www.google.com/maps/search/?api=1&query=Krasselts+Imbiss+Steglitzer+Damm+22+Berlin'
+        }
+      ];
+
+      function directionsUrl(place) {
+        return 'https://www.google.com/maps/dir/?api=1&origin=' +
+          encodeURIComponent(tourEnd) +
+          '&destination=' + encodeURIComponent(place.name + ', ' + place.area + ', Berlin') +
+          '&travelmode=walking';
+      }
+
+      function markerClass(place) {
+        if (place.tags.indexOf('tour-end') !== -1) return 'tour-end';
+        if (place.tags.indexOf('spicy') !== -1) return 'spicy';
+        if (place.tags.indexOf('vegan') !== -1) return 'vegan';
+        if (place.tags.indexOf('late') !== -1) return 'late';
+        return 'classic';
+      }
+
+      var map = L.map(mapEl, {
+        center: [52.515, 13.385],
+        zoom: 11,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var markerLayer = L.layerGroup().addTo(map);
+      var markers = {};
+      var listEl = root.querySelector('[data-list]');
+      var countEl = root.querySelector('[data-count]');
+      var activeFilter = 'all';
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (character) {
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+          }[character];
+        });
+      }
+
+      function iconFor(place, index) {
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: '<div class="bw-marker ' + markerClass(place) + '">' + (index + 1) + '</div>',
+          iconSize: [32, 32],
+          iconAnchor: [16, 16],
+          popupAnchor: [0, -18]
+        });
+      }
+
+      function popup(place) {
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-rank">' + escapeHtml(place.rank) + '</span>' +
+          '<div class="bw-popup-name">' + escapeHtml(place.name) + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<div class="bw-popup-ratings">' +
+          '<div class="bw-rating">Google<br>' + escapeHtml(place.google) + '</div>' +
+          '<div class="bw-rating">' + escapeHtml(place.second).replace(' ', '<br>') + '</div>' +
+          '</div>' +
+          '<strong>Order:</strong> ' + escapeHtml(place.order) + '<br>' +
+          '<strong>Verdict:</strong> ' + escapeHtml(place.verdict) +
+          '<div class="bw-popup-actions">' +
+          '<a class="bw-action" href="' + place.maps + '" target="_blank" rel="noopener">Google Maps</a>' +
+          '<a class="bw-action secondary" href="' + directionsUrl(place) + '" target="_blank" rel="noopener">From tour end</a>' +
+          '</div>' +
+          '</div>';
+      }
+
+      function placeButton(place, index) {
+        return '<button class="bw-place" type="button" data-place="' + place.id + '">' +
+          '<span class="bw-place-top">' +
+          '<span class="bw-num">' + (index + 1) + '</span>' +
+          '<span><span class="bw-place-name">' + escapeHtml(place.name) + '</span>' +
+          '<span class="bw-place-area">' + escapeHtml(place.area) + ' | ' + escapeHtml(place.rank) + '</span></span>' +
+          '</span>' +
+          '<span class="bw-badge-row">' + place.badges.map(function (badge) {
+            return '<span class="bw-badge">' + escapeHtml(badge) + '</span>';
+          }).join('') + '</span>' +
+          '<span class="bw-place-verdict">' + escapeHtml(place.verdict) + '</span>' +
+          '</button>';
+      }
+
+      function filteredPlaces() {
+        if (activeFilter === 'all') return places.slice();
+        return places.filter(function (place) {
+          return place.tags.indexOf(activeFilter) !== -1;
+        });
+      }
+
+      function setActivePlace(id) {
+        root.querySelectorAll('.bw-place').forEach(function (button) {
+          button.classList.toggle('is-active', button.getAttribute('data-place') === id);
+        });
+      }
+
+      function render() {
+        var visible = filteredPlaces();
+        markerLayer.clearLayers();
+        markers = {};
+        listEl.innerHTML = visible.map(placeButton).join('');
+        if (countEl) countEl.textContent = String(visible.length);
+
+        visible.forEach(function (place, index) {
+          var marker = L.marker([place.lat, place.lng], {
+            icon: iconFor(place, index)
+          }).bindPopup(popup(place), {
+            closeButton: true,
+            maxWidth: 286
+          });
+          marker.on('click', function () { setActivePlace(place.id); });
+          marker.addTo(markerLayer);
+          markers[place.id] = marker;
+        });
+
+        if (visible.length) {
+          var bounds = L.latLngBounds(visible.map(function (place) {
+            return [place.lat, place.lng];
+          }));
+          map.fitBounds(bounds.pad(0.14), { maxZoom: activeFilter === 'tour-end' ? 14 : 12 });
+        }
+
+        root.querySelectorAll('.bw-place').forEach(function (button) {
+          button.addEventListener('click', function () {
+            var id = button.getAttribute('data-place');
+            var marker = markers[id];
+            if (!marker) return;
+            setActivePlace(id);
+            map.setView(marker.getLatLng(), Math.max(map.getZoom(), 13), { animate: true });
+            marker.openPopup();
+          });
+        });
+      }
+
+      root.querySelectorAll('.bw-filter').forEach(function (button) {
+        button.addEventListener('click', function () {
+          activeFilter = button.getAttribute('data-filter') || 'all';
+          root.querySelectorAll('.bw-filter').forEach(function (item) {
+            item.classList.remove('is-active');
+          });
+          button.classList.add('is-active');
+          render();
+        });
+      });
+
+      render();
+      setTimeout(function () { map.invalidateSize(); }, 250);
+    })();
+  </script>
+</div>
+</body>
+</html>

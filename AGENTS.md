@@ -183,6 +183,7 @@ When Yusuf is in the Wix automation editor → email step → "Edit email," the 
 Pulled from `SESSION_LOG.md` — see that file for active state. As of the latest session:
 
 1. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug. *(Deferred far out per Yusuf on 2026-05-16.)*
+2. **Currywurst article/tool publish follow-up.** Create the BerlinTools CMS row for `/tools/berlin-currywurst-finder`, recheck live Google Maps ratings/opening hours, then create/publish the Wix blog draft from `blog-drafts/best-currywurst-places-in-berlin-2026.md`.
 
 ## 9. Protocol for ending a session
 

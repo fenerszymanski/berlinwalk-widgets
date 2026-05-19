@@ -6,6 +6,22 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (Currywurst finder)
+
+**Did:** Built the first version of the Berlin Currywurst Finder widget and local draft scaffold for the planned `Best Currywurst in Berlin` post.
+
+**Changed:**
+- `currywurst-finder/index.html` — new Leaflet map widget with 8 currywurst places, filters, Google Maps links, rating snapshots, order tips, and tour-end directions.
+- `tools-hub/data.json`, `widgets-hub/SEO_ADDITIONAL_TAGS.md`, `README.md` — added the new tool to the tools/widgets catalog and regenerated widget gallery JSON-LD.
+- `blog-drafts/best-currywurst-places-in-berlin-2026.md` — local article scaffold with rating table, embed plan, structure, FAQ ideas, and source list.
+- `quick-summary/data.json`, `faq/data.json` — added `currywurst` entries for the post widgets.
+- `AGENTS.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded follow-up tasks and cross-agent memory.
+
+**Opened:** Create the matching BerlinTools CMS row for `/tools/berlin-currywurst-finder`; before publishing the article, recheck live Google Maps ratings/opening hours and optionally create/paste a Wix blog draft.
+**Closed:** Local desktop/mobile QA passed for the finder; quick-summary and FAQ keys render locally.
+
+**Next session should:** Decide whether to push the widget repo first or create the Wix CMS/blog draft in the same pass.
+
 ## 2026-05-19 — Claude Code (Booking page redesign)
 
 **Did:** Rebuilt `/book-berlin-walking-tour/berlin-free-walking-tour-tip-based` as two custom elements wrapping the Wix-native Bookings widget. Wix Bookings widget itself is unchanged (must stay native — handles availability, checkout, 7-email trigger, calendar sync).
