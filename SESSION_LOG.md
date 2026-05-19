@@ -6,6 +6,20 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (Homepage planning tools section)
+
+**Did:** Reframed the homepage `bw-tools-home` section from generic "Free Berlin Tools" into a clearer visit-planning module.
+
+**Changed:**
+- `tools-home/tools-home-element.js` — new `Plan your Berlin visit in minutes` header, local-guide summary panel, planning CTA text, tighter 8px card styling, and `target="_top"` navigation.
+- `tools-home/index.html` — simplified the fallback preview so it loads the same Custom Element source.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the new homepage tools positioning.
+
+**Opened:** Yusuf needs to replace/update the homepage tools Custom Element after pushing/deploying the repo.
+**Closed:** Local desktop/mobile QA passed with no horizontal overflow.
+
+**Next session should:** Verify the live homepage section after Wix placement, especially the right summary panel and sticky booking CTA overlap.
+
 ## 2026-05-19 — Codex (Homepage guide teaser)
 
 **Did:** Built a new `bw-guide-home` Custom Element to replace the old Wix-native homepage `Meet Your Guide, Yusuf` section.

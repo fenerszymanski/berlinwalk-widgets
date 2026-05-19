@@ -26,13 +26,13 @@ class BWToolsHomeElement extends HTMLElement {
 
         .bw-tools-home {
           --serif: Merriweather, Georgia, serif;
-          background: #FAFAF5;
+          background: #FFFFFF;
           color: #212121;
           font-family: Montserrat, Arial, sans-serif;
           margin: 0;
           max-width: 100%;
           overflow-x: hidden;
-          padding: 48px 24px;
+          padding: 64px 24px;
         }
 
         .bw-tools-home *,
@@ -53,9 +53,11 @@ class BWToolsHomeElement extends HTMLElement {
         }
 
         .bw-tools-home .bw-tools-home-header {
-          margin: 0 auto 26px;
-          max-width: 760px;
-          text-align: center;
+          align-items: end;
+          display: grid;
+          gap: 26px;
+          grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
+          margin: 0 0 30px;
         }
 
         .bw-tools-home .bw-tools-home-kicker {
@@ -71,19 +73,62 @@ class BWToolsHomeElement extends HTMLElement {
 
         .bw-tools-home .bw-tools-home-title {
           color: #1B5E20;
-          font-size: 34px;
+          font-size: 42px;
           font-weight: 800;
-          line-height: 1.14;
-          margin-bottom: 10px;
+          line-height: 1.08;
+          margin-bottom: 12px;
         }
 
         .bw-tools-home .bw-tools-home-lead {
           color: #4E5A4E;
           font-family: var(--serif);
-          font-size: 16px;
-          line-height: 1.6;
+          font-size: 17px;
+          line-height: 1.65;
           margin-bottom: 0;
-          white-space: nowrap;
+          max-width: 640px;
+        }
+
+        .bw-tools-home .bw-tools-home-panel {
+          background: #FAFAF5;
+          border: 1px solid #C5E1A5;
+          border-left: 5px solid #1B5E20;
+          border-radius: 8px;
+          padding: 18px 20px;
+        }
+
+        .bw-tools-home .bw-tools-home-panel h3 {
+          color: #1B5E20;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 1px;
+          line-height: 1.3;
+          margin-bottom: 9px;
+          text-transform: uppercase;
+        }
+
+        .bw-tools-home .bw-tools-home-panel p {
+          color: #4E5A4E;
+          font-family: var(--serif);
+          font-size: 14px;
+          line-height: 1.55;
+          margin-bottom: 14px;
+        }
+
+        .bw-tools-home .bw-tools-home-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 7px;
+        }
+
+        .bw-tools-home .bw-tools-home-tag {
+          background: #FFE600;
+          border-radius: 999px;
+          color: #1B5E20;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.7px;
+          padding: 6px 9px;
+          text-transform: uppercase;
         }
 
         .bw-tools-home .bw-tools-grid {
@@ -96,11 +141,12 @@ class BWToolsHomeElement extends HTMLElement {
           align-items: flex-start;
           background: #FFFFFF;
           border: 1px solid #C5E1A5;
-          border-radius: 12px;
+          border-radius: 8px;
           color: inherit;
           display: flex;
           flex-direction: row;
           gap: 16px;
+          min-height: 178px;
           min-width: 0;
           opacity: 0;
           padding: 18px 20px;
@@ -133,7 +179,7 @@ class BWToolsHomeElement extends HTMLElement {
         }
 
         .bw-tools-home .bw-tool-card-thumb {
-          border-radius: 8px;
+          border-radius: 7px;
           flex-shrink: 0;
           height: 80px;
           object-fit: cover;
@@ -143,7 +189,7 @@ class BWToolsHomeElement extends HTMLElement {
         .bw-tools-home .bw-tool-card-placeholder {
           align-items: center;
           background: linear-gradient(135deg, #FFE600, #7CB342);
-          border-radius: 8px;
+          border-radius: 7px;
           color: #1B5E20;
           display: flex;
           flex-shrink: 0;
@@ -193,13 +239,16 @@ class BWToolsHomeElement extends HTMLElement {
         }
 
         .bw-tools-home .bw-tools-home-footer {
-          margin-top: 24px;
-          text-align: center;
+          align-items: center;
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          margin-top: 28px;
         }
 
         .bw-tools-home .bw-btn-primary {
           background: #FFE600;
-          border-radius: 10px;
+          border-radius: 999px;
           color: #1B5E20;
           display: inline-block;
           font-size: 14px;
@@ -220,6 +269,14 @@ class BWToolsHomeElement extends HTMLElement {
         .bw-tools-home .bw-btn-primary:focus-visible {
           outline: 3px solid rgba(27, 94, 32, 0.3);
           outline-offset: 3px;
+        }
+
+        .bw-tools-home .bw-tools-home-footer-note {
+          color: #4E5A4E;
+          font-family: var(--serif);
+          font-size: 14px;
+          line-height: 1.45;
+          margin-bottom: 0;
         }
 
         .bw-tools-home .bw-tools-error {
@@ -284,18 +341,19 @@ class BWToolsHomeElement extends HTMLElement {
         }
 
         @media (max-width: 1024px) {
-          .bw-tools-home .bw-tools-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+          .bw-tools-home .bw-tools-home-header {
+            align-items: stretch;
+            grid-template-columns: 1fr;
           }
 
-          .bw-tools-home .bw-tools-home-lead {
-            white-space: normal;
+          .bw-tools-home .bw-tools-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
 
         @media (max-width: 520px) {
           .bw-tools-home {
-            padding: 32px 16px;
+            padding: 42px 16px;
           }
 
           .bw-tools-home .bw-tools-home-header {
@@ -303,11 +361,15 @@ class BWToolsHomeElement extends HTMLElement {
           }
 
           .bw-tools-home .bw-tools-home-title {
-            font-size: 24px;
+            font-size: 30px;
           }
 
           .bw-tools-home .bw-tools-home-lead {
-            font-size: 14px;
+            font-size: 15px;
+          }
+
+          .bw-tools-home .bw-tools-home-panel {
+            padding: 16px;
           }
 
           .bw-tools-home .bw-tools-grid {
@@ -317,6 +379,7 @@ class BWToolsHomeElement extends HTMLElement {
           .bw-tools-home .bw-tool-card,
           .bw-tools-home .bw-skeleton-card {
             gap: 12px;
+            min-height: 0;
             padding: 14px;
           }
 
@@ -346,6 +409,12 @@ class BWToolsHomeElement extends HTMLElement {
             display: block;
             width: 100%;
           }
+
+          .bw-tools-home .bw-tools-home-footer {
+            align-items: stretch;
+            flex-direction: column;
+            text-align: center;
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -365,9 +434,20 @@ class BWToolsHomeElement extends HTMLElement {
       <section class="bw-tools-home" aria-labelledby="bw-tools-home-title">
         <div class="bw-tools-home-inner">
           <header class="bw-tools-home-header">
-            <span class="bw-tools-home-kicker">Free tools</span>
-            <h2 id="bw-tools-home-title" class="bw-tools-home-title">Free Berlin Tools</h2>
-            <p class="bw-tools-home-lead">Quick calculators, maps, and guides built by a local guide.</p>
+            <div>
+              <span class="bw-tools-home-kicker">Plan your visit</span>
+              <h2 id="bw-tools-home-title" class="bw-tools-home-title">Plan your Berlin visit in minutes</h2>
+              <p class="bw-tools-home-lead">Quick local tools for tickets, budget, weather, water, and first-day choices before you arrive.</p>
+            </div>
+            <aside class="bw-tools-home-panel" aria-label="Planning tools summary">
+              <h3>Built by a local guide</h3>
+              <p>Start with the questions travelers ask most, then bring the rest to the walk.</p>
+              <div class="bw-tools-home-tags" aria-hidden="true">
+                <span class="bw-tools-home-tag">Tickets</span>
+                <span class="bw-tools-home-tag">Budget</span>
+                <span class="bw-tools-home-tag">Maps</span>
+              </div>
+            </aside>
           </header>
 
           <div class="bw-tools-root" aria-live="polite">
@@ -375,7 +455,8 @@ class BWToolsHomeElement extends HTMLElement {
           </div>
 
           <footer class="bw-tools-home-footer">
-            <a href="https://www.berlinwalk.com/berlin-tools" class="bw-btn-primary">See all tools</a>
+            <a href="https://www.berlinwalk.com/berlin-tools" class="bw-btn-primary" target="_top">Explore all planning tools</a>
+            <p class="bw-tools-home-footer-note">Free to use. No signup needed.</p>
           </footer>
         </div>
       </section>
@@ -434,7 +515,7 @@ class BWToolsHomeElement extends HTMLElement {
     const lead = this._escapeHtml(tool.lead || '');
 
     return `
-      <a class="bw-tool-card" href="${href}">
+      <a class="bw-tool-card" href="${href}" target="_top">
         ${image
           ? `<img class="bw-tool-card-thumb" src="${image}" alt="${title}" loading="lazy" decoding="async">`
           : `<span class="bw-tool-card-placeholder" aria-hidden="true">${title.charAt(0)}</span>`}
