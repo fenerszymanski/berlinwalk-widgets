@@ -21,7 +21,12 @@ class BWHeaderElement extends HTMLElement {
   }
 
   disconnectedCallback() {
-    if (this._scrollHandler) window.removeEventListener('scroll', this._scrollHandler);
+    if (this._scrollTargets && this._scrollHandler) {
+      this._scrollTargets.forEach((target) => {
+        if (target && target.removeEventListener) target.removeEventListener('scroll', this._scrollHandler);
+      });
+    }
+    this._setHeaderHidden(false);
     if (this._keyHandler) document.removeEventListener('keydown', this._keyHandler);
     if (this._docClickHandler) document.removeEventListener('click', this._docClickHandler);
     if (this._dropdownReposition) {
@@ -35,15 +40,27 @@ class BWHeaderElement extends HTMLElement {
     const header = this.querySelector('.bw-header-wrap');
     const progress = this.querySelector('.bw-header-progress-bar');
     if (!header) return;
+    this._headerShell = this._findHeaderShell();
+    this._lastScrollY = this._getScrollY();
+    this._setHeaderHidden(false);
     let ticking = false;
     const update = () => {
-      const y = window.scrollY || window.pageYOffset || 0;
+      const y = this._getScrollY();
       header.classList.remove('bw-header-shrunk');
       if (progress) {
         const docH = (document.documentElement.scrollHeight || 0) - (window.innerHeight || 0);
         const pct = docH > 0 ? Math.max(0, Math.min(100, (y / docH) * 100)) : 0;
         progress.style.width = pct + '%';
       }
+      const delta = y - this._lastScrollY;
+      if (y < 24) {
+        this._setHeaderHidden(false);
+      } else if (delta > 8) {
+        this._setHeaderHidden(true);
+      } else if (delta < -8) {
+        this._setHeaderHidden(false);
+      }
+      this._lastScrollY = y;
       ticking = false;
     };
     this._scrollHandler = () => {
@@ -52,8 +69,53 @@ class BWHeaderElement extends HTMLElement {
         ticking = true;
       }
     };
-    window.addEventListener('scroll', this._scrollHandler, { passive: true });
+    this._scrollTargets = [
+      window,
+      document,
+      document.documentElement,
+      document.body,
+      document.scrollingElement
+    ].filter((target, index, list) => target && list.indexOf(target) === index);
+    this._scrollTargets.forEach((target) => target.addEventListener('scroll', this._scrollHandler, { passive: true }));
     update();
+  }
+
+  _getScrollY() {
+    const doc = document.documentElement;
+    const body = document.body;
+    const scrolling = document.scrollingElement;
+    return Math.max(
+      window.scrollY || 0,
+      window.pageYOffset || 0,
+      scrolling ? scrolling.scrollTop || 0 : 0,
+      doc ? doc.scrollTop || 0 : 0,
+      body ? body.scrollTop || 0 : 0
+    );
+  }
+
+  _findHeaderShell() {
+    let node = this.parentElement;
+    let depth = 0;
+    let shell = null;
+    while (node && node !== document.body && depth < 10) {
+      const className = typeof node.className === 'string' ? node.className : '';
+      if (className.includes('wixui-header') || node.tagName.toLowerCase() === 'header') {
+        shell = node;
+      }
+      node = node.parentElement;
+      depth++;
+    }
+    return shell;
+  }
+
+  _setHeaderHidden(hidden) {
+    const target = this._headerShell || this;
+    if (!target) return;
+    this._headerHidden = hidden;
+    target.style.setProperty('transition', 'transform 240ms ease', 'important');
+    target.style.setProperty('will-change', 'transform', 'important');
+    target.style.setProperty('transform', hidden ? 'translateY(-110%)' : 'translateY(0)', 'important');
+    target.style.setProperty('pointer-events', hidden ? 'none' : 'auto', 'important');
   }
 
   _setupMobile() {
