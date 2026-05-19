@@ -6,6 +6,23 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Claude Code (Homepage Berlin Quiz)
+
+**Did:** Ported the homepage `Are You Ready for Berlin?` inline-HTML Wix embed into custom element `<bw-berlin-quiz>` so it stops being a separate iframe-style embed and joins the rest of the custom-element ecosystem.
+
+**Changed:**
+- `berlin-quiz/berlin-quiz-element.js` — new file, defines `<bw-berlin-quiz>`. Three screens (start → 15 questions → result), 4 result tiers, scoped state on the element instance (no globals), method-based event handlers (no inline onclick), querySelector scoped to `this`. Visual parity with the original: dark green gradient bg, yellow accent, Montserrat 900 headlines, A/B/C/D options with lock-on-answer + fact box + restart.
+- `berlin-quiz/index.html` — standalone preview.
+- `AGENTS.md`, `wix-embed-snippets.md` — added berlin-quiz row.
+- Project root: `PROJECT_MEMORY.md` — new `Homepage Berlin Quiz` section + install snippet.
+
+**Opened:** Push widgets repo; remove the Wix Custom Code/HTML embed from the homepage section that hosts the quiz; drop in `<bw-berlin-quiz>` Custom Element. Section should be Apply max width OFF and H Auto (same recipe as booking/header).
+**Closed:** none
+
+**Next session should:** After Yusuf publishes, verify on live: start screen renders, START button enters quiz, all 15 questions cycle through with progress bar, correct/wrong styling + fact box behave, result screen tier matches score, BOOK CTA navigates, restart returns to start. Check on mobile too.
+
+---
+
 ## 2026-05-19 — Codex (Currywurst map viewport)
 
 **Did:** Fixed the Currywurst Finder map initial viewport.

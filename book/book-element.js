@@ -157,6 +157,10 @@ class BWBookHeroElement extends HTMLElement {
           gap: 48px;
           grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
           justify-content: space-between;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 1120px;
+          width: 100%;
         }
 
         .bw-book .bw-book-hero h1 {

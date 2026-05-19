@@ -25,6 +25,7 @@ Source type: Server URL
 | Gallery | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | `bw-gallery` | none |
 | Tools Hub | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tools-hub-element.js` | `bw-tools-hub` | none |
 | Site Header | `https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js` | `bw-site-header` | none |
+| Berlin Quiz (homepage) | `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-quiz/berlin-quiz-element.js` | `bw-berlin-quiz` | none |
 | Site Footer | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | `bw-site-footer` | none |
 | The Guide | `https://fenerszymanski.github.io/berlinwalk-widgets/the-guide/the-guide-element.js` | `bw-the-guide` | none |
 | Book Hero (above Wix Bookings widget) | `https://fenerszymanski.github.io/berlinwalk-widgets/book/book-element.js` | `bw-book-hero` | none |
