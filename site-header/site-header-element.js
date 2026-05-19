@@ -58,13 +58,16 @@ class BWHeaderElement extends HTMLElement {
     const hostRect = this.getBoundingClientRect();
     let node = this.parentElement;
     let depth = 0;
-    while (node && node !== document.body && depth < 4) {
+    while (node && node !== document.body && depth < 7) {
       const rect = node.getBoundingClientRect();
-      const nearHeaderHeight = rect.height > 0 && rect.height < 260;
+      const styles = window.getComputedStyle(node);
+      const minHeight = parseFloat(styles.minHeight) || 0;
+      const nearHeaderHeight = (rect.height > 0 && rect.height < 320) || (minHeight > 0 && minHeight < 320);
       const nearHostWidth = rect.width >= hostRect.width - 4;
       if (nearHeaderHeight && nearHostWidth) {
         node.style.setProperty('height', height + 'px', 'important');
         node.style.setProperty('min-height', '0', 'important');
+        node.style.setProperty('max-height', height + 'px', 'important');
         node.style.setProperty('overflow', 'visible', 'important');
       }
       node = node.parentElement;

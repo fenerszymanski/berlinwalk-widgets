@@ -9,13 +9,13 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-05-19 — Codex (Site header shrink placeholder)
 
-**Did:** Fixed the site header shrink behavior so the custom element height collapses with the visible menu instead of leaving the old placeholder space.
+**Did:** Fixed the site header shrink behavior so the custom element and Wix header wrappers collapse with the visible menu instead of leaving the old placeholder space.
 
 **Changed:**
-- `site-header/site-header-element.js` — added host/wrapper height sync on scroll and resize, including a delayed sync after the shrink transition, plus a cautious Wix wrapper height sync for near-header-sized ancestors.
+- `site-header/site-header-element.js` — added host/wrapper height sync on scroll and resize, including a delayed sync after the shrink transition; expanded Wix wrapper sync to the live `wixui-header` ancestor depth and force-syncs `height`, `min-height`, and `max-height`.
 
 **Opened:** Push/deploy widgets repo, then verify live homepage scroll-down header spacing.
-**Closed:** Local preview verified: header host height is 142px at top and 71px after scroll/shrink; syntax check passed.
+**Closed:** Local preview verified: header host height is 142px at top and 71px after scroll/shrink; live DOM inspection found the remaining 143px Wix header ancestor; syntax check passed.
 
 **Next session should:** After GitHub Pages deploy, verify on the live Wix homepage that the white placeholder gap under the shrunk menu is gone.
 
