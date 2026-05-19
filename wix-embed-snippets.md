@@ -18,6 +18,7 @@ Source type: Server URL
 | --- | --- | --- | --- |
 | Stats | `https://fenerszymanski.github.io/berlinwalk-widgets/stats/stats-element.js` | `bw-stats` | none |
 | How It Works | `https://fenerszymanski.github.io/berlinwalk-widgets/how-it-works/how-it-works-element.js` | `bw-how-it-works` | none |
+| Blog Home | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-home/blog-home-element.js` | `bw-blog-home` | none |
 | Guide Home | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | `bw-guide-home` | none |
 | Tools Home | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | `bw-tools-home` | none |
 | Testimonials | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | `bw-testimonials` | none |

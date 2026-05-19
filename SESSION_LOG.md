@@ -6,6 +6,22 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (Homepage blog teaser)
+
+**Did:** Built a new `bw-blog-home` Custom Element to replace the Wix-native homepage blog CMS grid with a curated `Berlin Travel Notes` section.
+
+**Changed:**
+- `blog-home/blog-home-element.js` — new editorial blog teaser with one featured post, three note cards, images, animations, and `/blog` CTA.
+- `blog-home/data.json` — curated mini-CMS for the four homepage posts.
+- `blog-home/index.html` — standalone preview/fallback page.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md` — documented the new homepage element.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded replacement guidance and install snippet.
+
+**Opened:** Yusuf needs to replace the Wix-native homepage blog section with `<bw-blog-home>` after pushing/deploying the repo.
+**Closed:** Local desktop/mobile QA passed with no horizontal overflow and all images loaded.
+
+**Next session should:** Verify the live homepage placement, especially spacing against the adjacent homepage sections and sticky booking CTA.
+
 ## 2026-05-19 — Codex (Homepage planning tools section)
 
 **Did:** Reframed the homepage `bw-tools-home` section from generic "Free Berlin Tools" into a clearer visit-planning module.
