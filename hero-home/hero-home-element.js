@@ -446,8 +446,8 @@ class BWHeroHomeElement extends HTMLElement {
 
             <div class="bw-hero-proof" aria-label="Tour highlights">
               <div class="bw-hero-proof-item">
-                <strong>5.0</strong>
-                <span>Guest rating</span>
+                <strong>9.8</strong>
+                <span>On Freetour</span>
               </div>
               <div class="bw-hero-proof-item">
                 <strong>12</strong>

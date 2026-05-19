@@ -6,6 +6,22 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (Hero follow-up + stats removal)
+
+**Did:** Adjusted the new homepage hero after live placement feedback: removed the duplicate stats strip, changed hero proof to `9.8 on Freetour`, and made the Route section cream.
+
+**Changed:**
+- `hero-home/hero-home-element.js` — first proof point now `9.8 / On Freetour`.
+- `stats/stats-element.js` — deprecated old stats strip as a hidden no-op so it creates no content or height if left in Wix temporarily.
+- `route/route-element.js` — route section background changed to cream.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md` — removed Stats from recommended homepage snippets and documented deprecation.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the hero proof/stat-strip decision.
+
+**Opened:** Yusuf will remove the old Stats/Tour Facts section from Wix Studio.
+**Closed:** Local check passed: `bw-stats` display none/height 0, no hero-to-route gap, route background cream.
+
+**Next session should:** Verify the live homepage after Wix removes the Stats section and publishes.
+
 ## 2026-05-19 — Codex (Homepage hero)
 
 **Did:** Built a new `bw-hero-home` Custom Element to replace the Wix-native homepage hero/header with a conversion-focused first viewport.

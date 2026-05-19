@@ -424,14 +424,14 @@ class BWRouteElement extends HTMLElement {
   _styles() {
     return `
         bw-route {
-          background: #FFFFFF;
+          background: #FAFAF5;
           display: block;
           width: 100%;
         }
 
         .bw-route {
           --serif: Merriweather, Georgia, serif;
-          background: #FFFFFF;
+          background: #FAFAF5;
           color: #212121;
           font-family: Montserrat, Arial, sans-serif;
           margin: 0;

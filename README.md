@@ -22,7 +22,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `free-museums-map/` - post-specific interactive map for free Berlin museum options.
 - `free-museums-compare/` - post-specific comparison table for free Berlin museum picks.
 - `public-toilets-map/` - live Berlin Open Data public toilet map with nearest-to-user distance.
-- `stats/` - `bw-stats` homepage tour metrics Custom Element.
+- `stats/` - deprecated hidden no-op; remove the old Stats section from Wix because hero now carries the facts.
 - `how-it-works/` - `bw-how-it-works` homepage 3-step walking timeline Custom Element.
 - `tools-home/` - `bw-tools-home` homepage tools preview Custom Element.
 - `testimonials/` - `bw-testimonials` homepage testimonial carousel Custom Element.
@@ -50,7 +50,6 @@ Current homepage Custom Element source URLs:
 
 | Section | Tag | Source URL | Notes |
 | --- | --- | --- | --- |
-| Stats | `bw-stats` | `https://fenerszymanski.github.io/berlinwalk-widgets/stats/stats-element.js` | Metrics section. |
 | How It Works | `bw-how-it-works` | `https://fenerszymanski.github.io/berlinwalk-widgets/how-it-works/how-it-works-element.js` | 3-step timeline. |
 | Hero Home | `bw-hero-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/hero-home/hero-home-element.js` | Homepage conversion hero with real tour photo, booking CTA, route, proof points. |
 | Blog Home | `bw-blog-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-home/blog-home-element.js` | Homepage `Berlin Travel Notes` editorial blog teaser. |
@@ -62,7 +61,7 @@ Current homepage Custom Element source URLs:
 | Site Footer | `bw-site-footer` | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | Global footer with booking CTA, meeting point, planning links, and partner tools link. |
 | The Guide | `bw-the-guide` | `https://fenerszymanski.github.io/berlinwalk-widgets/the-guide/the-guide-element.js` | Standalone guide profile/trust page for `/the-guide`. |
 | Why Walk With Me | `bw-why` | `https://fenerszymanski.github.io/berlinwalk-widgets/why/why-element.js` | White cards, yellow accent bars, Lucide icons. |
-| The Route | `bw-route` | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | Interactive illustrated map with 12 pins. |
+| The Route | `bw-route` | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | Interactive illustrated map with 12 pins on cream background. |
 | FAQ | `bw-faq` | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/faq-element.js` | Use attribute `post="home"`. |
 
 Important live notes:
