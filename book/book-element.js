@@ -327,7 +327,6 @@ class BWBookHeroElement extends HTMLElement {
                   <span class="bw-book-meta-chip">~2 hours</span>
                   <span class="bw-book-meta-chip">English</span>
                   <span class="bw-book-meta-chip">Daily</span>
-                  <span class="bw-book-meta-chip">Small group</span>
                 </div>
 
                 <div class="bw-book-actions">
@@ -349,7 +348,6 @@ class BWBookHeroElement extends HTMLElement {
                   <div><dt>Meeting point</dt><dd>World Clock, Alexanderplatz</dd></div>
                   <div><dt>Ends near</dt><dd>Hackescher Markt</dd></div>
                   <div><dt>Language</dt><dd>English</dd></div>
-                  <div><dt>Group size</dt><dd>Small group</dd></div>
                 </dl>
                 <p class="bw-book-hero-card-foot">No payment to book. Tip your guide at the end based on what the walk was worth to you.</p>
               </aside>
