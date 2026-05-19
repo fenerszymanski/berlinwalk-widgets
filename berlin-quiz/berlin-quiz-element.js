@@ -198,7 +198,7 @@ class BWBerlinQuizElement extends HTMLElement {
           color: #FFFFFF;
           font-family: Montserrat, Arial, sans-serif;
           margin: 0;
-          padding: 56px 24px;
+          padding: 48px 24px 40px;
           position: relative;
           width: 100%;
         }
@@ -284,6 +284,7 @@ class BWBerlinQuizElement extends HTMLElement {
           max-width: 480px;
           padding: 0 4px;
           text-align: center;
+          text-wrap: balance;
         }
 
         .bw-quiz-btn-primary {
@@ -558,6 +559,7 @@ class BWBerlinQuizElement extends HTMLElement {
           margin: 0 auto 20px;
           max-width: 420px;
           text-align: center;
+          text-wrap: balance;
         }
 
         .bw-quiz-btn-cta {
