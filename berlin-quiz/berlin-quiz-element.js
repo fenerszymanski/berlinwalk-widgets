@@ -276,11 +276,11 @@ class BWBerlinQuizElement extends HTMLElement {
           color: #FFE600;
         }
 
-        .bw-quiz-start-desc {
+        .bw-quiz-section .bw-quiz-start-desc {
           color: rgba(255, 255, 255, 0.55);
           font-size: 15px;
           line-height: 1.65;
-          margin: 0 auto 36px;
+          margin: 0 auto 46px;
           max-width: 480px;
           padding: 0 4px;
           text-align: center;
@@ -323,10 +323,10 @@ class BWBerlinQuizElement extends HTMLElement {
           padding: 4px 9px;
         }
 
-        .bw-quiz-watermark {
+        .bw-quiz-section .bw-quiz-watermark {
           color: rgba(255, 255, 255, 0.22);
           font-size: 11px;
-          margin-top: 26px;
+          margin-top: 38px;
         }
 
         .bw-quiz-quiz-inner {
@@ -552,7 +552,7 @@ class BWBerlinQuizElement extends HTMLElement {
           color: #FFE600;
         }
 
-        .bw-quiz-result-desc {
+        .bw-quiz-section .bw-quiz-result-desc {
           color: rgba(255, 255, 255, 0.55);
           font-size: 13px;
           line-height: 1.6;
