@@ -6,6 +6,18 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (The Guide hero balance)
+
+**Did:** Rebalanced the `/the-guide` hero after the newer portrait photo made the right card too tall and left too much empty space on the text side.
+
+**Changed:**
+- `the-guide/the-guide-element.js` — changed hero profile image from 3:4 to controlled 4:3 crop, centered the hero grid vertically, and added a compact "What you get on the walk" proof panel under the hero buttons.
+
+**Opened:** none
+**Closed:** Local desktop/mobile QA passed with no horizontal overflow; hero height is shorter and visually more balanced.
+
+**Next session should:** Push/deploy, then verify live `/the-guide` hero crop against the actual Wix page width.
+
 ## 2026-05-18 — Codex (The Guide page)
 
 **Did:** Built a dedicated `bw-the-guide` Custom Element for the planned `/the-guide` page, replacing the old primary-nav anchor idea with a real guide/trust page.

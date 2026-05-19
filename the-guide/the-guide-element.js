@@ -69,10 +69,10 @@ class BWTheGuideElement extends HTMLElement {
         }
 
         .bw-guide .bw-guide-hero-grid {
-          align-items: start;
+          align-items: center;
           display: grid;
-          gap: 42px;
-          grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
+          gap: 48px;
+          grid-template-columns: minmax(0, 0.98fr) minmax(360px, 0.82fr);
         }
 
         .bw-guide .bw-guide-kicker {
@@ -117,6 +117,54 @@ class BWTheGuideElement extends HTMLElement {
           display: flex;
           flex-wrap: wrap;
           gap: 12px;
+        }
+
+        .bw-guide .bw-guide-proof {
+          border: 1px solid var(--light-green);
+          border-left: 5px solid var(--green);
+          border-radius: 8px;
+          display: grid;
+          gap: 14px;
+          margin-top: 30px;
+          max-width: 680px;
+          padding: 18px 20px;
+        }
+
+        .bw-guide .bw-guide-proof h2 {
+          color: var(--green);
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 1.2px;
+          line-height: 1.3;
+          margin-bottom: 0;
+          text-transform: uppercase;
+        }
+
+        .bw-guide .bw-guide-proof-list {
+          display: grid;
+          gap: 10px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .bw-guide .bw-guide-proof-item {
+          min-width: 0;
+        }
+
+        .bw-guide .bw-guide-proof-item strong {
+          color: var(--green);
+          display: block;
+          font-size: 13px;
+          font-weight: 800;
+          line-height: 1.25;
+          margin-bottom: 4px;
+        }
+
+        .bw-guide .bw-guide-proof-item span {
+          color: var(--muted);
+          display: block;
+          font-family: var(--serif);
+          font-size: 13px;
+          line-height: 1.45;
         }
 
         .bw-guide .bw-guide-btn {
@@ -178,14 +226,16 @@ class BWTheGuideElement extends HTMLElement {
           background: #FFFFFF;
           border-radius: 8px;
           box-shadow: 0 18px 44px rgba(27, 94, 32, 0.16);
+          max-width: 520px;
           overflow: hidden;
+          width: 100%;
         }
 
         .bw-guide .bw-guide-profile-img {
-          aspect-ratio: 3 / 4;
+          aspect-ratio: 4 / 3;
           display: block;
           object-fit: cover;
-          object-position: center top;
+          object-position: center 38%;
           width: 100%;
         }
 
@@ -560,6 +610,10 @@ class BWTheGuideElement extends HTMLElement {
             flex-direction: column;
           }
 
+          .bw-guide .bw-guide-proof-list {
+            grid-template-columns: 1fr;
+          }
+
           .bw-guide .bw-guide-btn {
             width: 100%;
           }
@@ -599,6 +653,23 @@ class BWTheGuideElement extends HTMLElement {
                 <a class="bw-guide-btn bw-guide-btn-secondary" href="${BW_GUIDE_REVIEWS_URL}">Read reviews</a>
                 <a class="bw-guide-btn bw-guide-btn-ghost" href="${BW_GUIDE_MEETING_POINT_URL}">Meeting point</a>
               </div>
+              <aside class="bw-guide-proof" aria-label="What the tour gives you">
+                <h2>What you get on the walk</h2>
+                <div class="bw-guide-proof-list">
+                  <div class="bw-guide-proof-item">
+                    <strong>Clear context</strong>
+                    <span>How Berlin's layers fit together.</span>
+                  </div>
+                  <div class="bw-guide-proof-item">
+                    <strong>Old images</strong>
+                    <span>Compare vanished streets with today.</span>
+                  </div>
+                  <div class="bw-guide-proof-item">
+                    <strong>Human pace</strong>
+                    <span>Questions, photos, and no rush.</span>
+                  </div>
+                </div>
+              </aside>
             </div>
 
             <aside class="bw-guide-profile" aria-label="Yusuf profile">
