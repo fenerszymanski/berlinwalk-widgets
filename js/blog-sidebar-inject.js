@@ -106,7 +106,7 @@
     var style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = [
-      '.bw-blog-sidebar{position:fixed;top:190px;width:248px;z-index:50;font-family:Montserrat,Arial,sans-serif;color:#212121;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;}',
+      '.bw-blog-sidebar{position:fixed;top:190px;width:248px;z-index:9000;font-family:Montserrat,Arial,sans-serif;color:#212121;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;}',
       '.bw-blog-sidebar.bw-blog-sidebar-visible{opacity:1;pointer-events:auto;}',
       '.bw-blog-sidebar-progress{height:4px;background:rgba(27,94,32,.10);border-radius:999px;margin:0 0 18px;overflow:hidden;}',
       '.bw-blog-sidebar-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#1B5E20,#7CB342,#FFE600);border-radius:999px;transition:width .08s linear;}',
@@ -121,7 +121,7 @@
       '.bw-blog-sidebar-share-label{color:#6A746A;font-size:13px;font-weight:700;margin-right:2px;}',
       '.bw-blog-sidebar-share a,.bw-blog-sidebar-share button{align-items:center;background:#FFFFFF;border:1px solid rgba(27,94,32,.14);border-radius:8px;color:#1B5E20;cursor:pointer;display:inline-flex;font:700 12px/1 Montserrat,Arial,sans-serif;height:34px;justify-content:center;min-width:34px;padding:0 10px;text-decoration:none;}',
       '.bw-blog-sidebar-share a:hover,.bw-blog-sidebar-share button:hover{background:#FFE600;border-color:#FFE600;}',
-      'body #bw-desktop-cta{right:18px!important;bottom:18px!important;}',
+      'body #bw-desktop-cta{left:18px!important;right:auto!important;bottom:18px!important;z-index:8000!important;}',
       'body #bw-desktop-cta .bw-link{gap:8px!important;padding:9px 13px 9px 13px!important;}',
       'body #bw-desktop-cta .bw-emoji{font-size:15px!important;}',
       'body #bw-desktop-cta .bw-label-small{font-size:9px!important;letter-spacing:1.1px!important;}',
@@ -336,17 +336,28 @@
 
   function findMiniNavAnchor(body) {
     if (!body) return null;
-    var shell = body.closest('article') ||
-      body.closest('[data-hook="post-page"]') ||
-      body.closest('main') ||
-      body;
-    return shell;
+    // Try increasingly broad ancestors; some Wix templates wrap differently.
+    var candidates = [
+      body.closest('article'),
+      body.closest('[data-hook="post-page"]'),
+      body.closest('[data-hook="post-main"]'),
+      body.closest('main'),
+      document.querySelector('[data-hook="post-page"]'),
+      document.querySelector('[data-hook="post-header"]'),
+      document.querySelector('article'),
+      document.querySelector('main')
+    ];
+    for (var i = 0; i < candidates.length; i++) {
+      if (candidates[i] && candidates[i].parentNode) return candidates[i];
+    }
+    // Last-resort fallback: insert at top of body so the nav is never silently lost.
+    return body;
   }
 
   function injectMiniNav(body) {
     if (document.querySelector('[' + NAV_MARKER + ']')) return;
     var anchor = findMiniNavAnchor(body);
-    if (!anchor || !anchor.parentNode) return;
+    if (!anchor) return;
     var nav = document.createElement('nav');
     nav.className = 'bw-blog-mini-nav';
     nav.setAttribute(NAV_MARKER, '1');
@@ -359,10 +370,10 @@
         '<a class="bw-blog-mini-nav-link" href="https://www.berlinwalk.com/blog/categories/berlin-history" target="_top">Berlin History</a>' +
         '<a class="bw-blog-mini-nav-link" href="https://www.berlinwalk.com/berlin-tools" target="_top">Tools</a>' +
       '</div>';
-    if (anchor === document.body) {
-      document.body.insertBefore(nav, document.body.firstChild);
-    } else {
+    if (anchor.parentNode && anchor !== document.body) {
       anchor.parentNode.insertBefore(nav, anchor);
+    } else {
+      document.body.insertBefore(nav, document.body.firstChild);
     }
   }
 

@@ -5,7 +5,21 @@ Rolling log of agent sessions. Most recent at top.
 Format for each entry — see `AGENTS.md` §9.
 
 
+
 ---
+
+## 2026-05-20 — Claude Code (Blog sticky CTA + mini-nav fix)
+
+**Did:** Fixed two live blog-post issues Yusuf flagged: (a) desktop sticky `#bw-desktop-cta` pill bottom-right was overlapping the last `On this page` sidebar item; (b) the top mini-nav (`bw-blog-mini-nav`) had silently disappeared on some posts because the anchor finder was too strict and returned null.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — moved `#bw-desktop-cta` to bottom-left (`left:18px;right:auto`) with z-index 8000 so it never overlaps the right-side sidebar. Bumped `.bw-blog-sidebar` z-index 50 → 9000 as defense. Rewrote `findMiniNavAnchor` with multiple ancestor candidates (`article` / `[data-hook=post-page]` / `[data-hook=post-main]` / `main` / document-wide variants) and a last-resort fallback to insert at the top of `<body>` so the nav is never silently lost when Wix DOM changes.
+- `wix-embed-snippets.md` — bumped blog-sidebar-inject cache-bust querystring `?v=3` → `?v=4` so Yusuf pulls the new logic in Wix Custom Code.
+
+**Opened:** After deploy, Yusuf updates Wix Custom Code script src `?v` to `4` (or removes the query entirely and hard-refreshes) so the new injection ships.
+**Closed:** Desktop sticky CTA / sidebar overlap; mini-nav silent failure on Wix DOM variants.
+
+**Next session should:** Verify on a live post (e.g. the budget post in the screenshot): mini-nav appears at the top, sticky pill sits bottom-left, sidebar items are fully visible without obstruction.
 
 ## 2026-05-20 — Codex (Blog mini-nav + right rail polish)
 
