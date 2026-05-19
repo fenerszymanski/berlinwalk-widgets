@@ -22,6 +22,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `leave-review/` | Per-booking review submission form for `berlinwalk.com/leave-review`. `leave-review-element.js` is the `bw-leave-review` Custom Element (preferred); `index.html` is the legacy iframe page kept until Wix swaps to the CE; `preview.html` is a local CE test harness |
 | `reviews/` | `bw-reviews` Custom Element + local test page (`berlinwalk.com/reviews`) |
 | `testimonials/`, `stats/`, `route/`, `faq/`, `gallery/`, etc. | Homepage Custom Elements — see `README.md` for the full list |
+| `guide-home/` | Homepage Custom Element for the shorter `Meet Yusuf` teaser section. `guide-home-element.js` defines `<bw-guide-home>` with the Rotes Rathaus guide photo, compact route/trust proof points, and links to `/the-guide` + booking. |
 | `lead-form/` | Berlin Essentials email capture iframe widget |
 | `meeting-point/` | Custom Element page for `berlinwalk.com/meeting-point`. `meeting-point-element.js` defines `<bw-meeting-point>` with a real World Clock photo, stylized wayfinding map, tour-day details, and booking/map CTAs. `index.html` is the standalone GitHub Pages preview/fallback. |
 | `the-guide/` | Custom Element page for `berlinwalk.com/the-guide`. `the-guide-element.js` defines `<bw-the-guide>` with Yusuf profile copy, real profile photo, tour approach, route logic, reviews, and booking CTAs. `SEO_SETTINGS.md` has Wix-ready SEO tags/schema. |

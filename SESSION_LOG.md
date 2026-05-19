@@ -6,6 +6,21 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (Homepage guide teaser)
+
+**Did:** Built a new `bw-guide-home` Custom Element to replace the old Wix-native homepage `Meet Your Guide, Yusuf` section.
+
+**Changed:**
+- `guide-home/guide-home-element.js` — new homepage guide teaser with current Rotes Rathaus photo, compact proof points, `/the-guide` link, and booking CTA.
+- `guide-home/index.html` — standalone preview/fallback page.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md` — documented the new homepage element.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the replacement guidance and install snippet.
+
+**Opened:** Yusuf needs to replace the Wix-native homepage guide section with `<bw-guide-home>` after pushing/deploying the repo.
+**Closed:** Local desktop/mobile QA passed with no horizontal overflow.
+
+**Next session should:** Verify the live homepage section after Wix placement, especially image crop and sticky CTA overlap.
+
 ## 2026-05-19 — Codex (The Guide hero balance)
 
 **Did:** Rebalanced the `/the-guide` hero after the newer portrait photo made the right card too tall and left too much empty space on the text side.
