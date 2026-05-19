@@ -198,7 +198,7 @@ class BWBerlinQuizElement extends HTMLElement {
           color: #FFFFFF;
           font-family: Montserrat, Arial, sans-serif;
           margin: 0;
-          padding: 80px 24px;
+          padding: 56px 24px;
           position: relative;
           width: 100%;
         }
@@ -245,7 +245,10 @@ class BWBerlinQuizElement extends HTMLElement {
 
         .bw-quiz-start-inner {
           animation: bwQuizFadeIn 0.5s ease;
+          margin: 0 auto;
+          max-width: 480px;
           text-align: center;
+          width: 100%;
         }
 
         .bw-quiz-badge {
@@ -278,7 +281,9 @@ class BWBerlinQuizElement extends HTMLElement {
           font-size: 15px;
           line-height: 1.65;
           margin: 0 auto 24px;
-          max-width: 520px;
+          max-width: 480px;
+          padding: 0 4px;
+          text-align: center;
         }
 
         .bw-quiz-btn-primary {
@@ -552,6 +557,7 @@ class BWBerlinQuizElement extends HTMLElement {
           line-height: 1.6;
           margin: 0 auto 20px;
           max-width: 420px;
+          text-align: center;
         }
 
         .bw-quiz-btn-cta {
@@ -595,7 +601,7 @@ class BWBerlinQuizElement extends HTMLElement {
 
         @media (max-width: 600px) {
           .bw-quiz-section {
-            padding: 56px 18px;
+            padding: 44px 18px;
           }
           .bw-quiz-start-inner h1 {
             font-size: 30px;
