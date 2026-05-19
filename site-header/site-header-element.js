@@ -57,43 +57,25 @@ class BWHeaderElement extends HTMLElement {
     if (height > 0) {
       this.style.setProperty('height', height + 'px', 'important');
       this.style.setProperty('min-height', '0', 'important');
-      this._syncWixShellHeight(height);
+      this._syncWixLayoutOffset(height);
     }
   }
 
-  _syncWixShellHeight(height) {
-    const hostRect = this.getBoundingClientRect();
-    let node = this.parentElement;
-    let depth = 0;
-    const synced = new Set();
-    while (node && node !== document.body && depth < 10) {
-      const rect = node.getBoundingClientRect();
-      const styles = window.getComputedStyle(node);
-      const minHeight = parseFloat(styles.minHeight) || 0;
-      const className = typeof node.className === 'string' ? node.className : '';
-      const nearHeaderHeight = (rect.height > 0 && rect.height < 360) || (minHeight > 0 && minHeight < 360);
-      const nearHostWidth = rect.width >= hostRect.width - 4;
-      const isWixHeaderShell = className.includes('wixui-header')
-        || className.includes('max-width-container')
-        || node.tagName.toLowerCase() === 'header';
-      if ((nearHeaderHeight && nearHostWidth) || isWixHeaderShell) this._forceShellHeight(node, height, synced);
-      node = node.parentElement;
-      depth++;
-    }
-
-    this._hideWixBackgroundLayers();
+  _syncWixLayoutOffset(height) {
+    const headerShell = this._getWixHeaderShell();
+    if (!headerShell) return;
+    const shellHeight = Math.ceil(headerShell.getBoundingClientRect().height);
+    const shrunk = this.classList.contains('bw-header-host-shrunk');
+    const overlap = shrunk ? Math.max(0, shellHeight - height) : 0;
+    headerShell.style.setProperty('margin-bottom', overlap ? '-' + overlap + 'px' : '0', 'important');
+    headerShell.style.setProperty('background', 'transparent', 'important');
+    headerShell.style.setProperty('box-shadow', 'none', 'important');
+    headerShell.style.setProperty('backdrop-filter', 'none', 'important');
+    headerShell.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
+    this._hideWixBackgroundLayers(headerShell);
   }
 
-  _forceShellHeight(node, height, synced) {
-    if (!node || synced.has(node)) return;
-    synced.add(node);
-    node.style.setProperty('height', height + 'px', 'important');
-    node.style.setProperty('min-height', '0', 'important');
-    node.style.setProperty('max-height', height + 'px', 'important');
-    node.style.setProperty('overflow', 'visible', 'important');
-  }
-
-  _hideWixBackgroundLayers() {
+  _getWixHeaderShell() {
     let shell = this.parentElement;
     let depth = 0;
     while (shell && shell !== document.body && depth < 10) {
@@ -102,6 +84,19 @@ class BWHeaderElement extends HTMLElement {
       shell = shell.parentElement;
       depth++;
     }
+    if (!shell || shell === document.body) return null;
+    let topShell = shell;
+    let parent = shell.parentElement;
+    depth = 0;
+    while (parent && parent !== document.body && depth < 3) {
+      if (parent.tagName.toLowerCase() === 'header') topShell = parent;
+      parent = parent.parentElement;
+      depth++;
+    }
+    return topShell;
+  }
+
+  _hideWixBackgroundLayers(shell) {
     if (!shell || shell === document.body) return;
     shell.querySelectorAll('[id^="bgLayers_"], [id^="bgMedia_"], .QG9w8P, .LNYVZi, .ROWgFb').forEach((node) => {
       node.style.setProperty('display', 'none', 'important');
@@ -546,7 +541,7 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-shrunk .bw-header {
-          box-shadow: 0 8px 24px rgba(27, 94, 32, 0.08);
+          box-shadow: none;
         }
 
         .bw-header-shrunk .bw-header-main {
