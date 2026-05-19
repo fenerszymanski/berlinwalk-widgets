@@ -33,6 +33,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `why/` - `bw-why` homepage "Why Walk With Me?" Custom Element.
 - `route/` - `bw-route` homepage interactive illustrated route map Custom Element.
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
+- `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
 
 ## Project Memory
 
@@ -138,3 +139,13 @@ without leaving a large blank area on desktop.
 Suggested Wix embed height for quick summaries:
 
 - `audio + summary`: `520px`
+
+## Blog Custom Code Helpers
+
+These are loaded through Wix Custom Code rather than iframe embeds:
+
+- `js/lead-form-inject.js` - injects the Berlin Essentials lead form mid-post.
+- `js/cta-inject.js` - injects the global tour CTA near the end of posts.
+- `js/blog-sidebar-inject.js` - builds a desktop-only sticky "On this page"
+  sidebar from visible H2/H3 headings, with compact share buttons. It hides
+  below 1180px and skips non-`/post/` URLs.
