@@ -7,6 +7,20 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-20 — Codex (Blog mini-nav + right rail polish)
+
+**Did:** Added a compact blog navigation strip above post pages and tuned the right rail/floating CTA after Yusuf moved the article column left.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — now injects a slim `Berlin Travel Notes` mini-nav with links to All articles, Tourist Tips, Berlin History, and Tools; sidebar top moved lower (`190px`), width/gap tightened (`248px`/`24px`), desktop threshold lowered to `1024px`, and desktop floating `#bw-desktop-cta` is lightly compacted.
+- `README.md`, `wix-embed-snippets.md` — documented the expanded blog helper behavior and bumped the snippet to `?v=3`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the v3 helper behavior.
+
+**Opened:** Push/deploy widgets repo, update Wix Custom Code URL to `blog-sidebar-inject.js?v=3`, then verify a live blog post at the current desktop width.
+**Closed:** Local syntax check passed; `js/blog-sidebar-inject.js` has no non-ASCII characters.
+
+**Next session should:** If the injected mini-nav lands too low in Wix's DOM, adjust `findMiniNavAnchor()` to use the nearest post card wrapper ID from the live page.
+
 ## 2026-05-19 — Codex (Blog sidebar helper)
 
 **Did:** Built a reusable blog right-rail helper matching the reference pattern: sticky “On this page” links, scroll progress, active section highlight, and share buttons. Follow-up hardening prevents the sidebar from falling onto the left side of Wix blog pages or disappearing when Wix wrappers cannot be measured.

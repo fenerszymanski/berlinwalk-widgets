@@ -146,7 +146,8 @@ These are loaded through Wix Custom Code rather than iframe embeds:
 
 - `js/lead-form-inject.js` - injects the Berlin Essentials lead form mid-post.
 - `js/cta-inject.js` - injects the global tour CTA near the end of posts.
-- `js/blog-sidebar-inject.js` - builds a desktop-only sticky "On this page"
-  sidebar from visible H2/H3 headings, with compact share buttons. It hides
-  below 1500px, falls back to a fixed right rail when Wix wrappers are hard to
-  measure, and skips non-`/post/` URLs.
+- `js/blog-sidebar-inject.js` - adds a compact blog mini-nav above posts, builds
+  a desktop-only sticky "On this page" sidebar from visible H2/H3 headings, and
+  lightly shrinks the desktop floating booking CTA. The sidebar hides below
+  1024px and falls back to a fixed right rail when Wix wrappers are hard to
+  measure. The script skips non-`/post/` URLs.

@@ -50,13 +50,14 @@ Add these through Wix Custom Code, not as iframe embeds. They self-skip when the
 current URL is not a blog post.
 
 ```html
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=2" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=3" defer></script>
 ```
 
-`blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from the
-visible H2/H3 headings in the post body and adds compact share buttons. It hides
-below 1500px and falls back to a fixed right rail when Wix wrappers are hard to
-measure.
+`blog-sidebar-inject.js` adds a compact blog mini-nav above posts, builds a
+desktop-only `On this page` sidebar from visible H2/H3 headings, adds compact
+share buttons, and lightly shrinks the desktop floating booking CTA. The sidebar
+hides below 1024px and falls back to a fixed right rail when Wix wrappers are
+hard to measure.
 
 ## Lead Form
 
