@@ -6,6 +6,22 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (Currywurst Wix draft + CMS)
+
+**Did:** Created the Wix Blog draft and BerlinTools CMS row for the currywurst package.
+
+**Changed:**
+- Wix Blog draft: `dc623b0d-017e-4bcc-903f-df80f8ea0c03` — `Best Currywurst in Berlin: 8 Places to Try in 2026`, status `UNPUBLISHED`; verified 160 rich-content nodes, 3 images, 3 HTML embeds, 58 bold decorations, 9 links, slug `best-currywurst-places-in-berlin-2026`.
+- Wix Media: uploaded/used cover `5a08a3_3100730ad66147ec8e530dbeafa27903~mv2.png`, map `5a08a3_5f17875ceb634230aee1df2910be683d~mv2.png`, comparison `5a08a3_93e5331774b545a3824846a7be718b23~mv2.png`, order guide `5a08a3_46a69ddaabc041cebf0574bedc9fdf25~mv2.png`.
+- Wix CMS `BerlinTools`: inserted `/tools/berlin-currywurst-finder` item `988bc092-5168-4054-9034-97a7a1c98d7e`.
+- `blog-drafts/best-currywurst-places-in-berlin-2026.md` — cleaned into publish-ready English draft; `faq/inject.js` — added FAQ schema map for the currywurst slug.
+- Project root: `create-wix-currywurst-blog-draft.js`, `insert-currywurst-finder-tool.js`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — added scripts/memory for this pass.
+
+**Opened:** Push/deploy `berlinwalk-widgets` so `currywurst-finder/` and updated `faq/inject.js` are live; then verify GitHub Pages widget URL and Wix blog draft preview before publishing. Recheck Google Maps ratings/opening hours before publish.
+**Closed:** Wix draft creation, media upload, SEO payload, and BerlinTools CMS row creation.
+
+**Next session should:** Push the widgets repo or ask Yusuf to push origin, wait for GitHub Pages, then verify `/currywurst-finder/`, `/tools/berlin-currywurst-finder`, and the Wix blog draft preview.
+
 ## 2026-05-19 — Claude Code (Site header rebuild)
 
 **Did:** Replaced the Wix-native sitewide header with `<bw-site-header>` custom element — conversion micros + visual consistency + premium mobile menu + shrink-on-scroll.

@@ -1,194 +1,165 @@
 # Best Currywurst in Berlin: 8 Places to Try in 2026
 
-Slug idea: `best-currywurst-places-in-berlin-2026`
+{{quick-summary}}
 
-Wix draft ID: not created yet
+Currywurst is not Berlin's most elegant food. That is exactly the point. It is fast, blunt, cheap, slightly messy, and deeply Berlin: sliced sausage, curry ketchup, curry powder, fries or a bread roll, eaten standing up while the city moves around you.
 
-Wix draft status: local draft only
+If you are visiting Berlin for the first time, you do not need to turn currywurst into a research project. But you do need to pick the right place for the kind of Berlin day you are having. Some stands are famous because they are genuinely part of the city's food history. Some are famous because they are open late. Some are just very convenient when you are hungry after sightseeing.
 
-Meta title: Best Currywurst in Berlin: 8 Places, Mapped for Visitors
-
-Meta description: A Berlin guide's practical 2026 currywurst map: Konnopke's, Curry 36, Curry Baude, Curry 61, vegan options, late-night picks, and what to order.
-
-Category: Tourist Tips
-
-Primary keyword: best currywurst Berlin
-
-Secondary keywords: currywurst Berlin, Curry 36 vs Konnopke, vegan currywurst Berlin, Curry Baude Berlin, where to eat currywurst Berlin
-
-Suggested CTA: Try currywurst after the Berlin Free Walking Tour. The tour ends near Hackescher Markt, close to Curry 61 and easy connections to Konnopke's.
-
-## Widget Plan
-
-Use these embeds when building the post in Wix:
-
-1. Quick summary, near the top:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=currywurst`
-
-2. Currywurst Finder map, after the first "Quick Answer" section:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/currywurst-finder/`
-
-3. FAQ, near the bottom:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=currywurst`
-
-## Quick Summary
-
-- If you want the easiest currywurst after the BerlinWalk tour, go to Curry 61 near Hackescher Markt.
-- If you want the most famous names, compare Curry 36 at Mehringdamm with Konnopke's under the U-Bahn tracks in Prenzlauer Berg.
-- If you want a stronger local recommendation, Curry Baude at Gesundbrunnen is the best pick to lead with.
-- If you want organic or vegan currywurst, Witty's at Wittenbergplatz is the cleanest angle.
-- If you want a spicy challenge, Curry & Chili in Wedding gives the article a memorable edge.
-- Ratings snapshot checked May 2026. Recheck Google Maps and opening hours before publishing.
-
-## Rating Snapshot
-
-| Place | BerlinWalk angle | Google snapshot | Second source snapshot | Maps |
-|---|---|---:|---:|---|
-| Curry Baude | Best local pick | 4.5 / about 4.0k | Tripadvisor 4.7 / 109 | https://www.google.com/maps/search/?api=1&query=Curry+Baude+Badstrasse+1+Berlin |
-| Curry 61 | Best after the tour | 4.7 / about 8.1k | Tripadvisor 4.3 / 1.5k | https://www.google.com/maps/search/?api=1&query=Curry+61+Oranienburger+Strasse+6+Berlin |
-| Zur Bratpfanne | Best old West Berlin classic | 4.6 / about 3.3k | Tripadvisor 4.5 / 111 | https://www.google.com/maps/search/?api=1&query=Zur+Bratpfanne+Schlossstrasse+Berlin |
-| Curry & Chili | Best spicy challenge | 4.6 / about 1.5k | Tripadvisor 4.5 / 29 | https://www.google.com/maps/search/?api=1&query=Curry+und+Chili+Prinzenallee+Osloer+Strasse+Berlin |
-| Konnopke's Imbiss | Most historic East Berlin pick | 4.2 / about 5.9k | Tripadvisor 3.9 / 802 | https://www.google.com/maps/search/?api=1&query=Konnopkes+Imbiss+Schoenhauser+Allee+44b+Berlin |
-| Curry 36 Mehringdamm | Most famous late-night classic | 4.2 / about 13.5k | Tripadvisor 3.9 / 2.2k | https://www.google.com/maps/search/?api=1&query=Curry+36+Mehringdamm+36+Berlin |
-| Witty's Wittenbergplatz | Best organic and vegan option | 4.0 / about 730 | Tripadvisor 4.0 / 226 | https://www.google.com/maps/search/?api=1&query=Wittys+Wittenbergplatz+5+Berlin |
-| Krasselt's Imbiss | Best deep-cut classic | 4.3 / about 1.5k | Tripadvisor 4.5 / 69 | https://www.google.com/maps/search/?api=1&query=Krasselts+Imbiss+Steglitzer+Damm+22+Berlin |
-
-## Draft Structure
+This guide is written for visitors, not for people trying to win a Berlin snack argument. It maps eight strong currywurst stops, explains what each one is best for, and gives you the simple German phrases that make ordering easier.
 
 ## The Quick Answer
 
-If you are visiting Berlin for the first time, do not overthink currywurst. It is not fine dining. It is a street-food ritual: sausage, curry ketchup, curry powder, fries or a bread roll, eaten standing up while the city moves around you.
+For most first-time visitors, **Curry 61** is the easiest currywurst stop because it is central, highly rated, and close to where my Berlin walking tour ends near Hackescher Markt.
 
-For most visitors, the best first currywurst in Berlin is Curry 61 because it is central, easy, and close to where my Berlin walking tour ends. For the classic Berlin debate, try Curry 36 and Konnopke's. For the place I would put at the top if you care more about local food culture than famous names, go to Curry Baude.
+For the classic Berlin debate, compare **Curry 36** at Mehringdamm with **Konnopke's Imbiss** under the U-Bahn tracks in Prenzlauer Berg.
 
-## What Is Currywurst?
+For the strongest local recommendation, go to **Curry Baude** at Gesundbrunnen. It is less convenient than the famous names, but that is part of why it belongs high on the list.
 
-Short explanation:
-
-- Fried or steamed sausage, usually sliced.
-- Curry ketchup or house tomato sauce.
-- Curry powder on top.
-- Ordered with fries, a bread roll, or both.
-- In Berlin, the key choice is often `mit Darm` or `ohne Darm`, meaning with skin or without skin.
-
-Keep this section short and useful. The post should not become a food-history lecture.
+{{currywurst-finder}}
 
 ## The 8 Best Currywurst Places in Berlin
 
-### 1. Curry Baude
+![A BerlinWalk map graphic showing eight recommended currywurst places in Berlin.](tmp/currywurst-images/currywurst-places-map.png)
 
-Best for: local currywurst fans, no-nonsense Berlin snack culture, quality sausage.
+Ratings change, and opening hours can shift with holidays, staff shortages, or renovations. The rating snapshots below were checked in **May 2026** and should be treated as a guide, not a permanent ranking.
 
-Why go: Curry Baude has the strongest "locals still care about this place" signal. It is less convenient than Curry 61 or Curry 36, but that is exactly why it earns trust in the article.
+## 1. Curry Baude
 
-What to order: Currywurst ohne Darm with fries, house sauce if available.
+**Best for:** Local currywurst fans, no-nonsense Berlin snack culture, and a stronger recommendation than the usual tourist-only list.
 
-### 2. Curry 61
+**Why go:** Curry Baude has the strongest "people who actually care about currywurst still send you here" signal. It sits by Gesundbrunnen rather than in the middle of the tourist belt, which makes it less convenient but more convincing. If you only want the famous name, this is not the pick. If you want the list to feel local, start here.
 
-Best for: first-timers, visitors staying in Mitte, and anyone finishing the BerlinWalk tour near Hackescher Markt.
+**What to order:** Currywurst ohne Darm with fries. If a house sauce option is available, take it.
 
-Why go: It is central, fast, highly rated, and easy to explain to tourists. The vegan option also makes it useful for mixed groups.
+**Ratings snapshot:** Google around 4.5 with roughly 4,000 reviews. Tripadvisor around 4.7 with 100+ reviews.
 
-What to order: Classic currywurst with fries. Add spice if you want a little heat.
+**Google Maps:** [Open Curry Baude in Google Maps](https://www.google.com/maps/search/?api=1&query=Curry+Baude+Badstrasse+1+Berlin)
 
-### 3. Zur Bratpfanne
+## 2. Curry 61
 
-Best for: old West Berlin currywurst energy and people willing to leave the inner tourist belt.
+**Best for:** First-timers, visitors staying in Mitte, and anyone finishing the BerlinWalk tour near Hackescher Markt.
 
-Why go: It gives the list depth. Not every recommendation should sit between Alexanderplatz and Kreuzberg.
+**Why go:** Curry 61 is central, fast, easy to explain, and practical. It is not a secret, but it does not need to be. If you are already walking around Museum Island, Hackescher Markt, Oranienburger Strasse, or the Berlin Cathedral area, this is one of the simplest ways to try currywurst without turning lunch into a half-day detour.
 
-What to order: Currywurst with fries and house ketchup.
+**What to order:** Classic currywurst with fries. Add spicy powder if you want a little heat.
 
-### 4. Curry & Chili
+**Ratings snapshot:** Google around 4.7 with roughly 8,000 reviews. Tripadvisor around 4.3 with 1,500+ reviews.
 
-Best for: spice lovers and people who want a currywurst memory, not just a currywurst.
+**Google Maps:** [Open Curry 61 in Google Maps](https://www.google.com/maps/search/?api=1&query=Curry+61+Oranienburger+Strasse+6+Berlin)
 
-Why go: It makes the article more interactive. This is the obvious "spicy challenge" result in the finder widget.
+## 3. Zur Bratpfanne
 
-What to order: Start lower than your ego wants. Mention that cash may be useful.
+**Best for:** Old West Berlin currywurst energy and visitors willing to leave the inner tourist loop.
 
-### 5. Konnopke's Imbiss
+**Why go:** Zur Bratpfanne gives this list depth. Not every currywurst recommendation should sit between Alexanderplatz, Museum Island, and Kreuzberg. This is the kind of place that makes sense if you are already in Steglitz or if you want to compare famous central stands with a more neighborhood-rooted classic.
 
-Best for: history, East Berlin atmosphere, and the classic under-the-U-Bahn photo.
+**What to order:** Currywurst with fries and house ketchup.
 
-Why go: Konnopke's is part of Berlin's currywurst story. It should be in the article even if we write honestly that fame and food quality are not the same thing.
+**Ratings snapshot:** Google around 4.6 with roughly 3,300 reviews. Tripadvisor around 4.5 with 100+ reviews.
 
-What to order: Currywurst ohne Darm with fries.
+**Google Maps:** [Open Zur Bratpfanne in Google Maps](https://www.google.com/maps/search/?api=1&query=Zur+Bratpfanne+Schlossstrasse+Berlin)
 
-### 6. Curry 36 Mehringdamm
+## 4. Curry & Chili
 
-Best for: the famous Berlin currywurst experience and late-night food in Kreuzberg.
+**Best for:** Spice lovers and people who want a currywurst memory, not just a currywurst.
 
-Why go: It is the name tourists already know, and it has massive review volume. We can be honest: not a hidden gem, still a useful classic.
+**Why go:** Standard Berlin currywurst is usually mild. Curry & Chili is different: the spicy sauces are the point. This is not the safest pick for a first currywurst if you hate heat, but it is the most memorable choice if you like food with a challenge attached.
 
-What to order: Currywurst mit Pommes rot-weiss.
+**What to order:** Start lower than your ego wants. The spice levels climb quickly.
 
-### 7. Witty's Wittenbergplatz
+**Ratings snapshot:** Google around 4.6 with roughly 1,500 reviews. Tripadvisor around 4.5 with 25+ reviews.
 
-Best for: organic, vegan, gluten-free, and KaDeWe-area visitors.
+**Google Maps:** [Open Curry & Chili in Google Maps](https://www.google.com/maps/search/?api=1&query=Curry+und+Chili+Prinzenallee+Osloer+Strasse+Berlin)
 
-Why go: Witty's has a clear differentiator: organic sourcing and vegan currywurst. It gives the article a more inclusive, modern Berlin angle.
+## 5. Konnopke's Imbiss
 
-What to order: Organic currywurst or vegan currywurst with fries.
+**Best for:** Berlin history, East Berlin atmosphere, and the classic under-the-U-Bahn setting.
 
-### 8. Krasselt's Imbiss
+**Why go:** Konnopke's belongs in the article because it is part of Berlin's currywurst story. It has been operating since 1930, and the setting under the elevated U-Bahn tracks in Prenzlauer Berg is exactly the kind of place visitors imagine when they picture old Berlin snack culture. Go for the atmosphere and the history, not because it is a secret.
 
-Best for: a local deep cut in Steglitz.
+**What to order:** Currywurst ohne Darm with fries.
 
-Why go: This is the "you did your homework" pick. It is not the most practical for every tourist, but it makes the guide feel less copied from the usual top-five lists.
+**Ratings snapshot:** Google around 4.2 with roughly 5,900 reviews. Tripadvisor around 3.9 with 800+ reviews.
 
-What to order: Try with skin and without skin if possible.
+**Google Maps:** [Open Konnopke's in Google Maps](https://www.google.com/maps/search/?api=1&query=Konnopkes+Imbiss+Schoenhauser+Allee+44b+Berlin)
+
+## 6. Curry 36 Mehringdamm
+
+**Best for:** The famous Berlin currywurst experience and late-night food in Kreuzberg.
+
+**Why go:** Curry 36 is not hidden, not delicate, and not trying to be. It is famous, busy, central to the Berlin currywurst conversation, and genuinely useful because it stays open late. If you are in Kreuzberg at night and want the iconic tourist-safe currywurst stop, this is the easy answer.
+
+**What to order:** Currywurst mit Pommes rot-weiss: fries with ketchup and mayo.
+
+**Ratings snapshot:** Google around 4.2 with roughly 13,500 reviews. Tripadvisor around 3.9 with 2,000+ reviews.
+
+**Google Maps:** [Open Curry 36 Mehringdamm in Google Maps](https://www.google.com/maps/search/?api=1&query=Curry+36+Mehringdamm+36+Berlin)
+
+## 7. Witty's Wittenbergplatz
+
+**Best for:** Organic currywurst, vegan options, and visitors around KaDeWe or Wittenbergplatz.
+
+**Why go:** Witty's has a clear reason to be here: organic sourcing and better options for mixed groups. If someone in your group wants vegan currywurst, or if you are sightseeing around KaDeWe, this is the most useful pick. It is also a good reminder that Berlin food culture is not frozen in 1985.
+
+**What to order:** Organic currywurst or vegan currywurst with crispy fries.
+
+**Ratings snapshot:** Google around 4.0 with roughly 700 reviews. Tripadvisor around 4.0 with 200+ reviews.
+
+**Google Maps:** [Open Witty's Wittenbergplatz in Google Maps](https://www.google.com/maps/search/?api=1&query=Wittys+Wittenbergplatz+5+Berlin)
+
+## 8. Krasselt's Imbiss
+
+**Best for:** A local deep cut in Steglitz and readers who want one place outside the usual top-five lists.
+
+**Why go:** Krasselt's is the "you did your homework" pick. It is not the most practical choice for every tourist, but it gives the guide a stronger local shape. If you are already in the southwest or want to compare neighborhood currywurst with the famous central stands, add it to your map.
+
+**What to order:** Try with skin and without skin if you are curious about the texture difference.
+
+**Ratings snapshot:** Google around 4.3 with roughly 1,500 reviews. Tripadvisor around 4.5 with 60+ reviews.
+
+**Google Maps:** [Open Krasselt's Imbiss in Google Maps](https://www.google.com/maps/search/?api=1&query=Krasselts+Imbiss+Steglitzer+Damm+22+Berlin)
 
 ## Curry 36 vs Konnopke's
 
-Recommended take:
+![A BerlinWalk comparison graphic showing Curry 36 versus Konnopke's for visitors choosing a Berlin currywurst classic.](tmp/currywurst-images/curry-36-vs-konnopkes.png)
 
-Curry 36 is easier, later, busier, and more tourist-friendly. Konnopke's has the better historical setting and a stronger East Berlin story. If you only have one slot and you are already in Kreuzberg at night, Curry 36 makes sense. If you want the classic Berlin food photo and a Prenzlauer Berg detour, choose Konnopke's.
+If you only remember two names before your Berlin trip, they will probably be Curry 36 and Konnopke's. They are both famous, but they solve different problems.
 
-## What to Order
+**Choose Curry 36** if you want convenience, late-night opening, Kreuzberg energy, and the busy famous stand experience. It works especially well if you are already around Mehringdamm, Bergmannkiez, or Kreuzberg after drinks.
 
-- `Currywurst mit Darm`: sausage with casing, more snap.
-- `Currywurst ohne Darm`: skinless, very Berlin.
-- `Pommes rot-weiss`: fries with ketchup and mayo.
-- `Scharf`: spicy.
-- `Brötchen`: bread roll.
+**Choose Konnopke's** if you want the historical setting, the East Berlin story, and the under-the-U-Bahn photo. It makes more sense as a daytime or early evening food stop during a Prenzlauer Berg walk.
+
+Short answer: **Curry 36 for convenience. Konnopke's for history.**
+
+## How to Order Currywurst in Berlin
+
+![A BerlinWalk infographic explaining how to order currywurst in Berlin, including mit Darm, ohne Darm, Pommes rot-weiss, scharf, and Broetchen.](tmp/currywurst-images/how-to-order-currywurst.png)
+
+Ordering currywurst is simple once you know five phrases.
+
+- **Mit Darm** means the sausage has casing. It has more snap when you bite it.
+- **Ohne Darm** means skinless. This is very common in Berlin.
+- **Pommes rot-weiss** means fries with ketchup and mayo.
+- **Scharf** means spicy.
+- **Broetchen** means bread roll.
+
+If you are unsure, order currywurst ohne Darm with Pommes rot-weiss. It is the most Berlin-safe version for a first try.
 
 ## Is Currywurst Actually Worth It?
 
-Honest angle:
+Yes, but not because it is Berlin's most sophisticated food. Currywurst is worth trying because it is a Berlin ritual: cheap, fast, post-war, practical, and slightly absurd.
 
-Yes, but not because it is Berlin's most sophisticated food. Currywurst is worth trying because it is a Berlin ritual: cheap, fast, blunt, post-war, practical, and slightly absurd. Do not expect a life-changing meal. Expect a small piece of Berlin's street-food identity.
+Do not expect a life-changing meal. Expect a small edible piece of Berlin's street-food identity. That is enough.
 
-## After the BerlinWalk Tour
+## The Best Currywurst After the BerlinWalk Tour
 
-The Berlin Free Walking Tour starts at the World Clock in Alexanderplatz and ends near Hackescher Markt after about 2 hours. From the end point, Curry 61 is the easiest currywurst stop. If you want a longer post-tour detour, take the U-Bahn north to Konnopke's or Gesundbrunnen for Curry Baude.
+The [Berlin Free Walking Tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) starts at the World Clock in Alexanderplatz and ends near Hackescher Markt after about **2 hours**. From the end point, **Curry 61** is the easiest currywurst stop.
 
-Internal link:
-https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+If you want a longer food detour after the tour, take the U-Bahn north toward **Konnopke's** or Gesundbrunnen for **Curry Baude**. If you are heading west toward KaDeWe, **Witty's** is the cleaner vegan-friendly option.
 
-## FAQ Ideas
+## Sources and Rating Notes
 
-- What is the best currywurst in Berlin for first-timers?
-- Is Curry 36 or Konnopke's better?
-- Where can I eat currywurst near Alexanderplatz?
-- Is there vegan currywurst in Berlin?
-- What does `mit Darm` mean?
-- Is currywurst spicy?
-- What should I order with currywurst?
-- Is currywurst really from Berlin?
+Ratings were checked manually in May 2026 using public Google listing snapshots and secondary public sources such as Tripadvisor, Wanderlog, visitBerlin, and official operator pages where available. Google ratings, review counts, and opening hours can change quickly, so always recheck the map link before travelling across town.
 
-## Sources to Check Before Publishing
-
-- Konnopke's official site: https://www.konnopke-imbiss.de/en
-- Curry 61 Wanderlog: https://wanderlog.com/place/details/374787/curry-61
-- Curry 36 Wanderlog: https://wanderlog.com/place/details/89263/curry-36
-- Konnopke's Wanderlog: https://wanderlog.com/place/details/128016/konnopkes-imbiss
-- Curry Baude Tripadvisor: https://www.tripadvisor.com/Restaurant_Review-g187323-d1341412-Reviews-Curry_Baude-Berlin.html
-- Witty's official site: https://wittys.de/en/
-- Witty's Tripadvisor: https://www.tripadvisor.co.uk/Restaurant_Review-g187323-d1340759-Reviews-WITTY_S_Organic_Food-Berlin.html
-- Zur Bratpfanne Wanderlog: https://wanderlog.com/place/details/2165369/zur-bratpfanne
-- Krasselt's Wanderlog: https://wanderlog.com/place/details/522513
-- Curry & Chili Wanderlog: https://wanderlog.com/zh/place/details/378630/curry-und-chili
-- visitBerlin Curry Baude: https://www.visitberlin.de/en/curry-baude
-- visitBerlin Witty's: https://www.visitberlin.de/de/wittys-currywurst
-
+{{faq}}
