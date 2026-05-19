@@ -9,10 +9,10 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-05-19 — Codex (Site header shrink placeholder)
 
-**Did:** Hardened the site header shrink behavior after live screenshots still showed Wix-held placeholder space.
+**Did:** Hardened the site header shrink behavior after live screenshots still showed Wix-held placeholder space, then removed the Wix background-layer resize that caused a glass/blur band.
 
 **Changed:**
-- `site-header/site-header-element.js` — syncs shrink state from `window`, `document`, `body`, and `document.scrollingElement`; force-syncs near-header Wix ancestors plus `wixui-header`, `max-width-container`, sticky `header`, and Wix background/media layers to the visible header height.
+- `site-header/site-header-element.js` — syncs shrink state from `window`, `document`, `body`, and `document.scrollingElement`; force-syncs near-header Wix ancestors plus `wixui-header`, `max-width-container`, and sticky `header`; hides Wix background/media layers instead of resizing them to avoid the blur/glass band.
 
 **Opened:** Push/deploy widgets repo, then verify live homepage scroll-down header spacing.
 **Closed:** Local preview verified: header host height is 142px at top and 71px after scroll/shrink; live DOM inspection showed remaining 143px Wix header/background ancestors; syntax check passed.

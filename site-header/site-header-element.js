@@ -81,7 +81,7 @@ class BWHeaderElement extends HTMLElement {
       depth++;
     }
 
-    this._syncWixBackgroundLayers(height, synced);
+    this._hideWixBackgroundLayers();
   }
 
   _forceShellHeight(node, height, synced) {
@@ -93,7 +93,7 @@ class BWHeaderElement extends HTMLElement {
     node.style.setProperty('overflow', 'visible', 'important');
   }
 
-  _syncWixBackgroundLayers(height, synced) {
+  _hideWixBackgroundLayers() {
     let shell = this.parentElement;
     let depth = 0;
     while (shell && shell !== document.body && depth < 10) {
@@ -104,7 +104,9 @@ class BWHeaderElement extends HTMLElement {
     }
     if (!shell || shell === document.body) return;
     shell.querySelectorAll('[id^="bgLayers_"], [id^="bgMedia_"], .QG9w8P, .LNYVZi, .ROWgFb').forEach((node) => {
-      this._forceShellHeight(node, height, synced);
+      node.style.setProperty('display', 'none', 'important');
+      node.style.setProperty('opacity', '0', 'important');
+      node.style.setProperty('pointer-events', 'none', 'important');
     });
   }
 
