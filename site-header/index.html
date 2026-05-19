@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BerlinWalk site header preview</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      html, body { margin: 0; padding: 0; }
+      body { background: #FAFAF5; font-family: Montserrat, Arial, sans-serif; min-height: 300vh; }
+      .bw-preview-stage {
+        align-items: center;
+        color: #4E5A4E;
+        display: flex;
+        flex-direction: column;
+        font-family: Merriweather, Georgia, serif;
+        font-size: 16px;
+        gap: 18px;
+        justify-content: center;
+        padding: 120px 24px;
+        text-align: center;
+      }
+      .bw-preview-stage h2 {
+        color: #1B5E20;
+        font-family: Montserrat, Arial, sans-serif;
+        font-size: 22px;
+        font-weight: 800;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <bw-site-header></bw-site-header>
+    <main class="bw-preview-stage">
+      <h2>Scroll to see the header shrink</h2>
+      <p>The top mini-bar collapses, the logo shrinks, the bar tightens, and the green→lime→yellow scroll progress bar tracks page progress.</p>
+      <p>On mobile, hit the hamburger for the full-screen overlay.</p>
+    </main>
+    <script src="./site-header-element.js"></script>
+  </body>
+</html>

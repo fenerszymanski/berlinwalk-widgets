@@ -6,6 +6,23 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Claude Code (Site header rebuild)
+
+**Did:** Replaced the Wix-native sitewide header with `<bw-site-header>` custom element — conversion micros + visual consistency + premium mobile menu + shrink-on-scroll.
+
+**Changed:**
+- `site-header/site-header-element.js` — new file, defines `<bw-site-header>` with green top mini-bar (★ 9.8/FreeTour · Free · Tip-based · Daily 11:30), main bar (logo + Tour/The Guide/Reviews/Resources nav + dropdown + BOOK NOW pill), scroll progress bar (green→lime→yellow), shrink-on-scroll past 32px, full-screen mobile overlay with body scroll lock + Escape close + click-outside dismiss + hamburger→X animation. Re-uses the footer logo URL.
+- `site-header/index.html` — standalone preview with 300vh stage for scroll-shrink testing.
+- `AGENTS.md`, `wix-embed-snippets.md` — added site-header row.
+- Project root: `PROJECT_MEMORY.md` — new `Site Header` section with install snippet, feature list, sticky/mobile notes, and a known-limitation flag about Wix possibly overriding body scroll lock.
+
+**Opened:** Push widgets repo + replace the Wix-native header on every page: drop `<bw-site-header>` into the Wix Header container (already sticky/pinned), remove legacy logo + nav + Book Now elements from that section.
+**Closed:** none
+
+**Next session should:** After Yusuf publishes, verify on live: (a) shrink-on-scroll smooth, (b) Resources dropdown opens on hover + tap, (c) mobile overlay slides in + body does not scroll behind + Escape/X/backdrop all close, (d) all links navigate correctly, (e) progress bar tracks accurately.
+
+---
+
 ## 2026-05-19 — Codex (Currywurst finder)
 
 **Did:** Built the first version of the Berlin Currywurst Finder widget and local draft scaffold for the planned `Best Currywurst in Berlin` post.
