@@ -45,8 +45,9 @@ const BW_BOOK_SHARED_STYLES = `
   }
 
   .bw-book .bw-book-inner {
-    margin: 0 auto;
-    max-width: 1120px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 1120px !important;
     padding: 0 24px;
     width: 100%;
   }
@@ -153,8 +154,9 @@ class BWBookHeroElement extends HTMLElement {
         .bw-book .bw-book-hero-grid {
           align-items: center;
           display: grid;
-          gap: 44px;
-          grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.8fr);
+          gap: 48px;
+          grid-template-columns: minmax(0, 1fr) minmax(320px, 400px);
+          justify-content: space-between;
         }
 
         .bw-book .bw-book-hero h1 {
