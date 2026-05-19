@@ -6,6 +6,21 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-19 — Codex (Homepage hero)
+
+**Did:** Built a new `bw-hero-home` Custom Element to replace the Wix-native homepage hero/header with a conversion-focused first viewport.
+
+**Changed:**
+- `hero-home/hero-home-element.js` — new full-bleed hero with real tour photo, `Free Berlin Walking Tour` H1, booking CTA, meeting point CTA, route line, review link, and 5.0/12/~2h/tip-based proof points.
+- `hero-home/index.html` — standalone preview/fallback page.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md` — documented the new homepage element.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded replacement guidance and install snippet.
+
+**Opened:** Yusuf needs to replace the Wix-native homepage hero/header with `<bw-hero-home>` after pushing/deploying the repo.
+**Closed:** Local desktop/mobile QA passed with no horizontal overflow and the hero image loaded.
+
+**Next session should:** Verify live homepage first viewport after Wix placement, especially nav height, sticky booking widget overlap, and mobile crop.
+
 ## 2026-05-19 — Codex (Homepage blog teaser)
 
 **Did:** Built a new `bw-blog-home` Custom Element to replace the Wix-native homepage blog CMS grid with a curated `Berlin Travel Notes` section.

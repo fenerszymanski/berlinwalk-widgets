@@ -15,6 +15,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 
 - `lead-form/` - Berlin Essentials email capture form.
 - `quick-summary/` - reusable quick summary and optional audio player.
+- `hero-home/` - `bw-hero-home` homepage conversion hero Custom Element.
 - `blog-home/` - `bw-blog-home` homepage editorial blog teaser Custom Element.
 - `guide-home/` - `bw-guide-home` homepage "Meet Yusuf" teaser section.
 - `the-guide/` - `bw-the-guide` standalone The Guide page Custom Element.
@@ -51,6 +52,7 @@ Current homepage Custom Element source URLs:
 | --- | --- | --- | --- |
 | Stats | `bw-stats` | `https://fenerszymanski.github.io/berlinwalk-widgets/stats/stats-element.js` | Metrics section. |
 | How It Works | `bw-how-it-works` | `https://fenerszymanski.github.io/berlinwalk-widgets/how-it-works/how-it-works-element.js` | 3-step timeline. |
+| Hero Home | `bw-hero-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/hero-home/hero-home-element.js` | Homepage conversion hero with real tour photo, booking CTA, route, proof points. |
 | Blog Home | `bw-blog-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-home/blog-home-element.js` | Homepage `Berlin Travel Notes` editorial blog teaser. |
 | Guide Home | `bw-guide-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | Homepage "Meet Yusuf" teaser linking to `/the-guide`. |
 | Tools Home | `bw-tools-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | Homepage tools preview. |
