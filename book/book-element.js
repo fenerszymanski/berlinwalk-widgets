@@ -146,7 +146,7 @@ class BWBookHeroElement extends HTMLElement {
             linear-gradient(90deg, rgba(255, 230, 0, 0.16) 0 1px, transparent 1px 84px),
             linear-gradient(180deg, #FFFFFF, #F5F8EF);
           border-top: 6px solid var(--green);
-          padding: 56px 0 48px;
+          padding: 56px 0 20px;
           position: relative;
         }
 
@@ -295,7 +295,7 @@ class BWBookHeroElement extends HTMLElement {
 
         @media (max-width: 880px) {
           .bw-book .bw-book-hero {
-            padding: 44px 0 36px;
+            padding: 44px 0 14px;
           }
           .bw-book .bw-book-hero-grid {
             gap: 28px;
@@ -377,6 +377,10 @@ class BWBookDetailsElement extends HTMLElement {
 
         .bw-book .bw-book-section {
           padding: 56px 0;
+        }
+
+        .bw-book .bw-book-section:first-child {
+          padding-top: 28px;
         }
 
         .bw-book .bw-book-section + .bw-book-section {
