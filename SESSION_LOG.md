@@ -7,17 +7,17 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
-## 2026-05-19 — Codex (Site header shrink placeholder)
+## 2026-05-19 — Codex (Site header rollback)
 
-**Did:** Hardened the site header shrink behavior after live screenshots still showed Wix-held placeholder space, then removed blur/glass sources from the shrunk header.
+**Did:** Rolled back the risky Wix-wrapper shrink fixes and disabled header shrinking to stop the live blur/glass/gap regressions.
 
 **Changed:**
-- `site-header/site-header-element.js` — syncs shrink state from `window`, `document`, `body`, and `document.scrollingElement`; offsets the Wix header shell with negative margin instead of resizing the section; hides Wix background/media layers; removed the shrunk header box-shadow that read as a blur band.
+- `site-header/site-header-element.js` — removed custom host sizing, Wix wrapper manipulation, negative margins, background-layer hiding, and multi-source scroll listeners. The scroll handler now keeps `.bw-header-shrunk` off, preserving the stable 142px header height while the progress bar still updates.
 
-**Opened:** Push/deploy widgets repo, then verify live homepage scroll-down header spacing.
-**Closed:** Local preview verified: header host height is 142px at top and 71px after scroll/shrink; live DOM inspection showed remaining 143px Wix header/background ancestors; syntax check passed.
+**Opened:** Push/deploy widgets repo, then verify live homepage has no blur/glass band and no placeholder jump. If shrink is still desired, solve it in Wix Studio by changing the header/custom-element section sizing rather than fighting Wix with JS.
+**Closed:** Local preview verified: header stays 142px at top and after scroll; `.bw-header-shrunk` remains false; syntax check passed.
 
-**Next session should:** After GitHub Pages deploy, verify on the live Wix homepage that the white placeholder gap under the shrunk menu is gone.
+**Next session should:** Verify live after deploy. Only reintroduce shrink after the Wix header section Min H/height behavior is fixed in Studio.
 
 ## 2026-05-19 — Codex (Berlin Quiz spacing follow-up)
 

@@ -15,23 +15,13 @@ const BW_HEADER_LINKS = {
 class BWHeaderElement extends HTMLElement {
   connectedCallback() {
     this._render();
-    this._setupHostSizing();
     this._setupScroll();
     this._setupMobile();
     this._setupDropdown();
   }
 
   disconnectedCallback() {
-    if (this._scrollTargets && this._scrollHandler) {
-      this._scrollTargets.forEach((target) => {
-        if (target && target.removeEventListener) target.removeEventListener('scroll', this._scrollHandler);
-      });
-    }
-    if (this._resizeHandler) window.removeEventListener('resize', this._resizeHandler);
-    if (this._wheelHandler) window.removeEventListener('wheel', this._wheelHandler);
-    if (this._touchHandler) window.removeEventListener('touchmove', this._touchHandler);
-    if (this._heightInterval) clearInterval(this._heightInterval);
-    if (this._heightTimer) clearTimeout(this._heightTimer);
+    if (this._scrollHandler) window.removeEventListener('scroll', this._scrollHandler);
     if (this._keyHandler) document.removeEventListener('keydown', this._keyHandler);
     if (this._docClickHandler) document.removeEventListener('click', this._docClickHandler);
     if (this._dropdownReposition) {
@@ -41,104 +31,19 @@ class BWHeaderElement extends HTMLElement {
     document.body.style.overflow = '';
   }
 
-  _setupHostSizing() {
-    this.style.setProperty('display', 'block', 'important');
-    this.style.setProperty('width', '100%', 'important');
-    this.style.setProperty('min-height', '0', 'important');
-    this.style.setProperty('overflow', 'visible', 'important');
-    this._resizeHandler = () => this._syncHostHeightSoon();
-    window.addEventListener('resize', this._resizeHandler, { passive: true });
-  }
-
-  _syncHostHeight() {
-    const wrap = this.querySelector('.bw-header-wrap');
-    if (!wrap) return;
-    const height = Math.ceil(wrap.getBoundingClientRect().height);
-    if (height > 0) {
-      this.style.setProperty('height', height + 'px', 'important');
-      this.style.setProperty('min-height', '0', 'important');
-      this._syncWixLayoutOffset(height);
-    }
-  }
-
-  _syncWixLayoutOffset(height) {
-    const headerShell = this._getWixHeaderShell();
-    if (!headerShell) return;
-    const shellHeight = Math.ceil(headerShell.getBoundingClientRect().height);
-    const shrunk = this.classList.contains('bw-header-host-shrunk');
-    const overlap = shrunk ? Math.max(0, shellHeight - height) : 0;
-    headerShell.style.setProperty('margin-bottom', overlap ? '-' + overlap + 'px' : '0', 'important');
-    headerShell.style.setProperty('background', 'transparent', 'important');
-    headerShell.style.setProperty('box-shadow', 'none', 'important');
-    headerShell.style.setProperty('backdrop-filter', 'none', 'important');
-    headerShell.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
-    this._hideWixBackgroundLayers(headerShell);
-  }
-
-  _getWixHeaderShell() {
-    let shell = this.parentElement;
-    let depth = 0;
-    while (shell && shell !== document.body && depth < 10) {
-      const className = typeof shell.className === 'string' ? shell.className : '';
-      if (className.includes('wixui-header') || shell.tagName.toLowerCase() === 'header') break;
-      shell = shell.parentElement;
-      depth++;
-    }
-    if (!shell || shell === document.body) return null;
-    let topShell = shell;
-    let parent = shell.parentElement;
-    depth = 0;
-    while (parent && parent !== document.body && depth < 3) {
-      if (parent.tagName.toLowerCase() === 'header') topShell = parent;
-      parent = parent.parentElement;
-      depth++;
-    }
-    return topShell;
-  }
-
-  _hideWixBackgroundLayers(shell) {
-    if (!shell || shell === document.body) return;
-    shell.querySelectorAll('[id^="bgLayers_"], [id^="bgMedia_"], .QG9w8P, .LNYVZi, .ROWgFb').forEach((node) => {
-      node.style.setProperty('display', 'none', 'important');
-      node.style.setProperty('opacity', '0', 'important');
-      node.style.setProperty('pointer-events', 'none', 'important');
-    });
-  }
-
-  _syncHostHeightSoon() {
-    this._syncHostHeight();
-    if (this._heightTimer) clearTimeout(this._heightTimer);
-    this._heightTimer = setTimeout(() => this._syncHostHeight(), 260);
-  }
-
-  _getScrollY() {
-    const doc = document.documentElement;
-    const body = document.body;
-    const scrolling = document.scrollingElement;
-    return Math.max(
-      window.scrollY || 0,
-      window.pageYOffset || 0,
-      scrolling ? scrolling.scrollTop || 0 : 0,
-      doc ? doc.scrollTop || 0 : 0,
-      body ? body.scrollTop || 0 : 0
-    );
-  }
-
   _setupScroll() {
     const header = this.querySelector('.bw-header-wrap');
     const progress = this.querySelector('.bw-header-progress-bar');
     if (!header) return;
     let ticking = false;
     const update = () => {
-      const y = this._getScrollY();
-      header.classList.toggle('bw-header-shrunk', y > 32);
-      this.classList.toggle('bw-header-host-shrunk', y > 32);
+      const y = window.scrollY || window.pageYOffset || 0;
+      header.classList.remove('bw-header-shrunk');
       if (progress) {
         const docH = (document.documentElement.scrollHeight || 0) - (window.innerHeight || 0);
         const pct = docH > 0 ? Math.max(0, Math.min(100, (y / docH) * 100)) : 0;
         progress.style.width = pct + '%';
       }
-      this._syncHostHeightSoon();
       ticking = false;
     };
     this._scrollHandler = () => {
@@ -147,19 +52,7 @@ class BWHeaderElement extends HTMLElement {
         ticking = true;
       }
     };
-    this._scrollTargets = [
-      window,
-      document,
-      document.documentElement,
-      document.body,
-      document.scrollingElement
-    ].filter((target, index, list) => target && list.indexOf(target) === index);
-    this._scrollTargets.forEach((target) => target.addEventListener('scroll', this._scrollHandler, { passive: true }));
-    this._wheelHandler = this._scrollHandler;
-    this._touchHandler = this._scrollHandler;
-    window.addEventListener('wheel', this._wheelHandler, { passive: true });
-    window.addEventListener('touchmove', this._touchHandler, { passive: true });
-    this._heightInterval = setInterval(this._scrollHandler, 500);
+    window.addEventListener('scroll', this._scrollHandler, { passive: true });
     update();
   }
 
