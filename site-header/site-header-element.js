@@ -15,6 +15,7 @@ const BW_HEADER_LINKS = {
 class BWHeaderElement extends HTMLElement {
   connectedCallback() {
     this._render();
+    this._setupHostSizing();
     this._setupScroll();
     this._setupMobile();
     this._setupDropdown();
@@ -22,6 +23,8 @@ class BWHeaderElement extends HTMLElement {
 
   disconnectedCallback() {
     if (this._scrollHandler) window.removeEventListener('scroll', this._scrollHandler);
+    if (this._resizeHandler) window.removeEventListener('resize', this._resizeHandler);
+    if (this._heightTimer) clearTimeout(this._heightTimer);
     if (this._keyHandler) document.removeEventListener('keydown', this._keyHandler);
     if (this._docClickHandler) document.removeEventListener('click', this._docClickHandler);
     if (this._dropdownReposition) {
@@ -29,6 +32,50 @@ class BWHeaderElement extends HTMLElement {
       window.removeEventListener('scroll', this._dropdownReposition);
     }
     document.body.style.overflow = '';
+  }
+
+  _setupHostSizing() {
+    this.style.setProperty('display', 'block', 'important');
+    this.style.setProperty('width', '100%', 'important');
+    this.style.setProperty('min-height', '0', 'important');
+    this.style.setProperty('overflow', 'visible', 'important');
+    this._resizeHandler = () => this._syncHostHeightSoon();
+    window.addEventListener('resize', this._resizeHandler, { passive: true });
+  }
+
+  _syncHostHeight() {
+    const wrap = this.querySelector('.bw-header-wrap');
+    if (!wrap) return;
+    const height = Math.ceil(wrap.getBoundingClientRect().height);
+    if (height > 0) {
+      this.style.setProperty('height', height + 'px', 'important');
+      this.style.setProperty('min-height', '0', 'important');
+      this._syncWixShellHeight(height);
+    }
+  }
+
+  _syncWixShellHeight(height) {
+    const hostRect = this.getBoundingClientRect();
+    let node = this.parentElement;
+    let depth = 0;
+    while (node && node !== document.body && depth < 4) {
+      const rect = node.getBoundingClientRect();
+      const nearHeaderHeight = rect.height > 0 && rect.height < 260;
+      const nearHostWidth = rect.width >= hostRect.width - 4;
+      if (nearHeaderHeight && nearHostWidth) {
+        node.style.setProperty('height', height + 'px', 'important');
+        node.style.setProperty('min-height', '0', 'important');
+        node.style.setProperty('overflow', 'visible', 'important');
+      }
+      node = node.parentElement;
+      depth++;
+    }
+  }
+
+  _syncHostHeightSoon() {
+    this._syncHostHeight();
+    if (this._heightTimer) clearTimeout(this._heightTimer);
+    this._heightTimer = setTimeout(() => this._syncHostHeight(), 260);
   }
 
   _setupScroll() {
@@ -39,11 +86,13 @@ class BWHeaderElement extends HTMLElement {
     const update = () => {
       const y = window.scrollY || window.pageYOffset || 0;
       header.classList.toggle('bw-header-shrunk', y > 32);
+      this.classList.toggle('bw-header-host-shrunk', y > 32);
       if (progress) {
         const docH = (document.documentElement.scrollHeight || 0) - (window.innerHeight || 0);
         const pct = docH > 0 ? Math.max(0, Math.min(100, (y / docH) * 100)) : 0;
         progress.style.width = pct + '%';
       }
+      this._syncHostHeightSoon();
       ticking = false;
     };
     this._scrollHandler = () => {
