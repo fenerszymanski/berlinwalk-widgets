@@ -50,15 +50,15 @@ Add these through Wix Custom Code, not as iframe embeds. They self-skip when the
 current URL is not a blog post.
 
 ```html
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=5" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=6" defer></script>
 ```
 
-`blog-sidebar-inject.js` adds the blog category nav above the post title, builds
-a desktop-only `On this page` sidebar from visible H2/H3 headings, adds compact
-share buttons, and shortens the floating booking CTA copy to `Book Now`. The
-sidebar hides below 1024px, appears only while the article body is in view, sits
-close to the article edge, and its long heading list scrolls inside the card
-when needed.
+`blog-sidebar-inject.js` adds a wrapped two-line blog category nav above the
+post title, builds a desktop-only `On this page` sidebar from visible H2/H3
+headings, adds compact share buttons, and shortens the floating booking CTA copy
+to `Book Now`. The sidebar hides below 1024px, appears only while the article
+body is in view, sits close to the article edge, and its long heading list
+scrolls inside the card when needed.
 
 ## Lead Form
 

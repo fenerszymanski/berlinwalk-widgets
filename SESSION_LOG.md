@@ -8,6 +8,20 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-20 — Codex (Blog category nav wrap)
+
+**Did:** Changed the blog category nav from horizontal scroll to a wrapped two-line layout.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — `.bw-blog-mini-nav-inner` now uses `flex-wrap`, centered desktop rows, no horizontal overflow, and tighter mobile wrapping.
+- `README.md`, `wix-embed-snippets.md` — documented the wrapped two-line nav and bumped the snippet to `?v=6`.
+- Project root: `PROJECT_MEMORY.md` — recorded the v6 URL.
+
+**Opened:** Push/deploy widgets repo and make sure Wix Custom Code uses `blog-sidebar-inject.js?v=6`.
+**Closed:** Local syntax check passed; `js/blog-sidebar-inject.js` has no non-ASCII characters.
+
+**Next session should:** Verify live that category links wrap into two clean rows without horizontal page scroll.
+
 ## 2026-05-20 — Codex (Blog category nav + bounded index)
 
 **Did:** Matched Yusuf's requested blog post nav/index behavior: category nav before H1, index starts with body content, and index disappears after article body.
