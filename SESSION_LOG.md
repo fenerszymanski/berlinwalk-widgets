@@ -8,6 +8,20 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-20 — Codex (Blog nav styling + H1 index start)
+
+**Did:** Restyled the blog category nav and changed the right-side index start point to the post H1.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — removed the early-body threshold; sidebar now starts at the first visible post H1 and still disappears near the final meaningful article text. Blog category nav now uses a soft cream card, wrapped rows, red inactive labels, green active label, and yellow underline hover/active treatment.
+- `README.md`, `wix-embed-snippets.md` — documented the H1 start/styled nav behavior and bumped the snippet to `?v=8`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded v8 behavior.
+
+**Opened:** Push/deploy widgets repo and make sure Wix Custom Code uses `blog-sidebar-inject.js?v=8`.
+**Closed:** Local syntax check passed; `js/blog-sidebar-inject.js` has no non-ASCII characters.
+
+**Next session should:** Verify live that the category nav feels polished without horizontal scroll and the index appears with the H1, then vanishes near the article end.
+
 ## 2026-05-20 — Codex (Blog index earlier start)
 
 **Did:** Moved the right-side blog index upward and made it appear earlier while preserving the end-of-body disappear behavior.
