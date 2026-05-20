@@ -8,6 +8,20 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-20 — Codex (Blog index earlier start)
+
+**Did:** Moved the right-side blog index upward and made it appear earlier while preserving the end-of-body disappear behavior.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — sidebar fixed top changed from `188px` to `150px`; start threshold now allows the index to appear slightly before the first meaningful body text (`SIDEBAR_START_EARLY = 220`); end threshold unchanged.
+- `wix-embed-snippets.md` — bumped the snippet to `?v=7`.
+- Project root: `PROJECT_MEMORY.md` — recorded v7 URL and updated behavior note.
+
+**Opened:** Push/deploy widgets repo and make sure Wix Custom Code uses `blog-sidebar-inject.js?v=7`.
+**Closed:** Local syntax check passed; `js/blog-sidebar-inject.js` has no non-ASCII characters.
+
+**Next session should:** Verify live that the index starts higher/earlier but still disappears near the article body end.
+
 ## 2026-05-20 — Codex (Blog category nav wrap)
 
 **Did:** Changed the blog category nav from horizontal scroll to a wrapped two-line layout.

@@ -10,7 +10,8 @@
   var MIN_DESKTOP_WIDTH = 1024;
   var SIDEBAR_WIDTH = 236;
   var SIDEBAR_GAP = 12;
-  var SIDEBAR_TOP = 188;
+  var SIDEBAR_TOP = 150;
+  var SIDEBAR_START_EARLY = 220;
   var lastPath = location.pathname;
   var observer = null;
   var resizeTimer = null;
@@ -304,7 +305,7 @@
     var bounds = getBodyBounds(body);
     var y = window.scrollY || window.pageYOffset || 0;
     var stickyY = y + SIDEBAR_TOP;
-    if (!bounds || stickyY < bounds.start - 12 || stickyY > bounds.end - 24) {
+    if (!bounds || stickyY < bounds.start - SIDEBAR_START_EARLY || stickyY > bounds.end - 24) {
       sidebar.classList.remove('bw-blog-sidebar-visible');
       return;
     }
