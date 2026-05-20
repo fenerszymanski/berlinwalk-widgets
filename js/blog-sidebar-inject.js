@@ -10,6 +10,7 @@
   var MIN_DESKTOP_WIDTH = 1024;
   var SIDEBAR_WIDTH = 236;
   var SIDEBAR_GAP = 12;
+  var SIDEBAR_TOP = 188;
   var lastPath = location.pathname;
   var observer = null;
   var resizeTimer = null;
@@ -106,7 +107,7 @@
     var style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = [
-      '.bw-blog-sidebar{position:fixed;top:188px;width:236px;max-height:calc(100vh - 212px);z-index:9000;font-family:Montserrat,Arial,sans-serif;color:#212121;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;}',
+      '.bw-blog-sidebar{position:fixed;top:' + SIDEBAR_TOP + 'px;width:236px;max-height:calc(100vh - 212px);z-index:9000;font-family:Montserrat,Arial,sans-serif;color:#212121;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;}',
       '.bw-blog-sidebar.bw-blog-sidebar-visible{opacity:1;pointer-events:auto;}',
       '.bw-blog-sidebar-progress{height:4px;background:rgba(27,94,32,.10);border-radius:999px;margin:0 0 12px;overflow:hidden;}',
       '.bw-blog-sidebar-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#1B5E20,#7CB342,#FFE600);border-radius:999px;transition:width .08s linear;}',
@@ -131,15 +132,13 @@
       'body #bw-sticky-cta .bw-sub{display:none!important;}',
       'body #bw-desktop-cta .bw-arrow{width:27px!important;height:27px!important;font-size:13px!important;margin:5px 5px 5px 2px!important;}',
       'body #bw-desktop-cta .bw-close{width:20px!important;height:20px!important;font-size:13px!important;}',
-      '.bw-blog-mini-nav{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;margin:0 0 24px;padding:0;width:100%;}',
-      '.bw-blog-mini-nav-inner{align-items:center;border-bottom:1px solid rgba(27,94,32,.16);border-top:1px solid rgba(27,94,32,.10);display:flex;gap:10px;min-height:40px;overflow-x:auto;padding:7px 0;scrollbar-width:none;}',
+      '.bw-blog-mini-nav{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;margin:0 0 26px;padding:0;width:100%;}',
+      '.bw-blog-mini-nav-inner{align-items:center;border-bottom:1px solid rgba(27,94,32,.16);display:flex;gap:30px;justify-content:space-between;min-height:56px;overflow-x:auto;padding:0 0 16px;scrollbar-width:none;}',
       '.bw-blog-mini-nav-inner::-webkit-scrollbar{display:none;}',
-      '.bw-blog-mini-nav-kicker{color:#6A746A;flex:0 0 auto;font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;}',
-      '.bw-blog-mini-nav-link{align-items:center;border:1px solid rgba(27,94,32,.18);border-radius:999px;color:#1B5E20;display:inline-flex;flex:0 0 auto;font-size:13px;font-weight:800;line-height:1;padding:9px 13px;text-decoration:none;white-space:nowrap;}',
-      '.bw-blog-mini-nav-link:hover,.bw-blog-mini-nav-link:focus-visible{background:#FFE600;border-color:#FFE600;outline:0;}',
-      '.bw-blog-mini-nav-link-primary{background:#1B5E20;border-color:#1B5E20;color:#FFFFFF;}',
-      '.bw-blog-mini-nav-link-primary:hover,.bw-blog-mini-nav-link-primary:focus-visible{background:#FFE600;color:#1B5E20;}',
-      '@media (max-width:700px){.bw-blog-mini-nav{margin:16px auto 14px;max-width:calc(100% - 28px);}.bw-blog-mini-nav-inner{gap:8px;}.bw-blog-mini-nav-kicker{display:none;}.bw-blog-mini-nav-link{font-size:12px;padding:8px 11px;}}',
+      '.bw-blog-mini-nav-link{align-items:center;color:#E93445;display:inline-flex;flex:0 0 auto;font-size:16px;font-weight:900;letter-spacing:.2px;line-height:1;padding:0;text-decoration:none;white-space:nowrap;}',
+      '.bw-blog-mini-nav-link:hover,.bw-blog-mini-nav-link:focus-visible{color:#1B5E20;outline:0;}',
+      '.bw-blog-mini-nav-link-active{color:#6FAE3E;}',
+      '@media (max-width:900px){.bw-blog-mini-nav{margin:0 0 20px;}.bw-blog-mini-nav-inner{gap:22px;justify-content:flex-start;min-height:48px;padding-bottom:13px;}.bw-blog-mini-nav-link{font-size:14px;}}',
       '@media (max-width:1023px){.bw-blog-sidebar{display:none!important;}}'
     ].join('\n');
     document.head.appendChild(style);
@@ -302,6 +301,13 @@
       sidebar.classList.remove('bw-blog-sidebar-visible');
       return;
     }
+    var bounds = getBodyBounds(body);
+    var y = window.scrollY || window.pageYOffset || 0;
+    var stickyY = y + SIDEBAR_TOP;
+    if (!bounds || stickyY < bounds.start - 12 || stickyY > bounds.end - 24) {
+      sidebar.classList.remove('bw-blog-sidebar-visible');
+      return;
+    }
     var gap = SIDEBAR_GAP;
     var width = SIDEBAR_WIDTH;
     var rect = getArticleRect(body, items, viewportW, width, gap);
@@ -316,6 +322,30 @@
     }
     sidebar.style.left = left + 'px';
     sidebar.classList.add('bw-blog-sidebar-visible');
+  }
+
+  function isPostTextNode(el) {
+    if (!el || el.nodeType !== 1 || !isVisible(el)) return false;
+    if (el.closest('[' + MARKER + '], [' + NAV_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) return false;
+    if (el.closest('#bw-desktop-cta, #bw-sticky-cta')) return false;
+    return cleanText(el.textContent).length >= 18;
+  }
+
+  function getBodyBounds(body) {
+    if (!body) return null;
+    var nodes = [];
+    var candidates = body.querySelectorAll('p, h2, h3, li, blockquote');
+    for (var i = 0; i < candidates.length; i++) {
+      if (isPostTextNode(candidates[i])) nodes.push(candidates[i]);
+    }
+    if (!nodes.length) return null;
+    var first = nodes[0].getBoundingClientRect();
+    var last = nodes[nodes.length - 1].getBoundingClientRect();
+    var y = window.scrollY || window.pageYOffset || 0;
+    return {
+      start: first.top + y,
+      end: last.bottom + y
+    };
   }
 
   function updateActive(sidebar, items) {
@@ -382,6 +412,33 @@
     return body;
   }
 
+  function getActiveCategory() {
+    var path = location.pathname.toLowerCase();
+    if (/(german|language|speak)/.test(path)) return 'german-language';
+    if (/(myth|mistake|wrong|really)/.test(path)) return 'berlin-myths';
+    if (/(route|itinerary|walk|stops|alexanderplatz|hackescher)/.test(path)) return 'tour-route';
+    if (/(before|after|then|now|old|rebuilt|changed)/.test(path)) return 'before-after';
+    if (/(history|wall|cold-war|reichstag|museum|church|death|nikolaiviertel)/.test(path)) return 'berlin-history';
+    return 'tourist-tips';
+  }
+
+  function renderMiniNavLinks() {
+    var active = getActiveCategory();
+    var links = [
+      ['all-posts', 'All Posts', 'https://www.berlinwalk.com/blog'],
+      ['tour-route', 'Tour Route', 'https://www.berlinwalk.com/blog/categories/tour-route'],
+      ['berlin-myths', 'Berlin Myths', 'https://www.berlinwalk.com/blog/categories/berlin-myths'],
+      ['tourist-tips', 'Tourist Tips', 'https://www.berlinwalk.com/blog/categories/tourist-tips'],
+      ['before-after', 'Before & After', 'https://www.berlinwalk.com/blog/categories/before-after'],
+      ['german-language', 'German Language', 'https://www.berlinwalk.com/blog/categories/german-language'],
+      ['berlin-history', 'Berlin History', 'https://www.berlinwalk.com/blog/categories/berlin-history']
+    ];
+    return links.map(function (link) {
+      var cls = 'bw-blog-mini-nav-link' + (link[0] === active ? ' bw-blog-mini-nav-link-active' : '');
+      return '<a class="' + cls + '" href="' + link[2] + '" target="_top">' + escapeHtml(link[1]) + '</a>';
+    }).join('');
+  }
+
   function injectMiniNav(body) {
     if (document.querySelector('[' + NAV_MARKER + ']')) return;
     var anchor = findMiniNavAnchor(body);
@@ -392,11 +449,7 @@
     nav.setAttribute('aria-label', 'Blog navigation');
     nav.innerHTML =
       '<div class="bw-blog-mini-nav-inner">' +
-        '<span class="bw-blog-mini-nav-kicker">Berlin Travel Notes</span>' +
-        '<a class="bw-blog-mini-nav-link bw-blog-mini-nav-link-primary" href="https://www.berlinwalk.com/blog" target="_top">All articles</a>' +
-        '<a class="bw-blog-mini-nav-link" href="https://www.berlinwalk.com/blog/categories/tourist-tips" target="_top">Tourist Tips</a>' +
-        '<a class="bw-blog-mini-nav-link" href="https://www.berlinwalk.com/blog/categories/berlin-history" target="_top">Berlin History</a>' +
-        '<a class="bw-blog-mini-nav-link" href="https://www.berlinwalk.com/berlin-tools" target="_top">Tools</a>' +
+        renderMiniNavLinks() +
       '</div>';
     if (anchor.tagName && anchor.tagName.toLowerCase() === 'h1' && anchor.parentNode) {
       anchor.parentNode.insertBefore(nav, anchor);

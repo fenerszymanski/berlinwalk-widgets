@@ -8,6 +8,20 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-20 — Codex (Blog category nav + bounded index)
+
+**Did:** Matched Yusuf's requested blog post nav/index behavior: category nav before H1, index starts with body content, and index disappears after article body.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — mini-nav items are now the full category row (`All Posts`, `Tour Route`, `Berlin Myths`, `Tourist Tips`, `Before & After`, `German Language`, `Berlin History`) with active category heuristics; right index only appears between the first and last meaningful post-body text nodes; category URLs verified 200; sidebar remains compact/scrollable and near the article edge.
+- `README.md`, `wix-embed-snippets.md` — documented the bounded article-body behavior and bumped the snippet to `?v=5`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded v5 behavior.
+
+**Opened:** Push/deploy widgets repo and make sure Wix Custom Code uses `blog-sidebar-inject.js?v=5`.
+**Closed:** Local syntax check passed; category URLs returned 200.
+
+**Next session should:** Verify on live posts with different categories: category nav appears before H1, active category is reasonable, sidebar starts at body text and disappears before post CTA/related content.
+
 ## 2026-05-20 — Codex (Blog sidebar v4 follow-up)
 
 **Did:** Tightened the live blog right rail and made the missing mini-nav more deterministic.
