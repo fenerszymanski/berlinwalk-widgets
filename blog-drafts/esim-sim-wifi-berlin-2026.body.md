@@ -1,47 +1,6 @@
 # eSIM, SIM & Free WiFi in Berlin 2026: What Actually Works
 
-Slug idea: `esim-sim-wifi-berlin-2026`
-
-Wix draft ID: `f76bb987-760b-42e2-b4cd-3971bde1c64a`
-
-Wix draft status: `UNPUBLISHED`
-
-Meta title: eSIM, SIM & Free WiFi in Berlin 2026: A Tourist's Honest Guide
-
-Meta description: A Berlin guide's practical 2026 breakdown of travel eSIMs, German prepaid SIMs, and free public WiFi (BVG, Freifunk, cafes). What to buy before you fly, what to skip at the airport, and how to stay online without overpaying.
-
-Category: Tourist Tips
-
-Primary keyword: Berlin eSIM 2026
-
-Secondary keywords: prepaid SIM Berlin, free WiFi Berlin, BVG WiFi, Germany travel eSIM, Berlin tourist data plan, Airalo Germany, Holafly Germany, Aldi Talk, Lidl Connect, Vodafone CallYa
-
-Suggested CTA: Activate your eSIM before you land, then meet me at Alexanderplatz with Google Maps already working. The Berlin Free Walking Tour is easier when your phone is.
-
-## Widget Plan
-
-Use these embeds when building the post in Wix:
-
-1. Quick summary, near the top:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=esim-sim-wifi`
-
-2. **Berlin Connectivity Picker**, immediately after "The Honest Answer" section (interactive: pick trip length + need → personalised eSIM/SIM/WiFi recommendation + comparison table):
-   `https://fenerszymanski.github.io/berlinwalk-widgets/connectivity-picker/`
-   - Recommended iframe height: 900 px (widget auto-resizes via `bw-resize` postMessage; brand.js handles the parent listener).
-
-3. FAQ, near the bottom:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=esim-sim-wifi`
-
-## Quick Summary
-
-- Most tourists in Berlin only need one of three things: a travel eSIM bought online before the flight, a German prepaid SIM/eSIM from a supermarket brand, or no data plan at all because free WiFi is everywhere.
-- For a 3 to 7 day trip, a travel eSIM (Airalo, Saily, Holafly, Nomad) costs roughly 4 to 15 euros for 1 to 5 GB, installs in five minutes, and is usually the easiest answer.
-- For a 2 to 4 week stay, a German prepaid SIM (Aldi Talk, Lidl Connect, Vodafone CallYa, Congstar) is cheaper per gigabyte and gives you a German phone number plus EU roaming.
-- Skip the airport SIM kiosks. They sell physical SIMs at tourist prices and almost never sell eSIMs.
-- Berlin has serious free WiFi: BVG-WiFi at every U-Bahn station with no registration, free DB WiFi at most train stations, Freifunk in 1,000+ public spots, and free WiFi at most cafes, museums, and tourist sites.
-- 5G is live across all major Berlin networks (Telekom, Vodafone, O2) and most modern plans now include it by default.
-
-## Draft
+{{quick-summary}}
 
 The phone problem is one of the first things tourists actually have to solve in Berlin. Not the most romantic part of the trip, but real. You land at BER, your phone is in airplane mode, you want Google Maps, the U-Bahn timetable, the booking confirmation for your hotel, the address of where you are meeting me, the photo your friend just sent you of which currywurst place to go to. Then you see the SIM kiosk in the arrival hall and you wonder if you should pay 30 euros for a SIM right now, or if you can just rely on WiFi, or if eSIM is finally the answer.
 
@@ -64,6 +23,8 @@ Match the option to the trip:
 - **Tight budget, mostly sightseeing in the centre, your phone can wait:** WiFi only. Realistic in Berlin if you plan ahead.
 
 Most visitors are in the first group and never need to think about a German prepaid plan. That is fine.
+
+{{connectivity-picker}}
 
 ## Option 1: Travel eSIM (Best for Most Tourists)
 
@@ -90,7 +51,7 @@ Most tourists I meet use somewhere between 500 MB and 1.5 GB per day, depending 
 **The catch:**
 
 - Your phone must be eSIM-compatible. Almost every iPhone since the XS, Pixel 3 and newer, Samsung S20 and newer, and most modern flagships are. Older phones, budget Android, and dual-SIM travel routers may not be.
-- Most travel eSIMs are **data only**. You will not get a German phone number, and you cannot make traditional voice calls from this line. Use WhatsApp, Signal, or FaceTime for calls. This is fine for tourism but bad if you actually need a German number.
+- Most travel eSIMs are data only. You will not get a German phone number, and you cannot make traditional voice calls from this line. Use WhatsApp, Signal, or FaceTime for calls. This is fine for tourism but bad if you actually need a German number.
 - Set up the eSIM on your home WiFi the day before. Activating one in the middle of BER arrivals with no data is a stressful way to start the trip.
 
 ## Option 2: German Prepaid SIM or eSIM (Best for Longer Stays)
@@ -138,7 +99,7 @@ What is actually free in Berlin:
 - Download Google Maps offline for the central districts (Mitte, Friedrichshain, Kreuzberg, Prenzlauer Berg) before your trip.
 - Save addresses, hotel confirmations, and your booking for [the Berlin Free Walking Tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) as PDFs or screenshots, so you can open them with no data.
 - Use the BVG app, which has its own offline timetable cache.
-- Treat each U-Bahn station as a "sync point" where you check messages, refresh maps, and send anything time-sensitive.
+- Treat each U-Bahn station as a sync point where you check messages, refresh maps, and send anything time-sensitive.
 
 It is not as smooth as having mobile data. But it works, especially for a 2 or 3 day trip in the historic centre.
 
@@ -156,15 +117,6 @@ The kiosks at BER mostly sell physical SIMs at clear tourist prices. There are u
 If you are stuck and want to get a SIM the moment you land, fine, buy one. But it is usually not the best deal.
 
 For airport logistics on the same day, see [how to get from Berlin airport to Alexanderplatz the easy way](https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way).
-
-## Quick Comparison
-
-| Option | Cost (3 days) | Setup time | German number? | Best for |
-|---|---|---|---|---|
-| Travel eSIM (Airalo / Saily / Holafly / Nomad) | ~4 to 12 euros | 5 minutes online | No | Short trips, smooth arrival |
-| German prepaid SIM (Aldi Talk / Lidl Connect / CallYa) | ~9 to 15 euros for 4 weeks | 15 to 60 minutes (ID verify) | Yes | 2+ week stays |
-| Free WiFi only | 0 euros | None | No | Tight budgets, central sightseeing |
-| Airport SIM kiosk | ~15 to 30 euros | 10 to 20 minutes in queue | Yes | Forgot to plan ahead |
 
 ## What I Tell My Walking-Tour Guests
 
@@ -204,16 +156,4 @@ Whichever route you pick, do not let the airport kiosk be your first move. It is
 
 If you want a local to walk Berlin's historic centre with you on your first morning here, my [Berlin Free Walking Tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) starts at Alexanderplatz every day. Phone working, ticket on screen, Google Maps already pinned to the World Clock. That is the easiest possible Berlin morning.
 
-## Sources to Check Before Publishing
-
-- BVG free WiFi at U-Bahn stations: https://www.berlin.de/en/wifi/4468976-4479120-wifi-free-public-internet-access-at-unde.en.html
-- Berlin public WiFi overview (Freifunk, Godspot, Public Wifi): https://www.berlin.de/en/wifi/
-- visitBerlin public WiFi page: https://www.visitberlin.de/en/public-wi-fi-berlin
-- Airalo Germany eSIM plans: https://www.airalo.com/germany-esim
-- Saily Germany eSIM plans: https://saily.com/blog/sim-card-germany/
-- Holafly Germany unlimited eSIM: https://esim.holafly.com/
-- Aldi Talk current tariffs: https://www.alditalk.de/
-- Lidl Connect current tariffs: https://www.lidl-connect.de/
-- Vodafone CallYa prepaid: https://www.vodafone.de/privat/handy-tarife/callya-prepaid-tarife.html
-- Congstar prepaid: https://www.congstar.de/prepaid/
-- EU roaming rules (Roam Like at Home): https://europa.eu/youreurope/citizens/consumers/internet-telecoms/mobile-roaming-costs/index_en.htm
+{{faq}}

@@ -37,7 +37,8 @@
   "free-things-to-do-in-berlin-2026": "free-things-to-do",
   "luggage-storage-in-berlin-2026": "luggage-storage",
   "best-currywurst-places-in-berlin-2026": "currywurst",
-  "nikolaiviertel-rebuilt-old-town": "nikolaiviertel"
+  "nikolaiviertel-rebuilt-old-town": "nikolaiviertel",
+  "esim-sim-wifi-berlin-2026": "esim-sim-wifi"
 };
 
   var SCHEMAS = {
@@ -1609,6 +1610,76 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. Looking at the TV Tower from Alexanderplatz is free, but going up always costs money. For a free alternative view, book the Reichstag dome or visit a public rooftop such as Klunkerkranich or the upper levels of Galeries Lafayette."
+        }
+      }
+    ]
+  },
+  "esim-sim-wifi": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the easiest way to get internet on my phone in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a short Berlin trip, a travel eSIM bought online before the flight is the easiest. Airalo, Saily, Holafly, and Nomad all sell Germany plans starting around 4 to 6 euros for 1 GB. You scan a QR code on home WiFi the night before, leave the plan disabled, then activate it when you land at BER. Your phone is online before passport control."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I buy a SIM card at Berlin Brandenburg Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually no. The kiosks at BER mostly sell physical SIMs at tourist prices and rarely sell eSIMs. The same plans are typically 30 to 50 percent cheaper either bought online as an eSIM before the flight, or bought at any Aldi, Lidl, Saturn, MediaMarkt, or Vodafone shop in central Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the cheapest prepaid SIM in Berlin in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Aldi Talk and Lidl Connect are the value picks. A typical 2026 Aldi Talk plan is around 8 to 9 euros for 10 GB over 4 weeks with 5G. Lidl Connect prices are similar on the Vodafone network. Vodafone's own CallYa Allnet Flat S sits around 9 to 10 euros for 25 GB over 4 weeks with 5G and EU roaming."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use my US, UK, or non-EU phone plan in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can, but check the per-megabyte roaming rate before you fly. US, UK, and most non-EU carriers can charge frightening rates in Germany. EU citizens can use their home plan freely under EU Roam Like at Home rules. For everyone else, a travel eSIM or local prepaid SIM is almost always cheaper."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there free WiFi on Berlin public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BVG runs free BVG-WiFi at every U-Bahn station with no registration. Newer trams and buses also have on-board WiFi, but older vehicles do not. Deutsche Bahn provides free WiFi at most train stations including Hauptbahnhof, Friedrichstrasse, Ostbahnhof, Suedkreuz, and Gesundbrunnen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get around Berlin on free WiFi only?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, especially for a 2 to 3 day trip in the historic centre. Download Google Maps offline for Mitte, Friedrichshain, Kreuzberg, and Prenzlauer Berg before your trip. Save bookings as PDFs or screenshots. Use BVG-WiFi at U-Bahn stations as sync points, plus Freifunk in 1,000+ public spots and free WiFi at most cafes, museums, and hotels."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does my phone support eSIM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almost every iPhone since the XS, Pixel 3 and newer, Samsung Galaxy S20 and newer, and most modern flagships do. Older phones, budget Android models, and some dual-SIM travel routers may not. Check your phone settings for Add eSIM or Add data plan before buying."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is 5G available in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. 5G is live across Telekom, Vodafone, and O2 in Berlin in 2026, and most modern prepaid plans include 5G by default. Travel eSIMs running on these networks also get 5G access."
         }
       }
     ]

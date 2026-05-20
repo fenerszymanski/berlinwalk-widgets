@@ -133,6 +133,31 @@ Widget placement:
 Notes:
 - September should visually feel like the "smart traveler" month: calmer, clearer, less sweaty, still lively.
 
+## eSIM, SIM & Free WiFi in Berlin 2026
+
+Hero image:
+- Best choice: a hand holding a modern smartphone with a Berlin landmark visible in soft focus behind it (Brandenburger Tor, Berliner Dom, or Alexanderplatz with the TV Tower). Daylight, candid, slightly cinematic. Phone screen should show Google Maps or the lock screen, not a brand-specific app or logo.
+- Backup: an over-the-shoulder shot of a traveller at a U-Bahn platform with the phone in hand. Works because it ties the post to BVG-WiFi and public transport.
+- Avoid: stock images of SIM cards, ejector pins, or carrier logos. Looks generic and dates badly. Avoid airport SIM kiosk close-ups — risk of carrier trademarks.
+- Suggested filename: `berlin-tourist-phone-esim-cover.jpg`
+- Alt text: `A traveller using a smartphone in central Berlin, with the Brandenburger Tor or TV Tower visible in the background.`
+
+Inline images:
+- After "The Honest Answer" (just before the connectivity-picker widget): no image needed — the widget itself is the visual anchor.
+- Around "Option 1: Travel eSIM": optional close-up of a phone settings screen showing a generic "Mobile Plans" or "Add eSIM" view. Crop tight, no carrier branding. Skip if no clean shot exists.
+- Around "Option 3: Free WiFi Only": a U-Bahn platform with the BVG-WiFi sticker visible, or a Berlin cafe window with a discreet "Free WiFi" sign. Light, candid, no people front-and-centre.
+- Around "A Sample 'First Hours in Berlin' Plan": optional shot of the BER airport sign or an S-Bahn arriving at Hauptbahnhof — ties the section to real arrival logistics.
+
+Widget placement:
+- Quick summary near the top.
+- Connectivity Picker immediately after "The Honest Answer" section (interactive: trip length + need → recommendation + comparison table).
+- FAQ at the end.
+
+Notes:
+- The post should visually feel practical and clean, not techy. Phone-in-hand-in-Berlin beats device close-ups every time.
+- Avoid screenshots of specific apps (Airalo, Holafly, Aldi Talk) — visual clutter and update risk. Names in body text are enough.
+- If only one inline image is added, prioritise the BVG-WiFi/U-Bahn shot. It grounds the post in Berlin specifically and matches the Free WiFi angle that differentiates this guide from generic eSIM articles.
+
 ## Asset Search Checklist
 
 Priority order for each post:
