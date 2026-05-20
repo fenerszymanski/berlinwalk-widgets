@@ -53,11 +53,11 @@ current URL is not a blog post.
 <script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=4" defer></script>
 ```
 
-`blog-sidebar-inject.js` adds a compact blog mini-nav above posts, builds a
+`blog-sidebar-inject.js` adds a compact blog mini-nav above the post title, builds a
 desktop-only `On this page` sidebar from visible H2/H3 headings, adds compact
-share buttons, and lightly shrinks the desktop floating booking CTA. The sidebar
-hides below 1024px and falls back to a fixed right rail when Wix wrappers are
-hard to measure.
+share buttons, and shortens the floating booking CTA copy to `Book Now`. The
+sidebar hides below 1024px, sits closer to the article edge, and its long heading
+list scrolls inside the card when needed.
 
 ## Lead Form
 

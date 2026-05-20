@@ -8,6 +8,20 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-20 — Codex (Blog sidebar v4 follow-up)
+
+**Did:** Tightened the live blog right rail and made the missing mini-nav more deterministic.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — mini-nav now inserts directly before the first visible post `h1`; sidebar width/gap reduced to `236px`/`12px`, link spacing tightened, card gets internal scroll for long H2 lists, article-edge candidate sorting now prefers wide post-card wrappers, and floating CTA labels are changed to `Book Now`.
+- `README.md`, `wix-embed-snippets.md` — documented v4 behavior.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded v4 behavior.
+
+**Opened:** Push/deploy widgets repo and make sure Wix Custom Code uses `blog-sidebar-inject.js?v=4`.
+**Closed:** Local syntax check passed; `js/blog-sidebar-inject.js` has no non-ASCII characters.
+
+**Next session should:** Verify live: mini-nav appears above the post title, sidebar sits close to the article card, long index lists remain usable, and sticky CTA says `Book Now`.
+
 ## 2026-05-20 — Claude Code (Blog sticky CTA + mini-nav fix)
 
 **Did:** Fixed two live blog-post issues Yusuf flagged: (a) desktop sticky `#bw-desktop-cta` pill bottom-right was overlapping the last `On this page` sidebar item; (b) the top mini-nav (`bw-blog-mini-nav`) had silently disappeared on some posts because the anchor finder was too strict and returned null.
