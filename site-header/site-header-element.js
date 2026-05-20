@@ -33,6 +33,12 @@ class BWHeaderElement extends HTMLElement {
       window.removeEventListener('resize', this._dropdownReposition);
       window.removeEventListener('scroll', this._dropdownReposition);
     }
+    if (this._mobileOverlay && this._mobileOverlay.parentNode === document.body) {
+      document.body.removeChild(this._mobileOverlay);
+    }
+    if (this._dropdownMenu && this._dropdownMenu.parentNode === document.body) {
+      document.body.removeChild(this._dropdownMenu);
+    }
     document.body.style.overflow = '';
   }
 
@@ -121,8 +127,18 @@ class BWHeaderElement extends HTMLElement {
   _setupMobile() {
     const btn = this.querySelector('.bw-header-hamburger');
     const overlay = this.querySelector('.bw-header-mobile');
-    const closeBtn = this.querySelector('.bw-header-mobile-close');
     if (!btn || !overlay) return;
+
+    // Portal the overlay to <body> to escape ancestor transform/sticky
+    // contexts (Wix header wrapper uses transforms). Without this,
+    // position:fixed becomes effectively position:absolute inside the
+    // Wix header and the overlay gets clipped to the header height.
+    if (overlay.parentNode !== document.body) {
+      document.body.appendChild(overlay);
+    }
+    this._mobileOverlay = overlay;
+
+    const closeBtn = overlay.querySelector('.bw-header-mobile-close');
     const setOpen = (open) => {
       overlay.classList.toggle('bw-header-mobile-open', open);
       btn.classList.toggle('bw-header-hamburger-open', open);
@@ -147,6 +163,12 @@ class BWHeaderElement extends HTMLElement {
     const menu = this.querySelector('.bw-header-submenu');
     const wrap = this.querySelector('.bw-header-dropdown');
     if (!trigger || !menu || !wrap) return;
+
+    // Portal the dropdown to <body> for the same transform-ancestor reason.
+    if (menu.parentNode !== document.body) {
+      document.body.appendChild(menu);
+    }
+    this._dropdownMenu = menu;
     const positionMenu = () => {
       const rect = trigger.getBoundingClientRect();
       const menuRect = menu.getBoundingClientRect();
@@ -368,10 +390,16 @@ class BWHeaderElement extends HTMLElement {
         }
 
         .bw-header-submenu {
+          --green: #1B5E20;
+          --green-dark: #102414;
+          --yellow: #FFE600;
+          --light-green: #C5E1A5;
+          --cream: #FAFAF5;
           background: #FFFFFF;
           border: 1px solid var(--light-green);
           border-radius: 10px;
           box-shadow: 0 18px 44px rgba(27, 94, 32, 0.16);
+          font-family: Montserrat, Arial, sans-serif;
           left: 0;
           list-style: none;
           margin: 0;
@@ -384,6 +412,11 @@ class BWHeaderElement extends HTMLElement {
           transform: translateY(-4px);
           transition: opacity 160ms ease, transform 160ms ease;
           z-index: 2147483647;
+        }
+        .bw-header-submenu * { box-sizing: border-box; }
+        .bw-header-submenu a {
+          color: inherit;
+          text-decoration: none;
         }
 
         .bw-header-dropdown-open .bw-header-submenu {
@@ -521,13 +554,24 @@ class BWHeaderElement extends HTMLElement {
 
         /* Mobile overlay */
         .bw-header-mobile {
+          --green: #1B5E20;
+          --green-dark: #102414;
+          --yellow: #FFE600;
+          --light-green: #C5E1A5;
+          --cream: #FAFAF5;
           background: rgba(16, 36, 20, 0.92);
+          font-family: Montserrat, Arial, sans-serif;
           inset: 0;
           opacity: 0;
           pointer-events: none;
           position: fixed;
           transition: opacity 220ms ease;
-          z-index: 120;
+          z-index: 2147483646;
+        }
+        .bw-header-mobile * { box-sizing: border-box; }
+        .bw-header-mobile a {
+          color: inherit;
+          text-decoration: none;
         }
 
         .bw-header-mobile-open {

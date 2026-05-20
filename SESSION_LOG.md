@@ -6,7 +6,20 @@ Format for each entry — see `AGENTS.md` §9.
 
 
 
+
 ---
+
+## 2026-05-20 — Claude Code (Mobile menu portal fix)
+
+**Did:** Fixed `<bw-site-header>` mobile menu — the overlay was clipping to the Wix header height (~150px) on mobile, leaving the panel head visible but nav + CTA bleeding through the homepage hero. Root cause: Wix header wrapper has transform/sticky context, so `position: fixed` becomes effectively `position: absolute` relative to the wrapper, not the viewport. Same risk for the Resources dropdown.
+
+**Changed:**
+- `site-header/site-header-element.js` — Portal pattern: on connect, the mobile overlay and dropdown submenu are appended to `document.body` so `position: fixed` is honored against the viewport. Cleanup in `disconnectedCallback` removes the portaled nodes. CSS variables (`--green`, `--yellow`, `--light-green`) and `font-family` were inlined on `.bw-header-mobile` and `.bw-header-submenu` so they style correctly outside `.bw-header-wrap`. Mobile overlay z-index bumped to `2147483646` to win against any Wix sticky/floating widgets.
+
+**Opened:** After deploy, Yusuf verifies on mobile: hamburger → full-screen overlay slides in, nav + CTA + trust line all visible, backdrop opaque, body scroll lock works, ESC/backdrop tap closes. Also verify Resources dropdown on desktop still positions correctly (now portaled).
+**Closed:** Mobile overlay clipped by Wix header transform ancestor.
+
+**Next session should:** Live-test the mobile menu and dropdown on a real device. If dropdown is offset (because JS computes coords from trigger but menu is at body), check positionMenu logic.
 
 ## 2026-05-20 — Codex (Blog nav styling + H1 index start)
 
