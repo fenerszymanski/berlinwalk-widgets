@@ -219,6 +219,14 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-parking-calculator/",
       "embedHeight": 720
+    },
+    {
+      "slug": "connectivity-picker",
+      "title": "Berlin Connectivity Picker",
+      "lead": "eSIM, German SIM, or just free WiFi? Get a personalised recommendation for your Berlin trip in 10 seconds.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/connectivity-picker/",
+      "embedHeight": 900
     }
   ]
 }
