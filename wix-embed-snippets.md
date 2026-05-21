@@ -33,6 +33,7 @@ Source type: Server URL
 | Why Walk With Me | `https://fenerszymanski.github.io/berlinwalk-widgets/why/why-element.js` | `bw-why` | none |
 | The Route | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | `bw-route` | none |
 | FAQ | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/faq-element.js` | `bw-faq` | `post="home"` |
+| Blog Guide Note | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-guide-note/blog-guide-note-element.js` | `bw-blog-guide-note` | none |
 
 FAQ note: `bw-faq` emits homepage FAQPage JSON-LD from `faq/data.json`. Keep the
 old FAQ iframe files and `inject.js` for blog posts until live Rich Results
@@ -43,6 +44,9 @@ Route note: `bw-route` pin coordinates and the dashed path come from
 
 Testimonials note: the trust strip currently shows FreeTour.com only. The listing
 URL is `https://www.freetour.com/company/97387`.
+
+Blog Guide Note is designed for the right column of the Wix blog index. Use it
+as a Custom Element, not an iframe, so the card can fit the column width.
 
 ## Blog Custom Code
 

@@ -5,6 +5,22 @@ Rolling log of agent sessions. Most recent at top.
 Format for each entry — see `AGENTS.md` §9.
 
 
+## 2026-05-21 — Codex (Blog Guide Note custom element)
+
+**Did:** Built `<bw-blog-guide-note>` for the Wix `/blog` right column using Yusuf's `TourYusuf.jpeg` photo and the approved editorial-note direction.
+
+**Changed:**
+- `blog-guide-note/blog-guide-note-element.js` — new non-sticky right-column Custom Element with photo, note copy, `/the-guide` and booking links.
+- `blog-guide-note/yusuf-tour-note.jpg` — optimized 960×640 crop generated from `/Users/yusufucuz/Downloads/TourYusuf.jpeg`.
+- `blog-guide-note/index.html` — local preview page.
+- `README.md`, `wix-embed-snippets.md` — added Custom Element source/tag info.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded blog index right-column behavior.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, then add Custom Element on Wix `/blog`: source `https://fenerszymanski.github.io/berlinwalk-widgets/blog-guide-note/blog-guide-note-element.js`, tag `bw-blog-guide-note`; set element height around 640-660px.
+**Closed:** Local `node --check` passed; Playwright preview confirmed image loads, no overflow, and the card is not sticky.
+
+**Next session should:** Verify the card visually in the real Wix right column and adjust height/crop if Wix column width differs.
+
 ## 2026-05-21 — Codex (Blog nav editorial redesign)
 
 **Did:** Implemented and refined the blog menu redesign in the live blog helper: compact `Blog Home` + labelled `Categories` chips, mobile horizontal-scroll bar, and top-pinned sticky return on upward scroll.
