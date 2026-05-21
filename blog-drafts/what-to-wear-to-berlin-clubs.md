@@ -69,18 +69,18 @@ That is the heart of this guide.
 
 ## Berlin Club Dress-Code Matrix
 
-| Club | Door Difficulty | What to wear | What to avoid |
-|---|---:|---|---|
-| **Berghain** | `★★★★` | Dark, functional, calm, music-first | Loud tourist groups, influencer energy, costume-black |
-| **KitKatClub** | `★★★★` | Fetish, expressive, body-aware, creative | Normal casual streetwear, staring energy |
-| **RSO** | `★★★☆` | Functional techno clothes, serious but relaxed | Not knowing the event, visible intoxication |
-| **://about blank** | `★★★☆` | Low-key, left-field, natural, scene-aware | Glossy partywear, business-casual nightlife |
-| **Sisyphos** | `★★★☆` | Creative layers, comfortable shoes, playful style | Fragile outfits, high heels, Berghain cosplay |
-| **Kater Blau** | `★★★☆` | Colorful, individual, relaxed, riverside-ready | Corporate polish, matching tourist outfits |
-| **Renate** | `★★★☆` | Expressive, playful, personal, not stiff | Formal business attitude, officewear |
-| **Tresor** | `★★☆☆` | Casual, dark or neutral, dance-ready | Generic nightclub styling, stag-party energy |
-| **Ritter Butzke** | `★★☆☆` | Smart casual with a creative edge | Sports jerseys, messy tourist-party clothing |
-| **Club der Visionaere** | `★★☆☆` | Casual, light, low-key, summer-ready | Overdressed clubwear, huge groups |
+Here is the fast version before the detailed club-by-club notes:
+
+- **Berghain** — Door Difficulty: **★★★★**. Wear dark, functional, calm, music-first clothes. Avoid loud tourist groups, influencer energy, and costume-black.
+- **KitKatClub** — Door Difficulty: **★★★★**. Wear fetish, expressive, body-aware, or clearly creative clothing. Avoid normal casual streetwear and staring energy.
+- **RSO** — Door Difficulty: **★★★☆**. Wear functional techno clothes and comfortable shoes. Avoid showing up without knowing the event or arriving visibly intoxicated.
+- **://about blank** — Door Difficulty: **★★★☆**. Wear low-key, left-field, natural, scene-aware clothes. Avoid glossy partywear and business-casual nightlife.
+- **Sisyphos** — Door Difficulty: **★★★☆**. Wear creative layers, comfortable shoes, and playful style. Avoid fragile outfits, high heels, and Berghain cosplay.
+- **Kater Blau** — Door Difficulty: **★★★☆**. Wear colorful, individual, relaxed, riverside-ready clothes. Avoid corporate polish and matching tourist outfits.
+- **Renate** — Door Difficulty: **★★★☆**. Wear expressive, playful, personal clothes that do not feel stiff. Avoid formal business attitude and officewear.
+- **Tresor** — Door Difficulty: **★★☆☆**. Wear casual, dark or neutral, dance-ready clothes. Avoid generic nightclub styling and stag-party energy.
+- **Ritter Butzke** — Door Difficulty: **★★☆☆**. Wear smart casual with a creative edge. Avoid sports jerseys and messy tourist-party clothing.
+- **Club der Visionaere** — Door Difficulty: **★★☆☆**. Wear casual, light, low-key, summer-ready clothes. Avoid overdressed clubwear and huge groups.
 
 ## Berghain: Dress for the Music, Not the Myth
 

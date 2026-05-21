@@ -5,6 +5,20 @@ Rolling log of agent sessions. Most recent at top.
 Format for each entry — see `AGENTS.md` §9.
 
 
+## 2026-05-21 — Codex (Club draft matrix fix)
+
+**Did:** Fixed the Wix draft section where the markdown club matrix rendered as raw pipe-table text.
+
+**Changed:**
+- `blog-drafts/what-to-wear-to-berlin-clubs.md`, `.body.md` — replaced the markdown table with a bullet-based club matrix.
+- Wix Blog draft `f4eec937-98fe-4746-87ef-6221b9a3909b` — patched existing draft rich content; verified raw table header is gone and the fast-version matrix text exists.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — updated draft verification counts and noted the table fix.
+
+**Opened:** Re-preview in Wix editor/browser to confirm the section now reads cleanly.
+**Closed:** Raw markdown table rendering in the Club Dress-Code Matrix section.
+
+**Next session should:** Continue visual QA for remaining draft sections, especially spacing around embeds.
+
 ## 2026-05-21 — Codex (Club dress-code Wix draft)
 
 **Did:** Created the Wix Blog draft for `What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips`.
