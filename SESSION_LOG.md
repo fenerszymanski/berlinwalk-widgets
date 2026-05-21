@@ -7,14 +7,14 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-05-21 — Codex (Blog nav editorial redesign)
 
-**Did:** Implemented and refined the blog menu redesign in the live blog helper: compact `Blog Home` + labelled `Categories` chips, mobile two-column grid, and thinner full-width mobile sticky return on upward scroll.
+**Did:** Implemented and refined the blog menu redesign in the live blog helper: compact `Blog Home` + labelled `Categories` chips, mobile horizontal-scroll bar, and top-pinned sticky return on upward scroll.
 
 **Changed:**
-- `js/blog-sidebar-inject.js` — replaced the red wrapped mini-nav with a compact editorial bar/chip layout; mobile sticky now pins to top as a thin horizontal chip bar.
-- `README.md`, `wix-embed-snippets.md` — documented the v10 blog helper behavior and cache-bust URL.
-- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded v10 behavior.
+- `js/blog-sidebar-inject.js` — replaced the red wrapped mini-nav with a compact editorial bar/chip layout; mobile always uses the thin horizontal chip bar and sticky pins to top.
+- `README.md`, `wix-embed-snippets.md` — documented the v11 blog helper behavior and cache-bust URL.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded v11 behavior.
 
-**Opened:** Push/deploy `berlinwalk-widgets`, then update Wix Custom Code to `blog-sidebar-inject.js?v=10` and verify one desktop + one mobile blog post live.
+**Opened:** Push/deploy `berlinwalk-widgets`, then update Wix Custom Code to `blog-sidebar-inject.js?v=11` and verify one desktop + one mobile blog post live.
 **Closed:** Local `node --check` passed; Playwright simulation confirmed no desktop/mobile overflow, mobile two-column chips, sidebar injection, and upward-scroll sticky activation.
 
 **Next session should:** After GitHub Pages deploys, verify the sticky compact bar does not collide with the live Wix header on real mobile Safari.

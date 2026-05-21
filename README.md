@@ -148,9 +148,9 @@ These are loaded through Wix Custom Code rather than iframe embeds:
 - `js/cta-inject.js` - injects the global tour CTA near the end of posts.
 - `js/blog-sidebar-inject.js` - adds a compact editorial blog navigation bar
   above the post title with a `Blog Home` action and labelled `Categories` chip
-  group. The normal mobile state uses a two-column category grid; the
-  upward-scroll sticky mobile state becomes a thin full-width top bar with
-  horizontally scrollable chips. It builds a desktop-only sticky "On this page"
+  group. Mobile always uses the thinner horizontal-scroll chip layout, and the
+  upward-scroll sticky state pins to the top of the viewport. It builds a
+  desktop-only sticky "On this page"
   sidebar from visible H2/H3 headings and shortens the floating booking CTA copy
   to `Book Now`. The sidebar hides below 1024px, starts with the post H1,
   disappears near the article end, sits close to the article edge, and its long
