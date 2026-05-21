@@ -36,6 +36,12 @@ class BWBlogGuideNoteElement extends HTMLElement {
           width: 100%;
         }
 
+        @media (max-width: 760px) {
+          bw-blog-guide-note {
+            display: none !important;
+          }
+        }
+
         .bw-blog-guide-note *,
         .bw-blog-guide-note *::before,
         .bw-blog-guide-note *::after {
@@ -152,9 +158,10 @@ class BWBlogGuideNoteElement extends HTMLElement {
         }
 
         .bw-blog-guide-note .bw-note-actions {
-          align-items: center;
+          align-items: stretch;
           display: flex;
-          gap: 18px;
+          flex-direction: column;
+          gap: 10px;
         }
 
         .bw-blog-guide-note .bw-note-btn {
@@ -169,6 +176,7 @@ class BWBlogGuideNoteElement extends HTMLElement {
           text-decoration: none;
           text-transform: uppercase;
           transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+          width: 100%;
           white-space: nowrap;
         }
 
@@ -185,15 +193,17 @@ class BWBlogGuideNoteElement extends HTMLElement {
         }
 
         .bw-blog-guide-note .bw-note-btn-link {
+          border: 1px solid var(--light-green);
+          border-radius: 999px;
           color: var(--green);
           gap: 8px;
-          min-height: 34px;
-          padding: 0;
+          min-height: 42px;
+          padding: 0 18px;
         }
 
         .bw-blog-guide-note .bw-note-btn-link span:last-child {
           align-items: center;
-          border: 1px solid var(--light-green);
+          border: 1px solid rgba(27, 94, 32, 0.14);
           border-radius: 999px;
           display: inline-flex;
           height: 28px;
@@ -213,32 +223,8 @@ class BWBlogGuideNoteElement extends HTMLElement {
         }
 
         @media (max-width: 760px) {
-          .bw-blog-guide-note .bw-note-card {
-            max-width: none;
-            position: static;
-          }
-
-          .bw-blog-guide-note .bw-note-photo {
-            padding: 16px 16px 0;
-          }
-
-          .bw-blog-guide-note .bw-note-copy {
-            padding: 22px 20px 24px;
-          }
-
-          .bw-blog-guide-note .bw-note-title {
-            font-size: 25px;
-          }
-
-          .bw-blog-guide-note .bw-note-actions {
-            align-items: stretch;
-            flex-direction: column;
-            gap: 10px;
-          }
-
-          .bw-blog-guide-note .bw-note-btn-primary,
-          .bw-blog-guide-note .bw-note-btn-link {
-            width: 100%;
+          .bw-blog-guide-note {
+            display: none !important;
           }
         }
       </style>
