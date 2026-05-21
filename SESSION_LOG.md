@@ -9,6 +9,18 @@ Format for each entry — see `AGENTS.md` §9.
 
 ---
 
+## 2026-05-20 — Codex (Berlin Quiz mobile fix)
+
+**Did:** Fixed `<bw-berlin-quiz>` mobile layout overflow/height issue seen in Wix Studio.
+
+**Changed:**
+- `berlin-quiz/berlin-quiz-element.js` — added section border-box sizing/overflow guard, tightened mobile padding/type, and changed start-screen category tags to a two-column mobile grid so they no longer clip.
+
+**Opened:** Push/deploy widgets repo, then verify the homepage quiz section in Wix mobile preview and publish.
+**Closed:** Local `node --check` passed; Playwright checks at 360px confirmed no horizontal overflow on start, question, and answered states.
+
+**Next session should:** After deploy, cache-bust/check the live GitHub Pages asset and confirm Wix mobile preview pulls the updated quiz script.
+
 ## 2026-05-20 — Claude Code (Mobile menu portal fix)
 
 **Did:** Fixed `<bw-site-header>` mobile menu — the overlay was clipping to the Wix header height (~150px) on mobile, leaving the panel head visible but nav + CTA bleeding through the homepage hero. Root cause: Wix header wrapper has transform/sticky context, so `position: fixed` becomes effectively `position: absolute` relative to the wrapper, not the viewport. Same risk for the Resources dropdown.
