@@ -146,10 +146,12 @@ These are loaded through Wix Custom Code rather than iframe embeds:
 
 - `js/lead-form-inject.js` - injects the Berlin Essentials lead form mid-post.
 - `js/cta-inject.js` - injects the global tour CTA near the end of posts.
-- `js/blog-sidebar-inject.js` - adds a styled wrapped blog category nav above
-  the post title, builds a desktop-only sticky "On this page" sidebar from
-  visible H2/H3 headings, and shortens the floating booking CTA copy to
-  `Book Now`. The sidebar hides below 1024px, starts with the post H1,
-  disappears near the article end, sits close to the article edge, and its long
-  heading list scrolls inside the card when needed. The script skips non-`/post/`
-  URLs.
+- `js/blog-sidebar-inject.js` - adds an editorial blog navigation card above
+  the post title with `Browse the blog`, a `Blog Home` action, and a labelled
+  `Categories` chip group that becomes a two-column grid on mobile. After the
+  reader has passed the card, it returns as a compact sticky bar only on upward
+  scroll. It builds a desktop-only sticky "On this page" sidebar from visible
+  H2/H3 headings and shortens the floating booking CTA copy to `Book Now`. The
+  sidebar hides below 1024px, starts with the post H1, disappears near the
+  article end, sits close to the article edge, and its long heading list scrolls
+  inside the card when needed. The script skips non-`/post/` URLs.

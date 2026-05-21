@@ -15,6 +15,7 @@
   var observer = null;
   var resizeTimer = null;
   var cleanupSidebar = null;
+  var cleanupMiniNav = null;
 
   function isPostPage() {
     return location.pathname.indexOf('/post/') === 0;
@@ -132,16 +133,38 @@
       'body #bw-sticky-cta .bw-sub{display:none!important;}',
       'body #bw-desktop-cta .bw-arrow{width:27px!important;height:27px!important;font-size:13px!important;margin:5px 5px 5px 2px!important;}',
       'body #bw-desktop-cta .bw-close{width:20px!important;height:20px!important;font-size:13px!important;}',
-      '.bw-blog-mini-nav{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;margin:0 0 28px;padding:0;width:100%;}',
-      '.bw-blog-mini-nav-inner{align-items:center;background:rgba(250,250,245,.92);border:1px solid rgba(27,94,32,.14);border-radius:8px;box-shadow:0 10px 26px rgba(27,94,32,.06);display:flex;flex-wrap:wrap;column-gap:28px;row-gap:4px;justify-content:center;overflow:visible;padding:13px 18px;}',
-      '.bw-blog-mini-nav-inner::-webkit-scrollbar{display:none;}',
-      '.bw-blog-mini-nav-link{align-items:center;color:#E93445;display:inline-flex;flex:0 0 auto;font-size:15px;font-weight:900;letter-spacing:.15px;line-height:1;min-height:28px;padding:7px 0 6px;position:relative;text-decoration:none;white-space:nowrap;}',
-      '.bw-blog-mini-nav-link:after{background:#FFE600;border-radius:999px;bottom:0;content:"";height:3px;left:0;opacity:0;position:absolute;right:0;transform:scaleX(.55);transition:opacity .16s ease,transform .16s ease;}',
-      '.bw-blog-mini-nav-link:hover,.bw-blog-mini-nav-link:focus-visible{color:#1B5E20;outline:0;}',
+      '.bw-blog-mini-nav{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;margin:0 0 34px;padding:0;width:100%;}',
+      '.bw-blog-mini-nav *{box-sizing:border-box;}',
+      '.bw-blog-mini-nav-inner{background:#FFFFFF;border:1px solid rgba(27,94,32,.14);border-radius:8px;box-shadow:0 16px 34px rgba(27,94,32,.08);overflow:hidden;padding:0;transition:box-shadow .18s ease,opacity .18s ease,transform .18s ease;}',
+      '.bw-blog-mini-nav-inner:before{background:#FFE600;content:"";display:block;height:6px;width:100%;}',
+      '.bw-blog-mini-nav-content{padding:27px 32px 28px;}',
+      '.bw-blog-mini-nav-kicker{color:#4E5A4E;font-size:12px;font-weight:900;letter-spacing:2px;line-height:1.1;margin:0 0 10px;text-transform:uppercase;}',
+      '.bw-blog-mini-nav-deck{color:#212121;font:700 17px/1.45 Merriweather,Georgia,serif;margin:0 0 22px;max-width:760px;}',
+      '.bw-blog-mini-nav-row{align-items:flex-start;display:flex;gap:22px;width:100%;}',
+      '.bw-blog-mini-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;border-radius:999px;color:#FFFFFF;display:inline-flex;flex:0 0 auto;font-size:15px;font-weight:900;justify-content:center;line-height:1;min-height:44px;padding:0 27px;text-decoration:none;white-space:nowrap;}',
+      '.bw-blog-mini-nav-home:hover,.bw-blog-mini-nav-home:focus-visible{background:#164F1B;color:#FFFFFF;outline:0;}',
+      '.bw-blog-mini-nav-group{align-items:flex-start;display:flex;flex:1 1 auto;gap:16px;min-width:0;padding-top:3px;}',
+      '.bw-blog-mini-nav-label{color:#4E5A4E;display:inline-flex;flex:0 0 auto;font-size:12px;font-weight:900;letter-spacing:1.8px;line-height:38px;text-transform:uppercase;white-space:nowrap;}',
+      '.bw-blog-mini-nav-list{display:flex;flex:1 1 auto;flex-wrap:wrap;gap:10px 11px;min-width:0;}',
+      '.bw-blog-mini-nav-link{align-items:center;background:#FAFAF5;border:1px solid rgba(27,94,32,.14);border-radius:999px;color:#1B5E20;display:inline-flex;flex:0 0 auto;font-size:14px;font-weight:850;justify-content:center;line-height:1.15;min-height:38px;padding:0 20px;position:relative;text-align:center;text-decoration:none;white-space:nowrap;}',
+      '.bw-blog-mini-nav-link:after{background:#FFE600;border-radius:999px;bottom:7px;content:"";height:4px;left:20px;opacity:0;position:absolute;right:20px;transform:scaleX(.55);transition:opacity .16s ease,transform .16s ease;}',
+      '.bw-blog-mini-nav-link:hover,.bw-blog-mini-nav-link:focus-visible{background:#FFFFFF;border-color:rgba(27,94,32,.28);color:#1B5E20;outline:0;}',
       '.bw-blog-mini-nav-link:hover:after,.bw-blog-mini-nav-link:focus-visible:after{opacity:.75;transform:scaleX(1);}',
-      '.bw-blog-mini-nav-link-active{color:#1B5E20;}',
+      '.bw-blog-mini-nav-link-active{background:#FFF9B8;border-color:#FFE600;color:#1B5E20;font-weight:900;}',
       '.bw-blog-mini-nav-link-active:after{opacity:1;transform:scaleX(1);}',
-      '@media (max-width:900px){.bw-blog-mini-nav{margin:0 0 22px;}.bw-blog-mini-nav-inner{column-gap:20px;justify-content:flex-start;row-gap:2px;padding:12px 14px;}.bw-blog-mini-nav-link{font-size:13.5px;min-height:26px;}}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-inner{left:var(--bw-blog-mini-nav-left,24px);position:fixed;top:88px;width:var(--bw-blog-mini-nav-width,calc(100vw - 48px));z-index:8998;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-content{padding:12px 16px;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-inner:before{height:4px;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-kicker,.bw-blog-mini-nav-stuck .bw-blog-mini-nav-deck{display:none;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-row{align-items:center;gap:14px;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-home{font-size:13px;min-height:34px;padding:0 18px;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-group{align-items:center;padding-top:0;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-label{font-size:10px;line-height:34px;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-list{gap:8px;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-link{font-size:12px;min-height:34px;padding:0 14px;}',
+      '.bw-blog-mini-nav-stuck .bw-blog-mini-nav-link:after{bottom:5px;left:14px;right:14px;}',
+      '@media (max-width:1100px){.bw-blog-mini-nav-content{padding:24px 26px 26px;}.bw-blog-mini-nav-row{gap:18px;}.bw-blog-mini-nav-group{align-items:flex-start;display:grid;flex:1 1 auto;gap:10px;grid-template-columns:auto minmax(0,1fr);}.bw-blog-mini-nav-list{gap:10px;}.bw-blog-mini-nav-link{font-size:13.5px;min-height:38px;padding:0 17px;}}',
+      '@media (max-width:700px){.bw-blog-mini-nav{margin:0 0 26px;}.bw-blog-mini-nav-content{padding:22px 20px 24px;}.bw-blog-mini-nav-kicker{font-size:11px;letter-spacing:1.7px;}.bw-blog-mini-nav-deck{font-size:15px;margin-bottom:20px;}.bw-blog-mini-nav-row{display:block;}.bw-blog-mini-nav-home{display:flex;min-height:44px;width:100%;}.bw-blog-mini-nav-group{display:block;padding-top:24px;}.bw-blog-mini-nav-label{display:block;font-size:11px;line-height:1;margin:0 0 12px;}.bw-blog-mini-nav-list{display:grid;gap:10px;grid-template-columns:repeat(2,minmax(0,1fr));}.bw-blog-mini-nav-link{display:flex;font-size:13px;min-height:42px;padding:0 10px;white-space:normal;}.bw-blog-mini-nav-link:after{bottom:7px;left:18px;right:18px;}.bw-blog-mini-nav-stuck .bw-blog-mini-nav-inner{left:12px;top:66px;width:calc(100vw - 24px);}.bw-blog-mini-nav-stuck .bw-blog-mini-nav-content{padding:10px 12px 12px;}.bw-blog-mini-nav-stuck .bw-blog-mini-nav-home{font-size:13px;min-height:36px;}.bw-blog-mini-nav-stuck .bw-blog-mini-nav-group{padding-top:10px;}.bw-blog-mini-nav-stuck .bw-blog-mini-nav-list{gap:8px;}.bw-blog-mini-nav-stuck .bw-blog-mini-nav-link{font-size:12px;min-height:34px;padding:0 8px;}.bw-blog-mini-nav-stuck .bw-blog-mini-nav-label{display:none;}}',
       '@media (max-width:1023px){.bw-blog-sidebar{display:none!important;}}'
     ].join('\n');
     document.head.appendChild(style);
@@ -377,6 +400,10 @@
       cleanupSidebar();
       cleanupSidebar = null;
     }
+    if (cleanupMiniNav) {
+      cleanupMiniNav();
+      cleanupMiniNav = null;
+    }
     var old = document.querySelector('[' + MARKER + ']');
     if (old) old.remove();
     var oldNav = document.querySelector('[' + NAV_MARKER + ']');
@@ -429,7 +456,6 @@
   function renderMiniNavLinks() {
     var active = getActiveCategory();
     var links = [
-      ['all-posts', 'All Posts', 'https://www.berlinwalk.com/blog'],
       ['tour-route', 'Tour Route', 'https://www.berlinwalk.com/blog/categories/tour-route'],
       ['berlin-myths', 'Berlin Myths', 'https://www.berlinwalk.com/blog/categories/berlin-myths'],
       ['tourist-tips', 'Tourist Tips', 'https://www.berlinwalk.com/blog/categories/tourist-tips'],
@@ -443,6 +469,67 @@
     }).join('');
   }
 
+  function installMiniNavSticky(nav, body) {
+    if (!nav || !body || cleanupMiniNav) return;
+    var lastY = window.scrollY || window.pageYOffset || 0;
+    var ticking = false;
+
+    function syncVars() {
+      var wasStuck = nav.classList.contains('bw-blog-mini-nav-stuck');
+      if (wasStuck) nav.classList.remove('bw-blog-mini-nav-stuck');
+      nav.style.minHeight = '';
+      var rect = nav.getBoundingClientRect();
+      var width = Math.max(280, Math.round(rect.width));
+      var left = Math.max(12, Math.round(rect.left));
+      var height = Math.round(nav.offsetHeight || rect.height || 0);
+      nav.style.setProperty('--bw-blog-mini-nav-left', left + 'px');
+      nav.style.setProperty('--bw-blog-mini-nav-width', width + 'px');
+      if (height) nav.style.minHeight = height + 'px';
+      if (wasStuck) nav.classList.add('bw-blog-mini-nav-stuck');
+    }
+
+    function update() {
+      ticking = false;
+      var y = window.scrollY || window.pageYOffset || 0;
+      var rect = nav.getBoundingClientRect();
+      var navTop = rect.top + y;
+      var navBottom = navTop + (nav.offsetHeight || rect.height || 0);
+      var bounds = getBodyBounds(body);
+      var goingUp = y < lastY - 4;
+      var farEnough = y > navBottom + 120;
+      var beforeEnd = !bounds || y < bounds.end - 260;
+      if (goingUp && farEnough && beforeEnd) {
+        syncVars();
+        nav.classList.add('bw-blog-mini-nav-stuck');
+      } else if (y <= navBottom + 80 || y > lastY + 2 || !beforeEnd) {
+        nav.classList.remove('bw-blog-mini-nav-stuck');
+      }
+      lastY = y;
+    }
+
+    function requestUpdate() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    function onResize() {
+      nav.classList.remove('bw-blog-mini-nav-stuck');
+      syncVars();
+      requestUpdate();
+    }
+
+    syncVars();
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
+    cleanupMiniNav = function () {
+      window.removeEventListener('scroll', requestUpdate);
+      window.removeEventListener('resize', onResize);
+      nav.classList.remove('bw-blog-mini-nav-stuck');
+      nav.style.minHeight = '';
+    };
+  }
+
   function injectMiniNav(body) {
     if (document.querySelector('[' + NAV_MARKER + ']')) return;
     var anchor = findMiniNavAnchor(body);
@@ -453,7 +540,17 @@
     nav.setAttribute('aria-label', 'Blog navigation');
     nav.innerHTML =
       '<div class="bw-blog-mini-nav-inner">' +
-        renderMiniNavLinks() +
+        '<div class="bw-blog-mini-nav-content">' +
+          '<p class="bw-blog-mini-nav-kicker">Browse the blog</p>' +
+          '<p class="bw-blog-mini-nav-deck">Fresh Berlin guides, route stories, and practical travel notes.</p>' +
+          '<div class="bw-blog-mini-nav-row">' +
+            '<a class="bw-blog-mini-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
+            '<div class="bw-blog-mini-nav-group">' +
+              '<span class="bw-blog-mini-nav-label">Categories</span>' +
+              '<div class="bw-blog-mini-nav-list">' + renderMiniNavLinks() + '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
       '</div>';
     if (anchor.tagName && anchor.tagName.toLowerCase() === 'h1' && anchor.parentNode) {
       anchor.parentNode.insertBefore(nav, anchor);
@@ -462,6 +559,7 @@
     } else {
       document.body.insertBefore(nav, document.body.firstChild);
     }
+    installMiniNavSticky(nav, body);
   }
 
   function compactFloatingCta() {
