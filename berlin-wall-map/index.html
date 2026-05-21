@@ -165,6 +165,21 @@
       font-weight: 600;
     }
 
+    #bw-wall-map .bw-popup-gmaps {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 9px;
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--bw-green);
+      text-decoration: none;
+      border-bottom: 1.5px solid var(--bw-green);
+      padding-bottom: 1px;
+    }
+
+    #bw-wall-map .bw-popup-gmaps:hover { color: #2E7D32; border-color: #2E7D32; }
+
     #bw-wall-map .bw-marker {
       width: 30px;
       height: 30px;
@@ -249,56 +264,64 @@
       type: 'section',
       lat: 52.5053, lng: 13.4404,
       note: 'The longest remaining stretch of Wall — 1.3 km of original concrete covered in murals by 100+ international artists after reunification. Completely free to walk along at any hour.',
-      addr: 'Mühlenstraße, Friedrichshain · S/U Warschauer Str.'
+      addr: 'Mühlenstraße, Friedrichshain · S/U Warschauer Str.',
+      gmaps: 'https://www.google.com/maps/search/?api=1&query=East+Side+Gallery+Berlin'
     },
     {
       name: 'Berlin Wall Memorial (Bernauer Str.)',
       type: 'section',
       lat: 52.5352, lng: 13.3880,
       note: 'The most authentic preserved site: both walls plus the death strip between them, a guard tower, and a 1.4 km outdoor exhibition. Documentation center with a free viewing tower. Free entry.',
-      addr: 'Bernauer Straße 111, Wedding · S Nordbahnhof or U8 Bernauer Str.'
+      addr: 'Bernauer Straße 111, Wedding · S Nordbahnhof or U8 Bernauer Str.',
+      gmaps: 'https://www.google.com/maps/search/?api=1&query=Berlin+Wall+Memorial+Bernauer+Stra%C3%9Fe+111'
     },
     {
       name: 'Topography of Terror',
       type: 'section',
       lat: 52.5054, lng: 13.3811,
       note: 'A 200 m section of original Wall along Niederkirchnerstraße, next to a free museum documenting the Gestapo and SS — built on their former headquarters. One of the most powerful free museums in Berlin.',
-      addr: 'Niederkirchnerstraße 8, Mitte · S/U Potsdamer Platz'
+      addr: 'Niederkirchnerstraße 8, Mitte · S/U Potsdamer Platz',
+      gmaps: 'https://www.google.com/maps/search/?api=1&query=Topography+of+Terror+Berlin'
     },
     {
       name: 'Checkpoint Charlie',
       type: 'memorial',
       lat: 52.5075, lng: 13.3904,
       note: 'The most famous East–West crossing point. The white guardhouse is a replica — the original is in a museum — but the free outdoor exhibition boards around the crossing tell the real history clearly.',
-      addr: 'Friedrichstraße 43–45, Mitte · U6 Kochstraße'
+      addr: 'Friedrichstraße 43–45, Mitte · U6 Kochstraße',
+      gmaps: 'https://www.google.com/maps/search/?api=1&query=Checkpoint+Charlie+Berlin'
     },
     {
       name: 'Mauerpark',
       type: 'memorial',
       lat: 52.5416, lng: 13.4021,
       note: 'The park occupies the former death strip between Prenzlauer Berg and Wedding. A short original Wall section marks the northern end. Best known today for its Sunday flea market — but the park exists because of the Wall.',
-      addr: 'Bernauer Straße 63, Prenzlauer Berg · U2 Eberswalder Str.'
+      addr: 'Bernauer Straße 63, Prenzlauer Berg · U2 Eberswalder Str.',
+      gmaps: 'https://www.google.com/maps/search/?api=1&query=Mauerpark+Berlin'
     },
     {
       name: 'Potsdamer Platz',
       type: 'memorial',
       lat: 52.5097, lng: 13.3762,
       note: 'Once Europe\'s busiest intersection, cut in half by the Wall for 28 years. A few short Wall sections still stand between the modern buildings. Look for the double cobblestone line in the pavement marking the exact route.',
-      addr: 'Potsdamer Platz, Mitte · S1/S2/U2 Potsdamer Platz'
+      addr: 'Potsdamer Platz, Mitte · S1/S2/U2 Potsdamer Platz',
+      gmaps: 'https://www.google.com/maps/search/?api=1&query=Potsdamer+Platz+Berlin'
     },
     {
       name: 'Tränenpalast (Palace of Tears)',
       type: 'memorial',
       lat: 52.5201, lng: 13.3866,
       note: 'The former East German border pavilion at Friedrichstraße station — where families said goodbye, sometimes permanently. Now a free federal museum documenting divided Germany and the personal stories of those who crossed here.',
-      addr: 'Reichstagufer 17, Mitte · S/U Friedrichstraße · Tue–Fri 9–19, Sat–Sun 10–18'
+      addr: 'Reichstagufer 17, Mitte · S/U Friedrichstraße · Tue–Fri 9–19, Sat–Sun 10–18',
+      gmaps: 'https://www.google.com/maps/search/?api=1&query=Tr%C3%A4nenpalast+Berlin'
     },
     {
       name: 'Günter Litfin Memorial',
       type: 'memorial',
       lat: 52.5246, lng: 13.3783,
       note: 'A small memorial at the Charité harbour marking where Günter Litfin was shot on August 24, 1961 — the first person killed trying to cross the Wall. A watchtower nearby is open on weekends as a free memorial.',
-      addr: 'Near Invalidenstraße/Charité, Mitte · S Hauptbahnhof'
+      addr: 'Near Invalidenstraße/Charité, Mitte · S Hauptbahnhof',
+      gmaps: 'https://www.google.com/maps/search/?api=1&query=Gedenkst%C3%A4tte+G%C3%BCnter+Litfin+Berlin'
     }
   ];
 
@@ -344,6 +367,7 @@
       '<div class="bw-popup-body">' +
       site.note +
       '<div class="bw-popup-addr">' + site.addr + '</div>' +
+      '<a class="bw-popup-gmaps" href="' + site.gmaps + '" target="_blank" rel="noopener">Open in Google Maps →</a>' +
       '</div>';
   }
 

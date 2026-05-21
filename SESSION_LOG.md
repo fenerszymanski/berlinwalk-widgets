@@ -5,6 +5,19 @@ Rolling log of agent sessions. Most recent at top.
 Format for each entry — see `AGENTS.md` §9.
 
 
+## 2026-05-21 — Codex (Club dress-code Wix draft)
+
+**Did:** Created the Wix Blog draft for `What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips`.
+
+**Changed:**
+- Wix Blog: draft `f4eec937-98fe-4746-87ef-6221b9a3909b`, status `UNPUBLISHED`, slug `what-to-wear-to-berlin-clubs`, Tourist Tips category.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded draft ID and verification counts.
+
+**Opened:** Add/choose cover image, visually check Wix editor spacing/tables/embeds, push/deploy `berlinwalk-widgets` so `club-picker/` loads before publish, and recheck venue-specific claims.
+**Closed:** API verification confirmed 232 rich-content nodes, 3 HTML embeds (quick summary, Club Picker, FAQ), 49 bold decorations, 4 links, and booking link present.
+
+**Next session should:** Preview the draft in Wix editor after widget deploy; if table formatting feels weak, replace the markdown-style matrices with native Wix tables or shorter list sections.
+
 ## 2026-05-21 — Codex (Berlin Club Picker tools entry)
 
 **Did:** Added the new Berlin Club Picker to the tools/widgets catalog and created its Wix BerlinTools dynamic-page row.

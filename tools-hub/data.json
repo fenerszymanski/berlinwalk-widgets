@@ -235,6 +235,14 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/club-picker/",
       "embedHeight": 1180
+    },
+    {
+      "slug": "berlin-wall-remnants",
+      "title": "Berlin Wall Remnants Map",
+      "lead": "Find where to see the Berlin Wall today — 8 sites mapped with addresses, transport, and what's actually there.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-map/",
+      "embedHeight": 660
     }
   ]
 }
