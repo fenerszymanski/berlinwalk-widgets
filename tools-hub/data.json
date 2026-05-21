@@ -227,6 +227,14 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/connectivity-picker/",
       "embedHeight": 900
+    },
+    {
+      "slug": "berlin-club-picker",
+      "title": "Berlin Club Picker",
+      "lead": "Find the Berlin club that fits your night, outfit, group size, and appetite for a difficult door.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/club-picker/",
+      "embedHeight": 1180
     }
   ]
 }

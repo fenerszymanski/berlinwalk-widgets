@@ -132,6 +132,22 @@ https://fenerszymanski.github.io/berlinwalk-widgets/free-museums-compare/
 https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=free-museums
 ```
 
+## Berlin Club Dress Code Post Widgets
+
+Use these URLs for `what-to-wear-to-berlin-clubs`:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-club-dress-code
+https://fenerszymanski.github.io/berlinwalk-widgets/club-picker/
+https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-club-dress-code
+```
+
+Recommended first Wix iframe height for the Club Picker:
+
+```text
+1180px
+```
+
 ## Berlin in July Post Widgets
 
 Use these URLs for `berlin-in-july-2026`:

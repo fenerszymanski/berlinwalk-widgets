@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Club Picker | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-club-picker">
+  <style>
+    #bw-club-picker {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #123f16;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-lime-soft: #F2F8E8;
+      --bw-cream: #FAFAF5;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-red: #E63946;
+      --bw-white: #FFFFFF;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-club-picker * {
+      box-sizing: border-box;
+    }
+
+    #bw-club-picker .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+
+    #bw-club-picker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255,230,0,0.16), rgba(124,179,66,0.08)),
+        var(--bw-green);
+      padding: 18px 20px;
+    }
+
+    #bw-club-picker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.4px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    #bw-club-picker .bw-title {
+      color: var(--bw-white);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0;
+      line-height: 1.18;
+      margin: 0;
+    }
+
+    #bw-club-picker .bw-sub {
+      color: #DDEFC7;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.5;
+      margin: 7px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-club-picker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.74fr);
+      padding: 18px 20px;
+    }
+
+    #bw-club-picker .bw-questions {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    #bw-club-picker .bw-question {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      padding: 13px;
+    }
+
+    #bw-club-picker .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.3px;
+      line-height: 1.3;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    #bw-club-picker .bw-options {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-club-picker .bw-options button {
+      align-items: flex-start;
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      font-family: inherit;
+      gap: 3px;
+      justify-content: center;
+      min-height: 54px;
+      padding: 10px 11px;
+      text-align: left;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+      width: 100%;
+    }
+
+    #bw-club-picker .bw-options button:hover {
+      background: var(--bw-lime-soft);
+      border-color: var(--bw-lime);
+    }
+
+    #bw-club-picker .bw-options button.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-club-picker .bw-opt-title {
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-club-picker .bw-opt-sub {
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1.3;
+    }
+
+    #bw-club-picker button.active .bw-opt-sub {
+      color: #C5E1A5;
+    }
+
+    #bw-club-picker .bw-panel {
+      align-self: start;
+      background: var(--bw-white);
+      border: 2px solid var(--bw-green);
+      border-radius: 12px;
+      overflow: hidden;
+      position: sticky;
+      top: 12px;
+    }
+
+    #bw-club-picker .bw-panel-head {
+      background: var(--bw-green);
+      color: var(--bw-white);
+      padding: 13px 15px;
+    }
+
+    #bw-club-picker .bw-result-tag {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-club-picker .bw-pick {
+      display: block;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+    }
+
+    #bw-club-picker .bw-panel-body {
+      padding: 14px 15px 15px;
+    }
+
+    #bw-club-picker .bw-status {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0 0 11px;
+    }
+
+    #bw-club-picker .bw-meter {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: 1fr;
+      margin: 10px 0 12px;
+    }
+
+    #bw-club-picker .bw-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin: 0 0 12px;
+    }
+
+    #bw-club-picker .bw-chip {
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 800;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+    }
+
+    #bw-club-picker .bw-stars {
+      color: var(--bw-green);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+
+    #bw-club-picker .bw-meter-label {
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      text-transform: uppercase;
+    }
+
+    #bw-club-picker .bw-copy {
+      color: var(--bw-text);
+      font-size: 12px;
+      line-height: 1.58;
+      margin: 0 0 11px;
+    }
+
+    #bw-club-picker .bw-copy strong {
+      color: var(--bw-green);
+      font-weight: 900;
+    }
+
+    #bw-club-picker .bw-mini-title {
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin: 12px 0 6px;
+      text-transform: uppercase;
+    }
+
+    #bw-club-picker .bw-alt-list {
+      display: grid;
+      gap: 7px;
+      margin-top: 7px;
+    }
+
+    #bw-club-picker .bw-alt {
+      align-items: center;
+      background: var(--bw-cream);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: flex;
+      gap: 9px;
+      justify-content: space-between;
+      padding: 8px 10px;
+    }
+
+    #bw-club-picker .bw-alt-name {
+      color: var(--bw-text);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-club-picker .bw-alt-stars {
+      color: var(--bw-green);
+      flex: 0 0 auto;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    #bw-club-picker .bw-note {
+      background: #FFF9C9;
+      border-top: 1px solid #EAD972;
+      color: #4A4310;
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.5;
+      padding: 10px 15px;
+    }
+
+    #bw-club-picker .bw-table-wrap {
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      overflow-x: auto;
+    }
+
+    #bw-club-picker table {
+      border-collapse: collapse;
+      font-size: 12px;
+      min-width: 720px;
+      width: 100%;
+    }
+
+    #bw-club-picker th {
+      background: var(--bw-cream);
+      border-bottom: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      padding: 11px 13px;
+      text-align: left;
+      text-transform: uppercase;
+    }
+
+    #bw-club-picker td {
+      border-bottom: 1px solid var(--bw-border);
+      color: var(--bw-text);
+      line-height: 1.45;
+      padding: 12px 13px;
+      vertical-align: top;
+    }
+
+    #bw-club-picker tr:last-child td {
+      border-bottom: 0;
+    }
+
+    #bw-club-picker .bw-club-name {
+      color: var(--bw-green);
+      display: block;
+      font-weight: 900;
+      margin-bottom: 2px;
+    }
+
+    #bw-club-picker .bw-vibe {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    #bw-club-picker .bw-footer {
+      background: var(--bw-cream);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1.55;
+      padding: 11px 20px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-club-picker .bw-body {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-club-picker .bw-panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-club-picker {
+        margin: 18px 0;
+      }
+
+      #bw-club-picker .bw-head,
+      #bw-club-picker .bw-body,
+      #bw-club-picker .bw-footer {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      #bw-club-picker .bw-title {
+        font-size: 19px;
+      }
+
+      #bw-club-picker .bw-options {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-club-picker .bw-options button {
+        min-height: 48px;
+      }
+
+      #bw-club-picker table,
+      #bw-club-picker thead,
+      #bw-club-picker tbody,
+      #bw-club-picker tr,
+      #bw-club-picker th,
+      #bw-club-picker td {
+        display: block;
+        min-width: 0;
+        width: 100%;
+      }
+
+      #bw-club-picker table {
+        min-width: 0;
+      }
+
+      #bw-club-picker thead {
+        display: none;
+      }
+
+      #bw-club-picker .bw-table-wrap {
+        padding: 12px;
+      }
+
+      #bw-club-picker tbody tr {
+        background: var(--bw-white);
+        border: 1px solid var(--bw-border);
+        border-radius: 10px;
+        margin-bottom: 10px;
+        padding: 12px 13px;
+      }
+
+      #bw-club-picker tbody tr:last-child {
+        margin-bottom: 0;
+      }
+
+      #bw-club-picker td {
+        border-bottom: 0;
+        padding: 5px 0;
+      }
+
+      #bw-club-picker td:not(:first-child)::before {
+        color: var(--bw-muted);
+        content: attr(data-label);
+        display: block;
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: 1px;
+        margin-bottom: 2px;
+        text-transform: uppercase;
+      }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <div class="bw-kicker">Berlin Club Picker</div>
+      <h2 class="bw-title">Find the club that fits your night</h2>
+      <p class="bw-sub">Answer five quick questions. We will match you with a Berlin club, outfit logic, and realistic door difficulty.</p>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-questions" aria-label="Berlin club picker questions">
+        <div class="bw-question" data-question="sound">
+          <span class="bw-label">1. What kind of night do you want?</span>
+          <div class="bw-options">
+            <button type="button" data-tags="hard,iconic,music"><span class="bw-opt-title">Hard techno</span><span class="bw-opt-sub">Raw, serious, music-first</span></button>
+            <button type="button" data-tags="open,playful,outdoor"><span class="bw-opt-title">Playful open-air</span><span class="bw-opt-sub">Color, courtyards, long hours</span></button>
+            <button type="button" data-tags="sexpositive,expressive"><span class="bw-opt-title">Sex-positive</span><span class="bw-opt-sub">Expressive, body-aware, bold</span></button>
+            <button type="button" data-tags="house,playful"><span class="bw-opt-title">House / disco</span><span class="bw-opt-sub">Warmer, social, less severe</span></button>
+            <button type="button" data-tags="first,easy"><span class="bw-opt-title">First Berlin club</span><span class="bw-opt-sub">I want a real night, not a door war</span></button>
+          </div>
+        </div>
+
+        <div class="bw-question" data-question="door">
+          <span class="bw-label">2. How hard a door are you willing to try?</span>
+          <div class="bw-options">
+            <button type="button" data-tags="easy,first"><span class="bw-opt-title">Keep it easier</span><span class="bw-opt-sub">I do not want to waste the night</span></button>
+            <button type="button" data-tags="selective"><span class="bw-opt-title">Selective is fine</span><span class="bw-opt-sub">A real door, but not impossible</span></button>
+            <button type="button" data-tags="hard"><span class="bw-opt-title">Difficult</span><span class="bw-opt-sub">I can handle a rejection</span></button>
+            <button type="button" data-tags="hardest,iconic"><span class="bw-opt-title">Hardest doors</span><span class="bw-opt-sub">I want the iconic challenge</span></button>
+          </div>
+        </div>
+
+        <div class="bw-question" data-question="outfit">
+          <span class="bw-label">3. What would you rather wear?</span>
+          <div class="bw-options">
+            <button type="button" data-tags="dark,functional,hard"><span class="bw-opt-title">Dark and functional</span><span class="bw-opt-sub">Minimal, comfortable, serious</span></button>
+            <button type="button" data-tags="color,playful,open"><span class="bw-opt-title">Colorful / creative</span><span class="bw-opt-sub">Individual, relaxed, expressive</span></button>
+            <button type="button" data-tags="fetish,sexpositive,expressive"><span class="bw-opt-title">Fetish / expressive</span><span class="bw-opt-sub">Bold enough for a dress code</span></button>
+            <button type="button" data-tags="smart,house"><span class="bw-opt-title">Smart casual</span><span class="bw-opt-sub">Clean, but not corporate</span></button>
+            <button type="button" data-tags="casual,easy,first"><span class="bw-opt-title">Casual comfort</span><span class="bw-opt-sub">Sneakers, layers, low effort</span></button>
+          </div>
+        </div>
+
+        <div class="bw-question" data-question="group">
+          <span class="bw-label">4. Who are you going with?</span>
+          <div class="bw-options">
+            <button type="button" data-tags="solo,hard,selective"><span class="bw-opt-title">Solo</span><span class="bw-opt-sub">Quiet, flexible, easy to place</span></button>
+            <button type="button" data-tags="couple,selective"><span class="bw-opt-title">Couple</span><span class="bw-opt-sub">Small, calm, easy to read</span></button>
+            <button type="button" data-tags="small,easy,playful"><span class="bw-opt-title">Small group</span><span class="bw-opt-sub">2 to 4 people</span></button>
+            <button type="button" data-tags="large,easy,first"><span class="bw-opt-title">Larger tourist group</span><span class="bw-opt-sub">We need a forgiving choice</span></button>
+          </div>
+        </div>
+
+        <div class="bw-question" data-question="priority">
+          <span class="bw-label">5. What matters most?</span>
+          <div class="bw-options">
+            <button type="button" data-tags="music,hard"><span class="bw-opt-title">Music</span><span class="bw-opt-sub">Sound system and lineup first</span></button>
+            <button type="button" data-tags="iconic,hardest"><span class="bw-opt-title">Iconic Berlin</span><span class="bw-opt-sub">The story as much as the night</span></button>
+            <button type="button" data-tags="outdoor,open"><span class="bw-opt-title">Outdoor space</span><span class="bw-opt-sub">Garden, river, summer energy</span></button>
+            <button type="button" data-tags="sexpositive,expressive"><span class="bw-opt-title">Freedom</span><span class="bw-opt-sub">Queer, body-positive, expressive</span></button>
+            <button type="button" data-tags="easy,first"><span class="bw-opt-title">Higher chance</span><span class="bw-opt-sub">I want the night to actually happen</span></button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="bw-panel" aria-live="polite">
+        <div class="bw-panel-head">
+          <span class="bw-result-tag">Your best match</span>
+          <span class="bw-pick" id="bw-club-pick">Pick your answers</span>
+        </div>
+        <div class="bw-panel-body">
+          <p class="bw-status" id="bw-club-status">Choose one answer in each section. The result will update as you go.</p>
+          <div class="bw-meter" id="bw-club-meter" hidden>
+            <span class="bw-meter-label">Door Difficulty</span>
+            <span class="bw-stars" id="bw-club-stars">☆☆☆☆</span>
+          </div>
+          <div class="bw-chip-row" id="bw-club-chips" hidden></div>
+          <p class="bw-copy" id="bw-club-why"></p>
+          <p class="bw-copy" id="bw-club-wear"></p>
+          <p class="bw-copy" id="bw-club-avoid"></p>
+          <div id="bw-club-alt-wrap" hidden>
+            <div class="bw-mini-title">Backup options</div>
+            <div class="bw-alt-list" id="bw-club-alts"></div>
+          </div>
+        </div>
+        <div class="bw-note">
+          Door Difficulty is BerlinWalk editorial guidance, not official club policy. Entry is never guaranteed, even with tickets.
+        </div>
+      </aside>
+    </div>
+
+    <div class="bw-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Club</th>
+            <th>Door</th>
+            <th>Best outfit logic</th>
+            <th>Usually avoid</th>
+          </tr>
+        </thead>
+        <tbody id="bw-club-table"></tbody>
+      </table>
+    </div>
+
+    <div class="bw-footer">
+      Ratings are based on public venue guidance, Berlin.de dress-code categories, and BerlinWalk editorial judgment as of May 2026. Always check the specific event before you go.
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var root = document.getElementById('bw-club-picker');
+    if (!root) return;
+
+    var CLUBS = [
+      {
+        name: 'Berghain',
+        difficulty: 4,
+        vibe: 'Iconic hard-techno door',
+        tags: ['hard', 'hardest', 'iconic', 'music', 'dark', 'functional', 'solo', 'couple'],
+        wear: 'Dark, simple, comfortable clothes that look like you came for the music, not for a photo trophy.',
+        avoid: 'Loud tourist groups, influencer energy, heavy pre-drinking, or a costume version of Berlin black.',
+        why: 'Best if you want the iconic Berlin challenge and you are calm about the possibility of rejection.'
+      },
+      {
+        name: 'KitKatClub',
+        difficulty: 4,
+        vibe: 'Sex-positive and expressive',
+        tags: ['sexpositive', 'expressive', 'fetish', 'hardest', 'couple', 'solo'],
+        wear: 'Fetish, body-aware, creative, or visibly expressive clothing. Normal casual streetwear is usually a weak choice.',
+        avoid: 'Jeans-and-T-shirt tourist casual, staring energy, and treating the night like a spectacle.',
+        why: 'Best if you actively want a sex-positive, expressive club culture and can dress for that world.'
+      },
+      {
+        name: 'RSO',
+        difficulty: 3,
+        vibe: 'Music-first industrial techno',
+        tags: ['hard', 'music', 'dark', 'functional', 'selective', 'solo', 'couple'],
+        wear: 'Functional techno clothes, comfortable shoes, and a serious but relaxed look.',
+        avoid: 'Showing up without knowing the event, acting drunk at the door, or treating a ticket as a guarantee.',
+        why: 'Best if the lineup matters more than sightseeing fame and you want a serious contemporary techno room.'
+      },
+      {
+        name: '://about blank',
+        difficulty: 3,
+        vibe: 'Low-key, left-field, scene-aware',
+        tags: ['hard', 'music', 'selective', 'dark', 'functional', 'casual', 'solo'],
+        wear: 'Low-key clothes with personality. Think natural, comfortable, and scene-aware rather than polished.',
+        avoid: 'Business-casual nightlife, huge groups, or a glossy tourist-party look.',
+        why: 'Best if you want something political, music-led, and less shiny than mainstream Berlin nightlife.'
+      },
+      {
+        name: 'Sisyphos',
+        difficulty: 3,
+        vibe: 'Playful long-format party',
+        tags: ['open', 'playful', 'outdoor', 'color', 'small', 'selective'],
+        wear: 'Creative layers, comfortable shoes, and clothes that can survive a very long indoor-outdoor night.',
+        avoid: 'Fragile outfits, uncomfortable heels, or trying to look like Berghain in a place with a different mood.',
+        why: 'Best if you want color, sprawl, outdoor corners, and a night that can turn into a tiny weekend.'
+      },
+      {
+        name: 'Kater Blau',
+        difficulty: 3,
+        vibe: 'Riverside, colorful, individual',
+        tags: ['open', 'playful', 'outdoor', 'color', 'house', 'small'],
+        wear: 'Individual, colorful, relaxed clothing. Comfort matters because the night can move between inside and outside.',
+        avoid: 'Corporate polish, matching tourist-group outfits, or over-planned Instagram styling.',
+        why: 'Best if you want Berlin with river air, house/techno warmth, and a more playful visual world.'
+      },
+      {
+        name: 'Renate',
+        difficulty: 3,
+        vibe: 'House-party maze with self-expression',
+        tags: ['house', 'playful', 'expressive', 'smart', 'selective', 'small'],
+        wear: 'Expressive, playful, or smart-casual clothes that still feel personal and unforced.',
+        avoid: 'Formal business attitude, stiff officewear, or turning up like a corporate after-work event.',
+        why: 'Best if you want personality, rooms to explore, and a door that reads self-expression more than uniform.'
+      },
+      {
+        name: 'Tresor',
+        difficulty: 2,
+        vibe: 'Classic techno, more casual',
+        tags: ['hard', 'music', 'casual', 'dark', 'functional', 'easy', 'first', 'small'],
+        wear: 'Casual, dark or neutral, comfortable, and ready to dance. Sneakers are more useful than polish.',
+        avoid: 'Flashy stag-party energy, heavy logos, and treating it like a generic nightclub.',
+        why: 'Best if you want real Berlin techno with a more practical first-time path than the hardest doors.'
+      },
+      {
+        name: 'Ritter Butzke',
+        difficulty: 2,
+        vibe: 'Smart-casual, creative, accessible',
+        tags: ['house', 'smart', 'playful', 'easy', 'first', 'small'],
+        wear: 'Smart casual with a creative edge. Clean, relaxed, and not too corporate.',
+        avoid: 'Sports-team shirts, very messy tourist-party clothing, or looking like you ignored the venue entirely.',
+        why: 'Best if you want a good night out without making the door the main event.'
+      },
+      {
+        name: 'Club der Visionaere',
+        difficulty: 2,
+        vibe: 'Low-key canal and summer energy',
+        tags: ['open', 'outdoor', 'casual', 'easy', 'first', 'house', 'small'],
+        wear: 'Casual, light, comfortable clothes for a waterside setting. Summer layers help.',
+        avoid: 'Overdressed clubwear, massive groups, and expecting a hard industrial techno door.',
+        why: 'Best if you want something low-key, outdoorsy, and easier to fit into than the famous hard doors.'
+      }
+    ];
+
+    var state = {};
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, function(ch) {
+        return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+      });
+    }
+
+    function stars(n) {
+      return '★★★★'.slice(0, n) + '☆☆☆☆'.slice(0, 4 - n);
+    }
+
+    function selectedTags() {
+      var all = [];
+      Object.keys(state).forEach(function(key) {
+        all = all.concat(state[key]);
+      });
+      return all;
+    }
+
+    function scoreClub(club, tags) {
+      var score = 0;
+      tags.forEach(function(tag) {
+        if (club.tags.indexOf(tag) !== -1) score += 2;
+      });
+
+      if (tags.indexOf('large') !== -1 && club.difficulty >= 3) score -= 3;
+      if (tags.indexOf('easy') !== -1 && club.difficulty >= 4) score -= 4;
+      if (tags.indexOf('hardest') !== -1 && club.difficulty < 3) score -= 2;
+      if (tags.indexOf('fetish') !== -1 && club.name !== 'KitKatClub') score -= 1;
+      if (tags.indexOf('smart') !== -1 && club.name === 'Berghain') score -= 2;
+      if (tags.indexOf('color') !== -1 && club.name === 'Berghain') score -= 1;
+      if (tags.indexOf('first') !== -1 && club.difficulty <= 2) score += 2;
+      return score;
+    }
+
+    function bestMatches() {
+      var tags = selectedTags();
+      return CLUBS.map(function(club) {
+        return { club: club, score: scoreClub(club, tags) };
+      }).sort(function(a, b) {
+        if (b.score !== a.score) return b.score - a.score;
+        return a.club.difficulty - b.club.difficulty;
+      });
+    }
+
+    function renderResult() {
+      var answered = Object.keys(state).length;
+      var pickEl = document.getElementById('bw-club-pick');
+      var statusEl = document.getElementById('bw-club-status');
+      var meterEl = document.getElementById('bw-club-meter');
+      var starsEl = document.getElementById('bw-club-stars');
+      var chipsEl = document.getElementById('bw-club-chips');
+      var whyEl = document.getElementById('bw-club-why');
+      var wearEl = document.getElementById('bw-club-wear');
+      var avoidEl = document.getElementById('bw-club-avoid');
+      var altWrap = document.getElementById('bw-club-alt-wrap');
+      var altEl = document.getElementById('bw-club-alts');
+
+      if (answered < 5) {
+        pickEl.textContent = answered ? 'Keep going' : 'Pick your answers';
+        statusEl.textContent = answered + '/5 answered. Choose one answer in each section for a sharper match.';
+        meterEl.hidden = true;
+        chipsEl.hidden = true;
+        whyEl.textContent = '';
+        wearEl.textContent = '';
+        avoidEl.textContent = '';
+        altWrap.hidden = true;
+        return;
+      }
+
+      var ranked = bestMatches();
+      var winner = ranked[0].club;
+      var alts = ranked.slice(1, 3).map(function(item) { return item.club; });
+
+      pickEl.textContent = winner.name;
+      statusEl.textContent = winner.vibe;
+      meterEl.hidden = false;
+      starsEl.textContent = stars(winner.difficulty);
+      chipsEl.hidden = false;
+      chipsEl.innerHTML = winner.tags.slice(0, 4).map(function(tag) {
+        return '<span class="bw-chip">' + escapeHtml(tag) + '</span>';
+      }).join('');
+      whyEl.innerHTML = '<strong>Why it fits:</strong> ' + escapeHtml(winner.why);
+      wearEl.innerHTML = '<strong>Wear this:</strong> ' + escapeHtml(winner.wear);
+      avoidEl.innerHTML = '<strong>Avoid:</strong> ' + escapeHtml(winner.avoid);
+      altEl.innerHTML = alts.map(function(club) {
+        return '<div class="bw-alt"><span class="bw-alt-name">' + escapeHtml(club.name) + '</span><span class="bw-alt-stars">' + stars(club.difficulty) + '</span></div>';
+      }).join('');
+      altWrap.hidden = false;
+
+      try {
+        parent.postMessage({ type: 'bw-resize', height: document.body.scrollHeight }, '*');
+      } catch (e) {}
+    }
+
+    function renderTable() {
+      var tbody = document.getElementById('bw-club-table');
+      tbody.innerHTML = CLUBS.map(function(club) {
+        return '<tr>' +
+          '<td data-label="Club"><span class="bw-club-name">' + escapeHtml(club.name) + '</span><span class="bw-vibe">' + escapeHtml(club.vibe) + '</span></td>' +
+          '<td data-label="Door"><span class="bw-stars">' + stars(club.difficulty) + '</span></td>' +
+          '<td data-label="Best outfit logic">' + escapeHtml(club.wear) + '</td>' +
+          '<td data-label="Usually avoid">' + escapeHtml(club.avoid) + '</td>' +
+          '</tr>';
+      }).join('');
+    }
+
+    root.addEventListener('click', function(event) {
+      var btn = event.target.closest('button[data-tags]');
+      if (!btn || !root.contains(btn)) return;
+      var question = btn.closest('[data-question]');
+      if (!question) return;
+      question.querySelectorAll('button[data-tags]').forEach(function(item) {
+        item.classList.remove('active');
+      });
+      btn.classList.add('active');
+      state[question.getAttribute('data-question')] = btn.getAttribute('data-tags').split(',');
+      renderResult();
+    });
+
+    renderTable();
+    renderResult();
+  })();
+  </script>
+</div>
+</body>
+</html>

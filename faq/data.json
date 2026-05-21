@@ -121,7 +121,7 @@
       },
       {
         "q": "How long should I spend at Alexanderplatz?",
-        "a": "At minimum, **30 minutes** to properly see the World Clock, the TV Tower from ground level, and the surrounding architecture. If you're joining our walking tour, the starting point is at the World Clock — the tour covers Alexanderplatz and 11 more stops over 1 hour 45 minutes."
+        "a": "At minimum, **30 minutes** to properly see the World Clock, the TV Tower from ground level, and the surrounding architecture. If you're joining our walking tour, the starting point is at the World Clock — the tour covers Alexanderplatz and 11 more stops over about 2 hours."
       },
       {
         "q": "What's the best time to visit Alexanderplatz?",
@@ -505,7 +505,7 @@
     "items": [
       {
         "q": "How long is the BerlinWalk free walking tour?",
-        "a": "The tour is approximately **3 km long and takes about 1 hour 45 minutes**. The route is flat and easy — no rushing. Every stop has time for photos, questions, and a bit of breathing room before the next part of the city."
+        "a": "The tour is approximately **3 km long and takes about 2 hours**. The route is flat and easy — no rushing. Every stop has time for photos, questions, and a bit of breathing room before the next part of the city."
       },
       {
         "q": "Where does the walking tour start and end?",
@@ -1029,6 +1029,80 @@
       {
         "q": "Is 5G available in Berlin?",
         "a": "Yes. 5G is live across Telekom, Vodafone, and O2 in Berlin in 2026, and most modern prepaid plans include 5G by default. Travel eSIMs running on these networks also get 5G access."
+      }
+    ]
+  },
+  "berlin-club-dress-code": {
+    "title": "Berlin Club Dress Code - FAQ",
+    "items": [
+      {
+        "q": "Do I have to wear black to Berlin clubs?",
+        "a": "No. Black is common and often works at techno-focused clubs, but Berlin does not have one universal dress code. Berghain, RSO, Tresor, Sisyphos, KitKat, Renate, and Kater Blau all read style differently. The better rule is: match the club and the event, not just a color."
+      },
+      {
+        "q": "What should I wear to Berghain?",
+        "a": "Wear something dark, functional, comfortable, and intentional, but do not treat clothing as a trick. Berghain's door is about the whole impression: the event, the group, your calmness, your familiarity with the music, and whether you look like you fit the room. Entry is never guaranteed."
+      },
+      {
+        "q": "What is the KitKatClub dress code?",
+        "a": "KitKat is the Berlin club where dress code matters most. Sex-positive, fetish, body-aware, provocative, or clearly expressive clothing fits the culture better than normal casual streetwear. If you would wear the same outfit to a regular bar, it is probably too plain for KitKat."
+      },
+      {
+        "q": "Are sneakers okay in Berlin clubs?",
+        "a": "Usually yes, and they are often the smartest choice. Berlin club nights can last many hours, with concrete floors, stairs, courtyards, and queues. Clean, comfortable sneakers usually work better than painful heels or polished dress shoes, unless a specific event says otherwise."
+      },
+      {
+        "q": "Can tourists get into Berlin clubs?",
+        "a": "Yes, tourists get into Berlin clubs every weekend. The problem is not being a tourist; it is looking like a loud, drunk, oversized tourist group that does not know where it is. Go in a small group, know the event, stay calm at the door, and do not argue if you are rejected."
+      },
+      {
+        "q": "Do Berlin club tickets guarantee entry?",
+        "a": "No. For many Berlin clubs and parties, a presale ticket does not guarantee entry. The door can still refuse guests based on behavior, group fit, intoxication, event capacity, or house rules. Always have a backup plan nearby."
+      },
+      {
+        "q": "What should men wear to Berlin clubs?",
+        "a": "For techno clubs, men usually do best with simple, dark, comfortable clothes, minimal logos, and shoes they can dance in. For KitKat or expressive parties, the outfit needs to be more intentional. Avoid office shirts, sports-team jerseys, stag-party looks, and anything that feels like generic nightlife cosplay."
+      },
+      {
+        "q": "What should women wear to Berlin clubs?",
+        "a": "Wear something that feels confident, comfortable, and suited to the specific club. For techno clubs, functional dark layers often work. For Sisyphos, Kater Blau, or Renate, creative or colorful style can work well. For KitKat, expressive or fetish-informed clothing is much more appropriate than standard partywear."
+      }
+    ]
+  },
+  "berlin-wall-locations": {
+    "title": "Berlin Wall — Where to See It",
+    "items": [
+      {
+        "q": "Can you still see the Berlin Wall today?",
+        "a": "Yes, but you have to know where to look. The Wall was mostly torn down between 1989 and 1992, but several sections and memorials survive. The main places are the **East Side Gallery** (1.3 km of murals on original Wall concrete in Friedrichshain), the **Berlin Wall Memorial on Bernauer Straße** (preserved death strip and documentation center), the **Topography of Terror** (200 m section next to a free museum), and a few shorter sections near Potsdamer Platz and Mauerpark."
+      },
+      {
+        "q": "What is the best place to see the Berlin Wall in Berlin?",
+        "a": "The **Berlin Wall Memorial on Bernauer Straße** is the most historically complete site — it shows both walls, the death strip, a guard tower, and the original death strip width. The free documentation center has a viewing tower. If you want scale and murals, the **East Side Gallery** (1.3 km of painted Wall along the Spree) is the most visited site. For historical context connecting the Wall to the Nazi period, the **Topography of Terror** is the strongest choice."
+      },
+      {
+        "q": "Is the East Side Gallery free to visit?",
+        "a": "Yes. Walking along the East Side Gallery is completely free and accessible around the clock. The 1.3 km stretch of original Wall along Mühlenstraße in Friedrichshain has no entrance fee. Some murals have been restored by the adjacent East Side Gallery Museum, which charges entry, but the Wall itself is a public outdoor monument."
+      },
+      {
+        "q": "Is Checkpoint Charlie worth visiting?",
+        "a": "The area is worth a quick stop if you are nearby. The free outdoor information boards around the crossing explain the real history clearly. However, the white guardhouse and sign are reproductions — the originals are in museums. The paid Haus am Checkpoint Charlie museum gets mixed reviews; most visitors find the free outdoor exhibition sufficient and skip the museum."
+      },
+      {
+        "q": "How long was the Berlin Wall?",
+        "a": "The Berlin Wall was **155 kilometers long** in total. It completely encircled West Berlin, which meant it was not a line dividing the city in half but a ring around the Western enclave inside East Germany. Of that 155 km, less than 3 km of original concrete survives today."
+      },
+      {
+        "q": "When was the Berlin Wall built and when did it fall?",
+        "a": "Construction began on **August 13, 1961** — a Sunday morning — when East Germany sealed the border with barbed wire. Concrete replaced the wire over the following years. The Wall fell on **November 9, 1989**, when East Germany announced citizens could cross freely. Crowds gathered at crossing points across the city and the Wall was opened that same night."
+      },
+      {
+        "q": "How many people died at the Berlin Wall?",
+        "a": "At least **140 people died at the Berlin Wall** between 1961 and 1989, according to research by the Berlin Wall Memorial. Deaths occurred from gunshot wounds, accidents during escape attempts, and drowning in border waterways. The exact number is still debated by historians; some research puts the figure higher."
+      },
+      {
+        "q": "What is the cobblestone line running through Berlin streets?",
+        "a": "A double row of cobblestones set into the pavement marks the former course of the Berlin Wall across the city. It runs for around **220 km** and crosses roads, squares, parks, and pavements throughout the urban area. Look for two parallel lines of dark stone embedded in the ground — you will find them in most central districts, including Mitte, Kreuzberg, and Friedrichshain."
       }
     ]
   }

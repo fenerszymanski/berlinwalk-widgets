@@ -5,6 +5,38 @@ Rolling log of agent sessions. Most recent at top.
 Format for each entry — see `AGENTS.md` §9.
 
 
+## 2026-05-21 — Codex (Berlin Club Picker tools entry)
+
+**Did:** Added the new Berlin Club Picker to the tools/widgets catalog and created its Wix BerlinTools dynamic-page row.
+
+**Changed:**
+- `tools-hub/data.json` — added `berlin-club-picker` in Discovery, pointing to `club-picker/` with embedHeight `1180`.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated widgets ItemList SEO; now 24 widgets.
+- Project root: `insert-club-picker-tool.js` — one-off Wix CMS insertion script.
+- Wix CMS `BerlinTools`: inserted and re-saved item `0111e70d-1ea6-44f7-98be-953601d0f352`, slug `berlin-club-picker`; live route verified 200.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded live tools state.
+
+**Opened:** Push/deploy `berlinwalk-widgets`; until GitHub Pages has `club-picker/`, the live `/tools/berlin-club-picker` page can load the CMS content but the primary widget iframe may not render.
+**Closed:** Tools hub data and Wix dynamic route now exist for Club Picker.
+
+**Next session should:** After push, verify `https://fenerszymanski.github.io/berlinwalk-widgets/club-picker/` and the live `/tools/berlin-club-picker` widget iframe.
+
+## 2026-05-21 — Codex (Berlin Club Picker + dress-code draft)
+
+**Did:** Built the Berlin Club Picker widget and drafted the source-backed club dress-code article package.
+
+**Changed:**
+- `club-picker/index.html` — new iframe widget with five questions, club scoring, Door Difficulty stars, outfit/avoid tips, backup options, and responsive club matrix.
+- `blog-drafts/what-to-wear-to-berlin-clubs.md`, `.body.md` — local English draft with embed plan, club-by-club guidance, source list, and CTA.
+- `quick-summary/data.json`, `faq/data.json`, `faq/inject.js` — added `berlin-club-dress-code` quick summary/FAQ/schema; also corrected old tour-duration mentions in touched data to about 2 hours.
+- `README.md`, `wix-embed-snippets.md` — documented the new widget and post embed URLs.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded package state and next steps.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, recheck current venue details, then create the Wix blog draft and embed quick summary + Club Picker + FAQ. Existing untracked `berlin-wall-map/` was present and left untouched.
+**Closed:** Local JSON/JS checks passed; Playwright/Chrome preview confirmed desktop/mobile widget rendering, no horizontal overflow, and correct KitKat/Sisyphos recommendation paths.
+
+**Next session should:** Create the Wix draft from `.body.md`, verify the live GitHub Pages widget after push, and consider whether Club Picker should become a standalone BerlinTools CMS item.
+
 ## 2026-05-21 — Codex (Blog Guide Note custom element)
 
 **Did:** Built `<bw-blog-guide-note>` for the Wix `/blog` right column using Yusuf's `TourYusuf.jpeg` photo, editorial-note direction, and a small `Plan your visit` tools card.

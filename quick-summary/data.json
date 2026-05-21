@@ -162,7 +162,7 @@
     "audio": "https://static.wixstatic.com/mp3/5a08a3_912ee59715534392923679cbda056489.mp3",
     "items": [
       "Our free walking tour covers **12 stops from Alexanderplatz to Hackescher Markt** — tracing 800 years of Berlin history through the city's medieval, Prussian, and Cold War layers.",
-      "The route is **~3 km, ~1 hour 45 minutes**, flat and easy. No rushing — every stop has time for photos and questions.",
+      "The route is **~3 km, about 2 hours**, flat and easy. No rushing — every stop has time for photos and questions.",
       "Highlights include the **\"Pope's Revenge\" TV Tower story**, the Hohenzollern Crypt beneath the Berliner Dom, UNESCO Museum Island, and Berlin's hidden medieval quarter.",
       "Unlike most Berlin tours that start at Brandenburg Gate, this route covers **the oldest part of Berlin** — where the city was actually founded.",
       "The tour is **free and tip-based**. Meet at the World Clock, Alexanderplatz. **Book your spot at berlinwalk.com.**"
@@ -275,7 +275,7 @@
       "The **World Clock** is more interesting than the TV Tower, the restaurants on the square are overpriced traps, and the \"ugly\" architecture is actually one of Berlin's best stories.",
       "Most visitors use Alexanderplatz as a transit stop and miss its **medieval origins, GDR transformation, and hidden details**.",
       "The real food scene is a **5-minute walk away** — head toward Hackescher Markt or Rosenthaler Platz.",
-      "Our **free walking tour starts right here** — we cover everything most tourists miss in 1.75 hours."
+      "Our **free walking tour starts right here** — we cover everything most tourists miss in about 2 hours."
     ]
   },
   "berlin-budget": {
@@ -503,6 +503,32 @@
       "**Skip the airport SIM kiosks.** They sell physical SIMs at tourist prices and rarely sell eSIMs. The same plans are 30 to 50 percent cheaper bought online or at a Berlin supermarket.",
       "**Berlin is generous with free WiFi:** BVG-WiFi at every U-Bahn station with no registration, Freifunk in 1,000+ public spots, free WiFi on Museum Island, Brandenburger Tor area, and most cafes, museums, and hotels.",
       "**5G is live across Telekom, Vodafone, and O2** in Berlin in 2026, and EU roaming is included by law on every German prepaid plan."
+    ]
+  },
+  "berlin-club-dress-code": {
+    "title": "Berlin Club Dress Code - Quick Summary",
+    "icon": "🎧",
+    "kicker": "BERLINWALK.COM • NIGHTLIFE",
+    "items": [
+      "**Berlin does not have one club dress code.** Each door reads the event, the crowd, your group, and whether you look like you fit the room.",
+      "**Black helps at some techno clubs, but it is not a magic key.** Berghain, RSO, Tresor, and ://about blank reward music-first, functional, low-drama energy more than a color formula.",
+      "**KitKat is different.** A normal casual outfit is usually weak there; sex-positive, fetish, body-aware, or clearly expressive clothing fits the culture better.",
+      "**Sisyphos, Kater Blau, and Renate are more playful.** Color, creativity, comfort, and individual style can work better than copying the severe all-black stereotype.",
+      "**Door Difficulty is never official.** Treat ratings as editorial guidance only. Tickets, good clothes, and long queues still do not guarantee entry.",
+      "**The best outfit plan is practical:** comfortable shoes, light layers, a small bag, a cloakroom plan, and enough confidence to accept a no without letting it ruin the night."
+    ]
+  },
+  "berlin-wall-locations": {
+    "title": "Where to See the Berlin Wall - Quick Summary",
+    "icon": "🧱",
+    "kicker": "BERLINWALK.COM • BERLIN HISTORY",
+    "items": [
+      "**Most of the 155 km Wall is gone** — torn down by Berliners after 1989 and systematically demolished by 1992. Less than 3 km of original concrete survives in the city today.",
+      "**East Side Gallery** is the longest remaining stretch: 1.3 km of original Wall covered in 100+ murals along the Spree River, near Warschauer Str. Completely free.",
+      "**Berlin Wall Memorial on Bernauer Straße** is the most authentic site — both walls and the death strip are preserved. Free documentation center with a viewing tower.",
+      "**Checkpoint Charlie** is the most famous crossing point — but the guardhouse is a replica. The free outdoor exhibition boards tell the story clearly; skip the paid museum.",
+      "**Topography of Terror** has a 200 m original section and one of Berlin's best free museums — built on the former Gestapo and SS headquarters site.",
+      "**Look down as you walk through Berlin** — a double row of cobblestones embedded in the pavement marks the Wall's former course across the entire city."
     ]
   }
 }

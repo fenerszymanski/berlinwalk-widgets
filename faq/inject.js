@@ -38,7 +38,11 @@
   "luggage-storage-in-berlin-2026": "luggage-storage",
   "best-currywurst-places-in-berlin-2026": "currywurst",
   "nikolaiviertel-rebuilt-old-town": "nikolaiviertel",
-  "esim-sim-wifi-berlin-2026": "esim-sim-wifi"
+  "esim-sim-wifi-berlin-2026": "esim-sim-wifi",
+  "what-to-wear-to-berlin-clubs": "berlin-club-dress-code",
+  "what-to-wear-to-berlin-clubs-dress-code-tips": "berlin-club-dress-code",
+  "berlin-club-dress-code": "berlin-club-dress-code",
+  "the-berlin-wall-where-it-stood-and-what-s-left-in-2026": "berlin-wall-locations"
 };
 
   var SCHEMAS = {
@@ -105,7 +109,7 @@
         "name": "How long should I spend at Alexanderplatz?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "At minimum, 30 minutes to properly see the World Clock, the TV Tower from ground level, and the surrounding architecture. If you're joining our walking tour, the starting point is at the World Clock — the tour covers Alexanderplatz and 11 more stops over 1 hour 45 minutes."
+          "text": "At minimum, 30 minutes to properly see the World Clock, the TV Tower from ground level, and the surrounding architecture. If you're joining our walking tour, the starting point is at the World Clock — the tour covers Alexanderplatz and 11 more stops over about 2 hours."
         }
       },
       {
@@ -809,7 +813,7 @@
         "name": "How long is the BerlinWalk free walking tour?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The tour is approximately 3 km long and takes about 1 hour 45 minutes. The route is flat and easy — no rushing. Every stop has time for photos, questions, and a bit of breathing room before the next part of the city."
+          "text": "The tour is approximately 3 km long and takes about 2 hours. The route is flat and easy — no rushing. Every stop has time for photos, questions, and a bit of breathing room before the next part of the city."
         }
       },
       {
@@ -1046,6 +1050,52 @@
       }
     ]
   },
+  "visiting-berlin-in-june": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is June a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, June is one of the best months to visit Berlin. The weather is mild with average highs around 22°C, the days are extremely long (up to nearly 17 hours of daylight near the summer solstice), and the city's outdoor culture comes fully alive. The first half of June is slightly less crowded than mid-July or August. The main drawback is that hotel prices rise from mid-June onward as peak season begins."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in June?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin in June averages a daytime high of 22°C and an overnight low of around 12°C, though afternoons can occasionally reach 28°C. The month sees nine to twelve days of rain on average, often as short, intense afternoon thunderstorms. Pack a light rain jacket and layers, since mornings and evenings are noticeably cooler than midday."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long are the days in Berlin in June?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Days are extremely long. On the summer solstice around June 21, the sun rises before 5am and sets just after 21:30, giving Berlin nearly 17 hours of daylight. Twilight extends another hour beyond sunset, meaning the sky is still soft blue close to 22:30. June visitors get significantly more usable evening light than they would in southern European cities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What events happen in Berlin in June?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Major recurring June events include Fête de la Musique on June 21, when Berlin hosts free outdoor concerts at over a hundred venues across the city. The Long Night of the Sciences in early June opens dozens of research institutions and laboratories to the public until past midnight. The Berlin Philharmonic gives its annual season-closing open-air concert at the Waldbühne in late June. The Carnival of Cultures occasionally falls in early June depending on when Pentecost lands that year."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I book accommodation in advance for Berlin in June?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, particularly for trips after mid-June. Berlin's peak season ramps up steadily through the month, and hotel prices in central neighborhoods like Mitte, Charlottenburg, and Kreuzberg can run forty to sixty percent higher than in low season. Booking six to eight weeks ahead gives you the widest selection. For walking tours, museum tickets, and popular restaurants, plan at least two weeks in advance."
+        }
+      }
+    ]
+  },
   "berlin-in-the-rain": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -1092,7 +1142,7 @@
       }
     ]
   },
-  "east-west-1989": {
+  "was-your-berlin-address-east-or-west": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
@@ -1134,52 +1184,6 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The 2-hour free walking tour from Alexanderplatz to Hackescher Markt covers the historic center on the former East Berlin side of the divide, including spots where the cobblestone Wall line crosses the route and views toward former checkpoint locations. For a focused Wall-only walk, the Bernauer Straße Memorial in the north of the city is the most informative single destination, with a free outdoor exhibition that runs along the original Wall path."
-        }
-      }
-    ]
-  },
-  "visiting-berlin-in-june": {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "Is June a good time to visit Berlin?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, June is one of the best months to visit Berlin. The weather is mild with average highs around 22°C, the days are extremely long (up to nearly 17 hours of daylight near the summer solstice), and the city's outdoor culture comes fully alive. The first half of June is slightly less crowded than mid-July or August. The main drawback is that hotel prices rise from mid-June onward as peak season begins."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is the weather like in Berlin in June?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Berlin in June averages a daytime high of 22°C and an overnight low of around 12°C, though afternoons can occasionally reach 28°C. The month sees nine to twelve days of rain on average, often as short, intense afternoon thunderstorms. Pack a light rain jacket and layers, since mornings and evenings are noticeably cooler than midday."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How long are the days in Berlin in June?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Days are extremely long. On the summer solstice around June 21, the sun rises before 5am and sets just after 21:30, giving Berlin nearly 17 hours of daylight. Twilight extends another hour beyond sunset, meaning the sky is still soft blue close to 22:30. June visitors get significantly more usable evening light than they would in southern European cities."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What events happen in Berlin in June?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Major recurring June events include Fête de la Musique on June 21, when Berlin hosts free outdoor concerts at over a hundred venues across the city. The Long Night of the Sciences in early June opens dozens of research institutions and laboratories to the public until past midnight. The Berlin Philharmonic gives its annual season-closing open-air concert at the Waldbühne in late June. The Carnival of Cultures occasionally falls in early June depending on when Pentecost lands that year."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Should I book accommodation in advance for Berlin in June?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, particularly for trips after mid-June. Berlin's peak season ramps up steadily through the month, and hotel prices in central neighborhoods like Mitte, Charlottenburg, and Kreuzberg can run forty to sixty percent higher than in low season. Booking six to eight weeks ahead gives you the widest selection. For walking tours, museum tickets, and popular restaurants, plan at least two weeks in advance."
         }
       }
     ]
@@ -1614,6 +1618,106 @@
       }
     ]
   },
+  "movies-tv-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What famous movies were filmed in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Famous movies connected to Berlin include Run Lola Run, Wings of Desire, Christiane F., Good Bye, Lenin!, The Lives of Others, Victoria, The Bourne Supremacy, and parts of The Hunger Games: Mockingjay - Part 2. Some use Berlin as itself; others use Berlin or the Berlin-Brandenburg region as a stand-in for another place."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which TV shows were filmed in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Major series connected to Berlin include Babylon Berlin, Dark, Homeland Season 5, Berlin Station, Sense8, Deutschland 83, The Queen's Gambit, and Unorthodox. In some cases Berlin is the story setting; in others, Berlin and nearby Brandenburg provide architecture, studios, streets, or landscapes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit the exact filming locations in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes, but not always. Berlin filming can involve real streets, studio sets, edited-together locations, and places that double for another city. It is better to think in screen moods and neighborhoods: Oberbaumbrücke for Run Lola Run energy, Karl-Marx-Allee for socialist architecture, Bahnhof Zoo for West Berlin memory, and Alexanderplatz for modern transit and spy stories."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was The Hunger Games filmed in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Parts of The Hunger Games: Mockingjay - Part 2 were filmed in the Berlin-Brandenburg region, especially through the production world around Studio Babelsberg in Potsdam. Berlin is not simply playing Berlin here; the region becomes part of a dystopian screen world."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the best Berlin film locations to visit on a first trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with Alexanderplatz, Oberbaumbrücke, Karl-Marx-Allee, Bahnhof Zoo, and Wannsee. If you have extra time, add Potsdam-Babelsberg for film production history. These places help you understand why Berlin works so well for stories about surveillance, reinvention, division, nightlife, and escape."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the BerlinWalk tour cover movie locations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tour is not a pure film-location tour, but it covers the real city layers that make Berlin so cinematic: Alexanderplatz, historic Mitte, Museum Island, GDR architecture, Cold War memory, and the streets filmmakers keep returning to. It is a strong starting point if you want to see the real Berlin behind the screen image."
+        }
+      }
+    ]
+  },
+  "parking-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where should I park if I am joining the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use a central garage near Alexanderplatz and walk to the World Clock. RathausPassagen, ALEXA, and Q-Park Am Alexanderplatz are the most practical options. Arrive 20-30 minutes early so parking does not make you late."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Alexanderplatz inside Berlin's Umweltzone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Alexanderplatz is inside Berlin's low-emission zone. If you drive into the center, check whether your car needs the green environmental sticker, including foreign-registered vehicles."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is street parking near Alexanderplatz worth trying?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I would not rely on it. Mitte has managed paid parking zones, spaces can be hard to find, and central street parking can cost around €4 per hour in key zones. For a timed tour, a garage is much calmer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Park + Ride cheaper than parking in central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes. P+R often makes sense for one or two people staying all day, especially if you already need public transport tickets. For a short visit or a group, central garage parking can be simpler and sometimes not much more expensive."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How early should I arrive if I am parking before the tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan to arrive in the parking area 20-30 minutes before the tour starts. You need time to enter the garage, find a space, remember the exit, pay if needed, and walk to the World Clock."
+        }
+      }
+    ]
+  },
   "esim-sim-wifi": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -1647,7 +1751,7 @@
         "name": "Can I use my US, UK, or non-EU phone plan in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You can, but check the per-megabyte roaming rate before you fly. US, UK, and most non-EU carriers can charge frightening rates in Germany. EU citizens can use their home plan freely under EU Roam Like at Home rules. For everyone else, a travel eSIM or local prepaid SIM is almost always cheaper."
+          "text": "You can, but check the per-megabyte roaming rate before you fly. US, UK, and most non-EU carriers can charge frightening rates in Germany. EU citizens can use their home plan freely under EU 'Roam Like at Home' rules. For everyone else, a travel eSIM or local prepaid SIM is almost always cheaper."
         }
       },
       {
@@ -1655,7 +1759,7 @@
         "name": "Is there free WiFi on Berlin public transport?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. BVG runs free BVG-WiFi at every U-Bahn station with no registration. Newer trams and buses also have on-board WiFi, but older vehicles do not. Deutsche Bahn provides free WiFi at most train stations including Hauptbahnhof, Friedrichstrasse, Ostbahnhof, Suedkreuz, and Gesundbrunnen."
+          "text": "Yes. BVG runs free 'BVG-WiFi' at every U-Bahn station with no registration. Newer trams and buses also have on-board WiFi, but older vehicles do not. Deutsche Bahn provides free WiFi at most train stations including Hauptbahnhof, Friedrichstrasse, Ostbahnhof, Suedkreuz, and Gesundbrunnen."
         }
       },
       {
@@ -1671,7 +1775,7 @@
         "name": "Does my phone support eSIM?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Almost every iPhone since the XS, Pixel 3 and newer, Samsung Galaxy S20 and newer, and most modern flagships do. Older phones, budget Android models, and some dual-SIM travel routers may not. Check your phone settings for Add eSIM or Add data plan before buying."
+          "text": "Almost every iPhone since the XS, Pixel 3 and newer, Samsung Galaxy S20 and newer, and most modern flagships do. Older phones, budget Android models, and some dual-SIM travel routers may not. Check your phone settings for 'Add eSIM' or 'Add data plan' before buying."
         }
       },
       {
@@ -1680,6 +1784,146 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. 5G is live across Telekom, Vodafone, and O2 in Berlin in 2026, and most modern prepaid plans include 5G by default. Travel eSIMs running on these networks also get 5G access."
+        }
+      }
+    ]
+  },
+  "berlin-club-dress-code": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I have to wear black to Berlin clubs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Black is common and often works at techno-focused clubs, but Berlin does not have one universal dress code. Berghain, RSO, Tresor, Sisyphos, KitKat, Renate, and Kater Blau all read style differently. The better rule is: match the club and the event, not just a color."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I wear to Berghain?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wear something dark, functional, comfortable, and intentional, but do not treat clothing as a trick. Berghain's door is about the whole impression: the event, the group, your calmness, your familiarity with the music, and whether you look like you fit the room. Entry is never guaranteed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the KitKatClub dress code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "KitKat is the Berlin club where dress code matters most. Sex-positive, fetish, body-aware, provocative, or clearly expressive clothing fits the culture better than normal casual streetwear. If you would wear the same outfit to a regular bar, it is probably too plain for KitKat."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are sneakers okay in Berlin clubs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually yes, and they are often the smartest choice. Berlin club nights can last many hours, with concrete floors, stairs, courtyards, and queues. Clean, comfortable sneakers usually work better than painful heels or polished dress shoes, unless a specific event says otherwise."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can tourists get into Berlin clubs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, tourists get into Berlin clubs every weekend. The problem is not being a tourist; it is looking like a loud, drunk, oversized tourist group that does not know where it is. Go in a small group, know the event, stay calm at the door, and do not argue if you are rejected."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin club tickets guarantee entry?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. For many Berlin clubs and parties, a presale ticket does not guarantee entry. The door can still refuse guests based on behavior, group fit, intoxication, event capacity, or house rules. Always have a backup plan nearby."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should men wear to Berlin clubs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For techno clubs, men usually do best with simple, dark, comfortable clothes, minimal logos, and shoes they can dance in. For KitKat or expressive parties, the outfit needs to be more intentional. Avoid office shirts, sports-team jerseys, stag-party looks, and anything that feels like generic nightlife cosplay."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should women wear to Berlin clubs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Wear something that feels confident, comfortable, and suited to the specific club. For techno clubs, functional dark layers often work. For Sisyphos, Kater Blau, or Renate, creative or colorful style can work well. For KitKat, expressive or fetish-informed clothing is much more appropriate than standard partywear."
+        }
+      }
+    ]
+  },
+  "berlin-wall-locations": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can you still see the Berlin Wall today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but you have to know where to look. The Wall was mostly torn down between 1989 and 1992, but several sections and memorials survive. The main places are the East Side Gallery (1.3 km of murals on original Wall concrete in Friedrichshain), the Berlin Wall Memorial on Bernauer Straße (preserved death strip and documentation center), the Topography of Terror (200 m section next to a free museum), and a few shorter sections near Potsdamer Platz and Mauerpark."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best place to see the Berlin Wall in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Berlin Wall Memorial on Bernauer Straße is the most historically complete site — it shows both walls, the death strip, a guard tower, and the original death strip width. The free documentation center has a viewing tower. If you want scale and murals, the East Side Gallery (1.3 km of painted Wall along the Spree) is the most visited site. For historical context connecting the Wall to the Nazi period, the Topography of Terror is the strongest choice."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the East Side Gallery free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Walking along the East Side Gallery is completely free and accessible around the clock. The 1.3 km stretch of original Wall along Mühlenstraße in Friedrichshain has no entrance fee. Some murals have been restored by the adjacent East Side Gallery Museum, which charges entry, but the Wall itself is a public outdoor monument."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Checkpoint Charlie worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The area is worth a quick stop if you are nearby. The free outdoor information boards around the crossing explain the real history clearly. However, the white guardhouse and sign are reproductions — the originals are in museums. The paid Haus am Checkpoint Charlie museum gets mixed reviews; most visitors find the free outdoor exhibition sufficient and skip the museum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long was the Berlin Wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Berlin Wall was 155 kilometers long in total. It completely encircled West Berlin, which meant it was not a line dividing the city in half but a ring around the Western enclave inside East Germany. Of that 155 km, less than 3 km of original concrete survives today."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When was the Berlin Wall built and when did it fall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Construction began on August 13, 1961 — a Sunday morning — when East Germany sealed the border with barbed wire. Concrete replaced the wire over the following years. The Wall fell on November 9, 1989, when East Germany announced citizens could cross freely. Crowds gathered at crossing points across the city and the Wall was opened that same night."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many people died at the Berlin Wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "At least 140 people died at the Berlin Wall between 1961 and 1989, according to research by the Berlin Wall Memorial. Deaths occurred from gunshot wounds, accidents during escape attempts, and drowning in border waterways. The exact number is still debated by historians; some research puts the figure higher."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the cobblestone line running through Berlin streets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A double row of cobblestones set into the pavement marks the former course of the Berlin Wall across the city. It runs for around 220 km and crosses roads, squares, parks, and pavements throughout the urban area. Look for two parallel lines of dark stone embedded in the ground — you will find them in most central districts, including Mitte, Kreuzberg, and Friedrichshain."
         }
       }
     ]
