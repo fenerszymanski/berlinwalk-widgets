@@ -182,6 +182,7 @@ class BWHeaderElement extends HTMLElement {
     };
     const setOpen = (open) => {
       wrap.classList.toggle('bw-header-dropdown-open', open);
+      menu.classList.toggle('bw-header-submenu-open', open);
       trigger.setAttribute('aria-expanded', String(open));
       if (open) positionMenu();
     };
@@ -419,7 +420,7 @@ class BWHeaderElement extends HTMLElement {
           text-decoration: none;
         }
 
-        .bw-header-dropdown-open .bw-header-submenu {
+        .bw-header-submenu.bw-header-submenu-open {
           opacity: 1;
           pointer-events: auto;
           transform: translateY(0);
