@@ -45,8 +45,10 @@ Route note: `bw-route` pin coordinates and the dashed path come from
 Testimonials note: the trust strip currently shows FreeTour.com only. The listing
 URL is `https://www.freetour.com/company/97387`.
 
-Blog Guide Note is designed for the right column of the Wix blog index. Use it
-as a Custom Element, not an iframe, so the card can fit the column width.
+Blog Guide Note is designed for the right column of the Wix blog index. It
+combines Yusuf's editorial note with a small `Plan your visit` tools card
+linking to `/berlin-tools`. Use it as a Custom Element, not an iframe, so the
+card can fit the column width. Suggested desktop element height: `960-980px`.
 
 ## Blog Custom Code
 

@@ -6,6 +6,7 @@ const BW_BLOG_GUIDE_NOTE_BASE_URL = (() => {
 const BW_BLOG_GUIDE_NOTE_IMAGE_URL = new URL('./yusuf-tour-note.jpg', BW_BLOG_GUIDE_NOTE_BASE_URL).href;
 const BW_BLOG_GUIDE_NOTE_GUIDE_URL = 'https://www.berlinwalk.com/the-guide';
 const BW_BLOG_GUIDE_NOTE_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_BLOG_GUIDE_NOTE_TOOLS_URL = 'https://www.berlinwalk.com/berlin-tools';
 
 class BWBlogGuideNoteElement extends HTMLElement {
   connectedCallback() {
@@ -66,6 +67,24 @@ class BWBlogGuideNoteElement extends HTMLElement {
           max-width: 390px;
           overflow: hidden;
           position: relative;
+        }
+
+        .bw-blog-guide-note .bw-tools-card {
+          background: #FFFFFF;
+          border: 1px solid var(--border);
+          border-radius: 8px;
+          box-shadow: 0 12px 28px rgba(27, 94, 32, 0.08);
+          margin: 18px auto 0;
+          max-width: 390px;
+          overflow: hidden;
+        }
+
+        .bw-blog-guide-note .bw-tools-card::before {
+          background: linear-gradient(90deg, var(--green), var(--yellow));
+          content: "";
+          display: block;
+          height: 4px;
+          width: 100%;
         }
 
         .bw-blog-guide-note .bw-note-card::before {
@@ -222,6 +241,98 @@ class BWBlogGuideNoteElement extends HTMLElement {
           outline-offset: 3px;
         }
 
+        .bw-blog-guide-note .bw-tools-copy {
+          padding: 20px 22px 22px;
+        }
+
+        .bw-blog-guide-note .bw-tools-kicker {
+          color: var(--muted);
+          display: block;
+          font-size: 10px;
+          font-weight: 900;
+          letter-spacing: 1.6px;
+          line-height: 1.25;
+          margin-bottom: 10px;
+          text-transform: uppercase;
+        }
+
+        .bw-blog-guide-note .bw-tools-title {
+          color: var(--green);
+          font-size: 21px;
+          font-weight: 900;
+          line-height: 1.16;
+          margin: 0 0 8px;
+        }
+
+        .bw-blog-guide-note .bw-tools-lead {
+          color: var(--muted);
+          font-size: 13px;
+          font-weight: 700;
+          line-height: 1.5;
+          margin-bottom: 16px;
+        }
+
+        .bw-blog-guide-note .bw-tools-list {
+          display: grid;
+          gap: 8px;
+          list-style: none;
+          margin: 0 0 18px;
+          padding: 0;
+        }
+
+        .bw-blog-guide-note .bw-tools-list li {
+          align-items: center;
+          color: var(--green);
+          display: flex;
+          font-size: 13px;
+          font-weight: 900;
+          gap: 9px;
+          line-height: 1.25;
+        }
+
+        .bw-blog-guide-note .bw-tools-list li::before {
+          background: var(--yellow);
+          border-radius: 999px;
+          content: "";
+          flex: 0 0 auto;
+          height: 8px;
+          width: 8px;
+        }
+
+        .bw-blog-guide-note .bw-tools-link {
+          align-items: center;
+          border-top: 1px solid var(--border);
+          color: var(--green);
+          display: flex;
+          font-size: 12px;
+          font-weight: 900;
+          justify-content: space-between;
+          letter-spacing: 0.8px;
+          padding-top: 15px;
+          text-decoration: none;
+          text-transform: uppercase;
+        }
+
+        .bw-blog-guide-note .bw-tools-link span:last-child {
+          align-items: center;
+          background: var(--yellow);
+          border-radius: 999px;
+          display: inline-flex;
+          height: 28px;
+          justify-content: center;
+          width: 28px;
+        }
+
+        .bw-blog-guide-note .bw-tools-link:hover,
+        .bw-blog-guide-note .bw-tools-link:focus-visible {
+          color: var(--green-dark);
+        }
+
+        .bw-blog-guide-note .bw-tools-link:focus-visible {
+          outline: 3px solid rgba(255, 230, 0, 0.9);
+          outline-offset: 3px;
+        }
+
         @media (max-width: 760px) {
           .bw-blog-guide-note {
             display: none !important;
@@ -252,6 +363,25 @@ class BWBlogGuideNoteElement extends HTMLElement {
             </div>
           </div>
         </article>
+
+        <aside class="bw-tools-card" aria-label="Plan your visit tools">
+          <div class="bw-tools-copy">
+            <span class="bw-tools-kicker">Plan your visit</span>
+            <h2 class="bw-tools-title">Free Berlin tools</h2>
+            <p class="bw-tools-lead">Quick helpers for the practical stuff before you go.</p>
+
+            <ul class="bw-tools-list">
+              <li>Transport calculators</li>
+              <li>Luggage, toilets, weather</li>
+              <li>Free things and maps</li>
+            </ul>
+
+            <a class="bw-tools-link" href="${BW_BLOG_GUIDE_NOTE_TOOLS_URL}">
+              <span>Explore all tools</span>
+              <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </aside>
       </aside>
     `;
   }
