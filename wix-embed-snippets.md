@@ -84,6 +84,11 @@ skips `/book-berlin-walking-tour` and sub-routes, links the primary CTA to the
 free walking tour booking page, and posts Berlin Essentials PDF signups to the
 live Velo subscribe endpoint.
 
+Analytics events are sent to `dataLayer` and, when available, `gtag`:
+`bw_exit_popup_view`, `bw_exit_popup_book_click`, `bw_exit_popup_pdf_click`,
+`bw_exit_popup_submit_success`, `bw_exit_popup_submit_error`, and
+`bw_exit_popup_close`.
+
 ## Lead Form
 
 Recommended URL:

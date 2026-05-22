@@ -9,11 +9,12 @@
   var DESKTOP_MIN_WIDTH = 1024;
   var STYLE_ID = 'bw-exit-intent-styles';
   var OVERLAY_ID = 'bw-exit-intent-popup';
-  var DWELL_TIME_MS = isLocalPreviewForced() ? 500 : 30000;
+  var DWELL_TIME_MS = isPreviewForced() ? 500 : 30000;
 
   var dwellReady = false;
   var popupShown = false;
   var currentStep = 1;
+  var closeTracked = false;
 
   function getImageUrl() {
     if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
@@ -22,9 +23,15 @@
     return 'https://fenerszymanski.github.io/berlinwalk-widgets/assets/exit-intent-world-clock.jpg';
   }
 
-  function isLocalPreviewForced() {
-    return /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname) &&
-      window.location.search.indexOf('forceExitPreview=1') !== -1;
+  function isPreviewForced() {
+    var host = window.location.hostname;
+    var isSafeHost = /^(localhost|127\.0\.0\.1)$/.test(host) ||
+      host === 'www.berlinwalk.com' ||
+      host === 'berlinwalk.com';
+    return isSafeHost && (
+      window.location.search.indexOf('forceExitPreview=1') !== -1 ||
+      window.location.search.indexOf('bwExitPreview=1') !== -1
+    );
   }
 
   function safeSessionGet(key) {
@@ -51,11 +58,35 @@
   }
 
   function isDesktop() {
-    return isLocalPreviewForced() || window.innerWidth >= DESKTOP_MIN_WIDTH;
+    return isPreviewForced() || window.innerWidth >= DESKTOP_MIN_WIDTH;
   }
 
   function shouldRun() {
     return isDesktop() && !isExcludedPage() && !safeSessionGet(SESSION_KEY);
+  }
+
+  function trackEvent(name, params) {
+    var data = params || {};
+    data.event_category = 'exit_intent_popup';
+    data.page_path = window.location.pathname;
+    data.page_url = window.location.href;
+    data.popup_step = currentStep;
+    data.preview_mode = isPreviewForced() ? 'true' : 'false';
+
+    if (window.dataLayer && typeof window.dataLayer.push === 'function') {
+      var layerData = {};
+      for (var key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          layerData[key] = data[key];
+        }
+      }
+      layerData.event = name;
+      window.dataLayer.push(layerData);
+    }
+
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', name, data);
+    }
   }
 
   function injectStyles() {
@@ -137,9 +168,14 @@
     }
   }
 
-  function closePopup() {
+  function closePopup(reason) {
     var overlay = document.getElementById(OVERLAY_ID);
     if (!overlay) return;
+
+    if (!closeTracked) {
+      closeTracked = true;
+      trackEvent('bw_exit_popup_close', { close_reason: reason || 'unknown' });
+    }
 
     overlay.classList.remove('bw-exit-visible');
     document.documentElement.classList.remove('bw-exit-lock');
@@ -152,7 +188,7 @@
 
   function handleKeydown(event) {
     if (event.key === 'Escape') {
-      closePopup();
+      closePopup('escape');
     }
     if (event.key === 'Tab') {
       trapFocus(event);
@@ -249,10 +285,18 @@
     var status = overlay.querySelector('[data-bw-exit-status]');
     var success = overlay.querySelector('[data-bw-exit-success]');
 
-    closeButton.addEventListener('click', closePopup);
-    doneButton.addEventListener('click', closePopup);
-    bookButton.addEventListener('click', closePopup);
+    closeButton.addEventListener('click', function () {
+      closePopup('x_button');
+    });
+    doneButton.addEventListener('click', function () {
+      closePopup('done_button');
+    });
+    bookButton.addEventListener('click', function () {
+      trackEvent('bw_exit_popup_book_click', { cta_url: BOOKING_URL });
+      closePopup('book_click');
+    });
     pdfButton.addEventListener('click', function () {
+      trackEvent('bw_exit_popup_pdf_click');
       setStep(2);
     });
     backButton.addEventListener('click', function () {
@@ -261,7 +305,7 @@
       setStep(1);
     });
     overlay.addEventListener('click', function (event) {
-      if (event.target === overlay) closePopup();
+      if (event.target === overlay) closePopup('overlay_click');
     });
 
     form.addEventListener('submit', function (event) {
@@ -272,6 +316,7 @@
       status.textContent = '';
 
       if (!validateEmail(email)) {
+        trackEvent('bw_exit_popup_submit_error', { error_type: 'invalid_email' });
         status.textContent = 'Please enter a valid email address.';
         status.classList.add('bw-exit-error');
         input.focus();
@@ -297,12 +342,14 @@
             throw new Error(data.error || 'subscribe_failed');
           }
           success.innerHTML = 'We have sent the Berlin Essentials PDF to <strong>' + escapeHtml(email) + '</strong>. It should arrive in a minute.';
+          trackEvent('bw_exit_popup_submit_success');
           setStep(3);
         });
       }).catch(function (err) {
         var message = err && err.message === 'invalid_email'
           ? 'Please enter a valid email address.'
           : 'Something went wrong. Please try again.';
+        trackEvent('bw_exit_popup_submit_error', { error_type: err && err.message ? err.message : 'network_or_unknown' });
         status.textContent = message;
         status.classList.add('bw-exit-error');
       }).then(function () {
@@ -318,8 +365,10 @@
     if (!dwellReady || popupShown || !shouldRun() || document.getElementById(OVERLAY_ID)) return;
 
     popupShown = true;
+    closeTracked = false;
     safeSessionSet(SESSION_KEY, String(Date.now()));
     renderPopup();
+    trackEvent('bw_exit_popup_view', { trigger_type: isPreviewForced() ? 'preview' : 'exit_intent' });
   }
 
   function handleMouseLeave(event) {
@@ -333,6 +382,7 @@
   function boot() {
     window.setTimeout(function () {
       dwellReady = true;
+      if (isPreviewForced()) showPopup();
     }, DWELL_TIME_MS);
 
     document.addEventListener('mouseleave', handleMouseLeave);

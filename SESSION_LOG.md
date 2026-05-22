@@ -6,7 +6,7 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-05-22 — Codex (Exit intent popup)
 
-**Did:** Built the desktop-only sitewide exit-intent popup and local preview harness; added an optimized World Clock image and thank-you page exclusion.
+**Did:** Built the desktop-only sitewide exit-intent popup and local preview harness; added an optimized World Clock image, thank-you page exclusion, and GA/GTM tracking events.
 
 **Changed:**
 - `js/exit-intent-popup.js` — new 30-second dwell + top-exit trigger, once-per-session guard, booking CTA, inline Berlin Essentials signup posting to the live Velo subscribe endpoint, mobile/checkout skips.
@@ -15,7 +15,7 @@ Format for each entry — see `AGENTS.md` §9.
 - `README.md`, `wix-embed-snippets.md` — documented the Wix Body-end Custom Code URL.
 - Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the new sitewide script and install note.
 
-**Opened:** Push/deploy `berlinwalk-widgets`, then add `https://fenerszymanski.github.io/berlinwalk-widgets/js/exit-intent-popup.js` in Wix Custom Code Body-end on all pages and verify live desktop only; make sure thank-you/confirmation pages stay quiet.
+**Opened:** Push/deploy `berlinwalk-widgets`, then add `https://fenerszymanski.github.io/berlinwalk-widgets/js/exit-intent-popup.js` in Wix Custom Code Body-end on all pages and verify live desktop only; make sure thank-you/confirmation pages stay quiet. For live debug only, `?bwExitPreview=1` forces a 0.5s auto-open on `berlinwalk.com`. GA/GTM events: `bw_exit_popup_view`, `bw_exit_popup_book_click`, `bw_exit_popup_pdf_click`, `bw_exit_popup_submit_success`, `bw_exit_popup_submit_error`, `bw_exit_popup_close`.
 **Closed:** Local `node --check`, ASCII scan, browser 30-second trigger/CTA/PDF validation, and mocked mobile/checkout skip checks passed.
 
 **Next session should:** After deploy, test one live non-booking desktop page plus the booking route to confirm the popup appears only where intended.
