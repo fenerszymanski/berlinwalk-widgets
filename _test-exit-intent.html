@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Exit Intent Popup Test</title>
+  <link rel="stylesheet" href="css/brand.css">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --text: #212121;
+      --muted: #4E5A4E;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--cream);
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    .test-shell {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 24px 96px;
+    }
+
+    .test-hero {
+      min-height: 54vh;
+      display: grid;
+      align-items: center;
+      border-bottom: 1px solid rgba(27, 94, 32, 0.18);
+    }
+
+    .test-kicker {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin: 0 0 18px;
+      color: var(--green);
+      font-size: clamp(42px, 7vw, 82px);
+      line-height: 0.98;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .test-lead {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.65;
+      font-weight: 500;
+    }
+
+    .test-panel {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .test-card {
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 8px;
+      background: #fff;
+      padding: 20px;
+    }
+
+    .test-card strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    .test-card span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .test-button {
+      margin-top: 26px;
+      margin-right: 10px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--yellow);
+      cursor: pointer;
+      font: 900 14px/1 Montserrat, Arial, sans-serif;
+      padding: 14px 18px;
+    }
+
+    .test-button-secondary {
+      background: var(--text);
+      color: #fff;
+    }
+
+    .test-button:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 3px;
+    }
+
+    .test-section {
+      margin-top: 54px;
+      max-width: 760px;
+    }
+
+    .test-section h2 {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: 30px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .test-section p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .test-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="test-shell">
+    <section class="test-hero">
+      <div>
+        <p class="test-kicker">Local preview</p>
+        <h1>Exit intent popup test page</h1>
+        <p class="test-lead">This page loads the production exit-intent script. On desktop width, wait 30 seconds and move the cursor above the viewport to trigger the popup once per session.</p>
+        <button class="test-button" type="button" id="clear-session">Clear popup session flag</button>
+        <button class="test-button test-button-secondary" type="button" id="simulate-exit">Simulate top exit</button>
+        <div class="test-panel" aria-label="Expected behavior">
+          <div class="test-card">
+            <strong>Desktop only</strong>
+            <span>The popup should not render under 1024px viewport width.</span>
+          </div>
+          <div class="test-card">
+            <strong>30 second dwell</strong>
+            <span>Exit movement before the dwell timer should do nothing.</span>
+          </div>
+          <div class="test-card">
+            <strong>One per session</strong>
+            <span>After it opens once, sessionStorage prevents repeats.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="test-section">
+      <h2>Dummy page content</h2>
+      <p>Scroll a little, read for half a minute, then move the pointer out through the top edge of the browser window. The production script injects its own dialog only after the exit-intent signal passes all page, device, and session checks.</p>
+      <p>The booking CTA points to the live BerlinWalk booking route. The PDF form posts to the live Velo subscribe endpoint, so use invalid email validation for local checks unless you intentionally want to test the real subscription path.</p>
+    </section>
+  </main>
+
+  <script>
+    document.getElementById('clear-session').addEventListener('click', function () {
+      try {
+        sessionStorage.removeItem('bw-exit-intent-triggered');
+      } catch (err) {}
+      window.location.reload();
+    });
+
+    document.getElementById('simulate-exit').addEventListener('click', function () {
+      var event;
+      if (typeof MouseEvent === 'function') {
+        event = new MouseEvent('mouseleave', {
+          bubbles: true,
+          cancelable: true,
+          clientY: -1,
+          relatedTarget: null
+        });
+      } else {
+        event = document.createEvent('MouseEvents');
+        event.initMouseEvent('mouseleave', true, true, window, 0, 0, 0, 0, -1, false, false, false, false, 0, null);
+      }
+      document.dispatchEvent(event);
+    });
+  </script>
+  <script src="js/exit-intent-popup.js" defer></script>
+</body>
+</html>

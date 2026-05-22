@@ -35,6 +35,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `route/` - `bw-route` homepage interactive illustrated route map Custom Element.
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
 - `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
+- `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin Essentials PDF signup.
 
 ## Project Memory
 
@@ -158,3 +159,7 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   disappears near the article end, sits close to the article edge, and its long
   heading list scrolls inside the card when needed. The script skips non-`/post/`
   URLs.
+- `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
+  non-booking pages. It waits 30 seconds, opens once per session through
+  `sessionStorage`, links the primary CTA to the booking route, and posts the
+  Berlin Essentials PDF signup to `https://www.berlinwalk.com/_functions/subscribe`.

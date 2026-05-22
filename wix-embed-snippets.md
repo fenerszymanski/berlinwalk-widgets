@@ -70,6 +70,20 @@ sidebar hides below 1024px, starts with the post H1, disappears near the article
 end, sits close to the article edge, and its long heading list scrolls inside
 the card when needed.
 
+## Sitewide Custom Code
+
+Add this through Wix Custom Code in Body-end on all pages:
+
+```html
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/exit-intent-popup.js" defer></script>
+```
+
+`exit-intent-popup.js` waits 30 seconds, then opens a desktop-only exit-intent
+dialog once per session when the cursor leaves the top of the viewport. It
+skips `/book-berlin-walking-tour` and sub-routes, links the primary CTA to the
+free walking tour booking page, and posts Berlin Essentials PDF signups to the
+live Velo subscribe endpoint.
+
 ## Lead Form
 
 Recommended URL:
