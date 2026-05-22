@@ -919,23 +919,80 @@
         }
       }
 
-      function locateUser() {
-        if (!navigator.geolocation) {
-          panelSub.textContent = 'Your browser does not support location sharing. Tap the map to choose a starting point.';
+      function requestParentLocation(onSuccess, onError) {
+        if (window.parent === window || !window.parent.postMessage) {
+          onError();
           return;
         }
 
-        locateButton.disabled = true;
-        locateButton.querySelector('span:last-child').textContent = 'Finding you...';
+        var requestId = 'bw-toilet-location-' + Date.now() + '-' + Math.random().toString(36).slice(2);
+        var timeout = null;
+
+        function cleanup() {
+          window.removeEventListener('message', handleMessage);
+          if (timeout) window.clearTimeout(timeout);
+        }
+
+        function handleMessage(event) {
+          var data = event.data || {};
+          if (data.type !== 'bw-geolocation-result' || data.requestId !== requestId) return;
+
+          cleanup();
+          if (data.ok && isFinite(data.latitude) && isFinite(data.longitude)) {
+            onSuccess(data.latitude, data.longitude);
+          } else {
+            onError();
+          }
+        }
+
+        window.addEventListener('message', handleMessage);
+        timeout = window.setTimeout(function () {
+          cleanup();
+          onError();
+        }, 12000);
+
+        window.parent.postMessage({
+          type: 'bw-request-geolocation',
+          requestId: requestId,
+          src: window.location.href
+        }, '*');
+      }
+
+      function setLocateLoading(isLoading, label) {
+        locateButton.disabled = isLoading;
+        locateButton.querySelector('span:last-child').textContent = label;
+      }
+
+      function handleLocationError() {
+        setLocateLoading(false, 'Use my location');
+        panelSub.textContent = 'Location was not shared. Tap the map to choose your starting point instead.';
+      }
+
+      function locateUser() {
+        setLocateLoading(true, 'Finding you...');
+
+        function finish(latitude, longitude) {
+          setLocateLoading(false, 'Update location');
+          setUserLocation(latitude, longitude, 'gps');
+        }
+
+        function tryParentFallback() {
+          requestParentLocation(finish, handleLocationError);
+        }
+
+        if (!navigator.geolocation) {
+          tryParentFallback();
+          return;
+        }
 
         navigator.geolocation.getCurrentPosition(function (position) {
-          locateButton.disabled = false;
-          locateButton.querySelector('span:last-child').textContent = 'Update location';
-          setUserLocation(position.coords.latitude, position.coords.longitude, 'gps');
-        }, function () {
-          locateButton.disabled = false;
-          locateButton.querySelector('span:last-child').textContent = 'Use my location';
-          panelSub.textContent = 'Location was not shared. Tap the map to choose your starting point instead.';
+          finish(position.coords.latitude, position.coords.longitude);
+        }, function (error) {
+          if (error && error.code === 1) {
+            tryParentFallback();
+          } else {
+            handleLocationError();
+          }
         }, {
           enableHighAccuracy: true,
           maximumAge: 30000,

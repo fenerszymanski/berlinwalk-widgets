@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-22 — Codex (Public toilets geolocation fix)
+
+**Did:** Fixed `Use my location` on the live `public-toilets-in-berlin` post by updating the sitewide iframe helper and adding a widget-side parent geolocation fallback for the next deploy.
+
+**Changed:**
+- `public-toilets-map/index.html` — added parent-window geolocation fallback if iframe geolocation is blocked.
+- Project root: `berlinwalk-widget-auto-resize-custom-code.js` — adds `allow="geolocation *"` to BerlinWalk widget iframes, reloads geolocation widgets once, and handles parent geolocation requests.
+- Wix Custom Embed `BerlinWalk widget auto-resize` (`db9e238d-1e40-4a8b-b9a4-b994dbaaefd4`) — updated to revision 10.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded revision 10 behavior.
+
+**Opened:** Push/deploy `berlinwalk-widgets` so the widget-side fallback is live too; the live Wix custom-code fix already makes the current post work.
+**Closed:** Live Chrome test confirmed the public-toilets iframe reloads with geolocation permission and sorts nearest toilets from the supplied location.
+
+**Next session should:** After the next widget repo push, verify the deployed `public-toilets-map/index.html` includes the parent fallback.
+
 
 ## 2026-05-21 — Codex (Club draft matrix fix)
 
