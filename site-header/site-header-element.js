@@ -15,15 +15,30 @@ const BW_HEADER_LINKS = {
 class BWHeaderElement extends HTMLElement {
   connectedCallback() {
     this._render();
-    this._setupScroll();
-    this._setupMobile();
-    this._setupDropdown();
+    this._setupFrame = window.requestAnimationFrame(() => {
+      this._setupFrame = null;
+      if (!this.isConnected || this._isEffectivelyHidden()) return;
+      this._setupScroll();
+      this._setupMobile();
+      this._setupDropdown();
+    });
   }
 
   disconnectedCallback() {
+    if (this._setupFrame) {
+      window.cancelAnimationFrame(this._setupFrame);
+      this._setupFrame = null;
+    }
     if (this._scrollTargets && this._scrollHandler) {
       this._scrollTargets.forEach((target) => {
         if (target && target.removeEventListener) target.removeEventListener('scroll', this._scrollHandler);
+      });
+    }
+    if (this._scrollIntentTargets && this._scrollIntentHandler) {
+      this._scrollIntentTargets.forEach((target) => {
+        if (target && target.removeEventListener) target.removeEventListener('wheel', this._scrollIntentHandler);
+        if (target && target.removeEventListener) target.removeEventListener('touchmove', this._scrollIntentHandler);
+        if (target && target.removeEventListener) target.removeEventListener('keydown', this._scrollIntentHandler);
       });
     }
     this._setHeaderHidden(false);
@@ -42,13 +57,33 @@ class BWHeaderElement extends HTMLElement {
     document.body.style.overflow = '';
   }
 
+  _isEffectivelyHidden() {
+    let node = this;
+    while (node && node.nodeType === 1) {
+      const style = window.getComputedStyle(node);
+      if (style.display === 'none' || style.visibility === 'hidden') return true;
+      node = node.parentElement;
+    }
+    return false;
+  }
+
   _setupScroll() {
     const header = this.querySelector('.bw-header-wrap');
     const progress = this.querySelector('.bw-header-progress-bar');
     if (!header) return;
     this._headerShell = this._findHeaderShell();
     this._lastScrollY = this._getScrollY();
+    this._headerUserScrollIntent = false;
     this._setHeaderHidden(false);
+    this._scrollIntentHandler = () => {
+      this._headerUserScrollIntent = true;
+    };
+    this._scrollIntentTargets = [window, document].filter((target, index, list) => target && list.indexOf(target) === index);
+    this._scrollIntentTargets.forEach((target) => {
+      target.addEventListener('wheel', this._scrollIntentHandler, { passive: true });
+      target.addEventListener('touchmove', this._scrollIntentHandler, { passive: true });
+      target.addEventListener('keydown', this._scrollIntentHandler);
+    });
     let ticking = false;
     const update = () => {
       const y = this._getScrollY();
@@ -59,7 +94,7 @@ class BWHeaderElement extends HTMLElement {
         progress.style.width = pct + '%';
       }
       const delta = y - this._lastScrollY;
-      if (y < 24) {
+      if (!this._headerUserScrollIntent || y < 24) {
         this._setHeaderHidden(false);
       } else if (delta > 8) {
         this._setHeaderHidden(true);

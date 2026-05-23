@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Codex (Site header load flicker)
+
+**Did:** Re-diagnosed the reported blog load flicker as the global site header, not the blog category mini-nav, and hardened `<bw-site-header>` against Wix duplicate/hidden header instances.
+
+**Changed:**
+- `site-header/site-header-element.js` — setup now waits one animation frame, skips hidden Wix breakpoint/container instances, and only hides the header after real user scroll intent so Wix load/layout scroll changes cannot make the header disappear and reappear.
+- `wix-embed-snippets.md` — bumped the Site Header source URL to `site-header-element.js?v=3`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the v3 header cache-bust.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, update the Wix Custom Element source URL for `bw-site-header` to `https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js?v=3`, then cold-load a blog post in a separate browser.
+**Closed:** Hidden duplicate header instance and non-user load scroll events can no longer drive header hide/show behavior.
+
+**Next session should:** Verify live header load on desktop and mobile after Wix uses the v3 source URL.
+
 ## 2026-05-23 — Codex (Blog mini-nav load flicker)
 
 **Did:** Fixed the blog category mini-nav load flicker where it could appear, disappear, and reappear while Wix finished rendering the post.

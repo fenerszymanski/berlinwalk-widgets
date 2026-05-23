@@ -24,7 +24,7 @@ Source type: Server URL
 | Testimonials | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | `bw-testimonials` | none |
 | Gallery | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | `bw-gallery` | none |
 | Tools Hub | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tools-hub-element.js` | `bw-tools-hub` | none |
-| Site Header | `https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js` | `bw-site-header` | none |
+| Site Header | `https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js?v=3` | `bw-site-header` | none |
 | Berlin Quiz (homepage) | `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-quiz/berlin-quiz-element.js` | `bw-berlin-quiz` | none |
 | Site Footer | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | `bw-site-footer` | none |
 | The Guide | `https://fenerszymanski.github.io/berlinwalk-widgets/the-guide/the-guide-element.js` | `bw-the-guide` | none |
