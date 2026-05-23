@@ -56,18 +56,16 @@ Add these through Wix Custom Code, not as iframe embeds. They self-skip when the
 current URL is not a blog post.
 
 ```html
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=14" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=15" defer></script>
 ```
 
-`blog-sidebar-inject.js` adds a compact editorial blog navigation bar above the
-post title with a `Blog Home` action and a clearly labelled `Categories` chip
-group. On mobile the bar always uses the thinner horizontal-scroll chip layout.
-It also builds a
+`blog-sidebar-inject.js` builds a
 desktop-only `On this page` sidebar from visible H2/H3 headings, adds compact
 share buttons, and shortens the floating booking CTA copy to `Book Now`. The
 sidebar hides below 1024px, starts with the post H1, disappears near the article
 end, sits close to the article edge, and its long heading list scrolls inside
-the card when needed.
+the card when needed. The old in-post `Blog Home` / `Categories` mini-nav is
+disabled because it blinked during Wix blog load.
 
 ## Sitewide Custom Code
 

@@ -461,35 +461,13 @@
     }).join('');
   }
 
-  function injectMiniNav(body) {
-    if (document.querySelector('[' + NAV_MARKER + ']')) return;
-    var anchor = findMiniNavAnchor(body);
-    if (!anchor) return;
-    var nav = document.createElement('nav');
-    nav.className = 'bw-blog-mini-nav';
-    nav.setAttribute(NAV_MARKER, '1');
-    nav.setAttribute('aria-label', 'Blog navigation');
-    nav.innerHTML =
-      '<div class="bw-blog-mini-nav-inner">' +
-        '<div class="bw-blog-mini-nav-content">' +
-          '<p class="bw-blog-mini-nav-kicker">Browse the blog</p>' +
-          '<p class="bw-blog-mini-nav-deck">Fresh Berlin guides, route stories, and practical travel notes.</p>' +
-          '<div class="bw-blog-mini-nav-row">' +
-            '<a class="bw-blog-mini-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
-            '<div class="bw-blog-mini-nav-group">' +
-              '<span class="bw-blog-mini-nav-label">Categories</span>' +
-              '<div class="bw-blog-mini-nav-list">' + renderMiniNavLinks() + '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-    if (anchor.tagName && anchor.tagName.toLowerCase() === 'h1' && anchor.parentNode) {
-      anchor.parentNode.insertBefore(nav, anchor);
-    } else if (anchor.parentNode && anchor !== document.body) {
-      anchor.parentNode.insertBefore(nav, anchor);
-    } else {
-      document.body.insertBefore(nav, document.body.firstChild);
+  function injectMiniNav() {
+    if (cleanupMiniNav) {
+      cleanupMiniNav();
+      cleanupMiniNav = null;
     }
+    var oldNav = document.querySelector('[' + NAV_MARKER + ']');
+    if (oldNav) oldNav.remove();
   }
 
   function compactFloatingCta() {

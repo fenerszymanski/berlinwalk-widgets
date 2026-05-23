@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Codex (Disable blog mini-nav entirely)
+
+**Did:** After v14 still did not stop Yusuf's blinking in three browsers, fully disabled the in-post `Blog Home` / `Categories` mini-nav rather than trying to stabilize it.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — `injectMiniNav()` now removes any existing mini-nav and does not recreate it; desktop "On this page" sidebar, share buttons, and CTA compacting remain.
+- `README.md`, `wix-embed-snippets.md` — documented that the mini-nav is disabled and bumped the blog helper URL to `blog-sidebar-inject.js?v=15`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the v15 behavior.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, update Wix Custom Code to `blog-sidebar-inject.js?v=15`, and cold-load a live post. The blinking menu should be gone because the menu is no longer rendered.
+**Closed:** In-post blog mini-nav is disabled.
+
+**Next session should:** If Yusuf wants category navigation back later, rebuild it as a Wix-native/static section or reinsert only after a long post-load delay with opacity gating.
+
 ## 2026-05-23 — Codex (Disable blog mini-nav sticky)
 
 **Did:** Corrected the diagnosis: Yusuf's blinking element is the in-post blog `Blog Home / Categories` mini-nav, not the global site header. Disabled the mini-nav's sticky/up-scroll behavior.
