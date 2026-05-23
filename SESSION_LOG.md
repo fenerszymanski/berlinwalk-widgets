@@ -4,6 +4,18 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Codex (Blog nav v16 verified)
+
+**Did:** Yusuf confirmed the v16 blog helper fixed the issue: the in-post menu is back and the right "On this page" sidebar stopped blinking.
+
+**Changed:**
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — marked v16 as live/verified.
+
+**Opened:** None.
+**Closed:** Blog mini-nav/sidebar blinking regression.
+
+**Next session should:** Leave `blog-sidebar-inject.js?v=16` in Wix Custom Code unless a new blog-nav design is intentionally rebuilt.
+
 ## 2026-05-23 — Codex (Restore mini-nav and stop sidebar rebuilds)
 
 **Did:** Fixed the v15 regression: restoring the in-post blog menu while stopping mini-nav absence from repeatedly rebuilding the right "On this page" sidebar.
