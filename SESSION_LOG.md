@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Codex (Restore mini-nav and stop sidebar rebuilds)
+
+**Did:** Fixed the v15 regression: restoring the in-post blog menu while stopping mini-nav absence from repeatedly rebuilding the right "On this page" sidebar.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — restored static non-sticky `Blog Home` / `Categories` mini-nav; removed mini-nav-driven `scheduleInject()` from the MutationObserver; removed mini-nav transition effects that could blink during insertion.
+- `README.md`, `wix-embed-snippets.md` — bumped blog helper URL to `blog-sidebar-inject.js?v=16` and documented the stable static mini-nav.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded v16 behavior.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, update Wix Custom Code to `blog-sidebar-inject.js?v=16`, then cold-load and scroll a live post.
+**Closed:** v15 removed the menu and made the sidebar blink through repeated observer-triggered rebuilds.
+
+**Next session should:** If any flicker remains after v16, instrument `positionSidebar()` visibility toggles rather than changing mini-nav behavior.
+
 ## 2026-05-23 — Codex (Disable blog mini-nav entirely)
 
 **Did:** After v14 still did not stop Yusuf's blinking in three browsers, fully disabled the in-post `Blog Home` / `Categories` mini-nav rather than trying to stabilize it.

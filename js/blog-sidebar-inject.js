@@ -135,7 +135,7 @@
       'body #bw-desktop-cta .bw-close{width:20px!important;height:20px!important;font-size:13px!important;}',
       '.bw-blog-mini-nav{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;margin:0 0 28px;padding:0;width:100%;}',
       '.bw-blog-mini-nav *{box-sizing:border-box;}',
-      '.bw-blog-mini-nav-inner{background:#FAFAF5;border:1px solid rgba(27,94,32,.14);border-radius:8px;box-shadow:0 12px 28px rgba(27,94,32,.07);overflow:hidden;padding:0;transition:box-shadow .18s ease,opacity .18s ease,transform .18s ease;}',
+      '.bw-blog-mini-nav-inner{background:#FAFAF5;border:1px solid rgba(27,94,32,.14);border-radius:8px;box-shadow:0 12px 28px rgba(27,94,32,.07);overflow:hidden;padding:0;transition:none;}',
       '.bw-blog-mini-nav-inner:before{background:#FFE600;content:"";display:block;height:5px;width:100%;}',
       '.bw-blog-mini-nav-content{padding:14px 18px 15px;}',
       '.bw-blog-mini-nav-kicker,.bw-blog-mini-nav-deck{display:none;}',
@@ -461,13 +461,41 @@
     }).join('');
   }
 
-  function injectMiniNav() {
-    if (cleanupMiniNav) {
-      cleanupMiniNav();
-      cleanupMiniNav = null;
+  function injectMiniNav(body) {
+    if (document.querySelector('[' + NAV_MARKER + ']')) return;
+    var anchor = findMiniNavAnchor(body);
+    if (!anchor) return;
+    var nav = document.createElement('nav');
+    nav.className = 'bw-blog-mini-nav';
+    nav.setAttribute(NAV_MARKER, '1');
+    nav.setAttribute('aria-label', 'Blog navigation');
+    nav.style.opacity = '0';
+    nav.style.visibility = 'hidden';
+    nav.innerHTML =
+      '<div class="bw-blog-mini-nav-inner">' +
+        '<div class="bw-blog-mini-nav-content">' +
+          '<p class="bw-blog-mini-nav-kicker">Browse the blog</p>' +
+          '<p class="bw-blog-mini-nav-deck">Fresh Berlin guides, route stories, and practical travel notes.</p>' +
+          '<div class="bw-blog-mini-nav-row">' +
+            '<a class="bw-blog-mini-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
+            '<div class="bw-blog-mini-nav-group">' +
+              '<span class="bw-blog-mini-nav-label">Categories</span>' +
+              '<div class="bw-blog-mini-nav-list">' + renderMiniNavLinks() + '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+    if (anchor.tagName && anchor.tagName.toLowerCase() === 'h1' && anchor.parentNode) {
+      anchor.parentNode.insertBefore(nav, anchor);
+    } else if (anchor.parentNode && anchor !== document.body) {
+      anchor.parentNode.insertBefore(nav, anchor);
+    } else {
+      document.body.insertBefore(nav, document.body.firstChild);
     }
-    var oldNav = document.querySelector('[' + NAV_MARKER + ']');
-    if (oldNav) oldNav.remove();
+    setTimeout(function () {
+      nav.style.opacity = '';
+      nav.style.visibility = '';
+    }, 250);
   }
 
   function compactFloatingCta() {
@@ -535,7 +563,6 @@
     observer = new MutationObserver(function () {
       if (!isPostPage()) return;
       compactFloatingCta();
-      if (!document.querySelector('[' + NAV_MARKER + ']')) scheduleInject();
       if (!document.querySelector('[' + MARKER + ']')) scheduleInject();
     });
     if (document.body) observer.observe(document.body, { childList: true, subtree: true });
