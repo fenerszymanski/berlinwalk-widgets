@@ -397,12 +397,16 @@
       cleanupSidebar();
       cleanupSidebar = null;
     }
+    var old = document.querySelector('[' + MARKER + ']');
+    if (old) old.remove();
+  }
+
+  function removeAllInjectedUi() {
+    removeSidebar();
     if (cleanupMiniNav) {
       cleanupMiniNav();
       cleanupMiniNav = null;
     }
-    var old = document.querySelector('[' + MARKER + ']');
-    if (old) old.remove();
     var oldNav = document.querySelector('[' + NAV_MARKER + ']');
     if (oldNav) oldNav.remove();
   }
@@ -572,7 +576,7 @@
 
   function inject() {
     if (!isPostPage()) {
-      removeSidebar();
+      removeAllInjectedUi();
       return false;
     }
     var body = findPostBody();
@@ -639,7 +643,7 @@
   setInterval(function () {
     if (location.pathname !== lastPath) {
       lastPath = location.pathname;
-      removeSidebar();
+      removeAllInjectedUi();
       bootForCurrentPage();
     }
   }, 300);

@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Codex (Blog mini-nav load flicker)
+
+**Did:** Fixed the blog category mini-nav load flicker where it could appear, disappear, and reappear while Wix finished rendering the post.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — split sidebar-only cleanup from full UI cleanup so sidebar refreshes no longer remove/reinsert the top mini-nav; full cleanup still runs on route changes and non-post pages.
+- `wix-embed-snippets.md` — bumped the blog helper cache-bust URL to `?v=12`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the v12 behavior.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, then update Wix Custom Code to `blog-sidebar-inject.js?v=12` and verify one live blog post on a cold load.
+**Closed:** Mini-nav self-induced remove/reinsert flicker during injection.
+
+**Next session should:** After GitHub Pages deploys, cold-load a live post in an incognito/private window and confirm the category bar stays stable.
+
 ## 2026-05-22 — Codex (Exit intent popup)
 
 **Did:** Built the desktop-only sitewide exit-intent popup and local preview harness; added an optimized World Clock image, thank-you page exclusion, and GA/GTM tracking events.
