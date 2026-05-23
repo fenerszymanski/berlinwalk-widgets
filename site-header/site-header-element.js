@@ -73,17 +73,7 @@ class BWHeaderElement extends HTMLElement {
     if (!header) return;
     this._headerShell = this._findHeaderShell();
     this._lastScrollY = this._getScrollY();
-    this._headerUserScrollIntent = false;
     this._setHeaderHidden(false);
-    this._scrollIntentHandler = () => {
-      this._headerUserScrollIntent = true;
-    };
-    this._scrollIntentTargets = [window, document].filter((target, index, list) => target && list.indexOf(target) === index);
-    this._scrollIntentTargets.forEach((target) => {
-      target.addEventListener('wheel', this._scrollIntentHandler, { passive: true });
-      target.addEventListener('touchmove', this._scrollIntentHandler, { passive: true });
-      target.addEventListener('keydown', this._scrollIntentHandler);
-    });
     let ticking = false;
     const update = () => {
       const y = this._getScrollY();
@@ -93,14 +83,7 @@ class BWHeaderElement extends HTMLElement {
         const pct = docH > 0 ? Math.max(0, Math.min(100, (y / docH) * 100)) : 0;
         progress.style.width = pct + '%';
       }
-      const delta = y - this._lastScrollY;
-      if (!this._headerUserScrollIntent || y < 24) {
-        this._setHeaderHidden(false);
-      } else if (delta > 8) {
-        this._setHeaderHidden(true);
-      } else if (delta < -8) {
-        this._setHeaderHidden(false);
-      }
+      this._setHeaderHidden(false);
       this._lastScrollY = y;
       ticking = false;
     };
@@ -152,11 +135,11 @@ class BWHeaderElement extends HTMLElement {
   _setHeaderHidden(hidden) {
     const target = this._headerShell || this;
     if (!target) return;
-    this._headerHidden = hidden;
-    target.style.setProperty('transition', 'transform 240ms ease', 'important');
-    target.style.setProperty('will-change', 'transform', 'important');
-    target.style.setProperty('transform', hidden ? 'translateY(-110%)' : 'translateY(0)', 'important');
-    target.style.setProperty('pointer-events', hidden ? 'none' : 'auto', 'important');
+    this._headerHidden = false;
+    target.style.setProperty('transition', 'none', 'important');
+    target.style.setProperty('will-change', 'auto', 'important');
+    target.style.setProperty('transform', 'translateY(0)', 'important');
+    target.style.setProperty('pointer-events', 'auto', 'important');
   }
 
   _setupMobile() {

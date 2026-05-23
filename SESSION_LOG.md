@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Codex (Disable header auto-hide)
+
+**Did:** Followed up after the v3 header guard did not eliminate the live flicker; disabled header auto-hide entirely so the top menu remains stable during blog load and scroll.
+
+**Changed:**
+- `site-header/site-header-element.js` — `_setHeaderHidden()` now always pins the Wix header shell at `translateY(0)` with no transform transition; scroll handler only updates the progress bar.
+- `wix-embed-snippets.md` — bumped the Site Header source URL to `site-header-element.js?v=4`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded stable always-visible header behavior.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, update the Wix Custom Element source URL for `bw-site-header` to `https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js?v=4`, then cold-load a blog post.
+**Closed:** Header auto-hide can no longer create appear/disappear flicker.
+
+**Next session should:** If flicker persists after v4 is live, inspect Wix Studio header/container animation itself rather than widget JS.
+
 ## 2026-05-23 — Codex (Site header load flicker)
 
 **Did:** Re-diagnosed the reported blog load flicker as the global site header, not the blog category mini-nav, and hardened `<bw-site-header>` against Wix duplicate/hidden header instances.
