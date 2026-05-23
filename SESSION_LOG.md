@@ -4,6 +4,18 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Claude Code (Add Anna France review to homepage testimonials)
+
+**Did:** Added new 5-star FreeTour.com review from Anna Antraygues (France) to the homepage testimonials carousel. First France entry in the curated list.
+
+**Changed:**
+- `testimonials/data.json` — prepended `anna-france` review (May 2026, 🇫🇷, 5★).
+
+**Opened:** Push `berlinwalk-widgets` so GitHub Pages serves the updated `testimonials/data.json`.
+**Closed:** None.
+
+**Next session should:** If Yusuf wants this review also on `/reviews`, insert it into the Wix Reviews CMS with `source='FreeTour.com'` and the FreeTour review URL once available.
+
 ## 2026-05-23 — Codex (Blog nav v16 verified)
 
 **Did:** Yusuf confirmed the v16 blog helper fixed the issue: the in-post menu is back and the right "On this page" sidebar stopped blinking.
