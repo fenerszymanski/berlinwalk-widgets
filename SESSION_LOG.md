@@ -4,6 +4,34 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Codex (Disable blog mini-nav sticky)
+
+**Did:** Corrected the diagnosis: Yusuf's blinking element is the in-post blog `Blog Home / Categories` mini-nav, not the global site header. Disabled the mini-nav's sticky/up-scroll behavior.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — no longer calls `installMiniNavSticky()`, so the blog mini-nav remains static in normal article flow; removed the mistaken header stabilizer patch.
+- `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=14`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the corrected v14 behavior.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, update Wix Custom Code to `blog-sidebar-inject.js?v=14`, and cold-load a live blog post.
+**Closed:** Blog mini-nav can no longer enter sticky/fixed mode and blink during Wix load/layout changes.
+
+**Next session should:** If the static v14 mini-nav still blinks, inspect whether Wix itself is rerendering the blog post title area and consider delaying mini-nav insertion until after `document.readyState === "complete"`.
+
+## 2026-05-23 — Codex (Blog header stabilizer)
+
+**Did:** Added a blog-page header stabilizer after the standalone header v4 change still did not stop Yusuf's visible blinking.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — on `/post/` pages, injects a header stability CSS patch and repeatedly forces visible `<bw-site-header>` ancestor shells to `translateY(0)`, no transition, visible, and pointer-active for the first 10 seconds.
+- `wix-embed-snippets.md` — bumped the blog helper cache-bust URL to `?v=13`.
+- Project root: `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the v13 blog header stabilizer.
+
+**Opened:** Push/deploy `berlinwalk-widgets`, update Wix Custom Code to `blog-sidebar-inject.js?v=13`, and cold-load a live blog post. Keep Site Header v4 too.
+**Closed:** Blog script now overrides header/container transform flicker even if the header element or Wix shell tries to animate.
+
+**Next session should:** If blinking persists after v13, inspect Wix Studio header animations/breakpoint duplicate setup directly in the editor.
+
 ## 2026-05-23 — Codex (Disable header auto-hide)
 
 **Did:** Followed up after the v3 header guard did not eliminate the live flicker; disabled header auto-hide entirely so the top menu remains stable during blog load and scroll.
