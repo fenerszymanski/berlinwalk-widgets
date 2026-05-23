@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-23 — Codex (Add May 23 tour selfie to gallery)
+
+**Did:** Added Yusuf's May 23 group selfie as the ninth homepage gallery image after matching it to the existing gallery's warmer color grade.
+
+**Changed:**
+- `gallery/images/09-*` — generated JPG/WebP responsive variants plus full-size lightbox assets from `/Users/yusufucuz/Downloads/yusuftourselfie23may.jpeg`.
+- `gallery/data.json` — added photo `09` with English alt/caption text.
+- `gallery/gallery-element.js`, `gallery/index.html` — expanded the gallery mosaic and skeleton from 8 to 9 tiles.
+
+**Opened:** Push/deploy `berlinwalk-widgets` so GitHub Pages serves the new gallery asset/data.
+**Closed:** None.
+
+**Next session should:** After push, cold-load the homepage/gallery with a cache-bust query and confirm the ninth image appears on live Wix.
+
 ## 2026-05-23 — Claude Code (Add Anna France review to homepage + /reviews)
 
 **Did:** Added new 5-star FreeTour.com review from Anna (France) to both the homepage testimonials carousel and the Wix Reviews CMS. First France entry in either surface.

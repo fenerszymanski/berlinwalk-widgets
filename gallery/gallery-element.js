@@ -99,13 +99,14 @@ class BWGalleryElement extends HTMLElement {
           display: grid;
           gap: 12px;
           grid-template-areas:
-            "a a b c d"
-            "a a e f f"
-            "g g e h h";
-          grid-template-columns: repeat(5, minmax(0, 1fr));
-          grid-template-rows: repeat(3, minmax(160px, 1fr));
+            "a a b c d d"
+            "a a e e f f"
+            "g g e e i i"
+            "h h h h i i";
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          grid-template-rows: repeat(4, minmax(150px, 1fr));
           margin-top: 36px;
-          min-height: 680px;
+          min-height: 820px;
         }
 
         .bw-gallery .bw-tile {
@@ -392,10 +393,11 @@ class BWGalleryElement extends HTMLElement {
               "d e"
               "f f"
               "g g"
-              "h h";
+              "h h"
+              "i i";
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            grid-template-rows: repeat(7, minmax(170px, 1fr));
-            min-height: 1180px;
+            grid-template-rows: repeat(8, minmax(170px, 1fr));
+            min-height: 1360px;
           }
 
           .bw-gallery .bw-lightbox {
@@ -502,7 +504,7 @@ class BWGalleryElement extends HTMLElement {
   }
 
   _renderSkeleton() {
-    return ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'].map(area => (
+    return ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'].map(area => (
       `<div class="bw-skeleton-tile" style="grid-area:${area}" aria-hidden="true"></div>`
     )).join('');
   }
