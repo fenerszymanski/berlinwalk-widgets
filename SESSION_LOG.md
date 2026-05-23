@@ -4,17 +4,18 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
-## 2026-05-23 — Claude Code (Add Anna France review to homepage testimonials)
+## 2026-05-23 — Claude Code (Add Anna France review to homepage + /reviews)
 
-**Did:** Added new 5-star FreeTour.com review from Anna Antraygues (France) to the homepage testimonials carousel. First France entry in the curated list.
+**Did:** Added new 5-star FreeTour.com review from Anna (France) to both the homepage testimonials carousel and the Wix Reviews CMS. First France entry in either surface.
 
 **Changed:**
 - `testimonials/data.json` — prepended `anna-france` review (May 2026, 🇫🇷, 5★).
+- Wix: inserted Reviews item `829a40f6-898b-4345-98f4-cb51f757562d` (firstName Anna, lastInitial A, country France, rating 5, source FreeTour.com, sourceUrl `https://www.freetour.com/berlin/berlin-behind-the-landmarks-a-walk-through-power-faith-change`, approved=true). Verified live via `/_functions/listReviews`.
 
-**Opened:** Push `berlinwalk-widgets` so GitHub Pages serves the updated `testimonials/data.json`.
+**Opened:** `tourDate` was set to the review post date (2026-05-23) because actual tour date is unknown. Update via Wix Data PUT if a real date is confirmed. Also push `berlinwalk-widgets` so GitHub Pages serves the updated `testimonials/data.json`.
 **Closed:** None.
 
-**Next session should:** If Yusuf wants this review also on `/reviews`, insert it into the Wix Reviews CMS with `source='FreeTour.com'` and the FreeTour review URL once available.
+**Next session should:** No follow-up unless Yusuf wants to correct the placeholder `tourDate`.
 
 ## 2026-05-23 — Codex (Blog nav v16 verified)
 
