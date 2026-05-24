@@ -112,7 +112,7 @@ class BWToolsHubElement extends HTMLElement {
           display: flex;
           gap: 22px;
           justify-content: space-between;
-          margin: 0 0 38px;
+          margin: 44px 0 0;
           padding: 22px 24px;
         }
 
@@ -515,6 +515,10 @@ class BWToolsHubElement extends HTMLElement {
         </div>
 
         <main class="bw-hub-main">
+          <div class="bw-tools-root" aria-live="polite">
+            ${this._renderSkeleton()}
+          </div>
+
           <section class="bw-embed-cta" aria-labelledby="bw-embed-tools-title">
             <div>
               <h2 id="bw-embed-tools-title">Have a travel site or hotel website?</h2>
@@ -522,10 +526,6 @@ class BWToolsHubElement extends HTMLElement {
             </div>
             <a href="https://www.berlinwalk.com/widgets" class="bw-btn-secondary">Embed these tools</a>
           </section>
-
-          <div class="bw-tools-root" aria-live="polite">
-            ${this._renderSkeleton()}
-          </div>
         </main>
 
         <div class="bw-hub-footer">

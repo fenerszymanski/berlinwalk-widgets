@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Tools hub embed CTA moved)
+
+**Did:** Moved the `Have a travel site or hotel website?` embed CTA from the top of `/berlin-tools` to the bottom, below all tool categories and above the tour footer.
+
+**Changed:**
+- `tools-hub/index.html` — standalone hub CTA now renders after `#tools-root`.
+- `tools-hub/tools-hub-element.js` — Custom Element shell matches the same CTA placement.
+
+**Opened:** Push to GitHub Pages so the live `/berlin-tools` page picks up the lower CTA placement.
+**Closed:** Local Playwright check confirms CTA appears after the last category and before the footer.
+
+**Next session should:** Cold-load `/berlin-tools` after push and verify first viewport starts directly with Tickets & Money.
+
 ## 2026-05-24 — Codex (Gemini Pro tool icons)
 
 **Did:** Generated the 8 missing tools-hub card icons with Gemini Pro as a no-text 4x2 sheet, cropped them, cleaned the baked-in tile backgrounds, and wired them into the hub data.
