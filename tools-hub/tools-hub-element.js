@@ -233,8 +233,43 @@ class BWToolsHubElement extends HTMLElement {
           font-size: 19px;
           font-weight: 800;
           line-height: 1.25;
-          margin-bottom: 10px;
+          margin-bottom: 0;
           overflow-wrap: break-word;
+        }
+
+        .bw-tools-hub .bw-tool-card-head {
+          align-items: flex-start;
+          display: flex;
+          gap: 14px;
+          margin-bottom: 12px;
+          min-height: 66px;
+        }
+
+        .bw-tools-hub .bw-tool-icon {
+          align-items: center;
+          background: #F5FAEC;
+          border: 1px solid rgba(27, 94, 32, 0.14);
+          border-radius: 12px;
+          display: flex;
+          flex: 0 0 64px;
+          height: 64px;
+          justify-content: center;
+          overflow: hidden;
+          width: 64px;
+        }
+
+        .bw-tools-hub .bw-tool-icon img {
+          display: block;
+          height: 64px;
+          object-fit: cover;
+          width: 64px;
+        }
+
+        .bw-tools-hub .bw-tool-icon-fallback {
+          background: linear-gradient(135deg, #FFE600, #7CB342);
+          color: #1B5E20;
+          font-size: 24px;
+          font-weight: 900;
         }
 
         .bw-tools-hub .bw-tool-card p {
@@ -427,6 +462,23 @@ class BWToolsHubElement extends HTMLElement {
             font-size: 18px;
           }
 
+          .bw-tools-hub .bw-tool-card-head {
+            gap: 12px;
+            min-height: 58px;
+          }
+
+          .bw-tools-hub .bw-tool-icon {
+            border-radius: 10px;
+            flex-basis: 56px;
+            height: 56px;
+            width: 56px;
+          }
+
+          .bw-tools-hub .bw-tool-icon img {
+            height: 56px;
+            width: 56px;
+          }
+
           .bw-tools-hub .bw-hub-footer {
             padding: 32px 18px 36px;
           }
@@ -545,11 +597,28 @@ class BWToolsHubElement extends HTMLElement {
   _renderTool(tool) {
     return `
       <a class="bw-tool-card" href="https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}">
-        <h3>${this._escapeHtml(tool.title || '')}</h3>
+        <div class="bw-tool-card-head">
+          ${this._renderToolIcon(tool)}
+          <h3>${this._escapeHtml(tool.title || '')}</h3>
+        </div>
         <p>${this._escapeHtml(tool.lead || '')}</p>
         <span class="bw-tool-cta">Open tool</span>
       </a>
     `;
+  }
+
+  _renderToolIcon(tool) {
+    if (tool && tool.image) {
+      return `
+        <span class="bw-tool-icon" aria-hidden="true">
+          <img src="${this._escapeAttribute(tool.image)}" alt="" loading="lazy" decoding="async">
+        </span>
+      `;
+    }
+
+    const title = String((tool && tool.title) || '?').trim();
+    const letter = title ? title.charAt(0).toUpperCase() : '?';
+    return `<span class="bw-tool-icon bw-tool-icon-fallback" aria-hidden="true">${this._escapeHtml(letter)}</span>`;
   }
 
   _setupAnimations() {

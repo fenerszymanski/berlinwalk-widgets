@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Tools hub card icons)
+
+**Did:** Activated the existing PNG icon URLs on the `/berlin-tools` hub cards and listed the tools that still need icons.
+
+**Changed:**
+- `tools-hub/index.html` — standalone/iframe hub now renders `tool.image` as a 64px card icon, with temporary yellow/lime first-letter fallback for missing images.
+- `tools-hub/tools-hub-element.js` — Custom Element version now matches the same icon/fallback behavior.
+- Root `PROJECT_MEMORY.md` — recorded the 8 missing icon slugs.
+
+**Opened:** Generate/upload icons for `berlin-luggage-storage`, `berlin-currywurst-finder`, `alexanderplatz-parking-map`, `berlin-parking-calculator`, `connectivity-picker`, `berlin-club-picker`, `berlin-wall-remnants`, `german-phrases-quiz`.
+**Closed:** Local render shows 26 cards: 18 real image icons and 8 fallbacks, with no horizontal overflow.
+
+**Next session should:** After push, verify `/berlin-tools` live; then add Wix Media URLs for the 8 new icons to `tools-hub/data.json`.
+
 ## 2026-05-24 — Codex (Blog sidebar v18 repair)
 
 **Did:** Fixed the right sticky "On this page" blog index disappearing after recent mini-nav/PDF form fixes.

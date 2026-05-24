@@ -214,8 +214,43 @@
       font-size: 19px;
       font-weight: 800;
       line-height: 1.25;
-      margin-bottom: 10px;
+      margin-bottom: 0;
       overflow-wrap: break-word;
+    }
+
+    #bw-tools-hub .tool-card-head {
+      align-items: flex-start;
+      display: flex;
+      gap: 14px;
+      margin-bottom: 12px;
+      min-height: 66px;
+    }
+
+    #bw-tools-hub .tool-icon {
+      align-items: center;
+      background: #F5FAEC;
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 12px;
+      display: flex;
+      flex: 0 0 64px;
+      height: 64px;
+      justify-content: center;
+      overflow: hidden;
+      width: 64px;
+    }
+
+    #bw-tools-hub .tool-icon img {
+      display: block;
+      height: 64px;
+      object-fit: cover;
+      width: 64px;
+    }
+
+    #bw-tools-hub .tool-icon-fallback {
+      background: linear-gradient(135deg, var(--brand-yellow), var(--brand-lime));
+      color: var(--brand-green);
+      font-size: 24px;
+      font-weight: 900;
     }
 
     #bw-tools-hub .tool-card p {
@@ -363,6 +398,23 @@
         font-size: 18px;
       }
 
+      #bw-tools-hub .tool-card-head {
+        gap: 12px;
+        min-height: 58px;
+      }
+
+      #bw-tools-hub .tool-icon {
+        border-radius: 10px;
+        flex-basis: 56px;
+        height: 56px;
+        width: 56px;
+      }
+
+      #bw-tools-hub .tool-icon img {
+        height: 56px;
+        width: 56px;
+      }
+
       #bw-tools-hub .hub-footer {
         padding: 32px 18px 36px;
       }
@@ -413,6 +465,26 @@
         return element;
       }
 
+      function createToolIcon(tool) {
+        var icon = document.createElement('span');
+        icon.className = 'tool-icon';
+        icon.setAttribute('aria-hidden', 'true');
+
+        if (tool.image) {
+          var img = document.createElement('img');
+          img.src = tool.image;
+          img.alt = '';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          icon.appendChild(img);
+          return icon;
+        }
+
+        icon.className += ' tool-icon-fallback';
+        icon.textContent = (tool.title || '?').trim().charAt(0).toUpperCase() || '?';
+        return icon;
+      }
+
       function navigateParent(event) {
         var link = event.target.closest('a[href^="https://www.berlinwalk.com/"]');
         if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
@@ -455,7 +527,12 @@
             card.href = toolsBaseUrl + tool.slug;
             card.target = '_top';
 
-            card.appendChild(createTextElement('h3', '', tool.title));
+            var head = document.createElement('div');
+            head.className = 'tool-card-head';
+            head.appendChild(createToolIcon(tool));
+            head.appendChild(createTextElement('h3', '', tool.title));
+
+            card.appendChild(head);
             card.appendChild(createTextElement('p', '', tool.lead));
             card.appendChild(createTextElement('span', 'tool-cta', 'Open tool →'));
             grid.appendChild(card);
