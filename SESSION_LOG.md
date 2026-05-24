@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (What's Open icon wired)
+
+**Did:** Added the generated storefront/calendar/check icon for `whats-open-in-berlin-today` and removed the homepage fallback-letter path.
+
+**Changed:**
+- `tools-home/icons/` — added `whats-open-in-berlin-today.png` and `whats-open-in-berlin-today-160.png`.
+- `tools-home/data.json`, `tools-hub/data.json` — set the tool `image` to the GitHub Pages 160px icon URL.
+- `tools-home/icons/manifest.json` — recorded the generated source and output paths.
+
+**Opened:** Push to GitHub Pages so the absolute icon URL resolves on the live homepage and `/berlin-tools`.
+**Closed:** JSON validation passes; icon files are 512x512 and 160x160.
+
+**Next session should:** After push, cold-load the homepage tools grid and `/berlin-tools` to confirm `whats-open-in-berlin-today` shows the new icon instead of the fallback letter.
+
 ## 2026-05-24 — Codex (Blog sidebar header gate v24)
 
 **Did:** Kept the desktop blog sidebar top-anchored, but gated visibility until the site header/menu has cleared.
