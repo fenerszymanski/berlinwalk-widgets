@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Blog sidebar nav v22)
+
+**Did:** Moved the blog `Blog Home` / `Categories` navigation into the right desktop `On this page` sidebar to avoid Wix post header/body flicker.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — removed mini-nav creation/timing/repair logic; sidebar now renders `Blog Home` and category pills above the index and removes stale `[data-bw-blog-mini-nav]` nodes from older versions.
+- `README.md`, `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=22` and documented sidebar-only blog navigation.
+
+**Opened:** Push to GitHub Pages and update Wix Custom Code from `?v=21` to `?v=22`.
+**Closed:** Local mock `/post/` test: old mini-nav absent, sidebar nav exists above `On this page`, 6 category links render, and sidebar is visible.
+
+**Next session should:** After v22 is active, cold-load the Berlin Wall post and confirm the right sidebar nav stays stable with no Quick Summary/header flicker.
+
 ## 2026-05-24 — Codex (Blog mini-nav v21 stable content placement)
 
 **Did:** Changed strategy for the flickering blog mini-nav: stop fighting Wix's volatile post header/title render area.

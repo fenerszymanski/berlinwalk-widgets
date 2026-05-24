@@ -8,27 +8,17 @@
   var LOG = '[BW blog-sidebar]';
   var MAX_ITEMS = 12;
   var MIN_DESKTOP_WIDTH = 900;
-  var MINI_NAV_MIN_DELAY = 750;
-  var MINI_NAV_MAX_DELAY = 1500;
-  var MINI_NAV_STABLE_MS = 250;
-  var MINI_NAV_POLL_MS = 150;
-  var MINI_NAV_REPAIR_DELAY = 900;
   var SIDEBAR_WIDTH = 236;
   var SIDEBAR_GAP = 12;
   var SIDEBAR_TOP = 150;
   var lastPath = location.pathname;
   var observer = null;
   var resizeTimer = null;
-  var miniNavTimer = null;
-  var miniNavBootAt = 0;
-  var miniNavStableSince = 0;
-  var miniNavLastBodyKey = '';
   var sidebarRepairTimer = null;
   var hiddenSidebarSince = 0;
   var lastSidebarRepairAt = 0;
   var currentSidebarState = null;
   var cleanupSidebar = null;
-  var cleanupMiniNav = null;
 
   function isPostPage() {
     return location.pathname.indexOf('/post/') === 0;
@@ -123,9 +113,17 @@
     style.textContent = [
       '.bw-blog-sidebar{position:fixed;top:' + SIDEBAR_TOP + 'px;width:236px;max-height:calc(100vh - 212px);z-index:9000;font-family:Montserrat,Arial,sans-serif;color:#212121;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;}',
       '.bw-blog-sidebar.bw-blog-sidebar-visible{opacity:1;pointer-events:auto;}',
+      '.bw-blog-sidebar-nav{background:#FAFAF5;border:1px solid rgba(27,94,32,.16);border-radius:8px;box-shadow:0 10px 28px rgba(27,94,32,.08);margin:0 0 12px;overflow:hidden;padding:12px;}',
+      '.bw-blog-sidebar-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;border-radius:999px;color:#FFFFFF;display:flex;font-size:12px;font-weight:900;justify-content:center;line-height:1;min-height:32px;padding:0 12px;text-decoration:none;white-space:nowrap;}',
+      '.bw-blog-sidebar-nav-home:hover,.bw-blog-sidebar-nav-home:focus-visible{background:#164F1B;color:#FFFFFF;outline:0;}',
+      '.bw-blog-sidebar-nav-label{color:#4E5A4E;display:block;font-size:10px;font-weight:900;letter-spacing:1.3px;line-height:1;margin:12px 0 8px;text-transform:uppercase;}',
+      '.bw-blog-sidebar-nav-list{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none;}',
+      '.bw-blog-sidebar-nav-link{align-items:center;background:#FFFFFF;border:1px solid rgba(27,94,32,.14);border-radius:999px;color:#1B5E20;display:inline-flex;font-size:11px;font-weight:850;line-height:1.1;min-height:28px;padding:0 9px;position:relative;text-decoration:none;white-space:nowrap;}',
+      '.bw-blog-sidebar-nav-link:hover,.bw-blog-sidebar-nav-link:focus-visible{background:#FFFDF0;border-color:rgba(27,94,32,.28);color:#1B5E20;outline:0;}',
+      '.bw-blog-sidebar-nav-link-active{background:#FFF9B8;border-color:#FFE600;color:#1B5E20;font-weight:900;}',
       '.bw-blog-sidebar-progress{height:4px;background:rgba(27,94,32,.10);border-radius:999px;margin:0 0 12px;overflow:hidden;}',
       '.bw-blog-sidebar-progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#1B5E20,#7CB342,#FFE600);border-radius:999px;transition:width .08s linear;}',
-      '.bw-blog-sidebar-card{background:#FAFAF5;border:1px solid rgba(27,94,32,.16);border-radius:8px;box-shadow:0 10px 28px rgba(27,94,32,.08);max-height:calc(100vh - 274px);overflow-y:auto;padding:16px 14px;scrollbar-width:thin;}',
+      '.bw-blog-sidebar-card{background:#FAFAF5;border:1px solid rgba(27,94,32,.16);border-radius:8px;box-shadow:0 10px 28px rgba(27,94,32,.08);max-height:calc(100vh - 434px);overflow-y:auto;padding:16px 14px;scrollbar-width:thin;}',
       '.bw-blog-sidebar-title{color:#4E5A4E;font-size:11px;font-weight:800;letter-spacing:1.4px;line-height:1;text-transform:uppercase;margin:0 0 12px;}',
       '.bw-blog-sidebar-list{display:flex;flex-direction:column;gap:1px;margin:0;padding:0;list-style:none;}',
       '.bw-blog-sidebar-link{border-left:3px solid transparent;border-radius:0 6px 6px 0;color:#4E5A4E;display:block;font-size:12.8px;font-weight:700;line-height:1.22;padding:5px 7px 5px 10px;text-decoration:none;transition:background .16s ease,border-color .16s ease,color .16s ease;}',
@@ -146,26 +144,6 @@
       'body #bw-sticky-cta .bw-sub{display:none!important;}',
       'body #bw-desktop-cta .bw-arrow{width:27px!important;height:27px!important;font-size:13px!important;margin:5px 5px 5px 2px!important;}',
       'body #bw-desktop-cta .bw-close{width:20px!important;height:20px!important;font-size:13px!important;}',
-      '.bw-blog-mini-nav{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;margin:0 0 28px;padding:0;width:100%;}',
-      '.bw-blog-mini-nav *{box-sizing:border-box;}',
-      '.bw-blog-mini-nav-inner{background:#FAFAF5;border:1px solid rgba(27,94,32,.14);border-radius:8px;box-shadow:0 12px 28px rgba(27,94,32,.07);overflow:hidden;padding:0;transition:none;}',
-      '.bw-blog-mini-nav-inner:before{background:#FFE600;content:"";display:block;height:5px;width:100%;}',
-      '.bw-blog-mini-nav-content{padding:14px 18px 15px;}',
-      '.bw-blog-mini-nav-kicker,.bw-blog-mini-nav-deck{display:none;}',
-      '.bw-blog-mini-nav-row{align-items:center;display:flex;gap:10px;width:100%;}',
-      '.bw-blog-mini-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;border-radius:999px;color:#FFFFFF;display:inline-flex;flex:0 0 auto;font-size:13px;font-weight:900;justify-content:center;line-height:1;min-height:34px;padding:0 16px;text-decoration:none;white-space:nowrap;}',
-      '.bw-blog-mini-nav-home:hover,.bw-blog-mini-nav-home:focus-visible{background:#164F1B;color:#FFFFFF;outline:0;}',
-      '.bw-blog-mini-nav-group{align-items:center;display:flex;flex:1 1 auto;gap:10px;min-width:0;padding-top:0;}',
-      '.bw-blog-mini-nav-label{color:#4E5A4E;display:inline-flex;flex:0 0 auto;font-size:10px;font-weight:900;letter-spacing:1.5px;line-height:34px;text-transform:uppercase;white-space:nowrap;}',
-      '.bw-blog-mini-nav-list{display:flex;flex:1 1 auto;flex-wrap:wrap;gap:6px;min-width:0;}',
-      '.bw-blog-mini-nav-link{align-items:center;background:#FFFFFF;border:1px solid rgba(27,94,32,.14);border-radius:999px;color:#1B5E20;display:inline-flex;flex:0 0 auto;font-size:12px;font-weight:850;justify-content:center;line-height:1.15;min-height:34px;padding:0 11px;position:relative;text-align:center;text-decoration:none;white-space:nowrap;}',
-      '.bw-blog-mini-nav-link:after{background:#FFE600;border-radius:999px;bottom:5px;content:"";height:4px;left:11px;opacity:0;position:absolute;right:11px;transform:scaleX(.55);transition:opacity .16s ease,transform .16s ease;}',
-      '.bw-blog-mini-nav-link:hover,.bw-blog-mini-nav-link:focus-visible{background:#FFFDF0;border-color:rgba(27,94,32,.28);color:#1B5E20;outline:0;}',
-      '.bw-blog-mini-nav-link:hover:after,.bw-blog-mini-nav-link:focus-visible:after{opacity:.75;transform:scaleX(1);}',
-      '.bw-blog-mini-nav-link-active{background:#FFF9B8;border-color:#FFE600;color:#1B5E20;font-weight:900;}',
-      '.bw-blog-mini-nav-link-active:after{opacity:1;transform:scaleX(1);}',
-      '@media (max-width:1100px){.bw-blog-mini-nav-content{padding:14px 16px 15px;}.bw-blog-mini-nav-row{align-items:flex-start;gap:12px;}.bw-blog-mini-nav-group{align-items:flex-start;display:grid;flex:1 1 auto;gap:8px;grid-template-columns:auto minmax(0,1fr);}.bw-blog-mini-nav-list{gap:7px;}.bw-blog-mini-nav-link{font-size:12px;min-height:34px;padding:0 11px;}}',
-      '@media (max-width:700px){.bw-blog-mini-nav{margin:0 0 22px;}.bw-blog-mini-nav-inner{border-radius:8px;}.bw-blog-mini-nav-content{padding:7px 8px 8px;}.bw-blog-mini-nav-row{align-items:center;display:flex;gap:8px;}.bw-blog-mini-nav-home{display:flex;flex:0 0 auto;font-size:12px;min-height:34px;padding:0 12px;width:auto;}.bw-blog-mini-nav-group{display:block;flex:1 1 auto;min-width:0;padding-top:0;}.bw-blog-mini-nav-label{display:none;}.bw-blog-mini-nav-list{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;padding-bottom:1px;scrollbar-width:none;}.bw-blog-mini-nav-list::-webkit-scrollbar{display:none;}.bw-blog-mini-nav-link{display:flex;flex:0 0 auto;font-size:11.5px;min-height:34px;padding:0 11px;white-space:nowrap;}.bw-blog-mini-nav-link:after{bottom:5px;left:11px;right:11px;}}',
       '@media (max-width:899px){.bw-blog-sidebar{display:none!important;}}'
     ].join('\n');
     document.head.appendChild(style);
@@ -180,6 +158,32 @@
     return '#';
   }
 
+  function getActiveCategory() {
+    var path = location.pathname.toLowerCase();
+    if (/(german|language|speak)/.test(path)) return 'german-language';
+    if (/(myth|mistake|wrong|really)/.test(path)) return 'berlin-myths';
+    if (/(route|itinerary|walk|stops|alexanderplatz|hackescher)/.test(path)) return 'tour-route';
+    if (/(before|after|then|now|old|rebuilt|changed)/.test(path)) return 'before-after';
+    if (/(history|wall|cold-war|reichstag|museum|church|death|nikolaiviertel)/.test(path)) return 'berlin-history';
+    return 'tourist-tips';
+  }
+
+  function renderSidebarCategoryLinks() {
+    var active = getActiveCategory();
+    var links = [
+      ['tour-route', 'Tour Route', 'https://www.berlinwalk.com/blog/categories/tour-route'],
+      ['berlin-myths', 'Berlin Myths', 'https://www.berlinwalk.com/blog/categories/berlin-myths'],
+      ['tourist-tips', 'Tourist Tips', 'https://www.berlinwalk.com/blog/categories/tourist-tips'],
+      ['before-after', 'Before & After', 'https://www.berlinwalk.com/blog/categories/before-after'],
+      ['german-language', 'German Language', 'https://www.berlinwalk.com/blog/categories/german-language'],
+      ['berlin-history', 'Berlin History', 'https://www.berlinwalk.com/blog/categories/berlin-history']
+    ];
+    return links.map(function (link) {
+      var cls = 'bw-blog-sidebar-nav-link' + (link[0] === active ? ' bw-blog-sidebar-nav-link-active' : '');
+      return '<li><a class="' + cls + '" href="' + link[2] + '" target="_top">' + escapeHtml(link[1]) + '</a></li>';
+    }).join('');
+  }
+
   function createSidebar(items) {
     var aside = document.createElement('aside');
     aside.setAttribute(MARKER, '1');
@@ -191,6 +195,11 @@
     }).join('');
 
     aside.innerHTML =
+      '<div class="bw-blog-sidebar-nav" aria-label="Blog navigation">' +
+        '<a class="bw-blog-sidebar-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
+        '<span class="bw-blog-sidebar-nav-label">Categories</span>' +
+        '<ul class="bw-blog-sidebar-nav-list">' + renderSidebarCategoryLinks() + '</ul>' +
+      '</div>' +
       '<div class="bw-blog-sidebar-progress" aria-hidden="true"><span></span></div>' +
       '<div class="bw-blog-sidebar-card">' +
         '<p class="bw-blog-sidebar-title">On this page</p>' +
@@ -408,12 +417,12 @@
   }
 
   function removeAllInjectedUi() {
-    clearTimeout(miniNavTimer);
     removeSidebar();
-    if (cleanupMiniNav) {
-      cleanupMiniNav();
-      cleanupMiniNav = null;
-    }
+    var oldNav = document.querySelector('[' + NAV_MARKER + ']');
+    if (oldNav) oldNav.remove();
+  }
+
+  function removeMiniNav() {
     var oldNav = document.querySelector('[' + NAV_MARKER + ']');
     if (oldNav) oldNav.remove();
   }
@@ -427,156 +436,6 @@
       if (cleanText(h.textContent).length > 8) return h;
     }
     return null;
-  }
-
-  function findMiniNavAnchor(body) {
-    var title = findPostTitle();
-    if (title && title.parentNode) return title;
-    if (!body) return null;
-    // Try increasingly broad ancestors; some Wix templates wrap differently.
-    var candidates = [
-      body.closest('article'),
-      body.closest('[data-hook="post-page"]'),
-      body.closest('[data-hook="post-main"]'),
-      body.closest('main'),
-      document.querySelector('[data-hook="post-page"]'),
-      document.querySelector('[data-hook="post-header"]'),
-      document.querySelector('article'),
-      document.querySelector('main')
-    ];
-    for (var i = 0; i < candidates.length; i++) {
-      if (candidates[i] && candidates[i].parentNode) return candidates[i];
-    }
-    // Last-resort fallback: insert at top of body so the nav is never silently lost.
-    return body;
-  }
-
-  function isStablePostContent(body) {
-    return !!(body && body.nodeType === 1 && body !== document.body && body.matches && body.matches([
-      '[data-hook="post-content"]',
-      '[data-hook="rich-content-viewer"]',
-      '[data-hook="rich-content"]',
-      '.post-content',
-      '.rich-content',
-      '.blog-post-page-content'
-    ].join(',')));
-  }
-
-  function getActiveCategory() {
-    var path = location.pathname.toLowerCase();
-    if (/(german|language|speak)/.test(path)) return 'german-language';
-    if (/(myth|mistake|wrong|really)/.test(path)) return 'berlin-myths';
-    if (/(route|itinerary|walk|stops|alexanderplatz|hackescher)/.test(path)) return 'tour-route';
-    if (/(before|after|then|now|old|rebuilt|changed)/.test(path)) return 'before-after';
-    if (/(history|wall|cold-war|reichstag|museum|church|death|nikolaiviertel)/.test(path)) return 'berlin-history';
-    return 'tourist-tips';
-  }
-
-  function renderMiniNavLinks() {
-    var active = getActiveCategory();
-    var links = [
-      ['tour-route', 'Tour Route', 'https://www.berlinwalk.com/blog/categories/tour-route'],
-      ['berlin-myths', 'Berlin Myths', 'https://www.berlinwalk.com/blog/categories/berlin-myths'],
-      ['tourist-tips', 'Tourist Tips', 'https://www.berlinwalk.com/blog/categories/tourist-tips'],
-      ['before-after', 'Before & After', 'https://www.berlinwalk.com/blog/categories/before-after'],
-      ['german-language', 'German Language', 'https://www.berlinwalk.com/blog/categories/german-language'],
-      ['berlin-history', 'Berlin History', 'https://www.berlinwalk.com/blog/categories/berlin-history']
-    ];
-    return links.map(function (link) {
-      var cls = 'bw-blog-mini-nav-link' + (link[0] === active ? ' bw-blog-mini-nav-link-active' : '');
-      return '<a class="' + cls + '" href="' + link[2] + '" target="_top">' + escapeHtml(link[1]) + '</a>';
-    }).join('');
-  }
-
-  function injectMiniNav(body) {
-    if (document.querySelector('[' + NAV_MARKER + ']')) return;
-    var nav = document.createElement('nav');
-    nav.className = 'bw-blog-mini-nav';
-    nav.setAttribute(NAV_MARKER, '1');
-    nav.setAttribute('aria-label', 'Blog navigation');
-    nav.innerHTML =
-      '<div class="bw-blog-mini-nav-inner">' +
-        '<div class="bw-blog-mini-nav-content">' +
-          '<p class="bw-blog-mini-nav-kicker">Browse the blog</p>' +
-          '<p class="bw-blog-mini-nav-deck">Fresh Berlin guides, route stories, and practical travel notes.</p>' +
-          '<div class="bw-blog-mini-nav-row">' +
-            '<a class="bw-blog-mini-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
-            '<div class="bw-blog-mini-nav-group">' +
-              '<span class="bw-blog-mini-nav-label">Categories</span>' +
-              '<div class="bw-blog-mini-nav-list">' + renderMiniNavLinks() + '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-      '</div>';
-
-    if (isStablePostContent(body)) {
-      body.insertBefore(nav, body.firstChild);
-      return;
-    }
-
-    var anchor = findMiniNavAnchor(body);
-    if (!anchor) return;
-    if (anchor.tagName && anchor.tagName.toLowerCase() === 'h1' && anchor.parentNode) {
-      anchor.parentNode.insertBefore(nav, anchor);
-    } else if (anchor.parentNode && anchor !== document.body) {
-      anchor.parentNode.insertBefore(nav, anchor);
-    } else {
-      document.body.insertBefore(nav, document.body.firstChild);
-    }
-  }
-
-  function miniNavBodyStable(body) {
-    if (!body || !isVisible(body)) return false;
-    var rect = body.getBoundingClientRect();
-    var firstText = body.querySelector('p, h2, h3, li, blockquote');
-    var key = [
-      Math.round(rect.top),
-      Math.round(rect.height),
-      cleanText(firstText ? firstText.textContent : body.textContent).slice(0, 48)
-    ].join(':');
-    var now = Date.now();
-    if (key !== miniNavLastBodyKey) {
-      miniNavLastBodyKey = key;
-      miniNavStableSince = now;
-      return false;
-    }
-    return now - miniNavStableSince >= MINI_NAV_STABLE_MS;
-  }
-
-  function tryInitialMiniNav() {
-    if (!isPostPage()) return;
-    if (document.querySelector('[' + NAV_MARKER + ']')) return;
-    var body = findPostBody();
-    if (!body) {
-      scheduleInitialMiniNav(MINI_NAV_POLL_MS);
-      return;
-    }
-    var elapsed = Date.now() - miniNavBootAt;
-    var stable = isStablePostContent(body) ? miniNavBodyStable(body) : true;
-    if (elapsed >= MINI_NAV_MIN_DELAY && (stable || elapsed >= MINI_NAV_MAX_DELAY)) {
-      injectStyle();
-      injectMiniNav(body);
-      return;
-    }
-    scheduleInitialMiniNav(MINI_NAV_POLL_MS);
-  }
-
-  function scheduleInitialMiniNav(delay) {
-    clearTimeout(miniNavTimer);
-    miniNavTimer = setTimeout(tryInitialMiniNav, delay);
-  }
-
-  function scheduleMiniNav(delay) {
-    clearTimeout(miniNavTimer);
-    var wait = typeof delay === 'number' ? delay : MINI_NAV_REPAIR_DELAY;
-    miniNavTimer = setTimeout(function () {
-      if (!isPostPage()) return;
-      if (document.querySelector('[' + NAV_MARKER + ']')) return;
-      var body = findPostBody();
-      if (!body) return;
-      injectStyle();
-      injectMiniNav(body);
-    }, wait);
   }
 
   function compactFloatingCta() {
@@ -695,10 +554,7 @@
   }
 
   function bootForCurrentPage() {
-    miniNavBootAt = Date.now();
-    miniNavStableSince = 0;
-    miniNavLastBodyKey = '';
-    scheduleInitialMiniNav(MINI_NAV_POLL_MS);
+    removeMiniNav();
     setTimeout(inject, 900);
     [1600, 2800, 4500].forEach(function (delay) {
       setTimeout(function () {
@@ -710,10 +566,7 @@
     observer = new MutationObserver(function () {
       if (!isPostPage()) return;
       compactFloatingCta();
-      if (!document.querySelector('[' + NAV_MARKER + ']')) {
-        if (Date.now() - miniNavBootAt < MINI_NAV_MAX_DELAY) scheduleInitialMiniNav(MINI_NAV_POLL_MS);
-        else scheduleMiniNav(MINI_NAV_REPAIR_DELAY);
-      }
+      removeMiniNav();
       if (!document.querySelector('[' + MARKER + ']')) scheduleInject();
       else scheduleSidebarRepair();
     });

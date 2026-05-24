@@ -149,17 +149,15 @@ These are loaded through Wix Custom Code rather than iframe embeds:
 
 - `js/lead-form-inject.js` - injects the Berlin Survival Map lead form mid-post.
 - `js/cta-inject.js` - injects the global tour CTA near the end of posts.
-- `js/blog-sidebar-inject.js` - adds a static in-post `Blog Home` / `Categories`
-  menu above the post title and builds a desktop-only sticky "On this page"
-  sidebar from visible H2/H3 headings. It shortens the floating booking CTA copy
-  to `Book Now`. The sidebar hides below 900px, starts with the post H1,
-  disappears near the article end, sits close to the article edge, and its long
-  heading list scrolls inside the card when needed. The mini-nav is not sticky,
-  and renders inside the stable post content body, just before the article text,
-  instead of the volatile Wix post header/title area. Its absence no longer
-  triggers full sidebar rebuilds. The sidebar repairs stale heading/body
-  references if Wix replaces the post body after initial render. The script
-  skips non-`/post/` URLs.
+- `js/blog-sidebar-inject.js` - builds a desktop-only sticky "On this page"
+  sidebar from visible H2/H3 headings and puts a compact `Blog Home` /
+  `Categories` block above the index inside that same sidebar. It shortens the
+  floating booking CTA copy to `Book Now`. The sidebar hides below 900px, starts
+  with the post H1, disappears near the article end, sits close to the article
+  edge, and its long heading list scrolls inside the card when needed. It no
+  longer injects a mini-nav into Wix-managed blog header or article body DOM,
+  because that caused header/Quick Summary flicker. The script skips
+  non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
   `sessionStorage`, links the primary CTA to the booking route, and posts the
