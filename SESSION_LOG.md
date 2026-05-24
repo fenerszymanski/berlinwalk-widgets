@@ -4,6 +4,50 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex
+
+**Did:** Reworked the blog lead form into the Berlin Survival Map capture widget and removed the bottom `by berlinwalk.com` attribution bar.
+
+**Changed:**
+- `lead-form/index.html` — Survival Map copy, cover image, immediate download button after subscribe, local resize script, no `brand.js` attribution.
+- `lead-form/assets/berlin-survival-map-cover.jpg` — optimized cover image for the form mockup.
+- `js/lead-form-inject.js` — injects the Survival Map form mid-post with 320px fallback height.
+- `js/exit-intent-popup.js` — updated PDF CTA/success copy and download link.
+- `README.md`, `wix-embed-snippets.md`, `AGENTS.md` — documented the Survival Map lead form.
+- Wix Media: uploaded the PDF; public URL is `https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_fbb1e603406b4ac4b7a15628a0288e40.pdf`.
+
+**Opened:** Push to GitHub Pages, then update/verify Wix Custom Code cache if needed.
+**Closed:** Lead form no longer shows the attribution footer.
+
+**Next session should:** After push, cold-load a live `/post/` URL and confirm the form renders, captures email, and shows the direct PDF download.
+
+## 2026-05-24 — Claude Code
+
+**Did:** Converted the inline HTML quiz from the `50 German phrases` blog post into a Custom Element; added to tools-hub.
+
+**Changed:**
+- `german-phrases-quiz/german-phrases-quiz-element.js` — new `<bw-german-phrases-quiz>` Custom Element (card layout, green header, auto-advance 1.8s, 4 result tiers, Try Again resets state internally)
+- `german-phrases-quiz/index.html` — standalone preview page
+- `tools-hub/data.json` — added slug `german-phrases-quiz`, category Discovery, embedHeight 620
+
+**Opened:** Wix BerlinTools CMS row not yet inserted (`/tools/german-phrases-quiz` page doesn't exist yet — needs API insert or Content Studio Widget Builder after push).
+**Closed:** —
+
+**Next session should:** Push `berlinwalk-widgets` to GitHub, then insert BerlinTools CMS row via `insert-berlintool` API (or Content Studio Widget Builder) to create the live `/tools/german-phrases-quiz` page.
+
+## 2026-05-24 — Claude Code (Hero lead copy: medieval Berlin USP)
+
+**Did:** Rewrote homepage hero description to lead with the medieval Berlin angle (the original USP) instead of the generic "city's layers" line.
+
+**Changed:**
+- `hero-home/hero-home-element.js` — replaced `bw-hero-lead` paragraph with: "Berlin was founded in 1237, but most tours skip straight to 1933. In about 2 hours, walk the medieval core from Alexanderplatz to Hackescher Markt with Yusuf, and see the city the way a Berliner reads it: oldest streets first." No em dashes (brand rule).
+- External: Yusuf pushed to GitHub; GitHub Pages will serve the updated element.
+
+**Opened:** None.
+**Closed:** Hero copy no longer omits the medieval/old-Berlin USP that the previous header revision had dropped.
+
+**Next session should:** Cold-load `berlinwalk.com` with a cache-bust query and confirm the new lead paragraph is live in the hero.
+
 ## 2026-05-23 — Codex (Add May 23 tour selfie to gallery)
 
 **Did:** Added Yusuf's May 23 group selfie as the ninth homepage gallery image after matching it to the existing gallery's warmer color grade.

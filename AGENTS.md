@@ -24,7 +24,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `hero-home/` | Homepage conversion hero Custom Element. `hero-home-element.js` defines `<bw-hero-home>` with a real tour photo background, literal `Free Berlin Walking Tour` H1, booking CTA, meeting point CTA, route line, 9.8/12/~2h/tip-based proof points, and reviews link. |
 | `testimonials/`, `route/`, `faq/`, `gallery/`, etc. | Homepage Custom Elements — see `README.md` for the full list. `stats/` is deprecated because the new hero already carries the tour facts; its element is now a hidden no-op safety net. |
 | `guide-home/` | Homepage Custom Element for the shorter `Meet Yusuf` teaser section. `guide-home-element.js` defines `<bw-guide-home>` with the Rotes Rathaus guide photo, compact route/trust proof points, and links to `/the-guide` + booking. |
-| `lead-form/` | Berlin Essentials email capture iframe widget |
+| `lead-form/` | Berlin Survival Map email capture iframe widget |
 | `blog-home/` | Homepage Custom Element for the editorial blog teaser. `blog-home-element.js` defines `<bw-blog-home>` with the `Berlin Travel Notes` layout: one featured practical guide, three note cards, image-led design, and a CTA to `/blog`. `data.json` is the curated mini-CMS for the four homepage posts. |
 | `meeting-point/` | Custom Element page for `berlinwalk.com/meeting-point`. `meeting-point-element.js` defines `<bw-meeting-point>` with a real World Clock photo, stylized wayfinding map, tour-day details, and booking/map CTAs. `index.html` is the standalone GitHub Pages preview/fallback. |
 | `the-guide/` | Custom Element page for `berlinwalk.com/the-guide`. `the-guide-element.js` defines `<bw-the-guide>` with Yusuf profile copy, real profile photo, tour approach, route logic, reviews, and booking CTAs. `SEO_SETTINGS.md` has Wix-ready SEO tags/schema. |
@@ -53,7 +53,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 - `berlinwalk.com/tools` — directory grid of all 19+ free Berlin widgets, rendered from `tools-hub/data.json`
 - `berlinwalk.com/tools/<slug>` — dynamic per-tool page bound to BerlinTools CMS collection
 - `berlinwalk.com/widgets` — third-party embed gallery, rendered from `tools-hub/data.json` via `widgets-hub/`
-- `https://www.berlinwalk.com/_functions/subscribe` — Berlin Essentials lead form
+- `https://www.berlinwalk.com/_functions/subscribe` — Berlin Survival Map lead form
 - `https://www.berlinwalk.com/_functions/submitReview` — POST, review submission
 - `https://www.berlinwalk.com/_functions/listReviews` — GET, approved reviews
 - `https://www.berlinwalk.com/_functions/cancelBookingJourney` — POST, halts 7-email runs on cancellation

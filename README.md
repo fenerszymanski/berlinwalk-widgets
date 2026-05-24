@@ -13,7 +13,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 
 ## Widgets
 
-- `lead-form/` - Berlin Essentials email capture form.
+- `lead-form/` - Berlin Survival Map email capture form.
 - `quick-summary/` - reusable quick summary and optional audio player.
 - `hero-home/` - `bw-hero-home` homepage conversion hero Custom Element.
 - `blog-home/` - `bw-blog-home` homepage editorial blog teaser Custom Element.
@@ -35,7 +35,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `route/` - `bw-route` homepage interactive illustrated route map Custom Element.
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
 - `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
-- `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin Essentials PDF signup.
+- `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin Survival Map signup.
 
 ## Project Memory
 
@@ -136,8 +136,8 @@ For homepage SEO sections, use Wix Studio Custom Element:
 Suggested Wix embed height for the lead form: `320px`.
 
 Wix blog embeds may use a single fixed height across desktop and mobile.
-Use `320px` as the shared value to avoid iframe-internal scrolling on mobile
-without leaving a large blank area on desktop.
+Use `320px` as the safe fallback height; the Wix auto-resize listener should
+still tighten the iframe when it can.
 
 Suggested Wix embed height for quick summaries:
 
@@ -147,7 +147,7 @@ Suggested Wix embed height for quick summaries:
 
 These are loaded through Wix Custom Code rather than iframe embeds:
 
-- `js/lead-form-inject.js` - injects the Berlin Essentials lead form mid-post.
+- `js/lead-form-inject.js` - injects the Berlin Survival Map lead form mid-post.
 - `js/cta-inject.js` - injects the global tour CTA near the end of posts.
 - `js/blog-sidebar-inject.js` - adds a static in-post `Blog Home` / `Categories`
   menu above the post title and builds a desktop-only sticky "On this page"
@@ -160,4 +160,4 @@ These are loaded through Wix Custom Code rather than iframe embeds:
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
   `sessionStorage`, links the primary CTA to the booking route, and posts the
-  Berlin Essentials PDF signup to `https://www.berlinwalk.com/_functions/subscribe`.
+  Berlin Survival Map signup to `https://www.berlinwalk.com/_functions/subscribe`.

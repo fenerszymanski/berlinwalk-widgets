@@ -4,6 +4,7 @@
 (function () {
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var SUBSCRIBE_URL = 'https://www.berlinwalk.com/_functions/subscribe';
+  var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_fbb1e603406b4ac4b7a15628a0288e40.pdf';
   var IMAGE_URL = getImageUrl();
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
@@ -116,9 +117,11 @@
       '.bw-exit-title{margin:0 44px 12px 0;color:#FFFFFF;font-size:34px;line-height:1.05;font-weight:900;letter-spacing:0;}',
       '.bw-exit-copy{margin:0 0 24px;color:#FAFAF5;font-size:15px;line-height:1.55;font-weight:500;max-width:39em;}',
       '.bw-exit-actions{display:grid;gap:12px;}',
-      '.bw-exit-primary,.bw-exit-secondary,.bw-exit-submit,.bw-exit-back{font-family:Montserrat,Arial,sans-serif;cursor:pointer;text-decoration:none;}',
+      '.bw-exit-primary,.bw-exit-secondary,.bw-exit-submit,.bw-exit-back,.bw-exit-download{font-family:Montserrat,Arial,sans-serif;cursor:pointer;text-decoration:none;}',
       '.bw-exit-primary,.bw-exit-submit{border:0;border-radius:8px;background:#FFE600;color:#1B5E20;font-size:15px;font-weight:900;line-height:1.2;text-align:center;padding:16px 20px;box-shadow:0 10px 24px rgba(255,230,0,.18);transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;}',
       '.bw-exit-primary:hover,.bw-exit-submit:hover,.bw-exit-primary:focus-visible,.bw-exit-submit:focus-visible{background:#fff066;transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,230,0,.26);outline:0;}',
+      '.bw-exit-download{display:inline-flex;align-items:center;justify-content:center;width:100%;border:0;border-radius:8px;background:#FFE600;color:#1B5E20;font-size:15px;font-weight:900;line-height:1.2;text-align:center;padding:16px 20px;box-shadow:0 10px 24px rgba(255,230,0,.18);transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;}',
+      '.bw-exit-download:hover,.bw-exit-download:focus-visible{background:#fff066;transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,230,0,.26);outline:0;}',
       '.bw-exit-secondary{border:1px solid rgba(250,250,245,.48);border-radius:8px;background:rgba(250,250,245,.08);color:#FAFAF5;font-size:14px;font-weight:800;text-align:center;padding:15px 18px;transition:background-color .18s ease,border-color .18s ease,color .18s ease;}',
       '.bw-exit-secondary:hover,.bw-exit-secondary:focus-visible{border-color:#C5E1A5;background:rgba(197,225,165,.14);color:#FFFFFF;outline:0;}',
       '.bw-exit-form{margin-top:2px;}',
@@ -135,7 +138,7 @@
       '.bw-exit-back:hover,.bw-exit-back:focus-visible{color:#FFFFFF;outline:0;}',
       '.bw-exit-check{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 0 20px;background:rgba(255,230,0,.14);color:#FFE600;border:1px solid rgba(255,230,0,.35);}',
       '.bw-exit-check svg{width:38px;height:38px;}',
-      '@media (prefers-reduced-motion:reduce){.bw-exit-overlay,.bw-exit-card,.bw-exit-step,.bw-exit-close,.bw-exit-primary,.bw-exit-secondary,.bw-exit-submit{transition:none!important;animation:none!important;}}'
+      '@media (prefers-reduced-motion:reduce){.bw-exit-overlay,.bw-exit-card,.bw-exit-step,.bw-exit-close,.bw-exit-primary,.bw-exit-secondary,.bw-exit-submit,.bw-exit-download{transition:none!important;animation:none!important;}}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -234,13 +237,13 @@
       '<p class="bw-exit-copy">Start at the World Clock, then walk Berlin\'s stories with a tip-based English tour.</p>',
       '<div class="bw-exit-actions">',
       '<a class="bw-exit-primary" href="' + BOOKING_URL + '" data-bw-exit-book>Book Free Spot</a>',
-      '<button class="bw-exit-secondary" type="button" data-bw-exit-pdf>Get the Free Berlin Essentials PDF</button>',
+      '<button class="bw-exit-secondary" type="button" data-bw-exit-pdf>Get the Free Berlin Survival Map</button>',
       '</div>',
       '</section>',
       '<section class="bw-exit-step" data-bw-exit-step="2" aria-live="polite">',
-      '<p class="bw-exit-kicker">1-page Berlin essentials</p>',
-      '<h2 class="bw-exit-title">Send the PDF to your inbox.</h2>',
-      '<p class="bw-exit-copy">One page: transport, Sundays, cash, safety, and first-day mistakes.</p>',
+      '<p class="bw-exit-kicker">Free Berlin Survival Map</p>',
+      '<h2 class="bw-exit-title">Send the map to your inbox.</h2>',
+      '<p class="bw-exit-copy">Airport tickets, toilets, luggage, cash, Sundays, and a first walk that makes Berlin easier.</p>',
       '<form class="bw-exit-form" novalidate data-bw-exit-form>',
       '<div class="bw-exit-row">',
       '<input class="bw-exit-input" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email address" required data-bw-exit-email>',
@@ -254,9 +257,9 @@
       '<section class="bw-exit-step" data-bw-exit-step="3" aria-live="polite">',
       '<div class="bw-exit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></div>',
       '<p class="bw-exit-kicker">Success</p>',
-      '<h2 class="bw-exit-title">You are in! Check your inbox.</h2>',
-      '<p class="bw-exit-copy" data-bw-exit-success>We have sent the Berlin Essentials PDF. It should arrive in a minute.</p>',
-      '<div class="bw-exit-actions"><button class="bw-exit-primary" type="button" data-bw-exit-done>Done</button></div>',
+      '<h2 class="bw-exit-title">You are in.</h2>',
+      '<p class="bw-exit-copy" data-bw-exit-success>Download the Berlin Survival Map now.</p>',
+      '<div class="bw-exit-actions"><a class="bw-exit-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener" data-bw-exit-download>Download the map</a><button class="bw-exit-secondary" type="button" data-bw-exit-done>Done</button></div>',
       '</section>',
       '</div>',
       '</div>'
@@ -331,7 +334,8 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           email: email,
-          source: 'exit-intent',
+          source: 'exit-intent-survival-map',
+          offer: 'berlin-survival-map',
           page: window.location.pathname
         })
       }).then(function (response) {
@@ -341,7 +345,7 @@
           if (!response.ok || data.success === false) {
             throw new Error(data.error || 'subscribe_failed');
           }
-          success.innerHTML = 'We have sent the Berlin Essentials PDF to <strong>' + escapeHtml(email) + '</strong>. It should arrive in a minute.';
+          success.innerHTML = 'Saved for <strong>' + escapeHtml(email) + '</strong>. Download the Berlin Survival Map now.';
           trackEvent('bw_exit_popup_submit_success');
           setStep(3);
         });

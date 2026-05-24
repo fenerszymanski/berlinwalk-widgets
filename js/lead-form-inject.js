@@ -12,7 +12,7 @@
  *   4. Re-runs everything on SPA navigation between posts.
  */
 (function () {
-  var LEAD_FORM_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/lead-form/';
+  var LEAD_FORM_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/lead-form/?source=survival-map-blog-post';
   var MARKER = 'data-bw-leadform';
   var LOG = '[BW lead-form]';
   var MAX_REINJECTS = 12;
@@ -102,7 +102,7 @@
 
     var iframe = document.createElement('iframe');
     iframe.src = LEAD_FORM_URL;
-    iframe.title = 'BerlinWalk newsletter signup';
+    iframe.title = 'Get the BerlinWalk Berlin Survival Map';
     iframe.setAttribute('height', '320');
     iframe.setAttribute('scrolling', 'no');
     iframe.setAttribute('loading', 'lazy');

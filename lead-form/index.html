@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BerlinWalk Berlin Essentials Signup</title>
+  <title>BerlinWalk Berlin Survival Map Signup</title>
   <link rel="stylesheet" href="../css/brand.css">
   <style>
     html,
@@ -48,11 +48,13 @@
       box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
       display: grid;
       grid-template-columns: 0.8fr 1.35fr;
-      min-height: 300px;
+      min-height: 312px;
     }
 
     .bw-visual {
-      background: linear-gradient(135deg, #1B5E20 0%, #2d7a32 100%);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(255, 230, 0, 0.2), transparent 30%),
+        linear-gradient(145deg, #123d16 0%, #1B5E20 54%, #7CB342 155%);
       padding: 20px 18px;
       position: relative;
       overflow: hidden;
@@ -81,17 +83,28 @@
     }
 
     .bw-pdf-mock {
-      width: 96px;
-      height: 124px;
-      background: var(--bw-white);
-      border-radius: 6px;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      width: 122px;
+      height: 172px;
+      background: var(--bw-white) url("assets/berlin-survival-map-cover.jpg") center/cover no-repeat;
+      border: 4px solid rgba(250, 250, 245, 0.95);
+      border-radius: 8px;
+      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
       position: relative;
       transform: rotate(-4deg);
       z-index: 2;
     }
 
+    .bw-pdf-mock::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 5px;
+      box-shadow: inset 0 0 0 1px rgba(27, 94, 32, 0.18);
+      pointer-events: none;
+    }
+
     .bw-pdf-header {
+      display: none;
       background: var(--bw-green);
       height: 30px;
       border-radius: 6px 6px 0 0;
@@ -117,6 +130,7 @@
     }
 
     .bw-pdf-lines {
+      display: none;
       padding: 10px 8px;
       display: flex;
       flex-direction: column;
@@ -139,8 +153,8 @@
 
     .bw-pdf-badge {
       position: absolute;
-      top: -8px;
-      right: -6px;
+      top: -10px;
+      right: -24px;
       background: var(--bw-yellow);
       color: var(--bw-green);
       font-size: 9px;
@@ -148,7 +162,7 @@
       letter-spacing: 1.2px;
       padding: 6px 10px;
       border-radius: 20px;
-      transform: rotate(10deg);
+      transform: rotate(8deg);
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
       z-index: 3;
       white-space: nowrap;
@@ -283,6 +297,28 @@
       margin-top: 4px;
     }
 
+    .bw-download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .bw-download:hover,
+    .bw-download:focus-visible {
+      background: var(--bw-green-dark);
+      outline: 2px solid var(--bw-yellow);
+      outline-offset: 2px;
+    }
+
     @media (max-width: 600px) {
       .bw-signup {
         max-width: 100%;
@@ -356,7 +392,6 @@
       }
     }
   </style>
-  <script defer src="../js/brand.js"></script>
 </head>
 <body>
   <div class="bw-signup">
@@ -378,14 +413,14 @@
       </div>
 
       <div class="bw-form">
-        <div class="bw-kicker">Before your trip</div>
-        <h3 class="bw-title">Get my free 1-page<br>Berlin Essentials PDF</h3>
-        <p class="bw-desc">Transit hacks, emergency numbers, Sunday shopping tricks, and the scams to skip - everything a local tells their friends before they visit.</p>
+        <div class="bw-kicker">First day in Berlin</div>
+        <h3 class="bw-title">Get the free<br>Berlin Survival Map</h3>
+        <p class="bw-desc">Airport tickets, toilets, luggage, cash, Sundays, and the first walk that makes Berlin easier to understand.</p>
 
         <form class="bw-signup-form" novalidate>
           <div class="bw-input-row">
             <input type="email" class="bw-input" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
-            <button type="submit" class="bw-submit">Send it -&gt;</button>
+            <button type="submit" class="bw-submit">Get the map -&gt;</button>
           </div>
           <div class="bw-privacy">No spam, unsubscribe anytime.</div>
           <div class="bw-message" role="status" aria-live="polite"></div>
@@ -396,7 +431,64 @@
 
   <script>
     (function () {
+      if (window.parent === window) return;
+      var lastReported = 0;
+      var pending = false;
+
+      function contentHeight() {
+        if (!document.body || !document.body.children.length) return 0;
+        var max = 0;
+        for (var i = 0; i < document.body.children.length; i++) {
+          var child = document.body.children[i];
+          var rect = child.getBoundingClientRect();
+          var styles = window.getComputedStyle ? window.getComputedStyle(child) : null;
+          var marginBottom = styles ? (parseFloat(styles.marginBottom) || 0) : 0;
+          max = Math.max(max, rect.bottom + marginBottom);
+        }
+        return Math.ceil(max);
+      }
+
+      function reportNow() {
+        var height = contentHeight();
+        if (height > 0 && Math.abs(height - lastReported) > 2) {
+          lastReported = height;
+          try {
+            window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
+          } catch (err) {}
+        }
+      }
+
+      function report() {
+        if (pending) return;
+        pending = true;
+        (window.requestAnimationFrame || function (cb) { setTimeout(cb, 16); })(function () {
+          pending = false;
+          reportNow();
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', report);
+      } else {
+        report();
+      }
+      window.addEventListener('load', report);
+      if (typeof ResizeObserver !== 'undefined') {
+        try { new ResizeObserver(report).observe(document.body); } catch (err) {}
+      }
+      document.addEventListener('input', function () { setTimeout(report, 50); }, true);
+      document.addEventListener('change', function () { setTimeout(report, 50); }, true);
+      document.addEventListener('click', function () {
+        setTimeout(report, 50);
+        setTimeout(report, 250);
+      }, true);
+      setTimeout(report, 500);
+      setTimeout(report, 1500);
+    })();
+
+    (function () {
       var API_URL = 'https://www.berlinwalk.com/_functions/subscribe';
+      var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_fbb1e603406b4ac4b7a15628a0288e40.pdf';
 
       var form = document.querySelector('.bw-signup-form');
       var input = document.querySelector('.bw-input');
@@ -406,7 +498,7 @@
       if (!form || !input || !btn || !msg) return;
 
       var params = new URLSearchParams(window.location.search);
-      var source = params.get('source') || 'blog-post';
+      var source = params.get('source') || 'survival-map-blog-post';
 
       try {
         var refUrl = (document.referrer || '').toLowerCase();
@@ -443,13 +535,18 @@
           var response = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: email, source: source })
+            body: JSON.stringify({
+              email: email,
+              source: source,
+              offer: 'berlin-survival-map',
+              page: document.referrer || window.location.href
+            })
           });
 
           var data = await response.json();
 
           btn.disabled = false;
-          btn.textContent = 'Send it ->';
+          btn.textContent = 'Get the map ->';
 
           if (response.ok && data.success) {
             form.reset();
@@ -457,7 +554,8 @@
 
             showMessage(
               'success',
-              '<strong>You are in.</strong> Check your inbox.'
+              '<strong>You are in.</strong> Download the map now.' +
+              '<a class="bw-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener">Download Berlin Survival Map</a>'
             );
           } else {
             var errorMsg = data.error === 'invalid_email'
@@ -468,7 +566,7 @@
           }
         } catch (err) {
           btn.disabled = false;
-          btn.textContent = 'Send it ->';
+          btn.textContent = 'Get the map ->';
           showMessage('error', 'Connection error. Please try again.');
           console.error('Subscribe fetch error:', err);
         }
