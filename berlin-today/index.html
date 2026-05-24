@@ -414,8 +414,8 @@
       title: 'Supermarkets',
       status: closedDay ? 'closed' : 'open',
       note: closedDay
-        ? 'Closed today by German law. Open exceptions: <b>Edeka at Hauptbahnhof, Friedrichstraße, Ostbahnhof, Südkreuz, Gesundbrunnen, Zoo</b> and both airports.'
-        : 'Open ~7:00–22:00. Big chains: Edeka, Rewe, Aldi, Lidl, Kaufland.'
+        ? 'Closed today by German law. Open exceptions at train stations: <b>REWE</b> at Hauptbahnhof & Ostbahnhof, <b>Edeka</b> at Friedrichstraße, Südkreuz & Lichtenberg, <b>SPAR Express</b> at Potsdamer Platz, <b>Hit-Ullrich</b> at Bahnhof Zoo, plus <b>REWE at BER Airport Terminal 1 (24/7)</b>. Gesundbrunnen & Ostkreuz have organic-only (Denns).'
+        : 'Open ~7:00–22:00. Big chains: Edeka, REWE, Aldi, Lidl, Kaufland.'
     });
 
     // 2. Spätis (corner stores)
@@ -424,21 +424,21 @@
       title: 'Spätis (corner stores)',
       status: 'open',
       note: closedDay
-        ? 'Open as usual. Spätis are the Sunday/holiday workaround — drinks, snacks, basics until late, many central spots 24/7.'
-        : 'Open until late, many central spots 24/7. Cheaper than supermarket prices? No. But they save your Sunday.'
+        ? 'Open as usual. Spätis are the Sunday/holiday workaround — drinks, snacks, basics. Most close around midnight to 2:00; genuine 24/7 spots are concentrated in Kreuzberg, Friedrichshain, Neukölln.'
+        : 'Open late, typically until midnight or 2:00. A few 24/7 spots in Kreuzberg / Friedrichshain. Pricier than supermarkets, but they save your evening.'
     });
 
     // 3. Museums
     var museumStatus, museumNote;
     if (isMonday) {
       museumStatus = 'closed';
-      museumNote = '<b>Most state museums are closed Mondays</b> — incl. all 5 Museum Island museums, Jewish Museum, Berlinische Galerie. Open today: Topography of Terror, DDR Museum, Berlin Wall Memorial.';
+      museumNote = '<b>Most state museums are closed Mondays</b> — incl. all 5 Museum Island museums, Jewish Museum, Berlinische Galerie, and the Berlin Wall Memorial documentation center. Open today: TV Tower, Topography of Terror, DDR Museum, Stasi Museum, East Side Gallery (always outdoor).';
     } else if (isTuesday) {
       museumStatus = 'limited';
       museumNote = '<b>Humboldt Forum is closed Tuesdays.</b> Museum Island, Jewish Museum, Topography of Terror, DDR Museum all open.';
     } else {
       museumStatus = 'open';
-      museumNote = 'State museums open ~10:00–18:00. Note: Pergamon main building is closed for renovation through ~2027 (Panorama still open).';
+      museumNote = 'State museums open ~10:00–18:00. Pergamon main building has been closed for renovation since 2023 — partial reopening expected 2027, full reopening not before the mid-2030s. The Panorama next door stays open.';
     }
     cards.push({ icon: '🏛️', title: 'Museums', status: museumStatus, note: museumNote });
 
@@ -457,7 +457,7 @@
     var bankStatus, bankNote;
     if (closedDay) {
       bankStatus = 'closed';
-      bankNote = 'Closed today. ATMs always work. Currency exchange at Hauptbahnhof / Friedrichstraße / airports remains open.';
+      bankNote = 'Closed today. ATMs always work. Currency exchange at Hauptbahnhof, Friedrichstraße and BER airport stays open.';
     } else if (isSaturday) {
       bankStatus = 'limited';
       bankNote = 'Saturday: most branches closed. ATMs work. Some Deutsche Post counters open until ~13:00.';
@@ -506,7 +506,7 @@
       return '<b>Sunday rule of Berlin:</b> Buy groceries Saturday. On Sundays, head to station-Edekas, Spätis, brunch spots, museums, parks, or flea markets (Mauerpark from noon).';
     }
     if (dow === 1) {
-      return '<b>Monday tip:</b> Museum Island and most state museums close today. Spend the day on Berlin Wall sites, the TV Tower, Topography of Terror, or Treptower Park.';
+      return '<b>Monday tip:</b> Museum Island and most state museums close today. Spend the day on TV Tower, Topography of Terror, DDR Museum, Stasi Museum, the East Side Gallery, or Treptower Park.';
     }
     if (dow === 5 || dow === 6) {
       return '<b>Weekend mode:</b> U-Bahn and S-Bahn run all night. Clubs (Berghain, Sisyphos, Watergate) start late — plan a long sleep first.';
