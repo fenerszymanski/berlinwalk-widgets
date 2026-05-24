@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>What's Open in Berlin Today? | BerlinWalk</title>
+  <meta name="description" content="Live daily check: what's open and closed in Berlin today, public holidays, Sunday rules, and museum closing days — written by a local Berlin guide.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-berlin-today">
+  <style>
+    #bw-berlin-today {
+      --bw-green:#1B5E20; --bw-green-dark:#164a1a; --bw-yellow:#FFE600; --bw-lime:#7CB342;
+      --bw-border:#DCE8C8; --bw-text:#212121; --bw-muted:#4E5A4E; --bw-white:#FFFFFF; --bw-cream:#FAFAF5;
+      --bw-open:#27500A; --bw-open-bg:#EAF3DE;
+      --bw-limited:#7A5A00; --bw-limited-bg:#FFF6CC;
+      --bw-closed:#791F1F; --bw-closed-bg:#FCEBEB;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-berlin-today * { box-sizing: border-box; }
+
+    #bw-berlin-today .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-berlin-today .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    #bw-berlin-today .bw-head-icon { font-size: 18px; line-height: 1; }
+    #bw-berlin-today .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-berlin-today .bw-today {
+      padding: 22px 20px 18px;
+      background: linear-gradient(180deg, #FAFAF5 0%, #FFFFFF 100%);
+      border-bottom: 1px solid var(--bw-border);
+      text-align: center;
+    }
+    #bw-berlin-today .bw-today-label {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--bw-muted);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    #bw-berlin-today .bw-live-dot {
+      width: 8px; height: 8px;
+      background: var(--bw-lime);
+      border-radius: 50%;
+      box-shadow: 0 0 0 0 rgba(124,179,66,0.55);
+      animation: bwt-pulse 2.4s infinite ease-out;
+    }
+    @keyframes bwt-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(124,179,66,0.55); }
+      70% { box-shadow: 0 0 0 10px rgba(124,179,66,0); }
+      100% { box-shadow: 0 0 0 0 rgba(124,179,66,0); }
+    }
+    #bw-berlin-today .bw-today-day {
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--bw-green);
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+    #bw-berlin-today .bw-today-date {
+      font-size: 14px;
+      color: var(--bw-muted);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    #bw-berlin-today .bw-today-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 6px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.4px;
+    }
+    #bw-berlin-today .bw-today-tag.holiday {
+      background: #FFE600;
+      color: var(--bw-green-dark);
+    }
+    #bw-berlin-today .bw-today-tag.sunday {
+      background: var(--bw-closed-bg);
+      color: var(--bw-closed);
+    }
+    #bw-berlin-today .bw-today-tag.normal {
+      background: var(--bw-open-bg);
+      color: var(--bw-open);
+    }
+
+    #bw-berlin-today .bw-body { padding: 18px 18px 14px; background: var(--bw-cream); }
+    #bw-berlin-today .bw-section-label {
+      font-size: 10px; font-weight: 800; color: var(--bw-green);
+      letter-spacing: 2px; text-transform: uppercase;
+      display: flex; align-items: center; gap: 10px; margin-bottom: 12px;
+    }
+    #bw-berlin-today .bw-section-label::before {
+      content: ''; display: block; width: 4px; height: 22px;
+      background: linear-gradient(to bottom, var(--bw-yellow), var(--bw-lime));
+      border-radius: 2px;
+    }
+
+    #bw-berlin-today .bw-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+    #bw-berlin-today .bw-card {
+      background: var(--bw-white);
+      border: 0.5px solid var(--bw-border);
+      border-radius: 12px;
+      padding: 13px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    #bw-berlin-today .bw-card-row {
+      display: flex; align-items: center; gap: 10px; justify-content: space-between;
+    }
+    #bw-berlin-today .bw-card-title {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 13.5px; font-weight: 800; color: var(--bw-green);
+    }
+    #bw-berlin-today .bw-card-icon { font-size: 18px; line-height: 1; }
+    #bw-berlin-today .bw-badge {
+      font-size: 10px; font-weight: 800; padding: 3px 9px;
+      border-radius: 20px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    #bw-berlin-today .bw-badge.open { background: var(--bw-open-bg); color: var(--bw-open); }
+    #bw-berlin-today .bw-badge.limited { background: var(--bw-limited-bg); color: var(--bw-limited); }
+    #bw-berlin-today .bw-badge.closed { background: var(--bw-closed-bg); color: var(--bw-closed); }
+    #bw-berlin-today .bw-card-note {
+      font-size: 12px; color: var(--bw-muted); line-height: 1.5; margin: 0;
+    }
+    #bw-berlin-today .bw-card-note b { color: var(--bw-text); font-weight: 700; }
+
+    #bw-berlin-today .bw-tip {
+      background: var(--bw-green);
+      color: #F4FBEC;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    #bw-berlin-today .bw-tip-icon { font-size: 22px; line-height: 1; flex-shrink: 0; }
+    #bw-berlin-today .bw-tip-text { font-size: 13px; line-height: 1.55; }
+    #bw-berlin-today .bw-tip-text b { color: var(--bw-yellow); font-weight: 800; }
+
+    #bw-berlin-today details.bw-holidays {
+      background: var(--bw-white);
+      border: 0.5px solid var(--bw-border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    #bw-berlin-today details.bw-holidays summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--bw-green);
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    #bw-berlin-today details.bw-holidays summary::-webkit-details-marker { display: none; }
+    #bw-berlin-today details.bw-holidays summary::after {
+      content: '+';
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--bw-lime);
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+    #bw-berlin-today details.bw-holidays[open] summary::after { content: '–'; }
+    #bw-berlin-today .bw-hol-list { padding: 0 16px 12px; margin: 0; list-style: none; }
+    #bw-berlin-today .bw-hol-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      padding: 8px 0; border-top: 0.5px solid var(--bw-border);
+      font-size: 12.5px;
+    }
+    #bw-berlin-today .bw-hol-item:first-child { border-top: none; }
+    #bw-berlin-today .bw-hol-name { color: var(--bw-text); font-weight: 700; }
+    #bw-berlin-today .bw-hol-date { color: var(--bw-muted); font-weight: 700; font-size: 11.5px; white-space: nowrap; padding-left: 12px; }
+    #bw-berlin-today .bw-hol-item.next .bw-hol-name { color: var(--bw-green); }
+    #bw-berlin-today .bw-hol-item.next .bw-hol-date { color: var(--bw-green); background: var(--bw-open-bg); padding: 2px 8px; border-radius: 6px; }
+
+    #bw-berlin-today .bw-cta {
+      background: linear-gradient(135deg, var(--bw-yellow) 0%, var(--bw-lime) 130%);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    #bw-berlin-today .bw-cta-text {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--bw-green-dark);
+      line-height: 1.35;
+    }
+    #bw-berlin-today .bw-cta-text small {
+      display: block; font-size: 11px; font-weight: 700;
+      color: var(--bw-green); letter-spacing: 0.4px; text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+    #bw-berlin-today .bw-cta-btn {
+      display: inline-block;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 11px 18px;
+      border-radius: 999px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    #bw-berlin-today .bw-cta-btn:hover { background: var(--bw-green-dark); }
+
+    #bw-berlin-today .bw-foot {
+      padding: 10px 18px;
+      background: #FAFAF5;
+      border-top: 1px solid var(--bw-border);
+      font-size: 10.5px;
+      color: var(--bw-muted);
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 600px) {
+      #bw-berlin-today .bw-today { padding: 18px 16px 14px; }
+      #bw-berlin-today .bw-today-day { font-size: 26px; }
+      #bw-berlin-today .bw-body { padding: 14px 14px 12px; }
+      #bw-berlin-today .bw-cards { grid-template-columns: 1fr; gap: 8px; }
+      #bw-berlin-today .bw-card { padding: 12px; }
+      #bw-berlin-today .bw-cta { flex-direction: column; align-items: stretch; text-align: center; padding: 14px; }
+      #bw-berlin-today .bw-cta-btn { align-self: center; padding: 12px 22px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🇩🇪</span>
+      <span class="bw-kicker">What's Open in Berlin Today</span>
+    </div>
+
+    <div class="bw-today" id="bwt-today">
+      <div class="bw-today-label"><span class="bw-live-dot"></span> Berlin · Right Now</div>
+      <div class="bw-today-day" id="bwt-day">—</div>
+      <div class="bw-today-date" id="bwt-date">—</div>
+      <span class="bw-today-tag normal" id="bwt-tag">Normal weekday</span>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-section-label">Status today</div>
+      <div class="bw-cards" id="bwt-cards"></div>
+
+      <div class="bw-tip" id="bwt-tip" hidden>
+        <div class="bw-tip-icon" aria-hidden="true">💡</div>
+        <div class="bw-tip-text" id="bwt-tip-text"></div>
+      </div>
+
+      <details class="bw-holidays">
+        <summary>Berlin public holidays — next 12 months</summary>
+        <ul class="bw-hol-list" id="bwt-hol-list"></ul>
+      </details>
+
+      <div class="bw-cta">
+        <div class="bw-cta-text">
+          <small>While you're in Berlin</small>
+          Walk Alex to Hackescher Markt with a local guide — free, tip-based, daily 11:30.
+        </div>
+        <a class="bw-cta-btn" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_top" rel="noopener">Book Free Tour →</a>
+      </div>
+    </div>
+
+    <div class="bw-foot">Updated automatically · All times Europe/Berlin · Source: a local Berlin guide</div>
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-berlin-today');
+  if (!root) return;
+
+  /* ---------- Berlin "now" ---------- */
+  function berlinNow() {
+    // Build a Date that represents the current moment in Berlin's wall-clock,
+    // so getDay()/getMonth()/getDate() reflect Berlin local date even if the
+    // visitor is in another timezone.
+    var fmt = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Berlin',
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit', hour12: false
+    });
+    var parts = {};
+    fmt.formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; });
+    return new Date(
+      parseInt(parts.year, 10),
+      parseInt(parts.month, 10) - 1,
+      parseInt(parts.day, 10),
+      parseInt(parts.hour, 10) || 0,
+      parseInt(parts.minute, 10) || 0
+    );
+  }
+
+  /* ---------- Easter (Gauss) and movable feasts ---------- */
+  function easterDate(year) {
+    var a = year % 19;
+    var b = Math.floor(year / 100);
+    var c = year % 100;
+    var d = Math.floor(b / 4);
+    var e = b % 4;
+    var f = Math.floor((b + 8) / 25);
+    var g = Math.floor((b - f + 1) / 3);
+    var h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4);
+    var k = c % 4;
+    var L = (32 + 2 * e + 2 * i - h - k) % 7;
+    var m = Math.floor((a + 11 * h + 22 * L) / 451);
+    var month = Math.floor((h + L - 7 * m + 114) / 31);
+    var day = ((h + L - 7 * m + 114) % 31) + 1;
+    return new Date(year, month - 1, day);
+  }
+  function addDays(d, n) {
+    var x = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    x.setDate(x.getDate() + n);
+    return x;
+  }
+
+  /* Berlin public holidays — Berlin-specific list (Frauentag included). */
+  function berlinHolidays(year) {
+    var easter = easterDate(year);
+    return [
+      { name: "New Year's Day",        date: new Date(year, 0, 1) },
+      { name: "International Women's Day", date: new Date(year, 2, 8) },
+      { name: "Good Friday",           date: addDays(easter, -2) },
+      { name: "Easter Monday",         date: addDays(easter, 1) },
+      { name: "Labour Day",            date: new Date(year, 4, 1) },
+      { name: "Ascension Day",         date: addDays(easter, 39) },
+      { name: "Whit Monday",           date: addDays(easter, 50) },
+      { name: "German Unity Day",      date: new Date(year, 9, 3) },
+      { name: "Christmas Day",         date: new Date(year, 11, 25) },
+      { name: "Boxing Day",            date: new Date(year, 11, 26) }
+    ];
+  }
+  function sameDay(a, b) {
+    return a.getFullYear() === b.getFullYear()
+        && a.getMonth() === b.getMonth()
+        && a.getDate() === b.getDate();
+  }
+  function isHolidayToday(today) {
+    var hs = berlinHolidays(today.getFullYear());
+    for (var i = 0; i < hs.length; i++) if (sameDay(hs[i].date, today)) return hs[i];
+    return null;
+  }
+
+  /* ---------- Format helpers ---------- */
+  var DAY_NAMES = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  var MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  function formatLong(d) {
+    return DAY_NAMES[d.getDay()] + ' · ' + MONTH_NAMES[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+  }
+  function formatShort(d) {
+    return MONTH_NAMES[d.getMonth()].slice(0,3) + ' ' + d.getDate();
+  }
+
+  /* ---------- Status logic per category ---------- */
+  function statusForToday(today, holiday) {
+    var dow = today.getDay(); // 0 Sun .. 6 Sat
+    var isSunday = (dow === 0);
+    var isMonday = (dow === 1);
+    var isTuesday = (dow === 2);
+    var isSaturday = (dow === 6);
+    var isWeekend = isSunday || isSaturday;
+    var closedDay = isSunday || !!holiday;
+
+    var cards = [];
+
+    // 1. Supermarkets
+    cards.push({
+      icon: '🛒',
+      title: 'Supermarkets',
+      status: closedDay ? 'closed' : 'open',
+      note: closedDay
+        ? 'Closed today by German law. Open exceptions: <b>Edeka at Hauptbahnhof, Friedrichstraße, Ostbahnhof, Südkreuz, Gesundbrunnen, Zoo</b> and both airports.'
+        : 'Open ~7:00–22:00. Big chains: Edeka, Rewe, Aldi, Lidl, Kaufland.'
+    });
+
+    // 2. Spätis (corner stores)
+    cards.push({
+      icon: '🍺',
+      title: 'Spätis (corner stores)',
+      status: 'open',
+      note: closedDay
+        ? 'Open as usual. Spätis are the Sunday/holiday workaround — drinks, snacks, basics until late, many central spots 24/7.'
+        : 'Open until late, many central spots 24/7. Cheaper than supermarket prices? No. But they save your Sunday.'
+    });
+
+    // 3. Museums
+    var museumStatus, museumNote;
+    if (isMonday) {
+      museumStatus = 'closed';
+      museumNote = '<b>Most state museums are closed Mondays</b> — incl. all 5 Museum Island museums, Jewish Museum, Berlinische Galerie. Open today: Topography of Terror, DDR Museum, Berlin Wall Memorial.';
+    } else if (isTuesday) {
+      museumStatus = 'limited';
+      museumNote = '<b>Humboldt Forum is closed Tuesdays.</b> Museum Island, Jewish Museum, Topography of Terror, DDR Museum all open.';
+    } else {
+      museumStatus = 'open';
+      museumNote = 'State museums open ~10:00–18:00. Note: Pergamon main building is closed for renovation through ~2027 (Panorama still open).';
+    }
+    cards.push({ icon: '🏛️', title: 'Museums', status: museumStatus, note: museumNote });
+
+    // 4. Public transport (BVG / S-Bahn)
+    var transportStatus, transportNote;
+    if (isWeekend || holiday) {
+      transportStatus = 'open';
+      transportNote = '<b>24-hour service on Fri night → Mon morning</b> for U-Bahn and S-Bahn. Buses & trams run reduced. Holiday = Sunday schedule.';
+    } else {
+      transportStatus = 'open';
+      transportNote = 'Normal weekday service. U-Bahn 4:00–~1:00, then night buses (N1, N2…) every 30 min. AB ticket covers central Berlin.';
+    }
+    cards.push({ icon: '🚆', title: 'Public transport (BVG)', status: transportStatus, note: transportNote });
+
+    // 5. Banks & post offices
+    var bankStatus, bankNote;
+    if (closedDay) {
+      bankStatus = 'closed';
+      bankNote = 'Closed today. ATMs always work. Currency exchange at Hauptbahnhof / Friedrichstraße / airports remains open.';
+    } else if (isSaturday) {
+      bankStatus = 'limited';
+      bankNote = 'Saturday: most branches closed. ATMs work. Some Deutsche Post counters open until ~13:00.';
+    } else {
+      bankStatus = 'open';
+      bankNote = 'Banks roughly 9:00–16:00 (Thu often until 18:00). Post offices to ~18:00. Many cafés/restaurants are still cash-friendly.';
+    }
+    cards.push({ icon: '🏦', title: 'Banks & post offices', status: bankStatus, note: bankNote });
+
+    // 6. Restaurants & bars
+    cards.push({
+      icon: '🍽️',
+      title: 'Restaurants & bars',
+      status: 'open',
+      note: isSunday
+        ? '<b>Brunch capital.</b> Book ahead in Mitte, Prenzlauer Berg, Kreuzberg or expect a 30-min wait.'
+        : (holiday ? 'Mostly open. Some smaller spots may close — high streets and tourist areas safe.' : 'Open as usual. Kitchen usually 12:00–22:00, bars later. Reserve for Fri/Sat dinner.')
+    });
+
+    // 7. Public toilets
+    cards.push({
+      icon: '🚻',
+      title: 'Public toilets',
+      status: 'open',
+      note: 'Berliner Toilette network (paid, 50¢). All major U-/S-Bahn stations have toilets. Big cafés/department stores are the unwritten free option.'
+    });
+
+    // 8. Tap water
+    cards.push({
+      icon: '💧',
+      title: 'Tap water',
+      status: 'open',
+      note: 'Safe to drink everywhere. Berlin tap water is among Europe\'s best — bring a refill bottle, save €4 a day.'
+    });
+
+    return cards;
+  }
+
+  /* ---------- Tip box ---------- */
+  function tipForToday(today, holiday) {
+    var dow = today.getDay();
+    if (holiday) {
+      return 'Today is <b>' + holiday.name + '</b> — a German public holiday. Treat it like a Sunday: shops closed, Sunday transport schedule, museums open if it\'s not also a Monday.';
+    }
+    if (dow === 0) {
+      return '<b>Sunday rule of Berlin:</b> Buy groceries Saturday. On Sundays, head to station-Edekas, Spätis, brunch spots, museums, parks, or flea markets (Mauerpark from noon).';
+    }
+    if (dow === 1) {
+      return '<b>Monday tip:</b> Museum Island and most state museums close today. Spend the day on Berlin Wall sites, the TV Tower, Topography of Terror, or Treptower Park.';
+    }
+    if (dow === 5 || dow === 6) {
+      return '<b>Weekend mode:</b> U-Bahn and S-Bahn run all night. Clubs (Berghain, Sisyphos, Watergate) start late — plan a long sleep first.';
+    }
+    return null;
+  }
+
+  /* ---------- Render ---------- */
+  var today = berlinNow();
+  var holiday = isHolidayToday(today);
+
+  // Today banner
+  document.getElementById('bwt-day').textContent = DAY_NAMES[today.getDay()];
+  document.getElementById('bwt-date').textContent = MONTH_NAMES[today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear();
+  var tagEl = document.getElementById('bwt-tag');
+  if (holiday) {
+    tagEl.className = 'bw-today-tag holiday';
+    tagEl.textContent = '★ Public Holiday · ' + holiday.name;
+  } else if (today.getDay() === 0) {
+    tagEl.className = 'bw-today-tag sunday';
+    tagEl.textContent = 'Sunday — shops closed';
+  } else {
+    tagEl.className = 'bw-today-tag normal';
+    tagEl.textContent = 'Normal weekday';
+  }
+
+  // Status cards
+  var cards = statusForToday(today, holiday);
+  var cardsHtml = cards.map(function (c) {
+    var label = c.status === 'open' ? 'Open' : (c.status === 'limited' ? 'Limited' : 'Closed');
+    return ''
+      + '<div class="bw-card">'
+      + '  <div class="bw-card-row">'
+      + '    <div class="bw-card-title"><span class="bw-card-icon" aria-hidden="true">' + c.icon + '</span>' + c.title + '</div>'
+      + '    <span class="bw-badge ' + c.status + '">' + label + '</span>'
+      + '  </div>'
+      + '  <p class="bw-card-note">' + c.note + '</p>'
+      + '</div>';
+  }).join('');
+  document.getElementById('bwt-cards').innerHTML = cardsHtml;
+
+  // Tip box
+  var tip = tipForToday(today, holiday);
+  if (tip) {
+    document.getElementById('bwt-tip-text').innerHTML = tip;
+    document.getElementById('bwt-tip').hidden = false;
+  }
+
+  // Upcoming holidays — next 12 months from today
+  var year = today.getFullYear();
+  var pool = berlinHolidays(year).concat(berlinHolidays(year + 1));
+  var cutoff = addDays(today, 366);
+  var upcoming = pool.filter(function (h) { return h.date >= new Date(today.getFullYear(), today.getMonth(), today.getDate()) && h.date <= cutoff; });
+  upcoming.sort(function (a, b) { return a.date - b.date; });
+  var holHtml = upcoming.map(function (h, idx) {
+    var isToday = sameDay(h.date, today);
+    var cls = (idx === 0 || isToday) ? ' next' : '';
+    return ''
+      + '<li class="bw-hol-item' + cls + '">'
+      + '  <span class="bw-hol-name">' + h.name + (isToday ? ' (today)' : '') + '</span>'
+      + '  <span class="bw-hol-date">' + DAY_NAMES[h.date.getDay()].slice(0,3) + ' · ' + formatShort(h.date) + (h.date.getFullYear() !== year ? ' ' + h.date.getFullYear() : '') + '</span>'
+      + '</li>';
+  }).join('');
+  document.getElementById('bwt-hol-list').innerHTML = holHtml || '<li class="bw-hol-item"><span class="bw-hol-name">No public holidays in the next 12 months.</span></li>';
+})();
+</script>
+</body>
+</html>

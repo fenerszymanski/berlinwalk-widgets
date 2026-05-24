@@ -144,6 +144,14 @@
       "embedHeight": 640
     },
     {
+      "slug": "whats-open-in-berlin-today",
+      "title": "What's Open in Berlin Today",
+      "lead": "Live daily check: today's date, public holidays, what's open and closed across Berlin — supermarkets, museums, transport, banks.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-today/",
+      "embedHeight": 1280
+    },
+    {
       "slug": "berlin-free-things-to-do",
       "title": "Free Things to Do in Berlin",
       "lead": "Berlin has more genuinely free attractions than any other major European capital.",

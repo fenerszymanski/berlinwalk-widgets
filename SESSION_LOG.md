@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Blog sidebar top anchor v23)
+
+**Did:** Moved the desktop blog sidebar up to the top of the viewport so the new sidebar-internal blog nav does not make the `On this page` index feel cramped.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — sidebar now anchors at `24px`, uses flex layout, lets the index card take remaining viewport height, and can be visible from the top of the post page.
+- `README.md`, `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=23`.
+
+**Opened:** Push to GitHub Pages and update Wix Custom Code from `?v=22` to `?v=23`.
+**Closed:** Local Playwright mock: sidebar visible at page top, top `24px`, old mini-nav absent, nav above index, 6 category links, 12 index links, and the index card fits without internal scrolling in the 900px-high test viewport.
+
+**Next session should:** After v23 is active, cold-load a long Berlin Wall post and verify the right sidebar starts near the top and the index no longer feels cramped.
+
 ## 2026-05-24 — Codex (Blog sidebar nav v22)
 
 **Did:** Moved the blog `Blog Home` / `Categories` navigation into the right desktop `On this page` sidebar to avoid Wix post header/body flicker.

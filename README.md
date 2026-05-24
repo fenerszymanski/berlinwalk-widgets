@@ -153,10 +153,11 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   sidebar from visible H2/H3 headings and puts a compact `Blog Home` /
   `Categories` block above the index inside that same sidebar. It shortens the
   floating booking CTA copy to `Book Now`. The sidebar hides below 900px, starts
-  with the post H1, disappears near the article end, sits close to the article
-  edge, and its long heading list scrolls inside the card when needed. It no
-  longer injects a mini-nav into Wix-managed blog header or article body DOM,
-  because that caused header/Quick Summary flicker. The script skips
+  at the top of the desktop viewport, disappears near the article end, sits
+  close to the article edge, and its long heading list uses the remaining
+  viewport height before it needs to scroll inside the card. It no longer
+  injects a mini-nav into Wix-managed blog header or article body DOM, because
+  that caused header/Quick Summary flicker. The script skips
   non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
