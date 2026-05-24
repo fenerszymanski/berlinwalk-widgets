@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Blog menu watchdog)
+
+**Did:** Fixed the PDF lead form regression where the blog mini-nav appeared briefly and then disappeared, taking the desktop index with it on some Wix renders.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — added a small mini-nav-only watchdog to restore `Blog Home` / `Categories` if Wix/React removes it; this does not use the old full-rebuild path that caused blinking.
+- `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=17`.
+
+**Opened:** Push to GitHub Pages and update Wix Custom Code from `?v=16` to `?v=17`.
+**Closed:** None until live verification.
+
+**Next session should:** After v17 is live, cold-load a blog post and confirm the mini-nav, right index, and Survival Map form coexist.
+
 ## 2026-05-24 — Codex
 
 **Did:** Reworked the blog lead form into the Berlin Survival Map capture widget and removed the bottom `by berlinwalk.com` attribution bar.

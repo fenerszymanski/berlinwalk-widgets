@@ -197,7 +197,7 @@ bw-german-phrases-quiz { display: block; width: 100%; }
   background: #fff;
   border: 1px solid #e0e0e0;
   border-top: none;
-  padding: 24px;
+  padding: 28px 24px 32px;
 }
 
 .bwgpq-screen { display: none; }
@@ -209,27 +209,30 @@ bw-german-phrases-quiz { display: block; width: 100%; }
 .bwgpq-start {
   text-align: center;
   animation: bwgpqFadeUp 0.4s ease;
+  padding: 8px 0 4px;
 }
 .bwgpq-start-desc {
   font-size: 14px;
   color: #666;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.65;
+  margin: 0 auto 32px;
+  max-width: 440px;
 }
 .bwgpq-btn-start {
   background: #1B5E20;
   color: #fff;
   border: none;
   border-radius: 8px;
-  padding: 13px 28px;
+  padding: 14px 32px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.3px;
-  transition: opacity 0.2s;
+  transition: opacity 0.2s, transform 0.18s;
   -webkit-tap-highlight-color: transparent;
 }
-.bwgpq-btn-start:hover { opacity: 0.88; }
+.bwgpq-btn-start:hover { opacity: 0.92; transform: translateY(-1px); }
+.bwgpq-btn-start:active { transform: scale(0.97); }
 
 /* ---- quiz screen ---- */
 .bwgpq-meta {

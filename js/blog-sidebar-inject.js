@@ -14,6 +14,7 @@
   var lastPath = location.pathname;
   var observer = null;
   var resizeTimer = null;
+  var miniNavTimer = null;
   var cleanupSidebar = null;
   var cleanupMiniNav = null;
 
@@ -498,6 +499,18 @@
     }, 250);
   }
 
+  function scheduleMiniNav() {
+    clearTimeout(miniNavTimer);
+    miniNavTimer = setTimeout(function () {
+      if (!isPostPage()) return;
+      if (document.querySelector('[' + NAV_MARKER + ']')) return;
+      var body = findPostBody();
+      if (!body) return;
+      injectStyle();
+      injectMiniNav(body);
+    }, 450);
+  }
+
   function compactFloatingCta() {
     var desktopLabel = document.querySelector('#bw-desktop-cta .bw-label-big');
     if (desktopLabel && cleanText(desktopLabel.textContent) !== 'Book Now') {
@@ -563,6 +576,7 @@
     observer = new MutationObserver(function () {
       if (!isPostPage()) return;
       compactFloatingCta();
+      if (!document.querySelector('[' + NAV_MARKER + ']')) scheduleMiniNav();
       if (!document.querySelector('[' + MARKER + ']')) scheduleInject();
     });
     if (document.body) observer.observe(document.body, { childList: true, subtree: true });
