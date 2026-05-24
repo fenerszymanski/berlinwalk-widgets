@@ -7,7 +7,7 @@
   var STYLE_ID = 'bw-blog-sidebar-style';
   var LOG = '[BW blog-sidebar]';
   var MAX_ITEMS = 12;
-  var MIN_DESKTOP_WIDTH = 1024;
+  var MIN_DESKTOP_WIDTH = 900;
   var SIDEBAR_WIDTH = 236;
   var SIDEBAR_GAP = 12;
   var SIDEBAR_TOP = 150;
@@ -15,6 +15,10 @@
   var observer = null;
   var resizeTimer = null;
   var miniNavTimer = null;
+  var sidebarRepairTimer = null;
+  var hiddenSidebarSince = 0;
+  var lastSidebarRepairAt = 0;
+  var currentSidebarState = null;
   var cleanupSidebar = null;
   var cleanupMiniNav = null;
 
@@ -154,7 +158,7 @@
       '.bw-blog-mini-nav-link-active:after{opacity:1;transform:scaleX(1);}',
       '@media (max-width:1100px){.bw-blog-mini-nav-content{padding:14px 16px 15px;}.bw-blog-mini-nav-row{align-items:flex-start;gap:12px;}.bw-blog-mini-nav-group{align-items:flex-start;display:grid;flex:1 1 auto;gap:8px;grid-template-columns:auto minmax(0,1fr);}.bw-blog-mini-nav-list{gap:7px;}.bw-blog-mini-nav-link{font-size:12px;min-height:34px;padding:0 11px;}}',
       '@media (max-width:700px){.bw-blog-mini-nav{margin:0 0 22px;}.bw-blog-mini-nav-inner{border-radius:8px;}.bw-blog-mini-nav-content{padding:7px 8px 8px;}.bw-blog-mini-nav-row{align-items:center;display:flex;gap:8px;}.bw-blog-mini-nav-home{display:flex;flex:0 0 auto;font-size:12px;min-height:34px;padding:0 12px;width:auto;}.bw-blog-mini-nav-group{display:block;flex:1 1 auto;min-width:0;padding-top:0;}.bw-blog-mini-nav-label{display:none;}.bw-blog-mini-nav-list{display:flex;flex-wrap:nowrap;gap:6px;overflow-x:auto;padding-bottom:1px;scrollbar-width:none;}.bw-blog-mini-nav-list::-webkit-scrollbar{display:none;}.bw-blog-mini-nav-link{display:flex;flex:0 0 auto;font-size:11.5px;min-height:34px;padding:0 11px;white-space:nowrap;}.bw-blog-mini-nav-link:after{bottom:5px;left:11px;right:11px;}}',
-      '@media (max-width:1023px){.bw-blog-sidebar{display:none!important;}}'
+      '@media (max-width:899px){.bw-blog-sidebar{display:none!important;}}'
     ].join('\n');
     document.head.appendChild(style);
   }
@@ -389,6 +393,8 @@
       cleanupSidebar();
       cleanupSidebar = null;
     }
+    currentSidebarState = null;
+    hiddenSidebarSince = 0;
     var old = document.querySelector('[' + MARKER + ']');
     if (old) old.remove();
   }
@@ -522,6 +528,56 @@
     }
   }
 
+  function sidebarStateIsStale(state) {
+    if (!state || state.path !== location.pathname) return true;
+    if (!state.sidebar || !state.sidebar.isConnected) return true;
+    if (!state.body || !state.body.isConnected || !isVisible(state.body)) return true;
+    if (!state.items || state.items.length < 2) return true;
+    for (var i = 0; i < Math.min(state.items.length, 4); i++) {
+      if (!state.items[i].node || !state.items[i].node.isConnected || !isVisible(state.items[i].node)) return true;
+    }
+    return false;
+  }
+
+  function sidebarShouldBeVisibleNow(body, items) {
+    var viewportW = window.innerWidth || document.documentElement.clientWidth;
+    if (viewportW < MIN_DESKTOP_WIDTH || !body || !items || items.length < 2) return false;
+    var bounds = getBodyBounds(body);
+    var y = window.scrollY || window.pageYOffset || 0;
+    var stickyY = y + SIDEBAR_TOP;
+    return !!(bounds && stickyY >= bounds.start - 12 && stickyY <= bounds.end - 24);
+  }
+
+  function repairSidebarIfNeeded() {
+    if (!isPostPage()) return;
+    var viewportW = window.innerWidth || document.documentElement.clientWidth;
+    if (viewportW < MIN_DESKTOP_WIDTH) return;
+    var sidebar = document.querySelector('[' + MARKER + ']');
+    if (!sidebar || sidebarStateIsStale(currentSidebarState)) {
+      inject();
+      return;
+    }
+    if (sidebar.classList.contains('bw-blog-sidebar-visible')) {
+      hiddenSidebarSince = 0;
+      return;
+    }
+    if (!sidebarShouldBeVisibleNow(currentSidebarState.body, currentSidebarState.items)) {
+      hiddenSidebarSince = 0;
+      return;
+    }
+    var now = Date.now();
+    if (!hiddenSidebarSince) hiddenSidebarSince = now;
+    if (now - hiddenSidebarSince < 1200 || now - lastSidebarRepairAt < 3000) return;
+    lastSidebarRepairAt = now;
+    removeSidebar();
+    inject();
+  }
+
+  function scheduleSidebarRepair() {
+    clearTimeout(sidebarRepairTimer);
+    sidebarRepairTimer = setTimeout(repairSidebarIfNeeded, 700);
+  }
+
   function inject() {
     if (!isPostPage()) {
       removeAllInjectedUi();
@@ -533,14 +589,27 @@
     injectMiniNav(body);
     compactFloatingCta();
     var items = collectHeadings(body);
-    if (items.length < 2) return false;
+    if (items.length < 2) {
+      removeSidebar();
+      return false;
+    }
 
     removeSidebar();
     injectMiniNav(body);
     var sidebar = createSidebar(items);
     document.body.appendChild(sidebar);
+    currentSidebarState = {
+      sidebar: sidebar,
+      body: body,
+      items: items,
+      path: location.pathname
+    };
 
     function refresh() {
+      if (sidebarStateIsStale(currentSidebarState)) {
+        scheduleInject();
+        return;
+      }
       positionSidebar(sidebar, body, items);
       updateActive(sidebar, items);
     }
@@ -570,6 +639,8 @@
     [1600, 2800, 4500].forEach(function (delay) {
       setTimeout(function () {
         if (!document.querySelector('[' + MARKER + ']')) inject();
+        else scheduleSidebarRepair();
+        if (!document.querySelector('[' + NAV_MARKER + ']')) scheduleMiniNav();
       }, delay);
     });
     if (observer) observer.disconnect();
@@ -578,6 +649,7 @@
       compactFloatingCta();
       if (!document.querySelector('[' + NAV_MARKER + ']')) scheduleMiniNav();
       if (!document.querySelector('[' + MARKER + ']')) scheduleInject();
+      else scheduleSidebarRepair();
     });
     if (document.body) observer.observe(document.body, { childList: true, subtree: true });
   }

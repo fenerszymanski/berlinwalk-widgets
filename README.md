@@ -152,11 +152,12 @@ These are loaded through Wix Custom Code rather than iframe embeds:
 - `js/blog-sidebar-inject.js` - adds a static in-post `Blog Home` / `Categories`
   menu above the post title and builds a desktop-only sticky "On this page"
   sidebar from visible H2/H3 headings. It shortens the floating booking CTA copy
-  to `Book Now`. The sidebar hides below 1024px, starts with the post H1,
+  to `Book Now`. The sidebar hides below 900px, starts with the post H1,
   disappears near the article end, sits close to the article edge, and its long
   heading list scrolls inside the card when needed. The mini-nav is not sticky,
-  and its absence no longer triggers sidebar rebuilds. The script skips
-  non-`/post/` URLs.
+  and its absence no longer triggers full sidebar rebuilds. The sidebar repairs
+  stale heading/body references if Wix replaces the post body after initial
+  render. The script skips non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
   `sessionStorage`, links the primary CTA to the booking route, and posts the

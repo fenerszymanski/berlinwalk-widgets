@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Blog sidebar v18 repair)
+
+**Did:** Fixed the right sticky "On this page" blog index disappearing after recent mini-nav/PDF form fixes.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — sidebar now hides only below 900px instead of 1024px, stores its live body/heading state, detects stale Wix-rerendered body references, and quietly rebuilds the sidebar when needed.
+- `README.md`, `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=18` and documented the sidebar repair behavior.
+
+**Opened:** Push to GitHub Pages and update Wix Custom Code from `?v=17` to `?v=18`.
+**Closed:** `node --check` passes; local mock `/post/` test at 950px shows the sidebar after scrolling into the article.
+
+**Next session should:** Cold-load a live post with v18 active and confirm the top mini-nav, right index, and Survival Map form all remain visible.
+
 ## 2026-05-24 — Codex (German Phrases Quiz redesign)
 
 **Did:** Reworked the quiz widget visual design so `/tools/german-phrases-quiz` no longer feels like a generic card and fixed the retry/start click binding.
