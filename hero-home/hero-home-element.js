@@ -437,7 +437,7 @@ class BWHeroHomeElement extends HTMLElement {
           <div class="bw-hero-content">
             <span class="bw-hero-kicker">Tip based · 12 stops · ~2h</span>
             <h1 id="bw-hero-home-title" class="bw-hero-title">Free Berlin <span class="bw-hero-title-mark">Walking Tour</span>.</h1>
-            <p class="bw-hero-lead">From Alexanderplatz to Hackescher Markt, understand Berlin in about 2 hours with Yusuf, a local guide who connects the city's layers into one walk.</p>
+            <p class="bw-hero-lead">Berlin was founded in 1237, but most tours skip straight to 1933. In about 2 hours, walk the medieval core from Alexanderplatz to Hackescher Markt with Yusuf, and see the city the way a Berliner reads it: oldest streets first.</p>
 
             <div class="bw-hero-actions">
               <a class="bw-hero-btn bw-hero-btn-primary" href="${BW_HERO_HOME_BOOKING_URL}" target="_top">Book your free spot</a>
