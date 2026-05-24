@@ -36,10 +36,10 @@ const BWGPQ_QUESTIONS = [
 const BWGPQ_LETTERS = ['A', 'B', 'C', 'D'];
 
 const BWGPQ_TIERS = [
-  { max: 3,  emoji: '😅', msg: "Looks like you need a bit more study before your Berlin trip! Bookmark the phrases guide and come back." },
-  { max: 6,  emoji: '👍', msg: "Not bad! You've got the basics down. A few more rounds and you'll be ordering Schnitzel like a pro." },
-  { max: 9,  emoji: '🎉', msg: "Impressive! You're well-prepared for Berlin. The locals will be pleasantly surprised." },
-  { max: 10, emoji: '🏆', msg: "Perfect score! You're basically ready to give walking tours yourself. (But come on ours anyway!)" }
+  { max: 3,  emoji: 'Getting oriented', msg: "Looks like you need a bit more study before your Berlin trip. Bookmark the phrases guide and come back." },
+  { max: 6,  emoji: 'Good start', msg: "Not bad. You've got the basics down. A few more rounds and you'll be ordering confidently." },
+  { max: 9,  emoji: 'Berlin ready', msg: "Impressive. You're well-prepared for Berlin. The locals will be pleasantly surprised." },
+  { max: 10, emoji: 'Perfect score', msg: "Perfect score. You're basically ready to give walking tours yourself. But come on ours anyway." }
 ];
 
 class BWGermanPhrasesQuizElement extends HTMLElement {
@@ -49,7 +49,9 @@ class BWGermanPhrasesQuizElement extends HTMLElement {
   }
 
   _bind() {
-    this.querySelector('[data-bwgpq-start]').addEventListener('click', () => this._startQuiz());
+    this.querySelectorAll('[data-bwgpq-start]').forEach((button) => {
+      button.addEventListener('click', () => this._startQuiz());
+    });
   }
 
   _startQuiz() {
@@ -127,10 +129,10 @@ class BWGermanPhrasesQuizElement extends HTMLElement {
     const fb = this.querySelector('[data-bwgpq-feedback]');
     if (correct) {
       fb.className = 'bwgpq-feedback bwgpq-feedback-correct';
-      fb.textContent = '✅ Correct! Well done.';
+      fb.textContent = 'Correct. Well done.';
     } else {
       fb.className = 'bwgpq-feedback bwgpq-feedback-wrong';
-      fb.innerHTML = '❌ Not quite. The correct answer is: <strong>' + q.opts[q.ans] + '</strong>';
+      fb.innerHTML = 'Not quite. The correct answer is: <strong>' + q.opts[q.ans] + '</strong>';
     }
 
     setTimeout(() => {
@@ -158,11 +160,13 @@ bw-german-phrases-quiz { display: block; width: 100%; }
 
 .bwgpq-wrap {
   font-family: Montserrat, Arial, sans-serif;
-  max-width: 600px;
+  max-width: 860px;
   margin: 0 auto;
-  border-radius: 12px;
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.10);
+  border: 1px solid rgba(27, 94, 32, 0.14);
+  background: #FAFAF5;
+  box-shadow: 0 18px 44px rgba(27, 94, 32, 0.10);
   box-sizing: border-box;
 }
 .bwgpq-wrap *, .bwgpq-wrap *::before, .bwgpq-wrap *::after { box-sizing: border-box; }
@@ -170,62 +174,164 @@ bw-german-phrases-quiz { display: block; width: 100%; }
 .bwgpq-wrap h1, .bwgpq-wrap h2, .bwgpq-wrap p { margin: 0; }
 
 .bwgpq-head {
-  background: #1B5E20;
-  padding: 20px 24px;
-  text-align: center;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 230, 0, 0.16), transparent 34%),
+    linear-gradient(135deg, #164a1a 0%, #1B5E20 70%, #2B6B2B 100%);
+  padding: 26px 34px 24px;
+  text-align: left;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px;
+  align-items: center;
+  min-height: 168px;
 }
 .bwgpq-head-kicker {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 900;
   color: #FFE600;
-  letter-spacing: 2px;
+  letter-spacing: 2.2px;
   text-transform: uppercase;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
 }
 .bwgpq-head h1 {
-  font-size: 20px;
-  font-weight: 800;
+  font-size: clamp(28px, 4vw, 42px);
+  line-height: 0.98;
+  font-weight: 900;
   color: #fff;
-  margin-bottom: 4px;
+  margin-bottom: 10px;
+  max-width: 620px;
 }
 .bwgpq-head-sub {
-  font-size: 13px;
-  color: rgba(255,255,255,0.6);
+  max-width: 520px;
+  font-size: 15px;
+  line-height: 1.45;
+  font-weight: 600;
+  color: rgba(250, 250, 245, 0.78);
+}
+.bwgpq-head-mark {
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  background: #FFE600;
+  color: #1B5E20;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
+}
+.bwgpq-head-mark strong {
+  display: block;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 900;
+  text-align: center;
+}
+.bwgpq-head-mark span {
+  display: block;
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .bwgpq-body {
   background: #fff;
-  border: 1px solid #e0e0e0;
-  border-top: none;
-  padding: 28px 24px 32px;
+  border-top: 5px solid #FFE600;
+  padding: 0;
 }
 
 .bwgpq-screen { display: none; }
 .bwgpq-screen.bwgpq-active { display: block; }
+.bwgpq-screen#bwgpq-screen-quiz {
+  padding: 34px;
+}
 
 @keyframes bwgpqFadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 /* ---- start screen ---- */
 .bwgpq-start {
-  text-align: center;
   animation: bwgpqFadeUp 0.4s ease;
-  padding: 8px 0 4px;
+  display: grid;
+  grid-template-columns: 1.08fr 0.92fr;
+  gap: 0;
+  min-height: 232px;
+}
+.bwgpq-start-copy {
+  padding: 34px 34px 36px;
 }
 .bwgpq-start-desc {
-  font-size: 14px;
-  color: #666;
-  line-height: 1.65;
-  margin: 0 auto 32px;
-  max-width: 440px;
+  font-size: 16px;
+  color: #4E5A4E;
+  line-height: 1.55;
+  margin: 0 0 22px;
+  max-width: 500px;
+}
+.bwgpq-start-points {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 24px;
+}
+.bwgpq-chip {
+  border: 1px solid rgba(27, 94, 32, 0.12);
+  border-radius: 8px;
+  background: #FAFAF5;
+  padding: 10px 11px;
+  color: #1B5E20;
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.15;
+}
+.bwgpq-visual {
+  background:
+    linear-gradient(135deg, rgba(27, 94, 32, 0.98), rgba(22, 74, 26, 0.92)),
+    repeating-linear-gradient(45deg, transparent 0 16px, rgba(255,255,255,.05) 16px 17px);
+  color: #FAFAF5;
+  padding: 30px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bwgpq-phrase-card {
+  width: 100%;
+  max-width: 270px;
+  border-radius: 8px;
+  background: #FAFAF5;
+  color: #212121;
+  padding: 22px;
+  box-shadow: 0 18px 40px rgba(0,0,0,.22);
+  transform: rotate(-2deg);
+}
+.bwgpq-phrase-kicker {
+  color: #7CB342;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 1.7px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.bwgpq-phrase {
+  color: #1B5E20;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.bwgpq-phrase-note {
+  color: #4E5A4E;
+  font-size: 13px;
+  line-height: 1.45;
 }
 .bwgpq-btn-start {
   background: #1B5E20;
-  color: #fff;
+  color: #FFE600;
   border: none;
   border-radius: 8px;
-  padding: 14px 32px;
+  padding: 15px 24px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 900;
   cursor: pointer;
   letter-spacing: 0.3px;
   transition: opacity 0.2s, transform 0.18s;
@@ -239,24 +345,26 @@ bw-german-phrases-quiz { display: block; width: 100%; }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 .bwgpq-counter {
   font-size: 12px;
-  font-weight: 700;
-  color: #7CB342;
+  font-weight: 900;
+  color: #1B5E20;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 .bwgpq-score-label {
   font-size: 12px;
-  font-weight: 600;
-  color: #999;
+  font-weight: 800;
+  color: #4E5A4E;
 }
 
 .bwgpq-bar-track {
-  background: #e0e0e0;
+  background: #EAF3DE;
   border-radius: 4px;
-  height: 4px;
-  margin-bottom: 16px;
+  height: 6px;
+  margin-bottom: 22px;
   overflow: hidden;
 }
 .bwgpq-bar-fill {
@@ -267,16 +375,16 @@ bw-german-phrases-quiz { display: block; width: 100%; }
 }
 
 .bwgpq-question {
-  font-size: 16px;
-  font-weight: 700;
+  font-size: 24px;
+  font-weight: 900;
   color: #1B5E20;
-  line-height: 1.4;
-  margin-bottom: 16px;
+  line-height: 1.18;
+  margin-bottom: 18px;
 }
 
 .bwgpq-options {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -285,19 +393,20 @@ bw-german-phrases-quiz { display: block; width: 100%; }
   align-items: center;
   gap: 12px;
   width: 100%;
-  background: #fff;
-  border: 2px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 13px 16px;
+  min-height: 68px;
+  background: #FAFAF5;
+  border: 1.5px solid #DCE8C8;
+  border-radius: 8px;
+  padding: 14px 15px;
   cursor: pointer;
   text-align: left;
   font-size: 14px;
-  font-weight: 600;
-  color: #333;
+  font-weight: 800;
+  color: #212121;
   transition: border-color 0.15s, background 0.15s, color 0.15s;
   -webkit-tap-highlight-color: transparent;
 }
-.bwgpq-opt:hover:not(:disabled) { border-color: #7CB342; }
+.bwgpq-opt:hover:not(:disabled) { border-color: #7CB342; background: #FFFFFF; }
 .bwgpq-opt:disabled { cursor: default; }
 
 .bwgpq-opt-letter {
@@ -306,7 +415,8 @@ bw-german-phrases-quiz { display: block; width: 100%; }
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5f5f5;
+  background: #FFFFFF;
+  border: 1px solid rgba(27,94,32,.12);
   border-radius: 6px;
   font-size: 12px;
   font-weight: 700;
@@ -341,9 +451,21 @@ bw-german-phrases-quiz { display: block; width: 100%; }
 .bwgpq-result {
   text-align: center;
   animation: bwgpqFadeUp 0.45s ease;
-  padding: 12px 0 4px;
+  padding: 34px;
 }
-.bwgpq-result-emoji { font-size: 48px; margin-bottom: 10px; }
+.bwgpq-result-emoji {
+  display: inline-flex;
+  margin: 0 0 12px;
+  border-radius: 999px;
+  background: #FFE600;
+  color: #1B5E20;
+  padding: 9px 13px;
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 900;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
 .bwgpq-result-score {
   font-size: 32px;
   font-weight: 900;
@@ -365,12 +487,12 @@ bw-german-phrases-quiz { display: block; width: 100%; }
 }
 .bwgpq-btn-book {
   background: #1B5E20;
-  color: #fff;
+  color: #FFE600;
   padding: 12px 22px;
   border-radius: 8px;
   text-decoration: none;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 900;
   transition: opacity 0.2s;
 }
 .bwgpq-btn-book:hover { opacity: 0.88; }
@@ -381,7 +503,7 @@ bw-german-phrases-quiz { display: block; width: 100%; }
   border-radius: 8px;
   border: none;
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 900;
   cursor: pointer;
   transition: opacity 0.2s;
   -webkit-tap-highlight-color: transparent;
@@ -389,25 +511,48 @@ bw-german-phrases-quiz { display: block; width: 100%; }
 .bwgpq-btn-retry:hover { opacity: 0.88; }
 
 @media (max-width: 480px) {
-  .bwgpq-body { padding: 18px 16px; }
-  .bwgpq-head { padding: 16px 18px; }
+  .bwgpq-head { padding: 20px 18px; grid-template-columns: 1fr; min-height: 0; }
+  .bwgpq-head-mark { display: none; }
+  .bwgpq-start { grid-template-columns: 1fr; }
+  .bwgpq-start-copy { padding: 24px 18px; }
+  .bwgpq-start-points { grid-template-columns: 1fr; }
+  .bwgpq-visual { display: none; }
+  .bwgpq-screen#bwgpq-screen-quiz { padding: 24px 18px; }
+  .bwgpq-options { grid-template-columns: 1fr; }
   .bwgpq-opt { padding: 11px 12px; }
-  .bwgpq-question { font-size: 15px; }
+  .bwgpq-question { font-size: 20px; }
 }
 </style>
 
 <div class="bwgpq-wrap">
   <div class="bwgpq-head">
-    <div class="bwgpq-head-kicker">🧠 Interactive Quiz</div>
-    <h1>How's Your Tourist German?</h1>
-    <div class="bwgpq-head-sub">10 questions — See if you're ready for Berlin!</div>
+    <div>
+      <div class="bwgpq-head-kicker">Interactive quiz</div>
+      <h1>How's Your Tourist German?</h1>
+      <div class="bwgpq-head-sub">Ten practical phrases for restaurants, stations, signs, and small Berlin emergencies.</div>
+    </div>
+    <div class="bwgpq-head-mark" aria-hidden="true"><div><strong>10</strong><span>questions</span></div></div>
   </div>
   <div class="bwgpq-body">
 
     <div class="bwgpq-screen bwgpq-active" id="bwgpq-screen-start">
       <div class="bwgpq-start">
-        <p class="bwgpq-start-desc">From asking for the bill to reading street signs — test the German phrases every Berlin visitor needs.</p>
-        <button class="bwgpq-btn-start" type="button" data-bwgpq-start>START QUIZ →</button>
+        <div class="bwgpq-start-copy">
+          <p class="bwgpq-start-desc">From asking for the bill to reading street signs, test the German phrases every Berlin visitor actually needs.</p>
+          <div class="bwgpq-start-points" aria-label="Quiz details">
+            <span class="bwgpq-chip">No signup</span>
+            <span class="bwgpq-chip">Instant feedback</span>
+            <span class="bwgpq-chip">3 minutes</span>
+          </div>
+          <button class="bwgpq-btn-start" type="button" data-bwgpq-start>Start quiz -&gt;</button>
+        </div>
+        <div class="bwgpq-visual" aria-hidden="true">
+          <div class="bwgpq-phrase-card">
+            <p class="bwgpq-phrase-kicker">Try this first</p>
+            <p class="bwgpq-phrase">Bitte?</p>
+            <p class="bwgpq-phrase-note">One small word, several useful meanings. Very Berlin-trip efficient.</p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -430,8 +575,8 @@ bw-german-phrases-quiz { display: block; width: 100%; }
         <div class="bwgpq-result-score" data-bwgpq-final-score></div>
         <p class="bwgpq-result-msg" data-bwgpq-result-msg></p>
         <div class="bwgpq-result-actions">
-          <a class="bwgpq-btn-book" href="${BWGPQ_BOOKING_URL}" target="_blank">Book Your Free Tour →</a>
-          <button class="bwgpq-btn-retry" type="button" data-bwgpq-start>Try Again 🔄</button>
+          <a class="bwgpq-btn-book" href="${BWGPQ_BOOKING_URL}" target="_blank">Book your free tour -&gt;</a>
+          <button class="bwgpq-btn-retry" type="button" data-bwgpq-start>Try again</button>
         </div>
       </div>
     </div>

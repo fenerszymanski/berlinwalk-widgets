@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (German Phrases Quiz redesign)
+
+**Did:** Reworked the quiz widget visual design so `/tools/german-phrases-quiz` no longer feels like a generic card and fixed the retry/start click binding.
+
+**Changed:**
+- `german-phrases-quiz/german-phrases-quiz-element.js` — wider premium layout, strong green hero, yellow 10-question mark, start detail chips, right-side phrase visual, two-column desktop answers, cleaner feedback/result copy, all `[data-bwgpq-start]` buttons bound.
+- `german-phrases-quiz/index.html` — transparent page background and tighter body padding for Wix iframe embedding.
+- `tools-hub/data.json` — `german-phrases-quiz` embedHeight lowered from 620 to 540.
+
+**Opened:** Push to GitHub Pages, then cold-load the live Wix tool page and check the iframe gap.
+**Closed:** `node --check` passes; Playwright verified start, 10 answers, result screen, and Try Again restart.
+
+**Next session should:** If the live page still shows extra white space after push, inspect the Wix dynamic-page iframe/section height rather than the widget body.
+
 ## 2026-05-24 — Codex (Blog menu watchdog)
 
 **Did:** Fixed the PDF lead form regression where the blog mini-nav appeared briefly and then disappeared, taking the desktop index with it on some Wix renders.
