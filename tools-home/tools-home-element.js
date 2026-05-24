@@ -134,7 +134,7 @@ class BWToolsHomeElement extends HTMLElement {
         .bw-tools-home .bw-tools-grid {
           display: grid;
           gap: 16px;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-template-columns: repeat(4, minmax(0, 1fr));
         }
 
         .bw-tools-home .bw-tool-card {
@@ -212,20 +212,22 @@ class BWToolsHomeElement extends HTMLElement {
 
         .bw-tools-home .bw-tool-card h3 {
           color: #1B5E20;
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 800;
           line-height: 1.25;
           margin-bottom: 8px;
           overflow-wrap: break-word;
+          hyphens: auto;
         }
 
         .bw-tools-home .bw-tool-card p {
           color: #212121;
           font-family: var(--serif);
-          font-size: 14.5px;
+          font-size: 13.5px;
           line-height: 1.5;
           margin-bottom: 12px;
           overflow-wrap: break-word;
+          hyphens: auto;
         }
 
         .bw-tools-home .bw-tool-cta {
@@ -478,7 +480,7 @@ class BWToolsHomeElement extends HTMLElement {
   _renderSkeleton() {
     return `
       <div class="bw-tools-grid" aria-label="Loading tools">
-        ${Array.from({ length: 6 }).map(() => `
+        ${Array.from({ length: 8 }).map(() => `
           <div class="bw-skeleton-card" aria-hidden="true">
             <span class="bw-skeleton-thumb"></span>
             <span class="bw-skeleton-copy">
@@ -493,7 +495,7 @@ class BWToolsHomeElement extends HTMLElement {
   }
 
   _renderTools(data) {
-    const tools = data && Array.isArray(data.featuredTools) ? data.featuredTools.slice(0, 6) : [];
+    const tools = data && Array.isArray(data.featuredTools) ? data.featuredTools.slice(0, 8) : [];
     const root = this.querySelector('.bw-tools-root');
     if (!root || !tools.length) {
       this._renderError();

@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Blog sidebar header gate v24)
+
+**Did:** Kept the desktop blog sidebar top-anchored, but gated visibility until the site header/menu has cleared.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — detects the top site header/menu and hides the sidebar until the sidebar's 24px top position is below that header threshold; no-header pages still show immediately.
+- `README.md`, `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=24`.
+
+**Opened:** Push to GitHub Pages and update Wix Custom Code from `?v=23` to `?v=24`.
+**Closed:** Local Playwright mock: with a 120px header, sidebar hidden at page top and visible after header scroll; without a header, sidebar visible at page top; old mini-nav remains absent.
+
+**Next session should:** After v24 is active, cold-load the Berlin Wall post and confirm the sidebar starts at the top position only after the menu area has passed.
+
 ## 2026-05-24 — Codex (Blog sidebar top anchor v23)
 
 **Did:** Moved the desktop blog sidebar up to the top of the viewport so the new sidebar-internal blog nav does not make the `On this page` index feel cramped.

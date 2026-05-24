@@ -12,6 +12,7 @@
   var SIDEBAR_GAP = 12;
   var SIDEBAR_TOP = 24;
   var SIDEBAR_BOTTOM_GAP = 24;
+  var HEADER_CLEARANCE = 8;
   var lastPath = location.pathname;
   var observer = null;
   var resizeTimer = null;
@@ -331,6 +332,39 @@
     return candidates[0].rect;
   }
 
+  function getHeaderMenuEndY() {
+    var selectors = [
+      'bw-site-header',
+      '.bw-header-wrap',
+      '#SITE_HEADER',
+      '[id*="SITE_HEADER"]',
+      '[data-hook="site-header"]',
+      '[data-testid*="header"]',
+      'header[role="banner"]'
+    ];
+    var y = window.scrollY || window.pageYOffset || 0;
+    var best = 0;
+    var seen = [];
+    for (var i = 0; i < selectors.length; i++) {
+      var nodes = document.querySelectorAll(selectors[i]);
+      for (var j = 0; j < nodes.length; j++) {
+        var el = nodes[j];
+        if (seen.indexOf(el) !== -1 || !isVisible(el)) continue;
+        seen.push(el);
+        var rect = el.getBoundingClientRect();
+        if (!rect || rect.height < 32 || rect.height > 320) continue;
+        if (rect.bottom <= 0 || rect.top > 260) continue;
+        var style = window.getComputedStyle(el);
+        var endY = rect.bottom + y;
+        if ((style.position === 'fixed' || style.position === 'sticky') && rect.top <= 4) {
+          endY = rect.bottom;
+        }
+        best = Math.max(best, endY);
+      }
+    }
+    return best ? best + HEADER_CLEARANCE : 0;
+  }
+
   function positionSidebar(sidebar, body, items) {
     if (!sidebar || !body) return;
     var viewportW = window.innerWidth || document.documentElement.clientWidth;
@@ -341,7 +375,8 @@
     var bounds = getBodyBounds(body);
     var y = window.scrollY || window.pageYOffset || 0;
     var stickyY = y + SIDEBAR_TOP;
-    if (!bounds || stickyY > bounds.end - 24) {
+    var startY = getHeaderMenuEndY();
+    if (!bounds || stickyY < startY || stickyY > bounds.end - 24) {
       sidebar.classList.remove('bw-blog-sidebar-visible');
       return;
     }
@@ -467,7 +502,8 @@
     var bounds = getBodyBounds(body);
     var y = window.scrollY || window.pageYOffset || 0;
     var stickyY = y + SIDEBAR_TOP;
-    return !!(bounds && stickyY <= bounds.end - 24);
+    var startY = getHeaderMenuEndY();
+    return !!(bounds && stickyY >= startY && stickyY <= bounds.end - 24);
   }
 
   function repairSidebarIfNeeded() {

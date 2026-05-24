@@ -155,9 +155,10 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   floating booking CTA copy to `Book Now`. The sidebar hides below 900px, starts
   at the top of the desktop viewport, disappears near the article end, sits
   close to the article edge, and its long heading list uses the remaining
-  viewport height before it needs to scroll inside the card. It no longer
-  injects a mini-nav into Wix-managed blog header or article body DOM, because
-  that caused header/Quick Summary flicker. The script skips
+  viewport height before it needs to scroll inside the card. It waits until the
+  site header/menu has cleared before becoming visible. It no longer injects a
+  mini-nav into Wix-managed blog header or article body DOM, because that caused
+  header/Quick Summary flicker. The script skips
   non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through

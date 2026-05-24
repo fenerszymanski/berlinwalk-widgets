@@ -56,16 +56,17 @@ Add these through Wix Custom Code, not as iframe embeds. They self-skip when the
 current URL is not a blog post.
 
 ```html
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=23" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=24" defer></script>
 ```
 
 `blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from
 visible H2/H3 headings, adds compact share buttons, adds a small `Blog Home` /
 `Categories` block inside that same sidebar, and shortens the floating booking
 CTA copy to `Book Now`. The sidebar hides below 900px, disappears near the
-article end, sits close to the article edge, and in v23 is anchored near the
-top of the viewport so the index gets the full remaining height before it needs
-internal scrolling. It no longer injects any blog
+article end, sits close to the article edge, and stays anchored near the top of
+the viewport so the index gets the full remaining height before it needs
+internal scrolling. In v24, it waits until the site header/menu has cleared
+before becoming visible. It no longer injects any blog
 navigation into the Wix-managed post header or article body, avoiding the
 show-hide-show flicker and Quick Summary rerender.
 
