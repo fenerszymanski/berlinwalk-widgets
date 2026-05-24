@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Blog mini-nav v21 stable content placement)
+
+**Did:** Changed strategy for the flickering blog mini-nav: stop fighting Wix's volatile post header/title render area.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — mini-nav now inserts as the first child of the stable post content body when possible, so it appears below H1 and before the article text instead of above the title.
+- `README.md`, `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=21`.
+
+**Opened:** Push to GitHub Pages and update Wix Custom Code from `?v=20` to `?v=21`.
+**Closed:** Local mock `/post/` test: nav is inside `[data-hook="post-content"]`, first child, after H1, visible by 900ms, and delayed repair still works after forced removal.
+
+**Next session should:** After v21 is active, cold-load the Berlin Wall post and verify the nav is below the title and no longer flickers.
+
 ## 2026-05-24 — Codex (Blog mini-nav v20 adaptive timing)
 
 **Did:** Replaced the too-slow v19 fixed 3.2s mini-nav delay with adaptive timing so the menu comes back faster without jumping into Wix's first render churn.

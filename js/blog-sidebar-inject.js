@@ -8,9 +8,9 @@
   var LOG = '[BW blog-sidebar]';
   var MAX_ITEMS = 12;
   var MIN_DESKTOP_WIDTH = 900;
-  var MINI_NAV_MIN_DELAY = 1400;
-  var MINI_NAV_MAX_DELAY = 2400;
-  var MINI_NAV_STABLE_MS = 450;
+  var MINI_NAV_MIN_DELAY = 750;
+  var MINI_NAV_MAX_DELAY = 1500;
+  var MINI_NAV_STABLE_MS = 250;
   var MINI_NAV_POLL_MS = 150;
   var MINI_NAV_REPAIR_DELAY = 900;
   var SIDEBAR_WIDTH = 236;
@@ -22,7 +22,7 @@
   var miniNavTimer = null;
   var miniNavBootAt = 0;
   var miniNavStableSince = 0;
-  var miniNavLastAnchorKey = '';
+  var miniNavLastBodyKey = '';
   var sidebarRepairTimer = null;
   var hiddenSidebarSince = 0;
   var lastSidebarRepairAt = 0;
@@ -451,6 +451,17 @@
     return body;
   }
 
+  function isStablePostContent(body) {
+    return !!(body && body.nodeType === 1 && body !== document.body && body.matches && body.matches([
+      '[data-hook="post-content"]',
+      '[data-hook="rich-content-viewer"]',
+      '[data-hook="rich-content"]',
+      '.post-content',
+      '.rich-content',
+      '.blog-post-page-content'
+    ].join(',')));
+  }
+
   function getActiveCategory() {
     var path = location.pathname.toLowerCase();
     if (/(german|language|speak)/.test(path)) return 'german-language';
@@ -479,8 +490,6 @@
 
   function injectMiniNav(body) {
     if (document.querySelector('[' + NAV_MARKER + ']')) return;
-    var anchor = findMiniNavAnchor(body);
-    if (!anchor) return;
     var nav = document.createElement('nav');
     nav.className = 'bw-blog-mini-nav';
     nav.setAttribute(NAV_MARKER, '1');
@@ -499,6 +508,14 @@
           '</div>' +
         '</div>' +
       '</div>';
+
+    if (isStablePostContent(body)) {
+      body.insertBefore(nav, body.firstChild);
+      return;
+    }
+
+    var anchor = findMiniNavAnchor(body);
+    if (!anchor) return;
     if (anchor.tagName && anchor.tagName.toLowerCase() === 'h1' && anchor.parentNode) {
       anchor.parentNode.insertBefore(nav, anchor);
     } else if (anchor.parentNode && anchor !== document.body) {
@@ -508,18 +525,18 @@
     }
   }
 
-  function miniNavAnchorStable(body) {
-    var anchor = findPostTitle() || findMiniNavAnchor(body);
-    if (!anchor || !isVisible(anchor)) return false;
-    var rect = anchor.getBoundingClientRect();
+  function miniNavBodyStable(body) {
+    if (!body || !isVisible(body)) return false;
+    var rect = body.getBoundingClientRect();
+    var firstText = body.querySelector('p, h2, h3, li, blockquote');
     var key = [
       Math.round(rect.top),
       Math.round(rect.height),
-      cleanText(anchor.textContent).slice(0, 48)
+      cleanText(firstText ? firstText.textContent : body.textContent).slice(0, 48)
     ].join(':');
     var now = Date.now();
-    if (key !== miniNavLastAnchorKey) {
-      miniNavLastAnchorKey = key;
+    if (key !== miniNavLastBodyKey) {
+      miniNavLastBodyKey = key;
       miniNavStableSince = now;
       return false;
     }
@@ -535,7 +552,7 @@
       return;
     }
     var elapsed = Date.now() - miniNavBootAt;
-    var stable = miniNavAnchorStable(body);
+    var stable = isStablePostContent(body) ? miniNavBodyStable(body) : true;
     if (elapsed >= MINI_NAV_MIN_DELAY && (stable || elapsed >= MINI_NAV_MAX_DELAY)) {
       injectStyle();
       injectMiniNav(body);
@@ -680,7 +697,7 @@
   function bootForCurrentPage() {
     miniNavBootAt = Date.now();
     miniNavStableSince = 0;
-    miniNavLastAnchorKey = '';
+    miniNavLastBodyKey = '';
     scheduleInitialMiniNav(MINI_NAV_POLL_MS);
     setTimeout(inject, 900);
     [1600, 2800, 4500].forEach(function (delay) {
