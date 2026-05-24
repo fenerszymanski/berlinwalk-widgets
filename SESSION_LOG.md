@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Gemini Pro tool icons)
+
+**Did:** Generated the 8 missing tools-hub card icons with Gemini Pro as a no-text 4x2 sheet, cropped them, and wired them into the hub data.
+
+**Changed:**
+- `tools-home/icons/` — added 512px and 160px PNGs for `berlin-luggage-storage`, `berlin-currywurst-finder`, `alexanderplatz-parking-map`, `berlin-parking-calculator`, `connectivity-picker`, `berlin-club-picker`, `berlin-wall-remnants`, `german-phrases-quiz`.
+- `tools-hub/data.json` — added GitHub Pages `image` URLs for the 8 new icons.
+- `tools-home/icons/manifest.json` — appended source/crop metadata for the new icons.
+- Root `PROJECT_MEMORY.md` — updated missing-icon note to generated/resolved.
+
+**Opened:** Push to GitHub Pages so the new absolute image URLs resolve live.
+**Closed:** `tools-hub/data.json` now has `image` for all 26 tools.
+
+**Next session should:** After push, verify `/berlin-tools` shows 26 real icons and zero fallback letters.
+
 ## 2026-05-24 — Codex (Tools hub card icons)
 
 **Did:** Activated the existing PNG icon URLs on the `/berlin-tools` hub cards and listed the tools that still need icons.

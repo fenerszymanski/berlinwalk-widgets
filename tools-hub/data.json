@@ -122,7 +122,8 @@
       "lead": "Find the nearest place to drop your suitcase in Berlin: stations, the Hauptbahnhof Gepäckcenter, the airport, and app pickup zones.",
       "category": "Maps",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/luggage-storage-map/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-luggage-storage-160.png"
     },
     {
       "slug": "berlin-currywurst-finder",
@@ -130,7 +131,8 @@
       "lead": "Find the right currywurst stand for your Berlin day: historic, local, vegan, spicy, late-night, or closest after the tour.",
       "category": "Maps",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/currywurst-finder/",
-      "embedHeight": 720
+      "embedHeight": 720,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-currywurst-finder-160.png"
     },
     {
       "slug": "berlin-sunday-shopping",
@@ -210,7 +212,8 @@
       "lead": "Find practical parking near the BerlinWalk tour start, with Google Maps directions to the World Clock.",
       "category": "Maps",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/alexanderplatz-parking-map/",
-      "embedHeight": 660
+      "embedHeight": 660,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/alexanderplatz-parking-map-160.png"
     },
     {
       "slug": "berlin-parking-calculator",
@@ -218,7 +221,8 @@
       "lead": "Compare a central Alexanderplatz garage with Park + Ride and public transport in 30 seconds.",
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-parking-calculator/",
-      "embedHeight": 720
+      "embedHeight": 720,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-parking-calculator-160.png"
     },
     {
       "slug": "connectivity-picker",
@@ -226,7 +230,8 @@
       "lead": "eSIM, German SIM, or just free WiFi? Get a personalised recommendation for your Berlin trip in 10 seconds.",
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/connectivity-picker/",
-      "embedHeight": 900
+      "embedHeight": 900,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/connectivity-picker-160.png"
     },
     {
       "slug": "berlin-club-picker",
@@ -234,7 +239,8 @@
       "lead": "Find the Berlin club that fits your night, outfit, group size, and appetite for a difficult door.",
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/club-picker/",
-      "embedHeight": 1180
+      "embedHeight": 1180,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-club-picker-160.png"
     },
     {
       "slug": "berlin-wall-remnants",
@@ -242,7 +248,8 @@
       "lead": "Find where to see the Berlin Wall today — 8 sites mapped with addresses, transport, and what's actually there.",
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-map/",
-      "embedHeight": 660
+      "embedHeight": 660,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-wall-remnants-160.png"
     },
     {
       "slug": "german-phrases-quiz",
@@ -250,7 +257,8 @@
       "lead": "10 questions on the German words and phrases every Berlin visitor needs. See if you're ready.",
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/german-phrases-quiz/",
-      "embedHeight": 540
+      "embedHeight": 540,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/german-phrases-quiz-160.png"
     }
   ]
 }
