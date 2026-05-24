@@ -10,7 +10,7 @@ Format for each entry — see `AGENTS.md` §9.
 
 **Changed:**
 - `german-phrases-quiz/german-phrases-quiz-element.js` — wider premium layout, strong green hero, yellow 10-question mark, start detail chips, right-side phrase visual, two-column desktop answers, cleaner feedback/result copy, all `[data-bwgpq-start]` buttons bound.
-- `german-phrases-quiz/index.html` — transparent page background and tighter body padding for Wix iframe embedding.
+- `german-phrases-quiz/index.html` — transparent page background, tighter body padding, and hidden document overflow to prevent the nested iframe scrollbar.
 - `tools-hub/data.json` — `german-phrases-quiz` embedHeight lowered from 620 to 540.
 
 **Opened:** Push to GitHub Pages, then cold-load the live Wix tool page and check the iframe gap.
