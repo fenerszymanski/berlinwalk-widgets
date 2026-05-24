@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Blog mini-nav v19 delayed render)
+
+**Did:** Fixed the blog `Blog Home / Categories` mini-nav visibly appearing, disappearing, and coming back while Wix finishes rendering the post header.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — removed mini-nav injection from the early sidebar pass; mini-nav now waits ~3.2s before first render and uses a slower debounce if Wix removes it later.
+- `README.md`, `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=19`.
+
+**Opened:** Push to GitHub Pages and update Wix Custom Code from `?v=18` to `?v=19`.
+**Closed:** Local mock `/post/` test: nav absent at 1.1s, present before H1 at 3.7s, delayed repair restores it after forced removal without instant flashing.
+
+**Next session should:** After v19 is active, cold-load the Berlin Wall post and verify the mini-nav does not show-hide-show.
+
 ## 2026-05-24 — Codex (Tools hub embed CTA moved)
 
 **Did:** Moved the `Have a travel site or hotel website?` embed CTA from the top of `/berlin-tools` to the bottom, below all tool categories and above the tour footer.

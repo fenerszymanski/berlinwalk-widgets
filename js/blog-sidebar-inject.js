@@ -8,6 +8,8 @@
   var LOG = '[BW blog-sidebar]';
   var MAX_ITEMS = 12;
   var MIN_DESKTOP_WIDTH = 900;
+  var MINI_NAV_INITIAL_DELAY = 3200;
+  var MINI_NAV_REPAIR_DELAY = 1800;
   var SIDEBAR_WIDTH = 236;
   var SIDEBAR_GAP = 12;
   var SIDEBAR_TOP = 150;
@@ -15,6 +17,7 @@
   var observer = null;
   var resizeTimer = null;
   var miniNavTimer = null;
+  var miniNavReadyAt = 0;
   var sidebarRepairTimer = null;
   var hiddenSidebarSince = 0;
   var lastSidebarRepairAt = 0;
@@ -400,6 +403,7 @@
   }
 
   function removeAllInjectedUi() {
+    clearTimeout(miniNavTimer);
     removeSidebar();
     if (cleanupMiniNav) {
       cleanupMiniNav();
@@ -476,8 +480,6 @@
     nav.className = 'bw-blog-mini-nav';
     nav.setAttribute(NAV_MARKER, '1');
     nav.setAttribute('aria-label', 'Blog navigation');
-    nav.style.opacity = '0';
-    nav.style.visibility = 'hidden';
     nav.innerHTML =
       '<div class="bw-blog-mini-nav-inner">' +
         '<div class="bw-blog-mini-nav-content">' +
@@ -499,14 +501,15 @@
     } else {
       document.body.insertBefore(nav, document.body.firstChild);
     }
-    setTimeout(function () {
-      nav.style.opacity = '';
-      nav.style.visibility = '';
-    }, 250);
   }
 
-  function scheduleMiniNav() {
+  function scheduleMiniNav(delay) {
     clearTimeout(miniNavTimer);
+    var now = Date.now();
+    var wait = typeof delay === 'number' ? delay : MINI_NAV_REPAIR_DELAY;
+    if (miniNavReadyAt && now < miniNavReadyAt) {
+      wait = Math.max(wait, miniNavReadyAt - now);
+    }
     miniNavTimer = setTimeout(function () {
       if (!isPostPage()) return;
       if (document.querySelector('[' + NAV_MARKER + ']')) return;
@@ -514,7 +517,7 @@
       if (!body) return;
       injectStyle();
       injectMiniNav(body);
-    }, 450);
+    }, wait);
   }
 
   function compactFloatingCta() {
@@ -586,7 +589,6 @@
     var body = findPostBody();
     if (!body) return false;
     injectStyle();
-    injectMiniNav(body);
     compactFloatingCta();
     var items = collectHeadings(body);
     if (items.length < 2) {
@@ -595,7 +597,6 @@
     }
 
     removeSidebar();
-    injectMiniNav(body);
     var sidebar = createSidebar(items);
     document.body.appendChild(sidebar);
     currentSidebarState = {
@@ -635,19 +636,20 @@
   }
 
   function bootForCurrentPage() {
+    miniNavReadyAt = Date.now() + MINI_NAV_INITIAL_DELAY;
+    scheduleMiniNav(MINI_NAV_INITIAL_DELAY);
     setTimeout(inject, 900);
     [1600, 2800, 4500].forEach(function (delay) {
       setTimeout(function () {
         if (!document.querySelector('[' + MARKER + ']')) inject();
         else scheduleSidebarRepair();
-        if (!document.querySelector('[' + NAV_MARKER + ']')) scheduleMiniNav();
       }, delay);
     });
     if (observer) observer.disconnect();
     observer = new MutationObserver(function () {
       if (!isPostPage()) return;
       compactFloatingCta();
-      if (!document.querySelector('[' + NAV_MARKER + ']')) scheduleMiniNav();
+      if (!document.querySelector('[' + NAV_MARKER + ']')) scheduleMiniNav(MINI_NAV_REPAIR_DELAY);
       if (!document.querySelector('[' + MARKER + ']')) scheduleInject();
       else scheduleSidebarRepair();
     });

@@ -56,7 +56,7 @@ Add these through Wix Custom Code, not as iframe embeds. They self-skip when the
 current URL is not a blog post.
 
 ```html
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=18" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=19" defer></script>
 ```
 
 `blog-sidebar-inject.js` adds a static in-post `Blog Home` / `Categories` menu
@@ -66,7 +66,9 @@ share buttons, and shortens the floating booking CTA copy to `Book Now`. The
 sidebar hides below 900px, starts with the post H1, disappears near the article
 end, sits close to the article edge, and its long heading list scrolls inside
 the card when needed. The mini-nav is not sticky; the sidebar also repairs
-itself if Wix replaces the post body after initial render.
+itself if Wix replaces the post body after initial render. v19 delays the
+mini-nav until Wix's blog header has settled, preventing the visible
+show-hide-show flicker during load.
 
 ## Sitewide Custom Code
 
