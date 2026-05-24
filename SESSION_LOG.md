@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-24 — Codex (Blog mini-nav v20 adaptive timing)
+
+**Did:** Replaced the too-slow v19 fixed 3.2s mini-nav delay with adaptive timing so the menu comes back faster without jumping into Wix's first render churn.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — mini-nav waits at least ~1.4s, renders once the H1/header position is stable for ~450ms, and force-renders by ~2.4s if needed; repair delay reduced to 900ms.
+- `README.md`, `wix-embed-snippets.md` — bumped the blog helper URL to `blog-sidebar-inject.js?v=20`.
+
+**Opened:** Push to GitHub Pages and update Wix Custom Code from `?v=19` to `?v=20`.
+**Closed:** Local mock `/post/` test: no nav at 1.1s, nav present before H1 at 1.8s, still present at 2.5s.
+
+**Next session should:** After v20 is active, cold-load the Berlin Wall post and verify the nav appears quickly without show-hide-show.
+
 ## 2026-05-24 — Codex (Blog mini-nav v19 delayed render)
 
 **Did:** Fixed the blog `Blog Home / Categories` mini-nav visibly appearing, disappearing, and coming back while Wix finishes rendering the post header.

@@ -155,10 +155,10 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   to `Book Now`. The sidebar hides below 900px, starts with the post H1,
   disappears near the article end, sits close to the article edge, and its long
   heading list scrolls inside the card when needed. The mini-nav is not sticky,
-  renders after a short load delay so Wix's blog header can settle, and its
-  absence no longer triggers full sidebar rebuilds. The sidebar repairs stale
-  heading/body references if Wix replaces the post body after initial render.
-  The script skips non-`/post/` URLs.
+  waits briefly for Wix's blog header to stabilize, then renders as soon as the
+  H1 position is stable. Its absence no longer triggers full sidebar rebuilds.
+  The sidebar repairs stale heading/body references if Wix replaces the post
+  body after initial render. The script skips non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
   `sessionStorage`, links the primary CTA to the booking route, and posts the

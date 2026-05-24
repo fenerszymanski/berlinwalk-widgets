@@ -8,8 +8,11 @@
   var LOG = '[BW blog-sidebar]';
   var MAX_ITEMS = 12;
   var MIN_DESKTOP_WIDTH = 900;
-  var MINI_NAV_INITIAL_DELAY = 3200;
-  var MINI_NAV_REPAIR_DELAY = 1800;
+  var MINI_NAV_MIN_DELAY = 1400;
+  var MINI_NAV_MAX_DELAY = 2400;
+  var MINI_NAV_STABLE_MS = 450;
+  var MINI_NAV_POLL_MS = 150;
+  var MINI_NAV_REPAIR_DELAY = 900;
   var SIDEBAR_WIDTH = 236;
   var SIDEBAR_GAP = 12;
   var SIDEBAR_TOP = 150;
@@ -17,7 +20,9 @@
   var observer = null;
   var resizeTimer = null;
   var miniNavTimer = null;
-  var miniNavReadyAt = 0;
+  var miniNavBootAt = 0;
+  var miniNavStableSince = 0;
+  var miniNavLastAnchorKey = '';
   var sidebarRepairTimer = null;
   var hiddenSidebarSince = 0;
   var lastSidebarRepairAt = 0;
@@ -503,13 +508,50 @@
     }
   }
 
+  function miniNavAnchorStable(body) {
+    var anchor = findPostTitle() || findMiniNavAnchor(body);
+    if (!anchor || !isVisible(anchor)) return false;
+    var rect = anchor.getBoundingClientRect();
+    var key = [
+      Math.round(rect.top),
+      Math.round(rect.height),
+      cleanText(anchor.textContent).slice(0, 48)
+    ].join(':');
+    var now = Date.now();
+    if (key !== miniNavLastAnchorKey) {
+      miniNavLastAnchorKey = key;
+      miniNavStableSince = now;
+      return false;
+    }
+    return now - miniNavStableSince >= MINI_NAV_STABLE_MS;
+  }
+
+  function tryInitialMiniNav() {
+    if (!isPostPage()) return;
+    if (document.querySelector('[' + NAV_MARKER + ']')) return;
+    var body = findPostBody();
+    if (!body) {
+      scheduleInitialMiniNav(MINI_NAV_POLL_MS);
+      return;
+    }
+    var elapsed = Date.now() - miniNavBootAt;
+    var stable = miniNavAnchorStable(body);
+    if (elapsed >= MINI_NAV_MIN_DELAY && (stable || elapsed >= MINI_NAV_MAX_DELAY)) {
+      injectStyle();
+      injectMiniNav(body);
+      return;
+    }
+    scheduleInitialMiniNav(MINI_NAV_POLL_MS);
+  }
+
+  function scheduleInitialMiniNav(delay) {
+    clearTimeout(miniNavTimer);
+    miniNavTimer = setTimeout(tryInitialMiniNav, delay);
+  }
+
   function scheduleMiniNav(delay) {
     clearTimeout(miniNavTimer);
-    var now = Date.now();
     var wait = typeof delay === 'number' ? delay : MINI_NAV_REPAIR_DELAY;
-    if (miniNavReadyAt && now < miniNavReadyAt) {
-      wait = Math.max(wait, miniNavReadyAt - now);
-    }
     miniNavTimer = setTimeout(function () {
       if (!isPostPage()) return;
       if (document.querySelector('[' + NAV_MARKER + ']')) return;
@@ -636,8 +678,10 @@
   }
 
   function bootForCurrentPage() {
-    miniNavReadyAt = Date.now() + MINI_NAV_INITIAL_DELAY;
-    scheduleMiniNav(MINI_NAV_INITIAL_DELAY);
+    miniNavBootAt = Date.now();
+    miniNavStableSince = 0;
+    miniNavLastAnchorKey = '';
+    scheduleInitialMiniNav(MINI_NAV_POLL_MS);
     setTimeout(inject, 900);
     [1600, 2800, 4500].forEach(function (delay) {
       setTimeout(function () {
@@ -649,7 +693,10 @@
     observer = new MutationObserver(function () {
       if (!isPostPage()) return;
       compactFloatingCta();
-      if (!document.querySelector('[' + NAV_MARKER + ']')) scheduleMiniNav(MINI_NAV_REPAIR_DELAY);
+      if (!document.querySelector('[' + NAV_MARKER + ']')) {
+        if (Date.now() - miniNavBootAt < MINI_NAV_MAX_DELAY) scheduleInitialMiniNav(MINI_NAV_POLL_MS);
+        else scheduleMiniNav(MINI_NAV_REPAIR_DELAY);
+      }
       if (!document.querySelector('[' + MARKER + ']')) scheduleInject();
       else scheduleSidebarRepair();
     });
