@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-25 — Codex (Thank-you calendar links)
+
+**Did:** Added conditional Add to Calendar links to the `<bw-thank-you>` page section.
+
+**Changed:**
+- `thank-you/thank-you-element.js` — parses booking date/time from the hidden Wix confirmation section or optional element attributes, then renders Google Calendar and Apple/Outlook `.ics` links.
+- `README.md`, `AGENTS.md`, project root `PROJECT_MEMORY.md` — documented the calendar behavior.
+
+**Opened:** After push/publish, verify with a real/test booking that Wix's live confirmation section exposes a parseable date/time.
+**Closed:** Local Node parser tests passed; Chrome CDP mock passed on desktop/mobile with no horizontal overflow, calendar links for `20260525T113000/133000`, and `#thankYouPage1` hidden.
+
+**Next session should:** Push to GitHub Pages, publish Wix if needed, then book a test slot and check that the calendar card uses the real booking time.
+
 ## 2026-05-25 — Codex (Hide Wix thank-you confirmation)
 
 **Did:** Added a defensive hide for Wix's forced `Booking Confirmation` app section on `/thank-you-page`.

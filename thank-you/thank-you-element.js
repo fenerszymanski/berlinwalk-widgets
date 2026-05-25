@@ -5,11 +5,25 @@ const BW_THANK_YOU_TRANSPORT_URL = 'https://www.berlinwalk.com/tools/transport-t
 const BW_THANK_YOU_TODAY_URL = 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today';
 const BW_THANK_YOU_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.webp';
 const BW_THANK_YOU_IMAGE_FALLBACK_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.jpg';
+const BW_THANK_YOU_CALENDAR = {
+  title: 'BerlinWalk Free Walking Tour',
+  location: 'World Clock, Alexanderplatz, 10178 Berlin, Germany',
+  timezone: 'Europe/Berlin',
+  durationMinutes: 120,
+  details: [
+    'Your BerlinWalk spot is booked.',
+    'Meeting point: World Clock, Alexanderplatz.',
+    'Look for the BerlinWalk guide with a green umbrella.',
+    'Please arrive 5 minutes early.',
+    BW_THANK_YOU_MEETING_POINT_URL
+  ].join('\n')
+};
 
 class BWThankYouElement extends HTMLElement {
   connectedCallback() {
     document.body.classList.add('bw-thank-you-page-active');
     this._render();
+    this._syncCalendarLinksFromPage();
     this._startWixConfirmationHide();
   }
 
@@ -245,6 +259,64 @@ class BWThankYouElement extends HTMLElement {
           font-size: 14px;
           line-height: 1.55;
           margin-bottom: 0;
+        }
+
+        .bw-thank-you .bw-ty-calendar[hidden] {
+          display: none !important;
+        }
+
+        .bw-thank-you .bw-ty-calendar {
+          align-items: center;
+          background: var(--green-dark);
+          border: 1px solid rgba(197, 225, 165, 0.34);
+          border-radius: 8px;
+          box-shadow: 0 18px 42px rgba(16, 36, 20, 0.18);
+          color: #FFFFFF;
+          display: grid;
+          gap: 18px;
+          grid-template-columns: minmax(0, 1fr) auto;
+          margin-top: 16px;
+          max-width: 650px;
+          padding: 18px 20px;
+        }
+
+        .bw-thank-you .bw-ty-calendar-kicker {
+          color: var(--yellow);
+          display: block;
+          font-size: 11px;
+          font-weight: 800;
+          line-height: 1.35;
+          margin-bottom: 5px;
+          text-transform: uppercase;
+        }
+
+        .bw-thank-you .bw-ty-calendar strong {
+          display: block;
+          font-size: 16px;
+          font-weight: 800;
+          line-height: 1.35;
+          margin-bottom: 4px;
+        }
+
+        .bw-thank-you .bw-ty-calendar p {
+          color: rgba(255, 255, 255, 0.78);
+          font-family: var(--serif);
+          font-size: 14px;
+          line-height: 1.55;
+          margin-bottom: 0;
+        }
+
+        .bw-thank-you .bw-ty-calendar-actions {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          justify-content: flex-end;
+        }
+
+        .bw-thank-you .bw-ty-calendar-actions .bw-ty-btn {
+          min-height: 42px;
+          padding: 12px 16px;
+          white-space: nowrap;
         }
 
         .bw-thank-you .bw-ty-pass {
@@ -559,6 +631,19 @@ class BWThankYouElement extends HTMLElement {
             grid-template-columns: 1fr;
           }
 
+          .bw-thank-you .bw-ty-calendar {
+            align-items: stretch;
+            grid-template-columns: 1fr;
+          }
+
+          .bw-thank-you .bw-ty-calendar-actions {
+            flex-direction: column;
+          }
+
+          .bw-thank-you .bw-ty-calendar-actions .bw-ty-btn {
+            width: 100%;
+          }
+
           .bw-thank-you .bw-ty-pass-body {
             padding: 20px 20px 22px;
           }
@@ -598,6 +683,17 @@ class BWThankYouElement extends HTMLElement {
                 <div>
                   <strong>Check your inbox before the tour.</strong>
                   <p>The confirmation email carries the practical booking details. If you have a question, reply to that email and I will see it there.</p>
+                </div>
+              </div>
+              <div class="bw-ty-calendar" data-bw-ty-calendar hidden aria-live="polite">
+                <div>
+                  <span class="bw-ty-calendar-kicker">Add to calendar</span>
+                  <strong>Save your tour time</strong>
+                  <p data-bw-ty-calendar-copy></p>
+                </div>
+                <div class="bw-ty-calendar-actions" aria-label="Calendar links">
+                  <a class="bw-ty-btn bw-ty-btn-secondary" data-bw-ty-calendar-google href="#" target="_blank" rel="noopener">Google Calendar</a>
+                  <a class="bw-ty-btn bw-ty-btn-primary" data-bw-ty-calendar-ics href="#" download="berlinwalk-tour.ics">Apple / Outlook</a>
                 </div>
               </div>
             </div>
@@ -698,6 +794,8 @@ class BWThankYouElement extends HTMLElement {
   }
 
   _hideWixBookingConfirmation() {
+    this._syncCalendarLinksFromPage();
+
     const targets = new Set();
     const directSelectors = [
       '#thankYouPage1',
@@ -735,6 +833,337 @@ class BWThankYouElement extends HTMLElement {
       target.style.setProperty('overflow', 'hidden', 'important');
       target.style.setProperty('visibility', 'hidden', 'important');
     });
+  }
+
+  _syncCalendarLinksFromPage() {
+    if (this._calendarReady) return;
+    const booking = this._getCalendarBookingDetails();
+    if (!booking) return;
+    this._calendarReady = true;
+    this._renderCalendarLinks(booking);
+  }
+
+  _getCalendarBookingDetails() {
+    const attributeBooking = this._getCalendarBookingFromAttributes();
+    if (attributeBooking) return attributeBooking;
+
+    const candidates = [];
+    const directSelectors = [
+      '#thankYouPage1',
+      '[data-testid="thankYouPage1"]',
+      '[data-hook="thankYouPage1"]',
+      '[aria-label="Thank You Page"]',
+      '[aria-label="Booking Confirmation"]'
+    ];
+
+    directSelectors.forEach((selector) => {
+      try {
+        document.querySelectorAll(selector).forEach((node) => {
+          if (!this.contains(node)) candidates.push(node);
+        });
+      } catch (error) {
+        // Ignore selector support differences in Wix/editor contexts.
+      }
+    });
+
+    document.querySelectorAll('h1, h2, h3, [role="heading"], p, span, div').forEach((node) => {
+      if (this.contains(node)) return;
+      if ((node.textContent || '').trim() !== 'Booking Confirmation') return;
+      const target = this._findWixHideTarget(node);
+      if (target) candidates.push(target);
+    });
+
+    for (const candidate of candidates) {
+      const text = this._getReadableText(candidate);
+      const parsed = this._parseBookingDateTime(text);
+      if (parsed) return this._createCalendarBooking(parsed);
+    }
+
+    return null;
+  }
+
+  _getCalendarBookingFromAttributes() {
+    const startRaw =
+      this.getAttribute('tour-start') ||
+      this.getAttribute('data-tour-start') ||
+      this.getAttribute('datetime') ||
+      this.getAttribute('date-time') ||
+      this.getAttribute('data-date-time');
+    if (!startRaw) return null;
+
+    const start = this._parseBookingDateTime(startRaw);
+    if (!start) return null;
+
+    const endRaw = this.getAttribute('tour-end') || this.getAttribute('data-tour-end');
+    const end = endRaw ? this._parseBookingDateTime(endRaw) : null;
+    return this._createCalendarBooking(start, end);
+  }
+
+  _createCalendarBooking(start, end) {
+    return {
+      title: BW_THANK_YOU_CALENDAR.title,
+      location: BW_THANK_YOU_CALENDAR.location,
+      timezone: BW_THANK_YOU_CALENDAR.timezone,
+      details: BW_THANK_YOU_CALENDAR.details,
+      start,
+      end: end || this._addMinutesToDateParts(start, BW_THANK_YOU_CALENDAR.durationMinutes)
+    };
+  }
+
+  _renderCalendarLinks(booking) {
+    const calendar = this.querySelector('[data-bw-ty-calendar]');
+    if (!calendar) return;
+
+    const google = calendar.querySelector('[data-bw-ty-calendar-google]');
+    const ics = calendar.querySelector('[data-bw-ty-calendar-ics]');
+    const copy = calendar.querySelector('[data-bw-ty-calendar-copy]');
+    const displayDate = this._formatDisplayDate(booking.start);
+
+    if (copy) copy.textContent = `${booking.title} - ${displayDate}`;
+    if (google) google.href = this._buildGoogleCalendarUrl(booking);
+    if (ics) {
+      ics.href = this._buildIcsDataUrl(booking);
+      ics.setAttribute('download', `berlinwalk-tour-${this._formatCompactDate(booking.start).toLowerCase()}.ics`);
+    }
+
+    calendar.hidden = false;
+  }
+
+  _parseBookingDateTime(value) {
+    const text = this._normalizeBookingText(value);
+    if (!text) return null;
+
+    const iso = text.match(/\b(\d{4})-(\d{1,2})-(\d{1,2})(?:t|\s+)(\d{1,2}):(\d{2})\b/i);
+    if (iso) {
+      return this._buildDateParts(iso[1], iso[2], iso[3], iso[4], iso[5]);
+    }
+
+    const monthName = '(jan(?:uary|uar)?|feb(?:ruary|ruar)?|maerz|mar(?:ch|z)?|apr(?:il)?|may|mai|jun(?:e|i)?|jul(?:y|i)?|aug(?:ust)?|sep(?:t|tember)?|oct(?:ober)?|okt(?:ober)?|nov(?:ember)?|dec(?:ember)?|dez(?:ember)?)';
+    const timePart = '(\\d{1,2})(?::(\\d{2}))?\\s*(am|pm)?';
+    const afterDate = '(?:,?\\s*(?:at|um)?\\s*)';
+
+    const monthFirst = new RegExp(`\\b${monthName}\\.?\\s+(\\d{1,2})(?:st|nd|rd|th)?\\.?[,]?\\s+(\\d{4})${afterDate}${timePart}\\b`, 'i');
+    const monthFirstMatch = text.match(monthFirst);
+    if (monthFirstMatch) {
+      return this._buildDateParts(
+        monthFirstMatch[3],
+        this._monthNumber(monthFirstMatch[1]),
+        monthFirstMatch[2],
+        monthFirstMatch[4],
+        monthFirstMatch[5] || '0',
+        monthFirstMatch[6]
+      );
+    }
+
+    const dayFirst = new RegExp(`\\b(\\d{1,2})(?:st|nd|rd|th)?\\.?\\s+${monthName}\\.?[,]?\\s+(\\d{4})${afterDate}${timePart}\\b`, 'i');
+    const dayFirstMatch = text.match(dayFirst);
+    if (dayFirstMatch) {
+      return this._buildDateParts(
+        dayFirstMatch[3],
+        this._monthNumber(dayFirstMatch[2]),
+        dayFirstMatch[1],
+        dayFirstMatch[4],
+        dayFirstMatch[5] || '0',
+        dayFirstMatch[6]
+      );
+    }
+
+    const numeric = new RegExp(`\\b(\\d{1,2})[./-](\\d{1,2})[./-](\\d{4})${afterDate}${timePart}\\b`, 'i');
+    const numericMatch = text.match(numeric);
+    if (numericMatch) {
+      const first = Number(numericMatch[1]);
+      const second = Number(numericMatch[2]);
+      const month = first > 12 ? second : second > 12 ? first : second;
+      const day = first > 12 ? first : second > 12 ? second : first;
+
+      return this._buildDateParts(
+        numericMatch[3],
+        month,
+        day,
+        numericMatch[4],
+        numericMatch[5] || '0',
+        numericMatch[6]
+      );
+    }
+
+    return null;
+  }
+
+  _normalizeBookingText(value) {
+    return String(value || '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[\u00a0\u200b-\u200d\ufeff]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
+  _getReadableText(node) {
+    if (!node) return '';
+    const parts = [];
+
+    const read = (current) => {
+      if (!current) return;
+      if (current.nodeType === 3) {
+        parts.push(current.textContent || '');
+        return;
+      }
+      if (current.nodeType !== 1) return;
+      Array.from(current.childNodes || []).forEach(read);
+      parts.push(' ');
+    };
+
+    read(node);
+    return this._normalizeBookingText(parts.join(' '));
+  }
+
+  _monthNumber(value) {
+    const key = this._normalizeBookingText(value).toLowerCase().replace(/\./g, '');
+    const months = {
+      jan: 1,
+      january: 1,
+      januar: 1,
+      feb: 2,
+      february: 2,
+      februar: 2,
+      mar: 3,
+      march: 3,
+      marz: 3,
+      maerz: 3,
+      apr: 4,
+      april: 4,
+      may: 5,
+      mai: 5,
+      jun: 6,
+      june: 6,
+      juni: 6,
+      jul: 7,
+      july: 7,
+      juli: 7,
+      aug: 8,
+      august: 8,
+      sep: 9,
+      sept: 9,
+      september: 9,
+      oct: 10,
+      october: 10,
+      okt: 10,
+      oktober: 10,
+      nov: 11,
+      november: 11,
+      dec: 12,
+      december: 12,
+      dez: 12,
+      dezember: 12
+    };
+    return months[key] || null;
+  }
+
+  _buildDateParts(year, month, day, hour, minute, period) {
+    const result = {
+      year: Number(year),
+      month: Number(month),
+      day: Number(day),
+      hour: Number(hour),
+      minute: Number(minute || 0)
+    };
+
+    const normalizedPeriod = String(period || '').toLowerCase();
+    if (normalizedPeriod === 'pm' && result.hour < 12) result.hour += 12;
+    if (normalizedPeriod === 'am' && result.hour === 12) result.hour = 0;
+
+    if (!this._isValidDateParts(result)) return null;
+    return result;
+  }
+
+  _isValidDateParts(parts) {
+    if (!parts) return false;
+    if (parts.year < 2020 || parts.year > 2100) return false;
+    if (parts.month < 1 || parts.month > 12) return false;
+    if (parts.hour < 0 || parts.hour > 23) return false;
+    if (parts.minute < 0 || parts.minute > 59) return false;
+
+    const daysInMonth = new Date(Date.UTC(parts.year, parts.month, 0)).getUTCDate();
+    return parts.day >= 1 && parts.day <= daysInMonth;
+  }
+
+  _addMinutesToDateParts(parts, minutes) {
+    const date = new Date(Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute + minutes));
+    return {
+      year: date.getUTCFullYear(),
+      month: date.getUTCMonth() + 1,
+      day: date.getUTCDate(),
+      hour: date.getUTCHours(),
+      minute: date.getUTCMinutes()
+    };
+  }
+
+  _formatDisplayDate(parts) {
+    const date = new Date(Date.UTC(parts.year, parts.month - 1, parts.day));
+    const dateLabel = new Intl.DateTimeFormat('en-GB', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+      timeZone: 'UTC'
+    }).format(date);
+    return `${dateLabel} at ${this._pad(parts.hour)}:${this._pad(parts.minute)}`;
+  }
+
+  _formatCompactDate(parts) {
+    return `${parts.year}${this._pad(parts.month)}${this._pad(parts.day)}T${this._pad(parts.hour)}${this._pad(parts.minute)}00`;
+  }
+
+  _buildGoogleCalendarUrl(booking) {
+    const params = new URLSearchParams({
+      action: 'TEMPLATE',
+      text: booking.title,
+      dates: `${this._formatCompactDate(booking.start)}/${this._formatCompactDate(booking.end)}`,
+      ctz: booking.timezone,
+      details: booking.details,
+      location: booking.location
+    });
+    return `https://calendar.google.com/calendar/render?${params.toString()}`;
+  }
+
+  _buildIcsDataUrl(booking) {
+    const timestamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+    const lines = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//BerlinWalk//Thank You Page//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      `UID:berlinwalk-${this._formatCompactDate(booking.start).toLowerCase()}@berlinwalk.com`,
+      `DTSTAMP:${timestamp}`,
+      `DTSTART;TZID=${booking.timezone}:${this._formatCompactDate(booking.start)}`,
+      `DTEND;TZID=${booking.timezone}:${this._formatCompactDate(booking.end)}`,
+      `SUMMARY:${this._escapeIcsText(booking.title)}`,
+      `LOCATION:${this._escapeIcsText(booking.location)}`,
+      `DESCRIPTION:${this._escapeIcsText(booking.details)}`,
+      `URL:${BW_THANK_YOU_MEETING_POINT_URL}`,
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ];
+
+    return `data:text/calendar;charset=utf-8,${encodeURIComponent(lines.map((line) => this._foldIcsLine(line)).join('\r\n'))}`;
+  }
+
+  _escapeIcsText(value) {
+    return String(value || '')
+      .replace(/\\/g, '\\\\')
+      .replace(/\n/g, '\\n')
+      .replace(/,/g, '\\,')
+      .replace(/;/g, '\\;');
+  }
+
+  _foldIcsLine(line) {
+    return String(line).replace(/(.{73})/g, '$1\r\n ');
+  }
+
+  _pad(value) {
+    return String(value).padStart(2, '0');
   }
 
   _findWixHideTarget(node) {
