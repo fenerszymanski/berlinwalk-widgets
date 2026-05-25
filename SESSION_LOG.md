@@ -4,6 +4,33 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-25 — Codex (Route story preview section)
+
+**Did:** Added a compact route-story preview section to `<bw-route>` so The Route page teases the story-map concept without duplicating the full route story page.
+
+**Changed:**
+- `route/route-element.js` — replaced the plain post-map CTA block with a `Route as story map` section, three short story chapters, and story/booking CTAs.
+- `README.md`, `AGENTS.md`, project root `PROJECT_MEMORY.md` — documented the new route widget behavior.
+- `output/qa/route-story-preview-desktop.png`, `output/qa/route-story-preview-mobile.png` — local QA screenshots.
+
+**Opened:** Push/publish the widget repo so Wix uses the new route section.
+**Closed:** `node --check` passed; local Chrome QA shows desktop/mobile render, correct links, no console errors, and no horizontal overflow.
+
+**Next session should:** After publish, cold-load the live The Route page and confirm the new preview sits well above the global footer/next section.
+
+## 2026-05-25 — Codex (Route story live SEO)
+
+**Did:** Applied SEO metadata for the published route story page via Wix Custom Embeds API.
+
+**Changed:**
+- Wix: Created HEAD custom embed `BerlinWalk Route Story SEO` (`f161dfd6-23a8-4bf8-9d2a-da95f471de13`, `revision=2`). The Custom Embeds API ignored `pageFilter` on write, so the final embed is URL-guarded and only upserts title/meta/OG/Twitter/canonical/route `TouristTrip` JSON-LD when `location.pathname` is `/berlin-walking-tour-route`.
+- Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the live Wix SEO state.
+
+**Opened:** Optional later cleanup: set the native Wix SEO title/meta in Studio so raw source HTML also matches before JS execution.
+**Closed:** Chrome DOM checks show route title/description/OG image/route JSON-LD only on the route page; home and meeting point keep their own SEO and no console errors.
+
+**Next session should:** Recheck the live page without a query string after Wix CDN cache settles.
+
 ## 2026-05-25 — Codex (Route story footer contrast)
 
 **Did:** Adjusted the route story page ending so it no longer blends into the global footer.

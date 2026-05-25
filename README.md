@@ -34,7 +34,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `tools-hub/` - `bw-tools-hub` tools hub Custom Element.
 - `site-footer/` - `bw-site-footer` site footer Custom Element.
 - `why/` - `bw-why` homepage "Why Walk With Me?" Custom Element.
-- `route/` - `bw-route` homepage interactive illustrated route map Custom Element.
+- `route/` - `bw-route` interactive illustrated route map Custom Element with a route-story preview section.
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
 - `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin Survival Map signup.
@@ -70,7 +70,7 @@ Current homepage Custom Element source URLs:
 | Route Story | `bw-route-story` | `https://fenerszymanski.github.io/berlinwalk-widgets/route-story/route-story-element.js` | Standalone `/berlin-walking-tour-route` page with a 12-stop story map built around what visitors understand at each stop. |
 | Thank You | `bw-thank-you` | `https://fenerszymanski.github.io/berlinwalk-widgets/thank-you/thank-you-element.js` | Post-booking confirmation page for `/thank-you-page`; hides the global sticky booking CTA and Wix's forced `#thankYouPage1` confirmation section, shows Google Calendar + Apple/Outlook `.ics` links when Wix exposes a parseable booking date/time, renders a Tour Day Assistant with countdown, Open-Meteo forecast, outfit advice, and meeting-point map, and shows a change/cancel card that uses a detected or attributed manage-booking URL when available. |
 | Why Walk With Me | `bw-why` | `https://fenerszymanski.github.io/berlinwalk-widgets/why/why-element.js` | White cards, yellow accent bars, Lucide icons. |
-| The Route | `bw-route` | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | Interactive illustrated map with 12 pins on cream background. |
+| The Route | `bw-route` | `https://fenerszymanski.github.io/berlinwalk-widgets/route/route-element.js` | Interactive illustrated map with 12 pins plus a compact "Route as story map" preview that links to the full route story page and booking. |
 | FAQ | `bw-faq` | `https://fenerszymanski.github.io/berlinwalk-widgets/faq/faq-element.js` | Use attribute `post="home"`. |
 
 Important live notes:

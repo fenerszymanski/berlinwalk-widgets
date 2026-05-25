@@ -22,7 +22,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `leave-review/` | Per-booking review submission form for `berlinwalk.com/leave-review`. `leave-review-element.js` is the `bw-leave-review` Custom Element (preferred); `index.html` is the legacy iframe page kept until Wix swaps to the CE; `preview.html` is a local CE test harness |
 | `reviews/` | `bw-reviews` Custom Element + local test page (`berlinwalk.com/reviews`) |
 | `hero-home/` | Homepage conversion hero Custom Element. `hero-home-element.js` defines `<bw-hero-home>` with a real tour photo background, literal `Free Berlin Walking Tour` H1, booking CTA, meeting point CTA, route line, 9.8/12/~2h/tip-based proof points, and reviews link. |
-| `testimonials/`, `route/`, `faq/`, `gallery/`, etc. | Homepage Custom Elements — see `README.md` for the full list. `stats/` is deprecated because the new hero already carries the tour facts; its element is now a hidden no-op safety net. |
+| `testimonials/`, `route/`, `faq/`, `gallery/`, etc. | Homepage Custom Elements — see `README.md` for the full list. `route/route-element.js` defines `<bw-route>` with the illustrated 12-pin route map plus a compact "Route as story map" preview section linking to the full story map and booking. `stats/` is deprecated because the new hero already carries the tour facts; its element is now a hidden no-op safety net. |
 | `guide-home/` | Homepage Custom Element for the shorter `Meet Yusuf` teaser section. `guide-home-element.js` defines `<bw-guide-home>` with the Rotes Rathaus guide photo, compact route/trust proof points, and links to `/the-guide` + booking. |
 | `lead-form/` | Berlin Survival Map email capture iframe widget |
 | `blog-home/` | Homepage Custom Element for the editorial blog teaser. `blog-home-element.js` defines `<bw-blog-home>` with the `Berlin Travel Notes` layout: one featured practical guide, three note cards, image-led design, and a CTA to `/blog`. `data.json` is the curated mini-CMS for the four homepage posts. |
@@ -52,7 +52,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 - `berlinwalk.com/reviews` — public review display (Custom Element `bw-reviews`)
 - `berlinwalk.com/meeting-point` — planned dedicated meeting point page (Custom Element `bw-meeting-point`)
 - `berlinwalk.com/the-guide` — planned dedicated guide profile/trust page (Custom Element `bw-the-guide`)
-- `berlinwalk.com/berlin-walking-tour-route` — planned dedicated route story map page (Custom Element `bw-route-story`)
+- `berlinwalk.com/berlin-walking-tour-route` — live dedicated route story map page (Custom Element `bw-route-story`)
 - `berlinwalk.com/tools` — directory grid of all 19+ free Berlin widgets, rendered from `tools-hub/data.json`
 - `berlinwalk.com/tools/<slug>` — dynamic per-tool page bound to BerlinTools CMS collection
 - `berlinwalk.com/widgets` — third-party embed gallery, rendered from `tools-hub/data.json` via `widgets-hub/`

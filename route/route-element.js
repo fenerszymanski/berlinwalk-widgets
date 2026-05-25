@@ -155,10 +155,44 @@ class BWRouteElement extends HTMLElement {
             </div>
           </div>
 
-          <div class="bw-route-cta" aria-label="Explore or book the BerlinWalk route">
-            <a class="bw-route-btn bw-route-btn-primary" href="${BW_ROUTE_STORY_URL}">Explore the full story map</a>
-            <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">Book your free spot</a>
-          </div>
+          <section class="bw-route-story-preview" aria-labelledby="bw-route-story-title">
+            <div class="bw-route-story-copy">
+              <p class="bw-route-story-kicker">Route as story map</p>
+              <h3 id="bw-route-story-title">Not just where you stop. What you understand there.</h3>
+              <p>
+                The full route page turns the 12 stops into a short Berlin story:
+                medieval origins, royal ambition, war scars, East Berlin, and the city
+                you walk through today.
+              </p>
+              <div class="bw-route-story-actions" aria-label="Open the route story or book the tour">
+                <a class="bw-route-btn bw-route-btn-primary" href="${BW_ROUTE_STORY_URL}">Explore the story map</a>
+                <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">Book your free spot</a>
+              </div>
+            </div>
+            <div class="bw-route-story-steps" aria-label="Story chapters from the route">
+              <article class="bw-route-story-step">
+                <span class="bw-route-story-index">01</span>
+                <div>
+                  <h4>Start with orientation</h4>
+                  <p>At Alexanderplatz and the TV Tower, you learn how East Berlin still shapes the first impression of the city.</p>
+                </div>
+              </article>
+              <article class="bw-route-story-step">
+                <span class="bw-route-story-index">02</span>
+                <div>
+                  <h4>Read the old centre</h4>
+                  <p>Rotes Rathaus, St. Mary's Church, and Marx-Engels Forum reveal the medieval city that was erased, rebuilt, and argued over.</p>
+                </div>
+              </article>
+              <article class="bw-route-story-step">
+                <span class="bw-route-story-index">03</span>
+                <div>
+                  <h4>Leave with the bigger picture</h4>
+                  <p>Museum Island and Hackescher Markt connect Prussian ambition, visible repair, and the Berlin you can keep exploring after the walk.</p>
+                </div>
+              </article>
+            </div>
+          </section>
 
           <div class="bw-route-stop-card" role="region" aria-live="polite" hidden></div>
         </div>
@@ -650,6 +684,101 @@ class BWRouteElement extends HTMLElement {
           transition: max-height 400ms ease-out, opacity 300ms ease-out, padding 400ms ease-out;
         }
 
+        .bw-route .bw-route-story-preview {
+          align-items: stretch;
+          background: #FFFFFF;
+          border: 1px solid #E2E8D7;
+          border-radius: 8px;
+          display: grid;
+          gap: 28px;
+          grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+          margin-top: 28px;
+          padding: 32px;
+        }
+
+        .bw-route .bw-route-story-copy {
+          align-self: center;
+        }
+
+        .bw-route .bw-route-story-kicker {
+          color: #1B5E20;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.12em;
+          line-height: 1.3;
+          margin: 0 0 10px;
+          text-transform: uppercase;
+        }
+
+        .bw-route .bw-route-story-copy h3 {
+          color: #1B5E20;
+          font-size: 28px;
+          font-weight: 800;
+          line-height: 1.16;
+          margin: 0;
+        }
+
+        .bw-route .bw-route-story-copy p {
+          color: #394539;
+          font-size: 15px;
+          line-height: 1.65;
+          margin: 16px 0 0;
+        }
+
+        .bw-route .bw-route-story-actions {
+          align-items: center;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          margin-top: 22px;
+        }
+
+        .bw-route .bw-route-story-steps {
+          display: grid;
+          gap: 12px;
+        }
+
+        .bw-route .bw-route-story-step {
+          background: #FAFAF5;
+          border: 1px solid #E8E8E8;
+          border-radius: 8px;
+          display: grid;
+          gap: 14px;
+          grid-template-columns: 44px minmax(0, 1fr);
+          min-height: 112px;
+          padding: 18px;
+        }
+
+        .bw-route .bw-route-story-index {
+          align-items: center;
+          background: #FFE600;
+          border-radius: 999px;
+          color: #1B5E20;
+          display: inline-flex;
+          font-size: 12px;
+          font-weight: 800;
+          height: 44px;
+          justify-content: center;
+          letter-spacing: 0.06em;
+          line-height: 1;
+          width: 44px;
+        }
+
+        .bw-route .bw-route-story-step h4 {
+          color: #1B5E20;
+          font-size: 16px;
+          font-weight: 800;
+          line-height: 1.25;
+          margin: 0;
+        }
+
+        .bw-route .bw-route-story-step p {
+          color: #4E5A4E;
+          font-size: 14px;
+          line-height: 1.55;
+          margin: 7px 0 0;
+        }
+
         .bw-route .bw-route-cta {
           align-items: center;
           display: flex;
@@ -882,6 +1011,33 @@ class BWRouteElement extends HTMLElement {
           .bw-route .bw-route-cta {
             align-items: stretch;
             flex-direction: column;
+          }
+
+          .bw-route .bw-route-story-preview {
+            grid-template-columns: 1fr;
+            margin-top: 24px;
+            padding: 24px 18px;
+          }
+
+          .bw-route .bw-route-story-copy h3 {
+            font-size: 23px;
+          }
+
+          .bw-route .bw-route-story-actions {
+            align-items: stretch;
+            flex-direction: column;
+          }
+
+          .bw-route .bw-route-story-step {
+            grid-template-columns: 38px minmax(0, 1fr);
+            min-height: 0;
+            padding: 16px;
+          }
+
+          .bw-route .bw-route-story-index {
+            font-size: 11px;
+            height: 38px;
+            width: 38px;
           }
 
           .bw-route .bw-route-btn {
