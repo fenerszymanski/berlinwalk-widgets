@@ -5,6 +5,18 @@ const BW_THANK_YOU_TRANSPORT_URL = 'https://www.berlinwalk.com/tools/transport-t
 const BW_THANK_YOU_TODAY_URL = 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today';
 const BW_THANK_YOU_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.webp';
 const BW_THANK_YOU_IMAGE_FALLBACK_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.jpg';
+const BW_THANK_YOU_MAP_TILES = [
+  'https://tile.openstreetmap.org/16/35209/21491.png',
+  'https://tile.openstreetmap.org/16/35210/21491.png',
+  'https://tile.openstreetmap.org/16/35209/21492.png',
+  'https://tile.openstreetmap.org/16/35210/21492.png'
+];
+const BW_THANK_YOU_WEATHER_API_URL = 'https://api.open-meteo.com/v1/forecast';
+const BW_THANK_YOU_WEATHER_COORDS = {
+  latitude: 52.521918,
+  longitude: 13.413215
+};
+const BW_THANK_YOU_FORECAST_DAYS = 16;
 const BW_THANK_YOU_CALENDAR = {
   title: 'BerlinWalk Free Walking Tour',
   location: 'World Clock, Alexanderplatz, 10178 Berlin, Germany',
@@ -23,7 +35,9 @@ class BWThankYouElement extends HTMLElement {
   connectedCallback() {
     document.body.classList.add('bw-thank-you-page-active');
     this._render();
+    this._setupInteractionTracking();
     this._syncCalendarLinksFromPage();
+    this._syncTourDayAssistantFromPage();
     this._startWixConfirmationHide();
   }
 
@@ -31,6 +45,9 @@ class BWThankYouElement extends HTMLElement {
     document.body.classList.remove('bw-thank-you-page-active');
     if (this._bookingObserver) this._bookingObserver.disconnect();
     if (this._hideTimers) this._hideTimers.forEach((timer) => window.clearTimeout(timer));
+    if (this._countdownTimer) window.clearInterval(this._countdownTimer);
+    if (this._forecastAbortController) this._forecastAbortController.abort();
+    if (this._trackClickHandler) this.removeEventListener('click', this._trackClickHandler);
   }
 
   _render() {
@@ -81,11 +98,13 @@ class BWThankYouElement extends HTMLElement {
         .bw-thank-you h2,
         .bw-thank-you h3,
         .bw-thank-you p,
+        .bw-thank-you strong,
         .bw-thank-you figure,
         .bw-thank-you ol,
         .bw-thank-you dl,
         .bw-thank-you dd {
           margin-top: 0;
+          overflow-wrap: break-word;
         }
 
         .bw-thank-you dd {
@@ -117,6 +136,14 @@ class BWThankYouElement extends HTMLElement {
           display: grid;
           gap: 44px;
           grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.78fr);
+        }
+
+        .bw-thank-you .bw-ty-hero-grid > *,
+        .bw-thank-you .bw-ty-section-head > *,
+        .bw-thank-you .bw-ty-assistant-card,
+        .bw-thank-you .bw-ty-step,
+        .bw-thank-you .bw-ty-link-card {
+          min-width: 0;
         }
 
         .bw-thank-you .bw-ty-eyebrow {
@@ -418,6 +445,243 @@ class BWThankYouElement extends HTMLElement {
           margin-bottom: 0;
         }
 
+        .bw-thank-you .bw-ty-assistant {
+          background:
+            linear-gradient(180deg, #FFFFFF 0%, #F8FBF2 100%);
+          border-top: 1px solid rgba(27, 94, 32, 0.13);
+          color: var(--text);
+          padding: 44px 0;
+        }
+
+        .bw-thank-you .bw-ty-assistant .bw-ty-section-head {
+          color: var(--text);
+        }
+
+        .bw-thank-you .bw-ty-assistant .bw-ty-section-head p {
+          color: var(--muted);
+        }
+
+        .bw-thank-you .bw-ty-assistant-grid {
+          align-items: stretch;
+          display: grid;
+          gap: 14px;
+          grid-template-columns: minmax(230px, 0.7fr) minmax(0, 1fr) minmax(280px, 1fr);
+        }
+
+        .bw-thank-you .bw-ty-assistant-card {
+          background: #FFFFFF;
+          border: 1px solid rgba(27, 94, 32, 0.16);
+          border-radius: 8px;
+          box-shadow: 0 16px 34px rgba(27, 94, 32, 0.09);
+          min-height: 260px;
+          overflow: hidden;
+          padding: 22px;
+          position: relative;
+        }
+
+        .bw-thank-you .bw-ty-assistant-card::before {
+          background: var(--yellow);
+          content: "";
+          height: 5px;
+          left: 0;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+
+        .bw-thank-you .bw-ty-card-kicker {
+          color: var(--green);
+          display: block;
+          font-size: 11px;
+          font-weight: 800;
+          line-height: 1.35;
+          margin-bottom: 13px;
+          text-transform: uppercase;
+        }
+
+        .bw-thank-you .bw-ty-assistant-card h3 {
+          color: var(--green);
+          font-size: 23px;
+          font-weight: 800;
+          letter-spacing: 0;
+          line-height: 1.12;
+          margin-bottom: 10px;
+        }
+
+        .bw-thank-you .bw-ty-assistant-card p {
+          color: var(--muted);
+          font-size: 14px;
+          line-height: 1.58;
+          margin-bottom: 0;
+        }
+
+        .bw-thank-you .bw-ty-countdown-value {
+          color: var(--green);
+          display: block;
+          font-size: 31px;
+          font-weight: 800;
+          line-height: 1.02;
+          margin-bottom: 10px;
+        }
+
+        .bw-thank-you .bw-ty-countdown-date {
+          border-top: 1px solid rgba(27, 94, 32, 0.16);
+          color: var(--green);
+          display: block;
+          font-size: 12px;
+          font-weight: 800;
+          line-height: 1.4;
+          margin-top: 18px;
+          padding-top: 14px;
+          text-transform: uppercase;
+        }
+
+        .bw-thank-you .bw-ty-weather-metrics {
+          display: grid;
+          gap: 10px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          margin: 18px 0;
+        }
+
+        .bw-thank-you .bw-ty-weather-metrics[hidden],
+        .bw-thank-you .bw-ty-outfit[hidden] {
+          display: none !important;
+        }
+
+        .bw-thank-you .bw-ty-weather-metric {
+          background: #F5F8EF;
+          border: 1px solid rgba(197, 225, 165, 0.7);
+          border-radius: 8px;
+          min-height: 78px;
+          padding: 12px;
+        }
+
+        .bw-thank-you .bw-ty-weather-metric span {
+          color: var(--muted);
+          display: block;
+          font-size: 10px;
+          font-weight: 800;
+          line-height: 1.35;
+          margin-bottom: 7px;
+          text-transform: uppercase;
+        }
+
+        .bw-thank-you .bw-ty-weather-metric strong {
+          color: var(--green);
+          display: block;
+          font-size: 19px;
+          font-weight: 800;
+          line-height: 1.1;
+        }
+
+        .bw-thank-you .bw-ty-outfit {
+          background: var(--green-dark);
+          border-left: 6px solid var(--yellow);
+          border-radius: 8px;
+          color: #FFFFFF;
+          padding: 16px 17px;
+        }
+
+        .bw-thank-you .bw-ty-outfit strong {
+          color: var(--yellow);
+          display: block;
+          font-size: 13px;
+          font-weight: 800;
+          line-height: 1.35;
+          margin-bottom: 7px;
+          text-transform: uppercase;
+        }
+
+        .bw-thank-you .bw-ty-outfit p {
+          color: rgba(255, 255, 255, 0.82);
+          font-size: 14px;
+          line-height: 1.55;
+        }
+
+        .bw-thank-you .bw-ty-map-card {
+          display: grid;
+          gap: 15px;
+          grid-template-rows: auto minmax(180px, 1fr) auto;
+          padding: 22px;
+        }
+
+        .bw-thank-you .bw-ty-map-frame {
+          aspect-ratio: 4 / 3;
+          background: #E8F0E0;
+          border-radius: 8px;
+          display: block;
+          min-height: 190px;
+          overflow: hidden;
+          position: relative;
+          width: 100%;
+        }
+
+        .bw-thank-you .bw-ty-map-tile-grid {
+          aspect-ratio: 1 / 1;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-rows: repeat(2, minmax(0, 1fr));
+          left: 0;
+          position: absolute;
+          top: -18%;
+          width: 100%;
+        }
+
+        .bw-thank-you .bw-ty-map-tile-grid img {
+          display: block;
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+
+        .bw-thank-you .bw-ty-map-pin {
+          background: var(--green);
+          border: 4px solid var(--yellow);
+          border-radius: 999px;
+          box-shadow: 0 8px 18px rgba(16, 36, 20, 0.35);
+          height: 26px;
+          left: 40%;
+          position: absolute;
+          top: 47%;
+          transform: translate(-50%, -50%);
+          width: 26px;
+          z-index: 2;
+        }
+
+        .bw-thank-you .bw-ty-map-label {
+          background: rgba(16, 36, 20, 0.9);
+          border-left: 5px solid var(--yellow);
+          bottom: 14px;
+          color: #FFFFFF;
+          font-size: 12px;
+          font-weight: 800;
+          left: 14px;
+          line-height: 1.25;
+          padding: 8px 10px;
+          position: absolute;
+          text-transform: uppercase;
+          z-index: 2;
+        }
+
+        .bw-thank-you .bw-ty-map-credit {
+          background: rgba(255, 255, 255, 0.88);
+          bottom: 8px;
+          color: var(--muted);
+          font-size: 9px;
+          font-weight: 700;
+          line-height: 1.2;
+          padding: 4px 6px;
+          position: absolute;
+          right: 8px;
+          z-index: 2;
+        }
+
+        .bw-thank-you .bw-ty-map-card .bw-ty-btn {
+          justify-self: start;
+          min-height: 42px;
+          padding: 12px 16px;
+        }
+
         .bw-thank-you .bw-ty-next {
           background: var(--green);
           color: #FFFFFF;
@@ -590,12 +854,14 @@ class BWThankYouElement extends HTMLElement {
           }
 
           .bw-thank-you .bw-ty-steps,
-          .bw-thank-you .bw-ty-links {
+          .bw-thank-you .bw-ty-links,
+          .bw-thank-you .bw-ty-assistant-grid {
             grid-template-columns: 1fr;
           }
 
           .bw-thank-you .bw-ty-step,
-          .bw-thank-you .bw-ty-link-card {
+          .bw-thank-you .bw-ty-link-card,
+          .bw-thank-you .bw-ty-assistant-card {
             min-height: auto;
           }
         }
@@ -657,7 +923,19 @@ class BWThankYouElement extends HTMLElement {
             font-size: 28px;
           }
 
+          .bw-thank-you .bw-ty-weather-metrics {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-thank-you .bw-ty-map-card .bw-ty-btn {
+            width: 100%;
+          }
+
           .bw-thank-you .bw-ty-next {
+            padding: 36px 0;
+          }
+
+          .bw-thank-you .bw-ty-assistant {
             padding: 36px 0;
           }
 
@@ -675,8 +953,8 @@ class BWThankYouElement extends HTMLElement {
               <h1 id="bw-ty-title">You are booked. See you at the <span class="bw-ty-highlight">World Clock.</span></h1>
               <p class="bw-ty-lead">Thank you for reserving your spot on BerlinWalk. Your confirmation email is on its way with the date, time, and booking details. I am looking forward to walking Berlin with you.</p>
               <div class="bw-ty-actions" aria-label="Useful tour-day links">
-                <a class="bw-ty-btn bw-ty-btn-primary" href="${BW_THANK_YOU_MAPS_URL}" target="_blank" rel="noopener">Open meeting point map</a>
-                <a class="bw-ty-btn bw-ty-btn-secondary" href="${BW_THANK_YOU_MEETING_POINT_URL}">View meeting point guide</a>
+                <a class="bw-ty-btn bw-ty-btn-primary" href="${BW_THANK_YOU_MAPS_URL}" target="_blank" rel="noopener" data-bw-ty-event="directions_clicked">Open meeting point map</a>
+                <a class="bw-ty-btn bw-ty-btn-secondary" href="${BW_THANK_YOU_MEETING_POINT_URL}" data-bw-ty-event="meeting_guide_clicked">View meeting point guide</a>
               </div>
               <div class="bw-ty-inbox-note">
                 <span class="bw-ty-inbox-mark">OK</span>
@@ -692,8 +970,8 @@ class BWThankYouElement extends HTMLElement {
                   <p data-bw-ty-calendar-copy></p>
                 </div>
                 <div class="bw-ty-calendar-actions" aria-label="Calendar links">
-                  <a class="bw-ty-btn bw-ty-btn-secondary" data-bw-ty-calendar-google href="#" target="_blank" rel="noopener">Google Calendar</a>
-                  <a class="bw-ty-btn bw-ty-btn-primary" data-bw-ty-calendar-ics href="#" download="berlinwalk-tour.ics">Apple / Outlook</a>
+                  <a class="bw-ty-btn bw-ty-btn-secondary" data-bw-ty-calendar-google data-bw-ty-event="calendar_added" href="#" target="_blank" rel="noopener">Google Calendar</a>
+                  <a class="bw-ty-btn bw-ty-btn-primary" data-bw-ty-calendar-ics data-bw-ty-event="calendar_added" href="#" download="berlinwalk-tour.ics">Apple / Outlook</a>
                 </div>
               </div>
             </div>
@@ -729,6 +1007,64 @@ class BWThankYouElement extends HTMLElement {
           </div>
         </div>
 
+        <section class="bw-ty-assistant" aria-labelledby="bw-ty-assistant-title" data-bw-ty-assistant>
+          <div class="bw-ty-inner">
+            <div class="bw-ty-section-head" data-bw-ty-reveal>
+              <h2 id="bw-ty-assistant-title">Tour day assistant</h2>
+              <p>Live forecast, what to wear, directions, and a countdown in one place before you leave for Alexanderplatz.</p>
+            </div>
+            <div class="bw-ty-assistant-grid">
+              <article class="bw-ty-assistant-card" data-bw-ty-countdown-card data-bw-ty-reveal>
+                <span class="bw-ty-card-kicker">Countdown</span>
+                <strong class="bw-ty-countdown-value" data-bw-ty-countdown-value>Tour time loading</strong>
+                <p data-bw-ty-countdown-copy>The live countdown appears here when Wix exposes your booking time.</p>
+                <time class="bw-ty-countdown-date" data-bw-ty-countdown-date></time>
+              </article>
+
+              <article class="bw-ty-assistant-card" data-bw-ty-weather-card data-bw-ty-reveal aria-live="polite">
+                <span class="bw-ty-card-kicker">Weather + what to wear</span>
+                <h3 data-bw-ty-weather-title>Forecast appears here</h3>
+                <p data-bw-ty-weather-status>The tour-day forecast appears once the booking date is detected. Comfortable walking shoes are always the baseline.</p>
+                <div class="bw-ty-weather-metrics" data-bw-ty-weather-metrics hidden>
+                  <div class="bw-ty-weather-metric">
+                    <span>Feels like</span>
+                    <strong data-bw-ty-weather-temp></strong>
+                  </div>
+                  <div class="bw-ty-weather-metric">
+                    <span>Rain chance</span>
+                    <strong data-bw-ty-weather-rain></strong>
+                  </div>
+                  <div class="bw-ty-weather-metric">
+                    <span>Wind</span>
+                    <strong data-bw-ty-weather-wind></strong>
+                  </div>
+                </div>
+                <div class="bw-ty-outfit" data-bw-ty-outfit hidden>
+                  <strong data-bw-ty-outfit-title>Wear this</strong>
+                  <p data-bw-ty-outfit-copy></p>
+                </div>
+              </article>
+
+              <article class="bw-ty-assistant-card bw-ty-map-card" data-bw-ty-map-card data-bw-ty-reveal>
+                <div>
+                  <span class="bw-ty-card-kicker">Meeting point map</span>
+                  <h3>World Clock, Alexanderplatz</h3>
+                  <p>Arrive 5 minutes early and look for the BerlinWalk guide with a green umbrella.</p>
+                </div>
+                <div class="bw-ty-map-frame" role="img" aria-label="Map to the World Clock at Alexanderplatz">
+                  <div class="bw-ty-map-tile-grid" aria-hidden="true">
+                    ${BW_THANK_YOU_MAP_TILES.map((tileUrl) => `<img src="${tileUrl}" alt="" loading="eager" decoding="async">`).join('')}
+                  </div>
+                  <span class="bw-ty-map-pin" aria-hidden="true"></span>
+                  <span class="bw-ty-map-label">World Clock</span>
+                  <span class="bw-ty-map-credit">Map data OpenStreetMap</span>
+                </div>
+                <a class="bw-ty-btn bw-ty-btn-primary" href="${BW_THANK_YOU_MAPS_URL}" target="_blank" rel="noopener" data-bw-ty-event="directions_clicked">Open in Google Maps</a>
+              </article>
+            </div>
+          </div>
+        </section>
+
         <section class="bw-ty-next" aria-labelledby="bw-ty-next-title">
           <div class="bw-ty-inner">
             <div class="bw-ty-section-head" data-bw-ty-reveal>
@@ -759,19 +1095,19 @@ class BWThankYouElement extends HTMLElement {
               <p>Since your tour spot is sorted, these are the most useful BerlinWalk tools to check before you arrive.</p>
             </div>
             <div class="bw-ty-links">
-              <a class="bw-ty-link-card" href="${BW_THANK_YOU_TRANSPORT_URL}" data-bw-ty-reveal>
+              <a class="bw-ty-link-card" href="${BW_THANK_YOU_TRANSPORT_URL}" data-bw-ty-event="planning_tool_clicked" data-bw-ty-reveal>
                 <span class="bw-ty-link-kicker">Tickets</span>
                 <h3>Which transport ticket do you need?</h3>
                 <p>Compare Berlin AB, ABC, day tickets, and WelcomeCard logic before you ride to Alexanderplatz.</p>
                 <span class="bw-ty-link-action">Open tool</span>
               </a>
-              <a class="bw-ty-link-card" href="${BW_THANK_YOU_TODAY_URL}" data-bw-ty-reveal>
+              <a class="bw-ty-link-card" href="${BW_THANK_YOU_TODAY_URL}" data-bw-ty-event="planning_tool_clicked" data-bw-ty-reveal>
                 <span class="bw-ty-link-kicker">Today</span>
                 <h3>What is open in Berlin today?</h3>
                 <p>Quickly check Sundays, public holidays, supermarkets, museums, transport, and practical services.</p>
                 <span class="bw-ty-link-action">Check today</span>
               </a>
-              <a class="bw-ty-link-card" href="${BW_THANK_YOU_TOOLS_URL}" data-bw-ty-reveal>
+              <a class="bw-ty-link-card" href="${BW_THANK_YOU_TOOLS_URL}" data-bw-ty-event="planning_tool_clicked" data-bw-ty-reveal>
                 <span class="bw-ty-link-kicker">Planning</span>
                 <h3>Use the Berlin planning tools</h3>
                 <p>Weather, budget, luggage, toilets, free things to do, and practical maps for your trip.</p>
@@ -782,6 +1118,19 @@ class BWThankYouElement extends HTMLElement {
         </section>
       </section>
     `;
+  }
+
+  _setupInteractionTracking() {
+    this._trackedEvents = this._trackedEvents || new Set();
+    this._trackClickHandler = (event) => {
+      const target = event.target && event.target.closest ? event.target.closest('[data-bw-ty-event]') : null;
+      if (!target || !this.contains(target)) return;
+      this._track(target.getAttribute('data-bw-ty-event'), {
+        label: this._normalizeBookingText(target.textContent || '').slice(0, 90),
+        href: target.getAttribute('href') || ''
+      });
+    };
+    this.addEventListener('click', this._trackClickHandler);
   }
 
   _startWixConfirmationHide() {
@@ -795,6 +1144,7 @@ class BWThankYouElement extends HTMLElement {
 
   _hideWixBookingConfirmation() {
     this._syncCalendarLinksFromPage();
+    this._syncTourDayAssistantFromPage();
 
     const targets = new Set();
     const directSelectors = [
@@ -843,9 +1193,22 @@ class BWThankYouElement extends HTMLElement {
     this._renderCalendarLinks(booking);
   }
 
+  _syncTourDayAssistantFromPage() {
+    if (this._tourDayReady) return;
+    const booking = this._getCalendarBookingDetails();
+    if (!booking) return;
+    this._tourDayReady = true;
+    this._renderTourDayAssistant(booking);
+  }
+
   _getCalendarBookingDetails() {
+    if (this._bookingDetails) return this._bookingDetails;
+
     const attributeBooking = this._getCalendarBookingFromAttributes();
-    if (attributeBooking) return attributeBooking;
+    if (attributeBooking) {
+      this._bookingDetails = attributeBooking;
+      return attributeBooking;
+    }
 
     const candidates = [];
     const directSelectors = [
@@ -876,7 +1239,10 @@ class BWThankYouElement extends HTMLElement {
     for (const candidate of candidates) {
       const text = this._getReadableText(candidate);
       const parsed = this._parseBookingDateTime(text);
-      if (parsed) return this._createCalendarBooking(parsed);
+      if (parsed) {
+        this._bookingDetails = this._createCalendarBooking(parsed);
+        return this._bookingDetails;
+      }
     }
 
     return null;
@@ -928,6 +1294,496 @@ class BWThankYouElement extends HTMLElement {
 
     calendar.hidden = false;
   }
+
+  _renderTourDayAssistant(booking) {
+    const dateEl = this.querySelector('[data-bw-ty-countdown-date]');
+    if (dateEl) {
+      dateEl.textContent = this._formatDisplayDate(booking.start);
+      dateEl.setAttribute('datetime', this._formatLocalDateTime(booking.start));
+    }
+
+    this._startCountdown(booking);
+    this._loadTourDayWeather(booking);
+    this._trackOnce('tour_day_assistant_ready', {
+      tour_date: this._formatForecastDay(booking.start)
+    });
+  }
+
+  _startCountdown(booking) {
+    if (this._countdownTimer) window.clearInterval(this._countdownTimer);
+
+    const startDate = this._datePartsToTimeZoneDate(booking.start, booking.timezone);
+    if (!startDate || Number.isNaN(startDate.getTime())) return;
+
+    const update = () => this._renderCountdown(startDate, booking);
+    update();
+    this._countdownTimer = window.setInterval(update, 30000);
+  }
+
+  _renderCountdown(startDate, booking) {
+    const value = this.querySelector('[data-bw-ty-countdown-value]');
+    const copy = this.querySelector('[data-bw-ty-countdown-copy]');
+    if (!value || !copy) return;
+
+    const now = Date.now();
+    const diffMs = startDate.getTime() - now;
+    const durationMs = BW_THANK_YOU_CALENDAR.durationMinutes * 60 * 1000;
+
+    if (diffMs <= -durationMs) {
+      value.textContent = 'Tour time passed';
+      copy.textContent = 'If your plans changed, use the confirmation email as the easiest reply point.';
+      if (this._countdownTimer) window.clearInterval(this._countdownTimer);
+      return;
+    }
+
+    if (diffMs <= 0) {
+      value.textContent = 'Head to the World Clock';
+      copy.textContent = 'The tour is starting now. Look for the BerlinWalk guide with a green umbrella.';
+      return;
+    }
+
+    const totalMinutes = Math.max(1, Math.ceil(diffMs / 60000));
+    const days = Math.floor(totalMinutes / 1440);
+    const hours = Math.floor((totalMinutes % 1440) / 60);
+    const minutes = totalMinutes % 60;
+    const parts = [];
+
+    if (days) parts.push(this._formatCountdownUnit(days, 'day'));
+    if (hours || days) parts.push(this._formatCountdownUnit(hours, 'hour'));
+    parts.push(this._formatCountdownUnit(minutes, 'minute'));
+
+    value.textContent = parts.slice(0, 3).join(' ');
+    copy.textContent =
+      days > 0
+        ? 'Check back closer to the tour for the sharpest weather call.'
+        : 'Leave enough time for Alexanderplatz station and the short walk across the square.';
+
+    if (booking && booking.start) {
+      const dateEl = this.querySelector('[data-bw-ty-countdown-date]');
+      if (dateEl) dateEl.textContent = this._formatDisplayDate(booking.start);
+    }
+  }
+
+  _formatCountdownUnit(value, label) {
+    return `${value} ${label}${value === 1 ? '' : 's'}`;
+  }
+
+  async _loadTourDayWeather(booking) {
+    const weatherCard = this.querySelector('[data-bw-ty-weather-card]');
+    if (!weatherCard) return;
+
+    const daysUntilTour = this._daysFromTodayInBerlin(booking.start);
+    if (daysUntilTour < -1) {
+      this._renderWeatherFallback(
+        'Tour date already passed',
+        'The weather widget is built for the days before the walk. Use the meeting point map if you still need directions.',
+        'Practical baseline',
+        'Comfortable walking shoes and a layer you can remove are still the safest Berlin setup.'
+      );
+      return;
+    }
+
+    if (daysUntilTour > BW_THANK_YOU_FORECAST_DAYS - 1) {
+      this._renderWeatherFallback(
+        'Forecast opens closer to tour day',
+        `Live forecasts are shown up to ${BW_THANK_YOU_FORECAST_DAYS} days ahead. Check this page again closer to the walk.`,
+        'Berlin-ready baseline',
+        'Plan for comfortable walking shoes, a light layer, and a small rain layer if your trip is in spring or autumn.'
+      );
+      this._trackOnce('weather_forecast_pending', {
+        tour_date: this._formatForecastDay(booking.start),
+        days_until_tour: daysUntilTour
+      });
+      return;
+    }
+
+    this._setWeatherLoading(booking);
+
+    try {
+      if (this._forecastAbortController) this._forecastAbortController.abort();
+      this._forecastAbortController = 'AbortController' in window ? new AbortController() : null;
+
+      const response = await fetch(this._buildWeatherUrl(), {
+        signal: this._forecastAbortController ? this._forecastAbortController.signal : undefined
+      });
+      if (!response.ok) throw new Error(`Weather request failed: ${response.status}`);
+
+      const data = await response.json();
+      const forecast = this._extractTourForecast(data, booking);
+      if (!forecast) throw new Error('No matching tour forecast');
+
+      this._renderWeatherForecast(booking, forecast);
+      this._trackOnce('weather_forecast_viewed', {
+        tour_date: this._formatForecastDay(booking.start),
+        rain_probability: forecast.rainProbability
+      });
+    } catch (error) {
+      if (error && error.name === 'AbortError') return;
+      this._renderWeatherFallback(
+        'Weather check unavailable',
+        'The live forecast could not load just now. The meeting point map and countdown still work.',
+        'Safe walking setup',
+        'Wear comfortable shoes and bring one layer you can add or remove. If the sky looks doubtful, pack a light rain jacket.'
+      );
+      this._trackOnce('weather_forecast_error', {
+        tour_date: this._formatForecastDay(booking.start)
+      });
+    }
+  }
+
+  _setWeatherLoading(booking) {
+    const title = this.querySelector('[data-bw-ty-weather-title]');
+    const status = this.querySelector('[data-bw-ty-weather-status]');
+    const metrics = this.querySelector('[data-bw-ty-weather-metrics]');
+    const outfit = this.querySelector('[data-bw-ty-outfit]');
+
+    if (title) title.textContent = 'Checking Alexanderplatz weather';
+    if (status) status.textContent = `Loading the forecast for ${this._formatDisplayDate(booking.start)}.`;
+    if (metrics) metrics.hidden = true;
+    if (outfit) outfit.hidden = true;
+  }
+
+  _renderWeatherForecast(booking, forecast) {
+    const title = this.querySelector('[data-bw-ty-weather-title]');
+    const status = this.querySelector('[data-bw-ty-weather-status]');
+    const metrics = this.querySelector('[data-bw-ty-weather-metrics]');
+    const temp = this.querySelector('[data-bw-ty-weather-temp]');
+    const rain = this.querySelector('[data-bw-ty-weather-rain]');
+    const wind = this.querySelector('[data-bw-ty-weather-wind]');
+    const outfit = this.querySelector('[data-bw-ty-outfit]');
+    const outfitTitle = this.querySelector('[data-bw-ty-outfit-title]');
+    const outfitCopy = this.querySelector('[data-bw-ty-outfit-copy]');
+    const advice = this._buildOutfitAdvice(forecast);
+
+    if (title) title.textContent = `${forecast.condition}, around ${this._formatTemperature(forecast.temperature)}`;
+    if (status) {
+      status.textContent = `For ${this._formatDisplayDate(booking.start)} near the World Clock. Forecasts can still change, so this is your practical starting point.`;
+    }
+    if (temp) {
+      temp.textContent = this._formatTemperature(
+        Number.isFinite(forecast.apparentTemperature) ? forecast.apparentTemperature : forecast.temperature
+      );
+    }
+    if (rain) rain.textContent = this._formatPercent(forecast.rainProbability);
+    if (wind) wind.textContent = this._formatWind(forecast.windSpeed);
+    if (metrics) metrics.hidden = false;
+    if (outfitTitle) outfitTitle.textContent = advice.title;
+    if (outfitCopy) outfitCopy.textContent = advice.copy;
+    if (outfit) outfit.hidden = false;
+
+    this._trackOnce('outfit_viewed', {
+      tour_date: this._formatForecastDay(booking.start),
+      outfit_type: advice.title
+    });
+  }
+
+  _renderWeatherFallback(titleText, statusText, outfitTitleText, outfitCopyText) {
+    const title = this.querySelector('[data-bw-ty-weather-title]');
+    const status = this.querySelector('[data-bw-ty-weather-status]');
+    const metrics = this.querySelector('[data-bw-ty-weather-metrics]');
+    const outfit = this.querySelector('[data-bw-ty-outfit]');
+    const outfitTitle = this.querySelector('[data-bw-ty-outfit-title]');
+    const outfitCopy = this.querySelector('[data-bw-ty-outfit-copy]');
+
+    if (title) title.textContent = titleText;
+    if (status) status.textContent = statusText;
+    if (metrics) metrics.hidden = true;
+    if (outfitTitle) outfitTitle.textContent = outfitTitleText;
+    if (outfitCopy) outfitCopy.textContent = outfitCopyText;
+    if (outfit) outfit.hidden = false;
+  }
+
+  _buildWeatherUrl() {
+    const params = new URLSearchParams({
+      latitude: String(BW_THANK_YOU_WEATHER_COORDS.latitude),
+      longitude: String(BW_THANK_YOU_WEATHER_COORDS.longitude),
+      timezone: BW_THANK_YOU_CALENDAR.timezone,
+      forecast_days: String(BW_THANK_YOU_FORECAST_DAYS),
+      temperature_unit: 'celsius',
+      wind_speed_unit: 'kmh',
+      precipitation_unit: 'mm',
+      hourly: 'temperature_2m,apparent_temperature,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_gusts_10m',
+      daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max'
+    });
+    return `${BW_THANK_YOU_WEATHER_API_URL}?${params.toString()}`;
+  }
+
+  _extractTourForecast(data, booking) {
+    const hourly = data && data.hourly ? data.hourly : {};
+    const daily = data && data.daily ? data.daily : {};
+    const dayKey = this._formatForecastDay(booking.start);
+    const hourlyTimes = Array.isArray(hourly.time) ? hourly.time : [];
+    const indexes = [];
+    const end = this._addMinutesToDateParts(booking.start, BW_THANK_YOU_CALENDAR.durationMinutes);
+    const sameEndDay = this._isSameDateParts(booking.start, end);
+    const endHour = sameEndDay ? end.hour : 23;
+
+    hourlyTimes.forEach((time, index) => {
+      const parts = this._parseForecastTime(time);
+      if (!parts || this._formatForecastDay(parts) !== dayKey) return;
+      if (parts.hour >= booking.start.hour && parts.hour <= endHour) indexes.push(index);
+    });
+
+    if (!indexes.length) {
+      hourlyTimes.forEach((time, index) => {
+        const parts = this._parseForecastTime(time);
+        if (!parts || this._formatForecastDay(parts) !== dayKey) return;
+        if (Math.abs(parts.hour - booking.start.hour) <= 1) indexes.push(index);
+      });
+    }
+
+    const dailyIndex = Array.isArray(daily.time) ? daily.time.indexOf(dayKey) : -1;
+    const minTemp = this._dailyNumber(daily, 'temperature_2m_min', dailyIndex);
+    const maxTemp = this._dailyNumber(daily, 'temperature_2m_max', dailyIndex);
+    let temperature = this._roundNumber(this._meanNumbers(this._hourlyNumbers(hourly, 'temperature_2m', indexes)));
+    let apparentTemperature = this._roundNumber(this._meanNumbers(this._hourlyNumbers(hourly, 'apparent_temperature', indexes)));
+    let rainProbability = this._roundNumber(this._maxNumber(this._hourlyNumbers(hourly, 'precipitation_probability', indexes)));
+    let precipitation = this._roundNumber(this._sumNumbers(this._hourlyNumbers(hourly, 'precipitation', indexes)), 1);
+    let windSpeed = this._roundNumber(this._maxNumber(this._hourlyNumbers(hourly, 'wind_speed_10m', indexes)));
+    const gusts = this._roundNumber(this._maxNumber(this._hourlyNumbers(hourly, 'wind_gusts_10m', indexes)));
+    let weatherCode = this._mostSignificantWeatherCode(this._hourlyNumbers(hourly, 'weather_code', indexes));
+
+    if (temperature === null && minTemp !== null && maxTemp !== null) temperature = this._roundNumber((minTemp + maxTemp) / 2);
+    if (apparentTemperature === null) apparentTemperature = temperature;
+    if (rainProbability === null) rainProbability = this._roundNumber(this._dailyNumber(daily, 'precipitation_probability_max', dailyIndex));
+    if (precipitation === null) precipitation = this._roundNumber(this._dailyNumber(daily, 'precipitation_sum', dailyIndex), 1);
+    if (windSpeed === null) windSpeed = this._roundNumber(this._dailyNumber(daily, 'wind_speed_10m_max', dailyIndex));
+    if (weatherCode === null) weatherCode = this._dailyNumber(daily, 'weather_code', dailyIndex);
+
+    if (temperature === null && rainProbability === null && windSpeed === null && weatherCode === null) return null;
+
+    return {
+      temperature,
+      apparentTemperature,
+      rainProbability,
+      precipitation,
+      windSpeed,
+      gusts,
+      weatherCode,
+      condition: this._weatherCodeLabel(weatherCode),
+      minTemp,
+      maxTemp
+    };
+  }
+
+  _buildOutfitAdvice(forecast) {
+    const temp = forecast.apparentTemperature !== null ? forecast.apparentTemperature : forecast.temperature;
+    const rain = forecast.rainProbability || 0;
+    const precipitation = forecast.precipitation || 0;
+    const wind = forecast.gusts || forecast.windSpeed || 0;
+    const rainy = rain >= 55 || precipitation >= 1 || this._isRainCode(forecast.weatherCode);
+    const maybeRain = !rainy && rain >= 30;
+    let title = 'Comfortable walking setup';
+    const pieces = [];
+
+    if (rainy) {
+      title = 'Rain-ready walking setup';
+      pieces.push('Wear a waterproof jacket and shoes that handle wet pavement.');
+    } else if (maybeRain) {
+      title = 'Light rain backup';
+      pieces.push('Bring a light rain layer or compact umbrella, just in case.');
+    }
+
+    if (temp !== null && temp <= 3) {
+      title = rainy ? title : 'Cold-weather walking setup';
+      pieces.push('Use a warm coat, hat, and gloves; the tour stays outdoors.');
+    } else if (temp !== null && temp <= 9) {
+      pieces.push('Add a warm layer under your jacket.');
+    } else if (temp !== null && temp <= 16) {
+      pieces.push('A jacket or sweater is sensible for a 2-hour walk.');
+    } else if (temp !== null && temp >= 25) {
+      title = rainy ? title : 'Warm-day walking setup';
+      pieces.push('Wear light layers and bring water.');
+    }
+
+    if (wind >= 45) {
+      pieces.push('Choose a windproof layer; umbrellas can be awkward on open squares.');
+    }
+
+    if (!pieces.length) {
+      pieces.push('Comfortable shoes and one light layer are enough for most of the walk.');
+    }
+
+    return {
+      title,
+      copy: pieces.join(' ')
+    };
+  }
+
+  _hourlyNumbers(hourly, key, indexes) {
+    const values = hourly && Array.isArray(hourly[key]) ? hourly[key] : [];
+    return indexes
+      .map((index) => Number(values[index]))
+      .filter((value) => Number.isFinite(value));
+  }
+
+  _dailyNumber(daily, key, index) {
+    if (!daily || index < 0 || !Array.isArray(daily[key])) return null;
+    const value = Number(daily[key][index]);
+    return Number.isFinite(value) ? value : null;
+  }
+
+  _meanNumbers(values) {
+    if (!values.length) return null;
+    return values.reduce((sum, value) => sum + value, 0) / values.length;
+  }
+
+  _maxNumber(values) {
+    if (!values.length) return null;
+    return Math.max(...values);
+  }
+
+  _sumNumbers(values) {
+    if (!values.length) return null;
+    return values.reduce((sum, value) => sum + value, 0);
+  }
+
+  _roundNumber(value, decimals = 0) {
+    if (!Number.isFinite(value)) return null;
+    const factor = 10 ** decimals;
+    return Math.round(value * factor) / factor;
+  }
+
+  _mostSignificantWeatherCode(codes) {
+    if (!codes.length) return null;
+    return codes.reduce((best, code) => {
+      if (best === null) return code;
+      return this._weatherCodeSeverity(code) > this._weatherCodeSeverity(best) ? code : best;
+    }, null);
+  }
+
+  _weatherCodeSeverity(code) {
+    const value = Number(code);
+    if ([95, 96, 99].includes(value)) return 10;
+    if ([85, 86].includes(value)) return 9;
+    if ([75, 82].includes(value)) return 8;
+    if ([73, 81].includes(value)) return 7;
+    if ([65, 71, 80].includes(value)) return 6;
+    if ([63, 67].includes(value)) return 5;
+    if ([61, 66].includes(value)) return 4;
+    if ([45, 48, 51, 53, 55, 56, 57].includes(value)) return 3;
+    if ([2, 3].includes(value)) return 2;
+    if (value === 1) return 1;
+    return 0;
+  }
+
+  _weatherCodeLabel(code) {
+    const value = Number(code);
+    if (value === 0) return 'Clear weather';
+    if ([1, 2].includes(value)) return 'Partly cloudy';
+    if (value === 3) return 'Overcast';
+    if ([45, 48].includes(value)) return 'Foggy';
+    if ([51, 53, 55, 56, 57].includes(value)) return 'Drizzle';
+    if ([61, 63, 65, 66, 67].includes(value)) return 'Rain likely';
+    if ([71, 73, 75, 77, 85, 86].includes(value)) return 'Snow possible';
+    if ([80, 81, 82].includes(value)) return 'Showers possible';
+    if ([95, 96, 99].includes(value)) return 'Thunderstorms possible';
+    return 'Berlin weather';
+  }
+
+  _isRainCode(code) {
+    const value = Number(code);
+    return [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].includes(value);
+  }
+
+  _formatTemperature(value) {
+    return Number.isFinite(value) ? `${Math.round(value)} C` : 'Check forecast';
+  }
+
+  _formatPercent(value) {
+    return Number.isFinite(value) ? `${Math.round(value)}%` : 'Check';
+  }
+
+  _formatWind(value) {
+    return Number.isFinite(value) ? `${Math.round(value)} km/h` : 'Check';
+  }
+
+  _parseForecastTime(value) {
+    const match = String(value || '').match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+    if (!match) return null;
+    return this._buildDateParts(match[1], match[2], match[3], match[4], match[5]);
+  }
+
+  _formatLocalDateTime(parts) {
+    return `${this._formatForecastDay(parts)}T${this._pad(parts.hour)}:${this._pad(parts.minute)}:00`;
+  }
+
+  _formatForecastDay(parts) {
+    return `${parts.year}-${this._pad(parts.month)}-${this._pad(parts.day)}`;
+  }
+
+  _isSameDateParts(first, second) {
+    return first.year === second.year && first.month === second.month && first.day === second.day;
+  }
+
+  _daysFromTodayInBerlin(parts) {
+    const today = this._dateToPartsInTimeZone(new Date(), BW_THANK_YOU_CALENDAR.timezone);
+    const todayMs = Date.UTC(today.year, today.month - 1, today.day);
+    const targetMs = Date.UTC(parts.year, parts.month - 1, parts.day);
+    return Math.round((targetMs - todayMs) / 86400000);
+  }
+
+  _datePartsToTimeZoneDate(parts, timeZone) {
+    const desiredLocalMs = Date.UTC(parts.year, parts.month - 1, parts.day, parts.hour, parts.minute || 0, 0);
+    let utcMs = desiredLocalMs;
+
+    for (let index = 0; index < 3; index++) {
+      const zoned = this._dateToPartsInTimeZone(new Date(utcMs), timeZone);
+      const zonedMs = Date.UTC(zoned.year, zoned.month - 1, zoned.day, zoned.hour, zoned.minute, zoned.second || 0);
+      const diff = zonedMs - desiredLocalMs;
+      if (Math.abs(diff) < 1000) break;
+      utcMs -= diff;
+    }
+
+    return new Date(utcMs);
+  }
+
+  _dateToPartsInTimeZone(date, timeZone) {
+    const parts = new Intl.DateTimeFormat('en-GB', {
+      day: '2-digit',
+      hour: '2-digit',
+      hourCycle: 'h23',
+      minute: '2-digit',
+      month: '2-digit',
+      second: '2-digit',
+      timeZone,
+      year: 'numeric'
+    }).formatToParts(date);
+    const result = {};
+
+    parts.forEach((part) => {
+      if (part.type === 'literal') return;
+      result[part.type] = Number(part.value);
+    });
+
+    if (result.hour === 24) result.hour = 0;
+    return {
+      year: result.year,
+      month: result.month,
+      day: result.day,
+      hour: result.hour || 0,
+      minute: result.minute || 0,
+      second: result.second || 0
+    };
+  }
+
+  _trackOnce(eventName, params = {}) {
+    this._trackedEvents = this._trackedEvents || new Set();
+    if (this._trackedEvents.has(eventName)) return;
+    this._trackedEvents.add(eventName);
+    this._track(eventName, params);
+  }
+
+  _track(eventName, params = {}) {
+    const event = `bw_${eventName}`;
+    try {
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push({ event, ...params });
+      if (typeof window.gtag === 'function') window.gtag('event', event, params);
+    } catch (error) {
+      // Analytics must never block the confirmation experience.
+    }
+  }
+
 
   _parseBookingDateTime(value) {
     const text = this._normalizeBookingText(value);

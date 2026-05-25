@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-25 — Codex (Tour Day Assistant MVP)
+
+**Did:** Added the post-booking Tour Day Assistant to `<bw-thank-you>`: parsed tour time now powers countdown, live Open-Meteo forecast, outfit advice, meeting-point map, and analytics events.
+
+**Changed:**
+- `thank-you/thank-you-element.js` — added assistant UI/CSS, Open-Meteo fetch/extraction, countdown timer, weather fallback states, outfit rules, map iframe, and `dataLayer`/`gtag` click/view events.
+- `thank-you/index.html` — local preview now injects a dynamic +3 day sample tour time before loading the element.
+- `README.md`, `AGENTS.md`, project root `PROJECT_MEMORY.md` — documented Tour Day Assistant behavior.
+
+**Opened:** After push/publish, verify with a real/test Wix booking that the hidden confirmation still exposes a parseable date/time and the weather card appears on `/thank-you-page`.
+**Closed:** Local QA passed: `node --check`, Open-Meteo live endpoint smoke test, in-app browser desktop render with no console errors/no horizontal overflow, and Chrome headless 500px narrow screenshot.
+
+**Next session should:** Push `berlinwalk-widgets`, then book a test slot and cold-load `/thank-you-page` to verify countdown/weather/map against the real Wix confirmation payload.
+
 ## 2026-05-25 — Codex (Thank-you calendar links)
 
 **Did:** Added conditional Add to Calendar links to the `<bw-thank-you>` page section.

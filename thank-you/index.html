@@ -14,7 +14,18 @@
   </style>
 </head>
 <body>
-  <bw-thank-you></bw-thank-you>
+  <bw-thank-you id="bw-thank-you-preview"></bw-thank-you>
+  <script>
+    (() => {
+      const preview = document.getElementById('bw-thank-you-preview');
+      const date = new Date();
+      date.setDate(date.getDate() + 3);
+      preview.setAttribute(
+        'data-tour-start',
+        `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} 11:30`
+      );
+    })();
+  </script>
   <script src="./thank-you-element.js"></script>
 </body>
 </html>
