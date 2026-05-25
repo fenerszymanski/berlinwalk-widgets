@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-25 — Codex (Thank-you page redesign)
+
+**Did:** Added a new `<bw-thank-you>` Custom Element for the post-booking thank-you page.
+
+**Changed:**
+- `thank-you/thank-you-element.js`, `thank-you/index.html` — confirmation hero, World Clock tour-day card, next 3 steps, planning-tool links, and sticky booking CTA suppression.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md` — added install/documentation rows.
+- Project root: `PROJECT_MEMORY.md` — recorded the new Thank You Page guidance.
+
+**Opened:** Push to GitHub Pages, then install `https://fenerszymanski.github.io/berlinwalk-widgets/thank-you/thank-you-element.js` on Wix `/thank-you-page` with tag `bw-thank-you`.
+**Closed:** Local Chrome QA passed at 1440px and 390px: no horizontal overflow, image loads, and `#bw-sticky-cta` / `#bw-desktop-cta` compute to `display:none`.
+
+**Next session should:** Verify the live thank-you page after Wix publish, especially spacing below the site header and absence of the floating booking CTA.
+
 ## 2026-05-24 — Codex (What's Open icon wired)
 
 **Did:** Added the generated storefront/calendar/check icon for `whats-open-in-berlin-today` and removed the homepage fallback-letter path.

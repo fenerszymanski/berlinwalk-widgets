@@ -28,6 +28,7 @@ Source type: Server URL
 | Berlin Quiz (homepage) | `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-quiz/berlin-quiz-element.js` | `bw-berlin-quiz` | none |
 | Site Footer | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | `bw-site-footer` | none |
 | The Guide | `https://fenerszymanski.github.io/berlinwalk-widgets/the-guide/the-guide-element.js` | `bw-the-guide` | none |
+| Thank You Page | `https://fenerszymanski.github.io/berlinwalk-widgets/thank-you/thank-you-element.js` | `bw-thank-you` | none |
 | Book Hero (above Wix Bookings widget) | `https://fenerszymanski.github.io/berlinwalk-widgets/book/book-element.js` | `bw-book-hero` | none |
 | Book Details (below Wix Bookings widget) | `https://fenerszymanski.github.io/berlinwalk-widgets/book/book-element.js` | `bw-book-details` | none |
 | Why Walk With Me | `https://fenerszymanski.github.io/berlinwalk-widgets/why/why-element.js` | `bw-why` | none |
