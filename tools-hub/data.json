@@ -153,6 +153,14 @@
       "embedHeight": 1280
     },
     {
+      "slug": "free-berlin-audio-tour",
+      "title": "Berlin in 9 Minutes (Free Audio Tour)",
+      "lead": "A 9-minute audio walk from Alexanderplatz to Hackescher Markt — recorded by the guide who leads the free tour every day at 11:30.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/audio-tour/",
+      "embedHeight": 700
+    },
+    {
       "slug": "berlin-free-things-to-do",
       "title": "Free Things to Do in Berlin",
       "lead": "Berlin has more genuinely free attractions than any other major European capital.",
