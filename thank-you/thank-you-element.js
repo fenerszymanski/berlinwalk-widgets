@@ -10,10 +10,13 @@ class BWThankYouElement extends HTMLElement {
   connectedCallback() {
     document.body.classList.add('bw-thank-you-page-active');
     this._render();
+    this._startWixConfirmationHide();
   }
 
   disconnectedCallback() {
     document.body.classList.remove('bw-thank-you-page-active');
+    if (this._bookingObserver) this._bookingObserver.disconnect();
+    if (this._hideTimers) this._hideTimers.forEach((timer) => window.clearTimeout(timer));
   }
 
   _render() {
@@ -25,8 +28,15 @@ class BWThankYouElement extends HTMLElement {
         }
 
         body.bw-thank-you-page-active #bw-sticky-cta,
-        body.bw-thank-you-page-active #bw-desktop-cta {
+        body.bw-thank-you-page-active #bw-desktop-cta,
+        body.bw-thank-you-page-active #thankYouPage1 {
           display: none !important;
+          height: 0 !important;
+          margin: 0 !important;
+          min-height: 0 !important;
+          overflow: hidden !important;
+          padding: 0 !important;
+          visibility: hidden !important;
         }
 
         .bw-thank-you {
@@ -678,6 +688,83 @@ class BWThankYouElement extends HTMLElement {
     `;
   }
 
+  _startWixConfirmationHide() {
+    const hide = () => this._hideWixBookingConfirmation();
+    hide();
+    this._hideTimers = [250, 800, 1600, 3200, 5200].map((delay) => window.setTimeout(hide, delay));
+    if (!document.body || !('MutationObserver' in window)) return;
+    this._bookingObserver = new MutationObserver(() => hide());
+    this._bookingObserver.observe(document.body, { childList: true, subtree: true });
+  }
+
+  _hideWixBookingConfirmation() {
+    const targets = new Set();
+    const directSelectors = [
+      '#thankYouPage1',
+      '[data-testid="thankYouPage1"]',
+      '[data-hook="thankYouPage1"]',
+      '[aria-label="Thank You Page"]',
+      '[aria-label="Booking Confirmation"]'
+    ];
+
+    directSelectors.forEach((selector) => {
+      try {
+        document.querySelectorAll(selector).forEach((node) => {
+          if (!this.contains(node)) targets.add(this._findWixHideTarget(node) || node);
+        });
+      } catch (error) {
+        // Ignore selector support differences in Wix/editor contexts.
+      }
+    });
+
+    document.querySelectorAll('h1, h2, h3, [role="heading"], p, span, div').forEach((node) => {
+      if (this.contains(node)) return;
+      if ((node.textContent || '').trim() !== 'Booking Confirmation') return;
+      const target = this._findWixHideTarget(node);
+      if (target) targets.add(target);
+    });
+
+    targets.forEach((target) => {
+      if (!target || target === document.body || target === document.documentElement || this.contains(target)) return;
+      target.setAttribute('aria-hidden', 'true');
+      target.style.setProperty('display', 'none', 'important');
+      target.style.setProperty('height', '0', 'important');
+      target.style.setProperty('min-height', '0', 'important');
+      target.style.setProperty('margin', '0', 'important');
+      target.style.setProperty('padding', '0', 'important');
+      target.style.setProperty('overflow', 'hidden', 'important');
+      target.style.setProperty('visibility', 'hidden', 'important');
+    });
+  }
+
+  _findWixHideTarget(node) {
+    let current = node;
+    let best = node;
+    let depth = 0;
+
+    while (current && current !== document.body && depth < 9) {
+      if (current !== node && current.querySelector && current.querySelector('bw-thank-you')) break;
+      if (this.contains(current)) return null;
+
+      const rect = current.getBoundingClientRect ? current.getBoundingClientRect() : { width: 0, height: 0 };
+      const id = current.id || '';
+      const className = typeof current.className === 'string' ? current.className : '';
+      const tagName = current.tagName ? current.tagName.toLowerCase() : '';
+      const isLikelySection =
+        id === 'thankYouPage1' ||
+        id.indexOf('thankYouPage') !== -1 ||
+        className.indexOf('thankYouPage') !== -1 ||
+        tagName === 'section';
+
+      if (rect.width > 280 && rect.height > 90) best = current;
+      if (isLikelySection && rect.height > 90) best = current;
+
+      current = current.parentElement;
+      depth++;
+    }
+
+    return best;
+  }
 }
 
 if (!customElements.get('bw-thank-you')) {

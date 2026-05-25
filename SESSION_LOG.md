@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-25 — Codex (Hide Wix thank-you confirmation)
+
+**Did:** Added a defensive hide for Wix's forced `Booking Confirmation` app section on `/thank-you-page`.
+
+**Changed:**
+- `thank-you/thank-you-element.js` — now hides `#thankYouPage1` / `Booking Confirmation` via CSS, timed retries, and MutationObserver.
+- `README.md`, `AGENTS.md`, project root `PROJECT_MEMORY.md` — documented the forced-section hide and Velo fallback.
+
+**Opened:** If the live Wix page still keeps empty section height, add the Velo page code fallback: collapse/hide `#thankYouPage1` on ready.
+**Closed:** Local Chrome mock passed: late-injected `#thankYouPage1` becomes `display:none`, `height:0`, `aria-hidden=true`; no horizontal overflow.
+
+**Next session should:** Cold-load the live thank-you page after publish and verify the duplicate confirmation UI is gone.
+
 ## 2026-05-25 — Codex (Thank-you page redesign)
 
 **Did:** Added a new `<bw-thank-you>` Custom Element for the post-booking thank-you page.
