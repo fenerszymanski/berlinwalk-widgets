@@ -5,8 +5,20 @@ const BW_GUIDE_PROFILE_IMAGE_URL = 'https://static.wixstatic.com/media/5a08a3_ac
 const BW_GUIDE_GROUP_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/05-1200w.webp';
 const BW_GUIDE_WORLD_CLOCK_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.webp';
 
+const BW_GUIDE_AUDIO_TOUR_SCRIPT = 'https://fenerszymanski.github.io/berlinwalk-widgets/audio-tour/audio-tour-element.js';
+
+function loadAudioTourElement() {
+  if (customElements.get('bw-audio-tour')) return;
+  if (document.querySelector(`script[src="${BW_GUIDE_AUDIO_TOUR_SCRIPT}"]`)) return;
+  const s = document.createElement('script');
+  s.src = BW_GUIDE_AUDIO_TOUR_SCRIPT;
+  s.async = true;
+  document.head.appendChild(s);
+}
+
 class BWTheGuideElement extends HTMLElement {
   connectedCallback() {
+    loadAudioTourElement();
     this._render();
   }
 
@@ -528,6 +540,29 @@ class BWTheGuideElement extends HTMLElement {
           height: 3px;
         }
 
+        .bw-guide .bw-guide-audio-section {
+          background: var(--cream);
+        }
+        .bw-guide .bw-guide-audio-section .bw-guide-section-head {
+          text-align: center;
+          max-width: 720px;
+          margin: 0 auto 28px;
+        }
+        .bw-guide .bw-guide-audio-section .bw-guide-section-head p {
+          font-family: var(--serif);
+          color: var(--muted);
+          font-size: 16px;
+          line-height: 1.65;
+        }
+        .bw-guide .bw-guide-audio-slot {
+          max-width: 880px;
+          margin: 0 auto;
+        }
+        .bw-guide .bw-guide-audio-slot bw-audio-tour {
+          display: block;
+          margin: 0;
+        }
+
         .bw-guide .bw-guide-final {
           background:
             linear-gradient(90deg, rgba(255, 230, 0, 0.16) 0 1px, transparent 1px 84px),
@@ -752,6 +787,19 @@ class BWTheGuideElement extends HTMLElement {
               ${this._renderQuote('Yusuf the tour guide was extraordinary. You must take his tour for a thoughtful, funny and well-timed experience.', 'Samyukta V., India')}
               ${this._renderQuote('This one felt completely different. It is more about the real origins of Berlin, where the city actually started and how much of it disappeared.', 'Michal D., Poland')}
               ${this._renderQuote('Every stop felt relevant and engaging. Yusuf managed to navigate through centuries of history.', 'Karen Sells Brown, USA')}
+            </div>
+          </div>
+        </section>
+
+        <section class="bw-guide-section bw-guide-section-white bw-guide-audio-section" aria-labelledby="bw-guide-audio-title">
+          <div class="bw-guide-inner">
+            <header class="bw-guide-section-head">
+              <span class="bw-guide-kicker">Hear it first</span>
+              <h2 id="bw-guide-audio-title">Hear it before you walk it.</h2>
+              <p>A short audio teaser of the tour, recorded in my voice. Press play to hear how the first part of the walk actually sounds.</p>
+            </header>
+            <div class="bw-guide-audio-slot">
+              <bw-audio-tour></bw-audio-tour>
             </div>
           </div>
         </section>
