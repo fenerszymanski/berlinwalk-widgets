@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-25 — Codex (Route story footer contrast)
+
+**Did:** Adjusted the route story page ending so it no longer blends into the global footer.
+
+**Changed:**
+- `route-story/route-story-element.js` — final `Walk the story in person` CTA section now uses a light background, green text/buttons, and a yellow bottom separator before the dark footer.
+- `output/qa/route-story-final-section-light.png` — local QA screenshot.
+
+**Opened:** Same as previous route-story entry: push, create/publish Wix `/berlin-walking-tour-route`, install `<bw-route-story>`, paste SEO settings, and verify live links.
+**Closed:** `node --check` and Chrome QA passed; final section has white background, yellow divider, no console errors, and no horizontal overflow.
+
+**Next session should:** Verify the route page inside Wix with the real footer underneath.
+
 ## 2026-05-25 — Codex (Route story map page)
 
 **Did:** Built the 12-stop "Tour Route as Story Map" as a standalone `<bw-route-story>` page for SEO and booking conversion.

@@ -1095,24 +1095,42 @@ class BWRouteStoryElement extends HTMLElement {
 
       .bw-route-story .bw-rs-final {
         background:
-          linear-gradient(120deg, rgba(255, 230, 0, 0.12), transparent 44%),
-          var(--green-dark);
-        color: #FFFFFF;
+          linear-gradient(120deg, rgba(255, 230, 0, 0.18), transparent 46%),
+          #FFFFFF;
+        border-bottom: 6px solid var(--yellow);
+        border-top: 1px solid var(--line);
+        color: var(--text);
         padding: 72px 0;
       }
 
+      .bw-route-story .bw-rs-final .bw-rs-eyebrow {
+        color: var(--green);
+      }
+
       .bw-route-story .bw-rs-final h2 {
-        color: #FFFFFF;
+        color: var(--green);
         margin-bottom: 14px;
       }
 
       .bw-route-story .bw-rs-final p {
-        color: rgba(255, 255, 255, 0.82);
+        color: var(--muted);
         font-family: var(--serif);
         font-size: 17px;
         line-height: 1.72;
         margin-bottom: 24px;
         max-width: 620px;
+      }
+
+      .bw-route-story .bw-rs-final .bw-rs-btn-outline-light {
+        border-color: var(--green);
+        color: var(--green);
+      }
+
+      .bw-route-story .bw-rs-final .bw-rs-btn-outline-light:hover,
+      .bw-route-story .bw-rs-final .bw-rs-btn-outline-light:focus-visible {
+        background: var(--green);
+        border-color: var(--green);
+        color: #FFFFFF;
       }
 
       @media (max-width: 980px) {
