@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-25 — Codex (Route story map page)
+
+**Did:** Built the 12-stop "Tour Route as Story Map" as a standalone `<bw-route-story>` page for SEO and booking conversion.
+
+**Changed:**
+- `route-story/` — new full-bleed route story page, scroll-synced illustrated map pins, 12 "what you understand here" stop cards, booking/audio/meeting/guide CTAs, standalone preview, and Wix SEO settings.
+- `route/route-element.js`, `route/test-element.html` — homepage route widget now links to the full story map and booking page; local preview favicon 404 suppressed.
+- `site-header/site-header-element.js`, `site-footer/site-footer-element.js`, `README.md`, `AGENTS.md`, `wix-embed-snippets.md`, project root `PROJECT_MEMORY.md` — wired/documented the new route page and open install task.
+- `output/qa/route-story-*.png`, `output/qa/route-widget-mobile-cta.png` — local QA screenshots.
+
+**Opened:** Push `berlinwalk-widgets`, create/publish Wix `/berlin-walking-tour-route`, install `<bw-route-story>`, paste `route-story/SEO_SETTINGS.md`, and verify header/footer/homepage route links.
+**Closed:** Local syntax and Playwright/Chrome QA passed: 12 stops/pins render, pin interaction syncs, sticky map works, remote images load when scrolled, and desktop/mobile overflow is 0.
+
+**Next session should:** Publish the new Wix page and then cold-load it with `?cb=` to verify live assets, SEO tags, and internal links.
+
 ## 2026-05-25 — Codex (Thank-you change link copy)
 
 **Did:** Refined the Tour Day Assistant fallback and added a change/cancel booking card.

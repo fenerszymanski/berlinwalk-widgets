@@ -28,6 +28,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 | `blog-home/` | Homepage Custom Element for the editorial blog teaser. `blog-home-element.js` defines `<bw-blog-home>` with the `Berlin Travel Notes` layout: one featured practical guide, three note cards, image-led design, and a CTA to `/blog`. `data.json` is the curated mini-CMS for the four homepage posts. |
 | `meeting-point/` | Custom Element page for `berlinwalk.com/meeting-point`. `meeting-point-element.js` defines `<bw-meeting-point>` with a real World Clock photo, stylized wayfinding map, tour-day details, and booking/map CTAs. `index.html` is the standalone GitHub Pages preview/fallback. |
 | `the-guide/` | Custom Element page for `berlinwalk.com/the-guide`. `the-guide-element.js` defines `<bw-the-guide>` with Yusuf profile copy, real profile photo, tour approach, route logic, reviews, and booking CTAs. `SEO_SETTINGS.md` has Wix-ready SEO tags/schema. |
+| `route-story/` | Custom Element page for `berlinwalk.com/berlin-walking-tour-route`. `route-story-element.js` defines `<bw-route-story>` with a full-bleed World Clock hero, interactive 12-stop story map, scroll-synced map pins, "what you understand here" stop cards, sales CTAs, and Wix-ready SEO in `SEO_SETTINGS.md`. |
 | `thank-you/` | Custom Element page section for the post-booking thank-you page (`/thank-you-page`). `thank-you-element.js` defines `<bw-thank-you>` with confirmation copy, World Clock meeting-point card, next-step guidance, planning-tool links, conditional Google Calendar + Apple/Outlook `.ics` links parsed from the Wix confirmation section, a Tour Day Assistant with countdown, Open-Meteo forecast, outfit advice, and embedded meeting-point map, a change/cancel card that can use a detected or attributed manage-booking URL, CSS that hides the global sticky booking CTA, and a defensive helper that hides Wix's forced `#thankYouPage1` booking-confirmation section. |
 | `book/` | Custom Element page for `berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based`. `book-element.js` defines two elements: `<bw-book-hero>` (hero + key facts + "At a glance" card, scrolls to `#book` anchor) and `<bw-book-details>` (what-you-get grid, 5-stop route preview, meeting point teaser, free/tip-based explainer, FAQ, ending CTA). The Wix-native Bookings service widget stays sandwiched between the two custom elements at the existing position. `SEO_SETTINGS.md` has Wix-ready SEO tags + `TouristTrip` schema. `index.html` is the standalone preview with a placeholder strip in place of the Wix Bookings widget. |
 | `site-header/` | Global site header Custom Element. `site-header-element.js` defines `<bw-site-header>` with a green top mini-bar (FreeTour rating + Free/Tip-based + Daily 11:30), main bar (logo + nav + Resources dropdown + green BOOK NOW pill), shrink-on-scroll behavior (top bar collapses, logo + padding shrink past 32px), scroll progress bar (green→lime→yellow gradient), and a full-screen mobile overlay with body scroll lock, Escape-to-close, and yellow CTA. `index.html` is the standalone GitHub Pages preview with a tall stage for scroll testing. |
@@ -51,6 +52,7 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 - `berlinwalk.com/reviews` — public review display (Custom Element `bw-reviews`)
 - `berlinwalk.com/meeting-point` — planned dedicated meeting point page (Custom Element `bw-meeting-point`)
 - `berlinwalk.com/the-guide` — planned dedicated guide profile/trust page (Custom Element `bw-the-guide`)
+- `berlinwalk.com/berlin-walking-tour-route` — planned dedicated route story map page (Custom Element `bw-route-story`)
 - `berlinwalk.com/tools` — directory grid of all 19+ free Berlin widgets, rendered from `tools-hub/data.json`
 - `berlinwalk.com/tools/<slug>` — dynamic per-tool page bound to BerlinTools CMS collection
 - `berlinwalk.com/widgets` — third-party embed gallery, rendered from `tools-hub/data.json` via `widgets-hub/`
@@ -186,6 +188,7 @@ When Yusuf is in the Wix automation editor → email step → "Edit email," the 
 Pulled from `SESSION_LOG.md` — see that file for active state. As of the latest session:
 
 1. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug. *(Deferred far out per Yusuf on 2026-05-16.)*
+2. **Publish the route story map page.** After pushing `berlinwalk-widgets`, create/publish Wix `/berlin-walking-tour-route`, install `<bw-route-story>`, paste `route-story/SEO_SETTINGS.md`, then verify header/footer/homepage route links.
 
 ## 9. Protocol for ending a session
 

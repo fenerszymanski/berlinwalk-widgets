@@ -3,6 +3,7 @@ const BW_HEADER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-to
 const BW_HEADER_LINKS = {
   home: 'https://www.berlinwalk.com/',
   tour: 'https://www.berlinwalk.com/',
+  route: 'https://www.berlinwalk.com/berlin-walking-tour-route',
   guide: 'https://www.berlinwalk.com/the-guide',
   reviews: 'https://www.berlinwalk.com/reviews',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
@@ -799,6 +800,7 @@ class BWHeaderElement extends HTMLElement {
                   </button>
                   <ul class="bw-header-submenu" role="menu">
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.plan}">Plan Your Visit</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.blog}">Blog</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a></li>
@@ -835,6 +837,7 @@ class BWHeaderElement extends HTMLElement {
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Resources</div>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
+                <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
                 <a href="${BW_HEADER_LINKS.plan}">Plan Your Visit</a>
                 <a href="${BW_HEADER_LINKS.blog}">Blog</a>
                 <a href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a>

@@ -4,7 +4,7 @@ const BW_SITE_FOOTER_LINKS = {
   home: 'https://www.berlinwalk.com/',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
   reviews: 'https://www.berlinwalk.com/reviews',
-  route: 'https://www.berlinwalk.com/#route',
+  route: 'https://www.berlinwalk.com/berlin-walking-tour-route',
   faq: 'https://www.berlinwalk.com/#faq',
   guide: 'https://www.berlinwalk.com/the-guide',
   blog: 'https://www.berlinwalk.com/blog',

@@ -3,6 +3,7 @@ const BW_ROUTE_LOCAL_DATA_URL = document.currentScript && document.currentScript
   ? new URL('./data.json', document.currentScript.src).href
   : './data.json';
 const BW_ROUTE_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_ROUTE_STORY_URL = 'https://www.berlinwalk.com/berlin-walking-tour-route';
 
 class BWRouteElement extends HTMLElement {
   constructor() {
@@ -152,6 +153,11 @@ class BWRouteElement extends HTMLElement {
                 ${stops.map(stop => this._renderPin(stop)).join('')}
               </div>
             </div>
+          </div>
+
+          <div class="bw-route-cta" aria-label="Explore or book the BerlinWalk route">
+            <a class="bw-route-btn bw-route-btn-primary" href="${BW_ROUTE_STORY_URL}">Explore the full story map</a>
+            <a class="bw-route-btn bw-route-btn-ghost" href="${BW_ROUTE_BOOKING_URL}">Book your free spot</a>
           </div>
 
           <div class="bw-route-stop-card" role="region" aria-live="polite" hidden></div>
@@ -644,6 +650,65 @@ class BWRouteElement extends HTMLElement {
           transition: max-height 400ms ease-out, opacity 300ms ease-out, padding 400ms ease-out;
         }
 
+        .bw-route .bw-route-cta {
+          align-items: center;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 12px;
+          justify-content: center;
+          margin-top: 24px;
+        }
+
+        .bw-route .bw-route-btn {
+          align-items: center;
+          border-radius: 999px;
+          display: inline-flex;
+          font-size: 13px;
+          font-weight: 800;
+          justify-content: center;
+          letter-spacing: 0.5px;
+          line-height: 1.2;
+          min-height: 46px;
+          padding: 13px 20px;
+          text-decoration: none;
+          text-transform: uppercase;
+          transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+        }
+
+        .bw-route .bw-route-btn::after {
+          content: ">";
+          font-size: 14px;
+          margin-left: 9px;
+        }
+
+        .bw-route .bw-route-btn-primary {
+          background: #1B5E20;
+          color: #FFFFFF;
+        }
+
+        .bw-route .bw-route-btn-primary:hover,
+        .bw-route .bw-route-btn-primary:focus-visible {
+          background: #124516;
+          transform: translateY(-1px);
+        }
+
+        .bw-route .bw-route-btn-ghost {
+          border: 2px solid #1B5E20;
+          color: #1B5E20;
+        }
+
+        .bw-route .bw-route-btn-ghost:hover,
+        .bw-route .bw-route-btn-ghost:focus-visible {
+          background: #1B5E20;
+          color: #FFFFFF;
+          transform: translateY(-1px);
+        }
+
+        .bw-route .bw-route-btn:focus-visible {
+          outline: 3px solid rgba(255, 230, 0, 0.9);
+          outline-offset: 3px;
+        }
+
         .bw-route .bw-route-stop-card.visible {
           max-height: 600px;
           opacity: 1;
@@ -812,6 +877,15 @@ class BWRouteElement extends HTMLElement {
 
           .bw-route .bw-route-meta-item + .bw-route-meta-item::before {
             margin-right: 7px;
+          }
+
+          .bw-route .bw-route-cta {
+            align-items: stretch;
+            flex-direction: column;
+          }
+
+          .bw-route .bw-route-btn {
+            width: 100%;
           }
 
           .bw-route .bw-route-pin {
