@@ -38,6 +38,7 @@ class BWThankYouElement extends HTMLElement {
     this._setupInteractionTracking();
     this._syncCalendarLinksFromPage();
     this._syncTourDayAssistantFromPage();
+    this._syncManageBookingLinkFromPage();
     this._startWixConfirmationHide();
   }
 
@@ -344,6 +345,56 @@ class BWThankYouElement extends HTMLElement {
           min-height: 42px;
           padding: 12px 16px;
           white-space: nowrap;
+        }
+
+        .bw-thank-you .bw-ty-change {
+          align-items: center;
+          background: #FFFFFF;
+          border: 1px solid rgba(27, 94, 32, 0.16);
+          border-left: 6px solid var(--green);
+          box-shadow: 0 12px 28px rgba(27, 94, 32, 0.1);
+          display: grid;
+          gap: 16px;
+          grid-template-columns: minmax(0, 1fr) auto;
+          margin-top: 16px;
+          max-width: 650px;
+          padding: 17px 18px;
+        }
+
+        .bw-thank-you .bw-ty-change-kicker {
+          color: var(--green);
+          display: block;
+          font-size: 11px;
+          font-weight: 800;
+          line-height: 1.35;
+          margin-bottom: 5px;
+          text-transform: uppercase;
+        }
+
+        .bw-thank-you .bw-ty-change strong {
+          color: var(--green);
+          display: block;
+          font-size: 16px;
+          font-weight: 800;
+          line-height: 1.35;
+          margin-bottom: 4px;
+        }
+
+        .bw-thank-you .bw-ty-change p {
+          color: var(--muted);
+          font-size: 14px;
+          line-height: 1.55;
+          margin-bottom: 0;
+        }
+
+        .bw-thank-you .bw-ty-change .bw-ty-btn {
+          min-height: 42px;
+          padding: 12px 16px;
+          white-space: nowrap;
+        }
+
+        .bw-thank-you .bw-ty-change .bw-ty-btn[hidden] {
+          display: none !important;
         }
 
         .bw-thank-you .bw-ty-pass {
@@ -902,11 +953,20 @@ class BWThankYouElement extends HTMLElement {
             grid-template-columns: 1fr;
           }
 
+          .bw-thank-you .bw-ty-change {
+            align-items: stretch;
+            grid-template-columns: 1fr;
+          }
+
           .bw-thank-you .bw-ty-calendar-actions {
             flex-direction: column;
           }
 
           .bw-thank-you .bw-ty-calendar-actions .bw-ty-btn {
+            width: 100%;
+          }
+
+          .bw-thank-you .bw-ty-change .bw-ty-btn {
             width: 100%;
           }
 
@@ -974,6 +1034,14 @@ class BWThankYouElement extends HTMLElement {
                   <a class="bw-ty-btn bw-ty-btn-primary" data-bw-ty-calendar-ics data-bw-ty-event="calendar_added" href="#" download="berlinwalk-tour.ics">Apple / Outlook</a>
                 </div>
               </div>
+              <div class="bw-ty-change" data-bw-ty-change>
+                <div>
+                  <span class="bw-ty-change-kicker">Change of plans?</span>
+                  <strong>Move or cancel your booking</strong>
+                  <p data-bw-ty-change-copy>Use the change or cancel link in your confirmation email. That is the safest route because it is attached to your exact booking.</p>
+                </div>
+                <a class="bw-ty-btn bw-ty-btn-primary" data-bw-ty-manage-link data-bw-ty-event="manage_booking_clicked" href="#" target="_blank" rel="noopener" hidden>View or change booking</a>
+              </div>
             </div>
 
             <aside class="bw-ty-pass" aria-label="Tour day details" data-bw-ty-reveal>
@@ -1024,7 +1092,7 @@ class BWThankYouElement extends HTMLElement {
               <article class="bw-ty-assistant-card" data-bw-ty-weather-card data-bw-ty-reveal aria-live="polite">
                 <span class="bw-ty-card-kicker">Weather + what to wear</span>
                 <h3 data-bw-ty-weather-title>Forecast appears here</h3>
-                <p data-bw-ty-weather-status>The tour-day forecast appears once the booking date is detected. Comfortable walking shoes are always the baseline.</p>
+                <p data-bw-ty-weather-status>Berlin weather loves suspense. Once your tour date is detected, this turns into a forecast and outfit note.</p>
                 <div class="bw-ty-weather-metrics" data-bw-ty-weather-metrics hidden>
                   <div class="bw-ty-weather-metric">
                     <span>Feels like</span>
@@ -1145,6 +1213,7 @@ class BWThankYouElement extends HTMLElement {
   _hideWixBookingConfirmation() {
     this._syncCalendarLinksFromPage();
     this._syncTourDayAssistantFromPage();
+    this._syncManageBookingLinkFromPage();
 
     const targets = new Set();
     const directSelectors = [
@@ -1191,6 +1260,97 @@ class BWThankYouElement extends HTMLElement {
     if (!booking) return;
     this._calendarReady = true;
     this._renderCalendarLinks(booking);
+  }
+
+  _syncManageBookingLinkFromPage() {
+    if (this._manageBookingReady) return;
+    const url = this._getManageBookingUrl();
+    if (!url) return;
+    this._manageBookingReady = true;
+    this._renderManageBookingLink(url);
+  }
+
+  _getManageBookingUrl() {
+    const attributeUrl =
+      this.getAttribute('manage-booking-url') ||
+      this.getAttribute('data-manage-booking-url') ||
+      this.getAttribute('change-booking-url') ||
+      this.getAttribute('data-change-booking-url');
+    const normalizedAttributeUrl = this._normalizeManageBookingUrl(attributeUrl);
+    if (normalizedAttributeUrl) return normalizedAttributeUrl;
+
+    const candidates = this._getBookingConfirmationCandidates();
+    const linkPattern = /(manage|change|modify|reschedule|cancel|view).{0,28}booking|booking.{0,28}(manage|change|modify|reschedule|cancel|view)|reschedule|cancel/i;
+    const hrefPattern = /(manage|booking|bookings|reschedule|cancel)/i;
+
+    for (const candidate of candidates) {
+      const links = candidate.querySelectorAll ? Array.from(candidate.querySelectorAll('a[href]')) : [];
+      for (const link of links) {
+        const label = this._normalizeBookingText(link.textContent || link.getAttribute('aria-label') || '');
+        const href = link.getAttribute('href') || '';
+        if (!linkPattern.test(label) && !hrefPattern.test(href)) continue;
+        const normalizedUrl = this._normalizeManageBookingUrl(href);
+        if (normalizedUrl) return normalizedUrl;
+      }
+    }
+
+    return null;
+  }
+
+  _getBookingConfirmationCandidates() {
+    const candidates = [];
+    const directSelectors = [
+      '#thankYouPage1',
+      '[data-testid="thankYouPage1"]',
+      '[data-hook="thankYouPage1"]',
+      '[aria-label="Thank You Page"]',
+      '[aria-label="Booking Confirmation"]'
+    ];
+
+    directSelectors.forEach((selector) => {
+      try {
+        document.querySelectorAll(selector).forEach((node) => {
+          if (!this.contains(node)) candidates.push(node);
+        });
+      } catch (error) {
+        // Ignore selector support differences in Wix/editor contexts.
+      }
+    });
+
+    document.querySelectorAll('h1, h2, h3, [role="heading"], p, span, div').forEach((node) => {
+      if (this.contains(node)) return;
+      if ((node.textContent || '').trim() !== 'Booking Confirmation') return;
+      const target = this._findWixHideTarget(node);
+      if (target) candidates.push(target);
+    });
+
+    return candidates;
+  }
+
+  _normalizeManageBookingUrl(value) {
+    const raw = String(value || '').trim();
+    if (!raw || /^javascript:/i.test(raw) || /^mailto:/i.test(raw) || /^tel:/i.test(raw)) return null;
+
+    try {
+      const base = window.location && window.location.origin ? window.location.origin : 'https://www.berlinwalk.com';
+      const url = new URL(raw, base);
+      if (!/^https?:$/i.test(url.protocol)) return null;
+      return url.href;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  _renderManageBookingLink(url) {
+    const link = this.querySelector('[data-bw-ty-manage-link]');
+    const copy = this.querySelector('[data-bw-ty-change-copy]');
+    if (!link) return;
+
+    link.href = url;
+    link.hidden = false;
+    if (copy) {
+      copy.textContent = 'This opens the personal manage-booking link from Wix, so you can move or cancel the exact reservation without creating a duplicate.';
+    }
   }
 
   _syncTourDayAssistantFromPage() {
@@ -1385,9 +1545,9 @@ class BWThankYouElement extends HTMLElement {
 
     if (daysUntilTour > BW_THANK_YOU_FORECAST_DAYS - 1) {
       this._renderWeatherFallback(
-        'Forecast opens closer to tour day',
-        `Live forecasts are shown up to ${BW_THANK_YOU_FORECAST_DAYS} days ahead. Check this page again closer to the walk.`,
-        'Berlin-ready baseline',
+        'Berlin weather is still thinking',
+        `Your tour is too far out for a reliable forecast. Berlin weather has politely refused to make promises this early, so check back closer to the walk.`,
+        'Early packing wisdom',
         'Plan for comfortable walking shoes, a light layer, and a small rain layer if your trip is in spring or autumn.'
       );
       this._trackOnce('weather_forecast_pending', {

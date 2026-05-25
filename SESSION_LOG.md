@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-25 — Codex (Thank-you change link copy)
+
+**Did:** Refined the Tour Day Assistant fallback and added a change/cancel booking card.
+
+**Changed:**
+- `thank-you/thank-you-element.js` — far-out forecast fallback now uses the lighter `Berlin weather is still thinking` copy; default no-date weather copy is warmer; added `Change of plans?` card that auto-renders `View or change booking` when a Wix manage/change/cancel link or `manage-booking-url` attribute is available.
+- `README.md`, `AGENTS.md`, project root `PROJECT_MEMORY.md` — documented the manage-booking behavior.
+
+**Opened:** Live test still needs a real/test Wix booking to see whether the hidden confirmation exposes a manage-booking link; if it does not, pass `manage-booking-url` from Wix/Velo when possible.
+**Closed:** Local syntax/parser smoke checks passed; desktop preview shows the fallback email-based change/cancel copy without layout overflow.
+
+**Next session should:** Test `/thank-you-page` after a real booking and inspect whether the personal Wix manage-booking link is detectable.
+
 ## 2026-05-25 — Codex (Tour Day Assistant MVP)
 
 **Did:** Added the post-booking Tour Day Assistant to `<bw-thank-you>`: parsed tour time now powers countdown, live Open-Meteo forecast, outfit advice, meeting-point map, and analytics events.
