@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-05-17 (published status refreshed from Wix Blog API)
+Last updated: 2026-05-26 (Hackescher Markt after-tour draft added)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -13,7 +13,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 | 3 | Idea | Bebelplatz and the Nazi Book Burning Memorial: What Tourists Miss | Strong historical storytelling, close to central Berlin routes. |
 | 4 | Draft v1 | Where to Park in Berlin: Alexanderplatz, Park + Ride, and What Tourists Should Avoid | Practical guide for visitors arriving by car, now angled around the BerlinWalk tour start at the World Clock: Umweltzone, paid street parking, Park + Ride, and central garages near Alexanderplatz. Local draft at `blog-drafts/where-to-park-in-berlin-alexanderplatz-2026.md`; widgets wired under `alexanderplatz-parking-map` and `berlin-parking-calculator`. |
 | 5 | Idea | Tranenpalast: The Free Cold War Museum Tourists Shouldn't Skip | Practical and emotional museum guide, especially useful for visitors near Friedrichstrasse. |
-| 6 | Idea | What to Do Near Hackescher Markt After the Tour | Post-tour conversion content: food, courtyards, Museum Island, riverside walks, coffee. |
+| 6 | Draft v1 | What to Do Near Hackescher Markt After the Tour | Post-tour conversion content: food, courtyards, Museum Island, riverside walks, coffee. Local draft at `blog-drafts/what-to-do-near-hackescher-markt-after-walking-tour.md`; quick-summary + FAQ wired under slug `hackescher-after-tour`; `hackescher-after-tour-planner/` widget added. |
 | 7 | Idea | Berlin for One Day: What to See If You Only Have 6-8 Hours | High-intent itinerary post distinct from the 3-day guide. |
 | 8 | Idea | The Best Free Views in Berlin | SEO-shaped practical list distinct from the existing "views on foot" article. |
 | 9 | Idea | Berlin Memorials That Are Free, Powerful, and Easy to Visit | Free history itinerary with Holocaust Memorial, Neue Wache, Wall Memorial, Topography of Terror, Soviet memorials, and Tranenpalast. |

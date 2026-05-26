@@ -42,7 +42,9 @@
   "what-to-wear-to-berlin-clubs": "berlin-club-dress-code",
   "what-to-wear-to-berlin-clubs-dress-code-tips": "berlin-club-dress-code",
   "berlin-club-dress-code": "berlin-club-dress-code",
-  "the-berlin-wall-where-it-stood-and-what-s-left-in-2026": "berlin-wall-locations"
+  "the-berlin-wall-where-it-stood-and-what-s-left-in-2026": "berlin-wall-locations",
+  "what-to-do-near-hackescher-markt-after-walking-tour": "hackescher-after-tour",
+  "what-to-do-near-hackescher-markt-after-the-tour": "hackescher-after-tour"
 };
 
   var SCHEMAS = {
@@ -1924,6 +1926,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "A double row of cobblestones set into the pavement marks the former course of the Berlin Wall across the city. It runs for around 220 km and crosses roads, squares, parks, and pavements throughout the urban area. Look for two parallel lines of dark stone embedded in the ground — you will find them in most central districts, including Mitte, Kreuzberg, and Friedrichshain."
+        }
+      }
+    ]
+  },
+  "hackescher-after-tour": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where does the BerlinWalk tour end?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The BerlinWalk tour ends near Hackescher Markt in central Berlin. From there you are close to the S-Bahn station, trams, Hackesche Höfe, Museum Island, the Spree, and plenty of food options."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best thing to do immediately after the walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Eat or take a short break first. Then choose between Hackesche Höfe, Haus Schwarzenberg, the Spree riverbank, one museum, or an evening plan. Most people make better decisions after food or coffee."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Hackescher Markt good for lunch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Hackescher Markt is one of the easiest lunch areas after a central Berlin walking tour. Curry 61, Das Lemke, Monsieur Vuong, nearby bakeries, cafes, and the weekly market on some days make it more useful than returning to Alexanderplatz by default."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I walk from Hackescher Markt to Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Museum Island is a short walk from Hackescher Markt. After a 2-hour walking tour, the smarter plan is usually to choose one museum or walk the outside of Museum Island for free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can I do near Hackescher Markt when it rains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Good rainy-day options include the DDR Museum, Museum Otto Weidt's Workshop for the Blind, Anne Frank Zentrum, KW Institute for Contemporary Art, Neue Synagoge - Centrum Judaicum, Chamäleon Berlin, and the Museum Island museums."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Hackescher Markt safe at night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hackescher Markt is a busy central area and is generally fine at night with normal city awareness. Watch your phone and wallet around crowds, stations, and terraces. If you are tired, use the S-Bahn, tram, or a taxi rather than wandering aimlessly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I go back to Alexanderplatz after the tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only if you need transport, shopping, your hotel, or the TV Tower. For food, courtyards, Museum Island, the Spree, and evening plans, staying around Hackescher Markt is usually the better move."
         }
       }
     ]

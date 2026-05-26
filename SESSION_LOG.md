@@ -4,6 +4,36 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-26 — Codex (Hackescher after-tour planner widget)
+
+**Did:** Built the post-specific `Hackescher After-Tour Planner` widget for the Hackescher Markt after-tour article.
+
+**Changed:**
+- `hackescher-after-tour-planner/index.html` — new interactive iframe widget asking time, need, and energy, then returning one practical next move with route/map link and booking CTA.
+- `blog-drafts/what-to-do-near-hackescher-markt-after-walking-tour.md` — added the planner embed to the widget plan.
+- `blog-workplan.md`, `README.md` — documented the widget.
+- `output/qa/hackescher-after-tour-planner-desktop.png`, `output/qa/hackescher-after-tour-planner-mobile.png`, `output/qa/hackescher-after-tour-planner-mobile-full.png` — local QA screenshots.
+
+**Opened:** Push blocked locally: `git push origin main` failed because HTTPS credentials are missing, `gh` is not installed, and SSH has no GitHub identity. Local `main` is ahead of `origin/main` by 1.
+**Closed:** Inline JS parse passed; Playwright interaction test passed for default, rain, and museum states with no mobile horizontal overflow.
+
+**Next session should:** Authenticate GitHub locally (`gh auth login` + `gh auth setup-git`, or add an SSH key), then run `git push origin main`; after GitHub Pages deploy, embed `https://fenerszymanski.github.io/berlinwalk-widgets/hackescher-after-tour-planner/` in the Wix draft after the quick answer section.
+
+## 2026-05-26 — Codex (Hackescher after-tour blog draft)
+
+**Did:** Researched and drafted `What to Do Near Hackescher Markt After the Walking Tour` as a practical after-tour decision guide.
+
+**Changed:**
+- `blog-drafts/what-to-do-near-hackescher-markt-after-walking-tour.md` — new 2,990-word English blog draft with metadata, CTA, FAQ, and source notes.
+- `quick-summary/data.json`, `faq/data.json`, `faq/inject.js` — added `hackescher-after-tour` quick summary, FAQ, slug mappings, and FAQPage schema.
+- `blog-workplan.md` — marked the Hackescher Markt idea as Draft v1.
+- Project root `SESSION_LOG.md` — logged the broader handoff.
+
+**Opened:** Wix draft creation and final pre-publish hours check.
+**Closed:** JSON parse and `node --check faq/inject.js` passed; draft contains `2 hours` language and no `1h45m` wording.
+
+**Next session should:** Create the Wix draft, place quick-summary and FAQ embeds, then do a final live-hours check for museums/restaurants before publishing.
+
 ## 2026-05-26 — Codex (Route story live layout fix)
 
 **Did:** Fixed the live Wix wrapper issue that created huge blank space above and below `<bw-route-story>` on `/berlin-walking-tour-route`.

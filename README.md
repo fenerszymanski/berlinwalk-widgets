@@ -26,6 +26,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `public-toilets-map/` - live Berlin Open Data public toilet map with nearest-to-user distance.
 - `currywurst-finder/` - interactive Berlin currywurst map for the planned best currywurst article.
 - `club-picker/` - blog widget for the Berlin club dress-code article; asks five nightlife/outfit questions and returns a club recommendation, backup options, and Door Difficulty rating.
+- `hackescher-after-tour-planner/` - blog widget for the Hackescher Markt after-tour article; asks time, need, and energy, then returns one practical next move with route/map link and booking CTA.
 - `stats/` - deprecated hidden no-op; remove the old Stats section from Wix because hero now carries the facts.
 - `how-it-works/` - `bw-how-it-works` homepage 3-step walking timeline Custom Element.
 - `tools-home/` - `bw-tools-home` homepage tools preview Custom Element.
