@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-26 — Codex (Route story live layout fix)
+
+**Did:** Fixed the live Wix wrapper issue that created huge blank space above and below `<bw-route-story>` on `/berlin-walking-tour-route`.
+
+**Changed:**
+- Wix: Created HEAD custom embed `BerlinWalk Route Story Layout Fix` (`a814da86-8269-4a81-b732-4e04f911e25a`, `revision=1`, `loadOnce=false`). It is URL-guarded and collapses the Wix page/section wrappers around the custom element.
+- Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the live embed and QA state.
+- `output/qa/live-route-story-layout-fix-desktop.png`, `output/qa/live-route-story-layout-fix-mobile.png` — live QA screenshots.
+
+**Opened:** None.
+**Closed:** Live desktop/mobile Chrome checks show top gap `0px`, final CTA-to-footer gap `0px`, horizontal overflow `0`, and no console errors.
+
+**Next session should:** If the Wix page is rebuilt, re-check wrapper IDs `#comp-mpljwtm6` and `#comp-mpljz1bj` before editing the embed.
+
 ## 2026-05-25 — Codex (Route story preview section)
 
 **Did:** Added a compact route-story preview section to `<bw-route>` so The Route page teases the story-map concept without duplicating the full route story page.
