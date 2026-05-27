@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-27 — Codex (BerlinTools mobile polish)
+
+**Did:** Updated the single-tool mobile fixer for `/tools/*` after Yusuf reported narrow body text, oversized bottom related links, and occasional hero text overlap.
+
+**Changed:**
+- `js/berlintools-mobile-fixes.js` — added final mobile override rules for hero ordering/spacing, full-width body rich content, compact related cards, Read Next sizing, and sticky CTA spacing.
+- Project root `berlintools-mobile-tools-polish-custom-code.html`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — documented the live Wix inline CSS patch.
+- Wix Custom Embed `Berlin tools fix` (`f412a295-3d53-4339-bcbc-5d1bb1389be9`) — updated to revision 5 with inline CSS because the full JS source exceeds Wix's 15 KB Custom Embeds limit.
+
+**Opened:** Push this repo so the GitHub Pages JS source matches the live inline CSS behavior.
+**Closed:** Live mobile QA at 390px passed on daily budget, parking calculator, Alexanderplatz parking map, and connectivity picker: body content width is 354px, horizontal overflow is gone, hero blocks have spacing, and related cards are compact.
+
+**Next session should:** Keep the Wix embed inline unless intentionally switching back to an external `berlintools-mobile-fixes.js?v=...` URL after a GitHub Pages deploy.
+
 ## 2026-05-27 — Codex (BerlinTools link repair)
 
 **Did:** Fixed the source of a broken Berlin Connectivity Picker deep link in the hubs after Yusuf found `/tools/connectivity-picker` returning 404.
