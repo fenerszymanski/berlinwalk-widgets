@@ -86,7 +86,7 @@
       grid-template-columns: minmax(0, 0.85fr) minmax(280px, 1.15fr);
       gap: 16px;
       align-items: stretch;
-      margin-bottom: 18px;
+      margin: 18px 0 0;
     }
 
     #bw-budget-calc .bw-total {
@@ -161,6 +161,7 @@
       color: rgba(255,255,255,0.92);
       font-size: 12.5px;
       line-height: 1.55;
+      min-height: 94px;
       position: relative;
       z-index: 1;
     }
@@ -267,7 +268,7 @@
 
     #bw-budget-calc .bw-controls {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 14px;
     }
 
@@ -466,6 +467,11 @@
       border-radius: 12px;
       background: var(--bw-soft);
       padding: 14px;
+      min-height: 168px;
+    }
+
+    #bw-budget-calc .bw-summary-panel {
+      margin-top: 14px;
     }
 
     #bw-budget-calc .bw-note h4 {
@@ -570,6 +576,12 @@
       }
     }
 
+    @media (min-width: 761px) and (max-width: 980px) {
+      #bw-budget-calc .bw-controls {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
     @media (max-width: 420px) {
       #bw-budget-calc .bw-body { padding: 12px; }
       #bw-budget-calc .bw-presets { grid-template-columns: 1fr 1fr; gap: 7px; }
@@ -598,23 +610,6 @@
     </div>
 
     <div class="bw-body">
-      <div class="bw-result-grid" aria-live="polite">
-        <section class="bw-total" aria-label="Budget result">
-          <div class="bw-total-label" id="bw-tier-label">Balanced tourist day</div>
-          <div class="bw-euro">
-            <span class="bw-euro-main" id="bw-daily-total">€145</span>
-            <span class="bw-euro-unit">per day</span>
-          </div>
-          <div class="bw-trip-total" id="bw-trip-total">€435 for 3 days, per person</div>
-          <div class="bw-verdict" id="bw-verdict">This is a comfortable, realistic tourist budget if you stay central and mix restaurants with cheaper meals.</div>
-        </section>
-
-        <section class="bw-breakdown" aria-label="Budget breakdown">
-          <h4 class="bw-breakdown-title">Where the money goes</h4>
-          <div id="bw-bars"></div>
-        </section>
-      </div>
-
       <div class="bw-presets" aria-label="Budget presets">
         <button type="button" class="bw-preset active" data-preset="balanced">
           <strong>Balanced</strong>
@@ -745,20 +740,37 @@
             <input id="bw-buffer" type="range" min="0" max="25" step="5" value="10">
           </div>
         </section>
+      </div>
 
-        <section class="bw-panel">
-          <h4 class="bw-panel-title">Fast interpretation</h4>
-          <div class="bw-note">
-            <h4 id="bw-compare-title">Compared with Berlin averages</h4>
-            <ul id="bw-insight-list"></ul>
+      <div class="bw-result-grid" aria-live="polite">
+        <section class="bw-total" aria-label="Budget result">
+          <div class="bw-total-label" id="bw-tier-label">Balanced tourist day</div>
+          <div class="bw-euro">
+            <span class="bw-euro-main" id="bw-daily-total">€145</span>
+            <span class="bw-euro-unit">per day</span>
           </div>
-          <div class="bw-actions">
-            <button type="button" class="bw-action" id="bw-copy">Copy budget</button>
-            <button type="button" class="bw-action secondary" id="bw-reset">Reset</button>
-            <span class="bw-copy-status" id="bw-copy-status" aria-live="polite"></span>
-          </div>
+          <div class="bw-trip-total" id="bw-trip-total">€435 for 3 days, per person</div>
+          <div class="bw-verdict" id="bw-verdict">This is a comfortable, realistic tourist budget if you stay central and mix restaurants with cheaper meals.</div>
+        </section>
+
+        <section class="bw-breakdown" aria-label="Budget breakdown">
+          <h4 class="bw-breakdown-title">Where the money goes</h4>
+          <div id="bw-bars"></div>
         </section>
       </div>
+
+      <section class="bw-panel bw-summary-panel">
+        <h4 class="bw-panel-title">Fast interpretation</h4>
+        <div class="bw-note">
+          <h4 id="bw-compare-title">Compared with Berlin averages</h4>
+          <ul id="bw-insight-list"></ul>
+        </div>
+        <div class="bw-actions">
+          <button type="button" class="bw-action" id="bw-copy">Copy budget</button>
+          <button type="button" class="bw-action secondary" id="bw-reset">Reset</button>
+          <span class="bw-copy-status" id="bw-copy-status" aria-live="polite"></span>
+        </div>
+      </section>
     </div>
 
     <div class="bw-footer">Prices are 2026 working estimates for one adult visitor. Accommodation swings the most: weekends, fairs, and last-minute bookings can move the total sharply.</div>
@@ -983,10 +995,6 @@
         els.premiumToggle.setAttribute('aria-pressed', state.premium ? 'true' : 'false');
       }
 
-      function emitResize() {
-        window.parent.postMessage({ type: 'bw-resize', height: document.documentElement.scrollHeight }, '*');
-      }
-
       function update() {
         state.days = clamp(parseInt(state.days, 10) || 1, 1, 14);
         state.sights = clamp(parseInt(state.sights, 10) || 0, 0, 4);
@@ -1008,7 +1016,6 @@
 
         renderBars(values);
         syncControls();
-        window.setTimeout(emitResize, 40);
       }
 
       root.querySelectorAll('.bw-preset').forEach(function (btn) {

@@ -20,15 +20,15 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-05-27 — Codex (Daily Budget calculator upgrade)
 
-**Did:** Rebuilt `berlin-budget-table/` from a static comparison table into an interactive Berlin Daily Budget calculator.
+**Did:** Rebuilt `berlin-budget-table/` from a static comparison table into an interactive Berlin Daily Budget calculator, then moved the result section to the bottom.
 
 **Changed:**
-- `berlin-budget-table/index.html` — new calculator with presets, accommodation, room split, area, food, transport, paid sights, nightlife, premium attraction, walking-tour tip, buffer, live daily/trip totals, breakdown bars, insights, reset, and copy summary.
+- `berlin-budget-table/index.html` — new calculator with presets, accommodation, room split, area, food, transport, paid sights, nightlife, premium attraction, walking-tour tip, buffer, bottom live daily/trip totals, breakdown bars, insights, reset, and copy summary. The widget no longer sends its own `documentElement.scrollHeight` resize message on update; it relies on `brand.js` content-height reporting to avoid desktop slider height drift.
 - `tools-hub/data.json` — raised the Daily Budget `embedHeight` to 1120.
 - Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md` — documented the upgraded widget.
 
 **Opened:** Push this repo so GitHub Pages serves the new calculator on live `/tools/berlin-daily-budget`.
-**Closed:** Local QA passed with a temporary server at `http://127.0.0.1:8777/berlin-budget-table/`: inline JS parses, tools-hub JSON parses, desktop and 390px mobile Playwright checks showed no horizontal overflow, and preset interactions changed totals.
+**Closed:** Local QA passed with a temporary server at `http://127.0.0.1:8777/berlin-budget-table/`: inline JS parses, tools-hub JSON parses, desktop and 390px mobile Playwright checks showed no horizontal overflow, result appears below controls, preset interactions changed totals, and repeated slider changes kept desktop height stable (`1321 -> 1321`).
 
 **Next session should:** After push + GitHub Pages deploy, check the live Wix page and confirm the larger iframe auto-resizes cleanly.
 
