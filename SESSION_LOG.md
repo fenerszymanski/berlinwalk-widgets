@@ -25,10 +25,10 @@ Format for each entry — see `AGENTS.md` §9.
 **Changed:**
 - `js/berlintools-mobile-fixes.js` — added final mobile override rules for hero ordering/spacing, full-width body rich content, compact related cards, Read Next sizing, and sticky CTA spacing.
 - Project root `berlintools-mobile-tools-polish-custom-code.html`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — documented the live Wix inline CSS patch.
-- Wix Custom Embed `Berlin tools fix` (`f412a295-3d53-4339-bcbc-5d1bb1389be9`) — updated to revision 6 with inline CSS because the full JS source exceeds Wix's 15 KB Custom Embeds limit.
+- Wix Custom Embed `Berlin tools fix` (`f412a295-3d53-4339-bcbc-5d1bb1389be9`) — updated to revision 7 with inline CSS because the full JS source exceeds Wix's 15 KB Custom Embeds limit.
 
 **Opened:** Push this repo so the GitHub Pages JS source matches the live inline CSS behavior.
-**Closed:** Live mobile QA at 393px passed across all 28 `tools-hub` slugs: no squeezed intro/body/secondary widget shells, no horizontal overflow, no hero overlaps, and compact related cards. WelcomeCard intro and compare widget were specifically rechecked after revision 6.
+**Closed:** Live mobile QA at 393px passed across all 28 `tools-hub` slugs: no squeezed intro/body/secondary widget shells, no horizontal overflow, no hero overlaps, and compact related cards. WelcomeCard intro, compare widget, Read Next typography, and intro-to-H2 spacing were specifically rechecked after revision 7.
 
 **Next session should:** Keep the Wix embed inline unless intentionally switching back to an external `berlintools-mobile-fixes.js?v=...` URL after a GitHub Pages deploy.
 
