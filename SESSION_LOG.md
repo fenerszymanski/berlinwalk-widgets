@@ -4,6 +4,24 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-27 — Codex (Survival Map welcome email)
+
+**Did:** Created the professional Berlin Survival Map welcome email source to replace the old Berlin Essentials triggered email content.
+
+**Changed:**
+- `lead-form/email/README.md` — live automation IDs, subject/preheader, PDF URL, Wix paste workflow, and completed editor status.
+- `lead-form/email/berlin-survival-map-welcome.md` — editable English copy deck.
+- `lead-form/email/wix-html-block.html` — paste-ready inline-CSS/table HTML block for Wix.
+- `lead-form/email/preview.html` — local inbox/email preview.
+- `README.md`, `AGENTS.md` — documented `lead-form/email/` as the email source-of-truth.
+- Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the live Wix automation state and manual editor step.
+- Wix: Renamed automation/action labels to Berlin Survival Map (`revision=12`); Yusuf then pasted the refreshed body/subject/preview in the Wix editor.
+
+**Opened:** None for this email.
+**Closed:** HTML parser checks pass; paste-ready block has no `<style>`, SVG, JS, Berlin Essentials copy, or `1h45m`; PDF and cover links return 200; Chrome CDP desktop/mobile preview metrics show `overflow=false`; manual Wix editor paste is done.
+
+**Next session should:** No immediate follow-up unless the welcome email copy changes again.
+
 ## 2026-05-26 — Codex (Hackescher after-tour planner widget)
 
 **Did:** Built the post-specific `Hackescher After-Tour Planner` widget for the Hackescher Markt after-tour article.

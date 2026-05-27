@@ -13,7 +13,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 
 ## Widgets
 
-- `lead-form/` - Berlin Survival Map email capture form.
+- `lead-form/` - Berlin Survival Map email capture form, plus `lead-form/email/` source for the welcome email HTML and copy.
 - `quick-summary/` - reusable quick summary and optional audio player.
 - `hero-home/` - `bw-hero-home` homepage conversion hero Custom Element.
 - `blog-home/` - `bw-blog-home` homepage editorial blog teaser Custom Element.
