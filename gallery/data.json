@@ -71,6 +71,14 @@
       "caption": "Sunny group moment near Alexanderplatz",
       "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 100vw, 33vw",
       "aspectRatio": "3/4"
+    },
+    {
+      "id": "10",
+      "area": "j",
+      "alt": "Bronze city model of medieval Berlin's Marienviertel near Marienkirche",
+      "caption": "Medieval Berlin in bronze, near Marienkirche",
+      "sizes": "(max-width: 520px) 100vw, (max-width: 900px) 100vw, 100vw",
+      "aspectRatio": "16/9"
     }
   ]
 }

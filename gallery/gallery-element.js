@@ -102,11 +102,12 @@ class BWGalleryElement extends HTMLElement {
             "a a b c d d"
             "a a e e f f"
             "g g e e i i"
-            "h h h h i i";
+            "h h h h i i"
+            "j j j j j j";
           grid-template-columns: repeat(6, minmax(0, 1fr));
-          grid-template-rows: repeat(4, minmax(150px, 1fr));
+          grid-template-rows: repeat(5, minmax(150px, 1fr));
           margin-top: 36px;
-          min-height: 820px;
+          min-height: 1010px;
         }
 
         .bw-gallery .bw-tile {
@@ -394,10 +395,11 @@ class BWGalleryElement extends HTMLElement {
               "f f"
               "g g"
               "h h"
-              "i i";
+              "i i"
+              "j j";
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            grid-template-rows: repeat(8, minmax(170px, 1fr));
-            min-height: 1360px;
+            grid-template-rows: repeat(9, minmax(170px, 1fr));
+            min-height: 1530px;
           }
 
           .bw-gallery .bw-lightbox {
