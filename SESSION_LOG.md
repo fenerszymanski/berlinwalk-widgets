@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-27 — Codex (BerlinTools link repair)
+
+**Did:** Fixed the source of a broken Berlin Connectivity Picker deep link in the hubs after Yusuf found `/tools/connectivity-picker` returning 404.
+
+**Changed:**
+- `tools-hub/data.json` — changed the connectivity card slug to canonical `berlin-connectivity-picker` while keeping the widget folder URL at `connectivity-picker/`.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — updated the ItemList URL for Berlin Connectivity Picker to `/tools/berlin-connectivity-picker`.
+- Project root `insert-german-phrases-quiz-tool.js`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the canonical slug and live CMS repair.
+- Wix CMS: root session inserted parking tool pages and a compatibility alias for `/tools/connectivity-picker`.
+
+**Opened:** Push this repo so GitHub Pages serves the corrected hub data/SEO source.
+**Closed:** The live `/tools/connectivity-picker`, `/tools/berlin-parking-calculator`, and `/tools/alexanderplatz-parking-map` pages now return 200.
+
+**Next session should:** Push `berlinwalk-widgets`; after GitHub Pages deploys, spot-check `/berlin-tools` and `/widgets` generated links for Berlin Connectivity Picker.
+
 ## 2026-05-27 — Codex (Survival Map welcome email)
 
 **Did:** Created the professional Berlin Survival Map welcome email source to replace the old Berlin Essentials triggered email content.
