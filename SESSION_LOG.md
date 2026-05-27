@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-27 — Codex (Hero/gallery photo swap)
+
+**Did:** Replaced the homepage hero background and gallery slot `01` with Yusuf's new golden-hour Altes Museum tour photo.
+
+**Changed:**
+- `hero-home/hero-home-element.js` — hero now loads dedicated `hero-home-museum-island-*` WebP/JPG assets and updated alt text.
+- `gallery/images/hero-home-museum-island-*` plus `gallery/images/01-*` — new optimized hero 16:9 and gallery 1:1 asset sets.
+- `gallery/data.json` — updated photo `01` alt/caption to `Storytelling outside the Altes Museum`.
+
+**Opened:** Push `berlinwalk-widgets` when ready so GitHub Pages serves the new hero/gallery assets.
+**Closed:** Local QA passed at `http://127.0.0.1:8765/hero-home/` and `/gallery/`; desktop/mobile screenshots saved under project-root `output/qa/`, with no console errors or horizontal overflow.
+
+**Next session should:** After push + GitHub Pages deploy, hard-refresh `berlinwalk.com` and confirm the homepage hero and gallery first tile use the new photo.
+
 ## 2026-05-27 — Codex (BerlinTools mobile polish)
 
 **Did:** Updated the single-tool mobile fixer for `/tools/*` after Yusuf reported narrow body text, oversized bottom related links, and occasional hero text overlap.

@@ -421,13 +421,13 @@ class BWHeroHomeElement extends HTMLElement {
         <picture class="bw-hero-picture">
           <source
             type="image/webp"
-            srcset="${BW_HERO_HOME_ASSET_BASE}01-800w.webp 800w, ${BW_HERO_HOME_ASSET_BASE}01-1200w.webp 1200w, ${BW_HERO_HOME_ASSET_BASE}01-1600w.webp 1600w"
+            srcset="${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.webp 800w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1200w.webp 1200w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.webp 1600w"
             sizes="100vw">
           <img
-            src="${BW_HERO_HOME_ASSET_BASE}01-1600w.jpg"
-            srcset="${BW_HERO_HOME_ASSET_BASE}01-800w.jpg 800w, ${BW_HERO_HOME_ASSET_BASE}01-1200w.jpg 1200w, ${BW_HERO_HOME_ASSET_BASE}01-1600w.jpg 1600w"
+            src="${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.jpg"
+            srcset="${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.jpg 800w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1200w.jpg 1200w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.jpg 1600w"
             sizes="100vw"
-            alt="BerlinWalk guide Yusuf leading guests on Museum Island"
+            alt="BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island"
             loading="eager"
             decoding="async">
         </picture>
