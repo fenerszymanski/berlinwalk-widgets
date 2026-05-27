@@ -4,6 +4,34 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-27 — Codex (Compact 15-photo gallery)
+
+**Did:** Made the homepage gallery compact and expanded it to 15 photos, including Yusuf's new Hackescher Markt, Marx-Engels Forum, Humboldt Forum, refreshed Marienviertel, golden-hour TV Tower, and Marienkirche photos.
+
+**Changed:**
+- `gallery/gallery-element.js`, `gallery/index.html` — replaced the large mosaic with a compact responsive grid: 5 columns desktop, 4/3 on narrower screens, 2 on mobile.
+- `gallery/data.json`, `gallery/source-mapping.json` — updated compact image sizes, refreshed photo `10`, and added photos `11-15`.
+- `gallery/images/10-*`, `gallery/images/11-*`, `gallery/images/12-*`, `gallery/images/13-*`, `gallery/images/14-*`, `gallery/images/15-*` — optimized WebP/JPG asset sets.
+
+**Opened:** Push `berlinwalk-widgets` when ready so GitHub Pages serves the expanded compact gallery.
+**Closed:** Local QA passed: 15 photos render, desktop rows are 5+5+5, mobile is 2-column, last lightbox opens as `15 of 15`, no console errors or horizontal overflow.
+
+**Next session should:** After push + GitHub Pages deploy, hard-refresh the live homepage gallery and confirm the new compact 15-photo grid.
+
+## 2026-05-27 — Codex (Daily Budget calculator upgrade)
+
+**Did:** Rebuilt `berlin-budget-table/` from a static comparison table into an interactive Berlin Daily Budget calculator.
+
+**Changed:**
+- `berlin-budget-table/index.html` — new calculator with presets, accommodation, room split, area, food, transport, paid sights, nightlife, premium attraction, walking-tour tip, buffer, live daily/trip totals, breakdown bars, insights, reset, and copy summary.
+- `tools-hub/data.json` — raised the Daily Budget `embedHeight` to 1120.
+- Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md` — documented the upgraded widget.
+
+**Opened:** Push this repo so GitHub Pages serves the new calculator on live `/tools/berlin-daily-budget`.
+**Closed:** Local QA passed with a temporary server at `http://127.0.0.1:8777/berlin-budget-table/`: inline JS parses, tools-hub JSON parses, desktop and 390px mobile Playwright checks showed no horizontal overflow, and preset interactions changed totals.
+
+**Next session should:** After push + GitHub Pages deploy, check the live Wix page and confirm the larger iframe auto-resizes cleanly.
+
 ## 2026-05-27 — Codex (Hero/gallery photo swap)
 
 **Did:** Replaced the homepage hero background and gallery slot `01` with Yusuf's new golden-hour Altes Museum tour photo.
@@ -25,10 +53,10 @@ Format for each entry — see `AGENTS.md` §9.
 **Changed:**
 - `js/berlintools-mobile-fixes.js` — added final mobile override rules for hero ordering/spacing, full-width body rich content, compact related cards, Read Next sizing, and sticky CTA spacing.
 - Project root `berlintools-mobile-tools-polish-custom-code.html`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — documented the live Wix inline CSS patch.
-- Wix Custom Embed `Berlin tools fix` (`f412a295-3d53-4339-bcbc-5d1bb1389be9`) — updated to revision 7 with inline CSS because the full JS source exceeds Wix's 15 KB Custom Embeds limit.
+- Wix Custom Embed `Berlin tools fix` (`f412a295-3d53-4339-bcbc-5d1bb1389be9`) — updated to revision 8 with inline CSS because the full JS source exceeds Wix's 15 KB Custom Embeds limit.
 
 **Opened:** Push this repo so the GitHub Pages JS source matches the live inline CSS behavior.
-**Closed:** Live mobile QA at 393px passed across all 28 `tools-hub` slugs: no squeezed intro/body/secondary widget shells, no horizontal overflow, no hero overlaps, and compact related cards. WelcomeCard intro, compare widget, Read Next typography, and intro-to-H2 spacing were specifically rechecked after revision 7.
+**Closed:** Live mobile QA at 393px passed across all 28 `tools-hub` slugs: no squeezed intro/body/secondary widget shells, no horizontal overflow, no hero overlaps, and compact related cards. Daily Budget hero and intro edge padding were specifically rechecked after revision 8.
 
 **Next session should:** Keep the Wix embed inline unless intentionally switching back to an external `berlintools-mobile-fixes.js?v=...` URL after a GitHub Pages deploy.
 

@@ -3,122 +3,1092 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Berlin Daily Budget 2026: Backpacker, Mid-range, Comfort | BerlinWalk</title>
+  <title>Berlin Daily Budget Calculator 2026 | BerlinWalk</title>
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
-<div id="bw-budget-table">
+<div id="bw-budget-calc">
   <style>
-    #bw-budget-table {
+    #bw-budget-calc {
       --bw-green: #1B5E20;
+      --bw-green-dark: #123F17;
       --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F7FAF2;
+      --bw-soft-2: #EEF6E8;
       --bw-border: #DCE8C8;
       --bw-text: #212121;
-      --bw-muted: #4E5A4E;
+      --bw-muted: #536153;
       --bw-white: #FFFFFF;
+      --bw-red: #B3261E;
       font-family: Montserrat, Arial, sans-serif;
       color: var(--bw-text);
-      margin: 28px 0;
+      margin: 24px 0;
       max-width: 100%;
     }
-    #bw-budget-table * { box-sizing: border-box; }
-    #bw-budget-table .bw-wrap { border: 1px solid var(--bw-border); border-radius: 14px; background: var(--bw-white); overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-    #bw-budget-table .bw-head { background: var(--bw-green); padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
-    #bw-budget-table .bw-icon { font-size: 18px; line-height: 1; }
-    #bw-budget-table .bw-kicker { color: var(--bw-yellow); font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; }
-    #bw-budget-table .bw-body { background: var(--bw-white); overflow-x: auto; }
-    #bw-budget-table table { width: 100%; border-collapse: collapse; font-size: 13px; table-layout: fixed; }
-    #bw-budget-table col.c1 { width: 22%; } #bw-budget-table col.cc { width: 26%; }
-    #bw-budget-table thead th { padding: 14px 12px; text-align: left; border-bottom: 1px solid var(--bw-border); border-top: 0.5px solid var(--bw-border); background: #FAFAF5; }
-    #bw-budget-table thead th.cat-h { color: var(--bw-muted); font-size: 10px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; }
-    #bw-budget-table thead th.col-h { vertical-align: top; }
-    #bw-budget-table .bw-style { font-size: 13px; font-weight: 800; color: var(--bw-green); display: block; line-height: 1.2; }
-    #bw-budget-table .bw-tag { display: inline-block; font-size: 9px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; padding: 2px 7px; border-radius: 999px; margin-top: 6px; background: #EAF3DE; color: #27500A; }
-    #bw-budget-table .bw-tag.mid { background: #FFF3D6; color: #7A5500; }
-    #bw-budget-table .bw-tag.lux { background: #E0F2F1; color: #00574B; }
-    #bw-budget-table tbody td { padding: 13px 12px; border-bottom: 0.5px solid var(--bw-border); vertical-align: top; line-height: 1.5; font-size: 12.5px; color: var(--bw-text); }
-    #bw-budget-table tbody td:first-child { font-weight: 800; color: var(--bw-green); }
-    #bw-budget-table tbody tr:last-child td { border-bottom: none; }
-    #bw-budget-table tbody tr.total td { background: #F2F8E8; font-weight: 800; }
-    #bw-budget-table tbody tr.total td:first-child { color: var(--bw-green); }
-    #bw-budget-table tbody tr.total .bw-amount { font-size: 16px; color: var(--bw-green); }
-    #bw-budget-table .bw-amount { font-weight: 800; font-size: 13px; }
-    #bw-budget-table .bw-detail { display: block; color: var(--bw-muted); font-size: 11.5px; font-weight: 500; margin-top: 3px; line-height: 1.45; }
-    #bw-budget-table .bw-footer { padding: 11px 20px; background: #FAFAF5; border-top: 1px solid var(--bw-border); font-size: 11px; color: var(--bw-muted); line-height: 1.5; }
-    @media (max-width: 600px) {
-      #bw-budget-table .bw-head { padding: 12px 16px; gap: 8px; }
-      #bw-budget-table .bw-icon { font-size: 16px; }
-      #bw-budget-table .bw-kicker { font-size: 10px; letter-spacing: 2px; }
-      #bw-budget-table table, #bw-budget-table thead, #bw-budget-table tbody, #bw-budget-table tr, #bw-budget-table th, #bw-budget-table td { display: block; }
-      #bw-budget-table thead { display: none; }
-      #bw-budget-table tbody tr { border: 1px solid var(--bw-border); border-radius: 10px; margin: 10px 14px; padding: 10px 12px; background: var(--bw-white); }
-      #bw-budget-table tbody tr.total { background: #F2F8E8; }
-      #bw-budget-table tbody td { border: none; padding: 5px 0; font-size: 12.5px; }
-      #bw-budget-table tbody td::before { content: attr(data-label); display: block; font-size: 9.5px; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: var(--bw-muted); margin-bottom: 2px; }
-      #bw-budget-table tbody td[data-label="Category"]::before { display: none; }
-      #bw-budget-table tbody td[data-label="Category"] { font-size: 14px; margin-bottom: 6px; }
-      #bw-budget-table .bw-footer { padding: 10px 14px; font-size: 10.5px; }
+
+    #bw-budget-calc * { box-sizing: border-box; }
+
+    #bw-budget-calc button,
+    #bw-budget-calc input,
+    #bw-budget-calc select {
+      font: inherit;
+    }
+
+    #bw-budget-calc .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    }
+
+    #bw-budget-calc .bw-head {
+      background: var(--bw-green);
+      color: var(--bw-white);
+      padding: 18px 20px;
+    }
+
+    #bw-budget-calc .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    #bw-budget-calc .bw-title {
+      margin: 0;
+      color: var(--bw-white);
+      font-size: 23px;
+      line-height: 1.16;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    #bw-budget-calc .bw-sub {
+      margin: 8px 0 0;
+      max-width: 720px;
+      color: rgba(255,255,255,0.86);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    #bw-budget-calc .bw-body {
+      background: linear-gradient(180deg, #FCFDF8 0%, #FFFFFF 42%);
+      padding: 18px;
+    }
+
+    #bw-budget-calc .bw-result-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(280px, 1.15fr);
+      gap: 16px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+
+    #bw-budget-calc .bw-total {
+      background: var(--bw-green);
+      color: var(--bw-white);
+      border-radius: 12px;
+      padding: 18px;
+      min-height: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #bw-budget-calc .bw-total::after {
+      content: "";
+      position: absolute;
+      right: -38px;
+      top: -44px;
+      width: 120px;
+      height: 120px;
+      background: var(--bw-yellow);
+      opacity: 0.09;
+      border-radius: 999px;
+    }
+
+    #bw-budget-calc .bw-total-label {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-budget-calc .bw-euro {
+      display: flex;
+      align-items: baseline;
+      gap: 4px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-budget-calc .bw-euro-main {
+      font-size: 52px;
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    #bw-budget-calc .bw-euro-unit {
+      color: rgba(255,255,255,0.82);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    #bw-budget-calc .bw-trip-total {
+      margin-top: 10px;
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+      line-height: 1.45;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-budget-calc .bw-verdict {
+      margin-top: 14px;
+      padding: 12px;
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 10px;
+      color: rgba(255,255,255,0.92);
+      font-size: 12.5px;
+      line-height: 1.55;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-budget-calc .bw-breakdown {
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      background: var(--bw-white);
+      padding: 14px;
+    }
+
+    #bw-budget-calc .bw-breakdown-title {
+      margin: 0 0 11px;
+      color: var(--bw-green);
+      font-size: 16px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    #bw-budget-calc .bw-bar-row {
+      display: grid;
+      grid-template-columns: 106px minmax(0, 1fr) 56px;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    #bw-budget-calc .bw-bar-row:last-child { margin-bottom: 0; }
+
+    #bw-budget-calc .bw-bar-label {
+      color: var(--bw-muted);
+      font-weight: 700;
+    }
+
+    #bw-budget-calc .bw-bar-track {
+      height: 9px;
+      border-radius: 999px;
+      background: #EDF3E6;
+      overflow: hidden;
+    }
+
+    #bw-budget-calc .bw-bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--bw-lime), var(--bw-yellow));
+      transition: width 0.18s ease;
+    }
+
+    #bw-budget-calc .bw-bar-value {
+      text-align: right;
+      color: var(--bw-green);
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    #bw-budget-calc .bw-presets {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    #bw-budget-calc .bw-preset {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      border-radius: 10px;
+      padding: 11px 10px;
+      cursor: pointer;
+      text-align: left;
+      min-height: 58px;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+    }
+
+    #bw-budget-calc .bw-preset:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-soft);
+      transform: translateY(-1px);
+    }
+
+    #bw-budget-calc .bw-preset.active {
+      background: var(--bw-green);
+      color: var(--bw-white);
+      border-color: var(--bw-green);
+    }
+
+    #bw-budget-calc .bw-preset strong {
+      display: block;
+      font-size: 13px;
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    #bw-budget-calc .bw-preset span {
+      display: block;
+      font-size: 11px;
+      line-height: 1.35;
+      color: inherit;
+      opacity: 0.82;
+    }
+
+    #bw-budget-calc .bw-controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    #bw-budget-calc .bw-panel {
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      background: var(--bw-white);
+      padding: 14px;
+    }
+
+    #bw-budget-calc .bw-panel-title {
+      margin: 0 0 10px;
+      color: var(--bw-green);
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 800;
+    }
+
+    #bw-budget-calc .bw-field {
+      margin-bottom: 13px;
+    }
+
+    #bw-budget-calc .bw-field:last-child {
+      margin-bottom: 0;
+    }
+
+    #bw-budget-calc .bw-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.15px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    #bw-budget-calc .bw-live-value {
+      color: var(--bw-green);
+      letter-spacing: 0;
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    #bw-budget-calc .bw-segments {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    #bw-budget-calc .bw-segments.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    #bw-budget-calc .bw-segments.four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    #bw-budget-calc .bw-choice {
+      border: 1.5px solid var(--bw-border);
+      background: #FFFFFF;
+      color: var(--bw-text);
+      border-radius: 8px;
+      min-height: 42px;
+      padding: 8px 9px;
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    #bw-budget-calc .bw-choice:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-soft);
+    }
+
+    #bw-budget-calc .bw-choice.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-budget-calc .bw-input-row {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) 44px;
+      gap: 8px;
+      align-items: center;
+    }
+
+    #bw-budget-calc .bw-step {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      border-radius: 8px;
+      height: 40px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    #bw-budget-calc .bw-step:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-soft);
+    }
+
+    #bw-budget-calc .bw-number {
+      width: 100%;
+      height: 40px;
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      text-align: center;
+      color: var(--bw-green);
+      font-size: 15px;
+      font-weight: 800;
+      background: #FFFFFF;
+    }
+
+    #bw-budget-calc input[type="range"] {
+      width: 100%;
+      accent-color: var(--bw-green);
+    }
+
+    #bw-budget-calc .bw-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      border-radius: 8px;
+      padding: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    #bw-budget-calc .bw-toggle.active {
+      border-color: var(--bw-green);
+      background: var(--bw-soft);
+    }
+
+    #bw-budget-calc .bw-switch {
+      width: 36px;
+      height: 20px;
+      border-radius: 999px;
+      background: #D5DDCC;
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    #bw-budget-calc .bw-switch::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+      transition: transform 0.18s ease;
+    }
+
+    #bw-budget-calc .bw-toggle.active .bw-switch {
+      background: var(--bw-green);
+    }
+
+    #bw-budget-calc .bw-toggle.active .bw-switch::after {
+      transform: translateX(16px);
+    }
+
+    #bw-budget-calc .bw-toggle-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    #bw-budget-calc .bw-toggle-name {
+      color: var(--bw-text);
+      font-size: 12.5px;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    #bw-budget-calc .bw-toggle-sub {
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    #bw-budget-calc .bw-insights {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    #bw-budget-calc .bw-note {
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      background: var(--bw-soft);
+      padding: 14px;
+    }
+
+    #bw-budget-calc .bw-note h4 {
+      margin: 0 0 8px;
+      color: var(--bw-green);
+      font-size: 14px;
+      line-height: 1.25;
+      font-weight: 800;
+    }
+
+    #bw-budget-calc .bw-note ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #bw-budget-calc .bw-note li {
+      position: relative;
+      margin: 0 0 8px;
+      padding-left: 18px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    #bw-budget-calc .bw-note li:last-child { margin-bottom: 0; }
+
+    #bw-budget-calc .bw-note li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.52em;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bw-yellow);
+      border: 2px solid var(--bw-green);
+    }
+
+    #bw-budget-calc .bw-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    #bw-budget-calc .bw-action {
+      border: 1.5px solid var(--bw-green);
+      background: var(--bw-green);
+      color: var(--bw-white);
+      border-radius: 8px;
+      min-height: 42px;
+      padding: 10px 14px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    #bw-budget-calc .bw-action.secondary {
+      background: var(--bw-white);
+      color: var(--bw-green);
+    }
+
+    #bw-budget-calc .bw-action:hover {
+      filter: brightness(0.96);
+    }
+
+    #bw-budget-calc .bw-copy-status {
+      align-self: center;
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    #bw-budget-calc .bw-footer {
+      border-top: 1px solid var(--bw-border);
+      background: #FAFAF5;
+      color: var(--bw-muted);
+      padding: 12px 18px;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 760px) {
+      #bw-budget-calc { margin: 20px 0; }
+      #bw-budget-calc .bw-head { padding: 16px; }
+      #bw-budget-calc .bw-title { font-size: 20px; }
+      #bw-budget-calc .bw-body { padding: 14px; }
+      #bw-budget-calc .bw-result-grid,
+      #bw-budget-calc .bw-controls,
+      #bw-budget-calc .bw-insights {
+        grid-template-columns: 1fr;
+      }
+      #bw-budget-calc .bw-presets {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      #bw-budget-calc .bw-euro-main { font-size: 46px; }
+      #bw-budget-calc .bw-bar-row {
+        grid-template-columns: 96px minmax(0, 1fr) 52px;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      #bw-budget-calc .bw-body { padding: 12px; }
+      #bw-budget-calc .bw-presets { grid-template-columns: 1fr 1fr; gap: 7px; }
+      #bw-budget-calc .bw-preset { padding: 10px 9px; }
+      #bw-budget-calc .bw-controls { gap: 12px; }
+      #bw-budget-calc .bw-panel { padding: 12px; }
+      #bw-budget-calc .bw-segments,
+      #bw-budget-calc .bw-segments.four {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      #bw-budget-calc .bw-choice { min-height: 40px; font-size: 11.5px; }
+      #bw-budget-calc .bw-bar-row {
+        grid-template-columns: 88px minmax(0, 1fr) 50px;
+        font-size: 11.5px;
+      }
+      #bw-budget-calc .bw-total { padding: 16px; }
+      #bw-budget-calc .bw-euro-main { font-size: 42px; }
     }
   </style>
+
   <div class="bw-wrap">
     <div class="bw-head">
-      <span class="bw-icon" aria-hidden="true">📊</span>
-      <span class="bw-kicker">Berlin Daily Budget — 2026</span>
+      <div class="bw-kicker">Berlin Daily Budget - 2026</div>
+      <h3 class="bw-title">Build a realistic Berlin day budget</h3>
+      <p class="bw-sub">Adjust your stay, food, transport, sightseeing, nightlife, and buffer. The calculator shows a per-person daily budget plus the full trip total.</p>
     </div>
+
     <div class="bw-body">
-      <table>
-        <colgroup><col class="c1"><col class="cc"><col class="cc"><col class="cc"></colgroup>
-        <thead>
-          <tr>
-            <th class="cat-h">Category</th>
-            <th class="col-h"><span class="bw-style">Backpacker</span><span class="bw-tag">€60–90/day</span></th>
-            <th class="col-h"><span class="bw-style">Mid-range</span><span class="bw-tag mid">€120–250/day</span></th>
-            <th class="col-h"><span class="bw-style">Comfort</span><span class="bw-tag lux">€370–500/day</span></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Category">Accommodation</td>
-            <td data-label="Backpacker"><span class="bw-amount">€30–45</span><span class="bw-detail">Hostel dorm bed, central neighborhood</span></td>
-            <td data-label="Mid-range"><span class="bw-amount">€90–130</span><span class="bw-detail">3-star hotel, central</span></td>
-            <td data-label="Comfort"><span class="bw-amount">€160–280</span><span class="bw-detail">4-star or boutique hotel</span></td>
-          </tr>
-          <tr>
-            <td data-label="Category">Food</td>
-            <td data-label="Backpacker"><span class="bw-amount">€15–25</span><span class="bw-detail">Bakery + döner + supermarket cooking</span></td>
-            <td data-label="Mid-range"><span class="bw-amount">€30–45</span><span class="bw-detail">Lunch special + restaurant dinner</span></td>
-            <td data-label="Comfort"><span class="bw-amount">€70–100</span><span class="bw-detail">Restaurants throughout, occasional fine dining</span></td>
-          </tr>
-          <tr>
-            <td data-label="Category">Transport</td>
-            <td data-label="Backpacker"><span class="bw-amount">€5–12</span><span class="bw-detail">Day ticket + a lot of walking</span></td>
-            <td data-label="Mid-range"><span class="bw-amount">€11–15</span><span class="bw-detail">Day ticket, occasional U/S-Bahn</span></td>
-            <td data-label="Comfort"><span class="bw-amount">€15–25</span><span class="bw-detail">Day ticket plus the occasional taxi</span></td>
-          </tr>
-          <tr>
-            <td data-label="Category">Attractions</td>
-            <td data-label="Backpacker"><span class="bw-amount">€0–10</span><span class="bw-detail">Free sights only; one paid museum a few days</span></td>
-            <td data-label="Mid-range"><span class="bw-amount">€15–30</span><span class="bw-detail">1–2 paid museums per day</span></td>
-            <td data-label="Comfort"><span class="bw-amount">€30–60</span><span class="bw-detail">Premium tickets, bundled passes</span></td>
-          </tr>
-          <tr>
-            <td data-label="Category">Drinks &amp; nightlife</td>
-            <td data-label="Backpacker"><span class="bw-amount">€5–10</span><span class="bw-detail">Späti beer or two on a bench</span></td>
-            <td data-label="Mid-range"><span class="bw-amount">€15–30</span><span class="bw-detail">A few beers in a bar, an occasional cocktail</span></td>
-            <td data-label="Comfort"><span class="bw-amount">€40–60</span><span class="bw-detail">Cocktail bars, club entry on weekends</span></td>
-          </tr>
-          <tr class="total">
-            <td data-label="Category">Per-day total</td>
-            <td data-label="Backpacker"><span class="bw-amount">€60–90</span></td>
-            <td data-label="Mid-range"><span class="bw-amount">€120–250</span></td>
-            <td data-label="Comfort"><span class="bw-amount">€370–500</span></td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="bw-result-grid" aria-live="polite">
+        <section class="bw-total" aria-label="Budget result">
+          <div class="bw-total-label" id="bw-tier-label">Balanced tourist day</div>
+          <div class="bw-euro">
+            <span class="bw-euro-main" id="bw-daily-total">€145</span>
+            <span class="bw-euro-unit">per day</span>
+          </div>
+          <div class="bw-trip-total" id="bw-trip-total">€435 for 3 days, per person</div>
+          <div class="bw-verdict" id="bw-verdict">This is a comfortable, realistic tourist budget if you stay central and mix restaurants with cheaper meals.</div>
+        </section>
+
+        <section class="bw-breakdown" aria-label="Budget breakdown">
+          <h4 class="bw-breakdown-title">Where the money goes</h4>
+          <div id="bw-bars"></div>
+        </section>
+      </div>
+
+      <div class="bw-presets" aria-label="Budget presets">
+        <button type="button" class="bw-preset active" data-preset="balanced">
+          <strong>Balanced</strong>
+          <span>Central hotel, mixed meals</span>
+        </button>
+        <button type="button" class="bw-preset" data-preset="backpacker">
+          <strong>Backpacker</strong>
+          <span>Hostel, cheap eats, free sights</span>
+        </button>
+        <button type="button" class="bw-preset" data-preset="comfort">
+          <strong>Comfort</strong>
+          <span>Boutique stay, restaurants</span>
+        </button>
+        <button type="button" class="bw-preset" data-preset="weekend">
+          <strong>Big weekend</strong>
+          <span>Short trip with nightlife</span>
+        </button>
+      </div>
+
+      <div class="bw-controls">
+        <section class="bw-panel">
+          <h4 class="bw-panel-title">Trip basics</h4>
+
+          <div class="bw-field">
+            <label class="bw-label" for="bw-days">
+              Trip length
+              <span class="bw-live-value" id="bw-days-label">3 days</span>
+            </label>
+            <div class="bw-input-row">
+              <button type="button" class="bw-step" data-step="days" data-delta="-1" aria-label="Reduce trip length">-</button>
+              <input class="bw-number" id="bw-days" type="number" min="1" max="14" step="1" value="3">
+              <button type="button" class="bw-step" data-step="days" data-delta="1" aria-label="Increase trip length">+</button>
+            </div>
+          </div>
+
+          <div class="bw-field">
+            <div class="bw-label">Accommodation</div>
+            <div class="bw-segments" data-group="stay">
+              <button type="button" class="bw-choice" data-value="none">No hotel</button>
+              <button type="button" class="bw-choice" data-value="hostel">Hostel</button>
+              <button type="button" class="bw-choice active" data-value="hotel3">3-star</button>
+              <button type="button" class="bw-choice" data-value="boutique">Boutique</button>
+            </div>
+          </div>
+
+          <div class="bw-field">
+            <div class="bw-label">Room cost split</div>
+            <div class="bw-segments two" data-group="roomSplit">
+              <button type="button" class="bw-choice active" data-value="solo">Solo room</button>
+              <button type="button" class="bw-choice" data-value="shared">Two people split</button>
+            </div>
+          </div>
+
+          <div class="bw-field">
+            <div class="bw-label">Area</div>
+            <div class="bw-segments" data-group="area">
+              <button type="button" class="bw-choice" data-value="outer">Outer ring</button>
+              <button type="button" class="bw-choice active" data-value="central">Central</button>
+              <button type="button" class="bw-choice" data-value="prime">Prime center</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="bw-panel">
+          <h4 class="bw-panel-title">Daily choices</h4>
+
+          <div class="bw-field">
+            <div class="bw-label">Food style</div>
+            <div class="bw-segments" data-group="food">
+              <button type="button" class="bw-choice" data-value="cheap">Cheap eats</button>
+              <button type="button" class="bw-choice active" data-value="mixed">Mixed</button>
+              <button type="button" class="bw-choice" data-value="restaurants">Restaurants</button>
+            </div>
+          </div>
+
+          <div class="bw-field">
+            <div class="bw-label">Transport</div>
+            <div class="bw-segments" data-group="transport">
+              <button type="button" class="bw-choice" data-value="walk">Walk + 4-trip</button>
+              <button type="button" class="bw-choice active" data-value="daypass">24-hour ticket</button>
+              <button type="button" class="bw-choice" data-value="taxi">Ticket + taxis</button>
+            </div>
+          </div>
+
+          <div class="bw-field">
+            <label class="bw-label" for="bw-sights">
+              Paid sights per day
+              <span class="bw-live-value" id="bw-sights-label">1 sight</span>
+            </label>
+            <input id="bw-sights" type="range" min="0" max="4" step="1" value="1">
+          </div>
+
+          <div class="bw-field">
+            <label class="bw-label" for="bw-nightlife">
+              Drinks and nightlife
+              <span class="bw-live-value" id="bw-nightlife-label">€18/day</span>
+            </label>
+            <input id="bw-nightlife" type="range" min="0" max="70" step="5" value="20">
+          </div>
+        </section>
+
+        <section class="bw-panel">
+          <h4 class="bw-panel-title">One-time trip costs</h4>
+
+          <div class="bw-field">
+            <button type="button" class="bw-toggle active" id="bw-premium-toggle" aria-pressed="true">
+              <span class="bw-switch" aria-hidden="true"></span>
+              <span class="bw-toggle-text">
+                <span class="bw-toggle-name">One premium attraction</span>
+                <span class="bw-toggle-sub">TV Tower, boat tour, or a special exhibition, averaged across the trip.</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="bw-field">
+            <label class="bw-label" for="bw-tour-tip">
+              Walking tour tip
+              <span class="bw-live-value" id="bw-tour-tip-label">€15 once</span>
+            </label>
+            <input id="bw-tour-tip" type="range" min="0" max="30" step="5" value="15">
+          </div>
+
+          <div class="bw-field">
+            <label class="bw-label" for="bw-buffer">
+              Buffer
+              <span class="bw-live-value" id="bw-buffer-label">10%</span>
+            </label>
+            <input id="bw-buffer" type="range" min="0" max="25" step="5" value="10">
+          </div>
+        </section>
+
+        <section class="bw-panel">
+          <h4 class="bw-panel-title">Fast interpretation</h4>
+          <div class="bw-note">
+            <h4 id="bw-compare-title">Compared with Berlin averages</h4>
+            <ul id="bw-insight-list"></ul>
+          </div>
+          <div class="bw-actions">
+            <button type="button" class="bw-action" id="bw-copy">Copy budget</button>
+            <button type="button" class="bw-action secondary" id="bw-reset">Reset</button>
+            <span class="bw-copy-status" id="bw-copy-status" aria-live="polite"></span>
+          </div>
+        </section>
+      </div>
     </div>
-    <div class="bw-footer">Numbers reflect honest 2026 averages for a central stay. Off-center neighborhoods (Wedding, Neukölln, Moabit) lower accommodation by 30–50% with the same transport access.</div>
+
+    <div class="bw-footer">Prices are 2026 working estimates for one adult visitor. Accommodation swings the most: weekends, fairs, and last-minute bookings can move the total sharply.</div>
   </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-budget-calc');
+      if (!root) return;
+
+      var PRICES = {
+        stay: {
+          none: { label: 'No hotel', value: 0 },
+          hostel: { label: 'Hostel', value: 38 },
+          hotel3: { label: '3-star hotel', value: 120 },
+          boutique: { label: 'Boutique hotel', value: 220 }
+        },
+        area: {
+          outer: { label: 'outer-ring area', multiplier: 0.82 },
+          central: { label: 'central area', multiplier: 1 },
+          prime: { label: 'prime central area', multiplier: 1.22 }
+        },
+        food: {
+          cheap: { label: 'cheap eats', value: 24 },
+          mixed: { label: 'mixed meals', value: 44 },
+          restaurants: { label: 'restaurants', value: 82 }
+        },
+        transport: {
+          walk: { label: 'walking plus 4-trip ticket', value: 6 },
+          daypass: { label: '24-hour BVG ticket', value: 11.2 },
+          taxi: { label: 'ticket plus occasional taxi', value: 26 }
+        },
+        sightAverage: 16,
+        premiumAttraction: 26
+      };
+
+      var DEFAULT_STATE = {
+        preset: 'balanced',
+        days: 3,
+        stay: 'hotel3',
+        roomSplit: 'solo',
+        area: 'central',
+        food: 'mixed',
+        transport: 'daypass',
+        sights: 1,
+        nightlife: 20,
+        premium: true,
+        tourTip: 15,
+        buffer: 10
+      };
+
+      var PRESETS = {
+        backpacker: {
+          preset: 'backpacker', days: 3, stay: 'hostel', roomSplit: 'solo', area: 'outer',
+          food: 'cheap', transport: 'walk', sights: 0, nightlife: 5, premium: false, tourTip: 10, buffer: 5
+        },
+        balanced: DEFAULT_STATE,
+        comfort: {
+          preset: 'comfort', days: 4, stay: 'boutique', roomSplit: 'shared', area: 'central',
+          food: 'restaurants', transport: 'daypass', sights: 2, nightlife: 30, premium: true, tourTip: 20, buffer: 15
+        },
+        weekend: {
+          preset: 'weekend', days: 2, stay: 'hotel3', roomSplit: 'shared', area: 'prime',
+          food: 'mixed', transport: 'taxi', sights: 1, nightlife: 55, premium: true, tourTip: 15, buffer: 15
+        }
+      };
+
+      var state = Object.assign({}, DEFAULT_STATE);
+
+      var els = {
+        dailyTotal: root.querySelector('#bw-daily-total'),
+        tripTotal: root.querySelector('#bw-trip-total'),
+        tierLabel: root.querySelector('#bw-tier-label'),
+        verdict: root.querySelector('#bw-verdict'),
+        bars: root.querySelector('#bw-bars'),
+        days: root.querySelector('#bw-days'),
+        daysLabel: root.querySelector('#bw-days-label'),
+        sights: root.querySelector('#bw-sights'),
+        sightsLabel: root.querySelector('#bw-sights-label'),
+        nightlife: root.querySelector('#bw-nightlife'),
+        nightlifeLabel: root.querySelector('#bw-nightlife-label'),
+        tourTip: root.querySelector('#bw-tour-tip'),
+        tourTipLabel: root.querySelector('#bw-tour-tip-label'),
+        buffer: root.querySelector('#bw-buffer'),
+        bufferLabel: root.querySelector('#bw-buffer-label'),
+        premiumToggle: root.querySelector('#bw-premium-toggle'),
+        insights: root.querySelector('#bw-insight-list'),
+        compareTitle: root.querySelector('#bw-compare-title'),
+        copy: root.querySelector('#bw-copy'),
+        reset: root.querySelector('#bw-reset'),
+        copyStatus: root.querySelector('#bw-copy-status')
+      };
+
+      function euro(value) {
+        return '€' + Math.round(value).toLocaleString('en-US');
+      }
+
+      function clamp(num, min, max) {
+        return Math.min(max, Math.max(min, num));
+      }
+
+      function getAccommodation() {
+        var base = PRICES.stay[state.stay].value;
+        if (state.stay === 'hostel' || state.stay === 'none') return base;
+        var split = state.roomSplit === 'shared' ? 2 : 1;
+        return (base * PRICES.area[state.area].multiplier) / split;
+      }
+
+      function calculate() {
+        var accommodation = getAccommodation();
+        var food = PRICES.food[state.food].value;
+        var transport = PRICES.transport[state.transport].value;
+        var attractions = (state.sights * PRICES.sightAverage) + (state.premium ? PRICES.premiumAttraction / state.days : 0);
+        var nightlife = Number(state.nightlife);
+        var tour = Number(state.tourTip) / state.days;
+        var subtotal = accommodation + food + transport + attractions + nightlife + tour;
+        var buffer = subtotal * (Number(state.buffer) / 100);
+        var daily = subtotal + buffer;
+        var trip = daily * state.days;
+
+        return {
+          accommodation: accommodation,
+          food: food,
+          transport: transport,
+          attractions: attractions,
+          nightlife: nightlife,
+          tour: tour,
+          buffer: buffer,
+          daily: daily,
+          trip: trip
+        };
+      }
+
+      function tierFor(daily) {
+        if (daily < 80) return { label: 'Lean Berlin day', text: 'This is possible, but it depends on cheap accommodation, free sights, and limited restaurant spending.' };
+        if (daily < 150) return { label: 'Balanced tourist day', text: 'This is a realistic range for most visitors who want comfort without overspending.' };
+        if (daily < 260) return { label: 'Comfortable Berlin day', text: 'This budget gives room for central lodging, restaurants, paid sights, and a relaxed pace.' };
+        return { label: 'Premium Berlin day', text: 'Accommodation and restaurants are doing most of the work here. You can cut the total quickly by changing either one.' };
+      }
+
+      function topCategories(values) {
+        return [
+          ['Accommodation', values.accommodation],
+          ['Food', values.food],
+          ['Transport', values.transport],
+          ['Paid sights', values.attractions],
+          ['Nightlife', values.nightlife],
+          ['Walking tour tip', values.tour],
+          ['Buffer', values.buffer]
+        ].sort(function (a, b) { return b[1] - a[1]; });
+      }
+
+      function renderBars(values) {
+        var rows = topCategories(values);
+        var max = Math.max.apply(null, rows.map(function (row) { return row[1]; })) || 1;
+        els.bars.innerHTML = rows.map(function (row) {
+          var width = Math.max(3, Math.round((row[1] / max) * 100));
+          return [
+            '<div class="bw-bar-row">',
+            '<div class="bw-bar-label">' + row[0] + '</div>',
+            '<div class="bw-bar-track"><div class="bw-bar-fill" style="width:' + width + '%"></div></div>',
+            '<div class="bw-bar-value">' + euro(row[1]) + '</div>',
+            '</div>'
+          ].join('');
+        }).join('');
+      }
+
+      function buildInsights(values) {
+        var insights = [];
+        var top = topCategories(values)[0];
+        insights.push(top[0] + ' is your biggest lever today at about ' + euro(top[1]) + ' per day.');
+
+        if (state.stay !== 'none' && values.accommodation > values.daily * 0.45) {
+          insights.push('Moving one ring out or splitting a room cuts more than changing coffee, tickets, or small museum choices.');
+        } else if (values.food > 70) {
+          insights.push('Restaurant-heavy days add up fast. One bakery or market meal usually saves €15-25 without making the day feel cheap.');
+        } else if (values.transport > 20) {
+          insights.push('Taxi use is the main transport cost. For most sightseeing days, a BVG 24-hour ticket is the cleaner baseline.');
+        } else {
+          insights.push('Your budget is reasonably balanced. Small changes will not move the total as much as accommodation does.');
+        }
+
+        if (state.sights === 0 && !state.premium) {
+          insights.push('Berlin can still be very strong on free sights: Reichstag dome, memorials, parks, neighborhoods, and free viewpoints.');
+        } else if (state.sights >= 3) {
+          insights.push('At three or more paid sights per day, check passes carefully. They only help if you would visit those places anyway.');
+        } else {
+          insights.push('One paid sight per day plus free outdoor time is the sweet spot for many first-time visitors.');
+        }
+
+        return insights;
+      }
+
+      function syncControls() {
+        els.days.value = state.days;
+        els.daysLabel.textContent = state.days + (state.days === 1 ? ' day' : ' days');
+        els.sights.value = state.sights;
+        els.sightsLabel.textContent = state.sights === 1 ? '1 sight' : state.sights + ' sights';
+        els.nightlife.value = state.nightlife;
+        els.nightlifeLabel.textContent = euro(state.nightlife) + '/day';
+        els.tourTip.value = state.tourTip;
+        els.tourTipLabel.textContent = euro(state.tourTip) + ' once';
+        els.buffer.value = state.buffer;
+        els.bufferLabel.textContent = state.buffer + '%';
+
+        root.querySelectorAll('[data-group]').forEach(function (group) {
+          var key = group.getAttribute('data-group');
+          group.querySelectorAll('.bw-choice').forEach(function (btn) {
+            var active = btn.getAttribute('data-value') === String(state[key]);
+            btn.classList.toggle('active', active);
+            btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+        });
+
+        root.querySelectorAll('.bw-preset').forEach(function (btn) {
+          var active = btn.getAttribute('data-preset') === state.preset;
+          btn.classList.toggle('active', active);
+          btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+
+        els.premiumToggle.classList.toggle('active', state.premium);
+        els.premiumToggle.setAttribute('aria-pressed', state.premium ? 'true' : 'false');
+      }
+
+      function emitResize() {
+        window.parent.postMessage({ type: 'bw-resize', height: document.documentElement.scrollHeight }, '*');
+      }
+
+      function update() {
+        state.days = clamp(parseInt(state.days, 10) || 1, 1, 14);
+        state.sights = clamp(parseInt(state.sights, 10) || 0, 0, 4);
+        state.nightlife = clamp(parseInt(state.nightlife, 10) || 0, 0, 70);
+        state.tourTip = clamp(parseInt(state.tourTip, 10) || 0, 0, 30);
+        state.buffer = clamp(parseInt(state.buffer, 10) || 0, 0, 25);
+
+        var values = calculate();
+        var tier = tierFor(values.daily);
+        var stay = PRICES.stay[state.stay].label.toLowerCase();
+        var area = PRICES.area[state.area].label;
+
+        els.dailyTotal.textContent = euro(values.daily);
+        els.tripTotal.textContent = euro(values.trip) + ' for ' + state.days + (state.days === 1 ? ' day' : ' days') + ', per person';
+        els.tierLabel.textContent = tier.label;
+        els.verdict.textContent = tier.text + ' Your current setup uses ' + stay + ' in a ' + area + ', ' + PRICES.food[state.food].label + ', and ' + PRICES.transport[state.transport].label + '.';
+        els.compareTitle.textContent = tier.label;
+        els.insights.innerHTML = buildInsights(values).map(function (item) { return '<li>' + item + '</li>'; }).join('');
+
+        renderBars(values);
+        syncControls();
+        window.setTimeout(emitResize, 40);
+      }
+
+      root.querySelectorAll('.bw-preset').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          state = Object.assign({}, PRESETS[btn.getAttribute('data-preset')]);
+          update();
+        });
+      });
+
+      root.querySelectorAll('[data-group] .bw-choice').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var group = btn.closest('[data-group]').getAttribute('data-group');
+          state[group] = btn.getAttribute('data-value');
+          state.preset = 'custom';
+          update();
+        });
+      });
+
+      root.querySelectorAll('.bw-step').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var key = btn.getAttribute('data-step');
+          state[key] = Number(state[key]) + Number(btn.getAttribute('data-delta'));
+          state.preset = 'custom';
+          update();
+        });
+      });
+
+      els.days.addEventListener('input', function () {
+        state.days = els.days.value;
+        state.preset = 'custom';
+        update();
+      });
+
+      ['sights', 'nightlife', 'tourTip', 'buffer'].forEach(function (key) {
+        els[key].addEventListener('input', function () {
+          state[key] = els[key].value;
+          state.preset = 'custom';
+          update();
+        });
+      });
+
+      els.premiumToggle.addEventListener('click', function () {
+        state.premium = !state.premium;
+        state.preset = 'custom';
+        update();
+      });
+
+      els.reset.addEventListener('click', function () {
+        state = Object.assign({}, DEFAULT_STATE);
+        els.copyStatus.textContent = '';
+        update();
+      });
+
+      els.copy.addEventListener('click', function () {
+        var values = calculate();
+        var summary = [
+          'Berlin daily budget estimate:',
+          euro(values.daily) + ' per day',
+          euro(values.trip) + ' for ' + state.days + (state.days === 1 ? ' day' : ' days'),
+          'Accommodation: ' + euro(values.accommodation) + '/day',
+          'Food: ' + euro(values.food) + '/day',
+          'Transport: ' + euro(values.transport) + '/day',
+          'Paid sights: ' + euro(values.attractions) + '/day',
+          'Nightlife: ' + euro(values.nightlife) + '/day'
+        ].join('\n');
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(summary).then(function () {
+            els.copyStatus.textContent = 'Copied.';
+          }).catch(function () {
+            els.copyStatus.textContent = summary;
+          });
+        } else {
+          els.copyStatus.textContent = summary;
+        }
+      });
+
+      update();
+    })();
+  </script>
 </div>
 </body>
 </html>

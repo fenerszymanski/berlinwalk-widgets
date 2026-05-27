@@ -97,21 +97,15 @@ class BWGalleryElement extends HTMLElement {
 
         .bw-gallery .bw-gallery-grid {
           display: grid;
-          gap: 12px;
-          grid-template-areas:
-            "a a b c d d"
-            "a a e e f f"
-            "g g e e i i"
-            "h h h h i i"
-            "j j j j j j";
-          grid-template-columns: repeat(6, minmax(0, 1fr));
-          grid-template-rows: repeat(5, minmax(150px, 1fr));
+          gap: 14px;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
           margin-top: 36px;
-          min-height: 1010px;
+          min-height: 0;
         }
 
         .bw-gallery .bw-tile {
           appearance: none;
+          aspect-ratio: 4 / 3;
           background: #FFFFFF;
           border: 0;
           border-radius: 8px;
@@ -370,15 +364,22 @@ class BWGalleryElement extends HTMLElement {
 
         .bw-gallery .bw-skeleton-tile {
           animation: bw-gallery-shimmer 1200ms linear infinite;
+          aspect-ratio: 4 / 3;
           background: linear-gradient(90deg, #F2F8E8 0%, #FFFFFF 45%, #F2F8E8 90%);
           background-size: 220% 100%;
           border-radius: 8px;
-          min-height: 160px;
+          min-height: 0;
         }
 
         @keyframes bw-gallery-shimmer {
           from { background-position: 120% 0; }
           to { background-position: -120% 0; }
+        }
+
+        @media (max-width: 1180px) {
+          .bw-gallery .bw-gallery-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+          }
         }
 
         @media (max-width: 900px) {
@@ -387,19 +388,7 @@ class BWGalleryElement extends HTMLElement {
           }
 
           .bw-gallery .bw-gallery-grid {
-            grid-template-areas:
-              "a a"
-              "a a"
-              "b c"
-              "d e"
-              "f f"
-              "g g"
-              "h h"
-              "i i"
-              "j j";
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            grid-template-rows: repeat(9, minmax(170px, 1fr));
-            min-height: 1530px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
           }
 
           .bw-gallery .bw-lightbox {
@@ -418,15 +407,8 @@ class BWGalleryElement extends HTMLElement {
           }
 
           .bw-gallery .bw-gallery-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            min-height: 0;
-          }
-
-          .bw-gallery .bw-tile {
-            aspect-ratio: 4 / 3;
-            min-height: 0;
+            gap: 10px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
 
           .bw-gallery .bw-caption {
@@ -450,6 +432,12 @@ class BWGalleryElement extends HTMLElement {
           .bw-gallery .bw-lightbox-picture,
           .bw-gallery .bw-lightbox-picture img {
             max-height: calc(100vh - 170px);
+          }
+        }
+
+        @media (max-width: 360px) {
+          .bw-gallery .bw-gallery-grid {
+            grid-template-columns: 1fr;
           }
         }
 
@@ -506,8 +494,8 @@ class BWGalleryElement extends HTMLElement {
   }
 
   _renderSkeleton() {
-    return ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'].map(area => (
-      `<div class="bw-skeleton-tile" style="grid-area:${area}" aria-hidden="true"></div>`
+    return Array.from({ length: 15 }, () => (
+      '<div class="bw-skeleton-tile" aria-hidden="true"></div>'
     )).join('');
   }
 
@@ -534,7 +522,7 @@ class BWGalleryElement extends HTMLElement {
 
   _renderTile(photo, index) {
     return `
-      <button class="bw-tile" type="button" data-photo-index="${index}" style="grid-area:${this._escapeAttribute(photo.area || '')}" aria-label="Open photo: ${this._escapeAttribute(photo.caption || '')}">
+      <button class="bw-tile" type="button" data-photo-index="${index}" aria-label="Open photo: ${this._escapeAttribute(photo.caption || '')}">
         ${this._renderPicture(photo)}
         <span class="bw-caption">${this._escapeHtml(photo.caption || '')}</span>
       </button>
