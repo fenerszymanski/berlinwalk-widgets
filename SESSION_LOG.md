@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (First-Day Planner V3 lead gate)
+
+**Did:** Added V3 lead-gated PDF/print exports for `Berlin First-Day Planner`, plus Velo/email funnel source.
+
+**Changed:**
+- `berlin-first-day-planner/index.html` — PDF/print exports now show/click `berlinwalk.com/book`, PDF/print buttons open an email+consent unlock form, successful unlock persists 30 days in `localStorage`, endpoint errors fail-soft, and the PDF transport table/page break was tightened.
+- `berlin-first-day-planner/velo/*` — added `firstDayPlannerLead` HTTP function source, lead upsert/contact label logic, scheduled funnel sender, `jobs.config`, optional `book` router source, and deployment README.
+- `berlin-first-day-planner/email/*`, `README.md` — added four practical triggered-email copy drafts and documented the V3 funnel folders.
+
+**Opened:** Push this repo; in Wix, add the real `/book` redirect (URL Redirect Manager or Velo `book` router), merge/publish Velo backend files, create Triggered Email templates, paste their messageIds, then live-QA the lead-gated PDF/print path.
+**Closed:** Local QA passed: inline JS parse, JSON parse, Velo source parse, lead form validation, mocked endpoint success auto-PDF, localStorage unlock, endpoint-500 print fail-soft, desktop/mobile overflow, and rendered PDF check with short booking URL only.
+
+**Next session should:** After push + Wix backend setup, test live `https://www.berlinwalk.com/tools/berlin-first-day-planner` with a real test email and confirm the lead record/contact label/funnel queue.
+
 ## 2026-05-28 — Codex (First-Day Planner PDF polish)
 
 **Did:** Reworked the `Berlin First-Day Planner` PDF/print output into a more readable branded export.

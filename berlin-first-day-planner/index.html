@@ -741,6 +741,155 @@
       text-align: center;
     }
 
+    #bw-first-day-planner .bw-lead-panel[hidden] {
+      display: none;
+    }
+
+    #bw-first-day-planner .bw-lead-panel {
+      background: linear-gradient(135deg, #F8FBF2 0%, #FFFDF4 100%);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      box-shadow: 0 12px 30px rgba(27, 94, 32, 0.12);
+      grid-column: 1 / -1;
+      padding: 13px;
+    }
+
+    #bw-first-day-planner .bw-lead-head {
+      align-items: flex-start;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    #bw-first-day-planner .bw-lead-title {
+      color: var(--bw-green);
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0 0 4px;
+    }
+
+    #bw-first-day-planner .bw-lead-copy {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-first-day-planner .bw-lead-close {
+      align-items: center;
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      flex: 0 0 32px;
+      font-size: 18px;
+      font-weight: 900;
+      height: 32px;
+      justify-content: center;
+      line-height: 1;
+      width: 32px;
+    }
+
+    #bw-first-day-planner .bw-lead-close:hover,
+    #bw-first-day-planner .bw-lead-close:focus-visible {
+      background: var(--bw-lime-soft);
+      outline: none;
+    }
+
+    #bw-first-day-planner .bw-lead-form {
+      display: grid;
+      gap: 9px;
+    }
+
+    #bw-first-day-planner .bw-lead-label {
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    #bw-first-day-planner .bw-lead-input {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 13px;
+      min-height: 42px;
+      padding: 10px 12px;
+      width: 100%;
+    }
+
+    #bw-first-day-planner .bw-lead-input:focus-visible {
+      border-color: var(--bw-green);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.22);
+      outline: none;
+    }
+
+    #bw-first-day-planner .bw-lead-consent {
+      align-items: flex-start;
+      color: var(--bw-muted);
+      display: grid;
+      font-size: 11px;
+      font-weight: 650;
+      gap: 8px;
+      grid-template-columns: 18px minmax(0, 1fr);
+      line-height: 1.42;
+    }
+
+    #bw-first-day-planner .bw-lead-consent input {
+      accent-color: var(--bw-green);
+      height: 16px;
+      margin: 1px 0 0;
+      width: 16px;
+    }
+
+    #bw-first-day-planner .bw-lead-submit {
+      align-items: center;
+      background: var(--bw-green);
+      border: 2px solid var(--bw-green);
+      border-radius: 999px;
+      color: var(--bw-yellow);
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: center;
+      letter-spacing: 0.55px;
+      min-height: 42px;
+      padding: 11px 16px;
+      text-transform: uppercase;
+    }
+
+    #bw-first-day-planner .bw-lead-submit:hover,
+    #bw-first-day-planner .bw-lead-submit:focus-visible {
+      background: var(--bw-green-dark);
+      border-color: var(--bw-green-dark);
+      outline: none;
+    }
+
+    #bw-first-day-planner .bw-lead-submit[disabled] {
+      cursor: progress;
+      opacity: 0.68;
+    }
+
+    #bw-first-day-planner .bw-lead-message {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.4;
+      min-height: 16px;
+    }
+
+    #bw-first-day-planner .bw-lead-message.is-error {
+      color: #B3261E;
+    }
+
     #bw-first-day-planner .bw-foot {
       background: #F8FBF2;
       border-top: 1px solid var(--bw-border);
@@ -944,6 +1093,25 @@
             <button class="bw-secondary" type="button" data-download-pdf>Download PDF</button>
             <button class="bw-secondary" type="button" data-print-plan>Print plan</button>
             <div class="bw-action-status" data-action-status aria-live="polite"></div>
+            <div class="bw-lead-panel" data-lead-panel hidden>
+              <div class="bw-lead-head">
+                <div>
+                  <h3 class="bw-lead-title">Save your first-day plan</h3>
+                  <p class="bw-lead-copy">Enter your email to unlock the <span data-lead-action>PDF</span>. I will also send short Berlin arrival tips around your selected date.</p>
+                </div>
+                <button class="bw-lead-close" type="button" data-lead-close aria-label="Close email form">×</button>
+              </div>
+              <form class="bw-lead-form" data-lead-form novalidate>
+                <label class="bw-lead-label" for="bw-first-day-email">Email</label>
+                <input class="bw-lead-input" id="bw-first-day-email" data-lead-email type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required>
+                <label class="bw-lead-consent">
+                  <input type="checkbox" data-lead-consent required>
+                  <span>Email me this plan and Berlin first-day tips. I can unsubscribe anytime.</span>
+                </label>
+                <button class="bw-lead-submit" type="submit" data-lead-submit>Unlock PDF</button>
+                <div class="bw-lead-message" data-lead-message aria-live="polite"></div>
+              </form>
+            </div>
           </div>
         </div>
       </aside>
@@ -973,6 +1141,11 @@
   var TIMEZONE = 'Europe/Berlin';
   var FORECAST_MAX_DAYS = 15;
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot';
+  var BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
+  var BOOKING_SHORT_LABEL = 'berlinwalk.com/book';
+  var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/firstDayPlannerLead';
+  var LEAD_STORAGE_KEY = 'bw_first_day_lead_unlock';
+  var LEAD_UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
   var BW_MINI_LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_4d96e164d26241fd9eb009843ec2084a~mv2.png';
   var MONTH_CLIMATE = [
     { name: 'January', hi: 3, lo: -2, rain: 40, rainDays: '10', sun: 2, icon: '❄️', season: 'winter', pack: 'Heavy winter coat, warm hat, gloves, scarf, and waterproof shoes.' },
@@ -1399,7 +1572,7 @@
         return step.time + ' - ' + step.title + ': ' + step.copy;
       }).join('\n'),
       '',
-      'Book: ' + BOOKING_URL
+      'Book: ' + BOOKING_SHORT_LABEL
     ].join('\n');
 
     track('bw_first_day_result', {
@@ -1478,7 +1651,7 @@
         return step.time + ' - ' + step.title + ': ' + step.copy;
       }).join('\n'),
       '',
-      'Book: ' + BOOKING_URL
+      'Book: ' + BOOKING_SHORT_LABEL
     ].join('\n');
   }
 
@@ -1773,6 +1946,179 @@
     setText('[data-action-status]', message || '');
   }
 
+  var pendingLeadAction = null;
+
+  function leadActionLabel(action) {
+    return action === 'print' ? 'print view' : 'PDF';
+  }
+
+  function validEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
+  }
+
+  function setLeadMessage(message, isError) {
+    var element = root.querySelector('[data-lead-message]');
+    if (!element) return;
+    element.textContent = message || '';
+    element.classList.toggle('is-error', Boolean(isError));
+  }
+
+  function isLeadUnlocked() {
+    try {
+      var raw = window.localStorage && window.localStorage.getItem(LEAD_STORAGE_KEY);
+      if (!raw) return false;
+      var parsed = JSON.parse(raw);
+      if (parsed && Number(parsed.expiresAt) > Date.now()) return true;
+      window.localStorage.removeItem(LEAD_STORAGE_KEY);
+    } catch (error) {}
+    return false;
+  }
+
+  function rememberLeadUnlock(email) {
+    try {
+      if (!window.localStorage) return;
+      window.localStorage.setItem(LEAD_STORAGE_KEY, JSON.stringify({
+        email: String(email || '').trim().toLowerCase(),
+        expiresAt: Date.now() + LEAD_UNLOCK_MS
+      }));
+    } catch (error) {}
+  }
+
+  function openLeadPanel(action) {
+    pendingLeadAction = action === 'print' ? 'print' : 'pdf';
+    var panel = root.querySelector('[data-lead-panel]');
+    var input = root.querySelector('[data-lead-email]');
+    var actionText = root.querySelector('[data-lead-action]');
+    var submit = root.querySelector('[data-lead-submit]');
+    if (actionText) actionText.textContent = leadActionLabel(pendingLeadAction);
+    if (submit) submit.textContent = 'Unlock ' + leadActionLabel(pendingLeadAction);
+    setLeadMessage('', false);
+    if (panel) panel.hidden = false;
+    if (input) setTimeout(function () { input.focus(); }, 0);
+    track('bw_first_day_lead_view', {
+      date: state.date,
+      requested_action: pendingLeadAction
+    });
+  }
+
+  function closeLeadPanel() {
+    var panel = root.querySelector('[data-lead-panel]');
+    if (panel) panel.hidden = true;
+    pendingLeadAction = null;
+    setLeadMessage('', false);
+  }
+
+  function leadPayload(action, email) {
+    var data = pdfLines();
+    var params = new URLSearchParams(window.location.search);
+    return {
+      email: String(email || '').trim().toLowerCase(),
+      arrivalDate: data.plan.dateKey,
+      arrivalTime: data.labels.arrival || state.arrival,
+      startPoint: data.labels.start || state.start,
+      energy: data.labels.energy || state.energy,
+      priority: data.labels.priority || state.priority,
+      luggage: data.labels.luggage || state.luggage,
+      planTitle: data.plan.title,
+      ticket: data.plan.ticket,
+      tourFit: data.plan.tourFit,
+      weatherMode: data.weather.mode || '',
+      weatherTitle: data.weather.title || '',
+      requestedAction: action,
+      source: params.get('context') || 'tool',
+      page: window.location.href,
+      consent: true
+    };
+  }
+
+  function runUnlockedAction(action, method) {
+    var eventName = action === 'print' ? 'bw_first_day_print_unlock' : 'bw_first_day_pdf_unlock';
+    track(eventName, {
+      date: state.date,
+      method: method || 'stored'
+    });
+    if (action === 'print') printPlan();
+    else downloadPdf();
+  }
+
+  function requestGatedAction(action) {
+    var normalized = action === 'print' ? 'print' : 'pdf';
+    if (isLeadUnlocked()) {
+      runUnlockedAction(normalized, 'stored');
+      return;
+    }
+    openLeadPanel(normalized);
+  }
+
+  function handleLeadSubmit(event) {
+    event.preventDefault();
+    var action = pendingLeadAction || 'pdf';
+    var input = root.querySelector('[data-lead-email]');
+    var consent = root.querySelector('[data-lead-consent]');
+    var submit = root.querySelector('[data-lead-submit]');
+    var email = input ? input.value.trim() : '';
+
+    if (!validEmail(email)) {
+      setLeadMessage('Add a valid email address to unlock your plan.', true);
+      if (input) input.focus();
+      return;
+    }
+    if (!consent || !consent.checked) {
+      setLeadMessage('Please tick the consent box so I can send the arrival tips.', true);
+      if (consent) consent.focus();
+      return;
+    }
+
+    var payload = leadPayload(action, email);
+    track('bw_first_day_lead_submit', {
+      date: payload.arrivalDate,
+      requested_action: action
+    });
+
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = 'Unlocking...';
+    }
+    setLeadMessage('Saving your plan...', false);
+
+    var request = typeof fetch === 'function' ? fetch(LEAD_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }) : Promise.reject(new Error('Fetch unavailable'));
+
+    request.then(function (response) {
+      if (!response.ok) throw new Error('Lead endpoint failed: ' + response.status);
+      return response.json().catch(function () { return {}; });
+    }).then(function () {
+      rememberLeadUnlock(email);
+      track('bw_first_day_lead_success', {
+        date: payload.arrivalDate,
+        requested_action: action
+      });
+      closeLeadPanel();
+      setActionStatus('Thanks. Your plan is unlocked for 30 days.');
+      runUnlockedAction(action, 'lead');
+    }).catch(function () {
+      rememberLeadUnlock(email);
+      track('bw_first_day_lead_error', {
+        date: payload.arrivalDate,
+        requested_action: action,
+        fail_soft: true
+      });
+      closeLeadPanel();
+      setActionStatus('Email save had a hiccup, so the plan is unlocked this time.');
+      setTimeout(function () {
+        runUnlockedAction(action, 'lead_error');
+      }, 350);
+    }).finally(function () {
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = 'Unlock ' + leadActionLabel(action);
+      }
+    });
+  }
+
   var pdfLogoDataUrlPromise = null;
 
   function loadPdfLogoDataUrl() {
@@ -1975,8 +2321,8 @@
         y = 142;
       }
 
-      function section(titleValue) {
-        ensure(28);
+      function section(titleValue, nextSpace) {
+        ensure(nextSpace ? nextSpace + 20 : 28);
         text(titleValue, margin, y, 13, 'bold', green);
         y += 16;
       }
@@ -2098,12 +2444,15 @@
       function drawTransportCard() {
         var rows = data.transport.rows || [];
         var rowLines = rows.map(function (row) {
-          return split(row.copy, contentW - 166, 8.8, 'normal');
+          return {
+            label: split(row.label, 132, 8.8, 'bold'),
+            copy: split(row.copy, contentW - 218, 8.8, 'normal')
+          };
         });
         var ticketLines = split(data.transport.ticket, contentW - 30, 9.5, 'normal');
         var noteLines = split(data.transport.luggage + ' ' + data.transport.note, contentW - 30, 8.8, 'normal');
         var h = 56 + ticketLines.length * 12 + noteLines.length * 11;
-        rowLines.forEach(function (lines) { h += Math.max(34, lines.length * 11 + 14); });
+        rowLines.forEach(function (lines) { h += Math.max(40, Math.max(lines.label.length, lines.copy.length) * 11 + 16); });
         ensure(h + 8);
         rounded(margin, y, contentW, h, [255, 253, 244], [230, 203, 94]);
         text(data.transport.title, margin + 14, y + 22, 12, 'bold', green);
@@ -2111,12 +2460,12 @@
         var rowY = y + 47 + ticketLines.length * 12;
         rows.forEach(function (row, index) {
           var numberX = margin + 16;
-          var rowH = Math.max(34, rowLines[index].length * 11 + 14);
+          var rowH = Math.max(40, Math.max(rowLines[index].label.length, rowLines[index].copy.length) * 11 + 16);
           rgb('setFillColor', green);
           doc.circle(numberX + 9, rowY + 13, 9, 'F');
           text(String(index + 1), numberX + 9, rowY + 16, 7.5, 'bold', [255, 255, 255], { align: 'center' });
-          text(row.label, margin + 44, rowY + 13, 8.8, 'bold', green);
-          text(rowLines[index], margin + 148, rowY + 13, 8.8, 'normal', [55, 68, 55]);
+          text(rowLines[index].label, margin + 44, rowY + 13, 8.8, 'bold', green);
+          text(rowLines[index].copy, margin + 206, rowY + 13, 8.8, 'normal', [55, 68, 55]);
           rowY += rowH;
         });
         rgb('setDrawColor', [230, 203, 94]);
@@ -2143,19 +2492,19 @@
       }
 
       function drawBooking() {
-        var lines = split(BOOKING_URL, contentW - 28, 8.2, 'normal');
+        var lines = split(BOOKING_SHORT_LABEL, contentW - 28, 11, 'bold');
         ensure(88);
         rounded(margin, y, contentW, 86, [246, 250, 239], line);
         text('Book your free spot', margin + 14, y + 24, 12, 'bold', green);
         text('Daily 11:30 from the World Clock at Alexanderplatz. The walk is about 2 hours and tip-based.', margin + 14, y + 42, 9.2, 'normal', [55, 68, 55]);
         rgb('setTextColor', [47, 128, 237]);
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(8.2);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(11);
         if (typeof doc.textWithLink === 'function') {
-          doc.textWithLink(lines[0], margin + 14, y + 62, { url: BOOKING_URL });
+          doc.textWithLink(lines[0], margin + 14, y + 64, { url: BOOKING_SHORT_URL });
           if (lines.length > 1) doc.text(lines.slice(1), margin + 14, y + 74);
         } else {
-          doc.text(lines, margin + 14, y + 62);
+          doc.text(lines, margin + 14, y + 64);
         }
         y += 104;
       }
@@ -2190,7 +2539,7 @@
       ], 3);
       section('Expected weather');
       drawWeatherCard();
-      section('Public transport');
+      section('Public transport', 310);
       drawTransportCard();
       section('First-day timeline');
       drawTimeline();
@@ -2235,7 +2584,7 @@
       '<div class="section weather"><div class="k">Expected weather</div><p><strong>' + escapeHtml(data.weather.title) + '</strong><br>' + escapeHtml(data.weather.copy || '') + '</p>' + weatherMetrics + '<p>' + escapeHtml(data.weather.advice) + '</p></div>' +
       '<div class="section transport"><div class="k">Public transport</div><p><strong>' + escapeHtml(data.transport.title) + '</strong><br>' + escapeHtml(data.transport.ticket) + '</p><table>' + transportRows + '</table><p class="note">' + escapeHtml(data.transport.luggage + ' ' + data.transport.note) + '</p></div>' +
       '<div class="section"><div class="k">Timeline</div><ol>' + steps + '</ol></div>' +
-      '<div class="section book"><div class="k">Book</div><p>Daily 11:30 from the World Clock at Alexanderplatz. The walk is about 2 hours and tip-based.</p><p><a href="' + escapeHtml(BOOKING_URL) + '">' + escapeHtml(BOOKING_URL) + '</a></p></div>' +
+      '<div class="section book"><div class="k">Book</div><p>Daily 11:30 from the World Clock at Alexanderplatz. The walk is about 2 hours and tip-based.</p><p><a href="' + escapeHtml(BOOKING_SHORT_URL) + '">' + escapeHtml(BOOKING_SHORT_LABEL) + '</a></p></div>' +
       '<div class="foot">berlinwalk.com · @berlinwalkingtour</div></body></html>';
   }
 
@@ -2290,18 +2639,30 @@
     }
 
     if (event.target.closest('[data-download-pdf]')) {
-      downloadPdf();
+      requestGatedAction('pdf');
       return;
     }
 
     if (event.target.closest('[data-print-plan]')) {
-      printPlan();
+      requestGatedAction('print');
+      return;
+    }
+
+    if (event.target.closest('[data-lead-close]')) {
+      pendingLeadAction = null;
+      closeLeadPanel();
       return;
     }
 
     if (event.target.closest('[data-book-link]')) {
       track('bw_first_day_book_click', Object.assign({ date: state.date }, state));
       return;
+    }
+  });
+
+  root.addEventListener('submit', function (event) {
+    if (event.target && event.target.matches('[data-lead-form]')) {
+      handleLeadSubmit(event);
     }
   });
 
