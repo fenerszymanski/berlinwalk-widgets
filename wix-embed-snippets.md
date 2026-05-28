@@ -100,8 +100,8 @@ Add this through Wix Custom Code in Body-end on all pages:
 `exit-intent-popup.js` waits 30 seconds, then opens a desktop-only exit-intent
 dialog once per session when the cursor leaves the top of the viewport. It
 skips `/book-berlin-walking-tour` and sub-routes, links the primary CTA to the
-free walking tour booking page, and posts Berlin Survival Map signups to the
-live Velo subscribe endpoint.
+free walking tour booking page, and posts Berlin First-Day Survival Guide
+signups to the live Velo subscribe endpoint.
 
 Analytics events are sent to `dataLayer` and, when available, `gtag`:
 `bw_exit_popup_view`, `bw_exit_popup_book_click`, `bw_exit_popup_pdf_click`,
@@ -127,7 +127,7 @@ If Wix asks for full iframe code instead of just a URL:
 ```html
 <iframe
   src="https://widgets.berlinwalk.com/lead-form/?source=survival-map-manual"
-  title="Get the free Berlin Survival Map"
+  title="Get the free Berlin First-Day Survival Guide"
   loading="lazy"
   style="width:100%;height:320px;border:0;display:block;"
 ></iframe>

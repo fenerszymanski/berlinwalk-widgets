@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BerlinWalk Berlin Survival Map Signup</title>
+  <title>BerlinWalk Berlin First-Day Survival Guide Signup</title>
   <link rel="stylesheet" href="../css/brand.css">
   <style>
     html,
@@ -85,7 +85,7 @@
     .bw-pdf-mock {
       width: 122px;
       height: 172px;
-      background: var(--bw-white) url("assets/berlin-survival-map-cover.jpg") center/cover no-repeat;
+      background: var(--bw-white) url("assets/berlin-first-day-survival-guide-cover.jpg") center/cover no-repeat;
       border: 4px solid rgba(250, 250, 245, 0.95);
       border-radius: 8px;
       box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
@@ -414,13 +414,13 @@
 
       <div class="bw-form">
         <div class="bw-kicker">First day in Berlin</div>
-        <h3 class="bw-title">Get the free<br>Berlin Survival Map</h3>
+        <h3 class="bw-title">Get the free<br>Berlin First-Day Survival Guide</h3>
         <p class="bw-desc">Airport tickets, toilets, luggage, cash, Sundays, and the first walk that makes Berlin easier to understand.</p>
 
         <form class="bw-signup-form" novalidate>
           <div class="bw-input-row">
             <input type="email" class="bw-input" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address">
-            <button type="submit" class="bw-submit">Get the map -&gt;</button>
+            <button type="submit" class="bw-submit">Get the guide -&gt;</button>
           </div>
           <div class="bw-privacy">No spam, unsubscribe anytime.</div>
           <div class="bw-message" role="status" aria-live="polite"></div>
@@ -488,7 +488,7 @@
 
     (function () {
       var API_URL = 'https://www.berlinwalk.com/_functions/subscribe';
-      var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_fbb1e603406b4ac4b7a15628a0288e40.pdf';
+      var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_2fdd0e52467b4fe98b409d5d64e5818c.pdf';
 
       var form = document.querySelector('.bw-signup-form');
       var input = document.querySelector('.bw-input');
@@ -546,7 +546,7 @@
           var data = await response.json();
 
           btn.disabled = false;
-          btn.textContent = 'Get the map ->';
+          btn.textContent = 'Get the guide ->';
 
           if (response.ok && data.success) {
             form.reset();
@@ -554,8 +554,8 @@
 
             showMessage(
               'success',
-              '<strong>You are in.</strong> Download the map now.' +
-              '<a class="bw-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener">Download Berlin Survival Map</a>'
+              '<strong>You are in.</strong> Download the guide now.' +
+              '<a class="bw-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener">Download Berlin First-Day Guide</a>'
             );
           } else {
             var errorMsg = data.error === 'invalid_email'
@@ -566,7 +566,7 @@
           }
         } catch (err) {
           btn.disabled = false;
-          btn.textContent = 'Get the map ->';
+          btn.textContent = 'Get the guide ->';
           showMessage('error', 'Connection error. Please try again.');
           console.error('Subscribe fetch error:', err);
         }

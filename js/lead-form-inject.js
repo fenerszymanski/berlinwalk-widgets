@@ -102,7 +102,7 @@
 
     var iframe = document.createElement('iframe');
     iframe.src = LEAD_FORM_URL;
-    iframe.title = 'Get the BerlinWalk Berlin Survival Map';
+    iframe.title = 'Get the BerlinWalk Berlin First-Day Survival Guide';
     iframe.setAttribute('height', '320');
     iframe.setAttribute('scrolling', 'no');
     iframe.setAttribute('loading', 'lazy');

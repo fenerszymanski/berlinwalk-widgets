@@ -4,7 +4,7 @@
 (function () {
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var SUBSCRIBE_URL = 'https://www.berlinwalk.com/_functions/subscribe';
-  var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_fbb1e603406b4ac4b7a15628a0288e40.pdf';
+  var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_2fdd0e52467b4fe98b409d5d64e5818c.pdf';
   var IMAGE_URL = getImageUrl();
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
@@ -237,13 +237,13 @@
       '<p class="bw-exit-copy">Start at the World Clock, then walk Berlin\'s stories with a tip-based English tour.</p>',
       '<div class="bw-exit-actions">',
       '<a class="bw-exit-primary" href="' + BOOKING_URL + '" data-bw-exit-book>Book Free Spot</a>',
-      '<button class="bw-exit-secondary" type="button" data-bw-exit-pdf>Get the Free Berlin Survival Map</button>',
+      '<button class="bw-exit-secondary" type="button" data-bw-exit-pdf>Get the Free First-Day Guide</button>',
       '</div>',
       '</section>',
       '<section class="bw-exit-step" data-bw-exit-step="2" aria-live="polite">',
-      '<p class="bw-exit-kicker">Free Berlin Survival Map</p>',
-      '<h2 class="bw-exit-title">Send the map to your inbox.</h2>',
-      '<p class="bw-exit-copy">Airport tickets, toilets, luggage, cash, Sundays, and a first walk that makes Berlin easier.</p>',
+      '<p class="bw-exit-kicker">Free Berlin First-Day Guide</p>',
+      '<h2 class="bw-exit-title">Send the guide to your inbox.</h2>',
+      '<p class="bw-exit-copy">Airport tickets, toilets, luggage, cash, Sunday rules, and a first walk that makes Berlin easier.</p>',
       '<form class="bw-exit-form" novalidate data-bw-exit-form>',
       '<div class="bw-exit-row">',
       '<input class="bw-exit-input" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email address" required data-bw-exit-email>',
@@ -258,8 +258,8 @@
       '<div class="bw-exit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></div>',
       '<p class="bw-exit-kicker">Success</p>',
       '<h2 class="bw-exit-title">You are in.</h2>',
-      '<p class="bw-exit-copy" data-bw-exit-success>Download the Berlin Survival Map now.</p>',
-      '<div class="bw-exit-actions"><a class="bw-exit-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener" data-bw-exit-download>Download the map</a><button class="bw-exit-secondary" type="button" data-bw-exit-done>Done</button></div>',
+      '<p class="bw-exit-copy" data-bw-exit-success>Download the Berlin First-Day Survival Guide now.</p>',
+      '<div class="bw-exit-actions"><a class="bw-exit-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener" data-bw-exit-download>Download Berlin First-Day Guide</a><button class="bw-exit-secondary" type="button" data-bw-exit-done>Done</button></div>',
       '</section>',
       '</div>',
       '</div>'
@@ -345,7 +345,7 @@
           if (!response.ok || data.success === false) {
             throw new Error(data.error || 'subscribe_failed');
           }
-          success.innerHTML = 'Saved for <strong>' + escapeHtml(email) + '</strong>. Download the Berlin Survival Map now.';
+          success.innerHTML = 'Saved for <strong>' + escapeHtml(email) + '</strong>. Download the Berlin First-Day Survival Guide now.';
           trackEvent('bw_exit_popup_submit_success');
           setStep(3);
         });

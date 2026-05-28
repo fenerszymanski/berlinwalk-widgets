@@ -4,6 +4,35 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (Blog index v2 Vox-style polish)
+
+**Did:** Reworked the custom blog index into a Vox-inspired editorial archive without the Vox membership/support banner pattern.
+
+**Changed:**
+- `blog-index/blog-index-element.js`, `blog-index/index.html` — new `Berlin Travel & History Notes` masthead, tighter hero, compact topic/search controls, compact editorial shelves, lower tools band, filter/search rerender fix, and mobile overflow hardening.
+- `scripts/generate-blog-index-data.mjs`, `blog-index/data.json` — editorial hero lead is now `Berlin First-Time Visitor Mistakes`; secondary rail is Airport to Alexanderplatz, Public Toilets, and Public Transport; shelves now surface up to 10 compact links.
+- Project root `output/qa/blog-index-v2-desktop.png`, `output/qa/blog-index-v2-mobile.png` — refreshed local QA screenshots.
+
+**Opened:** Push `berlinwalk-widgets` again so GitHub Pages serves the new blog index JS/data; then live-QA `/blog` in Wix after cache/deploy.
+**Closed:** Local syntax checks passed; local QA confirmed no `99 Berlin guides`, no membership/support banner, correct featured posts, working topic buttons/Search, no broken images, and no horizontal overflow in tested views.
+
+**Next session should:** After push/deploy, smoke-test live `/blog` for the `All` filter regression, topic result ordering, and mobile width inside the Wix page shell.
+
+## 2026-05-28 — Codex (First-Day Guide lead magnet v2)
+
+**Did:** Reworked the Survival Map public surfaces into `Berlin First-Day Survival Guide`.
+
+**Changed:**
+- `lead-form/index.html` — new guide headline/button/success copy, new PDF URL, new cover asset reference; internal `offer: 'berlin-survival-map'` unchanged.
+- `js/exit-intent-popup.js`, `js/lead-form-inject.js` — popup/injected iframe copy now says First-Day Guide; success link text is `Download Berlin First-Day Guide`.
+- `lead-form/email/*` — markdown, paste-ready HTML, and preview updated to subject `Your Berlin First-Day Survival Guide is here`, new CTA URL, and new cover image.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md`, `lead-form/email/README.md` — documented the new public positioning and compatibility names.
+
+**Opened:** Push to GitHub Pages before expecting live widgets/email cover image to update; paste `lead-form/email/wix-html-block.html` into Wix Triggered Email manually if the live email body must change now.
+**Closed:** Local Chrome QA passed for lead form desktop/mobile, forced exit popup success flow, and email preview desktop/mobile; no horizontal overflow and all download CTAs point to the final PDF URL.
+
+**Next session should:** After push/deploy, live smoke test a signup and verify the welcome email + download link.
+
 ## 2026-05-28 — Codex (Subscription helper prep)
 
 **Did:** Prepared the non-push-dependent Email Marketing subscription-status fix for Survival Map signups.

@@ -53,12 +53,13 @@ class BWBlogIndexElement extends HTMLElement {
           --muted: #4E5A4E;
           --border: #DDE9D2;
           --serif: Merriweather, Georgia, serif;
-          background: var(--cream);
+          background: #FBFBF2;
           color: var(--text);
           font-family: Montserrat, Arial, sans-serif;
           margin: 0;
           max-width: 100%;
           overflow-x: hidden;
+          width: 100%;
         }
 
         .bw-blog-index *,
@@ -73,6 +74,7 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index p,
         .bw-blog-index figure {
           margin-top: 0;
+          overflow-wrap: anywhere;
         }
 
         .bw-blog-index a {
@@ -82,20 +84,21 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-inner {
           margin: 0 auto;
           max-width: 1180px;
+          min-width: 0;
           padding-left: 24px;
           padding-right: 24px;
+          width: 100%;
         }
 
         .bw-blog-index .bw-hero {
-          background:
-            linear-gradient(115deg, rgba(27, 94, 32, 0.98), rgba(18, 69, 22, 0.94)),
-            radial-gradient(circle at 78% 12%, rgba(255, 230, 0, 0.22), transparent 28%);
-          color: #FFFFFF;
-          padding: 58px 0 48px;
+          background: #FBFBF2;
+          border-top: 8px solid var(--yellow);
+          border-bottom: 2px solid var(--text);
+          color: var(--text);
+          padding: 28px 0 30px;
           position: relative;
         }
 
-        .bw-blog-index .bw-hero::after,
         .bw-blog-index .bw-footer-band::before {
           background: linear-gradient(90deg, var(--yellow), var(--lime));
           bottom: 0;
@@ -108,10 +111,9 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-masthead {
-          display: grid;
-          gap: 24px;
-          grid-template-columns: minmax(0, 1fr) minmax(260px, 0.34fr);
-          margin-bottom: 34px;
+          border-bottom: 1px solid var(--text);
+          margin-bottom: 22px;
+          padding-bottom: 20px;
         }
 
         .bw-blog-index .bw-kicker,
@@ -125,59 +127,39 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-kicker {
-          color: var(--yellow);
-          display: block;
+          background: var(--yellow);
+          color: var(--text);
+          display: inline-block;
           margin-bottom: 12px;
+          padding: 5px 8px;
         }
 
         .bw-blog-index h1 {
-          color: #FFFFFF;
-          font-size: 54px;
+          color: var(--text);
+          font-size: 68px;
           font-weight: 900;
           letter-spacing: 0;
-          line-height: 1;
-          margin-bottom: 16px;
+          line-height: 0.92;
+          margin-bottom: 10px;
           max-width: 760px;
         }
 
         .bw-blog-index .bw-hero-lead {
-          color: rgba(255, 255, 255, 0.9);
+          color: #2B332B;
           font-family: var(--serif);
           font-size: 18px;
           line-height: 1.62;
           margin-bottom: 0;
           max-width: 700px;
-        }
-
-        .bw-blog-index .bw-issue-note {
-          align-self: end;
-          border: 1px solid rgba(255, 230, 0, 0.38);
-          border-radius: 8px;
-          padding: 18px 18px 20px;
-        }
-
-        .bw-blog-index .bw-issue-note strong {
-          color: var(--yellow);
-          display: block;
-          font-size: 13px;
-          font-weight: 900;
-          letter-spacing: 1px;
-          margin-bottom: 8px;
-          text-transform: uppercase;
-        }
-
-        .bw-blog-index .bw-issue-note span {
-          color: rgba(255, 255, 255, 0.9);
-          display: block;
-          font-family: var(--serif);
-          font-size: 14px;
-          line-height: 1.55;
+          overflow-wrap: anywhere;
         }
 
         .bw-blog-index .bw-hero-grid {
           display: grid;
-          gap: 18px;
-          grid-template-columns: minmax(0, 1.18fr) minmax(280px, 0.52fr);
+          gap: 20px;
+          grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.5fr);
+          max-width: 100%;
+          min-width: 0;
         }
 
         .bw-blog-index .bw-lead-card,
@@ -185,9 +167,11 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-post-card,
         .bw-blog-index .bw-tool-card {
           background: #FFFFFF;
-          border: 1px solid var(--border);
-          border-radius: 8px;
+          border: 0;
+          border-radius: 0;
           color: var(--text);
+          max-width: 100%;
+          min-width: 0;
           overflow: hidden;
           text-decoration: none;
           transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
@@ -204,8 +188,8 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-row-link:hover,
         .bw-blog-index .bw-row-link:focus-visible {
           border-color: var(--green);
-          box-shadow: 0 16px 34px rgba(27, 94, 32, 0.14);
-          transform: translateY(-2px);
+          box-shadow: none;
+          transform: translateY(-1px);
         }
 
         .bw-blog-index a:focus-visible,
@@ -217,9 +201,11 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-lead-card {
           display: grid;
-          grid-template-columns: minmax(280px, 0.55fr) minmax(0, 0.45fr);
-          height: 430px;
-          min-height: 430px;
+          background: transparent;
+          border-top: 3px solid var(--text);
+          grid-template-columns: minmax(280px, 0.54fr) minmax(0, 0.46fr);
+          height: 390px;
+          min-height: 390px;
         }
 
         .bw-blog-index .bw-media {
@@ -256,8 +242,9 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-lead-copy {
           align-content: end;
+          background: #FFFFFF;
           display: grid;
-          padding: 30px;
+          padding: 24px 26px;
         }
 
         .bw-blog-index .bw-card-kicker,
@@ -267,6 +254,8 @@ class BWBlogIndexElement extends HTMLElement {
           flex-wrap: wrap;
           gap: 8px;
           margin-bottom: 10px;
+          min-width: 0;
+          overflow-wrap: anywhere;
         }
 
         .bw-blog-index .bw-dot {
@@ -279,13 +268,13 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-lead-title {
-          color: var(--green);
+          color: var(--text);
           display: block;
           font-size: 34px;
           font-weight: 900;
           letter-spacing: 0;
           line-height: 1.08;
-          margin-bottom: 14px;
+          margin-bottom: 10px;
           overflow-wrap: break-word;
         }
 
@@ -301,35 +290,42 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-secondary-stack {
           display: grid;
-          gap: 14px;
+          gap: 0;
+          border-top: 3px solid var(--text);
+          max-width: 100%;
+          min-width: 0;
         }
 
         .bw-blog-index .bw-small-card {
+          background: transparent;
+          border-bottom: 1px solid var(--text);
           display: grid;
-          grid-template-columns: 132px minmax(0, 1fr);
-          min-height: 132px;
+          grid-template-columns: 116px minmax(0, 1fr);
+          min-height: 116px;
         }
 
         .bw-blog-index .bw-small-copy {
-          padding: 17px 18px;
+          background: #FFFFFF;
+          padding: 14px 16px;
         }
 
         .bw-blog-index .bw-small-title {
-          color: var(--green);
+          color: var(--text);
           display: block;
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 900;
           line-height: 1.2;
-          margin-bottom: 7px;
+          margin-bottom: 0;
+          overflow-wrap: anywhere;
         }
 
         .bw-blog-index .bw-small-card .bw-card-text {
-          font-size: 13px;
-          line-height: 1.42;
+          display: none;
         }
 
         .bw-blog-index .bw-main {
-          padding: 34px 0 62px;
+          padding: 24px 0 54px;
+          width: 100%;
         }
 
         .bw-blog-index .bw-visually-hidden {
@@ -349,7 +345,7 @@ class BWBlogIndexElement extends HTMLElement {
           display: grid;
           gap: 14px;
           grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
-          margin-bottom: 28px;
+          margin-bottom: 24px;
         }
 
         .bw-blog-index .bw-search {
@@ -358,8 +354,8 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-search input {
           background: #FFFFFF;
-          border: 1px solid var(--border);
-          border-radius: 999px;
+          border: 1px solid var(--text);
+          border-radius: 0;
           color: var(--text);
           font: 800 14px/1 Montserrat, Arial, sans-serif;
           min-height: 46px;
@@ -372,13 +368,14 @@ class BWBlogIndexElement extends HTMLElement {
           flex-wrap: wrap;
           gap: 8px;
           justify-content: flex-end;
+          min-width: 0;
         }
 
         .bw-blog-index .bw-topic-btn {
           background: #FFFFFF;
-          border: 1px solid var(--border);
-          border-radius: 999px;
-          color: var(--green);
+          border: 1px solid var(--text);
+          border-radius: 0;
+          color: var(--text);
           cursor: pointer;
           font: 900 12px/1 Montserrat, Arial, sans-serif;
           min-height: 38px;
@@ -386,18 +383,17 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-topic-btn[aria-pressed="true"] {
-          background: var(--green);
-          border-color: var(--green);
-          color: #FFFFFF;
+          background: var(--yellow);
+          border-color: var(--text);
+          color: var(--text);
         }
 
         .bw-blog-index .bw-results {
           background: #FFFFFF;
-          border: 1px solid var(--border);
-          border-left: 5px solid var(--green);
-          border-radius: 8px;
-          margin-bottom: 34px;
-          padding: 20px;
+          border: 2px solid var(--text);
+          border-radius: 0;
+          margin-bottom: 30px;
+          padding: 18px 20px 20px;
         }
 
         .bw-blog-index .bw-results[hidden] {
@@ -405,13 +401,12 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-section {
-          margin-top: 42px;
+          margin-top: 34px;
         }
 
         .bw-blog-index .bw-section[data-bw-animate] {
-          opacity: 0;
-          transform: translateY(12px);
-          transition: opacity 380ms ease-out, transform 380ms ease-out;
+          opacity: 1;
+          transform: none;
         }
 
         .bw-blog-index .bw-section[data-bw-animate].visible {
@@ -421,7 +416,7 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-section-header {
           align-items: end;
-          border-top: 1px solid var(--border);
+          border-top: 3px solid var(--text);
           display: flex;
           gap: 18px;
           justify-content: space-between;
@@ -430,7 +425,7 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-section h2 {
-          color: var(--green);
+          color: var(--text);
           font-size: 31px;
           font-weight: 900;
           letter-spacing: 0;
@@ -448,7 +443,7 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-view-link {
-          color: var(--green);
+          color: var(--text);
           flex: 0 0 auto;
           font-size: 12px;
           font-weight: 900;
@@ -457,12 +452,18 @@ class BWBlogIndexElement extends HTMLElement {
           text-transform: uppercase;
         }
 
-        .bw-blog-index .bw-post-grid,
-        .bw-blog-index .bw-tool-grid,
         .bw-blog-index .bw-result-grid {
           display: grid;
           gap: 16px;
           grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .bw-blog-index .bw-compact-grid {
+          display: grid;
+          gap: 10px 18px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          max-width: 100%;
+          min-width: 0;
         }
 
         .bw-blog-index .bw-post-card {
@@ -500,42 +501,55 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-tools-band {
-          background: #FFFFFF;
-          border: 1px solid var(--border);
-          border-radius: 8px;
-          margin: 32px 0 10px;
-          padding: 24px;
+          background: var(--yellow);
+          border: 2px solid var(--text);
+          border-radius: 0;
+          margin: 38px 0 4px;
+          padding: 16px 18px;
         }
 
         .bw-blog-index .bw-tools-band h2 {
-          color: var(--green);
-          font-size: 26px;
+          color: var(--text);
+          font-size: 20px;
           font-weight: 900;
           line-height: 1.14;
-          margin-bottom: 8px;
+          margin-bottom: 4px;
+        }
+
+        .bw-blog-index .bw-tools-band .bw-section-header {
+          border-top: 0;
+          margin-bottom: 12px;
+          padding-top: 0;
+        }
+
+        .bw-blog-index .bw-tool-grid {
+          display: grid;
+          gap: 10px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
         .bw-blog-index .bw-tool-card {
-          border-left: 5px solid var(--yellow);
-          min-height: 188px;
-          padding: 20px;
+          background: #FBFBF2;
+          border: 1px solid var(--text);
+          min-height: 0;
+          padding: 14px 16px;
         }
 
         .bw-blog-index .bw-tool-card strong {
-          color: var(--green);
+          color: var(--text);
           display: block;
-          font-size: 18px;
+          font-size: 15px;
           font-weight: 900;
           line-height: 1.22;
-          margin-bottom: 9px;
+          margin-bottom: 4px;
         }
 
         .bw-blog-index .bw-tool-card span {
           color: var(--muted);
           display: block;
           font-family: var(--serif);
-          font-size: 14px;
-          line-height: 1.52;
+          font-size: 13px;
+          line-height: 1.42;
         }
 
         .bw-blog-index .bw-start-panel {
@@ -585,6 +599,50 @@ class BWBlogIndexElement extends HTMLElement {
           line-height: 1.45;
         }
 
+        .bw-blog-index .bw-compact-link {
+          align-items: start;
+          background: transparent;
+          border: 0;
+          border-top: 1px solid var(--text);
+          border-radius: 0;
+          display: grid;
+          gap: 8px;
+          grid-template-columns: 82px minmax(0, 1fr);
+          min-width: 0;
+          overflow: hidden;
+          padding: 12px 0;
+          text-decoration: none;
+          transition: background 160ms ease, border-color 160ms ease, transform 160ms ease;
+        }
+
+        .bw-blog-index .bw-compact-link:hover,
+        .bw-blog-index .bw-compact-link:focus-visible {
+          background: #FFFFFF;
+          border-color: var(--text);
+          transform: translateY(-1px);
+        }
+
+        .bw-blog-index .bw-compact-link .bw-mini-meta {
+          color: var(--muted);
+          font-size: 10px;
+          font-weight: 900;
+          letter-spacing: 0.8px;
+          line-height: 1.25;
+          min-width: 0;
+          overflow-wrap: anywhere;
+          text-transform: uppercase;
+        }
+
+        .bw-blog-index .bw-compact-link b {
+          color: var(--text);
+          display: block;
+          font-size: 14px;
+          font-weight: 900;
+          line-height: 1.25;
+          min-width: 0;
+          overflow-wrap: anywhere;
+        }
+
         .bw-blog-index .bw-footer-band {
           background: var(--green);
           color: #FFFFFF;
@@ -632,7 +690,6 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         @media (max-width: 980px) {
-          .bw-blog-index .bw-masthead,
           .bw-blog-index .bw-hero-grid,
           .bw-blog-index .bw-lead-card,
           .bw-blog-index .bw-controls {
@@ -650,27 +707,53 @@ class BWBlogIndexElement extends HTMLElement {
 
           .bw-blog-index .bw-post-grid,
           .bw-blog-index .bw-tool-grid,
+          .bw-blog-index .bw-compact-grid,
           .bw-blog-index .bw-result-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
 
         @media (max-width: 640px) {
+          .bw-blog-index,
+          .bw-blog-index .bw-blog-index-root,
+          .bw-blog-index .bw-hero,
+          .bw-blog-index .bw-main,
+          .bw-blog-index .bw-masthead,
+          .bw-blog-index .bw-hero-grid,
+          .bw-blog-index .bw-secondary-stack,
+          .bw-blog-index .bw-lead-card,
+          .bw-blog-index .bw-small-card,
+          .bw-blog-index .bw-controls,
+          .bw-blog-index .bw-search,
+          .bw-blog-index .bw-topic-nav,
+          .bw-blog-index .bw-results,
+          .bw-blog-index .bw-section,
+          .bw-blog-index .bw-tools-band,
+          .bw-blog-index .bw-compact-grid,
+          .bw-blog-index .bw-tool-grid,
+          .bw-blog-index .bw-footer-band {
+            max-width: 100%;
+            min-width: 0;
+            width: 100%;
+          }
+
           .bw-blog-index .bw-inner {
             padding-left: 16px;
             padding-right: 16px;
           }
 
           .bw-blog-index .bw-hero {
-            padding: 42px 0 34px;
+            padding: 34px 0 28px;
           }
 
           .bw-blog-index h1 {
-            font-size: 38px;
+            font-size: 36px;
           }
 
           .bw-blog-index .bw-hero-lead {
             font-size: 16px;
+            max-width: 100%;
+            width: 100%;
           }
 
           .bw-blog-index .bw-lead-card {
@@ -678,6 +761,9 @@ class BWBlogIndexElement extends HTMLElement {
           }
 
           .bw-blog-index .bw-lead-copy {
+            max-width: 100%;
+            min-width: 0;
+            overflow: hidden;
             padding: 22px;
           }
 
@@ -687,7 +773,14 @@ class BWBlogIndexElement extends HTMLElement {
           }
 
           .bw-blog-index .bw-small-card {
-            grid-template-columns: 104px minmax(0, 1fr);
+            grid-template-columns: 96px minmax(0, 1fr);
+            overflow: hidden;
+          }
+
+          .bw-blog-index .bw-small-copy {
+            max-width: 100%;
+            min-width: 0;
+            overflow: hidden;
           }
 
           .bw-blog-index .bw-small-card .bw-media {
@@ -695,7 +788,7 @@ class BWBlogIndexElement extends HTMLElement {
           }
 
           .bw-blog-index .bw-small-title {
-            font-size: 16px;
+            font-size: 15px;
           }
 
           .bw-blog-index .bw-small-card .bw-card-text {
@@ -704,6 +797,7 @@ class BWBlogIndexElement extends HTMLElement {
 
           .bw-blog-index .bw-post-grid,
           .bw-blog-index .bw-tool-grid,
+          .bw-blog-index .bw-compact-grid,
           .bw-blog-index .bw-result-grid {
             grid-template-columns: 1fr;
           }
@@ -749,6 +843,10 @@ class BWBlogIndexElement extends HTMLElement {
     } catch (error) {
       this._data = BW_BLOG_INDEX_FALLBACK;
     }
+    this._rerender();
+  }
+
+  _rerender() {
     this._render();
     this._bindControls();
     this._setupAnimations();
@@ -757,6 +855,7 @@ class BWBlogIndexElement extends HTMLElement {
   _render() {
     const root = this.querySelector('.bw-blog-index-root');
     if (!root) return;
+    const activeView = Boolean(this._query || this._topic !== 'all');
     root.removeAttribute('aria-live');
     root.innerHTML = `
       ${this._renderHero()}
@@ -764,8 +863,9 @@ class BWBlogIndexElement extends HTMLElement {
         <div class="bw-inner">
           ${this._renderControls()}
           ${this._renderResults()}
-          ${this._renderToolsBand()}
+          ${activeView ? this._renderToolsBand() : ''}
           ${this._renderShelves()}
+          ${activeView ? '' : this._renderToolsBand()}
           ${this._renderLatest()}
         </div>
       </main>
@@ -776,20 +876,15 @@ class BWBlogIndexElement extends HTMLElement {
   _renderHero() {
     const lead = this._data.hero?.lead;
     const secondary = this._data.hero?.secondary || [];
-    const total = Number(this._data.totalPosts || this._data.allPosts?.length || 0);
     return `
       <header class="bw-hero">
         <div class="bw-inner">
           <div class="bw-masthead">
             <div>
               <span class="bw-kicker">Field notes from BerlinWalk</span>
-              <h1 id="bw-blog-index-title">Berlin Travel Notes</h1>
+              <h1 id="bw-blog-index-title">Berlin Travel &amp; History Notes</h1>
               <p class="bw-hero-lead">Practical guides, route stories, history explainers, and first-day fixes for visitors who want Berlin to make sense before they start walking.</p>
             </div>
-            <p class="bw-issue-note">
-              <strong>${total ? `${total} Berlin guides` : 'Berlin guide archive'}</strong>
-              <span>Built like a small travel magazine: useful now, easy to browse, and connected to the tour.</span>
-            </p>
           </div>
 
           <div class="bw-hero-grid">
@@ -798,7 +893,6 @@ class BWBlogIndexElement extends HTMLElement {
               <div class="bw-secondary-stack">
                 ${secondary.map((post) => this._renderSmallCard(post)).join('')}
               </div>
-              ${this._renderStartHere()}
             </div>
           </div>
         </div>
@@ -828,18 +922,19 @@ class BWBlogIndexElement extends HTMLElement {
 
   _renderResults() {
     const active = this._query || this._topic !== 'all';
-    const posts = active ? this._filteredPosts().slice(0, 12) : [];
+    const matches = active ? this._filteredPosts() : [];
+    const posts = matches.slice(0, 12);
     return `
       <section class="bw-results" ${active ? '' : 'hidden'} aria-label="Filtered guides">
         <div class="bw-section-header">
           <div>
-            <span class="bw-card-kicker">${posts.length} matches</span>
+            <span class="bw-card-kicker">${matches.length} matches</span>
             <h2>${this._query ? 'Search results' : 'Topic picks'}</h2>
           </div>
           <a class="bw-view-link" href="https://www.berlinwalk.com/blog" target="_top">Reset view</a>
         </div>
-        <div class="bw-result-grid">
-          ${posts.map((post) => this._renderPostCard(post)).join('') || '<p class="bw-section-desc">No matching guide found.</p>'}
+        <div class="bw-compact-grid">
+          ${posts.map((post) => this._renderCompactLink(post)).join('') || '<p class="bw-section-desc">No matching guide found.</p>'}
         </div>
       </section>
     `;
@@ -852,9 +947,9 @@ class BWBlogIndexElement extends HTMLElement {
       <section class="bw-tools-band" aria-labelledby="bw-blog-tools-title">
         <div class="bw-section-header">
           <div>
-            <span class="bw-card-kicker">Plan your visit</span>
-            <h2 id="bw-blog-tools-title">Free Berlin tools</h2>
-            <p class="bw-section-desc">Quick helpers for the practical decisions people usually search for after reading a guide.</p>
+            <span class="bw-card-kicker">Tools</span>
+            <h2 id="bw-blog-tools-title">Useful Berlin tools</h2>
+            <p class="bw-section-desc">Quick helpers for tickets, toilets, and first-day decisions.</p>
           </div>
           <a class="bw-view-link" href="https://www.berlinwalk.com/berlin-tools" target="_top">All tools</a>
         </div>
@@ -882,8 +977,8 @@ class BWBlogIndexElement extends HTMLElement {
           </div>
           <a class="bw-view-link" href="#" data-topic-link="${this._escapeAttribute(shelf.key)}">View topic</a>
         </div>
-        <div class="bw-post-grid">
-          ${(shelf.posts || []).slice(0, 6).map((post) => this._renderPostCard(post)).join('')}
+        <div class="bw-compact-grid">
+          ${(shelf.posts || []).slice(0, 10).map((post) => this._renderCompactLink(post)).join('')}
         </div>
       </section>
     `).join('');
@@ -901,8 +996,8 @@ class BWBlogIndexElement extends HTMLElement {
             <p class="bw-section-desc">Freshly published guides and updates from the BerlinWalk archive.</p>
           </div>
         </div>
-        <div class="bw-post-grid">
-          ${posts.slice(0, 6).map((post) => this._renderPostCard(post)).join('')}
+        <div class="bw-compact-grid">
+          ${posts.slice(0, 8).map((post) => this._renderCompactLink(post)).join('')}
         </div>
       </section>
     `;
@@ -963,6 +1058,16 @@ class BWBlogIndexElement extends HTMLElement {
     `;
   }
 
+  _renderCompactLink(post) {
+    const meta = [post.category || post.topicLabel || 'Guide', post.readTime].filter(Boolean).join(' · ');
+    return `
+      <a class="bw-compact-link" href="${this._escapeAttribute(post.url)}" target="_top">
+        <span class="bw-mini-meta">${this._escapeHtml(meta)}</span>
+        <b>${this._escapeHtml(post.title)}</b>
+      </a>
+    `;
+  }
+
   _renderStartHere() {
     const links = this._data.startHere || [];
     if (!links.length) return '';
@@ -1003,8 +1108,7 @@ class BWBlogIndexElement extends HTMLElement {
     this.querySelectorAll('[data-topic]').forEach((button) => {
       button.addEventListener('click', () => {
         this._topic = button.getAttribute('data-topic') || 'all';
-        this._render();
-        this._bindControls();
+        this._rerender();
       });
     });
 
@@ -1012,9 +1116,8 @@ class BWBlogIndexElement extends HTMLElement {
       link.addEventListener('click', (event) => {
         event.preventDefault();
         this._topic = link.getAttribute('data-topic-link') || 'all';
-        this._render();
-        this._bindControls();
-        this.querySelector('.bw-controls')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this._rerender();
+        this.querySelector('.bw-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
@@ -1022,8 +1125,7 @@ class BWBlogIndexElement extends HTMLElement {
     if (input) {
       input.addEventListener('input', () => {
         this._query = input.value.trim();
-        this._render();
-        this._bindControls();
+        this._rerender();
         const nextInput = this.querySelector('[data-bw-blog-search]');
         if (nextInput) {
           nextInput.focus();
@@ -1049,21 +1151,11 @@ class BWBlogIndexElement extends HTMLElement {
   }
 
   _setupAnimations() {
-    const sections = this.querySelectorAll('[data-bw-animate]');
-    if (!sections.length) return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-      sections.forEach((section) => section.classList.add('visible'));
-      return;
+    if (this._observer) {
+      this._observer.disconnect();
+      this._observer = null;
     }
-    this._observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          this._observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    sections.forEach((section) => this._observer.observe(section));
+    this.querySelectorAll('[data-bw-animate]').forEach((section) => section.classList.add('visible'));
   }
 
   _escapeHtml(value) {

@@ -13,7 +13,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 
 ## Widgets
 
-- `lead-form/` - Berlin Survival Map email capture form, plus `lead-form/email/` source for the welcome email HTML and copy.
+- `lead-form/` - Berlin First-Day Survival Guide email capture form, plus `lead-form/email/` source for the welcome email HTML and copy.
 - `quick-summary/` - reusable quick summary and optional audio player.
 - `hero-home/` - `bw-hero-home` homepage conversion hero Custom Element.
 - `blog-home/` - `bw-blog-home` homepage editorial blog teaser Custom Element.
@@ -41,7 +41,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
 - `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
 - `js/blog-journey-inject.js` - sitewide Wix Custom Code helper for mobile post guide chips and topic-aware next-step cards.
-- `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin Survival Map signup.
+- `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin First-Day Survival Guide signup.
 
 ## Project Memory
 
@@ -157,7 +157,7 @@ Suggested Wix embed height for quick summaries:
 
 These are loaded through Wix Custom Code rather than iframe embeds:
 
-- `js/lead-form-inject.js` - injects the Berlin Survival Map lead form mid-post.
+- `js/lead-form-inject.js` - injects the Berlin First-Day Survival Guide lead form mid-post.
 - `js/cta-inject.js` - injects the global tour CTA near the end of posts.
 - `js/blog-sidebar-inject.js` - builds a desktop-only sticky "On this page"
   sidebar from visible H2/H3 headings and puts a compact `Blog Home` /
@@ -178,4 +178,4 @@ These are loaded through Wix Custom Code rather than iframe embeds:
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
   `sessionStorage`, links the primary CTA to the booking route, and posts the
-  Berlin Survival Map signup to `https://www.berlinwalk.com/_functions/subscribe`.
+  Berlin First-Day Survival Guide signup to `https://www.berlinwalk.com/_functions/subscribe`.

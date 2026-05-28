@@ -1,7 +1,8 @@
-# Berlin Survival Map Welcome Email
+# Berlin First-Day Survival Guide Welcome Email
 
 Source-of-truth for the lead magnet welcome email sent after a visitor signs up
-for the Berlin Survival Map.
+for the Berlin First-Day Survival Guide. The backend/internal offer key remains
+`berlin-survival-map` for compatibility.
 
 ## Live Wix email state
 
@@ -32,19 +33,21 @@ welcome `VKufY4L`, owner notification `VKugjPv`.
 
 ## Current PDF
 
-- Public title: `Berlin Survival Map`
-- Public URL: `https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_fbb1e603406b4ac4b7a15628a0288e40.pdf`
-- Local PDF: `/Users/yusufucuz/Documents/New project/output/pdf/berlin-survival-map.pdf`
+- Public title: `Berlin First-Day Survival Guide`
+- Public URL: `https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_2fdd0e52467b4fe98b409d5d64e5818c.pdf`
+- Local PDF: `/Users/yusufucuz/Documents/New project/output/pdf/berlin-first-day-survival-guide.pdf`
+- Cover asset: `lead-form/assets/berlin-first-day-survival-guide-cover.jpg`
 
 ## Inbox copy
 
-- Subject: `Your Berlin Survival Map is here`
-- Preview: `Airport tickets, Sunday traps, toilets, luggage, cash and local shortcuts in one PDF.`
+- Subject: `Your Berlin First-Day Survival Guide is here`
+- Preview: `Airport tickets, Sunday rules, toilets, luggage, cash and the easiest first walk in one PDF.`
 
 ## Current editor status
 
-Yusuf manually pasted this refreshed body, subject, and preview into the Wix
-Triggered Email editor on 2026-05-27.
+Local source was updated on 2026-05-28. The live Wix Triggered Email body still
+needs manual editor paste if the new public copy should be live immediately;
+the direct email IDs remain unchanged.
 
 ## Files
 

@@ -134,11 +134,11 @@ const TOPICS = [
 ];
 
 const HERO_SLUGS = {
-  lead: 'nikolaiviertel-rebuilt-old-town',
+  lead: 'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
   secondary: [
-    'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
-    'public-toilets-in-berlin',
     'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
+    'public-toilets-in-berlin',
+    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   ],
 };
 
@@ -400,7 +400,7 @@ function buildData(posts) {
       navLabel: topic.navLabel,
       kicker: topic.kicker,
       description: topic.description,
-      posts: pickPosts(posts, topic.slugs, topic.key, 6),
+      posts: pickPosts(posts, topic.slugs, topic.key, 10),
     })),
     latest: posts.slice(0, 12),
     allPosts: posts,
