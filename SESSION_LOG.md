@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (First-Day Planner live rollout)
+
+**Did:** Finished live rollout for `Berlin First-Day Planner` after Yusuf pushed `berlinwalk-widgets`.
+
+**Changed:**
+- Wix CMS `BerlinTools` — inserted `berlin-first-day-planner` as item `6c285b0e-5cef-4792-862c-f59933a8b6ef`, verified Ricos counts, and re-saved the item to wake `/tools/berlin-first-day-planner`.
+- Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md` — updated live CMS ID and rollout status.
+- `SESSION_LOG.md` — recorded this widget-repo handoff.
+
+**Opened:** Add the blog iframe embed (`/berlin-first-day-planner/?context=blog`) to the three planned posts now that live QA passed.
+**Closed:** GitHub Pages widget/icon return 200; live Wix tool page returns 200; desktop/mobile live iframe QA passed with no overflow, booking CTA `target="_top"`, correct UTM, and `/berlin-tools` card visible.
+
+**Next session should:** Add and QA the blog embeds in `Berlin First-Time Visitor Mistakes`, `Berlin Airport to Alexanderplatz`, and `Berlin in 3 Days`.
+
 ## 2026-05-27 — Codex (Berlin First-Day Planner)
 
 **Did:** Added the `Berlin First-Day Planner` widget as a booking-first first-24-hours planner with weather, transport, opening-day, luggage, and tour-fit logic.
