@@ -189,7 +189,6 @@ Pulled from `SESSION_LOG.md` — see that file for active state. As of the lates
 
 1. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug. *(Deferred far out per Yusuf on 2026-05-16.)*
 2. **Publish the route story map page.** After pushing `berlinwalk-widgets`, create/publish Wix `/berlin-walking-tour-route`, install `<bw-route-story>`, paste `route-story/SEO_SETTINGS.md`, then verify header/footer/homepage route links.
-3. **Publish Survival Map direct email trigger.** Add `lead-form/velo/survivalMapEmails.js` as Wix `Backend/survivalMapEmails.js`, add the `post_subscribe` import/call from `lead-form/velo/README.md`, live-test a fresh signup, then deactivate `Berlin Survival Map Welcome Email - v2` and `Berlin Survival Map - Owner Notification` to avoid duplicate emails.
 
 ## 9. Protocol for ending a session
 

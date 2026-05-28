@@ -8,11 +8,54 @@ lead magnet emails directly from backend code.
 
 - `survivalMapEmails.js` - add this as `Backend/survivalMapEmails.js` in Wix.
 
+## Wix Data log collection
+
+Created via REST on 2026-05-28:
+
+```text
+SurvivalMapEmailLogs
+```
+
+Purpose: one row per Survival Map signup email attempt, so the direct Velo path
+has a simple audit trail outside Wix Automations.
+
+Fields:
+
+| Field key | Type | Notes |
+|---|---|---|
+| `email` | Text | Normalized lowercase lead email |
+| `contactId` | Text | Subscriber Wix contact ID |
+| `source` | Text | Source passed by the widget or popup |
+| `page` | Text | Referrer/calling page |
+| `offer` | Text | Usually `berlin-survival-map` |
+| `welcomeQueued` | Boolean | Subscriber welcome queued successfully |
+| `ownerQueued` | Boolean | Owner notification queued successfully |
+| `queuedCount` | Number | Count of successful direct sends |
+| `failedCount` | Number | Count of failed direct sends |
+| `welcomeError` | Text | Last subscriber-send error, if any |
+| `ownerError` | Text | Last owner-send error, if any |
+| `deliveryPath` | Text | `automation_label_trigger` or `direct_triggered_email` |
+| `note` | Text | Operational note for fallback/debug state |
+| `createdAt` | Date/Time | Backend log timestamp |
+
+Local report:
+
+```bash
+source scripts/load-api-keys.sh
+node scripts/survival-map-email-log-report.mjs --limit 100
+```
+
 ## Live IDs verified on 2026-05-28
 
 - Subscriber welcome v2: `46a631f2-156e-4f14-9a8c-49d26fd97990`
 - Owner notification: `2fb9b51f-91cd-4705-9967-178f861df727`
 - Owner contact for `info@yusufucuz.com`: `9e996f34-501f-4d45-8228-098680672e69`
+
+Important: the two `messageId` values above belong to Wix Automations email
+actions. They are not valid Velo `triggeredEmails.emailContact()` IDs. Until
+proper Developer Tools -> Triggered Emails templates exist, keep
+`DIRECT_TRIGGERED_EMAILS_ENABLED = false`; the helper only writes the log and
+the active label-trigger automations handle delivery.
 
 ## http-functions.js patch
 
