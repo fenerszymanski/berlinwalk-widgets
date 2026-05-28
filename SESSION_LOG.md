@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-27 — Codex (Berlin First-Day Planner)
+
+**Did:** Added the `Berlin First-Day Planner` widget as a booking-first first-24-hours planner with weather, transport, opening-day, luggage, and tour-fit logic.
+
+**Changed:**
+- `berlin-first-day-planner/index.html` — new standalone widget using `brand.css`/`brand.js`, five choice groups, 3-5 step result timeline, Open-Meteo card, Sunday/holiday/Monday notes, booking/Survival Map CTAs, supporting links, copy action, `?context=blog`, `?date=YYYY-MM-DD`, and `?weather=off`.
+- `tools-hub/data.json`, `tools-home/data.json` — added the BerlinTools Discovery entry (`embedHeight: 1280`) and made it the first homepage tools card.
+- `tools-home/icons/berlin-first-day-planner.png`, `tools-home/icons/berlin-first-day-planner-160.png`, `tools-home/icons/manifest.json`, `widgets-hub/SEO_ADDITIONAL_TAGS.md`, `README.md`, `wix-embed-snippets.md` — added the no-text icon, regenerated widget SEO ItemList, and documented embed usage.
+- Project root `insert-berlin-first-day-planner.js`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — added the Wix CMS insert script and broader rollout memory.
+
+**Opened:** Push this repo so GitHub Pages serves `/berlin-first-day-planner/`; then run the root insert script and live QA before adding blog embeds.
+**Closed:** Local QA passed: inline JS parse, JSON parse, insert script `--dry-run`, `node --check`, desktop `1280x900`, mobile `390x900`, weather success/error/fallback, CTA/copy analytics, no horizontal overflow, and representative BER/Hbf/Alex result paths.
+
+**Next session should:** After deploy, verify the GitHub Pages widget URL, `/berlin-tools` first card, and live `/tools/berlin-first-day-planner`; only then embed it in the three planned blog posts.
+
 ## 2026-05-27 — Codex (Compact 15-photo gallery)
 
 **Did:** Made the homepage gallery compact and expanded it to 15 photos, including Yusuf's new Hackescher Markt, Marx-Engels Forum, Humboldt Forum, refreshed Marienviertel, golden-hour TV Tower, and Marienkirche photos.

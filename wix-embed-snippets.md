@@ -155,6 +155,21 @@ https://fenerszymanski.github.io/berlinwalk-widgets/free-museums-compare/
 https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=free-museums
 ```
 
+## Berlin First-Day Planner Blog Embed
+
+After the live tool page is verified, use this iframe URL in the first-time,
+airport-to-Alexanderplatz, and Berlin-in-3-days posts:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/berlin-first-day-planner/?context=blog
+```
+
+Recommended first Wix iframe height:
+
+```text
+1280px
+```
+
 ## Berlin Club Dress Code Post Widgets
 
 Use these URLs for `what-to-wear-to-berlin-clubs`:

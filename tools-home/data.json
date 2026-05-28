@@ -1,6 +1,12 @@
 {
   "featuredTools": [
     {
+      "slug": "berlin-first-day-planner",
+      "title": "Berlin First-Day Planner",
+      "lead": "Arriving today? Build a realistic first-day route with weather and opening-day logic.",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-first-day-planner-160.png"
+    },
+    {
       "slug": "whats-open-in-berlin-today",
       "title": "What's Open in Berlin Today",
       "lead": "Is today a public holiday? See what's open and closed in Berlin right now.",
