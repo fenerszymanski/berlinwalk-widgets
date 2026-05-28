@@ -7,6 +7,9 @@ lead magnet emails directly from backend code.
 ## Files
 
 - `survivalMapEmails.js` - add this as `Backend/survivalMapEmails.js` in Wix.
+- `emailMarketingSubscription.js` - optional helper for the Email Marketing
+  subscription status fix. Add this as `Backend/emailMarketingSubscription.js`
+  in Wix once the API key is stored in Wix Secrets Manager.
 
 ## Wix Data log collection
 
@@ -81,12 +84,65 @@ If the existing request body variable is named `body` or `data`, use that name
 instead of `payload`. Keep the existing success response shape, especially
 `success: true`, because the iframe checks it before revealing the PDF link.
 
+## Email Marketing subscription status fix
+
+The direct lead-magnet emails work independently of Email Marketing subscriber
+status, but the live `/_functions/subscribe` response can still show
+`subscriptionDebug: missing_api_key` if `http-functions.js` cannot read a Wix
+REST API key.
+
+Verified on 2026-05-28: the current Keychain `WIX_API_KEY` can query Wix Email
+Subscriptions successfully through:
+
+```text
+POST https://www.wixapis.com/email-marketing/v1/email-subscriptions/query
+```
+
+To make the live Velo endpoint subscribe opted-in leads:
+
+1. Add the same Wix REST API key to Wix Secrets Manager under `WIX_API_KEY`.
+2. Add `emailMarketingSubscription.js` as
+   `Backend/emailMarketingSubscription.js`.
+3. In `Backend/http-functions.js`, add:
+
+```js
+import { subscribeEmailMarketing } from 'backend/emailMarketingSubscription';
+```
+
+4. Inside `post_subscribe`, after the email has been validated and the contact
+   has been created/labelled, run the helper without blocking the PDF unlock:
+
+```js
+const subscriptionDebug = await subscribeEmailMarketing(email);
+```
+
+5. Keep returning the existing `success: true` response. If you include
+   `subscriptionDebug` in the JSON response, use the helper result directly so a
+   future failure is visible during smoke tests but does not break the lead
+   magnet:
+
+```js
+subscriptionDebug
+```
+
+Local audit/backfill for logged Survival Map leads:
+
+```bash
+source scripts/load-api-keys.sh
+node scripts/survival-map-subscription-repair.mjs
+node scripts/survival-map-subscription-repair.mjs --apply
+```
+
+The script defaults to a dry run and skips contacts currently marked
+`UNSUBSCRIBED` unless `--include-unsubscribed` is explicitly passed.
+
 ## After publish
 
 1. Test the live form with a fresh email address.
 2. Confirm the subscriber welcome email and owner notification arrive quickly.
-3. Keep these two old label-trigger automations inactive to avoid duplicate sends:
+3. Confirm `subscriptionDebug.ok === true` or equivalent in the JSON response.
+4. Keep these two old label-trigger automations inactive to avoid duplicate sends:
    - `Berlin Survival Map Welcome Email - v2`
    - `Berlin Survival Map - Owner Notification`
-4. Keep `Berlin Survival Map Welcome Email` inactive and do not delete it. It
+5. Keep `Berlin Survival Map Welcome Email` inactive and do not delete it. It
    keeps the owner-notification Triggered Email template alive.

@@ -4,17 +4,46 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (Subscription helper prep)
+
+**Did:** Prepared the non-push-dependent Email Marketing subscription-status fix for Survival Map signups.
+
+**Changed:**
+- `lead-form/velo/emailMarketingSubscription.js` — new Velo helper that reads a Wix Secrets Manager REST key and upserts opted-in emails as `SUBSCRIBED`.
+- Project root `scripts/survival-map-subscription-repair.mjs` — new local audit/backfill script for `SurvivalMapEmailLogs`.
+- `lead-form/velo/README.md`, `AGENTS.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated the handoff.
+
+**Opened:** When Wix Editor access is available, add secret `WIX_API_KEY`, install the helper as `Backend/emailMarketingSubscription.js`, call `subscribeEmailMarketing(email)` from `post_subscribe`, publish, and live-test `subscriptionDebug.ok`.
+**Closed:** Confirmed the current Keychain `WIX_API_KEY` can query Wix Email Subscriptions; dry-run found the one logged Survival Map lead already `SUBSCRIBED`, with no apply run.
+
+**Next session should:** Treat the direct email path as working; only patch subscription status once Yusuf can publish Velo.
+
+## 2026-05-28 — Codex (Blog redesign v1 local)
+
+**Did:** Started the blog redesign implementation with a new full `/blog` editorial hub and post-page journey helper.
+
+**Changed:**
+- `blog-index/*`, `scripts/generate-blog-index-data.mjs` — added `<bw-blog-index>`, local preview, and generated 99-post Wix Blog API data with topic shelves/search/tools.
+- `js/blog-journey-inject.js` — new post helper for mobile `In this guide` chips and a topic-aware `Next step` card.
+- `README.md`, `AGENTS.md`, `wix-embed-snippets.md` — documented install snippets and the publish TODO.
+
+**Opened:** Push the repo, wait for GitHub Pages, replace the Wix `/blog` feed area with `<bw-blog-index>`, and add `blog-journey-inject.js?v=1` to Wix Custom Code.
+**Closed:** Local syntax checks and desktop/mobile blog-index QA passed; screenshots saved in project-root `output/qa/`.
+
+**Next session should:** After push/deploy, live-QA `/blog` and one high-traffic `/post/*` page before adding more editorial tuning.
+
 ## 2026-05-28 — Codex (BerlinTools CTA polish)
 
 **Did:** Mirrored the live mobile `/tools/*` CTA polish in the widget repo source.
 
 **Changed:**
-- `js/berlintools-mobile-fixes.js` — raised sticky/footer spacing to 136px, tightened `More Berlin Tools` bottom padding, collapsed the empty spacer before the tour CTA, and added readable CTA band padding/border rules.
-- Project root `berlintools-mobile-tools-polish-custom-code.html`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — documented and deployed the live inline source.
+- `js/berlintools-mobile-fixes.js` — raised sticky/footer spacing to 136px, tightened `More Berlin Tools` bottom padding, collapsed the empty spacer before the tour CTA, added readable CTA band padding/border rules, enlarged CTA text, and forces the CTA link to the canonical booking service URL.
+- Project root `berlintools-mobile-tools-polish-custom-code.html`, `berlintools-cta-polish-custom-code.html`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — documented and deployed the live inline sources.
 - Wix Custom Embed `Berlin tools fix` (`f412a295-3d53-4339-bcbc-5d1bb1389be9`) — updated to revision 10.
+- Wix Custom Embed `BerlinTools CTA Polish` (`e7c8b2c9-34a5-4944-b042-4a947462cea3`) — created and updated to revision 2.
 
 **Opened:** Push this repo when convenient so GitHub has the matching source.
-**Closed:** Live Daily Budget mobile QA passed at 393px; revision 10 CSS loaded, related-card-to-CTA gap is 48px, and horizontal overflow is 0.
+**Closed:** Live Daily Budget mobile QA passed at 393px; revision 10 CSS loaded, related-card-to-CTA gap is 48px, CTA heading/body/button fonts are 30/16/14px, href is the booking service URL, and horizontal overflow is 0.
 
 **Next session should:** Keep the live Wix embed inline unless deliberately moving back to the external GitHub Pages script.
 

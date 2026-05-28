@@ -863,6 +863,29 @@
     '  html body #comp-mozmi7u3,',
     '  html body #comp-mozmkgew {',
     '    width: min(100%, 430px) !important;',
+    '    height: auto !important;',
+    '    min-height: 0 !important;',
+    '    overflow: visible !important;',
+    '  }',
+    '',
+    '  html body #comp-mozmi7u3 h1,',
+    '  html body #comp-mozmi7u3 h2,',
+    '  html body #comp-mozmi7u3 p,',
+    '  html body #comp-mozmi7u3 span {',
+    '    font-size: 30px !important;',
+    '    line-height: 1.12 !important;',
+    '    letter-spacing: 0 !important;',
+    '    text-align: center !important;',
+    '    white-space: normal !important;',
+    '  }',
+    '',
+    '  html body #comp-mozmkgew p,',
+    '  html body #comp-mozmkgew span {',
+    '    font-size: 16px !important;',
+    '    line-height: 1.45 !important;',
+    '    letter-spacing: 0 !important;',
+    '    text-align: center !important;',
+    '    white-space: normal !important;',
     '  }',
     '',
     '  html body #comp-mozmlwb5 {',
@@ -870,9 +893,42 @@
     '    margin-top: 2px !important;',
     '  }',
     '',
+    '  html body #comp-mozmlwb5,',
+    '  html body #comp-mozmlwb5 a {',
+    '    height: 52px !important;',
+    '    min-height: 52px !important;',
+    '  }',
+    '',
+    '  html body #comp-mozmlwb5 a {',
+    '    display: flex !important;',
+    '    align-items: center !important;',
+    '    justify-content: center !important;',
+    '  }',
+    '',
+    '  html body #comp-mozmlwb5 span {',
+    '    font-size: 14px !important;',
+    '    line-height: 1 !important;',
+    '    letter-spacing: 0.04em !important;',
+    '    white-space: nowrap !important;',
+    '  }',
+    '',
     '  #SITE_FOOTER {',
     '    margin-bottom: 136px !important;',
     '    margin-bottom: calc(136px + env(safe-area-inset-bottom, 0px)) !important;',
+    '  }',
+    '}',
+    '',
+    '@media screen and (max-width: 380px) {',
+    '  html body #comp-mozmi7u3 h1,',
+    '  html body #comp-mozmi7u3 h2,',
+    '  html body #comp-mozmi7u3 p,',
+    '  html body #comp-mozmi7u3 span {',
+    '    font-size: 27px !important;',
+    '  }',
+    '',
+    '  html body #comp-mozmkgew p,',
+    '  html body #comp-mozmkgew span {',
+    '    font-size: 15px !important;',
     '  }',
     '}'
   ].join('\n');
@@ -881,4 +937,45 @@
   style.id = 'berlintools-mobile-fixes-css';
   style.textContent = css;
   document.head.appendChild(style);
+
+  var bookingUrl = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+
+  function fixTourCtaLink() {
+    var isSmall = window.matchMedia('(max-width: 380px)').matches;
+    var links = document.querySelectorAll('#comp-mozmlwb5 a');
+    for (var i = 0; i < links.length; i += 1) {
+      links[i].href = bookingUrl;
+      links[i].target = '_top';
+      links[i].rel = 'noopener';
+    }
+
+    var headings = document.querySelectorAll(
+      '#comp-mozmi7u3 h1, #comp-mozmi7u3 h2, #comp-mozmi7u3 p, #comp-mozmi7u3 span'
+    );
+    for (var h = 0; h < headings.length; h += 1) {
+      headings[h].style.setProperty('font-size', isSmall ? '27px' : '30px', 'important');
+      headings[h].style.setProperty('line-height', '1.12', 'important');
+      headings[h].style.setProperty('letter-spacing', '0', 'important');
+    }
+
+    var bodyCopy = document.querySelectorAll('#comp-mozmkgew p, #comp-mozmkgew span');
+    for (var b = 0; b < bodyCopy.length; b += 1) {
+      bodyCopy[b].style.setProperty('font-size', isSmall ? '15px' : '16px', 'important');
+      bodyCopy[b].style.setProperty('line-height', '1.45', 'important');
+    }
+
+    var buttonLabels = document.querySelectorAll('#comp-mozmlwb5 span');
+    for (var l = 0; l < buttonLabels.length; l += 1) {
+      buttonLabels[l].style.setProperty('font-size', '14px', 'important');
+      buttonLabels[l].style.setProperty('line-height', '1', 'important');
+    }
+  }
+
+  fixTourCtaLink();
+  setTimeout(fixTourCtaLink, 500);
+  setTimeout(fixTourCtaLink, 1500);
+  new MutationObserver(fixTourCtaLink).observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
 })();

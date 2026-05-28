@@ -17,6 +17,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `quick-summary/` - reusable quick summary and optional audio player.
 - `hero-home/` - `bw-hero-home` homepage conversion hero Custom Element.
 - `blog-home/` - `bw-blog-home` homepage editorial blog teaser Custom Element.
+- `blog-index/` - `bw-blog-index` full `/blog` editorial hub Custom Element, backed by Wix Blog API data generated into `blog-index/data.json`.
 - `guide-home/` - `bw-guide-home` homepage "Meet Yusuf" teaser section.
 - `the-guide/` - `bw-the-guide` standalone The Guide page Custom Element.
 - `route-story/` - `bw-route-story` standalone route story map page Custom Element.
@@ -39,6 +40,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `route/` - `bw-route` interactive illustrated route map Custom Element with a route-story preview section.
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
 - `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
+- `js/blog-journey-inject.js` - sitewide Wix Custom Code helper for mobile post guide chips and topic-aware next-step cards.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin Survival Map signup.
 
 ## Project Memory
@@ -61,6 +63,7 @@ Current homepage Custom Element source URLs:
 | How It Works | `bw-how-it-works` | `https://fenerszymanski.github.io/berlinwalk-widgets/how-it-works/how-it-works-element.js` | 3-step timeline. |
 | Hero Home | `bw-hero-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/hero-home/hero-home-element.js` | Homepage conversion hero with real tour photo, booking CTA, route, proof points. |
 | Blog Home | `bw-blog-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-home/blog-home-element.js` | Homepage `Berlin Travel Notes` editorial blog teaser. |
+| Blog Index | `bw-blog-index` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js` | Full `/blog` editorial hub with lead story, topic shelves, search, tools, and start-here links. |
 | Blog Guide Note | `bw-blog-guide-note` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-guide-note/blog-guide-note-element.js` | Compact right-column editorial note for the Wix blog index, using Yusuf's tour photo. |
 | Guide Home | `bw-guide-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | Homepage "Meet Yusuf" teaser linking to `/the-guide`. |
 | Tools Home | `bw-tools-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | Homepage tools preview. |
@@ -167,6 +170,11 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   mini-nav into Wix-managed blog header or article body DOM, because that caused
   header/Quick Summary flicker. The script skips
   non-`/post/` URLs.
+- `js/blog-journey-inject.js` - adds a mobile-only `In this guide` chip row
+  before the first visible heading and a topic-aware `Next step` module near the
+  end of each post. It reads `blog-index/data.json`, links to one related guide,
+  one relevant Berlin tool, and the booking page, and sends `bw_blog_journey_*`
+  analytics events. It skips non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
   `sessionStorage`, links the primary CTA to the booking route, and posts the

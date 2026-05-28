@@ -19,6 +19,7 @@ Source type: Server URL
 | Hero Home | `https://fenerszymanski.github.io/berlinwalk-widgets/hero-home/hero-home-element.js` | `bw-hero-home` | none |
 | How It Works | `https://fenerszymanski.github.io/berlinwalk-widgets/how-it-works/how-it-works-element.js` | `bw-how-it-works` | none |
 | Blog Home | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-home/blog-home-element.js` | `bw-blog-home` | none |
+| Blog Index | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js` | `bw-blog-index` | none |
 | Guide Home | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | `bw-guide-home` | none |
 | Tools Home | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | `bw-tools-home` | none |
 | Testimonials | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | `bw-testimonials` | none |
@@ -54,6 +55,14 @@ combines Yusuf's editorial note with a small `Plan your visit` tools card
 linking to `/berlin-tools`. Use it as a Custom Element, not an iframe, so the
 card can fit the column width. Suggested desktop element height: `960-980px`.
 
+Blog Index is the recommended replacement for the Wix-native `/blog` feed when
+Yusuf is ready to rebuild that page. Use one full-width Custom Element section:
+
+```html
+<bw-blog-index></bw-blog-index>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js"></script>
+```
+
 ## Blog Custom Code
 
 Add these through Wix Custom Code, not as iframe embeds. They self-skip when the
@@ -61,6 +70,7 @@ current URL is not a blog post.
 
 ```html
 <script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=24" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=1" defer></script>
 ```
 
 `blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from
@@ -73,6 +83,11 @@ internal scrolling. In v24, it waits until the site header/menu has cleared
 before becoming visible. It no longer injects any blog
 navigation into the Wix-managed post header or article body, avoiding the
 show-hide-show flicker and Quick Summary rerender.
+
+`blog-journey-inject.js` adds the mobile `In this guide` chip row and a
+topic-aware `Next step` module near the article end. It reads
+`blog-index/data.json`, recommends a related guide and tool, and tracks
+`bw_blog_journey_view` / `bw_blog_journey_click`.
 
 ## Sitewide Custom Code
 
