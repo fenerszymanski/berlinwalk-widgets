@@ -99,6 +99,20 @@ function leadKey(email, arrivalDate) {
   return email + '|' + arrivalDate;
 }
 
+function contactIdFrom(contact) {
+  if (!contact) return '';
+  return contact._id || contact.id || contact.contactId || (contact.contact && (contact.contact._id || contact.contact.id)) || '';
+}
+
+async function findContactByEmail(email) {
+  const results = await contacts.queryContacts()
+    .eq('primaryInfo.email', email)
+    .limit(1)
+    .find({ suppressAuth: true });
+
+  return results.items && results.items.length ? results.items[0] : null;
+}
+
 function labelKeyFrom(result) {
   if (!result) return '';
   if (result.key) return result.key;
@@ -108,15 +122,26 @@ function labelKeyFrom(result) {
 }
 
 async function ensureContact(email) {
-  const resolved = await contacts.appendOrCreateContact({
-    emails: [{ email, tag: 'MAIN', primary: true }]
-  });
-  const contactId = resolved && resolved.contactId;
+  let contact = await findContactByEmail(email);
+
+  if (!contact) {
+    try {
+      contact = await contacts.createContact({
+        emails: [{ email, primary: true }]
+      }, { suppressAuth: true });
+    } catch (error) {
+      contact = await findContactByEmail(email);
+      if (!contact) throw error;
+    }
+  }
+
+  const contactId = contactIdFrom(contact);
   if (!contactId) throw new Error('contact_not_created');
 
   try {
     const labelResult = await contacts.findOrCreateLabel(CONTACT_LABEL, { suppressAuth: true });
     const labelKey = labelKeyFrom(labelResult);
+
     if (labelKey) {
       await contacts.labelContact(contactId, [labelKey], { suppressAuth: true });
     }
@@ -132,6 +157,7 @@ async function findExistingLead(key) {
     .eq('leadKey', key)
     .limit(1)
     .find({ suppressAuth: true });
+
   return results.items && results.items.length ? results.items[0] : null;
 }
 
@@ -166,13 +192,21 @@ export async function saveFirstDayPlannerLead(payload) {
   };
 
   if (existing) {
-    const updated = await wixData.update(COLLECTION, Object.assign({}, existing, item), { suppressAuth: true });
+    const updated = await wixData.update(
+      COLLECTION,
+      Object.assign({}, existing, item),
+      { suppressAuth: true }
+    );
+
     return { contactId, leadId: updated._id, created: false, updated: true };
   }
 
-  const inserted = await wixData.insert(COLLECTION, Object.assign({}, item, {
-    createdAt: now
-  }), { suppressAuth: true });
+  const inserted = await wixData.insert(
+    COLLECTION,
+    Object.assign({}, item, { createdAt: now }),
+    { suppressAuth: true }
+  );
+
   return { contactId, leadId: inserted._id, created: true, updated: false };
 }
 
@@ -183,9 +217,12 @@ function messageIdFor(stage) {
 function stageDueForLead(lead, stage, berlinToday, berlinHour) {
   if (!lead || lead[stage.sentField]) return false;
   if (!lead.arrivalDate) return false;
+
   const dueDate = addDays(lead.arrivalDate, stage.offset);
+
   if (dueDate !== berlinToday) return false;
   if (stage.key === 'dayOf' && berlinHour >= 18) return false;
+
   return true;
 }
 
