@@ -4,6 +4,33 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (Handoff preference + subscribe TODO)
+
+**Did:** Recorded Yusuf's preference for simpler manual code/editor instructions.
+
+**Changed:**
+- `AGENTS.md` — added simple Turkish, one-step-at-a-time handoff style for Yusuf's manual code tasks.
+- Project root `AGENTS.md`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — mirrored the preference and added `subscriptionDebug: missing_api_key` as an open TODO.
+
+**Opened:** Fix `subscriptionDebug: missing_api_key` for the Survival Map subscribe response.
+**Closed:** None.
+
+**Next session should:** Keep manual Wix/code instructions short and step-by-step.
+
+## 2026-05-28 — Codex (Survival Map direct emails live)
+
+**Did:** Completed the Survival Map move from slow label-trigger automations to direct Velo-triggered emails.
+
+**Changed:**
+- `lead-form/velo/survivalMapEmails.js` — set `DIRECT_TRIGGERED_EMAILS_ENABLED = true`, welcome ID `VKufY4L`, owner notification ID `VKugjPv`, and passed `SITE_URL`.
+- `lead-form/velo/README.md`, `lead-form/email/README.md`, `AGENTS.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` / `velo-subscribe-direct-trigger-patch.js` — updated handoff docs to the final direct-email state.
+- Wix: Yusuf created both Developer Tools Triggered Emails and published the helper. Live tests logged `deliveryPath: direct_triggered_email`, `welcome:ok owner:ok`, no failures; old label-trigger automations were set inactive (`Welcome Email - v2` revision 7, `Owner Notification` revision 10).
+
+**Opened:** `subscriptionDebug: missing_api_key` still appears in the subscribe response, affecting Email Marketing subscribed status only.
+**Closed:** Upgrade Survival Map emails to true instant sends; duplicate-send risk from old label automations removed.
+
+**Next session should:** If Yusuf reports delivery issues, start with `source scripts/load-api-keys.sh && node scripts/survival-map-email-log-report.mjs --limit 100` from the workspace root.
+
 ## 2026-05-28 — Codex (Survival Map direct email trigger)
 
 **Did:** Added the Velo helper source for direct Survival Map welcome + owner notification sends.

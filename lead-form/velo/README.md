@@ -47,15 +47,14 @@ node scripts/survival-map-email-log-report.mjs --limit 100
 
 ## Live IDs verified on 2026-05-28
 
-- Subscriber welcome v2: `46a631f2-156e-4f14-9a8c-49d26fd97990`
-- Owner notification: `2fb9b51f-91cd-4705-9967-178f861df727`
+- Subscriber welcome direct Triggered Email ID: `VKufY4L`
+- Owner notification direct Triggered Email ID: `VKugjPv`
 - Owner contact for `info@yusufucuz.com`: `9e996f34-501f-4d45-8228-098680672e69`
 
 Important: the two `messageId` values above belong to Wix Automations email
-actions. They are not valid Velo `triggeredEmails.emailContact()` IDs. Until
-proper Developer Tools -> Triggered Emails templates exist, keep
-`DIRECT_TRIGGERED_EMAILS_ENABLED = false`; the helper only writes the log and
-the active label-trigger automations handle delivery.
+actions. They are not valid Velo `triggeredEmails.emailContact()` IDs. The live
+helper now uses the real Developer Tools -> Triggered Emails IDs above and has
+`DIRECT_TRIGGERED_EMAILS_ENABLED = true`.
 
 ## http-functions.js patch
 
@@ -86,7 +85,7 @@ instead of `payload`. Keep the existing success response shape, especially
 
 1. Test the live form with a fresh email address.
 2. Confirm the subscriber welcome email and owner notification arrive quickly.
-3. Set these two automations to inactive to avoid duplicate sends:
+3. Keep these two old label-trigger automations inactive to avoid duplicate sends:
    - `Berlin Survival Map Welcome Email - v2`
    - `Berlin Survival Map - Owner Notification`
 4. Keep `Berlin Survival Map Welcome Email` inactive and do not delete it. It

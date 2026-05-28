@@ -2,12 +2,12 @@ import { triggeredEmails } from 'wix-crm-backend';
 import wixData from 'wix-data';
 
 const LOG_COLLECTION = 'SurvivalMapEmailLogs';
-const DIRECT_TRIGGERED_EMAILS_ENABLED = false;
+const DIRECT_TRIGGERED_EMAILS_ENABLED = true;
 
-// These must be real Velo Developer Tools -> Triggered Emails IDs, not
-// Automation action messageIds. Leave blank until those templates exist.
-const SURVIVAL_MAP_WELCOME_EMAIL_ID = '';
-const OWNER_NOTIFICATION_EMAIL_ID = '';
+// These are real Velo Developer Tools -> Triggered Emails IDs, not
+// Automation action messageIds.
+const SURVIVAL_MAP_WELCOME_EMAIL_ID = 'VKufY4L';
+const OWNER_NOTIFICATION_EMAIL_ID = 'VKugjPv';
 const OWNER_CONTACT_ID = '9e996f34-501f-4d45-8228-098680672e69';
 
 function cleanText(value, fallback = '') {
@@ -74,7 +74,8 @@ export async function sendSurvivalMapEmails(subscriberContactId, payload = {}) {
     email: cleanEmail(payload.email),
     source: cleanText(payload.source),
     page: cleanText(payload.page),
-    offer: cleanText(payload.offer, 'berlin-survival-map')
+    offer: cleanText(payload.offer, 'berlin-survival-map'),
+    SITE_URL: 'https://www.berlinwalk.com'
   };
 
   const sends = [];

@@ -9,13 +9,15 @@ Checked through the Wix Automations API on 2026-05-28:
 
 - Subscriber welcome: `Berlin Survival Map Welcome Email - v2`
   - Automation ID: `7eeb7b18-8211-427e-aba6-14b81172cd2c`
-  - Revision checked: `3`
+  - Revision checked: `7`
+  - Status: inactive
   - Triggered Email messageId: `46a631f2-156e-4f14-9a8c-49d26fd97990`
   - Trigger: `contacts-label_added_to_contact`
   - Label filter: `custom.berlin-essentials-signup`
 - Owner notification: `Berlin Survival Map - Owner Notification`
   - Automation ID: `29ea42fe-9990-45ef-b9d7-b94a509a1190`
-  - Revision checked: `6`
+  - Revision checked: `10`
+  - Status: inactive
   - Triggered Email messageId: `2fb9b51f-91cd-4705-9967-178f861df727`
 - Template anchor: `Berlin Survival Map Welcome Email`
   - Automation ID: `5de2cbc8-cefa-47ba-91f2-0bbc4a0404b1`
@@ -24,11 +26,9 @@ Checked through the Wix Automations API on 2026-05-28:
   - Keep it inactive and do not delete it. It keeps the owner-notification
     Triggered Email template alive.
 
-The label-trigger automations work but can arrive 2-10 minutes late. The direct
-Velo patch in `../velo/` sends the same Triggered Email templates from the
-`/_functions/subscribe` endpoint and should be used for the live lead form.
-After that patch is published and tested, set the two active automations above
-to inactive to avoid duplicate sends.
+The label-trigger automations work but can arrive 2-10 minutes late, so they are
+inactive. The live lead form uses Developer Tools Triggered Email IDs instead:
+welcome `VKufY4L`, owner notification `VKugjPv`.
 
 ## Current PDF
 

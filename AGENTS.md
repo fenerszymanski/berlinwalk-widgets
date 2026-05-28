@@ -13,6 +13,9 @@ This file is the single source of truth for AI agents (Claude Code, Codex, or ot
 - **Owner:** Yusuf (single operator, also the tour guide)
 - **Repo:** `fenerszymanski/berlinwalk-widgets` on GitHub, deployed to `fenerszymanski.github.io/berlinwalk-widgets/` via GitHub Pages
 - **Local path:** `/Users/yusufucuz/Documents/New project/berlinwalk-widgets/`
+- **User handoff style:** When Yusuf needs to do code/editor steps manually,
+  explain in simple Turkish, one action at a time, with clear "now do this"
+  instructions.
 
 ## 2. What lives where
 
@@ -189,7 +192,8 @@ Pulled from `SESSION_LOG.md` — see that file for active state. As of the lates
 
 1. **Test cancel-on-cancel flow end-to-end.** Book + cancel a test tour, verify Velo logs show `cancelEvent status: 200` and E2 doesn't fire at +6h. If the externalEntityId mismatch, debug. *(Deferred far out per Yusuf on 2026-05-16.)*
 2. **Publish the route story map page.** After pushing `berlinwalk-widgets`, create/publish Wix `/berlin-walking-tour-route`, install `<bw-route-story>`, paste `route-story/SEO_SETTINGS.md`, then verify header/footer/homepage route links.
-3. **Upgrade Survival Map emails to true instant sends.** Current live state logs each signup to `SurvivalMapEmailLogs` and delivers through active label-trigger automations. To bypass Wix automation latency, create real Developer Tools → Triggered Emails templates and paste their generated Email IDs into `lead-form/velo/survivalMapEmails.js`; automation action `messageId`s are not valid for Velo direct sends.
+3. **Monitor Survival Map direct emails.** Live `/_functions/subscribe` now sends welcome + owner emails directly through Developer Tools Triggered Email IDs `VKufY4L` and `VKugjPv`; old label-trigger automations are inactive to avoid duplicates. Use `source scripts/load-api-keys.sh && node scripts/survival-map-email-log-report.mjs --limit 100` from the workspace root to audit delivery.
+4. **Fix `subscriptionDebug: missing_api_key`.** Direct Survival Map emails work, but the subscribe response still reports this Email Marketing subscription-status issue.
 
 ## 9. Protocol for ending a session
 
