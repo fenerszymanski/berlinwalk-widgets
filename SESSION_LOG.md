@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (BerlinTools CTA polish)
+
+**Did:** Mirrored the live mobile `/tools/*` CTA polish in the widget repo source.
+
+**Changed:**
+- `js/berlintools-mobile-fixes.js` — raised sticky/footer spacing to 136px, tightened `More Berlin Tools` bottom padding, collapsed the empty spacer before the tour CTA, and added readable CTA band padding/border rules.
+- Project root `berlintools-mobile-tools-polish-custom-code.html`, `PROJECT_MEMORY.md`, `SESSION_LOG.md` — documented and deployed the live inline source.
+- Wix Custom Embed `Berlin tools fix` (`f412a295-3d53-4339-bcbc-5d1bb1389be9`) — updated to revision 10.
+
+**Opened:** Push this repo when convenient so GitHub has the matching source.
+**Closed:** Live Daily Budget mobile QA passed at 393px; revision 10 CSS loaded, related-card-to-CTA gap is 48px, and horizontal overflow is 0.
+
+**Next session should:** Keep the live Wix embed inline unless deliberately moving back to the external GitHub Pages script.
+
 ## 2026-05-28 — Codex (Handoff preference + subscribe TODO)
 
 **Did:** Recorded Yusuf's preference for simpler manual code/editor instructions.
