@@ -57,8 +57,8 @@ the direct email IDs remain unchanged.
 
 ## Wix paste workflow
 
-1. Open Wix Automations -> `Berlin Survival Map Welcome Email - v2`.
-2. Open the email step.
+1. Open Wix Developer Tools -> Triggered Emails.
+2. Open the welcome email with ID `VKufY4L`.
 3. Replace the old content with one HTML block.
 4. Paste everything between `HTML BLOCK START` and `HTML BLOCK END` from
    `wix-html-block.html`.

@@ -4,6 +4,43 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-29 — Codex (Blog lead CTA visual polish)
+
+**Did:** Polished the blog lead form CTA visual after Yusuf flagged the left-side image as bad.
+
+**Changed:**
+- `lead-form/index.html` — removed the heavy dark-green poster/mockup treatment, added a calmer cream PDF preview panel with green spine/dots, clearer cover thumbnail, tighter layout, and value chips.
+
+**Opened:** Push the repo so GitHub Pages/live blog embeds load the updated CTA.
+**Closed:** Local Chrome QA passed for desktop/mobile, mocked submit success, correct PDF URL, no old public Map wording, and zero horizontal overflow.
+
+**Next session should:** Live-QA the CTA inside a Wix blog post after deploy.
+
+## 2026-05-28 — Codex (Blog native feed suppressor)
+
+**Did:** Hid the undeletable Wix-native blog feed section from the custom `/blog` index.
+
+**Changed:**
+- `blog-index/blog-index-element.js` — `<bw-blog-index>` now installs a `/blog`-only suppressor for live Wix feed section `#comp-mm3d94ml`, plus fallback detection for Wix Blog `data-hook` roots, and watches Wix re-renders with `MutationObserver`.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the live section ID and behavior.
+
+**Opened:** Push `berlinwalk-widgets` so GitHub Pages/Wix load the suppressor.
+**Closed:** Live DOM check confirmed the original Wix feed is `#comp-mm3d94ml`, separate from the custom index section `#comp-mppyfuyg`, with Blog feed hooks inside the native section.
+
+**Next session should:** After deploy, live-QA `/blog` once to confirm the lower native feed is gone on desktop and mobile.
+
+## 2026-05-28 — Codex (First-Day email paste prep)
+
+**Did:** Prepared the final Wix Triggered Email paste after Yusuf pushed the widget repo.
+
+**Changed:**
+- `lead-form/email/wix-html-block.html`, `lead-form/email/README.md` — fixed instructions to target direct Triggered Email ID `VKufY4L`; copied the actual HTML block to the macOS clipboard.
+
+**Opened:** Paste clipboard into Wix Developer Tools -> Triggered Emails -> `VKufY4L`; set subject/preview; save; then live-test one signup.
+**Closed:** GitHub Pages now serves the new cover asset and First-Day Guide lead form / exit popup JS.
+
+**Next session should:** Smoke-test the live email after the Wix editor save and audit the newest `SurvivalMapEmailLogs` rows.
+
 ## 2026-05-28 — Codex (Blog index v3 Vox layout pass)
 
 **Did:** Pushed the `/blog` custom index closer to Yusuf's Vox references: stronger featured area, image-heavy shelves, popular/newsletter block, and one large feature category.

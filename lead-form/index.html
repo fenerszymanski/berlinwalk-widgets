@@ -42,55 +42,68 @@
 
     .bw-wrap {
       border: 1px solid var(--bw-border);
-      border-radius: 14px;
+      border-radius: 12px;
       background: var(--bw-white);
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+      box-shadow: 0 10px 28px rgba(27, 94, 32, 0.08);
       display: grid;
-      grid-template-columns: 0.8fr 1.35fr;
-      min-height: 312px;
+      grid-template-columns: 192px minmax(0, 1fr);
+      min-height: 244px;
     }
 
     .bw-visual {
-      background:
-        radial-gradient(circle at 18% 18%, rgba(255, 230, 0, 0.2), transparent 30%),
-        linear-gradient(145deg, #123d16 0%, #1B5E20 54%, #7CB342 155%);
-      padding: 20px 18px;
+      background: #FAFAF5;
+      border-right: 1px solid var(--bw-border);
+      padding: 18px 16px;
       position: relative;
       overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 190px;
+      min-height: 210px;
       isolation: isolate;
     }
 
     .bw-visual::before {
       content: "";
       position: absolute;
-      top: -35%;
-      right: -20%;
-      width: 140px;
-      height: 140px;
-      background: var(--bw-yellow);
-      opacity: 0.08;
+      inset: 0 auto 0 0;
+      width: 42px;
+      background: var(--bw-green);
+      z-index: 0;
+    }
+
+    .bw-visual::after {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 50px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
+      background: var(--bw-yellow);
+      box-shadow:
+        0 36px 0 var(--bw-yellow),
+        0 72px 0 var(--bw-yellow),
+        0 108px 0 var(--bw-yellow);
+      z-index: 1;
     }
 
     .bw-pdf-wrap {
       position: relative;
       z-index: 2;
+      margin-left: 18px;
     }
 
     .bw-pdf-mock {
-      width: 122px;
-      height: 172px;
+      width: 128px;
+      height: 181px;
       background: var(--bw-white) url("assets/berlin-first-day-survival-guide-cover.jpg") center/cover no-repeat;
-      border: 4px solid rgba(250, 250, 245, 0.95);
-      border-radius: 8px;
-      box-shadow: 0 14px 34px rgba(0, 0, 0, 0.32);
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 6px;
+      box-shadow: 0 12px 26px rgba(27, 94, 32, 0.18);
       position: relative;
-      transform: rotate(-4deg);
+      transform: rotate(-2deg);
       z-index: 2;
     }
 
@@ -104,7 +117,7 @@
     }
 
     .bw-pdf-header {
-      display: none;
+      display: none !important;
       background: var(--bw-green);
       height: 30px;
       border-radius: 6px 6px 0 0;
@@ -130,7 +143,7 @@
     }
 
     .bw-pdf-lines {
-      display: none;
+      display: none !important;
       padding: 10px 8px;
       display: flex;
       flex-direction: column;
@@ -153,8 +166,8 @@
 
     .bw-pdf-badge {
       position: absolute;
-      top: -10px;
-      right: -24px;
+      top: -13px;
+      right: -18px;
       background: var(--bw-yellow);
       color: var(--bw-green);
       font-size: 9px;
@@ -162,14 +175,14 @@
       letter-spacing: 1.2px;
       padding: 6px 10px;
       border-radius: 20px;
-      transform: rotate(8deg);
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+      transform: rotate(4deg);
+      box-shadow: 0 5px 14px rgba(27, 94, 32, 0.2);
       z-index: 3;
       white-space: nowrap;
     }
 
     .bw-form {
-      padding: 22px 24px;
+      padding: 24px 28px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -179,28 +192,51 @@
       color: var(--bw-green);
       font-size: 10px;
       font-weight: 800;
-      letter-spacing: 2.5px;
+      letter-spacing: 2.4px;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 9px;
     }
 
     .bw-title {
-      margin: 0 0 8px;
-      font-size: 20px;
+      margin: 0 0 9px;
+      font-size: 22px;
       font-weight: 800;
       color: var(--bw-text);
       line-height: 1.22;
     }
 
     .bw-desc {
-      margin: 0 0 14px;
+      margin: 0 0 13px;
       font-size: 13px;
       color: var(--bw-muted);
       line-height: 1.5;
     }
 
-    .bw-input-row {
+    .bw-highlights {
       display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 0 0 15px;
+    }
+
+    .bw-highlights span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 999px;
+      background: #FAFAF5;
+      color: var(--bw-green);
+      font-size: 10.5px;
+      font-weight: 800;
+      line-height: 1;
+      padding: 6px 9px;
+      white-space: nowrap;
+    }
+
+    .bw-input-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 8px;
       margin-bottom: 9px;
     }
@@ -208,11 +244,11 @@
     .bw-input {
       flex: 1;
       min-width: 0;
-      padding: 12px 14px;
-      font-size: 14px;
+      padding: 13px 14px;
+      font-size: 13.5px;
       font-family: inherit;
       border: 1.5px solid var(--bw-border);
-      border-radius: 10px;
+      border-radius: 8px;
       outline: none;
       background: #FAFAF5;
       color: var(--bw-text);
@@ -228,15 +264,15 @@
     }
 
     .bw-submit {
-      padding: 12px 18px;
+      padding: 13px 17px;
       background: var(--bw-green);
       color: var(--bw-yellow);
       font-family: inherit;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 800;
       letter-spacing: 0.3px;
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
       cursor: pointer;
       white-space: nowrap;
     }
@@ -355,8 +391,20 @@
         margin-bottom: 10px;
       }
 
+      .bw-highlights {
+        gap: 5px;
+        margin-bottom: 11px;
+      }
+
+      .bw-highlights span {
+        min-height: 21px;
+        font-size: 9.5px;
+        padding: 5px 7px;
+      }
+
       .bw-input-row {
         flex-direction: column;
+        display: flex;
         gap: 7px;
         margin-bottom: 7px;
       }
@@ -416,6 +464,11 @@
         <div class="bw-kicker">First day in Berlin</div>
         <h3 class="bw-title">Get the free<br>Berlin First-Day Survival Guide</h3>
         <p class="bw-desc">Airport tickets, toilets, luggage, cash, Sundays, and the first walk that makes Berlin easier to understand.</p>
+        <div class="bw-highlights" aria-label="Guide includes">
+          <span>BER tickets</span>
+          <span>Sunday rules</span>
+          <span>Toilets + luggage</span>
+        </div>
 
         <form class="bw-signup-form" novalidate>
           <div class="bw-input-row">
