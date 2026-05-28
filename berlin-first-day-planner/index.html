@@ -973,6 +973,7 @@
   var TIMEZONE = 'Europe/Berlin';
   var FORECAST_MAX_DAYS = 15;
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=berlin_first_day_planner&utm_content=book_free_spot';
+  var BW_MINI_LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_4d96e164d26241fd9eb009843ec2084a~mv2.png';
   var MONTH_CLIMATE = [
     { name: 'January', hi: 3, lo: -2, rain: 40, rainDays: '10', sun: 2, icon: '❄️', season: 'winter', pack: 'Heavy winter coat, warm hat, gloves, scarf, and waterproof shoes.' },
     { name: 'February', hi: 5, lo: -2, rain: 33, rainDays: '8', sun: 3, icon: '🌨️', season: 'winter', pack: 'Heavy coat, layers, waterproof shoes, and warm accessories.' },
@@ -1772,15 +1773,126 @@
     setText('[data-action-status]', message || '');
   }
 
+  var pdfLogoDataUrlPromise = null;
+
+  function loadPdfLogoDataUrl() {
+    if (pdfLogoDataUrlPromise) return pdfLogoDataUrlPromise;
+    if (typeof fetch !== 'function' || typeof FileReader === 'undefined') {
+      pdfLogoDataUrlPromise = Promise.resolve('');
+      return pdfLogoDataUrlPromise;
+    }
+    pdfLogoDataUrlPromise = fetch(BW_MINI_LOGO_URL, { mode: 'cors' })
+      .then(function (response) {
+        if (!response.ok) throw new Error('Logo request failed');
+        return response.blob();
+      })
+      .then(function (blob) {
+        return new Promise(function (resolve, reject) {
+          var reader = new FileReader();
+          reader.onload = function () { resolve(reader.result || ''); };
+          reader.onerror = function () { reject(new Error('Logo read failed')); };
+          reader.readAsDataURL(blob);
+        });
+      })
+      .catch(function () { return ''; });
+    return pdfLogoDataUrlPromise;
+  }
+
+  function transportAdvice() {
+    var luggage = state.luggage === 'luggage';
+    if (state.start === 'ber') {
+      return {
+        title: 'From BER Airport to central Berlin',
+        ticket: 'Buy an ABC ticket before boarding. BER is Zone C; Alexanderplatz and Hauptbahnhof are Zone A.',
+        rows: [
+          { label: 'Fastest board check', copy: 'Use FEX or a regional train toward Berlin Hbf or Alexanderplatz when the airport boards show it.' },
+          { label: 'Simplest direct route', copy: 'S9 runs direct to S+U Alexanderplatz. It is slower than express trains, but very easy after a flight.' },
+          { label: 'If your hotel is south/west', copy: 'S45 can make sense toward Sudkreuz or south-west connections; otherwise keep the route rail-simple.' }
+        ],
+        luggage: luggage ? 'Drop luggage before sightseeing: hotel first, or central station storage if check-in is not ready.' : 'Travel light if you can. A suitcase makes the first walk through Mitte much less fun.',
+        note: 'Check the live airport station boards or BVG/VBB app before boarding; line names and platforms can change.'
+      };
+    }
+    if (state.start === 'hbf') {
+      return {
+        title: 'From Berlin Hauptbahnhof',
+        ticket: 'AB is enough. Use a single ticket for one transfer, or an AB day ticket if you will ride again later.',
+        rows: [
+          { label: 'Easy eastbound move', copy: 'Take the S-Bahn eastbound toward Friedrichstrasse, Hackescher Markt, or Alexanderplatz.' },
+          { label: 'For the tour area', copy: 'Aim for S+U Alexanderplatz, then walk a few minutes to the World Clock meeting area.' },
+          { label: 'If bags are heavy', copy: 'Use station lockers or a storage service near Hbf before trying to sightsee.' }
+        ],
+        luggage: luggage ? 'Handle bags at Hbf first. The city center is easier when both hands are free.' : 'Hbf is a good clean start: do not turn the first transfer into a many-change puzzle.',
+        note: 'Keep the first route on rail if possible; buses and trams are useful later, but less obvious on arrival day.'
+      };
+    }
+    if (state.start === 'alex') {
+      return {
+        title: 'Already around Alexanderplatz / Mitte',
+        ticket: 'You may not need a ticket for the first loop. Buy AB only if you decide to ride.',
+        rows: [
+          { label: 'Best first walk', copy: 'World Clock, TV Tower, Marienkirche, Nikolaiviertel, and the Museum Island edge make a compact orientation loop.' },
+          { label: 'If you are tired', copy: 'Use one-stop U-Bahn or S-Bahn hops only when they genuinely save your legs.' },
+          { label: 'For BerlinWalk', copy: 'Stay close to S+U Alexanderplatz and the World Clock so the 11:30 tour is easy to join.' }
+        ],
+        luggage: luggage ? 'If you have luggage, store it before the loop. Alexanderplatz is practical, but rolling bags are annoying on cobbles and crossings.' : 'This is the easiest start point: walk first, ride later.',
+        note: 'Do not over-plan transport here. The value is that central Berlin is already under your feet.'
+      };
+    }
+    return {
+      title: 'From your hotel or another Berlin start point',
+      ticket: 'AB usually covers normal city travel. Choose a day ticket if you expect two or more rides.',
+      rows: [
+        { label: 'First target', copy: 'Use the nearest U-Bahn or S-Bahn toward Alexanderplatz or Hackescher Markt.' },
+        { label: 'If you are in the west', copy: 'A rail route via Friedrichstrasse or Alexanderplatz is usually easier than a bus-plus-tram chain.' },
+        { label: 'If you are outside the center', copy: 'Pick one direct rail line into Mitte, then walk. Save complicated transfers for day two.' }
+      ],
+      luggage: luggage ? 'Check in or leave bags before the sightseeing part. Your first day should not become luggage logistics.' : 'Save the hotel address offline, then build the day around one simple ride into Mitte.',
+      note: 'Use your map app for the exact platform; the planner gives the clean first-day logic, not live routing.'
+    };
+  }
+
+  function defaultWeatherSummary() {
+    return {
+      mode: 'Weather not loaded',
+      dateText: formatDisplayDate(state.date),
+      theme: 'partly',
+      title: 'Weather not loaded',
+      copy: 'Check the forecast before you leave.',
+      metrics: [
+        { label: 'Temp', value: 'Check' },
+        { label: 'Rain', value: 'Check' },
+        { label: 'Wind', value: 'Check' }
+      ],
+      advice: 'Comfortable shoes and one layer are the safe Berlin default.'
+    };
+  }
+
   function pdfLines() {
     var labels = selectedLabels();
     var plan = latestPlan || buildPlan();
-    var weather = latestWeatherSummary || {
-      title: 'Weather not loaded',
-      advice: 'Check the forecast before you leave.',
-      metrics: []
+    var weather = latestWeatherSummary || defaultWeatherSummary();
+    return {
+      labels: labels,
+      plan: plan,
+      weather: weather,
+      transport: transportAdvice()
     };
-    return { labels: labels, plan: plan, weather: weather };
+  }
+
+  function weatherPalette(theme) {
+    var palettes = {
+      sunny: { bg: [231, 245, 255], border: [245, 166, 35], text: [11, 75, 120] },
+      partly: { bg: [237, 247, 255], border: [124, 179, 66], text: [36, 90, 115] },
+      cloudy: { bg: [241, 243, 244], border: [109, 114, 120], text: [63, 71, 77] },
+      fog: { bg: [241, 243, 244], border: [109, 114, 120], text: [63, 71, 77] },
+      rain: { bg: [234, 244, 255], border: [47, 128, 237], text: [23, 76, 138] },
+      storm: { bg: [234, 244, 255], border: [47, 128, 237], text: [23, 76, 138] },
+      snow: { bg: [242, 248, 255], border: [119, 170, 221], text: [49, 90, 125] },
+      wind: { bg: [245, 240, 255], border: [142, 107, 190], text: [81, 59, 115] },
+      climate: { bg: [255, 247, 230], border: [245, 166, 35], text: [128, 84, 0] }
+    };
+    return palettes[theme] || palettes.partly;
   }
 
   function downloadPdf() {
@@ -1791,83 +1903,339 @@
       return;
     }
 
+    setActionStatus('Preparing PDF...');
     var data = pdfLines();
-    var doc = new api({ unit: 'pt', format: 'a4' });
-    var left = 42;
-    var right = 553;
-    var width = right - left;
-    var y = 48;
+    Promise.resolve(loadPdfLogoDataUrl()).then(function (logoDataUrl) {
+      var doc = new api({ unit: 'pt', format: 'a4' });
+      var pageW = doc.internal.pageSize.getWidth();
+      var pageH = doc.internal.pageSize.getHeight();
+      var margin = 36;
+      var contentW = pageW - margin * 2;
+      var y = 34;
+      var green = [27, 94, 32];
+      var yellow = [255, 230, 0];
+      var ink = [33, 45, 35];
+      var muted = [82, 95, 82];
+      var pale = [248, 251, 242];
+      var line = [207, 224, 188];
 
-    function ensure(space) {
-      if (y + space > 790) {
-        doc.addPage();
-        y = 44;
+      function rgb(method, color) {
+        doc[method](color[0], color[1], color[2]);
       }
-    }
 
-    function text(value, size, style, color, gap) {
-      ensure(size * 2);
-      doc.setFont('helvetica', style || 'normal');
-      doc.setFontSize(size);
-      doc.setTextColor(color ? color[0] : 33, color ? color[1] : 33, color ? color[2] : 33);
-      var lines = doc.splitTextToSize(String(value || ''), width);
-      doc.text(lines, left, y);
-      y += lines.length * (size + 5) + (gap || 7);
-    }
+      function split(value, width, size, style) {
+        doc.setFont('helvetica', style || 'normal');
+        doc.setFontSize(size);
+        return doc.splitTextToSize(String(value || ''), width);
+      }
 
-    doc.setFillColor(27, 94, 32);
-    doc.rect(0, 0, 595, 104, 'F');
-    doc.setTextColor(255, 230, 0);
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.text('BERLINWALK', left, 38);
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(24);
-    doc.text('Berlin First-Day Plan', left, 72);
-    y = 128;
+      function text(value, x, posY, size, style, color, options) {
+        doc.setFont('helvetica', style || 'normal');
+        doc.setFontSize(size);
+        rgb('setTextColor', color || ink);
+        doc.text(value, x, posY, options || {});
+      }
 
-    text(data.plan.displayDate + ' · ' + data.plan.title, 16, 'bold', [27, 94, 32], 10);
-    text(data.plan.summary, 10, 'normal', [55, 68, 55], 10);
+      function ensure(space) {
+        if (y + space > pageH - 54) {
+          doc.addPage();
+          y = 42;
+        }
+      }
 
-    text('Choices', 12, 'bold', [27, 94, 32], 4);
-    text('Arrival: ' + data.labels.arrival + '   Start: ' + data.labels.start + '   Energy: ' + data.labels.energy, 9, 'normal', [70, 82, 70], 2);
-    text('Priority: ' + data.labels.priority + '   Luggage: ' + data.labels.luggage, 9, 'normal', [70, 82, 70], 10);
+      function drawVectorLogo(x, posY, size) {
+        var cx = x + size / 2;
+        var cy = posY + size / 2;
+        rgb('setFillColor', yellow);
+        doc.circle(cx, cy, size / 2, 'F');
+        rgb('setDrawColor', green);
+        doc.setLineWidth(2);
+        doc.circle(cx, cy, size / 2 - 1, 'S');
+        text('BW', cx, cy + size * 0.12, size * 0.3, 'bold', green, { align: 'center' });
+      }
 
-    text('Quick checks', 12, 'bold', [27, 94, 32], 4);
-    text('Ticket: ' + data.plan.ticket + '   Open date: ' + data.plan.status.label + '   Tour fit: ' + data.plan.tourFit, 9, 'normal', [70, 82, 70], 10);
+      function drawLogo(x, posY, size) {
+        if (logoDataUrl) {
+          try {
+            var format = logoDataUrl.indexOf('image/jpeg') !== -1 ? 'JPEG' : 'PNG';
+            doc.addImage(logoDataUrl, format, x, posY, size, size);
+            return;
+          } catch (error) {}
+        }
+        drawVectorLogo(x, posY, size);
+      }
 
-    text('Weather', 12, 'bold', [27, 94, 32], 4);
-    text(data.weather.title + '. ' + data.weather.advice, 9, 'normal', [70, 82, 70], 10);
+      function drawHeader() {
+        rgb('setFillColor', green);
+        doc.rect(0, 0, pageW, 118, 'F');
+        drawLogo(margin, 28, 52);
+        text('BERLINWALK', margin + 66, 45, 12, 'bold', yellow);
+        text('Berlin First-Day Plan', margin + 66, 75, 23, 'bold', [255, 255, 255]);
+        text(data.plan.displayDate + ' | ' + data.plan.title, margin + 66, 96, 10.5, 'normal', [240, 248, 236]);
+        y = 142;
+      }
 
-    text('Timeline', 12, 'bold', [27, 94, 32], 4);
-    data.plan.steps.forEach(function (step) {
-      text(step.time + ' - ' + step.title, 10, 'bold', [27, 94, 32], 1);
-      text(step.copy, 9, 'normal', [70, 82, 70], 5);
+      function section(titleValue) {
+        ensure(28);
+        text(titleValue, margin, y, 13, 'bold', green);
+        y += 16;
+      }
+
+      function rounded(x, posY, w, h, fill, stroke) {
+        rgb('setFillColor', fill || [255, 255, 255]);
+        rgb('setDrawColor', stroke || line);
+        doc.setLineWidth(0.8);
+        doc.roundedRect(x, posY, w, h, 8, 8, 'FD');
+      }
+
+      function drawSummary() {
+        var lines = split(data.plan.summary, contentW, 10, 'normal');
+        ensure(lines.length * 14 + 20);
+        rgb('setFillColor', pale);
+        doc.roundedRect(margin, y - 8, contentW, lines.length * 14 + 16, 8, 8, 'F');
+        rgb('setDrawColor', line);
+        doc.roundedRect(margin, y - 8, contentW, lines.length * 14 + 16, 8, 8, 'S');
+        text(lines, margin + 14, y + 7, 10, 'normal', [55, 68, 55]);
+        y += lines.length * 14 + 24;
+      }
+
+      function drawGrid(items, columns) {
+        var gap = 8;
+        var colW = (contentW - gap * (columns - 1)) / columns;
+        var cellH = 50;
+        var rows = Math.ceil(items.length / columns);
+        ensure(rows * (cellH + gap) + 4);
+        items.forEach(function (item, index) {
+          var col = index % columns;
+          var row = Math.floor(index / columns);
+          var x = margin + col * (colW + gap);
+          var posY = y + row * (cellH + gap);
+          rounded(x, posY, colW, cellH, [255, 255, 255], line);
+          text(item.label.toUpperCase(), x + 10, posY + 17, 7, 'bold', [92, 112, 86]);
+          text(split(item.value, colW - 20, 10, 'bold'), x + 10, posY + 35, 10, 'bold', green);
+        });
+        y += rows * (cellH + gap) + 10;
+      }
+
+      function drawWeatherGlyph(x, posY, theme) {
+        var palette = weatherPalette(theme);
+        rgb('setFillColor', [255, 255, 255]);
+        doc.circle(x + 32, posY + 32, 26, 'F');
+        rgb('setDrawColor', palette.border);
+        doc.setLineWidth(1.2);
+        doc.circle(x + 32, posY + 32, 26, 'S');
+        if (theme === 'rain' || theme === 'storm') {
+          rgb('setFillColor', [170, 190, 205]);
+          doc.ellipse(x + 29, posY + 28, 16, 9, 'F');
+          doc.ellipse(x + 42, posY + 28, 12, 8, 'F');
+          rgb('setDrawColor', [47, 128, 237]);
+          doc.line(x + 22, posY + 42, x + 18, posY + 50);
+          doc.line(x + 34, posY + 42, x + 30, posY + 50);
+          doc.line(x + 46, posY + 42, x + 42, posY + 50);
+          if (theme === 'storm') {
+            rgb('setDrawColor', [245, 166, 35]);
+            doc.line(x + 37, posY + 32, x + 31, posY + 43);
+            doc.line(x + 31, posY + 43, x + 39, posY + 43);
+          }
+          return;
+        }
+        if (theme === 'cloudy' || theme === 'fog') {
+          rgb('setFillColor', [178, 188, 196]);
+          doc.ellipse(x + 27, posY + 32, 15, 9, 'F');
+          doc.ellipse(x + 42, posY + 32, 13, 8, 'F');
+          if (theme === 'fog') {
+            rgb('setDrawColor', [109, 114, 120]);
+            doc.line(x + 18, posY + 45, x + 48, posY + 45);
+            doc.line(x + 23, posY + 51, x + 53, posY + 51);
+          }
+          return;
+        }
+        if (theme === 'snow') {
+          rgb('setDrawColor', [119, 170, 221]);
+          doc.line(x + 32, posY + 17, x + 32, posY + 47);
+          doc.line(x + 19, posY + 24, x + 45, posY + 40);
+          doc.line(x + 45, posY + 24, x + 19, posY + 40);
+          return;
+        }
+        if (theme === 'wind') {
+          rgb('setDrawColor', [142, 107, 190]);
+          doc.line(x + 17, posY + 25, x + 49, posY + 25);
+          doc.line(x + 22, posY + 34, x + 54, posY + 34);
+          doc.line(x + 16, posY + 43, x + 44, posY + 43);
+          return;
+        }
+        rgb('setFillColor', [245, 166, 35]);
+        doc.circle(x + 29, posY + 28, 11, 'F');
+        if (theme === 'partly') {
+          rgb('setFillColor', [190, 205, 214]);
+          doc.ellipse(x + 35, posY + 37, 15, 8, 'F');
+          doc.ellipse(x + 48, posY + 37, 10, 7, 'F');
+        }
+      }
+
+      function drawWeatherCard() {
+        var palette = weatherPalette(data.weather.theme);
+        var metricText = (data.weather.metrics || []).map(function (metric) {
+          return metric.label + ': ' + metric.value;
+        }).join('   ');
+        var copy = data.weather.copy || '';
+        var body = copy + (copy ? ' ' : '') + data.weather.advice;
+        var titleLines = split(data.weather.title, contentW - 106, 13, 'bold');
+        var bodyLines = split(body, contentW - 106, 9.5, 'normal');
+        var h = Math.max(118, 52 + titleLines.length * 14 + bodyLines.length * 12);
+        ensure(h + 8);
+        rounded(margin, y, contentW, h, palette.bg, palette.border);
+        rgb('setFillColor', palette.border);
+        doc.rect(margin, y, 5, h, 'F');
+        drawWeatherGlyph(margin + 18, y + 24, data.weather.theme);
+        text((data.weather.mode || 'Weather') + ' | ' + (data.weather.dateText || data.plan.displayDate), margin + 94, y + 22, 8, 'bold', palette.text);
+        text(titleLines, margin + 94, y + 42, 13, 'bold', palette.text);
+        text(metricText, margin + 94, y + 66 + (titleLines.length - 1) * 14, 8.5, 'bold', [55, 68, 55]);
+        text(bodyLines, margin + 94, y + 86 + (titleLines.length - 1) * 14, 9.5, 'normal', [55, 68, 55]);
+        y += h + 18;
+      }
+
+      function drawTransportCard() {
+        var rows = data.transport.rows || [];
+        var rowLines = rows.map(function (row) {
+          return split(row.copy, contentW - 166, 8.8, 'normal');
+        });
+        var ticketLines = split(data.transport.ticket, contentW - 30, 9.5, 'normal');
+        var noteLines = split(data.transport.luggage + ' ' + data.transport.note, contentW - 30, 8.8, 'normal');
+        var h = 56 + ticketLines.length * 12 + noteLines.length * 11;
+        rowLines.forEach(function (lines) { h += Math.max(34, lines.length * 11 + 14); });
+        ensure(h + 8);
+        rounded(margin, y, contentW, h, [255, 253, 244], [230, 203, 94]);
+        text(data.transport.title, margin + 14, y + 22, 12, 'bold', green);
+        text(ticketLines, margin + 14, y + 40, 9.5, 'normal', [55, 68, 55]);
+        var rowY = y + 47 + ticketLines.length * 12;
+        rows.forEach(function (row, index) {
+          var numberX = margin + 16;
+          var rowH = Math.max(34, rowLines[index].length * 11 + 14);
+          rgb('setFillColor', green);
+          doc.circle(numberX + 9, rowY + 13, 9, 'F');
+          text(String(index + 1), numberX + 9, rowY + 16, 7.5, 'bold', [255, 255, 255], { align: 'center' });
+          text(row.label, margin + 44, rowY + 13, 8.8, 'bold', green);
+          text(rowLines[index], margin + 148, rowY + 13, 8.8, 'normal', [55, 68, 55]);
+          rowY += rowH;
+        });
+        rgb('setDrawColor', [230, 203, 94]);
+        doc.line(margin + 14, rowY + 2, margin + contentW - 14, rowY + 2);
+        text(noteLines, margin + 14, rowY + 18, 8.8, 'normal', [88, 82, 54]);
+        y += h + 18;
+      }
+
+      function drawTimeline() {
+        data.plan.steps.forEach(function (step) {
+          var titleLines = split(step.title, contentW - 102, 10.5, 'bold');
+          var bodyLines = split(step.copy, contentW - 102, 9, 'normal');
+          var h = Math.max(62, 24 + titleLines.length * 13 + bodyLines.length * 11);
+          ensure(h + 8);
+          rounded(margin, y, contentW, h, [255, 255, 255], line);
+          rgb('setFillColor', pale);
+          doc.roundedRect(margin + 10, y + 12, 66, h - 24, 7, 7, 'F');
+          text(step.time, margin + 43, y + h / 2 + 4, 9.5, 'bold', green, { align: 'center' });
+          text(titleLines, margin + 92, y + 23, 10.5, 'bold', green);
+          text(bodyLines, margin + 92, y + 40 + (titleLines.length - 1) * 13, 9, 'normal', muted);
+          y += h + 8;
+        });
+        y += 4;
+      }
+
+      function drawBooking() {
+        var lines = split(BOOKING_URL, contentW - 28, 8.2, 'normal');
+        ensure(88);
+        rounded(margin, y, contentW, 86, [246, 250, 239], line);
+        text('Book your free spot', margin + 14, y + 24, 12, 'bold', green);
+        text('Daily 11:30 from the World Clock at Alexanderplatz. The walk is about 2 hours and tip-based.', margin + 14, y + 42, 9.2, 'normal', [55, 68, 55]);
+        rgb('setTextColor', [47, 128, 237]);
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8.2);
+        if (typeof doc.textWithLink === 'function') {
+          doc.textWithLink(lines[0], margin + 14, y + 62, { url: BOOKING_URL });
+          if (lines.length > 1) doc.text(lines.slice(1), margin + 14, y + 74);
+        } else {
+          doc.text(lines, margin + 14, y + 62);
+        }
+        y += 104;
+      }
+
+      function drawFooters() {
+        var pages = doc.getNumberOfPages();
+        for (var page = 1; page <= pages; page += 1) {
+          doc.setPage(page);
+          rgb('setDrawColor', line);
+          doc.line(margin, pageH - 36, pageW - margin, pageH - 36);
+          drawLogo(margin, pageH - 29, 18);
+          text('berlinwalk.com | @berlinwalkingtour', margin + 26, pageH - 16, 8.5, 'bold', green);
+          text('Page ' + page + ' / ' + pages, pageW - margin, pageH - 16, 8, 'normal', muted, { align: 'right' });
+        }
+      }
+
+      drawHeader();
+      drawSummary();
+      section('Your choices');
+      drawGrid([
+        { label: 'Arrival', value: data.labels.arrival || '-' },
+        { label: 'Start', value: data.labels.start || '-' },
+        { label: 'Energy', value: data.labels.energy || '-' },
+        { label: 'Priority', value: data.labels.priority || '-' },
+        { label: 'Luggage', value: data.labels.luggage || '-' }
+      ], 3);
+      section('Quick checks');
+      drawGrid([
+        { label: 'Ticket', value: data.plan.ticket },
+        { label: 'Open date', value: data.plan.status.label },
+        { label: 'Tour fit', value: data.plan.tourFit }
+      ], 3);
+      section('Expected weather');
+      drawWeatherCard();
+      section('Public transport');
+      drawTransportCard();
+      section('First-day timeline');
+      drawTimeline();
+      drawBooking();
+      drawFooters();
+
+      doc.save('berlin-first-day-plan-' + data.plan.dateKey + '.pdf');
+      setActionStatus('PDF downloaded.');
+      track('bw_first_day_pdf_download', { success: true, date: data.plan.dateKey });
+    }).catch(function () {
+      setActionStatus('PDF could not generate. Use Print plan instead.');
+      track('bw_first_day_pdf_download', { success: false, reason: 'generate_failed' });
     });
-
-    ensure(70);
-    text('Book your free spot', 12, 'bold', [27, 94, 32], 2);
-    text(BOOKING_URL, 8, 'normal', [47, 128, 237], 6);
-    text('berlinwalk.com · @berlinwalkingtour', 9, 'bold', [27, 94, 32], 0);
-
-    doc.save('berlin-first-day-plan-' + data.plan.dateKey + '.pdf');
-    setActionStatus('PDF downloaded.');
-    track('bw_first_day_pdf_download', { success: true, date: data.plan.dateKey });
   }
 
   function printableHtml(data) {
     var steps = data.plan.steps.map(function (step) {
       return '<li><strong>' + escapeHtml(step.time + ' - ' + step.title) + '</strong><br>' + escapeHtml(step.copy) + '</li>';
     }).join('');
+    var choices = [
+      ['Arrival', data.labels.arrival],
+      ['Start', data.labels.start],
+      ['Energy', data.labels.energy],
+      ['Priority', data.labels.priority],
+      ['Luggage', data.labels.luggage]
+    ].map(function (item) {
+      return '<div class="cell"><span>' + escapeHtml(item[0]) + '</span><strong>' + escapeHtml(item[1] || '-') + '</strong></div>';
+    }).join('');
+    var weatherMetrics = (data.weather.metrics || []).map(function (metric) {
+      return '<span class="chip">' + escapeHtml(metric.label + ': ' + metric.value) + '</span>';
+    }).join('');
+    var transportRows = (data.transport.rows || []).map(function (row, index) {
+      return '<tr><th>' + (index + 1) + '</th><td><strong>' + escapeHtml(row.label) + '</strong><br>' + escapeHtml(row.copy) + '</td></tr>';
+    }).join('');
     return '<!doctype html><html><head><title>Berlin First-Day Plan</title>' +
-      '<style>@page{size:A4;margin:18mm}body{font-family:Arial,sans-serif;color:#212121;margin:0}.head{background:#1B5E20;color:#fff;padding:18px 20px;border-radius:8px}.brand{color:#FFE600;font-weight:900;letter-spacing:1.4px;font-size:12px}.head h1{margin:8px 0 0;font-size:28px;line-height:1.1}.section{margin:18px 0}.k{color:#1B5E20;font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:12px;margin-bottom:7px}.chip{display:inline-block;border:1px solid #C5E1A5;border-radius:999px;padding:6px 10px;margin:0 5px 5px 0;font-size:12px;font-weight:700}p,li{font-size:13px;line-height:1.5}li{margin-bottom:10px}.weather{background:#F8FBF2;border-left:5px solid #7CB342;padding:12px;border-radius:8px}.foot{border-top:1px solid #DCE8C8;margin-top:20px;padding-top:10px;color:#1B5E20;font-weight:900;font-size:12px}</style>' +
-      '</head><body><div class="head"><div class="brand">BERLINWALK</div><h1>Berlin First-Day Plan</h1></div>' +
+      '<style>@page{size:A4;margin:16mm}*{box-sizing:border-box}body{font-family:Arial,sans-serif;color:#223024;margin:0}.head{background:#1B5E20;color:#fff;padding:18px 20px;border-radius:10px;display:flex;gap:14px;align-items:center}.logo{width:50px;height:50px;border-radius:50%}.brand{color:#FFE600;font-weight:900;letter-spacing:1.4px;font-size:12px}.head h1{margin:5px 0 4px;font-size:27px;line-height:1.1}.head p{margin:0;color:#eef7ea}.section{margin:16px 0}.k{color:#1B5E20;font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:12px;margin-bottom:8px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.cell{border:1px solid #CFE0BC;border-radius:8px;padding:8px 10px}.cell span{display:block;color:#5C7056;font-size:10px;font-weight:900;text-transform:uppercase}.cell strong{display:block;color:#1B5E20;font-size:13px;margin-top:4px}.chip{display:inline-block;border:1px solid #C5E1A5;border-radius:999px;padding:6px 10px;margin:0 5px 5px 0;font-size:12px;font-weight:700}.summary,.weather,.transport,.book{border-radius:10px;padding:13px 14px;border:1px solid #CFE0BC;background:#F8FBF2}.weather{border-left:7px solid #7CB342}.transport{background:#FFFDF4;border-color:#E6CB5E}.transport table{width:100%;border-collapse:collapse}.transport th{width:30px;color:#fff;background:#1B5E20;border-radius:50%;display:block;margin:6px 10px 6px 0;padding:5px 0}.transport td{padding:5px 0 9px;font-size:12.5px;line-height:1.42}.transport tr+tr td{border-top:1px solid #EBDFA8}.transport .note{border-top:1px solid #EBDFA8;margin-top:7px;padding-top:9px;color:#5A5236}p,li{font-size:13px;line-height:1.48}li{margin-bottom:9px}.book a{color:#2F80ED;word-break:break-word}.foot{border-top:1px solid #DCE8C8;margin-top:18px;padding-top:10px;color:#1B5E20;font-weight:900;font-size:12px}</style>' +
+      '</head><body><div class="head"><img class="logo" src="' + BW_MINI_LOGO_URL + '" alt=""><div><div class="brand">BERLINWALK</div><h1>Berlin First-Day Plan</h1><p>' + escapeHtml(data.plan.displayDate + ' | ' + data.plan.title) + '</p></div></div>' +
       '<div class="section"><div class="k">' + escapeHtml(data.plan.displayDate) + '</div><h2>' + escapeHtml(data.plan.title) + '</h2><p>' + escapeHtml(data.plan.summary) + '</p></div>' +
-      '<div class="section"><div class="k">Choices</div><span class="chip">Arrival: ' + escapeHtml(data.labels.arrival) + '</span><span class="chip">Start: ' + escapeHtml(data.labels.start) + '</span><span class="chip">Energy: ' + escapeHtml(data.labels.energy) + '</span><span class="chip">Priority: ' + escapeHtml(data.labels.priority) + '</span><span class="chip">Luggage: ' + escapeHtml(data.labels.luggage) + '</span></div>' +
+      '<div class="section summary"><p>' + escapeHtml(data.plan.summary) + '</p></div>' +
+      '<div class="section"><div class="k">Choices</div><div class="grid">' + choices + '</div></div>' +
       '<div class="section"><div class="k">Quick checks</div><span class="chip">Ticket: ' + escapeHtml(data.plan.ticket) + '</span><span class="chip">Open date: ' + escapeHtml(data.plan.status.label) + '</span><span class="chip">Tour fit: ' + escapeHtml(data.plan.tourFit) + '</span></div>' +
-      '<div class="section weather"><div class="k">Weather</div><p><strong>' + escapeHtml(data.weather.title) + '</strong><br>' + escapeHtml(data.weather.advice) + '</p></div>' +
+      '<div class="section weather"><div class="k">Expected weather</div><p><strong>' + escapeHtml(data.weather.title) + '</strong><br>' + escapeHtml(data.weather.copy || '') + '</p>' + weatherMetrics + '<p>' + escapeHtml(data.weather.advice) + '</p></div>' +
+      '<div class="section transport"><div class="k">Public transport</div><p><strong>' + escapeHtml(data.transport.title) + '</strong><br>' + escapeHtml(data.transport.ticket) + '</p><table>' + transportRows + '</table><p class="note">' + escapeHtml(data.transport.luggage + ' ' + data.transport.note) + '</p></div>' +
       '<div class="section"><div class="k">Timeline</div><ol>' + steps + '</ol></div>' +
-      '<div class="section"><div class="k">Book</div><p>' + escapeHtml(BOOKING_URL) + '</p></div>' +
+      '<div class="section book"><div class="k">Book</div><p>Daily 11:30 from the World Clock at Alexanderplatz. The walk is about 2 hours and tip-based.</p><p><a href="' + escapeHtml(BOOKING_URL) + '">' + escapeHtml(BOOKING_URL) + '</a></p></div>' +
       '<div class="foot">berlinwalk.com · @berlinwalkingtour</div></body></html>';
   }
 

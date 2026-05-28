@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (First-Day Planner PDF polish)
+
+**Did:** Reworked the `Berlin First-Day Planner` PDF/print output into a more readable branded export.
+
+**Changed:**
+- `berlin-first-day-planner/index.html` — added mini BW logo loading for PDF, two-page card/table-style jsPDF layout, visual weather/climate panel, start-point-specific public transport guidance (BER/Hbf/Alex/hotel), stronger timeline cards, booking footer, and matching print-view structure.
+- Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md` — recorded the latest local handoff.
+
+**Opened:** Push this repo so GitHub Pages serves the PDF polish; then live-QA the Wix tool page's Download PDF and Print plan actions.
+**Closed:** Local QA passed: inline JS parse, desktop/mobile no-overflow, climate-date PDF render review, live-weather BER PDF text check, print popup check, no console errors.
+
+**Next session should:** After push + Pages deploy, test `https://www.berlinwalk.com/tools/berlin-first-day-planner` PDF/print on desktop and mobile, especially logo loading and text clipping.
+
 ## 2026-05-28 — Codex (First-Day Planner V2 polish)
 
 **Did:** Polished `Berlin First-Day Planner` V2 with a less text-heavy, date-aware result flow.
