@@ -13,12 +13,12 @@ Format for each entry — see `AGENTS.md` §9.
 - `lead-form/velo/README.md` — Wix `http-functions.js` import/call instructions and post-publish deactivation checklist.
 - `lead-form/email/README.md` — updated live automation IDs/revisions and documented the direct-trigger handoff.
 - Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md`, `velo-subscribe-direct-trigger-patch.js` — recorded the corrected patch and live API verification.
-- Wix: Yusuf published the helper + `http-functions.js` patch; live `POST /_functions/subscribe` smoke test returned 200 and created contact `def308e9-c4ea-46a9-bb2e-f4f1b3ad8b00`; after inbox confirmation, label-trigger automations were set inactive.
+- Wix: created `SurvivalMapEmailLogs`; Yusuf published the logging helper; live safe-log test wrote `deliveryPath: automation_label_trigger`, then Codex test rows were removed. Label-trigger automations were restored ACTIVE because automation action `messageId`s are not valid Velo Triggered Email IDs.
 
 **Opened:** Live response still showed `subscriptionDebug: missing_api_key`, which affects Email Marketing subscription status only, not direct Triggered Email sends.
-**Closed:** Local ESM syntax check passed; live endpoint did not error after publish; Yusuf confirmed owner notification arrived; `Berlin Survival Map Welcome Email - v2` is INACTIVE revision 4 and `Berlin Survival Map - Owner Notification` is INACTIVE revision 7.
+**Closed:** Local ESM syntax check passed; live endpoint did not error after publish; logging works; email delivery restored through active label-trigger automations (`Welcome Email - v2` revision 6, owner notification revision 9).
 
-**Next session should:** Leave the Survival Map label-trigger automations inactive and undeleted; direct Velo sends are now the live path.
+**Next session should:** To make sends truly instant, create real Developer Tools → Triggered Emails templates and use their generated Email IDs in `survivalMapEmails.js`; current automation `messageId`s returned `Not Found` in direct Velo sends.
 
 ## 2026-05-28 — Codex (First-Day Planner V3 lead gate)
 
