@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (Survival Map direct email trigger)
+
+**Did:** Added the Velo helper source for direct Survival Map welcome + owner notification sends.
+
+**Changed:**
+- `lead-form/velo/survivalMapEmails.js` — new backend helper using `triggeredEmails.emailContact()` with the live v2 welcome `messageId 46a631...`, owner notification `messageId 2fb9...`, and owner contact `9e996...`.
+- `lead-form/velo/README.md` — Wix `http-functions.js` import/call instructions and post-publish deactivation checklist.
+- `lead-form/email/README.md` — updated live automation IDs/revisions and documented the direct-trigger handoff.
+- Project root `PROJECT_MEMORY.md`, `SESSION_LOG.md`, `velo-subscribe-direct-trigger-patch.js` — recorded the corrected patch and live API verification.
+
+**Opened:** Publish the Velo helper and `post_subscribe` call in Wix, then live-test a fresh signup and turn off the two label-trigger automations to prevent duplicates.
+**Closed:** Local ESM syntax check passed; read-only Wix API verification confirmed current messageIds and active/inactive state.
+
+**Next session should:** After Wix Velo publish, smoke-test the live `/_functions/subscribe` endpoint and then deactivate `Berlin Survival Map Welcome Email - v2` plus `Berlin Survival Map - Owner Notification`.
+
 ## 2026-05-28 — Codex (First-Day Planner V3 lead gate)
 
 **Did:** Added V3 lead-gated PDF/print exports for `Berlin First-Day Planner`, plus Velo/email funnel source.

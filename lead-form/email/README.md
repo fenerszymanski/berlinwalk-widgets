@@ -3,20 +3,32 @@
 Source-of-truth for the lead magnet welcome email sent after a visitor signs up
 for the Berlin Survival Map.
 
-## Live Wix automation
+## Live Wix email state
 
-- Automation: `Berlin Survival Map Welcome Email`
-- Automation ID: `5de2cbc8-cefa-47ba-91f2-0bbc4a0404b1`
-- Revision checked: `12` on 2026-05-27
-- Trigger: `contacts-label_added_to_contact`
-- Label filter: `custom.berlin-essentials-signup`
-- Triggered Email messageId: `2fb9b51f-91cd-4705-9967-178f861df727`
-- Action ID: `a1b2c3d4-e5f6-7890-1234-567890abcdef`
-- Action display name: `Send Berlin Survival Map welcome email`
+Checked through the Wix Automations API on 2026-05-28:
 
-The automation still uses the old label key internally. That is acceptable for
-now because the Velo subscribe endpoint already assigns the existing label and
-newer submissions also send `offer: berlin-survival-map`.
+- Subscriber welcome: `Berlin Survival Map Welcome Email - v2`
+  - Automation ID: `7eeb7b18-8211-427e-aba6-14b81172cd2c`
+  - Revision checked: `3`
+  - Triggered Email messageId: `46a631f2-156e-4f14-9a8c-49d26fd97990`
+  - Trigger: `contacts-label_added_to_contact`
+  - Label filter: `custom.berlin-essentials-signup`
+- Owner notification: `Berlin Survival Map - Owner Notification`
+  - Automation ID: `29ea42fe-9990-45ef-b9d7-b94a509a1190`
+  - Revision checked: `6`
+  - Triggered Email messageId: `2fb9b51f-91cd-4705-9967-178f861df727`
+- Template anchor: `Berlin Survival Map Welcome Email`
+  - Automation ID: `5de2cbc8-cefa-47ba-91f2-0bbc4a0404b1`
+  - Revision checked: `16`
+  - Status: inactive
+  - Keep it inactive and do not delete it. It keeps the owner-notification
+    Triggered Email template alive.
+
+The label-trigger automations work but can arrive 2-10 minutes late. The direct
+Velo patch in `../velo/` sends the same Triggered Email templates from the
+`/_functions/subscribe` endpoint and should be used for the live lead form.
+After that patch is published and tested, set the two active automations above
+to inactive to avoid duplicate sends.
 
 ## Current PDF
 
@@ -42,7 +54,7 @@ Triggered Email editor on 2026-05-27.
 
 ## Wix paste workflow
 
-1. Open Wix Automations -> `Berlin Survival Map Welcome Email`.
+1. Open Wix Automations -> `Berlin Survival Map Welcome Email - v2`.
 2. Open the email step.
 3. Replace the old content with one HTML block.
 4. Paste everything between `HTML BLOCK START` and `HTML BLOCK END` from
