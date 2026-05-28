@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (First-Day Planner V2 polish)
+
+**Did:** Polished `Berlin First-Day Planner` V2 with a less text-heavy, date-aware result flow.
+
+**Changed:**
+- `berlin-first-day-planner/index.html` — added a tomorrow-default arrival-date picker, `?date=` prefill, 0-15 day Open-Meteo forecast vs day-16+ monthly climate averages, visual weather themes/icons, richer colored choice cards, jsPDF download, branded print view, and separate bottom `More Berlin planning tools` links.
+- Project root `insert-berlin-first-day-planner.js`, `PROJECT_MEMORY.md`, `SESSION_LOG.md`, plus `README.md` — updated V2 source/docs; no live CMS write was run in this session.
+
+**Opened:** Push this repo so GitHub Pages serves V2; then live-QA the Wix tool page before adding blog embeds.
+**Closed:** Local QA passed: inline JS parse, JSON parse, insert script `node --check` and `--dry-run`, default tomorrow date, `?date=` prefill, day-15 forecast, day-16 climate average, weather failure fallback, representative result paths, PDF download, print popup, desktop/mobile screenshots, no horizontal overflow, and no console errors.
+
+**Next session should:** After push + deploy, verify live `/tools/berlin-first-day-planner` desktop/mobile, PDF, print, and `/berlin-tools` card, then add the planned blog embeds.
+
 ## 2026-05-28 — Codex (First-Day Planner live rollout)
 
 **Did:** Finished live rollout for `Berlin First-Day Planner` after Yusuf pushed `berlinwalk-widgets`.
