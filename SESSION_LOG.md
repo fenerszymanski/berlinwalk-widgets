@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-28 — Codex (Blog index v3 Vox layout pass)
+
+**Did:** Pushed the `/blog` custom index closer to Yusuf's Vox references: stronger featured area, image-heavy shelves, popular/newsletter block, and one large feature category.
+
+**Changed:**
+- `blog-index/blog-index-element.js` — hero now has one large lead story plus a five-story right rail with mini images; regular category shelves render as 5 visual cards; after two shelves it inserts `Most Popular` + `Berlin Survival Guide` signup; `Berlin History & Myths` renders as a large feature section; newsletter posts to `/_functions/subscribe` with offer `berlin-survival-map`.
+- `scripts/generate-blog-index-data.mjs`, `blog-index/data.json` — hero secondary rail now outputs 5 curated posts: airport, toilets, public transport, Berlin Wall, and free things.
+- Project root `output/qa/blog-index-v3-*.png` — saved top, shelves, popular/feature, feature, desktop, and mobile screenshots.
+
+**Opened:** Push `berlinwalk-widgets` again so GitHub Pages/Wix `/blog` pick up v3.
+**Closed:** Syntax checks passed; local Browser QA confirmed 5 hero rail stories/images, 5-card shelves, popular/signup, feature section, filters/search/All behavior, no support/member banner, no `99 Berlin guides`, 0 loaded broken images, and no desktop horizontal overflow.
+
+**Next session should:** Live-QA `/blog` inside Wix after deploy, especially the custom element height and mobile width in the Wix page shell.
+
 ## 2026-05-28 — Codex (Blog index v2 Vox-style polish)
 
 **Did:** Reworked the custom blog index into a Vox-inspired editorial archive without the Vox membership/support banner pattern.

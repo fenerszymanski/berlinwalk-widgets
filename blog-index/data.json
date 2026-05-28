@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-28T20:49:37.741Z",
+  "updatedAt": "2026-05-28T21:39:57.989Z",
   "source": "Wix Blog API",
   "totalPosts": 99,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
@@ -109,6 +109,40 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
         "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.",
         "relatedToolSlug": "transport-ticket-calculator"
+      },
+      {
+        "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+        "slug": "where-was-the-berlin-wall-interactive-map",
+        "path": "/post/where-was-the-berlin-wall-interactive-map",
+        "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
+        "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
+        "category": "Berlin History",
+        "categorySlug": "berlin-history",
+        "topic": "history-myths",
+        "topicLabel": "Berlin History & Myths",
+        "readTime": "6 min read",
+        "publishedDate": "2026-05-05T09:32:22.821Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+        "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+        "relatedToolSlug": "east-or-west-1989"
+      },
+      {
+        "title": "Free Things to Do in Berlin in 2026",
+        "slug": "free-things-to-do-in-berlin-2026",
+        "path": "/post/free-things-to-do-in-berlin-2026",
+        "url": "https://www.berlinwalk.com/post/free-things-to-do-in-berlin-2026",
+        "excerpt": "A Berlin guide's honest list of what's actually free in Berlin in 2026, from the Reichstag dome and memorials to parks, free museums, and Bus 100.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "free-budget",
+        "topicLabel": "Free & Budget",
+        "readTime": "7 min read",
+        "publishedDate": "2026-05-16T21:48:17.798Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_d23a723947274468b1bc281bc59f75f8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/free_things_berlin_2026_hero.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_d23a723947274468b1bc281bc59f75f8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/free_things_berlin_2026_hero.jpg",
+        "alt": "Woman with backpack overlooks Berlin landmarks: Brandenburg Gate, TV Tower, and Berlin Cathedral. Blue sky, sunny day, relaxed mood.",
+        "relatedToolSlug": "berlin-free-things-to-do"
       }
     ]
   },

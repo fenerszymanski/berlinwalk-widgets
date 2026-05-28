@@ -95,7 +95,7 @@ class BWBlogIndexElement extends HTMLElement {
           border-top: 8px solid var(--yellow);
           border-bottom: 2px solid var(--text);
           color: var(--text);
-          padding: 28px 0 30px;
+          padding: 28px 0 38px;
           position: relative;
         }
 
@@ -155,9 +155,10 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-hero-grid {
+          align-items: start;
           display: grid;
-          gap: 20px;
-          grid-template-columns: minmax(0, 1.12fr) minmax(300px, 0.5fr);
+          gap: 36px;
+          grid-template-columns: minmax(0, 1.62fr) minmax(330px, 0.88fr);
           max-width: 100%;
           min-width: 0;
         }
@@ -200,12 +201,16 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-lead-card {
-          display: grid;
           background: transparent;
-          border-top: 3px solid var(--text);
-          grid-template-columns: minmax(280px, 0.54fr) minmax(0, 0.46fr);
-          height: 390px;
-          min-height: 390px;
+          display: block;
+          height: auto;
+          min-height: 0;
+        }
+
+        .bw-blog-index .bw-lead-card > .bw-media {
+          aspect-ratio: 1.82 / 1;
+          display: block;
+          min-height: 0;
         }
 
         .bw-blog-index .bw-media {
@@ -241,10 +246,13 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-lead-copy {
-          align-content: end;
           background: #FFFFFF;
-          display: grid;
-          padding: 24px 26px;
+          display: block;
+          margin: -50px 0 0 52px;
+          max-width: calc(100% - 52px);
+          padding: 28px 32px 22px;
+          position: relative;
+          z-index: 1;
         }
 
         .bw-blog-index .bw-card-kicker,
@@ -270,11 +278,11 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-lead-title {
           color: var(--text);
           display: block;
-          font-size: 34px;
+          font-size: 46px;
           font-weight: 900;
           letter-spacing: 0;
-          line-height: 1.08;
-          margin-bottom: 10px;
+          line-height: 1.02;
+          margin-bottom: 9px;
           overflow-wrap: break-word;
         }
 
@@ -289,32 +297,46 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-secondary-stack {
+          border-top: 0;
           display: grid;
           gap: 0;
-          border-top: 3px solid var(--text);
           max-width: 100%;
           min-width: 0;
         }
 
         .bw-blog-index .bw-small-card {
+          align-items: start;
           background: transparent;
-          border-bottom: 1px solid var(--text);
+          border-bottom: 1px solid #D7D7CF;
           display: grid;
-          grid-template-columns: 116px minmax(0, 1fr);
-          min-height: 116px;
+          gap: 16px;
+          grid-template-columns: minmax(0, 1fr) 90px;
+          min-height: 0;
+          padding: 14px 0;
+        }
+
+        .bw-blog-index .bw-small-card:first-child {
+          padding-top: 0;
+        }
+
+        .bw-blog-index .bw-small-card .bw-media {
+          aspect-ratio: 1 / 0.82;
+          min-height: 0;
+          order: 2;
         }
 
         .bw-blog-index .bw-small-copy {
-          background: #FFFFFF;
-          padding: 14px 16px;
+          background: transparent;
+          order: 1;
+          padding: 0;
         }
 
         .bw-blog-index .bw-small-title {
           color: var(--text);
           display: block;
-          font-size: 16px;
+          font-size: 19px;
           font-weight: 900;
-          line-height: 1.2;
+          line-height: 1.1;
           margin-bottom: 0;
           overflow-wrap: anywhere;
         }
@@ -643,6 +665,277 @@ class BWBlogIndexElement extends HTMLElement {
           overflow-wrap: anywhere;
         }
 
+        .bw-blog-index .bw-card-row {
+          display: grid;
+          gap: 0;
+          grid-template-columns: repeat(5, minmax(0, 1fr));
+          margin-top: 6px;
+        }
+
+        .bw-blog-index .bw-shelf-card {
+          color: var(--text);
+          display: block;
+          min-width: 0;
+          padding: 0 22px;
+          text-decoration: none;
+        }
+
+        .bw-blog-index .bw-shelf-card:first-child {
+          padding-left: 0;
+        }
+
+        .bw-blog-index .bw-shelf-card:not(:last-child) {
+          border-right: 1px solid #D7D7CF;
+        }
+
+        .bw-blog-index .bw-shelf-card .bw-media {
+          aspect-ratio: 1.5 / 1;
+          display: block;
+          margin-bottom: 14px;
+          min-height: 0;
+        }
+
+        .bw-blog-index .bw-shelf-title {
+          color: var(--text);
+          display: block;
+          font-size: 20px;
+          font-weight: 900;
+          line-height: 1.12;
+          margin-bottom: 12px;
+          overflow-wrap: anywhere;
+        }
+
+        .bw-blog-index .bw-byline {
+          color: #333333;
+          display: block;
+          font-size: 12px;
+          letter-spacing: 1.3px;
+          line-height: 1.2;
+          text-transform: uppercase;
+        }
+
+        .bw-blog-index .bw-popular-signup {
+          display: grid;
+          gap: 72px;
+          grid-template-columns: minmax(0, 1fr) minmax(300px, 0.38fr);
+          margin: 58px 0 44px;
+        }
+
+        .bw-blog-index .bw-popular-signup h2 {
+          color: var(--text);
+          font-size: 34px;
+          font-weight: 900;
+          letter-spacing: 0;
+          line-height: 1.08;
+          margin-bottom: 22px;
+        }
+
+        .bw-blog-index .bw-popular-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .bw-blog-index .bw-popular-list li {
+          border-bottom: 1px solid #D7D7CF;
+        }
+
+        .bw-blog-index .bw-popular-list a {
+          align-items: start;
+          display: grid;
+          gap: 22px;
+          grid-template-columns: 44px minmax(0, 1fr);
+          padding: 18px 0;
+          text-decoration: none;
+        }
+
+        .bw-blog-index .bw-rank {
+          align-items: center;
+          background: var(--yellow);
+          border-radius: 999px;
+          color: var(--text);
+          display: inline-flex;
+          font-size: 16px;
+          font-weight: 900;
+          height: 34px;
+          justify-content: center;
+          width: 34px;
+        }
+
+        .bw-blog-index .bw-popular-title {
+          color: var(--text);
+          display: block;
+          font-size: 26px;
+          font-weight: 500;
+          line-height: 1.18;
+          overflow-wrap: anywhere;
+        }
+
+        .bw-blog-index .bw-newsletter-box {
+          align-self: start;
+          border: 2px dotted var(--text);
+          padding: 28px 30px;
+        }
+
+        .bw-blog-index .bw-newsletter-box p {
+          color: var(--text);
+          font-family: "Courier New", Courier, monospace;
+          font-size: 17px;
+          line-height: 1.32;
+          margin-bottom: 22px;
+        }
+
+        .bw-blog-index .bw-newsletter-box strong {
+          font-family: Montserrat, Arial, sans-serif;
+          font-weight: 900;
+        }
+
+        .bw-blog-index .bw-newsletter-form {
+          display: grid;
+          gap: 14px;
+        }
+
+        .bw-blog-index .bw-newsletter-form input {
+          background: #FFFFFF;
+          border: 1px solid var(--text);
+          border-radius: 0;
+          color: var(--text);
+          font: 500 17px/1 Montserrat, Arial, sans-serif;
+          min-height: 54px;
+          padding: 0 16px;
+          width: 100%;
+        }
+
+        .bw-blog-index .bw-newsletter-form button {
+          background: var(--yellow);
+          border: 0;
+          border-radius: 0;
+          color: var(--text);
+          cursor: pointer;
+          font: 900 14px/1 Montserrat, Arial, sans-serif;
+          justify-self: start;
+          min-height: 52px;
+          padding: 0 28px;
+        }
+
+        .bw-blog-index .bw-newsletter-status {
+          color: var(--muted);
+          font-size: 12px;
+          font-weight: 800;
+          line-height: 1.45;
+          margin: 0;
+          min-height: 18px;
+        }
+
+        .bw-blog-index .bw-feature-section {
+          margin-top: 48px;
+        }
+
+        .bw-blog-index .bw-feature-section .bw-section-header {
+          align-items: start;
+          margin-bottom: 28px;
+        }
+
+        .bw-blog-index .bw-feature-section h2 {
+          font-size: clamp(48px, 8vw, 92px);
+          line-height: 0.9;
+          margin: 0;
+        }
+
+        .bw-blog-index .bw-feature-grid {
+          display: grid;
+          gap: 38px;
+          grid-template-columns: minmax(0, 1.45fr) repeat(2, minmax(0, 0.72fr));
+        }
+
+        .bw-blog-index .bw-feature-card {
+          color: var(--text);
+          display: block;
+          min-width: 0;
+          text-decoration: none;
+        }
+
+        .bw-blog-index .bw-feature-card .bw-media {
+          aspect-ratio: 1.35 / 1;
+          display: block;
+          margin-bottom: 16px;
+          min-height: 0;
+        }
+
+        .bw-blog-index .bw-feature-lead .bw-media {
+          aspect-ratio: 1.55 / 1;
+          margin-bottom: 0;
+        }
+
+        .bw-blog-index .bw-feature-lead-copy {
+          background: #FFFFFF;
+          margin: -48px 0 0 52px;
+          max-width: calc(100% - 52px);
+          padding: 24px 28px 18px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .bw-blog-index .bw-feature-title {
+          color: var(--text);
+          display: block;
+          font-size: 30px;
+          font-weight: 900;
+          line-height: 1.08;
+          margin-bottom: 8px;
+          overflow-wrap: anywhere;
+        }
+
+        .bw-blog-index .bw-feature-lead .bw-feature-title {
+          font-size: 39px;
+          line-height: 1.04;
+        }
+
+        .bw-blog-index .bw-feature-excerpt {
+          color: #4D4D47;
+          display: block;
+          font-family: var(--serif);
+          font-size: 18px;
+          line-height: 1.36;
+          margin-bottom: 12px;
+          overflow-wrap: anywhere;
+        }
+
+        .bw-blog-index .bw-feature-bottom {
+          border-top: 2px dotted var(--text);
+          display: grid;
+          gap: 32px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          margin-top: 38px;
+          padding-top: 34px;
+        }
+
+        .bw-blog-index .bw-feature-mini {
+          align-items: start;
+          color: var(--text);
+          display: grid;
+          gap: 16px;
+          grid-template-columns: 96px minmax(0, 1fr);
+          min-width: 0;
+          text-decoration: none;
+        }
+
+        .bw-blog-index .bw-feature-mini .bw-media {
+          aspect-ratio: 1 / 1;
+          display: block;
+          min-height: 0;
+        }
+
+        .bw-blog-index .bw-feature-mini b {
+          color: var(--text);
+          display: block;
+          font-family: var(--serif);
+          font-size: 21px;
+          font-weight: 500;
+          line-height: 1.14;
+          overflow-wrap: anywhere;
+        }
+
         .bw-blog-index .bw-footer-band {
           background: var(--green);
           color: #FFFFFF;
@@ -708,8 +1001,20 @@ class BWBlogIndexElement extends HTMLElement {
           .bw-blog-index .bw-post-grid,
           .bw-blog-index .bw-tool-grid,
           .bw-blog-index .bw-compact-grid,
-          .bw-blog-index .bw-result-grid {
+          .bw-blog-index .bw-result-grid,
+          .bw-blog-index .bw-card-row,
+          .bw-blog-index .bw-feature-bottom {
             grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .bw-blog-index .bw-popular-signup,
+          .bw-blog-index .bw-feature-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-blog-index .bw-feature-lead-copy {
+            max-width: calc(100% - 34px);
+            margin-left: 34px;
           }
         }
 
@@ -730,6 +1035,10 @@ class BWBlogIndexElement extends HTMLElement {
           .bw-blog-index .bw-section,
           .bw-blog-index .bw-tools-band,
           .bw-blog-index .bw-compact-grid,
+          .bw-blog-index .bw-card-row,
+          .bw-blog-index .bw-popular-signup,
+          .bw-blog-index .bw-feature-grid,
+          .bw-blog-index .bw-feature-bottom,
           .bw-blog-index .bw-tool-grid,
           .bw-blog-index .bw-footer-band {
             max-width: 100%;
@@ -763,6 +1072,8 @@ class BWBlogIndexElement extends HTMLElement {
           .bw-blog-index .bw-lead-copy {
             max-width: 100%;
             min-width: 0;
+            margin: -34px 0 0 22px;
+            max-width: calc(100% - 22px);
             overflow: hidden;
             padding: 22px;
           }
@@ -773,7 +1084,8 @@ class BWBlogIndexElement extends HTMLElement {
           }
 
           .bw-blog-index .bw-small-card {
-            grid-template-columns: 96px minmax(0, 1fr);
+            gap: 14px;
+            grid-template-columns: minmax(0, 1fr) 92px;
             overflow: hidden;
           }
 
@@ -798,8 +1110,57 @@ class BWBlogIndexElement extends HTMLElement {
           .bw-blog-index .bw-post-grid,
           .bw-blog-index .bw-tool-grid,
           .bw-blog-index .bw-compact-grid,
-          .bw-blog-index .bw-result-grid {
+          .bw-blog-index .bw-result-grid,
+          .bw-blog-index .bw-card-row,
+          .bw-blog-index .bw-feature-bottom {
             grid-template-columns: 1fr;
+          }
+
+          .bw-blog-index .bw-shelf-card {
+            border-bottom: 1px solid #D7D7CF;
+            border-right: 0 !important;
+            padding: 0 0 20px;
+          }
+
+          .bw-blog-index .bw-shelf-card + .bw-shelf-card {
+            padding-top: 18px;
+          }
+
+          .bw-blog-index .bw-popular-signup {
+            gap: 28px;
+            margin: 42px 0 34px;
+          }
+
+          .bw-blog-index .bw-popular-list a {
+            gap: 14px;
+            grid-template-columns: 36px minmax(0, 1fr);
+          }
+
+          .bw-blog-index .bw-popular-title {
+            font-size: 20px;
+          }
+
+          .bw-blog-index .bw-newsletter-box {
+            padding: 22px;
+          }
+
+          .bw-blog-index .bw-feature-section h2 {
+            font-size: 48px;
+          }
+
+          .bw-blog-index .bw-feature-lead-copy {
+            margin: -34px 0 0 22px;
+            max-width: calc(100% - 22px);
+            padding: 22px;
+          }
+
+          .bw-blog-index .bw-feature-lead .bw-feature-title,
+          .bw-blog-index .bw-feature-title {
+            font-size: 27px;
+          }
+
+          .bw-blog-index .bw-feature-mini {
+            grid-template-columns: 82px minmax(0, 1fr);
           }
 
           .bw-blog-index .bw-post-card {
@@ -875,7 +1236,7 @@ class BWBlogIndexElement extends HTMLElement {
 
   _renderHero() {
     const lead = this._data.hero?.lead;
-    const secondary = this._data.hero?.secondary || [];
+    const secondary = (this._data.hero?.secondary || []).slice(0, 5);
     return `
       <header class="bw-hero">
         <div class="bw-inner">
@@ -967,7 +1328,26 @@ class BWBlogIndexElement extends HTMLElement {
 
   _renderShelves() {
     const shelves = this._data.shelves || [];
-    return shelves.map((shelf) => `
+    const activeView = Boolean(this._query || this._topic !== 'all');
+    if (activeView) {
+      return shelves.map((shelf) => this._renderRegularShelf(shelf)).join('');
+    }
+
+    const featureKey = 'history-myths';
+    const featureShelf = shelves.find((shelf) => shelf.key === featureKey);
+    const regularShelves = shelves.filter((shelf) => shelf.key !== featureKey);
+    const firstRows = regularShelves.slice(0, 2).map((shelf) => this._renderRegularShelf(shelf));
+    const restRows = regularShelves.slice(2).map((shelf) => this._renderRegularShelf(shelf));
+    return [
+      ...firstRows,
+      this._renderPopularSignup(),
+      featureShelf ? this._renderFeatureShelf(featureShelf) : '',
+      ...restRows,
+    ].join('');
+  }
+
+  _renderRegularShelf(shelf) {
+    return `
       <section class="bw-section" id="bw-topic-${this._escapeAttribute(shelf.key)}" data-bw-animate>
         <div class="bw-section-header">
           <div>
@@ -977,11 +1357,68 @@ class BWBlogIndexElement extends HTMLElement {
           </div>
           <a class="bw-view-link" href="#" data-topic-link="${this._escapeAttribute(shelf.key)}">View topic</a>
         </div>
-        <div class="bw-compact-grid">
-          ${(shelf.posts || []).slice(0, 10).map((post) => this._renderCompactLink(post)).join('')}
+        <div class="bw-card-row">
+          ${(shelf.posts || []).slice(0, 5).map((post) => this._renderShelfCard(post)).join('')}
         </div>
       </section>
-    `).join('');
+    `;
+  }
+
+  _renderPopularSignup() {
+    const posts = this._popularPosts();
+    return `
+      <section class="bw-popular-signup" aria-label="Popular Berlin guides and newsletter signup">
+        <div>
+          <h2>Most Popular</h2>
+          <ol class="bw-popular-list">
+            ${posts.map((post, index) => `
+              <li>
+                <a href="${this._escapeAttribute(post.url)}" target="_top">
+                  <span class="bw-rank">${index + 1}</span>
+                  <span class="bw-popular-title">${this._escapeHtml(post.title)}</span>
+                </a>
+              </li>
+            `).join('')}
+          </ol>
+        </div>
+        <aside class="bw-newsletter-box" aria-label="Berlin Survival Guide signup">
+          <p><strong>Berlin Survival Guide</strong> Get the practical first-day guide: tickets, toilets, luggage, Sundays, cash, and the simple route that makes Berlin easier.</p>
+          <form class="bw-newsletter-form" data-bw-newsletter-form>
+            <label>
+              <span class="bw-visually-hidden">Email address</span>
+              <input type="email" name="email" placeholder="Enter your email" autocomplete="email" required>
+            </label>
+            <button type="submit">Sign Up</button>
+            <span class="bw-newsletter-status" data-bw-newsletter-status aria-live="polite"></span>
+          </form>
+        </aside>
+      </section>
+    `;
+  }
+
+  _renderFeatureShelf(shelf) {
+    const posts = (shelf.posts || []).slice(0, 6);
+    const lead = posts[0];
+    const side = posts.slice(1, 3);
+    const bottom = posts.slice(3, 6);
+    if (!lead) return '';
+    return `
+      <section class="bw-section bw-feature-section" id="bw-topic-${this._escapeAttribute(shelf.key)}" data-bw-animate>
+        <div class="bw-section-header">
+          <div>
+            <h2>${this._escapeHtml(shelf.title)}</h2>
+          </div>
+          <a class="bw-view-link" href="#" data-topic-link="${this._escapeAttribute(shelf.key)}">More</a>
+        </div>
+        <div class="bw-feature-grid">
+          ${this._renderFeatureLead(lead)}
+          ${side.map((post) => this._renderFeatureCard(post)).join('')}
+        </div>
+        <div class="bw-feature-bottom">
+          ${bottom.map((post) => this._renderFeatureMini(post)).join('')}
+        </div>
+      </section>
+    `;
   }
 
   _renderLatest() {
@@ -1058,6 +1495,54 @@ class BWBlogIndexElement extends HTMLElement {
     `;
   }
 
+  _renderShelfCard(post) {
+    return `
+      <a class="bw-shelf-card" href="${this._escapeAttribute(post.url)}" target="_top">
+        ${this._renderMedia(post, 'thumb')}
+        <span class="bw-shelf-title">${this._escapeHtml(post.title)}</span>
+        <span class="bw-byline">By BerlinWalk</span>
+      </a>
+    `;
+  }
+
+  _renderFeatureLead(post) {
+    return `
+      <a class="bw-feature-card bw-feature-lead" href="${this._escapeAttribute(post.url)}" target="_top">
+        ${this._renderMedia(post, 'image')}
+        <span class="bw-feature-lead-copy">
+          ${this._renderMeta(post)}
+          <span class="bw-feature-title">${this._escapeHtml(post.title)}</span>
+          <span class="bw-feature-excerpt">${this._escapeHtml(post.excerpt || '')}</span>
+          <span class="bw-byline">By BerlinWalk</span>
+        </span>
+      </a>
+    `;
+  }
+
+  _renderFeatureCard(post) {
+    return `
+      <a class="bw-feature-card" href="${this._escapeAttribute(post.url)}" target="_top">
+        ${this._renderMedia(post, 'thumb')}
+        ${this._renderMeta(post)}
+        <span class="bw-feature-title">${this._escapeHtml(post.title)}</span>
+        <span class="bw-feature-excerpt">${this._escapeHtml(post.excerpt || '')}</span>
+        <span class="bw-byline">By BerlinWalk</span>
+      </a>
+    `;
+  }
+
+  _renderFeatureMini(post) {
+    return `
+      <a class="bw-feature-mini" href="${this._escapeAttribute(post.url)}" target="_top">
+        ${this._renderMedia(post, 'thumb')}
+        <span>
+          ${this._renderMeta(post)}
+          <b>${this._escapeHtml(post.title)}</b>
+        </span>
+      </a>
+    `;
+  }
+
   _renderCompactLink(post) {
     const meta = [post.category || post.topicLabel || 'Guide', post.readTime].filter(Boolean).join(' · ');
     return `
@@ -1066,6 +1551,37 @@ class BWBlogIndexElement extends HTMLElement {
         <b>${this._escapeHtml(post.title)}</b>
       </a>
     `;
+  }
+
+  _popularPosts() {
+    const curatedSlugs = [
+      'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
+      'public-toilets-in-berlin',
+      'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+      'free-things-to-do-in-berlin-2026',
+      'where-was-the-berlin-wall-interactive-map',
+      'nikolaiviertel-rebuilt-old-town',
+      'best-currywurst-places-in-berlin-2026',
+    ];
+    const posts = this._data.allPosts || [];
+    const bySlug = new Map(posts.map((post) => [post.slug, post]));
+    const picked = [];
+    const seen = new Set();
+    curatedSlugs.forEach((slug) => {
+      const post = bySlug.get(slug);
+      if (post && !seen.has(post.slug)) {
+        picked.push(post);
+        seen.add(post.slug);
+      }
+    });
+    posts.forEach((post) => {
+      if (picked.length >= 7) return;
+      if (!seen.has(post.slug)) {
+        picked.push(post);
+        seen.add(post.slug);
+      }
+    });
+    return picked.slice(0, 7);
   }
 
   _renderStartHere() {
@@ -1132,6 +1648,53 @@ class BWBlogIndexElement extends HTMLElement {
           nextInput.setSelectionRange(nextInput.value.length, nextInput.value.length);
         }
       });
+    }
+
+    this.querySelectorAll('[data-bw-newsletter-form]').forEach((form) => {
+      form.addEventListener('submit', (event) => this._submitNewsletter(event, form));
+    });
+  }
+
+  async _submitNewsletter(event, form) {
+    event.preventDefault();
+    const input = form.querySelector('input[type="email"]');
+    const button = form.querySelector('button');
+    const status = form.querySelector('[data-bw-newsletter-status]');
+    const email = (input?.value || '').trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      if (status) status.textContent = 'Please enter a valid email address.';
+      input?.focus();
+      return;
+    }
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Sending...';
+    }
+    if (status) status.textContent = '';
+
+    try {
+      const response = await fetch('https://www.berlinwalk.com/_functions/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email,
+          source: 'blog-index-newsletter',
+          offer: 'berlin-survival-map',
+          page: window.location.href,
+        }),
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || !data.success) throw new Error(data.error || 'subscribe_failed');
+      form.reset();
+      if (status) status.textContent = 'Saved. Check your inbox for the Berlin Survival Guide.';
+    } catch {
+      if (status) status.textContent = 'Something went wrong. Please try again.';
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = 'Sign Up';
+      }
     }
   }
 

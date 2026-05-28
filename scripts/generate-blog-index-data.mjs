@@ -139,6 +139,8 @@ const HERO_SLUGS = {
     'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
     'public-toilets-in-berlin',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+    'where-was-the-berlin-wall-interactive-map',
+    'free-things-to-do-in-berlin-2026',
   ],
 };
 
@@ -383,7 +385,7 @@ function pickPosts(posts, slugs, fallbackTopic, count) {
 function buildData(posts) {
   const map = bySlug(posts);
   const lead = map.get(HERO_SLUGS.lead) || posts[0];
-  const secondary = pickPosts(posts, HERO_SLUGS.secondary, 'first-day', 3).filter((post) => post.slug !== lead.slug);
+  const secondary = pickPosts(posts, HERO_SLUGS.secondary, 'first-day', 5).filter((post) => post.slug !== lead.slug);
 
   return {
     updatedAt: new Date().toISOString(),
@@ -391,7 +393,7 @@ function buildData(posts) {
     totalPosts: posts.length,
     bookingUrl: BOOKING_URL,
     navTopics: TOPICS.map(({ key, label, navLabel }) => ({ key, label, navLabel })),
-    hero: { lead, secondary: secondary.slice(0, 3) },
+    hero: { lead, secondary: secondary.slice(0, 5) },
     startHere: START_HERE_LINKS,
     tools: SPOTLIGHT_TOOLS,
     shelves: TOPICS.map((topic) => ({
