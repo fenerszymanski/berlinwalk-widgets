@@ -23,15 +23,18 @@ class BWBlogIndexElement extends HTMLElement {
     this._topic = 'all';
     this._query = '';
     this._observer = null;
+    this._nativeFeedObserver = null;
   }
 
   connectedCallback() {
     this._renderShell();
+    this._installWixNativeBlogFeedSuppressor();
     this._loadDataAndRender();
   }
 
   disconnectedCallback() {
     if (this._observer) this._observer.disconnect();
+    if (this._nativeFeedObserver) this._nativeFeedObserver.disconnect();
   }
 
   _renderShell() {
@@ -1719,6 +1722,71 @@ class BWBlogIndexElement extends HTMLElement {
       this._observer = null;
     }
     this.querySelectorAll('[data-bw-animate]').forEach((section) => section.classList.add('visible'));
+  }
+
+  _installWixNativeBlogFeedSuppressor() {
+    if (!this._isBlogIndexPage()) return;
+
+    const styleId = 'bw-blog-index-native-feed-suppressor';
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement('style');
+      style.id = styleId;
+      style.textContent = `
+        [data-bw-native-blog-feed-hidden="true"] {
+          display: none !important;
+          height: 0 !important;
+          min-height: 0 !important;
+          max-height: 0 !important;
+          margin: 0 !important;
+          padding: 0 !important;
+          overflow: hidden !important;
+          visibility: hidden !important;
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    const hideNativeFeed = () => {
+      const exactSection = document.getElementById('comp-mm3d94ml');
+      if (exactSection && !exactSection.contains(this)) {
+        this._hideNativeFeedSection(exactSection);
+      }
+
+      const feedRoots = document.querySelectorAll([
+        '[data-hook="feed-page-root"]',
+        '[data-hook="post-list-pro-gallery-container"]',
+        '[data-hook="blog-desktop-header-container"]',
+      ].join(','));
+
+      feedRoots.forEach((feedRoot) => {
+        const section = feedRoot.closest('section[id^="comp-"]') || feedRoot.closest('[id^="comp-"]');
+        if (section && !section.contains(this)) {
+          this._hideNativeFeedSection(section);
+        }
+      });
+    };
+
+    hideNativeFeed();
+    this._nativeFeedObserver = new MutationObserver(hideNativeFeed);
+    this._nativeFeedObserver.observe(document.body, { childList: true, subtree: true });
+  }
+
+  _hideNativeFeedSection(section) {
+    section.setAttribute('data-bw-native-blog-feed-hidden', 'true');
+    section.setAttribute('aria-hidden', 'true');
+    section.style.setProperty('display', 'none', 'important');
+    section.style.setProperty('height', '0', 'important');
+    section.style.setProperty('min-height', '0', 'important');
+    section.style.setProperty('max-height', '0', 'important');
+    section.style.setProperty('margin', '0', 'important');
+    section.style.setProperty('padding', '0', 'important');
+    section.style.setProperty('overflow', 'hidden', 'important');
+    section.style.setProperty('visibility', 'hidden', 'important');
+  }
+
+  _isBlogIndexPage() {
+    const path = window.location.pathname.replace(/\/+$/, '') || '/';
+    return path === '/blog';
   }
 
   _escapeHtml(value) {
