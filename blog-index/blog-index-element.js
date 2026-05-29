@@ -462,6 +462,7 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-section {
           margin-top: 34px;
+          scroll-margin-top: 86px;
         }
 
         .bw-blog-index .bw-section[data-bw-animate] {
@@ -502,6 +503,10 @@ class BWBlogIndexElement extends HTMLElement {
           max-width: 680px;
         }
 
+        .bw-blog-index .bw-section-copy {
+          min-width: 0;
+        }
+
         .bw-blog-index .bw-view-link {
           color: var(--text);
           flex: 0 0 auto;
@@ -510,6 +515,33 @@ class BWBlogIndexElement extends HTMLElement {
           letter-spacing: 0.8px;
           text-decoration: none;
           text-transform: uppercase;
+        }
+
+        .bw-blog-index .bw-shelf-actions {
+          align-items: center;
+          display: flex;
+          flex: 0 0 auto;
+          gap: 8px;
+        }
+
+        .bw-blog-index .bw-shelf-arrow {
+          align-items: center;
+          background: transparent;
+          border: 1px solid var(--text);
+          border-radius: 0;
+          color: var(--text);
+          cursor: pointer;
+          display: inline-flex;
+          font: 900 22px/1 Montserrat, Arial, sans-serif;
+          height: 38px;
+          justify-content: center;
+          padding: 0;
+          width: 38px;
+        }
+
+        .bw-blog-index .bw-shelf-arrow:hover,
+        .bw-blog-index .bw-shelf-arrow:focus-visible {
+          background: var(--yellow);
         }
 
         .bw-blog-index .bw-result-grid {
@@ -705,9 +737,21 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-card-row {
           display: grid;
+          grid-auto-columns: calc(100% / 5);
+          grid-auto-flow: column;
           gap: 0;
-          grid-template-columns: repeat(5, minmax(0, 1fr));
           margin-top: 6px;
+          max-width: 100%;
+          overflow-x: auto;
+          overscroll-behavior-x: contain;
+          padding-bottom: 12px;
+          scroll-behavior: smooth;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+        }
+
+        .bw-blog-index .bw-card-row::-webkit-scrollbar {
+          display: none;
         }
 
         .bw-blog-index .bw-shelf-card {
@@ -715,6 +759,7 @@ class BWBlogIndexElement extends HTMLElement {
           display: block;
           min-width: 0;
           padding: 0 22px;
+          scroll-snap-align: start;
           text-decoration: none;
         }
 
@@ -1048,9 +1093,12 @@ class BWBlogIndexElement extends HTMLElement {
           .bw-blog-index .bw-tool-grid,
           .bw-blog-index .bw-compact-grid,
           .bw-blog-index .bw-result-grid,
-          .bw-blog-index .bw-card-row,
           .bw-blog-index .bw-feature-bottom {
             grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+
+          .bw-blog-index .bw-card-row {
+            grid-auto-columns: 50%;
           }
 
           .bw-blog-index .bw-popular-signup,
@@ -1162,19 +1210,28 @@ class BWBlogIndexElement extends HTMLElement {
           .bw-blog-index .bw-tool-grid,
           .bw-blog-index .bw-compact-grid,
           .bw-blog-index .bw-result-grid,
-          .bw-blog-index .bw-card-row,
           .bw-blog-index .bw-feature-bottom {
             grid-template-columns: 1fr;
           }
 
+          .bw-blog-index .bw-section-header {
+            align-items: flex-start;
+            flex-wrap: wrap;
+          }
+
+          .bw-blog-index .bw-card-row {
+            grid-auto-columns: minmax(252px, 84%);
+          }
+
           .bw-blog-index .bw-shelf-card {
-            border-bottom: 1px solid #D7D7CF;
-            border-right: 0 !important;
-            padding: 0 0 20px;
+            border-bottom: 0;
+            border-right: 1px solid #D7D7CF !important;
+            padding: 0 18px 0 0;
           }
 
           .bw-blog-index .bw-shelf-card + .bw-shelf-card {
-            padding-top: 18px;
+            padding-left: 18px;
+            padding-top: 0;
           }
 
           .bw-blog-index .bw-popular-signup {
@@ -1401,17 +1458,31 @@ class BWBlogIndexElement extends HTMLElement {
   }
 
   _renderRegularShelf(shelf) {
+    const posts = (shelf.posts || []).slice(0, 10);
+    const shelfTitle = shelf.title || 'Berlin guides';
+    const controls = posts.length > 5 ? `
+      <div class="bw-shelf-actions" aria-label="${this._escapeAttribute(shelfTitle)} carousel controls">
+        <button class="bw-shelf-arrow" type="button" data-shelf-prev aria-label="Previous ${this._escapeAttribute(shelfTitle)} posts">
+          <span aria-hidden="true">&larr;</span>
+        </button>
+        <button class="bw-shelf-arrow" type="button" data-shelf-next aria-label="Next ${this._escapeAttribute(shelfTitle)} posts">
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
+    ` : '';
+
     return `
       <section class="bw-section" id="bw-topic-${this._escapeAttribute(shelf.key)}" data-bw-animate>
         <div class="bw-section-header">
-          <div>
+          <div class="bw-section-copy">
             <span class="bw-card-kicker">${this._escapeHtml(shelf.kicker || 'Guides')}</span>
             <h2>${this._escapeHtml(shelf.title)}</h2>
             <p class="bw-section-desc">${this._escapeHtml(shelf.description || '')}</p>
           </div>
+          ${controls}
         </div>
-        <div class="bw-card-row">
-          ${(shelf.posts || []).slice(0, 5).map((post) => this._renderShelfCard(post)).join('')}
+        <div class="bw-card-row" data-shelf-rail tabindex="0" aria-label="${this._escapeAttribute(shelfTitle)} posts">
+          ${posts.map((post) => this._renderShelfCard(post)).join('')}
         </div>
       </section>
     `;
@@ -1707,6 +1778,17 @@ class BWBlogIndexElement extends HTMLElement {
         }
       });
     }
+
+    this.querySelectorAll('[data-shelf-prev], [data-shelf-next]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const section = button.closest('.bw-section');
+        const rail = section?.querySelector('[data-shelf-rail]');
+        if (!rail) return;
+        const direction = button.hasAttribute('data-shelf-prev') ? -1 : 1;
+        const distance = Math.max(rail.clientWidth * 0.86, 260);
+        rail.scrollBy({ left: direction * distance, behavior: 'smooth' });
+      });
+    });
 
     this.querySelectorAll('[data-bw-newsletter-form]').forEach((form) => {
       form.addEventListener('submit', (event) => this._submitNewsletter(event, form));

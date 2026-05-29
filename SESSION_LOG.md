@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-29 — Codex (Blog index category shelf sliders)
+
+**Did:** Converted `/blog` category shelves from fixed 5-card rows into horizontal sliders so more posts are reachable per category.
+
+**Changed:**
+- `blog-index/blog-index-element.js` — regular shelves now render up to 10 posts, show previous/next arrow controls when a shelf has more than 5 posts, scroll smoothly inside the shelf, and keep mobile rows horizontally scrollable without page overflow.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the new shelf-slider behavior and QA screenshots.
+- Project root `output/qa/blog-index-shelf-slider-desktop.png`, `output/qa/blog-index-shelf-slider-mobile.png` — saved local QA screenshots.
+
+**Opened:** Push/deploy still needed before live `/blog` uses the slider rows.
+**Closed:** Local syntax, desktop arrow-scroll, and mobile 390px overflow checks passed.
+
+**Next session should:** After push, live-QA `/blog` inside Wix and continue Yusuf's remaining visual tweaks.
+
 ## 2026-05-29 — Codex (Blog index logo + topic behavior pass)
 
 **Did:** Added Yusuf's Adobe Express blog logo and cleaned up the `/blog` index interactions flagged in live screenshots.
