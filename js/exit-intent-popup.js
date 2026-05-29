@@ -4,7 +4,7 @@
 (function () {
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var SUBSCRIBE_URL = 'https://www.berlinwalk.com/_functions/subscribe';
-  var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_2fdd0e52467b4fe98b409d5d64e5818c.pdf';
+  var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_12853b807c6947f09135e339d6ea0a57.pdf';
   var IMAGE_URL = getImageUrl();
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;

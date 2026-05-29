@@ -4,7 +4,7 @@ Subject: Your Berlin First-Day Survival Guide is here
 
 Preview: Airport tickets, Sunday rules, toilets, luggage, cash and the easiest first walk in one PDF.
 
-CTA URL: https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_2fdd0e52467b4fe98b409d5d64e5818c.pdf
+CTA URL: https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_12853b807c6947f09135e339d6ea0a57.pdf
 
 Secondary CTA URL: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
 

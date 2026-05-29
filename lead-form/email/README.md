@@ -34,7 +34,7 @@ welcome `VKufY4L`, owner notification `VKugjPv`.
 ## Current PDF
 
 - Public title: `Berlin First-Day Survival Guide`
-- Public URL: `https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_2fdd0e52467b4fe98b409d5d64e5818c.pdf`
+- Public URL: `https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_12853b807c6947f09135e339d6ea0a57.pdf`
 - Local PDF: `/Users/yusufucuz/Documents/New project/output/pdf/berlin-first-day-survival-guide.pdf`
 - Cover asset: `lead-form/assets/berlin-first-day-survival-guide-cover.jpg`
 
@@ -45,7 +45,7 @@ welcome `VKufY4L`, owner notification `VKugjPv`.
 
 ## Current editor status
 
-Local source was updated on 2026-05-28. The live Wix Triggered Email body still
+Local source was updated on 2026-05-29 with the new AI-page PDF URL. The live Wix Triggered Email body still
 needs manual editor paste if the new public copy should be live immediately;
 the direct email IDs remain unchanged.
 
