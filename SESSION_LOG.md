@@ -4,6 +4,33 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-29 — Codex (Blog index logo + topic behavior pass)
+
+**Did:** Added Yusuf's Adobe Express blog logo and cleaned up the `/blog` index interactions flagged in live screenshots.
+
+**Changed:**
+- `blog-index/assets/*` — added cropped web-ready `Berlin travel & history notes` logo PNGs from the latest Downloads files; archived originals under project root `brand/logos/blog/`.
+- `blog-index/blog-index-element.js` — replaced the giant text H1 with the logo masthead, changed topic chips into section-jump links, removed destructive `View topic` / `More` links, kept search as the only filtering mode, made the hero lead overlay cream/translucent, tightened the history feature section title and removed its white image overlay block.
+- `scripts/generate-blog-index-data.mjs`, `blog-index/data.json` — `Most Popular` now comes from Wix Blog API sorting by `metrics.views` when generating data, with curated fallback still in the element.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the new logo assets, topic behavior, and popularity-source caveat.
+
+**Opened:** True last-30-day per-post popularity still needs a Wix Analytics export/API source; Wix Blog API sorted by lifetime `metrics.views` but did not return per-period counts.
+**Closed:** Local desktop/mobile QA passed for logo masthead, topic jumps, search, persistent Most Popular, history feature layout, and zero horizontal overflow.
+
+**Next session should:** Push `berlinwalk-widgets`, wait for GitHub Pages, then live-QA `/blog` with the new logo and topic-menu behavior.
+
+## 2026-05-29 — Codex (First-Day PDF AI art notes)
+
+**Did:** Recorded PDF visual feedback in the lead-magnet source folder.
+
+**Changed:**
+- Project root `lead-magnets/berlin-survival-map/AI_PAGE_ART_NOTES.md` — noted overlapping text/icon issues, weak Page 1 graphic, and the one-page-at-a-time AI art experiment.
+
+**Opened:** Test Page 1 AI prompt first; do not redesign all pages until Yusuf likes the direction.
+**Closed:** None.
+
+**Next session should:** Continue in the lead-magnet folder, not widget code, unless the final art affects the signup cover asset.
+
 ## 2026-05-29 — Codex (Blog lead CTA visual polish)
 
 **Did:** Polished the blog lead form CTA visual after Yusuf flagged the left-side image as bad.

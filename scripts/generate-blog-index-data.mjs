@@ -284,6 +284,26 @@ async function getPosts(siteId, maxPosts) {
   return posts.slice(0, maxPosts);
 }
 
+async function getPopularPosts(siteId, maxPosts = 20) {
+  try {
+    const data = await wixFetch('/blog/v3/posts/query', {
+      method: 'POST',
+      siteId,
+      body: {
+        query: {
+          paging: { limit: Math.min(100, maxPosts), offset: 0 },
+          sort: [{ fieldName: 'metrics.views', order: 'DESC' }],
+        },
+        fieldsets: ['URL'],
+      },
+    });
+    return (data.posts || []).slice(0, maxPosts);
+  } catch (error) {
+    console.warn(`Could not fetch Wix Blog popularity sort: ${error.message}`);
+    return [];
+  }
+}
+
 function cleanText(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
 }
@@ -382,20 +402,31 @@ function pickPosts(posts, slugs, fallbackTopic, count) {
   return picked.slice(0, count);
 }
 
-function buildData(posts) {
+function buildData(posts, popularPosts = []) {
   const map = bySlug(posts);
   const lead = map.get(HERO_SLUGS.lead) || posts[0];
   const secondary = pickPosts(posts, HERO_SLUGS.secondary, 'first-day', 5).filter((post) => post.slug !== lead.slug);
+  const popular = [];
+  const seenPopular = new Set();
+  for (const post of popularPosts) {
+    if (post?.slug && !seenPopular.has(post.slug)) {
+      popular.push(post);
+      seenPopular.add(post.slug);
+    }
+    if (popular.length >= 7) break;
+  }
 
   return {
     updatedAt: new Date().toISOString(),
     source: 'Wix Blog API',
+    popularSource: popular.length ? 'Wix Blog metrics.views lifetime sort' : 'Curated fallback',
     totalPosts: posts.length,
     bookingUrl: BOOKING_URL,
     navTopics: TOPICS.map(({ key, label, navLabel }) => ({ key, label, navLabel })),
     hero: { lead, secondary: secondary.slice(0, 5) },
     startHere: START_HERE_LINKS,
     tools: SPOTLIGHT_TOOLS,
+    popular,
     shelves: TOPICS.map((topic) => ({
       key: topic.key,
       title: topic.label,
@@ -415,12 +446,14 @@ async function main() {
   const repoRoot = path.resolve(__dirname, '..');
   const outPath = path.resolve(repoRoot, args.out);
 
-  const [categories, rawPosts] = await Promise.all([
+  const [categories, rawPosts, rawPopularPosts] = await Promise.all([
     getCategories(args.siteId),
     getPosts(args.siteId, args.limit),
+    getPopularPosts(args.siteId, 20),
   ]);
   const posts = rawPosts.map((post) => normalizePost(post, categories));
-  const data = buildData(posts);
+  const popularPosts = rawPopularPosts.map((post) => normalizePost(post, categories));
+  const data = buildData(posts, popularPosts);
 
   await fs.mkdir(path.dirname(outPath), { recursive: true });
   await fs.writeFile(outPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8');

@@ -1,8 +1,9 @@
-const BW_BLOG_INDEX_DATA_URL = (() => {
+const BW_BLOG_INDEX_BASE_URL = (() => {
   const script = document.currentScript;
-  const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json', base).href;
+  return script && script.src ? script.src : window.location.href;
 })();
+const BW_BLOG_INDEX_DATA_URL = new URL('./data.json', BW_BLOG_INDEX_BASE_URL).href;
+const BW_BLOG_INDEX_LOGO_URL = `${new URL('./assets/berlin-travel-history-notes-logo.png', BW_BLOG_INDEX_BASE_URL).href}?v=20260529`;
 
 const BW_BLOG_INDEX_FALLBACK = {
   totalPosts: 0,
@@ -11,6 +12,7 @@ const BW_BLOG_INDEX_FALLBACK = {
   hero: { lead: null, secondary: [] },
   startHere: [],
   tools: [],
+  popular: [],
   shelves: [],
   latest: [],
   allPosts: [],
@@ -98,7 +100,7 @@ class BWBlogIndexElement extends HTMLElement {
           border-top: 8px solid var(--yellow);
           border-bottom: 2px solid var(--text);
           color: var(--text);
-          padding: 28px 0 38px;
+          padding: 22px 0 34px;
           position: relative;
         }
 
@@ -115,8 +117,35 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-masthead {
           border-bottom: 1px solid var(--text);
-          margin-bottom: 22px;
-          padding-bottom: 20px;
+          display: grid;
+          gap: 16px;
+          grid-template-columns: minmax(240px, 460px) minmax(0, 1fr);
+          margin-bottom: 26px;
+          padding-bottom: 16px;
+        }
+
+        .bw-blog-index .bw-blog-logo-link {
+          align-self: start;
+          display: block;
+          max-width: 460px;
+          min-width: 0;
+          text-decoration: none;
+          width: 100%;
+        }
+
+        .bw-blog-index .bw-blog-logo {
+          display: block;
+          height: auto;
+          max-width: 100%;
+          width: 100%;
+        }
+
+        .bw-blog-index .bw-masthead-side {
+          align-content: end;
+          display: grid;
+          gap: 12px;
+          justify-items: end;
+          min-width: 0;
         }
 
         .bw-blog-index .bw-kicker,
@@ -150,11 +179,12 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-hero-lead {
           color: #2B332B;
           font-family: var(--serif);
-          font-size: 18px;
-          line-height: 1.62;
+          font-size: 15px;
+          line-height: 1.5;
           margin-bottom: 0;
-          max-width: 700px;
+          max-width: 500px;
           overflow-wrap: anywhere;
+          text-align: right;
         }
 
         .bw-blog-index .bw-hero-grid {
@@ -249,11 +279,12 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-lead-copy {
-          background: #FFFFFF;
+          background: rgba(250, 250, 245, 0.94);
+          border-left: 8px solid var(--yellow);
           display: block;
           margin: -50px 0 0 52px;
           max-width: calc(100% - 52px);
-          padding: 28px 32px 22px;
+          padding: 26px 32px 22px;
           position: relative;
           z-index: 1;
         }
@@ -367,14 +398,14 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-controls {
           align-items: center;
-          display: grid;
-          gap: 14px;
-          grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
+          display: flex;
           margin-bottom: 24px;
         }
 
         .bw-blog-index .bw-search {
+          max-width: 360px;
           position: relative;
+          width: 100%;
         }
 
         .bw-blog-index .bw-search input {
@@ -391,23 +422,27 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-topic-nav {
           display: flex;
           flex-wrap: wrap;
-          gap: 8px;
+          gap: 6px 8px;
           justify-content: flex-end;
           min-width: 0;
         }
 
         .bw-blog-index .bw-topic-btn {
-          background: #FFFFFF;
+          align-items: center;
+          background: transparent;
           border: 1px solid var(--text);
           border-radius: 0;
           color: var(--text);
           cursor: pointer;
+          display: inline-flex;
           font: 900 12px/1 Montserrat, Arial, sans-serif;
           min-height: 38px;
           padding: 0 13px;
+          text-decoration: none;
         }
 
-        .bw-blog-index .bw-topic-btn[aria-pressed="true"] {
+        .bw-blog-index .bw-topic-btn:hover,
+        .bw-blog-index .bw-topic-btn:focus-visible {
           background: var(--yellow);
           border-color: var(--text);
           color: var(--text);
@@ -840,8 +875,8 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-feature-section h2 {
-          font-size: clamp(48px, 8vw, 92px);
-          line-height: 0.9;
+          font-size: clamp(34px, 5vw, 58px);
+          line-height: 0.96;
           margin: 0;
         }
 
@@ -871,10 +906,10 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-feature-lead-copy {
-          background: #FFFFFF;
-          margin: -48px 0 0 52px;
-          max-width: calc(100% - 52px);
-          padding: 24px 28px 18px;
+          background: transparent;
+          margin: 18px 0 0;
+          max-width: 100%;
+          padding: 0;
           position: relative;
           z-index: 1;
         }
@@ -882,7 +917,7 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-feature-title {
           color: var(--text);
           display: block;
-          font-size: 30px;
+          font-size: 26px;
           font-weight: 900;
           line-height: 1.08;
           margin-bottom: 8px;
@@ -890,8 +925,8 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-feature-lead .bw-feature-title {
-          font-size: 39px;
-          line-height: 1.04;
+          font-size: 32px;
+          line-height: 1.06;
         }
 
         .bw-blog-index .bw-feature-excerpt {
@@ -988,7 +1023,7 @@ class BWBlogIndexElement extends HTMLElement {
         @media (max-width: 980px) {
           .bw-blog-index .bw-hero-grid,
           .bw-blog-index .bw-lead-card,
-          .bw-blog-index .bw-controls {
+          .bw-blog-index .bw-masthead {
             grid-template-columns: 1fr;
           }
 
@@ -999,6 +1034,14 @@ class BWBlogIndexElement extends HTMLElement {
 
           .bw-blog-index .bw-topic-nav {
             justify-content: flex-start;
+          }
+
+          .bw-blog-index .bw-masthead-side {
+            justify-items: start;
+          }
+
+          .bw-blog-index .bw-hero-lead {
+            text-align: left;
           }
 
           .bw-blog-index .bw-post-grid,
@@ -1016,8 +1059,8 @@ class BWBlogIndexElement extends HTMLElement {
           }
 
           .bw-blog-index .bw-feature-lead-copy {
-            max-width: calc(100% - 34px);
-            margin-left: 34px;
+            max-width: 100%;
+            margin-left: 0;
           }
         }
 
@@ -1055,15 +1098,20 @@ class BWBlogIndexElement extends HTMLElement {
           }
 
           .bw-blog-index .bw-hero {
-            padding: 34px 0 28px;
+            padding: 22px 0 26px;
           }
 
-          .bw-blog-index h1 {
-            font-size: 36px;
+          .bw-blog-index .bw-masthead {
+            gap: 12px;
+            margin-bottom: 20px;
+          }
+
+          .bw-blog-index .bw-blog-logo-link {
+            max-width: 360px;
           }
 
           .bw-blog-index .bw-hero-lead {
-            font-size: 16px;
+            font-size: 14px;
             max-width: 100%;
             width: 100%;
           }
@@ -1078,7 +1126,7 @@ class BWBlogIndexElement extends HTMLElement {
             margin: -34px 0 0 22px;
             max-width: calc(100% - 22px);
             overflow: hidden;
-            padding: 22px;
+            padding: 20px;
           }
 
           .bw-blog-index .bw-lead-title {
@@ -1148,13 +1196,13 @@ class BWBlogIndexElement extends HTMLElement {
           }
 
           .bw-blog-index .bw-feature-section h2 {
-            font-size: 48px;
+            font-size: 36px;
           }
 
           .bw-blog-index .bw-feature-lead-copy {
-            margin: -34px 0 0 22px;
-            max-width: calc(100% - 22px);
-            padding: 22px;
+            margin: 16px 0 0;
+            max-width: 100%;
+            padding: 0;
           }
 
           .bw-blog-index .bw-feature-lead .bw-feature-title,
@@ -1219,7 +1267,6 @@ class BWBlogIndexElement extends HTMLElement {
   _render() {
     const root = this.querySelector('.bw-blog-index-root');
     if (!root) return;
-    const activeView = Boolean(this._query || this._topic !== 'all');
     root.removeAttribute('aria-live');
     root.innerHTML = `
       ${this._renderHero()}
@@ -1227,9 +1274,8 @@ class BWBlogIndexElement extends HTMLElement {
         <div class="bw-inner">
           ${this._renderControls()}
           ${this._renderResults()}
-          ${activeView ? this._renderToolsBand() : ''}
           ${this._renderShelves()}
-          ${activeView ? '' : this._renderToolsBand()}
+          ${this._renderToolsBand()}
           ${this._renderLatest()}
         </div>
       </main>
@@ -1245,9 +1291,14 @@ class BWBlogIndexElement extends HTMLElement {
         <div class="bw-inner">
           <div class="bw-masthead">
             <div>
-              <span class="bw-kicker">Field notes from BerlinWalk</span>
-              <h1 id="bw-blog-index-title">Berlin Travel &amp; History Notes</h1>
+              <h1 id="bw-blog-index-title" class="bw-visually-hidden">Berlin Travel &amp; History Notes</h1>
+              <a class="bw-blog-logo-link" href="https://www.berlinwalk.com/blog" target="_top" aria-label="Berlin Travel and History Notes by BerlinWalk">
+                <img class="bw-blog-logo" src="${this._escapeAttribute(BW_BLOG_INDEX_LOGO_URL)}" alt="Berlin Travel &amp; History Notes" loading="eager" decoding="async">
+              </a>
+            </div>
+            <div class="bw-masthead-side">
               <p class="bw-hero-lead">Practical guides, route stories, history explainers, and first-day fixes for visitors who want Berlin to make sense before they start walking.</p>
+              ${this._renderTopicMenu()}
             </div>
           </div>
 
@@ -1265,27 +1316,32 @@ class BWBlogIndexElement extends HTMLElement {
   }
 
   _renderControls() {
-    const topics = this._data.navTopics || [];
     return `
       <div class="bw-controls" aria-label="Blog controls">
         <label class="bw-search">
           <span class="bw-visually-hidden">Search Berlin guides</span>
           <input type="search" data-bw-blog-search placeholder="Search Berlin guides" value="${this._escapeAttribute(this._query)}">
         </label>
-        <nav class="bw-topic-nav" aria-label="Blog topics">
-          <button class="bw-topic-btn" type="button" data-topic="all" aria-pressed="${this._topic === 'all'}">All</button>
-          ${topics.map((topic) => `
-            <button class="bw-topic-btn" type="button" data-topic="${this._escapeAttribute(topic.key)}" aria-pressed="${this._topic === topic.key}">
-              ${this._escapeHtml(topic.navLabel || topic.label)}
-            </button>
-          `).join('')}
-        </nav>
       </div>
     `;
   }
 
+  _renderTopicMenu() {
+    const topics = this._data.navTopics || [];
+    if (!topics.length) return '';
+    return `
+      <nav class="bw-topic-nav" aria-label="Blog sections">
+        ${topics.map((topic) => `
+          <a class="bw-topic-btn" href="#bw-topic-${this._escapeAttribute(topic.key)}" data-topic-scroll="${this._escapeAttribute(topic.key)}">
+            ${this._escapeHtml(topic.navLabel || topic.label)}
+          </a>
+        `).join('')}
+      </nav>
+    `;
+  }
+
   _renderResults() {
-    const active = this._query || this._topic !== 'all';
+    const active = Boolean(this._query);
     const matches = active ? this._filteredPosts() : [];
     const posts = matches.slice(0, 12);
     return `
@@ -1293,9 +1349,9 @@ class BWBlogIndexElement extends HTMLElement {
         <div class="bw-section-header">
           <div>
             <span class="bw-card-kicker">${matches.length} matches</span>
-            <h2>${this._query ? 'Search results' : 'Topic picks'}</h2>
+            <h2>Search results</h2>
           </div>
-          <a class="bw-view-link" href="https://www.berlinwalk.com/blog" target="_top">Reset view</a>
+          <a class="bw-view-link" href="#" data-search-reset>Reset search</a>
         </div>
         <div class="bw-compact-grid">
           ${posts.map((post) => this._renderCompactLink(post)).join('') || '<p class="bw-section-desc">No matching guide found.</p>'}
@@ -1331,11 +1387,6 @@ class BWBlogIndexElement extends HTMLElement {
 
   _renderShelves() {
     const shelves = this._data.shelves || [];
-    const activeView = Boolean(this._query || this._topic !== 'all');
-    if (activeView) {
-      return shelves.map((shelf) => this._renderRegularShelf(shelf)).join('');
-    }
-
     const featureKey = 'history-myths';
     const featureShelf = shelves.find((shelf) => shelf.key === featureKey);
     const regularShelves = shelves.filter((shelf) => shelf.key !== featureKey);
@@ -1358,7 +1409,6 @@ class BWBlogIndexElement extends HTMLElement {
             <h2>${this._escapeHtml(shelf.title)}</h2>
             <p class="bw-section-desc">${this._escapeHtml(shelf.description || '')}</p>
           </div>
-          <a class="bw-view-link" href="#" data-topic-link="${this._escapeAttribute(shelf.key)}">View topic</a>
         </div>
         <div class="bw-card-row">
           ${(shelf.posts || []).slice(0, 5).map((post) => this._renderShelfCard(post)).join('')}
@@ -1411,7 +1461,6 @@ class BWBlogIndexElement extends HTMLElement {
           <div>
             <h2>${this._escapeHtml(shelf.title)}</h2>
           </div>
-          <a class="bw-view-link" href="#" data-topic-link="${this._escapeAttribute(shelf.key)}">More</a>
         </div>
         <div class="bw-feature-grid">
           ${this._renderFeatureLead(lead)}
@@ -1557,6 +1606,10 @@ class BWBlogIndexElement extends HTMLElement {
   }
 
   _popularPosts() {
+    if (Array.isArray(this._data.popular) && this._data.popular.length) {
+      return this._data.popular.slice(0, 7);
+    }
+
     const curatedSlugs = [
       'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
       'public-toilets-in-berlin',
@@ -1624,19 +1677,21 @@ class BWBlogIndexElement extends HTMLElement {
   }
 
   _bindControls() {
-    this.querySelectorAll('[data-topic]').forEach((button) => {
-      button.addEventListener('click', () => {
-        this._topic = button.getAttribute('data-topic') || 'all';
-        this._rerender();
+    this.querySelectorAll('[data-topic-scroll]').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        const topic = link.getAttribute('data-topic-scroll');
+        const target = topic ? this.querySelector(`#bw-topic-${topic}`) : null;
+        target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
-    this.querySelectorAll('[data-topic-link]').forEach((link) => {
+    this.querySelectorAll('[data-search-reset]').forEach((link) => {
       link.addEventListener('click', (event) => {
         event.preventDefault();
-        this._topic = link.getAttribute('data-topic-link') || 'all';
+        this._query = '';
         this._rerender();
-        this.querySelector('.bw-results')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.querySelector('[data-bw-blog-search]')?.focus();
       });
     });
 
@@ -1704,8 +1759,6 @@ class BWBlogIndexElement extends HTMLElement {
   _filteredPosts() {
     const query = this._query.toLowerCase();
     return (this._data.allPosts || []).filter((post) => {
-      const matchesTopic = this._topic === 'all' || post.topic === this._topic;
-      if (!matchesTopic) return false;
       if (!query) return true;
       return [
         post.title,
