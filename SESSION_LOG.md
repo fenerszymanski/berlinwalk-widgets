@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-29 — Codex (Single blog post mockup)
+
+**Did:** Built a static mockup for the redesigned single blog post experience before touching production post scripts.
+
+**Changed:**
+- `blog-post-mockup/index.html` — new standalone editorial article mockup using the current blog logo, real first-time visitor hero image, Quick Summary + Audio module, sticky guide rail, inline tool prompt, First-Day Guide signup, next-step cards, and related guides.
+- Project root `output/qa/blog-post-mockup-*.png` — saved desktop/mobile top and journey-section screenshots.
+
+**Opened:** Yusuf needs to approve/adjust the direction before this becomes the production `js/blog-journey-inject.js` / blog post CSS implementation.
+**Closed:** Local mockup QA passed with 0 broken images and 0 horizontal overflow on desktop and 390px mobile.
+
+**Next session should:** Review the mockup with Yusuf, then translate the accepted pieces into the sitewide post enhancer without replacing Wix Blog CMS.
+
 ## 2026-05-29 — Codex (Blog index category shelf sliders)
 
 **Did:** Converted `/blog` category shelves from fixed 5-card rows into horizontal sliders so more posts are reachable per category.

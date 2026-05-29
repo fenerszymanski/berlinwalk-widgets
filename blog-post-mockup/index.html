@@ -1,0 +1,848 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Blog Post Mockup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --text: #212121;
+      --muted: #4E5A4E;
+      --line: #D7D7CF;
+      --serif: Merriweather, Georgia, serif;
+      --sans: Montserrat, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--cream);
+      color: var(--text);
+      font-family: var(--sans);
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      height: auto;
+      max-width: 100%;
+    }
+
+    .bw-post {
+      background: linear-gradient(90deg, var(--yellow) 0 24%, var(--green) 24% 100%) top/100% 7px no-repeat, var(--cream);
+      min-height: 100vh;
+      padding-top: 7px;
+    }
+
+    .bw-post-bar {
+      align-items: center;
+      border-bottom: 2px solid var(--text);
+      display: flex;
+      gap: 28px;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 1240px;
+      min-height: 82px;
+      padding: 14px 28px;
+    }
+
+    .bw-post-logo {
+      display: block;
+      width: min(330px, 52vw);
+    }
+
+    .bw-post-nav {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .bw-post-nav a {
+      border: 1px solid var(--text);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .2px;
+      min-height: 38px;
+      padding: 11px 14px 0;
+      text-decoration: none;
+    }
+
+    .bw-post-nav a:last-child {
+      background: var(--yellow);
+    }
+
+    .bw-hero {
+      display: grid;
+      gap: 44px;
+      grid-template-columns: minmax(0, .92fr) minmax(420px, 1.08fr);
+      margin: 0 auto;
+      max-width: 1240px;
+      padding: 48px 28px 36px;
+    }
+
+    .bw-hero-copy {
+      align-self: end;
+      max-width: 680px;
+    }
+
+    .bw-kicker {
+      color: var(--green);
+      display: block;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1.8px;
+      line-height: 1.2;
+      margin-bottom: 13px;
+      text-transform: uppercase;
+    }
+
+    .bw-hero h1 {
+      font-size: clamp(42px, 6vw, 78px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: .95;
+      margin: 0 0 18px;
+    }
+
+    .bw-dek {
+      color: #333333;
+      font-family: var(--serif);
+      font-size: 21px;
+      line-height: 1.48;
+      margin: 0 0 24px;
+    }
+
+    .bw-meta {
+      border-top: 2px solid var(--text);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding-top: 16px;
+    }
+
+    .bw-meta span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .bw-hero-media {
+      align-self: end;
+    }
+
+    .bw-hero-media img {
+      aspect-ratio: 1.36 / 1;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .bw-page-grid {
+      border-top: 2px solid var(--text);
+      display: grid;
+      gap: 42px;
+      grid-template-columns: 210px minmax(0, 720px) 250px;
+      margin: 0 auto;
+      max-width: 1240px;
+      padding: 34px 28px 64px;
+    }
+
+    .bw-rail {
+      align-self: start;
+      position: sticky;
+      top: 18px;
+    }
+
+    .bw-panel {
+      background: var(--paper);
+      border: 1px solid var(--text);
+      padding: 18px;
+    }
+
+    .bw-panel + .bw-panel {
+      margin-top: 18px;
+    }
+
+    .bw-panel-title {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0 0 12px;
+      text-transform: uppercase;
+    }
+
+    .bw-toc {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bw-toc li {
+      border-top: 1px solid var(--line);
+    }
+
+    .bw-toc li:first-child {
+      border-top: 0;
+    }
+
+    .bw-toc a {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.25;
+      padding: 10px 0;
+      text-decoration: none;
+    }
+
+    .bw-side-cta {
+      background: var(--green);
+      border-color: var(--green);
+      color: #FFFFFF;
+    }
+
+    .bw-side-cta strong {
+      display: block;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+
+    .bw-side-cta span {
+      color: rgba(255, 255, 255, .88);
+      display: block;
+      font-family: var(--serif);
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .bw-button {
+      align-items: center;
+      background: var(--yellow);
+      border: 1px solid var(--text);
+      color: var(--text);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: center;
+      letter-spacing: .8px;
+      min-height: 42px;
+      padding: 0 15px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .bw-article {
+      background: var(--paper);
+      border-left: 1px solid var(--line);
+      border-right: 1px solid var(--line);
+      padding: 0 38px 18px;
+    }
+
+    .bw-quick {
+      border-bottom: 2px solid var(--text);
+      border-top: 2px solid var(--text);
+      display: grid;
+      gap: 26px;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      margin: 0 -38px 34px;
+      padding: 24px 38px;
+    }
+
+    .bw-audio {
+      align-content: start;
+      background: var(--green);
+      color: #FFFFFF;
+      display: grid;
+      gap: 12px;
+      padding: 20px;
+    }
+
+    .bw-audio b {
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .bw-player {
+      align-items: center;
+      border: 1px solid rgba(255, 255, 255, .5);
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 42px minmax(0, 1fr);
+      min-height: 54px;
+      padding: 0 12px;
+    }
+
+    .bw-play {
+      align-items: center;
+      background: var(--yellow);
+      border-radius: 999px;
+      color: var(--green);
+      display: inline-flex;
+      font-weight: 900;
+      height: 32px;
+      justify-content: center;
+      width: 32px;
+    }
+
+    .bw-bar {
+      background: rgba(255, 255, 255, .26);
+      height: 5px;
+      overflow: hidden;
+    }
+
+    .bw-bar span {
+      background: #FFFFFF;
+      display: block;
+      height: 100%;
+      width: 42%;
+    }
+
+    .bw-summary h2,
+    .bw-next h2,
+    .bw-survival h2 {
+      font-size: 27px;
+      font-weight: 900;
+      line-height: 1.05;
+      margin: 0 0 12px;
+    }
+
+    .bw-summary ul {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .bw-summary li {
+      font-family: var(--serif);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .bw-article p {
+      font-family: var(--serif);
+      font-size: 18px;
+      line-height: 1.82;
+      margin: 0 0 22px;
+    }
+
+    .bw-article .bw-lead {
+      color: #2D2D2D;
+      font-size: 21px;
+      line-height: 1.65;
+    }
+
+    .bw-article h2 {
+      border-top: 2px solid var(--text);
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.04;
+      margin: 42px 0 14px;
+      padding-top: 26px;
+    }
+
+    .bw-pull {
+      border-left: 7px solid var(--yellow);
+      font-family: var(--sans);
+      font-size: 26px;
+      font-weight: 900;
+      line-height: 1.14;
+      margin: 36px 0;
+      padding: 6px 0 6px 20px;
+    }
+
+    .bw-inline-tool,
+    .bw-survival,
+    .bw-next,
+    .bw-related {
+      margin: 38px -12px;
+    }
+
+    .bw-inline-tool {
+      align-items: center;
+      background: var(--cream);
+      border: 2px solid var(--text);
+      display: grid;
+      gap: 22px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 22px;
+    }
+
+    .bw-inline-tool strong {
+      display: block;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 7px;
+    }
+
+    .bw-inline-tool span {
+      color: var(--muted);
+      display: block;
+      font-family: var(--serif);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .bw-survival {
+      background: var(--green);
+      color: #FFFFFF;
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 148px minmax(0, 1fr);
+      padding: 24px;
+    }
+
+    .bw-survival img {
+      align-self: start;
+      box-shadow: 8px 8px 0 var(--yellow);
+      width: 132px;
+    }
+
+    .bw-survival h2 {
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .bw-survival p {
+      color: rgba(255, 255, 255, .9);
+      font-size: 15px;
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .bw-form {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .bw-form input {
+      border: 1px solid #FFFFFF;
+      border-radius: 0;
+      font: 700 14px/1 var(--sans);
+      min-height: 46px;
+      padding: 0 13px;
+    }
+
+    .bw-next {
+      background: #111111;
+      color: #FFFFFF;
+      padding: 28px;
+    }
+
+    .bw-next h2 {
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+
+    .bw-next > p {
+      color: rgba(255, 255, 255, .84);
+      font-size: 15px;
+      line-height: 1.55;
+      margin-bottom: 20px;
+    }
+
+    .bw-next-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bw-next-card {
+      background: #FFFFFF;
+      color: var(--text);
+      display: block;
+      min-width: 0;
+      padding: 17px;
+      text-decoration: none;
+    }
+
+    .bw-next-card span {
+      color: var(--green);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .bw-next-card strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.16;
+      margin-bottom: 8px;
+    }
+
+    .bw-next-card em {
+      color: var(--muted);
+      display: block;
+      font-family: var(--serif);
+      font-size: 13px;
+      font-style: normal;
+      line-height: 1.4;
+    }
+
+    .bw-right-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .bw-right-list li {
+      border-top: 1px solid var(--line);
+    }
+
+    .bw-right-list li:first-child {
+      border-top: 0;
+    }
+
+    .bw-right-list a {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 72px minmax(0, 1fr);
+      padding: 12px 0;
+      text-decoration: none;
+    }
+
+    .bw-right-list img {
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      width: 72px;
+    }
+
+    .bw-right-list b {
+      display: block;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.23;
+    }
+
+    .bw-related {
+      border-top: 2px solid var(--text);
+      padding-top: 26px;
+    }
+
+    .bw-related h2 {
+      border: 0;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .bw-related-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bw-related-card {
+      border-left: 1px solid var(--line);
+      padding-left: 15px;
+      text-decoration: none;
+    }
+
+    .bw-related-card img {
+      aspect-ratio: 1.4 / 1;
+      margin-bottom: 12px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .bw-related-card strong {
+      display: block;
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.16;
+    }
+
+    @media (max-width: 1080px) {
+      .bw-page-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .bw-rail {
+        display: none;
+      }
+
+      .bw-article {
+        border: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .bw-post-bar {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+        padding: 16px;
+      }
+
+      .bw-post-logo {
+        width: min(340px, 100%);
+      }
+
+      .bw-post-nav {
+        justify-content: flex-start;
+      }
+
+      .bw-hero {
+        gap: 24px;
+        grid-template-columns: 1fr;
+        padding: 32px 16px 26px;
+      }
+
+      .bw-hero h1 {
+        font-size: 38px;
+      }
+
+      .bw-dek {
+        font-size: 18px;
+      }
+
+      .bw-page-grid {
+        padding: 24px 16px 48px;
+      }
+
+      .bw-article {
+        padding: 0;
+      }
+
+      .bw-quick {
+        grid-template-columns: 1fr;
+        margin: 0 0 30px;
+        padding: 20px 0;
+      }
+
+      .bw-article h2 {
+        font-size: 28px;
+      }
+
+      .bw-article p,
+      .bw-article .bw-lead {
+        font-size: 17px;
+      }
+
+      .bw-inline-tool,
+      .bw-survival,
+      .bw-next,
+      .bw-related {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      .bw-inline-tool,
+      .bw-survival,
+      .bw-next-grid,
+      .bw-related-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-inline-tool {
+        align-items: start;
+      }
+
+      .bw-form {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-survival img {
+        width: 118px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bw-post">
+    <nav class="bw-post-bar" aria-label="Blog">
+      <a href="/blog" class="bw-post-logo" aria-label="Berlin Travel and History Notes">
+        <img src="../blog-index/assets/berlin-travel-history-notes-logo-640.png" alt="Berlin travel and history notes">
+      </a>
+      <div class="bw-post-nav">
+        <a href="/blog">Blog home</a>
+        <a href="/blog#bw-topic-first-day">First day</a>
+        <a href="/blog#bw-topic-history-myths">History</a>
+        <a href="/book">Book free tour</a>
+      </div>
+    </nav>
+
+    <header class="bw-hero">
+      <div class="bw-hero-copy">
+        <span class="bw-kicker">Tourist tips · 5 min read</span>
+        <h1>Berlin First-Time Visitor Mistakes: 12 Things to Know Before You Go</h1>
+        <p class="bw-dek">Visiting Berlin for the first time? Avoid the classic tourist mistakes around transport, Sunday closures, cash, neighborhoods, museums, and sightseeing with this honest local guide.</p>
+        <div class="bw-meta">
+          <span>By BerlinWalk</span>
+          <span>Updated May 2026</span>
+          <span>Part of First Day in Berlin</span>
+        </div>
+      </div>
+      <figure class="bw-hero-media">
+        <img src="https://static.wixstatic.com/media/5a08a3_54f21b39201148979493c61258d4a640~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7950505146516d46314234~mv2.jpg" alt="Hand holding a folded 100 euro note on Berlin pavement">
+      </figure>
+    </header>
+
+    <div class="bw-page-grid">
+      <aside class="bw-rail" aria-label="Article navigation">
+        <section class="bw-panel">
+          <p class="bw-panel-title">In this guide</p>
+          <ol class="bw-toc">
+            <li><a href="#tickets">Do not buy transport tickets blindly</a></li>
+            <li><a href="#sunday">Sunday changes the city</a></li>
+            <li><a href="#cash">Cash still matters</a></li>
+            <li><a href="#next">Turn this into a plan</a></li>
+          </ol>
+        </section>
+        <section class="bw-panel bw-side-cta">
+          <strong>Walk the historic center with Yusuf</strong>
+          <span>2 hours from Alexanderplatz to Hackescher Markt. Free to book, tip-based after the walk.</span>
+          <a class="bw-button" href="/book">Reserve your spot</a>
+        </section>
+      </aside>
+
+      <article class="bw-article">
+        <section class="bw-quick" aria-label="Quick summary and audio">
+          <div class="bw-audio">
+            <b>Listen first</b>
+            <div class="bw-player">
+              <span class="bw-play">▶</span>
+              <span class="bw-bar"><span></span></span>
+            </div>
+            <p style="font-family:var(--serif);font-size:14px;line-height:1.5;margin:0;color:rgba(255,255,255,.9);">A short local intro before you start reading.</p>
+          </div>
+          <div class="bw-summary">
+            <h2>Quick summary</h2>
+            <ul>
+              <li>Validate the right transport ticket before your first ride.</li>
+              <li>Plan around Sunday closures, especially shopping and pharmacies.</li>
+              <li>Carry some cash, but do not over-withdraw for normal city days.</li>
+              <li>Use your first day to understand the center before chasing every landmark.</li>
+            </ul>
+          </div>
+        </section>
+
+        <p class="bw-lead">Berlin is easy to visit once you understand its logic. The trouble is that many visitors arrive with expectations from Paris, London, or Rome, and Berlin behaves differently.</p>
+        <p>This guide is not here to make the city sound difficult. It is here to remove the small frictions that waste your first day: the ticket machine moment, the closed shop, the confusing museum plan, the long detour that did not need to happen.</p>
+
+        <h2 id="tickets">Do not buy transport tickets blindly</h2>
+        <p>Berlin transport is excellent, but the ticket names are not always intuitive. Most central city travel uses AB. Airport journeys need ABC. Paper tickets must be validated before the ride, and the fine is far more expensive than the ticket.</p>
+
+        <aside class="bw-inline-tool">
+          <div>
+            <span class="bw-kicker">Useful now</span>
+            <strong>Berlin First-Day Planner</strong>
+            <span>Build a realistic first-day plan around arrival time, luggage, weather, tickets, and the walking tour.</span>
+          </div>
+          <a class="bw-button" href="/tools/berlin-first-day-planner">Open tool</a>
+        </aside>
+
+        <h2 id="sunday">Sunday changes the city</h2>
+        <p>Many supermarkets and ordinary shops close on Sundays. Museums, restaurants, cafes, and tourist sights may still be open, but the day has a different rhythm. If you land on a Sunday, plan your first meals and basic supplies before you need them.</p>
+
+        <div class="bw-pull">The first day should make Berlin feel legible, not make your itinerary feel heroic.</div>
+
+        <h2 id="cash">Cash still matters, but not everywhere</h2>
+        <p>Berlin is much more card-friendly than it used to be, but cash has not disappeared. Small food places, flea markets, public toilets, and some older neighborhood spots may still prefer or require it. Carry enough for small moments, not a week of anxiety.</p>
+
+        <section class="bw-survival" aria-label="Berlin First-Day Survival Guide signup">
+          <img src="../lead-form/assets/berlin-first-day-survival-guide-cover.jpg" alt="Berlin First-Day Survival Guide cover">
+          <div>
+            <span class="bw-kicker">Free guide</span>
+            <h2>Get the Berlin First-Day Survival Guide</h2>
+            <p>A compact PDF for airport arrival, transport tickets, luggage, toilets, Sunday rules, and the first walk through the historic center.</p>
+            <form class="bw-form">
+              <input type="email" placeholder="Enter your email" aria-label="Email address">
+              <button class="bw-button" type="button">Send guide</button>
+            </form>
+          </div>
+        </section>
+
+        <h2>Start with the center, then branch out</h2>
+        <p>Berlin rewards context. If you understand Alexanderplatz, Museum Island, Unter den Linden, and the route toward Hackescher Markt, many later places make more sense. That is why the free walk is built as a story route rather than a checklist.</p>
+
+        <section class="bw-next" id="next" aria-label="Next steps">
+          <span class="bw-kicker">Next step</span>
+          <h2>Turn this guide into a Berlin plan</h2>
+          <p>After reading, the next move should be obvious: walk the city, continue with the most relevant guide, or use a practical tool.</p>
+          <div class="bw-next-grid">
+            <a class="bw-next-card" href="/book">
+              <span>Walk it</span>
+              <strong>Book the free Berlin walk</strong>
+              <em>Join the 2 hours route from Alexanderplatz to near Hackescher Markt.</em>
+            </a>
+            <a class="bw-next-card" href="/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way">
+              <span>Read next</span>
+              <strong>Berlin Airport to Alexanderplatz</strong>
+              <em>The easiest route from BER into the center without overpaying.</em>
+            </a>
+            <a class="bw-next-card" href="/tools/berlin-first-day-planner">
+              <span>Use a tool</span>
+              <strong>Berlin First-Day Planner</strong>
+              <em>Turn arrival time and energy into a realistic first-day route.</em>
+            </a>
+          </div>
+        </section>
+
+        <section class="bw-related" aria-label="Related guides">
+          <h2>Keep planning</h2>
+          <div class="bw-related-grid">
+            <a class="bw-related-card" href="/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus">
+              <img src="https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg" alt="Berlin U-Bahn train">
+              <strong>Berlin Public Transport 2026</strong>
+            </a>
+            <a class="bw-related-card" href="/post/public-toilets-in-berlin">
+              <img src="https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg" alt="Public toilet sign in Berlin">
+              <strong>Public Toilets in Berlin</strong>
+            </a>
+            <a class="bw-related-card" href="/post/where-to-find-a-luggage-storage-in-berlin-for-a-few-hours">
+              <img src="https://static.wixstatic.com/media/5a08a3_d02fcda6952d4f888c691198e4f9fd22~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_2562e8eaa0124f3993de4b8764793e13~mv2.jpg" alt="Colorful luggage lockers">
+              <strong>Where to Store Luggage</strong>
+            </a>
+          </div>
+        </section>
+      </article>
+
+      <aside class="bw-rail" aria-label="More BerlinWalk guides">
+        <section class="bw-panel">
+          <p class="bw-panel-title">Related guides</p>
+          <ul class="bw-right-list">
+            <li><a href="/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way"><img src="https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_180,h_180,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg" alt=""><b>Berlin Airport to Alexanderplatz</b></a></li>
+            <li><a href="/post/public-toilets-in-berlin"><img src="https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_180,h_180,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg" alt=""><b>Public Toilets in Berlin</b></a></li>
+            <li><a href="/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus"><img src="https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_180,h_180,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg" alt=""><b>Berlin Public Transport 2026</b></a></li>
+          </ul>
+        </section>
+      </aside>
+    </div>
+  </div>
+</body>
+</html>
