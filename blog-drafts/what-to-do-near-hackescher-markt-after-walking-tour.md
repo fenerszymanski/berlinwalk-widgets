@@ -2,7 +2,7 @@
 
 Slug idea: `what-to-do-near-hackescher-markt-after-walking-tour`
 
-Wix draft status: not created
+Wix draft status: created on 2026-05-30 as draft `3d4933e8-c479-4a4b-8dfb-2bec143721b8`
 
 Meta title: What to Do Near Hackescher Markt After a Walking Tour
 
@@ -91,9 +91,17 @@ If the weather is decent and you still want to move, take this loop:
 
 Start with **Hackesche Höfe**, the famous courtyard complex entered from Rosenthaler Strasse. The official Hackesche Höfe site describes it as Germany's biggest courtyard complex, and visitBerlin notes the eight courtyards between Rosenthaler Strasse and Sophienstrasse, with shops, cafes, cultural venues, apartments, and offices packed into the restored site.
 
+![Hackesche Höfe courtyard near Hackescher Markt](assets/hackescher-after-tour/06-hackesche-hoefe-courtyard.jpg)
+
+*Hackesche Höfe gives this loop its polished courtyard contrast: restored Art Nouveau architecture, shops, cafes, and a very easy no-ticket stop. Photo: Raimond Spekking, CC BY-SA 4.0, via Wikimedia Commons; resized.*
+
 This is not a deep historical stop in the same way as the Berlin Wall or Museum Island. It is more useful as a Berlin atmosphere stop. You see the old courtyard logic of the city: the public street in front, the passageway, then a series of more private spaces inside. It is also easy. No ticket, no queue, no commitment.
 
 After that, cross to **Haus Schwarzenberg** at Rosenthaler Strasse 39. This is the rougher courtyard people often mean when they say "street art courtyard near Hackescher Markt." The Anne Frank Zentrum and Museum Otto Weidt are inside the same cultural ensemble. Even if you do not go into the exhibitions, the courtyard gives a very different feeling from the polished Hackesche Höfe across the street.
+
+![Street art in Haus Schwarzenberg near Hackescher Markt](assets/hackescher-after-tour/07-haus-schwarzenberg-street-art-courtyard.jpg)
+
+*Haus Schwarzenberg feels deliberately rougher than Hackesche Höfe: street art, small museums, and a more improvised courtyard atmosphere. Photo: Singlespeedfahrer, CC0, via Wikimedia Commons; resized.*
 
 From there, walk toward **Monbijoupark** and the Spree. Grün Berlin describes Monbijoupark as a four-hectare green area stretching from Oranienburger Strasse to the Spree riverbank promenade, right beside Museum Island. That makes it ideal after a tour: short, central, open, and not another checklist monument.
 
@@ -266,3 +274,4 @@ Checked on 2026-05-26:
 - Grün Berlin: Monbijoupark location and Spree/Museum Island context.
 - Das Lemke, Monsieur Vuong, Chamäleon, and Clärchens official sites: current positioning, location, and visitor information.
 - Berlin.de / market listings: weekly market context at Hackescher Markt.
+- Wikimedia Commons: Hackesche Höfe photo by Raimond Spekking, CC BY-SA 4.0; Haus Schwarzenberg photo by Singlespeedfahrer, CC0. Both resized for blog use.

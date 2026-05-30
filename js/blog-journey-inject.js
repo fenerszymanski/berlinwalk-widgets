@@ -4,12 +4,16 @@
  */
 (function () {
   var DATA_URL = window.BW_BLOG_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/data.json';
+  var TOOLS_DATA_URL = window.BW_TOOLS_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var STYLE_ID = 'bw-blog-journey-style';
   var POST_BODY_MARKER = 'data-bw-blog-post-body';
   var MOBILE_MARKER = 'data-bw-blog-mobile-guide';
   var TOOL_MARKER = 'data-bw-blog-tool-prompt';
   var JOURNEY_MARKER = 'data-bw-blog-journey';
+  var EMPTY_PARAGRAPH_MARKER = 'data-bw-empty-paragraph';
+  var NATIVE_END_MARKER = 'data-bw-native-blog-end-hidden';
   var MIN_MOBILE_WIDTH = 900;
+  var TOUR_IMAGE = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_700,h_420,al_c,q_86,enc_avif,quality_auto/file.jpg';
   var dataCache = null;
   var renderTimer = null;
   var observer = null;
@@ -167,7 +171,8 @@
     style.id = STYLE_ID;
     style.textContent = [
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"]{color:#212121;}',
-      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy){font-family:Merriweather,Georgia,serif!important;font-size:18px!important;line-height:1.78!important;margin:0 0 22px!important;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + EMPTY_PARAGRAPH_MARKER + '="1"]{display:none!important;height:0!important;line-height:0!important;margin:0!important;min-height:0!important;padding:0!important;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-family:Merriweather,Georgia,serif!important;font-size:18px!important;line-height:1.74!important;margin:0 0 18px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-family:Montserrat,Arial,sans-serif!important;font-weight:900!important;letter-spacing:0!important;color:#212121!important;scroll-margin-top:96px;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{border-top:2px solid #212121;font-size:clamp(28px,4vw,38px)!important;line-height:1.06!important;margin:42px 0 14px!important;padding-top:24px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-size:clamp(21px,3vw,26px)!important;line-height:1.12!important;margin:30px 0 10px!important;}',
@@ -191,34 +196,47 @@
       '.bw-blog-journey:before{background:linear-gradient(90deg,#FFE600,#7CB342);content:"";display:block;height:5px;left:0;position:absolute;top:0;width:100%;}',
       '.bw-blog-journey-kicker{color:#FFE600;}',
       '.bw-blog-journey h2{color:#FFFFFF!important;font-size:clamp(27px,4vw,36px)!important;font-weight:900!important;letter-spacing:0!important;line-height:1.06!important;margin:0 0 8px!important;padding:0!important;border:0!important;}',
-      '.bw-blog-journey-intro{color:rgba(255,255,255,.86);font-family:Merriweather,Georgia,serif;font-size:15px;line-height:1.58;margin:0 0 20px;}',
+      '.bw-blog-journey-intro{color:rgba(255,255,255,.86);font-family:Merriweather,Georgia,serif;font-size:15px;line-height:1.58;margin:0 0 22px;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey h2{border:0!important;color:#FFFFFF!important;font-size:clamp(27px,4vw,36px)!important;line-height:1.06!important;margin:0 0 8px!important;padding:0!important;}',
-      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey .bw-blog-journey-intro{color:rgba(255,255,255,.86)!important;font-family:Merriweather,Georgia,serif!important;font-size:15px!important;line-height:1.58!important;margin:0 0 20px!important;}',
-      '.bw-blog-journey-grid{display:grid;gap:12px;grid-template-columns:repeat(3,minmax(0,1fr));}',
-      '.bw-blog-journey-card{background:#FFFFFF;border:0;color:#212121;display:flex;flex-direction:column;min-width:0;padding:17px;text-decoration:none;transition:box-shadow .16s ease,transform .16s ease;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey .bw-blog-journey-intro{color:rgba(255,255,255,.86)!important;font-family:Merriweather,Georgia,serif!important;font-size:15px!important;line-height:1.58!important;margin:0 0 22px!important;}',
+      '.bw-blog-journey-grid{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:22px;}',
+      '.bw-blog-related-title{color:#FFE600!important;font-size:13px!important;font-weight:900!important;letter-spacing:1.4px!important;line-height:1!important;margin:0 0 14px!important;text-transform:uppercase;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-related-title{border:0!important;color:#FFE600!important;font-size:13px!important;line-height:1!important;margin:0 0 14px!important;padding:0!important;}',
+      '.bw-blog-related-grid{display:grid;gap:14px;grid-template-columns:repeat(3,minmax(0,1fr));}',
+      '.bw-blog-journey-card{background:#FFFFFF;border:0;color:#212121;display:flex;flex-direction:column;min-width:0;overflow:hidden;text-decoration:none;transition:box-shadow .16s ease,transform .16s ease;}',
       '.bw-blog-journey-card:hover{box-shadow:0 14px 28px rgba(0,0,0,.25);transform:translateY(-2px);}',
-      '.bw-blog-journey-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.2px;line-height:1;margin-bottom:10px;text-transform:uppercase;}',
-      '.bw-blog-journey-card strong{color:#212121;display:block;font-size:17px;font-weight:900;line-height:1.16;margin-bottom:8px;overflow-wrap:break-word;}',
-      '.bw-blog-journey-card span:last-child{color:#4E5A4E;display:block;font-family:Merriweather,Georgia,serif;font-size:13px;line-height:1.45;}',
+      '.bw-blog-journey-image{aspect-ratio:16/9;background:#E8EEE6;display:block;overflow:hidden;width:100%;}',
+      '.bw-blog-journey-image img{display:block;height:100%!important;object-fit:cover;width:100%!important;}',
+      '.bw-blog-journey-content{display:flex;flex:1;flex-direction:column;padding:14px 15px 16px;}',
+      '.bw-blog-journey-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.2px;line-height:1;margin-bottom:9px;text-transform:uppercase;}',
+      '.bw-blog-journey-card strong{color:#212121;display:block;font-size:16px;font-weight:900;line-height:1.16;overflow-wrap:break-word;}',
+      '[' + NATIVE_END_MARKER + '="1"]{display:none!important;}',
       '@media (min-width:900px){.bw-blog-mobile-guide{display:none!important;}}',
-      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy){font-size:17px!important;line-height:1.7!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:36px!important;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}}'
+      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}}'
     ].join('\n');
-    document.head.appendChild(style);
+    (document.head || document.documentElement).appendChild(style);
   }
 
   function loadData() {
     if (dataCache) return Promise.resolve(dataCache);
-    return fetch(DATA_URL, { cache: 'no-cache' })
-      .then(function (response) {
+    return Promise.all([
+      fetch(DATA_URL, { cache: 'no-cache' }).then(function (response) {
         if (!response.ok) throw new Error('blog data unavailable');
         return response.json();
-      })
-      .then(function (data) {
+      }),
+      fetch(TOOLS_DATA_URL, { cache: 'no-cache' }).then(function (response) {
+        if (!response.ok) return { tools: [] };
+        return response.json();
+      }).catch(function () { return { tools: [] }; })
+    ])
+      .then(function (payloads) {
+        var data = payloads[0] || {};
+        data.toolsHub = (payloads[1] && payloads[1].tools) || [];
         dataCache = data;
         return data;
       })
       .catch(function () {
-        dataCache = { allPosts: [], tools: [], bookingUrl: 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based' };
+        dataCache = { allPosts: [], tools: [], toolsHub: [], bookingUrl: 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based' };
         return dataCache;
       });
   }
@@ -240,13 +258,55 @@
     return null;
   }
 
+  function relatedPosts(data, post, limit) {
+    var posts = data.allPosts || [];
+    var current = post && post.slug;
+    var topic = post && post.topic;
+    var picked = [];
+    var seen = {};
+
+    function add(candidate) {
+      if (!candidate || !candidate.slug || candidate.slug === current || seen[candidate.slug]) return;
+      if (!candidate.url || !candidate.title) return;
+      seen[candidate.slug] = true;
+      picked.push(candidate);
+    }
+
+    posts.forEach(function (candidate) {
+      if (topic && candidate.topic === topic) add(candidate);
+    });
+    posts.forEach(add);
+    return picked.slice(0, limit || 6);
+  }
+
   function relatedTool(data, post) {
     var slug = post && post.relatedToolSlug;
     var tool = null;
     if (slug) {
-      tool = (data.tools || []).filter(function (item) { return item.slug === slug; })[0] || TOOL_FALLBACKS[slug];
+      tool = (data.toolsHub || []).filter(function (item) { return item.slug === slug; })[0] ||
+        (data.tools || []).filter(function (item) { return item.slug === slug; })[0] ||
+        TOOL_FALLBACKS[slug];
     }
-    return tool || (data.tools || [])[0] || TOOL_FALLBACKS['berlin-first-day-planner'];
+    tool = tool || (data.tools || [])[0] || TOOL_FALLBACKS['berlin-first-day-planner'];
+    if (tool && tool.slug && !tool.url) tool.url = 'https://www.berlinwalk.com/tools/' + tool.slug;
+    if (tool && !tool.summary && tool.lead) tool.summary = tool.lead;
+    return tool;
+  }
+
+  function normalizePostSpacing(body) {
+    if (!body) return;
+    body.querySelectorAll('p').forEach(function (paragraph) {
+      if (paragraph.closest('[' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) return;
+      var hasMedia = paragraph.querySelector('img,iframe,video,svg,canvas,button,audio');
+      var text = String(paragraph.textContent || '').replace(/\u00a0/g, ' ').trim();
+      if (!hasMedia && !text) {
+        paragraph.setAttribute(EMPTY_PARAGRAPH_MARKER, '1');
+        paragraph.setAttribute('aria-hidden', 'true');
+      } else {
+        paragraph.removeAttribute(EMPTY_PARAGRAPH_MARKER);
+        paragraph.removeAttribute('aria-hidden');
+      }
+    });
   }
 
   function markPostBody(body) {
@@ -261,15 +321,31 @@
     if (!body || !tool || !tool.url) return false;
     var slug = (tool.url.split('/').filter(Boolean).pop() || '').toLowerCase();
     if (!slug) return false;
-    var refs = body.querySelectorAll('a[href*="/tools/' + escapeSelector(slug) + '"], iframe[src*="/' + escapeSelector(slug) + '"]');
+    var widgetSlug = '';
+    if (tool.widgetUrl) widgetSlug = (tool.widgetUrl.split('/').filter(Boolean).pop() || '').toLowerCase();
+    var selector = 'a[href*="/tools/' + escapeSelector(slug) + '"], iframe[src*="/' + escapeSelector(slug) + '"]';
+    if (widgetSlug) selector += ', iframe[src*="/' + escapeSelector(widgetSlug) + '/"], a[href*="/' + escapeSelector(widgetSlug) + '/"]';
+    var refs = body.querySelectorAll(selector);
     for (var i = 0; i < refs.length; i++) {
       if (!refs[i].closest('[' + TOOL_MARKER + '], [' + JOURNEY_MARKER + ']')) return true;
     }
     return false;
   }
 
+  function hasEmbeddedArticleTool(body, tool) {
+    if (!body) return false;
+    var frames = body.querySelectorAll('iframe[src*="fenerszymanski.github.io/berlinwalk-widgets/"]');
+    for (var i = 0; i < frames.length; i++) {
+      var src = frames[i].getAttribute('src') || '';
+      if (frames[i].closest('[' + TOOL_MARKER + '], [' + JOURNEY_MARKER + ']')) continue;
+      if (/\/(quick-summary|faq)\//.test(src)) continue;
+      return true;
+    }
+    return hasExistingToolReference(body, tool);
+  }
+
   function findToolInsertionPoint(body, items) {
-    var start = items && items.length ? items[0].node : null;
+    var start = items && items.length > 1 ? items[1].node : (items && items.length ? items[0].node : null);
     var node = start ? start.nextElementSibling : null;
     while (node) {
       var tag = (node.tagName || '').toUpperCase();
@@ -296,7 +372,7 @@
     if (!body) return;
     var post = currentPost(data);
     var tool = relatedTool(data, post);
-    if (!tool || !tool.url || hasExistingToolReference(body, tool)) return;
+    if (!tool || !tool.url || hasEmbeddedArticleTool(body, tool)) return;
     var point = findToolInsertionPoint(body, items);
     if (!point || !point.parent || !point.after) return;
 
@@ -371,12 +447,27 @@
     return { parent: body, after: body.lastElementChild };
   }
 
+  function cardImage(card) {
+    return card.image || card.thumb || TOUR_IMAGE;
+  }
+
+  function renderJourneyCard(card) {
+    var image = cardImage(card);
+    return '<a class="bw-blog-journey-card" href="' + escapeAttr(card.url) + '" target="_top" data-bw-blog-journey-click="' + escapeAttr(card.label) + '">' +
+      '<span class="bw-blog-journey-image" aria-hidden="true"><img src="' + escapeAttr(image) + '" alt="" loading="lazy"></span>' +
+      '<span class="bw-blog-journey-content">' +
+        '<span class="bw-blog-journey-label">' + escapeHtml(card.label) + '</span>' +
+        '<strong>' + escapeHtml(card.title) + '</strong>' +
+      '</span>' +
+    '</a>';
+  }
+
   function insertJourney(body, data) {
     var old = document.querySelector('[' + JOURNEY_MARKER + ']');
     if (old) old.remove();
     if (!body) return;
     var post = currentPost(data);
-    var nextPost = relatedPost(data, post);
+    var posts = relatedPosts(data, post, 7);
     var tool = relatedTool(data, post);
     var bookingUrl = data.bookingUrl || 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
     var cards = [
@@ -384,23 +475,23 @@
         label: 'Walk it',
         title: 'Book the free Berlin walk',
         url: bookingUrl,
-        summary: 'Join the 2 hours route from Alexanderplatz to near Hackescher Markt.'
+        image: TOUR_IMAGE
       }
     ];
-    if (nextPost) {
-      cards.push({
-        label: 'Read next',
-        title: nextPost.title,
-        url: nextPost.url,
-        summary: nextPost.excerpt || 'Continue with a related BerlinWalk guide.'
-      });
-    }
     if (tool) {
       cards.push({
         label: 'Use a tool',
         title: tool.title,
         url: tool.url,
-        summary: tool.summary || 'Make the practical next step faster.'
+        image: tool.image
+      });
+    }
+    if (posts[0]) {
+      cards.push({
+        label: 'Read next',
+        title: posts[0].title,
+        url: posts[0].url,
+        image: posts[0].thumb || posts[0].image
       });
     }
 
@@ -411,16 +502,21 @@
     section.innerHTML =
       '<span class="bw-blog-journey-kicker">Next step</span>' +
       '<h2>Turn this guide into a Berlin plan</h2>' +
-      '<p class="bw-blog-journey-intro">Keep going with the most useful next move: the walk, a related guide, or a practical Berlin tool.</p>' +
+      '<p class="bw-blog-journey-intro">Keep going with the walk, the right tool, or another practical Berlin guide.</p>' +
       '<div class="bw-blog-journey-grid">' +
-      cards.slice(0, 3).map(function (card) {
-        return '<a class="bw-blog-journey-card" href="' + escapeAttr(card.url) + '" target="_top" data-bw-blog-journey-click="' + escapeAttr(card.label) + '">' +
-          '<span class="bw-blog-journey-label">' + escapeHtml(card.label) + '</span>' +
-          '<strong>' + escapeHtml(card.title) + '</strong>' +
-          '<span>' + escapeHtml(card.summary) + '</span>' +
-        '</a>';
+      cards.slice(0, 3).map(renderJourneyCard).join('') +
+      '</div>' +
+      (posts.length ? '<h3 class="bw-blog-related-title">Related guides</h3>' +
+      '<div class="bw-blog-related-grid">' +
+      posts.slice(1, 7).map(function (related) {
+        return renderJourneyCard({
+          label: related.topicLabel || related.category || 'Guide',
+          title: related.title,
+          url: related.url,
+          image: related.thumb || related.image
+        });
       }).join('') +
-      '</div>';
+      '</div>' : '');
 
     section.addEventListener('click', function (event) {
       var link = event.target.closest('[data-bw-blog-journey-click]');
@@ -439,6 +535,37 @@
     pushEvent('bw_blog_journey_view', { slug: currentSlug() });
   }
 
+  function hideNativeEndMatter() {
+    var labels = ['Related Posts', 'Comments'];
+    var candidates = document.querySelectorAll('h1,h2,h3,h4,[role="heading"],p,span,div');
+
+    function chooseContainer(el, label) {
+      var node = el;
+      for (var depth = 0; depth < 8 && node.parentElement && node.parentElement !== document.body; depth++) {
+        var parent = node.parentElement;
+        if (parent.closest('[' + JOURNEY_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) break;
+        var text = cleanText(parent.textContent);
+        var hasRelatedShape = label === 'Related Posts' && text.indexOf('Related Posts') !== -1 && parent.querySelectorAll('a,img').length >= 2;
+        var hasCommentsShape = label === 'Comments' && (text.indexOf('Comments') !== -1 || text.indexOf("Commenting on this post") !== -1);
+        if (hasRelatedShape || hasCommentsShape) return parent;
+      }
+      return node;
+    }
+
+    for (var i = 0; i < candidates.length; i++) {
+      var text = cleanText(candidates[i].textContent);
+      var isCommentUnavailable = text.indexOf("Commenting on this post") !== -1 && text.length < 220;
+      if (labels.indexOf(text) === -1 && !isCommentUnavailable) continue;
+      if (candidates[i].closest('[' + JOURNEY_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) continue;
+      var label = text.indexOf('Related Posts') !== -1 ? 'Related Posts' : 'Comments';
+      var container = chooseContainer(candidates[i], label);
+      if (container && container !== document.body) {
+        container.setAttribute(NATIVE_END_MARKER, '1');
+        container.setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+
   function pushEvent(name, params) {
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(Object.assign({ event: name }, params || {}));
@@ -454,11 +581,13 @@
     var body = findPostBody();
     if (!body) return;
     markPostBody(body);
+    normalizePostSpacing(body);
     var items = collectHeadings(body);
     insertMobileGuide(body, items);
     loadData().then(function (data) {
       insertToolPrompt(body, data, items);
       insertJourney(body, data);
+      hideNativeEndMatter();
     });
   }
 
@@ -473,22 +602,28 @@
     document.querySelectorAll('[' + POST_BODY_MARKER + ']').forEach(function (oldBody) {
       oldBody.removeAttribute(POST_BODY_MARKER);
     });
+    document.querySelectorAll('[' + NATIVE_END_MARKER + ']').forEach(function (el) {
+      el.removeAttribute(NATIVE_END_MARKER);
+      el.removeAttribute('aria-hidden');
+    });
   }
 
   function scheduleRender() {
     clearTimeout(renderTimer);
-    renderTimer = setTimeout(render, 700);
+    renderTimer = setTimeout(render, 160);
   }
 
   function boot() {
-    setTimeout(render, 1200);
-    [2400, 4200, 7000].forEach(function (delay) {
-      setTimeout(scheduleRender, delay);
+    if (isPostPage()) injectStyle();
+    [0, 80, 220, 520, 1100, 2400, 4200, 7000].forEach(function (delay) {
+      setTimeout(render, delay);
     });
     if (observer) observer.disconnect();
     observer = new MutationObserver(function () {
       if (!isPostPage()) return;
       var body = findPostBody();
+      if (body) normalizePostSpacing(body);
+      hideNativeEndMatter();
       var needsMobileGuide = body && collectHeadings(body).length >= 2;
       if (!document.querySelector('[' + JOURNEY_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {
         scheduleRender();
@@ -496,6 +631,8 @@
     });
     if (document.body) observer.observe(document.body, { childList: true, subtree: true });
   }
+
+  if (isPostPage()) injectStyle();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', boot);

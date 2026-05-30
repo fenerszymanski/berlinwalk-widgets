@@ -4,6 +4,48 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-30 — Codex (Blog journey helper v3)
+
+**Did:** Addressed Yusuf's SS1-SS4 feedback on Wix blog post rendering.
+
+**Changed:**
+- `js/blog-journey-inject.js` — loads CSS immediately on `/post/*`, retries render at 0/80/220/520ms to reduce first-paint flicker, hides empty Wix spacer paragraphs instead of relying on draft-level line breaks, suppresses the early inline tool prompt when the post already embeds a real tool iframe, replaces the `Next step` cards with image-led cards, adds six related-guide cards, pulls tool preview images from `tools-hub/data.json`, and hides Wix-native Related Posts/Comments.
+- `blog-post-mockup/enhancer-test.html` — added local regression fixtures for empty spacer paragraphs, embedded tool iframe, and native Wix related/comments blocks.
+- Project root `PROJECT_MEMORY.md` — recorded `blog-journey-inject.js?v=3` behavior/install note.
+
+**Opened:** Push/deploy and Wix Custom Code update to `https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=3` remain; live QA needed.
+**Closed:** Local syntax check and in-app browser QA passed: at ~140ms CSS/body enhancement applied; 2 empty spacers hidden; early tool prompt suppressed; 3 top next-step cards + 6 related cards rendered; native related/comments hidden.
+
+**Next session should:** Push the repo, update Wix Custom Code to `?v=3`, and live-check one older post with spacer paragraphs plus one post containing an embedded tool.
+
+## 2026-05-30 — Codex (Hackescher Wix draft created)
+
+**Did:** Uploaded the Hackescher after-tour post to Wix Blog as an unpublished draft with full SEO, all seven images, and the three planned widgets.
+
+**Changed:**
+- `blog-drafts/what-to-do-near-hackescher-markt-after-walking-tour.md` — updated local draft status with Wix draft ID.
+- Project root `create-wix-hackescher-after-tour-blog-draft.js` — added direct REST uploader script; upload cache lives at project root `tmp/hackescher-after-tour/wix-upload-cache.json`.
+- Wix Blog: created draft `3d4933e8-c479-4a4b-8dfb-2bec143721b8`, status `UNPUBLISHED`, category `Tourist Tips`, seoSlug `what-to-do-near-hackescher-markt-after-walking-tour`; verification returned 186 rich-content nodes, 7 image nodes, 3 HTML embeds, SEO title/description/keywords/OG image set.
+
+**Opened:** Visual review in Wix editor and live desktop/mobile QA after publish remain.
+**Closed:** Wix draft creation/import for this post.
+
+**Next session should:** Review/publish the Wix draft, then check the live post rendering and update blog index data once the post is public.
+
+## 2026-05-30 — Codex (Hackescher Wikimedia images)
+
+**Did:** Added the two missing Wikimedia Commons visuals for the Hackescher after-tour draft: Hackesche Höfe and Haus Schwarzenberg.
+
+**Changed:**
+- `blog-drafts/what-to-do-near-hackescher-markt-after-walking-tour.md` — inserted the two image/caption blocks in `The Free 45-Minute Walk` and added Wikimedia source notes.
+- `blog-drafts/assets/hackescher-after-tour/06-hackesche-hoefe-courtyard.jpg` — optimized Hackesche Höfe image from Wikimedia Commons.
+- `blog-drafts/assets/hackescher-after-tour/07-haus-schwarzenberg-street-art-courtyard.jpg` — optimized Haus Schwarzenberg courtyard image from Wikimedia Commons.
+
+**Opened:** Wix import/publishing, widget embeds, and live desktop/mobile QA remain.
+**Closed:** Commons image research, selection, optimization, placement, and attribution.
+
+**Next session should:** Publish/import this draft to Wix with quick summary, after-tour planner, and FAQ widgets, then live-QA image/caption layout.
+
 ## 2026-05-30 — Codex (Hackescher blog images)
 
 **Did:** Retrieved Yusuf's `Hackescher Markt ` Drive folder, inspected all 13 HEIC photos, selected the five that best match the article flow, optimized them, and placed them in the draft with captions.
