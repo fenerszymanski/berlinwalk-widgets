@@ -190,14 +190,16 @@
   },
   {
     "slug": "berlin-first-day-planner",
-    "source": "local Pillow vector drawing; suitcase + clock + map pin; no text",
+    "source": "/Users/yusufucuz/Documents/New project/output/imagegen/tools-icons-gemini-flash-ultimate-home/berlin-first-day-planner-raw.png",
+    "model": "gemini-2.5-flash-image",
     "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-first-day-planner.png",
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-first-day-planner-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-first-day-planner-160.png"
   },
   {
     "slug": "hackescher-after-tour-planner",
-    "source": "local Pillow vector drawing; map route + Hackescher courtyard arches + pin; no text",
+    "source": "/Users/yusufucuz/Documents/New project/output/imagegen/tools-icons-gemini-flash-ultimate-home/hackescher-after-tour-planner-raw.png",
+    "model": "gemini-2.5-flash-image",
     "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner.png",
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner-160.png"

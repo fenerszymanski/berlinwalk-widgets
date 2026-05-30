@@ -4,6 +4,36 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-30 — Codex (Tools home shortcut cleanup)
+
+**Did:** Removed the unpublished Ultimate planner from homepage tool shortcuts and regenerated the two visible planner icons with the cheap Gemini image model.
+
+**Changed:**
+- `tools-home/data.json` — removed `ultimate-berlin-trip-planner` from `featuredTools` until the tool is live/published; first card is now `berlin-first-day-planner`.
+- `tools-home/icons/berlin-first-day-planner*.png`, `tools-home/icons/hackescher-after-tour-planner*.png` — replaced the flat local drawings with `gemini-2.5-flash-image` 3D yellow/green icons matching the existing tool icon family.
+- `tools-home/icons/manifest.json` — recorded Gemini Flash source paths/model for both new icons.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the temporary Ultimate shortcut removal and icon regeneration.
+
+**Opened:** Add `ultimate-berlin-trip-planner` back to `tools-home/data.json` first slot after the tool is live on Wix/GitHub Pages.
+**Closed:** JSON validation passed and icon contact sheet generated at `output/qa/tools-home-icon-contact-gemini-flash.png`.
+
+**Next session should:** Push/deploy, then verify homepage tools no longer show the Ultimate fallback `U` card and that the two planner icons load from GitHub Pages.
+
+## 2026-05-30 — Codex (Ultimate planner visual/PDF polish)
+
+**Did:** Addressed Yusuf's "not ultimate yet" feedback with stronger visuals and a safer PDF layout.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — replaced text abbreviation badges with inline SVG icons, added the illustrated Mitte map to the plan board, added icon treatments to route nodes/full-plan days/map links/essentials, fixed mobile time-label overflow, and eager-loads the plan image.
+- `ultimate-berlin-trip-planner/assets/berlinwalk-logo-wide.png` — copied the real BerlinWalk wordmark for PDF generation.
+- `ultimate-berlin-trip-planner/index.html` PDF flow — loads the real BW logo, draws it in the header, computes dynamic weather/note/essentials heights, and switches essentials to full-width itinerary cards to remove overlap.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the V3 visual/PDF upgrade.
+
+**Opened:** Push/deploy remains; after GitHub Pages updates, live-check the GitHub Pages URL and then the Wix tool embed.
+**Closed:** Local JS syntax check; desktop and 390px mobile browser QA showed no horizontal overflow, 68 SVG icons, loaded map image, and correct 1/3/5/7-day counts. Fresh Chrome PDF render for a 7-day plan produced 4 pages with BW logo and no overlapping note/essentials content.
+
+**Next session should:** Push `berlinwalk-widgets`, wait for GitHub Pages, then open `/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=3&v=visualpdf` in Atlas/live and inspect the new PDF once from the deployed URL.
+
 ## 2026-05-30 — Codex (Ultimate Berlin Trip Planner)
 
 **Did:** Built and then upgraded the Ultimate Berlin Trip Planner as a standalone trip-level lead magnet and tour-conversion widget.

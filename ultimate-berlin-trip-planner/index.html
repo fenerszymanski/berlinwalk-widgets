@@ -330,6 +330,17 @@
       width: 30px;
     }
 
+    #bw-trip-planner .bw-svg-icon {
+      display: block;
+      flex: 0 0 auto;
+      height: 16px;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 2.35;
+      width: 16px;
+    }
+
     #bw-trip-planner .bw-option.active .bw-opt-icon {
       background: rgba(255, 255, 255, 0.18);
       color: var(--bw-yellow);
@@ -345,6 +356,7 @@
       font-size: 12px;
       font-weight: 900;
       line-height: 1.24;
+      overflow-wrap: anywhere;
     }
 
     #bw-trip-planner .bw-opt-sub {
@@ -354,6 +366,7 @@
       font-weight: 700;
       line-height: 1.34;
       margin-top: 2px;
+      overflow-wrap: anywhere;
     }
 
     #bw-trip-planner .bw-option.active .bw-opt-sub {
@@ -453,6 +466,46 @@
       padding: 11px;
     }
 
+    #bw-trip-planner .bw-board-media {
+      background: var(--bw-cream);
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      border-radius: 8px;
+      min-height: 145px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-trip-planner .bw-board-media img {
+      display: block;
+      height: 100%;
+      min-height: 145px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    #bw-trip-planner .bw-board-badges {
+      bottom: 9px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      left: 9px;
+      position: absolute;
+      right: 9px;
+    }
+
+    #bw-trip-planner .bw-board-badges span {
+      background: rgba(27, 94, 32, 0.9);
+      border: 1px solid rgba(255, 230, 0, 0.7);
+      border-radius: 999px;
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.45px;
+      line-height: 1.2;
+      padding: 5px 7px;
+      text-transform: uppercase;
+    }
+
     #bw-trip-planner .bw-board-top {
       align-items: center;
       display: flex;
@@ -484,11 +537,29 @@
     }
 
     #bw-trip-planner .bw-route-node {
+      align-items: start;
       background: var(--bw-white);
       border: 1px solid var(--bw-border);
       border-radius: 8px;
+      display: grid;
+      gap: 7px;
+      grid-template-columns: 30px minmax(0, 1fr);
       min-height: 54px;
       padding: 8px;
+    }
+
+    #bw-trip-planner .bw-route-symbol,
+    #bw-trip-planner .bw-insight-icon,
+    #bw-trip-planner .bw-essential-icon {
+      align-items: center;
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-green);
+      display: inline-flex;
+      height: 30px;
+      justify-content: center;
+      width: 30px;
     }
 
     #bw-trip-planner .bw-route-node strong {
@@ -499,7 +570,7 @@
       line-height: 1.25;
     }
 
-    #bw-trip-planner .bw-route-node span {
+    #bw-trip-planner .bw-route-copy {
       color: var(--bw-muted);
       display: block;
       font-size: 9.5px;
@@ -519,8 +590,11 @@
       border: 1px solid rgba(185, 214, 156, 0.82);
       border-radius: 8px;
       color: var(--bw-muted);
+      display: grid;
       font-size: 10.5px;
       font-weight: 700;
+      gap: 7px;
+      grid-template-columns: 30px minmax(0, 1fr);
       line-height: 1.35;
       min-height: 48px;
       padding: 8px;
@@ -896,13 +970,24 @@
       border-radius: 8px;
       color: var(--bw-white);
       display: inline-flex;
+      flex-direction: column;
       font-size: 11px;
       font-weight: 900;
+      gap: 2px;
       height: 42px;
       justify-content: center;
       line-height: 1.1;
       text-align: center;
       width: 50px;
+    }
+
+    #bw-trip-planner .bw-day-num .bw-svg-icon {
+      height: 15px;
+      width: 15px;
+    }
+
+    #bw-trip-planner .bw-day-num span {
+      display: block;
     }
 
     #bw-trip-planner .bw-day-body {
@@ -963,9 +1048,15 @@
       display: inline-flex;
       font-size: 10.5px;
       font-weight: 900;
+      gap: 5px;
       line-height: 1.2;
       padding: 7px 9px;
       text-decoration: none;
+    }
+
+    #bw-trip-planner .bw-map-link .bw-svg-icon {
+      height: 13px;
+      width: 13px;
     }
 
     #bw-trip-planner .bw-day-check {
@@ -1019,10 +1110,20 @@
     }
 
     #bw-trip-planner .bw-essential {
+      align-items: start;
       background: rgba(255, 255, 255, 0.1);
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 30px minmax(0, 1fr);
       padding: 9px 10px;
+    }
+
+    #bw-trip-planner .bw-essential-icon {
+      background: rgba(255, 230, 0, 0.14);
+      border-color: rgba(255, 230, 0, 0.32);
+      color: var(--bw-yellow);
     }
 
     #bw-trip-planner .bw-essential strong {
@@ -1169,7 +1270,7 @@
       }
 
       #bw-trip-planner .bw-block {
-        grid-template-columns: 70px minmax(0, 1fr);
+        grid-template-columns: 82px minmax(0, 1fr);
       }
 
       #bw-trip-planner .bw-day-head {
@@ -1423,9 +1524,12 @@
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=ultimate_berlin_trip_planner&utm_content=book_free_spot';
   var BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
   var BOOKING_SHORT_LABEL = 'berlinwalk.com/book';
+  var BW_LOGO_URL = 'assets/berlinwalk-logo-wide.png';
   var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerLead';
   var UNLOCK_KEY = 'bw_trip_planner_unlock';
   var UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
+  var bwLogoDataUrl = '';
+  var bwLogoPromise = null;
 
   var MONTH_CLIMATE = [
     { name: 'January', hi: 3, lo: -2, rainDays: '10', pack: 'Heavy winter coat, warm hat, gloves, scarf, and waterproof shoes.' },
@@ -1474,6 +1578,130 @@
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char];
     });
+  }
+
+  var ICON_PATHS = {
+    bed: '<path d="M3 11V6a2 2 0 0 1 2-2h5v7"/><path d="M10 7h7a4 4 0 0 1 4 4v7"/><path d="M3 18h18"/><path d="M3 18v-7h18"/>',
+    book: '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z"/>',
+    building: '<path d="M4 21V7l8-4 8 4v14"/><path d="M9 21v-8h6v8"/><path d="M8 9h.01"/><path d="M12 9h.01"/><path d="M16 9h.01"/>',
+    calendar: '<path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/><path d="M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>',
+    camera: '<path d="M14.5 4l1.4 2H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4.1l1.4-2z"/><circle cx="12" cy="13" r="3.5"/>',
+    check: '<path d="M20 6L9 17l-5-5"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    cloud: '<path d="M17.5 19H7a4 4 0 1 1 .9-7.9A6 6 0 0 1 19 13a3 3 0 0 1-1.5 6z"/>',
+    coin: '<circle cx="12" cy="12" r="9"/><path d="M15 9.5a3 3 0 1 0 0 5"/><path d="M9 11h5"/><path d="M9 13h5"/>',
+    family: '<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3.5 21a5.5 5.5 0 0 1 11 0"/><path d="M14 21a4.5 4.5 0 0 1 7 0"/>',
+    food: '<path d="M4 3v8"/><path d="M8 3v8"/><path d="M4 7h4"/><path d="M6 11v10"/><path d="M17 3v18"/><path d="M13 3h4a4 4 0 0 1 0 8h-4z"/>',
+    landmark: '<path d="M3 21h18"/><path d="M5 21V10"/><path d="M19 21V10"/><path d="M12 3l9 5H3z"/><path d="M9 21v-8"/><path d="M15 21v-8"/>',
+    leaf: '<path d="M5 21c8-4 13-10 14-18C11 4 5 9 5 17v4z"/><path d="M5 17c4-1 7-3 10-7"/>',
+    moon: '<path d="M21 14.5A8 8 0 0 1 9.5 3 9 9 0 1 0 21 14.5z"/>',
+    pin: '<path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/>',
+    plane: '<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>',
+    question: '<path d="M9.1 9a3 3 0 1 1 5.2 2c-1.5 1-2.3 1.8-2.3 3"/><path d="M12 18h.01"/><circle cx="12" cy="12" r="9"/>',
+    rain: '<path d="M17.5 18H7a4 4 0 1 1 .9-7.9A6 6 0 0 1 19 12a3 3 0 0 1-1.5 6z"/><path d="M8 20l-1 2"/><path d="M13 20l-1 2"/><path d="M18 20l-1 2"/>',
+    route: '<circle cx="6" cy="6" r="2"/><circle cx="18" cy="18" r="2"/><path d="M8 6h4a4 4 0 0 1 0 8h-1a4 4 0 0 0 0 8h5"/>',
+    shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+    snow: '<path d="M12 2v20"/><path d="M4 6l16 12"/><path d="M20 6L4 18"/>',
+    sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="M4.93 4.93l1.41 1.41"/><path d="M17.66 17.66l1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="M4.93 19.07l1.41-1.41"/><path d="M17.66 6.34l1.41-1.41"/>',
+    ticket: '<path d="M3 9a3 3 0 0 0 0 6v3h18v-3a3 3 0 0 0 0-6V6H3z"/><path d="M9 6v12"/>',
+    train: '<path d="M6 3h12a3 3 0 0 1 3 3v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V6a3 3 0 0 1 3-3z"/><path d="M7 18l-2 3"/><path d="M17 18l2 3"/><path d="M7 8h10"/><path d="M8 14h.01"/><path d="M16 14h.01"/>',
+    umbrella: '<path d="M3 12a9 9 0 0 1 18 0z"/><path d="M12 12v6a2 2 0 0 0 4 0"/>',
+    users: '<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+    wall: '<path d="M3 21h18"/><path d="M4 17h16V5H4z"/><path d="M4 9h16"/><path d="M9 5v4"/><path d="M15 9v4"/><path d="M9 13v4"/>',
+    wind: '<path d="M3 8h10a3 3 0 1 0-3-3"/><path d="M3 12h15a3 3 0 1 1-3 3"/><path d="M3 16h7"/>',
+    zap: '<path d="M13 2L3 14h8l-1 8 11-14h-8z"/>'
+  };
+
+  function iconSvg(name) {
+    var path = ICON_PATHS[name] || ICON_PATHS.route;
+    return '<svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">' + path + '</svg>';
+  }
+
+  var OPTION_ICONS = {
+    morning: 'sun',
+    midday: 'clock',
+    afternoon: 'sun',
+    evening: 'moon',
+    ber: 'plane',
+    hbf: 'train',
+    alex: 'pin',
+    hotel: 'bed',
+    mitte: 'landmark',
+    east: 'food',
+    north: 'leaf',
+    west: 'building',
+    unsure: 'question',
+    solo: 'pin',
+    couple: 'users',
+    family: 'family',
+    slow: 'leaf',
+    yes: 'check',
+    no: 'route',
+    mixed: 'users',
+    history: 'book',
+    wall: 'wall',
+    museums: 'landmark',
+    food: 'food',
+    nightlife: 'moon',
+    free: 'coin',
+    low: 'coin',
+    smart: 'ticket',
+    comfort: 'shield',
+    rain: 'umbrella',
+    kids: 'family',
+    photos: 'camera',
+    reservations: 'ticket',
+    gentle: 'leaf',
+    balanced: 'route',
+    packed: 'zap',
+    considering: 'route',
+    booked: 'check',
+    maybe: 'question'
+  };
+
+  function upgradeOptionIcons() {
+    root.querySelectorAll('.bw-option').forEach(function (button) {
+      var icon = button.querySelector('.bw-opt-icon');
+      var value = button.getAttribute('data-value');
+      if (!icon || /^[1-7]$/.test(value || '')) return;
+      icon.innerHTML = iconSvg(OPTION_ICONS[value] || 'route');
+      icon.setAttribute('aria-hidden', 'true');
+    });
+    var dateIcon = root.querySelector('.bw-date-icon');
+    if (dateIcon) dateIcon.innerHTML = iconSvg('calendar');
+  }
+
+  function dayIconName(day) {
+    var text = ((day && day.theme) || '') + ' ' + ((day && day.title) || '');
+    text = text.toLowerCase();
+    if (text.indexOf('arrival') !== -1) return 'pin';
+    if (text.indexOf('wall') !== -1 || text.indexOf('cold war') !== -1) return 'wall';
+    if (text.indexOf('museum') !== -1 || text.indexOf('royal') !== -1) return 'landmark';
+    if (text.indexOf('food') !== -1) return 'food';
+    if (text.indexOf('budget') !== -1 || text.indexOf('free') !== -1) return 'coin';
+    if (text.indexOf('night') !== -1) return 'moon';
+    if (text.indexOf('potsdam') !== -1 || text.indexOf('trip') !== -1) return 'train';
+    if (text.indexOf('neighborhood') !== -1) return 'route';
+    return 'route';
+  }
+
+  function essentialIconName(title) {
+    var key = String(title || '').toLowerCase();
+    if (key.indexOf('ticket') !== -1 || key.indexOf('validate') !== -1) return 'ticket';
+    if (key.indexOf('meeting') !== -1) return 'pin';
+    if (key.indexOf('sunday') !== -1 || key.indexOf('monday') !== -1) return 'calendar';
+    if (key.indexOf('cash') !== -1) return 'coin';
+    if (key.indexOf('water') !== -1) return 'umbrella';
+    return 'route';
+  }
+
+  function weatherIconName(value) {
+    var key = String(value || '').toUpperCase();
+    if (key === 'SUN' || key === 'MIX' || key === 'AVG') return 'sun';
+    if (key === 'RAIN' || key === 'STRM') return 'rain';
+    if (key === 'WIND') return 'wind';
+    if (key === 'FOG' || key === 'CLD') return 'cloud';
+    return 'umbrella';
   }
 
   function setText(selector, value) {
@@ -1702,19 +1930,20 @@
     var nodes = plan.days.slice(0, Math.min(3, plan.days.length)).map(function (day) {
       return {
         title: 'Day ' + day.dayNumber,
-        copy: day.theme
+        copy: day.theme,
+        icon: dayIconName(day)
       };
     });
-    while (nodes.length < 3) nodes.push({ title: 'Buffer', copy: 'Keep one flexible block' });
+    while (nodes.length < 3) nodes.push({ title: 'Buffer', copy: 'Keep one flexible block', icon: 'route' });
     return {
       title: plan.days.length + (plan.days.length === 1 ? ' day' : ' days') + ' by area, not by checklist',
       subtitle: 'Core route: ' + nodes.map(function (node) { return node.copy; }).join(' -> '),
       nodes: nodes,
       insights: [
-        { label: 'Base logic', value: selectedLabels().stayArea },
-        { label: 'Spend mode', value: selectedLabels().budgetStyle },
-        { label: 'Must handle', value: selectedLabels().mustHandle || 'Weather, tickets, pace' },
-        { label: 'Best tour slot', value: plan.tourFit }
+        { label: 'Base logic', value: selectedLabels().stayArea, icon: 'pin' },
+        { label: 'Spend mode', value: selectedLabels().budgetStyle, icon: 'coin' },
+        { label: 'Must handle', value: selectedLabels().mustHandle || 'Weather, tickets, pace', icon: 'shield' },
+        { label: 'Best tour slot', value: plan.tourFit, icon: 'route' }
       ]
     };
   }
@@ -1962,11 +2191,15 @@
         '<div><p class="bw-board-title">' + escapeHtml(data.title) + '</p><p class="bw-board-sub">' + escapeHtml(data.subtitle) + '</p></div>' +
         '<span class="bw-pill">Plan map</span>' +
       '</div>' +
+      '<div class="bw-board-media">' +
+        '<img src="../route/assets/berlin-mitte-illustration.png" alt="Illustrated Berlin Mitte map" loading="eager" decoding="async">' +
+        '<div class="bw-board-badges"><span>World Clock</span><span>Museum Island</span><span>Hackescher Markt</span></div>' +
+      '</div>' +
       '<div class="bw-route-strip">' + data.nodes.map(function (node) {
-        return '<div class="bw-route-node"><strong>' + escapeHtml(node.title) + '</strong><span>' + escapeHtml(node.copy) + '</span></div>';
+        return '<div class="bw-route-node"><span class="bw-route-symbol">' + iconSvg(node.icon) + '</span><div><strong>' + escapeHtml(node.title) + '</strong><span class="bw-route-copy">' + escapeHtml(node.copy) + '</span></div></div>';
       }).join('') + '</div>' +
       '<div class="bw-insight-grid">' + data.insights.map(function (item) {
-        return '<div class="bw-insight"><strong>' + escapeHtml(item.label) + '</strong>' + escapeHtml(item.value) + '</div>';
+        return '<div class="bw-insight"><span class="bw-insight-icon">' + iconSvg(item.icon) + '</span><div><strong>' + escapeHtml(item.label) + '</strong>' + escapeHtml(item.value) + '</div></div>';
       }).join('') + '</div>';
   }
 
@@ -1981,7 +2214,7 @@
     target.innerHTML = '<section class="bw-essentials-panel">' +
       '<div class="bw-essentials-head"><strong>Berlin essentials</strong><span>Added to the end of your PDF and print plan.</span></div>' +
       '<div class="bw-essentials-grid">' + items.map(function (item) {
-        return '<div class="bw-essential"><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.copy) + '</span></div>';
+        return '<div class="bw-essential"><span class="bw-essential-icon">' + iconSvg(essentialIconName(item.title)) + '</span><div><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.copy) + '</span></div></div>';
       }).join('') + '</div>' +
     '</section>';
   }
@@ -2038,11 +2271,11 @@
         '</div>';
       }).join('');
       var mapLinks = dayMapLinks(day).map(function (link) {
-        return '<a class="bw-map-link" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">Map: ' + escapeHtml(link.label) + '</a>';
+        return '<a class="bw-map-link" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">' + iconSvg('pin') + '<span>Map: ' + escapeHtml(link.label) + '</span></a>';
       }).join('');
       return '<article class="bw-day" style="--day-accent:' + escapeHtml(day.accent || '#7CB342') + ';--day-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
         '<div class="bw-day-head">' +
-          '<span class="bw-day-num">DAY ' + day.dayNumber + '</span>' +
+          '<span class="bw-day-num">' + iconSvg(dayIconName(day)) + '<span>DAY ' + day.dayNumber + '</span></span>' +
           '<div><strong class="bw-day-title">' + escapeHtml(day.title) + '</strong><span class="bw-day-date">' + escapeHtml(formatDisplayDate(day.dateKey)) + ' - ' + escapeHtml(day.theme) + '</span></div>' +
         '</div>' +
         '<div class="bw-day-body">' + blocks + (mapLinks ? '<div class="bw-map-links">' + mapLinks + '</div>' : '') + '<p class="bw-day-check">' + escapeHtml(day.note) + '</p></div>' +
@@ -2070,7 +2303,8 @@
   function renderWeather(summary) {
     latestWeather = summary;
     setWeatherTheme(summary.theme);
-    setText('[data-weather-icon]', summary.icon || 'WX');
+    var icon = root.querySelector('[data-weather-icon]');
+    if (icon) icon.innerHTML = iconSvg(weatherIconName(summary.icon));
     setText('[data-weather-title]', summary.title);
     setText('[data-weather-mode]', summary.mode);
     setText('[data-weather-date]', summary.dateText || formatDisplayDate(state.arrivalDate));
@@ -2361,6 +2595,33 @@
     setText('[data-action-status]', message || '');
   }
 
+  function loadBwLogoDataUrl() {
+    if (bwLogoDataUrl) return Promise.resolve(bwLogoDataUrl);
+    if (bwLogoPromise) return bwLogoPromise;
+    bwLogoPromise = new Promise(function (resolve) {
+      var image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.onload = function () {
+        try {
+          var canvas = document.createElement('canvas');
+          canvas.width = image.naturalWidth || image.width;
+          canvas.height = image.naturalHeight || image.height;
+          var context = canvas.getContext('2d');
+          context.drawImage(image, 0, 0);
+          bwLogoDataUrl = canvas.toDataURL('image/png');
+          resolve(bwLogoDataUrl);
+        } catch (error) {
+          resolve('');
+        }
+      };
+      image.onerror = function () {
+        resolve('');
+      };
+      image.src = BW_LOGO_URL;
+    });
+    return bwLogoPromise;
+  }
+
   function isUnlocked() {
     try {
       var raw = window.localStorage && window.localStorage.getItem(UNLOCK_KEY);
@@ -2519,7 +2780,7 @@
     return lines.join('\n');
   }
 
-  function downloadPdf() {
+  async function downloadPdf() {
     if (!unlocked) return;
     var api = window.jspdf && window.jspdf.jsPDF;
     if (!api) {
@@ -2527,6 +2788,8 @@
       track('bw_trip_planner_pdf_download', { success: false, reason: 'jspdf_unavailable' });
       return;
     }
+    setActionStatus('Preparing PDF...');
+    var logoData = await loadBwLogoDataUrl();
     var doc = new api({ unit: 'pt', format: 'a4' });
     var pageW = doc.internal.pageSize.getWidth();
     var pageH = doc.internal.pageSize.getHeight();
@@ -2608,21 +2871,39 @@
       y += 11;
     }
 
-    doc.setFillColor(27, 94, 32);
-    doc.rect(0, 0, pageW, 132, 'F');
+    function drawBrandLogo(x, logoY, logoW) {
+      var logoH = logoW * 450 / 1080;
+      if (logoData) {
+        try {
+          doc.addImage(logoData, 'PNG', x, logoY, logoW, logoH);
+          return logoH;
+        } catch (error) {}
+      }
+      fill(yellow);
+      doc.roundedRect(x, logoY, logoW, logoH, 4, 4, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      color(green);
+      doc.text('BerlinWalk', x + 9, logoY + logoH / 2 + 4);
+      return logoH;
+    }
+
+    fill(green);
+    doc.rect(0, 0, pageW, 142, 'F');
+    drawBrandLogo(pageW - margin - 118, 24, 118);
     doc.setTextColor(255, 230, 0);
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(10);
-    doc.text('BERLINWALK LOCAL PLANNER', margin, 34);
+    doc.text('LOCAL ARRIVAL-AWARE PLANNER', margin, 34);
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(24);
-    doc.text('Ultimate Berlin Trip Plan', margin, 65);
+    doc.text('Ultimate Berlin Trip Plan', margin, 67);
     doc.setFontSize(10);
-    doc.text(plan.displayDate + ' | ' + labels.tripLength + ' | ' + labels.stayArea, margin, 89);
+    doc.text(plan.displayDate + ' | ' + labels.tripLength + ' | ' + labels.stayArea, margin, 92);
     doc.setFontSize(9);
-    doc.text('Built around arrival date, weather, opening-day rules, and the best BerlinWalk tour slot.', margin, 112);
+    doc.text('Built around arrival date, weather, opening-day rules, and the best BerlinWalk tour slot.', margin, 116);
 
-    y = 158;
+    y = 166;
     drawText(plan.title, margin, contentW, 16, 'bold', green, 20);
     drawText(plan.summary, margin, contentW, 9.5, 'normal', muted, 12);
     y += 8;
@@ -2635,13 +2916,25 @@
     y += 61;
 
     if (latestWeather) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      var weatherTitleLines = doc.splitTextToSize('Weather: ' + latestWeather.title, contentW - 24);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      var weatherAdviceLines = doc.splitTextToSize(latestWeather.advice, contentW - 24);
+      var weatherH = Math.max(52, weatherTitleLines.length * 12 + weatherAdviceLines.length * 11 + 22);
+      ensure(weatherH + 14);
       fill([234, 244, 255]);
       stroke([184, 215, 250]);
-      doc.roundedRect(margin, y, contentW, 48, 7, 7, 'FD');
-      y += 16;
-      drawText('Weather: ' + latestWeather.title, margin + 12, contentW - 24, 9.5, 'bold', [23, 76, 138], 12);
-      drawText(latestWeather.advice, margin + 12, contentW - 24, 8.5, 'normal', [23, 76, 138], 11);
-      y += 12;
+      doc.roundedRect(margin, y, contentW, weatherH, 7, 7, 'FD');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9.5);
+      color([23, 76, 138]);
+      doc.text(weatherTitleLines, margin + 12, y + 16);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8.5);
+      doc.text(weatherAdviceLines, margin + 12, y + 18 + weatherTitleLines.length * 12);
+      y += weatherH + 14;
     }
 
     sectionTitle('Trip Snapshot', 'This is the quick operating logic for the trip.');
@@ -2662,19 +2955,22 @@
     sectionTitle('Day-by-Day Plan', 'Each day has one backbone area plus practical map anchors.');
     plan.days.forEach(function (day) {
       ensure(150);
+      var dayTitleLines = doc.splitTextToSize(day.title, contentW - 92);
+      var headerH = Math.max(42, 30 + dayTitleLines.length * 12);
       fill(cream);
       stroke(border);
-      doc.roundedRect(margin, y, contentW, 40, 8, 8, 'FD');
+      doc.roundedRect(margin, y, contentW, headerH, 8, 8, 'FD');
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(10);
       color(green);
       doc.text('DAY ' + day.dayNumber, margin + 12, y + 16);
       doc.setFontSize(11.5);
-      doc.text(day.title, margin + 72, y + 16);
+      color(textColor);
+      doc.text(dayTitleLines, margin + 72, y + 16);
       doc.setFontSize(8.5);
       color(muted);
-      doc.text(formatDisplayDate(day.dateKey) + ' | ' + day.theme, margin + 72, y + 30);
-      y += 54;
+      doc.text(formatDisplayDate(day.dateKey) + ' | ' + day.theme, margin + 72, y + 18 + dayTitleLines.length * 12);
+      y += headerH + 14;
       day.blocks.forEach(function (block) {
         ensure(42);
         fill(limeSoft);
@@ -2699,36 +2995,47 @@
         links.forEach(function (link) {
           drawLink('Map: ' + link.label, link.url, margin, contentW);
         });
+        y += 3;
       }
-      ensure(42);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      var noteLines = doc.splitTextToSize('Note: ' + day.note, contentW - 20);
+      var noteH = Math.max(34, noteLines.length * 10 + 18);
+      ensure(noteH + 16);
       fill([255, 252, 219]);
       stroke([239, 230, 163]);
-      doc.roundedRect(margin, y - 6, contentW, 34, 7, 7, 'FD');
-      drawText('Note: ' + day.note, margin + 10, contentW - 20, 8, 'normal', [90, 82, 54], 10);
-      y += 14;
+      doc.roundedRect(margin, y, contentW, noteH, 7, 7, 'FD');
+      color([90, 82, 54]);
+      doc.text(noteLines, margin + 10, y + 14);
+      y += noteH + 16;
     });
 
     sectionTitle('Berlin Essentials', 'Save this page for the end of the PDF.');
     var essentials = berlinEssentials(plan);
-    var essentialsW = (contentW - cardGap) / 2;
-    essentials.forEach(function (item, index) {
-      ensure(58);
-      var x = margin + (index % 2) * (essentialsW + cardGap);
-      if (index > 0 && index % 2 === 0) y += 58;
+    essentials.forEach(function (item) {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.8);
+      var copyLines = doc.splitTextToSize(String(item.copy || ''), contentW - 78);
+      var cardH = Math.max(46, copyLines.length * 9 + 28);
+      ensure(cardH + 8);
       fill(limeSoft);
       stroke(border);
-      doc.roundedRect(x, y, essentialsW, 48, 7, 7, 'FD');
-      var oldY = y + 15;
+      doc.roundedRect(margin, y, contentW, cardH, 7, 7, 'FD');
+      fill([255, 255, 255]);
+      doc.roundedRect(margin + 10, y + 10, 28, 28, 6, 6, 'F');
       doc.setFont('helvetica', 'bold');
-      doc.setFontSize(8.5);
+      doc.setFontSize(8);
       color(green);
-      doc.text(item.title, x + 9, oldY);
-      var savedY = y;
-      y = oldY + 12;
-      drawText(item.copy, x + 9, essentialsW - 18, 7.4, 'normal', muted, 9);
-      y = savedY;
+      doc.text(String(item.title || '').slice(0, 2).toUpperCase(), margin + 17, y + 28);
+      doc.setFontSize(9);
+      doc.text(item.title, margin + 50, y + 17);
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.8);
+      color(muted);
+      doc.text(copyLines, margin + 50, y + 31);
+      y += cardH + 8;
     });
-    y += 70;
+    y += 8;
 
     ensure(64);
     fill(green);
@@ -2875,6 +3182,7 @@
   var bookingLink = root.querySelector('[data-book-link]');
   if (bookingLink) bookingLink.href = BOOKING_URL;
 
+  upgradeOptionIcons();
   initFromParams();
   renderPlan();
   loadWeather();
