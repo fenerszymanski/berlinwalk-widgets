@@ -66,6 +66,8 @@ Fields:
 | `groupType` | Text | User-facing label |
 | `firstTime` | Text | User-facing label |
 | `interests` | Text | Comma-separated user-facing labels |
+| `budgetStyle` | Text | User-facing label |
+| `mustHandle` | Text | Comma-separated user-facing labels |
 | `pace` | Text | User-facing label |
 | `tourIntent` | Text | User-facing label |
 | `planTitle` | Text | Result title |
@@ -137,6 +139,8 @@ Available variables:
 - `${stayArea}`
 - `${groupType}`
 - `${interests}`
+- `${budgetStyle}`
+- `${mustHandle}`
 - `${pace}`
 - `${tourIntent}`
 - `${bookingStatus}`

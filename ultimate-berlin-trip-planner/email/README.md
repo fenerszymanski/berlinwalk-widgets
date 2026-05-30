@@ -19,6 +19,8 @@ Variables expected by Velo:
 - `${stayArea}`
 - `${groupType}`
 - `${interests}`
+- `${budgetStyle}`
+- `${mustHandle}`
 - `${pace}`
 - `${tourIntent}`
 - `${bookingStatus}`
@@ -32,4 +34,3 @@ Variables expected by Velo:
 
 Tone: practical, calm, local-guide voice. Public links should use
 `berlinwalk.com` and `@berlinwalkingtour` only.
-

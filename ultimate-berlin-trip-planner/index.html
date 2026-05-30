@@ -272,7 +272,9 @@
     #bw-trip-planner .bw-option[data-value="mitte"],
     #bw-trip-planner .bw-option[data-value="history"],
     #bw-trip-planner .bw-option[data-value="yes"],
-    #bw-trip-planner .bw-option[data-value="considering"] {
+    #bw-trip-planner .bw-option[data-value="considering"],
+    #bw-trip-planner .bw-option[data-value="smart"],
+    #bw-trip-planner .bw-option[data-value="rain"] {
       --accent: var(--bw-green);
       --accent-border: #B9D69C;
       --accent-soft: #F2F8E8;
@@ -282,7 +284,8 @@
     #bw-trip-planner .bw-option[data-value="ber"],
     #bw-trip-planner .bw-option[data-value="wall"],
     #bw-trip-planner .bw-option[data-value="solo"],
-    #bw-trip-planner .bw-option[data-value="balanced"] {
+    #bw-trip-planner .bw-option[data-value="balanced"],
+    #bw-trip-planner .bw-option[data-value="photos"] {
       --accent: var(--bw-blue);
       --accent-border: #B8D7FA;
       --accent-soft: #EAF4FF;
@@ -292,7 +295,9 @@
     #bw-trip-planner .bw-option[data-value="hbf"],
     #bw-trip-planner .bw-option[data-value="museums"],
     #bw-trip-planner .bw-option[data-value="couple"],
-    #bw-trip-planner .bw-option[data-value="maybe"] {
+    #bw-trip-planner .bw-option[data-value="maybe"],
+    #bw-trip-planner .bw-option[data-value="low"],
+    #bw-trip-planner .bw-option[data-value="reservations"] {
       --accent: var(--bw-amber);
       --accent-border: #F4D386;
       --accent-soft: var(--bw-amber-soft);
@@ -303,7 +308,9 @@
     #bw-trip-planner .bw-option[data-value="food"],
     #bw-trip-planner .bw-option[data-value="nightlife"],
     #bw-trip-planner .bw-option[data-value="family"],
-    #bw-trip-planner .bw-option[data-value="booked"] {
+    #bw-trip-planner .bw-option[data-value="booked"],
+    #bw-trip-planner .bw-option[data-value="comfort"],
+    #bw-trip-planner .bw-option[data-value="kids"] {
       --accent: var(--bw-rose);
       --accent-border: #F0BDC6;
       --accent-soft: #FFF0F3;
@@ -432,6 +439,102 @@
       font-size: 12px;
       font-weight: 900;
       line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-visual-board {
+      background:
+        linear-gradient(135deg, rgba(242, 248, 232, 0.96), rgba(255, 252, 219, 0.82)),
+        var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      margin: 0 0 12px;
+      padding: 11px;
+    }
+
+    #bw-trip-planner .bw-board-top {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+    }
+
+    #bw-trip-planner .bw-board-title {
+      color: var(--bw-green);
+      font-size: 12.5px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    #bw-trip-planner .bw-board-sub {
+      color: var(--bw-muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 2px 0 0;
+    }
+
+    #bw-trip-planner .bw-route-strip {
+      align-items: center;
+      display: grid;
+      gap: 6px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-route-node {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-height: 54px;
+      padding: 8px;
+    }
+
+    #bw-trip-planner .bw-route-node strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10.5px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-route-node span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 9.5px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-top: 3px;
+    }
+
+    #bw-trip-planner .bw-insight-grid {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-insight {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(185, 214, 156, 0.82);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      min-height: 48px;
+      padding: 8px;
+    }
+
+    #bw-trip-planner .bw-insight strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      margin-bottom: 3px;
+      text-transform: uppercase;
     }
 
     #bw-trip-planner .bw-weather {
@@ -844,6 +947,27 @@
       line-height: 1.45;
     }
 
+    #bw-trip-planner .bw-map-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-map-link {
+      align-items: center;
+      background: var(--bw-blue-soft);
+      border: 1px solid rgba(47, 128, 237, 0.24);
+      border-radius: 999px;
+      color: #174C8A;
+      display: inline-flex;
+      font-size: 10.5px;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 7px 9px;
+      text-decoration: none;
+    }
+
     #bw-trip-planner .bw-day-check {
       background: #FFFCDB;
       border: 1px solid #EFE6A3;
@@ -853,6 +977,69 @@
       font-weight: 700;
       line-height: 1.45;
       padding: 8px 10px;
+    }
+
+    #bw-trip-planner .bw-essentials-panel {
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-essentials-head {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 13px 14px;
+    }
+
+    #bw-trip-planner .bw-essentials-head strong {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-essentials-head span {
+      color: #DDEFC7;
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-top: 4px;
+    }
+
+    #bw-trip-planner .bw-essentials-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 12px;
+    }
+
+    #bw-trip-planner .bw-essential {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      padding: 9px 10px;
+    }
+
+    #bw-trip-planner .bw-essential strong {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    #bw-trip-planner .bw-essential span {
+      color: var(--bw-white);
+      display: block;
+      font-size: 10.8px;
+      font-weight: 650;
+      line-height: 1.4;
     }
 
     #bw-trip-planner .bw-links {
@@ -918,6 +1105,12 @@
       #bw-trip-planner .bw-options.cols-4,
       #bw-trip-planner .bw-options.cols-7 {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-trip-planner .bw-route-strip,
+      #bw-trip-planner .bw-insight-grid,
+      #bw-trip-planner .bw-essentials-grid {
+        grid-template-columns: 1fr;
       }
 
       #bw-trip-planner .bw-link-grid {
@@ -1081,6 +1274,25 @@
         </div>
 
         <div class="bw-question">
+          <span class="bw-label">Trip mode</span>
+          <div class="bw-options cols-3" data-group="budgetStyle">
+            <button class="bw-option" type="button" data-value="low"><span class="bw-opt-icon">EUR</span><span class="bw-opt-copy"><span class="bw-opt-title">Low budget</span><span class="bw-opt-sub">Free-first days</span></span></button>
+            <button class="bw-option active" type="button" data-value="smart"><span class="bw-opt-icon">MID</span><span class="bw-opt-copy"><span class="bw-opt-title">Smart spend</span><span class="bw-opt-sub">Worth-it anchors</span></span></button>
+            <button class="bw-option" type="button" data-value="comfort"><span class="bw-opt-icon">OK</span><span class="bw-opt-copy"><span class="bw-opt-title">Comfort</span><span class="bw-opt-sub">Fewer frictions</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">Must handle</span>
+          <div class="bw-options" data-group="mustHandle" data-multi="true">
+            <button class="bw-option is-multi active" type="button" data-value="rain"><span class="bw-opt-icon">WX</span><span class="bw-opt-copy"><span class="bw-opt-title">Rain backup</span><span class="bw-opt-sub">Indoor fallback</span></span></button>
+            <button class="bw-option is-multi" type="button" data-value="kids"><span class="bw-opt-icon">BRK</span><span class="bw-opt-copy"><span class="bw-opt-title">Breaks</span><span class="bw-opt-sub">Slower rhythm</span></span></button>
+            <button class="bw-option is-multi" type="button" data-value="photos"><span class="bw-opt-icon">PIC</span><span class="bw-opt-copy"><span class="bw-opt-title">Photo stops</span><span class="bw-opt-sub">Viewpoints</span></span></button>
+            <button class="bw-option is-multi" type="button" data-value="reservations"><span class="bw-opt-icon">TIX</span><span class="bw-opt-copy"><span class="bw-opt-title">Tickets</span><span class="bw-opt-sub">Book-ahead flags</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
           <span class="bw-label">Pace</span>
           <div class="bw-options cols-3" data-group="pace">
             <button class="bw-option" type="button" data-value="gentle"><span class="bw-opt-icon">LOW</span><span class="bw-opt-copy"><span class="bw-opt-title">Gentle</span><span class="bw-opt-sub">Fewer stops</span></span></button>
@@ -1120,6 +1332,8 @@
               <span class="bw-status-value" data-open-status>Checking</span>
             </div>
           </div>
+
+          <div class="bw-visual-board" data-plan-board></div>
 
           <section class="bw-weather theme-sunny" aria-label="Weather near Alexanderplatz" data-weather-card>
             <div class="bw-weather-main">
@@ -1180,6 +1394,7 @@
         </div>
       </div>
       <div class="bw-days" data-full-days></div>
+      <div data-essentials-panel></div>
     </section>
 
     <section class="bw-links" aria-label="More Berlin planning tools">
@@ -1236,6 +1451,8 @@
     groupType: 'solo',
     firstTime: 'yes',
     interests: ['history', 'wall'],
+    budgetStyle: 'smart',
+    mustHandle: ['rain'],
     pace: 'balanced',
     tourIntent: 'considering'
   };
@@ -1417,12 +1634,16 @@
       groupType: labelFor('groupType', state.groupType),
       firstTime: labelFor('firstTime', state.firstTime),
       interests: state.interests.map(function (key) { return labelFor('interests', key); }).join(', '),
+      budgetStyle: labelFor('budgetStyle', state.budgetStyle),
+      mustHandle: state.mustHandle.map(function (key) { return labelFor('mustHandle', key); }).join(', '),
       pace: labelFor('pace', state.pace),
       tourIntent: labelFor('tourIntent', state.tourIntent)
     };
   }
 
   function ticketNudge() {
+    if (state.budgetStyle === 'low') return state.arrivalPoint === 'ber' ? 'ABC first, AB later' : 'AB day ticket if busy';
+    if (state.budgetStyle === 'comfort') return state.arrivalPoint === 'ber' ? 'ABC first, keep it simple' : 'AB day ticket';
     if (state.arrivalPoint === 'ber') return 'ABC first';
     if (state.tripLength >= 4) return 'AB day tickets or pass';
     if (state.pace === 'packed') return 'AB day ticket';
@@ -1449,7 +1670,67 @@
     if (state.firstTime !== 'no') base += ' Start with context early, then use the rest of the trip for Wall history, museums, food, neighborhoods, and slower backup time.';
     else base += ' Since this is not your first visit, it keeps the central core efficient and gives more room to neighborhoods.';
     if (state.groupType === 'family' || state.groupType === 'slow' || state.pace === 'gentle') base += ' It also builds in more breaks so the trip stays enjoyable.';
+    if (state.budgetStyle === 'low') base += ' It favors free anchors and paid entries only when they are genuinely worth it.';
+    if (state.mustHandle.indexOf('reservations') !== -1) base += ' Book-ahead flags are called out so timed entries do not surprise you.';
     return base;
+  }
+
+  function mapsUrl(query) {
+    return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query + ', Berlin');
+  }
+
+  function mapLink(label, query) {
+    return { label: label, url: mapsUrl(query || label) };
+  }
+
+  function dayMapLinks(day) {
+    return (day && day.mapLinks ? day.mapLinks : []).slice(0, 4);
+  }
+
+  function extraDayAdvice(day) {
+    var pieces = [];
+    if (state.budgetStyle === 'low') pieces.push('Keep this day mostly free: use outdoor sights, free memorials, and one paid entry only if it is a true priority.');
+    if (state.budgetStyle === 'comfort') pieces.push('Reduce friction: pre-book timed entries where possible and leave budget for taxis if the weather turns.');
+    if (state.mustHandle.indexOf('rain') !== -1 && day.theme !== 'Arrival day') pieces.push('Rain backup: keep one museum, cafe, or covered market near the same area.');
+    if (state.mustHandle.indexOf('kids') !== -1 || state.groupType === 'family') pieces.push('Break rule: add one playground, park, cafe, or hotel reset before evening.');
+    if (state.mustHandle.indexOf('photos') !== -1) pieces.push('Photo rhythm: save 10-15 minutes for bridges, squares, courtyards, or golden-hour exteriors.');
+    if (state.mustHandle.indexOf('reservations') !== -1) pieces.push('Booking flag: check timed museum entries, Reichstag dome, restaurants, and popular evening plans before arrival.');
+    return pieces.join(' ');
+  }
+
+  function planBoard(plan) {
+    var nodes = plan.days.slice(0, Math.min(3, plan.days.length)).map(function (day) {
+      return {
+        title: 'Day ' + day.dayNumber,
+        copy: day.theme
+      };
+    });
+    while (nodes.length < 3) nodes.push({ title: 'Buffer', copy: 'Keep one flexible block' });
+    return {
+      title: plan.days.length + (plan.days.length === 1 ? ' day' : ' days') + ' by area, not by checklist',
+      subtitle: 'Core route: ' + nodes.map(function (node) { return node.copy; }).join(' -> '),
+      nodes: nodes,
+      insights: [
+        { label: 'Base logic', value: selectedLabels().stayArea },
+        { label: 'Spend mode', value: selectedLabels().budgetStyle },
+        { label: 'Must handle', value: selectedLabels().mustHandle || 'Weather, tickets, pace' },
+        { label: 'Best tour slot', value: plan.tourFit }
+      ]
+    };
+  }
+
+  function berlinEssentials(plan) {
+    var labels = selectedLabels();
+    return [
+      { title: 'Tickets', copy: state.arrivalPoint === 'ber' ? 'BER starts in Zone C: buy ABC first, then use AB for normal central sightseeing.' : 'Most central sightseeing is AB. Use a day ticket when you expect three or more rides.' },
+      { title: 'Validate', copy: 'Paper tickets must be validated before the first ride. Digital tickets are usually valid from the chosen start time.' },
+      { title: 'Meeting point', copy: 'BerlinWalk meets at the World Clock on Alexanderplatz. Save the map before you leave the hotel.' },
+      { title: 'Sunday rule', copy: 'Regular shops close on Sundays and public holidays. Stations, restaurants, parks, museums, and walks still work.' },
+      { title: 'Monday rule', copy: 'Many museums close on Mondays. Build Monday around outdoor history or one checked-open museum.' },
+      { title: 'Cash/card', copy: 'Cards are common, but small food spots, markets, lockers, and toilets can still prefer cash or coins.' },
+      { title: 'Water/toilets', copy: 'Carry water on long walking days. Use station toilets, department stores, museums, and cafe breaks strategically.' },
+      { title: 'Your setup', copy: labels.tripLength + ', ' + labels.pace + ', ' + labels.budgetStyle + '. ' + (latestWeather ? latestWeather.title + '.' : 'Check weather again before arrival.') }
+    ];
   }
 
   function firstDayBlocks() {
@@ -1485,6 +1766,11 @@
           { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Start at Bernauer Strasse. It is the clearest place to understand the Wall as a system, not only a photo backdrop.' },
           { time: 'Afternoon', title: 'East Side Gallery and Friedrichshain', copy: 'Walk the painted Wall section, then stay east instead of rushing back across town.' },
           { time: 'Evening', title: 'Kreuzberg or Friedrichshain dinner', copy: 'Use the evening for casual food and a real neighborhood feel rather than another monument.' }
+        ],
+        mapLinks: [
+          mapLink('Wall Memorial', 'Berlin Wall Memorial Bernauer Strasse'),
+          mapLink('East Side Gallery', 'East Side Gallery'),
+          mapLink('Kreuzberg food', 'Markthalle Neun')
         ]
       },
       museums: {
@@ -1496,6 +1782,11 @@
           { time: 'Morning', title: 'Pick one museum anchor', copy: 'Choose Neues Museum, Altes Museum, or another checked-open museum. One good museum beats four rushed ones.' },
           { time: 'Afternoon', title: 'Reichstag dome or Brandenburg Gate', copy: 'If booked in advance, add the free Reichstag dome. Otherwise use Brandenburg Gate, Unter den Linden, and the memorial area.' },
           { time: 'Evening', title: 'Easy central dinner', copy: 'Stay near Mitte or Hackescher Markt so the day does not become a long late transfer.' }
+        ],
+        mapLinks: [
+          mapLink('Museum Island', 'Museumsinsel'),
+          mapLink('Brandenburg Gate', 'Brandenburger Tor'),
+          mapLink('Reichstag', 'Reichstag Building')
         ]
       },
       food: {
@@ -1507,6 +1798,11 @@
           { time: 'Morning', title: 'Start slow in a neighborhood', copy: 'Choose Prenzlauer Berg, Kreuzberg, or Hackescher Markt depending on where you stay.' },
           { time: 'Afternoon', title: 'Courtyards, markets, or street food', copy: 'Use Hackesche Hofe, Markthalle Neun timing, or a relaxed local food stop instead of a chain-heavy tourist square.' },
           { time: 'Evening', title: 'Dinner where locals actually go', copy: 'Pick one area and stay there. Berlin evenings work best when you stop crossing the whole city.' }
+        ],
+        mapLinks: [
+          mapLink('Hackesche Hofe', 'Hackesche Hofe'),
+          mapLink('Markthalle Neun', 'Markthalle Neun'),
+          mapLink('Kastanienallee', 'Kastanienallee Berlin')
         ]
       },
       free: {
@@ -1518,6 +1814,11 @@
           { time: 'Morning', title: 'Outdoor central history', copy: 'Brandenburg Gate, the memorial area, Museum Island from outside, and the Spree can fill a strong day without paid entry.' },
           { time: 'Afternoon', title: 'Reichstag dome or Topography of Terror', copy: 'Both are free, but Reichstag needs advance booking. Topography of Terror is a reliable indoor-outdoor fallback.' },
           { time: 'Evening', title: 'Park, Spree, or cheap food', copy: 'Use Tiergarten, Tempelhofer Feld, or a simple neighborhood dinner depending on weather and energy.' }
+        ],
+        mapLinks: [
+          mapLink('Topography of Terror', 'Topography of Terror'),
+          mapLink('Tiergarten', 'Tiergarten Berlin'),
+          mapLink('Tempelhofer Feld', 'Tempelhofer Feld')
         ]
       },
       nightlife: {
@@ -1529,6 +1830,11 @@
           { time: 'Morning', title: 'Keep sightseeing compact', copy: 'Do the one essential cultural block early and avoid a 25,000-step day before going out.' },
           { time: 'Afternoon', title: 'Rest, food, and outfit check', copy: 'Eat properly, plan transport back, and do not leave door-code decisions until midnight.' },
           { time: 'Evening', title: 'Choose the night by appetite', copy: 'A relaxed bar night is not a failed Berlin night. If trying clubs, have a backup area ready.' }
+        ],
+        mapLinks: [
+          mapLink('RAW-Gelande', 'RAW-Gelande Berlin'),
+          mapLink('Kreuzberg bars', 'Oranienstrasse Berlin'),
+          mapLink('Friedrichshain', 'Simon-Dach-Strasse Berlin')
         ]
       },
       local: {
@@ -1540,6 +1846,11 @@
           { time: 'Morning', title: 'Prenzlauer Berg or Charlottenburg', copy: 'Choose one calmer area and walk it slowly. This is the day that makes Berlin feel lived-in.' },
           { time: 'Afternoon', title: 'Cafe, park, and one small museum', copy: 'Use Kulturbrauerei, Savignyplatz, Lietzensee, or a neighborhood cafe instead of another central queue.' },
           { time: 'Evening', title: 'Dinner near your base', copy: 'Finish close to where you sleep. The plan should make tomorrow easier, not heavier.' }
+        ],
+        mapLinks: [
+          mapLink('Kulturbrauerei', 'Kulturbrauerei Berlin'),
+          mapLink('Savignyplatz', 'Savignyplatz'),
+          mapLink('Lietzensee', 'Lietzensee Berlin')
         ]
       },
       potsdam: {
@@ -1551,6 +1862,11 @@
           { time: 'Morning', title: 'Decide by energy and weather', copy: 'If the weather is kind and you want a full outing, Potsdam works. If not, keep Berlin slower.' },
           { time: 'Afternoon', title: 'Sanssouci or Berlin backup', copy: 'Potsdam needs time and an ABC ticket. The Berlin backup is Charlottenburg, Tiergarten, or a museum you skipped.' },
           { time: 'Evening', title: 'Return early enough', copy: 'Do not make the day trip your latest night. Tomorrow is better when you leave margin.' }
+        ],
+        mapLinks: [
+          mapLink('Sanssouci', 'Sanssouci Palace Potsdam'),
+          mapLink('Potsdam Hbf', 'Potsdam Hauptbahnhof'),
+          mapLink('Charlottenburg backup', 'Schloss Charlottenburg')
         ]
       }
     };
@@ -1591,6 +1907,11 @@
       accent: '#1B5E20',
       bg: '#F2F8E8',
       blocks: firstDayBlocks(),
+      mapLinks: [
+        mapLink('World Clock', 'Weltzeituhr Alexanderplatz'),
+        mapLink('Museum Island', 'Museumsinsel'),
+        mapLink('Hackescher Markt', 'Hackescher Markt')
+      ],
       note: status.note
     });
 
@@ -1614,6 +1935,12 @@
       });
     }
 
+    days = days.map(function (day) {
+      var extra = extraDayAdvice(day);
+      if (!extra) return day;
+      return Object.assign({}, day, { note: day.note + ' ' + extra });
+    });
+
     return {
       title: title,
       summary: planSummary(),
@@ -1626,6 +1953,39 @@
     };
   }
 
+  function renderPlanBoard(plan) {
+    var board = root.querySelector('[data-plan-board]');
+    if (!board) return;
+    var data = planBoard(plan);
+    board.innerHTML =
+      '<div class="bw-board-top">' +
+        '<div><p class="bw-board-title">' + escapeHtml(data.title) + '</p><p class="bw-board-sub">' + escapeHtml(data.subtitle) + '</p></div>' +
+        '<span class="bw-pill">Plan map</span>' +
+      '</div>' +
+      '<div class="bw-route-strip">' + data.nodes.map(function (node) {
+        return '<div class="bw-route-node"><strong>' + escapeHtml(node.title) + '</strong><span>' + escapeHtml(node.copy) + '</span></div>';
+      }).join('') + '</div>' +
+      '<div class="bw-insight-grid">' + data.insights.map(function (item) {
+        return '<div class="bw-insight"><strong>' + escapeHtml(item.label) + '</strong>' + escapeHtml(item.value) + '</div>';
+      }).join('') + '</div>';
+  }
+
+  function renderEssentials(plan) {
+    var target = root.querySelector('[data-essentials-panel]');
+    if (!target) return;
+    if (!unlocked) {
+      target.innerHTML = '';
+      return;
+    }
+    var items = berlinEssentials(plan);
+    target.innerHTML = '<section class="bw-essentials-panel">' +
+      '<div class="bw-essentials-head"><strong>Berlin essentials</strong><span>Added to the end of your PDF and print plan.</span></div>' +
+      '<div class="bw-essentials-grid">' + items.map(function (item) {
+        return '<div class="bw-essential"><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.copy) + '</span></div>';
+      }).join('') + '</div>' +
+    '</section>';
+  }
+
   function renderPlan() {
     var plan = buildPlan();
     latestPlan = plan;
@@ -1635,6 +1995,7 @@
     setText('[data-tour-fit]', plan.tourFit);
     setText('[data-ticket]', plan.ticket);
     setText('[data-open-status]', plan.arrivalStatus.short);
+    renderPlanBoard(plan);
 
     var preview = root.querySelector('[data-preview-days]');
     if (preview) {
@@ -1664,7 +2025,10 @@
     var daysEl = root.querySelector('[data-full-days]');
     if (!full || !daysEl) return;
     full.hidden = !unlocked;
-    if (!unlocked) return;
+    if (!unlocked) {
+      renderEssentials(plan);
+      return;
+    }
     setText('[data-full-sub]', state.tripLength + (state.tripLength === 1 ? ' day' : ' days') + ' from ' + plan.displayDate + '. Tour fit: ' + plan.tourFit + '.');
     daysEl.innerHTML = plan.days.map(function (day) {
       var blocks = day.blocks.map(function (block) {
@@ -1673,14 +2037,18 @@
           '<span class="bw-block-copy"><strong>' + escapeHtml(block.title) + '</strong><span>' + escapeHtml(block.copy) + '</span></span>' +
         '</div>';
       }).join('');
+      var mapLinks = dayMapLinks(day).map(function (link) {
+        return '<a class="bw-map-link" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">Map: ' + escapeHtml(link.label) + '</a>';
+      }).join('');
       return '<article class="bw-day" style="--day-accent:' + escapeHtml(day.accent || '#7CB342') + ';--day-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
         '<div class="bw-day-head">' +
           '<span class="bw-day-num">DAY ' + day.dayNumber + '</span>' +
           '<div><strong class="bw-day-title">' + escapeHtml(day.title) + '</strong><span class="bw-day-date">' + escapeHtml(formatDisplayDate(day.dateKey)) + ' - ' + escapeHtml(day.theme) + '</span></div>' +
         '</div>' +
-        '<div class="bw-day-body">' + blocks + '<p class="bw-day-check">' + escapeHtml(day.note) + '</p></div>' +
+        '<div class="bw-day-body">' + blocks + (mapLinks ? '<div class="bw-map-links">' + mapLinks + '</div>' : '') + '<p class="bw-day-check">' + escapeHtml(day.note) + '</p></div>' +
       '</article>';
     }).join('');
+    renderEssentials(plan);
   }
 
   function updateUnlockUi() {
@@ -2028,6 +2396,8 @@
       groupType: labels.groupType,
       firstTime: labels.firstTime,
       interests: labels.interests,
+      budgetStyle: labels.budgetStyle,
+      mustHandle: labels.mustHandle,
       pace: labels.pace,
       tourIntent: labels.tourIntent,
       planTitle: plan.title,
@@ -2119,6 +2489,8 @@
       'Stay area: ' + labels.stayArea,
       'Group: ' + labels.groupType,
       'Interests: ' + labels.interests,
+      'Trip mode: ' + labels.budgetStyle,
+      'Must handle: ' + labels.mustHandle,
       'Pace: ' + labels.pace,
       'Tour fit: ' + plan.tourFit,
       '',
@@ -2132,9 +2504,17 @@
       day.blocks.forEach(function (block) {
         lines.push(block.time + ': ' + block.title + ' - ' + block.copy);
       });
+      dayMapLinks(day).forEach(function (link) {
+        lines.push('Map: ' + link.label + ' - ' + link.url);
+      });
       lines.push('Note: ' + day.note);
       lines.push('');
     });
+    lines.push('Berlin essentials');
+    berlinEssentials(plan).forEach(function (item) {
+      lines.push(item.title + ': ' + item.copy);
+    });
+    lines.push('');
     lines.push('Book the BerlinWalk tour: ' + BOOKING_SHORT_LABEL);
     return lines.join('\n');
   }
@@ -2150,59 +2530,222 @@
     var doc = new api({ unit: 'pt', format: 'a4' });
     var pageW = doc.internal.pageSize.getWidth();
     var pageH = doc.internal.pageSize.getHeight();
-    var margin = 40;
+    var margin = 38;
+    var contentW = pageW - margin * 2;
     var y = 44;
     var plan = latestPlan || buildPlan();
+    var labels = selectedLabels();
+    var green = [27, 94, 32];
+    var yellow = [255, 230, 0];
+    var limeSoft = [242, 248, 232];
+    var cream = [250, 250, 245];
+    var border = [220, 232, 200];
+    var muted = [78, 90, 78];
+    var textColor = [33, 33, 33];
 
-    function addPageIfNeeded(space) {
-      if (y + space > pageH - 50) {
+    function color(c) {
+      doc.setTextColor(c[0], c[1], c[2]);
+    }
+
+    function fill(c) {
+      doc.setFillColor(c[0], c[1], c[2]);
+    }
+
+    function stroke(c) {
+      doc.setDrawColor(c[0], c[1], c[2]);
+    }
+
+    function ensure(space) {
+      if (y + space > pageH - 58) {
         doc.addPage();
         y = 44;
       }
     }
 
-    function text(value, x, size, style, color) {
+    function drawText(value, x, width, size, style, c, lineGap) {
       doc.setFont('helvetica', style || 'normal');
       doc.setFontSize(size);
-      doc.setTextColor.apply(doc, color || [33, 33, 33]);
-      var lines = doc.splitTextToSize(String(value || ''), pageW - margin * 2 - (x - margin));
+      color(c || textColor);
+      var lines = doc.splitTextToSize(String(value || ''), width);
       doc.text(lines, x, y);
-      y += lines.length * (size + 3);
+      y += lines.length * (lineGap || (size + 3));
+      return lines.length;
+    }
+
+    function sectionTitle(title, subtitle) {
+      ensure(54);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(13);
+      color(green);
+      doc.text(title, margin, y);
+      y += 15;
+      if (subtitle) drawText(subtitle, margin, contentW, 8.5, 'normal', muted, 11);
+      y += 5;
+    }
+
+    function statCard(label, value, x, cardY, w) {
+      fill(limeSoft);
+      stroke(border);
+      doc.roundedRect(x, cardY, w, 46, 7, 7, 'FD');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      color(muted);
+      doc.text(label.toUpperCase(), x + 10, cardY + 15);
+      doc.setFontSize(9.5);
+      color(green);
+      var lines = doc.splitTextToSize(String(value || ''), w - 20);
+      doc.text(lines.slice(0, 2), x + 10, cardY + 30);
+    }
+
+    function drawLink(label, url, x, width) {
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.2);
+      color([47, 128, 237]);
+      var clean = String(label || '');
+      var lines = doc.splitTextToSize(clean, width);
+      if (doc.textWithLink && url) doc.textWithLink(lines[0], x, y, { url: url });
+      else doc.text(lines[0], x, y);
+      y += 11;
     }
 
     doc.setFillColor(27, 94, 32);
-    doc.rect(0, 0, pageW, 110, 'F');
+    doc.rect(0, 0, pageW, 132, 'F');
     doc.setTextColor(255, 230, 0);
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(11);
-    doc.text('BERLINWALK', margin, 36);
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(23);
-    doc.text('Ultimate Berlin Trip Plan', margin, 66);
     doc.setFontSize(10);
-    doc.text(plan.displayDate + ' | ' + state.tripLength + (state.tripLength === 1 ? ' day' : ' days'), margin, 88);
-    y = 136;
-    text(plan.title, margin, 15, 'bold', [27, 94, 32]);
-    text(plan.summary, margin, 10, 'normal', [55, 68, 55]);
-    if (latestWeather) text('Weather: ' + latestWeather.title + '. ' + latestWeather.advice, margin, 9.5, 'normal', [55, 68, 55]);
-    text('Tour fit: ' + plan.tourFit + ' | Ticket start: ' + plan.ticket, margin, 10, 'bold', [27, 94, 32]);
+    doc.text('BERLINWALK LOCAL PLANNER', margin, 34);
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(24);
+    doc.text('Ultimate Berlin Trip Plan', margin, 65);
+    doc.setFontSize(10);
+    doc.text(plan.displayDate + ' | ' + labels.tripLength + ' | ' + labels.stayArea, margin, 89);
+    doc.setFontSize(9);
+    doc.text('Built around arrival date, weather, opening-day rules, and the best BerlinWalk tour slot.', margin, 112);
+
+    y = 158;
+    drawText(plan.title, margin, contentW, 16, 'bold', green, 20);
+    drawText(plan.summary, margin, contentW, 9.5, 'normal', muted, 12);
     y += 8;
-    plan.days.forEach(function (day) {
-      addPageIfNeeded(96);
-      doc.setFillColor(248, 251, 242);
-      doc.setDrawColor(220, 232, 200);
-      doc.roundedRect(margin, y - 12, pageW - margin * 2, 28, 7, 7, 'FD');
-      text('Day ' + day.dayNumber + ': ' + day.title + ' (' + formatDisplayDate(day.dateKey) + ')', margin + 10, 11, 'bold', [27, 94, 32]);
-      day.blocks.forEach(function (block) {
-        addPageIfNeeded(42);
-        text(block.time + ' - ' + block.title, margin + 12, 9.5, 'bold', [33, 33, 33]);
-        text(block.copy, margin + 12, 8.8, 'normal', [78, 90, 78]);
-      });
-      text('Note: ' + day.note, margin + 12, 8.5, 'normal', [90, 82, 54]);
-      y += 6;
+
+    var cardGap = 8;
+    var cardW = (contentW - cardGap * 2) / 3;
+    statCard('Tour fit', plan.tourFit, margin, y, cardW);
+    statCard('Ticket start', plan.ticket, margin + cardW + cardGap, y, cardW);
+    statCard('Trip mode', labels.budgetStyle, margin + (cardW + cardGap) * 2, y, cardW);
+    y += 61;
+
+    if (latestWeather) {
+      fill([234, 244, 255]);
+      stroke([184, 215, 250]);
+      doc.roundedRect(margin, y, contentW, 48, 7, 7, 'FD');
+      y += 16;
+      drawText('Weather: ' + latestWeather.title, margin + 12, contentW - 24, 9.5, 'bold', [23, 76, 138], 12);
+      drawText(latestWeather.advice, margin + 12, contentW - 24, 8.5, 'normal', [23, 76, 138], 11);
+      y += 12;
+    }
+
+    sectionTitle('Trip Snapshot', 'This is the quick operating logic for the trip.');
+    var board = planBoard(plan);
+    var nodeW = (contentW - cardGap * 2) / 3;
+    board.nodes.forEach(function (node, index) {
+      statCard(node.title, node.copy, margin + (nodeW + cardGap) * index, y, nodeW);
     });
-    addPageIfNeeded(70);
-    text('Book your free BerlinWalk spot: ' + BOOKING_SHORT_LABEL, margin, 11, 'bold', [47, 128, 237]);
+    y += 61;
+    var insightW = (contentW - cardGap) / 2;
+    board.insights.forEach(function (item, index) {
+      var x = margin + (index % 2) * (insightW + cardGap);
+      if (index > 0 && index % 2 === 0) y += 52;
+      statCard(item.label, item.value, x, y, insightW);
+    });
+    y += 62;
+
+    sectionTitle('Day-by-Day Plan', 'Each day has one backbone area plus practical map anchors.');
+    plan.days.forEach(function (day) {
+      ensure(150);
+      fill(cream);
+      stroke(border);
+      doc.roundedRect(margin, y, contentW, 40, 8, 8, 'FD');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      color(green);
+      doc.text('DAY ' + day.dayNumber, margin + 12, y + 16);
+      doc.setFontSize(11.5);
+      doc.text(day.title, margin + 72, y + 16);
+      doc.setFontSize(8.5);
+      color(muted);
+      doc.text(formatDisplayDate(day.dateKey) + ' | ' + day.theme, margin + 72, y + 30);
+      y += 54;
+      day.blocks.forEach(function (block) {
+        ensure(42);
+        fill(limeSoft);
+        stroke(border);
+        doc.roundedRect(margin, y - 9, 70, 20, 5, 5, 'FD');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7.8);
+        color(green);
+        doc.text(String(block.time || '').toUpperCase(), margin + 8, y + 4);
+        drawText(block.title, margin + 84, contentW - 84, 9.2, 'bold', textColor, 12);
+        drawText(block.copy, margin + 84, contentW - 84, 8.3, 'normal', muted, 10.5);
+        y += 4;
+      });
+      var links = dayMapLinks(day);
+      if (links.length) {
+        ensure(18 + links.length * 11);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(8);
+        color(green);
+        doc.text('Google Maps anchors', margin, y);
+        y += 12;
+        links.forEach(function (link) {
+          drawLink('Map: ' + link.label, link.url, margin, contentW);
+        });
+      }
+      ensure(42);
+      fill([255, 252, 219]);
+      stroke([239, 230, 163]);
+      doc.roundedRect(margin, y - 6, contentW, 34, 7, 7, 'FD');
+      drawText('Note: ' + day.note, margin + 10, contentW - 20, 8, 'normal', [90, 82, 54], 10);
+      y += 14;
+    });
+
+    sectionTitle('Berlin Essentials', 'Save this page for the end of the PDF.');
+    var essentials = berlinEssentials(plan);
+    var essentialsW = (contentW - cardGap) / 2;
+    essentials.forEach(function (item, index) {
+      ensure(58);
+      var x = margin + (index % 2) * (essentialsW + cardGap);
+      if (index > 0 && index % 2 === 0) y += 58;
+      fill(limeSoft);
+      stroke(border);
+      doc.roundedRect(x, y, essentialsW, 48, 7, 7, 'FD');
+      var oldY = y + 15;
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      color(green);
+      doc.text(item.title, x + 9, oldY);
+      var savedY = y;
+      y = oldY + 12;
+      drawText(item.copy, x + 9, essentialsW - 18, 7.4, 'normal', muted, 9);
+      y = savedY;
+    });
+    y += 70;
+
+    ensure(64);
+    fill(green);
+    doc.roundedRect(margin, y, contentW, 48, 8, 8, 'F');
+    y += 18;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10.5);
+    color(yellow);
+    doc.text('Start Berlin with context', margin + 14, y);
+    y += 14;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9.5);
+    color([255, 255, 255]);
+    if (doc.textWithLink) doc.textWithLink('Book the BerlinWalk tour: ' + BOOKING_SHORT_LABEL, margin + 14, y, { url: BOOKING_SHORT_URL });
+    else doc.text('Book the BerlinWalk tour: ' + BOOKING_SHORT_LABEL, margin + 14, y);
+    y += 12;
+
     var pages = doc.getNumberOfPages();
     for (var page = 1; page <= pages; page += 1) {
       doc.setPage(page);
@@ -2226,11 +2769,22 @@
       setActionStatus('Print window was blocked. Allow pop-ups and try again.');
       return;
     }
-    var text = planText().replace(/[&<>"']/g, function (char) {
-      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char];
-    });
+    var plan = latestPlan || buildPlan();
+    var labels = selectedLabels();
+    var daysHtml = plan.days.map(function (day) {
+      var blocks = day.blocks.map(function (block) {
+        return '<div class="block"><b>' + escapeHtml(block.time) + '</b><div><strong>' + escapeHtml(block.title) + '</strong><span>' + escapeHtml(block.copy) + '</span></div></div>';
+      }).join('');
+      var links = dayMapLinks(day).map(function (link) {
+        return '<a href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">Map: ' + escapeHtml(link.label) + '</a>';
+      }).join('');
+      return '<section class="day"><header><em>DAY ' + day.dayNumber + '</em><div><h2>' + escapeHtml(day.title) + '</h2><p>' + escapeHtml(formatDisplayDate(day.dateKey)) + ' | ' + escapeHtml(day.theme) + '</p></div></header>' + blocks + '<nav>' + links + '</nav><p class="note">' + escapeHtml(day.note) + '</p></section>';
+    }).join('');
+    var essentialsHtml = berlinEssentials(plan).map(function (item) {
+      return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.copy) + '</span></article>';
+    }).join('');
     printWindow.document.open();
-    printWindow.document.write('<!doctype html><html><head><title>Ultimate Berlin Trip Plan</title><style>body{font-family:Arial,sans-serif;color:#212121;margin:24px;line-height:1.45;white-space:pre-wrap}h1{color:#1B5E20}.brand{color:#1B5E20;font-weight:700}</style></head><body><h1>Ultimate Berlin Trip Plan</h1><div>' + text + '</div><p class="brand">berlinwalk.com | @berlinwalkingtour</p></body></html>');
+    printWindow.document.write('<!doctype html><html><head><title>Ultimate Berlin Trip Plan</title><style>body{font-family:Arial,sans-serif;color:#212121;margin:0;background:#FAFAF5;line-height:1.45}.hero{background:#1B5E20;color:white;padding:28px 34px}.hero small{color:#FFE600;font-weight:800;letter-spacing:2px}.hero h1{margin:8px 0 6px;font-size:30px;line-height:1.05}.hero p{margin:0;color:#DDEFC7;font-weight:700}.wrap{padding:24px 34px}.snapshot{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:0 0 16px}.chip,.day,.essentials article{background:white;border:1px solid #DCE8C8;border-radius:8px}.chip{padding:10px}.chip b{display:block;color:#4E5A4E;font-size:10px;text-transform:uppercase}.chip span{display:block;color:#1B5E20;font-weight:800}.day{margin:0 0 14px;overflow:hidden}.day header{display:grid;grid-template-columns:64px 1fr;gap:12px;background:#F2F8E8;padding:12px 14px}.day em{background:#1B5E20;color:white;border-radius:8px;text-align:center;font-style:normal;font-weight:800;padding:12px 6px}.day h2{margin:0;color:#1B5E20;font-size:18px}.day header p{margin:3px 0 0;color:#4E5A4E;font-weight:700}.block{display:grid;grid-template-columns:92px 1fr;gap:10px;padding:10px 14px;border-top:1px solid #EEF4E7}.block b{background:#F2F8E8;border:1px solid #DCE8C8;border-radius:7px;color:#1B5E20;text-align:center;padding:8px}.block strong,.block span{display:block}.block span{color:#4E5A4E}nav{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 10px}nav a{background:#EAF4FF;border:1px solid #B8D7FA;border-radius:999px;color:#174C8A;font-size:12px;font-weight:800;padding:7px 9px;text-decoration:none}.note{background:#FFFCDB;border:1px solid #EFE6A3;border-radius:8px;color:#5A5236;margin:0 14px 14px;padding:9px 10px;font-weight:700}.essentials{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.essentials article{padding:10px}.essentials strong{display:block;color:#1B5E20}.essentials span{display:block;color:#4E5A4E}.brand{color:#1B5E20;font-weight:800;margin-top:18px}@media print{body{background:white}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.day{break-inside:avoid}.snapshot,.essentials{grid-template-columns:repeat(2,1fr)}}</style></head><body><section class="hero"><small>BERLINWALK LOCAL PLANNER</small><h1>Ultimate Berlin Trip Plan</h1><p>' + escapeHtml(plan.displayDate) + ' | ' + escapeHtml(labels.tripLength) + ' | ' + escapeHtml(labels.stayArea) + '</p></section><main class="wrap"><section class="snapshot"><div class="chip"><b>Tour fit</b><span>' + escapeHtml(plan.tourFit) + '</span></div><div class="chip"><b>Ticket</b><span>' + escapeHtml(plan.ticket) + '</span></div><div class="chip"><b>Trip mode</b><span>' + escapeHtml(labels.budgetStyle) + '</span></div><div class="chip"><b>Must handle</b><span>' + escapeHtml(labels.mustHandle) + '</span></div></section>' + daysHtml + '<h2>Berlin essentials</h2><section class="essentials">' + essentialsHtml + '</section><p class="brand">berlinwalk.com | @berlinwalkingtour</p></main></body></html>');
     printWindow.document.close();
     setTimeout(function () {
       try {
@@ -2264,12 +2818,13 @@
       var value = option.getAttribute('data-value');
       if (group.getAttribute('data-multi') === 'true') {
         option.classList.toggle('active');
-        state.interests = Array.prototype.slice.call(group.querySelectorAll('.bw-option.active')).map(function (button) {
+        state[key] = Array.prototype.slice.call(group.querySelectorAll('.bw-option.active')).map(function (button) {
           return button.getAttribute('data-value');
         });
-        if (!state.interests.length) {
-          state.interests = ['history'];
-          group.querySelector('[data-value="history"]').classList.add('active');
+        if (!state[key].length) {
+          state[key] = key === 'interests' ? ['history'] : ['rain'];
+          var fallback = group.querySelector('[data-value="' + state[key][0] + '"]');
+          if (fallback) fallback.classList.add('active');
         }
       } else {
         group.querySelectorAll('.bw-option').forEach(function (button) {

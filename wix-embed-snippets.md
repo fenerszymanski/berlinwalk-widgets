@@ -201,7 +201,7 @@ https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner
 Recommended first Wix iframe height:
 
 ```text
-1680px
+2400px
 ```
 
 ## Berlin Club Dress Code Post Widgets

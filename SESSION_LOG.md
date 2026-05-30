@@ -6,16 +6,16 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-05-30 — Codex (Ultimate Berlin Trip Planner)
 
-**Did:** Built the Ultimate Berlin Trip Planner as a standalone trip-level lead magnet and tour-conversion widget.
+**Did:** Built and then upgraded the Ultimate Berlin Trip Planner as a standalone trip-level lead magnet and tour-conversion widget.
 
 **Changed:**
-- `ultimate-berlin-trip-planner/` — new widget with 1-7 day deterministic Berlin plans, Open-Meteo/monthly weather logic, Sunday/public-holiday/Monday warnings, useful preview, email+consent gate, fail-soft unlock, PDF download, print view, and `?context`, `?date`, `?tripLength`, `?weather=off` params.
-- `ultimate-berlin-trip-planner/velo/`, `ultimate-berlin-trip-planner/email/` — Velo handoff for `TripPlannerLeads`, `/_functions/tripPlannerLead`, `/_functions/tripPlannerBooking`, hourly due-email processing, booking-aware sales/prep stages, plus instant/-7/-3/-1/day-of copy drafts.
-- `tools-hub/data.json`, `tools-home/data.json`, `widgets-hub/SEO_ADDITIONAL_TAGS.md`, `wix-embed-snippets.md`, `README.md`, `AGENTS.md` — added the new tool to hub/home/widgets SEO/docs with `embedHeight: 1680`.
+- `ultimate-berlin-trip-planner/` — new widget with 1-7 day deterministic Berlin plans, Open-Meteo/monthly weather logic, Sunday/public-holiday/Monday warnings, useful preview, email+consent gate, fail-soft unlock, visual plan board, Google Maps anchors, Berlin essentials, redesigned itinerary-style PDF/print output, and `?context`, `?date`, `?tripLength`, `?weather=off` params.
+- `ultimate-berlin-trip-planner/velo/`, `ultimate-berlin-trip-planner/email/` — Velo handoff for `TripPlannerLeads`, `/_functions/tripPlannerLead`, `/_functions/tripPlannerBooking`, hourly due-email processing, booking-aware sales/prep stages, plus instant/-7/-3/-1/day-of copy drafts. Lead payload/source now includes `budgetStyle` and `mustHandle`.
+- `tools-hub/data.json`, `tools-home/data.json`, `widgets-hub/SEO_ADDITIONAL_TAGS.md`, `wix-embed-snippets.md`, `README.md`, `AGENTS.md` — added the new tool to hub/home/widgets SEO/docs with `embedHeight: 2400`.
 - `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`, `blog-drafts/ultimate-berlin-trip-planner.md` — added SEO blog support, Quick Summary, FAQ schema mapping, internal links, and competitor-positioning notes. Also removed old public email references from homepage FAQ data in favor of `berlinwalk.com`.
 
 **Opened:** Push/GitHub Pages deploy; live `/tools/ultimate-berlin-trip-planner` CMS insert/re-save; install Velo backend/job/collection; create Triggered Emails and replace placeholder IDs; live lead + booking-event smoke tests; publish the SEO blog post.
-**Closed:** Local syntax/JSON checks, Velo transformed syntax smoke, CMS dry-run, date logic QA (today/tomorrow/Sunday/Monday/holiday/>15 days), lead-gate validation/fail-soft unlock, PDF/print status smoke, and desktop/mobile browser QA with no horizontal overflow or clipped trip-length buttons.
+**Closed:** Local syntax/JSON checks, Velo transformed syntax smoke, CMS dry-run, date logic QA (today/tomorrow/Sunday/Monday/holiday/>15 days), lead-gate validation/fail-soft unlock, PDF/print status smoke, and desktop/mobile browser QA with no horizontal overflow, no clipped trip-length buttons, 15 map anchors on a 5-day plan, and 8 essentials cards.
 
 **Next session should:** Push the widget repo, then create the BerlinTools CMS row and install the Velo/email pieces before embedding the blog draft near the top of the SEO post.
 

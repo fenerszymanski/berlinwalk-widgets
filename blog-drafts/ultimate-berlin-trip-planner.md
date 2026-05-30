@@ -46,6 +46,8 @@ Berlin is not a compact old-town city where every major sight naturally falls in
 
 So this Berlin trip planner starts with the details that actually change the trip: arrival date, trip length, arrival point, where you are staying, your pace, your interests, and whether you have already booked the BerlinWalk tour.
 
+It also turns the result into something you can actually use: daily Google Maps anchors, practical ticket and opening-day warnings, and a Berlin essentials section at the end of the PDF.
+
 {{quick-summary}}
 
 ## Quick Answer: How Should You Plan a Berlin Trip?
