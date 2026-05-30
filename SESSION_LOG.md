@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-30 — Codex (Ultimate planner research backlog)
+
+**Did:** Researched travel-planner UX, map/PDF/export patterns, lead-gate form best practices, Berlin date-data sources, and SEO structured-data constraints for the next Ultimate planner pass.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md` — new V4/V5 implementation backlog with sources and prioritized recommendations.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded that the Ultimate planner task remains open with a research-backed V4 direction.
+
+**Opened:** Implement V4 around visual trip spine, place catalog/directions links, PDF-as-travel-document, adaptive CTA logic, share/resume state, travel mode, and itinerary health checks.
+**Closed:** Research pass completed; no widget runtime code changed.
+
+**Next session should:** Start with `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, then implement P0 items in order: place catalog/maps, visual day spine, PDF V4, and adaptive CTA/analytics.
+
 ## 2026-05-30 — Codex (Tools home shortcut cleanup)
 
 **Did:** Removed the unpublished Ultimate planner from homepage tool shortcuts and regenerated the two visible planner icons with the cheap Gemini image model.
