@@ -27,7 +27,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `public-toilets-map/` - live Berlin Open Data public toilet map with nearest-to-user distance.
 - `currywurst-finder/` - interactive Berlin currywurst map for the planned best currywurst article.
 - `club-picker/` - blog widget for the Berlin club dress-code article; asks five nightlife/outfit questions and returns a club recommendation, backup options, and Door Difficulty rating.
-- `hackescher-after-tour-planner/` - blog widget for the Hackescher Markt after-tour article; asks time, need, and energy, then returns one practical next move with route/map link and booking CTA.
+- `hackescher-after-tour-planner/` - BerlinTools/homepage/blog widget for the Hackescher Markt after-tour article; asks time, need, and energy, then returns one practical next move with route/map link and booking CTA.
 - `berlin-first-day-planner/` - BerlinTools/homepage widget for first-day visitors; asks arrival date/time, start point, energy, priority, and luggage, then returns a booking-first 24-hour plan with Open-Meteo forecast or monthly climate average, Sunday/holiday logic, ticket nudges, lead-gated PDF download, and lead-gated print view. Velo handoff code and funnel email copy live in its `velo/` and `email/` folders.
 - `stats/` - deprecated hidden no-op; remove the old Stats section from Wix because hero now carries the facts.
 - `how-it-works/` - `bw-how-it-works` homepage 3-step walking timeline Custom Element.
@@ -40,7 +40,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `route/` - `bw-route` interactive illustrated route map Custom Element with a route-story preview section.
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
 - `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
-- `js/blog-journey-inject.js` - sitewide Wix Custom Code helper for post typography polish, mobile guide chips, inline tool prompts, and topic-aware next-step cards.
+- `js/blog-journey-inject.js` - sitewide Wix Custom Code helper for post typography polish, mobile blog/category nav, mobile guide chips, inline tool prompts, topic-aware next-step cards, and a back-to-top arrow.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin First-Day Survival Guide signup.
 
 ## Project Memory
@@ -171,12 +171,15 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   header/Quick Summary flicker. The script skips
   non-`/post/` URLs.
 - `js/blog-journey-inject.js` - lightly polishes post body typography, adds a
-  mobile-only `In this guide` chip row before the first visible heading, injects
-  one topic-aware inline tool prompt when the post does not already link to that
-  tool, and adds a topic-aware `Next step` module near the end of each post. It
-  reads `blog-index/data.json`, links to one related guide, one relevant Berlin
-  tool, and the booking page, and sends `bw_blog_tool_prompt_*` plus
-  `bw_blog_journey_*` analytics events. It skips non-`/post/` URLs.
+  mobile-only `Blog Home` / category chip row near the top of the article, adds
+  a mobile-only `In this guide` chip row before the first visible heading, hides
+  the photo-led `Walk It` card on mobile, injects one topic-aware inline tool
+  prompt when the post does not already link to that tool, adds a sticky
+  back-to-top arrow, and adds a topic-aware `Next step` module near the end of
+  each post. It reads `blog-index/data.json`, links to related guides, relevant
+  Berlin tools, and the booking page, and sends `bw_blog_tool_prompt_*`,
+  `bw_blog_journey_*`, plus `bw_blog_back_top_click` analytics events. It skips
+  non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
   `sessionStorage`, links the primary CTA to the booking route, and posts the

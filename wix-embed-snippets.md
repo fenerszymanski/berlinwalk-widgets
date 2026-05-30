@@ -70,7 +70,7 @@ current URL is not a blog post.
 
 ```html
 <script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=24" defer></script>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=2" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=4" defer></script>
 ```
 
 `blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from
@@ -85,10 +85,13 @@ navigation into the Wix-managed post header or article body, avoiding the
 show-hide-show flicker and Quick Summary rerender.
 
 `blog-journey-inject.js` lightly polishes article body typography, adds the
+mobile `Blog Home` / category chip row near the top of the article, adds the
 mobile `In this guide` chip row, injects one topic-aware inline tool prompt, and
-adds a topic-aware `Next step` module near the article end. It reads
-`blog-index/data.json`, recommends a related guide and tool, and tracks
-`bw_blog_tool_prompt_*` plus `bw_blog_journey_*` events.
+adds a topic-aware `Next step` module near the article end. It hides the
+photo-led `Walk It` card on mobile, adds a sticky back-to-top arrow, reads
+`blog-index/data.json`, recommends related guides and tools, and tracks
+`bw_blog_tool_prompt_*`, `bw_blog_journey_*`, plus `bw_blog_back_top_click`
+events.
 
 ## Sitewide Custom Code
 
@@ -197,6 +200,22 @@ https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-club-dress-
 ```
 
 Recommended first Wix iframe height for the Club Picker:
+
+```text
+1180px
+```
+
+## Hackescher Markt After-Tour Post Widgets
+
+Use these URLs for `what-to-do-near-hackescher-markt-after-walking-tour`:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=hackescher-after-tour
+https://fenerszymanski.github.io/berlinwalk-widgets/hackescher-after-tour-planner/
+https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=hackescher-after-tour
+```
+
+Recommended first Wix iframe height for the Hackescher After-Tour Planner:
 
 ```text
 1180px

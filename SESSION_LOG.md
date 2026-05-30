@@ -4,6 +4,38 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-30 — Codex (Blog journey mobile nav + back-to-top)
+
+**Did:** Implemented Yusuf's mobile blog-post tweaks for the journey helper.
+
+**Changed:**
+- `js/blog-journey-inject.js` — added mobile `Blog Home` + category chip nav near the top of each article, hid the photo-led `Walk It` journey card on mobile, added a sticky back-to-top button on desktop/mobile, excluded the new nav from heading/spacing scans, and sends `bw_blog_back_top_click`.
+- `blog-post-mockup/enhancer-test.html` — loads `cta-inject.js` before the journey helper so the local harness better reflects the live helper mix.
+- `README.md`, `wix-embed-snippets.md`, `AGENTS.md` — documented the new behavior and bumped the install snippet to `blog-journey-inject.js?v=4`.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the v4 helper behavior and install note.
+
+**Opened:** Push/deploy and Wix Custom Code update to `https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=4` remain; live mobile Safari check needed.
+**Closed:** Local `node --check` passed; Playwright QA passed on desktop and 390px mobile with mobile nav visible, desktop nav hidden, mobile `Walk It` card hidden, back-to-top visible after scroll, no broken images, and horizontal overflow `0`.
+
+**Next session should:** After push/GitHub Pages deploy, update the existing Wix Custom Code URL to `?v=4` and live-check one `/post/*` page on desktop plus mobile Safari.
+
+## 2026-05-30 — Codex (Hackescher tool hubs)
+
+**Did:** Added the Hackescher After-Tour Planner to the homepage tools preview, `/berlin-tools` inventory, and `/widgets` embed gallery data.
+
+**Changed:**
+- `tools-home/data.json` — inserted `hackescher-after-tour-planner` as the second `Plan your visit` card so it appears within the first 8 rendered homepage tools.
+- `tools-hub/data.json` — added the Discovery entry with `widgetUrl` `https://fenerszymanski.github.io/berlinwalk-widgets/hackescher-after-tour-planner/` and `embedHeight: 1180`.
+- `tools-home/icons/hackescher-after-tour-planner.png`, `tools-home/icons/hackescher-after-tour-planner-160.png`, `tools-home/icons/manifest.json` — added a no-text route/courtyard/pin icon.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated ItemList SEO; now 30 widgets.
+- `README.md`, `wix-embed-snippets.md`, `AGENTS.md` — documented the tool promotion and future no-manual-spacer rule.
+- Project root `insert-hackescher-after-tour-planner.js` — created and ran one-off Wix CMS insertion script; Wix CMS item `a5bfc7d5-ec2c-4c03-857e-3c99f3221c56` is live at `/tools/hackescher-after-tour-planner`.
+
+**Opened:** Push/deploy needed before live GitHub Pages serves the new data/icon; then live-QA homepage `Plan your visit`, `/berlin-tools`, and `/widgets`.
+**Closed:** Local JSON validation, widgets SEO regeneration, browser QA for local tools/widgets hubs, and live Wix dynamic route creation.
+
+**Next session should:** After push, verify the new icon URL returns 200 and the Hackescher card appears on all three live surfaces.
+
 ## 2026-05-30 — Codex (Blog journey helper v3)
 
 **Did:** Addressed Yusuf's SS1-SS4 feedback on Wix blog post rendering.

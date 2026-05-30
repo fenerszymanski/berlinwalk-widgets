@@ -162,6 +162,15 @@
       "embedHeight": 1280
     },
     {
+      "slug": "hackescher-after-tour-planner",
+      "title": "Hackescher Markt After-Tour Planner",
+      "lead": "Just finished a walking tour near Hackescher Markt? Pick food, courtyards, museums, rain plans, or an easy evening next step.",
+      "category": "Discovery",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner-160.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/hackescher-after-tour-planner/",
+      "embedHeight": 1180
+    },
+    {
       "slug": "free-berlin-audio-tour",
       "title": "Berlin in 9 Minutes (Free Audio Tour)",
       "lead": "A 9-minute audio walk from Alexanderplatz to Hackescher Markt — recorded by the guide who leads the free tour every day at 11:30.",
