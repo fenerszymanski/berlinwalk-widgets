@@ -73,11 +73,11 @@
           },
           {
             "q": "What if I need to cancel?",
-            "a": "Since the tour is free, there's **no cancellation fee**. However, we kindly ask that you cancel your booking if you know you won't make it — this helps us manage group sizes. You can cancel through your booking confirmation email or by contacting us at **info@yusufucuz.com**."
+            "a": "Since the tour is free, there's **no cancellation fee**. However, we kindly ask that you cancel your booking if you know you won't make it — this helps us manage group sizes. You can cancel through your booking confirmation email or through **berlinwalk.com**."
           },
           {
             "q": "Can I book a private tour for my group?",
-            "a": "Yes! We offer **private tours** for groups of any size — families, corporate outings, school trips, or friend groups. Private tours can be customized in terms of route, schedule, and focus areas. Contact us at **info@yusufucuz.com** with your group size, preferred date, and any special requests."
+            "a": "Yes! We offer **private tours** for groups of any size — families, corporate outings, school trips, or friend groups. Private tours can be customized in terms of route, schedule, and focus areas. Reach out through **berlinwalk.com** with your group size, preferred date, and any special requests."
           },
           {
             "q": "How often does the tour run?",
@@ -1136,6 +1136,39 @@
       {
         "q": "Should I go back to Alexanderplatz after the tour?",
         "a": "Only if you need transport, shopping, your hotel, or the TV Tower. For food, courtyards, Museum Island, the Spree, and evening plans, staying around Hackescher Markt is usually the better move."
+      }
+    ]
+  },
+  "ultimate-berlin-trip-planner": {
+    "title": "Ultimate Berlin Trip Planner - FAQ",
+    "items": [
+      {
+        "q": "Is the Ultimate Berlin Trip Planner free?",
+        "a": "Yes. The planner is free to use. It gives you a preview immediately, then unlocks the full day-by-day plan, PDF, print view, and arrival tips after email consent."
+      },
+      {
+        "q": "How many days in Berlin does the planner cover?",
+        "a": "It covers **1 to 7 days**. One day stays tightly focused on the central highlights. Three days uses the classic first-time structure: Mitte, Wall/East Berlin, and museums or neighborhoods. Longer trips add slower local days, food, nightlife, free sights, or Potsdam."
+      },
+      {
+        "q": "Why does the planner ask for my arrival date?",
+        "a": "Arrival date changes the practical plan. The tool checks live weather for near dates, monthly averages for later dates, Sunday and public-holiday restrictions, Monday museum caution, and the best moment to join the BerlinWalk tour."
+      },
+      {
+        "q": "Does the planner use AI?",
+        "a": "No. V1 uses deterministic local-guide logic instead of live AI generation. That keeps the recommendations predictable, Berlin-specific, and focused on real visitor decisions rather than generic itinerary filler."
+      },
+      {
+        "q": "When should I take the BerlinWalk tour during my trip?",
+        "a": "For most first-time visitors, take the BerlinWalk tour as early as possible, ideally on arrival day if you arrive early enough or the next morning at 11:30. The tour lasts about **2 hours** and gives the historic center a structure before you choose museums, Wall sites, food, or nightlife."
+      },
+      {
+        "q": "Can the planner help if I already booked the walking tour?",
+        "a": "Yes. If you mark the tour as already booked, the planner treats the walk as a fixed anchor and the email sequence can switch from booking reminders to meeting-point, weather, ticket, and arrival prep."
+      },
+      {
+        "q": "Is this enough to book museums and restaurants?",
+        "a": "Use it as a planning framework, not a live reservation system. Always check paid attractions, timed museum entries, restaurants, and special events directly before you go."
       }
     ]
   }

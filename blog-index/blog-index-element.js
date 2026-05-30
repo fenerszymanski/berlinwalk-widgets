@@ -4,6 +4,30 @@ const BW_BLOG_INDEX_BASE_URL = (() => {
 })();
 const BW_BLOG_INDEX_DATA_URL = new URL('./data.json', BW_BLOG_INDEX_BASE_URL).href;
 const BW_BLOG_INDEX_LOGO_URL = `${new URL('./assets/berlin-travel-history-notes-logo.png', BW_BLOG_INDEX_BASE_URL).href}?v=20260529`;
+const BW_BLOG_INDEX_NATIVE_FEED_STYLE_ID = 'bw-blog-index-native-feed-suppressor';
+
+function bwInstallBlogIndexNativeFeedPrehide() {
+  if (!/^\/blog\/?$/.test(window.location.pathname)) return;
+  if (document.getElementById(BW_BLOG_INDEX_NATIVE_FEED_STYLE_ID)) return;
+  const style = document.createElement('style');
+  style.id = BW_BLOG_INDEX_NATIVE_FEED_STYLE_ID;
+  style.textContent = `
+    #comp-mm3d94ml,
+    [data-bw-native-blog-feed-hidden="true"] {
+      display: none !important;
+      height: 0 !important;
+      min-height: 0 !important;
+      max-height: 0 !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      overflow: hidden !important;
+      visibility: hidden !important;
+    }
+  `;
+  (document.head || document.documentElement).appendChild(style);
+}
+
+bwInstallBlogIndexNativeFeedPrehide();
 
 const BW_BLOG_INDEX_FALLBACK = {
   totalPosts: 0,
@@ -98,7 +122,7 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-hero {
           background: #FBFBF2;
           border-top: 8px solid var(--yellow);
-          border-bottom: 2px solid var(--text);
+          border-bottom: 1px solid #D7D7CF;
           color: var(--text);
           padding: 22px 0 34px;
           position: relative;
@@ -116,7 +140,7 @@ class BWBlogIndexElement extends HTMLElement {
         }
 
         .bw-blog-index .bw-masthead {
-          border-bottom: 1px solid var(--text);
+          border-bottom: 1px solid #D7D7CF;
           display: grid;
           gap: 16px;
           grid-template-columns: minmax(240px, 460px) minmax(0, 1fr);
@@ -410,8 +434,8 @@ class BWBlogIndexElement extends HTMLElement {
 
         .bw-blog-index .bw-search input {
           background: #FFFFFF;
-          border: 1px solid var(--text);
-          border-radius: 0;
+          border: 1px solid #D7D7CF;
+          border-radius: 4px;
           color: var(--text);
           font: 800 14px/1 Montserrat, Arial, sans-serif;
           min-height: 46px;
@@ -422,29 +446,30 @@ class BWBlogIndexElement extends HTMLElement {
         .bw-blog-index .bw-topic-nav {
           display: flex;
           flex-wrap: wrap;
-          gap: 6px 8px;
+          gap: 7px 8px;
           justify-content: flex-end;
           min-width: 0;
         }
 
         .bw-blog-index .bw-topic-btn {
           align-items: center;
-          background: transparent;
-          border: 1px solid var(--text);
-          border-radius: 0;
-          color: var(--text);
+          background: #FFFFFF;
+          border: 1px solid #D7D7CF;
+          border-radius: 4px;
+          color: var(--green);
           cursor: pointer;
           display: inline-flex;
           font: 900 12px/1 Montserrat, Arial, sans-serif;
-          min-height: 38px;
-          padding: 0 13px;
+          min-height: 34px;
+          padding: 0 12px;
           text-decoration: none;
+          transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
         }
 
         .bw-blog-index .bw-topic-btn:hover,
         .bw-blog-index .bw-topic-btn:focus-visible {
           background: var(--yellow);
-          border-color: var(--text);
+          border-color: var(--yellow);
           color: var(--text);
         }
 
@@ -1862,24 +1887,7 @@ class BWBlogIndexElement extends HTMLElement {
   _installWixNativeBlogFeedSuppressor() {
     if (!this._isBlogIndexPage()) return;
 
-    const styleId = 'bw-blog-index-native-feed-suppressor';
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement('style');
-      style.id = styleId;
-      style.textContent = `
-        [data-bw-native-blog-feed-hidden="true"] {
-          display: none !important;
-          height: 0 !important;
-          min-height: 0 !important;
-          max-height: 0 !important;
-          margin: 0 !important;
-          padding: 0 !important;
-          overflow: hidden !important;
-          visibility: hidden !important;
-        }
-      `;
-      document.head.appendChild(style);
-    }
+    bwInstallBlogIndexNativeFeedPrehide();
 
     const hideNativeFeed = () => {
       const exactSection = document.getElementById('comp-mm3d94ml');

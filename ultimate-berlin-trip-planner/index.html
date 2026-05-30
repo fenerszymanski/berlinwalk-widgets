@@ -1,0 +1,2335 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ultimate Berlin Trip Planner | BerlinWalk</title>
+  <meta name="description" content="Build a realistic Berlin itinerary before you arrive, with arrival-date logic, weather, opening-day notes, and the best time to join BerlinWalk.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-trip-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-trip-planner {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #143F17;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light-green: #C5E1A5;
+      --bw-lime-soft: #F2F8E8;
+      --bw-cream: #FAFAF5;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-red: #E63946;
+      --bw-blue: #2F80ED;
+      --bw-blue-soft: #EAF4FF;
+      --bw-amber: #F5A623;
+      --bw-amber-soft: #FFF3D7;
+      --bw-rose: #D94D5C;
+      --bw-rose-soft: #FFF0F3;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-trip-planner *,
+    #bw-trip-planner *::before,
+    #bw-trip-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-trip-planner button,
+    #bw-trip-planner input {
+      font: inherit;
+    }
+
+    #bw-trip-planner button,
+    #bw-trip-planner a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #bw-trip-planner .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.1)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 22px;
+    }
+
+    #bw-trip-planner .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.5px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner h1,
+    #bw-trip-planner h2,
+    #bw-trip-planner h3,
+    #bw-trip-planner p {
+      margin-top: 0;
+    }
+
+    #bw-trip-planner .bw-title {
+      color: var(--bw-white);
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.1;
+      margin: 0;
+      max-width: 860px;
+    }
+
+    #bw-trip-planner .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 880px;
+    }
+
+    #bw-trip-planner .bw-body {
+      align-items: start;
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-trip-planner .bw-form {
+      align-content: start;
+      display: grid;
+      gap: 13px;
+      min-width: 0;
+    }
+
+    #bw-trip-planner .bw-question,
+    #bw-trip-planner .bw-result,
+    #bw-trip-planner .bw-full-plan,
+    #bw-trip-planner .bw-lead-panel {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+    }
+
+    #bw-trip-planner .bw-question {
+      padding: 13px;
+    }
+
+    #bw-trip-planner .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.35px;
+      line-height: 1.3;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-date-row {
+      align-items: center;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 48px minmax(0, 1fr);
+    }
+
+    #bw-trip-planner .bw-date-icon {
+      align-items: center;
+      background: var(--bw-blue-soft);
+      border: 1px solid rgba(47, 128, 237, 0.24);
+      border-radius: 8px;
+      color: var(--bw-blue);
+      display: inline-flex;
+      font-size: 14px;
+      font-weight: 900;
+      height: 48px;
+      justify-content: center;
+      line-height: 1;
+      width: 48px;
+    }
+
+    #bw-trip-planner .bw-date-input,
+    #bw-trip-planner .bw-lead-input {
+      appearance: none;
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-blue);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.2;
+      min-height: 48px;
+      padding: 10px 12px;
+      width: 100%;
+    }
+
+    #bw-trip-planner .bw-date-help {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-top: 5px;
+    }
+
+    #bw-trip-planner .bw-options {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-options.cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-options.cols-4 {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-options.cols-7 {
+      grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+    }
+
+    #bw-trip-planner .bw-option {
+      align-items: flex-start;
+      background:
+        linear-gradient(90deg, var(--accent-soft, var(--bw-white)), var(--bw-white) 62%);
+      border: 1.5px solid var(--accent-border, var(--bw-border));
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 30px minmax(0, 1fr);
+      min-height: 58px;
+      padding: 10px 11px;
+      text-align: left;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+      width: 100%;
+    }
+
+    #bw-trip-planner .bw-option:hover {
+      background: var(--accent-soft, var(--bw-lime-soft));
+      border-color: var(--accent, var(--bw-lime));
+      transform: translateY(-1px);
+    }
+
+    #bw-trip-planner .bw-option:focus-visible,
+    #bw-trip-planner .bw-date-input:focus-visible,
+    #bw-trip-planner .bw-lead-input:focus-visible,
+    #bw-trip-planner .bw-lead-submit:focus-visible,
+    #bw-trip-planner .bw-secondary:focus-visible,
+    #bw-trip-planner .bw-primary:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-trip-planner .bw-option.active {
+      background: var(--accent, var(--bw-green));
+      border-color: var(--accent, var(--bw-green));
+      color: var(--bw-white);
+    }
+
+    #bw-trip-planner .bw-option.is-multi.active {
+      box-shadow: inset 0 0 0 2px rgba(255, 230, 0, 0.95);
+    }
+
+    #bw-trip-planner .bw-option[data-value="1"],
+    #bw-trip-planner .bw-option[data-value="2"],
+    #bw-trip-planner .bw-option[data-value="3"],
+    #bw-trip-planner .bw-option[data-value="4"],
+    #bw-trip-planner .bw-option[data-value="5"],
+    #bw-trip-planner .bw-option[data-value="6"],
+    #bw-trip-planner .bw-option[data-value="7"],
+    #bw-trip-planner .bw-option[data-value="morning"],
+    #bw-trip-planner .bw-option[data-value="mitte"],
+    #bw-trip-planner .bw-option[data-value="history"],
+    #bw-trip-planner .bw-option[data-value="yes"],
+    #bw-trip-planner .bw-option[data-value="considering"] {
+      --accent: var(--bw-green);
+      --accent-border: #B9D69C;
+      --accent-soft: #F2F8E8;
+    }
+
+    #bw-trip-planner .bw-option[data-value="midday"],
+    #bw-trip-planner .bw-option[data-value="ber"],
+    #bw-trip-planner .bw-option[data-value="wall"],
+    #bw-trip-planner .bw-option[data-value="solo"],
+    #bw-trip-planner .bw-option[data-value="balanced"] {
+      --accent: var(--bw-blue);
+      --accent-border: #B8D7FA;
+      --accent-soft: #EAF4FF;
+    }
+
+    #bw-trip-planner .bw-option[data-value="afternoon"],
+    #bw-trip-planner .bw-option[data-value="hbf"],
+    #bw-trip-planner .bw-option[data-value="museums"],
+    #bw-trip-planner .bw-option[data-value="couple"],
+    #bw-trip-planner .bw-option[data-value="maybe"] {
+      --accent: var(--bw-amber);
+      --accent-border: #F4D386;
+      --accent-soft: var(--bw-amber-soft);
+    }
+
+    #bw-trip-planner .bw-option[data-value="evening"],
+    #bw-trip-planner .bw-option[data-value="hotel"],
+    #bw-trip-planner .bw-option[data-value="food"],
+    #bw-trip-planner .bw-option[data-value="nightlife"],
+    #bw-trip-planner .bw-option[data-value="family"],
+    #bw-trip-planner .bw-option[data-value="booked"] {
+      --accent: var(--bw-rose);
+      --accent-border: #F0BDC6;
+      --accent-soft: #FFF0F3;
+    }
+
+    #bw-trip-planner .bw-opt-icon {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.82);
+      border-radius: 8px;
+      color: var(--accent, var(--bw-green));
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      height: 30px;
+      justify-content: center;
+      line-height: 1;
+      width: 30px;
+    }
+
+    #bw-trip-planner .bw-option.active .bw-opt-icon {
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--bw-yellow);
+    }
+
+    #bw-trip-planner .bw-opt-copy {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-trip-planner .bw-opt-title {
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.24;
+    }
+
+    #bw-trip-planner .bw-opt-sub {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.34;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-option.active .bw-opt-sub {
+      color: var(--bw-light-green);
+    }
+
+    #bw-trip-planner .bw-result {
+      align-self: start;
+      border: 2px solid var(--bw-green);
+      overflow: hidden;
+      position: sticky;
+      top: 12px;
+    }
+
+    #bw-trip-planner .bw-result-head {
+      background: var(--bw-green);
+      color: var(--bw-white);
+      padding: 14px 15px;
+    }
+
+    #bw-trip-planner .bw-result-tag {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.8px;
+      line-height: 1.3;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-result-title {
+      color: var(--bw-white);
+      display: block;
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.16;
+      margin: 0;
+    }
+
+    #bw-trip-planner .bw-result-body {
+      padding: 14px 15px 15px;
+    }
+
+    #bw-trip-planner .bw-summary {
+      color: var(--bw-text);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0 0 12px;
+    }
+
+    #bw-trip-planner .bw-status-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin-bottom: 12px;
+    }
+
+    #bw-trip-planner .bw-status {
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 9px 10px;
+    }
+
+    #bw-trip-planner .bw-status-label {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-status-value {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-weather {
+      --weather-accent: var(--bw-lime);
+      --weather-bg: #F8FBF2;
+      --weather-text: var(--bw-green);
+      background:
+        radial-gradient(circle at top right, rgba(255, 255, 255, 0.72), transparent 38%),
+        var(--weather-bg);
+      border: 1px solid rgba(27, 94, 32, 0.15);
+      border-left: 5px solid var(--weather-accent);
+      border-radius: 8px;
+      color: var(--weather-text);
+      margin: 0 0 12px;
+      overflow: hidden;
+      padding: 12px;
+    }
+
+    #bw-trip-planner .bw-weather.theme-sunny {
+      --weather-accent: #F5A623;
+      --weather-bg: #E7F5FF;
+      --weather-text: #0B4B78;
+    }
+
+    #bw-trip-planner .bw-weather.theme-rain,
+    #bw-trip-planner .bw-weather.theme-storm {
+      --weather-accent: #2F80ED;
+      --weather-bg: #EAF4FF;
+      --weather-text: #174C8A;
+    }
+
+    #bw-trip-planner .bw-weather.theme-cloudy,
+    #bw-trip-planner .bw-weather.theme-fog {
+      --weather-accent: #6D7278;
+      --weather-bg: #F1F3F4;
+      --weather-text: #3F474D;
+    }
+
+    #bw-trip-planner .bw-weather.theme-climate {
+      --weather-accent: #F5A623;
+      --weather-bg: #FFF7E6;
+      --weather-text: #805400;
+    }
+
+    #bw-trip-planner .bw-weather-main {
+      align-items: center;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 54px minmax(0, 1fr);
+      margin-bottom: 8px;
+    }
+
+    #bw-trip-planner .bw-weather-icon {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      border-radius: 8px;
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 900;
+      height: 54px;
+      justify-content: center;
+      line-height: 1;
+      width: 54px;
+    }
+
+    #bw-trip-planner .bw-weather-title {
+      color: var(--weather-text, var(--bw-green));
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin: 0;
+    }
+
+    #bw-trip-planner .bw-weather-meta {
+      color: var(--weather-text);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 6px;
+    }
+
+    #bw-trip-planner .bw-weather-pill,
+    #bw-trip-planner .bw-pill {
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      border-radius: 999px;
+      font-size: 9.5px;
+      font-weight: 900;
+      letter-spacing: 0.65px;
+      line-height: 1.2;
+      padding: 4px 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-weather-copy,
+    #bw-trip-planner .bw-note {
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-trip-planner .bw-weather-metrics {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      margin: 9px 0;
+    }
+
+    #bw-trip-planner .bw-weather-metric {
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 8px;
+      padding: 7px 8px;
+    }
+
+    #bw-trip-planner .bw-weather-metric span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 8.5px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-weather-metric strong {
+      color: var(--weather-text, var(--bw-green));
+      display: block;
+      font-size: 12px;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-preview {
+      display: grid;
+      gap: 9px;
+      margin: 0 0 12px;
+    }
+
+    #bw-trip-planner .bw-preview-day {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    #bw-trip-planner .bw-preview-day strong,
+    #bw-trip-planner .bw-day-title {
+      color: var(--bw-green);
+      display: block;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.3;
+    }
+
+    #bw-trip-planner .bw-preview-day span,
+    #bw-trip-planner .bw-day-date {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10.5px;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-preview-day p {
+      color: var(--bw-text);
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1.45;
+      margin: 7px 0 0;
+    }
+
+    #bw-trip-planner .bw-lock {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.2), rgba(124, 179, 66, 0.12)),
+        var(--bw-white);
+      border: 1px dashed #AECF8E;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      padding: 11px;
+    }
+
+    #bw-trip-planner .bw-lock-title {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    #bw-trip-planner .bw-lock p {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-trip-planner .bw-lead-panel {
+      display: grid;
+      gap: 10px;
+      margin: 0 0 12px;
+      padding: 12px;
+    }
+
+    #bw-trip-planner .bw-lead-panel[hidden],
+    #bw-trip-planner .bw-full-plan[hidden],
+    #bw-trip-planner .bw-locked-only[hidden] {
+      display: none;
+    }
+
+    #bw-trip-planner .bw-lead-title {
+      color: var(--bw-green);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin: 0 0 4px;
+    }
+
+    #bw-trip-planner .bw-lead-copy {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-trip-planner .bw-lead-consent {
+      align-items: flex-start;
+      color: var(--bw-muted);
+      display: grid;
+      font-size: 10.8px;
+      font-weight: 650;
+      gap: 8px;
+      grid-template-columns: 18px minmax(0, 1fr);
+      line-height: 1.45;
+    }
+
+    #bw-trip-planner .bw-lead-consent input {
+      height: 18px;
+      margin: 0;
+      width: 18px;
+    }
+
+    #bw-trip-planner .bw-lead-submit,
+    #bw-trip-planner .bw-primary,
+    #bw-trip-planner .bw-secondary {
+      align-items: center;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 10px 12px;
+      text-align: center;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    #bw-trip-planner .bw-lead-submit,
+    #bw-trip-planner .bw-primary {
+      background: var(--bw-yellow);
+      border: 2px solid var(--bw-yellow);
+      color: var(--bw-green);
+    }
+
+    #bw-trip-planner .bw-secondary {
+      background: var(--bw-white);
+      border: 2px solid var(--bw-green);
+      color: var(--bw-green);
+    }
+
+    #bw-trip-planner .bw-secondary[disabled],
+    #bw-trip-planner .bw-lead-submit[disabled] {
+      cursor: not-allowed;
+      opacity: 0.62;
+    }
+
+    #bw-trip-planner .bw-actions {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1.2fr 0.9fr 0.9fr;
+    }
+
+    #bw-trip-planner .bw-message,
+    #bw-trip-planner .bw-lead-message {
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.35;
+      min-height: 15px;
+    }
+
+    #bw-trip-planner .bw-lead-message.is-error {
+      color: var(--bw-red);
+    }
+
+    #bw-trip-planner .bw-full-plan {
+      margin: 0 20px 20px;
+      padding: 16px;
+    }
+
+    #bw-trip-planner .bw-full-head {
+      align-items: end;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    #bw-trip-planner .bw-full-title {
+      color: var(--bw-green);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-trip-planner .bw-full-sub {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 5px 0 0;
+    }
+
+    #bw-trip-planner .bw-days {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-trip-planner .bw-day {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-left: 5px solid var(--day-accent, var(--bw-lime));
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-day-head {
+      align-items: center;
+      background: linear-gradient(90deg, var(--day-bg, var(--bw-lime-soft)), var(--bw-white));
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 58px minmax(0, 1fr);
+      padding: 11px 12px;
+    }
+
+    #bw-trip-planner .bw-day-num {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      height: 42px;
+      justify-content: center;
+      line-height: 1.1;
+      text-align: center;
+      width: 50px;
+    }
+
+    #bw-trip-planner .bw-day-body {
+      display: grid;
+      gap: 8px;
+      padding: 11px 12px 12px;
+    }
+
+    #bw-trip-planner .bw-block {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 88px minmax(0, 1fr);
+    }
+
+    #bw-trip-planner .bw-block-time {
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 7px;
+      color: var(--bw-green);
+      font-size: 10.5px;
+      font-weight: 900;
+      line-height: 1.25;
+      padding: 7px 8px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-block-copy strong {
+      color: var(--bw-text);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+
+    #bw-trip-planner .bw-block-copy span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    #bw-trip-planner .bw-day-check {
+      background: #FFFCDB;
+      border: 1px solid #EFE6A3;
+      border-radius: 8px;
+      color: #5A5236;
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.45;
+      padding: 8px 10px;
+    }
+
+    #bw-trip-planner .bw-links {
+      background: var(--bw-green);
+      color: var(--bw-white);
+      padding: 15px 20px 18px;
+    }
+
+    #bw-trip-planner .bw-links-title {
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      line-height: 1.3;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-link-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-link {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 11.5px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1.25;
+      min-height: 40px;
+      padding: 9px 10px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    #bw-trip-planner .bw-foot {
+      background: var(--bw-cream);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 10.5px;
+      font-weight: 650;
+      line-height: 1.45;
+      padding: 10px 16px;
+      text-align: center;
+    }
+
+    @media (max-width: 880px) {
+      #bw-trip-planner .bw-body {
+        grid-template-columns: 1fr;
+        padding: 15px;
+      }
+
+      #bw-trip-planner .bw-result {
+        position: static;
+      }
+
+      #bw-trip-planner .bw-options.cols-4,
+      #bw-trip-planner .bw-options.cols-7 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-trip-planner .bw-link-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-trip-planner .bw-full-plan {
+        margin: 0 15px 18px;
+      }
+    }
+
+    @media (max-width: 540px) {
+      #bw-trip-planner {
+        margin: 18px 0;
+      }
+
+      #bw-trip-planner .bw-head {
+        padding: 18px 16px;
+      }
+
+      #bw-trip-planner .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-trip-planner .bw-sub {
+        font-size: 12.5px;
+      }
+
+      #bw-trip-planner .bw-body {
+        padding: 12px;
+      }
+
+      #bw-trip-planner .bw-question,
+      #bw-trip-planner .bw-result-body,
+      #bw-trip-planner .bw-full-plan {
+        padding: 11px;
+      }
+
+      #bw-trip-planner .bw-options,
+      #bw-trip-planner .bw-options.cols-3,
+      #bw-trip-planner .bw-options.cols-4,
+      #bw-trip-planner .bw-options.cols-7,
+      #bw-trip-planner .bw-status-grid,
+      #bw-trip-planner .bw-weather-metrics,
+      #bw-trip-planner .bw-actions,
+      #bw-trip-planner .bw-link-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-trip-planner .bw-option {
+        min-height: 50px;
+      }
+
+      #bw-trip-planner .bw-full-head {
+        display: block;
+      }
+
+      #bw-trip-planner .bw-block {
+        grid-template-columns: 70px minmax(0, 1fr);
+      }
+
+      #bw-trip-planner .bw-day-head {
+        grid-template-columns: 52px minmax(0, 1fr);
+      }
+    }
+  </style>
+
+  <section class="bw-wrap" aria-labelledby="bw-trip-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk local planner</p>
+      <h1 id="bw-trip-title" class="bw-title">Ultimate Berlin Trip Planner</h1>
+      <p class="bw-sub">Build a realistic 1 to 7 day Berlin plan before you arrive. The planner uses your arrival date, trip length, interests, pace, weather, opening-day rules, and the best moment to join the BerlinWalk tour.</p>
+    </header>
+
+    <div class="bw-body">
+      <form class="bw-form" aria-label="Ultimate Berlin trip planner choices">
+        <div class="bw-question">
+          <span class="bw-label">Arrival date</span>
+          <div class="bw-date-row">
+            <span class="bw-date-icon" aria-hidden="true">DATE</span>
+            <label>
+              <input class="bw-date-input" type="date" data-arrival-date aria-label="Arrival date">
+              <span class="bw-date-help">Live weather for the next 15 days; Berlin monthly averages after that.</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">Trip length</span>
+          <div class="bw-options cols-7" data-group="tripLength">
+            <button class="bw-option" type="button" data-value="1"><span class="bw-opt-icon">1</span><span class="bw-opt-copy"><span class="bw-opt-title">1 day</span><span class="bw-opt-sub">Fast visit</span></span></button>
+            <button class="bw-option" type="button" data-value="2"><span class="bw-opt-icon">2</span><span class="bw-opt-copy"><span class="bw-opt-title">2 days</span><span class="bw-opt-sub">Core city</span></span></button>
+            <button class="bw-option active" type="button" data-value="3"><span class="bw-opt-icon">3</span><span class="bw-opt-copy"><span class="bw-opt-title">3 days</span><span class="bw-opt-sub">Classic first trip</span></span></button>
+            <button class="bw-option" type="button" data-value="4"><span class="bw-opt-icon">4</span><span class="bw-opt-copy"><span class="bw-opt-title">4 days</span><span class="bw-opt-sub">Add neighborhoods</span></span></button>
+            <button class="bw-option" type="button" data-value="5"><span class="bw-opt-icon">5</span><span class="bw-opt-copy"><span class="bw-opt-title">5 days</span><span class="bw-opt-sub">Slow down</span></span></button>
+            <button class="bw-option" type="button" data-value="6"><span class="bw-opt-icon">6</span><span class="bw-opt-copy"><span class="bw-opt-title">6 days</span><span class="bw-opt-sub">Deeper Berlin</span></span></button>
+            <button class="bw-option" type="button" data-value="7"><span class="bw-opt-icon">7</span><span class="bw-opt-copy"><span class="bw-opt-title">7 days</span><span class="bw-opt-sub">Full week</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">Arrival time</span>
+          <div class="bw-options cols-4" data-group="arrivalTime">
+            <button class="bw-option active" type="button" data-value="morning"><span class="bw-opt-icon">AM</span><span class="bw-opt-copy"><span class="bw-opt-title">Before 10:30</span><span class="bw-opt-sub">Tour may fit today</span></span></button>
+            <button class="bw-option" type="button" data-value="midday"><span class="bw-opt-icon">MD</span><span class="bw-opt-copy"><span class="bw-opt-title">10:30-14:30</span><span class="bw-opt-sub">Light first day</span></span></button>
+            <button class="bw-option" type="button" data-value="afternoon"><span class="bw-opt-icon">PM</span><span class="bw-opt-copy"><span class="bw-opt-title">14:30-18:00</span><span class="bw-opt-sub">Evening setup</span></span></button>
+            <button class="bw-option" type="button" data-value="evening"><span class="bw-opt-icon">EV</span><span class="bw-opt-copy"><span class="bw-opt-title">After 18:00</span><span class="bw-opt-sub">Keep it calm</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">Arrival point</span>
+          <div class="bw-options cols-4" data-group="arrivalPoint">
+            <button class="bw-option active" type="button" data-value="ber"><span class="bw-opt-icon">BER</span><span class="bw-opt-copy"><span class="bw-opt-title">BER Airport</span><span class="bw-opt-sub">ABC ticket logic</span></span></button>
+            <button class="bw-option" type="button" data-value="hbf"><span class="bw-opt-icon">HBF</span><span class="bw-opt-copy"><span class="bw-opt-title">Hauptbahnhof</span><span class="bw-opt-sub">Station arrival</span></span></button>
+            <button class="bw-option" type="button" data-value="alex"><span class="bw-opt-icon">ALEX</span><span class="bw-opt-copy"><span class="bw-opt-title">Alexanderplatz</span><span class="bw-opt-sub">Already central</span></span></button>
+            <button class="bw-option" type="button" data-value="hotel"><span class="bw-opt-icon">BASE</span><span class="bw-opt-copy"><span class="bw-opt-title">Hotel/base</span><span class="bw-opt-sub">Start from there</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">Where are you staying?</span>
+          <div class="bw-options" data-group="stayArea">
+            <button class="bw-option active" type="button" data-value="mitte"><span class="bw-opt-icon">MI</span><span class="bw-opt-copy"><span class="bw-opt-title">Mitte / Alexanderplatz</span><span class="bw-opt-sub">Sightseeing base</span></span></button>
+            <button class="bw-option" type="button" data-value="east"><span class="bw-opt-icon">FX</span><span class="bw-opt-copy"><span class="bw-opt-title">Kreuzberg / Friedrichshain</span><span class="bw-opt-sub">Food and nightlife</span></span></button>
+            <button class="bw-option" type="button" data-value="north"><span class="bw-opt-icon">PB</span><span class="bw-opt-copy"><span class="bw-opt-title">Prenzlauer Berg</span><span class="bw-opt-sub">Calmer local feel</span></span></button>
+            <button class="bw-option" type="button" data-value="west"><span class="bw-opt-icon">CW</span><span class="bw-opt-copy"><span class="bw-opt-title">Charlottenburg / West</span><span class="bw-opt-sub">Classic west Berlin</span></span></button>
+            <button class="bw-option" type="button" data-value="unsure"><span class="bw-opt-icon">?</span><span class="bw-opt-copy"><span class="bw-opt-title">Not sure yet</span><span class="bw-opt-sub">Keep flexible</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">Who is traveling?</span>
+          <div class="bw-options cols-4" data-group="groupType">
+            <button class="bw-option active" type="button" data-value="solo"><span class="bw-opt-icon">SO</span><span class="bw-opt-copy"><span class="bw-opt-title">Solo</span><span class="bw-opt-sub">Efficient and flexible</span></span></button>
+            <button class="bw-option" type="button" data-value="couple"><span class="bw-opt-icon">2+</span><span class="bw-opt-copy"><span class="bw-opt-title">Couple / friends</span><span class="bw-opt-sub">Shared pace</span></span></button>
+            <button class="bw-option" type="button" data-value="family"><span class="bw-opt-icon">FAM</span><span class="bw-opt-copy"><span class="bw-opt-title">Family</span><span class="bw-opt-sub">Breaks matter</span></span></button>
+            <button class="bw-option" type="button" data-value="slow"><span class="bw-opt-icon">SLO</span><span class="bw-opt-copy"><span class="bw-opt-title">Older / slower</span><span class="bw-opt-sub">Less rushing</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">First time in Berlin?</span>
+          <div class="bw-options cols-3" data-group="firstTime">
+            <button class="bw-option active" type="button" data-value="yes"><span class="bw-opt-icon">YES</span><span class="bw-opt-copy"><span class="bw-opt-title">Yes</span><span class="bw-opt-sub">Need the city to click</span></span></button>
+            <button class="bw-option" type="button" data-value="no"><span class="bw-opt-icon">NO</span><span class="bw-opt-copy"><span class="bw-opt-title">No</span><span class="bw-opt-sub">Skip basics faster</span></span></button>
+            <button class="bw-option" type="button" data-value="mixed"><span class="bw-opt-icon">MIX</span><span class="bw-opt-copy"><span class="bw-opt-title">Mixed group</span><span class="bw-opt-sub">One plan for both</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">Top interests</span>
+          <div class="bw-options" data-group="interests" data-multi="true">
+            <button class="bw-option is-multi active" type="button" data-value="history"><span class="bw-opt-icon">HIS</span><span class="bw-opt-copy"><span class="bw-opt-title">History</span><span class="bw-opt-sub">City layers</span></span></button>
+            <button class="bw-option is-multi active" type="button" data-value="wall"><span class="bw-opt-icon">WAL</span><span class="bw-opt-copy"><span class="bw-opt-title">Berlin Wall</span><span class="bw-opt-sub">Cold War sites</span></span></button>
+            <button class="bw-option is-multi" type="button" data-value="museums"><span class="bw-opt-icon">MUS</span><span class="bw-opt-copy"><span class="bw-opt-title">Museums</span><span class="bw-opt-sub">Museum Island</span></span></button>
+            <button class="bw-option is-multi" type="button" data-value="food"><span class="bw-opt-icon">EAT</span><span class="bw-opt-copy"><span class="bw-opt-title">Food</span><span class="bw-opt-sub">Local stops</span></span></button>
+            <button class="bw-option is-multi" type="button" data-value="nightlife"><span class="bw-opt-icon">NIT</span><span class="bw-opt-copy"><span class="bw-opt-title">Nightlife</span><span class="bw-opt-sub">Save energy</span></span></button>
+            <button class="bw-option is-multi" type="button" data-value="free"><span class="bw-opt-icon">EUR</span><span class="bw-opt-copy"><span class="bw-opt-title">Free / low budget</span><span class="bw-opt-sub">Smart spending</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">Pace</span>
+          <div class="bw-options cols-3" data-group="pace">
+            <button class="bw-option" type="button" data-value="gentle"><span class="bw-opt-icon">LOW</span><span class="bw-opt-copy"><span class="bw-opt-title">Gentle</span><span class="bw-opt-sub">Fewer stops</span></span></button>
+            <button class="bw-option active" type="button" data-value="balanced"><span class="bw-opt-icon">MID</span><span class="bw-opt-copy"><span class="bw-opt-title">Balanced</span><span class="bw-opt-sub">Realistic default</span></span></button>
+            <button class="bw-option" type="button" data-value="packed"><span class="bw-opt-icon">MAX</span><span class="bw-opt-copy"><span class="bw-opt-title">Packed</span><span class="bw-opt-sub">Use long days</span></span></button>
+          </div>
+        </div>
+
+        <div class="bw-question">
+          <span class="bw-label">BerlinWalk tour status</span>
+          <div class="bw-options cols-3" data-group="tourIntent">
+            <button class="bw-option active" type="button" data-value="considering"><span class="bw-opt-icon">GO</span><span class="bw-opt-copy"><span class="bw-opt-title">Considering</span><span class="bw-opt-sub">Show best timing</span></span></button>
+            <button class="bw-option" type="button" data-value="booked"><span class="bw-opt-icon">OK</span><span class="bw-opt-copy"><span class="bw-opt-title">Already booked</span><span class="bw-opt-sub">Prep me instead</span></span></button>
+            <button class="bw-option" type="button" data-value="maybe"><span class="bw-opt-icon">?</span><span class="bw-opt-copy"><span class="bw-opt-title">Not sure</span><span class="bw-opt-sub">Keep optional</span></span></button>
+          </div>
+        </div>
+      </form>
+
+      <aside class="bw-result" aria-live="polite" aria-label="Your Berlin trip plan preview">
+        <div class="bw-result-head">
+          <span class="bw-result-tag">Your trip preview - <span data-result-date></span></span>
+          <h2 class="bw-result-title" data-result-title>Build Berlin around the first real orientation day</h2>
+        </div>
+        <div class="bw-result-body">
+          <p class="bw-summary" data-result-summary></p>
+          <div class="bw-status-grid">
+            <div class="bw-status">
+              <span class="bw-status-label">Tour fit</span>
+              <span class="bw-status-value" data-tour-fit>Checking</span>
+            </div>
+            <div class="bw-status">
+              <span class="bw-status-label">Ticket start</span>
+              <span class="bw-status-value" data-ticket>ABC first</span>
+            </div>
+            <div class="bw-status">
+              <span class="bw-status-label">Arrival day</span>
+              <span class="bw-status-value" data-open-status>Checking</span>
+            </div>
+          </div>
+
+          <section class="bw-weather theme-sunny" aria-label="Weather near Alexanderplatz" data-weather-card>
+            <div class="bw-weather-main">
+              <span class="bw-weather-icon" data-weather-icon aria-hidden="true">WX</span>
+              <div>
+                <h3 class="bw-weather-title" data-weather-title>Checking Alexanderplatz weather</h3>
+                <div class="bw-weather-meta">
+                  <span class="bw-weather-pill" data-weather-mode>Live forecast</span>
+                  <span class="bw-weather-pill" data-weather-date></span>
+                </div>
+              </div>
+            </div>
+            <p class="bw-weather-copy" data-weather-copy>Loading the forecast near the World Clock.</p>
+            <div class="bw-weather-metrics" data-weather-metrics>
+              <div class="bw-weather-metric"><span data-weather-label-one>Temp</span><strong data-weather-temp>...</strong></div>
+              <div class="bw-weather-metric"><span data-weather-label-two>Rain</span><strong data-weather-rain>...</strong></div>
+              <div class="bw-weather-metric"><span data-weather-label-three>Wind</span><strong data-weather-wind>...</strong></div>
+            </div>
+            <p class="bw-note" data-weather-advice>Comfortable shoes and one layer are the safest Berlin default.</p>
+          </section>
+
+          <div class="bw-preview" data-preview-days></div>
+
+          <div class="bw-lock bw-locked-only" data-lock-box>
+            <strong class="bw-lock-title">Unlock the full day-by-day plan</strong>
+            <p>Preview is open. Email unlocks the full itinerary, PDF, print view, and arrival-date reminder sequence.</p>
+          </div>
+
+          <div class="bw-lead-panel bw-locked-only" data-lead-panel>
+            <div>
+              <h3 class="bw-lead-title">Send me the full Berlin plan</h3>
+              <p class="bw-lead-copy">You will get this plan now, then short Berlin reminders before arrival. If you book the tour, the sequence switches to prep instead of sales.</p>
+            </div>
+            <input class="bw-lead-input" data-lead-email type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email address" required>
+            <label class="bw-lead-consent">
+              <input type="checkbox" data-lead-consent required>
+              <span>Email me this plan and Berlin arrival tips. I can unsubscribe anytime.</span>
+            </label>
+            <button class="bw-lead-submit" type="button" data-unlock-plan>Unlock full plan</button>
+            <div class="bw-lead-message" data-lead-message aria-live="polite"></div>
+          </div>
+
+          <div class="bw-actions">
+            <a class="bw-primary" data-book-link href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=ultimate_berlin_trip_planner&utm_content=book_free_spot" target="_top" rel="noopener">Book free tour</a>
+            <button class="bw-secondary" type="button" data-download-pdf disabled>Download PDF</button>
+            <button class="bw-secondary" type="button" data-print-plan disabled>Print plan</button>
+          </div>
+          <div class="bw-message" data-action-status aria-live="polite"></div>
+        </div>
+      </aside>
+    </div>
+
+    <section class="bw-full-plan" data-full-plan hidden>
+      <div class="bw-full-head">
+        <div>
+          <h2 class="bw-full-title">Your full Berlin plan</h2>
+          <p class="bw-full-sub" data-full-sub>Unlocked plan appears here.</p>
+        </div>
+      </div>
+      <div class="bw-days" data-full-days></div>
+    </section>
+
+    <section class="bw-links" aria-label="More Berlin planning tools">
+      <h3 class="bw-links-title">More Berlin planning tools</h3>
+      <div class="bw-link-grid">
+        <a class="bw-link" href="https://www.berlinwalk.com/tools/berlin-first-day-planner" target="_top" rel="noopener">First-day planner</a>
+        <a class="bw-link" href="https://www.berlinwalk.com/tools/transport-ticket-calculator" target="_top" rel="noopener">Ticket calculator</a>
+        <a class="bw-link" href="https://www.berlinwalk.com/tools/whats-open-in-berlin-today" target="_top" rel="noopener">What's open</a>
+        <a class="bw-link" href="https://www.berlinwalk.com/tools/berlin-daily-budget" target="_top" rel="noopener">Daily budget</a>
+      </div>
+    </section>
+
+    <footer class="bw-foot">Live forecasts use Open-Meteo near Alexanderplatz. Far-future dates use Berlin monthly averages. Opening notes are practical visitor rules, not guarantees for every individual shop, museum, or restaurant.</footer>
+  </section>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-trip-planner');
+  if (!root) return;
+
+  var WEATHER_API_URL = 'https://api.open-meteo.com/v1/forecast';
+  var COORDS = { latitude: 52.521918, longitude: 13.413215 };
+  var TIMEZONE = 'Europe/Berlin';
+  var FORECAST_MAX_DAYS = 15;
+  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=ultimate_berlin_trip_planner&utm_content=book_free_spot';
+  var BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
+  var BOOKING_SHORT_LABEL = 'berlinwalk.com/book';
+  var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerLead';
+  var UNLOCK_KEY = 'bw_trip_planner_unlock';
+  var UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
+
+  var MONTH_CLIMATE = [
+    { name: 'January', hi: 3, lo: -2, rainDays: '10', pack: 'Heavy winter coat, warm hat, gloves, scarf, and waterproof shoes.' },
+    { name: 'February', hi: 5, lo: -2, rainDays: '8', pack: 'Heavy coat, layers, waterproof shoes, and warm accessories.' },
+    { name: 'March', hi: 9, lo: 1, rainDays: '9', pack: 'Medium jacket, sweater, layers, umbrella, and comfortable shoes.' },
+    { name: 'April', hi: 14, lo: 4, rainDays: '8', pack: 'Light jacket, layers, rain jacket, and comfortable walking shoes.' },
+    { name: 'May', hi: 19, lo: 9, rainDays: '10', pack: 'Light layers, one light jacket, sunglasses, and comfortable shoes.' },
+    { name: 'June', hi: 23, lo: 13, rainDays: '9-12', pack: 'Light clothing, sunscreen, sunglasses, water bottle, and light rain jacket.' },
+    { name: 'July', hi: 25, lo: 15, rainDays: '10', pack: 'Summer clothes, sunscreen, hat, water bottle, and packable rain jacket.' },
+    { name: 'August', hi: 25, lo: 15, rainDays: '10', pack: 'Summer clothes, sunscreen, hat, water bottle, and one light evening layer.' },
+    { name: 'September', hi: 20, lo: 11, rainDays: '9', pack: 'Layers, light jacket, jeans, comfortable walking shoes, and rain jacket.' },
+    { name: 'October', hi: 13, lo: 6, rainDays: '9', pack: 'Medium jacket, sweater, layers, umbrella, and closed shoes.' },
+    { name: 'November', hi: 7, lo: 2, rainDays: '10', pack: 'Warm jacket, layers, scarf, waterproof shoes, and umbrella.' },
+    { name: 'December', hi: 4, lo: 0, rainDays: '11', pack: 'Heavy winter coat, thermal layers, hat, gloves, scarf, and waterproof boots.' }
+  ];
+
+  var state = {
+    arrivalDate: initialDateKey(),
+    tripLength: 3,
+    arrivalTime: 'morning',
+    arrivalPoint: 'ber',
+    stayArea: 'mitte',
+    groupType: 'solo',
+    firstTime: 'yes',
+    interests: ['history', 'wall'],
+    pace: 'balanced',
+    tourIntent: 'considering'
+  };
+
+  var latestPlan = null;
+  var latestWeather = null;
+  var weatherRequestId = 0;
+  var unlocked = isUnlocked();
+
+  function track(event, params) {
+    var payload = params || {};
+    try {
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: event }, payload));
+      if (typeof window.gtag === 'function') window.gtag('event', event, payload);
+    } catch (error) {}
+  }
+
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char];
+    });
+  }
+
+  function setText(selector, value) {
+    var element = root.querySelector(selector);
+    if (element) element.textContent = value == null ? '' : String(value);
+  }
+
+  function getDateOverride() {
+    var params = new URLSearchParams(window.location.search);
+    var date = params.get('date');
+    return /^\d{4}-\d{2}-\d{2}$/.test(date || '') ? date : null;
+  }
+
+  function getTripLengthOverride() {
+    var params = new URLSearchParams(window.location.search);
+    var value = Number(params.get('tripLength'));
+    return Number.isFinite(value) && value >= 1 && value <= 7 ? Math.round(value) : null;
+  }
+
+  function berlinTodayKey() {
+    var parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: TIMEZONE,
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).formatToParts(new Date()).reduce(function (acc, part) {
+      acc[part.type] = part.value;
+      return acc;
+    }, {});
+    return parts.year + '-' + parts.month + '-' + parts.day;
+  }
+
+  function initialDateKey() {
+    return getDateOverride() || addDays(berlinTodayKey(), 14);
+  }
+
+  function dateParts(dateKey) {
+    var pieces = dateKey.split('-').map(Number);
+    return { year: pieces[0], month: pieces[1], day: pieces[2] };
+  }
+
+  function dateFromKey(dateKey) {
+    var parts = dateParts(dateKey);
+    return new Date(Date.UTC(parts.year, parts.month - 1, parts.day, 12, 0, 0));
+  }
+
+  function pad2(value) {
+    return String(value).padStart(2, '0');
+  }
+
+  function toDateKey(date) {
+    return date.getUTCFullYear() + '-' + pad2(date.getUTCMonth() + 1) + '-' + pad2(date.getUTCDate());
+  }
+
+  function addDays(dateKey, days) {
+    var date = dateFromKey(dateKey);
+    date.setUTCDate(date.getUTCDate() + days);
+    return toDateKey(date);
+  }
+
+  function daysFromToday(dateKey) {
+    return Math.round((dateFromKey(dateKey).getTime() - dateFromKey(berlinTodayKey()).getTime()) / 86400000);
+  }
+
+  function formatDisplayDate(dateKey) {
+    return new Intl.DateTimeFormat('en-GB', {
+      weekday: 'short',
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+      timeZone: 'UTC'
+    }).format(dateFromKey(dateKey));
+  }
+
+  function easterDate(year) {
+    var a = year % 19;
+    var b = Math.floor(year / 100);
+    var c = year % 100;
+    var d = Math.floor(b / 4);
+    var e = b % 4;
+    var f = Math.floor((b + 8) / 25);
+    var g = Math.floor((b - f + 1) / 3);
+    var h = (19 * a + b - d - g + 15) % 30;
+    var i = Math.floor(c / 4);
+    var k = c % 4;
+    var l = (32 + 2 * e + 2 * i - h - k) % 7;
+    var m = Math.floor((a + 11 * h + 22 * l) / 451);
+    var month = Math.floor((h + l - 7 * m + 114) / 31);
+    var day = ((h + l - 7 * m + 114) % 31) + 1;
+    return year + '-' + pad2(month) + '-' + pad2(day);
+  }
+
+  function berlinHolidays(year) {
+    var easter = easterDate(year);
+    return {
+      [year + '-01-01']: 'New Year',
+      [year + '-03-08']: "International Women's Day",
+      [addDays(easter, -2)]: 'Good Friday',
+      [addDays(easter, 1)]: 'Easter Monday',
+      [year + '-05-01']: 'Labour Day',
+      [addDays(easter, 39)]: 'Ascension Day',
+      [addDays(easter, 50)]: 'Whit Monday',
+      [year + '-10-03']: 'German Unity Day',
+      [year + '-12-25']: 'Christmas Day',
+      [year + '-12-26']: 'Second Christmas Day'
+    };
+  }
+
+  function dayStatus(dateKey) {
+    var parts = dateParts(dateKey);
+    var holidays = Object.assign({}, berlinHolidays(parts.year - 1), berlinHolidays(parts.year), berlinHolidays(parts.year + 1));
+    var day = dateFromKey(dateKey).getUTCDay();
+    var holiday = holidays[dateKey] || '';
+    if (holiday) {
+      return {
+        key: 'holiday',
+        short: 'Holiday',
+        label: holiday,
+        note: holiday + ' usually follows Sunday-style rules: supermarkets and banks close, transport runs, restaurants vary, and outdoor sightseeing still works.'
+      };
+    }
+    if (day === 0) {
+      return {
+        key: 'sunday',
+        short: 'Sunday',
+        label: 'Sunday in Berlin',
+        note: 'Most regular shops and supermarkets close. Plan train-station shops, restaurants, museums, parks, markets, and walking routes.'
+      };
+    }
+    if (day === 1) {
+      return {
+        key: 'monday',
+        short: 'Monday',
+        label: 'Monday museum caution',
+        note: 'Many museums close on Mondays. Keep one checked-open museum only and use outdoor history as the reliable backbone.'
+      };
+    }
+    return {
+      key: 'weekday',
+      short: 'Weekday',
+      label: 'Normal weekday',
+      note: 'Normal weekday rules apply. Shops, restaurants, transport, and most visitor logistics are easier than on Sundays and holidays.'
+    };
+  }
+
+  function labelFor(groupKey, value) {
+    var button = root.querySelector('[data-group="' + groupKey + '"] [data-value="' + value + '"] .bw-opt-title');
+    return button ? button.textContent.trim() : String(value || '');
+  }
+
+  function selectedLabels() {
+    return {
+      arrivalDate: formatDisplayDate(state.arrivalDate),
+      tripLength: state.tripLength + (state.tripLength === 1 ? ' day' : ' days'),
+      arrivalTime: labelFor('arrivalTime', state.arrivalTime),
+      arrivalPoint: labelFor('arrivalPoint', state.arrivalPoint),
+      stayArea: labelFor('stayArea', state.stayArea),
+      groupType: labelFor('groupType', state.groupType),
+      firstTime: labelFor('firstTime', state.firstTime),
+      interests: state.interests.map(function (key) { return labelFor('interests', key); }).join(', '),
+      pace: labelFor('pace', state.pace),
+      tourIntent: labelFor('tourIntent', state.tourIntent)
+    };
+  }
+
+  function ticketNudge() {
+    if (state.arrivalPoint === 'ber') return 'ABC first';
+    if (state.tripLength >= 4) return 'AB day tickets or pass';
+    if (state.pace === 'packed') return 'AB day ticket';
+    return 'AB single/day';
+  }
+
+  function recommendedTourDay() {
+    if (state.tourIntent === 'booked') return 'Already booked';
+    if (state.arrivalTime === 'morning') return 'Arrival day 11:30';
+    if (state.tripLength === 1) return 'First possible 11:30';
+    return 'Day 2 at 11:30';
+  }
+
+  function planTitle() {
+    if (state.tripLength === 1) return 'One strong Berlin day, not a scattered checklist';
+    if (state.pace === 'gentle') return 'A realistic Berlin plan with breathing room';
+    if (state.interests.indexOf('nightlife') !== -1) return 'See Berlin well and save energy for the night';
+    if (state.firstTime === 'no') return 'Skip the basics and go deeper by area';
+    return 'Build Berlin around the first real orientation day';
+  }
+
+  function planSummary() {
+    var base = 'This plan keeps Berlin area-by-area instead of sending you across the city all day.';
+    if (state.firstTime !== 'no') base += ' Start with context early, then use the rest of the trip for Wall history, museums, food, neighborhoods, and slower backup time.';
+    else base += ' Since this is not your first visit, it keeps the central core efficient and gives more room to neighborhoods.';
+    if (state.groupType === 'family' || state.groupType === 'slow' || state.pace === 'gentle') base += ' It also builds in more breaks so the trip stays enjoyable.';
+    return base;
+  }
+
+  function firstDayBlocks() {
+    var arrive = state.arrivalPoint === 'ber'
+      ? 'Use an ABC ticket from BER and keep the first ride rail-simple. If bags are heavy, drop them before sightseeing.'
+      : state.arrivalPoint === 'hbf'
+        ? 'Use Hauptbahnhof as your clean entry point. Store bags if needed, then ride east toward Alexanderplatz or Hackescher Markt.'
+        : state.arrivalPoint === 'alex'
+          ? 'You are already where the city starts to make sense. Keep the first loop around Alexanderplatz, Marienkirche, and Museum Island.'
+          : 'Connect your hotel to Alexanderplatz with one simple U-Bahn or S-Bahn route. Do not turn arrival into a transport puzzle.';
+
+    var tour = state.tourIntent === 'booked'
+      ? 'You already have the BerlinWalk tour in the plan. Save the World Clock meeting point and look for the green umbrella.'
+      : state.arrivalTime === 'morning'
+        ? 'If timing works, join the 11:30 BerlinWalk tour today. It gives the historic center a structure before you improvise.'
+        : 'Book the next 11:30 BerlinWalk tour and keep arrival day light. Berlin works better after the first story connects.';
+
+    return [
+      { time: 'Arrival', title: 'Get central without over-solving Berlin', copy: arrive },
+      { time: 'Core', title: 'Use the tour as the first city framework', copy: tour },
+      { time: 'Later', title: state.arrivalTime === 'evening' ? 'Dinner, water, and sleep' : 'One extra stop, then stop', copy: state.arrivalTime === 'evening' ? 'Have dinner near your base, buy water or snacks before shops close, and make tomorrow easy.' : 'Add one nearby stop only: Museum Island outside, Hackescher Markt, or the Spree. Do not stack faraway sights on day one.' }
+    ];
+  }
+
+  function dayTemplate(key) {
+    var templates = {
+      wall: {
+        title: 'Wall, East Berlin, and post-1989 energy',
+        theme: 'Cold War geography',
+        accent: '#2F80ED',
+        bg: '#EAF4FF',
+        blocks: [
+          { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Start at Bernauer Strasse. It is the clearest place to understand the Wall as a system, not only a photo backdrop.' },
+          { time: 'Afternoon', title: 'East Side Gallery and Friedrichshain', copy: 'Walk the painted Wall section, then stay east instead of rushing back across town.' },
+          { time: 'Evening', title: 'Kreuzberg or Friedrichshain dinner', copy: 'Use the evening for casual food and a real neighborhood feel rather than another monument.' }
+        ]
+      },
+      museums: {
+        title: 'Museum Island without museum overload',
+        theme: 'Museums and royal Berlin',
+        accent: '#F5A623',
+        bg: '#FFF3D7',
+        blocks: [
+          { time: 'Morning', title: 'Pick one museum anchor', copy: 'Choose Neues Museum, Altes Museum, or another checked-open museum. One good museum beats four rushed ones.' },
+          { time: 'Afternoon', title: 'Reichstag dome or Brandenburg Gate', copy: 'If booked in advance, add the free Reichstag dome. Otherwise use Brandenburg Gate, Unter den Linden, and the memorial area.' },
+          { time: 'Evening', title: 'Easy central dinner', copy: 'Stay near Mitte or Hackescher Markt so the day does not become a long late transfer.' }
+        ]
+      },
+      food: {
+        title: 'Food, courtyards, and the lived-in city',
+        theme: 'Food and neighborhoods',
+        accent: '#D94D5C',
+        bg: '#FFF0F3',
+        blocks: [
+          { time: 'Morning', title: 'Start slow in a neighborhood', copy: 'Choose Prenzlauer Berg, Kreuzberg, or Hackescher Markt depending on where you stay.' },
+          { time: 'Afternoon', title: 'Courtyards, markets, or street food', copy: 'Use Hackesche Hofe, Markthalle Neun timing, or a relaxed local food stop instead of a chain-heavy tourist square.' },
+          { time: 'Evening', title: 'Dinner where locals actually go', copy: 'Pick one area and stay there. Berlin evenings work best when you stop crossing the whole city.' }
+        ]
+      },
+      free: {
+        title: 'Free Berlin that still feels essential',
+        theme: 'Low-budget day',
+        accent: '#7CB342',
+        bg: '#F2F8E8',
+        blocks: [
+          { time: 'Morning', title: 'Outdoor central history', copy: 'Brandenburg Gate, the memorial area, Museum Island from outside, and the Spree can fill a strong day without paid entry.' },
+          { time: 'Afternoon', title: 'Reichstag dome or Topography of Terror', copy: 'Both are free, but Reichstag needs advance booking. Topography of Terror is a reliable indoor-outdoor fallback.' },
+          { time: 'Evening', title: 'Park, Spree, or cheap food', copy: 'Use Tiergarten, Tempelhofer Feld, or a simple neighborhood dinner depending on weather and energy.' }
+        ]
+      },
+      nightlife: {
+        title: 'A smart day before a Berlin night',
+        theme: 'Nightlife without burnout',
+        accent: '#8E6BBE',
+        bg: '#F5F0FF',
+        blocks: [
+          { time: 'Morning', title: 'Keep sightseeing compact', copy: 'Do the one essential cultural block early and avoid a 25,000-step day before going out.' },
+          { time: 'Afternoon', title: 'Rest, food, and outfit check', copy: 'Eat properly, plan transport back, and do not leave door-code decisions until midnight.' },
+          { time: 'Evening', title: 'Choose the night by appetite', copy: 'A relaxed bar night is not a failed Berlin night. If trying clubs, have a backup area ready.' }
+        ]
+      },
+      local: {
+        title: 'Local-feeling Berlin beyond the checklist',
+        theme: 'Neighborhood day',
+        accent: '#6D7278',
+        bg: '#F1F3F4',
+        blocks: [
+          { time: 'Morning', title: 'Prenzlauer Berg or Charlottenburg', copy: 'Choose one calmer area and walk it slowly. This is the day that makes Berlin feel lived-in.' },
+          { time: 'Afternoon', title: 'Cafe, park, and one small museum', copy: 'Use Kulturbrauerei, Savignyplatz, Lietzensee, or a neighborhood cafe instead of another central queue.' },
+          { time: 'Evening', title: 'Dinner near your base', copy: 'Finish close to where you sleep. The plan should make tomorrow easier, not heavier.' }
+        ]
+      },
+      potsdam: {
+        title: 'Potsdam or a deliberate slow day',
+        theme: 'Day trip or recovery',
+        accent: '#1B5E20',
+        bg: '#F2F8E8',
+        blocks: [
+          { time: 'Morning', title: 'Decide by energy and weather', copy: 'If the weather is kind and you want a full outing, Potsdam works. If not, keep Berlin slower.' },
+          { time: 'Afternoon', title: 'Sanssouci or Berlin backup', copy: 'Potsdam needs time and an ABC ticket. The Berlin backup is Charlottenburg, Tiergarten, or a museum you skipped.' },
+          { time: 'Evening', title: 'Return early enough', copy: 'Do not make the day trip your latest night. Tomorrow is better when you leave margin.' }
+        ]
+      }
+    };
+    return templates[key] || templates.local;
+  }
+
+  function dayKeys() {
+    var keys = [];
+    function add(key) {
+      if (keys.indexOf(key) === -1) keys.push(key);
+    }
+
+    state.interests.forEach(function (interest) {
+      if (interest === 'history') add('museums');
+      else add(interest);
+    });
+    add('wall');
+    add('museums');
+    add('food');
+    add('free');
+    add('local');
+    if (state.tripLength >= 5) add('potsdam');
+    if (state.tripLength >= 6) add('nightlife');
+    return keys;
+  }
+
+  function buildPlan() {
+    var status = dayStatus(state.arrivalDate);
+    var days = [];
+    var title = planTitle();
+    var keys = dayKeys();
+
+    days.push({
+      dayNumber: 1,
+      dateKey: state.arrivalDate,
+      title: state.tripLength === 1 ? 'Arrival, orientation, and the one essential Berlin layer' : 'Arrival and first Berlin orientation',
+      theme: 'Arrival day',
+      accent: '#1B5E20',
+      bg: '#F2F8E8',
+      blocks: firstDayBlocks(),
+      note: status.note
+    });
+
+    for (var i = 2; i <= state.tripLength; i += 1) {
+      var template = dayTemplate(keys[(i - 2) % keys.length]);
+      var dateKey = addDays(state.arrivalDate, i - 1);
+      var dayNote = dayStatus(dateKey).note;
+      days.push(Object.assign({}, template, {
+        dayNumber: i,
+        dateKey: dateKey,
+        note: dayNote
+      }));
+    }
+
+    if (state.pace === 'gentle' || state.groupType === 'family' || state.groupType === 'slow') {
+      days = days.map(function (day) {
+        var clone = Object.assign({}, day);
+        clone.blocks = day.blocks.slice(0, 3);
+        clone.note += ' Keep one protected break in this day because your selected pace benefits from margin.';
+        return clone;
+      });
+    }
+
+    return {
+      title: title,
+      summary: planSummary(),
+      arrivalStatus: status,
+      displayDate: formatDisplayDate(state.arrivalDate),
+      ticket: ticketNudge(),
+      tourFit: recommendedTourDay(),
+      recommendedTourDay: recommendedTourDay(),
+      days: days
+    };
+  }
+
+  function renderPlan() {
+    var plan = buildPlan();
+    latestPlan = plan;
+    setText('[data-result-date]', plan.displayDate);
+    setText('[data-result-title]', plan.title);
+    setText('[data-result-summary]', plan.summary);
+    setText('[data-tour-fit]', plan.tourFit);
+    setText('[data-ticket]', plan.ticket);
+    setText('[data-open-status]', plan.arrivalStatus.short);
+
+    var preview = root.querySelector('[data-preview-days]');
+    if (preview) {
+      var previewCount = Math.min(unlocked ? plan.days.length : 2, plan.days.length);
+      preview.innerHTML = plan.days.slice(0, previewCount).map(function (day) {
+        return '<article class="bw-preview-day">' +
+          '<strong>Day ' + day.dayNumber + ': ' + escapeHtml(day.title) + '</strong>' +
+          '<span>' + escapeHtml(formatDisplayDate(day.dateKey)) + ' - ' + escapeHtml(day.theme) + '</span>' +
+          '<p>' + escapeHtml(day.blocks[0].title + ': ' + day.blocks[0].copy) + '</p>' +
+        '</article>';
+      }).join('');
+    }
+
+    renderFullPlan();
+    updateUnlockUi();
+    track('bw_trip_planner_result', {
+      arrival_date: state.arrivalDate,
+      trip_length: state.tripLength,
+      tour_intent: state.tourIntent,
+      pace: state.pace
+    });
+  }
+
+  function renderFullPlan() {
+    var plan = latestPlan || buildPlan();
+    var full = root.querySelector('[data-full-plan]');
+    var daysEl = root.querySelector('[data-full-days]');
+    if (!full || !daysEl) return;
+    full.hidden = !unlocked;
+    if (!unlocked) return;
+    setText('[data-full-sub]', state.tripLength + (state.tripLength === 1 ? ' day' : ' days') + ' from ' + plan.displayDate + '. Tour fit: ' + plan.tourFit + '.');
+    daysEl.innerHTML = plan.days.map(function (day) {
+      var blocks = day.blocks.map(function (block) {
+        return '<div class="bw-block">' +
+          '<span class="bw-block-time">' + escapeHtml(block.time) + '</span>' +
+          '<span class="bw-block-copy"><strong>' + escapeHtml(block.title) + '</strong><span>' + escapeHtml(block.copy) + '</span></span>' +
+        '</div>';
+      }).join('');
+      return '<article class="bw-day" style="--day-accent:' + escapeHtml(day.accent || '#7CB342') + ';--day-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
+        '<div class="bw-day-head">' +
+          '<span class="bw-day-num">DAY ' + day.dayNumber + '</span>' +
+          '<div><strong class="bw-day-title">' + escapeHtml(day.title) + '</strong><span class="bw-day-date">' + escapeHtml(formatDisplayDate(day.dateKey)) + ' - ' + escapeHtml(day.theme) + '</span></div>' +
+        '</div>' +
+        '<div class="bw-day-body">' + blocks + '<p class="bw-day-check">' + escapeHtml(day.note) + '</p></div>' +
+      '</article>';
+    }).join('');
+  }
+
+  function updateUnlockUi() {
+    root.querySelectorAll('.bw-locked-only').forEach(function (el) {
+      el.hidden = unlocked;
+    });
+    var pdf = root.querySelector('[data-download-pdf]');
+    var print = root.querySelector('[data-print-plan]');
+    if (pdf) pdf.disabled = !unlocked;
+    if (print) print.disabled = !unlocked;
+    renderFullPlan();
+  }
+
+  function setWeatherTheme(theme) {
+    var card = root.querySelector('[data-weather-card]');
+    if (card) card.className = 'bw-weather theme-' + (theme || 'sunny');
+  }
+
+  function renderWeather(summary) {
+    latestWeather = summary;
+    setWeatherTheme(summary.theme);
+    setText('[data-weather-icon]', summary.icon || 'WX');
+    setText('[data-weather-title]', summary.title);
+    setText('[data-weather-mode]', summary.mode);
+    setText('[data-weather-date]', summary.dateText || formatDisplayDate(state.arrivalDate));
+    setText('[data-weather-copy]', summary.copy);
+    setText('[data-weather-label-one]', summary.metrics[0].label);
+    setText('[data-weather-temp]', summary.metrics[0].value);
+    setText('[data-weather-label-two]', summary.metrics[1].label);
+    setText('[data-weather-rain]', summary.metrics[1].value);
+    setText('[data-weather-label-three]', summary.metrics[2].label);
+    setText('[data-weather-wind]', summary.metrics[2].value);
+    setText('[data-weather-advice]', summary.advice);
+  }
+
+  function buildWeatherUrl() {
+    var params = new URLSearchParams({
+      latitude: String(COORDS.latitude),
+      longitude: String(COORDS.longitude),
+      timezone: TIMEZONE,
+      forecast_days: '16',
+      temperature_unit: 'celsius',
+      wind_speed_unit: 'kmh',
+      precipitation_unit: 'mm',
+      hourly: 'temperature_2m,apparent_temperature,precipitation_probability,precipitation,weather_code,wind_speed_10m,wind_gusts_10m',
+      daily: 'weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,precipitation_sum,wind_speed_10m_max'
+    });
+    return WEATHER_API_URL + '?' + params.toString();
+  }
+
+  function planHour() {
+    if (state.arrivalTime === 'morning') return 11;
+    if (state.arrivalTime === 'midday') return 14;
+    if (state.arrivalTime === 'afternoon') return 17;
+    return 19;
+  }
+
+  function parseForecastTime(value) {
+    var match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2})/.exec(String(value || ''));
+    if (!match) return null;
+    return { key: match[1] + '-' + match[2] + '-' + match[3], hour: Number(match[4]) };
+  }
+
+  function numberList(source, key, indexes) {
+    var values = source && Array.isArray(source[key]) ? source[key] : [];
+    return indexes.map(function (index) { return Number(values[index]); }).filter(Number.isFinite);
+  }
+
+  function mean(values) {
+    return values.length ? values.reduce(function (sum, value) { return sum + value; }, 0) / values.length : null;
+  }
+
+  function max(values) {
+    return values.length ? Math.max.apply(Math, values) : null;
+  }
+
+  function round(value, decimals) {
+    if (!Number.isFinite(value)) return null;
+    var factor = Math.pow(10, decimals || 0);
+    return Math.round(value * factor) / factor;
+  }
+
+  function significantCode(codes) {
+    if (!codes.length) return null;
+    return codes.reduce(function (best, code) {
+      return best === null || severity(code) > severity(best) ? code : best;
+    }, null);
+  }
+
+  function severity(code) {
+    var value = Number(code);
+    if ([95, 96, 99].indexOf(value) !== -1) return 10;
+    if ([75, 82, 85, 86].indexOf(value) !== -1) return 8;
+    if ([61, 63, 65, 66, 67, 80, 81].indexOf(value) !== -1) return 6;
+    if ([45, 48, 51, 53, 55, 56, 57].indexOf(value) !== -1) return 3;
+    if ([2, 3].indexOf(value) !== -1) return 2;
+    if (value === 1) return 1;
+    return 0;
+  }
+
+  function weatherLabel(code) {
+    var value = Number(code);
+    if (value === 0) return 'Clear weather';
+    if ([1, 2].indexOf(value) !== -1) return 'Partly cloudy';
+    if (value === 3) return 'Overcast';
+    if ([45, 48].indexOf(value) !== -1) return 'Foggy';
+    if ([51, 53, 55, 56, 57].indexOf(value) !== -1) return 'Drizzle';
+    if ([61, 63, 65, 66, 67].indexOf(value) !== -1) return 'Rain likely';
+    if ([71, 73, 75, 77, 85, 86].indexOf(value) !== -1) return 'Snow possible';
+    if ([80, 81, 82].indexOf(value) !== -1) return 'Showers possible';
+    if ([95, 96, 99].indexOf(value) !== -1) return 'Thunderstorms possible';
+    return 'Berlin weather';
+  }
+
+  function weatherVisual(code, forecast) {
+    var value = Number(code);
+    if ([95, 96, 99].indexOf(value) !== -1) return { theme: 'storm', icon: 'STRM' };
+    if ([61, 63, 65, 66, 67, 80, 81, 82].indexOf(value) !== -1) return { theme: 'rain', icon: 'RAIN' };
+    if ([45, 48].indexOf(value) !== -1) return { theme: 'fog', icon: 'FOG' };
+    if ((forecast.gusts || forecast.windSpeed || 0) >= 45) return { theme: 'cloudy', icon: 'WIND' };
+    if (value === 0) return { theme: 'sunny', icon: 'SUN' };
+    if ([1, 2].indexOf(value) !== -1) return { theme: 'sunny', icon: 'MIX' };
+    return { theme: 'cloudy', icon: 'CLD' };
+  }
+
+  function isRainCode(code) {
+    return [51, 53, 55, 56, 57, 61, 63, 65, 66, 67, 80, 81, 82, 95, 96, 99].indexOf(Number(code)) !== -1;
+  }
+
+  function formatTemperature(value) {
+    return Number.isFinite(value) ? Math.round(value) + ' C' : 'Check';
+  }
+
+  function extractForecast(data) {
+    var dateKey = state.arrivalDate;
+    var hour = planHour();
+    var hourly = data && data.hourly ? data.hourly : {};
+    var daily = data && data.daily ? data.daily : {};
+    var times = Array.isArray(hourly.time) ? hourly.time : [];
+    var indexes = [];
+    times.forEach(function (time, index) {
+      var parsed = parseForecastTime(time);
+      if (!parsed || parsed.key !== dateKey) return;
+      if (parsed.hour >= hour && parsed.hour <= hour + 2) indexes.push(index);
+    });
+    if (!indexes.length) {
+      times.forEach(function (time, index) {
+        var parsed = parseForecastTime(time);
+        if (!parsed || parsed.key !== dateKey) return;
+        if (Math.abs(parsed.hour - hour) <= 1) indexes.push(index);
+      });
+    }
+    var dailyIndex = Array.isArray(daily.time) ? daily.time.indexOf(dateKey) : -1;
+    var temperature = round(mean(numberList(hourly, 'temperature_2m', indexes)));
+    var apparent = round(mean(numberList(hourly, 'apparent_temperature', indexes)));
+    var rainProbability = round(max(numberList(hourly, 'precipitation_probability', indexes)));
+    var windSpeed = round(max(numberList(hourly, 'wind_speed_10m', indexes)));
+    var gusts = round(max(numberList(hourly, 'wind_gusts_10m', indexes)));
+    var weatherCode = significantCode(numberList(hourly, 'weather_code', indexes));
+    if (temperature === null && dailyIndex >= 0) {
+      var hi = Number(daily.temperature_2m_max && daily.temperature_2m_max[dailyIndex]);
+      var lo = Number(daily.temperature_2m_min && daily.temperature_2m_min[dailyIndex]);
+      if (Number.isFinite(hi) && Number.isFinite(lo)) temperature = round((hi + lo) / 2);
+    }
+    if (apparent === null) apparent = temperature;
+    if (rainProbability === null && dailyIndex >= 0) rainProbability = round(Number(daily.precipitation_probability_max && daily.precipitation_probability_max[dailyIndex]));
+    if (windSpeed === null && dailyIndex >= 0) windSpeed = round(Number(daily.wind_speed_10m_max && daily.wind_speed_10m_max[dailyIndex]));
+    if (weatherCode === null && dailyIndex >= 0) weatherCode = Number(daily.weather_code && daily.weather_code[dailyIndex]);
+    if (temperature === null && rainProbability === null && windSpeed === null && weatherCode === null) return null;
+    return {
+      temperature: temperature,
+      apparent: apparent,
+      rainProbability: rainProbability,
+      windSpeed: windSpeed,
+      gusts: gusts,
+      weatherCode: weatherCode,
+      condition: weatherLabel(weatherCode)
+    };
+  }
+
+  function outfitAdvice(forecast) {
+    var temp = forecast.apparent !== null ? forecast.apparent : forecast.temperature;
+    var rain = forecast.rainProbability || 0;
+    var wind = forecast.gusts || forecast.windSpeed || 0;
+    var rainy = rain >= 55 || isRainCode(forecast.weatherCode);
+    var pieces = [];
+    if (rainy) pieces.push('Use a waterproof layer and shoes that handle wet pavement.');
+    else if (rain >= 30) pieces.push('Bring a light rain layer or compact umbrella.');
+    if (temp !== null && temp <= 3) pieces.push('Add a warm coat, hat, and gloves.');
+    else if (temp !== null && temp <= 9) pieces.push('Add a warm layer under your jacket.');
+    else if (temp !== null && temp <= 16) pieces.push('A jacket or sweater is sensible because the tour lasts 2 hours.');
+    else if (temp !== null && temp >= 25) pieces.push('Wear light layers and bring water.');
+    if (wind >= 45) pieces.push('Use a windproof layer; umbrellas can be awkward on open squares.');
+    if (!pieces.length) pieces.push('Comfortable shoes and one light layer are enough for most central Berlin routes.');
+    return pieces.join(' ');
+  }
+
+  function renderWeatherForecast(forecast) {
+    var visual = weatherVisual(forecast.weatherCode, forecast);
+    renderWeather({
+      mode: 'Live forecast',
+      dateText: formatDisplayDate(state.arrivalDate),
+      theme: visual.theme,
+      icon: visual.icon,
+      title: forecast.condition + ', around ' + formatTemperature(forecast.temperature),
+      copy: 'Forecast near the World Clock for the part of your arrival day this plan uses most.',
+      metrics: [
+        { label: 'Feels like', value: formatTemperature(forecast.apparent !== null ? forecast.apparent : forecast.temperature) },
+        { label: 'Rain', value: Number.isFinite(forecast.rainProbability) ? Math.round(forecast.rainProbability) + '%' : 'Check' },
+        { label: 'Wind', value: Number.isFinite(forecast.windSpeed) ? Math.round(forecast.windSpeed) + ' km/h' : 'Check' }
+      ],
+      advice: outfitAdvice(forecast)
+    });
+  }
+
+  function renderClimateWeather() {
+    var month = MONTH_CLIMATE[dateParts(state.arrivalDate).month - 1];
+    renderWeather({
+      mode: 'Monthly average',
+      dateText: month.name,
+      theme: 'climate',
+      icon: 'AVG',
+      title: month.name + ' average: ' + month.hi + ' C high',
+      copy: 'This date is too far out for a reliable live forecast, so use Berlin climate averages.',
+      metrics: [
+        { label: 'Avg high', value: month.hi + ' C' },
+        { label: 'Avg low', value: month.lo + ' C' },
+        { label: 'Rainy days', value: month.rainDays }
+      ],
+      advice: month.pack
+    });
+    track('bw_trip_planner_weather_climate_view', { date: state.arrivalDate, month: month.name });
+  }
+
+  function renderWeatherFallback() {
+    renderWeather({
+      mode: 'Weather fallback',
+      dateText: formatDisplayDate(state.arrivalDate),
+      theme: 'sunny',
+      icon: 'WX',
+      title: 'Weather check unavailable',
+      copy: 'The live forecast could not load just now. The trip plan still works.',
+      metrics: [
+        { label: 'Temp', value: 'Check' },
+        { label: 'Rain', value: 'Check' },
+        { label: 'Wind', value: 'Check' }
+      ],
+      advice: 'Wear comfortable shoes and bring one layer you can add or remove.'
+    });
+  }
+
+  async function loadWeather() {
+    var requestId = ++weatherRequestId;
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('weather') === 'off') {
+      renderWeatherFallback();
+      return;
+    }
+    var dayDiff = daysFromToday(state.arrivalDate);
+    if (dayDiff > FORECAST_MAX_DAYS || dayDiff < 0) {
+      renderClimateWeather();
+      return;
+    }
+    renderWeather({
+      mode: 'Live forecast',
+      dateText: formatDisplayDate(state.arrivalDate),
+      theme: 'sunny',
+      icon: 'WX',
+      title: 'Checking Alexanderplatz weather',
+      copy: 'Loading the forecast near the World Clock.',
+      metrics: [
+        { label: 'Temp', value: '...' },
+        { label: 'Rain', value: '...' },
+        { label: 'Wind', value: '...' }
+      ],
+      advice: 'Comfortable shoes and one layer are the safest Berlin default.'
+    });
+    try {
+      var response = await fetch(buildWeatherUrl());
+      if (!response.ok) throw new Error('Weather request failed: ' + response.status);
+      var data = await response.json();
+      if (requestId !== weatherRequestId) return;
+      var forecast = extractForecast(data);
+      if (!forecast) throw new Error('No matching forecast');
+      renderWeatherForecast(forecast);
+      track('bw_trip_planner_weather_view', {
+        date: state.arrivalDate,
+        rain_probability: forecast.rainProbability,
+        condition: forecast.condition
+      });
+    } catch (error) {
+      if (requestId !== weatherRequestId) return;
+      renderWeatherFallback();
+      track('bw_trip_planner_weather_error', { reason: 'fetch_or_parse_failed' });
+    }
+  }
+
+  function validEmail(value) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
+  }
+
+  function setLeadMessage(message, isError) {
+    var element = root.querySelector('[data-lead-message]');
+    if (!element) return;
+    element.textContent = message || '';
+    element.classList.toggle('is-error', Boolean(isError));
+  }
+
+  function setActionStatus(message) {
+    setText('[data-action-status]', message || '');
+  }
+
+  function isUnlocked() {
+    try {
+      var raw = window.localStorage && window.localStorage.getItem(UNLOCK_KEY);
+      if (!raw) return false;
+      var parsed = JSON.parse(raw);
+      if (parsed && Number(parsed.expiresAt) > Date.now()) return true;
+      window.localStorage.removeItem(UNLOCK_KEY);
+    } catch (error) {}
+    return false;
+  }
+
+  function rememberUnlock(email) {
+    try {
+      if (!window.localStorage) return;
+      window.localStorage.setItem(UNLOCK_KEY, JSON.stringify({
+        email: String(email || '').trim().toLowerCase(),
+        expiresAt: Date.now() + UNLOCK_MS
+      }));
+    } catch (error) {}
+  }
+
+  function leadPayload(email) {
+    var params = new URLSearchParams(window.location.search);
+    var plan = latestPlan || buildPlan();
+    var labels = selectedLabels();
+    return {
+      email: String(email || '').trim().toLowerCase(),
+      arrivalDate: state.arrivalDate,
+      tripLength: state.tripLength,
+      arrivalTime: labels.arrivalTime,
+      arrivalPoint: labels.arrivalPoint,
+      stayArea: labels.stayArea,
+      groupType: labels.groupType,
+      firstTime: labels.firstTime,
+      interests: labels.interests,
+      pace: labels.pace,
+      tourIntent: labels.tourIntent,
+      planTitle: plan.title,
+      recommendedTourDay: plan.recommendedTourDay,
+      ticket: plan.ticket,
+      weatherTitle: latestWeather ? latestWeather.title : '',
+      source: params.get('context') || 'tool',
+      page: window.location.href,
+      consent: true
+    };
+  }
+
+  function unlock(email, method) {
+    rememberUnlock(email);
+    unlocked = true;
+    updateUnlockUi();
+    renderPlan();
+    setActionStatus(method === 'lead_error' ? 'Email save had a hiccup, so the plan is unlocked this time.' : 'Your full plan is unlocked.');
+  }
+
+  function handleUnlock() {
+    var input = root.querySelector('[data-lead-email]');
+    var consent = root.querySelector('[data-lead-consent]');
+    var button = root.querySelector('[data-unlock-plan]');
+    var email = input ? input.value.trim() : '';
+    if (!validEmail(email)) {
+      setLeadMessage('Add a valid email address to unlock the full plan.', true);
+      if (input) input.focus();
+      return;
+    }
+    if (!consent || !consent.checked) {
+      setLeadMessage('Please tick the consent box so I can send the arrival tips.', true);
+      if (consent) consent.focus();
+      return;
+    }
+
+    var payload = leadPayload(email);
+    track('bw_trip_planner_lead_submit', {
+      arrival_date: payload.arrivalDate,
+      trip_length: payload.tripLength,
+      source: payload.source
+    });
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = 'Unlocking...';
+    }
+    setLeadMessage('Saving your trip plan...', false);
+
+    var request = typeof fetch === 'function' ? fetch(LEAD_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }) : Promise.reject(new Error('Fetch unavailable'));
+
+    request.then(function (response) {
+      if (!response.ok) throw new Error('Lead endpoint failed: ' + response.status);
+      return response.json().catch(function () { return {}; });
+    }).then(function () {
+      track('bw_trip_planner_lead_success', {
+        arrival_date: payload.arrivalDate,
+        trip_length: payload.tripLength
+      });
+      unlock(email, 'lead');
+    }).catch(function () {
+      track('bw_trip_planner_lead_error', {
+        arrival_date: payload.arrivalDate,
+        trip_length: payload.tripLength,
+        fail_soft: true
+      });
+      unlock(email, 'lead_error');
+    }).finally(function () {
+      if (button) {
+        button.disabled = false;
+        button.textContent = 'Unlock full plan';
+      }
+    });
+  }
+
+  function planText() {
+    var plan = latestPlan || buildPlan();
+    var labels = selectedLabels();
+    var lines = [
+      'Ultimate Berlin Trip Planner',
+      'Arrival: ' + labels.arrivalDate,
+      'Trip length: ' + labels.tripLength,
+      'Arrival time: ' + labels.arrivalTime,
+      'Arrival point: ' + labels.arrivalPoint,
+      'Stay area: ' + labels.stayArea,
+      'Group: ' + labels.groupType,
+      'Interests: ' + labels.interests,
+      'Pace: ' + labels.pace,
+      'Tour fit: ' + plan.tourFit,
+      '',
+      plan.title,
+      plan.summary,
+      latestWeather ? 'Weather: ' + latestWeather.title + ' - ' + latestWeather.advice : '',
+      ''
+    ];
+    plan.days.forEach(function (day) {
+      lines.push('Day ' + day.dayNumber + ' - ' + formatDisplayDate(day.dateKey) + ': ' + day.title);
+      day.blocks.forEach(function (block) {
+        lines.push(block.time + ': ' + block.title + ' - ' + block.copy);
+      });
+      lines.push('Note: ' + day.note);
+      lines.push('');
+    });
+    lines.push('Book the BerlinWalk tour: ' + BOOKING_SHORT_LABEL);
+    return lines.join('\n');
+  }
+
+  function downloadPdf() {
+    if (!unlocked) return;
+    var api = window.jspdf && window.jspdf.jsPDF;
+    if (!api) {
+      setActionStatus('PDF engine did not load. Use Print plan instead.');
+      track('bw_trip_planner_pdf_download', { success: false, reason: 'jspdf_unavailable' });
+      return;
+    }
+    var doc = new api({ unit: 'pt', format: 'a4' });
+    var pageW = doc.internal.pageSize.getWidth();
+    var pageH = doc.internal.pageSize.getHeight();
+    var margin = 40;
+    var y = 44;
+    var plan = latestPlan || buildPlan();
+
+    function addPageIfNeeded(space) {
+      if (y + space > pageH - 50) {
+        doc.addPage();
+        y = 44;
+      }
+    }
+
+    function text(value, x, size, style, color) {
+      doc.setFont('helvetica', style || 'normal');
+      doc.setFontSize(size);
+      doc.setTextColor.apply(doc, color || [33, 33, 33]);
+      var lines = doc.splitTextToSize(String(value || ''), pageW - margin * 2 - (x - margin));
+      doc.text(lines, x, y);
+      y += lines.length * (size + 3);
+    }
+
+    doc.setFillColor(27, 94, 32);
+    doc.rect(0, 0, pageW, 110, 'F');
+    doc.setTextColor(255, 230, 0);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(11);
+    doc.text('BERLINWALK', margin, 36);
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(23);
+    doc.text('Ultimate Berlin Trip Plan', margin, 66);
+    doc.setFontSize(10);
+    doc.text(plan.displayDate + ' | ' + state.tripLength + (state.tripLength === 1 ? ' day' : ' days'), margin, 88);
+    y = 136;
+    text(plan.title, margin, 15, 'bold', [27, 94, 32]);
+    text(plan.summary, margin, 10, 'normal', [55, 68, 55]);
+    if (latestWeather) text('Weather: ' + latestWeather.title + '. ' + latestWeather.advice, margin, 9.5, 'normal', [55, 68, 55]);
+    text('Tour fit: ' + plan.tourFit + ' | Ticket start: ' + plan.ticket, margin, 10, 'bold', [27, 94, 32]);
+    y += 8;
+    plan.days.forEach(function (day) {
+      addPageIfNeeded(96);
+      doc.setFillColor(248, 251, 242);
+      doc.setDrawColor(220, 232, 200);
+      doc.roundedRect(margin, y - 12, pageW - margin * 2, 28, 7, 7, 'FD');
+      text('Day ' + day.dayNumber + ': ' + day.title + ' (' + formatDisplayDate(day.dateKey) + ')', margin + 10, 11, 'bold', [27, 94, 32]);
+      day.blocks.forEach(function (block) {
+        addPageIfNeeded(42);
+        text(block.time + ' - ' + block.title, margin + 12, 9.5, 'bold', [33, 33, 33]);
+        text(block.copy, margin + 12, 8.8, 'normal', [78, 90, 78]);
+      });
+      text('Note: ' + day.note, margin + 12, 8.5, 'normal', [90, 82, 54]);
+      y += 6;
+    });
+    addPageIfNeeded(70);
+    text('Book your free BerlinWalk spot: ' + BOOKING_SHORT_LABEL, margin, 11, 'bold', [47, 128, 237]);
+    var pages = doc.getNumberOfPages();
+    for (var page = 1; page <= pages; page += 1) {
+      doc.setPage(page);
+      doc.setDrawColor(220, 232, 200);
+      doc.line(margin, pageH - 36, pageW - margin, pageH - 36);
+      doc.setTextColor(27, 94, 32);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(8.5);
+      doc.text('berlinwalk.com | @berlinwalkingtour', margin, pageH - 18);
+      doc.text('Page ' + page + ' / ' + pages, pageW - margin, pageH - 18, { align: 'right' });
+    }
+    doc.save('ultimate-berlin-trip-plan-' + state.arrivalDate + '.pdf');
+    setActionStatus('PDF downloaded.');
+    track('bw_trip_planner_pdf_download', { success: true, arrival_date: state.arrivalDate, trip_length: state.tripLength });
+  }
+
+  function printPlan() {
+    if (!unlocked) return;
+    var printWindow = window.open('', '_blank');
+    if (!printWindow) {
+      setActionStatus('Print window was blocked. Allow pop-ups and try again.');
+      return;
+    }
+    var text = planText().replace(/[&<>"']/g, function (char) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char];
+    });
+    printWindow.document.open();
+    printWindow.document.write('<!doctype html><html><head><title>Ultimate Berlin Trip Plan</title><style>body{font-family:Arial,sans-serif;color:#212121;margin:24px;line-height:1.45;white-space:pre-wrap}h1{color:#1B5E20}.brand{color:#1B5E20;font-weight:700}</style></head><body><h1>Ultimate Berlin Trip Plan</h1><div>' + text + '</div><p class="brand">berlinwalk.com | @berlinwalkingtour</p></body></html>');
+    printWindow.document.close();
+    setTimeout(function () {
+      try {
+        printWindow.focus();
+        printWindow.print();
+      } catch (error) {}
+    }, 250);
+    setActionStatus('Print view opened.');
+    track('bw_trip_planner_print_click', { arrival_date: state.arrivalDate, trip_length: state.tripLength });
+  }
+
+  function initFromParams() {
+    var tripLength = getTripLengthOverride();
+    if (tripLength) state.tripLength = tripLength;
+    var dateInput = root.querySelector('[data-arrival-date]');
+    if (dateInput) {
+      dateInput.value = state.arrivalDate;
+      dateInput.min = berlinTodayKey();
+    }
+    root.querySelectorAll('[data-group="tripLength"] .bw-option').forEach(function (button) {
+      button.classList.toggle('active', Number(button.getAttribute('data-value')) === state.tripLength);
+    });
+  }
+
+  root.addEventListener('click', function (event) {
+    var option = event.target.closest('.bw-option');
+    if (option) {
+      var group = option.closest('[data-group]');
+      var key = group && group.getAttribute('data-group');
+      if (!key) return;
+      var value = option.getAttribute('data-value');
+      if (group.getAttribute('data-multi') === 'true') {
+        option.classList.toggle('active');
+        state.interests = Array.prototype.slice.call(group.querySelectorAll('.bw-option.active')).map(function (button) {
+          return button.getAttribute('data-value');
+        });
+        if (!state.interests.length) {
+          state.interests = ['history'];
+          group.querySelector('[data-value="history"]').classList.add('active');
+        }
+      } else {
+        group.querySelectorAll('.bw-option').forEach(function (button) {
+          button.classList.toggle('active', button === option);
+        });
+        state[key] = key === 'tripLength' ? Number(value) : value;
+      }
+      setActionStatus('');
+      setLeadMessage('', false);
+      renderPlan();
+      return;
+    }
+
+    if (event.target.closest('[data-unlock-plan]')) {
+      handleUnlock();
+      return;
+    }
+
+    if (event.target.closest('[data-download-pdf]')) {
+      downloadPdf();
+      return;
+    }
+
+    if (event.target.closest('[data-print-plan]')) {
+      printPlan();
+      return;
+    }
+
+    if (event.target.closest('[data-book-link]')) {
+      track('bw_trip_planner_book_click', {
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength,
+        tour_fit: (latestPlan || buildPlan()).tourFit
+      });
+    }
+  });
+
+  root.addEventListener('change', function (event) {
+    if (event.target && event.target.matches('[data-arrival-date]')) {
+      state.arrivalDate = /^\d{4}-\d{2}-\d{2}$/.test(event.target.value || '') ? event.target.value : addDays(berlinTodayKey(), 14);
+      event.target.value = state.arrivalDate;
+      setActionStatus('');
+      renderPlan();
+      loadWeather();
+    }
+  });
+
+  var bookingLink = root.querySelector('[data-book-link]');
+  if (bookingLink) bookingLink.href = BOOKING_URL;
+
+  initFromParams();
+  renderPlan();
+  loadWeather();
+  track('bw_trip_planner_start', {
+    context: new URLSearchParams(window.location.search).get('context') || 'tool',
+    arrival_date: state.arrivalDate,
+    trip_length: state.tripLength,
+    unlocked: unlocked
+  });
+})();
+</script>
+</body>
+</html>

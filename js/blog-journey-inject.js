@@ -17,6 +17,7 @@
   var MIN_MOBILE_WIDTH = 900;
   var TOUR_IMAGE = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_700,h_420,al_c,q_86,enc_avif,quality_auto/file.jpg';
   var dataCache = null;
+  var dataPromise = null;
   var renderTimer = null;
   var observer = null;
   var lastPath = location.pathname;
@@ -194,12 +195,12 @@
       '.bw-blog-mobile-nav,.bw-blog-mobile-guide,.bw-blog-tool-prompt,.bw-blog-journey,.bw-blog-back-top{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;color:#212121;}',
       '.bw-blog-mobile-nav *,.bw-blog-mobile-guide *,.bw-blog-tool-prompt *,.bw-blog-journey *{box-sizing:border-box;}',
       '.bw-blog-mobile-nav{display:none;}',
-      '.bw-blog-mobile-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;color:#FFFFFF!important;display:inline-flex;font-size:12px;font-weight:900;line-height:1;min-height:36px;padding:0 14px;text-decoration:none!important;white-space:nowrap;}',
-      '.bw-blog-mobile-nav-label{color:#1B5E20;display:block;font-size:11px;font-weight:900;letter-spacing:1.5px;line-height:1;margin:14px 0 10px;text-transform:uppercase;}',
-      '.bw-blog-mobile-nav-list{display:flex;gap:8px;list-style:none;margin:0;overflow-x:auto;padding:0 0 5px;scrollbar-width:none;}',
+      '.bw-blog-mobile-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;border-radius:4px;color:#FFFFFF!important;display:inline-flex;font-size:12px;font-weight:900;line-height:1;min-height:34px;padding:0 14px;text-decoration:none!important;white-space:nowrap;}',
+      '.bw-blog-mobile-nav-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.35px;line-height:1;margin:13px 0 9px;text-transform:uppercase;}',
+      '.bw-blog-mobile-nav-list{display:flex;gap:8px;list-style:none;margin:0;overflow-x:auto;padding:0 0 4px;scrollbar-width:none;}',
       '.bw-blog-mobile-nav-list::-webkit-scrollbar{display:none;}',
-      '.bw-blog-mobile-nav-list a{align-items:center;background:#FFFFFF;border:1px solid #212121;color:#212121!important;display:inline-flex;font-size:12px;font-weight:900;line-height:1;min-height:34px;padding:0 11px;text-decoration:none!important;white-space:nowrap;}',
-      '.bw-blog-mobile-nav-list a.bw-blog-mobile-nav-active{background:#FFE600;}',
+      '.bw-blog-mobile-nav-list a{align-items:center;background:#FFFFFF;border:1px solid #D7D7CF;border-radius:4px;color:#1B5E20!important;display:inline-flex;font-size:12px;font-weight:900;line-height:1;min-height:33px;padding:0 11px;text-decoration:none!important;white-space:nowrap;}',
+      '.bw-blog-mobile-nav-list a.bw-blog-mobile-nav-active{background:#FFE600;border-color:#FFE600;color:#212121!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav a{text-decoration:none!important;text-decoration-color:transparent!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav .bw-blog-mobile-nav-home{color:#FFFFFF!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav-list a{color:#212121!important;}',
@@ -238,14 +239,15 @@
       '.bw-blog-back-top-visible{opacity:1;pointer-events:auto;transform:translateY(0);visibility:visible;}',
       '[' + NATIVE_END_MARKER + '="1"]{display:none!important;}',
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
-      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}.bw-blog-mobile-nav{background:#FAFAF5;border-top:2px solid #212121;border-bottom:2px solid #212121;display:block;margin:0 0 18px;padding:14px 0 13px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-journey-card-walk-it{display:none!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
+      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}.bw-blog-mobile-nav{background:#FFFDF1;border:1px solid #D7D7CF;border-left:5px solid #FFE600;box-shadow:0 10px 24px rgba(27,94,32,.07);display:block;margin:0 0 22px;padding:14px 14px 12px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-journey-card-walk-it{display:none!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
     ].join('\n');
     (document.head || document.documentElement).appendChild(style);
   }
 
   function loadData() {
     if (dataCache) return Promise.resolve(dataCache);
-    return Promise.all([
+    if (dataPromise) return dataPromise;
+    dataPromise = Promise.all([
       fetch(DATA_URL, { cache: 'no-cache' }).then(function (response) {
         if (!response.ok) throw new Error('blog data unavailable');
         return response.json();
@@ -348,36 +350,54 @@
     if (post && post.categorySlug) return post.categorySlug;
     var path = location.pathname.toLowerCase();
     if (/(german|language|speak)/.test(path)) return 'german-language';
-    if (/(myth|mistake|wrong|really)/.test(path)) return 'berlin-myths';
-    if (/(route|itinerary|walk|stops|alexanderplatz|hackescher)/.test(path)) return 'tour-route';
-    if (/(before|after|then|now|old|rebuilt|changed)/.test(path)) return 'before-after';
-    if (/(history|wall|cold-war|reichstag|museum|church|death|nikolaiviertel)/.test(path)) return 'berlin-history';
+    if (/(before-after|then-and-now|then-now|rebuilt|changed)/.test(path)) return 'before-after';
+    if (/(myth|myths)/.test(path)) return 'berlin-myths';
+    if (/(history|wall|cold-war|reichstag|museum|church|death|nikolaiviertel|ampelmann)/.test(path)) return 'berlin-history';
+    if (/(route|itinerary|walking-tour|tour-starts|12-stops|hackescher|humboldt|weltzeituhr|berliner-dom)/.test(path)) return 'tour-route';
     return 'tourist-tips';
   }
 
-  function insertMobileBlogNav(body, data) {
-    var old = document.querySelector('[' + MOBILE_NAV_MARKER + ']');
-    if (old) old.remove();
-    if (!body) return;
-    var active = activeCategorySlug(data);
-    var nav = document.createElement('nav');
-    nav.className = 'bw-blog-mobile-nav';
-    nav.setAttribute(MOBILE_NAV_MARKER, '1');
-    nav.setAttribute('aria-label', 'Blog navigation');
-    nav.innerHTML =
-      '<a class="bw-blog-mobile-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
+  function mobileBlogNavHtml(active) {
+    return '<a class="bw-blog-mobile-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
       '<span class="bw-blog-mobile-nav-label">Categories</span>' +
       '<ul class="bw-blog-mobile-nav-list">' +
       BLOG_CATEGORIES.map(function (category) {
         var cls = ' class="bw-blog-mobile-nav-item' + (category.slug === active ? ' bw-blog-mobile-nav-active' : '') + '"';
-        return '<li><a' + cls + ' href="' + escapeAttr(category.url) + '" target="_top">' + escapeHtml(category.label) + '</a></li>';
+        return '<li><a' + cls + ' href="' + escapeAttr(category.url) + '" target="_top" data-bw-blog-category="' + escapeAttr(category.slug) + '">' + escapeHtml(category.label) + '</a></li>';
       }).join('') +
       '</ul>';
+  }
+
+  function updateMobileBlogNavActive(nav, active) {
+    if (!nav || nav.getAttribute('data-bw-blog-mobile-active') === active) return;
+    nav.querySelectorAll('.bw-blog-mobile-nav-item').forEach(function (link) {
+      link.classList.toggle('bw-blog-mobile-nav-active', link.getAttribute('data-bw-blog-category') === active);
+    });
+    nav.setAttribute('data-bw-blog-mobile-active', active);
+  }
+
+  function insertMobileBlogNav(body, data) {
+    if (!body) return;
+    var active = activeCategorySlug(data);
+    var nav = document.querySelector('[' + MOBILE_NAV_MARKER + ']');
+    if (!nav) {
+      nav = document.createElement('nav');
+      nav.className = 'bw-blog-mobile-nav';
+      nav.setAttribute(MOBILE_NAV_MARKER, '1');
+      nav.setAttribute('aria-label', 'Blog navigation');
+      nav.innerHTML = mobileBlogNavHtml(active);
+      nav.setAttribute('data-bw-blog-mobile-active', active);
+    } else if (!nav.querySelector('.bw-blog-mobile-nav-item')) {
+      nav.innerHTML = mobileBlogNavHtml(active);
+      nav.setAttribute('data-bw-blog-mobile-active', active);
+    } else {
+      updateMobileBlogNavActive(nav, active);
+    }
     var article = body.closest('article');
     if (article && article.contains(body)) {
-      article.insertBefore(nav, article.firstElementChild || body);
+      if (article.firstElementChild !== nav) article.insertBefore(nav, article.firstElementChild || body);
     } else {
-      body.insertBefore(nav, body.firstElementChild || null);
+      if (body.firstElementChild !== nav) body.insertBefore(nav, body.firstElementChild || null);
     }
   }
 
@@ -684,6 +704,7 @@
     normalizePostSpacing(body);
     insertBackToTop();
     var items = collectHeadings(body);
+    insertMobileBlogNav(body, dataCache);
     insertMobileGuide(body, items);
     loadData().then(function (data) {
       insertMobileBlogNav(body, data);
@@ -720,7 +741,7 @@
 
   function scheduleRender() {
     clearTimeout(renderTimer);
-    renderTimer = setTimeout(render, 160);
+    renderTimer = setTimeout(render, 80);
   }
 
   function boot() {

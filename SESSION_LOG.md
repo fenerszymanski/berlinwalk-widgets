@@ -4,6 +4,36 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-30 — Codex (Ultimate Berlin Trip Planner)
+
+**Did:** Built the Ultimate Berlin Trip Planner as a standalone trip-level lead magnet and tour-conversion widget.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/` — new widget with 1-7 day deterministic Berlin plans, Open-Meteo/monthly weather logic, Sunday/public-holiday/Monday warnings, useful preview, email+consent gate, fail-soft unlock, PDF download, print view, and `?context`, `?date`, `?tripLength`, `?weather=off` params.
+- `ultimate-berlin-trip-planner/velo/`, `ultimate-berlin-trip-planner/email/` — Velo handoff for `TripPlannerLeads`, `/_functions/tripPlannerLead`, `/_functions/tripPlannerBooking`, hourly due-email processing, booking-aware sales/prep stages, plus instant/-7/-3/-1/day-of copy drafts.
+- `tools-hub/data.json`, `tools-home/data.json`, `widgets-hub/SEO_ADDITIONAL_TAGS.md`, `wix-embed-snippets.md`, `README.md`, `AGENTS.md` — added the new tool to hub/home/widgets SEO/docs with `embedHeight: 1680`.
+- `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`, `blog-drafts/ultimate-berlin-trip-planner.md` — added SEO blog support, Quick Summary, FAQ schema mapping, internal links, and competitor-positioning notes. Also removed old public email references from homepage FAQ data in favor of `berlinwalk.com`.
+
+**Opened:** Push/GitHub Pages deploy; live `/tools/ultimate-berlin-trip-planner` CMS insert/re-save; install Velo backend/job/collection; create Triggered Emails and replace placeholder IDs; live lead + booking-event smoke tests; publish the SEO blog post.
+**Closed:** Local syntax/JSON checks, Velo transformed syntax smoke, CMS dry-run, date logic QA (today/tomorrow/Sunday/Monday/holiday/>15 days), lead-gate validation/fail-soft unlock, PDF/print status smoke, and desktop/mobile browser QA with no horizontal overflow or clipped trip-length buttons.
+
+**Next session should:** Push the widget repo, then create the BerlinTools CMS row and install the Velo/email pieces before embedding the blog draft near the top of the SEO post.
+
+## 2026-05-30 — Codex (Blog journey menu blink reduction)
+
+**Did:** Smoothed the mobile blog-post menu and `/blog` index topic menu after Yusuf reported load delay/blinking and harsh top/bottom lines.
+
+**Changed:**
+- `js/blog-journey-inject.js` — mobile `Blog Home` / category nav now inserts before waiting for `blog-index/data.json`, reuses the existing nav instead of removing/recreating it, caches the in-flight data request to avoid repeated fetches, uses a more conservative fallback category matcher so `before you go` does not flash `Before & After`, and restyled the nav as a lighter cream card with a yellow left accent instead of heavy black top/bottom rules.
+- `blog-index/blog-index-element.js` — softens the `/blog` topic chips/search borders, lightens masthead divider lines, and installs exact native-feed preload CSS for `#comp-mm3d94ml` as soon as the element script runs.
+- `wix-embed-snippets.md`, `README.md`, `AGENTS.md` — bumped the journey helper install URL to `blog-journey-inject.js?v=5` and the Blog Index element URL to `blog-index-element.js?v=2`.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the v5 helper behavior and install note.
+
+**Opened:** Push/deploy and Wix Custom Code update to `https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=5` remain; live mobile Safari check needed.
+**Closed:** Local `node --check` passed; delayed-data QA passed with nav visible before data, active category stable as `Tourist Tips`, one nav copy, no overflow; blog post and `/blog-index/` desktop/mobile QA passed with no broken images.
+
+**Next session should:** After push/GitHub Pages deploy, update Wix Custom Code to `?v=5` and live-check one `/post/*` page on desktop plus mobile Safari.
+
 ## 2026-05-30 — Codex (Blog journey mobile nav + back-to-top)
 
 **Did:** Implemented Yusuf's mobile blog-post tweaks for the journey helper.

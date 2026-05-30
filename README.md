@@ -29,6 +29,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `club-picker/` - blog widget for the Berlin club dress-code article; asks five nightlife/outfit questions and returns a club recommendation, backup options, and Door Difficulty rating.
 - `hackescher-after-tour-planner/` - BerlinTools/homepage/blog widget for the Hackescher Markt after-tour article; asks time, need, and energy, then returns one practical next move with route/map link and booking CTA.
 - `berlin-first-day-planner/` - BerlinTools/homepage widget for first-day visitors; asks arrival date/time, start point, energy, priority, and luggage, then returns a booking-first 24-hour plan with Open-Meteo forecast or monthly climate average, Sunday/holiday logic, ticket nudges, lead-gated PDF download, and lead-gated print view. Velo handoff code and funnel email copy live in its `velo/` and `email/` folders.
+- `ultimate-berlin-trip-planner/` - BerlinTools/homepage/blog widget for pre-trip planning and tour conversion; asks arrival date, trip length, arrival point/time, stay area, group type, first-time status, interests, pace, and tour intent, then returns a 1-7 day plan with weather/opening-day logic, lead-gated full plan/PDF/print, and booking-aware Velo/email handoff in `velo/` and `email/`.
 - `stats/` - deprecated hidden no-op; remove the old Stats section from Wix because hero now carries the facts.
 - `how-it-works/` - `bw-how-it-works` homepage 3-step walking timeline Custom Element.
 - `tools-home/` - `bw-tools-home` homepage tools preview Custom Element.
@@ -63,7 +64,7 @@ Current homepage Custom Element source URLs:
 | How It Works | `bw-how-it-works` | `https://fenerszymanski.github.io/berlinwalk-widgets/how-it-works/how-it-works-element.js` | 3-step timeline. |
 | Hero Home | `bw-hero-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/hero-home/hero-home-element.js` | Homepage conversion hero with real tour photo, booking CTA, route, proof points. |
 | Blog Home | `bw-blog-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-home/blog-home-element.js` | Homepage `Berlin Travel Notes` editorial blog teaser. |
-| Blog Index | `bw-blog-index` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js` | Full `/blog` editorial hub with lead story, topic shelves, search, tools, and start-here links. |
+| Blog Index | `bw-blog-index` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js?v=2` | Full `/blog` editorial hub with lead story, topic shelves, search, tools, and start-here links. |
 | Blog Guide Note | `bw-blog-guide-note` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-guide-note/blog-guide-note-element.js` | Compact right-column editorial note for the Wix blog index, using Yusuf's tour photo. |
 | Guide Home | `bw-guide-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | Homepage "Meet Yusuf" teaser linking to `/the-guide`. |
 | Tools Home | `bw-tools-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | Homepage tools preview. |

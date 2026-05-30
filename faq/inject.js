@@ -1,4 +1,4 @@
-/* Auto-generated from /faq/data.json — do not edit by hand. */
+/* Auto-generated from /faq/data.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
   "is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026": "pergamon-closed",
@@ -44,7 +44,9 @@
   "berlin-club-dress-code": "berlin-club-dress-code",
   "the-berlin-wall-where-it-stood-and-what-s-left-in-2026": "berlin-wall-locations",
   "what-to-do-near-hackescher-markt-after-walking-tour": "hackescher-after-tour",
-  "what-to-do-near-hackescher-markt-after-the-tour": "hackescher-after-tour"
+  "what-to-do-near-hackescher-markt-after-the-tour": "hackescher-after-tour",
+  "ultimate-berlin-trip-planner": "ultimate-berlin-trip-planner",
+  "ultimate-berlin-trip-planner-build-realistic-berlin-itinerary-before-you-arrive": "ultimate-berlin-trip-planner"
 };
 
   var SCHEMAS = {
@@ -1988,6 +1990,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Only if you need transport, shopping, your hotel, or the TV Tower. For food, courtyards, Museum Island, the Spree, and evening plans, staying around Hackescher Markt is usually the better move."
+        }
+      }
+    ]
+  },
+  "ultimate-berlin-trip-planner": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Ultimate Berlin Trip Planner free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The planner is free to use. It gives you a preview immediately, then unlocks the full day-by-day plan, PDF, print view, and arrival tips after email consent."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many days in Berlin does the planner cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It covers 1 to 7 days. One day stays tightly focused on the central highlights. Three days uses the classic first-time structure: Mitte, Wall/East Berlin, and museums or neighborhoods. Longer trips add slower local days, food, nightlife, free sights, or Potsdam."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the planner ask for my arrival date?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Arrival date changes the practical plan. The tool checks live weather for near dates, monthly averages for later dates, Sunday and public-holiday restrictions, Monday museum caution, and the best moment to join the BerlinWalk tour."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the planner use AI?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. V1 uses deterministic local-guide logic instead of live AI generation. That keeps the recommendations predictable, Berlin-specific, and focused on real visitor decisions rather than generic itinerary filler."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I take the BerlinWalk tour during my trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most first-time visitors, take the BerlinWalk tour as early as possible, ideally on arrival day if you arrive early enough or the next morning at 11:30. The tour lasts about 2 hours and gives the historic center a structure before you choose museums, Wall sites, food, or nightlife."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can the planner help if I already booked the walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. If you mark the tour as already booked, the planner treats the walk as a fixed anchor and the email sequence can switch from booking reminders to meeting-point, weather, ticket, and arrival prep."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this enough to book museums and restaurants?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use it as a planning framework, not a live reservation system. Always check paid attractions, timed museum entries, restaurants, and special events directly before you go."
         }
       }
     ]

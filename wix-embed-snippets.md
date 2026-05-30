@@ -19,7 +19,7 @@ Source type: Server URL
 | Hero Home | `https://fenerszymanski.github.io/berlinwalk-widgets/hero-home/hero-home-element.js` | `bw-hero-home` | none |
 | How It Works | `https://fenerszymanski.github.io/berlinwalk-widgets/how-it-works/how-it-works-element.js` | `bw-how-it-works` | none |
 | Blog Home | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-home/blog-home-element.js` | `bw-blog-home` | none |
-| Blog Index | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js` | `bw-blog-index` | none |
+| Blog Index | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js?v=2` | `bw-blog-index` | none |
 | Guide Home | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | `bw-guide-home` | none |
 | Tools Home | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | `bw-tools-home` | none |
 | Testimonials | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | `bw-testimonials` | none |
@@ -60,7 +60,7 @@ Yusuf is ready to rebuild that page. Use one full-width Custom Element section:
 
 ```html
 <bw-blog-index></bw-blog-index>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js?v=2"></script>
 ```
 
 ## Blog Custom Code
@@ -70,7 +70,7 @@ current URL is not a blog post.
 
 ```html
 <script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=24" defer></script>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=4" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=5" defer></script>
 ```
 
 `blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from
@@ -85,9 +85,10 @@ navigation into the Wix-managed post header or article body, avoiding the
 show-hide-show flicker and Quick Summary rerender.
 
 `blog-journey-inject.js` lightly polishes article body typography, adds the
-mobile `Blog Home` / category chip row near the top of the article, adds the
-mobile `In this guide` chip row, injects one topic-aware inline tool prompt, and
-adds a topic-aware `Next step` module near the article end. It hides the
+mobile `Blog Home` / category chip row near the top of the article before
+waiting for data, adds the mobile `In this guide` chip row, injects one
+topic-aware inline tool prompt, and adds a topic-aware `Next step` module near
+the article end. It hides the
 photo-led `Walk It` card on mobile, adds a sticky back-to-top arrow, reads
 `blog-index/data.json`, recommends related guides and tools, and tracks
 `bw_blog_tool_prompt_*`, `bw_blog_journey_*`, plus `bw_blog_back_top_click`
@@ -187,6 +188,20 @@ Recommended first Wix iframe height:
 
 ```text
 1280px
+```
+
+## Ultimate Berlin Trip Planner Blog Embed
+
+Use this URL for the planned `Ultimate Berlin Trip Planner` post:
+
+```text
+https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/?context=blog
+```
+
+Recommended first Wix iframe height:
+
+```text
+1680px
 ```
 
 ## Berlin Club Dress Code Post Widgets
