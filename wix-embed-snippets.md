@@ -70,7 +70,7 @@ current URL is not a blog post.
 
 ```html
 <script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=24" defer></script>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=1" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=2" defer></script>
 ```
 
 `blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from
@@ -84,10 +84,11 @@ before becoming visible. It no longer injects any blog
 navigation into the Wix-managed post header or article body, avoiding the
 show-hide-show flicker and Quick Summary rerender.
 
-`blog-journey-inject.js` adds the mobile `In this guide` chip row and a
-topic-aware `Next step` module near the article end. It reads
+`blog-journey-inject.js` lightly polishes article body typography, adds the
+mobile `In this guide` chip row, injects one topic-aware inline tool prompt, and
+adds a topic-aware `Next step` module near the article end. It reads
 `blog-index/data.json`, recommends a related guide and tool, and tracks
-`bw_blog_journey_view` / `bw_blog_journey_click`.
+`bw_blog_tool_prompt_*` plus `bw_blog_journey_*` events.
 
 ## Sitewide Custom Code
 

@@ -195,7 +195,7 @@ Pulled from `SESSION_LOG.md` — see that file for active state. As of the lates
 2. **Publish the route story map page.** After pushing `berlinwalk-widgets`, create/publish Wix `/berlin-walking-tour-route`, install `<bw-route-story>`, paste `route-story/SEO_SETTINGS.md`, then verify header/footer/homepage route links.
 3. **Monitor First-Day Guide direct emails.** Live `/_functions/subscribe` now sends welcome + owner emails directly through Developer Tools Triggered Email IDs `VKufY4L` and `VKugjPv`; old label-trigger automations are inactive to avoid duplicates. Some Velo/log/report names still say Survival Map. Use `source scripts/load-api-keys.sh && node scripts/survival-map-email-log-report.mjs --limit 100` from the workspace root to audit delivery.
 4. **Install the prepared Email Marketing subscription helper.** Direct First-Day Guide emails work, but the subscribe response still reports `subscriptionDebug: missing_api_key`. Add the Wix REST API key to Wix Secrets Manager as `WIX_API_KEY`, add `lead-form/velo/emailMarketingSubscription.js` as `Backend/emailMarketingSubscription.js`, call `subscribeEmailMarketing(email)` from `post_subscribe`, publish, then live-test that `subscriptionDebug.ok` is true.
-5. **Publish the blog redesign v1.** Push `berlinwalk-widgets`, wait for GitHub Pages, then replace the Wix `/blog` feed area with `<bw-blog-index>` and add `js/blog-journey-inject.js?v=1` as a blog/post Custom Code helper.
+5. **Publish the blog redesign v1.** Push `berlinwalk-widgets`, wait for GitHub Pages, then replace the Wix `/blog` feed area with `<bw-blog-index>` and add `js/blog-journey-inject.js?v=2` as a blog/post Custom Code helper.
 
 ## 9. Protocol for ending a session
 

@@ -40,7 +40,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `route/` - `bw-route` interactive illustrated route map Custom Element with a route-story preview section.
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
 - `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
-- `js/blog-journey-inject.js` - sitewide Wix Custom Code helper for mobile post guide chips and topic-aware next-step cards.
+- `js/blog-journey-inject.js` - sitewide Wix Custom Code helper for post typography polish, mobile guide chips, inline tool prompts, and topic-aware next-step cards.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin First-Day Survival Guide signup.
 
 ## Project Memory
@@ -170,11 +170,13 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   mini-nav into Wix-managed blog header or article body DOM, because that caused
   header/Quick Summary flicker. The script skips
   non-`/post/` URLs.
-- `js/blog-journey-inject.js` - adds a mobile-only `In this guide` chip row
-  before the first visible heading and a topic-aware `Next step` module near the
-  end of each post. It reads `blog-index/data.json`, links to one related guide,
-  one relevant Berlin tool, and the booking page, and sends `bw_blog_journey_*`
-  analytics events. It skips non-`/post/` URLs.
+- `js/blog-journey-inject.js` - lightly polishes post body typography, adds a
+  mobile-only `In this guide` chip row before the first visible heading, injects
+  one topic-aware inline tool prompt when the post does not already link to that
+  tool, and adds a topic-aware `Next step` module near the end of each post. It
+  reads `blog-index/data.json`, links to one related guide, one relevant Berlin
+  tool, and the booking page, and sends `bw_blog_tool_prompt_*` plus
+  `bw_blog_journey_*` analytics events. It skips non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
   `sessionStorage`, links the primary CTA to the booking route, and posts the

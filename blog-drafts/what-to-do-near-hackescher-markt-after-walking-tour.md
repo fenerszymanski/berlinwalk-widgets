@@ -48,6 +48,10 @@ My [Berlin Free Walking Tour](https://www.berlinwalk.com/book-berlin-walking-tou
 
 The mistake is treating Hackescher Markt only as a station. It is better than that. Use it as your decision point.
 
+![Hackescher Markt S-Bahn station after a Berlin walking tour](assets/hackescher-after-tour/01-hackescher-markt-station-after-tour.jpg)
+
+*Hackescher Markt is more than the place where the tour ends. It is the easiest point to pause, eat, walk, or catch the S-Bahn and trams.*
+
 ## The Best Answer in 30 Seconds
 
 If you have just finished a walking tour near Hackescher Markt, do this:
@@ -69,6 +73,10 @@ For a fast Berlin bite, **Curry 61** on Oranienburger Strasse is the practical c
 
 For a sit-down German lunch or beer, **Das Lemke at Hackescher Markt** is the most convenient answer. It sits directly by the S-Bahn arches, serves Berlin and German classics, and is useful when someone in the group wants beer, someone wants proper food, and nobody wants to think too hard.
 
+![Outdoor tables under the S-Bahn arches near Hackescher Markt](assets/hackescher-after-tour/02-food-under-sbahn-arches-hackescher-markt.jpg)
+
+*The S-Bahn arches around Hackescher Markt make food the easiest first decision after the tour: quick, central, and close to your next route.*
+
 For something lighter, **Monsieur Vuong** is a reliable Vietnamese lunch nearby. It is not hidden, and it is not trying to be. It is popular because it solves a common tourist problem: you want fresh food, fast service, and a real table after several hours outside.
 
 For coffee, do not turn this post into a second coffee guide. I already wrote the focused version here: [5 Best Coffee Shops Near Hackescher Markt](https://www.berlinwalk.com/post/5-best-coffee-shops-near-hackescher-markt-a-local-s-guide). If you are tired, open that, pick the closest one, and do not over-optimise.
@@ -89,7 +97,15 @@ After that, cross to **Haus Schwarzenberg** at Rosenthaler Strasse 39. This is t
 
 From there, walk toward **Monbijoupark** and the Spree. Grün Berlin describes Monbijoupark as a four-hectare green area stretching from Oranienburger Strasse to the Spree riverbank promenade, right beside Museum Island. That makes it ideal after a tour: short, central, open, and not another checklist monument.
 
+![People resting in Monbijoupark with Museum Island nearby](assets/hackescher-after-tour/03-monbijoupark-after-tour-reset.jpg)
+
+*Monbijoupark works because it asks almost nothing from you: grass, shade, the Spree nearby, and Museum Island in view.*
+
 If you continue along the river, the outside of **Museum Island** is right there. You can admire the Bode Museum, cross toward the Lustgarten, look at Berliner Dom from the outside, and decide whether you actually want to go indoors.
+
+![Berliner Dom and Museum Island seen from the Spree-side green space](assets/hackescher-after-tour/04-museum-island-spree-after-tour.jpg)
+
+*After a 2-hour tour, the outside of Museum Island is often the smarter win: beautiful, free, and easy to leave when you are done.*
 
 This whole loop can be 45 minutes. It can also become 2 hours if you stop for coffee, photos, or a bench by the river. That flexibility is the point.
 
@@ -154,6 +170,10 @@ If you still have legs, Hackescher Markt gives you several good walking directio
 **Toward Nikolaiviertel:** best if you want Berlin's strange rebuilt old town. It pairs well with the historic center, but read my guide to [Nikolaiviertel](https://www.berlinwalk.com/post/nikolaiviertel-rebuilt-old-town) first so you do not mistake it for untouched medieval Berlin.
 
 **Toward Alexanderplatz:** best only if you need transport, your hotel, shopping, or the TV Tower. Otherwise, I would stay west and north of Hackescher Markt for a while.
+
+![A quiet side street near Hackescher Markt in Mitte](assets/hackescher-after-tour/05-streets-near-hackescher-markt.jpg)
+
+*The best after-tour move is often not another landmark. It is choosing the right direction and letting Mitte open up slowly.*
 
 ## Evening Near Hackescher Markt
 

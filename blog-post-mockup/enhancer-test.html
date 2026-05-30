@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BerlinWalk Blog Post Enhancer Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Montserrat:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAFAF5;
+      --text: #212121;
+      --green: #1B5E20;
+      --yellow: #FFE600;
+      --muted: #4E5A4E;
+      --line: #D7D7CF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--cream);
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+    }
+
+    .shell {
+      margin: 0 auto;
+      max-width: 1180px;
+      padding: 40px 24px 80px;
+    }
+
+    .masthead {
+      border-bottom: 2px solid var(--text);
+      border-top: 7px solid var(--green);
+      margin-bottom: 34px;
+      padding: 20px 0;
+    }
+
+    .masthead span {
+      background: var(--yellow);
+      color: var(--text);
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      padding: 8px 10px;
+      text-transform: uppercase;
+    }
+
+    .layout {
+      display: grid;
+      gap: 44px;
+      grid-template-columns: minmax(0, 720px) 280px;
+      align-items: start;
+    }
+
+    article {
+      min-width: 0;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 76px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: .96;
+      margin: 0 0 18px;
+    }
+
+    .dek {
+      color: #333333;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 21px;
+      line-height: 1.5;
+      margin: 0 0 28px;
+    }
+
+    .meta {
+      border-top: 2px solid var(--text);
+      color: var(--muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 30px;
+      padding-top: 14px;
+      text-transform: uppercase;
+    }
+
+    [data-hook="post-content"] {
+      background: #fff;
+      border: 1px solid var(--line);
+      padding: 34px;
+    }
+
+    [data-hook="post-content"] p {
+      color: #333333;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 18px;
+      line-height: 1.72;
+      margin: 0 0 20px;
+    }
+
+    [data-hook="post-content"] h2 {
+      font-size: 34px;
+      line-height: 1.08;
+      margin: 34px 0 12px;
+    }
+
+    [data-hook="post-content"] h3 {
+      font-size: 25px;
+      line-height: 1.15;
+      margin: 28px 0 10px;
+    }
+
+    .rail {
+      border: 1px solid var(--text);
+      padding: 18px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .rail strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+    }
+
+    .rail p {
+      color: var(--muted);
+      font-family: Merriweather, Georgia, serif;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .fake-tour-cta {
+      background: var(--green);
+      color: #fff;
+      margin-top: 34px;
+      padding: 22px;
+    }
+
+    .fake-tour-cta strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .fake-tour-cta a {
+      background: var(--yellow);
+      color: var(--text);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      margin-top: 12px;
+      padding: 12px 14px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 899px) {
+      .shell {
+        padding: 24px 16px 60px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      [data-hook="post-content"] {
+        padding: 22px 18px;
+      }
+
+      .rail {
+        display: none;
+      }
+    }
+  </style>
+  <script>
+    window.BW_BLOG_DATA_URL = '/blog-index/data.json';
+    history.replaceState(null, '', '/post/berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go');
+  </script>
+</head>
+<body>
+  <main class="shell">
+    <header class="masthead">
+      <span>Berlin Travel & History Notes</span>
+    </header>
+
+    <div class="layout">
+      <article>
+        <p class="meta">Tourist tips · 5 min read · By BerlinWalk</p>
+        <h1>Berlin First-Time Visitor Mistakes: 12 Things to Know Before You Go</h1>
+        <p class="dek">Visiting Berlin for the first time? Avoid the classic tourist mistakes around transport, Sunday closures, cash, neighborhoods, museums, and sightseeing with this honest local guide.</p>
+
+        <section data-hook="post-content">
+          <p>Berlin is not a difficult city, but it can feel unusually confusing on the first day. The city is wide, the transport system has its own logic, and many visitor mistakes come from assuming Berlin behaves like Paris, London, or Amsterdam.</p>
+          <p>This guide keeps the advice practical. It focuses on the small decisions that shape your first twenty-four hours: tickets, luggage, toilets, Sunday rules, and where to begin walking.</p>
+
+          <h2>Start with the shape of the city</h2>
+          <p>Berlin is not built around one obvious postcard center. Alexanderplatz, Museum Island, Brandenburg Gate, Potsdamer Platz, and Kreuzberg all feel central in different ways. That is why a first day works best when you choose one story line instead of trying to collect every famous name.</p>
+          <p>For most first-time visitors, the easiest starting point is Alexanderplatz. You can understand East Berlin, walk into the medieval core, reach Museum Island, and still finish near good food and transport.</p>
+
+          <h2>Do not buy transport tickets by instinct</h2>
+          <p>The ticket system is simple once you know what your actual journeys are. The mistake is buying a day ticket because it sounds safe, then only taking two rides. If you arrive from BER, remember that the airport sits in fare zone C.</p>
+          <p>A realistic first day often needs one airport ticket and then a smaller plan for the city center. Count your rides before choosing a ticket.</p>
+
+          <h3>Sunday changes the rhythm</h3>
+          <p>Many shops close on Sundays. Museums, cafes, restaurants, and tourist sights still operate, but grocery shopping and quick errands may be harder than expected. Plan cash, water, and small essentials before Sunday if you can.</p>
+
+          <h2>Choose one walk, not ten landmarks</h2>
+          <p>Berlin rewards slow orientation. A route through Alexanderplatz, Nikolaiviertel, Museum Island, and Hackescher Markt gives you enough structure to understand the city without turning the day into a checklist.</p>
+          <p>Once you know the route, the later neighborhoods become easier to place. Kreuzberg, Prenzlauer Berg, Charlottenburg, and the Wall sites make more sense after the first central walk.</p>
+
+          <div class="fake-tour-cta" data-bw-tourcta>
+            <strong>Walk Berlin with the story underneath it.</strong>
+            <span>Join the free Berlin walking tour from Alexanderplatz to near Hackescher Markt.</span>
+            <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Reserve your spot</a>
+          </div>
+        </section>
+      </article>
+
+      <aside class="rail">
+        <strong>Desktop sidebar stays separate.</strong>
+        <p>This test page checks the production enhancer only. The existing Wix desktop sidebar helper remains its own script.</p>
+      </aside>
+    </div>
+  </main>
+
+  <script src="/js/blog-journey-inject.js"></script>
+</body>
+</html>

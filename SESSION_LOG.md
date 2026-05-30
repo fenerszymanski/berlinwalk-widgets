@@ -4,6 +4,33 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-30 — Codex (Hackescher blog images)
+
+**Did:** Retrieved Yusuf's `Hackescher Markt ` Drive folder, inspected all 13 HEIC photos, selected the five that best match the article flow, optimized them, and placed them in the draft with captions.
+
+**Changed:**
+- `blog-drafts/what-to-do-near-hackescher-markt-after-walking-tour.md` — inserted images after the intro, food section, Monbijoupark paragraph, Museum Island paragraph, and walking-directions section.
+- `blog-drafts/assets/hackescher-after-tour/` — added five final JPGs (`01-...` through `05-...`) sized ~527-704 KB; discarded temporary HEICs/contact sheets/unselected conversions.
+
+**Opened:** Wix draft creation/import, widget embeds, and live desktop/mobile QA remain.
+**Closed:** Image optimization and local Markdown placement for the Hackescher after-tour draft.
+
+**Next session should:** Publish/import this draft to Wix, include the quick summary/planner/FAQ widgets, then verify image layout live.
+
+## 2026-05-30 — Codex (Single blog post enhancer implementation)
+
+**Did:** Translated Yusuf-approved single post mockup direction into the production post helper.
+
+**Changed:**
+- `js/blog-journey-inject.js` — now lightly polishes Wix post body typography, keeps mobile `In this guide` chips, injects one topic-aware inline tool prompt, and renders the black editorial `Next step` module without duplicating itself across Wix rerenders.
+- `blog-post-mockup/enhancer-test.html` — local harness for `/post/*` enhancer QA using live `blog-index/data.json`.
+- Project root `output/qa/blog-post-enhancer-*.png` — desktop/mobile top and journey screenshots; local QA passed with tool prompt, journey cards, no broken images, and 0 horizontal overflow.
+
+**Opened:** Push/deploy still needed; after GitHub Pages updates, add `https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=2` in Wix Custom Code for blog posts/all pages.
+**Closed:** Single post redesign mockup is approved and implemented locally.
+
+**Next session should:** Push `berlinwalk-widgets`, wait for GitHub Pages, install/update the Wix Custom Code helper, then live-QA one high-traffic `/post/*` page on desktop and mobile.
+
 ## 2026-05-29 — Codex (Single blog post mockup)
 
 **Did:** Built a static mockup for the redesigned single blog post experience before touching production post scripts.
