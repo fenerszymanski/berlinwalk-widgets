@@ -538,15 +538,27 @@
   function hideNativeEndMatter() {
     var labels = ['Related Posts', 'Comments'];
     var candidates = document.querySelectorAll('h1,h2,h3,h4,[role="heading"],p,span,div');
+    var postBody = document.querySelector('[' + POST_BODY_MARKER + '="1"]');
+
+    function isUnsafeEndMatterContainer(el) {
+      if (!el || el === document.body || el === document.documentElement) return true;
+      var tag = (el.tagName || '').toUpperCase();
+      if (tag === 'MAIN' || tag === 'ARTICLE') return true;
+      if (el.hasAttribute(POST_BODY_MARKER) || el.hasAttribute(JOURNEY_MARKER)) return true;
+      if (postBody && el.contains(postBody)) return true;
+      if (el.querySelector && el.querySelector('[' + POST_BODY_MARKER + '], [' + JOURNEY_MARKER + ']')) return true;
+      return false;
+    }
 
     function chooseContainer(el, label) {
       var node = el;
       for (var depth = 0; depth < 8 && node.parentElement && node.parentElement !== document.body; depth++) {
         var parent = node.parentElement;
         if (parent.closest('[' + JOURNEY_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) break;
+        if (isUnsafeEndMatterContainer(parent)) break;
         var text = cleanText(parent.textContent);
-        var hasRelatedShape = label === 'Related Posts' && text.indexOf('Related Posts') !== -1 && parent.querySelectorAll('a,img').length >= 2;
-        var hasCommentsShape = label === 'Comments' && (text.indexOf('Comments') !== -1 || text.indexOf("Commenting on this post") !== -1);
+        var hasRelatedShape = label === 'Related Posts' && text.indexOf('Related Posts') !== -1 && parent.querySelectorAll('a,img').length >= 2 && text.length < 1200;
+        var hasCommentsShape = label === 'Comments' && (text.indexOf('Comments') !== -1 || text.indexOf("Commenting on this post") !== -1) && text.length < 700;
         if (hasRelatedShape || hasCommentsShape) return parent;
       }
       return node;
@@ -559,7 +571,7 @@
       if (candidates[i].closest('[' + JOURNEY_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) continue;
       var label = text.indexOf('Related Posts') !== -1 ? 'Related Posts' : 'Comments';
       var container = chooseContainer(candidates[i], label);
-      if (container && container !== document.body) {
+      if (container && !isUnsafeEndMatterContainer(container)) {
         container.setAttribute(NATIVE_END_MARKER, '1');
         container.setAttribute('aria-hidden', 'true');
       }
