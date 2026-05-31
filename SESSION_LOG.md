@@ -4,6 +4,22 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-31 — Codex (Ultimate post-push QA)
+
+**Did:** Verified Yusuf's push and GitHub Pages deployment for Ultimate's public visibility release.
+Follow-up: audited the unpublished Wix Blog draft for publish readiness.
+
+**Changed:**
+- `SESSION_LOG.md` — recorded the post-push QA handoff.
+- GitHub Pages: commit `67d7928` deployed successfully; live `tools-hub/data.json` now returns 31 public items with Ultimate no longer `draft`; `widgets-hub/SEO_ADDITIONAL_TAGS.md` now has `numberOfItems: 31` and Ultimate at position 15.
+- Browser QA: `/tools/ultimate-berlin-trip-planner`, `/berlin-tools`, and `/widgets` passed desktop 1365px and mobile 390px/319px checks with Ultimate visible, expected iframes/cards present, and horizontal overflow `0`.
+- Wix Blog: draft `b1915fa5-dfcf-4427-bcfc-d9a6665208e7` remains `UNPUBLISHED`, has 176 nodes, 3 correct embeds, no published duplicate, no competitor-note leak, and live Quick Summary/FAQ DOM render with overflow `0`.
+
+**Opened:** Publish Wix Blog draft `b1915fa5-dfcf-4427-bcfc-d9a6665208e7`; add homepage shortcut later only if Yusuf wants it.
+**Closed:** Push/deploy verification and live desktop/mobile distribution QA.
+
+**Next session should:** Publish the already-audited Wix Blog draft from Yusuf's logged-in Wix editor, then live-QA the post URL.
+
 ## 2026-05-31 — Codex (Ultimate live publish verified)
 
 **Did:** Completed the live launch checks for Ultimate after Yusuf published Velo.
