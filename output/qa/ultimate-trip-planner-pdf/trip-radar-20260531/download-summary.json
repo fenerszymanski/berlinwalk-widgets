@@ -1,0 +1,26 @@
+[
+  {
+    "case": "trip-radar-3day-sales",
+    "status": "PDF downloaded.",
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/trip-radar-20260531/trip-radar-3day-sales.pdf",
+    "bytes": 2313371,
+    "dom": {
+      "radar": "Trip radarScore, tour anchor, opening risk, and the next useful move.Live plan75/100Plan scoreGood, with watch-outsTour anchorArrival day 11:30-13:30Best tour fitBook / holdOpening watchMonday cautionWeather-aware planCheck rhythmNext moveBook or hold the tourBefore arrivalBook the tour",
+      "fullHidden": false,
+      "leadHidden": true,
+      "overflow": 0
+    }
+  },
+  {
+    "case": "trip-radar-7day-booked",
+    "status": "PDF downloaded.",
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/trip-radar-20260531/trip-radar-7day-booked.pdf",
+    "bytes": 2607305,
+    "dom": {
+      "radar": "Trip radarScore, tour anchor, opening risk, and the next useful move.Live plan72/100Plan scoreNeeds two checksTour anchorAlready bookedPrep pathWorld ClockOpening watchDay 7 shop rulesWeather-aware planCheck rhythmNext moveSave World ClockBefore arrivalOpen meeting point",
+      "fullHidden": false,
+      "leadHidden": true,
+      "overflow": 0
+    }
+  }
+]

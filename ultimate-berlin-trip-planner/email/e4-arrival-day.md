@@ -10,6 +10,14 @@ Your planner result:
 
 **${planTitle}**
 
+Your phone-ready mode:
+
+**${travelMode}**
+
+Your arrival checklist:
+
+**${preArrivalChecklist}**
+
 Today, keep the logic simple:
 
 - Get central.
@@ -33,4 +41,3 @@ Have a calm first day. Berlin gets much better when you stop trying to solve all
 Yusuf  
 BerlinWalk  
 berlinwalk.com · @berlinwalkingtour
-

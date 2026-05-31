@@ -1,0 +1,34 @@
+[
+  {
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/trip-radar-20260531/trip-radar-3day-sales.pdf",
+    "bytes": 2313371,
+    "pages": 9,
+    "contactSheet": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/trip-radar-20260531/trip-radar-3day-sales-contact-sheet.png",
+    "checks": {
+      "tripRadarText": true,
+      "planScoreText": true,
+      "tourAnchorText": true,
+      "openingWatchText": true,
+      "nextMoveText": true,
+      "logoText": true,
+      "staleLocalCue": false
+    },
+    "textSample": "LOCAL ARRIVAL-AWARE PLANNER Ultimate Berlin Trip Plan Mon, 1 Jun 2026 | 3 days | Mitte / Alexanderplatz A BerlinWalk plan built around geography, weather, opening-day rules, and the best tour slot. Build Berlin around the first real orientation day This plan keeps Berlin area-by-area instead of sending you across the city all day. Start with context early, then use the rest of the trip for Wall history, museums, food, neighborhoods, and slower backup time. Route snapshots The plan uses real Berlin anchors, not a generic itinerary wall of text."
+  },
+  {
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/trip-radar-20260531/trip-radar-7day-booked.pdf",
+    "bytes": 2607305,
+    "pages": 14,
+    "contactSheet": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/trip-radar-20260531/trip-radar-7day-booked-contact-sheet.png",
+    "checks": {
+      "tripRadarText": true,
+      "planScoreText": true,
+      "tourAnchorText": true,
+      "openingWatchText": true,
+      "nextMoveText": true,
+      "logoText": true,
+      "staleLocalCue": false
+    },
+    "textSample": "LOCAL ARRIVAL-AWARE PLANNER Ultimate Berlin Trip Plan Mon, 1 Jun 2026 | 7 days | Mitte / Alexanderplatz A BerlinWalk plan built around geography, weather, opening-day rules, and the best tour slot. Build Berlin around the first real orientation day This plan keeps Berlin area-by-area instead of sending you across the city all day. Start with context early, then use the rest of the trip for Wall history, museums, food, neighborhoods, and slower backup time. Route snapshots The plan uses real Berlin anchors, not a generic itinerary wall of text."
+  }
+]

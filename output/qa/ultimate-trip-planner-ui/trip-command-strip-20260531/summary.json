@@ -1,0 +1,32 @@
+[
+  {
+    "scenario": "desktop-1280-far",
+    "summary": {
+      "stripCount": 1,
+      "commandCards": 4,
+      "commandStops": 4,
+      "travelModePanels": 0,
+      "title": "Trip commands",
+      "firstCard": "4 anchors",
+      "overflow": 0,
+      "bad": [],
+      "vertical": []
+    },
+    "errors": []
+  },
+  {
+    "scenario": "mobile-390-far",
+    "summary": {
+      "stripCount": 1,
+      "commandCards": 4,
+      "commandStops": 4,
+      "travelModePanels": 0,
+      "title": "Trip commands",
+      "firstCard": "4 anchors",
+      "overflow": 0,
+      "bad": [],
+      "vertical": []
+    },
+    "errors": []
+  }
+]

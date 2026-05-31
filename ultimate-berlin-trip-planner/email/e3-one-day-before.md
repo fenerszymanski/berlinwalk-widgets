@@ -12,6 +12,18 @@ Your planner weather note:
 
 **${weatherTitle}**
 
+Weather/openings strategy:
+
+**${weatherStrategy}**
+
+Planner review:
+
+**${planAdvice}**
+
+Your final checklist:
+
+**${preArrivalChecklist}**
+
 Berlin rewards comfortable shoes more than heroic planning. The historic center has exposed squares, station stairs, cobbles, river wind, and long crossings.
 
 Before you travel:
@@ -34,4 +46,3 @@ The walk is about 2 hours and gives your first Berlin day a clear shape.
 Yusuf  
 BerlinWalk  
 berlinwalk.com · @berlinwalkingtour
-

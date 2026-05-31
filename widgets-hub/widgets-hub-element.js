@@ -662,7 +662,10 @@ class BWWidgetsHubElement extends HTMLElement {
   _renderHub(data) {
     const root = this.querySelector('.bw-tools-root');
     const categories = data && Array.isArray(data.categories) ? data.categories : [];
-    const tools = data && Array.isArray(data.tools) ? data.tools : [];
+    const tools = data && Array.isArray(data.tools)
+      ? data.tools.filter(tool => this._isVisibleTool(tool))
+      : [];
+    this._data = Object.assign({}, data, { tools });
     if (!root || !categories.length || !tools.length) {
       this._renderError();
       return;
@@ -714,6 +717,12 @@ class BWWidgetsHubElement extends HTMLElement {
         <p class="bw-category-blurb">${this._escapeHtml(category.blurb || '')}</p>
         ${categoryTools.map(tool => this._renderWidgetCard(tool)).join('')}
       </section>`;
+  }
+
+  _isVisibleTool(tool) {
+    if (!tool || !tool.widgetUrl) return false;
+    const status = String(tool.status || '').toLowerCase();
+    return tool.hidden !== true && tool.published !== false && status !== 'draft';
   }
 
   _renderWidgetCard(tool) {
@@ -869,8 +878,8 @@ class BWWidgetsHubElement extends HTMLElement {
   }
 
   _toolBySlug(slug) {
-    if (!this._data) return null;
-    return this._data.tools.find(t => t.slug === slug) || null;
+    if (!this._data || !Array.isArray(this._data.tools)) return null;
+    return this._data.tools.find(t => t.slug === slug && this._isVisibleTool(t)) || null;
   }
 
   _renderError() {
@@ -892,14 +901,6 @@ class BWWidgetsHubElement extends HTMLElement {
     return this._escapeHtml(value).replace(/'/g, '&#39;');
   }
 }
-
-// Keep a reference to the loaded data on the element so click handlers can
-// rebuild the snippet for the new theme without re-fetching.
-const origRender = BWWidgetsHubElement.prototype._renderHub;
-BWWidgetsHubElement.prototype._renderHub = function (data) {
-  this._data = data;
-  return origRender.call(this, data);
-};
 
 if (!customElements.get('bw-widgets-hub')) {
   customElements.define('bw-widgets-hub', BWWidgetsHubElement);

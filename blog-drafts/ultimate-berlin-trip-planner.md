@@ -4,6 +4,8 @@ Slug idea: `ultimate-berlin-trip-planner`
 
 Status: local draft, not pushed to Wix.
 
+Wix-ready body: `blog-drafts/ultimate-berlin-trip-planner.body.md`
+
 Meta title: Ultimate Berlin Trip Planner: Build Your Berlin Itinerary
 
 Meta description: Use this free Berlin trip planner to build a realistic 1-7 day itinerary with arrival-date logic, weather, opening-day notes, transport tips, and the best BerlinWalk tour slot.
@@ -29,7 +31,7 @@ Use these embeds when building the post in Wix:
 
 2. Ultimate Berlin Trip Planner, immediately after the quick answer:
    `https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/?context=blog`
-   - Recommended first Wix iframe height: 1680 px.
+   - Recommended first Wix iframe height: 2400 px.
 
 3. FAQ, near the bottom:
    `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=ultimate-berlin-trip-planner`

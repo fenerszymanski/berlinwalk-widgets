@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-05-31T10:01:36.634Z",
+  "source": "ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js",
+  "status": "fail",
+  "tests": [
+    {
+      "name": "sales and booked leads use separate minus3 IDs",
+      "status": "pass",
+      "details": {
+        "sent": 2,
+        "messages": [
+          "contact-sales:sales-minus3-id:no",
+          "contact-booked:booked-minus3-id:yes"
+        ]
+      }
+    },
+    {
+      "name": "cancelled booked markers use the sales branch",
+      "status": "pass",
+      "details": {
+        "bookingStatus": "cancelled",
+        "messageId": "sales-minus3-id",
+        "isBooked": "no"
+      }
+    },
+    {
+      "name": "missing booked IDs skip instead of falling back",
+      "status": "fail",
+      "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n1 !== 0\n\n    at testMissingBookedMessageIdFailsClosed (file:///Users/yusufucuz/Documents/New%20project/berlinwalk-widgets/ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs:268:10)\n    at async run (file:///Users/yusufucuz/Documents/New%20project/berlinwalk-widgets/ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs:329:23)"
+    },
+    {
+      "name": "booking marker respects arrivalDate scope",
+      "status": "pass",
+      "details": {
+        "matched": 1,
+        "updated": 1,
+        "targetBookingId": "fixture-booking",
+        "otherTouched": false
+      }
+    }
+  ]
+}

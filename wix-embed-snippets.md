@@ -70,7 +70,7 @@ current URL is not a blog post.
 
 ```html
 <script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=24" defer></script>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=5" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=6" defer></script>
 ```
 
 `blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from

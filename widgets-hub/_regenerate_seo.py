@@ -51,10 +51,20 @@ def build_schema(tools):
     }
 
 
+def is_visible_tool(tool):
+    status = str(tool.get("status", "")).lower()
+    return (
+        bool(tool.get("widgetUrl"))
+        and tool.get("hidden") is not True
+        and tool.get("published") is not False
+        and status != "draft"
+    )
+
+
 def regenerate():
     with open(DATA) as f:
         data = json.load(f)
-    tools = [t for t in data["tools"] if t.get("widgetUrl")]
+    tools = [t for t in data["tools"] if is_visible_tool(t)]
     schema = build_schema(tools)
 
     minified = json.dumps(schema, ensure_ascii=False, separators=(",", ":"))

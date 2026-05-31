@@ -1,0 +1,67 @@
+{
+  "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&qaUnlock=1&weather=off&v=trip-highlights-20260531",
+  "desktop": {
+    "viewport": "desktop",
+    "highlightCount": 3,
+    "labels": [
+      {
+        "label": "Start",
+        "title": "Day 1: Arrival day",
+        "action": "Open first route",
+        "href": "https://www.google.com/maps/dir/?api=1&origin=52.521918%2C13.413215&destination=52.5221%2C13.4027&travelmode=walking&waypoints=52.5169%2C13.4017",
+        "imageLoaded": true
+      },
+      {
+        "label": "Tour",
+        "title": "Arrival day 11:30-13:30",
+        "action": "Book or hold spot",
+        "href": "https://www.berlinwalk.com/book",
+        "imageLoaded": true
+      },
+      {
+        "label": "Finish",
+        "title": "Day 7: Day trip or recovery",
+        "action": "Open final route",
+        "href": "https://www.google.com/maps/dir/?api=1&origin=52.3917%2C13.0664&destination=52.5209%2C13.2957&travelmode=transit&waypoints=52.4033%2C13.0386",
+        "imageLoaded": true
+      }
+    ],
+    "allImagesLoaded": true,
+    "hasStartTourFinish": true,
+    "sectionHeight": 289,
+    "overflowCount": 0,
+    "overflow": []
+  },
+  "mobile": {
+    "viewport": "mobile",
+    "highlightCount": 3,
+    "labels": [
+      {
+        "label": "Start",
+        "title": "Day 1: Arrival day",
+        "action": "Open first route",
+        "href": "https://www.google.com/maps/dir/?api=1&origin=52.521918%2C13.413215&destination=52.5221%2C13.4027&travelmode=walking&waypoints=52.5169%2C13.4017",
+        "imageLoaded": true
+      },
+      {
+        "label": "Tour",
+        "title": "Arrival day 11:30-13:30",
+        "action": "Book or hold spot",
+        "href": "https://www.berlinwalk.com/book",
+        "imageLoaded": true
+      },
+      {
+        "label": "Finish",
+        "title": "Day 7: Day trip or recovery",
+        "action": "Open final route",
+        "href": "https://www.google.com/maps/dir/?api=1&origin=52.3917%2C13.0664&destination=52.5209%2C13.2957&travelmode=transit&waypoints=52.4033%2C13.0386",
+        "imageLoaded": true
+      }
+    ],
+    "allImagesLoaded": true,
+    "hasStartTourFinish": true,
+    "sectionHeight": 728,
+    "overflowCount": 0,
+    "overflow": []
+  }
+}

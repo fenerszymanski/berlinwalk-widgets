@@ -12,6 +12,14 @@ Trip shape:
 
 **${planTitle}**
 
+Plan health:
+
+**${planHealth}**
+
+Your booked-trip checklist:
+
+**${preArrivalChecklist}**
+
 The main prep now:
 
 - Save the World Clock meeting point.
@@ -28,4 +36,3 @@ Your plan works best when the tour gives the first layer, then the rest of the t
 Yusuf  
 BerlinWalk  
 berlinwalk.com · @berlinwalkingtour
-

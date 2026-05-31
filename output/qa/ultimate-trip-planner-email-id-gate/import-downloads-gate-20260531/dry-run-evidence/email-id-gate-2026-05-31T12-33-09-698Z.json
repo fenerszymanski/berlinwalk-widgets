@@ -1,0 +1,28 @@
+{
+  "generatedAt": "2026-05-31T12:33:09.697Z",
+  "write": false,
+  "importDownloads": true,
+  "downloadsDir": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/downloads",
+  "importFrom": "",
+  "idsPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/ids-out/message-ids.local.json",
+  "funnelPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/tripPlannerFunnel.temp.js",
+  "ok": true,
+  "steps": [
+    {
+      "name": "Import message IDs from Downloads",
+      "command": "node ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs --out output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/ids-out/message-ids.local.json --search-dir output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/downloads",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Import Triggered Email IDs From Downloads\nSource: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/downloads/message-ids.local.json\nOutput: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/ids-out/message-ids.local.json\nValid IDs: 10/10\nMissing: 0, invalid: 0, duplicate: 0\n\n- sales.instant: OK\n  TODO_TRIP_PLANNER_INSTANT: URL -> GATE_DOWNLOAD_ID_00\n- sales.minus7: OK\n  TODO_TRIP_PLANNER_MINUS_7: URL -> GATE_DOWNLOAD_ID_01\n- sales.minus3: OK\n  TODO_TRIP_PLANNER_MINUS_3: URL -> GATE_DOWNLOAD_ID_02\n- sales.minus1: OK\n  TODO_TRIP_PLANNER_MINUS_1: URL -> GATE_DOWNLOAD_ID_03\n- sales.dayOf: OK\n  TODO_TRIP_PLANNER_DAY_OF: URL -> GATE_DOWNLOAD_ID_04\n- booked.instant: OK\n  TODO_TRIP_PLANNER_INSTANT_BOOKED: URL -> GATE_DOWNLOAD_ID_05\n- booked.minus7: OK\n  TODO_TRIP_PLANNER_MINUS_7_BOOKED: URL -> GATE_DOWNLOAD_ID_06\n- booked.minus3: OK\n  TODO_TRIP_PLANNER_MINUS_3_BOOKED: URL -> GATE_DOWNLOAD_ID_07\n- booked.minus1: OK\n  TODO_TRIP_PLANNER_MINUS_1_BOOKED: URL -> GATE_DOWNLOAD_ID_08\n- booked.dayOf: OK\n  TODO_TRIP_PLANNER_DAY_OF_BOOKED: URL -> GATE_DOWNLOAD_ID_09\n\nDry run OK. Re-run with --write to import the normalized local JSON file.\n"
+    },
+    {
+      "name": "Validate/apply imported IDs",
+      "command": "",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": true,
+      "output": "Import dry-run succeeded. Re-run with --write to create the local ID file before applying."
+    }
+  ]
+}

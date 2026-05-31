@@ -6,6 +6,14 @@ Preheader: Final meeting point reminder and calm arrival-day logic.
 
 Welcome to Berlin.
 
+Your phone-ready mode:
+
+**${travelMode}**
+
+Your arrival checklist:
+
+**${preArrivalChecklist}**
+
 Keep today simple:
 
 - Get central.

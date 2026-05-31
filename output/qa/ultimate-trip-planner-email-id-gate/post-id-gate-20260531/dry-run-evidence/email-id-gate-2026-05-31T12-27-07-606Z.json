@@ -1,0 +1,34 @@
+{
+  "generatedAt": "2026-05-31T12:27:07.606Z",
+  "write": false,
+  "importDownloads": false,
+  "idsPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json",
+  "funnelPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js",
+  "ok": true,
+  "steps": [
+    {
+      "name": "Validate message IDs",
+      "command": "node ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs --ids output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json --funnel output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Triggered Email ID Progress\nIDs file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json\nFunnel file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js\nIDs file exists: yes\nValid IDs: 10/10\nMissing: 0, invalid: 0, duplicate: 0\nApplied in Velo: 0/10\n\n- sales.instant   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_INSTANT\n  html: e0-instant-plan.html\n  id: GATE_FAKE_ID_00\n- sales.minus7    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_7\n  html: e1-seven-days-before.html\n  id: GATE_FAKE_ID_01\n- sales.minus3    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_3\n  html: e2-three-days-before.html\n  id: GATE_FAKE_ID_02\n- sales.minus1    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_1\n  html: e3-one-day-before.html\n  id: GATE_FAKE_ID_03\n- sales.dayOf     VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_DAY_OF\n  html: e4-arrival-day.html\n  id: GATE_FAKE_ID_04\n- booked.instant  VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_INSTANT_BOOKED\n  html: booked-e0-instant-plan.html\n  id: GATE_FAKE_ID_05\n- booked.minus7   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_7_BOOKED\n  html: booked-e1-seven-days-before.html\n  id: GATE_FAKE_ID_06\n- booked.minus3   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_3_BOOKED\n  html: booked-e2-three-days-before.html\n  id: GATE_FAKE_ID_07\n- booked.minus1   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_1_BOOKED\n  html: booked-e3-one-day-before.html\n  id: GATE_FAKE_ID_08\n- booked.dayOf    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_DAY_OF_BOOKED\n  html: booked-e4-arrival-day.html\n  id: GATE_FAKE_ID_09\n\nOK: all 10 IDs are valid. Next dry-run apply-triggered-email-ids.mjs, then run with --write.\n"
+    },
+    {
+      "name": "Dry-run message ID apply",
+      "command": "node ultimate-berlin-trip-planner/velo/apply-triggered-email-ids.mjs --ids output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json --funnel output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "DRY RUN: 10 Triggered Email IDs validated.\n- sales.instant: TODO_TRIP_PLANNER_INSTANT -> GATE_FAKE_ID_00\n- sales.minus7: TODO_TRIP_PLANNER_MINUS_7 -> GATE_FAKE_ID_01\n- sales.minus3: TODO_TRIP_PLANNER_MINUS_3 -> GATE_FAKE_ID_02\n- sales.minus1: TODO_TRIP_PLANNER_MINUS_1 -> GATE_FAKE_ID_03\n- sales.dayOf: TODO_TRIP_PLANNER_DAY_OF -> GATE_FAKE_ID_04\n- booked.instant: TODO_TRIP_PLANNER_INSTANT_BOOKED -> GATE_FAKE_ID_05\n- booked.minus7: TODO_TRIP_PLANNER_MINUS_7_BOOKED -> GATE_FAKE_ID_06\n- booked.minus3: TODO_TRIP_PLANNER_MINUS_3_BOOKED -> GATE_FAKE_ID_07\n- booked.minus1: TODO_TRIP_PLANNER_MINUS_1_BOOKED -> GATE_FAKE_ID_08\n- booked.dayOf: TODO_TRIP_PLANNER_DAY_OF_BOOKED -> GATE_FAKE_ID_09\n\nNo files changed. Re-run with --write to update tripPlannerFunnel.js.\n"
+    },
+    {
+      "name": "Post-apply launch checks",
+      "command": "",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": true,
+      "output": "Dry-run mode stops before mutating tripPlannerFunnel.js."
+    }
+  ]
+}

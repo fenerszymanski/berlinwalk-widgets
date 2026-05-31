@@ -1,0 +1,14 @@
+BLOCK Validate message IDs
+Triggered Email ID Progress
+IDs file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/duplicate/message-ids.local.json
+Funnel file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/duplicate/tripPlannerFunnel.temp.js
+IDs file exists: yes
+Valid IDs: 8/10
+Missing: 0, invalid: 0, duplicate: 2
+Applied in Velo: 0/10
+
+
+Mode: WRITE
+Ready for next launch step: NO
+Evidence: output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/duplicate/evidence/email-id-gate-2026-05-31T12-27-22-905Z.json
+Next: fix the first BLOCK above, then re-run this gate.

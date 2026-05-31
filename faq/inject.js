@@ -2003,7 +2003,7 @@
         "name": "Is the Ultimate Berlin Trip Planner free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. The planner is free to use. It gives you a preview immediately, then unlocks the full day-by-day plan, PDF, print view, and arrival tips after email consent."
+          "text": "Yes. The planner is free to use. It gives you a preview immediately, then unlocks the full day-by-day plan, visual route overview, Google Maps anchors, PDF, print view, Berlin essentials, and arrival tips after email consent."
         }
       },
       {

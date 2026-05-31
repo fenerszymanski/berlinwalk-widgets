@@ -616,6 +616,11 @@
         return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
       }
 
+      function isVisibleTool(tool) {
+        var status = String((tool && tool.status) || '').toLowerCase();
+        return Boolean(tool && tool.widgetUrl && tool.hidden !== true && tool.published !== false && status !== 'draft');
+      }
+
       // Wrapper-only themes for the embed snippet. The iframe content keeps
       // the widget's own design; only the surrounding <aside> (background,
       // heading, body text, link colors) changes. Each theme is built from
@@ -862,7 +867,7 @@
         navInner.appendChild(el('span', 'category-nav-label', 'Jump to:'));
         data.categories.forEach(function (category) {
           var count = data.tools.filter(function (t) {
-            return t.category === category.key && t.widgetUrl;
+            return t.category === category.key && isVisibleTool(t);
           }).length;
           if (!count) return;
           var pill = el('a', 'category-pill');
@@ -882,7 +887,7 @@
         // Category sections
         data.categories.forEach(function (category) {
           var tools = data.tools.filter(function (t) {
-            return t.category === category.key && t.widgetUrl;
+            return t.category === category.key && isVisibleTool(t);
           });
           if (!tools.length) return;
 

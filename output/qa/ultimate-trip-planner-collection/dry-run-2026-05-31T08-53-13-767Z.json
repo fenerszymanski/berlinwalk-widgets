@@ -1,0 +1,355 @@
+{
+  "mode": "dry-run",
+  "generatedAt": "2026-05-31T08:53:13.766Z",
+  "collectionId": "TripPlannerLeads",
+  "plannedFieldCount": 65,
+  "permissions": {
+    "insert": "ADMIN",
+    "update": "ADMIN",
+    "remove": "ADMIN",
+    "read": "ADMIN"
+  },
+  "created": false,
+  "existing": null,
+  "verification": null,
+  "planned": {
+    "collection": {
+      "id": "TripPlannerLeads",
+      "displayName": "Trip Planner Leads",
+      "displayField": "email",
+      "fields": [
+        {
+          "key": "leadKey",
+          "displayName": "Lead Key",
+          "type": "TEXT"
+        },
+        {
+          "key": "email",
+          "displayName": "Email",
+          "type": "TEXT"
+        },
+        {
+          "key": "contactId",
+          "displayName": "Contact ID",
+          "type": "TEXT"
+        },
+        {
+          "key": "arrivalDate",
+          "displayName": "Arrival Date",
+          "type": "TEXT"
+        },
+        {
+          "key": "tripLength",
+          "displayName": "Trip Length",
+          "type": "NUMBER"
+        },
+        {
+          "key": "arrivalTime",
+          "displayName": "Arrival Time",
+          "type": "TEXT"
+        },
+        {
+          "key": "arrivalPoint",
+          "displayName": "Arrival Point",
+          "type": "TEXT"
+        },
+        {
+          "key": "stayArea",
+          "displayName": "Stay Area",
+          "type": "TEXT"
+        },
+        {
+          "key": "groupType",
+          "displayName": "Group Type",
+          "type": "TEXT"
+        },
+        {
+          "key": "firstTime",
+          "displayName": "First Time Status",
+          "type": "TEXT"
+        },
+        {
+          "key": "interests",
+          "displayName": "Interests",
+          "type": "TEXT"
+        },
+        {
+          "key": "budgetStyle",
+          "displayName": "Budget Style",
+          "type": "TEXT"
+        },
+        {
+          "key": "mustHandle",
+          "displayName": "Must Handle",
+          "type": "TEXT"
+        },
+        {
+          "key": "pace",
+          "displayName": "Pace",
+          "type": "TEXT"
+        },
+        {
+          "key": "tourIntent",
+          "displayName": "Tour Intent",
+          "type": "TEXT"
+        },
+        {
+          "key": "planTitle",
+          "displayName": "Plan Title",
+          "type": "TEXT"
+        },
+        {
+          "key": "recommendedTourDay",
+          "displayName": "Recommended Tour Day",
+          "type": "TEXT"
+        },
+        {
+          "key": "recommendedTourDate",
+          "displayName": "Recommended Tour Date",
+          "type": "TEXT"
+        },
+        {
+          "key": "recommendedTourTime",
+          "displayName": "Recommended Tour Time",
+          "type": "TEXT"
+        },
+        {
+          "key": "meetingPointUrl",
+          "displayName": "Meeting Point URL",
+          "type": "TEXT"
+        },
+        {
+          "key": "ticket",
+          "displayName": "Ticket Note",
+          "type": "TEXT"
+        },
+        {
+          "key": "weatherTitle",
+          "displayName": "Weather Title",
+          "type": "TEXT"
+        },
+        {
+          "key": "travelMode",
+          "displayName": "Travel Mode",
+          "type": "TEXT"
+        },
+        {
+          "key": "planHealth",
+          "displayName": "Plan Health",
+          "type": "TEXT"
+        },
+        {
+          "key": "preArrivalChecklist",
+          "displayName": "Pre-arrival Checklist",
+          "type": "TEXT"
+        },
+        {
+          "key": "baseBrief",
+          "displayName": "Base Brief",
+          "type": "TEXT"
+        },
+        {
+          "key": "budgetPulse",
+          "displayName": "Budget Pulse",
+          "type": "TEXT"
+        },
+        {
+          "key": "interestLens",
+          "displayName": "Interest Lens",
+          "type": "TEXT"
+        },
+        {
+          "key": "paceGuard",
+          "displayName": "Pace Guard",
+          "type": "TEXT"
+        },
+        {
+          "key": "weatherStrategy",
+          "displayName": "Weather Strategy",
+          "type": "TEXT"
+        },
+        {
+          "key": "carryPack",
+          "displayName": "Carry Pack",
+          "type": "TEXT"
+        },
+        {
+          "key": "reservationRadar",
+          "displayName": "Reservation Radar",
+          "type": "TEXT"
+        },
+        {
+          "key": "planAdvice",
+          "displayName": "Plan Advice",
+          "type": "TEXT"
+        },
+        {
+          "key": "planSwaps",
+          "displayName": "Plan Swaps",
+          "type": "TEXT"
+        },
+        {
+          "key": "dayRhythm",
+          "displayName": "Day Rhythm",
+          "type": "TEXT"
+        },
+        {
+          "key": "dayIntelligence",
+          "displayName": "Day Intelligence",
+          "type": "TEXT"
+        },
+        {
+          "key": "dayOperations",
+          "displayName": "Day Operations",
+          "type": "TEXT"
+        },
+        {
+          "key": "arrivalWindow",
+          "displayName": "Arrival Window",
+          "type": "TEXT"
+        },
+        {
+          "key": "tripRisk",
+          "displayName": "Trip Risk",
+          "type": "TEXT"
+        },
+        {
+          "key": "tourRecommendation",
+          "displayName": "Tour Recommendation",
+          "type": "TEXT"
+        },
+        {
+          "key": "intentStage",
+          "displayName": "Intent Stage",
+          "type": "TEXT"
+        },
+        {
+          "key": "familyOrSlow",
+          "displayName": "Family Or Slow",
+          "type": "TEXT"
+        },
+        {
+          "key": "bookAheadNeeded",
+          "displayName": "Book Ahead Needed",
+          "type": "TEXT"
+        },
+        {
+          "key": "conversionSignal",
+          "displayName": "Conversion Signal",
+          "type": "TEXT"
+        },
+        {
+          "key": "source",
+          "displayName": "Source",
+          "type": "TEXT"
+        },
+        {
+          "key": "page",
+          "displayName": "Page URL",
+          "type": "TEXT"
+        },
+        {
+          "key": "consent",
+          "displayName": "Consent",
+          "type": "BOOLEAN"
+        },
+        {
+          "key": "createdAt",
+          "displayName": "Created At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "lastSignupAt",
+          "displayName": "Last Signup At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "updatedAt",
+          "displayName": "Updated At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "sentInstantAt",
+          "displayName": "Sent Instant At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "sentMinus7At",
+          "displayName": "Sent Minus 7 At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "sentMinus3At",
+          "displayName": "Sent Minus 3 At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "sentMinus1At",
+          "displayName": "Sent Minus 1 At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "sentDayOfAt",
+          "displayName": "Sent Day Of At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "instantError",
+          "displayName": "Instant Error",
+          "type": "TEXT"
+        },
+        {
+          "key": "minus7Error",
+          "displayName": "Minus 7 Error",
+          "type": "TEXT"
+        },
+        {
+          "key": "minus3Error",
+          "displayName": "Minus 3 Error",
+          "type": "TEXT"
+        },
+        {
+          "key": "minus1Error",
+          "displayName": "Minus 1 Error",
+          "type": "TEXT"
+        },
+        {
+          "key": "dayOfError",
+          "displayName": "Day Of Error",
+          "type": "TEXT"
+        },
+        {
+          "key": "bookedAt",
+          "displayName": "Booked At",
+          "type": "DATETIME"
+        },
+        {
+          "key": "bookingId",
+          "displayName": "Booking ID",
+          "type": "TEXT"
+        },
+        {
+          "key": "tourDate",
+          "displayName": "Tour Date",
+          "type": "TEXT"
+        },
+        {
+          "key": "bookingStatus",
+          "displayName": "Booking Status",
+          "type": "TEXT"
+        },
+        {
+          "key": "bookingSource",
+          "displayName": "Booking Source",
+          "type": "TEXT"
+        }
+      ],
+      "permissions": {
+        "insert": "ADMIN",
+        "update": "ADMIN",
+        "remove": "ADMIN",
+        "read": "ADMIN"
+      }
+    }
+  }
+}

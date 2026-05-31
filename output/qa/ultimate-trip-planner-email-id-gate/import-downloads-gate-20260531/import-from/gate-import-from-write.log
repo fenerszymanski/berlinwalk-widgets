@@ -1,0 +1,11 @@
+OK Import message IDs from Downloads
+OK Validate message IDs
+OK Apply message IDs
+OK Verify IDs are applied
+SKIP Real launch regeneration
+Temp funnel QA mode stops before regenerating launch artifacts or reading the real Velo source.
+
+Mode: WRITE
+Ready for next launch step: YES
+Evidence: output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/import-from/evidence/email-id-gate-2026-05-31T12-33-38-536Z.json
+Next: paste/publish the Velo source in Wix, then run live smoke.

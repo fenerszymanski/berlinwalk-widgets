@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&qaUnlock=1&weather=off&v=dayclose-final-pdf-20260531",
+  "status": "PDF downloaded.",
+  "qa": {
+    "fullDays": 7,
+    "closeCount": 7,
+    "duplicatedCloseInReels": 0,
+    "firstReelSteps": 2,
+    "overflowCount": 0,
+    "pdfDisabled": false
+  },
+  "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/day-close-20260531/day-close-7day-sales.pdf",
+  "bytes": 2619185
+}

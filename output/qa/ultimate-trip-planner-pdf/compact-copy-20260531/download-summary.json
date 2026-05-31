@@ -1,0 +1,16 @@
+[
+  {
+    "label": "compact-3day-sales",
+    "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=3&weather=off&qaUnlock=1&resetUnlock=1&v=compact-pdf-3day-sales",
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/compact-copy-20260531/compact-3day-sales.pdf",
+    "bytes": 2313126,
+    "maxVisibleDayCopy": 87
+  },
+  {
+    "label": "compact-7day-booked",
+    "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&qaUnlock=1&resetUnlock=1&tourIntent=booked&v=compact-pdf-7day-booked",
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/compact-copy-20260531/compact-7day-booked.pdf",
+    "bytes": 2606790,
+    "maxVisibleDayCopy": 87
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/timebox-20260531/timebox-3day-sales.pdf",
+    "bytes": 2305245,
+    "pages": 9,
+    "contactSheet": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/timebox-20260531/timebox-3day-sales-contact-sheet.png",
+    "pagePngDir": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/timebox-20260531/timebox-3day-sales-pages",
+    "textChecks": {
+      "has_logo_text_or_brand": true,
+      "has_timebox": true,
+      "has_essentials": true,
+      "stale_local_cue_absent": true,
+      "booked_branch_clean": true
+    },
+    "textSample": "LOCAL ARRIVAL-AWARE PLANNER\nUltimate Berlin Trip Plan\nMon, 1 Jun 2026 | 3 days | Mitte / Alexanderplatz\nA BerlinWalk plan built around geography, weather, opening-day rules, and the best tour slot.\nBuild Berlin around the first real orientation day\nThis plan keeps Berlin area-by-area instead of sending you across the city all day. Start with context early, then use the rest of\nthe trip for Wall history, museums, food, neighborhoods, and slower backup time.\nRoute snapshots\nThe plan uses real Berlin anchors, not a generic itinerary wall of text.\nD1 Arrival setup\n D2 Museum core\n D3 Wall route\nBERLIN TRIP PASS\nBW-260601-3D-MIT\nOpen overview map\nARRIVAL\nMon, 1 Jun 2026\nBASE\nMitte / Alexanderplatz\nTOUR\nArrival day 11:30-13:30\nD1 D2 D3\nPhone carry pack\nExact link, map, tour anchor, and PDF backu"
+  },
+  {
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/timebox-20260531/timebox-7day-booked.pdf",
+    "bytes": 2599061,
+    "pages": 14,
+    "contactSheet": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/timebox-20260531/timebox-7day-booked-contact-sheet.png",
+    "pagePngDir": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/timebox-20260531/timebox-7day-booked-pages",
+    "textChecks": {
+      "has_logo_text_or_brand": true,
+      "has_timebox": true,
+      "has_essentials": true,
+      "stale_local_cue_absent": true,
+      "booked_branch_clean": true
+    },
+    "textSample": "LOCAL ARRIVAL-AWARE PLANNER\nUltimate Berlin Trip Plan\nMon, 1 Jun 2026 | 7 days | Mitte / Alexanderplatz\nA BerlinWalk plan built around geography, weather, opening-day rules, and the best tour slot.\nBuild Berlin around the first real orientation day\nThis plan keeps Berlin area-by-area instead of sending you across the city all day. Start with context early, then use the rest of\nthe trip for Wall history, museums, food, neighborhoods, and slower backup time.\nRoute snapshots\nThe plan uses real Berlin anchors, not a generic itinerary wall of text.\nD1 Arrival setup\n D2 Museum core\n D3 Wall route\n D4 Food neighborho\nBERLIN TRIP PASS\nBW-260601-7D-MIT\nOpen overview map\nARRIVAL\nMon, 1 Jun 2026\nBASE\nMitte / Alexanderplatz\nTOUR\nTour booked\nD1 D2 D3 D4 D5 D6 D7\nPhone carry pack\nExact link, map, tour a"
+  }
+]

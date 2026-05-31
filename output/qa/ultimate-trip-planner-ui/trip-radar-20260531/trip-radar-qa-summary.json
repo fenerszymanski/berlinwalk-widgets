@@ -1,0 +1,59 @@
+[
+  {
+    "case": "desktop-locked-3day",
+    "metrics": {
+      "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=3&weather=off&v=trip-radar-desktop-final",
+      "visible": true,
+      "cards": 3,
+      "links": 3,
+      "actions": [
+        "rgb(245, 166, 35)",
+        "rgb(47, 128, 237)",
+        "rgb(124, 179, 66)"
+      ],
+      "fullHidden": true,
+      "leadHidden": false,
+      "overflow": 0,
+      "text": "Trip radarScore, tour anchor, opening risk, and the next useful move.Live plan75/100Plan scoreGood, with watch-outsTour anchorArrival day 11:30-13:30Best tour fitBook / holdOpening watchMonday cautionWeather-aware planCheck rhythmNext moveBook or hold the tourBefore arrivalBook the tour"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/trip-radar-20260531/desktop-locked-3day.png"
+  },
+  {
+    "case": "mobile-locked-7day",
+    "metrics": {
+      "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&v=trip-radar-mobile-final",
+      "visible": true,
+      "cards": 3,
+      "links": 3,
+      "actions": [
+        "rgb(245, 166, 35)",
+        "rgb(47, 128, 237)",
+        "rgb(124, 179, 66)"
+      ],
+      "fullHidden": true,
+      "leadHidden": false,
+      "overflow": 0,
+      "text": "Trip radarScore, tour anchor, opening risk, and the next useful move.Live plan67/100Plan scoreNeeds two checksTour anchorArrival day 11:30-13:30Best tour fitBook / holdOpening watchDay 7 shop rulesWeather-aware planCheck rhythmNext moveBook or hold the tourBefore arrivalBook the tour"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/trip-radar-20260531/mobile-locked-7day.png"
+  },
+  {
+    "case": "mobile-unlocked-7day",
+    "metrics": {
+      "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&qaUnlock=1&v=trip-radar-unlocked-final",
+      "visible": true,
+      "cards": 3,
+      "links": 3,
+      "actions": [
+        "rgb(245, 166, 35)",
+        "rgb(47, 128, 237)",
+        "rgb(124, 179, 66)"
+      ],
+      "fullHidden": false,
+      "leadHidden": true,
+      "overflow": 0,
+      "text": "Trip radarScore, tour anchor, opening risk, and the next useful move.Live plan67/100Plan scoreNeeds two checksTour anchorArrival day 11:30-13:30Best tour fitBook / holdOpening watchDay 7 shop rulesWeather-aware planCheck rhythmNext moveBook or hold the tourBefore arrivalBook the tour"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/trip-radar-20260531/mobile-unlocked-7day.png"
+  }
+]

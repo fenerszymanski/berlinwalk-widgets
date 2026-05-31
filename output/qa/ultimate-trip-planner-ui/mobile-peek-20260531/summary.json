@@ -1,0 +1,28 @@
+{
+  "mobile": {
+    "width": 390,
+    "height": 1700,
+    "peekDisplay": "grid",
+    "peekHeight": 378,
+    "formTop": 1013,
+    "resultTop": 3400,
+    "actionCount": 3,
+    "dayCount": 3,
+    "imageLoaded": true,
+    "overflow": 0,
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/mobile-peek-20260531/mobile-peek-compact.png"
+  },
+  "desktop": {
+    "width": 1440,
+    "height": 1400,
+    "peekDisplay": "none",
+    "peekHeight": 0,
+    "formTop": 225,
+    "resultTop": 225,
+    "actionCount": 0,
+    "dayCount": 0,
+    "imageLoaded": false,
+    "overflow": 0,
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/mobile-peek-20260531/desktop-peek-hidden.png"
+  }
+}

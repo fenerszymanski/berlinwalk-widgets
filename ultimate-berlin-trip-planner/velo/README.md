@@ -7,6 +7,34 @@ Source handoff for the widget lead gate and booking-aware arrival sequence.
 - `http-functions.js` - merge into live Wix `Backend/http-functions.js`.
 - `tripPlannerFunnel.js` - add as `Backend/tripPlannerFunnel.js`.
 - `jobs.config` - merge into backend scheduled jobs config.
+- `build-velo-install-kit.mjs` - regenerates the local copy/paste install kit.
+- `install-kit.html` - local admin page with copy buttons for the Velo paste
+  points.
+
+Regenerate the local install kit after changing Velo source:
+
+```bash
+node ultimate-berlin-trip-planner/velo/build-velo-install-kit.mjs
+```
+
+Then open:
+
+```text
+ultimate-berlin-trip-planner/velo/install-kit.html
+```
+
+Before pasting Velo into Wix after the 10 Triggered Email IDs are applied, run
+the one-command gate:
+
+```bash
+source ../scripts/load-api-keys.sh
+node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs
+```
+
+It writes evidence under `output/qa/ultimate-trip-planner-prepublish-gate/` and
+exits non-zero until IDs are valid/applied, no `TODO_TRIP_PLANNER_*`
+placeholders remain, the endpoint/scheduler source is present, booked emails
+fail closed, and the live `TripPlannerLeads` critical fields pass.
 
 ## Endpoints
 
@@ -41,6 +69,86 @@ with at least:
 If `arrivalDate` is included, only that lead row is updated. Without it, all
 matching rows for the email are marked booked.
 
+After the backend is published and the Triggered Email IDs are real, use the
+dry-run-first smoke helper:
+
+```bash
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --email you@example.com
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --booking
+```
+
+The first command writes the exact lead/booking payloads without touching Wix.
+The live commands call `/_functions/tripPlannerLead` and, with `--booking`,
+`/_functions/tripPlannerBooking`, then save the response JSON under
+`output/qa/ultimate-trip-planner-live-smoke/`.
+
+## Email Sequence Simulator
+
+Before publishing or changing scheduler logic, use the dry-run-only simulator to
+inspect the exact 7/3/1/day-of timeline, same-day signup skips, booked-vs-sales
+branch, and the arrival-day before-18:00 rule. It does not call Wix or send
+email.
+
+```bash
+node ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs --arrival 2026-06-12 --signup 2026-06-01
+node ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs --arrival 2026-06-12 --job-date 2026-06-09 --hour 10
+node ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs --arrival 2026-06-12 --signup 2026-06-01 --booked
+```
+
+Results are written under
+`output/qa/ultimate-trip-planner-email-sequence/`.
+
+## Lead Report
+
+After launch, use the read-only lead report to see whether the planner is
+creating hot/warm/booked/researching segments, which trip styles are converting,
+which arrivals are inside the next 7 days, and whether any email stages have
+errors. It masks emails by default and includes a stable `emailHash`.
+
+```bash
+node ultimate-berlin-trip-planner/velo/report-trip-planner-leads.mjs
+source ../scripts/load-api-keys.sh
+node ultimate-berlin-trip-planner/velo/report-trip-planner-leads.mjs --live --limit 200
+```
+
+Use `--include-emails` only when you need the raw address for operational
+follow-up. Live mode is read-only and writes evidence under
+`output/qa/ultimate-trip-planner-lead-report/`.
+
+## Local Booking-Aware Fixture
+
+Before touching live Wix, run the local fixture to verify sales leads, booked
+leads, cancelled bookings, missing booked-path IDs, and booking-event scoping:
+
+```bash
+node ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs
+```
+
+The fixture mocks Wix Data, Contacts, and Triggered Emails locally. It writes a
+JSON result under `output/qa/ultimate-trip-planner-velo/` and exits non-zero if
+a booked lead could fall back to a sales email.
+
+## Collection Setup Script
+
+The collection can be prepared through the Wix Data Collections API after
+loading `WIX_API_KEY` from Keychain:
+
+```bash
+source ../scripts/load-api-keys.sh
+node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs
+node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live
+node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live --sync-fields
+```
+
+The script is dry-run by default. Live mode creates `TripPlannerLeads` only if
+it is missing, then verifies the expected field keys and types. Add
+`--sync-fields` only when the collection already exists and the helper reports
+missing fields; it creates those missing field definitions through Wix Data
+`create-field`, then verifies again. The helper still keeps a `patch-field`
+fallback function available for future existing-field edits, but missing-field
+sync must use `create-field`.
+
 ## Wix Data Collection
 
 Create a Wix Data collection with ID:
@@ -70,10 +178,40 @@ Fields:
 | `mustHandle` | Text | Comma-separated user-facing labels |
 | `pace` | Text | User-facing label |
 | `tourIntent` | Text | User-facing label |
+| `tripStyle` | Text | Visual preset label or `Custom mix` |
 | `planTitle` | Text | Result title |
 | `recommendedTourDay` | Text | Tour-fit recommendation |
+| `recommendedTourDate` | Text | Suggested BerlinWalk tour calendar-hold date, `YYYY-MM-DD` when known |
+| `recommendedTourTime` | Text | Suggested tour time window, normally `11:30-13:30` |
+| `meetingPointUrl` | Text | Google Maps URL for the World Clock meeting point |
 | `ticket` | Text | Ticket chip |
 | `weatherTitle` | Text | Weather summary title |
+| `travelMode` | Text | Near-arrival Now / Next / Later summary |
+| `planHealth` | Text | BerlinWalk plan health score/check summary |
+| `preArrivalChecklist` | Text | Pre-arrival action checklist summary |
+| `baseBrief` | Text | Stay-area base camp summary |
+| `budgetPulse` | Text | Trip spend/ticket/cash summary |
+| `interestLens` | Text | Interest-to-day/anchor summary |
+| `paceGuard` | Text | Pace/group realism guardrail summary |
+| `weatherStrategy` | Text | Weather/opening-day strategy summary |
+| `carryPack` | Text | Phone-ready exact link / map / tour / PDF action summary |
+| `reservationRadar` | Text | Book/check actions that can change the trip |
+| `planAdvice` | Text | Smart Fixes / trip review summary |
+| `planSwaps` | Text | Smart Swaps / day-level move summary |
+| `dayRhythm` | Text | Day-by-day load / move / buffer / night summary |
+| `dayIntelligence` | Text | Day-by-day Route / Energy / Spend / Check summary |
+| `dayOperations` | Text | Day-by-day timing windows plus start / transit / reserve / backup summary |
+| `arrivalWindow` | Text | `today`, `tomorrow`, `near_forecast`, or `future_planning` |
+| `tripRisk` | Text | `low`, `medium`, or `high` |
+| `tourRecommendation` | Text | Primary CTA/tour recommendation label |
+| `intentStage` | Text | `booked`, `researching`, or `sales_ready` |
+| `familyOrSlow` | Text | `yes` or `no` |
+| `bookAheadNeeded` | Text | `yes` or `no` |
+| `conversionSignal` | Text | Compact tour-readiness score and next best action |
+| `conversionScore` | Number | Machine-readable 0-100 conversion/prep score |
+| `conversionTier` | Text | `hot_tour_lead`, `warm_tour_lead`, `researching`, or `booked_prep` |
+| `conversionNextAction` | Text | Machine-readable next best action summary |
+| `conversionReasons` | Text | Comma-separated score reasons |
 | `source` | Text | `tool`, `blog`, or other context |
 | `page` | Text | Calling page URL |
 | `consent` | Boolean | Must be true |
@@ -98,8 +236,46 @@ Fields:
 
 ## Triggered Emails
 
-Create these Wix Triggered Email templates manually, then replace placeholders in
-`tripPlannerFunnel.js`:
+Create these Wix Triggered Email templates manually from
+`../email/paste-ready/`, then replace placeholders in `tripPlannerFunnel.js`.
+Regenerate the paste-ready package after copy changes with:
+
+```bash
+node ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs
+```
+
+When the 10 Wix templates exist, put the message IDs or Wix editor URLs into a
+local JSON file shaped like `../email/paste-ready/message-ids.template.json`,
+then validate/apply them with:
+
+```bash
+node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads
+source ../scripts/load-api-keys.sh
+node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads --write
+node ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs
+node ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs --write
+node ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json
+node ultimate-berlin-trip-planner/velo/apply-triggered-email-ids.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json
+node ultimate-berlin-trip-planner/velo/apply-triggered-email-ids.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json --write
+node ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json --require-applied
+```
+
+The import helper is optional but useful when the copy kit downloads
+`message-ids.local.json` to `~/Downloads`; it dry-runs first, normalizes Wix
+editor URLs to message IDs, and backs up any previous local ID file before
+writing.
+
+The gate runner is the preferred fast path after the 10 IDs exist. It dry-runs
+first, then with `--write` imports/applies IDs, verifies the replacement,
+regenerates local launch artifacts, runs `prepublish-gate.mjs`, and runs the
+launch audit. If the downloaded JSON is not in `~/Downloads`, pass
+`--import-from /path/to/message-ids.local.json` or
+`--downloads-dir /path/to/download-folder`.
+
+The check helper is read-only. Use it while filling the local JSON file to catch
+missing, placeholder, duplicate, or not-yet-applied IDs before publishing Velo.
+The `--write` apply step creates a timestamped local backup under
+`output/qa/ultimate-trip-planner-email-id-apply/` before replacing placeholders.
 
 Sales path:
 
@@ -124,6 +300,11 @@ TODO_TRIP_PLANNER_DAY_OF_BOOKED
 If a booked-path ID is missing, that booked-path stage is skipped rather than
 sending a sales email.
 
+Booked leads fail closed: the backend never falls back to a sales-path message
+ID for a booked lead. If a booking marker later carries `bookingStatus` such as
+`cancelled`, `canceled`, `refunded`, `declined`, `no_show`, or `no-show`, that
+status overrides any earlier `bookedAt` value for future email branch selection.
+
 Available variables:
 
 - `${stage}`
@@ -132,8 +313,36 @@ Available variables:
 - `${tripLength}`
 - `${planTitle}`
 - `${recommendedTourDay}`
+- `${recommendedTourDate}`
+- `${recommendedTourTime}`
 - `${ticket}`
 - `${weatherTitle}`
+- `${travelMode}`
+- `${planHealth}`
+- `${preArrivalChecklist}`
+- `${baseBrief}`
+- `${budgetPulse}`
+- `${interestLens}`
+- `${paceGuard}`
+- `${weatherStrategy}`
+- `${carryPack}`
+- `${reservationRadar}`
+- `${planAdvice}`
+- `${planSwaps}`
+- `${dayRhythm}`
+- `${dayIntelligence}`
+- `${dayOperations}` - daily timing windows plus start / transit / reserve / backup notes
+- `${arrivalWindow}`
+- `${tripRisk}`
+- `${tourRecommendation}`
+- `${intentStage}`
+- `${familyOrSlow}`
+- `${bookAheadNeeded}`
+- `${conversionSignal}`
+- `${conversionScore}`
+- `${conversionTier}`
+- `${conversionNextAction}`
+- `${conversionReasons}`
 - `${arrivalTime}`
 - `${arrivalPoint}`
 - `${stayArea}`
@@ -143,6 +352,7 @@ Available variables:
 - `${mustHandle}`
 - `${pace}`
 - `${tourIntent}`
+- `${tripStyle}`
 - `${bookingStatus}`
 - `${tourDate}`
 - `${bookingUrl}`
@@ -155,7 +365,8 @@ Available variables:
 ## Schedule
 
 `jobs.config` runs the funnel once per hour. Wix cron is UTC; the backend
-calculates due dates in Berlin time.
+calculates due dates in Berlin time. The processor pages through all due
+candidates in 100-row batches instead of only checking the first query page.
 
 Email stages:
 
@@ -166,6 +377,11 @@ Email stages:
 - arrival day: welcome, final booking or booked-guest prep.
 
 The day-of email is skipped after 18:00 Berlin time.
+
+Scheduled reminder stages are also skipped on the same Berlin calendar date as
+the latest signup/update. This prevents a lead who unlocks the planner exactly
+7 days, 3 days, 1 day, or the morning of arrival from receiving the instant plan
+and the scheduled reminder on the same day.
 
 ## Deployment checklist
 

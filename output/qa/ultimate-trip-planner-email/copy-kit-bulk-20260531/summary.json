@@ -1,0 +1,44 @@
+[
+  {
+    "scenario": "desktop-bulk",
+    "summary": {
+      "bulkPanel": true,
+      "allFilled": true,
+      "jsonKeys": 10,
+      "firstJsonValue": "ultimate-msg-01",
+      "lastJsonValue": "ultimate-msg-10",
+      "idCount": "10/10",
+      "health": "All ten IDs are valid. Download message-ids.local.json and run the checker.",
+      "status": "Applied 10 bulk ID(s) from 10 pasted line(s).",
+      "overflow": 0,
+      "bad": []
+    },
+    "errors": []
+  },
+  {
+    "scenario": "mobile-bulk",
+    "summary": {
+      "bulkPanel": true,
+      "allFilled": true,
+      "jsonKeys": 10,
+      "firstJsonValue": "ultimate-msg-01",
+      "lastJsonValue": "ultimate-msg-10",
+      "idCount": "10/10",
+      "health": "All ten IDs are valid. Download message-ids.local.json and run the checker.",
+      "status": "Applied 10 bulk ID(s) from 10 pasted line(s).",
+      "overflow": 0,
+      "bad": []
+    },
+    "errors": []
+  },
+  {
+    "scenario": "duplicate-detection",
+    "summary": {
+      "idCount": "0/10",
+      "issueCount": 10,
+      "health": "10 ID issue(s): TODO_TRIP_PLANNER_INSTANT, TODO_TRIP_PLANNER_MINUS_7, TODO_TRIP_PLANNER_MINUS_3, TODO_TRIP_PLANNER_MINUS_1, TODO_TRIP_PLANNER_DAY_OF, TODO_TRIP_PLANNER_INSTANT_BOOKED, TODO_TRIP_PLANNER_MINUS_7_BOOKED, TODO_TRIP_PLANNER_MINUS_3_BOOKED, TODO_TRIP_PLANNER_MINUS_1_BOOKED, TODO_TRIP_PLANNER_DAY_OF_BOOKED",
+      "firstStatus": "duplicate ID shared by TODO_TRIP_PLANNER_INSTANT, TODO_TRIP_PLANNER_MINUS_7, TODO_TRIP_PLANNER_MINUS_3, TODO_TRIP_PLANNER_MINUS_1, TODO_TRIP_PLANNER_DAY_OF, TODO_TRIP_PLANNER_INSTANT_BOOKED, TODO_TRIP_PLANNER_MINUS_7_BOOKED, TODO_TRIP_PLANNER_MINUS_3_BOOKED, TODO_TRIP_PLANNER_MINUS_1_BOOKED, TODO_TRIP_PLANNER_DAY_OF_BOOKED"
+    },
+    "errors": []
+  }
+]

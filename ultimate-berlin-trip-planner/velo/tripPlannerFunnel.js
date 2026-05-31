@@ -5,6 +5,7 @@ const COLLECTION = 'TripPlannerLeads';
 const CONTACT_LABEL = 'Ultimate Berlin Trip Planner Lead';
 const TIMEZONE = 'Europe/Berlin';
 const BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
+const DUE_QUERY_PAGE_SIZE = 100;
 
 const STAGES = [
   {
@@ -63,8 +64,8 @@ function validEmail(value) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizeEmail(value));
 }
 
-function cleanText(value, fallback = '') {
-  return String(value == null ? fallback : value).trim().slice(0, 800);
+function cleanText(value, fallback = '', maxLength = 800) {
+  return String(value == null ? fallback : value).trim().slice(0, maxLength);
 }
 
 function cleanNumber(value, fallback, min, max) {
@@ -94,10 +95,40 @@ function validateLeadPayload(payload) {
     mustHandle: cleanText(payload.mustHandle),
     pace: cleanText(payload.pace),
     tourIntent: cleanText(payload.tourIntent),
+    tripStyle: cleanText(payload.tripStyle, 'Custom mix'),
     planTitle: cleanText(payload.planTitle, 'Ultimate Berlin trip plan'),
     recommendedTourDay: cleanText(payload.recommendedTourDay),
+    recommendedTourDate: cleanText(payload.recommendedTourDate),
+    recommendedTourTime: cleanText(payload.recommendedTourTime),
+    meetingPointUrl: cleanText(payload.meetingPointUrl, 'https://www.berlinwalk.com/meeting-point'),
     ticket: cleanText(payload.ticket),
     weatherTitle: cleanText(payload.weatherTitle),
+    travelMode: cleanText(payload.travelMode),
+    planHealth: cleanText(payload.planHealth),
+    preArrivalChecklist: cleanText(payload.preArrivalChecklist),
+    baseBrief: cleanText(payload.baseBrief),
+    budgetPulse: cleanText(payload.budgetPulse),
+    interestLens: cleanText(payload.interestLens),
+    paceGuard: cleanText(payload.paceGuard),
+    weatherStrategy: cleanText(payload.weatherStrategy),
+    carryPack: cleanText(payload.carryPack),
+    reservationRadar: cleanText(payload.reservationRadar),
+    planAdvice: cleanText(payload.planAdvice),
+    planSwaps: cleanText(payload.planSwaps),
+    dayRhythm: cleanText(payload.dayRhythm),
+    dayIntelligence: cleanText(payload.dayIntelligence),
+    dayOperations: cleanText(payload.dayOperations, '', 1200),
+    arrivalWindow: cleanText(payload.arrivalWindow),
+    tripRisk: cleanText(payload.tripRisk),
+    tourRecommendation: cleanText(payload.tourRecommendation),
+    intentStage: cleanText(payload.intentStage),
+    familyOrSlow: cleanText(payload.familyOrSlow),
+    bookAheadNeeded: cleanText(payload.bookAheadNeeded),
+    conversionSignal: cleanText(payload.conversionSignal),
+    conversionScore: cleanNumber(payload.conversionScore, 0, 0, 100),
+    conversionTier: cleanText(payload.conversionTier),
+    conversionNextAction: cleanText(payload.conversionNextAction),
+    conversionReasons: cleanText(payload.conversionReasons),
     source: cleanText(payload.source, 'tool'),
     page: cleanText(payload.page),
     consent: true
@@ -153,6 +184,13 @@ function berlinNowParts(now = new Date()) {
     dateKey: parts.year + '-' + parts.month + '-' + parts.day,
     hour: Number(parts.hour || 0)
   };
+}
+
+function berlinDateKeyFrom(value) {
+  if (!value) return '';
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) return '';
+  return berlinNowParts(date).dateKey;
 }
 
 function leadKey(email, arrivalDate) {
@@ -221,12 +259,15 @@ async function findExistingLead(key) {
 function isBookedLead(lead) {
   const status = String(lead && lead.bookingStatus || '').toLowerCase();
   const intent = String(lead && lead.tourIntent || '').toLowerCase();
-  return Boolean(lead && (lead.bookedAt || status === 'booked' || status === 'confirmed' || intent.indexOf('already booked') !== -1));
+  const inactiveStatuses = ['cancelled', 'canceled', 'refunded', 'declined', 'no_show', 'no-show'];
+  const bookedStatuses = ['booked', 'confirmed', 'self_reported_booked'];
+  if (!lead || inactiveStatuses.indexOf(status) !== -1) return false;
+  return Boolean(lead.bookedAt || bookedStatuses.indexOf(status) !== -1 || intent.indexOf('already booked') !== -1);
 }
 
 function messageIdFor(stage, lead) {
   const booked = isBookedLead(lead);
-  const raw = booked && stage.bookedMessageId ? stage.bookedMessageId : stage.messageId;
+  const raw = booked ? stage.bookedMessageId : stage.messageId;
   return raw && raw.indexOf('TODO_') !== 0 ? raw : '';
 }
 
@@ -239,8 +280,36 @@ function emailVariables(lead, stage) {
     tripLength: String(lead.tripLength || ''),
     planTitle: String(lead.planTitle || 'Ultimate Berlin trip plan'),
     recommendedTourDay: String(lead.recommendedTourDay || ''),
+    recommendedTourDate: String(lead.recommendedTourDate || ''),
+    recommendedTourTime: String(lead.recommendedTourTime || ''),
     ticket: String(lead.ticket || ''),
     weatherTitle: String(lead.weatherTitle || ''),
+    travelMode: String(lead.travelMode || ''),
+    planHealth: String(lead.planHealth || ''),
+    preArrivalChecklist: String(lead.preArrivalChecklist || ''),
+    baseBrief: String(lead.baseBrief || ''),
+    budgetPulse: String(lead.budgetPulse || ''),
+    interestLens: String(lead.interestLens || ''),
+    paceGuard: String(lead.paceGuard || ''),
+    weatherStrategy: String(lead.weatherStrategy || ''),
+    carryPack: String(lead.carryPack || ''),
+    reservationRadar: String(lead.reservationRadar || ''),
+    planAdvice: String(lead.planAdvice || ''),
+    planSwaps: String(lead.planSwaps || ''),
+    dayRhythm: String(lead.dayRhythm || ''),
+    dayIntelligence: String(lead.dayIntelligence || ''),
+    dayOperations: String(lead.dayOperations || ''),
+    arrivalWindow: String(lead.arrivalWindow || ''),
+    tripRisk: String(lead.tripRisk || ''),
+    tourRecommendation: String(lead.tourRecommendation || ''),
+    intentStage: String(lead.intentStage || ''),
+    familyOrSlow: String(lead.familyOrSlow || ''),
+    bookAheadNeeded: String(lead.bookAheadNeeded || ''),
+    conversionSignal: String(lead.conversionSignal || ''),
+    conversionScore: String(lead.conversionScore || ''),
+    conversionTier: String(lead.conversionTier || ''),
+    conversionNextAction: String(lead.conversionNextAction || ''),
+    conversionReasons: String(lead.conversionReasons || ''),
     arrivalTime: String(lead.arrivalTime || ''),
     arrivalPoint: String(lead.arrivalPoint || ''),
     stayArea: String(lead.stayArea || ''),
@@ -250,10 +319,11 @@ function emailVariables(lead, stage) {
     mustHandle: String(lead.mustHandle || ''),
     pace: String(lead.pace || ''),
     tourIntent: String(lead.tourIntent || ''),
+    tripStyle: String(lead.tripStyle || ''),
     bookingStatus: String(lead.bookingStatus || ''),
     tourDate: String(lead.tourDate || ''),
     bookingUrl: BOOKING_SHORT_URL,
-    meetingPointUrl: 'https://www.berlinwalk.com/meeting-point',
+    meetingPointUrl: String(lead.meetingPointUrl || 'https://www.berlinwalk.com/meeting-point'),
     firstDayPlannerUrl: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',
     ticketCalculatorUrl: 'https://www.berlinwalk.com/tools/transport-ticket-calculator',
     whatsOpenUrl: 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today',
@@ -332,10 +402,40 @@ export async function saveTripPlannerLead(payload) {
     mustHandle: lead.mustHandle,
     pace: lead.pace,
     tourIntent: lead.tourIntent,
+    tripStyle: lead.tripStyle,
     planTitle: lead.planTitle,
     recommendedTourDay: lead.recommendedTourDay,
+    recommendedTourDate: lead.recommendedTourDate,
+    recommendedTourTime: lead.recommendedTourTime,
+    meetingPointUrl: lead.meetingPointUrl,
     ticket: lead.ticket,
     weatherTitle: lead.weatherTitle,
+    travelMode: lead.travelMode,
+    planHealth: lead.planHealth,
+    preArrivalChecklist: lead.preArrivalChecklist,
+    baseBrief: lead.baseBrief,
+    budgetPulse: lead.budgetPulse,
+    interestLens: lead.interestLens,
+    paceGuard: lead.paceGuard,
+    weatherStrategy: lead.weatherStrategy,
+    carryPack: lead.carryPack,
+    reservationRadar: lead.reservationRadar,
+    planAdvice: lead.planAdvice,
+    planSwaps: lead.planSwaps,
+    dayRhythm: lead.dayRhythm,
+    dayIntelligence: lead.dayIntelligence,
+    dayOperations: lead.dayOperations,
+    arrivalWindow: lead.arrivalWindow,
+    tripRisk: lead.tripRisk,
+    tourRecommendation: lead.tourRecommendation,
+    intentStage: lead.intentStage,
+    familyOrSlow: lead.familyOrSlow,
+    bookAheadNeeded: lead.bookAheadNeeded,
+    conversionSignal: lead.conversionSignal,
+    conversionScore: lead.conversionScore,
+    conversionTier: lead.conversionTier,
+    conversionNextAction: lead.conversionNextAction,
+    conversionReasons: lead.conversionReasons,
     source: lead.source,
     page: lead.page,
     consent: lead.consent,
@@ -378,20 +478,36 @@ function stageDueForLead(lead, stage, berlinToday, berlinHour) {
   if (!lead.arrivalDate || stage.offset === null) return false;
   const dueDate = addDays(lead.arrivalDate, stage.offset);
   if (dueDate !== berlinToday) return false;
+  const latestSignupDate = berlinDateKeyFrom(lead.lastSignupAt || lead.createdAt);
+  if (latestSignupDate === berlinToday) return false;
   if (stage.key === 'dayOf' && berlinHour >= 18) return false;
   return true;
 }
 
+async function fetchDueCandidateLeads(berlinToday) {
+  const latestArrivalDate = addDays(berlinToday, 7);
+  let skip = 0;
+  let items = [];
+
+  while (true) {
+    const page = await wixData.query(COLLECTION)
+      .between('arrivalDate', berlinToday, latestArrivalDate)
+      .eq('consent', true)
+      .skip(skip)
+      .limit(DUE_QUERY_PAGE_SIZE)
+      .find({ suppressAuth: true });
+    const pageItems = page.items || [];
+    items = items.concat(pageItems);
+    if (pageItems.length < DUE_QUERY_PAGE_SIZE) break;
+    skip += pageItems.length;
+  }
+
+  return items;
+}
+
 export async function processTripPlannerDueEmails(now = new Date()) {
   const berlin = berlinNowParts(now);
-  const latestArrivalDate = addDays(berlin.dateKey, 7);
-  const results = await wixData.query(COLLECTION)
-    .between('arrivalDate', berlin.dateKey, latestArrivalDate)
-    .eq('consent', true)
-    .limit(100)
-    .find({ suppressAuth: true });
-
-  const items = results.items || [];
+  const items = await fetchDueCandidateLeads(berlin.dateKey);
   const summary = {
     checked: items.length,
     sent: 0,

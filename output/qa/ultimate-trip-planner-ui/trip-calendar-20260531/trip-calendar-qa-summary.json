@@ -1,0 +1,69 @@
+{
+  "generatedAt": "2026-05-31T08:30:31.871Z",
+  "desktopDom": {
+    "carryCount": 5,
+    "hasDataUrlInVisibleText": true,
+    "items": [
+      {
+        "download": "",
+        "hasTourCalendar": false,
+        "hasTripCalendar": false,
+        "hrefStart": "",
+        "text": "Exact planSafe linkCopy link: Copy choices to your phone."
+      },
+      {
+        "download": "",
+        "hasTourCalendar": false,
+        "hasTripCalendar": false,
+        "hrefStart": "https://www.google.com/maps/dir/",
+        "text": "Route mapOpen overview routeOpen map: World Clock / Museum Island / Hackescher Markt"
+      },
+      {
+        "download": "berlin-trip-plan-2026-06-10-7days.ics",
+        "hasTourCalendar": false,
+        "hasTripCalendar": true,
+        "hrefStart": "data:text/calendar;charset=utf-8",
+        "text": "Trip calendar7 day holdsAdd .ics: Save day themes."
+      },
+      {
+        "download": "berlinwalk-tour-2026-06-10.ics",
+        "hasTourCalendar": true,
+        "hasTripCalendar": false,
+        "hrefStart": "data:text/calendar;charset=utf-8",
+        "text": "Tour holdArrival day 11:30-13:30Add hold: Wed, 10 Jun 2026"
+      },
+      {
+        "download": "",
+        "hasTourCalendar": false,
+        "hasTripCalendar": false,
+        "hrefStart": "",
+        "text": "Carry PDFPlan documentDownload: Download for offline backup."
+      }
+    ],
+    "labels": [
+      "Exact planSafe linkCopy link:",
+      "Route mapOpen overview routeOpen",
+      "Trip calendar7 day holdsAdd",
+      "Tour holdArrival day 11:30-13:30Add",
+      "Carry PDFPlan documentDownload: Download"
+    ],
+    "overflowCount": 0,
+    "overflowing": [],
+    "tripDownload": "berlin-trip-plan-2026-06-10-7days.ics",
+    "tripHref": "data:text/calendar;charset=utf-8,BEGIN%3AVCALEND",
+    "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-10&tripLength=7&qaUnlock=1&resetUnlock=1&v=tripcal-20260531",
+    "tripCalendarEvents": 7,
+    "hasAllDayStart": true,
+    "hasDay7": true,
+    "hasRoute": true,
+    "hasExactPlan": true
+  },
+  "mobileScreenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/trip-calendar-20260531/mobile-full-7day-trip-calendar.png",
+  "notes": [
+    "In-app browser DOM QA found 5 Carry Pack actions, one trip calendar link, one tour hold link, overflow 0.",
+    "Decoded trip calendar data URL contains 7 VEVENT entries, all-day DTSTART for 2026-06-10, Day 7 summary, day route URLs, and exact plan URL.",
+    "Chrome headless 390px screenshot rendered the unlocked 7-day page for visual inspection.",
+    "Mobile crop visually confirms the Carry Pack stacks cleanly with Trip calendar, Tour hold, and Carry PDF cards."
+  ],
+  "mobileCarryCrop": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/trip-calendar-20260531/carry-pack-mobile-crop.png"
+}

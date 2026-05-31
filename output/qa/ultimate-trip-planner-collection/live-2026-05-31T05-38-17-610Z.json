@@ -1,0 +1,21 @@
+{
+  "mode": "live",
+  "generatedAt": "2026-05-31T05:38:16.329Z",
+  "collectionId": "TripPlannerLeads",
+  "plannedFieldCount": 64,
+  "permissions": {
+    "insert": "ADMIN",
+    "update": "ADMIN",
+    "remove": "ADMIN",
+    "read": "ADMIN"
+  },
+  "created": true,
+  "existing": false,
+  "verification": {
+    "fieldCount": 68,
+    "expectedFieldCount": 64,
+    "missing": [],
+    "wrongType": []
+  },
+  "createStatus": 200
+}

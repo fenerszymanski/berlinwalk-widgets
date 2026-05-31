@@ -1,0 +1,42 @@
+{
+  "generatedAt": "2026-05-31T12:27:07.754Z",
+  "write": true,
+  "importDownloads": false,
+  "idsPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json",
+  "funnelPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js",
+  "ok": true,
+  "steps": [
+    {
+      "name": "Validate message IDs",
+      "command": "node ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs --ids output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json --funnel output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Triggered Email ID Progress\nIDs file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json\nFunnel file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js\nIDs file exists: yes\nValid IDs: 10/10\nMissing: 0, invalid: 0, duplicate: 0\nApplied in Velo: 0/10\n\n- sales.instant   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_INSTANT\n  html: e0-instant-plan.html\n  id: GATE_FAKE_ID_00\n- sales.minus7    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_7\n  html: e1-seven-days-before.html\n  id: GATE_FAKE_ID_01\n- sales.minus3    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_3\n  html: e2-three-days-before.html\n  id: GATE_FAKE_ID_02\n- sales.minus1    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_1\n  html: e3-one-day-before.html\n  id: GATE_FAKE_ID_03\n- sales.dayOf     VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_DAY_OF\n  html: e4-arrival-day.html\n  id: GATE_FAKE_ID_04\n- booked.instant  VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_INSTANT_BOOKED\n  html: booked-e0-instant-plan.html\n  id: GATE_FAKE_ID_05\n- booked.minus7   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_7_BOOKED\n  html: booked-e1-seven-days-before.html\n  id: GATE_FAKE_ID_06\n- booked.minus3   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_3_BOOKED\n  html: booked-e2-three-days-before.html\n  id: GATE_FAKE_ID_07\n- booked.minus1   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_1_BOOKED\n  html: booked-e3-one-day-before.html\n  id: GATE_FAKE_ID_08\n- booked.dayOf    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_DAY_OF_BOOKED\n  html: booked-e4-arrival-day.html\n  id: GATE_FAKE_ID_09\n\nOK: all 10 IDs are valid. Next dry-run apply-triggered-email-ids.mjs, then run with --write.\n"
+    },
+    {
+      "name": "Apply message IDs",
+      "command": "node ultimate-berlin-trip-planner/velo/apply-triggered-email-ids.mjs --ids output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json --funnel output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js --write",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "WRITE: 10 Triggered Email IDs validated.\n- sales.instant: TODO_TRIP_PLANNER_INSTANT -> GATE_FAKE_ID_00\n- sales.minus7: TODO_TRIP_PLANNER_MINUS_7 -> GATE_FAKE_ID_01\n- sales.minus3: TODO_TRIP_PLANNER_MINUS_3 -> GATE_FAKE_ID_02\n- sales.minus1: TODO_TRIP_PLANNER_MINUS_1 -> GATE_FAKE_ID_03\n- sales.dayOf: TODO_TRIP_PLANNER_DAY_OF -> GATE_FAKE_ID_04\n- booked.instant: TODO_TRIP_PLANNER_INSTANT_BOOKED -> GATE_FAKE_ID_05\n- booked.minus7: TODO_TRIP_PLANNER_MINUS_7_BOOKED -> GATE_FAKE_ID_06\n- booked.minus3: TODO_TRIP_PLANNER_MINUS_3_BOOKED -> GATE_FAKE_ID_07\n- booked.minus1: TODO_TRIP_PLANNER_MINUS_1_BOOKED -> GATE_FAKE_ID_08\n- booked.dayOf: TODO_TRIP_PLANNER_DAY_OF_BOOKED -> GATE_FAKE_ID_09\n\nBackup: output/qa/ultimate-trip-planner-email-id-apply/tripPlannerFunnel.temp.before-email-ids-2026-05-31T12-27-07-714Z.js\nUpdated output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js\nNext: node ultimate-berlin-trip-planner/launch-audit.mjs\n"
+    },
+    {
+      "name": "Verify IDs are applied",
+      "command": "node ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs --ids output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json --funnel output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js --require-applied",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Triggered Email ID Progress\nIDs file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/message-ids.local.json\nFunnel file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/tripPlannerFunnel.temp.js\nIDs file exists: yes\nValid IDs: 10/10\nMissing: 0, invalid: 0, duplicate: 0\nApplied in Velo: 10/10\nRequire applied mode: yes\n\n- sales.instant   APPLIED\n  placeholder: TODO_TRIP_PLANNER_INSTANT\n  html: e0-instant-plan.html\n  id: GATE_FAKE_ID_00\n- sales.minus7    APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_7\n  html: e1-seven-days-before.html\n  id: GATE_FAKE_ID_01\n- sales.minus3    APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_3\n  html: e2-three-days-before.html\n  id: GATE_FAKE_ID_02\n- sales.minus1    APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_1\n  html: e3-one-day-before.html\n  id: GATE_FAKE_ID_03\n- sales.dayOf     APPLIED\n  placeholder: TODO_TRIP_PLANNER_DAY_OF\n  html: e4-arrival-day.html\n  id: GATE_FAKE_ID_04\n- booked.instant  APPLIED\n  placeholder: TODO_TRIP_PLANNER_INSTANT_BOOKED\n  html: booked-e0-instant-plan.html\n  id: GATE_FAKE_ID_05\n- booked.minus7   APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_7_BOOKED\n  html: booked-e1-seven-days-before.html\n  id: GATE_FAKE_ID_06\n- booked.minus3   APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_3_BOOKED\n  html: booked-e2-three-days-before.html\n  id: GATE_FAKE_ID_07\n- booked.minus1   APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_1_BOOKED\n  html: booked-e3-one-day-before.html\n  id: GATE_FAKE_ID_08\n- booked.dayOf    APPLIED\n  placeholder: TODO_TRIP_PLANNER_DAY_OF_BOOKED\n  html: booked-e4-arrival-day.html\n  id: GATE_FAKE_ID_09\n\nOK: all 10 IDs are valid and applied in tripPlannerFunnel.js.\n"
+    },
+    {
+      "name": "Real launch regeneration",
+      "command": "",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": true,
+      "output": "Temp funnel QA mode stops before regenerating launch artifacts or reading the real Velo source."
+    }
+  ]
+}

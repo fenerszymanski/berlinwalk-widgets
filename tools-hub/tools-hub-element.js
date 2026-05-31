@@ -566,7 +566,9 @@ class BWToolsHubElement extends HTMLElement {
   _renderHub(data) {
     const root = this.querySelector('.bw-tools-root');
     const categories = data && Array.isArray(data.categories) ? data.categories : [];
-    const tools = data && Array.isArray(data.tools) ? data.tools : [];
+    const tools = data && Array.isArray(data.tools)
+      ? data.tools.filter(tool => this._isVisibleTool(tool))
+      : [];
     if (!root || !categories.length || !tools.length) {
       this._renderError();
       return;
@@ -579,6 +581,7 @@ class BWToolsHubElement extends HTMLElement {
   _renderCategory(category, tools) {
     const categoryTools = tools.filter(tool => tool.category === category.key);
     const id = `bw-category-${String(category.key || '').toLowerCase()}`;
+    if (!categoryTools.length) return '';
 
     return `
       <section class="bw-category-section" aria-labelledby="${this._escapeAttribute(id)}">
@@ -619,6 +622,12 @@ class BWToolsHubElement extends HTMLElement {
     const title = String((tool && tool.title) || '?').trim();
     const letter = title ? title.charAt(0).toUpperCase() : '?';
     return `<span class="bw-tool-icon bw-tool-icon-fallback" aria-hidden="true">${this._escapeHtml(letter)}</span>`;
+  }
+
+  _isVisibleTool(tool) {
+    if (!tool || !tool.widgetUrl) return false;
+    const status = String(tool.status || '').toLowerCase();
+    return tool.hidden !== true && tool.published !== false && status !== 'draft';
   }
 
   _setupAnimations() {

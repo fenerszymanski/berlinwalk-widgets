@@ -12,6 +12,14 @@ Your planner result:
 
 **${planTitle}**
 
+Plan health:
+
+**${planHealth}**
+
+Your pre-arrival checklist:
+
+**${preArrivalChecklist}**
+
 The most useful thing to lock now is not every meal. It is the first high-value anchor.
 
 For most first-time visitors, that anchor is the BerlinWalk tour early in the trip. It starts at the World Clock at Alexanderplatz, lasts about 2 hours, and gives the city center a structure before you start choosing museums, Wall sites, food stops, or nightlife.
@@ -35,4 +43,3 @@ Do not plan Berlin like a tiny old-town city. It is spread out, layered, and muc
 Yusuf  
 BerlinWalk  
 berlinwalk.com · @berlinwalkingtour
-

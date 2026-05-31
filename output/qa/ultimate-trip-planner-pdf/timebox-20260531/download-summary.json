@@ -1,0 +1,67 @@
+[
+  {
+    "label": "3day-sales",
+    "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=3&weather=off&qaUnlock=1&resetUnlock=1&v=pdfqa-3day-sales",
+    "state": {
+      "href": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=3&weather=off&qaUnlock=1&resetUnlock=1&v=pdfqa-3day-sales",
+      "ready": "complete",
+      "qa": "1",
+      "fullDays": 3,
+      "previewDays": 3,
+      "fullHidden": false,
+      "pdfDisabled": false,
+      "closeRows": 3,
+      "closeWithCopy": 0,
+      "stale": false,
+      "timing": [
+        "09:00-10:45",
+        "11:30-13:30",
+        "After 18:00",
+        "09:30-12:00",
+        "13:30-16:30",
+        "After 18:00",
+        "09:30-12:00",
+        "13:30-16:30",
+        "After 18:00"
+      ],
+      "overflow": 0,
+      "status": ""
+    },
+    "status": "PDF downloaded.",
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/timebox-20260531/timebox-3day-sales.pdf",
+    "bytes": 2305245
+  },
+  {
+    "label": "7day-booked",
+    "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&qaUnlock=1&resetUnlock=1&v=pdfqa-7day-booked&tourIntent=booked",
+    "state": {
+      "href": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&qaUnlock=1&resetUnlock=1&v=pdfqa-7day-booked&tourIntent=booked",
+      "ready": "complete",
+      "qa": "1",
+      "fullDays": 7,
+      "previewDays": 7,
+      "fullHidden": false,
+      "pdfDisabled": false,
+      "closeRows": 7,
+      "closeWithCopy": 0,
+      "stale": false,
+      "timing": [
+        "09:00-10:45",
+        "11:30-13:30",
+        "After 18:00",
+        "09:30-12:00",
+        "13:30-16:30",
+        "After 18:00",
+        "09:30-12:00",
+        "13:30-16:30",
+        "After 18:00",
+        "09:30-12:00"
+      ],
+      "overflow": 0,
+      "status": ""
+    },
+    "status": "PDF downloaded.",
+    "pdf": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-pdf/timebox-20260531/timebox-7day-booked.pdf",
+    "bytes": 2599061
+  }
+]

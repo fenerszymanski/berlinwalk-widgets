@@ -1,0 +1,65 @@
+[
+  {
+    "label": "desktop-locked-7day",
+    "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&v=overview-desktop-locked-7day",
+    "viewport": [
+      1280,
+      1200
+    ],
+    "state": {
+      "ready": "complete",
+      "overview": 1,
+      "days": 7,
+      "photos": 7,
+      "links": 7,
+      "fullHidden": true,
+      "fullDays": 0,
+      "routeDeck": 1,
+      "overflow": 0,
+      "text": "Plan at a glancePhoto index, daily backbone areas, and one route map before the full details.Overview mapD1Arrival dayMon, 1 Jun 2026World Clock / Museum Island / Hackescher MarktD2Museums and royal BerlinTue, 2 Jun 2026"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/itinerary-overview-20260531/desktop-locked-7day.png"
+  },
+  {
+    "label": "mobile-locked-7day",
+    "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&v=overview-mobile-locked-7day",
+    "viewport": [
+      390,
+      1200
+    ],
+    "state": {
+      "ready": "complete",
+      "overview": 1,
+      "days": 7,
+      "photos": 7,
+      "links": 7,
+      "fullHidden": true,
+      "fullDays": 0,
+      "routeDeck": 1,
+      "overflow": 0,
+      "text": "Plan at a glancePhoto index, daily backbone areas, and one route map before the full details.Overview mapD1Arrival dayMon, 1 Jun 2026World Clock / Museum Island / Hackescher MarktD2Museums and royal BerlinTue, 2 Jun 2026"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/itinerary-overview-20260531/mobile-locked-7day.png"
+  },
+  {
+    "label": "mobile-unlocked-7day",
+    "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&v=overview-mobile-unlocked-7day&qaUnlock=1&resetUnlock=1&tourIntent=booked",
+    "viewport": [
+      390,
+      1200
+    ],
+    "state": {
+      "ready": "complete",
+      "overview": 1,
+      "days": 7,
+      "photos": 7,
+      "links": 7,
+      "fullHidden": false,
+      "fullDays": 7,
+      "routeDeck": 1,
+      "overflow": 0,
+      "text": "Plan at a glancePhoto index, daily backbone areas, and one route map before the full details.Overview mapD1Arrival dayMon, 1 Jun 2026World Clock / Museum Island / Hackescher MarktD2Museums and royal BerlinTue, 2 Jun 2026"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/itinerary-overview-20260531/mobile-unlocked-7day.png"
+  }
+]

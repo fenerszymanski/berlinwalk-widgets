@@ -16,6 +16,7 @@
   var NATIVE_END_MARKER = 'data-bw-native-blog-end-hidden';
   var MIN_MOBILE_WIDTH = 900;
   var TOUR_IMAGE = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_700,h_420,al_c,q_86,enc_avif,quality_auto/file.jpg';
+  var TOOL_ICON_BASE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/';
   var dataCache = null;
   var dataPromise = null;
   var renderTimer = null;
@@ -88,6 +89,20 @@
       url: 'https://www.berlinwalk.com/tools/berlin-club-picker',
       summary: 'Match your night, outfit, group, and door-difficulty comfort.'
     }
+  };
+
+  var TOOL_ICON_FALLBACKS = {
+    'berlin-first-day-planner': TOOL_ICON_BASE_URL + 'berlin-first-day-planner-160.png',
+    'berlin-public-toilets': TOOL_ICON_BASE_URL + 'berlin-public-toilets-160.png',
+    'berlin-luggage-storage': TOOL_ICON_BASE_URL + 'berlin-luggage-storage-160.png',
+    'transport-ticket-calculator': TOOL_ICON_BASE_URL + 'transport-ticket-calculator-160.png',
+    'best-month-to-visit-berlin': TOOL_ICON_BASE_URL + 'best-month-to-visit-berlin-160.png',
+    'berlin-daily-budget': TOOL_ICON_BASE_URL + 'berlin-daily-budget-160.png',
+    'berlin-free-things-to-do': TOOL_ICON_BASE_URL + 'berlin-free-things-to-do-160.png',
+    'berlin-safety': TOOL_ICON_BASE_URL + 'berlin-safety-160.png',
+    'east-or-west-1989': TOOL_ICON_BASE_URL + 'east-or-west-1989-160.png',
+    'berlin-currywurst-finder': TOOL_ICON_BASE_URL + 'berlin-currywurst-finder-160.png',
+    'berlin-club-picker': TOOL_ICON_BASE_URL + 'berlin-club-picker-160.png'
   };
 
   function isPostPage() {
@@ -230,6 +245,8 @@
       '.bw-blog-journey-card:hover{box-shadow:0 14px 28px rgba(0,0,0,.25);transform:translateY(-2px);}',
       '.bw-blog-journey-image{aspect-ratio:16/9;background:#E8EEE6;display:block;overflow:hidden;width:100%;}',
       '.bw-blog-journey-image img{display:block;height:100%!important;object-fit:cover;width:100%!important;}',
+      '.bw-blog-journey-card-use-a-tool .bw-blog-journey-image{align-items:center;background:linear-gradient(135deg,#FFFDF1 0%,#E8F5E4 100%);display:flex;justify-content:center;padding:24px;}',
+      '.bw-blog-journey-card-use-a-tool .bw-blog-journey-image img{height:82px!important;max-height:70%;max-width:82px;object-fit:contain;width:82px!important;}',
       '.bw-blog-journey-content{display:flex;flex:1;flex-direction:column;padding:14px 15px 16px;}',
       '.bw-blog-journey-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.2px;line-height:1;margin-bottom:9px;text-transform:uppercase;}',
       '.bw-blog-journey-card strong{color:#212121;display:block;font-size:16px;font-weight:900;line-height:1.16;overflow-wrap:break-word;}',
@@ -307,17 +324,28 @@
     return picked.slice(0, limit || 6);
   }
 
+  function cloneTool(tool, slug) {
+    if (!tool) return null;
+    var copy = {};
+    Object.keys(tool).forEach(function (key) {
+      copy[key] = tool[key];
+    });
+    if (!copy.slug && slug) copy.slug = slug;
+    return copy;
+  }
+
   function relatedTool(data, post) {
     var slug = post && post.relatedToolSlug;
-    var tool = null;
+    var match = null;
     if (slug) {
-      tool = (data.toolsHub || []).filter(function (item) { return item.slug === slug; })[0] ||
+      match = (data.toolsHub || []).filter(function (item) { return item.slug === slug; })[0] ||
         (data.tools || []).filter(function (item) { return item.slug === slug; })[0] ||
         TOOL_FALLBACKS[slug];
     }
-    tool = tool || (data.tools || [])[0] || TOOL_FALLBACKS['berlin-first-day-planner'];
+    var tool = cloneTool(match || (data.tools || [])[0] || TOOL_FALLBACKS['berlin-first-day-planner'], slug || 'berlin-first-day-planner');
     if (tool && tool.slug && !tool.url) tool.url = 'https://www.berlinwalk.com/tools/' + tool.slug;
     if (tool && !tool.summary && tool.lead) tool.summary = tool.lead;
+    if (tool && tool.slug && !tool.image) tool.image = TOOL_ICON_FALLBACKS[tool.slug] || '';
     return tool;
   }
 

@@ -1,0 +1,214 @@
+[
+  {
+    "source": "e0-instant-plan.md",
+    "html": "e0-instant-plan.html",
+    "path": "sales",
+    "stage": "instant",
+    "placeholder": "TODO_TRIP_PLANNER_INSTANT",
+    "subject": "Your Berlin trip plan is ready",
+    "preheader": "Arrival date, trip shape, ticket note, and the best tour timing.",
+    "variables": [
+      "arrivalDate",
+      "arrivalPoint",
+      "baseBrief",
+      "bookingUrl",
+      "budgetPulse",
+      "carryPack",
+      "conversionSignal",
+      "dailyBudgetUrl",
+      "dayIntelligence",
+      "dayOperations",
+      "dayRhythm",
+      "interestLens",
+      "interests",
+      "meetingPointUrl",
+      "pace",
+      "paceGuard",
+      "planAdvice",
+      "planHealth",
+      "planSwaps",
+      "planTitle",
+      "preArrivalChecklist",
+      "recommendedTourDate",
+      "recommendedTourDay",
+      "recommendedTourTime",
+      "reservationRadar",
+      "stayArea",
+      "ticketCalculatorUrl",
+      "tripLength",
+      "tripStyle",
+      "weatherStrategy",
+      "whatsOpenUrl"
+    ]
+  },
+  {
+    "source": "e1-seven-days-before.md",
+    "html": "e1-seven-days-before.html",
+    "path": "sales",
+    "stage": "minus7",
+    "placeholder": "TODO_TRIP_PLANNER_MINUS_7",
+    "subject": "One week before Berlin: keep the trip realistic",
+    "preheader": "Your trip shape, tour timing, and the first decisions to lock now.",
+    "variables": [
+      "arrivalPoint",
+      "bookingUrl",
+      "planHealth",
+      "planTitle",
+      "preArrivalChecklist",
+      "recommendedTourDay",
+      "stayArea",
+      "ticket"
+    ]
+  },
+  {
+    "source": "e2-three-days-before.md",
+    "html": "e2-three-days-before.html",
+    "path": "sales",
+    "stage": "minus3",
+    "placeholder": "TODO_TRIP_PLANNER_MINUS_3",
+    "subject": "Three days before Berlin: tickets, shops, and first-day traps",
+    "preheader": "BER zones, Sunday closures, Monday museum logic, and the better first move.",
+    "variables": [
+      "arrivalDate",
+      "bookingUrl",
+      "firstDayPlannerUrl",
+      "planAdvice",
+      "preArrivalChecklist",
+      "ticket",
+      "ticketCalculatorUrl",
+      "whatsOpenUrl"
+    ]
+  },
+  {
+    "source": "e3-one-day-before.md",
+    "html": "e3-one-day-before.html",
+    "path": "sales",
+    "stage": "minus1",
+    "placeholder": "TODO_TRIP_PLANNER_MINUS_1",
+    "subject": "Berlin tomorrow: ${weatherTitle}",
+    "preheader": "Weather, shoes, meeting point, and your final first-day check.",
+    "variables": [
+      "arrivalPoint",
+      "bookingUrl",
+      "meetingPointUrl",
+      "planAdvice",
+      "preArrivalChecklist",
+      "weatherStrategy",
+      "weatherTitle"
+    ]
+  },
+  {
+    "source": "e4-arrival-day.md",
+    "html": "e4-arrival-day.html",
+    "path": "sales",
+    "stage": "dayOf",
+    "placeholder": "TODO_TRIP_PLANNER_DAY_OF",
+    "subject": "Welcome to Berlin - start simple",
+    "preheader": "World Clock, first route, and the final booking link.",
+    "variables": [
+      "bookingUrl",
+      "meetingPointUrl",
+      "planTitle",
+      "preArrivalChecklist",
+      "travelMode"
+    ]
+  },
+  {
+    "source": "booked-e0-instant-plan.md",
+    "html": "booked-e0-instant-plan.html",
+    "path": "booked",
+    "stage": "instant",
+    "placeholder": "TODO_TRIP_PLANNER_INSTANT_BOOKED",
+    "subject": "Your Berlin plan is ready - and your walk is in the right place",
+    "preheader": "Trip shape, meeting point, weather, and prep after booking.",
+    "variables": [
+      "arrivalDate",
+      "baseBrief",
+      "budgetPulse",
+      "carryPack",
+      "conversionSignal",
+      "dayIntelligence",
+      "dayOperations",
+      "dayRhythm",
+      "interestLens",
+      "interests",
+      "meetingPointUrl",
+      "pace",
+      "paceGuard",
+      "planAdvice",
+      "planHealth",
+      "planSwaps",
+      "planTitle",
+      "preArrivalChecklist",
+      "recommendedTourTime",
+      "reservationRadar",
+      "ticketCalculatorUrl",
+      "tripLength",
+      "tripStyle",
+      "weatherStrategy",
+      "whatsOpenUrl"
+    ]
+  },
+  {
+    "source": "booked-e1-seven-days-before.md",
+    "html": "booked-e1-seven-days-before.html",
+    "path": "booked",
+    "stage": "minus7",
+    "placeholder": "TODO_TRIP_PLANNER_MINUS_7_BOOKED",
+    "subject": "One week before Berlin: your booked-walk prep",
+    "preheader": "Meeting point, trip shape, and what to leave flexible.",
+    "variables": [
+      "meetingPointUrl",
+      "planHealth",
+      "planTitle",
+      "preArrivalChecklist"
+    ]
+  },
+  {
+    "source": "booked-e2-three-days-before.md",
+    "html": "booked-e2-three-days-before.html",
+    "path": "booked",
+    "stage": "minus3",
+    "placeholder": "TODO_TRIP_PLANNER_MINUS_3_BOOKED",
+    "subject": "Three days before Berlin: transport and first-day checks",
+    "preheader": "Ticket zone, opening-day traps, and meeting-point confidence.",
+    "variables": [
+      "meetingPointUrl",
+      "planAdvice",
+      "preArrivalChecklist",
+      "ticket",
+      "ticketCalculatorUrl",
+      "whatsOpenUrl"
+    ]
+  },
+  {
+    "source": "booked-e3-one-day-before.md",
+    "html": "booked-e3-one-day-before.html",
+    "path": "booked",
+    "stage": "minus1",
+    "placeholder": "TODO_TRIP_PLANNER_MINUS_1_BOOKED",
+    "subject": "Berlin tomorrow: ${weatherTitle}",
+    "preheader": "Weather, shoes, and the World Clock meeting point.",
+    "variables": [
+      "meetingPointUrl",
+      "planAdvice",
+      "preArrivalChecklist",
+      "weatherStrategy",
+      "weatherTitle"
+    ]
+  },
+  {
+    "source": "booked-e4-arrival-day.md",
+    "html": "booked-e4-arrival-day.html",
+    "path": "booked",
+    "stage": "dayOf",
+    "placeholder": "TODO_TRIP_PLANNER_DAY_OF_BOOKED",
+    "subject": "Welcome to Berlin - see you at the World Clock",
+    "preheader": "Final meeting point reminder and calm arrival-day logic.",
+    "variables": [
+      "meetingPointUrl",
+      "preArrivalChecklist",
+      "travelMode"
+    ]
+  }
+]

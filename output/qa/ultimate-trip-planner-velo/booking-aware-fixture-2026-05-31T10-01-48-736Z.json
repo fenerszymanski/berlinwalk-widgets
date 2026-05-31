@@ -1,0 +1,47 @@
+{
+  "generatedAt": "2026-05-31T10:01:48.736Z",
+  "source": "ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js",
+  "status": "pass",
+  "tests": [
+    {
+      "name": "sales and booked leads use separate minus3 IDs",
+      "status": "pass",
+      "details": {
+        "sent": 2,
+        "messages": [
+          "contact-sales:sales-minus3-id:no",
+          "contact-booked:booked-minus3-id:yes"
+        ]
+      }
+    },
+    {
+      "name": "cancelled booked markers use the sales branch",
+      "status": "pass",
+      "details": {
+        "bookingStatus": "cancelled",
+        "messageId": "sales-minus3-id",
+        "isBooked": "no"
+      }
+    },
+    {
+      "name": "missing booked IDs skip instead of falling back",
+      "status": "pass",
+      "details": {
+        "sent": 0,
+        "skipped": 1,
+        "reason": "missing_message_id",
+        "booked": true
+      }
+    },
+    {
+      "name": "booking marker respects arrivalDate scope",
+      "status": "pass",
+      "details": {
+        "matched": 1,
+        "updated": 1,
+        "targetBookingId": "fixture-booking",
+        "otherTouched": false
+      }
+    }
+  ]
+}

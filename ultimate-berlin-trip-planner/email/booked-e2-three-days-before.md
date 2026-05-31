@@ -12,6 +12,10 @@ Your planner ticket note:
 
 **${ticket}**
 
+Your booked-trip checklist:
+
+**${preArrivalChecklist}**
+
 If you arrive at BER, remember that the airport is Zone C. If you are already staying inside Berlin, most normal city travel is AB.
 
 Before arrival, check:
@@ -22,9 +26,12 @@ Before arrival, check:
 
 If your arrival day is a Sunday or public holiday, plan shops carefully. If it is Monday, check museum opening times before building the day around one museum.
 
+Your planner's smart fix note:
+
+**${planAdvice}**
+
 See you at the World Clock.
 
 Yusuf  
 BerlinWalk  
 berlinwalk.com · @berlinwalkingtour
-

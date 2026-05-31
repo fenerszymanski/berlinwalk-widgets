@@ -1,0 +1,74 @@
+{
+  "generatedAt": "2026-05-31T14:14:03.880Z",
+  "mode": "dry_run_email_sequence_simulator",
+  "arrivalDate": "2026-06-12",
+  "latestSignupDate": "2026-06-05",
+  "jobDate": "2026-06-09",
+  "berlinHour": 10,
+  "booked": false,
+  "branch": "sales_conversion",
+  "timeline": [
+    {
+      "stage": "instant",
+      "label": "Instant plan",
+      "branch": "sales_conversion",
+      "messagePath": "sales.instant",
+      "dueDate": "2026-06-05",
+      "status": "send_on_submit",
+      "note": "Immediate plan delivery email; includes the tour CTA."
+    },
+    {
+      "stage": "minus7",
+      "label": "7 days before arrival",
+      "branch": "sales_conversion",
+      "messagePath": "sales.minus7",
+      "dueDate": "2026-06-05",
+      "status": "folded_into_instant",
+      "note": "Velo skips scheduled reminders on the same Berlin date as signup to avoid double-sending."
+    },
+    {
+      "stage": "minus3",
+      "label": "3 days before arrival",
+      "branch": "sales_conversion",
+      "messagePath": "sales.minus3",
+      "dueDate": "2026-06-09",
+      "status": "scheduled",
+      "note": "Hourly scheduler should send this stage on the due date."
+    },
+    {
+      "stage": "minus1",
+      "label": "1 day before arrival",
+      "branch": "sales_conversion",
+      "messagePath": "sales.minus1",
+      "dueDate": "2026-06-11",
+      "status": "scheduled",
+      "note": "Hourly scheduler should send this stage on the due date."
+    },
+    {
+      "stage": "dayOf",
+      "label": "Arrival day before 18:00 Berlin time",
+      "branch": "sales_conversion",
+      "messagePath": "sales.dayOf",
+      "dueDate": "2026-06-12",
+      "status": "scheduled_before_18",
+      "note": "Arrival-day email is eligible only before 18:00 Berlin time."
+    }
+  ],
+  "dueNow": [
+    {
+      "stage": "minus3",
+      "label": "3 days before arrival",
+      "branch": "sales_conversion",
+      "messagePath": "sales.minus3",
+      "dueDate": "2026-06-09",
+      "status": "scheduled",
+      "note": "Hourly scheduler should send this stage on the due date."
+    }
+  ],
+  "notes": [
+    "Instant sends at signup if the matching message ID exists.",
+    "Scheduled reminders are skipped on the same Berlin date as the latest signup/update.",
+    "Arrival-day email is eligible only before 18:00 Berlin time.",
+    "Booked leads use booked/prep message IDs and should not fall back to sales IDs."
+  ]
+}

@@ -1,0 +1,49 @@
+Triggered Email ID Progress
+IDs file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-import/download-helper-20260531/imported-message-ids.local.json
+IDs file exists: yes
+Valid IDs: 10/10
+Missing: 0, invalid: 0, duplicate: 0
+Applied in Velo: 0/10
+
+- sales.instant   VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_INSTANT
+  html: e0-instant-plan.html
+  id: FAKE_IMPORT_ID_00
+- sales.minus7    VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_MINUS_7
+  html: e1-seven-days-before.html
+  id: FAKE_IMPORT_ID_01
+- sales.minus3    VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_MINUS_3
+  html: e2-three-days-before.html
+  id: FAKE_IMPORT_ID_02
+- sales.minus1    VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_MINUS_1
+  html: e3-one-day-before.html
+  id: FAKE_IMPORT_ID_03
+- sales.dayOf     VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_DAY_OF
+  html: e4-arrival-day.html
+  id: FAKE_IMPORT_ID_04
+- booked.instant  VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_INSTANT_BOOKED
+  html: booked-e0-instant-plan.html
+  id: FAKE_IMPORT_ID_05
+- booked.minus7   VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_MINUS_7_BOOKED
+  html: booked-e1-seven-days-before.html
+  id: FAKE_IMPORT_ID_06
+- booked.minus3   VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_MINUS_3_BOOKED
+  html: booked-e2-three-days-before.html
+  id: FAKE_IMPORT_ID_07
+- booked.minus1   VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_MINUS_1_BOOKED
+  html: booked-e3-one-day-before.html
+  id: FAKE_IMPORT_ID_08
+- booked.dayOf    VALID, NOT APPLIED
+  placeholder: TODO_TRIP_PLANNER_DAY_OF_BOOKED
+  html: booked-e4-arrival-day.html
+  id: FAKE_IMPORT_ID_09
+
+OK: all 10 IDs are valid. Next dry-run apply-triggered-email-ids.mjs, then run with --write.

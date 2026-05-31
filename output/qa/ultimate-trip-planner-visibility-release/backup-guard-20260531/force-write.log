@@ -1,0 +1,15 @@
+Ultimate visibility release (WRITE)
+- Current tools-hub visibility: draft
+- Triggered Email placeholders: 10
+- Live smoke: missing
+- Latest remote preflight: output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T12-28-09-213Z.json
+- Wix tool page status: 404
+- Homepage shortcut currently present: no
+- tools-hub/data.json would remove draft/hidden/published:false visibility flags.
+- tools-home/data.json would Inserted homepage shortcut at position 0.
+
+Wrote output/qa/ultimate-trip-planner-visibility-release/backup-guard-20260531/tools-hub.temp.json
+Wrote output/qa/ultimate-trip-planner-visibility-release/backup-guard-20260531/tools-home.temp.json
+Backup: output/qa/ultimate-trip-planner-visibility-release/backup-guard-20260531/backups/tools-hub.temp.before-visibility-release-2026-05-31T12-37-47-826Z.json
+Backup: output/qa/ultimate-trip-planner-visibility-release/backup-guard-20260531/backups/tools-home.temp.before-visibility-release-2026-05-31T12-37-47-828Z.json
+Visibility release complete. Run launch-audit and manual page QA next.

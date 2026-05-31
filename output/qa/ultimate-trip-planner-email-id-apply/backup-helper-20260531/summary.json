@@ -1,0 +1,12 @@
+{
+  "output": "WRITE: 10 Triggered Email IDs validated.\n- sales.instant: TODO_TRIP_PLANNER_INSTANT -> fake-sales-instant-01\n- sales.minus7: TODO_TRIP_PLANNER_MINUS_7 -> fake-sales-minus7-02\n- sales.minus3: TODO_TRIP_PLANNER_MINUS_3 -> fake-sales-minus3-03\n- sales.minus1: TODO_TRIP_PLANNER_MINUS_1 -> fake-sales-minus1-04\n- sales.dayOf: TODO_TRIP_PLANNER_DAY_OF -> fake-sales-dayOf-05\n- booked.instant: TODO_TRIP_PLANNER_INSTANT_BOOKED -> fake-booked-instant-06\n- booked.minus7: TODO_TRIP_PLANNER_MINUS_7_BOOKED -> fake-booked-minus7-07\n- booked.minus3: TODO_TRIP_PLANNER_MINUS_3_BOOKED -> fake-booked-minus3-08\n- booked.minus1: TODO_TRIP_PLANNER_MINUS_1_BOOKED -> fake-booked-minus1-09\n- booked.dayOf: TODO_TRIP_PLANNER_DAY_OF_BOOKED -> fake-booked-dayOf-10\n\nBackup: output/qa/ultimate-trip-planner-email-id-apply/backup-helper-20260531/tripPlannerFunnel.temp.before-email-ids-2026-05-31T12-04-02-238Z.js\nUpdated output/qa/ultimate-trip-planner-email-id-apply/backup-helper-20260531/tripPlannerFunnel.temp.js\nNext: node ultimate-berlin-trip-planner/launch-audit.mjs\n",
+  "originalUnchanged": true,
+  "fakeIdsApplied": true,
+  "placeholdersRemovedFromTemp": true,
+  "backupCount": 1,
+  "backups": [
+    "tripPlannerFunnel.temp.before-email-ids-2026-05-31T12-04-02-238Z.js"
+  ],
+  "idsPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-apply/backup-helper-20260531/fake-message-ids.local.json",
+  "tempFunnel": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-apply/backup-helper-20260531/tripPlannerFunnel.temp.js"
+}

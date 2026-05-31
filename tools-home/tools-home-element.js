@@ -495,7 +495,12 @@ class BWToolsHomeElement extends HTMLElement {
   }
 
   _renderTools(data) {
-    const tools = data && Array.isArray(data.featuredTools) ? data.featuredTools.slice(0, 8) : [];
+    const tools = data && Array.isArray(data.featuredTools)
+      ? data.featuredTools.filter((tool) => {
+        const status = String((tool && tool.status) || '').toLowerCase();
+        return Boolean(tool && tool.hidden !== true && tool.published !== false && status !== 'draft');
+      }).slice(0, 8)
+      : [];
     const root = this.querySelector('.bw-tools-root');
     if (!root || !tools.length) {
       this._renderError();

@@ -1,0 +1,29 @@
+Import Triggered Email IDs From Downloads
+Source: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-import/download-helper-20260531/downloads/message-ids.local.json
+Output: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-import/download-helper-20260531/imported-message-ids.local.json
+Valid IDs: 10/10
+Missing: 0, invalid: 0, duplicate: 0
+
+- sales.instant: OK
+  TODO_TRIP_PLANNER_INSTANT: FAKE_IMPORT_ID_00
+- sales.minus7: OK
+  TODO_TRIP_PLANNER_MINUS_7: FAKE_IMPORT_ID_01
+- sales.minus3: OK
+  TODO_TRIP_PLANNER_MINUS_3: FAKE_IMPORT_ID_02
+- sales.minus1: OK
+  TODO_TRIP_PLANNER_MINUS_1: FAKE_IMPORT_ID_03
+- sales.dayOf: OK
+  TODO_TRIP_PLANNER_DAY_OF: FAKE_IMPORT_ID_04
+- booked.instant: OK
+  TODO_TRIP_PLANNER_INSTANT_BOOKED: FAKE_IMPORT_ID_05
+- booked.minus7: OK
+  TODO_TRIP_PLANNER_MINUS_7_BOOKED: FAKE_IMPORT_ID_06
+- booked.minus3: OK
+  TODO_TRIP_PLANNER_MINUS_3_BOOKED: FAKE_IMPORT_ID_07
+- booked.minus1: OK
+  TODO_TRIP_PLANNER_MINUS_1_BOOKED: FAKE_IMPORT_ID_08
+- booked.dayOf: OK
+  TODO_TRIP_PLANNER_DAY_OF_BOOKED: FAKE_IMPORT_ID_09
+
+Wrote output/qa/ultimate-trip-planner-email-id-import/download-helper-20260531/imported-message-ids.local.json
+Next: run check-triggered-email-ids.mjs, then apply-triggered-email-ids.mjs.

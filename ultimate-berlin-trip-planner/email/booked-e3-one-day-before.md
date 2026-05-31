@@ -12,6 +12,18 @@ Weather note:
 
 **${weatherTitle}**
 
+Weather/openings strategy:
+
+**${weatherStrategy}**
+
+Planner review:
+
+**${planAdvice}**
+
+Your final checklist:
+
+**${preArrivalChecklist}**
+
 Simple prep:
 
 - Wear shoes you can walk in for about 2 hours.
@@ -30,4 +42,3 @@ See you soon.
 Yusuf  
 BerlinWalk  
 berlinwalk.com · @berlinwalkingtour
-

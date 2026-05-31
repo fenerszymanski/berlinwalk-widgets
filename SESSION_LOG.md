@@ -4,6 +4,1765 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-31 — Codex (Ultimate launch blocked on IDs)
+
+**Did:** Rechecked whether the final launch blocker had changed.
+
+**Changed:**
+- No widget files changed in this pass beyond this log entry.
+- Ran `check-triggered-email-ids.mjs`: `message-ids.local.json` still missing, `0/10` valid IDs, `0/10` applied.
+- Checked `~/Downloads`: no `message-ids*.json` file present.
+
+**Opened:** Ultimate is now genuinely blocked on the external Wix step: create 10 Developer Tools Triggered Email templates, collect their editor URLs/message IDs, and generate/import `message-ids.local.json`.
+**Closed:** Launch audit remains `131 pass, 1 warn, 1 block`; the remaining block is only the 10 real Triggered Email IDs.
+
+**Next session should:** Once `message-ids.local.json` exists or is downloaded, run the email-ID launch gate dry-run, then `source ../scripts/load-api-keys.sh` and rerun with `--write`.
+
+## 2026-05-31 — Codex (Ultimate email checklist export)
+
+**Did:** Added a single checklist export for the remaining 10-template Wix setup.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` and regenerated `email/paste-ready/*` — added `setup-checklist.txt` plus an embedded `One-page setup checklist` panel and `Copy checklist` button inside `copy-kit.html`.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added required-file and copy-kit guards for the setup checklist.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, and `LAUNCH_CONTROL_ROOM.html` — regenerated after audit.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff state.
+
+**Opened:** `email/paste-ready/message-ids.local.json` is still missing; 10 real Wix Triggered Email IDs remain the blocker before Velo publish and live smoke.
+**Closed:** QA passed: generator/audit syntax, targeted `diff --check`, launch audit `131 pass, 1 warn, 1 block`, rendered `setup-checklist.txt`, and Browser copy-kit smoke with checklist panel, Copy checklist button, first/final template coverage, checklist length `3866`, 10 template-name inputs, 10 Copy name buttons, `Next: template 1/10`, 48 buttons, 42 copy buttons, and overflow `0`.
+
+**Next session should:** Use the open copy-kit checklist to create the 10 Wix Developer Tools Triggered Email templates, collect URLs/IDs, then run the email-ID launch gate.
+
+## 2026-05-31 — Codex (Ultimate copy-kit sequence)
+
+**Did:** Upgraded the email copy kit so the manual Wix template creation step is less fiddly.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` and regenerated `email/paste-ready/*` — added `Wix template name` copy fields for all 10 templates, a `Next missing template` navigator, updated generated README numbering, and kept the Developer Tools / no automation workflow warning.
+- `ultimate-berlin-trip-planner/WIX_EMAIL_SETUP_TR.md` — updated the Turkish workflow to use the new `Copy name` button before subject/preheader/HTML.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added copy-kit guards for template names and the next-template navigator.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+
+**Opened:** `email/paste-ready/message-ids.local.json` is still missing; 10 real Wix Triggered Email IDs remain the blocker before Velo publish and live smoke.
+**Closed:** QA passed: generator/audit syntax, targeted `diff --check`, launch audit `130 pass, 1 warn, 1 block`, and Browser copy-kit smoke with 10 template-name inputs, 10 Copy name buttons, first name `Ultimate Planner - Sales - Instant Plan`, `Next: template 1/10`, 47 buttons, 41 copy buttons, and overflow `0`. The next-button click automation timed out in the in-app browser, but the control is present and layout/state checks passed.
+
+**Next session should:** Use the open copy-kit page to create the 10 Wix Developer Tools Triggered Email templates, collect URLs/IDs, then run the email-ID launch gate.
+
+## 2026-05-31 — Codex (Ultimate email-ID handoff)
+
+**Did:** Reduced the remaining launch risk around the manual Triggered Email ID step.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` and regenerated `email/paste-ready/*` — copy-kit, paste-ready README, and individual HTML comments now explicitly say to use Wix Developer Tools -> Triggered Emails, not automation workflows.
+- `ultimate-berlin-trip-planner/WIX_EMAIL_SETUP_TR.md` — added the direct local copy-kit URL and the same Developer Tools / no workflow warning.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added guards that the copy kit and Turkish handoff include the warning.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, and `LAUNCH_CONTROL_ROOM.html` — regenerated after a fresh read-only remote preflight.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff state.
+- Browser: opened `http://127.0.0.1:8765/ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html` for Yusuf; smoke found the warning text, 36 buttons, 31 copy buttons, 32 textareas, and overflow `0`.
+
+**Opened:** `email/paste-ready/message-ids.local.json` is still missing; 10 real Wix Triggered Email IDs remain the blocker before Velo publish and live smoke.
+**Closed:** Fresh remote preflight wrote `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T14-40-53-892Z.json`: GitHub Pages reachable, Wix tool URL not live yet, Velo endpoints unpublished, BerlinTools slug free, and `TripPlannerLeads` PASS with 74 fields. Launch audit remains `130 pass, 1 warn, 1 block`.
+
+**Next session should:** After Yusuf finishes the copy-kit ID collection, run `node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads`, then `source ../scripts/load-api-keys.sh` and rerun with `--write`.
+
+## 2026-05-31 — Codex (Ultimate planner logic)
+
+**Did:** Added a compact `Planner logic` layer so users can see the rules behind the generated trip.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added Planner logic UI after Trip load map, with 6 visual rule cards, responsive wrapping, text export, print view, and PDF cover export.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard that Planner logic reaches UI, text, print, and PDF.
+- `ultimate-berlin-trip-planner/LAUNCH_CONTROL_ROOM.html`, `LAUNCH_STATUS.md`, and `LAUNCH_STATUS.json` — regenerated after audit.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/planner-logic-20260531/` and `output/qa/ultimate-trip-planner-pdf/planner-logic-20260531/` — desktop/mobile screenshots, crops, downloaded PDF, rendered pages, and contact sheet.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: inline script parse, desktop/mobile Playwright checks with 6 cards and overflow `0`, real 7-day PDF download, `pypdfium2` render/contact sheet, text extraction for Planner logic + Trip load map + Essentials, targeted `diff --check`, and launch audit `130 pass, 1 warn, 1 block`.
+
+**Next session should:** Either stop polishing and do the Triggered Email ID/Velo live-smoke launch path, or add only a clearly higher-value visual layer.
+
+## 2026-05-31 — Codex (Ultimate trip load map)
+
+**Did:** Added a visual `Trip load map` so the planner reads like an operations board, not only an itinerary.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added Trip load map UI after Plan at a glance, with day cards, load/move bars, buffer/watch chips, route links, mobile wrapping fixes, text export, print view, and PDF cover export.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard that the load map reaches UI, text, print, and PDF.
+- `ultimate-berlin-trip-planner/LAUNCH_CONTROL_ROOM.html`, `LAUNCH_STATUS.md`, and `LAUNCH_STATUS.json` — regenerated after audit.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/load-map-20260531/` and `output/qa/ultimate-trip-planner-pdf/load-map-20260531/` — desktop/mobile screenshots, crops, downloaded PDF, rendered pages, and contact sheet.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: inline script parse, desktop/mobile Playwright checks with 7 cards and overflow `0`, mobile crop after title-wrap fix, real 7-day PDF download, `pypdfium2` render/contact sheet, text extraction for Trip load map + Essentials, targeted `diff --check`, and launch audit `129 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue final UX/PDF polish if Yusuf wants another "ultimate" pass, otherwise move to Triggered Email ID handoff and Velo live smoke.
+
+## 2026-05-31 — Codex (Ultimate email sequence simulator)
+
+**Did:** Added a dry-run-only email sequence simulator so the scheduler can be inspected before Velo publish.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs` — new CLI covering instant, minus7, minus3, minus1, day-of, `--job-date`, `--hour`, and `--booked` branches without network/API calls.
+- `ultimate-berlin-trip-planner/velo/README.md` — documented simulator commands and evidence path.
+- `ultimate-berlin-trip-planner/build-launch-control-room.mjs`, `build-launch-status-report.mjs`, `LAUNCH_CONTROL_ROOM.html`, and `LAUNCH_STATUS.*` — added sequence-simulator command shortcuts and regenerated generated artifacts.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added required-file and behavior guard for scheduler branch simulation.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff state.
+- `output/qa/ultimate-trip-planner-email-sequence/` — sales, due-minus3, and booked-day-of-after-18 fixture outputs.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: script/build/audit syntax checks, sales sequence fixture, due-now `minus3` fixture, booked day-of after-18 suppression fixture, generated launch artifacts, targeted `diff --check`, and launch audit `128 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue UX/PDF polish if Yusuf wants another "ultimate" pass, otherwise move to Triggered Email ID handoff and Velo live smoke.
+
+## 2026-05-31 — Codex (Ultimate lead report)
+
+**Did:** Added a dry-run-first/read-only lead report so Ultimate's collected funnel data can be inspected after launch.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/report-trip-planner-leads.mjs` — new report script with dry-run fixtures, live Wix Data read mode, masked emails by default, `--include-emails`, priority leads, upcoming arrivals, trip-style/conversion-tier breakdowns, and send-error summary.
+- `ultimate-berlin-trip-planner/velo/README.md` — documented post-launch lead report commands and privacy behavior.
+- `ultimate-berlin-trip-planner/build-launch-control-room.mjs`, `build-launch-status-report.mjs`, `LAUNCH_CONTROL_ROOM.html`, and `LAUNCH_STATUS.*` — added lead-report command shortcuts and regenerated generated launch artifacts.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added required-file and behavior guard for the lead report.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff state.
+- `output/qa/ultimate-trip-planner-lead-report/` — dry-run fixture report and live read-only report evidence.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: script syntax, dry-run report with 5 fixtures / 2 priority leads / 2 upcoming arrivals / 1 send error, live read-only report with 0 current rows before Velo publish, targeted `diff --check`, and launch audit `126 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue UX/PDF polish if Yusuf wants another "ultimate" pass, otherwise move to Triggered Email ID handoff and Velo live smoke.
+
+## 2026-05-31 — Codex (Ultimate trip style lead segment)
+
+**Did:** Turned the new Trip Style Shortcuts from UI-only presets into a funnel segment.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `tripStyleForLead()` and sends `tripStyle` with the lead payload / lead-submit analytics.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `create-trip-planner-leads-collection.mjs`, `prepublish-gate.mjs`, `launch-remote-preflight.mjs`, `live-smoke-trip-planner.mjs`, `velo/README.md`, and `velo/install-kit.html` — store/expose `tripStyle`, include it in smoke payloads, and gate it as a critical collection field.
+- `ultimate-berlin-trip-planner/email/*`, `email/paste-ready/*`, and `email/README.md` — instant sales/booked emails now include `Planner style: ${tripStyle}` and paste-ready HTML was regenerated.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- Wix: synced live `TripPlannerLeads` to add `tripStyle`; latest remote preflight reports 74 fields and critical fields verified.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: inline script parse, Velo/Node syntax checks, targeted `diff --check`, paste-ready email regeneration, in-app Browser `Food + nightlife` preset smoke with overflow `0`, dry-run live-smoke payload containing `tripStyle`, prepublish collection gate PASS, and launch audit `124 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue UX/PDF polish if Yusuf wants another "ultimate" pass, otherwise move to Triggered Email ID handoff and Velo live smoke.
+
+## 2026-05-31 — Codex (Ultimate trip style shortcuts)
+
+**Did:** Added four visual one-click presets so users can start from a realistic trip style instead of tuning every field manually.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `TRIP_PRESETS`, preset matching/apply helpers, synced form-state rendering, and responsive `Trip style shortcuts` cards below Plan Inputs.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard for the preset layer and state-sync hook.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/trip-presets-20260531/` — desktop/mobile screenshots plus in-app Browser preset-state smoke.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: inline script parse, targeted `diff --check`, launch audit, desktop/mobile visual checks, and in-app Browser click smoke. `Food + nightlife` correctly switched stay area to east, selected wall/food/nightlife interests, set packed pace, kept overflow `0`, and status updated to `Food + nightlife applied. Adjust any detail below.` Launch audit is `123 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue UX/PDF polish if Yusuf wants another "ultimate" pass, otherwise move to Triggered Email ID handoff and Velo live smoke.
+
+## 2026-05-31 — Codex (Ultimate visual header polish)
+
+**Did:** Made the Ultimate first viewport more visual by replacing the plain green text header with a real-photo route hero.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-hero-visual`, a two-column/stacked hero with Museum Island photo, feature chips, compact route cue, and mobile route-pill refinements.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a launch guard for the real Berlin visual hero.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/visual-hero-20260531/` — desktop/mobile Chrome screenshots; in-app Browser metrics confirmed loaded image and overflow `0`.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: inline script parse, targeted `diff --check`, in-app Browser at 319px found loaded hero image, 3 mobile route columns, overflow `0`; local QA unlock found full plan open, PDF/print enabled, 8 Essentials cards, and PDF status `PDF downloaded.`. Launch audit is `122 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue with another visual/product polish pass if Yusuf wants it, otherwise move to the Triggered Email ID handoff and Velo live smoke.
+
+## 2026-05-31 — Codex (Ultimate mobile first-screen polish)
+
+**Did:** Added a mobile-only `Phone-ready preview` card so the first mobile viewport feels visual and plan-led before the input form.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-mobile-peek`, responsive `.bw-mobile-peek*` styles, `renderMobilePeek()`, and a render hook; desktop keeps the existing form/result two-column layout.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard for the mobile first-screen visual peek.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/mobile-peek-20260531/` — mobile/desktop screenshots and `summary.json`.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: in-app Browser confirmed mobile order stays form-before-result while the compact peek appears above the form; CDP 390px mobile found peek `grid`, 3 actions, 3 day chips, loaded photo, height `378`, overflow `0`; desktop found peek `display:none`, unchanged form/result top alignment, overflow `0`. Launch audit is `121 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue visual/product polish if requested, or move to the Triggered Email ID handoff and Velo live smoke.
+
+## 2026-05-31 — Codex (Ultimate Map Passport polish)
+
+**Did:** Added a visual `Map passport` layer to make Ultimate feel less text-heavy and more map/action-led.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-place-passport`, responsive UI/CSS, iconized place-card helpers, text export, print output, and PDF rendering; fixed clipped PDF mini-card labels by using measured one-line labels instead of fixed 12-char slices.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/map-passport-20260531/` — desktop/mobile screenshots and overflow checks.
+- `output/qa/ultimate-trip-planner-pdf/map-passport-20260531/` — real downloaded 7-day PDF, rendered PNG pages, and contact sheet.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: inline DOM smoke found one passport, 6 cards, 6 Google Maps links, loaded images, 3 full-plan days, 8 Essentials cards, overflow `0`, and no browser errors; true 390px CDP check had doc/body scroll width `390` and no overflow offenders; real 15-page PDF downloaded via the button and rendered with BerlinWalk logo, Map Passport, Berlin Essentials, and no visible overlap.
+
+**Next session should:** Continue the visual/product polish queue if Yusuf wants a stronger "ultimate" feel, or switch to the Triggered Email ID handoff and Velo live smoke.
+
+## 2026-05-31 — Codex (Ultimate post-ID gate runner)
+
+**Did:** Added a one-command post-ID gate runner for the Ultimate Triggered Email launch sequence.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs` — dry-run-first runner for import/check/apply/verify/regenerate/prepublish/audit after the 10 real Wix IDs exist.
+- `ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs` — added `--funnel` so temp-funnel QA can verify applied IDs without touching the real Velo file.
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs`, `email/paste-ready/README.md`, `email/paste-ready/copy-kit.html`, `LAUNCH_RUNBOOK.md`, `WIX_EMAIL_SETUP_TR.md`, `velo/README.md`, `velo/build-velo-install-kit.mjs`, `velo/install-kit.html`, `build-launch-control-room.mjs`, `LAUNCH_CONTROL_ROOM.html`, `build-launch-status-report.mjs`, `LAUNCH_STATUS.*`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated the fast-path handoff.
+- `output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/` — fake ID gate-runner QA logs and summary.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Wix Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: syntax checks, fake 10-ID dry-run/write against a temp funnel, temp placeholders removed, fake IDs applied, duplicate IDs rejected before apply, `--import-downloads --downloads-dir` dry-run/write, direct `--import-from` write, real `tripPlannerFunnel.js` untouched, remote preflight refreshed with `TripPlannerLeads` 73 fields verified, prepublish gate still correctly blocks without real IDs, and launch audit is `120 pass, 1 warn, 1 block`.
+
+**Next session should:** Create the 10 Wix Triggered Email templates, download/import `message-ids.local.json`, run the gate runner with `--import-downloads` then with `--write` after loading `WIX_API_KEY`, publish Velo, and run live smoke.
+
+## 2026-05-31 — Codex (Ultimate email ID import helper)
+
+**Did:** Added a dry-run-first helper so the Triggered Email copy-kit download can be imported from `~/Downloads` without manual file moves.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs` — finds the newest `message-ids*.json`, validates all 10 IDs, normalizes Wix editor URLs, rejects duplicates/placeholders, writes only with `--write`, and backs up any existing local ID file.
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs`, `email/paste-ready/README.md`, and `email/paste-ready/copy-kit.html` — regenerated copy-kit guidance/status text for the Downloads import path.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `WIX_EMAIL_SETUP_TR.md`, `velo/README.md`, `velo/build-velo-install-kit.mjs`, `velo/install-kit.html`, `build-launch-control-room.mjs`, `LAUNCH_CONTROL_ROOM.html`, `build-launch-status-report.mjs`, `LAUNCH_STATUS.*`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated launch handoff/status.
+- `output/qa/ultimate-trip-planner-email-id-import/download-helper-20260531/` — fake Downloads import QA logs and summary.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Wix Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: helper syntax ok, fake 10-URL Downloads import dry-run/write/check produced 10 normalized unique IDs, duplicate import was rejected without writing, original `tripPlannerFunnel.js` placeholders stayed untouched, remote preflight refreshed with `TripPlannerLeads` 73 fields verified, and launch audit is `118 pass, 1 warn, 1 block`.
+
+**Next session should:** Create the 10 Wix Triggered Email templates, download/import `message-ids.local.json`, apply IDs, run `prepublish-gate.mjs`, then paste/publish Velo and run live smoke.
+
+## 2026-05-31 — Codex (Ultimate distribution guard)
+
+**Did:** Hardened the homepage tools shortcut so draft Ultimate cannot leak before launch, and verified the refreshed planner icons.
+
+**Changed:**
+- `tools-home/tools-home-element.js` — now filters `status: "draft"`, `hidden: true`, and `published: false` before taking the first 8 homepage cards.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added guards for the homepage renderer filter, Gemini Flash planner icons, and the prepared-but-hidden Ultimate icon.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/tools-home/draft-filter-20260531/` — screenshot and summary from a headless smoke where draft Ultimate plus hidden/unpublished test rows were injected into homepage tool data.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** Homepage smoke passed: 8 public cards rendered, no Ultimate/hidden/unpublished card appeared, First-Day and Hackescher icons loaded, overflow `0`, empty console errors. Launch audit is now `115 pass, 1 warn, 1 block`.
+
+**Next session should:** Either continue UI/PDF polish, or move to the 10 Triggered Email IDs, Velo publish, and live smoke.
+
+## 2026-05-31 — Codex (Ultimate personalized close chips)
+
+**Did:** Made Ultimate's end-of-day close strips context-aware without bringing back long prose.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `personalizedCloseChip()` / `dayCloseChips()` so the second close chip varies by family/kids, pace, rain, reservations, budget, Monday museum hours, and Sunday/holiday food timing while staying at two short chips.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — strengthened the no-long-day-end-copy guard to require personalized close-chip helpers.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/personalized-close-20260531/` and `output/qa/ultimate-trip-planner-pdf/personalized-close-20260531/` — desktop/mobile QA screenshots, summary, real 16-page PDF, rendered pages, and contact sheet.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: desktop family/gentle/rain/kids produced 4 second-chip variants, mobile packed/rain/reservations produced 4 second-chip variants, overflow `0`, PDF text includes the new cues, stale `Note:` / `Local cue` absent, and rendered PDF pages show no visible overlap. Launch audit remains `110 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue product polish only if Yusuf wants another UI pass; otherwise move to the 10 Triggered Email IDs, Velo publish, and live smoke.
+
+## 2026-05-31 — Codex (Ultimate Arrival Playbook)
+
+**Did:** Added an `Arrival playbook` visual operations card to the top of the Ultimate result stack.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-arrival-playbook`, CSS, `arrivalPlaybookItems()` / summary / HTML / render helpers, text export, print output, and PDF cover rendering; Trip Highlights now uses a distinct tour photo when the tour day is also the arrival day.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard proving Arrival Playbook reaches UI, text, print, and PDF.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/arrival-playbook-20260531/` and `output/qa/ultimate-trip-planner-pdf/arrival-playbook-20260531/` — desktop/mobile screenshots, crops, summary, real 15-page PDF, rendered PNG pages, contact sheet, and text summary.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: one playbook, 4 cards (`Ticket`, `First move`, `Tour anchor`, `First close`), loaded photo, first-close value `Food, water, sleep`, distinct Trip Highlights images `3`, print capture includes Arrival Playbook, desktop/mobile overflow `0`, empty browser errors, PDF text includes Arrival Playbook/Trip Highlights/Essentials, and page 2/contact sheet show no overlap. Launch audit is `110 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue product polish only if needed, or move to the Triggered Email ID handoff, Velo publish, and live smoke.
+
+## 2026-05-31 — Codex (Ultimate Trip Highlights export)
+
+**Did:** Carried the `Trip highlights` Start / Tour / Finish layer into Ultimate's exports.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added Trip Highlights to text export, print output, and the PDF cover flow with linked-style visual cards and day photos.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard proving Trip Highlights reaches text, print, and PDF exports.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-pdf/trip-highlights-export-20260531/` — browser summary, text summary, real 14-page PDF, rendered PNG pages, and contact sheet.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: inline JS parse, targeted `diff --check`, desktop/mobile UI still has 3 highlight cards with overflow `0`, print output includes Trip Highlights with loaded images, PDF text includes Trip Highlights/Start/Finish, and page 2/contact sheet visual inspection showed no overlap. Launch audit is `109 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue final visual/product polish, or create/apply the 10 Wix Triggered Email IDs and then publish/smoke the Velo backend.
+
+## 2026-05-31 — Codex (Ultimate Trip Highlights)
+
+**Did:** Added a photo-first `Trip highlights` layer to the Ultimate result screen.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-trip-highlights`, Trip Highlights CSS, and `tripHighlightItems()` / `tripHighlightsHtml()` / `renderTripHighlights()` for Start, Tour/Meeting, and Finish image cards with icons and map/booking actions.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard for the new photo-first result layer.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/trip-highlights-20260531/` — desktop/mobile screenshots, focused crops, and `summary.json`.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: 3 highlight cards, Start/Tour/Finish present, all photos loaded, Google Maps/booking links present, overflow `0`, and launch audit is `108 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue visual polish, or create/apply the 10 Wix Triggered Email IDs and then publish/smoke the Velo backend.
+
+## 2026-05-31 — Codex (Ultimate compact day closes)
+
+**Did:** Reworked Ultimate's end-of-day close strips so they are shorter, more varied, and PDF-safe.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — day closes now use day-type labels/titles (`Arrival`, `Museum`, `East`, `Food`, `Low-cost`, `Local`, `Return`) with two short chips; removed the repeated close-level rain/family override; enlarged the PDF close box before the Google Maps pack.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — strengthened the day-close guard for compact labels/chips and PDF close spacing.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/close-compact-20260531/` — desktop/mobile summaries/screenshots plus a real 7-day PDF, rendered pages, contact sheet, and PDF text summary.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** QA passed: `closeCount: 7`, `maxChipCount: 2`, `repeatedCoveredBackup: 0`, stale `Note:`/`Local cue` absent, overflow `0`, 14-page PDF rendered, and launch audit is `107 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue product polish, or create/apply the 10 Wix Triggered Email IDs and then publish/smoke the Velo backend.
+
+## 2026-05-31 — Codex (Ultimate Velo pre-publish gate)
+
+**Did:** Added a pre-publish command gate to the Ultimate Velo install kit.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/build-velo-install-kit.mjs` — now emits a `Pre-publish gate` panel with ID check/apply, remote preflight, install-kit regeneration, and launch audit commands before the Wix paste panels.
+- `ultimate-berlin-trip-planner/velo/install-kit.html` — regenerated with the new gate and current placeholder warning.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — install-kit guard now requires the pre-publish gate and ID apply/check commands.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff/status.
+- `output/qa/ultimate-trip-planner-velo/install-kit-prepublish-20260531/` — desktop/mobile screenshots and `summary.json`.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** Install-kit QA passed: one pre-publish panel, 3 source panels, check/apply/preflight/build commands present, placeholder warning visible, overflow `0`, no console errors. Launch audit remains `105 pass, 1 warn, 1 block`.
+
+**Next session should:** Create/apply the 10 Wix Triggered Email IDs, regenerate the install kit once placeholders are gone, paste/publish Velo, then run live smoke.
+
+## 2026-05-31 — Codex (Ultimate email copy-kit bulk paste)
+
+**Did:** Added a bulk URL paste lane to the Triggered Email copy kit.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` — generator now emits a bulk paste panel, parsing helpers, and `Apply bulk IDs` / clear actions.
+- `ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html` and `README.md` — regenerated with the bulk paste workflow.
+- `ultimate-berlin-trip-planner/WIX_EMAIL_SETUP_TR.md` and `LAUNCH_RUNBOOK.md` — documented the short path: paste 10 Wix editor URLs in order, click `Apply bulk IDs`, then download JSON.
+- `ultimate-berlin-trip-planner/launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff/audit state.
+- `output/qa/ultimate-trip-planner-email/copy-kit-bulk-20260531/` — desktop/mobile bulk-paste screenshots and `summary.json`.
+
+**Opened:** Ultimate is still draft/unpublished; the 10 real Triggered Email IDs remain the hard blocker before Velo publish and live smoke.
+**Closed:** Copy-kit bulk QA passed: desktop and 390px mobile filled `10/10` IDs from 10 URLs with JSON keys `10`, overflow `0`, no console errors, and duplicate-ID detection returned 10 issue rows.
+
+**Next session should:** Create the 10 Wix Triggered Email templates, collect their editor URLs, use the copy-kit bulk paste box to build `message-ids.local.json`, apply IDs, then publish/smoke Velo.
+
+## 2026-05-31 — Codex (Ultimate collection sync)
+
+**Did:** Synced the live `TripPlannerLeads` conversion fields.
+
+**Changed:**
+- Wix: added `conversionSignal`, `conversionScore`, `conversionTier`, `conversionNextAction`, and `conversionReasons` to live `TripPlannerLeads`.
+- `ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs` — switched missing-field sync to the correct Wix Data `create-field` endpoint; kept `patch-field` helper for future existing-field edits.
+- `ultimate-berlin-trip-planner/launch-audit.mjs`, `velo/README.md`, `RESEARCH_BACKLOG.md`, `LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated launch handoff/status.
+- `output/qa/ultimate-trip-planner-collection/live-sync-2026-05-31T10-31-06-192Z.json` and `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T10-31-30-014Z.json` — live sync and non-mutating verification evidence.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the hard blocker, then Velo publish and live `tripPlannerLead` / `tripPlannerBooking` smoke.
+**Closed:** Collection gate now passes: live sync verified `69` expected fields, remote preflight sees `73` fields including system fields and all critical fields present. Launch status still says `NOT READY` because email IDs are placeholders.
+
+**Next session should:** Create the 10 Wix Triggered Email templates from `email/paste-ready/copy-kit.html`, export/apply `message-ids.local.json`, regenerate the Velo install kit, publish Velo, and run live smoke.
+
+## 2026-05-31 — Codex (Ultimate Trip Command Strip)
+
+**Did:** Added an always-visible visual `Trip commands` action layer to the Ultimate result screen.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added the `Trip commands` strip with route anchors plus `Route map`, `Day 1 start`, tour/meeting, and `Weather/open` cards; carried the same data into text export, print output, and PDF cover flow before Trip Radar.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard proving the command strip reaches UI, text, print, and PDF.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/trip-command-strip-20260531/` and `output/qa/ultimate-trip-planner-pdf/trip-command-strip-20260531/` — desktop/mobile UI evidence plus real 5-day sales PDF download, rendered pages, contact sheet, and text checks.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the blocker, and live `TripPlannerLeads` still needs the five conversion fields synced before Velo publish.
+**Closed:** Inline script parse, launch-audit syntax, targeted `diff --check`, launch audit (`105 pass, 1 warn, 1 block`), desktop/mobile far-date QA (`commandCards: 4`, `commandStops: 4`, Travel Mode suppressed, overflow `0`, no vertical text), and 5-day sales PDF render/text QA passed (`12` pages, Trip Commands/Trip Radar/Essentials/BerlinWalk branding present, stale `Local cue` / `Note:` absent).
+
+**Next session should:** Continue product polish, or switch to the Wix handoff once Yusuf is ready to create/apply the 10 Triggered Email templates.
+
+## 2026-05-31 — Codex (Ultimate Travel Mode assistant)
+
+**Did:** Turned the near-arrival Travel Mode panel into a phone-ready assistant.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — redesigned `renderTravelMode()` with a real-photo phone card, Day 1 badge, Google Maps anchors, quick actions, chips, and Now/Next/Later cards; extended `travelModeSummary()`, print output, and PDF Travel Review route-anchor pills.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a Travel Mode phone-assistant guard.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/travel-mode-assistant-20260531/` and `output/qa/ultimate-trip-planner-pdf/travel-mode-assistant-20260531/` — desktop/mobile UI screenshots/summaries plus real PDF download, rendered pages, contact sheet, and text checks.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the blocker, and live `TripPlannerLeads` still needs the five conversion fields synced before Velo publish.
+**Closed:** Inline script parse, launch-audit syntax, targeted `diff --check`, launch audit (`104 pass, 1 warn, 1 block`), desktop/mobile near-arrival QA (`photoLoaded: true`, `stopCount: 3`, `quickActions: 3`, overflow `0`, no vertical text), far-date suppression, and 3-day sales PDF render/text QA passed (`10` pages, Travel Review anchors and Essentials present, stale `Local cue` / `Note:` absent).
+
+**Next session should:** Continue product polish, or switch to the Wix handoff once Yusuf is ready to create/apply the 10 Triggered Email templates.
+
+## 2026-05-31 — Codex (Ultimate booking-aware fixture)
+
+**Did:** Added a local Wix mock fixture for Ultimate's booking-aware email branch.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs` — local-only harness for `tripPlannerFunnel.js` with mocked Wix Data, Contacts, and Triggered Emails.
+- `ultimate-berlin-trip-planner/velo/README.md` — documented the fixture command.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added required-file and fixture-coverage guards.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-velo/` — fixture JSON evidence.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the blocker, and live `TripPlannerLeads` still needs the five conversion fields synced before Velo publish.
+**Closed:** `node ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs` passed 4 checks: sales/booked `minus3` branch selection, cancelled status override, missing booked-ID fail-closed skip, and `arrivalDate`-scoped booking updates. Syntax checks, targeted `diff --check`, regenerated status/control room, and launch audit passed (`103 pass, 1 warn, 1 block`).
+
+**Next session should:** Continue product polish, or move to the Wix handoff once Yusuf is ready to create/apply the 10 Triggered Email templates.
+
+## 2026-05-31 — Codex (Ultimate PDF document guide)
+
+**Did:** Added an `Inside this plan` travel-document guide strip to the PDF cover.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `drawPdfDocumentKit()` and placed it before the cover photo/radar/pass sections.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a PDF document-guide guard.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/pdf-document-kit-20260531/` and `output/qa/ultimate-trip-planner-pdf/pdf-document-kit-20260531/` — desktop/mobile UI smoke evidence plus real 7-day sales PDF, rendered pages, contact sheet, and summary.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the blocker, and live `TripPlannerLeads` still needs the five conversion fields synced before Velo publish.
+**Closed:** Inline JS parse, launch audit, targeted `diff --check`, regenerated status/control room, headless desktop/mobile QA (`fullDays: 7`, `mapPacks: 7`, PDF enabled, overflow `0`), and real PDF download/render (`14` pages, `Inside this plan` labels present, old `Place:` / `Map actions` absent) passed. Latest launch audit is `101 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue product polish, or switch to the Wix handoff by syncing missing collection fields and applying the 10 Triggered Email IDs when Yusuf is ready.
+
+## 2026-05-31 — Codex (Ultimate map pack)
+
+**Did:** Replaced full-plan day map-link stacks with visual `Google Maps pack` cards.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `dayMapPackItems()`, `dayMapPackHtml()`, `printDayMapPackHtml()`, map-pack CSS, text export lines, and PDF day-card map-pack rendering; removed the old full-plan plain map-link stack and PDF `Map actions` / `Place:` list.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard proving the map pack reaches UI, text export, print, and PDF.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/map-pack-20260531/` and `output/qa/ultimate-trip-planner-pdf/map-pack-20260531/` — desktop/mobile UI evidence plus real 7-day sales PDF, rendered pages, contact sheet, and summaries.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the blocker, and live `TripPlannerLeads` still needs the five conversion fields synced before Velo publish.
+**Closed:** Inline JS parse, launch audit, targeted `diff --check`, regenerated status/control room, headless Chrome desktop/mobile 7-day unlocked QA (`mapPacks: 7`, `mapCards: 28`, `plainMapLinks: 0`, overflow `0`), and real PDF download/render (`14` pages, `Google Maps pack` present, `Place:` / `Map actions` absent) passed. Latest launch audit is `100 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue product polish, or switch to the Wix handoff by syncing missing collection fields and applying the 10 Triggered Email IDs when Yusuf is ready.
+
+## 2026-05-31 — Codex (Ultimate day-close strip)
+
+**Did:** Replaced repeated end-of-day itinerary tiles with a short visual `Day close` strip.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `dayActionBlockItems()`, `dayClosePlan()`, UI/print helpers, compact close-chip CSS, text export lines, PDF day-card close rendering, and removed `Later`/`Evening` duplication from route reels/PDF route tiles.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — strengthened the day-end guard to require visual close strips and main-action-only route reels.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — regenerated/updated handoff state.
+- `output/qa/ultimate-trip-planner-ui/day-close-20260531/` and `output/qa/ultimate-trip-planner-pdf/day-close-20260531/` — desktop/mobile UI evidence plus real 7-day sales PDF, rendered pages, contact sheet, and summaries.
+
+**Opened:** Ultimate is still draft/unpublished; 10 real Triggered Email IDs remain the blocker, and live `TripPlannerLeads` still needs the five conversion fields synced before Velo publish.
+**Closed:** Inline JS parse, launch-audit syntax, targeted `diff --check`, regenerated status/control room, in-app browser 7-day unlocked smoke (`closeCount: 7`, duplicate route-reel closers `0`, overflow `0`), true 390px mobile smoke, real PDF download/render (`14` pages), and launch audit passed (`99 pass, 1 warn, 1 block`).
+
+**Next session should:** Continue product polish, or switch to the Wix handoff by syncing missing collection fields and applying the 10 Triggered Email IDs when Yusuf is ready.
+
+## 2026-05-31 — Codex (Ultimate conversion fields)
+
+**Did:** Split the Ultimate planner conversion signal into machine-readable CRM/email fields.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — `leadPayload()` now sends `conversionScore`, `conversionTier`, `conversionNextAction`, and `conversionReasons` alongside the user-safe `conversionSignal`.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/create-trip-planner-leads-collection.mjs`, `launch-remote-preflight.mjs`, `launch-audit.mjs`, `email/README.md`, and `velo/README.md` — validate/store/expose the machine-readable fields and guard critical live schema.
+- `ultimate-berlin-trip-planner/email/paste-ready/`, `velo/install-kit.html`, `LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, and root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — generated/handoff artifacts updated.
+
+**Opened:** Live `TripPlannerLeads` currently misses `conversionSignal`, `conversionScore`, `conversionTier`, `conversionNextAction`, and `conversionReasons`. Before Velo publish, load `WIX_API_KEY` and run `node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live --sync-fields`.
+**Closed:** Inline JS parse, transformed Velo syntax, helper syntax checks, regenerated paste-ready emails, regenerated Velo install kit, collection dry-run (`69` planned fields), non-mutating remote preflight, `diff --check`, regenerated launch status/control room, and launch audit passed (`99 pass, 1 warn, 1 block`).
+
+**Next session should:** Run the guarded field sync only when ready to mutate Wix, then continue with the 10 Triggered Email IDs and Velo publish/live smoke.
+
+## 2026-05-31 — Codex (Ultimate collection schema guard)
+
+**Did:** Hardened the Ultimate launch path so new lead fields cannot silently miss the live `TripPlannerLeads` schema.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs` — added `--live --sync-fields`, `patchCollectionField()`, before/after verification, and clear missing-field guidance.
+- `ultimate-berlin-trip-planner/launch-remote-preflight.mjs` — now verifies critical collection fields including `conversionSignal`, not just field count.
+- `ultimate-berlin-trip-planner/build-launch-status-report.mjs`, `build-launch-control-room.mjs`, `LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `LAUNCH_RUNBOOK.md`, `velo/README.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, and root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — status, dashboard, docs, and audit updated.
+
+**Opened:** Live `TripPlannerLeads` currently exists but is missing the new `conversionSignal` field. Before publishing Velo, load `WIX_API_KEY` and run `node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live --sync-fields`.
+**Closed:** Non-mutating remote preflight now reports missing critical fields; launch status shows `TripPlannerLeads collection | WARN | Missing critical fields: conversionSignal`; helper dry-run reports 65 planned fields; syntax checks, `diff --check`, regenerated status/control room, and launch audit passed (`98 pass, 1 warn, 1 block`).
+
+**Next session should:** Run the guarded field sync only when ready to mutate Wix, then proceed with the 10 Triggered Email IDs and Velo publish/live smoke.
+
+## 2026-05-31 — Codex (Ultimate conversion signal)
+
+**Did:** Added a deterministic `conversionSignal` score/next-action summary for Ultimate trip planner leads.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `conversionSignal()` / `conversionSignalSummary()` and included the summary in `leadPayload()`.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` and `velo/create-trip-planner-leads-collection.mjs` — validate/store/expose `conversionSignal` and include the collection field in setup dry-runs.
+- `ultimate-berlin-trip-planner/email/` — instant sales/booked emails include `Planner signal`; paste-ready HTML/copy kit regenerated.
+- `ultimate-berlin-trip-planner/launch-audit.mjs`, `LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md`, and root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — audit/status/handoff updated; audit now reports `97 pass, 1 warn, 1 block`.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, transformed Velo syntax, `node --check` for `.mjs` helpers, regenerated email HTML, regenerated Velo install kit, `diff --check`, collection dry-run (`65` planned fields), in-app browser forced fail-soft unlock (`fullPlanHidden: false`, PDF enabled, overflow `0`), launch status/control regeneration, and launch audit passed.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate trip-calendar PDF QA)
+
+**Did:** Fixed the PDF Carry Pack layout after the Trip Calendar action made it a 5-card block, then rendered fresh PDFs.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — `drawPdfCarryPack()` now computes rows/columns, wraps 5 actions into a measured 3-column/2-row grid, updates the cover subtitle, and skips `data:text/calendar` URLs as PDF links while showing `.ics` filenames.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard for PDF Carry Pack row wrapping and safe calendar-link handling.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated; audit now reports `96 pass, 1 warn, 1 block`.
+- `output/qa/ultimate-trip-planner-pdf/trip-calendar-20260531/` — real-download sales/booked PDFs, rendered pages, contact sheets, download summaries, render summaries, and text-check summary.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, launch-audit syntax, targeted `diff --check`, launch audit, status/control regeneration, real Chrome PDF downloads, `pypdfium2` render, visual page/contact-sheet inspection, and PDF text extraction passed. Both `trip-calendar-7day-sales.pdf` and `trip-calendar-7day-booked.pdf` rendered as 14 pages; cover Carry Pack has no visible overlap, Trip Calendar filename appears, `data:text/calendar` text is absent, booked PDF has World Clock prep and no sales booking text.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate trip calendar export)
+
+**Did:** Added a full-trip `.ics` calendar download to the unlocked Phone Carry Pack.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `tripCalendarText()` / `tripCalendarHref()` / `tripCalendarFileName()`, a new `Trip calendar` Carry Pack action, event tracking, responsive Carry Pack grid, and text/print export handling that shows filenames instead of data URLs.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard for full-trip calendar export and data-URL-safe text export.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated; audit now reports `95 pass, 1 warn, 1 block`.
+- `output/qa/ultimate-trip-planner-ui/trip-calendar-20260531/` — in-app browser DOM decode summary plus 390px Chrome screenshot/crop evidence.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, `node --check` for launch audit, targeted `diff --check`, launch audit, launch status/control regeneration, in-app browser DOM QA, and 390px Chrome visual QA passed. QA confirmed 5 Carry Pack actions, `berlin-trip-plan-2026-06-10-7days.ics`, 7 decoded `VEVENT`s, all-day DTSTART, Day 7, Google Maps route URLs, exact plan URL, and overflow `0`.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate dynamic reminder timeline)
+
+**Did:** Made the Ultimate lead-gate `Arrival reminder timeline` respond to the selected arrival date.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added dynamic reminder timeline rendering, skipped/current/future states, exact future reminder dates, dynamic `Up to N emails`, booked-path prep language, and mobile date-layout fixes.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — strengthened the lead-gate timeline guard to require the dynamic timeline functions, skipped/current copy, date formatting, render wiring, and World Clock booked language.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated; audit remains `94 pass, 1 warn, 1 block`.
+- `output/qa/ultimate-trip-planner-ui/reminder-timeline-20260531/` — DOM QA summaries and focused desktop/mobile screenshots for tomorrow-arrival sales, 10-day sales, and 10-day booked states.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, `node --check` for launch audit, targeted `diff --check`, launch audit, launch status/control regeneration, desktop focused QA, and true 390px mobile booked QA passed. Tomorrow-arrival sales now shows `Up to 2 emails` with passed windows folded into the instant plan; 10-day sales/booked states show `Up to 5 emails`, exact future dates, no overflow, and booked copy switches to World Clock prep.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate compact day copy)
+
+**Did:** Tightened the Ultimate planner's day-card prose so the full plan/PDF read less like repeated explanations.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — shortened first-day and template itinerary copy into compact action lines while keeping final `Later`/`Evening` closers title-only.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a `Day-card prose stays compact` guard for first-day/template copy under 90 chars.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated; audit now reports `94 pass, 1 warn, 1 block`.
+- `output/qa/ultimate-trip-planner-ui/compact-copy-20260531/` — in-app browser QA summary plus desktop/mobile viewport screenshots.
+- `output/qa/ultimate-trip-planner-pdf/compact-copy-20260531/` — fresh PDFs, rendered pages, contact sheets, and render/download summaries.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, syntax checks, targeted `diff --check`, launch audit, in-app browser desktop 3-day and true 390px mobile 7-day unlocked QA passed (`closersWithCopy: 0`, max copy `87`, overflow `0`). Real-download PDF QA passed for `compact-3day-sales.pdf` (9 pages) and `compact-7day-booked.pdf` (14 pages); rendered contact sheets show no visible overlap, and text checks confirmed branding/Trip Radar/Essentials with stale long-note phrases absent.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate Trip Radar exports)
+
+**Did:** Extended Trip Radar beyond the screen UI into text export, print HTML, and the PDF cover flow.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added shared `tripRadarData()` / `tripRadarSummary()`, print Trip Radar markup, and `drawPdfTripRadar()` on the PDF cover before the Trip Pass.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard proving Trip Radar reaches text, print, and PDF exports.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated; audit now reports `93 pass, 1 warn, 1 block`.
+- `output/qa/ultimate-trip-planner-pdf/trip-radar-20260531/` — fresh PDFs, rendered pages, contact sheets, text/render summaries, and print capture summary.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, targeted `diff --check`, launch audit, print HTML capture, and real-download PDF QA passed. `trip-radar-3day-sales.pdf` rendered as 9 pages and `trip-radar-7day-booked.pdf` rendered as 14 pages; contact sheets show Trip Radar, branding, day cards, and Essentials without visible overlap, and text extraction confirms Trip Radar labels with no stale `Local cue` / `Note:`.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate trip radar)
+
+**Did:** Added a compact `Trip radar` above the Berlin Trip Pass to make the result feel more like a visual control panel.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `[data-trip-radar]`, `tripRadarHtml()`, CSS for the score ring/action cards, and render wiring before the Trip Pass.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard for the visual plan-health summary.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated; audit now reports `92 pass, 1 warn, 1 block`.
+- `output/qa/ultimate-trip-planner-ui/trip-radar-20260531/` — desktop/mobile screenshots and DOM QA summary.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, targeted `diff --check`, launch audit, desktop locked 3-day, true 390px mobile locked 7-day, and true 390px mobile unlocked 7-day QA passed. Checks confirmed 3 radar cards, 3 links, full-plan gating intact before unlock, lead gate hidden after unlock, and overflow `0`.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate lead-gate timeline)
+
+**Did:** Added a visual `Arrival reminder timeline` to the Ultimate lead gate so the email ask feels like a concrete pre-arrival service.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added the 5-step reminder timeline UI, mobile grid fixes, and copy explaining booked guests receive prep instead of sales.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard for the lead-gate arrival email sequence.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated; audit now reports `91 pass, 1 warn, 1 block`.
+- `output/qa/ultimate-trip-planner-ui/lead-reminder-timeline-20260531/` — desktop/mobile screenshots and DOM QA summary.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, targeted `diff --check`, launch audit, desktop locked 3-day, true 390px mobile locked 7-day, and true 390px mobile unlocked 7-day QA passed. Checks confirmed 5 steps, no bad mobile wraps, full-plan gating intact before unlock, lead gate hidden after unlock, and overflow `0`.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate visual overview)
+
+**Did:** Added a photo-led `Plan at a glance` layer so the result panel feels more visual before the detailed route deck/full plan.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `[data-itinerary-overview]`, `itineraryOverviewHtml()`, CSS for photo-led day cards, overview stats, and responsive 390px layout.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard for the visual itinerary overview.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated; audit now reports `90 pass, 1 warn, 1 block`.
+- `output/qa/ultimate-trip-planner-ui/itinerary-overview-20260531/` — desktop/mobile screenshots and DOM QA summary.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, targeted `diff --check`, launch audit, desktop locked 7-day render, mobile locked 7-day render, and mobile unlocked booked 7-day render passed. New overview showed 7 photos, 7 Google Maps route links, full-plan gating intact before unlock, and overflow `0`.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate timebox PDF QA)
+
+**Did:** Verified the timebox PDF layer with fresh real downloads and rendered contact sheets.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added localhost-only `?qaUnlock=1` so PDF/export QA can unlock the full plan without sending live leads.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — extended the local-QA-param guard to prove `qaUnlock` is localhost/127.0.0.1-only.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, `LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html` — updated/regenerated with latest QA context.
+- `output/qa/ultimate-trip-planner-pdf/timebox-20260531/` — fresh PDFs, rendered page PNGs, contact sheets, and JSON summaries for 3-day sales and 7-day booked paths.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse and launch audit passed (`89 pass, 1 warn, 1 block`). Chrome headless downloaded `timebox-3day-sales.pdf` (9 pages) and `timebox-7day-booked.pdf` (14 pages); `pypdfium2` render/text QA confirmed BerlinWalk branding, timeboxes, title-only closers, Essentials, booked branch behavior, and no visible overlap/stale `Local cue` / `Note:` text.
+
+**Next session should:** Continue product polish or switch to the Triggered Email ID blocker when Yusuf has the 10 Wix message IDs.
+
+## 2026-05-31 — Codex (Ultimate timeboxes into email)
+
+**Did:** Extended the new daily timebox timeline into the lead/email funnel without changing the collection schema.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — `dayOperationsSummary()` now includes compact `Time ...` windows derived from the visible itinerary.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — `cleanText()` accepts an optional max length and `${dayOperations}` now allows 1200 chars so 7-day timing summaries are not clipped.
+- `ultimate-berlin-trip-planner/email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md`, `email/README.md`, `velo/README.md` — renamed the instant-email section to daily timing + operating notes and documented the timing windows.
+- `ultimate-berlin-trip-planner/email/paste-ready/`, `velo/install-kit.html` — regenerated from source after copy/Velo changes.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added a guard proving timeboxes reach the existing `${dayOperations}` email variable path.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated after the new audit check.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, Velo module syntax via `node --input-type=module --check`, generated email kit, generated Velo install kit, `diff --check`, and launch audit passed with `89 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue product polish or switch to the remaining launch blocker when the 10 real Wix email IDs are available.
+
+## 2026-05-31 — Codex (Ultimate itinerary timeboxes)
+
+**Did:** Added deterministic time windows so the day plan reads more like a real itinerary.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `dayBlockWindow()` / `dayBlockTimeHtml()`, preview `Timing` chips, route-reel time windows, full-plan block time badges, text export windows, print badges, and PDF day-card time windows.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — added audited coverage for the daily timebox timeline.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated after the new audit check.
+- `output/qa/ultimate-trip-planner-ui/timebox-mobile-20260531.png` — mobile headless screenshot.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Inline JS parse, launch/control/status syntax checks, `diff --check`, headless Chrome DOM dump for `Timing` / `09:00-10:45` / `11:30-13:30`, mobile screenshot, and launch audit passed with `88 pass, 1 warn, 1 block`.
+
+**Next session should:** Continue product polish or switch to the remaining launch blocker when the 10 real Wix email IDs are available.
+
+## 2026-05-31 — Codex (Ultimate day-end audit guard)
+
+**Did:** Added a launch-audit regression check for the no-long-day-end-copy policy.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — now blocks if `Later`/`Evening` closing blocks regain copy, `dayBlockCopy()` stops blanking closers, or legacy `shortDayNote` / `bw-day-check` / `Local cue` hooks return.
+- `ultimate-berlin-trip-planner/build-launch-control-room.mjs` — trims trailing whitespace from generated HTML output.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `RESEARCH_BACKLOG.md` — regenerated/updated after the new audit check.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** `node --check` for the audit/control-room generator, launch audit now reports `87 pass, 1 warn, 1 block`, generated status/control-room refresh passed, and trailing-whitespace checks passed for the touched launch artifacts.
+
+**Next session should:** Apply the 10 real email IDs when available, or continue product polish knowing the day-end text wall cannot quietly regress.
+
+## 2026-05-31 — Codex (Ultimate pasted-ID builder)
+
+**Did:** Added a dry-run-first helper that converts a pasted list of Wix editor URLs into the local message-ID JSON.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/build-message-ids-from-paste.mjs` — accepts `--from` or stdin, maps 10 raw URLs/IDs in manifest order or placeholder-labelled lines, extracts `/automations/edit/{id}/content/en`, validates duplicates/placeholders, and writes only with `--write`.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `WIX_EMAIL_SETUP_TR.md`, `build-launch-status-report.mjs`, `build-launch-control-room.mjs`, `LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md` — documented/wired/audited the helper.
+- `output/qa/ultimate-trip-planner-email/fake-pasted-message-ids.txt`, `fake-message-ids-from-paste.local.json` — QA fixtures/evidence.
+- `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T06-42-59-026Z.json` — latest remote preflight evidence.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Builder syntax, fake 10-URL dry-run/write/check, duplicate-ID failure, status/control-room regeneration, remote preflight refresh, and launch audit passed with `86 pass, 1 warn, 1 block`.
+
+**Next session should:** Use either the copy kit or the pasted-ID builder to create `message-ids.local.json`, then run the ID checker/apply helper and publish/smoke Velo.
+
+## 2026-05-31 — Codex (Ultimate copy-kit setup cockpit)
+
+**Did:** Upgraded the Triggered Email copy kit into a progress/validation cockpit for the 10 manual Wix templates.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` — generator now emits progress checkboxes, counters, URL-to-ID extraction, duplicate/placeholder validation, reset progress, normalized JSON export, and localStorage persistence in the copy kit.
+- `ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html`, `README.md`, `manifest.json`, 10 paste-ready HTML files, `message-ids.template.json`, `preview.html` — regenerated from the source generator.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `WIX_EMAIL_SETUP_TR.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md` — documented/audited the new copy-kit behavior.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `LAUNCH_CONTROL_ROOM.html` — regenerated after latest audit/preflight.
+- `output/qa/ultimate-trip-planner-email/copy-kit-progress-20260531.png` — desktop screenshot after duplicate-ID smoke.
+- `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T06-37-21-249Z.json` — latest remote preflight evidence.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Generator syntax/regeneration, desktop headless interaction smoke with duplicate-ID detection, 390px mobile overflow smoke, targeted `diff --check`, remote preflight refresh, and launch audit passed with `84 pass, 1 warn, 1 block`.
+
+**Next session should:** Use the upgraded copy kit while creating the 10 dashboard templates, export `message-ids.local.json`, run the ID checker/apply helper, then publish/smoke Velo.
+
+## 2026-05-31 — Codex (Ultimate Triggered Email API check)
+
+**Did:** Checked current Wix docs and documented why the remaining Triggered Email template creation step is still manual.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/TRIGGERED_EMAIL_API_NOTES.md` — official-docs note: Wix documents sending already-created Triggered Emails and managing automations, but not creating Triggered Email template HTML/content through a stable API.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `build-launch-control-room.mjs`, `LAUNCH_CONTROL_ROOM.html`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, `AGENTS.md` — linked/wired the note.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json` — regenerated after latest audit/preflight.
+- `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T06-29-09-272Z.json` — latest remote preflight evidence.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Wix docs check, API note wiring, JS syntax checks, generated status/control-room refresh, remote preflight refresh, and launch audit passed with `84 pass, 1 warn, 1 block`.
+
+**Next session should:** Create the 10 dashboard templates with the copy kit, fill `message-ids.local.json`, run the ID checker/apply helper, then publish/smoke Velo.
+
+## 2026-05-31 — Codex (Ultimate email ID checker)
+
+**Did:** Added a read-only progress checker for the 10 Wix Triggered Email message IDs.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs` — validates `message-ids.local.json`, accepts raw IDs or Wix editor URLs, reports missing/placeholder/duplicate/not-applied IDs, and supports `--json` plus `--require-applied`.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `WIX_EMAIL_SETUP_TR.md`, `email/paste-ready/README.md`, `velo/README.md` — added the check command before/after the apply helper.
+- `ultimate-berlin-trip-planner/build-launch-control-room.mjs`, `LAUNCH_CONTROL_ROOM.html`, `build-launch-status-report.mjs`, `LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md` — wired and audited the checker.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Checker syntax, missing-file check, template-placeholder check, generated status/control-room refresh, and launch audit passed with `82 pass, 1 warn, 1 block`.
+
+**Next session should:** Fill `message-ids.local.json` from the Wix email templates, run `check-triggered-email-ids.mjs`, apply IDs, then publish/smoke Velo.
+
+## 2026-05-31 — Codex (Ultimate launch gate refresh)
+
+**Did:** Refreshed Ultimate launch readiness and confirmed the Turkish Wix email handoff is part of the audited package.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json` — regenerated after the latest remote preflight.
+- `ultimate-berlin-trip-planner/LAUNCH_CONTROL_ROOM.html` — regenerated from the current dashboard model.
+- `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T06-17-26-213Z.json` — latest remote preflight evidence.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — updated latest status.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** JS syntax checks, status/control-room regeneration, targeted `diff --check`, remote preflight refresh, and launch audit passed with `80 pass, 1 warn, 1 block`.
+
+**Next session should:** Open `WIX_EMAIL_SETUP_TR.md` and `email/paste-ready/copy-kit.html`, create/apply the 10 Triggered Email IDs, publish/smoke Velo, and continue the runbook.
+
+## 2026-05-31 — Codex (Ultimate launch status report)
+
+**Did:** Added a generated launch status report for the Ultimate planner package.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/build-launch-status-report.mjs` — generator for Markdown/JSON status.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json` — current launch verdict, gates, audit, preflight, smoke, visibility, blog package, blockers/warnings, and next actions.
+- `ultimate-berlin-trip-planner/build-launch-control-room.mjs`, `LAUNCH_CONTROL_ROOM.html` — links the status report from the local dashboard.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — documented and audited the report.
+- `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T06-10-53-681Z.json` — latest remote preflight evidence.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Report script syntax, generated Markdown/JSON, status/control-room checks, targeted `diff --check`, remote preflight refresh, and launch audit passed with `78 pass, 1 warn, 1 block`.
+
+**Next session should:** Use `LAUNCH_STATUS.md` as the single status readout, then create/apply Triggered Email IDs, publish/smoke Velo, and continue the runbook.
+
+## 2026-05-31 — Codex (Ultimate visibility release guard)
+
+**Did:** Added a protected dry-run-first helper for the final Ultimate public visibility flip.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/release-visibility.mjs` — removes draft visibility only after guarded gates pass; supports optional homepage shortcut and widgets SEO regeneration.
+- `ultimate-berlin-trip-planner/build-launch-control-room.mjs`, `LAUNCH_CONTROL_ROOM.html` — added visibility-release command block.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — documented and audited the helper.
+- `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T06-05-38-535Z.json` — latest remote preflight evidence.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Helper syntax, dry-run output, guarded `--write` refusal, control-room regeneration, targeted `diff --check`, remote preflight refresh, and launch audit passed with `74 pass, 1 warn, 1 block`.
+
+**Next session should:** Create/apply the 10 Wix Triggered Email IDs, publish/smoke Velo, insert the CMS row, then run `release-visibility.mjs` after its gates pass.
+
+## 2026-05-31 — Codex (Ultimate launch control room)
+
+**Did:** Added a local launch dashboard for the remaining Ultimate planner handoff.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/build-launch-control-room.mjs` — generator for the local launch dashboard.
+- `ultimate-berlin-trip-planner/LAUNCH_CONTROL_ROOM.html` — local status/control page linking the email copy kit, Velo install kit, runbook, message-ID commands, live-smoke commands, CMS insert commands, and current launch state cards.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — documented and audited the control room.
+- `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T06-00-05-838Z.json` — latest remote preflight evidence.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Generator syntax, generated control room, static coverage check, targeted `diff --check`, remote preflight refresh, and launch audit passed with `72 pass, 1 warn, 1 block`.
+
+**Next session should:** Open `LAUNCH_CONTROL_ROOM.html`, create/apply the 10 Wix Triggered Email IDs, paste/publish Velo via `velo/install-kit.html`, then run `live-smoke-trip-planner.mjs --live --email ...` and `--booking`.
+
+## 2026-05-31 — Codex (Ultimate Velo install kit)
+
+**Did:** Added a local Wix Developer Tools install kit for the Ultimate planner Velo backend.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/build-velo-install-kit.mjs` — generator for `velo/install-kit.html`.
+- `ultimate-berlin-trip-planner/velo/install-kit.html` — local admin page with copy buttons for `Backend/tripPlannerFunnel.js`, the `Backend/http-functions.js` merge source, `jobs.config`, and smoke commands.
+- `ultimate-berlin-trip-planner/velo/README.md`, `LAUNCH_RUNBOOK.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — documented and audited the kit.
+- `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T05-52-25-394Z.json` — latest remote preflight evidence.
+
+**Opened:** Ultimate remains draft/unpublished; 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and BerlinTools CMS/blog remain unpublished.
+**Closed:** Generator syntax, generated install kit, static kit coverage check, targeted `diff --check`, remote preflight refresh, and launch audit passed with `69 pass, 1 warn, 1 block`.
+
+**Next session should:** Create/apply the 10 Wix Triggered Email IDs, regenerate/open `velo/install-kit.html`, paste/publish Velo, then run `live-smoke-trip-planner.mjs --live --email ...` and `--booking`.
+
+## 2026-05-31 — Codex (Ultimate email copy kit)
+
+**Did:** Added a local one-page copy kit for creating the 10 Ultimate Wix Triggered Email templates.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` — now generates `email/paste-ready/copy-kit.html`.
+- `ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html` — local admin page with subject/preheader/HTML copy buttons, message-ID inputs, JSON copy/download builder.
+- `ultimate-berlin-trip-planner/email/paste-ready/README.md`, `LAUNCH_RUNBOOK.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — documented and audited the copy kit.
+- `output/qa/ultimate-trip-planner-email/copy-kit-20260531.png` — headless Chrome render evidence.
+
+**Opened:** Ultimate remains draft/unpublished; the 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and the BerlinTools CMS row/blog remain unpublished.
+**Closed:** Generator syntax/regeneration, copy-kit static counts, headless Chrome render, targeted `diff --check`, and launch audit passed with `66 pass, 1 warn, 1 block`.
+
+**Next session should:** Use `copy-kit.html` while creating the 10 Wix Triggered Email templates, export/fill `message-ids.local.json`, apply IDs with the helper, then publish/smoke Velo.
+
+## 2026-05-31 — Codex (Ultimate planner launch prep)
+
+**Did:** Added launch handoff/preflight helpers and created the live lead collection.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md` — step-by-step launch order for Triggered Emails, Velo, smoke tests, CMS visibility, and blog publish.
+- `ultimate-berlin-trip-planner/launch-remote-preflight.mjs` — non-mutating remote check for GitHub Pages, Wix dynamic page, Velo endpoint OPTIONS, BerlinTools slug, and `TripPlannerLeads`.
+- `ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs` — dry-run-first helper that creates/verifies the Wix Data collection.
+- `ultimate-berlin-trip-planner/launch-audit.mjs`, `velo/README.md`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — wired and documented the new launch prep.
+- Wix CMS: created `TripPlannerLeads` via REST; live run verified 64 expected fields.
+- `output/qa/ultimate-trip-planner-collection/`, `output/qa/ultimate-trip-planner-remote-preflight/` — dry/live evidence JSON.
+
+**Opened:** Ultimate remains draft/unpublished; the 10 real Triggered Email IDs still block launch, Velo backend/job is not published, live endpoint smoke evidence is still missing, and the BerlinTools CMS row/blog remain unpublished.
+**Closed:** Collection helper syntax/dry-run/live run, remote preflight after collection creation (`TripPlannerLeads` exists, BerlinTools slug free, endpoints not published), targeted `diff --check`, CMS insert dry-run, and launch audit passed with `64 pass, 1 warn, 1 block`.
+
+**Next session should:** Create/apply real Triggered Email IDs, publish the Velo files/job, rerun remote preflight/audit, then run `live-smoke-trip-planner.mjs --live --email ...` and `--booking`.
+
+## 2026-05-31 — Codex (Ultimate planner live smoke helper)
+
+**Did:** Added a dry-run-first smoke helper for the live Velo endpoints.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — builds full `tripPlannerLead` payloads, optional `tripPlannerBooking` payloads, dry-runs by default, requires `--live --email ...` before calling Wix, and records JSON output under `output/qa/ultimate-trip-planner-live-smoke/`.
+- `ultimate-berlin-trip-planner/velo/README.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — documented and wired the helper into launch readiness.
+- `output/qa/ultimate-trip-planner-live-smoke/dry-run-script-20260531.json` — dry-run evidence with no network responses.
+
+**Opened:** Ultimate remains draft/unpublished; real Wix Triggered Email IDs still need to replace the 10 `TODO_TRIP_PLANNER_*` placeholders, then actual live `tripPlannerLead` and `tripPlannerBooking` smokes are required.
+**Closed:** Smoke helper syntax, dry-run with lead+booking payload, targeted `diff --check`, dry-run JSON inspection, and launch audit passed with `46 pass, 1 warn, 1 block`.
+
+**Next session should:** Create/apply real Triggered Email IDs, publish Velo, rerun launch audit, then run `live-smoke-trip-planner.mjs --live --email ...` and `--booking`.
+
+## 2026-05-31 — Codex (Ultimate planner email ID helper)
+
+**Did:** Added a dry-run-first helper for applying the 10 Wix Triggered Email message IDs.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/apply-triggered-email-ids.mjs` — validates raw IDs or Wix editor URLs, extracts `/automations/edit/{messageId}/content`, checks duplicates/placeholders, dry-runs by default, and updates `tripPlannerFunnel.js` only with `--write`.
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs`, `email/paste-ready/message-ids.template.json`, `email/paste-ready/README.md` — generator now emits the message-ID template and documents the apply workflow.
+- `.gitignore` — ignores local message-ID JSON files under `email/paste-ready/`.
+- `ultimate-berlin-trip-planner/launch-audit.mjs`, `email/README.md`, `velo/README.md`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — wired/documented the helper and latest audit.
+- `output/qa/ultimate-trip-planner-email/fake-message-ids.json` — QA fixture for dry-run validation.
+
+**Opened:** Ultimate remains draft/unpublished; real Wix Triggered Email IDs still need to replace the 10 `TODO_TRIP_PLANNER_*` placeholders, then live endpoint smoke tests are required.
+**Closed:** Generator/apply-script syntax, targeted `diff --check`, expected failure with placeholder template, successful fake-ID dry-run with Wix URL extraction, no accidental source replacement, and launch audit passed with `45 pass, 1 warn, 1 block`.
+
+**Next session should:** Create the 10 Wix Triggered Email templates from `email/paste-ready/README.md`, run `apply-triggered-email-ids.mjs` with real IDs, rerun launch audit, then live-test `/_functions/tripPlannerLead` and `/_functions/tripPlannerBooking`.
+
+## 2026-05-31 — Codex (Ultimate planner email HTML package)
+
+**Did:** Turned the 10 Ultimate planner email markdown drafts into a Wix paste-ready Triggered Email package.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` — generator for table/inline-CSS HTML blocks from the markdown source.
+- `ultimate-berlin-trip-planner/email/paste-ready/` — generated 10 HTML blocks, `manifest.json`, `README.md`, and `preview.html`.
+- `ultimate-berlin-trip-planner/email/README.md`, `velo/README.md`, `launch-audit.mjs`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — documented workflow and wired the package into launch audit.
+- `output/qa/ultimate-trip-planner-email/paste-ready-preview-20260531.png` — headless Chrome preview screenshot.
+
+**Opened:** Ultimate remains draft/unpublished; real Wix Triggered Email message IDs still need to replace the 10 `TODO_TRIP_PLANNER_*` placeholders, then live endpoint smoke tests are required.
+**Closed:** Generator syntax, targeted `diff --check`, paste-ready forbidden-tag scan, headless Chrome preview render, and launch audit passed with `43 pass, 1 warn, 1 block`; the block remains the expected missing real message IDs.
+
+**Next session should:** Create the 10 Wix Triggered Email templates from `email/paste-ready/README.md`, paste message IDs into `velo/tripPlannerFunnel.js`, rerun `node ultimate-berlin-trip-planner/launch-audit.mjs`, then live-test `/_functions/tripPlannerLead` and `/_functions/tripPlannerBooking`.
+
+## 2026-05-31 — Codex (Ultimate planner launch audit)
+
+**Did:** Added a local audit script that turns the remaining launch checklist into command output.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — checks required artifacts, TODO Triggered Email IDs, email/Velo variables, Velo endpoints and scheduler, booking-aware fail-closed behavior, draft visibility, local-only QA params, PDF/Route Deck/Day Jump markers, blog body hygiene, CMS insert helper, and live-smoke evidence.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded audit scope and latest result.
+
+**Opened:** Ultimate remains draft/unpublished; the 10 `TODO_TRIP_PLANNER_*` message IDs still block launch until real Wix Triggered Email IDs are pasted. Live Wix smoke evidence still has to be produced after publish.
+**Closed:** `node --check`, targeted `git diff --check`, and `node ultimate-berlin-trip-planner/launch-audit.mjs` passed the script itself; latest audit result is `37 pass, 1 warn, 1 block` with the one block expected.
+
+**Next session should:** Replace the Triggered Email placeholders, rerun the audit, then move to live `/_functions/tripPlannerLead` and `/_functions/tripPlannerBooking` smoke tests.
+
+## 2026-05-31 — Codex (Ultimate planner PDF overview)
+
+**Did:** Made the exported PDF feel more like a real plan document by adding a dedicated itinerary overview page.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `drawItineraryOverviewPage()` with BerlinWalk logo header, trip code, sales/booked tour summary, linked Day 1-7 mini cards with photos/anchors, and a `How to use this PDF` note before the detailed day cards.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+- `output/qa/ultimate-trip-planner-pdf/overview-20260531/overview-7day-contact-sheet.png`, `overview-3day-booked-contact-sheet.png` — rendered PDF QA evidence.
+
+**Opened:** Ultimate remains draft/unpublished; product polish and launch prep remain open.
+**Closed:** Inline JS parse, `diff --check`, headless Chrome 7-day sales PDF download/render (14 pages, overview labels present, stale cue/note text absent), 3-day booked PDF download/render (9 pages, booked copy present, sales booking line absent), contact-sheet visual inspection, and Chrome cleanup passed.
+
+**Next session should:** Continue product polish or move into launch-readiness audit; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Day Jump Bar)
+
+**Did:** Added a compact unlocked full-plan index so the long itinerary is easier to use on phone.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-day-jump-bar`, Day Jump Bar CSS, `dayJump*` helpers, focused-card styling, `[data-day-jump-day]` click handling, and Route Deck jump sync.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+- `output/qa/ultimate-trip-planner-ui/day-jump-bar-desktop-20260531.png`, `day-jump-bar-mobile-390-20260531.png`, `day-jump-desktop-20260531.png`, `day-jump-mobile-390-20260531.png` — visual/interaction QA screenshots.
+
+**Opened:** Ultimate remains draft/unpublished; product polish and launch prep remain open.
+**Closed:** Inline JS parse, `diff --check`, in-app browser locked read (`0` day-jump buttons, overflow `0`), headless desktop fail-soft unlock/click (`7` buttons, Day 5 active/focused, PDF enabled, overflow `0`), true 390px mobile fail-soft unlock/click (`Day 7` active/focused, two-column grid, overflow `0`), bar screenshot inspection, and Chrome cleanup passed.
+
+**Next session should:** Continue product polish toward launch readiness; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Dashboard Lens)
+
+**Did:** Reworked the result plan board into a segmented Dashboard so the preview feels less like a long stack of modules.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `boardLens`, `.bw-board-tabs`, `boardLensMeta()`, `boardTabsHtml()`, and `[data-board-lens]` click handling. The plan board now shows one active lens: `Route` (map/media, map brief, trip spine), `Prep` (base, budget, interests, pace, weather/openings), or `Review` (health, checklist, radar, confidence, swaps, fixes).
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+- `output/qa/ultimate-trip-planner-ui/dashboard-lens-desktop-20260531.png`, `dashboard-lens-mobile-390-20260531.png` — visual QA screenshots.
+
+**Opened:** Ultimate remains draft/unpublished; product polish and launch prep remain open.
+**Closed:** Inline JS parse, `diff --check`, in-app browser route/prep/review read/click smoke, headless Chrome desktop and true 390px mobile lens-switch smokes (correct section counts, active tab state, overflow `0`), fail-soft unlock after switching to Prep (`fullDays: 7`, Route Deck jump, PDF enabled, overflow `0`), and Chrome cleanup passed.
+
+**Next session should:** Continue toward launch-readiness/product polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Route Deck)
+
+**Did:** Added an interactive Route Deck so the trip preview feels more like a visual route control panel.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-route-deck`, Route Deck CSS, `routeDeck*` helpers, selectable Day 1-7 buttons, focus photo/anchor/watch chips, Google Maps day action, selected-day jump after unlock, and `data-day-card` anchors in the full plan. Also fixed narrow Trip Pass route-line wrapping.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+- `output/qa/ultimate-trip-planner-ui/route-deck-desktop-20260531.png`, `route-deck-mobile-390-20260531.png`, `route-deck-focus-desktop-20260531.png`, `route-deck-focus-mobile-20260531.png` — visual QA screenshots.
+
+**Opened:** Ultimate remains draft/unpublished; more visual/product polish and launch prep remain open.
+**Closed:** Inline JS parse, `diff --check`, in-app browser locked/mobile-ish read (`7` day buttons, loaded photo, 3 anchors, overflow `0`), headless Chrome desktop 7-day click/unlock smoke (`Day 4` switches active route, fail-soft unlock gives 7 full days, jump button, PDF enabled, overflow `0`), true 390px mobile emulation (`Day 7` Potsdam transit route, overflow `0`), and Chrome cleanup passed.
+
+**Next session should:** Continue toward a launch-readiness/product-polish audit; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner PDF photo polish)
+
+**Did:** Extended real-photo visual polish into the exported PDF.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added cached PDF image loading (`loadImageDataUrl()`, `loadDayPhotoDataUrls()`), `drawPdfPhoto()`, `drawPdfPhotoStrip()`, a cover `Route snapshots` strip, and photo thumbnails in PDF day-card visual bands with fallback color tiles.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+- `output/qa/ultimate-trip-planner-pdf/photo-postcards-20260531/photo-postcards-7day.pdf`, rendered page PNGs, and `photo-postcards-7day-contact-sheet.png` — PDF visual QA evidence.
+
+**Opened:** Ultimate remains draft/unpublished; launch tasks and more product polish remain open.
+**Closed:** Inline script parse, `diff --check`, headless Chrome 7-day fail-soft PDF smoke (`PDF downloaded.`, `fullDays: 7`, `photos: 14`, overflow `0`), `pypdfium2` render of 13 pages, visual contact-sheet inspection, and text extraction checks (`Route snapshots` / `Day-by-Day Plan` present; `Local cue` / `Note:` absent) passed.
+
+**Next session should:** Continue with route-board/interaction polish or launch-readiness audit; do not publish/push until Yusuf asks.
+
+## 2026-05-31 — Codex (Ultimate planner photo postcards)
+
+**Did:** Added real-photo postcard visuals to make day cards feel less text-only and more like a trip plan object.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `DAY_PHOTOS`, `assetUrl()`, `dayPhotoForType()`, `dayPhotoHtml()`, `.bw-day-photo*` CSS, mobile stacking, and print photo strips. Preview/full-plan day cards now use real BerlinWalk/gallery photos with a day-icon overlay instead of only SVG art.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+- `output/qa/ultimate-trip-planner-ui/photo-postcards-desktop-20260531.png`, `photo-postcards-mobile-20260531.png`, `photo-postcards-preview-crop-20260531.png` — visual QA screenshots.
+
+**Opened:** Ultimate remains draft/unpublished; broader visual/PDF polish and launch tasks remain open.
+**Closed:** Inline script parse, `diff --check`, asset existence checks, in-app browser locked smoke, headless desktop/mobile locked and fail-soft unlocked smokes (`14/14` photos loaded after unlock, overflow `0`, `closeRowsWithCopy: 0`), print HTML photo-source check, and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue with a PDF/day-card visual pass or a stronger route-board view; keep reducing prose density.
+
+## 2026-05-31 — Codex (Ultimate planner day-end trim cleanup)
+
+**Did:** Removed the dead day-end note path after Yusuf called out the long repeated end-of-day text.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — removed `.bw-day-check`, `shortDayNote()`, UI/text/PDF/print `Local cue`/`Note` render slots; `Later`/`Evening` closers stay title-only.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the final day-end copy policy and QA.
+
+**Opened:** Ultimate remains draft/unpublished; visual/product polish and launch tasks remain open.
+**Closed:** Inline script parse, `diff --check`, source search for old hooks, and headless Chrome 7-day fail-soft unlock passed: `fullDays: 7`, `closeRows: 7`, `closeRowsWithCopy: 0`, `dayChecks: 0`, no `Local cue`/`Note` day-card text, stale long phrases absent, overflow `0`, PDF enabled.
+
+**Next session should:** Continue Ultimate polish; use risk chips, Smart Fixes, Weather/Openings, and Berlin Essentials for exceptions instead of day-end paragraphs.
+
+## 2026-05-31 — Codex (Ultimate planner PDF visual regression)
+
+**Did:** Ran a real PDF visual regression pass after the Trip Pass, Day Rhythm, and Phone Carry Pack additions.
+
+**Changed:**
+- `output/qa/ultimate-trip-planner-pdf/live-regression-20260531/` — generated fresh `carry-3day-sales.pdf`, `carry-7day-booked.pdf`, page PNGs, and contact sheets.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the PDF QA evidence.
+
+**Opened:** Ultimate remains draft/unpublished; launch tasks and any later visual polish remain open.
+**Closed:** Headless Chrome downloaded the 3-day sales PDF and 7-day booked/stress PDF; `pypdfium2` rendered all pages to PNG. Contact sheets show no visible overlap/clipping, BerlinWalk logo present, Phone Carry Pack and Day Rhythm present, Essentials clean; text extraction found `Phone carry pack` / Day Rhythm content and no stale `Local cue`.
+
+**Next session should:** Continue Ultimate polish or launch prep; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Phone Carry Pack)
+
+**Did:** Added an unlocked phone-ready action hub so users can carry the plan as link/map/tour/PDF actions instead of hunting through separate buttons.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-carry-pack`, `.bw-carry-*` UI, `carryPackItems()` / `carryPackHtml()` / `carryPackSummary()`, Carry Pack rendering after the Trip Pass, copy/PDF carry actions, text export lines, print section, and a PDF cover-flow card.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — added/stored/exposed `${carryPack}` and included it in instant sales/booked emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader visual/product polish is still open.
+**Closed:** Inline script parse, transformed Velo syntax, `diff --check`, headless locked hidden-state smoke, forced fail-soft unlock 4-action smoke (`Exact plan`, `Route map`, `Tour hold`, `Carry PDF`), copy action, clean lead-payload intercept (`carryPack` present), print capture, PDF status `PDF downloaded.`, mobile-width 390px overflow `0`, and booked-state smoke (`Tour prep`, no calendar download, meeting link present) passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Day Rhythm)
+
+**Did:** Added compact per-day rhythm bars so each day communicates load, movement, buffer, and night intensity without more prose.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `dayRhythmItems()` / `dayRhythmHtml()` / `dayRhythmSummary()` and `.bw-day-rhythm` UI; preview and full-plan cards now show `Load / Move / Buffer / Night` bars, text export includes the summary, PDF day cards draw rhythm bars, and print output captures the same bars.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — added/stored/exposed `${dayRhythm}` and included it in instant sales/booked emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader visual/product polish is still open.
+**Closed:** Inline script parse, transformed Velo syntax, `diff --check`, headless desktop locked 7-day rhythm smoke (2 preview rhythm panels / 8 items, overflow `0`), forced fail-soft unlock (7 preview rhythms + 7 full-plan rhythms / 28 full rhythm items, PDF status `PDF downloaded.`), clean lead-payload intercept (`dayRhythm` present), print capture, and mobile-width 390px fail-soft unlock (7 full rhythms, overflow `0`) passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner preview-flow trim)
+
+**Did:** Replaced the remaining long preview-day paragraph with compact visual action chips.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `.bw-preview-flow` cards and `previewDayFlowHtml()`; preview days now show `Route / Anchors / Watch` chips with a Google Maps route action, place anchors, and first risk state instead of a first-block prose paragraph. Icon/text CSS is scoped so chip icons stay white.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader visual/product polish is still open.
+**Closed:** Inline script parse, `diff --check`, headless desktop locked 7-day preview smoke (2 flows / 6 chips, zero preview paragraphs, Google Maps `api=1`, overflow `0`), forced fail-soft unlock smoke (7 flows / 21 chips, zero preview paragraphs, PDF status `PDF downloaded.`), and mobile-width 390px locked smoke passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Trip Pass exports)
+
+**Did:** Reused the Trip Pass identity across text export, print, and PDF.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `tripPassData()` as the shared source; `planText()` now includes pass code, pass route, and pass map; print output includes a dark-green Trip Pass block; PDF cover flow draws a branded Trip Pass card with stats and day dots.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader visual/product polish is still open.
+**Closed:** Inline script parse, `diff --check`, headless 7-day screen/print/PDF smoke (1 pass, 3 stats, 7 day icons, Google Maps `api=1`, overflow `0`, print HTML includes pass/code/map action and invokes print, PDF status `PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Trip Pass visual)
+
+**Did:** Added a compact Trip Pass visual to make the result preview feel more like a travel document.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-trip-pass`, Trip Pass CSS, and `tripPassHtml()` / `renderTripPass()`; the result now shows a deterministic pass code, arrival, base, tour slot, day-icon route line, and Google Maps overview action without extra explanatory prose.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader visual/product polish is still open.
+**Closed:** Inline script parse, `diff --check`, headless Chrome desktop 3-day smoke (1 pass, 3 stats, 3 day icons, Google Maps `api=1`, overflow `0`), mobile-width 390px 7-day smoke (1 pass, 7 day icons, overflow `0`), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner no day-end notes + draft visibility)
+
+**Did:** Removed repeated day-end note boxes and made the live widgets Custom Element respect draft status.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — `shortDayNote()` now returns empty, so UI/text export/PDF/print no longer append repeated `Local cue` / `Note` boxes after day cards; final `Later`/`Evening` rows remain title-only.
+- `widgets-hub/widgets-hub-element.js` — filters out `hidden`, `published: false`, and `status: "draft"` tools before rendering/counting cards and before theme-snippet lookup.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader visual/product polish is still open.
+**Closed:** Inline script parse, widgets hub syntax, JSON parse, `diff --check`, draft visibility audit (`visibleCount: 30`, `visibleHasUltimate: false`), headless 7-day fail-soft unlock no-cue smoke (`fullDays: 7`, `closeRowsWithCopy: 0`, `dayChecks: 0`, note boxes `0`, overflow `0`), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner lead gate QA hardening)
+
+**Did:** Hardened local QA hooks and verified the lead gate/fail-soft unlock path.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added localhost-only `?resetUnlock=1` and `?forceLeadError=1` QA params; `unlock()` now clears stale lead messages after success/fail-soft.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader polish is still open.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, fresh locked visit (full plan hidden, PDF/print disabled, 2 preview days), invalid email, missing consent, forced endpoint failure fail-soft unlock (3 full days, Essentials, PDF/print enabled, stale message cleared, overflow `0`, empty browser error log), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Berlin Essentials cards)
+
+**Did:** Reworked Berlin Essentials into short visual carry cards.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — Essentials source now has label/cue/note fields; UI cards show icon + command + short note, text export includes cue text, print includes cue styling, and the PDF Essentials page uses a two-column cheat-sheet layout.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader polish is still open.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser Essentials smoke (8 cards, all cues/icons present, longest note 60 chars, overflow `0`, empty browser error log), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Travel Mode hero)
+
+**Did:** Completed the near-arrival Travel Mode hero polish.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — fixed Travel Mode kicker cascade so the label stays brand yellow; text export now includes Travel Mode quick-check chips and first-route URL.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded behavior and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader polish is still open.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser tomorrow-arrival smoke (panel before map brief, 4 chips, 3 actions, yellow kicker, overflow `0`, empty browser error log), far-date smoke (Travel Mode absent), and PDF button smoke (`PDF downloaded.`) passed. Screenshot capture timed out in the in-app browser.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner day-end copy check)
+
+**Did:** Rechecked whether end-of-day explanations are necessary and confirmed the product rule: close rows stay title-only.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — no new source change this pass; current code already routes UI/text/PDF/print close rows through `dayBlockCopy()` so final `Later`/`Evening` copy is suppressed.
+- Root `SESSION_LOG.md` — logged the QA outcome.
+
+**Opened:** Ultimate remains draft/unpublished; broader polish is still open.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, and in-app browser 7-day close-row smoke passed (`closeCount: 7`, `closeWithCopy: 0`, overflow `0`; only exception note was the short Sunday cue).
+
+**Next session should:** Continue Ultimate polish; keep close rows title-only unless a short exception prevents a real visitor mistake.
+
+## 2026-05-31 — Codex (Ultimate planner Weather & Openings Strategy)
+
+**Did:** Added a compact Weather & Openings Strategy so existing weather/opening logic becomes a visual decision panel.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `weatherStrategy()` / `weatherStrategyHtml()` with four cards for weather source, opening rhythm, route bias, and final check; included it in result board, text export, print view, PDF cover flow, and lead payload.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md`, `email/e3-one-day-before.md`, `email/booked-e3-one-day-before.md` — added/stored/exposed `${weatherStrategy}` and used it in instant + 1-day-before emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader polish is still open.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser Monday/Sunday/future-climate smoke (4 cards, overflow `0`, empty browser errors), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish; do not publish/push until Yusuf explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner day-end close caps)
+
+**Did:** Made final day-end blocks explanation-free and styled them as compact visual close caps.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — source `Later`/`Evening` closing block copy is now empty, labels are shorter, UI close rows get a moon icon/compact styling, and print gets matching close-row styling.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md` — recorded the stricter no-closing-paragraph rule and latest QA.
+
+**Opened:** Ultimate remains draft/unpublished; broader polish is still open.
+**Closed:** Inline script parse, `diff --check`, in-app browser 7-day close-row smoke (`closeWithCopy: 0`, overflow `0`), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish; keep day-ending copy title-only unless an exception prevents a real visitor mistake.
+
+## 2026-05-31 — Codex (Ultimate planner Pace Guard)
+
+**Did:** Added Pace Guard cards so group/pace choices visibly constrain the plan without adding prose.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `paceGuard()` / `paceGuardHtml()` with compact cards for day load, break rule, transfers, and night/close-to-base logic; included it in result board, text export, print view, and PDF cover flow. Also made PDF export lazy-load jsPDF if needed, timeout logo loading, and fail soft instead of hanging.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — added/stored/exposed `${paceGuard}` and included it in instant sales/booked emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser family/gentle, packed/nightlife, and balanced/evening smoke (4 cards, overflow `0`, empty browser errors), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Interest Lens)
+
+**Did:** Added an Interest Lens so personalization is visible as day/anchor cards instead of more itinerary prose.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `interestLens()` / `interestLensHtml()` with compact cards mapping selected interests to plan days and Google Maps anchors; included it in result board, text export, print view, and PDF cover flow.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — added/stored/exposed `${interestLens}` and included it in instant sales/booked emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser history/wall, museums/food/free, and nightlife/food/wall/museums smoke (2/3/4 cards, Google Maps anchor links, overflow `0`, empty browser errors), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Budget Pulse)
+
+**Did:** Added a compact Budget Pulse for spend/ticket/cash logic without adding itinerary prose.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `budgetPulse()` / `budgetPulseHtml()` with four compact cards for daily baseline, transit ticket, paid anchors, and cash/tips; included it in result board, text export, print view, and PDF cover flow.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — added/stored/exposed `${budgetPulse}` and included it in instant sales/booked emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser low/smart/comfort spend-mode smoke (4 budget cards, daily budget link present, overflow `0`, empty browser errors), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Base Camp Brief)
+
+**Did:** Added a stay-area-aware Base Camp Brief and kept final day-end blocks short/title-only after Yusuf flagged repetition.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `baseCampProfile()` / `baseCampBrief()` / `baseCampBriefHtml()` with four compact cards for base anchor, first move, ticket logic, and late return; included Google Maps base/first-route actions and carried the brief into text export, print view, and PDF cover flow.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — added/stored/exposed `${baseBrief}` and included it in instant sales/booked emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser 3/5/7-day east/west/unsure stay-area smoke (4 cards, title-only `Later`/`Evening` endings, overflow `0`, empty browser errors), and PDF button smoke (`PDF downloaded.`) passed. Screenshot capture timed out in the in-app browser.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Reservation Radar)
+
+**Did:** Added a plan-level Reservation Radar for the actions that can actually change the trip.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `reservationRadar()` / `reservationRadarHtml()` with compact cards for BerlinWalk tour, museum/Reichstag-style timed checks, dinner/nightlife holds, Potsdam decisions, and Sunday/holiday errands; included it in result board, text export, print view, and PDF cover flow.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — added/stored/exposed `${reservationRadar}` and included it in instant sales/booked emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser sales 3-day / booked 7-day / 1-day mobile-width smoke (booked path suppresses book link, overflow `0`, empty browser errors), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner daily operating notes)
+
+**Did:** Added compact daily operating notes to make each itinerary day feel more actionable and less text-like.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added deterministic `Start`, `Transit`, `Reserve`, and `Backup` chips to preview/full-plan day cards; included the same notes in text export, print view, and PDF day cards.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — added/stored/exposed `${dayOperations}` and included it in instant sales/booked emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check, `diff --check`, in-app browser 1/5/7-day mobile-width smoke (`Start / Transit / Reserve / Backup`, overflow `0`, empty browser errors), and PDF button smoke (`PDF downloaded.`) passed. Screenshot capture timed out in the in-app browser.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner scheduler hardening)
+
+**Did:** Hardened the scheduled email processor for launch-scale and same-day signup edge cases.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — added paged due-lead fetching in 100-row batches and skipped reminder stages when the latest signup/update happened on the same Berlin calendar date.
+- `ultimate-berlin-trip-planner/velo/README.md` — documented pagination and same-day duplicate-reminder suppression.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the scheduler hardening and QA.
+
+**Opened:** Ultimate remains draft/unpublished; Wix collection, Triggered Email IDs, scheduled job install, and live endpoint smoke tests remain.
+**Closed:** `node --input-type=module --check`, `diff --check`, and standalone due-stage fixture checks passed.
+
+**Next session should:** Continue Ultimate polish or prepare the Wix launch checklist when Yusuf explicitly asks; do not publish/push by default.
+
+## 2026-05-31 — Codex (Ultimate planner reminder email signals)
+
+**Did:** Made the scheduled email sequence reuse the new planner signals instead of sounding generic.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/e1-seven-days-before.md`, `e2-three-days-before.md`, `e3-one-day-before.md`, `e4-arrival-day.md` — added concise `${planHealth}` / `${preArrivalChecklist}` blocks where useful in the sales path.
+- `ultimate-berlin-trip-planner/email/booked-e1-seven-days-before.md`, `booked-e2-three-days-before.md`, `booked-e3-one-day-before.md`, `booked-e4-arrival-day.md` — added booked-path checklist/health reminders while keeping sales links out.
+- `ultimate-berlin-trip-planner/email/README.md`, `RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded reminder-email variable usage.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** `diff --check` passed for the updated email/docs files.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner pre-arrival checklist)
+
+**Did:** Added a conversion-focused checklist for what to do before arriving in Berlin.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `preArrivalChecklist()` / `preArrivalChecklistHtml()` with four action cards for tour/meeting point, ticket, opening/weather, and Day 1 route; rendered in the result board and carried into text export, print plan, and PDF cover flow.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — normalized/stored/exposed `${preArrivalChecklist}` and included it in instant plan emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded checklist scope and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check via `node --input-type=module --check`, `diff --check`, in-app browser 3-day sales / 1-day sales / 7-day booked smoke (4 actions, booked copy switches to World Clock, overflow `0`, empty widget errors), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Plan Health)
+
+**Did:** Added a short visual Plan Health review so the itinerary feels checked by a local guide.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `planHealth()` / `planHealthHtml()` and rendered `Ready / Watch / Fix`, score, route/watch/fix micro-checks in the result board; carried the summary into text export, print plan, and PDF cover flow.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — normalized/stored/exposed `${planHealth}` and included it in instant plan emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the Plan Health layer and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check via `node --input-type=module --check`, `diff --check`, in-app browser 1/3/5/7-day smoke (`ready/watch/fix` tones, overflow `0`, empty widget errors), and PDF button smoke (`PDF downloaded.`) passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner closing copy + lead intelligence)
+
+**Did:** Cut repetitive day-closing text further and wired day intelligence into the lead/email path.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `dayBlockCopy()` so final `Later`/`Evening` blocks show title-only in UI, text export, PDF, and print; fixed postcard text overflow; added `dayIntelligenceSummary()` to the lead payload.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md`, `email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — normalized/stored/exposed `${dayIntelligence}` and included it in instant plan emails.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the copy-density and funnel changes.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, transformed Velo syntax check via `node --input-type=module --check`, `diff --check`, in-app browser 1/3/5/7-day smoke (`closingWithCopy: 0`, overflow `0`, empty widget errors). Lead-payload interception was limited by the in-app browser sandbox, so the new payload field was verified statically.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner day intelligence)
+
+**Did:** Added quick logistics intelligence to preview and full-plan day cards.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `dayIntelItems()` / `dayIntelHtml()` plus `Route`, `Energy`, `Spend`, and `Check` chips derived from day type, pace/group, budget style, tour slot, openings, and reservation intent.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the decision-chip layer and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, `diff --check`, in-app browser 5-day/7-day DOM smoke, aria-label checks (`Route: ...`, `Energy: ...`, `Spend: ...`, `Check: ...`), empty console log, and overflow `0` passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner export visuals)
+
+**Did:** Extended day-card visuals into print/PDF output.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added print-safe day postcard helpers and inserted them into the print day sections; added a measured visual anchor band inside PDF day cards using existing day visual metadata.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded export-visual QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, `diff --check`, in-app browser PDF button smoke (`PDF downloaded.`), empty console log, and overflow `0` passed. In-app browser did not expose the downloaded file for a fresh rendered contact sheet in this micro-pass.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner day postcards)
+
+**Did:** Made the itinerary cards more visual with per-day postcard scenes.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `bw-day-postcard` CSS, day visual metadata helpers, and inline SVG scenes for arrival, Wall, museums, food, free/low-budget, nightlife, local-neighborhood, and Potsdam/day-trip days; preview and full-plan day cards now render the visual layer.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the visual-card change and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, `diff --check`, in-app browser DOM smoke for 7-day and 5-day plans, postcard/SVG counts, empty console log, and overflow `0` passed. Screenshot capture in the in-app browser timed out, so QA evidence is DOM/runtime rather than a saved PNG.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner holiday override)
+
+**Did:** Added a future-proof Berlin one-off public holiday override.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `BERLIN_ONE_OFF_HOLIDAYS` and merged it into `berlinHolidays()` so 2028-06-17 is flagged as a Berlin public holiday.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded official-source check and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Official Berlin.de check for 2026/2027 public holidays plus 2028-06-17 one-off holiday, inline script parse, `diff --check`, fixture smoke for holiday/Sunday/Monday/weekday behavior, and DOM smoke for 2028-06-17/2027-03-08/normal weekday passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner tighter day-end copy)
+
+**Did:** Made day-end itinerary text shorter and less repetitive.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — shortened all `Later`/`Evening` block copy to compact one-line actions and tightened exception-only `Local cue` text.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the copy-density change and QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, `diff --check`, in-app browser desktop 1280/mobile 390 checks, overflow `0`, max rendered end-of-day line about 74 chars, and local PDF button smoke passed. In-app browser reports downloads are not exposed, so no fresh PDF file render was captured in this micro-pass.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner share privacy)
+
+**Did:** Hardened Ultimate planner copy/share/resume URLs so they only carry safe plan state.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — `plannerStateParams()` now builds an allowlisted query from plan choices plus safe `context/weather`; copied/WhatsApp links and lead payload `page` no longer preserve email, UTM, lead, booking, cache-buster, or unknown params.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded share/resume privacy QA.
+
+**Opened:** Ultimate remains draft/unpublished; launch tasks still pending.
+**Closed:** Inline script parse, `diff --check`, dirty-URL share/lead interception smoke, resume-state mobile smoke, no console errors, and overflow `0` passed.
+
+**Next session should:** Continue Ultimate polish or launch prep only when Yusuf explicitly asks; do not push/publish by default.
+
+## 2026-05-31 — Codex (Ultimate planner lead delivery grid)
+
+**Did:** Made the Ultimate lead gate feel more like plan delivery and less like a plain form.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added four visual delivery chips inside the email gate: PDF, exact link, maps, and arrival-aware reminders.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the lead-gate QA.
+- `../output/qa/ultimate-trip-planner-ui/delivery-grid-desktop-20260531.png`, `delivery-grid-mobile-20260531.png` — saved desktop/mobile visual QA.
+
+**Opened:** Ultimate remains draft/unpublished; launch tasks still pending.
+**Closed:** Inline script parse, `diff --check`, desktop/mobile locked-gate smoke, unlocked-state smoke, no console errors, and overflow `0` passed.
+
+**Next session should:** Continue Ultimate polish or launch prep only when Yusuf explicitly asks; do not push/publish by default.
+
+## 2026-05-31 — Codex (Ultimate planner PDF action cards)
+
+**Did:** Made the Ultimate PDF's Berlin Essentials ending more useful and visual.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added PDF `Use this plan` action cards for World Clock map + booking, with booked-state prep language that suppresses the booking link.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the PDF action-card QA.
+- `../output/qa/ultimate-trip-planner-pdf/action-cards-3day-20260531.pdf`, `action-cards-3day-20260531-contact-sheet.png`, `action-cards-7day-booked-20260531.pdf`, `action-cards-7day-booked-20260531-contact-sheet.png` — saved real rendered PDF QA.
+
+**Opened:** Ultimate remains draft/unpublished; launch tasks still pending.
+**Closed:** Inline script parse, `diff --check`, real PDF download smoke, rendered PNG/contact-sheet visual checks, PDF text checks for `Use this plan`, booking/booked branch behavior, stale long-copy absence, no console errors, and overflow `0` passed.
+
+**Next session should:** Continue Ultimate polish or launch prep only when Yusuf explicitly asks; do not push/publish by default.
+
+## 2026-05-31 — Codex (Ultimate planner less text / fine-tune)
+
+**Did:** Reduced repeated day-end copy further and collapsed lower-priority planner questions.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — keeps normal days silent, shows only exception micro-cues, and wraps group/interests/pace-style personalization in a `Fine-tune the plan` details panel with a live summary.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the UX change and QA artifacts.
+- `../output/qa/ultimate-trip-planner-ui/advanced-mobile-closed-section-20260531.png`, `advanced-mobile-open-section-20260531.png`, `cues-fullplan-sunday-3day-20260531.png` — saved visual QA.
+
+**Opened:** Ultimate remains draft/unpublished; more product polish can continue later.
+**Closed:** Inline script parse, `diff --check`, in-app browser open, desktop/mobile closed/open fine-tune smoke, unlocked cue checks (`0` cues on normal 3-day; only Sunday/Monday micro-cues in Sunday/stress cases), no console errors, stale long-copy check, and overflow `0` passed.
+
+**Next session should:** Continue Ultimate polish when Yusuf resumes; do not publish/push until he explicitly asks.
+
+## 2026-05-31 — Codex (Ultimate planner Plan Inputs guide)
+
+**Did:** Reduced the long-form feel by adding a compact live inputs guide before the question list.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `Plan inputs` guide with five visual chips (`When`, `Base`, `Style`, `Focus`, `Tour`) plus live state updates and booked/prep switching.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the UX layer and QA artifacts.
+- `../output/qa/ultimate-trip-planner-ui/input-guide-desktop-grid-20260531.png`, `input-guide-mobile-grid-20260531.png` — saved visual QA.
+
+**Opened:** Ultimate remains draft/unpublished; launch tasks still pending.
+**Closed:** Inline script parse, `diff --check`, desktop/mobile screenshot smoke, state-change smoke (`Tour` -> `Tour prep`), no console errors, and overflow `0` passed.
+
+**Next session should:** Continue final visual polish or launch prep only when Yusuf explicitly wants publish/push.
+
+## 2026-05-31 — Codex (Ultimate planner Trip Control Panel)
+
+**Did:** Made the Ultimate planner first screen feel more like a live control panel than a questionnaire.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added a `Trip control panel` band above the form with four live visual tiles: arrival, first move, tour anchor/prep, and watch-out. The panel updates from current state and switches to booked/prep language when tour status is booked.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the new UI layer and QA artifacts.
+- `../output/qa/ultimate-trip-planner-ui/control-panel-desktop-20260531.png`, `control-panel-mobile-20260531.png` — saved desktop/mobile visual QA.
+
+**Opened:** Ultimate remains draft/unpublished; launch prep and any final visual polish remain open.
+**Closed:** Inline script parse, `diff --check`, desktop/mobile screenshot smoke, panel state-change smoke (`Tour anchor` -> `Tour prep` + meeting CTA), no console errors, and overflow `0` passed.
+
+**Next session should:** Continue final visual polish or move into launch prep only when Yusuf explicitly wants publish/push.
+
+## 2026-05-31 — Codex (Ultimate planner cue-trim PDF QA)
+
+**Did:** Verified the shorter day cues in real PDF output and hardened day-card height math.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — PDF card height now measures wrapped place/risk chip rows before drawing, reducing overlap risk when labels wrap.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded fresh PDF/UI QA.
+- `../output/qa/ultimate-trip-planner-pdf/cue-trim-3day-20260531.pdf`, `cue-trim-3day-20260531-contact-sheet.png`, `cue-trim-7day-stress-20260531.pdf`, `cue-trim-7day-stress-20260531-contact-sheet.png` — new rendered QA artifacts.
+
+**Opened:** Ultimate remains draft/unpublished; launch tasks and broader polish remain open.
+**Closed:** 3-day PDF downloaded as 5 pages with `0` day cues, 7-day stress PDF downloaded as 9 pages with only 3 exception cues, contact sheets show no visible overlap, PDF text extraction found no stale long-note phrases, desktop/mobile unlocked overflow `0`, inline script parse and `diff --check` passed.
+
+**Next session should:** Continue final visual polish or begin launch prep when Yusuf explicitly says publish/push.
+
+## 2026-05-31 — Codex (Ultimate planner exception-only day cues)
+
+**Did:** Trimmed day-end "Local cue" notes so they appear only when they prevent a real visitor mistake.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — shortened opening-day status copy, removed normal weekday notes, and limited day-end cues to Sunday/holiday, Monday museum, late arrival, or packed-night exceptions.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the lower-text-density behavior.
+
+**Opened:** Ultimate planner task remains open for more product polish and launch prep; no push/publish done.
+**Closed:** Inline script parse, `diff --check`, stale long-copy grep, browser locked-preview smoke (`overflow 0`, no console errors), and day-cue fixture checks passed (`0` cues on normal 3-day, `1` late arrival, `1` 7-day with Sunday, `2` Sunday+Monday-museum).
+
+**Next session should:** Continue Ultimate polish from the open task, then run full unlocked/PDF contact-sheet QA before launch.
+
+## 2026-05-31 — Codex (Ultimate planner PDF map brief QA)
+
+**Did:** Rendered the updated jsPDF output after the route/map brief integration and checked the layout visually.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the fresh PDF artifact.
+- `../output/qa/ultimate-trip-planner-pdf/map-brief-20260531.pdf`, `map-brief-20260531-pages/`, `map-brief-20260531-contact-sheet.png` — generated 6-page PDF QA output.
+
+**Opened:** Ultimate still needs launch tasks: live Wix Velo/email IDs/CMS row, draft-gate removal only when ready, live endpoint smoke, and final blog publish.
+**Closed:** Headless Chrome jsPDF capture succeeded (`2,047,545` bytes, `6` pages), rendered contact sheet showed no visible overlap, inline script parse passed, `git diff --check` passed, and Ultimate remains `status: "draft"` with public count `30`.
+
+**Next session should:** Continue product polish or start launch prep only when Yusuf says go.
+
+## 2026-05-31 — Codex (Ultimate planner map brief)
+
+**Did:** Added a more visual route/map layer so the planner reads less like a list and more like a carryable itinerary object.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `tripRouteStops()`, `tripRouteOverview()`, and `mapBriefHtml()`; rendered the map brief in the main plan board and unlocked full plan; added route overview to text export, print view, and the jsPDF cover page.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded map-brief progress and QA evidence.
+- `../output/qa/ultimate-trip-planner-ui/map-brief-final-crop-20260531.png` — saved visual QA crop.
+
+**Opened:** Full jsPDF render/contact-sheet should be rerun in a later PDF-specific pass; this turn verified source integration and UI layout, not a newly rendered PDF contact sheet.
+**Closed:** Inline script parse, `git diff --check`, desktop and mobile-ish browser map-brief smoke passed (`api=1` Google Maps links, overflow `0`, empty browser error log). Ultimate remains `status: "draft"` and public count remains `30`.
+
+**Next session should:** Continue visual/PDF polish, especially a fresh rendered PDF contact sheet after the map brief, or move to launch prep when Yusuf says go.
+
+## 2026-05-31 — Codex (Ultimate planner Velo booked fail-closed)
+
+**Did:** Hardened the Ultimate planner booking-aware email branch so booked leads cannot accidentally receive sales emails when booked template IDs are missing.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — `messageIdFor()` now uses only `bookedMessageId` for booked leads and skips if it is blank/TODO; `isBookedLead()` now treats cancelled/canceled/refunded/declined/no-show statuses as inactive even when `bookedAt` exists.
+- `ultimate-berlin-trip-planner/velo/README.md`, `ultimate-berlin-trip-planner/email/README.md` — documented fail-closed booked-path behavior and inactive status override.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the backend safety fix.
+
+**Opened:** Triggered Email IDs are still placeholders until Yusuf creates/pastes them in Wix; live endpoint smoke remains part of launch.
+**Closed:** Transformed Velo syntax check, booking-branch fixture matrix, `git diff --check`, and hub JSON/JS parse passed.
+
+**Next session should:** Continue Ultimate polish or move to launch prep: paste Velo/emails, create `TripPlannerLeads`, remove draft gate only when ready, then live-test lead and booking endpoints.
+
+## 2026-05-31 — Codex (Ultimate planner short day cues)
+
+**Did:** Replaced long/repetitive day-end paragraphs with short optional "Local cue" text.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — shortened `shortDayNote()`, skipped empty cues in UI/text/print, and reduced the PDF cue box to a compact one-line treatment.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md` — recorded the day-cue simplification and QA evidence.
+- `../output/qa/ultimate-trip-planner-ui/short-day-cues-20260531.png` — saved local UI QA screenshot.
+
+**Opened:** In-app browser downloads are unsupported, so jsPDF file capture was not completed in this turn; use the existing headless/render contact-sheet path for the next PDF-specific layout pass.
+**Closed:** Inline script parse, `git diff --check`, and local unlocked 3-day UI smoke passed (`36/33/29` character cues, overflow `0`).
+
+**Next session should:** Continue the Ultimate Velo/booking-aware audit; the booked email message ID fallback still needs the fail-closed patch.
+
+## 2026-05-31 — Codex (Ultimate planner launch icon)
+
+**Did:** Prepared a real Ultimate planner icon so it will not show a fallback letter when the draft gate is removed.
+
+**Changed:**
+- `tools-home/icons/ultimate-berlin-trip-planner.png`, `tools-home/icons/ultimate-berlin-trip-planner-160.png` — generated brand-colored route/map/calendar icon assets.
+- `tools-home/icons/manifest.json` — added the Ultimate icon entry.
+- `tools-hub/data.json` — added the Ultimate icon URL while keeping `status: "draft"`.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the launch-icon readiness.
+- `../output/qa/tools-icons/ultimate-icon-contact-sheet-20260531.png` — visual QA contact sheet with neighboring tool icons.
+
+**Opened:** Ultimate remains hidden until launch; remove `status: "draft"` when ready to publish.
+**Closed:** JSON parse, image dimensions (`512x512`, `160x160`), local HTTP 200, corner/background check, `git diff --check`, and visual contact sheet passed.
+
+**Next session should:** Continue Ultimate polish, or push/deploy and live-test once Yusuf is ready.
+
+## 2026-05-31 — Codex (Ultimate planner hub draft gate)
+
+**Did:** Prevented the unfinished Ultimate planner from appearing in public tool/widget shortcuts before launch.
+
+**Changed:**
+- `tools-hub/data.json` — marked `ultimate-berlin-trip-planner` as `status: "draft"` while keeping its launch wiring in place.
+- `tools-hub/tools-hub-element.js`, `widgets-hub/index.html` — filter `draft`, `hidden: true`, and `published: false` tools out of public rendering/counts.
+- `widgets-hub/_regenerate_seo.py`, `widgets-hub/SEO_ADDITIONAL_TAGS.md` — SEO ItemList now filters draft tools and is regenerated to 30 public widgets with Ultimate removed.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the launch-gate state and launch reminder.
+
+**Opened:** On Ultimate launch, remove `status: "draft"`, regenerate/re-paste widgets SEO if `/widgets` should list it, then run live hub/widgets QA.
+**Closed:** JSON parse, `node --check tools-hub/tools-hub-element.js`, widgets-hub local browser smoke (`30` cards, no Ultimate text/card, overflow `0`, empty console errors), SEO no-Ultimate check, and visual check of First-Day/Hackescher icons passed.
+
+**Next session should:** Continue Ultimate polish, or push/deploy and live-test once Yusuf is ready.
+
+## 2026-05-31 — Codex (Ultimate planner Route Reel)
+
+**Did:** Added visual route-reel day rhythm cards to reduce the "text wall" feel in preview, full plan, and PDF day cards.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added route-reel CSS, `blockIconName()`, `routeReelHtml()`, preview/full-plan route rhythm tiles, and matching PDF route-reel tiles with adjusted day-card height math.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded route-reel progress and QA evidence.
+- `../output/qa/ultimate-trip-planner-ui/route-reel-visible-20260531.png` and `../output/qa/ultimate-trip-planner-pdf/route-reel-20260531-contact-sheet.png` — saved visual QA artifacts.
+
+**Opened:** Ultimate planner remains open for further visual/PDF polish, then push/live GitHub Pages + Wix/Velo QA.
+**Closed:** Inline JS parse, `git diff --check`, browser route-reel smoke (`3` full reels, `9` full steps, preview route reel visible, overflow `0`), empty browser error log, headless Chrome PDF download smoke, and rendered 6-page PDF contact sheet passed with no visible overlap.
+
+**Next session should:** Continue polishing the "ultimate" feel or push/deploy and live-check GitHub Pages/Wix/Velo when Yusuf says go.
+
+## 2026-05-31 — Codex (Ultimate planner WhatsApp share)
+
+**Did:** Added phone-ready WhatsApp sharing without exposing email/PII, while keeping day-end notes concise.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added a `WhatsApp` action beside copy/PDF/print, a share icon, `whatsappShareText()`, `whatsappShareUrl()`, `updateShareActions()`, click tracking, plan-text `Plan link`, and print-view `Open this exact plan`.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the share/resume progress.
+
+**Opened:** Ultimate planner remains open for more visual/PDF polish, then push/live GitHub Pages + Wix/Velo QA.
+**Closed:** Inline JS parse, `git diff --check`, browser WhatsApp smoke (`email` stripped, `date=2026-06-01` preserved), overflow `0`, empty browser error log, and day-end notes checked at 74/86/76 chars for the 3-day QA plan.
+
+**Next session should:** Continue from remaining "ultimate" polish items, especially visual density and PDF refinement, or push/deploy when Yusuf says go.
+
+## 2026-05-31 — Codex (Ultimate planner In-Day Tour Marker)
+
+**Did:** Made the recommended BerlinWalk 11:30 slot visible inside the actual itinerary day.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `tourSlotForDay()`, spine mini marker, full-plan day marker, PDF day-card marker, print marker, and plan-text tour-anchor line for the recommended day.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded marker progress and QA evidence.
+- `../output/qa/ultimate-trip-planner-pdf/tour-day-marker-20260531-contact-sheet.png` — rendered PDF visual QA with the in-day marker.
+
+**Opened:** Ultimate planner remains open for final polish, then push/live GitHub Pages + Wix/Velo QA.
+**Closed:** Inline JS parse, `git diff --check`, browser marker smoke (evening arrival places marker on Day 2), edge cases (morning arrival Day 1, one-day evening no in-plan marker, booked-state no sales marker), overflow `0`, empty browser error log, removed temporary QA hooks, and rendered 5-page PDF contact sheet passed with no visible overlap.
+
+**Next session should:** Continue from remaining "ultimate" polish items, or push/deploy and live-check the GitHub Pages widget/PDF when Yusuf says go.
+
+## 2026-05-31 — Codex (Ultimate planner Smart Swaps)
+
+**Did:** Added Smart Swaps so the planner gives day-level local-guide moves for openings, rain, Sunday logistics, and late arrivals.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `planSwapsForPlan()`, Smart Swaps UI panel, route-backed swap actions, plan text/PDF/print inclusion, `planSwaps` lead payload, and swap click tracking.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md` — accepts/stores/exposes `planSwaps`.
+- `ultimate-berlin-trip-planner/email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — documented/used `planSwaps` in instant email copy.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded Smart Swaps progress and QA evidence.
+- `../output/qa/ultimate-trip-planner-pdf/smart-swaps-20260531-contact-sheet.png` — rendered PDF visual QA with Smart Swaps + Smart Fixes.
+
+**Opened:** Ultimate planner remains open for further polish, then push/live GitHub Pages + Wix/Velo QA.
+**Closed:** Inline JS parse, transformed Velo syntax, `git diff --check`, browser Smart Swaps smoke (`3` swaps, `3` route actions, overflow `0`), empty browser error log, removed temporary QA hooks, and rendered 8-page PDF contact sheet passed with no visible overlap.
+
+**Next session should:** Continue from remaining "ultimate" polish items, or push/deploy and live-check the GitHub Pages widget/PDF when Yusuf says go.
+
+## 2026-05-30 — Codex (Ultimate planner Tour Anchor)
+
+**Did:** Added a concrete Tour Anchor layer so the recommended BerlinWalk slot feels like a real plan object, not only CTA text.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added a visual Tour Anchor card under the main actions, generated `.ics` calendar holds for the recommended 11:30 slot, added World Clock map actions, suppresses calendar hold when the user says they are already booked, routes plan text/print/PDF through the slot summary, and tracks calendar/meeting-point clicks.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md` — accepts/stores/exposes `recommendedTourDate`, `recommendedTourTime`, and dynamic `meetingPointUrl`.
+- `ultimate-berlin-trip-planner/email/README.md`, `email/e0-instant-plan.md`, `email/booked-e0-instant-plan.md` — documented/used the new tour date/time fields in instant email copy.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the new Tour Anchor state and QA evidence.
+- `../output/qa/ultimate-trip-planner-pdf/tour-anchor-20260530-contact-sheet.png` — rendered PDF visual QA for the Tour Anchor CTA.
+
+**Opened:** Ultimate planner remains open for further polish, then push/live GitHub Pages + Wix/Velo QA.
+**Closed:** Inline JS parse, transformed Velo syntax, `git diff --check`, browser Tour Anchor smoke (`.ics` date `2026-06-02 11:30-13:30`, map link, overflow `0`), booked-state no-calendar smoke, empty browser error log, removed temporary QA hooks, and rendered 7-page PDF contact sheet passed with no visible overlap.
+
+**Next session should:** Continue from the remaining "ultimate" polish items, or push/deploy and live-check the GitHub Pages widget/PDF when Yusuf says go.
+
+## 2026-05-30 — Codex (Ultimate planner note cleanup)
+
+**Did:** Reduced the Ultimate planner day-end explanations from repeated advice paragraphs to short day-specific local notes.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — removed repeated `extraDayAdvice` appends, stopped gentle/family mode from adding the same protected-break sentence to every day, made `shortDayNote()` return concise day-specific notes, and routed plan text/PDF/print notes through `shortDayNote()`.
+- `../output/qa/ultimate-trip-planner-pdf/note-shortening-20260530.pdf` and `note-shortening-20260530-contact-sheet.png` — generated visual PDF QA artifacts.
+- Project root `SESSION_LOG.md` — recorded the widget note cleanup.
+
+**Opened:** Ultimate planner remains open for more "ultimate" polish, then push/live GitHub Pages + Wix/Velo QA.
+**Closed:** Inline JS parse, `git diff --check` for the widget file, browser 7-day note smoke (`maxLength=84`, `uniqueCount=6`, overflow `0`), empty browser error log, and rendered 7-page PDF contact sheet passed with no visible note overlap.
+
+**Next session should:** Continue visual/feature polish or push the current V4/V5 changes for live GitHub Pages QA when Yusuf says go.
+
+## 2026-05-30 — Codex (Ultimate planner Travel Mode)
+
+**Did:** Continued Ultimate planner V4 by turning Travel Mode and Smart Fixes into real UI/PDF/print/lead-funnel data.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added Travel Mode/Smart Fixes summary helpers, deterministic lead segments, PDF Travel Review page, print Travel Mode/Smart Fixes sections, and lead payload fields for arrival/risk/intent segmentation.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `velo/README.md` — validates, stores, and exposes `travelMode`, `planAdvice`, `arrivalWindow`, `tripRisk`, `tourRecommendation`, `intentStage`, `familyOrSlow`, and `bookAheadNeeded`.
+- `ultimate-berlin-trip-planner/email/*.md`, `email/README.md` — added the new variables to docs and used `planAdvice` / `travelMode` in sales and booked email copy.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded V4 progress and QA evidence.
+- `output/qa/ultimate-trip-planner-pdf/v5-travel-review-contact-sheet.png` — rendered 7-day PDF visual QA with the new Travel Review page.
+
+**Opened:** Push/live GitHub Pages + Wix/Velo QA remain.
+**Closed:** Inline JS parse, transformed Velo syntax, `diff --check`, browser today Travel Mode/Smart Fixes QA, far-date no-Travel-Mode QA, no-overflow check, empty browser error log, final PDF button smoke after removing QA hooks, and rendered 7-day PDF contact sheet passed.
+
+**Next session should:** Push/deploy and run live GitHub Pages/Wix embed/lead/booking smoke tests.
+
+## 2026-05-30 — Codex (Blog journey tool-card image fix)
+
+**Did:** Fixed the single-post `Next step` module so the `Use a tool` card cannot duplicate the tour/Yusuf photo.
+
+**Changed:**
+- `js/blog-journey-inject.js` — added fallback tool-icon URLs, clones/enriches related-tool data with icons when blog-index tool data has no image, and styles the `Use a tool` journey card as a centered icon preview.
+- `wix-embed-snippets.md`, `AGENTS.md` — bumped the blog journey helper install URL to `blog-journey-inject.js?v=6`.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the v6 install note.
+
+**Opened:** Push/deploy and update Wix Custom Code to `https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=6`; then live-check one post on desktop/mobile.
+**Closed:** Local `node --check` and desktop/mobile in-app browser QA passed: tool card uses `berlin-first-day-planner-160.png`, mobile hides `Walk it`, and horizontal overflow is `0`.
+
+**Next session should:** After push/GitHub Pages deploy, update the Wix Custom Code helper URL to `?v=6` and verify the live `Next step` module no longer repeats the tour photo.
+
+## 2026-05-30 — Codex (Ultimate planner deep research)
+
+**Did:** Ran a deeper best-practice pass for how to make the Ultimate Berlin Trip Planner feel genuinely "ultimate" without turning it into generic AI text.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md` — added source-backed findings from travel planner products, Google Maps/Open-Meteo/Berlin official sources, form UX, and current Google SEO constraints.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded the updated direction.
+
+**Opened:** Finish Travel Mode and Smart Fixes across UI/PDF/print/lead payload/Velo/email variables, then QA. Keep the tool unpublished/homepage-hidden until live QA passes.
+**Closed:** Research pass only; no runtime code changed in this turn.
+
+**Next session should:** Implement the new highest-value items: mobile Travel Mode, Smart Fixes/trip review, PDF carry mode, lead segmentation, and blog embed strategy.
+
+## 2026-05-30 — Codex (Ultimate planner V4 start)
+
+**Did:** Started V4 implementation from the research backlog: made the planner more visual, map-grounded, and conversion-aware.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added canonical Berlin place catalog, day-level Google Maps directions, catalog search links, visual trip spine, risk chips, plan confidence, adaptive booking/meeting-point CTA, copy-plan-link state serialization, lead-gate copy/events, and redesigned PDF/print route/risk output.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md` — recorded V4 progress and remaining caveats.
+- Project root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded V4 local progress and QA notes.
+- `output/qa/ultimate-trip-planner-pdf/v4-contact-sheet.png` — rendered 7-day V4 PDF visual QA contact sheet.
+
+**Opened:** Push/live GitHub Pages + Wix QA remain.
+**Closed:** Local JS syntax check, `diff --check`, desktop/mobile overflow QA, 1/3/5/7-day spine checks, CTA-state checks, Maps `api=1` route/search checks, clean-origin locked gate QA, PDF button smoke, and rendered 7-day PDF visual QA passed.
+
+**Next session should:** Push/deploy, then live-check GitHub Pages/Wix embed, run one real endpoint smoke when Velo is installed, and inspect the deployed PDF once.
+
 ## 2026-05-30 — Codex (Ultimate planner research backlog)
 
 **Did:** Researched travel-planner UX, map/PDF/export patterns, lead-gate form best practices, Berlin date-data sources, and SEO structured-data constraints for the next Ultimate planner pass.

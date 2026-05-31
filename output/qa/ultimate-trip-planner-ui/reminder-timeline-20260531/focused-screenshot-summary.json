@@ -1,0 +1,80 @@
+[
+  {
+    "file": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/reminder-timeline-20260531/lead-gate-tomorrow-sales.png",
+    "metrics": {
+      "count": "Up to 2 emails",
+      "steps": [
+        {
+          "key": "instant",
+          "cls": "bw-reminder-step is-current",
+          "date": "Today",
+          "title": "Plan + PDF"
+        },
+        {
+          "key": "minus7",
+          "cls": "bw-reminder-step is-skipped",
+          "date": "Window passed",
+          "title": "Tour slot"
+        },
+        {
+          "key": "minus3",
+          "cls": "bw-reminder-step is-skipped",
+          "date": "Window passed",
+          "title": "Route check"
+        },
+        {
+          "key": "minus1",
+          "cls": "bw-reminder-step is-current",
+          "date": "Folded in now",
+          "title": "Final setup"
+        },
+        {
+          "key": "dayOf",
+          "cls": "bw-reminder-step is-future",
+          "date": "Mon 1 Jun",
+          "title": "Arrival nudge"
+        }
+      ],
+      "overflow": 0
+    }
+  },
+  {
+    "file": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/reminder-timeline-20260531/lead-gate-mobile-booked-10day.png",
+    "metrics": {
+      "count": "Up to 5 emails",
+      "steps": [
+        {
+          "key": "instant",
+          "cls": "bw-reminder-step is-current",
+          "date": "Today",
+          "title": "Plan + PDF"
+        },
+        {
+          "key": "minus7",
+          "cls": "bw-reminder-step is-future",
+          "date": "Wed 3 Jun",
+          "title": "Meeting prep"
+        },
+        {
+          "key": "minus3",
+          "cls": "bw-reminder-step is-future",
+          "date": "Sun 7 Jun",
+          "title": "Route check"
+        },
+        {
+          "key": "minus1",
+          "cls": "bw-reminder-step is-future",
+          "date": "Tue 9 Jun",
+          "title": "Final setup"
+        },
+        {
+          "key": "dayOf",
+          "cls": "bw-reminder-step is-future",
+          "date": "Wed 10 Jun",
+          "title": "World Clock prep"
+        }
+      ],
+      "overflow": 0
+    }
+  }
+]

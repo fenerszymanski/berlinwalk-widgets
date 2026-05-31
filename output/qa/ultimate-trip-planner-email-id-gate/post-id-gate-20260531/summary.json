@@ -1,0 +1,11 @@
+{
+  "dryRunOk": true,
+  "writeOk": true,
+  "tempPlaceholdersRemoved": true,
+  "tempFakeIdsApplied": true,
+  "realFunnelUntouched": true,
+  "dryStepCount": 3,
+  "writeStepCount": 4,
+  "writeStoppedBeforeRealLaunch": true,
+  "duplicateRejected": true
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "scenario": "desktop-1280",
+    "summary": {
+      "prepublishPanels": 1,
+      "sourcePanels": 3,
+      "hasCheckIds": true,
+      "hasApplyIds": true,
+      "hasPrepublishGate": true,
+      "hasRemotePreflight": true,
+      "hasBuildInstallKit": true,
+      "warning": "Current Velo source still contains 10 Triggered Email placeholder IDs. Apply real IDs before live publish.",
+      "overflow": 0,
+      "bad": []
+    },
+    "errors": []
+  },
+  {
+    "scenario": "mobile-390",
+    "summary": {
+      "prepublishPanels": 1,
+      "sourcePanels": 3,
+      "hasCheckIds": true,
+      "hasApplyIds": true,
+      "hasPrepublishGate": true,
+      "hasRemotePreflight": true,
+      "hasBuildInstallKit": true,
+      "warning": "Current Velo source still contains 10 Triggered Email placeholder IDs. Apply real IDs before live publish.",
+      "overflow": 0,
+      "bad": []
+    },
+    "errors": []
+  }
+]

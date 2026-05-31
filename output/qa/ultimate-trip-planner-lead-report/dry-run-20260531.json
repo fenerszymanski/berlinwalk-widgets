@@ -1,0 +1,150 @@
+{
+  "generatedAt": "2026-05-31T14:06:17.606Z",
+  "mode": "dry_run_fixture",
+  "collectionId": "TripPlannerLeads",
+  "limit": 100,
+  "includeEmails": false,
+  "privacy": "emails masked; stable emailHash included",
+  "summary": {
+    "count": 5,
+    "bookedCount": 1,
+    "unbookedCount": 4,
+    "averageConversionScore": 72,
+    "arrivingNext7Days": 2,
+    "sendErrorCount": 1,
+    "byConversionTier": {
+      "hot_tour_lead": 1,
+      "warm_tour_lead": 2,
+      "booked_prep": 1,
+      "researching": 1
+    },
+    "byTripStyle": {
+      "Classic first trip": 1,
+      "Family / slower pace": 1,
+      "History + museums": 1,
+      "Custom mix": 1,
+      "Food + nightlife": 1
+    },
+    "byArrivalWindow": {
+      "near_forecast": 2,
+      "(blank)": 2,
+      "future_planning": 1
+    },
+    "byIntentStage": {
+      "sales_ready": 3,
+      "booked": 1,
+      "researching": 1
+    },
+    "byTourIntent": {
+      "Considering": 2,
+      "Already booked": 1,
+      "Not sure": 1,
+      "(blank)": 1
+    },
+    "byTripLength": {
+      "2": 1,
+      "3": 1,
+      "4": 1,
+      "5": 1,
+      "7": 1
+    },
+    "bySource": {
+      "tool": 3,
+      "blog": 2
+    },
+    "priorityLeads": [
+      {
+        "emailHash": "0e5d874f207b",
+        "email": "cl***@example.com",
+        "arrivalDate": "2026-06-04",
+        "daysUntilArrival": 4,
+        "tripLength": 3,
+        "tripStyle": "Classic first trip",
+        "conversionScore": 84,
+        "conversionTier": "hot_tour_lead",
+        "conversionNextAction": "Book or hold the tour before arrival",
+        "intentStage": "sales_ready",
+        "tourIntent": "Considering",
+        "bookingStatus": "",
+        "booked": false,
+        "source": "tool",
+        "emailMasked": "cl***@example.com"
+      },
+      {
+        "emailHash": "5083407ed319",
+        "email": "er***@example.com",
+        "arrivalDate": "2026-06-01",
+        "daysUntilArrival": 1,
+        "tripLength": 2,
+        "tripStyle": "Food + nightlife",
+        "conversionScore": 73,
+        "conversionTier": "warm_tour_lead",
+        "conversionNextAction": "Book first, protect late night energy",
+        "intentStage": "sales_ready",
+        "tourIntent": "",
+        "bookingStatus": "",
+        "booked": false,
+        "source": "tool",
+        "emailMasked": "er***@example.com"
+      }
+    ],
+    "upcomingArrivals": [
+      {
+        "emailHash": "5083407ed319",
+        "email": "er***@example.com",
+        "arrivalDate": "2026-06-01",
+        "daysUntilArrival": 1,
+        "tripLength": 2,
+        "tripStyle": "Food + nightlife",
+        "conversionScore": 73,
+        "conversionTier": "warm_tour_lead",
+        "conversionNextAction": "Book first, protect late night energy",
+        "intentStage": "sales_ready",
+        "tourIntent": "",
+        "bookingStatus": "",
+        "booked": false,
+        "source": "tool",
+        "emailMasked": "er***@example.com"
+      },
+      {
+        "emailHash": "0e5d874f207b",
+        "email": "cl***@example.com",
+        "arrivalDate": "2026-06-04",
+        "daysUntilArrival": 4,
+        "tripLength": 3,
+        "tripStyle": "Classic first trip",
+        "conversionScore": 84,
+        "conversionTier": "hot_tour_lead",
+        "conversionNextAction": "Book or hold the tour before arrival",
+        "intentStage": "sales_ready",
+        "tourIntent": "Considering",
+        "bookingStatus": "",
+        "booked": false,
+        "source": "tool",
+        "emailMasked": "cl***@example.com"
+      }
+    ],
+    "sendErrors": [
+      {
+        "emailHash": "5083407ed319",
+        "email": "er***@example.com",
+        "arrivalDate": "2026-06-01",
+        "daysUntilArrival": 1,
+        "tripLength": 2,
+        "tripStyle": "Food + nightlife",
+        "conversionScore": 73,
+        "conversionTier": "warm_tour_lead",
+        "conversionNextAction": "Book first, protect late night energy",
+        "intentStage": "sales_ready",
+        "tourIntent": "",
+        "bookingStatus": "",
+        "booked": false,
+        "source": "tool",
+        "emailMasked": "er***@example.com",
+        "errors": [
+          "instantError: missing_message_id"
+        ]
+      }
+    ]
+  }
+}

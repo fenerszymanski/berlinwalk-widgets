@@ -1,0 +1,59 @@
+[
+  {
+    "scenario": "desktop-1280",
+    "summary": {
+      "hasRoot": true,
+      "panelCount": 1,
+      "phoneCards": 1,
+      "photoLoaded": true,
+      "stopCount": 3,
+      "quickActions": 3,
+      "chipCount": 4,
+      "stepCount": 3,
+      "modeTitle": "Tomorrow mode",
+      "routeBadge": "Day 1: Arrival day",
+      "overflow": 0,
+      "bad": [],
+      "verticalTextCandidates": []
+    },
+    "errors": []
+  },
+  {
+    "scenario": "mobile-390",
+    "summary": {
+      "hasRoot": true,
+      "panelCount": 1,
+      "phoneCards": 1,
+      "photoLoaded": true,
+      "stopCount": 3,
+      "quickActions": 3,
+      "chipCount": 4,
+      "stepCount": 3,
+      "modeTitle": "Tomorrow mode",
+      "routeBadge": "Day 1: Arrival day",
+      "overflow": 0,
+      "bad": [],
+      "verticalTextCandidates": []
+    },
+    "errors": []
+  },
+  {
+    "scenario": "far-date",
+    "summary": {
+      "hasRoot": true,
+      "panelCount": 0,
+      "phoneCards": 0,
+      "photoLoaded": false,
+      "stopCount": 0,
+      "quickActions": 0,
+      "chipCount": 0,
+      "stepCount": 0,
+      "modeTitle": "",
+      "routeBadge": "",
+      "overflow": 0,
+      "bad": [],
+      "verticalTextCandidates": []
+    },
+    "errors": []
+  }
+]

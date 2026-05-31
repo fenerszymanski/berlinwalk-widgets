@@ -1,0 +1,35 @@
+{
+  "mode": "live",
+  "generatedAt": "2026-05-31T13:56:18.110Z",
+  "collectionId": "TripPlannerLeads",
+  "plannedFieldCount": 70,
+  "permissions": {
+    "insert": "ADMIN",
+    "update": "ADMIN",
+    "remove": "ADMIN",
+    "read": "ADMIN"
+  },
+  "syncFields": true,
+  "created": false,
+  "existing": true,
+  "verification": {
+    "fieldCount": 74,
+    "expectedFieldCount": 70,
+    "missing": [],
+    "wrongType": []
+  },
+  "verificationBeforeSync": {
+    "fieldCount": 73,
+    "expectedFieldCount": 70,
+    "missing": [
+      "tripStyle"
+    ],
+    "wrongType": []
+  },
+  "syncedFields": [
+    {
+      "key": "tripStyle",
+      "status": 200
+    }
+  ]
+}

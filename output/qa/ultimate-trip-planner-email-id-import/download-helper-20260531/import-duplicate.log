@@ -1,0 +1,30 @@
+Import Triggered Email IDs From Downloads
+Source: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-import/download-helper-20260531/duplicate-downloads/message-ids.local.json
+Output: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-email-id-import/download-helper-20260531/should-not-write.json
+Valid IDs: 8/10
+Missing: 0, invalid: 0, duplicate: 2
+
+- sales.instant: DUPLICATE
+  TODO_TRIP_PLANNER_INSTANT: DUPLICATE_IMPORT_ID
+  issue: duplicate ID shared by TODO_TRIP_PLANNER_INSTANT, TODO_TRIP_PLANNER_MINUS_7
+- sales.minus7: DUPLICATE
+  TODO_TRIP_PLANNER_MINUS_7: DUPLICATE_IMPORT_ID
+  issue: duplicate ID shared by TODO_TRIP_PLANNER_INSTANT, TODO_TRIP_PLANNER_MINUS_7
+- sales.minus3: OK
+  TODO_TRIP_PLANNER_MINUS_3: UNIQUE_IMPORT_ID_2
+- sales.minus1: OK
+  TODO_TRIP_PLANNER_MINUS_1: UNIQUE_IMPORT_ID_3
+- sales.dayOf: OK
+  TODO_TRIP_PLANNER_DAY_OF: UNIQUE_IMPORT_ID_4
+- booked.instant: OK
+  TODO_TRIP_PLANNER_INSTANT_BOOKED: UNIQUE_IMPORT_ID_5
+- booked.minus7: OK
+  TODO_TRIP_PLANNER_MINUS_7_BOOKED: UNIQUE_IMPORT_ID_6
+- booked.minus3: OK
+  TODO_TRIP_PLANNER_MINUS_3_BOOKED: UNIQUE_IMPORT_ID_7
+- booked.minus1: OK
+  TODO_TRIP_PLANNER_MINUS_1_BOOKED: UNIQUE_IMPORT_ID_8
+- booked.dayOf: OK
+  TODO_TRIP_PLANNER_DAY_OF_BOOKED: UNIQUE_IMPORT_ID_9
+
+Fix missing, placeholder, invalid, or duplicate IDs before importing.

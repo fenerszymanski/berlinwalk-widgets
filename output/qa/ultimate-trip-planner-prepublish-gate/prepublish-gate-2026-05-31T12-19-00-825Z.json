@@ -1,0 +1,216 @@
+{
+  "generatedAt": "2026-05-31T12:19:00.824Z",
+  "readyForVeloPaste": false,
+  "idsPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json",
+  "idState": {
+    "idsFileExists": false,
+    "total": 10,
+    "valid": 0,
+    "applied": 0,
+    "missing": 10,
+    "invalid": 0,
+    "duplicate": 0,
+    "rows": [
+      {
+        "path": "sales",
+        "stage": "instant",
+        "placeholder": "TODO_TRIP_PLANNER_INSTANT",
+        "html": "e0-instant-plan.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "sales",
+        "stage": "minus7",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_7",
+        "html": "e1-seven-days-before.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "sales",
+        "stage": "minus3",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_3",
+        "html": "e2-three-days-before.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "sales",
+        "stage": "minus1",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_1",
+        "html": "e3-one-day-before.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "sales",
+        "stage": "dayOf",
+        "placeholder": "TODO_TRIP_PLANNER_DAY_OF",
+        "html": "e4-arrival-day.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "booked",
+        "stage": "instant",
+        "placeholder": "TODO_TRIP_PLANNER_INSTANT_BOOKED",
+        "html": "booked-e0-instant-plan.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "booked",
+        "stage": "minus7",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_7_BOOKED",
+        "html": "booked-e1-seven-days-before.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "booked",
+        "stage": "minus3",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_3_BOOKED",
+        "html": "booked-e2-three-days-before.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "booked",
+        "stage": "minus1",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_1_BOOKED",
+        "html": "booked-e3-one-day-before.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      },
+      {
+        "path": "booked",
+        "stage": "dayOf",
+        "placeholder": "TODO_TRIP_PLANNER_DAY_OF_BOOKED",
+        "html": "booked-e4-arrival-day.html",
+        "raw": "",
+        "id": "",
+        "reason": "ID file missing",
+        "duplicate": "",
+        "applied": false,
+        "placeholderPresent": true
+      }
+    ]
+  },
+  "sourceState": {
+    "todos": [
+      "TODO_TRIP_PLANNER_DAY_OF",
+      "TODO_TRIP_PLANNER_DAY_OF_BOOKED",
+      "TODO_TRIP_PLANNER_INSTANT",
+      "TODO_TRIP_PLANNER_INSTANT_BOOKED",
+      "TODO_TRIP_PLANNER_MINUS_1",
+      "TODO_TRIP_PLANNER_MINUS_1_BOOKED",
+      "TODO_TRIP_PLANNER_MINUS_3",
+      "TODO_TRIP_PLANNER_MINUS_3_BOOKED",
+      "TODO_TRIP_PLANNER_MINUS_7",
+      "TODO_TRIP_PLANNER_MINUS_7_BOOKED"
+    ],
+    "hasLeadEndpoint": true,
+    "hasBookingEndpoint": true,
+    "hasScheduler": true,
+    "bookedFailClosed": true
+  },
+  "collection": {
+    "ok": true,
+    "status": 200,
+    "fieldCount": 73,
+    "missingCriticalFields": [],
+    "schemaOk": true
+  },
+  "checks": [
+    {
+      "name": "Triggered Email ID file exists",
+      "ok": false,
+      "status": "BLOCK",
+      "detail": "message-ids.local.json is missing"
+    },
+    {
+      "name": "All 10 IDs are valid and unique",
+      "ok": false,
+      "status": "BLOCK",
+      "detail": "0/10 valid, duplicate rows 0"
+    },
+    {
+      "name": "All 10 IDs are applied in tripPlannerFunnel.js",
+      "ok": false,
+      "status": "BLOCK",
+      "detail": "0/10 applied"
+    },
+    {
+      "name": "No TODO_TRIP_PLANNER placeholders remain",
+      "ok": false,
+      "status": "BLOCK",
+      "detail": "TODO_TRIP_PLANNER_DAY_OF, TODO_TRIP_PLANNER_DAY_OF_BOOKED, TODO_TRIP_PLANNER_INSTANT, TODO_TRIP_PLANNER_INSTANT_BOOKED, TODO_TRIP_PLANNER_MINUS_1, TODO_TRIP_PLANNER_MINUS_1_BOOKED, TODO_TRIP_PLANNER_MINUS_3, TODO_TRIP_PLANNER_MINUS_3_BOOKED, TODO_TRIP_PLANNER_MINUS_7, TODO_TRIP_PLANNER_MINUS_7_BOOKED"
+    },
+    {
+      "name": "Velo HTTP endpoints are present",
+      "ok": true,
+      "status": "PASS",
+      "detail": "tripPlannerLead and tripPlannerBooking handlers"
+    },
+    {
+      "name": "Hourly scheduler is present",
+      "ok": true,
+      "status": "PASS",
+      "detail": "processTripPlannerDueEmails hourly job"
+    },
+    {
+      "name": "Booked email branch fails closed",
+      "ok": true,
+      "status": "PASS",
+      "detail": "missing booked IDs should not fall back to sales IDs"
+    },
+    {
+      "name": "TripPlannerLeads critical fields pass remote gate",
+      "ok": true,
+      "status": "PASS",
+      "detail": "73 fields visible; critical fields verified"
+    }
+  ],
+  "summary": {
+    "pass": 4,
+    "warn": 0,
+    "block": 4
+  }
+}

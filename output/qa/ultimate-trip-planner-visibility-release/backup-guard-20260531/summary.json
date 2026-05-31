@@ -1,0 +1,14 @@
+{
+  "forceWriteOk": true,
+  "tempHubPublic": true,
+  "tempHomeHasUltimate": true,
+  "backups": 2,
+  "backupNames": [
+    "tools-home.temp.before-visibility-release-2026-05-31T12-37-47-828Z.json",
+    "tools-hub.temp.before-visibility-release-2026-05-31T12-37-47-826Z.json"
+  ],
+  "realHubStillDraft": true,
+  "blockedWriteRejected": true,
+  "blockedWriteNoBackup": true,
+  "blockedWriteHubUnchanged": true
+}

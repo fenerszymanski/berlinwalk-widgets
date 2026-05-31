@@ -1,0 +1,50 @@
+[
+  {
+    "case": "desktop-locked-3day",
+    "metrics": {
+      "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=3&weather=off&v=lead-timeline-desktop-final2",
+      "flow": 1,
+      "steps": 5,
+      "visible": true,
+      "leadHidden": false,
+      "fullHidden": true,
+      "overflow": 0,
+      "badWrap": [],
+      "pillColor": "rgb(255, 230, 0)",
+      "text": "Arrival reminder timelineShort, useful nudges before Berlin. Booked guests get prep instead of sales. 5 emails NowPlan + PDF 7 daysTour slot 3 daysRoute check 1 dayOpenings ArrivalWorld Clock"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/lead-reminder-timeline-20260531/desktop-locked-3day.png"
+  },
+  {
+    "case": "mobile-locked-7day",
+    "metrics": {
+      "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&v=lead-timeline-mobile-final2",
+      "flow": 1,
+      "steps": 5,
+      "visible": true,
+      "leadHidden": false,
+      "fullHidden": true,
+      "overflow": 0,
+      "badWrap": [],
+      "pillColor": "rgb(255, 230, 0)",
+      "text": "Arrival reminder timelineShort, useful nudges before Berlin. Booked guests get prep instead of sales. 5 emails NowPlan + PDF 7 daysTour slot 3 daysRoute check 1 dayOpenings ArrivalWorld Clock"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/lead-reminder-timeline-20260531/mobile-locked-7day.png"
+  },
+  {
+    "case": "mobile-unlocked-7day",
+    "metrics": {
+      "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&weather=off&qaUnlock=1&v=lead-timeline-unlocked-final2",
+      "flow": 1,
+      "steps": 5,
+      "visible": false,
+      "leadHidden": true,
+      "fullHidden": false,
+      "overflow": 0,
+      "badWrap": [],
+      "pillColor": "rgb(255, 230, 0)",
+      "text": "Arrival reminder timelineShort, useful nudges before Berlin. Booked guests get prep instead of sales. 5 emails NowPlan + PDF 7 daysTour slot 3 daysRoute check 1 dayOpenings ArrivalWorld Clock"
+    },
+    "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/lead-reminder-timeline-20260531/mobile-unlocked-7day.png"
+  }
+]

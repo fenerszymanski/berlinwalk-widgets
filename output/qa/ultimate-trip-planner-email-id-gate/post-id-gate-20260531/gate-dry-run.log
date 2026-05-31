@@ -1,0 +1,9 @@
+OK Validate message IDs
+OK Dry-run message ID apply
+SKIP Post-apply launch checks
+Dry-run mode stops before mutating tripPlannerFunnel.js.
+
+Mode: DRY RUN
+Ready for next launch step: YES
+Evidence: output/qa/ultimate-trip-planner-email-id-gate/post-id-gate-20260531/dry-run-evidence/email-id-gate-2026-05-31T12-27-07-606Z.json
+Next: re-run with --write after confirming the 10 IDs are real.

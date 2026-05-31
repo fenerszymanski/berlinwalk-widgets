@@ -1,0 +1,144 @@
+{
+  "desktopFamily": {
+    "closeRows": [
+      {
+        "label": "Arrival close",
+        "title": "Food, water, sleep",
+        "chips": [
+          "Food near base",
+          "Family pause"
+        ]
+      },
+      {
+        "label": "Museum close",
+        "title": "Dinner, no second queue",
+        "chips": [
+          "Central dinner",
+          "Budget dinner"
+        ]
+      },
+      {
+        "label": "East close",
+        "title": "Stay east, then home",
+        "chips": [
+          "Stay east",
+          "Dry exit"
+        ]
+      },
+      {
+        "label": "Food close",
+        "title": "One-area dinner",
+        "chips": [
+          "Same area",
+          "Dry exit"
+        ]
+      },
+      {
+        "label": "Low-cost close",
+        "title": "Cheap food or Spree",
+        "chips": [
+          "Spree or park",
+          "Family pause"
+        ]
+      },
+      {
+        "label": "Local close",
+        "title": "Base-side dinner",
+        "chips": [
+          "Keep it local",
+          "Dry exit"
+        ]
+      },
+      {
+        "label": "Return close",
+        "title": "Back early",
+        "chips": [
+          "Back by 19:00",
+          "Food before close"
+        ]
+      }
+    ],
+    "closeCount": 7,
+    "uniqueSecondChips": [
+      "Family pause",
+      "Budget dinner",
+      "Dry exit",
+      "Food before close"
+    ],
+    "fullDayCards": 7,
+    "pdfEnabled": true,
+    "overflowCount": 0
+  },
+  "mobilePacked": {
+    "closeRows": [
+      {
+        "label": "Arrival close",
+        "title": "Food, water, sleep",
+        "chips": [
+          "Food near base",
+          "Stop before tired"
+        ]
+      },
+      {
+        "label": "Museum close",
+        "title": "Dinner, no second queue",
+        "chips": [
+          "Central dinner",
+          "One booking only"
+        ]
+      },
+      {
+        "label": "East close",
+        "title": "Stay east, then home",
+        "chips": [
+          "Stay east",
+          "Dry exit"
+        ]
+      },
+      {
+        "label": "Food close",
+        "title": "One-area dinner",
+        "chips": [
+          "Same area",
+          "One booking only"
+        ]
+      },
+      {
+        "label": "Low-cost close",
+        "title": "Cheap food or Spree",
+        "chips": [
+          "Spree or park",
+          "Stop before tired"
+        ]
+      },
+      {
+        "label": "Local close",
+        "title": "Base-side dinner",
+        "chips": [
+          "Keep it local",
+          "Dry exit"
+        ]
+      },
+      {
+        "label": "Return close",
+        "title": "Back early",
+        "chips": [
+          "Back by 19:00",
+          "Food before close"
+        ]
+      }
+    ],
+    "closeCount": 7,
+    "uniqueSecondChips": [
+      "Stop before tired",
+      "One booking only",
+      "Dry exit",
+      "Food before close"
+    ],
+    "fullDayCards": 7,
+    "pdfEnabled": true,
+    "overflowCount": 0
+  },
+  "pdfPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/personalized-close-20260531/personalized-close-7day-family.pdf",
+  "errors": []
+}

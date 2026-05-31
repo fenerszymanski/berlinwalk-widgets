@@ -1,0 +1,8 @@
+OK Import message IDs from Downloads
+SKIP Validate/apply imported IDs
+Import dry-run succeeded. Re-run with --write to create the local ID file before applying.
+
+Mode: DRY RUN
+Ready for next launch step: YES
+Evidence: output/qa/ultimate-trip-planner-email-id-gate/import-downloads-gate-20260531/dry-run-evidence/email-id-gate-2026-05-31T12-33-09-698Z.json
+Next: re-run with --write after confirming the 10 IDs are real.

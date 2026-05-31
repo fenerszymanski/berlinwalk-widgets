@@ -1,0 +1,179 @@
+{
+  "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&qaUnlock=1&weather=off&v=close-compact-20260531b",
+  "desktop": {
+    "viewport": "desktop",
+    "closeCount": 7,
+    "labels": [
+      {
+        "label": "Arrival close",
+        "title": "Food, water, sleep",
+        "chips": [
+          "Food near base",
+          "Sleep wins"
+        ]
+      },
+      {
+        "label": "Museum close",
+        "title": "Dinner, no second queue",
+        "chips": [
+          "Central dinner",
+          "No second queue"
+        ]
+      },
+      {
+        "label": "East close",
+        "title": "Stay east, then home",
+        "chips": [
+          "Stay east",
+          "One ride home"
+        ]
+      },
+      {
+        "label": "Food close",
+        "title": "One-area dinner",
+        "chips": [
+          "Same area",
+          "Late snack ok"
+        ]
+      },
+      {
+        "label": "Low-cost close",
+        "title": "Cheap food or Spree",
+        "chips": [
+          "Spree or park",
+          "Cheap food"
+        ]
+      },
+      {
+        "label": "Local close",
+        "title": "Base-side dinner",
+        "chips": [
+          "Keep it local",
+          "Short ride home"
+        ]
+      },
+      {
+        "label": "Return close",
+        "title": "Back early",
+        "chips": [
+          "Back by 19:00",
+          "No second mission"
+        ]
+      }
+    ],
+    "maxChipCount": 2,
+    "repeatedCoveredBackup": 0,
+    "uniqueLabels": [
+      "Arrival close",
+      "Museum close",
+      "East close",
+      "Food close",
+      "Low-cost close",
+      "Local close",
+      "Return close"
+    ],
+    "uniqueSecondChips": [
+      "Sleep wins",
+      "No second queue",
+      "One ride home",
+      "Late snack ok",
+      "Cheap food",
+      "Short ride home",
+      "No second mission"
+    ],
+    "noteTextPresent": false,
+    "overflowCount": 0,
+    "overflow": []
+  },
+  "mobile": {
+    "viewport": "mobile",
+    "closeCount": 7,
+    "labels": [
+      {
+        "label": "Arrival close",
+        "title": "Food, water, sleep",
+        "chips": [
+          "Food near base",
+          "Sleep wins"
+        ]
+      },
+      {
+        "label": "Museum close",
+        "title": "Dinner, no second queue",
+        "chips": [
+          "Central dinner",
+          "No second queue"
+        ]
+      },
+      {
+        "label": "East close",
+        "title": "Stay east, then home",
+        "chips": [
+          "Stay east",
+          "One ride home"
+        ]
+      },
+      {
+        "label": "Food close",
+        "title": "One-area dinner",
+        "chips": [
+          "Same area",
+          "Late snack ok"
+        ]
+      },
+      {
+        "label": "Low-cost close",
+        "title": "Cheap food or Spree",
+        "chips": [
+          "Spree or park",
+          "Cheap food"
+        ]
+      },
+      {
+        "label": "Local close",
+        "title": "Base-side dinner",
+        "chips": [
+          "Keep it local",
+          "Short ride home"
+        ]
+      },
+      {
+        "label": "Return close",
+        "title": "Back early",
+        "chips": [
+          "Back by 19:00",
+          "No second mission"
+        ]
+      }
+    ],
+    "maxChipCount": 2,
+    "repeatedCoveredBackup": 0,
+    "uniqueLabels": [
+      "Arrival close",
+      "Museum close",
+      "East close",
+      "Food close",
+      "Low-cost close",
+      "Local close",
+      "Return close"
+    ],
+    "uniqueSecondChips": [
+      "Sleep wins",
+      "No second queue",
+      "One ride home",
+      "Late snack ok",
+      "Cheap food",
+      "Short ride home",
+      "No second mission"
+    ],
+    "noteTextPresent": false,
+    "overflowCount": 0,
+    "overflow": []
+  },
+  "pdf": {
+    "ok": true,
+    "path": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/close-compact-20260531/close-compact-7day.pdf",
+    "bytes": 2693494,
+    "suggestedFilename": "ultimate-berlin-trip-plan-2026-06-01.pdf"
+  }
+}

@@ -1,0 +1,16 @@
+Ultimate visibility release (WRITE)
+- Current tools-hub visibility: draft
+- Triggered Email placeholders: 10
+- Live smoke: missing
+- Latest remote preflight: output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T12-28-09-213Z.json
+- Wix tool page status: 404
+- Homepage shortcut currently present: no
+- tools-hub/data.json would remove draft/hidden/published:false visibility flags.
+- tools-home/data.json would not be changed. Add --include-home after final page QA if desired.
+
+Release gates not met:
+- 10 Triggered Email placeholders remain
+- No passing live smoke evidence found
+- Wix tool page is not live in latest preflight (status 404)
+
+No files written. Re-run after the gates pass, or use --force only for deliberate recovery.

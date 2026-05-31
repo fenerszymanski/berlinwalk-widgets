@@ -1,0 +1,11 @@
+{
+  "keys": 10,
+  "uniqueValues": 10,
+  "allNormalized": true,
+  "dryRunOk": true,
+  "writeOk": true,
+  "checkValid": true,
+  "checkApplied": true,
+  "originalFunnelHasPlaceholders": true,
+  "duplicateRejected": true
+}

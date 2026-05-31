@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-05-31T14:06:23.382Z",
+  "mode": "live_read_only",
+  "collectionId": "TripPlannerLeads",
+  "limit": 20,
+  "includeEmails": false,
+  "privacy": "emails masked; stable emailHash included",
+  "summary": {
+    "count": 0,
+    "bookedCount": 0,
+    "unbookedCount": 0,
+    "averageConversionScore": 0,
+    "arrivingNext7Days": 0,
+    "sendErrorCount": 0,
+    "byConversionTier": {},
+    "byTripStyle": {},
+    "byArrivalWindow": {},
+    "byIntentStage": {},
+    "byTourIntent": {},
+    "byTripLength": {},
+    "bySource": {},
+    "priorityLeads": [],
+    "upcomingArrivals": [],
+    "sendErrors": []
+  }
+}

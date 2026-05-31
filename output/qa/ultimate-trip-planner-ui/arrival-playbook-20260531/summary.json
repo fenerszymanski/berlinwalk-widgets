@@ -1,0 +1,45 @@
+{
+  "url": "http://127.0.0.1:52281/ultimate-berlin-trip-planner/?context=tool&date=2026-06-01&tripLength=7&qaUnlock=1&resetUnlock=1&weather=off&v=arrival-playbook-qa2",
+  "desktop": {
+    "arrivalCount": 1,
+    "arrivalCards": 4,
+    "arrivalLabels": [
+      "Ticket",
+      "First move",
+      "Tour anchor",
+      "First close"
+    ],
+    "firstCloseValue": "Food, water, sleep",
+    "arrivalImageLoaded": true,
+    "highlightCount": 3,
+    "distinctHighlightImages": 3,
+    "fullDays": 7,
+    "overflowCount": 0,
+    "overflow": []
+  },
+  "print": {
+    "called": true,
+    "hasArrivalPlaybook": true,
+    "hasTripHighlights": true,
+    "hasTicket": true,
+    "hasBookSpot": true
+  },
+  "pdf": {
+    "path": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/ultimate-trip-planner-ui/arrival-playbook-20260531/arrival-playbook-7day.pdf",
+    "bytes": 2721007,
+    "suggestedFilename": "ultimate-berlin-trip-plan-2026-06-01.pdf"
+  },
+  "mobile": {
+    "arrivalCount": 1,
+    "arrivalCards": 4,
+    "arrivalGridColumns": "310px",
+    "highlightCount": 3,
+    "fullDays": 7,
+    "overflowCount": 0,
+    "overflow": []
+  },
+  "errors": {
+    "desktop": [],
+    "mobile": []
+  }
+}

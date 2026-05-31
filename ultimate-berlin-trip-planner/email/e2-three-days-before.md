@@ -12,6 +12,10 @@ Your trip starts on `${arrivalDate}`. Your planner ticket note was:
 
 **${ticket}**
 
+Your pre-arrival checklist:
+
+**${preArrivalChecklist}**
+
 Two practical traps to avoid:
 
 **1. BER Airport is Zone C**  
@@ -19,6 +23,10 @@ If you arrive at BER, you normally need an ABC ticket before boarding. Central B
 
 **2. Sundays and Mondays change plans**  
 Most normal shops close on Sundays. Many museums close on Mondays. Restaurants, transport, parks, outdoor sights, and the walking tour still work.
+
+Your planner's smart fix note:
+
+**${planAdvice}**
 
 Quick checks:
 
@@ -35,4 +43,3 @@ Start with the story. Then Berlin becomes much easier to plan.
 Yusuf  
 BerlinWalk  
 berlinwalk.com · @berlinwalkingtour
-

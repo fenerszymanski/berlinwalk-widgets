@@ -1,0 +1,134 @@
+{
+  "tomorrowSales": {
+    "count": "Up to 2 emails",
+    "documentOverflow": 0,
+    "rootOverflow": 0,
+    "steps": [
+      {
+        "cls": "bw-reminder-step is-current",
+        "date": "Today",
+        "key": "instant",
+        "label": "Now",
+        "title": "Plan + PDF"
+      },
+      {
+        "cls": "bw-reminder-step is-skipped",
+        "date": "Window passed",
+        "key": "minus7",
+        "label": "7 days before",
+        "title": "Tour slot"
+      },
+      {
+        "cls": "bw-reminder-step is-skipped",
+        "date": "Window passed",
+        "key": "minus3",
+        "label": "3 days before",
+        "title": "Route check"
+      },
+      {
+        "cls": "bw-reminder-step is-current",
+        "date": "Folded in now",
+        "key": "minus1",
+        "label": "1 day before",
+        "title": "Final setup"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Mon 1 Jun",
+        "key": "dayOf",
+        "label": "Arrival day",
+        "title": "Arrival nudge"
+      }
+    ],
+    "subtitle": "Dates adapt to your arrival. Passed windows fold into the instant plan instead of cluttering inboxes.",
+    "width": 319
+  },
+  "tenDaySales": {
+    "count": "Up to 5 emails",
+    "documentOverflow": 0,
+    "rootOverflow": 0,
+    "steps": [
+      {
+        "cls": "bw-reminder-step is-current",
+        "date": "Today",
+        "key": "instant",
+        "label": "Now",
+        "title": "Plan + PDF"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Wed 3 Jun",
+        "key": "minus7",
+        "label": "7 days before",
+        "title": "Tour slot"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Sun 7 Jun",
+        "key": "minus3",
+        "label": "3 days before",
+        "title": "Route check"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Tue 9 Jun",
+        "key": "minus1",
+        "label": "1 day before",
+        "title": "Final setup"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Wed 10 Jun",
+        "key": "dayOf",
+        "label": "Arrival day",
+        "title": "Arrival nudge"
+      }
+    ],
+    "subtitle": "Dates adapt to your arrival. Passed windows fold into the instant plan instead of cluttering inboxes.",
+    "width": 319
+  },
+  "tenDayBookedMobile": {
+    "count": "Up to 5 emails",
+    "documentOverflow": 0,
+    "rootOverflow": 0,
+    "steps": [
+      {
+        "cls": "bw-reminder-step is-current",
+        "date": "Today",
+        "key": "instant",
+        "label": "Now",
+        "title": "Plan + PDF"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Wed 3 Jun",
+        "key": "minus7",
+        "label": "7 days before",
+        "title": "Meeting prep"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Sun 7 Jun",
+        "key": "minus3",
+        "label": "3 days before",
+        "title": "Route check"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Tue 9 Jun",
+        "key": "minus1",
+        "label": "1 day before",
+        "title": "Final setup"
+      },
+      {
+        "cls": "bw-reminder-step is-future",
+        "date": "Wed 10 Jun",
+        "key": "dayOf",
+        "label": "Arrival day",
+        "title": "World Clock prep"
+      }
+    ],
+    "subtitle": "Your reminder path is already in prep mode: meeting point, weather, and arrival setup.",
+    "width": 390
+  }
+}

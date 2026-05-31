@@ -1,0 +1,60 @@
+{
+  "compactDesktopMetrics": {
+    "closerTitles": [
+      "One stop, then stop",
+      "Central dinner",
+      "Dinner east"
+    ],
+    "closersWithCopy": 0,
+    "dayCards": 3,
+    "dayCopyCount": 6,
+    "firstBlockTitles": [
+      "Get central without over-solving Berlin",
+      "Use the tour as the first city framework",
+      "One stop, then stop",
+      "Pick one museum anchor",
+      "Reichstag dome or Brandenburg Gate",
+      "Central dinner",
+      "Berlin Wall Memorial",
+      "East Side Gallery and Friedrichshain",
+      "Dinner east"
+    ],
+    "height": 900,
+    "leadGateVisible": false,
+    "longCopy": [],
+    "maxCopyLength": 87,
+    "overflow": 0,
+    "width": 1280
+  },
+  "compactMobileMetrics": {
+    "closerTitles": [
+      "One stop, then stop",
+      "Central dinner",
+      "Dinner east",
+      "One-area dinner",
+      "Park, Spree, or cheap food",
+      "Dinner near base",
+      "Early return"
+    ],
+    "closersWithCopy": 0,
+    "dayCards": 7,
+    "dayCopyCount": 14,
+    "firstBlockTitles": [
+      "Get central without over-solving Berlin",
+      "Use the tour as the first city framework",
+      "One stop, then stop",
+      "Pick one museum anchor",
+      "Reichstag dome or Brandenburg Gate",
+      "Central dinner",
+      "Berlin Wall Memorial",
+      "East Side Gallery and Friedrichshain",
+      "Dinner east"
+    ],
+    "height": 900,
+    "leadGateVisible": false,
+    "longCopy": [],
+    "maxCopyLength": 87,
+    "overflow": 0,
+    "width": 390
+  }
+}
