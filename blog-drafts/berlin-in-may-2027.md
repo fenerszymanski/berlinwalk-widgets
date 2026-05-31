@@ -2,7 +2,7 @@
 
 Slug: `berlin-in-may-2027`
 
-Wix draft ID: `TBD` (create on publish)
+Wix draft ID: `a091d844-238b-45a4-a913-5233563f1e40`
 
 Wix draft status: `UNPUBLISHED`
 
@@ -62,9 +62,7 @@ Local files in `blog-drafts/images/berlin-in-may/`. Add 2-3 images, hero first.
 - Headline dates include May 1, the Carnival of Cultures around Pentecost (about May 14 to 17, 2027), and a run of public holidays.
 - Pack for warm days and cooler evenings: layers, a light jacket, a rain layer and good walking shoes.
 
-## Berlin Weather in May
-
-(Hero image goes above this introduction.)
+## Draft
 
 May is the month I quietly recommend most often, because Berlin in May usually gets the balance right.
 
@@ -91,6 +89,8 @@ It is less ideal only if your trip is built entirely around hot lake-swimming we
 My honest view: if someone asked me for the most balanced, enjoyable Berlin month, May would be my answer, alongside September. It has long days, friendly weather, festivals and a relaxed, outdoor city, without July's heat or August's crowds.
 
 It is a wonderful month for my [Berlin Free Walking Tour](https://www.berlinwalk.com/). The temperature is ideal for walking, the city looks green and alive, and you finish with a long evening still ahead of you.
+
+## Berlin Weather in May
 
 Berlin.de's May overview lists an average daily maximum of 18.8 degrees Celsius, an average minimum of 7.7 degrees, about 7 hours of sunshine per day, nine rainy days, and 47 mm of rain. It plainly calls May a good time to visit, when the weather is friendly but the city is not yet so crowded.
 

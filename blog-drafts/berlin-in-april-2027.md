@@ -2,7 +2,7 @@
 
 Slug: `berlin-in-april-2027`
 
-Wix draft ID: `TBD` (create on publish)
+Wix draft ID: `cbc1c7ca-9099-4e9a-a282-1b64963298f9`
 
 Wix draft status: `UNPUBLISHED`
 

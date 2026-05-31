@@ -695,13 +695,17 @@ function run() {
   }
 
   const homeTools = Array.isArray(toolsHome.featuredTools) ? toolsHome.featuredTools : [];
+  const homeHasUltimate = homeTools.some((tool) => tool && tool.slug === 'ultimate-berlin-trip-planner');
+  const ultimateStatus = String(ultimateTool?.status || '').toLowerCase();
+  const ultimateIsPublic = Boolean(ultimateTool) && ultimateTool.hidden !== true && ultimateTool.published !== false && ultimateStatus !== 'draft';
+  const homepageCanShowUltimate = ultimateIsPublic && Boolean(liveSmokeEvidence()) && Boolean(latestRemotePreflightEvidence());
   const homePlannerIconSlugs = ['berlin-first-day-planner', 'hackescher-after-tour-planner'];
   const homePlannerIconRows = homePlannerIconSlugs.map((slug) => iconManifestRows.find((row) => row && row.slug === slug));
   const homePlannerTools = homePlannerIconSlugs.map((slug) => homeTools.find((tool) => tool && tool.slug === slug));
   block(
-    'Homepage tool shortcuts keep Ultimate held for final page QA',
-    !homeTools.some((tool) => tool && tool.slug === 'ultimate-berlin-trip-planner'),
-    'Move Ultimate into tools-home/data.json only after final page QA.'
+    'Homepage tool shortcut state is launch-safe',
+    !homeHasUltimate || homepageCanShowUltimate,
+    'Keep Ultimate out of tools-home/data.json until the public tool has live smoke and remote preflight evidence.'
   );
   block(
     'Homepage tools renderer filters draft tools',
@@ -720,12 +724,12 @@ function run() {
     'Berlin First-Day and Hackescher homepage shortcuts should use generated local 160px icons, not letter placeholders.'
   );
   block(
-    'Ultimate icon is prepared but homepage-held',
+    'Ultimate homepage icon state is launch-safe',
     exists('tools-home/icons/ultimate-berlin-trip-planner-160.png') &&
       ultimateTool &&
       /ultimate-berlin-trip-planner-160\.png$/.test(ultimateTool.image || '') &&
-      !homeTools.some((tool) => tool && tool.slug === 'ultimate-berlin-trip-planner'),
-    'Keep the Ultimate icon ready in tools-hub, but do not expose the homepage shortcut until final page QA.'
+      (!homeHasUltimate || /^https:\/\/fenerszymanski\.github\.io\/berlinwalk-widgets\/tools-home\/icons\/ultimate-berlin-trip-planner-160\.png$/.test(homeTools.find((tool) => tool && tool.slug === 'ultimate-berlin-trip-planner')?.image || '')),
+    'Keep the Ultimate icon ready in tools-hub; when homepage-visible, use the generated 160px icon URL.'
   );
   block(
     'Tools hub Custom Element filters draft tools',

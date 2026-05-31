@@ -2,7 +2,7 @@
 
 Slug: `berlin-in-october-2026`
 
-Wix draft ID: `TBD` (create on publish)
+Wix draft ID: `055f887a-271e-4a3f-97e8-566c37af7aab`
 
 Wix draft status: `UNPUBLISHED`
 

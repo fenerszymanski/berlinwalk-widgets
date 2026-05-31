@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-31 — Codex (Monthly Wix drafts created)
+
+**Did:** Continued Claude's monthly blog series handoff by creating/verifying the Wix Blog draft package for the remaining months.
+
+**Changed:**
+- `blog-drafts/berlin-in-{october,november,december}-2026.md` and `blog-drafts/berlin-in-{january,february,march,april,may}-2027.md` — filled Wix draft IDs; corrected May's missing `## Draft` marker and moved `Berlin Weather in May` to the proper section.
+- Root `/Users/yusufucuz/Documents/New project/create-wix-monthly-blog-drafts.mjs` — added a dry-run-first uploader that parses monthly drafts, uploads/caches images, inserts 7 embeds, limits SEO keywords to Wix's 5-keyword max, and skips existing drafts.
+- Wix Blog: all 8 monthly drafts are `UNPUBLISHED`, have cover images and 7 embeds; November-May public source sections were removed from Wix body while image credits remain. IDs: Oct `055f887a-271e-4a3f-97e8-566c37af7aab`, Nov `3f5d104d-1008-46dc-acff-5a9b5ad9c14b`, Dec `b350cea6-1d1d-4dd8-b8a6-146b66873a45`, Jan `219c9483-fe16-4fff-93c4-e6ab82373b65`, Feb `295b35d2-4f6e-4149-92a4-e7aeeb768a34`, Mar `77515780-5b89-42ce-a4b9-5cb4bf669be9`, Apr `cbc1c7ca-9099-4e9a-a282-1b64963298f9`, May `a091d844-238b-45a4-a913-5233563f1e40`.
+
+**Opened:** Preview and publish the monthly drafts in order October → November → December → January → February → March → April → May; after publishing, update month nav/blog index as needed and live-QA URLs.
+**Closed:** Wix draft creation for the missing monthly series.
+
+**Next session should:** Start with October draft preview/publish QA, then proceed through the queue one post at a time.
+
 ## 2026-05-31 — Codex (Ultimate post-push QA)
 
 **Did:** Verified Yusuf's push and GitHub Pages deployment for Ultimate's public visibility release.
