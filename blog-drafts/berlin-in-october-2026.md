@@ -4,7 +4,7 @@ Slug: `berlin-in-october-2026`
 
 Wix draft ID: `055f887a-271e-4a3f-97e8-566c37af7aab`
 
-Wix draft status: `UNPUBLISHED`
+Wix draft status: `PUBLISHED`
 
 Focus keyword: **Berlin in October**
 

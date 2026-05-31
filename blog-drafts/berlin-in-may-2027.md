@@ -4,7 +4,7 @@ Slug: `berlin-in-may-2027`
 
 Wix draft ID: `a091d844-238b-45a4-a913-5233563f1e40`
 
-Wix draft status: `UNPUBLISHED`
+Wix draft status: `PUBLISHED`
 
 Focus keyword: **Berlin in May**
 

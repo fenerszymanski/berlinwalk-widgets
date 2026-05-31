@@ -6,42 +6,42 @@ const BW_BLOG_HOME_DATA_URL = (() => {
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Where to Find Luggage Storage in Berlin for a Few Hours',
-    url: 'https://www.berlinwalk.com/post/luggage-storage-in-berlin-2026',
-    category: 'Practical Berlin',
-    readTime: '6 min read',
-    label: 'First-day fix',
-    summary: 'Where to leave your bags between check-out, the tour, and your flight without wasting half the day.',
-    image: 'https://static.wixstatic.com/media/5a08a3_d02fcda6952d4f888c691198e4f9fd22~mv2.png/v1/fill/w_920,h_620,fp_0.50_0.50,q_90,enc_avif,quality_auto/5a08a3_d02fcda6952d4f888c691198e4f9fd22~mv2.png',
-    alt: 'Colorful luggage lockers in Berlin'
+    title: 'Berlin in October 2026: Weather, Festival of Lights, Packing and What to Book',
+    url: 'https://www.berlinwalk.com/post/berlin-in-october-2026',
+    category: 'When to Visit',
+    readTime: '8 min read',
+    label: 'Monthly guide',
+    summary: 'Autumn light, Festival of Lights dates, German Unity Day, packing tips, daylight changes, and what to book early.',
+    image: 'https://static.wixstatic.com/media/5a08a3_a68f85c43a134c31aee35fce276e2d14~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-in-october-2026-01-hero-autumn-berlin.jpg',
+    alt: 'Golden autumn leaves covering a Berlin street and parked cars in October'
   },
   posts: [
     {
-      title: 'Free Things to Do in Berlin in 2026',
-      url: 'https://www.berlinwalk.com/post/free-things-to-do-in-berlin-2026',
-      category: 'Tourist Tips',
-      readTime: '7 min read',
-      summary: 'No-cost places, views, museums, and route ideas that still feel worth your time.',
-      image: 'https://static.wixstatic.com/media/5a08a3_d23a723947274468b1bc281bc59f75f8~mv2.jpg/v1/fill/w_720,h_480,fp_0.50_0.50,q_90,enc_avif,quality_auto/5a08a3_d23a723947274468b1bc281bc59f75f8~mv2.jpg',
-      alt: 'Traveler looking over Berlin landmarks'
-    },
-    {
-      title: 'Public Toilets in Berlin: What Tourists Actually Need to Know',
-      url: 'https://www.berlinwalk.com/post/public-toilets-in-berlin',
-      category: 'Practical Berlin',
-      readTime: '5 min read',
-      summary: 'What costs money, what is free, and how to avoid awkward surprises while exploring.',
-      image: 'https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_720,h_480,fp_0.50_0.50,q_90,enc_avif,quality_auto/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg',
-      alt: 'Public toilet sign in Berlin'
-    },
-    {
-      title: 'Berlin in September 2026: The Best Month Nobody Plans For',
-      url: 'https://www.berlinwalk.com/post/berlin-in-september-2026',
+      title: "Berlin in December 2026: Christmas Markets, Weather, Closures and New Year's Eve",
+      url: 'https://www.berlinwalk.com/post/berlin-in-december-2026',
       category: 'When to Visit',
-      readTime: '8 min read',
-      summary: "Weather, events, crowds, and why September may be Berlin's easiest travel month.",
-      image: 'https://static.wixstatic.com/media/5a08a3_54ec79099a614f8d9867e46258a6e6be~mv2.jpg/v1/fill/w_720,h_480,fp_0.50_0.50,q_90,enc_avif,quality_auto/5a08a3_54ec79099a614f8d9867e46258a6e6be~mv2.jpg',
-      alt: 'Berlin riverbank in autumn with TV Tower in the distance'
+      readTime: '7 min read',
+      summary: "Christmas markets, winter weather, holiday closures, New Year's Eve, packing tips, and what to book.",
+      image: 'https://static.wixstatic.com/media/5a08a3_b13955ac1c7047aca76aa006a5c3a20b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-christmas-market.jpg',
+      alt: 'A Berlin Christmas market glowing with lights and wooden stalls on a December evening'
+    },
+    {
+      title: 'Berlin in January 2027: Weather, the Cheapest, Quietest Month, and What to Do',
+      url: 'https://www.berlinwalk.com/post/berlin-in-january-2027',
+      category: 'When to Visit',
+      readTime: '6 min read',
+      summary: 'Cold weather, low prices, quiet museums, winter packing advice, events, and honest January planning.',
+      image: 'https://static.wixstatic.com/media/5a08a3_8fa40dec62794d5591d286e809a578d2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-berliner-dom-snow.jpg',
+      alt: 'The Berlin Cathedral, the Berliner Dom, covered in snow on a cold January day'
+    },
+    {
+      title: 'Berlin in May 2027: Weather, Festivals, Long Days and the Sweet Spot Before Summer',
+      url: 'https://www.berlinwalk.com/post/berlin-in-may-2027',
+      category: 'When to Visit',
+      readTime: '7 min read',
+      summary: 'Warm but not hot, long days, May 1, Carnival of Cultures, beer gardens, and what to book early.',
+      image: 'https://static.wixstatic.com/media/5a08a3_9c4f15caade945bcae72737bf8254b5c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-karneval.jpg',
+      alt: 'Colourful costumes and crowds at the Karneval der Kulturen street parade in Berlin'
     }
   ]
 };

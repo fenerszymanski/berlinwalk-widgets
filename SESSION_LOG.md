@@ -4,6 +4,37 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-31 — Codex (Monthly placement/widgets updated)
+
+**Did:** Updated the local widgets that surface the monthly Berlin guides across posts, `/blog`, and the homepage.
+
+**Changed:**
+- `months-nav/data.json` — all 12 month cards now have `status: "published"` and correct post slugs: Jan-May 2027, June legacy, Jul-Dec 2026.
+- `scripts/generate-blog-index-data.mjs` — treats month slugs as `when-to-visit`, pins all 12 month guides in calendar order, and raises the Month-by-Month shelf limit to 12.
+- `blog-index/data.json` — regenerated from Wix Blog API; local index has newest 100 posts and a 12-post Month-by-Month Berlin shelf.
+- `blog-home/data.json` and `blog-home/blog-home-element.js` — homepage teaser now features October, December, January, and May monthly guides.
+
+**Opened:** Push the repo so GitHub Pages serves the updated JSON/JS; then QA one live monthly post, `/blog`, and the homepage.
+**Closed:** Local widget data/link updates for the monthly post series.
+
+**Next session should:** Push `berlinwalk-widgets`, wait for deploy, then verify the live month-nav widget no longer shows `COMING SOON` for the published months.
+
+## 2026-05-31 — Codex (Monthly posts published)
+
+**Did:** Completed the missing SEO fields Yusuf flagged, published all 8 monthly posts, and verified live URLs.
+
+**Changed:**
+- `blog-drafts/berlin-in-{october,november,december}-2026.md` and `blog-drafts/berlin-in-{january,february,march,april,may}-2027.md` — changed Wix status to `PUBLISHED`.
+- `months-nav/data.json` — Jan-May and Oct-Dec now point to the live `berlin-in-...` slugs with `status: "published"`.
+- `blog-index/data.json` — regenerated from Wix Blog API after publish; current local feed has newest 100 posts.
+- Root `/Users/yusufucuz/Documents/New project/publish-wix-monthly-blog-drafts.mjs` — added publish helper that patches focus keyword, tag IDs, cover alt text, OG/Twitter image tags + image alt tags, then publishes via Wix Blog Draft Posts API.
+- Wix Blog: published October `055f887a-271e-4a3f-97e8-566c37af7aab`, November `3f5d104d-1008-46dc-acff-5a9b5ad9c14b`, December `b350cea6-1d1d-4dd8-b8a6-146b66873a45`, January `219c9483-fe16-4fff-93c4-e6ab82373b65`, February `295b35d2-4f6e-4149-92a4-e7aeeb768a34`, March `77515780-5b89-42ce-a4b9-5cb4bf669be9`, April `cbc1c7ca-9099-4e9a-a282-1b64963298f9`, May `a091d844-238b-45a4-a913-5233563f1e40`.
+
+**Opened:** Push `berlinwalk-widgets` so `months-nav/data.json` and `blog-index/data.json` go live on GitHub Pages; then spot-check the months-nav embed on one live monthly post.
+**Closed:** Monthly post SEO completion and Wix publishing.
+
+**Next session should:** Push the widget repo, wait for GitHub Pages, and QA one live monthly post plus `/blog` index data.
+
 ## 2026-05-31 — Codex (Monthly Wix drafts created)
 
 **Did:** Continued Claude's monthly blog series handoff by creating/verifying the Wix Blog draft package for the remaining months.

@@ -4,7 +4,7 @@ Slug: `berlin-in-november-2026`
 
 Wix draft ID: `3f5d104d-1008-46dc-acff-5a9b5ad9c14b`
 
-Wix draft status: `UNPUBLISHED`
+Wix draft status: `PUBLISHED`
 
 Focus keyword: **Berlin in November**
 

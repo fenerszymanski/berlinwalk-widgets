@@ -122,13 +122,22 @@ const TOPICS = [
     kicker: 'Timing',
     description: 'Weather, daylight, crowds, events, and what each season feels like on foot.',
     slugs: [
-      'berlin-in-september-2026',
-      'berlin-in-august-2026',
-      'berlin-in-july-2026',
+      'berlin-in-january-2027',
+      'berlin-in-february-2027',
+      'berlin-in-march-2027',
+      'berlin-in-april-2027',
+      'berlin-in-may-2027',
       'visiting-berlin-in-june',
+      'berlin-in-july-2026',
+      'berlin-in-august-2026',
+      'berlin-in-september-2026',
+      'berlin-in-october-2026',
+      'berlin-in-november-2026',
+      'berlin-in-december-2026',
       'what-s-the-best-time-to-visit-berlin-a-month-by-month-guide',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
     ],
+    shelfLimit: 12,
     match: /(january|february|march|april|may|june|july|august|september|october|november|december|month|weather|temperature|rain|summer|winter|spring|autumn|fall|best time)/i,
   },
 ];
@@ -326,6 +335,9 @@ function imageUrl(image, width = 960, height = 640) {
 
 function topicFor(post) {
   const haystack = `${post.title || ''} ${post.excerpt || ''} ${post.slug || ''}`;
+  if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) {
+    return TOPICS.find((topic) => topic.key === 'when-to-visit');
+  }
   const explicit = TOPICS.find((topic) => topic.slugs.includes(post.slug));
   if (explicit) return explicit;
   return TOPICS.find((topic) => topic.match.test(haystack)) || TOPICS[1];
@@ -333,6 +345,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) return 'best-month-to-visit-berlin';
   if (/(toilet)/.test(s)) return 'berlin-public-toilets';
   if (/(luggage|storage|suitcase)/.test(s)) return 'berlin-luggage-storage';
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
@@ -340,7 +353,7 @@ function relatedToolSlugFor(post) {
   if (/(welcomecard)/.test(s)) return 'welcomecard-calculator';
   if (/(budget|expensive|cheap|credit|cash)/.test(s)) return 'berlin-daily-budget';
   if (/(first-time|3-days|itinerary)/.test(s)) return 'berlin-first-day-planner';
-  if (/(weather|temperature|july|august|september|june|rain|pack|month)/.test(s)) return 'best-month-to-visit-berlin';
+  if (/(weather|temperature|january|february|march|april|may|june|july|august|september|october|november|december|rain|pack|month)/.test(s)) return 'best-month-to-visit-berlin';
   if (/(free-things|free-museums|museum-island-free|reichstag)/.test(s)) return 'berlin-free-things-to-do';
   if (/(safe|safety|solo)/.test(s)) return 'berlin-safety';
   if (/(wall|east|west|cold-war)/.test(s)) return 'east-or-west-1989';
@@ -433,7 +446,7 @@ function buildData(posts, popularPosts = []) {
       navLabel: topic.navLabel,
       kicker: topic.kicker,
       description: topic.description,
-      posts: pickPosts(posts, topic.slugs, topic.key, 10),
+      posts: pickPosts(posts, topic.slugs, topic.key, topic.shelfLimit || 10),
     })),
     latest: posts.slice(0, 12),
     allPosts: posts,

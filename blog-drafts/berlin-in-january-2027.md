@@ -4,7 +4,7 @@ Slug: `berlin-in-january-2027`
 
 Wix draft ID: `219c9483-fe16-4fff-93c4-e6ab82373b65`
 
-Wix draft status: `UNPUBLISHED`
+Wix draft status: `PUBLISHED`
 
 Focus keyword: **Berlin in January**
 
