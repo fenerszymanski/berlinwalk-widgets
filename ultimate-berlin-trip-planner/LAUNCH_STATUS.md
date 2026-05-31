@@ -1,10 +1,10 @@
 # Ultimate Berlin Trip Planner Launch Status
 
-Generated: 2026-05-31T18:32:00.199Z
+Generated: 2026-05-31T19:21:09.054Z
 
-## Verdict: WAITING FOR LIVE QA
+## Verdict: PUBLIC TOOL LIVE - HOMEPAGE HELD
 
-Launch audit: 132 pass, 1 warn, 0 block (ready for manual Wix smoke tests)
+Launch audit: 139 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 
 ## Gates
 
@@ -12,30 +12,31 @@ Launch audit: 132 pass, 1 warn, 0 block (ready for manual Wix smoke tests)
 | --- | --- | --- |
 | Triggered Email IDs | PASS | All message IDs are applied. |
 | TripPlannerLeads collection | PASS | 74 fields visible via API; critical fields verified. |
-| Velo endpoints | WARN | lead OPTIONS 404, booking OPTIONS 404. |
-| Live lead/booking smoke | WARN | No passing live smoke evidence found. |
-| Live Wix tool page | WARN | Latest remote preflight status 404. |
-| Public visibility | HOLD | Ultimate is still protected as draft. |
+| Velo endpoints | PASS | lead OPTIONS 204, booking OPTIONS 204. |
+| Live lead/booking smoke | PASS | output/qa/ultimate-trip-planner-live-smoke/live-2026-05-31T18-57-06-052Z.json |
+| Live Wix tool page | PASS | Latest remote preflight status 200. |
+| Public visibility | PASS | Ultimate is public in tools-hub. |
 | Homepage shortcut | HOLD | Homepage shortcut is not enabled yet. |
 | SEO blog package | PASS | Body draft has widget/summary/FAQ placeholders. |
+| Wix Blog draft | PASS | Draft b1915fa5-dfcf-4427-bcfc-d9a6665208e7 is created but unpublished. |
 
 ## Evidence
 
-- Latest remote preflight: `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T14-40-53-892Z.json`
-- Latest passing live smoke: missing
-- Visibility: draft/protected, homepage shortcut not enabled
+- Latest remote preflight: `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T19-20-51-073Z.json`
+- Latest passing live smoke: `output/qa/ultimate-trip-planner-live-smoke/live-2026-05-31T18-57-06-052Z.json`
+- Visibility: public, homepage shortcut not enabled
 - Widget URL: https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/
 - Blog package: body draft exists; widget near top yes; quick summary yes; FAQ yes
+- Wix Blog draft: b1915fa5-dfcf-4427-bcfc-d9a6665208e7 (https://manage.wix.com/dashboard/12ee5ea0-70a7-492f-8020-ffb27cbb630f/blog/drafts/b1915fa5-dfcf-4427-bcfc-d9a6665208e7/edit)
 
 ## Current Blockers And Warnings
 
 - No audit blockers.
-- WARN Live Wix smoke test evidence is recorded - No live-*.json result with successful tripPlannerLead response found under output/qa/ultimate-trip-planner-live-smoke/.
 
 ## Next Actions
 
-1. Publish Backend/tripPlannerFunnel.js, http-functions.js handlers, and jobs.config in Wix.
-2. Run launch-remote-preflight.mjs until both Velo OPTIONS handlers are live.
+1. QA the live /tools/ultimate-berlin-trip-planner page and /widgets listing after pushing repo changes.
+2. Add the homepage shortcut later with release-visibility.mjs --write --include-home --regenerate-widgets-seo only after final page QA.
 
 ## Command Shortcuts
 

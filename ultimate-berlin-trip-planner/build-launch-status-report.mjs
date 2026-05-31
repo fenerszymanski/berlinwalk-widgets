@@ -120,13 +120,21 @@ function toolVisibility() {
 
 function blogPackage() {
   const bodyPath = repoPath('blog-drafts/ultimate-berlin-trip-planner.body.md');
+  const draftPath = repoPath('blog-drafts/ultimate-berlin-trip-planner.md');
+  const draftCreatorPath = repoPath('../create-wix-ultimate-trip-planner-blog-draft.mjs');
   const body = fs.existsSync(bodyPath) ? fs.readFileSync(bodyPath, 'utf8') : '';
+  const draft = fs.existsSync(draftPath) ? fs.readFileSync(draftPath, 'utf8') : '';
+  const draftId = (draft.match(/Wix draft ID:\s*`([^`]+)`/) || [])[1] || '';
+  const editUrl = (draft.match(/Wix edit URL:\s*`([^`]+)`/) || [])[1] || '';
   return {
     bodyExists: Boolean(body),
     widgetNearTop: body.includes('{{widget:ultimate-berlin-trip-planner}}') &&
       body.indexOf('{{widget:ultimate-berlin-trip-planner}}') < 2500,
     quickSummary: body.includes('{{quick-summary}}'),
-    faq: body.includes('{{faq}}')
+    faq: body.includes('{{faq}}'),
+    draftCreatorExists: fs.existsSync(draftCreatorPath),
+    wixDraftId: draftId,
+    editUrl
   };
 }
 
@@ -192,19 +200,31 @@ function collectState() {
       label: 'SEO blog package',
       status: blog.bodyExists && blog.widgetNearTop && blog.quickSummary && blog.faq ? 'pass' : 'warn',
       detail: blog.bodyExists ? 'Body draft has widget/summary/FAQ placeholders.' : 'Body draft missing.'
+    },
+    {
+      id: 'blog_draft',
+      label: 'Wix Blog draft',
+      status: blog.wixDraftId && blog.draftCreatorExists ? 'pass' : 'hold',
+      detail: blog.wixDraftId
+        ? `Draft ${blog.wixDraftId} is created but unpublished.`
+        : 'No Wix draft ID recorded yet.'
     }
   ];
 
   const blockers = gates.filter((gate) => gate.status === 'block');
   const warnings = gates.filter((gate) => gate.status === 'warn');
   const holds = gates.filter((gate) => gate.status === 'hold');
+  const visibilityHeld = holds.some((gate) => gate.id === 'visibility');
+  const homepageHeld = holds.some((gate) => gate.id === 'homepage');
   const verdict = blockers.length
     ? 'NOT READY'
     : warnings.length
       ? 'WAITING FOR LIVE QA'
-      : holds.length
+      : visibilityHeld
         ? 'READY FOR VISIBILITY RELEASE'
-        : 'PUBLIC LAUNCH COMPLETE';
+        : homepageHeld
+          ? 'PUBLIC TOOL LIVE - HOMEPAGE HELD'
+          : 'PUBLIC LAUNCH COMPLETE';
 
   return {
     generatedAt: new Date().toISOString(),
@@ -285,10 +305,17 @@ function nextActions({ blockers, warnings, holds }) {
     ];
   }
 
+  if (holds.some((gate) => gate.id === 'blog_draft')) {
+    return [
+      'Run create-wix-ultimate-trip-planner-blog-draft.mjs in dry-run, then with --write after loading WIX_API_KEY.',
+      'Review the created Wix Blog draft before publishing.'
+    ];
+  }
+
   if (holds.some((gate) => gate.id === 'homepage')) {
     return [
-      'After page/embed QA, run release-visibility.mjs --write --include-home --regenerate-widgets-seo.',
-      'QA the homepage tools section on desktop and mobile.'
+      'QA the live /tools/ultimate-berlin-trip-planner page and /widgets listing after pushing repo changes.',
+      'Add the homepage shortcut later with release-visibility.mjs --write --include-home --regenerate-widgets-seo only after final page QA.'
     ];
   }
 
@@ -332,6 +359,7 @@ function markdown(state) {
     `- Visibility: ${state.visibility.publicVisible ? 'public' : 'draft/protected'}, homepage shortcut ${state.visibility.inHome ? 'enabled' : 'not enabled'}`,
     `- Widget URL: ${state.visibility.widgetUrl || 'missing'}`,
     `- Blog package: ${state.blog.bodyExists ? 'body draft exists' : 'missing'}; widget near top ${state.blog.widgetNearTop ? 'yes' : 'no'}; quick summary ${state.blog.quickSummary ? 'yes' : 'no'}; FAQ ${state.blog.faq ? 'yes' : 'no'}`,
+    `- Wix Blog draft: ${state.blog.wixDraftId || 'missing'}${state.blog.editUrl ? ` (${state.blog.editUrl})` : ''}`,
     '',
     '## Current Blockers And Warnings',
     '',

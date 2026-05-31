@@ -2,161 +2,121 @@
   "visiting-berlin-in-june": {
     "title": "June at a Glance: Compared to May and July",
     "subtitle": "How June stacks up against its neighbors",
-    "headers": [
-      "Month",
-      "Season",
-      "Key Strengths",
-      "Price Tier"
-    ],
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
     "rows": [
-      {
-        "name": "May",
-        "statusBadge": {
-          "label": "Shoulder",
-          "type": "shoulder"
-        },
-        "highlights": "Mild temps, blooming gardens, lower crowds. Lakes still cold.",
-        "priceTier": "$$"
-      },
-      {
-        "name": "June",
-        "statusBadge": {
-          "label": "Shoulder to Peak",
-          "type": "transitioning"
-        },
-        "highlights": "Long days, beer gardens fill, Fête de la Musique, lakes warm by mid-month.",
-        "priceTier": "$$$",
-        "highlighted": true
-      },
-      {
-        "name": "July",
-        "statusBadge": {
-          "label": "Peak",
-          "type": "peak"
-        },
-        "highlights": "Hottest temps, busiest crowds, festival season, 48 Stunden Neukölln.",
-        "priceTier": "$$$"
-      }
+      { "name": "May", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Mild temps, blooming gardens, lower crowds. Lakes still cold.", "priceTier": "$$" },
+      { "name": "June", "statusBadge": { "label": "Shoulder to Peak", "type": "transitioning" }, "highlights": "Long days, beer gardens fill, Fete de la Musique, lakes warm by mid-month.", "priceTier": "$$$", "highlighted": true },
+      { "name": "July", "statusBadge": { "label": "Peak", "type": "peak" }, "highlights": "Hottest temps, busiest crowds, festival season, 48 Stunden Neukolln.", "priceTier": "$$$" }
     ]
   },
   "berlin-in-july-2026": {
     "title": "July at a Glance: Compared to June and August",
     "subtitle": "How peak summer stacks up against its neighbors",
-    "headers": [
-      "Month",
-      "Season",
-      "Key Strengths",
-      "Price Tier"
-    ],
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
     "rows": [
-      {
-        "name": "June",
-        "statusBadge": {
-          "label": "Shoulder to Peak",
-          "type": "transitioning"
-        },
-        "highlights": "Longest days, warm but usually easier, beer gardens and lakes ramp up.",
-        "priceTier": "$$$"
-      },
-      {
-        "name": "July",
-        "statusBadge": {
-          "label": "Peak",
-          "type": "peak"
-        },
-        "highlights": "Warmest feel, long evenings, Fashion Week, Classic Open Air, CSD, school holidays.",
-        "priceTier": "$$$$",
-        "highlighted": true
-      },
-      {
-        "name": "August",
-        "statusBadge": {
-          "label": "Peak",
-          "type": "peak"
-        },
-        "highlights": "Hot lake weather, many locals away, strong summer mood but shorter evenings.",
-        "priceTier": "$$$"
-      }
+      { "name": "June", "statusBadge": { "label": "Shoulder to Peak", "type": "transitioning" }, "highlights": "Longest days, warm but usually easier, beer gardens and lakes ramp up.", "priceTier": "$$$" },
+      { "name": "July", "statusBadge": { "label": "Peak", "type": "peak" }, "highlights": "Warmest feel, long evenings, Fashion Week, Classic Open Air, CSD, school holidays.", "priceTier": "$$$$", "highlighted": true },
+      { "name": "August", "statusBadge": { "label": "Peak", "type": "peak" }, "highlights": "Hot lake weather, many locals away, strong summer mood but shorter evenings.", "priceTier": "$$$" }
     ]
   },
   "berlin-in-august-2026": {
     "title": "August at a Glance: Compared to July and September",
     "subtitle": "How late summer stacks up against its neighbors",
-    "headers": [
-      "Month",
-      "Season",
-      "Key Strengths",
-      "Price Tier"
-    ],
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
     "rows": [
-      {
-        "name": "July",
-        "statusBadge": {
-          "label": "Peak",
-          "type": "peak"
-        },
-        "highlights": "Longest summer evenings, CSD, Classic Open Air, high visitor demand.",
-        "priceTier": "$$$$"
-      },
-      {
-        "name": "August",
-        "statusBadge": {
-          "label": "Peak",
-          "type": "peak"
-        },
-        "highlights": "Warmest feel, best lake water, Tanz im August, Long Night of Museums, shorter evenings.",
-        "priceTier": "$$$$",
-        "highlighted": true
-      },
-      {
-        "name": "September",
-        "statusBadge": {
-          "label": "Shoulder",
-          "type": "shoulder"
-        },
-        "highlights": "Better walking weather, fewer peak-season families, Berlin Art Week, Marathon energy.",
-        "priceTier": "$$$"
-      }
+      { "name": "July", "statusBadge": { "label": "Peak", "type": "peak" }, "highlights": "Longest summer evenings, CSD, Classic Open Air, high visitor demand.", "priceTier": "$$$$" },
+      { "name": "August", "statusBadge": { "label": "Peak", "type": "peak" }, "highlights": "Warmest feel, best lake water, Tanz im August, Long Night of Museums, shorter evenings.", "priceTier": "$$$$", "highlighted": true },
+      { "name": "September", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Better walking weather, fewer peak-season families, Berlin Art Week, Marathon energy.", "priceTier": "$$$" }
     ]
   },
   "berlin-in-september-2026": {
     "title": "September at a Glance: Compared to August and October",
     "subtitle": "How early shoulder season changes the trip",
-    "headers": [
-      "Month",
-      "Season",
-      "Key Strengths",
-      "Price Tier"
-    ],
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
     "rows": [
-      {
-        "name": "August",
-        "statusBadge": {
-          "label": "Peak",
-          "type": "peak"
-        },
-        "highlights": "Warmest feel, lake weather, school holidays, and higher peak-season pressure.",
-        "priceTier": "$$$$"
-      },
-      {
-        "name": "September",
-        "statusBadge": {
-          "label": "Shoulder",
-          "type": "shoulder"
-        },
-        "highlights": "Best walking weather, Berlin Art Week, Open Monument Day, Marathon energy.",
-        "priceTier": "$$$",
-        "highlighted": true
-      },
-      {
-        "name": "October",
-        "statusBadge": {
-          "label": "Autumn",
-          "type": "transitioning"
-        },
-        "highlights": "Cooler, darker, Festival of Lights, stronger museum-and-cafe rhythm.",
-        "priceTier": "$$"
-      }
+      { "name": "August", "statusBadge": { "label": "Peak", "type": "peak" }, "highlights": "Warmest feel, lake weather, school holidays, and higher peak-season pressure.", "priceTier": "$$$$" },
+      { "name": "September", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Best walking weather, Berlin Art Week, Open Monument Day, Marathon energy.", "priceTier": "$$$", "highlighted": true },
+      { "name": "October", "statusBadge": { "label": "Autumn", "type": "transitioning" }, "highlights": "Cooler, darker, Festival of Lights, stronger museum-and-cafe rhythm.", "priceTier": "$$" }
+    ]
+  },
+  "berlin-in-october-2026": {
+    "title": "October at a Glance: Compared to September and November",
+    "subtitle": "How autumn changes the trip",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      { "name": "September", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Best walking weather, Berlin Art Week, Marathon energy, still mild.", "priceTier": "$$$" },
+      { "name": "October", "statusBadge": { "label": "Autumn", "type": "transitioning" }, "highlights": "Golden light, Festival of Lights, German Unity Day, fewer crowds.", "priceTier": "$$", "highlighted": true },
+      { "name": "November", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Cold and grey, quietest month, first Christmas markets late in the month.", "priceTier": "$" }
+    ]
+  },
+  "berlin-in-november-2026": {
+    "title": "November at a Glance: Compared to October and December",
+    "subtitle": "How the quiet season changes the trip",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      { "name": "October", "statusBadge": { "label": "Autumn", "type": "transitioning" }, "highlights": "Autumn colour, Festival of Lights, comfortable walking, fewer crowds.", "priceTier": "$$" },
+      { "name": "November", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Cheapest and quietest, the Wall anniversary, the first Christmas markets.", "priceTier": "$", "highlighted": true },
+      { "name": "December", "statusBadge": { "label": "Festive", "type": "transitioning" }, "highlights": "Christmas markets, festive lights, very short days, New Year's Eve.", "priceTier": "$$$" }
+    ]
+  },
+  "berlin-in-december-2026": {
+    "title": "December at a Glance: Compared to November and January",
+    "subtitle": "How the festive season changes the trip",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      { "name": "November", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Cold and quiet, the first Christmas markets open late in the month.", "priceTier": "$" },
+      { "name": "December", "statusBadge": { "label": "Festive", "type": "transitioning" }, "highlights": "Christmas markets, shortest days, festive atmosphere, New Year's Eve.", "priceTier": "$$$", "highlighted": true },
+      { "name": "January", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Coldest month, markets gone, calm museums, the lowest prices of the year.", "priceTier": "$" }
+    ]
+  },
+  "berlin-in-january-2027": {
+    "title": "January at a Glance: Compared to December and February",
+    "subtitle": "How deep winter changes the trip",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      { "name": "December", "statusBadge": { "label": "Festive", "type": "transitioning" }, "highlights": "Christmas markets and New Year's Eve, festive but cold and dark.", "priceTier": "$$$" },
+      { "name": "January", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Coldest, quietest, cheapest month, Grune Woche, museum-heavy.", "priceTier": "$", "highlighted": true },
+      { "name": "February", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Still cold, lengthening days, the Berlinale film festival.", "priceTier": "$$" }
+    ]
+  },
+  "berlin-in-february-2027": {
+    "title": "February at a Glance: Compared to January and March",
+    "subtitle": "How late winter changes the trip",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      { "name": "January", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Coldest and cheapest, calm museums, the lowest crowds.", "priceTier": "$" },
+      { "name": "February", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Cold but lengthening days, the Berlinale, low prices.", "priceTier": "$$", "highlighted": true },
+      { "name": "March", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Spring begins, clock change, longer evenings, Easter in 2027.", "priceTier": "$$" }
+    ]
+  },
+  "berlin-in-march-2027": {
+    "title": "March at a Glance: Compared to February and April",
+    "subtitle": "How early spring changes the trip",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      { "name": "February", "statusBadge": { "label": "Low season", "type": "shoulder" }, "highlights": "Cold winter, the Berlinale, quiet and cheap.", "priceTier": "$$" },
+      { "name": "March", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Spring arrives, clocks forward, long evenings late in the month, Easter.", "priceTier": "$$", "highlighted": true },
+      { "name": "April", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Cherry blossom, long days, Gallery Weekend, changeable weather.", "priceTier": "$$$" }
+    ]
+  },
+  "berlin-in-april-2027": {
+    "title": "April at a Glance: Compared to March and May",
+    "subtitle": "How spring changes the trip",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      { "name": "March", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Spring begins, changeable, longer evenings after the clock change.", "priceTier": "$$" },
+      { "name": "April", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Cherry blossom, green parks, long evenings, Gallery Weekend.", "priceTier": "$$$", "highlighted": true },
+      { "name": "May", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Friendly weather, festivals, beer gardens, the sweet spot before summer.", "priceTier": "$$$" }
+    ]
+  },
+  "berlin-in-may-2027": {
+    "title": "May at a Glance: Compared to April and June",
+    "subtitle": "How late spring changes the trip",
+    "headers": ["Month", "Season", "Key Strengths", "Price Tier"],
+    "rows": [
+      { "name": "April", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Cherry blossom and long evenings, but unpredictable weather.", "priceTier": "$$$" },
+      { "name": "May", "statusBadge": { "label": "Shoulder", "type": "shoulder" }, "highlights": "Friendly weather, long days, Carnival of Cultures, beer gardens, not yet peak.", "priceTier": "$$$", "highlighted": true },
+      { "name": "June", "statusBadge": { "label": "Shoulder to Peak", "type": "transitioning" }, "highlights": "Long days, beer gardens, lakes warm by mid-month, busier.", "priceTier": "$$$" }
     ]
   }
 }

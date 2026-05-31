@@ -1,0 +1,40 @@
+{
+  "generatedAt": "2026-05-31T18:57:36.617Z",
+  "mode": "live_read_only",
+  "collectionId": "TripPlannerLeads",
+  "limit": 10,
+  "includeEmails": false,
+  "privacy": "emails masked; stable emailHash included",
+  "summary": {
+    "count": 1,
+    "bookedCount": 1,
+    "unbookedCount": 0,
+    "averageConversionScore": 75,
+    "arrivingNext7Days": 0,
+    "sendErrorCount": 0,
+    "byConversionTier": {
+      "warm_tour_lead": 1
+    },
+    "byTripStyle": {
+      "Classic first trip": 1
+    },
+    "byArrivalWindow": {
+      "future_planning": 1
+    },
+    "byIntentStage": {
+      "sales_ready": 1
+    },
+    "byTourIntent": {
+      "Interested in BerlinWalk": 1
+    },
+    "byTripLength": {
+      "3": 1
+    },
+    "bySource": {
+      "codex_live_smoke": 1
+    },
+    "priorityLeads": [],
+    "upcomingArrivals": [],
+    "sendErrors": []
+  }
+}

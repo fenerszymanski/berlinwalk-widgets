@@ -4,6 +4,23 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-31 — Codex (Ultimate live publish verified)
+
+**Did:** Completed the live launch checks for Ultimate after Yusuf published Velo.
+Follow-up: created the unpublished Wix Blog draft for the Ultimate SEO article, then reran post-publish preflight after Yusuf published `jobs.config`.
+
+**Changed:**
+- `tools-hub/data.json` — removed the Ultimate draft visibility flags through `release-visibility.mjs --write`; homepage shortcut remains held out of `tools-home/data.json`.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated ItemList SEO with 31 public widgets including Ultimate.
+- `ultimate-berlin-trip-planner/launch-remote-preflight.mjs`, `launch-audit.mjs`, `build-launch-status-report.mjs`, `LAUNCH_STATUS.*`, and `LAUNCH_CONTROL_ROOM.html` — updated post-release gates/status; audit now passes `139 pass, 0 warn, 0 block` and status verdict is `PUBLIC TOOL LIVE - HOMEPAGE HELD`.
+- `blog-drafts/ultimate-berlin-trip-planner.md` — recorded Wix Blog draft `b1915fa5-dfcf-4427-bcfc-d9a6665208e7`; root script `create-wix-ultimate-trip-planner-blog-draft.mjs` created it with 176 nodes and 3 embeds.
+- Wix: live smoke passed for `/_functions/tripPlannerLead` and `/_functions/tripPlannerBooking`; BerlinTools CMS item `ee335453-9278-4b7e-a3d6-ffb2889bdfbc` is inserted/re-saved and the live tool page returns 200.
+
+**Opened:** Push repo changes; live GitHub Pages still reports Ultimate as `draft` in `tools-hub/data.json`, while local `tools-hub/` and `widgets-hub/` QA already shows Ultimate visible, 31 widget iframes, and overflow `0`. After push, QA `/tools/ultimate-berlin-trip-planner`, `/berlin-tools`, and `/widgets`; add the homepage shortcut only after final page QA; review/publish the SEO blog draft after tool QA.
+**Closed:** Velo publish QA, live lead/booking smoke, CMS row insert/re-save, and local visibility release.
+
+**Next session should:** Push `berlinwalk-widgets`, wait for GitHub Pages, open the live tool/tools/widgets pages on desktop/mobile, and then move to the blog publish package.
+
 ## 2026-05-31 — Codex (Ultimate email IDs applied)
 
 **Did:** Applied Yusuf's five real Wix Triggered Email IDs to the Ultimate Trip Planner funnel and advanced the launch state to live QA.

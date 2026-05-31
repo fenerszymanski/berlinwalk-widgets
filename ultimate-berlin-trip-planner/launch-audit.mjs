@@ -107,6 +107,32 @@ function liveSmokeEvidence() {
   return null;
 }
 
+function latestRemotePreflightEvidence() {
+  const preflightDir = filePath('output/qa/ultimate-trip-planner-remote-preflight');
+  if (!fs.existsSync(preflightDir)) return null;
+
+  const candidates = fs.readdirSync(preflightDir)
+    .filter((name) => /^remote-preflight-.*\.json$/.test(name))
+    .sort()
+    .reverse();
+
+  for (const candidate of candidates) {
+    const absolute = path.join(preflightDir, candidate);
+    try {
+      const result = JSON.parse(fs.readFileSync(absolute, 'utf8'));
+      const liveToolPageOk = result && result.checks && result.checks.liveToolPage && result.checks.liveToolPage.status === 200;
+      const leadOptionsOk = result && result.checks && result.checks.leadOptions && result.checks.leadOptions.ok === true;
+      const bookingOptionsOk = result && result.checks && result.checks.bookingOptions && result.checks.bookingOptions.ok === true;
+      const collectionOk = result && result.checks && result.checks.tripPlannerCollection && result.checks.tripPlannerCollection.schemaOk === true;
+      if (liveToolPageOk && leadOptionsOk && bookingOptionsOk && collectionOk) return rel(absolute);
+    } catch (error) {
+      // Keep scanning older preflight files.
+    }
+  }
+
+  return null;
+}
+
 function run() {
   const requiredFiles = [
     'ultimate-berlin-trip-planner/index.html',
@@ -150,12 +176,14 @@ function run() {
     'tools-home/icons/manifest.json',
     'widgets-hub/index.html',
     'widgets-hub/widgets-hub-element.js',
+    'widgets-hub/SEO_ADDITIONAL_TAGS.md',
     'quick-summary/data.json',
     'faq/data.json',
     'faq/inject.js',
     'blog-drafts/ultimate-berlin-trip-planner.md',
     'blog-drafts/ultimate-berlin-trip-planner.body.md',
-    '../insert-ultimate-berlin-trip-planner.js'
+    '../insert-ultimate-berlin-trip-planner.js',
+    '../create-wix-ultimate-trip-planner-blog-draft.mjs'
   ];
 
   for (const requiredFile of requiredFiles) {
@@ -198,6 +226,7 @@ function run() {
   const toolsHomeIconManifest = readJson('tools-home/icons/manifest.json');
   const widgetsHubStatic = read('widgets-hub/index.html');
   const widgetsHubElement = read('widgets-hub/widgets-hub-element.js');
+  const widgetsSeoAdditionalTags = read('widgets-hub/SEO_ADDITIONAL_TAGS.md');
   const toolsHubElement = read('tools-hub/tools-hub-element.js');
   const quickSummary = readJson('quick-summary/data.json');
   const faqData = readJson('faq/data.json');
@@ -205,6 +234,7 @@ function run() {
   const blogDraft = read('blog-drafts/ultimate-berlin-trip-planner.md');
   const blogBody = read('blog-drafts/ultimate-berlin-trip-planner.body.md');
   const cmsInsertSource = read('../insert-ultimate-berlin-trip-planner.js');
+  const blogDraftCreator = read('../create-wix-ultimate-trip-planner-blog-draft.mjs');
   const allEmailTemplateText = emailTemplateFiles().map((template) => read(template)).join('\n\n');
   const iconManifestRows = Array.isArray(toolsHomeIconManifest) ? toolsHomeIconManifest : [];
   const closingBlockObjects = [...indexHtml.matchAll(/\{\s*time:\s*'(?:Later|Evening)'[\s\S]*?\}/g)].map((match) => match[0]);
@@ -650,10 +680,12 @@ function run() {
   block('Ultimate entry exists in tools-hub data', Boolean(ultimateTool), 'tools-hub/data.json needs the draft tool row.');
   if (ultimateTool) {
     const status = String(ultimateTool.status || '').toLowerCase();
+    const draftProtected = status === 'draft' || ultimateTool.published === false || ultimateTool.hidden === true;
+    const releasedWithEvidence = !draftProtected && Boolean(liveSmokeEvidence()) && Boolean(latestRemotePreflightEvidence());
     block(
-      'Draft protection is active in tools-hub data',
-      status === 'draft' || ultimateTool.published === false || ultimateTool.hidden === true,
-      `Current status=${ultimateTool.status || '(none)'}, published=${String(ultimateTool.published)}.`
+      'Ultimate visibility state is launch-safe',
+      draftProtected || releasedWithEvidence,
+      `Current status=${ultimateTool.status || '(none)'}, published=${String(ultimateTool.published)}; public release requires live smoke and remote preflight evidence.`
     );
     block(
       'Ultimate widgetUrl points to GitHub Pages folder',
@@ -667,9 +699,9 @@ function run() {
   const homePlannerIconRows = homePlannerIconSlugs.map((slug) => iconManifestRows.find((row) => row && row.slug === slug));
   const homePlannerTools = homePlannerIconSlugs.map((slug) => homeTools.find((tool) => tool && tool.slug === slug));
   block(
-    'Homepage tool shortcuts do not include Ultimate while draft',
+    'Homepage tool shortcuts keep Ultimate held for final page QA',
     !homeTools.some((tool) => tool && tool.slug === 'ultimate-berlin-trip-planner'),
-    'Move Ultimate into tools-home/data.json only after launch.'
+    'Move Ultimate into tools-home/data.json only after final page QA.'
   );
   block(
     'Homepage tools renderer filters draft tools',
@@ -688,12 +720,12 @@ function run() {
     'Berlin First-Day and Hackescher homepage shortcuts should use generated local 160px icons, not letter placeholders.'
   );
   block(
-    'Ultimate icon is prepared but not homepage-visible before launch',
+    'Ultimate icon is prepared but homepage-held',
     exists('tools-home/icons/ultimate-berlin-trip-planner-160.png') &&
       ultimateTool &&
       /ultimate-berlin-trip-planner-160\.png$/.test(ultimateTool.image || '') &&
       !homeTools.some((tool) => tool && tool.slug === 'ultimate-berlin-trip-planner'),
-    'Keep the Ultimate icon ready in tools-hub, but do not expose the homepage shortcut until launch.'
+    'Keep the Ultimate icon ready in tools-hub, but do not expose the homepage shortcut until final page QA.'
   );
   block(
     'Tools hub Custom Element filters draft tools',
@@ -706,9 +738,16 @@ function run() {
     'widgets-hub/widgets-hub-element.js should hide status:draft and published:false.'
   );
   block(
-    'Static widgets hub SEO does not expose draft Ultimate',
-    !/Ultimate Berlin Trip Planner|ultimate-berlin-trip-planner/.test(widgetsHubStatic),
+    'Widgets hub SEO matches Ultimate visibility',
+    ultimateTool && (String(ultimateTool.status || '').toLowerCase() === 'draft' || ultimateTool.published === false || ultimateTool.hidden === true)
+      ? !/Ultimate Berlin Trip Planner|ultimate-berlin-trip-planner/.test(widgetsSeoAdditionalTags)
+      : /Ultimate Berlin Trip Planner/.test(widgetsSeoAdditionalTags) && /ultimate-berlin-trip-planner/.test(widgetsSeoAdditionalTags),
     'Regenerate widgets hub SEO after changing public/draft status.'
+  );
+  block(
+    'Static widgets hub page does not hardcode visibility state',
+    !/Ultimate Berlin Trip Planner|ultimate-berlin-trip-planner/.test(widgetsHubStatic),
+    'Standalone gallery should read tools-hub/data.json at runtime; ItemList SEO lives in SEO_ADDITIONAL_TAGS.md.'
   );
 
   block(
@@ -1115,6 +1154,24 @@ function run() {
     'Blog body contains required internal links',
     missingBlogLinks.length === 0,
     missingBlogLinks.length ? `Missing links containing: ${missingBlogLinks.join(', ')}` : `${requiredBlogLinks.length} key internal links present.`
+  );
+  const wixDraftId = (blogDraft.match(/Wix draft ID:\s*`([^`]+)`/) || [])[1] || '';
+  const wixDraftUrl = (blogDraft.match(/Wix edit URL:\s*`([^`]+)`/) || [])[1] || '';
+  block(
+    'Wix Blog draft is recorded',
+    /^b1915fa5-dfcf-4427-bcfc-d9a6665208e7$/.test(wixDraftId) &&
+      /blog\/drafts\/b1915fa5-dfcf-4427-bcfc-d9a6665208e7\/edit/.test(wixDraftUrl),
+    `draftId=${wixDraftId || '(missing)'}, editUrl=${wixDraftUrl || '(missing)'}`
+  );
+  block(
+    'Wix Blog draft creator is dry-run-first',
+    /Dry run only\. Add --write/.test(blogDraftCreator) &&
+      /findExistingDraftsByTitle/.test(blogDraftCreator) &&
+      /findPublishedBySlug/.test(blogDraftCreator) &&
+      /height = '2400'/.test(blogDraftCreator) &&
+      /POST\.keywords\.map/.test(blogDraftCreator) &&
+      /Ultimate Berlin Trip Planner: Build a Realistic Berlin Itinerary Before You Arrive/.test(blogDraftCreator),
+    'Expected root draft creator to preflight duplicates, keep --write explicit, and set the planner embed to 2400px.'
   );
 
   const quickSummaryEntry = quickSummary['ultimate-berlin-trip-planner'];

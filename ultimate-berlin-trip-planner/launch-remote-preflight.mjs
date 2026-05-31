@@ -251,7 +251,15 @@ async function main() {
       {},
       { keepBody: false }
     ),
-    liveToolPage: await fetchWithTimeout(`https://www.berlinwalk.com/tools/${TOOL_SLUG}`, {}, { keepBody: false }),
+    liveToolPage: await fetchWithTimeout(
+      `https://www.berlinwalk.com/tools/${TOOL_SLUG}`,
+      {
+        headers: {
+          Accept: 'text/html,application/xhtml+xml'
+        }
+      },
+      { keepBody: false }
+    ),
     leadOptions: await fetchWithTimeout(
       'https://www.berlinwalk.com/_functions/tripPlannerLead',
       { method: 'OPTIONS' },

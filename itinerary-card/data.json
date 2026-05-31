@@ -3,296 +3,288 @@
     "title": "Three-Day June Itinerary",
     "subtitle": "Long days, outdoor time, historical depth",
     "days": [
-      {
-        "dayNumber": 1,
-        "theme": "East Berlin, the historical core",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Breakfast in Mitte. Walk to Alexanderplatz before 11:30."
-          },
-          {
-            "time": "11:30",
-            "activity": "Free walking tour (Tue to Sat). Two hours. Alexanderplatz to Hackescher Markt via Rotes Rathaus, TV Tower, Marx-Engels-Forum, Museum Island.",
-            "isCTA": true,
-            "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
-          },
-          {
-            "time": "Afternoon",
-            "activity": "Lunch in Hackesche Höfe. Loop back to Museum Island for Neues Museum or Alte Nationalgalerie."
-          },
-          {
-            "time": "Evening",
-            "activity": "Dinner along the Spree. Sunset from a bridge. Light until 21:30+."
-          }
-        ]
-      },
-      {
-        "dayNumber": 2,
-        "theme": "West Berlin and the lakes",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Brandenburg Gate, Reichstag dome (book ahead), slow walk through Tiergarten."
-          },
-          {
-            "time": "Midday",
-            "activity": "Coffee or beer at Café am Neuen See."
-          },
-          {
-            "time": "Afternoon",
-            "activity": "S-Bahn to Wannsee or Schlachtensee. Swim, lakeside walk, optional ferry."
-          },
-          {
-            "time": "Evening",
-            "activity": "Dinner in Charlottenburg or Mitte."
-          }
-        ]
-      },
-      {
-        "dayNumber": 3,
-        "theme": "The Wall and the alternative city",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Bernauer Straße Wall Memorial. Walk the preserved death strip."
-          },
-          {
-            "time": "Midday",
-            "activity": "Mauerpark (Sundays: flea market and karaoke)."
-          },
-          {
-            "time": "Afternoon",
-            "activity": "East Side Gallery, then Tempelhofer Feld. Cycling on the runways at golden hour."
-          },
-          {
-            "time": "Evening",
-            "activity": "Outdoor cinema (Freiluftkino) or Friedrichshain beer garden."
-          }
-        ]
-      }
+      { "dayNumber": 1, "theme": "East Berlin, the historical core", "schedule": [
+        { "time": "Morning", "activity": "Breakfast in Mitte. Walk to Alexanderplatz before 11:30." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours. Alexanderplatz to Hackescher Markt via Rotes Rathaus, TV Tower, Marx-Engels-Forum, Museum Island.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Lunch in Hackesche Hofe. Loop back to Museum Island for Neues Museum or Alte Nationalgalerie." },
+        { "time": "Evening", "activity": "Dinner along the Spree. Sunset from a bridge. Light until 21:30+." }
+      ]},
+      { "dayNumber": 2, "theme": "West Berlin and the lakes", "schedule": [
+        { "time": "Morning", "activity": "Brandenburg Gate, Reichstag dome (book ahead), slow walk through Tiergarten." },
+        { "time": "Midday", "activity": "Coffee or beer at Cafe am Neuen See." },
+        { "time": "Afternoon", "activity": "S-Bahn to Wannsee or Schlachtensee. Swim, lakeside walk, optional ferry." },
+        { "time": "Evening", "activity": "Dinner in Charlottenburg or Mitte." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall and the alternative city", "schedule": [
+        { "time": "Morning", "activity": "Bernauer Strasse Wall Memorial. Walk the preserved death strip." },
+        { "time": "Midday", "activity": "Mauerpark (Sundays: flea market and karaoke)." },
+        { "time": "Afternoon", "activity": "East Side Gallery, then Tempelhofer Feld. Cycling on the runways at golden hour." },
+        { "time": "Evening", "activity": "Outdoor cinema (Freiluftkino) or Friedrichshain beer garden." }
+      ]}
     ]
   },
   "july": {
     "title": "Three-Day July Itinerary",
     "subtitle": "Early starts, shaded breaks, long summer evenings",
     "days": [
-      {
-        "dayNumber": 1,
-        "theme": "Historic core before the heat builds",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Start at Alexanderplatz while the city is still cooler. Coffee, water bottle, comfortable shoes."
-          },
-          {
-            "time": "11:30",
-            "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.",
-            "isCTA": true,
-            "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
-          },
-          {
-            "time": "Afternoon",
-            "activity": "Lunch near Hackescher Markt, then an indoor stop on Museum Island or a shaded break by the Spree."
-          },
-          {
-            "time": "Evening",
-            "activity": "Walk Unter den Linden toward Brandenburg Gate after the heat drops. Sunset stays late."
-          }
-        ]
-      },
-      {
-        "dayNumber": 2,
-        "theme": "Water, parks, and a cooler rhythm",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Reichstag dome if booked ahead, then Tiergarten before midday heat."
-          },
-          {
-            "time": "Midday",
-            "activity": "Long shaded lunch or cafe break. Do not force exposed sightseeing at 14:00."
-          },
-          {
-            "time": "Afternoon",
-            "activity": "S-Bahn to Schlachtensee, Wannsee, or another lake if the forecast is hot."
-          },
-          {
-            "time": "Evening",
-            "activity": "Beer garden, Spree walk, open-air cinema, or Classic Open Air if your dates match."
-          }
-        ]
-      },
-      {
-        "dayNumber": 3,
-        "theme": "The Wall, neighborhoods, and event-aware planning",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Berlin Wall Memorial at Bernauer Strasse before crowds and heat peak."
-          },
-          {
-            "time": "Midday",
-            "activity": "Prenzlauer Berg or Mitte lunch, then an indoor museum or hotel rest if it is hot."
-          },
-          {
-            "time": "Afternoon",
-            "activity": "East Side Gallery or a neighborhood walk, adjusted for CSD or major event closures."
-          },
-          {
-            "time": "Evening",
-            "activity": "Keep plans flexible. July evenings are better when you leave room for weather and events."
-          }
-        ]
-      }
+      { "dayNumber": 1, "theme": "Historic core before the heat builds", "schedule": [
+        { "time": "Morning", "activity": "Start at Alexanderplatz while the city is still cooler. Coffee, water bottle, comfortable shoes." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then an indoor stop on Museum Island or a shaded break by the Spree." },
+        { "time": "Evening", "activity": "Walk Unter den Linden toward Brandenburg Gate after the heat drops. Sunset stays late." }
+      ]},
+      { "dayNumber": 2, "theme": "Water, parks, and a cooler rhythm", "schedule": [
+        { "time": "Morning", "activity": "Reichstag dome if booked ahead, then Tiergarten before midday heat." },
+        { "time": "Midday", "activity": "Long shaded lunch or cafe break. Do not force exposed sightseeing at 14:00." },
+        { "time": "Afternoon", "activity": "S-Bahn to Schlachtensee, Wannsee, or another lake if the forecast is hot." },
+        { "time": "Evening", "activity": "Beer garden, Spree walk, open-air cinema, or Classic Open Air if your dates match." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, neighborhoods, and event-aware planning", "schedule": [
+        { "time": "Morning", "activity": "Berlin Wall Memorial at Bernauer Strasse before crowds and heat peak." },
+        { "time": "Midday", "activity": "Prenzlauer Berg or Mitte lunch, then an indoor museum or hotel rest if it is hot." },
+        { "time": "Afternoon", "activity": "East Side Gallery or a neighborhood walk, adjusted for CSD or major event closures." },
+        { "time": "Evening", "activity": "Keep plans flexible. July evenings are better when you leave room for weather and events." }
+      ]}
     ]
   },
   "august": {
     "title": "Three-Day August Itinerary",
     "subtitle": "Warm days, lake time, and event-aware evenings",
     "days": [
-      {
-        "dayNumber": 1,
-        "theme": "Historic core before the city heats up",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Start early at Alexanderplatz. Bring water and use the cooler part of the day for the historic center."
-          },
-          {
-            "time": "11:30",
-            "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the city's oldest layers.",
-            "isCTA": true,
-            "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
-          },
-          {
-            "time": "Afternoon",
-            "activity": "Lunch near Hackescher Markt, then choose an indoor stop on Museum Island or a shaded riverside break."
-          },
-          {
-            "time": "Evening",
-            "activity": "Spree walk, beer garden, open-air cinema, or a slow sunset loop through Mitte."
-          }
-        ]
-      },
-      {
-        "dayNumber": 2,
-        "theme": "Lake day without pretending Berlin is the Mediterranean",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Reichstag dome if booked ahead, then Tiergarten or a shaded neighborhood walk."
-          },
-          {
-            "time": "Midday",
-            "activity": "Travel to Schlachtensee, Wannsee, Plötzensee, or another lake before the hottest part of the afternoon."
-          },
-          {
-            "time": "Afternoon",
-            "activity": "Swim or picnic, but check water quality and expect crowds on hot weekends."
-          },
-          {
-            "time": "Evening",
-            "activity": "Return for dinner in Kreuzberg, Prenzlauer Berg, Friedrichshain, or Charlottenburg."
-          }
-        ]
-      },
-      {
-        "dayNumber": 3,
-        "theme": "The Wall, culture, and late-August events",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Berlin Wall Memorial at Bernauer Strasse before crowds and heat build."
-          },
-          {
-            "time": "Midday",
-            "activity": "Lunch and a cool-down break. August thunderstorms are a feature, not a failure."
-          },
-          {
-            "time": "Afternoon",
-            "activity": "East Side Gallery, Futurium, or a museum depending on weather."
-          },
-          {
-            "time": "Evening",
-            "activity": "If your dates match, plan around Tanz im August, Long Night of Museums, or the August 12 astronomy/eclipse evening."
-          }
-        ]
-      }
+      { "dayNumber": 1, "theme": "Historic core before the city heats up", "schedule": [
+        { "time": "Morning", "activity": "Start early at Alexanderplatz. Bring water and use the cooler part of the day for the historic center." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the city's oldest layers.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then choose an indoor stop on Museum Island or a shaded riverside break." },
+        { "time": "Evening", "activity": "Spree walk, beer garden, open-air cinema, or a slow sunset loop through Mitte." }
+      ]},
+      { "dayNumber": 2, "theme": "Lake day without pretending Berlin is the Mediterranean", "schedule": [
+        { "time": "Morning", "activity": "Reichstag dome if booked ahead, then Tiergarten or a shaded neighborhood walk." },
+        { "time": "Midday", "activity": "Travel to Schlachtensee, Wannsee, Plotzensee, or another lake before the hottest part of the afternoon." },
+        { "time": "Afternoon", "activity": "Swim or picnic, but check water quality and expect crowds on hot weekends." },
+        { "time": "Evening", "activity": "Return for dinner in Kreuzberg, Prenzlauer Berg, Friedrichshain, or Charlottenburg." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, culture, and late-August events", "schedule": [
+        { "time": "Morning", "activity": "Berlin Wall Memorial at Bernauer Strasse before crowds and heat build." },
+        { "time": "Midday", "activity": "Lunch and a cool-down break. August thunderstorms are a feature, not a failure." },
+        { "time": "Afternoon", "activity": "East Side Gallery, Futurium, or a museum depending on weather." },
+        { "time": "Evening", "activity": "If your dates match, plan around Tanz im August or the Long Night of Museums." }
+      ]}
     ]
   },
   "september": {
     "title": "Three-Day September Itinerary",
     "subtitle": "Walking weather, art season, and event-aware planning",
     "days": [
-      {
-        "dayNumber": 1,
-        "theme": "Historic core in the best walking weather",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Start at Alexanderplatz while the light is good and the temperature is comfortable."
-          },
-          {
-            "time": "11:30",
-            "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the city's oldest layers.",
-            "isCTA": true,
-            "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based"
-          },
-          {
-            "time": "Afternoon",
-            "activity": "Museum Island, Humboldt Forum, or a cafe break if September rain appears."
-          },
-          {
-            "time": "Evening",
-            "activity": "Spree walk, Gendarmenmarkt, or dinner before the evening cools down."
-          }
-        ]
-      },
-      {
-        "dayNumber": 2,
-        "theme": "Neighborhoods, galleries, and softer light",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Prenzlauer Berg, Kreuzberg, or Charlottenburg, depending on where you are staying."
-          },
-          {
-            "time": "Midday",
-            "activity": "Lunch in a neighborhood rather than rushing back to the main tourist axis."
-          },
-          {
-            "time": "Afternoon",
-            "activity": "If your dates match Berlin Art Week, choose one gallery cluster or exhibition route."
-          },
-          {
-            "time": "Evening",
-            "activity": "Use the earlier sunset deliberately: viewpoint, riverside walk, gallery opening, or performance."
-          }
-        ]
-      },
-      {
-        "dayNumber": 3,
-        "theme": "The Wall, museums, and September event logistics",
-        "schedule": [
-          {
-            "time": "Morning",
-            "activity": "Berlin Wall Memorial at Bernauer Strasse or East Side Gallery while the day is still bright."
-          },
-          {
-            "time": "Midday",
-            "activity": "Museum, lunch, or Open Monument Day stop if September 13 matches your dates."
-          },
-          {
-            "time": "Afternoon",
-            "activity": "Tiergarten, Reichstag Dome if booked, or a practical rest before the evening."
-          },
-          {
-            "time": "Evening",
-            "activity": "On Marathon weekend, avoid tight cross-city plans and let the city atmosphere be part of the day."
-          }
-        ]
-      }
+      { "dayNumber": 1, "theme": "Historic core in the best walking weather", "schedule": [
+        { "time": "Morning", "activity": "Start at Alexanderplatz while the light is good and the temperature is comfortable." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the city's oldest layers.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Museum Island, Humboldt Forum, or a cafe break if September rain appears." },
+        { "time": "Evening", "activity": "Spree walk, Gendarmenmarkt, or dinner before the evening cools down." }
+      ]},
+      { "dayNumber": 2, "theme": "Neighborhoods, galleries, and softer light", "schedule": [
+        { "time": "Morning", "activity": "Prenzlauer Berg, Kreuzberg, or Charlottenburg, depending on where you are staying." },
+        { "time": "Midday", "activity": "Lunch in a neighborhood rather than rushing back to the main tourist axis." },
+        { "time": "Afternoon", "activity": "If your dates match Berlin Art Week, choose one gallery cluster or exhibition route." },
+        { "time": "Evening", "activity": "Use the earlier sunset deliberately: viewpoint, riverside walk, gallery opening, or performance." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, museums, and September event logistics", "schedule": [
+        { "time": "Morning", "activity": "Berlin Wall Memorial at Bernauer Strasse or East Side Gallery while the day is still bright." },
+        { "time": "Midday", "activity": "Museum, lunch, or Open Monument Day stop if September 13 matches your dates." },
+        { "time": "Afternoon", "activity": "Tiergarten, Reichstag Dome if booked, or a practical rest before the evening." },
+        { "time": "Evening", "activity": "On Marathon weekend, avoid tight cross-city plans and let the city atmosphere be part of the day." }
+      ]}
+    ]
+  },
+  "october": {
+    "title": "Three-Day October Itinerary",
+    "subtitle": "Golden light, early sunsets, and the Festival of Lights",
+    "days": [
+      { "dayNumber": 1, "theme": "Historic core in autumn light", "schedule": [
+        { "time": "Morning", "activity": "Start at Alexanderplatz while you have the best of the daylight. Layers and a rain jacket." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then Museum Island or the Humboldt Forum as the light fades." },
+        { "time": "Evening", "activity": "During the Festival of Lights (Oct 9-18), walk the illuminated centre after dark." }
+      ]},
+      { "dayNumber": 2, "theme": "Parks, the government quarter, and autumn colour", "schedule": [
+        { "time": "Morning", "activity": "Brandenburg Gate, Reichstag dome (book ahead), then the Tiergarten in autumn colour." },
+        { "time": "Midday", "activity": "Warm lunch or a cafe break. Use the early afternoon for outdoor sights." },
+        { "time": "Afternoon", "activity": "Low autumn light along the Spree and Museum Island before sunset, which comes early." },
+        { "time": "Evening", "activity": "Dinner, a concert, or more Festival of Lights if your dates match." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, history, and German Unity Day", "schedule": [
+        { "time": "Morning", "activity": "Bernauer Strasse Wall Memorial. Around October 3, expect Unity Day crowds and events near the Reichstag." },
+        { "time": "Midday", "activity": "Lunch in Prenzlauer Berg or Mitte, then a museum if the weather turns." },
+        { "time": "Afternoon", "activity": "East Side Gallery, or the soft autumn light along the river." },
+        { "time": "Evening", "activity": "Warm bar or restaurant. The blue hour comes early, so enjoy it before dinner." }
+      ]}
+    ]
+  },
+  "november": {
+    "title": "Three-Day November Itinerary",
+    "subtitle": "Short days, indoor culture, and the first Christmas markets",
+    "days": [
+      { "dayNumber": 1, "theme": "Historic core, then warm indoors", "schedule": [
+        { "time": "Late morning", "activity": "Start at Alexanderplatz to use the limited daylight. Warm coat, hat and gloves." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Warm lunch, then Museum Island or the Humboldt Forum as it gets dark early." },
+        { "time": "Evening", "activity": "Dinner, a concert, or a warm bar. In late November, the first Christmas markets open." }
+      ]},
+      { "dayNumber": 2, "theme": "Museums and the Cold War story", "schedule": [
+        { "time": "Morning", "activity": "Go deep on a museum or two while the weather is grey and cold." },
+        { "time": "Midday", "activity": "Hearty lunch in Mitte or Prenzlauer Berg." },
+        { "time": "Afternoon", "activity": "Bernauer Strasse Wall Memorial. Around November 9, the city marks the fall of the Wall." },
+        { "time": "Evening", "activity": "Early blue hour walk past the Brandenburg Gate, then a warm dinner." }
+      ]},
+      { "dayNumber": 3, "theme": "Neighborhoods and early festive lights", "schedule": [
+        { "time": "Morning", "activity": "Reichstag dome if booked, or an indoor highlight like the Futurium." },
+        { "time": "Midday", "activity": "Lunch in a neighborhood, with an indoor backup if it rains." },
+        { "time": "Afternoon", "activity": "East Side Gallery or a covered route through galleries and courtyards." },
+        { "time": "Evening", "activity": "If a Christmas market has opened, finish with mulled wine before the December crowds." }
+      ]}
+    ]
+  },
+  "december": {
+    "title": "Three-Day December Itinerary",
+    "subtitle": "Short days, Christmas markets, and festive evenings",
+    "days": [
+      { "dayNumber": 1, "theme": "Historic core, then the markets light up", "schedule": [
+        { "time": "Late morning", "activity": "Start at Alexanderplatz to use the short daylight. Warm coat and waterproof boots." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Warm lunch, then a museum as the light fades early." },
+        { "time": "Evening", "activity": "The Gendarmenmarkt Christmas market or another lit market as it comes alive." }
+      ]},
+      { "dayNumber": 2, "theme": "Indoor highlights and a second market", "schedule": [
+        { "time": "Morning", "activity": "Museum Island or the Humboldt Forum while it is cold outside." },
+        { "time": "Midday", "activity": "Hearty lunch. Check Christmas opening hours if your dates overlap Dec 24-26." },
+        { "time": "Afternoon", "activity": "Brandenburg Gate and a short outdoor loop in the early dark." },
+        { "time": "Evening", "activity": "A different Christmas market with a different character, plus dinner." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, history, and festive city", "schedule": [
+        { "time": "Morning", "activity": "Bernauer Strasse Wall Memorial, wrapped up warm." },
+        { "time": "Midday", "activity": "Lunch in a cosy neighborhood spot." },
+        { "time": "Afternoon", "activity": "An indoor museum or a covered route as the weather dictates." },
+        { "time": "Evening", "activity": "On New Year's Eve, plan around the Brandenburg Gate party and city-wide fireworks." }
+      ]}
+    ]
+  },
+  "january": {
+    "title": "Three-Day January Itinerary",
+    "subtitle": "The coldest, cheapest month, built around museums",
+    "days": [
+      { "dayNumber": 1, "theme": "Historic core, then deep indoors", "schedule": [
+        { "time": "Late morning", "activity": "Start at Alexanderplatz to use the short daylight. Real winter layers, hat and gloves." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Warm lunch, then go deep on Museum Island as it gets dark early." },
+        { "time": "Evening", "activity": "A long dinner or a coffee house. The light goes early, so lean into the evening." }
+      ]},
+      { "dayNumber": 2, "theme": "Museum Island and indoor Berlin", "schedule": [
+        { "time": "Morning", "activity": "A second museum, while crowds are at their lowest all year." },
+        { "time": "Midday", "activity": "Hearty lunch in Mitte or Prenzlauer Berg." },
+        { "time": "Afternoon", "activity": "If Grune Woche is on, the Messe halls are a giant indoor food festival." },
+        { "time": "Evening", "activity": "Early blue-hour walk past the Brandenburg Gate, then a warm dinner." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, history, and warmth", "schedule": [
+        { "time": "Morning", "activity": "Bernauer Strasse Wall Memorial, wrapped up warm." },
+        { "time": "Midday", "activity": "Lunch, then the Reichstag dome if booked." },
+        { "time": "Afternoon", "activity": "A covered route through galleries, the Futurium, or another indoor highlight." },
+        { "time": "Evening", "activity": "A concert, a warm bar, or a long meal. January rewards a slow indoor pace." }
+      ]}
+    ]
+  },
+  "february": {
+    "title": "Three-Day February Itinerary",
+    "subtitle": "Winter culture, the Berlinale, and lengthening days",
+    "days": [
+      { "dayNumber": 1, "theme": "Historic core in late winter", "schedule": [
+        { "time": "Morning", "activity": "Start at Alexanderplatz, especially on a brighter day. Warm coat, hat and gloves." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Warm lunch, then Museum Island or a gallery." },
+        { "time": "Evening", "activity": "During the Berlinale (Feb 10-21), book a film, or enjoy the buzz around Potsdamer Platz." }
+      ]},
+      { "dayNumber": 2, "theme": "Museums, films, and the lengthening light", "schedule": [
+        { "time": "Morning", "activity": "A museum while the city is calm." },
+        { "time": "Midday", "activity": "Hearty lunch in Mitte or Prenzlauer Berg." },
+        { "time": "Afternoon", "activity": "A Berlinale screening if your dates match, or another indoor highlight." },
+        { "time": "Evening", "activity": "Use the later sunset for a short walk, then dinner." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, history, and indoor culture", "schedule": [
+        { "time": "Morning", "activity": "Bernauer Strasse Wall Memorial, wrapped up warm." },
+        { "time": "Midday", "activity": "Lunch, then the Reichstag dome if booked." },
+        { "time": "Afternoon", "activity": "East Side Gallery on a bright day, or a museum if it is grey." },
+        { "time": "Evening", "activity": "A film, concert, or warm dinner. February evenings are slowly getting longer." }
+      ]}
+    ]
+  },
+  "march": {
+    "title": "Three-Day March Itinerary",
+    "subtitle": "Early spring, the clock change, and longer evenings",
+    "days": [
+      { "dayNumber": 1, "theme": "Historic core as spring begins", "schedule": [
+        { "time": "Morning", "activity": "Start at Alexanderplatz. Layers and a rain jacket, since March weather swings." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then Museum Island or a cafe if it rains." },
+        { "time": "Evening", "activity": "After the clock change (Mar 28), use the new long evenings for the Spree or a first terrace drink." }
+      ]},
+      { "dayNumber": 2, "theme": "Parks waking up and the government quarter", "schedule": [
+        { "time": "Morning", "activity": "Brandenburg Gate, Reichstag dome (book ahead), then the Tiergarten as it greens up." },
+        { "time": "Midday", "activity": "Lunch or a cafe break. Keep the plan flexible for sun or showers." },
+        { "time": "Afternoon", "activity": "A park walk if the sun is out, or a museum if the weather turns." },
+        { "time": "Evening", "activity": "Around Easter (Mar 26-29 in 2027), check opening hours and book dinner early." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, history, and spring light", "schedule": [
+        { "time": "Morning", "activity": "Bernauer Strasse Wall Memorial." },
+        { "time": "Midday", "activity": "Lunch in a neighborhood, with an indoor backup if it rains." },
+        { "time": "Afternoon", "activity": "East Side Gallery, then the fresh spring light along the river." },
+        { "time": "Evening", "activity": "Use the lengthening evenings for a long walk before dinner." }
+      ]}
+    ]
+  },
+  "april": {
+    "title": "Three-Day April Itinerary",
+    "subtitle": "Cherry blossom, long evenings, and changeable weather",
+    "days": [
+      { "dayNumber": 1, "theme": "Historic core in spring light", "schedule": [
+        { "time": "Morning", "activity": "Start at Alexanderplatz. Pack for sun and rain, since April does both." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then Museum Island or a covered stop if it rains." },
+        { "time": "Evening", "activity": "Use the long light for the Spree, a canal in Kreuzberg, or a terrace dinner." }
+      ]},
+      { "dayNumber": 2, "theme": "Cherry blossom and green parks", "schedule": [
+        { "time": "Morning", "activity": "Reichstag dome if booked, then the Tiergarten and the government quarter." },
+        { "time": "Midday", "activity": "Lunch outdoors if the weather allows, with a rain backup." },
+        { "time": "Afternoon", "activity": "Chase the cherry blossom along the former Wall trail and the city's blossoming avenues." },
+        { "time": "Evening", "activity": "A beer garden reopening, or a long park evening in the late light." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, neighborhoods, and culture", "schedule": [
+        { "time": "Morning", "activity": "Bernauer Strasse Wall Memorial." },
+        { "time": "Midday", "activity": "Lunch in Prenzlauer Berg or Kreuzberg." },
+        { "time": "Afternoon", "activity": "East Side Gallery, or Gallery Weekend if it lands on your dates." },
+        { "time": "Evening", "activity": "Long spring evening by the canal or the Spree, then dinner." }
+      ]}
+    ]
+  },
+  "may": {
+    "title": "Three-Day May Itinerary",
+    "subtitle": "Long days, festivals, and the best of outdoor Berlin",
+    "days": [
+      { "dayNumber": 1, "theme": "Historic core in fine spring weather", "schedule": [
+        { "time": "Morning", "activity": "Start at Alexanderplatz. Layers for warm days and cool evenings, plus a water bottle." },
+        { "time": "11:30", "activity": "Free walking tour (Tue to Sat). Two hours from Alexanderplatz to Hackescher Markt through the historic center.", "isCTA": true, "link": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" },
+        { "time": "Afternoon", "activity": "Lunch near Hackescher Markt, then Museum Island or a riverside walk." },
+        { "time": "Evening", "activity": "Use the long light for a beer garden, the Spree, or a terrace dinner." }
+      ]},
+      { "dayNumber": 2, "theme": "Parks, the first lake days, and the canals", "schedule": [
+        { "time": "Morning", "activity": "Reichstag dome if booked, then the Tiergarten or Tempelhofer Feld." },
+        { "time": "Midday", "activity": "Outdoor lunch or a picnic in the sun." },
+        { "time": "Afternoon", "activity": "The Strandbad Wannsee or a lake for a lakeside walk. The water is still cool for swimming." },
+        { "time": "Evening", "activity": "Dinner in Kreuzberg, then a slow canal-side walk in the long light." }
+      ]},
+      { "dayNumber": 3, "theme": "The Wall, festivals, and street life", "schedule": [
+        { "time": "Morning", "activity": "Bernauer Strasse Wall Memorial, or the Carnival of Cultures parade if it is that weekend." },
+        { "time": "Midday", "activity": "Lunch in a lively neighborhood. Watch for May public-holiday closures." },
+        { "time": "Afternoon", "activity": "East Side Gallery, or the festival crowds in Kreuzberg." },
+        { "time": "Evening", "activity": "A beer garden, an outdoor event, or a long park evening before dinner." }
+      ]}
     ]
   }
 }

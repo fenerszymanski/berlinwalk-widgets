@@ -2,7 +2,11 @@
 
 Slug idea: `ultimate-berlin-trip-planner`
 
-Status: local draft, not pushed to Wix.
+Status: Wix Blog draft created on 2026-05-31, not published.
+
+Wix draft ID: `b1915fa5-dfcf-4427-bcfc-d9a6665208e7`
+
+Wix edit URL: `https://manage.wix.com/dashboard/12ee5ea0-70a7-492f-8020-ffb27cbb630f/blog/drafts/b1915fa5-dfcf-4427-bcfc-d9a6665208e7/edit`
 
 Wix-ready body: `blog-drafts/ultimate-berlin-trip-planner.body.md`
 
