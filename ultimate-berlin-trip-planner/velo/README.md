@@ -1,6 +1,6 @@
 # Ultimate Berlin Trip Planner Velo Source
 
-Source handoff for the widget lead gate and booking-aware arrival sequence.
+Source handoff for the widget lead gate and pre-booking planner sequence.
 
 ## Files
 
@@ -23,7 +23,7 @@ Then open:
 ultimate-berlin-trip-planner/velo/install-kit.html
 ```
 
-Before pasting Velo into Wix after the 10 Triggered Email IDs are applied, run
+Before pasting Velo into Wix after the 5 Triggered Email IDs are applied, run
 the one-command gate:
 
 ```bash
@@ -33,8 +33,9 @@ node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs
 
 It writes evidence under `output/qa/ultimate-trip-planner-prepublish-gate/` and
 exits non-zero until IDs are valid/applied, no `TODO_TRIP_PLANNER_*`
-placeholders remain, the endpoint/scheduler source is present, booked emails
-fail closed, and the live `TripPlannerLeads` critical fields pass.
+placeholders remain, the endpoint/scheduler source is present, booked leads
+suppress future Ultimate reminders, and the live `TripPlannerLeads` critical
+fields pass.
 
 ## Endpoints
 
@@ -53,8 +54,9 @@ Booking-aware helper endpoint:
 POST https://www.berlinwalk.com/_functions/tripPlannerBooking
 ```
 
-This marks matching leads as booked. A future Wix Booking automation can call it
-with at least:
+This marks matching leads as booked. The existing Wix Booking automation/flow
+already handles booked-guest emails; this endpoint only lets Ultimate stop its
+own future sales reminders. A Wix Booking automation can call it with at least:
 
 ```json
 {
@@ -86,9 +88,9 @@ The live commands call `/_functions/tripPlannerLead` and, with `--booking`,
 ## Email Sequence Simulator
 
 Before publishing or changing scheduler logic, use the dry-run-only simulator to
-inspect the exact 7/3/1/day-of timeline, same-day signup skips, booked-vs-sales
-branch, and the arrival-day before-18:00 rule. It does not call Wix or send
-email.
+inspect the exact instant/7/3/1/day-of timeline, same-day signup skips,
+booked-lead suppression, and the arrival-day before-18:00 rule. It does not
+call Wix or send email.
 
 ```bash
 node ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs --arrival 2026-06-12 --signup 2026-06-01
@@ -119,7 +121,8 @@ follow-up. Live mode is read-only and writes evidence under
 ## Local Booking-Aware Fixture
 
 Before touching live Wix, run the local fixture to verify sales leads, booked
-leads, cancelled bookings, missing booked-path IDs, and booking-event scoping:
+lead suppression, cancelled bookings, self-reported booked suppression, and
+booking-event scoping:
 
 ```bash
 node ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs
@@ -127,7 +130,7 @@ node ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs
 
 The fixture mocks Wix Data, Contacts, and Triggered Emails locally. It writes a
 JSON result under `output/qa/ultimate-trip-planner-velo/` and exits non-zero if
-a booked lead could fall back to a sales email.
+a booked lead receives an Ultimate scheduled reminder.
 
 ## Collection Setup Script
 
@@ -244,7 +247,7 @@ Regenerate the paste-ready package after copy changes with:
 node ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs
 ```
 
-When the 10 Wix templates exist, put the message IDs or Wix editor URLs into a
+When the 5 Wix templates exist, put the message IDs or Wix editor URLs into a
 local JSON file shaped like `../email/paste-ready/message-ids.template.json`,
 then validate/apply them with:
 
@@ -265,7 +268,7 @@ The import helper is optional but useful when the copy kit downloads
 editor URLs to message IDs, and backs up any previous local ID file before
 writing.
 
-The gate runner is the preferred fast path after the 10 IDs exist. It dry-runs
+The gate runner is the preferred fast path after the 5 IDs exist. It dry-runs
 first, then with `--write` imports/applies IDs, verifies the replacement,
 regenerates local launch artifacts, runs `prepublish-gate.mjs`, and runs the
 launch audit. If the downloaded JSON is not in `~/Downloads`, pass
@@ -277,7 +280,7 @@ missing, placeholder, duplicate, or not-yet-applied IDs before publishing Velo.
 The `--write` apply step creates a timestamped local backup under
 `output/qa/ultimate-trip-planner-email-id-apply/` before replacing placeholders.
 
-Sales path:
+Planner/sales path:
 
 ```js
 TODO_TRIP_PLANNER_INSTANT
@@ -287,23 +290,13 @@ TODO_TRIP_PLANNER_MINUS_1
 TODO_TRIP_PLANNER_DAY_OF
 ```
 
-Booked/prep path:
-
-```js
-TODO_TRIP_PLANNER_INSTANT_BOOKED
-TODO_TRIP_PLANNER_MINUS_7_BOOKED
-TODO_TRIP_PLANNER_MINUS_3_BOOKED
-TODO_TRIP_PLANNER_MINUS_1_BOOKED
-TODO_TRIP_PLANNER_DAY_OF_BOOKED
-```
-
-If a booked-path ID is missing, that booked-path stage is skipped rather than
-sending a sales email.
-
-Booked leads fail closed: the backend never falls back to a sales-path message
-ID for a booked lead. If a booking marker later carries `bookingStatus` such as
+There is no booked/prep path in Ultimate. If a booking marker or self-reported
+`Already booked` intent is present, future Ultimate scheduled reminders are
+suppressed and the existing booking email sequence owns meeting-point, weather,
+and tour-day prep. If a later booking marker carries `bookingStatus` such as
 `cancelled`, `canceled`, `refunded`, `declined`, `no_show`, or `no-show`, that
-status overrides any earlier `bookedAt` value for future email branch selection.
+status overrides any earlier `bookedAt` value and the lead can receive
+pre-booking reminders again.
 
 Available variables:
 
@@ -374,7 +367,7 @@ Email stages:
 - arrivalDate - 7: trip shape, tour timing, first high-intent CTA.
 - arrivalDate - 3: first-day logistics, tickets, Sunday/Monday traps.
 - arrivalDate - 1: weather, packing, meeting point.
-- arrival day: welcome, final booking or booked-guest prep.
+- arrival day: welcome and final booking link for leads who have not booked.
 
 The day-of email is skipped after 18:00 Berlin time.
 
@@ -388,9 +381,9 @@ and the scheduled reminder on the same day.
 1. Create `TripPlannerLeads`.
 2. Add `tripPlannerFunnel.js`.
 3. Merge `http-functions.js` exports into live `Backend/http-functions.js`.
-4. Create Triggered Emails from `../email/`.
+4. Create the 5 Triggered Emails from `../email/`.
 5. Replace message ID placeholders.
 6. Merge `jobs.config`.
 7. Publish Wix.
 8. Test `POST /_functions/tripPlannerLead` with a real email.
-9. Test `POST /_functions/tripPlannerBooking` with the same email and confirm future stage selection switches to booked/prep.
+9. Test `POST /_functions/tripPlannerBooking` with the same email and confirm future Ultimate reminders are suppressed.

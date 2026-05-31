@@ -21,7 +21,7 @@ function usage() {
   node ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs --list
 
 Dry-run is the default. The helper finds the newest message-ids*.json file in
-~/Downloads, validates all ten Wix Triggered Email IDs, then writes the
+~/Downloads, validates all five Wix Triggered Email IDs, then writes the
 normalized local repo file only when --write is passed.
 It accepts full Wix editor URLs shaped like /automations/edit/{MESSAGE_ID}/content/en.
 
@@ -246,13 +246,14 @@ function writeOutput(options, payload) {
 function resultFor(options) {
   const { sourcePath, candidates } = chooseSource(options);
   if (!sourcePath || !fs.existsSync(sourcePath)) {
+    const total = readJson(manifestPath).length;
     return {
       ok: false,
       write: options.write,
       sourcePath,
       outPath: options.outPath,
       candidates,
-      summary: { total: 10, valid: 0, missing: 10, invalid: 0, duplicate: 0 },
+      summary: { total, valid: 0, missing: total, invalid: 0, duplicate: 0 },
       rows: [],
       issue: options.fromPath ? 'source file not found' : `no message-ids*.json file found in ${options.searchDir}`
     };

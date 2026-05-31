@@ -4,6 +4,52 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-31 — Codex (Ultimate email IDs applied)
+
+**Did:** Applied Yusuf's five real Wix Triggered Email IDs to the Ultimate Trip Planner funnel and advanced the launch state to live QA.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json` — added the ignored local ID file from Yusuf's five IDs.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — replaced the five `TODO_TRIP_PLANNER_*` placeholders with the real message IDs.
+- `ultimate-berlin-trip-planner/velo/install-kit.html`, `LAUNCH_CONTROL_ROOM.html`, and `LAUNCH_STATUS.*` — regenerated after `run-email-id-launch-gate.mjs --write`.
+- Root `PROJECT_MEMORY.md` and root `SESSION_LOG.md` — recorded that the ID blocker is closed.
+
+**Opened:** Ultimate is waiting for Wix Velo publish/live smoke: paste/publish Backend/tripPlannerFunnel.js, http-functions handlers, and jobs.config, then live-test `tripPlannerLead` and `tripPlannerBooking`.
+**Closed:** Triggered Email ID gate passed with `Ready for next launch step: YES`; launch audit is `132 pass, 1 warn, 0 block`.
+
+**Next session should:** Use `ultimate-berlin-trip-planner/velo/install-kit.html` for the Wix paste/publish step, then run `launch-remote-preflight.mjs` and live smoke before releasing public visibility.
+
+## 2026-05-31 — Codex (Ultimate booking-email correction)
+
+**Did:** Removed the duplicate booked-path Ultimate email sequence after Yusuf pointed out the existing site booking automation already handles booked guests.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — removed `bookedMessageId` branches; instant planner email can still send from the normal planner path, while future 7/3/1/day-of Ultimate reminders are suppressed for official or self-reported booked leads.
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs`, `email/README.md`, and regenerated `email/paste-ready/*` — active package now has 5 planner/sales templates only, deletes stale booked generated HTML, and warns not to create booked-path planner templates.
+- `ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs`, `simulate-email-sequence.mjs`, `prepublish-gate.mjs`, `launch-audit.mjs`, Velo/runbook/setup docs, `LAUNCH_STATUS.*`, `LAUNCH_CONTROL_ROOM.html`, `velo/install-kit.html`, `RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated the launch gates and handoff from 10 IDs/booked branch to 5 IDs/booked suppression.
+- Deleted active `email/booked-e*.md` source drafts.
+- Browser: copy-kit reload confirmed 5 cards, `0/5` counters, no `_BOOKED` placeholders, existing booking-sequence warning, and overflow `0`.
+
+**Opened:** `email/paste-ready/message-ids.local.json` is still missing; 5 real Wix Triggered Email IDs remain the blocker before Velo publish and live smoke.
+**Closed:** Duplicate booked-path planner email risk is removed. QA passed generator syntax, `.mjs` syntax checks, booking suppression fixture, booked sequence simulator, Browser copy-kit smoke, ID checker total `5`, and launch audit `131 pass, 1 warn, 1 block`.
+
+**Next session should:** Create/collect the 5 Wix Developer Tools Triggered Email URLs/IDs and run the email-ID launch gate.
+
+## 2026-05-31 — Codex (Ultimate copy-kit layout fix)
+
+**Did:** Fixed the copy-kit layout bug where the `Message ID JSON` panel let card/code text appear behind it while scrolling.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` and regenerated `email/paste-ready/copy-kit.html` — removed sticky positioning from the JSON panel, kept the setup checklist textarea compact, added an email-card guide before the card grid, and made `Next missing template` close the checklist before scrolling to the next card.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md`, `LAUNCH_STATUS.json`, and `LAUNCH_CONTROL_ROOM.html` — regenerated after audit.
+- `ultimate-berlin-trip-planner/RESEARCH_BACKLOG.md`, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` — updated handoff state.
+- Browser: reloaded the local copy-kit and confirmed `jsonPosition: relative`, checklist height `220`, overflow `0`, open checklist stays contained, and next-card jump closes the checklist.
+
+**Opened:** `email/paste-ready/message-ids.local.json` is still missing; 10 real Wix Triggered Email IDs remain the blocker before Velo publish and live smoke.
+**Closed:** Copy-kit overlap/behind-scroll issue is fixed. QA passed generator syntax, targeted `diff --check`, Browser layout/jump smoke, and launch audit `131 pass, 1 warn, 1 block`.
+
+**Next session should:** Create/collect the 10 Wix Developer Tools Triggered Email URLs/IDs and run the email-ID launch gate.
+
 ## 2026-05-31 — Codex (Ultimate launch blocked on IDs)
 
 **Did:** Rechecked whether the final launch blocker had changed.

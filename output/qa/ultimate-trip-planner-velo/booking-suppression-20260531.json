@@ -1,0 +1,46 @@
+{
+  "generatedAt": "2026-05-31T18:17:00.134Z",
+  "source": "ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js",
+  "status": "pass",
+  "tests": [
+    {
+      "name": "booked leads suppress Ultimate reminders",
+      "status": "pass",
+      "details": {
+        "sent": 1,
+        "messages": [
+          "contact-sales:sales-minus3-id:no"
+        ],
+        "bookedSuppressed": true
+      }
+    },
+    {
+      "name": "cancelled booked markers use the sales branch",
+      "status": "pass",
+      "details": {
+        "bookingStatus": "cancelled",
+        "messageId": "sales-minus3-id",
+        "isBooked": "no"
+      }
+    },
+    {
+      "name": "self-reported booked leads suppress scheduled reminders",
+      "status": "pass",
+      "details": {
+        "sent": 0,
+        "messages": 0,
+        "suppressed": true
+      }
+    },
+    {
+      "name": "booking marker respects arrivalDate scope",
+      "status": "pass",
+      "details": {
+        "matched": 1,
+        "updated": 1,
+        "targetBookingId": "fixture-booking",
+        "otherTouched": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "generatedAt": "2026-05-31T18:32:01.123Z",
+  "write": true,
+  "importDownloads": false,
+  "downloadsDir": "",
+  "importFrom": "",
+  "idsPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json",
+  "funnelPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js",
+  "ok": true,
+  "steps": [
+    {
+      "name": "Validate message IDs",
+      "command": "node ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Triggered Email ID Progress\nIDs file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json\nFunnel file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js\nIDs file exists: yes\nValid IDs: 5/5\nMissing: 0, invalid: 0, duplicate: 0\nApplied in Velo: 0/5\n\n- sales.instant   VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_INSTANT\n  html: e0-instant-plan.html\n  id: VLDqhLM\n- sales.minus7    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_7\n  html: e1-seven-days-before.html\n  id: VLDvLj8\n- sales.minus3    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_3\n  html: e2-three-days-before.html\n  id: VLDvnng\n- sales.minus1    VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_1\n  html: e3-one-day-before.html\n  id: VLDwKUu\n- sales.dayOf     VALID, NOT APPLIED\n  placeholder: TODO_TRIP_PLANNER_DAY_OF\n  html: e4-arrival-day.html\n  id: VLDwjZc\n\nOK: all 5 IDs are valid. Next dry-run apply-triggered-email-ids.mjs, then run with --write.\n"
+    },
+    {
+      "name": "Apply message IDs",
+      "command": "node ultimate-berlin-trip-planner/velo/apply-triggered-email-ids.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json --write",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "WRITE: 5 Triggered Email IDs validated.\n- sales.instant: TODO_TRIP_PLANNER_INSTANT -> VLDqhLM\n- sales.minus7: TODO_TRIP_PLANNER_MINUS_7 -> VLDvLj8\n- sales.minus3: TODO_TRIP_PLANNER_MINUS_3 -> VLDvnng\n- sales.minus1: TODO_TRIP_PLANNER_MINUS_1 -> VLDwKUu\n- sales.dayOf: TODO_TRIP_PLANNER_DAY_OF -> VLDwjZc\n\nBackup: output/qa/ultimate-trip-planner-email-id-apply/tripPlannerFunnel.before-email-ids-2026-05-31T18-31-59-940Z.js\nUpdated ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js\nNext: node ultimate-berlin-trip-planner/launch-audit.mjs\n"
+    },
+    {
+      "name": "Verify IDs are applied",
+      "command": "node ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json --require-applied",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Triggered Email ID Progress\nIDs file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json\nFunnel file: /Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js\nIDs file exists: yes\nValid IDs: 5/5\nMissing: 0, invalid: 0, duplicate: 0\nApplied in Velo: 5/5\nRequire applied mode: yes\n\n- sales.instant   APPLIED\n  placeholder: TODO_TRIP_PLANNER_INSTANT\n  html: e0-instant-plan.html\n  id: VLDqhLM\n- sales.minus7    APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_7\n  html: e1-seven-days-before.html\n  id: VLDvLj8\n- sales.minus3    APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_3\n  html: e2-three-days-before.html\n  id: VLDvnng\n- sales.minus1    APPLIED\n  placeholder: TODO_TRIP_PLANNER_MINUS_1\n  html: e3-one-day-before.html\n  id: VLDwKUu\n- sales.dayOf     APPLIED\n  placeholder: TODO_TRIP_PLANNER_DAY_OF\n  html: e4-arrival-day.html\n  id: VLDwjZc\n\nOK: all 5 IDs are valid and applied in tripPlannerFunnel.js.\n"
+    },
+    {
+      "name": "Regenerate Velo install kit",
+      "command": "node ultimate-berlin-trip-planner/velo/build-velo-install-kit.mjs",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Wrote ultimate-berlin-trip-planner/velo/install-kit.html\n"
+    },
+    {
+      "name": "Regenerate launch control room",
+      "command": "node ultimate-berlin-trip-planner/build-launch-control-room.mjs",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Wrote ultimate-berlin-trip-planner/LAUNCH_CONTROL_ROOM.html\n"
+    },
+    {
+      "name": "Regenerate launch status",
+      "command": "node ultimate-berlin-trip-planner/build-launch-status-report.mjs",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Wrote ultimate-berlin-trip-planner/LAUNCH_STATUS.md\nWrote ultimate-berlin-trip-planner/LAUNCH_STATUS.json\nVerdict: WAITING FOR LIVE QA\n"
+    },
+    {
+      "name": "Velo pre-publish gate",
+      "command": "node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "Ultimate Trip Planner Velo Pre-publish Gate\nPASS Triggered Email ID file exists - /Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json\nPASS All 5 IDs are valid and unique - 5/5 valid, duplicate rows 0\nPASS All 5 IDs are applied in tripPlannerFunnel.js - 5/5 applied\nPASS No TODO_TRIP_PLANNER placeholders remain - no placeholders found\nPASS Velo HTTP endpoints are present - tripPlannerLead and tripPlannerBooking handlers\nPASS Hourly scheduler is present - processTripPlannerDueEmails hourly job\nPASS Booked leads suppress Ultimate reminders - existing Wix booking sequence owns booked-guest prep\nPASS TripPlannerLeads critical fields pass remote gate - 74 fields visible; critical fields verified\n\nSummary: 8 pass, 0 warn, 0 block\nReady for Velo paste: YES\nResult written to output/qa/ultimate-trip-planner-prepublish-gate/prepublish-gate-2026-05-31T18-32-00-989Z.json\n"
+    },
+    {
+      "name": "Launch audit",
+      "command": "node ultimate-berlin-trip-planner/launch-audit.mjs",
+      "exitCode": 0,
+      "ok": true,
+      "skipped": false,
+      "output": "OK Required file exists: ultimate-berlin-trip-planner/index.html\nOK Required file exists: ultimate-berlin-trip-planner/build-launch-control-room.mjs\nOK Required file exists: ultimate-berlin-trip-planner/LAUNCH_CONTROL_ROOM.html\nOK Required file exists: ultimate-berlin-trip-planner/build-launch-status-report.mjs\nOK Required file exists: ultimate-berlin-trip-planner/LAUNCH_STATUS.md\nOK Required file exists: ultimate-berlin-trip-planner/LAUNCH_STATUS.json\nOK Required file exists: ultimate-berlin-trip-planner/WIX_EMAIL_SETUP_TR.md\nOK Required file exists: ultimate-berlin-trip-planner/TRIGGERED_EMAIL_API_NOTES.md\nOK Required file exists: ultimate-berlin-trip-planner/release-visibility.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js\nOK Required file exists: ultimate-berlin-trip-planner/velo/http-functions.js\nOK Required file exists: ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/build-message-ids-from-paste.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/apply-triggered-email-ids.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/report-trip-planner-leads.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/booking-aware-fixture.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/prepublish-gate.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/build-velo-install-kit.mjs\nOK Required file exists: ultimate-berlin-trip-planner/velo/install-kit.html\nOK Required file exists: ultimate-berlin-trip-planner/velo/jobs.config\nOK Required file exists: ultimate-berlin-trip-planner/velo/README.md\nOK Required file exists: ultimate-berlin-trip-planner/email/README.md\nOK Required file exists: ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs\nOK Required file exists: ultimate-berlin-trip-planner/email/paste-ready/manifest.json\nOK Required file exists: ultimate-berlin-trip-planner/email/paste-ready/message-ids.template.json\nOK Required file exists: ultimate-berlin-trip-planner/email/paste-ready/setup-checklist.txt\nOK Required file exists: ultimate-berlin-trip-planner/email/paste-ready/README.md\nOK Required file exists: ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html\nOK Required file exists: ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md\nOK Required file exists: ultimate-berlin-trip-planner/launch-remote-preflight.mjs\nOK Required file exists: tools-hub/data.json\nOK Required file exists: tools-home/data.json\nOK Required file exists: tools-home/tools-home-element.js\nOK Required file exists: tools-home/icons/manifest.json\nOK Required file exists: widgets-hub/index.html\nOK Required file exists: widgets-hub/widgets-hub-element.js\nOK Required file exists: quick-summary/data.json\nOK Required file exists: faq/data.json\nOK Required file exists: faq/inject.js\nOK Required file exists: blog-drafts/ultimate-berlin-trip-planner.md\nOK Required file exists: blog-drafts/ultimate-berlin-trip-planner.body.md\nOK Required file exists: ../insert-ultimate-berlin-trip-planner.js\nOK Triggered Email message IDs are pasted\nOK All 5 planner email template drafts exist\nOK Email template variables are exposed by Velo\nOK Critical plan/email variables are present\nOK Paste-ready Wix email HTML package exists\nOK Paste-ready email HTML is Wix-safe\nOK Paste-ready placeholders match Velo TODO IDs\nOK Triggered Email copy kit is generated\nOK Launch runbook covers manual Wix handoff\nOK Launch control room is generated\nOK Turkish Wix email setup handoff exists\nOK Triggered Email API research note exists\nOK Triggered Email downloaded JSON import helper exists\nOK Triggered Email raw paste builder exists\nOK Triggered Email ID progress checker exists\nOK Triggered Email launch gate runner exists\nOK Triggered Email ID apply helper writes a local backup\nOK Launch status report is generated\nOK Launch status checks collection schema\nOK Visibility release helper is guarded\nOK Velo install kit is generated\nOK Velo pre-publish gate is available\nOK Velo lead endpoint exports are present\nOK Lead report summarizes funnel segments\nOK Email sequence simulator covers scheduler branches\nOK Velo booking endpoint exports are present\nOK TripPlannerLeads collection is wired/documented\nOK TripPlannerLeads setup helper exists\nOK Hourly scheduled processor is configured\nOK Booked leads suppress Ultimate reminders\nOK Inactive booking statuses can re-enter pre-booking reminders\nOK Booking-aware email behavior has a local fixture\nOK Ultimate entry exists in tools-hub data\nOK Draft protection is active in tools-hub data\nOK Ultimate widgetUrl points to GitHub Pages folder\nOK Homepage tool shortcuts do not include Ultimate while draft\nOK Homepage tools renderer filters draft tools\nOK Homepage planner icons are launch-ready\nOK Ultimate icon is prepared but not homepage-visible before launch\nOK Tools hub Custom Element filters draft tools\nOK Widgets hub Custom Element filters draft tools\nOK Static widgets hub SEO does not expose draft Ultimate\nOK Local lead-gate QA params are localhost-only\nOK PDF itinerary overview exists\nOK Day-end closers stay short and separate\nOK Day-card prose stays compact\nOK Daily Google Maps pack is visual\nOK Daily timebox timeline is visible\nOK Trip calendar export is available\nOK PDF Carry Pack handles trip calendar rows\nOK PDF cover has a document guide\nOK Visual itinerary overview is visible before the detailed plan\nOK Trip load map summarizes daily intensity visually\nOK Planner logic shows how inputs shape the itinerary\nOK Top header uses a real Berlin visual hero\nOK Trip style presets reduce form friction\nOK Trip style preset reaches lead segmentation\nOK Mobile first screen has a visual plan peek\nOK Arrival playbook turns first-day logic into a visual operations card\nOK Trip highlights add a photo-first result layer\nOK Trip highlights reach text, print, and PDF exports\nOK Trip radar gives a visual plan health summary\nOK Trip radar reaches text, print, and PDF exports\nOK Trip command strip gives immediate map and action anchors\nOK Travel Mode feels like a phone-ready assistant\nOK Lead gate explains the arrival email sequence visually\nOK Daily timeboxes reach the email sequence\nOK Conversion signal reaches lead storage and email\nOK Machine-readable conversion fields are stored\nOK Route Deck and Day Jump Bar exist\nOK Berlin one-off holiday override includes 2028-06-17\nOK Blog body draft exists and embeds the widget near the top\nOK Blog body includes Quick Summary placeholder\nOK Blog body includes FAQ placeholder\nOK Blog metadata is present\nOK Blog targets the Berlin trip planner keyword\nOK Blog body contains required internal links\nOK Quick Summary entry exists for Ultimate blog\nOK FAQ entry exists for Ultimate blog\nOK FAQ injector maps Ultimate slugs\nOK FAQ schema includes Ultimate questions\nOK Public blog body has no competitor/source-note leak\nOK Research/source notes remain only in the private markdown draft\nOK BerlinTools CMS insert helper exists\nOK BerlinTools CMS insert helper targets Ultimate correctly\nWARN Live Wix smoke test evidence is recorded - No live-*.json result with successful tripPlannerLead response found under output/qa/ultimate-trip-planner-live-smoke/.\n\nSummary: 132 pass, 1 warn, 0 block\nLaunch status: ready for manual Wix smoke tests\n"
+    }
+  ]
+}

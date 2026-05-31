@@ -692,7 +692,7 @@ git diff --check -- ultimate-berlin-trip-planner tools-hub/data.json tools-home/
       <h2>Next Manual Move</h2>
       <div class="bw-next">
         <div class="bw-next-number">1</div>
-        <p><strong>Create the 10 Wix Triggered Emails first.</strong> Use the email copy kit, paste each template, copy each Wix editor URL into the JSON builder, save <code>message-ids.local.json</code>, then run the Message ID commands below. The first command is read-only and tells you exactly which rows are still missing or duplicated.</p>
+        <p><strong>Create the 5 Wix Triggered Emails first.</strong> Use the email copy kit, paste each template, copy each Wix editor URL into the JSON builder, save <code>message-ids.local.json</code>, then run the Message ID commands below. Do not create a booked-path Ultimate set; the existing booking email sequence already handles booked guests.</p>
       </div>
     </section>
 

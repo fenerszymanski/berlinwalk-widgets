@@ -51,46 +51,6 @@ const EMAILS = [
     stage: 'dayOf',
     placeholder: 'TODO_TRIP_PLANNER_DAY_OF',
     eyebrow: 'Arrival day'
-  },
-  {
-    source: 'booked-e0-instant-plan.md',
-    output: 'booked-e0-instant-plan.html',
-    path: 'booked',
-    stage: 'instant',
-    placeholder: 'TODO_TRIP_PLANNER_INSTANT_BOOKED',
-    eyebrow: 'Booked path'
-  },
-  {
-    source: 'booked-e1-seven-days-before.md',
-    output: 'booked-e1-seven-days-before.html',
-    path: 'booked',
-    stage: 'minus7',
-    placeholder: 'TODO_TRIP_PLANNER_MINUS_7_BOOKED',
-    eyebrow: 'Booked path'
-  },
-  {
-    source: 'booked-e2-three-days-before.md',
-    output: 'booked-e2-three-days-before.html',
-    path: 'booked',
-    stage: 'minus3',
-    placeholder: 'TODO_TRIP_PLANNER_MINUS_3_BOOKED',
-    eyebrow: 'Booked path'
-  },
-  {
-    source: 'booked-e3-one-day-before.md',
-    output: 'booked-e3-one-day-before.html',
-    path: 'booked',
-    stage: 'minus1',
-    placeholder: 'TODO_TRIP_PLANNER_MINUS_1_BOOKED',
-    eyebrow: 'Booked path'
-  },
-  {
-    source: 'booked-e4-arrival-day.md',
-    output: 'booked-e4-arrival-day.html',
-    path: 'booked',
-    stage: 'dayOf',
-    placeholder: 'TODO_TRIP_PLANNER_DAY_OF_BOOKED',
-    eyebrow: 'Booked path'
   }
 ];
 
@@ -354,7 +314,7 @@ node ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs
 
 ## Wix Paste Workflow
 
-1. Open Wix Developer Tools -> Triggered Emails and create a new Triggered Email template. Do not create an automation workflow for these ten templates; Velo sends them by message ID.
+1. Open Wix Developer Tools -> Triggered Emails and create a new Triggered Email template. Do not create an automation workflow for these five templates; Velo sends them by message ID.
 2. Copy the Wix template name from the matching card in \`copy-kit.html\` and use it as the template name in Wix.
 3. Paste the subject and preheader from the same card.
 4. Open the HTML/custom body editor and paste everything between \`HTML BLOCK START\` and \`HTML BLOCK END\` from the matching HTML file.
@@ -367,7 +327,7 @@ node ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs
 node ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs --write
 \`\`\`
 
-8. Preferred fast path after the 10 IDs exist:
+8. Preferred fast path after the 5 IDs exist:
 
 \`\`\`bash
 node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads
@@ -411,7 +371,7 @@ ${rows}
 - HTML is table-based with inline CSS only.
 - No \`<style>\`, \`<script>\`, \`<svg>\`, or external font tags are used.
 - Wix variables keep the \`\${var_name}\` syntax expected by Velo Triggered Emails.
-- Booked-path placeholders intentionally stay separate from sales-path placeholders so missing booked IDs skip safely instead of sending sales copy.
+- Once a lead books, the Ultimate scheduler suppresses future planner reminders and lets the existing Wix booking email sequence handle meeting-point/prep emails.
 `;
 }
 
@@ -428,7 +388,8 @@ function renderSetupChecklist(manifest) {
     'Ultimate Berlin Trip Planner Triggered Email Setup Checklist',
     '',
     'Use Wix Developer Tools -> Triggered Emails.',
-    'Do not create automation workflows for these ten templates; Velo sends them by message ID.',
+    'Do not create automation workflows for these five templates; Velo sends them by message ID.',
+    'Do not create booked-path planner templates here; the existing booking email sequence already handles booked guests.',
     '',
     'For each item: create template -> paste name -> subject -> preheader -> HTML body -> save -> paste editor URL/message ID into copy-kit.html.',
     ''
@@ -448,7 +409,7 @@ function renderSetupChecklist(manifest) {
   });
 
   lines.push(
-    'After all 10 URLs/IDs are collected:',
+    'After all 5 URLs/IDs are collected:',
     '1. Paste them into copy-kit.html or download message-ids.local.json.',
     '2. Run: node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads',
     '3. Then source ../scripts/load-api-keys.sh and rerun with --write.'
@@ -530,7 +491,7 @@ function renderCopyKit(manifest) {
         </div>
         <div class="card-badges">
           <span class="state-chip" data-card-state>Not started</span>
-          <span class="count">${index + 1}/10</span>
+      <span class="count">${index + 1}/${manifest.length}</span>
         </div>
       </div>
 
@@ -835,9 +796,7 @@ function renderCopyKit(manifest) {
 
     .json-panel {
       margin-top: 18px;
-      position: sticky;
-      top: 12px;
-      z-index: 2;
+      position: relative;
     }
 
     .json-panel h2 {
@@ -906,8 +865,11 @@ function renderCopyKit(manifest) {
     }
 
     .setup-export textarea {
+      height: 220px;
       margin-top: 10px;
-      min-height: 220px;
+      max-height: 260px;
+      min-height: 160px;
+      overflow: auto;
     }
 
     .bulk-panel {
@@ -1007,6 +969,33 @@ function renderCopyKit(manifest) {
       min-height: 18px;
     }
 
+    .card-guide {
+      align-items: center;
+      background: #F0F6E8;
+      border: 1px solid var(--border);
+      display: grid;
+      gap: 8px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      margin-top: 18px;
+      padding: 12px 14px;
+    }
+
+    .card-guide strong {
+      color: var(--green);
+      display: block;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .card-guide span {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.45;
+      margin-top: 2px;
+    }
+
     @media (max-width: 860px) {
       body {
         padding: 16px;
@@ -1020,13 +1009,10 @@ function renderCopyKit(manifest) {
         font-size: 28px;
       }
 
-      .json-panel {
-        position: static;
-      }
-
       .mini-stats,
       .setup-checklist,
-      .next-action {
+      .next-action,
+      .card-guide {
         grid-template-columns: 1fr;
       }
     }
@@ -1037,24 +1023,24 @@ function renderCopyKit(manifest) {
     <section class="hero">
       <span class="kicker">BerlinWalk launch kit</span>
       <h1>Ultimate Berlin Trip Planner Triggered Emails</h1>
-      <p>Use Wix Developer Tools -> Triggered Emails, not an automation workflow. Create the ten templates, paste each subject, preheader, and HTML body, then paste the saved editor URL or message ID back into the matching input. The JSON panel at the bottom builds the local ID file for the apply helper.</p>
+      <p>Use Wix Developer Tools -> Triggered Emails, not an automation workflow. Create the five planner templates, paste each subject, preheader, and HTML body, then paste the saved editor URL or message ID back into the matching input. Do not create booked-path planner templates; the existing booking email sequence already handles booked guests.</p>
     </section>
 
     <section class="json-panel" aria-label="Message ID builder">
       <h2>Message ID JSON</h2>
-      <p>After all ten templates are saved in Wix, copy or download this JSON as <code>message-ids.local.json</code>. If it lands in Downloads, run <code>import-message-ids-from-downloads.mjs</code>, then run the apply helper from the repo root.</p>
+      <p>After all five templates are saved in Wix, copy or download this JSON as <code>message-ids.local.json</code>. If it lands in Downloads, run <code>import-message-ids-from-downloads.mjs</code>, then run the apply helper from the repo root.</p>
       <div class="progress-board">
         <div class="progress-track" aria-label="Setup progress"><div class="progress-fill" data-progress-fill></div></div>
         <div class="mini-stats">
-          <div class="mini-stat"><strong data-template-count>0/10</strong><span>Templates ready</span></div>
-          <div class="mini-stat"><strong data-id-count>0/10</strong><span>Valid IDs</span></div>
-          <div class="mini-stat"><strong data-check-count>0/40</strong><span>Checklist ticks</span></div>
+          <div class="mini-stat"><strong data-template-count>0/${manifest.length}</strong><span>Templates ready</span></div>
+          <div class="mini-stat"><strong data-id-count>0/${manifest.length}</strong><span>Valid IDs</span></div>
+          <div class="mini-stat"><strong data-check-count>0/${manifest.length * 4}</strong><span>Checklist ticks</span></div>
         </div>
         <div class="health" data-id-health>Waiting for Wix message IDs.</div>
       </div>
       <div class="next-action" aria-label="Next template to create">
         <div>
-          <strong data-next-label>Start with template 1/10.</strong>
+          <strong data-next-label>Start with template 1/${manifest.length}.</strong>
           <span data-next-detail>Copy the Wix template name, then subject, preheader, and HTML.</span>
         </div>
         <button type="button" data-scroll-next>Next missing template</button>
@@ -1068,7 +1054,7 @@ function renderCopyKit(manifest) {
       </details>
       <div class="bulk-panel" aria-label="Bulk message ID paste">
         <label for="bulk-message-ids">Bulk paste Wix URLs or IDs</label>
-        <textarea id="bulk-message-ids" rows="5" placeholder="Paste 10 editor URLs in template order, or labelled lines like TODO_TRIP_PLANNER_INSTANT: https://manage.wix.com/.../automations/edit/.../content/en"></textarea>
+        <textarea id="bulk-message-ids" rows="5" placeholder="Paste 5 editor URLs in template order, or labelled lines like TODO_TRIP_PLANNER_INSTANT: https://manage.wix.com/.../automations/edit/.../content/en"></textarea>
         <span class="bulk-help">Labelled lines can be in any order. Unlabelled lines are assigned in the template order below.</span>
         <div class="json-actions">
           <button type="button" data-apply-bulk-ids>Apply bulk IDs</button>
@@ -1083,6 +1069,14 @@ function renderCopyKit(manifest) {
         <button type="button" data-reset-progress>Reset saved progress</button>
       </div>
       <div class="status" data-status></div>
+    </section>
+
+    <section class="card-guide" aria-label="Email template cards">
+      <div>
+        <strong>Email template cards start below.</strong>
+        <span>For each card, copy the Wix template name, subject, preheader, and HTML body, then paste the saved Wix URL or message ID back into that card.</span>
+      </div>
+      <button type="button" data-scroll-next>Start next card</button>
     </section>
 
     <section class="grid">
@@ -1353,17 +1347,17 @@ ${cards}
       const progress = Math.round(((checked + validIds) / (PLACEHOLDERS.length * 5)) * 100);
 
       if (fill) fill.style.width = progress + '%';
-      if (templateCount) templateCount.textContent = completeCards + '/10';
-      if (idCount) idCount.textContent = validIds + '/10';
-      if (checkCount) checkCount.textContent = checked + '/40';
+      if (templateCount) templateCount.textContent = completeCards + '/' + PLACEHOLDERS.length;
+      if (idCount) idCount.textContent = validIds + '/' + PLACEHOLDERS.length;
+      if (checkCount) checkCount.textContent = checked + '/' + (PLACEHOLDERS.length * 4);
       if (nextLabel && nextDetail) {
         if (nextCard) {
           const index = nextCard.getAttribute('data-card-index') || '?';
           const name = nextCard.getAttribute('data-template-name') || 'Next template';
-          nextLabel.textContent = 'Next: template ' + index + '/10';
+          nextLabel.textContent = 'Next: template ' + index + '/' + PLACEHOLDERS.length;
           nextDetail.textContent = name;
         } else {
-          nextLabel.textContent = 'All ten templates are ready.';
+          nextLabel.textContent = 'All ' + PLACEHOLDERS.length + ' templates are ready.';
           nextDetail.textContent = 'Download message-ids.local.json and run the launch gate.';
         }
       }
@@ -1371,7 +1365,7 @@ ${cards}
         health.classList.toggle('is-ok', validIds === PLACEHOLDERS.length && issueRows.length === 0);
         health.classList.toggle('is-error', issueRows.length > 0);
         if (validIds === PLACEHOLDERS.length && issueRows.length === 0) {
-          health.textContent = 'All ten IDs are valid. Download message-ids.local.json and run the checker.';
+          health.textContent = 'All ' + PLACEHOLDERS.length + ' IDs are valid. Download message-ids.local.json and run the checker.';
         } else if (issueRows.length) {
           health.textContent = issueRows.length + ' ID issue(s): ' + issueRows.map(function (row) { return row.placeholder; }).join(', ');
         } else {
@@ -1395,12 +1389,14 @@ ${cards}
       updateCards(rows);
       updateSummary(rows);
       writeState();
-      setStatus(missing.length ? missing.length + ' message IDs still empty.' : 'All ten message ID slots are filled.');
+      setStatus(missing.length ? missing.length + ' message IDs still empty.' : 'All ' + PLACEHOLDERS.length + ' message ID slots are filled.');
       return payload;
     }
 
     function scrollToNextCard() {
       buildJson();
+      const setupExport = document.querySelector('.setup-export');
+      if (setupExport) setupExport.open = false;
       const cards = Array.from(document.querySelectorAll('[data-card-placeholder]'));
       const nextCard = cards.find(function (card) { return !card.classList.contains('is-complete'); }) || cards[0];
       if (!nextCard) return;
@@ -1486,6 +1482,18 @@ ${cards}
 
 function main() {
   fs.mkdirSync(outDir, { recursive: true });
+  for (const name of fs.readdirSync(outDir)) {
+    const isGeneratedEmail = /^(booked-)?e[0-9]-.*\.html$/.test(name);
+    const isGeneratedSupport = [
+      'manifest.json',
+      'message-ids.template.json',
+      'setup-checklist.txt',
+      'README.md',
+      'preview.html',
+      'copy-kit.html'
+    ].includes(name);
+    if (isGeneratedEmail || isGeneratedSupport) fs.rmSync(path.join(outDir, name), { force: true });
+  }
 
   const manifest = EMAILS.map((item) => {
     const parsed = parseMarkdown(item.source);

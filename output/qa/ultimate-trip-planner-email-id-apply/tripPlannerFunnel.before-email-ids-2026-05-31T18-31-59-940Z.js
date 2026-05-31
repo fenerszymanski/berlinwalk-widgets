@@ -13,35 +13,35 @@ const STAGES = [
     offset: null,
     sentField: 'sentInstantAt',
     errorField: 'instantError',
-    messageId: 'VLDqhLM'
+    messageId: 'TODO_TRIP_PLANNER_INSTANT'
   },
   {
     key: 'minus7',
     offset: -7,
     sentField: 'sentMinus7At',
     errorField: 'minus7Error',
-    messageId: 'VLDvLj8'
+    messageId: 'TODO_TRIP_PLANNER_MINUS_7'
   },
   {
     key: 'minus3',
     offset: -3,
     sentField: 'sentMinus3At',
     errorField: 'minus3Error',
-    messageId: 'VLDvnng'
+    messageId: 'TODO_TRIP_PLANNER_MINUS_3'
   },
   {
     key: 'minus1',
     offset: -1,
     sentField: 'sentMinus1At',
     errorField: 'minus1Error',
-    messageId: 'VLDwKUu'
+    messageId: 'TODO_TRIP_PLANNER_MINUS_1'
   },
   {
     key: 'dayOf',
     offset: 0,
     sentField: 'sentDayOfAt',
     errorField: 'dayOfError',
-    messageId: 'VLDwjZc'
+    messageId: 'TODO_TRIP_PLANNER_DAY_OF'
   }
 ];
 

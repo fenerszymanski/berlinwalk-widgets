@@ -239,8 +239,8 @@ function nextActions({ blockers, warnings, holds }) {
   if (blockers.some((gate) => gate.id === 'triggered_email_ids')) {
     const actions = [
       'Open WIX_EMAIL_SETUP_TR.md next to email/paste-ready/copy-kit.html.',
-      'Create the 10 Wix Triggered Email templates from the copy kit.',
-      'Export message-ids.local.json from the copy kit, import it from Downloads, or build it from 10 pasted URLs with build-message-ids-from-paste.mjs.',
+      'Create the 5 Wix Triggered Email templates from the copy kit.',
+      'Export message-ids.local.json from the copy kit, import it from Downloads, or build it from 5 pasted URLs with build-message-ids-from-paste.mjs.',
       'Run run-email-id-launch-gate.mjs first in dry-run, then with --write after loading WIX_API_KEY.',
       'Regenerate Velo install kit and publish Velo in Wix Developer Tools.'
     ];

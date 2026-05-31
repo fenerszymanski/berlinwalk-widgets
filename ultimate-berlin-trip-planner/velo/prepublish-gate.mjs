@@ -39,7 +39,7 @@ function usage() {
   node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs --ids ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json
   node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs --json
 
-Run after the 10 Triggered Email IDs have been applied, before pasting Velo into Wix.
+Run after the 5 Triggered Email IDs have been applied, before pasting Velo into Wix.
 Load WIX_API_KEY first so the live TripPlannerLeads collection can be verified:
   source ../scripts/load-api-keys.sh
 `);
@@ -164,8 +164,9 @@ function inspectSource() {
       /export\s+function\s+options_tripPlannerBooking/.test(httpFunctions),
     hasScheduler: /processTripPlannerDueEmails/.test(jobsConfig) &&
       /"cronExpression"\s*:\s*"0 \* \* \* \*"/.test(jobsConfig),
-    bookedFailClosed: /booked\s*\?\s*stage\.bookedMessageId\s*:\s*stage\.messageId/.test(funnel) &&
-      /missing_message_id/.test(funnel)
+    bookedSuppression: /shouldSuppressUltimateReminder/.test(funnel) &&
+      /booked_existing_sequence/.test(funnel) &&
+      !/bookedMessageId/.test(funnel)
   };
 }
 
@@ -254,12 +255,12 @@ async function main() {
   const sourceState = inspectSource();
   const checks = [
     check('Triggered Email ID file exists', idState.idsFileExists, idState.idsFileExists ? options.idsPath : 'message-ids.local.json is missing'),
-    check('All 10 IDs are valid and unique', idState.valid === idState.total && idState.duplicate === 0, `${idState.valid}/${idState.total} valid, duplicate rows ${idState.duplicate}`),
-    check('All 10 IDs are applied in tripPlannerFunnel.js', idState.applied === idState.total, `${idState.applied}/${idState.total} applied`),
+    check('All 5 IDs are valid and unique', idState.valid === idState.total && idState.duplicate === 0, `${idState.valid}/${idState.total} valid, duplicate rows ${idState.duplicate}`),
+    check('All 5 IDs are applied in tripPlannerFunnel.js', idState.applied === idState.total, `${idState.applied}/${idState.total} applied`),
     check('No TODO_TRIP_PLANNER placeholders remain', sourceState.todos.length === 0, sourceState.todos.length ? sourceState.todos.join(', ') : 'no placeholders found'),
     check('Velo HTTP endpoints are present', sourceState.hasLeadEndpoint && sourceState.hasBookingEndpoint, 'tripPlannerLead and tripPlannerBooking handlers'),
     check('Hourly scheduler is present', sourceState.hasScheduler, 'processTripPlannerDueEmails hourly job'),
-    check('Booked email branch fails closed', sourceState.bookedFailClosed, 'missing booked IDs should not fall back to sales IDs')
+    check('Booked leads suppress Ultimate reminders', sourceState.bookedSuppression, 'existing Wix booking sequence owns booked-guest prep')
   ];
 
   const apiKey = String(process.env.WIX_API_KEY || '').trim();

@@ -4,7 +4,7 @@ Internal launch note for Ultimate Berlin Trip Planner.
 
 ## Conclusion
 
-The 10 Triggered Email templates still have to be created in the Wix dashboard.
+The 5 Triggered Email templates still have to be created in the Wix dashboard.
 Current public Wix docs support sending already-created Triggered Emails from
 code, but do not expose a stable REST/API path for creating the email templates
 and HTML content themselves.
@@ -46,13 +46,13 @@ first pass.
 
 ## Practical Launch Decision
 
-Do not spend launch time trying to create the 10 Triggered Email templates via
+Do not spend launch time trying to create the 5 Triggered Email templates via
 REST unless Wix ships a specific Triggered Email template-management endpoint.
 
 Use this order instead:
 
 1. Open `email/paste-ready/copy-kit.html`.
-2. Create the 10 templates manually in Wix.
+2. Create the 5 templates manually in Wix.
 3. Save URLs or message IDs into `message-ids.local.json`.
 4. Run `velo/check-triggered-email-ids.mjs`.
 5. Run `velo/apply-triggered-email-ids.mjs`.

@@ -39,7 +39,7 @@ Open the generated status report when you need a plain Markdown launch summary:
 ultimate-berlin-trip-planner/LAUNCH_STATUS.md
 ```
 
-Expected before Wix template work: one blocker for the ten
+Expected before Wix template work: one blocker for the five
 `TODO_TRIP_PLANNER_*` Triggered Email message IDs. Do not publish the tool page,
 homepage shortcut, or widgets gallery entry until that blocker is gone and live
 smoke evidence is recorded. Keep the tools-hub row at `status: "draft"` until
@@ -69,7 +69,7 @@ ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html
 If doing the Wix clicks manually, keep
 `ultimate-berlin-trip-planner/WIX_EMAIL_SETUP_TR.md` open next to the copy kit.
 
-In Wix, create ten Triggered Email templates from
+In Wix, create five Triggered Email templates from
 `ultimate-berlin-trip-planner/email/paste-ready/`:
 
 | Branch | Stage | Placeholder | HTML file |
@@ -79,11 +79,10 @@ In Wix, create ten Triggered Email templates from
 | Sales | 3 days before | `TODO_TRIP_PLANNER_MINUS_3` | `e2-three-days-before.html` |
 | Sales | 1 day before | `TODO_TRIP_PLANNER_MINUS_1` | `e3-one-day-before.html` |
 | Sales | Arrival day | `TODO_TRIP_PLANNER_DAY_OF` | `e4-arrival-day.html` |
-| Booked | Instant | `TODO_TRIP_PLANNER_INSTANT_BOOKED` | `booked-e0-instant-plan.html` |
-| Booked | 7 days before | `TODO_TRIP_PLANNER_MINUS_7_BOOKED` | `booked-e1-seven-days-before.html` |
-| Booked | 3 days before | `TODO_TRIP_PLANNER_MINUS_3_BOOKED` | `booked-e2-three-days-before.html` |
-| Booked | 1 day before | `TODO_TRIP_PLANNER_MINUS_1_BOOKED` | `booked-e3-one-day-before.html` |
-| Booked | Arrival day | `TODO_TRIP_PLANNER_DAY_OF_BOOKED` | `booked-e4-arrival-day.html` |
+
+Do not create a booked-path Ultimate set. Booked guests already enter the
+existing BerlinWalk booking email sequence; Ultimate only needs to suppress its
+own future reminders after a booking marker arrives.
 
 For each template, paste:
 
@@ -93,7 +92,7 @@ For each template, paste:
 The copy kit has buttons for all three parts and a message-ID JSON builder for
 the next step. It also keeps a local progress checklist in the browser, validates
 IDs as they are pasted, extracts IDs from Wix editor URLs, warns about duplicates,
-and has a bulk paste box for all 10 URLs in template order.
+and has a bulk paste box for all 5 URLs in template order.
 
 Get each message ID from the Wix editor URL. The ID appears between
 `/automations/edit/` and `/content/en`.
@@ -114,16 +113,11 @@ Use either raw IDs or full Wix editor URLs:
   "TODO_TRIP_PLANNER_MINUS_7": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID",
   "TODO_TRIP_PLANNER_MINUS_3": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID",
   "TODO_TRIP_PLANNER_MINUS_1": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID",
-  "TODO_TRIP_PLANNER_DAY_OF": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID",
-  "TODO_TRIP_PLANNER_INSTANT_BOOKED": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID",
-  "TODO_TRIP_PLANNER_MINUS_7_BOOKED": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID",
-  "TODO_TRIP_PLANNER_MINUS_3_BOOKED": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID",
-  "TODO_TRIP_PLANNER_MINUS_1_BOOKED": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID",
-  "TODO_TRIP_PLANNER_DAY_OF_BOOKED": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID"
+  "TODO_TRIP_PLANNER_DAY_OF": "PASTE_WIX_EDITOR_URL_OR_MESSAGE_ID"
 }
 ```
 
-Shortcut if you already have ten Wix editor URLs in order: paste them into the
+Shortcut if you already have five Wix editor URLs in order: paste them into the
 copy kit's bulk paste box and click `Apply bulk IDs`, or paste them into a local
 text file / pipe them from the clipboard, then let the helper build the JSON file:
 
@@ -140,11 +134,11 @@ node ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs
 node ultimate-berlin-trip-planner/velo/import-message-ids-from-downloads.mjs --write
 ```
 
-The first command is a dry run. The write command validates all ten IDs, writes
+The first command is a dry run. The write command validates all five IDs, writes
 the normalized local repo file, and backs up any previous local ID file under
 `output/qa/ultimate-trip-planner-message-id-import/`.
 
-Fast path once the 10 IDs exist:
+Fast path once the 5 IDs exist:
 
 ```bash
 node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads
@@ -175,8 +169,8 @@ node ultimate-berlin-trip-planner/velo/check-triggered-email-ids.mjs --ids ultim
 node ultimate-berlin-trip-planner/launch-audit.mjs
 ```
 
-The read-only check should report `Valid IDs: 10/10` before the write, and
-`Applied in Velo: 10/10` after the write. The write step also creates a
+The read-only check should report `Valid IDs: 5/5` before the write, and
+`Applied in Velo: 5/5` after the write. The write step also creates a
 timestamped backup under `output/qa/ultimate-trip-planner-email-id-apply/` before
 touching `tripPlannerFunnel.js`. The audit should no longer show the Triggered
 Email blocker.
@@ -234,8 +228,10 @@ In Wix Developer Tools:
 6. Publish the Wix site so `/_functions/tripPlannerLead`,
    `/_functions/tripPlannerBooking`, and the hourly scheduled job are live.
 
-Do not use a sales-path ID as a booked-path fallback. The backend is designed to
-skip a booked email if its booked template ID is missing.
+Booked guests should not receive a second Ultimate prep sequence. The
+`tripPlannerBooking` endpoint marks matching planner leads as booked so future
+Ultimate scheduled reminders stop, while the existing Wix booking email
+sequence handles meeting-point, weather, and tour-day prep.
 
 ## 4. Live Smoke Test
 
@@ -254,8 +250,7 @@ Confirm:
 - `tripPlannerLead` returns `ok: true` and a `leadId`.
 - The instant email arrives with the plan variables filled.
 - `tripPlannerBooking` returns `ok: true`.
-- Future booked-path emails use meeting point / prep language instead of sales
-  CTA language.
+- Future Ultimate reminders are suppressed for that booked lead.
 - The audit warning for live smoke evidence disappears.
 
 ## 5. Create Tool Page And Publish Visibility

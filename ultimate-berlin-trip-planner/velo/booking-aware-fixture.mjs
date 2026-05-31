@@ -16,12 +16,7 @@ const MESSAGE_IDS = {
   TODO_TRIP_PLANNER_MINUS_7: 'sales-minus7-id',
   TODO_TRIP_PLANNER_MINUS_3: 'sales-minus3-id',
   TODO_TRIP_PLANNER_MINUS_1: 'sales-minus1-id',
-  TODO_TRIP_PLANNER_DAY_OF: 'sales-dayof-id',
-  TODO_TRIP_PLANNER_INSTANT_BOOKED: 'booked-instant-id',
-  TODO_TRIP_PLANNER_MINUS_7_BOOKED: 'booked-minus7-id',
-  TODO_TRIP_PLANNER_MINUS_3_BOOKED: 'booked-minus3-id',
-  TODO_TRIP_PLANNER_MINUS_1_BOOKED: 'booked-minus1-id',
-  TODO_TRIP_PLANNER_DAY_OF_BOOKED: 'booked-dayof-id'
+  TODO_TRIP_PLANNER_DAY_OF: 'sales-dayof-id'
 };
 
 function parseArgs() {
@@ -53,7 +48,7 @@ function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function transformFunnelSource({ replaceBookedIds = true } = {}) {
+function transformFunnelSource() {
   let source = fs.readFileSync(sourcePath, 'utf8');
   source = source.replace(/^import .+;$/gm, '');
   source = source.replace(/export\s+async\s+function\s+/g, 'async function ');
@@ -61,7 +56,6 @@ function transformFunnelSource({ replaceBookedIds = true } = {}) {
   const replacements = Object.entries(MESSAGE_IDS)
     .sort((a, b) => b[0].length - a[0].length);
   for (const [placeholder, messageId] of replacements) {
-    if (!replaceBookedIds && placeholder.endsWith('_BOOKED')) continue;
     source = source.replace(new RegExp(`${escapeRegExp(placeholder)}(?![A-Z0-9_])`, 'g'), messageId);
   }
 
@@ -209,7 +203,7 @@ function baseLead(overrides = {}) {
   }, overrides);
 }
 
-async function testSalesAndBookedBranches() {
+async function testBookedLeadSuppressesUltimateReminders() {
   const { db, api } = createHarness();
   const now = new Date('2026-06-05T08:00:00.000Z');
   db.items.push(
@@ -218,20 +212,18 @@ async function testSalesAndBookedBranches() {
   );
 
   const summary = await api.processTripPlannerDueEmails(now);
-  assert.equal(summary.sent, 2);
-  assert.equal(db.sentEmails.length, 2);
+  assert.equal(summary.sent, 1);
+  assert.equal(db.sentEmails.length, 1);
 
   const salesEmail = db.sentEmails.find((email) => email.contactId === 'contact-sales');
-  const bookedEmail = db.sentEmails.find((email) => email.contactId === 'contact-booked');
   assert.equal(salesEmail.messageId, 'sales-minus3-id');
   assert.equal(salesEmail.variables.isBooked, 'no');
-  assert.equal(bookedEmail.messageId, 'booked-minus3-id');
-  assert.equal(bookedEmail.variables.isBooked, 'yes');
-  assert(!db.sentEmails.some((email) => email.contactId === 'contact-booked' && email.messageId.startsWith('sales-')));
+  assert(!db.sentEmails.some((email) => email.contactId === 'contact-booked'));
 
   return {
     sent: summary.sent,
-    messages: db.sentEmails.map((email) => `${email.contactId}:${email.messageId}:${email.variables.isBooked}`)
+    messages: db.sentEmails.map((email) => `${email.contactId}:${email.messageId}:${email.variables.isBooked}`),
+    bookedSuppressed: !db.sentEmails.some((email) => email.contactId === 'contact-booked')
   };
 }
 
@@ -258,28 +250,23 @@ async function testInactiveBookingStatusUsesSalesBranch() {
   };
 }
 
-async function testMissingBookedMessageIdFailsClosed() {
-  const { db, api } = createHarness({ replaceBookedIds: false });
+async function testSelfReportedBookedSuppressesScheduledReminders() {
+  const { db, api } = createHarness();
   db.items.push(baseLead({
-    _id: 'lead-booked-missing-id',
-    email: 'booked-missing@example.com',
-    contactId: 'contact-booked-missing',
-    bookedAt: '2026-06-04T09:00:00.000Z',
-    bookingStatus: 'booked'
+    _id: 'lead-self-reported-booked',
+    email: 'self-reported@example.com',
+    contactId: 'contact-self-reported',
+    tourIntent: 'Already booked'
   }));
 
   const summary = await api.processTripPlannerDueEmails(new Date('2026-06-05T08:00:00.000Z'));
   assert.equal(summary.sent, 0);
   assert.equal(db.sentEmails.length, 0);
-  assert.equal(summary.stages.length, 1);
-  assert.equal(summary.stages[0].reason, 'missing_message_id');
-  assert.equal(summary.stages[0].booked, true);
 
   return {
     sent: summary.sent,
-    skipped: summary.skipped,
-    reason: summary.stages[0].reason,
-    booked: summary.stages[0].booked
+    messages: db.sentEmails.length,
+    suppressed: true
   };
 }
 
@@ -318,9 +305,9 @@ async function testBookingMarkerScopesByArrivalDate() {
 }
 
 const TESTS = [
-  ['sales and booked leads use separate minus3 IDs', testSalesAndBookedBranches],
+  ['booked leads suppress Ultimate reminders', testBookedLeadSuppressesUltimateReminders],
   ['cancelled booked markers use the sales branch', testInactiveBookingStatusUsesSalesBranch],
-  ['missing booked IDs skip instead of falling back', testMissingBookedMessageIdFailsClosed],
+  ['self-reported booked leads suppress scheduled reminders', testSelfReportedBookedSuppressesScheduledReminders],
   ['booking marker respects arrivalDate scope', testBookingMarkerScopesByArrivalDate]
 ];
 

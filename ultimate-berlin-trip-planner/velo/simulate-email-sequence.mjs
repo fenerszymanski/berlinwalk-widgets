@@ -20,14 +20,14 @@ function usage() {
   node ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs --arrival 2026-06-12 --signup 2026-06-01 --booked
   node ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs --arrival 2026-06-12 --job-date 2026-06-09 --hour 10
 
-Dry-run only. Shows how the 7/3/1/day-of scheduler should branch and skip.
+Dry-run only. Shows how the instant/7/3/1/day-of scheduler should send or skip.
 
 Options:
   --arrival DATE   Arrival date, YYYY-MM-DD. Default: 10 days from today.
   --signup DATE    Latest signup/update date, YYYY-MM-DD. Default: today.
   --job-date DATE  Optional scheduler run date to evaluate due stages.
   --hour HOUR      Berlin scheduler hour for --job-date. Default: 10.
-  --booked         Use booked/prep branch instead of sales branch.
+  --booked         Simulate an already-booked lead; future Ultimate reminders are suppressed.
   --out FILE       Write JSON to a specific path.
 `);
 }
@@ -116,11 +116,12 @@ function compareDates(left, right) {
 }
 
 function branchFor(options) {
-  return options.booked ? 'booked_prep' : 'sales_conversion';
+  return options.booked ? 'booked_suppressed_existing_sequence' : 'sales_conversion';
 }
 
 function messagePath(stage, options) {
-  return `${options.booked ? 'booked' : 'sales'}.${stage.key}`;
+  if (options.booked && stage.key !== 'instant') return `existing_booking_sequence.${stage.key}`;
+  return `sales.${stage.key}`;
 }
 
 function plannedStage(stage, options) {
@@ -134,8 +135,21 @@ function plannedStage(stage, options) {
       dueDate: options.signupDate,
       status: 'send_on_submit',
       note: options.booked
-        ? 'Immediate prep email; sales CTA suppressed.'
+        ? 'Immediate planner delivery can still send if the guest submits after booking; the existing booking sequence handles prep.'
         : 'Immediate plan delivery email; includes the tour CTA.'
+    };
+  }
+
+  if (options.booked) {
+    const dueDate = addDays(options.arrivalDate, stage.offset);
+    return {
+      stage: stage.key,
+      label: stage.label,
+      branch,
+      messagePath: messagePath(stage, options),
+      dueDate,
+      status: 'suppressed_after_booking',
+      note: 'Ultimate does not send booked-path prep emails. The existing Wix booking email sequence owns meeting-point, weather, and tour-day prep.'
     };
   }
 
@@ -153,10 +167,6 @@ function plannedStage(stage, options) {
   } else if (stage.key === 'dayOf') {
     status = 'scheduled_before_18';
     note = 'Arrival-day email is eligible only before 18:00 Berlin time.';
-  }
-
-  if (options.booked && status.startsWith('scheduled')) {
-    note += ' Booked branch uses meeting point, weather, and prep language.';
   }
 
   return {
@@ -208,7 +218,7 @@ function simulate(options) {
       'Instant sends at signup if the matching message ID exists.',
       'Scheduled reminders are skipped on the same Berlin date as the latest signup/update.',
       'Arrival-day email is eligible only before 18:00 Berlin time.',
-      'Booked leads use booked/prep message IDs and should not fall back to sales IDs.'
+      'Booked leads suppress future Ultimate reminders because the existing Wix booking sequence handles booked-guest prep.'
     ]
   };
 }

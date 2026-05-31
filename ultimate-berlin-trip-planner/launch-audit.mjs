@@ -78,7 +78,7 @@ function extractTemplateVariables(markdown) {
 function emailTemplateFiles() {
   const emailDir = path.join(widgetRoot, 'email');
   return fs.readdirSync(emailDir)
-    .filter((name) => /^(booked-)?e[0-9]-.*\.md$/.test(name))
+    .filter((name) => /^e[0-9]-.*\.md$/.test(name))
     .sort()
     .map((name) => path.join('ultimate-berlin-trip-planner/email', name));
 }
@@ -233,18 +233,13 @@ function run() {
     'ultimate-berlin-trip-planner/email/e1-seven-days-before.md',
     'ultimate-berlin-trip-planner/email/e2-three-days-before.md',
     'ultimate-berlin-trip-planner/email/e3-one-day-before.md',
-    'ultimate-berlin-trip-planner/email/e4-arrival-day.md',
-    'ultimate-berlin-trip-planner/email/booked-e0-instant-plan.md',
-    'ultimate-berlin-trip-planner/email/booked-e1-seven-days-before.md',
-    'ultimate-berlin-trip-planner/email/booked-e2-three-days-before.md',
-    'ultimate-berlin-trip-planner/email/booked-e3-one-day-before.md',
-    'ultimate-berlin-trip-planner/email/booked-e4-arrival-day.md'
+    'ultimate-berlin-trip-planner/email/e4-arrival-day.md'
   ];
   const missingTemplates = expectedTemplates.filter((template) => !exists(template));
   block(
-    'All 10 sales/booked email template drafts exist',
+    'All 5 planner email template drafts exist',
     missingTemplates.length === 0,
-    missingTemplates.length ? `Missing: ${missingTemplates.join(', ')}` : 'Sales and booked paths both have five drafts.'
+    missingTemplates.length ? `Missing: ${missingTemplates.join(', ')}` : 'Sales/nurture path has five drafts; booked guests stay in the existing booking sequence.'
   );
 
   const templateVars = unique(emailTemplateFiles().flatMap((template) => extractTemplateVariables(read(template))));
@@ -309,16 +304,11 @@ function run() {
     'TODO_TRIP_PLANNER_MINUS_7',
     'TODO_TRIP_PLANNER_MINUS_3',
     'TODO_TRIP_PLANNER_MINUS_1',
-    'TODO_TRIP_PLANNER_DAY_OF',
-    'TODO_TRIP_PLANNER_INSTANT_BOOKED',
-    'TODO_TRIP_PLANNER_MINUS_7_BOOKED',
-    'TODO_TRIP_PLANNER_MINUS_3_BOOKED',
-    'TODO_TRIP_PLANNER_MINUS_1_BOOKED',
-    'TODO_TRIP_PLANNER_DAY_OF_BOOKED'
+    'TODO_TRIP_PLANNER_DAY_OF'
   ]);
   block(
     'Paste-ready Wix email HTML package exists',
-    pasteReadyFiles.length === 10 && missingPasteReady.length === 0,
+    pasteReadyFiles.length === 5 && missingPasteReady.length === 0,
     missingPasteReady.length ? `Missing HTML files: ${missingPasteReady.join(', ')}` : `Manifest has ${pasteReadyFiles.length} templates.`
   );
   block(
@@ -358,7 +348,8 @@ function run() {
       /Copy checklist/.test(copyKit) &&
       /Ultimate Planner - Sales - Instant Plan/.test(setupChecklist) &&
       /Do not create automation workflows/.test(setupChecklist) &&
-      /TODO_TRIP_PLANNER_DAY_OF_BOOKED/.test(setupChecklist) &&
+      /existing booking email sequence/.test(setupChecklist) &&
+      !/TODO_TRIP_PLANNER_[A-Z0-9_]+_BOOKED/.test(copyKit) &&
       missingCopyKitPlaceholders.length === 0,
     missingCopyKitPlaceholders.length ? `Missing placeholders: ${missingCopyKitPlaceholders.join(', ')}` : 'copy-kit.html covers all template placeholders.'
   );
@@ -589,11 +580,12 @@ function run() {
       /--job-date/.test(sequenceSimulatorSource) &&
       /--booked/.test(sequenceSimulatorSource) &&
       /dueNow/.test(sequenceSimulatorSource) &&
-      /booked_prep/.test(sequenceSimulatorSource) &&
+      /booked_suppressed_existing_sequence/.test(sequenceSimulatorSource) &&
+      /suppressed_after_booking/.test(sequenceSimulatorSource) &&
       /sales_conversion/.test(sequenceSimulatorSource) &&
       /simulate-email-sequence\.mjs/.test(veloReadme) &&
       /cmd-sequence/.test(launchControlBuilder),
-    'Expected dry-run simulator for 7/3/1/day-of email schedule and booked/sales branch.'
+    'Expected dry-run simulator for 7/3/1/day-of email schedule and booked-lead suppression.'
   );
   block(
     'Velo booking endpoint exports are present',
@@ -631,26 +623,27 @@ function run() {
     'jobs.config should run processTripPlannerDueEmails hourly.'
   );
   block(
-    'Booked leads do not fall back to sales IDs',
-    /booked\s*\?\s*stage\.bookedMessageId\s*:\s*stage\.messageId/.test(funnel) &&
-      /raw\.indexOf\('TODO_'\)\s*!==\s*0/.test(funnel),
-    'Booked-path missing IDs should skip, not send sales email.'
+    'Booked leads suppress Ultimate reminders',
+    /shouldSuppressUltimateReminder/.test(funnel) &&
+      /booked_existing_sequence/.test(funnel) &&
+      !/bookedMessageId/.test(funnel),
+    'Existing Wix booking sequence should own booked-guest prep after booking.'
   );
   block(
-    'Inactive booking statuses suppress booked branch',
+    'Inactive booking statuses can re-enter pre-booking reminders',
     /cancelled/.test(funnel) && /refunded/.test(funnel) && /no-show/.test(funnel),
     'Expected cancelled/refunded/no-show handling in isBookedLead().'
   );
   block(
     'Booking-aware email behavior has a local fixture',
     /sales-minus3-id/.test(bookingAwareFixture) &&
-      /booked-minus3-id/.test(bookingAwareFixture) &&
-      /missing_message_id/.test(bookingAwareFixture) &&
+      /bookedSuppressed/.test(bookingAwareFixture) &&
+      /self-reported booked leads suppress/.test(bookingAwareFixture) &&
       /cancelled/.test(bookingAwareFixture) &&
       /markTripPlannerLeadBooked/.test(bookingAwareFixture) &&
       /ultimate-trip-planner-velo/.test(bookingAwareFixture) &&
       /booking-aware-fixture\.mjs/.test(veloReadme),
-    'Expected a local Wix mock fixture that proves sales/booked branching, fail-closed missing booked IDs, inactive statuses, and arrivalDate-scoped booking markers.'
+    'Expected a local Wix mock fixture that proves booked suppression, cancelled-status sales eligibility, self-reported booked suppression, and arrivalDate-scoped booking markers.'
   );
 
   const ultimateTool = findUltimateTool(toolsHub);

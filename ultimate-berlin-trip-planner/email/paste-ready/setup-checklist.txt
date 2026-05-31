@@ -1,7 +1,8 @@
 Ultimate Berlin Trip Planner Triggered Email Setup Checklist
 
 Use Wix Developer Tools -> Triggered Emails.
-Do not create automation workflows for these ten templates; Velo sends them by message ID.
+Do not create automation workflows for these five templates; Velo sends them by message ID.
+Do not create booked-path planner templates here; the existing booking email sequence already handles booked guests.
 
 For each item: create template -> paste name -> subject -> preheader -> HTML body -> save -> paste editor URL/message ID into copy-kit.html.
 
@@ -45,47 +46,7 @@ For each item: create template -> paste name -> subject -> preheader -> HTML bod
    HTML file: e4-arrival-day.html
    Wix editor URL / message ID:
 
-6. Ultimate Planner - Booked - Instant Plan
-   Branch/stage: booked.instant
-   Placeholder: TODO_TRIP_PLANNER_INSTANT_BOOKED
-   Subject: Your Berlin plan is ready - and your walk is in the right place
-   Preheader: Trip shape, meeting point, weather, and prep after booking.
-   HTML file: booked-e0-instant-plan.html
-   Wix editor URL / message ID:
-
-7. Ultimate Planner - Booked - 7 Days Before
-   Branch/stage: booked.minus7
-   Placeholder: TODO_TRIP_PLANNER_MINUS_7_BOOKED
-   Subject: One week before Berlin: your booked-walk prep
-   Preheader: Meeting point, trip shape, and what to leave flexible.
-   HTML file: booked-e1-seven-days-before.html
-   Wix editor URL / message ID:
-
-8. Ultimate Planner - Booked - 3 Days Before
-   Branch/stage: booked.minus3
-   Placeholder: TODO_TRIP_PLANNER_MINUS_3_BOOKED
-   Subject: Three days before Berlin: transport and first-day checks
-   Preheader: Ticket zone, opening-day traps, and meeting-point confidence.
-   HTML file: booked-e2-three-days-before.html
-   Wix editor URL / message ID:
-
-9. Ultimate Planner - Booked - 1 Day Before
-   Branch/stage: booked.minus1
-   Placeholder: TODO_TRIP_PLANNER_MINUS_1_BOOKED
-   Subject: Berlin tomorrow: ${weatherTitle}
-   Preheader: Weather, shoes, and the World Clock meeting point.
-   HTML file: booked-e3-one-day-before.html
-   Wix editor URL / message ID:
-
-10. Ultimate Planner - Booked - Arrival Day
-   Branch/stage: booked.dayOf
-   Placeholder: TODO_TRIP_PLANNER_DAY_OF_BOOKED
-   Subject: Welcome to Berlin - see you at the World Clock
-   Preheader: Final meeting point reminder and calm arrival-day logic.
-   HTML file: booked-e4-arrival-day.html
-   Wix editor URL / message ID:
-
-After all 10 URLs/IDs are collected:
+After all 5 URLs/IDs are collected:
 1. Paste them into copy-kit.html or download message-ids.local.json.
 2. Run: node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads
 3. Then source ../scripts/load-api-keys.sh and rerun with --write.

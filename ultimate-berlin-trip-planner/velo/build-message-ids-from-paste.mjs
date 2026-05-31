@@ -16,7 +16,7 @@ function usage() {
   pbpaste | node ultimate-berlin-trip-planner/velo/build-message-ids-from-paste.mjs --write
 
 Paste either:
-  - 10 raw Wix editor URLs / message IDs in manifest order
+  - 5 raw Wix editor URLs / message IDs in manifest order
   - lines containing placeholders, for example:
     TODO_TRIP_PLANNER_INSTANT: https://manage.wix.com/.../automations/edit/abc123/content/en
 

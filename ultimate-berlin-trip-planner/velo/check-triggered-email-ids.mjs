@@ -224,9 +224,9 @@ function printText(result) {
   console.log('');
   if (result.ok) {
     if (result.requireApplied) {
-      console.log('OK: all 10 IDs are valid and applied in tripPlannerFunnel.js.');
+      console.log(`OK: all ${result.summary.total} IDs are valid and applied in tripPlannerFunnel.js.`);
     } else {
-      console.log('OK: all 10 IDs are valid. Next dry-run apply-triggered-email-ids.mjs, then run with --write.');
+      console.log(`OK: all ${result.summary.total} IDs are valid. Next dry-run apply-triggered-email-ids.mjs, then run with --write.`);
     }
   } else if (!result.idsFileExists) {
     console.log('Next: create email/paste-ready/message-ids.local.json from the copy-kit JSON builder.');

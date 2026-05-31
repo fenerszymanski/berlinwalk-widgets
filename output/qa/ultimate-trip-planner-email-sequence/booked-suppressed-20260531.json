@@ -1,0 +1,64 @@
+{
+  "generatedAt": "2026-05-31T18:17:00.103Z",
+  "mode": "dry_run_email_sequence_simulator",
+  "arrivalDate": "2026-06-12",
+  "latestSignupDate": "2026-06-01",
+  "jobDate": "",
+  "berlinHour": 10,
+  "booked": true,
+  "branch": "booked_suppressed_existing_sequence",
+  "timeline": [
+    {
+      "stage": "instant",
+      "label": "Instant plan",
+      "branch": "booked_suppressed_existing_sequence",
+      "messagePath": "sales.instant",
+      "dueDate": "2026-06-01",
+      "status": "send_on_submit",
+      "note": "Immediate planner delivery can still send if the guest submits after booking; the existing booking sequence handles prep."
+    },
+    {
+      "stage": "minus7",
+      "label": "7 days before arrival",
+      "branch": "booked_suppressed_existing_sequence",
+      "messagePath": "existing_booking_sequence.minus7",
+      "dueDate": "2026-06-05",
+      "status": "suppressed_after_booking",
+      "note": "Ultimate does not send booked-path prep emails. The existing Wix booking email sequence owns meeting-point, weather, and tour-day prep."
+    },
+    {
+      "stage": "minus3",
+      "label": "3 days before arrival",
+      "branch": "booked_suppressed_existing_sequence",
+      "messagePath": "existing_booking_sequence.minus3",
+      "dueDate": "2026-06-09",
+      "status": "suppressed_after_booking",
+      "note": "Ultimate does not send booked-path prep emails. The existing Wix booking email sequence owns meeting-point, weather, and tour-day prep."
+    },
+    {
+      "stage": "minus1",
+      "label": "1 day before arrival",
+      "branch": "booked_suppressed_existing_sequence",
+      "messagePath": "existing_booking_sequence.minus1",
+      "dueDate": "2026-06-11",
+      "status": "suppressed_after_booking",
+      "note": "Ultimate does not send booked-path prep emails. The existing Wix booking email sequence owns meeting-point, weather, and tour-day prep."
+    },
+    {
+      "stage": "dayOf",
+      "label": "Arrival day before 18:00 Berlin time",
+      "branch": "booked_suppressed_existing_sequence",
+      "messagePath": "existing_booking_sequence.dayOf",
+      "dueDate": "2026-06-12",
+      "status": "suppressed_after_booking",
+      "note": "Ultimate does not send booked-path prep emails. The existing Wix booking email sequence owns meeting-point, weather, and tour-day prep."
+    }
+  ],
+  "dueNow": [],
+  "notes": [
+    "Instant sends at signup if the matching message ID exists.",
+    "Scheduled reminders are skipped on the same Berlin date as the latest signup/update.",
+    "Arrival-day email is eligible only before 18:00 Berlin time.",
+    "Booked leads suppress future Ultimate reminders because the existing Wix booking sequence handles booked-guest prep."
+  ]
+}

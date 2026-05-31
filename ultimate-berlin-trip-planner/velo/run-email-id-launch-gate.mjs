@@ -179,7 +179,7 @@ function printSummary(result, outPath) {
   console.log(`Evidence: ${relative(outPath)}`);
 
   if (result.ok && !result.write) {
-    console.log('Next: re-run with --write after confirming the 10 IDs are real.');
+    console.log('Next: re-run with --write after confirming the 5 IDs are real.');
   } else if (result.ok) {
     console.log('Next: paste/publish the Velo source in Wix, then run live smoke.');
   } else {

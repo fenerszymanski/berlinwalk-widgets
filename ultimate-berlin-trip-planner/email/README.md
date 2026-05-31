@@ -1,6 +1,6 @@
 # Ultimate Berlin Trip Planner Email Funnel
 
-Source copy for Wix Triggered Emails used by the booking-aware trip planner
+Source copy for Wix Triggered Emails used by the pre-booking trip planner
 sequence.
 
 Paste-ready HTML lives in `paste-ready/` and is generated from these markdown
@@ -15,10 +15,10 @@ paste the subject/preheader, paste the matching HTML block, then use
 `../velo/apply-triggered-email-ids.mjs` to validate and apply the resulting Wix
 messageIds into `../velo/tripPlannerFunnel.js`.
 
-Use the sales-path files while the lead has not booked. Use the `booked-*` files
-after the backend marks a matching lead as booked. If a booked-path Triggered
-Email ID has not been pasted into Velo yet, that stage is skipped instead of
-falling back to a sales email.
+Use these five files while the lead has not booked. Once the backend marks a
+matching lead as booked, Ultimate suppresses its future planner reminders and
+lets the existing BerlinWalk booking email sequence handle meeting-point,
+weather, and tour-day prep. Do not create a second booked-guest automation here.
 
 The instant and reminder emails intentionally reuse `${planHealth}`,
 `${preArrivalChecklist}`, `${baseBrief}`, `${budgetPulse}`,

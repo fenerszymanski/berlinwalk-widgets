@@ -84,7 +84,7 @@ function sourcePanel(item) {
 
 function checklistHtml(todoCount) {
   const idWarning = todoCount
-    ? `<li class="is-warning">Apply the 10 Triggered Email message IDs before pasting Velo. Current source still has <strong>${todoCount}</strong> TODO_TRIP_PLANNER placeholders.</li>`
+    ? `<li class="is-warning">Apply the 5 Triggered Email message IDs before pasting Velo. Current source still has <strong>${todoCount}</strong> TODO_TRIP_PLANNER placeholders.</li>`
     : '<li class="is-good">Triggered Email placeholders are gone in the generated source.</li>';
 
   return `
@@ -117,7 +117,7 @@ function prePublishPanel(todoCount) {
     'node ultimate-berlin-trip-planner/launch-audit.mjs'
   ].join('\n');
   const gateText = todoCount
-    ? 'Do not paste/publish Velo yet. Create the 10 Wix Triggered Email templates, bulk-paste their editor URLs in copy-kit.html, then run these commands.'
+    ? 'Do not paste/publish Velo yet. Create the 5 Wix Triggered Email templates, bulk-paste their editor URLs in copy-kit.html, then run these commands.'
     : 'The email IDs are applied. Run these commands once more before pasting the Velo source below.';
 
   return `
@@ -130,7 +130,7 @@ function prePublishPanel(todoCount) {
         ${copyButton('prepublish-commands', 'Copy gate commands')}
       </div>
       <p class="bw-target">${escapeHtml(gateText)}</p>
-      <p class="bw-note">The copy kit is at <code>ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html</code>. Its bulk box accepts all 10 Wix editor URLs in template order. If the JSON downloads to <code>~/Downloads</code>, the gate runner can import, validate, apply, regenerate, preflight, and audit in one dry-run-first flow. The <code>--write</code> apply step creates a timestamped local backup under <code>output/qa/ultimate-trip-planner-email-id-apply/</code>.</p>
+      <p class="bw-note">The copy kit is at <code>ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html</code>. Its bulk box accepts all 5 Wix editor URLs in template order. Booked guests stay in the existing booking email sequence, so do not create a second booked-path planner set. If the JSON downloads to <code>~/Downloads</code>, the gate runner can import, validate, apply, regenerate, preflight, and audit in one dry-run-first flow. The <code>--write</code> apply step creates a timestamped local backup under <code>output/qa/ultimate-trip-planner-email-id-apply/</code>.</p>
       <textarea id="prepublish-commands" readonly spellcheck="false">${escapeHtml(commands)}</textarea>
     </section>`;
 }

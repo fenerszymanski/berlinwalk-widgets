@@ -325,11 +325,11 @@
       <aside class="bw-status">
         <div>
           <p class="bw-kicker">Generated</p>
-          <p><strong>2026-05-31 13:58:20</strong></p>
+          <p><strong>2026-05-31 18:32:00</strong></p>
           <p class="bw-footer-note">Source folder: <code>ultimate-berlin-trip-planner/velo/</code></p>
         </div>
-        <div class="bw-alert">
-          Current Velo source still contains 10 Triggered Email placeholder IDs. Apply real IDs before live publish.
+        <div class="bw-alert is-good">
+          Triggered Email placeholders are gone in this generated source.
         </div>
       </aside>
     </section>
@@ -340,7 +340,7 @@
       
     <ol class="bw-checklist">
       <li>Run the pre-publish gate commands below from <code>berlinwalk-widgets/</code>.</li>
-      <li class="is-warning">Apply the 10 Triggered Email message IDs before pasting Velo. Current source still has <strong>10</strong> TODO_TRIP_PLANNER placeholders.</li>
+      <li class="is-good">Triggered Email placeholders are gone in the generated source.</li>
       <li>Confirm <code>TripPlannerLeads</code> passes remote preflight with all critical fields verified.</li>
       <li>Create <code>Backend/tripPlannerFunnel.js</code> in Wix and paste the full source below.</li>
       <li>Merge the <code>tripPlannerLead</code> and <code>tripPlannerBooking</code> handlers into live <code>Backend/http-functions.js</code>.</li>
@@ -359,8 +359,8 @@
         </div>
         <button class="bw-copy" type="button" data-copy-target="prepublish-commands">Copy gate commands</button>
       </div>
-      <p class="bw-target">Do not paste/publish Velo yet. Create the 10 Wix Triggered Email templates, bulk-paste their editor URLs in copy-kit.html, then run these commands.</p>
-      <p class="bw-note">The copy kit is at <code>ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html</code>. Its bulk box accepts all 10 Wix editor URLs in template order. If the JSON downloads to <code>~/Downloads</code>, the gate runner can import, validate, apply, regenerate, preflight, and audit in one dry-run-first flow. The <code>--write</code> apply step creates a timestamped local backup under <code>output/qa/ultimate-trip-planner-email-id-apply/</code>.</p>
+      <p class="bw-target">The email IDs are applied. Run these commands once more before pasting the Velo source below.</p>
+      <p class="bw-note">The copy kit is at <code>ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html</code>. Its bulk box accepts all 5 Wix editor URLs in template order. Booked guests stay in the existing booking email sequence, so do not create a second booked-path planner set. If the JSON downloads to <code>~/Downloads</code>, the gate runner can import, validate, apply, regenerate, preflight, and audit in one dry-run-first flow. The <code>--write</code> apply step creates a timestamped local backup under <code>output/qa/ultimate-trip-planner-email-id-apply/</code>.</p>
       <textarea id="prepublish-commands" readonly spellcheck="false">node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads
 source ../scripts/load-api-keys.sh
 node ultimate-berlin-trip-planner/velo/run-email-id-launch-gate.mjs --import-downloads --write
@@ -388,7 +388,7 @@ node ultimate-berlin-trip-planner/launch-audit.mjs</textarea>
       <p class="bw-target">Create this backend file in Wix Developer Tools.</p>
       <p class="bw-note">Paste the full source into a new Backend file named tripPlannerFunnel.js.</p>
       <div class="bw-meta">
-        <span>579 lines</span>
+        <span>588 lines</span>
         <span>19.1 KB</span>
         <span>tripPlannerFunnel.js</span>
       </div>
@@ -407,40 +407,35 @@ const STAGES = [
     offset: null,
     sentField: 'sentInstantAt',
     errorField: 'instantError',
-    messageId: 'TODO_TRIP_PLANNER_INSTANT',
-    bookedMessageId: 'TODO_TRIP_PLANNER_INSTANT_BOOKED'
+    messageId: 'VLDqhLM'
   },
   {
     key: 'minus7',
     offset: -7,
     sentField: 'sentMinus7At',
     errorField: 'minus7Error',
-    messageId: 'TODO_TRIP_PLANNER_MINUS_7',
-    bookedMessageId: 'TODO_TRIP_PLANNER_MINUS_7_BOOKED'
+    messageId: 'VLDvLj8'
   },
   {
     key: 'minus3',
     offset: -3,
     sentField: 'sentMinus3At',
     errorField: 'minus3Error',
-    messageId: 'TODO_TRIP_PLANNER_MINUS_3',
-    bookedMessageId: 'TODO_TRIP_PLANNER_MINUS_3_BOOKED'
+    messageId: 'VLDvnng'
   },
   {
     key: 'minus1',
     offset: -1,
     sentField: 'sentMinus1At',
     errorField: 'minus1Error',
-    messageId: 'TODO_TRIP_PLANNER_MINUS_1',
-    bookedMessageId: 'TODO_TRIP_PLANNER_MINUS_1_BOOKED'
+    messageId: 'VLDwKUu'
   },
   {
     key: 'dayOf',
     offset: 0,
     sentField: 'sentDayOfAt',
     errorField: 'dayOfError',
-    messageId: 'TODO_TRIP_PLANNER_DAY_OF',
-    bookedMessageId: 'TODO_TRIP_PLANNER_DAY_OF_BOOKED'
+    messageId: 'VLDwjZc'
   }
 ];
 
@@ -660,9 +655,12 @@ function isBookedLead(lead) {
 }
 
 function messageIdFor(stage, lead) {
-  const booked = isBookedLead(lead);
-  const raw = booked ? stage.bookedMessageId : stage.messageId;
+  const raw = stage.messageId;
   return raw &amp;&amp; raw.indexOf('TODO_') !== 0 ? raw : '';
+}
+
+function shouldSuppressUltimateReminder(lead, stage) {
+  return Boolean(stage &amp;&amp; stage.key !== 'instant' &amp;&amp; isBookedLead(lead));
 }
 
 function emailVariables(lead, stage) {
@@ -726,6 +724,16 @@ function emailVariables(lead, stage) {
 }
 
 async function sendStageEmail(lead, stage, now) {
+  if (shouldSuppressUltimateReminder(lead, stage)) {
+    return {
+      sent: false,
+      skipped: true,
+      reason: 'booked_existing_sequence',
+      stage: stage.key,
+      booked: true
+    };
+  }
+
   const messageId = messageIdFor(stage, lead);
   if (!messageId) {
     return {
@@ -869,6 +877,7 @@ export async function saveTripPlannerLead(payload) {
 
 function stageDueForLead(lead, stage, berlinToday, berlinHour) {
   if (!lead || stage.key === 'instant' || lead[stage.sentField]) return false;
+  if (shouldSuppressUltimateReminder(lead, stage)) return false;
   if (!lead.arrivalDate || stage.offset === null) return false;
   const dueDate = addDays(lead.arrivalDate, stage.offset);
   if (dueDate !== berlinToday) return false;
