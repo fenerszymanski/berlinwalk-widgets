@@ -1,6 +1,7 @@
 /* Auto-generated from /faq/data.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
+  "brandenburg-gate-berlin-visitors-guide": "brandenburg-gate",
   "shopping-in-berlin": "shopping-in-berlin",
   "is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026": "pergamon-closed",
   "5-mistakes-tourists-make-at-alexanderplatz": "alex-mistakes",
@@ -51,6 +52,60 @@
 };
 
   var SCHEMAS = {
+  "brandenburg-gate": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Brandenburg Gate free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Brandenburg Gate is an outdoor monument on Pariser Platz. It is free, open 24 hours a day, and there is no ticket and nothing to book. You can walk right up to it at any time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you get to the Brandenburg Gate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take the U5 underground or the S-Bahn (S1, S2, S25, or S26) to Brandenburger Tor station, which exits right at the gate. You can also ride Bus 100, which passes along Unter den Linden, or simply walk west along Unter den Linden from Museum Island."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do you need at the Brandenburg Gate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "About 20 to 30 minutes is enough to see the gate, the Quadriga, and Pariser Platz. It is a quick, symbolic stop, so plan to combine it with the Reichstag, the Holocaust Memorial, and Tiergarten, which are all a short walk away."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is near the Brandenburg Gate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Reichstag is two minutes north, the Memorial to the Murdered Jews of Europe is one minute south, Tiergarten park begins right behind it, and Unter den Linden runs east toward Museum Island and Alexanderplatz. It is one of the densest clusters of landmarks in Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best time to photograph the Brandenburg Gate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Come at sunrise or during the blue hour just after sunset. The square is nearly empty and the light is soft. Midday is crowded with tour groups and the light is flat, so avoid it if you want a clean photo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the Brandenburg Gate famous?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It was built in 1791 as a Prussian triumphal arch, but it became world famous as the symbol of a divided Berlin. For nearly three decades it stood stranded in the death strip behind the Berlin Wall, unreachable from either side. When the gate's crossing reopened on 22 December 1989, it became the defining image of German reunification."
+        }
+      }
+    ]
+  },
   "shopping-in-berlin": {
     "@context": "https://schema.org",
     "@type": "FAQPage",

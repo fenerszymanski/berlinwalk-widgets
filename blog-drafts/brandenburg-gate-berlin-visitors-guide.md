@@ -2,9 +2,11 @@
 
 Slug idea: `brandenburg-gate-berlin-visitors-guide`
 
-Wix draft ID: `TBD`
+Wix draft ID: `400e4670-e4df-4b2f-a252-067338a69af9`
 
 Wix draft status: `UNPUBLISHED`
+
+Image/SEO status: Wix draft patched on 2026-06-01 with four licensed images via `berlinwalk-content-app/add-brandenburg-blog-images.mjs`. Cover/featured/OG/Twitter image: blue-hour Brandenburg Gate (CC0). Inline images: Pariser Platz day (CC BY-SA 3.0), Berlin Wall crane 1989 (public domain), Quadriga close-up (CC BY 2.0). Image credits appended in the Wix draft body; alt text, focus keyword "Brandenburg Gate", SEO keywords, meta description, excerpt, and Wix Blog tags (Brandenburg Gate / Berlin Landmarks / Berlin Travel Tips) are filled.
 
 Meta title: Brandenburg Gate Berlin: A Visitor's Guide (2026)
 

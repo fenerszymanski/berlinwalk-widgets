@@ -98,6 +98,58 @@ const BW_BOOKING_CALENDAR_STYLES = `
     text-transform: uppercase;
   }
 
+  .bw-cal-date-row {
+    align-items: stretch;
+    display: grid;
+    gap: 6px;
+    grid-template-columns: 30px minmax(0, 1fr) 30px;
+    min-width: 0;
+  }
+
+  .bw-cal-date-viewport {
+    min-width: 0;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .bw-cal-date-viewport::after {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.96));
+    bottom: 4px;
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 1px;
+    width: 22px;
+  }
+
+  .bw-cal-date-nav {
+    appearance: none;
+    align-items: center;
+    background: #F8FBF4;
+    border: 1px solid #CFE4C8;
+    border-radius: 8px;
+    color: var(--green);
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 22px;
+    font-weight: 800;
+    justify-content: center;
+    line-height: 1;
+    min-width: 0;
+  }
+
+  .bw-cal-date-nav:hover,
+  .bw-cal-date-nav:focus-visible {
+    background: #EEF7EA;
+    border-color: var(--green);
+  }
+
+  .bw-cal-date-nav:disabled {
+    cursor: default;
+    opacity: 0.34;
+  }
+
   .bw-cal-days {
     display: flex;
     gap: 7px;
@@ -105,8 +157,23 @@ const BW_BOOKING_CALENDAR_STYLES = `
     min-width: 0;
     overflow-x: auto;
     padding: 1px 0 4px;
+    scroll-behavior: smooth;
     scrollbar-width: thin;
+    scrollbar-color: #BFD8B8 transparent;
     width: 100%;
+  }
+
+  .bw-cal-days::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .bw-cal-days::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .bw-cal-days::-webkit-scrollbar-thumb {
+    background: #BFD8B8;
+    border-radius: 999px;
   }
 
   .bw-cal-day,
@@ -438,9 +505,17 @@ class BWBookingCalendarElement extends HTMLElement {
             ${error ? `<div class="bw-cal-message">${this._escape(error)}</div>` : ''}
             <div>
               <span class="bw-cal-label">Date</span>
-              <div class="bw-cal-days">
-                ${dates.length ? dates.map((date) => this._dayButton(date)).join('') : '<div class="bw-cal-empty">No available dates found.</div>'}
-              </div>
+              ${dates.length ? `
+                <div class="bw-cal-date-row">
+                  <button class="bw-cal-date-nav" type="button" data-action="scroll-days" data-direction="-1" aria-label="Show earlier dates">&lsaquo;</button>
+                  <div class="bw-cal-date-viewport">
+                    <div class="bw-cal-days" data-days>
+                      ${dates.map((date) => this._dayButton(date)).join('')}
+                    </div>
+                  </div>
+                  <button class="bw-cal-date-nav" type="button" data-action="scroll-days" data-direction="1" aria-label="Show later dates">&rsaquo;</button>
+                </div>
+              ` : '<div class="bw-cal-empty">No available dates found.</div>'}
             </div>
             <div>
               <span class="bw-cal-label">Time</span>
@@ -466,6 +541,7 @@ class BWBookingCalendarElement extends HTMLElement {
     `;
 
     this._bind();
+    this._scrollSelectedDateIntoView();
     this._postResize();
   }
 
@@ -497,6 +573,21 @@ class BWBookingCalendarElement extends HTMLElement {
       });
     });
 
+    this.querySelectorAll('[data-action="scroll-days"]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const days = this.querySelector('[data-days]');
+        if (!days) return;
+        const direction = Number(button.getAttribute('data-direction') || 1);
+        const firstDay = days.querySelector('.bw-cal-day');
+        const step = ((firstDay?.offsetWidth || 62) + 7) * 2;
+        days.scrollBy({ left: direction * step, behavior: 'smooth' });
+      });
+    });
+
+    const days = this.querySelector('[data-days]');
+    if (days) days.addEventListener('scroll', () => this._syncDayNav(), { passive: true });
+    this._syncDayNav();
+
     const continueLink = this.querySelector('[data-action="continue"]');
     if (continueLink) {
       continueLink.addEventListener('click', (event) => {
@@ -512,6 +603,25 @@ class BWBookingCalendarElement extends HTMLElement {
         if (!shouldContinue) event.preventDefault();
       });
     }
+  }
+
+  _scrollSelectedDateIntoView() {
+    window.requestAnimationFrame(() => {
+      const selected = this.querySelector('.bw-cal-day.is-active');
+      if (selected) selected.scrollIntoView({ block: 'nearest', inline: 'center' });
+      this._syncDayNav();
+    });
+  }
+
+  _syncDayNav() {
+    const days = this.querySelector('[data-days]');
+    if (!days) return;
+    const maxScroll = days.scrollWidth - days.clientWidth;
+    this.querySelectorAll('[data-action="scroll-days"]').forEach((button) => {
+      const direction = Number(button.getAttribute('data-direction') || 1);
+      const disabled = maxScroll <= 1 || (direction < 0 ? days.scrollLeft <= 1 : days.scrollLeft >= maxScroll - 1);
+      button.disabled = disabled;
+    });
   }
 
   _availableDates() {
