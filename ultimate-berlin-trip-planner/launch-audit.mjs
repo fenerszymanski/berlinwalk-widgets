@@ -242,6 +242,10 @@ function run() {
   const firstDayBlocksSource = indexHtml.slice(indexHtml.indexOf('function firstDayBlocks'), indexHtml.indexOf('function dayTemplate'));
   const dayTemplateSource = indexHtml.slice(indexHtml.indexOf('function dayTemplate'), indexHtml.indexOf('function dayKeys'));
   const dayClosePlanSource = indexHtml.slice(indexHtml.indexOf('function dayClosePlan'), indexHtml.indexOf('function dayCloseHtml'));
+  const renderPlanSource = indexHtml.slice(indexHtml.indexOf('function renderPlan()'), indexHtml.indexOf('function renderFullPlan()'));
+  const renderFullPlanSource = indexHtml.slice(indexHtml.indexOf('function renderFullPlan()'), indexHtml.indexOf('function renderEssentials'));
+  const downloadSimplePdfSource = indexHtml.slice(indexHtml.indexOf('async function downloadSimplePdf'), indexHtml.indexOf('async function downloadPdf'));
+  const printPlanSource = indexHtml.slice(indexHtml.indexOf('function printPlan()'), indexHtml.indexOf('function initFromParams'));
   const firstDayBlockCopies = [...firstDayBlocksSource.matchAll(/'([^']{20,})'/g)]
     .map((match) => match[1])
     .filter((copy) => /^[A-Z]/.test(copy) && !/^Get central|^Use the tour|^Dinner/.test(copy));
@@ -983,12 +987,15 @@ function run() {
     'Expected a visual Start/Tour/Finish layer above the itinerary overview.'
   );
   block(
-    'Trip highlights reach text, print, and PDF exports',
-    /Trip highlights[\s\S]*tripHighlightItems\(plan\)\.forEach/.test(indexHtml) &&
-      /tripHighlightsPrintHtml/.test(indexHtml) &&
-      /function\s+drawPdfTripHighlights/.test(indexHtml) &&
-      /drawPdfTripHighlights\(\);/.test(indexHtml),
-    'Expected the Start/Tour/Finish visual layer beyond the screen UI.'
+    'Simple V2 exports stay focused',
+    /function\s+downloadSimplePdf/.test(indexHtml) &&
+      /await\s+downloadSimplePdf\(api\);\s*return;/.test(indexHtml) &&
+      /format:\s*'simple_v2'/.test(indexHtml) &&
+      /BERLINWALK|berlinwalk\.com/.test(downloadSimplePdfSource) &&
+      /Berlin essentials/.test(indexHtml) &&
+      !/sectionTitle\('Optional guided walk'/.test(downloadSimplePdfSource) &&
+      !/simpleTourHtml/.test(printPlanSource),
+    'Expected the active PDF/print path to use the simplified day-by-day export; tour guidance should appear naturally inside day blocks.'
   );
   block(
     'Trip radar gives a visual plan health summary',
@@ -1003,13 +1010,15 @@ function run() {
     'Expected a compact score/tour/openings/next-action panel before the Trip Pass.'
   );
   block(
-    'Trip radar reaches text, print, and PDF exports',
-    /function\s+tripRadarSummary/.test(indexHtml) &&
-      /Trip radar[\s\S]*tripRadarSummary\(plan\)/.test(indexHtml) &&
-      /tripRadarPrintHtml/.test(indexHtml) &&
-      /function\s+drawPdfTripRadar/.test(indexHtml) &&
-      /drawPdfTripRadar\(\)/.test(indexHtml),
-    'Expected the new score/action panel to appear beyond the screen UI.'
+    'Tour recommendation flows naturally in result plan',
+    /function\s+firstDayBlocks\(\)/.test(indexHtml) &&
+      /BerlinWalk/.test(firstDayBlocksSource) &&
+      /Use the walking tour as your first city framework/.test(firstDayBlocksSource) &&
+      !/renderTourActions\(plan\)/.test(renderPlanSource) &&
+      !/tourDayMarkerHtml\(day,\s*plan\)/.test(renderFullPlanSource) &&
+      !/tourMiniHtml\(day,\s*plan\)/.test(renderPlanSource) &&
+      !/data-book-link/.test(renderPlanSource),
+    'Expected BerlinWalk to appear as the first useful itinerary recommendation, without a standalone widget CTA card.'
   );
   block(
     'Trip command strip gives immediate map and action anchors',

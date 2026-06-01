@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-05-31 — Codex (Ultimate CTA/photo correction)
+
+**Did:** Corrected the simplified Ultimate widget after Yusuf clarified that BerlinWalk should be a natural itinerary recommendation, not a standalone in-widget CTA.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — hid the empty tour action slot, removed standalone tour CTA rendering from the active flow, restored the Day 1 `BerlinWalk` itinerary block at the first feasible `11:30` slot, and kept PDF/print free of optional tour-card sections.
+- `ultimate-berlin-trip-planner/assets/sanssouci-palace-potsdam.jpg` and `ultimate-berlin-trip-planner/ASSET_SOURCES.md` — added a sourced public-domain Sanssouci Palace image for the Potsdam/slow-day card.
+- `ultimate-berlin-trip-planner/launch-audit.mjs`, `build-launch-status-report.mjs`, `UX_REVISION_HOLD.md`, and `LAUNCH_STATUS.*` — keep the simplified-UX hold active; latest audit is `139 pass, 0 warn, 0 block`.
+
+**Opened:** Continue UX simplification before republishing the SEO blog; the local widget still needs Yusuf's final acceptance before push/live promotion.
+**Closed:** Standalone visible tour CTA is gone from active UI/PDF/print; Wall, food, local, and Potsdam photo mismatches are corrected locally.
+
+**Next session should:** Review the local `simple-v2` planner in the browser with Yusuf, then decide whether the remaining form/result density is calm enough to push.
+
 ## 2026-05-31 — Codex (Monthly placement/widgets updated)
 
 **Did:** Updated the local widgets that surface the monthly Berlin guides across posts, `/blog`, and the homepage.

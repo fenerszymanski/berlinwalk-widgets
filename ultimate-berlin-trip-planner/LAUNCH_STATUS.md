@@ -1,8 +1,8 @@
 # Ultimate Berlin Trip Planner Launch Status
 
-Generated: 2026-05-31T19:21:09.054Z
+Generated: 2026-05-31T20:32:15.062Z
 
-## Verdict: PUBLIC TOOL LIVE - HOMEPAGE HELD
+## Verdict: PUBLIC TOOL LIVE - UX REVISION OPEN
 
 Launch audit: 139 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 
@@ -16,7 +16,8 @@ Launch audit: 139 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 | Live lead/booking smoke | PASS | output/qa/ultimate-trip-planner-live-smoke/live-2026-05-31T18-57-06-052Z.json |
 | Live Wix tool page | PASS | Latest remote preflight status 200. |
 | Public visibility | PASS | Ultimate is public in tools-hub. |
-| Homepage shortcut | HOLD | Homepage shortcut is not enabled yet. |
+| Homepage shortcut | PASS | Ultimate appears in tools-home/data.json. |
+| UX revision | HOLD | Yusuf flagged the live widget as too complex and too promotional; simplify the planner before treating the SEO blog/post launch as finished. (ultimate-berlin-trip-planner/UX_REVISION_HOLD.md) |
 | SEO blog package | PASS | Body draft has widget/summary/FAQ placeholders. |
 | Wix Blog draft | PASS | Draft b1915fa5-dfcf-4427-bcfc-d9a6665208e7 is created but unpublished. |
 
@@ -24,7 +25,7 @@ Launch audit: 139 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 
 - Latest remote preflight: `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T19-20-51-073Z.json`
 - Latest passing live smoke: `output/qa/ultimate-trip-planner-live-smoke/live-2026-05-31T18-57-06-052Z.json`
-- Visibility: public, homepage shortcut not enabled
+- Visibility: public, homepage shortcut enabled
 - Widget URL: https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/
 - Blog package: body draft exists; widget near top yes; quick summary yes; FAQ yes
 - Wix Blog draft: b1915fa5-dfcf-4427-bcfc-d9a6665208e7 (https://manage.wix.com/dashboard/12ee5ea0-70a7-492f-8020-ffb27cbb630f/blog/drafts/b1915fa5-dfcf-4427-bcfc-d9a6665208e7/edit)
@@ -35,8 +36,8 @@ Launch audit: 139 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 
 ## Next Actions
 
-1. QA the live /tools/ultimate-berlin-trip-planner page and /widgets listing after pushing repo changes.
-2. Add the homepage shortcut later with release-visibility.mjs --write --include-home --regenerate-widgets-seo only after final page QA.
+1. Keep the Wix Blog post unpublished while the widget UX is simplified.
+2. Continue local QA on the simpler planner, especially mobile result density and PDF layout.
 
 ## Command Shortcuts
 

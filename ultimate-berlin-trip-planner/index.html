@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ultimate Berlin Trip Planner | BerlinWalk</title>
-  <meta name="description" content="Build a realistic Berlin itinerary before you arrive, with arrival-date logic, weather, opening-day notes, and the best time to join BerlinWalk.">
+  <meta name="description" content="Build a simple, realistic Berlin itinerary before you arrive, with arrival-date logic, weather, opening-day notes, maps, and Berlin essentials.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -67,6 +67,31 @@
       border-radius: 8px;
       box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
       overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-control-panel,
+    #bw-trip-planner .bw-mobile-peek,
+    #bw-trip-planner .bw-input-guide,
+    #bw-trip-planner .bw-trip-presets,
+    #bw-trip-planner [data-trip-command-strip],
+    #bw-trip-planner [data-trip-radar],
+    #bw-trip-planner [data-trip-pass],
+    #bw-trip-planner [data-arrival-playbook],
+    #bw-trip-planner [data-trip-highlights],
+    #bw-trip-planner [data-trip-load-map],
+    #bw-trip-planner [data-planner-logic],
+    #bw-trip-planner [data-place-passport],
+    #bw-trip-planner [data-carry-pack],
+    #bw-trip-planner [data-route-deck],
+    #bw-trip-planner .bw-visual-board,
+    #bw-trip-planner .bw-reminder-flow,
+    #bw-trip-planner .bw-tour-day-marker,
+    #bw-trip-planner .bw-tour-mini,
+    #bw-trip-planner .bw-day-intel,
+    #bw-trip-planner .bw-day-rhythm,
+    #bw-trip-planner .bw-day-ops,
+    #bw-trip-planner .bw-route-reel {
+      display: none !important;
     }
 
     #bw-trip-planner .bw-head {
@@ -8098,7 +8123,7 @@
       <div class="bw-head-copy">
         <p class="bw-kicker">BerlinWalk local planner</p>
         <h1 id="bw-trip-title" class="bw-title">Ultimate Berlin Trip Planner</h1>
-        <p class="bw-sub">Plan 1 to 7 Berlin days around arrival date, weather, opening rules, interests, pace, and the best BerlinWalk tour slot.</p>
+        <p class="bw-sub">Answer a few basics and get a realistic 1 to 7 day Berlin plan with weather, opening-day notes, map links, and practical first-day guidance.</p>
         <div class="bw-head-chip-row" aria-label="Planner features">
           <span class="bw-head-chip" aria-label="1 to 7 day plan"><span class="bw-head-chip-icon" aria-hidden="true">7</span>1-7 day plan</span>
           <span class="bw-head-chip" aria-label="Google Maps links"><span class="bw-head-chip-icon" aria-hidden="true">MAP</span>Google Maps links</span>
@@ -8113,7 +8138,7 @@
           <div class="bw-head-route" aria-hidden="true">
             <b>World Clock</b><i></i><b>Museum Island</b><i></i><b>Finish</b>
           </div>
-          <span>Arrival setup, tour anchor, maps, weather, and Berlin essentials in one plan.</span>
+          <span>Arrival setup, daily areas, maps, weather, and Berlin essentials in one plan.</span>
         </figcaption>
       </figure>
     </header>
@@ -8153,7 +8178,7 @@
         <div class="bw-question">
           <span class="bw-label">Arrival time</span>
           <div class="bw-options cols-4" data-group="arrivalTime">
-            <button class="bw-option active" type="button" data-value="morning"><span class="bw-opt-icon">AM</span><span class="bw-opt-copy"><span class="bw-opt-title">Before 10:30</span><span class="bw-opt-sub">Tour may fit today</span></span></button>
+            <button class="bw-option active" type="button" data-value="morning"><span class="bw-opt-icon">AM</span><span class="bw-opt-copy"><span class="bw-opt-title">Before 10:30</span><span class="bw-opt-sub">Good first route</span></span></button>
             <button class="bw-option" type="button" data-value="midday"><span class="bw-opt-icon">MD</span><span class="bw-opt-copy"><span class="bw-opt-title">10:30-14:30</span><span class="bw-opt-sub">Light first day</span></span></button>
             <button class="bw-option" type="button" data-value="afternoon"><span class="bw-opt-icon">PM</span><span class="bw-opt-copy"><span class="bw-opt-title">14:30-18:00</span><span class="bw-opt-sub">Evening setup</span></span></button>
             <button class="bw-option" type="button" data-value="evening"><span class="bw-opt-icon">EV</span><span class="bw-opt-copy"><span class="bw-opt-title">After 18:00</span><span class="bw-opt-sub">Keep it calm</span></span></button>
@@ -8185,7 +8210,7 @@
           <summary class="bw-advanced-summary">
             <span>
               <strong class="bw-advanced-title">Fine-tune the plan</strong>
-              <span class="bw-advanced-copy" data-advanced-summary>Group, interests, pace, and backups use smart defaults.</span>
+              <span class="bw-advanced-copy" data-advanced-summary>Interests, pace, budget, and backups are optional.</span>
             </span>
             <span class="bw-advanced-toggle" aria-hidden="true"></span>
           </summary>
@@ -8251,12 +8276,12 @@
           </div>
         </details>
 
-        <div class="bw-question">
-          <span class="bw-label">BerlinWalk tour status</span>
+        <div class="bw-question" data-tour-intent-question hidden>
+          <span class="bw-label">Walking tour</span>
           <div class="bw-options cols-3" data-group="tourIntent">
-            <button class="bw-option active" type="button" data-value="considering"><span class="bw-opt-icon">GO</span><span class="bw-opt-copy"><span class="bw-opt-title">Considering</span><span class="bw-opt-sub">Show best timing</span></span></button>
-            <button class="bw-option" type="button" data-value="booked"><span class="bw-opt-icon">OK</span><span class="bw-opt-copy"><span class="bw-opt-title">Already booked</span><span class="bw-opt-sub">Prep me instead</span></span></button>
-            <button class="bw-option" type="button" data-value="maybe"><span class="bw-opt-icon">?</span><span class="bw-opt-copy"><span class="bw-opt-title">Not sure</span><span class="bw-opt-sub">Keep optional</span></span></button>
+            <button class="bw-option active" type="button" data-value="considering"><span class="bw-opt-icon">NO</span><span class="bw-opt-copy"><span class="bw-opt-title">Not booked yet</span><span class="bw-opt-sub">Keep one good slot</span></span></button>
+            <button class="bw-option" type="button" data-value="booked"><span class="bw-opt-icon">OK</span><span class="bw-opt-copy"><span class="bw-opt-title">Already booked</span><span class="bw-opt-sub">Show prep notes</span></span></button>
+            <button class="bw-option" type="button" data-value="maybe"><span class="bw-opt-icon">?</span><span class="bw-opt-copy"><span class="bw-opt-title">Not sure</span><span class="bw-opt-sub">Keep it light</span></span></button>
           </div>
         </div>
       </form>
@@ -8270,7 +8295,7 @@
           <p class="bw-summary" data-result-summary></p>
           <div class="bw-status-grid">
             <div class="bw-status">
-              <span class="bw-status-label">Tour fit</span>
+              <span class="bw-status-label">Plan style</span>
               <span class="bw-status-value" data-tour-fit>Checking</span>
             </div>
             <div class="bw-status">
@@ -8321,13 +8346,13 @@
 
           <div class="bw-lock bw-locked-only" data-lock-box>
             <strong class="bw-lock-title">Send the phone-ready plan</strong>
-            <p>Preview is open. Email unlocks the full itinerary, PDF, print view, map actions, and arrival-date reminders.</p>
+            <p>Preview is open. Email unlocks the full itinerary, PDF, print view, map links, and a few arrival reminders.</p>
           </div>
 
           <div class="bw-lead-panel bw-locked-only" data-lead-panel>
             <div>
               <h3 class="bw-lead-title">Send me the phone-ready plan + PDF</h3>
-              <p class="bw-lead-copy">You will get this plan now, then short Berlin reminders before arrival. If you book the tour, the sequence switches to prep instead of sales.</p>
+              <p class="bw-lead-copy">You will get this plan now, then a few short Berlin reminders before arrival. Useful, practical, and easy to unsubscribe from.</p>
             </div>
             <div class="bw-delivery-grid" aria-label="What unlocks with email">
               <div class="bw-delivery-item"><span class="bw-delivery-icon"><svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg></span><span><strong>PDF</strong><span>Printable trip plan</span></span></div>
@@ -8337,12 +8362,12 @@
             </div>
             <div class="bw-reminder-flow" aria-label="Arrival reminder timeline">
               <div class="bw-reminder-head">
-                <div><strong>Arrival reminder timeline</strong><span data-reminder-subtitle>Short, useful nudges before Berlin. Booked guests get prep instead of sales.</span></div>
+                <div><strong>Arrival reminder timeline</strong><span data-reminder-subtitle>Short, useful nudges before Berlin.</span></div>
                 <span class="bw-reminder-pill"><svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M8 2v4"/><path d="M16 2v4"/><path d="M3 10h18"/><path d="M5 4h14a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg><span data-reminder-count>Up to 5 emails</span></span>
               </div>
               <div class="bw-reminder-rail" data-reminder-rail>
                 <div class="bw-reminder-step"><span class="bw-reminder-dot"><svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M4 4h16v16H4z"/><path d="M8 8h8"/><path d="M8 12h8"/><path d="M8 16h5"/></svg></span><b>Now</b><span>Plan + PDF</span></div>
-                <div class="bw-reminder-step"><span class="bw-reminder-dot"><svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><b>7 days</b><span>Tour slot</span></div>
+                <div class="bw-reminder-step"><span class="bw-reminder-dot"><svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><b>7 days</b><span>Plan check</span></div>
                 <div class="bw-reminder-step"><span class="bw-reminder-dot"><svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 2v20"/><path d="M5 7h14"/><path d="M7 17h10"/></svg></span><b>3 days</b><span>Route check</span></div>
                 <div class="bw-reminder-step"><span class="bw-reminder-dot"><svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M7 7h10"/><path d="M7 12h10"/><path d="M7 17h6"/><rect x="4" y="3" width="16" height="18" rx="2"/></svg></span><b>1 day</b><span>Openings</span></div>
                 <div class="bw-reminder-step"><span class="bw-reminder-dot"><svg class="bw-svg-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M12 21s7-5.2 7-12a7 7 0 0 0-14 0c0 6.8 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg></span><b>Arrival</b><span>World Clock</span></div>
@@ -8358,13 +8383,12 @@
           </div>
 
           <div class="bw-actions">
-            <a class="bw-primary" data-book-link href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=ultimate_berlin_trip_planner&utm_content=book_free_spot" target="_top" rel="noopener">Book free tour</a>
             <button class="bw-secondary" type="button" data-copy-plan-link>Copy plan link</button>
             <a class="bw-secondary" data-share-whatsapp href="#" target="_blank" rel="noopener" aria-label="Share this Berlin plan on WhatsApp">WhatsApp</a>
             <button class="bw-secondary" type="button" data-download-pdf disabled>Download PDF</button>
             <button class="bw-secondary" type="button" data-print-plan disabled>Print plan</button>
           </div>
-          <div class="bw-tour-actions" data-tour-actions></div>
+          <div class="bw-tour-actions" data-tour-actions hidden></div>
           <div class="bw-message" data-action-status aria-live="polite"></div>
         </div>
       </aside>
@@ -8422,13 +8446,13 @@
   var UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
   var DAY_PHOTOS = {
     arrival: { src: '../gallery/images/06-400w.jpg', alt: 'Alexanderplatz and the World Clock' },
-    wall: { src: '../gallery/images/10-400w.jpg', alt: 'Berlin route detail and city texture' },
+    wall: { src: '../blog-drafts/images/berlin-in-november/03-fall-of-wall-1989.jpg', alt: 'Berlin Wall and Brandenburg Gate in 1989' },
     museums: { src: '../gallery/images/07-400w.jpg', alt: 'Museum Island and Berlin Cathedral' },
-    food: { src: '../gallery/images/11-400w.jpg', alt: 'Berlin station arcade in the evening' },
+    food: { src: '../blog-drafts/assets/hackescher-after-tour/02-food-under-sbahn-arches-hackescher-markt.jpg', alt: 'Food and cafe tables under the S-Bahn arches near Hackescher Markt' },
     free: { src: '../gallery/images/12-400w.jpg', alt: 'Central Berlin public monument and cathedral view' },
-    nightlife: { src: '../gallery/images/11-400w.jpg', alt: 'Berlin station arcade in the evening' },
-    local: { src: '../gallery/images/15-400w.jpg', alt: 'Berlin neighborhood church and square' },
-    potsdam: { src: '../gallery/images/04-400w.jpg', alt: 'Classical colonnade and open walking space' }
+    nightlife: { src: '../gallery/images/11-400w.jpg', alt: 'Hackescher Markt S-Bahn arches in the evening' },
+    local: { src: '../blog-drafts/assets/hackescher-after-tour/05-streets-near-hackescher-markt.jpg', alt: 'Side street near Hackescher Markt with cafes and old Berlin facades' },
+    potsdam: { src: 'assets/sanssouci-palace-potsdam.jpg', alt: 'Sanssouci Palace and park in Potsdam' }
   };
   var BERLIN_ONE_OFF_HOLIDAYS = {
     '2028-06-17': '17 June one-off public holiday'
@@ -8554,7 +8578,7 @@
   var consentTracked = false;
 
   var PLACE_CATALOG = {
-    world_clock: { label: 'World Clock', query: 'Weltzeituhr Alexanderplatz Berlin', area: 'Alexanderplatz', type: 'meeting point', lat: 52.521918, lng: 13.413215, why: 'BerlinWalk meeting point and the easiest central orientation anchor.' },
+    world_clock: { label: 'World Clock', query: 'Weltzeituhr Alexanderplatz Berlin', area: 'Alexanderplatz', type: 'central landmark', lat: 52.521918, lng: 13.413215, why: 'A clear central landmark and easy orientation anchor.' },
     alexanderplatz: { label: 'Alexanderplatz', query: 'Alexanderplatz Berlin', area: 'Mitte', type: 'transport', lat: 52.5218, lng: 13.4132, why: 'Central transport hub and the place your first Berlin layer starts.' },
     museum_island: { label: 'Museum Island', query: 'Museumsinsel Berlin', area: 'Mitte', type: 'museum', lat: 52.5169, lng: 13.4017, why: 'The cleanest central museum and historic architecture cluster.' },
     hackescher_markt: { label: 'Hackescher Markt', query: 'Hackescher Markt Berlin', area: 'Mitte', type: 'food', lat: 52.5221, lng: 13.4027, why: 'Easy end point for food, courtyards, and Spree-side wandering.' },
@@ -8563,7 +8587,7 @@
     markthalle_neun: { label: 'Markthalle Neun', query: 'Markthalle Neun Berlin', area: 'Kreuzberg', type: 'food', lat: 52.502, lng: 13.4316, why: 'Covered food-market backup and a useful neighborhood anchor.' },
     brandenburg_gate: { label: 'Brandenburg Gate', query: 'Brandenburger Tor Berlin', area: 'Mitte', type: 'landmark', lat: 52.5163, lng: 13.3777, why: 'The unavoidable central history/photo anchor.' },
     reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, why: 'Free dome if booked ahead; still useful from outside.' },
-    hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'Courtyard layer close to the BerlinWalk finish.' },
+    hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'A useful courtyard layer close to Museum Island and Hackescher Markt.' },
     kastanienallee: { label: 'Kastanienallee', query: 'Kastanienallee Berlin', area: 'Prenzlauer Berg', type: 'neighborhood', lat: 52.5352, lng: 13.4102, why: 'Good slow neighborhood walk with cafes and local rhythm.' },
     topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, why: 'Free, serious, and reliable as a weather backup.' },
     tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'The easiest green reset near the central sights.' },
@@ -10064,7 +10088,6 @@
     var days = (plan && plan.days ? plan.days : []).slice(0, 7);
     if (!days.length) return '';
     var overview = tripRouteOverview(plan);
-    var slot = tourSlotForPlan(plan);
     var cards = days.map(function (day) {
       var type = dayVisualType(day);
       var photo = dayPhotoForType(type);
@@ -10083,7 +10106,7 @@
       '<div class="bw-itinerary-grid">' + cards + '</div>' +
       '<div class="bw-itinerary-footer">' +
         '<div class="bw-itinerary-stat"><b>Days</b><span>' + days.length + (days.length === 1 ? ' day' : ' days') + '</span></div>' +
-        '<div class="bw-itinerary-stat"><b>Tour</b><span>' + escapeHtml(slot.booked ? 'Already booked' : slot.dayLabel + ' ' + slot.timeLabel) + '</span></div>' +
+        '<div class="bw-itinerary-stat"><b>Start rule</b><span>' + escapeHtml(plan.arrivalStatus.short || 'Normal day') + '</span></div>' +
         '<div class="bw-itinerary-stat"><b>Map layer</b><span>' + escapeHtml(overview.stops.length + ' anchors') + '</span></div>' +
       '</div>' +
     '</section>';
@@ -12098,22 +12121,14 @@
   }
 
   function renderTourAnchor(plan) {
-    var slot = tourSlotForPlan(plan);
-    var meta = slot.booked ? 'Meeting point saved for your booked tour' : slot.dayLabel + ' | ' + slot.dateLabel + ' | ' + slot.timeLabel;
-    var actions = slot.booked
-      ? '<a class="bw-tour-link primary" href="' + escapeHtml(slot.meetingUrl) + '" target="_blank" rel="noopener" data-meeting-link>' + iconSvg('pin') + '<span>Open World Clock map</span></a>'
-      : '<a class="bw-tour-link primary" href="' + escapeHtml(tourCalendarHref(slot)) + '" download="' + escapeHtml(tourCalendarFileName(slot)) + '" data-tour-calendar>' + iconSvg('calendar') + '<span>Add calendar hold</span></a>' +
-        '<a class="bw-tour-link" href="' + escapeHtml(slot.meetingUrl) + '" target="_blank" rel="noopener" data-meeting-link>' + iconSvg('pin') + '<span>Save World Clock</span></a>';
-    return '<section class="bw-tour-card" aria-label="BerlinWalk tour anchor">' +
-      '<span class="bw-tour-symbol">' + iconSvg(slot.booked ? 'check' : 'calendar') + '</span>' +
-      '<div class="bw-tour-copy"><strong>' + escapeHtml(slot.title) + '</strong><span><span class="bw-tour-meta">' + escapeHtml(meta) + '</span> - ' + escapeHtml(slot.copy) + '</span></div>' +
-      '<div class="bw-tour-links">' + actions + '</div>' +
-    '</section>';
+    return '';
   }
 
   function renderTourActions(plan) {
     var target = root.querySelector('[data-tour-actions]');
-    if (target) target.innerHTML = renderTourAnchor(plan);
+    if (!target) return;
+    target.innerHTML = renderTourAnchor(plan);
+    target.hidden = true;
   }
 
   function ctaForPlan(plan) {
@@ -12429,7 +12444,7 @@
     return [
       { title: 'Ticket zone', cue: state.arrivalPoint === 'ber' ? 'Start ABC, then AB' : 'AB covers most days', copy: state.arrivalPoint === 'ber' ? 'BER is Zone C. Central sightseeing is usually AB.' : 'Use a day ticket when you expect three or more rides.' },
       { title: 'Validate', cue: 'Stamp paper tickets', copy: 'Digital tickets follow the selected start time.' },
-      { title: 'Meeting point', cue: 'Save World Clock', copy: 'Alexanderplatz. Arrive 5 minutes early for BerlinWalk.' },
+      { title: 'Central landmark', cue: 'Save World Clock', copy: 'Alexanderplatz is an easy reference point when your route gets fuzzy.' },
       { title: 'Sunday rule', cue: 'Shop before Sunday', copy: 'Stations, restaurants, museums, parks, and walks still work.' },
       { title: 'Monday rule', cue: 'Check museums', copy: 'Use outdoor history as the backup.' },
       { title: 'Cash/card', cue: 'Carry small cash', copy: 'Markets, lockers, toilets, and tiny food spots may need it.' },
@@ -12448,14 +12463,14 @@
           : 'Connect to Alexanderplatz with one simple U/S-Bahn route; skip transfer puzzles today.';
 
     var tour = state.tourIntent === 'booked'
-      ? 'Tour is already in the plan. Save World Clock and look for the green umbrella.'
+      ? 'Save the World Clock meeting point and keep the rest of the day light.'
       : state.arrivalTime === 'morning'
-        ? 'If timing works, join 11:30 BerlinWalk today for the first city framework.'
-        : 'Book the next 11:30 tour and keep arrival day light.';
+        ? 'If timing works, join BerlinWalk at 11:30 from the World Clock for context.'
+        : 'If today is too late, make the next 11:30 BerlinWalk your first history anchor.';
 
     return [
       { time: 'Arrival', title: 'Get central without over-solving Berlin', copy: arrive },
-      { time: 'Core', title: 'Use the tour as the first city framework', copy: tour },
+      { time: 'BerlinWalk', title: 'Use the walking tour as your first city framework', copy: tour },
       { time: 'Later', title: state.arrivalTime === 'evening' ? 'Dinner, water, sleep' : 'One stop, then stop', copy: '' }
     ];
   }
@@ -12703,29 +12718,12 @@
     setText('[data-result-date]', plan.displayDate);
     setText('[data-result-title]', plan.title);
     setText('[data-result-summary]', plan.summary);
-    setText('[data-tour-fit]', plan.tourFit);
+    setText('[data-tour-fit]', plan.days.length + (plan.days.length === 1 ? ' day' : ' days') + ' by area');
     setText('[data-ticket]', plan.ticket);
     setText('[data-open-status]', plan.arrivalStatus.short);
-    renderTripControl(plan);
-    renderInputGuide(plan);
-    renderTripPresets();
-    renderMobilePeek(plan);
     renderAdvancedSummary();
-    renderTripCommandStrip(plan);
-    renderTripRadar(plan);
-    renderTripPass(plan);
-    renderArrivalPlaybook(plan);
-    renderTripHighlights(plan);
     renderItineraryOverview(plan);
-    renderTripLoadMap(plan);
-    renderPlannerLogic(plan);
-    renderPlacePassport(plan);
-    renderCarryPack(plan);
-    renderRouteDeck(plan);
-    renderPlanBoard(plan);
     renderArrivalReminderTimeline(plan);
-    updatePrimaryCta(plan);
-    renderTourActions(plan);
     updateShareActions(plan);
 
     var preview = root.querySelector('[data-preview-days]');
@@ -12736,10 +12734,6 @@
           '<strong>Day ' + day.dayNumber + ': ' + escapeHtml(day.title) + '</strong>' +
           '<span>' + escapeHtml(formatDisplayDate(day.dateKey)) + ' - ' + escapeHtml(day.theme) + '</span>' +
           dayPostcardHtml(day) +
-          dayRhythmHtml(day, plan) +
-          dayIntelHtml(day, plan) +
-          dayOperationsHtml(day, plan) +
-          routeReelHtml(day) +
           previewDayFlowHtml(day, plan) +
           placeChipsHtml(day, 3) +
           riskChipsHtml(riskTagsForDay(day).slice(0, 2)) +
@@ -12771,8 +12765,8 @@
       renderEssentials(plan);
       return;
     }
-    setText('[data-full-sub]', state.tripLength + (state.tripLength === 1 ? ' day' : ' days') + ' from ' + plan.displayDate + '. Tour fit: ' + plan.tourFit + '.');
-    if (routeBrief) routeBrief.innerHTML = mapBriefHtml(plan, true);
+    setText('[data-full-sub]', state.tripLength + (state.tripLength === 1 ? ' day' : ' days') + ' from ' + plan.displayDate + '. Built around daily areas, maps, and Berlin essentials.');
+    if (routeBrief) routeBrief.innerHTML = '';
     renderDayJumpBar(plan);
     daysEl.innerHTML = plan.days.map(function (day) {
       var activeDay = day.dayNumber === dayJumpDay;
@@ -12793,12 +12787,7 @@
         '</div>' +
         '<div class="bw-day-body">' +
           dayPostcardHtml(day) +
-          dayRhythmHtml(day, plan) +
-          dayIntelHtml(day, plan) +
-          dayOperationsHtml(day, plan) +
           riskChipsHtml(riskTagsForDay(day)) +
-          tourDayMarkerHtml(day, plan) +
-          routeReelHtml(day) +
           blocks +
           dayCloseHtml(day) +
           mapPack +
@@ -12821,7 +12810,6 @@
     var print = root.querySelector('[data-print-plan]');
     if (pdf) pdf.disabled = !unlocked;
     if (print) print.disabled = !unlocked;
-    renderRouteDeck(latestPlan || buildPlan());
     renderFullPlan();
   }
 
@@ -13007,7 +12995,7 @@
     else if (rain >= 30) pieces.push('Bring a light rain layer or compact umbrella.');
     if (temp !== null && temp <= 3) pieces.push('Add a warm coat, hat, and gloves.');
     else if (temp !== null && temp <= 9) pieces.push('Add a warm layer under your jacket.');
-    else if (temp !== null && temp <= 16) pieces.push('A jacket or sweater is sensible because the tour lasts 2 hours.');
+    else if (temp !== null && temp <= 16) pieces.push('A jacket or sweater is sensible for exposed squares and river wind.');
     else if (temp !== null && temp >= 25) pieces.push('Wear light layers and bring water.');
     if (wind >= 45) pieces.push('Use a windproof layer; umbrellas can be awkward on open squares.');
     if (!pieces.length) pieces.push('Comfortable shoes and one light layer are enough for most central Berlin routes.');
@@ -13022,7 +13010,7 @@
       theme: visual.theme,
       icon: visual.icon,
       title: forecast.condition + ', around ' + formatTemperature(forecast.temperature),
-      copy: 'Forecast near the World Clock for the part of your arrival day this plan uses most.',
+      copy: 'Forecast for central Berlin during the part of your arrival day this plan uses most.',
       metrics: [
         { label: 'Feels like', value: formatTemperature(forecast.apparent !== null ? forecast.apparent : forecast.temperature) },
         { label: 'Rain', value: Number.isFinite(forecast.rainProbability) ? Math.round(forecast.rainProbability) + '%' : 'Check' },
@@ -13319,16 +13307,11 @@
   }
 
   function whatsappShareText(plan) {
-    var slot = tourSlotForPlan(plan);
-    var tourLine = slot.booked
-      ? 'Tour: already booked - save the World Clock meeting point.'
-      : 'Tour anchor: ' + slot.dayLabel + ', ' + slot.dateLabel + ', ' + slot.timeLabel + '.';
     return [
       'My Berlin plan from BerlinWalk',
       plan.title,
       'Arrival: ' + plan.displayDate,
       'Length: ' + selectedLabels().tripLength,
-      tourLine,
       'Open plan: ' + planShareUrl()
     ].join('\n');
   }
@@ -13522,145 +13505,27 @@
       'Arrival time: ' + labels.arrivalTime,
       'Arrival point: ' + labels.arrivalPoint,
       'Stay area: ' + labels.stayArea,
-      'Group: ' + labels.groupType,
       'Interests: ' + labels.interests,
-      'Trip mode: ' + labels.budgetStyle,
-      'Must handle: ' + labels.mustHandle,
       'Pace: ' + labels.pace,
-      'Tour fit: ' + plan.tourFit,
       '',
       plan.title,
       plan.summary,
       latestWeather ? 'Weather: ' + latestWeather.title + ' - ' + latestWeather.advice : '',
       ''
     ];
-    lines.push('Trip commands');
-    lines.push(tripCommandSummary(plan));
-    lines.push('');
-    lines.push('Trip radar');
-    lines.push(tripRadarSummary(plan));
-    lines.push('');
-    lines.push('Arrival playbook');
-    lines.push(arrivalPlaybookSummary(plan));
-    lines.push('');
-    lines.push('Trip highlights');
-    tripHighlightItems(plan).forEach(function (item) {
-      lines.push(item.label + ': ' + item.title + ' - ' + item.detail + ' [' + item.action + ': ' + item.url + ']');
-    });
-    lines.push('');
-    lines.push('Trip load map');
-    lines.push(tripLoadMapSummary(plan));
-    lines.push('');
-    lines.push('Planner logic');
-    lines.push(plannerLogicSummary(plan));
-    lines.push('');
-    var slot = tourSlotForPlan(plan);
-    var pass = tripPassData(plan);
-    lines.push('Trip pass: ' + pass.code);
-    lines.push('Pass route: ' + pass.routeSummary);
-    lines.push('Pass map: ' + pass.overview.url);
     lines.push('Plan link: ' + planShareUrl());
-    lines.push('Tour anchor: ' + (slot.booked ? 'Already booked. Save the World Clock meeting point.' : slot.dayLabel + ' - ' + slot.dateLabel + ' - ' + slot.timeLabel));
-    lines.push('Meeting point: ' + slot.meetingUrl);
     var overview = tripRouteOverview(plan);
     if (overview.stops.length) {
-      lines.push('Route overview: ' + overview.url);
-      lines.push('Map anchors: ' + overview.stops.map(function (stop) { return 'D' + stop.dayNumber + ' ' + stop.label; }).join(' -> '));
+      lines.push('Whole-trip map: ' + overview.url);
     }
     lines.push('');
-    lines.push('Map passport');
-    placePassportItems(plan).forEach(function (item) {
-      lines.push(item.dayLabel + ': ' + item.title + ' - ' + item.area + ' / ' + item.type + ' - ' + item.why + ' [' + item.url + ']');
-    });
-    lines.push('');
-    var base = baseCampBrief(plan);
-    lines.push('Base camp brief');
-    lines.push(baseCampBriefSummary(plan));
-    lines.push('Base map: ' + base.baseMapUrl);
-    lines.push('First route: ' + base.firstRouteUrl);
-    lines.push('');
-    var budget = budgetPulse(plan);
-    lines.push('Budget pulse');
-    lines.push(budgetPulseSummary(plan));
-    lines.push(budget.actionLabel + ': ' + budget.actionUrl);
-    lines.push('');
-    lines.push('Interest lens');
-    interestLens(plan).forEach(function (item) {
-      lines.push(item.label + ': ' + item.dayLabel + ' - ' + item.anchor + ' - ' + item.copy + ' [' + item.url + ']');
-    });
-    lines.push('');
-    lines.push('Pace guard');
-    lines.push(paceGuardSummary(plan));
-    lines.push('');
-    lines.push('Weather and openings');
-    lines.push(weatherStrategySummary(plan));
-    lines.push('');
-    lines.push('Phone carry pack');
-    carryPackItems(plan).forEach(function (item) {
-      var itemLink = item.url && item.url.indexOf('data:') !== 0 ? ' [' + item.url + ']' : (item.download ? ' [' + item.download + ']' : '');
-      lines.push(item.label + ': ' + item.value + ' - ' + item.detail + itemLink);
-    });
-    lines.push('');
-    lines.push('Plan health');
-    lines.push(planHealthSummary(plan));
-    lines.push('');
-    lines.push('Pre-arrival checklist');
-    preArrivalChecklist(plan).forEach(function (item) {
-      lines.push(item.due + ': ' + item.title + ' - ' + item.copy + ' [' + item.action + ': ' + item.url + ']');
-    });
-    lines.push('');
-    lines.push('Reservation radar');
-    reservationRadar(plan).forEach(function (item) {
-      lines.push(item.status + ': ' + item.title + ' - ' + item.copy + ' [' + item.action + ': ' + item.url + ']');
-    });
-    lines.push('');
-    var mode = travelModeForPlan(plan);
-    if (mode) {
-      lines.push(mode.title);
-      if (mode.chips && mode.chips.length) {
-        lines.push('Quick checks: ' + mode.chips.map(function (chip) {
-          return chip.label + ' ' + chip.value;
-        }).join(', '));
-      }
-      mode.steps.forEach(function (step) {
-        lines.push(step.label + ': ' + step.copy);
-      });
-      if (mode.route && mode.route.url) lines.push('First route: ' + mode.route.url);
-      lines.push('');
-    }
-    var swaps = planSwapsForPlan(plan);
-    if (swaps.length) {
-      lines.push('Smart swaps');
-      swaps.forEach(function (swap) {
-        lines.push(swap.label + ': ' + swap.copy);
-        if (swap.actionUrl) lines.push('Route: ' + swap.actionUrl);
-      });
-      lines.push('');
-    }
-    var fixes = smartFixesForPlan(plan);
-    if (fixes.length) {
-      lines.push('Smart fixes');
-      fixes.forEach(function (fix) {
-        lines.push(fix.label + ': ' + fix.copy);
-      });
-      lines.push('');
-    }
-    lines.push('Day rhythm');
-    lines.push(dayRhythmSummary(plan));
-    lines.push('');
+
+    lines.push('Day-by-day plan');
     plan.days.forEach(function (day) {
       lines.push('Day ' + day.dayNumber + ' - ' + formatDisplayDate(day.dateKey) + ': ' + day.title);
       lines.push('Route: ' + dayRouteAction(day).url);
       var risks = riskTagsForDay(day).map(function (tag) { return tag.label; }).join(', ');
-      if (risks) lines.push('Risk flags: ' + risks);
-      lines.push('Day rhythm: ' + dayRhythmItems(day, plan).map(function (item) {
-        return item.label + ' ' + item.value;
-      }).join(', '));
-      lines.push('Operating notes: ' + dayOperationItems(day, plan).map(function (item) {
-        return item.label + ' ' + item.value;
-      }).join(', '));
-      var daySlot = tourSlotForDay(day, plan);
-      if (daySlot) lines.push('Tour anchor: BerlinWalk ' + daySlot.timeLabel + ' at the World Clock. Book the spot before relying on it.');
+      if (risks) lines.push('Watch out: ' + risks);
       dayActionBlockItems(day).forEach(function (item) {
         var block = item.block;
         var index = item.index;
@@ -13680,9 +13545,194 @@
     berlinEssentials(plan).forEach(function (item) {
       lines.push(item.title + ': ' + (item.cue ? item.cue + ' - ' : '') + item.copy);
     });
-    lines.push('');
-    lines.push('Book the BerlinWalk tour: ' + BOOKING_SHORT_LABEL);
     return lines.join('\n');
+  }
+
+  async function downloadSimplePdf(Api) {
+    var plan = latestPlan || buildPlan();
+    var labels = selectedLabels();
+    var logoData = await loadBwLogoDataUrl();
+    var doc = new Api({ unit: 'pt', format: 'a4' });
+    var pageW = doc.internal.pageSize.getWidth();
+    var pageH = doc.internal.pageSize.getHeight();
+    var margin = 38;
+    var contentW = pageW - margin * 2;
+    var y = margin;
+    var green = [27, 94, 32];
+    var yellow = [255, 230, 0];
+    var cream = [250, 250, 245];
+    var light = [242, 248, 232];
+    var text = [33, 33, 33];
+    var muted = [78, 90, 78];
+    var blue = [31, 88, 152];
+
+    function setColor(color) {
+      doc.setTextColor(color[0], color[1], color[2]);
+    }
+
+    function fill(color) {
+      doc.setFillColor(color[0], color[1], color[2]);
+    }
+
+    function stroke(color) {
+      doc.setDrawColor(color[0], color[1], color[2]);
+    }
+
+    function addPageIf(height) {
+      if (y + height <= pageH - margin) return;
+      doc.addPage();
+      y = margin;
+    }
+
+    function wrapped(value, x, width, size, style, color, lineGap) {
+      doc.setFont('helvetica', style || 'normal');
+      doc.setFontSize(size);
+      setColor(color || text);
+      var lines = doc.splitTextToSize(String(value || ''), width);
+      doc.text(lines, x, y);
+      y += lines.length * (lineGap || size * 1.35);
+      return lines.length;
+    }
+
+    function sectionTitle(title, subtitle) {
+      addPageIf(subtitle ? 60 : 36);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(16);
+      setColor(green);
+      doc.text(title, margin, y);
+      y += 18;
+      if (subtitle) {
+        wrapped(subtitle, margin, contentW, 9.5, 'normal', muted, 13);
+        y += 4;
+      }
+    }
+
+    function chip(label, value, x, yy, w) {
+      fill(light);
+      stroke([220, 232, 200]);
+      doc.roundedRect(x, yy, w, 44, 6, 6, 'FD');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(7.5);
+      setColor(muted);
+      doc.text(label.toUpperCase(), x + 9, yy + 15);
+      doc.setFontSize(10);
+      setColor(green);
+      doc.text(doc.splitTextToSize(String(value || ''), w - 18).slice(0, 2), x + 9, yy + 29);
+    }
+
+    function drawSimpleLogo() {
+      var logoW = 112;
+      var logoH = 47;
+      var x = pageW - margin - logoW;
+      var logoY = 28;
+      fill([255, 255, 255]);
+      stroke([221, 239, 199]);
+      doc.roundedRect(x, logoY, logoW, logoH, 7, 7, 'FD');
+      if (logoData) {
+        try {
+          doc.addImage(logoData, 'PNG', x + 8, logoY + 6, logoW - 16, (logoW - 16) * 450 / 1080);
+          return;
+        } catch (error) {}
+      }
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(12);
+      setColor(green);
+      doc.text('BerlinWalk', x + 16, logoY + 29);
+    }
+
+    fill(green);
+    doc.rect(0, 0, pageW, 148, 'F');
+    drawSimpleLogo();
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    setColor(yellow);
+    doc.text('BERLINWALK LOCAL PLANNER', margin, 48);
+    doc.setFontSize(28);
+    setColor([255, 255, 255]);
+    doc.text(doc.splitTextToSize('Ultimate Berlin Trip Plan', contentW - 140), margin, 78);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    setColor([221, 239, 199]);
+    doc.text(plan.displayDate + ' | ' + labels.tripLength + ' | ' + labels.stayArea, margin, 126);
+    y = 178;
+    wrapped(plan.summary, margin, contentW, 12, 'normal', text, 16);
+    y += 14;
+    var chipW = (contentW - 16) / 3;
+    chip('Arrival', labels.arrivalTime, margin, y, chipW);
+    chip('Start', labels.arrivalPoint, margin + chipW + 8, y, chipW);
+    chip('Pace', labels.pace, margin + chipW * 2 + 16, y, chipW);
+    y += 66;
+
+    sectionTitle('Day-by-day plan', 'A simple route shape: one main area per day, with map links and opening/weather notes where they matter.');
+    plan.days.forEach(function (day) {
+      var blocks = dayActionBlockItems(day).slice(0, 4);
+      var maps = dayMapPackItems(day).slice(0, 3);
+      addPageIf(150 + blocks.length * 35 + maps.length * 18);
+      fill([255, 255, 255]);
+      stroke([220, 232, 200]);
+      var cardTop = y;
+      doc.roundedRect(margin, cardTop, contentW, 54, 7, 7, 'FD');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      setColor(green);
+      doc.text('DAY ' + day.dayNumber + ' | ' + formatDisplayDate(day.dateKey), margin + 13, y + 18);
+      doc.setFontSize(15);
+      setColor(text);
+      doc.text(doc.splitTextToSize(day.title, contentW - 26), margin + 13, y + 38);
+      y += 72;
+      var risks = riskTagsForDay(day).map(function (tag) { return tag.label; }).slice(0, 3).join(', ');
+      if (risks) {
+        wrapped('Watch out: ' + risks, margin + 8, contentW - 16, 9.5, 'bold', muted, 13);
+        y += 3;
+      }
+      blocks.forEach(function (item) {
+        var block = item.block;
+        var copy = dayBlockCopy(day, block, item.index);
+        addPageIf(42);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        setColor(green);
+        doc.text(block.time, margin + 8, y);
+        wrapped(block.title + (copy ? ' - ' + copy : ''), margin + 82, contentW - 90, 10, 'normal', text, 13);
+        y += 5;
+      });
+      if (maps.length) {
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(9);
+        setColor(muted);
+        doc.text('Map links', margin + 8, y + 3);
+        y += 18;
+        maps.forEach(function (item) {
+          addPageIf(24);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(9);
+          setColor(blue);
+          doc.textWithLink(item.title, margin + 8, y, { url: item.url });
+          y += 15;
+        });
+      }
+      y += 12;
+    });
+
+    sectionTitle('Berlin essentials', 'Practical notes to keep on your phone.');
+    berlinEssentials(plan).forEach(function (item) {
+      addPageIf(54);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      setColor(green);
+      doc.text(item.title, margin, y);
+      y += 14;
+      wrapped((item.cue ? item.cue + ' - ' : '') + item.copy, margin, contentW, 9.5, 'normal', muted, 13);
+      y += 5;
+    });
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    setColor(green);
+    doc.text('berlinwalk.com | @berlinwalkingtour', margin, pageH - 22);
+    doc.save('berlin-trip-plan-' + state.arrivalDate + '.pdf');
+    setActionStatus('PDF downloaded.');
+    track('bw_trip_planner_pdf_download', { success: true, format: 'simple_v2', trip_length: state.tripLength });
   }
 
   async function downloadPdf() {
@@ -13696,6 +13746,8 @@
     }
     setActionStatus('Preparing PDF...');
     try {
+    await downloadSimplePdf(api);
+    return;
     var plan = latestPlan || buildPlan();
     var labels = selectedLabels();
     var health = planHealth(plan);
@@ -15611,7 +15663,31 @@
     }
     var plan = latestPlan || buildPlan();
     var labels = selectedLabels();
-    var slot = tourSlotForPlan(plan);
+    var simpleDaysHtml = plan.days.map(function (day) {
+      var blocks = dayActionBlockItems(day).slice(0, 4).map(function (item) {
+        var block = item.block;
+        var copy = dayBlockCopy(day, block, item.index);
+        return '<li><b>' + escapeHtml(block.time) + '</b><span><strong>' + escapeHtml(block.title) + '</strong>' + (copy ? ' - ' + escapeHtml(copy) : '') + '</span></li>';
+      }).join('');
+      var mapLinks = dayMapPackItems(day).slice(0, 3).map(function (item) {
+        return '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + escapeHtml(item.title) + '</a>';
+      }).join('');
+      var risks = riskTagsForDay(day).map(function (tag) { return tag.label; }).slice(0, 3).join(', ');
+      return '<section class="day"><header><small>DAY ' + day.dayNumber + ' | ' + escapeHtml(formatDisplayDate(day.dateKey)) + '</small><h2>' + escapeHtml(day.title) + '</h2></header>' +
+        (risks ? '<p class="watch"><strong>Watch out:</strong> ' + escapeHtml(risks) + '</p>' : '') +
+        '<ol>' + blocks + '</ol>' +
+        (mapLinks ? '<nav>' + mapLinks + '</nav>' : '') +
+      '</section>';
+    }).join('');
+    var simpleEssentialsHtml = berlinEssentials(plan).map(function (item) {
+      return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml((item.cue ? item.cue + ' - ' : '') + item.copy) + '</span></article>';
+    }).join('');
+    printWindow.document.write('<!doctype html><html><head><title>Ultimate Berlin Trip Plan</title><style>body{background:#FAFAF5;color:#212121;font-family:Arial,sans-serif;line-height:1.45;margin:0}.hero{background:#1B5E20;color:white;padding:28px 34px}.hero small{color:#FFE600;font-weight:800;letter-spacing:1.8px}.hero h1{font-size:30px;line-height:1.05;margin:8px 0}.hero p{color:#DDEFC7;font-weight:700;margin:0}.wrap{padding:24px 34px}.meta{display:grid;gap:8px;grid-template-columns:repeat(3,1fr);margin-bottom:18px}.meta div,.day,.essentials article{background:white;border:1px solid #DCE8C8;border-radius:8px}.meta div{padding:10px}.meta b{color:#4E5A4E;display:block;font-size:10px;text-transform:uppercase}.meta span{color:#1B5E20;font-weight:800}.day{break-inside:avoid;margin:0 0 14px;overflow:hidden}.day header{background:#F2F8E8;padding:14px}.day small{color:#4E5A4E;font-weight:800}.day h2{color:#1B5E20;font-size:20px;margin:5px 0 0}.watch{background:#FFFCDB;border:1px solid #EFE6A3;border-radius:8px;color:#5A5236;margin:12px 14px 0;padding:9px 10px}ol{list-style:none;margin:0;padding:10px 14px}li{border-top:1px solid #EEF4E7;display:grid;gap:10px;grid-template-columns:86px 1fr;padding:10px 0}li:first-child{border-top:0}li b{background:#F2F8E8;border:1px solid #DCE8C8;border-radius:7px;color:#1B5E20;padding:8px;text-align:center}li span strong{display:block}nav{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 14px}a{color:#174C8A;font-weight:800;text-decoration:none}.essentials h2{color:#1B5E20;margin:0 0 8px}.essentials{display:grid;gap:8px;grid-template-columns:repeat(2,1fr)}.essentials article{padding:10px}.essentials strong,.essentials span{display:block}.essentials strong{color:#1B5E20}.brand{color:#1B5E20;font-weight:800;margin-top:18px}@media print{body{background:white}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.day{break-inside:avoid}}@media(max-width:640px){.meta,.essentials{grid-template-columns:1fr}li{grid-template-columns:1fr}}</style></head><body><section class="hero"><small>BERLINWALK LOCAL PLANNER</small><h1>Ultimate Berlin Trip Plan</h1><p>' + escapeHtml(plan.displayDate) + ' | ' + escapeHtml(labels.tripLength) + ' | ' + escapeHtml(labels.stayArea) + '</p></section><main class="wrap"><section class="meta"><div><b>Arrival</b><span>' + escapeHtml(labels.arrivalTime) + '</span></div><div><b>Start</b><span>' + escapeHtml(labels.arrivalPoint) + '</span></div><div><b>Pace</b><span>' + escapeHtml(labels.pace) + '</span></div></section><p>' + escapeHtml(plan.summary) + '</p>' + simpleDaysHtml + '<h2>Berlin essentials</h2><section class="essentials">' + simpleEssentialsHtml + '</section><p class="brand">berlinwalk.com | @berlinwalkingtour</p></main></body></html>');
+    printWindow.document.close();
+    printWindow.focus();
+    printWindow.print();
+    track('bw_trip_planner_print', { format: 'simple_v2', trip_length: state.tripLength });
+    return;
     var health = planHealth(plan);
     var overview = tripRouteOverview(plan);
     var base = baseCampBrief(plan);

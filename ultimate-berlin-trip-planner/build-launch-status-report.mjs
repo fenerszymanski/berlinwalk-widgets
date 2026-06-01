@@ -138,6 +138,20 @@ function blogPackage() {
   };
 }
 
+function uxRevisionHold() {
+  const holdPath = widgetPath('UX_REVISION_HOLD.md');
+  if (!fs.existsSync(holdPath)) return null;
+  const body = fs.readFileSync(holdPath, 'utf8').trim();
+  const summary = body
+    .split('\n')
+    .map((line) => line.trim())
+    .find((line) => line && !line.startsWith('#')) || 'UX revision is still open.';
+  return {
+    file: relative(holdPath),
+    summary
+  };
+}
+
 function collectState() {
   const funnel = read('velo/tripPlannerFunnel.js');
   const todos = unique([...funnel.matchAll(/TODO_TRIP_PLANNER_[A-Z0-9_]+/g)].map((match) => match[0]));
@@ -147,6 +161,7 @@ function collectState() {
   const audit = runAudit();
   const visibility = toolVisibility();
   const blog = blogPackage();
+  const uxRevision = uxRevisionHold();
 
   const gates = [
     {
@@ -195,6 +210,12 @@ function collectState() {
       status: visibility.inHome ? 'pass' : 'hold',
       detail: visibility.inHome ? 'Ultimate appears in tools-home/data.json.' : 'Homepage shortcut is not enabled yet.'
     },
+    ...(uxRevision ? [{
+      id: 'ux_revision',
+      label: 'UX revision',
+      status: 'hold',
+      detail: `${uxRevision.summary} (${uxRevision.file})`
+    }] : []),
     {
       id: 'blog',
       label: 'SEO blog package',
@@ -216,12 +237,15 @@ function collectState() {
   const holds = gates.filter((gate) => gate.status === 'hold');
   const visibilityHeld = holds.some((gate) => gate.id === 'visibility');
   const homepageHeld = holds.some((gate) => gate.id === 'homepage');
+  const uxRevisionHeld = holds.some((gate) => gate.id === 'ux_revision');
   const verdict = blockers.length
     ? 'NOT READY'
     : warnings.length
       ? 'WAITING FOR LIVE QA'
       : visibilityHeld
         ? 'READY FOR VISIBILITY RELEASE'
+        : uxRevisionHeld
+          ? 'PUBLIC TOOL LIVE - UX REVISION OPEN'
         : homepageHeld
           ? 'PUBLIC TOOL LIVE - HOMEPAGE HELD'
           : 'PUBLIC LAUNCH COMPLETE';
@@ -250,6 +274,7 @@ function collectState() {
       : null,
     visibility,
     blog,
+    uxRevision,
     gates,
     nextActions: nextActions({ blockers, warnings, holds })
   };
@@ -316,6 +341,13 @@ function nextActions({ blockers, warnings, holds }) {
     return [
       'QA the live /tools/ultimate-berlin-trip-planner page and /widgets listing after pushing repo changes.',
       'Add the homepage shortcut later with release-visibility.mjs --write --include-home --regenerate-widgets-seo only after final page QA.'
+    ];
+  }
+
+  if (holds.some((gate) => gate.id === 'ux_revision')) {
+    return [
+      'Keep the Wix Blog post unpublished while the widget UX is simplified.',
+      'Continue local QA on the simpler planner, especially mobile result density and PDF layout.'
     ];
   }
 
