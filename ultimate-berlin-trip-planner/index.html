@@ -1357,6 +1357,12 @@
       --accent-soft: #F2F8E8;
     }
 
+    #bw-trip-planner .bw-option[data-value="lateMorning"] {
+      --accent: var(--bw-amber);
+      --accent-border: #F4D386;
+      --accent-soft: var(--bw-amber-soft);
+    }
+
     #bw-trip-planner .bw-option[data-value="midday"],
     #bw-trip-planner .bw-option[data-value="ber"],
     #bw-trip-planner .bw-option[data-value="car"],
@@ -8876,9 +8882,10 @@
 
         <div class="bw-question">
           <span class="bw-label">Arrival time</span>
-          <div class="bw-options cols-4" data-group="arrivalTime">
-            <button class="bw-option active" type="button" data-value="morning"><span class="bw-opt-icon">AM</span><span class="bw-opt-copy"><span class="bw-opt-title">Before 10:30</span><span class="bw-opt-sub">Good first route</span></span></button>
-            <button class="bw-option" type="button" data-value="midday"><span class="bw-opt-icon">MD</span><span class="bw-opt-copy"><span class="bw-opt-title">10:30-14:30</span><span class="bw-opt-sub">Light first day</span></span></button>
+          <div class="bw-options cols-5" data-group="arrivalTime">
+            <button class="bw-option active" type="button" data-value="morning"><span class="bw-opt-icon">AM</span><span class="bw-opt-copy"><span class="bw-opt-title">Before 09:00</span><span class="bw-opt-sub">Tour can work</span></span></button>
+            <button class="bw-option" type="button" data-value="lateMorning"><span class="bw-opt-icon">10</span><span class="bw-opt-copy"><span class="bw-opt-title">09:00-10:00</span><span class="bw-opt-sub">Central only</span></span></button>
+            <button class="bw-option" type="button" data-value="midday"><span class="bw-opt-icon">MD</span><span class="bw-opt-copy"><span class="bw-opt-title">10:00-14:30</span><span class="bw-opt-sub">Light first day</span></span></button>
             <button class="bw-option" type="button" data-value="afternoon"><span class="bw-opt-icon">PM</span><span class="bw-opt-copy"><span class="bw-opt-title">14:30-18:00</span><span class="bw-opt-sub">Evening setup</span></span></button>
             <button class="bw-option" type="button" data-value="evening"><span class="bw-opt-icon">EV</span><span class="bw-opt-copy"><span class="bw-opt-title">After 18:00</span><span class="bw-opt-sub">Keep it calm</span></span></button>
           </div>
@@ -9481,6 +9488,7 @@
 
   var OPTION_ICONS = {
     morning: 'sun',
+    lateMorning: 'clock',
     midday: 'clock',
     afternoon: 'sun',
     evening: 'moon',
@@ -9573,15 +9581,15 @@
 
     if (firstDay && index === 0) {
       if (state.arrivalTime === 'morning') return '09:00-10:45';
+      if (state.arrivalTime === 'lateMorning') return state.arrivalPoint === 'ber' ? 'Too tight for 11:30' : '09:00-10:00';
       if (state.arrivalTime === 'midday') return '12:30-14:00';
       if (state.arrivalTime === 'afternoon') return '15:30-17:00';
       return '18:30-19:15';
     }
 
-    if (firstDay && index === 1) {
-      if (state.arrivalTime === 'morning') return '11:30-13:30';
-      if (state.arrivalTime === 'midday') return '15:00-16:30';
-      if (state.arrivalTime === 'afternoon') return 'Next 11:30';
+    if (firstDay && /berlinwalk|tour|day 2/i.test(String((block && block.time) || '') + ' ' + String((block && block.title) || ''))) {
+      if (arrivalDayTourEligible()) return '11:30-13:30';
+      if (state.tripLength > 1) return 'Day 2 at 11:30';
       return 'Next 11:30';
     }
 
@@ -9607,6 +9615,7 @@
       return '13:30-16:30';
     }
 
+    if (firstDay && label.indexOf('core') !== -1) return 'Self-guided';
     if (label.indexOf('core') !== -1) return '11:30-13:30';
     return '';
   }
@@ -9639,9 +9648,17 @@
   function previewDayFlowHtml(day, plan) {
     var anchors = dayMapLinks(day).slice(0, 3).map(function (link) { return link.label; });
     var anchorCopy = anchors.length ? anchors.join(' -> ') : 'World Clock -> Museum Island';
+    var slot = plan ? tourSlotForPlan(plan) : null;
     var tourCopy = state.tourIntent === 'booked'
       ? 'Keep the World Clock meeting point saved and keep arrival day light.'
-      : 'If your arrival timing works, use the 11:30 BerlinWalk as the first city framework.';
+      : arrivalDayTourEligible()
+        ? 'Use the 11:30 BerlinWalk as the first city framework.'
+        : state.tripLength > 1
+          ? 'Keep the 11:30 BerlinWalk for Day 2; arrival day stays for landing and central setup.'
+          : 'Do not force the 11:30 tour today; keep the one-day route central and realistic.';
+    if (slot && !arrivalDayTourEligible() && state.tripLength === 1 && state.tourIntent !== 'booked') {
+      tourCopy = 'Today is too tight for 11:30; the next BerlinWalk slot sits outside this one-day plan.';
+    }
     return '<div class="bw-preview-flow" aria-label="Day ' + escapeHtml(day.dayNumber) + ' simple preview">' +
       '<div class="bw-preview-flow-item">' +
         '<span class="bw-preview-flow-icon" aria-hidden="true">📍</span><span class="bw-preview-flow-copy"><b>Start central</b><span>' + escapeHtml(anchorCopy) + '</span></span>' +
@@ -9923,9 +9940,9 @@
 
     var start = '10:00 start';
     if (day.dayNumber === 1) {
-      start = state.arrivalTime === 'morning'
+      start = arrivalDayTourEligible()
         ? 'Arrive -> 11:30'
-        : state.arrivalTime === 'midday'
+        : state.arrivalTime === 'midday' || state.arrivalTime === 'lateMorning'
           ? 'Arrive -> core'
           : state.arrivalTime === 'afternoon'
             ? '16:00 light'
@@ -10349,9 +10366,14 @@
     return 'AB single/day';
   }
 
+  function arrivalDayTourEligible() {
+    if (state.arrivalTime === 'morning') return true;
+    return state.tripLength === 1 && state.arrivalTime === 'lateMorning' && state.arrivalPoint !== 'ber';
+  }
+
   function recommendedTourDay() {
     if (state.tourIntent === 'booked') return 'Already booked';
-    if (state.arrivalTime === 'morning') return 'Arrival day 11:30';
+    if (arrivalDayTourEligible()) return 'Arrival day 11:30';
     if (state.tripLength === 1) return 'First possible 11:30';
     return 'Day 2 at 11:30';
   }
@@ -10430,7 +10452,7 @@
         copy: 'Save the World Clock meeting point and keep the plan focused on arrival prep instead of another sales step.'
       };
     }
-    var offset = state.arrivalTime === 'morning' ? 0 : 1;
+    var offset = arrivalDayTourEligible() ? 0 : 1;
     var dateKey = addDays(state.arrivalDate, offset);
     var dayLabel = offset === 0 ? 'Arrival day' : (state.tripLength > 1 ? 'Day 2' : 'Next possible day');
     var title = offset === 0 ? 'Tour anchor: arrival-day 11:30' : 'Tour anchor: Day 2 at 11:30';
@@ -12536,7 +12558,7 @@
       : 'Check weather';
     var meetingValue = state.tourIntent === 'booked'
       ? 'World Clock saved'
-      : (state.arrivalTime === 'morning' ? '11:30 possible' : slot.dayLabel + ' ' + TOUR_START_LABEL);
+      : (arrivalDayTourEligible() ? '11:30 possible' : slot.dayLabel + ' ' + TOUR_START_LABEL);
     var backupValue = state.arrivalTime === 'evening'
       ? 'Sleep wins'
       : state.mustHandle.indexOf('rain') !== -1 || Boolean(latestWeather && (latestWeather.theme === 'rain' || latestWeather.theme === 'storm'))
@@ -12547,7 +12569,7 @@
       : 'Save the first route, check the weather one more time, and keep your arrival ticket choice ready.';
     var nextCopy = state.tourIntent === 'booked'
       ? 'Save the World Clock meeting point and plan to arrive 5 minutes early.'
-      : (state.arrivalTime === 'morning' ? 'If timing works, use the 11:30 tour as your first city framework.' : 'Keep Day 1 light and use the next 11:30 tour slot as the city framework.');
+      : (arrivalDayTourEligible() ? 'Use the 11:30 tour as your first city framework.' : 'Keep Day 1 light and use the next 11:30 tour slot as the city framework.');
     var laterCopy = state.mustHandle.indexOf('rain') !== -1
       ? 'Keep the rain backup near the same area. Do not cross Berlin for a backup.'
       : 'Stop before the day feels finished. Berlin works better when tomorrow still has energy.';
@@ -12834,7 +12856,7 @@
       score += 8;
       addReason('multi-day trip');
     }
-    if (state.arrivalTime === 'morning') {
+    if (arrivalDayTourEligible()) {
       score += 5;
       addReason('arrival-day tour possible');
     }
@@ -12959,7 +12981,7 @@
     if (state.tourIntent === 'maybe') {
       return { label: 'See the 11:30 tour details', href: BOOKING_URL, target: '_top', kind: 'tour_details' };
     }
-    if (state.arrivalTime === 'morning') {
+    if (arrivalDayTourEligible()) {
       return { label: 'Book arrival-day 11:30 tour', href: BOOKING_URL, target: '_top', kind: 'arrival_day' };
     }
     if (state.tripLength === 1) {
@@ -13285,17 +13307,38 @@
             ? 'Park at your stay or a sensible P+R first, then use transit or walking for the city core.'
             : 'Start from your stay, then connect to Alexanderplatz with one simple route.';
 
-    var tour = state.tourIntent === 'booked'
-      ? 'Save the World Clock meeting point and keep the rest of the day light.'
-      : state.arrivalTime === 'morning'
-        ? 'If timing works, join BerlinWalk at 11:30 from the World Clock for context.'
-        : 'If today is too late, make the next 11:30 BerlinWalk your first history anchor.';
-
-    return [
-      { time: 'Arrival', title: 'Get central without over-solving Berlin', copy: arrive },
-      { time: 'BerlinWalk', title: 'Use the walking tour as your first city framework', copy: tour },
-      { time: 'Later', title: state.arrivalTime === 'evening' ? 'Dinner, water, sleep' : 'One stop, then stop', copy: '' }
+    var blocks = [
+      { time: 'Arrival', title: 'Get central without over-solving Berlin', copy: arrive }
     ];
+
+    if (state.tourIntent === 'booked') {
+      blocks.push({
+        time: 'Meeting point',
+        title: 'Keep the booked tour easy',
+        copy: 'Save the World Clock meeting point and keep the rest of the day light.'
+      });
+    } else if (arrivalDayTourEligible()) {
+      blocks.push({
+        time: 'BerlinWalk',
+        title: 'Use the walking tour as your first city framework',
+        copy: 'Join BerlinWalk at 11:30 from the World Clock for context.'
+      });
+    } else if (state.tripLength > 1) {
+      blocks.push({
+        time: 'Day 2',
+        title: 'Keep the walking tour for the next morning',
+        copy: 'Arrival timing is too tight for 11:30 today, so use Day 2 as the first history framework.'
+      });
+    } else {
+      blocks.push({
+        time: 'Core route',
+        title: 'Keep the one-day route realistic',
+        copy: 'Do not force an airport-to-tour sprint today; use a central self-guided route instead.'
+      });
+    }
+
+    blocks.push({ time: 'Later', title: state.arrivalTime === 'evening' ? 'Dinner, water, sleep' : 'One stop, then stop', copy: '' });
+    return blocks;
   }
 
   function dayTemplate(key) {
@@ -13774,6 +13817,7 @@
           dayPostcardHtml(day) +
           riskChipsHtml(riskTagsForDay(day)) +
           blocks +
+          tourDayMarkerHtml(day, plan) +
           dayCloseHtml(day) +
           mapPack +
         '</div>' +
@@ -13847,6 +13891,7 @@
 
   function planHour() {
     if (state.arrivalTime === 'morning') return 11;
+    if (state.arrivalTime === 'lateMorning') return 12;
     if (state.arrivalTime === 'midday') return 14;
     if (state.arrivalTime === 'afternoon') return 17;
     return 19;

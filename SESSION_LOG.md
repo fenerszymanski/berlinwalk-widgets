@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-01 — Codex (Ultimate tour timing rule)
+
+**Did:** Fixed the arrival-day BerlinWalk recommendation rule so BER/late-morning arrivals are not pushed into an impossible 11:30 tour.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — split arrival time options into `Before 09:00`, `09:00-10:00`, `10:00-14:30`, `14:30-18:00`, and `After 18:00`; added `arrivalDayTourEligible()` so arrival-day 11:30 is recommended only before 09:00, plus the one-day/non-BER 09:00-10:00 exception. Multi-day 09:00+ BER arrivals now move the tour anchor to Day 2; one-day BER/late arrivals avoid forcing the tour.
+- Local QA — `git diff --check` and inline script parse passed. Browser QA confirmed BER 09:00-10:00 / 4-day preview says Day 2, unlocked Day 1 has no 11:30 tour block, and Day 2 has the BerlinWalk tour marker; Hbf 09:00-10:00 / 1-day still keeps arrival-day 11:30.
+
+**Opened:** Continue one-by-one UX fixes with Yusuf; full launch audit currently has an unrelated homepage-icon manifest block in this dirty working tree.
+**Closed:** Arrival-day tour timing logic corrected locally.
+
+**Next session should:** Keep reviewing from `v=tour-timing-20260601` and address the next visible issue one at a time.
+
 ## 2026-06-01 — Codex (Tools icon alignment)
 
 **Did:** Bound Yusuf-approved Gemini/Banana 2 icons after the first Shopping icon looked too close to Sunday and Hackescher looked off-style.
