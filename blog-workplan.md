@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-05-26 (Hackescher Markt after-tour draft added)
+Last updated: 2026-06-01 (Brandenburg Gate draft + landmarks map; A-tier tourist-capture ideas added)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -8,6 +8,11 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
+| 0 | Local draft + widget | Brandenburg Gate Berlin: A Visitor's Guide (2026) | A-tier head-term capture (no existing post). Honest funnel: the gate is the western edge, the tour walks the eastern core most visitors miss. Draft `blog-drafts/brandenburg-gate-berlin-visitors-guide.md`; reusable `berlin-landmarks-map` widget built + QA'd; QS/FAQ key `brandenburg-gate`; CMS insert `insert-berlin-landmarks-map.js`. Pending push + live steps. |
+| 0 | Idea (A-tier) | East Side Gallery: Berlin's Open-Air Wall Guide | Most-visited Wall section, huge search volume, no dedicated post. Reuses `berlin-wall-map` / `berlin-landmarks-map`. |
+| 0 | Idea (A-tier) | Best Day Trips from Berlin (Potsdam, Sachsenhausen, Spreewald) | High-volume "day trips from Berlin"; new "day trip picker" widget candidate. Captures longer-stay tourists. |
+| 0 | Idea (A-tier, seasonal) | Best Christmas Markets in Berlin (2026) | Q4 seasonal pillar; new "Christmas markets map" widget candidate. Publish by October. |
+| 0 | Idea (B-tier) | Berlin Street Art Guide / Holocaust Memorial Guide / Sachsenhausen Memorial Guide / "How Many Days in Berlin?" | High-intent gaps; street-art map + `berlin-landmarks-map` reuse. |
 | 1 | Wix draft | Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange | Route-adjacent history piece. Pairs with existing old-town and GDR demolition content. Local draft at `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`; quick-summary + FAQ + `nikolaiviertel-walk` self-guided walking-tour widget wired under slug `nikolaiviertel`. Wix draft ID: `48bf0945-63d9-46cd-b9af-a8fb87ab3c75`. |
 | 2 | Wix draft | Famous Movies and TV Shows Filmed in Berlin | Screen-location master post with generated media, Quick Summary, FAQ, and `screen-mood-finder` widget. Wix draft ID: `a026aeb9-6126-4adc-bebd-2dcd5c88fb8b`. |
 | 3 | Idea | Bebelplatz and the Nazi Book Burning Memorial: What Tourists Miss | Strong historical storytelling, close to central Berlin routes. |

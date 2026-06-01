@@ -153,6 +153,14 @@
       "embedHeight": 820
     },
     {
+      "slug": "berlin-landmarks-map",
+      "title": "Berlin Landmarks Map",
+      "lead": "Find Berlin's central landmarks, memorials, museums and viewpoints, mapped by type with the nearest U-Bahn or S-Bahn for each.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-landmarks-map/",
+      "embedHeight": 820
+    },
+    {
       "slug": "whats-open-in-berlin-today",
       "title": "What's Open in Berlin Today",
       "lead": "Live daily check: today's date, public holidays, what's open and closed across Berlin — supermarkets, museums, transport, banks.",
