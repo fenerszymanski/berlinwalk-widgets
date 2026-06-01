@@ -14,10 +14,12 @@ Format for each entry — see `AGENTS.md` §9.
 - `blog-drafts/shopping-in-berlin.md` — full draft: metadata, widget plan, Quick Summary, body with internal links (#17, #61, #40, #16, #88, booking), and FAQ content. Focus keyword "shopping in Berlin". Facts verified by web search (Galeries Lafayette closed Aug 2024, KaDeWe open/renovated, VAT non-EU min 50.01 EUR @ 19%, flea-market Sundays).
 - Workspace: `insert-berlin-shopping-areas.js` (ready-to-run CMS insert, slug preflight + re-save), plus PROJECT_MEMORY.md tool note + table row 31.
 
-**Opened:** Push `berlinwalk-widgets` so GitHub Pages serves the widget; then run the CMS insert, generate a tool icon, build/publish the Wix blog draft, and switch the insert script's relatedBlog to `/post/shopping-in-berlin` after publish.
-**Closed:** Widget build + local QA + tools-hub wiring + blog draft + CMS insert script.
+After Yusuf's first push, the live steps ran: widget is served by GitHub Pages (200); BerlinTools CMS row inserted (`0f235bae-71fb-44db-a2eb-132abef64589`), `/tools/berlin-shopping-areas` returns 200; Wix Blog draft created UNPUBLISHED (`6c6b71d2-ba58-4265-8506-a36e301679dd`, 82 nodes, 3 embeds). QS/FAQ content added to `quick-summary/data.json`, `faq/data.json`, and `faq/inject.js` (SLUG_MAP + SCHEMAS) under key `shopping-in-berlin`.
 
-**Next session should:** After Yusuf pushes the repo, confirm the widget is live on GitHub Pages, then do the live Wix steps (CMS insert + blog draft creation/publish + QS/FAQ wiring under key `shopping-in-berlin`).
+**Opened:** (1) Push `berlinwalk-widgets` AGAIN — the QS/FAQ + inject.js edits landed after the first push, so the post's quick-summary/FAQ embeds are empty until the second deploy. (2) Yusuf reviews + publishes the UNPUBLISHED draft. (3) Generate + wire a tool icon for `berlin-shopping-areas`. (4) After publish, switch `insert-berlin-shopping-areas.js` relatedBlog to `/post/shopping-in-berlin` and re-save.
+**Closed:** Widget build + QA + tools-hub wiring + blog draft markdown + CMS insert + Wix draft creation + QS/FAQ data wiring.
+
+**Next session should:** After the second push deploys, spot-check the draft's quick-summary + FAQ embeds populate, then let Yusuf publish.
 
 ## 2026-06-01 — Codex (Ultimate build-gate + hero revision)
 

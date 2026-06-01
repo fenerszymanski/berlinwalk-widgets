@@ -1,6 +1,7 @@
 /* Auto-generated from /faq/data.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
+  "shopping-in-berlin": "shopping-in-berlin",
   "is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026": "pergamon-closed",
   "5-mistakes-tourists-make-at-alexanderplatz": "alex-mistakes",
   "where-to-find-free-drinking-water-in-berlin": "drinking-water",
@@ -50,6 +51,60 @@
 };
 
   var SCHEMAS = {
+  "shopping-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is the best place to go shopping in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on what you want. For famous flagship stores and KaDeWe, go to Kurfürstendamm and Tauentzienstraße in the west. For independent labels and concept stores, go to Mitte around Münzstraße and the Hackesche Höfe. For vintage, head to Friedrichshain around Boxhagener Platz. For one-off finds, the Sunday flea markets are unbeatable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are shops open on Sunday in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. By law, almost all regular shops in Berlin close on Sundays. The exceptions are flea markets, bakeries, shops inside major train stations, and a handful of legally permitted special Sundays each year. If you want to shop on a Sunday, plan around the flea markets instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I buy good souvenirs in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Ampelmann stores, especially the one at Hackescher Markt, sell the most characterful Berlin gifts. The Nikolaiviertel near Alexanderplatz has calmer craft and souvenir shops. Avoid the generic stalls right next to the big sights, where prices are higher and quality is lower."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the best vintage shopping in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Friedrichshain, especially the streets around Boxhagener Platz, is the centre of Berlin's vintage and second-hand scene, including large by-the-kilo stores. There are also good vintage shops in Prenzlauer Berg, Kreuzberg, and around Rosenthaler Platz in Mitte."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can tourists get a VAT refund when shopping in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you live outside the EU. You can reclaim the 19% VAT on goods when a single receipt from one store is over 50.01 EUR. Ask the shop for a tax-free form, get it stamped by customs as you leave the EU, and export the goods within three months. The customs stamp is required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin good for luxury shopping?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin has luxury options, mostly at KaDeWe and along Kurfürstendamm, but it is not a luxury-shopping capital like Paris or Milan. The city's real strength is independent design, concept stores, vintage, and markets, which is what most visitors end up enjoying more anyway."
+        }
+      }
+    ]
+  },
   "pergamon-closed": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
