@@ -4,6 +4,73 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-01 — Codex (Ultimate gate flow + collapsed lists)
+
+**Did:** Reworked the Ultimate Trip Planner preview gate so email capture comes after a short Day 1 teaser instead of deep inside the Day 1 preview, and shortened the unlocked utility lists.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — preview now shows a plan intro plus only the start of Day 1, then the blurred lock area and email form; removed the old preview flow rows before the gate. Transport maps, shopping notes, and Berlin essentials now show only the first item by default with `Show more` / `Show less` toggles.
+- Local QA — `git diff --check` and inline script parse passed. In-app Browser confirmed locked full plan stays hidden, lead panel is not inside `.bw-preview-day`, preview flow rows are gone, all three long lists show one item by default, toggles expand correctly, and console errors are empty.
+
+**Opened:** Continue one-by-one Ultimate UX fixes with Yusuf; no push/live promotion yet.
+**Closed:** Current gate-order issue and long unlocked list issue are fixed locally.
+
+**Next session should:** Review the locked gate flow in the in-app browser at `v=gate-collapse-20260601`, then continue copy/visual simplification.
+
+## 2026-06-01 — Codex (Reusable booking calendar)
+
+**Did:** Added a reusable `<bw-booking-calendar>` component so the paid landing page and future Wix custom Booking Calendar pages can share the same compact calendar UI.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — new light-DOM Custom Element with demo/JSON availability slots, date/time selection, guest stepper, UTM-preserving continue link, and custom change/continue events.
+- `booking-calendar/index.html` — standalone preview for local QA and dashboard route `/calendar`.
+- `booking-calendar/velo/custom-booking-calendar-page.js` — Velo scaffold for binding Wix Bookings availability into the component and routing to the Wix Booking Form.
+- `booking-calendar/README.md` — install/attribute/event notes.
+
+**Opened:** Live Wix custom calendar POC still needs to verify the current availability API (old `availabilityCalendar.queryAvailability()` vs Time Slots V2), real availability shape, and the exact Booking Form query params before publish.
+**Closed:** Local component preview and landing-page use smoke-tested with no console errors or horizontal overflow on the narrow in-app viewport.
+
+**Next session should:** Install this on a Wix custom Booking Calendar test page, bind real `wix-bookings.v2` availability, and validate that selected slot + guest count land correctly in the native Booking Form.
+
+## 2026-06-01 — Codex (Ultimate map copy cleanup)
+
+**Did:** Reworded a technical Google Maps label in the Ultimate Trip Planner day map pack.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — changed `Place anchor` to `Map stop` in day map cards and softened route detail from `with the day anchors` to `with today's stops`.
+- Local QA — `git diff --check` and inline script parse passed; Browser confirmed the visible Google Maps pack now shows `Day route` and `Map stop` labels.
+
+**Opened:** Continue copy simplification pass; there are still other `anchor` phrases elsewhere if Yusuf wants the whole vocabulary softened.
+**Closed:** The visible `Place anchor` label is removed locally.
+
+**Next session should:** Continue one-by-one visible copy fixes in the local widget.
+
+## 2026-06-01 — Codex (Ultimate loading animation)
+
+**Did:** Made the Ultimate Trip Planner “planning” state feel more polished while the preview is generated.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — replaced the static three loading chips with a one-row step timeline (`Arrival`, `Route`, `Maps/PDF`) that highlights each step in sequence while the spinner continues; added a synced progress underline and mobile-specific sizing so the row does not collapse.
+- Local QA — `git diff --check` and inline script parse passed. In-app Browser confirmed the row stays one line on the narrow viewport, labels do not truncate, the active step rotates, and console errors are empty.
+
+**Opened:** Continue one-by-one Ultimate UX fixes with Yusuf; no push/live promotion yet.
+**Closed:** Planning animation pass implemented locally.
+
+**Next session should:** Keep the local widget open at the planning-motion state and continue the next visible polish item.
+
+## 2026-06-01 — Codex (Ultimate emoji icon repair)
+
+**Did:** Fixed the Ultimate Trip Planner emoji icons that were rendering tiny/off-center after the SVG-to-emoji cleanup.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added scoped emoji/icon CSS so resource, map, tour marker, close-card, route-step, form-option, and essentials icons render centered at predictable sizes; changed the emoji span box back to `1em` so inline chips no longer stretch and force vertical text.
+- Local QA — `git diff --check` and inline script parse passed. In-app Browser confirmed transport/resource icons, essentials icons, day-map icons, and the Day 2 BerlinWalk tour marker render centered; console error check returned no errors.
+
+**Opened:** Continue one-by-one Ultimate UX fixes with Yusuf; no push/live promotion yet.
+**Closed:** Broken emoji icon alignment and the day-close chip vertical-text side effect are fixed locally.
+
+**Next session should:** Continue visual simplification from the local icon-fix state and review the remaining full-plan sections one at a time.
+
 ## 2026-06-01 — Codex (Ultimate tour timing rule)
 
 **Did:** Fixed the arrival-day BerlinWalk recommendation rule so BER/late-morning arrivals are not pushed into an impossible 11:30 tour.

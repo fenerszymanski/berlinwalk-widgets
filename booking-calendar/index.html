@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BerlinWalk Booking Calendar Preview</title>
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background: #FAFAF5;
+        color: #212121;
+        font-family: Montserrat, Arial, sans-serif;
+        margin: 0;
+        overflow-x: hidden;
+        padding: 24px;
+      }
+
+      main {
+        display: grid;
+        gap: 18px;
+        margin: 0 auto;
+        max-width: 420px;
+        min-width: 0;
+      }
+
+      h1 {
+        color: #1B5E20;
+        font-size: 28px;
+        line-height: 1.1;
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+
+      p {
+        color: #4E5A4E;
+        line-height: 1.55;
+        margin: 0;
+      }
+
+      @media (max-width: 520px) {
+        body {
+          padding: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Reusable booking calendar</h1>
+      <p>Compact calendar UI for BerlinWalk paid landing pages and Wix custom Booking Calendar pages.</p>
+      <bw-booking-calendar
+        demo
+        service-title="Pick your tour date"
+        default-guests="2"
+        max-guests="8"
+        cta-label="Continue to form">
+      </bw-booking-calendar>
+    </main>
+    <script src="./booking-calendar-element.js"></script>
+  </body>
+</html>

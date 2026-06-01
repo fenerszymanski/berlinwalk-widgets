@@ -762,27 +762,141 @@
     }
 
     #bw-trip-planner .bw-planning-steps {
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
       display: grid;
-      gap: 8px;
+      gap: 6px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      overflow: hidden;
+      padding: 6px;
+      position: relative;
+    }
+
+    #bw-trip-planner .bw-planning-steps::before,
+    #bw-trip-planner .bw-planning-steps::after {
+      border-radius: 999px;
+      bottom: 5px;
+      content: "";
+      height: 3px;
+      left: 8px;
+      position: absolute;
+      right: 8px;
+    }
+
+    #bw-trip-planner .bw-planning-steps::before {
+      background: rgba(27, 94, 32, 0.13);
+    }
+
+    #bw-trip-planner .bw-planning-steps::after {
+      animation: bwPlanProgress 6s linear infinite;
+      background: linear-gradient(90deg, var(--bw-green), var(--bw-lime), var(--bw-yellow));
+      right: auto;
+      width: calc((100% - 16px) / 3);
     }
 
     #bw-trip-planner .bw-planning-step {
+      align-items: center;
       background: rgba(255, 255, 255, 0.86);
       border: 1px solid var(--bw-border);
       border-radius: 8px;
       color: var(--bw-green);
-      display: block;
+      display: inline-flex;
+      gap: 7px;
       font-size: 10.5px;
       font-weight: 900;
+      justify-content: center;
       line-height: 1.25;
       min-height: 42px;
-      padding: 9px;
+      min-width: 0;
+      padding: 8px 8px 11px;
+      position: relative;
       text-align: center;
+      z-index: 1;
+      animation: bwPlanStep 6s ease-in-out infinite;
+    }
+
+    #bw-trip-planner .bw-planning-step:nth-child(2) {
+      animation-delay: 2s;
+    }
+
+    #bw-trip-planner .bw-planning-step:nth-child(3) {
+      animation-delay: 4s;
+    }
+
+    #bw-trip-planner .bw-planning-step b {
+      align-items: center;
+      background: var(--bw-lime-soft);
+      border: 1px solid rgba(27, 94, 32, 0.12);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      flex: 0 0 auto;
+      font-size: 9px;
+      height: 22px;
+      justify-content: center;
+      line-height: 1;
+      width: 22px;
+    }
+
+    #bw-trip-planner .bw-planning-step span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     @keyframes bwSpin {
       to { transform: rotate(360deg); }
+    }
+
+    @keyframes bwPlanStep {
+      0%,
+      100% {
+        background: rgba(255, 255, 255, 0.82);
+        border-color: var(--bw-border);
+        box-shadow: none;
+        color: var(--bw-green);
+        transform: translateY(0);
+      }
+
+      8%,
+      26% {
+        background: var(--bw-green);
+        border-color: var(--bw-green);
+        box-shadow: 0 8px 18px rgba(27, 94, 32, 0.16);
+        color: var(--bw-yellow);
+        transform: translateY(-1px);
+      }
+
+      34% {
+        background: rgba(255, 255, 255, 0.82);
+        border-color: var(--bw-border);
+        box-shadow: none;
+        color: var(--bw-green);
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bwPlanProgress {
+      0%,
+      32% {
+        transform: translateX(0);
+      }
+
+      33%,
+      65% {
+        transform: translateX(100%);
+      }
+
+      66%,
+      99% {
+        transform: translateX(200%);
+      }
+
+      100% {
+        transform: translateX(0);
+      }
     }
 
     #bw-trip-planner .bw-input-guide {
@@ -6047,6 +6161,48 @@
       margin: 0 0 12px;
     }
 
+    #bw-trip-planner .bw-preview-intro {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.12), rgba(242, 248, 232, 0.82)),
+        var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 3px;
+      padding: 10px;
+    }
+
+    #bw-trip-planner .bw-preview-intro b,
+    #bw-trip-planner .bw-preview-intro strong,
+    #bw-trip-planner .bw-preview-intro span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-preview-intro b {
+      color: var(--bw-muted);
+      font-size: 9px;
+      font-weight: 950;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-preview-intro strong {
+      color: var(--bw-green);
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-trip-planner .bw-preview-intro span {
+      color: var(--bw-muted);
+      font-size: 10.8px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
     #bw-trip-planner .bw-preview-day {
       background: var(--bw-white);
       border: 1px solid var(--bw-border);
@@ -6083,6 +6239,19 @@
 
     #bw-trip-planner .bw-preview-day .bw-day-postcard {
       margin-top: 8px;
+    }
+
+    #bw-trip-planner .bw-preview-day.is-cut {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      margin-bottom: -9px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-trip-planner .bw-preview-day.is-cut .bw-day-postcard {
+      max-height: 136px;
+      overflow: hidden;
     }
 
     #bw-trip-planner .bw-preview-flow {
@@ -6180,12 +6349,9 @@
         var(--bw-white);
       border: 1px solid rgba(27, 94, 32, 0.16);
       border-radius: 8px;
-      border-bottom: 0;
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
       display: grid;
       gap: 8px;
-      margin: -2px 0 0;
+      margin: 0 0 8px;
       overflow: hidden;
       padding: 11px;
       position: relative;
@@ -6399,8 +6565,7 @@
         linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(242, 248, 232, 0.96)),
         var(--bw-white);
       border: 1px solid var(--bw-border);
-      border-radius: 0 0 8px 8px;
-      border-top: 0;
+      border-radius: 8px;
     }
 
     #bw-trip-planner .bw-lead-panel .bw-delivery-grid {
@@ -6883,6 +7048,41 @@
       gap: 9px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       padding: 0 12px 12px;
+    }
+
+    #bw-trip-planner .bw-collapse-list:not(.is-expanded) {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    #bw-trip-planner .bw-collapse-list:not(.is-expanded) > .bw-collapse-item:nth-child(n+2) {
+      display: none;
+    }
+
+    #bw-trip-planner .bw-list-toggle {
+      align-items: center;
+      background: var(--section-accent, var(--bw-green));
+      border: 0;
+      border-radius: 999px;
+      color: var(--bw-white);
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 950;
+      justify-self: start;
+      letter-spacing: 0.7px;
+      line-height: 1.1;
+      margin: -2px 12px 12px;
+      min-height: 34px;
+      padding: 9px 12px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-list-toggle:hover {
+      filter: brightness(0.96);
+    }
+
+    #bw-trip-planner .bw-resource-panel.is-shopping .bw-list-toggle {
+      color: var(--bw-green);
     }
 
     #bw-trip-planner .bw-resource-card {
@@ -8295,6 +8495,12 @@
       margin-top: 3px;
     }
 
+    #bw-trip-planner .bw-essentials-panel .bw-list-toggle {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      margin: 0 12px 12px;
+    }
+
     #bw-trip-planner .bw-foot {
       background: var(--bw-cream);
       border-top: 1px solid var(--bw-border);
@@ -8304,6 +8510,90 @@
       line-height: 1.45;
       padding: 10px 16px;
       text-align: center;
+    }
+
+    #bw-trip-planner .bw-emoji-icon {
+      display: grid !important;
+      font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+      font-size: inherit !important;
+      font-style: normal !important;
+      font-weight: 400 !important;
+      height: 1em !important;
+      letter-spacing: 0 !important;
+      line-height: 1 !important;
+      margin: 0 !important;
+      place-items: center;
+      text-align: center;
+      text-transform: none !important;
+      transform: none;
+      width: 1em !important;
+    }
+
+    #bw-trip-planner .bw-carry-icon,
+    #bw-trip-planner .bw-health-icon,
+    #bw-trip-planner .bw-reservation-icon,
+    #bw-trip-planner .bw-base-icon,
+    #bw-trip-planner .bw-budget-icon,
+    #bw-trip-planner .bw-interest-icon,
+    #bw-trip-planner .bw-pace-icon,
+    #bw-trip-planner .bw-weather-strategy-icon,
+    #bw-trip-planner .bw-mode-chip-icon,
+    #bw-trip-planner .bw-arrival-check-icon,
+    #bw-trip-planner .bw-resource-icon,
+    #bw-trip-planner .bw-day-op-icon,
+    #bw-trip-planner .bw-day-close-icon,
+    #bw-trip-planner .bw-day-map-icon,
+    #bw-trip-planner .bw-tour-day-icon,
+    #bw-trip-planner .bw-route-step-icon,
+    #bw-trip-planner .bw-essential-icon {
+      align-items: center;
+      display: inline-grid !important;
+      justify-items: center;
+      line-height: 1 !important;
+      overflow: visible !important;
+      place-items: center;
+      text-align: center;
+    }
+
+    #bw-trip-planner .bw-resource-icon,
+    #bw-trip-planner .bw-day-map-icon,
+    #bw-trip-planner .bw-tour-day-icon {
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      color: var(--bw-text);
+      font-size: 22px !important;
+    }
+
+    #bw-trip-planner .bw-day-map-card.is-route .bw-day-map-icon {
+      background: var(--bw-yellow);
+      border-color: rgba(27, 94, 32, 0.18);
+      font-size: 22px !important;
+    }
+
+    #bw-trip-planner .bw-carry-icon,
+    #bw-trip-planner .bw-reservation-icon,
+    #bw-trip-planner .bw-arrival-check-icon,
+    #bw-trip-planner .bw-day-op-icon,
+    #bw-trip-planner .bw-day-close-icon,
+    #bw-trip-planner .bw-route-step-icon {
+      font-size: 19px !important;
+    }
+
+    #bw-trip-planner .bw-base-icon,
+    #bw-trip-planner .bw-budget-icon,
+    #bw-trip-planner .bw-interest-icon,
+    #bw-trip-planner .bw-pace-icon,
+    #bw-trip-planner .bw-weather-strategy-icon,
+    #bw-trip-planner .bw-mode-chip-icon {
+      font-size: 18px !important;
+    }
+
+    #bw-trip-planner .bw-health-icon {
+      font-size: 24px !important;
+    }
+
+    #bw-trip-planner .bw-essential-icon {
+      font-size: 20px !important;
     }
 
     @media (max-width: 880px) {
@@ -8380,6 +8670,36 @@
       #bw-trip-planner .bw-tour-card,
       #bw-trip-planner .bw-essentials-grid {
         grid-template-columns: 1fr;
+      }
+
+      #bw-trip-planner .bw-planning-steps {
+        gap: 4px;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        padding: 5px;
+      }
+
+      #bw-trip-planner .bw-planning-steps::before,
+      #bw-trip-planner .bw-planning-steps::after {
+        bottom: 4px;
+        left: 7px;
+        right: 7px;
+      }
+
+      #bw-trip-planner .bw-planning-steps::after {
+        width: calc((100% - 14px) / 3);
+      }
+
+      #bw-trip-planner .bw-planning-step {
+        font-size: 8.8px;
+        gap: 4px;
+        min-height: 38px;
+        padding: 7px 4px 10px;
+      }
+
+      #bw-trip-planner .bw-planning-step b {
+        font-size: 7.8px;
+        height: 18px;
+        width: 18px;
       }
 
       #bw-trip-planner .bw-lead-panel .bw-delivery-grid {
@@ -9002,9 +9322,9 @@
           <span class="bw-planning-spinner" aria-hidden="true"></span>
         </div>
         <div class="bw-planning-steps" aria-hidden="true">
-          <span class="bw-planning-step">Arrival setup</span>
-          <span class="bw-planning-step">Daily route logic</span>
-          <span class="bw-planning-step">Map + PDF pack</span>
+          <span class="bw-planning-step"><b>1</b><span>Arrival</span></span>
+          <span class="bw-planning-step"><b>2</b><span>Route</span></span>
+          <span class="bw-planning-step"><b>3</b><span>Maps/PDF</span></span>
         </div>
       </section>
 
@@ -9041,11 +9361,11 @@
           <div class="bw-preview-fade bw-locked-only" data-lock-box>
             <div class="bw-preview-fade-row">
               <span class="bw-preview-fade-icon" aria-hidden="true">📋</span>
-              <span class="bw-preview-fade-copy"><b>Full itinerary</b><strong>All days, timings, and route notes</strong><span>Phone-ready plan continues after unlock.</span></span>
+              <span class="bw-preview-fade-copy"><b>Rest of Day 1</b><strong>Timing, first route, and arrival notes</strong><span>The detail starts right after unlock.</span></span>
             </div>
             <div class="bw-preview-fade-row">
               <span class="bw-preview-fade-icon" aria-hidden="true">🗺️</span>
-              <span class="bw-preview-fade-copy"><b>Maps + PDF</b><strong>Google Maps links and printable plan</strong><span>Saved as one clean Berlin plan.</span></span>
+              <span class="bw-preview-fade-copy"><b>Later days</b><strong>Day 2 onward, maps, PDF, and print</strong><span>The full plan continues below.</span></span>
             </div>
           </div>
 
@@ -9368,6 +9688,11 @@
   var gateViewTracked = false;
   var emailFocusTracked = false;
   var emailValidTracked = false;
+  var expandedLists = {
+    transport: false,
+    shopping: false,
+    essentials: false
+  };
 
   var PLACE_CATALOG = {
     world_clock: { label: 'World Clock', query: 'Weltzeituhr Alexanderplatz Berlin', area: 'Alexanderplatz', type: 'central landmark', lat: 52.521918, lng: 13.413215, why: 'A clear central landmark and easy orientation anchor.' },
@@ -10638,7 +10963,7 @@
       icon: 'route',
       label: 'Day route',
       title: 'Day ' + day.dayNumber + ' route',
-      detail: routeMode + ' with the day anchors',
+      detail: routeMode + ' with today\'s stops',
       action: 'Open route',
       url: route.url
     }];
@@ -10647,7 +10972,7 @@
       return {
         kind: 'place',
         icon: place && place.type === 'food' ? 'food' : (place && place.type === 'park' ? 'leaf' : 'pin'),
-        label: 'Place anchor',
+        label: 'Map stop',
         title: link.label,
         detail: ((place && place.area) || 'Berlin') + ' / ' + placeTypeLabel(place && place.type),
         action: 'Open map',
@@ -13562,6 +13887,24 @@
       '<div class="bw-board-lens" data-board-active-lens="' + escapeHtml(boardLens) + '">' + activeLensHtml + '</div>';
   }
 
+  function collapseListClass(key) {
+    return 'bw-collapse-list' + (expandedLists[key] ? ' is-expanded' : '');
+  }
+
+  function resetExpandedLists() {
+    expandedLists.transport = false;
+    expandedLists.shopping = false;
+    expandedLists.essentials = false;
+  }
+
+  function collapseToggleHtml(key, total, noun) {
+    if (total <= 1) return '';
+    var expanded = Boolean(expandedLists[key]);
+    var hiddenCount = Math.max(0, total - 1);
+    var label = expanded ? 'Show less' : 'Show ' + hiddenCount + ' more ' + noun;
+    return '<button class="bw-list-toggle" type="button" data-toggle-list="' + escapeHtml(key) + '" aria-expanded="' + (expanded ? 'true' : 'false') + '">' + escapeHtml(label) + '</button>';
+  }
+
   function renderEssentials(plan) {
     var target = root.querySelector('[data-essentials-panel]');
     if (!target) return;
@@ -13572,15 +13915,16 @@
     var items = berlinEssentials(plan);
     target.innerHTML = '<section class="bw-essentials-panel">' +
       '<div class="bw-essentials-head"><strong>Berlin essentials</strong><span>Added to the end of your PDF and print plan.</span></div>' +
-      '<div class="bw-essentials-grid">' + items.map(function (item) {
-        return '<div class="bw-essential"><span class="bw-essential-icon">' + iconSvg(essentialIconName(item.title)) + '</span><div><strong>' + escapeHtml(item.title) + '</strong><b>' + escapeHtml(item.cue || '') + '</b><span>' + escapeHtml(item.copy) + '</span></div></div>';
+      '<div class="bw-essentials-grid ' + collapseListClass('essentials') + '">' + items.map(function (item) {
+        return '<div class="bw-essential bw-collapse-item"><span class="bw-essential-icon">' + iconSvg(essentialIconName(item.title)) + '</span><div><strong>' + escapeHtml(item.title) + '</strong><b>' + escapeHtml(item.cue || '') + '</b><span>' + escapeHtml(item.copy) + '</span></div></div>';
       }).join('') + '</div>' +
+      collapseToggleHtml('essentials', items.length, 'tips') +
     '</section>';
   }
 
   function resourceCardHtml(item, kind) {
     var url = item.url || mapsSearchUrl(item.query || item.title);
-    return '<a class="bw-resource-card" href="' + escapeHtml(url) + '" target="_blank" rel="noopener" style="--resource-accent:' + escapeHtml(item.accent || '#1B5E20') + '">' +
+    return '<a class="bw-resource-card bw-collapse-item" href="' + escapeHtml(url) + '" target="_blank" rel="noopener" style="--resource-accent:' + escapeHtml(item.accent || '#1B5E20') + '">' +
       '<span class="bw-resource-icon">' + iconSvg(item.icon || 'map') + '</span>' +
       '<span><b>' + escapeHtml(item.label || kind || 'Resource') + '</b><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail || '') + '</span><em>' + escapeHtml(kind === 'map' ? 'Open PDF' : 'Open in Google Maps') + '</em></span>' +
     '</a>';
@@ -13596,7 +13940,8 @@
     target.innerHTML =
       '<section class="bw-resource-panel is-transport" aria-label="Berlin public transport maps">' +
         '<div class="bw-resource-head"><div><strong>Berlin public transport maps</strong><span>Save these official BVG/VBB PDFs for offline use. Especially useful for BER, night routes, trams, and Potsdam days.</span></div><span class="bw-resource-pill">Full plan</span></div>' +
-        '<div class="bw-resource-grid">' + TRANSPORT_MAPS.map(function (item) { return resourceCardHtml(item, 'map'); }).join('') + '</div>' +
+        '<div class="bw-resource-grid ' + collapseListClass('transport') + '">' + TRANSPORT_MAPS.map(function (item) { return resourceCardHtml(item, 'map'); }).join('') + '</div>' +
+        collapseToggleHtml('transport', TRANSPORT_MAPS.length, 'maps') +
       '</section>';
   }
 
@@ -13610,7 +13955,8 @@
     target.innerHTML =
       '<section class="bw-resource-panel is-shopping" aria-label="Berlin shopping planner">' +
         '<div class="bw-resource-head"><div><strong>Shopping notes</strong><span>Malls for weather backup, classic shopping streets, courtyard browsing, and the nearby outlet option if you want a half-day outside the city.</span></div><span class="bw-resource-pill">Feature</span></div>' +
-        '<div class="bw-resource-grid">' + SHOPPING_GROUPS.map(function (item) { return resourceCardHtml(item, 'shopping'); }).join('') + '</div>' +
+        '<div class="bw-resource-grid ' + collapseListClass('shopping') + '">' + SHOPPING_GROUPS.map(function (item) { return resourceCardHtml(item, 'shopping'); }).join('') + '</div>' +
+        collapseToggleHtml('shopping', SHOPPING_GROUPS.length, 'places') +
       '</section>';
   }
 
@@ -13697,6 +14043,7 @@
     planningInProgress = false;
     planGenerated = false;
     latestPlan = null;
+    resetExpandedLists();
     var draftPlan = buildPlan();
     renderPlanChrome(draftPlan);
     updatePlanningUi();
@@ -13710,6 +14057,7 @@
     planningInProgress = true;
     planGenerated = false;
     latestPlan = null;
+    resetExpandedLists();
     renderPlanChrome(buildPlan());
     updatePlanningUi();
     setActionStatus('');
@@ -13754,15 +14102,19 @@
 
     var preview = root.querySelector('[data-preview-days]');
     if (preview) {
-      var previewCount = Math.min(1, plan.days.length);
-      preview.innerHTML = plan.days.slice(0, previewCount).map(function (day) {
-        return '<article class="bw-preview-day">' +
-          '<strong>Day ' + day.dayNumber + ': ' + escapeHtml(day.title) + '</strong>' +
-          '<span>' + escapeHtml(formatDisplayDate(day.dateKey)) + ' - ' + escapeHtml(day.theme) + '</span>' +
-          dayPostcardHtml(day) +
-          previewDayFlowHtml(day, plan) +
-        '</article>';
-      }).join('');
+      var firstPreviewDay = (plan.days || [])[0];
+      preview.innerHTML = firstPreviewDay ? (
+        '<section class="bw-preview-intro" aria-label="Plan preview">' +
+          '<b>Preview plan</b>' +
+          '<strong>' + escapeHtml(plan.days.length + (plan.days.length === 1 ? ' Berlin day' : ' Berlin days')) + ' shaped around your arrival</strong>' +
+          '<span>Here is the start. The full Day 1 detail and later days unlock after email.</span>' +
+        '</section>' +
+        '<article class="bw-preview-day is-cut">' +
+          '<strong>Day ' + firstPreviewDay.dayNumber + ': ' + escapeHtml(firstPreviewDay.title) + '</strong>' +
+          '<span>' + escapeHtml(formatDisplayDate(firstPreviewDay.dateKey)) + ' - ' + escapeHtml(firstPreviewDay.theme) + '</span>' +
+          dayPostcardHtml(firstPreviewDay) +
+        '</article>'
+      ) : '';
     }
 
     renderFullPlan();
@@ -17018,6 +17370,25 @@
         day_number: jumpDay
       });
       setActionStatus('Day ' + jumpDay + ' opened in the full plan.');
+      return;
+    }
+
+    var listToggle = event.target.closest('[data-toggle-list]');
+    if (listToggle) {
+      var listKey = listToggle.getAttribute('data-toggle-list');
+      if (Object.prototype.hasOwnProperty.call(expandedLists, listKey)) {
+        expandedLists[listKey] = !expandedLists[listKey];
+        var listPlan = latestPlan || buildPlan();
+        if (listKey === 'transport') renderTransportMaps(listPlan);
+        if (listKey === 'shopping') renderShoppingPanel(listPlan);
+        if (listKey === 'essentials') renderEssentials(listPlan);
+        track('bw_trip_planner_list_toggle', {
+          arrival_date: state.arrivalDate,
+          trip_length: state.tripLength,
+          list_key: listKey,
+          expanded: expandedLists[listKey]
+        });
+      }
       return;
     }
 
