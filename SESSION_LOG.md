@@ -4,6 +4,36 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-01 — Codex (Shopping blog images + SEO)
+
+**Did:** Continued the `shopping-in-berlin` blog after Claude hit the limit; completed the Wix draft's image and SEO package.
+
+**Changed:**
+- `blog-drafts/images/shopping-in-berlin/*.jpg` — four optimized Wikimedia Commons source images are present locally (KaDeWe, Tauentzienstraße, Hackesche Höfe, Mauerpark flea market).
+- `blog-drafts/shopping-in-berlin.md` — recorded real Wix draft ID and image/SEO status.
+- Workspace `berlinwalk-content-app/add-shopping-blog-images.mjs` — retained as the one-off uploader/patcher with Wikimedia source URLs + license URLs for all four credits.
+- Wix Blog: draft `6c6b71d2-ba58-4265-8506-a36e301679dd` remains `UNPUBLISHED`; patched with KaDeWe cover/featured/OG/Twitter image, 3 inline images, image credits, excerpt, SEO title/meta, focus keyword `shopping in Berlin`, 5 keywords, and tags `Shopping in Berlin`, `Berlin Flea Markets`, `Berlin Travel Tips`.
+- Root `PROJECT_MEMORY.md` / `SESSION_LOG.md` — recorded that live QS/FAQ data contains `shopping-in-berlin` and the stale second-push blocker is closed.
+
+**Opened:** Yusuf still needs to review/publish the Wix draft. Optional: generate a tool icon; after publish, update the BerlinTools relatedBlog and re-save the CMS row.
+**Closed:** Image upload, inline placement, alt text, SEO/tags, and API readback verification.
+
+**Next session should:** Review the Wix draft in the editor, publish when approved, then live-QA the public post URL.
+
+## 2026-06-01 — Codex (Ultimate feedback cleanup gate)
+
+**Did:** Applied Yusuf's latest local UX feedback for the Ultimate Trip Planner: simpler first-time choice, cleaner interest wording, stricter preview gate, and clearer unlocked-plan styling.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — changed `Mixed group` to `Long time ago`, renamed `Berlin Wall` to `Berlin Wall / Cold War`, removed the top result glance cards and technical `Start rule`/`Map layer` stats, reduced the weather panel to a compact mini box, moved the email gate directly under a blurred preview continuation, shortened lead benefit chips to `PDF`/`Link`/`Maps`/`Tips`, kept the reminder timeline hidden in the gate, and restyled the unlocked full-plan section as a separate document-like area. Full plan remains locked before email/QA unlock.
+- Local in-app Browser QA — normal locked flow shows 2 preview day cards, full plan hidden, compact weather, two-column lead chips on narrow viewport, and no `Mixed group`/`Start rule`/`Map layer`; QA unlock shows 4 full days, 4 transport map cards, 6 shopping cards, 8 essentials, overflow `0`.
+- `PROJECT_MEMORY.md` — recorded the feedback pass and that emails remain unchanged until Yusuf accepts the widget.
+
+**Opened:** Yusuf still needs to review this local iteration; do not push or update email copy until he accepts the widget direction.
+**Closed:** Latest requested text/structure cleanup is implemented locally; `node ultimate-berlin-trip-planner/launch-audit.mjs` is `143 pass, 0 warn, 0 block`; `git diff --check` is clean.
+
+**Next session should:** Show Yusuf the local URL with `resetUnlock=1`, collect the next UX pass, and only then decide whether to push/live-promote.
+
 ## 2026-06-01 — Claude Code (Berlin Shopping Areas widget + blog draft)
 
 **Did:** Built a new `berlin-shopping-areas` BerlinTools map widget and a `shopping-in-berlin` blog draft to capture the high-intent "where to shop in Berlin" search that existing posts #17 (souvenirs) and #61 (Sunday hours) miss.

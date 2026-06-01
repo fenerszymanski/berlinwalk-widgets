@@ -2,7 +2,7 @@
 
 Slug idea: `shopping-in-berlin`
 
-Wix draft ID: `TBD`
+Wix draft ID: `6c6b71d2-ba58-4265-8506-a36e301679dd`
 
 Wix draft status: `UNPUBLISHED`
 
@@ -17,6 +17,8 @@ Primary keyword: shopping in Berlin
 Secondary keywords: where to shop in Berlin, best shopping areas in Berlin, Berlin flea markets, Berlin vintage shopping, Berlin shopping streets
 
 Suggested CTA: Start at the World Clock on Alexanderplatz and finish near the Hackesche Höfe shops on our free Berlin walking tour, then keep exploring on foot.
+
+Image/SEO status: Wix draft patched on 2026-06-01 with four licensed Wikimedia Commons images via `berlinwalk-content-app/add-shopping-blog-images.mjs`. Cover/featured/OG/Twitter image: KaDeWe. Inline images: Tauentzienstraße, Hackesche Höfe, Mauerpark flea market. Image credits are appended in the Wix draft body; alt text, focus keyword, SEO keywords, meta description, excerpt, and Wix Blog tags are filled.
 
 ## Widget Plan
 
