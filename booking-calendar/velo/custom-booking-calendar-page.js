@@ -26,7 +26,7 @@ import { availabilityCalendar } from 'wix-bookings.v2';
 const CALENDAR_ELEMENT_ID = '#bwBookingCalendar';
 const BOOKING_FORM_PATH = '/booking-form';
 const TIMEZONE = 'Europe/Berlin';
-const DAYS_TO_LOAD = 14;
+const DAYS_TO_LOAD = 60;
 
 let normalizedSlots = [];
 

@@ -384,6 +384,7 @@ class BWBookingCalendarElement extends HTMLElement {
       'service-title',
       'default-guests',
       'max-guests',
+      'demo-days',
       'loading',
       'error-message',
       'cta-label',
@@ -461,7 +462,8 @@ class BWBookingCalendarElement extends HTMLElement {
   _demoSlots() {
     const slots = [];
     const now = new Date();
-    for (let day = 1; day <= 10; day += 1) {
+    const demoDays = Math.max(14, Math.min(Number(this.getAttribute('demo-days') || 60), 120));
+    for (let day = 1; day <= demoDays; day += 1) {
       const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + day);
       [11.5, 14.5].forEach((hour, index) => {
         if (index === 1 && day % 3 !== 0) return;

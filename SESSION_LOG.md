@@ -53,13 +53,13 @@ After Yusuf's first push, live steps ran: widget served by GitHub Pages (200); C
 **Did:** Added a reusable `<bw-booking-calendar>` component so the paid landing page and future Wix custom Booking Calendar pages can share the same compact calendar UI.
 
 **Changed:**
-- `booking-calendar/booking-calendar-element.js` — new light-DOM Custom Element with demo/JSON availability slots, visible date-carousel arrows/fade, date/time selection, guest stepper, UTM-preserving continue link, and custom change/continue events.
+- `booking-calendar/booking-calendar-element.js` — new light-DOM Custom Element with demo/JSON availability slots, visible date-carousel arrows/fade, date/time selection, guest stepper, UTM-preserving continue link, custom change/continue events, and 60-day default demo range (`demo-days` configurable, capped at 120).
 - `booking-calendar/index.html` — standalone preview for local QA and dashboard route `/calendar`.
 - `booking-calendar/velo/custom-booking-calendar-page.js` — Velo scaffold for binding Wix Bookings availability into the component and routing to the Wix Booking Form.
 - `booking-calendar/README.md` — install/attribute/event notes.
 
 **Opened:** Live Wix custom calendar POC still needs to verify the current availability API (old `availabilityCalendar.queryAvailability()` vs Time Slots V2), real availability shape, and the exact Booking Form query params before publish.
-**Closed:** Local component preview and landing-page use smoke-tested with no console errors or horizontal overflow; the date row now clearly indicates horizontal scrolling.
+**Closed:** Local component preview and landing-page use smoke-tested with no console errors or horizontal overflow; the date row now clearly indicates horizontal scrolling and demo mode reaches beyond short-notice dates.
 
 **Next session should:** Install this on a Wix custom Booking Calendar test page, bind real `wix-bookings.v2` availability, and validate that selected slot + guest count land correctly in the native Booking Form.
 

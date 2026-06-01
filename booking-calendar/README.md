@@ -11,6 +11,7 @@ http://127.0.0.1:4177/calendar
 ```
 
 The local preview uses demo slots.
+By default, demo mode generates 60 days of future tour dates so longer-term reservations are visible.
 
 ## Custom Element
 
@@ -33,6 +34,7 @@ Useful attributes:
 - `service-title`: visible heading.
 - `default-guests`: starting guest count.
 - `max-guests`: maximum guest count.
+- `demo-days`: demo-only future date window, default `60`, capped at `120`.
 - `cta-label`: CTA copy.
 - `demo`: use generated demo availability.
 
@@ -65,7 +67,7 @@ Use Wix's custom Booking Calendar page flow:
 2. Add one Custom Element with ID `#bwBookingCalendar`.
 3. Set tag name `bw-booking-calendar`.
 4. Use `velo/custom-booking-calendar-page.js` as the page-code starting point.
-5. Query real availability. The scaffold follows Wix's custom calendar article with `availabilityCalendar.queryAvailability()`, but Wix's newer Time Slots V2 docs say Availability Calendar is being replaced. If that call is unavailable on the live site, replace `loadSlots()` with Time Slots V2, likely List Event Time Slots for the BerlinWalk group tour.
+5. Query real availability. The scaffold asks for 60 days. The final available range still depends on the Wix Bookings service booking-window settings. The scaffold follows Wix's custom calendar article with `availabilityCalendar.queryAvailability()`, but Wix's newer Time Slots V2 docs say Availability Calendar is being replaced. If that call is unavailable on the live site, replace `loadSlots()` with Time Slots V2, likely List Event Time Slots for the BerlinWalk group tour.
 6. Pass normalized slots to the custom element with `setAttribute('availability-json', JSON.stringify(slots))`.
 7. On `bw-booking-calendar-continue`, route to the Wix Booking Form with selected slot defaults.
 
