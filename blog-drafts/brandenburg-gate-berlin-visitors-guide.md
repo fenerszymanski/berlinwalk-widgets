@@ -8,6 +8,8 @@ Wix draft status: `UNPUBLISHED`
 
 Image/SEO status: Wix draft patched on 2026-06-01 with four licensed images via `berlinwalk-content-app/add-brandenburg-blog-images.mjs`. Cover/featured/OG/Twitter image: blue-hour Brandenburg Gate (CC0). Inline images: Pariser Platz day (CC BY-SA 3.0), Berlin Wall crane 1989 (public domain), Quadriga close-up (CC BY 2.0). Image credits appended in the Wix draft body; alt text, focus keyword "Brandenburg Gate", SEO keywords, meta description, excerpt, and Wix Blog tags (Brandenburg Gate / Berlin Landmarks / Berlin Travel Tips) are filled.
 
+Body expansion (2026-06-01): re-patched via `berlinwalk-content-app/update-brandenburg-body.mjs` (reuses existing media IDs, patches richContent only). Body grew to ~1400 words, added a new "The Brandenburg Gate and the Berlin Wall" section and deeper history (Eirene to Victoria, 1933 torchlight, WWII Quadriga destruction + 1957-58 East-West recast). Link audit on the live draft: 14 internal links + 3 editorial external links (visitBerlin, Bundestag, Stiftung Denkmal) + 7 required image-credit attribution links. Cover media, SEO, and tags were left untouched by the body re-patch.
+
 Meta title: Brandenburg Gate Berlin: A Visitor's Guide (2026)
 
 Meta description: A Berlin walking guide's honest take on the Brandenburg Gate: a short history, what you actually see today, how to visit, the best photo times, and what to combine it with.
@@ -50,31 +52,46 @@ Note: end-of-post tour CTA and the Berlin First-Day Survival Guide lead form are
 
 Almost everyone who visits Berlin ends up standing in front of the Brandenburg Gate at some point. It is on the postcards, the news backdrops, and probably your itinerary already. As a guide, I get asked about it constantly, even though it sits at the western end of the historic centre, away from where my own tour runs.
 
-So here is the honest visitor's guide: a little history to make the stop mean something, what you actually see today, how to visit without wasting time, and what to combine it with so you are not standing in a square for an hour wondering what to do next.
+So here is the honest visitor's guide: enough history to make the stop mean something, what you actually see today, how to visit without wasting time, and what to combine it with so you are not left standing in a square wondering what to do next.
 
 {{quick-summary}}
 
 ## What is the Brandenburg Gate?
 
-The Brandenburg Gate is an 18th-century triumphal arch and the last surviving city gate of Berlin. It stands on Pariser Platz in Mitte, at the western end of the grand boulevard Unter den Linden, right where the historic centre meets the green of Tiergarten.
+The Brandenburg Gate is an 18th-century triumphal arch and the last surviving city gate of Berlin. It stands on Pariser Platz in Mitte, at the western end of the grand boulevard Unter den Linden, right where the dense historic centre opens out into the green of Tiergarten.
 
-It is free, open all the time, and you do not need a ticket for anything. You simply walk up to it. What makes it worth understanding is not the stone itself, but everything that has happened around it.
+It is free, open around the clock, and there is no ticket for anything. You simply walk up to it. What makes it worth understanding is not the sandstone itself, but the sheer amount of history that has passed through it: Prussian kings, Napoleon, Nazi torchlight parades, a Cold War no-man's-land, and finally the night the Wall came down. For official visitor information, Berlin's tourism board keeps a short page on the [Brandenburg Gate](https://www.visitberlin.de/en/brandenburg-gate).
 
 ## A short history
 
-The gate was built between 1788 and 1791 for King Frederick William II, designed by Carl Gotthard Langhans and inspired by the entrance to the Acropolis in Athens. In 1793 the sculptor Johann Gottfried Schadow crowned it with the Quadriga, a statue of a four-horse chariot driven by a winged goddess.
+The gate was built between 1788 and 1791 for King Frederick William II, designed by Carl Gotthard Langhans and modelled on the monumental entrance to the Acropolis in Athens. It was conceived as a gate of peace, and in 1793 the sculptor Johann Gottfried Schadow crowned it with the Quadriga, a four-horse chariot driven by a goddess who originally represented Eirene, the Greek goddess of peace.
 
-In 1806, after defeating Prussia, Napoleon marched through the gate and took the Quadriga to Paris as a trophy. It returned in triumph in 1814, and the goddess was redesigned as Victoria, the goddess of victory, carrying a Prussian eagle and an iron cross.
+In 1806, after crushing Prussia, Napoleon marched through the gate and shipped the Quadriga to Paris as a war trophy. It returned in triumph in 1814, and the goddess was reworked as Victoria, the goddess of victory, now carrying a Prussian eagle and an iron cross. The gate of peace had quietly become a victory monument.
 
-The gate's most powerful chapter is the most recent. When the Berlin Wall went up in 1961, the Brandenburg Gate ended up stranded in the death strip between East and West, sealed off and unreachable from either side. For nearly three decades it stood as the single most recognisable symbol of a divided city and a divided world. It is where Ronald Reagan said "tear down this wall" in 1987. When the Wall fell, the gate itself did not reopen until 22 December 1989, and that reopening is still one of the defining images of reunification.
+The 20th century pulled it in every direction. In 1933 the Nazis staged a torchlight procession through the gate to celebrate Hitler becoming chancellor. By 1945 the square around it was rubble and the Quadriga was destroyed; it was recast and reinstalled in 1957 and 1958 in a rare moment of cooperation between East and West Berlin.
+
+Then came its most famous chapter. When the Berlin Wall went up in 1961, the Brandenburg Gate was left stranded in the death strip between the two sides, sealed off and unreachable. For nearly three decades it stood as the single most recognisable symbol of a divided city and a divided world. It is where US President Ronald Reagan said "tear down this wall" in 1987. When the Wall finally fell, the gate's own crossing did not reopen until 22 December 1989, and that night remains one of the defining images of reunification. For the bigger picture, I wrote a plain-English guide to [how Berlin was divided](https://www.berlinwalk.com/post/how-berlin-was-divided-a-simple-guide-to-east-vs-west).
+
+## The Brandenburg Gate and the Berlin Wall
+
+It is hard to overstate how strange the gate's Cold War decades were. The Wall did not simply run past it; it boxed it in. Visitors from the West could climb a viewing platform and look at the gate across the barrier, while in the East it sat behind a second fence, floodlit but untouchable. That is exactly why this is where crowds gathered the moment the border opened.
+
+If the Wall is the thread you want to follow in Berlin, the gate is the right place to start pulling it. Trace where the Wall actually ran, then see what survives today:
+
+- [Where was the Berlin Wall? An interactive map](https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map) shows the line through the modern city.
+- [The Berlin Wall: where it stood and what is left in 2026](https://www.berlinwalk.com/post/the-berlin-wall-where-it-stood-and-what-s-left-in-2026) is the practical "what can I still see" guide.
+- [Cold War Berlin in 5 key locations](https://www.berlinwalk.com/post/cold-war-berlin-in-5-key-locations-you-can-still-visit) connects the gate with Checkpoint Charlie and the rest.
 
 ## What you actually see today
 
-Pariser Platz, the square in front of the gate, has been rebuilt since reunification and now holds the Hotel Adlon, the US and French embassies, and the Academy of Arts. Look up at the Quadriga, then notice the quiet details most people walk past.
+Pariser Platz, the square in front of the gate, was rebuilt after reunification and now holds the Hotel Adlon, the US and French embassies, and the Academy of Arts. Stand back and look up: the gate is sandstone in a strict Doric style, with twelve columns forming five passages. In the old days the widest central passage was reserved for the royal family.
 
-Inside the northern gatehouse is the Room of Silence, a small free space kept for quiet reflection, easy to miss and worth a minute. And just steps to the south sits the Memorial to the Murdered Jews of Europe, which I will come back to.
+Two details most visitors walk straight past:
 
-Use the map below to see the gate in context, along with the other central landmarks, memorials, museums, and viewpoints, each with the nearest U-Bahn or S-Bahn.
+- The **Quadriga** you see today is the 1950s recast, with the Prussian eagle and iron cross restored after 1990. Read that one statue closely and you have the whole story of the gate: peace, conquest, division, and return.
+- Inside the northern gatehouse is the **Room of Silence** (Raum der Stille), a small, free, non-religious space kept for quiet reflection. It is easy to miss and worth a minute.
+
+Use the map below to see the gate in context, with the other central landmarks, memorials, museums, and viewpoints, each with the nearest U-Bahn or S-Bahn.
 
 {{widget:berlin-landmarks-map}}
 
@@ -82,27 +99,28 @@ Use the map below to see the gate in context, along with the other central landm
 
 A few practical notes that save time:
 
-- **Cost and hours.** Free, outdoors, and open 24 hours. There is nothing to book.
-- **Getting there.** Take the U5 or the S-Bahn (S1, S2, S25, S26) to Brandenburger Tor station, which comes out right at the gate. The cheap and scenic option is [Bus 100](https://www.berlinwalk.com/post/bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about), which runs past it.
-- **How long to spend.** Honestly, 20 to 30 minutes is plenty for the gate and the square. It photographs better than it occupies you.
-- **When to go.** Sunrise and the blue hour after sunset are magic and nearly empty. Midday is packed with tour groups and the light is flat. If you only care about one good photo, come early.
+- **Cost and hours.** Free, outdoors, and open 24 hours. There is nothing to book, which makes it one of the best [free things to do in Berlin](https://www.berlinwalk.com/post/free-things-to-do-in-berlin-2026).
+- **Getting there.** Take the U5 or the S-Bahn (S1, S2, S25, S26) to Brandenburger Tor station, which exits right at the gate. The cheap, scenic alternative is [Bus 100](https://www.berlinwalk.com/post/bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about), which trundles past it through the centre.
+- **How long to spend.** Honestly, 20 to 30 minutes is plenty for the gate and the square. It photographs better than it occupies you, so do not over-plan it.
+- **When to go.** Sunrise and the blue hour after sunset are quiet and beautiful. Midday is packed with tour groups and the light is flat. For more timing tricks, see [Berlin's best photo spots](https://www.berlinwalk.com/post/7-best-photo-spots-in-berlin-most-tourists-walk-right-past).
+- **Big nights.** The gate hosts one of Europe's largest New Year's Eve parties and is a centrepiece of the Festival of Lights every October. Expect crowds and road closures on those dates.
 
 ## What to combine it with
 
-The real reason to come here is that the Brandenburg Gate sits in the middle of a dense cluster of Berlin's heaviest hitters, all within a short walk:
+The real reason to come is that the Brandenburg Gate sits in the middle of a dense cluster of Berlin's heaviest hitters, all within a short walk:
 
-- **The Reichstag**, Germany's parliament with the free glass dome, is two minutes north. The dome is free but you must [register online in advance](https://www.berlinwalk.com/post/how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now), often weeks ahead, so sort that before you travel.
-- **The Memorial to the Murdered Jews of Europe** is one minute south: 2,711 concrete stelae you can walk into, free and always open, with a free information centre underneath. Treat it as a place to be quiet, not to pose.
-- **Tiergarten**, Berlin's huge central park, begins right behind the gate and leads to the Victory Column.
+- **The Reichstag**, Germany's parliament with the free glass dome, is two minutes north. The dome is free but you must register in advance through the [Bundestag visitor service](https://www.bundestag.de/en/visitthebundestag); here is my full guide to [visiting the Reichstag dome for free](https://www.berlinwalk.com/post/how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now).
+- **The Memorial to the Murdered Jews of Europe** is one minute south: 2,711 concrete stelae you can walk into, free and always open, with a free information centre underneath run by the [Stiftung Denkmal](https://www.stiftung-denkmal.de/en/). Treat it as a place to be quiet, not to pose.
+- **Tiergarten**, Berlin's huge central park, begins right behind the gate and leads to the Victory Column, one of [the best views in Berlin you can find on foot](https://www.berlinwalk.com/post/the-best-views-in-berlin-you-can-find-on-foot).
 - **Unter den Linden** runs east from the gate toward Museum Island and Alexanderplatz, the spine of historic Berlin.
 
-For more photogenic corners beyond the obvious, see my guide to [Berlin's best photo spots](https://www.berlinwalk.com/post/7-best-photo-spots-in-berlin-most-tourists-walk-right-past), and if you are mapping a whole trip, the [Berlin in 3 days itinerary](https://www.berlinwalk.com/post/berlin-in-3-days-the-perfect-itinerary-from-a-local-guide) puts this area in order.
+If you are mapping a whole trip, the [Berlin in 3 days itinerary](https://www.berlinwalk.com/post/berlin-in-3-days-the-perfect-itinerary-from-a-local-guide) puts this western cluster in sensible order with everything else.
 
 ## The honest take
 
-The Brandenburg Gate is essential, but it is a quick, symbolic stop, not a half-day attraction. The mistake I see is people treating it as the centre of their Berlin and missing that it marks the western edge of the old city.
+The Brandenburg Gate is essential, but it is a quick, symbolic stop, not a half-day attraction. The most common [first-time visitor mistake](https://www.berlinwalk.com/post/berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go) I see is treating it as the centre of Berlin and missing that it actually marks the western edge of the old city.
 
-The story keeps going east. Unter den Linden leads straight into the layered historic core, the part where Berlin stops being a postcard and starts making sense: medieval origins, Prussian grandeur, wartime destruction, and the East German city built on top. That eastern stretch, from the World Clock on Alexanderplatz to Hackescher Markt, is exactly the ground our [free walking tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) covers. See the gate on your own in the morning, then let the [route](https://www.berlinwalk.com/berlin-walking-tour-route) tie the rest of the city together. If you want the background on why Berlin looks the way it does, start with [how Berlin was divided](https://www.berlinwalk.com/post/how-berlin-was-divided-a-simple-guide-to-east-vs-west).
+The story keeps going east. Unter den Linden leads straight into the layered historic core, the part where Berlin stops being a postcard and starts to make sense: medieval origins, Prussian grandeur, wartime destruction, and the East German city built on top. That eastern stretch, from the World Clock on Alexanderplatz to [Hackescher Markt](https://www.berlinwalk.com/post/hackescher-markt-where-our-tour-ends-and-your-berlin-adventure-begins), is exactly the ground our [free walking tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) covers. See the gate on your own in the morning, then let the [route](https://www.berlinwalk.com/berlin-walking-tour-route) tie the rest of the city together.
 
 {{faq}}
 
