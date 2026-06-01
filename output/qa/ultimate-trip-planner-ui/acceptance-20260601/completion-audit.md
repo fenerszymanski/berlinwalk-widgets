@@ -29,6 +29,9 @@ Status: ready for Yusuf review, not complete until approval and email updates.
 - Shopping feature in widget/PDF: passed.
   Evidence: `../lead-gate-20260601/summary.json` shows `shoppingCards: 6` after unlock; PDF `render-summary.json` shows `hasShoppingNotes: true`.
 
+- Second form cleanup: passed.
+  Evidence: `../form-simplify-20260601/summary.json` shows visible `1 day`, hidden option subtexts, centered options, `Plan needs` visible, old `Planning priorities` absent, session-only preview lock intact, and post-unlock resource sections distinct with smaller icons.
+
 ## Still Open
 
 - Yusuf review/approval of the widget.

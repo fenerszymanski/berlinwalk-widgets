@@ -1,0 +1,38 @@
+{
+  "pass": true,
+  "initial": {
+    "resultHidden": true,
+    "fullHidden": true,
+    "pdfDisabled": true,
+    "firstLengthVisibleText": "1 day",
+    "lengthIconDisplay": "none",
+    "optionAlignItems": "center",
+    "optionMinHeight": "52px",
+    "optSubDisplay": "none",
+    "planNeedsVisible": true,
+    "oldPlanningPrioritiesVisible": false,
+    "overflow": 0
+  },
+  "afterBuild": {
+    "resultHidden": false,
+    "fullHidden": true,
+    "previewCards": 2,
+    "fullDayCards": 0,
+    "transportCards": 0,
+    "shoppingCards": 0,
+    "pdfDisabled": true,
+    "overflow": 0
+  },
+  "unlocked": {
+    "fullHidden": false,
+    "transportCards": 4,
+    "shoppingCards": 6,
+    "resourceIconWidth": "15px",
+    "resourceIconHeight": "15px",
+    "resourceIconStroke": "2px",
+    "resourceCardOverflow": "hidden",
+    "transportDistinct": true,
+    "shoppingDistinct": true,
+    "overflow": 0
+  }
+}
