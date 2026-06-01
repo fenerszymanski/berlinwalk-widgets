@@ -144,6 +144,14 @@
       "embedHeight": 640
     },
     {
+      "slug": "berlin-shopping-areas",
+      "title": "Berlin Shopping Areas Map",
+      "lead": "Where to actually shop in Berlin: fashion, concept stores, vintage, flea markets and souvenirs, mapped by what you want.",
+      "category": "Maps",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-shopping-areas/",
+      "embedHeight": 820
+    },
+    {
       "slug": "whats-open-in-berlin-today",
       "title": "What's Open in Berlin Today",
       "lead": "Live daily check: today's date, public holidays, what's open and closed across Berlin — supermarkets, museums, transport, banks.",

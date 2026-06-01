@@ -4,21 +4,37 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
-## 2026-06-01 — Codex (Ultimate build-gate + hero revision)
+## 2026-06-01 — Claude Code (Berlin Shopping Areas widget + blog draft)
 
-**Did:** Reworked the local Ultimate widget into an explicit build-flow preview gate and swapped the featured image to Yusuf's generated Berlin trip planner visual.
+**Did:** Built a new `berlin-shopping-areas` BerlinTools map widget and a `shopping-in-berlin` blog draft to capture the high-intent "where to shop in Berlin" search that existing posts #17 (souvenirs) and #61 (Sunday hours) miss.
 
 **Changed:**
-- `ultimate-berlin-trip-planner/index.html` — results start hidden, `Build my Berlin plan` triggers a short planning animation, preview appears before lead capture, full plan/PDF/print stay locked until unlock, full plan adds Berlin transport map resources and shopping notes, plan detail cards are cleaner, simple PDF logo/header overlap guards were tightened, and the hero now points to `assets/berlin-trip-planner-hero.jpg`.
+- `berlin-shopping-areas/index.html` — new Leaflet map, 19 spots, "What are you shopping for?" filter (fashion & malls / concept & boutiques / vintage / flea markets / souvenirs); tour-linked pins (Alexa, Hackesche Höfe, Ampelmann) render as yellow stars; uses `../css/brand.css` + `../js/brand.js`. Local preview QA: filters correct (markets 5, vintage 8, all 19), popups render, desktop + mobile overflow 0, console clean.
+- `tools-hub/data.json` — added the widget entry (Maps category, `embedHeight: 820`, no icon yet). Now 32 tools.
+- `blog-drafts/shopping-in-berlin.md` — full draft: metadata, widget plan, Quick Summary, body with internal links (#17, #61, #40, #16, #88, booking), and FAQ content. Focus keyword "shopping in Berlin". Facts verified by web search (Galeries Lafayette closed Aug 2024, KaDeWe open/renovated, VAT non-EU min 50.01 EUR @ 19%, flea-market Sundays).
+- Workspace: `insert-berlin-shopping-areas.js` (ready-to-run CMS insert, slug preflight + re-save), plus PROJECT_MEMORY.md tool note + table row 31.
+
+**Opened:** Push `berlinwalk-widgets` so GitHub Pages serves the widget; then run the CMS insert, generate a tool icon, build/publish the Wix blog draft, and switch the insert script's relatedBlog to `/post/shopping-in-berlin` after publish.
+**Closed:** Widget build + local QA + tools-hub wiring + blog draft + CMS insert script.
+
+**Next session should:** After Yusuf pushes the repo, confirm the widget is live on GitHub Pages, then do the live Wix steps (CMS insert + blog draft creation/publish + QS/FAQ wiring under key `shopping-in-berlin`).
+
+## 2026-06-01 — Codex (Ultimate build-gate + hero revision)
+
+**Did:** Reworked the local Ultimate widget into an explicit build-flow preview gate, then applied Yusuf's second cleanup feedback on form density and full-plan resource sections.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — results start hidden, `Build my Berlin plan` triggers a short planning animation, preview appears before lead capture, full plan/PDF/print stay locked until unlock, full plan adds Berlin transport map resources and shopping notes, plan detail cards are cleaner, simple PDF logo/header overlap guards were tightened, and the hero now points to `assets/berlin-trip-planner-hero.jpg`. Follow-up cleanup: visible option mini descriptions are hidden, trip-length duplicate number badges are hidden, `Planning priorities` is renamed to `Plan needs`, old localStorage unlock is cleared and unlock persistence is session-only, and transport/shopping resource cards now have smaller icons plus distinct blue/amber section treatments.
 - `ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg` — optimized from `/Users/yusufucuz/Downloads/BerlinTripPlanner.png` to 1200x900 JPEG, 452 KB.
 - `ultimate-berlin-trip-planner/launch-audit.mjs`, `LAUNCH_STATUS.*`, and `LAUNCH_CONTROL_ROOM.html` — updated/generated for the build-gate, preview gate, transport/shopping, and PDF guard checks; latest audit is `143 pass, 0 warn, 0 block`.
+- `output/qa/ultimate-trip-planner-ui/form-simplify-20260601/` — QA for the second cleanup pass: visible `1 day`, option subtexts hidden, `Plan needs` visible, old `Planning priorities` absent, preview-only lock intact, post-unlock resources visible, resource icons smaller, overflow `0`.
 - `output/qa/ultimate-trip-planner-ui/acceptance-20260601/completion-audit.md` — added a requirement-by-requirement evidence map for Yusuf's feedback.
 - Root `PROJECT_MEMORY.md` and `SESSION_LOG.md` — recorded that this is local-only and emails remain unchanged until Yusuf approves.
 
 **Opened:** Yusuf still needs to inspect the local widget before push/live promotion or any email-copy update.
-**Closed:** The requested featured-image swap is done and browser-smoked locally with mobile overflow `0`; acceptance QA under `output/qa/ultimate-trip-planner-ui/acceptance-20260601/` passed desktop/mobile build-animation preview-only lock; lead-gate QA under `output/qa/ultimate-trip-planner-ui/lead-gate-20260601/` passed invalid email, missing consent, fail-soft unlock, and post-unlock transport/shopping/PDF availability; real 4-page PDF QA downloaded/rendered under `output/qa/ultimate-trip-planner-pdf/build-gate-20260601/` with logo, transport maps, shopping notes, Berlin Essentials, and day-by-day plan present, and stale `Map actions` / `Place:` / `Note:` text absent.
+**Closed:** The requested featured-image swap is done and browser-smoked locally with mobile overflow `0`; acceptance QA under `output/qa/ultimate-trip-planner-ui/acceptance-20260601/` passed desktop/mobile build-animation preview-only lock; form cleanup QA under `output/qa/ultimate-trip-planner-ui/form-simplify-20260601/` passed; lead-gate QA under `output/qa/ultimate-trip-planner-ui/lead-gate-20260601/` passed invalid email, missing consent, fail-soft unlock, and post-unlock transport/shopping/PDF availability; real 4-page PDF QA downloaded/rendered under `output/qa/ultimate-trip-planner-pdf/build-gate-20260601/` with logo, transport maps, shopping notes, Berlin Essentials, and day-by-day plan present, and stale `Map actions` / `Place:` / `Note:` text absent.
 
-**Next session should:** Show Yusuf `http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-15&tripLength=4&qaUnlock=1&v=hero-image-local`, collect UX feedback, then push only after acceptance.
+**Next session should:** Show Yusuf `http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-15&tripLength=4&resetUnlock=1&v=form-cleanup-20260601`, collect UX feedback, then push only after acceptance.
 
 ## 2026-05-31 — Codex (Ultimate CTA/photo correction)
 

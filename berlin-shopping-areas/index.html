@@ -1,0 +1,592 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Shopping Areas Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-shopping-areas">
+  <style>
+    #bw-shopping-areas {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-shopping-areas * { box-sizing: border-box; }
+
+    #bw-shopping-areas .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-shopping-areas .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-shopping-areas .bw-head-icon { font-size: 18px; line-height: 1; }
+
+    #bw-shopping-areas .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-shopping-areas .bw-body { background: #FAFAF5; padding: 16px 18px; }
+
+    #bw-shopping-areas .bw-ask {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin: 0 0 10px;
+    }
+
+    #bw-shopping-areas .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-shopping-areas .bw-filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    #bw-shopping-areas .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-shopping-areas .bw-filter:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-shopping-areas .bw-filter.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-shopping-areas .bw-map-container {
+      width: 100%;
+      height: 440px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-shopping-areas .bw-map { width: 100%; height: 100%; z-index: 1; }
+
+    /* Leaflet override styles (scoped) */
+    #bw-shopping-areas .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-shopping-areas .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-shopping-areas .leaflet-popup-content {
+      margin: 0;
+      width: 250px !important;
+      font-family: inherit;
+    }
+
+    #bw-shopping-areas .leaflet-popup-tip { box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    #bw-shopping-areas .bw-popup-head {
+      background: var(--bw-green);
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+    }
+
+    #bw-shopping-areas .bw-popup-type {
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    #bw-shopping-areas .bw-popup-name {
+      color: var(--bw-white);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-shopping-areas .bw-popup-body { padding: 12px 14px; }
+
+    #bw-shopping-areas .bw-popup-note {
+      font-size: 12px;
+      color: var(--bw-text);
+      line-height: 1.55;
+      margin: 0 0 10px;
+    }
+
+    #bw-shopping-areas .bw-popup-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--bw-text);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    #bw-shopping-areas .bw-popup-row:last-of-type { margin-bottom: 0; }
+
+    #bw-shopping-areas .bw-popup-label {
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      min-width: 52px;
+      padding-top: 1px;
+    }
+
+    #bw-shopping-areas .bw-popup-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    #bw-shopping-areas .bw-popup-link:hover { background: #FFEF33; }
+
+    /* Custom marker */
+    #bw-shopping-areas .bw-marker {
+      width: 30px;
+      height: 30px;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #bw-shopping-areas .bw-marker-inner {
+      transform: rotate(45deg);
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    /* Tour-linked pins (start/end) stand out in yellow */
+    #bw-shopping-areas .bw-marker.tour {
+      background: var(--bw-yellow);
+      border-color: var(--bw-green);
+    }
+    #bw-shopping-areas .bw-marker.tour .bw-marker-inner { color: var(--bw-green); }
+
+    #bw-shopping-areas .bw-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.4;
+    }
+
+    #bw-shopping-areas .bw-legend span { display: inline-flex; align-items: center; gap: 5px; }
+
+    #bw-shopping-areas .bw-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--bw-green);
+      border: 2px solid var(--bw-yellow);
+      flex: 0 0 auto;
+    }
+    #bw-shopping-areas .bw-dot.tour { background: var(--bw-yellow); border-color: var(--bw-green); }
+
+    #bw-shopping-areas .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #bw-shopping-areas .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    #bw-shopping-areas .bw-tour-note {
+      margin-top: 12px;
+      padding: 11px 14px;
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--bw-text);
+    }
+
+    #bw-shopping-areas .bw-tour-note strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      #bw-shopping-areas { margin: 22px 0; }
+      #bw-shopping-areas .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-shopping-areas .bw-head-icon { font-size: 16px; }
+      #bw-shopping-areas .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-shopping-areas .bw-body { padding: 14px; }
+      #bw-shopping-areas .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-shopping-areas .bw-filter { font-size: 11px; padding: 7px 12px; }
+      #bw-shopping-areas .bw-map-container { height: 380px; }
+      #bw-shopping-areas .leaflet-popup-content { width: 215px !important; }
+      #bw-shopping-areas .bw-popup-name { font-size: 14px; }
+      #bw-shopping-areas .bw-popup-row { font-size: 11.5px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🛍️</span>
+      <span class="bw-kicker">Berlin Shopping Areas</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-ask">What are you shopping for?</p>
+      <div class="bw-filters">
+        <button class="bw-filter active" type="button" data-filter="all">Show all</button>
+        <button class="bw-filter" type="button" data-filter="fashion">Fashion &amp; malls</button>
+        <button class="bw-filter" type="button" data-filter="concept">Concept &amp; boutiques</button>
+        <button class="bw-filter" type="button" data-filter="vintage">Vintage &amp; second-hand</button>
+        <button class="bw-filter" type="button" data-filter="market">Flea markets</button>
+        <button class="bw-filter" type="button" data-filter="souvenir">Souvenirs &amp; gifts</button>
+      </div>
+
+      <p class="bw-hint">Tap any pin for the honest local take and the nearest U-Bahn or S-Bahn. Flea markets are mostly weekends; most other shops close on Sundays.</p>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-shopping-areas-canvas"></div>
+      </div>
+
+      <div class="bw-legend">
+        <span><i class="bw-dot"></i> Shopping spot</span>
+        <span><i class="bw-dot tour"></i> Also a stop near our walking tour</span>
+      </div>
+
+      <p class="bw-count"><strong id="bw-count-num">19</strong> shopping spots across Berlin</p>
+
+      <div class="bw-tour-note">
+        <strong>On our free walking tour:</strong> we start at the World Clock on Alexanderplatz (next to the Alexa mall) and finish near Hackescher Markt, steps from the Hackesche Höfe shops. Easy to add a shopping stop before or after the walk.
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-shopping-areas');
+      if (!root) return;
+
+      var locations = [
+        // ---- Fashion & department stores / malls ----
+        {
+          name: 'KaDeWe',
+          type: 'Department store',
+          note: 'Continental Europe’s biggest department store. Designer floors are pricey, but the 6th-floor food hall is worth the trip even if you buy nothing.',
+          area: 'Schoneberg', station: 'U Wittenbergplatz',
+          lat: 52.5018, lng: 13.3403, cats: ['fashion'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=KaDeWe+Berlin'
+        },
+        {
+          name: 'Kurfürstendamm (Ku’damm)',
+          type: 'Shopping boulevard',
+          note: 'West Berlin’s grand high street. Flagship fashion stores and big chains from Breitscheidplatz down toward Uhlandstrasse.',
+          area: 'Charlottenburg', station: 'U Kurfürstendamm',
+          lat: 52.5036, lng: 13.3270, cats: ['fashion'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Kurfurstendamm+Berlin'
+        },
+        {
+          name: 'Mall of Berlin',
+          type: 'Shopping mall',
+          note: 'Large indoor mall by Leipziger Platz with mainstream brands and a food court. A solid rainy-day option near Potsdamer Platz.',
+          area: 'Mitte', station: 'U Potsdamer Platz',
+          lat: 52.5096, lng: 13.3789, cats: ['fashion'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Mall+of+Berlin'
+        },
+        {
+          name: 'Bikini Berlin',
+          type: 'Concept mall',
+          note: 'Design-led concept mall with rotating pop-up “boxes” and a rooftop terrace looking into the zoo. More browsing than bargains.',
+          area: 'Charlottenburg', station: 'U/S Zoologischer Garten',
+          lat: 52.5052, lng: 13.3373, cats: ['fashion', 'concept'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Bikini+Berlin'
+        },
+        {
+          name: 'Friedrichstraße',
+          type: 'Upscale street',
+          note: 'Mitte’s smart shopping strip. Note the old Galeries Lafayette has closed, so it is quieter than guidebooks suggest, but still good for a stroll.',
+          area: 'Mitte', station: 'U Französische Straße',
+          lat: 52.5135, lng: 13.3893, cats: ['fashion'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Friedrichstrasse+Berlin'
+        },
+        {
+          name: 'Alexa Shopping Center',
+          type: 'Shopping mall',
+          note: 'Big mainstream mall right next to Alexanderplatz, where our tour begins. High-street brands, electronics and a food court under one roof.',
+          area: 'Mitte', station: 'U/S Alexanderplatz',
+          lat: 52.5208, lng: 13.4153, cats: ['fashion'], tour: true,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Alexa+Berlin'
+        },
+
+        // ---- Concept stores & neighborhood boutiques ----
+        {
+          name: 'Hackesche Höfe',
+          type: 'Boutique courtyards',
+          note: 'Interlinked courtyards full of independent shops, German designers and the Ampelmann store. Right where our walking tour finishes.',
+          area: 'Mitte', station: 'S Hackescher Markt',
+          lat: 52.5247, lng: 13.4024, cats: ['concept', 'souvenir'], tour: true,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Hackesche+Hofe'
+        },
+        {
+          name: 'Münzstraße & Mulackstraße',
+          type: 'Fashion boutiques',
+          note: 'The heart of Mitte’s fashion district: local labels, denim, sneakers and concept stores on quiet side streets.',
+          area: 'Mitte', station: 'U Weinmeisterstraße',
+          lat: 52.5251, lng: 13.4072, cats: ['concept'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Munzstrasse+Berlin'
+        },
+        {
+          name: 'Kastanienallee',
+          type: 'Indie shopping street',
+          note: 'Nicknamed “Casting Alley”. Indie boutiques, local designers and vintage between cafes in Prenzlauer Berg.',
+          area: 'Prenzlauer Berg', station: 'U Eberswalder Straße',
+          lat: 52.5378, lng: 13.4085, cats: ['concept', 'vintage'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Kastanienallee+Berlin'
+        },
+        {
+          name: 'Bergmannstraße',
+          type: 'Relaxed shopping street',
+          note: 'A laid-back Kreuzberg street for books, records, vintage and small gift shops, with a covered market hall (Marheineke) at one end.',
+          area: 'Kreuzberg', station: 'U Gneisenaustraße',
+          lat: 52.4885, lng: 13.3950, cats: ['concept', 'vintage'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Bergmannstrasse+Berlin'
+        },
+
+        // ---- Vintage & second-hand ----
+        {
+          name: 'Friedrichshain vintage (Boxhagener)',
+          type: 'Vintage cluster',
+          note: 'Streets around Boxhagener Platz are packed with second-hand and by-the-kilo vintage stores. Best vintage hunting in the city.',
+          area: 'Friedrichshain', station: 'S Ostkreuz / U Frankfurter Tor',
+          lat: 52.5112, lng: 13.4585, cats: ['vintage'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Boxhagener+Platz+vintage'
+        },
+        {
+          name: 'Vintage around Rosenthaler Platz',
+          type: 'Second-hand shops',
+          note: 'Several well-known vintage and second-hand stores cluster between Rosenthaler Platz and Torstrasse, an easy add-on after the tour.',
+          area: 'Mitte', station: 'U Rosenthaler Platz',
+          lat: 52.5295, lng: 13.4015, cats: ['vintage', 'concept'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=vintage+Rosenthaler+Platz+Berlin'
+        },
+
+        // ---- Flea markets (mostly weekends) ----
+        {
+          name: 'Mauerpark Flohmarkt',
+          type: 'Flea market (Sun)',
+          note: 'Berlin’s most famous Sunday flea market: vintage, records, crafts and street food, plus the legendary open-air karaoke next door.',
+          area: 'Prenzlauer Berg', station: 'U Eberswalder Straße',
+          lat: 52.5417, lng: 13.4022, cats: ['market', 'vintage'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Mauerpark+Flohmarkt'
+        },
+        {
+          name: 'Flohmarkt am Boxhagener Platz',
+          type: 'Flea market (Sun)',
+          note: 'A friendly, local Sunday flea market in Friedrichshain. Less touristy than Mauerpark, good for second-hand finds.',
+          area: 'Friedrichshain', station: 'S Ostkreuz',
+          lat: 52.5118, lng: 13.4588, cats: ['market', 'vintage'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Flohmarkt+Boxhagener+Platz'
+        },
+        {
+          name: 'Trödelmarkt Arkonaplatz',
+          type: 'Flea market (Sun)',
+          note: 'A curated, design-leaning Sunday flea market: mid-century furniture, GDR design, vinyl and antiques.',
+          area: 'Mitte', station: 'U Bernauer Straße',
+          lat: 52.5410, lng: 13.4000, cats: ['market', 'vintage'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Trodelmarkt+Arkonaplatz'
+        },
+        {
+          name: 'Flohmarkt Straße des 17. Juni',
+          type: 'Flea market (Sat/Sun)',
+          note: 'Berlin’s classic antiques and art market near Tiergarten. More antiques and books than cheap finds, but great for collectors.',
+          area: 'Charlottenburg', station: 'S Tiergarten',
+          lat: 52.5135, lng: 13.3320, cats: ['market'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Flohmarkt+Strasse+des+17+Juni'
+        },
+        {
+          name: 'Nowkoelln Flowmarkt',
+          type: 'Flea market (biweekly)',
+          note: 'A young, handmade-and-vintage canal-side market on the Maybachufer in Neukolln. Runs on selected Sundays, spring to autumn.',
+          area: 'Neukölln', station: 'U Schönleinstraße',
+          lat: 52.4928, lng: 13.4262, cats: ['market', 'vintage'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Nowkoelln+Flowmarkt'
+        },
+
+        // ---- Souvenirs & gifts ----
+        {
+          name: 'Ampelmann Shop',
+          type: 'Souvenirs',
+          note: 'Official store for East Berlin’s beloved traffic-light man. The most tasteful Berlin souvenirs: bags, sweets and homeware.',
+          area: 'Mitte', station: 'S Hackescher Markt',
+          lat: 52.5232, lng: 13.4020, cats: ['souvenir'], tour: true,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Ampelmann+Shop+Hackescher+Markt'
+        },
+        {
+          name: 'Nikolaiviertel',
+          type: 'Old-town gift shops',
+          note: 'Berlin’s reconstructed medieval quarter near Alexanderplatz, with small craft, gift and souvenir shops in a calm, photogenic setting.',
+          area: 'Mitte', station: 'U Klosterstraße',
+          lat: 52.5165, lng: 13.4075, cats: ['souvenir', 'concept'], tour: false,
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Nikolaiviertel+Berlin'
+        }
+      ];
+
+      var mapEl = document.getElementById('bw-shopping-areas-canvas');
+      var countEl = document.getElementById('bw-count-num');
+      var filterBtns = root.querySelectorAll('.bw-filter');
+
+      var map = L.map(mapEl, {
+        center: [52.515, 13.402],
+        zoom: 12,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var markers = [];
+
+      function createMarkerIcon(loc) {
+        var letter = loc.tour ? '★' : '●';
+        var html = '<div class="bw-marker' + (loc.tour ? ' tour' : '') + '"><div class="bw-marker-inner">' + letter + '</div></div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+      }
+
+      function createPopup(loc) {
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + loc.type + '</span>' +
+          '<div class="bw-popup-name">' + loc.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<p class="bw-popup-note">' + loc.note + '</p>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Area</span><span>' + loc.area + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Nearest</span><span>' + loc.station + '</span></div>' +
+          '<a href="' + loc.gmaps + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Google Maps →</a>' +
+          '</div>';
+      }
+
+      locations.forEach(function (loc) {
+        var marker = L.marker([loc.lat, loc.lng], {
+          icon: createMarkerIcon(loc)
+        }).bindPopup(createPopup(loc), {
+          closeButton: true,
+          maxWidth: 270,
+          className: 'bw-popup-wrapper'
+        });
+        marker.addTo(map);
+        marker._cats = loc.cats;
+        markers.push(marker);
+      });
+
+      countEl.textContent = markers.length;
+
+      function applyFilter(filter) {
+        var visibleCount = 0;
+        markers.forEach(function (m) {
+          var show = filter === 'all' || m._cats.indexOf(filter) !== -1;
+          if (show) {
+            if (!map.hasLayer(m)) m.addTo(map);
+            visibleCount++;
+          } else {
+            if (map.hasLayer(m)) map.removeLayer(m);
+          }
+        });
+        countEl.textContent = visibleCount;
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+</div>
+</body>
+</html>
