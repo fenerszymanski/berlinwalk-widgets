@@ -1,0 +1,46 @@
+{
+  "baseUrl": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-15&tripLength=4&forceLeadError=1&v=lead-gate-qa-20260601",
+  "initial": {
+    "resultHidden": true,
+    "fullHidden": true,
+    "leadVisible": true,
+    "pdfDisabled": true,
+    "overflow": 0
+  },
+  "afterBuild": {
+    "resultHidden": false,
+    "fullHidden": true,
+    "leadVisible": true,
+    "lockedCopyVisible": true,
+    "previewCards": 2,
+    "fullDayCards": 0,
+    "transportCards": 0,
+    "shoppingCards": 0,
+    "pdfDisabled": true,
+    "overflow": 0
+  },
+  "invalid": {
+    "message": "Add a valid email address to unlock the full plan.",
+    "fullHidden": true,
+    "pdfDisabled": true,
+    "activeIsEmail": true
+  },
+  "missingConsent": {
+    "message": "Please tick the consent box so I can send the arrival tips.",
+    "fullHidden": true,
+    "pdfDisabled": true,
+    "activeIsConsent": true
+  },
+  "afterUnlock": {
+    "actionStatus": "Email save had a hiccup, so the plan is unlocked this time.",
+    "leadMessage": "",
+    "fullHidden": false,
+    "leadVisible": false,
+    "previewCards": 4,
+    "fullDayCards": 4,
+    "transportCards": 4,
+    "shoppingCards": 6,
+    "pdfDisabled": false,
+    "overflow": 0
+  }
+}

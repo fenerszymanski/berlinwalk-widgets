@@ -1,0 +1,36 @@
+{
+  "pages": 4,
+  "hasLogoText": true,
+  "hasTransportMaps": true,
+  "hasShoppingNotes": true,
+  "hasBerlinEssentials": true,
+  "hasDayByDay": true,
+  "staleMapActions": false,
+  "stalePlacePrefix": false,
+  "staleNotePrefix": false,
+  "textChars": 3999,
+  "sheet": "output/qa/ultimate-trip-planner-pdf/build-gate-20260601/contact-sheet.png",
+  "rendered": "output/qa/ultimate-trip-planner-pdf/build-gate-20260601/rendered",
+  "pageSizes": [
+    {
+      "page": 1,
+      "width": 953,
+      "height": 1348
+    },
+    {
+      "page": 2,
+      "width": 953,
+      "height": 1348
+    },
+    {
+      "page": 3,
+      "width": 953,
+      "height": 1348
+    },
+    {
+      "page": 4,
+      "width": 953,
+      "height": 1348
+    }
+  ]
+}

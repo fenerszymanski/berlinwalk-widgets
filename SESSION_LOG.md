@@ -4,6 +4,22 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-01 — Codex (Ultimate build-gate + hero revision)
+
+**Did:** Reworked the local Ultimate widget into an explicit build-flow preview gate and swapped the featured image to Yusuf's generated Berlin trip planner visual.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — results start hidden, `Build my Berlin plan` triggers a short planning animation, preview appears before lead capture, full plan/PDF/print stay locked until unlock, full plan adds Berlin transport map resources and shopping notes, plan detail cards are cleaner, simple PDF logo/header overlap guards were tightened, and the hero now points to `assets/berlin-trip-planner-hero.jpg`.
+- `ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg` — optimized from `/Users/yusufucuz/Downloads/BerlinTripPlanner.png` to 1200x900 JPEG, 452 KB.
+- `ultimate-berlin-trip-planner/launch-audit.mjs`, `LAUNCH_STATUS.*`, and `LAUNCH_CONTROL_ROOM.html` — updated/generated for the build-gate, preview gate, transport/shopping, and PDF guard checks; latest audit is `143 pass, 0 warn, 0 block`.
+- `output/qa/ultimate-trip-planner-ui/acceptance-20260601/completion-audit.md` — added a requirement-by-requirement evidence map for Yusuf's feedback.
+- Root `PROJECT_MEMORY.md` and `SESSION_LOG.md` — recorded that this is local-only and emails remain unchanged until Yusuf approves.
+
+**Opened:** Yusuf still needs to inspect the local widget before push/live promotion or any email-copy update.
+**Closed:** The requested featured-image swap is done and browser-smoked locally with mobile overflow `0`; acceptance QA under `output/qa/ultimate-trip-planner-ui/acceptance-20260601/` passed desktop/mobile build-animation preview-only lock; lead-gate QA under `output/qa/ultimate-trip-planner-ui/lead-gate-20260601/` passed invalid email, missing consent, fail-soft unlock, and post-unlock transport/shopping/PDF availability; real 4-page PDF QA downloaded/rendered under `output/qa/ultimate-trip-planner-pdf/build-gate-20260601/` with logo, transport maps, shopping notes, Berlin Essentials, and day-by-day plan present, and stale `Map actions` / `Place:` / `Note:` text absent.
+
+**Next session should:** Show Yusuf `http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-15&tripLength=4&qaUnlock=1&v=hero-image-local`, collect UX feedback, then push only after acceptance.
+
 ## 2026-05-31 — Codex (Ultimate CTA/photo correction)
 
 **Did:** Corrected the simplified Ultimate widget after Yusuf clarified that BerlinWalk should be a natural itinerary recommendation, not a standalone in-widget CTA.

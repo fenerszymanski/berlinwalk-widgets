@@ -1,0 +1,84 @@
+{
+  "pass": true,
+  "generatedAt": "2026-06-01T08:10:29.295Z",
+  "checks": {
+    "desktop": {
+      "label": "desktop",
+      "viewport": {
+        "width": 1280,
+        "height": 1200
+      },
+      "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-15&tripLength=4&v=acceptance-desktop-20260601",
+      "initial": {
+        "resultHidden": true,
+        "planningHidden": true,
+        "fullHidden": true,
+        "leadVisible": true,
+        "pdfDisabled": true,
+        "buildText": "Build my Berlin plan",
+        "heroSrc": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg",
+        "overflow": 0
+      },
+      "during": {
+        "resultHidden": true,
+        "planningHidden": false,
+        "buildDisabled": true,
+        "buildText": "Planning...",
+        "overflow": 0
+      },
+      "afterBuild": {
+        "resultHidden": false,
+        "planningHidden": true,
+        "fullHidden": true,
+        "leadVisible": true,
+        "previewCards": 2,
+        "fullDayCards": 0,
+        "transportCards": 0,
+        "shoppingCards": 0,
+        "pdfDisabled": true,
+        "glanceCards": 3,
+        "firstPreviewTitle": "Day 1: Arrival and first Berlin orientation",
+        "overflow": 0
+      }
+    },
+    "mobile": {
+      "label": "mobile",
+      "viewport": {
+        "width": 390,
+        "height": 1100
+      },
+      "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-15&tripLength=4&v=acceptance-mobile-20260601",
+      "initial": {
+        "resultHidden": true,
+        "planningHidden": true,
+        "fullHidden": true,
+        "leadVisible": true,
+        "pdfDisabled": true,
+        "buildText": "Build my Berlin plan",
+        "heroSrc": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg",
+        "overflow": 0
+      },
+      "during": {
+        "resultHidden": true,
+        "planningHidden": false,
+        "buildDisabled": true,
+        "buildText": "Planning...",
+        "overflow": 0
+      },
+      "afterBuild": {
+        "resultHidden": false,
+        "planningHidden": true,
+        "fullHidden": true,
+        "leadVisible": true,
+        "previewCards": 2,
+        "fullDayCards": 0,
+        "transportCards": 0,
+        "shoppingCards": 0,
+        "pdfDisabled": true,
+        "glanceCards": 3,
+        "firstPreviewTitle": "Day 1: Arrival and first Berlin orientation",
+        "overflow": 0
+      }
+    }
+  }
+}

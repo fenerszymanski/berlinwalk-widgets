@@ -1,10 +1,10 @@
 # Ultimate Berlin Trip Planner Launch Status
 
-Generated: 2026-05-31T20:32:15.062Z
+Generated: 2026-06-01T07:45:30.562Z
 
 ## Verdict: PUBLIC TOOL LIVE - UX REVISION OPEN
 
-Launch audit: 139 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
+Launch audit: 143 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 
 ## Gates
 

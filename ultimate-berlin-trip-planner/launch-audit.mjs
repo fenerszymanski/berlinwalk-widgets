@@ -243,7 +243,7 @@ function run() {
   const dayTemplateSource = indexHtml.slice(indexHtml.indexOf('function dayTemplate'), indexHtml.indexOf('function dayKeys'));
   const dayClosePlanSource = indexHtml.slice(indexHtml.indexOf('function dayClosePlan'), indexHtml.indexOf('function dayCloseHtml'));
   const renderPlanSource = indexHtml.slice(indexHtml.indexOf('function renderPlan()'), indexHtml.indexOf('function renderFullPlan()'));
-  const renderFullPlanSource = indexHtml.slice(indexHtml.indexOf('function renderFullPlan()'), indexHtml.indexOf('function renderEssentials'));
+  const renderFullPlanSource = indexHtml.slice(indexHtml.indexOf('function renderFullPlan()'), indexHtml.indexOf('function updateUnlockUi'));
   const downloadSimplePdfSource = indexHtml.slice(indexHtml.indexOf('async function downloadSimplePdf'), indexHtml.indexOf('async function downloadPdf'));
   const printPlanSource = indexHtml.slice(indexHtml.indexOf('function printPlan()'), indexHtml.indexOf('function initFromParams'));
   const firstDayBlockCopies = [...firstDayBlocksSource.matchAll(/'([^']{20,})'/g)]
@@ -912,14 +912,66 @@ function run() {
     'Top header uses a real Berlin visual hero',
     /data-hero-visual/.test(indexHtml) &&
       /bw-head-media/.test(indexHtml) &&
-      /hero-home-museum-island-1200w\.jpg/.test(indexHtml) &&
-      /Museum Island and Berlin Cathedral in Berlin/.test(indexHtml) &&
+      /berlin-trip-planner-hero\.jpg/.test(indexHtml) &&
+      /Berlin Cathedral, TV Tower/.test(indexHtml) &&
       /bw-head-route/.test(indexHtml) &&
-      /Route-first itinerary/.test(indexHtml) &&
+      /Date-to-plan itinerary/.test(indexHtml) &&
       /Google Maps links/.test(indexHtml) &&
       /Weather aware/.test(indexHtml) &&
       /Print-ready export/.test(indexHtml),
     'Expected the first viewport to show a real Berlin photo, route cue, and planner feature chips instead of a plain text header.'
+  );
+  block(
+    'Planner waits for a deliberate build action',
+    /data-build-plan/.test(indexHtml) &&
+      /data-planning-card/.test(indexHtml) &&
+      /var\s+PLANNING_DELAY_MS\s*=\s*6500/.test(indexHtml) &&
+      /var\s+planGenerated\s*=\s*false/.test(indexHtml) &&
+      /function\s+startPlanning/.test(indexHtml) &&
+      /setTimeout\(function\s*\(\)\s*\{[\s\S]*planGenerated\s*=\s*true[\s\S]*renderPlan\(\)/.test(indexHtml) &&
+      /function\s+renderPlan\(\)\s*\{\s*if\s*\(!planGenerated\)\s*return/.test(indexHtml) &&
+      /class="bw-result"[^>]*hidden/.test(indexHtml) &&
+      /markPlanDirty\(\)/.test(indexHtml),
+    'Expected results to stay hidden until the visitor clicks the build button and the planning animation completes.'
+  );
+  block(
+    'Lead gate keeps full plan locked after preview',
+    /full\.hidden\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(indexHtml) &&
+      /if\s*\(!unlocked\s*\|\|\s*!planGenerated\)/.test(renderFullPlanSource) &&
+      /previewCount\s*=\s*Math\.min\(unlocked\s*\?\s*plan\.days\.length\s*:\s*2/.test(indexHtml) &&
+      /if\s*\(pdf\)\s*pdf\.disabled\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(indexHtml) &&
+      /if\s*\(!unlocked\s*\|\|\s*!planGenerated\)\s*return/.test(downloadSimplePdfSource + printPlanSource),
+    'Expected post-animation results to show a two-day preview while full days, PDF, and print stay email-gated.'
+  );
+  block(
+    'Full plan includes transport maps and shopping feature',
+    /var\s+TRANSPORT_MAPS\s*=\s*\[/.test(indexHtml) &&
+      /Night Network Map/.test(indexHtml) &&
+      /S-Bahn & Regional Train Map/.test(indexHtml) &&
+      /Tram Network Map/.test(indexHtml) &&
+      /Full Regional Network Map/.test(indexHtml) &&
+      /var\s+SHOPPING_GROUPS\s*=\s*\[/.test(indexHtml) &&
+      /Mall of Berlin/.test(indexHtml) &&
+      /Designer Outlet Berlin/.test(indexHtml) &&
+      /data-transport-maps-panel/.test(indexHtml) &&
+      /data-shopping-panel/.test(indexHtml) &&
+      /function\s+renderTransportMaps/.test(indexHtml) &&
+      /function\s+renderShoppingPanel/.test(indexHtml) &&
+      /resourceSection\('Berlin public transport maps'/.test(downloadSimplePdfSource) &&
+      /resourceSection\('Shopping notes'/.test(downloadSimplePdfSource) &&
+      /transportHtml\s*=\s*TRANSPORT_MAPS\.map/.test(printPlanSource) &&
+      /shoppingHtml\s*=\s*SHOPPING_GROUPS\.map/.test(printPlanSource),
+    'Expected full-plan UI, PDF, print, and text export to include transport PDFs plus shopping/outlet guidance.'
+  );
+  block(
+    'Simple PDF logo and day headers avoid overlap',
+    /var\s+logoW\s*=\s*140/.test(downloadSimplePdfSource) &&
+      /logoY\s*=\s*24/.test(downloadSimplePdfSource) &&
+      /var\s+imageH\s*=\s*imageW\s*\*\s*450\s*\/\s*1080/.test(downloadSimplePdfSource) &&
+      /logoY\s*\+\s*\(logoH\s*-\s*imageH\)\s*\/\s*2/.test(downloadSimplePdfSource) &&
+      /var\s+titleLines\s*=\s*doc\.splitTextToSize\(day\.title/.test(downloadSimplePdfSource) &&
+      /var\s+headerH\s*=\s*Math\.max\(58,\s*32\s*\+\s*titleLines\.length\s*\*\s*15\)/.test(downloadSimplePdfSource),
+    'Expected the active simple PDF to center the BerlinWalk logo and size day headers from wrapped title text.'
   );
   block(
     'Trip style presets reduce form friction',

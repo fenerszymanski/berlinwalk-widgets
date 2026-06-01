@@ -1,0 +1,34 @@
+{
+  "url": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=2026-06-15&tripLength=4&v=build-gate-qa-20260601",
+  "initial": {
+    "resultHidden": true,
+    "planningHidden": true,
+    "fullHidden": true,
+    "pdfDisabled": true,
+    "leadHidden": false,
+    "buildText": "Build my Berlin plan",
+    "overflow": 0,
+    "heroSrc": "http://127.0.0.1:8765/ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg"
+  },
+  "during": {
+    "resultHidden": true,
+    "planningHidden": false,
+    "fullHidden": true,
+    "pdfDisabled": true,
+    "buildDisabled": true,
+    "buildText": "Planning...",
+    "overflow": 0
+  },
+  "after": {
+    "resultHidden": false,
+    "planningHidden": true,
+    "fullHidden": true,
+    "pdfDisabled": true,
+    "leadHidden": false,
+    "previewCards": 2,
+    "fullDayCards": 0,
+    "buildText": "Update my Berlin plan",
+    "firstPreviewTitle": "Day 1: Arrival and first Berlin orientation",
+    "overflow": 0
+  }
+}
