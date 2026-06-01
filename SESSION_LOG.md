@@ -4,6 +4,37 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-01 — Codex (Ultimate itinerary/tour logic)
+
+**Did:** Simplified the full-plan day cards into clear itinerary blocks and corrected arrival-day tour eligibility for 09:00+ arrivals outside the central start zone.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — removed the extra locked-preview intro card; arrival-day 11:30 now works only before 09:00, or 09:00-10:00 from Alexanderplatz / Mitte hotel base. BER/Hbf/car/non-central stays move the tour into Day 2. Day 2 now gets a real BerlinWalk itinerary block when the tour is postponed, day maps stay inside each day card, evening blocks render as part of the itinerary, and summer/weather-aware extra blocks add realistic daylight or rain-backup flexibility.
+- Local QA — `git diff --check` and inline script parse passed. In-app Browser confirmed the Hbf afternoon scenario keeps Day 1 as arrival logistics, puts BerlinWalk on Day 2 at 11:30-13:30, removes the old preview intro, keeps full plan locked pre-email, and shows no horizontal overflow or console errors.
+
+**Opened:** Continue one-by-one Ultimate UX fixes with Yusuf; no push/live promotion yet.
+**Closed:** Current tour-placement and too-short day-card issue is fixed locally.
+
+**Next session should:** Review `v=tour-logic-20260601b` locally, then continue simplifying remaining unlocked sections if they still feel busy.
+
+## 2026-06-01 — Claude Code (Brandenburg Gate post + Berlin Landmarks Map widget)
+
+**Did:** Built the reusable `berlin-landmarks-map` widget and the `brandenburg-gate-berlin-visitors-guide` blog draft (A-tier head-term capture; no existing Brandenburg Gate post).
+
+**Changed:**
+- `berlin-landmarks-map/index.html` — new Leaflet map, 19 central landmarks, "What do you want to see?" filter (landmark/history/museum/view); tour-linked star pins (World Clock, TV Tower, Rotes Rathaus, Berliner Dom, Museum Island, Humboldt Forum, Hackescher Markt). Local QA: filters correct (landmark 9, history 6, museum 4, view 5, all 19), popups render, desktop+mobile overflow 0, console clean.
+- `tools-hub/data.json` — added entry (Maps, `embedHeight: 820`); 33 tools.
+- `blog-drafts/brandenburg-gate-berlin-visitors-guide.md` — full draft (metadata, Quick Summary, body, FAQ; focus keyword "Brandenburg Gate"; facts web-verified: 1788-1791 Langhans, Quadriga 1793 Schadow, Napoleon 1806/1814, U5+S Brandenburger Tor, Reichstag dome registration).
+- `blog-workplan.md` — Brandenburg Gate marked draft+widget; A/B-tier tourist-capture ideas queued.
+- Workspace: `insert-berlin-landmarks-map.js` (ready CMS insert), PROJECT_MEMORY.md tool row 32 + note.
+
+After Yusuf's first push, live steps ran: widget served by GitHub Pages (200); CMS row inserted (`6873d057-dcda-46db-be1f-1c26342a9d04`), `/tools/berlin-landmarks-map` 200; Wix draft created UNPUBLISHED (`400e4670-e4df-4b2f-a252-067338a69af9`) and patched with 4 licensed images (cover blue-hour CC0, inline Pariser Platz / Wall 1989 PD / Quadriga), focus keyword + SEO + OG/Twitter image:alt + 3 blog tags. QS/FAQ added to `quick-summary/data.json`, `faq/data.json`, `faq/inject.js` under key `brandenburg-gate`.
+
+**Opened:** (1) Push `berlinwalk-widgets` AGAIN — QS/FAQ + inject.js edits landed after the first push, so the post's quick-summary/FAQ embeds are empty until the second deploy. (2) Yusuf reviews + publishes the UNPUBLISHED draft. (3) Generate + wire a tool icon for `berlin-landmarks-map`.
+**Closed:** Widget + QA + tools-hub + blog draft + CMS insert + Wix draft creation + 4 images + full SEO + QS/FAQ wiring.
+
+**Next session should:** After the second push deploys, spot-check the draft's quick-summary/FAQ embeds populate, then let Yusuf publish.
+
 ## 2026-06-01 — Codex (Ultimate gate flow + collapsed lists)
 
 **Did:** Reworked the Ultimate Trip Planner preview gate so email capture comes after a short Day 1 teaser instead of deep inside the Day 1 preview, and shortened the unlocked utility lists.
@@ -22,13 +53,13 @@ Format for each entry — see `AGENTS.md` §9.
 **Did:** Added a reusable `<bw-booking-calendar>` component so the paid landing page and future Wix custom Booking Calendar pages can share the same compact calendar UI.
 
 **Changed:**
-- `booking-calendar/booking-calendar-element.js` — new light-DOM Custom Element with demo/JSON availability slots, date/time selection, guest stepper, UTM-preserving continue link, and custom change/continue events.
+- `booking-calendar/booking-calendar-element.js` — new light-DOM Custom Element with demo/JSON availability slots, visible date-carousel arrows/fade, date/time selection, guest stepper, UTM-preserving continue link, and custom change/continue events.
 - `booking-calendar/index.html` — standalone preview for local QA and dashboard route `/calendar`.
 - `booking-calendar/velo/custom-booking-calendar-page.js` — Velo scaffold for binding Wix Bookings availability into the component and routing to the Wix Booking Form.
 - `booking-calendar/README.md` — install/attribute/event notes.
 
 **Opened:** Live Wix custom calendar POC still needs to verify the current availability API (old `availabilityCalendar.queryAvailability()` vs Time Slots V2), real availability shape, and the exact Booking Form query params before publish.
-**Closed:** Local component preview and landing-page use smoke-tested with no console errors or horizontal overflow on the narrow in-app viewport.
+**Closed:** Local component preview and landing-page use smoke-tested with no console errors or horizontal overflow; the date row now clearly indicates horizontal scrolling.
 
 **Next session should:** Install this on a Wix custom Booking Calendar test page, bind real `wix-bookings.v2` availability, and validate that selected slot + guest count land correctly in the native Booking Form.
 
