@@ -328,6 +328,36 @@ class BWWidgetsHubElement extends HTMLElement {
           flex-wrap: wrap;
         }
 
+        .bw-widgets-hub .bw-widget-title-row {
+          align-items: flex-start;
+          display: flex;
+          gap: 12px;
+          min-width: min(100%, 520px);
+        }
+
+        .bw-widgets-hub .bw-widget-icon {
+          align-items: center;
+          background: #FAFAF5;
+          border: 1px solid #C5E1A5;
+          border-radius: 12px;
+          color: #1B5E20;
+          display: inline-flex;
+          flex: 0 0 54px;
+          font-size: 22px;
+          font-weight: 900;
+          height: 54px;
+          justify-content: center;
+          overflow: hidden;
+          width: 54px;
+        }
+
+        .bw-widgets-hub .bw-widget-icon img {
+          display: block;
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+
         .bw-widgets-hub .bw-widget-title {
           color: #1B5E20;
           font-size: 20px;
@@ -729,6 +759,8 @@ class BWWidgetsHubElement extends HTMLElement {
     const slug = this._escapeAttribute(tool.slug || '');
     const title = this._escapeHtml(tool.title || '');
     const lead = this._escapeHtml(tool.lead || '');
+    const image = this._escapeAttribute(tool.image || '');
+    const fallbackLetter = this._escapeHtml((tool.title || tool.slug || 'B').trim().charAt(0).toUpperCase());
     const previewUrl = this._escapeAttribute(tool.widgetUrl + '?attribution=none');
     const standaloneUrl = this._escapeAttribute(tool.widgetUrl);
     const initialCode = this._escapeHtml(this._buildSnippet(tool, 'standard'));
@@ -747,9 +779,14 @@ class BWWidgetsHubElement extends HTMLElement {
       <article class="bw-widget-card" data-slug="${slug}">
         <div class="bw-widget-head">
           <div class="bw-widget-head-row">
-            <div>
-              <h3 class="bw-widget-title">${title}</h3>
-              <p class="bw-widget-lead">${lead}</p>
+            <div class="bw-widget-title-row">
+              <span class="bw-widget-icon" aria-hidden="true">
+                ${image ? `<img src="${image}" alt="" loading="lazy" decoding="async">` : fallbackLetter}
+              </span>
+              <div>
+                <h3 class="bw-widget-title">${title}</h3>
+                <p class="bw-widget-lead">${lead}</p>
+              </div>
             </div>
             <div class="bw-widget-meta">Auto-height · ${this._escapeHtml(tool.category || '')}</div>
           </div>

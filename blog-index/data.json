@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-31T20:21:42.022Z",
+  "updatedAt": "2026-06-01T10:37:08.171Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 100,
@@ -254,7 +254,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
       "alt": "Berlin walking tour group exploring historic city centre near Berlin Cathedral with local guide",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-shopping-areas"
     },
     {
       "title": "Public Toilets in Berlin: What Tourists Actually Need to Know",
@@ -274,23 +274,6 @@
       "relatedToolSlug": "berlin-public-toilets"
     },
     {
-      "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
-      "slug": "where-was-the-berlin-wall-interactive-map",
-      "path": "/post/where-was-the-berlin-wall-interactive-map",
-      "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
-      "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
-      "category": "Berlin History",
-      "categorySlug": "berlin-history",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "6 min read",
-      "publishedDate": "2026-05-05T09:32:22.821Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
-      "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
-      "relatedToolSlug": "east-or-west-1989"
-    },
-    {
       "title": "Do You Really Need to Validate Your Ticket on Berlin Trains?",
       "slug": "do-you-really-need-to-validate-your-ticket-on-berlin-trains",
       "path": "/post/do-you-really-need-to-validate-your-ticket-on-berlin-trains",
@@ -306,6 +289,23 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_379c0cc89f52448a9fd4dcb6158c8925~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20yellow%20ticket%20machine%20sitting%20on%20the%20side%20of%20a%20train%20track.jpg",
       "alt": "Do You Really Need to Validate Your Ticket on Berlin Trains?",
       "relatedToolSlug": "transport-ticket-calculator"
+    },
+    {
+      "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+      "slug": "where-was-the-berlin-wall-interactive-map",
+      "path": "/post/where-was-the-berlin-wall-interactive-map",
+      "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
+      "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "6 min read",
+      "publishedDate": "2026-05-05T09:32:22.821Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+      "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+      "relatedToolSlug": "east-or-west-1989"
     }
   ],
   "shelves": [
@@ -564,6 +564,23 @@
           "relatedToolSlug": "berlin-daily-budget"
         },
         {
+          "title": "Shopping in Berlin: Where to Actually Shop in 2026 (A Local Guide)",
+          "slug": "shopping-in-berlin",
+          "path": "/post/shopping-in-berlin",
+          "url": "https://www.berlinwalk.com/post/shopping-in-berlin",
+          "excerpt": "Forget the luxury-mall clichés. Where to actually shop in Berlin, from a local guide: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "practical",
+          "topicLabel": "Practical Berlin",
+          "readTime": "5 min read",
+          "publishedDate": "2026-06-01T10:30:41.540Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
+          "alt": "The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin",
+          "relatedToolSlug": "berlin-shopping-areas"
+        },
+        {
           "title": "Where to Stay in Berlin: Best Neighborhoods for Every Type of Tourist",
           "slug": "where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist",
           "path": "/post/where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist",
@@ -598,6 +615,23 @@
           "relatedToolSlug": "best-month-to-visit-berlin"
         },
         {
+          "title": "What to Buy in Berlin: 12 Souvenir and Gift Ideas Worth Taking Home",
+          "slug": "what-to-buy-in-berlin-12-souvenir-and-gift-ideas-worth-taking-home",
+          "path": "/post/what-to-buy-in-berlin-12-souvenir-and-gift-ideas-worth-taking-home",
+          "url": "https://www.berlinwalk.com/post/what-to-buy-in-berlin-12-souvenir-and-gift-ideas-worth-taking-home",
+          "excerpt": "Wondering what to buy in Berlin? This guide covers 12 of the best Berlin souvenirs and gift ideas, from Ampelmann and museum-shop finds to chocolate, honey, and stylish picks around Hackescher Markt.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "practical",
+          "topicLabel": "Practical Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-04-18T06:27:56Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_5167b62ad8e7478cbab0ab4d2f7677e1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Buddy%20Bears.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_5167b62ad8e7478cbab0ab4d2f7677e1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Buddy%20Bears.jpg",
+          "alt": "Colorful bear figurines with raised arms stand on a shelf. Each bear has a unique design: flames, hearts, stars, mosaic, flag heart. Bright and playful.",
+          "relatedToolSlug": "berlin-shopping-areas"
+        },
+        {
           "title": "Berlin TV Tower Construction: Before, During, and After",
           "slug": "berlin-tv-tower-construction-before-during-and-after",
           "path": "/post/berlin-tv-tower-construction-before-during-and-after",
@@ -630,40 +664,6 @@
           "thumb": "https://static.wixstatic.com/media/nsplsh_4758455a75576f356d3449~mv2_d_6000_4000_s_4_2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/person%20walking%20on%20street%20and%20holding%20umbrella%20while%20raining%20with%20vehicle%20nearby.jpg",
           "alt": "rain and umbrella",
           "relatedToolSlug": "best-month-to-visit-berlin"
-        },
-        {
-          "title": "7 Best Photo Spots in Berlin Most Tourists Walk Right Past",
-          "slug": "7-best-photo-spots-in-berlin-most-tourists-walk-right-past",
-          "path": "/post/7-best-photo-spots-in-berlin-most-tourists-walk-right-past",
-          "url": "https://www.berlinwalk.com/post/7-best-photo-spots-in-berlin-most-tourists-walk-right-past",
-          "excerpt": "The real magic of Berlin photography is in the quieter corners and unexpected angles. Here are 7 spots most tourists walk right past — with exact locations and photo tips.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "4 min read",
-          "publishedDate": "2026-03-17T08:54:42.485Z",
-          "image": "https://static.wixstatic.com/media/nsplsh_474d3218641f4a379400101d34b98d69~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin%20TV%20Tower%20at%20sunset.jpg",
-          "thumb": "https://static.wixstatic.com/media/nsplsh_474d3218641f4a379400101d34b98d69~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin%20TV%20Tower%20at%20sunset.jpg",
-          "alt": "berlin photo",
-          "relatedToolSlug": ""
-        },
-        {
-          "title": "How Much Should You Tip in Berlin? A Simple Guide to Tipping in Germany",
-          "slug": "how-much-should-you-tip-in-berlin-a-simple-guide-to-tipping-in-germany",
-          "path": "/post/how-much-should-you-tip-in-berlin-a-simple-guide-to-tipping-in-germany",
-          "url": "https://www.berlinwalk.com/post/how-much-should-you-tip-in-berlin-a-simple-guide-to-tipping-in-germany",
-          "excerpt": "Tipping in Germany is different from the US, the UK, and most of Asia. Here's exactly how much to tip in Berlin restaurants, cafés, hotels, taxis, and on free walking tours — without overthinking it.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "3 min read",
-          "publishedDate": "2026-03-10T17:36:21.766Z",
-          "image": "https://static.wixstatic.com/media/nsplsh_2d7246346b757667486855~mv2_d_6000_4000_s_4_2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Tip%20Jar.jpg",
-          "thumb": "https://static.wixstatic.com/media/nsplsh_2d7246346b757667486855~mv2_d_6000_4000_s_4_2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Tip%20Jar.jpg",
-          "alt": "tip box",
-          "relatedToolSlug": ""
         }
       ]
     },
@@ -973,23 +973,6 @@
           "relatedToolSlug": "berlin-lakes"
         },
         {
-          "title": "What to Buy in Berlin: 12 Souvenir and Gift Ideas Worth Taking Home",
-          "slug": "what-to-buy-in-berlin-12-souvenir-and-gift-ideas-worth-taking-home",
-          "path": "/post/what-to-buy-in-berlin-12-souvenir-and-gift-ideas-worth-taking-home",
-          "url": "https://www.berlinwalk.com/post/what-to-buy-in-berlin-12-souvenir-and-gift-ideas-worth-taking-home",
-          "excerpt": "Wondering what to buy in Berlin? This guide covers 12 of the best Berlin souvenirs and gift ideas, from Ampelmann and museum-shop finds to chocolate, honey, and stylish picks around Hackescher Markt.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "route-stories",
-          "topicLabel": "Tour Route Stories",
-          "readTime": "6 min read",
-          "publishedDate": "2026-04-18T06:27:56Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_5167b62ad8e7478cbab0ab4d2f7677e1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Buddy%20Bears.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_5167b62ad8e7478cbab0ab4d2f7677e1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Buddy%20Bears.jpg",
-          "alt": "Colorful bear figurines with raised arms stand on a shelf. Each bear has a unique design: flames, hearts, stars, mosaic, flag heart. Bright and playful.",
-          "relatedToolSlug": ""
-        },
-        {
           "title": "Is the Pergamon Museum Closed? What Every Tourist Needs to Know in 2026",
           "slug": "is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026",
           "path": "/post/is-the-pergamon-museum-closed-what-every-tourist-needs-to-know-in-2026",
@@ -1021,6 +1004,23 @@
           "image": "https://static.wixstatic.com/media/5a08a3_cb3e095918d94d2fa11269a6e3c9b26c~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinAltesNationalGallery.jpeg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_cb3e095918d94d2fa11269a6e3c9b26c~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinAltesNationalGallery.jpeg",
           "alt": "Historic building with columns and a horse statue on its wall, set against a blue cloudy sky. Cobblestone path in the foreground.",
+          "relatedToolSlug": ""
+        },
+        {
+          "title": "Berliner Dom Before and After WWII: The Cathedral That Lost Its Crown",
+          "slug": "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown",
+          "path": "/post/berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown",
+          "url": "https://www.berlinwalk.com/post/berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown",
+          "excerpt": "The Berliner Dom you see today isn't the original. Before WWII, it had a taller dome, extra chapels, and dramatically different proportions. Here's the visual story of what changed and why.",
+          "category": "Before & After",
+          "categorySlug": "before-after",
+          "topic": "route-stories",
+          "topicLabel": "Tour Route Stories",
+          "readTime": "2 min read",
+          "publishedDate": "2026-03-05T12:43:40.061Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_78189c2e03174a62b403590dfb14c3ac~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berliner%20Dom%20Before%20and%20After%20WWII.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_78189c2e03174a62b403590dfb14c3ac~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berliner%20Dom%20Before%20and%20After%20WWII.jpg",
+          "alt": "berlin catherdal dome",
           "relatedToolSlug": ""
         }
       ]
@@ -1294,7 +1294,7 @@
           "image": "https://static.wixstatic.com/media/nsplsh_a9fc04d8484248ed9e53f0df5294fc6e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/The%20essentials%20of%20a%20good%20conversation..jpg",
           "thumb": "https://static.wixstatic.com/media/nsplsh_a9fc04d8484248ed9e53f0df5294fc6e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/The%20essentials%20of%20a%20good%20conversation..jpg",
           "alt": "People holding three coffee cups with latte art at a café near Hackescher Markt in Berlin",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "berlin-shopping-areas"
         },
         {
           "title": "What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips",
@@ -1531,6 +1531,23 @@
   ],
   "latest": [
     {
+      "title": "Shopping in Berlin: Where to Actually Shop in 2026 (A Local Guide)",
+      "slug": "shopping-in-berlin",
+      "path": "/post/shopping-in-berlin",
+      "url": "https://www.berlinwalk.com/post/shopping-in-berlin",
+      "excerpt": "Forget the luxury-mall clichés. Where to actually shop in Berlin, from a local guide: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-06-01T10:30:41.540Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
+      "alt": "The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin",
+      "relatedToolSlug": "berlin-shopping-areas"
+    },
+    {
       "title": "Berlin in May 2027: Weather, Festivals, Long Days and the Sweet Spot Before Summer",
       "slug": "berlin-in-may-2027",
       "path": "/post/berlin-in-may-2027",
@@ -1716,26 +1733,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
       "alt": "People in fetish outfits line up at a red-lit nightclub entrance, with a bouncer checking guests in a dark industrial hallway.",
       "relatedToolSlug": "berlin-club-picker"
-    },
-    {
-      "title": "eSIM, SIM & Free WiFi in Berlin 2026: What Actually Works",
-      "slug": "esim-sim-wifi-berlin-2026",
-      "path": "/post/esim-sim-wifi-berlin-2026",
-      "url": "https://www.berlinwalk.com/post/esim-sim-wifi-berlin-2026",
-      "excerpt": "A Berlin guide's honest 2026 breakdown of travel eSIMs (Airalo, Saily, Holafly, Nomad), German prepaid SIMs (Aldi Talk, Lidl Connect, Vodafone CallYa), and free public WiFi (BVG, Freifunk). What to buy before you fly and what to skip at the airport.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-05-20T12:06:22Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e9eb5967ffe2422cbbd8bc5608523d78~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin_esim_sim_wifi_hero_4x3.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e9eb5967ffe2422cbbd8bc5608523d78~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin_esim_sim_wifi_hero_4x3.jpg",
-      "alt": "Smartphone with map, three SIM cards, and Wi-Fi symbol on wooden surface. Background shows sunset over Berlin landmarks, creating a warm mood.",
-      "relatedToolSlug": ""
     }
   ],
   "allPosts": [
+    {
+      "title": "Shopping in Berlin: Where to Actually Shop in 2026 (A Local Guide)",
+      "slug": "shopping-in-berlin",
+      "path": "/post/shopping-in-berlin",
+      "url": "https://www.berlinwalk.com/post/shopping-in-berlin",
+      "excerpt": "Forget the luxury-mall clichés. Where to actually shop in Berlin, from a local guide: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-06-01T10:30:41.540Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
+      "alt": "The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin",
+      "relatedToolSlug": "berlin-shopping-areas"
+    },
     {
       "title": "Berlin in May 2027: Weather, Festivals, Long Days and the Sweet Spot Before Summer",
       "slug": "berlin-in-may-2027",
@@ -2203,14 +2220,14 @@
       "excerpt": "Wondering what to buy in Berlin? This guide covers 12 of the best Berlin souvenirs and gift ideas, from Ampelmann and museum-shop finds to chocolate, honey, and stylish picks around Hackescher Markt.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
       "readTime": "6 min read",
       "publishedDate": "2026-04-18T06:27:56Z",
       "image": "https://static.wixstatic.com/media/5a08a3_5167b62ad8e7478cbab0ab4d2f7677e1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Buddy%20Bears.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_5167b62ad8e7478cbab0ab4d2f7677e1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Buddy%20Bears.jpg",
       "alt": "Colorful bear figurines with raised arms stand on a shelf. Each bear has a unique design: flames, hearts, stars, mosaic, flag heart. Bright and playful.",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-shopping-areas"
     },
     {
       "title": "Is the Pergamon Museum Closed? What Every Tourist Needs to Know in 2026",
@@ -2618,7 +2635,7 @@
       "image": "https://static.wixstatic.com/media/nsplsh_a9fc04d8484248ed9e53f0df5294fc6e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/The%20essentials%20of%20a%20good%20conversation..jpg",
       "thumb": "https://static.wixstatic.com/media/nsplsh_a9fc04d8484248ed9e53f0df5294fc6e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/The%20essentials%20of%20a%20good%20conversation..jpg",
       "alt": "People holding three coffee cups with latte art at a café near Hackescher Markt in Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-shopping-areas"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try in 2026",
@@ -2958,7 +2975,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
       "alt": "Berlin walking tour group exploring historic city centre near Berlin Cathedral with local guide",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-shopping-areas"
     },
     {
       "title": "Exploring Checkpoint Charlie: A Historical Journey Through Cold War Berlin's Iconic Border Crossing",
@@ -3417,23 +3434,6 @@
       "image": "https://static.wixstatic.com/media/nsplsh_53a00ec0a8314d9cac48c3d06b9cbafd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/brown%20wooden%20door%20on%20train%20station.jpg",
       "thumb": "https://static.wixstatic.com/media/nsplsh_53a00ec0a8314d9cac48c3d06b9cbafd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/brown%20wooden%20door%20on%20train%20station.jpg",
       "alt": "Hackescher Markt: Where Our Tour Ends and Your Berlin Adventure Begins",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "The Berliner Dom: A Cathedral That Survived Everything",
-      "slug": "the-berliner-dom-a-cathedral-that-survived-everything",
-      "path": "/post/the-berliner-dom-a-cathedral-that-survived-everything",
-      "url": "https://www.berlinwalk.com/post/the-berliner-dom-a-cathedral-that-survived-everything",
-      "excerpt": "The Berliner Dom (Berlin Cathedral) is one of those buildings that stops you in your tracks. Rising above Museum Island with its massive green dome, it's Berlin's largest church and one of the most impressive Protestant cathedrals in Europe. But what makes it truly remarkable isn't just its size — it's the story of how it got here, what it survived, and what it represents. A Cathedral Built on Ambition There has been a church on this site since the 15th century, but the current Berliner Dom...",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "2 min read",
-      "publishedDate": "2026-02-26T14:44:19.180Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_5a722d5a6e544e656b4559~mv2_d_5446_4000_s_4_2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berliner%20Dom.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_5a722d5a6e544e656b4559~mv2_d_5446_4000_s_4_2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berliner%20Dom.jpg",
-      "alt": "The Berliner Dom: A Cathedral That Survived Everything",
       "relatedToolSlug": ""
     }
   ]

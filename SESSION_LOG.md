@@ -4,6 +4,24 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-01 — Codex (Shopping post distribution)
+
+**Did:** Generated and wired a proper Berlin Shopping Areas icon, then promoted the now-published shopping post across local homepage/blog data.
+
+**Changed:**
+- `tools-home/icons/berlin-shopping-areas.png` and `tools-home/icons/berlin-shopping-areas-160.png` — new gpt-image-1.5 3D icon matching the existing tools style; 512 icon uploaded to Wix Media (`5a08a3_27134c41481a4ef1ab116aa6700b9464~mv2.png`).
+- `tools-hub/data.json`, `tools-home/icons/manifest.json`, and `widgets-hub/{widgets-hub-element.js,index.html}` — `berlin-shopping-areas` now has the Wix icon URL; `/tools` uses it in cards and `/widgets` now renders tool icons in card headers.
+- `blog-home/data.json` — shopping post added as the first right-column homepage blog teaser.
+- `scripts/generate-blog-index-data.mjs` and `blog-index/data.json` — shopping maps to `Practical Berlin` and related tool `berlin-shopping-areas`; data regenerated from live Wix Blog, placing `shopping-in-berlin` in Latest/allPosts and the Practical shelf.
+- Workspace `insert-berlin-shopping-areas.js` — source related blog switched to `/post/shopping-in-berlin`.
+- Wix CMS: BerlinTools item `0f235bae-71fb-44db-a2eb-132abef64589` re-saved with the new related blog.
+- Local QA screenshots: `output/qa/shopping-distribution-20260601/`.
+
+**Opened:** Push `berlinwalk-widgets` so GitHub Pages serves the new icon/data changes; then live-QA `/berlin-tools`, `/widgets`, homepage blog teaser, and `/blog`.
+**Closed:** Icon, homepage blog teaser placement, blog-index placement, and BerlinTools related-blog update are complete locally/remotely as applicable.
+
+**Next session should:** Push/deploy and verify live surfaces with cache-busting if needed.
+
 ## 2026-06-01 — Codex (Shopping blog images + SEO)
 
 **Did:** Continued the `shopping-in-berlin` blog after Claude hit the limit; completed the Wix draft's image and SEO package.

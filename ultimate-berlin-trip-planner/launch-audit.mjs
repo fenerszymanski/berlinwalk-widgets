@@ -827,11 +827,11 @@ function run() {
     /function\s+dayBlockWindow/.test(indexHtml) &&
       /function\s+dayBlockTimeHtml/.test(indexHtml) &&
       /bw-block-time-main/.test(indexHtml) &&
-      /<b>Timing<\/b>/.test(indexHtml) &&
+      /Full timings, maps, PDF, and later days unlock below\./.test(indexHtml) &&
       /dayBlockWindow\(day,\s*block,\s*index\)/.test(indexHtml) &&
       /09:30-12:00/.test(indexHtml) &&
       /Next 11:30/.test(indexHtml),
-    'Expected itinerary blocks, preview chips, print/PDF/text export to expose deterministic time windows.'
+    'Expected the locked preview to hint at timings and the unlocked itinerary/print/PDF/text export to expose deterministic time windows.'
   );
   block(
     'Trip calendar export is available',
@@ -938,10 +938,10 @@ function run() {
     'Lead gate keeps full plan locked after preview',
     /full\.hidden\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(indexHtml) &&
       /if\s*\(!unlocked\s*\|\|\s*!planGenerated\)/.test(renderFullPlanSource) &&
-      /previewCount\s*=\s*Math\.min\(unlocked\s*\?\s*plan\.days\.length\s*:\s*2/.test(indexHtml) &&
+      /previewCount\s*=\s*Math\.min\(1,\s*plan\.days\.length\)/.test(indexHtml) &&
       /if\s*\(pdf\)\s*pdf\.disabled\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(indexHtml) &&
       /if\s*\(!unlocked\s*\|\|\s*!planGenerated\)\s*return/.test(downloadSimplePdfSource + printPlanSource),
-    'Expected post-animation results to show a two-day preview while full days, PDF, and print stay email-gated.'
+    'Expected post-animation results to show only a Day 1 preview while full days, PDF, and print stay email-gated.'
   );
   block(
     'Full plan includes transport maps and shopping feature',

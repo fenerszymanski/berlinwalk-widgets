@@ -46,10 +46,11 @@ const TOPICS = [
       'is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists',
       'is-berlin-safe-to-visit-an-honest-2026-guide',
       'can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany',
+      'shopping-in-berlin',
       'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
     ],
-    match: /(budget|expensive|safe|credit|cash|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
+    match: /(budget|expensive|safe|credit|cash|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
   },
   {
     key: 'free-budget',
@@ -351,6 +352,7 @@ function relatedToolSlugFor(post) {
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
   if (/(welcomecard)/.test(s)) return 'welcomecard-calculator';
+  if (/(shopping|shop|flea-market|vintage|souvenir)/.test(s)) return 'berlin-shopping-areas';
   if (/(budget|expensive|cheap|credit|cash)/.test(s)) return 'berlin-daily-budget';
   if (/(first-time|3-days|itinerary)/.test(s)) return 'berlin-first-day-planner';
   if (/(weather|temperature|january|february|march|april|may|june|july|august|september|october|november|december|rain|pack|month)/.test(s)) return 'best-month-to-visit-berlin';

@@ -265,6 +265,36 @@
       flex-wrap: wrap;
     }
 
+    #bw-widgets-hub .widget-title-row {
+      align-items: flex-start;
+      display: flex;
+      gap: 12px;
+      min-width: min(100%, 520px);
+    }
+
+    #bw-widgets-hub .widget-icon {
+      align-items: center;
+      background: var(--cream);
+      border: 1px solid var(--light-green);
+      border-radius: 12px;
+      color: var(--brand-green);
+      display: inline-flex;
+      flex: 0 0 54px;
+      font-size: 22px;
+      font-weight: 900;
+      height: 54px;
+      justify-content: center;
+      overflow: hidden;
+      width: 54px;
+    }
+
+    #bw-widgets-hub .widget-icon img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
     #bw-widgets-hub .widget-title {
       color: var(--brand-green);
       font-size: 20px;
@@ -703,9 +733,24 @@
 
         var head = el('div', 'widget-head');
         var headRow = el('div', 'widget-head-row');
-        var headLeft = document.createElement('div');
-        headLeft.appendChild(el('h3', 'widget-title', tool.title));
-        headLeft.appendChild(el('p', 'widget-lead', tool.lead));
+        var headLeft = el('div', 'widget-title-row');
+        var icon = el('span', 'widget-icon');
+        icon.setAttribute('aria-hidden', 'true');
+        if (tool.image) {
+          var iconImg = document.createElement('img');
+          iconImg.src = tool.image;
+          iconImg.alt = '';
+          iconImg.loading = 'lazy';
+          iconImg.decoding = 'async';
+          icon.appendChild(iconImg);
+        } else {
+          icon.textContent = String(tool.title || tool.slug || 'B').trim().charAt(0).toUpperCase();
+        }
+        var headCopy = document.createElement('div');
+        headCopy.appendChild(el('h3', 'widget-title', tool.title));
+        headCopy.appendChild(el('p', 'widget-lead', tool.lead));
+        headLeft.appendChild(icon);
+        headLeft.appendChild(headCopy);
         var meta = el('div', 'widget-meta', 'Auto-height · ' + (tool.category || ''));
         headRow.appendChild(headLeft);
         headRow.appendChild(meta);
