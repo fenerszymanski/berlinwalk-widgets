@@ -71,18 +71,18 @@
   },
   {
     "slug": "berlin-sunday-shopping",
-    "source": "/Users/yusufucuz/.codex/generated_images/019e31fc-3aca-7a73-b86e-7bc78e976a49/ig_044d173bd536527d016a08c86aceac8191b55f827ed1108e15.png",
+    "source": "/Users/yusufucuz/Documents/New project/output/qa/icon-alignment-banana2-20260601/sunday-shopping-cart-banana2-candidate.png",
     "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-sunday-shopping.png",
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-sunday-shopping-160.png",
-    "wixUrl": "https://static.wixstatic.com/media/5a08a3_4d34b6aa57b349c59db4664ce2cbd737~mv2.png"
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_328a5cc9dfb141ae98fe2a8d4fd0746a~mv2.png"
   },
   {
     "slug": "berlin-shopping-areas",
-    "source": "Generated 2026-06-01 via gpt-image-1.5 for BerlinWalk shopping map tool",
+    "source": "/Users/yusufucuz/Documents/New project/output/qa/icon-alignment-banana2-20260601/shopping-areas-banana2-candidate.png",
     "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-shopping-areas.png",
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-shopping-areas-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-shopping-areas-160.png",
-    "wixUrl": "https://static.wixstatic.com/media/5a08a3_27134c41481a4ef1ab116aa6700b9464~mv2.png"
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_74592b7cad724f7a8ab863b56e407afd~mv2.png"
   },
   {
     "slug": "berlin-free-things-to-do",
@@ -206,11 +206,12 @@
   },
   {
     "slug": "hackescher-after-tour-planner",
-    "source": "/Users/yusufucuz/Documents/New project/output/imagegen/tools-icons-gemini-flash-ultimate-home/hackescher-after-tour-planner-raw.png",
+    "source": "/Users/yusufucuz/Documents/New project/output/qa/icon-alignment-banana2-20260601/hackescher-after-tour-banana2-candidate.png",
     "model": "gemini-2.5-flash-image",
     "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner.png",
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner-160.png",
-    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner-160.png"
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_8505101d30c84fd78e7ed5ecdd4f371f~mv2.png"
   },
   {
     "slug": "ultimate-berlin-trip-planner",

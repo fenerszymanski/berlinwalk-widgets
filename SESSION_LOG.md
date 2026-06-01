@@ -4,6 +4,36 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-01 — Codex (Tools icon alignment)
+
+**Did:** Bound Yusuf-approved Gemini/Banana 2 icons after the first Shopping icon looked too close to Sunday and Hackescher looked off-style.
+
+**Changed:**
+- `tools-home/icons/berlin-shopping-areas*.png` — approved bag + pin icon for Berlin Shopping Areas.
+- `tools-home/icons/berlin-sunday-shopping*.png` — redrawn as a shopping cart icon so it no longer matches Shopping Areas.
+- `tools-home/icons/hackescher-after-tour-planner*.png` — accepted map + pin icon.
+- `tools-hub/data.json`, `tools-home/data.json`, `tools-home/icons/manifest.json` — wired Wix Media URLs `5a08a3_74592b7cad724f7a8ab863b56e407afd~mv2.png`, `5a08a3_328a5cc9dfb141ae98fe2a8d4fd0746a~mv2.png`, and `5a08a3_8505101d30c84fd78e7ed5ecdd4f371f~mv2.png`.
+- Local QA — `output/qa/icon-alignment-banana2-20260601-bound-set.png` plus `output/qa/icon-alignment-banana2-20260601/tools-hub-bound.png` and `tools-home-bound.png`; JSON validation and `git diff --check` passed.
+
+**Opened:** Push `berlinwalk-widgets` so GitHub Pages serves the updated icon files/data.
+**Closed:** Shopping/Sunday/Hackescher visual mismatch is fixed locally and uploaded to Wix Media.
+
+**Next session should:** After push, live-QA `/tools`, `/widgets`, and the homepage tools strip.
+
+## 2026-06-01 — Codex (Ultimate emoji gate cleanup)
+
+**Did:** Applied Yusuf's latest Ultimate Trip Planner feedback: all visible utility icons now use emoji, the locked preview is a simpler Day 1 cutoff, and the email gate is tighter.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — central icon renderer now returns emoji spans instead of SVG icons; hero feature chips, option icons, preview rows, locked fade rows, delivery cards, reminder dots, weather icon, share/action icons, and full-plan utility icons now render as emojis. Removed the visible unlock-button label in the fade, removed the consent checkbox in favor of implicit legal copy, kept full plan/PDF/print locked until email, simplified preview rows (`Start central`, `First useful anchor`, `Rest of plan`), removed the bottom "More Berlin planning tools" block, and renamed the share button to `Copy plan link to share`.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated the timebox guard to match the new simplified locked preview instead of the old `Timing` chip layout.
+- Local QA — `git diff --check`, inline script parse, and launch audit passed (`143 pass, 0 warn, 0 block`). In-app Browser locked flow: 1 preview day, full plan hidden, no consent input, no old unlock label, no visible SVG utility icons, emoji icons present, legal copy present. Fail-soft email unlock: full plan visible, 4 full day cards, PDF/print enabled, lead/fade hidden.
+
+**Opened:** Yusuf still needs to review the local `emoji-gate-20260601` state before any push or live promotion.
+**Closed:** Latest gate/icon simplification pass is implemented locally.
+
+**Next session should:** Continue visual simplification from the local URL, especially the full-plan resource/document sections if Yusuf still finds them busy.
+
 ## 2026-06-01 — Codex (Shopping post distribution)
 
 **Did:** Generated and wired a proper Berlin Shopping Areas icon, then promoted the now-published shopping post across local homepage/blog data.
