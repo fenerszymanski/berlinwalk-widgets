@@ -4,25 +4,37 @@
       "key": "Money",
       "label": "Tickets & Money",
       "icon": "💰",
-      "blurb": "Figure out the right ticket, the WelcomeCard, and your daily budget."
+      "blurb": "Figure out the right ticket, the WelcomeCard, and your daily budget.",
+      "bannerImage": "assets/category-banners/tickets-money-banner-2400x600.webp",
+      "bannerFallbackImage": "assets/category-banners/tickets-money-banner-2400x600.jpg",
+      "bannerAlt": "A Berlin transport ticket machine and travel card in a station concourse"
     },
     {
       "key": "Weather",
       "label": "Weather & Timing",
       "icon": "☀️",
-      "blurb": "When to visit, what to pack, and how the months actually compare."
+      "blurb": "When to visit, what to pack, and how the months actually compare.",
+      "bannerImage": "assets/category-banners/weather-timing-banner-2400x600.webp",
+      "bannerFallbackImage": "assets/category-banners/weather-timing-banner-2400x600.jpg",
+      "bannerAlt": "Berlin skyline with the TV Tower and Berliner Dom under changing weather"
     },
     {
       "key": "Maps",
       "label": "Maps & Practical",
       "icon": "🗺️",
-      "blurb": "Drinking water, public toilets, Sunday shopping, free things, safety by area."
+      "blurb": "Drinking water, public toilets, Sunday shopping, free things, safety by area.",
+      "bannerImage": "assets/category-banners/maps-practical-banner-2400x600.webp",
+      "bannerFallbackImage": "assets/category-banners/maps-practical-banner-2400x600.jpg",
+      "bannerAlt": "A Berlin city map, phone map, water bottle, and practical travel items"
     },
     {
       "key": "Discovery",
       "label": "Discovery & Planning",
       "icon": "🔍",
-      "blurb": "Lakes, pools, Berlin Wall history, 3-day itinerary, tourist mistakes."
+      "blurb": "Lakes, pools, Berlin Wall history, 3-day itinerary, tourist mistakes.",
+      "bannerImage": "assets/category-banners/discovery-planning-banner-2400x600.webp",
+      "bannerFallbackImage": "assets/category-banners/discovery-planning-banner-2400x600.jpg",
+      "bannerAlt": "Travelers looking at a Berlin map on Museum Island with the TV Tower in the distance"
     }
   ],
   "tools": [

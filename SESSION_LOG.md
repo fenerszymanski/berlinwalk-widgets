@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-01 — Codex (Tools hub category banners)
+
+**Did:** Added GPT-generated thin hero banners above the four `/berlin-tools` category sections.
+
+**Changed:**
+- `tools-hub/assets/category-banners/` — new 2400x600 JPG/WebP banners for Tickets & Money, Weather & Timing, Maps & Practical, and Discovery & Planning.
+- `tools-hub/data.json` — category objects now include `bannerImage`, `bannerFallbackImage`, and `bannerAlt`.
+- `tools-hub/index.html` and `tools-hub/tools-hub-element.js` — render category banners above headings; category banners load eager; mobile H1/card-title wrapping hardened.
+- Workspace `PROJECT_MEMORY.md` — recorded local banner state.
+
+**Opened:** Push `berlinwalk-widgets` so GitHub Pages and live `/berlin-tools` get the new banner assets/code.
+**Closed:** Local QA passed: JSON valid, `node --check` clean, in-app Browser loaded 4/4 WebP banners, desktop 1280 + mobile 390 overflow `0`, 33 tool cards still present.
+
+**Next session should:** After push/deploy, live-QA `/berlin-tools` and confirm banners load from GitHub Pages under the Wix page.
+
 ## 2026-06-01 — Codex (Ultimate itinerary/tour logic)
 
 **Did:** Simplified the full-plan day cards into clear itinerary blocks and corrected arrival-day tour eligibility for 09:00+ arrivals outside the central start zone.

@@ -64,6 +64,7 @@
       font-weight: 800;
       line-height: 1.14;
       margin-bottom: 14px;
+      text-wrap: balance;
     }
 
     #bw-tools-hub .highlight {
@@ -152,6 +153,24 @@
       margin-bottom: 0;
     }
 
+    #bw-tools-hub .category-banner {
+      aspect-ratio: 4 / 1;
+      background: #F5FAEC;
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 8px;
+      display: block;
+      margin-bottom: 18px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-tools-hub .category-banner img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
     #bw-tools-hub .category-heading {
       align-items: center;
       color: var(--brand-green);
@@ -215,6 +234,7 @@
       font-weight: 800;
       line-height: 1.25;
       margin-bottom: 0;
+      min-width: 0;
       overflow-wrap: break-word;
     }
 
@@ -363,7 +383,7 @@
       }
 
       #bw-tools-hub h1 {
-        font-size: 28px;
+        font-size: 26px;
       }
 
       #bw-tools-hub .hero-lead {
@@ -376,6 +396,11 @@
 
       #bw-tools-hub .category-section {
         margin-bottom: 34px;
+      }
+
+      #bw-tools-hub .category-banner {
+        border-radius: 6px;
+        margin-bottom: 14px;
       }
 
       #bw-tools-hub .category-heading {
@@ -458,11 +483,43 @@
       var root = document.getElementById('tools-root');
       var toolsBaseUrl = 'https://www.berlinwalk.com/tools/';
 
+      function resolveAssetUrl(value) {
+        if (!value) return '';
+        try {
+          return new URL(value, window.location.href).href;
+        } catch (error) {
+          return value;
+        }
+      }
+
       function createTextElement(tag, className, text) {
         var element = document.createElement(tag);
         if (className) element.className = className;
         element.textContent = text;
         return element;
+      }
+
+      function createCategoryBanner(category) {
+        if (!category.bannerImage && !category.bannerFallbackImage) return null;
+
+        var picture = document.createElement('picture');
+        picture.className = 'category-banner';
+
+        if (category.bannerImage) {
+          var source = document.createElement('source');
+          source.srcset = resolveAssetUrl(category.bannerImage);
+          source.type = 'image/webp';
+          picture.appendChild(source);
+        }
+
+        var img = document.createElement('img');
+        img.src = resolveAssetUrl(category.bannerFallbackImage || category.bannerImage);
+        img.alt = category.bannerAlt || '';
+        img.loading = 'eager';
+        img.decoding = 'async';
+        picture.appendChild(img);
+
+        return picture;
       }
 
       function createToolIcon(tool) {
@@ -538,6 +595,8 @@
             grid.appendChild(card);
           });
 
+          var banner = createCategoryBanner(category);
+          if (banner) section.appendChild(banner);
           section.appendChild(heading);
           section.appendChild(blurb);
           section.appendChild(grid);

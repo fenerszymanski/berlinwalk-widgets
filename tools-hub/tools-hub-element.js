@@ -83,6 +83,7 @@ class BWToolsHubElement extends HTMLElement {
           font-weight: 800;
           line-height: 1.14;
           margin-bottom: 14px;
+          text-wrap: balance;
         }
 
         .bw-tools-hub .bw-highlight {
@@ -171,6 +172,24 @@ class BWToolsHubElement extends HTMLElement {
           margin-bottom: 0;
         }
 
+        .bw-tools-hub .bw-category-banner {
+          aspect-ratio: 4 / 1;
+          background: #F5FAEC;
+          border: 1px solid rgba(27, 94, 32, 0.14);
+          border-radius: 8px;
+          display: block;
+          margin-bottom: 18px;
+          overflow: hidden;
+          width: 100%;
+        }
+
+        .bw-tools-hub .bw-category-banner img {
+          display: block;
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+
         .bw-tools-hub .bw-category-heading {
           align-items: center;
           color: #1B5E20;
@@ -234,6 +253,7 @@ class BWToolsHubElement extends HTMLElement {
           font-weight: 800;
           line-height: 1.25;
           margin-bottom: 0;
+          min-width: 0;
           overflow-wrap: break-word;
         }
 
@@ -427,7 +447,7 @@ class BWToolsHubElement extends HTMLElement {
           }
 
           .bw-tools-hub h1 {
-            font-size: 28px;
+            font-size: 26px;
           }
 
           .bw-tools-hub .bw-hero-lead {
@@ -440,6 +460,11 @@ class BWToolsHubElement extends HTMLElement {
 
           .bw-tools-hub .bw-category-section {
             margin-bottom: 34px;
+          }
+
+          .bw-tools-hub .bw-category-banner {
+            border-radius: 6px;
+            margin-bottom: 14px;
           }
 
           .bw-tools-hub .bw-category-heading {
@@ -585,6 +610,7 @@ class BWToolsHubElement extends HTMLElement {
 
     return `
       <section class="bw-category-section" aria-labelledby="${this._escapeAttribute(id)}">
+        ${this._renderCategoryBanner(category)}
         <h2 class="bw-category-heading" id="${this._escapeAttribute(id)}">
           <span class="bw-category-icon" aria-hidden="true">${this._escapeHtml(category.icon || '')}</span>
           ${this._escapeHtml(category.label || '')}
@@ -594,6 +620,21 @@ class BWToolsHubElement extends HTMLElement {
           ${categoryTools.map(tool => this._renderTool(tool)).join('')}
         </div>
       </section>
+    `;
+  }
+
+  _renderCategoryBanner(category) {
+    const source = category && category.bannerImage ? this._resolveAssetUrl(category.bannerImage) : '';
+    const fallback = category && (category.bannerFallbackImage || category.bannerImage)
+      ? this._resolveAssetUrl(category.bannerFallbackImage || category.bannerImage)
+      : '';
+    if (!source && !fallback) return '';
+
+    return `
+      <picture class="bw-category-banner">
+        ${source ? `<source srcset="${this._escapeAttribute(source)}" type="image/webp">` : ''}
+        <img src="${this._escapeAttribute(fallback || source)}" alt="${this._escapeAttribute(category.bannerAlt || '')}" loading="eager" decoding="async">
+      </picture>
     `;
   }
 
@@ -622,6 +663,15 @@ class BWToolsHubElement extends HTMLElement {
     const title = String((tool && tool.title) || '?').trim();
     const letter = title ? title.charAt(0).toUpperCase() : '?';
     return `<span class="bw-tool-icon bw-tool-icon-fallback" aria-hidden="true">${this._escapeHtml(letter)}</span>`;
+  }
+
+  _resolveAssetUrl(value) {
+    if (!value) return '';
+    try {
+      return new URL(value, BW_TOOLS_HUB_DATA_URL).href;
+    } catch (error) {
+      return value;
+    }
   }
 
   _isVisibleTool(tool) {
