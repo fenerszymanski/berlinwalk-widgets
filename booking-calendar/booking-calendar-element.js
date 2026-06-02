@@ -443,6 +443,7 @@ class BWBookingCalendarElement extends HTMLElement {
       'availability-days',
       'availability-endpoint',
       'service-id',
+      'navigation-mode',
       'loading',
       'error-message',
       'cta-label',
@@ -750,6 +751,7 @@ class BWBookingCalendarElement extends HTMLElement {
           detail,
         });
         const shouldContinue = this.dispatchEvent(customEvent);
+        if (this.getAttribute('navigation-mode') === 'event') return;
         if (shouldContinue) this._navigateTo(detail.href);
       });
     }
