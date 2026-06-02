@@ -90,6 +90,199 @@
     #bw-day-trips .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
     #bw-day-trips .bw-filter.time.active { background: var(--bw-lime); border-color: var(--bw-lime); color: var(--bw-green-dark); }
 
+    #bw-day-trips .bw-map-panel {
+      margin: 4px 0 14px;
+    }
+
+    #bw-day-trips .bw-map-copy {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    #bw-day-trips .bw-map-title {
+      margin: 0;
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-day-trips .bw-map-hint {
+      margin: 2px 0 0;
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    #bw-day-trips .bw-map-count {
+      flex: 0 0 auto;
+      color: var(--bw-green);
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 5px 9px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #bw-day-trips .bw-map-container {
+      width: 100%;
+      height: 340px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-day-trips .bw-map { width: 100%; height: 100%; z-index: 1; }
+
+    #bw-day-trips .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-day-trips .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.16);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-day-trips .leaflet-popup-content {
+      margin: 0;
+      width: 240px !important;
+      font-family: inherit;
+    }
+
+    #bw-day-trips .leaflet-popup-tip { box-shadow: 0 6px 20px rgba(0,0,0,0.16); }
+
+    #bw-day-trips .bw-marker {
+      width: 30px;
+      height: 30px;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #bw-day-trips .bw-marker-inner {
+      transform: rotate(45deg);
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    #bw-day-trips .bw-marker.berlin {
+      background: var(--bw-yellow);
+      border-color: var(--bw-green);
+    }
+
+    #bw-day-trips .bw-marker.berlin .bw-marker-inner { color: var(--bw-green); font-size: 12px; }
+
+    #bw-day-trips .bw-popup-head {
+      background: var(--bw-green);
+      padding: 10px 13px;
+      border-radius: 11px 11px 0 0;
+    }
+
+    #bw-day-trips .bw-popup-type {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+
+    #bw-day-trips .bw-popup-name {
+      color: var(--bw-white);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-day-trips .bw-popup-body { padding: 11px 13px 13px; }
+
+    #bw-day-trips .bw-popup-note {
+      color: var(--bw-text);
+      font-size: 12px;
+      line-height: 1.5;
+      margin: 0 0 9px;
+    }
+
+    #bw-day-trips .bw-popup-row {
+      border-top: 1px dashed var(--bw-border);
+      color: var(--bw-text);
+      display: flex;
+      font-size: 11.5px;
+      gap: 8px;
+      line-height: 1.45;
+      padding-top: 7px;
+      margin-top: 7px;
+    }
+
+    #bw-day-trips .bw-popup-label {
+      color: var(--bw-green);
+      flex: 0 0 50px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    #bw-day-trips .bw-popup-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      padding: 7px 11px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    #bw-day-trips .bw-popup-link:hover { background: #FFEF33; }
+
+    #bw-day-trips .bw-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-top: 9px;
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.4;
+    }
+
+    #bw-day-trips .bw-legend span { display: inline-flex; align-items: center; gap: 5px; }
+
+    #bw-day-trips .bw-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--bw-green);
+      border: 2px solid var(--bw-yellow);
+      flex: 0 0 auto;
+    }
+
+    #bw-day-trips .bw-dot.berlin { background: var(--bw-yellow); border-color: var(--bw-green); }
+
     #bw-day-trips .bw-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -201,8 +394,14 @@
       #bw-day-trips .bw-body { padding: 14px; }
       #bw-day-trips .bw-grid { grid-template-columns: 1fr; }
       #bw-day-trips .bw-filter { font-size: 11px; padding: 7px 12px; }
+      #bw-day-trips .bw-map-copy { display: block; }
+      #bw-day-trips .bw-map-count { display: inline-flex; margin-top: 7px; }
+      #bw-day-trips .bw-map-container { height: 310px; }
+      #bw-day-trips .leaflet-popup-content { width: 215px !important; }
     }
   </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
   <div class="bw-wrap">
     <div class="bw-head">
@@ -227,6 +426,23 @@
         <button class="bw-filter time" type="button" data-time="full">I have a full day</button>
       </div>
 
+      <div class="bw-map-panel">
+        <div class="bw-map-copy">
+          <div>
+            <p class="bw-map-title">Pinned day-trip map</p>
+            <p class="bw-map-hint">Tap a pin to compare the distance, train idea, ticket type, and why that escape is worth leaving Berlin for.</p>
+          </div>
+          <span class="bw-map-count"><span id="bw-map-count-num">8</span> on map</span>
+        </div>
+        <div class="bw-map-container">
+          <div class="bw-map" id="bw-day-trips-map"></div>
+        </div>
+        <div class="bw-legend">
+          <span><i class="bw-dot berlin"></i> Berlin starting point</span>
+          <span><i class="bw-dot"></i> Matching day trip</span>
+        </div>
+      </div>
+
       <div class="bw-grid" id="bw-grid"></div>
 
       <p class="bw-count"><strong id="bw-count-num">8</strong> day trips match</p>
@@ -237,6 +453,7 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     (function () {
       var root = document.getElementById('bw-day-trips');
@@ -259,7 +476,9 @@
           text: 'Prussian palaces and parks, above all Sanssouci. The single easiest and most rewarding day trip from Berlin.',
           travel: '30–40 min · S7 or RE1',
           ticket: 'Berlin ABC ticket',
-          gmaps: 'Sanssouci+Potsdam'
+          gmaps: 'Sanssouci+Potsdam',
+          lat: 52.4033,
+          lng: 13.0386
         },
         {
           name: 'Sachsenhausen Memorial',
@@ -268,7 +487,9 @@
           text: 'The former concentration camp at Oranienburg, now a memorial and museum. A heavy but important half day. Free entry.',
           travel: '~50 min · S1 to Oranienburg, then 20 min walk',
           ticket: 'Berlin ABC ticket · free entry',
-          gmaps: 'Sachsenhausen+Memorial'
+          gmaps: 'Sachsenhausen+Memorial',
+          lat: 52.7650,
+          lng: 13.2640
         },
         {
           name: 'Lutherstadt Wittenberg',
@@ -277,7 +498,9 @@
           text: 'The small town where Martin Luther sparked the Reformation. Compact, walkable, and rich in history.',
           travel: '40–75 min · ICE or RE',
           ticket: 'Regional or fast-train ticket',
-          gmaps: 'Lutherstadt+Wittenberg'
+          gmaps: 'Lutherstadt+Wittenberg',
+          lat: 51.8666,
+          lng: 12.6460
         },
         {
           name: 'Spreewald',
@@ -286,7 +509,9 @@
           text: 'A UNESCO biosphere of forest canals south of Berlin. Glide through on a punt, paddle a canoe, and try the famous gherkins.',
           travel: '~1h15 · RE2 to Lübbenau',
           ticket: 'VBB regional ticket / Deutschland-Ticket',
-          gmaps: 'Spreewald+L%C3%BCbbenau'
+          gmaps: 'Spreewald+L%C3%BCbbenau',
+          lat: 51.8687,
+          lng: 13.9686
         },
         {
           name: 'Dresden',
@@ -295,7 +520,9 @@
           text: 'The rebuilt Baroque capital of Saxony, with the Frauenkirche, Zwinger, and the Elbe. A full day, but worth it.',
           travel: '~2h · EC/IC direct',
           ticket: 'Separate train ticket',
-          gmaps: 'Dresden+Frauenkirche'
+          gmaps: 'Dresden+Frauenkirche',
+          lat: 51.0519,
+          lng: 13.7414
         },
         {
           name: 'Leipzig',
@@ -304,7 +531,9 @@
           text: 'A lively city of music, art, and 1989 “peaceful revolution” history. Bach, galleries, and a buzzing food scene.',
           travel: '~1h15 · ICE direct',
           ticket: 'Separate train ticket',
-          gmaps: 'Leipzig+Germany'
+          gmaps: 'Leipzig+Germany',
+          lat: 51.3397,
+          lng: 12.3731
         },
         {
           name: 'Tropical Islands',
@@ -313,7 +542,9 @@
           text: 'A giant indoor tropical resort under a former airship hangar: pools, a rainforest, and beaches. A reliable rainy-day or family win.',
           travel: '~1h + shuttle · RE to Brand',
           ticket: 'VBB regional ticket / Deutschland-Ticket',
-          gmaps: 'Tropical+Islands+Krausnick'
+          gmaps: 'Tropical+Islands+Krausnick',
+          lat: 52.0385,
+          lng: 13.7488
         },
         {
           name: 'Saxon Switzerland (Bastei)',
@@ -322,16 +553,34 @@
           text: 'Dramatic sandstone cliffs and the Bastei bridge in the Elbe valley. A proper hiking day, usually changed in Dresden.',
           travel: '~2.5h · via Dresden + S-Bahn',
           ticket: 'Separate train ticket',
-          gmaps: 'Bastei+Bridge+Saxon+Switzerland'
+          gmaps: 'Bastei+Bridge+Saxon+Switzerland',
+          lat: 50.9616,
+          lng: 14.0730
         }
       ];
 
+      trips.forEach(function (trip, index) { trip.num = index + 1; });
+
       var grid = document.getElementById('bw-grid');
       var countEl = document.getElementById('bw-count-num');
+      var mapCountEl = document.getElementById('bw-map-count-num');
       var interestBtns = root.querySelectorAll('#bw-interest .bw-filter');
       var timeBtns = root.querySelectorAll('#bw-time .bw-filter');
 
       var state = { interest: 'all', time: 'any' };
+      var berlin = {
+        name: 'Berlin',
+        type: 'Starting point',
+        note: 'Most day trips here leave from central Berlin stations such as Hauptbahnhof, Alexanderplatz, Friedrichstraße, or Ostkreuz.',
+        travel: 'Start in Berlin',
+        ticket: 'Check the ticket zone before you go',
+        lat: 52.5215,
+        lng: 13.4132,
+        gmaps: 'Berlin+Hauptbahnhof'
+      };
+      var map = null;
+      var markerLayer = null;
+      var lineLayer = null;
 
       function matches(t) {
         var okInterest = state.interest === 'all' || t.themes.indexOf(state.interest) !== -1;
@@ -353,9 +602,110 @@
           '</article>';
       }
 
+      function createMarkerIcon(loc, isBerlin) {
+        var label = isBerlin ? '★' : loc.num;
+        var html = '<div class="bw-marker' + (isBerlin ? ' berlin' : '') + '"><div class="bw-marker-inner">' + label + '</div></div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+      }
+
+      function popupHtml(loc) {
+        var note = loc.text || loc.note || '';
+        var type = loc.type || TAG[(loc.themes || [])[0]] || 'Day trip';
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + type + '</span>' +
+          '<div class="bw-popup-name">' + loc.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<p class="bw-popup-note">' + note + '</p>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Travel</span><span>' + loc.travel + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Ticket</span><span>' + loc.ticket + '</span></div>' +
+          '<a href="https://www.google.com/maps/search/?api=1&query=' + loc.gmaps + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Google Maps →</a>' +
+          '</div>';
+      }
+
+      function initMap() {
+        var mapEl = document.getElementById('bw-day-trips-map');
+        if (!mapEl || !window.L) return;
+
+        map = L.map(mapEl, {
+          center: [51.95, 13.38],
+          zoom: 7,
+          scrollWheelZoom: false,
+          tap: true
+        });
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+          maxZoom: 18
+        }).addTo(map);
+
+        map.once('click', function () { map.scrollWheelZoom.enable(); });
+        markerLayer = L.layerGroup().addTo(map);
+        lineLayer = L.layerGroup().addTo(map);
+
+        setTimeout(function () { map.invalidateSize(); }, 120);
+      }
+
+      function renderMap(list) {
+        if (!map || !markerLayer || !lineLayer) return;
+
+        markerLayer.clearLayers();
+        lineLayer.clearLayers();
+
+        L.marker([berlin.lat, berlin.lng], {
+          icon: createMarkerIcon(berlin, true)
+        }).bindPopup(popupHtml(berlin), {
+          closeButton: true,
+          maxWidth: 260,
+          className: 'bw-popup-wrapper'
+        }).addTo(markerLayer);
+
+        var boundsPoints = [[berlin.lat, berlin.lng]];
+
+        list.forEach(function (trip) {
+          var point = [trip.lat, trip.lng];
+          boundsPoints.push(point);
+
+          L.polyline([[berlin.lat, berlin.lng], point], {
+            color: '#7CB342',
+            weight: 1.5,
+            opacity: 0.5,
+            dashArray: '4 6'
+          }).addTo(lineLayer);
+
+          L.marker(point, {
+            icon: createMarkerIcon(trip, false)
+          }).bindPopup(popupHtml(trip), {
+            closeButton: true,
+            maxWidth: 260,
+            className: 'bw-popup-wrapper'
+          }).addTo(markerLayer);
+        });
+
+        if (mapCountEl) mapCountEl.textContent = list.length;
+
+        if (boundsPoints.length > 1) {
+          map.fitBounds(boundsPoints, {
+            padding: [24, 24],
+            maxZoom: list.length === 1 ? 10 : 8
+          });
+        } else {
+          map.setView([51.95, 13.38], 7);
+        }
+
+        setTimeout(function () { map.invalidateSize(); }, 80);
+      }
+
       function render() {
         var list = trips.filter(matches);
         countEl.textContent = list.length;
+        renderMap(list);
         if (!list.length) {
           grid.innerHTML = '<p class="bw-empty">No day trip matches that exact combination. Try “Any” time, or pick a different interest.</p>';
           return;
@@ -380,6 +730,7 @@
         });
       });
 
+      initMap();
       render();
     })();
   </script>

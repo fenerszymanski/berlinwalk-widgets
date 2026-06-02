@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-06-01 (Brandenburg Gate draft + landmarks map; A-tier tourist-capture ideas added)
+Last updated: 2026-06-02 (Day Trips Wix draft + finder/map widget added)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -10,7 +10,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 |---|---|---|---|
 | 0 | Local draft + widget | Brandenburg Gate Berlin: A Visitor's Guide (2026) | A-tier head-term capture (no existing post). Honest funnel: the gate is the western edge, the tour walks the eastern core most visitors miss. Draft `blog-drafts/brandenburg-gate-berlin-visitors-guide.md`; reusable `berlin-landmarks-map` widget built + QA'd; QS/FAQ key `brandenburg-gate`; CMS insert `insert-berlin-landmarks-map.js`. Pending push + live steps. |
 | 0 | Local draft + widget | East Side Gallery: Berlin's Open-Air Wall Guide | A-tier, no dedicated post existed. Draft `blog-drafts/east-side-gallery-berlin-guide.md`; new `east-side-gallery-murals` card-guide widget (12 famous murals, theme filter) built + QA'd; QS/FAQ key `east-side-gallery`; CMS insert `insert-east-side-gallery-murals.js`. Pending push + live steps. |
-| 0 | Idea (A-tier) | Best Day Trips from Berlin (Potsdam, Sachsenhausen, Spreewald) | High-volume "day trips from Berlin"; new "day trip picker" widget candidate. Captures longer-stay tourists. |
+| 0 | Wix draft + widget | Best Day Trips from Berlin (Potsdam, Sachsenhausen, Spreewald) | High-volume "day trips from Berlin"; Wix draft `80b60289-cd69-4d4c-ac9b-399ce47c8155` created UNPUBLISHED and patched with 4 licensed images + SEO; local draft `blog-drafts/best-day-trips-from-berlin.md`; new `berlin-day-trips-finder` picker widget with pinned map built; QS/FAQ key `best-day-trips-from-berlin`; CMS insert `../insert-berlin-day-trips-finder.js`. Pending full visual QA, push, CMS row insert/re-save and tool icon. |
 | 0 | Idea (A-tier, seasonal) | Best Christmas Markets in Berlin (2026) | Q4 seasonal pillar; new "Christmas markets map" widget candidate. Publish by October. |
 | 0 | Idea (B-tier) | Berlin Street Art Guide / Holocaust Memorial Guide / Sachsenhausen Memorial Guide / "How Many Days in Berlin?" | High-intent gaps; street-art map + `berlin-landmarks-map` reuse. |
 | 1 | Wix draft | Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange | Route-adjacent history piece. Pairs with existing old-town and GDR demolition content. Local draft at `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`; quick-summary + FAQ + `nikolaiviertel-walk` self-guided walking-tour widget wired under slug `nikolaiviertel`. Wix draft ID: `48bf0945-63d9-46cd-b9af-a8fb87ab3c75`. |

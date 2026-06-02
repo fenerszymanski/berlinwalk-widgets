@@ -1,6 +1,7 @@
 /* Auto-generated from /faq/data.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
+  "best-day-trips-from-berlin": "best-day-trips-from-berlin",
   "east-side-gallery-berlin-guide": "east-side-gallery",
   "brandenburg-gate-berlin-visitors-guide": "brandenburg-gate",
   "shopping-in-berlin": "shopping-in-berlin",
@@ -53,6 +54,60 @@
 };
 
   var SCHEMAS = {
+  "best-day-trips-from-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the easiest day trip from Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Potsdam is the easiest and most rewarding day trip from Berlin for most visitors. It is close, reachable with a Berlin ABC ticket, and gives you palaces, gardens, lakes and a completely different atmosphere in about 30 to 40 minutes plus local travel time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you visit Sachsenhausen from Berlin in half a day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Sachsenhausen Memorial can work as a half-day trip from Berlin, but do not rush it. Take the S-Bahn to Oranienburg, then walk or take the local bus to the memorial. Entry to the memorial and museums is free, but the visit is emotionally heavy and deserves time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Deutschlandticket useful for day trips from Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if your day trips use local and regional trains. In 2026 the Deutschlandticket costs 63 EUR per month and covers local and regional public transport, but not ICE, IC or EC long-distance trains. It can help for trips such as Spreewald or Tropical Islands, but not for fast trains to Dresden or Leipzig."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Potsdam included in Berlin ABC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Potsdam is in Berlin fare zone C, so a Berlin ABC ticket is usually enough to travel from Berlin to Potsdam by public transport. Palace interiors, such as Sanssouci Palace, need separate tickets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you do Dresden as a day trip from Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Dresden is possible as a full-day trip from Berlin, usually around two hours each way by long-distance train. It is worth it if you want the Frauenkirche, Zwinger, the Elbe and a very different city, but it is too much if you only have a short Berlin trip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best nature day trip from Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Spreewald is the best easy nature day trip from Berlin, especially from spring to early autumn. You can take the RE2 toward Lübbenau, then spend the day among forest canals, punt boats, canoe routes and small-town Brandenburg calm."
+        }
+      }
+    ]
+  },
   "east-side-gallery": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
