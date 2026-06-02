@@ -4,6 +4,48 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Booking calendar sessionId fix)
+
+**Did:** Fixed the custom Booking Calendar's native Booking Form handoff after Wix showed a €10 payment block.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — CTA URL now sends only supported Booking Form params: `bookings_sessionId`, `bookings_timezone`, `bookings_serviceId`, optional `bookings_locationId`, and UTMs; removed unsupported `selected_date`, `selected_time`, `event_id`, and `guests` params from the form URL.
+- `booking-calendar/README.md` — documented that the live endpoint uses Availability Calendar `slot.sessionId`, not Time Slots V2 `eventId`.
+- Workspace `berlinwalk-content-app/api/booking-calendar-availability.js` and `scripts/booking-calendar-availability-probe.mjs` — switched to Availability Calendar data; Vercel endpoint redeployed and verified.
+
+**Opened:** Push this widget change, wait for GitHub Pages, then retest Wix preview. If the form still shows payment after using the real `sessionId`, inspect Wix Booking Form/payment page settings.
+**Closed:** Root cause identified: Time Slots V2 `eventId` and Booking Form `bookings_sessionId` are distinct.
+
+**Next session should:** After push/deploy, confirm the generated href contains a `bookings_sessionId` starting with Availability Calendar's `slot.sessionId` and no `guests/event_id/selected_date` params.
+
+## 2026-06-02 — Codex (Day Trips extra images)
+
+**Did:** Added four more licensed images to the already-published Best Day Trips post.
+
+**Changed:**
+- `blog-drafts/images/best-day-trips-from-berlin/` — added optimized JPEGs for Leipzig Nikolaikirche, Wittenberg Castle Church, Tropical Islands and Bastei Bridge.
+- `blog-drafts/best-day-trips-from-berlin.md` — recorded the extra image status and four additional Wikimedia source/credit lines.
+- Workspace script `berlinwalk-content-app/add-day-trips-extra-images.mjs` uploaded the images, inserted them into Wix richContent, rewrote Image credits, and re-published the already-published post to sync live content.
+
+**Opened:** Visual-check the live post; Day Trip Finder CMS row/icon/homepage promotion may still be pending. Unrelated `booking-calendar/booking-calendar-element.js` and `ultimate-berlin-trip-planner/index.html` local modifications remain untouched.
+**Closed:** Live Wix post readback: 159 nodes, 7 inline images, 3 HTML embeds; Leipzig/Wittenberg/Tropical/Bastei headings now each have an image immediately after the heading.
+
+**Next session should:** Verify the published page visually and continue any remaining BerlinTools live/CMS/icon steps.
+
+## 2026-06-02 — Codex (Ultimate planner anti-repeat routes)
+
+**Did:** Fixed long Ultimate Berlin Trip Planner plans that repeated the same central anchors under different themes.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added place-memory logic in `buildPlan()` so later days avoid already-used map anchors and switch to theme-specific alternatives when needed.
+- `ultimate-berlin-trip-planner/index.html` — added alternative anchors (Holocaust Memorial, Gendarmenmarkt, Nikolaiviertel, Berlin Cathedral, Victory Column, Treptower Park) and route variants for history, Wall, free, and museum days.
+- `ultimate-berlin-trip-planner/index.html` — moved Potsdam/slow-day earlier for 5+ day plans, and made arrival-day Wall/Cold War map anchors choose one rain-aware stop instead of showing multiple alternatives as one route.
+
+**Opened:** Continue full UX/content simplification; Potsdam is still automatic in long plans, not yet a visible user-selectable interest.
+**Closed:** Local QA passed for the 2026-06-16 / 6-day / history+wall / low-budget / rain+photos / gentle scenario: no Museum Island repeat day, Day 1 no longer shows both Wall Memorial and Topography, Day 2 uses Holocaust Memorial/Gendarmenmarkt/Nikolaiviertel, Day 5 uses Tempelhofer/Treptower/Victory Column, Day 6 includes Potsdam; broken images 0, overflow 0.
+
+**Next session should:** Review the visible long-plan rhythm with Yusuf, then decide whether to add `Potsdam / day trip` as a visible Top interests option.
+
 ## 2026-06-02 — Codex (Day Trips embed cache fix)
 
 **Did:** Diagnosed why the Wix editor showed blank/fallback Quick Summary/FAQ widgets for the Day Trips draft.

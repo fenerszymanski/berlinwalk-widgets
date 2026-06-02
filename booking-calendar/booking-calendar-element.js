@@ -879,13 +879,11 @@ class BWBookingCalendarElement extends HTMLElement {
     const base = slot?.bookingUrl || this.getAttribute('booking-url') || BW_BOOKING_CALENDAR_BOOKING_URL;
     const url = new URL(base, window.location.href);
     if (slot) {
-      url.searchParams.set('selected_date', this._dateKey(slot.startDate));
-      url.searchParams.set('selected_time', this._formatTime(slot.startDate));
       url.searchParams.set('bookings_timezone', slot.timezone || 'Europe/Berlin');
+      if (slot.serviceId || this.getAttribute('service-id')) url.searchParams.set('bookings_serviceId', slot.serviceId || this.getAttribute('service-id'));
+      if (slot.locationId) url.searchParams.set('bookings_locationId', slot.locationId);
       if (slot.sessionId || slot.eventId) url.searchParams.set('bookings_sessionId', slot.sessionId || slot.eventId);
-      if (slot.eventId) url.searchParams.set('event_id', slot.eventId);
     }
-    url.searchParams.set('guests', String(this.state.guests));
     url.searchParams.set('utm_content', 'booking_calendar');
 
     const incoming = new URL(window.location.href);

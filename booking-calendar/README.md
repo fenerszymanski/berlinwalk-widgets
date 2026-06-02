@@ -74,8 +74,8 @@ Use Wix's custom Booking Calendar page flow:
 3. Set tag name `bw-booking-calendar`.
 4. If Wix page code is available, `velo/custom-booking-calendar-page.js` remains a page-code starting point.
 5. If Wix page code is not available, no page code is required: the element auto-loads sanitized live slots from the Content Studio endpoint.
-6. Query real availability through Wix Bookings Time Slots V2 `List Event Time Slots`. This was live-tested on 2026-06-02 for the Berlin Free Walking Tour service and returned bookable class sessions, event IDs, capacity, location, and resource data. The endpoint requests 365 days; Wix only returns slots that are actually bookable in the configured service window. For the native Booking Form preload, class sessions use `bookings_sessionId`; the normalizer copies Time Slots V2 `eventInfo.eventId` into `sessionId`.
-7. On `Reserve your spot`, route to the Wix Booking Form with selected slot defaults.
+6. Query real availability through the Content Studio endpoint. It uses Wix Bookings Availability Calendar `Query Availability` because the native Booking Form needs the real class `slot.sessionId`; Time Slots V2 returns an `eventId`, which is not the same value and can confuse the Booking Form.
+7. On `Reserve your spot`, route to the Wix Booking Form with only supported booking defaults: `bookings_sessionId`, `bookings_timezone`, `bookings_serviceId`, optional `bookings_locationId`, and UTM parameters.
 
 This keeps Wix's Booking Form, confirmation page, calendar sync, and automations intact while replacing the heavy native calendar UI.
 
@@ -88,4 +88,4 @@ source scripts/load-api-keys.sh
 node scripts/booking-calendar-availability-probe.mjs --start 2026-06-02 --days 365
 ```
 
-The probe calls the same Time Slots V2 endpoint and prints a concise summary plus sample normalized slots. It does not print API keys.
+The probe calls the same availability endpoint shape and prints a concise summary plus sample normalized slots. It does not print API keys.
