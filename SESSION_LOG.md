@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Tools hub oil-painting banners)
+
+**Did:** Regenerated all four `/berlin-tools` category hero banners as refined oil-painting images using Yusuf's ChatGPT browser session.
+
+**Changed:**
+- `tools-hub/assets/category-banners/*-oil-banner-2400x600.{jpg,webp}` — new Tickets & Money, Weather & Timing, Maps & Practical, and Discovery & Planning banner assets.
+- `tools-hub/data.json` — category `bannerImage` / `bannerFallbackImage` fields now point to the oil-painting v2 files.
+- Workspace `PROJECT_MEMORY.md` + root `SESSION_LOG.md` — recorded the v2 banner state; raw images live under `output/imagegen/tools-hub-oil-banners-20260602/`, QA contact sheet under `output/qa/tools-hub-oil-banners-20260602/contact-sheet.png`.
+
+**Opened:** Push/deploy still needed for GitHub Pages and live `/berlin-tools`.
+**Closed:** Local image generation/download/processing completed; old photo-style banner files remain in place as fallback history.
+
+**Next session should:** After push/deploy, live-QA the four category banners on `https://www.berlinwalk.com/berlin-tools`.
+
 ## 2026-06-02 — Codex (Audio tour tool icon)
 
 **Did:** Generated and wired the missing icon for `Berlin in 9 Minutes (Free Audio Tour)`.
