@@ -9678,12 +9678,18 @@
     oberbaum_bridge: { label: 'Oberbaum Bridge', query: 'Oberbaumbruecke Berlin', area: 'Friedrichshain / Kreuzberg', type: 'landmark', lat: 52.5018, lng: 13.4458, why: 'A short Spree-side add-on beside East Side Gallery, not a cross-city detour.' },
     markthalle_neun: { label: 'Markthalle Neun', query: 'Markthalle Neun Berlin', area: 'Kreuzberg', type: 'food', lat: 52.502, lng: 13.4316, why: 'Covered food-market backup and a useful neighborhood anchor.' },
     brandenburg_gate: { label: 'Brandenburg Gate', query: 'Brandenburger Tor Berlin', area: 'Mitte', type: 'landmark', lat: 52.5163, lng: 13.3777, why: 'The unavoidable central history/photo anchor.' },
+    holocaust_memorial: { label: 'Holocaust Memorial', query: 'Memorial to the Murdered Jews of Europe Berlin', area: 'Mitte', type: 'history', lat: 52.5139, lng: 13.3787, why: 'A central memorial anchor that pairs naturally with the government quarter.' },
     reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, why: 'Free dome if booked ahead; still useful from outside.' },
+    gendarmenmarkt: { label: 'Gendarmenmarkt', query: 'Gendarmenmarkt Berlin', area: 'Mitte', type: 'landmark', lat: 52.5138, lng: 13.3927, why: 'A central square that keeps the history day fresh without repeating the same anchors.' },
+    nikolaiviertel: { label: 'Nikolaiviertel', query: 'Nikolaiviertel Berlin', area: 'Mitte', type: 'neighborhood', lat: 52.5169, lng: 13.4072, why: 'A compact old-Berlin-feeling area close to Museum Island and Alexanderplatz.' },
+    berlin_cathedral: { label: 'Berlin Cathedral', query: 'Berliner Dom Berlin', area: 'Museum Island', type: 'landmark', lat: 52.5191, lng: 13.4011, why: 'A useful Museum Island exterior or paid-entry fallback without forcing a full museum day.' },
     hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'A useful courtyard layer close to Museum Island and Hackescher Markt.' },
     kastanienallee: { label: 'Kastanienallee', query: 'Kastanienallee Berlin', area: 'Prenzlauer Berg', type: 'neighborhood', lat: 52.5352, lng: 13.4102, why: 'Good slow neighborhood walk with cafes and local rhythm.' },
     topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, why: 'Free, serious, and reliable as a weather backup.' },
     tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'The easiest green reset near the central sights.' },
+    victory_column: { label: 'Victory Column', query: 'Siegessaeule Berlin', area: 'Tiergarten', type: 'landmark', lat: 52.5145, lng: 13.3501, why: 'A free outdoor Tiergarten anchor that keeps the low-budget day visual.' },
     tempelhofer_feld: { label: 'Tempelhofer Feld', query: 'Tempelhofer Feld Berlin', area: 'Neukoelln / Tempelhof', type: 'park', lat: 52.473, lng: 13.4036, why: 'Big open Berlin and strong low-budget day anchor.' },
+    treptower_park: { label: 'Treptower Park', query: 'Treptower Park Berlin', area: 'Treptow', type: 'park', lat: 52.4862, lng: 13.4691, why: 'A strong free green-space backup with a different Berlin geography.' },
     raw_gelande: { label: 'RAW-Gelande', query: 'RAW-Gelaende Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5075, lng: 13.4548, why: 'Useful nightlife and street-art area with backup options.' },
     oranienstrasse: { label: 'Oranienstrasse', query: 'Oranienstrasse Berlin', area: 'Kreuzberg', type: 'nightlife', lat: 52.5021, lng: 13.4219, why: 'Casual bar and food corridor for a Berlin night without overplanning.' },
     simon_dach_strasse: { label: 'Simon-Dach-Strasse', query: 'Simon-Dach-Strasse Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5103, lng: 13.4573, why: 'Easy backup bar area after an eastern Berlin day.' },
@@ -9847,6 +9853,7 @@
     text = text.toLowerCase();
     if (text.indexOf('arrival') !== -1) return 'pin';
     if (text.indexOf('wall') !== -1 || text.indexOf('cold war') !== -1) return 'wall';
+    if (text.indexOf('history') !== -1 || text.indexOf('memorial') !== -1 || text.indexOf('context') !== -1) return 'book';
     if (text.indexOf('museum') !== -1 || text.indexOf('royal') !== -1) return 'landmark';
     if (text.indexOf('food') !== -1) return 'food';
     if (text.indexOf('budget') !== -1 || text.indexOf('free') !== -1) return 'coin';
@@ -9895,6 +9902,14 @@
       var slot = tourSlotForPlan();
       if (slot && slot.insideTrip) return slot.dayLabel + ' at ' + slot.startLabel;
       return 'Next Tue-Sat';
+    }
+
+    if (firstDay && label.indexOf('afternoon') !== -1) {
+      if (state.arrivalTime === 'morning') return '14:00-16:30';
+      if (state.arrivalTime === 'lateMorning') return '14:00-16:30';
+      if (state.arrivalTime === 'midday') return '15:00-17:00';
+      if (state.arrivalTime === 'afternoon') return '17:00-18:30';
+      return 'Tonight';
     }
 
     if (/berlinwalk|walking tour/i.test(String((block && block.title) || '') + ' ' + String((block && block.copy) || ''))) {
@@ -9998,6 +10013,7 @@
     text = text.toLowerCase();
     if (text.indexOf('arrival') !== -1) return 'arrival';
     if (text.indexOf('wall') !== -1 || text.indexOf('cold war') !== -1) return 'wall';
+    if (text.indexOf('history') !== -1 || text.indexOf('memorial') !== -1 || text.indexOf('context') !== -1) return 'history';
     if (text.indexOf('museum') !== -1 || text.indexOf('royal') !== -1) return 'museums';
     if (text.indexOf('food') !== -1) return 'food';
     if (text.indexOf('budget') !== -1 || text.indexOf('free') !== -1) return 'free';
@@ -10011,6 +10027,7 @@
     return {
       arrival: 'Arrival setup',
       wall: 'Wall route',
+      history: 'History layer',
       museums: 'Museum core',
       food: 'Food neighborhood',
       free: 'Free Berlin',
@@ -10028,6 +10045,7 @@
     return {
       arrival: 'Ticket / World Clock / first route',
       wall: 'Memorial / gallery / east-side food',
+      history: 'Memorials / Reichstag / Topography',
       museums: 'One anchor / one backup / dinner',
       food: 'Market / courtyard / dinner',
       free: 'Outdoor sights / free backup',
@@ -10061,6 +10079,7 @@
     var art = {
       arrival: '<rect class="art-bg" x="2" y="8" width="128" height="66" rx="14"/><path class="art-line" d="M17 57 C37 36 57 62 78 43 C91 31 101 31 115 25"/><circle class="art-yellow" cx="108" cy="25" r="12"/><circle class="art-accent" cx="108" cy="25" r="4"/><rect class="art-soft" x="18" y="38" width="29" height="22" rx="5"/><path class="art-line" d="M23 38 V29 h19 v9"/><path class="art-line" d="M26 60 h75"/>',
       wall: '<rect class="art-bg" x="2" y="8" width="128" height="66" rx="14"/><rect class="art-soft" x="16" y="25" width="78" height="34" rx="6"/><path class="art-line" d="M17 37 h76 M17 49 h76 M37 25 v12 M60 37 v12 M78 25 v12 M31 49 v10 M56 49 v10"/><path class="art-line" d="M100 57 C107 49 112 42 114 31"/><circle class="art-yellow" cx="114" cy="28" r="10"/>',
+      history: '<rect class="art-bg" x="2" y="8" width="128" height="66" rx="14"/><path class="art-line" d="M18 61 h96"/><path class="art-yellow" d="M30 31 L64 15 L98 31 Z"/><path class="art-soft" d="M29 31 h70 v10 H29 Z"/><path class="art-line" d="M37 41 v20 M50 41 v20 M64 41 v20 M78 41 v20 M91 41 v20"/><circle class="art-accent" cx="103" cy="25" r="8"/>',
       museums: '<rect class="art-bg" x="2" y="8" width="128" height="66" rx="14"/><path class="art-yellow" d="M28 29 L65 12 L102 29 Z"/><rect class="art-soft" x="25" y="29" width="80" height="8" rx="3"/><path class="art-line" d="M34 37 v23 M53 37 v23 M72 37 v23 M91 37 v23"/><path class="art-line" d="M24 61 h84"/>',
       food: '<rect class="art-bg" x="2" y="8" width="128" height="66" rx="14"/><path class="art-yellow" d="M20 28 h88 l9 13 H12 Z"/><path class="art-line" d="M24 41 v19 h82 V41"/><circle class="art-soft" cx="49" cy="53" r="13"/><path class="art-line" d="M84 45 v19 M93 45 v19 M84 52 h9"/><path class="art-line" d="M43 53 h12"/>',
       free: '<rect class="art-bg" x="2" y="8" width="128" height="66" rx="14"/><path class="art-line" d="M18 61 h96"/><path class="art-yellow" d="M26 42 h44 v19 H26 Z"/><path class="art-line" d="M34 42 V28 h10 v14 M52 42 V25 h10 v17"/><circle class="art-soft" cx="94" cy="33" r="17"/><path class="art-line" d="M94 47 v16 M82 63 h24"/>',
@@ -12591,6 +12610,7 @@
     var base = {
       arrival: { label: 'Food near base', icon: 'food' },
       wall: { label: 'Stay east', icon: 'pin' },
+      history: { label: 'Stay central', icon: 'book' },
       museums: { label: 'Central dinner', icon: 'food' },
       food: { label: 'Same area', icon: 'pin' },
       free: { label: 'Spree or park', icon: 'route' },
@@ -12601,6 +12621,7 @@
     var fallback = {
       arrival: { label: 'Sleep wins', icon: 'bed' },
       wall: { label: 'One ride home', icon: 'train' },
+      history: { label: 'No paid queue', icon: 'coin' },
       museums: { label: 'No second queue', icon: 'shield' },
       food: { label: 'Late snack ok', icon: 'food' },
       free: { label: 'Cheap food', icon: 'coin' },
@@ -12620,6 +12641,7 @@
     var closeMeta = {
       arrival: { label: 'Arrival', title: 'Food, water, sleep' },
       wall: { label: 'East', title: 'Stay east, then home' },
+      history: { label: 'Central', title: 'Dinner, no second queue' },
       museums: { label: 'Museum', title: 'Dinner, no second queue' },
       food: { label: 'Food', title: 'One-area dinner' },
       free: { label: 'Low-cost', title: 'Cheap food or Spree' },
@@ -13800,6 +13822,7 @@
 
   function focusPlaceIds(key) {
     var places = {
+      history: ['brandenburg_gate', 'topography_terror', 'reichstag'],
       museums: ['museum_island', 'brandenburg_gate', 'hackescher_markt'],
       wall: ['wall_memorial', 'topography_terror', 'brandenburg_gate'],
       food: stayAreaFoodPlaces(),
@@ -13812,6 +13835,13 @@
 
   function focusDayMove(key, compact) {
     var moves = {
+      history: {
+        time: compact ? 'History anchor' : 'Afternoon',
+        title: compact ? 'Use one free central history layer' : 'Free central history layer',
+        copy: compact
+          ? 'Use Brandenburg Gate, memorials, Reichstag exterior, or Topography of Terror. Keep museums for a separate choice only if you really want one.'
+          : 'After the walk, stay in the same central history direction: Brandenburg Gate, memorials, Reichstag exterior, or Topography of Terror. No museum queue by default.'
+      },
       museums: {
         time: compact ? 'One strong stop' : 'Afternoon',
         title: compact ? 'Choose one museum or Museum Island edge' : 'Choose one Museum Island anchor',
@@ -13848,7 +13878,7 @@
           : 'After the walk, avoid an overloaded afternoon. Eat properly, rest, then choose one night area with a ride-home backup.'
       }
     };
-    return moves[key] || moves.museums;
+    return moves[key] || moves.history;
   }
 
   function oneDayFocusMove() {
@@ -13892,7 +13922,8 @@
 
   function firstDayPlaceIds() {
     if (state.tourIntent === 'booked' || arrivalDayTourEligible()) {
-      var tourPlaces = ['world_clock'].concat(focusPlaceIds(primaryFocusKey()));
+      var tourPlaces = (tourFrameworkFocus().placeIds || ['world_clock'].concat(focusPlaceIds(primaryFocusKey()))).slice();
+      if (tourPlaces.indexOf('world_clock') === -1) tourPlaces.unshift('world_clock');
       return tourPlaces.filter(function (placeId, index, list) {
         return list.indexOf(placeId) === index;
       }).slice(0, 4);
@@ -13976,6 +14007,18 @@
 
   function dayTemplate(key) {
     var templates = {
+      history: {
+        title: 'Free central history without museum overload',
+        theme: 'Central history day',
+        accent: '#1B5E20',
+        bg: '#F2F8E8',
+        blocks: [
+          { time: 'Morning', title: 'Brandenburg Gate and memorials', copy: 'Use the central memorial layer first: Brandenburg Gate, Holocaust Memorial, and the government quarter edges.' },
+          { time: 'Afternoon', title: 'Topography of Terror or Reichstag exterior', copy: 'Choose one serious free history anchor. If rain hits, Topography of Terror is the clean backup.' },
+          { time: 'Evening', title: 'Simple central dinner', copy: 'Keep dinner around Mitte, Hackescher Markt, or your base. Do not add another paid entry tonight.' }
+        ],
+        placeIds: ['brandenburg_gate', 'topography_terror', 'reichstag']
+      },
       wall: {
         title: 'Wall, East Berlin, and post-1989 energy',
         theme: 'Cold War geography',
@@ -14066,17 +14109,27 @@
 
   function tourFrameworkFocusKey() {
     var selected = Array.isArray(state.interests) ? state.interests : [];
-    var priority = ['museums', 'wall', 'food', 'free', 'nightlife'];
+    var priority = ['museums', 'wall', 'food', 'free', 'nightlife', 'history'];
     for (var i = 0; i < priority.length; i += 1) {
       if (selected.indexOf(priority[i]) !== -1) return priority[i];
     }
-    if (selected.indexOf('history') !== -1) return 'museums';
-    return 'museums';
+    return 'history';
   }
 
   function tourFrameworkFocus() {
     var key = tourFrameworkFocusKey();
     var focus = {
+      history: {
+        theme: 'Tour + central history',
+        title: 'BerlinWalk tour, then free central history',
+        afternoonTitle: 'Use one free central history layer',
+        afternoonCopy: 'After lunch, stay central: Brandenburg Gate, memorials, Reichstag exterior, or Topography of Terror. Use a museum only if you explicitly want one.',
+        eveningTitle: 'Simple central dinner',
+        eveningCopy: 'End near Mitte, Hackescher Markt, or your base so the first day stays clear.',
+        placeIds: ['world_clock', 'brandenburg_gate', 'topography_terror', 'reichstag'],
+        accent: '#1B5E20',
+        bg: '#F2F8E8'
+      },
       museums: {
         theme: 'Tour + museums',
         title: 'BerlinWalk tour, then Museum Island',
@@ -14091,11 +14144,15 @@
       wall: {
         theme: 'Tour + Wall / Cold War',
         title: 'BerlinWalk tour, then one Cold War layer',
-        afternoonTitle: 'Add one Wall / Cold War stop',
-        afternoonCopy: 'After lunch, choose one serious Wall or Cold War stop. Do not try to do every Wall site today.',
+        afternoonTitle: hasRainConcern() ? 'Use one rain-safe Cold War stop' : 'Add one Wall / Cold War stop',
+        afternoonCopy: hasRainConcern()
+          ? 'After lunch, use Topography of Terror as the rain-safe history layer, then stop. Save the Wall Memorial / East Side Gallery geography for a separate day.'
+          : 'After lunch, choose one serious Wall or Cold War stop. Do not try to do every Wall site today.',
         eveningTitle: 'Easy dinner after the history layer',
         eveningCopy: 'End near your base or Hackescher Markt so the day stays coherent.',
-        placeIds: ['world_clock', 'wall_memorial', 'topography_terror', 'hackescher_markt'],
+        placeIds: hasRainConcern()
+          ? ['world_clock', 'topography_terror', 'hackescher_markt']
+          : ['world_clock', 'wall_memorial', 'hackescher_markt'],
         accent: '#2F80ED',
         bg: '#EAF4FF'
       },
@@ -14133,7 +14190,7 @@
         bg: '#F5F0FF'
       }
     };
-    return focus[key] || focus.museums;
+    return focus[key] || focus.history;
   }
 
   function tourFrameworkTemplate() {
@@ -14183,7 +14240,6 @@
   }
 
   function normalizeInterestKey(key) {
-    if (key === 'history') return 'museums';
     return key;
   }
 
@@ -14191,7 +14247,7 @@
     var slow = state.pace === 'gentle' || state.groupType === 'family' || state.groupType === 'slow' || hasMustHandle('kids');
     var lateArrival = state.arrivalTime === 'afternoon' || state.arrivalTime === 'evening';
     var explicit = (state.interests || []).map(normalizeInterestKey).filter(function (key, index, list) {
-      return ['wall', 'museums', 'food', 'nightlife', 'free'].indexOf(key) !== -1 && list.indexOf(key) === index;
+      return ['history', 'wall', 'museums', 'food', 'nightlife', 'free'].indexOf(key) !== -1 && list.indexOf(key) === index;
     });
     return {
       explicitInterests: explicit,
@@ -14226,8 +14282,9 @@
     });
 
     if (profile.firstTimer) {
-      addPlanKey(keys, 'museums');
       addPlanKey(keys, 'wall');
+      addPlanKey(keys, 'history');
+      addPlanKey(keys, 'museums');
     }
 
     if (profile.repeatVisitor) {
@@ -14237,21 +14294,23 @@
     }
 
     if (profile.lowBudget) addPlanKey(keys, 'free');
-    if (profile.rain || profile.reservations || profile.comfort) addPlanKey(keys, 'museums');
+    if (profile.rain) addPlanKey(keys, 'free');
+    if (profile.reservations || profile.comfort) addPlanKey(keys, 'museums');
     if (profile.photos) addPlanKey(keys, 'free');
     if (profile.kids || profile.slow) {
       addPlanKey(keys, 'local');
       addPlanKey(keys, 'free');
     }
     if (profile.packed || hasSelectedInterest('nightlife')) addPlanKey(keys, 'nightlife');
+    if (state.tripLength >= 5 && !profile.eveningArrival) addPlanKey(keys, 'potsdam');
 
     addPlanKey(keys, 'wall');
+    addPlanKey(keys, 'history');
+    addPlanKey(keys, 'free');
     addPlanKey(keys, 'museums');
     addPlanKey(keys, 'food');
-    addPlanKey(keys, 'free');
     addPlanKey(keys, 'local');
 
-    if (state.tripLength >= 5 && !profile.eveningArrival) addPlanKey(keys, 'potsdam');
     if (state.tripLength >= 6 && !profile.slow) addPlanKey(keys, 'nightlife');
     if (state.tripLength >= 7) addPlanKey(keys, 'local');
     return keys;
@@ -14264,6 +14323,117 @@
       }),
       placeIds: (template.placeIds || []).slice()
     });
+  }
+
+  function markUsedPlaceIds(usedIds, day) {
+    dayPlaceIds(day).forEach(function (placeId) {
+      usedIds[placeId] = true;
+    });
+  }
+
+  function hasUsedPlaceId(usedIds, ids) {
+    return (ids || []).some(function (placeId) {
+      return Boolean(usedIds[placeId]);
+    });
+  }
+
+  function uniquePlaceIdsForDay(placeIds, usedIds, fallbacks) {
+    var output = [];
+    function add(placeId, allowUsed) {
+      if (!placeId || output.indexOf(placeId) !== -1 || !placeFor(placeId)) return;
+      if (!allowUsed && usedIds[placeId]) return;
+      output.push(placeId);
+    }
+    (placeIds || []).forEach(function (placeId) { add(placeId, false); });
+    (fallbacks || []).forEach(function (placeId) {
+      if (output.length < 3) add(placeId, false);
+    });
+    if (output.length < 2) (placeIds || []).forEach(function (placeId) { add(placeId, true); });
+    if (output.length < 2) (fallbacks || []).forEach(function (placeId) {
+      if (output.length < 2) add(placeId, true);
+    });
+    return output.slice(0, 4);
+  }
+
+  function templateVariant(template, data) {
+    var clone = cloneDayTemplate(template);
+    Object.keys(data || {}).forEach(function (key) {
+      if (key === 'blocks') {
+        clone.blocks = (data.blocks || []).map(function (block) {
+          return Object.assign({}, block);
+        });
+      } else if (key === 'placeIds') {
+        clone.placeIds = (data.placeIds || []).slice();
+      } else {
+        clone[key] = data[key];
+      }
+    });
+    return clone;
+  }
+
+  function diversifyTemplateForUsedPlaces(template, key, usedIds) {
+    var repeated = hasUsedPlaceId(usedIds, template.placeIds || []);
+    var variant = template;
+
+    if (repeated && key === 'history') {
+      variant = templateVariant(template, {
+        title: 'Government quarter, memorials, and old Mitte',
+        theme: 'Central history without repeats',
+        blocks: [
+          { time: 'Morning', title: 'Government quarter and Holocaust Memorial', copy: 'Use the Reichstag exterior, the government quarter edges, and the Holocaust Memorial without repeating yesterday\'s main history stop.' },
+          { time: 'Afternoon', title: 'Gendarmenmarkt to Nikolaiviertel', copy: 'Move through a different central layer: Gendarmenmarkt, old Mitte streets, and Nikolaiviertel if energy is good.' },
+          { time: 'Evening', title: 'Simple central dinner', copy: 'Keep dinner around Mitte, Hackescher Markt, or your base. No second paid entry tonight.' }
+        ],
+        placeIds: ['holocaust_memorial', 'gendarmenmarkt', 'nikolaiviertel']
+      });
+    } else if (repeated && key === 'wall') {
+      variant = templateVariant(template, {
+        title: 'East Side Gallery and the Spree edge',
+        theme: 'Wall / Cold War without repeat stops',
+        blocks: [
+          { time: 'Morning', title: 'East Side Gallery', copy: 'Use the painted Wall section as the main Wall layer today instead of repeating the same central Cold War stop.' },
+          { time: 'Afternoon', title: 'Oberbaum Bridge and Kreuzberg edge', copy: 'Keep the add-on nearby: Oberbaum Bridge, the Spree edge, or one covered stop toward Kreuzberg.' },
+          { time: 'Evening', title: 'Dinner east', copy: 'Stay east for dinner instead of crossing the city again.' }
+        ],
+        placeIds: ['east_side_gallery', 'oberbaum_bridge', 'markthalle_neun']
+      });
+    } else if (repeated && key === 'free') {
+      variant = templateVariant(template, {
+        title: 'Free Berlin away from the repeat anchors',
+        theme: 'Parks, open space, and cheap food',
+        blocks: [
+          { time: 'Morning', title: 'Tempelhofer Feld or Tiergarten', copy: 'Choose one big free outdoor space instead of repeating the central memorial loop.' },
+          { time: 'Afternoon', title: 'Treptower Park or Victory Column edge', copy: 'Use a second free outdoor anchor only if weather and energy allow. Keep it low-cost and simple.' },
+          { time: 'Evening', title: 'Cheap food close by', copy: 'Finish with simple food near the last area or your base.' }
+        ],
+        placeIds: ['tempelhofer_feld', 'treptower_park', 'victory_column']
+      });
+    } else if (repeated && key === 'museums') {
+      variant = templateVariant(template, {
+        title: 'Charlottenburg Palace or one west-side museum',
+        theme: 'Museum day without repeating Mitte',
+        blocks: [
+          { time: 'Morning', title: 'Charlottenburg Palace or one west-side anchor', copy: 'Use a different museum/palace geography instead of returning to the same Museum Island and Reichstag loop.' },
+          { time: 'Afternoon', title: 'Savignyplatz and Lietzensee edge', copy: 'Keep the afternoon west-side and relaxed: cafe, bookshops, lake edge, or one small cultural stop.' },
+          { time: 'Evening', title: 'West-side or base dinner', copy: 'End around Savignyplatz, Charlottenburg, or your base.' }
+        ],
+        placeIds: ['charlottenburg_palace', 'savignyplatz', 'lietzensee']
+      });
+    }
+
+    variant = cloneDayTemplate(variant);
+    var fallbacks = {
+      history: ['holocaust_memorial', 'gendarmenmarkt', 'nikolaiviertel', 'brandenburg_gate', 'reichstag', 'topography_terror'],
+      wall: ['east_side_gallery', 'oberbaum_bridge', 'wall_memorial', 'topography_terror', 'markthalle_neun'],
+      free: ['tempelhofer_feld', 'treptower_park', 'victory_column', 'tiergarten', 'topography_terror'],
+      museums: ['museum_island', 'berlin_cathedral', 'charlottenburg_palace', 'savignyplatz', 'reichstag'],
+      food: ['hackesche_hofe', 'markthalle_neun', 'oranienstrasse', 'kastanienallee', 'savignyplatz'],
+      local: ['kulturbrauerei', 'savignyplatz', 'lietzensee', 'kastanienallee', 'charlottenburg_palace'],
+      nightlife: ['raw_gelande', 'oranienstrasse', 'simon_dach_strasse', 'hackescher_markt'],
+      potsdam: ['potsdam_hbf', 'sanssouci', 'charlottenburg_palace']
+    };
+    variant.placeIds = uniquePlaceIdsForDay(variant.placeIds, usedIds, fallbacks[key] || []);
+    return variant;
   }
 
   function addBlockBeforeClose(blocks, block) {
@@ -14493,7 +14663,10 @@
       note: status.note
     });
 
-    var consumedTourFocus = '';
+    var usedPlaceIds = {};
+    markUsedPlaceIds(usedPlaceIds, days[0]);
+
+    var consumedTourFocus = arrivalDayTourEligible() ? tourFrameworkFocusKey() : '';
     var keyCursor = 0;
     var tourOffset = firstTourOffsetInsideTrip();
     for (var i = 2; i <= state.tripLength; i += 1) {
@@ -14502,7 +14675,8 @@
       var template;
       if (tourFrameworkDay) {
         consumedTourFocus = tourFrameworkFocusKey();
-        template = personalizeDayTemplate(tourFrameworkTemplate(), consumedTourFocus);
+        template = diversifyTemplateForUsedPlaces(tourFrameworkTemplate(), consumedTourFocus, usedPlaceIds);
+        template = personalizeDayTemplate(template, consumedTourFocus);
       } else {
         while (keys.length && keyCursor < keys.length * 2) {
           key = keys[keyCursor % keys.length];
@@ -14510,15 +14684,18 @@
           if (!consumedTourFocus || key !== consumedTourFocus) break;
         }
         if (!key) key = 'local';
-        template = personalizeDayTemplate(dayTemplate(key), key);
+        template = diversifyTemplateForUsedPlaces(dayTemplate(key), key, usedPlaceIds);
+        template = personalizeDayTemplate(template, key);
       }
       var dateKey = addDays(state.arrivalDate, i - 1);
       var dayNote = dayStatus(dateKey).note;
-      days.push(adaptBlocksForSeason(Object.assign({}, template, {
+      var plannedDay = adaptBlocksForSeason(Object.assign({}, template, {
         dayNumber: i,
         dateKey: dateKey,
         note: dayNote
-      })));
+      }));
+      days.push(plannedDay);
+      markUsedPlaceIds(usedPlaceIds, plannedDay);
     }
 
     return {

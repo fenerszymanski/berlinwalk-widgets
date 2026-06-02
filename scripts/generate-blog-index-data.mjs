@@ -42,6 +42,7 @@ const TOPICS = [
     kicker: 'Useful now',
     description: 'Clear answers for transport, money, luggage, safety, weather, and planning decisions visitors actually search for.',
     slugs: [
+      'best-day-trips-from-berlin',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
       'is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists',
       'is-berlin-safe-to-visit-an-honest-2026-guide',
@@ -183,10 +184,10 @@ const SPOTLIGHT_TOOLS = [
     summary: 'Build a realistic first-day plan around arrival time, luggage, weather, and the tour.',
   },
   {
-    title: 'Berlin Public Toilet Finder',
-    slug: 'berlin-public-toilets',
-    url: `${BLOG_BASE}/tools/berlin-public-toilets`,
-    summary: 'Find official toilets, free options, and accessible locations around the city.',
+    title: 'Berlin Day Trip Finder',
+    slug: 'berlin-day-trips-finder',
+    url: `${BLOG_BASE}/tools/berlin-day-trips-finder`,
+    summary: 'Compare Potsdam, Sachsenhausen, Spreewald, Dresden, Leipzig and more by interest, time and map distance.',
   },
   {
     title: 'Berlin Transport Ticket Calculator',
@@ -346,6 +347,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(day-trip|day trip|potsdam|sachsenhausen|spreewald|dresden|leipzig|wittenberg|tropical-islands|bastei)/.test(s)) return 'berlin-day-trips-finder';
   if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) return 'best-month-to-visit-berlin';
   if (/(toilet)/.test(s)) return 'berlin-public-toilets';
   if (/(luggage|storage|suitcase)/.test(s)) return 'berlin-luggage-storage';

@@ -6,11 +6,17 @@ Wix draft status: created UNPUBLISHED on 2026-06-02. Draft ID: `80b60289-cd69-4d
 
 Image/SEO status: done. `berlinwalk-content-app/add-day-trips-blog-images.mjs` uploaded 4 licensed Wikimedia Commons images to Wix Media, set Sanssouci as cover/OG/Twitter image, inserted Sachsenhausen/Spreewald/Dresden inline images, added image credits, tags and focus keyword `day trips from Berlin`.
 
+Extra image status: done on 2026-06-02 after publish. `berlinwalk-content-app/add-day-trips-extra-images.mjs` uploaded and inserted 4 more Wikimedia images under Leipzig, Lutherstadt Wittenberg, Tropical Islands and Saxon Switzerland/Bastei, rewrote the image credits block, then called `/blog/v3/draft-posts/{id}/publish` to sync the already-published live post. Live readback: 159 Ricos nodes, 7 inline images, 3 HTML embeds.
+
 Image sources:
 - Sanssouci Palace — Wolfgang Staudt, CC BY 2.0: `https://commons.wikimedia.org/wiki/File:Potsdam_Sanssouci_Palace.jpg`
 - Sachsenhausen gate — Berlinuno, CC BY-SA 4.0: `https://commons.wikimedia.org/wiki/File:Sachsenhausen_gate_Arbeit_macht_frei.jpg`
 - Spreewald canal — Dr. Seuthberg, CC BY-SA 4.0: `https://commons.wikimedia.org/wiki/File:Spreewaldkanal_near_L%C3%BCbbenau.jpg`
 - Dresden skyline — Frze / Hic et nunc, CC BY 3.0: `https://commons.wikimedia.org/wiki/File:WRM_Dresden_Skyline_with_Frauenkirche_-_Dresdens_Skyline_mit_Frauenkirche.jpg`
+- Leipzig Nikolaikirche — Fred Romero, CC BY 2.0: `https://commons.wikimedia.org/wiki/File:Leipzig_-_Nikolaikirche.jpg`
+- Wittenberg Castle Church — Gary Todd, CC0: `https://commons.wikimedia.org/wiki/File:Wittenberg_Castle_Church_%289813299843%29.jpg`
+- Tropical Islands — Bmalina, public domain: `https://commons.wikimedia.org/wiki/File:Tropical_Islands_4.jpg`
+- Bastei Bridge — Flukes69, CC BY-SA 4.0: `https://commons.wikimedia.org/wiki/File:Bastei_Bridge_in_Saxon_Switzerland.jpg`
 
 Meta title: Best Day Trips from Berlin (2026): Easy Escapes by Train
 

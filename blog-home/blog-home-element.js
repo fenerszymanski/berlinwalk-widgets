@@ -6,42 +6,42 @@ const BW_BLOG_HOME_DATA_URL = (() => {
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Berlin in October 2026: Weather, Festival of Lights, Packing and What to Book',
-    url: 'https://www.berlinwalk.com/post/berlin-in-october-2026',
-    category: 'When to Visit',
+    title: 'Best Day Trips from Berlin (2026): Easy Escapes by Train',
+    url: 'https://www.berlinwalk.com/post/best-day-trips-from-berlin',
+    category: 'Day Trips',
     readTime: '8 min read',
-    label: 'Monthly guide',
-    summary: 'Autumn light, Festival of Lights dates, German Unity Day, packing tips, daylight changes, and what to book early.',
-    image: 'https://static.wixstatic.com/media/5a08a3_a68f85c43a134c31aee35fce276e2d14~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-in-october-2026-01-hero-autumn-berlin.jpg',
-    alt: 'Golden autumn leaves covering a Berlin street and parked cars in October'
+    label: 'New guide',
+    summary: 'Potsdam, Sachsenhausen, Spreewald, Dresden, Leipzig, Wittenberg, Tropical Islands and Bastei: what to choose and how the train logic works.',
+    image: 'https://static.wixstatic.com/media/5a08a3_53b56c6369974f5495a8493bfb0927ba~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/day-trips-sanssouci-potsdam.jpg',
+    alt: 'Sanssouci Palace in Potsdam, the easiest classic day trip from Berlin'
   },
   posts: [
     {
-      title: "Berlin in December 2026: Christmas Markets, Weather, Closures and New Year's Eve",
-      url: 'https://www.berlinwalk.com/post/berlin-in-december-2026',
-      category: 'When to Visit',
+      title: 'Berlin Public Transport 2026: U-Bahn, S-Bahn, Tram & Bus',
+      url: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+      category: 'Practical',
       readTime: '7 min read',
-      summary: "Christmas markets, winter weather, holiday closures, New Year's Eve, packing tips, and what to book.",
-      image: 'https://static.wixstatic.com/media/5a08a3_b13955ac1c7047aca76aa006a5c3a20b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-christmas-market.jpg',
-      alt: 'A Berlin Christmas market glowing with lights and wooden stalls on a December evening'
+      summary: 'Which zones, tickets, prices and validation rules you need before taking trains around Berlin.',
+      image: 'https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg',
+      alt: 'Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.'
     },
     {
-      title: 'Berlin in January 2027: Weather, the Cheapest, Quietest Month, and What to Do',
-      url: 'https://www.berlinwalk.com/post/berlin-in-january-2027',
-      category: 'When to Visit',
+      title: 'Shopping in Berlin: Where to Actually Shop in 2026',
+      url: 'https://www.berlinwalk.com/post/shopping-in-berlin',
+      category: 'Practical',
+      readTime: '5 min read',
+      summary: 'Where to actually shop in Berlin: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.',
+      image: 'https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg',
+      alt: 'The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin'
+    },
+    {
+      title: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989',
+      url: 'https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map',
+      category: 'History',
       readTime: '6 min read',
-      summary: 'Cold weather, low prices, quiet museums, winter packing advice, events, and honest January planning.',
-      image: 'https://static.wixstatic.com/media/5a08a3_8fa40dec62794d5591d286e809a578d2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-berliner-dom-snow.jpg',
-      alt: 'The Berlin Cathedral, the Berliner Dom, covered in snow on a cold January day'
-    },
-    {
-      title: 'Berlin in May 2027: Weather, Festivals, Long Days and the Sweet Spot Before Summer',
-      url: 'https://www.berlinwalk.com/post/berlin-in-may-2027',
-      category: 'When to Visit',
-      readTime: '7 min read',
-      summary: 'Warm but not hot, long days, May 1, Carnival of Cultures, beer gardens, and what to book early.',
-      image: 'https://static.wixstatic.com/media/5a08a3_9c4f15caade945bcae72737bf8254b5c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-karneval.jpg',
-      alt: 'Colourful costumes and crowds at the Karneval der Kulturen street parade in Berlin'
+      summary: 'The Wall ran 155 km around West Berlin. Tap any point on this interactive map to see exactly where it stood.',
+      image: 'https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/where-was-the-berlin-wall.jpg',
+      alt: 'An interactive map showing the route of the Berlin Wall around West Berlin in 1989'
     }
   ]
 };

@@ -4,6 +4,33 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Day Trips homepage/blog placement)
+
+**Did:** Put the published Best Day Trips post into the homepage blog teaser and `/blog` index surfaces.
+
+**Changed:**
+- `blog-home/data.json` and `blog-home/blog-home-element.js` — featured card is now `best-day-trips-from-berlin`; right-column cards are Public Transport, Shopping, and Berlin Wall map.
+- `blog-index/data.json` — regenerated from live Wix Blog; Day Trips is latest[0], first in Practical Berlin, and linked to `berlin-day-trips-finder`.
+- `scripts/generate-blog-index-data.mjs` — Day Trips gets Practical Berlin priority, related tool mapping, and a Berlin Day Trip Finder spotlight item.
+- Workspace/Wix: `insert-berlin-day-trips-finder.js` inserted BerlinTools CMS item `4e328109-f0dc-47ec-ba5e-95fd45e64ebf`; `/tools/berlin-day-trips-finder` returned 200 after re-save.
+
+**Opened:** Push this repo so GitHub Pages serves the updated `blog-home` and `blog-index` files; local unrelated `ultimate-berlin-trip-planner/*` changes remain untouched.
+**Closed:** JSON parse, `node --check`, local Playwright QA for `blog-home` desktop/mobile, and live tool-route 200 check passed.
+
+**Next session should:** After push/Pages deploy, spot-check the live homepage blog teaser, `/blog` latest/Practical shelf, and the Day Trip Finder link from the blog index.
+
+## 2026-06-02 — Codex (Ultimate planner logic review doc)
+
+**Did:** Created a single review surface for the Ultimate Berlin Trip Planner decision logic so Yusuf can audit the itinerary brain in one pass.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/PLANNER_LOGIC_REVIEW.md` — documented visible inputs, tour-slot rules, Day 1 branches, day-type queue, core templates, tour framework variants, personalization rules, nearby pause logic, anti-repeat alternatives, place catalog, base logic, and current weak spots.
+
+**Opened:** Yusuf should review the doc and decide on visible `Potsdam / day trip`, tour focus priority, Monday swap aggressiveness, gentle-pause frequency, and copy tone.
+**Closed:** Logic review list is now available in one file instead of scattered through UI testing.
+
+**Next session should:** Apply Yusuf's review notes to the planner logic and rerun local long-plan QA.
+
 ## 2026-06-02 — Codex (Booking calendar sessionId fix)
 
 **Did:** Fixed the custom Booking Calendar's native Booking Form handoff after Wix showed a €10 payment block.
