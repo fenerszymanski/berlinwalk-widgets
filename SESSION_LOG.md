@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Booking calendar self-load)
+
+**Did:** Removed the Wix page-code dependency from the custom Booking Calendar install path.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — when no `availability-json` and no `demo` are present, the element now fetches live sanitized slots from `https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability`.
+- `booking-calendar/README.md` — documented `availability-endpoint`, `availability-days`, `service-id`, and no-page-code install path.
+- External: Content Studio endpoint deployed to Vercel and tested; local commit `d429e92` is ready for Yusuf to push.
+
+**Opened:** Push `d429e92`, wait for GitHub Pages, then preview Wix Custom Booking Calendar with only the Custom Element installed.
+**Closed:** Browser smoke passed: self-load returned 81 date buttons, CTA `Reserve your spot`, and href included `bookings_sessionId` + `bookings_timezone`.
+
+**Next session should:** Verify GitHub Pages serves the self-loading JS, then test Wix preview click-through into native Booking Form.
+
 ## 2026-06-02 — Codex (Ultimate planner option logic remap)
 
 **Did:** Reworked Ultimate Berlin Trip Planner’s deterministic plan logic so arrival timing, trip length, interests, pace, budget, and plan needs affect the actual day sequence and map anchors.
@@ -11,9 +25,10 @@ Format for each entry — see `AGENTS.md` §9.
 **Changed:**
 - `ultimate-berlin-trip-planner/index.html` — late/evening arrivals now become arrival + dinner/rest, not forced sightseeing; one-day plans now use the selected focus; Day 2 tour framework now adapts to museums, Wall / Cold War, food, free, or nightlife interest.
 - `ultimate-berlin-trip-planner/index.html` — map packs no longer show “Map stop”; preview itinerary cards use inline visual art/fallback-safe rendering; slow/family plans avoid repeated extra-stop bloat.
+- `ultimate-berlin-trip-planner/index.html` — BerlinWalk tour slots now respect Tue-Sat availability plus July 1-Sept 30 double-slot season (`11:30` and `15:30`); CTA, preview, calendar hold, PDF, and day cards read from the chosen slot.
 
 **Opened:** The widget still needs broader UX/content simplification toward a truly “ultimate” final version.
-**Closed:** Local browser QA passed for late BER 2-day, museum-focused 1/2-day, Wall 3-day, and family low-budget 5-day scenarios: no `Base area`, `Map stop`, or `Tomorrow`; no broken images; overflow 0.
+**Closed:** Local browser QA passed for late BER 2-day, museum-focused 1/2-day, Wall 3-day, family low-budget 5-day, Sun/Mon no-tour days, July/Sep `15:30`, and Oct single-slot scenarios: no `Base area`, `Map stop`, or `Tomorrow`; no broken images; overflow 0.
 
 **Next session should:** Review the visible copy density and result-section hierarchy with Yusuf before pushing/publishing.
 
