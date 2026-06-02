@@ -4,6 +4,35 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Day Trips Tropical Islands image swap)
+
+**Did:** Replaced the weak Tropical Islands image in the published Best Day Trips post.
+
+**Changed:**
+- `blog-drafts/images/best-day-trips-from-berlin/day-trips-tropical-islands.jpg` — replaced with optimized 1600px Wikimedia image `Südsee Tropical Islands.jpg`, showing the indoor South Sea pool under the hangar.
+- `blog-drafts/best-day-trips-from-berlin.md` — updated status/source credit to Technouwe, CC BY-SA 3.0.
+- Workspace scripts: `berlinwalk-content-app/replace-day-trips-tropical-image.mjs` uploaded the new image, replaced the live Wix image node, rewrote credits, and publish-synced post `80b60289-cd69-4d4c-ac9b-399ce47c8155`.
+- Wix: new media id `5a08a3_d965ce2230ec4f46adef4a6238172749~mv2.jpg`.
+
+**Opened:** Push/commit local source changes if the Day Trips image bundle is being kept in repo; unrelated `tools-home` / `tools-hub` changes remain untouched.
+**Closed:** Live Wix API readback shows new Tropical alt text/media id and credits updated.
+
+**Next session should:** Only visual-refresh the live post if the browser cache still shows the old Tropical image.
+
+## 2026-06-02 — Codex (Ultimate planner visibility hold)
+
+**Did:** Pulled the not-yet-ready Ultimate Berlin Trip Planner out of public tool listing surfaces without deleting the widget.
+
+**Changed:**
+- `tools-home/data.json` — marked `ultimate-berlin-trip-planner` as `status: draft`, so the homepage/shortcut tools grid filters it out.
+- `tools-hub/data.json` — marked `ultimate-berlin-trip-planner` as `status: draft`, so `/berlin-tools`, `/tools`, and `/widgets` listing surfaces filter it out.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated the widgets ItemList from 35 to 34 visible tools.
+
+**Opened:** Push the repo and wait for GitHub Pages before checking live `/berlin-tools` and the shortcut grid.
+**Closed:** Local data verification shows Ultimate hidden from both visible tool lists.
+
+**Next session should:** Keep Ultimate in draft/listing-hold until Yusuf signs off on planner UX and logic.
+
 ## 2026-06-02 — Codex (Day Trips homepage/blog placement)
 
 **Did:** Put the published Best Day Trips post into the homepage blog teaser and `/blog` index surfaces.
