@@ -70,7 +70,7 @@ current URL is not a blog post.
 
 ```html
 <script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-sidebar-inject.js?v=24" defer></script>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=6" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/blog-journey-inject.js?v=7" defer></script>
 ```
 
 `blog-sidebar-inject.js` builds a desktop-only `On this page` sidebar from
@@ -84,13 +84,14 @@ before becoming visible. It no longer injects any blog
 navigation into the Wix-managed post header or article body, avoiding the
 show-hide-show flicker and Quick Summary rerender.
 
-`blog-journey-inject.js` lightly polishes article body typography, adds the
+`blog-journey-inject.js` lightly polishes article body typography, removes the
+deprecated end-of-post tour CTA banner if an old helper still injects it, adds the
 mobile `Blog Home` / category chip row near the top of the article before
 waiting for data, adds the mobile `In this guide` chip row, injects one
 topic-aware inline tool prompt, and adds a topic-aware `Next step` module near
-the article end. It hides the
-photo-led `Walk It` card on mobile, adds a sticky back-to-top arrow, reads
-`blog-index/data.json`, recommends related guides and tools, and tracks
+the article end. It hides the photo-led `Walk It` card on mobile, uses a generic
+tool image when a related tool has no assigned icon, adds a sticky back-to-top
+arrow, reads `blog-index/data.json`, recommends related guides and tools, and tracks
 `bw_blog_tool_prompt_*`, `bw_blog_journey_*`, plus `bw_blog_back_top_click`
 events.
 

@@ -261,6 +261,41 @@ const BW_BOOKING_CALENDAR_STYLES = `
     line-height: 1;
   }
 
+  .bw-cal-tbd {
+    align-content: center;
+    background: #FFFDE7;
+    border: 1px dashed #D7C900;
+    border-radius: 8px;
+    color: var(--green);
+    display: grid;
+    flex: 0 0 94px;
+    gap: 2px;
+    min-height: 62px;
+    padding: 7px 8px;
+    text-align: center;
+  }
+
+  .bw-cal-tbd span {
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 800;
+    line-height: 1.05;
+    text-transform: uppercase;
+  }
+
+  .bw-cal-tbd b {
+    color: var(--green);
+    font-size: 17px;
+    line-height: 1;
+  }
+
+  .bw-cal-tbd small {
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: 700;
+    line-height: 1.05;
+  }
+
   .bw-cal-day.is-active,
   .bw-cal-slot.is-active {
     background: var(--green);
@@ -615,6 +650,7 @@ class BWBookingCalendarElement extends HTMLElement {
                   <div class="bw-cal-date-viewport">
                     <div class="bw-cal-days" data-days>
                       ${dates.map((date) => this._dayButton(date)).join('')}
+                      ${this._futureTbdCard(dates)}
                     </div>
                   </div>
                   <button class="bw-cal-date-nav" type="button" data-action="scroll-days" data-direction="1" aria-label="Show later dates">&rsaquo;</button>
@@ -807,6 +843,27 @@ class BWBookingCalendarElement extends HTMLElement {
         <b>${this._escape(day)}</b>
         <small>${this._escape(month)}</small>
       </button>
+    `;
+  }
+
+  _futureTbdCard(dates) {
+    if (!dates.length || this.hasAttribute('demo') || this.hasAttribute('hide-future-tbd')) return '';
+    const lastDateKey = dates[dates.length - 1];
+    const lastDate = new Date(`${lastDateKey}T12:00:00`);
+    if (Number.isNaN(lastDate.getTime())) return '';
+
+    const nextMonth = new Date(lastDate);
+    nextMonth.setDate(1);
+    nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+    const month = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(nextMonth);
+    const lastLabel = this._formatDate(lastDateKey);
+    return `
+      <div class="bw-cal-tbd" role="note" aria-label="Dates after ${this._escape(lastLabel)} are coming soon">
+        <span>${this._escape(month)} onward</span>
+        <b>TBD</b>
+        <small>Dates soon</small>
+      </div>
     `;
   }
 

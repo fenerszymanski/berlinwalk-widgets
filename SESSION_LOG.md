@@ -4,6 +4,47 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Booking calendar TBD card)
+
+**Did:** Added a disabled future-season cue at the end of the reusable booking calendar date carousel.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — live availability now appends a final non-clickable card like `Oct onward / TBD / Dates soon` after the last available date; hidden in demo mode and opt-out via `hide-future-tbd`.
+- `booking-calendar/README.md` — documented the future TBD card.
+
+**Opened:** Push the widget repo and update/pin the Wix script if Yusuf wants this on the live calendar immediately.
+**Closed:** Local `/landing` QA showed the card after Sep 30, `bookings_sessionId` still present, no `guests=` param, and overflow `0`.
+
+**Next session should:** After push/GitHub Pages deploy, verify the live custom Booking Calendar shows the TBD card at the end of the date row.
+
+## 2026-06-02 — Codex (Ultimate planner Gemini polish)
+
+**Did:** Added a fail-soft Gemini 2.5 Flash "local second look" layer after Ultimate planner email unlock, while keeping deterministic itinerary/PDF logic as the source of truth.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — full-plan panel now requests optional AI polish after unlock, hides on failure, supports localhost `mockAi=1` / `forceAiError=1`, and avoids user-facing Gemini jargon.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` and `http-functions.js` — added backend-only `tripPlannerAi` endpoint using sanitized non-email payloads, `GEMINI_API_KEY`, `responseJsonSchema`, and `thinkingBudget: 0`.
+- `ultimate-berlin-trip-planner/velo/README.md`, `build-velo-install-kit.mjs`, `install-kit.html`, and `RESEARCH_BACKLOG.md` — documented Gemini secret/model override and regenerated paste kit.
+
+**Opened:** Wix live install still needs the new Velo endpoint pasted/published and `GEMINI_API_KEY` added to Wix Secrets before live smoke. Existing launch audit still blocks on older UX/listing/icon/gate items, not the AI layer.
+**Closed:** Local mock/fail-soft browser QA passed desktop/mobile overflow `0`; direct Gemini API smoke returned valid schema JSON with `thinkingBudget: 0`.
+
+**Next session should:** Paste/publish the updated Velo only after Yusuf is ready for another live test, then run a real `/_functions/tripPlannerAi` smoke alongside the existing lead smoke.
+
+## 2026-06-02 — Codex (Single-tool related card icons)
+
+**Did:** Fixed live `/tools/*` `More Berlin Tools` cards for newer tools that still showed first-letter icon chips.
+
+**Changed:**
+- Workspace `scripts/update-berlintools-layout-icons-embed.mjs` — new reusable Wix Custom Embed updater; reads `tools-hub/data.json`, `tools-home/data.json`, and `tools-home/icons/`.
+- Wix: `BerlinTools Layout Fixes` Custom Embed `0dd3e5f3-520b-47ae-a995-e767f222265f` updated to revision 7 with a 36-slug icon map. Known tools without a specific icon currently use a generic inline BerlinWalk SVG (`berlin-day-trips-finder`).
+- Root `PROJECT_MEMORY.md` — updated the Custom Code record from revision 6 / 18 icons to revision 7 / current icon map.
+
+**Opened:** None.
+**Closed:** Live readback confirmed Currywurst, First-Day Planner, East Side Gallery, Day Trips and generic SVG are in the embed. Browser QA passed for `/tools/hackescher-after-tour-planner`, `/tools/berlin-landmarks-map`, `/tools/berlin-day-trips-finder`, and `/tools/berlin-shopping-areas` with related-card images loading and overflow 0.
+
+**Next session should:** When a new tool icon is added, run the root updater after loading Wix keys so the single-tool related cards stay synced.
+
 ## 2026-06-02 — Codex (Blog CTA/banner removal + generic tool image)
 
 **Did:** Removed the old end-of-post tour CTA banner behavior and fixed iconless tool cards.

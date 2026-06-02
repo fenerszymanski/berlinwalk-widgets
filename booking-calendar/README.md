@@ -38,6 +38,7 @@ Useful attributes:
 - `demo-days`: demo-only future date window, default `180`, capped at `365`.
 - `cta-label`: CTA copy. Recommended: `Reserve your spot`.
 - `demo`: use generated demo availability.
+- `hide-future-tbd`: optional flag to hide the final disabled "TBD / dates soon" card after the last live available date.
 
 Slot JSON format:
 
@@ -76,6 +77,8 @@ Use Wix's custom Booking Calendar page flow:
 7. On `Reserve your spot`, route to the Wix Booking Form with only supported booking defaults: `bookings_sessionId`, `bookings_timezone`, `bookings_serviceId`, optional `bookings_locationId`, and UTM parameters. Attendee count stays on the native Wix form because Wix's shareable Booking Form URL does not support a reliable attendee-count prefill.
 
 This keeps Wix's Booking Form, confirmation page, calendar sync, and automations intact while replacing the heavy native calendar UI.
+
+When live availability ends before the full future season is open, the date carousel shows a disabled final card such as `Oct onward / TBD / Dates soon`. This reassures visitors that later dates are not broken, just not open yet.
 
 ## Local live availability probe
 
