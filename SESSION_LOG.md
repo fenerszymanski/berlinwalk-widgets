@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Ultimate planner nearby extras)
+
+**Did:** Tightened Ultimate Berlin Trip Planner's "extra stop" logic so add-ons are realistic, nearby, and pace/interest-aware instead of generic volume.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — removed duplicate Optional/Flexible extra behavior; each non-arrival day can now add at most one 30-45 minute nearby pause/option, e.g. coffee break for gentle pace, Museum Island backup for museum days, or Oberbaum/Spree/cafe finish after East Side Gallery.
+- `ultimate-berlin-trip-planner/index.html` — added Oberbaum Bridge as a Wall-day nearby map anchor and kept add-ons out of arrival, Potsdam, break-heavy, and afternoon-tour days.
+
+**Opened:** Continue broader Ultimate planner UX/content simplification with Yusuf; no push/live promotion yet.
+**Closed:** Local QA passed for Yusuf's July Wall scenario and a gentle/food 2-day scenario: no duplicate extras, no old optional/flexible labels, one 30-45 minute nearby add-on where appropriate, no broken images, overflow 0.
+
+**Next session should:** Review the result rhythm visually with Yusuf and keep refining the actual itinerary intelligence before launch.
+
 ## 2026-06-02 — Codex (Booking calendar self-load)
 
 **Did:** Removed the Wix page-code dependency from the custom Booking Calendar install path.

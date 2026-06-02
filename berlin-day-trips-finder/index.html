@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Day Trip Finder | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-day-trips">
+  <style>
+    #bw-day-trips {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-day-trips * { box-sizing: border-box; }
+
+    #bw-day-trips .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-day-trips .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-day-trips .bw-head-icon { font-size: 18px; line-height: 1; }
+
+    #bw-day-trips .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-day-trips .bw-body { background: #FAFAF5; padding: 16px 18px; }
+
+    #bw-day-trips .bw-ask {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin: 0 0 9px;
+    }
+    #bw-day-trips .bw-ask.second { margin-top: 4px; }
+
+    #bw-day-trips .bw-filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    #bw-day-trips .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    #bw-day-trips .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+    #bw-day-trips .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
+    #bw-day-trips .bw-filter.time.active { background: var(--bw-lime); border-color: var(--bw-lime); color: var(--bw-green-dark); }
+
+    #bw-day-trips .bw-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 2px;
+    }
+
+    #bw-day-trips .bw-card {
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      background: var(--bw-white);
+      padding: 14px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    #bw-day-trips .bw-card-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+
+    #bw-day-trips .bw-card-tag {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      background: var(--bw-yellow);
+      border-radius: 6px;
+      padding: 3px 8px;
+    }
+
+    #bw-day-trips .bw-card-time {
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--bw-muted);
+    }
+
+    #bw-day-trips .bw-card-title { font-size: 16px; font-weight: 800; line-height: 1.2; color: var(--bw-text); }
+
+    #bw-day-trips .bw-card-text { font-size: 12.5px; line-height: 1.55; color: var(--bw-text); margin: 0; }
+
+    #bw-day-trips .bw-card-row {
+      display: flex;
+      gap: 8px;
+      font-size: 11.5px;
+      color: var(--bw-text);
+      line-height: 1.45;
+      border-top: 1px dashed var(--bw-border);
+      padding-top: 7px;
+    }
+    #bw-day-trips .bw-card-row:first-of-type { border-top: 1px dashed var(--bw-border); }
+
+    #bw-day-trips .bw-card-label {
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      min-width: 52px;
+      flex: 0 0 auto;
+      padding-top: 1px;
+    }
+
+    #bw-day-trips .bw-cta {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 2px;
+      padding: 7px 11px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+    #bw-day-trips .bw-cta:hover { background: #FFEF33; }
+
+    #bw-day-trips .bw-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 13px;
+      color: var(--bw-muted);
+      padding: 22px 10px;
+      line-height: 1.55;
+    }
+
+    #bw-day-trips .bw-count { font-size: 11px; color: var(--bw-muted); margin: 14px 0 0; text-align: center; }
+    #bw-day-trips .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    #bw-day-trips .bw-tour-note {
+      margin-top: 14px;
+      padding: 11px 14px;
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--bw-text);
+    }
+    #bw-day-trips .bw-tour-note strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      #bw-day-trips { margin: 22px 0; }
+      #bw-day-trips .bw-head { padding: 12px 16px; }
+      #bw-day-trips .bw-body { padding: 14px; }
+      #bw-day-trips .bw-grid { grid-template-columns: 1fr; }
+      #bw-day-trips .bw-filter { font-size: 11px; padding: 7px 12px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🚆</span>
+      <span class="bw-kicker">Berlin Day Trip Finder</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-ask">What kind of day trip?</p>
+      <div class="bw-filters" id="bw-interest">
+        <button class="bw-filter active" type="button" data-interest="all">Show all</button>
+        <button class="bw-filter" type="button" data-interest="palaces">Palaces &amp; gardens</button>
+        <button class="bw-filter" type="button" data-interest="nature">Nature &amp; water</button>
+        <button class="bw-filter" type="button" data-interest="city">Another city</button>
+        <button class="bw-filter" type="button" data-interest="history">History &amp; memorial</button>
+        <button class="bw-filter" type="button" data-interest="family">Family</button>
+      </div>
+
+      <p class="bw-ask second">How much time?</p>
+      <div class="bw-filters" id="bw-time">
+        <button class="bw-filter time active" type="button" data-time="any">Any</button>
+        <button class="bw-filter time" type="button" data-time="half">Half day is fine</button>
+        <button class="bw-filter time" type="button" data-time="full">I have a full day</button>
+      </div>
+
+      <div class="bw-grid" id="bw-grid"></div>
+
+      <p class="bw-count"><strong id="bw-count-num">8</strong> day trips match</p>
+
+      <div class="bw-tour-note">
+        <strong>Tip:</strong> give Berlin itself two or three days first, then day-trip out. Most of these leave from the same central stations our free walking tour ends near, so it is easy to add one after you have seen the city.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-day-trips');
+      if (!root) return;
+
+      var TAG = {
+        palaces: 'Palaces & gardens',
+        nature: 'Nature & water',
+        city: 'Another city',
+        history: 'History & memorial',
+        family: 'Family'
+      };
+
+      // time: 'half' = comfortable in a half day; 'full' = needs a full day.
+      var trips = [
+        {
+          name: 'Potsdam',
+          themes: ['palaces', 'nature'],
+          time: 'half',
+          text: 'Prussian palaces and parks, above all Sanssouci. The single easiest and most rewarding day trip from Berlin.',
+          travel: '30–40 min · S7 or RE1',
+          ticket: 'Berlin ABC ticket',
+          gmaps: 'Sanssouci+Potsdam'
+        },
+        {
+          name: 'Sachsenhausen Memorial',
+          themes: ['history'],
+          time: 'half',
+          text: 'The former concentration camp at Oranienburg, now a memorial and museum. A heavy but important half day. Free entry.',
+          travel: '~50 min · S1 to Oranienburg, then 20 min walk',
+          ticket: 'Berlin ABC ticket · free entry',
+          gmaps: 'Sachsenhausen+Memorial'
+        },
+        {
+          name: 'Lutherstadt Wittenberg',
+          themes: ['city', 'history'],
+          time: 'half',
+          text: 'The small town where Martin Luther sparked the Reformation. Compact, walkable, and rich in history.',
+          travel: '40–75 min · ICE or RE',
+          ticket: 'Regional or fast-train ticket',
+          gmaps: 'Lutherstadt+Wittenberg'
+        },
+        {
+          name: 'Spreewald',
+          themes: ['nature'],
+          time: 'full',
+          text: 'A UNESCO biosphere of forest canals south of Berlin. Glide through on a punt, paddle a canoe, and try the famous gherkins.',
+          travel: '~1h15 · RE2 to Lübbenau',
+          ticket: 'VBB regional ticket / Deutschland-Ticket',
+          gmaps: 'Spreewald+L%C3%BCbbenau'
+        },
+        {
+          name: 'Dresden',
+          themes: ['city'],
+          time: 'full',
+          text: 'The rebuilt Baroque capital of Saxony, with the Frauenkirche, Zwinger, and the Elbe. A full day, but worth it.',
+          travel: '~2h · EC/IC direct',
+          ticket: 'Separate train ticket',
+          gmaps: 'Dresden+Frauenkirche'
+        },
+        {
+          name: 'Leipzig',
+          themes: ['city'],
+          time: 'full',
+          text: 'A lively city of music, art, and 1989 “peaceful revolution” history. Bach, galleries, and a buzzing food scene.',
+          travel: '~1h15 · ICE direct',
+          ticket: 'Separate train ticket',
+          gmaps: 'Leipzig+Germany'
+        },
+        {
+          name: 'Tropical Islands',
+          themes: ['family'],
+          time: 'full',
+          text: 'A giant indoor tropical resort under a former airship hangar: pools, a rainforest, and beaches. A reliable rainy-day or family win.',
+          travel: '~1h + shuttle · RE to Brand',
+          ticket: 'VBB regional ticket / Deutschland-Ticket',
+          gmaps: 'Tropical+Islands+Krausnick'
+        },
+        {
+          name: 'Saxon Switzerland (Bastei)',
+          themes: ['nature'],
+          time: 'full',
+          text: 'Dramatic sandstone cliffs and the Bastei bridge in the Elbe valley. A proper hiking day, usually changed in Dresden.',
+          travel: '~2.5h · via Dresden + S-Bahn',
+          ticket: 'Separate train ticket',
+          gmaps: 'Bastei+Bridge+Saxon+Switzerland'
+        }
+      ];
+
+      var grid = document.getElementById('bw-grid');
+      var countEl = document.getElementById('bw-count-num');
+      var interestBtns = root.querySelectorAll('#bw-interest .bw-filter');
+      var timeBtns = root.querySelectorAll('#bw-time .bw-filter');
+
+      var state = { interest: 'all', time: 'any' };
+
+      function matches(t) {
+        var okInterest = state.interest === 'all' || t.themes.indexOf(state.interest) !== -1;
+        var okTime = state.time === 'any' || (state.time === 'half' ? t.time === 'half' : true);
+        return okInterest && okTime;
+      }
+
+      function cardHtml(t) {
+        return '<article class="bw-card">' +
+          '<div class="bw-card-top">' +
+            '<span class="bw-card-tag">' + (TAG[t.themes[0]] || '') + '</span>' +
+            '<span class="bw-card-time">' + (t.time === 'half' ? 'Half day OK' : 'Full day') + '</span>' +
+          '</div>' +
+          '<div class="bw-card-title">' + t.name + '</div>' +
+          '<p class="bw-card-text">' + t.text + '</p>' +
+          '<div class="bw-card-row"><span class="bw-card-label">Travel</span><span>' + t.travel + '</span></div>' +
+          '<div class="bw-card-row"><span class="bw-card-label">Ticket</span><span>' + t.ticket + '</span></div>' +
+          '<a class="bw-cta" href="https://www.google.com/maps/search/?api=1&query=' + t.gmaps + '" target="_blank" rel="noopener">Open in Google Maps →</a>' +
+          '</article>';
+      }
+
+      function render() {
+        var list = trips.filter(matches);
+        countEl.textContent = list.length;
+        if (!list.length) {
+          grid.innerHTML = '<p class="bw-empty">No day trip matches that exact combination. Try “Any” time, or pick a different interest.</p>';
+          return;
+        }
+        grid.innerHTML = list.map(cardHtml).join('');
+      }
+
+      interestBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          interestBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          state.interest = btn.getAttribute('data-interest');
+          render();
+        });
+      });
+      timeBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          timeBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          state.time = btn.getAttribute('data-time');
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>
