@@ -91,7 +91,7 @@
                 <div class="bw-paid-hero-copy">
                   <p class="bw-paid-eyebrow">No upfront payment</p>
                   <h1>Free Berlin Walking Tour</h1>
-                  <p class="bw-paid-lead">Meet at the World Clock, walk the historic centre in about 2 hours, and understand what you are looking at while Berlin is still fresh.</p>
+                  <p class="bw-paid-lead">Most Berlin tours focus on the Wall and Cold War. This walk starts where Berlin began: the historic centre, from Alexanderplatz through medieval streets and Museum Island to Hackescher Markt.</p>
                   <div class="bw-paid-facts" aria-label="Tour facts">
                     <span>~2 hours</span>
                     <span>12 stops</span>
