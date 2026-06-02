@@ -740,6 +740,7 @@ class BWBookingCalendarElement extends HTMLElement {
     const continueLink = this.querySelector('[data-action="continue"]');
     if (continueLink) {
       continueLink.addEventListener('click', (event) => {
+        event.preventDefault();
         const selectedSlot = this._selectedSlot();
         const detail = this._eventDetail(selectedSlot);
         const customEvent = new CustomEvent('bw-booking-calendar-continue', {
@@ -749,9 +750,22 @@ class BWBookingCalendarElement extends HTMLElement {
           detail,
         });
         const shouldContinue = this.dispatchEvent(customEvent);
-        if (!shouldContinue) event.preventDefault();
+        if (shouldContinue) this._navigateTo(detail.href);
       });
     }
+  }
+
+  _navigateTo(href) {
+    if (!href) return;
+    try {
+      window.top.location.href = href;
+      return;
+    } catch {}
+    try {
+      window.parent.location.href = href;
+      return;
+    } catch {}
+    window.location.href = href;
   }
 
   _preserveDateScroll() {
