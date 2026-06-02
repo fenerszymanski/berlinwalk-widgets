@@ -49,13 +49,17 @@
       });
       this._render();
       this._bind();
+      this._setupAutoHeight();
       this._track('bw_booking_page_view', { source: 'paid_landing' });
     }
 
     disconnectedCallback() {
       if (this._stickyObserver) this._stickyObserver.disconnect();
+      if (this._heightObserver) this._heightObserver.disconnect();
       if (this._scrollHandler) window.removeEventListener('scroll', this._scrollHandler);
       if (this._resizeHandler) window.removeEventListener('resize', this._resizeHandler);
+      if (this._heightResizeHandler) window.removeEventListener('resize', this._heightResizeHandler);
+      if (this._loadHandler) window.removeEventListener('load', this._loadHandler);
     }
 
     _render() {
@@ -314,6 +318,58 @@
       window.addEventListener('resize', this._resizeHandler);
     }
 
+    _setupAutoHeight() {
+      const content = this.querySelector('.bw-paid-landing');
+      if (!content) return;
+
+      const sync = () => this._syncAutoHeight();
+      this._loadHandler = sync;
+      this._heightResizeHandler = sync;
+
+      if ('ResizeObserver' in window) {
+        this._heightObserver = new ResizeObserver(sync);
+        this._heightObserver.observe(content);
+      }
+
+      window.addEventListener('load', this._loadHandler);
+      window.addEventListener('resize', this._heightResizeHandler);
+      window.requestAnimationFrame(sync);
+      window.requestAnimationFrame(() => window.requestAnimationFrame(sync));
+      window.setTimeout(sync, 800);
+      window.setTimeout(sync, 2200);
+    }
+
+    _syncAutoHeight() {
+      const content = this.querySelector('.bw-paid-landing');
+      if (!content) return;
+
+      const height = Math.ceil(content.getBoundingClientRect().height);
+      if (!height) return;
+
+      this.style.setProperty('display', 'block', 'important');
+      this.style.setProperty('height', `${height}px`, 'important');
+      this.style.setProperty('min-height', '0', 'important');
+      this.style.setProperty('overflow', 'visible', 'important');
+      this.style.setProperty('width', '100%', 'important');
+
+      const parent = this.parentElement;
+      if (parent) {
+        const parentHeight = Math.ceil(parent.getBoundingClientRect().height);
+        if (parentHeight > height + 180) {
+          parent.style.setProperty('height', `${height}px`, 'important');
+          parent.style.setProperty('min-height', '0', 'important');
+        }
+      }
+
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'bw-resize',
+          source: 'bw-paid-landing',
+          height,
+        }, '*');
+      }
+    }
+
     _track(name, detail) {
       const now = new Date().toISOString();
       const params = this._params();
@@ -393,6 +449,14 @@
 
     _styles() {
       return `
+        bw-paid-landing {
+          display: block !important;
+          height: auto !important;
+          min-height: 0 !important;
+          overflow: visible !important;
+          width: 100% !important;
+        }
+
         .bw-paid-landing {
           --green: #1B5E20;
           --green-dark: #0E2A13;
