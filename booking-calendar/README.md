@@ -78,7 +78,7 @@ Use Wix's custom Booking Calendar page flow:
 
 This keeps Wix's Booking Form, confirmation page, calendar sync, and automations intact while replacing the heavy native calendar UI.
 
-When live availability ends before the full future season is open, the date carousel shows a disabled final card such as `Oct onward / TBD / Dates soon`. This reassures visitors that later dates are not broken, just not open yet.
+When live availability ends before the full future season is open, the date carousel shows a disabled final card such as `Oct onward / TBD / Dates soon`, and the month dropdown includes a disabled option such as `October onward - TBD`. This reassures visitors that later dates are not broken, just not open yet.
 
 ## Local live availability probe
 

@@ -127,6 +127,11 @@ const BW_BOOKING_CALENDAR_STYLES = `
     width: 100%;
   }
 
+  .bw-cal-month-select option:disabled {
+    color: #6A765F;
+    font-weight: 700;
+  }
+
   .bw-cal-month-wrap {
     position: relative;
   }
@@ -642,7 +647,7 @@ class BWBookingCalendarElement extends HTMLElement {
             <div>
               <div class="bw-cal-date-tools">
                 <span class="bw-cal-label">Date</span>
-                ${months.length > 1 ? this._monthSelect(months) : ''}
+                ${months.length > 1 ? this._monthSelect(months, dates) : ''}
               </div>
               ${dates.length ? `
                 <div class="bw-cal-date-row">
@@ -847,34 +852,44 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _futureTbdCard(dates) {
-    if (!dates.length || this.hasAttribute('demo') || this.hasAttribute('hide-future-tbd')) return '';
-    const lastDateKey = dates[dates.length - 1];
-    const lastDate = new Date(`${lastDateKey}T12:00:00`);
-    if (Number.isNaN(lastDate.getTime())) return '';
-
-    const nextMonth = new Date(lastDate);
-    nextMonth.setDate(1);
-    nextMonth.setMonth(nextMonth.getMonth() + 1);
-
-    const month = new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(nextMonth);
-    const lastLabel = this._formatDate(lastDateKey);
+    const meta = this._futureTbdMeta(dates);
+    if (!meta) return '';
     return `
-      <div class="bw-cal-tbd" role="note" aria-label="Dates after ${this._escape(lastLabel)} are coming soon">
-        <span>${this._escape(month)} onward</span>
+      <div class="bw-cal-tbd" role="note" aria-label="Dates after ${this._escape(meta.lastLabel)} are coming soon">
+        <span>${this._escape(meta.shortLabel)} onward</span>
         <b>TBD</b>
         <small>Dates soon</small>
       </div>
     `;
   }
 
-  _monthSelect(months) {
+  _futureTbdMeta(dates) {
+    if (!dates.length || this.hasAttribute('demo') || this.hasAttribute('hide-future-tbd')) return null;
+    const lastDateKey = dates[dates.length - 1];
+    const lastDate = new Date(`${lastDateKey}T12:00:00`);
+    if (Number.isNaN(lastDate.getTime())) return null;
+
+    const nextMonth = new Date(lastDate);
+    nextMonth.setDate(1);
+    nextMonth.setMonth(nextMonth.getMonth() + 1);
+
+    return {
+      shortLabel: new Intl.DateTimeFormat('en-GB', { month: 'short' }).format(nextMonth),
+      longLabel: new Intl.DateTimeFormat('en-GB', { month: 'long' }).format(nextMonth),
+      lastLabel: this._formatDate(lastDateKey),
+    };
+  }
+
+  _monthSelect(months, dates) {
     const selectedMonth = this._monthKey(this.state.selectedDate || months[0]?.key || '');
+    const tbd = this._futureTbdMeta(dates);
     return `
       <label class="bw-cal-month-wrap">
         <select class="bw-cal-month-select" data-month-select aria-label="Jump to month">
           ${months.map((month) => `
             <option value="${this._escape(month.key)}"${month.key === selectedMonth ? ' selected' : ''}>${this._escape(month.label)}</option>
           `).join('')}
+          ${tbd ? `<option value="future-tbd" disabled>${this._escape(tbd.longLabel)} onward - TBD</option>` : ''}
         </select>
       </label>
     `;

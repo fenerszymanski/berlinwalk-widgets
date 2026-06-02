@@ -4,16 +4,44 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Paid landing Custom Element)
+
+**Did:** Added the reusable paid-traffic landing page as a Wix Custom Element.
+
+**Changed:**
+- `paid-landing/paid-landing-element.js` — defines `<bw-paid-landing>` with mini trust strip, World Clock hero, live `<bw-booking-calendar>`, trust band, feature cards, full route band, guide section, FAQ, final CTA, sticky mobile CTA, and `bw_booking_*` tracking.
+- `paid-landing/index.html` and `paid-landing/README.md` — local/GitHub Pages preview and Wix install instructions.
+- `AGENTS.md` — documented the new `paid-landing/` folder.
+
+**Opened:** Push repo and install on a new Wix paid landing page using tag `bw-paid-landing`; hide the normal Wix header/footer for that page.
+**Closed:** Local preview at `http://127.0.0.1:4189/paid-landing/` loaded 81 live dates, appended `Oct onward / TBD`, produced a Booking Form URL with `bookings_sessionId` and no `guests=`, fixed CTA text color, and had no mobile horizontal overflow.
+
+**Next session should:** After Pages deploy, verify the GitHub Pages preview and live Wix page in mobile + desktop before sending Meta traffic.
+
+## 2026-06-02 — Codex (Ultimate planner Gemini smoke hardening)
+
+**Did:** Hardened the Ultimate planner Gemini handoff so the new AI endpoint can be verified safely after Wix publish.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — added `--ai` dry-run/live mode with a sanitized no-email AI payload and `enhancement.localRead` assertion.
+- `ultimate-berlin-trip-planner/launch-remote-preflight.mjs`, `launch-audit.mjs`, `build-launch-status-report.mjs`, `LAUNCH_STATUS.*`, `build-launch-control-room.mjs`, and `LAUNCH_CONTROL_ROOM.html` — now check/report `tripPlannerAi` OPTIONS and Gemini smoke evidence.
+- `ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md`, `velo/README.md`, `velo/install-kit.html` — added `GEMINI_API_KEY`, `tripPlannerAi`, and `--ai` smoke instructions.
+
+**Opened:** Latest remote preflight shows `tripPlannerAi OPTIONS 404`; Wix still needs the updated Velo pasted/published and `GEMINI_API_KEY` in Secrets before AI live smoke can pass. Current launch audit remains `138 pass, 1 warn, 7 block` because older UX/listing/icon blockers remain.
+**Closed:** `--ai` dry-run wrote `output/qa/ultimate-trip-planner-live-smoke/dry-run-ai-20260602.json` with no email in AI payload; syntax/inline-script/diff checks passed.
+
+**Next session should:** Keep fixing the existing UX launch blockers first, then publish updated Velo and run `live-smoke-trip-planner.mjs --live --email ... --ai`.
+
 ## 2026-06-02 — Codex (Booking calendar TBD card)
 
 **Did:** Added a disabled future-season cue at the end of the reusable booking calendar date carousel.
 
 **Changed:**
-- `booking-calendar/booking-calendar-element.js` — live availability now appends a final non-clickable card like `Oct onward / TBD / Dates soon` after the last available date; hidden in demo mode and opt-out via `hide-future-tbd`.
+- `booking-calendar/booking-calendar-element.js` — live availability now appends a final non-clickable card like `Oct onward / TBD / Dates soon` after the last available date and adds a disabled month dropdown option like `October onward - TBD`; hidden in demo mode and opt-out via `hide-future-tbd`.
 - `booking-calendar/README.md` — documented the future TBD card.
 
 **Opened:** Push the widget repo and update/pin the Wix script if Yusuf wants this on the live calendar immediately.
-**Closed:** Local `/landing` QA showed the card after Sep 30, `bookings_sessionId` still present, no `guests=` param, and overflow `0`.
+**Closed:** Local `/landing` QA showed the card after Sep 30, the disabled dropdown option, `bookings_sessionId` still present, no `guests=` param, and overflow `0`.
 
 **Next session should:** After push/GitHub Pages deploy, verify the live custom Booking Calendar shows the TBD card at the end of the date row.
 
