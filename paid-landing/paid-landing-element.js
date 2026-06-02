@@ -44,22 +44,27 @@
   class BWPaidLandingElement extends HTMLElement {
     connectedCallback() {
       ensureFont();
+      this._activatePaidLandingPage();
       ensureBookingCalendar().catch((error) => {
         console.error('BerlinWalk paid landing calendar loader failed:', error);
       });
       this._render();
       this._bind();
       this._setupAutoHeight();
+      this._hideGlobalStickyCtas();
       this._track('bw_booking_page_view', { source: 'paid_landing' });
     }
 
     disconnectedCallback() {
       if (this._stickyObserver) this._stickyObserver.disconnect();
       if (this._heightObserver) this._heightObserver.disconnect();
+      if (this._globalCtaObserver) this._globalCtaObserver.disconnect();
       if (this._scrollHandler) window.removeEventListener('scroll', this._scrollHandler);
       if (this._resizeHandler) window.removeEventListener('resize', this._resizeHandler);
       if (this._heightResizeHandler) window.removeEventListener('resize', this._heightResizeHandler);
       if (this._loadHandler) window.removeEventListener('load', this._loadHandler);
+      document.documentElement.classList.remove('bw-paid-landing-active');
+      document.body?.classList.remove('bw-paid-landing-active');
     }
 
     _render() {
@@ -98,7 +103,6 @@
                     <a class="bw-paid-button bw-paid-button-primary" href="#bw-paid-calendar" data-scroll-target="bw-paid-calendar" data-track-pick-date>Pick your date</a>
                     <a class="bw-paid-button bw-paid-button-secondary" href="#bw-paid-route" data-scroll-target="bw-paid-route">See the route</a>
                   </div>
-                  <p class="bw-paid-note">Phone number is used only for tour-day coordination if you are late or cannot find the group.</p>
                 </div>
 
                 <aside class="bw-paid-booking-panel" id="bw-paid-calendar" aria-label="Pick your tour date">
@@ -339,6 +343,37 @@
       window.setTimeout(sync, 2200);
     }
 
+    _activatePaidLandingPage() {
+      document.documentElement.classList.add('bw-paid-landing-active');
+      document.body?.classList.add('bw-paid-landing-active');
+    }
+
+    _hideGlobalStickyCtas() {
+      const hide = () => {
+        document.querySelectorAll('#bw-sticky-cta, #bw-desktop-cta, [data-bw-tourcta]').forEach((node) => {
+          if (!(node instanceof HTMLElement)) return;
+          node.style.setProperty('display', 'none', 'important');
+          node.style.setProperty('visibility', 'hidden', 'important');
+          node.style.setProperty('pointer-events', 'none', 'important');
+        });
+        document.body?.classList.remove('bw-sticky-active');
+        document.body?.style.setProperty('padding-bottom', '0px', 'important');
+      };
+
+      hide();
+      window.setTimeout(hide, 300);
+      window.setTimeout(hide, 1200);
+      window.setTimeout(hide, 2600);
+
+      if ('MutationObserver' in window) {
+        this._globalCtaObserver = new MutationObserver(hide);
+        this._globalCtaObserver.observe(document.body || document.documentElement, {
+          childList: true,
+          subtree: true,
+        });
+      }
+    }
+
     _syncAutoHeight() {
       const content = this.querySelector('.bw-paid-landing');
       if (!content) return;
@@ -449,6 +484,22 @@
 
     _styles() {
       return `
+        html.bw-paid-landing-active #bw-sticky-cta,
+        html.bw-paid-landing-active #bw-desktop-cta,
+        html.bw-paid-landing-active [data-bw-tourcta],
+        body.bw-paid-landing-active #bw-sticky-cta,
+        body.bw-paid-landing-active #bw-desktop-cta,
+        body.bw-paid-landing-active [data-bw-tourcta] {
+          display: none !important;
+          visibility: hidden !important;
+          pointer-events: none !important;
+        }
+
+        html.bw-paid-landing-active body.bw-sticky-active,
+        body.bw-paid-landing-active.bw-sticky-active {
+          padding-bottom: 0 !important;
+        }
+
         bw-paid-landing {
           display: block !important;
           height: auto !important;
@@ -614,24 +665,42 @@
 
         .bw-paid-button {
           align-items: center;
+          border: 0;
           border-radius: 8px;
           display: inline-flex;
           font-size: 15px;
           font-weight: 800;
           justify-content: center;
+          line-height: 1;
           min-height: 46px;
           padding: 0 18px;
           text-decoration: none;
+          transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
         }
 
         .bw-paid-button-primary {
           background: var(--yellow);
-          color: var(--ink);
+          color: var(--ink) !important;
         }
 
         .bw-paid-button-secondary {
           background: rgba(255, 255, 255, 0.95);
-          color: var(--green);
+          border: 1px solid rgba(255, 255, 255, 0.72);
+          color: var(--green) !important;
+        }
+
+        .bw-paid-button-primary:hover,
+        .bw-paid-button-primary:focus-visible {
+          background: #FFF04A;
+          color: var(--ink) !important;
+          transform: translateY(-1px);
+        }
+
+        .bw-paid-button-secondary:hover,
+        .bw-paid-button-secondary:focus-visible {
+          background: var(--white);
+          color: var(--green-dark) !important;
+          transform: translateY(-1px);
         }
 
         .bw-paid-note {
