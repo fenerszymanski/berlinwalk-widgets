@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Audio tour tool icon)
+
+**Did:** Generated and wired the missing icon for `Berlin in 9 Minutes (Free Audio Tour)`.
+
+**Changed:**
+- `tools-home/icons/free-berlin-audio-tour.png` and `tools-home/icons/free-berlin-audio-tour-160.png` — new no-text 3D audio-walk icon generated through Yusuf's ChatGPT browser session.
+- `tools-hub/data.json` — `free-berlin-audio-tour` now points to the GitHub Pages 160px icon URL instead of falling back to the `B` chip.
+- `tools-home/icons/manifest.json` — recorded source/model/path metadata.
+- Workspace `PROJECT_MEMORY.md` — corrected the audio-tour CMS item ID and recorded the icon note.
+
+**Opened:** Push/deploy still needed for live `/berlin-tools` to load the icon if this entry is not yet pushed.
+**Closed:** Local QA passed: JSON valid, `git diff --check` clean, icon source downloaded from ChatGPT browser and optimized to 512/160.
+
+**Next session should:** After GitHub Pages deploy, live-QA `/berlin-tools` at the Discovery section and confirm the `B` placeholder is gone.
+
 ## 2026-06-01 — Codex (Tools hub category banners)
 
 **Did:** Added GPT-generated thin hero banners above the four `/berlin-tools` category sections.
