@@ -248,7 +248,12 @@
         return;
       }
 
-      fetch('./data.json')
+      function dataUrl() {
+        var version = params.get('v') || '';
+        return version ? './data.json?v=' + encodeURIComponent(version) : './data.json';
+      }
+
+      fetch(dataUrl())
         .then(function (r) { if (!r.ok) throw new Error('404'); return r.json(); })
         .then(function (d) {
           if (d[slug]) render(d[slug]);

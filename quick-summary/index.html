@@ -349,8 +349,13 @@
         }).join('');
       }
 
+      function dataUrl() {
+        var version = value('v', '');
+        return version ? './data.json?v=' + encodeURIComponent(version) : './data.json';
+      }
+
       if (postSlug) {
-        fetch('./data.json')
+        fetch(dataUrl())
           .then(function (response) {
             if (!response.ok) throw new Error('data_not_found');
             return response.json();

@@ -4,6 +4,50 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Day Trips embed cache fix)
+
+**Did:** Diagnosed why the Wix editor showed blank/fallback Quick Summary/FAQ widgets for the Day Trips draft.
+
+**Changed:**
+- `quick-summary/index.html` and `faq/index.html` — when a `v` URL parameter is present, forward it to `data.json` fetches to bypass stale Wix/Atlas iframe cache.
+- Wix: patched draft `80b60289-cd69-4d4c-ac9b-399ce47c8155` HTML embed URLs to `v=20260602b`.
+- Workspace: `berlinwalk-content-app/api/_lib/markdown-to-ricos.js` now emits versioned embed URLs for future drafts.
+
+**Opened:** Push this cache fix; after GitHub Pages updates, refresh/reopen the Wix editor draft if it still shows the old blank iframe.
+**Closed:** Live GitHub Pages already has `best-day-trips-from-berlin` in QS/FAQ data and the finder URL returns 200; Wix draft API now shows all 3 embed URLs with `v=20260602b`.
+
+**Next session should:** Verify the Wix draft visually, then run the BerlinTools CMS insert if the Day Trip Finder row is still pending.
+
+## 2026-06-02 — Codex (Day Trips Wix draft/images)
+
+**Did:** Finished the Best Day Trips blog post as an unpublished Wix draft with licensed images and SEO.
+
+**Changed:**
+- `blog-drafts/best-day-trips-from-berlin.md` — updated status with Wix draft ID `80b60289-cd69-4d4c-ac9b-399ce47c8155`, edit URL, image/SEO completion, and image sources.
+- `blog-drafts/images/best-day-trips-from-berlin/` — added optimized JPEGs for Sanssouci cover plus Sachsenhausen, Spreewald and Dresden inline images.
+- Workspace scripts: `berlinwalk-content-app/create-day-trips-draft.mjs` and `add-day-trips-blog-images.mjs` created/patched the UNPUBLISHED Wix draft.
+- `blog-workplan.md` and root `PROJECT_MEMORY.md` updated from local-only to Wix draft + widget status.
+
+**Opened:** Push widgets repo, visual-QA GitHub Pages finder/map, insert/re-save BerlinTools CMS row, and generate/wire the tool icon before homepage grid promotion. Unrelated `ultimate-berlin-trip-planner/index.html` modification is still present and untouched.
+**Closed:** Wix draft exists with 155 Ricos nodes, 3 HTML embeds, Sanssouci cover/OG/Twitter image, 3 inline section images, tags, focus keyword and image credits.
+
+**Next session should:** Push `berlinwalk-widgets`, verify `/berlin-day-trips-finder/` on GitHub Pages, then run `source scripts/load-api-keys.sh && node insert-berlin-day-trips-finder.js` from the workspace root.
+
+## 2026-06-02 — Codex (Day Trips draft + pinned map)
+
+**Did:** Took over the A-tier Best Day Trips task and added a pinned Leaflet map to the Day Trip Finder.
+
+**Changed:**
+- `berlin-day-trips-finder/index.html` — added pinned map, Berlin start pin, filtered destination pins/route guide lines, popups, and coordinates for 8 day trips.
+- `tools-hub/data.json` / `widgets-hub/SEO_ADDITIONAL_TAGS.md` — added `berlin-day-trips-finder` (Discovery, `embedHeight: 1900`) and regenerated widgets SEO ItemList to 35 tools.
+- `blog-drafts/best-day-trips-from-berlin.md`, `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`, `blog-workplan.md` — created publish-ready local draft and wired QS/FAQ/schema under `best-day-trips-from-berlin`.
+- Workspace: `insert-berlin-day-trips-finder.js` and `PROJECT_MEMORY.md` updated with local-only status and verified official-source facts.
+
+**Opened:** Visual Browser QA on localhost was blocked by Browser URL policy, so do full visual QA after a safer browser path/push. Push repo, insert/re-save BerlinTools CMS row, create Wix Blog draft with 4 licensed images/SEO, and generate a tool icon before homepage grid promotion. Unrelated `ultimate-berlin-trip-planner/index.html` modification is present and was left untouched.
+**Closed:** JSON parse, `faq/inject.js` syntax, CMS helper syntax, widget inline script parse, `git diff --check`, Leaflet CDN HEAD checks, and source/fact checks passed.
+
+**Next session should:** Push `berlinwalk-widgets`, verify GitHub Pages serves the finder with the map, then run `source scripts/load-api-keys.sh && node insert-berlin-day-trips-finder.js` from the workspace root and create the Wix draft/images.
+
 ## 2026-06-02 — Codex (Ultimate planner nearby extras)
 
 **Did:** Tightened Ultimate Berlin Trip Planner's "extra stop" logic so add-ons are realistic, nearby, and pace/interest-aware instead of generic volume.
