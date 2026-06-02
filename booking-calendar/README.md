@@ -30,6 +30,9 @@ Script after GitHub Pages deploy:
 Useful attributes:
 
 - `availability-json`: JSON array of available slots.
+- `availability-endpoint`: optional public endpoint that returns `{ slots: [...] }`. If omitted and `availability-json` is not set, the element loads BerlinWalk live availability from `https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability`.
+- `availability-days`: optional future availability window for the endpoint, default `365`.
+- `service-id`: optional Wix Bookings service ID override for the endpoint.
 - `booking-url`: fallback booking URL.
 - `service-title`: visible heading.
 - `default-guests`: starting guest count.
@@ -69,12 +72,10 @@ Use Wix's custom Booking Calendar page flow:
 1. Replace the native Booking Calendar page with a custom page.
 2. Add one Custom Element with ID `#bwBookingCalendar`.
 3. Set tag name `bw-booking-calendar`.
-4. Use `velo/custom-booking-calendar-page.js` as the page-code starting point.
-5. Add `velo/backend/bookingCalendarAvailability.jsw` as a Wix backend module.
-6. Add a Wix Secret named `berlinwalk-wix-api-key` with the Wix API key value.
-7. Query real availability through Wix Bookings Time Slots V2 `List Event Time Slots`. This was live-tested on 2026-06-02 for the Berlin Free Walking Tour service and returned bookable class sessions, event IDs, capacity, location, and resource data. The scaffold requests 365 days; Wix only returns slots that are actually bookable in the configured service window. For the native Booking Form preload, class sessions use `bookings_sessionId`; the normalizer copies Time Slots V2 `eventInfo.eventId` into `sessionId`.
-8. Pass normalized slots to the custom element with `setAttribute('availability-json', JSON.stringify(slots))`.
-9. On `bw-booking-calendar-continue`, route to the Wix Booking Form with selected slot defaults.
+4. If Wix page code is available, `velo/custom-booking-calendar-page.js` remains a page-code starting point.
+5. If Wix page code is not available, no page code is required: the element auto-loads sanitized live slots from the Content Studio endpoint.
+6. Query real availability through Wix Bookings Time Slots V2 `List Event Time Slots`. This was live-tested on 2026-06-02 for the Berlin Free Walking Tour service and returned bookable class sessions, event IDs, capacity, location, and resource data. The endpoint requests 365 days; Wix only returns slots that are actually bookable in the configured service window. For the native Booking Form preload, class sessions use `bookings_sessionId`; the normalizer copies Time Slots V2 `eventInfo.eventId` into `sessionId`.
+7. On `Reserve your spot`, route to the Wix Booking Form with selected slot defaults.
 
 This keeps Wix's Booking Form, confirmation page, calendar sync, and automations intact while replacing the heavy native calendar UI.
 

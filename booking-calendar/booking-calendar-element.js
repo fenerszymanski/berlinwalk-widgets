@@ -1,4 +1,5 @@
 const BW_BOOKING_CALENDAR_BOOKING_URL = 'https://www.berlinwalk.com/booking-form';
+const BW_BOOKING_CALENDAR_AVAILABILITY_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
 
 const BW_BOOKING_CALENDAR_STYLES = `
   bw-booking-calendar {
@@ -380,6 +381,13 @@ const BW_BOOKING_CALENDAR_STYLES = `
     background: #124516;
   }
 
+  .bw-cal-cta.is-disabled {
+    background: #9AA89A;
+    cursor: default;
+    opacity: 0.62;
+    pointer-events: none;
+  }
+
   .bw-cal-message {
     background: #FFFDE7;
     border: 1px solid #EFE6A3;
@@ -432,6 +440,9 @@ class BWBookingCalendarElement extends HTMLElement {
       'default-guests',
       'max-guests',
       'demo-days',
+      'availability-days',
+      'availability-endpoint',
+      'service-id',
       'loading',
       'error-message',
       'cta-label',
@@ -449,17 +460,25 @@ class BWBookingCalendarElement extends HTMLElement {
     };
     this._dateScrollMode = 'align';
     this._dateScrollLeft = 0;
+    this._availabilityRequested = false;
+    this._isFetchingAvailability = false;
   }
 
   connectedCallback() {
     this._hydrate();
+    this._isFetchingAvailability = this._shouldLoadExternalAvailability();
     this._render();
+    this._loadExternalAvailability();
   }
 
-  attributeChangedCallback() {
+  attributeChangedCallback(name) {
     if (!this.isConnected) return;
+    if (['availability-endpoint', 'service-id', 'availability-days'].includes(name)) {
+      this._availabilityRequested = false;
+    }
     this._hydrate();
     this._render();
+    this._loadExternalAvailability();
   }
 
   _hydrate() {
@@ -490,8 +509,55 @@ class BWBookingCalendarElement extends HTMLElement {
         return [];
       }
     }
-    if (this.hasAttribute('demo') || !raw) return this._demoSlots();
+    if (this.hasAttribute('demo')) return this._demoSlots();
     return [];
+  }
+
+  _shouldLoadExternalAvailability() {
+    return !this.hasAttribute('availability-json') && !this.hasAttribute('demo') && Boolean(this._availabilityEndpoint());
+  }
+
+  _availabilityEndpoint() {
+    const endpoint = this.getAttribute('availability-endpoint') || BW_BOOKING_CALENDAR_AVAILABILITY_ENDPOINT;
+    if (!endpoint || endpoint === 'none') return '';
+
+    const url = new URL(endpoint, window.location.href);
+    if (!url.searchParams.has('days')) {
+      url.searchParams.set('days', this.getAttribute('availability-days') || '365');
+    }
+    if (!url.searchParams.has('guests')) {
+      url.searchParams.set('guests', '1');
+    }
+    const serviceId = this.getAttribute('service-id');
+    if (serviceId && !url.searchParams.has('serviceId')) {
+      url.searchParams.set('serviceId', serviceId);
+    }
+    return url.toString();
+  }
+
+  async _loadExternalAvailability() {
+    if (!this._shouldLoadExternalAvailability() || this._availabilityRequested) return;
+
+    this._availabilityRequested = true;
+    this._isFetchingAvailability = true;
+    this._render();
+
+    try {
+      const response = await fetch(this._availabilityEndpoint());
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Availability failed');
+
+      const slots = Array.isArray(data.slots) ? data.slots : [];
+      this._isFetchingAvailability = false;
+      this.removeAttribute('error-message');
+      this.setAttribute('availability-json', JSON.stringify(slots));
+    } catch (error) {
+      this._isFetchingAvailability = false;
+      this.setAttribute('error-message', 'Could not load live availability. Please try again in a moment.');
+      console.error('BerlinWalk booking calendar availability error:', error);
+      this._hydrate();
+      this._render();
+    }
   }
 
   _normalizeSlots(slots) {
@@ -541,7 +607,7 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _render() {
-    const loading = this.hasAttribute('loading');
+    const loading = this.hasAttribute('loading') || this._isFetchingAvailability;
     const error = this.getAttribute('error-message') || '';
     const serviceTitle = this.getAttribute('service-title') || 'Pick your tour date';
     const selectedSlot = this._selectedSlot();
@@ -578,12 +644,12 @@ class BWBookingCalendarElement extends HTMLElement {
                   </div>
                   <button class="bw-cal-date-nav" type="button" data-action="scroll-days" data-direction="1" aria-label="Show later dates">&rsaquo;</button>
                 </div>
-              ` : '<div class="bw-cal-empty">No available dates found.</div>'}
+              ` : loading ? '' : '<div class="bw-cal-empty">No available dates found.</div>'}
             </div>
             <div>
               <span class="bw-cal-label">Time</span>
               <div class="bw-cal-slots">
-                ${slots.length ? slots.map((slot) => this._slotButton(slot)).join('') : '<div class="bw-cal-empty">No open slots on this date.</div>'}
+                ${slots.length ? slots.map((slot) => this._slotButton(slot)).join('') : loading ? '' : '<div class="bw-cal-empty">No open slots on this date.</div>'}
               </div>
             </div>
             <div class="bw-cal-guest-row">
@@ -597,7 +663,9 @@ class BWBookingCalendarElement extends HTMLElement {
           </div>
           <footer class="bw-cal-summary">
             <span class="bw-cal-selected">${selectedText}</span>
-            <a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</a>
+            ${selectedSlot
+              ? `<a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</a>`
+              : `<span class="bw-cal-cta is-disabled" aria-disabled="true">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</span>`}
           </footer>
         </div>
       </section>
