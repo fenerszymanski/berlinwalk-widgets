@@ -370,7 +370,7 @@
           <strong>Ready for Wix smoke</strong>
           Triggered Email placeholders are gone.
         </div>
-        <p class="bw-lead">Generated 2026-06-01 07:45:46. File: <code>LAUNCH_CONTROL_ROOM.html</code>. Runbook sections detected: 6.</p>
+        <p class="bw-lead">Generated 2026-06-02 14:08:53. File: <code>LAUNCH_CONTROL_ROOM.html</code>. Runbook sections detected: 6.</p>
       </aside>
     </section>
 
@@ -389,7 +389,7 @@
       <p class="bw-eyebrow">Data</p>
       <h3>TripPlannerLeads</h3>
       <p>Remote preflight sees the live collection and critical fields.</p>
-      <div class="bw-card-action"><small><code>output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-05-31T19-20-51-073Z.json</code></small></div>
+      <div class="bw-card-action"><small><code>output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-06-02T14-07-47-464Z.json</code></small></div>
     </article>
 
     <article class="bw-status-card is-ready">
@@ -413,10 +413,10 @@
 
     </article>
 
-    <article class="bw-status-card is-block">
+    <article class="bw-status-card is-safe">
       <p class="bw-eyebrow">Safety</p>
       <h3>Public visibility</h3>
-      <p>Visibility protection needs review before pushing.</p>
+      <p>Ultimate is still draft and not in homepage shortcuts.</p>
 
     </article>
 
@@ -539,7 +539,9 @@ node ultimate-berlin-trip-planner/launch-audit.mjs</textarea>
       </div>
       <textarea id="cmd-smoke" readonly spellcheck="false">source ../scripts/load-api-keys.sh
 node ultimate-berlin-trip-planner/launch-remote-preflight.mjs
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --ai
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --booking
 node ultimate-berlin-trip-planner/launch-audit.mjs</textarea>
     </section>

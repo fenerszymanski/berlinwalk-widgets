@@ -197,7 +197,9 @@ node ultimate-berlin-trip-planner/launch-audit.mjs`;
   const smokeCommands = `
 source ../scripts/load-api-keys.sh
 node ultimate-berlin-trip-planner/launch-remote-preflight.mjs
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --ai
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --booking
 node ultimate-berlin-trip-planner/launch-audit.mjs`;
 

@@ -1,0 +1,25 @@
+{
+  "generatedAt": "2026-06-02T13:00:41.699Z",
+  "missingKeyFailSoft": {
+    "ok": false,
+    "reason": "missing_api_key"
+  },
+  "privacyScrub": {
+    "sanitizedInputHasPrivateText": false,
+    "promptHasPrivateText": false
+  },
+  "geminiRequest": {
+    "url": "https://generativelanguage.googleapis.com/v1beta/models/fixture-gemini-key:generateContent",
+    "modelUrlUsesFixtureKey": true,
+    "thinkingBudget": 0,
+    "responseMimeType": "application/json",
+    "hasResponseJsonSchema": true
+  },
+  "enhancement": {
+    "ok": true,
+    "provider": "gemini",
+    "model": "fixture-gemini-key",
+    "dayNotes": 1,
+    "totalTokens": 490
+  }
+}

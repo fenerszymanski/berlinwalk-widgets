@@ -23,7 +23,7 @@ const SOURCES = [
     badge: 'Merge exports',
     source: 'http-functions.js',
     target: 'Merge into the existing live Backend/http-functions.js file.',
-    note: 'Keep existing live endpoints. Add the imports and tripPlannerLead/tripPlannerBooking handlers from this source.'
+    note: 'Keep existing live endpoints. Add the imports plus tripPlannerLead, tripPlannerAi, and tripPlannerBooking handlers from this source.'
   },
   {
     id: 'jobs',
@@ -92,8 +92,9 @@ function checklistHtml(todoCount) {
       <li>Run the pre-publish gate commands below from <code>berlinwalk-widgets/</code>.</li>
       ${idWarning}
       <li>Confirm <code>TripPlannerLeads</code> passes remote preflight with all critical fields verified.</li>
+      <li>Add <code>GEMINI_API_KEY</code> in Wix Secrets Manager if the optional AI polish endpoint should run live.</li>
       <li>Create <code>Backend/tripPlannerFunnel.js</code> in Wix and paste the full source below.</li>
-      <li>Merge the <code>tripPlannerLead</code> and <code>tripPlannerBooking</code> handlers into live <code>Backend/http-functions.js</code>.</li>
+      <li>Merge the <code>tripPlannerLead</code>, <code>tripPlannerAi</code>, and <code>tripPlannerBooking</code> handlers into live <code>Backend/http-functions.js</code>.</li>
       <li>Merge the hourly <code>processTripPlannerDueEmails</code> entry into <code>jobs.config</code>.</li>
       <li>Publish Wix, then run remote preflight and the live smoke helper with a real test inbox.</li>
     </ol>`;
@@ -140,7 +141,9 @@ function commandPanel() {
     'source ../scripts/load-api-keys.sh',
     'node ultimate-berlin-trip-planner/launch-audit.mjs',
     'node ultimate-berlin-trip-planner/launch-remote-preflight.mjs',
+    'node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only',
     'node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com',
+    'node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --ai',
     'node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --booking',
     'node ultimate-berlin-trip-planner/launch-audit.mjs'
   ].join('\n');

@@ -73,6 +73,31 @@ function latestLiveSmoke() {
   return leadOk && bookingOk ? latest : null;
 }
 
+function latestAiSmoke() {
+  const latest = latestJsonIn('output/qa/ultimate-trip-planner-live-smoke', /^live-.*\.json$/);
+  if (!latest) return null;
+  const result = latest.json;
+  const aiOk = result?.mode === 'live' &&
+    result?.responses?.ai?.ok === true &&
+    result?.responses?.ai?.body?.ok === true &&
+    result?.responses?.ai?.body?.enhancement;
+  return aiOk ? latest : null;
+}
+
+function aiCostSummary(aiSmoke) {
+  const cost = aiSmoke?.json?.aiCost;
+  if (!cost || !Number.isFinite(Number(cost.estimatedUsd))) return null;
+  const input = Number(cost.promptTokens || 0);
+  const output = Number(cost.outputTokens || 0);
+  return {
+    model: cost.model || 'gemini-2.5-flash',
+    promptTokens: input,
+    outputTokens: output,
+    estimatedUsd: Number(cost.estimatedUsd),
+    summary: `${cost.model || 'gemini-2.5-flash'}: ${input} input + ${output} output tokens, est. $${Number(cost.estimatedUsd).toFixed(6)}`
+  };
+}
+
 function runAudit() {
   const result = spawnSync('node', ['ultimate-berlin-trip-planner/launch-audit.mjs'], {
     cwd: repoRoot,
@@ -157,6 +182,8 @@ function collectState() {
   const todos = unique([...funnel.matchAll(/TODO_TRIP_PLANNER_[A-Z0-9_]+/g)].map((match) => match[0]));
   const preflight = latestJsonIn('output/qa/ultimate-trip-planner-remote-preflight', /^remote-preflight-.*\.json$/);
   const smoke = latestLiveSmoke();
+  const aiSmoke = latestAiSmoke();
+  const aiCost = aiCostSummary(aiSmoke);
   const checks = preflight?.json?.checks || {};
   const audit = runAudit();
   const visibility = toolVisibility();
@@ -183,14 +210,20 @@ function collectState() {
     {
       id: 'velo_endpoints',
       label: 'Velo endpoints',
-      status: checks.leadOptions?.status === 204 && checks.bookingOptions?.status === 204 ? 'pass' : 'warn',
-      detail: `lead OPTIONS ${checks.leadOptions?.status || 'unknown'}, booking OPTIONS ${checks.bookingOptions?.status || 'unknown'}.`
+      status: checks.leadOptions?.status === 204 && checks.aiOptions?.status === 204 && checks.bookingOptions?.status === 204 ? 'pass' : 'warn',
+      detail: `lead OPTIONS ${checks.leadOptions?.status || 'unknown'}, ai OPTIONS ${checks.aiOptions?.status || 'unknown'}, booking OPTIONS ${checks.bookingOptions?.status || 'unknown'}.`
     },
     {
       id: 'live_smoke',
       label: 'Live lead/booking smoke',
       status: smoke ? 'pass' : 'warn',
       detail: smoke ? smoke.relative : 'No passing live smoke evidence found.'
+    },
+    {
+      id: 'ai_smoke',
+      label: 'Gemini AI polish smoke',
+      status: aiSmoke ? 'pass' : 'warn',
+      detail: aiSmoke ? aiSmoke.relative : 'No passing tripPlannerAi smoke evidence found.'
     },
     {
       id: 'tool_page',
@@ -207,8 +240,12 @@ function collectState() {
     {
       id: 'homepage',
       label: 'Homepage shortcut',
-      status: visibility.inHome ? 'pass' : 'hold',
-      detail: visibility.inHome ? 'Ultimate appears in tools-home/data.json.' : 'Homepage shortcut is not enabled yet.'
+      status: visibility.inHome && !visibility.publicVisible ? 'block' : visibility.inHome ? 'pass' : 'hold',
+      detail: visibility.inHome && !visibility.publicVisible
+        ? 'Ultimate appears in tools-home/data.json while the tool is still draft/protected.'
+        : visibility.inHome
+          ? 'Ultimate appears in tools-home/data.json.'
+          : 'Homepage shortcut is not enabled yet.'
     },
     ...(uxRevision ? [{
       id: 'ux_revision',
@@ -235,10 +272,11 @@ function collectState() {
   const blockers = gates.filter((gate) => gate.status === 'block');
   const warnings = gates.filter((gate) => gate.status === 'warn');
   const holds = gates.filter((gate) => gate.status === 'hold');
+  const auditBlocked = Number(audit.summary?.block || 0) > 0;
   const visibilityHeld = holds.some((gate) => gate.id === 'visibility');
   const homepageHeld = holds.some((gate) => gate.id === 'homepage');
   const uxRevisionHeld = holds.some((gate) => gate.id === 'ux_revision');
-  const verdict = blockers.length
+  const verdict = blockers.length || auditBlocked
     ? 'NOT READY'
     : warnings.length
       ? 'WAITING FOR LIVE QA'
@@ -261,6 +299,7 @@ function collectState() {
           githubWidgetStatus: checks.githubWidget?.status || null,
           liveToolPageStatus: checks.liveToolPage?.status || null,
           leadOptionsStatus: checks.leadOptions?.status || null,
+          aiOptionsStatus: checks.aiOptions?.status || null,
           bookingOptionsStatus: checks.bookingOptions?.status || null,
           berlinToolsSlugCount: checks.berlinToolsSlug?.count ?? null,
           tripPlannerCollectionOk: checks.tripPlannerCollection?.ok === true,
@@ -272,15 +311,28 @@ function collectState() {
           file: smoke.relative
         }
       : null,
+    aiSmoke: aiSmoke
+      ? {
+          file: aiSmoke.relative,
+          cost: aiCost
+        }
+      : null,
     visibility,
     blog,
     uxRevision,
     gates,
-    nextActions: nextActions({ blockers, warnings, holds })
+    nextActions: nextActions({ blockers, warnings, holds, audit })
   };
 }
 
-function nextActions({ blockers, warnings, holds }) {
+function nextActions({ blockers, warnings, holds, audit }) {
+  if (Number(audit.summary?.block || 0) > 0) {
+    return [
+      'Fix the launch-audit BLOCK items first, especially the lead gate, compact day copy, and public-listing/icon issues.',
+      'After those pass, publish the updated Velo including tripPlannerAi and run remote preflight plus --ai-only live smoke.'
+    ];
+  }
+
   if (blockers.some((gate) => gate.id === 'triggered_email_ids')) {
     const actions = [
       'Open WIX_EMAIL_SETUP_TR.md next to email/paste-ready/copy-kit.html.',
@@ -305,7 +357,7 @@ function nextActions({ blockers, warnings, holds }) {
   if (warnings.some((gate) => gate.id === 'velo_endpoints')) {
     return [
       'Publish Backend/tripPlannerFunnel.js, http-functions.js handlers, and jobs.config in Wix.',
-      'Run launch-remote-preflight.mjs until both Velo OPTIONS handlers are live.'
+      'Run launch-remote-preflight.mjs until lead, AI, and booking Velo OPTIONS handlers are live.'
     ];
   }
 
@@ -313,6 +365,13 @@ function nextActions({ blockers, warnings, holds }) {
     return [
       'Run live-smoke-trip-planner.mjs --live with a real test email.',
       'Run live-smoke-trip-planner.mjs --live --booking to prove booked-branch behavior.'
+    ];
+  }
+
+  if (warnings.some((gate) => gate.id === 'ai_smoke')) {
+    return [
+      'Add GEMINI_API_KEY in Wix Secrets Manager if it is not already present.',
+      'Publish the updated tripPlannerAi Velo endpoint, then run live-smoke-trip-planner.mjs --live --ai-only.'
     ];
   }
 
@@ -388,6 +447,8 @@ function markdown(state) {
     '',
     `- Latest remote preflight: ${state.preflight ? `\`${state.preflight.file}\`` : 'missing'}`,
     `- Latest passing live smoke: ${state.smoke ? `\`${state.smoke.file}\`` : 'missing'}`,
+    `- Latest passing Gemini AI smoke: ${state.aiSmoke ? `\`${state.aiSmoke.file}\`` : 'missing'}`,
+    `- Latest Gemini cost estimate: ${state.aiSmoke?.cost ? state.aiSmoke.cost.summary : 'missing until live AI smoke passes'}`,
     `- Visibility: ${state.visibility.publicVisible ? 'public' : 'draft/protected'}, homepage shortcut ${state.visibility.inHome ? 'enabled' : 'not enabled'}`,
     `- Widget URL: ${state.visibility.widgetUrl || 'missing'}`,
     `- Blog package: ${state.blog.bodyExists ? 'body draft exists' : 'missing'}; widget near top ${state.blog.widgetNearTop ? 'yes' : 'no'}; quick summary ${state.blog.quickSummary ? 'yes' : 'no'}; FAQ ${state.blog.faq ? 'yes' : 'no'}`,
@@ -415,7 +476,9 @@ function markdown(state) {
     'source ../scripts/load-api-keys.sh',
     'node ultimate-berlin-trip-planner/launch-remote-preflight.mjs',
     'node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live --sync-fields',
+    'node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only',
     'node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com',
+    'node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --ai',
     'node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --booking',
     'node ultimate-berlin-trip-planner/velo/simulate-email-sequence.mjs --arrival 2026-06-12 --signup 2026-06-01',
     'node ultimate-berlin-trip-planner/velo/report-trip-planner-leads.mjs --live --limit 200',

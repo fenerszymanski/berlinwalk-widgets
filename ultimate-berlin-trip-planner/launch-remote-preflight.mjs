@@ -196,9 +196,11 @@ function summarize(result) {
     line('INFO', 'Wix dynamic tool URL is not live yet', `${checks.liveToolPage.status} ${checks.liveToolPage.statusText}`);
   }
 
-  for (const endpoint of ['leadOptions', 'bookingOptions']) {
+  for (const endpoint of ['leadOptions', 'aiOptions', 'bookingOptions']) {
     const check = checks[endpoint];
-    const label = endpoint === 'leadOptions' ? 'tripPlannerLead OPTIONS' : 'tripPlannerBooking OPTIONS';
+    const label = endpoint === 'leadOptions'
+      ? 'tripPlannerLead OPTIONS'
+      : (endpoint === 'aiOptions' ? 'tripPlannerAi OPTIONS' : 'tripPlannerBooking OPTIONS');
     if (check.status === 204) {
       line('OK', `${label} is live`);
     } else {
@@ -262,6 +264,11 @@ async function main() {
     ),
     leadOptions: await fetchWithTimeout(
       'https://www.berlinwalk.com/_functions/tripPlannerLead',
+      { method: 'OPTIONS' },
+      { keepBody: false }
+    ),
+    aiOptions: await fetchWithTimeout(
+      'https://www.berlinwalk.com/_functions/tripPlannerAi',
       { method: 'OPTIONS' },
       { keepBody: false }
     ),

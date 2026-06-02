@@ -4,6 +4,41 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Ultimate planner Gemini QA + listing hold)
+
+**Did:** Tightened the optional Gemini 2.5 Flash layer and cleared the remaining local launch-audit blockers.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/` — `tripPlannerAi` remains fail-soft and privacy-scrubbed; `--ai-only` smoke mode now tests the AI endpoint path without creating a lead or sending instant email; latest dry-run evidence is `output/qa/ultimate-trip-planner-live-smoke/dry-run-ai-only-20260602c.json`.
+- `ultimate-berlin-trip-planner/index.html` — lead gate now shows one Day 1 preview, keeps full days/PDF/print locked until email, shortens day action copy, moves closing prose into visual close strips, exposes deterministic timeboxes, and keeps BerlinWalk as a natural itinerary block.
+- `tools-home/data.json` — removed the draft Ultimate shortcut from the homepage tool grid and switched Hackescher to the local generated 160px icon.
+- `ultimate-berlin-trip-planner/WIX_GEMINI_PUBLISH_TR.md` / `LAUNCH_RUNBOOK.md` — added the short Turkish Wix publish checklist plus Gemini 2.5 Flash cost/guardrail notes (`maxOutputTokens: 1200`, `thinkingBudget: 0`, fail-soft deterministic fallback).
+- `ultimate-berlin-trip-planner/velo/prepublish-gate.mjs` — bounded Gemini check now explicitly verifies the output token cap as well as response schema, backend-only secret, and missing-key fallback.
+- `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` and `build-launch-status-report.mjs` — live `--ai` / `--ai-only` smoke now records Gemini token usage and estimated USD cost when the live response includes usage metadata; dry-run evidence is `output/qa/ultimate-trip-planner-live-smoke/dry-run-ai-only-cost-20260602.json`.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.*` — regenerated after latest remote preflight `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-06-02T14-07-47-464Z.json`: `149 pass, 1 warn, 0 block`, verdict `WAITING FOR LIVE QA`; Velo prepublish gate passed `12/12`; local Keychain has `GEMINI_API_KEY`; live `tripPlannerAi OPTIONS` still returns `404` until Wix Velo is published.
+
+**Opened:** Add `GEMINI_API_KEY` in Wix Secrets, paste/publish updated Velo, then run remote preflight and live `--ai-only` / `--ai` smoke; this is the only remaining blocker for live Gemini verification.
+**Closed:** All local launch-audit blockers are cleared; browser QA on localhost showed locked state has 1 preview, full days 0, PDF/print disabled, and fail-soft unlock opens 2 full days with overflow 0 and no closing prose.
+
+**Next session should:** Publish/paste the updated Velo once Yusuf is ready, then live-smoke `tripPlannerAi` with `--ai-only` before any full lead smoke.
+
+## 2026-06-02 — Codex (Ultimate planner Gemini prepublish gate)
+
+**Did:** Finished the safety gates around the optional Gemini 2.5 Flash "local second look" layer for Ultimate Trip Planner.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/prepublish-gate.mjs` — now verifies `tripPlannerAi`, bounded Gemini backend config, no-email AI payloads, and backend privacy scrub; latest run passed `12/12`.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — Gemini-bound payload text now drops email-like/private-looking text at backend validation before prompt assembly.
+- `ultimate-berlin-trip-planner/velo/ai-privacy-fixture.mjs` — new mocked-Wix fixture proves missing Gemini key returns fail-soft and scrubbed Gemini prompts contain no email-like text.
+- `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — `--ai` dry-run/live mode now asserts the AI payload contains no lead email, email-like text, or email-shaped key; dry-run evidence written to `output/qa/ultimate-trip-planner-live-smoke/dry-run-ai-privacy-20260602.json`.
+- `ultimate-berlin-trip-planner/build-launch-status-report.mjs` and `LAUNCH_STATUS.*` — status now marks the homepage shortcut as `BLOCK` while Ultimate is still draft/protected, and keeps `tripPlannerAi OPTIONS 404` / missing AI smoke as warnings.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — AI endpoint/source/smoke checks remain wired into the launch audit, including a frontend fail-soft invariant that proves AI failure cannot control full-plan/PDF visibility.
+
+**Opened:** Wix still needs `GEMINI_API_KEY` in Secrets plus updated Velo publish before `tripPlannerAi` can pass live smoke; current audit remains `141 pass, 1 warn, 7 block` due older UX/listing/icon/gate blockers.
+**Closed:** Prepublish gate proves the AI layer is paste-ready locally: `12/12` pass, message IDs applied, TripPlannerLeads schema verified, AI endpoint safeguards present, no email accepted in the AI payload, backend prompt input is privacy-scrubbed, and `ai-privacy-fixture.mjs` passes.
+
+**Next session should:** Continue the 7 UX launch blockers first, then paste/publish the updated Velo and run `live-smoke-trip-planner.mjs --live --email ... --ai`.
+
 ## 2026-06-02 — Codex (Paid landing Custom Element)
 
 **Did:** Added the reusable paid-traffic landing page as a Wix Custom Element.

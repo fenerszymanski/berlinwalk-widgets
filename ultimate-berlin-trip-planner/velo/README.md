@@ -37,6 +37,16 @@ placeholders remain, the endpoint/scheduler source is present, booked leads
 suppress future Ultimate reminders, and the live `TripPlannerLeads` critical
 fields pass.
 
+For the optional Gemini layer, also run the local privacy/fail-soft fixture:
+
+```bash
+node ultimate-berlin-trip-planner/velo/ai-privacy-fixture.mjs
+```
+
+It executes the Velo source in a mocked Wix backend, proves `missing_api_key`
+returns fail-soft, and verifies email-like text is scrubbed before Gemini prompt
+assembly.
+
 ## Endpoints
 
 Public endpoint after publish:
@@ -47,6 +57,23 @@ POST https://www.berlinwalk.com/_functions/tripPlannerLead
 
 The widget sends email, consent, arrival date, trip length, trip profile, plan title,
 recommended tour day, ticket note, weather summary, source, and page URL.
+
+Optional AI polish endpoint after publish:
+
+```text
+POST https://www.berlinwalk.com/_functions/tripPlannerAi
+```
+
+This endpoint adds a short "local second look" after the deterministic full plan
+is unlocked. It never receives the user's email; the widget sends only sanitized
+trip inputs, weather/tour-slot labels, and the already-built day skeleton. If
+Gemini is unavailable, missing a key, or returns a bad response, the frontend
+hides the AI panel and the deterministic plan/PDF/print flow continues normally.
+
+Add the Gemini API key in Wix Secrets Manager as `GEMINI_API_KEY`. Accepted
+fallback secret names are `GOOGLE_AI_API_KEY` and `GOOGLE_GEMINI_API_KEY`.
+The default model is `gemini-2.5-flash`; optionally override it with
+`TRIP_PLANNER_GEMINI_MODEL` or `GEMINI_MODEL`.
 
 Booking-aware helper endpoint:
 
@@ -77,13 +104,17 @@ dry-run-first smoke helper:
 ```bash
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --email you@example.com
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --booking
 ```
 
 The first command writes the exact lead/booking payloads without touching Wix.
-The live commands call `/_functions/tripPlannerLead` and, with `--booking`,
-`/_functions/tripPlannerBooking`, then save the response JSON under
-`output/qa/ultimate-trip-planner-live-smoke/`.
+The `--ai-only` command tests `/_functions/tripPlannerAi` without creating a
+lead or sending the instant plan email. The other live commands call
+`/_functions/tripPlannerLead` and, with `--ai` or `--booking`, also test
+`/_functions/tripPlannerAi` or `/_functions/tripPlannerBooking`, then save the
+response JSON under `output/qa/ultimate-trip-planner-live-smoke/`.
 
 ## Email Sequence Simulator
 
@@ -386,4 +417,5 @@ and the scheduled reminder on the same day.
 6. Merge `jobs.config`.
 7. Publish Wix.
 8. Test `POST /_functions/tripPlannerLead` with a real email.
-9. Test `POST /_functions/tripPlannerBooking` with the same email and confirm future Ultimate reminders are suppressed.
+9. Test `POST /_functions/tripPlannerAi` with `--ai-only` first, then optionally with `--ai`, and confirm `enhancement.localRead` returns.
+10. Test `POST /_functions/tripPlannerBooking` with the same email and confirm future Ultimate reminders are suppressed.

@@ -1,11 +1,18 @@
 import wixData from 'wix-data';
 import { contacts, triggeredEmails } from 'wix-crm-backend';
+import { getSecret } from 'wix-secrets-backend';
+import { fetch } from 'wix-fetch';
 
 const COLLECTION = 'TripPlannerLeads';
 const CONTACT_LABEL = 'Ultimate Berlin Trip Planner Lead';
 const TIMEZONE = 'Europe/Berlin';
 const BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
 const DUE_QUERY_PAGE_SIZE = 100;
+const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta/models';
+const GEMINI_DEFAULT_MODEL = 'gemini-2.5-flash';
+const GEMINI_API_KEY_SECRET_NAMES = ['GEMINI_API_KEY', 'GOOGLE_AI_API_KEY', 'GOOGLE_GEMINI_API_KEY'];
+const GEMINI_MODEL_SECRET_NAMES = ['TRIP_PLANNER_GEMINI_MODEL', 'GEMINI_MODEL'];
+const PRIVATE_TEXT_PATTERN = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 
 const STAGES = [
   {
@@ -141,6 +148,275 @@ function validateBookingPayload(payload) {
     bookingStatus: cleanText(payload && payload.bookingStatus, 'booked'),
     source: cleanText(payload && payload.source, 'booking_event')
   };
+}
+
+function cleanList(values, maxItems = 12, maxLength = 140) {
+  if (!Array.isArray(values)) return [];
+  return values
+    .map(value => cleanText(value, '', maxLength))
+    .filter(Boolean)
+    .slice(0, maxItems);
+}
+
+function cleanRecord(source, fields, maxLength = 220) {
+  const item = {};
+  fields.forEach(field => {
+    const value = cleanText(source && source[field], '', maxLength);
+    if (value) item[field] = value;
+  });
+  return item;
+}
+
+function cleanPublicPlannerText(value, fallback = '', maxLength = 800) {
+  const text = cleanText(value, fallback, maxLength);
+  if (PRIVATE_TEXT_PATTERN.test(text)) return '';
+  return text;
+}
+
+function cleanPublicPlannerList(values, maxItems = 12, maxLength = 140) {
+  if (!Array.isArray(values)) return [];
+  return values
+    .map(value => cleanPublicPlannerText(value, '', maxLength))
+    .filter(Boolean)
+    .slice(0, maxItems);
+}
+
+function cleanPublicPlannerRecord(source, fields, maxLength = 220) {
+  const item = {};
+  fields.forEach(field => {
+    const value = cleanPublicPlannerText(source && source[field], '', maxLength);
+    if (value) item[field] = value;
+  });
+  return item;
+}
+
+function validateAiEnhancementPayload(payload) {
+  const plan = payload && payload.plan;
+  const days = Array.isArray(plan && plan.days) ? plan.days : [];
+  if (!plan || !days.length) throw invalidPayload('plan.days are required');
+
+  return {
+    inputs: cleanPublicPlannerRecord(payload && payload.inputs, [
+      'arrivalDate',
+      'tripLength',
+      'arrivalTime',
+      'arrivalPoint',
+      'stayArea',
+      'groupType',
+      'firstTime',
+      'interests',
+      'budgetStyle',
+      'mustHandle',
+      'pace',
+      'tourIntent'
+    ]),
+    weather: cleanPublicPlannerRecord(payload && payload.weather, ['title', 'mode', 'copy', 'advice']),
+    tourSlot: cleanPublicPlannerRecord(payload && payload.tourSlot, ['dayLabel', 'dateLabel', 'timeLabel', 'booked']),
+    plan: {
+      title: cleanPublicPlannerText(plan.title, 'Ultimate Berlin Trip Plan', 180),
+      summary: cleanPublicPlannerText(plan.summary, '', 650),
+      ticket: cleanPublicPlannerText(plan.ticket, '', 160),
+      tourFit: cleanPublicPlannerText(plan.tourFit, '', 160),
+      arrivalStatus: cleanPublicPlannerText(plan.arrivalStatus, '', 160),
+      days: days.slice(0, 7).map(day => ({
+        dayNumber: cleanNumber(day && day.dayNumber, 1, 1, 7),
+        date: cleanPublicPlannerText(day && day.date, '', 80),
+        title: cleanPublicPlannerText(day && day.title, '', 180),
+        theme: cleanPublicPlannerText(day && day.theme, '', 160),
+        places: cleanPublicPlannerList(day && day.places, 6, 120),
+        blocks: Array.isArray(day && day.blocks)
+          ? day.blocks.slice(0, 6).map(block => ({
+            time: cleanPublicPlannerText(block && block.time, '', 80),
+            title: cleanPublicPlannerText(block && block.title, '', 180),
+            copy: cleanPublicPlannerText(block && block.copy, '', 280)
+          }))
+          : [],
+        risks: cleanPublicPlannerList(day && day.risks, 6, 80)
+      }))
+    }
+  };
+}
+
+async function readFirstSecret(names) {
+  for (const name of names) {
+    try {
+      const value = cleanText(await getSecret(name), '', 2000);
+      if (value) return value;
+    } catch (error) {
+      // Missing secrets throw in Wix; try the next accepted name.
+    }
+  }
+  return '';
+}
+
+function geminiResponseSchema() {
+  return {
+    type: 'object',
+    properties: {
+      headline: { type: 'string' },
+      localRead: { type: 'string' },
+      watchOut: { type: 'string' },
+      tourNote: { type: 'string' },
+      dayNotes: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            dayNumber: { type: 'number' },
+            headline: { type: 'string' },
+            note: { type: 'string' },
+            nextMove: { type: 'string' }
+          },
+          required: ['dayNumber', 'headline', 'note', 'nextMove']
+        }
+      }
+    },
+    required: ['headline', 'localRead', 'watchOut', 'tourNote', 'dayNotes']
+  };
+}
+
+function geminiPrompt(input) {
+  return [
+    'You are polishing a deterministic Berlin trip plan for BerlinWalk.',
+    'The itinerary logic is already decided. Do not move days, change times, invent venues, add new map stops, or create new CTAs.',
+    'Use only the provided day titles, themes, timing blocks, places, weather notes, and risk tags.',
+    'Do not add new neighborhoods, meals, safety warnings, ticket claims, booking advice, or attraction names that are not in the input.',
+    'If you need a next move but the skeleton is vague, say to keep the next step near the same area.',
+    'Write in warm, practical English, like a local walking-tour guide. Avoid technical planner terms, hype, and em dashes.',
+    'Use the selected inputs to explain why the plan works. Keep it useful for a traveler reading on a phone.',
+    'If BerlinWalk is relevant, mention it once naturally as context, not as a hard sales pitch.',
+    '',
+    'Return valid JSON only matching the requested schema. Do not use markdown.',
+    '',
+    'Planner input:',
+    JSON.stringify(input)
+  ].join('\n');
+}
+
+function extractGeminiText(parsed) {
+  const candidates = parsed && parsed.candidates;
+  const parts = candidates && candidates[0] && candidates[0].content && candidates[0].content.parts;
+  if (!Array.isArray(parts)) return '';
+  return parts.map(part => cleanText(part && part.text, '', 5000)).filter(Boolean).join('\n');
+}
+
+function parseJsonText(text) {
+  const raw = cleanText(text, '', 12000);
+  if (!raw) return {};
+  try {
+    return JSON.parse(raw);
+  } catch (error) {
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (!match) throw error;
+    return JSON.parse(match[0]);
+  }
+}
+
+function sanitizeAiEnhancement(data, input, model, usage) {
+  const validDays = {};
+  input.plan.days.forEach(day => {
+    validDays[day.dayNumber] = true;
+  });
+
+  const dayNotes = Array.isArray(data && data.dayNotes)
+    ? data.dayNotes.map(item => ({
+      dayNumber: cleanNumber(item && item.dayNumber, 0, 0, 7),
+      headline: cleanText(item && item.headline, '', 80),
+      note: cleanText(item && item.note, '', 240),
+      nextMove: cleanText(item && item.nextMove, '', 160)
+    })).filter(item => validDays[item.dayNumber] && item.headline && item.note).slice(0, input.plan.days.length)
+    : [];
+
+  return {
+    provider: 'gemini',
+    model,
+    headline: cleanText(data && data.headline, 'Local guide read', 90),
+    localRead: cleanText(data && data.localRead, '', 420),
+    watchOut: cleanText(data && data.watchOut, '', 280),
+    tourNote: cleanText(data && data.tourNote, '', 220),
+    dayNotes,
+    usage: {
+      promptTokens: cleanNumber(usage && usage.promptTokenCount, 0, 0, 100000),
+      outputTokens: cleanNumber(usage && usage.candidatesTokenCount, 0, 0, 100000),
+      totalTokens: cleanNumber(usage && usage.totalTokenCount, 0, 0, 100000)
+    }
+  };
+}
+
+export async function enhanceTripPlannerPlan(payload) {
+  const input = validateAiEnhancementPayload(payload);
+  const apiKey = await readFirstSecret(GEMINI_API_KEY_SECRET_NAMES);
+  if (!apiKey) {
+    return { ok: false, reason: 'missing_api_key' };
+  }
+
+  const requestedModel = await readFirstSecret(GEMINI_MODEL_SECRET_NAMES);
+  const model = requestedModel || GEMINI_DEFAULT_MODEL;
+  const url = `${GEMINI_API_ROOT}/${encodeURIComponent(model)}:generateContent`;
+
+  try {
+    const geminiResponse = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-goog-api-key': apiKey
+      },
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [{
+            text: 'You improve traveler-facing copy for BerlinWalk while preserving deterministic itinerary logic exactly.'
+          }]
+        },
+        contents: [{
+          role: 'user',
+          parts: [{ text: geminiPrompt(input) }]
+        }],
+        generationConfig: {
+          temperature: 0.35,
+          maxOutputTokens: 1200,
+          thinkingConfig: {
+            thinkingBudget: 0
+          },
+          responseMimeType: 'application/json',
+          responseJsonSchema: geminiResponseSchema()
+        }
+      })
+    });
+
+    const text = await geminiResponse.text();
+    let parsed = {};
+    try {
+      parsed = text ? JSON.parse(text) : {};
+    } catch (error) {
+      parsed = {};
+    }
+
+    if (!geminiResponse.ok) {
+      return {
+        ok: false,
+        reason: 'api_error',
+        status: geminiResponse.status,
+        message: cleanText(parsed && (parsed.error && parsed.error.message || parsed.message) || text, '', 500)
+      };
+    }
+
+    const modelText = extractGeminiText(parsed);
+    const enhancement = sanitizeAiEnhancement(parseJsonText(modelText), input, model, parsed.usageMetadata || {});
+    if (!enhancement.localRead && !enhancement.dayNotes.length) {
+      return { ok: false, reason: 'empty_ai_result', model };
+    }
+
+    return {
+      ok: true,
+      enhancement
+    };
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'network_or_parse_error',
+      message: cleanText(error && error.message ? error.message : error, '', 500)
+    };
+  }
 }
 
 function dateFromKey(dateKey) {

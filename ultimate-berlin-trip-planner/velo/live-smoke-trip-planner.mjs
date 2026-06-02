@@ -5,12 +5,21 @@ import path from 'node:path';
 
 const DEFAULT_BASE_URL = 'https://www.berlinwalk.com';
 const OUTPUT_DIR = 'output/qa/ultimate-trip-planner-live-smoke';
+const GEMINI_FLASH_PRICING = {
+  model: 'gemini-2.5-flash',
+  inputUsdPerMillionTokens: 0.30,
+  outputUsdPerMillionTokens: 2.50,
+  checkedAt: '2026-06-02',
+  source: 'https://ai.google.dev/gemini-api/docs/pricing'
+};
 
 function usage() {
   console.log(`Usage:
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --email you@example.com
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --booking
+  node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai
+  node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
 
 Defaults to dry-run. It prints and records the payloads but does not call Wix
 unless --live is present.
@@ -21,6 +30,8 @@ Options:
   --tripLength N     1-7. Defaults to 3.
   --base URL         Defaults to https://www.berlinwalk.com.
   --booking          Also POST /_functions/tripPlannerBooking after lead.
+  --ai               Also POST /_functions/tripPlannerAi after lead.
+  --ai-only          Only POST /_functions/tripPlannerAi; no lead/email call.
   --live             Actually call the live endpoints.
   --out FILE         Optional result JSON path.
 `);
@@ -34,6 +45,8 @@ function parseArgs(argv) {
     tripLength: 3,
     live: false,
     booking: false,
+    ai: false,
+    aiOnly: false,
     outPath: ''
   };
 
@@ -45,6 +58,11 @@ function parseArgs(argv) {
       options.live = true;
     } else if (arg === '--booking') {
       options.booking = true;
+    } else if (arg === '--ai') {
+      options.ai = true;
+    } else if (arg === '--ai-only') {
+      options.ai = true;
+      options.aiOnly = true;
     } else if (arg === '--email') {
       options.email = argv[index + 1] || '';
       index += 1;
@@ -88,6 +106,34 @@ function validEmail(email) {
 
 function safeJson(value) {
   return JSON.stringify(value, null, 2);
+}
+
+function cleanNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) && number >= 0 ? number : 0;
+}
+
+function estimateGeminiCost(response) {
+  const enhancement = response?.body?.enhancement;
+  const usage = enhancement?.usage || {};
+  const promptTokens = cleanNumber(usage.promptTokens);
+  const outputTokens = cleanNumber(usage.outputTokens);
+  const totalTokens = cleanNumber(usage.totalTokens || promptTokens + outputTokens);
+  const estimatedUsd = (promptTokens / 1_000_000 * GEMINI_FLASH_PRICING.inputUsdPerMillionTokens) +
+    (outputTokens / 1_000_000 * GEMINI_FLASH_PRICING.outputUsdPerMillionTokens);
+
+  if (!promptTokens && !outputTokens && !totalTokens) return null;
+
+  return {
+    provider: enhancement?.provider || 'gemini',
+    model: enhancement?.model || GEMINI_FLASH_PRICING.model,
+    promptTokens,
+    outputTokens,
+    totalTokens,
+    estimatedUsd: Number(estimatedUsd.toFixed(6)),
+    estimatedCents: Number((estimatedUsd * 100).toFixed(4)),
+    pricing: GEMINI_FLASH_PRICING
+  };
 }
 
 function buildLeadPayload(options) {
@@ -159,6 +205,145 @@ function buildBookingPayload(leadPayload) {
   };
 }
 
+function buildAiPayload(leadPayload) {
+  const arrivalDate = leadPayload.arrivalDate;
+  const day2Date = leadPayload.recommendedTourDate || arrivalDate;
+  const day3Date = dateKey(addDays(new Date(`${arrivalDate}T12:00:00Z`), 2));
+
+  return {
+    inputs: {
+      arrivalDate,
+      tripLength: String(leadPayload.tripLength),
+      arrivalTime: leadPayload.arrivalTime,
+      arrivalPoint: leadPayload.arrivalPoint,
+      stayArea: leadPayload.stayArea,
+      groupType: leadPayload.groupType,
+      firstTime: leadPayload.firstTime,
+      interests: leadPayload.interests,
+      budgetStyle: leadPayload.budgetStyle,
+      mustHandle: leadPayload.mustHandle,
+      pace: leadPayload.pace,
+      tourIntent: leadPayload.tourIntent
+    },
+    weather: {
+      title: leadPayload.weatherTitle,
+      mode: 'Smoke test fallback',
+      copy: 'Use weather notes as a light planning check, not a full forecast.',
+      advice: leadPayload.weatherStrategy
+    },
+    tourSlot: {
+      dayLabel: 'Day 2',
+      dateLabel: day2Date,
+      timeLabel: leadPayload.recommendedTourTime,
+      booked: 'no'
+    },
+    plan: {
+      title: leadPayload.planTitle,
+      summary: 'Smoke test plan with arrival, BerlinWalk tour framework, Wall / Cold War layer, and one museum anchor.',
+      ticket: leadPayload.ticket,
+      tourFit: leadPayload.recommendedTourDay,
+      arrivalStatus: 'Weekday rules apply',
+      days: [
+        {
+          dayNumber: 1,
+          date: arrivalDate,
+          title: 'Arrival and first Berlin orientation',
+          theme: 'Arrival day',
+          places: ['World Clock', 'Museum Island', 'Hackescher Markt'],
+          blocks: [
+            {
+              time: '09:00-10:45',
+              title: 'Get central without over-solving Berlin',
+              copy: 'Use ABC from BER, drop bags if needed, then keep the first walk central.'
+            }
+          ],
+          risks: ['Arrival logistics']
+        },
+        {
+          dayNumber: 2,
+          date: day2Date,
+          title: 'BerlinWalk tour, then one Wall / Cold War layer',
+          theme: 'Tour + Wall / Cold War',
+          places: ['World Clock', 'Berlin Wall Memorial', 'Topography of Terror'],
+          blocks: [
+            {
+              time: '11:30-13:30',
+              title: 'BerlinWalk at 11:30 from the World Clock',
+              copy: 'Use the 2-hour walk as the main city framework.'
+            },
+            {
+              time: '14:00-16:30',
+              title: 'Add one Wall / Cold War stop',
+              copy: 'After lunch, choose one serious Wall or Cold War stop.'
+            }
+          ],
+          risks: ['Do not overfill the day']
+        },
+        {
+          dayNumber: 3,
+          date: day3Date,
+          title: 'Museum Island without museum overload',
+          theme: 'Museums and royal Berlin',
+          places: ['Museum Island', 'Brandenburg Gate', 'Reichstag'],
+          blocks: [
+            {
+              time: '10:30-12:30',
+              title: 'Pick one museum anchor',
+              copy: 'One checked-open museum beats four rushed ones.'
+            }
+          ],
+          risks: ['Check timed entry']
+        }
+      ].slice(0, leadPayload.tripLength)
+    }
+  };
+}
+
+function collectStrings(value, pathName = '$', rows = []) {
+  if (typeof value === 'string') {
+    rows.push({ path: pathName, value });
+    return rows;
+  }
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => collectStrings(item, `${pathName}[${index}]`, rows));
+    return rows;
+  }
+  if (value && typeof value === 'object') {
+    for (const [key, item] of Object.entries(value)) {
+      collectStrings(item, `${pathName}.${key}`, rows);
+    }
+  }
+  return rows;
+}
+
+function assertAiPayloadPrivacy(aiPayload, leadPayload) {
+  const strings = collectStrings(aiPayload);
+  const email = String(leadPayload.email || '').trim().toLowerCase();
+  const leakedEmail = email
+    ? strings.find((row) => row.value.toLowerCase().includes(email))
+    : null;
+  const emailLike = strings.find((row) => /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(row.value));
+  const emailKey = JSON.stringify(aiPayload).match(/"[^"]*email[^"]*"\s*:/i);
+
+  if (leakedEmail) {
+    throw new Error(`AI payload includes lead email at ${leakedEmail.path}`);
+  }
+  if (emailLike) {
+    throw new Error(`AI payload includes email-like text at ${emailLike.path}`);
+  }
+  if (emailKey) {
+    throw new Error('AI payload includes an email-shaped key');
+  }
+
+  return {
+    checked: true,
+    stringCount: strings.length,
+    emailKey: false,
+    emailLikeText: false,
+    leadEmailIncluded: false
+  };
+}
+
 async function postJson(url, payload) {
   const response = await fetch(url, {
     method: 'POST',
@@ -193,7 +378,9 @@ function assertResult(name, result, extraCheck) {
 function outputPath(options) {
   if (options.outPath) return path.resolve(process.cwd(), options.outPath);
   const stamp = new Date().toISOString().replace(/[:.]/g, '-');
-  return path.resolve(process.cwd(), OUTPUT_DIR, `${options.live ? 'live' : 'dry-run'}-${stamp}.json`);
+  const prefix = options.live ? 'live' : 'dry-run';
+  const suffix = options.aiOnly ? '-ai-only' : '';
+  return path.resolve(process.cwd(), OUTPUT_DIR, `${prefix}${suffix}-${stamp}.json`);
 }
 
 function writeResult(options, result) {
@@ -219,7 +406,13 @@ async function main() {
     return;
   }
 
-  if (options.live && !validEmail(options.email)) {
+  if (options.booking && options.aiOnly) {
+    console.error('--booking cannot be combined with --ai-only because --ai-only intentionally skips lead/booking writes.');
+    process.exitCode = 1;
+    return;
+  }
+
+  if (options.live && !options.aiOnly && !validEmail(options.email)) {
     console.error('--live requires a real --email address so the instant email can be checked.');
     process.exitCode = 1;
     return;
@@ -233,29 +426,38 @@ async function main() {
 
   const leadPayload = buildLeadPayload(options);
   const bookingPayload = buildBookingPayload(leadPayload);
+  const aiPayload = buildAiPayload(leadPayload);
+  const aiPrivacy = options.ai ? assertAiPayloadPrivacy(aiPayload, leadPayload) : null;
   const baseUrl = String(options.baseUrl || DEFAULT_BASE_URL).replace(/\/$/, '');
   const result = {
     mode: options.live ? 'live' : 'dry-run',
     generatedAt: new Date().toISOString(),
     baseUrl,
-    leadPayload,
+    aiOnly: options.aiOnly,
+    leadPayload: options.aiOnly ? null : leadPayload,
     bookingPayload: options.booking ? bookingPayload : null,
+    aiPayload: options.ai ? aiPayload : null,
+    aiPrivacy,
+    aiCost: null,
     responses: {}
   };
 
   if (!options.live) {
     const outPath = writeResult(options, result);
     console.log('DRY RUN: no network calls made.');
-    console.log(`Lead endpoint: ${baseUrl}/_functions/tripPlannerLead`);
+    if (!options.aiOnly) console.log(`Lead endpoint: ${baseUrl}/_functions/tripPlannerLead`);
     if (options.booking) console.log(`Booking endpoint: ${baseUrl}/_functions/tripPlannerBooking`);
+    if (options.ai) console.log(`AI endpoint: ${baseUrl}/_functions/tripPlannerAi`);
     console.log(`Result written to ${path.relative(process.cwd(), outPath)}`);
     return;
   }
 
-  result.responses.lead = await postJson(`${baseUrl}/_functions/tripPlannerLead`, leadPayload);
-  assertResult('tripPlannerLead', result.responses.lead, (body) => {
-    if (!body.leadId) throw new Error('tripPlannerLead response missing leadId');
-  });
+  if (!options.aiOnly) {
+    result.responses.lead = await postJson(`${baseUrl}/_functions/tripPlannerLead`, leadPayload);
+    assertResult('tripPlannerLead', result.responses.lead, (body) => {
+      if (!body.leadId) throw new Error('tripPlannerLead response missing leadId');
+    });
+  }
 
   if (options.booking) {
     result.responses.booking = await postJson(`${baseUrl}/_functions/tripPlannerBooking`, bookingPayload);
@@ -264,8 +466,19 @@ async function main() {
     });
   }
 
+  if (options.ai) {
+    result.responses.ai = await postJson(`${baseUrl}/_functions/tripPlannerAi`, aiPayload);
+    assertResult('tripPlannerAi', result.responses.ai, (body) => {
+      if (!body.enhancement || !body.enhancement.localRead) throw new Error('tripPlannerAi response missing enhancement.localRead');
+    });
+    result.aiCost = estimateGeminiCost(result.responses.ai);
+  }
+
   const outPath = writeResult(options, result);
-  console.log(`LIVE OK: tripPlannerLead${options.booking ? ' + tripPlannerBooking' : ''}`);
+  console.log(`LIVE OK: ${options.aiOnly ? 'tripPlannerAi only' : `tripPlannerLead${options.booking ? ' + tripPlannerBooking' : ''}${options.ai ? ' + tripPlannerAi' : ''}`}`);
+  if (result.aiCost) {
+    console.log(`Gemini usage: ${result.aiCost.promptTokens} input + ${result.aiCost.outputTokens} output tokens; estimated $${result.aiCost.estimatedUsd}`);
+  }
   console.log(`Result written to ${path.relative(process.cwd(), outPath)}`);
 }
 

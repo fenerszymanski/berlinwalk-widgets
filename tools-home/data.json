@@ -1,13 +1,6 @@
 {
   "featuredTools": [
     {
-      "slug": "ultimate-berlin-trip-planner",
-      "title": "Ultimate Berlin Trip Planner",
-      "lead": "Build a realistic 1-7 day Berlin plan with arrival-date logic, weather, opening-day notes, and the best time to join BerlinWalk.",
-      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/ultimate-berlin-trip-planner-160.png",
-      "status": "draft"
-    },
-    {
       "slug": "berlin-first-day-planner",
       "title": "Berlin First-Day Planner",
       "lead": "Arriving today? Build a realistic first-day route with weather and opening-day logic.",
@@ -17,7 +10,7 @@
       "slug": "hackescher-after-tour-planner",
       "title": "Hackescher Markt After-Tour Planner",
       "lead": "Finished the walk? Choose the best next move for food, courtyards, museums, or the Spree.",
-      "image": "https://static.wixstatic.com/media/5a08a3_8505101d30c84fd78e7ed5ecdd4f371f~mv2.png"
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/hackescher-after-tour-planner-160.png"
     },
     {
       "slug": "berlin-landmarks-map",

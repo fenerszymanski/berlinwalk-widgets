@@ -155,13 +155,33 @@ function inspectSource() {
   const httpFunctions = fs.readFileSync(httpFunctionsPath, 'utf8');
   const jobsConfig = fs.readFileSync(jobsConfigPath, 'utf8');
   const todos = [...new Set([...funnel.matchAll(/TODO_TRIP_PLANNER_[A-Z0-9_]+/g)].map((match) => match[0]))].sort();
+  const aiPayloadValidatorStart = funnel.indexOf('function validateAiEnhancementPayload');
+  const aiPayloadValidatorEnd = funnel.indexOf('async function readFirstSecret', aiPayloadValidatorStart);
+  const aiPayloadValidator = aiPayloadValidatorStart >= 0 && aiPayloadValidatorEnd > aiPayloadValidatorStart
+    ? funnel.slice(aiPayloadValidatorStart, aiPayloadValidatorEnd)
+    : '';
 
   return {
     todos,
     hasLeadEndpoint: /export\s+async\s+function\s+post_tripPlannerLead/.test(httpFunctions) &&
       /export\s+function\s+options_tripPlannerLead/.test(httpFunctions),
+    hasAiEndpoint: /export\s+async\s+function\s+post_tripPlannerAi/.test(httpFunctions) &&
+      /export\s+function\s+options_tripPlannerAi/.test(httpFunctions) &&
+      /enhanceTripPlannerPlan/.test(httpFunctions),
     hasBookingEndpoint: /export\s+async\s+function\s+post_tripPlannerBooking/.test(httpFunctions) &&
       /export\s+function\s+options_tripPlannerBooking/.test(httpFunctions),
+    hasGeminiBackend: /export\s+async\s+function\s+enhanceTripPlannerPlan/.test(funnel) &&
+      /GEMINI_API_KEY/.test(funnel) &&
+      /gemini-2\.5-flash/.test(funnel) &&
+      /responseJsonSchema/.test(funnel) &&
+      /maxOutputTokens:\s*1200/.test(funnel) &&
+      /thinkingBudget:\s*0/.test(funnel) &&
+      /missing_api_key/.test(funnel),
+    hasAiPrivacyScrub: /PRIVATE_TEXT_PATTERN/.test(funnel) &&
+      /cleanPublicPlannerText/.test(funnel) &&
+      /cleanPublicPlannerRecord/.test(aiPayloadValidator) &&
+      /cleanPublicPlannerList/.test(aiPayloadValidator),
+    aiPayloadAvoidsEmail: Boolean(aiPayloadValidator) && !/\bemail\b/i.test(aiPayloadValidator),
     hasScheduler: /processTripPlannerDueEmails/.test(jobsConfig) &&
       /"cronExpression"\s*:\s*"0 \* \* \* \*"/.test(jobsConfig),
     bookedSuppression: /shouldSuppressUltimateReminder/.test(funnel) &&
@@ -259,6 +279,10 @@ async function main() {
     check('All 5 IDs are applied in tripPlannerFunnel.js', idState.applied === idState.total, `${idState.applied}/${idState.total} applied`),
     check('No TODO_TRIP_PLANNER placeholders remain', sourceState.todos.length === 0, sourceState.todos.length ? sourceState.todos.join(', ') : 'no placeholders found'),
     check('Velo HTTP endpoints are present', sourceState.hasLeadEndpoint && sourceState.hasBookingEndpoint, 'tripPlannerLead and tripPlannerBooking handlers'),
+    check('Velo AI polish endpoint is present', sourceState.hasAiEndpoint, 'tripPlannerAi options/post handlers call enhanceTripPlannerPlan'),
+    check('Gemini backend is fail-soft and bounded', sourceState.hasGeminiBackend, 'Gemini 2.5 Flash, backend-only secret names, responseJsonSchema, maxOutputTokens 1200, thinkingBudget 0, missing-key fallback'),
+    check('AI enhancement payload is privacy-scrubbed', sourceState.hasAiPrivacyScrub, 'Gemini-bound text fields drop private-looking text before prompt assembly'),
+    check('AI enhancement payload avoids email', sourceState.aiPayloadAvoidsEmail, 'validateAiEnhancementPayload should not accept or forward email/PII'),
     check('Hourly scheduler is present', sourceState.hasScheduler, 'processTripPlannerDueEmails hourly job'),
     check('Booked leads suppress Ultimate reminders', sourceState.bookedSuppression, 'existing Wix booking sequence owns booked-guest prep')
   ];

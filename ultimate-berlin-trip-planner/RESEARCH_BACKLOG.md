@@ -386,8 +386,10 @@ That means the widget should not only generate text. It should produce a visible
    - Keep as deterministic data, not live AI.
 
 2. **Optional AI Refinement**
-   - Only after deterministic V4 is solid: "Make this slower", "Add more food", "I already saw Museum Island."
-   - Output should remain bounded by curated Berlin data.
+   - V1 AI layer is now a bounded Gemini "local second look" after unlock only.
+   - It does not change dates, tour slots, times, stops, map links, PDF logic, or lead storage.
+   - If the endpoint/key/API fails, the deterministic full plan remains visible and no scary user-facing error appears.
+   - Future interactive prompts such as "Make this slower", "Add more food", or "I already saw Museum Island" should still stay bounded by curated Berlin data.
 
 3. **Live Opening Hours**
    - Avoid promising live opening hours unless using a paid/reliable API or a curated maintained dataset.

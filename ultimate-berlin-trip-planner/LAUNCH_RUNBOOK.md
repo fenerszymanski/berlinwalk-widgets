@@ -39,6 +39,12 @@ Open the generated status report when you need a plain Markdown launch summary:
 ultimate-berlin-trip-planner/LAUNCH_STATUS.md
 ```
 
+For the short Turkish Gemini/Velo live publish checklist, open:
+
+```text
+ultimate-berlin-trip-planner/WIX_GEMINI_PUBLISH_TR.md
+```
+
 Expected before Wix template work: one blocker for the five
 `TODO_TRIP_PLANNER_*` Triggered Email message IDs. Do not publish the tool page,
 homepage shortcut, or widgets gallery entry until that blocker is gone and live
@@ -221,12 +227,22 @@ In Wix Developer Tools:
    Field list also lives in `ultimate-berlin-trip-planner/velo/README.md`.
 3. Add `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` as
    `Backend/tripPlannerFunnel.js`.
-4. Merge `ultimate-berlin-trip-planner/velo/http-functions.js` into live
+4. Add `GEMINI_API_KEY` in Wix Secrets Manager if the AI polish layer should run
+   live. The endpoint is fail-soft, but the live AI smoke will not pass without
+   this secret.
+   - Default model: `gemini-2.5-flash`.
+   - Cost guardrail: `maxOutputTokens: 1200`, `thinkingBudget: 0`, structured
+     JSON response, and deterministic fallback if Gemini fails.
+   - Expected cost is well under one cent per unlock in normal use; recheck the
+     official Gemini pricing page before changing the model or sending high
+     traffic.
+5. Merge `ultimate-berlin-trip-planner/velo/http-functions.js` into live
    `Backend/http-functions.js`.
-5. Merge `ultimate-berlin-trip-planner/velo/jobs.config` into live
+6. Merge `ultimate-berlin-trip-planner/velo/jobs.config` into live
    `jobs.config`.
-6. Publish the Wix site so `/_functions/tripPlannerLead`,
-   `/_functions/tripPlannerBooking`, and the hourly scheduled job are live.
+7. Publish the Wix site so `/_functions/tripPlannerLead`,
+   `/_functions/tripPlannerAi`, `/_functions/tripPlannerBooking`, and the
+   hourly scheduled job are live.
 
 Booked guests should not receive a second Ultimate prep sequence. The
 `tripPlannerBooking` endpoint marks matching planner leads as booked so future
@@ -239,7 +255,9 @@ Use a real test inbox, not a fake domain:
 
 ```bash
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --email test@example.com
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email test@example.com
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email test@example.com --ai
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email test@example.com --booking
 node ultimate-berlin-trip-planner/launch-remote-preflight.mjs
 node ultimate-berlin-trip-planner/launch-audit.mjs
@@ -249,9 +267,12 @@ Confirm:
 
 - `tripPlannerLead` returns `ok: true` and a `leadId`.
 - The instant email arrives with the plan variables filled.
+- `tripPlannerAi` returns `ok: true` and an `enhancement.localRead`; use
+  `--ai-only` first if you only want to test Gemini without creating a lead or
+  sending the instant email.
 - `tripPlannerBooking` returns `ok: true`.
 - Future Ultimate reminders are suppressed for that booked lead.
-- The audit warning for live smoke evidence disappears.
+- The audit warnings for lead/booking and Gemini AI smoke evidence disappear.
 
 ## 5. Create Tool Page And Publish Visibility
 
