@@ -4,6 +4,44 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Booking calendar scroll preserve)
+
+**Did:** Removed the remaining date-carousel movement when clicking a visible future date.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — date/time/guest clicks now preserve the carousel `scrollLeft`; only month changes align to the selected month. Removed CSS smooth scrolling from the date strip so programmatic restoration is instant.
+
+**Opened:** Native Wix Booking Form preload still needs live validation with selected `eventId` + guest count.
+**Closed:** Browser QA passed: August select then Aug 4/Aug 5 clicks kept `scrollLeft` fixed at 2622 at 50ms/300ms/900ms; no visible date-strip motion.
+
+**Next session should:** Move to Wix test-page install unless Yusuf spots another local calendar issue.
+
+## 2026-06-02 — Codex (Booking calendar scroll fix)
+
+**Did:** Fixed the date carousel jumping back to the beginning after selecting a day in later months.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — selected-date alignment now sets carousel scroll directly and repeats once after layout without smooth animation, removing the visible reset/jump.
+
+**Opened:** Native Wix Booking Form preload still needs live validation with selected `eventId` + guest count.
+**Closed:** Local QA passed: selecting August, then Aug 5, stays in August and shows Aug 4-7 rather than jumping back to June.
+
+**Next session should:** Continue calendar polish only if Yusuf spots more UI issues; otherwise move to Wix test-page install.
+
+## 2026-06-02 — Codex (Booking calendar month jump)
+
+**Did:** Polished `<bw-booking-calendar>` for long-range booking before the Wix test-page install.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — added compact month select, removed slot capacity labels, hardened selected-date reset/scroll alignment.
+- `booking-calendar/index.html` — removed the visible live-status/debug line and now fetches 365 days of live availability.
+- `booking-calendar/velo/*`, `booking-calendar/README.md`, and root scripts — Velo/local probe/dashboard availability windows now use 365 days.
+
+**Opened:** Native Wix Booking Form preload still needs live validation with selected `eventId` + guest count.
+**Closed:** Local QA passed: live API returned 145 slots / 81 dates through 2026-09-30; no “spots” or debug status visible; September jump works and shows 11:30/15:30.
+
+**Next session should:** Move the current Velo scaffold into a Wix test custom Booking Calendar page and verify form routing.
+
 ## 2026-06-02 — Codex (Tools hub oil-painting banners)
 
 **Did:** Regenerated all four `/berlin-tools` category hero banners as refined oil-painting images using Yusuf's ChatGPT browser session.
@@ -17,6 +55,52 @@ Format for each entry — see `AGENTS.md` §9.
 **Closed:** Local image generation/download/processing completed; old photo-style banner files remain in place as fallback history.
 
 **Next session should:** After push/deploy, live-QA the four category banners on `https://www.berlinwalk.com/berlin-tools`.
+
+## 2026-06-02 — Claude Code (East Side Gallery post + mural-guide widget)
+
+**Did:** Built the `east-side-gallery-murals` card-guide widget and the `east-side-gallery-berlin-guide` blog draft (A-tier; no existing ESG post).
+
+**Changed:**
+- `east-side-gallery-murals/index.html` — new card-list guide of 12 famous ESG murals (title + German + artist + meaning + "Look for"), theme filter (politics/fall/hope/love). Local QA: filters correct (politics 3, fall 5, hope 5, love 3, all 12), desktop+mobile overflow 0, console clean. Mural data verified via Wikipedia + Stiftung Berliner Mauer.
+- `tools-hub/data.json` — entry added (Discovery, `embedHeight: 1980`); 34 tools.
+- `blog-drafts/east-side-gallery-berlin-guide.md` — full ~1500-word draft (focus keyword "East Side Gallery"; ESG facts verified: 1,316 m, 1990, 118 artists/21 countries, 2009 repaints, 1991 monument).
+- `blog-workplan.md` — ESG marked draft+widget.
+- Workspace: `insert-east-side-gallery-murals.js` (ready CMS insert), PROJECT_MEMORY.md row 33 + note.
+
+After Yusuf's first push, live steps ran: widget served by GitHub Pages (200); CMS row inserted (`45e311b3-7597-4273-99de-b5268c5113fd`), `/tools/east-side-gallery-murals` 200; Wix draft created UNPUBLISHED (`8d4ba163-4852-4ab0-b2e1-e1f1a832633f`, 75 nodes, 3 embeds, 2 categories) and patched with 4 licensed images (cover Fraternal Kiss; inline Worlds People / Test the Rest / Oberbaumbrücke), focus keyword "East Side Gallery", OG/Twitter image:alt, 3 blog tags. QS/FAQ added to `quick-summary/data.json`, `faq/data.json`, `faq/inject.js` under key `east-side-gallery`.
+
+**Opened:** (1) Push `berlinwalk-widgets` AGAIN — QS/FAQ + inject.js edits landed after the first push, so the post's quick-summary/FAQ embeds are empty until the second deploy. (2) Yusuf reviews + publishes the UNPUBLISHED draft. (3) Generate + wire a tool icon for `east-side-gallery-murals`.
+**Closed:** Widget + QA + tools-hub + blog draft + CMS insert + Wix draft creation + 4 images + full SEO + QS/FAQ wiring.
+
+**Next session should:** After the second push deploys, spot-check the draft's quick-summary/FAQ embeds populate, then let Yusuf publish.
+
+## 2026-06-02 — Codex (Booking calendar live availability)
+
+**Did:** Replaced the booking-calendar availability handoff with the verified Wix Bookings Time Slots V2 path and made the local preview load real Wix slots.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — handles Wix local Berlin datetime strings without client-timezone shifting.
+- `booking-calendar/index.html` — `/calendar` preview now loads live availability from the local dashboard API and falls back to demo slots if unavailable.
+- `booking-calendar/velo/custom-booking-calendar-page.js` and `booking-calendar/velo/backend/bookingCalendarAvailability.jsw` — frontend/backend Velo scaffold using Time Slots V2 without exposing API keys.
+- `booking-calendar/README.md` — updated install, slot shape, secret, and local probe notes.
+
+**Opened:** Need live Wix custom Booking Calendar test page to confirm native Booking Form query params for selected `eventId` + guest count.
+**Closed:** API uncertainty closed: local probe loaded 59 live slots across 38 dates for 2026-06-02 to 2026-08-01.
+
+**Next session should:** Install the `.jsw` backend and page code in Wix, set the `berlinwalk-wix-api-key` Wix Secret, and verify selected slot routing to the native Booking Form.
+
+## 2026-06-02 — Codex (Ultimate Day 1 base logic)
+
+**Did:** Fixed the Ultimate Trip Planner's BER/non-central arrival-day logic so Day 1 no longer shows a “tomorrow” itinerary card or the BerlinWalk tour route when the tour is moved to Day 2.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added base-area Day 1 copy/place logic, changed Day 1 map places from fixed World Clock/Museum Island/Hackescher to stay-area-specific stops, removed visible `Map stop` labels from web/PDF map cards, and softened remaining preview/ops copy from central/core to base/simple.
+- Local QA — `git diff --check` and inline script parse passed. In-app Browser confirmed Yusuf's BER midday / 2-day / Prenzlauer Berg scenario has no Day 1 “Tomorrow” block, no Day 1 tour block, Day 1 maps show Alexanderplatz/Kulturbrauerei/Kastanienallee, Day 2 carries BerlinWalk at 11:30, `Map stop` labels are gone, and horizontal overflow is `0`.
+
+**Opened:** Continue one-by-one Ultimate UX fixes with Yusuf; no push/live promotion yet.
+**Closed:** Current Day 1 vs Day 2 tour-placement/map-pack mismatch is fixed locally.
+
+**Next session should:** Review the local `v=day1-base-fix-20260602` state with Yusuf, then keep simplifying the remaining full-plan sections that still feel busy.
 
 ## 2026-06-02 — Codex (Audio tour tool icon)
 

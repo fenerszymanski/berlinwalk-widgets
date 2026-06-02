@@ -2,9 +2,11 @@
 
 Slug idea: `east-side-gallery-berlin-guide`
 
-Wix draft ID: `TBD`
+Wix draft ID: `8d4ba163-4852-4ab0-b2e1-e1f1a832633f`
 
 Wix draft status: `UNPUBLISHED`
+
+Image/SEO status: Wix draft patched 2026-06-02 with four licensed images via `berlinwalk-content-app/add-esg-blog-images.mjs`. Cover/featured/OG/Twitter: Fraternal Kiss (Vrubel, CC BY-SA 3.0 via Fortepan). Inline: Worlds People (Gimajew, CC BY-SA 3.0), Test the Rest (Birgit Kinder mural, photo Tony Webster CC BY 2.0), Oberbaumbrücke (Hans-Jürgen Neubert CC BY 4.0). Mural photos under German Panoramafreiheit; artists credited. Focus keyword "East Side Gallery", SEO keywords, meta description, excerpt, image alt text, and Wix Blog tags (East Side Gallery / Berlin Wall / Berlin Travel Tips) filled. QS/FAQ wired under key `east-side-gallery`.
 
 Meta title: East Side Gallery: Berlin's Open-Air Wall Guide (2026)
 
