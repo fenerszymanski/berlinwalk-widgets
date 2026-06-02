@@ -324,6 +324,15 @@ const BW_BOOKING_CALENDAR_STYLES = `
     font-weight: 800;
   }
 
+  .bw-cal-next-note {
+    color: var(--muted);
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-top: -2px;
+  }
+
   .bw-cal-cta {
     align-items: center;
     background: var(--green);
@@ -621,6 +630,7 @@ class BWBookingCalendarElement extends HTMLElement {
           </div>
           <footer class="bw-cal-summary">
             <span class="bw-cal-selected">${selectedText}</span>
+            <span class="bw-cal-next-note">You'll choose the number of attendees on the next step.</span>
             ${selectedSlot
               ? `<a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</a>`
               : `<span class="bw-cal-cta is-disabled" aria-disabled="true">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</span>`}

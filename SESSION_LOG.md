@@ -66,7 +66,7 @@ Format for each entry — see `AGENTS.md` §9.
 
 **Changed:**
 - `booking-calendar/booking-calendar-element.js` — CTA URL now sends only supported Booking Form params: `bookings_sessionId`, `bookings_timezone`, `bookings_serviceId`, optional `bookings_locationId`, and UTMs; removed unsupported `selected_date`, `selected_time`, `event_id`, and `guests` params from the form URL.
-- `booking-calendar/booking-calendar-element.js` — removed guest stepper UI because attendee count stays on the native Wix form's `Number of Attendees` field.
+- `booking-calendar/booking-calendar-element.js` — removed guest stepper UI because attendee count stays on the native Wix form's `Number of Attendees` field, and added the note `You'll choose the number of attendees on the next step.`
 - `booking-calendar/README.md` — documented that the live endpoint uses Availability Calendar `slot.sessionId`, not Time Slots V2 `eventId`.
 - Workspace `berlinwalk-content-app/api/booking-calendar-availability.js` and `scripts/booking-calendar-availability-probe.mjs` — switched to Availability Calendar data; Vercel endpoint redeployed and verified.
 
