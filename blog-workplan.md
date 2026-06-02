@@ -9,7 +9,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
 | 0 | Local draft + widget | Brandenburg Gate Berlin: A Visitor's Guide (2026) | A-tier head-term capture (no existing post). Honest funnel: the gate is the western edge, the tour walks the eastern core most visitors miss. Draft `blog-drafts/brandenburg-gate-berlin-visitors-guide.md`; reusable `berlin-landmarks-map` widget built + QA'd; QS/FAQ key `brandenburg-gate`; CMS insert `insert-berlin-landmarks-map.js`. Pending push + live steps. |
-| 0 | Idea (A-tier) | East Side Gallery: Berlin's Open-Air Wall Guide | Most-visited Wall section, huge search volume, no dedicated post. Reuses `berlin-wall-map` / `berlin-landmarks-map`. |
+| 0 | Local draft + widget | East Side Gallery: Berlin's Open-Air Wall Guide | A-tier, no dedicated post existed. Draft `blog-drafts/east-side-gallery-berlin-guide.md`; new `east-side-gallery-murals` card-guide widget (12 famous murals, theme filter) built + QA'd; QS/FAQ key `east-side-gallery`; CMS insert `insert-east-side-gallery-murals.js`. Pending push + live steps. |
 | 0 | Idea (A-tier) | Best Day Trips from Berlin (Potsdam, Sachsenhausen, Spreewald) | High-volume "day trips from Berlin"; new "day trip picker" widget candidate. Captures longer-stay tourists. |
 | 0 | Idea (A-tier, seasonal) | Best Christmas Markets in Berlin (2026) | Q4 seasonal pillar; new "Christmas markets map" widget candidate. Publish by October. |
 | 0 | Idea (B-tier) | Berlin Street Art Guide / Holocaust Memorial Guide / Sachsenhausen Memorial Guide / "How Many Days in Berlin?" | High-intent gaps; street-art map + `berlin-landmarks-map` reuse. |
