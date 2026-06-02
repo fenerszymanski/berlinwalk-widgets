@@ -1,0 +1,114 @@
+/*
+ * Wix Velo backend module for BerlinWalk's custom booking calendar.
+ *
+ * Put this file in Wix as:
+ * backend/bookingCalendarAvailability.jsw
+ *
+ * Required Wix Secret:
+ * - Name: berlinwalk-wix-api-key
+ * - Value: the Wix API key used by the local reporting scripts
+ *
+ * The frontend page code imports `loadBookingCalendarSlots()` from this module,
+ * so the API key never reaches the visitor's browser.
+ */
+
+import { fetch } from 'wix-fetch';
+import { getSecret } from 'wix-secrets-backend';
+
+const API_ROOT = 'https://www.wixapis.com';
+const SITE_ID = '12ee5ea0-70a7-492f-8020-ffb27cbb630f';
+const TIMEZONE = 'Europe/Berlin';
+const WIX_API_KEY_SECRET_NAME = 'berlinwalk-wix-api-key';
+
+export async function loadBookingCalendarSlots(options = {}) {
+  const serviceId = options.serviceId;
+  if (!serviceId) throw new Error('serviceId is required');
+
+  const days = boundedInteger(options.days, 365, 1, 365);
+  const guests = boundedInteger(options.guests, 1, 1, 50);
+  const startDate = todayInTimezone(TIMEZONE);
+  const endDate = addDays(startDate, days);
+  const apiKey = await getSecret(WIX_API_KEY_SECRET_NAME);
+
+  const response = await fetch(`${API_ROOT}/_api/service-availability/v2/time-slots/event`, {
+    method: 'POST',
+    headers: {
+      Authorization: apiKey,
+      'wix-site-id': SITE_ID,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      serviceIds: [serviceId],
+      timeZone: TIMEZONE,
+      fromLocalDate: `${startDate}T00:00:00`,
+      toLocalDate: `${endDate}T00:00:00`,
+      includeNonBookable: false,
+      minBookableCapacity: guests,
+      cursorPaging: { limit: 1000 },
+    }),
+  });
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(`Wix Time Slots V2 failed (${response.status}): ${JSON.stringify(data).slice(0, 300)}`);
+  }
+
+  return normalizeTimeSlots(data, serviceId);
+}
+
+function normalizeTimeSlots(data, serviceId) {
+  const slots = data.timeSlots || data.items || [];
+  return slots
+    .map((slot, index) => {
+      const startDate = slot.localStartDate || slot.startDate || slot.start?.dateTime;
+      if (!startDate) return null;
+
+      const resource = (slot.availableResources || [])[0] || {};
+      return {
+        id: String(slot.eventInfo?.eventId || slot.id || `${startDate}-${index}`),
+        eventId: slot.eventInfo?.eventId || '',
+        serviceId: slot.serviceId || serviceId,
+        startDate,
+        endDate: slot.localEndDate || slot.endDate || slot.end?.dateTime || '',
+        timezone: data.timeZone || TIMEZONE,
+        openSpots: firstFiniteNumber(slot.bookableCapacity, slot.remainingCapacity),
+        totalCapacity: firstFiniteNumber(slot.totalCapacity),
+        locationName: slot.location?.name || '',
+        locationAddress: slot.location?.formattedAddress || '',
+        resourceName: resource.name || resource.resource?.name || '',
+      };
+    })
+    .filter(Boolean)
+    .sort((a, b) => a.startDate.localeCompare(b.startDate));
+}
+
+function firstFiniteNumber(...values) {
+  for (const value of values) {
+    const number = Number(value);
+    if (Number.isFinite(number)) return number;
+  }
+  return null;
+}
+
+function boundedInteger(value, fallback, min, max) {
+  const number = Number(value);
+  if (!Number.isInteger(number)) return fallback;
+  return Math.max(min, Math.min(max, number));
+}
+
+function todayInTimezone(timezone) {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: timezone,
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).formatToParts(new Date());
+  const map = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${map.year}-${map.month}-${map.day}`;
+}
+
+function addDays(dateString, days) {
+  const [year, month, day] = dateString.split('-').map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day + days, 12, 0, 0));
+  return date.toISOString().slice(0, 10);
+}

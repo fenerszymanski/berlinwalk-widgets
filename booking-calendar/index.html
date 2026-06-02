@@ -56,9 +56,29 @@
         service-title="Pick your tour date"
         default-guests="2"
         max-guests="8"
+        demo-days="180"
         cta-label="Continue to form">
       </bw-booking-calendar>
     </main>
     <script src="./booking-calendar-element.js"></script>
+    <script>
+      (async function loadLiveAvailability() {
+        const calendar = document.querySelector('bw-booking-calendar');
+        if (!calendar || !window.location.pathname.includes('/calendar')) return;
+
+        try {
+          calendar.setAttribute('loading', 'true');
+          const response = await fetch('/api/booking-calendar-availability?days=365');
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || 'Live availability failed');
+
+          calendar.setAttribute('availability-json', JSON.stringify(data.slots || []));
+          calendar.removeAttribute('loading');
+        } catch (error) {
+          calendar.removeAttribute('loading');
+          console.error('Live availability could not load, demo slots are still shown:', error);
+        }
+      }());
+    </script>
   </body>
 </html>

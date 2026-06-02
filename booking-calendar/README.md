@@ -10,8 +10,8 @@ Open:
 http://127.0.0.1:4177/calendar
 ```
 
-The local preview uses demo slots.
-By default, demo mode generates 60 days of future tour dates so longer-term reservations are visible.
+The local preview loads live Wix availability through the local dashboard server.
+If live availability fails, demo mode is shown as a fallback.
 
 ## Custom Element
 
@@ -34,7 +34,7 @@ Useful attributes:
 - `service-title`: visible heading.
 - `default-guests`: starting guest count.
 - `max-guests`: maximum guest count.
-- `demo-days`: demo-only future date window, default `60`, capped at `120`.
+- `demo-days`: demo-only future date window, default `180`, capped at `365`.
 - `cta-label`: CTA copy.
 - `demo`: use generated demo availability.
 
@@ -46,10 +46,12 @@ Slot JSON format:
     "id": "slot-or-event-id",
     "eventId": "optional-event-id",
     "serviceId": "448872c2-4bd8-4f15-8030-594f5b2162c7",
-    "startDate": "2026-06-02T09:30:00.000Z",
-    "endDate": "2026-06-02T11:30:00.000Z",
+    "startDate": "2026-06-03T11:30:00",
+    "endDate": "2026-06-03T13:30:00",
     "timezone": "Europe/Berlin",
-    "openSpots": 8
+    "openSpots": 8,
+    "locationName": "Alexanderplatz",
+    "locationAddress": "Weltzeituhr, Alexanderplatz, Berlin, Germany"
   }
 ]
 ```
@@ -67,8 +69,21 @@ Use Wix's custom Booking Calendar page flow:
 2. Add one Custom Element with ID `#bwBookingCalendar`.
 3. Set tag name `bw-booking-calendar`.
 4. Use `velo/custom-booking-calendar-page.js` as the page-code starting point.
-5. Query real availability. The scaffold asks for 60 days. The final available range still depends on the Wix Bookings service booking-window settings. The scaffold follows Wix's custom calendar article with `availabilityCalendar.queryAvailability()`, but Wix's newer Time Slots V2 docs say Availability Calendar is being replaced. If that call is unavailable on the live site, replace `loadSlots()` with Time Slots V2, likely List Event Time Slots for the BerlinWalk group tour.
-6. Pass normalized slots to the custom element with `setAttribute('availability-json', JSON.stringify(slots))`.
-7. On `bw-booking-calendar-continue`, route to the Wix Booking Form with selected slot defaults.
+5. Add `velo/backend/bookingCalendarAvailability.jsw` as a Wix backend module.
+6. Add a Wix Secret named `berlinwalk-wix-api-key` with the Wix API key value.
+7. Query real availability through Wix Bookings Time Slots V2 `List Event Time Slots`. This was live-tested on 2026-06-02 for the Berlin Free Walking Tour service and returned bookable class sessions, event IDs, capacity, location, and resource data. The scaffold requests 365 days; Wix only returns slots that are actually bookable in the configured service window.
+8. Pass normalized slots to the custom element with `setAttribute('availability-json', JSON.stringify(slots))`.
+9. On `bw-booking-calendar-continue`, route to the Wix Booking Form with selected slot defaults.
 
 This keeps Wix's Booking Form, confirmation page, calendar sync, and automations intact while replacing the heavy native calendar UI.
+
+## Local live availability probe
+
+From the root workspace:
+
+```bash
+source scripts/load-api-keys.sh
+node scripts/booking-calendar-availability-probe.mjs --start 2026-06-02 --days 365
+```
+
+The probe calls the same Time Slots V2 endpoint and prints a concise summary plus sample normalized slots. It does not print API keys.

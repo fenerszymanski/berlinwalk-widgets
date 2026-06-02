@@ -98,6 +98,50 @@ const BW_BOOKING_CALENDAR_STYLES = `
     text-transform: uppercase;
   }
 
+  .bw-cal-date-tools {
+    align-items: center;
+    display: grid;
+    gap: 8px;
+    grid-template-columns: 1fr minmax(128px, auto);
+    margin-bottom: 7px;
+    min-width: 0;
+  }
+
+  .bw-cal-date-tools .bw-cal-label {
+    margin-bottom: 0;
+  }
+
+  .bw-cal-month-select {
+    appearance: none;
+    background: #F8FBF4;
+    border: 1px solid #CFE4C8;
+    border-radius: 8px;
+    color: var(--green);
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 800;
+    height: 32px;
+    min-width: 0;
+    padding: 0 28px 0 10px;
+    width: 100%;
+  }
+
+  .bw-cal-month-wrap {
+    position: relative;
+  }
+
+  .bw-cal-month-wrap::after {
+    color: var(--green);
+    content: "⌄";
+    font-size: 14px;
+    font-weight: 800;
+    pointer-events: none;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-54%);
+  }
+
   .bw-cal-date-row {
     align-items: stretch;
     display: grid;
@@ -239,16 +283,16 @@ const BW_BOOKING_CALENDAR_STYLES = `
 
   .bw-cal-slot {
     border-radius: 8px;
-    display: grid;
-    gap: 1px;
-    min-height: 50px;
+    display: inline-flex;
+    min-height: 44px;
     padding: 7px;
-    place-items: center;
+    align-items: center;
+    justify-content: center;
     text-align: center;
   }
 
   .bw-cal-slot b {
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1;
   }
 
@@ -362,6 +406,10 @@ const BW_BOOKING_CALENDAR_STYLES = `
       display: grid;
     }
 
+    .bw-cal-date-tools {
+      grid-template-columns: 1fr;
+    }
+
     .bw-cal-guest-row {
       grid-template-columns: 1fr;
     }
@@ -417,8 +465,15 @@ class BWBookingCalendarElement extends HTMLElement {
     this.state.guests = this._boundedGuests(Number(this.getAttribute('default-guests') || this.state.guests || 2));
     this.state.slots = this._readSlots();
     const firstSlot = this.state.slots[0];
-    if (!this.state.selectedDate && firstSlot) this.state.selectedDate = this._dateKey(firstSlot.startDate);
-    if (!this.state.selectedSlotId) {
+    const dates = this._availableDates();
+    if (firstSlot && (!this.state.selectedDate || !dates.includes(this.state.selectedDate))) {
+      this.state.selectedDate = this._dateKey(firstSlot.startDate);
+      this.state.selectedSlotId = '';
+    }
+    if (!this.state.slots.some((slot) => slot.id === this.state.selectedSlotId)) {
+      this.state.selectedSlotId = '';
+    }
+    if (!this.state.selectedSlotId || !this._slotsForSelectedDate().some((slot) => slot.id === this.state.selectedSlotId)) {
       const firstSelectedDateSlot = this._slotsForSelectedDate()[0] || firstSlot;
       if (firstSelectedDateSlot) this.state.selectedSlotId = firstSelectedDateSlot.id;
     }
@@ -456,13 +511,13 @@ class BWBookingCalendarElement extends HTMLElement {
         };
       })
       .filter(Boolean)
-      .sort((a, b) => new Date(a.startDate) - new Date(b.startDate));
+      .sort((a, b) => this._compareSlotDates(a.startDate, b.startDate));
   }
 
   _demoSlots() {
     const slots = [];
     const now = new Date();
-    const demoDays = Math.max(14, Math.min(Number(this.getAttribute('demo-days') || 60), 120));
+    const demoDays = Math.max(14, Math.min(Number(this.getAttribute('demo-days') || 180), 365));
     for (let day = 1; day <= demoDays; day += 1) {
       const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + day);
       [11.5, 14.5].forEach((hour, index) => {
@@ -489,6 +544,7 @@ class BWBookingCalendarElement extends HTMLElement {
     const serviceTitle = this.getAttribute('service-title') || 'Pick your tour date';
     const selectedSlot = this._selectedSlot();
     const dates = this._availableDates();
+    const months = this._availableMonths(dates);
     const slots = this._slotsForSelectedDate();
     const selectedText = selectedSlot
       ? `<strong>${this._formatDate(selectedSlot.startDate)} at ${this._formatTime(selectedSlot.startDate)}</strong> for ${this.state.guests} ${this.state.guests === 1 ? 'guest' : 'guests'}`
@@ -506,7 +562,10 @@ class BWBookingCalendarElement extends HTMLElement {
             ${loading ? '<div class="bw-cal-message">Loading real tour availability...</div>' : ''}
             ${error ? `<div class="bw-cal-message">${this._escape(error)}</div>` : ''}
             <div>
-              <span class="bw-cal-label">Date</span>
+              <div class="bw-cal-date-tools">
+                <span class="bw-cal-label">Date</span>
+                ${months.length > 1 ? this._monthSelect(months) : ''}
+              </div>
               ${dates.length ? `
                 <div class="bw-cal-date-row">
                   <button class="bw-cal-date-nav" type="button" data-action="scroll-days" data-direction="-1" aria-label="Show earlier dates">&lsaquo;</button>
@@ -586,6 +645,20 @@ class BWBookingCalendarElement extends HTMLElement {
       });
     });
 
+    const monthSelect = this.querySelector('[data-month-select]');
+    if (monthSelect) {
+      monthSelect.addEventListener('change', () => {
+        const month = monthSelect.value;
+        const nextDate = this._availableDates().find((date) => this._monthKey(date) === month);
+        if (!nextDate) return;
+        this.state.selectedDate = nextDate;
+        const nextSlot = this._slotsForSelectedDate()[0];
+        this.state.selectedSlotId = nextSlot ? nextSlot.id : '';
+        this._emitChange('month');
+        this._render();
+      });
+    }
+
     const days = this.querySelector('[data-days]');
     if (days) days.addEventListener('scroll', () => this._syncDayNav(), { passive: true });
     this._syncDayNav();
@@ -608,11 +681,17 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _scrollSelectedDateIntoView() {
-    window.requestAnimationFrame(() => {
+    const align = () => {
+      const days = this.querySelector('[data-days]');
       const selected = this.querySelector('.bw-cal-day.is-active');
-      if (selected) selected.scrollIntoView({ block: 'nearest', inline: 'center' });
+      if (days && selected) {
+        days.scrollLeft = Math.max(0, selected.offsetLeft - days.offsetLeft);
+      }
       this._syncDayNav();
-    });
+    };
+
+    align();
+    window.requestAnimationFrame(align);
   }
 
   _syncDayNav() {
@@ -633,6 +712,17 @@ class BWBookingCalendarElement extends HTMLElement {
       if (!keys.includes(key)) keys.push(key);
     });
     return keys;
+  }
+
+  _availableMonths(dates) {
+    const months = [];
+    dates.forEach((date) => {
+      const key = this._monthKey(date);
+      if (!months.some((month) => month.key === key)) {
+        months.push({ key, label: this._monthLabel(key) });
+      }
+    });
+    return months;
   }
 
   _slotsForSelectedDate() {
@@ -658,13 +748,24 @@ class BWBookingCalendarElement extends HTMLElement {
     `;
   }
 
+  _monthSelect(months) {
+    const selectedMonth = this._monthKey(this.state.selectedDate || months[0]?.key || '');
+    return `
+      <label class="bw-cal-month-wrap">
+        <select class="bw-cal-month-select" data-month-select aria-label="Jump to month">
+          ${months.map((month) => `
+            <option value="${this._escape(month.key)}"${month.key === selectedMonth ? ' selected' : ''}>${this._escape(month.label)}</option>
+          `).join('')}
+        </select>
+      </label>
+    `;
+  }
+
   _slotButton(slot) {
     const active = slot.id === this.state.selectedSlotId ? ' is-active' : '';
-    const note = slot.openSpots == null ? 'Open' : `${slot.openSpots} spots`;
     return `
       <button class="bw-cal-slot${active}" type="button" data-slot="${this._escape(slot.id)}">
         <b>${this._escape(this._formatTime(slot.startDate))}</b>
-        <small>${this._escape(note)}</small>
       </button>
     `;
   }
@@ -717,24 +818,71 @@ class BWBookingCalendarElement extends HTMLElement {
   }
 
   _dateKey(value) {
-    return new Date(value).toISOString().slice(0, 10);
+    if (this._isLocalDateTime(value)) return String(value).slice(0, 10);
+    return this._formatDateParts(value).dateKey;
+  }
+
+  _monthKey(dateKey) {
+    return String(dateKey || '').slice(0, 7);
+  }
+
+  _monthLabel(monthKey) {
+    const date = new Date(`${monthKey}-01T12:00:00`);
+    if (Number.isNaN(date.getTime())) return monthKey;
+    return new Intl.DateTimeFormat('en-GB', {
+      month: 'long',
+      year: 'numeric',
+    }).format(date);
   }
 
   _formatDate(value) {
+    const dateKey = this._dateKey(value);
+    const displayDate = new Date(`${dateKey}T12:00:00`);
     return new Intl.DateTimeFormat('en-GB', {
       weekday: 'short',
       month: 'short',
       day: 'numeric',
-    }).format(new Date(value));
+    }).format(displayDate);
   }
 
   _formatTime(value) {
+    if (this._isLocalDateTime(value)) return String(value).slice(11, 16);
     return new Intl.DateTimeFormat('en-GB', {
       hour: '2-digit',
       minute: '2-digit',
       hour12: false,
       timeZone: 'Europe/Berlin',
     }).format(new Date(value));
+  }
+
+  _compareSlotDates(left, right) {
+    const leftKey = this._sortDateValue(left);
+    const rightKey = this._sortDateValue(right);
+    return leftKey.localeCompare(rightKey);
+  }
+
+  _sortDateValue(value) {
+    if (this._isLocalDateTime(value)) return String(value);
+    const parsed = new Date(value);
+    return Number.isNaN(parsed.getTime()) ? String(value || '') : parsed.toISOString();
+  }
+
+  _isLocalDateTime(value) {
+    const stringValue = String(value || '');
+    return /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(stringValue) && !/(Z|[+-]\d{2}:?\d{2})$/i.test(stringValue);
+  }
+
+  _formatDateParts(value) {
+    const parts = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Europe/Berlin',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    }).formatToParts(new Date(value));
+    const map = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+    return {
+      dateKey: `${map.year}-${map.month}-${map.day}`,
+    };
   }
 
   _escape(value) {

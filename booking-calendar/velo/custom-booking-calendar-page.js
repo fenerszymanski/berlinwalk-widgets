@@ -10,23 +10,22 @@
  * This page replaces the native Wix Booking Calendar page. It keeps Wix's
  * Booking Form and confirmation flow intact.
  *
- * 2026-06-01 API note:
- * Wix's Custom Booking Calendar page article still shows
- * `availabilityCalendar.queryAvailability()`, but the newer Bookings Time Slots
- * V2 docs say Availability Calendar is being replaced. Treat this file as a
- * live POC scaffold. If `queryAvailability()` is unavailable on the site,
- * replace `loadSlots()` with the Time Slots V2 flow (for group/class sessions:
- * List Event Time Slots, then route the selected event/session to Booking Form).
+ * 2026-06-02 API note:
+ * Live Wix API probing confirmed that Bookings Time Slots V2
+ * `List Event Time Slots` returns bookable Berlin Free Walking Tour class
+ * sessions, event IDs, capacity, location, and resource data. Use the backend
+ * module in `velo/backend/bookingCalendarAvailability.jsw`; do not call the
+ * Wix REST API or expose the Wix API key from frontend page code.
  */
 
 import wixWindowFrontend from 'wix-window-frontend';
 import wixLocation from 'wix-location';
-import { availabilityCalendar } from 'wix-bookings.v2';
+import { loadBookingCalendarSlots } from 'backend/bookingCalendarAvailability';
 
 const CALENDAR_ELEMENT_ID = '#bwBookingCalendar';
 const BOOKING_FORM_PATH = '/booking-form';
 const TIMEZONE = 'Europe/Berlin';
-const DAYS_TO_LOAD = 60;
+const DAYS_TO_LOAD = 365;
 
 let normalizedSlots = [];
 
@@ -49,7 +48,11 @@ $w.onReady(async function () {
     }
 
     calendar.setAttribute('service-title', 'Pick your tour date');
-    normalizedSlots = await loadSlots(serviceId);
+    normalizedSlots = await loadBookingCalendarSlots({
+      serviceId,
+      days: DAYS_TO_LOAD,
+      guests: 1,
+    });
 
     calendar.setAttribute('availability-json', JSON.stringify(normalizedSlots));
     calendar.setAttribute('loading', '');
@@ -68,62 +71,6 @@ $w.onReady(async function () {
     wixLocation.to(buildBookingFormUrl(slot, guests));
   });
 });
-
-async function loadSlots(serviceId) {
-  const startDate = new Date();
-  const endDate = new Date(startDate.getTime() + DAYS_TO_LOAD * 24 * 60 * 60 * 1000);
-  const response = await availabilityCalendar.queryAvailability({
-    filter: {
-      serviceId: [serviceId],
-      startDate,
-      endDate,
-    },
-  }, {
-    timezone: TIMEZONE,
-  });
-
-  return normalizeAvailability(response, serviceId);
-}
-
-function normalizeAvailability(response, serviceId) {
-  const entries =
-    response?.availabilityEntries ||
-    response?.entries ||
-    response?.slots ||
-    response?.items ||
-    [];
-
-  return entries
-    .map((entry, index) => {
-      const slot = entry.slot || entry;
-      const startDate =
-        slot.startDate ||
-        slot.start?.dateTime ||
-        entry.startDate ||
-        entry.start?.dateTime;
-      const endDate =
-        slot.endDate ||
-        slot.end?.dateTime ||
-        entry.endDate ||
-        entry.end?.dateTime;
-
-      if (!startDate) return null;
-
-      return {
-        id: String(slot.id || slot.eventId || entry.id || `${startDate}-${index}`),
-        eventId: slot.eventId || entry.eventId || '',
-        serviceId: slot.serviceId || serviceId,
-        startDate,
-        endDate: endDate || '',
-        timezone: slot.timezone || TIMEZONE,
-        openSpots: Number.isFinite(Number(entry.openSpots || slot.openSpots))
-          ? Number(entry.openSpots || slot.openSpots)
-          : null,
-      };
-    })
-    .filter(Boolean)
-    .sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
-}
 
 function buildBookingFormUrl(slot, guests) {
   /*
