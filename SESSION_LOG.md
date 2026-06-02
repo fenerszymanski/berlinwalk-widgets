@@ -4,6 +4,33 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Ultimate planner option logic remap)
+
+**Did:** Reworked Ultimate Berlin Trip Planner’s deterministic plan logic so arrival timing, trip length, interests, pace, budget, and plan needs affect the actual day sequence and map anchors.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — late/evening arrivals now become arrival + dinner/rest, not forced sightseeing; one-day plans now use the selected focus; Day 2 tour framework now adapts to museums, Wall / Cold War, food, free, or nightlife interest.
+- `ultimate-berlin-trip-planner/index.html` — map packs no longer show “Map stop”; preview itinerary cards use inline visual art/fallback-safe rendering; slow/family plans avoid repeated extra-stop bloat.
+
+**Opened:** The widget still needs broader UX/content simplification toward a truly “ultimate” final version.
+**Closed:** Local browser QA passed for late BER 2-day, museum-focused 1/2-day, Wall 3-day, and family low-budget 5-day scenarios: no `Base area`, `Map stop`, or `Tomorrow`; no broken images; overflow 0.
+
+**Next session should:** Review the visible copy density and result-section hierarchy with Yusuf before pushing/publishing.
+
+## 2026-06-02 — Codex (Booking calendar CTA polish)
+
+**Did:** Polished the booking-calendar reassurance note and CTA copy.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — changed the old pill-style “Free to reserve” label into a slim info banner (`Free reservation, no upfront payment`) and changed default CTA to `Reserve your spot`.
+- `booking-calendar/index.html` and `booking-calendar/velo/custom-booking-calendar-page.js` — updated explicit CTA label to `Reserve your spot`.
+- `booking-calendar/README.md` — documented `Reserve your spot` as recommended CTA.
+
+**Opened:** Native Wix Booking Form preload still needs live validation with selected `eventId` + guest count.
+**Closed:** Browser QA passed: old `Continue to form` copy is gone and the reassurance label no longer uses the pill/button class.
+
+**Next session should:** Move to Wix test-page install unless Yusuf spots another local calendar issue.
+
 ## 2026-06-02 — Codex (Booking calendar scroll preserve)
 
 **Did:** Removed the remaining date-carousel movement when clicking a visible future date.

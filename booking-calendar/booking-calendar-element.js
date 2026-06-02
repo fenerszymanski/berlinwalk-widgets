@@ -1,4 +1,4 @@
-const BW_BOOKING_CALENDAR_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+const BW_BOOKING_CALENDAR_BOOKING_URL = 'https://www.berlinwalk.com/booking-form';
 
 const BW_BOOKING_CALENDAR_STYLES = `
   bw-booking-calendar {
@@ -47,11 +47,10 @@ const BW_BOOKING_CALENDAR_STYLES = `
   }
 
   .bw-cal-head {
-    align-items: center;
+    align-items: start;
     border-bottom: 1px solid var(--line);
-    display: flex;
-    gap: 10px;
-    justify-content: space-between;
+    display: grid;
+    gap: 8px;
     min-width: 0;
     padding: 12px 12px 10px;
   }
@@ -64,17 +63,18 @@ const BW_BOOKING_CALENDAR_STYLES = `
     margin: 0;
   }
 
-  .bw-cal-pill {
-    background: #F1FAEE;
-    border: 1px solid #CFE4C8;
-    border-radius: 999px;
+  .bw-cal-note {
+    background: #F8FBF4;
+    border-left: 3px solid var(--yellow);
+    border-radius: 4px;
     color: var(--green);
-    font-size: 10px;
+    display: block;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 0;
-    padding: 5px 8px;
+    line-height: 1.25;
+    padding: 7px 9px;
     text-transform: uppercase;
-    white-space: nowrap;
   }
 
   .bw-cal-body {
@@ -201,7 +201,6 @@ const BW_BOOKING_CALENDAR_STYLES = `
     min-width: 0;
     overflow-x: auto;
     padding: 1px 0 4px;
-    scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: #BFD8B8 transparent;
     width: 100%;
@@ -448,6 +447,8 @@ class BWBookingCalendarElement extends HTMLElement {
       selectedSlotId: '',
       guests: 2,
     };
+    this._dateScrollMode = 'align';
+    this._dateScrollLeft = 0;
   }
 
   connectedCallback() {
@@ -503,6 +504,7 @@ class BWBookingCalendarElement extends HTMLElement {
           ...slot,
           id,
           eventId: slot.eventId || '',
+          sessionId: slot.sessionId || slot.eventId || '',
           startDate,
           endDate: slot.endDate || slot.end || slot.localEndDate || '',
           timezone: slot.timezone || 'Europe/Berlin',
@@ -556,7 +558,7 @@ class BWBookingCalendarElement extends HTMLElement {
         <div class="bw-cal-shell">
           <header class="bw-cal-head">
             <h2 class="bw-cal-title">${this._escape(serviceTitle)}</h2>
-            <span class="bw-cal-pill">Free to reserve</span>
+            <span class="bw-cal-note">Free reservation, no upfront payment</span>
           </header>
           <div class="bw-cal-body">
             ${loading ? '<div class="bw-cal-message">Loading real tour availability...</div>' : ''}
@@ -595,20 +597,21 @@ class BWBookingCalendarElement extends HTMLElement {
           </div>
           <footer class="bw-cal-summary">
             <span class="bw-cal-selected">${selectedText}</span>
-            <a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(this.getAttribute('cta-label') || 'Continue to form')}</a>
+            <a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</a>
           </footer>
         </div>
       </section>
     `;
 
     this._bind();
-    this._scrollSelectedDateIntoView();
+    this._applyDateScrollPosition();
     this._postResize();
   }
 
   _bind() {
     this.querySelectorAll('[data-date]').forEach((button) => {
       button.addEventListener('click', () => {
+        this._preserveDateScroll();
         this.state.selectedDate = button.getAttribute('data-date') || '';
         const nextSlot = this._slotsForSelectedDate()[0];
         this.state.selectedSlotId = nextSlot ? nextSlot.id : '';
@@ -619,6 +622,7 @@ class BWBookingCalendarElement extends HTMLElement {
 
     this.querySelectorAll('[data-slot]').forEach((button) => {
       button.addEventListener('click', () => {
+        this._preserveDateScroll();
         this.state.selectedSlotId = button.getAttribute('data-slot') || '';
         this._emitChange('slot');
         this._render();
@@ -627,6 +631,7 @@ class BWBookingCalendarElement extends HTMLElement {
 
     this.querySelectorAll('[data-action="minus"], [data-action="plus"]').forEach((button) => {
       button.addEventListener('click', () => {
+        this._preserveDateScroll();
         const delta = button.getAttribute('data-action') === 'plus' ? 1 : -1;
         this.state.guests = this._boundedGuests(this.state.guests + delta);
         this._emitChange('guests');
@@ -654,6 +659,7 @@ class BWBookingCalendarElement extends HTMLElement {
         this.state.selectedDate = nextDate;
         const nextSlot = this._slotsForSelectedDate()[0];
         this.state.selectedSlotId = nextSlot ? nextSlot.id : '';
+        this._dateScrollMode = 'align';
         this._emitChange('month');
         this._render();
       });
@@ -680,11 +686,25 @@ class BWBookingCalendarElement extends HTMLElement {
     }
   }
 
-  _scrollSelectedDateIntoView() {
+  _preserveDateScroll() {
+    const days = this.querySelector('[data-days]');
+    this._dateScrollMode = 'preserve';
+    this._dateScrollLeft = days ? days.scrollLeft : 0;
+  }
+
+  _applyDateScrollPosition() {
+    const mode = this._dateScrollMode;
+    const preservedLeft = this._dateScrollLeft;
     const align = () => {
       const days = this.querySelector('[data-days]');
       const selected = this.querySelector('.bw-cal-day.is-active');
-      if (days && selected) {
+      if (!days) {
+        this._syncDayNav();
+        return;
+      }
+      if (mode === 'preserve') {
+        days.scrollLeft = preservedLeft;
+      } else if (selected) {
         days.scrollLeft = Math.max(0, selected.offsetLeft - days.offsetLeft);
       }
       this._syncDayNav();
@@ -692,6 +712,7 @@ class BWBookingCalendarElement extends HTMLElement {
 
     align();
     window.requestAnimationFrame(align);
+    this._dateScrollMode = 'align';
   }
 
   _syncDayNav() {
@@ -776,6 +797,8 @@ class BWBookingCalendarElement extends HTMLElement {
     if (slot) {
       url.searchParams.set('selected_date', this._dateKey(slot.startDate));
       url.searchParams.set('selected_time', this._formatTime(slot.startDate));
+      url.searchParams.set('bookings_timezone', slot.timezone || 'Europe/Berlin');
+      if (slot.sessionId || slot.eventId) url.searchParams.set('bookings_sessionId', slot.sessionId || slot.eventId);
       if (slot.eventId) url.searchParams.set('event_id', slot.eventId);
     }
     url.searchParams.set('guests', String(this.state.guests));

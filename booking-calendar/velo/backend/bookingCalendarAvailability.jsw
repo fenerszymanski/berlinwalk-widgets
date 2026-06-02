@@ -67,6 +67,7 @@ function normalizeTimeSlots(data, serviceId) {
       return {
         id: String(slot.eventInfo?.eventId || slot.id || `${startDate}-${index}`),
         eventId: slot.eventInfo?.eventId || '',
+        sessionId: slot.sessionId || slot.eventInfo?.eventId || '',
         serviceId: slot.serviceId || serviceId,
         startDate,
         endDate: slot.localEndDate || slot.endDate || slot.end?.dateTime || '',

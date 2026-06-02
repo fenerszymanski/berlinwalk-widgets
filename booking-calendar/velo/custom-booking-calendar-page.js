@@ -36,7 +36,7 @@ $w.onReady(async function () {
   calendar.setAttribute('service-title', 'Pick your tour date');
   calendar.setAttribute('default-guests', '2');
   calendar.setAttribute('max-guests', '8');
-  calendar.setAttribute('cta-label', 'Continue to form');
+  calendar.setAttribute('cta-label', 'Reserve your spot');
 
   try {
     const pageData = await wixWindowFrontend.getAppPageData();
@@ -74,21 +74,16 @@ $w.onReady(async function () {
 
 function buildBookingFormUrl(slot, guests) {
   /*
-   * Wix's shareable Booking Form link supports preloaded defaults via query
-   * parameters. The exact final parameter names can vary by Bookings flow and
-   * should be confirmed once on the live form URL after selecting a real slot.
-   *
-   * For class/group sessions, eventId is the safest key to preserve because Wix
-   * can derive time, resource, location, and timezone from the event.
+   * Wix's official shareable Booking Form links require class sessions to pass
+   * `bookings_sessionId` and `bookings_timezone`. Time Slots V2 exposes the
+   * current session identifier as `eventInfo.eventId`, so the backend normalizer
+   * also copies that value into `slot.sessionId`.
    */
   const query = new URLSearchParams();
 
-  query.set('serviceId', slot.serviceId);
-  query.set('startDate', slot.startDate);
-  if (slot.endDate) query.set('endDate', slot.endDate);
-  query.set('timezone', slot.timezone || TIMEZONE);
-  query.set('numberOfParticipants', String(Math.max(1, guests || 1)));
-  if (slot.eventId) query.set('eventId', slot.eventId);
+  query.set('bookings_timezone', slot.timezone || TIMEZONE);
+  if (slot.sessionId || slot.eventId) query.set('bookings_sessionId', slot.sessionId || slot.eventId);
+  query.set('guests', String(Math.max(1, guests || 1)));
 
   query.set('utm_source', wixLocation.query.utm_source || 'berlinwalk');
   query.set('utm_medium', wixLocation.query.utm_medium || 'booking_calendar');
