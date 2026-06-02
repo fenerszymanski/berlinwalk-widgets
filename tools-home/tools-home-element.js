@@ -1,4 +1,5 @@
 const BW_TOOLS_HOME_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json';
+const BW_TOOLS_HOME_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 
 class BWToolsHomeElement extends HTMLElement {
   constructor() {
@@ -385,18 +386,12 @@ class BWToolsHomeElement extends HTMLElement {
             padding: 14px;
           }
 
-          .bw-tools-home .bw-tool-card-thumb,
-          .bw-tools-home .bw-tool-card-placeholder,
-          .bw-tools-home .bw-skeleton-thumb {
+        .bw-tools-home .bw-tool-card-thumb,
+        .bw-tools-home .bw-skeleton-thumb {
             flex-basis: 64px;
             height: 64px;
             width: 64px;
           }
-
-          .bw-tools-home .bw-tool-card-placeholder {
-            font-size: 24px;
-          }
-
           .bw-tools-home .bw-tool-card h3 {
             font-size: 16px;
             margin-bottom: 6px;
@@ -517,15 +512,13 @@ class BWToolsHomeElement extends HTMLElement {
 
   _renderTool(tool) {
     const href = `https://www.berlinwalk.com/tools/${tool.slug || ''}`;
-    const image = typeof tool.image === 'string' ? tool.image.trim() : '';
+    const image = typeof tool.image === 'string' && tool.image.trim() ? tool.image.trim() : BW_TOOLS_HOME_DEFAULT_IMAGE;
     const title = this._escapeHtml(tool.title || '');
     const lead = this._escapeHtml(tool.lead || '');
 
     return `
       <a class="bw-tool-card" href="${href}" target="_top">
-        ${image
-          ? `<img class="bw-tool-card-thumb" src="${image}" alt="${title}" loading="lazy" decoding="async">`
-          : `<span class="bw-tool-card-placeholder" aria-hidden="true">${title.charAt(0)}</span>`}
+        <img class="bw-tool-card-thumb" src="${image}" alt="" loading="lazy" decoding="async">
         <span class="bw-tool-card-content">
           <h3>${title}</h3>
           <p>${lead}</p>

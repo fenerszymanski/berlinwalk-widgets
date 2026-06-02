@@ -4,6 +4,22 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-02 — Codex (Blog CTA/banner removal + generic tool image)
+
+**Did:** Removed the old end-of-post tour CTA banner behavior and fixed iconless tool cards.
+
+**Changed:**
+- `js/cta-inject.js` — deprecated into a no-op safety shim that removes old `[data-bw-tourcta]` nodes instead of injecting the large tour banner.
+- `js/blog-journey-inject.js` — hides old tour CTA nodes, no longer positions the journey module around them, and uses `tools-home/icons/generic-tool.svg` when a related tool has no assigned image.
+- `tools-home/icons/generic-tool.svg` — new generic BerlinWalk tool fallback image.
+- `tools-home/tools-home-element.js` and `tools-hub/tools-hub-element.js` — iconless tools now render the generic image instead of a first-letter chip.
+- `wix-embed-snippets.md`, `README.md`, `AGENTS.md` — documented `blog-journey-inject.js?v=7` and deprecated `cta-inject.js`.
+
+**Opened:** Push the repo, update Wix Custom Code from `blog-journey-inject.js?v=6` to `?v=7`, and remove any explicit old `cta-inject.js` Custom Code entry if still installed. Unrelated Ultimate planner local changes remain untouched.
+**Closed:** `node --check`, `git diff --check`, and local Playwright QA passed; Day Trips test post had CTA count 0, `Berlin Day Trip Finder` used `generic-tool.svg`, overflow 0.
+
+**Next session should:** After Pages deploy and Wix Custom Code update, live-check the related-guides area on one blog post desktop/mobile.
+
 ## 2026-06-02 — Codex (Day Trips Tropical Islands image swap)
 
 **Did:** Replaced the weak Tropical Islands image in the published Best Day Trips post.

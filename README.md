@@ -159,7 +159,7 @@ Suggested Wix embed height for quick summaries:
 These are loaded through Wix Custom Code rather than iframe embeds:
 
 - `js/lead-form-inject.js` - injects the Berlin First-Day Survival Guide lead form mid-post.
-- `js/cta-inject.js` - injects the global tour CTA near the end of posts.
+- `js/cta-inject.js` - deprecated no-op shim that removes old global tour CTA banners if an old Wix Custom Code URL still loads it.
 - `js/blog-sidebar-inject.js` - builds a desktop-only sticky "On this page"
   sidebar from visible H2/H3 headings and puts a compact `Blog Home` /
   `Categories` block above the index inside that same sidebar. It shortens the
@@ -171,14 +171,15 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   mini-nav into Wix-managed blog header or article body DOM, because that caused
   header/Quick Summary flicker. The script skips
   non-`/post/` URLs.
-- `js/blog-journey-inject.js` - lightly polishes post body typography, adds a
+- `js/blog-journey-inject.js` - lightly polishes post body typography, removes
+  deprecated tour CTA banners if old helpers still inject them, adds a
   mobile-only `Blog Home` / category chip row near the top of the article, adds
   a mobile-only `In this guide` chip row before the first visible heading, hides
   the photo-led `Walk It` card on mobile, injects one topic-aware inline tool
   prompt when the post does not already link to that tool, adds a sticky
   back-to-top arrow, and adds a topic-aware `Next step` module near the end of
   each post. It reads `blog-index/data.json`, links to related guides, relevant
-  Berlin tools, and the booking page, and sends `bw_blog_tool_prompt_*`,
+  Berlin tools with a generic fallback image when no icon is assigned, and the booking page, and sends `bw_blog_tool_prompt_*`,
   `bw_blog_journey_*`, plus `bw_blog_back_top_click` analytics events. It skips
   non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for

@@ -17,6 +17,7 @@
   var MIN_MOBILE_WIDTH = 900;
   var TOUR_IMAGE = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_700,h_420,al_c,q_86,enc_avif,quality_auto/file.jpg';
   var TOOL_ICON_BASE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/';
+  var DEFAULT_TOOL_IMAGE = TOOL_ICON_BASE_URL + 'generic-tool.svg';
   var dataCache = null;
   var dataPromise = null;
   var renderTimer = null;
@@ -250,7 +251,7 @@
       '.bw-blog-journey-content{display:flex;flex:1;flex-direction:column;padding:14px 15px 16px;}',
       '.bw-blog-journey-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.2px;line-height:1;margin-bottom:9px;text-transform:uppercase;}',
       '.bw-blog-journey-card strong{color:#212121;display:block;font-size:16px;font-weight:900;line-height:1.16;overflow-wrap:break-word;}',
-      '.bw-blog-journey [data-bw-tourcta]{margin:22px 0!important;}',
+      '[data-bw-tourcta]{display:none!important;}',
       '.bw-blog-back-top{align-items:center;background:#212121;border:2px solid #FFE600;border-radius:999px;bottom:24px;box-shadow:0 12px 28px rgba(0,0,0,.22);color:#FFFFFF;cursor:pointer;display:flex;font-size:22px;font-weight:900;height:44px;justify-content:center;opacity:0;pointer-events:none;position:fixed;right:22px;text-decoration:none;transform:translateY(10px);transition:opacity .18s ease,transform .18s ease,background .18s ease;visibility:hidden;width:44px;z-index:8500;}',
       '.bw-blog-back-top:hover{background:#1B5E20;}',
       '.bw-blog-back-top-visible{opacity:1;pointer-events:auto;transform:translateY(0);visibility:visible;}',
@@ -345,7 +346,7 @@
     var tool = cloneTool(match || (data.tools || [])[0] || TOOL_FALLBACKS['berlin-first-day-planner'], slug || 'berlin-first-day-planner');
     if (tool && tool.slug && !tool.url) tool.url = 'https://www.berlinwalk.com/tools/' + tool.slug;
     if (tool && !tool.summary && tool.lead) tool.summary = tool.lead;
-    if (tool && tool.slug && !tool.image) tool.image = TOOL_ICON_FALLBACKS[tool.slug] || '';
+    if (tool && tool.slug && !tool.image) tool.image = TOOL_ICON_FALLBACKS[tool.slug] || DEFAULT_TOOL_IMAGE;
     return tool;
   }
 
@@ -546,8 +547,6 @@
   }
 
   function findJourneyInsertionPoint(body) {
-    var tourCta = body.querySelector('[data-bw-tourcta]');
-    if (tourCta && tourCta.parentNode) return { parent: tourCta.parentNode, before: tourCta };
     var candidates = body.querySelectorAll('p, li, blockquote');
     for (var i = candidates.length - 1; i >= 0; i--) {
       var el = candidates[i];
@@ -560,7 +559,7 @@
   }
 
   function cardImage(card) {
-    return card.image || card.thumb || TOUR_IMAGE;
+    return card.image || card.thumb || (card.kind === 'tool' ? DEFAULT_TOOL_IMAGE : TOUR_IMAGE);
   }
 
   function renderJourneyCard(card) {
@@ -594,6 +593,7 @@
     if (tool) {
       cards.push({
         label: 'Use a tool',
+        kind: 'tool',
         title: tool.title,
         url: tool.url,
         image: tool.image

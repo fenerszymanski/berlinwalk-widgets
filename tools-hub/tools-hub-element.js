@@ -1,4 +1,5 @@
 const BW_TOOLS_HUB_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
+const BW_TOOLS_HUB_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 
 class BWToolsHubElement extends HTMLElement {
   constructor() {
@@ -652,17 +653,14 @@ class BWToolsHubElement extends HTMLElement {
   }
 
   _renderToolIcon(tool) {
-    if (tool && tool.image) {
-      return `
-        <span class="bw-tool-icon" aria-hidden="true">
-          <img src="${this._escapeAttribute(tool.image)}" alt="" loading="lazy" decoding="async">
-        </span>
-      `;
-    }
-
-    const title = String((tool && tool.title) || '?').trim();
-    const letter = title ? title.charAt(0).toUpperCase() : '?';
-    return `<span class="bw-tool-icon bw-tool-icon-fallback" aria-hidden="true">${this._escapeHtml(letter)}</span>`;
+    const image = tool && typeof tool.image === 'string' && tool.image.trim()
+      ? tool.image.trim()
+      : BW_TOOLS_HUB_DEFAULT_IMAGE;
+    return `
+      <span class="bw-tool-icon" aria-hidden="true">
+        <img src="${this._escapeAttribute(image)}" alt="" loading="lazy" decoding="async">
+      </span>
+    `;
   }
 
   _resolveAssetUrl(value) {
