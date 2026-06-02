@@ -35,8 +35,6 @@ Useful attributes:
 - `service-id`: optional Wix Bookings service ID override for the endpoint.
 - `booking-url`: fallback booking URL.
 - `service-title`: visible heading.
-- `default-guests`: starting guest count.
-- `max-guests`: maximum guest count.
 - `demo-days`: demo-only future date window, default `180`, capped at `365`.
 - `cta-label`: CTA copy. Recommended: `Reserve your spot`.
 - `demo`: use generated demo availability.
@@ -75,7 +73,7 @@ Use Wix's custom Booking Calendar page flow:
 4. If Wix page code is available, `velo/custom-booking-calendar-page.js` remains a page-code starting point.
 5. If Wix page code is not available, no page code is required: the element auto-loads sanitized live slots from the Content Studio endpoint.
 6. Query real availability through the Content Studio endpoint. It uses Wix Bookings Availability Calendar `Query Availability` because the native Booking Form needs the real class `slot.sessionId`; Time Slots V2 returns an `eventId`, which is not the same value and can confuse the Booking Form.
-7. On `Reserve your spot`, route to the Wix Booking Form with only supported booking defaults: `bookings_sessionId`, `bookings_timezone`, `bookings_serviceId`, optional `bookings_locationId`, and UTM parameters.
+7. On `Reserve your spot`, route to the Wix Booking Form with only supported booking defaults: `bookings_sessionId`, `bookings_timezone`, `bookings_serviceId`, optional `bookings_locationId`, and UTM parameters. Attendee count stays on the native Wix form because Wix's shareable Booking Form URL does not support a reliable attendee-count prefill.
 
 This keeps Wix's Booking Form, confirmation page, calendar sync, and automations intact while replacing the heavy native calendar UI.
 

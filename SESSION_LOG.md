@@ -62,17 +62,18 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-06-02 — Codex (Booking calendar sessionId fix)
 
-**Did:** Fixed the custom Booking Calendar's native Booking Form handoff after Wix showed a €10 payment block.
+**Did:** Fixed the custom Booking Calendar's native Booking Form handoff after Wix showed a €10 payment block, then simplified the calendar to date/time only.
 
 **Changed:**
 - `booking-calendar/booking-calendar-element.js` — CTA URL now sends only supported Booking Form params: `bookings_sessionId`, `bookings_timezone`, `bookings_serviceId`, optional `bookings_locationId`, and UTMs; removed unsupported `selected_date`, `selected_time`, `event_id`, and `guests` params from the form URL.
+- `booking-calendar/booking-calendar-element.js` — removed guest stepper UI because attendee count stays on the native Wix form's `Number of Attendees` field.
 - `booking-calendar/README.md` — documented that the live endpoint uses Availability Calendar `slot.sessionId`, not Time Slots V2 `eventId`.
 - Workspace `berlinwalk-content-app/api/booking-calendar-availability.js` and `scripts/booking-calendar-availability-probe.mjs` — switched to Availability Calendar data; Vercel endpoint redeployed and verified.
 
-**Opened:** Push this widget change, wait for GitHub Pages, then retest Wix preview. If the form still shows payment after using the real `sessionId`, inspect Wix Booking Form/payment page settings.
+**Opened:** Push latest widget commit `62b8427`, wait for GitHub Pages, then retest Wix preview/live. If the form still shows payment after using the real `sessionId`, inspect Wix Booking Form/payment page settings.
 **Closed:** Root cause identified: Time Slots V2 `eventId` and Booking Form `bookings_sessionId` are distinct.
 
-**Next session should:** After push/deploy, confirm the generated href contains a `bookings_sessionId` starting with Availability Calendar's `slot.sessionId` and no `guests/event_id/selected_date` params.
+**Next session should:** After push/deploy, confirm the generated href contains a `bookings_sessionId` starting with Availability Calendar's `slot.sessionId` and no `guests/event_id/selected_date` params; calendar should not show a guest selector.
 
 ## 2026-06-02 — Codex (Day Trips extra images)
 

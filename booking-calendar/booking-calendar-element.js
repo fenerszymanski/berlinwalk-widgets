@@ -302,41 +302,6 @@ const BW_BOOKING_CALENDAR_STYLES = `
     font-weight: 700;
   }
 
-  .bw-cal-guest-row {
-    align-items: center;
-    display: grid;
-    gap: 8px;
-    grid-template-columns: 1fr 132px;
-    min-width: 0;
-  }
-
-  .bw-cal-stepper {
-    background: #F8FBF4;
-    border: 1px solid #CFE4C8;
-    border-radius: 8px;
-    display: grid;
-    grid-template-columns: 34px 1fr 34px;
-    overflow: hidden;
-  }
-
-  .bw-cal-step {
-    border: 0;
-    border-radius: 0;
-    font-size: 18px;
-    font-weight: 800;
-    height: 34px;
-  }
-
-  .bw-cal-guests {
-    align-items: center;
-    color: var(--green);
-    display: inline-flex;
-    font-size: 13px;
-    font-weight: 800;
-    justify-content: center;
-    min-width: 0;
-  }
-
   .bw-cal-summary {
     background: #F8FBF4;
     border-top: 1px solid var(--line);
@@ -616,7 +581,7 @@ class BWBookingCalendarElement extends HTMLElement {
     const months = this._availableMonths(dates);
     const slots = this._slotsForSelectedDate();
     const selectedText = selectedSlot
-      ? `<strong>${this._formatDate(selectedSlot.startDate)} at ${this._formatTime(selectedSlot.startDate)}</strong> for ${this.state.guests} ${this.state.guests === 1 ? 'guest' : 'guests'}`
+      ? `<strong>${this._formatDate(selectedSlot.startDate)} at ${this._formatTime(selectedSlot.startDate)}</strong>`
       : 'Choose a date and time.';
 
     this.innerHTML = `
@@ -653,14 +618,6 @@ class BWBookingCalendarElement extends HTMLElement {
                 ${slots.length ? slots.map((slot) => this._slotButton(slot)).join('') : loading ? '' : '<div class="bw-cal-empty">No open slots on this date.</div>'}
               </div>
             </div>
-            <div class="bw-cal-guest-row">
-              <span class="bw-cal-label">Guests</span>
-              <div class="bw-cal-stepper" aria-label="Guest count">
-                <button class="bw-cal-step" type="button" data-action="minus">-</button>
-                <span class="bw-cal-guests">${this.state.guests}</span>
-                <button class="bw-cal-step" type="button" data-action="plus">+</button>
-              </div>
-            </div>
           </div>
           <footer class="bw-cal-summary">
             <span class="bw-cal-selected">${selectedText}</span>
@@ -694,16 +651,6 @@ class BWBookingCalendarElement extends HTMLElement {
         this._preserveDateScroll();
         this.state.selectedSlotId = button.getAttribute('data-slot') || '';
         this._emitChange('slot');
-        this._render();
-      });
-    });
-
-    this.querySelectorAll('[data-action="minus"], [data-action="plus"]').forEach((button) => {
-      button.addEventListener('click', () => {
-        this._preserveDateScroll();
-        const delta = button.getAttribute('data-action') === 'plus' ? 1 : -1;
-        this.state.guests = this._boundedGuests(this.state.guests + delta);
-        this._emitChange('guests');
         this._render();
       });
     });
