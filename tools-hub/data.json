@@ -39,6 +39,22 @@
   ],
   "tools": [
     {
+      "slug": "watch-world-cup-2026-berlin",
+      "title": "Where to Watch the World Cup in Berlin",
+      "lead": "Free public viewing screens, beer gardens and bars to watch the 2026 World Cup in Berlin, filterable by what you want.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/worldcup-berlin/",
+      "embedHeight": 1480
+    },
+    {
+      "slug": "world-cup-2026-fixtures-berlin-time",
+      "title": "World Cup 2026 Fixtures in Berlin Time",
+      "lead": "Every 2026 World Cup match converted to Berlin time, with a live countdown. Filter by day or jump to Germany's games.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/worldcup-fixtures/",
+      "embedHeight": 1120
+    },
+    {
       "slug": "welcomecard-calculator",
       "title": "Berlin WelcomeCard Calculator",
       "lead": "Is the WelcomeCard worth it for your trip? Find out in 30 seconds.",

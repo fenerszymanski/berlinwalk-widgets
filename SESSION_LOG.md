@@ -4,6 +4,23 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Claude Code (World Cup 2026 widgets + blog draft)
+
+**Did:** Added two new World Cup widgets and a matching blog draft for the "where to watch the 2026 World Cup in Berlin" angle (Cup is in North America; no Brandenburg fan mile this year; kick-offs mostly Berlin evening/overnight).
+
+**Changed:**
+- `worldcup-fixtures/index.html` + `README.md` — full schedule in Berlin time (CEST): 72 group matches grouped by day + knockout calendar, live next-match countdown, filters (All / Germany / Evening-friendly / Today) + jump-to-day. Data inlined as `M`/`KO` arrays. Verified in preview desktop + mobile, no console errors.
+- `worldcup-berlin/index.html` + `README.md` — public-viewing venue finder: 12 spots, filters (free / beer garden / by the water / late-night), Maps links, "no fan mile" + 10pm-outdoor-rule note.
+- `quick-summary/data.json` + `faq/data.json` — new `world-cup-berlin` entries (render verified at `/quick-summary/?post=world-cup-berlin` and `/faq/?post=world-cup-berlin`).
+- `blog-drafts/where-to-watch-2026-world-cup-in-berlin.md` — blog draft (converter-safe: no tables; embeds `{{quick-summary}}`, `{{widget:worldcup-berlin}}`, `{{widget:worldcup-fixtures}}`, `{{faq}}`).
+- `tools-hub/data.json` — registered both widgets under Discovery.
+- Wix (via `../berlinwalk-content-app/create-worldcup-berlin-draft.mjs`): UNPUBLISHED draft `0d25be5a-4e4a-447d-af5d-a9f1de72206a`.
+
+**Opened:** Not pushed — embeds 404 until `berlinwalk-widgets` is pushed to GitHub Pages. Fixture times from secondary sources; reconfirm vs FIFA. No BerlinTools CMS rows yet for the two `/tools/<slug>` pages.
+**Closed:** —
+
+**Next session should:** Push the repo, then review/publish the Wix draft. Optional: add CMS rows + icons for the two new tools.
+
 ## 2026-06-03 — Codex (Ultimate widget finalization pass)
 
 **Did:** Implemented the widget-only finalization pass for the Ultimate planner route story, embedded map links, and post-itinerary resource separation.

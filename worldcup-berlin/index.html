@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Where to Watch the World Cup in Berlin 2026 | BerlinWalk</title>
+  <meta name="description" content="Where to watch the 2026 World Cup in Berlin: free public viewing screens, beer gardens and bars by neighbourhood. There is no Brandenburg Gate fan mile this year.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-wc-berlin">
+  <style>
+    #bw-wc-berlin {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-wc-berlin * { box-sizing: border-box; }
+
+    #bw-wc-berlin .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    #bw-wc-berlin .bw-head { background: var(--bw-green); padding: 16px 20px; }
+    #bw-wc-berlin .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; margin: 0 0 4px;
+    }
+    #bw-wc-berlin .bw-title { color: var(--bw-white); font-size: 20px; font-weight: 800; margin: 0; line-height: 1.2; }
+    #bw-wc-berlin .bw-sub { color: #DDEFCB; font-size: 12.5px; margin: 6px 0 0; line-height: 1.5; }
+
+    #bw-wc-berlin .bw-note {
+      background: #FFFDF0;
+      border-bottom: 1px solid var(--bw-border);
+      border-top: 3px solid var(--bw-yellow);
+      padding: 11px 20px;
+      font-size: 12px;
+      color: #6b5a00;
+      line-height: 1.5;
+    }
+    #bw-wc-berlin .bw-note b { color: var(--bw-green-dark); }
+
+    #bw-wc-berlin .bw-body { background: var(--bw-cream); padding: 16px 18px 20px; }
+
+    #bw-wc-berlin .bw-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+    #bw-wc-berlin .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit; font-size: 12px; font-weight: 700;
+      padding: 8px 13px; border-radius: 999px; cursor: pointer;
+      transition: all 0.15s ease; white-space: nowrap;
+    }
+    #bw-wc-berlin .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+    #bw-wc-berlin .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
+
+    #bw-wc-berlin .bw-count { font-size: 11.5px; color: var(--bw-muted); font-weight: 700; margin: 10px 0 12px; }
+    #bw-wc-berlin .bw-count b { color: var(--bw-green); }
+
+    #bw-wc-berlin .bw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
+    @media (max-width: 600px) { #bw-wc-berlin .bw-grid { grid-template-columns: 1fr; } }
+
+    #bw-wc-berlin .bw-card {
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      background: var(--bw-white);
+      padding: 13px 14px 12px;
+      display: flex; flex-direction: column;
+    }
+    #bw-wc-berlin .bw-card.feat { border-color: var(--bw-lime); box-shadow: inset 0 3px 0 var(--bw-yellow); }
+
+    #bw-wc-berlin .bw-cardtop { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+    #bw-wc-berlin .bw-name { font-size: 14.5px; font-weight: 800; color: var(--bw-text); line-height: 1.25; margin: 0; }
+    #bw-wc-berlin .bw-hood {
+      flex: 0 0 auto;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.4px; text-transform: uppercase;
+      color: var(--bw-green); background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border); border-radius: 7px; padding: 4px 8px; white-space: nowrap;
+    }
+
+    #bw-wc-berlin .bw-badges { display: flex; flex-wrap: wrap; gap: 5px; margin: 9px 0 8px; }
+    #bw-wc-berlin .bw-badge {
+      font-size: 10px; font-weight: 800; letter-spacing: 0.3px;
+      border-radius: 6px; padding: 3px 7px; text-transform: uppercase;
+    }
+    #bw-wc-berlin .bw-badge.free { background: var(--bw-green); color: var(--bw-yellow); }
+    #bw-wc-berlin .bw-badge.de { background: var(--bw-yellow); color: var(--bw-green-dark); }
+    #bw-wc-berlin .bw-badge.plain { background: #EAF2DC; color: #3c5a24; }
+
+    #bw-wc-berlin .bw-desc { font-size: 12.5px; color: var(--bw-muted); line-height: 1.5; margin: 0 0 10px; flex: 1 1 auto; }
+
+    #bw-wc-berlin .bw-maps {
+      align-self: flex-start;
+      font-size: 11.5px; font-weight: 800; color: var(--bw-green);
+      text-decoration: none; border: 1.5px solid var(--bw-border);
+      border-radius: 8px; padding: 6px 10px; transition: all 0.15s ease;
+    }
+    #bw-wc-berlin .bw-maps:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+
+    #bw-wc-berlin .bw-foot {
+      font-size: 11px; color: var(--bw-muted); line-height: 1.55;
+      margin: 14px 0 0; border-top: 1px solid var(--bw-border); padding-top: 11px;
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <p class="bw-kicker">BerlinWalk &bull; World Cup 2026</p>
+      <h2 class="bw-title">Where to Watch the World Cup in Berlin</h2>
+      <p class="bw-sub">The 2026 World Cup is played in North America, but Berlin is full of places to watch. Free public screens, beer gardens and bars &mdash; filter by what you're after.</p>
+    </div>
+
+    <div class="bw-note">
+      <b>No Brandenburg Gate fan mile this year.</b> For the first time since 2006, Berlin skipped its famous <i>Fanmeile</i>. Most kick-offs are evening or overnight Berlin time; the city allows outdoor screening for matches that start by <b>10&nbsp;pm</b>, so very late games move indoors.
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-filters" id="bwFilters">
+        <button class="bw-filter active" data-f="all">All spots</button>
+        <button class="bw-filter" data-f="free">Free entry</button>
+        <button class="bw-filter" data-f="beergarden">Beer garden</button>
+        <button class="bw-filter" data-f="water">By the water</button>
+        <button class="bw-filter" data-f="latenight">Late-night OK</button>
+      </div>
+
+      <p class="bw-count" id="bwCount"></p>
+      <div class="bw-grid" id="bwGrid"></div>
+
+      <p class="bw-foot">
+        Most kick-offs land in the Berlin evening or overnight, which leaves your days free to explore the city on foot. Venues, screenings and opening hours can change &mdash; check each spot before you go. The full official screening list is published on Berlin.de.
+      </p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    // tags: free, beergarden, water, latenight  |  feat = highlighted (official free flagship)
+    var V = [
+      { n: 'Center am Potsdamer Platz', hood: 'Mitte', feat: true,
+        badges: [['FREE','free'], ['Shows all Germany games','de'], ['100 m² LED','plain']],
+        tags: ['free'],
+        desc: "The headline spot. Matches on the ~100 m² face of Germany's largest 3D LED wall, sheltered under the Center's roof. Ten games confirmed: all three Germany group matches, the opening game, both semi-finals and the final. Admission free.",
+        q: 'Center am Potsdamer Platz Berlin' },
+
+      { n: 'Neulich Beer Garden — Tempelhof', hood: 'Tempelhof',
+        badges: [['Big screen','plain'], ['Beer garden','plain'], ['Street food','plain']],
+        tags: ['beergarden','free'],
+        desc: 'A public viewing party at the THF Tower on the former airport grounds: big screen, drinks, street food and a proper beer-garden atmosphere on Berlin’s most iconic open space.',
+        q: 'Neulich Biergarten THF Tower Tempelhof Berlin' },
+
+      { n: 'Beach Neukölln', hood: 'Neukölln',
+        badges: [['City beach','plain'], ['Big screen','plain'], ['Street food','plain']],
+        tags: ['water','beergarden'],
+        desc: 'A city-beach venue turned screening spot, with live broadcasts and street food. Sand-under-your-feet football in the south of the city.',
+        q: 'Beach Neukölln Berlin' },
+
+      { n: 'Strandbad Wendenschloss', hood: 'Köpenick',
+        badges: [['By the water','plain'], ['LED screen','plain'], ['Late games OK','plain']],
+        tags: ['water','latenight'],
+        desc: 'An LED screen set up in the open air right by the lake. Thanks to a special permit, even late kick-offs can be shown here, feet in the sand.',
+        q: 'Strandbad Wendenschloss Berlin' },
+
+      { n: 'BRLO Brwhouse', hood: 'Kreuzberg',
+        badges: [['Craft beer','plain'], ['Beer garden','plain'], ['Gleisdreieck','plain']],
+        tags: ['beergarden'],
+        desc: 'Craft beer meets football in a big open-air setting at Gleisdreieck park. One of the most reliable summer screening venues in the centre.',
+        q: 'BRLO Brwhouse Gleisdreieck Berlin' },
+
+      { n: 'Golgatha Biergarten', hood: 'Kreuzberg',
+        badges: [['Beer garden','plain'], ['Viktoriapark','plain']],
+        tags: ['beergarden'],
+        desc: 'A classic Berlin beer garden under the trees and fairy lights in Viktoriapark. Relaxed, green and very local.',
+        q: 'Golgatha Biergarten Viktoriapark Berlin' },
+
+      { n: 'Kulturbrauerei', hood: 'Prenzlauer Berg',
+        badges: [['36 m² LED','plain'], ['Indoor backup','plain'], ['BBQ','plain']],
+        tags: ['latenight'],
+        desc: 'A 36 m² LED screen in the historic brewery courtyard, with indoor space as a bad-weather backup and a barbecue. Central, atmospheric and good for later games.',
+        q: 'Kulturbrauerei Berlin' },
+
+      { n: 'Maaya at RAW', hood: 'Friedrichshain',
+        badges: [['Club vibe','plain'], ['Music after','plain']],
+        tags: ['beergarden','latenight'],
+        desc: 'A creative, slightly club-like spot on the RAW site: football first, then drinks and music. Good energy for the younger crowd and late kick-offs.',
+        q: 'Maaya RAW Gelände Berlin' },
+
+      { n: 'Studio 14 — rbb Rooftop', hood: 'Westend',
+        badges: [['Rooftop','plain'], ['City views','plain'], ['Commentary','plain']],
+        tags: [],
+        desc: 'A rooftop lounge on the public broadcaster’s building with panoramic city views, commentary, music and discussions around selected matches.',
+        q: 'rbb Studio 14 Masurenallee Berlin' },
+
+      { n: 'Zollpackhof', hood: 'Wedding / Mitte',
+        badges: [['Beer garden','plain'], ['Riverside','plain'], ['Chancellery view','plain']],
+        tags: ['beergarden','water'],
+        desc: 'A riverside beer garden with a view across the Spree to the Chancellery, a short walk from the main station. Classic Berlin summer atmosphere.',
+        q: 'Zollpackhof Berlin' },
+
+      { n: 'Naumanns', hood: 'Schöneberg',
+        badges: [['Free entry','free'], ['Beer garden','plain'], ['Long tables','plain']],
+        tags: ['beergarden','free'],
+        desc: 'A traditional beer garden with long shared tables and a relaxed, conversational crowd. Planning to show matches with free entry.',
+        q: 'Naumanns Biergarten Schöneberg Berlin' },
+
+      { n: 'Freiheit Fünfzehn', hood: 'Köpenick',
+        badges: [['Riverside','plain'], ['Beer garden','plain']],
+        tags: ['beergarden','water'],
+        desc: 'A laid-back riverside beer garden along the Müggelspree in the leafy south-east. Worth it if you want football away from the crowds.',
+        q: 'Freiheit Fünfzehn Köpenick Berlin' }
+    ];
+
+    var gridEl = document.getElementById('bwGrid');
+    var countEl = document.getElementById('bwCount');
+    var filtersEl = document.getElementById('bwFilters');
+    var current = 'all';
+
+    function visible() {
+      if (current === 'all') return V;
+      return V.filter(function (v) { return v.tags.indexOf(current) !== -1; });
+    }
+
+    function card(v) {
+      var badges = v.badges.map(function (b) {
+        return '<span class="bw-badge ' + b[1] + '">' + b[0] + '</span>';
+      }).join('');
+      var maps = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(v.q);
+      var el = document.createElement('div');
+      el.className = 'bw-card' + (v.feat ? ' feat' : '');
+      el.innerHTML =
+        '<div class="bw-cardtop"><h3 class="bw-name">' + v.n + '</h3>' +
+          '<span class="bw-hood">' + v.hood + '</span></div>' +
+        '<div class="bw-badges">' + badges + '</div>' +
+        '<p class="bw-desc">' + v.desc + '</p>' +
+        '<a class="bw-maps" href="' + maps + '" target="_blank" rel="noopener">📍 Open in Maps</a>';
+      return el;
+    }
+
+    function render() {
+      var rows = visible();
+      gridEl.innerHTML = '';
+      rows.forEach(function (v) { gridEl.appendChild(card(v)); });
+      var labels = { all: 'public-viewing spots across Berlin', free: 'spots with free entry',
+        beergarden: 'beer gardens', water: 'spots by the water', latenight: 'spots good for late kick-offs' };
+      countEl.innerHTML = 'Showing <b>' + rows.length + '</b> &middot; ' + (labels[current] || '');
+    }
+
+    filtersEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.bw-filter');
+      if (!btn) return;
+      current = btn.getAttribute('data-f');
+      Array.prototype.forEach.call(filtersEl.querySelectorAll('.bw-filter'), function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      render();
+    });
+
+    render();
+  })();
+  </script>
+</div>
+</body>
+</html>
