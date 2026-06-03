@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (World Cup blog launch + placement)
+
+**Did:** Published the World Cup Berlin post, wired its two tools into BerlinTools CMS, and promoted it live on `/blog` + homepage.
+
+**Changed:**
+- `blog-drafts/where-to-watch-2026-world-cup-in-berlin.md` + `blog-drafts/images/worldcup-berlin/` — local source now has internal links, bolding, and the optimized active visual set.
+- `blog-home/data.json`, `blog-index/data.json`, `scripts/generate-blog-index-data.mjs`, `blog-index/blog-index-element.js` — local durable placement now pins the World Cup post and tools on the current local `main`.
+- Wix: published post `0d25be5a-4e4a-447d-af5d-a9f1de72206a`; BerlinTools CMS rows live for `watch-world-cup-2026-berlin` and `world-cup-2026-fixtures-berlin-time`; temporary HEAD embeds promote the post live because this Codex environment cannot push GitHub.
+
+**Opened:** Push is still pending from an authenticated terminal; `git push` failed with missing GitHub HTTPS credential and the GitHub connector returned 403 for writes. After push, decide whether to remove temporary Wix embeds `7b593b94-45e8-4bcf-a002-ec308a52f37d` and `da64c566-6258-4839-9601-0e345bfff08c`.
+**Closed:** Live post readback has 3 images, 4 embeds, 22 bold marks, and 4 internal BerlinWalk links; `/blog`, homepage, post URL, and both `/tools/*` pages were Playwright/curl verified.
+
+**Next session should:** Push `main` from an authenticated GitHub terminal, wait for GitHub Pages, then QA `/blog` and the homepage with the temporary embeds disabled or removed if the data files are live.
+
 ## 2026-06-03 — Claude Code (World Cup 2026 widgets + blog draft)
 
 **Did:** Added two new World Cup widgets and a matching blog draft for the "where to watch the 2026 World Cup in Berlin" angle (Cup is in North America; no Brandenburg fan mile this year; kick-offs mostly Berlin evening/overnight).
