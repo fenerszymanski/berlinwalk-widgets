@@ -1,20 +1,20 @@
 # Ultimate Berlin Trip Planner Launch Status
 
-Generated: 2026-06-02T14:08:53.418Z
+Generated: 2026-06-03T05:49:38.727Z
 
 ## Verdict: WAITING FOR LIVE QA
 
-Launch audit: 149 pass, 1 warn, 0 block (ready for manual Wix smoke tests)
+Launch audit: 152 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 
 ## Gates
 
 | Gate | Status | Detail |
 | --- | --- | --- |
 | Triggered Email IDs | PASS | All message IDs are applied. |
-| TripPlannerLeads collection | PASS | 74 fields visible via API; critical fields verified. |
-| Velo endpoints | WARN | lead OPTIONS 204, ai OPTIONS 404, booking OPTIONS 204. |
-| Live lead/booking smoke | PASS | output/qa/ultimate-trip-planner-live-smoke/live-2026-05-31T18-57-06-052Z.json |
-| Gemini AI polish smoke | WARN | No passing tripPlannerAi smoke evidence found. |
+| TripPlannerLeads collection | PASS | 77 fields visible via API; critical fields verified. |
+| Velo endpoints | PASS | lead OPTIONS 204, ai OPTIONS 204, booking OPTIONS 204. |
+| Live lead/booking smoke | WARN | No passing live smoke evidence found. |
+| Gemini AI polish smoke | PASS | output/qa/ultimate-trip-planner-live-smoke/live-ai-only-2026-06-02T19-43-19-550Z.json |
 | Live Wix tool page | PASS | Latest remote preflight status 200. |
 | Public visibility | HOLD | Ultimate is still protected as draft. |
 | Homepage shortcut | HOLD | Homepage shortcut is not enabled yet. |
@@ -24,10 +24,10 @@ Launch audit: 149 pass, 1 warn, 0 block (ready for manual Wix smoke tests)
 
 ## Evidence
 
-- Latest remote preflight: `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-06-02T14-07-47-464Z.json`
-- Latest passing live smoke: `output/qa/ultimate-trip-planner-live-smoke/live-2026-05-31T18-57-06-052Z.json`
-- Latest passing Gemini AI smoke: missing
-- Latest Gemini cost estimate: missing until live AI smoke passes
+- Latest remote preflight: `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-06-03T05-49-14-482Z.json`
+- Latest passing live smoke: missing
+- Latest passing Gemini AI smoke: `output/qa/ultimate-trip-planner-live-smoke/live-ai-only-2026-06-02T19-43-19-550Z.json`
+- Latest Gemini cost estimate: gemini-2.5-flash: 853 input + 729 output tokens, est. $0.002078
 - Visibility: draft/protected, homepage shortcut not enabled
 - Widget URL: https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/
 - Blog package: body draft exists; widget near top yes; quick summary yes; FAQ yes
@@ -36,12 +36,11 @@ Launch audit: 149 pass, 1 warn, 0 block (ready for manual Wix smoke tests)
 ## Current Blockers And Warnings
 
 - No audit blockers.
-- WARN Gemini AI polish live smoke evidence is recorded - No live-*.json result with successful tripPlannerAi response found under output/qa/ultimate-trip-planner-live-smoke/. Add GEMINI_API_KEY in Wix Secrets, publish Velo, then run the smoke helper with --ai.
 
 ## Next Actions
 
-1. Publish Backend/tripPlannerFunnel.js, http-functions.js handlers, and jobs.config in Wix.
-2. Run launch-remote-preflight.mjs until lead, AI, and booking Velo OPTIONS handlers are live.
+1. Run live-smoke-trip-planner.mjs --live with a real test email.
+2. Run live-smoke-trip-planner.mjs --live --booking to prove booked-branch behavior.
 
 ## Command Shortcuts
 

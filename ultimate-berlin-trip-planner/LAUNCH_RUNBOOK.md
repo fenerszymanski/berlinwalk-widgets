@@ -255,7 +255,7 @@ Use a real test inbox, not a fake domain:
 
 ```bash
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --email test@example.com
-node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email test@example.com --ai-only
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email test@example.com
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email test@example.com --ai
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email test@example.com --booking
@@ -267,9 +267,9 @@ Confirm:
 
 - `tripPlannerLead` returns `ok: true` and a `leadId`.
 - The instant email arrives with the plan variables filled.
-- `tripPlannerAi` returns `ok: true` and an `enhancement.localRead`; use
-  `--ai-only` first if you only want to test Gemini without creating a lead or
-  sending the instant email.
+- `tripPlannerAi` returns `ok: true` and an `enhancement.guideNote`; use
+  `--ai-only` first if you only want to test Gemini against an existing lead
+  without creating a new lead or sending the instant email.
 - `tripPlannerBooking` returns `ok: true`.
 - Future Ultimate reminders are suppressed for that booked lead.
 - The audit warnings for lead/booking and Gemini AI smoke evidence disappear.

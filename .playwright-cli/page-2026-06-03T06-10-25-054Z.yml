@@ -1,0 +1,212 @@
+- generic [active] [ref=e1]:
+  - region "Ultimate Berlin Trip Planner" [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - paragraph [ref=e6]: BerlinWalk local planner
+        - heading "Ultimate Berlin Trip Planner" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Answer a few basics and get a realistic 1 to 7 day Berlin plan with weather, opening-day notes, map links, and practical first-day guidance.
+        - generic "Planner features" [ref=e9]:
+          - generic "1 to 7 day plan" [ref=e10]:
+            - generic [ref=e11]: 🗓️
+            - text: 1-7 day plan
+          - generic "Google Maps links" [ref=e12]:
+            - generic [ref=e13]: 🗺️
+            - text: Google Maps links
+          - generic "Weather aware" [ref=e14]:
+            - generic [ref=e15]: 🌦️
+            - text: Weather aware
+          - generic "Print-ready PDF export" [ref=e16]:
+            - generic [ref=e17]: 📄
+            - text: Print-ready export
+      - figure "Berlin trip planner preview" [ref=e18]:
+        - img "Illustrated Berlin river view with Berlin Cathedral, TV Tower, and city route feeling" [ref=e19]
+        - generic [ref=e20]:
+          - strong [ref=e21]: Date-to-plan itinerary
+          - generic [ref=e22]:
+            - generic [ref=e23]: Arrival
+            - generic [ref=e25]: Daily areas
+            - generic [ref=e27]: PDF
+          - generic [ref=e28]: Weather, maps, openings, and Berlin essentials are built into the plan.
+    - form "Ultimate Berlin trip planner choices" [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]: Arrival date
+        - generic [ref=e33]:
+          - generic [ref=e35]: 📅
+          - textbox "Arrival date" [ref=e37]: 2026-07-14
+      - generic [ref=e38]:
+        - generic [ref=e39]: Trip length
+        - generic [ref=e40]:
+          - button "1 day" [ref=e41] [cursor=pointer]:
+            - generic [ref=e43]: 1 day
+          - button "2 days" [ref=e44] [cursor=pointer]:
+            - generic [ref=e46]: 2 days
+          - button "3 days" [ref=e47] [cursor=pointer]:
+            - generic [ref=e49]: 3 days
+          - button "4 days" [ref=e50] [cursor=pointer]:
+            - generic [ref=e52]: 4 days
+          - button "5 days" [ref=e53] [cursor=pointer]:
+            - generic [ref=e55]: 5 days
+          - button "6 days" [ref=e56] [cursor=pointer]:
+            - generic [ref=e58]: 6 days
+          - button "7 days" [ref=e59] [cursor=pointer]:
+            - generic [ref=e61]: 7 days
+      - generic [ref=e62]:
+        - generic [ref=e63]: Arrival time
+        - generic [ref=e64]:
+          - button "Before 09:00" [ref=e65] [cursor=pointer]:
+            - generic [ref=e67]: ☀️
+            - generic [ref=e69]: Before 09:00
+          - button "09:00-10:00" [ref=e70] [cursor=pointer]:
+            - generic [ref=e72]: 🕒
+            - generic [ref=e74]: 09:00-10:00
+          - button "10:00-14:30" [ref=e75] [cursor=pointer]:
+            - generic [ref=e77]: 🕒
+            - generic [ref=e79]: 10:00-14:30
+          - button "14:30-18:00" [ref=e80] [cursor=pointer]:
+            - generic [ref=e82]: ☀️
+            - generic [ref=e84]: 14:30-18:00
+          - button "After 18:00" [ref=e85] [cursor=pointer]:
+            - generic [ref=e87]: 🌙
+            - generic [ref=e89]: After 18:00
+      - generic [ref=e90]:
+        - generic [ref=e91]: Arrival point
+        - generic [ref=e92]:
+          - button "BER Airport" [ref=e93] [cursor=pointer]:
+            - generic [ref=e95]: ✈️
+            - generic [ref=e97]: BER Airport
+          - button "Hauptbahnhof" [ref=e98] [cursor=pointer]:
+            - generic [ref=e100]: 🚆
+            - generic [ref=e102]: Hauptbahnhof
+          - button "Alexanderplatz" [ref=e103] [cursor=pointer]:
+            - generic [ref=e105]: 📍
+            - generic [ref=e107]: Alexanderplatz
+          - button "Hotel/Airbnb" [ref=e108] [cursor=pointer]:
+            - generic [ref=e110]: 🛏️
+            - generic [ref=e112]: Hotel/Airbnb
+          - button "Car / rental" [ref=e113] [cursor=pointer]:
+            - generic [ref=e115]: 🚗
+            - generic [ref=e117]: Car / rental
+      - generic [ref=e118]:
+        - generic [ref=e119]: Where are you staying?
+        - generic [ref=e120]:
+          - button "Mitte / Alexanderplatz" [ref=e121] [cursor=pointer]:
+            - generic [ref=e123]: 🏛️
+            - generic [ref=e125]: Mitte / Alexanderplatz
+          - button "Kreuzberg / Friedrichshain" [ref=e126] [cursor=pointer]:
+            - generic [ref=e128]: 🍽️
+            - generic [ref=e130]: Kreuzberg / Friedrichshain
+          - button "Prenzlauer Berg" [ref=e131] [cursor=pointer]:
+            - generic [ref=e133]: 🌿
+            - generic [ref=e135]: Prenzlauer Berg
+          - button "Charlottenburg / West" [ref=e136] [cursor=pointer]:
+            - generic [ref=e138]: 🏢
+            - generic [ref=e140]: Charlottenburg / West
+          - button "Not sure yet" [ref=e141] [cursor=pointer]:
+            - generic [ref=e143]: ❓
+            - generic [ref=e145]: Not sure yet
+      - generic [ref=e146]:
+        - generic [ref=e147]:
+          - generic [ref=e148]: Who is traveling?
+          - generic [ref=e149]:
+            - button "Solo" [ref=e150] [cursor=pointer]:
+              - generic [ref=e152]: 📍
+              - generic [ref=e154]: Solo
+            - button "Couple / friends" [ref=e155] [cursor=pointer]:
+              - generic [ref=e157]: 👥
+              - generic [ref=e159]: Couple / friends
+            - button "Family" [ref=e160] [cursor=pointer]:
+              - generic [ref=e162]: 👨‍👩‍👧
+              - generic [ref=e164]: Family
+            - button "Older / slower" [ref=e165] [cursor=pointer]:
+              - generic [ref=e167]: 🌿
+              - generic [ref=e169]: Older / slower
+        - generic [ref=e170]:
+          - generic [ref=e171]: First time in Berlin?
+          - generic [ref=e172]:
+            - button "Yes" [ref=e173] [cursor=pointer]:
+              - generic [ref=e175]: ✅
+              - generic [ref=e177]: "Yes"
+            - button "No" [ref=e178] [cursor=pointer]:
+              - generic [ref=e180]: 🧭
+              - generic [ref=e182]: "No"
+            - button "Long time ago" [ref=e183] [cursor=pointer]:
+              - generic [ref=e185]: 🕒
+              - generic [ref=e187]: Long time ago
+        - generic [ref=e188]:
+          - generic [ref=e189]:
+            - generic [ref=e190]: Top interests
+            - generic [ref=e191]: Choose any that apply
+          - generic [ref=e192]:
+            - button "History" [ref=e193] [cursor=pointer]:
+              - generic [ref=e195]: 📚
+              - generic [ref=e197]: History
+            - button "Berlin Wall / Cold War" [ref=e198] [cursor=pointer]:
+              - generic [ref=e200]: 🧱
+              - generic [ref=e202]: Berlin Wall / Cold War
+            - button "Museums" [ref=e203] [cursor=pointer]:
+              - generic [ref=e205]: 🏛️
+              - generic [ref=e207]: Museums
+            - button "Food" [ref=e208] [cursor=pointer]:
+              - generic [ref=e210]: 🍽️
+              - generic [ref=e212]: Food
+            - button "Nightlife" [ref=e213] [cursor=pointer]:
+              - generic [ref=e215]: 🌙
+              - generic [ref=e217]: Nightlife
+            - button "Free / low budget" [ref=e218] [cursor=pointer]:
+              - generic [ref=e220]: 💶
+              - generic [ref=e222]: Free / low budget
+        - generic [ref=e223]:
+          - generic [ref=e224]: Trip mode
+          - generic [ref=e225]:
+            - button "Low budget" [ref=e226] [cursor=pointer]:
+              - generic [ref=e228]: 💶
+              - generic [ref=e230]: Low budget
+            - button "Smart spend" [ref=e231] [cursor=pointer]:
+              - generic [ref=e233]: 🎟️
+              - generic [ref=e235]: Smart spend
+            - button "Comfort" [ref=e236] [cursor=pointer]:
+              - generic [ref=e238]: 🛡️
+              - generic [ref=e240]: Comfort
+        - generic [ref=e241]:
+          - generic [ref=e242]:
+            - generic [ref=e243]: Plan needs
+            - generic [ref=e244]: Select any
+          - generic [ref=e245]:
+            - button "Rain backup" [ref=e246] [cursor=pointer]:
+              - generic [ref=e248]: ☂️
+              - generic [ref=e250]: Rain backup
+            - button "Low walking / breaks" [ref=e251] [cursor=pointer]:
+              - generic [ref=e253]: 👨‍👩‍👧
+              - generic [ref=e255]: Low walking / breaks
+            - button "Photo-friendly route" [ref=e256] [cursor=pointer]:
+              - generic [ref=e258]: 📸
+              - generic [ref=e260]: Photo-friendly route
+            - button "Timed entry planning" [ref=e261] [cursor=pointer]:
+              - generic [ref=e263]: 🎟️
+              - generic [ref=e265]: Timed entry planning
+        - generic [ref=e266]:
+          - generic [ref=e267]: Pace
+          - generic [ref=e268]:
+            - button "Gentle" [ref=e269] [cursor=pointer]:
+              - generic [ref=e271]: 🌿
+              - generic [ref=e273]: Gentle
+            - button "Balanced" [ref=e274] [cursor=pointer]:
+              - generic [ref=e276]: 🧭
+              - generic [ref=e278]: Balanced
+            - button "Packed" [ref=e279] [cursor=pointer]:
+              - generic [ref=e281]: ⚡
+              - generic [ref=e283]: Packed
+      - region "Build Berlin trip plan" [ref=e284]:
+        - generic [ref=e285]:
+          - strong [ref=e286]: Ready when you are
+          - generic [ref=e287]: Fill the basics above, then generate a calmer preview. The full day-by-day plan, maps, PDF, and print view stay behind email consent.
+        - button "Build my Berlin plan" [ref=e288] [cursor=pointer]:
+          - generic [ref=e289]: Build my Berlin plan
+        - paragraph [ref=e290]: Planning takes a few seconds so the result feels intentional, not like another instant wall of text.
+    - generic [ref=e291]: Live forecasts use Open-Meteo near Alexanderplatz. Far-future dates use Berlin monthly averages. Opening notes are practical visitor rules, not guarantees for every individual shop, museum, or restaurant.
+  - link "Made by BerlinWalk — open berlinwalk.com" [ref=e292] [cursor=pointer]:
+    - /url: https://www.berlinwalk.com/?utm_source=embed&utm_medium=widget&utm_campaign=ultimate-berlin-trip-planner&utm_content=footer-badge
+    - generic [ref=e293]:
+      - text: by
+      - strong [ref=e294]: berlinwalk.com
+    - generic [ref=e295]: →

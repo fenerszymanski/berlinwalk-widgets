@@ -44,7 +44,45 @@ return {
 };`;
 }
 
-function loadFunnelRuntime({ secretValue = '', fetchImpl = async () => ({ ok: false, status: 500, text: async () => '' }) } = {}) {
+function fakeWixData(initialLead) {
+  let lead = Object.assign({}, initialLead);
+  const updates = [];
+  return {
+    updates,
+    currentLead() {
+      return Object.assign({}, lead);
+    },
+    query() {
+      return {
+        eq(field, value) {
+          this.field = field;
+          this.value = value;
+          return this;
+        },
+        limit() {
+          return this;
+        },
+        async find() {
+          if (this.field === 'leadKey' && this.value === lead.leadKey) {
+            return { items: [Object.assign({}, lead)] };
+          }
+          return { items: [] };
+        }
+      };
+    },
+    async update(collection, item) {
+      lead = Object.assign({}, item);
+      updates.push({ collection, item: Object.assign({}, item) });
+      return Object.assign({}, lead);
+    }
+  };
+}
+
+function loadFunnelRuntime({
+  secretValue = '',
+  fetchImpl = async () => ({ ok: false, status: 500, text: async () => '' }),
+  wixDataImpl = {}
+} = {}) {
   const factory = new Function(
     'wixData',
     'contacts',
@@ -55,7 +93,7 @@ function loadFunnelRuntime({ secretValue = '', fetchImpl = async () => ({ ok: fa
   );
 
   return factory(
-    {},
+    wixDataImpl,
     {},
     {},
     async () => secretValue,
@@ -65,6 +103,7 @@ function loadFunnelRuntime({ secretValue = '', fetchImpl = async () => ({ ok: fa
 
 function fixturePayload() {
   return {
+    quotaEmail: 'quota@example.com',
     inputs: {
       arrivalDate: '2026-07-14',
       tripLength: '3 days',
@@ -83,7 +122,8 @@ function fixturePayload() {
       title: 'Summer day',
       mode: 'Monthly fallback',
       copy: 'Send details to private@example.com',
-      advice: 'Carry a layer'
+      advice: 'Carry a layer',
+      tripSummary: 'Warm July pattern, with one rain-safe backup inside the same area.'
     },
     tourSlot: {
       dayLabel: 'Day 2',
@@ -124,16 +164,15 @@ function fakeGeminiBody() {
       content: {
         parts: [{
           text: JSON.stringify({
-            headline: 'Local guide read',
-            localRead: 'Keep the first day narrow and useful.',
-            watchOut: 'Do not overload arrival day.',
-            tourNote: 'Use BerlinWalk once as context if the slot fits.',
-            dayNotes: [{
-              dayNumber: 1,
-              headline: 'Keep it simple',
-              note: 'Stay near the first area.',
-              nextMove: 'Open the first map.'
-            }]
+            noteTitle: 'A clean first Berlin rhythm',
+            guideNote: 'I would keep this plan calm on arrival day: use the BER ABC ticket, reach the World Clock area, and save the heavier history layer for the next morning. Museum Island works as a first visual anchor, but the plan is stronger if you do not turn it into a museum marathon. Day 2 at 11:30 gives the guided city context, then the Wall / Cold War stop can stay focused instead of becoming a second cross-city route.',
+            weatherSentence: 'July should be workable, but keep one rain-safe museum or cafe backup in the same area.',
+            tourSentence: 'Use Day 2 at 11:30 from the World Clock as the BerlinWalk anchor.',
+            chips: [
+              { label: 'Arrival move', value: 'Reach the World Clock area first.' },
+              { label: 'Tour anchor', value: 'Day 2 at 11:30.' },
+              { label: 'Weather move', value: 'Keep a same-area indoor backup.' }
+            ]
           })
         }]
       }
@@ -159,9 +198,19 @@ async function main() {
   assert.equal(missingKeyResult.reason, 'missing_api_key');
 
   let capturedRequest = null;
+  let fetchCalls = 0;
+  const quotaStore = fakeWixData({
+    _id: 'fixture-lead-1',
+    leadKey: 'quota@example.com|2026-07-14',
+    email: 'quota@example.com',
+    arrivalDate: '2026-07-14',
+    aiRequestCount: 0
+  });
   const runtime = loadFunnelRuntime({
     secretValue: 'fixture-gemini-key',
+    wixDataImpl: quotaStore,
     fetchImpl: async (url, request) => {
+      fetchCalls += 1;
       capturedRequest = {
         url,
         body: JSON.parse(request.body)
@@ -181,12 +230,25 @@ async function main() {
   assert.equal(result.ok, true);
   assert.equal(result.enhancement.provider, 'gemini');
   assert.equal(result.enhancement.model, 'fixture-gemini-key');
+  assert.ok(result.enhancement.guideNote, 'enhancement.guideNote missing');
+  assert.equal(result.quota.remaining, 1);
   assert.equal(result.enhancement.usage.totalTokens, 490);
   assert.ok(capturedRequest, 'Gemini fetch was not called');
   assert.equal(capturedRequest.body.generationConfig.thinkingConfig.thinkingBudget, 0);
   assert.equal(capturedRequest.body.generationConfig.responseMimeType, 'application/json');
   assert.ok(capturedRequest.body.generationConfig.responseJsonSchema, 'responseJsonSchema missing');
   assertNoPrivateText(capturedRequest.body.contents);
+  assert.equal(JSON.stringify(capturedRequest.body.contents).includes('quota@example.com'), false, 'quota email reached Gemini prompt');
+
+  const secondResult = await runtime.enhanceTripPlannerPlan(fixturePayload());
+  assert.equal(secondResult.ok, true);
+  assert.equal(secondResult.quota.remaining, 0);
+  const callsAfterSecond = fetchCalls;
+  const thirdResult = await runtime.enhanceTripPlannerPlan(fixturePayload());
+  assert.equal(thirdResult.ok, false);
+  assert.equal(thirdResult.reason, 'ai_quota_limit');
+  assert.equal(thirdResult.quota.remaining, 0);
+  assert.equal(fetchCalls, callsAfterSecond, 'Gemini fetch should not run after quota is exhausted');
 
   const evidence = {
     generatedAt: new Date().toISOString(),
@@ -197,6 +259,14 @@ async function main() {
     privacyScrub: {
       sanitizedInputHasPrivateText: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(JSON.stringify(sanitizedInput)),
       promptHasPrivateText: /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(JSON.stringify(capturedRequest.body.contents))
+    },
+    quota: {
+      limit: result.quota.limit,
+      firstRemaining: result.quota.remaining,
+      secondRemaining: secondResult.quota.remaining,
+      thirdReason: thirdResult.reason,
+      geminiFetchCalls: fetchCalls,
+      updates: quotaStore.updates.length
     },
     geminiRequest: {
       url: capturedRequest.url,
@@ -209,7 +279,8 @@ async function main() {
       ok: result.ok,
       provider: result.enhancement.provider,
       model: result.enhancement.model,
-      dayNotes: result.enhancement.dayNotes.length,
+      guideNoteLength: result.enhancement.guideNote.length,
+      chips: result.enhancement.chips.length,
       totalTokens: result.enhancement.usage.totalTokens
     }
   };

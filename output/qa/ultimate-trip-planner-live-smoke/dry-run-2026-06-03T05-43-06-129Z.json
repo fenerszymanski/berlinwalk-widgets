@@ -1,0 +1,176 @@
+{
+  "mode": "dry-run",
+  "generatedAt": "2026-06-03T05:43:06.125Z",
+  "baseUrl": "https://www.berlinwalk.com",
+  "aiOnly": false,
+  "leadPayload": {
+    "email": "ultimate-planner-smoke@example.com",
+    "arrivalDate": "2026-06-12",
+    "tripLength": 3,
+    "arrivalTime": "Late morning / midday",
+    "arrivalPoint": "BER Airport",
+    "stayArea": "Mitte / Alexanderplatz",
+    "groupType": "Solo or couple",
+    "firstTime": "First time in Berlin",
+    "interests": "History, Berlin Wall, food, museums",
+    "budgetStyle": "Smart / mixed budget",
+    "mustHandle": "Weather, Sunday/Monday rules, transport tickets",
+    "pace": "Balanced",
+    "tourIntent": "Interested in BerlinWalk",
+    "tripStyle": "Classic first trip",
+    "planTitle": "Smoke test Ultimate Berlin trip plan",
+    "recommendedTourDay": "Best tour fit: Day 2 (2026-06-13) at 11:30",
+    "recommendedTourDate": "2026-06-13",
+    "recommendedTourTime": "11:30-13:30",
+    "meetingPointUrl": "https://www.google.com/maps/search/?api=1&query=Weltzeituhr%20Alexanderplatz%20Berlin",
+    "ticket": "BER arrival usually needs an ABC ticket before boarding.",
+    "weatherTitle": "Smoke-test weather summary",
+    "travelMode": "Now: get central. Next: keep the first route simple. Later: save the World Clock map.",
+    "planHealth": "Ready: route shape, ticket note, and tour timing are present.",
+    "preArrivalChecklist": "Save the plan link, check ticket zone, save meeting point, keep one weather fallback.",
+    "baseBrief": "Base camp: Mitte gives the cleanest first-route start and late return.",
+    "budgetPulse": "Budget: mix free sights with one paid anchor, keep cash for tips and small stops.",
+    "interestLens": "History and Wall interests are mapped to central history and East Berlin days.",
+    "paceGuard": "Balanced pace: one main area per day, one optional extra, protected food break.",
+    "weatherStrategy": "Use live weather close to arrival and monthly fallback for later dates.",
+    "carryPack": "Exact link, overview map, tour hold, and PDF backup are ready.",
+    "reservationRadar": "Book the tour first, check timed museum entries, keep arrival errands light.",
+    "planAdvice": "Smart fix: avoid scattering the first day across too many areas.",
+    "planSwaps": "Swap: if rain hits, move one museum or covered market into the same area.",
+    "dayRhythm": "Day 1 light, Day 2 story/tour, Day 3 Wall and East Berlin.",
+    "dayIntelligence": "Route, energy, spend, and check chips present for every day.",
+    "dayOperations": "Start, transit, reserve, and backup notes present for every day.",
+    "arrivalWindow": "future_planning",
+    "tripRisk": "low",
+    "tourRecommendation": "Book the free walking tour early in the trip",
+    "intentStage": "sales_ready",
+    "familyOrSlow": "no",
+    "bookAheadNeeded": "yes",
+    "conversionSignal": "75/100 - sales-ready planner lead; next action: book or hold the tour",
+    "conversionScore": 75,
+    "conversionTier": "warm_tour_lead",
+    "conversionNextAction": "Book or hold the tour before arrival",
+    "conversionReasons": "arrival date known, tour early in trip, first-time route shape",
+    "source": "codex_live_smoke",
+    "page": "https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner?source=codex_live_smoke",
+    "consent": true
+  },
+  "bookingPayload": null,
+  "aiPayload": {
+    "quotaEmail": "ultimate-planner-smoke@example.com",
+    "inputs": {
+      "arrivalDate": "2026-06-12",
+      "tripLength": "3",
+      "arrivalTime": "Late morning / midday",
+      "arrivalPoint": "BER Airport",
+      "stayArea": "Mitte / Alexanderplatz",
+      "groupType": "Solo or couple",
+      "firstTime": "First time in Berlin",
+      "interests": "History, Berlin Wall, food, museums",
+      "budgetStyle": "Smart / mixed budget",
+      "mustHandle": "Weather, Sunday/Monday rules, transport tickets",
+      "pace": "Balanced",
+      "tourIntent": "Interested in BerlinWalk"
+    },
+    "weather": {
+      "title": "Smoke-test weather summary",
+      "mode": "Smoke test fallback",
+      "copy": "Use weather notes as a light planning check, not a full forecast.",
+      "advice": "Use live weather close to arrival and monthly fallback for later dates.",
+      "tripSummary": "Mild Berlin fallback: keep one rain-safe indoor option and re-check weather close to arrival."
+    },
+    "tourSlot": {
+      "dayLabel": "Day 2",
+      "dateLabel": "2026-06-13",
+      "timeLabel": "11:30-13:30",
+      "booked": "no"
+    },
+    "plan": {
+      "title": "Smoke test Ultimate Berlin trip plan",
+      "summary": "Smoke test plan with arrival, BerlinWalk tour framework, Wall / Cold War layer, and one museum anchor.",
+      "ticket": "BER arrival usually needs an ABC ticket before boarding.",
+      "tourFit": "Best tour fit: Day 2 (2026-06-13) at 11:30",
+      "arrivalStatus": "Weekday rules apply",
+      "days": [
+        {
+          "dayNumber": 1,
+          "date": "2026-06-12",
+          "title": "Arrival and first Berlin orientation",
+          "theme": "Arrival day",
+          "places": [
+            "World Clock",
+            "Museum Island",
+            "Hackescher Markt"
+          ],
+          "blocks": [
+            {
+              "time": "09:00-10:45",
+              "title": "Get central without over-solving Berlin",
+              "copy": "Use ABC from BER, drop bags if needed, then keep the first walk central."
+            }
+          ],
+          "risks": [
+            "Arrival logistics"
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "date": "2026-06-13",
+          "title": "BerlinWalk tour, then one Wall / Cold War layer",
+          "theme": "Tour + Wall / Cold War",
+          "places": [
+            "World Clock",
+            "Berlin Wall Memorial",
+            "Topography of Terror"
+          ],
+          "blocks": [
+            {
+              "time": "11:30-13:30",
+              "title": "BerlinWalk at 11:30 from the World Clock",
+              "copy": "Use the 2-hour walk as the main city framework."
+            },
+            {
+              "time": "14:00-16:30",
+              "title": "Add one Wall / Cold War stop",
+              "copy": "After lunch, choose one serious Wall or Cold War stop."
+            }
+          ],
+          "risks": [
+            "Do not overfill the day"
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "date": "2026-06-14",
+          "title": "Museum Island without museum overload",
+          "theme": "Museums and royal Berlin",
+          "places": [
+            "Museum Island",
+            "Brandenburg Gate",
+            "Reichstag"
+          ],
+          "blocks": [
+            {
+              "time": "10:30-12:30",
+              "title": "Pick one museum anchor",
+              "copy": "One checked-open museum beats four rushed ones."
+            }
+          ],
+          "risks": [
+            "Check timed entry"
+          ]
+        }
+      ]
+    }
+  },
+  "aiPrivacy": {
+    "checked": true,
+    "stringCount": 59,
+    "quotaEmailPresent": true,
+    "geminiBoundEmailKey": false,
+    "geminiBoundEmailLikeText": false,
+    "geminiBoundLeadEmailIncluded": false
+  },
+  "aiCost": null,
+  "responses": {}
+}

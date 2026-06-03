@@ -1,0 +1,179 @@
+{
+  "mode": "live",
+  "generatedAt": "2026-06-02T19:43:13.478Z",
+  "baseUrl": "https://www.berlinwalk.com",
+  "aiOnly": true,
+  "leadPayload": null,
+  "bookingPayload": null,
+  "aiPayload": {
+    "inputs": {
+      "arrivalDate": "2026-06-12",
+      "tripLength": "3",
+      "arrivalTime": "Late morning / midday",
+      "arrivalPoint": "BER Airport",
+      "stayArea": "Mitte / Alexanderplatz",
+      "groupType": "Solo or couple",
+      "firstTime": "First time in Berlin",
+      "interests": "History, Berlin Wall, food, museums",
+      "budgetStyle": "Smart / mixed budget",
+      "mustHandle": "Weather, Sunday/Monday rules, transport tickets",
+      "pace": "Balanced",
+      "tourIntent": "Interested in BerlinWalk"
+    },
+    "weather": {
+      "title": "Smoke-test weather summary",
+      "mode": "Smoke test fallback",
+      "copy": "Use weather notes as a light planning check, not a full forecast.",
+      "advice": "Use live weather close to arrival and monthly fallback for later dates."
+    },
+    "tourSlot": {
+      "dayLabel": "Day 2",
+      "dateLabel": "2026-06-13",
+      "timeLabel": "11:30-13:30",
+      "booked": "no"
+    },
+    "plan": {
+      "title": "Smoke test Ultimate Berlin trip plan",
+      "summary": "Smoke test plan with arrival, BerlinWalk tour framework, Wall / Cold War layer, and one museum anchor.",
+      "ticket": "BER arrival usually needs an ABC ticket before boarding.",
+      "tourFit": "Best tour fit: Day 2 (2026-06-13) at 11:30",
+      "arrivalStatus": "Weekday rules apply",
+      "days": [
+        {
+          "dayNumber": 1,
+          "date": "2026-06-12",
+          "title": "Arrival and first Berlin orientation",
+          "theme": "Arrival day",
+          "places": [
+            "World Clock",
+            "Museum Island",
+            "Hackescher Markt"
+          ],
+          "blocks": [
+            {
+              "time": "09:00-10:45",
+              "title": "Get central without over-solving Berlin",
+              "copy": "Use ABC from BER, drop bags if needed, then keep the first walk central."
+            }
+          ],
+          "risks": [
+            "Arrival logistics"
+          ]
+        },
+        {
+          "dayNumber": 2,
+          "date": "2026-06-13",
+          "title": "BerlinWalk tour, then one Wall / Cold War layer",
+          "theme": "Tour + Wall / Cold War",
+          "places": [
+            "World Clock",
+            "Berlin Wall Memorial",
+            "Topography of Terror"
+          ],
+          "blocks": [
+            {
+              "time": "11:30-13:30",
+              "title": "BerlinWalk at 11:30 from the World Clock",
+              "copy": "Use the 2-hour walk as the main city framework."
+            },
+            {
+              "time": "14:00-16:30",
+              "title": "Add one Wall / Cold War stop",
+              "copy": "After lunch, choose one serious Wall or Cold War stop."
+            }
+          ],
+          "risks": [
+            "Do not overfill the day"
+          ]
+        },
+        {
+          "dayNumber": 3,
+          "date": "2026-06-14",
+          "title": "Museum Island without museum overload",
+          "theme": "Museums and royal Berlin",
+          "places": [
+            "Museum Island",
+            "Brandenburg Gate",
+            "Reichstag"
+          ],
+          "blocks": [
+            {
+              "time": "10:30-12:30",
+              "title": "Pick one museum anchor",
+              "copy": "One checked-open museum beats four rushed ones."
+            }
+          ],
+          "risks": [
+            "Check timed entry"
+          ]
+        }
+      ]
+    }
+  },
+  "aiPrivacy": {
+    "checked": true,
+    "stringCount": 58,
+    "emailKey": false,
+    "emailLikeText": false,
+    "leadEmailIncluded": false
+  },
+  "aiCost": {
+    "provider": "gemini",
+    "model": "gemini-2.5-flash",
+    "promptTokens": 853,
+    "outputTokens": 729,
+    "totalTokens": 1582,
+    "estimatedUsd": 0.002078,
+    "estimatedCents": 0.2078,
+    "pricing": {
+      "model": "gemini-2.5-flash",
+      "inputUsdPerMillionTokens": 0.3,
+      "outputUsdPerMillionTokens": 2.5,
+      "checkedAt": "2026-06-02",
+      "source": "https://ai.google.dev/gemini-api/docs/pricing"
+    }
+  },
+  "responses": {
+    "ai": {
+      "url": "https://www.berlinwalk.com/_functions/tripPlannerAi",
+      "status": 200,
+      "ok": true,
+      "body": {
+        "ok": true,
+        "enhancement": {
+          "provider": "gemini",
+          "model": "gemini-2.5-flash",
+          "headline": "Your Ultimate Berlin Trip: A 3-Day Plan",
+          "localRead": "Welcome to Berlin! This plan helps you make the most of your visit, especially if it's your first time. We'll focus on history, the Berlin Wall, food, and museums, all at a balanced pace. Remember that Sundays and Mondays can have different opening hours, so it's always good to check ahead. Public transport is excellent, and you'll likely need an ABC ticket for your arrival from BER Airport.",
+          "watchOut": "This plan is designed to be practical and enjoyable. We've considered typical Berlin weather, so pack layers! Also, keep in mind that some attractions may require timed entry, especially museums. We'll make sure to highlight when to check for those. Don't try to do too much in on",
+          "tourNote": "This itinerary includes a BerlinWalk tour on Day 2, which is a fantastic way to get oriented and understand the city's rich history. It's scheduled for 11:30 AM, starting from the World Clock, and provides an excellent f",
+          "dayNotes": [
+            {
+              "dayNumber": 1,
+              "headline": "Arrival and First Berlin Orientation",
+              "note": "Today is all about settling in and getting a feel for central Berlin. After arriving at BER Airport, grab an ABC ticket for your journey into the city. Once you've dropped your bags, head to the World Clock to start your exploration. From t",
+              "nextMove": "Keep your first walk central around Mitte and Alexanderplatz."
+            },
+            {
+              "dayNumber": 2,
+              "headline": "BerlinWalk Tour, then One Wall / Cold War Layer",
+              "note": "Start your day with the BerlinWalk tour at 11:30 AM, beginning at the World Clock. This 2-hour walk will give you a fantastic overview of the city's history and key sights. After the tour and a quick lunch, dedicate your afternoon to one si",
+              "nextMove": "After your chosen Wall/Cold War stop, stay near the same area for dinner or further exploration."
+            },
+            {
+              "dayNumber": 3,
+              "headline": "Museum Island Without Museum Overload",
+              "note": "Today, we'll focus on Museum Island, but with a smart approach: pick one museum to truly enjoy. Trying to see too many can lead to museum fatigue. Choose one that genuinely interests you and check for timed entry in advance. After your muse",
+              "nextMove": "After the Brandenburg Gate and Reichstag, explore nearby areas or head to your departure point."
+            }
+          ],
+          "usage": {
+            "promptTokens": 853,
+            "outputTokens": 729,
+            "totalTokens": 1582
+          }
+        }
+      }
+    }
+  }
+}

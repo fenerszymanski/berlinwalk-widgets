@@ -4,6 +4,77 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (Ultimate post-merge guide note + quota)
+
+**Did:** Implemented the post-merge feedback pass for the Ultimate planner full-plan flow.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — locked flow keeps only the cut Day 1 preview; after unlock the whole preview container disappears and the full plan starts with `Your full Berlin plan`, Yusuf guide note, one `Plan at a glance`, full day cards, then share/PDF/print actions and resource sections.
+- `ultimate-berlin-trip-planner/index.html` — added per-day weather chips, moved action buttons after the last day, added Yusuf photo asset `assets/yusuf-local-guide.jpg`, and changed the AI panel to `Your Local Guide Yusuf's Note`.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — changed Gemini schema/prompt to one natural guide paragraph plus weather/tour sentences and short chips; added email+arrival AI quota (`aiRequestCount`, `aiLastRequestedAt`, `aiLimitReachedAt`) without sending email to Gemini.
+- `ultimate-berlin-trip-planner/velo/*`, runbook/status/audit files — updated smoke helpers, privacy fixture, prepublish gate, remote preflight fields, install kit, docs, and launch status for the new quota/guide-note flow.
+- Live Wix `TripPlannerLeads` collection — synced the 3 new AI quota fields with `create-trip-planner-leads-collection.mjs --live --sync-fields`.
+
+**Opened:** Local code is ready; Yusuf still needs to paste/publish the updated Velo source before testing live Gemini quota behavior.
+**Closed:** `launch-audit.mjs` is `152 pass, 0 warn, 0 block`; AI privacy/quota fixture passed including 3rd-call quota suppression; prepublish gate passed `13 pass`; remote preflight passed; Playwright locked/unlocked/mobile QA passed with no horizontal overflow and correct preview/full-plan behavior.
+
+## 2026-06-03 — Codex (Ultimate planner merged visual index)
+
+**Did:** Merged the duplicate `Your first preview` / `Full plan index` experience into one unlocked visual `Plan at a glance` index.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — removed the unlocked dashboard `data-itinerary-overview` module and now renders one image-led `Plan at a glance` day index inside the full plan's `data-day-jump-bar`.
+- `ultimate-berlin-trip-planner/index.html` — the merged index uses the new oil-style day art, shows date/anchors, shows compact `Tour 11:30` or `Tour 15:30` pills when applicable, and keeps the existing day-jump scroll behavior.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` plus `LAUNCH_STATUS.*` / `LAUNCH_CONTROL_ROOM.html` — updated launch checks and reports for the merged index.
+
+**Opened:** None.
+**Closed:** Locked browser QA shows 1 cut Day 1 preview, no `Plan at a glance`, no full days, and PDF disabled. Unlocked QA shows exactly 1 `Plan at a glance`, correct 1/2/4/7 mobile card counts, no broken images, no horizontal overflow, working Day 3 jump/focus, PDF/print enabled, and `launch-audit.mjs` remains `151 pass, 0 warn, 0 block`.
+
+**Next session should:** Continue result-logic review with Yusuf; this change was not pushed or published.
+
+## 2026-06-03 — Codex (Ultimate planner oil-style day art)
+
+**Did:** Replaced the rough wireframe-style itinerary art with a warmer oil-painting/postcard visual set.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/assets/day-art/` — added nine optimized 900x600 webp day visuals for arrival, Wall/Cold War, central history, museums, food, low-budget/parks, Potsdam, nightlife, and local streets.
+- `ultimate-berlin-trip-planner/index.html` — `DAY_PHOTOS` now uses the local day-art assets, the preview itinerary cards render real images instead of inline SVG art, and day visual classification now keeps low-budget/park days from being misfiled as food.
+
+**Opened:** None.
+**Closed:** Inline script parse passed; browser QA shows 7 itinerary images loaded, no broken images, no old itinerary SVG art, no horizontal overflow, and `launch-audit.mjs` remains `151 pass, 0 warn, 0 block`.
+
+**Next session should:** Continue Yusuf's review of the deterministic result logic; this visual pass was not pushed or published.
+
+## 2026-06-03 — Codex (Ultimate local preview server)
+
+**Did:** Restored the local Ultimate Trip Planner preview after Atlas showed `ERR_EMPTY_RESPONSE`.
+
+**Changed:**
+- Local only — killed the stale half-responsive Python preview process and restarted `python3 -m http.server 8765 --bind 127.0.0.1` from `berlinwalk-widgets/`.
+
+**Opened:** None.
+**Closed:** `curl` now returns `HTTP/1.0 200 OK` for the Ultimate planner URL on `127.0.0.1:8765`.
+
+**Next session should:** Keep using the same localhost URL for visual QA; if Atlas shows `ERR_EMPTY_RESPONSE` again, restart the port 8765 preview server.
+
+## 2026-06-02 — Codex (Ultimate planner AI note + tour visibility)
+
+**Did:** Simplified the optional Gemini output and made the in-trip BerlinWalk recommendation visible as part of the daily itinerary, not as a separate CTA card.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — Gemini now renders only a compact `Local guide note` with why/watch-out/tour-note copy; AI-generated D1/D2/D3 cards are no longer displayed because the deterministic route, dates, stops, and tour slot remain the source of truth.
+- `ultimate-berlin-trip-planner/index.html` — `file://` and localhost QA now share a local-preview helper, so `qaUnlock`, `resetUnlock`, `forceLeadError`, `forceAiError`, and `mockAi=1` work for local/file previews but not live domains. File previews without `mockAi=1` now show a small local-only “Gemini is backend-only” note instead of silently disappearing.
+- `ultimate-berlin-trip-planner/index.html` — in-trip tour days now show the tour as a normal highlighted time block labelled `BERLINWALK` with the real slot (`11:30-13:30` or summer slot), and the full-plan header/index also names the recommended BerlinWalk day.
+- `ultimate-berlin-trip-planner/index.html` — fixed a real logic bug where the anti-repeat/diversify layer could replace a tour-framework day with a normal Wall/Museum variant, silently deleting the BerlinWalk block. Tour framework days are now protected and keep `World Clock` in the map pack.
+- `ultimate-berlin-trip-planner/index.html` / `velo/tripPlannerFunnel.js` — mock and live Gemini copy are now constrained to concrete plan-specific notes; tour notes must name the actual provided slot instead of vague “if the slot fits” language.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated the QA-param guard from localhost-only to local-preview-only.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.*` and `LAUNCH_CONTROL_ROOM.html` — regenerated after the local audit.
+
+**Opened:** Full live lead/email smoke with a real test inbox and booking smoke are still the next release checks.
+**Closed:** Inline script check passed; `launch-audit.mjs` is `151 pass, 0 warn, 0 block`. Browser QA for the 2026-06-11 two-day HBF/east/wall scenario shows Day 2 starts with `BERLINWALK 11:30-13:30`, has one natural tour block, no separate tour marker, AI day cards `0`, and mobile overflow `0`. Localhost `mockAi=1` QA for the 2026-06-04 seven-day Alexanderplatz scenario now shows `Recommended BerlinWalk: Day 2 at 11:30`, a Day 2 `BERLINWALK 11:30-13:30` block, one tour index pill, a specific Gemini/mock tour note, and overflow `0`.
+
+**Next session should:** Continue reviewing the deterministic day-mapping matrix with Yusuf, then run the remaining full live smoke + booking smoke before enabling public visibility.
+
 ## 2026-06-02 — Codex (Ultimate planner Gemini QA + listing hold)
 
 **Did:** Tightened the optional Gemini 2.5 Flash layer and cleared the remaining local launch-audit blockers.
@@ -15,12 +86,13 @@ Format for each entry — see `AGENTS.md` §9.
 - `ultimate-berlin-trip-planner/WIX_GEMINI_PUBLISH_TR.md` / `LAUNCH_RUNBOOK.md` — added the short Turkish Wix publish checklist plus Gemini 2.5 Flash cost/guardrail notes (`maxOutputTokens: 1200`, `thinkingBudget: 0`, fail-soft deterministic fallback).
 - `ultimate-berlin-trip-planner/velo/prepublish-gate.mjs` — bounded Gemini check now explicitly verifies the output token cap as well as response schema, backend-only secret, and missing-key fallback.
 - `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` and `build-launch-status-report.mjs` — live `--ai` / `--ai-only` smoke now records Gemini token usage and estimated USD cost when the live response includes usage metadata; dry-run evidence is `output/qa/ultimate-trip-planner-live-smoke/dry-run-ai-only-cost-20260602.json`.
-- `ultimate-berlin-trip-planner/LAUNCH_STATUS.*` — regenerated after latest remote preflight `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-06-02T14-07-47-464Z.json`: `149 pass, 1 warn, 0 block`, verdict `WAITING FOR LIVE QA`; Velo prepublish gate passed `12/12`; local Keychain has `GEMINI_API_KEY`; live `tripPlannerAi OPTIONS` still returns `404` until Wix Velo is published.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.*` — regenerated after Wix publish and latest remote preflight `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-06-02T19-42-19-932Z.json`: `151 pass, 0 warn, 0 block`, verdict `WAITING FOR LIVE QA`; `tripPlannerAi OPTIONS` is now `204`.
+- `output/qa/ultimate-trip-planner-live-smoke/live-ai-only-2026-06-02T19-43-19-550Z.json` — live Gemini AI-only smoke passed without creating a lead or sending email; usage was `853` input tokens + `729` output tokens, estimated `$0.002078`.
 
-**Opened:** Add `GEMINI_API_KEY` in Wix Secrets, paste/publish updated Velo, then run remote preflight and live `--ai-only` / `--ai` smoke; this is the only remaining blocker for live Gemini verification.
-**Closed:** All local launch-audit blockers are cleared; browser QA on localhost showed locked state has 1 preview, full days 0, PDF/print disabled, and fail-soft unlock opens 2 full days with overflow 0 and no closing prose.
+**Opened:** Run full live smoke with a real test email, then booking smoke, before public release visibility is enabled.
+**Closed:** All local launch-audit blockers are cleared; browser QA on localhost showed locked state has 1 preview, full days 0, PDF/print disabled, and fail-soft unlock opens 2 full days with overflow 0 and no closing prose. Live Gemini AI-only smoke is now green.
 
-**Next session should:** Publish/paste the updated Velo once Yusuf is ready, then live-smoke `tripPlannerAi` with `--ai-only` before any full lead smoke.
+**Next session should:** Run `live-smoke-trip-planner.mjs --live --email ... --ai` with Yusuf's test inbox, then `--booking` to prove booked-branch suppression before any public visibility flip.
 
 ## 2026-06-02 — Codex (Ultimate planner Gemini prepublish gate)
 

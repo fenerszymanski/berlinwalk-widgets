@@ -12,6 +12,7 @@ const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta/models
 const GEMINI_DEFAULT_MODEL = 'gemini-2.5-flash';
 const GEMINI_API_KEY_SECRET_NAMES = ['GEMINI_API_KEY', 'GOOGLE_AI_API_KEY', 'GOOGLE_GEMINI_API_KEY'];
 const GEMINI_MODEL_SECRET_NAMES = ['TRIP_PLANNER_GEMINI_MODEL', 'GEMINI_MODEL'];
+const AI_GENERATION_LIMIT = 2;
 const PRIVATE_TEXT_PATTERN = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 
 const STAGES = [
@@ -210,7 +211,7 @@ function validateAiEnhancementPayload(payload) {
       'pace',
       'tourIntent'
     ]),
-    weather: cleanPublicPlannerRecord(payload && payload.weather, ['title', 'mode', 'copy', 'advice']),
+    weather: cleanPublicPlannerRecord(payload && payload.weather, ['title', 'mode', 'copy', 'advice', 'tripSummary']),
     tourSlot: cleanPublicPlannerRecord(payload && payload.tourSlot, ['dayLabel', 'dateLabel', 'timeLabel', 'booked']),
     plan: {
       title: cleanPublicPlannerText(plan.title, 'Ultimate Berlin Trip Plan', 180),
@@ -253,38 +254,38 @@ function geminiResponseSchema() {
   return {
     type: 'object',
     properties: {
-      headline: { type: 'string' },
-      localRead: { type: 'string' },
-      watchOut: { type: 'string' },
-      tourNote: { type: 'string' },
-      dayNotes: {
+      noteTitle: { type: 'string' },
+      guideNote: { type: 'string' },
+      weatherSentence: { type: 'string' },
+      tourSentence: { type: 'string' },
+      chips: {
         type: 'array',
         items: {
           type: 'object',
           properties: {
-            dayNumber: { type: 'number' },
-            headline: { type: 'string' },
-            note: { type: 'string' },
-            nextMove: { type: 'string' }
+            label: { type: 'string' },
+            value: { type: 'string' }
           },
-          required: ['dayNumber', 'headline', 'note', 'nextMove']
+          required: ['label', 'value']
         }
       }
     },
-    required: ['headline', 'localRead', 'watchOut', 'tourNote', 'dayNotes']
+    required: ['noteTitle', 'guideNote', 'weatherSentence', 'tourSentence', 'chips']
   };
 }
 
 function geminiPrompt(input) {
   return [
-    'You are polishing a deterministic Berlin trip plan for BerlinWalk.',
+    'You are writing a short personalized guide note for BerlinWalk.',
     'The itinerary logic is already decided. Do not move days, change times, invent venues, add new map stops, or create new CTAs.',
     'Use only the provided day titles, themes, timing blocks, places, weather notes, and risk tags.',
     'Do not add new neighborhoods, meals, safety warnings, ticket claims, booking advice, or attraction names that are not in the input.',
-    'If you need a next move but the skeleton is vague, say to keep the next step near the same area.',
-    'Write in warm, practical English, like a local walking-tour guide. Avoid technical planner terms, hype, and em dashes.',
-    'Use the selected inputs to explain why the plan works. Keep it useful for a traveler reading on a phone.',
-    'If BerlinWalk is relevant, mention it once naturally as context, not as a hard sales pitch.',
+    'Write in warm, human English in the voice of Yusuf, the local guide. It should feel like a thoughtful note after reading this exact plan, not a template.',
+    'Avoid technical planner terms, hype, generic travel philosophy, "if the slot fits", "one area per day" as a repeated slogan, and em dashes.',
+    'guideNote must be one natural paragraph, 75-115 words, with at least two concrete details from the itinerary input.',
+    'weatherSentence must be one useful sentence based on the weather.tripSummary or weather notes. If weather is uncertain, say to re-check close to arrival.',
+    'If input.tourSlot has a date/time and is not booked, tourSentence must naturally name the BerlinWalk day/time using the provided slot. If booked, switch to meeting-point/prep language.',
+    'chips should contain 2 or 3 short human cues such as Best rhythm, Weather move, Tour anchor, or Energy guard. Do not repeat the same wording every time.',
     '',
     'Return valid JSON only matching the requested schema. Do not use markdown.',
     '',
@@ -330,6 +331,16 @@ function sanitizeAiEnhancement(data, input, model, usage) {
   return {
     provider: 'gemini',
     model,
+    noteTitle: cleanText(data && (data.noteTitle || data.headline), 'Yusuf guide read', 90),
+    guideNote: cleanText(data && (data.guideNote || data.localRead), '', 620),
+    weatherSentence: cleanText(data && data.weatherSentence, '', 220),
+    tourSentence: cleanText(data && (data.tourSentence || data.tourNote), '', 220),
+    chips: Array.isArray(data && data.chips)
+      ? data.chips.map(item => ({
+        label: cleanText(item && item.label, '', 34),
+        value: cleanText(item && item.value, '', 90)
+      })).filter(item => item.label && item.value).slice(0, 3)
+      : [],
     headline: cleanText(data && data.headline, 'Local guide read', 90),
     localRead: cleanText(data && data.localRead, '', 420),
     watchOut: cleanText(data && data.watchOut, '', 280),
@@ -343,11 +354,91 @@ function sanitizeAiEnhancement(data, input, model, usage) {
   };
 }
 
+function aiQuotaIdentity(payload, input) {
+  const email = normalizeEmail(payload && (payload.quotaEmail || payload.email));
+  const arrivalDate = cleanText(input && input.inputs && input.inputs.arrivalDate);
+  if (!validEmail(email) || !/^\d{4}-\d{2}-\d{2}$/.test(arrivalDate)) {
+    return { ok: false, email: '', arrivalDate: '', leadKey: '' };
+  }
+  return {
+    ok: true,
+    email,
+    arrivalDate,
+    leadKey: leadKey(email, arrivalDate)
+  };
+}
+
+async function claimAiQuota(payload, input, now) {
+  const identity = aiQuotaIdentity(payload, input);
+  if (!identity.ok) {
+    return {
+      ok: false,
+      reason: 'ai_quota_email_required',
+      quota: { limit: AI_GENERATION_LIMIT, used: 0, remaining: 0 }
+    };
+  }
+
+  const existing = await findExistingLead(identity.leadKey);
+  if (!existing) {
+    return {
+      ok: false,
+      reason: 'ai_quota_lead_not_found',
+      quota: { limit: AI_GENERATION_LIMIT, used: 0, remaining: 0 }
+    };
+  }
+
+  const used = cleanNumber(existing.aiRequestCount, 0, 0, 1000);
+  if (used >= AI_GENERATION_LIMIT) {
+    if (!existing.aiLimitReachedAt) {
+      await wixData.update(
+        COLLECTION,
+        Object.assign({}, existing, { aiLimitReachedAt: now, updatedAt: now }),
+        { suppressAuth: true }
+      );
+    }
+    return {
+      ok: false,
+      reason: 'ai_quota_limit',
+      quota: { limit: AI_GENERATION_LIMIT, used, remaining: 0 }
+    };
+  }
+
+  const nextUsed = used + 1;
+  await wixData.update(
+    COLLECTION,
+    Object.assign({}, existing, {
+      aiRequestCount: nextUsed,
+      aiLastRequestedAt: now,
+      updatedAt: now
+    }),
+    { suppressAuth: true }
+  );
+
+  return {
+    ok: true,
+    quota: {
+      limit: AI_GENERATION_LIMIT,
+      used: nextUsed,
+      remaining: Math.max(0, AI_GENERATION_LIMIT - nextUsed)
+    }
+  };
+}
+
 export async function enhanceTripPlannerPlan(payload) {
   const input = validateAiEnhancementPayload(payload);
   const apiKey = await readFirstSecret(GEMINI_API_KEY_SECRET_NAMES);
   if (!apiKey) {
     return { ok: false, reason: 'missing_api_key' };
+  }
+
+  const now = new Date();
+  const quota = await claimAiQuota(payload, input, now);
+  if (!quota.ok) {
+    return {
+      ok: false,
+      reason: quota.reason,
+      quota: quota.quota
+    };
   }
 
   const requestedModel = await readFirstSecret(GEMINI_MODEL_SECRET_NAMES);
@@ -402,13 +493,14 @@ export async function enhanceTripPlannerPlan(payload) {
 
     const modelText = extractGeminiText(parsed);
     const enhancement = sanitizeAiEnhancement(parseJsonText(modelText), input, model, parsed.usageMetadata || {});
-    if (!enhancement.localRead && !enhancement.dayNotes.length) {
+    if (!enhancement.guideNote && !enhancement.localRead && !enhancement.dayNotes.length) {
       return { ok: false, reason: 'empty_ai_result', model };
     }
 
     return {
       ok: true,
-      enhancement
+      enhancement,
+      quota: quota.quota
     };
   } catch (error) {
     return {

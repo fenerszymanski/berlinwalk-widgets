@@ -22,7 +22,10 @@ const CRITICAL_COLLECTION_FIELDS = [
   'conversionNextAction',
   'conversionReasons',
   'bookingStatus',
-  'bookedAt'
+  'bookedAt',
+  'aiRequestCount',
+  'aiLastRequestedAt',
+  'aiLimitReachedAt'
 ];
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
@@ -182,6 +185,12 @@ function inspectSource() {
       /cleanPublicPlannerRecord/.test(aiPayloadValidator) &&
       /cleanPublicPlannerList/.test(aiPayloadValidator),
     aiPayloadAvoidsEmail: Boolean(aiPayloadValidator) && !/\bemail\b/i.test(aiPayloadValidator),
+    hasAiQuotaGuard: /AI_GENERATION_LIMIT\s*=\s*2/.test(funnel) &&
+      /function\s+claimAiQuota/.test(funnel) &&
+      /aiRequestCount/.test(funnel) &&
+      /aiLastRequestedAt/.test(funnel) &&
+      /aiLimitReachedAt/.test(funnel) &&
+      /quotaEmail/.test(funnel),
     hasScheduler: /processTripPlannerDueEmails/.test(jobsConfig) &&
       /"cronExpression"\s*:\s*"0 \* \* \* \*"/.test(jobsConfig),
     bookedSuppression: /shouldSuppressUltimateReminder/.test(funnel) &&
@@ -282,7 +291,8 @@ async function main() {
     check('Velo AI polish endpoint is present', sourceState.hasAiEndpoint, 'tripPlannerAi options/post handlers call enhanceTripPlannerPlan'),
     check('Gemini backend is fail-soft and bounded', sourceState.hasGeminiBackend, 'Gemini 2.5 Flash, backend-only secret names, responseJsonSchema, maxOutputTokens 1200, thinkingBudget 0, missing-key fallback'),
     check('AI enhancement payload is privacy-scrubbed', sourceState.hasAiPrivacyScrub, 'Gemini-bound text fields drop private-looking text before prompt assembly'),
-    check('AI enhancement payload avoids email', sourceState.aiPayloadAvoidsEmail, 'validateAiEnhancementPayload should not accept or forward email/PII'),
+    check('AI enhancement payload avoids email', sourceState.aiPayloadAvoidsEmail, 'validateAiEnhancementPayload should not accept or forward email/PII to Gemini'),
+    check('AI quota guard is backend-enforced', sourceState.hasAiQuotaGuard, 'email + arrival date max 2 Gemini generations before quota fallback'),
     check('Hourly scheduler is present', sourceState.hasScheduler, 'processTripPlannerDueEmails hourly job'),
     check('Booked leads suppress Ultimate reminders', sourceState.bookedSuppression, 'existing Wix booking sequence owns booked-guest prep')
   ];

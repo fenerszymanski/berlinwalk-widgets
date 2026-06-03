@@ -23,7 +23,10 @@ const CRITICAL_COLLECTION_FIELDS = [
   'conversionNextAction',
   'conversionReasons',
   'bookingStatus',
-  'bookedAt'
+  'bookedAt',
+  'aiRequestCount',
+  'aiLastRequestedAt',
+  'aiLimitReachedAt'
 ];
 
 function usage() {

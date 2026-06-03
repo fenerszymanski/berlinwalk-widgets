@@ -1,0 +1,58 @@
+{
+  "generatedAt": "2026-06-03T05:49:14.481Z",
+  "nonMutating": true,
+  "checks": {
+    "githubWidget": {
+      "ok": true,
+      "status": 200,
+      "statusText": "OK",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/?v=remote-preflight",
+      "body": null
+    },
+    "liveToolPage": {
+      "ok": true,
+      "status": 200,
+      "statusText": "OK",
+      "url": "https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner",
+      "body": null
+    },
+    "leadOptions": {
+      "ok": true,
+      "status": 204,
+      "statusText": "No Content",
+      "url": "https://www.berlinwalk.com/_functions/tripPlannerLead",
+      "body": null
+    },
+    "aiOptions": {
+      "ok": true,
+      "status": 204,
+      "statusText": "No Content",
+      "url": "https://www.berlinwalk.com/_functions/tripPlannerAi",
+      "body": null
+    },
+    "bookingOptions": {
+      "ok": true,
+      "status": 204,
+      "statusText": "No Content",
+      "url": "https://www.berlinwalk.com/_functions/tripPlannerBooking",
+      "body": null
+    },
+    "wixApiKeyPresent": true,
+    "berlinToolsSlug": {
+      "ok": true,
+      "status": 200,
+      "count": 1,
+      "itemIds": [
+        "ee335453-9278-4b7e-a3d6-ffb2889bdfbc"
+      ]
+    },
+    "tripPlannerCollection": {
+      "ok": true,
+      "status": 200,
+      "fieldCount": 77,
+      "criticalFieldCount": 17,
+      "missingCriticalFields": [],
+      "schemaOk": true
+    }
+  }
+}

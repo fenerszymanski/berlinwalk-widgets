@@ -19,7 +19,7 @@ function usage() {
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --booking
   node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai
-  node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
+  node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai-only
 
 Defaults to dry-run. It prints and records the payloads but does not call Wix
 unless --live is present.
@@ -31,7 +31,7 @@ Options:
   --base URL         Defaults to https://www.berlinwalk.com.
   --booking          Also POST /_functions/tripPlannerBooking after lead.
   --ai               Also POST /_functions/tripPlannerAi after lead.
-  --ai-only          Only POST /_functions/tripPlannerAi; no lead/email call.
+  --ai-only          Only POST /_functions/tripPlannerAi; no new lead/email call. Requires an existing lead for the email + arrival.
   --live             Actually call the live endpoints.
   --out FILE         Optional result JSON path.
 `);
@@ -211,6 +211,7 @@ function buildAiPayload(leadPayload) {
   const day3Date = dateKey(addDays(new Date(`${arrivalDate}T12:00:00Z`), 2));
 
   return {
+    quotaEmail: leadPayload.email,
     inputs: {
       arrivalDate,
       tripLength: String(leadPayload.tripLength),
@@ -229,7 +230,8 @@ function buildAiPayload(leadPayload) {
       title: leadPayload.weatherTitle,
       mode: 'Smoke test fallback',
       copy: 'Use weather notes as a light planning check, not a full forecast.',
-      advice: leadPayload.weatherStrategy
+      advice: leadPayload.weatherStrategy,
+      tripSummary: 'Mild Berlin fallback: keep one rain-safe indoor option and re-check weather close to arrival.'
     },
     tourSlot: {
       dayLabel: 'Day 2',
@@ -317,30 +319,37 @@ function collectStrings(value, pathName = '$', rows = []) {
 }
 
 function assertAiPayloadPrivacy(aiPayload, leadPayload) {
-  const strings = collectStrings(aiPayload);
+  const quotaEmail = String(aiPayload && aiPayload.quotaEmail || '').trim().toLowerCase();
+  const geminiBoundPayload = Object.assign({}, aiPayload);
+  delete geminiBoundPayload.quotaEmail;
+  const strings = collectStrings(geminiBoundPayload);
   const email = String(leadPayload.email || '').trim().toLowerCase();
   const leakedEmail = email
     ? strings.find((row) => row.value.toLowerCase().includes(email))
     : null;
   const emailLike = strings.find((row) => /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(row.value));
-  const emailKey = JSON.stringify(aiPayload).match(/"[^"]*email[^"]*"\s*:/i);
+  const emailKey = JSON.stringify(geminiBoundPayload).match(/"[^"]*email[^"]*"\s*:/i);
 
   if (leakedEmail) {
-    throw new Error(`AI payload includes lead email at ${leakedEmail.path}`);
+    throw new Error(`Gemini-bound AI payload includes lead email at ${leakedEmail.path}`);
   }
   if (emailLike) {
-    throw new Error(`AI payload includes email-like text at ${emailLike.path}`);
+    throw new Error(`Gemini-bound AI payload includes email-like text at ${emailLike.path}`);
   }
   if (emailKey) {
-    throw new Error('AI payload includes an email-shaped key');
+    throw new Error('Gemini-bound AI payload includes an email-shaped key');
+  }
+  if (email && quotaEmail !== email) {
+    throw new Error('AI quotaEmail must match the smoke-test lead email for backend quota lookup.');
   }
 
   return {
     checked: true,
     stringCount: strings.length,
-    emailKey: false,
-    emailLikeText: false,
-    leadEmailIncluded: false
+    quotaEmailPresent: Boolean(quotaEmail),
+    geminiBoundEmailKey: false,
+    geminiBoundEmailLikeText: false,
+    geminiBoundLeadEmailIncluded: false
   };
 }
 
@@ -412,8 +421,8 @@ async function main() {
     return;
   }
 
-  if (options.live && !options.aiOnly && !validEmail(options.email)) {
-    console.error('--live requires a real --email address so the instant email can be checked.');
+  if (options.live && !validEmail(options.email)) {
+    console.error('--live requires a real --email address so the lead/AI quota lookup can be checked.');
     process.exitCode = 1;
     return;
   }
@@ -469,7 +478,7 @@ async function main() {
   if (options.ai) {
     result.responses.ai = await postJson(`${baseUrl}/_functions/tripPlannerAi`, aiPayload);
     assertResult('tripPlannerAi', result.responses.ai, (body) => {
-      if (!body.enhancement || !body.enhancement.localRead) throw new Error('tripPlannerAi response missing enhancement.localRead');
+      if (!body.enhancement || !body.enhancement.guideNote) throw new Error('tripPlannerAi response missing enhancement.guideNote');
     });
     result.aiCost = estimateGeminiCost(result.responses.ai);
   }

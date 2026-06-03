@@ -276,7 +276,8 @@ function run() {
   const updateUnlockUiSource = indexHtml.slice(indexHtml.indexOf('function updateUnlockUi()'), indexHtml.indexOf('function setLeadMessage'));
   const aiPayloadSource = indexHtml.slice(indexHtml.indexOf('function aiEnhancementPayload'), indexHtml.indexOf('function cleanAiText'));
   const aiHtmlSource = indexHtml.slice(indexHtml.indexOf('function aiEnhancementHtml'), indexHtml.indexOf('function renderAiEnhancement'));
-  const aiRequestSource = indexHtml.slice(indexHtml.indexOf('function requestAiEnhancement'), indexHtml.indexOf('function unlock'));
+  const aiRequestStart = indexHtml.indexOf('function requestAiEnhancement');
+  const aiRequestSource = indexHtml.slice(aiRequestStart, indexHtml.indexOf('function unlock', aiRequestStart));
   const downloadSimplePdfSource = indexHtml.slice(indexHtml.indexOf('async function downloadSimplePdf'), indexHtml.indexOf('async function downloadPdf'));
   const printPlanSource = indexHtml.slice(indexHtml.indexOf('function printPlan()'), indexHtml.indexOf('function initFromParams'));
   const firstDayBlockCopies = [...firstDayBlocksSource.matchAll(/'([^']{20,})'/g)]
@@ -621,9 +622,11 @@ function run() {
       /hasGeminiBackend/.test(prepublishGate) &&
       /hasAiPrivacyScrub/.test(prepublishGate) &&
       /aiPayloadAvoidsEmail/.test(prepublishGate) &&
+      /hasAiQuotaGuard/.test(prepublishGate) &&
+      /AI quota guard is backend-enforced/.test(prepublishGate) &&
       /TripPlannerLeads critical fields pass remote gate/.test(prepublishGate) &&
       /TODO_TRIP_PLANNER/.test(prepublishGate),
-    'Expected a one-command gate that refuses Velo paste until IDs are applied, AI endpoint safeguards/privacy scrub exist, and the live collection schema passes.'
+    'Expected a one-command gate that refuses Velo paste until IDs are applied, AI endpoint safeguards/privacy scrub/quota exist, and the live collection schema passes.'
   );
 
   block(
@@ -640,6 +643,11 @@ function run() {
       /GEMINI_API_KEY/.test(funnel) &&
       /gemini-2\.5-flash/.test(funnel) &&
       /responseJsonSchema/.test(funnel) &&
+      /guideNote/.test(funnel) &&
+      /weatherSentence/.test(funnel) &&
+      /AI_GENERATION_LIMIT\s*=\s*2/.test(funnel) &&
+      /function\s+claimAiQuota/.test(funnel) &&
+      /ai_quota_limit/.test(funnel) &&
       /thinkingBudget:\s*0/.test(funnel) &&
       /PRIVATE_TEXT_PATTERN/.test(funnel) &&
       /cleanPublicPlannerText/.test(funnel) &&
@@ -657,9 +665,10 @@ function run() {
       /aiPrivacy/.test(liveSmokeSource) &&
       /estimateGeminiCost/.test(liveSmokeSource) &&
       /aiCost/.test(liveSmokeSource) &&
+      /quotaEmail:\s*leadPayload\.email/.test(liveSmokeSource) &&
       /tripPlannerAi/.test(liveSmokeSource) &&
-      /enhancement\.localRead/.test(liveSmokeSource),
-    'live-smoke-trip-planner.mjs should dry-run/live-test the optional AI endpoint, including AI-only smoke without lead/email writes and usage/cost reporting.'
+      /enhancement\.guideNote/.test(liveSmokeSource),
+    'live-smoke-trip-planner.mjs should dry-run/live-test the optional AI endpoint, including AI-only smoke without new lead/email writes and usage/cost reporting.'
   );
   block(
     'AI privacy fixture covers Gemini fail-soft',
@@ -724,6 +733,9 @@ function run() {
       /\['conversionTier',\s*'Conversion Tier',\s*'TEXT'\]/.test(collectionScript) &&
       /\['conversionNextAction',\s*'Conversion Next Action',\s*'TEXT'\]/.test(collectionScript) &&
       /\['conversionReasons',\s*'Conversion Reasons',\s*'TEXT'\]/.test(collectionScript) &&
+      /\['aiRequestCount',\s*'AI Request Count',\s*'NUMBER'\]/.test(collectionScript) &&
+      /\['aiLastRequestedAt',\s*'AI Last Requested At',\s*'DATETIME'\]/.test(collectionScript) &&
+      /\['aiLimitReachedAt',\s*'AI Limit Reached At',\s*'DATETIME'\]/.test(collectionScript) &&
       /verifyCollection/.test(collectionScript) &&
       /patchCollectionField/.test(collectionScript) &&
       /\/patch-field/.test(collectionScript) &&
@@ -842,10 +854,11 @@ function run() {
   );
 
   block(
-    'Local lead-gate QA params are localhost-only',
-    /localHost\s*&&\s*params\.get\('forceLeadError'\)\s*===\s*'1'/.test(indexHtml) &&
-      /localHost\s*&&\s*params\.get\('qaUnlock'\)\s*===\s*'1'/.test(indexHtml) &&
-      /localHost\s*\|\|\s*params\.get\('resetUnlock'\)\s*!==\s*'1'/.test(indexHtml),
+    'Local lead-gate QA params are local-preview only',
+    /function\s+isLocalPreviewSurface\(\)/.test(indexHtml) &&
+      /isLocalPreviewSurface\(\)\s*&&\s*params\.get\('forceLeadError'\)\s*===\s*'1'/.test(indexHtml) &&
+      /isLocalPreviewSurface\(\)\s*&&\s*params\.get\('qaUnlock'\)\s*===\s*'1'/.test(indexHtml) &&
+      /!isLocalPreviewSurface\(\)\s*\|\|\s*params\.get\('resetUnlock'\)\s*!==\s*'1'/.test(indexHtml),
     'forceLeadError/qaUnlock/resetUnlock must not work on live domains.'
   );
   block(
@@ -948,13 +961,18 @@ function run() {
     'Expected the PDF cover to introduce the document structure before the photo/radar/pass sections.'
   );
   block(
-    'Visual itinerary overview is visible before the detailed plan',
-    /data-itinerary-overview/.test(indexHtml) &&
-      /function\s+itineraryOverviewHtml/.test(indexHtml) &&
-      /bw-itinerary-grid/.test(indexHtml) &&
+    'Merged Plan at a glance index replaces duplicate preview/index',
+    /data-day-jump-bar/.test(indexHtml) &&
+      /function\s+dayJumpBarHtml/.test(indexHtml) &&
+      /Plan at a glance/.test(indexHtml) &&
+      /Tap a day to jump to the full itinerary/.test(indexHtml) &&
+      /bw-plan-index-grid/.test(indexHtml) &&
+      /bw-plan-index-photo/.test(indexHtml) &&
       /dayPhotoForType/.test(indexHtml) &&
-      /Overview map/.test(indexHtml),
-    'Expected a photo-led day index between the Trip Pass and detailed route deck.'
+      !/data-itinerary-overview/.test(indexHtml) &&
+      !/Your first preview/.test(indexHtml) &&
+      !/Full plan index/.test(indexHtml),
+    'Expected one photo-led unlocked day index, not separate preview and full-plan index modules.'
   );
   block(
     'Trip load map summarizes daily intensity visually',
@@ -1022,26 +1040,49 @@ function run() {
     /full\.hidden\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(indexHtml) &&
       /if\s*\(!unlocked\s*\|\|\s*!planGenerated\)/.test(renderFullPlanSource) &&
       /previewCount\s*=\s*Math\.min\(1,\s*plan\.days\.length\)/.test(indexHtml) &&
+      /preview\.hidden\s*=\s*unlocked/.test(renderPlanSource) &&
+      /preview\.innerHTML\s*=\s*''/.test(renderPlanSource + updateUnlockUiSource) &&
+      /data-full-actions/.test(indexHtml) &&
+      /data-full-days><\/div>[\s\S]*data-full-actions/.test(indexHtml) &&
       /if\s*\(pdf\)\s*pdf\.disabled\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(indexHtml) &&
       /if\s*\(!unlocked\s*\|\|\s*!planGenerated\)\s*return/.test(downloadSimplePdfSource + printPlanSource),
-    'Expected post-animation results to show only a Day 1 preview while full days, PDF, and print stay email-gated.'
+    'Expected locked results to show only a Day 1 preview; after unlock the preview clears and PDF/share actions move after the last day.'
   );
   block(
     'Frontend AI polish is fail-soft',
     /function\s+aiEnhancementPayload/.test(indexHtml) &&
-      !/\bemail\b/i.test(aiPayloadSource) &&
+      /function\s+unlockEmailForQuota/.test(indexHtml) &&
+      /quotaEmail:\s*unlockEmailForQuota\(\)/.test(aiPayloadSource) &&
+      /Your Local Guide Yusuf\\'s Note|Your Local Guide Yusuf's Note/.test(aiHtmlSource) &&
+      /YUSUF_GUIDE_PHOTO_URL/.test(indexHtml) &&
+      /guideNote/.test(aiHtmlSource) &&
+      /weatherSentence/.test(aiHtmlSource) &&
+      /tourSentence/.test(aiHtmlSource) &&
+      /localGuideFallback/.test(aiRequestSource + indexHtml) &&
+      /aiStatus\s*=\s*'quota'/.test(aiRequestSource) &&
       /body:\s*JSON\.stringify\(aiEnhancementPayload\(plan\)\)/.test(aiRequestSource) &&
       /forceLocalAiErrorForQa\(\)/.test(aiRequestSource) &&
       /aiStatus\s*=\s*'error'/.test(aiRequestSource) &&
       /aiEnhancement\s*=\s*null/.test(aiRequestSource) &&
       /fail_soft:\s*true/.test(aiRequestSource) &&
-      /if\s*\(!aiEnhancement\s*\|\|\s*aiStatus\s*!==\s*'ready'\)\s*return\s*''/.test(aiHtmlSource) &&
+      /if\s*\(!aiEnhancement\s*\|\|\s*\(aiStatus\s*!==\s*'ready'\s*&&\s*aiStatus\s*!==\s*'quota'\)\)\s*return\s*''/.test(aiHtmlSource) &&
       /full\.hidden\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(renderFullPlanSource) &&
       /dashboard\.hidden\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(updateUnlockUiSource) &&
       /pdf\.disabled\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(updateUnlockUiSource) &&
       /print\.disabled\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(updateUnlockUiSource) &&
       !/aiStatus/.test(updateUnlockUiSource),
-    'Expected the optional AI panel to send no email, disappear on Gemini/API failure, and never control full-plan/PDF visibility.'
+    'Expected the optional AI panel to be guide-note styled, use email only for backend quota lookup, fail soft, and never control full-plan/PDF visibility.'
+  );
+  block(
+    'Daily weather chips appear inside each full day',
+    /function\s+dayWeatherChipHtml/.test(indexHtml) &&
+      /bw-day-weather/.test(indexHtml) &&
+      /dayWeatherFor\(day\)/.test(indexHtml) &&
+      /tripWeatherSummary\(plan\)/.test(indexHtml) &&
+      /setDailyWeatherMap\(liveDailyWeatherMap\(data\)\)/.test(indexHtml) &&
+      /setDailyWeatherMap\(climateDailyWeatherMap\(\)\)/.test(indexHtml) &&
+      /setDailyWeatherMap\(fallbackDailyWeatherMap\(\)\)/.test(indexHtml),
+    'Expected each unlocked day card to include a concise live/fallback weather cue and the AI payload to receive only a short trip weather summary.'
   );
   block(
     'Full plan includes transport maps and shopping feature',
@@ -1263,9 +1304,12 @@ function run() {
     'Expected score/tier/next-action/reason fields to be stored separately for CRM and email segmentation.'
   );
   block(
-    'Route Deck and Day Jump Bar exist',
-    /data-route-deck/.test(indexHtml) && /Full plan index/.test(indexHtml),
-    'Expected visual route deck and unlocked day index.'
+    'Route Deck and merged day index exist',
+    /data-route-deck/.test(indexHtml) &&
+      /data-day-jump-bar/.test(indexHtml) &&
+      /data-day-jump-day/.test(indexHtml) &&
+      /bw-plan-index-card/.test(indexHtml),
+    'Expected visual route deck and unlocked Plan at a glance day index.'
   );
   block(
     'Berlin one-off holiday override includes 2028-06-17',

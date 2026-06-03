@@ -78,7 +78,10 @@ const FIELD_DEFINITIONS = [
   ['bookingId', 'Booking ID', 'TEXT'],
   ['tourDate', 'Tour Date', 'TEXT'],
   ['bookingStatus', 'Booking Status', 'TEXT'],
-  ['bookingSource', 'Booking Source', 'TEXT']
+  ['bookingSource', 'Booking Source', 'TEXT'],
+  ['aiRequestCount', 'AI Request Count', 'NUMBER'],
+  ['aiLastRequestedAt', 'AI Last Requested At', 'DATETIME'],
+  ['aiLimitReachedAt', 'AI Limit Reached At', 'DATETIME']
 ];
 
 function usage() {

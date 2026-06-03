@@ -65,10 +65,13 @@ POST https://www.berlinwalk.com/_functions/tripPlannerAi
 ```
 
 This endpoint adds a short "local second look" after the deterministic full plan
-is unlocked. It never receives the user's email; the widget sends only sanitized
-trip inputs, weather/tour-slot labels, and the already-built day skeleton. If
-Gemini is unavailable, missing a key, or returns a bad response, the frontend
-hides the AI panel and the deterministic plan/PDF/print flow continues normally.
+is unlocked. The widget sends `quotaEmail` only so the backend can enforce the
+email + arrival-date Gemini limit; `quotaEmail` is not included in the
+Gemini-bound prompt input. Gemini receives only sanitized trip inputs,
+weather/tour-slot labels, and the already-built day skeleton. If Gemini is
+unavailable, missing a key, quota-limited, or returns a bad response, the
+frontend falls back calmly and the deterministic plan/PDF/print flow continues
+normally.
 
 Add the Gemini API key in Wix Secrets Manager as `GEMINI_API_KEY`. Accepted
 fallback secret names are `GOOGLE_AI_API_KEY` and `GOOGLE_GEMINI_API_KEY`.
@@ -104,14 +107,14 @@ dry-run-first smoke helper:
 ```bash
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --email you@example.com
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com
-node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai-only
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --ai
 node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email you@example.com --booking
 ```
 
 The first command writes the exact lead/booking payloads without touching Wix.
-The `--ai-only` command tests `/_functions/tripPlannerAi` without creating a
-lead or sending the instant plan email. The other live commands call
+The `--ai-only` command tests `/_functions/tripPlannerAi` against an existing
+lead without creating a new lead or sending the instant plan email. The other live commands call
 `/_functions/tripPlannerLead` and, with `--ai` or `--booking`, also test
 `/_functions/tripPlannerAi` or `/_functions/tripPlannerBooking`, then save the
 response JSON under `output/qa/ultimate-trip-planner-live-smoke/`.
@@ -417,5 +420,5 @@ and the scheduled reminder on the same day.
 6. Merge `jobs.config`.
 7. Publish Wix.
 8. Test `POST /_functions/tripPlannerLead` with a real email.
-9. Test `POST /_functions/tripPlannerAi` with `--ai-only` first, then optionally with `--ai`, and confirm `enhancement.localRead` returns.
+9. Test `POST /_functions/tripPlannerAi` with `--ai-only` first, then optionally with `--ai`, and confirm `enhancement.guideNote` returns.
 10. Test `POST /_functions/tripPlannerBooking` with the same email and confirm future Ultimate reminders are suppressed.

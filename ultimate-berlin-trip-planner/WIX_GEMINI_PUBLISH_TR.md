@@ -63,15 +63,15 @@ Terminalde `berlinwalk-widgets/` icinden:
 ```bash
 source ../scripts/load-api-keys.sh
 node ultimate-berlin-trip-planner/launch-remote-preflight.mjs
-node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --ai-only
+node ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs --live --email YOUR_TEST_EMAIL@example.com --ai-only
 node ultimate-berlin-trip-planner/launch-audit.mjs
 ```
 
 Beklenen:
 
 - `tripPlannerAi OPTIONS` artik `204`.
-- `--ai-only` lead yaratmadan ve instant email gondermeden `ok: true` doner.
-- `enhancement.localRead` gelir.
+- `--ai-only` mevcut lead uzerinden, yeni lead yaratmadan ve instant email gondermeden `ok: true` doner.
+- `enhancement.guideNote` gelir.
 
 ## 4. Sonra Full Smoke
 
