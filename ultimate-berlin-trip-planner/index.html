@@ -8514,19 +8514,20 @@
     }
 
     #bw-trip-planner .bw-ai-asides {
-      display: grid;
-      gap: 8px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
     }
 
     #bw-trip-planner .bw-ai-aside {
-      background: rgba(234, 244, 255, 0.82);
+      background: rgba(234, 244, 255, 0.72);
       border: 1px solid rgba(47, 128, 237, 0.18);
-      border-radius: 8px;
+      border-radius: 999px;
       color: var(--bw-muted);
-      display: grid;
-      gap: 4px;
-      padding: 8px 9px;
+      display: inline-flex;
+      gap: 6px;
+      min-width: 0;
+      padding: 7px 9px;
     }
 
     #bw-trip-planner .bw-ai-aside b,
@@ -8594,7 +8595,7 @@
     #bw-trip-planner .bw-ai-days {
       display: grid;
       gap: 8px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     #bw-trip-planner .bw-ai-day {
@@ -8603,8 +8604,8 @@
       border-radius: 8px;
       display: grid;
       gap: 4px;
-      grid-template-columns: 42px minmax(0, 1fr);
-      padding: 10px;
+      grid-template-columns: 34px minmax(0, 1fr);
+      padding: 9px;
     }
 
     #bw-trip-planner .bw-ai-day b {
@@ -8615,10 +8616,10 @@
       display: inline-flex;
       font-size: 11px;
       font-weight: 950;
-      height: 38px;
+      height: 32px;
       justify-content: center;
       line-height: 1;
-      width: 38px;
+      width: 32px;
     }
 
     #bw-trip-planner .bw-ai-day strong {
@@ -16733,6 +16734,36 @@
     return humanList(guideAnchorLabels(day, limit || 2)) || day.theme || day.title || 'this day';
   }
 
+  function naturalGuidePhrase(value) {
+    return String(value || '')
+      .replace(/\s*\/\s*/g, ' and ')
+      .replace(/\bHbf\b/g, 'station')
+      .replace(/\bPotsdam station\b/gi, 'Potsdam')
+      .replace(/\bFree and low budget\b/gi, 'free and low-cost Berlin')
+      .replace(/\bBerlin Wall and Cold War\b/gi, 'Wall history')
+      .trim();
+  }
+
+  function guideTopicPhrase(labels) {
+    return humanList((labels || []).map(naturalGuidePhrase).filter(Boolean)) || 'Berlin';
+  }
+
+  function guideFocusPhrase(labels) {
+    var text = (labels || []).join(' ').toLowerCase();
+    if (/history/.test(text) && /wall|cold/.test(text) && /free|budget/.test(text)) return 'history and Wall days';
+    if (/history/.test(text) && /wall|cold/.test(text)) return 'history and Wall days';
+    if (/museum/.test(text) && /history/.test(text)) return 'museum and history time';
+    if (/food/.test(text) && /night/.test(text)) return 'food and evening time';
+    if (/free|budget/.test(text)) return 'low-cost Berlin';
+    if (/museum/.test(text)) return 'museum time';
+    if (/food/.test(text)) return 'food and neighborhood time';
+    return 'Berlin';
+  }
+
+  function guideAnchorNaturalPhrase(day, limit) {
+    return naturalGuidePhrase(guideAnchorPhrase(day, limit || 2));
+  }
+
   function guideBlockTitle(day, match) {
     var blocks = dayActionBlockItems(day).map(function (item) { return item.block; });
     var found = blocks.find(function (block) {
@@ -16743,21 +16774,24 @@
 
   function mockRouteIntro(plan, mainFocus, slot) {
     var days = plan.days || [];
-    var first = days[0] ? guideAnchorPhrase(days[0], 2) : 'your first Berlin bearings';
-    var last = days.length > 1 ? guideAnchorPhrase(days[days.length - 1], 2) : '';
+    var first = days[0] ? guideAnchorNaturalPhrase(days[0], 2) : 'your first Berlin bearings';
+    var last = days.length > 1 ? guideAnchorNaturalPhrase(days[days.length - 1], 2) : '';
     var tourDay = slot && slot.insideTrip
-      ? ' I would keep BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock, then leave the rest of that day lighter.'
+      ? ' Use BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock, then leave the rest of that day lighter.'
       : '';
-    var ending = last && days.length > 2 ? ' Near the end, save ' + last + ' for a day when you still have energy, not as another forced stop.' : '';
-    return 'For these ' + days.length + ' days, I would start gently with ' + first + '. Let arrival day do the simple work: bags, food, water, and a first walk that stays close. After that, give real time to ' + mainFocus + ' instead of chasing every famous name.' + tourDay + ending;
+    var focusLine = mainFocus && mainFocus !== 'Berlin'
+      ? ' Save the bigger ' + mainFocus + ' until after you are settled.'
+      : ' Save the bigger sights until after you are settled.';
+    var ending = last && days.length > 2 ? ' Save ' + last + ' for a day when the weather and your legs still feel good.' : '';
+    return 'I would keep this plan simple. Start gently with ' + first + '.' + focusLine + tourDay + ending;
   }
 
   function mockDayStory(day, slot) {
     var type = day.planKey || dayVisualType(day);
     var anchors = guideAnchorLabels(day, 3);
-    var first = anchors[0] || day.theme || 'the main stop';
-    var second = anchors[1] || guideBlockTitle(day, /afternoon|museum|wall|food|park|neighborhood/i) || 'the next layer';
-    var third = anchors[2] || guideBlockTitle(day, /evening|dinner|pause|break/i) || '';
+    var first = naturalGuidePhrase(anchors[0] || day.theme || 'the main stop');
+    var second = naturalGuidePhrase(anchors[1] || guideBlockTitle(day, /afternoon|museum|wall|food|park|neighborhood/i) || 'the next stop');
+    var third = naturalGuidePhrase(anchors[2] || guideBlockTitle(day, /evening|dinner|pause|break/i) || '');
     var isTourDay = slot && slot.insideTrip && day.dayNumber === slot.offset + 1;
 
     if (day.dayNumber === 1) {
@@ -16785,7 +16819,7 @@
       return 'Save some legs for later. ' + first + ' is more fun if you do not spend the whole afternoon crossing town before ' + (third || second) + '.';
     }
     if (type === 'potsdam') {
-      return 'Treat Potsdam as the nice-weather choice. If the day feels heavy, keep ' + second + ' as the easier Berlin-side plan.';
+      return 'Treat Potsdam as the nice-weather choice. If the day feels heavy, make it a shorter recovery day in Berlin instead.';
     }
     return 'Use ' + first + ' and ' + second + ' as a calmer day between bigger sights. This is where the trip gets room to breathe.';
   }
@@ -16794,24 +16828,20 @@
     var slot = tourSlotForPlan(plan);
     var dayCount = (plan.days || []).length;
     var focusLabels = (state.interests || []).map(function (key) { return labelFor('interests', key); }).slice(0, 3);
-    var mainFocus = humanList(focusLabels) || 'central Berlin';
+    var mainFocus = guideFocusPhrase(focusLabels);
     var tourSentence = slot && slot.insideTrip
-      ? 'I would hold ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock for BerlinWalk, then keep that day lighter afterward.'
+      ? 'Use BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock, then keep that day lighter afterward.'
       : slot && !slot.booked
         ? 'The tour does not land cleanly inside this plan, so I would not force it into a bad arrival day.'
         : 'Since the tour is already booked, keep the World Clock meeting point saved and arrive 5 minutes early.';
     return normalizeAiEnhancement({
       provider: 'gemini',
       model: 'gemini-2.5-flash-mock',
-      noteTitle: 'How I would read these days',
+      noteTitle: 'My quick read',
       routeIntro: mockRouteIntro(plan, mainFocus, slot),
       weatherSentence: tripWeatherSummary(plan),
       tourSentence: tourSentence,
-      chips: [
-        { label: 'Pace cue', value: state.pace === 'gentle' ? 'Keep breaks visible and avoid late cross-city moves.' : 'Add extras only when the day still feels easy.' },
-        { label: 'Map cue', value: 'Open only today first. Tomorrow can wait.' },
-        { label: 'Tour cue', value: slot && slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : 'Do not force a bad tour day.' }
-      ],
+      chips: [],
       dayStories: (plan.days || []).slice(0, 7).map(function (day) {
         return {
           dayNumber: day.dayNumber,
@@ -16833,16 +16863,13 @@
       provider: 'local',
       model: 'deterministic-fallback',
       noteTitle: 'My read on this plan',
-      routeIntro: 'This plan is still useful without another AI rewrite. Start with ' + firstAnchors + ' and keep the first day light. For a ' + days + '-day visit, I would protect the order of the days more than the number of famous names. You can always add one nearby stop when the day still feels good.',
+      routeIntro: 'Start with ' + naturalGuidePhrase(firstAnchors) + ' and keep the first day light. For a ' + days + '-day visit, the order matters more than the number of famous names. Add one nearby stop only when the day still feels good.',
       weatherSentence: tripWeatherSummary(plan),
       tourSentence: slot && slot.insideTrip
         ? 'The clean BerlinWalk fit remains ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock.'
         : 'If you still want BerlinWalk, use the next clean Tue-Sat slot rather than forcing it into a bad day.',
       quotaMessage: quotaMessage,
-      chips: [
-        { label: 'AI limit', value: quota && Number.isFinite(Number(quota.remaining)) ? String(Math.max(0, Number(quota.remaining))) + ' guide-note runs left' : quotaMessage },
-        { label: 'Plan update', value: 'You can still update the itinerary itself.' }
-      ],
+      chips: [],
       dayStories: (plan.days || []).slice(0, 7).map(function (day) {
         return {
           dayNumber: day.dayNumber,
@@ -16863,17 +16890,38 @@
     return '<span class="bw-ai-avatar" aria-hidden="true"><img src="' + escapeHtml(assetUrl(YUSUF_GUIDE_PHOTO_URL)) + '" alt="" loading="eager" decoding="async"></span>';
   }
 
+  function aiVisibleDayStories(plan, storyByDay) {
+    var days = plan.days || [];
+    if (days.length <= 3) {
+      return days.filter(function (day) { return storyByDay[day.dayNumber]; });
+    }
+    var slot = tourSlotForPlan(plan);
+    var picked = [];
+    function add(day) {
+      if (!day || !storyByDay[day.dayNumber]) return;
+      if (picked.some(function (item) { return item.dayNumber === day.dayNumber; })) return;
+      picked.push(day);
+    }
+    add(days[0]);
+    if (slot && slot.insideTrip) add(days[slot.offset]);
+    add(days[days.length - 1]);
+    days.forEach(function (day) {
+      if (picked.length < 3) add(day);
+    });
+    return picked.slice(0, 3);
+  }
+
   function aiEnhancementHtml(plan) {
     if (!unlocked || !planGenerated) return '';
     if (aiStatus === 'loading') {
       return '<section class="bw-ai-panel is-loading" aria-label="Local guide polish loading">' +
-        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Route Story</strong><span>Reading the plan like a local guide. The route and times stay unchanged.</span></div></div><span class="bw-ai-pill">Guide note</span></div>' +
+        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>Reading the plan in simple English. The route and times stay unchanged.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
       '</section>';
     }
     if (aiStatus === 'error') {
       if (!isLocalPreviewSurface()) return '';
       return '<section class="bw-ai-panel" aria-label="Local guide polish unavailable">' +
-        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Route Story</strong><span>Gemini is backend-only. Use localhost/live, or add mockAi=1 for local visual QA.</span></div></div><span class="bw-ai-pill">Preview</span></div>' +
+        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>Gemini is backend-only. Use localhost/live, or add mockAi=1 for local visual QA.</span></div></div><span class="bw-ai-pill">Preview</span></div>' +
       '</section>';
     }
     if (!aiEnhancement || (aiStatus !== 'ready' && aiStatus !== 'quota')) return '';
@@ -16887,7 +16935,7 @@
     (aiEnhancement.dayStories || []).forEach(function (item) {
       storyByDay[item.dayNumber] = item.text;
     });
-    var dayStoryHtml = (plan.days || []).slice(0, 7).map(function (day) {
+    var dayStoryHtml = aiVisibleDayStories(plan, storyByDay).map(function (day) {
       var text = cleanAiText(storyByDay[day.dayNumber], '', 220);
       if (!text) return '';
       return '<article class="bw-ai-day"><b>D' + day.dayNumber + '</b><span><strong>' + escapeHtml(day.theme || day.title) + '</strong><span>' + escapeHtml(text) + '</span></span></article>';
@@ -16899,11 +16947,11 @@
     ].filter(Boolean).map(function (item) {
       return '<span class="bw-ai-aside"><b>' + escapeHtml(item.label) + '</b><span>' + escapeHtml(item.value) + '</span></span>';
     }).join('');
-    var chipHtml = chips.length ? '<div class="bw-ai-chips">' + chips.map(function (chip) {
+    var chipHtml = aiStatus === 'quota' && chips.length ? '<div class="bw-ai-chips">' + chips.map(function (chip) {
       return '<span><b>' + escapeHtml(chip.label) + '</b><em>' + escapeHtml(chip.value) + '</em></span>';
     }).join('') + '</div>' : '';
     return '<section class="bw-ai-panel' + (aiStatus === 'quota' ? ' is-quota' : '') + '" aria-label="Local guide polish">' +
-      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Route Story</strong><span>A short personal read of this exact route. Dates, stops, and tour slot stay unchanged.</span></div></div><span class="bw-ai-pill">' + (aiStatus === 'quota' ? 'Local fallback' : 'Guide note') + '</span></div>' +
+      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>A simple read before you start. Dates, stops, and tour time stay unchanged.</span></div></div><span class="bw-ai-pill">' + (aiStatus === 'quota' ? 'Local fallback' : 'Yusuf note') + '</span></div>' +
       '<div class="bw-ai-body">' +
         '<div class="bw-ai-copy"><strong>' + escapeHtml(noteTitle) + '</strong>' +
           (routeIntro ? '<span>' + escapeHtml(routeIntro) + '</span>' : '') +

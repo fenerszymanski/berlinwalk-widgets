@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (Ultimate simple Yusuf note)
+
+**Did:** Simplified the Ultimate planner AI/Yusuf note so it reads less like a generated route-story module and more like a short personal guide note.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — renamed the panel to `Your Local Guide Yusuf's Note`, reduced visible AI day stories to a max of 3 key days, removed normal-state cue chips, made weather/tour notes compact, and simplified mock/fallback language.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — simplified the Gemini prompt: plain English, no fixed template, no raw interest-label lists, no invented stops/times.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated the AI polish wording audit for the new panel title.
+- `output/qa/ultimate-trip-planner-prepublish-gate/` — new local prepublish evidence files from the latest gate runs.
+
+**Opened:** The panel is calmer, but Yusuf should still judge the real live Gemini output after Velo paste/publish; PDF/email polish remain next-phase work.
+**Closed:** Inline script parse passed; `launch-audit.mjs` passed `152 pass, 0 warn, 0 block`; Velo prepublish gate passed `13 pass`; local browser QA on a 7-day mock plan showed 3 AI day cards, 7 full days, no `Route Story`, no normal cue chips, normal copy weights, and no horizontal overflow.
+
+**Next session should:** If Yusuf likes the copy direction, paste/publish the updated Velo source and smoke-test live Gemini. If not, tune the guide note copy one more round before touching PDF/email.
+
 ## 2026-06-03 — Codex (Fixtures icon yellow fill)
 
 **Did:** Replaced the fixtures icon with Yusuf's later ChatGPT image after removing/replacing black corners so the icon area is fully yellow.

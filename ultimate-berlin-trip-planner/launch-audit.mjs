@@ -1058,7 +1058,7 @@ function run() {
       /function\s+aiEnhancementPayload/.test(indexHtml) &&
       /function\s+unlockEmailForQuota/.test(indexHtml) &&
       /quotaEmail:\s*unlockEmailForQuota\(\)/.test(aiPayloadSource) &&
-      /Your Local Guide Yusuf\\'s Route Story|Your Local Guide Yusuf's Route Story/.test(aiHtmlSource) &&
+      /Your Local Guide Yusuf\\'s Note|Your Local Guide Yusuf's Note/.test(aiHtmlSource) &&
       /YUSUF_GUIDE_PHOTO_URL/.test(indexHtml) &&
       /routeIntro/.test(aiHtmlSource) &&
       /dayStories/.test(aiHtmlSource) &&

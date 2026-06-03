@@ -28,12 +28,14 @@ class BWToolsHomeElement extends HTMLElement {
         .bw-tools-home {
           --serif: Merriweather, Georgia, serif;
           background: #FFFFFF;
+          box-sizing: border-box;
           color: #212121;
           font-family: Montserrat, Arial, sans-serif;
-          margin: 0;
-          max-width: 100%;
+          margin: 0 calc((100% - 100vw) / 2);
+          max-width: 100vw;
           overflow-x: hidden;
           padding: 64px 24px;
+          width: 100vw;
         }
 
         .bw-tools-home *,
