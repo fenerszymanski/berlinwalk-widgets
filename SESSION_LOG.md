@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (Homepage tools width fix)
+
+**Did:** Fixed the `<bw-tools-home>` section so Wix's shifted intermediate-width wrapper no longer cuts the section off-screen.
+
+**Changed:**
+- `tools-home/tools-home-element.js` — outer `.bw-tools-home` now uses viewport width/max-width, border-box sizing, and viewport-centering side margins.
+- `output/qa/homepage-tools-width-fix/live-850-tools-section-20260603.png` — live 850px screenshot evidence.
+- Workspace/Wix: created `BerlinWalk Homepage Tools Width Fix` custom embed (`f4e716ff-8cad-4086-ab6c-7370e6b50dcc`, revision 1) from `../berlinwalk-homepage-tools-width-fix.html` via `../scripts/update-homepage-tools-width-fix-embed.mjs`.
+
+**Opened:** Commit/push this source fix when the current unrelated Ultimate planner work is ready or separately staged.
+**Closed:** Live homepage Playwright QA passed at 850x768, 390x844, and 1280x800; `.bw-tools-home`/grid/cards fit inside the viewport and horizontal overflow is `0`.
+
+**Next session should:** Avoid touching the dirty Ultimate planner files unless that work is active; for this issue, just push the targeted tools-home source fix and then recheck GitHub Pages/live homepage.
+
 ## 2026-06-03 — Codex (Ultimate simple Yusuf note)
 
 **Did:** Simplified the Ultimate planner AI/Yusuf note so it reads less like a generated route-story module and more like a short personal guide note.
