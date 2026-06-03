@@ -42,6 +42,7 @@ const TOPICS = [
     kicker: 'Useful now',
     description: 'Clear answers for transport, money, luggage, safety, weather, and planning decisions visitors actually search for.',
     slugs: [
+      'where-to-watch-2026-world-cup-in-berlin',
       'best-day-trips-from-berlin',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
       'is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists',
@@ -51,7 +52,7 @@ const TOPICS = [
       'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
     ],
-    match: /(budget|expensive|safe|credit|cash|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
+    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
   },
   {
     key: 'free-budget',
@@ -145,8 +146,9 @@ const TOPICS = [
 ];
 
 const HERO_SLUGS = {
-  lead: 'shopping-in-berlin',
+  lead: 'where-to-watch-2026-world-cup-in-berlin',
   secondary: [
+    'shopping-in-berlin',
     'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
     'public-toilets-in-berlin',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
@@ -178,22 +180,22 @@ const START_HERE_LINKS = [
 
 const SPOTLIGHT_TOOLS = [
   {
+    title: 'World Cup Public-Viewing Finder',
+    slug: 'watch-world-cup-2026-berlin',
+    url: `${BLOG_BASE}/tools/watch-world-cup-2026-berlin`,
+    summary: 'Find free screens, beer gardens, waterside spots and late-night-friendly venues in Berlin.',
+  },
+  {
+    title: 'World Cup Fixtures in Berlin Time',
+    slug: 'world-cup-2026-fixtures-berlin-time',
+    url: `${BLOG_BASE}/tools/world-cup-2026-fixtures-berlin-time`,
+    summary: 'See every 2026 match converted to Berlin time, with Germany and evening-friendly filters.',
+  },
+  {
     title: 'Berlin First-Day Planner',
     slug: 'berlin-first-day-planner',
     url: `${BLOG_BASE}/tools/berlin-first-day-planner`,
     summary: 'Build a realistic first-day plan around arrival time, luggage, weather, and the tour.',
-  },
-  {
-    title: 'Berlin Day Trip Finder',
-    slug: 'berlin-day-trips-finder',
-    url: `${BLOG_BASE}/tools/berlin-day-trips-finder`,
-    summary: 'Compare Potsdam, Sachsenhausen, Spreewald, Dresden, Leipzig and more by interest, time and map distance.',
-  },
-  {
-    title: 'Berlin Transport Ticket Calculator',
-    slug: 'transport-ticket-calculator',
-    url: `${BLOG_BASE}/tools/transport-ticket-calculator`,
-    summary: 'Pick the cheapest ticket for the actual journeys you plan to take.',
   },
 ];
 
@@ -347,6 +349,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(world-cup|world cup|public viewing|fan mile|football|soccer)/.test(s)) return 'watch-world-cup-2026-berlin';
   if (/(day-trip|day trip|potsdam|sachsenhausen|spreewald|dresden|leipzig|wittenberg|tropical-islands|bastei)/.test(s)) return 'berlin-day-trips-finder';
   if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) return 'best-month-to-visit-berlin';
   if (/(toilet)/.test(s)) return 'berlin-public-toilets';

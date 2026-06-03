@@ -34,21 +34,21 @@ Note: end-of-post tour CTA and the Berlin First-Day Survival Guide lead form are
 
 If you are visiting Berlin this June or July, you have picked a good summer. The 2026 FIFA World Cup runs from 11 June to 19 July, and even though every match is being played thousands of kilometres away in the United States, Canada and Mexico, the city quietly turns into one big screening room after dark.
 
-Here is the honest part most guides will not tell you up front: there is no giant fan zone at the Brandenburg Gate this year. The good news is that the alternatives are more local, more relaxed, and often more fun. I walk these streets every week, so this is the practical version of where to actually watch.
+Here is the honest part most guides will not tell you up front: **there is no giant fan zone at the Brandenburg Gate this year**. The good news is that the alternatives are more local, more relaxed, and often more fun. I walk these streets every week, so this is the practical version of where to actually watch.
 
 {{quick-summary}}
 
 ## First, the reality check: the Cup is in North America
 
-Let's clear this up, because a lot of visitors arrive confused. Berlin is not a host city. No 2026 World Cup match is played in Germany at all. The tournament is shared between 16 cities across the United States, Mexico and Canada, kicking off with Mexico against South Africa on 11 June and ending with the final in New York on 19 July.
+Let's clear this up, because a lot of visitors arrive confused. **Berlin is not a host city**. No 2026 World Cup match is played in Germany at all. The tournament is shared between 16 cities across the United States, Mexico and Canada, kicking off with Mexico against South Africa on 11 June and ending with the final in New York on 19 July.
 
 What Berlin does have is a long, emotional public viewing tradition. And this year that tradition is changing shape.
 
 ## Why there is no Brandenburg Gate fan mile this year
 
-For the first time since the legendary 2006 "Sommermärchen," Berlin has skipped its famous Fanmeile on Straße des 17. Juni, the 72,000 square metre stretch that once packed in up to 70,000 fans for a Germany match. The city pointed to the high security cost and the awkward, late North American kick-off times, and in the end no organiser even submitted an application.
+For the first time since the legendary 2006 "Sommermärchen," **Berlin has skipped its famous Fanmeile on Straße des 17. Juni**, the 72,000 square metre stretch that once packed in up to 70,000 fans for a Germany match. The city pointed to the high security cost and the awkward, late North American kick-off times, and in the end no organiser even submitted an application.
 
-So if you arrive expecting a sea of flags between the Victory Column and the Brandenburg Gate, you will be disappointed. Everything has moved into screens, beer gardens and bars spread across the city instead.
+So if you arrive expecting a sea of flags between the Victory Column and the Brandenburg Gate, **you will be disappointed**. Everything has moved into screens, beer gardens and bars spread across the city instead.
 
 ## Where to watch the World Cup in Berlin
 
@@ -69,28 +69,28 @@ So if you arrive expecting a sea of flags between the Victory Column and the Bra
 - **Zollpackhof (near the main station)**: a riverside beer garden with a view across to the Chancellery.
 - **Naumanns (Schöneberg)**: long shared tables and a relaxed, conversational crowd.
 
-The city has confirmed official screens at Tempelhof, Potsdamer Platz and around 14 other locations, with the full, updated list published on Berlin.de. Use the finder below to filter spots by what you are after, from free entry to a beer garden by the water.
+The city has confirmed official screens at **Tempelhof, Potsdamer Platz and around 14 other locations**, with the full, updated list published on Berlin.de. Use the [World Cup public-viewing finder](https://www.berlinwalk.com/tools/watch-world-cup-2026-berlin) below to filter spots by what you are after, from free entry to a beer garden by the water.
 
 {{widget:worldcup-berlin}}
 
 ## What time are the matches in Berlin?
 
-This is the part worth planning around. Because the action is in North America, kick-offs land in the evening and through the night in Central European Summer Time. Around 52 matches kick off in the convenient evening window, roughly 6 pm to midnight. But 69 of the 104 matches fall between 22:00 and 06:00, and 50 of those are after midnight. East-coast United States games sit around 21:00 to 03:00, while west-coast games push as late as 04:00 to 06:00.
+This is the part worth planning around. Because the action is in North America, kick-offs land in the evening and through the night in Central European Summer Time. **Around 52 matches kick off in the convenient evening window**, roughly 6 pm to midnight. But **69 of the 104 matches fall between 22:00 and 06:00**, and 50 of those are after midnight. East-coast United States games sit around 21:00 to 03:00, while west-coast games push as late as 04:00 to 06:00.
 
-For Germany fans, the timing is friendlier than average. Germany are in Group E, and their opener against Curaçao on Sunday 14 June kicks off at 19:00 Berlin time, which is close to perfect. Their other two group games, against Ivory Coast on 20 June and Ecuador on 25 June, both start at 22:00.
+For Germany fans, the timing is friendlier than average. Germany are in Group E, and their opener against Curaçao on Sunday 14 June kicks off at **19:00 Berlin time**, which is close to perfect. Their other two group games, against Ivory Coast on 20 June and Ecuador on 25 June, both start at **22:00**.
 
-The schedule below shows every match in Berlin time. You can filter by day, jump straight to Germany's games, or see which kick-offs are evening-friendly.
+The [schedule below](https://www.berlinwalk.com/tools/world-cup-2026-fixtures-berlin-time) shows every match in Berlin time. You can filter by day, jump straight to Germany's games, or see which kick-offs are evening-friendly.
 
 {{widget:worldcup-fixtures}}
 
 ## One Berlin rule worth knowing
 
-Berlin's normal quiet hours, the Ruhezeit, begin at 10 pm. For the World Cup the city has issued a special exemption: outdoor venues can keep screening as long as the match kicks off by 10 pm. A few spots with special permits, like Strandbad Wendenschloss, can go later. In practice, evening games are easy to find outdoors, and for the very late kick-offs you simply head indoors to a bar.
+Berlin's normal quiet hours, the Ruhezeit, begin at **10 pm**. For the World Cup the city has issued a special exemption: outdoor venues can keep screening as long as the match kicks off by 10 pm. A few spots with special permits, like Strandbad Wendenschloss, can go later. In practice, evening games are easy to find outdoors, and for the very late kick-offs you simply head indoors to a bar.
 
 ## Make the most of your Berlin days
 
-Here is the upside of those late kick-offs: your days are completely free. You can spend the afternoon actually understanding the city, the TV Tower, the Rotes Rathaus, the real path of the Berlin Wall, Museum Island, and still be at a beer garden in time for the evening whistle.
+Here is the upside of those late kick-offs: **your days are completely free**. You can spend the afternoon actually understanding the city, the [TV Tower, the Rotes Rathaus, the real path of the Berlin Wall and Museum Island](https://www.berlinwalk.com/berlin-walking-tour-route), and still be at a beer garden in time for the evening whistle.
 
-That is exactly why a morning or early-afternoon walk pairs so well with a World Cup trip. You see Berlin properly while the football world sleeps, then watch the match with locals when night falls.
+That is exactly why a [morning or early-afternoon walk](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) pairs so well with a World Cup trip. You see Berlin properly while the football world sleeps, then watch the match with locals when night falls.
 
 {{faq}}

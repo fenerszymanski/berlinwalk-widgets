@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-02T08:59:28.462Z",
+  "updatedAt": "2026-06-03T15:51:45.764Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 111,
+  "totalPosts": 112,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -43,23 +43,40 @@
   ],
   "hero": {
     "lead": {
-      "title": "Shopping in Berlin: Where to Actually Shop in 2026 (A Local Guide)",
-      "slug": "shopping-in-berlin",
-      "path": "/post/shopping-in-berlin",
-      "url": "https://www.berlinwalk.com/post/shopping-in-berlin",
-      "excerpt": "Forget the luxury-mall clichés. Where to actually shop in Berlin, from a local guide: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.",
+      "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
+      "slug": "where-to-watch-2026-world-cup-in-berlin",
+      "path": "/post/where-to-watch-2026-world-cup-in-berlin",
+      "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
+      "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "practical",
       "topicLabel": "Practical Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-06-01T10:30:41.540Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
-      "alt": "The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin",
-      "relatedToolSlug": "berlin-shopping-areas"
+      "readTime": "4 min read",
+      "publishedDate": "2026-06-03T15:51:27.753Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
+      "relatedToolSlug": "watch-world-cup-2026-berlin"
     },
     "secondary": [
+      {
+        "title": "Shopping in Berlin: Where to Actually Shop in 2026 (A Local Guide)",
+        "slug": "shopping-in-berlin",
+        "path": "/post/shopping-in-berlin",
+        "url": "https://www.berlinwalk.com/post/shopping-in-berlin",
+        "excerpt": "Forget the luxury-mall clichés. Where to actually shop in Berlin, from a local guide: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "5 min read",
+        "publishedDate": "2026-06-01T10:30:41Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
+        "alt": "Woman in beige coat walks down a Berlin shopping street past clothing racks, with the TV Tower in the background.",
+        "relatedToolSlug": "berlin-shopping-areas"
+      },
       {
         "title": "Berlin Airport to Alexanderplatz: The Easy Way (2026 Guide)",
         "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
         "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
         "relatedToolSlug": "east-or-west-1989"
-      },
-      {
-        "title": "Free Things to Do in Berlin in 2026",
-        "slug": "free-things-to-do-in-berlin-2026",
-        "path": "/post/free-things-to-do-in-berlin-2026",
-        "url": "https://www.berlinwalk.com/post/free-things-to-do-in-berlin-2026",
-        "excerpt": "A Berlin guide's honest list of what's actually free in Berlin in 2026, from the Reichstag dome and memorials to parks, free museums, and Bus 100.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "free-budget",
-        "topicLabel": "Free & Budget",
-        "readTime": "7 min read",
-        "publishedDate": "2026-05-16T21:48:17.798Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_d23a723947274468b1bc281bc59f75f8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/free_things_berlin_2026_hero.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_d23a723947274468b1bc281bc59f75f8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/free_things_berlin_2026_hero.jpg",
-        "alt": "Woman with backpack overlooks Berlin landmarks: Brandenburg Gate, TV Tower, and Berlin Cathedral. Blue sky, sunny day, relaxed mood.",
-        "relatedToolSlug": "berlin-free-things-to-do"
       }
     ]
   },
@@ -169,22 +169,22 @@
   ],
   "tools": [
     {
+      "title": "World Cup Public-Viewing Finder",
+      "slug": "watch-world-cup-2026-berlin",
+      "url": "https://www.berlinwalk.com/tools/watch-world-cup-2026-berlin",
+      "summary": "Find free screens, beer gardens, waterside spots and late-night-friendly venues in Berlin."
+    },
+    {
+      "title": "World Cup Fixtures in Berlin Time",
+      "slug": "world-cup-2026-fixtures-berlin-time",
+      "url": "https://www.berlinwalk.com/tools/world-cup-2026-fixtures-berlin-time",
+      "summary": "See every 2026 match converted to Berlin time, with Germany and evening-friendly filters."
+    },
+    {
       "title": "Berlin First-Day Planner",
       "slug": "berlin-first-day-planner",
       "url": "https://www.berlinwalk.com/tools/berlin-first-day-planner",
       "summary": "Build a realistic first-day plan around arrival time, luggage, weather, and the tour."
-    },
-    {
-      "title": "Berlin Day Trip Finder",
-      "slug": "berlin-day-trips-finder",
-      "url": "https://www.berlinwalk.com/tools/berlin-day-trips-finder",
-      "summary": "Compare Potsdam, Sachsenhausen, Spreewald, Dresden, Leipzig and more by interest, time and map distance."
-    },
-    {
-      "title": "Berlin Transport Ticket Calculator",
-      "slug": "transport-ticket-calculator",
-      "url": "https://www.berlinwalk.com/tools/transport-ticket-calculator",
-      "summary": "Pick the cheapest ticket for the actual journeys you plan to take."
     }
   ],
   "popular": [
@@ -496,6 +496,23 @@
       "description": "Clear answers for transport, money, luggage, safety, weather, and planning decisions visitors actually search for.",
       "posts": [
         {
+          "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
+          "slug": "where-to-watch-2026-world-cup-in-berlin",
+          "path": "/post/where-to-watch-2026-world-cup-in-berlin",
+          "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
+          "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "practical",
+          "topicLabel": "Practical Berlin",
+          "readTime": "4 min read",
+          "publishedDate": "2026-06-03T15:51:27.753Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+          "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
+          "relatedToolSlug": "watch-world-cup-2026-berlin"
+        },
+        {
           "title": "Best Day Trips from Berlin (2026): Easy Escapes by Train",
           "slug": "best-day-trips-from-berlin",
           "path": "/post/best-day-trips-from-berlin",
@@ -506,7 +523,7 @@
           "topic": "practical",
           "topicLabel": "Practical Berlin",
           "readTime": "8 min read",
-          "publishedDate": "2026-06-02T08:31:29.164Z",
+          "publishedDate": "2026-06-02T08:31:29Z",
           "image": "https://static.wixstatic.com/media/5a08a3_53b56c6369974f5495a8493bfb0927ba~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/day-trips-sanssouci-potsdam.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_53b56c6369974f5495a8493bfb0927ba~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/day-trips-sanssouci-potsdam.jpg",
           "alt": "Sanssouci Palace in Potsdam, the easiest classic day trip from Berlin",
@@ -591,10 +608,10 @@
           "topic": "practical",
           "topicLabel": "Practical Berlin",
           "readTime": "5 min read",
-          "publishedDate": "2026-06-01T10:30:41.540Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
-          "alt": "The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin",
+          "publishedDate": "2026-06-01T10:30:41Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
+          "alt": "Woman in beige coat walks down a Berlin shopping street past clothing racks, with the TV Tower in the background.",
           "relatedToolSlug": "berlin-shopping-areas"
         },
         {
@@ -647,23 +664,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_5167b62ad8e7478cbab0ab4d2f7677e1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Buddy%20Bears.jpg",
           "alt": "Colorful bear figurines with raised arms stand on a shelf. Each bear has a unique design: flames, hearts, stars, mosaic, flag heart. Bright and playful.",
           "relatedToolSlug": "berlin-shopping-areas"
-        },
-        {
-          "title": "Berlin TV Tower Construction: Before, During, and After",
-          "slug": "berlin-tv-tower-construction-before-during-and-after",
-          "path": "/post/berlin-tv-tower-construction-before-during-and-after",
-          "url": "https://www.berlinwalk.com/post/berlin-tv-tower-construction-before-during-and-after",
-          "excerpt": "Berlin's TV Tower was built in just 4 years, cost 4 times its budget, and accidentally created a giant Christian cross — in an atheist state. Here's the full construction story from 1965 to today.",
-          "category": "Before & After",
-          "categorySlug": "before-after",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "5 min read",
-          "publishedDate": "2026-03-23T10:45:15.611Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_6469c4947d0d424e9dfd082ca297cbe2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tvtowerberlin.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_6469c4947d0d424e9dfd082ca297cbe2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tvtowerberlin.jpg",
-          "alt": "TV tower with a metallic sphere in a clear blue sky. Modern building edges frame the sides. A sense of stillness and architectural focus.",
-          "relatedToolSlug": ""
         }
       ]
     },
@@ -1531,6 +1531,23 @@
   ],
   "latest": [
     {
+      "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
+      "slug": "where-to-watch-2026-world-cup-in-berlin",
+      "path": "/post/where-to-watch-2026-world-cup-in-berlin",
+      "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
+      "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "4 min read",
+      "publishedDate": "2026-06-03T15:51:27.753Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
+      "relatedToolSlug": "watch-world-cup-2026-berlin"
+    },
+    {
       "title": "Best Day Trips from Berlin (2026): Easy Escapes by Train",
       "slug": "best-day-trips-from-berlin",
       "path": "/post/best-day-trips-from-berlin",
@@ -1541,7 +1558,7 @@
       "topic": "practical",
       "topicLabel": "Practical Berlin",
       "readTime": "8 min read",
-      "publishedDate": "2026-06-02T08:31:29.164Z",
+      "publishedDate": "2026-06-02T08:31:29Z",
       "image": "https://static.wixstatic.com/media/5a08a3_53b56c6369974f5495a8493bfb0927ba~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/day-trips-sanssouci-potsdam.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_53b56c6369974f5495a8493bfb0927ba~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/day-trips-sanssouci-potsdam.jpg",
       "alt": "Sanssouci Palace in Potsdam, the easiest classic day trip from Berlin",
@@ -1575,10 +1592,10 @@
       "topic": "practical",
       "topicLabel": "Practical Berlin",
       "readTime": "5 min read",
-      "publishedDate": "2026-06-01T10:30:41.540Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
-      "alt": "The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin",
+      "publishedDate": "2026-06-01T10:30:41Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
+      "alt": "Woman in beige coat walks down a Berlin shopping street past clothing racks, with the TV Tower in the background.",
       "relatedToolSlug": "berlin-shopping-areas"
     },
     {
@@ -1716,26 +1733,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_a68f85c43a134c31aee35fce276e2d14~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-in-october-2026-01-hero-autumn-berlin.jpg",
       "alt": "Golden autumn leaves covering a Berlin street and parked cars in October",
       "relatedToolSlug": "best-month-to-visit-berlin"
-    },
-    {
-      "title": "What to Do Near Hackescher Markt After the Walking Tour",
-      "slug": "what-to-do-near-hackescher-markt-after-walking-tour",
-      "path": "/post/what-to-do-near-hackescher-markt-after-walking-tour",
-      "url": "https://www.berlinwalk.com/post/what-to-do-near-hackescher-markt-after-walking-tour",
-      "excerpt": "A Berlin guide's practical after-tour plan for Hackescher Markt: where to eat, how to reset, which courtyards to walk, and what to do if it rains.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "9 min read",
-      "publishedDate": "2026-05-30T08:49:12Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_0d90550575d5404cb1598b4cabf27149~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hackescher-markt-station-after-tour.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_0d90550575d5404cb1598b4cabf27149~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hackescher-markt-station-after-tour.jpg",
-      "alt": "Hackescher Markt S-Bahn station after a Berlin walking tour",
-      "relatedToolSlug": ""
     }
   ],
   "allPosts": [
+    {
+      "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
+      "slug": "where-to-watch-2026-world-cup-in-berlin",
+      "path": "/post/where-to-watch-2026-world-cup-in-berlin",
+      "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
+      "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "4 min read",
+      "publishedDate": "2026-06-03T15:51:27.753Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
+      "relatedToolSlug": "watch-world-cup-2026-berlin"
+    },
     {
       "title": "Best Day Trips from Berlin (2026): Easy Escapes by Train",
       "slug": "best-day-trips-from-berlin",
@@ -1747,7 +1764,7 @@
       "topic": "practical",
       "topicLabel": "Practical Berlin",
       "readTime": "8 min read",
-      "publishedDate": "2026-06-02T08:31:29.164Z",
+      "publishedDate": "2026-06-02T08:31:29Z",
       "image": "https://static.wixstatic.com/media/5a08a3_53b56c6369974f5495a8493bfb0927ba~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/day-trips-sanssouci-potsdam.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_53b56c6369974f5495a8493bfb0927ba~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/day-trips-sanssouci-potsdam.jpg",
       "alt": "Sanssouci Palace in Potsdam, the easiest classic day trip from Berlin",
@@ -1781,10 +1798,10 @@
       "topic": "practical",
       "topicLabel": "Practical Berlin",
       "readTime": "5 min read",
-      "publishedDate": "2026-06-01T10:30:41.540Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg",
-      "alt": "The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin",
+      "publishedDate": "2026-06-01T10:30:41Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
+      "alt": "Woman in beige coat walks down a Berlin shopping street past clothing racks, with the TV Tower in the background.",
       "relatedToolSlug": "berlin-shopping-areas"
     },
     {
