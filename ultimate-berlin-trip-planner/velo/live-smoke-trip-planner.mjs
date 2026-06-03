@@ -478,7 +478,8 @@ async function main() {
   if (options.ai) {
     result.responses.ai = await postJson(`${baseUrl}/_functions/tripPlannerAi`, aiPayload);
     assertResult('tripPlannerAi', result.responses.ai, (body) => {
-      if (!body.enhancement || !body.enhancement.guideNote) throw new Error('tripPlannerAi response missing enhancement.guideNote');
+      if (!body.enhancement || !body.enhancement.routeIntro) throw new Error('tripPlannerAi response missing enhancement.routeIntro');
+      if (!Array.isArray(body.enhancement.dayStories)) throw new Error('tripPlannerAi response missing enhancement.dayStories');
     });
     result.aiCost = estimateGeminiCost(result.responses.ai);
   }

@@ -420,5 +420,5 @@ and the scheduled reminder on the same day.
 6. Merge `jobs.config`.
 7. Publish Wix.
 8. Test `POST /_functions/tripPlannerLead` with a real email.
-9. Test `POST /_functions/tripPlannerAi` with `--ai-only` first, then optionally with `--ai`, and confirm `enhancement.guideNote` returns.
+9. Test `POST /_functions/tripPlannerAi` with `--ai-only` first, then optionally with `--ai`, and confirm `enhancement.routeIntro` and `enhancement.dayStories` return.
 10. Test `POST /_functions/tripPlannerBooking` with the same email and confirm future Ultimate reminders are suppressed.

@@ -165,7 +165,13 @@ function fakeGeminiBody() {
         parts: [{
           text: JSON.stringify({
             noteTitle: 'A clean first Berlin rhythm',
-            guideNote: 'I would keep this plan calm on arrival day: use the BER ABC ticket, reach the World Clock area, and save the heavier history layer for the next morning. Museum Island works as a first visual anchor, but the plan is stronger if you do not turn it into a museum marathon. Day 2 at 11:30 gives the guided city context, then the Wall / Cold War stop can stay focused instead of becoming a second cross-city route.',
+            routeIntro: 'I would keep this plan calm on arrival day: use the BER ABC ticket, reach the World Clock area, and save the heavier history layer for the next morning. Museum Island works as a first visual anchor, but the plan is stronger if you do not turn it into a museum marathon.',
+            dayStories: [
+              {
+                dayNumber: 1,
+                text: 'Day 1 is about landing cleanly, reaching the World Clock area, and letting Museum Island work as the first visual Berlin layer.'
+              }
+            ],
             weatherSentence: 'July should be workable, but keep one rain-safe museum or cafe backup in the same area.',
             tourSentence: 'Use Day 2 at 11:30 from the World Clock as the BerlinWalk anchor.',
             chips: [
@@ -230,7 +236,8 @@ async function main() {
   assert.equal(result.ok, true);
   assert.equal(result.enhancement.provider, 'gemini');
   assert.equal(result.enhancement.model, 'fixture-gemini-key');
-  assert.ok(result.enhancement.guideNote, 'enhancement.guideNote missing');
+  assert.ok(result.enhancement.routeIntro, 'enhancement.routeIntro missing');
+  assert.ok(result.enhancement.dayStories.length, 'enhancement.dayStories missing');
   assert.equal(result.quota.remaining, 1);
   assert.equal(result.enhancement.usage.totalTokens, 490);
   assert.ok(capturedRequest, 'Gemini fetch was not called');
@@ -279,7 +286,8 @@ async function main() {
       ok: result.ok,
       provider: result.enhancement.provider,
       model: result.enhancement.model,
-      guideNoteLength: result.enhancement.guideNote.length,
+      routeIntroLength: result.enhancement.routeIntro.length,
+      dayStories: result.enhancement.dayStories.length,
       chips: result.enhancement.chips.length,
       totalTokens: result.enhancement.usage.totalTokens
     }

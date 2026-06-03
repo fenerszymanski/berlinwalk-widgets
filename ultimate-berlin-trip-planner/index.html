@@ -8069,6 +8069,10 @@
       margin-top: 2px;
     }
 
+    #bw-trip-planner .bw-block .bw-map-links {
+      margin-top: 8px;
+    }
+
     #bw-trip-planner .bw-map-link {
       align-items: center;
       background: var(--bw-blue-soft);
@@ -8084,6 +8088,7 @@
       text-decoration: none;
     }
 
+    #bw-trip-planner .bw-day-route-pack,
     #bw-trip-planner .bw-day-map-pack {
       background:
         linear-gradient(135deg, rgba(234, 244, 255, 0.92), rgba(242, 248, 232, 0.96)),
@@ -8095,6 +8100,7 @@
       padding: 9px;
     }
 
+    #bw-trip-planner .bw-day-route-head,
     #bw-trip-planner .bw-day-map-pack-head {
       align-items: center;
       display: flex;
@@ -8103,12 +8109,15 @@
       min-width: 0;
     }
 
+    #bw-trip-planner .bw-day-route-title,
     #bw-trip-planner .bw-day-map-pack-title {
       display: grid;
       gap: 2px;
       min-width: 0;
     }
 
+    #bw-trip-planner .bw-day-route-title strong,
+    #bw-trip-planner .bw-day-route-title span,
     #bw-trip-planner .bw-day-map-pack-title strong,
     #bw-trip-planner .bw-day-map-pack-title span,
     #bw-trip-planner .bw-day-map-card b,
@@ -8120,6 +8129,7 @@
       overflow-wrap: anywhere;
     }
 
+    #bw-trip-planner .bw-day-route-title strong,
     #bw-trip-planner .bw-day-map-pack-title strong {
       color: var(--bw-green);
       font-size: 11.5px;
@@ -8127,6 +8137,7 @@
       line-height: 1.15;
     }
 
+    #bw-trip-planner .bw-day-route-title span,
     #bw-trip-planner .bw-day-map-pack-title span {
       color: var(--bw-muted);
       font-size: 10px;
@@ -8156,10 +8167,15 @@
       width: 12px;
     }
 
+    #bw-trip-planner .bw-day-route-grid,
     #bw-trip-planner .bw-day-map-grid {
       display: grid;
       gap: 7px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-day-route-grid {
+      grid-template-columns: 1fr;
     }
 
     #bw-trip-planner .bw-day-map-card {
@@ -8269,6 +8285,53 @@
     #bw-trip-planner .bw-day .bw-route-action {
       justify-self: start;
       margin-top: 0;
+    }
+
+    #bw-trip-planner .bw-after-itinerary {
+      background:
+        linear-gradient(135deg, var(--bw-green), #0F3F18),
+        var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: grid;
+      gap: 6px;
+      margin: 16px 0 12px;
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-after-itinerary::after {
+      background: var(--bw-yellow);
+      content: "";
+      height: 5px;
+      left: 20px;
+      position: absolute;
+      right: 20px;
+      top: 0;
+    }
+
+    #bw-trip-planner .bw-after-itinerary strong,
+    #bw-trip-planner .bw-after-itinerary span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-after-itinerary strong {
+      color: var(--bw-yellow);
+      font-size: 18px;
+      font-weight: 950;
+      letter-spacing: 1.4px;
+      line-height: 1.1;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-after-itinerary span {
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 1.35;
     }
 
     #bw-trip-planner .bw-full-plan {
@@ -8448,6 +8511,44 @@
       font-weight: 800;
       line-height: 1.35;
       padding: 7px 8px;
+    }
+
+    #bw-trip-planner .bw-ai-asides {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-ai-aside {
+      background: rgba(234, 244, 255, 0.82);
+      border: 1px solid rgba(47, 128, 237, 0.18);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      display: grid;
+      gap: 4px;
+      padding: 8px 9px;
+    }
+
+    #bw-trip-planner .bw-ai-aside b,
+    #bw-trip-planner .bw-ai-aside span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-ai-aside b {
+      color: #174C8A;
+      font-size: 8.8px;
+      font-weight: 950;
+      letter-spacing: 0.7px;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-ai-aside span {
+      font-size: 10.4px;
+      font-weight: 800;
+      line-height: 1.35;
     }
 
     #bw-trip-planner .bw-ai-chips {
@@ -9266,7 +9367,9 @@
       #bw-trip-planner .bw-board-tabs,
       #bw-trip-planner .bw-weather-metrics,
       #bw-trip-planner .bw-actions,
-      #bw-trip-planner .bw-ai-chips {
+      #bw-trip-planner .bw-ai-chips,
+      #bw-trip-planner .bw-ai-days,
+      #bw-trip-planner .bw-ai-asides {
         grid-template-columns: 1fr;
       }
 
@@ -9479,11 +9582,13 @@
         width: 4px;
       }
 
+      #bw-trip-planner .bw-day-route-head,
       #bw-trip-planner .bw-day-map-pack-head {
         align-items: start;
         flex-direction: column;
       }
 
+      #bw-trip-planner .bw-day-route-grid,
       #bw-trip-planner .bw-day-map-grid,
       #bw-trip-planner .bw-day-map-card.is-route {
         grid-template-columns: 1fr;
@@ -9799,6 +9904,7 @@
         </div>
         <div class="bw-message" data-action-status aria-live="polite"></div>
       </div>
+      <div data-after-itinerary-divider></div>
       <div data-transport-maps-panel></div>
       <div data-shopping-panel></div>
       <div data-essentials-panel></div>
@@ -11508,23 +11614,91 @@
     }));
   }
 
-  function dayMapPackHtml(day) {
+  function dayRouteCardHtml(day) {
     var items = dayMapPackItems(day);
-    if (!items.length) return '';
-    return '<section class="bw-day-map-pack" aria-label="Day ' + escapeHtml(day.dayNumber) + ' Google Maps pack">' +
-      '<div class="bw-day-map-pack-head">' +
-        '<div class="bw-day-map-pack-title"><strong>Google Maps pack</strong><span>Route plus the real places this day uses.</span></div>' +
-        '<span class="bw-day-map-badge">' + iconSvg('pin') + '<span>Maps</span></span>' +
+    var route = items.find(function (item) { return item.kind === 'route'; });
+    if (!route) return '';
+    return '<section class="bw-day-route-pack" aria-label="Day ' + escapeHtml(day.dayNumber) + ' full route">' +
+      '<div class="bw-day-route-head">' +
+        '<div class="bw-day-route-title"><strong>Full day route</strong><span>Open the whole route, then use each step\'s map link below.</span></div>' +
+        '<span class="bw-day-map-badge">' + iconSvg('route') + '<span>Route</span></span>' +
       '</div>' +
-      '<div class="bw-day-map-grid">' + items.map(function (item) {
-        var label = item.label ? '<b>' + escapeHtml(item.label) + '</b>' : '';
-        return '<a class="bw-day-map-card is-' + escapeHtml(item.kind) + '" href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' +
-          '<span class="bw-day-map-icon">' + iconSvg(item.icon) + '</span>' +
-          '<span class="bw-day-map-copy">' + label + '<strong>' + escapeHtml(item.title) + '</strong><em>' + escapeHtml(item.detail) + '</em></span>' +
-          '<span class="bw-day-map-open">' + escapeHtml(item.action) + '</span>' +
-        '</a>';
-      }).join('') + '</div>' +
+      '<div class="bw-day-route-grid">' +
+        '<a class="bw-day-map-card is-route" href="' + escapeHtml(route.url) + '" target="_blank" rel="noopener">' +
+          '<span class="bw-day-map-icon">' + iconSvg(route.icon) + '</span>' +
+          '<span class="bw-day-map-copy"><b>' + escapeHtml(route.label) + '</b><strong>' + escapeHtml(route.title) + '</strong><em>' + escapeHtml(route.detail) + '</em></span>' +
+          '<span class="bw-day-map-open">' + escapeHtml(route.action) + '</span>' +
+        '</a>' +
+      '</div>' +
     '</section>';
+  }
+
+  function normalizedPlaceLabel(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  }
+
+  function blockPlaceMatchScore(place, text) {
+    if (!place || !text) return 0;
+    var label = normalizedPlaceLabel(place.label);
+    var query = normalizedPlaceLabel(place.query);
+    var type = normalizedPlaceLabel(place.type);
+    var score = 0;
+    if (label && text.indexOf(label) !== -1) score += 6;
+    if (query && text.indexOf(query) !== -1) score += 4;
+    if (type && text.indexOf(type) !== -1) score += 1;
+    label.split(' ').forEach(function (part) {
+      if (part.length > 4 && text.indexOf(part) !== -1) score += 1;
+    });
+    return score;
+  }
+
+  function nonClosingBlockIndex(day, targetIndex) {
+    var count = 0;
+    var blocks = (day && day.blocks) || [];
+    for (var index = 0; index < blocks.length; index += 1) {
+      if (index === targetIndex) return count;
+      if (!isDayClosingBlock(day, blocks[index], index) && !isTourBlock(blocks[index])) count += 1;
+    }
+    return count;
+  }
+
+  function blockMapLinks(day, block, index) {
+    if (!day || !block || isDayClosingBlock(day, block, index)) return [];
+    var ids = dayPlaceIds(day);
+    if (!ids.length) return [];
+    if (isTourBlock(block)) {
+      return ids.indexOf('world_clock') !== -1
+        ? [{ label: 'World Clock', url: placeSearchUrl('world_clock') }]
+        : [];
+    }
+    var text = normalizedPlaceLabel((block.title || '') + ' ' + (block.copy || ''));
+    var scored = ids.map(function (placeId) {
+      return { placeId: placeId, place: placeFor(placeId), score: blockPlaceMatchScore(placeFor(placeId), text) };
+    }).filter(function (item) {
+      return item.place && item.placeId !== 'world_clock';
+    }).sort(function (a, b) {
+      return b.score - a.score;
+    });
+    var picked = scored.filter(function (item) { return item.score > 0; }).slice(0, 2);
+    if (!picked.length) {
+      var fallbackIds = ids.filter(function (placeId) { return placeId !== 'world_clock' && placeFor(placeId); });
+      var fallbackId = fallbackIds[Math.min(nonClosingBlockIndex(day, index), Math.max(0, fallbackIds.length - 1))];
+      if (fallbackId) picked = [{ placeId: fallbackId, place: placeFor(fallbackId), score: 0 }];
+    }
+    return picked.slice(0, 2).map(function (item) {
+      return { label: item.place.label, url: placeSearchUrl(item.placeId) };
+    });
+  }
+
+  function blockMapLinksHtml(day, block, index) {
+    var links = blockMapLinks(day, block, index);
+    if (!links.length) return '';
+    return '<div class="bw-map-links" aria-label="Map links for ' + escapeHtml(block.title || 'this step') + '">' + links.map(function (link) {
+      return '<a class="bw-map-link" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">' + iconSvg('pin') + '<span>Open map: ' + escapeHtml(link.label) + '</span></a>';
+    }).join('') + '</div>';
   }
 
   function tripRouteStops(plan, limit) {
@@ -13070,7 +13244,7 @@
     var items = dayMapPackItems(day);
     if (!items.length) return '';
     return '<section style="background:#EAF4FF;border:1px solid #B8D7FA;border-radius:8px;margin:0 14px 10px;padding:10px">' +
-      '<header style="align-items:center;display:flex;gap:10px;justify-content:space-between;margin:0 0 8px"><strong style="color:#1B5E20">Google Maps pack</strong><span style="background:#fff;border:1px solid #B8D7FA;border-radius:999px;color:#174C8A;font-size:10px;font-weight:800;padding:5px 8px;text-transform:uppercase">Maps</span></header>' +
+      '<header style="align-items:center;display:flex;gap:10px;justify-content:space-between;margin:0 0 8px"><strong style="color:#1B5E20">Map links</strong><span style="background:#fff;border:1px solid #B8D7FA;border-radius:999px;color:#174C8A;font-size:10px;font-weight:800;padding:5px 8px;text-transform:uppercase">Maps</span></header>' +
       '<div style="display:grid;gap:7px;grid-template-columns:repeat(2,1fr)">' + items.map(function (item) {
         var route = item.kind === 'route';
         var label = item.label ? '<b style="color:' + (route ? '#DDEFC7' : '#4E5A4E') + ';display:block;font-size:9px;text-transform:uppercase">' + escapeHtml(item.label) + '</b>' : '';
@@ -15259,6 +15433,19 @@
       '</section>';
   }
 
+  function renderAfterItineraryDivider(plan) {
+    var target = root.querySelector('[data-after-itinerary-divider]');
+    if (!target) return;
+    if (!unlocked || !planGenerated) {
+      target.innerHTML = '';
+      return;
+    }
+    target.innerHTML = '<section class="bw-after-itinerary" aria-label="After the itinerary">' +
+      '<strong>After the itinerary</strong>' +
+      '<span>Save these maps, shopping backups, and Berlin essentials for the moments when plans change.</span>' +
+    '</section>';
+  }
+
   function renderPlanChrome(plan) {
     renderTripPresets();
     renderInputGuide(plan);
@@ -15450,6 +15637,7 @@
       if (routeBrief) routeBrief.innerHTML = '';
       if (jumpBar) jumpBar.innerHTML = '';
       daysEl.innerHTML = '';
+      renderAfterItineraryDivider(plan);
       renderTransportMaps(plan);
       renderShoppingPanel(plan);
       renderEssentials(plan);
@@ -15471,12 +15659,13 @@
         var copy = dayBlockCopy(day, block, index);
         var closeClass = isDayClosingBlock(day, block, index) ? ' bw-block-close' : '';
         var tourClass = isTourBlock(block) ? ' bw-block-tour' : '';
+        var mapLinks = blockMapLinksHtml(day, block, index);
         return '<div class="bw-block' + closeClass + tourClass + '">' +
           dayBlockTimeHtml(day, block, index) +
-          '<span class="bw-block-copy"><strong>' + escapeHtml(block.title) + '</strong>' + (copy ? '<span>' + escapeHtml(copy) + '</span>' : '') + '</span>' +
+          '<div class="bw-block-copy"><strong>' + escapeHtml(block.title) + '</strong>' + (copy ? '<span>' + escapeHtml(copy) + '</span>' : '') + mapLinks + '</div>' +
         '</div>';
       }).join('');
-      var mapPack = dayMapPackHtml(day);
+      var routeCard = dayRouteCardHtml(day);
       var weatherChip = dayWeatherChipHtml(day);
       return '<article class="bw-day' + (activeDay ? ' is-focused' : '') + '" data-day-card="' + day.dayNumber + '" style="--day-accent:' + escapeHtml(day.accent || '#7CB342') + ';--day-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
         '<div class="bw-day-head">' +
@@ -15486,11 +15675,12 @@
         '<div class="bw-day-body">' +
           weatherChip +
           blocks +
-          mapPack +
+          routeCard +
         '</div>' +
       '</article>';
     }).join('');
     focusDayCard(dayJumpDay, false);
+    renderAfterItineraryDivider(plan);
     renderTransportMaps(plan);
     renderShoppingPanel(plan);
     renderEssentials(plan);
@@ -16393,6 +16583,23 @@
     (plan.days || []).forEach(function (day) {
       validDays[day.dayNumber] = true;
     });
+    var rawDayStories = Array.isArray(raw && raw.dayStories) ? raw.dayStories : [];
+    if (!rawDayStories.length && Array.isArray(raw && raw.dayNotes)) {
+      rawDayStories = raw.dayNotes.map(function (item) {
+        return {
+          dayNumber: item && item.dayNumber,
+          text: item && (item.text || item.note || item.nextMove || item.headline)
+        };
+      });
+    }
+    var dayStories = rawDayStories.map(function (item) {
+      return {
+        dayNumber: Number(item && item.dayNumber) || 0,
+        text: cleanAiText(item && item.text, '', 240)
+      };
+    }).filter(function (item) {
+      return validDays[item.dayNumber] && item.text;
+    }).slice(0, plan.days.length);
     var dayNotes = Array.isArray(raw && raw.dayNotes) ? raw.dayNotes.map(function (item) {
       return {
         dayNumber: Number(item && item.dayNumber) || 0,
@@ -16407,6 +16614,7 @@
       provider: cleanAiText(raw && raw.provider, 'gemini', 40),
       model: cleanAiText(raw && raw.model, 'gemini-2.5-flash', 80),
       noteTitle: cleanAiText(raw && (raw.noteTitle || raw.headline), 'Yusuf guide read', 90),
+      routeIntro: cleanAiText(raw && (raw.routeIntro || raw.guideNote || raw.localRead), '', 680),
       guideNote: cleanAiText(raw && (raw.guideNote || raw.localRead), '', 620),
       weatherSentence: cleanAiText(raw && raw.weatherSentence, '', 220),
       tourSentence: cleanAiText(raw && (raw.tourSentence || raw.tourNote), '', 220),
@@ -16423,6 +16631,7 @@
       localRead: cleanAiText(raw && raw.localRead, '', 420),
       watchOut: cleanAiText(raw && raw.watchOut, '', 280),
       tourNote: cleanAiText(raw && raw.tourNote, '', 220),
+      dayStories: dayStories,
       dayNotes: dayNotes
     };
   }
@@ -16450,7 +16659,7 @@
       provider: 'gemini',
       model: 'gemini-2.5-flash-mock',
       noteTitle: dayCount + '-day Berlin rhythm',
-      guideNote: 'I would read this as a ' + dayCount + '-day plan built around ' + mainFocus + ', with ' + firstArea + ' kept as the first real orientation layer. The important part is that the plan does not chase every famous stop at once; it gives each day one clear area and leaves enough room for food, weather, and real travel energy.',
+      routeIntro: 'I would read this as a ' + dayCount + '-day Berlin route built around ' + mainFocus + '. Start with ' + firstArea + ' as the first real orientation layer, then let the later days change texture instead of repeating the same central loop. The strongest version is practical, local, and still easy to follow.',
       weatherSentence: tripWeatherSummary(plan),
       tourSentence: tourSentence,
       chips: [
@@ -16458,14 +16667,13 @@
         { label: 'Map habit', value: 'Open one day at a time instead of treating the plan as a checklist.' },
         { label: 'Tour fit', value: slot && slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : 'Use the next clean Tue-Sat slot.' }
       ],
-      dayNotes: (plan.days || []).slice(0, 7).map(function (day) {
+      dayStories: (plan.days || []).slice(0, 7).map(function (day) {
+        var anchors = dayMapLinks(day).slice(0, 2).map(function (link) { return link.label; }).join(' and ');
         return {
           dayNumber: day.dayNumber,
-          headline: day.dayNumber === 1 ? 'Keep arrival day simple' : day.theme,
-          note: day.dayNumber === (slot && slot.insideTrip ? slot.offset + 1 : -1)
-            ? 'This is the BerlinWalk day. Keep the tour first, then add only one nearby layer.'
-            : 'Use this day for its own area instead of pulling stops from another day.',
-          nextMove: 'Open Day ' + day.dayNumber + ' map and start with the first listed stop.'
+          text: day.dayNumber === (slot && slot.insideTrip ? slot.offset + 1 : -1)
+            ? 'Day ' + day.dayNumber + ' uses BerlinWalk as the city framework, then keeps ' + (anchors || day.theme) + ' close enough to avoid a second mission.'
+            : 'Day ' + day.dayNumber + ' gives ' + (anchors || day.theme) + ' its own space, so the route feels like a day in Berlin rather than a checklist.'
         };
       })
     }, plan);
@@ -16483,7 +16691,7 @@
       provider: 'local',
       model: 'deterministic-fallback',
       noteTitle: 'Yusuf-style quick read',
-      guideNote: 'This plan is still useful without another AI rewrite: keep Day 1 around ' + firstAnchors + ', then read each later day as one main area rather than a list to finish. For a ' + days + '-day trip, the best version is the one you can actually follow without crossing Berlin just to add volume.',
+      routeIntro: 'This plan is still useful without another AI rewrite: keep Day 1 around ' + firstAnchors + ', then let each later day have its own Berlin rhythm. For a ' + days + '-day trip, the best version is the one you can actually follow without crossing town just to add volume.',
       weatherSentence: tripWeatherSummary(plan),
       tourSentence: slot && slot.insideTrip
         ? 'The clean BerlinWalk fit remains ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock.'
@@ -16492,7 +16700,14 @@
       chips: [
         { label: 'AI limit', value: quota && Number.isFinite(Number(quota.remaining)) ? String(Math.max(0, Number(quota.remaining))) + ' guide-note runs left' : quotaMessage },
         { label: 'Plan update', value: 'You can still update the itinerary itself.' }
-      ]
+      ],
+      dayStories: (plan.days || []).slice(0, 7).map(function (day) {
+        var anchors = dayMapLinks(day).slice(0, 2).map(function (link) { return link.label; }).join(' and ');
+        return {
+          dayNumber: day.dayNumber,
+          text: 'Day ' + day.dayNumber + ' keeps ' + (anchors || day.theme) + ' as the main thread and avoids turning the day into scattered errands.'
+        };
+      })
     }, plan);
   }
 
@@ -16511,34 +16726,49 @@
     if (!unlocked || !planGenerated) return '';
     if (aiStatus === 'loading') {
       return '<section class="bw-ai-panel is-loading" aria-label="Local guide polish loading">' +
-        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>Reading the plan like a local guide. The route and times stay unchanged.</span></div></div><span class="bw-ai-pill">Guide note</span></div>' +
+        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Route Story</strong><span>Reading the plan like a local guide. The route and times stay unchanged.</span></div></div><span class="bw-ai-pill">Guide note</span></div>' +
       '</section>';
     }
     if (aiStatus === 'error') {
       if (!isLocalPreviewSurface()) return '';
       return '<section class="bw-ai-panel" aria-label="Local guide polish unavailable">' +
-        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>Gemini is backend-only. Use localhost/live, or add mockAi=1 for local visual QA.</span></div></div><span class="bw-ai-pill">Preview</span></div>' +
+        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Route Story</strong><span>Gemini is backend-only. Use localhost/live, or add mockAi=1 for local visual QA.</span></div></div><span class="bw-ai-pill">Preview</span></div>' +
       '</section>';
     }
     if (!aiEnhancement || (aiStatus !== 'ready' && aiStatus !== 'quota')) return '';
     var noteTitle = cleanAiText(aiEnhancement.noteTitle || aiEnhancement.headline || 'Yusuf guide read', '', 90);
-    var guideNote = cleanAiText(aiEnhancement.guideNote || aiEnhancement.localRead || plan.summary, '', 520);
-    var weatherSentence = cleanAiText(aiEnhancement.weatherSentence, '', 180);
-    var tourSentence = cleanAiText(aiEnhancement.tourSentence || aiEnhancement.tourNote, '', 180);
+    var routeIntro = cleanAiText(aiEnhancement.routeIntro || aiEnhancement.guideNote || aiEnhancement.localRead || plan.summary, '', 620);
+    var weatherSentence = cleanAiText(aiEnhancement.weatherSentence, '', 150);
+    var tourSentence = cleanAiText(aiEnhancement.tourSentence || aiEnhancement.tourNote, '', 150);
     var quotaMessage = cleanAiText(aiEnhancement.quotaMessage, '', 150);
     var chips = Array.isArray(aiEnhancement.chips) ? aiEnhancement.chips.slice(0, 3) : [];
+    var storyByDay = {};
+    (aiEnhancement.dayStories || []).forEach(function (item) {
+      storyByDay[item.dayNumber] = item.text;
+    });
+    var dayStoryHtml = (plan.days || []).slice(0, 7).map(function (day) {
+      var text = cleanAiText(storyByDay[day.dayNumber], '', 220);
+      if (!text) return '';
+      return '<article class="bw-ai-day"><b>D' + day.dayNumber + '</b><span><strong>' + escapeHtml(day.theme || day.title) + '</strong><span>' + escapeHtml(text) + '</span></span></article>';
+    }).filter(Boolean).join('');
+    var asideHtml = [
+      weatherSentence ? { label: 'Weather read', value: weatherSentence } : null,
+      tourSentence ? { label: 'Tour note', value: tourSentence } : null,
+      quotaMessage ? { label: 'AI limit', value: quotaMessage } : null
+    ].filter(Boolean).map(function (item) {
+      return '<span class="bw-ai-aside"><b>' + escapeHtml(item.label) + '</b><span>' + escapeHtml(item.value) + '</span></span>';
+    }).join('');
     var chipHtml = chips.length ? '<div class="bw-ai-chips">' + chips.map(function (chip) {
       return '<span><b>' + escapeHtml(chip.label) + '</b><em>' + escapeHtml(chip.value) + '</em></span>';
     }).join('') + '</div>' : '';
     return '<section class="bw-ai-panel' + (aiStatus === 'quota' ? ' is-quota' : '') + '" aria-label="Local guide polish">' +
-      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>A short personal read of this exact plan. Route, dates, stops, and tour slot stay unchanged.</span></div></div><span class="bw-ai-pill">' + (aiStatus === 'quota' ? 'Local fallback' : 'Guide note') + '</span></div>' +
+      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Route Story</strong><span>A short personal read of this exact route. Dates, stops, and tour slot stay unchanged.</span></div></div><span class="bw-ai-pill">' + (aiStatus === 'quota' ? 'Local fallback' : 'Guide note') + '</span></div>' +
       '<div class="bw-ai-body">' +
         '<div class="bw-ai-copy"><strong>' + escapeHtml(noteTitle) + '</strong>' +
-          (guideNote ? '<span>' + escapeHtml(guideNote) + '</span>' : '') +
-          (weatherSentence ? '<em>' + escapeHtml(weatherSentence) + '</em>' : '') +
-          (tourSentence ? '<em>' + escapeHtml(tourSentence) + '</em>' : '') +
-          (quotaMessage ? '<small>' + escapeHtml(quotaMessage) + '</small>' : '') +
+          (routeIntro ? '<span>' + escapeHtml(routeIntro) + '</span>' : '') +
         '</div>' +
+        (dayStoryHtml ? '<div class="bw-ai-days">' + dayStoryHtml + '</div>' : '') +
+        (asideHtml ? '<div class="bw-ai-asides">' + asideHtml + '</div>' : '') +
         chipHtml +
       '</div>' +
     '</section>';
@@ -16752,7 +16982,7 @@
       });
       var close = dayClosePlan(day);
       if (close) lines.push(close.label + ' close: ' + close.title + ' - ' + close.chips.map(function (chip) { return chip.label; }).join(', '));
-      lines.push('Google Maps pack');
+      lines.push('Map links');
       dayMapPackItems(day).forEach(function (item) {
         lines.push((item.kind === 'route' ? 'Google Maps route: ' : 'Google Maps anchor: ') + item.title + ' (' + item.detail + ') - ' + item.url);
       });
@@ -17225,7 +17455,7 @@
       color(green);
       doc.setFont('helvetica', 'bold');
       doc.setFontSize(8.3);
-      doc.text('Google Maps pack', margin + 30, boxY + 15);
+      doc.text('Map links', margin + 30, boxY + 15);
       color([23, 76, 138]);
       doc.setFontSize(6.6);
       doc.text('ROUTE + PLACE ANCHORS', pageW - margin - 126, boxY + 15);

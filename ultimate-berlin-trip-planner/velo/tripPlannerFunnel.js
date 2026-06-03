@@ -255,7 +255,18 @@ function geminiResponseSchema() {
     type: 'object',
     properties: {
       noteTitle: { type: 'string' },
-      guideNote: { type: 'string' },
+      routeIntro: { type: 'string' },
+      dayStories: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            dayNumber: { type: 'number' },
+            text: { type: 'string' }
+          },
+          required: ['dayNumber', 'text']
+        }
+      },
       weatherSentence: { type: 'string' },
       tourSentence: { type: 'string' },
       chips: {
@@ -270,20 +281,22 @@ function geminiResponseSchema() {
         }
       }
     },
-    required: ['noteTitle', 'guideNote', 'weatherSentence', 'tourSentence', 'chips']
+    required: ['noteTitle', 'routeIntro', 'dayStories', 'weatherSentence', 'tourSentence', 'chips']
   };
 }
 
 function geminiPrompt(input) {
   return [
-    'You are writing a short personalized guide note for BerlinWalk.',
+    'You are writing a short personalized route story for BerlinWalk.',
     'The itinerary logic is already decided. Do not move days, change times, invent venues, add new map stops, or create new CTAs.',
     'Use only the provided day titles, themes, timing blocks, places, weather notes, and risk tags.',
     'Do not add new neighborhoods, meals, safety warnings, ticket claims, booking advice, or attraction names that are not in the input.',
-    'Write in warm, human English in the voice of Yusuf, the local guide. It should feel like a thoughtful note after reading this exact plan, not a template.',
+    'Write in warm, human English in the voice of Yusuf, the local guide. It should feel like a thoughtful route read after seeing this exact plan, not a template.',
     'Avoid technical planner terms, hype, generic travel philosophy, "if the slot fits", "one area per day" as a repeated slogan, and em dashes.',
-    'guideNote must be one natural paragraph, 75-115 words, with at least two concrete details from the itinerary input.',
-    'weatherSentence must be one useful sentence based on the weather.tripSummary or weather notes. If weather is uncertain, say to re-check close to arrival.',
+    'noteTitle must be a short human title for the route rhythm, not a marketing headline.',
+    'routeIntro must be one natural paragraph, 55-85 words, summarizing the whole route with at least two concrete details from the itinerary input.',
+    'dayStories must include exactly one item for every input.plan.days item. Each text must be 18-34 words, storytelling-style, and must mention a real day detail from that day.',
+    'weatherSentence must be one compact useful sentence based on weather.tripSummary or weather notes. Keep it shorter than the routeIntro.',
     'If input.tourSlot has a date/time and is not booked, tourSentence must naturally name the BerlinWalk day/time using the provided slot. If booked, switch to meeting-point/prep language.',
     'chips should contain 2 or 3 short human cues such as Best rhythm, Weather move, Tour anchor, or Energy guard. Do not repeat the same wording every time.',
     '',
@@ -319,20 +332,19 @@ function sanitizeAiEnhancement(data, input, model, usage) {
     validDays[day.dayNumber] = true;
   });
 
-  const dayNotes = Array.isArray(data && data.dayNotes)
-    ? data.dayNotes.map(item => ({
+  const dayStories = Array.isArray(data && data.dayStories)
+    ? data.dayStories.map(item => ({
       dayNumber: cleanNumber(item && item.dayNumber, 0, 0, 7),
-      headline: cleanText(item && item.headline, '', 80),
-      note: cleanText(item && item.note, '', 240),
-      nextMove: cleanText(item && item.nextMove, '', 160)
-    })).filter(item => validDays[item.dayNumber] && item.headline && item.note).slice(0, input.plan.days.length)
+      text: cleanText(item && item.text, '', 220)
+    })).filter(item => validDays[item.dayNumber] && item.text).slice(0, input.plan.days.length)
     : [];
 
   return {
     provider: 'gemini',
     model,
     noteTitle: cleanText(data && (data.noteTitle || data.headline), 'Yusuf guide read', 90),
-    guideNote: cleanText(data && (data.guideNote || data.localRead), '', 620),
+    routeIntro: cleanText(data && (data.routeIntro || data.guideNote || data.localRead), '', 620),
+    dayStories,
     weatherSentence: cleanText(data && data.weatherSentence, '', 220),
     tourSentence: cleanText(data && (data.tourSentence || data.tourNote), '', 220),
     chips: Array.isArray(data && data.chips)
@@ -345,7 +357,6 @@ function sanitizeAiEnhancement(data, input, model, usage) {
     localRead: cleanText(data && data.localRead, '', 420),
     watchOut: cleanText(data && data.watchOut, '', 280),
     tourNote: cleanText(data && data.tourNote, '', 220),
-    dayNotes,
     usage: {
       promptTokens: cleanNumber(usage && usage.promptTokenCount, 0, 0, 100000),
       outputTokens: cleanNumber(usage && usage.candidatesTokenCount, 0, 0, 100000),
@@ -493,7 +504,7 @@ export async function enhanceTripPlannerPlan(payload) {
 
     const modelText = extractGeminiText(parsed);
     const enhancement = sanitizeAiEnhancement(parseJsonText(modelText), input, model, parsed.usageMetadata || {});
-    if (!enhancement.guideNote && !enhancement.localRead && !enhancement.dayNotes.length) {
+    if (!enhancement.routeIntro && !enhancement.dayStories.length) {
       return { ok: false, reason: 'empty_ai_result', model };
     }
 

@@ -643,7 +643,8 @@ function run() {
       /GEMINI_API_KEY/.test(funnel) &&
       /gemini-2\.5-flash/.test(funnel) &&
       /responseJsonSchema/.test(funnel) &&
-      /guideNote/.test(funnel) &&
+      /routeIntro/.test(funnel) &&
+      /dayStories/.test(funnel) &&
       /weatherSentence/.test(funnel) &&
       /AI_GENERATION_LIMIT\s*=\s*2/.test(funnel) &&
       /function\s+claimAiQuota/.test(funnel) &&
@@ -667,7 +668,8 @@ function run() {
       /aiCost/.test(liveSmokeSource) &&
       /quotaEmail:\s*leadPayload\.email/.test(liveSmokeSource) &&
       /tripPlannerAi/.test(liveSmokeSource) &&
-      /enhancement\.guideNote/.test(liveSmokeSource),
+      /enhancement\.routeIntro/.test(liveSmokeSource) &&
+      /enhancement\.dayStories/.test(liveSmokeSource),
     'live-smoke-trip-planner.mjs should dry-run/live-test the optional AI endpoint, including AI-only smoke without new lead/email writes and usage/cost reporting.'
   );
   block(
@@ -902,21 +904,24 @@ function run() {
       : 'Daily plan copy should read as short actions, not paragraph notes.'
   );
   block(
-    'Daily Google Maps pack is visual',
+    'Daily map links are embedded in steps',
     /function\s+dayMapPackItems/.test(indexHtml) &&
-      /function\s+dayMapPackHtml/.test(indexHtml) &&
+      /function\s+dayRouteCardHtml/.test(indexHtml) &&
+      /function\s+blockMapLinks/.test(indexHtml) &&
+      /function\s+blockMapLinksHtml/.test(indexHtml) &&
       /function\s+printDayMapPackHtml/.test(indexHtml) &&
-      /bw-day-map-pack/.test(indexHtml) &&
-      /Google Maps pack/.test(indexHtml) &&
-      /Route plus the real places this day uses/.test(indexHtml) &&
-      /dayMapPackHtml\(day\)/.test(indexHtml) &&
+      /bw-day-route-pack/.test(indexHtml) &&
+      /Full day route/.test(indexHtml) &&
+      /Open map:/.test(indexHtml) &&
+      /blockMapLinksHtml\(day,\s*block,\s*index\)/.test(indexHtml) &&
       /dayMapPackItems\(day\)\.forEach/.test(indexHtml) &&
       /function\s+drawPdfMapPack/.test(indexHtml) &&
       /function\s+drawDayCard[\s\S]*var\s+mapPack\s*=\s*dayMapPackItems\(day\)/.test(indexHtml) &&
       /drawPdfMapPack\(mapPack,\s*day,\s*mapPackH,\s*accent\)/.test(indexHtml) &&
       /Google Maps route:/.test(indexHtml) &&
+      !/Google Maps pack/.test(indexHtml) &&
       !/Place:\s*'\s*\+\s*link\.label/.test(indexHtml),
-    'Each unlocked day should show a compact map-card pack in UI/print/PDF/text instead of a plain stack of location links.'
+    'Each unlocked day should keep one full-route card and expose place map links inside the relevant timeboxes.'
   );
   block(
     'Daily timebox timeline is visible',
@@ -1050,12 +1055,13 @@ function run() {
   );
   block(
     'Frontend AI polish is fail-soft',
-    /function\s+aiEnhancementPayload/.test(indexHtml) &&
+      /function\s+aiEnhancementPayload/.test(indexHtml) &&
       /function\s+unlockEmailForQuota/.test(indexHtml) &&
       /quotaEmail:\s*unlockEmailForQuota\(\)/.test(aiPayloadSource) &&
-      /Your Local Guide Yusuf\\'s Note|Your Local Guide Yusuf's Note/.test(aiHtmlSource) &&
+      /Your Local Guide Yusuf\\'s Route Story|Your Local Guide Yusuf's Route Story/.test(aiHtmlSource) &&
       /YUSUF_GUIDE_PHOTO_URL/.test(indexHtml) &&
-      /guideNote/.test(aiHtmlSource) &&
+      /routeIntro/.test(aiHtmlSource) &&
+      /dayStories/.test(aiHtmlSource) &&
       /weatherSentence/.test(aiHtmlSource) &&
       /tourSentence/.test(aiHtmlSource) &&
       /localGuideFallback/.test(aiRequestSource + indexHtml) &&

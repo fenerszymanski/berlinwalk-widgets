@@ -267,7 +267,7 @@ Confirm:
 
 - `tripPlannerLead` returns `ok: true` and a `leadId`.
 - The instant email arrives with the plan variables filled.
-- `tripPlannerAi` returns `ok: true` and an `enhancement.guideNote`; use
+- `tripPlannerAi` returns `ok: true` with `enhancement.routeIntro` and `enhancement.dayStories`; use
   `--ai-only` first if you only want to test Gemini against an existing lead
   without creating a new lead or sending the instant email.
 - `tripPlannerBooking` returns `ok: true`.

@@ -71,7 +71,7 @@ Beklenen:
 
 - `tripPlannerAi OPTIONS` artik `204`.
 - `--ai-only` mevcut lead uzerinden, yeni lead yaratmadan ve instant email gondermeden `ok: true` doner.
-- `enhancement.guideNote` gelir.
+- `enhancement.routeIntro` ve `enhancement.dayStories` gelir.
 
 ## 4. Sonra Full Smoke
 

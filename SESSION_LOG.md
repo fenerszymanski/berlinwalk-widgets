@@ -4,6 +4,22 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (Ultimate widget finalization pass)
+
+**Did:** Implemented the widget-only finalization pass for the Ultimate planner route story, embedded map links, and post-itinerary resource separation.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — changed the AI/Yusuf panel to `Your Local Guide Yusuf's Route Story`, rendering a short intro, per-day storytelling cards, compact weather/tour asides, and chips without letting AI alter deterministic routes, stops, times, or tour slots.
+- `ultimate-berlin-trip-planner/index.html` — removed the separate visible `Google Maps pack`; each day now keeps one `Full day route` card and adds small `Open map` links inside meaningful itinerary blocks, while generic dinner/base/rest blocks stay clean.
+- `ultimate-berlin-trip-planner/index.html` — added the `After the itinerary` divider after the share/PDF/print actions so transport maps, shopping backups, and Berlin essentials feel clearly separate from the main itinerary.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — updated Gemini prompt/schema to `noteTitle`, `routeIntro`, `dayStories`, `weatherSentence`, `tourSentence`, and `chips`; existing email+arrival quota remains max 2 and email is still excluded from Gemini input.
+- `ultimate-berlin-trip-planner/velo/*`, `launch-audit.mjs`, and docs — updated AI fixtures, live smoke checks, launch audit, and Velo handoff text for the new route-story schema.
+
+**Opened:** PDF polish and triggered-email copy updates are intentionally still next-phase work; this pass only verified current PDF/print/copy/WhatsApp actions are not broken.
+**Closed:** `launch-audit.mjs` passed `152 pass, 0 warn, 0 block`; Velo prepublish gate passed `13 pass`; AI privacy fixture passed; AI-only dry-run smoke passed; locked/unlocked desktop and mobile browser QA showed no horizontal overflow, no visible `Google Maps pack`, one `Plan at a glance`, inline map links, and working PDF/print triggers.
+
+**Next session should:** Review the live copy feel of the route story with Yusuf, then move to PDF polish and email-template updates once the widget experience is approved.
+
 ## 2026-06-03 — Codex (Ultimate post-merge guide note + quota)
 
 **Did:** Implemented the post-merge feedback pass for the Ultimate planner full-plan flow.
