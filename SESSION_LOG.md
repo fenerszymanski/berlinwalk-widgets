@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (Fixtures World Cup icon swap)
+
+**Did:** Replaced only the World Cup fixtures tool icon with Yusuf's new square World Cup icon.
+
+**Changed:**
+- `tools-home/icons/world-cup-2026-fixtures-berlin-time.png` and `tools-home/icons/world-cup-2026-fixtures-berlin-time-160.png` — regenerated from `/Users/yusufucuz/Downloads/worldcupicon.png`.
+- `tools-home/icons/manifest.json` — fixtures entry now points to `worldcupicon.png` and Wix Media `5a08a3_725c47e499be4e63bec2013410e0a98b~mv2.png`.
+- `tools-hub/data.json` — fixtures `image` now uses the v2 Wix Media icon; `watch-world-cup-2026-berlin` was left unchanged.
+- Wix: uploaded the fixtures v2 160px icon and updated `BerlinTools Layout Fixes` custom embed `0dd3e5f3-520b-47ae-a995-e767f222265f` to revision 10.
+
+**Opened:** Push this fixtures-icon commit from an authenticated terminal so GitHub Pages-backed data catches up.
+**Closed:** Live `/berlin-tools` Playwright QA confirms fixtures uses `725c...` and public-viewing still uses `9add...`.
+
+**Next session should:** Push/QA only the fixtures icon if Yusuf asks; avoid touching the current dirty Ultimate planner files unless that work is active.
+
 ## 2026-06-03 — Codex (World Cup tool icons)
 
 **Did:** Optimized Yusuf's World Cup trophy reference into square BerlinTools icons and wired both World Cup tools to those icons.
