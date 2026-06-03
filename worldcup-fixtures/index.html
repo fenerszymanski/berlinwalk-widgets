@@ -150,8 +150,12 @@
     }
     #bw-wc-fixtures .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
     #bw-wc-fixtures .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
-    #bw-wc-fixtures .bw-jump {
+    #bw-wc-fixtures .bw-selects {
       margin-left: auto;
+      display: flex;
+      gap: 8px;
+    }
+    #bw-wc-fixtures .bw-jump {
       border: 1.5px solid var(--bw-border);
       background: var(--bw-white);
       color: var(--bw-green);
@@ -161,7 +165,9 @@
       padding: 8px 12px;
       border-radius: 10px;
       cursor: pointer;
+      max-width: 190px;
     }
+    #bw-wc-fixtures .bw-jump:hover { border-color: var(--bw-lime); }
 
     #bw-wc-fixtures .bw-meta {
       font-size: 11.5px;
@@ -317,7 +323,8 @@
 
     @media (max-width: 520px) {
       #bw-wc-fixtures .bw-title { font-size: 17px; }
-      #bw-wc-fixtures .bw-jump { margin-left: 0; width: 100%; }
+      #bw-wc-fixtures .bw-selects { margin-left: 0; width: 100%; flex-direction: column; }
+      #bw-wc-fixtures .bw-jump { width: 100%; max-width: none; }
       #bw-wc-fixtures .bw-count { margin-left: 0; width: 100%; }
       #bw-wc-fixtures .bw-match { gap: 9px; padding: 8px 10px; }
       #bw-wc-fixtures .bw-team { font-size: 12.5px; }
@@ -349,7 +356,10 @@
           <button class="bw-filter" data-f="evening">Evening-friendly</button>
           <button class="bw-filter" data-f="today">Today</button>
         </div>
-        <select class="bw-jump" id="bwJump" aria-label="Jump to a day"></select>
+        <div class="bw-selects">
+          <select class="bw-jump" id="bwTeam" aria-label="Filter by team"></select>
+          <select class="bw-jump" id="bwJump" aria-label="Jump to a day"></select>
+        </div>
       </div>
 
       <p class="bw-meta" id="bwMeta"></p>
@@ -499,8 +509,26 @@
     var listEl = document.getElementById('bwList');
     var metaEl = document.getElementById('bwMeta');
     var jumpEl = document.getElementById('bwJump');
+    var teamEl = document.getElementById('bwTeam');
     var filtersEl = document.getElementById('bwFilters');
     var current = 'all';
+    var team = '';
+
+    // Populate team filter (all group-stage teams, alphabetical)
+    var teams = [];
+    matches.forEach(function (m) {
+      if (teams.indexOf(m.h) === -1) teams.push(m.h);
+      if (teams.indexOf(m.a) === -1) teams.push(m.a);
+    });
+    teams.sort(function (a, b) { return a.localeCompare(b); });
+    var topt = document.createElement('option');
+    topt.value = ''; topt.textContent = 'Filter by team…';
+    teamEl.appendChild(topt);
+    teams.forEach(function (tm) {
+      var o = document.createElement('option');
+      o.value = tm; o.textContent = flag(tm) + '  ' + tm;
+      teamEl.appendChild(o);
+    });
 
     // Populate jump
     var opt0 = document.createElement('option');
@@ -522,6 +550,7 @@
     }
 
     function filtered() {
+      if (team) return matches.filter(function (m) { return m.h === team || m.a === team; });
       if (current === 'de') return matches.filter(function (m) { return m.de; });
       if (current === 'evening') return matches.filter(function (m) { return m.slot === 'evening'; });
       if (current === 'today') {
@@ -576,8 +605,8 @@
         });
       }
 
-      // Knockout section (only on "all")
-      if (current === 'all') {
+      // Knockout section (only on the unfiltered "all" view)
+      if (current === 'all' && !team) {
         var t = document.createElement('div');
         t.className = 'bw-ko-title';
         t.textContent = 'Knockout stage';
@@ -592,7 +621,8 @@
 
       // Meta line
       var labelMap = { all: 'all 72 group-stage matches + knockout calendar', de: "Germany's group matches", evening: 'evening kick-offs (before midnight, Berlin time)', today: "today's matches" };
-      metaEl.innerHTML = 'Showing <b>' + rows.length + '</b> &middot; ' + (labelMap[current] || '');
+      var label = team ? (flag(team) + ' ' + team + "'s group matches") : (labelMap[current] || '');
+      metaEl.innerHTML = 'Showing <b>' + rows.length + '</b> &middot; ' + label;
     }
 
     // Filter buttons
@@ -600,8 +630,19 @@
       var btn = e.target.closest('.bw-filter');
       if (!btn) return;
       current = btn.getAttribute('data-f');
+      team = ''; teamEl.value = '';            // a quick filter clears the team filter
       Array.prototype.forEach.call(filtersEl.querySelectorAll('.bw-filter'), function (b) {
         b.classList.toggle('active', b === btn);
+      });
+      render();
+    });
+
+    // Team filter
+    teamEl.addEventListener('change', function () {
+      team = teamEl.value;
+      if (!team) current = 'all';
+      Array.prototype.forEach.call(filtersEl.querySelectorAll('.bw-filter'), function (b) {
+        b.classList.toggle('active', !team && b.getAttribute('data-f') === 'all');
       });
       render();
     });
@@ -610,8 +651,8 @@
     jumpEl.addEventListener('change', function () {
       var v = jumpEl.value;
       if (!v) return;
-      if (current !== 'all') {
-        current = 'all';
+      if (current !== 'all' || team) {        // jumping shows the full day, so clear filters
+        current = 'all'; team = ''; teamEl.value = '';
         Array.prototype.forEach.call(filtersEl.querySelectorAll('.bw-filter'), function (b) {
           b.classList.toggle('active', b.getAttribute('data-f') === 'all');
         });

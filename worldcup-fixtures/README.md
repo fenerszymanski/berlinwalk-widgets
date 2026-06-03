@@ -7,9 +7,11 @@ time (CEST)**.
   and `../js/brand.js`). No build step.
 - Shows all 72 group-stage matches grouped by day, plus the knockout calendar
   (Round of 32 → Final). Times are pre-converted to **Berlin time (CEST, UTC+2)**.
-- Features: live "next match" countdown, filters (All / Germany 🇩🇪 /
-  Evening-friendly / Today), a "jump to a day" select, and 🟢 evening /
-  🌙 late / 🌅 morning slot tags.
+- Features: live "next match" countdown, quick filters (All / Germany 🇩🇪 /
+  Evening-friendly / Today), a "filter by team" select (all 48 teams), a
+  "jump to a day" select, and 🟢 evening / 🌙 late / 🌅 morning slot tags.
+  The quick filters, team filter and day jump reset each other so only one
+  view is active at a time.
 - Match data is inlined in `index.html` as the `M` (group stage) and `KO`
   (knockout) arrays. To edit a fixture, change the relevant row.
 
