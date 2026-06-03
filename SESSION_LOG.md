@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (Fixtures icon yellow fill)
+
+**Did:** Replaced the fixtures icon with Yusuf's later ChatGPT image after removing/replacing black corners so the icon area is fully yellow.
+
+**Changed:**
+- `tools-home/icons/world-cup-2026-fixtures-berlin-time.png` and `tools-home/icons/world-cup-2026-fixtures-berlin-time-160.png` — regenerated from `/Users/yusufucuz/Downloads/ChatGPT Image Jun 3, 2026, 10_05_48 PM.png`, with border-connected black pixels filled by yellow background.
+- `tools-home/icons/manifest.json` — fixtures entry now points to the later source image and Wix Media `5a08a3_b197adcbe5214470a8c6ee3907955adc~mv2.png`.
+- `tools-hub/data.json` — fixtures `image` now uses the cleaned yellow-fill Wix Media icon; `watch-world-cup-2026-berlin` was left unchanged.
+- Wix: uploaded the cleaned fixtures 160px icon and updated `BerlinTools Layout Fixes` custom embed `0dd3e5f3-520b-47ae-a995-e767f222265f` to revision 11.
+
+**Opened:** Push this cleaned fixtures-icon commit from an authenticated terminal so GitHub Pages-backed data catches up.
+**Closed:** Live `/berlin-tools` Playwright QA confirms fixtures uses `b197...` and public-viewing still uses `9add...`.
+
+**Next session should:** Push/QA only the fixtures icon if Yusuf asks; avoid touching the current dirty Ultimate planner files unless that work is active.
+
 ## 2026-06-03 — Codex (Fixtures World Cup icon swap)
 
 **Did:** Replaced only the World Cup fixtures tool icon with Yusuf's new square World Cup icon.
