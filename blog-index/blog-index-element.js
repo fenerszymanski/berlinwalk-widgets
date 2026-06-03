@@ -5,6 +5,77 @@ const BW_BLOG_INDEX_BASE_URL = (() => {
 const BW_BLOG_INDEX_DATA_URL = new URL('./data.json', BW_BLOG_INDEX_BASE_URL).href;
 const BW_BLOG_INDEX_LOGO_URL = `${new URL('./assets/berlin-travel-history-notes-logo.png', BW_BLOG_INDEX_BASE_URL).href}?v=20260529`;
 const BW_BLOG_INDEX_NATIVE_FEED_STYLE_ID = 'bw-blog-index-native-feed-suppressor';
+const BW_BLOG_INDEX_WORLD_CUP_POST = {
+  title: "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
+  slug: 'where-to-watch-2026-world-cup-in-berlin',
+  path: '/post/where-to-watch-2026-world-cup-in-berlin',
+  url: 'https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin',
+  excerpt: 'The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.',
+  category: 'Tourist Tips',
+  categorySlug: 'tourist-tips',
+  topic: 'practical',
+  topicLabel: 'Practical Berlin',
+  readTime: '4 min read',
+  publishedDate: '2026-06-03T15:51:27.753Z',
+  image: 'https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg',
+  thumb: 'https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg',
+  alt: 'A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline',
+  relatedToolSlug: 'watch-world-cup-2026-berlin',
+};
+const BW_BLOG_INDEX_WORLD_CUP_TOOLS = [
+  {
+    title: 'World Cup Public-Viewing Finder',
+    slug: 'watch-world-cup-2026-berlin',
+    url: 'https://www.berlinwalk.com/tools/watch-world-cup-2026-berlin',
+    summary: 'Find free screens, beer gardens, waterside spots and late-night-friendly venues in Berlin.',
+  },
+  {
+    title: 'World Cup Fixtures in Berlin Time',
+    slug: 'world-cup-2026-fixtures-berlin-time',
+    url: 'https://www.berlinwalk.com/tools/world-cup-2026-fixtures-berlin-time',
+    summary: 'See every 2026 match converted to Berlin time, with Germany and evening-friendly filters.',
+  },
+  {
+    title: 'Berlin First-Day Planner',
+    slug: 'berlin-first-day-planner',
+    url: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',
+    summary: 'Build a realistic first-day plan around arrival time, luggage, weather, and the tour.',
+  },
+];
+
+function bwWithoutWorldCup(posts = []) {
+  return posts.filter((post) => post?.slug !== BW_BLOG_INDEX_WORLD_CUP_POST.slug);
+}
+
+function bwApplyWorldCupFeature(data) {
+  const next = {
+    ...BW_BLOG_INDEX_FALLBACK,
+    ...(data || {}),
+  };
+  const heroSecondaryCandidates = [
+    next.hero?.lead,
+    ...(next.hero?.secondary || []),
+    ...(next.latest || []),
+  ].filter(Boolean);
+
+  next.hero = {
+    ...(next.hero || {}),
+    lead: BW_BLOG_INDEX_WORLD_CUP_POST,
+    secondary: bwWithoutWorldCup(heroSecondaryCandidates).slice(0, 5),
+  };
+  next.tools = BW_BLOG_INDEX_WORLD_CUP_TOOLS;
+  next.latest = [BW_BLOG_INDEX_WORLD_CUP_POST, ...bwWithoutWorldCup(next.latest || [])].slice(0, 12);
+  next.allPosts = [BW_BLOG_INDEX_WORLD_CUP_POST, ...bwWithoutWorldCup(next.allPosts || [])];
+  next.totalPosts = Math.max(Number(next.totalPosts || 0), next.allPosts.length);
+  next.shelves = (next.shelves || []).map((shelf) => {
+    if (shelf.key !== 'practical') return shelf;
+    return {
+      ...shelf,
+      posts: [BW_BLOG_INDEX_WORLD_CUP_POST, ...bwWithoutWorldCup(shelf.posts || [])].slice(0, 10),
+    };
+  });
+  return next;
+}
 
 function bwInstallBlogIndexNativeFeedPrehide() {
   if (!/^\/blog\/?$/.test(window.location.pathname)) return;
@@ -1333,9 +1404,9 @@ class BWBlogIndexElement extends HTMLElement {
     try {
       const response = await fetch(BW_BLOG_INDEX_DATA_URL, { cache: 'no-cache' });
       if (!response.ok) throw new Error('Blog data unavailable');
-      this._data = await response.json();
+      this._data = bwApplyWorldCupFeature(await response.json());
     } catch (error) {
-      this._data = BW_BLOG_INDEX_FALLBACK;
+      this._data = bwApplyWorldCupFeature(BW_BLOG_INDEX_FALLBACK);
     }
     this._rerender();
   }
