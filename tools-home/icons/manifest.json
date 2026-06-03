@@ -222,6 +222,24 @@
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_8505101d30c84fd78e7ed5ecdd4f371f~mv2.png"
   },
   {
+    "slug": "watch-world-cup-2026-berlin",
+    "source": "/Users/yusufucuz/Downloads/Draw_world_cup_icon_reference_202606031909.jpeg",
+    "model": "user-supplied optimized icon",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/watch-world-cup-2026-berlin.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/watch-world-cup-2026-berlin-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/watch-world-cup-2026-berlin-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_9add1ac8902d4c928abc81b75f07a02f~mv2.png"
+  },
+  {
+    "slug": "world-cup-2026-fixtures-berlin-time",
+    "source": "/Users/yusufucuz/Downloads/Draw_world_cup_icon_reference_202606031909.jpeg",
+    "model": "user-supplied optimized icon",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/world-cup-2026-fixtures-berlin-time.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/world-cup-2026-fixtures-berlin-time-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/world-cup-2026-fixtures-berlin-time-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_cd2c4d2118cc47a79a263010e6150e31~mv2.png"
+  },
+  {
     "slug": "ultimate-berlin-trip-planner",
     "source": "code-native PIL illustration",
     "model": "local",

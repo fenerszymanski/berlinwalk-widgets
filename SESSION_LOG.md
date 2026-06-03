@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (World Cup tool icons)
+
+**Did:** Optimized Yusuf's World Cup trophy reference into square BerlinTools icons and wired both World Cup tools to those icons.
+
+**Changed:**
+- `tools-home/icons/watch-world-cup-2026-berlin.png`, `tools-home/icons/watch-world-cup-2026-berlin-160.png`, `tools-home/icons/world-cup-2026-fixtures-berlin-time.png`, `tools-home/icons/world-cup-2026-fixtures-berlin-time-160.png` — new optimized 512/160 PNG assets from `/Users/yusufucuz/Downloads/Draw_world_cup_icon_reference_202606031909.jpeg`.
+- `tools-home/icons/manifest.json` — added manifest entries with GitHub Pages URLs and Wix Media URLs.
+- `tools-hub/data.json` — added `image` fields for `watch-world-cup-2026-berlin` and `world-cup-2026-fixtures-berlin-time`.
+- Wix: uploaded both 160px icons to Media Manager and updated `BerlinTools Layout Fixes` custom embed `0dd3e5f3-520b-47ae-a995-e767f222265f` to revision 9 with both slugs in the live icon map plus `/berlin-tools`/`/widgets` hub-card generic-icon replacement.
+
+**Opened:** Push this icon commit from an authenticated terminal so GitHub Pages-backed data picks up the new `image` fields durably.
+**Closed:** Local data, live `/berlin-tools` cards, and live related-card icon map now use the World Cup trophy icon instead of fallback lettering/generic icons.
+
+**Next session should:** After push, cache-bust and QA the tools hub plus widgets gallery card icons.
+
 ## 2026-06-03 — Codex (World Cup blog launch + placement)
 
 **Did:** Published the World Cup Berlin post, wired its two tools into BerlinTools CMS, and promoted it live on `/blog` + homepage.
