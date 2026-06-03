@@ -19,6 +19,47 @@ Format for each entry — see `AGENTS.md` §9.
 
 **Next session should:** Push/QA only the fixtures icon if Yusuf asks; avoid touching the current dirty Ultimate planner files unless that work is active.
 
+## 2026-06-03 — Codex (Ultimate copy weight + natural route story)
+
+**Did:** Made widget explanatory copy read calmer and pushed Ultimate route-story wording away from robotic planner language.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added a copy-weight normalization block so paragraphs, short descriptions, day block copy, plan-index stops, AI story text, resource descriptions, weather chips, essentials notes, and option subtitles use normal weight while headings/labels/CTAs stay bold.
+- `ultimate-berlin-trip-planner/index.html` — rewrote local `mockAi=1` and fallback route-story sentences to avoid jargon like `framework`, `layer`, `texture`, `concrete place to land`, and repeated checklist phrasing.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — tightened the Gemini prompt with the same banned phrases and more human Yusuf-style guidance.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated the tour recommendation audit to match the new `first Berlin introduction` copy.
+
+**Opened:** None.
+**Closed:** Inline script parse passed; `launch-audit.mjs` is back to `152 pass, 0 warn, 0 block`; Velo prepublish gate passed `13 pass`; browser QA on the 7-day mock link showed 7 AI day stories, 7 full days, no old bad phrases, key explanation slots at `font-weight: 500`, and no horizontal overflow.
+
+**Next session should:** Continue Yusuf's visual/content review, then treat PDF polish and triggered-email copy as the next phase once the widget copy feels right.
+
+## 2026-06-03 — Codex (Ultimate local QA state sync)
+
+**Did:** Fixed the confusing local QA mismatch where a URL could say `tripLength=7` while the generated unlocked result still used an older in-page form state.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — extracted `applyQueryParamsToState()` and re-applies query params before build only on local QA surfaces (`qaUnlock`, `mockAi`, or `resetUnlock`), so test/share URLs drive the generated plan reliably without affecting normal live user edits.
+- `ultimate-berlin-trip-planner/index.html` — `syncInputsFromState()` now also refreshes the visible arrival-date input.
+
+**Opened:** None.
+**Closed:** Browser QA on the 7-day mock link now shows active length `7`, active interests `history/wall/free`, `7` Plan-at-a-glance cards, `7` full day cards, `7` AI day stories, no old repeated phrase, and no horizontal overflow. `launch-audit.mjs` remains `152 pass, 0 warn, 0 block`.
+
+**Next session should:** Keep reviewing route-story copy quality now that the test state is trustworthy.
+
+## 2026-06-03 — Codex (Ultimate route-story voice tuning)
+
+**Did:** Tightened the Ultimate planner AI voice so it reads more like Yusuf explaining the route as a guide, not a planner audit.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — updated the Gemini prompt to ask for spoken tour-guide route narration, varied day-story rhythm, concrete route details, and to forbid repetitive filler like `its own space` / `rather than a checklist`.
+- `ultimate-berlin-trip-planner/index.html` — upgraded `mockAi=1` and local fallback day stories so local QA shows guide-style per-day narration instead of repeated template sentences.
+
+**Opened:** None.
+**Closed:** Inline script parse passed; `launch-audit.mjs` remains `152 pass, 0 warn, 0 block`; Velo prepublish gate remains `13 pass, 0 warn, 0 block`; browser QA for the 4-day mock route showed 4 day stories, no old repeated phrase, and no horizontal overflow.
+
+**Next session should:** Continue visual/content review with Yusuf, then move to PDF polish and email template copy once the widget itself feels approved.
+
 ## 2026-06-03 — Codex (World Cup tool icons)
 
 **Did:** Optimized Yusuf's World Cup trophy reference into square BerlinTools icons and wired both World Cup tools to those icons.

@@ -1210,9 +1210,9 @@ function run() {
   );
   block(
     'Tour recommendation flows naturally in result plan',
-    /function\s+firstDayBlocks\(\)/.test(indexHtml) &&
+      /function\s+firstDayBlocks\(\)/.test(indexHtml) &&
       /BerlinWalk/.test(firstDayBlocksSource) &&
-      /Use the walking tour as your first city framework/.test(firstDayBlocksSource) &&
+      /Use the walking tour as your first Berlin introduction/.test(firstDayBlocksSource) &&
       !/renderTourActions\(plan\)/.test(renderPlanSource) &&
       !/tourDayMarkerHtml\(day,\s*plan\)/.test(renderFullPlanSource) &&
       !/tourMiniHtml\(day,\s*plan\)/.test(renderPlanSource) &&

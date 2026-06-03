@@ -9046,6 +9046,53 @@
       font-size: 20px !important;
     }
 
+    /* Keep explanatory copy calmer than headings, CTAs, labels, and day titles. */
+    #bw-trip-planner .bw-sub,
+    #bw-trip-planner .bw-head-caption span,
+    #bw-trip-planner .bw-control-head span,
+    #bw-trip-planner .bw-control-detail,
+    #bw-trip-planner .bw-mobile-peek-copy span,
+    #bw-trip-planner .bw-mobile-peek-action em,
+    #bw-trip-planner .bw-build-copy span,
+    #bw-trip-planner .bw-build-note,
+    #bw-trip-planner .bw-planning-top span,
+    #bw-trip-planner .bw-opt-sub,
+    #bw-trip-planner .bw-summary,
+    #bw-trip-planner .bw-note,
+    #bw-trip-planner .bw-label-note,
+    #bw-trip-planner .bw-lead-copy,
+    #bw-trip-planner .bw-lead-legal,
+    #bw-trip-planner .bw-full-sub,
+    #bw-trip-planner .bw-resource-head span,
+    #bw-trip-planner .bw-resource-card span,
+    #bw-trip-planner .bw-plan-index-title span,
+    #bw-trip-planner .bw-plan-index-copy em,
+    #bw-trip-planner .bw-day-weather-copy span,
+    #bw-trip-planner .bw-day-weather-copy em,
+    #bw-trip-planner .bw-day-postcard-copy em,
+    #bw-trip-planner .bw-day-rhythm-head span,
+    #bw-trip-planner .bw-block-copy span,
+    #bw-trip-planner .bw-block-time small,
+    #bw-trip-planner .bw-day-route-title span,
+    #bw-trip-planner .bw-day-map-pack-title span,
+    #bw-trip-planner .bw-day-map-card em,
+    #bw-trip-planner .bw-route-step em,
+    #bw-trip-planner .bw-tour-day-marker span,
+    #bw-trip-planner .bw-after-itinerary span,
+    #bw-trip-planner .bw-ai-title span,
+    #bw-trip-planner .bw-ai-copy span,
+    #bw-trip-planner .bw-ai-copy em,
+    #bw-trip-planner .bw-ai-copy small,
+    #bw-trip-planner .bw-ai-aside span,
+    #bw-trip-planner .bw-ai-chips em,
+    #bw-trip-planner .bw-ai-day > span > span,
+    #bw-trip-planner .bw-ai-day em,
+    #bw-trip-planner .bw-essentials-head span,
+    #bw-trip-planner .bw-essential span,
+    #bw-trip-planner .bw-foot {
+      font-weight: 500;
+    }
+
     @media (max-width: 880px) {
       #bw-trip-planner .bw-head {
         grid-template-columns: 1fr;
@@ -10477,7 +10524,7 @@
   function routeReelHtml(day) {
     var items = dayActionBlockItems(day).slice(0, 3);
     if (!items.length) return '';
-    return '<div class="bw-route-reel" style="--route-reel-count:' + items.length + '" aria-label="Day ' + escapeHtml(day.dayNumber) + ' route rhythm">' +
+    return '<div class="bw-route-reel" style="--route-reel-count:' + items.length + '" aria-label="Day ' + escapeHtml(day.dayNumber) + ' route preview">' +
       items.map(function (item) {
         var block = item.block;
         var index = item.index;
@@ -10497,7 +10544,7 @@
     var tourCopy = state.tourIntent === 'booked'
       ? 'Keep the World Clock meeting point saved and keep arrival day light.'
       : arrivalDayTourEligible()
-        ? 'Use the ' + ((slot && slot.startLabel) || TOUR_START_LABEL) + ' BerlinWalk as the first city framework.'
+        ? 'Use the ' + ((slot && slot.startLabel) || TOUR_START_LABEL) + ' BerlinWalk as your first proper Berlin introduction.'
         : slot && slot.insideTrip
           ? 'Keep the ' + slot.startLabel + ' BerlinWalk for ' + slot.dayLabel + '; arrival day stays for landing and base setup.'
           : 'Do not force a no-tour day; keep this plan realistic and use the next Tue-Sat BerlinWalk slot if it fits.';
@@ -10912,6 +10959,34 @@
     return Number.isFinite(value) && value >= 1 && value <= 7 ? Math.round(value) : null;
   }
 
+  function applyQueryParamsToState() {
+    var params = new URLSearchParams(window.location.search);
+    var date = getDateOverride();
+    var tripLength = getTripLengthOverride();
+    if (date) state.arrivalDate = date;
+    if (tripLength) state.tripLength = tripLength;
+    ['arrivalTime', 'arrivalPoint', 'stayArea', 'groupType', 'firstTime', 'budgetStyle', 'pace', 'tourIntent'].forEach(function (key) {
+      var value = params.get(key);
+      if (value && root.querySelector('[data-group="' + key + '"] [data-value="' + value + '"]')) state[key] = value;
+    });
+    ['interests', 'mustHandle'].forEach(function (key) {
+      var values = String(params.get(key) || '').split(',').map(function (value) { return value.trim(); }).filter(Boolean);
+      values = values.filter(function (value) {
+        return Boolean(root.querySelector('[data-group="' + key + '"] [data-value="' + value + '"]'));
+      });
+      if (values.length) state[key] = values;
+    });
+  }
+
+  function shouldReapplyQueryForQaBuild() {
+    var params = new URLSearchParams(window.location.search);
+    return isLocalPreviewSurface() && (
+      params.get('qaUnlock') === '1' ||
+      params.get('mockAi') === '1' ||
+      params.get('resetUnlock') === '1'
+    );
+  }
+
   function berlinTodayKey() {
     var parts = new Intl.DateTimeFormat('en-CA', {
       timeZone: TIMEZONE,
@@ -11166,6 +11241,8 @@
         button.classList.toggle('active', active);
       });
     });
+    var dateInput = root.querySelector('[data-arrival-date]');
+    if (dateInput) dateInput.value = state.arrivalDate;
   }
 
   function renderTripPresets() {
@@ -11422,7 +11499,7 @@
       seasonal: slot.seasonal,
       location: TOUR_LOCATION,
       meetingUrl: meetingPointUrl(),
-      copy: 'Use this as a calendar hold before booking. The tour gives the historic centre a framework, then the rest of the plan becomes easier to improvise.'
+      copy: 'Use this as a calendar hold before booking. The tour makes the historic centre easier to read, then the rest of the plan becomes easier to improvise.'
     };
   }
 
@@ -11524,7 +11601,7 @@
     if (!slot) return '';
     return '<div class="bw-tour-day-marker">' +
       '<span class="bw-tour-day-icon">' + iconSvg('calendar') + '</span>' +
-      '<div><strong>BerlinWalk tour anchor</strong><span>' + escapeHtml(slot.timeLabel + ' at the World Clock. Book the spot first, then use this day as your city framework.') + '</span></div>' +
+      '<div><strong>BerlinWalk tour anchor</strong><span>' + escapeHtml(slot.timeLabel + ' at the World Clock. Book the spot first, then keep the rest of this day lighter.') + '</span></div>' +
     '</div>';
   }
 
@@ -11828,7 +11905,7 @@
       {
         label: slot.booked ? 'Meeting' : 'Tour anchor',
         value: slot.booked ? 'World Clock saved' : slot.dayLabel + ' ' + slot.timeLabel,
-        detail: slot.booked ? 'Prep language only.' : 'Best historical framework.',
+        detail: slot.booked ? 'Prep language only.' : 'Best guided history start.',
         action: slot.booked ? 'Open point' : 'Book spot',
         icon: slot.booked ? 'check' : 'calendar',
         url: slot.booked ? slot.meetingUrl : BOOKING_SHORT_URL,
@@ -13355,7 +13432,7 @@
       } : {
         due: 'Before arrival',
         title: 'Book or hold the tour',
-        copy: slot.dayLabel + ' at ' + slot.timeLabel + ' is the cleanest city framework.',
+        copy: slot.dayLabel + ' at ' + slot.timeLabel + ' is the cleanest guided start.',
         icon: 'calendar',
         action: 'Book the tour',
         url: BOOKING_SHORT_URL
@@ -13428,7 +13505,7 @@
       key: 'tour-book',
       status: 'Book first',
       title: slot.dayLabel + ' BerlinWalk tour',
-      copy: slot.timeLabel + ' at the World Clock is the cleanest first city framework.',
+      copy: slot.timeLabel + ' at the World Clock is the cleanest first Berlin introduction.',
       icon: 'calendar',
       accent: '#1B5E20',
       action: 'Book the tour',
@@ -13574,7 +13651,7 @@
       : 'Save the first route, check the weather one more time, and keep your arrival ticket choice ready.';
     var nextCopy = state.tourIntent === 'booked'
       ? 'Save the World Clock meeting point and plan to arrive 5 minutes early.'
-      : (arrivalDayTourEligible() ? 'Use the ' + slot.startLabel + ' tour as your first city framework.' : 'Keep Day 1 light and use the next Tue-Sat tour slot as the city framework.');
+      : (arrivalDayTourEligible() ? 'Use the ' + slot.startLabel + ' tour as your first guided introduction.' : 'Keep Day 1 light and use the next Tue-Sat tour slot as the guided start.');
     var laterCopy = state.mustHandle.indexOf('rain') !== -1
       ? 'Keep the rain backup near the same area. Do not cross Berlin for a backup.'
       : 'Stop before the day feels finished. Berlin works better when tomorrow still has energy.';
@@ -14541,7 +14618,7 @@
       blocks.push({
         time: 'BerlinWalk',
         window: arrivalSlot.timeLabel,
-        title: 'Use the walking tour as your first city framework',
+        title: 'Use the walking tour as your first Berlin introduction',
         copy: 'Join BerlinWalk at ' + arrivalSlot.startLabel + ' from the World Clock for context.'
       });
       if (arrivalSlot.startLabel === TOUR_DEFAULT_SLOT.start) blocks.push(afterTourFocusMove());
@@ -15541,6 +15618,10 @@
   function startPlanning() {
     if (planningInProgress) return;
     if (planningTimer) clearTimeout(planningTimer);
+    if (shouldReapplyQueryForQaBuild()) {
+      applyQueryParamsToState();
+      syncInputsFromState();
+    }
     planningInProgress = true;
     planGenerated = false;
     latestPlan = null;
@@ -16644,36 +16725,97 @@
     return list.slice(0, -1).join(', ') + ', and ' + list[list.length - 1];
   }
 
+  function guideAnchorLabels(day, limit) {
+    return dayMapLinks(day).slice(0, limit || 3).map(function (link) { return link.label; }).filter(Boolean);
+  }
+
+  function guideAnchorPhrase(day, limit) {
+    return humanList(guideAnchorLabels(day, limit || 2)) || day.theme || day.title || 'this day';
+  }
+
+  function guideBlockTitle(day, match) {
+    var blocks = dayActionBlockItems(day).map(function (item) { return item.block; });
+    var found = blocks.find(function (block) {
+      return match.test(String(block.time || '') + ' ' + String(block.title || '') + ' ' + String(block.copy || ''));
+    });
+    return found ? found.title : '';
+  }
+
+  function mockRouteIntro(plan, mainFocus, slot) {
+    var days = plan.days || [];
+    var first = days[0] ? guideAnchorPhrase(days[0], 2) : 'your first Berlin bearings';
+    var last = days.length > 1 ? guideAnchorPhrase(days[days.length - 1], 2) : '';
+    var tourDay = slot && slot.insideTrip
+      ? ' I would keep BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock, then leave the rest of that day lighter.'
+      : '';
+    var ending = last && days.length > 2 ? ' Near the end, save ' + last + ' for a day when you still have energy, not as another forced stop.' : '';
+    return 'For these ' + days.length + ' days, I would start gently with ' + first + '. Let arrival day do the simple work: bags, food, water, and a first walk that stays close. After that, give real time to ' + mainFocus + ' instead of chasing every famous name.' + tourDay + ending;
+  }
+
+  function mockDayStory(day, slot) {
+    var type = day.planKey || dayVisualType(day);
+    var anchors = guideAnchorLabels(day, 3);
+    var first = anchors[0] || day.theme || 'the main stop';
+    var second = anchors[1] || guideBlockTitle(day, /afternoon|museum|wall|food|park|neighborhood/i) || 'the next layer';
+    var third = anchors[2] || guideBlockTitle(day, /evening|dinner|pause|break/i) || '';
+    var isTourDay = slot && slot.insideTrip && day.dayNumber === slot.offset + 1;
+
+    if (day.dayNumber === 1) {
+      return 'After arrival, keep it simple: use ' + first + ' for first bearings, get food and water, and leave the heavier stops for the next day.';
+    }
+    if (isTourDay) {
+      return 'Do BerlinWalk at ' + slot.startLabel + ' first. Starting at the World Clock makes the Mitte story easier to follow; after that, choose ' + second + ' and keep the day light.';
+    }
+    if (type === 'wall') {
+      return first + ' is the serious Wall stop. Add ' + second + ' only if you still want more Cold War history, not just because it is nearby.';
+    }
+    if (type === 'museums') {
+      return 'Give ' + first + ' the proper slot. One museum done slowly will usually beat two rushed entries, especially if queues or rain appear.';
+    }
+    if (type === 'history') {
+      return 'Keep this central and sober: start with ' + first + ', then use ' + second + ' for air and a different kind of Berlin history.';
+    }
+    if (type === 'food') {
+      return 'Let the food day move slowly. ' + first + ' and ' + second + ' work best when you leave time to sit, look around, and change your mind.';
+    }
+    if (type === 'free') {
+      return 'Keep this cheap and mostly outside. ' + first + ' gives you the big open Berlin feeling; add ' + second + ' only if the weather still behaves.';
+    }
+    if (type === 'nightlife') {
+      return 'Save some legs for later. ' + first + ' is more fun if you do not spend the whole afternoon crossing town before ' + (third || second) + '.';
+    }
+    if (type === 'potsdam') {
+      return 'Treat Potsdam as the nice-weather choice. If the day feels heavy, keep ' + second + ' as the easier Berlin-side plan.';
+    }
+    return 'Use ' + first + ' and ' + second + ' as a calmer day between bigger sights. This is where the trip gets room to breathe.';
+  }
+
   function mockAiEnhancement(plan) {
     var slot = tourSlotForPlan(plan);
     var dayCount = (plan.days || []).length;
     var focusLabels = (state.interests || []).map(function (key) { return labelFor('interests', key); }).slice(0, 3);
     var mainFocus = humanList(focusLabels) || 'central Berlin';
-    var firstArea = plan.days && plan.days[0] ? dayMapLinks(plan.days[0]).slice(0, 2).map(function (link) { return link.label; }).join(' and ') : 'your first area';
     var tourSentence = slot && slot.insideTrip
-      ? 'I would use ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock as the guided context, then keep the rest of that day lighter.'
+      ? 'I would hold ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock for BerlinWalk, then keep that day lighter afterward.'
       : slot && !slot.booked
-        ? 'The in-trip tour fit is not clean, so I would keep this itinerary realistic and use the next Tue-Sat BerlinWalk slot only if it matches your energy.'
+        ? 'The tour does not land cleanly inside this plan, so I would not force it into a bad arrival day.'
         : 'Since the tour is already booked, keep the World Clock meeting point saved and arrive 5 minutes early.';
     return normalizeAiEnhancement({
       provider: 'gemini',
       model: 'gemini-2.5-flash-mock',
-      noteTitle: dayCount + '-day Berlin rhythm',
-      routeIntro: 'I would read this as a ' + dayCount + '-day Berlin route built around ' + mainFocus + '. Start with ' + firstArea + ' as the first real orientation layer, then let the later days change texture instead of repeating the same central loop. The strongest version is practical, local, and still easy to follow.',
+      noteTitle: 'How I would read these days',
+      routeIntro: mockRouteIntro(plan, mainFocus, slot),
       weatherSentence: tripWeatherSummary(plan),
       tourSentence: tourSentence,
       chips: [
-        { label: 'Best rhythm', value: state.pace === 'gentle' ? 'Keep the breaks visible and avoid late cross-city moves.' : 'One area first, one add-on only if energy stays good.' },
-        { label: 'Map habit', value: 'Open one day at a time instead of treating the plan as a checklist.' },
-        { label: 'Tour fit', value: slot && slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : 'Use the next clean Tue-Sat slot.' }
+        { label: 'Pace cue', value: state.pace === 'gentle' ? 'Keep breaks visible and avoid late cross-city moves.' : 'Add extras only when the day still feels easy.' },
+        { label: 'Map cue', value: 'Open only today first. Tomorrow can wait.' },
+        { label: 'Tour cue', value: slot && slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : 'Do not force a bad tour day.' }
       ],
       dayStories: (plan.days || []).slice(0, 7).map(function (day) {
-        var anchors = dayMapLinks(day).slice(0, 2).map(function (link) { return link.label; }).join(' and ');
         return {
           dayNumber: day.dayNumber,
-          text: day.dayNumber === (slot && slot.insideTrip ? slot.offset + 1 : -1)
-            ? 'Day ' + day.dayNumber + ' uses BerlinWalk as the city framework, then keeps ' + (anchors || day.theme) + ' close enough to avoid a second mission.'
-            : 'Day ' + day.dayNumber + ' gives ' + (anchors || day.theme) + ' its own space, so the route feels like a day in Berlin rather than a checklist.'
+          text: mockDayStory(day, slot)
         };
       })
     }, plan);
@@ -16690,22 +16832,21 @@
     return normalizeAiEnhancement({
       provider: 'local',
       model: 'deterministic-fallback',
-      noteTitle: 'Yusuf-style quick read',
-      routeIntro: 'This plan is still useful without another AI rewrite: keep Day 1 around ' + firstAnchors + ', then let each later day have its own Berlin rhythm. For a ' + days + '-day trip, the best version is the one you can actually follow without crossing town just to add volume.',
+      noteTitle: 'My read on this plan',
+      routeIntro: 'This plan is still useful without another AI rewrite. Start with ' + firstAnchors + ' and keep the first day light. For a ' + days + '-day visit, I would protect the order of the days more than the number of famous names. You can always add one nearby stop when the day still feels good.',
       weatherSentence: tripWeatherSummary(plan),
       tourSentence: slot && slot.insideTrip
         ? 'The clean BerlinWalk fit remains ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock.'
-        : 'If you still want the guided context, use the next clean Tue-Sat BerlinWalk slot rather than forcing it into a bad day.',
+        : 'If you still want BerlinWalk, use the next clean Tue-Sat slot rather than forcing it into a bad day.',
       quotaMessage: quotaMessage,
       chips: [
         { label: 'AI limit', value: quota && Number.isFinite(Number(quota.remaining)) ? String(Math.max(0, Number(quota.remaining))) + ' guide-note runs left' : quotaMessage },
         { label: 'Plan update', value: 'You can still update the itinerary itself.' }
       ],
       dayStories: (plan.days || []).slice(0, 7).map(function (day) {
-        var anchors = dayMapLinks(day).slice(0, 2).map(function (link) { return link.label; }).join(' and ');
         return {
           dayNumber: day.dayNumber,
-          text: 'Day ' + day.dayNumber + ' keeps ' + (anchors || day.theme) + ' as the main thread and avoids turning the day into scattered errands.'
+          text: mockDayStory(day, slot)
         };
       })
     }, plan);
@@ -18163,7 +18304,7 @@
         badge: 'BOOK',
         label: 'BerlinWalk tour',
         title: 'Book the free walking tour',
-        copy: 'The tour gives the historic centre a framework before the rest of the trip gets looser.',
+        copy: 'The tour makes the historic centre easier to read before the rest of the trip gets looser.',
         url: BOOKING_SHORT_URL,
         linkLabel: BOOKING_SHORT_LABEL
       }, margin + cardW + gap, cardY, cardW, slot.booked ? 'light' : 'dark');
@@ -18564,7 +18705,7 @@
       doc.text(slot.booked ? 'World Clock prep' : slot.dayLabel + ' ' + slot.timeLabel, margin + topW + topGap + 62, cardY + 32);
       color(slot.booked ? muted : [221, 239, 199]);
       doc.setFontSize(7.4);
-      doc.text(doc.splitTextToSize(slot.booked ? 'Use meeting point, weather, and first-route prep instead of sales copy.' : 'Use the tour as the historical framework before the trip gets looser.', topW - 74).slice(0, 2), margin + topW + topGap + 62, cardY + 47);
+      doc.text(doc.splitTextToSize(slot.booked ? 'Use meeting point, weather, and first-route prep instead of sales copy.' : 'Use the tour as the guided history start before the trip gets looser.', topW - 74).slice(0, 2), margin + topW + topGap + 62, cardY + 47);
       y += 86;
 
       color(green);
@@ -18897,7 +19038,7 @@
         doc.text('BerlinWalk tour anchor', margin + 62, y + 15);
         color([255, 255, 255]);
         doc.setFontSize(7.8);
-        doc.text(doc.splitTextToSize(daySlot.timeLabel + ' at the World Clock. Book the spot first, then use this day as your city framework.', contentW - 112).slice(0, 2), margin + 62, y + 28);
+        doc.text(doc.splitTextToSize(daySlot.timeLabel + ' at the World Clock. Book the spot first, then keep the rest of this day lighter.', contentW - 112).slice(0, 2), margin + 62, y + 28);
         y += 46;
       }
 
@@ -19297,7 +19438,7 @@
       var closeHtml = printDayCloseHtml(day);
       var mapPackHtml = printDayMapPackHtml(day);
       var daySlot = tourSlotForDay(day, plan);
-      var tourDayHtml = daySlot ? '<p class="tourday"><strong>BerlinWalk tour anchor:</strong> ' + escapeHtml(daySlot.timeLabel) + ' at the World Clock. Book the spot first, then use this day as your city framework.</p>' : '';
+      var tourDayHtml = daySlot ? '<p class="tourday"><strong>BerlinWalk tour anchor:</strong> ' + escapeHtml(daySlot.timeLabel) + ' at the World Clock. Book the spot first, then keep the rest of this day lighter.</p>' : '';
       var risks = riskTagsForDay(day).map(function (tag) { return tag.label; }).join(' | ');
       var rhythm = dayRhythmItems(day, plan).map(function (item) {
         return '<article style="background:#FAFAF5;border:1px solid #DCE8C8;border-radius:8px;padding:8px"><b style="color:#4E5A4E;display:block;font-size:9px;text-transform:uppercase">' + escapeHtml(item.label) + '</b><span style="color:#1B5E20;display:block;font-weight:800">' + escapeHtml(item.value) + '</span><i style="background:#E7EFD8;border-radius:999px;display:block;height:5px;margin-top:6px;overflow:hidden"><em style="background:#1B5E20;border-radius:999px;display:block;height:100%;width:' + rhythmLevel(item.score) + '%"></em></i></article>';
@@ -19324,20 +19465,7 @@
   }
 
   function initFromParams() {
-    var params = new URLSearchParams(window.location.search);
-    var tripLength = getTripLengthOverride();
-    if (tripLength) state.tripLength = tripLength;
-    ['arrivalTime', 'arrivalPoint', 'stayArea', 'groupType', 'firstTime', 'budgetStyle', 'pace', 'tourIntent'].forEach(function (key) {
-      var value = params.get(key);
-      if (value && root.querySelector('[data-group="' + key + '"] [data-value="' + value + '"]')) state[key] = value;
-    });
-    ['interests', 'mustHandle'].forEach(function (key) {
-      var values = String(params.get(key) || '').split(',').map(function (value) { return value.trim(); }).filter(Boolean);
-      values = values.filter(function (value) {
-        return Boolean(root.querySelector('[data-group="' + key + '"] [data-value="' + value + '"]'));
-      });
-      if (values.length) state[key] = values;
-    });
+    applyQueryParamsToState();
     var dateInput = root.querySelector('[data-arrival-date]');
     if (dateInput) {
       dateInput.value = state.arrivalDate;
