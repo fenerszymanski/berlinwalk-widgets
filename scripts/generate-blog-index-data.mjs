@@ -145,7 +145,7 @@ const TOPICS = [
 ];
 
 const HERO_SLUGS = {
-  lead: 'berlin-first-time-visitor-mistakes-12-things-to-know-before-you-go',
+  lead: 'shopping-in-berlin',
   secondary: [
     'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
     'public-toilets-in-berlin',
