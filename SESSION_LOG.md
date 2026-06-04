@@ -4,12 +4,45 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-04 — Codex (Ultimate email simplification pass)
+
+**Did:** Simplified the Ultimate planner triggered-email sequence after Yusuf approved the widget/PDF direction, keeping the emails practical and traveller-facing instead of planner-report style.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/e0-instant-plan.md` through `e4-arrival-day.md` — rewrote all five drafts with shorter Yusuf-style copy: instant plan, 7-day, 3-day, 1-day, and arrival-day reminders. Booked guests still stay in the existing booking sequence.
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` — softened generated variable-card body weight and updated the footer wording.
+- `ultimate-berlin-trip-planner/email/paste-ready/` — regenerated paste-ready HTML, preview, copy kit, manifest, README, and checklist from the new copy.
+- `ultimate-berlin-trip-planner/email/README.md` — documented the compact-copy direction and the smaller visible variable set.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated email-related checks so technical CRM/segmentation fields remain verified in payload/Velo, but no longer have to appear in user-facing email copy.
+
+**Opened:** In-app browser refused local email preview URLs (`127.0.0.1` and `file://`) because of browser URL policy, so no visual browser screenshot was captured for the email preview this pass.
+**Closed:** Rebuilt paste-ready emails; static HTML check passed for all five emails with no `<style>`, `<script>`, SVG, old planner jargon, or `1h45m`; `launch-audit.mjs` passed `153 pass, 0 warn, 0 block`; Velo prepublish gate passed `13 pass, 0 warn, 0 block` and wrote `output/qa/ultimate-trip-planner-prepublish-gate/prepublish-gate-2026-06-04T14-46-24-109Z.json`.
+
+**Next session should:** Let Yusuf review/paste the updated email HTML from `ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html`; if he approves, decide whether to update live Wix triggered emails now or do one small visual pass in a normal browser first.
+
+## 2026-06-04 — Claude Code (Women's Basketball World Cup blog draft)
+
+**Did:** Researched and drafted a new event-tie-in blog post for the FIBA Women's Basketball World Cup 2026 (Berlin, Sept 4-13), aimed at catching fan/tourist traffic and converting to the walking tour.
+
+**Changed:**
+- `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md` — full draft in the standard format (meta, widget plan, quick summary, body, sources). Angle: visitor/fan city guide, not sports coverage. Core hook = both arenas (Uber Arena / Berlin Arena near East Side Gallery, Max-Schmeling-Halle near Mauerpark) sit on the old Berlin Wall line and are a short, direct ride from Alexanderplatz where the tour starts. Covers venues + transport, ticket mechanics (Eventim, session/day/team tickets), groups (Türkiye in C, USA in D, Germany hosts A), and what to do between games with internal links + booking CTA.
+
+**Opened:**
+- Quick-summary + FAQ data entries not yet created for slug `fiba-womens-basketball-world-cup-2026-berlin` (qsKey/faqKey in `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`).
+- Reverify before publish: exact group-to-venue split and precise daily/knockout schedule against the official FIBA schedule PDF.
+- Consider adding the Basketball World Cup to the live `berlin-in-september-2026` post (it currently lists IFA, Art Week, Open Monument Day, Marathon but not this).
+
+**Closed:** None.
+
+**Next session should:** Get Yusuf's review of the draft, then (if approved) build the qs/FAQ entries and move it into a Wix draft, and patch the September post to cross-link.
+
 ## 2026-06-04 — Codex (Ultimate PDF screenshot fixes)
 
 **Did:** Applied Yusuf's screenshot feedback to the polished Ultimate planner PDF and rechecked the rendered output.
 
 **Changed:**
 - `ultimate-berlin-trip-planner/index.html` — added cropped PDF image helpers so Yusuf portrait/day art keep natural proportions, widened the cover guide card, centered PDF day badges, improved note-card padding, fixed the cover summary double-period edge case, and increased spacing before resource sections, including `Shopping backups` → `Berlin essentials`.
+- `ultimate-berlin-trip-planner/index.html` — changed PDF/print document title from `Ultimate Berlin Trip Plan` to `Your Berlin Trip Plan` while keeping the public widget name `Ultimate Berlin Trip Planner`.
 - `output/qa/ultimate-trip-planner-pdf/ultimate-trip-plan-polished-2026-06-12-spacing-fix-v3.pdf` and `output/qa/ultimate-trip-planner-pdf/rendered-spacing-fix-v3/` — latest 8-page PDF visual QA evidence.
 
 **Opened:** Widget PDF copy/design can still be reviewed by Yusuf, but the screenshot-specific layout issues are addressed locally.

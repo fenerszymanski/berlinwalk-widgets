@@ -324,6 +324,20 @@ function run() {
     unknownVars.length === 0,
     unknownVars.length ? `Missing Velo variables: ${unknownVars.join(', ')}` : `${templateVars.length} template variables covered.`
   );
+  block(
+    'Triggered Email copy stays reader-facing',
+    /Your first read/.test(allEmailTemplateText) &&
+      /Your day rhythm/.test(allEmailTemplateText) &&
+      /Recommended BerlinWalk timing/.test(allEmailTemplateText) &&
+      /One week before Berlin/.test(allEmailTemplateText) &&
+      /Welcome to Berlin/.test(allEmailTemplateText) &&
+      !/Planner signal/i.test(allEmailTemplateText) &&
+      !/Plan health/i.test(allEmailTemplateText) &&
+      !/conversionSignal/.test(allEmailTemplateText) &&
+      !/dayOperations/.test(allEmailTemplateText) &&
+      !/dayIntelligence/.test(allEmailTemplateText),
+    'Expected the current email sequence to use compact traveller-facing copy, while keeping technical segmentation fields out of the pasted emails.'
+  );
 
   const criticalVars = [
     'planHealth',
@@ -1147,17 +1161,16 @@ function run() {
     'Expected a visual one-click trip-style shortcut layer that updates multiple planning inputs while keeping detailed controls editable.'
   );
   block(
-    'Trip style preset reaches lead segmentation',
+    'Trip style preset reaches lead and CRM segmentation',
     /function\s+tripStyleForLead/.test(indexHtml) &&
       /tripStyle:\s*tripStyleForLead\(\)/.test(indexHtml) &&
       /tripStyle:\s*cleanText\(payload\.tripStyle,\s*'Custom mix'\)/.test(funnel) &&
       /tripStyle:\s*String\(lead\.tripStyle/.test(funnel) &&
       /tripStyle:\s*lead\.tripStyle/.test(funnel) &&
       /\['tripStyle',\s*'Trip Style',\s*'TEXT'\]/.test(collectionScript) &&
-      /\$\{tripStyle\}/.test(allEmailTemplateText) &&
       /\$\{tripStyle\}/.test(emailReadme) &&
       /\$\{tripStyle\}/.test(veloReadme),
-    'Expected the selected visual trip-style shortcut to move into the lead payload, Wix Data setup, Velo email variables, and instant email copy.'
+    'Expected the selected visual trip-style shortcut to move into the lead payload, Wix Data setup, and Velo email-variable contract.'
   );
   block(
     'Mobile first screen has a visual plan peek',
@@ -1282,18 +1295,17 @@ function run() {
     'Expected the email gate to show arrival-date-aware instant, pre-arrival, and arrival-day reminder value.'
   );
   block(
-    'Daily timeboxes reach the email sequence',
+    'Daily timeboxes reach lead storage and backend variables',
       /function\s+dayOperationsSummary[\s\S]*dayBlockWindow/.test(indexHtml) &&
       /dayOperations:\s*dayOperationsSummary\(plan\)/.test(indexHtml) &&
       /dayOperations:\s*cleanText\(payload\.dayOperations,\s*'',\s*1200\)/.test(funnel) &&
       /dayOperations:\s*String\(lead\.dayOperations/.test(funnel) &&
-      /daily timing \+ operating notes/i.test(allEmailTemplateText) &&
-      /deterministic timing windows/.test(emailReadme) &&
+      /daily timing windows plus start \/ transit \/ reserve \/ backup/.test(emailReadme) &&
       /timing windows plus start \/ transit \/ reserve \/ backup/.test(veloReadme),
-    'Expected the existing dayOperations payload/Velo/email variable to carry the visible timebox windows.'
+    'Expected the existing dayOperations payload/Velo variable to carry visible timebox windows for backend use without forcing technical copy into the emails.'
   );
   block(
-    'Conversion signal reaches lead storage and email',
+    'Conversion signal reaches lead storage and CRM segmentation',
     /function\s+conversionSignal\(plan\)/.test(indexHtml) &&
       /function\s+conversionSignalSummary\(plan\)/.test(indexHtml) &&
       /conversionSignal:\s*signal\.summary/.test(indexHtml) &&
@@ -1301,11 +1313,9 @@ function run() {
       /conversionSignal:\s*String\(lead\.conversionSignal/.test(funnel) &&
       /conversionSignal:\s*lead\.conversionSignal/.test(funnel) &&
       /\['conversionSignal',\s*'Conversion Signal',\s*'TEXT'\]/.test(collectionScript) &&
-      /\$\{conversionSignal\}/.test(allEmailTemplateText) &&
-      /Planner signal/i.test(allEmailTemplateText) &&
       /\$\{conversionSignal\}/.test(emailReadme) &&
       /\$\{conversionSignal\}/.test(veloReadme),
-    'Expected the deterministic tour-readiness signal to move from widget payload into Wix Data and triggered emails.'
+    'Expected the deterministic tour-readiness signal to move from widget payload into Wix Data and backend variables without exposing planner jargon in the emails.'
   );
   block(
     'Machine-readable conversion fields are stored',

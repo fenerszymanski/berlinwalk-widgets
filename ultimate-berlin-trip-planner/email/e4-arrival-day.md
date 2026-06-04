@@ -1,36 +1,36 @@
 # E4 - Arrival Day
 
-Subject: Welcome to Berlin - start simple
+Subject: Welcome to Berlin - keep today simple
 
-Preheader: World Clock, first route, and the final booking link.
+Preheader: Reach your base, eat, save the World Clock, and avoid overloading arrival day.
 
 Welcome to Berlin.
 
-Your planner result:
+Your plan for today:
 
 **${planTitle}**
 
-Your phone-ready mode:
+Phone-ready mode:
 
 **${travelMode}**
 
-Your arrival checklist:
+Arrival checklist:
 
 **${preArrivalChecklist}**
 
-Today, keep the logic simple:
+Today, the best plan is usually the simplest one:
 
-- Get central.
+- Reach your base.
 - Solve luggage before sightseeing.
 - Eat before you are exhausted.
 - Save the World Clock meeting point.
-- Do one walkable orientation layer before chasing the whole city.
+- Do one walkable orientation move, then stop.
 
-The BerlinWalk tour starts at the World Clock at Alexanderplatz and takes about 2 hours. It is the easiest way to turn central Berlin into an actual story instead of a loose set of photos.
-
-Book here:
+If you still want to join BerlinWalk, book your free spot here:
 
 ${bookingUrl}
+
+The walk starts at the World Clock at Alexanderplatz and takes about 2 hours. It gives the center of Berlin a story instead of leaving you with a random list of stops.
 
 Meeting point details:
 

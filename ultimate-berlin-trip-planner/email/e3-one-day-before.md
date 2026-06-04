@@ -2,46 +2,42 @@
 
 Subject: Berlin tomorrow: ${weatherTitle}
 
-Preheader: Weather, shoes, meeting point, and your final first-day check.
+Preheader: Weather, shoes, meeting point, and a calm first-day check.
 
 Hi,
 
 Tomorrow is Berlin.
 
-Your planner weather note:
+Weather note:
 
 **${weatherTitle}**
 
-Weather/openings strategy:
+What to do with that:
 
 **${weatherStrategy}**
 
-Planner review:
-
-**${planAdvice}**
-
-Your final checklist:
+Your final plan check:
 
 **${preArrivalChecklist}**
 
-Berlin rewards comfortable shoes more than heroic planning. The historic center has exposed squares, station stairs, cobbles, river wind, and long crossings.
+Berlin rewards comfortable shoes more than heroic planning. You will meet cobbles, wide crossings, station stairs, river wind, and more walking than the map suggests.
 
 Before you travel:
 
 - Save the World Clock meeting point.
 - Bring one layer you can add or remove.
-- If rain is likely, choose a waterproof layer over a fragile umbrella.
 - Keep the first route simple from **${arrivalPoint}**.
+- If rain is likely, choose a waterproof layer and keep one covered backup in mind.
 
 Meeting point:
 
 ${meetingPointUrl}
 
-If you have not booked yet, book here:
+If you have not booked the walk yet, you can still reserve here:
 
 ${bookingUrl}
 
-The walk is about 2 hours and gives your first Berlin day a clear shape.
+The walk takes about 2 hours and gives your first Berlin day a clear shape.
 
 Yusuf  
 BerlinWalk  

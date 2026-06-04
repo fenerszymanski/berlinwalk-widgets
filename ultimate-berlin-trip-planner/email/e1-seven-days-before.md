@@ -1,44 +1,38 @@
 # E1 - 7 Days Before Arrival
 
-Subject: One week before Berlin: keep the trip realistic
+Subject: One week before Berlin: keep the first day simple
 
-Preheader: Your trip shape, tour timing, and the first decisions to lock now.
+Preheader: A quick plan check before tickets, museums, and meals start filling up.
 
 Hi,
 
-You are about a week from Berlin.
+You are about one week from Berlin.
 
 Your planner result:
 
 **${planTitle}**
 
-Plan health:
-
-**${planHealth}**
-
-Your pre-arrival checklist:
+Your quick check:
 
 **${preArrivalChecklist}**
 
-The most useful thing to lock now is not every meal. It is the first high-value anchor.
+At this point, I would not try to lock every meal or every museum. I would lock the first real anchor, then keep the rest flexible around weather and energy.
 
-For most first-time visitors, that anchor is the BerlinWalk tour early in the trip. It starts at the World Clock at Alexanderplatz, lasts about 2 hours, and gives the city center a structure before you start choosing museums, Wall sites, food stops, or nightlife.
-
-Your recommended tour timing:
+Your recommended BerlinWalk timing:
 
 **${recommendedTourDay}**
 
-Book your free spot here:
+If you want the walk to be the first proper city orientation, reserve your free spot here:
 
 ${bookingUrl}
 
-Also check:
+Useful details from your plan:
 
 - Ticket start: **${ticket}**
 - Arrival point: **${arrivalPoint}**
 - Stay area: **${stayArea}**
 
-Do not plan Berlin like a tiny old-town city. It is spread out, layered, and much easier when each day has one area as the backbone.
+Berlin is easier when you let one area carry each day. Give the first day a calm shape, then let the later days do the heavier sightseeing.
 
 Yusuf  
 BerlinWalk  

@@ -20,16 +20,11 @@ matching lead as booked, Ultimate suppresses its future planner reminders and
 lets the existing BerlinWalk booking email sequence handle meeting-point,
 weather, and tour-day prep. Do not create a second booked-guest automation here.
 
-The instant and reminder emails intentionally reuse `${planHealth}`,
-`${preArrivalChecklist}`, `${baseBrief}`, `${budgetPulse}`,
-`${interestLens}`, `${paceGuard}`, `${weatherStrategy}`,
-`${carryPack}`, `${reservationRadar}`, `${dayRhythm}`, and compact day-level logistics so each message feels
-tied to the same generated plan, not like a generic campaign.
-`${tripStyle}` carries the visual shortcut or `Custom mix` so leads can be
-segmented by how they framed the trip before unlocking the full plan.
-`${dayOperations}` includes the deterministic timing windows from the visible
-itinerary, so instant emails carry the same phone-ready rhythm as the widget/PDF
-without requiring a new collection field.
+The current copy is intentionally compact. It uses a small set of plan-specific
+variables so the emails feel like Yusuf's practical follow-up to the generated
+plan, not an internal planner report. Keep sales CTAs natural and limited:
+booked guests are suppressed from this sequence and should continue in the
+existing booking email automation.
 
 Variables expected by Velo:
 

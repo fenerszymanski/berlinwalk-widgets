@@ -522,23 +522,23 @@ For each item: create template -&gt; paste name -&gt; subject -&gt; preheader -&
    Branch/stage: sales.instant
    Placeholder: TODO_TRIP_PLANNER_INSTANT
    Subject: Your Berlin trip plan is ready
-   Preheader: Arrival date, trip shape, ticket note, and the best tour timing.
+   Preheader: Your route shape, first-day note, weather cue, and BerlinWalk timing.
    HTML file: e0-instant-plan.html
    Wix editor URL / message ID:
 
 2. Ultimate Planner - Sales - 7 Days Before
    Branch/stage: sales.minus7
    Placeholder: TODO_TRIP_PLANNER_MINUS_7
-   Subject: One week before Berlin: keep the trip realistic
-   Preheader: Your trip shape, tour timing, and the first decisions to lock now.
+   Subject: One week before Berlin: keep the first day simple
+   Preheader: A quick plan check before tickets, museums, and meals start filling up.
    HTML file: e1-seven-days-before.html
    Wix editor URL / message ID:
 
 3. Ultimate Planner - Sales - 3 Days Before
    Branch/stage: sales.minus3
    Placeholder: TODO_TRIP_PLANNER_MINUS_3
-   Subject: Three days before Berlin: tickets, shops, and first-day traps
-   Preheader: BER zones, Sunday closures, Monday museum logic, and the better first move.
+   Subject: Three days before Berlin: check the practical things
+   Preheader: Ticket zone, openings, weather backup, and one good first move.
    HTML file: e2-three-days-before.html
    Wix editor URL / message ID:
 
@@ -546,15 +546,15 @@ For each item: create template -&gt; paste name -&gt; subject -&gt; preheader -&
    Branch/stage: sales.minus1
    Placeholder: TODO_TRIP_PLANNER_MINUS_1
    Subject: Berlin tomorrow: ${weatherTitle}
-   Preheader: Weather, shoes, meeting point, and your final first-day check.
+   Preheader: Weather, shoes, meeting point, and a calm first-day check.
    HTML file: e3-one-day-before.html
    Wix editor URL / message ID:
 
 5. Ultimate Planner - Sales - Arrival Day
    Branch/stage: sales.dayOf
    Placeholder: TODO_TRIP_PLANNER_DAY_OF
-   Subject: Welcome to Berlin - start simple
-   Preheader: World Clock, first route, and the final booking link.
+   Subject: Welcome to Berlin - keep today simple
+   Preheader: Reach your base, eat, save the World Clock, and avoid overloading arrival day.
    HTML file: e4-arrival-day.html
    Wix editor URL / message ID:
 
@@ -624,13 +624,13 @@ After all 5 URLs/IDs are collected:
         <label for="preheader-0">Preheader</label>
         <button type="button" data-copy-target="preheader-0">Copy preheader</button>
       </div>
-      <textarea id="preheader-0" readonly rows="2">Arrival date, trip shape, ticket note, and the best tour timing.</textarea>
+      <textarea id="preheader-0" readonly rows="2">Your route shape, first-day note, weather cue, and BerlinWalk timing.</textarea>
 
       <div class="field-row">
         <label for="html-block-0">HTML body block</label>
         <button type="button" data-copy-target="html-block-0">Copy HTML</button>
       </div>
-      <textarea id="html-block-0" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Arrival date, trip shape, ticket note, and the best tour timing.&lt;/div&gt;
+      <textarea id="html-block-0" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Your route shape, first-day note, weather cue, and BerlinWalk timing.&lt;/div&gt;
 &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;&quot;&gt;
   &lt;tr&gt;
     &lt;td style=&quot;background: #FAFAF5; padding: 22px 24px 18px; text-align: center;&quot;&gt;
@@ -645,7 +645,7 @@ After all 5 URLs/IDs are collected:
           &lt;td style=&quot;background: #1B5E20; padding: 30px 28px 28px;&quot;&gt;
             &lt;p style=&quot;margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;&quot;&gt;Your plan&lt;/p&gt;
             &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;Your Berlin trip plan is ready&lt;/h1&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Arrival date, trip shape, ticket note, and the best tour timing.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Your route shape, first-day note, weather cue, and BerlinWalk timing.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -664,7 +664,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planTitle}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${planTitle}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -687,65 +687,17 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Interests: &lt;strong style=&quot;color: #1B5E20;&quot;&gt;${interests}&lt;/strong&gt;&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
             &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Pace: &lt;strong style=&quot;color: #1B5E20;&quot;&gt;${pace}&lt;/strong&gt;&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Planner style: &lt;strong style=&quot;color: #1B5E20;&quot;&gt;${tripStyle}&lt;/strong&gt;&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The first thing to get right is not a giant checklist. It is the shape of the trip:&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FFFFFF;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
-                &lt;/td&gt;
-                &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Keep arrival day realistic.&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-              &lt;tr&gt;
-                &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
-                &lt;/td&gt;
-                &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Start with one strong orientation layer.&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-              &lt;tr&gt;
-                &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
-                &lt;/td&gt;
-                &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Move area by area.&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-              &lt;tr&gt;
-                &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
-                &lt;/td&gt;
-                &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Save enough energy for the city to stay enjoyable.&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The main idea is simple: keep each day around one area, protect your arrival day, and avoid turning Berlin into a cross-city checklist.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your tour timing note&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your first read&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -753,209 +705,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${recommendedTourDay}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Suggested calendar hold: &lt;strong style=&quot;color: #1B5E20;&quot;&gt;${recommendedTourDate} ${recommendedTourTime}&lt;/strong&gt;&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Meeting point map: ${meetingPointUrl}&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Plan health&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planHealth}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Planner signal&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${conversionSignal}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Pre-arrival checklist&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Base camp brief&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${baseBrief}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Budget pulse&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${budgetPulse}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Interest lens&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${interestLens}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Pace guard&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${paceGuard}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Weather/openings&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${weatherStrategy}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Phone carry pack&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${carryPack}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Reservation radar&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${reservationRadar}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your planner review&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planAdvice}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your day-swap notes&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planSwaps}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${planAdvice}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -971,7 +721,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${dayRhythm}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${dayRhythm}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -979,7 +729,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your day-by-day logistics snapshot&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Weather and openings&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -987,15 +737,15 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${dayIntelligence}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${weatherStrategy}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Your daily timing + operating notes:&lt;/p&gt;
+          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Ticket note&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1003,7 +753,39 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${dayOperations}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${ticket}&lt;/p&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Carry on your phone&lt;/p&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
+            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
+              &lt;tr&gt;
+                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${carryPack}&lt;/p&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Recommended BerlinWalk timing&lt;/p&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
+            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
+              &lt;tr&gt;
+                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${recommendedTourDay}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1011,7 +793,12 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you are still choosing a first Berlin activity, this is the clean move:&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Suggested calendar hold: &lt;strong style=&quot;color: #1B5E20;&quot;&gt;${recommendedTourDate} ${recommendedTourTime}&lt;/strong&gt;&lt;/p&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If that timing works for you, book the free walking tour here:&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1027,17 +814,25 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The BerlinWalk tour starts at the World Clock at Alexanderplatz and takes about 2 hours. It turns the first central sights into a story before you scatter across Berlin.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The walk starts at the World Clock in Alexanderplatz and takes about 2 hours. It is the easiest way to give the center of Berlin a story before you use the rest of the trip for Wall history, museums, food, neighborhoods, or slower days.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Useful checks&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Useful planning checks&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FFFFFF;&quot;&gt;
+              &lt;tr&gt;
+                &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
+                &lt;/td&gt;
+                &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Meeting point: ${meetingPointUrl}&lt;/p&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
               &lt;tr&gt;
                 &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
                   &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
@@ -1081,7 +876,7 @@ After all 5 URLs/IDs are collected:
               &lt;span style=&quot;color: #7CB342;&quot;&gt;&amp;nbsp;|&amp;nbsp;&lt;/span&gt;
               &lt;a href=&quot;https://www.instagram.com/berlinwalkingtour&quot; style=&quot;color: #FFE600; text-decoration: none; font-weight: 700;&quot;&gt;@berlinwalkingtour&lt;/a&gt;
             &lt;/p&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked for an Ultimate Berlin Trip Planner email from BerlinWalk.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked BerlinWalk to send your Berlin trip plan.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
       &lt;/table&gt;
@@ -1123,19 +918,19 @@ After all 5 URLs/IDs are collected:
         <label for="subject-1">Subject</label>
         <button type="button" data-copy-target="subject-1">Copy subject</button>
       </div>
-      <textarea id="subject-1" readonly rows="2">One week before Berlin: keep the trip realistic</textarea>
+      <textarea id="subject-1" readonly rows="2">One week before Berlin: keep the first day simple</textarea>
 
       <div class="field-row">
         <label for="preheader-1">Preheader</label>
         <button type="button" data-copy-target="preheader-1">Copy preheader</button>
       </div>
-      <textarea id="preheader-1" readonly rows="2">Your trip shape, tour timing, and the first decisions to lock now.</textarea>
+      <textarea id="preheader-1" readonly rows="2">A quick plan check before tickets, museums, and meals start filling up.</textarea>
 
       <div class="field-row">
         <label for="html-block-1">HTML body block</label>
         <button type="button" data-copy-target="html-block-1">Copy HTML</button>
       </div>
-      <textarea id="html-block-1" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Your trip shape, tour timing, and the first decisions to lock now.&lt;/div&gt;
+      <textarea id="html-block-1" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;A quick plan check before tickets, museums, and meals start filling up.&lt;/div&gt;
 &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;&quot;&gt;
   &lt;tr&gt;
     &lt;td style=&quot;background: #FAFAF5; padding: 22px 24px 18px; text-align: center;&quot;&gt;
@@ -1149,8 +944,8 @@ After all 5 URLs/IDs are collected:
         &lt;tr&gt;
           &lt;td style=&quot;background: #1B5E20; padding: 30px 28px 28px;&quot;&gt;
             &lt;p style=&quot;margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;&quot;&gt;One week before&lt;/p&gt;
-            &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;One week before Berlin: keep the trip realistic&lt;/h1&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Your trip shape, tour timing, and the first decisions to lock now.&lt;/p&gt;
+            &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;One week before Berlin: keep the first day simple&lt;/h1&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;A quick plan check before tickets, museums, and meals start filling up.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -1161,7 +956,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;You are about a week from Berlin.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;You are about one week from Berlin.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1174,7 +969,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planTitle}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${planTitle}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1182,7 +977,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Plan health&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your quick check&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1190,23 +985,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planHealth}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your pre-arrival checklist&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1214,17 +993,12 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The most useful thing to lock now is not every meal. It is the first high-value anchor.&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;For most first-time visitors, that anchor is the BerlinWalk tour early in the trip. It starts at the World Clock at Alexanderplatz, lasts about 2 hours, and gives the city center a structure before you start choosing museums, Wall sites, food stops, or nightlife.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;At this point, I would not try to lock every meal or every museum. I would lock the first real anchor, then keep the rest flexible around weather and energy.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your recommended tour timing&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your recommended BerlinWalk timing&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1232,15 +1006,15 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${recommendedTourDay}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${recommendedTourDay}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Book your free spot here&lt;/p&gt;
+          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you want the walk to be the first proper city orientation, reserve your free spot here:&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1256,7 +1030,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Also check&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Useful details from your plan&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1291,7 +1065,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Do not plan Berlin like a tiny old-town city. It is spread out, layered, and much easier when each day has one area as the backbone.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Berlin is easier when you let one area carry each day. Give the first day a calm shape, then let the later days do the heavier sightseeing.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -1310,7 +1084,7 @@ After all 5 URLs/IDs are collected:
               &lt;span style=&quot;color: #7CB342;&quot;&gt;&amp;nbsp;|&amp;nbsp;&lt;/span&gt;
               &lt;a href=&quot;https://www.instagram.com/berlinwalkingtour&quot; style=&quot;color: #FFE600; text-decoration: none; font-weight: 700;&quot;&gt;@berlinwalkingtour&lt;/a&gt;
             &lt;/p&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked for an Ultimate Berlin Trip Planner email from BerlinWalk.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked BerlinWalk to send your Berlin trip plan.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
       &lt;/table&gt;
@@ -1352,19 +1126,19 @@ After all 5 URLs/IDs are collected:
         <label for="subject-2">Subject</label>
         <button type="button" data-copy-target="subject-2">Copy subject</button>
       </div>
-      <textarea id="subject-2" readonly rows="2">Three days before Berlin: tickets, shops, and first-day traps</textarea>
+      <textarea id="subject-2" readonly rows="2">Three days before Berlin: check the practical things</textarea>
 
       <div class="field-row">
         <label for="preheader-2">Preheader</label>
         <button type="button" data-copy-target="preheader-2">Copy preheader</button>
       </div>
-      <textarea id="preheader-2" readonly rows="2">BER zones, Sunday closures, Monday museum logic, and the better first move.</textarea>
+      <textarea id="preheader-2" readonly rows="2">Ticket zone, openings, weather backup, and one good first move.</textarea>
 
       <div class="field-row">
         <label for="html-block-2">HTML body block</label>
         <button type="button" data-copy-target="html-block-2">Copy HTML</button>
       </div>
-      <textarea id="html-block-2" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;BER zones, Sunday closures, Monday museum logic, and the better first move.&lt;/div&gt;
+      <textarea id="html-block-2" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Ticket zone, openings, weather backup, and one good first move.&lt;/div&gt;
 &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;&quot;&gt;
   &lt;tr&gt;
     &lt;td style=&quot;background: #FAFAF5; padding: 22px 24px 18px; text-align: center;&quot;&gt;
@@ -1378,8 +1152,8 @@ After all 5 URLs/IDs are collected:
         &lt;tr&gt;
           &lt;td style=&quot;background: #1B5E20; padding: 30px 28px 28px;&quot;&gt;
             &lt;p style=&quot;margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;&quot;&gt;Three days before&lt;/p&gt;
-            &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;Three days before Berlin: tickets, shops, and first-day traps&lt;/h1&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;BER zones, Sunday closures, Monday museum logic, and the better first move.&lt;/p&gt;
+            &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;Three days before Berlin: check the practical things&lt;/h1&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Ticket zone, openings, weather backup, and one good first move.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -1390,12 +1164,12 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Berlin is close now.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Berlin is close now. Your trip starts on ${arrivalDate}.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Your trip starts on ${arrivalDate}. Your planner ticket note was:&lt;/p&gt;
+          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Ticket note from your plan&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1403,7 +1177,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${ticket}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${ticket}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1411,7 +1185,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your pre-arrival checklist&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your planner check&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1419,7 +1193,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1427,32 +1201,42 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Two practical traps to avoid&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 4px 28px 14px;&quot;&gt;
-            &lt;h2 style=&quot;margin: 0; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.35; font-weight: 700; color: #1B5E20;&quot;&gt;1. BER Airport is Zone C&lt;/h2&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Three small things are worth checking before you arrive&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you arrive at BER, you normally need an ABC ticket before boarding. Central Berlin sightseeing is usually AB.&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 4px 28px 14px;&quot;&gt;
-            &lt;h2 style=&quot;margin: 0; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.35; font-weight: 700; color: #1B5E20;&quot;&gt;2. Sundays and Mondays change plans&lt;/h2&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Most normal shops close on Sundays. Many museums close on Mondays. Restaurants, transport, parks, outdoor sights, and the walking tour still work.&lt;/p&gt;
+            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FFFFFF;&quot;&gt;
+              &lt;tr&gt;
+                &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
+                &lt;/td&gt;
+                &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;If you land at BER, remember it is Zone C. Most central sightseeing is AB.&lt;/p&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
+                &lt;/td&gt;
+                &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Sundays are not normal shopping days. Many museums are closed on Mondays.&lt;/p&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td width=&quot;22&quot; style=&quot;padding: 12px 0; vertical-align: top;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
+                &lt;/td&gt;
+                &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top;&quot;&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;If you want Reichstag, a famous museum, or a special restaurant, check whether it needs a reservation.&lt;/p&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your planner's smart fix note&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Weather and opening-day fix&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1460,7 +1244,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planAdvice}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${planAdvice}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1468,7 +1252,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Quick checks&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Quick links&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1503,7 +1287,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you have not booked the walk yet, this is the moment:&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you still want a guided first frame for the city, book the walk here:&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1519,7 +1303,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Start with the story. Then Berlin becomes much easier to plan.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Start with one good story. Then Berlin becomes much easier to sort out.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -1538,7 +1322,7 @@ After all 5 URLs/IDs are collected:
               &lt;span style=&quot;color: #7CB342;&quot;&gt;&amp;nbsp;|&amp;nbsp;&lt;/span&gt;
               &lt;a href=&quot;https://www.instagram.com/berlinwalkingtour&quot; style=&quot;color: #FFE600; text-decoration: none; font-weight: 700;&quot;&gt;@berlinwalkingtour&lt;/a&gt;
             &lt;/p&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked for an Ultimate Berlin Trip Planner email from BerlinWalk.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked BerlinWalk to send your Berlin trip plan.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
       &lt;/table&gt;
@@ -1586,13 +1370,13 @@ After all 5 URLs/IDs are collected:
         <label for="preheader-3">Preheader</label>
         <button type="button" data-copy-target="preheader-3">Copy preheader</button>
       </div>
-      <textarea id="preheader-3" readonly rows="2">Weather, shoes, meeting point, and your final first-day check.</textarea>
+      <textarea id="preheader-3" readonly rows="2">Weather, shoes, meeting point, and a calm first-day check.</textarea>
 
       <div class="field-row">
         <label for="html-block-3">HTML body block</label>
         <button type="button" data-copy-target="html-block-3">Copy HTML</button>
       </div>
-      <textarea id="html-block-3" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Weather, shoes, meeting point, and your final first-day check.&lt;/div&gt;
+      <textarea id="html-block-3" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Weather, shoes, meeting point, and a calm first-day check.&lt;/div&gt;
 &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;&quot;&gt;
   &lt;tr&gt;
     &lt;td style=&quot;background: #FAFAF5; padding: 22px 24px 18px; text-align: center;&quot;&gt;
@@ -1607,7 +1391,7 @@ After all 5 URLs/IDs are collected:
           &lt;td style=&quot;background: #1B5E20; padding: 30px 28px 28px;&quot;&gt;
             &lt;p style=&quot;margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;&quot;&gt;Tomorrow&lt;/p&gt;
             &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;Berlin tomorrow: ${weatherTitle}&lt;/h1&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Weather, shoes, meeting point, and your final first-day check.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Weather, shoes, meeting point, and a calm first-day check.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -1623,7 +1407,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your planner weather note&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Weather note&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1631,7 +1415,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${weatherTitle}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${weatherTitle}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1639,7 +1423,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Weather/openings strategy&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;What to do with that&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1647,7 +1431,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${weatherStrategy}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${weatherStrategy}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1655,7 +1439,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Planner review&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your final plan check&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1663,23 +1447,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planAdvice}&lt;/p&gt;
-                &lt;/td&gt;
-              &lt;/tr&gt;
-            &lt;/table&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your final checklist&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 0 28px 20px;&quot;&gt;
-            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
-              &lt;tr&gt;
-                &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1687,7 +1455,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Berlin rewards comfortable shoes more than heroic planning. The historic center has exposed squares, station stairs, cobbles, river wind, and long crossings.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Berlin rewards comfortable shoes more than heroic planning. You will meet cobbles, wide crossings, station stairs, river wind, and more walking than the map suggests.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1719,7 +1487,7 @@ After all 5 URLs/IDs are collected:
                   &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
                 &lt;/td&gt;
                 &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;If rain is likely, choose a waterproof layer over a fragile umbrella.&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Keep the first route simple from &lt;strong style=&quot;color: #1B5E20;&quot;&gt;${arrivalPoint}&lt;/strong&gt;.&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
               &lt;tr&gt;
@@ -1727,7 +1495,7 @@ After all 5 URLs/IDs are collected:
                   &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
                 &lt;/td&gt;
                 &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Keep the first route simple from &lt;strong style=&quot;color: #1B5E20;&quot;&gt;${arrivalPoint}&lt;/strong&gt;.&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;If rain is likely, choose a waterproof layer and keep one covered backup in mind.&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1751,7 +1519,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you have not booked yet, book here:&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you have not booked the walk yet, you can still reserve here:&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1767,7 +1535,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The walk is about 2 hours and gives your first Berlin day a clear shape.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The walk takes about 2 hours and gives your first Berlin day a clear shape.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -1786,7 +1554,7 @@ After all 5 URLs/IDs are collected:
               &lt;span style=&quot;color: #7CB342;&quot;&gt;&amp;nbsp;|&amp;nbsp;&lt;/span&gt;
               &lt;a href=&quot;https://www.instagram.com/berlinwalkingtour&quot; style=&quot;color: #FFE600; text-decoration: none; font-weight: 700;&quot;&gt;@berlinwalkingtour&lt;/a&gt;
             &lt;/p&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked for an Ultimate Berlin Trip Planner email from BerlinWalk.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked BerlinWalk to send your Berlin trip plan.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
       &lt;/table&gt;
@@ -1828,19 +1596,19 @@ After all 5 URLs/IDs are collected:
         <label for="subject-4">Subject</label>
         <button type="button" data-copy-target="subject-4">Copy subject</button>
       </div>
-      <textarea id="subject-4" readonly rows="2">Welcome to Berlin - start simple</textarea>
+      <textarea id="subject-4" readonly rows="2">Welcome to Berlin - keep today simple</textarea>
 
       <div class="field-row">
         <label for="preheader-4">Preheader</label>
         <button type="button" data-copy-target="preheader-4">Copy preheader</button>
       </div>
-      <textarea id="preheader-4" readonly rows="2">World Clock, first route, and the final booking link.</textarea>
+      <textarea id="preheader-4" readonly rows="2">Reach your base, eat, save the World Clock, and avoid overloading arrival day.</textarea>
 
       <div class="field-row">
         <label for="html-block-4">HTML body block</label>
         <button type="button" data-copy-target="html-block-4">Copy HTML</button>
       </div>
-      <textarea id="html-block-4" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;World Clock, first route, and the final booking link.&lt;/div&gt;
+      <textarea id="html-block-4" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Reach your base, eat, save the World Clock, and avoid overloading arrival day.&lt;/div&gt;
 &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;&quot;&gt;
   &lt;tr&gt;
     &lt;td style=&quot;background: #FAFAF5; padding: 22px 24px 18px; text-align: center;&quot;&gt;
@@ -1854,8 +1622,8 @@ After all 5 URLs/IDs are collected:
         &lt;tr&gt;
           &lt;td style=&quot;background: #1B5E20; padding: 30px 28px 28px;&quot;&gt;
             &lt;p style=&quot;margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;&quot;&gt;Arrival day&lt;/p&gt;
-            &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;Welcome to Berlin - start simple&lt;/h1&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;World Clock, first route, and the final booking link.&lt;/p&gt;
+            &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;Welcome to Berlin - keep today simple&lt;/h1&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Reach your base, eat, save the World Clock, and avoid overloading arrival day.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -1866,7 +1634,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your planner result&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your plan for today&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1874,7 +1642,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${planTitle}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${planTitle}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1882,7 +1650,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your phone-ready mode&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Phone-ready mode&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1890,7 +1658,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${travelMode}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${travelMode}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1898,7 +1666,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Your arrival checklist&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Arrival checklist&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1906,7 +1674,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;padding: 18px 20px;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;&quot;&gt;${preArrivalChecklist}&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1914,7 +1682,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Today, keep the logic simple:&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Today, the best plan is usually the simplest one:&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1925,7 +1693,7 @@ After all 5 URLs/IDs are collected:
                   &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
                 &lt;/td&gt;
                 &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Get central.&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Reach your base.&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
               &lt;tr&gt;
@@ -1957,7 +1725,7 @@ After all 5 URLs/IDs are collected:
                   &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
                 &lt;/td&gt;
                 &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Do one walkable orientation layer before chasing the whole city.&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;Do one walkable orientation move, then stop.&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1965,12 +1733,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The BerlinWalk tour starts at the World Clock at Alexanderplatz and takes about 2 hours. It is the easiest way to turn central Berlin into an actual story instead of a loose set of photos.&lt;/p&gt;
-          &lt;/td&gt;
-        &lt;/tr&gt;
-        &lt;tr&gt;
-          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Book here&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you still want to join BerlinWalk, book your free spot here:&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1982,6 +1745,11 @@ After all 5 URLs/IDs are collected:
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;The walk starts at the World Clock at Alexanderplatz and takes about 2 hours. It gives the center of Berlin a story instead of leaving you with a random list of stops.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -2021,7 +1789,7 @@ After all 5 URLs/IDs are collected:
               &lt;span style=&quot;color: #7CB342;&quot;&gt;&amp;nbsp;|&amp;nbsp;&lt;/span&gt;
               &lt;a href=&quot;https://www.instagram.com/berlinwalkingtour&quot; style=&quot;color: #FFE600; text-decoration: none; font-weight: 700;&quot;&gt;@berlinwalkingtour&lt;/a&gt;
             &lt;/p&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked for an Ultimate Berlin Trip Planner email from BerlinWalk.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;&quot;&gt;You are receiving this because you asked BerlinWalk to send your Berlin trip plan.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
       &lt;/table&gt;

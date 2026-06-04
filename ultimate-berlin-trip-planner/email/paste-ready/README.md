@@ -61,10 +61,10 @@ The same checklist is also generated as `setup-checklist.txt`.
 | Path | Stage | Velo Placeholder | HTML | Subject |
 | --- | --- | --- | --- | --- |
 | sales | instant | `TODO_TRIP_PLANNER_INSTANT` | [e0-instant-plan.html](e0-instant-plan.html) | Your Berlin trip plan is ready |
-| sales | minus7 | `TODO_TRIP_PLANNER_MINUS_7` | [e1-seven-days-before.html](e1-seven-days-before.html) | One week before Berlin: keep the trip realistic |
-| sales | minus3 | `TODO_TRIP_PLANNER_MINUS_3` | [e2-three-days-before.html](e2-three-days-before.html) | Three days before Berlin: tickets, shops, and first-day traps |
+| sales | minus7 | `TODO_TRIP_PLANNER_MINUS_7` | [e1-seven-days-before.html](e1-seven-days-before.html) | One week before Berlin: keep the first day simple |
+| sales | minus3 | `TODO_TRIP_PLANNER_MINUS_3` | [e2-three-days-before.html](e2-three-days-before.html) | Three days before Berlin: check the practical things |
 | sales | minus1 | `TODO_TRIP_PLANNER_MINUS_1` | [e3-one-day-before.html](e3-one-day-before.html) | Berlin tomorrow: ${weatherTitle} |
-| sales | dayOf | `TODO_TRIP_PLANNER_DAY_OF` | [e4-arrival-day.html](e4-arrival-day.html) | Welcome to Berlin - start simple |
+| sales | dayOf | `TODO_TRIP_PLANNER_DAY_OF` | [e4-arrival-day.html](e4-arrival-day.html) | Welcome to Berlin - keep today simple |
 
 ## Notes
 

@@ -2,7 +2,7 @@
 
 Subject: Your Berlin trip plan is ready
 
-Preheader: Arrival date, trip shape, ticket note, and the best tour timing.
+Preheader: Your route shape, first-day note, weather cue, and BerlinWalk timing.
 
 Hi,
 
@@ -13,93 +13,45 @@ Your Berlin trip plan is ready for `${arrivalDate}`.
 Trip length: **${tripLength} days**  
 Arrival point: **${arrivalPoint}**  
 Stay area: **${stayArea}**  
-Interests: **${interests}**
 Pace: **${pace}**
-Planner style: **${tripStyle}**
 
-The first thing to get right is not a giant checklist. It is the shape of the trip:
+The main idea is simple: keep each day around one area, protect your arrival day, and avoid turning Berlin into a cross-city checklist.
 
-- Keep arrival day realistic.
-- Start with one strong orientation layer.
-- Move area by area.
-- Save enough energy for the city to stay enjoyable.
-
-Your tour timing note:
-
-**${recommendedTourDay}**
-
-Suggested calendar hold: **${recommendedTourDate} ${recommendedTourTime}**
-
-Meeting point map: ${meetingPointUrl}
-
-Plan health:
-
-**${planHealth}**
-
-Planner signal:
-
-**${conversionSignal}**
-
-Pre-arrival checklist:
-
-**${preArrivalChecklist}**
-
-Base camp brief:
-
-**${baseBrief}**
-
-Budget pulse:
-
-**${budgetPulse}**
-
-Interest lens:
-
-**${interestLens}**
-
-Pace guard:
-
-**${paceGuard}**
-
-Weather/openings:
-
-**${weatherStrategy}**
-
-Phone carry pack:
-
-**${carryPack}**
-
-Reservation radar:
-
-**${reservationRadar}**
-
-Your planner review:
+Your first read:
 
 **${planAdvice}**
-
-Your day-swap notes:
-
-**${planSwaps}**
 
 Your day rhythm:
 
 **${dayRhythm}**
 
-Your day-by-day logistics snapshot:
+Weather and openings:
 
-**${dayIntelligence}**
+**${weatherStrategy}**
 
-Your daily timing + operating notes:
+Ticket note:
 
-**${dayOperations}**
+**${ticket}**
 
-If you are still choosing a first Berlin activity, this is the clean move:
+Carry on your phone:
+
+**${carryPack}**
+
+Recommended BerlinWalk timing:
+
+**${recommendedTourDay}**
+
+Suggested calendar hold: **${recommendedTourDate} ${recommendedTourTime}**
+
+If that timing works for you, book the free walking tour here:
 
 ${bookingUrl}
 
-The BerlinWalk tour starts at the World Clock at Alexanderplatz and takes about 2 hours. It turns the first central sights into a story before you scatter across Berlin.
+The walk starts at the World Clock in Alexanderplatz and takes about 2 hours. It is the easiest way to give the center of Berlin a story before you use the rest of the trip for Wall history, museums, food, neighborhoods, or slower days.
 
-Useful checks:
+Useful planning checks:
 
+- Meeting point: ${meetingPointUrl}
 - Ticket calculator: ${ticketCalculatorUrl}
 - What's open: ${whatsOpenUrl}
 - Daily budget: ${dailyBudgetUrl}

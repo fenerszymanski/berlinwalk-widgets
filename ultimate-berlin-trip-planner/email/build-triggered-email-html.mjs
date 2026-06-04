@@ -140,7 +140,7 @@ function variableCard(text) {
   return `            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse; background: #FAFAF5; border-left: 5px solid #FFE600;">
               <tr>
                 <td style="padding: 18px 20px;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.65; color: #212121; font-weight: 700;">${inlineMarkdown(text)}</p>
+                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.68; color: #212121; font-weight: 500;">${inlineMarkdown(text)}</p>
                 </td>
               </tr>
             </table>`;
@@ -289,7 +289,7 @@ ${renderBody(parsed.bodyLines)}
               <span style="color: #7CB342;">&nbsp;|&nbsp;</span>
               <a href="${INSTAGRAM_URL}" style="color: #FFE600; text-decoration: none; font-weight: 700;">@berlinwalkingtour</a>
             </p>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;">You are receiving this because you asked for an Ultimate Berlin Trip Planner email from BerlinWalk.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;">You are receiving this because you asked BerlinWalk to send your Berlin trip plan.</p>
           </td>
         </tr>
       </table>
