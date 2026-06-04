@@ -16339,6 +16339,61 @@
     return imageDataUrlPromises[key];
   }
 
+  function loadCroppedImageDataUrl(src, cacheKey, timeoutMs, options) {
+    options = options || {};
+    var key = cacheKey || (src + '-crop-' + (options.width || 400) + 'x' + (options.height || 400));
+    if (imageDataUrlCache[key]) return Promise.resolve(imageDataUrlCache[key]);
+    if (imageDataUrlPromises[key]) return imageDataUrlPromises[key];
+    imageDataUrlPromises[key] = new Promise(function (resolve) {
+      var settled = false;
+      function done(value) {
+        if (settled) return;
+        settled = true;
+        if (value) imageDataUrlCache[key] = value;
+        resolve(value || '');
+      }
+      var image = new Image();
+      image.crossOrigin = 'anonymous';
+      image.onload = function () {
+        try {
+          var targetW = options.width || 420;
+          var targetH = options.height || 420;
+          var naturalW = image.naturalWidth || image.width;
+          var naturalH = image.naturalHeight || image.height;
+          var targetRatio = targetW / targetH;
+          var sourceRatio = naturalW / naturalH;
+          var sw = naturalW;
+          var sh = naturalH;
+          var sx = 0;
+          var sy = 0;
+          if (sourceRatio > targetRatio) {
+            sw = naturalH * targetRatio;
+            sx = (naturalW - sw) * (typeof options.focusX === 'number' ? options.focusX : 0.5);
+          } else {
+            sh = naturalW / targetRatio;
+            sy = (naturalH - sh) * (typeof options.focusY === 'number' ? options.focusY : 0.38);
+          }
+          var canvas = document.createElement('canvas');
+          canvas.width = targetW;
+          canvas.height = targetH;
+          var context = canvas.getContext('2d');
+          context.drawImage(image, sx, sy, sw, sh, 0, 0, targetW, targetH);
+          done(canvas.toDataURL('image/jpeg', options.quality || 0.84));
+        } catch (error) {
+          done('');
+        }
+      };
+      image.onerror = function () {
+        done('');
+      };
+      image.src = assetUrl(src);
+      window.setTimeout(function () {
+        done('');
+      }, timeoutMs || 2500);
+    });
+    return imageDataUrlPromises[key];
+  }
+
   function loadDayPhotoDataUrls(plan) {
     var result = {};
     var types = {};
@@ -16350,6 +16405,28 @@
       return loadImageDataUrl(types[type].src, 'day-photo-' + type, 2500).then(function (dataUrl) {
         result[type] = dataUrl;
       });
+    })).then(function () {
+      return result;
+    });
+  }
+
+  function loadPdfDayPhotoDataUrls(plan) {
+    var result = { hero: {}, glance: {} };
+    var types = {};
+    (plan.days || []).forEach(function (day) {
+      var type = dayVisualType(day);
+      types[type] = dayPhotoForType(type);
+    });
+    return Promise.all(Object.keys(types).map(function (type) {
+      var src = types[type].src;
+      return Promise.all([
+        loadCroppedImageDataUrl(src, 'pdf-day-hero-' + type, 2500, { width: 620, height: 340, quality: 0.86 }).then(function (dataUrl) {
+          result.hero[type] = dataUrl;
+        }),
+        loadCroppedImageDataUrl(src, 'pdf-day-glance-' + type, 2500, { width: 720, height: 220, quality: 0.86 }).then(function (dataUrl) {
+          result.glance[type] = dataUrl;
+        })
+      ]);
     })).then(function () {
       return result;
     });
@@ -17447,8 +17524,8 @@
     });
     setPdfDebug('load-assets');
     var logoData = await loadBwLogoDataUrl();
-    var yusufData = await loadImageDataUrl(YUSUF_GUIDE_PHOTO_URL, 'pdf-yusuf-guide', 2500);
-    var dayPhotoData = await loadDayPhotoDataUrls(plan);
+    var yusufData = await loadCroppedImageDataUrl(YUSUF_GUIDE_PHOTO_URL, 'pdf-yusuf-guide-portrait', 2500, { width: 360, height: 460, focusY: 0.28, quality: 0.86 });
+    var dayPhotoData = await loadPdfDayPhotoDataUrls(plan);
     setPdfDebug('create-doc');
     var doc = new Api({ unit: 'pt', format: 'a4' });
     var pageW = doc.internal.pageSize.getWidth();
@@ -17588,13 +17665,18 @@
       return dayVisualType(day);
     }
 
-    function drawPhoto(day, x, yy, w, h) {
+    function drawCenteredText(text, cx, cy, size, style, color) {
+      setFont(size, style || 'bold', color || textColor);
+      doc.text(String(text || ''), cx, cy + size * 0.34, { align: 'center' });
+    }
+
+    function drawPhoto(day, x, yy, w, h, variant) {
       var type = dayPhotoType(day);
       var bg = rgbFromHexLocal(day && day.bg, soft);
       fill(bg);
       stroke(border);
       doc.roundedRect(x, yy, w, h, 8, 8, 'FD');
-      var dataUrl = dayPhotoData[type] || '';
+      var dataUrl = (dayPhotoData[variant || 'hero'] && dayPhotoData[variant || 'hero'][type]) || '';
       if (dataUrl) {
         try {
           doc.addImage(dataUrl, 'JPEG', x, yy, w, h);
@@ -17632,29 +17714,37 @@
 
       y = 174;
       var first = plan.days[0];
-      var heroH = 122;
+      var heroH = 150;
+      var photoW = 166;
+      var photoH = 92;
+      var photoX = margin + contentW - photoW - 18;
+      var textX = margin + 18;
+      var textW = photoX - textX - 22;
       fill([255, 255, 255]);
       stroke(border);
       doc.roundedRect(margin, y, contentW, heroH, 10, 10, 'FD');
-      if (first) drawPhoto(first, margin + contentW - 188, y + 16, 160, 88);
-      setFont(14, 'bold', green);
-      doc.text(plan.title, margin + 18, y + 30);
-      drawText(plan.summary, margin + 18, y + 50, contentW - 230, 9.5, 'normal', muted, 4);
-      var statY = y + 88;
+      if (first) drawPhoto(first, photoX, y + 20, photoW, photoH, 'hero');
+      var titleUsed = drawText(plan.title, textX, y + 30, textW, 14, 'bold', green, 2);
+      var coverSummary = safeText(plan.summary, '').replace(/\s+It also\b.*$/i, '').trim();
+      if (coverSummary && !/[.!?]$/.test(coverSummary)) coverSummary += '.';
+      var summaryUsed = drawText(coverSummary, textX, y + 30 + titleUsed + 4, textW, 9.2, 'normal', muted, 3);
+      var statY = Math.max(y + 102, y + 30 + titleUsed + summaryUsed + 16);
+      if (statY + 24 > y + heroH - 12) statY = y + heroH - 36;
+      var statW = (textW - 16) / 3;
       [
         { label: 'Arrival', value: labels.arrivalTime },
         { label: 'Start', value: labels.arrivalPoint },
         { label: 'Pace', value: labels.pace }
       ].forEach(function (item, index) {
-        var w = 118;
-        var x = margin + 18 + index * (w + 8);
+        var w = statW;
+        var x = textX + index * (w + 8);
         fill(soft);
         stroke(border);
-        doc.roundedRect(x, statY, w, 22, 6, 6, 'FD');
+        doc.roundedRect(x, statY, w, 24, 6, 6, 'FD');
         setFont(6.4, 'bold', muted);
         doc.text(item.label.toUpperCase(), x + 8, statY + 9);
         setFont(7.6, 'bold', green);
-        doc.text(split(item.value, w - 16, 7.6, 'bold').slice(0, 1), x + 8, statY + 18);
+        doc.text(split(item.value, w - 16, 7.6, 'bold').slice(0, 1), x + 8, statY + 19);
       });
       y += heroH + 22;
     }
@@ -17666,7 +17756,10 @@
       var storyDays = aiVisibleDayStories(plan, storyByDay);
       var introH = textHeight(intro, contentW - 100, 9.2, 'normal', 5);
       var storyCount = Math.min(3, storyDays.length);
-      var cardH = 126 + introH + storyCount * 46 + (weather || tour ? 44 : 0);
+      var storyCardH = 54;
+      var storyGap = 10;
+      var asideH = 48;
+      var cardH = 126 + introH + storyCount * (storyCardH + storyGap) + (weather || tour ? asideH + 18 : 0);
       ensure(cardH + 10);
       var top = y;
       fill([255, 255, 255]);
@@ -17676,7 +17769,7 @@
       doc.roundedRect(margin, top, 7, cardH, 4, 4, 'F');
       if (yusufData) {
         try {
-          doc.addImage(yusufData, 'JPEG', margin + 18, top + 18, 38, 38);
+          doc.addImage(yusufData, 'JPEG', margin + 18, top + 17, 38, 49);
         } catch (error) {}
       } else {
         fill(soft);
@@ -17701,15 +17794,14 @@
         if (!story) return;
         fill([255, 255, 255]);
         stroke([184, 215, 250]);
-        doc.roundedRect(margin + 16, y, contentW - 32, 38, 8, 8, 'FD');
+        doc.roundedRect(margin + 16, y, contentW - 32, storyCardH, 8, 8, 'FD');
         fill(lightBlue);
-        doc.roundedRect(margin + 28, y + 8, 28, 22, 6, 6, 'F');
-        setFont(7.8, 'bold', blue);
-        doc.text('D' + day.dayNumber, margin + 36, y + 22);
+        doc.roundedRect(margin + 28, y + 12, 28, 26, 6, 6, 'F');
+        drawCenteredText('D' + day.dayNumber, margin + 42, y + 25, 7.8, 'bold', blue);
         setFont(8.8, 'bold', green);
-        doc.text(split(day.theme || day.title, 150, 8.8, 'bold').slice(0, 1), margin + 68, y + 15);
-        drawText(story, margin + 68, y + 27, contentW - 100, 7.8, 'normal', muted, 2);
-        y += 46;
+        doc.text(split(day.theme || day.title, 150, 8.8, 'bold').slice(0, 1), margin + 68, y + 18);
+        drawText(story, margin + 68, y + 32, contentW - 100, 7.7, 'normal', muted, 2);
+        y += storyCardH + storyGap;
       });
       if (weather || tour) {
         var half = (contentW - 40) / 2;
@@ -17720,12 +17812,12 @@
           var x = margin + 16 + index * (half + 8);
           fill(lightBlue);
           stroke([184, 215, 250]);
-          doc.roundedRect(x, y, half, 34, 7, 7, 'FD');
+          doc.roundedRect(x, y, half, asideH, 7, 7, 'FD');
           setFont(6.8, 'bold', blue);
-          doc.text(item.label.toUpperCase(), x + 9, y + 12);
-          drawText(item.value, x + 9, y + 24, half - 18, 7.3, 'normal', muted, 2);
+          doc.text(item.label.toUpperCase(), x + 9, y + 13);
+          drawText(item.value, x + 9, y + 28, half - 18, 7.3, 'normal', muted, 2);
         });
-        y += 42;
+        y += asideH + 10;
       }
       y = top + cardH + 16;
     }
@@ -17733,7 +17825,7 @@
     function drawPlanGlance() {
       var gap = 10;
       var cardW = (contentW - gap) / 2;
-      var cardH = 116;
+      var cardH = 148;
       ensure(66 + cardH);
       sectionTitle('Plan at a glance', 'A visual index of the full itinerary. Each card links the theme, date, and main stops.', 'Index');
       plan.days.forEach(function (day, index) {
@@ -17741,26 +17833,31 @@
         var x = margin + (index % 2) * (cardW + gap);
         var cardY = y;
         var accent = rgbFromHexLocal(day.accent, green);
+        var imageX = x + 14;
+        var imageY = cardY + 12;
+        var imageW = cardW - 28;
+        var imageH = 58;
+        var badgeCx = imageX + 22;
+        var badgeCy = imageY + imageH - 16;
+        var daySlot = tourSlotForDay(day, plan);
         fill([255, 255, 255]);
         stroke(border);
         doc.roundedRect(x, cardY, cardW, cardH, 9, 9, 'FD');
         fill(accent);
         doc.roundedRect(x, cardY, 6, cardH, 3, 3, 'F');
-        drawPhoto(day, x + 14, cardY + 12, cardW - 28, 45);
+        drawPhoto(day, imageX, imageY, imageW, imageH, 'glance');
         fill(accent);
         stroke([255, 255, 255]);
-        doc.circle(x + 32, cardY + 58, 14, 'FD');
-        setFont(7.5, 'bold', [255, 255, 255]);
-        doc.text('D' + day.dayNumber, x + 24, cardY + 61);
+        doc.circle(badgeCx, badgeCy, 14, 'FD');
+        drawCenteredText('D' + day.dayNumber, badgeCx, badgeCy, 7.5, 'bold', [255, 255, 255]);
         setFont(7.2, 'bold', accent);
-        doc.text(split(day.theme || day.title, cardW - 28, 7.2, 'bold').slice(0, 2), x + 14, cardY + 74);
+        doc.text(split(day.theme || day.title, daySlot ? cardW - 102 : cardW - 28, 7.2, 'bold').slice(0, 2), x + 14, cardY + 88);
         setFont(8.4, 'bold', textColor);
-        doc.text(formatDisplayDate(day.dateKey), x + 14, cardY + 93);
+        doc.text(formatDisplayDate(day.dateKey), x + 14, cardY + 112);
         setFont(7.2, 'normal', muted);
         var anchors = dayMapLinks(day).slice(0, 3).map(function (link) { return link.label; }).join(' / ');
-        doc.text(split(anchors || dayVisualDetail(day, dayVisualType(day)), cardW - 28, 7.2, 'normal').slice(0, 2), x + 14, cardY + 106);
-        var daySlot = tourSlotForDay(day, plan);
-        if (daySlot) pill('Tour ' + daySlot.startLabel, x + cardW - 77, cardY + 63, { bg: yellow, border: [239, 230, 163], color: green, size: 6.8, maxWidth: 68, height: 15 });
+        doc.text(split(anchors || dayVisualDetail(day, dayVisualType(day)), cardW - 28, 7.2, 'normal').slice(0, 2), x + 14, cardY + 129);
+        if (daySlot) pill('Tour ' + daySlot.startLabel, x + cardW - 77, cardY + 84, { bg: yellow, border: [239, 230, 163], color: green, size: 6.8, maxWidth: 68, height: 15 });
         if (index % 2 === 1 || index === plan.days.length - 1) y += cardH + 12;
       });
       y += 2;
@@ -17836,11 +17933,9 @@
       fill([255, 255, 255]);
       stroke(border);
       doc.roundedRect(margin + 18, top + 18, 48, 46, 8, 8, 'FD');
-      setFont(7.6, 'bold', green);
-      doc.text('DAY', margin + 29, top + 36);
-      setFont(11.4, 'bold', green);
-      doc.text(String(day.dayNumber), margin + 37, top + 52);
-      drawPhoto(day, pageW - margin - 126, top + 16, 106, 58);
+      drawCenteredText('DAY', margin + 42, top + 32, 7.6, 'bold', green);
+      drawCenteredText(String(day.dayNumber), margin + 42, top + 51, 11.4, 'bold', green);
+      drawPhoto(day, pageW - margin - 126, top + 16, 106, 58, 'hero');
       setFont(13, 'bold', green);
       doc.text(split(day.title, contentW - 210, 13, 'bold').slice(0, 2), margin + 80, top + 30);
       setFont(8.4, 'normal', muted);
@@ -17883,7 +17978,7 @@
       setFont(16, 'bold', yellow);
       doc.text('After the itinerary', margin + 18, y + 23);
       drawText('Save these maps, shopping backups, and Berlin essentials for the moments when plans change.', margin + 18, y + 41, contentW - 36, 8.4, 'normal', [255, 255, 255], 2);
-      y += 74;
+      y += 92;
     }
 
     function drawResourceGrid(title, subtitle, items, options) {
@@ -17912,7 +18007,7 @@
         drawLink(options.action || 'Open map', url, x + 14, cardY + cardH - 8, cardW - 28, 7.2);
         if (index % 2 === 1 || index === items.length - 1) y += cardH + 9;
       });
-      y += 4;
+      y += options.afterGap || 18;
     }
 
     function drawEssentials() {
@@ -17952,8 +18047,8 @@
     });
     setPdfDebug('resources');
     drawAfterDivider();
-    drawResourceGrid('Berlin public transport maps', 'Official BVG/VBB PDFs for BER, night routes, trams, and Potsdam days.', TRANSPORT_MAPS, { label: 'Map', action: 'Open PDF', tag: 'Maps', cardH: 78 });
-    drawResourceGrid('Shopping backups', 'Weather-friendly malls, courtyards, classic shopping streets, and the nearby outlet option.', SHOPPING_GROUPS, { label: 'Place', action: 'Open in Google Maps', tag: 'Backup', cardH: 84 });
+    drawResourceGrid('Berlin public transport maps', 'Official BVG/VBB PDFs for BER, night routes, trams, and Potsdam days.', TRANSPORT_MAPS, { label: 'Map', action: 'Open PDF', tag: 'Maps', cardH: 78, afterGap: 22 });
+    drawResourceGrid('Shopping backups', 'Weather-friendly malls, courtyards, classic shopping streets, and the nearby outlet option.', SHOPPING_GROUPS, { label: 'Place', action: 'Open in Google Maps', tag: 'Backup', cardH: 84, afterGap: 40 });
     drawEssentials();
 
     setPdfDebug('footer-save');

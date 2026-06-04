@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-04 — Codex (Ultimate PDF screenshot fixes)
+
+**Did:** Applied Yusuf's screenshot feedback to the polished Ultimate planner PDF and rechecked the rendered output.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added cropped PDF image helpers so Yusuf portrait/day art keep natural proportions, widened the cover guide card, centered PDF day badges, improved note-card padding, fixed the cover summary double-period edge case, and increased spacing before resource sections, including `Shopping backups` → `Berlin essentials`.
+- `output/qa/ultimate-trip-planner-pdf/ultimate-trip-plan-polished-2026-06-12-spacing-fix-v3.pdf` and `output/qa/ultimate-trip-planner-pdf/rendered-spacing-fix-v3/` — latest 8-page PDF visual QA evidence.
+
+**Opened:** Widget PDF copy/design can still be reviewed by Yusuf, but the screenshot-specific layout issues are addressed locally.
+**Closed:** Inline script parse passed; `launch-audit.mjs` passed `152 pass, 0 warn, 0 block`; browser PDF export produced a complete `%%EOF` PDF and PyMuPDF rendered 8 pages. Visual QA checked page 1 cover/Yusuf note, page 2 Plan at a glance, page 3 day header, page 7 After the itinerary spacing, and page 8 Shopping backups → Berlin essentials spacing.
+
+**Next session should:** If Yusuf approves the PDF direction, move to email template copy/layout updates; otherwise continue PDF polish from the rendered `spacing-fix-v3` evidence.
+
 ## 2026-06-03 — Codex (Ultimate polished PDF pass)
 
 **Did:** Rebuilt the Ultimate planner PDF export into the current widget flow and fixed runtime/layout issues found during local browser QA.
