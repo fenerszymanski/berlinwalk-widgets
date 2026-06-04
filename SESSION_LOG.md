@@ -4,6 +4,22 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-03 — Codex (Ultimate polished PDF pass)
+
+**Did:** Rebuilt the Ultimate planner PDF export into the current widget flow and fixed runtime/layout issues found during local browser QA.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added polished PDF export with BerlinWalk logo, Yusuf note, Plan at a glance, daily weather chips, per-step map links, full-day route buttons, After the itinerary resources, and a simple `?pdf=simple` fallback.
+- `ultimate-berlin-trip-planner/index.html` — isolated the old long PDF generator as `legacyDownloadPdf`, added DOM-based PDF debug hooks for QA, fixed missing hex-color helper, fixed orphan/overlap around Plan at a glance, and increased resource card spacing.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated the active PDF-path audit for the new clean wrapper.
+- `output/qa/ultimate-trip-planner-pdf/ultimate-trip-plan-polished-2026-06-12-resource-fix.pdf` and `output/qa/ultimate-trip-planner-pdf/rendered-resource-fix/` — 8-page rendered PDF QA evidence.
+- `output/qa/ultimate-trip-planner-prepublish-gate/prepublish-gate-2026-06-03T23-00-24-247Z.json` — latest Velo gate evidence.
+
+**Opened:** Email template copy/design is still the next phase; live Wix paste/publish is not done in this pass.
+**Closed:** Inline script parse passed; `launch-audit.mjs` passed `152 pass, 0 warn, 0 block`; Velo prepublish gate passed `13 pass`; browser QA showed PDF reaches `saved`, extracted full PDF renders to 8 pages, logo appears, route links are readable, and resource/essentials pages no longer overlap.
+
+**Next session should:** Review the final rendered PDF with Yusuf, then move to triggered-email copy/layout updates to match the simplified widget and polished PDF.
+
 ## 2026-06-03 — Codex (Homepage tools width fix)
 
 **Did:** Fixed the `<bw-tools-home>` section so Wix's shifted intermediate-width wrapper no longer cuts the section off-screen.

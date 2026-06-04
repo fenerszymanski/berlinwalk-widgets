@@ -278,8 +278,14 @@ function run() {
   const aiHtmlSource = indexHtml.slice(indexHtml.indexOf('function aiEnhancementHtml'), indexHtml.indexOf('function renderAiEnhancement'));
   const aiRequestStart = indexHtml.indexOf('function requestAiEnhancement');
   const aiRequestSource = indexHtml.slice(aiRequestStart, indexHtml.indexOf('function unlock', aiRequestStart));
-  const downloadSimplePdfSource = indexHtml.slice(indexHtml.indexOf('async function downloadSimplePdf'), indexHtml.indexOf('async function downloadPdf'));
-  const printPlanSource = indexHtml.slice(indexHtml.indexOf('function printPlan()'), indexHtml.indexOf('function initFromParams'));
+  const downloadSimplePdfStart = indexHtml.indexOf('async function downloadSimplePdf');
+  const downloadPolishedPdfStart = indexHtml.indexOf('async function downloadPolishedPdf');
+  const downloadPdfStart = indexHtml.indexOf('async function downloadPdf');
+  const printPlanStart = indexHtml.indexOf('function printPlan()');
+  const downloadSimplePdfSource = indexHtml.slice(downloadSimplePdfStart, downloadPolishedPdfStart);
+  const downloadPolishedPdfSource = indexHtml.slice(downloadPolishedPdfStart, downloadPdfStart);
+  const downloadPdfSource = indexHtml.slice(downloadPdfStart, printPlanStart);
+  const printPlanSource = indexHtml.slice(printPlanStart, indexHtml.indexOf('function initFromParams'));
   const firstDayBlockCopies = [...firstDayBlocksSource.matchAll(/'([^']{20,})'/g)]
     .map((match) => match[1])
     .filter((copy) => /^[A-Z]/.test(copy) && !/^Get central|^Use the tour|^Dinner/.test(copy));
@@ -864,9 +870,12 @@ function run() {
     'forceLeadError/qaUnlock/resetUnlock must not work on live domains.'
   );
   block(
-    'PDF itinerary overview exists',
-    /function\s+drawItineraryOverviewPage/.test(indexHtml) && /ITINERARY OVERVIEW/.test(indexHtml),
-    'Expected the dedicated PDF overview page.'
+    'Polished PDF itinerary overview exists',
+    /async function\s+downloadPolishedPdf/.test(indexHtml) &&
+      /function\s+drawPlanGlance/.test(downloadPolishedPdfSource) &&
+      /Plan at a glance/.test(downloadPolishedPdfSource) &&
+      /drawPlanGlance\(\);[\s\S]*doc\.addPage\(\);[\s\S]*Day-by-day itinerary/.test(downloadPolishedPdfSource),
+    'Expected the active polished PDF to include a visual Plan at a glance before the daily cards.'
   );
   block(
     'Day-end closers stay short and separate',
@@ -915,9 +924,9 @@ function run() {
       /Open map:/.test(indexHtml) &&
       /blockMapLinksHtml\(day,\s*block,\s*index\)/.test(indexHtml) &&
       /dayMapPackItems\(day\)\.forEach/.test(indexHtml) &&
-      /function\s+drawPdfMapPack/.test(indexHtml) &&
-      /function\s+drawDayCard[\s\S]*var\s+mapPack\s*=\s*dayMapPackItems\(day\)/.test(indexHtml) &&
-      /drawPdfMapPack\(mapPack,\s*day,\s*mapPackH,\s*accent\)/.test(indexHtml) &&
+      /function\s+drawDayStep/.test(downloadPolishedPdfSource) &&
+      /var\s+links\s*=\s*blockMapLinks\(day,\s*block,\s*index\)/.test(downloadPolishedPdfSource) &&
+      /Open map:/.test(downloadPolishedPdfSource) &&
       /Google Maps route:/.test(indexHtml) &&
       !/Google Maps pack/.test(indexHtml) &&
       !/Place:\s*'\s*\+\s*link\.label/.test(indexHtml),
@@ -1104,21 +1113,24 @@ function run() {
       /data-shopping-panel/.test(indexHtml) &&
       /function\s+renderTransportMaps/.test(indexHtml) &&
       /function\s+renderShoppingPanel/.test(indexHtml) &&
-      /resourceSection\('Berlin public transport maps'/.test(downloadSimplePdfSource) &&
-      /resourceSection\('Shopping notes'/.test(downloadSimplePdfSource) &&
+      /drawResourceGrid\('Berlin public transport maps'/.test(downloadPolishedPdfSource) &&
+      /drawResourceGrid\('Shopping backups'/.test(downloadPolishedPdfSource) &&
       /transportHtml\s*=\s*TRANSPORT_MAPS\.map/.test(printPlanSource) &&
       /shoppingHtml\s*=\s*SHOPPING_GROUPS\.map/.test(printPlanSource),
     'Expected full-plan UI, PDF, print, and text export to include transport PDFs plus shopping/outlet guidance.'
   );
   block(
-    'Simple PDF logo and day headers avoid overlap',
+    'PDF logo and day headers avoid overlap',
     /var\s+logoW\s*=\s*140/.test(downloadSimplePdfSource) &&
       /logoY\s*=\s*24/.test(downloadSimplePdfSource) &&
       /var\s+imageH\s*=\s*imageW\s*\*\s*450\s*\/\s*1080/.test(downloadSimplePdfSource) &&
       /logoY\s*\+\s*\(logoH\s*-\s*imageH\)\s*\/\s*2/.test(downloadSimplePdfSource) &&
       /var\s+titleLines\s*=\s*doc\.splitTextToSize\(day\.title/.test(downloadSimplePdfSource) &&
-      /var\s+headerH\s*=\s*Math\.max\(58,\s*32\s*\+\s*titleLines\.length\s*\*\s*15\)/.test(downloadSimplePdfSource),
-    'Expected the active simple PDF to center the BerlinWalk logo and size day headers from wrapped title text.'
+      /var\s+headerH\s*=\s*Math\.max\(58,\s*32\s*\+\s*titleLines\.length\s*\*\s*15\)/.test(downloadSimplePdfSource) &&
+      /function\s+drawBrandLogo/.test(downloadPolishedPdfSource) &&
+      /function\s+drawDay\(day\)/.test(downloadPolishedPdfSource) &&
+      /doc\.text\(split\(day\.title/.test(downloadPolishedPdfSource),
+    'Expected the fallback simple PDF and active polished PDF to size logo/title areas instead of overlapping text.'
   );
   block(
     'Trip style presets reduce form friction',
@@ -1186,15 +1198,22 @@ function run() {
     'Expected a visual Start/Tour/Finish layer above the itinerary overview.'
   );
   block(
-    'Simple V2 exports stay focused',
+    'Polished PDF export stays focused',
     /function\s+downloadSimplePdf/.test(indexHtml) &&
-      /await\s+downloadSimplePdf\(api\);\s*return;/.test(indexHtml) &&
-      /format:\s*'simple_v2'/.test(indexHtml) &&
-      /BERLINWALK|berlinwalk\.com/.test(downloadSimplePdfSource) &&
-      /Berlin essentials/.test(indexHtml) &&
-      !/sectionTitle\('Optional guided walk'/.test(downloadSimplePdfSource) &&
+      /async function\s+downloadPolishedPdf/.test(indexHtml) &&
+      /async function\s+legacyDownloadPdf/.test(indexHtml) &&
+      /pdfParams\.get\('pdf'\)\s*===\s*'simple'/.test(downloadPdfSource) &&
+      /await\s+downloadPolishedPdf\(api\);/.test(downloadPdfSource) &&
+      /pdf_exception/.test(downloadPdfSource) &&
+      /format:\s*'polished_v1'/.test(downloadPolishedPdfSource) &&
+      /Your Local Guide Yusuf/.test(downloadPolishedPdfSource) &&
+      /Plan at a glance/.test(downloadPolishedPdfSource) &&
+      /Day-by-day itinerary/.test(downloadPolishedPdfSource) &&
+      /After the itinerary/.test(downloadPolishedPdfSource) &&
+      /Berlin essentials/.test(downloadPolishedPdfSource) &&
+      !/sectionTitle\('Optional guided walk'/.test(downloadPolishedPdfSource) &&
       !/simpleTourHtml/.test(printPlanSource),
-    'Expected the active PDF/print path to use the simplified day-by-day export; tour guidance should appear naturally inside day blocks.'
+    'Expected the active PDF path to use the polished document export while keeping the simple PDF as an explicit QA fallback.'
   );
   block(
     'Trip radar gives a visual plan health summary',

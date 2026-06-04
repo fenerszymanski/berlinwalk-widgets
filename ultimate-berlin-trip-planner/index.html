@@ -16255,6 +16255,17 @@
     setText('[data-action-status]', message || '');
   }
 
+  function setPdfDebug(stage, detail) {
+    try {
+      window.__tripPlannerPdfStage = stage || '';
+      if (typeof detail !== 'undefined') window.__tripPlannerPdfError = detail || '';
+      if (root) {
+        root.setAttribute('data-pdf-stage', stage || '');
+        if (typeof detail !== 'undefined') root.setAttribute('data-pdf-error', detail || '');
+      }
+    } catch (error) {}
+  }
+
   function loadBwLogoDataUrl() {
     if (bwLogoDataUrl) return Promise.resolve(bwLogoDataUrl);
     if (bwLogoPromise) return bwLogoPromise;
@@ -17423,7 +17434,564 @@
     track('bw_trip_planner_pdf_download', { success: true, format: 'simple_v2', trip_length: state.tripLength });
   }
 
-  async function downloadPdf() {
+  async function downloadPolishedPdf(Api) {
+    setPdfDebug('start', '');
+    var plan = latestPlan || buildPlan();
+    ensureDailyWeatherForPlan(plan);
+    var labels = selectedLabels();
+    var slot = tourSlotForPlan(plan);
+    var guide = aiEnhancement || localGuideFallback(plan, 'pdf_fallback', {});
+    var storyByDay = {};
+    (guide.dayStories || []).forEach(function (item) {
+      storyByDay[item.dayNumber] = item.text;
+    });
+    setPdfDebug('load-assets');
+    var logoData = await loadBwLogoDataUrl();
+    var yusufData = await loadImageDataUrl(YUSUF_GUIDE_PHOTO_URL, 'pdf-yusuf-guide', 2500);
+    var dayPhotoData = await loadDayPhotoDataUrls(plan);
+    setPdfDebug('create-doc');
+    var doc = new Api({ unit: 'pt', format: 'a4' });
+    var pageW = doc.internal.pageSize.getWidth();
+    var pageH = doc.internal.pageSize.getHeight();
+    var margin = 40;
+    var contentW = pageW - margin * 2;
+    var y = 42;
+    var green = [27, 94, 32];
+    var darkGreen = [12, 68, 28];
+    var yellow = [255, 230, 0];
+    var cream = [250, 250, 245];
+    var soft = [242, 248, 232];
+    var border = [220, 232, 200];
+    var blue = [23, 76, 138];
+    var lightBlue = [234, 244, 255];
+    var textColor = [33, 33, 33];
+    var muted = [78, 90, 78];
+    var footerY = pageH - 28;
+
+    function setTextColor(c) {
+      doc.setTextColor(c[0], c[1], c[2]);
+    }
+
+    function fill(c) {
+      doc.setFillColor(c[0], c[1], c[2]);
+    }
+
+    function stroke(c) {
+      doc.setDrawColor(c[0], c[1], c[2]);
+    }
+
+    function rgbFromHexLocal(hex, fallback) {
+      var clean = String(hex || '').replace('#', '').trim();
+      if (clean.length === 3) {
+        clean = clean.split('').map(function (char) { return char + char; }).join('');
+      }
+      if (!/^[0-9a-fA-F]{6}$/.test(clean)) return fallback || green;
+      return [
+        parseInt(clean.slice(0, 2), 16),
+        parseInt(clean.slice(2, 4), 16),
+        parseInt(clean.slice(4, 6), 16)
+      ];
+    }
+
+    function setFont(size, style, color) {
+      doc.setFont('helvetica', style || 'normal');
+      doc.setFontSize(size);
+      setTextColor(color || textColor);
+    }
+
+    function split(value, width, size, style) {
+      setFont(size, style || 'normal', textColor);
+      return doc.splitTextToSize(String(value || ''), width);
+    }
+
+    function lineHeight(size) {
+      return size + 3.5;
+    }
+
+    function textHeight(value, width, size, style, maxLines) {
+      var lines = split(value, width, size, style);
+      if (maxLines) lines = lines.slice(0, maxLines);
+      return Math.max(lineHeight(size), lines.length * lineHeight(size));
+    }
+
+    function drawText(value, x, yy, width, size, style, color, maxLines) {
+      var lines = split(value, width, size, style);
+      if (maxLines) lines = lines.slice(0, maxLines);
+      setFont(size, style || 'normal', color || textColor);
+      doc.text(lines, x, yy);
+      return lines.length * lineHeight(size);
+    }
+
+    function nextPage() {
+      doc.addPage();
+      y = 42;
+    }
+
+    function ensure(space) {
+      if (y + space > footerY - 12) nextPage();
+    }
+
+    function safeText(value, fallback) {
+      return String(value || fallback || '').trim();
+    }
+
+    function drawBrandLogo(x, yy, w) {
+      var h = w * 450 / 1080;
+      if (logoData) {
+        try {
+          doc.addImage(logoData, 'PNG', x, yy, w, h);
+          return h;
+        } catch (error) {}
+      }
+      fill([255, 255, 255]);
+      stroke(border);
+      doc.roundedRect(x, yy, w, h, 4, 4, 'FD');
+      setFont(10, 'bold', green);
+      doc.text('BerlinWalk', x + 10, yy + h / 2 + 3);
+      return h;
+    }
+
+    function pill(label, x, yy, options) {
+      options = options || {};
+      setFont(options.size || 7.5, 'bold', options.color || green);
+      var text = String(label || '').slice(0, 42);
+      var w = Math.min(options.maxWidth || 170, doc.getTextWidth(text) + 17);
+      fill(options.bg || [255, 255, 255]);
+      stroke(options.border || border);
+      doc.roundedRect(x, yy, w, options.height || 17, 8, 8, 'FD');
+      setFont(options.size || 7.5, 'bold', options.color || green);
+      doc.text(text, x + 8, yy + (options.height || 17) - 5.6);
+      return w;
+    }
+
+    function drawLink(label, url, x, yy, width, size) {
+      setFont(size || 8, 'bold', blue);
+      var lines = split(label, width, size || 8, 'bold').slice(0, 1);
+      if (doc.textWithLink && url) doc.textWithLink(lines[0], x, yy, { url: url });
+      else doc.text(lines, x, yy);
+    }
+
+    function sectionTitle(title, subtitle, tag) {
+      ensure(subtitle ? 54 : 36);
+      setFont(16, 'bold', green);
+      doc.text(title, margin, y);
+      if (tag) pill(tag, pageW - margin - 110, y - 12, { bg: green, border: green, color: yellow, maxWidth: 110 });
+      y += 17;
+      if (subtitle) {
+        y += drawText(subtitle, margin, y, contentW, 8.8, 'normal', muted, 2) + 8;
+      } else {
+        y += 8;
+      }
+    }
+
+    function dayPhotoType(day) {
+      return dayVisualType(day);
+    }
+
+    function drawPhoto(day, x, yy, w, h) {
+      var type = dayPhotoType(day);
+      var bg = rgbFromHexLocal(day && day.bg, soft);
+      fill(bg);
+      stroke(border);
+      doc.roundedRect(x, yy, w, h, 8, 8, 'FD');
+      var dataUrl = dayPhotoData[type] || '';
+      if (dataUrl) {
+        try {
+          doc.addImage(dataUrl, 'JPEG', x, yy, w, h);
+        } catch (error) {
+          dataUrl = '';
+        }
+      }
+      if (!dataUrl) {
+        fill(rgbFromHexLocal(day && day.accent, green));
+        doc.roundedRect(x + w - 38, yy + h - 32, 28, 24, 6, 6, 'F');
+        setFont(8, 'bold', [255, 255, 255]);
+        doc.text('D' + ((day && day.dayNumber) || ''), x + w - 31, yy + h - 17);
+      }
+      stroke(border);
+      doc.roundedRect(x, yy, w, h, 8, 8, 'S');
+    }
+
+    function drawCover() {
+      fill(green);
+      doc.rect(0, 0, pageW, 150, 'F');
+      fill(yellow);
+      doc.rect(0, 146, pageW, 4, 'F');
+      drawBrandLogo(pageW - margin - 128, 27, 128);
+      setFont(8.5, 'bold', yellow);
+      doc.text('BERLINWALK LOCAL PLANNER', margin, 40);
+      setFont(28, 'bold', [255, 255, 255]);
+      doc.text('Ultimate Berlin Trip Plan', margin, 73);
+      setFont(10.5, 'normal', [221, 239, 199]);
+      doc.text(plan.displayDate + ' | ' + labels.tripLength + ' | ' + labels.stayArea, margin, 100);
+      var tourCopy = slot && slot.insideTrip
+        ? 'Recommended BerlinWalk: ' + slot.dayLabel + ' at ' + slot.startLabel + '.'
+        : 'Built around daily areas, weather, maps, and Berlin essentials.';
+      setFont(9.5, 'normal', [255, 255, 255]);
+      doc.text(doc.splitTextToSize(tourCopy, contentW - 160), margin, 124);
+
+      y = 174;
+      var first = plan.days[0];
+      var heroH = 122;
+      fill([255, 255, 255]);
+      stroke(border);
+      doc.roundedRect(margin, y, contentW, heroH, 10, 10, 'FD');
+      if (first) drawPhoto(first, margin + contentW - 188, y + 16, 160, 88);
+      setFont(14, 'bold', green);
+      doc.text(plan.title, margin + 18, y + 30);
+      drawText(plan.summary, margin + 18, y + 50, contentW - 230, 9.5, 'normal', muted, 4);
+      var statY = y + 88;
+      [
+        { label: 'Arrival', value: labels.arrivalTime },
+        { label: 'Start', value: labels.arrivalPoint },
+        { label: 'Pace', value: labels.pace }
+      ].forEach(function (item, index) {
+        var w = 118;
+        var x = margin + 18 + index * (w + 8);
+        fill(soft);
+        stroke(border);
+        doc.roundedRect(x, statY, w, 22, 6, 6, 'FD');
+        setFont(6.4, 'bold', muted);
+        doc.text(item.label.toUpperCase(), x + 8, statY + 9);
+        setFont(7.6, 'bold', green);
+        doc.text(split(item.value, w - 16, 7.6, 'bold').slice(0, 1), x + 8, statY + 18);
+      });
+      y += heroH + 22;
+    }
+
+    function drawYusufNote() {
+      var intro = safeText(guide.routeIntro || guide.guideNote || guide.localRead, plan.summary);
+      var weather = safeText(guide.weatherSentence, tripWeatherSummary(plan));
+      var tour = safeText(guide.tourSentence || guide.tourNote, slot && slot.insideTrip ? 'BerlinWalk fits ' + slot.dayLabel + ' at ' + slot.startLabel + '.' : '');
+      var storyDays = aiVisibleDayStories(plan, storyByDay);
+      var introH = textHeight(intro, contentW - 100, 9.2, 'normal', 5);
+      var storyCount = Math.min(3, storyDays.length);
+      var cardH = 126 + introH + storyCount * 46 + (weather || tour ? 44 : 0);
+      ensure(cardH + 10);
+      var top = y;
+      fill([255, 255, 255]);
+      stroke([239, 230, 163]);
+      doc.roundedRect(margin, top, contentW, cardH, 10, 10, 'FD');
+      fill(yellow);
+      doc.roundedRect(margin, top, 7, cardH, 4, 4, 'F');
+      if (yusufData) {
+        try {
+          doc.addImage(yusufData, 'JPEG', margin + 18, top + 18, 38, 38);
+        } catch (error) {}
+      } else {
+        fill(soft);
+        stroke(border);
+        doc.circle(margin + 37, top + 37, 19, 'FD');
+        setFont(10, 'bold', green);
+        doc.text('Y', margin + 33, top + 41);
+      }
+      setFont(14, 'bold', green);
+      doc.text("Your Local Guide Yusuf's Note", margin + 68, top + 27);
+      drawText('A simple read before you start. Dates, stops, and tour time stay unchanged.', margin + 68, top + 43, contentW - 92, 8.2, 'normal', muted, 2);
+      y = top + 74;
+      fill([255, 255, 255]);
+      stroke([184, 215, 250]);
+      doc.roundedRect(margin + 16, y, contentW - 32, introH + 24, 8, 8, 'FD');
+      setFont(9.8, 'bold', green);
+      doc.text(safeText(guide.noteTitle, 'How I would read these days'), margin + 28, y + 15);
+      drawText(intro, margin + 28, y + 32, contentW - 56, 9.2, 'normal', muted, 5);
+      y += introH + 34;
+      storyDays.slice(0, 3).forEach(function (day) {
+        var story = safeText(storyByDay[day.dayNumber], '');
+        if (!story) return;
+        fill([255, 255, 255]);
+        stroke([184, 215, 250]);
+        doc.roundedRect(margin + 16, y, contentW - 32, 38, 8, 8, 'FD');
+        fill(lightBlue);
+        doc.roundedRect(margin + 28, y + 8, 28, 22, 6, 6, 'F');
+        setFont(7.8, 'bold', blue);
+        doc.text('D' + day.dayNumber, margin + 36, y + 22);
+        setFont(8.8, 'bold', green);
+        doc.text(split(day.theme || day.title, 150, 8.8, 'bold').slice(0, 1), margin + 68, y + 15);
+        drawText(story, margin + 68, y + 27, contentW - 100, 7.8, 'normal', muted, 2);
+        y += 46;
+      });
+      if (weather || tour) {
+        var half = (contentW - 40) / 2;
+        [
+          { label: 'Weather read', value: weather },
+          { label: 'Tour note', value: tour }
+        ].filter(function (item) { return item.value; }).slice(0, 2).forEach(function (item, index) {
+          var x = margin + 16 + index * (half + 8);
+          fill(lightBlue);
+          stroke([184, 215, 250]);
+          doc.roundedRect(x, y, half, 34, 7, 7, 'FD');
+          setFont(6.8, 'bold', blue);
+          doc.text(item.label.toUpperCase(), x + 9, y + 12);
+          drawText(item.value, x + 9, y + 24, half - 18, 7.3, 'normal', muted, 2);
+        });
+        y += 42;
+      }
+      y = top + cardH + 16;
+    }
+
+    function drawPlanGlance() {
+      var gap = 10;
+      var cardW = (contentW - gap) / 2;
+      var cardH = 116;
+      ensure(66 + cardH);
+      sectionTitle('Plan at a glance', 'A visual index of the full itinerary. Each card links the theme, date, and main stops.', 'Index');
+      plan.days.forEach(function (day, index) {
+        if (index % 2 === 0) ensure(cardH + 12);
+        var x = margin + (index % 2) * (cardW + gap);
+        var cardY = y;
+        var accent = rgbFromHexLocal(day.accent, green);
+        fill([255, 255, 255]);
+        stroke(border);
+        doc.roundedRect(x, cardY, cardW, cardH, 9, 9, 'FD');
+        fill(accent);
+        doc.roundedRect(x, cardY, 6, cardH, 3, 3, 'F');
+        drawPhoto(day, x + 14, cardY + 12, cardW - 28, 45);
+        fill(accent);
+        stroke([255, 255, 255]);
+        doc.circle(x + 32, cardY + 58, 14, 'FD');
+        setFont(7.5, 'bold', [255, 255, 255]);
+        doc.text('D' + day.dayNumber, x + 24, cardY + 61);
+        setFont(7.2, 'bold', accent);
+        doc.text(split(day.theme || day.title, cardW - 28, 7.2, 'bold').slice(0, 2), x + 14, cardY + 74);
+        setFont(8.4, 'bold', textColor);
+        doc.text(formatDisplayDate(day.dateKey), x + 14, cardY + 93);
+        setFont(7.2, 'normal', muted);
+        var anchors = dayMapLinks(day).slice(0, 3).map(function (link) { return link.label; }).join(' / ');
+        doc.text(split(anchors || dayVisualDetail(day, dayVisualType(day)), cardW - 28, 7.2, 'normal').slice(0, 2), x + 14, cardY + 106);
+        var daySlot = tourSlotForDay(day, plan);
+        if (daySlot) pill('Tour ' + daySlot.startLabel, x + cardW - 77, cardY + 63, { bg: yellow, border: [239, 230, 163], color: green, size: 6.8, maxWidth: 68, height: 15 });
+        if (index % 2 === 1 || index === plan.days.length - 1) y += cardH + 12;
+      });
+      y += 2;
+    }
+
+    function drawWeatherChip(day, x, yy, width) {
+      var weather = dayWeatherFor(day);
+      if (!weather) return 0;
+      fill(lightBlue);
+      stroke([184, 215, 250]);
+      doc.roundedRect(x, yy, width, 34, 7, 7, 'FD');
+      setFont(6.8, 'bold', blue);
+      doc.text('WEATHER', x + 9, yy + 12);
+      setFont(7.8, 'normal', muted);
+      doc.text(split(weather.title + ' - ' + weather.cue, width - 18, 7.8, 'normal').slice(0, 2), x + 9, yy + 24);
+      return 40;
+    }
+
+    function drawDayStep(day, item) {
+      var block = item.block;
+      var index = item.index;
+      var copy = dayBlockCopy(day, block, index);
+      var windowLabel = dayBlockWindow(day, block, index);
+      var links = blockMapLinks(day, block, index);
+      var titleH = textHeight(block.title, contentW - 126, 9.4, 'bold', 2);
+      var copyH = copy ? textHeight(copy, contentW - 126, 8.4, 'normal', 3) : 0;
+      var linksH = links.length ? 17 : 0;
+      var h = Math.max(48, 16 + titleH + copyH + linksH);
+      ensure(h + 8);
+      var top = y;
+      fill([255, 255, 255]);
+      stroke(border);
+      doc.roundedRect(margin + 16, top, contentW - 32, h, 8, 8, 'FD');
+      fill(isTourBlock(block) ? green : [255, 252, 219]);
+      stroke(isTourBlock(block) ? green : [239, 230, 163]);
+      doc.roundedRect(margin + 28, top + 10, 74, 28, 6, 6, 'FD');
+      setFont(7.2, 'bold', isTourBlock(block) ? yellow : green);
+      doc.text(String(block.time || '').toUpperCase().slice(0, 15), margin + 36, top + 21);
+      if (windowLabel) {
+        setFont(6.3, 'normal', isTourBlock(block) ? [255, 255, 255] : muted);
+        doc.text(String(windowLabel).slice(0, 20), margin + 36, top + 31);
+      }
+      var textX = margin + 116;
+      var textY = top + 16;
+      textY += drawText(block.title, textX, textY, contentW - 132, 9.4, 'bold', textColor, 2);
+      if (copy) textY += drawText(copy, textX, textY + 1, contentW - 132, 8.4, 'normal', muted, 3) + 1;
+      if (links.length) {
+        var linkX = textX;
+        links.slice(0, 2).forEach(function (link) {
+          setFont(7, 'bold', blue);
+          var linkLabel = 'Open map: ' + link.label;
+          var linkW = Math.min(132, doc.getTextWidth(linkLabel) + 14);
+          fill(lightBlue);
+          stroke([184, 215, 250]);
+          doc.roundedRect(linkX, top + h - 19, linkW, 13, 6, 6, 'FD');
+          drawLink(linkLabel, link.url, linkX + 7, top + h - 9.5, linkW - 14, 6.8);
+          linkX += linkW + 5;
+        });
+      }
+      y += h + 8;
+    }
+
+    function drawDay(day) {
+      ensure(126);
+      var accent = rgbFromHexLocal(day.accent, green);
+      var headH = 92;
+      var top = y;
+      fill(rgbFromHexLocal(day.bg, soft));
+      stroke(border);
+      doc.roundedRect(margin, top, contentW, headH, 10, 10, 'FD');
+      fill(accent);
+      doc.roundedRect(margin, top, 7, headH, 4, 4, 'F');
+      fill([255, 255, 255]);
+      stroke(border);
+      doc.roundedRect(margin + 18, top + 18, 48, 46, 8, 8, 'FD');
+      setFont(7.6, 'bold', green);
+      doc.text('DAY', margin + 29, top + 36);
+      setFont(11.4, 'bold', green);
+      doc.text(String(day.dayNumber), margin + 37, top + 52);
+      drawPhoto(day, pageW - margin - 126, top + 16, 106, 58);
+      setFont(13, 'bold', green);
+      doc.text(split(day.title, contentW - 210, 13, 'bold').slice(0, 2), margin + 80, top + 30);
+      setFont(8.4, 'normal', muted);
+      doc.text(formatDisplayDate(day.dateKey) + ' - ' + day.theme, margin + 80, top + 59);
+      var daySlot = tourSlotForDay(day, plan);
+      if (daySlot) pill('Tour ' + daySlot.startLabel, margin + 80, top + 68, { bg: yellow, border: [239, 230, 163], color: green, size: 7, maxWidth: 82 });
+      y += headH + 10;
+      drawWeatherChip(day, margin + 16, y, contentW - 32);
+      if (dayWeatherFor(day)) y += 42;
+      dayActionBlockItems(day).forEach(function (item) {
+        drawDayStep(day, item);
+      });
+      var risks = riskTagsForDay(day).slice(0, 3);
+      if (risks.length) {
+        ensure(26);
+        var x = margin + 16;
+        risks.forEach(function (risk) {
+          var w = pill(risk.label, x, y, { bg: [255, 247, 230], border: [245, 210, 154], color: [128, 84, 0], maxWidth: 130 });
+          x += w + 6;
+        });
+        y += 24;
+      }
+      ensure(28);
+      fill(green);
+      stroke(green);
+      doc.roundedRect(margin + 16, y, contentW - 32, 28, 8, 8, 'FD');
+      setFont(8.4, 'bold', yellow);
+      doc.text('Full day route', margin + 30, y + 18);
+      setFont(8, 'bold', yellow);
+      if (doc.textWithLink) doc.textWithLink('Open route in Google Maps', pageW - margin - 148, y + 18, { url: dayRouteAction(day).url });
+      else doc.text('Open route in Google Maps', pageW - margin - 148, y + 18);
+      y += 44;
+    }
+
+    function drawAfterDivider() {
+      ensure(74);
+      fill(darkGreen);
+      stroke(darkGreen);
+      doc.roundedRect(margin, y, contentW, 58, 10, 10, 'FD');
+      setFont(16, 'bold', yellow);
+      doc.text('After the itinerary', margin + 18, y + 23);
+      drawText('Save these maps, shopping backups, and Berlin essentials for the moments when plans change.', margin + 18, y + 41, contentW - 36, 8.4, 'normal', [255, 255, 255], 2);
+      y += 74;
+    }
+
+    function drawResourceGrid(title, subtitle, items, options) {
+      options = options || {};
+      var gap = 8;
+      var cardW = (contentW - gap) / 2;
+      var cardH = options.cardH || 58;
+      ensure((subtitle ? 56 : 38) + cardH + 10);
+      sectionTitle(title, subtitle, options.tag || '');
+      items.forEach(function (item, index) {
+        if (index % 2 === 0) ensure(cardH + 10);
+        var x = margin + (index % 2) * (cardW + gap);
+        var cardY = y;
+        var url = item.url || mapsSearchUrl(item.query || item.title);
+        var accent = rgbFromHexLocal(item.accent, green);
+        fill([255, 255, 255]);
+        stroke(border);
+        doc.roundedRect(x, cardY, cardW, cardH, 8, 8, 'FD');
+        fill(accent);
+        doc.roundedRect(x, cardY, 5, cardH, 3, 3, 'F');
+        setFont(6.8, 'bold', muted);
+        doc.text(String(item.label || options.label || '').toUpperCase().slice(0, 18), x + 14, cardY + 14);
+        setFont(8.8, 'bold', green);
+        doc.text(split(item.title, cardW - 28, 8.8, 'bold').slice(0, 1), x + 14, cardY + 28);
+        drawText(item.detail || '', x + 14, cardY + 42, cardW - 28, 7.3, 'normal', muted, 2);
+        drawLink(options.action || 'Open map', url, x + 14, cardY + cardH - 8, cardW - 28, 7.2);
+        if (index % 2 === 1 || index === items.length - 1) y += cardH + 9;
+      });
+      y += 4;
+    }
+
+    function drawEssentials() {
+      sectionTitle('Berlin essentials', 'Practical notes added to the end of the plan.', 'Tips');
+      var items = berlinEssentials(plan);
+      var gap = 8;
+      var cardW = (contentW - gap) / 2;
+      var cardH = 62;
+      items.forEach(function (item, index) {
+        if (index % 2 === 0) ensure(cardH + 10);
+        var x = margin + (index % 2) * (cardW + gap);
+        var cardY = y;
+        fill(soft);
+        stroke(border);
+        doc.roundedRect(x, cardY, cardW, cardH, 8, 8, 'FD');
+        setFont(6.8, 'bold', muted);
+        doc.text(String(item.title || '').toUpperCase().slice(0, 22), x + 12, cardY + 14);
+        setFont(8.8, 'bold', green);
+        doc.text(split(item.cue || item.title, cardW - 24, 8.8, 'bold').slice(0, 1), x + 12, cardY + 28);
+        drawText(item.copy || '', x + 12, cardY + 42, cardW - 24, 7.3, 'normal', muted, 2);
+        if (index % 2 === 1 || index === items.length - 1) y += cardH + 9;
+      });
+    }
+
+    setPdfDebug('cover');
+    drawCover();
+    setPdfDebug('yusuf-note');
+    drawYusufNote();
+    setPdfDebug('plan-glance');
+    drawPlanGlance();
+    doc.addPage();
+    y = 42;
+    setPdfDebug('day-cards');
+    sectionTitle('Day-by-day itinerary', 'Read one day at a time. Each important step includes a map link when a real location is available.', 'Plan');
+    plan.days.forEach(function (day) {
+      drawDay(day);
+    });
+    setPdfDebug('resources');
+    drawAfterDivider();
+    drawResourceGrid('Berlin public transport maps', 'Official BVG/VBB PDFs for BER, night routes, trams, and Potsdam days.', TRANSPORT_MAPS, { label: 'Map', action: 'Open PDF', tag: 'Maps', cardH: 78 });
+    drawResourceGrid('Shopping backups', 'Weather-friendly malls, courtyards, classic shopping streets, and the nearby outlet option.', SHOPPING_GROUPS, { label: 'Place', action: 'Open in Google Maps', tag: 'Backup', cardH: 84 });
+    drawEssentials();
+
+    setPdfDebug('footer-save');
+    var pages = doc.getNumberOfPages();
+    for (var page = 1; page <= pages; page += 1) {
+      doc.setPage(page);
+      stroke(border);
+      doc.line(margin, pageH - 34, pageW - margin, pageH - 34);
+      setFont(8, 'bold', green);
+      doc.text('berlinwalk.com | @berlinwalkingtour', margin, pageH - 17);
+      doc.text('Page ' + page + ' / ' + pages, pageW - margin, pageH - 17, { align: 'right' });
+    }
+    if (new URLSearchParams(window.location.search).get('pdfPreview') === '1') {
+      try {
+        root.setAttribute('data-pdf-preview-url', doc.output('bloburl'));
+        var previewData = doc.output('datauristring');
+        root.setAttribute('data-pdf-preview-size', String(previewData.length));
+        var previewField = root.querySelector('[data-pdf-preview-data]');
+        if (!previewField) {
+          previewField = document.createElement('textarea');
+          previewField.setAttribute('data-pdf-preview-data', '');
+          previewField.setAttribute('aria-hidden', 'true');
+          previewField.style.position = 'absolute';
+          previewField.style.left = '-9999px';
+          previewField.style.width = '1px';
+          previewField.style.height = '1px';
+          root.appendChild(previewField);
+        }
+        previewField.value = previewData;
+      } catch (error) {}
+    }
+    doc.save('ultimate-berlin-trip-plan-' + state.arrivalDate + '.pdf');
+    setPdfDebug('saved');
+    setActionStatus('PDF downloaded.');
+    track('bw_trip_planner_pdf_download', { success: true, format: 'polished_v1', arrival_date: state.arrivalDate, trip_length: state.tripLength });
+  }
+
+  async function legacyDownloadPdf() {
     if (!unlocked || !planGenerated) return;
     setActionStatus('Loading PDF engine...');
     var api = await ensurePdfEngine();
@@ -17434,7 +18002,12 @@
     }
     setActionStatus('Preparing PDF...');
     try {
-    await downloadSimplePdf(api);
+    var pdfParams = new URLSearchParams(window.location.search);
+    if (pdfParams.get('pdf') === 'simple') {
+      await downloadSimplePdf(api);
+      return;
+    }
+    await downloadPolishedPdf(api);
     return;
     var plan = latestPlan || buildPlan();
     var labels = selectedLabels();
@@ -19337,8 +19910,55 @@
     setActionStatus('PDF downloaded.');
     track('bw_trip_planner_pdf_download', { success: true, arrival_date: state.arrivalDate, trip_length: state.tripLength });
     } catch (error) {
+      setPdfDebug(window.__tripPlannerPdfStage || 'unknown', 'legacy stage=' + String(window.__tripPlannerPdfStage || 'unknown') + ' error=' + String(error && (error.stack || error.message || error.name) || error || 'empty error'));
+      console.error('tripPlanner PDF failed', error);
       setActionStatus('PDF had a layout hiccup. Use Print plan while we fix this view.');
       track('bw_trip_planner_pdf_download', { success: false, reason: 'pdf_exception' });
+    }
+  }
+
+  function pdfErrorDetail(error) {
+    if (!error) return 'empty error';
+    if (typeof error === 'string') return error || 'empty string error';
+    var parts = [];
+    if (error.name) parts.push('name=' + error.name);
+    if (error.message) parts.push('message=' + error.message);
+    if (error.stack) parts.push('stack=' + error.stack);
+    if (!parts.length) {
+      try {
+        parts.push(JSON.stringify(error));
+      } catch (jsonError) {
+        parts.push(String(error));
+      }
+    }
+    return parts.join(' | ') || 'unreadable error';
+  }
+
+  async function downloadPdf() {
+    if (!unlocked || !planGenerated) return;
+    setActionStatus('Loading PDF engine...');
+    setPdfDebug('engine', '');
+    var api = await ensurePdfEngine();
+    if (!api) {
+      setActionStatus('PDF engine did not load. Use Print plan instead.');
+      track('bw_trip_planner_pdf_download', { success: false, reason: 'jspdf_unavailable' });
+      return;
+    }
+    try {
+      setActionStatus('Preparing PDF...');
+      var pdfParams = new URLSearchParams(window.location.search);
+      if (pdfParams.get('pdf') === 'simple') {
+        setPdfDebug('simple-pdf');
+        await downloadSimplePdf(api);
+        return;
+      }
+      await downloadPolishedPdf(api);
+    } catch (error) {
+      var detail = 'stage=' + String(window.__tripPlannerPdfStage || 'unknown') + ' | ' + pdfErrorDetail(error);
+      setPdfDebug(window.__tripPlannerPdfStage || 'unknown', detail);
+      console.error('tripPlanner PDF failed', detail, error);
+      setActionStatus('PDF had a layout hiccup. Use Print plan while we fix this view.');
+      track('bw_trip_planner_pdf_download', { success: false, reason: 'pdf_exception', stage: window.__tripPlannerPdfStage || 'unknown' });
     }
   }
 
