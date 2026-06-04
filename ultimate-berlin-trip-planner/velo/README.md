@@ -383,6 +383,7 @@ Available variables:
 - `${bookingStatus}`
 - `${tourDate}`
 - `${bookingUrl}`
+- `${planUrl}`
 - `${meetingPointUrl}`
 - `${firstDayPlannerUrl}`
 - `${ticketCalculatorUrl}`

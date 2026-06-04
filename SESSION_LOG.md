@@ -4,6 +4,114 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-04 — Codex (Ultimate tourist-prep email rewrite)
+
+**Did:** Rewrote the Ultimate Trip Planner emails again after Yusuf clarified they should feel like a tourist-coming-to-Berlin prep sequence from blog/SEO leads, not planner-system emails.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/e0-instant-plan.md` through `e4-arrival-day.md` — final direction: plan delivery, book-ahead reminders, Berlin tickets/opening-day prep, tomorrow/weather/meeting-point prep, and arrival-day calm guidance. Copy now uses fewer variables and reads more like Yusuf's local guide notes.
+- `ultimate-berlin-trip-planner/email/paste-ready/` — regenerated all five Wix-safe HTML emails, preview, copy kit, manifest, README, and setup checklist.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated the email-copy guard to expect the new tourist-prep sequence.
+
+**Opened:** Direct PDF file links remain a later backend/storage phase; current emails link back to the saved planner and explain that `Download PDF` happens inside the planner.
+**Closed:** External prep links returned HTTP 200 for Bundestag, SMB, BVG, and VBB; `launch-audit.mjs` passed `153 pass, 0 warn, 0 block`; `velo/prepublish-gate.mjs` passed `13 pass, 0 warn, 0 block`.
+
+**Next session should:** Yusuf should refresh `ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html` and judge the email tone before any Wix paste/update.
+
+## 2026-06-05 — Codex (Festival of Lights route blog)
+
+**Did:** Built the Festival of Lights Berlin 2026 route-guide stack and created the Wix draft from the root content app.
+
+**Changed:**
+- `blog-drafts/festival-of-lights-berlin-2026.md` — NEW full English draft: dates, confirmed 2026 preview locations, central walking route, extensions, timing, transport, photo tips, BerlinWalk tie-in, and source/recheck notes.
+- `festival-lights-route/index.html` — NEW post-only Leaflet route widget with 19 official-preview locations, core/old-centre/Potsdamer/extensions filters, route line, and local route notes.
+- `quick-summary/data.json`, `faq/data.json`, `faq/inject.js` — wired QS/FAQ/schema under key `festival-of-lights-berlin-2026`.
+- `blog-drafts/images/festival-of-lights-berlin-2026/` — NEW visual candidate folder: Brandenburg Gate night, Berliner Dom night, Potsdamer Platz blue hour, plus `visual-sources.md`; not uploaded to Wix yet.
+- `blog-workplan.md` — added the Festival of Lights post/widget to the priority queue and drafts list.
+- `output/qa/festival-lights-route/desktop-1280.png`, `output/qa/festival-lights-route/mobile-390.png` — QA screenshots.
+- Wix: UNPUBLISHED draft `c6e633aa-a5d9-4779-98ad-c2cd0fd1a686`, slug `festival-of-lights-berlin-2026`, created with 122 nodes and 3 embeds.
+
+**Opened:** Push `berlinwalk-widgets` so the new route widget/QS/FAQ/schema resolve on GitHub Pages. Add images only after Yusuf approves candidates or requests a generated cover. Recheck final Festival of Lights programme/map/artwork details before publish.
+**Closed:** Local widget QA passed: desktop 1280 overflow 0, 19 markers, 12 loaded tiles; mobile 390 overflow 0; filters core 15 and extensions 4; QS/FAQ render for the new key; JSON, `faq/inject.js`, draft script, widget inline script, and `diff --check` passed.
+
+**Next session should:** Get visual approval, upload approved images to the Wix draft, push/deploy widgets, and visually QA the Wix draft before publish.
+
+## 2026-06-04 — Codex (Ultimate prep-email link pass)
+
+**Did:** Reframed the Ultimate Trip Planner email sequence as practical Berlin pre-arrival prep instead of a robotic plan report.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/e0-instant-plan.md` through `e4-arrival-day.md` — rewritten around plan link/PDF clarification, book-ahead reminders, official Reichstag/Museum Island ticket links, BVG/VBB ticket links, BER Zone C, paper-ticket validation, weather, and meeting-point prep.
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` — added safe markdown-link rendering so official prep links become clickable inside Wix email HTML.
+- `ultimate-berlin-trip-planner/email/paste-ready/` — regenerated copy kit, preview, setup checklist, manifest, and all five Wix-safe HTML emails.
+- `ultimate-berlin-trip-planner/index.html`, `velo/tripPlannerFunnel.js`, `velo/live-smoke-trip-planner.mjs`, `email/README.md`, `velo/README.md`, and `launch-audit.mjs` — clarified that the PDF is generated inside the unlocked planner, added `${planUrl}` to Velo email variables, and updated audits/docs.
+
+**Opened:** Direct PDF file links still require a later backend PDF generation/storage or magic-link phase; V1 email now links back to the saved planner and tells users to use `Download PDF` there.
+**Closed:** `launch-audit.mjs` passed `153 pass, 0 warn, 0 block`; `velo/prepublish-gate.mjs` passed `13 pass, 0 warn, 0 block`.
+
+**Next session should:** Have Yusuf refresh `ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html`, review the new prep-email tone, then paste/update the five Wix Triggered Emails only if approved.
+
+## 2026-06-04 — Claude Code (2026 events research + Berlin Pride draft)
+
+**Did:** Researched major 2026 Berlin tourist events for new event-tie-in blog opportunities, then (Yusuf's pick) drafted the Berlin Pride / CSD 2026 post. Basketball post is now LIVE: https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin
+
+**Changed:**
+- `blog-drafts/berlin-pride-csd-2026.md` — NEW full draft (standard format). Angle: Pride Week visitor guide + the deep history that makes Berlin a queer capital (Hirschfeld's Institute for Sexual Science 1919, Weimar Nollendorfplatz, 1933 Nazi destruction, the Nollendorfplatz plaque + Tiergarten memorial). Covers the Jul 25 parade route (Leipziger Str → Potsdamer Platz → Nollendorfplatz → Siegessäule → Brandenburg Gate), two-day format (Democracy Night Fri Jul 24), Pride Week (Stadtfest Jul 18-19, CSD on the Spree Jul 23), Schöneberg, practical tips, internal links + tour CTA. Two custom widgets embedded via `{{widget:...}}`. No em dashes, no `1h45m`.
+- `berlin-pride-week-timeline/index.html` — NEW post widget. Vertical day-by-day Pride Week timeline (Stadtfest → CSD on the Spree → Democracy Night → parade → finale) with each event's time/place/nearest U-Bahn, a countdown to the parade (Jul 25 12:00), and a "Free & open to all" filter. Browser-verified: 5 items, parade highlighted, countdown live, free filter → 4, no console errors.
+- `berlin-pride-parade-map/index.html` — NEW post widget. Leaflet/OpenStreetMap map: 6 numbered route points (Spittelmarkt → Potsdamer Platz → Nollendorfplatz → Urania → Victory Column → Brandenburg Gate) + the Tiergarten LGBTQ+ memorial, an indicative dashed route polyline, nearest U-Bahn per popup, filters (Best viewing / Route points / LGBTQ+ history). Browser-verified: 7 markers + polyline, tiles load, filters work (view → 3, history → 2, route → 3), no console errors.
+
+**Opened:**
+- qs/FAQ data entries needed for slug `berlin-pride-csd-2026`.
+- New Pride widgets need a GitHub Pages push before `{{widget:...}}` embeds resolve live. Optionally add both to `tools-hub/data.json`.
+- Reverify before publish: exact 2026 parade route/step-off time, Pride Week dates, any official 2026 motto, exact memorial/plaque wording.
+- 2026 events pipeline identified (none have a dedicated live post): Festival of Lights (Oct 9-18, best brand fit), BMW Berlin Marathon (Sep 27), Christmas markets (Nov-Jan), Lollapalooza (Jul 18-19), summer stadium concerts, NYE at Brandenburg Gate (Dec 31). Consider logging into `blog-workplan.md`.
+
+**Closed:** Optional Pride widgets (timeline + route map) — built, verified, and embedded in the draft.
+
+**Next session should:** Get Yusuf's review of the Pride draft + widgets; if approved, build the qs/FAQ entries, push `berlinwalk-widgets` to GitHub Pages, move the post into a Wix draft, then start the next event post (Festival of Lights or Marathon).
+
+## 2026-06-04 — Codex (Basketball official logo)
+
+**Did:** Added the Yusuf-provided official FIBA Women's Basketball World Cup Germany 2026 logo to the blog draft.
+
+**Changed:**
+- `blog-drafts/images/fiba-womens-basketball-world-cup-2026-berlin/fiba-wwc-2026-official-logo.png` and `_src/fiba-wwc-germany-2026-official-logo.png` — new transparent PNG logo asset.
+- `blog-drafts/images/fiba-womens-basketball-world-cup-2026-berlin/visual-sources.md` and `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md` — recorded official-logo source/rights note.
+- `../berlinwalk-content-app/add-fiba-womens-basketball-world-cup-logo.mjs` and `../berlinwalk-content-app/add-fiba-womens-basketball-world-cup-images.mjs` — logo upload/patch support.
+- Wix: draft `d7731e4b-c550-451c-9a1b-0d129823616c` remains UNPUBLISHED; logo media is `5a08a3_8c57a2a88fc047849476bed64f0d5935~mv2.png`; readback confirmed 3 IMAGE nodes, 4 HTML embeds, official-logo alt/credit text.
+
+**Opened:** Push/deploy widgets and do Wix visual QA before publishing.
+**Closed:** Official logo is now placed before the quick-summary widget.
+
+**Next session should:** Push `berlinwalk-widgets`, then review the draft visually and publish only after Yusuf approves.
+
+## 2026-06-04 — Codex (Ultimate live instant email smoke)
+
+**Did:** Sent a live Ultimate Trip Planner instant-email smoke test to Yusuf's requested Gmail address after the five Wix Triggered Emails were published.
+
+**Changed:**
+- `output/qa/ultimate-trip-planner-live-smoke/live-2026-06-04T21-44-33-504Z.json` — new live smoke evidence for `yusuf.ucuz@gmail.com`, arrival `2026-06-14`, trip length `3`.
+
+**Opened:** Only the instant email was sent by the existing live endpoint. The four scheduled reminders still require their natural scheduled-job timing or a separate dev-only/manual test path; do not create one casually because it could send duplicate/spam test emails.
+**Closed:** Live `POST /_functions/tripPlannerLead` returned `200`, created contact `21700383-1cb1-49e5-8343-7357fc20e13d`, created lead `563e4cd6-20eb-4f69-abff-f1eb68129c7c`, and returned `instant.sent: true`.
+
+**Next session should:** Have Yusuf check the Gmail inbox/spam/promotions for the instant email. If the four reminder templates also need visual inbox testing, either use Wix's own per-template test-send UI or add a temporary protected dev-only test endpoint and remove it after QA.
+
+## 2026-06-04 — Codex (Basketball blog visual package)
+
+**Did:** Added the approved visual package for the FIBA Women's Basketball World Cup 2026 blog and patched the Wix draft.
+
+**Changed:**
+- `blog-drafts/images/fiba-womens-basketball-world-cup-2026-berlin/` — new raw/optimized image package: generated cover, Max-Schmeling-Halle, East Side Gallery, plus `visual-sources.md`.
+- `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md` — added Visual Assets handoff notes.
+- `../berlinwalk-content-app/add-fiba-womens-basketball-world-cup-images.mjs` — new one-off upload/patch script.
+- Wix: draft `d7731e4b-c550-451c-9a1b-0d129823616c` remains UNPUBLISHED; cover media is `5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg`; inline images are Max-Schmeling-Halle and East Side Gallery; readback confirmed 2 IMAGE nodes, 4 HTML embeds, and image credits.
+
+**Opened:** Push/deploy widgets and do Wix visual QA before publishing.
+**Closed:** Blog image sourcing/optimization/upload gap.
+
+**Next session should:** Push `berlinwalk-widgets`, then review the Wix draft visually and publish only after Yusuf approves.
+
 ## 2026-06-04 — Codex (Basketball team filter revision)
 
 **Did:** Applied Yusuf's feedback to remove special Germany/Türkiye fixture filters and make the fixture widget team-neutral.

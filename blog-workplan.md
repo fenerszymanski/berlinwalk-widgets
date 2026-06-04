@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-06-04 (FIBA Women's Basketball World Cup Wix draft + post widgets added)
+Last updated: 2026-06-05 (Festival of Lights route draft + widget added)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -12,6 +12,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 | 0 | Local draft + widget | East Side Gallery: Berlin's Open-Air Wall Guide | A-tier, no dedicated post existed. Draft `blog-drafts/east-side-gallery-berlin-guide.md`; new `east-side-gallery-murals` card-guide widget (12 famous murals, theme filter) built + QA'd; QS/FAQ key `east-side-gallery`; CMS insert `insert-east-side-gallery-murals.js`. Pending push + live steps. |
 | 0 | Wix draft + widget | Best Day Trips from Berlin (Potsdam, Sachsenhausen, Spreewald) | High-volume "day trips from Berlin"; Wix draft `80b60289-cd69-4d4c-ac9b-399ce47c8155` created UNPUBLISHED and patched with 4 licensed images + SEO; local draft `blog-drafts/best-day-trips-from-berlin.md`; new `berlin-day-trips-finder` picker widget with pinned map built; QS/FAQ key `best-day-trips-from-berlin`; CMS insert `../insert-berlin-day-trips-finder.js`. Pending full visual QA, push, CMS row insert/re-save and tool icon. |
 | 0 | Wix draft + post widgets | FIBA Women's Basketball World Cup 2026 in Berlin | Seasonal/event-tie-in for September 2026 visitors and basketball fans. Wix draft `d7731e4b-c550-451c-9a1b-0d129823616c` created UNPUBLISHED; local draft `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md`; post-only widgets `basketball-worldcup-fixtures/` and `basketball-worldcup-venues-map/`; QS/FAQ key `fiba-womens-basketball-world-cup-2026-berlin`. Pending GitHub Pages push before embed review, cover/inline image selection, then visual QA/publish. |
+| 0 | Local draft + post widget | Festival of Lights Berlin 2026: Best Walking Route and Local Tips | Seasonal/event-tie-in for October visitors. Local draft `blog-drafts/festival-of-lights-berlin-2026.md`; post-only route widget `festival-lights-route/`; QS/FAQ key `festival-of-lights-berlin-2026`. Based on official 2026 programme preview, not the final map. Pending widget QA, Wix draft creation, visual selection/approval, GitHub Pages push and pre-publish recheck. |
 | 0 | Idea (A-tier, seasonal) | Best Christmas Markets in Berlin (2026) | Q4 seasonal pillar; new "Christmas markets map" widget candidate. Publish by October. |
 | 0 | Idea (B-tier) | Berlin Street Art Guide / Holocaust Memorial Guide / Sachsenhausen Memorial Guide / "How Many Days in Berlin?" | High-intent gaps; street-art map + `berlin-landmarks-map` reuse. |
 | 1 | Wix draft | Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange | Route-adjacent history piece. Pairs with existing old-town and GDR demolition content. Local draft at `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`; quick-summary + FAQ + `nikolaiviertel-walk` self-guided walking-tour widget wired under slug `nikolaiviertel`. Wix draft ID: `48bf0945-63d9-46cd-b9af-a8fb87ab3c75`. |
@@ -44,6 +45,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 - `blog-drafts/public-toilets-in-berlin-2026.md`
 - `blog-drafts/free-things-to-do-in-berlin-2026.md`
 - `blog-drafts/luggage-storage-in-berlin-2026.md`
+- `blog-drafts/festival-of-lights-berlin-2026.md`
 - `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`
 - `blog-drafts/where-to-park-in-berlin-alexanderplatz-2026.md`
 - `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md`
@@ -57,6 +59,7 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 - `nikolaiviertel-walk/`
 - `basketball-worldcup-fixtures/`
 - `basketball-worldcup-venues-map/`
+- `festival-lights-route/`
 
 ## Source Notes
 

@@ -1,44 +1,33 @@
 # E2 - 3 Days Before Arrival
 
-Subject: ✅ Berlin in three days
+Subject: 🎫 Berlin tickets and opening days
 
-Preheader: Ticket zone, opening days, weather backup, and one good first move.
+Preheader: A few boring checks that make arrival much easier.
 
 Hi,
 
-Berlin is close now. Your trip starts on `${arrivalDate}`.
+Three days before Berlin, I would not add more sights. I would make the practical layer boring and clear.
 
-This is the moment where small practical things save a lot of energy later.
-
-Your ticket note:
+Your planner ticket note:
 
 **${ticket}**
 
-Your main check before arriving:
+A simple rule: if you land at BER, your first ride usually needs ABC because the airport is in Zone C. Most central Berlin sightseeing is usually AB.
 
-**${preArrivalChecklist}**
-
-I would also quickly check three things:
-
-- If you arrive through BER, remember that the airport is Zone C. Most central Berlin sightseeing is AB.
-- Sunday is not a normal shopping day, and Monday can be tricky for museums.
-- If you want Reichstag, a famous museum, or a special dinner, check reservation rules now.
-
-For weather and opening hours, keep this in mind:
-
-**${planAdvice}**
+For tickets, visitors normally use the BVG app, a ticket machine, or a station shop. If you buy a paper ticket, validate it before boarding. Digital tickets are easier, but only if your phone battery is not living dangerously.
 
 Useful links:
 
-- What's open: ${whatsOpenUrl}
-- Ticket calculator: ${ticketCalculatorUrl}
-- First-day planner: ${firstDayPlannerUrl}
+- BerlinWalk ticket helper: ${ticketCalculatorUrl}
+- Official BVG ticket page: [bvg.de tickets](https://www.bvg.de/en/subscriptions-and-tickets/all-tickets)
+- Official VBB ticket page: [vbb.de tickets](https://www.vbb.de/en/tickets/)
+- Opening-day check: ${whatsOpenUrl}
 
-If you still want the city to make sense before you wander off alone, BerlinWalk is here:
+If your plan touches museums, Reichstag, or a Sunday/Monday, check opening days once. Berlin is not hard, but it does punish assumptions.
 
-${bookingUrl}
+Your plan is here:
 
-Start with one good story. The rest of Berlin becomes much easier after that.
+${planUrl}
 
 Yusuf  
 BerlinWalk  

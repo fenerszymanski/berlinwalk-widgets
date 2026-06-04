@@ -5,28 +5,13 @@
     "path": "sales",
     "stage": "instant",
     "placeholder": "TODO_TRIP_PLANNER_INSTANT",
-    "subject": "🗺️ Your Berlin plan from Yusuf",
-    "preheader": "A simple first read before you arrive: first day, weather, tickets, and BerlinWalk timing.",
+    "subject": "🗺️ Your Berlin plan is ready",
+    "preheader": "A calm start for your Berlin prep.",
     "variables": [
       "arrivalDate",
-      "arrivalPoint",
       "bookingUrl",
-      "carryPack",
-      "dailyBudgetUrl",
-      "dayRhythm",
-      "meetingPointUrl",
-      "pace",
-      "planAdvice",
-      "planTitle",
-      "recommendedTourDate",
-      "recommendedTourDay",
-      "recommendedTourTime",
-      "stayArea",
-      "ticket",
-      "ticketCalculatorUrl",
-      "tripLength",
-      "weatherStrategy",
-      "whatsOpenUrl"
+      "planUrl",
+      "recommendedTourDay"
     ]
   },
   {
@@ -35,16 +20,12 @@
     "path": "sales",
     "stage": "minus7",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_7",
-    "subject": "🧳 One week until Berlin",
-    "preheader": "A calm check before tickets, museums, meals, and the first day start to feel real.",
+    "subject": "🧳 One week before Berlin",
+    "preheader": "Book the few things that need slots. Leave the rest flexible.",
     "variables": [
-      "arrivalPoint",
       "bookingUrl",
-      "planTitle",
-      "preArrivalChecklist",
-      "recommendedTourDay",
-      "stayArea",
-      "ticket"
+      "planUrl",
+      "recommendedTourDay"
     ]
   },
   {
@@ -53,14 +34,10 @@
     "path": "sales",
     "stage": "minus3",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_3",
-    "subject": "✅ Berlin in three days",
-    "preheader": "Ticket zone, opening days, weather backup, and one good first move.",
+    "subject": "🎫 Berlin tickets and opening days",
+    "preheader": "A few boring checks that make arrival much easier.",
     "variables": [
-      "arrivalDate",
-      "bookingUrl",
-      "firstDayPlannerUrl",
-      "planAdvice",
-      "preArrivalChecklist",
+      "planUrl",
       "ticket",
       "ticketCalculatorUrl",
       "whatsOpenUrl"
@@ -72,14 +49,12 @@
     "path": "sales",
     "stage": "minus1",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_1",
-    "subject": "🌦️ Berlin tomorrow: ${weatherTitle}",
-    "preheader": "Shoes, weather, meeting point, and a simple first-day reminder.",
+    "subject": "🌦️ Berlin tomorrow",
+    "preheader": "Weather, shoes, meeting point, and the first-day rule.",
     "variables": [
-      "arrivalPoint",
       "bookingUrl",
       "meetingPointUrl",
-      "preArrivalChecklist",
-      "weatherStrategy",
+      "planUrl",
       "weatherTitle"
     ]
   },
@@ -90,13 +65,11 @@
     "stage": "dayOf",
     "placeholder": "TODO_TRIP_PLANNER_DAY_OF",
     "subject": "👋 Welcome to Berlin",
-    "preheader": "Reach your base, eat something, save the World Clock, and keep the first day light.",
+    "preheader": "Reach your base, eat something, and keep the first day human.",
     "variables": [
       "bookingUrl",
       "meetingPointUrl",
-      "planTitle",
-      "preArrivalChecklist",
-      "travelMode"
+      "planUrl"
     ]
   }
 ]

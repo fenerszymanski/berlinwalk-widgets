@@ -12747,9 +12747,17 @@
   }
 
   function carryPackSummary(plan) {
-    return carryPackItems(plan).map(function (item) {
-      return item.label + ': ' + item.value + ' - ' + item.detail;
-    }).join(' | ');
+    var pieces = carryPackItems(plan).filter(function (item) {
+      return item.kind !== 'pdf';
+    }).map(function (item) {
+      if (item.kind === 'copy') return 'the exact plan link';
+      if (item.kind === 'tripCalendar') return 'the trip calendar';
+      if (item.kind === 'calendar') return 'the BerlinWalk calendar hold';
+      if (item.track === 'meeting') return 'the World Clock meeting point';
+      if (item.label === 'Route map') return 'the route map';
+      return item.label.toLowerCase();
+    });
+    return 'Save ' + pieces.join(', ').replace(/, ([^,]*)$/, ', and $1') + '. The print-ready PDF is generated inside the unlocked planner.';
   }
 
   function carryPackHtml(plan) {

@@ -1,57 +1,28 @@
 # E0 - Instant Plan
 
-Subject: 🗺️ Your Berlin plan from Yusuf
+Subject: 🗺️ Your Berlin plan is ready
 
-Preheader: A simple first read before you arrive: first day, weather, tickets, and BerlinWalk timing.
+Preheader: A calm start for your Berlin prep.
 
 Hi,
 
-I made your Berlin plan for `${arrivalDate}`.
+Your Berlin plan for `${arrivalDate}` is here:
 
-**${planTitle}**
+${planUrl}
 
-Here is the short version: you have `${tripLength} days`, you are starting from **${arrivalPoint}**, staying around **${stayArea}**, and the pace should feel **${pace}**.
+Use it as a starting point, not as a strict schedule. Berlin is easier when each day has one main idea, one real area, and a little space between stops.
 
-The important thing is not to see every famous place at once. Berlin works much better when each day has one clear area, one main idea, and enough space to actually enjoy it.
+If you want a print version, open the plan and tap **Download PDF** inside the planner. I am not attaching a PDF file to this email.
 
-For your first read, I would focus on this:
-
-**${planAdvice}**
-
-And keep this rhythm in mind:
-
-**${dayRhythm}**
-
-Weather and openings may change the day a little, so use this as your practical cue:
-
-**${weatherStrategy}**
-
-For transport, start with this:
-
-**${ticket}**
-
-And save this on your phone before you travel:
-
-**${carryPack}**
-
-For BerlinWalk, I would keep this timing in mind:
+The main thing I would protect is the first real city context. For your dates, the BerlinWalk timing to keep in mind is:
 
 **${recommendedTourDay}**
 
-Suggested hold: **${recommendedTourDate} ${recommendedTourTime}**
-
-If that timing works, you can reserve your free spot here:
+You can reserve a free spot here:
 
 ${bookingUrl}
 
-The walk starts at the World Clock in Alexanderplatz and takes about 2 hours. It is a good way to give the center of Berlin a story before you use the rest of the trip for Wall history, museums, food, neighborhoods, or slower days.
-
-A few useful links:
-
-- Meeting point: ${meetingPointUrl}
-- Ticket calculator: ${ticketCalculatorUrl}
-- What's open: ${whatsOpenUrl}
-- Daily budget: ${dailyBudgetUrl}
+Over the next few days, I will send a few short Berlin prep notes: what to book ahead, how tickets work, what to check before you arrive, and how to keep the first day simple.
 
 Yusuf  
 BerlinWalk  

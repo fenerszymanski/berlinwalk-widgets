@@ -1,44 +1,32 @@
 # E3 - 1 Day Before Arrival
 
-Subject: 🌦️ Berlin tomorrow: ${weatherTitle}
+Subject: 🌦️ Berlin tomorrow
 
-Preheader: Shoes, weather, meeting point, and a simple first-day reminder.
+Preheader: Weather, shoes, meeting point, and the first-day rule.
 
 Hi,
 
 Tomorrow is Berlin.
 
-Weather first:
+Your weather note:
 
 **${weatherTitle}**
 
-How I would use that:
+My first-day rule is simple because it works: arrive, eat, walk a little, and stop before you are exhausted.
 
-**${weatherStrategy}**
+Berlin looks smaller on a map than it feels on foot. There are station stairs, cobbles, big crossings, river wind, and more walking than expected. Put comfortable shoes where you can actually find them tomorrow.
 
-And one last plan check:
+Save these before you travel:
 
-**${preArrivalChecklist}**
-
-Berlin usually looks closer on the map than it feels on your feet. Expect cobbles, station stairs, wide crossings, river wind, and more walking than planned.
-
-Before you travel, I would do this:
-
-- Save the World Clock meeting point.
-- Wear comfortable shoes.
-- Bring one layer you can add or remove.
-- Keep the first route simple from **${arrivalPoint}**.
-- If rain is likely, have one covered backup ready.
-
-Meeting point:
+${planUrl}
 
 ${meetingPointUrl}
 
-If you have not booked the walk yet, you can still reserve here:
+If you still want to join BerlinWalk, last-minute spots are here:
 
 ${bookingUrl}
 
-The walk takes about 2 hours and gives your first Berlin day a clear shape.
+If you do not join the walk, the advice is the same: keep the first day gentle. Berlin has enough edges; arrival day does not need to become one of them.
 
 Yusuf  
 BerlinWalk  

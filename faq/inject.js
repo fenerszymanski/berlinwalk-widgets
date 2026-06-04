@@ -51,7 +51,8 @@
   "what-to-do-near-hackescher-markt-after-the-tour": "hackescher-after-tour",
   "ultimate-berlin-trip-planner": "ultimate-berlin-trip-planner",
   "ultimate-berlin-trip-planner-build-realistic-berlin-itinerary-before-you-arrive": "ultimate-berlin-trip-planner",
-  "fiba-womens-basketball-world-cup-2026-berlin": "fiba-womens-basketball-world-cup-2026-berlin"
+  "fiba-womens-basketball-world-cup-2026-berlin": "fiba-womens-basketball-world-cup-2026-berlin",
+  "festival-of-lights-berlin-2026": "festival-of-lights-berlin-2026"
 };
 
   var SCHEMAS = {
@@ -2327,6 +2328,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Use the free hours for the city, not just the arena. The Berlin Arena is beside the East Side Gallery, Max-Schmeling-Halle is beside Mauerpark, and both are a short ride from the BerlinWalk route starting at the World Clock on Alexanderplatz. A morning walking tour fits well before many match-day sessions."
+        }
+      }
+    ]
+  },
+  "festival-of-lights-berlin-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Festival of Lights Berlin 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Festival of Lights Berlin 2026 runs from **October 9 to 18, 2026**. The official motto is **Colours of Love**."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time are the Festival of Lights illuminations on?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The normal lighting window is **daily from 7 pm to 11 pm**. Individual illuminations can vary, so check the official programme page again shortly before your visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Festival of Lights Berlin free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The outdoor illuminations are free to view. Some special tours, boat trips, concerts or partner events may require tickets, but the main city-centre light walk is free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best route for Festival of Lights Berlin 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a first visit, walk from **Alexanderplatz and the TV Tower** through St. Mary's Church, the Nikolai Quarter, Berlin Cathedral, Bebelplatz, Brandenburg Gate and then finish at **Potsdamer Platz**. This covers the densest cluster of confirmed 2026 preview locations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does the Festival of Lights walking route take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Allow **2 to 2.5 hours** for the central route with photo stops. The pure walking distance is only a few kilometres, but crowds, projections and pauses make the evening slower."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see every Festival of Lights location in one night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can see the central cluster in one night, but do not try to cover every preview location. Victory Column, Oberbaum Bridge, THF Tower and Radio Tower are better as extensions or separate evenings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I start if I am joining BerlinWalk the same day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Join the walking tour earlier in the day from the World Clock at Alexanderplatz, then return after dark for the light route. The tour gives the historic centre context before you see many of the same city layers illuminated at night."
         }
       }
     ]

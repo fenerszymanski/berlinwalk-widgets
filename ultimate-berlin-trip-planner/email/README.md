@@ -20,11 +20,13 @@ matching lead as booked, Ultimate suppresses its future planner reminders and
 lets the existing BerlinWalk booking email sequence handle meeting-point,
 weather, and tour-day prep. Do not create a second booked-guest automation here.
 
-The current copy is intentionally compact. It uses a small set of plan-specific
-variables so the emails feel like Yusuf's practical follow-up to the generated
-plan, not an internal planner report. Keep sales CTAs natural and limited:
-booked guests are suppressed from this sequence and should continue in the
-existing booking email automation.
+The current copy is intentionally compact and prep-led. It uses a small set of
+plan-specific variables, then adds useful visitor preparation: official booking
+links, ticket reminders, opening-day checks, BER zone logic, and meeting-point
+links. It should feel like Yusuf helping someone get ready for Berlin, not an
+internal planner report. Keep sales CTAs natural and limited: booked guests are
+suppressed from this sequence and should continue in the existing booking email
+automation.
 
 Variables expected by Velo:
 
@@ -75,6 +77,7 @@ Variables expected by Velo:
 - `${bookingStatus}`
 - `${tourDate}`
 - `${bookingUrl}`
+- `${planUrl}`
 - `${meetingPointUrl}`
 - `${firstDayPlannerUrl}`
 - `${ticketCalculatorUrl}`

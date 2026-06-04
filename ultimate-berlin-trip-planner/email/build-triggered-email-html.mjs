@@ -55,6 +55,7 @@ const EMAILS = [
 ];
 
 const LINK_LABELS = {
+  planUrl: 'Open your Berlin plan',
   bookingUrl: 'Book the free walking tour',
   meetingPointUrl: 'Open the World Clock meeting point',
   firstDayPlannerUrl: 'Open the First-Day Planner',
@@ -73,8 +74,19 @@ function escapeHtml(value) {
 
 function inlineMarkdown(value) {
   const withoutVariableTicks = String(value).replace(/`(\$\{[A-Za-z_][A-Za-z0-9_]*\})`/g, '$1');
-  return escapeHtml(withoutVariableTicks)
-    .replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #1B5E20;">$1</strong>');
+  const links = [];
+  const withLinkTokens = withoutVariableTicks.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, (_match, label, href) => {
+    const index = links.length;
+    links.push({ label, href });
+    return `__BW_LINK_${index}__`;
+  });
+  return escapeHtml(withLinkTokens)
+    .replace(/\*\*([^*]+)\*\*/g, '<strong style="color: #1B5E20;">$1</strong>')
+    .replace(/__BW_LINK_(\d+)__/g, (_match, index) => {
+      const link = links[Number(index)];
+      if (!link) return '';
+      return `<a href="${escapeHtml(link.href)}" style="color: #1B5E20; font-weight: 700; text-decoration: underline;">${escapeHtml(link.label)}</a>`;
+    });
 }
 
 function plainText(value) {

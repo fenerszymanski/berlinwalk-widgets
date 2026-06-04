@@ -326,15 +326,21 @@ function run() {
   );
   block(
     'Triggered Email copy stays reader-facing',
-    /Subject:\s*🗺️ Your Berlin plan from Yusuf/.test(allEmailTemplateText) &&
-      /Subject:\s*🧳 One week until Berlin/.test(allEmailTemplateText) &&
-      /Subject:\s*✅ Berlin in three days/.test(allEmailTemplateText) &&
+    /Subject:\s*🗺️ Your Berlin plan is ready/.test(allEmailTemplateText) &&
+      /Subject:\s*🧳 One week before Berlin/.test(allEmailTemplateText) &&
+      /Subject:\s*🎫 Berlin tickets and opening days/.test(allEmailTemplateText) &&
       /Subject:\s*🌦️ Berlin tomorrow/.test(allEmailTemplateText) &&
       /Subject:\s*👋 Welcome to Berlin/.test(allEmailTemplateText) &&
-      /I made your Berlin plan/.test(allEmailTemplateText) &&
-      /Berlin is much easier when one area carries the day/.test(allEmailTemplateText) &&
-      /This is the moment where small practical things save/.test(allEmailTemplateText) &&
+      /starting point, not as a strict schedule/.test(allEmailTemplateText) &&
+      /official Bundestag visit booking/.test(allEmailTemplateText) &&
+      /official Staatliche Museen zu Berlin ticket page/.test(allEmailTemplateText) &&
+      /Official BVG ticket page/.test(allEmailTemplateText) &&
+      /Zone C/.test(allEmailTemplateText) &&
+      /paper ticket/.test(allEmailTemplateText) &&
       /Tomorrow is Berlin/.test(allEmailTemplateText) &&
+      /\$\{planUrl\}/.test(allEmailTemplateText) &&
+      !/\$\{carryPack\}/.test(allEmailTemplateText) &&
+      !/PDF backup/i.test(allEmailTemplateText) &&
       !/Planner signal/i.test(allEmailTemplateText) &&
       !/Plan health/i.test(allEmailTemplateText) &&
       !/conversionSignal/.test(allEmailTemplateText) &&
@@ -363,6 +369,7 @@ function run() {
     'conversionReasons',
     'tripStyle',
     'bookingUrl',
+    'planUrl',
     'meetingPointUrl'
   ];
   const missingCriticalVars = criticalVars.filter((variable) => !veloVars.has(variable));

@@ -1,38 +1,33 @@
 # E1 - 7 Days Before Arrival
 
-Subject: 🧳 One week until Berlin
+Subject: 🧳 One week before Berlin
 
-Preheader: A calm check before tickets, museums, meals, and the first day start to feel real.
+Preheader: Book the few things that need slots. Leave the rest flexible.
 
 Hi,
 
-You are about one week from Berlin now.
+You are about a week from Berlin now.
 
-Your plan is:
+This is the moment when people usually open twenty tabs. I would do the opposite: book only the things that genuinely need a slot, then leave the rest of the trip flexible.
 
-**${planTitle}**
+Two Berlin things worth checking early:
 
-At this point, I would not try to schedule every hour. I would make sure the first day is easy, check the few things that need booking, and leave some room for weather.
+- **Reichstag dome:** free, but you need a confirmed time slot from the [official Bundestag visit booking](https://visite.bundestag.de/BAPWeb/pages/createBookingRequest.jsf?lang=en).
+- **Museum Island:** if there is one museum you really care about, check tickets on the [official Staatliche Museen zu Berlin ticket page](https://www.smb.museum/en/plan-your-visit/tickets/).
 
-Start with this:
-
-**${preArrivalChecklist}**
-
-For BerlinWalk, your best timing looks like:
+If you want the city to make sense before it becomes a list of sights, keep BerlinWalk early in the trip. For your plan, I would look at:
 
 **${recommendedTourDay}**
 
-If you want the walk to be your first proper city orientation, you can reserve a free spot here:
+Reserve your free spot here:
 
 ${bookingUrl}
 
-A few practical notes from your plan:
+Your saved plan is here when you need it:
 
-- Ticket start: **${ticket}**
-- Arrival point: **${arrivalPoint}**
-- Stay area: **${stayArea}**
+${planUrl}
 
-Berlin is much easier when one area carries the day. Let the first day stay simple, then use the later days for the heavier history, museums, food, or neighborhood time.
+No need to solve every meal today. Protect the timed things, then let Berlin breathe a bit.
 
 Yusuf  
 BerlinWalk  

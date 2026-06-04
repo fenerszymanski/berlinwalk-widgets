@@ -2,35 +2,31 @@
 
 Subject: 👋 Welcome to Berlin
 
-Preheader: Reach your base, eat something, save the World Clock, and keep the first day light.
+Preheader: Reach your base, eat something, and keep the first day human.
 
 Welcome to Berlin.
 
-Your plan for today is:
+Today is not the day to prove anything.
 
-**${planTitle}**
+Reach your base, solve luggage, eat before you are tired, and keep the first walk simple. If you do one good orientation move today, that is enough.
 
-For your phone:
+If you came from BER, do not worry if the first transfer felt clunky. Most people meet Berlin through a platform sign, a ticket machine, or a station that makes less sense than it should.
 
-**${travelMode}**
+One last practical thing: BER is Zone C. Central Berlin is usually AB. And if you have a paper ticket, validate it before you ride.
 
-Your arrival reminder:
+Your plan is here:
 
-**${preArrivalChecklist}**
+${planUrl}
 
-Today, simple is usually better than ambitious. Reach your base, solve luggage, eat before you are tired, and do one walkable orientation move instead of trying to win Berlin on day one.
-
-If you still want to join BerlinWalk, you can reserve your free spot here:
-
-${bookingUrl}
-
-The walk starts at the World Clock at Alexanderplatz and takes about 2 hours. It gives the center of Berlin a story instead of leaving you with a random list of stops.
-
-Meeting point details:
+If you are joining BerlinWalk, the meeting point is the World Clock at Alexanderplatz:
 
 ${meetingPointUrl}
 
-Have a calm first day. Berlin gets much better when you stop trying to solve all of it at once.
+Last-minute reservation link:
+
+${bookingUrl}
+
+Have a calm first day. Berlin gets much better when you stop trying to understand all of it immediately.
 
 Yusuf  
 BerlinWalk  

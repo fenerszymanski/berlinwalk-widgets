@@ -325,7 +325,7 @@
       <aside class="bw-status">
         <div>
           <p class="bw-kicker">Generated</p>
-          <p><strong>2026-06-03 05:49:38</strong></p>
+          <p><strong>2026-06-04 22:05:33</strong></p>
           <p class="bw-footer-note">Source folder: <code>ultimate-berlin-trip-planner/velo/</code></p>
         </div>
         <div class="bw-alert is-good">
@@ -389,8 +389,8 @@ node ultimate-berlin-trip-planner/launch-audit.mjs</textarea>
       <p class="bw-target">Create this backend file in Wix Developer Tools.</p>
       <p class="bw-note">Paste the full source into a new Backend file named tripPlannerFunnel.js.</p>
       <div class="bw-meta">
-        <span>956 lines</span>
-        <span>31.5 KB</span>
+        <span>971 lines</span>
+        <span>31.9 KB</span>
         <span>tripPlannerFunnel.js</span>
       </div>
       <textarea id="source-funnel" readonly spellcheck="false">import wixData from 'wix-data';
@@ -650,7 +650,18 @@ function geminiResponseSchema() {
     type: 'object',
     properties: {
       noteTitle: { type: 'string' },
-      guideNote: { type: 'string' },
+      routeIntro: { type: 'string' },
+      dayStories: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            dayNumber: { type: 'number' },
+            text: { type: 'string' }
+          },
+          required: ['dayNumber', 'text']
+        }
+      },
       weatherSentence: { type: 'string' },
       tourSentence: { type: 'string' },
       chips: {
@@ -665,22 +676,27 @@ function geminiResponseSchema() {
         }
       }
     },
-    required: ['noteTitle', 'guideNote', 'weatherSentence', 'tourSentence', 'chips']
+    required: ['noteTitle', 'routeIntro', 'dayStories', 'weatherSentence', 'tourSentence', 'chips']
   };
 }
 
 function geminiPrompt(input) {
   return [
-    'You are writing a short personalized guide note for BerlinWalk.',
+    'You are writing a short personal note for BerlinWalk.',
     'The itinerary logic is already decided. Do not move days, change times, invent venues, add new map stops, or create new CTAs.',
     'Use only the provided day titles, themes, timing blocks, places, weather notes, and risk tags.',
     'Do not add new neighborhoods, meals, safety warnings, ticket claims, booking advice, or attraction names that are not in the input.',
-    'Write in warm, human English in the voice of Yusuf, the local guide. It should feel like a thoughtful note after reading this exact plan, not a template.',
-    'Avoid technical planner terms, hype, generic travel philosophy, &quot;if the slot fits&quot;, &quot;one area per day&quot; as a repeated slogan, and em dashes.',
-    'guideNote must be one natural paragraph, 75-115 words, with at least two concrete details from the itinerary input.',
-    'weatherSentence must be one useful sentence based on the weather.tripSummary or weather notes. If weather is uncertain, say to re-check close to arrival.',
-    'If input.tourSlot has a date/time and is not booked, tourSentence must naturally name the BerlinWalk day/time using the provided slot. If booked, switch to meeting-point/prep language.',
-    'chips should contain 2 or 3 short human cues such as Best rhythm, Weather move, Tour anchor, or Energy guard. Do not repeat the same wording every time.',
+    'Write as Yusuf speaking directly to the guest before the trip.',
+    'Use simple English. Short sentences are better. It should sound like a local guide, not like software.',
+    'Do not use a fixed template. Do not make every day sound the same.',
+    'Do not list interest labels like &quot;History, Berlin Wall / Cold War, Free / low budget&quot;. Turn them into normal travel language.',
+    'Avoid technical planner language, abstract travel philosophy, hype, and long explanations.',
+    'noteTitle must be short and natural.',
+    'routeIntro must be one simple paragraph, 45-75 words, with real places or days from the itinerary.',
+    'dayStories must include exactly one item for every input.plan.days item. Each text must be one simple sentence, 14-28 words, using a real place, block, or tour detail from that day.',
+    'weatherSentence must be one short practical sentence.',
+    'If input.tourSlot has a date/time and is not booked, tourSentence should mention it naturally. If booked, use meeting-point/prep language.',
+    'chips may be an empty array. If used, keep them short and human.',
     '',
     'Return valid JSON only matching the requested schema. Do not use markdown.',
     '',
@@ -714,20 +730,19 @@ function sanitizeAiEnhancement(data, input, model, usage) {
     validDays[day.dayNumber] = true;
   });
 
-  const dayNotes = Array.isArray(data &amp;&amp; data.dayNotes)
-    ? data.dayNotes.map(item =&gt; ({
+  const dayStories = Array.isArray(data &amp;&amp; data.dayStories)
+    ? data.dayStories.map(item =&gt; ({
       dayNumber: cleanNumber(item &amp;&amp; item.dayNumber, 0, 0, 7),
-      headline: cleanText(item &amp;&amp; item.headline, '', 80),
-      note: cleanText(item &amp;&amp; item.note, '', 240),
-      nextMove: cleanText(item &amp;&amp; item.nextMove, '', 160)
-    })).filter(item =&gt; validDays[item.dayNumber] &amp;&amp; item.headline &amp;&amp; item.note).slice(0, input.plan.days.length)
+      text: cleanText(item &amp;&amp; item.text, '', 220)
+    })).filter(item =&gt; validDays[item.dayNumber] &amp;&amp; item.text).slice(0, input.plan.days.length)
     : [];
 
   return {
     provider: 'gemini',
     model,
     noteTitle: cleanText(data &amp;&amp; (data.noteTitle || data.headline), 'Yusuf guide read', 90),
-    guideNote: cleanText(data &amp;&amp; (data.guideNote || data.localRead), '', 620),
+    routeIntro: cleanText(data &amp;&amp; (data.routeIntro || data.guideNote || data.localRead), '', 620),
+    dayStories,
     weatherSentence: cleanText(data &amp;&amp; data.weatherSentence, '', 220),
     tourSentence: cleanText(data &amp;&amp; (data.tourSentence || data.tourNote), '', 220),
     chips: Array.isArray(data &amp;&amp; data.chips)
@@ -740,7 +755,6 @@ function sanitizeAiEnhancement(data, input, model, usage) {
     localRead: cleanText(data &amp;&amp; data.localRead, '', 420),
     watchOut: cleanText(data &amp;&amp; data.watchOut, '', 280),
     tourNote: cleanText(data &amp;&amp; data.tourNote, '', 220),
-    dayNotes,
     usage: {
       promptTokens: cleanNumber(usage &amp;&amp; usage.promptTokenCount, 0, 0, 100000),
       outputTokens: cleanNumber(usage &amp;&amp; usage.candidatesTokenCount, 0, 0, 100000),
@@ -888,7 +902,7 @@ export async function enhanceTripPlannerPlan(payload) {
 
     const modelText = extractGeminiText(parsed);
     const enhancement = sanitizeAiEnhancement(parseJsonText(modelText), input, model, parsed.usageMetadata || {});
-    if (!enhancement.guideNote &amp;&amp; !enhancement.localRead &amp;&amp; !enhancement.dayNotes.length) {
+    if (!enhancement.routeIntro &amp;&amp; !enhancement.dayStories.length) {
       return { ok: false, reason: 'empty_ai_result', model };
     }
 
@@ -1084,6 +1098,7 @@ function emailVariables(lead, stage) {
     bookingStatus: String(lead.bookingStatus || ''),
     tourDate: String(lead.tourDate || ''),
     bookingUrl: BOOKING_SHORT_URL,
+    planUrl: String(lead.page || 'https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner'),
     meetingPointUrl: String(lead.meetingPointUrl || 'https://www.berlinwalk.com/meeting-point'),
     firstDayPlannerUrl: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',
     ticketCalculatorUrl: 'https://www.berlinwalk.com/tools/transport-ticket-calculator',

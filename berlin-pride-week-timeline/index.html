@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Pride Week 2026 Timeline | BerlinWalk</title>
+  <meta name="description" content="A day-by-day timeline of Berlin Pride / CSD 2026: the Lesbian and Gay City Festival, CSD on the Spree, the Democracy Night rally, and the main parade on July 25, with times, places, and nearest U-Bahn.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-pride-week">
+  <style>
+    #bw-pride-week {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-pride-week * { box-sizing: border-box; }
+
+    #bw-pride-week .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-pride-week .bw-head { background: var(--bw-green); padding: 16px 20px; }
+    #bw-pride-week .bw-kicker {
+      color: var(--bw-yellow); font-size: 11px; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; margin: 0 0 4px;
+    }
+    #bw-pride-week .bw-title { color: var(--bw-white); font-size: 20px; font-weight: 800; margin: 0; line-height: 1.2; }
+    #bw-pride-week .bw-sub { color: #DDEFCB; font-size: 12.5px; margin: 6px 0 0; line-height: 1.5; }
+
+    #bw-pride-week .bw-next {
+      background: linear-gradient(120deg, #164a1a, #1B5E20 60%, #2c7a2f);
+      border-top: 3px solid var(--bw-yellow);
+      padding: 13px 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    #bw-pride-week .bw-next-label { color: var(--bw-yellow); font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 3px; }
+    #bw-pride-week .bw-next-match { color: var(--bw-white); font-size: 15px; font-weight: 800; line-height: 1.25; }
+    #bw-pride-week .bw-next-when { color: #CDE9BC; font-size: 12px; margin-top: 2px; }
+    #bw-pride-week .bw-count { margin-left: auto; display: flex; gap: 6px; }
+    #bw-pride-week .bw-count .seg { background: rgba(255,255,255,0.10); border: 1px solid rgba(255,230,0,0.35); border-radius: 8px; padding: 6px 9px; text-align: center; min-width: 46px; }
+    #bw-pride-week .bw-count .num { display: block; color: var(--bw-yellow); font-size: 19px; font-weight: 800; line-height: 1; font-variant-numeric: tabular-nums; }
+    #bw-pride-week .bw-count .unit { display: block; color: #BFE0AE; font-size: 8.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; margin-top: 4px; }
+
+    #bw-pride-week .bw-body { background: var(--bw-cream); padding: 18px 18px 20px; }
+
+    #bw-pride-week .bw-filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+    #bw-pride-week .bw-filter {
+      border: 1.5px solid var(--bw-border); background: var(--bw-white); color: var(--bw-green);
+      font-family: inherit; font-size: 12px; font-weight: 700; padding: 8px 13px;
+      border-radius: 999px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;
+    }
+    #bw-pride-week .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+    #bw-pride-week .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
+
+    #bw-pride-week .bw-timeline { position: relative; padding-left: 8px; }
+    #bw-pride-week .bw-item { position: relative; padding: 0 0 16px 30px; border-left: 2px solid var(--bw-border); }
+    #bw-pride-week .bw-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+    #bw-pride-week .bw-node {
+      position: absolute; left: -9px; top: 2px; width: 16px; height: 16px; border-radius: 50%;
+      background: var(--bw-green); border: 3px solid var(--bw-cream); box-shadow: 0 0 0 2px var(--bw-green);
+    }
+    #bw-pride-week .bw-item.hl .bw-node { background: var(--bw-yellow); box-shadow: 0 0 0 2px var(--bw-green); }
+
+    #bw-pride-week .bw-card { background: var(--bw-white); border: 1px solid var(--bw-border); border-radius: 12px; padding: 12px 14px; }
+    #bw-pride-week .bw-item.hl .bw-card { border-color: var(--bw-lime); box-shadow: inset 4px 0 0 var(--bw-yellow); background: linear-gradient(90deg, #FBFEF6, var(--bw-white) 45%); }
+
+    #bw-pride-week .bw-when { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 5px; }
+    #bw-pride-week .bw-date { font-size: 11px; font-weight: 800; color: var(--bw-green); letter-spacing: 0.4px; text-transform: uppercase; }
+    #bw-pride-week .bw-time { font-size: 11px; font-weight: 700; color: var(--bw-muted); }
+    #bw-pride-week .bw-type { font-size: 9px; font-weight: 800; letter-spacing: 0.6px; text-transform: uppercase; color: var(--bw-green); background: var(--bw-lime-soft); border: 1px solid var(--bw-border); border-radius: 6px; padding: 2px 7px; }
+    #bw-pride-week .bw-type.free { color: var(--bw-green-dark); background: var(--bw-yellow); border-color: var(--bw-yellow); }
+
+    #bw-pride-week .bw-name { font-size: 15px; font-weight: 800; color: var(--bw-text); line-height: 1.25; margin: 0 0 4px; }
+    #bw-pride-week .bw-note { font-size: 12.5px; color: var(--bw-text); line-height: 1.55; margin: 0 0 8px; }
+    #bw-pride-week .bw-rows { display: flex; flex-direction: column; gap: 4px; }
+    #bw-pride-week .bw-row { display: flex; gap: 8px; font-size: 12px; color: var(--bw-text); line-height: 1.45; }
+    #bw-pride-week .bw-rlabel { color: var(--bw-green); font-weight: 800; font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; min-width: 56px; padding-top: 1px; flex: 0 0 auto; }
+
+    #bw-pride-week .bw-empty { text-align: center; color: var(--bw-muted); font-size: 13px; padding: 22px 10px; font-weight: 600; }
+    #bw-pride-week .bw-foot { font-size: 11px; color: var(--bw-muted); line-height: 1.55; margin: 16px 0 0; border-top: 1px solid var(--bw-border); padding-top: 11px; }
+    #bw-pride-week .bw-foot b { color: var(--bw-green); }
+
+    @media (max-width: 520px) {
+      #bw-pride-week .bw-title { font-size: 17px; }
+      #bw-pride-week .bw-count { margin-left: 0; width: 100%; }
+      #bw-pride-week .bw-name { font-size: 14px; }
+      #bw-pride-week .bw-item { padding-left: 26px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <p class="bw-kicker">BerlinWalk &bull; Berlin Pride 2026</p>
+      <h2 class="bw-title">Berlin Pride Week 2026 &mdash; Day by Day</h2>
+      <p class="bw-sub">The whole CSD season at a glance, from the Lesbian and Gay City Festival to the main parade on July 25, with times, places, and the nearest U-Bahn.</p>
+    </div>
+
+    <div class="bw-next">
+      <div>
+        <p class="bw-next-label" id="bwNextLabel">Main parade in</p>
+        <div class="bw-next-match" id="bwNextMatch">🌈 CSD Berlin parade</div>
+        <div class="bw-next-when" id="bwNextWhen">Sat, Jul 25, 2026 &middot; 12:00 &middot; Berlin time</div>
+      </div>
+      <div class="bw-count" id="bwCount"></div>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-filters" id="bwFilters">
+        <button class="bw-filter active" data-f="all">All events</button>
+        <button class="bw-filter" data-f="free">Free &amp; open to all</button>
+      </div>
+
+      <div class="bw-timeline" id="bwTimeline"></div>
+
+      <p class="bw-foot">
+        Dates are confirmed for 2026; <b>exact start times for some events are set closer to the date</b>, so reconfirm on the official CSD Berlin and Stadtfest Berlin sites. Most events are free to attend.
+      </p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var root = document.getElementById('bw-pride-week');
+    if (!root) return;
+
+    var EVENTS = [
+      {
+        date: 'Sat–Sun, Jul 18–19', time: 'From 11:00',
+        type: 'Festival', free: true, hl: false,
+        name: 'Lesbian & Gay City Festival (Stadtfest)',
+        note: "Europe's largest queer street festival fills the streets around Nollendorfplatz with stages, bars, and food. Around half a million people over the weekend.",
+        place: 'Schöneberg (Motzstraße, Fuggerstraße, Eisenacher Straße)',
+        station: 'U1/U2/U3 Nollendorfplatz'
+      },
+      {
+        date: 'Thu, Jul 23', time: 'See official site',
+        type: 'On the water', free: false, hl: false,
+        name: 'CSD on the Spree (boat parade)',
+        note: 'A boat parade on the river in the run-up to the main march. A calmer, very Berlin way to take part, from the water.',
+        place: 'River Spree, central Berlin',
+        station: 'S Friedrichstraße / S Hackescher Markt'
+      },
+      {
+        date: 'Fri, Jul 24', time: '18:00–23:00',
+        type: 'Rally', free: true, hl: false,
+        name: 'Democracy Night at the Brandenburg Gate',
+        note: 'New for 2026: a Friday-evening rally with three stages, political speeches, and performances. The demonstration heart of CSD before the parade.',
+        place: 'Brandenburg Gate, Straße des 17. Juni',
+        station: 'S+U Brandenburger Tor'
+      },
+      {
+        date: 'Sat, Jul 25', time: '12:00',
+        type: 'Main parade', free: true, hl: true,
+        name: 'CSD Berlin Main Parade',
+        note: 'The big one. A moving street party several kilometres long, from Mitte through Schöneberg to the Brandenburg Gate. Step-off around noon.',
+        place: 'Starts: Leipziger Straße / Spittelmarkt → Brandenburg Gate',
+        station: 'U2 Spittelmarkt (start) · S+U Brandenburger Tor (finish)'
+      },
+      {
+        date: 'Sat, Jul 25', time: 'Afternoon onward',
+        type: 'Finale', free: true, hl: false,
+        name: 'Pride Village & CSD Finale',
+        note: 'The parade arrives at the Brandenburg Gate for the closing celebration, with stages and the Pride Village.',
+        place: 'Brandenburg Gate, Straße des 17. Juni',
+        station: 'S+U Brandenburger Tor'
+      }
+    ];
+
+    var listEl = root.querySelector('#bwTimeline');
+    var filtersEl = root.querySelector('#bwFilters');
+    var current = 'all';
+
+    function filtered() {
+      if (current === 'free') return EVENTS.filter(function (e) { return e.free; });
+      return EVENTS;
+    }
+
+    function card(e) {
+      var item = document.createElement('div');
+      item.className = 'bw-item' + (e.hl ? ' hl' : '');
+      item.innerHTML =
+        '<span class="bw-node"></span>' +
+        '<div class="bw-card">' +
+          '<div class="bw-when">' +
+            '<span class="bw-date">' + e.date + '</span>' +
+            '<span class="bw-time">' + e.time + '</span>' +
+            '<span class="bw-type' + (e.free ? ' free' : '') + '">' + e.type + '</span>' +
+          '</div>' +
+          '<p class="bw-name">' + e.name + '</p>' +
+          '<p class="bw-note">' + e.note + '</p>' +
+          '<div class="bw-rows">' +
+            '<div class="bw-row"><span class="bw-rlabel">Where</span><span>' + e.place + '</span></div>' +
+            '<div class="bw-row"><span class="bw-rlabel">Nearest</span><span>' + e.station + '</span></div>' +
+          '</div>' +
+        '</div>';
+      return item;
+    }
+
+    function render() {
+      var rows = filtered();
+      listEl.innerHTML = '';
+      if (!rows.length) {
+        var em = document.createElement('div');
+        em.className = 'bw-empty';
+        em.textContent = 'No events for this filter.';
+        listEl.appendChild(em);
+        return;
+      }
+      rows.forEach(function (e) { listEl.appendChild(card(e)); });
+    }
+
+    filtersEl.addEventListener('click', function (ev) {
+      var btn = ev.target.closest('.bw-filter');
+      if (!btn) return;
+      current = btn.getAttribute('data-f');
+      Array.prototype.forEach.call(filtersEl.querySelectorAll('.bw-filter'), function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      render();
+    });
+
+    // Countdown to the parade
+    var countEl = root.querySelector('#bwCount');
+    var nLabel = root.querySelector('#bwNextLabel');
+    var nMatch = root.querySelector('#bwNextMatch');
+    var nWhen = root.querySelector('#bwNextWhen');
+    var PARADE = new Date('2026-07-25T12:00:00+02:00').getTime();
+    var PARADE_END = new Date('2026-07-25T20:00:00+02:00').getTime();
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function seg(v, u) { return '<span class="seg"><span class="num">' + pad(v) + '</span><span class="unit">' + u + '</span></span>'; }
+
+    function tick() {
+      var now = Date.now();
+      if (now >= PARADE_END) {
+        nLabel.textContent = 'Berlin Pride 2026';
+        nMatch.textContent = '🌈 See you next year';
+        nWhen.textContent = 'Happy Pride from Berlin.';
+        countEl.innerHTML = '';
+        return;
+      }
+      if (now >= PARADE) {
+        nLabel.textContent = 'Happening now';
+        nMatch.textContent = '🌈 The CSD parade is on';
+        nWhen.innerHTML = 'Mitte → Schöneberg → Brandenburg Gate';
+        countEl.innerHTML = '';
+        return;
+      }
+      nLabel.textContent = 'Main parade in';
+      nMatch.innerHTML = '🌈 CSD Berlin parade';
+      nWhen.innerHTML = 'Sat, Jul 25, 2026 &middot; 12:00 &middot; Berlin time';
+      var diff = Math.max(0, PARADE - now);
+      var s = Math.floor(diff / 1000);
+      var dd = Math.floor(s / 86400); s -= dd * 86400;
+      var hh = Math.floor(s / 3600); s -= hh * 3600;
+      var mm = Math.floor(s / 60); var ss = s - mm * 60;
+      countEl.innerHTML = seg(dd, 'Days') + seg(hh, 'Hrs') + seg(mm, 'Min') + seg(ss, 'Sec');
+    }
+
+    render();
+    tick();
+    setInterval(tick, 1000);
+  })();
+  </script>
+</div>
+</body>
+</html>

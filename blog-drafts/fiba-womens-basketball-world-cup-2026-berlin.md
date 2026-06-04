@@ -27,6 +27,17 @@ Secondary keywords: Women's Basketball World Cup Berlin tickets, Berlin Arena ba
 
 Note: both new widgets are built and verified locally (no console errors, filters work). They still need a `tools-hub/data.json` entry only if they should also appear on `/tools` and `/widgets`; as post-only embeds they work from their GitHub Pages URL. The quick-summary and FAQ keys are wired in `quick-summary/data.json`, `faq/data.json`, and `faq/inject.js`. End-of-post tour CTA and the Berlin First-Day Survival Guide lead form are auto-injected globally. Do not embed them manually.
 
+## Visual Assets
+
+Approved visual set is stored in `blog-drafts/images/fiba-womens-basketball-world-cup-2026-berlin/`:
+
+- Cover/social image: `fiba-wwc-2026-berlin-hero.jpg` (generated with ChatGPT/OpenAI for BerlinWalk, optimized JPEG, no official logos/branding/player likenesses).
+- Inline official event logo before `{{quick-summary}}`: `fiba-wwc-2026-official-logo.png` (Yusuf-provided official FIBA Women's Basketball World Cup Germany 2026 logo, transparent PNG, used for editorial identification).
+- Inline image after `### Max-Schmeling-Halle`: `fiba-wwc-2026-max-schmeling-halle.jpg` (Ansgar Koreng / CC BY 4.0, resized and optimized).
+- Inline image after `## The part I love: you are watching on top of the Berlin Wall`: `fiba-wwc-2026-east-side-gallery.jpg` (© Anil Öztas / CC BY-SA 4.0, resized and optimized).
+
+Source and license notes are in `blog-drafts/images/fiba-womens-basketball-world-cup-2026-berlin/visual-sources.md`. The old Mercedes-Benz Arena exterior candidate and Mauerpark karaoke candidate were not used.
+
 ## Quick Summary
 
 - The FIBA Women's Basketball World Cup 2026 runs in Berlin from September 4 to 13, 2026. Sixteen of the best national teams play across two arenas.

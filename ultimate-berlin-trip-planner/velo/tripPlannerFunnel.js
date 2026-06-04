@@ -703,6 +703,7 @@ function emailVariables(lead, stage) {
     bookingStatus: String(lead.bookingStatus || ''),
     tourDate: String(lead.tourDate || ''),
     bookingUrl: BOOKING_SHORT_URL,
+    planUrl: String(lead.page || 'https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner'),
     meetingPointUrl: String(lead.meetingPointUrl || 'https://www.berlinwalk.com/meeting-point'),
     firstDayPlannerUrl: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',
     ticketCalculatorUrl: 'https://www.berlinwalk.com/tools/transport-ticket-calculator',

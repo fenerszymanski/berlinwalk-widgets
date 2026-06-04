@@ -170,7 +170,7 @@ function buildLeadPayload(options) {
     interestLens: 'History and Wall interests are mapped to central history and East Berlin days.',
     paceGuard: 'Balanced pace: one main area per day, one optional extra, protected food break.',
     weatherStrategy: 'Use live weather close to arrival and monthly fallback for later dates.',
-    carryPack: 'Exact link, overview map, tour hold, and PDF backup are ready.',
+    carryPack: 'Save the exact plan link, route map, trip calendar, and BerlinWalk calendar hold. The print-ready PDF is generated inside the unlocked planner.',
     reservationRadar: 'Book the tour first, check timed museum entries, keep arrival errands light.',
     planAdvice: 'Smart fix: avoid scattering the first day across too many areas.',
     planSwaps: 'Swap: if rain hits, move one museum or covered market into the same area.',
