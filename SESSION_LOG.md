@@ -4,6 +4,51 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-04 — Codex (Basketball team filter revision)
+
+**Did:** Applied Yusuf's feedback to remove special Germany/Türkiye fixture filters and make the fixture widget team-neutral.
+
+**Changed:**
+- `basketball-worldcup-fixtures/index.html` — quick buttons are now only All games / Berlin Arena / Max-Schmeling-Halle; the team dropdown covers all 16 teams; special team row highlighting removed.
+- `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md`, `faq/data.json`, `faq/inject.js`, and `PROJECT_MEMORY.md` — copy/schema updated to describe general all-team filtering.
+- Wix: patched UNPUBLISHED draft `d7731e4b-c550-451c-9a1b-0d129823616c` richContent so old Germany/Türkiye quick-filter wording is gone.
+
+**Opened:** Still needs `berlinwalk-widgets` push, image selection, and Wix visual QA before publish.
+**Closed:** Special Germany/Türkiye quick filter issue.
+
+**Next session should:** Push/deploy widgets, then review the Wix draft embeds/images visually.
+
+## 2026-06-04 — Codex (Women's Basketball World Cup Wix draft)
+
+**Did:** Continued Claude's FIBA Women's Basketball World Cup 2026 work into a verified local/widget stack and Wix draft.
+
+**Changed:**
+- `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md` — recorded Wix draft ID, updated official schedule/venue/ticket facts, and kept the visitor/fan city-guide angle.
+- `basketball-worldcup-fixtures/index.html` and `basketball-worldcup-venues-map/index.html` — corrected arena allocation, added official group-stage tip-off times, and updated venue notes.
+- `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`, `blog-workplan.md` — wired QS/FAQ/schema and tracking for slug `fiba-womens-basketball-world-cup-2026-berlin`.
+- `../berlinwalk-content-app/create-fiba-womens-basketball-world-cup-draft.mjs` — new one-off draft-creation script.
+- Wix: created UNPUBLISHED blog draft `d7731e4b-c550-451c-9a1b-0d129823616c` with 106 Ricos nodes and 4 HTML embeds.
+
+**Opened:** Push `berlinwalk-widgets` so the two new post-only widgets and QS/FAQ data resolve on GitHub Pages; add/select cover/inline images; visually QA the Wix draft before publish.
+**Closed:** Claude's open QS/FAQ wiring and FIBA schedule reverify items are done; local desktop/mobile widget QA passed.
+
+**Next session should:** Push/deploy widgets, then open Wix draft `d7731e4b-c550-451c-9a1b-0d129823616c`, add images, and publish only after visual review.
+
+## 2026-06-04 — Codex (Ultimate email human copy pass)
+
+**Did:** Reworked the Ultimate planner triggered emails again after Yusuf said the copy still felt robotic.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/e0-instant-plan.md` through `e4-arrival-day.md` — rewrote the subjects/preheaders/body copy in a warmer Yusuf-style voice and added one simple emoji to each subject.
+- `ultimate-berlin-trip-planner/email/build-triggered-email-html.mjs` — added a spacer row between the green email hero and body copy so `Hi,` no longer sits flush against the previous section; changed footer signoff to `See you soon,`.
+- `ultimate-berlin-trip-planner/email/paste-ready/` — regenerated all paste-ready HTML, preview, copy kit, manifest, README, and setup checklist.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated the email-copy audit to validate the new warmer copy and emoji subject contract.
+
+**Opened:** Yusuf should refresh `ultimate-berlin-trip-planner/email/paste-ready/copy-kit.html` and judge the actual copy tone before pasting into Wix.
+**Closed:** Email HTML package rebuilt; static check passed for all five emails with no old planner jargon, no `<style>`, no `<script>`, no SVG, no `1h45m`, and the new top spacer present; `launch-audit.mjs` passed `153 pass, 0 warn, 0 block`.
+
+**Next session should:** If Yusuf approves the new email tone, paste/update the five Wix Triggered Emails from `copy-kit.html`; otherwise make one final copy-only pass without touching widget/PDF logic.
+
 ## 2026-06-04 — Codex (Ultimate email simplification pass)
 
 **Did:** Simplified the Ultimate planner triggered-email sequence after Yusuf approved the widget/PDF direction, keeping the emails practical and traveller-facing instead of planner-report style.
@@ -25,16 +70,19 @@ Format for each entry — see `AGENTS.md` §9.
 **Did:** Researched and drafted a new event-tie-in blog post for the FIBA Women's Basketball World Cup 2026 (Berlin, Sept 4-13), aimed at catching fan/tourist traffic and converting to the walking tour.
 
 **Changed:**
-- `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md` — full draft in the standard format (meta, widget plan, quick summary, body, sources). Angle: visitor/fan city guide, not sports coverage. Core hook = both arenas (Uber Arena / Berlin Arena near East Side Gallery, Max-Schmeling-Halle near Mauerpark) sit on the old Berlin Wall line and are a short, direct ride from Alexanderplatz where the tour starts. Covers venues + transport, ticket mechanics (Eventim, session/day/team tickets), groups (Türkiye in C, USA in D, Germany hosts A), and what to do between games with internal links + booking CTA.
+- `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md` — full draft in the standard format (meta, widget plan, quick summary, body, sources). Angle: visitor/fan city guide, not sports coverage. Core hook = both arenas (Uber Arena / Berlin Arena near East Side Gallery, Max-Schmeling-Halle near Mauerpark) sit on the old Berlin Wall line and are a short, direct ride from Alexanderplatz where the tour starts. Covers venues + transport, ticket mechanics (Eventim, session/day/team tickets), groups (Türkiye in C, USA in D, Germany hosts A), and what to do between games with internal links + booking CTA. Two custom widgets embedded via `{{widget:...}}`.
+- `basketball-worldcup-fixtures/index.html` — NEW post widget. All 24 group-stage match-ups by day (Sep 4-7), filters by group/team/venue + Germany/Türkiye quick filters, tip-off countdown, and knockout calendar (QF Sep 10, SF Sep 12, final Sep 13, all at Berlin Arena). Built from the `worldcup-fixtures` pattern. Browser-verified: 24 matches, filters work (Türkiye → 3), no console errors.
+- `basketball-worldcup-venues-map/index.html` — NEW post widget. Leaflet/OpenStreetMap map, 6 pins: both arenas (🏀), the two Berlin Wall sites beside them (East Side Gallery, Mauerpark), tour start/finish (★); nearest U-Bahn in each popup; filters Arenas / Berlin Wall / Walking tour. Built from the `berlin-landmarks-map` pattern. Browser-verified: 6 markers, tiles load, filters work (Arenas → 2, Wall → 2), no console errors.
 
 **Opened:**
 - Quick-summary + FAQ data entries not yet created for slug `fiba-womens-basketball-world-cup-2026-berlin` (qsKey/faqKey in `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`).
-- Reverify before publish: exact group-to-venue split and precise daily/knockout schedule against the official FIBA schedule PDF.
+- New widgets need a GitHub Pages push before the `{{widget:...}}` embeds resolve live. Optionally add both to `tools-hub/data.json` if they should also show on `/tools` + `/widgets` (currently post-only embeds).
+- Reverify before publish: exact group-to-venue split and precise daily/knockout schedule against the official FIBA schedule PDF (widget uses confirmed group round-robin match-ups; per-game tip-off times are intentionally not hardcoded).
 - Consider adding the Basketball World Cup to the live `berlin-in-september-2026` post (it currently lists IFA, Art Week, Open Monument Day, Marathon but not this).
 
 **Closed:** None.
 
-**Next session should:** Get Yusuf's review of the draft, then (if approved) build the qs/FAQ entries and move it into a Wix draft, and patch the September post to cross-link.
+**Next session should:** Get Yusuf's review of the draft + widgets, then (if approved) build the qs/FAQ entries, push `berlinwalk-widgets` to GitHub Pages, move the post into a Wix draft, and patch the September post to cross-link.
 
 ## 2026-06-04 — Codex (Ultimate PDF screenshot fixes)
 

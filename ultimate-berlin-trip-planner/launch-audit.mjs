@@ -326,17 +326,21 @@ function run() {
   );
   block(
     'Triggered Email copy stays reader-facing',
-    /Your first read/.test(allEmailTemplateText) &&
-      /Your day rhythm/.test(allEmailTemplateText) &&
-      /Recommended BerlinWalk timing/.test(allEmailTemplateText) &&
-      /One week before Berlin/.test(allEmailTemplateText) &&
-      /Welcome to Berlin/.test(allEmailTemplateText) &&
+    /Subject:\s*🗺️ Your Berlin plan from Yusuf/.test(allEmailTemplateText) &&
+      /Subject:\s*🧳 One week until Berlin/.test(allEmailTemplateText) &&
+      /Subject:\s*✅ Berlin in three days/.test(allEmailTemplateText) &&
+      /Subject:\s*🌦️ Berlin tomorrow/.test(allEmailTemplateText) &&
+      /Subject:\s*👋 Welcome to Berlin/.test(allEmailTemplateText) &&
+      /I made your Berlin plan/.test(allEmailTemplateText) &&
+      /Berlin is much easier when one area carries the day/.test(allEmailTemplateText) &&
+      /This is the moment where small practical things save/.test(allEmailTemplateText) &&
+      /Tomorrow is Berlin/.test(allEmailTemplateText) &&
       !/Planner signal/i.test(allEmailTemplateText) &&
       !/Plan health/i.test(allEmailTemplateText) &&
       !/conversionSignal/.test(allEmailTemplateText) &&
       !/dayOperations/.test(allEmailTemplateText) &&
       !/dayIntelligence/.test(allEmailTemplateText),
-    'Expected the current email sequence to use compact traveller-facing copy, while keeping technical segmentation fields out of the pasted emails.'
+    'Expected the current email sequence to use warmer traveller-facing copy with emoji subjects, while keeping technical segmentation fields out of the pasted emails.'
   );
 
   const criticalVars = [

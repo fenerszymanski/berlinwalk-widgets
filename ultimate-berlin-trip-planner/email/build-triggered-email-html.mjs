@@ -272,11 +272,15 @@ ${hiddenPreheader}
           </td>
         </tr>
 
+        <tr>
+          <td style="padding: 18px 28px 0; font-size: 0; line-height: 0;">&nbsp;</td>
+        </tr>
+
 ${renderBody(parsed.bodyLines)}
 
         <tr>
           <td style="padding: 16px 28px 34px;">
-            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you in Berlin,</p>
+            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you soon,</p>
             <p style="margin: 0 0 2px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.3; font-weight: 700; color: #1B5E20;">Yusuf</p>
             <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0.08em; text-transform: uppercase; color: #4E5A4E;">BerlinWalk</p>
           </td>

@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Women's Basketball World Cup 2026 Berlin Venues Map | BerlinWalk</title>
+  <meta name="description" content="Map of the FIBA Women's Basketball World Cup 2026 venues in Berlin: the Berlin Arena (Uber Arena) and the Max-Schmeling-Halle, with the nearest U-Bahn, the walking-tour start, and the Berlin Wall sites beside each arena.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-bwc-map">
+  <style>
+    #bw-bwc-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-bwc-map * { box-sizing: border-box; }
+
+    #bw-bwc-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    #bw-bwc-map .bw-head { background: var(--bw-green); padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
+    #bw-bwc-map .bw-head-icon { font-size: 18px; line-height: 1; }
+    #bw-bwc-map .bw-kicker { color: var(--bw-yellow); font-size: 11px; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; }
+
+    #bw-bwc-map .bw-body { background: #FAFAF5; padding: 16px 18px; }
+    #bw-bwc-map .bw-ask { font-size: 12px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: var(--bw-green); margin: 0 0 10px; }
+    #bw-bwc-map .bw-filters { display: flex; gap: 8px; margin-bottom: 14px; flex-wrap: wrap; }
+    #bw-bwc-map .bw-filter {
+      border: 1.5px solid var(--bw-border); background: var(--bw-white); color: var(--bw-green);
+      font-family: inherit; font-size: 12px; font-weight: 700; padding: 8px 14px;
+      border-radius: 999px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;
+    }
+    #bw-bwc-map .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+    #bw-bwc-map .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
+
+    #bw-bwc-map .bw-hint { font-size: 13px; color: var(--bw-muted); margin: 0 0 14px; line-height: 1.55; }
+
+    #bw-bwc-map .bw-map-container {
+      width: 100%; height: 440px; border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--bw-border); background: #E8EEDC; position: relative;
+    }
+    #bw-bwc-map .bw-map { width: 100%; height: 100%; z-index: 1; }
+    #bw-bwc-map .leaflet-container { font-family: Montserrat, Arial, sans-serif; background: #E8EEDC; }
+    #bw-bwc-map .leaflet-popup-content-wrapper { border-radius: 12px; padding: 0; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border: 1px solid var(--bw-border); }
+    #bw-bwc-map .leaflet-popup-content { margin: 0; width: 252px !important; font-family: inherit; }
+    #bw-bwc-map .leaflet-popup-tip { box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    #bw-bwc-map .bw-popup-head { background: var(--bw-green); padding: 10px 14px; border-radius: 11px 11px 0 0; }
+    #bw-bwc-map .bw-popup-type { color: var(--bw-yellow); font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 2px; }
+    #bw-bwc-map .bw-popup-name { color: var(--bw-white); font-size: 15px; font-weight: 800; line-height: 1.25; }
+    #bw-bwc-map .bw-popup-body { padding: 12px 14px; }
+    #bw-bwc-map .bw-popup-note { font-size: 12px; color: var(--bw-text); line-height: 1.55; margin: 0 0 10px; }
+    #bw-bwc-map .bw-popup-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--bw-text); line-height: 1.5; margin-bottom: 6px; }
+    #bw-bwc-map .bw-popup-row:last-of-type { margin-bottom: 0; }
+    #bw-bwc-map .bw-popup-label { color: var(--bw-green); font-weight: 800; font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; min-width: 52px; padding-top: 1px; }
+    #bw-bwc-map .bw-popup-link {
+      display: inline-flex; align-items: center; gap: 4px; margin-top: 10px; padding: 8px 12px;
+      background: var(--bw-yellow); color: var(--bw-green); font-weight: 800; font-size: 11px;
+      text-decoration: none; border-radius: 8px; transition: background 0.15s ease;
+    }
+    #bw-bwc-map .bw-popup-link:hover { background: #FFEF33; }
+
+    #bw-bwc-map .bw-marker {
+      width: 32px; height: 32px; background: var(--bw-green); border: 3px solid var(--bw-yellow);
+      border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center;
+      justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    }
+    #bw-bwc-map .bw-marker-inner { transform: rotate(45deg); color: var(--bw-yellow); font-size: 14px; font-weight: 800; line-height: 1; }
+    #bw-bwc-map .bw-marker.venue { background: var(--bw-green); border-color: var(--bw-yellow); }
+    #bw-bwc-map .bw-marker.tour { background: var(--bw-yellow); border-color: var(--bw-green); }
+    #bw-bwc-map .bw-marker.tour .bw-marker-inner { color: var(--bw-green); }
+    #bw-bwc-map .bw-marker.wall { background: var(--bw-white); border-color: var(--bw-green); }
+    #bw-bwc-map .bw-marker.wall .bw-marker-inner { color: var(--bw-green); }
+
+    #bw-bwc-map .bw-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px; font-size: 11px; color: var(--bw-muted); line-height: 1.4; }
+    #bw-bwc-map .bw-legend span { display: inline-flex; align-items: center; gap: 5px; }
+    #bw-bwc-map .bw-dot { width: 13px; height: 13px; border-radius: 50%; background: var(--bw-green); border: 2px solid var(--bw-yellow); flex: 0 0 auto; }
+    #bw-bwc-map .bw-dot.tour { background: var(--bw-yellow); border-color: var(--bw-green); }
+    #bw-bwc-map .bw-dot.wall { background: var(--bw-white); border-color: var(--bw-green); }
+
+    #bw-bwc-map .bw-count { font-size: 11px; color: var(--bw-muted); margin-top: 10px; text-align: center; }
+    #bw-bwc-map .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    #bw-bwc-map .bw-tour-note {
+      margin-top: 12px; padding: 11px 14px; background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border); border-radius: 10px; font-size: 12px; line-height: 1.55; color: var(--bw-text);
+    }
+    #bw-bwc-map .bw-tour-note strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      #bw-bwc-map { margin: 22px 0; }
+      #bw-bwc-map .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-bwc-map .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-bwc-map .bw-body { padding: 14px; }
+      #bw-bwc-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-bwc-map .bw-filter { font-size: 11px; padding: 7px 12px; }
+      #bw-bwc-map .bw-map-container { height: 380px; }
+      #bw-bwc-map .leaflet-popup-content { width: 215px !important; }
+      #bw-bwc-map .bw-popup-name { font-size: 14px; }
+      #bw-bwc-map .bw-popup-row { font-size: 11.5px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🏀</span>
+      <span class="bw-kicker">World Cup 2026 &bull; Berlin Venues Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-ask">What do you want to find?</p>
+      <div class="bw-filters">
+        <button class="bw-filter active" type="button" data-filter="all">Show all</button>
+        <button class="bw-filter" type="button" data-filter="venue">Arenas</button>
+        <button class="bw-filter" type="button" data-filter="wall">Berlin Wall sites</button>
+        <button class="bw-filter" type="button" data-filter="tour">Walking tour</button>
+      </div>
+
+      <p class="bw-hint">Tap any pin for the nearest U-Bahn or S-Bahn and a quick local note. The two arenas both sit on the old line of the Berlin Wall, and both are a short, direct ride from the walking-tour start at Alexanderplatz.</p>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-bwc-map-canvas"></div>
+      </div>
+
+      <div class="bw-legend">
+        <span><i class="bw-dot"></i> 🏀 Arena</span>
+        <span><i class="bw-dot wall"></i> Berlin Wall site</span>
+        <span><i class="bw-dot tour"></i> Walking-tour stop</span>
+      </div>
+
+      <p class="bw-count"><strong id="bw-count-num">6</strong> places on the map</p>
+
+      <div class="bw-tour-note">
+        <strong>On a match day:</strong> do the morning walk from the World Clock on Alexanderplatz, then ride a few stops to your arena. The Berlin Arena sits beside the East Side Gallery; the Max-Schmeling-Halle sits beside the Mauerpark. You end up watching the world's best on the exact ground where the city was once divided.
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-bwc-map');
+      if (!root) return;
+
+      var locations = [
+        {
+          name: 'Berlin Arena (Uber Arena)',
+          type: 'Main venue - 12 group games + final phase',
+          note: "The tournament's main arena and Berlin's largest indoor venue (around 14,000 seats). It hosts 12 group-stage games and every final-phase game, including the final. Locally known as the Uber Arena, on the Mercedes Platz entertainment square.",
+          area: 'Friedrichshain, Mühlenstraße', station: 'S+U Warschauer Straße (5 min walk) / S Ostbahnhof (12 min)',
+          lat: 52.5083, lng: 13.4430, cats: ['venue'], kind: 'venue',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Uber+Arena+Berlin'
+        },
+        {
+          name: 'Max-Schmeling-Halle',
+          type: 'Second venue - 12 group games',
+          note: 'Hosts 12 group-stage games, with every team playing at least once here. It sits inside the green Friedrich-Ludwig-Jahn-Sportpark. There is no visitor parking on purpose, so come by U-Bahn.',
+          area: 'Prenzlauer Berg, Am Falkplatz', station: 'U2 Eberswalder Straße / S+U Schönhauser Allee',
+          lat: 52.5418, lng: 13.4045, cats: ['venue'], kind: 'venue',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Max-Schmeling-Halle+Berlin'
+        },
+        {
+          name: 'World Clock, Alexanderplatz',
+          type: 'Walking-tour start',
+          note: 'The Weltzeituhr, where our free walking tour begins. Both arenas are a short, direct ride from here, which makes Alexanderplatz the natural base for a match day. Look for the guide with the green umbrella.',
+          area: 'Mitte, Alexanderplatz', station: 'U/S Alexanderplatz',
+          lat: 52.5215, lng: 13.4132, cats: ['tour'], kind: 'tour',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Weltzeituhr+Alexanderplatz'
+        },
+        {
+          name: 'East Side Gallery',
+          type: 'Berlin Wall site',
+          note: 'The longest surviving stretch of the Berlin Wall, painted by artists from around the world. It is a two-minute walk from the Berlin Arena, so it is easy to see before or after a game. Free, outdoors, and best earlier in the day.',
+          area: 'Friedrichshain', station: 'S+U Warschauer Straße / S Ostbahnhof',
+          lat: 52.5050, lng: 13.4396, cats: ['wall'], kind: 'wall',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=East+Side+Gallery+Berlin'
+        },
+        {
+          name: 'Mauerpark',
+          type: 'Berlin Wall site & park',
+          note: "Once part of the Wall's death strip, now one of Berlin's best-loved parks, right beside the Max-Schmeling-Halle. Famous for its big Sunday flea market and the summer open-air karaoke that draws thousands.",
+          area: 'Prenzlauer Berg', station: 'U2 Eberswalder Straße',
+          lat: 52.5407, lng: 13.4023, cats: ['wall'], kind: 'wall',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Mauerpark+Berlin'
+        },
+        {
+          name: 'Hackescher Markt',
+          type: 'Walking-tour finish',
+          note: 'Where our tour ends: a lively square with the Hackesche Höfe courtyards, cafes, and fast transport to both arenas.',
+          area: 'Mitte', station: 'S Hackescher Markt',
+          lat: 52.5225, lng: 13.4024, cats: ['tour'], kind: 'tour',
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Hackescher+Markt'
+        }
+      ];
+
+      var mapEl = root.querySelector('#bw-bwc-map-canvas');
+      var countEl = root.querySelector('#bw-count-num');
+      var filterBtns = root.querySelectorAll('.bw-filter');
+
+      var map = L.map(mapEl, {
+        center: [52.524, 13.422],
+        zoom: 12,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var markers = [];
+
+      function glyph(kind) {
+        if (kind === 'venue') return '🏀';
+        if (kind === 'tour') return '★';
+        return '✕'; // wall
+      }
+
+      function createMarkerIcon(loc) {
+        var html = '<div class="bw-marker ' + loc.kind + '"><div class="bw-marker-inner">' + glyph(loc.kind) + '</div></div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [32, 32],
+          iconAnchor: [16, 32],
+          popupAnchor: [0, -30]
+        });
+      }
+
+      function createPopup(loc) {
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + loc.type + '</span>' +
+          '<div class="bw-popup-name">' + loc.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<p class="bw-popup-note">' + loc.note + '</p>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Area</span><span>' + loc.area + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Nearest</span><span>' + loc.station + '</span></div>' +
+          '<a href="' + loc.gmaps + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Google Maps →</a>' +
+          '</div>';
+      }
+
+      locations.forEach(function (loc) {
+        var marker = L.marker([loc.lat, loc.lng], {
+          icon: createMarkerIcon(loc)
+        }).bindPopup(createPopup(loc), {
+          closeButton: true,
+          maxWidth: 272,
+          className: 'bw-popup-wrapper'
+        });
+        marker.addTo(map);
+        marker._cats = loc.cats;
+        markers.push(marker);
+      });
+
+      countEl.textContent = markers.length;
+
+      function applyFilter(filter) {
+        var visibleCount = 0;
+        markers.forEach(function (m) {
+          var show = filter === 'all' || m._cats.indexOf(filter) !== -1;
+          if (show) {
+            if (!map.hasLayer(m)) m.addTo(map);
+            visibleCount++;
+          } else {
+            if (map.hasLayer(m)) map.removeLayer(m);
+          }
+        });
+        countEl.textContent = visibleCount;
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+</div>
+</body>
+</html>

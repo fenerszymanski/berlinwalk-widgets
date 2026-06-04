@@ -2,6 +2,8 @@
 
 Slug: `fiba-womens-basketball-world-cup-2026-berlin`
 
+Wix draft ID: `d7731e4b-c550-451c-9a1b-0d129823616c` (UNPUBLISHED, created 2026-06-04)
+
 Meta title: FIBA Women's Basketball World Cup 2026 Berlin: Fan Guide
 
 Meta description: A local's guide to the FIBA Women's Basketball World Cup 2026 in Berlin: both arenas, how to get there, how tickets work, the groups, and what to do in the city between games.
@@ -15,15 +17,21 @@ Secondary keywords: Women's Basketball World Cup Berlin tickets, Berlin Arena ba
 ## Widget Plan
 
 1. Quick summary, near the top: `{{quick-summary}}` (qsKey `fiba-womens-basketball-world-cup-2026-berlin`)
-2. FAQ, near the bottom: `{{faq}}` (faqKey `fiba-womens-basketball-world-cup-2026-berlin`)
+2. Fixtures + knockout calendar, after the "basics / groups" section: `{{widget:basketball-worldcup-fixtures}}`
+   - Source: `basketball-worldcup-fixtures/index.html` &middot; live URL `https://fenerszymanski.github.io/berlinwalk-widgets/basketball-worldcup-fixtures/`
+   - All 24 group-stage match-ups by day with confirmed Berlin tip-off times, filters for all teams, group/venue filters, a tip-off countdown, and the knockout calendar.
+3. Venues map, after the "two arenas" section: `{{widget:basketball-worldcup-venues-map}}`
+   - Source: `basketball-worldcup-venues-map/index.html` &middot; live URL `https://fenerszymanski.github.io/berlinwalk-widgets/basketball-worldcup-venues-map/`
+   - Leaflet/OpenStreetMap map with both arenas, nearest U-Bahn, the walking-tour start/finish, and the Berlin Wall site beside each arena; filters for Arenas / Berlin Wall / Walking tour.
+4. FAQ, near the bottom: `{{faq}}` (faqKey `fiba-womens-basketball-world-cup-2026-berlin`)
 
-Note: both keys still need to be added to `quick-summary/data.json`, `faq/data.json`, and the SLUG_MAP + SCHEMAS in `faq/inject.js`. End-of-post tour CTA and the Berlin First-Day Survival Guide lead form are auto-injected globally. Do not embed them manually.
+Note: both new widgets are built and verified locally (no console errors, filters work). They still need a `tools-hub/data.json` entry only if they should also appear on `/tools` and `/widgets`; as post-only embeds they work from their GitHub Pages URL. The quick-summary and FAQ keys are wired in `quick-summary/data.json`, `faq/data.json`, and `faq/inject.js`. End-of-post tour CTA and the Berlin First-Day Survival Guide lead form are auto-injected globally. Do not embed them manually.
 
 ## Quick Summary
 
 - The FIBA Women's Basketball World Cup 2026 runs in Berlin from September 4 to 13, 2026. Sixteen of the best national teams play across two arenas.
-- The games are split between the Berlin Arena (the Uber Arena, the city's biggest indoor venue) and the Max-Schmeling-Halle in Prenzlauer Berg. All the knockout games, including the final, are at the Berlin Arena.
-- Tickets are sold through Eventim. You buy day tickets, team tickets, or session tickets, and a session covers two games. There is no single-game ticket.
+- The games are split between the Berlin Arena (the Uber Arena, the city's biggest indoor venue) and the Max-Schmeling-Halle in Prenzlauer Berg. Berlin Arena hosts 12 group-stage games plus the entire final phase; Max-Schmeling-Halle hosts 12 group-stage games.
+- Tickets are sold through Eventim. The smallest ticket unit is a session ticket, which covers two games. Day tickets, team tickets, Premium tickets, and VIP tickets are also sold subject to availability, but there is no single-game ticket.
 - Both arenas sit right on the old line of the Berlin Wall, and both are a short, direct ride from Alexanderplatz, where my walking tour starts.
 - Game days usually leave you a free morning or a full free day, which is the perfect window for seeing the city on foot.
 
@@ -48,11 +56,15 @@ The tournament runs from **September 4 to 13, 2026**. Sixteen teams were drawn i
 - **Group C:** Australia, Belgium, Puerto Rico, Türkiye
 - **Group D:** United States, China, Czechia, Italy
 
-The group games fill the first week. The knockout rounds follow, with the quarter-finals, then the semi-finals, and the final and bronze-medal game on the closing weekend of September 12 and 13.
+The group games run from September 4 to 7. The Qualification to Quarter-Finals round follows on September 8, then the quarter-finals, semi-finals, and the final and bronze-medal game on the closing weekend of September 12 and 13.
 
-The big names to watch include **A'ja Wilson** with the United States, **Leonie Fiebich** for the host nation Germany, and **Emma Meesseman** for Belgium. Spain's **Pau Gasol** is a global ambassador for the event, and Australian legend **Lauren Jackson** hosted the draw here in Berlin.
+The names highlighted by the organisers include **A'ja Wilson** with the United States, **Leonie Fiebich** for the host nation Germany, and **Emma Meesseman** for Belgium. Final rosters can still change, but those are the kind of players casual fans should know before they arrive.
 
 If you are following a specific team, two notes. Germany, as hosts, are the emotional center of the tournament and the hardest tickets to get. And **Türkiye are in Group C** alongside Australia, Belgium, and Puerto Rico, so Turkish fans have a clear set of dates to plan around.
+
+Here is the full group-stage schedule with official Berlin tip-off times. Filter it by group, by any team, or by venue, and check the knockout calendar through to the final.
+
+{{widget:basketball-worldcup-fixtures}}
 
 ## The two arenas, and how to get to each
 
@@ -60,7 +72,7 @@ The games are split between two venues. This matters, because they are in differ
 
 ### Berlin Arena (the Uber Arena)
 
-This is the main venue: Berlin's largest indoor arena, holding around 14,000 people. It hosts two of the four groups in the first round, and then **every knockout game, including the final.** If you are buying tickets for the business end of the tournament, this is where you are going.
+This is the main venue: Berlin's largest indoor arena, holding around 14,000 people. It hosts **12 group-stage games and every final-phase game, including the final.** If you are buying tickets for the business end of the tournament, this is where you are going.
 
 The official tournament name is "Berlin Arena," but locals know it as the **Uber Arena** (you may also see its old name, the Mercedes-Benz Arena). It sits in Friedrichshain, by the river, in an entertainment district with the cinema, restaurants, and bars of the Mercedes Platz square right next to it.
 
@@ -72,7 +84,7 @@ Getting there is easy:
 
 ### Max-Schmeling-Halle
 
-The second venue holds around 9,000 and hosts the other two first-round groups. It sits in **Prenzlauer Berg**, inside the green Friedrich-Ludwig-Jahn-Sportpark, in one of the most pleasant residential neighborhoods in the city.
+The second venue holds around 9,000 and hosts **12 group-stage games**. It sits in **Prenzlauer Berg**, inside the green Friedrich-Ludwig-Jahn-Sportpark, in one of the most pleasant residential neighborhoods in the city.
 
 To get there:
 
@@ -82,12 +94,16 @@ To get there:
 
 One small local tip: the Max-Schmeling-Halle is a 5-minute walk from the U2 at Eberswalder Straße, which is the same line that runs through Alexanderplatz. So from the center it is genuinely a short, direct hop.
 
+Here are both arenas on the map, with the nearest U-Bahn, the walking-tour start at Alexanderplatz, and the Berlin Wall site that sits right beside each one. Tap any pin for the local detail.
+
+{{widget:basketball-worldcup-venues-map}}
+
 ## How the tickets work
 
 Tickets are sold through **Eventim**, the official ticketing platform. A few things are worth knowing before you buy, because the system is not the usual one-ticket-one-game setup:
 
 - The smallest unit is a **session ticket**, and a session **covers two games**, not one. You cannot buy a ticket for a single isolated game.
-- You can also buy **day tickets** (everything at one venue on one day), **team tickets** (follow one team through the group stage), and packages for the final round.
+- You can also buy **day tickets**, **team tickets** (follow one team through the group stage), **Premium tickets**, and **VIP tickets**, subject to availability.
 - Prices run in **categories 1 to 5**, depending on the seat, the day, and how full the game is expected to be.
 - Discounted and accessible tickets are available at every venue on every match day.
 
@@ -143,11 +159,12 @@ Walk the city in the morning. Watch the world's best in the afternoon. That is a
 ## Sources to Check Before Publishing
 
 - FIBA Women's Basketball World Cup 2026 official site (dates, format, venues): https://www.fiba.basketball/en/events/fiba-womens-basketball-world-cup-2026
-- 2026 FIBA Women's Basketball World Cup, Wikipedia (groups, venue/group assignment, schedule structure): https://en.wikipedia.org/wiki/2026_FIBA_Women's_Basketball_World_Cup
+- FIBA official schedule news and PDF (confirmed game times and venues): https://www.fiba.basketball/en/events/fiba-womens-basketball-world-cup-2026/news/fiba-womens-basketball-world-cup-2026-full-schedule-available and https://assets.fiba.basketball/image/upload/fiba-womens-basketball-world-cup-208875-game-schedule.pdf
+- FIBA competition system (16 teams, 36 games, qualification round, final phase): https://www.fiba.basketball/en/events/fiba-womens-basketball-world-cup-2026/competition-system
 - Olympics.com, all groups and full schedule: https://www.olympics.com/en/news/fiba-women-basketball-world-cup-2026-all-groups-full-schedule
 - Eventim official ticketing and FAQ (session/day/team tickets, categories): https://www.eventim.de/campaign/en/fwbwc2026 and https://www.eventim.de/campaign/en/fwbwc2026/faq
 - visitBerlin event page: https://www.visitberlin.de/en/event/fiba-womens-basketball-world-cup-2026
 - Uber Arena "Getting There" (transport, Warschauer Straße / Ostbahnhof): https://www.uber-arena.de/en/getting-there
 - Max-Schmeling-Halle arrival info (U2 Eberswalder Straße, Schönhauser Allee, no parking): https://www.max-schmeling-halle.de/besucherservice/anfahrt
 
-**Reverify before publishing:** the exact group-to-venue split (Berlin Arena vs Max-Schmeling-Halle) and the precise daily/knockout schedule against the official FIBA game-schedule PDF, since these can be adjusted. Confirm final ticket price bands if FIBA/Eventim publish exact figures closer to the event.
+**Verified on 2026-06-04:** FIBA has published the official schedule PDF with group-stage times and venues. Before publishing, do one final click-through on the FIBA schedule and Eventim availability because ticket inventory and final-phase time slots can still change.

@@ -1,55 +1,52 @@
 # E0 - Instant Plan
 
-Subject: Your Berlin trip plan is ready
+Subject: 🗺️ Your Berlin plan from Yusuf
 
-Preheader: Your route shape, first-day note, weather cue, and BerlinWalk timing.
+Preheader: A simple first read before you arrive: first day, weather, tickets, and BerlinWalk timing.
 
 Hi,
 
-Your Berlin trip plan is ready for `${arrivalDate}`.
+I made your Berlin plan for `${arrivalDate}`.
 
 **${planTitle}**
 
-Trip length: **${tripLength} days**  
-Arrival point: **${arrivalPoint}**  
-Stay area: **${stayArea}**  
-Pace: **${pace}**
+Here is the short version: you have `${tripLength} days`, you are starting from **${arrivalPoint}**, staying around **${stayArea}**, and the pace should feel **${pace}**.
 
-The main idea is simple: keep each day around one area, protect your arrival day, and avoid turning Berlin into a cross-city checklist.
+The important thing is not to see every famous place at once. Berlin works much better when each day has one clear area, one main idea, and enough space to actually enjoy it.
 
-Your first read:
+For your first read, I would focus on this:
 
 **${planAdvice}**
 
-Your day rhythm:
+And keep this rhythm in mind:
 
 **${dayRhythm}**
 
-Weather and openings:
+Weather and openings may change the day a little, so use this as your practical cue:
 
 **${weatherStrategy}**
 
-Ticket note:
+For transport, start with this:
 
 **${ticket}**
 
-Carry on your phone:
+And save this on your phone before you travel:
 
 **${carryPack}**
 
-Recommended BerlinWalk timing:
+For BerlinWalk, I would keep this timing in mind:
 
 **${recommendedTourDay}**
 
-Suggested calendar hold: **${recommendedTourDate} ${recommendedTourTime}**
+Suggested hold: **${recommendedTourDate} ${recommendedTourTime}**
 
-If that timing works for you, book the free walking tour here:
+If that timing works, you can reserve your free spot here:
 
 ${bookingUrl}
 
-The walk starts at the World Clock in Alexanderplatz and takes about 2 hours. It is the easiest way to give the center of Berlin a story before you use the rest of the trip for Wall history, museums, food, neighborhoods, or slower days.
+The walk starts at the World Clock in Alexanderplatz and takes about 2 hours. It is a good way to give the center of Berlin a story before you use the rest of the trip for Wall history, museums, food, neighborhoods, or slower days.
 
-Useful planning checks:
+A few useful links:
 
 - Meeting point: ${meetingPointUrl}
 - Ticket calculator: ${ticketCalculatorUrl}

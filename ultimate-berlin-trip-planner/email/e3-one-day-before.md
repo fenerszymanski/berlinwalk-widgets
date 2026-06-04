@@ -1,33 +1,34 @@
 # E3 - 1 Day Before Arrival
 
-Subject: Berlin tomorrow: ${weatherTitle}
+Subject: 🌦️ Berlin tomorrow: ${weatherTitle}
 
-Preheader: Weather, shoes, meeting point, and a calm first-day check.
+Preheader: Shoes, weather, meeting point, and a simple first-day reminder.
 
 Hi,
 
 Tomorrow is Berlin.
 
-Weather note:
+Weather first:
 
 **${weatherTitle}**
 
-What to do with that:
+How I would use that:
 
 **${weatherStrategy}**
 
-Your final plan check:
+And one last plan check:
 
 **${preArrivalChecklist}**
 
-Berlin rewards comfortable shoes more than heroic planning. You will meet cobbles, wide crossings, station stairs, river wind, and more walking than the map suggests.
+Berlin usually looks closer on the map than it feels on your feet. Expect cobbles, station stairs, wide crossings, river wind, and more walking than planned.
 
-Before you travel:
+Before you travel, I would do this:
 
 - Save the World Clock meeting point.
+- Wear comfortable shoes.
 - Bring one layer you can add or remove.
 - Keep the first route simple from **${arrivalPoint}**.
-- If rain is likely, choose a waterproof layer and keep one covered backup in mind.
+- If rain is likely, have one covered backup ready.
 
 Meeting point:
 

@@ -1,32 +1,26 @@
 # E4 - Arrival Day
 
-Subject: Welcome to Berlin - keep today simple
+Subject: 👋 Welcome to Berlin
 
-Preheader: Reach your base, eat, save the World Clock, and avoid overloading arrival day.
+Preheader: Reach your base, eat something, save the World Clock, and keep the first day light.
 
 Welcome to Berlin.
 
-Your plan for today:
+Your plan for today is:
 
 **${planTitle}**
 
-Phone-ready mode:
+For your phone:
 
 **${travelMode}**
 
-Arrival checklist:
+Your arrival reminder:
 
 **${preArrivalChecklist}**
 
-Today, the best plan is usually the simplest one:
+Today, simple is usually better than ambitious. Reach your base, solve luggage, eat before you are tired, and do one walkable orientation move instead of trying to win Berlin on day one.
 
-- Reach your base.
-- Solve luggage before sightseeing.
-- Eat before you are exhausted.
-- Save the World Clock meeting point.
-- Do one walkable orientation move, then stop.
-
-If you still want to join BerlinWalk, book your free spot here:
+If you still want to join BerlinWalk, you can reserve your free spot here:
 
 ${bookingUrl}
 

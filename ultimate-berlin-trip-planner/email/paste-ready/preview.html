@@ -7,7 +7,7 @@
 </head>
 <body style="margin: 0; padding: 28px; background: #F3F6EC;">
 <section style="margin: 0 0 44px;">
-  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / instant - Your Berlin trip plan is ready</h2>
+  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / instant - 🗺️ Your Berlin plan from Yusuf</h2>
   <!--
 =============================================================================
 E0 - Instant Plan
@@ -18,8 +18,8 @@ Path: sales
 Stage: instant
 Velo message ID placeholder: TODO_TRIP_PLANNER_INSTANT
 
-Subject: Your Berlin trip plan is ready
-Preheader: Your route shape, first-day note, weather cue, and BerlinWalk timing.
+Subject: 🗺️ Your Berlin plan from Yusuf
+Preheader: A simple first read before you arrive: first day, weather, tickets, and BerlinWalk timing.
 
 In Wix Developer Tools -> Triggered Emails, create/open the template and copy
 everything between HTML BLOCK START and HTML BLOCK END into the HTML block.
@@ -29,7 +29,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
 -->
 
 <!-- HTML BLOCK START -->
-<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Your route shape, first-day note, weather cue, and BerlinWalk timing.</div>
+<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">A simple first read before you arrive: first day, weather, tickets, and BerlinWalk timing.</div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;">
   <tr>
     <td style="background: #FAFAF5; padding: 22px 24px 18px; text-align: center;">
@@ -43,9 +43,13 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         <tr>
           <td style="background: #1B5E20; padding: 30px 28px 28px;">
             <p style="margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;">Your plan</p>
-            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">Your Berlin trip plan is ready</h1>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Your route shape, first-day note, weather cue, and BerlinWalk timing.</p>
+            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">🗺️ Your Berlin plan from Yusuf</h1>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">A simple first read before you arrive: first day, weather, tickets, and BerlinWalk timing.</p>
           </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 18px 28px 0; font-size: 0; line-height: 0;">&nbsp;</td>
         </tr>
 
         <tr>
@@ -55,7 +59,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Your Berlin trip plan is ready for ${arrivalDate}.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">I made your Berlin plan for ${arrivalDate}.</p>
           </td>
         </tr>
         <tr>
@@ -71,32 +75,17 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Trip length: <strong style="color: #1B5E20;">${tripLength} days</strong></p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Here is the short version: you have `${tripLength} days`, you are starting from <strong style="color: #1B5E20;">${arrivalPoint}</strong>, staying around <strong style="color: #1B5E20;">${stayArea}</strong>, and the pace should feel <strong style="color: #1B5E20;">${pace}</strong>.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Arrival point: <strong style="color: #1B5E20;">${arrivalPoint}</strong></p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">The important thing is not to see every famous place at once. Berlin works much better when each day has one clear area, one main idea, and enough space to actually enjoy it.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Stay area: <strong style="color: #1B5E20;">${stayArea}</strong></p>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Pace: <strong style="color: #1B5E20;">${pace}</strong></p>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">The main idea is simple: keep each day around one area, protect your arrival day, and avoid turning Berlin into a cross-city checklist.</p>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your first read</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">For your first read, I would focus on this:</p>
           </td>
         </tr>
         <tr>
@@ -112,7 +101,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your day rhythm</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">And keep this rhythm in mind</p>
           </td>
         </tr>
         <tr>
@@ -127,8 +116,8 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
           </td>
         </tr>
         <tr>
-          <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Weather and openings</p>
+          <td style="padding: 0 28px 18px;">
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Weather and openings may change the day a little, so use this as your practical cue:</p>
           </td>
         </tr>
         <tr>
@@ -143,8 +132,8 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
           </td>
         </tr>
         <tr>
-          <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Ticket note</p>
+          <td style="padding: 0 28px 18px;">
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">For transport, start with this:</p>
           </td>
         </tr>
         <tr>
@@ -160,7 +149,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Carry on your phone</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">And save this on your phone before you travel</p>
           </td>
         </tr>
         <tr>
@@ -175,8 +164,8 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
           </td>
         </tr>
         <tr>
-          <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Recommended BerlinWalk timing</p>
+          <td style="padding: 0 28px 18px;">
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">For BerlinWalk, I would keep this timing in mind:</p>
           </td>
         </tr>
         <tr>
@@ -192,12 +181,12 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Suggested calendar hold: <strong style="color: #1B5E20;">${recommendedTourDate} ${recommendedTourTime}</strong></p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Suggested hold: <strong style="color: #1B5E20;">${recommendedTourDate} ${recommendedTourTime}</strong></p>
           </td>
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If that timing works for you, book the free walking tour here:</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If that timing works, you can reserve your free spot here:</p>
           </td>
         </tr>
         <tr>
@@ -213,12 +202,12 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">The walk starts at the World Clock in Alexanderplatz and takes about 2 hours. It is the easiest way to give the center of Berlin a story before you use the rest of the trip for Wall history, museums, food, neighborhoods, or slower days.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">The walk starts at the World Clock in Alexanderplatz and takes about 2 hours. It is a good way to give the center of Berlin a story before you use the rest of the trip for Wall history, museums, food, neighborhoods, or slower days.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Useful planning checks</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">A few useful links</p>
           </td>
         </tr>
         <tr>
@@ -262,7 +251,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
 
         <tr>
           <td style="padding: 16px 28px 34px;">
-            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you in Berlin,</p>
+            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you soon,</p>
             <p style="margin: 0 0 2px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.3; font-weight: 700; color: #1B5E20;">Yusuf</p>
             <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0.08em; text-transform: uppercase; color: #4E5A4E;">BerlinWalk</p>
           </td>
@@ -286,7 +275,7 @@ TODO_TRIP_PLANNER_INSTANT in velo/tripPlannerFunnel.js.
 
 </section>
 <section style="margin: 0 0 44px;">
-  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / minus7 - One week before Berlin: keep the first day simple</h2>
+  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / minus7 - 🧳 One week until Berlin</h2>
   <!--
 =============================================================================
 E1 - 7 Days Before Arrival
@@ -297,8 +286,8 @@ Path: sales
 Stage: minus7
 Velo message ID placeholder: TODO_TRIP_PLANNER_MINUS_7
 
-Subject: One week before Berlin: keep the first day simple
-Preheader: A quick plan check before tickets, museums, and meals start filling up.
+Subject: 🧳 One week until Berlin
+Preheader: A calm check before tickets, museums, meals, and the first day start to feel real.
 
 In Wix Developer Tools -> Triggered Emails, create/open the template and copy
 everything between HTML BLOCK START and HTML BLOCK END into the HTML block.
@@ -308,7 +297,7 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
 -->
 
 <!-- HTML BLOCK START -->
-<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">A quick plan check before tickets, museums, and meals start filling up.</div>
+<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">A calm check before tickets, museums, meals, and the first day start to feel real.</div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;">
   <tr>
     <td style="background: #FAFAF5; padding: 22px 24px 18px; text-align: center;">
@@ -322,9 +311,13 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
         <tr>
           <td style="background: #1B5E20; padding: 30px 28px 28px;">
             <p style="margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;">One week before</p>
-            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">One week before Berlin: keep the first day simple</h1>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">A quick plan check before tickets, museums, and meals start filling up.</p>
+            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">🧳 One week until Berlin</h1>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">A calm check before tickets, museums, meals, and the first day start to feel real.</p>
           </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 18px 28px 0; font-size: 0; line-height: 0;">&nbsp;</td>
         </tr>
 
         <tr>
@@ -334,12 +327,12 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">You are about one week from Berlin.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">You are about one week from Berlin now.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your planner result</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your plan is</p>
           </td>
         </tr>
         <tr>
@@ -354,8 +347,13 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
           </td>
         </tr>
         <tr>
+          <td style="padding: 0 28px 18px;">
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">At this point, I would not try to schedule every hour. I would make sure the first day is easy, check the few things that need booking, and leave some room for weather.</p>
+          </td>
+        </tr>
+        <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your quick check</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Start with this</p>
           </td>
         </tr>
         <tr>
@@ -371,12 +369,7 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">At this point, I would not try to lock every meal or every museum. I would lock the first real anchor, then keep the rest flexible around weather and energy.</p>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your recommended BerlinWalk timing</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">For BerlinWalk, your best timing looks like:</p>
           </td>
         </tr>
         <tr>
@@ -392,7 +385,7 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If you want the walk to be the first proper city orientation, reserve your free spot here:</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If you want the walk to be your first proper city orientation, you can reserve a free spot here:</p>
           </td>
         </tr>
         <tr>
@@ -408,7 +401,7 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Useful details from your plan</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">A few practical notes from your plan</p>
           </td>
         </tr>
         <tr>
@@ -443,13 +436,13 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Berlin is easier when you let one area carry each day. Give the first day a calm shape, then let the later days do the heavier sightseeing.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Berlin is much easier when one area carries the day. Let the first day stay simple, then use the later days for the heavier history, museums, food, or neighborhood time.</p>
           </td>
         </tr>
 
         <tr>
           <td style="padding: 16px 28px 34px;">
-            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you in Berlin,</p>
+            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you soon,</p>
             <p style="margin: 0 0 2px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.3; font-weight: 700; color: #1B5E20;">Yusuf</p>
             <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0.08em; text-transform: uppercase; color: #4E5A4E;">BerlinWalk</p>
           </td>
@@ -473,7 +466,7 @@ TODO_TRIP_PLANNER_MINUS_7 in velo/tripPlannerFunnel.js.
 
 </section>
 <section style="margin: 0 0 44px;">
-  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / minus3 - Three days before Berlin: check the practical things</h2>
+  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / minus3 - ✅ Berlin in three days</h2>
   <!--
 =============================================================================
 E2 - 3 Days Before Arrival
@@ -484,8 +477,8 @@ Path: sales
 Stage: minus3
 Velo message ID placeholder: TODO_TRIP_PLANNER_MINUS_3
 
-Subject: Three days before Berlin: check the practical things
-Preheader: Ticket zone, openings, weather backup, and one good first move.
+Subject: ✅ Berlin in three days
+Preheader: Ticket zone, opening days, weather backup, and one good first move.
 
 In Wix Developer Tools -> Triggered Emails, create/open the template and copy
 everything between HTML BLOCK START and HTML BLOCK END into the HTML block.
@@ -495,7 +488,7 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
 -->
 
 <!-- HTML BLOCK START -->
-<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Ticket zone, openings, weather backup, and one good first move.</div>
+<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Ticket zone, opening days, weather backup, and one good first move.</div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;">
   <tr>
     <td style="background: #FAFAF5; padding: 22px 24px 18px; text-align: center;">
@@ -509,9 +502,13 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
         <tr>
           <td style="background: #1B5E20; padding: 30px 28px 28px;">
             <p style="margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;">Three days before</p>
-            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">Three days before Berlin: check the practical things</h1>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Ticket zone, openings, weather backup, and one good first move.</p>
+            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">✅ Berlin in three days</h1>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Ticket zone, opening days, weather backup, and one good first move.</p>
           </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 18px 28px 0; font-size: 0; line-height: 0;">&nbsp;</td>
         </tr>
 
         <tr>
@@ -525,8 +522,13 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
           </td>
         </tr>
         <tr>
+          <td style="padding: 0 28px 18px;">
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">This is the moment where small practical things save a lot of energy later.</p>
+          </td>
+        </tr>
+        <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Ticket note from your plan</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your ticket note</p>
           </td>
         </tr>
         <tr>
@@ -542,7 +544,7 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your planner check</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your main check before arriving</p>
           </td>
         </tr>
         <tr>
@@ -558,7 +560,7 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Three small things are worth checking before you arrive</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">I would also quickly check three things</p>
           </td>
         </tr>
         <tr>
@@ -569,7 +571,7 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
                   <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
                 </td>
                 <td style="padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">If you land at BER, remember it is Zone C. Most central sightseeing is AB.</p>
+                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">If you arrive through BER, remember that the airport is Zone C. Most central Berlin sightseeing is AB.</p>
                 </td>
               </tr>
               <tr>
@@ -577,7 +579,7 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
                   <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
                 </td>
                 <td style="padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Sundays are not normal shopping days. Many museums are closed on Mondays.</p>
+                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Sunday is not a normal shopping day, and Monday can be tricky for museums.</p>
                 </td>
               </tr>
               <tr>
@@ -585,15 +587,15 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
                   <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
                 </td>
                 <td style="padding: 10px 0 12px; vertical-align: top;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">If you want Reichstag, a famous museum, or a special restaurant, check whether it needs a reservation.</p>
+                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">If you want Reichstag, a famous museum, or a special dinner, check reservation rules now.</p>
                 </td>
               </tr>
             </table>
           </td>
         </tr>
         <tr>
-          <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Weather and opening-day fix</p>
+          <td style="padding: 0 28px 18px;">
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">For weather and opening hours, keep this in mind:</p>
           </td>
         </tr>
         <tr>
@@ -609,7 +611,7 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Quick links</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Useful links</p>
           </td>
         </tr>
         <tr>
@@ -644,7 +646,7 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If you still want a guided first frame for the city, book the walk here:</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If you still want the city to make sense before you wander off alone, BerlinWalk is here:</p>
           </td>
         </tr>
         <tr>
@@ -660,13 +662,13 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Start with one good story. Then Berlin becomes much easier to sort out.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Start with one good story. The rest of Berlin becomes much easier after that.</p>
           </td>
         </tr>
 
         <tr>
           <td style="padding: 16px 28px 34px;">
-            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you in Berlin,</p>
+            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you soon,</p>
             <p style="margin: 0 0 2px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.3; font-weight: 700; color: #1B5E20;">Yusuf</p>
             <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0.08em; text-transform: uppercase; color: #4E5A4E;">BerlinWalk</p>
           </td>
@@ -690,7 +692,7 @@ TODO_TRIP_PLANNER_MINUS_3 in velo/tripPlannerFunnel.js.
 
 </section>
 <section style="margin: 0 0 44px;">
-  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / minus1 - Berlin tomorrow: ${weatherTitle}</h2>
+  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / minus1 - 🌦️ Berlin tomorrow: ${weatherTitle}</h2>
   <!--
 =============================================================================
 E3 - 1 Day Before Arrival
@@ -701,8 +703,8 @@ Path: sales
 Stage: minus1
 Velo message ID placeholder: TODO_TRIP_PLANNER_MINUS_1
 
-Subject: Berlin tomorrow: ${weatherTitle}
-Preheader: Weather, shoes, meeting point, and a calm first-day check.
+Subject: 🌦️ Berlin tomorrow: ${weatherTitle}
+Preheader: Shoes, weather, meeting point, and a simple first-day reminder.
 
 In Wix Developer Tools -> Triggered Emails, create/open the template and copy
 everything between HTML BLOCK START and HTML BLOCK END into the HTML block.
@@ -712,7 +714,7 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
 -->
 
 <!-- HTML BLOCK START -->
-<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Weather, shoes, meeting point, and a calm first-day check.</div>
+<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Shoes, weather, meeting point, and a simple first-day reminder.</div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;">
   <tr>
     <td style="background: #FAFAF5; padding: 22px 24px 18px; text-align: center;">
@@ -726,9 +728,13 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
         <tr>
           <td style="background: #1B5E20; padding: 30px 28px 28px;">
             <p style="margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;">Tomorrow</p>
-            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">Berlin tomorrow: ${weatherTitle}</h1>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Weather, shoes, meeting point, and a calm first-day check.</p>
+            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">🌦️ Berlin tomorrow: ${weatherTitle}</h1>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Shoes, weather, meeting point, and a simple first-day reminder.</p>
           </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 18px 28px 0; font-size: 0; line-height: 0;">&nbsp;</td>
         </tr>
 
         <tr>
@@ -743,7 +749,7 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Weather note</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Weather first</p>
           </td>
         </tr>
         <tr>
@@ -759,7 +765,7 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">What to do with that</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">How I would use that</p>
           </td>
         </tr>
         <tr>
@@ -775,7 +781,7 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your final plan check</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">And one last plan check</p>
           </td>
         </tr>
         <tr>
@@ -791,12 +797,12 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Berlin rewards comfortable shoes more than heroic planning. You will meet cobbles, wide crossings, station stairs, river wind, and more walking than the map suggests.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Berlin usually looks closer on the map than it feels on your feet. Expect cobbles, station stairs, wide crossings, river wind, and more walking than planned.</p>
           </td>
         </tr>
         <tr>
-          <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Before you travel</p>
+          <td style="padding: 0 28px 18px;">
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Before you travel, I would do this:</p>
           </td>
         </tr>
         <tr>
@@ -808,6 +814,14 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
                 </td>
                 <td style="padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
                   <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Save the World Clock meeting point.</p>
+                </td>
+              </tr>
+              <tr>
+                <td width="22" style="padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
+                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
+                </td>
+                <td style="padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
+                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Wear comfortable shoes.</p>
                 </td>
               </tr>
               <tr>
@@ -831,7 +845,7 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
                   <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
                 </td>
                 <td style="padding: 10px 0 12px; vertical-align: top;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">If rain is likely, choose a waterproof layer and keep one covered backup in mind.</p>
+                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">If rain is likely, have one covered backup ready.</p>
                 </td>
               </tr>
             </table>
@@ -877,7 +891,7 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
 
         <tr>
           <td style="padding: 16px 28px 34px;">
-            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you in Berlin,</p>
+            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you soon,</p>
             <p style="margin: 0 0 2px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.3; font-weight: 700; color: #1B5E20;">Yusuf</p>
             <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0.08em; text-transform: uppercase; color: #4E5A4E;">BerlinWalk</p>
           </td>
@@ -901,7 +915,7 @@ TODO_TRIP_PLANNER_MINUS_1 in velo/tripPlannerFunnel.js.
 
 </section>
 <section style="margin: 0 0 44px;">
-  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / dayOf - Welcome to Berlin - keep today simple</h2>
+  <h2 style="font-family: Montserrat, Arial, sans-serif; color: #1B5E20;">sales / dayOf - 👋 Welcome to Berlin</h2>
   <!--
 =============================================================================
 E4 - Arrival Day
@@ -912,8 +926,8 @@ Path: sales
 Stage: dayOf
 Velo message ID placeholder: TODO_TRIP_PLANNER_DAY_OF
 
-Subject: Welcome to Berlin - keep today simple
-Preheader: Reach your base, eat, save the World Clock, and avoid overloading arrival day.
+Subject: 👋 Welcome to Berlin
+Preheader: Reach your base, eat something, save the World Clock, and keep the first day light.
 
 In Wix Developer Tools -> Triggered Emails, create/open the template and copy
 everything between HTML BLOCK START and HTML BLOCK END into the HTML block.
@@ -923,7 +937,7 @@ TODO_TRIP_PLANNER_DAY_OF in velo/tripPlannerFunnel.js.
 -->
 
 <!-- HTML BLOCK START -->
-<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Reach your base, eat, save the World Clock, and avoid overloading arrival day.</div>
+<div style="display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;">Reach your base, eat something, save the World Clock, and keep the first day light.</div>
 <table cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;">
   <tr>
     <td style="background: #FAFAF5; padding: 22px 24px 18px; text-align: center;">
@@ -937,9 +951,13 @@ TODO_TRIP_PLANNER_DAY_OF in velo/tripPlannerFunnel.js.
         <tr>
           <td style="background: #1B5E20; padding: 30px 28px 28px;">
             <p style="margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;">Arrival day</p>
-            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">Welcome to Berlin - keep today simple</h1>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Reach your base, eat, save the World Clock, and avoid overloading arrival day.</p>
+            <h1 style="margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;">👋 Welcome to Berlin</h1>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;">Reach your base, eat something, save the World Clock, and keep the first day light.</p>
           </td>
+        </tr>
+
+        <tr>
+          <td style="padding: 18px 28px 0; font-size: 0; line-height: 0;">&nbsp;</td>
         </tr>
 
         <tr>
@@ -949,7 +967,7 @@ TODO_TRIP_PLANNER_DAY_OF in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your plan for today</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your plan for today is</p>
           </td>
         </tr>
         <tr>
@@ -965,7 +983,7 @@ TODO_TRIP_PLANNER_DAY_OF in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Phone-ready mode</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">For your phone</p>
           </td>
         </tr>
         <tr>
@@ -981,7 +999,7 @@ TODO_TRIP_PLANNER_DAY_OF in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 10px 28px 8px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Arrival checklist</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;">Your arrival reminder</p>
           </td>
         </tr>
         <tr>
@@ -997,58 +1015,12 @@ TODO_TRIP_PLANNER_DAY_OF in velo/tripPlannerFunnel.js.
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Today, the best plan is usually the simplest one:</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">Today, simple is usually better than ambitious. Reach your base, solve luggage, eat before you are tired, and do one walkable orientation move instead of trying to win Berlin on day one.</p>
           </td>
         </tr>
         <tr>
           <td style="padding: 0 28px 18px;">
-            <table cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse: collapse; background: #FFFFFF;">
-              <tr>
-                <td width="22" style="padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
-                </td>
-                <td style="padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Reach your base.</p>
-                </td>
-              </tr>
-              <tr>
-                <td width="22" style="padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
-                </td>
-                <td style="padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Solve luggage before sightseeing.</p>
-                </td>
-              </tr>
-              <tr>
-                <td width="22" style="padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
-                </td>
-                <td style="padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Eat before you are exhausted.</p>
-                </td>
-              </tr>
-              <tr>
-                <td width="22" style="padding: 12px 0; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
-                </td>
-                <td style="padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Save the World Clock meeting point.</p>
-                </td>
-              </tr>
-              <tr>
-                <td width="22" style="padding: 12px 0; vertical-align: top;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;">&bull;</p>
-                </td>
-                <td style="padding: 10px 0 12px; vertical-align: top;">
-                  <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;">Do one walkable orientation move, then stop.</p>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-        <tr>
-          <td style="padding: 0 28px 18px;">
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If you still want to join BerlinWalk, book your free spot here:</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;">If you still want to join BerlinWalk, you can reserve your free spot here:</p>
           </td>
         </tr>
         <tr>
@@ -1091,7 +1063,7 @@ TODO_TRIP_PLANNER_DAY_OF in velo/tripPlannerFunnel.js.
 
         <tr>
           <td style="padding: 16px 28px 34px;">
-            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you in Berlin,</p>
+            <p style="margin: 0 0 4px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.6; color: #212121;">See you soon,</p>
             <p style="margin: 0 0 2px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 20px; line-height: 1.3; font-weight: 700; color: #1B5E20;">Yusuf</p>
             <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0.08em; text-transform: uppercase; color: #4E5A4E;">BerlinWalk</p>
           </td>

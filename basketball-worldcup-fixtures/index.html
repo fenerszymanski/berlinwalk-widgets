@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Women's Basketball World Cup 2026 Berlin Fixtures | BerlinWalk</title>
+  <meta name="description" content="The official group-stage schedule for the FIBA Women's Basketball World Cup 2026 in Berlin. Filter by group, team, venue, and tip-off time, then see the knockout calendar through to the final.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-bwc-fixtures">
+  <style>
+    #bw-bwc-fixtures {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-lime-soft: #F2F8E8;
+      --bw-red: #E63946;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+    #bw-bwc-fixtures * { box-sizing: border-box; }
+
+    #bw-bwc-fixtures .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-bwc-fixtures .bw-head { background: var(--bw-green); padding: 16px 20px; }
+    #bw-bwc-fixtures .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; margin: 0 0 4px;
+    }
+    #bw-bwc-fixtures .bw-title {
+      color: var(--bw-white); font-size: 20px; font-weight: 800;
+      margin: 0; line-height: 1.2;
+    }
+    #bw-bwc-fixtures .bw-sub { color: #DDEFCB; font-size: 12.5px; margin: 6px 0 0; line-height: 1.5; }
+
+    #bw-bwc-fixtures .bw-next {
+      background: linear-gradient(120deg, #164a1a, #1B5E20 60%, #2c7a2f);
+      border-top: 3px solid var(--bw-yellow);
+      padding: 13px 20px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    #bw-bwc-fixtures .bw-next-label {
+      color: var(--bw-yellow); font-size: 10px; font-weight: 800;
+      letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 3px;
+    }
+    #bw-bwc-fixtures .bw-next-match { color: var(--bw-white); font-size: 15px; font-weight: 800; line-height: 1.25; }
+    #bw-bwc-fixtures .bw-next-when { color: #CDE9BC; font-size: 12px; margin-top: 2px; }
+    #bw-bwc-fixtures .bw-count { margin-left: auto; display: flex; gap: 6px; }
+    #bw-bwc-fixtures .bw-count .seg {
+      background: rgba(255,255,255,0.10); border: 1px solid rgba(255,230,0,0.35);
+      border-radius: 8px; padding: 6px 9px; text-align: center; min-width: 46px;
+    }
+    #bw-bwc-fixtures .bw-count .num {
+      display: block; color: var(--bw-yellow); font-size: 19px; font-weight: 800;
+      line-height: 1; font-variant-numeric: tabular-nums;
+    }
+    #bw-bwc-fixtures .bw-count .unit {
+      display: block; color: #BFE0AE; font-size: 8.5px; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase; margin-top: 4px;
+    }
+
+    #bw-bwc-fixtures .bw-body { background: var(--bw-cream); padding: 16px 18px 20px; }
+    #bw-bwc-fixtures .bw-controls { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+    #bw-bwc-fixtures .bw-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    #bw-bwc-fixtures .bw-filter {
+      border: 1.5px solid var(--bw-border); background: var(--bw-white); color: var(--bw-green);
+      font-family: inherit; font-size: 12px; font-weight: 700; padding: 8px 13px;
+      border-radius: 999px; cursor: pointer; transition: all 0.15s ease; white-space: nowrap;
+    }
+    #bw-bwc-fixtures .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+    #bw-bwc-fixtures .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
+    #bw-bwc-fixtures .bw-selects { margin-left: auto; display: flex; gap: 8px; }
+    #bw-bwc-fixtures .bw-jump {
+      border: 1.5px solid var(--bw-border); background: var(--bw-white); color: var(--bw-green);
+      font-family: inherit; font-size: 12px; font-weight: 700; padding: 8px 12px;
+      border-radius: 10px; cursor: pointer; max-width: 190px;
+    }
+    #bw-bwc-fixtures .bw-jump:hover { border-color: var(--bw-lime); }
+
+    #bw-bwc-fixtures .bw-meta { font-size: 11.5px; color: var(--bw-muted); margin: 0 0 12px; line-height: 1.5; }
+    #bw-bwc-fixtures .bw-meta b { color: var(--bw-green); }
+
+    #bw-bwc-fixtures .bw-day { scroll-margin-top: 10px; margin-bottom: 8px; }
+    #bw-bwc-fixtures .bw-day-head {
+      position: sticky; top: 0; z-index: 2; background: var(--bw-cream);
+      display: flex; align-items: baseline; gap: 8px; padding: 10px 2px 7px;
+      border-bottom: 2px solid var(--bw-border); margin-bottom: 8px;
+    }
+    #bw-bwc-fixtures .bw-day-name { font-size: 13px; font-weight: 800; color: var(--bw-green); letter-spacing: 0.3px; }
+    #bw-bwc-fixtures .bw-day-count { font-size: 10.5px; color: var(--bw-muted); font-weight: 700; }
+
+    #bw-bwc-fixtures .bw-match {
+      display: flex; align-items: center; gap: 12px; background: var(--bw-white);
+      border: 1px solid var(--bw-border); border-radius: 11px; padding: 10px 12px; margin-bottom: 7px;
+    }
+    #bw-bwc-fixtures .bw-match.feat {
+      border-color: var(--bw-lime);
+      background: linear-gradient(90deg, #FBFEF6, var(--bw-white) 45%);
+      box-shadow: inset 4px 0 0 var(--bw-yellow);
+    }
+    #bw-bwc-fixtures .bw-teams { flex: 1 1 auto; min-width: 0; }
+    #bw-bwc-fixtures .bw-team {
+      font-size: 13.5px; font-weight: 700; color: var(--bw-text);
+      display: flex; align-items: center; gap: 7px; line-height: 1.35;
+    }
+    #bw-bwc-fixtures .bw-vs { font-size: 10px; font-weight: 700; color: var(--bw-muted); margin: 1px 0 1px 2px; letter-spacing: 1px; }
+    #bw-bwc-fixtures .bw-flag { font-size: 15px; line-height: 1; flex: 0 0 auto; }
+    #bw-bwc-fixtures .bw-tags { flex: 0 0 auto; display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+    #bw-bwc-fixtures .bw-tag {
+      font-size: 10px; font-weight: 800; color: var(--bw-green); background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border); border-radius: 7px; padding: 3px 8px; white-space: nowrap;
+    }
+    #bw-bwc-fixtures .bw-tag.grp.feat { background: var(--bw-yellow); border-color: var(--bw-yellow); color: var(--bw-green-dark); }
+    #bw-bwc-fixtures .bw-tag.venue { color: var(--bw-muted); background: var(--bw-white); font-weight: 700; }
+
+    #bw-bwc-fixtures .bw-ko-title {
+      font-size: 12px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase;
+      color: var(--bw-green); margin: 18px 0 4px;
+    }
+    #bw-bwc-fixtures .bw-ko-sub { font-size: 11px; color: var(--bw-muted); margin: 0 0 9px; }
+    #bw-bwc-fixtures .bw-ko {
+      display: flex; align-items: center; gap: 12px; background: var(--bw-white);
+      border: 1px dashed #BFD3A2; border-radius: 11px; padding: 11px 13px; margin-bottom: 7px;
+    }
+    #bw-bwc-fixtures .bw-ko .r { font-size: 13.5px; font-weight: 800; color: var(--bw-green); flex: 1 1 auto; }
+    #bw-bwc-fixtures .bw-ko .d { font-size: 12px; color: var(--bw-muted); font-weight: 700; text-align: right; }
+    #bw-bwc-fixtures .bw-ko.final { border: 2px solid var(--bw-yellow); background: #FFFDF0; }
+
+    #bw-bwc-fixtures .bw-empty { text-align: center; color: var(--bw-muted); font-size: 13px; padding: 26px 10px; font-weight: 600; }
+    #bw-bwc-fixtures .bw-foot {
+      font-size: 11px; color: var(--bw-muted); line-height: 1.55; margin: 14px 0 0;
+      border-top: 1px solid var(--bw-border); padding-top: 11px;
+    }
+    #bw-bwc-fixtures .bw-list { max-height: 640px; overflow-y: auto; padding-right: 4px; }
+
+    @media (max-width: 520px) {
+      #bw-bwc-fixtures .bw-title { font-size: 17px; }
+      #bw-bwc-fixtures .bw-selects { margin-left: 0; width: 100%; flex-direction: column; }
+      #bw-bwc-fixtures .bw-jump { width: 100%; max-width: none; }
+      #bw-bwc-fixtures .bw-count { margin-left: 0; width: 100%; }
+      #bw-bwc-fixtures .bw-match { gap: 9px; padding: 9px 10px; }
+      #bw-bwc-fixtures .bw-team { font-size: 12.5px; }
+      #bw-bwc-fixtures .bw-tag.venue { display: none; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <p class="bw-kicker">BerlinWalk &bull; Women's Basketball World Cup 2026</p>
+      <h2 class="bw-title">FIBA Women's World Cup 2026 - Berlin Fixtures</h2>
+      <p class="bw-sub">The official group-stage schedule, September 4 to 7, played across two arenas. Every team plays at least once in both venues. Filter by group, team, or venue.</p>
+    </div>
+
+    <div class="bw-next" id="bwNext">
+      <div>
+        <p class="bw-next-label" id="bwNextLabel">Tournament tips off in</p>
+        <div class="bw-next-match" id="bwNextMatch">-</div>
+        <div class="bw-next-when" id="bwNextWhen"></div>
+      </div>
+      <div class="bw-count" id="bwCount"></div>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-controls">
+        <div class="bw-filters" id="bwFilters">
+          <button class="bw-filter active" data-f="all">All games</button>
+          <button class="bw-filter" data-f="arena">Berlin Arena</button>
+          <button class="bw-filter" data-f="msh">Max-Schmeling-Halle</button>
+        </div>
+        <div class="bw-selects">
+          <select class="bw-jump" id="bwTeam" aria-label="Filter by any team"></select>
+          <select class="bw-jump" id="bwGroup" aria-label="Filter by group">
+            <option value="">All groups</option>
+            <option value="A">Group A</option>
+            <option value="B">Group B</option>
+            <option value="C">Group C</option>
+            <option value="D">Group D</option>
+          </select>
+        </div>
+      </div>
+
+      <p class="bw-meta" id="bwMeta"></p>
+
+      <div class="bw-list" id="bwList"></div>
+
+      <p class="bw-foot">
+        Group-stage match-ups, tip-off times, and venues are from the official FIBA schedule published in April 2026. <b>Qualification-round and semi-final time slots depend on the previous round</b>, so reconfirm final-phase details on the official FIBA schedule before booking around a specific game. All final-phase games, including the final, are played at the Berlin Arena (the Uber Arena).
+      </p>
+    </div>
+  </div>
+
+  <script>
+  (function () {
+    var root = document.getElementById('bw-bwc-fixtures');
+    if (!root) return;
+
+    // d = ISO date, t = Berlin tip-off, h/a = teams, g = group, v = venue (arena = Berlin Arena, msh = Max-Schmeling-Halle)
+    var M = [
+      // Friday, September 4
+      ['2026-09-04','11:30','Japan','Mali','A','arena'],
+      ['2026-09-04','11:30','Australia','Puerto Rico','C','msh'],
+      ['2026-09-04','14:15','United States','China','D','msh'],
+      ['2026-09-04','14:30','South Korea','Nigeria','B','arena'],
+      ['2026-09-04','17:30','Belgium','Türkiye','C','msh'],
+      ['2026-09-04','17:45','Spain','Germany','A','arena'],
+      ['2026-09-04','20:15','Czechia','Italy','D','msh'],
+      ['2026-09-04','21:00','Hungary','France','B','arena'],
+      // Saturday, September 5
+      ['2026-09-05','11:30','Mali','Spain','A','msh'],
+      ['2026-09-05','14:15','Nigeria','Hungary','B','msh'],
+      ['2026-09-05','18:00','Germany','Japan','A','msh'],
+      ['2026-09-05','20:45','France','South Korea','B','msh'],
+      // Sunday, September 6
+      ['2026-09-06','11:30','Türkiye','Australia','C','arena'],
+      ['2026-09-06','14:30','China','Czechia','D','arena'],
+      ['2026-09-06','17:45','Puerto Rico','Belgium','C','arena'],
+      ['2026-09-06','20:45','Italy','United States','D','arena'],
+      // Monday, September 7
+      ['2026-09-07','11:30','Belgium','Australia','C','arena'],
+      ['2026-09-07','11:30','Puerto Rico','Türkiye','C','msh'],
+      ['2026-09-07','14:30','Nigeria','France','B','arena'],
+      ['2026-09-07','14:30','Hungary','South Korea','B','msh'],
+      ['2026-09-07','17:50','Germany','Mali','A','arena'],
+      ['2026-09-07','17:50','Japan','Spain','A','msh'],
+      ['2026-09-07','20:45','United States','Czechia','D','arena'],
+      ['2026-09-07','20:45','Italy','China','D','msh']
+    ];
+
+    var KO = [
+      ['Qualification to Quarter-Finals', 'Tue, Sep 8 · 17:45 or 20:45', false],
+      ['Quarter-Final 1', 'Thu, Sep 10 · 11:30', false],
+      ['Quarter-Final 2', 'Thu, Sep 10 · 14:30', false],
+      ['Quarter-Final 3', 'Thu, Sep 10 · 17:45', false],
+      ['Quarter-Final 4', 'Thu, Sep 10 · 20:45', false],
+      ['Semi-finals', 'Sat, Sep 12 · 16:30 or 20:00', false],
+      ['Bronze-medal game', 'Sun, Sep 13 · 16:30', false],
+      ['Final', 'Sun, Sep 13 · 20:00', true]
+    ];
+
+    var FLAG = {
+      'Japan':'🇯🇵','Mali':'🇲🇱','Spain':'🇪🇸','Germany':'🇩🇪','South Korea':'🇰🇷','Nigeria':'🇳🇬',
+      'Hungary':'🇭🇺','France':'🇫🇷','Australia':'🇦🇺','Puerto Rico':'🇵🇷','Belgium':'🇧🇪','Türkiye':'🇹🇷',
+      'United States':'🇺🇸','China':'🇨🇳','Czechia':'🇨🇿','Italy':'🇮🇹'
+    };
+    var flag = function (t) { return FLAG[t] || '🏀'; };
+    var VEN = { arena: 'Berlin Arena', msh: 'Max-Schmeling-Halle' };
+    var VEN_SHORT = { arena: 'Berlin Arena', msh: 'Max-Schmeling' };
+
+    var DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    function fmtDay(iso) {
+      var p = iso.split('-');
+      var jsd = new Date(Number(p[0]), Number(p[1]) - 1, Number(p[2]));
+      return DOW[jsd.getDay()] + ', ' + MON[Number(p[1]) - 1] + ' ' + Number(p[2]);
+    }
+
+    var matches = M.map(function (m) {
+      return { d: m[0], t: m[1], h: m[2], a: m[3], g: m[4], v: m[5], feat: false };
+    });
+
+    var days = [];
+    matches.forEach(function (m) { if (days.indexOf(m.d) === -1) days.push(m.d); });
+
+    var listEl = root.querySelector('#bwList');
+    var metaEl = root.querySelector('#bwMeta');
+    var groupEl = root.querySelector('#bwGroup');
+    var teamEl = root.querySelector('#bwTeam');
+    var filtersEl = root.querySelector('#bwFilters');
+    var current = 'all';
+    var team = '';
+    var group = '';
+
+    var teams = [];
+    matches.forEach(function (m) {
+      if (teams.indexOf(m.h) === -1) teams.push(m.h);
+      if (teams.indexOf(m.a) === -1) teams.push(m.a);
+    });
+    teams.sort(function (a, b) { return a.localeCompare(b); });
+    var topt = document.createElement('option');
+    topt.value = ''; topt.textContent = 'All teams';
+    teamEl.appendChild(topt);
+    teams.forEach(function (tm) {
+      var o = document.createElement('option');
+      o.value = tm; o.textContent = flag(tm) + '  ' + tm;
+      teamEl.appendChild(o);
+    });
+
+    function filtered() {
+      if (team) return matches.filter(function (m) { return m.h === team || m.a === team; });
+      if (group) return matches.filter(function (m) { return m.g === group; });
+      if (current === 'arena') return matches.filter(function (m) { return m.v === 'arena'; });
+      if (current === 'msh') return matches.filter(function (m) { return m.v === 'msh'; });
+      return matches;
+    }
+
+    function matchRow(m) {
+      var row = document.createElement('div');
+      row.className = 'bw-match' + (m.feat ? ' feat' : '');
+      row.innerHTML =
+        '<div class="bw-teams">' +
+          '<div class="bw-team"><span class="bw-flag">' + flag(m.h) + '</span>' + m.h + '</div>' +
+          '<div class="bw-vs">VS</div>' +
+          '<div class="bw-team"><span class="bw-flag">' + flag(m.a) + '</span>' + m.a + '</div>' +
+        '</div>' +
+        '<div class="bw-tags">' +
+          '<span class="bw-tag time">' + m.t + '</span>' +
+          '<span class="bw-tag grp' + (m.feat ? ' feat' : '') + '">Group ' + m.g + '</span>' +
+          '<span class="bw-tag venue">' + VEN_SHORT[m.v] + '</span>' +
+        '</div>';
+      return row;
+    }
+
+    function render() {
+      var rows = filtered();
+      listEl.innerHTML = '';
+
+      if (!rows.length) {
+        var e = document.createElement('div');
+        e.className = 'bw-empty';
+        e.textContent = 'No games found for this filter.';
+        listEl.appendChild(e);
+      } else {
+        var byDay = {};
+        rows.forEach(function (m) { (byDay[m.d] = byDay[m.d] || []).push(m); });
+        days.forEach(function (d) {
+          if (!byDay[d]) return;
+          var grp = document.createElement('div');
+          grp.className = 'bw-day';
+          grp.id = 'bwc-day-' + d;
+          var head = document.createElement('div');
+          head.className = 'bw-day-head';
+          head.innerHTML = '<span class="bw-day-name">' + fmtDay(d) + '</span>' +
+            '<span class="bw-day-count">' + byDay[d].length + (byDay[d].length === 1 ? ' game' : ' games') + '</span>';
+          grp.appendChild(head);
+          byDay[d].forEach(function (m) { grp.appendChild(matchRow(m)); });
+          listEl.appendChild(grp);
+        });
+      }
+
+      // Knockout calendar (only on the unfiltered "all" view)
+      if (current === 'all' && !team && !group) {
+        var t = document.createElement('div');
+        t.className = 'bw-ko-title';
+        t.textContent = 'Knockout stage';
+        listEl.appendChild(t);
+        var sub = document.createElement('p');
+        sub.className = 'bw-ko-sub';
+        sub.textContent = 'All knockout games are at the Berlin Arena. Match-ups are set once the groups finish.';
+        listEl.appendChild(sub);
+        KO.forEach(function (k) {
+          var ko = document.createElement('div');
+          ko.className = 'bw-ko' + (k[2] ? ' final' : '');
+          ko.innerHTML = '<span class="r">' + (k[2] ? '🏆 ' : '') + k[0] + '</span><span class="d">' + k[1] + '</span>';
+          listEl.appendChild(ko);
+        });
+      }
+
+      var labelMap = {
+        all: 'all 24 group-stage games + knockout calendar',
+        arena: 'group games at the Berlin Arena',
+        msh: 'group games at the Max-Schmeling-Halle'
+      };
+      var label;
+      if (team) label = flag(team) + ' ' + team + "'s group games";
+      else if (group) label = 'Group ' + group + ' games';
+      else label = labelMap[current] || '';
+      metaEl.innerHTML = 'Showing <b>' + rows.length + '</b> &middot; ' + label;
+    }
+
+    filtersEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('.bw-filter');
+      if (!btn) return;
+      current = btn.getAttribute('data-f');
+      team = ''; teamEl.value = '';
+      group = ''; groupEl.value = '';
+      Array.prototype.forEach.call(filtersEl.querySelectorAll('.bw-filter'), function (b) {
+        b.classList.toggle('active', b === btn);
+      });
+      render();
+    });
+
+    teamEl.addEventListener('change', function () {
+      team = teamEl.value;
+      group = ''; groupEl.value = '';
+      if (!team) current = 'all';
+      Array.prototype.forEach.call(filtersEl.querySelectorAll('.bw-filter'), function (b) {
+        b.classList.toggle('active', !team && b.getAttribute('data-f') === 'all');
+      });
+      render();
+    });
+
+    groupEl.addEventListener('change', function () {
+      group = groupEl.value;
+      team = ''; teamEl.value = '';
+      if (!group) current = 'all';
+      Array.prototype.forEach.call(filtersEl.querySelectorAll('.bw-filter'), function (b) {
+        b.classList.toggle('active', !group && b.getAttribute('data-f') === 'all');
+      });
+      render();
+    });
+
+    // ---- Countdown to tip-off (first games: Sep 4, 2026, 11:30 Berlin time) ----
+    var countEl = root.querySelector('#bwCount');
+    var nMatch = root.querySelector('#bwNextMatch');
+    var nWhen = root.querySelector('#bwNextWhen');
+    var nLabel = root.querySelector('#bwNextLabel');
+    var TIP = new Date('2026-09-04T11:30:00+02:00').getTime();
+    var END = new Date('2026-09-13T23:00:00+02:00').getTime();
+
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function seg(v, u) { return '<span class="seg"><span class="num">' + pad(v) + '</span><span class="unit">' + u + '</span></span>'; }
+
+    function tick() {
+      var now = Date.now();
+      if (now >= END) {
+        nLabel.textContent = "Women's Basketball World Cup 2026";
+        nMatch.textContent = 'The tournament has finished';
+        nWhen.textContent = 'Thanks for following along in Berlin.';
+        countEl.innerHTML = '';
+        return;
+      }
+      if (now >= TIP) {
+        nLabel.textContent = 'Live in Berlin';
+        nMatch.textContent = 'The World Cup is underway';
+        nWhen.innerHTML = 'Sep 4-13, 2026 &middot; Berlin Arena &amp; Max-Schmeling-Halle';
+        countEl.innerHTML = '';
+        return;
+      }
+      nLabel.textContent = 'Tournament tips off in';
+      nMatch.innerHTML = '🏀 Japan vs Mali / Australia vs Puerto Rico';
+      nWhen.innerHTML = 'Opening games: Fri, Sep 4, 2026 &middot; 11:30 Berlin time';
+      var diff = Math.max(0, TIP - now);
+      var s = Math.floor(diff / 1000);
+      var dd = Math.floor(s / 86400); s -= dd * 86400;
+      var hh = Math.floor(s / 3600); s -= hh * 3600;
+      var mm = Math.floor(s / 60); var ss = s - mm * 60;
+      countEl.innerHTML = seg(dd, 'Days') + seg(hh, 'Hrs') + seg(mm, 'Min') + seg(ss, 'Sec');
+    }
+
+    render();
+    tick();
+    setInterval(tick, 1000);
+  })();
+  </script>
+</div>
+</body>
+</html>

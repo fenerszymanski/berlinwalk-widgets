@@ -1,42 +1,44 @@
 # E2 - 3 Days Before Arrival
 
-Subject: Three days before Berlin: check the practical things
+Subject: ✅ Berlin in three days
 
-Preheader: Ticket zone, openings, weather backup, and one good first move.
+Preheader: Ticket zone, opening days, weather backup, and one good first move.
 
 Hi,
 
 Berlin is close now. Your trip starts on `${arrivalDate}`.
 
-Ticket note from your plan:
+This is the moment where small practical things save a lot of energy later.
+
+Your ticket note:
 
 **${ticket}**
 
-Your planner check:
+Your main check before arriving:
 
 **${preArrivalChecklist}**
 
-Three small things are worth checking before you arrive:
+I would also quickly check three things:
 
-- If you land at BER, remember it is Zone C. Most central sightseeing is AB.
-- Sundays are not normal shopping days. Many museums are closed on Mondays.
-- If you want Reichstag, a famous museum, or a special restaurant, check whether it needs a reservation.
+- If you arrive through BER, remember that the airport is Zone C. Most central Berlin sightseeing is AB.
+- Sunday is not a normal shopping day, and Monday can be tricky for museums.
+- If you want Reichstag, a famous museum, or a special dinner, check reservation rules now.
 
-Weather and opening-day fix:
+For weather and opening hours, keep this in mind:
 
 **${planAdvice}**
 
-Quick links:
+Useful links:
 
 - What's open: ${whatsOpenUrl}
 - Ticket calculator: ${ticketCalculatorUrl}
 - First-day planner: ${firstDayPlannerUrl}
 
-If you still want a guided first frame for the city, book the walk here:
+If you still want the city to make sense before you wander off alone, BerlinWalk is here:
 
 ${bookingUrl}
 
-Start with one good story. Then Berlin becomes much easier to sort out.
+Start with one good story. The rest of Berlin becomes much easier after that.
 
 Yusuf  
 BerlinWalk  
