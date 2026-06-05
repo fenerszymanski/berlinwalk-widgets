@@ -2,7 +2,7 @@
 
 Slug: `berlin-pride-csd-2026`
 
-Wix draft ID: `51f9bda0-30e6-4118-a11c-232b7dbde002` (UNPUBLISHED, created 2026-06-05 via blog-publish)
+Wix draft ID: `9a5e6d05-5a4e-4658-a311-c9146c17ade9` (UNPUBLISHED, created 2026-06-05; cover + 2 inline images + credits + parade-map/qs/FAQ embeds all in via API)
 
 Meta title: Berlin Pride 2026 (CSD): Dates, Route & Local Guide
 
@@ -25,9 +25,9 @@ Real Wikimedia Commons photos, optimized and uploaded to Wix Media on 2026-06-05
 - inline in the history section ("The part most guides skip…"): `berlin-pride-memorial-homosexuals.jpg` -> `5a08a3_91ecc4269ed547b49dff4531b15e7df4~mv2.jpg` (CC BY-SA 4.0, credit: Gerd Eichmann)
   - alt: `The Memorial to Homosexuals Persecuted under Nazism, a dark concrete monolith in Berlin's Tiergarten.`
 
-The cover was set via the Blog Draft Posts API. The 2 inline images still need dropping into the Wix draft body in the editor (with the alt text above). The 2 CC BY-SA images need a visible photo credit.
+All three images are already in the Wix draft via the Blog Draft Posts API: the cover is set, and both inline images are placed inside their sections with a small centered photo credit caption under each (`Photo: Fridolin freudenfett, CC BY-SA 4.0` and `Photo: Gerd Eichmann, CC BY-SA 4.0`). Nothing to add in the editor.
 
-Note: the Wix draft embeds the parade-map widget + quick-summary + FAQ. The `{{widget:berlin-pride-week-timeline}}` placeholder below was published as a text link to the live `/tools/berlin-pride-week-timeline` page (blog-publish supports one inline widget); embed the timeline in the editor too if you want it inline.
+Note: the draft embeds the parade-map widget + quick-summary + FAQ. The timeline is a text link to the live `/tools/berlin-pride-week-timeline` page (the Wix create flow embeds one inline widget cleanly); embed the timeline in the editor too if you want it inline.
 
 ## Widget Plan
 

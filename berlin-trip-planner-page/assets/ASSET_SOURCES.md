@@ -43,4 +43,18 @@ UI icon clarity, rounded shapes, high contrast, warm but restrained. Use
 BerlinWalk palette: dark green #1B5E20, yellow #FFE600, lime #7CB342, cream
 #FAFAF5, small blue accent only if needed. No visible words, no labels, no
 watermarks, no logos, no text at all. Keep each cell visually separated so it
-can be cropped into individual assets.
+   can be cropped into individual assets.
+
+## Header Proof Icon Replacement
+
+- `_src/ikonset-header-proof-20260605.png`
+- Original local source: `/Users/yusufucuz/Downloads/ikonset.png`
+- Original dimensions: 1254 x 1254
+- Derived assets:
+  - `proof-plan.webp`
+  - `proof-weather.webp`
+  - `proof-map.webp`
+  - `proof-guide.webp`
+- Cropping notes: the 2x2 sheet was cut into four cells, the off-white sheet
+  background was masked out, and each icon was resized to 320 x 320 transparent
+  WebP so the artwork sits directly on the header proof-card background.

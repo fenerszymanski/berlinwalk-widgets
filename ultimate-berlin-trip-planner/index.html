@@ -311,8 +311,10 @@
       padding: 18px 20px 20px;
     }
 
-    #bw-trip-planner .bw-body:not(.is-result-ready) {
-      grid-template-columns: minmax(0, 1fr);
+    #bw-trip-planner .bw-body:not(.is-result-ready),
+    #bw-trip-planner .bw-body.is-result-ready:not(.is-result-visible) {
+      grid-template-columns: minmax(0, min(1120px, 100%));
+      justify-content: center;
     }
 
     #bw-trip-planner .bw-control-panel {
@@ -15591,8 +15593,12 @@
     var buildButton = root.querySelector('[data-build-plan]');
     var buildLabel = root.querySelector('[data-build-plan-label]');
     var buildNote = root.querySelector('[data-build-note]');
-    if (body) body.classList.toggle('is-result-ready', planGenerated);
-    if (result) result.hidden = !planGenerated || unlocked;
+    var resultVisible = planGenerated && !unlocked;
+    if (body) {
+      body.classList.toggle('is-result-ready', planGenerated);
+      body.classList.toggle('is-result-visible', resultVisible);
+    }
+    if (result) result.hidden = !resultVisible;
     if (planning) planning.hidden = !planningInProgress;
     if (control) control.hidden = !planGenerated;
     if (mobile) mobile.hidden = !planGenerated;

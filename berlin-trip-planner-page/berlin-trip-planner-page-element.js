@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const WIDGET_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/';
+  const WIDGET_PATH = 'ultimate-berlin-trip-planner/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 
   const asset = (path) => new URL(path, BASE_URL).toString();
@@ -42,7 +42,7 @@
     }
 
     _plannerSrc() {
-      const url = new URL(WIDGET_URL);
+      const url = new URL(WIDGET_PATH, BASE_URL);
       const current = new URLSearchParams(window.location.search || '');
       const keys = [
         'context',
@@ -423,7 +423,7 @@
           color: rgba(255, 255, 255, 0.86);
           display: grid;
           font-size: 12px;
-          grid-template-columns: 96px 1fr;
+          grid-template-columns: 104px 1fr;
           line-height: 1.45;
           min-height: 96px;
           min-width: 0;
@@ -432,12 +432,15 @@
         }
 
         .bw-trip-proof img {
+          background: transparent;
+          border-right: 0;
           display: block;
           grid-row: 1 / span 2;
           height: 100%;
           min-height: 96px;
-          object-fit: cover;
-          width: 96px;
+          object-fit: contain;
+          padding: 0;
+          width: 104px;
         }
 
         .bw-trip-proof b {

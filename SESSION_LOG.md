@@ -4,6 +4,39 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-05 — Codex (Trip Planner landing/widget alignment + iconset fix)
+
+**Did:** Fixed the latest `/berlin-trip-planner` local QA issues: the embedded planner form no longer sits left with a hidden right column, and the hero proof icons now use Yusuf's latest `ikonset.png` artwork as transparent icons without an extra white tile background.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — form-only/result-hidden states now use a centered single-column body (`min(1120px, 100%)`), while the two-column result layout only activates when the locked preview is actually visible.
+- `berlin-trip-planner-page/assets/` — replaced `proof-plan/weather/map/guide.webp` with optimized transparent crops from `/Users/yusufucuz/Downloads/ikonset.png` (320px WebP) and added `_src/ikonset-header-proof-20260605.png`.
+- `berlin-trip-planner-page/assets/ASSET_SOURCES.md` — documented the new iconset source/crop notes.
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — local preview now embeds the local widget path instead of the GitHub widget URL; proof icon tiles use `object-fit: contain`, padding, and a slightly wider square slot so artwork does not touch the edges.
+- `output/playwright/berlin-trip-planner-page/` — added QA screenshots for desktop hero, desktop embedded form, and mobile hero; checks showed no horizontal overflow, equal form side gaps, and 4 loaded 320x320 proof icons.
+
+**Opened:** Push/deploy still needed before live `/berlin-trip-planner` can use these exact local fixes.
+**Closed:** Yusuf's latest header iconset request, icon-edge-spacing question, and the desktop left-aligned embedded form issue are locally fixed.
+
+**Next session should:** Push widgets, create/install the Wix `/berlin-trip-planner` page, then switch email plan links from the direct GitHub widget URL to the branded page when live.
+
+## 2026-06-05 — Claude Code (Pride draft: inline images in via API)
+
+**Did:** Placed the 2 inline images + photo credits into the Berlin Pride Wix draft by rebuilding the full richContent and re-creating the draft (the draft body is not editable via GET/PATCH — richContent returns 0 nodes, so I built it locally and POSTed fresh).
+
+**Changed:**
+- Wix Blog: NEW draft `9a5e6d05-5a4e-4658-a311-c9146c17ade9` (slug `berlin-pride-csd-2026`, UNPUBLISHED), built via local `markdownToRicos` + spliced IMAGE nodes. 96 nodes, 2 IMAGE (Nollendorfplatz rainbow in the Schöneberg section, Memorial in the history section, each with a centered small photo-credit caption) + 3 HTML embeds (quick-summary, parade-map widget, FAQ). Cover (parade) + 2 categories (Tourist Tips, Berlin History) set in the create. Old draft `51f9bda0-…` DELETED. Only one Pride draft remains.
+- `blog-drafts/berlin-pride-csd-2026.md` — updated Wix draft ID + Visual Notes (all images now in via API; nothing left for the editor).
+- Image node schema copied from the live Festival of Lights post (`imageData.image.src.id` + width/height + altText + disableDownload). Credits are small centered caption paragraphs under each image.
+
+**Opened:**
+- Yusuf: review draft `9a5e6d05-…` and **publish**. (Cover + both inline images + credits + qs/FAQ/parade-map are all in; the week timeline is a text link to its tool page — embed it inline in the editor only if you want it.)
+- After publish: update the 2 Pride BerlinTools rows' relatedBlog from `berlin-in-july-2026` to the live Pride post.
+
+**Closed:** Pride post fully assembled in Wix (real photos, credits, embeds, cover) — ready to publish, no manual image step left.
+
+**Next session should:** After Yusuf publishes, verify qs/FAQ/widgets render and swap the Pride tools' relatedBlog; optionally build the `festival-lights-route` widget + tool icons.
+
 ## 2026-06-05 — Codex (Berlin Trip Planner visual asset pack)
 
 **Did:** Replaced placeholder proof/process visuals on the standalone `/berlin-trip-planner` landing page with one generated BerlinWalk-style asset set.
