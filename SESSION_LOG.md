@@ -4,6 +4,40 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-05 — Codex (Ultimate email direct unlock fix)
+
+**Did:** Fixed the latest Ultimate Trip Planner email-link issue where `${planUrl}` could open the Wix wrapper page without unlocking the iframe widget.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — `planUrlForEmail()` now always rebuilds the email link as the direct GitHub Pages widget URL, preserves saved planner query params, and forces `planAccess=1`.
+- `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — smoke-test payloads now use the same direct widget URL so future email tests measure the real unlock behavior.
+- `output/qa/ultimate-trip-planner-live-smoke/dry-run-direct-widget-link-check.json` — dry-run evidence confirms host `fenerszymanski.github.io` and `planAccess=1`.
+
+**Opened:** Yusuf needs to paste/publish the updated `tripPlannerFunnel.js` in Wix Velo, then rerun one live email smoke.
+**Closed:** Syntax checks passed; `launch-audit.mjs` `153 pass`; Velo `prepublish-gate.mjs` `13 pass`.
+
+**Next session should:** After Wix publish, send a live test email and verify the link opens the full unlocked plan without rebuilding.
+
+## 2026-06-05 — Claude Code (Pride widgets to tools pages)
+
+**Did:** Promoted the two Berlin Pride post widgets into BerlinTools, so they have standalone `/tools/<slug>` pages and appear in the `/tools` + `/widgets` grids. (Festival of Lights post confirmed live.)
+
+**Changed:**
+- Wix: inserted 2 BerlinTools CMS rows via Content Studio `/api/insert-berlintool` — `berlin-pride-week-timeline` (itemId `773220f1-…`) and `berlin-pride-parade-map` (itemId `00737be5-…`). Both dynamic pages verified LIVE: `https://www.berlinwalk.com/tools/berlin-pride-week-timeline` and `/tools/berlin-pride-parade-map` return HTTP 200 (no re-save needed). relatedBlog points to the live `berlin-in-july-2026` post for now (swap to the Pride post once it is published).
+- `tools-hub/data.json` — added the 2 Pride entries (category Discovery, embedHeight 1180/900, no icon yet). Now 41 tools.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — re-ran `widgets-hub/_regenerate_seo.py`; ItemList now 40 widgets incl. both Pride, 6084 chars (under the 7000 Wix limit).
+- Both Pride widget folders confirmed live on GitHub Pages (HTTP 200).
+
+**Opened:**
+- PUSH `berlinwalk-widgets` so GitHub Pages serves the updated `tools-hub/data.json` — until then the `/tools` + `/widgets` GRID cards won't show (the dynamic `/tools/<slug>` pages already work because they are CMS-driven).
+- Paste the regenerated ItemList into Wix Studio → `/widgets` → Advanced SEO (manual).
+- Pride cards have no icon (letter chip fallback); generate 2 icons later via the ChatGPT-browser flow like the basketball icons.
+- When the Pride post goes live, update both CMS rows' relatedBlog to it.
+
+**Closed:** Pride timeline + parade map now have live BerlinTools pages and are wired into the tools directory data.
+
+**Next session should:** After Yusuf pushes the repo, verify the 2 new cards render on `/tools` and `/widgets`; optionally generate icons and build the `festival-lights-route` widget.
+
 ## 2026-06-05 — Codex (Ultimate email plan access)
 
 **Did:** Made Ultimate Trip Planner email links reopen the saved-choice full plan directly instead of sending users back through the email gate.

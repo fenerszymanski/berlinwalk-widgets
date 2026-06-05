@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const DEFAULT_BASE_URL = 'https://www.berlinwalk.com';
+const DIRECT_WIDGET_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/';
 const OUTPUT_DIR = 'output/qa/ultimate-trip-planner-live-smoke';
 const GEMINI_FLASH_PRICING = {
   model: 'gemini-2.5-flash',
@@ -137,7 +138,7 @@ function estimateGeminiCost(response) {
 }
 
 function buildPlannerPageUrl(options, arrivalDate, tripLength) {
-  const url = new URL('/tools/ultimate-berlin-trip-planner', options.baseUrl || DEFAULT_BASE_URL);
+  const url = new URL(DIRECT_WIDGET_URL);
   url.searchParams.set('context', 'tool');
   url.searchParams.set('date', arrivalDate);
   url.searchParams.set('tripLength', String(tripLength));

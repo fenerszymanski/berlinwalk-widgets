@@ -7,6 +7,7 @@ const COLLECTION = 'TripPlannerLeads';
 const CONTACT_LABEL = 'Ultimate Berlin Trip Planner Lead';
 const TIMEZONE = 'Europe/Berlin';
 const BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
+const DIRECT_WIDGET_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/';
 const DUE_QUERY_PAGE_SIZE = 100;
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta/models';
 const GEMINI_DEFAULT_MODEL = 'gemini-2.5-flash';
@@ -652,14 +653,18 @@ function shouldSuppressUltimateReminder(lead, stage) {
 }
 
 function planUrlForEmail(lead) {
-  const fallback = 'https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner';
-  const raw = String(lead && lead.page || fallback);
+  const raw = String(lead && lead.page || DIRECT_WIDGET_URL);
   try {
-    const url = new URL(raw, fallback);
-    url.searchParams.set('planAccess', '1');
-    return url.toString();
+    const source = new URL(raw, DIRECT_WIDGET_URL);
+    const direct = new URL(DIRECT_WIDGET_URL);
+    source.searchParams.forEach((value, key) => {
+      direct.searchParams.set(key, value);
+    });
+    direct.searchParams.set('context', direct.searchParams.get('context') || 'tool');
+    direct.searchParams.set('planAccess', '1');
+    return direct.toString();
   } catch (error) {
-    return raw + (raw.indexOf('?') === -1 ? '?' : '&') + 'planAccess=1';
+    return `${DIRECT_WIDGET_URL}?context=tool&planAccess=1`;
   }
 }
 

@@ -75,6 +75,22 @@
       "embedHeight": 820
     },
     {
+      "slug": "berlin-pride-week-timeline",
+      "title": "Berlin Pride Week 2026 Timeline",
+      "lead": "A day-by-day timeline of Berlin Pride / CSD 2026, from the city festival to the July 25 parade, with times, places and nearest U-Bahn.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pride-week-timeline/",
+      "embedHeight": 1180
+    },
+    {
+      "slug": "berlin-pride-parade-map",
+      "title": "Berlin Pride 2026 Parade Route Map",
+      "lead": "Follow the Berlin Pride / CSD 2026 parade route on July 25, with the best viewing spots, nearest U-Bahn and the LGBTQ+ memorial near the finish.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pride-parade-map/",
+      "embedHeight": 900
+    },
+    {
       "slug": "welcomecard-calculator",
       "title": "Berlin WelcomeCard Calculator",
       "lead": "Is the WelcomeCard worth it for your trip? Find out in 30 seconds.",
