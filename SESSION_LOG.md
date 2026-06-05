@@ -4,6 +4,40 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-05 — Codex (Berlin Trip Planner visual asset pack)
+
+**Did:** Replaced placeholder proof/process visuals on the standalone `/berlin-trip-planner` landing page with one generated BerlinWalk-style asset set.
+
+**Changed:**
+- `berlin-trip-planner-page/assets/` — added the ChatGPT-generated source sheet, 4 cropped WebP proof icons, 3 cropped WebP process illustrations, and `ASSET_SOURCES.md` with the exact prompt/source notes.
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — wired the new proof icons and process illustrations, replaced the blue `Use it when` band with a blurred image background, and kept the CTA/process images visually distinct from the lower itinerary art.
+- `output/playwright/berlin-trip-planner-page/` — added contact sheet and desktop/mobile QA screenshots; checks confirmed no horizontal overflow, 4 proof icons, 3 process images, and the blurred background image loading.
+
+**Opened:** Landing page still needs push/deploy, Wix `/berlin-trip-planner` page creation, and menu/homepage wiring before email links move away from the direct GitHub widget URL.
+**Closed:** Yusuf's latest visual-feedback pass for proof icons/process cards/blurred section is locally implemented and QA'd.
+
+**Next session should:** Push widgets, install `<bw-berlin-trip-planner-page>` on the Wix `/berlin-trip-planner` page, then live-QA the branded page before changing email `${planUrl}`.
+
+## 2026-06-05 — Claude Code (Berlin Pride post: real photos + Wix draft)
+
+**Did:** Took the Berlin Pride / CSD 2026 post to publish-ready: sourced 3 real CC Commons photos, added qs/FAQ data + FAQ schema, and created the Wix blog draft with cover, parade-map widget, quick-summary and FAQ embedded.
+
+**Changed:**
+- `blog-drafts/images/berlin-pride-csd-2026/` — 3 optimized real Commons photos: cover `berlin-pride-csd-parade.jpg` (CSD 2025 "Ganz vorne", IgorCalzone1, CC0, 337 KB); `berlin-pride-nollendorfplatz-rainbow.jpg` (Fridolin freudenfett, CC BY-SA 4.0, 257 KB); `berlin-pride-memorial-homosexuals.jpg` (Gerd Eichmann, CC BY-SA 4.0, 209 KB) + `_src/` + `visual-sources.md`.
+- Wix Media: uploaded all 3 (cover `5a08a3_14cf449f…`, nollendorf `5a08a3_cc50b46c…`, memorial `5a08a3_91ecc426…`), all HTTP 200.
+- Wix Blog: created draft `51f9bda0-30e6-4118-a11c-232b7dbde002` (slug `berlin-pride-csd-2026`, UNPUBLISHED) via Content Studio `/api/blog-publish` — 88 nodes, 3 HTML embeds (quick-summary, parade-map widget, FAQ). PATCHed the cover image + alt via the Blog Draft Posts API. The timeline widget placeholder was published as a text link to `/tools/berlin-pride-week-timeline` (blog-publish supports one inline widget).
+- `quick-summary/data.json` + `faq/data.json` — added `berlin-pride-csd-2026` entries; `faq/inject.js` — added SLUG_MAP + FAQPage SCHEMAS (node --check passed).
+- `blog-drafts/berlin-pride-csd-2026.md` — added Wix draft ID + Visual Notes (image IDs, alt text, placements, credit + timeline notes).
+
+**Opened (Yusuf to finish before publishing):**
+- PUSH `berlinwalk-widgets` so the new `quick-summary`/`faq` data + `inject.js` go live (until then the qs + FAQ embeds in the draft are empty).
+- In the Wix draft editor: drop the 2 inline images at the marked spots (alt text in Visual Notes), add a visible photo credit for the 2 CC BY-SA images, optionally embed the timeline widget inline, then review + publish.
+- Once published, update the 2 Pride BerlinTools rows' relatedBlog from `berlin-in-july-2026` to the live Pride post.
+
+**Closed:** Pride post is publish-ready (draft built, cover set, real photos uploaded, qs/FAQ wired).
+
+**Next session should:** After Yusuf publishes, verify qs/FAQ render and swap the Pride tools' relatedBlog; optionally build the `festival-lights-route` widget + Pride/FoL tool icons.
+
 ## 2026-06-05 — Codex (Berlin Trip Planner landing page polish)
 
 **Did:** Applied Yusuf's visual-feedback pass to the standalone `/berlin-trip-planner` landing page.

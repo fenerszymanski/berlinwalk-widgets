@@ -1,0 +1,629 @@
+- main [ref=e3]:
+  - region "Berlin Trip Planner" [ref=e4]:
+    - generic [ref=e6]:
+      - paragraph [ref=e7]: BerlinWalk local planner
+      - heading "Berlin Trip Planner" [level=1] [ref=e8]
+      - paragraph [ref=e9]: Build a realistic 1 to 7 day Berlin plan around your arrival date, first day, weather, opening-day traps, map links, and the best BerlinWalk tour slot.
+      - link "Build my plan" [ref=e11] [cursor=pointer]:
+        - /url: "#planner"
+      - generic "Planner highlights" [ref=e12]:
+        - generic [ref=e13]:
+          - img [ref=e14]
+          - generic [ref=e15]: 1-7 days
+          - emphasis [ref=e16]: Daily route rhythm
+        - generic [ref=e17]:
+          - img [ref=e18]
+          - generic [ref=e19]: Weather aware
+          - emphasis [ref=e20]: Live or monthly fallback
+        - generic [ref=e21]:
+          - img [ref=e22]
+          - generic [ref=e23]: Map ready
+          - emphasis [ref=e24]: Route and place links
+        - generic [ref=e25]:
+          - img [ref=e26]
+          - generic [ref=e27]: Local guide
+          - emphasis [ref=e28]: Yusuf's route read
+  - region "Berlin trip planner widget" [ref=e29]:
+    - generic [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - paragraph [ref=e33]: Start here
+          - heading "Answer a few basics, then get your Berlin plan." [level=2] [ref=e34]
+        - paragraph [ref=e35]: Build a quick preview first. If the route feels useful, send it to yourself to keep the full plan, map links, print view, and PDF export.
+      - iframe [ref=e37]:
+        - region "Ultimate Berlin Trip Planner" [ref=f2e3]:
+          - generic [ref=f2e4]:
+            - generic [ref=f2e5]:
+              - paragraph [ref=f2e6]: BerlinWalk local planner
+              - heading "Ultimate Berlin Trip Planner" [level=1] [ref=f2e7]
+              - paragraph [ref=f2e8]: Answer a few basics and get a realistic 1 to 7 day Berlin plan with weather, opening-day notes, map links, and practical first-day guidance.
+              - generic "Planner features" [ref=f2e9]:
+                - generic "1 to 7 day plan" [ref=f2e10]:
+                  - generic [ref=f2e11]: 🗓️
+                  - text: 1-7 day plan
+                - generic "Google Maps links" [ref=f2e12]:
+                  - generic [ref=f2e13]: 🗺️
+                  - text: Google Maps links
+                - generic "Weather aware" [ref=f2e14]:
+                  - generic [ref=f2e15]: 🌦️
+                  - text: Weather aware
+                - generic "Print-ready PDF export" [ref=f2e16]:
+                  - generic [ref=f2e17]: 📄
+                  - text: Print-ready export
+            - figure "Berlin trip planner preview" [ref=f2e18]:
+              - img "Illustrated Berlin river view with Berlin Cathedral, TV Tower, and city route feeling" [ref=f2e19]
+              - generic [ref=f2e20]:
+                - strong [ref=f2e21]: Date-to-plan itinerary
+                - generic [ref=f2e22]:
+                  - generic [ref=f2e23]: Arrival
+                  - generic [ref=f2e25]: Daily areas
+                  - generic [ref=f2e27]: PDF
+                - generic [ref=f2e28]: Weather, maps, openings, and Berlin essentials are built into the plan.
+          - form "Ultimate Berlin trip planner choices" [ref=f2e30]:
+            - generic [ref=f2e31]:
+              - generic [ref=f2e32]: Arrival date
+              - generic [ref=f2e33]:
+                - generic [ref=f2e35]: 📅
+                - textbox "Arrival date" [ref=f2e37]: 2026-07-17
+            - generic [ref=f2e38]:
+              - generic [ref=f2e39]: Trip length
+              - generic [ref=f2e40]:
+                - button "1 day" [ref=f2e41] [cursor=pointer]:
+                  - generic [ref=f2e43]: 1 day
+                - button "2 days" [ref=f2e44] [cursor=pointer]:
+                  - generic [ref=f2e46]: 2 days
+                - button "3 days" [ref=f2e47] [cursor=pointer]:
+                  - generic [ref=f2e49]: 3 days
+                - button "4 days" [ref=f2e50] [cursor=pointer]:
+                  - generic [ref=f2e52]: 4 days
+                - button "5 days" [ref=f2e53] [cursor=pointer]:
+                  - generic [ref=f2e55]: 5 days
+                - button "6 days" [ref=f2e56] [cursor=pointer]:
+                  - generic [ref=f2e58]: 6 days
+                - button "7 days" [ref=f2e59] [cursor=pointer]:
+                  - generic [ref=f2e61]: 7 days
+            - generic [ref=f2e62]:
+              - generic [ref=f2e63]: Arrival time
+              - generic [ref=f2e64]:
+                - button "Before 09:00" [ref=f2e65] [cursor=pointer]:
+                  - generic [ref=f2e67]: ☀️
+                  - generic [ref=f2e69]: Before 09:00
+                - button "09:00-10:00" [ref=f2e70] [cursor=pointer]:
+                  - generic [ref=f2e72]: 🕒
+                  - generic [ref=f2e74]: 09:00-10:00
+                - button "10:00-14:30" [ref=f2e75] [cursor=pointer]:
+                  - generic [ref=f2e77]: 🕒
+                  - generic [ref=f2e79]: 10:00-14:30
+                - button "14:30-18:00" [ref=f2e80] [cursor=pointer]:
+                  - generic [ref=f2e82]: ☀️
+                  - generic [ref=f2e84]: 14:30-18:00
+                - button "After 18:00" [ref=f2e85] [cursor=pointer]:
+                  - generic [ref=f2e87]: 🌙
+                  - generic [ref=f2e89]: After 18:00
+            - generic [ref=f2e90]:
+              - generic [ref=f2e91]: Arrival point
+              - generic [ref=f2e92]:
+                - button "BER Airport" [ref=f2e93] [cursor=pointer]:
+                  - generic [ref=f2e95]: ✈️
+                  - generic [ref=f2e97]: BER Airport
+                - button "Hauptbahnhof" [ref=f2e98] [cursor=pointer]:
+                  - generic [ref=f2e100]: 🚆
+                  - generic [ref=f2e102]: Hauptbahnhof
+                - button "Alexanderplatz" [ref=f2e103] [cursor=pointer]:
+                  - generic [ref=f2e105]: 📍
+                  - generic [ref=f2e107]: Alexanderplatz
+                - button "Hotel/Airbnb" [ref=f2e108] [cursor=pointer]:
+                  - generic [ref=f2e110]: 🛏️
+                  - generic [ref=f2e112]: Hotel/Airbnb
+                - button "Car / rental" [ref=f2e113] [cursor=pointer]:
+                  - generic [ref=f2e115]: 🚗
+                  - generic [ref=f2e117]: Car / rental
+            - generic [ref=f2e118]:
+              - generic [ref=f2e119]: Where are you staying?
+              - generic [ref=f2e120]:
+                - button "Mitte / Alexanderplatz" [ref=f2e121] [cursor=pointer]:
+                  - generic [ref=f2e123]: 🏛️
+                  - generic [ref=f2e125]: Mitte / Alexanderplatz
+                - button "Kreuzberg / Friedrichshain" [ref=f2e126] [cursor=pointer]:
+                  - generic [ref=f2e128]: 🍽️
+                  - generic [ref=f2e130]: Kreuzberg / Friedrichshain
+                - button "Prenzlauer Berg" [ref=f2e131] [cursor=pointer]:
+                  - generic [ref=f2e133]: 🌿
+                  - generic [ref=f2e135]: Prenzlauer Berg
+                - button "Charlottenburg / West" [ref=f2e136] [cursor=pointer]:
+                  - generic [ref=f2e138]: 🏢
+                  - generic [ref=f2e140]: Charlottenburg / West
+                - button "Not sure yet" [ref=f2e141] [cursor=pointer]:
+                  - generic [ref=f2e143]: ❓
+                  - generic [ref=f2e145]: Not sure yet
+            - generic [ref=f2e146]:
+              - generic [ref=f2e147]:
+                - generic [ref=f2e148]: Who is traveling?
+                - generic [ref=f2e149]:
+                  - button "Solo" [ref=f2e150] [cursor=pointer]:
+                    - generic [ref=f2e152]: 📍
+                    - generic [ref=f2e154]: Solo
+                  - button "Couple / friends" [ref=f2e155] [cursor=pointer]:
+                    - generic [ref=f2e157]: 👥
+                    - generic [ref=f2e159]: Couple / friends
+                  - button "Family" [ref=f2e160] [cursor=pointer]:
+                    - generic [ref=f2e162]: 👨‍👩‍👧
+                    - generic [ref=f2e164]: Family
+                  - button "Older / slower" [ref=f2e165] [cursor=pointer]:
+                    - generic [ref=f2e167]: 🌿
+                    - generic [ref=f2e169]: Older / slower
+              - generic [ref=f2e170]:
+                - generic [ref=f2e171]: First time in Berlin?
+                - generic [ref=f2e172]:
+                  - button "Yes" [ref=f2e173] [cursor=pointer]:
+                    - generic [ref=f2e175]: ✅
+                    - generic [ref=f2e177]: "Yes"
+                  - button "No" [ref=f2e178] [cursor=pointer]:
+                    - generic [ref=f2e180]: 🧭
+                    - generic [ref=f2e182]: "No"
+                  - button "Long time ago" [ref=f2e183] [cursor=pointer]:
+                    - generic [ref=f2e185]: 🕒
+                    - generic [ref=f2e187]: Long time ago
+              - generic [ref=f2e188]:
+                - generic [ref=f2e189]:
+                  - generic [ref=f2e190]: Top interests
+                  - generic [ref=f2e191]: Choose any that apply
+                - generic [ref=f2e192]:
+                  - button "History" [ref=f2e193] [cursor=pointer]:
+                    - generic [ref=f2e195]: 📚
+                    - generic [ref=f2e197]: History
+                  - button "Berlin Wall / Cold War" [ref=f2e198] [cursor=pointer]:
+                    - generic [ref=f2e200]: 🧱
+                    - generic [ref=f2e202]: Berlin Wall / Cold War
+                  - button "Museums" [ref=f2e203] [cursor=pointer]:
+                    - generic [ref=f2e205]: 🏛️
+                    - generic [ref=f2e207]: Museums
+                  - button "Food" [ref=f2e208] [cursor=pointer]:
+                    - generic [ref=f2e210]: 🍽️
+                    - generic [ref=f2e212]: Food
+                  - button "Nightlife" [ref=f2e213] [cursor=pointer]:
+                    - generic [ref=f2e215]: 🌙
+                    - generic [ref=f2e217]: Nightlife
+                  - button "Free / low budget" [ref=f2e218] [cursor=pointer]:
+                    - generic [ref=f2e220]: 💶
+                    - generic [ref=f2e222]: Free / low budget
+              - generic [ref=f2e223]:
+                - generic [ref=f2e224]: Trip mode
+                - generic [ref=f2e225]:
+                  - button "Low budget" [ref=f2e226] [cursor=pointer]:
+                    - generic [ref=f2e228]: 💶
+                    - generic [ref=f2e230]: Low budget
+                  - button "Smart spend" [ref=f2e231] [cursor=pointer]:
+                    - generic [ref=f2e233]: 🎟️
+                    - generic [ref=f2e235]: Smart spend
+                  - button "Comfort" [ref=f2e236] [cursor=pointer]:
+                    - generic [ref=f2e238]: 🛡️
+                    - generic [ref=f2e240]: Comfort
+              - generic [ref=f2e241]:
+                - generic [ref=f2e242]:
+                  - generic [ref=f2e243]: Plan needs
+                  - generic [ref=f2e244]: Select any
+                - generic [ref=f2e245]:
+                  - button "Rain backup" [ref=f2e246] [cursor=pointer]:
+                    - generic [ref=f2e248]: ☂️
+                    - generic [ref=f2e250]: Rain backup
+                  - button "Low walking / breaks" [ref=f2e251] [cursor=pointer]:
+                    - generic [ref=f2e253]: 👨‍👩‍👧
+                    - generic [ref=f2e255]: Low walking / breaks
+                  - button "Photo-friendly route" [ref=f2e256] [cursor=pointer]:
+                    - generic [ref=f2e258]: 📸
+                    - generic [ref=f2e260]: Photo-friendly route
+                  - button "Timed entry planning" [ref=f2e261] [cursor=pointer]:
+                    - generic [ref=f2e263]: 🎟️
+                    - generic [ref=f2e265]: Timed entry planning
+              - generic [ref=f2e266]:
+                - generic [ref=f2e267]: Pace
+                - generic [ref=f2e268]:
+                  - button "Gentle" [ref=f2e269] [cursor=pointer]:
+                    - generic [ref=f2e271]: 🌿
+                    - generic [ref=f2e273]: Gentle
+                  - button "Balanced" [ref=f2e274] [cursor=pointer]:
+                    - generic [ref=f2e276]: 🧭
+                    - generic [ref=f2e278]: Balanced
+                  - button "Packed" [ref=f2e279] [cursor=pointer]:
+                    - generic [ref=f2e281]: ⚡
+                    - generic [ref=f2e283]: Packed
+            - region "Build Berlin trip plan" [ref=f2e284]:
+              - generic [ref=f2e285]:
+                - strong [ref=f2e286]: Ready when you are
+                - generic [ref=f2e287]: Fill the basics above, then generate a calmer preview. The full day-by-day plan, maps, PDF, and print view stay behind email consent.
+              - button "Update my Berlin plan" [ref=f2e288] [cursor=pointer]:
+                - generic [ref=f2e289]: Update my Berlin plan
+              - paragraph [ref=f2e290]: Change any answer above, then update the preview.
+          - generic [ref=f2e291]:
+            - generic [ref=f2e293]:
+              - heading "Your full Berlin plan" [level=2] [ref=f2e294]
+              - paragraph [ref=f2e295]: "3 days from Fri, 17 Jul 2026. Built around daily areas, maps, and Berlin essentials. Recommended BerlinWalk: Arrival day at 11:30."
+            - region "Local guide polish loading" [ref=f2e297]:
+              - generic [ref=f2e298]:
+                - generic [ref=f2e301]:
+                  - strong [ref=f2e302]: Your Local Guide Yusuf's Note
+                  - generic [ref=f2e303]: Reading the plan in simple English. The route and times stay unchanged.
+                - generic [ref=f2e304]: Yusuf note
+            - region "Plan at a glance" [ref=f2e306]:
+              - generic [ref=f2e308]:
+                - strong [ref=f2e309]: Plan at a glance
+                - generic [ref=f2e310]: Tap a day to jump to the full itinerary.
+              - generic [ref=f2e311]:
+                - button "Oil painting style Berlin arrival day with suitcase near Alexanderplatz D1 Arrival day Fri, 17 Jul 2026 World Clock / Topography of Terror / Hackescher Markt Tour 11:30" [pressed] [ref=f2e312] [cursor=pointer]:
+                  - generic [ref=f2e313]:
+                    - img "Oil painting style Berlin arrival day with suitcase near Alexanderplatz" [ref=f2e314]
+                    - generic [ref=f2e315]: D1
+                  - generic [ref=f2e316]:
+                    - strong [ref=f2e317]: Arrival day
+                    - generic [ref=f2e318]: Fri, 17 Jul 2026
+                    - emphasis [ref=f2e319]: World Clock / Topography of Terror / Hackescher Markt
+                    - generic [ref=f2e320]: Tour 11:30
+                - button "Oil painting style Brandenburg Gate and central Berlin history D2 Central history without repeats Sat, 18 Jul 2026 Holocaust Memorial / Gendarmenmarkt / Nikolaiviertel" [ref=f2e321] [cursor=pointer]:
+                  - generic [ref=f2e322]:
+                    - img "Oil painting style Brandenburg Gate and central Berlin history" [ref=f2e323]
+                    - generic [ref=f2e324]: D2
+                  - generic [ref=f2e325]:
+                    - strong [ref=f2e326]: Central history without repeats
+                    - generic [ref=f2e327]: Sat, 18 Jul 2026
+                    - emphasis [ref=f2e328]: Holocaust Memorial / Gendarmenmarkt / Nikolaiviertel
+                - button "Oil painting style Museum Island and Berlin museum day D3 Museums and royal Berlin Sun, 19 Jul 2026 Museum Island / Brandenburg Gate / Reichstag" [ref=f2e329] [cursor=pointer]:
+                  - generic [ref=f2e330]:
+                    - img "Oil painting style Museum Island and Berlin museum day" [ref=f2e331]
+                    - generic [ref=f2e332]: D3
+                  - generic [ref=f2e333]:
+                    - strong [ref=f2e334]: Museums and royal Berlin
+                    - generic [ref=f2e335]: Sun, 19 Jul 2026
+                    - emphasis [ref=f2e336]: Museum Island / Brandenburg Gate / Reichstag
+            - generic [ref=f2e337]:
+              - article [ref=f2e338]:
+                - generic [ref=f2e339]:
+                  - generic [ref=f2e340]:
+                    - generic [ref=f2e341]: 📍
+                    - generic [ref=f2e342]: DAY 1
+                  - generic [ref=f2e343]:
+                    - strong [ref=f2e344]: Arrival and first Berlin orientation
+                    - generic [ref=f2e345]: Fri, 17 Jul 2026 - Arrival day
+                - generic [ref=f2e346]:
+                  - 'generic "Day 1 weather: July average, 25 C high" [ref=f2e347]':
+                    - generic [ref=f2e349]: ☀️
+                    - generic [ref=f2e350]:
+                      - generic [ref=f2e351]: July average, 25 C high
+                      - generic [ref=f2e352]: 15 C low / 10 rainy days
+                      - emphasis [ref=f2e353]: "Climate fallback: check the live forecast again before arrival."
+                  - generic [ref=f2e354]:
+                    - generic [ref=f2e355]:
+                      - generic [ref=f2e357]: Arrival
+                      - generic [ref=f2e358]: 09:00-10:45
+                    - generic [ref=f2e359]:
+                      - strong [ref=f2e360]: Get central without over-solving Berlin
+                      - generic [ref=f2e361]: Use ABC from BER, drop bags if needed, then keep the first walk central.
+                      - generic "Map links for Get central without over-solving Berlin" [ref=f2e362]:
+                        - 'link "Open map: Topography of Terror" [ref=f2e363] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Topography%20of%20Terror%20Berlin
+                          - generic [ref=f2e364]: 📍
+                          - generic [ref=f2e365]: "Open map: Topography of Terror"
+                  - generic [ref=f2e366]:
+                    - generic [ref=f2e367]:
+                      - generic [ref=f2e369]: BerlinWalk
+                      - generic [ref=f2e370]: 11:30-13:30
+                    - generic [ref=f2e371]:
+                      - strong [ref=f2e372]: Use the walking tour as your first Berlin introduction
+                      - generic [ref=f2e373]: Join BerlinWalk at 11:30 from the World Clock for context.
+                      - generic "Map links for Use the walking tour as your first Berlin introduction" [ref=f2e374]:
+                        - 'link "Open map: World Clock" [ref=f2e375] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Weltzeituhr%20Alexanderplatz%20Berlin
+                          - generic [ref=f2e376]: 📍
+                          - generic [ref=f2e377]: "Open map: World Clock"
+                  - generic [ref=f2e378]:
+                    - generic [ref=f2e379]:
+                      - generic [ref=f2e381]: Afternoon
+                      - generic [ref=f2e382]: 14:00-16:30
+                    - generic [ref=f2e383]:
+                      - strong [ref=f2e384]: Add one Wall / Cold War layer
+                      - generic [ref=f2e385]: After the walk, choose one serious Wall or Cold War stop and keep the rest of the route in that direction.
+                      - generic "Map links for Add one Wall / Cold War layer" [ref=f2e386]:
+                        - 'link "Open map: Hackescher Markt" [ref=f2e387] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Hackescher%20Markt%20Berlin
+                          - generic [ref=f2e388]: 📍
+                          - generic [ref=f2e389]: "Open map: Hackescher Markt"
+                  - generic [ref=f2e390]:
+                    - generic [ref=f2e391]:
+                      - generic [ref=f2e392]:
+                        - generic [ref=f2e393]: 🌙
+                        - generic [ref=f2e394]: Evening
+                      - generic [ref=f2e395]: After 18:00
+                    - strong [ref=f2e397]: One stop, then stop
+                  - region "Day 1 full route" [ref=f2e398]:
+                    - generic [ref=f2e399]:
+                      - generic [ref=f2e400]:
+                        - strong [ref=f2e401]: Full day route
+                        - generic [ref=f2e402]: Open the whole route, then use each step's map link below.
+                      - generic [ref=f2e403]:
+                        - generic [ref=f2e404]: 🧭
+                        - generic [ref=f2e405]: Route
+                    - link "Day route Day 1 route Walking route with today's stops Open route" [ref=f2e407] [cursor=pointer]:
+                      - /url: https://www.google.com/maps/dir/?api=1&origin=52.521918%2C13.413215&destination=52.5221%2C13.4027&travelmode=walking&waypoints=52.5066%2C13.3823
+                      - generic [ref=f2e409]: 🧭
+                      - generic [ref=f2e410]:
+                        - generic [ref=f2e411]: Day route
+                        - strong [ref=f2e412]: Day 1 route
+                        - emphasis [ref=f2e413]: Walking route with today's stops
+                      - generic [ref=f2e414]: Open route
+              - article [ref=f2e415]:
+                - generic [ref=f2e416]:
+                  - generic [ref=f2e417]:
+                    - generic [ref=f2e418]: 📚
+                    - generic [ref=f2e419]: DAY 2
+                  - generic [ref=f2e420]:
+                    - strong [ref=f2e421]: Government quarter, memorials, and old Mitte
+                    - generic [ref=f2e422]: Sat, 18 Jul 2026 - Central history without repeats
+                - generic [ref=f2e423]:
+                  - 'generic "Day 2 weather: July average, 25 C high" [ref=f2e424]':
+                    - generic [ref=f2e426]: ☀️
+                    - generic [ref=f2e427]:
+                      - generic [ref=f2e428]: July average, 25 C high
+                      - generic [ref=f2e429]: 15 C low / 10 rainy days
+                      - emphasis [ref=f2e430]: "Climate fallback: check the live forecast again before arrival."
+                  - generic [ref=f2e431]:
+                    - generic [ref=f2e432]:
+                      - generic [ref=f2e434]: Morning
+                      - generic [ref=f2e435]: 09:30-12:00
+                    - generic [ref=f2e436]:
+                      - strong [ref=f2e437]: Government quarter and Holocaust Memorial
+                      - generic [ref=f2e438]: Use a different central history edge.
+                      - generic "Map links for Government quarter and Holocaust Memorial" [ref=f2e439]:
+                        - 'link "Open map: Holocaust Memorial" [ref=f2e440] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Memorial%20to%20the%20Murdered%20Jews%20of%20Europe%20Berlin
+                          - generic [ref=f2e441]: 📍
+                          - generic [ref=f2e442]: "Open map: Holocaust Memorial"
+                  - generic [ref=f2e443]:
+                    - generic [ref=f2e444]:
+                      - generic [ref=f2e446]: Afternoon
+                      - generic [ref=f2e447]: 13:30-16:30
+                    - generic [ref=f2e448]:
+                      - strong [ref=f2e449]: Gendarmenmarkt to Nikolaiviertel
+                      - generic [ref=f2e450]: Move through old Mitte without repeating yesterday.
+                      - generic "Map links for Gendarmenmarkt to Nikolaiviertel" [ref=f2e451]:
+                        - 'link "Open map: Gendarmenmarkt" [ref=f2e452] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Gendarmenmarkt%20Berlin
+                          - generic [ref=f2e453]: 📍
+                          - generic [ref=f2e454]: "Open map: Gendarmenmarkt"
+                        - 'link "Open map: Nikolaiviertel" [ref=f2e455] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Nikolaiviertel%20Berlin
+                          - generic [ref=f2e456]: 📍
+                          - generic [ref=f2e457]: "Open map: Nikolaiviertel"
+                  - generic [ref=f2e458]:
+                    - generic [ref=f2e459]:
+                      - generic [ref=f2e461]: Nearby option
+                      - generic [ref=f2e462]: 30-45 min
+                    - generic [ref=f2e463]:
+                      - strong [ref=f2e464]: Keep it close
+                      - generic [ref=f2e465]: Use this only if you still have energy. Stay near Nikolaiviertel instead of crossing Berlin.
+                      - generic "Map links for Keep it close" [ref=f2e466]:
+                        - 'link "Open map: Nikolaiviertel" [ref=f2e467] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Nikolaiviertel%20Berlin
+                          - generic [ref=f2e468]: 📍
+                          - generic [ref=f2e469]: "Open map: Nikolaiviertel"
+                  - generic [ref=f2e470]:
+                    - generic [ref=f2e471]:
+                      - generic [ref=f2e472]:
+                        - generic [ref=f2e473]: 🌙
+                        - generic [ref=f2e474]: Evening
+                      - generic [ref=f2e475]: After 18:00
+                    - strong [ref=f2e477]: Simple central dinner
+                  - region "Day 2 full route" [ref=f2e478]:
+                    - generic [ref=f2e479]:
+                      - generic [ref=f2e480]:
+                        - strong [ref=f2e481]: Full day route
+                        - generic [ref=f2e482]: Open the whole route, then use each step's map link below.
+                      - generic [ref=f2e483]:
+                        - generic [ref=f2e484]: 🧭
+                        - generic [ref=f2e485]: Route
+                    - link "Day route Day 2 route Walking route with today's stops Open route" [ref=f2e487] [cursor=pointer]:
+                      - /url: https://www.google.com/maps/dir/?api=1&origin=52.5139%2C13.3787&destination=52.5169%2C13.4072&travelmode=walking&waypoints=52.5138%2C13.3927
+                      - generic [ref=f2e489]: 🧭
+                      - generic [ref=f2e490]:
+                        - generic [ref=f2e491]: Day route
+                        - strong [ref=f2e492]: Day 2 route
+                        - emphasis [ref=f2e493]: Walking route with today's stops
+                      - generic [ref=f2e494]: Open route
+              - article [ref=f2e495]:
+                - generic [ref=f2e496]:
+                  - generic [ref=f2e497]:
+                    - generic [ref=f2e498]: 🏛️
+                    - generic [ref=f2e499]: DAY 3
+                  - generic [ref=f2e500]:
+                    - strong [ref=f2e501]: Museum Island without museum overload
+                    - generic [ref=f2e502]: Sun, 19 Jul 2026 - Museums and royal Berlin
+                - generic [ref=f2e503]:
+                  - 'generic "Day 3 weather: July average, 25 C high" [ref=f2e504]':
+                    - generic [ref=f2e506]: ☀️
+                    - generic [ref=f2e507]:
+                      - generic [ref=f2e508]: July average, 25 C high
+                      - generic [ref=f2e509]: 15 C low / 10 rainy days
+                      - emphasis [ref=f2e510]: "Climate fallback: check the live forecast again before arrival."
+                  - generic [ref=f2e511]:
+                    - generic [ref=f2e512]:
+                      - generic [ref=f2e514]: Morning
+                      - generic [ref=f2e515]: 09:30-12:00
+                    - generic [ref=f2e516]:
+                      - strong [ref=f2e517]: Pick one museum anchor
+                      - generic [ref=f2e518]: Pick one checked-open museum. One good museum beats four rushed ones.
+                      - generic "Map links for Pick one museum anchor" [ref=f2e519]:
+                        - 'link "Open map: Museum Island" [ref=f2e520] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Museumsinsel%20Berlin
+                          - generic [ref=f2e521]: 📍
+                          - generic [ref=f2e522]: "Open map: Museum Island"
+                  - generic [ref=f2e523]:
+                    - generic [ref=f2e524]:
+                      - generic [ref=f2e526]: Afternoon
+                      - generic [ref=f2e527]: 13:30-16:30
+                    - generic [ref=f2e528]:
+                      - strong [ref=f2e529]: Reichstag dome or Brandenburg Gate
+                      - generic [ref=f2e530]: Use a booked dome slot or the open-air memorial route.
+                      - generic "Map links for Reichstag dome or Brandenburg Gate" [ref=f2e531]:
+                        - 'link "Open map: Brandenburg Gate" [ref=f2e532] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Brandenburger%20Tor%20Berlin
+                          - generic [ref=f2e533]: 📍
+                          - generic [ref=f2e534]: "Open map: Brandenburg Gate"
+                        - 'link "Open map: Reichstag" [ref=f2e535] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Reichstag%20Building%20Berlin
+                          - generic [ref=f2e536]: 📍
+                          - generic [ref=f2e537]: "Open map: Reichstag"
+                  - generic [ref=f2e538]:
+                    - generic [ref=f2e539]:
+                      - generic [ref=f2e541]: Nearby option
+                      - generic [ref=f2e542]: 30-45 min
+                    - generic [ref=f2e543]:
+                      - strong [ref=f2e544]: Museum Island backup only
+                      - generic [ref=f2e545]: If weather turns, stay in the same Museum Island cluster and choose one nearby open museum or cafe. Do not add a separate museum district.
+                      - generic "Map links for Museum Island backup only" [ref=f2e546]:
+                        - 'link "Open map: Museum Island" [ref=f2e547] [cursor=pointer]':
+                          - /url: https://www.google.com/maps/search/?api=1&query=Museumsinsel%20Berlin
+                          - generic [ref=f2e548]: 📍
+                          - generic [ref=f2e549]: "Open map: Museum Island"
+                  - generic [ref=f2e550]:
+                    - generic [ref=f2e551]:
+                      - generic [ref=f2e552]:
+                        - generic [ref=f2e553]: 🌙
+                        - generic [ref=f2e554]: Evening
+                      - generic [ref=f2e555]: After 18:00
+                    - strong [ref=f2e557]: Central dinner
+                  - region "Day 3 full route" [ref=f2e558]:
+                    - generic [ref=f2e559]:
+                      - generic [ref=f2e560]:
+                        - strong [ref=f2e561]: Full day route
+                        - generic [ref=f2e562]: Open the whole route, then use each step's map link below.
+                      - generic [ref=f2e563]:
+                        - generic [ref=f2e564]: 🧭
+                        - generic [ref=f2e565]: Route
+                    - link "Day route Day 3 route Walking route with today's stops Open route" [ref=f2e567] [cursor=pointer]:
+                      - /url: https://www.google.com/maps/dir/?api=1&origin=52.5169%2C13.4017&destination=52.5186%2C13.3762&travelmode=walking&waypoints=52.5163%2C13.3777
+                      - generic [ref=f2e569]: 🧭
+                      - generic [ref=f2e570]:
+                        - generic [ref=f2e571]: Day route
+                        - strong [ref=f2e572]: Day 3 route
+                        - emphasis [ref=f2e573]: Walking route with today's stops
+                      - generic [ref=f2e574]: Open route
+            - generic [ref=f2e575]:
+              - generic [ref=f2e576]:
+                - button "Copy plan link to share" [ref=f2e577] [cursor=pointer]
+                - link "Share this Berlin plan on WhatsApp" [ref=f2e578] [cursor=pointer]:
+                  - /url: https://wa.me/?text=My%20Berlin%20plan%20from%20BerlinWalk%0ABuild%20Berlin%20around%20the%20first%20real%20orientation%20day%0AArrival%3A%20Fri%2C%2017%20Jul%202026%0ALength%3A%203%20days%0AOpen%20plan%3A%20https%3A%2F%2Ffenerszymanski.github.io%2Fberlinwalk-widgets%2Fultimate-berlin-trip-planner%2F%3Fcontext%3Dtool%26date%3D2026-07-17%26tripLength%3D3%26arrivalTime%3Dmorning%26arrivalPoint%3Dber%26stayArea%3Dmitte%26groupType%3Dsolo%26firstTime%3Dyes%26interests%3Dhistory%252Cwall%26budgetStyle%3Dsmart%26mustHandle%3Drain%26pace%3Dbalanced%26tourIntent%3Dconsidering
+                  - generic [ref=f2e579]: 🔗
+                  - generic [ref=f2e580]: WhatsApp
+                - button "Download PDF" [ref=f2e581] [cursor=pointer]
+                - button "Print plan" [ref=f2e582] [cursor=pointer]
+              - generic [ref=f2e583]: Your saved plan is open.
+            - region "After the itinerary" [ref=f2e585]:
+              - strong [ref=f2e586]: After the itinerary
+              - generic [ref=f2e587]: Save these maps, shopping backups, and Berlin essentials for the moments when plans change.
+            - region "Berlin public transport maps" [ref=f2e589]:
+              - generic [ref=f2e590]:
+                - generic [ref=f2e591]:
+                  - strong [ref=f2e592]: Berlin public transport maps
+                  - generic [ref=f2e593]: Save these official BVG/VBB PDFs for offline use. Especially useful for BER, night routes, trams, and Potsdam days.
+                - generic [ref=f2e594]: Full plan
+              - link "Night routes Night Network Map U-Bahn, S-Bahn, Nachtbus, and late-night route backup. Open PDF" [ref=f2e596] [cursor=pointer]:
+                - /url: https://5a08a3af-4b9b-4403-9de7-3e26eba72dc0.usrfiles.com/ugd/5a08a3_f51926c9e2604d359914823a42df2abf.pdf
+                - generic [ref=f2e598]: 🌙
+                - generic [ref=f2e599]:
+                  - generic [ref=f2e600]: Night routes
+                  - strong [ref=f2e601]: Night Network Map
+                  - generic [ref=f2e602]: U-Bahn, S-Bahn, Nachtbus, and late-night route backup.
+                  - emphasis [ref=f2e603]: Open PDF
+              - button "Show 3 more maps" [ref=f2e604] [cursor=pointer]
+            - region "Berlin shopping planner" [ref=f2e606]:
+              - generic [ref=f2e607]:
+                - generic [ref=f2e608]:
+                  - strong [ref=f2e609]: Shopping notes
+                  - generic [ref=f2e610]: Malls for weather backup, classic shopping streets, courtyard browsing, and the nearby outlet option if you want a half-day outside the city.
+                - generic [ref=f2e611]: Feature
+              - link "Mall Mall of Berlin Central mall near Potsdamer Platz; practical if weather turns. Open in Google Maps" [ref=f2e613] [cursor=pointer]:
+                - /url: https://www.google.com/maps/search/?api=1&query=Mall%20of%20Berlin%20Leipziger%20Platz
+                - generic [ref=f2e615]: 🏢
+                - generic [ref=f2e616]:
+                  - generic [ref=f2e617]: Mall
+                  - strong [ref=f2e618]: Mall of Berlin
+                  - generic [ref=f2e619]: Central mall near Potsdamer Platz; practical if weather turns.
+                  - emphasis [ref=f2e620]: Open in Google Maps
+              - button "Show 5 more places" [ref=f2e621] [cursor=pointer]
+            - generic [ref=f2e623]:
+              - generic [ref=f2e624]:
+                - strong [ref=f2e625]: Berlin essentials
+                - generic [ref=f2e626]: Added to the end of your PDF and print plan.
+              - generic [ref=f2e628]:
+                - generic [ref=f2e630]: 🎟️
+                - generic [ref=f2e631]:
+                  - strong [ref=f2e632]: Ticket zone
+                  - generic [ref=f2e633]: Start ABC, then AB
+                  - generic [ref=f2e634]: BER is Zone C. Central sightseeing is usually AB.
+              - button "Show 7 more tips" [ref=f2e635] [cursor=pointer]
+          - generic [ref=f2e636]: Live forecasts use Open-Meteo near Alexanderplatz. Far-future dates use Berlin monthly averages. Opening notes are practical visitor rules, not guarantees for every individual shop, museum, or restaurant.
+  - generic [ref=e39]:
+    - generic [ref=e40]:
+      - paragraph [ref=e41]: Why this page exists
+      - heading "Most Berlin plans break on the first day." [level=2] [ref=e42]
+      - paragraph [ref=e43]: Arrival time, BER tickets, Sunday rules, museum closures, weather, and overpacked routes are what usually make a Berlin itinerary feel messy. This planner starts with those constraints first.
+    - generic [ref=e44]:
+      - article [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e47]: "01"
+          - heading "Set the arrival reality" [level=3] [ref=e48]
+          - paragraph [ref=e49]: Tell it when you land, where you start, how long you stay, and what kind of trip you want.
+      - article [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]: "02"
+          - heading "Get a route that respects energy" [level=3] [ref=e53]
+          - paragraph [ref=e54]: The plan keeps days area-by-area, avoids repeat loops, and saves heavier stops for better moments.
+      - article [ref=e55]:
+        - generic [ref=e56]:
+          - generic [ref=e57]: "03"
+          - heading "Use BerlinWalk at the right time" [level=3] [ref=e58]
+          - paragraph [ref=e59]: If the walking tour fits, the planner places it early enough to give the rest of the trip more context.
+  - generic [ref=e61]:
+    - figure [ref=e62]:
+      - img "Yusuf from BerlinWalk" [ref=e63]
+    - generic [ref=e64]:
+      - paragraph [ref=e65]: Built by BerlinWalk
+      - heading "It should feel like a local guide checked your route before you arrived." [level=2] [ref=e66]
+      - paragraph [ref=e67]: "This is not a generic AI itinerary. The planner uses fixed Berlin rules first: when the tour runs, when museums are risky, how arrival days behave, when Potsdam makes sense, and where a day should slow down instead of spreading across the city."
+      - link "Book the BerlinWalk tour" [ref=e68] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+  - generic [ref=e70]:
+    - generic [ref=e71]:
+      - paragraph [ref=e72]: What it plans
+      - heading "A full trip, not just a sightseeing list." [level=2] [ref=e73]
+    - generic [ref=e74]:
+      - article [ref=e75]:
+        - img "Berlin arrival day illustration" [ref=e76]
+        - heading "Arrival day" [level=3] [ref=e77]
+        - paragraph [ref=e78]: BER, Hauptbahnhof, hotel starts, tickets, food, first walk, and when to stop.
+      - article [ref=e79]:
+        - img "Berlin Wall route illustration" [ref=e80]
+        - heading "Wall and Cold War" [level=3] [ref=e81]
+        - paragraph [ref=e82]: Wall Memorial, East Side Gallery, Topography of Terror, and smart ordering.
+      - article [ref=e83]:
+        - img "Museum Island illustration" [ref=e84]
+        - heading "Museums and history" [level=3] [ref=e85]
+        - paragraph [ref=e86]: One strong museum anchor, central history, rain backup, and timed-entry cues.
+      - article [ref=e87]:
+        - img "Berlin food and neighborhood illustration" [ref=e88]
+        - heading "Food and neighborhoods" [level=3] [ref=e89]
+        - paragraph [ref=e90]: Kreuzberg, Prenzlauer Berg, Hackescher Markt, simple dinners, and local pauses.
+  - generic [ref=e92]:
+    - generic [ref=e93]:
+      - paragraph [ref=e94]: Use it when
+      - heading "You want a plan before you arrive, but you do not want to overplan Berlin." [level=2] [ref=e95]
+    - list [ref=e96]:
+      - listitem [ref=e97]: "First time in Berlin: start with context, then build around the city center."
+      - listitem [ref=e98]: "Short trip: protect the first day and avoid wasting energy on cross-town jumps."
+      - listitem [ref=e99]: "Longer stay: add neighborhoods, museums, low-budget days, and Potsdam only when it fits."
+      - listitem [ref=e100]: "Weather uncertainty: keep museum, market, mall, and cafe backup options inside the same area."
+  - generic [ref=e102]:
+    - paragraph [ref=e103]: Ready when you are
+    - heading "Build your Berlin plan now." [level=2] [ref=e104]
+    - paragraph [ref=e105]: It takes a few minutes. Start with your arrival date and let the plan shape itself around the trip you actually have.
+    - link "Open the planner" [ref=e107] [cursor=pointer]:
+      - /url: "#planner"

@@ -52,10 +52,65 @@
   "ultimate-berlin-trip-planner": "ultimate-berlin-trip-planner",
   "ultimate-berlin-trip-planner-build-realistic-berlin-itinerary-before-you-arrive": "ultimate-berlin-trip-planner",
   "fiba-womens-basketball-world-cup-2026-berlin": "fiba-womens-basketball-world-cup-2026-berlin",
-  "festival-of-lights-berlin-2026": "festival-of-lights-berlin-2026"
+  "festival-of-lights-berlin-2026": "festival-of-lights-berlin-2026",
+  "berlin-pride-csd-2026": "berlin-pride-csd-2026"
 };
 
   var SCHEMAS = {
+  "berlin-pride-csd-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Berlin Pride 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The main Christopher Street Day (CSD) parade is **Saturday, July 25, 2026**, stepping off around **12:00 noon**. For the first time there is also a Friday-evening rally at the Brandenburg Gate on **July 24**, from about 18:00 to 23:00."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Berlin Pride 2026 parade route?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The parade starts at the corner of **Leipziger Straße and Spittelmarkt** in Mitte, then runs to **Potsdamer Platz**, through **Bülowstraße and Nollendorfplatz** in Schöneberg, past the **Urania** to the **Victory Column**, and finishes on **Straße des 17. Juni in front of the Brandenburg Gate**."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin Pride free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The parade, the Friday rally and the Lesbian & Gay City Festival are all free and open to everyone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the best place to watch the parade?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For atmosphere and history, stand around **Nollendorfplatz** in Schöneberg, the heart of the city's gay quarter. For the big finish, head to the **Tiergarten end near the Brandenburg Gate**. The start at Spittelmarkt is the least crowded if you want room to breathe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What else happens during Berlin Pride week?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The **Lesbian & Gay City Festival (Stadtfest)** fills the streets around Nollendorfplatz on **July 18-19**, there is a **CSD on the Spree** boat parade on **July 23**, and a **Democracy Night rally** at the Brandenburg Gate on **July 24**, before the main parade on July 25."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Berlin important for LGBTQ+ history?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In the 1920s Berlin was the most openly queer city in the world, home to Magnus Hirschfeld's **Institute for Sexual Science (1919)**, the first of its kind. The Nazis destroyed it in **1933**. Today **Schöneberg around Nollendorfplatz** is the oldest continuously operating gay district in Europe, and a memorial in the Tiergarten remembers the homosexual victims of Nazism."
+        }
+      }
+    ]
+  },
   "best-day-trips-from-berlin": {
     "@context": "https://schema.org",
     "@type": "FAQPage",

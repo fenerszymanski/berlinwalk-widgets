@@ -73,16 +73,21 @@
     _render() {
       const heroImage = asset('ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg');
       const yusufImage = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_900,h_1125,al_c,q_85/file.jpg';
+      const proofPlanIcon = asset('berlin-trip-planner-page/assets/proof-plan.webp');
+      const proofWeatherIcon = asset('berlin-trip-planner-page/assets/proof-weather.webp');
+      const proofMapIcon = asset('berlin-trip-planner-page/assets/proof-map.webp');
+      const proofGuideIcon = asset('berlin-trip-planner-page/assets/proof-guide.webp');
+      const processArrivalArt = asset('berlin-trip-planner-page/assets/process-arrival.webp');
+      const processEnergyArt = asset('berlin-trip-planner-page/assets/process-energy.webp');
+      const processTourArt = asset('berlin-trip-planner-page/assets/process-tour.webp');
       const arrivalArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-arrival.webp');
       const wallArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-wall.webp');
-      const historyArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-history.webp');
-      const localArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-local.webp');
       const museumArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-museums.webp');
       const foodArt = asset('ultimate-berlin-trip-planner/assets/day-art/day-oil-food.webp');
 
       this.innerHTML = `
         <style>${this._styles()}</style>
-        <main class="bw-trip-page" style="--hero-image: url('${heroImage}');">
+        <main class="bw-trip-page" style="--hero-image: url('${heroImage}'); --compare-image: url('${processEnergyArt}');">
           <section class="bw-trip-hero" aria-labelledby="bw-trip-page-title">
             <div class="bw-trip-hero-shade"></div>
             <div class="bw-trip-inner bw-trip-hero-inner">
@@ -93,10 +98,10 @@
                 <a class="bw-trip-btn bw-trip-btn-primary" href="#planner">Build my plan</a>
               </div>
               <div class="bw-trip-proof" aria-label="Planner highlights">
-                <span><i aria-hidden="true">7</i><b>1-7 days</b><em>Daily route rhythm</em></span>
-                <span><i aria-hidden="true">WX</i><b>Weather aware</b><em>Live or monthly fallback</em></span>
-                <span><i aria-hidden="true">MAP</i><b>Map ready</b><em>Route and place links</em></span>
-                <span><i aria-hidden="true">YG</i><b>Local guide</b><em>Yusuf's route read</em></span>
+                <span><img src="${proofPlanIcon}" alt="" aria-hidden="true"><b>1-7 days</b><em>Daily route rhythm</em></span>
+                <span><img src="${proofWeatherIcon}" alt="" aria-hidden="true"><b>Weather aware</b><em>Live or monthly fallback</em></span>
+                <span><img src="${proofMapIcon}" alt="" aria-hidden="true"><b>Map ready</b><em>Route and place links</em></span>
+                <span><img src="${proofGuideIcon}" alt="" aria-hidden="true"><b>Local guide</b><em>Yusuf's route read</em></span>
               </div>
             </div>
           </section>
@@ -125,7 +130,7 @@
               </div>
               <div class="bw-trip-steps">
                 <article>
-                  <img class="bw-trip-step-art" src="${arrivalArt}" alt="">
+                  <img class="bw-trip-step-art" src="${processArrivalArt}" alt="">
                   <div class="bw-trip-step-body">
                     <span>01</span>
                     <h3>Set the arrival reality</h3>
@@ -133,7 +138,7 @@
                   </div>
                 </article>
                 <article>
-                  <img class="bw-trip-step-art" src="${localArt}" alt="">
+                  <img class="bw-trip-step-art" src="${processEnergyArt}" alt="">
                   <div class="bw-trip-step-body">
                     <span>02</span>
                     <h3>Get a route that respects energy</h3>
@@ -141,7 +146,7 @@
                   </div>
                 </article>
                 <article>
-                  <img class="bw-trip-step-art" src="${historyArt}" alt="">
+                  <img class="bw-trip-step-art" src="${processTourArt}" alt="">
                   <div class="bw-trip-step-body">
                     <span>03</span>
                     <h3>Use BerlinWalk at the right time</h3>
@@ -418,12 +423,21 @@
           color: rgba(255, 255, 255, 0.86);
           display: grid;
           font-size: 12px;
-          grid-template-columns: 74px 1fr;
+          grid-template-columns: 96px 1fr;
           line-height: 1.45;
-          min-height: 88px;
+          min-height: 96px;
           min-width: 0;
           overflow: hidden;
           padding: 0;
+        }
+
+        .bw-trip-proof img {
+          display: block;
+          grid-row: 1 / span 2;
+          height: 100%;
+          min-height: 96px;
+          object-fit: cover;
+          width: 96px;
         }
 
         .bw-trip-proof b {
@@ -440,21 +454,6 @@
           grid-column: 2;
           margin: 0 14px auto;
           min-width: 0;
-        }
-
-        .bw-trip-proof i {
-          align-items: center;
-          align-self: stretch;
-          background: rgba(255, 230, 0, 0.94);
-          color: var(--green);
-          display: flex;
-          font-size: 14px;
-          font-style: normal;
-          font-weight: 900;
-          grid-row: 1 / span 2;
-          justify-content: center;
-          letter-spacing: 0;
-          min-height: 88px;
         }
 
         .bw-trip-planner-band {
@@ -678,7 +677,32 @@
         }
 
         .bw-trip-compare {
-          background: var(--blue-soft);
+          background: #EDF7E8;
+          isolation: isolate;
+          overflow: hidden;
+          position: relative;
+        }
+
+        .bw-trip-compare::before {
+          background-image: var(--compare-image);
+          background-position: center;
+          background-size: cover;
+          content: "";
+          filter: blur(18px);
+          inset: -32px;
+          opacity: 0.76;
+          position: absolute;
+          transform: scale(1.03);
+          z-index: -2;
+        }
+
+        .bw-trip-compare::after {
+          background:
+            linear-gradient(90deg, rgba(250, 250, 245, 0.88) 0%, rgba(250, 250, 245, 0.66) 48%, rgba(237, 247, 232, 0.58) 100%);
+          content: "";
+          inset: 0;
+          position: absolute;
+          z-index: -1;
         }
 
         .bw-trip-compare-grid {
@@ -696,10 +720,11 @@
         }
 
         .bw-trip-compare li {
-          background: #FFFFFF;
-          border: 1px solid #C8DDF6;
-          border-left: 6px solid var(--blue);
+          background: rgba(255, 255, 255, 0.84);
+          border: 1px solid rgba(197, 225, 165, 0.78);
+          border-left: 6px solid var(--green);
           border-radius: 10px;
+          box-shadow: 0 16px 36px rgba(27, 94, 32, 0.08);
           padding: 16px 18px;
         }
 

@@ -2,6 +2,8 @@
 
 Slug: `berlin-pride-csd-2026`
 
+Wix draft ID: `51f9bda0-30e6-4118-a11c-232b7dbde002` (UNPUBLISHED, created 2026-06-05 via blog-publish)
+
 Meta title: Berlin Pride 2026 (CSD): Dates, Route & Local Guide
 
 Meta description: A local guide to Berlin Pride 2026 (Christopher Street Day): the July 25 parade route, the full Pride Week, the Schöneberg scene, and the deep history that makes Berlin one of the world's great queer capitals.
@@ -11,6 +13,21 @@ Category: Tourist Tips; Berlin History
 Primary keyword: Berlin Pride 2026
 
 Secondary keywords: CSD Berlin 2026, Berlin Pride parade route, Christopher Street Day Berlin, Berlin Pride Week 2026, Schöneberg gay district
+
+## Visual Notes
+
+Real Wikimedia Commons photos, optimized and uploaded to Wix Media on 2026-06-05. Full license/credit in `images/berlin-pride-csd-2026/visual-sources.md`.
+
+- **cover (DONE via API):** `berlin-pride-csd-parade.jpg` -> `5a08a3_14cf449f4a9e4c8ba3466ab54ffb053b~mv2.jpg` (CC0)
+  - alt: `A large crowd with rainbow and trans pride flags at the head of the Berlin Pride (Christopher Street Day) parade in Berlin.`
+- inline in "Schöneberg: Berlin's gay quarter": `berlin-pride-nollendorfplatz-rainbow.jpg` -> `5a08a3_cc50b46ca19846d1ae4a238eff4b3314~mv2.jpg` (CC BY-SA 4.0, credit: Fridolin freudenfett)
+  - alt: `The Nollendorfplatz U-Bahn station in Schöneberg with a long rainbow flag draped along the elevated track, in Berlin's Regenbogenkiez.`
+- inline in the history section ("The part most guides skip…"): `berlin-pride-memorial-homosexuals.jpg` -> `5a08a3_91ecc4269ed547b49dff4531b15e7df4~mv2.jpg` (CC BY-SA 4.0, credit: Gerd Eichmann)
+  - alt: `The Memorial to Homosexuals Persecuted under Nazism, a dark concrete monolith in Berlin's Tiergarten.`
+
+The cover was set via the Blog Draft Posts API. The 2 inline images still need dropping into the Wix draft body in the editor (with the alt text above). The 2 CC BY-SA images need a visible photo credit.
+
+Note: the Wix draft embeds the parade-map widget + quick-summary + FAQ. The `{{widget:berlin-pride-week-timeline}}` placeholder below was published as a text link to the live `/tools/berlin-pride-week-timeline` page (blog-publish supports one inline widget); embed the timeline in the editor too if you want it inline.
 
 ## Widget Plan
 
