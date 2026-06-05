@@ -4,6 +4,34 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-05 — Codex (Berlin Trip Planner landing page polish)
+
+**Did:** Applied Yusuf's visual-feedback pass to the standalone `/berlin-trip-planner` landing page.
+
+**Changed:**
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — removed the hero secondary `See how it works` button and the final `Only need day one?` CTA, reframed the email-gate copy as `send/save your plan`, added square proof icons, added day-art images to the three process cards, switched Yusuf's guide image to a high-resolution Wix portrait asset, and tightened final CTA spacing/color.
+- `output/playwright/berlin-trip-planner-page/` — added updated desktop/mobile QA screenshots; checks confirmed hero/final button counts, no horizontal overflow, step images loaded, and Yusuf image natural size `900x1125`.
+
+**Opened:** Landing page still needs GitHub push, Wix page creation at `/berlin-trip-planner`, menu/homepage wiring, and eventual email `${planUrl}` switch to the branded page once live.
+**Closed:** Latest local landing-page polish pass is review-ready.
+
+**Next session should:** Push/deploy the landing page, then install it on the Wix `/berlin-trip-planner` page and verify the live embed.
+
+## 2026-06-05 — Codex (Berlin Trip Planner landing page)
+
+**Did:** Designed and implemented the standalone `/berlin-trip-planner` landing page shell for the Ultimate Planner.
+
+**Changed:**
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — new `<bw-berlin-trip-planner-page>` custom element with image-led hero, embedded planner iframe, local-guide section, coverage cards, CTA sections, auto-height listener, and parent query forwarding into the planner iframe including `planAccess=1`.
+- `berlin-trip-planner-page/index.html` — local standalone preview.
+- `berlin-trip-planner-page/SEO_SETTINGS.md` and `README.md` — Wix install snippet, `/berlin-trip-planner` SEO basics, WebApplication schema, and rollout notes.
+- `output/playwright/berlin-trip-planner-page/` — desktop/mobile QA screenshots and checks; overflow `0`, iframe receives saved params and `attribution=none`.
+
+**Opened:** Push to GitHub Pages, create Wix page `/berlin-trip-planner`, install the custom element, then switch Ultimate email `${planUrl}` from direct GitHub widget to branded `/berlin-trip-planner` once live.
+**Closed:** Standalone page design/implementation is locally ready.
+
+**Next session should:** Open the local preview with Yusuf, tune copy/layout if needed, then publish the page and remove/de-emphasize Ultimate from generic tools surfaces.
+
 ## 2026-06-05 — Codex (Ultimate email direct unlock fix)
 
 **Did:** Fixed the latest Ultimate Trip Planner email-link issue where `${planUrl}` could open the Wix wrapper page without unlocking the iframe widget.
@@ -12,11 +40,12 @@ Format for each entry — see `AGENTS.md` §9.
 - `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — `planUrlForEmail()` now always rebuilds the email link as the direct GitHub Pages widget URL, preserves saved planner query params, and forces `planAccess=1`.
 - `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — smoke-test payloads now use the same direct widget URL so future email tests measure the real unlock behavior.
 - `output/qa/ultimate-trip-planner-live-smoke/dry-run-direct-widget-link-check.json` — dry-run evidence confirms host `fenerszymanski.github.io` and `planAccess=1`.
+- `output/qa/ultimate-trip-planner-live-smoke/live-direct-widget-link-2026-06-05b.json` — live smoke to `yusuf.ucuz@gmail.com`, arrival `2026-07-17`, returned `instant.sent: true`; Yusuf confirmed the email link opens the plan unlocked.
 
-**Opened:** Yusuf needs to paste/publish the updated `tripPlannerFunnel.js` in Wix Velo, then rerun one live email smoke.
-**Closed:** Syntax checks passed; `launch-audit.mjs` `153 pass`; Velo `prepublish-gate.mjs` `13 pass`.
+**Opened:** Future product direction: Ultimate Planner should move to its own standalone BerlinWalk page, not live as a normal tools-grid item long term.
+**Closed:** Syntax checks passed; `launch-audit.mjs` `153 pass`; Velo `prepublish-gate.mjs` `13 pass`; live email smoke worked after Wix publish.
 
-**Next session should:** After Wix publish, send a live test email and verify the link opens the full unlocked plan without rebuilding.
+**Next session should:** Design/implement the standalone Ultimate Planner page and later remove/de-emphasize it from generic tools surfaces once that page is ready.
 
 ## 2026-06-05 — Claude Code (Pride widgets to tools pages)
 
