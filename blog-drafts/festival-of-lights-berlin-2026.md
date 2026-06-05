@@ -27,17 +27,14 @@ End-of-post tour CTA and the Berlin First-Day Survival Guide lead form are auto-
 
 ## Visual Notes
 
-Do not add Festival of Lights photos to Wix before Yusuf approval. The official FAQ says the light art installations are copyright-protected and commercial use needs consent, so the safer route is either:
+Yusuf approved the safer normal-night-landmark image set on 2026-06-05, and Codex uploaded it to the Wix draft. The official FAQ says the light art installations are copyright-protected and commercial use needs consent, so the image set intentionally avoids close-up Festival of Lights projection photos and uses normal licensed night landmark photos instead.
 
-- approved editorial/press usage from the official festival/visitBerlin assets, with exact credit; or
-- a generated BerlinWalk cover that suggests Berlin at night without copying specific official artwork; or
-- normal licensed night landmark photos that do not show copyrighted light-art projections.
+Uploaded Wix media:
 
-Candidate images prepared but **not uploaded to Wix yet**:
-
-- `blog-drafts/images/festival-of-lights-berlin-2026/festival-lights-brandenburg-gate-night.jpg`
-- `blog-drafts/images/festival-of-lights-berlin-2026/festival-lights-berliner-dom-night.jpg`
-- `blog-drafts/images/festival-of-lights-berlin-2026/festival-lights-potsdamer-platz-blue-hour.jpg`
+- cover: `festival-lights-brandenburg-gate-night.jpg` -> `5a08a3_eb1a96bcc9c64cf881e3c9cd7e17e758~mv2.jpg`
+- inline after "Where to start": `festival-lights-berliner-dom-night.jpg` -> `5a08a3_171d0edc15e846d3a388e6eaf502a748~mv2.jpg`
+- inline after "The strongest central stops": `festival-lights-potsdamer-platz-night.jpg` -> `5a08a3_cd6057dc0b16447e9adcec9f68334a13~mv2.jpg`
+- inline after "What to leave for another night": `festival-lights-oberbaum-bridge-blue-hour.jpg` -> `5a08a3_9930d6b701714bf9a773c6e0a51fa19f~mv2.jpg`
 
 Source and license notes are in `blog-drafts/images/festival-of-lights-berlin-2026/visual-sources.md`.
 

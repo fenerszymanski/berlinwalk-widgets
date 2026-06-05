@@ -4,6 +4,22 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-05 — Codex (Festival of Lights visuals uploaded)
+
+**Did:** Added Yusuf-approved Festival of Lights image set to the Wix draft and updated local source notes.
+
+**Changed:**
+- `blog-drafts/festival-of-lights-berlin-2026.md` — Visual Notes now list the uploaded cover/inline media IDs.
+- `blog-drafts/images/festival-of-lights-berlin-2026/` — added optimized Potsdamer Platz night and Oberbaum Bridge blue-hour files, plus raw `_src/` downloads.
+- `blog-drafts/images/festival-of-lights-berlin-2026/visual-sources.md` — updated from candidate list to uploaded source/credit record.
+- `../berlinwalk-content-app/add-festival-of-lights-2026-images.mjs` — one-off script now handles cover + Berliner Dom + Potsdamer Platz + Oberbaum Bridge.
+- Wix: draft `c6e633aa-a5d9-4779-98ad-c2cd0fd1a686` remains UNPUBLISHED; readback confirmed 3 inline IMAGE nodes, 3 HTML embeds, cover media, SEO image tags, and image alt text.
+
+**Opened:** Push this repo so `festival-lights-route/`, quick-summary, FAQ, and schema changes resolve on GitHub Pages; then visual-QA the Wix draft before publish.
+**Closed:** Visual selection/upload for the Festival post.
+
+**Next session should:** Push/deploy widgets, check the Wix draft in the editor/preview, and publish only after Yusuf's final layout approval.
+
 ## 2026-06-04 — Codex (Ultimate tourist-prep email rewrite)
 
 **Did:** Rewrote the Ultimate Trip Planner emails again after Yusuf clarified they should feel like a tourist-coming-to-Berlin prep sequence from blog/SEO leads, not planner-system emails.
@@ -26,15 +42,15 @@ Format for each entry — see `AGENTS.md` §9.
 - `blog-drafts/festival-of-lights-berlin-2026.md` — NEW full English draft: dates, confirmed 2026 preview locations, central walking route, extensions, timing, transport, photo tips, BerlinWalk tie-in, and source/recheck notes.
 - `festival-lights-route/index.html` — NEW post-only Leaflet route widget with 19 official-preview locations, core/old-centre/Potsdamer/extensions filters, route line, and local route notes.
 - `quick-summary/data.json`, `faq/data.json`, `faq/inject.js` — wired QS/FAQ/schema under key `festival-of-lights-berlin-2026`.
-- `blog-drafts/images/festival-of-lights-berlin-2026/` — NEW visual candidate folder: Brandenburg Gate night, Berliner Dom night, Potsdamer Platz blue hour, plus `visual-sources.md`; not uploaded to Wix yet.
+- `blog-drafts/images/festival-of-lights-berlin-2026/` — NEW visual candidate folder: Brandenburg Gate night, Berliner Dom night, Potsdamer Platz blue hour, plus `visual-sources.md`; visual upload was completed in the later 2026-06-05 visuals entry above.
 - `blog-workplan.md` — added the Festival of Lights post/widget to the priority queue and drafts list.
 - `output/qa/festival-lights-route/desktop-1280.png`, `output/qa/festival-lights-route/mobile-390.png` — QA screenshots.
 - Wix: UNPUBLISHED draft `c6e633aa-a5d9-4779-98ad-c2cd0fd1a686`, slug `festival-of-lights-berlin-2026`, created with 122 nodes and 3 embeds.
 
-**Opened:** Push `berlinwalk-widgets` so the new route widget/QS/FAQ/schema resolve on GitHub Pages. Add images only after Yusuf approves candidates or requests a generated cover. Recheck final Festival of Lights programme/map/artwork details before publish.
+**Opened:** Push `berlinwalk-widgets` so the new route widget/QS/FAQ/schema resolve on GitHub Pages. Recheck final Festival of Lights programme/map/artwork details before publish.
 **Closed:** Local widget QA passed: desktop 1280 overflow 0, 19 markers, 12 loaded tiles; mobile 390 overflow 0; filters core 15 and extensions 4; QS/FAQ render for the new key; JSON, `faq/inject.js`, draft script, widget inline script, and `diff --check` passed.
 
-**Next session should:** Get visual approval, upload approved images to the Wix draft, push/deploy widgets, and visually QA the Wix draft before publish.
+**Next session should:** Push/deploy widgets and visually QA the Wix draft before publish.
 
 ## 2026-06-04 — Codex (Ultimate prep-email link pass)
 
