@@ -4,6 +4,38 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-05 — Codex (Ultimate email plan access)
+
+**Did:** Made Ultimate Trip Planner email links reopen the saved-choice full plan directly instead of sending users back through the email gate.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — lead payload now sends a `planAccess=1` email URL, restores query-state links, auto-unlocks, and renders the full plan when that email access param is present; normal share/WhatsApp links still omit the access param.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — `${planUrl}` now defensively appends `planAccess=1` in Velo email variables.
+- `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — dry/live smoke payloads now use realistic stateful planner URLs with `planAccess=1`.
+
+**Opened:** Live rollout needs both GitHub Pages push for the widget JS and Wix Velo paste/publish for the backend `planUrlForEmail` helper.
+**Closed:** Local QA confirmed email-link URL opens full plan with hidden gate, and WhatsApp/share links do not include `planAccess=1`; launch audit `153 pass`, prepublish gate `13 pass`.
+
+**Next session should:** After Yusuf pushes and publishes Velo, run one live smoke to verify the received email link opens the full plan directly.
+
+## 2026-06-05 — Claude Code (Festival of Lights AI images: optimize, upload, wire)
+
+**Did:** Optimized Yusuf's 4 AI-generated Festival of Lights images, uploaded them to Wix Media, set the post cover via API, and recorded all alt text. The 3 inline images still need a quick Wix-editor swap.
+
+**Changed:**
+- `blog-drafts/images/festival-of-lights-berlin-2026/` — added 4 optimized JPGs at canonical names (brandenburg cover 283 KB/1760×1314; berliner-dom 281 KB; potsdamer 287 KB; oberbaum 215 KB), raw AI originals in `_src/ai/`, old safe set moved to `_safe-set-backup/`.
+- Wix Media: uploaded all 4 (cover `5a08a3_b8fef771406e4a6cb2539dfcbd3ec3ec~mv2.jpg`; dom `…090d959d…`; potsdamer `…5651fe5e…`; oberbaum `…671c9fb0…`), all HTTP 200.
+- Wix draft `c6e633aa-…` (Festival of Lights): PATCHed `media` (featured/cover) to the new Brandenburg AI image + alt text via Blog Draft Posts API. Inline body images NOT changed via API (draft body content not safely API-editable; richContent returned 0 nodes).
+- `blog-drafts/festival-of-lights-berlin-2026.md` Visual Notes + `images/.../visual-sources.md` + `ai-image-prompts.md` — updated to the AI set with media IDs and alt text for all 4.
+
+**Opened:**
+- Yusuf to swap the 3 inline images in the Wix editor with the new media + alt text (cover already done). URLs/alt text are in the draft Visual Notes.
+- `festival-lights-route` map widget referenced by `{{widget:festival-lights-route}}` still not built.
+
+**Closed:** Festival of Lights images optimized, uploaded, alt text written, cover set.
+
+**Next session should:** After Yusuf swaps the 3 inline images, build the `festival-lights-route` map widget, then add the qs/FAQ data entries for `festival-of-lights-berlin-2026`.
+
 ## 2026-06-05 — Codex (Ultimate live email retest)
 
 **Did:** Sent another live Ultimate Trip Planner instant-email smoke test after Yusuf confirmed all five updated templates were live.

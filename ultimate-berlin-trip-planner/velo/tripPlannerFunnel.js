@@ -651,6 +651,18 @@ function shouldSuppressUltimateReminder(lead, stage) {
   return Boolean(stage && stage.key !== 'instant' && isBookedLead(lead));
 }
 
+function planUrlForEmail(lead) {
+  const fallback = 'https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner';
+  const raw = String(lead && lead.page || fallback);
+  try {
+    const url = new URL(raw, fallback);
+    url.searchParams.set('planAccess', '1');
+    return url.toString();
+  } catch (error) {
+    return raw + (raw.indexOf('?') === -1 ? '?' : '&') + 'planAccess=1';
+  }
+}
+
 function emailVariables(lead, stage) {
   const booked = isBookedLead(lead);
   return {
@@ -703,7 +715,7 @@ function emailVariables(lead, stage) {
     bookingStatus: String(lead.bookingStatus || ''),
     tourDate: String(lead.tourDate || ''),
     bookingUrl: BOOKING_SHORT_URL,
-    planUrl: String(lead.page || 'https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner'),
+    planUrl: planUrlForEmail(lead),
     meetingPointUrl: String(lead.meetingPointUrl || 'https://www.berlinwalk.com/meeting-point'),
     firstDayPlannerUrl: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',
     ticketCalculatorUrl: 'https://www.berlinwalk.com/tools/transport-ticket-calculator',

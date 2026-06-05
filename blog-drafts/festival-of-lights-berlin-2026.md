@@ -27,16 +27,20 @@ End-of-post tour CTA and the Berlin First-Day Survival Guide lead form are auto-
 
 ## Visual Notes
 
-Yusuf approved the safer normal-night-landmark image set on 2026-06-05, and Codex uploaded it to the Wix draft. The official FAQ says the light art installations are copyright-protected and commercial use needs consent, so the image set intentionally avoids close-up Festival of Lights projection photos and uses normal licensed night landmark photos instead.
+**Updated 2026-06-05 (Claude): switched to AI-generated Festival of Lights images.** Yusuf generated the four scenes in his ChatGPT Pro from the briefs in `images/festival-of-lights-berlin-2026/ai-image-prompts.md`. This deliberately replaces the earlier safe night-landmark set and sidesteps the light-art copyright issue, because the images are original (not photos of a real copyrighted projection). The previous safe set is preserved in `images/festival-of-lights-berlin-2026/_safe-set-backup/`; raw AI originals are in `_src/ai/`.
 
-Uploaded Wix media:
+New optimized images (~215-287 KB each, uploaded to Wix Media 2026-06-05) and their alt text:
 
-- cover: `festival-lights-brandenburg-gate-night.jpg` -> `5a08a3_eb1a96bcc9c64cf881e3c9cd7e17e758~mv2.jpg`
-- inline after "Where to start": `festival-lights-berliner-dom-night.jpg` -> `5a08a3_171d0edc15e846d3a388e6eaf502a748~mv2.jpg`
-- inline after "The strongest central stops": `festival-lights-potsdamer-platz-night.jpg` -> `5a08a3_cd6057dc0b16447e9adcec9f68334a13~mv2.jpg`
-- inline after "What to leave for another night": `festival-lights-oberbaum-bridge-blue-hour.jpg` -> `5a08a3_9930d6b701714bf9a773c6e0a51fa19f~mv2.jpg`
+- **cover — DONE via Blog Draft Posts API:** `festival-lights-brandenburg-gate-night.jpg` -> `5a08a3_b8fef771406e4a6cb2539dfcbd3ec3ec~mv2.jpg`
+  - alt: `The Brandenburg Gate in Berlin lit with colourful light projections at night during the Festival of Lights, with a crowd watching from Pariser Platz.`
+- inline after "Where to start": `festival-lights-berliner-dom-night.jpg` -> `5a08a3_090d959d90904bc0a40971e55f4a0174~mv2.jpg`
+  - alt: `Berlin Cathedral on Museum Island lit with colourful projections at night during the Festival of Lights, reflected in the Spree river.`
+- inline after "The strongest central stops": `festival-lights-potsdamer-platz-night.jpg` -> `5a08a3_5651fe5e4da64a38ba70331bc09c987f~mv2.jpg`
+  - alt: `The glass towers of Potsdamer Platz glowing with colourful light projections at night during Berlin's Festival of Lights.`
+- inline after "What to leave for another night": `festival-lights-oberbaum-bridge-blue-hour.jpg` -> `5a08a3_671c9fb0d6234b11ae4bf4d1657fdb1e~mv2.jpg`
+  - alt: `The Oberbaum Bridge over the Spree in Berlin lit up in colour at blue hour, reflected in the calm water.`
 
-Source and license notes are in `blog-drafts/images/festival-of-lights-berlin-2026/visual-sources.md`.
+The cover was swapped automatically via the Blog Draft Posts API. The three inline images still need swapping in the Wix editor (the draft body content is not safely API-editable here); set the alt text above on each. Source/processing notes: `images/festival-of-lights-berlin-2026/visual-sources.md`.
 
 ## Quick Summary
 

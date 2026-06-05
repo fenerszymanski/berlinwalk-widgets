@@ -10211,7 +10211,7 @@
   var aiStatus = 'idle';
   var aiRequestId = 0;
   resetLocalUnlockForQa();
-  var unlocked = isUnlocked() || forceLocalUnlockForQa();
+  var unlocked = isUnlocked() || forceLocalUnlockForQa() || shouldOpenEmailPlan();
   var gateViewTracked = false;
   var emailFocusTracked = false;
   var emailValidTracked = false;
@@ -16543,6 +16543,28 @@
     }
   }
 
+  function emailPlanAccessRequested() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      return params.get('planAccess') === '1';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function hasRestorablePlanParams() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      return Boolean(params.get('date') && params.get('tripLength'));
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function shouldOpenEmailPlan() {
+    return emailPlanAccessRequested() && hasRestorablePlanParams();
+  }
+
   function currentContext() {
     var params = new URLSearchParams(window.location.search);
     return params.get('context') === 'blog' ? 'blog' : 'tool';
@@ -16570,6 +16592,12 @@
 
   function planShareUrl() {
     return window.location.origin + window.location.pathname + '?' + plannerStateParams().toString();
+  }
+
+  function planEmailUrl() {
+    var params = plannerStateParams();
+    params.set('planAccess', '1');
+    return window.location.origin + window.location.pathname + '?' + params.toString();
   }
 
   function whatsappShareText(plan) {
@@ -16624,7 +16652,6 @@
   }
 
   function leadPayload(email) {
-    var params = new URLSearchParams(window.location.search);
     var plan = latestPlan || buildPlan();
     var labels = selectedLabels();
     var segments = leadSegmentsForPlan(plan);
@@ -16679,7 +16706,7 @@
       conversionNextAction: signal.next,
       conversionReasons: signal.reasons.join(', '),
       source: currentContext(),
-      page: planShareUrl(),
+      page: planEmailUrl(),
       consent: true
     };
   }
@@ -20245,6 +20272,23 @@
     syncInputsFromState();
   }
 
+  function openEmailPlanFromLink() {
+    if (!shouldOpenEmailPlan()) return;
+    planningInProgress = false;
+    planGenerated = true;
+    dayJumpDay = 1;
+    routeDeckDay = 1;
+    boardLens = 'route';
+    renderPlan();
+    updatePlanningUi();
+    updateUnlockUi();
+    setActionStatus('Your saved plan is open.');
+    track('bw_trip_planner_email_plan_open', {
+      arrival_date: state.arrivalDate,
+      trip_length: state.tripLength
+    });
+  }
+
   root.addEventListener('error', function (event) {
     var target = event.target;
     if (!target || target.tagName !== 'IMG' || target.getAttribute('data-bw-img-fallback')) return;
@@ -20501,6 +20545,7 @@
   updatePlanningUi();
   updateUnlockUi();
   loadWeather();
+  openEmailPlanFromLink();
   track('bw_trip_planner_start', {
     context: currentContext(),
     arrival_date: state.arrivalDate,

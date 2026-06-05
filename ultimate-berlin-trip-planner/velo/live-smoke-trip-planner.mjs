@@ -136,14 +136,35 @@ function estimateGeminiCost(response) {
   };
 }
 
+function buildPlannerPageUrl(options, arrivalDate, tripLength) {
+  const url = new URL('/tools/ultimate-berlin-trip-planner', options.baseUrl || DEFAULT_BASE_URL);
+  url.searchParams.set('context', 'tool');
+  url.searchParams.set('date', arrivalDate);
+  url.searchParams.set('tripLength', String(tripLength));
+  url.searchParams.set('arrivalTime', 'morning');
+  url.searchParams.set('arrivalPoint', 'ber');
+  url.searchParams.set('stayArea', 'mitte');
+  url.searchParams.set('groupType', 'solo');
+  url.searchParams.set('firstTime', 'yes');
+  url.searchParams.set('interests', 'history,wall,food,museums');
+  url.searchParams.set('budgetStyle', 'smart');
+  url.searchParams.set('mustHandle', 'rain');
+  url.searchParams.set('pace', 'balanced');
+  url.searchParams.set('tourIntent', 'considering');
+  url.searchParams.set('planAccess', '1');
+  url.searchParams.set('source', 'codex_live_smoke');
+  return url.toString();
+}
+
 function buildLeadPayload(options) {
   const arrivalDate = options.arrivalDate || dateKey(addDays(new Date(), 10));
+  const tripLength = Math.max(1, Math.min(7, Math.round(options.tripLength || 3)));
   const recommendedTourDate = dateKey(addDays(new Date(`${arrivalDate}T12:00:00Z`), 1));
 
   return {
     email: options.email || `ultimate-planner-smoke+${Date.now()}@example.com`,
     arrivalDate,
-    tripLength: Math.max(1, Math.min(7, Math.round(options.tripLength || 3))),
+    tripLength,
     arrivalTime: 'Late morning / midday',
     arrivalPoint: 'BER Airport',
     stayArea: 'Mitte / Alexanderplatz',
@@ -189,7 +210,7 @@ function buildLeadPayload(options) {
     conversionNextAction: 'Book or hold the tour before arrival',
     conversionReasons: 'arrival date known, tour early in trip, first-time route shape',
     source: 'codex_live_smoke',
-    page: 'https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner?source=codex_live_smoke',
+    page: buildPlannerPageUrl(options, arrivalDate, tripLength),
     consent: true
   };
 }
