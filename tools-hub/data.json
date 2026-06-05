@@ -57,6 +57,24 @@
       "embedHeight": 1120
     },
     {
+      "slug": "basketball-worldcup-fixtures",
+      "title": "Women's Basketball World Cup 2026 Fixtures",
+      "lead": "Every Berlin group-stage match in local time, with team, group and venue filters plus the knockout calendar.",
+      "category": "Discovery",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/basketball-worldcup-fixtures-160.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/basketball-worldcup-fixtures/",
+      "embedHeight": 1160
+    },
+    {
+      "slug": "basketball-worldcup-venues-map",
+      "title": "Women's Basketball World Cup Berlin Venues Map",
+      "lead": "Map the two Berlin arenas, nearest stations, Berlin Wall sites and the BerlinWalk tour start for match-day planning.",
+      "category": "Discovery",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/basketball-worldcup-venues-map-160.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/basketball-worldcup-venues-map/",
+      "embedHeight": 820
+    },
+    {
       "slug": "welcomecard-calculator",
       "title": "Berlin WelcomeCard Calculator",
       "lead": "Is the WelcomeCard worth it for your trip? Find out in 30 seconds.",

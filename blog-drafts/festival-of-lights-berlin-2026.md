@@ -51,11 +51,13 @@ Source and license notes are in `blog-drafts/images/festival-of-lights-berlin-20
 
 # Festival of Lights Berlin 2026: Best Walking Route and Local Tips
 
-Every October, Berlin does something very Berlin: it turns the serious stone of the city into a temporary outdoor gallery. The Brandenburg Gate, Berlin Cathedral, Bebelplatz, Potsdamer Platz and other landmarks become projection surfaces, and the whole centre suddenly feels a little less heavy.
+Every October, Berlin does something very Berlin: it turns the serious grey stone of the city into a temporary outdoor gallery. For ten nights the Brandenburg Gate, Berlin Cathedral, Bebelplatz and Potsdamer Platz stop being landmarks and become canvases. Artists project colour, motion and stories across the facades, and the whole centre suddenly feels a little less heavy and a lot more alive.
 
-The **Festival of Lights Berlin 2026** runs from **October 9 to 18, 2026**. The motto is **Colours of Love**, and the official programme preview is already useful enough to plan a route, even though the final map and individual artworks may still change.
+It is one of the largest light-art festivals in the world, it is completely free, and it pulls huge crowds into the city centre after dark. That is exactly why a plan helps.
 
-This guide is not a generic event listing. It is the route I would give a first-time visitor who wants to see the strongest cluster of confirmed locations without spending the whole night crossing the city.
+The **Festival of Lights Berlin 2026** runs from **October 9 to 18, 2026**. The motto is **Colours of Love**, and the official programme preview is already detailed enough to plan a route around, even though the final map and the individual artworks may still change.
+
+This guide is not a generic event listing. It is the walk I would give a first-time visitor: the strongest cluster of confirmed locations, in an order that flows, without spending the whole night crossing the city.
 
 {{quick-summary}}
 
@@ -64,6 +66,8 @@ This guide is not a generic event listing. It is the route I would give a first-
 The official Festival of Lights site says the 2026 edition runs from **Friday, October 9 to Sunday, October 18, 2026**, celebrating the festival's 22nd edition under the motto **Colours of Love**. The [official programme preview](https://festival-of-lights.de/en/programme-2026/) already lists the first confirmed illuminated locations, with more to come.
 
 The standard lighting window is **7 pm to 11 pm**. [visitBerlin](https://www.visitberlin.de/en/event/festival-lights-2026) also lists daily 7 pm to 11 pm, and the official FAQ says individual illuminations can vary, so treat that as the normal window rather than a promise for every single building.
+
+One detail that matters for planning: **the festival is free**. There is no ticket and no fenced-off zone. You simply walk the city and look up, which is part of why it is so easy to combine with a normal day of sightseeing.
 
 The confirmed preview locations are concentrated in a few clusters:
 
@@ -98,13 +102,13 @@ The biggest mistake is trying to make it a checklist. The festival works best as
 
 Start around **Alexanderplatz**, near the TV Tower. It is easy to reach, it is close to the first confirmed locations, and it keeps the route moving naturally west through the historic centre.
 
-The opening stretch is also a good Berlin story. St. Mary's Church is one of the oldest surviving churches in the city. The Nikolai Quarter is the reconstructed "old town" that East Berlin rebuilt in the 1980s. Berlin Cathedral and Museum Island then bring you into the grand imperial layer of the city. By the time you reach Bebelplatz, you are walking through the ceremonial heart of Unter den Linden.
+The opening stretch is also a good Berlin story. [St. Mary's Church](https://www.berlinwalk.com/post/st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower) is one of the oldest surviving churches in the city. The Nikolai Quarter is the reconstructed "old town" that East Berlin rebuilt in the 1980s. Berlin Cathedral and Museum Island then bring you into the grand imperial layer of the city. By the time you reach Bebelplatz, you are walking through the ceremonial heart of Unter den Linden.
 
 This is why I like the route. It is not just pretty buildings in lights. It is a compact version of Berlin's history, from medieval traces to royal power, Nazi memory, Cold War division and reunification.
 
 ## The strongest central stops
 
-**Berlin Cathedral** is usually one of the most satisfying photo stops because the building is large, detailed and visible from the open space around Lustgarten. If there is one place to slow down properly before Unter den Linden, make it this one.
+**[Berlin Cathedral](https://www.berlinwalk.com/post/the-berliner-dom-a-cathedral-that-survived-everything)** is usually one of the most satisfying photo stops because the building is large, detailed and visible from the open space around Lustgarten. If there is one place to slow down properly before Unter den Linden, make it this one.
 
 **Bebelplatz** is another strong stop. The square is framed by the State Opera, Humboldt University, Saint Hedwig's Cathedral and the Hotel de Rome, so light projections can work from several angles. Berlin.de also points to Bebelplatz as a recurring hotspot for the festival. It is a good place to pause, not just pass through.
 
@@ -116,7 +120,7 @@ This is why I like the route. It is not just pretty buildings in lights. It is a
 
 The preview also names **Victory Column**, **Oberbaum Bridge**, **THF Tower**, and **Radio Tower**. They are worth knowing about, but I would not put all of them into the same first-time walk.
 
-**Victory Column** is the easiest extension from the Brandenburg Gate if you still have energy. It sits in the middle of the Tiergarten roundabout at Großer Stern. The walk from the Gate is long but straightforward along Straße des 17. Juni.
+**Victory Column** is the easiest extension from the Brandenburg Gate if you still have energy. It sits in the middle of the Tiergarten roundabout at Großer Stern. The walk from the Gate is long but straightforward along Straße des 17. Juni, and it is also a stop on the famous [Bus 100 route](https://www.berlinwalk.com/post/bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about) if you would rather ride than walk.
 
 **Oberbaum Bridge** is better as a separate Friedrichshain-Kreuzberg evening. Pair it with the East Side Gallery, a riverside walk, and food or drinks around Warschauer Straße.
 
@@ -152,7 +156,7 @@ Bring your phone or camera, but do not spend the whole night fighting your setti
 
 Hold still for a second after you tap the shutter. Avoid digital zoom. Step to the side rather than photographing from the most crowded central spot. At Brandenburg Gate, try the edges of Pariser Platz instead of standing directly in front with everyone else.
 
-For video projections, wait for a full loop before leaving. Many shows build slowly, and the best moment is often not the first ten seconds.
+For video projections, wait for a full loop before leaving. Many shows build slowly, and the best moment is often not the first ten seconds. If you enjoy hunting for the right angle, my guide to the [best photo spots in Berlin](https://www.berlinwalk.com/post/7-best-photo-spots-in-berlin-most-tourists-walk-right-past) points out a few corners most people walk straight past.
 
 Also, be patient with people. The Festival of Lights is free, central and photogenic. Crowds are not a bug in the experience. They are part of it.
 
@@ -180,7 +184,7 @@ Festival of Lights is one of the few big Berlin events that works beautifully fo
 
 But do less. Do not chase every location. Pick the central route, move slowly, and save the outer sites for another evening if they matter to you.
 
-The best version is simple: see Berlin's historic centre in daylight, eat early, then walk from Alexanderplatz to Potsdamer Platz as the city lights up. That is enough for a very good October night in Berlin.
+The best version is simple: see Berlin's historic centre in daylight, [eat early near Alexanderplatz](https://www.berlinwalk.com/post/where-to-eat-near-alexanderplatz-without-getting-ripped-off), then walk from Alexanderplatz to Potsdamer Platz as the city lights up. That is enough for a very good October night in Berlin.
 
 {{faq}}
 

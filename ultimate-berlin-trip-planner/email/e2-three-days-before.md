@@ -6,7 +6,7 @@ Preheader: A few boring checks that make arrival much easier.
 
 Hi,
 
-Three days before Berlin, I would not add more sights. I would make the practical layer boring and clear.
+Three days before Berlin, keep things simple. Check tickets, opening days, and your first ride from the airport.
 
 Your planner ticket note:
 

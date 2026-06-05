@@ -240,6 +240,22 @@
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_b197adcbe5214470a8c6ee3907955adc~mv2.png"
   },
   {
+    "slug": "basketball-worldcup-fixtures",
+    "source": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/basketball-worldcup-fixtures-chatgpt.png",
+    "model": "ChatGPT browser image generation",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/basketball-worldcup-fixtures.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/basketball-worldcup-fixtures-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/basketball-worldcup-fixtures-160.png"
+  },
+  {
+    "slug": "basketball-worldcup-venues-map",
+    "source": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/basketball-worldcup-venues-map-chatgpt.png",
+    "model": "ChatGPT browser image generation",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/basketball-worldcup-venues-map.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/basketball-worldcup-venues-map-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/basketball-worldcup-venues-map-160.png"
+  },
+  {
     "slug": "ultimate-berlin-trip-planner",
     "source": "code-native PIL illustration",
     "model": "local",

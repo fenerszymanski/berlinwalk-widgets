@@ -2,13 +2,13 @@
 
 Subject: 👋 Welcome to Berlin
 
-Preheader: Reach your base, eat something, and keep the first day human.
+Preheader: Reach your base, eat something, and keep the first day easy.
 
 Welcome to Berlin.
 
 Today is not the day to prove anything.
 
-Reach your base, solve luggage, eat before you are tired, and keep the first walk simple. If you do one good orientation move today, that is enough.
+Reach your base, drop bags if you need to, eat before you are tired, and keep the first walk simple. One good orientation walk is enough today.
 
 If you came from BER, do not worry if the first transfer felt clunky. Most people meet Berlin through a platform sign, a ticket machine, or a station that makes less sense than it should.
 

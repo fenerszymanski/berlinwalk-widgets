@@ -12,9 +12,9 @@ Your weather note:
 
 **${weatherTitle}**
 
-My first-day rule is simple because it works: arrive, eat, walk a little, and stop before you are exhausted.
+For the first day, keep it easy: arrive, eat, take one short walk, then stop before you get too tired.
 
-Berlin looks smaller on a map than it feels on foot. There are station stairs, cobbles, big crossings, river wind, and more walking than expected. Put comfortable shoes where you can actually find them tomorrow.
+Berlin looks smaller on a map than it feels on foot. There are station stairs, cobbles, big crossings, river wind, and more walking than expected. Pack comfortable shoes somewhere easy to reach.
 
 Save these before you travel:
 

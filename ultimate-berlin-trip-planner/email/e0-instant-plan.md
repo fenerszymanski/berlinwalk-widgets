@@ -6,7 +6,9 @@ Preheader: A calm start for your Berlin prep.
 
 Hi,
 
-Your Berlin plan for `${arrivalDate}` is here:
+Your Berlin plan for `${arrivalDate}` is ready.
+
+Your plan is here:
 
 ${planUrl}
 

@@ -4,6 +4,70 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-05 — Codex (Ultimate live email retest)
+
+**Did:** Sent another live Ultimate Trip Planner instant-email smoke test after Yusuf confirmed all five updated templates were live.
+
+**Changed:**
+- `output/qa/ultimate-trip-planner-live-smoke/live-2026-06-05T06-16-04-773Z.json` — new live smoke evidence for `yusuf.ucuz@gmail.com`, arrival `2026-07-02`, trip length `3`.
+- Wix: live `POST /_functions/tripPlannerLead` returned `200`, reused contact `21700383-1cb1-49e5-8343-7357fc20e13d`, created lead `83904e12-59ed-49db-bd89-0028c1ba7461`, and returned `instant.sent: true`.
+
+**Opened:** None.
+**Closed:** Instant email live retest succeeded.
+
+**Next session should:** Yusuf should check Gmail inbox/promotions/spam and judge the final rendered email copy.
+
+## 2026-06-05 — Claude Code (Festival of Lights draft polish + photo research)
+
+**Did:** Improved the Festival of Lights 2026 draft text, strengthened internal/external links, and researched real Festival of Lights photos (left the use decision to Yusuf because of the light-art copyright caveat).
+
+**Changed:**
+- `blog-drafts/festival-of-lights-berlin-2026.md` — richer intro (world's largest light-art festival, free admission), added a free-entry note in the dates section, and wove in 5 LIVE internal cross-links (St. Mary's Church, Berliner Dom, Bus 100, 7 best photo spots, eat near Alexanderplatz) on top of the existing ones. Verified all internal /post links resolve to live posts and `berlin-in-october-2026` is live (HTTP 200, PUBLISHED). No em dashes, no `1h45m`.
+
+**Decision:** Yusuf chose to AI-generate the festival images himself (zero API spend) rather than use real projection photos, which cleanly avoids the light-art copyright issue. Real Commons candidates were verified but set aside (e.g. `2009-10-23 - Festival of Lights - Brandenburger Tor 4.JPG`, CC BY-SA 3.0, Michael F. Mehnert, 1920×1080).
+
+**Changed (added):**
+- `blog-drafts/images/festival-of-lights-berlin-2026/ai-image-prompts.md` — NEW. Four paste-ready photorealistic prompts mapped to the draft's image slots (cover = Brandenburg Gate 16:9; inline = Berliner Dom, Potsdamer Platz, Oberbaum Bridge 3:2), each with copyright-safe guardrails (original light patterns, recognisable architecture, no text/logos/watermarks).
+
+**Opened:**
+- Yusuf generates the 4 images in his ChatGPT Pro, drops them into the images folder; then crop/compress/brand/upload to Wix, swap the current safe images, and update `visual-sources.md` to note the AI source.
+- `festival-lights-route` map widget referenced by `{{widget:festival-lights-route}}` in the draft is NOT built yet (offer to build, same pattern as the Pride widgets).
+
+**Closed:** Text + link improvements for the Festival of Lights draft. Photo direction decided (AI-generate).
+
+**Next session should:** Process Yusuf's generated images (crop/compress/upload/wire), then build the `festival-lights-route` map widget.
+
+## 2026-06-05 — Codex (Basketball widgets to tools)
+
+**Did:** Promoted the two FIBA Women's Basketball World Cup post widgets into BerlinTools entries and generated separate ChatGPT-browser icons.
+
+**Changed:**
+- `tools-hub/data.json` — added `basketball-worldcup-fixtures` and `basketball-worldcup-venues-map` with icon URLs, widget URLs, and embed heights.
+- `tools-home/icons/basketball-worldcup-fixtures.png`, `tools-home/icons/basketball-worldcup-fixtures-160.png`, `tools-home/icons/basketball-worldcup-venues-map.png`, `tools-home/icons/basketball-worldcup-venues-map-160.png` — new generated icons.
+- `tools-home/icons/_src/` — raw ChatGPT browser PNGs and `basketball-worldcup-icons-prompts.md`.
+- `tools-home/icons/manifest.json` — recorded the two generated icon assets.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated ItemList SEO, now 38 widgets.
+- Wix: BerlinTools CMS rows inserted for `basketball-worldcup-fixtures` and `basketball-worldcup-venues-map`; both dynamic `/tools/<slug>` pages return HTTP 200.
+
+**Opened:** Push this repo so GitHub Pages serves the new icon PNGs and the updated `tools-hub/data.json`; until push, the dynamic tool pages work but `/tools`/`/widgets` grids will not show the new cards/icons.
+**Closed:** Two basketball post widgets now have standalone dynamic tool pages.
+
+**Next session should:** Push/deploy widgets, then verify `/tools`, `/widgets`, and the two new cards/icons live.
+
+## 2026-06-05 — Codex (Ultimate email wording cleanup)
+
+**Did:** Applied Yusuf's line-level feedback to make the Ultimate Trip Planner emails plainer and less robotic.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/email/e0-instant-plan.md` — added the explicit `Your plan is here:` link block to the first email.
+- `ultimate-berlin-trip-planner/email/e2-three-days-before.md`, `e3-one-day-before.md`, `e4-arrival-day.md` — simplified selected prep sentences around three-day checks, first-day pacing, shoes, and arrival-day wording.
+- `ultimate-berlin-trip-planner/email/paste-ready/` — regenerated the Wix copy kit and all five paste-ready emails.
+
+**Opened:** None.
+**Closed:** `launch-audit.mjs` passed `153 pass, 0 warn, 0 block`; `velo/prepublish-gate.mjs` passed `13 pass, 0 warn, 0 block`.
+
+**Next session should:** Yusuf can refresh `email/paste-ready/copy-kit.html` and review the exact updated lines before pasting into Wix.
+
 ## 2026-06-05 — Codex (Festival of Lights visuals uploaded)
 
 **Did:** Added Yusuf-approved Festival of Lights image set to the Wix draft and updated local source notes.
