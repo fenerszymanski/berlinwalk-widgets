@@ -6,15 +6,16 @@ Format for each entry — see `AGENTS.md` §9.
 
 ## 2026-06-06 — Codex (Trip Planner live resize gap guard)
 
-**Did:** Made the live `/berlin-trip-planner` Wix gap guard respond to browser resizing after Yusuf found top/bottom whitespace returned when widening the browser.
+**Did:** Reworked the live `/berlin-trip-planner` Wix gap fix after the margin guard proved unreliable across browsers.
 
 **Changed:**
-- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — gap guard now listens to `window`/`visualViewport` resize, observes the Wix section/wrapper, clears stale timers, re-measures across multiple post-resize delays, and applies matching negative top/bottom margins only when Wix creates a large wrapper gap.
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — the guard now pins the Wix-generated custom-element wrapper to `start/stretch`, resets the generated grid row/section height to `auto`, and keeps the resize observers/timers. This targets the root cause: Wix live was setting the wrapper to `place-self: center`, which vertically centered the planner inside an oversized generated grid and created matching top/bottom blanks.
+- `berlin-trip-planner-page/SEO_SETTINGS.md` — install snippet now uses `?v=20260606-wrapper` so Wix can cache-bust the new wrapper fix.
 
-**Opened:** Push/deploy still needed, then live QA by resizing `/berlin-trip-planner` from normal desktop width to wide desktop.
-**Closed:** Live measurement reproduced the issue: 1280px had no gap, 1920px created about 785px top and bottom gaps; temporary live injection of the new logic closed both gaps.
+**Opened:** Push/deploy still needed; update the Wix page script URL to `?v=20260606-wrapper`, publish, then live QA in Chrome/Opera by resizing `/berlin-trip-planner`.
+**Closed:** Live measurement found the true cause: the Wix wrapper `.comp-mq1axvyp` computed as `place-self: center`; temporary live injection of the wrapper fix closed top and footer gaps without negative margins.
 
-**Next session should:** Push this one-file fix, wait for GitHub Pages, verify `/berlin-trip-planner?v=resize-gap-fix` at 1280px and 1920px, then continue homepage mini teaser work.
+**Next session should:** Push this wrapper fix, wait for GitHub Pages, update/publish the Wix script tag, then verify `/berlin-trip-planner` at normal and wide browser widths before continuing homepage mini teaser work.
 
 ## 2026-06-05 — Codex (Trip Planner live top-gap guard)
 

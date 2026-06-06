@@ -285,21 +285,29 @@
 
       const sync = () => {
         const section = this.closest('section.wixui-section');
-        if (!section) return;
-
         this.style.marginTop = '';
         this.style.marginBottom = '';
         delete this.dataset.bwWixTopGap;
 
-        const ownTop = this.getBoundingClientRect().top;
-        const sectionTop = section.getBoundingClientRect().top;
-        const gap = Math.round(ownTop - sectionTop);
+        const wrapper = this.parentElement;
+        const container = wrapper && wrapper.parentElement;
+        if (!section || !wrapper || !container) return;
 
-        if (gap > 40 && gap < 1400) {
-          this.style.marginTop = `-${gap}px`;
-          this.style.marginBottom = `-${gap}px`;
-          this.dataset.bwWixTopGap = String(gap);
-        }
+        // Wix live centers custom-element wrappers inside a generated grid when
+        // the viewport width changes. Pin this page wrapper to the top instead.
+        wrapper.style.alignSelf = 'start';
+        wrapper.style.justifySelf = 'stretch';
+        wrapper.style.placeSelf = 'start stretch';
+        wrapper.style.width = '100%';
+
+        container.style.alignItems = 'start';
+        container.style.justifyItems = 'stretch';
+        container.style.gridTemplateRows = 'auto';
+        container.style.height = 'auto';
+
+        section.style.height = 'auto';
+        section.style.minHeight = '0';
+        this.dataset.bwWixLayoutFixed = 'true';
       };
 
       const runInFrame = () => {
