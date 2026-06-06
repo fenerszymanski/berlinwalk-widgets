@@ -412,15 +412,27 @@
         wrapper.style.alignSelf = 'start';
         wrapper.style.justifySelf = 'stretch';
         wrapper.style.placeSelf = 'start stretch';
+        wrapper.style.maxWidth = '100%';
+        wrapper.style.minWidth = '0';
+        wrapper.style.overflowX = 'hidden';
         wrapper.style.width = '100%';
 
         container.style.alignItems = 'start';
         container.style.justifyItems = 'stretch';
         container.style.gridTemplateRows = 'auto';
         container.style.height = 'auto';
+        container.style.maxWidth = '100%';
+        container.style.minWidth = '0';
+        container.style.overflowX = 'hidden';
 
         section.style.height = 'auto';
+        section.style.maxWidth = '100%';
         section.style.minHeight = '0';
+        section.style.minWidth = '0';
+        section.style.overflowX = 'hidden';
+        this.style.maxWidth = '100%';
+        this.style.minWidth = '0';
+        this.style.overflowX = 'hidden';
         this.dataset.bwWixLayoutFixed = 'true';
       };
 
@@ -453,6 +465,9 @@
       return `
         bw-berlin-trip-planner-page {
           display: block;
+          max-width: 100%;
+          min-width: 0;
+          overflow-x: clip;
           width: 100%;
         }
 
@@ -470,8 +485,46 @@
           background: var(--cream);
           color: var(--text);
           font-family: Montserrat, Arial, sans-serif;
-          overflow-x: hidden;
+          max-width: 100%;
+          min-width: 0;
+          overflow-x: clip;
           width: 100%;
+        }
+
+        .bw-trip-inner,
+        .bw-trip-hero,
+        .bw-trip-hero-inner,
+        .bw-trip-planner-band,
+        .bw-trip-widget-shell,
+        .bw-trip-section,
+        .bw-trip-proof,
+        .bw-trip-steps,
+        .bw-trip-cover-grid,
+        .bw-trip-guide-grid,
+        .bw-trip-compare-grid,
+        .bw-trip-final-box {
+          max-width: 100%;
+          min-width: 0;
+          overflow-x: clip;
+        }
+
+        @supports not (overflow: clip) {
+          bw-berlin-trip-planner-page,
+          .bw-trip-page,
+          .bw-trip-inner,
+          .bw-trip-hero,
+          .bw-trip-hero-inner,
+          .bw-trip-planner-band,
+          .bw-trip-widget-shell,
+          .bw-trip-section,
+          .bw-trip-proof,
+          .bw-trip-steps,
+          .bw-trip-cover-grid,
+          .bw-trip-guide-grid,
+          .bw-trip-compare-grid,
+          .bw-trip-final-box {
+            overflow-x: hidden;
+          }
         }
 
         .bw-trip-page *,
@@ -699,6 +752,8 @@
           display: block;
           height: 1900px;
           min-height: 1900px;
+          max-width: 100%;
+          min-width: 0;
           overflow: hidden;
           width: 100%;
         }
@@ -1012,8 +1067,8 @@
             border-left: 0;
             border-radius: 12px;
             border-right: 0;
-            margin-left: -12px;
-            margin-right: -12px;
+            margin-left: 0;
+            margin-right: 0;
           }
         }
       `;

@@ -55,6 +55,72 @@
       box-sizing: border-box;
     }
 
+    #bw-trip-planner,
+    #bw-trip-planner .bw-wrap,
+    #bw-trip-planner .bw-body,
+    #bw-trip-planner .bw-result,
+    #bw-trip-planner .bw-result-body,
+    #bw-trip-planner .bw-full-plan,
+    #bw-trip-planner [data-full-plan],
+    #bw-trip-planner [data-full-days],
+    #bw-trip-planner .bw-day,
+    #bw-trip-planner .bw-day-body,
+    #bw-trip-planner .bw-day-postcard,
+    #bw-trip-planner .bw-day-map-pack,
+    #bw-trip-planner .bw-day-map-grid,
+    #bw-trip-planner .bw-plan-index,
+    #bw-trip-planner .bw-plan-index-grid,
+    #bw-trip-planner .bw-ai-panel,
+    #bw-trip-planner .bw-carry-pack,
+    #bw-trip-planner .bw-carry-grid,
+    #bw-trip-planner .bw-actions,
+    #bw-trip-planner .bw-resource-panel,
+    #bw-trip-planner .bw-resource-grid,
+    #bw-trip-planner .bw-essentials-panel,
+    #bw-trip-planner .bw-essentials-grid,
+    #bw-trip-planner .bw-after-itinerary {
+      max-width: 100%;
+      min-width: 0;
+      overflow-x: clip;
+    }
+
+    @supports not (overflow: clip) {
+      #bw-trip-planner,
+      #bw-trip-planner .bw-wrap,
+      #bw-trip-planner .bw-body,
+      #bw-trip-planner .bw-result,
+      #bw-trip-planner .bw-result-body,
+      #bw-trip-planner .bw-full-plan,
+      #bw-trip-planner [data-full-plan],
+      #bw-trip-planner [data-full-days],
+      #bw-trip-planner .bw-day,
+      #bw-trip-planner .bw-day-body,
+      #bw-trip-planner .bw-day-postcard,
+      #bw-trip-planner .bw-day-map-pack,
+      #bw-trip-planner .bw-day-map-grid,
+      #bw-trip-planner .bw-plan-index,
+      #bw-trip-planner .bw-plan-index-grid,
+      #bw-trip-planner .bw-ai-panel,
+      #bw-trip-planner .bw-carry-pack,
+      #bw-trip-planner .bw-carry-grid,
+      #bw-trip-planner .bw-actions,
+      #bw-trip-planner .bw-resource-panel,
+      #bw-trip-planner .bw-resource-grid,
+      #bw-trip-planner .bw-essentials-panel,
+      #bw-trip-planner .bw-essentials-grid,
+      #bw-trip-planner .bw-after-itinerary {
+        overflow-x: hidden;
+      }
+    }
+
+    #bw-trip-planner img,
+    #bw-trip-planner svg,
+    #bw-trip-planner canvas,
+    #bw-trip-planner a,
+    #bw-trip-planner button {
+      max-width: 100%;
+    }
+
     #bw-trip-planner button,
     #bw-trip-planner input {
       font: inherit;
@@ -17638,8 +17704,8 @@
       y += 12;
     });
 
-    resourceSection('Berlin public transport maps', 'Official BVG/VBB PDF maps to save on your phone for offline route confidence.', TRANSPORT_MAPS, 'BVG/VBB map');
-    resourceSection('Shopping notes', 'Weather-friendly malls, classic shopping streets, courtyard browsing, and the nearby outlet option.', SHOPPING_GROUPS, 'Open map');
+    resourceSection('Berlin public transport maps', 'Official BVG/VBB PDF maps to save on your phone for offline route confidence.', TRANSPORT_MAPS, 'Official map');
+    resourceSection('Shopping notes', 'Weather-friendly malls, classic shopping streets, courtyard browsing, and the nearby outlet option.', SHOPPING_GROUPS, 'Area note');
 
     sectionTitle('Berlin essentials', 'Practical notes to keep on your phone.');
     berlinEssentials(plan).forEach(function (item) {
@@ -20240,7 +20306,7 @@
       return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + ' Source: official BVG/VBB PDF map.</span></article>';
     }).join('');
     var shoppingHtml = SHOPPING_GROUPS.map(function (item) {
-      return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + ' <a href="' + escapeHtml(mapsSearchUrl(item.query || item.title)) + '" target="_blank" rel="noopener">Open map</a></span></article>';
+      return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + '</span></article>';
     }).join('');
     printWindow.document.write('<!doctype html><html><head><title>Your Berlin Trip Plan</title><style>body{background:#FAFAF5;color:#212121;font-family:Arial,sans-serif;line-height:1.45;margin:0}.hero{background:#1B5E20;color:white;padding:28px 34px}.hero small{color:#FFE600;font-weight:800;letter-spacing:1.8px}.hero h1{font-size:30px;line-height:1.05;margin:8px 0}.hero p{color:#DDEFC7;font-weight:700;margin:0}.wrap{padding:24px 34px}.meta{display:grid;gap:8px;grid-template-columns:repeat(3,1fr);margin-bottom:18px}.meta div,.day,.essentials article{background:white;border:1px solid #DCE8C8;border-radius:8px}.meta div{padding:10px}.meta b{color:#4E5A4E;display:block;font-size:10px;text-transform:uppercase}.meta span{color:#1B5E20;font-weight:800}.day{break-inside:avoid;margin:0 0 14px;overflow:hidden}.day header{background:#F2F8E8;padding:14px}.day small{color:#4E5A4E;font-weight:800}.day h2{color:#1B5E20;font-size:20px;margin:5px 0 0}.watch{background:#FFFCDB;border:1px solid #EFE6A3;border-radius:8px;color:#5A5236;margin:12px 14px 0;padding:9px 10px}ol{list-style:none;margin:0;padding:10px 14px}li{border-top:1px solid #EEF4E7;display:grid;gap:10px;grid-template-columns:86px 1fr;padding:10px 0}li:first-child{border-top:0}li b{background:#F2F8E8;border:1px solid #DCE8C8;border-radius:7px;color:#1B5E20;padding:8px;text-align:center}li span strong{display:block}nav{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 14px}a{color:#174C8A;font-weight:800;text-decoration:none}.essentials h2{color:#1B5E20;margin:0 0 8px}.essentials{display:grid;gap:8px;grid-template-columns:repeat(2,1fr);margin-bottom:16px}.essentials article{padding:10px}.essentials strong,.essentials span{display:block}.essentials strong{color:#1B5E20}.brand{color:#1B5E20;font-weight:800;margin-top:18px}@media print{body{background:white}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.day{break-inside:avoid}}@media(max-width:640px){.meta,.essentials{grid-template-columns:1fr}li{grid-template-columns:1fr}}</style></head><body><section class="hero"><small>BERLINWALK LOCAL PLANNER</small><h1>Your Berlin Trip Plan</h1><p>' + escapeHtml(plan.displayDate) + ' | ' + escapeHtml(labels.tripLength) + ' | ' + escapeHtml(labels.stayArea) + '</p></section><main class="wrap"><section class="meta"><div><b>Arrival</b><span>' + escapeHtml(labels.arrivalTime) + '</span></div><div><b>Start</b><span>' + escapeHtml(labels.arrivalPoint) + '</span></div><div><b>Pace</b><span>' + escapeHtml(labels.pace) + '</span></div></section><p>' + escapeHtml(plan.summary) + '</p>' + simpleDaysHtml + '<h2>Berlin public transport maps</h2><section class="essentials">' + transportHtml + '</section><h2>Shopping notes</h2><section class="essentials">' + shoppingHtml + '</section><h2>Berlin essentials</h2><section class="essentials">' + simpleEssentialsHtml + '</section><p class="brand">berlinwalk.com | @berlinwalkingtour</p></main></body></html>');
     printWindow.document.close();

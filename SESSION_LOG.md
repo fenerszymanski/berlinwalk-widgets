@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Codex (Ultimate mobile overflow + print cleanup)
+
+**Did:** Closed the last two Ultimate Trip Planner issues Yusuf found: mobile unlock no longer widens the branded planner page, and print/simple PDF resource sections no longer show command-like `Open PDF` / `Open map` labels.
+
+**Changed:**
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — added host/wrapper/section/iframe width guards for the branded `/berlin-trip-planner` custom element; removed the mobile negative margin around the planner iframe shell to prevent 1-2px horizontal scroll after unlock.
+- `ultimate-berlin-trip-planner/index.html` — tightened widget full-plan overflow guards; print shopping notes no longer include `Open map`; simple PDF resource action labels now read `Official map` / `Area note` instead of `Open PDF` / `Open map`.
+- QA: `node --check berlin-trip-planner-page/berlin-trip-planner-page-element.js` passed; `launch-audit.mjs` passed `153 pass`; `git diff --check` passed; local Browser mobile QA at 430px showed both branded wrapper and direct unlocked widget at `scrollWidth=430`, `clientWidth=430`, with no overflowing elements.
+
+**Opened:** Push/deploy still needed for the frontend widget + branded page custom element changes to reach GitHub Pages/live Wix.
+**Closed:** Mobile horizontal scroll after unlock and print/simple-PDF resource command wording are fixed locally.
+
+**Next session should:** Push the widget repo, wait for GitHub Pages, then test `/berlin-trip-planner` live on iPhone Chrome after unlocking a 7-day plan.
+
 ## 2026-06-06 — Codex (Ultimate share/print/Yusuf-note cleanup)
 
 **Did:** Fixed the issues found in the final Ultimate Trip Planner test pass: shared plan links no longer look like raw GitHub links, print/PDF no longer expose useless "Open PDF" resource commands, and Yusuf's note no longer shows fallback/quota copy or partial/out-of-order day stories.
