@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Codex (Homepage Trip Planner teaser)
+
+**Did:** Added a new standalone homepage Custom Element for promoting the `/berlin-trip-planner` page as its own homepage section.
+
+**Changed:**
+- `trip-planner-home/trip-planner-home-element.js` — new `<bw-trip-planner-home>` compact feature band with Berlin Trip Planner headline, direct CTA, blurred hero background, four visual proof cards, responsive desktop/mobile layout, and GitHub Pages/local asset resolution.
+- `trip-planner-home/index.html` and `trip-planner-home/README.md` — local preview plus Wix install snippet.
+- `README.md` and `wix-embed-snippets.md` — registered the new homepage section URL/tag with cache-bust `?v=20260606`.
+- `output/playwright/trip-planner-home-20260606/` — desktop and mobile QA screenshots.
+
+**Opened:** Push/deploy needed, then add the new Custom Element section to Wix homepage where Yusuf wants the planner promo.
+**Closed:** Homepage task 1 local implementation is ready.
+
+**Next session should:** After push/GitHub Pages deploy, add `<bw-trip-planner-home>` to the homepage and live-QA it near the planning/tools area before moving to menu/email/tool-grid cleanup.
+
 ## 2026-06-06 — Codex (Trip Planner live resize gap guard)
 
 **Did:** Reworked the live `/berlin-trip-planner` Wix gap fix after the margin guard proved unreliable across browsers.

@@ -21,6 +21,7 @@ Source type: Server URL
 | Blog Home | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-home/blog-home-element.js` | `bw-blog-home` | none |
 | Blog Index | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js?v=2` | `bw-blog-index` | none |
 | Guide Home | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | `bw-guide-home` | none |
+| Trip Planner Home | `https://fenerszymanski.github.io/berlinwalk-widgets/trip-planner-home/trip-planner-home-element.js?v=20260606` | `bw-trip-planner-home` | none |
 | Tools Home | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | `bw-tools-home` | none |
 | Testimonials | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | `bw-testimonials` | none |
 | Gallery | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | `bw-gallery` | none |

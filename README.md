@@ -67,6 +67,7 @@ Current homepage Custom Element source URLs:
 | Blog Index | `bw-blog-index` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-index/blog-index-element.js?v=2` | Full `/blog` editorial hub with lead story, topic shelves, search, tools, and start-here links. |
 | Blog Guide Note | `bw-blog-guide-note` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-guide-note/blog-guide-note-element.js` | Compact right-column editorial note for the Wix blog index, using Yusuf's tour photo. |
 | Guide Home | `bw-guide-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | Homepage "Meet Yusuf" teaser linking to `/the-guide`. |
+| Trip Planner Home | `bw-trip-planner-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/trip-planner-home/trip-planner-home-element.js?v=20260606` | Compact homepage teaser linking to the standalone `/berlin-trip-planner` page. |
 | Tools Home | `bw-tools-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | Homepage tools preview. |
 | Testimonials | `bw-testimonials` | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | Trust strip shows FreeTour.com only. |
 | Gallery | `bw-gallery` | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | Homepage image gallery. |
