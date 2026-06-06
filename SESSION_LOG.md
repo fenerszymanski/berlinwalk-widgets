@@ -4,6 +4,20 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Codex (Ultimate mobile unlock/iframe scroll WIP)
+
+**Did:** Started fixing mobile unlock behavior for `/berlin-trip-planner`: after email/full-plan unlock the page should scroll to the top of the unlocked plan, and the embedded planner should not create its own internal scroll or horizontal page overflow.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `syncPlannerFrame()` helpers that report content height to the parent frame, request parent scrolling to the full plan after build/unlock, reset child iframe scroll, and guard against horizontal overflow on `html/body/#bw-trip-planner`.
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — raised accepted iframe height from `<7000` to `<30000`, added `bw-scroll-to` message handling, disabled iframe scrolling, and set iframe overflow hidden.
+- QA so far: local iPhone-size Playwright reproduced the bug on a 7-day unlocked plan. Child content height was about `13905px`, but parent iframe still stayed at `1908px`; page horizontal overflow measured clean locally (`scrollWidth === clientWidth === 430`). A manual test showed `bw-resize` messages reach the parent window, but the current parent handler still did not update the iframe height.
+
+**Opened:** This is intentionally unfinished WIP because Yusuf had to close the laptop. Next fix should make parent-side iframe height measurement more robust instead of relying only on child postMessage. Add a fallback measurement loop in `berlin-trip-planner-page-element.js` that reads `frame.contentDocument.documentElement.scrollHeight/body.scrollHeight` after iframe load, after resize, and after received messages, then sets the frame height.
+**Closed:** None yet; do not push this WIP until the mobile iframe height is verified.
+
+**Next session should:** Continue from the WIP diff, add parent-side height polling/ResizeObserver fallback, rerun `launch-audit.mjs`, `node --check berlin-trip-planner-page/berlin-trip-planner-page-element.js`, and Playwright iPhone 430x932 QA for a 7-day unlocked plan. Expected post-fix: iframe height should rise to ~14k, child internal scroll should disappear, and page horizontal width should remain 430.
+
 ## 2026-06-06 — Codex (Ultimate weather fail-soft fallback)
 
 **Did:** Fixed Ultimate Trip Planner weather behavior so failed mobile/API fetches no longer show "weather unavailable"; they fall back to Berlin monthly averages.

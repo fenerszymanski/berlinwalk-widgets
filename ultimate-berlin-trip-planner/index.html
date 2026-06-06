@@ -17,7 +17,10 @@
     body {
       background: transparent;
       margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
       padding: 0;
+      width: 100%;
     }
 
     #bw-trip-planner {
@@ -43,6 +46,7 @@
       font-family: Montserrat, Arial, sans-serif;
       margin: 28px 0;
       max-width: 100%;
+      overflow-x: hidden;
     }
 
     #bw-trip-planner *,
@@ -10014,6 +10018,64 @@
   var imageDataUrlPromises = {};
   var pdfEnginePromise = null;
 
+  function plannerContentHeight() {
+    if (!document.body || !document.body.children || !document.body.children.length) return 0;
+    var max = 0;
+    Array.prototype.forEach.call(document.body.children, function (child) {
+      var rect = child.getBoundingClientRect();
+      var styles = window.getComputedStyle ? window.getComputedStyle(child) : null;
+      var marginBottom = styles ? (parseFloat(styles.marginBottom) || 0) : 0;
+      max = Math.max(max, rect.bottom + marginBottom);
+    });
+    return Math.ceil(max);
+  }
+
+  function reportPlannerHeight() {
+    if (window.parent === window) return plannerContentHeight();
+    var height = plannerContentHeight();
+    if (height > 0) {
+      try {
+        window.parent.postMessage({ type: 'bw-resize', height: height }, '*');
+      } catch (error) {}
+    }
+    return height;
+  }
+
+  function documentTopForElement(element) {
+    if (!element) return 0;
+    return Math.max(0, Math.round(element.getBoundingClientRect().top + window.scrollY));
+  }
+
+  function scrollPlannerTarget(element) {
+    if (!element) return;
+    var top = documentTopForElement(element);
+    if (window.parent !== window) {
+      try { window.scrollTo(0, 0); } catch (error) {}
+      try {
+        window.parent.postMessage({
+          type: 'bw-scroll-to',
+          top: top,
+          height: reportPlannerHeight()
+        }, '*');
+      } catch (error) {}
+      return;
+    }
+    try {
+      window.scrollTo({ top: top, behavior: 'smooth' });
+    } catch (error) {
+      window.scrollTo(0, top);
+    }
+  }
+
+  function syncPlannerFrame(element, shouldScroll) {
+    [0, 80, 220, 600, 1200].forEach(function (delay) {
+      setTimeout(function () {
+        reportPlannerHeight();
+        if (shouldScroll && (delay === 80 || delay === 220)) scrollPlannerTarget(element);
+      }, delay);
+    });
+  }
+
   var MONTH_CLIMATE = [
     { name: 'January', hi: 3, lo: -2, rainDays: '10', pack: 'Heavy winter coat, warm hat, gloves, scarf, and waterproof shoes.' },
     { name: 'February', hi: 5, lo: -2, rainDays: '8', pack: 'Heavy coat, layers, waterproof shoes, and warm accessories.' },
@@ -15665,9 +15727,7 @@
       updatePlanningUi();
       var result = root.querySelector('.bw-result');
       var scrollTarget = unlocked ? root.querySelector('[data-full-plan]') : result;
-      if (scrollTarget && scrollTarget.scrollIntoView) {
-        try { scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (error) {}
-      }
+      syncPlannerFrame(scrollTarget, true);
     }, PLANNING_DELAY_MS);
   }
 
@@ -17197,6 +17257,7 @@
     setLeadMessage('', false);
     setActionStatus(method === 'lead_error' ? 'Email save had a hiccup, so the plan is unlocked this time.' : 'Your full plan is unlocked.');
     requestAiEnhancement();
+    syncPlannerFrame(root.querySelector('[data-full-plan]'), true);
   }
 
   function handleUnlock() {

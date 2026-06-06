@@ -25,7 +25,11 @@
   }
 
   function validHeight(value) {
-    return typeof value === 'number' && Number.isFinite(value) && value > 320 && value < 7000;
+    return typeof value === 'number' && Number.isFinite(value) && value > 320 && value < 30000;
+  }
+
+  function validScrollTop(value) {
+    return typeof value === 'number' && Number.isFinite(value) && value >= 0 && value < 30000;
   }
 
   class BWBerlinTripPlannerPage extends HTMLElement {
@@ -124,7 +128,7 @@
                 <p>Build a quick preview first. If the route feels useful, send it to yourself to keep the full plan, map links, print view, and PDF export.</p>
               </div>
               <div class="bw-trip-widget-shell">
-                <iframe data-bw-trip-planner-frame src="${this._plannerSrc()}" title="Berlin Trip Planner" loading="eager"></iframe>
+                <iframe data-bw-trip-planner-frame src="${this._plannerSrc()}" title="Berlin Trip Planner" loading="eager" scrolling="no"></iframe>
               </div>
             </div>
           </section>
@@ -260,10 +264,26 @@
         frame.style.minHeight = `${next}px`;
       };
 
+      const scrollToPlannerOffset = (top) => {
+        const frameBox = frame.getBoundingClientRect();
+        const absoluteTop = window.scrollY + frameBox.top + top - 10;
+        window.scrollTo({
+          top: Math.max(0, Math.round(absoluteTop)),
+          behavior: 'smooth'
+        });
+      };
+
       this._messageHandler = (event) => {
         if (event.source !== frame.contentWindow) return;
-        if (!event.data || event.data.type !== 'bw-resize' || !validHeight(event.data.height)) return;
-        setHeight(event.data.height);
+        if (!event.data) return;
+        if (event.data.type === 'bw-resize' && validHeight(event.data.height)) {
+          setHeight(event.data.height);
+          return;
+        }
+        if (event.data.type === 'bw-scroll-to' && validScrollTop(event.data.top)) {
+          if (validHeight(event.data.height)) setHeight(event.data.height);
+          scrollToPlannerOffset(event.data.top);
+        }
       };
 
       window.addEventListener('message', this._messageHandler);
@@ -585,6 +605,7 @@
           display: block;
           height: 1900px;
           min-height: 1900px;
+          overflow: hidden;
           width: 100%;
         }
 
