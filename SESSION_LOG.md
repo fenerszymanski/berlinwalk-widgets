@@ -44,9 +44,9 @@ Format for each entry — see `AGENTS.md` §9.
 - `ultimate-berlin-trip-planner/velo/install-kit.html` — regenerated paste-ready Wix Velo install kit.
 - `berlin-trip-planner-page/README.md`, `berlin-trip-planner-page/SEO_SETTINGS.md`, root `PROJECT_MEMORY.md` — documented that Ultimate email `${planUrl}` now targets the branded saved-plan page.
 - Wix: Yusuf pasted/published the updated `Backend/tripPlannerFunnel.js`.
-- QA: `launch-audit.mjs` passed `153 pass`; `velo/prepublish-gate.mjs` passed `13 pass, 0 block`; syntax checks passed; live `tripPlannerLead` smoke wrote `output/qa/ultimate-trip-planner-live-smoke/live-branded-plan-link-20260606.json` with `/berlin-trip-planner?...&planAccess=1`.
+- QA: `launch-audit.mjs` passed `153 pass`; `velo/prepublish-gate.mjs` passed `13 pass, 0 block`; syntax checks passed; first same-date smoke skipped instant as `already_sent`; fresh live `tripPlannerLead` smoke wrote `output/qa/ultimate-trip-planner-live-smoke/live-branded-plan-link-fresh-20260606.json` with `/berlin-trip-planner?...&planAccess=1` and `instant.sent: true`; Gmail readback of the latest email confirmed the Wix tracking button wraps `https://www.berlinwalk.com/berlin-trip-planner?...&planAccess=1`, not GitHub Pages.
 
-**Opened:** Confirm the received Gmail link opens the branded page unlocked with restored choices.
+**Opened:** Confirm the newest Gmail test link opens the branded page unlocked with restored choices in the browser; older emails may still point to the old GitHub URL.
 **Closed:** Live email plan URL generation now points at the branded Trip Planner page.
 
 **Next session should:** Click the latest test email link in Gmail and confirm it opens `/berlin-trip-planner` with the plan unlocked and choices restored.
