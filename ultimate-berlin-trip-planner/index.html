@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ultimate Berlin Trip Planner | BerlinWalk</title>
-  <meta name="description" content="Build a simple, realistic Berlin itinerary before you arrive, with arrival-date logic, weather, opening-day notes, maps, and Berlin essentials.">
+  <meta name="description" content="Build your Berlin plan before you arrive.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
@@ -9998,6 +9998,7 @@
   var LEGACY_UNLOCK_KEY = 'bw_trip_planner_unlock';
   var UNLOCK_KEY = 'bw_trip_planner_unlock_session_v3';
   var UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
+  var BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var DAY_PHOTOS = {
     arrival: { src: 'assets/day-art/day-oil-arrival.webp', alt: 'Oil painting style Berlin arrival day with suitcase near Alexanderplatz' },
     wall: { src: 'assets/day-art/day-oil-wall.webp', alt: 'Oil painting style Berlin Wall and Cold War route' },
@@ -11644,7 +11645,7 @@
       });
       var description = [
         'BerlinWalk Ultimate Berlin Trip Planner',
-        plan.title,
+        'Your day-by-day Berlin plan',
         '',
         blockLines.join('\n'),
         '',
@@ -16700,19 +16701,21 @@
   }
 
   function planShareUrl() {
-    return window.location.origin + window.location.pathname + '?' + plannerStateParams().toString();
+    var url = new URL(BRANDED_PLANNER_URL);
+    plannerStateParams().forEach(function (value, key) {
+      url.searchParams.set(key, value);
+    });
+    url.searchParams.set('planAccess', '1');
+    return url.toString();
   }
 
   function planEmailUrl() {
-    var params = plannerStateParams();
-    params.set('planAccess', '1');
-    return window.location.origin + window.location.pathname + '?' + params.toString();
+    return planShareUrl();
   }
 
   function whatsappShareText(plan) {
     return [
       'My Berlin plan from BerlinWalk',
-      plan.title,
       'Arrival: ' + plan.displayDate,
       'Length: ' + selectedLabels().tripLength,
       'Open plan: ' + planShareUrl()
@@ -16894,7 +16897,8 @@
 
   function normalizeAiEnhancement(raw, plan) {
     var validDays = {};
-    (plan.days || []).forEach(function (day) {
+    var planDays = plan.days || [];
+    planDays.forEach(function (day) {
       validDays[day.dayNumber] = true;
     });
     var rawDayStories = Array.isArray(raw && raw.dayStories) ? raw.dayStories : [];
@@ -16906,14 +16910,26 @@
         };
       });
     }
-    var dayStories = rawDayStories.map(function (item) {
+    var storyByDay = {};
+    rawDayStories.map(function (item) {
       return {
         dayNumber: Number(item && item.dayNumber) || 0,
         text: cleanAiText(item && item.text, '', 240)
       };
     }).filter(function (item) {
       return validDays[item.dayNumber] && item.text;
-    }).slice(0, plan.days.length);
+    }).forEach(function (item) {
+      if (!storyByDay[item.dayNumber]) storyByDay[item.dayNumber] = item.text;
+    });
+    var slotForStories = tourSlotForPlan(plan);
+    var dayStories = planDays.map(function (day) {
+      return {
+        dayNumber: day.dayNumber,
+        text: cleanAiText(storyByDay[day.dayNumber] || mockDayStory(day, slotForStories), '', 240)
+      };
+    }).filter(function (item) {
+      return item.text;
+    });
     var dayNotes = Array.isArray(raw && raw.dayNotes) ? raw.dayNotes.map(function (item) {
       return {
         dayNumber: Number(item && item.dayNumber) || 0,
@@ -17123,24 +17139,9 @@
   }
 
   function aiVisibleDayStories(plan, storyByDay) {
-    var days = plan.days || [];
-    if (days.length <= 3) {
-      return days.filter(function (day) { return storyByDay[day.dayNumber]; });
-    }
-    var slot = tourSlotForPlan(plan);
-    var picked = [];
-    function add(day) {
-      if (!day || !storyByDay[day.dayNumber]) return;
-      if (picked.some(function (item) { return item.dayNumber === day.dayNumber; })) return;
-      picked.push(day);
-    }
-    add(days[0]);
-    if (slot && slot.insideTrip) add(days[slot.offset]);
-    add(days[days.length - 1]);
-    days.forEach(function (day) {
-      if (picked.length < 3) add(day);
+    return (plan.days || []).filter(function (day) {
+      return storyByDay[day.dayNumber];
     });
-    return picked.slice(0, 3);
   }
 
   function aiEnhancementHtml(plan) {
@@ -17161,7 +17162,6 @@
     var routeIntro = cleanAiText(aiEnhancement.routeIntro || aiEnhancement.guideNote || aiEnhancement.localRead || plan.summary, '', 620);
     var weatherSentence = cleanAiText(aiEnhancement.weatherSentence, '', 150);
     var tourSentence = cleanAiText(aiEnhancement.tourSentence || aiEnhancement.tourNote, '', 150);
-    var quotaMessage = cleanAiText(aiEnhancement.quotaMessage, '', 150);
     var chips = Array.isArray(aiEnhancement.chips) ? aiEnhancement.chips.slice(0, 3) : [];
     var storyByDay = {};
     (aiEnhancement.dayStories || []).forEach(function (item) {
@@ -17174,16 +17174,15 @@
     }).filter(Boolean).join('');
     var asideHtml = [
       weatherSentence ? { label: 'Weather read', value: weatherSentence } : null,
-      tourSentence ? { label: 'Tour note', value: tourSentence } : null,
-      quotaMessage ? { label: 'AI limit', value: quotaMessage } : null
+      tourSentence ? { label: 'Tour note', value: tourSentence } : null
     ].filter(Boolean).map(function (item) {
       return '<span class="bw-ai-aside"><b>' + escapeHtml(item.label) + '</b><span>' + escapeHtml(item.value) + '</span></span>';
     }).join('');
-    var chipHtml = aiStatus === 'quota' && chips.length ? '<div class="bw-ai-chips">' + chips.map(function (chip) {
+    var chipHtml = chips.length ? '<div class="bw-ai-chips">' + chips.map(function (chip) {
       return '<span><b>' + escapeHtml(chip.label) + '</b><em>' + escapeHtml(chip.value) + '</em></span>';
     }).join('') + '</div>' : '';
-    return '<section class="bw-ai-panel' + (aiStatus === 'quota' ? ' is-quota' : '') + '" aria-label="Local guide polish">' +
-      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>A simple read before you start. Dates, stops, and tour time stay unchanged.</span></div></div><span class="bw-ai-pill">' + (aiStatus === 'quota' ? 'Local fallback' : 'Yusuf note') + '</span></div>' +
+    return '<section class="bw-ai-panel" aria-label="Local guide polish">' +
+      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>A simple read before you start. Dates, stops, and tour time stay unchanged.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
       '<div class="bw-ai-body">' +
         '<div class="bw-ai-copy"><strong>' + escapeHtml(noteTitle) + '</strong>' +
           (routeIntro ? '<span>' + escapeHtml(routeIntro) + '</span>' : '') +
@@ -17639,7 +17638,7 @@
       y += 12;
     });
 
-    resourceSection('Berlin public transport maps', 'Official BVG/VBB PDF maps to save on your phone for offline route confidence.', TRANSPORT_MAPS, 'Open PDF');
+    resourceSection('Berlin public transport maps', 'Official BVG/VBB PDF maps to save on your phone for offline route confidence.', TRANSPORT_MAPS, 'BVG/VBB map');
     resourceSection('Shopping notes', 'Weather-friendly malls, classic shopping streets, courtyard browsing, and the nearby outlet option.', SHOPPING_GROUPS, 'Open map');
 
     sectionTitle('Berlin essentials', 'Practical notes to keep on your phone.');
@@ -18199,7 +18198,7 @@
     });
     setPdfDebug('resources');
     drawAfterDivider();
-    drawResourceGrid('Berlin public transport maps', 'Official BVG/VBB PDFs for BER, night routes, trams, and Potsdam days.', TRANSPORT_MAPS, { label: 'Map', action: 'Open PDF', tag: 'Maps', cardH: 78, afterGap: 22 });
+    drawResourceGrid('Berlin public transport maps', 'Official BVG/VBB PDFs for BER, night routes, trams, and Potsdam days.', TRANSPORT_MAPS, { label: 'Map', action: 'BVG/VBB map', tag: 'Maps', cardH: 78, afterGap: 22 });
     drawResourceGrid('Shopping backups', 'Weather-friendly malls, courtyards, classic shopping streets, and the nearby outlet option.', SHOPPING_GROUPS, { label: 'Place', action: 'Open in Google Maps', tag: 'Backup', cardH: 84, afterGap: 40 });
     drawEssentials();
 
@@ -20238,7 +20237,7 @@
       return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml((item.cue ? item.cue + ' - ' : '') + item.copy) + '</span></article>';
     }).join('');
     var transportHtml = TRANSPORT_MAPS.map(function (item) {
-      return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + ' <a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">Open PDF</a></span></article>';
+      return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + ' Source: official BVG/VBB PDF map.</span></article>';
     }).join('');
     var shoppingHtml = SHOPPING_GROUPS.map(function (item) {
       return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + ' <a href="' + escapeHtml(mapsSearchUrl(item.query || item.title)) + '" target="_blank" rel="noopener">Open map</a></span></article>';

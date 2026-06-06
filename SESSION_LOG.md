@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Codex (Ultimate share/print/Yusuf-note cleanup)
+
+**Did:** Fixed the issues found in the final Ultimate Trip Planner test pass: shared plan links no longer look like raw GitHub links, print/PDF no longer expose useless "Open PDF" resource commands, and Yusuf's note no longer shows fallback/quota copy or partial/out-of-order day stories.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — `planShareUrl()`/email/share URLs now use the branded `https://www.berlinwalk.com/berlin-trip-planner?...&planAccess=1`; WhatsApp copy drops the artificial one-line plan title; widget meta description is shorter.
+- `ultimate-berlin-trip-planner/index.html` — AI day stories now render every plan day in plan order, filling missing AI stories locally; visible `AI limit`/`Local fallback` copy is removed from the guide panel.
+- `ultimate-berlin-trip-planner/index.html` — print/PDF transport resource labels no longer say `Open PDF`; print output uses source-style wording for official BVG/VBB maps; trip calendar export replaces the artificial plan-title line with `Your day-by-day Berlin plan`.
+- QA: `launch-audit.mjs` passed `153 pass`; `git diff --check` passed; local Browser QA on a 4-day unlocked plan confirmed WhatsApp uses branded `/berlin-trip-planner` with `planAccess=1`, no artificial title in WhatsApp or calendar export, Yusuf note shows D1-D4 in order, no visible fallback text, and no visible `Open PDF` in the checked output.
+
+**Opened:** Push/deploy still needed for the frontend widget changes to reach GitHub Pages/live embeds.
+**Closed:** Final share preview/copy, print resource wording, and Yusuf note fallback/order bugs are fixed locally.
+
+**Next session should:** Push the widget repo, then test one live shared WhatsApp link and one print/PDF export from `/berlin-trip-planner`.
+
 ## 2026-06-06 — Antigravity (Added 2 unique images and SEO configuration)
 
 **Did:**
