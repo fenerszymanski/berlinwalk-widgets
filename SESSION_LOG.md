@@ -4,19 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
-## 2026-06-06 — Codex (Ultimate mobile unlock/iframe scroll WIP)
+## 2026-06-06 — Codex (Ultimate mobile unlock/iframe scroll fix)
 
-**Did:** Started fixing mobile unlock behavior for `/berlin-trip-planner`: after email/full-plan unlock the page should scroll to the top of the unlocked plan, and the embedded planner should not create its own internal scroll or horizontal page overflow.
+**Did:** Fixed mobile unlock behavior for `/berlin-trip-planner`: after email/full-plan unlock the parent page scrolls to the top of the unlocked plan, and long plans no longer leave the embedded planner trapped in its own internal iframe scroll.
 
 **Changed:**
-- `ultimate-berlin-trip-planner/index.html` — added `syncPlannerFrame()` helpers that report content height to the parent frame, request parent scrolling to the full plan after build/unlock, reset child iframe scroll, and guard against horizontal overflow on `html/body/#bw-trip-planner`.
-- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — raised accepted iframe height from `<7000` to `<30000`, added `bw-scroll-to` message handling, disabled iframe scrolling, and set iframe overflow hidden.
-- QA so far: local iPhone-size Playwright reproduced the bug on a 7-day unlocked plan. Child content height was about `13905px`, but parent iframe still stayed at `1908px`; page horizontal overflow measured clean locally (`scrollWidth === clientWidth === 430`). A manual test showed `bw-resize` messages reach the parent window, but the current parent handler still did not update the iframe height.
+- `ultimate-berlin-trip-planner/index.html` — added frame sync helpers that report content height to the parent, request parent scrolling after build/unlock, reset child iframe scroll, guard horizontal overflow on `html/body/#bw-trip-planner`, and keep reporting size through load/resize/ResizeObserver changes.
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — accepts large planner heights up to `30000px`, handles `bw-scroll-to`, disables iframe scrolling, accepts trusted messages by iframe origin as well as source, and adds a same-origin readable-frame fallback plus load/resize height checks.
+- QA: `node ultimate-berlin-trip-planner/launch-audit.mjs` passed `153 pass`; `node --check berlin-trip-planner-page/berlin-trip-planner-page-element.js` passed. Playwright iPhone-width QA (`430x932`) on a 7-day unlocked plan now grows the iframe from the broken `1908px` state to about `14kpx`, with `scrollWidth === clientWidth === 430`. Locked → email fail-soft unlock also scrolls the full plan to the top of the viewport (`~14px`) with no horizontal overflow.
 
-**Opened:** This is intentionally unfinished WIP because Yusuf had to close the laptop. Next fix should make parent-side iframe height measurement more robust instead of relying only on child postMessage. Add a fallback measurement loop in `berlin-trip-planner-page-element.js` that reads `frame.contentDocument.documentElement.scrollHeight/body.scrollHeight` after iframe load, after resize, and after received messages, then sets the frame height.
-**Closed:** None yet; do not push this WIP until the mobile iframe height is verified.
+**Opened:** Push/deploy needed, then live-test `/berlin-trip-planner` on iPhone 15 Plus Chrome with a 7-day unlocked plan and an email-unlock plan.
+**Closed:** The local mobile iframe internal-scroll and unlock scroll-position bugs are fixed.
 
-**Next session should:** Continue from the WIP diff, add parent-side height polling/ResizeObserver fallback, rerun `launch-audit.mjs`, `node --check berlin-trip-planner-page/berlin-trip-planner-page-element.js`, and Playwright iPhone 430x932 QA for a 7-day unlocked plan. Expected post-fix: iframe height should rise to ~14k, child internal scroll should disappear, and page horizontal width should remain 430.
+**Next session should:** Push/deploy this fix, cache-bust the Wix page script if needed, then verify on the real phone. If live still differs, inspect Wix/Chrome message origin behavior first; local postMessage and same-origin fallback are both green.
 
 ## 2026-06-06 — Codex (Ultimate weather fail-soft fallback)
 

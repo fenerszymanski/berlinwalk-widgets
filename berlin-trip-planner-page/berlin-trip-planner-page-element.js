@@ -44,6 +44,13 @@
     disconnectedCallback() {
       if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
       if (this._resizeObserver) this._resizeObserver.disconnect();
+      if (this._plannerFrameLoadHandler && this._plannerFrame) this._plannerFrame.removeEventListener('load', this._plannerFrameLoadHandler);
+      if (this._plannerResizeHandler) {
+        window.removeEventListener('resize', this._plannerResizeHandler);
+        if (window.visualViewport) window.visualViewport.removeEventListener('resize', this._plannerResizeHandler);
+      }
+      if (this._plannerResizeTimers) this._plannerResizeTimers.forEach((timer) => window.clearTimeout(timer));
+      if (this._plannerContentObserver) this._plannerContentObserver.disconnect();
       if (this._gapTimers) this._gapTimers.forEach((timer) => window.clearTimeout(timer));
       if (this._gapResizeHandler) {
         window.removeEventListener('resize', this._gapResizeHandler);
@@ -257,11 +264,75 @@
     _setupPlannerResize() {
       const frame = this.querySelector('[data-bw-trip-planner-frame]');
       if (!frame) return;
+      this._plannerFrame = frame;
+      this._plannerResizeTimers = [];
 
+      let lastHeight = 0;
       const setHeight = (height) => {
         const next = Math.ceil(height) + 8;
+        if (Math.abs(next - lastHeight) < 2) return;
+        lastHeight = next;
         frame.style.height = `${next}px`;
         frame.style.minHeight = `${next}px`;
+      };
+
+      const plannerOrigin = () => {
+        try {
+          return new URL(frame.src, window.location.href).origin;
+        } catch (error) {
+          return '';
+        }
+      };
+
+      const isPlannerMessage = (event) => {
+        if (event.source === frame.contentWindow) return true;
+        const origin = plannerOrigin();
+        return !!(event.origin && origin && event.origin === origin);
+      };
+
+      const readFrameHeight = () => {
+        try {
+          const doc = frame.contentDocument;
+          if (!doc) return 0;
+          const root = doc.documentElement;
+          const body = doc.body;
+          const planner = doc.querySelector('#bw-trip-planner');
+          const plannerBottom = planner ? Math.ceil(planner.getBoundingClientRect().bottom + (frame.contentWindow ? frame.contentWindow.scrollY : 0)) : 0;
+          return Math.max(
+            root ? root.scrollHeight : 0,
+            body ? body.scrollHeight : 0,
+            plannerBottom
+          );
+        } catch (error) {
+          return 0;
+        }
+      };
+
+      const syncFromReadableFrame = () => {
+        const height = readFrameHeight();
+        if (validHeight(height)) setHeight(height);
+      };
+
+      const scheduleHeightChecks = () => {
+        if (this._plannerResizeTimers) this._plannerResizeTimers.forEach((timer) => window.clearTimeout(timer));
+        this._plannerResizeTimers = [];
+        [0, 120, 360, 700, 1200, 2200].forEach((delay) => {
+          const timer = window.setTimeout(syncFromReadableFrame, delay);
+          this._plannerResizeTimers.push(timer);
+        });
+      };
+
+      const watchReadableFrame = () => {
+        syncFromReadableFrame();
+        if (!window.ResizeObserver || this._plannerContentObserver) return;
+        try {
+          const doc = frame.contentDocument;
+          if (!doc || !doc.body) return;
+          this._plannerContentObserver = new ResizeObserver(syncFromReadableFrame);
+          this._plannerContentObserver.observe(doc.body);
+          const planner = doc.querySelector('#bw-trip-planner');
+          if (planner) this._plannerContentObserver.observe(planner);
+        } catch (error) {}
       };
 
       const scrollToPlannerOffset = (top) => {
@@ -274,20 +345,39 @@
       };
 
       this._messageHandler = (event) => {
-        if (event.source !== frame.contentWindow) return;
         if (!event.data) return;
-        if (event.data.type === 'bw-resize' && validHeight(event.data.height)) {
+        const isResize = event.data.type === 'bw-resize' && validHeight(event.data.height);
+        const isScroll = event.data.type === 'bw-scroll-to' && validScrollTop(event.data.top);
+        if (!isResize && !isScroll) return;
+        if (!isPlannerMessage(event)) return;
+
+        if (isResize) {
           setHeight(event.data.height);
+          scheduleHeightChecks();
           return;
         }
-        if (event.data.type === 'bw-scroll-to' && validScrollTop(event.data.top)) {
+        if (isScroll) {
           if (validHeight(event.data.height)) setHeight(event.data.height);
+          scheduleHeightChecks();
           scrollToPlannerOffset(event.data.top);
         }
       };
 
       window.addEventListener('message', this._messageHandler);
+      this._plannerFrameLoadHandler = () => {
+        if (this._plannerContentObserver) {
+          this._plannerContentObserver.disconnect();
+          this._plannerContentObserver = null;
+        }
+        watchReadableFrame();
+        scheduleHeightChecks();
+      };
+      frame.addEventListener('load', this._plannerFrameLoadHandler);
+      this._plannerResizeHandler = scheduleHeightChecks;
+      window.addEventListener('resize', this._plannerResizeHandler);
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', this._plannerResizeHandler);
       setHeight(1900);
+      scheduleHeightChecks();
     }
 
     _setupWixTopGapGuard() {

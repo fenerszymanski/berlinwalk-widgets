@@ -53,7 +53,8 @@
   "ultimate-berlin-trip-planner-build-realistic-berlin-itinerary-before-you-arrive": "ultimate-berlin-trip-planner",
   "fiba-womens-basketball-world-cup-2026-berlin": "fiba-womens-basketball-world-cup-2026-berlin",
   "festival-of-lights-berlin-2026": "festival-of-lights-berlin-2026",
-  "berlin-pride-csd-2026": "berlin-pride-csd-2026"
+  "berlin-pride-csd-2026": "berlin-pride-csd-2026",
+  "berlin-beer-gardens-guide": "berlin-beer-gardens-guide"
 };
 
   var SCHEMAS = {
@@ -2445,6 +2446,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Join the walking tour earlier in the day from the World Clock at Alexanderplatz, then return after dark for the light route. The tour gives the historic centre context before you see many of the same city layers illuminated at night."
+        }
+      }
+    ]
+  },
+  "berlin-beer-gardens-guide": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When do beer gardens in Berlin open?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most beer gardens in Berlin open in April or May and close in September or October. Opening hours are highly weather-dependent; on sunny summer days they open from noon until midnight, but they may close early or remain closed on rainy or cold days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are beer gardens in Berlin cash-only?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many traditional beer gardens in Berlin still prefer cash, especially for small drink orders or glass deposits. While some modern spots (like BRLO) accept cards, it is always smart to carry some cash (5 and 10-euro notes) when visiting classic spots like Prater or Schleusenkrug."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the glass deposit (Pfand) work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When you buy a draft beer, you pay a small deposit (usually 1 to 2 euros) for the glass. The cashier will give you a plastic token (Pfandmarke). When you return the glass and the token to the wash station (Gläserrückgabe), you get your deposit back."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you bring your own food to a Berlin beer garden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In traditional self-service beer gardens, yes. You can bring your own picnic food (Brotzeit) to the wooden tables, but you must buy your drinks from the garden. Note that this rule does not apply to modern craft beer gardens or full-service gastropubs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best beer garden near the walking tour endpoint?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The BerlinWalk tour ends at Hackescher Markt. From the finish line, Zollpackhof in Mitte is a 15-minute walk west along the Spree river, and Prater in Prenzlauer Berg is a quick 10-minute tram ride away on the M1 line."
         }
       }
     ]
