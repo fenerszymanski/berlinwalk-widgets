@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Beer Gardens Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-beer-gardens-map">
+  <style>
+    #bw-beer-gardens-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-beer-gardens-map * { box-sizing: border-box; }
+
+    #bw-beer-gardens-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-beer-gardens-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-beer-gardens-map .bw-head-icon { font-size: 18px; line-height: 1; }
+
+    #bw-beer-gardens-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-beer-gardens-map .bw-body { background: #FAFAF5; padding: 16px 18px; }
+
+    #bw-beer-gardens-map .bw-ask {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin: 0 0 10px;
+    }
+
+    #bw-beer-gardens-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 0 0 14px;
+      line-height: 1.55;
+    }
+
+    #bw-beer-gardens-map .bw-filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    #bw-beer-gardens-map .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-beer-gardens-map .bw-filter:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-beer-gardens-map .bw-filter.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-beer-gardens-map .bw-map-container {
+      width: 100%;
+      height: 440px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-beer-gardens-map .bw-map { width: 100%; height: 100%; z-index: 1; }
+
+    #bw-beer-gardens-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-beer-gardens-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-beer-gardens-map .leaflet-popup-content {
+      margin: 0;
+      width: 260px !important;
+      font-family: inherit;
+    }
+
+    #bw-beer-gardens-map .leaflet-popup-tip { box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    #bw-beer-gardens-map .bw-popup-head {
+      background: var(--bw-green);
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+    }
+
+    #bw-beer-gardens-map .bw-popup-type {
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    #bw-beer-gardens-map .bw-popup-name {
+      color: var(--bw-white);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-beer-gardens-map .bw-popup-body { padding: 12px 14px; }
+
+    #bw-beer-gardens-map .bw-popup-note {
+      font-size: 12px;
+      color: var(--bw-text);
+      line-height: 1.55;
+      margin: 0 0 10px;
+    }
+
+    #bw-beer-gardens-map .bw-popup-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--bw-text);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    #bw-beer-gardens-map .bw-popup-row:last-of-type { margin-bottom: 0; }
+
+    #bw-beer-gardens-map .bw-popup-label {
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      min-width: 52px;
+      padding-top: 1px;
+    }
+
+    #bw-beer-gardens-map .bw-popup-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    #bw-beer-gardens-map .bw-popup-link:hover { background: #FFEF33; }
+
+    #bw-beer-gardens-map .bw-marker {
+      width: 30px;
+      height: 30px;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #bw-beer-gardens-map .bw-marker-inner {
+      transform: rotate(45deg);
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    #bw-beer-gardens-map .bw-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.4;
+    }
+
+    #bw-beer-gardens-map .bw-legend span { display: inline-flex; align-items: center; gap: 5px; }
+
+    #bw-beer-gardens-map .bw-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--bw-green);
+      border: 2px solid var(--bw-yellow);
+      flex: 0 0 auto;
+    }
+
+    #bw-beer-gardens-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #bw-beer-gardens-map .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    #bw-beer-gardens-map .bw-tour-note {
+      margin-top: 12px;
+      padding: 11px 14px;
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--bw-text);
+    }
+
+    #bw-beer-gardens-map .bw-tour-note strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      #bw-beer-gardens-map { margin: 22px 0; }
+      #bw-beer-gardens-map .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-beer-gardens-map .bw-head-icon { font-size: 16px; }
+      #bw-beer-gardens-map .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-beer-gardens-map .bw-body { padding: 14px; }
+      #bw-beer-gardens-map .bw-hint { font-size: 12px; margin-bottom: 12px; }
+      #bw-beer-gardens-map .bw-filter { font-size: 11px; padding: 7px 12px; }
+      #bw-beer-gardens-map .bw-map-container { height: 380px; }
+      #bw-beer-gardens-map .leaflet-popup-content { width: 225px !important; }
+      #bw-beer-gardens-map .bw-popup-name { font-size: 14px; }
+      #bw-beer-gardens-map .bw-popup-row { font-size: 11.5px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🍻</span>
+      <span class="bw-kicker">Berlin Beer Gardens Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-ask">Filter by atmosphere:</p>
+      <div class="bw-filters">
+        <button class="bw-filter active" type="button" data-filter="all">Show all</button>
+        <button class="bw-filter" type="button" data-filter="traditional">Traditional &amp; Classic</button>
+        <button class="bw-filter" type="button" data-filter="scenic">Lakeside &amp; Riverside</button>
+        <button class="bw-filter" type="button" data-filter="modern">Modern &amp; Craft</button>
+      </div>
+
+      <p class="bw-hint">Tap any pin to see what makes the spot special, nearest stations, and Google Maps directions. All spots feature excellent local food and outdoor vibes.</p>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-beer-gardens-map-canvas"></div>
+      </div>
+
+      <div class="bw-legend">
+        <span><i class="bw-dot"></i> Berlin Beer Garden</span>
+      </div>
+
+      <p class="bw-count"><strong id="bw-count-num">8</strong> local spots mapped</p>
+
+      <div class="bw-tour-note">
+        <strong>Local Tip:</strong> After finishing our walking tour near <strong>Hackescher Markt</strong>, you are just a 15-minute walk from <strong>Zollpackhof</strong> in Mitte or a quick 10-minute tram ride (M1 line) to <strong>Prater</strong> in Prenzlauer Berg.
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-beer-gardens-map');
+      if (!root) return;
+
+      var locations = [
+        {
+          name: 'Prater Biergarten',
+          type: 'Traditional & Oldest',
+          note: 'Berlin’s oldest operating beer garden (1837), shaded by a massive canopy of chestnut trees. A classic neighborhood atmosphere with simple German bratwurst and house Pils.',
+          area: 'Prenzlauer Berg', station: 'U Eberswalder Straße',
+          lat: 52.5401, lng: 13.4098, cats: ['traditional'],
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Prater+Biergarten+Berlin'
+        },
+        {
+          name: 'Café am Neuen See',
+          type: 'Lakeside Scenic',
+          note: 'A picturesque lakeside garden tucked deep inside the green Tiergarten park. Drink wheat beer under mature trees and watch rowboats float across the lake (or rent one yourself).',
+          area: 'Tiergarten', station: 'U/S Zoologischer Garten / S Tiergarten',
+          lat: 52.5076, lng: 13.3551, cats: ['traditional', 'scenic'],
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Cafe+am+Neuen+See+Berlin'
+        },
+        {
+          name: 'Schleusenkrug',
+          type: 'Canal-side Historic',
+          note: 'Rustic and cozy terraced garden right next to the Tiergarten lock gate (Schleuse) and the Zoo. Great organic grilled meats, daily specials, and canal views.',
+          area: 'Tiergarten / Charlottenburg', station: 'U/S Zoologischer Garten',
+          lat: 52.5113, lng: 13.3323, cats: ['traditional'],
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Schleusenkrug+Berlin'
+        },
+        {
+          name: 'Golgatha',
+          type: 'Neighborhood Classic',
+          note: 'Located inside Viktoriapark, Kreuzberg. A quiet family-friendly spot by day that turns into an active open-air bar with electronic music and a rooftop deck by night.',
+          area: 'Kreuzberg', station: 'U Mehringdamm / S Julius-Leber-Brücke',
+          lat: 52.4885, lng: 13.3855, cats: ['traditional'],
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Golgatha+Biergarten+Berlin'
+        },
+        {
+          name: 'BRLO Brwhouse',
+          type: 'Modern Craft Beer',
+          note: 'A stylish, industrial-chic craft beer garden built out of 38 recycled shipping containers. Serves local BRLO draft craft beers and high-quality smoked food.',
+          area: 'Kreuzberg / Schöneberg', station: 'U Gleisdreieck',
+          lat: 52.5005, lng: 13.3764, cats: ['modern'],
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=BRLO+Brwhouse+Berlin'
+        },
+        {
+          name: 'Zollpackhof',
+          type: 'Riverside Traditional',
+          note: 'Shaded by a grand 150-year-old chestnut tree directly on the Spree river. Steps from the Federal Chancellery and Reichstag, serving fresh Augustiner from wooden barrels.',
+          area: 'Mitte', station: 'S+U Hauptbahnhof',
+          lat: 52.5222, lng: 13.3644, cats: ['traditional', 'scenic'],
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Zollpackhof+Biergarten+Berlin'
+        },
+        {
+          name: 'Zenner',
+          type: 'Riverside Estate',
+          note: 'A monumental 19th-century riverside estate in Treptower Park. Offers a massive waterfront beer garden with scenic views of the Spree and the Island of Youth.',
+          area: 'Alt-Treptow', station: 'S Treptower Park',
+          lat: 52.4842, lng: 13.4735, cats: ['traditional', 'scenic'],
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Zenner+Berlin'
+        },
+        {
+          name: 'Luise Dahlem',
+          type: 'Suburban Leafy',
+          note: 'A leafy, student-and-local favorite in peaceful Dahlem since the early 1900s. A classic academic atmosphere, perfect when visiting the Botanical Gardens.',
+          area: 'Dahlem / Zehlendorf', station: 'U Dahlem-Dorf',
+          lat: 52.4578, lng: 13.2915, cats: ['traditional'],
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Luise+Dahlem+Berlin'
+        }
+      ];
+
+      var mapEl = document.getElementById('bw-beer-gardens-map-canvas');
+      var countEl = document.getElementById('bw-count-num');
+      var filterBtns = root.querySelectorAll('.bw-filter');
+
+      var map = L.map(mapEl, {
+        center: [52.505, 13.385],
+        zoom: 11,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var markers = [];
+
+      function createMarkerIcon(loc) {
+        var html = '<div class="bw-marker"><div class="bw-marker-inner">🍻</div></div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+      }
+
+      function createPopup(loc) {
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + loc.type + '</span>' +
+          '<div class="bw-popup-name">' + loc.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<p class="bw-popup-note">' + loc.note + '</p>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Area</span><span>' + loc.area + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Nearest</span><span>' + loc.station + '</span></div>' +
+          '<a href="' + loc.gmaps + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Google Maps →</a>' +
+          '</div>';
+      }
+
+      locations.forEach(function (loc) {
+        var marker = L.marker([loc.lat, loc.lng], {
+          icon: createMarkerIcon(loc)
+        }).bindPopup(createPopup(loc), {
+          closeButton: true,
+          maxWidth: 270,
+          className: 'bw-popup-wrapper'
+        });
+        marker.addTo(map);
+        marker._cats = loc.cats;
+        markers.push(marker);
+      });
+
+      countEl.textContent = markers.length;
+
+      function applyFilter(filter) {
+        var visibleCount = 0;
+        var visibleMarkers = [];
+
+        markers.forEach(function (m) {
+          var show = filter === 'all' || m._cats.indexOf(filter) !== -1;
+          if (show) {
+            if (!map.hasLayer(m)) m.addTo(map);
+            visibleCount++;
+            visibleMarkers.push(m);
+          } else {
+            if (map.hasLayer(m)) map.removeLayer(m);
+          }
+        });
+
+        countEl.textContent = visibleCount;
+
+        // Auto pan/zoom to fit active markers if not showing all
+        if (visibleMarkers.length > 0 && filter !== 'all') {
+          var group = new L.featureGroup(visibleMarkers);
+          map.fitBounds(group.getBounds().pad(0.15));
+        } else if (filter === 'all') {
+          map.setView([52.505, 13.385], 11);
+        }
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+</div>
+</body>
+</html>

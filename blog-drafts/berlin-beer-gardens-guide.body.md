@@ -28,7 +28,12 @@ Before you grab a tray, there are a few unwritten German rules you should know. 
 
 Here is where to go to experience Berlin's beer culture at its best, selected for their history, local character, and scenery.
 
+{{widget:berlin-beer-gardens-map}}
+
 ### 1. Prater Biergarten (Prenzlauer Berg)
+
+![Prater Biergarten with cozy outdoor seating and yellow chairs under leafy green chestnut trees](blog-media/beer-gardens/prater-biergarten.png)
+
 Prater is the granddaddy of Berlin beer gardens. Established in 1837, it is the oldest operating beer garden in the city. Located in the heart of Prenzlauer Berg, it has survived wars, bombings, and the division of the city (it was a popular community hub in East Berlin). 
 
 Today, it is a massive, leafy courtyard shaded by ancient chestnut trees, offering a perfect escape from the busy Kastanienallee outside. The vibe is classic: yellow folding chairs, wooden benches, and simple local food like bratwurst, pretzels, and potato salad. They serve their own house draft (Prater Pils) along with seasonal bocks. It is popular with both locals and visitors, but because of its size, you can almost always find a corner to squeeze into.
@@ -37,6 +42,9 @@ Today, it is a massive, leafy courtyard shaded by ancient chestnut trees, offeri
 * **Best for:** The ultimate historic beer garden experience.
 
 ### 2. Café am Neuen See (Tiergarten)
+
+![Café am Neuen See lakeside beer garden in Tiergarten park with wooden tables at sunset](blog-media/beer-gardens/cafe-am-neuen-see.png)
+
 If you want romantic scenery, Café am Neuen See (often called CANS by locals) is hard to beat. Tucked deep inside the leafy Tiergarten park, this beer garden sits directly on the edge of a scenic lake. 
 
 Under the canopy of mature trees, you can sit on wooden benches, drink a cold Hefeweizen, and watch people paddle rowboats across the water. If you feel active, you can even rent a rowboat yourself from the dock next door. The food menu is slightly more extensive than traditional gardens, featuring stone-baked pizzas alongside classic German pretzels and sausages. It gets very busy on sunny weekend afternoons, so aim for a weekday evening for a calmer sunset view.
@@ -45,6 +53,7 @@ Under the canopy of mature trees, you can sit on wooden benches, drink a cold He
 * **Best for:** Lakeside views and relaxed park vibes.
 
 ### 3. Schleusenkrug (Tiergarten)
+
 Located on the western edge of Tiergarten, right next to the Berlin Zoo and the Landwehr Canal, Schleusenkrug has been serving locals since 1954. It started as a small kiosk for lock-keepers and canal workers and grew into one of the city's most charming outdoor spots.
 
 The seating is terraced over several levels, offering views of the historic lock gate (Schleuse) where you can watch boats navigate the canal. It is incredibly green, rustic, and cozy. The menu features organic grilled meats, seasonal vegetarian dishes, and a great selection of beers from regional German breweries. It is the perfect place to rest your feet after a long walk through Tiergarten or a visit to the zoo.
@@ -53,6 +62,7 @@ The seating is terraced over several levels, offering views of the historic lock
 * **Best for:** A rustic canal-side break.
 
 ### 4. Golgatha (Kreuzberg)
+
 Golgatha opened in 1977 inside Viktoriapark, Kreuzberg, and has remained a local neighborhood institution ever since. By day, it is a relaxed, family-friendly beer garden where parents stop for cake, coffee, and draft beer after visiting the park's waterfall. 
 
 By night, Golgatha transforms. The lights go down, the music goes up, and locals gather on the rooftop terrace for electronic music, craft beers, and charcoal-grilled burgers. They serve a variety of regional drafts, including their unfiltered Kreuzberger Molle. It is a fantastic representation of Kreuzberg’s community spirit.
@@ -61,6 +71,9 @@ By night, Golgatha transforms. The lights go down, the music goes up, and locals
 * **Best for:** A neighborhood vibe that transitions from afternoon sun to night bar.
 
 ### 5. BRLO Brwhouse (Park am Gleisdreieck)
+
+![BRLO Brwhouse craft beer garden with modern wooden benches and shipping container building](blog-media/beer-gardens/brlo-brwhouse.png)
+
 For a taste of Berlin's modern craft beer revolution, head to BRLO. Located inside the industrial-chic Park am Gleisdreieck, the building itself is a striking piece of architecture constructed from 38 recycled shipping containers.
 
 Their outdoor beer garden is spacious, modern, and highly popular with local tech workers and craft beer fans. Unlike traditional gardens serving standard lagers, BRLO pours its own locally brewed craft beers, including their excellent Helles, Pale Ale, IPA, and Berliner Weisse. The food menu is also modern, focusing on high-quality smoked vegetables and meats. 
@@ -69,6 +82,7 @@ Their outdoor beer garden is spacious, modern, and highly popular with local tec
 * **Best for:** Craft beer lovers and modern container architecture.
 
 ### 6. Biergarten Zollpackhof (Mitte)
+
 Zollpackhof is the oldest beer garden in the Mitte district, located right on the banks of the Spree river. Despite being in the middle of the government quarter—directly opposite the Federal Chancellery (Bundeskanzleramt)—it feels completely cut off from the noise of the city.
 
 The garden is shaded by a magnificent 150-year-old chestnut tree and offers views of the river boats passing by. They serve traditional Bavarian beers (Augustiner) fresh from the wooden barrel, alongside traditional hearty German dishes. It is an excellent central spot to relax after visiting the Reichstag or arriving at Hauptbahnhof.
@@ -77,6 +91,7 @@ The garden is shaded by a magnificent 150-year-old chestnut tree and offers view
 * **Best for:** Traditional Spree-side drinks in the center of the city.
 
 ### 7. Zenner (Treptower Park)
+
 Zenner is a historic riverside estate in Treptower Park that dates back to 1822. After a major restoration, it reopened as a massive cultural venue and beer garden that blends old-world Prussian scale with modern Berlin culture.
 
 The beer garden is enormous, sitting directly on the Spree river with views of the Peninsula Stralau and the Island of Youth. They serve their own house beers along with modern craft options, and the food kitchen serves traditional beer garden classics with high-quality ingredients. It is a favorite weekend stop for Berliners walking through Treptower Park.
@@ -85,6 +100,7 @@ The beer garden is enormous, sitting directly on the Spree river with views of t
 * **Best for:** Great river views and massive open-air space.
 
 ### 8. Luise Dahlem (Zehlendorf)
+
 If you want to escape the central tourist trail entirely, head southwest to Luise Dahlem. Located near the Free University of Berlin in the leafy Dahlem neighborhood, this historic garden has been a favorite meeting point for students, professors, and locals since the early 1900s.
 
 It has a classic, leafy suburban feel with large wooden tables, green hedges, and a very relaxed pace. They serve traditional German food and standard draft beers. It is the perfect stop if you are heading out to explore the botanical gardens or taking a day trip toward the Wannsee lakes.

@@ -404,6 +404,14 @@
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/german-phrases-quiz/",
       "embedHeight": 540,
       "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/german-phrases-quiz-160.png"
+    },
+    {
+      "slug": "berlin-beer-gardens-map",
+      "title": "Berlin Beer Gardens Map",
+      "lead": "Find the 8 best beer gardens in Berlin, mapped by atmosphere (traditional vs. craft vs. waterfront) with nearest transit and local notes.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-beer-gardens-map/",
+      "embedHeight": 620
     }
   ]
 }
