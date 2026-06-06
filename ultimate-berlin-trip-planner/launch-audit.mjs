@@ -1083,12 +1083,13 @@ function run() {
       /preview\.innerHTML\s*=\s*''/.test(renderPlanSource + updateUnlockUiSource) &&
       /data-full-actions/.test(indexHtml) &&
       /data-full-days><\/div>[\s\S]*data-full-actions/.test(indexHtml) &&
-      /if\s*\(pdf\)\s*pdf\.disabled\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(indexHtml) &&
+      /function\s+fullPlanContentReady/.test(indexHtml) &&
+      /if\s*\(pdf\)\s*pdf\.disabled\s*=\s*!fullPlanContentReady\(\)/.test(indexHtml) &&
       /if\s*\(!unlocked\s*\|\|\s*!planGenerated\)\s*return/.test(downloadSimplePdfSource + printPlanSource),
-    'Expected locked results to show only a Day 1 preview; after unlock the preview clears and PDF/share actions move after the last day.'
+    'Expected locked results to show only a Day 1 preview; after unlock the preview clears and PDF/share actions wait until the guide note/full plan is ready.'
   );
   block(
-    'Frontend AI polish is fail-soft',
+    'Frontend AI guide gate is fail-soft',
       /function\s+aiEnhancementPayload/.test(indexHtml) &&
       /function\s+unlockEmailForQuota/.test(indexHtml) &&
       /quotaEmail:\s*unlockEmailForQuota\(\)/.test(aiPayloadSource) &&
@@ -1102,16 +1103,17 @@ function run() {
       /aiStatus\s*=\s*'quota'/.test(aiRequestSource) &&
       /body:\s*JSON\.stringify\(aiEnhancementPayload\(plan\)\)/.test(aiRequestSource) &&
       /forceLocalAiErrorForQa\(\)/.test(aiRequestSource) &&
-      /aiStatus\s*=\s*'error'/.test(aiRequestSource) &&
-      /aiEnhancement\s*=\s*null/.test(aiRequestSource) &&
+      /aiEnhancement\s*=\s*localGuideFallback\(plan,\s*'ai_error'/.test(aiRequestSource) &&
       /fail_soft:\s*true/.test(aiRequestSource) &&
       /if\s*\(!aiEnhancement\s*\|\|\s*\(aiStatus\s*!==\s*'ready'\s*&&\s*aiStatus\s*!==\s*'quota'\)\)\s*return\s*''/.test(aiHtmlSource) &&
+      /function\s+fullPlanContentReady\(\)\s*\{[\s\S]*aiStatus\s*===\s*'ready'[\s\S]*aiStatus\s*===\s*'quota'/.test(indexHtml) &&
+      /revealFullPlanAfterGuide\(plan,\s*true\)/.test(aiRequestSource) &&
       /full\.hidden\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(renderFullPlanSource) &&
-      /dashboard\.hidden\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(updateUnlockUiSource) &&
-      /pdf\.disabled\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(updateUnlockUiSource) &&
-      /print\.disabled\s*=\s*!unlocked\s*\|\|\s*!planGenerated/.test(updateUnlockUiSource) &&
-      !/aiStatus/.test(updateUnlockUiSource),
-    'Expected the optional AI panel to be guide-note styled, use email only for backend quota lookup, fail soft, and never control full-plan/PDF visibility.'
+      /if\s*\(!fullPlanContentReady\(\)\)\s*\{[\s\S]*daysEl\.innerHTML\s*=\s*''/.test(renderFullPlanSource) &&
+      /dashboard\.hidden\s*=\s*!fullPlanContentReady\(\)/.test(updateUnlockUiSource) &&
+      /pdf\.disabled\s*=\s*!fullPlanContentReady\(\)/.test(updateUnlockUiSource) &&
+      /print\.disabled\s*=\s*!fullPlanContentReady\(\)/.test(updateUnlockUiSource),
+    'Expected the guide note to gate the full itinerary, fall back locally if Gemini fails, and use email only for backend quota lookup.'
   );
   block(
     'Daily weather chips appear inside each full day',

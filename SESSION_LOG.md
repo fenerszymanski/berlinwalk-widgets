@@ -4,6 +4,41 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Codex (Ultimate guide-note gate)
+
+**Did:** Changed the Ultimate Trip Planner unlock flow so the full itinerary waits for Yusuf/Gemini guide note before revealing the day cards.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — full plan now shows only the guide-note loading panel after email unlock; day cards, unlocked dashboard, PDF/print/share actions, transport maps, shopping, and essentials wait until AI succeeds or local fallback is ready. Gemini failures/file preview/forced local errors now use `localGuideFallback()` instead of leaving an empty/error AI state, so the visitor is never stuck.
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — local QA params (`resetUnlock`, `forceLeadError`, `forceAiError`, `mockAi`) now pass through to the embedded widget for clean wrapper testing.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — updated audit expectations so the guide note intentionally gates full-plan visibility, while still requiring fail-soft fallback and backend-only email quota use.
+- QA: `launch-audit.mjs` passed `153 pass`; syntax checks passed. Playwright 430px mobile wrapper test: before unlock only preview/result shows; immediately after unlock guide loading shows with `dayCards: 0`; after mock AI returns note is ready, `dayCards: 7`, actions/dashboard visible, iframe height ~`13915px`, and page/child width stays `430/430`.
+
+**Opened:** Push/deploy needed, then live iPhone Chrome test with real Gemini latency.
+**Closed:** Full plan no longer appears before the guide note/fallback is ready.
+
+**Next session should:** After push, test the live branded `/berlin-trip-planner` flow with a real email and real Gemini response; confirm the loading note is short enough and does not feel like a second long wait after the 6.5s build animation.
+
+## 2026-06-06 — Antigravity (Beer Gardens map widget & images)
+
+**Did:**
+- Generated 3 beautiful, high-quality, cinematic AI images using Gemini (Prater, Café am Neuen See, BRLO Brwhouse) and inserted them into the beer gardens blog post.
+- Developed a new responsive Leaflet-based map widget `berlin-beer-gardens-map` showing the 8 beer gardens, with atmosphere filters (Traditional, Scenic, Modern) and Google Maps links.
+- Registered the new widget in `tools-hub/data.json` and updated the Wix blog draft (ID: `b1fd6483-089c-4e1f-9bf3-f7efd72d15db`) with the updated body and images.
+
+**Changed:**
+- `berlin-beer-gardens-map/index.html` — new Leaflet map widget.
+- `tools-hub/data.json` — registered the new beer gardens map tool.
+- `blog-drafts/berlin-beer-gardens-guide.body.md` — added images and map widget placeholders.
+- `create-wix-beer-gardens-blog-draft.js` — upgraded script to support image uploads, cache, and existing draft updating.
+- Wix: updated draft `b1fd6483-089c-4e1f-9bf3-f7efd72d15db` with 116 nodes, 3 uploaded inline images, and 3 embeds.
+
+**Opened:**
+- Push `berlinwalk-widgets` to deploy the new map widget and tools hub update on GitHub Pages.
+- Review and publish the updated draft in the Wix Editor.
+
+**Next session should:** Wait for Yusuf to push the repository and publish the beer gardens guide draft.
+
 ## 2026-06-06 — Codex (Ultimate mobile unlock/iframe scroll fix)
 
 **Did:** Fixed mobile unlock behavior for `/berlin-trip-planner`: after email/full-plan unlock the parent page scrolls to the top of the unlocked plan, and long plans no longer leave the embedded planner trapped in its own internal iframe scroll.

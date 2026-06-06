@@ -78,7 +78,11 @@
         'pace',
         'tourIntent',
         'weather',
-        'planAccess'
+        'planAccess',
+        'resetUnlock',
+        'forceLeadError',
+        'forceAiError',
+        'mockAi'
       ];
       keys.forEach((key) => {
         if (current.has(key)) url.searchParams.set(key, current.get(key));

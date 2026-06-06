@@ -15551,7 +15551,7 @@
   function renderEssentials(plan) {
     var target = root.querySelector('[data-essentials-panel]');
     if (!target) return;
-    if (!unlocked || !planGenerated) {
+    if (!fullPlanContentReady()) {
       target.innerHTML = '';
       return;
     }
@@ -15576,7 +15576,7 @@
   function renderTransportMaps(plan) {
     var target = root.querySelector('[data-transport-maps-panel]');
     if (!target) return;
-    if (!unlocked || !planGenerated) {
+    if (!fullPlanContentReady()) {
       target.innerHTML = '';
       return;
     }
@@ -15591,7 +15591,7 @@
   function renderShoppingPanel(plan) {
     var target = root.querySelector('[data-shopping-panel]');
     if (!target) return;
-    if (!unlocked || !planGenerated) {
+    if (!fullPlanContentReady()) {
       target.innerHTML = '';
       return;
     }
@@ -15606,7 +15606,7 @@
   function renderAfterItineraryDivider(plan) {
     var target = root.querySelector('[data-after-itinerary-divider]');
     if (!target) return;
-    if (!unlocked || !planGenerated) {
+    if (!fullPlanContentReady()) {
       target.innerHTML = '';
       return;
     }
@@ -15786,8 +15786,8 @@
       }
     }
 
-    renderFullPlan();
     if (unlocked) requestAiEnhancement();
+    renderFullPlan();
     updateUnlockUi();
     updatePlanningUi();
     track('bw_trip_planner_result', {
@@ -15796,6 +15796,16 @@
       tour_intent: state.tourIntent,
       pace: state.pace
     });
+  }
+
+  function fullPlanContentReady() {
+    return Boolean(unlocked && planGenerated && (aiStatus === 'ready' || aiStatus === 'quota' || aiStatus === 'error'));
+  }
+
+  function revealFullPlanAfterGuide(plan, shouldScroll) {
+    updateUnlockUi();
+    renderFullPlan();
+    syncPlannerFrame(root.querySelector('[data-full-plan]'), shouldScroll);
   }
 
   function renderFullPlan() {
@@ -15807,7 +15817,7 @@
     var fullActions = root.querySelector('[data-full-actions]');
     if (!full || !daysEl) return;
     full.hidden = !unlocked || !planGenerated;
-    if (fullActions) fullActions.hidden = !unlocked || !planGenerated;
+    if (fullActions) fullActions.hidden = !fullPlanContentReady();
     if (!unlocked || !planGenerated) {
       renderAiEnhancement(plan);
       if (routeBrief) routeBrief.innerHTML = '';
@@ -15825,6 +15835,16 @@
       : '';
     setText('[data-full-sub]', state.tripLength + (state.tripLength === 1 ? ' day' : ' days') + ' from ' + plan.displayDate + '. Built around daily areas, maps, and Berlin essentials.' + tourLine);
     renderAiEnhancement(plan);
+    if (!fullPlanContentReady()) {
+      if (routeBrief) routeBrief.innerHTML = '';
+      if (jumpBar) jumpBar.innerHTML = '';
+      daysEl.innerHTML = '';
+      renderAfterItineraryDivider(plan);
+      renderTransportMaps(plan);
+      renderShoppingPanel(plan);
+      renderEssentials(plan);
+      return;
+    }
     if (routeBrief) routeBrief.innerHTML = '';
     renderDayJumpBar(plan);
     daysEl.innerHTML = plan.days.map(function (day) {
@@ -15869,7 +15889,7 @@
       el.hidden = unlocked;
     });
     var dashboard = root.querySelector('[data-unlocked-result-panels]');
-    if (dashboard) dashboard.hidden = !unlocked || !planGenerated;
+    if (dashboard) dashboard.hidden = !fullPlanContentReady();
     if (!unlocked || !planGenerated) clearUnlockedResultPanels();
     if (planGenerated && !unlocked && !gateViewTracked) {
       gateViewTracked = true;
@@ -15882,8 +15902,8 @@
     }
     var pdf = root.querySelector('[data-download-pdf]');
     var print = root.querySelector('[data-print-plan]');
-    if (pdf) pdf.disabled = !unlocked || !planGenerated;
-    if (print) print.disabled = !unlocked || !planGenerated;
+    if (pdf) pdf.disabled = !fullPlanContentReady();
+    if (print) print.disabled = !fullPlanContentReady();
     renderFullPlan();
   }
 
@@ -17184,12 +17204,17 @@
   function requestAiEnhancement() {
     var plan = latestPlan || buildPlan();
     if (!unlocked || !planGenerated || aiStatus === 'loading' || aiStatus === 'ready' || aiStatus === 'quota') return;
-    if (forceLocalUnlockForQa() && !forceLocalAiMockForQa() && !forceLocalAiErrorForQa()) return;
+    if (forceLocalUnlockForQa() && !forceLocalAiMockForQa() && !forceLocalAiErrorForQa()) {
+      aiEnhancement = localGuideFallback(plan, 'local_qa_unlock', {});
+      aiStatus = 'quota';
+      revealFullPlanAfterGuide(plan, true);
+      return;
+    }
     var requestId = aiRequestId + 1;
     aiRequestId = requestId;
     aiStatus = 'loading';
     aiEnhancement = null;
-    renderAiEnhancement(plan);
+    renderFullPlan();
 
     track('bw_trip_planner_ai_request', {
       arrival_date: state.arrivalDate,
@@ -17202,22 +17227,24 @@
         if (requestId !== aiRequestId) return;
         aiEnhancement = mockAiEnhancement(plan);
         aiStatus = 'ready';
-        renderAiEnhancement(plan);
+        revealFullPlanAfterGuide(plan, true);
         track('bw_trip_planner_ai_success', { provider: 'gemini_mock', trip_length: state.tripLength });
       }, 500);
       return;
     }
 
     if (window.location.protocol === 'file:') {
-      aiStatus = 'error';
-      renderAiEnhancement(plan);
+      aiEnhancement = localGuideFallback(plan, 'file_preview_backend_only', {});
+      aiStatus = 'quota';
+      revealFullPlanAfterGuide(plan, true);
       track('bw_trip_planner_ai_error', { provider: 'gemini', reason: 'file_preview_backend_only', fail_soft: true });
       return;
     }
 
     if (forceLocalAiErrorForQa() || typeof fetch !== 'function') {
-      aiStatus = 'error';
-      renderAiEnhancement(plan);
+      aiEnhancement = localGuideFallback(plan, 'forced_or_fetch_unavailable', {});
+      aiStatus = 'quota';
+      revealFullPlanAfterGuide(plan, true);
       track('bw_trip_planner_ai_error', { provider: 'gemini', reason: 'forced_or_fetch_unavailable', fail_soft: true });
       return;
     }
@@ -17237,7 +17264,7 @@
       if (body && body.ok !== true && /quota|lead_not_found|email_required/i.test(String(body.reason || body.error || ''))) {
         aiEnhancement = localGuideFallback(plan, body.reason || body.error, body.quota || {});
         aiStatus = 'quota';
-        renderAiEnhancement(plan);
+        revealFullPlanAfterGuide(plan, true);
         track('bw_trip_planner_ai_quota_fallback', {
           provider: 'local',
           reason: String(body.reason || body.error || '').slice(0, 80),
@@ -17248,7 +17275,7 @@
       if (!body || body.ok !== true || !body.enhancement) throw new Error(body && (body.reason || body.error) || 'empty_ai_response');
       aiEnhancement = normalizeAiEnhancement(body.enhancement, plan);
       aiStatus = 'ready';
-      renderAiEnhancement(plan);
+      revealFullPlanAfterGuide(plan, true);
       track('bw_trip_planner_ai_success', {
         provider: aiEnhancement.provider,
         model: aiEnhancement.model,
@@ -17256,9 +17283,9 @@
       });
     }).catch(function (error) {
       if (requestId !== aiRequestId) return;
-      aiStatus = 'error';
-      aiEnhancement = null;
-      renderAiEnhancement(plan);
+      aiEnhancement = localGuideFallback(plan, 'ai_error', {});
+      aiStatus = 'quota';
+      revealFullPlanAfterGuide(plan, true);
       track('bw_trip_planner_ai_error', {
         provider: 'gemini',
         reason: String(error && error.message || error).slice(0, 80),
