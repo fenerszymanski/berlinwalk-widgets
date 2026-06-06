@@ -41,6 +41,12 @@
       if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
       if (this._resizeObserver) this._resizeObserver.disconnect();
       if (this._gapTimers) this._gapTimers.forEach((timer) => window.clearTimeout(timer));
+      if (this._gapResizeHandler) {
+        window.removeEventListener('resize', this._gapResizeHandler);
+        if (window.visualViewport) window.visualViewport.removeEventListener('resize', this._gapResizeHandler);
+      }
+      if (this._gapResizeObserver) this._gapResizeObserver.disconnect();
+      if (this._gapRaf) window.cancelAnimationFrame(this._gapRaf);
     }
 
     _plannerSrc() {
@@ -265,25 +271,60 @@
     }
 
     _setupWixTopGapGuard() {
+      this._gapTimers = [];
+
+      const clearGapTimers = () => {
+        this._gapTimers.forEach((timer) => window.clearTimeout(timer));
+        this._gapTimers = [];
+      };
+
+      const later = (callback, delay) => {
+        const timer = window.setTimeout(callback, delay);
+        this._gapTimers.push(timer);
+      };
+
       const sync = () => {
         const section = this.closest('section.wixui-section');
         if (!section) return;
 
         this.style.marginTop = '';
         this.style.marginBottom = '';
+        delete this.dataset.bwWixTopGap;
+
         const ownTop = this.getBoundingClientRect().top;
         const sectionTop = section.getBoundingClientRect().top;
         const gap = Math.round(ownTop - sectionTop);
 
-        if (gap > 40 && gap < 900) {
+        if (gap > 40 && gap < 1400) {
           this.style.marginTop = `-${gap}px`;
           this.style.marginBottom = `-${gap}px`;
           this.dataset.bwWixTopGap = String(gap);
         }
       };
 
+      const runInFrame = () => {
+        if (this._gapRaf) window.cancelAnimationFrame(this._gapRaf);
+        this._gapRaf = window.requestAnimationFrame(sync);
+      };
+
+      const scheduleSync = () => {
+        clearGapTimers();
+        runInFrame();
+        [120, 320, 720, 1400].forEach((delay) => later(runInFrame, delay));
+      };
+
       sync();
-      this._gapTimers = [60, 250, 800, 1600].map((delay) => window.setTimeout(sync, delay));
+      [60, 250, 800, 1600].forEach((delay) => later(sync, delay));
+      this._gapResizeHandler = scheduleSync;
+      window.addEventListener('resize', this._gapResizeHandler, { passive: true });
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', this._gapResizeHandler, { passive: true });
+
+      const section = this.closest('section.wixui-section');
+      if (section && 'ResizeObserver' in window) {
+        this._gapResizeObserver = new ResizeObserver(scheduleSync);
+        this._gapResizeObserver.observe(section);
+        if (this.parentElement) this._gapResizeObserver.observe(this.parentElement);
+      }
     }
 
     _styles() {

@@ -4,6 +4,18 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Codex (Trip Planner live resize gap guard)
+
+**Did:** Made the live `/berlin-trip-planner` Wix gap guard respond to browser resizing after Yusuf found top/bottom whitespace returned when widening the browser.
+
+**Changed:**
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — gap guard now listens to `window`/`visualViewport` resize, observes the Wix section/wrapper, clears stale timers, re-measures across multiple post-resize delays, and applies matching negative top/bottom margins only when Wix creates a large wrapper gap.
+
+**Opened:** Push/deploy still needed, then live QA by resizing `/berlin-trip-planner` from normal desktop width to wide desktop.
+**Closed:** Live measurement reproduced the issue: 1280px had no gap, 1920px created about 785px top and bottom gaps; temporary live injection of the new logic closed both gaps.
+
+**Next session should:** Push this one-file fix, wait for GitHub Pages, verify `/berlin-trip-planner?v=resize-gap-fix` at 1280px and 1920px, then continue homepage mini teaser work.
+
 ## 2026-06-05 — Codex (Trip Planner live top-gap guard)
 
 **Did:** Diagnosed and fixed the live `/berlin-trip-planner` top and bottom whitespace that appeared around the custom element in the live Wix page but not in Wix Studio editor.
