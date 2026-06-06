@@ -34,11 +34,13 @@
       this._render();
       this._bind();
       this._setupPlannerResize();
+      this._setupWixTopGapGuard();
     }
 
     disconnectedCallback() {
       if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
       if (this._resizeObserver) this._resizeObserver.disconnect();
+      if (this._gapTimers) this._gapTimers.forEach((timer) => window.clearTimeout(timer));
     }
 
     _plannerSrc() {
@@ -260,6 +262,26 @@
 
       window.addEventListener('message', this._messageHandler);
       setHeight(1900);
+    }
+
+    _setupWixTopGapGuard() {
+      const sync = () => {
+        const section = this.closest('section.wixui-section');
+        if (!section) return;
+
+        this.style.marginTop = '';
+        const ownTop = this.getBoundingClientRect().top;
+        const sectionTop = section.getBoundingClientRect().top;
+        const gap = Math.round(ownTop - sectionTop);
+
+        if (gap > 40 && gap < 900) {
+          this.style.marginTop = `-${gap}px`;
+          this.dataset.bwWixTopGap = String(gap);
+        }
+      };
+
+      sync();
+      this._gapTimers = [60, 250, 800, 1600].map((delay) => window.setTimeout(sync, delay));
     }
 
     _styles() {

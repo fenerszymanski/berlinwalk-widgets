@@ -4,6 +4,18 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-05 — Codex (Trip Planner live top-gap guard)
+
+**Did:** Diagnosed and fixed the live `/berlin-trip-planner` top whitespace that appeared below the site header but not in Wix Studio editor.
+
+**Changed:**
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — added a Wix-only section top-gap guard: if the custom element renders far below its containing Wix section on live, it applies a negative top margin to align the planner hero directly under the site header. The guard re-checks a few times after load because Wix live layout settles asynchronously.
+
+**Opened:** Needs commit/push/deploy, then live QA on `/berlin-trip-planner` with cache-bust.
+**Closed:** Root cause identified: Wix live wrapper positioned the custom element about 374px below its section top; component itself was not creating the blank space.
+
+**Next session should:** Push this one-file fix, wait for GitHub Pages, then verify `/berlin-trip-planner?v=gap-fix` starts immediately below the header before returning to homepage teaser work.
+
 ## 2026-06-05 — Codex (Trip Planner landing/widget alignment + iconset fix)
 
 **Did:** Fixed the latest `/berlin-trip-planner` local QA issues: the embedded planner form no longer sits left with a hidden right column, and the hero proof icons now use Yusuf's latest `ikonset.png` artwork as transparent icons without an extra white tile background.
