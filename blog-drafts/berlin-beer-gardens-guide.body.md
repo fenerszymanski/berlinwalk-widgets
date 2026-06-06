@@ -1,4 +1,4 @@
-# Berlin Beer Gardens Guide: 8 Spots to Drink Like a Local
+# Berlin Beer Gardens Guide: 12 Spots to Drink Like a Local
 
 {{quick-summary}}
 
@@ -6,7 +6,7 @@ When the temperature in Berlin crosses 20 degrees, the city shifts. People stop 
 
 Berlin’s beer gardens (Biergärten) are a summer and shoulder-season ritual. They represent the relaxed, open-air lifestyle that makes the city famous during the warm months. While Munich might be the spiritual home of the traditional Bavarian beer garden, Berlin has created its own version: less formal, slightly gritty, highly diverse, and spread across hidden backyards, lakeside parks, and industrial canal banks.
 
-This guide covers the 8 best beer gardens in Berlin, from the oldest historic institutions to modern craft beer spots, along with the local etiquette you need to know to fit right in.
+This guide covers the 12 best beer gardens in Berlin, from the oldest historic institutions to modern craft beer spots, along with the local etiquette you need to know to fit right in.
 
 For more local travel tips, pair this with my guide on [what to eat in Berlin](https://www.berlinwalk.com/post/what-to-eat-in-berlin-12-must-try-local-foods) and my realistic [Berlin daily budget guide](https://www.berlinwalk.com/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists).
 
@@ -24,7 +24,7 @@ Before you grab a tray, there are a few unwritten German rules you should know. 
 
 ---
 
-## The 8 Best Berlin Beer Gardens
+## The 12 Best Berlin Beer Gardens
 
 Here is where to go to experience Berlin's beer culture at its best, selected for their history, local character, and scenery.
 
@@ -107,6 +107,42 @@ It has a classic, leafy suburban feel with large wooden tables, green hedges, an
 
 * **Where:** Königin-Luise-Straße 40-42, 14195 Berlin
 * **Best for:** A quiet academic atmosphere in the leafy suburbs.
+
+### 9. Fischerhütte am Schlachtensee (Zehlendorf)
+
+This historic lakeside restaurant and beer garden dates back to the mid-19th century. Located in the Zehlendorf district, it sits directly on the banks of Schlachtensee, one of Berlin's cleanest and most popular swimming lakes, surrounded by the Grunewald forest.
+
+It offers a classic beer garden experience: long wooden tables directly facing the water, simple self-service German food, and cold beer. It is extremely popular during the summer months with locals who spend the day swimming, sunbathing, or walking the 7km trail around the lake, stopping at the Fischerhütte to cool down with a Radler. It is a bit far from the center, but easily reachable via S-Bahn S1 directly to Schlachtensee station.
+
+* **Where:** Fischerhüttenstraße 136, 14163 Berlin
+* **Best for:** Combining a forest walk or lake swim with a scenic beer.
+
+### 10. BrewDog DogTap Berlin (Mariendorf)
+
+If you want scale, BrewDog DogTap is a craft beer destination in Mariendorf, in Berlin's south. Set inside a beautifully restored historic gasworks building from 1901, the venue combines historic red-brick industrial scale with a massive, modern outdoor craft beer garden.
+
+The outdoor lawns are enormous, offering picnic tables, fire pits, games like giant Jenga, and plenty of space to relax. They pour over 60 draft craft beers, including BrewDog's global favorites and locally brewed Berlin specials, alongside a modern menu featuring burgers, wings, and pizzas. While it requires a U-Bahn (U6 to Alt-Mariendorf) and a short bus ride or S-Bahn (S2 to Attilastraße) to reach from the center, its impressive size and industrial-heritage architecture make it a popular weekend destination for families and craft beer fans alike.
+
+* **Where:** Im Marienpark 23, 12107 Berlin
+* **Best for:** Giant modern craft beer gardens in a historic industrial setting.
+
+### 11. Eschenbräu (Wedding)
+
+Tucked away in the quiet, residential Sprengelkiez in Wedding, Eschenbräu is a legendary neighborhood microbrewery that feels like a true local secret. Operating since 2001, it is located in the basement courtyard of a student residence block. 
+
+The outdoor seating area is shaded by a magnificent, ancient oak tree and surrounded by simple wooden benches. Eschenbräu brews its own outstanding seasonal and traditional German beers, including their flagship Wedding Helles, Dunkel, and various bocks. There is no major kitchen here; instead, they serve fresh Flammkuchen (traditional German flatbread) and invite customers to bring their own picnic food to enjoy under the trees, keeping the old-school Bavarian beer garden tradition alive in the heart of Berlin's working-class north.
+
+* **Where:** Triftstraße 67, 13353 Berlin
+* **Best for:** An authentic, local microbrewery vibe under a giant oak.
+
+### 12. Biergarten Cassiopeia (Friedrichshain)
+
+For a beer garden experience that could only exist in Berlin, head to Cassiopeia Sommergarten. Located inside the RAW-Gelände in Friedrichshain—a former train repair yard turned cultural and nightlife hub—this outdoor space is surrounded by industrial ruins, street art, and climbing walls.
+
+By day, the garden is a relaxed oasis with colorful string lights, wooden benches, and deck chairs where you can drink a cold local draft or a craft IPA and eat stone-baked pizza. As night falls, it acts as the perfect pre-party meeting point, with DJs spinning music and a lively alternative crowd gathering before heading to the surrounding clubs. It is the ultimate fusion of classic German beer garden culture with Berlin's gritty, creative nightlife energy.
+
+* **Where:** Revaler Straße 99, 10245 Berlin
+* **Best for:** Alternative industrial vibes and a pre-clubbing drink in Friedrichshain.
 
 ---
 

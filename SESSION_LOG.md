@@ -4,21 +4,37 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Antigravity (Expanded beer gardens to 12 spots)
+
+**Did:**
+- Expanded the Berlin Beer Gardens blog post and map widget from 10 to 12 locations by adding Eschenbräu (Wedding) and Biergarten Cassiopeia (Friedrichshain).
+- Updated the Wix draft post with the updated 12-spot content (148 Ricos nodes).
+
+**Changed:**
+- `berlin-beer-gardens-map/index.html` — added Eschenbräu and Cassiopeia Sommergarten, updated mapped spots count to 12.
+- `blog-drafts/berlin-beer-gardens-guide.md` — updated title, keywords, meta description, and sources.
+- `blog-drafts/berlin-beer-gardens-guide.body.md` — added write-ups for the 2 new spots and updated H1/intro.
+- `create-wix-beer-gardens-blog-draft.js` (root) — updated title/metadata in draft upload config.
+- Wix: updated draft `b1fd6483-089c-4e1f-9bf3-f7efd72d15db` to 12 spots (148 nodes, 3 images, 3 embeds).
+
+**Next session should:** Wait for Yusuf to review the draft and push the widgets repository using his local client.
+
 ## 2026-06-06 — Codex (Ultimate branded email plan links)
 
-**Did:** Switched Ultimate Trip Planner email plan links from the raw GitHub widget URL to the branded `/berlin-trip-planner` page with saved choices and unlocked access.
+**Did:** Switched Ultimate Trip Planner email plan links from the raw GitHub widget URL to the branded `/berlin-trip-planner` page with saved choices and unlocked access; Yusuf pasted/published the Velo update and live smoke passed.
 
 **Changed:**
 - `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — `planUrlForEmail()` now builds `https://www.berlinwalk.com/berlin-trip-planner?...&planAccess=1`, preserving existing plan query params and defaulting `context=tool`.
 - `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — dry-run/live smoke payloads now use the branded planner page as `page`.
 - `ultimate-berlin-trip-planner/velo/install-kit.html` — regenerated paste-ready Wix Velo install kit.
 - `berlin-trip-planner-page/README.md`, `berlin-trip-planner-page/SEO_SETTINGS.md`, root `PROJECT_MEMORY.md` — documented that Ultimate email `${planUrl}` now targets the branded saved-plan page.
-- QA: `launch-audit.mjs` passed `153 pass`; `velo/prepublish-gate.mjs` passed `13 pass, 0 block`; syntax checks passed.
+- Wix: Yusuf pasted/published the updated `Backend/tripPlannerFunnel.js`.
+- QA: `launch-audit.mjs` passed `153 pass`; `velo/prepublish-gate.mjs` passed `13 pass, 0 block`; syntax checks passed; live `tripPlannerLead` smoke wrote `output/qa/ultimate-trip-planner-live-smoke/live-branded-plan-link-20260606.json` with `/berlin-trip-planner?...&planAccess=1`.
 
-**Opened:** Paste/publish the updated Velo `Backend/tripPlannerFunnel.js` in Wix so live emails stop showing GitHub Pages URLs.
-**Closed:** Local email plan URL generation now points at the branded Trip Planner page.
+**Opened:** Confirm the received Gmail link opens the branded page unlocked with restored choices.
+**Closed:** Live email plan URL generation now points at the branded Trip Planner page.
 
-**Next session should:** After Wix publish, send one test email and confirm `${planUrl}` opens `/berlin-trip-planner` with the plan unlocked and choices restored.
+**Next session should:** Click the latest test email link in Gmail and confirm it opens `/berlin-trip-planner` with the plan unlocked and choices restored.
 
 ## 2026-06-06 — Codex (Ultimate guide-note gate)
 

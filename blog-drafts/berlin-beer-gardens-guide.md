@@ -1,4 +1,4 @@
-# Berlin Beer Gardens Guide: 8 Spots to Drink Like a Local
+# Berlin Beer Gardens Guide: 12 Spots to Drink Like a Local
 
 Slug idea: `berlin-beer-gardens-guide`
 
@@ -6,15 +6,15 @@ Wix draft ID: `b1fd6483-089c-4e1f-9bf3-f7efd72d15db`
 
 Wix draft status: `UNPUBLISHED`
 
-Meta title: Berlin Beer Gardens: 8 Best Spots to Drink Like a Local
+Meta title: Berlin Beer Gardens: 12 Best Spots to Drink Like a Local
 
-Meta description: Discover the 8 best beer gardens in Berlin, from historic chestnut-shaded spots like Prater to beautiful lakeside gardens like Café am Neuen See. A local guide.
+Meta description: Discover the 12 best beer gardens in Berlin, from historic chestnut-shaded spots like Prater to beautiful lakeside forest gardens and modern craft beer hubs. A local guide.
 
 Category: Tourist Tips (ID: `6da64e22-3360-42ec-a558-e906e4deeb19`)
 
 Primary keyword: Berlin beer gardens
 
-Secondary keywords: best beer gardens in Berlin, traditional German beer garden Berlin, Prater Biergarten, Café am Neuen See, Schleusenkrug, BRLO Brwhouse, Zenner Treptower Park, Luise Dahlem, Zollpackhof, Golgatha Kreuzberg
+Secondary keywords: best beer gardens in Berlin, traditional German beer garden Berlin, Prater Biergarten, Café am Neuen See, Schleusenkrug, BRLO Brwhouse, Zenner Treptower Park, Luise Dahlem, Zollpackhof, Golgatha Kreuzberg, Fischerhütte am Schlachtensee, BrewDog DogTap Berlin, Eschenbräu Wedding, Cassiopeia Sommergarten Friedrichshain
 
 Suggested CTA: After relaxing at a chestnut-shaded table with a cold German draft, join me at Alexanderplatz for the Berlin Free Walking Tour to discover the history behind this iconic beer-loving city.
 
@@ -23,10 +23,13 @@ Suggested CTA: After relaxing at a chestnut-shaded table with a cold German draf
 Use these embeds when building the post in Wix:
 
 1. Quick summary, near the top:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-beer-gardens-guide`
+   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-beer-gardens-guide&v=20260606b`
 
-2. FAQ, near the bottom:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-beer-gardens-guide`
+2. Map widget, after the list intro:
+   `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-beer-gardens-map/?v=20260606b`
+
+3. FAQ, near the bottom:
+   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-beer-gardens-guide&v=20260606b`
 
 ## Quick Summary
 
@@ -47,3 +50,7 @@ Use these embeds when building the post in Wix:
 - Zollpackhof: https://www.zollpackhof.de/
 - Zenner: https://zenner.berlin/
 - Luise Dahlem: https://www.luise-dahlem.de/
+- Fischerhütte am Schlachtensee: https://www.fischerhuette-berlin.de/
+- BrewDog DogTap Berlin: https://www.brewdog.com/de/dogtap-berlin
+- Eschenbräu: https://eschenbraeu.de/
+- Cassiopeia: https://cassiopeia-berlin.de/
