@@ -270,12 +270,14 @@
         if (!section) return;
 
         this.style.marginTop = '';
+        this.style.marginBottom = '';
         const ownTop = this.getBoundingClientRect().top;
         const sectionTop = section.getBoundingClientRect().top;
         const gap = Math.round(ownTop - sectionTop);
 
         if (gap > 40 && gap < 900) {
           this.style.marginTop = `-${gap}px`;
+          this.style.marginBottom = `-${gap}px`;
           this.dataset.bwWixTopGap = String(gap);
         }
       };
