@@ -28,7 +28,10 @@ Use these embeds when building the post in Wix:
 2. Map widget, after the list intro:
    `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-beer-gardens-map/?v=20260606b`
 
-3. FAQ, near the bottom:
+3. Comparison table widget, before the food dictionary:
+   `https://fenerszymanski.github.io/berlinwalk-widgets/beer-gardens-compare/?v=20260606c`
+
+4. FAQ, near the bottom:
    `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-beer-gardens-guide&v=20260606b`
 
 ## Quick Summary

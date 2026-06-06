@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Antigravity (Added beer gardens comparison widget)
+
+**Did:**
+- Created a new responsive, premium comparison table widget for the 12 beer gardens.
+- Embedded it in the blog post body file and updated the Wix blog draft.
+
+**Changed:**
+- `beer-gardens-compare/index.html` — new widget with responsive table layout.
+- `blog-drafts/berlin-beer-gardens-guide.body.md` — embedded the `{{widget:beer-gardens-compare}}` placeholder.
+- `blog-drafts/berlin-beer-gardens-guide.md` — updated embeds plan.
+- `create-wix-beer-gardens-blog-draft.js` (root) — added `beer-gardens-compare` configuration to `EMBEDS`.
+- Wix: updated draft `b1fd6483-089c-4e1f-9bf3-f7efd72d15db` to 156 nodes, 4 embeds, 3 images.
+
+**Next session should:** Wait for Yusuf to review the draft and push the widgets repository using his local client.
+
 ## 2026-06-06 — Antigravity (Expanded beer gardens to 12 spots)
 
 **Did:**

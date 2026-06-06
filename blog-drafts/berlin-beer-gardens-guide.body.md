@@ -146,6 +146,14 @@ By day, the garden is a relaxed oasis with colorful string lights, wooden benche
 
 ---
 
+## Quick Comparison: Which Beer Garden is Right for You?
+
+If you are stuck choosing between these spots, use this comparison table to filter by their main vibes, locations, highlights, and whether they accept card payments.
+
+{{widget:beer-gardens-compare}}
+
+---
+
 ## What to Order: A Quick Beer & Food Dictionary
 
 If you want to order like a local, here are the key German terms to know:

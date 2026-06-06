@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Beer Gardens Comparison | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-beer-gardens-compare">
+  <style>
+    #bw-beer-gardens-compare {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-beer-gardens-compare * { box-sizing: border-box; }
+
+    #bw-beer-gardens-compare .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-beer-gardens-compare .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-beer-gardens-compare .bw-head-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+      flex: 0 0 24px;
+    }
+
+    #bw-beer-gardens-compare .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+    }
+
+    #bw-beer-gardens-compare .bw-body {
+      background: var(--bw-cream);
+      padding: 18px 20px;
+    }
+
+    #bw-beer-gardens-compare .bw-note {
+      margin: 0 0 14px;
+      color: var(--bw-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    #bw-beer-gardens-compare table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+      background: var(--bw-white);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-beer-gardens-compare col.c1 { width: 25%; }
+    #bw-beer-gardens-compare col.c2 { width: 18%; }
+    #bw-beer-gardens-compare col.c3 { width: 27%; }
+    #bw-beer-gardens-compare col.c4 { width: 30%; }
+
+    #bw-beer-gardens-compare thead th {
+      padding: 12px 14px;
+      font-size: 10px;
+      font-weight: 900;
+      color: var(--bw-muted);
+      text-align: left;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: var(--bw-soft);
+      border-bottom: 1px solid var(--bw-border);
+      line-height: 1.25;
+    }
+
+    #bw-beer-gardens-compare tbody td {
+      padding: 12.5px 14px;
+      font-size: 12.5px;
+      color: var(--bw-text);
+      vertical-align: top;
+      line-height: 1.5;
+      border-bottom: 1px solid #E8E8E8;
+    }
+
+    #bw-beer-gardens-compare tbody tr:last-child td { border-bottom: none; }
+    #bw-beer-gardens-compare tbody tr {
+      transition: background 0.15s ease;
+    }
+    #bw-beer-gardens-compare tbody tr:hover { background: var(--bw-cream); }
+    #bw-beer-gardens-compare tbody tr:nth-child(even) td { background: #FCFCF7; }
+    #bw-beer-gardens-compare tbody tr:nth-child(even):hover td { background: var(--bw-cream); }
+
+    #bw-beer-gardens-compare tbody td:first-child {
+      font-weight: 800;
+      color: var(--bw-green);
+    }
+
+    #bw-beer-gardens-compare .bw-area {
+      display: block;
+      font-size: 11px;
+      color: var(--bw-muted);
+      font-weight: normal;
+      margin-top: 2px;
+    }
+
+    #bw-beer-gardens-compare .bw-card-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      color: var(--bw-muted);
+      font-weight: normal;
+      margin-top: 5px;
+      background: #F0F4EC;
+      padding: 1px 6px;
+      border-radius: 4px;
+    }
+
+    #bw-beer-gardens-compare .bw-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 900;
+      padding: 4px 9px;
+      border-radius: 20px;
+      white-space: nowrap;
+      line-height: 1.2;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+
+    #bw-beer-gardens-compare .bw-badge.traditional { background: #EAF3DE; color: #27500A; }
+    #bw-beer-gardens-compare .bw-badge.scenic { background: #E1F5FE; color: #0277BD; }
+    #bw-beer-gardens-compare .bw-badge.craft { background: #FFE0B2; color: #E65100; }
+    #bw-beer-gardens-compare .bw-badge.alternative { background: #EDE7F6; color: #4A148C; }
+
+    #bw-beer-gardens-compare .bw-pick {
+      font-weight: 800;
+      color: var(--bw-green);
+    }
+
+    #bw-beer-gardens-compare .bw-footer {
+      padding: 12px 20px;
+      background: var(--bw-white);
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      #bw-beer-gardens-compare { margin: 22px 0; }
+      #bw-beer-gardens-compare .bw-head { padding: 12px 16px; }
+      #bw-beer-gardens-compare .bw-kicker { font-size: 10px; letter-spacing: 1.7px; }
+      #bw-beer-gardens-compare .bw-body { padding: 12px; }
+      #bw-beer-gardens-compare .bw-note { font-size: 12px; margin-bottom: 12px; }
+      #bw-beer-gardens-compare table, #bw-beer-gardens-compare thead, #bw-beer-gardens-compare tbody, #bw-beer-gardens-compare tr, #bw-beer-gardens-compare th, #bw-beer-gardens-compare td { display: block; }
+      #bw-beer-gardens-compare colgroup, #bw-beer-gardens-compare thead { display: none; }
+      #bw-beer-gardens-compare tbody tr {
+        border: 1px solid var(--bw-border);
+        border-radius: 10px;
+        margin-bottom: 8px;
+        background: var(--bw-white);
+        overflow: hidden;
+      }
+      #bw-beer-gardens-compare tbody tr:nth-child(even) td { background: transparent; }
+      #bw-beer-gardens-compare tbody tr:hover td { background: transparent; }
+      #bw-beer-gardens-compare tbody td {
+        border: none;
+        padding: 6px 14px;
+        font-size: 12.5px;
+        line-height: 1.45;
+      }
+      #bw-beer-gardens-compare tbody td:first-child {
+        padding-top: 14px;
+        font-size: 14.5px;
+        border-bottom: 1px solid #F0F4EC;
+        margin-bottom: 4px;
+      }
+      #bw-beer-gardens-compare tbody td:last-child { padding-bottom: 14px; }
+      #bw-beer-gardens-compare tbody td::before {
+        content: attr(data-label);
+        display: block;
+        margin-bottom: 2px;
+        font-size: 9px;
+        font-weight: 900;
+        color: var(--bw-muted);
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+      #bw-beer-gardens-compare tbody td:first-child::before { display: none; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">📊</span>
+      <span class="bw-kicker">Quick Comparison Table</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-note">Use this decision table to find your perfect beer garden based on atmosphere, district, highlights, and card compatibility.</p>
+      <table>
+        <colgroup><col class="c1"><col class="c2"><col class="c3"><col class="c4"></colgroup>
+        <thead>
+          <tr>
+            <th>Place &amp; Area</th>
+            <th>Vibe</th>
+            <th>Key Highlight</th>
+            <th>Choose it if...</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Prater Biergarten
+              <span class="bw-area">Prenzlauer Berg</span>
+              <span class="bw-card-info">💵 Cash preferred</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge traditional">Traditional</span></td>
+            <td data-label="Key Highlight">Berlin's oldest (1837) operating beer garden, shaded by a massive canopy of chestnut trees.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want the quintessential historic Berlin beer garden experience</span> with simple German food.</td>
+          </tr>
+          <tr>
+            <td>
+              Café am Neuen See
+              <span class="bw-area">Tiergarten</span>
+              <span class="bw-card-info">💳 Cards OK</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge scenic">Scenic</span></td>
+            <td data-label="Key Highlight">A romantic lakeside garden deep in Tiergarten park. Serve pizza, pretzels, and rent rowboats.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want a peaceful, romantic sunset view</span> right on the water inside a massive forest park.</td>
+          </tr>
+          <tr>
+            <td>
+              Schleusenkrug
+              <span class="bw-area">Tiergarten</span>
+              <span class="bw-card-info">💳 Cards OK</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge traditional">Traditional</span></td>
+            <td data-label="Key Highlight">Cozy terraced garden next to the historic lock gate (Schleuse) and the Berlin Zoo.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want a rustic, canal-side break</span> with great regional beers after walking Tiergarten.</td>
+          </tr>
+          <tr>
+            <td>
+              Golgatha
+              <span class="bw-area">Kreuzberg</span>
+              <span class="bw-card-info">💵 Cash preferred</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge traditional">Traditional</span></td>
+            <td data-label="Key Highlight">Local neighborhood spot in Viktoriapark. Shaded tables by day, electronic music bar by night.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want a relaxed local neighborhood vibe</span> that transitions from family park break to rooftop beats.</td>
+          </tr>
+          <tr>
+            <td>
+              BRLO Brwhouse
+              <span class="bw-area">Gleisdreieck</span>
+              <span class="bw-card-info">💳 Cards Only</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge craft">Modern Craft</span></td>
+            <td data-label="Key Highlight">Striking shipping-container design. Pours excellent house-brewed craft beers and smoked foods.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You love craft IPAs and local craft lagers</span> combined with modern container architecture.</td>
+          </tr>
+          <tr>
+            <td>
+              Zollpackhof
+              <span class="bw-area">Mitte</span>
+              <span class="bw-card-info">💳 Cards OK</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge traditional">Traditional</span></td>
+            <td data-label="Key Highlight">Riverside garden opposite the Federal Chancellery, serving Augustiner from wooden barrels.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want Spree river views in the center</span>, within walking distance of Reichstag or Hauptbahnhof.</td>
+          </tr>
+          <tr>
+            <td>
+              Zenner
+              <span class="bw-area">Treptower Park</span>
+              <span class="bw-card-info">💳 Cards OK</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge scenic">Scenic</span></td>
+            <td data-label="Key Highlight">Monumental historic estate on the Spree river with sweeping views of the Island of Youth.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want enormous waterfront space</span> and Spree views during a weekend walk in Treptower Park.</td>
+          </tr>
+          <tr>
+            <td>
+              Luise Dahlem
+              <span class="bw-area">Zehlendorf</span>
+              <span class="bw-card-info">💳 Cards OK</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge traditional">Traditional</span></td>
+            <td data-label="Key Highlight">A leafy, student-and-professor favorite since the early 1900s in Zehlendorf suburbs.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You are heading southwest</span> and want a quiet, leafy suburban stop near the Botanical Gardens.</td>
+          </tr>
+          <tr>
+            <td>
+              Fischerhütte
+              <span class="bw-area">Schlachtensee</span>
+              <span class="bw-card-info">💳 Cards OK</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge scenic">Scenic</span></td>
+            <td data-label="Key Highlight">Historic forest-side beer garden directly on the banks of Berlin's cleanest swimming lake.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want to combine a lake swim or forest walk</span> with a cold Radler and classic German snacks.</td>
+          </tr>
+          <tr>
+            <td>
+              BrewDog DogTap
+              <span class="bw-area">Mariendorf</span>
+              <span class="bw-card-info">💳 Cards Only</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge craft">Modern Craft</span></td>
+            <td data-label="Key Highlight">Massive venue in a restored 1901 gasworks with huge lawns, outdoor games, and 60 craft drafts.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want a giant, family-friendly craft destination</span> with plenty of space and industrial heritage.</td>
+          </tr>
+          <tr>
+            <td>
+              Eschenbräu
+              <span class="bw-area">Wedding</span>
+              <span class="bw-card-info">💵 Cash preferred</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge craft">Modern Craft</span></td>
+            <td data-label="Key Highlight">Otantik local microbrewery hidden in a Wedding block courtyard, shaded by a giant oak.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want a true local neighborhood experience</span> and want to drink beer brewed right next to you.</td>
+          </tr>
+          <tr>
+            <td>
+              Biergarten Cassiopeia
+              <span class="bw-area">Friedrichshain</span>
+              <span class="bw-card-info">💳 Cards OK</span>
+            </td>
+            <td data-label="Vibe"><span class="bw-badge alternative">Alternative</span></td>
+            <td data-label="Key Highlight">Gritty urban sommergarten inside the street-art covered RAW-Gelände railway depot.</td>
+            <td data-label="Choose it if..."><span class="bw-pick">You want alternative industrial vibes</span> and a pre-party craft beer in a creative urban courtyard.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="bw-footer">Traditional Pick: Prater Biergarten. Scenic Pick: Café am Neuen See. Craft Pick: BRLO Brwhouse. Alternative Pick: Cassiopeia.</div>
+  </div>
+</div>
+</body>
+</html>
