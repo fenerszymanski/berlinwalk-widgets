@@ -4,6 +4,19 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Codex (Ultimate weather fail-soft fallback)
+
+**Did:** Fixed Ultimate Trip Planner weather behavior so failed mobile/API fetches no longer show "weather unavailable"; they fall back to Berlin monthly averages.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added a 6.5s Open-Meteo timeout, validates the JSON payload, treats API/timeout/parse failures as monthly-average fallback, removes the visible `Weather fallback` / `Weather check unavailable` state, and keeps daily weather chips populated from climate fallback.
+- QA: Open-Meteo endpoint returned 16 daily forecast rows locally; `launch-audit.mjs` passed `153 pass`; Playwright checked live forecast, `weather=off` fallback, and exact 15-day edge date with no `unavailable` text and daily weather chips present.
+
+**Opened:** Push/deploy needed, then test on phone again against GitHub/Wix cache-busted URL.
+**Closed:** Local weather API, fallback, and 15-day boundary behavior are fixed.
+
+**Next session should:** After push/deploy, retest the same phone scenario; if mobile still fails live API, the UI should now show monthly averages instead of an unavailable state.
+
 ## 2026-06-06 — Codex (Homepage Trip Planner teaser)
 
 **Did:** Added a new standalone homepage Custom Element for promoting the `/berlin-trip-planner` page as its own homepage section.

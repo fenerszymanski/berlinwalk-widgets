@@ -9973,6 +9973,7 @@
   var COORDS = { latitude: 52.521918, longitude: 13.413215 };
   var TIMEZONE = 'Europe/Berlin';
   var FORECAST_MAX_DAYS = 15;
+  var WEATHER_TIMEOUT_MS = 6500;
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=ultimate_berlin_trip_planner&utm_content=book_free_spot';
   var BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
   var BOOKING_SHORT_LABEL = 'berlinwalk.com/book';
@@ -13106,7 +13107,6 @@
     });
     var rainConcern = state.mustHandle.indexOf('rain') !== -1 || Boolean(latestWeather && (latestWeather.theme === 'rain' || latestWeather.theme === 'storm'));
     var farForecast = Boolean(latestWeather && latestWeather.mode === 'Monthly average');
-    var fallbackWeather = Boolean(latestWeather && latestWeather.mode === 'Weather fallback');
     var openingValue = sundayLike
       ? 'Day ' + sundayLike.day.dayNumber + ' shop rules'
       : mondayMuseum
@@ -13115,7 +13115,7 @@
           ? 'Monday caution'
           : 'Normal rhythm';
     var weatherValue = latestWeather
-      ? (farForecast ? 'Monthly average' : (fallbackWeather ? 'Manual check' : latestWeather.title.replace(/, around.*$/, '')))
+      ? (farForecast ? 'Monthly average' : latestWeather.title.replace(/, around.*$/, ''))
       : 'Checking';
     var routeBias = rainConcern
       ? 'Covered backup ready'
@@ -15849,6 +15849,28 @@
     return WEATHER_API_URL + '?' + params.toString();
   }
 
+  async function fetchWeatherJson(url) {
+    var controller = typeof AbortController === 'function' ? new AbortController() : null;
+    var timeoutId = null;
+    var request = fetch(url, controller ? { signal: controller.signal } : {});
+    var timeout = new Promise(function (_resolve, reject) {
+      timeoutId = setTimeout(function () {
+        if (controller) controller.abort();
+        reject(new Error('Weather request timed out'));
+      }, WEATHER_TIMEOUT_MS);
+    });
+    try {
+      var response = await Promise.race([request, timeout]);
+      if (!response || !response.ok) throw new Error('Weather request failed: ' + (response ? response.status : 'no_response'));
+      var data = await response.json();
+      if (!data || data.error) throw new Error('Weather API error: ' + (data && data.reason ? data.reason : 'unknown'));
+      if (!data.daily || !Array.isArray(data.daily.time)) throw new Error('Weather daily data missing');
+      return data;
+    } finally {
+      if (timeoutId) clearTimeout(timeoutId);
+    }
+  }
+
   function planHour() {
     if (state.arrivalTime === 'morning') return 11;
     if (state.arrivalTime === 'lateMorning') return 12;
@@ -16052,15 +16074,7 @@
   }
 
   function fallbackWeatherForDate(dateKey) {
-    return {
-      dateKey: dateKey,
-      mode: 'Weather fallback',
-      theme: 'sunny',
-      icon: 'WX',
-      title: 'Weather check unavailable',
-      meta: 'Check temp / rain / wind',
-      cue: 'Keep one flexible covered backup and re-check before you go.'
-    };
+    return climateWeatherForDate(dateKey);
   }
 
   function setDailyWeatherMap(map) {
@@ -16168,15 +16182,18 @@
     });
   }
 
-  function renderClimateWeather() {
+  function renderClimateWeather(reason) {
     var month = MONTH_CLIMATE[dateParts(state.arrivalDate).month - 1];
+    var copy = reason === 'api_fallback'
+      ? 'The live forecast could not load just now, so this uses Berlin monthly averages until you can re-check.'
+      : 'This date is too far out for a reliable live forecast, so use Berlin climate averages.';
     renderWeather({
       mode: 'Monthly average',
       dateText: month.name,
       theme: 'climate',
       icon: 'AVG',
       title: month.name + ' average: ' + month.hi + ' C high',
-      copy: 'This date is too far out for a reliable live forecast, so use Berlin climate averages.',
+      copy: copy,
       metrics: [
         { label: 'Avg high', value: month.hi + ' C' },
         { label: 'Avg low', value: month.lo + ' C' },
@@ -16184,24 +16201,11 @@
       ],
       advice: month.pack
     });
-    track('bw_trip_planner_weather_climate_view', { date: state.arrivalDate, month: month.name });
+    track('bw_trip_planner_weather_climate_view', { date: state.arrivalDate, month: month.name, reason: reason || 'future_date' });
   }
 
   function renderWeatherFallback() {
-    renderWeather({
-      mode: 'Weather fallback',
-      dateText: formatDisplayDate(state.arrivalDate),
-      theme: 'sunny',
-      icon: 'WX',
-      title: 'Weather check unavailable',
-      copy: 'The live forecast could not load just now. The trip plan still works.',
-      metrics: [
-        { label: 'Temp', value: 'Check' },
-        { label: 'Rain', value: 'Check' },
-        { label: 'Wind', value: 'Check' }
-      ],
-      advice: 'Wear comfortable shoes and bring one layer you can add or remove.'
-    });
+    renderClimateWeather('api_fallback');
   }
 
   async function loadWeather() {
@@ -16210,6 +16214,7 @@
     if (params.get('weather') === 'off') {
       setDailyWeatherMap(fallbackDailyWeatherMap());
       renderWeatherFallback();
+      track('bw_trip_planner_weather_fallback', { date: state.arrivalDate, reason: 'weather_off' });
       return;
     }
     var dayDiff = daysFromToday(state.arrivalDate);
@@ -16233,9 +16238,7 @@
       advice: 'Comfortable shoes and one layer are the safest Berlin default.'
     });
     try {
-      var response = await fetch(buildWeatherUrl());
-      if (!response.ok) throw new Error('Weather request failed: ' + response.status);
-      var data = await response.json();
+      var data = await fetchWeatherJson(buildWeatherUrl());
       if (requestId !== weatherRequestId) return;
       var forecast = extractForecast(data);
       if (!forecast) throw new Error('No matching forecast');
@@ -16250,7 +16253,7 @@
       if (requestId !== weatherRequestId) return;
       setDailyWeatherMap(fallbackDailyWeatherMap());
       renderWeatherFallback();
-      track('bw_trip_planner_weather_error', { reason: 'fetch_or_parse_failed' });
+      track('bw_trip_planner_weather_fallback', { date: state.arrivalDate, reason: 'fetch_or_parse_failed' });
     }
   }
 
