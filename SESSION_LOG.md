@@ -4,6 +4,21 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Antigravity (Added 2 unique images and SEO configuration)
+
+**Did:**
+- Generated 2 more unique, atmospheric, non-generic AI images (Cassiopeia alternative scene and BrewDog DogTap industrial gasworks).
+- Embedded them with descriptive alt texts in the blog post body.
+- Configured Wix SEO settings in the uploader script (og:image, twitter:image, and 5 validated keywords limit).
+- Uploaded and updated the Wix blog draft.
+
+**Changed:**
+- `blog-drafts/berlin-beer-gardens-guide.body.md` — inserted DogTap and Cassiopeia images with descriptive alt texts.
+- `create-wix-beer-gardens-blog-draft.js` (root) — added `og:image` and `twitter:image` to `seoData()`, and limited keywords to 5.
+- Wix: updated draft `b1fd6483-089c-4e1f-9bf3-f7efd72d15db` to 160 nodes, 5 images, 4 embeds, and full SEO tags.
+
+**Next session should:** Wait for Yusuf to review the draft and push the widgets repository using his local client.
+
 ## 2026-06-06 — Antigravity (Added beer gardens comparison widget)
 
 **Did:**

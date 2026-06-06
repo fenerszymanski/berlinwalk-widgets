@@ -119,6 +119,8 @@ It offers a classic beer garden experience: long wooden tables directly facing t
 
 ### 10. BrewDog DogTap Berlin (Mariendorf)
 
+![Massive modern craft beer garden set in the historic red-brick gasworks of Mariendorf in Berlin with a large gasometer and picnic tables](blog-media/beer-gardens/dogtap-mariendorf.png)
+
 If you want scale, BrewDog DogTap is a craft beer destination in Mariendorf, in Berlin's south. Set inside a beautifully restored historic gasworks building from 1901, the venue combines historic red-brick industrial scale with a massive, modern outdoor craft beer garden.
 
 The outdoor lawns are enormous, offering picnic tables, fire pits, games like giant Jenga, and plenty of space to relax. They pour over 60 draft craft beers, including BrewDog's global favorites and locally brewed Berlin specials, alongside a modern menu featuring burgers, wings, and pizzas. While it requires a U-Bahn (U6 to Alt-Mariendorf) and a short bus ride or S-Bahn (S2 to Attilastraße) to reach from the center, its impressive size and industrial-heritage architecture make it a popular weekend destination for families and craft beer fans alike.
@@ -136,6 +138,8 @@ The outdoor seating area is shaded by a magnificent, ancient oak tree and surrou
 * **Best for:** An authentic, local microbrewery vibe under a giant oak.
 
 ### 12. Biergarten Cassiopeia (Friedrichshain)
+
+![Alternative outdoor Sommergarten inside the gritty industrial RAW-Gelände in Berlin Friedrichshain with string lights and brick walls](blog-media/beer-gardens/cassiopeia-biergarten.png)
 
 For a beer garden experience that could only exist in Berlin, head to Cassiopeia Sommergarten. Located inside the RAW-Gelände in Friedrichshain—a former train repair yard turned cultural and nightlife hub—this outdoor space is surrounded by industrial ruins, street art, and climbing walls.
 
