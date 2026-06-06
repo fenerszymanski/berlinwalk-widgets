@@ -10,7 +10,7 @@ This page wraps the existing Ultimate Berlin Trip Planner widget in a branded Be
 - visual coverage cards
 - final CTA back to the planner
 
-The component forwards parent-page query params into the widget iframe. This means future email links can use:
+The component forwards parent-page query params into the widget iframe. Ultimate email links can use:
 
 `https://www.berlinwalk.com/berlin-trip-planner?date=2026-07-17&tripLength=3&planAccess=1`
 

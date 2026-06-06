@@ -49,5 +49,5 @@ Add this to the page body:
 ## Notes
 
 - This page is meant to replace the generic tools-grid placement for the Ultimate Planner.
-- Future email `${planUrl}` should point to `/berlin-trip-planner` once the page is live.
-- The page component forwards saved query params, including `planAccess=1`, into the embedded planner iframe.
+- Ultimate email `${planUrl}` points to `/berlin-trip-planner` and keeps saved query params, including `planAccess=1`, so returning users open the full plan without rebuilding it.
+- The page component forwards saved query params into the embedded planner iframe.

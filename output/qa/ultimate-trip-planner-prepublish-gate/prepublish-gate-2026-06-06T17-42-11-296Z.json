@@ -1,0 +1,180 @@
+{
+  "generatedAt": "2026-06-06T17:42:11.295Z",
+  "readyForVeloPaste": true,
+  "idsPath": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json",
+  "idState": {
+    "idsFileExists": true,
+    "total": 5,
+    "valid": 5,
+    "applied": 5,
+    "missing": 0,
+    "invalid": 0,
+    "duplicate": 0,
+    "rows": [
+      {
+        "path": "sales",
+        "stage": "instant",
+        "placeholder": "TODO_TRIP_PLANNER_INSTANT",
+        "html": "e0-instant-plan.html",
+        "raw": "VLDqhLM",
+        "id": "VLDqhLM",
+        "reason": "",
+        "duplicate": "",
+        "applied": true,
+        "placeholderPresent": false
+      },
+      {
+        "path": "sales",
+        "stage": "minus7",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_7",
+        "html": "e1-seven-days-before.html",
+        "raw": "VLDvLj8",
+        "id": "VLDvLj8",
+        "reason": "",
+        "duplicate": "",
+        "applied": true,
+        "placeholderPresent": false
+      },
+      {
+        "path": "sales",
+        "stage": "minus3",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_3",
+        "html": "e2-three-days-before.html",
+        "raw": "VLDvnng",
+        "id": "VLDvnng",
+        "reason": "",
+        "duplicate": "",
+        "applied": true,
+        "placeholderPresent": false
+      },
+      {
+        "path": "sales",
+        "stage": "minus1",
+        "placeholder": "TODO_TRIP_PLANNER_MINUS_1",
+        "html": "e3-one-day-before.html",
+        "raw": "VLDwKUu",
+        "id": "VLDwKUu",
+        "reason": "",
+        "duplicate": "",
+        "applied": true,
+        "placeholderPresent": false
+      },
+      {
+        "path": "sales",
+        "stage": "dayOf",
+        "placeholder": "TODO_TRIP_PLANNER_DAY_OF",
+        "html": "e4-arrival-day.html",
+        "raw": "VLDwjZc",
+        "id": "VLDwjZc",
+        "reason": "",
+        "duplicate": "",
+        "applied": true,
+        "placeholderPresent": false
+      }
+    ]
+  },
+  "sourceState": {
+    "todos": [],
+    "hasLeadEndpoint": true,
+    "hasAiEndpoint": true,
+    "hasBookingEndpoint": true,
+    "hasGeminiBackend": true,
+    "hasAiPrivacyScrub": true,
+    "aiPayloadAvoidsEmail": true,
+    "hasAiQuotaGuard": true,
+    "hasScheduler": true,
+    "bookedSuppression": true
+  },
+  "collection": {
+    "ok": true,
+    "status": 200,
+    "fieldCount": 77,
+    "missingCriticalFields": [],
+    "schemaOk": true
+  },
+  "checks": [
+    {
+      "name": "Triggered Email ID file exists",
+      "ok": true,
+      "status": "PASS",
+      "detail": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/ultimate-berlin-trip-planner/email/paste-ready/message-ids.local.json"
+    },
+    {
+      "name": "All 5 IDs are valid and unique",
+      "ok": true,
+      "status": "PASS",
+      "detail": "5/5 valid, duplicate rows 0"
+    },
+    {
+      "name": "All 5 IDs are applied in tripPlannerFunnel.js",
+      "ok": true,
+      "status": "PASS",
+      "detail": "5/5 applied"
+    },
+    {
+      "name": "No TODO_TRIP_PLANNER placeholders remain",
+      "ok": true,
+      "status": "PASS",
+      "detail": "no placeholders found"
+    },
+    {
+      "name": "Velo HTTP endpoints are present",
+      "ok": true,
+      "status": "PASS",
+      "detail": "tripPlannerLead and tripPlannerBooking handlers"
+    },
+    {
+      "name": "Velo AI polish endpoint is present",
+      "ok": true,
+      "status": "PASS",
+      "detail": "tripPlannerAi options/post handlers call enhanceTripPlannerPlan"
+    },
+    {
+      "name": "Gemini backend is fail-soft and bounded",
+      "ok": true,
+      "status": "PASS",
+      "detail": "Gemini 2.5 Flash, backend-only secret names, responseJsonSchema, maxOutputTokens 1200, thinkingBudget 0, missing-key fallback"
+    },
+    {
+      "name": "AI enhancement payload is privacy-scrubbed",
+      "ok": true,
+      "status": "PASS",
+      "detail": "Gemini-bound text fields drop private-looking text before prompt assembly"
+    },
+    {
+      "name": "AI enhancement payload avoids email",
+      "ok": true,
+      "status": "PASS",
+      "detail": "validateAiEnhancementPayload should not accept or forward email/PII to Gemini"
+    },
+    {
+      "name": "AI quota guard is backend-enforced",
+      "ok": true,
+      "status": "PASS",
+      "detail": "email + arrival date max 2 Gemini generations before quota fallback"
+    },
+    {
+      "name": "Hourly scheduler is present",
+      "ok": true,
+      "status": "PASS",
+      "detail": "processTripPlannerDueEmails hourly job"
+    },
+    {
+      "name": "Booked leads suppress Ultimate reminders",
+      "ok": true,
+      "status": "PASS",
+      "detail": "existing Wix booking sequence owns booked-guest prep"
+    },
+    {
+      "name": "TripPlannerLeads critical fields pass remote gate",
+      "ok": true,
+      "status": "PASS",
+      "detail": "77 fields visible; critical fields verified"
+    }
+  ],
+  "summary": {
+    "pass": 13,
+    "warn": 0,
+    "block": 0
+  }
+}

@@ -325,7 +325,7 @@
       <aside class="bw-status">
         <div>
           <p class="bw-kicker">Generated</p>
-          <p><strong>2026-06-04 22:05:33</strong></p>
+          <p><strong>2026-06-06 17:39:26</strong></p>
           <p class="bw-footer-note">Source folder: <code>ultimate-berlin-trip-planner/velo/</code></p>
         </div>
         <div class="bw-alert is-good">
@@ -389,8 +389,8 @@ node ultimate-berlin-trip-planner/launch-audit.mjs</textarea>
       <p class="bw-target">Create this backend file in Wix Developer Tools.</p>
       <p class="bw-note">Paste the full source into a new Backend file named tripPlannerFunnel.js.</p>
       <div class="bw-meta">
-        <span>971 lines</span>
-        <span>31.9 KB</span>
+        <span>988 lines</span>
+        <span>32.5 KB</span>
         <span>tripPlannerFunnel.js</span>
       </div>
       <textarea id="source-funnel" readonly spellcheck="false">import wixData from 'wix-data';
@@ -402,6 +402,7 @@ const COLLECTION = 'TripPlannerLeads';
 const CONTACT_LABEL = 'Ultimate Berlin Trip Planner Lead';
 const TIMEZONE = 'Europe/Berlin';
 const BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
+const BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
 const DUE_QUERY_PAGE_SIZE = 100;
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta/models';
 const GEMINI_DEFAULT_MODEL = 'gemini-2.5-flash';
@@ -1046,6 +1047,22 @@ function shouldSuppressUltimateReminder(lead, stage) {
   return Boolean(stage &amp;&amp; stage.key !== 'instant' &amp;&amp; isBookedLead(lead));
 }
 
+function planUrlForEmail(lead) {
+  const raw = String(lead &amp;&amp; lead.page || BRANDED_PLANNER_URL);
+  try {
+    const source = new URL(raw, BRANDED_PLANNER_URL);
+    const branded = new URL(BRANDED_PLANNER_URL);
+    source.searchParams.forEach((value, key) =&gt; {
+      branded.searchParams.set(key, value);
+    });
+    branded.searchParams.set('context', branded.searchParams.get('context') || 'tool');
+    branded.searchParams.set('planAccess', '1');
+    return branded.toString();
+  } catch (error) {
+    return `${BRANDED_PLANNER_URL}?context=tool&amp;planAccess=1`;
+  }
+}
+
 function emailVariables(lead, stage) {
   const booked = isBookedLead(lead);
   return {
@@ -1098,7 +1115,7 @@ function emailVariables(lead, stage) {
     bookingStatus: String(lead.bookingStatus || ''),
     tourDate: String(lead.tourDate || ''),
     bookingUrl: BOOKING_SHORT_URL,
-    planUrl: String(lead.page || 'https://www.berlinwalk.com/tools/ultimate-berlin-trip-planner'),
+    planUrl: planUrlForEmail(lead),
     meetingPointUrl: String(lead.meetingPointUrl || 'https://www.berlinwalk.com/meeting-point'),
     firstDayPlannerUrl: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',
     ticketCalculatorUrl: 'https://www.berlinwalk.com/tools/transport-ticket-calculator',

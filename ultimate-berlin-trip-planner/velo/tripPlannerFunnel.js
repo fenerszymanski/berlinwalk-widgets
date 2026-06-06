@@ -7,7 +7,7 @@ const COLLECTION = 'TripPlannerLeads';
 const CONTACT_LABEL = 'Ultimate Berlin Trip Planner Lead';
 const TIMEZONE = 'Europe/Berlin';
 const BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
-const DIRECT_WIDGET_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/';
+const BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
 const DUE_QUERY_PAGE_SIZE = 100;
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta/models';
 const GEMINI_DEFAULT_MODEL = 'gemini-2.5-flash';
@@ -653,18 +653,18 @@ function shouldSuppressUltimateReminder(lead, stage) {
 }
 
 function planUrlForEmail(lead) {
-  const raw = String(lead && lead.page || DIRECT_WIDGET_URL);
+  const raw = String(lead && lead.page || BRANDED_PLANNER_URL);
   try {
-    const source = new URL(raw, DIRECT_WIDGET_URL);
-    const direct = new URL(DIRECT_WIDGET_URL);
+    const source = new URL(raw, BRANDED_PLANNER_URL);
+    const branded = new URL(BRANDED_PLANNER_URL);
     source.searchParams.forEach((value, key) => {
-      direct.searchParams.set(key, value);
+      branded.searchParams.set(key, value);
     });
-    direct.searchParams.set('context', direct.searchParams.get('context') || 'tool');
-    direct.searchParams.set('planAccess', '1');
-    return direct.toString();
+    branded.searchParams.set('context', branded.searchParams.get('context') || 'tool');
+    branded.searchParams.set('planAccess', '1');
+    return branded.toString();
   } catch (error) {
-    return `${DIRECT_WIDGET_URL}?context=tool&planAccess=1`;
+    return `${BRANDED_PLANNER_URL}?context=tool&planAccess=1`;
   }
 }
 

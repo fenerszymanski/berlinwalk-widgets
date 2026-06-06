@@ -4,6 +4,22 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-06 — Codex (Ultimate branded email plan links)
+
+**Did:** Switched Ultimate Trip Planner email plan links from the raw GitHub widget URL to the branded `/berlin-trip-planner` page with saved choices and unlocked access.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — `planUrlForEmail()` now builds `https://www.berlinwalk.com/berlin-trip-planner?...&planAccess=1`, preserving existing plan query params and defaulting `context=tool`.
+- `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — dry-run/live smoke payloads now use the branded planner page as `page`.
+- `ultimate-berlin-trip-planner/velo/install-kit.html` — regenerated paste-ready Wix Velo install kit.
+- `berlin-trip-planner-page/README.md`, `berlin-trip-planner-page/SEO_SETTINGS.md`, root `PROJECT_MEMORY.md` — documented that Ultimate email `${planUrl}` now targets the branded saved-plan page.
+- QA: `launch-audit.mjs` passed `153 pass`; `velo/prepublish-gate.mjs` passed `13 pass, 0 block`; syntax checks passed.
+
+**Opened:** Paste/publish the updated Velo `Backend/tripPlannerFunnel.js` in Wix so live emails stop showing GitHub Pages URLs.
+**Closed:** Local email plan URL generation now points at the branded Trip Planner page.
+
+**Next session should:** After Wix publish, send one test email and confirm `${planUrl}` opens `/berlin-trip-planner` with the plan unlocked and choices restored.
+
 ## 2026-06-06 — Codex (Ultimate guide-note gate)
 
 **Did:** Changed the Ultimate Trip Planner unlock flow so the full itinerary waits for Yusuf/Gemini guide note before revealing the day cards.
