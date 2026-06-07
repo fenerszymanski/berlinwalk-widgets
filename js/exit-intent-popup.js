@@ -4,7 +4,8 @@
 (function () {
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner#planner';
-  var IMAGE_URL = getImageUrl();
+  var HERO_IMAGE_URL = getImageUrl('hero');
+  var MOCKUP_IMAGE_URL = getImageUrl('mockup');
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
   var STYLE_ID = 'bw-exit-intent-styles';
@@ -16,11 +17,12 @@
   var currentStep = 1;
   var closeTracked = false;
 
-  function getImageUrl() {
+  function getImageUrl(type) {
+    var file = type === 'hero' ? 'berlin-trip-planner-hero.jpg' : 'berlin-trip-planner-mockup.png';
     if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
-      return 'ultimate-berlin-trip-planner/assets/berlin-trip-planner-mockup.png';
+      return 'ultimate-berlin-trip-planner/assets/' + file;
     }
-    return 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/assets/berlin-trip-planner-mockup.png';
+    return 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/assets/' + file;
   }
 
   function isPreviewForced() {
@@ -106,6 +108,12 @@
       '.bw-exit-media{position:relative;aspect-ratio:16/7;min-height:210px;overflow:hidden;background:#123d16;}',
       '.bw-exit-media img{width:100%;height:100%;display:block;object-fit:cover;}',
       '.bw-exit-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,9,0) 28%,rgba(8,20,9,.42) 100%);}',
+      '.bw-exit-preview-overlay{position:absolute!important;bottom:16px!important;right:22px!important;width:185px!important;border-radius:6px!important;background:#1e1e1e!important;border:1px solid rgba(255,255,255,.15)!important;box-shadow:0 20px 45px rgba(0,0,0,.5)!important;overflow:hidden!important;z-index:3!important;transform:rotate(3deg)!important;transition:transform .25s cubic-bezier(.175,.885,.32,1.275),box-shadow .25s ease!important;}',
+      '.bw-exit-preview-overlay:hover{transform:rotate(0deg) scale(1.06)!important;box-shadow:0 25px 55px rgba(0,0,0,.6),0 0 15px rgba(255,230,0,.2)!important;}',
+      '.bw-exit-mockup-header{height:12px!important;background:#2d2d2d!important;display:flex!important;align-items:center!important;gap:3px!important;padding:0 6px!important;border-bottom:1px solid rgba(255,255,255,.08)!important;}',
+      '.bw-exit-mockup-dot{width:4px!important;height:4px!important;border-radius:50%!important;background:rgba(255,255,255,.3)!important;display:inline-block!important;}',
+      '.bw-exit-mockup-screen{aspect-ratio:1.5!important;overflow:hidden!important;background:#1b5e20!important;}',
+      '.bw-exit-mockup-screen img{width:100%!important;height:100%!important;object-fit:cover!important;object-position:top center!important;display:block!important;}',
       '.bw-exit-badge{position:absolute;left:22px;bottom:18px;z-index:2;max-width:calc(100% - 44px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-radius:999px;background:rgba(27,94,32,.88);color:#FFE600;border:1px solid rgba(255,230,0,.32);padding:8px 12px;font-size:11px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase;box-shadow:0 10px 24px rgba(0,0,0,.24);}',
       '.bw-exit-inner{position:relative;padding:28px 38px 34px;text-align:left;}',
       '.bw-exit-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(250,250,245,.1);color:#FAFAF5;font:800 24px/1 Arial,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:background-color .18s ease,transform .18s ease;}',
@@ -181,7 +189,20 @@
     overlay.innerHTML = [
       '<div class="bw-exit-card" role="dialog" aria-modal="true" aria-labelledby="bw-exit-title">',
       '<button class="bw-exit-close" type="button" aria-label="Close" data-bw-exit-close>&times;</button>',
-      '<div class="bw-exit-media"><img src="' + IMAGE_URL + '" alt="Berlin Trip Planner hero" width="720" height="404"><span class="bw-exit-badge">Berlin Trip Planner</span></div>',
+      '<div class="bw-exit-media">',
+        '<img src="' + HERO_IMAGE_URL + '" alt="Berlin Cathedral illustration" width="720" height="404">',
+        '<div class="bw-exit-preview-overlay">',
+          '<div class="bw-exit-mockup-header">',
+            '<span class="bw-exit-mockup-dot"></span>',
+            '<span class="bw-exit-mockup-dot"></span>',
+            '<span class="bw-exit-mockup-dot"></span>',
+          '</div>',
+          '<div class="bw-exit-mockup-screen">',
+            '<img src="' + MOCKUP_IMAGE_URL + '" alt="Berlin Trip Planner tool mockup">',
+          '</div>',
+        '</div>',
+        '<span class="bw-exit-badge">Berlin Trip Planner</span>',
+      '</div>',
       '<div class="bw-exit-inner">',
       '<section class="bw-exit-step bw-exit-active" data-bw-exit-step="1">',
       '<p class="bw-exit-kicker">Free Travel Tool</p>',
