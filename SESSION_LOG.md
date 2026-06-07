@@ -2,6 +2,18 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-08 — Codex (Trip Planner first-party tracking)
+
+**Did:**
+- Added first-party anonymous event tracking to the Ultimate Berlin Trip Planner while keeping existing `dataLayer`, `gtag`, and Meta `fbq trackCustom` events.
+- Tracks page view/start, first form start, plan build/result, gate view, lead submit/unlock success, PDF download, print, copy-link share, WhatsApp share, and book clicks to `https://berlinwalk-content-app.vercel.app/api/tp-event`.
+- Enriches events with safe trip/context fields, UTMs, referrer/landing page, device width, visitor/session IDs, and paid-source hints; email is not sent.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added first-party tracking endpoint, visitor/session IDs, safe payload enrichment, page-view event, and first form-start event.
+
+**Next session should:** After GitHub Pages deploy, smoke-test live `/berlin-trip-planner` and confirm the local dashboard at `http://127.0.0.1:4177/planner` receives real events.
+
 ## 2026-06-08 — Codex (Mobile menu NEW badge polish)
 
 **Did:**

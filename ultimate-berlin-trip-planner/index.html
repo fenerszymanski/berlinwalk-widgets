@@ -10135,6 +10135,10 @@
   var YUSUF_GUIDE_PHOTO_URL = 'assets/yusuf-local-guide.jpg';
   var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerLead';
   var AI_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerAi';
+  var TRACK_EVENT_URL = 'https://berlinwalk-content-app.vercel.app/api/tp-event';
+  var TRACK_STORAGE_KEY = 'bwTripPlannerTracking.v1';
+  var TRACK_VISITOR_KEY = 'bwTripPlannerVisitorId.v1';
+  var TRACK_SESSION_KEY = 'bwTripPlannerSessionId.v1';
   var AI_GENERATION_LIMIT = 2;
   var LEGACY_UNLOCK_KEY = 'bw_trip_planner_unlock';
   var UNLOCK_KEY = 'bw_trip_planner_unlock_session_v3';
@@ -10440,6 +10444,7 @@
   resetLocalUnlockForQa();
   var unlocked = isUnlocked() || forceLocalUnlockForQa() || shouldOpenEmailPlan();
   var gateViewTracked = false;
+  var formStartTracked = false;
   var emailFocusTracked = false;
   var emailValidTracked = false;
   var expandedLists = {
@@ -10498,12 +10503,221 @@
     hackescher_markt_market: { label: 'Hackescher Markt Weekly Market', query: 'Wochenmarkt Hackescher Markt Berlin', area: 'Mitte', type: 'food', lat: 52.5221, lng: 13.4027, why: 'A lively open-air street food market operating only on Thursdays and Saturdays.' }
   };
 
-  function track(event, params) {
-    var payload = params || {};
+  var tripPlannerTracking = null;
+
+  function randomTrackingId(prefix) {
+    return prefix + '_' + Math.random().toString(36).slice(2) + '_' + Date.now().toString(36);
+  }
+
+  function readTrackingJson(storage, key) {
     try {
+      var raw = storage && storage.getItem(key);
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function writeTrackingJson(storage, key, value) {
+    try {
+      if (storage) storage.setItem(key, JSON.stringify(value));
+    } catch (error) {}
+  }
+
+  function getTrackingCookie(name) {
+    try {
+      var parts = String(document.cookie || '').split(';');
+      for (var i = 0; i < parts.length; i += 1) {
+        var pair = parts[i].split('=');
+        if (pair[0] && pair[0].trim() === name) return decodeURIComponent(pair.slice(1).join('=') || '');
+      }
+    } catch (error) {}
+    return '';
+  }
+
+  function getOrCreateTrackingId(storage, key, prefix) {
+    try {
+      var existing = storage && storage.getItem(key);
+      if (existing) return existing;
+      var value = randomTrackingId(prefix);
+      if (storage) storage.setItem(key, value);
+      return value;
+    } catch (error) {
+      return randomTrackingId(prefix);
+    }
+  }
+
+  function referrerUrl() {
+    try {
+      var ref = String(document.referrer || '');
+      if (!ref) return null;
+      return new URL(ref);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function visiblePagePath() {
+    var ref = referrerUrl();
+    if (ref && /(^|\.)berlinwalk\.com$/i.test(ref.hostname)) return ref.pathname || '/';
+    return window.location.pathname || '/';
+  }
+
+  function visiblePageUrl() {
+    var ref = referrerUrl();
+    if (ref && /(^|\.)berlinwalk\.com$/i.test(ref.hostname)) return ref.toString();
+    return window.location.href;
+  }
+
+  function trackingPaidSignal(data) {
+    var joined = [
+      data.utm_source,
+      data.utm_medium,
+      data.utm_campaign,
+      data.fbclid,
+      data.fbc,
+      data.fbp
+    ].join(' ').toLowerCase();
+    return /(^|[^a-z])(meta|facebook|instagram|fb|ig|paid|cpc|paid_social)([^a-z]|$)/i.test(joined) || Boolean(data.fbclid);
+  }
+
+  function initTripPlannerTracking() {
+    var params = new URLSearchParams(window.location.search || '');
+    var stored = readTrackingJson(window.localStorage, TRACK_STORAGE_KEY) || {};
+    var current = {
+      utm_source: params.get('utm_source') || '',
+      utm_medium: params.get('utm_medium') || '',
+      utm_campaign: params.get('utm_campaign') || '',
+      utm_content: params.get('utm_content') || '',
+      utm_term: params.get('utm_term') || '',
+      fbclid: params.get('fbclid') || '',
+      fbc: getTrackingCookie('_fbc'),
+      fbp: getTrackingCookie('_fbp')
+    };
+    var hasCurrentAttribution = Boolean(
+      current.utm_source ||
+      current.utm_medium ||
+      current.utm_campaign ||
+      current.utm_content ||
+      current.utm_term ||
+      current.fbclid
+    );
+    var merged = Object.assign({}, stored);
+
+    merged.visitorId = merged.visitorId || getOrCreateTrackingId(window.localStorage, TRACK_VISITOR_KEY, 'bw_tpv');
+    merged.sessionId = getOrCreateTrackingId(window.sessionStorage, TRACK_SESSION_KEY, 'bw_tps');
+    merged.firstPage = merged.firstPage || visiblePagePath();
+    merged.landingPage = merged.landingPage || visiblePageUrl();
+    merged.createdAt = merged.createdAt || new Date().toISOString();
+
+    if (hasCurrentAttribution || !stored.utm_source) {
+      Object.keys(current).forEach(function (key) {
+        if (current[key]) merged[key] = current[key];
+      });
+      if (hasCurrentAttribution) merged.landingPage = stored.landingPage || visiblePageUrl();
+    }
+
+    merged.isPaid = trackingPaidSignal(merged);
+    merged.updatedAt = new Date().toISOString();
+    writeTrackingJson(window.localStorage, TRACK_STORAGE_KEY, merged);
+    return merged;
+  }
+
+  function tripPlannerStatePayload(extra) {
+    return Object.assign({
+      context: currentContext(),
+      arrival_date: state.arrivalDate,
+      trip_length: state.tripLength,
+      arrival_time: state.arrivalTime,
+      arrival_point: state.arrivalPoint,
+      stay_area: state.stayArea,
+      group_type: state.groupType,
+      first_time: state.firstTime,
+      interests: Array.isArray(state.interests) ? state.interests.join(',') : String(state.interests || ''),
+      budget_style: state.budgetStyle,
+      must_handle: Array.isArray(state.mustHandle) ? state.mustHandle.join(',') : String(state.mustHandle || ''),
+      pace: state.pace,
+      tour_intent: state.tourIntent,
+      plan_generated: planGenerated,
+      unlocked: unlocked
+    }, extra || {});
+  }
+
+  function sendTripPlannerTrackingEvent(event, payload) {
+    if (!/^bw_trip_planner_[a-z0-9_]{1,90}$/.test(String(event || ''))) return;
+    var tracking = tripPlannerTracking || initTripPlannerTracking();
+    tripPlannerTracking = tracking;
+    var body = JSON.stringify({
+      eventName: event,
+      eventId: randomTrackingId('bw_tpe'),
+      timestamp: new Date().toISOString(),
+      eventDate: new Date().toISOString().slice(0, 10),
+      sessionId: tracking.sessionId,
+      visitorId: tracking.visitorId,
+      isPaid: Boolean(tracking.isPaid),
+      pagePath: visiblePagePath(),
+      pageUrl: visiblePageUrl(),
+      referrer: document.referrer || '',
+      landingPage: tracking.landingPage || '',
+      firstPage: tracking.firstPage || '',
+      utmSource: tracking.utm_source || '',
+      utmMedium: tracking.utm_medium || '',
+      utmCampaign: tracking.utm_campaign || '',
+      utmContent: tracking.utm_content || '',
+      utmTerm: tracking.utm_term || '',
+      fbclid: tracking.fbclid || '',
+      fbc: tracking.fbc || '',
+      fbp: tracking.fbp || '',
+      screenWidth: String(window.screen && window.screen.width || ''),
+      viewportWidth: String(window.innerWidth || ''),
+      payload: payload || {}
+    });
+
+    function sendBeaconFallback() {
+      try {
+        if (navigator.sendBeacon) {
+          var blob = new Blob([body], { type: 'application/json' });
+          navigator.sendBeacon(TRACK_EVENT_URL, blob);
+        }
+      } catch (error) {}
+    }
+
+    try {
+      if (window.fetch) {
+        window.fetch(TRACK_EVENT_URL, {
+          method: 'POST',
+          mode: 'cors',
+          keepalive: true,
+          headers: { 'Content-Type': 'application/json' },
+          body: body
+        }).then(function (response) {
+          if (!response || !response.ok) sendBeaconFallback();
+        }).catch(sendBeaconFallback);
+        return;
+      }
+    } catch (error) {
+      sendBeaconFallback();
+      return;
+    }
+
+    sendBeaconFallback();
+  }
+
+  function track(event, params) {
+    var payload = tripPlannerStatePayload(params || {});
+    try {
+      window.dataLayer = window.dataLayer || [];
       if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: event }, payload));
       if (typeof window.gtag === 'function') window.gtag('event', event, payload);
+      if (typeof window.fbq === 'function') window.fbq('trackCustom', event, payload);
     } catch (error) {}
+    sendTripPlannerTrackingEvent(event, payload);
+  }
+
+  function trackFormStart(field) {
+    if (formStartTracked) return;
+    formStartTracked = true;
+    track('bw_trip_planner_form_start', { field: field || '' });
   }
 
   function escapeHtml(value) {
@@ -21034,6 +21248,7 @@
       var key = group && group.getAttribute('data-group');
       if (!key) return;
       var value = option.getAttribute('data-value');
+      trackFormStart(key);
       if (group.getAttribute('data-multi') === 'true') {
         option.classList.toggle('active');
         state[key] = Array.prototype.slice.call(group.querySelectorAll('.bw-option.active')).map(function (button) {
@@ -21258,6 +21473,7 @@
 
   root.addEventListener('change', function (event) {
     if (event.target && event.target.matches('[data-arrival-date]')) {
+      trackFormStart('arrivalDate');
       state.arrivalDate = /^\d{4}-\d{2}-\d{2}$/.test(event.target.value || '') ? event.target.value : addDays(berlinTodayKey(), 14);
       event.target.value = state.arrivalDate;
       setActionStatus('');
@@ -21277,6 +21493,12 @@
   loadWeather();
   installPlannerFrameSync();
   openEmailPlanFromLink();
+  track('bw_trip_planner_page_view', {
+    context: currentContext(),
+    arrival_date: state.arrivalDate,
+    trip_length: state.tripLength,
+    unlocked: unlocked
+  });
   track('bw_trip_planner_start', {
     context: currentContext(),
     arrival_date: state.arrivalDate,
