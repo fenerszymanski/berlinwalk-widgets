@@ -2,6 +2,17 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-07 — Antigravity (Berlin Trip Planner menu reorganization & tools page rename)
+
+**Did:**
+- Reorganized navigation menu to bring "Berlin Trip Planner" to the primary navigation directly, instead of placing it under Resources.
+- Added a glossy brand-style "NEW" badge next to "Berlin Trip Planner" in both desktop and mobile headers.
+- Renamed the general tools hub page link from "Plan Your Visit" to "Berlin Hacks" in both desktop and mobile headers and footers.
+
+**Changed:**
+- `site-header/site-header-element.js` — added `planner` link, updated dropdown menu layout, added `.bw-badge-new` CSS class, added "Berlin Trip Planner" link with new badge directly to primary desktop and mobile navigation, and renamed "Plan Your Visit" to "Berlin Hacks".
+- `site-footer/site-footer-element.js` — added "Berlin Trip Planner" link with new badge and renamed "Plan Your Visit" to "Berlin Hacks".
+
 ## 2026-06-07 — Antigravity (Berlin Trip Planner widget system copy updated and character limit increased)
 
 **Did:**

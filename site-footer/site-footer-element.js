@@ -8,7 +8,8 @@ const BW_SITE_FOOTER_LINKS = {
   faq: 'https://www.berlinwalk.com/#faq',
   guide: 'https://www.berlinwalk.com/the-guide',
   blog: 'https://www.berlinwalk.com/blog',
-  plan: 'https://www.berlinwalk.com/berlin-tools',
+  planner: 'https://www.berlinwalk.com/berlin-trip-planner',
+  tools: 'https://www.berlinwalk.com/berlin-tools',
   widgets: 'https://www.berlinwalk.com/widgets',
   instagram: 'https://www.instagram.com/berlinwalkingtour/',
   transport: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
@@ -200,6 +201,20 @@ class BWSiteFooterElement extends HTMLElement {
           transform: translateX(2px);
         }
 
+        .bw-site-footer .bw-badge-new {
+          background: var(--yellow);
+          color: var(--green-dark);
+          font-size: 8px;
+          font-weight: 800;
+          padding: 2px 5px;
+          border-radius: 4px;
+          margin-left: 6px;
+          display: inline-block;
+          vertical-align: middle;
+          letter-spacing: 0.5px;
+          line-height: 1;
+        }
+
         .bw-site-footer .bw-footer-note-grid {
           border-top: 1px solid rgba(197, 225, 165, 0.22);
           display: grid;
@@ -342,7 +357,8 @@ class BWSiteFooterElement extends HTMLElement {
             ${this._renderLinkColumn('Explore', [
               ['The Guide', BW_SITE_FOOTER_LINKS.guide],
               ['Blog', BW_SITE_FOOTER_LINKS.blog],
-              ['Plan Your Visit', BW_SITE_FOOTER_LINKS.plan],
+              ['Berlin Trip Planner', BW_SITE_FOOTER_LINKS.planner],
+              ['Berlin Hacks', BW_SITE_FOOTER_LINKS.tools],
               ['Embed Berlin Tools', BW_SITE_FOOTER_LINKS.widgets],
               ['Instagram', BW_SITE_FOOTER_LINKS.instagram]
             ])}
@@ -379,9 +395,13 @@ class BWSiteFooterElement extends HTMLElement {
       <nav class="bw-footer-col" aria-label="${this._escapeHtml(title)}">
         <h3>${this._escapeHtml(title)}</h3>
         <ul class="bw-footer-links">
-          ${links.map(([label, href]) => `
-            <li><a href="${this._escapeAttribute(href)}">${this._escapeHtml(label)}</a></li>
-          `).join('')}
+          ${links.map(([label, href]) => {
+            var isPlanner = href.indexOf('berlin-trip-planner') !== -1;
+            var labelHtml = isPlanner 
+              ? this._escapeHtml(label) + '<span class="bw-badge-new">NEW</span>' 
+              : this._escapeHtml(label);
+            return '<li><a href="' + this._escapeAttribute(href) + '">' + labelHtml + '</a></li>';
+          }).join('')}
         </ul>
       </nav>
     `;

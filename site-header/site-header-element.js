@@ -8,6 +8,7 @@ const BW_HEADER_LINKS = {
   reviews: 'https://www.berlinwalk.com/reviews',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
   plan: 'https://www.berlinwalk.com/berlin-tools',
+  planner: 'https://www.berlinwalk.com/berlin-trip-planner',
   blog: 'https://www.berlinwalk.com/blog',
   widgets: 'https://www.berlinwalk.com/widgets',
   faq: 'https://www.berlinwalk.com/#faq'
@@ -387,6 +388,21 @@ class BWHeaderElement extends HTMLElement {
         .bw-header-dropdown-trigger:focus-visible {
           background: var(--cream);
           outline: none;
+        }
+
+        .bw-header-wrap .bw-badge-new {
+          background: var(--yellow);
+          color: var(--green-dark);
+          font-size: 8px;
+          font-weight: 800;
+          padding: 2px 5px;
+          border-radius: 4px;
+          margin-left: 6px;
+          display: inline-block;
+          vertical-align: middle;
+          letter-spacing: 0.5px;
+          line-height: 1;
+          text-transform: none; /* override uppercase link so badge text stays readable */
         }
 
         .bw-header-dropdown {
@@ -794,6 +810,7 @@ class BWHeaderElement extends HTMLElement {
                 <li><a href="${BW_HEADER_LINKS.tour}">Tour</a></li>
                 <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
                 <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
+                <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a></li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
                     Resources <span class="bw-header-caret" aria-hidden="true">⌄</span>
@@ -801,7 +818,7 @@ class BWHeaderElement extends HTMLElement {
                   <ul class="bw-header-submenu" role="menu">
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.plan}">Plan Your Visit</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.blog}">Blog</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a></li>
                   </ul>
@@ -833,12 +850,13 @@ class BWHeaderElement extends HTMLElement {
               <a href="${BW_HEADER_LINKS.tour}">Tour</a>
               <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
               <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
+              <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a>
 
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Resources</div>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
-                <a href="${BW_HEADER_LINKS.plan}">Plan Your Visit</a>
+                <a href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a>
                 <a href="${BW_HEADER_LINKS.blog}">Blog</a>
                 <a href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a>
               </div>
