@@ -2,6 +2,15 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-07 — Antigravity (Berlin Trip Planner exit popup mockup preview overlay)
+
+**Did:**
+- Added a floating macOS-style browser mockup preview card (`berlin-trip-planner-mockup.png`) overlaying the Cathedral background image on the exit-intent popup.
+- Structured the mockup preview with a clean window title bar containing window dots, modern shadows, rotation, and micro-animations on hover.
+
+**Changed:**
+- `js/exit-intent-popup.js` — added mockup HTML overlay elements and customized browser window CSS with absolute positioning, rotations, and hover effects.
+
 ## 2026-06-07 — Antigravity (Berlin Trip Planner menu reorganization & layout adjustments)
 
 **Did:**
