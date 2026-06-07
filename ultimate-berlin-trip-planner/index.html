@@ -8458,6 +8458,59 @@
       border-left-color: var(--bw-green);
     }
 
+    #bw-trip-planner .bw-ai-panel.is-loading .bw-ai-avatar {
+      animation: bw-avatar-pulse 1.5s infinite ease-in-out;
+      border-color: var(--bw-green);
+    }
+
+    #bw-trip-planner .bw-ai-skeleton-title {
+      height: 14px;
+      width: 150px;
+      background: #E8F0E0;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      animation: bw-pulse 1.5s infinite ease-in-out;
+    }
+
+    #bw-trip-planner .bw-ai-skeleton-text {
+      height: 10px;
+      background: #F0F4E8;
+      border-radius: 3px;
+      margin-bottom: 8px;
+      animation: bw-pulse 1.5s infinite ease-in-out;
+    }
+
+    #bw-trip-planner .bw-ai-skeleton-text.line-1 { width: 90%; }
+    #bw-trip-planner .bw-ai-skeleton-text.line-2 { width: 85%; }
+    #bw-trip-planner .bw-ai-skeleton-text.line-3 { width: 60%; }
+
+    #bw-trip-planner .bw-ai-skeleton-days {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    #bw-trip-planner .bw-ai-skeleton-day {
+      height: 36px;
+      background: #F0F4E8;
+      border-radius: 6px;
+      animation: bw-pulse 1.5s infinite ease-in-out;
+      width: 100%;
+    }
+
+    @keyframes bw-pulse {
+      0% { opacity: 0.6; }
+      50% { opacity: 1.0; }
+      100% { opacity: 0.6; }
+    }
+
+    @keyframes bw-avatar-pulse {
+      0% { box-shadow: 0 0 0 0 rgba(78, 179, 66, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(78, 179, 66, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(78, 179, 66, 0); }
+    }
+
     #bw-trip-planner .bw-ai-panel.is-quota {
       border-left-color: var(--bw-muted);
     }
@@ -10374,36 +10427,36 @@
   };
 
   var PLACE_CATALOG = {
-    world_clock: { label: 'World Clock', query: 'Weltzeituhr Alexanderplatz Berlin', area: 'Alexanderplatz', type: 'central landmark', lat: 52.521918, lng: 13.413215, why: 'A clear central landmark and easy orientation anchor.' },
-    alexanderplatz: { label: 'Alexanderplatz', query: 'Alexanderplatz Berlin', area: 'Mitte', type: 'transport', lat: 52.5218, lng: 13.4132, why: 'Central transport hub and the place your first Berlin layer starts.' },
-    museum_island: { label: 'Museum Island', query: 'Museumsinsel Berlin', area: 'Mitte', type: 'museum', lat: 52.5169, lng: 13.4017, why: 'The cleanest central museum and historic architecture cluster.' },
-    hackescher_markt: { label: 'Hackescher Markt', query: 'Hackescher Markt Berlin', area: 'Mitte', type: 'food', lat: 52.5221, lng: 13.4027, why: 'Easy end point for food, courtyards, and Spree-side wandering.' },
-    wall_memorial: { label: 'Wall Memorial', query: 'Berlin Wall Memorial Bernauer Strasse', area: 'Wedding / Mitte', type: 'history', lat: 52.5351, lng: 13.3903, why: 'The best place to understand the Wall as a system.' },
-    east_side_gallery: { label: 'East Side Gallery', query: 'East Side Gallery Berlin', area: 'Friedrichshain', type: 'wall', lat: 52.505, lng: 13.4397, why: 'The famous painted Wall section, best paired with eastern neighborhoods.' },
-    oberbaum_bridge: { label: 'Oberbaum Bridge', query: 'Oberbaumbruecke Berlin', area: 'Friedrichshain / Kreuzberg', type: 'landmark', lat: 52.5018, lng: 13.4458, why: 'A short Spree-side add-on beside East Side Gallery, not a cross-city detour.' },
-    markthalle_neun: { label: 'Markthalle Neun', query: 'Markthalle Neun Berlin', area: 'Kreuzberg', type: 'food', lat: 52.502, lng: 13.4316, why: 'Covered food-market backup and a useful neighborhood anchor.' },
-    brandenburg_gate: { label: 'Brandenburg Gate', query: 'Brandenburger Tor Berlin', area: 'Mitte', type: 'landmark', lat: 52.5163, lng: 13.3777, why: 'The unavoidable central history/photo anchor.' },
-    holocaust_memorial: { label: 'Holocaust Memorial', query: 'Memorial to the Murdered Jews of Europe Berlin', area: 'Mitte', type: 'history', lat: 52.5139, lng: 13.3787, why: 'A central memorial anchor that pairs naturally with the government quarter.' },
-    reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, why: 'Free dome if booked ahead; still useful from outside.' },
-    gendarmenmarkt: { label: 'Gendarmenmarkt', query: 'Gendarmenmarkt Berlin', area: 'Mitte', type: 'landmark', lat: 52.5138, lng: 13.3927, why: 'A central square that keeps the history day fresh without repeating the same anchors.' },
-    nikolaiviertel: { label: 'Nikolaiviertel', query: 'Nikolaiviertel Berlin', area: 'Mitte', type: 'neighborhood', lat: 52.5169, lng: 13.4072, why: 'A compact old-Berlin-feeling area close to Museum Island and Alexanderplatz.' },
-    berlin_cathedral: { label: 'Berlin Cathedral', query: 'Berliner Dom Berlin', area: 'Museum Island', type: 'landmark', lat: 52.5191, lng: 13.4011, why: 'A useful Museum Island exterior or paid-entry fallback without forcing a full museum day.' },
-    hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'A useful courtyard layer close to Museum Island and Hackescher Markt.' },
-    kastanienallee: { label: 'Kastanienallee', query: 'Kastanienallee Berlin', area: 'Prenzlauer Berg', type: 'neighborhood', lat: 52.5352, lng: 13.4102, why: 'Good slow neighborhood walk with cafes and local rhythm.' },
-    topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, why: 'Free, serious, and reliable as a weather backup.' },
-    tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'The easiest green reset near the central sights.' },
-    victory_column: { label: 'Victory Column', query: 'Siegessaeule Berlin', area: 'Tiergarten', type: 'landmark', lat: 52.5145, lng: 13.3501, why: 'A free outdoor Tiergarten anchor that keeps the low-budget day visual.' },
-    tempelhofer_feld: { label: 'Tempelhofer Feld', query: 'Tempelhofer Feld Berlin', area: 'Neukoelln / Tempelhof', type: 'park', lat: 52.473, lng: 13.4036, why: 'Big open Berlin and strong low-budget day anchor.' },
-    treptower_park: { label: 'Treptower Park', query: 'Treptower Park Berlin', area: 'Treptow', type: 'park', lat: 52.4862, lng: 13.4691, why: 'A strong free green-space backup with a different Berlin geography.' },
-    raw_gelande: { label: 'RAW-Gelande', query: 'RAW-Gelaende Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5075, lng: 13.4548, why: 'Useful nightlife and street-art area with backup options.' },
-    oranienstrasse: { label: 'Oranienstrasse', query: 'Oranienstrasse Berlin', area: 'Kreuzberg', type: 'nightlife', lat: 52.5021, lng: 13.4219, why: 'Casual bar and food corridor for a Berlin night without overplanning.' },
-    simon_dach_strasse: { label: 'Simon-Dach-Strasse', query: 'Simon-Dach-Strasse Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5103, lng: 13.4573, why: 'Easy backup bar area after an eastern Berlin day.' },
-    kulturbrauerei: { label: 'Kulturbrauerei', query: 'Kulturbrauerei Berlin', area: 'Prenzlauer Berg', type: 'culture', lat: 52.5383, lng: 13.4135, why: 'A good neighborhood culture anchor with cafes nearby.' },
-    savignyplatz: { label: 'Savignyplatz', query: 'Savignyplatz Berlin', area: 'Charlottenburg', type: 'neighborhood', lat: 52.5054, lng: 13.3204, why: 'Classic west Berlin pause with restaurants and bookish streets.' },
-    lietzensee: { label: 'Lietzensee', query: 'Lietzensee Berlin', area: 'Charlottenburg', type: 'park', lat: 52.5082, lng: 13.2877, why: 'A calm local lake reset away from the checklist.' },
-    sanssouci: { label: 'Sanssouci', query: 'Sanssouci Palace Potsdam', area: 'Potsdam', type: 'day trip', lat: 52.4033, lng: 13.0386, why: 'The main Potsdam anchor when weather and energy are kind.' },
-    potsdam_hbf: { label: 'Potsdam Hbf', query: 'Potsdam Hauptbahnhof', area: 'Potsdam', type: 'station', lat: 52.3917, lng: 13.0664, why: 'The practical rail start/end for a Potsdam day.' },
-    charlottenburg_palace: { label: 'Charlottenburg Palace', query: 'Schloss Charlottenburg Berlin', area: 'Charlottenburg', type: 'palace', lat: 52.5209, lng: 13.2957, why: 'A Berlin-side backup if Potsdam is too much.' }
+    world_clock: { label: 'World Clock', query: 'Weltzeituhr Alexanderplatz Berlin', area: 'Alexanderplatz', type: 'central landmark', lat: 52.521918, lng: 13.413215, why: 'A classic 1969 East German world time clock, which is the perfect easy-to-find meeting spot.' },
+    alexanderplatz: { label: 'Alexanderplatz', query: 'Alexanderplatz Berlin', area: 'Mitte', type: 'transport', lat: 52.5218, lng: 13.4132, why: 'Berlin’s largest public square and main transit hub, making it a bustling starting point for exploring.' },
+    museum_island: { label: 'Museum Island', query: 'Museumsinsel Berlin', area: 'Mitte', type: 'museum', lat: 52.5169, lng: 13.4017, why: 'A beautiful island on the Spree hosting five world-famous museums and grand architecture.' },
+    hackescher_markt: { label: 'Hackescher Markt', query: 'Hackescher Markt Berlin', area: 'Mitte', type: 'food', lat: 52.5221, lng: 13.4027, why: 'A lively market square full of courtyards, boutiques, and cafes, great for a Spree-side stroll.' },
+    wall_memorial: { label: 'Wall Memorial', query: 'Berlin Wall Memorial Bernauer Strasse', area: 'Wedding / Mitte', type: 'history', lat: 52.5351, lng: 13.3903, why: 'The official open-air Berlin Wall memorial preserving real border fortifications to show how the division actually worked.' },
+    east_side_gallery: { label: 'East Side Gallery', query: 'East Side Gallery Berlin', area: 'Friedrichshain', type: 'wall', lat: 52.505, lng: 13.4397, why: 'A 1.3km section of the Berlin Wall covered in famous protest murals, best paired with exploring the vibrant eastern neighborhoods.' },
+    oberbaum_bridge: { label: 'Oberbaum Bridge', query: 'Oberbaumbruecke Berlin', area: 'Friedrichshain / Kreuzberg', type: 'landmark', lat: 52.5018, lng: 13.4458, why: 'An iconic double-deck bridge linking east and west, offering great river views close to the gallery.' },
+    markthalle_neun: { label: 'Markthalle Neun', query: 'Markthalle Neun Berlin', area: 'Kreuzberg', type: 'food', lat: 52.502, lng: 13.4316, why: 'A historic covered market hall in Kreuzberg featuring local food stalls and a legendary street food scene.' },
+    brandenburg_gate: { label: 'Brandenburg Gate', query: 'Brandenburger Tor Berlin', area: 'Mitte', type: 'landmark', lat: 52.5163, lng: 13.3777, why: 'Berlin’s ultimate neoclassical landmark and symbol of unity, which is a must-see for photos.' },
+    holocaust_memorial: { label: 'Holocaust Memorial', query: 'Memorial to the Murdered Jews of Europe Berlin', area: 'Mitte', type: 'history', lat: 52.5139, lng: 13.3787, why: 'A moving memorial made of 2,711 concrete slabs near the government quarter, built for quiet reflection.' },
+    reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, why: 'The historic parliament building with a modern glass dome, offering great city views if you book a free slot ahead.' },
+    gendarmenmarkt: { label: 'Gendarmenmarkt', query: 'Gendarmenmarkt Berlin', area: 'Mitte', type: 'landmark', lat: 52.5138, lng: 13.3927, why: 'One of Berlin’s most beautiful historic squares, featuring twin cathedrals and the central Concert Hall.' },
+    nikolaiviertel: { label: 'Nikolaiviertel', query: 'Nikolaiviertel Berlin', area: 'Mitte', type: 'neighborhood', lat: 52.5169, lng: 13.4072, why: 'A reconstructed medieval-style neighborhood with narrow streets, perfect for a cozy old-Berlin stroll.' },
+    berlin_cathedral: { label: 'Berlin Cathedral', query: 'Berliner Dom Berlin', area: 'Museum Island', type: 'landmark', lat: 52.5191, lng: 13.4011, why: 'The city’s grand 19th-century Protestant cathedral, offering a striking exterior view on Museum Island.' },
+    hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'A maze of eight beautifully restored courtyard alleys filled with boutiques, cafes, and art spaces.' },
+    kastanienallee: { label: 'Kastanienallee', query: 'Kastanienallee Berlin', area: 'Prenzlauer Berg', type: 'neighborhood', lat: 52.5352, lng: 13.4102, why: 'A leafy neighborhood street in Prenzlauer Berg lined with independent shops, cozy cafes, and local life.' },
+    topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, why: 'A free indoor-outdoor museum on the former Gestapo headquarters, offering a detailed and serious history read.' },
+    tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'A massive central park with peaceful paths and beer gardens, ideal for a quiet escape from the busy sights.' },
+    victory_column: { label: 'Victory Column', query: 'Siegessaeule Berlin', area: 'Tiergarten', type: 'landmark', lat: 52.5145, lng: 13.3501, why: 'A historic golden monument in the center of Tiergarten, offering great city views from the top if you climb up.' },
+    tempelhofer_feld: { label: 'Tempelhofer Feld', query: 'Tempelhofer Feld Berlin', area: 'Neukoelln / Tempelhof', type: 'park', lat: 52.473, lng: 13.4036, why: 'A former airport turned giant public park, where locals cycle, skate, and barbecue on open runways.' },
+    treptower_park: { label: 'Treptower Park', query: 'Treptower Park Berlin', area: 'Treptow', type: 'park', lat: 52.4862, lng: 13.4691, why: 'A large riverside park featuring a massive Soviet War Memorial and scenic paths along the Spree.' },
+    raw_gelande: { label: 'RAW-Gelande', query: 'RAW-Gelaende Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5075, lng: 13.4548, why: 'An industrial railway yard covered in street art, housing alternative clubs, food stalls, and creative spaces.' },
+    oranienstrasse: { label: 'Oranienstrasse', query: 'Oranienstrasse Berlin', area: 'Kreuzberg', type: 'nightlife', lat: 52.5021, lng: 13.4219, why: 'A famous street in Kreuzberg packed with alternative bars, multicultural food, and local nightlife.' },
+    simon_dach_strasse: { label: 'Simon-Dach-Strasse', query: 'Simon-Dach-Strasse Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5103, lng: 13.4573, why: 'A lively dining and bar street in Friedrichshain, perfect for casual drinks and outdoor seating.' },
+    kulturbrauerei: { label: 'Kulturbrauerei', query: 'Kulturbrauerei Berlin', area: 'Prenzlauer Berg', type: 'culture', lat: 52.5383, lng: 13.4135, why: 'A historic 19th-century brick brewery complex turned cultural hub with cinemas, cafes, and weekly events.' },
+    savignyplatz: { label: 'Savignyplatz', query: 'Savignyplatz Berlin', area: 'Charlottenburg', type: 'neighborhood', lat: 52.5054, lng: 13.3204, why: 'An elegant west Berlin square surrounded by great restaurants and quiet bookstores.' },
+    lietzensee: { label: 'Lietzensee', query: 'Lietzensee Berlin', area: 'Charlottenburg', type: 'park', lat: 52.5082, lng: 13.2877, why: 'A peaceful lakeside park in Charlottenburg, ideal for a quiet afternoon coffee or rest.' },
+    sanssouci: { label: 'Sanssouci', query: 'Sanssouci Palace Potsdam', area: 'Potsdam', type: 'day trip', lat: 52.4033, lng: 13.0386, why: 'Potsdam’s spectacular Prussian summer palace, famous for its terraced vineyards and beautiful gardens.' },
+    potsdam_hbf: { label: 'Potsdam Hbf', query: 'Potsdam Hauptbahnhof', area: 'Potsdam', type: 'station', lat: 52.3917, lng: 13.0664, why: 'Potsdam’s main train station, serving as the starting point for exploring the palaces and parks.' },
+    charlottenburg_palace: { label: 'Charlottenburg Palace', query: 'Schloss Charlottenburg Berlin', area: 'Charlottenburg', type: 'palace', lat: 52.5209, lng: 13.2957, why: 'Berlin’s grandest Baroque palace, featuring beautiful royal gardens and serving as a closer alternative to Potsdam.' }
   };
 
   function track(event, params) {
@@ -17303,6 +17356,16 @@
     if (aiStatus === 'loading') {
       return '<section class="bw-ai-panel is-loading" aria-label="Local guide polish loading">' +
         '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>Reading the plan in simple English. The route and times stay unchanged.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
+        '<div class="bw-ai-body" style="margin-top:14px;padding:8px 0">' +
+          '<div class="bw-ai-skeleton-title"></div>' +
+          '<div class="bw-ai-skeleton-text line-1"></div>' +
+          '<div class="bw-ai-skeleton-text line-2"></div>' +
+          '<div class="bw-ai-skeleton-text line-3"></div>' +
+          '<div class="bw-ai-skeleton-days">' +
+            '<div class="bw-ai-skeleton-day"></div>' +
+            '<div class="bw-ai-skeleton-day"></div>' +
+          '</div>' +
+        '</div>' +
       '</section>';
     }
     if (aiStatus === 'error') {
@@ -17913,7 +17976,7 @@
     }
 
     function ensure(space) {
-      if (y + space > footerY - 12) nextPage();
+      if (y > 42 && y + space > footerY - 12) nextPage();
     }
 
     function safeText(value, fallback) {
@@ -18063,11 +18126,11 @@
       var tour = safeText(guide.tourSentence || guide.tourNote, slot && slot.insideTrip ? 'BerlinWalk fits ' + slot.dayLabel + ' at ' + slot.startLabel + '.' : '');
       var storyDays = aiVisibleDayStories(plan, storyByDay);
       var introH = textHeight(intro, contentW - 100, 9.2, 'normal', 5);
-      var storyCount = Math.min(3, storyDays.length);
-      var storyCardH = 54;
-      var storyGap = 10;
+      var storyCount = storyDays.length;
+      var storyCardH = 48;
+      var storyGap = 8;
       var asideH = 48;
-      var cardH = 126 + introH + storyCount * (storyCardH + storyGap) + (weather || tour ? asideH + 18 : 0);
+      var cardH = 126 + introH + storyCount * (storyCardH + storyGap) + (weather || tour ? asideH + 10 : 0);
       ensure(cardH + 10);
       var top = y;
       fill([255, 255, 255]);
@@ -18097,18 +18160,18 @@
       doc.text(safeText(guide.noteTitle, 'How I would read these days'), margin + 28, y + 15);
       drawText(intro, margin + 28, y + 32, contentW - 56, 9.2, 'normal', muted, 5);
       y += introH + 34;
-      storyDays.slice(0, 3).forEach(function (day) {
+      storyDays.forEach(function (day) {
         var story = safeText(storyByDay[day.dayNumber], '');
         if (!story) return;
         fill([255, 255, 255]);
         stroke([184, 215, 250]);
         doc.roundedRect(margin + 16, y, contentW - 32, storyCardH, 8, 8, 'FD');
         fill(lightBlue);
-        doc.roundedRect(margin + 28, y + 12, 28, 26, 6, 6, 'F');
-        drawCenteredText('D' + day.dayNumber, margin + 42, y + 25, 7.8, 'bold', blue);
+        doc.roundedRect(margin + 28, y + 10, 26, 26, 5, 5, 'F');
+        drawCenteredText('D' + day.dayNumber, margin + 41, y + 23, 7.8, 'bold', blue);
         setFont(8.8, 'bold', green);
         doc.text(split(day.theme || day.title, 150, 8.8, 'bold').slice(0, 1), margin + 68, y + 18);
-        drawText(story, margin + 68, y + 32, contentW - 100, 7.7, 'normal', muted, 2);
+        drawText(story, margin + 68, y + 30, contentW - 100, 7.7, 'normal', muted, 2);
         y += storyCardH + storyGap;
       });
       if (weather || tour) {

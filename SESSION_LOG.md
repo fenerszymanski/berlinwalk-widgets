@@ -8,12 +8,18 @@ Format for each entry — see `AGENTS.md` §9.
 
 **Did:**
 - Applied revisions based on test feedback: dynamic dining recommendations for closing blocks, personalized lead gate subtitle copy, descriptive place contexts, and clickable PDF resource card links.
+- Updated the PDF Guide Note generator to output all plan days dynamically rather than slicing to the first 3 days.
+- Added a pulsing skeleton loading animation and avatar pulse effect to the guide note loading panel.
+- Refined `PLACE_CATALOG` descriptions to be warmer and more descriptive, explaining what each place is and why to go.
+- Refined Velo backend Gemini prompt templates to make guide notes flatter, casual, and conversational.
 
 **Changed:**
-- `ultimate-berlin-trip-planner/index.html` — updated dayBlockCopy call sites to dayBlockDisplayCopy across layout, PDF, print and share renders. Added doc.link annotations on PDF transport/shopping grids.
+- `ultimate-berlin-trip-planner/index.html` — updated dayBlockCopy call sites, drawYusufNote coordinates/loop, aiEnhancementHtml loading state, PLACE_CATALOG, and CSS animations.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — refined geminiPrompt instructions.
+- `ultimate-berlin-trip-planner/velo/install-kit.html` — regenerated.
 - QA: `node ultimate-berlin-trip-planner/launch-audit.mjs` passed `153 pass`.
 
-**Next session should:** Yusuf can test the planner locally or push the repository to deploy these changes.
+**Next session should:** Yusuf can review the new guide note layout and load animation, and paste the regenerated `install-kit.html` into Wix Velo.
 
 ## 2026-06-06 — Codex (Ultimate mobile overflow + print cleanup)
 
