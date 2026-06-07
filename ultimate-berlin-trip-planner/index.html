@@ -12033,11 +12033,6 @@
       return b.score - a.score;
     });
     var picked = scored.filter(function (item) { return item.score > 0; }).slice(0, 2);
-    if (!picked.length) {
-      var fallbackIds = ids.filter(function (placeId) { return placeId !== 'world_clock' && placeFor(placeId); });
-      var fallbackId = fallbackIds[Math.min(nonClosingBlockIndex(day, index), Math.max(0, fallbackIds.length - 1))];
-      if (fallbackId) picked = [{ placeId: fallbackId, place: placeFor(fallbackId), score: 0 }];
-    }
     return picked.slice(0, 2).map(function (item) {
       return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId), score: item.score };
     });
@@ -13493,8 +13488,11 @@
       if (base === 'west') return 'Welcome to Charlottenburg! Try traditional cozy German food at Dicke Wirtin, or relax at Schwarzes Café near Savignyplatz.';
       return 'Welcome to Berlin! Keep tonight easy and find a local dinner spot close to your base camp.';
     }
-    if (type === 'history' || type === 'museums') {
+    if (type === 'history') {
       return 'Try traditional German food at Clärchens Ballhaus on Auguststraße or Maximilians on Friedrichstraße. For quick fresh Vietnamese street food, grab a bowl at Monsieur Vuong.';
+    }
+    if (type === 'museums') {
+      return 'Try Dicke Wirtin near Savignyplatz for a traditional cozy pub feel, or check the base camp guide for neighborhood favorites.';
     }
     if (type === 'wall' || type === 'nightlife') {
       return 'Try fresh Vietnamese bowls at 1990 Vegan Living at Boxhagener Platz, or grab a legendary burger under the Schlesisches Tor U-Bahn tracks at Burgermeister.';
@@ -13506,7 +13504,10 @@
       return 'Get legendary cheap Currywurst at Konnopke\'s Imbiss (under the U2 tracks since 1930) or Curry 36, or grab a chicken Döner at Mustafa\'s Gemüse Kebap.';
     }
     if (type === 'local') {
-      return 'If in the west, try Dicke Wirtin near Savignyplatz for a traditional cozy pub feel. If in the north, visit Prater Biergarten, Berlin\'s oldest beer garden (since 1837).';
+      if (base === 'west') return 'Try Dicke Wirtin near Savignyplatz for a traditional cozy pub feel.';
+      if (base === 'north') return 'Visit Prater Biergarten, Berlin\'s oldest beer garden (since 1837).';
+      if (base === 'east') return 'Try fresh vegan bowls at 1990 Vegan Living at Boxhagener Platz.';
+      return 'Find a local spot in your neighborhood or check the base camp guide.';
     }
     if (type === 'potsdam') {
       return 'Back in Berlin, keep it easy with dinner close to your stay area. Check the base camp guide for recommendations.';
@@ -13536,8 +13537,11 @@
       var selectedIdx = (day.dayNumber + 3) % options.length;
       return options[selectedIdx];
     }
-    if (type === 'history' || type === 'museums') {
+    if (type === 'history') {
       return 'Grab quick Vietnamese at Monsieur Vuong, or try unique Asian-fusion burgers at Shiso Burger.';
+    }
+    if (type === 'museums') {
+      return 'Grab a quick bite near Charlottenburg Palace or head towards Savignyplatz for cozy cafes.';
     }
     if (type === 'wall') {
       return 'Try local cafes on Kastanienallee, or grab cheap currywurst at Konnopke\'s Imbiss under the tracks.';
@@ -13552,7 +13556,11 @@
       return 'Grab a burger under U-Bahn tracks at Burgermeister, or check Boxhagener Platz cafes.';
     }
     if (type === 'local') {
-      return 'Try Dicke Wirtin near Savignyplatz in the west, or cozy cafes around Kulturbrauerei.';
+      var base = state.stayArea || 'unsure';
+      if (base === 'west') return 'Try Dicke Wirtin near Savignyplatz.';
+      if (base === 'north') return 'Try cozy cafes around Kulturbrauerei or Kastanienallee.';
+      if (base === 'east') return 'Grab a legendary burger under the tracks at Burgermeister Schlesisches Tor.';
+      return 'Grab a quick local bite in your neighborhood.';
     }
     if (type === 'potsdam') {
       return 'Try traditional Dutch pancakes or explore cafes in the historic Potsdam Dutch Quarter.';
@@ -13571,27 +13579,7 @@
     if (block.time === 'Lunch') {
       return dayLunchCopy(day);
     }
-    var baseCopy = String(block.copy || '');
-    var links = blockMapLinks(day, block, index);
-    if (links && links.length > 0) {
-      var whyParts = [];
-      links.forEach(function (link) {
-        if (link.score > 0) {
-          var pl = PLACE_CATALOG[link.placeId];
-          if (pl && pl.why) {
-            var cleanWhy = pl.why.replace(/[.!?]$/, '');
-            if (baseCopy.toLowerCase().indexOf(cleanWhy.toLowerCase()) === -1) {
-              whyParts.push(pl.why);
-            }
-          }
-        }
-      });
-      if (whyParts.length > 0) {
-        if (baseCopy) baseCopy += ' ';
-        baseCopy += whyParts.join(' ');
-      }
-    }
-    return baseCopy;
+    return String(block.copy || '');
   }
 
   function dayActionBlockItems(day) {
@@ -15081,7 +15069,7 @@
           { time: 'Morning', title: 'Prenzlauer Berg walk', copy: 'Stroll through Prenzlauer Berg\'s quiet streets and cafes.' },
           { time: 'Lunch', title: 'Lunch nearby', copy: '' },
           { time: 'Afternoon', title: 'Courtyards and markets', copy: 'Browse Hackesche Höfe courtyards or head to Markthalle Neun.' },
-          { time: 'Evening', title: 'Dinner in Kreuzberg', copy: '' }
+          { time: 'Evening', title: 'Dinner', copy: '' }
         ],
         placeIds: ['hackesche_hofe', 'markthalle_neun', 'kastanienallee']
       },
@@ -15119,7 +15107,7 @@
         blocks: [
           { time: 'Morning', title: 'Local neighborhood walk', copy: 'Walk a local neighborhood, find a cozy cafe, and relax.' },
           { time: 'Lunch', title: 'Lunch nearby', copy: '' },
-          { time: 'Afternoon', title: 'Quiet park or museum', copy: 'Walk by Lietzensee lake or explore the Kulturbrauerei complex.' },
+          { time: 'Afternoon', title: 'Quiet park or museum', copy: 'Walk by a local lake like Lietzensee, or explore a cultural complex like Kulturbrauerei.' },
           { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
         placeIds: ['kulturbrauerei', 'savignyplatz', 'lietzensee']
@@ -15485,7 +15473,7 @@
         blocks: [
           { time: 'Morning', title: 'Charlottenburg Palace or one west-side anchor', copy: 'Use a west-side museum or palace layer.' },
           { time: 'Afternoon', title: 'Savignyplatz and Lietzensee edge', copy: 'Keep the afternoon west-side and relaxed.' },
-          { time: 'Evening', title: 'West-side or base dinner', copy: '' }
+          { time: 'Evening', title: 'Dinner', copy: '' }
         ],
         placeIds: ['charlottenburg_palace', 'savignyplatz', 'lietzensee']
       });

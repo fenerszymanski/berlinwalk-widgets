@@ -4,6 +4,30 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-07 — Antigravity (Ultimate Trip Planner West-Side Geographic Logic Fixes)
+
+**Did:**
+- Fixed the geographic inconsistency in Day 6 (Local Neighborhood) where the lunch and dinner copies statically suggested both West (Savignyplatz) and North/East (Kulturbrauerei) locations simultaneously. Both copies are now fully dynamic based on the user's selected `base` (stayArea).
+- Fixed the Day 7 (Museums) dinner copy logic. Previously, Day 7's title was "West-side or base dinner" but `dayDiningCopy` incorrectly grouped 'museums' with 'history' and forced Mitte dining recommendations (Clärchens Ballhaus, Monsieur Vuong). Day 7 now correctly recommends West-side dining (Dicke Wirtin) or base dining.
+- Simplified Day 7's Evening title to just "Dinner" for cleaner rendering.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — Updated `dayDiningCopy` and `dayLunchCopy` to separate 'history' and 'museums' types, made 'local' logic dynamic based on `state.stayArea`, and refined Day 6/Day 7 template titles and copy.
+- QA: `node ultimate-berlin-trip-planner/launch-audit.mjs` passed `153 pass`.
+
+## 2026-06-07 — Antigravity (Ultimate Trip Planner Fallback Links & Explanation Append Fixes)
+
+**Did:**
+- Removed the automatic appending of place catalog `why` explanations inside `dayBlockDisplayCopy` to prevent the tone from sounding encyclopedic and repetitive.
+- Removed the fallback map links inside `blockMapLinks` that assigned 0-score locations when no specific places were mentioned, preventing unrelated map pins (like Hackesche Höfe under a Prenzlauer Berg walk).
+- Updated the generic Day 4 (Food) Evening title from "Dinner in Kreuzberg" to a dynamic "Dinner" to adapt smoothly when the user's accommodation is in the North and dinner options switch to Kastanienallee.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — simplified `blockMapLinks` and `dayBlockDisplayCopy`, updated Evening block title.
+- QA: `node ultimate-berlin-trip-planner/launch-audit.mjs` passed `153 pass`.
+
+**Next session should:** Yusuf can push the widget frontend changes to GitHub to apply these fixes live.
+
 ## 2026-06-07 — Antigravity (Ultimate Trip Planner Copy Simplification, Lunch & East Dining Fixes)
 
 **Did:**
