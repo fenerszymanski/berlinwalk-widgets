@@ -262,5 +262,21 @@
     "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/ultimate-berlin-trip-planner.png",
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/ultimate-berlin-trip-planner-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/ultimate-berlin-trip-planner-160.png"
+  },
+  {
+    "slug": "berlin-beer-gardens-map",
+    "source": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/berlin-beer-gardens-map-chatgpt.png",
+    "model": "ChatGPT browser image generation",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-beer-gardens-map.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-beer-gardens-map-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-beer-gardens-map-160.png"
+  },
+  {
+    "slug": "christmas-markets-map",
+    "source": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/christmas-markets-map-chatgpt.png",
+    "model": "ChatGPT browser image generation",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/christmas-markets-map.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/christmas-markets-map-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/christmas-markets-map-160.png"
   }
 ]

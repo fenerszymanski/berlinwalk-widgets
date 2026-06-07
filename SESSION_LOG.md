@@ -4,6 +4,51 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-07 — Codex (Ultimate Trip Planner Meal QA Finish)
+
+**Did:**
+- Finished the handoff meal/repeat cleanup for the Ultimate Berlin Trip Planner.
+- Removed the remaining Markthalle Neun repeat path by keeping Wall fallback stops east-side, making the food day use Markthalle as lunch before Hackesche Höfe/Kastanienallee, and letting day-type-specific pause logic run before the generic slow-travel pause.
+- Kept BerlinWalk days with a separate lunch near Hackescher Markt and kept area-locked tour lunch from falling back to repeated/wrong-area restaurants just to fill two options.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — wall/food place routing, nearby pause ordering, food-link de-dupe fallback, and one compact food-day copy line.
+- `SESSION_LOG.md` — this handoff note.
+
+**Verified:**
+- `node ultimate-berlin-trip-planner/launch-audit.mjs` → `153 pass / 0 warn / 0 block`.
+- `git diff --check` → clean.
+- Local Browser mobile QA at 430px for evening-arrival 2-day, 4-day tour/museums, and 7-day mixed-interest plans: no horizontal overflow, no visible AI fallback, no `Open PDF` in the widget text, no old `Water, base map, sleep` / `See the main history sights` strings, no explicit dinner+evening duplicate, and no repeated food map links.
+
+**Next session should:** Yusuf can review/push this widget cleanup; remaining work can move to PDF polish or the live landing-page/homepage integration.
+
+## 2026-06-07 — Codex (Blog search-trends TODOs)
+
+**Did:** Added Yusuf's English tourist search-trends recommendations to `blog-workplan.md` as concrete blog TODOs.
+
+**Changed:**
+- `blog-workplan.md` — added a dedicated search-trends TODO section from the local DOCX research, covering new post ideas, existing post refreshes, and deprioritized flight-only content; updated the priority queue with Christmas markets, Spati, vegan, walkable Berlin, Reichstag sold-out, and Christmas-market accommodation items.
+
+**Next session should:** Start with high-intent existing refreshes or draft the Christmas markets pillar, then move to Spati/Sunday/cash and vegan Berlin.
+
+## 2026-06-07 — Codex (Ultimate Trip Planner Meal Logic Handoff Cleanup)
+
+**Did:**
+- Took over the unfinished Ultimate Trip Planner meal/itinerary revision after the previous agent hit quota.
+- Fixed duplicate Day 1 dinner/evening behavior, added a dedicated Hackescher Markt lunch block after BerlinWalk, and added plan-level meal assignment so restaurant recommendations do not repeat across the same plan.
+- Replaced the empty/robotic history cluster line with more natural slow-route copy and added a west-side day rule so Charlottenburg/Savignyplatz/Lietzensee days do not drift back into Mitte dinner logic.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — restored `firstDayDinnerMove`, added `FOOD_POOLS` meal assignment helpers, added `dayUsesWestSide`, updated `dayDiningCopy` / `dayLunchCopy`, and inserted the BerlinWalk lunch block into `tourFrameworkTemplate`.
+
+**Verified:**
+- `node ultimate-berlin-trip-planner/launch-audit.mjs` → `153 pass / 0 warn / 0 block`.
+- `git diff --check` → clean.
+- Local Browser DOM QA: 7-day unlocked plan has no repeated food-map recommendations, BerlinWalk day includes `Lunch near Hackescher Markt`, old `Water, base map, sleep` and `See the main history sights` strings are gone, and 430px-style horizontal overflow check remains clean.
+- Afternoon-arrival QA: Day 1 no longer creates a separate dinner plus evening duplicate; west-side museum day now uses west-side dinner copy and a west-side restaurant.
+
+**Next session should:** Yusuf can review the local widget once; if approved, push this cleanup. Remaining polish can focus on PDF/print design and broader itinerary copy, not the core meal de-duplication.
+
 ## 2026-06-07 — Antigravity (Ultimate Trip Planner West-Side Geographic Logic Fixes)
 
 **Did:**
