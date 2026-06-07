@@ -4,6 +4,7 @@ import { getSecret } from 'wix-secrets-backend';
 import { fetch } from 'wix-fetch';
 
 const COLLECTION = 'TripPlannerLeads';
+const AI_BUDGET_COLLECTION = 'TripPlannerAiBudget';
 const CONTACT_LABEL = 'Ultimate Berlin Trip Planner Lead';
 const TIMEZONE = 'Europe/Berlin';
 const BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
@@ -14,6 +15,8 @@ const GEMINI_DEFAULT_MODEL = 'gemini-2.5-flash';
 const GEMINI_API_KEY_SECRET_NAMES = ['GEMINI_API_KEY', 'GOOGLE_AI_API_KEY', 'GOOGLE_GEMINI_API_KEY'];
 const GEMINI_MODEL_SECRET_NAMES = ['TRIP_PLANNER_GEMINI_MODEL', 'GEMINI_MODEL'];
 const AI_GENERATION_LIMIT = 2;
+const AI_DAILY_GENERATION_LIMIT = 5000;
+const AI_MONTHLY_GENERATION_LIMIT = AI_DAILY_GENERATION_LIMIT * 30;
 const PRIVATE_TEXT_PATTERN = /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i;
 
 const STAGES = [
@@ -386,13 +389,21 @@ function aiQuotaIdentity(payload, input) {
   };
 }
 
-async function claimAiQuota(payload, input, now) {
+function leadQuotaState(used) {
+  return {
+    limit: AI_GENERATION_LIMIT,
+    used,
+    remaining: Math.max(0, AI_GENERATION_LIMIT - used)
+  };
+}
+
+async function checkAiLeadQuota(payload, input, now) {
   const identity = aiQuotaIdentity(payload, input);
   if (!identity.ok) {
     return {
       ok: false,
       reason: 'ai_quota_email_required',
-      quota: { limit: AI_GENERATION_LIMIT, used: 0, remaining: 0 }
+      quota: leadQuotaState(0)
     };
   }
 
@@ -401,7 +412,7 @@ async function claimAiQuota(payload, input, now) {
     return {
       ok: false,
       reason: 'ai_quota_lead_not_found',
-      quota: { limit: AI_GENERATION_LIMIT, used: 0, remaining: 0 }
+      quota: leadQuotaState(0)
     };
   }
 
@@ -417,14 +428,23 @@ async function claimAiQuota(payload, input, now) {
     return {
       ok: false,
       reason: 'ai_quota_limit',
-      quota: { limit: AI_GENERATION_LIMIT, used, remaining: 0 }
+      quota: leadQuotaState(used)
     };
   }
 
+  return {
+    ok: true,
+    lead: existing,
+    used,
+    quota: leadQuotaState(used)
+  };
+}
+
+async function claimAiLeadQuota(lead, used, now) {
   const nextUsed = used + 1;
   await wixData.update(
     COLLECTION,
-    Object.assign({}, existing, {
+    Object.assign({}, lead, {
       aiRequestCount: nextUsed,
       aiLastRequestedAt: now,
       updatedAt: now
@@ -434,11 +454,120 @@ async function claimAiQuota(payload, input, now) {
 
   return {
     ok: true,
-    quota: {
-      limit: AI_GENERATION_LIMIT,
-      used: nextUsed,
-      remaining: Math.max(0, AI_GENERATION_LIMIT - nextUsed)
+    quota: leadQuotaState(nextUsed)
+  };
+}
+
+function aiBudgetPeriods(now) {
+  const dayKey = berlinDateKeyFrom(now);
+  const monthKey = dayKey.slice(0, 7);
+  return [
+    {
+      type: 'day',
+      periodKey: `day|${dayKey}`,
+      periodLabel: dayKey,
+      limit: AI_DAILY_GENERATION_LIMIT
+    },
+    {
+      type: 'month',
+      periodKey: `month|${monthKey}`,
+      periodLabel: monthKey,
+      limit: AI_MONTHLY_GENERATION_LIMIT
     }
+  ];
+}
+
+function budgetState(period, used) {
+  return {
+    periodKey: period.periodKey,
+    periodType: period.type,
+    periodLabel: period.periodLabel,
+    limit: period.limit,
+    used,
+    remaining: Math.max(0, period.limit - used)
+  };
+}
+
+function budgetSummary(states) {
+  return states.reduce((acc, state) => {
+    acc[state.periodType === 'day' ? 'daily' : 'monthly'] = state;
+    return acc;
+  }, {});
+}
+
+async function findAiBudgetCounter(periodKey) {
+  const results = await wixData.query(AI_BUDGET_COLLECTION)
+    .eq('periodKey', periodKey)
+    .limit(1)
+    .find({ suppressAuth: true });
+
+  return results.items && results.items.length ? results.items[0] : null;
+}
+
+async function saveAiBudgetCounter(period, existing, nextUsed, now) {
+  const item = Object.assign({}, existing || {}, {
+    periodKey: period.periodKey,
+    periodType: period.type,
+    periodLabel: period.periodLabel,
+    requestCount: nextUsed,
+    limit: period.limit,
+    updatedAt: now
+  });
+
+  if (existing && existing._id) {
+    return await wixData.update(AI_BUDGET_COLLECTION, item, { suppressAuth: true });
+  }
+
+  return await wixData.insert(
+    AI_BUDGET_COLLECTION,
+    Object.assign({}, item, { createdAt: now }),
+    { suppressAuth: true }
+  );
+}
+
+async function markAiBudgetLimitReached(period, existing, now) {
+  if (!existing || existing.limitReachedAt) return;
+  await wixData.update(
+    AI_BUDGET_COLLECTION,
+    Object.assign({}, existing, {
+      periodType: period.type,
+      periodLabel: period.periodLabel,
+      limit: period.limit,
+      limitReachedAt: now,
+      updatedAt: now
+    }),
+    { suppressAuth: true }
+  );
+}
+
+async function claimAiBudget(now) {
+  const periods = aiBudgetPeriods(now);
+  const snapshots = [];
+
+  for (const period of periods) {
+    const existing = await findAiBudgetCounter(period.periodKey);
+    const used = cleanNumber(existing && existing.requestCount, 0, 0, 1000000000);
+    if (used >= period.limit) {
+      await markAiBudgetLimitReached(period, existing, now);
+      return {
+        ok: false,
+        reason: period.type === 'day' ? 'ai_budget_daily_limit' : 'ai_budget_monthly_limit',
+        budget: budgetSummary([budgetState(period, used)])
+      };
+    }
+    snapshots.push({ period, existing, used });
+  }
+
+  const states = [];
+  for (const snapshot of snapshots) {
+    const nextUsed = snapshot.used + 1;
+    await saveAiBudgetCounter(snapshot.period, snapshot.existing, nextUsed, now);
+    states.push(budgetState(snapshot.period, nextUsed));
+  }
+
+  return {
+    ok: true,
+    budget: budgetSummary(states)
   };
 }
 
@@ -450,12 +579,53 @@ export async function enhanceTripPlannerPlan(payload) {
   }
 
   const now = new Date();
-  const quota = await claimAiQuota(payload, input, now);
-  if (!quota.ok) {
+  let leadQuota;
+  try {
+    leadQuota = await checkAiLeadQuota(payload, input, now);
+  } catch (error) {
     return {
       ok: false,
-      reason: quota.reason,
-      quota: quota.quota
+      reason: 'ai_quota_guard_error',
+      message: cleanText(error && error.message ? error.message : error, '', 500)
+    };
+  }
+  if (!leadQuota.ok) {
+    return {
+      ok: false,
+      reason: leadQuota.reason,
+      quota: leadQuota.quota
+    };
+  }
+
+  let budget;
+  try {
+    budget = await claimAiBudget(now);
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'ai_budget_guard_error',
+      quota: leadQuota.quota,
+      message: cleanText(error && error.message ? error.message : error, '', 500)
+    };
+  }
+  if (!budget.ok) {
+    return {
+      ok: false,
+      reason: budget.reason,
+      quota: leadQuota.quota,
+      budget: budget.budget
+    };
+  }
+
+  let quota;
+  try {
+    quota = await claimAiLeadQuota(leadQuota.lead, leadQuota.used, now);
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'ai_quota_guard_error',
+      budget: budget.budget,
+      message: cleanText(error && error.message ? error.message : error, '', 500)
     };
   }
 
@@ -518,7 +688,8 @@ export async function enhanceTripPlannerPlan(payload) {
     return {
       ok: true,
       enhancement,
-      quota: quota.quota
+      quota: quota.quota,
+      budget: budget.budget
     };
   } catch (error) {
     return {

@@ -2,6 +2,18 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-08 — Codex (Blog CTA compact source update)
+
+**Did:**
+- Updated the blog sidebar helper's source-level desktop floating CTA compact rules for the new two-button stack.
+- Kept blog CTAs left-aligned but reduced both `Berlin Trip Planner` and `Book Tour` pills to 176px so they do not cover post text.
+- Live overlap is already fixed through the root Wix `BerlinWalk Sticky CTA Color Polish` Custom Embed revision 10; this repo change still needs a push for GitHub Pages durability.
+
+**Changed:**
+- `js/blog-sidebar-inject.js` — compacted `#bw-desktop-cta` pill/planner widths, padding, fonts, arrows, and close button on blog posts.
+
+**Next session should:** Yusuf pushes `berlinwalk-widgets`; after GitHub Pages deploy, verify `blog-sidebar-inject.js` serves the compact CTA rules.
+
 ## 2026-06-07 — Antigravity (Berlin Trip Planner exit popup PDF preview & mobile sticky banner fixes)
 
 **Did:**

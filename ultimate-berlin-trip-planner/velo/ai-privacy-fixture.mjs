@@ -44,15 +44,23 @@ return {
 };`;
 }
 
-function fakeWixData(initialLead) {
+function fakeWixData(initialLead, initialBudgetCounters = {}) {
   let lead = Object.assign({}, initialLead);
+  const budgetCounters = Object.fromEntries(
+    Object.entries(initialBudgetCounters).map(([key, value]) => [key, Object.assign({}, value)])
+  );
   const updates = [];
+  const inserts = [];
   return {
     updates,
+    inserts,
     currentLead() {
       return Object.assign({}, lead);
     },
-    query() {
+    currentBudget(periodKey) {
+      return budgetCounters[periodKey] ? Object.assign({}, budgetCounters[periodKey]) : null;
+    },
+    query(collection) {
       return {
         eq(field, value) {
           this.field = field;
@@ -63,17 +71,32 @@ function fakeWixData(initialLead) {
           return this;
         },
         async find() {
-          if (this.field === 'leadKey' && this.value === lead.leadKey) {
+          if (collection === 'TripPlannerLeads' && this.field === 'leadKey' && this.value === lead.leadKey) {
             return { items: [Object.assign({}, lead)] };
+          }
+          if (collection === 'TripPlannerAiBudget' && this.field === 'periodKey' && budgetCounters[this.value]) {
+            return { items: [Object.assign({}, budgetCounters[this.value])] };
           }
           return { items: [] };
         }
       };
     },
     async update(collection, item) {
-      lead = Object.assign({}, item);
+      if (collection === 'TripPlannerAiBudget') {
+        budgetCounters[item.periodKey] = Object.assign({}, item);
+      } else {
+        lead = Object.assign({}, item);
+      }
       updates.push({ collection, item: Object.assign({}, item) });
-      return Object.assign({}, lead);
+      return Object.assign({}, item);
+    },
+    async insert(collection, item) {
+      const saved = Object.assign({ _id: `${collection}-${inserts.length + 1}` }, item);
+      if (collection === 'TripPlannerAiBudget') {
+        budgetCounters[saved.periodKey] = Object.assign({}, saved);
+      }
+      inserts.push({ collection, item: Object.assign({}, saved) });
+      return Object.assign({}, saved);
     }
   };
 }
@@ -239,6 +262,10 @@ async function main() {
   assert.ok(result.enhancement.routeIntro, 'enhancement.routeIntro missing');
   assert.ok(result.enhancement.dayStories.length, 'enhancement.dayStories missing');
   assert.equal(result.quota.remaining, 1);
+  assert.equal(result.budget.daily.limit, 5000);
+  assert.equal(result.budget.monthly.limit, 150000);
+  assert.equal(result.budget.daily.remaining, 4999);
+  assert.equal(result.budget.monthly.remaining, 149999);
   assert.equal(result.enhancement.usage.totalTokens, 490);
   assert.ok(capturedRequest, 'Gemini fetch was not called');
   assert.equal(capturedRequest.body.generationConfig.thinkingConfig.thinkingBudget, 0);
@@ -257,6 +284,52 @@ async function main() {
   assert.equal(thirdResult.quota.remaining, 0);
   assert.equal(fetchCalls, callsAfterSecond, 'Gemini fetch should not run after quota is exhausted');
 
+  let budgetLimitFetchCalls = 0;
+  const today = new Date();
+  const berlinDay = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Europe/Berlin',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).format(today);
+  const budgetLimitStore = fakeWixData(
+    {
+      _id: 'fixture-lead-budget',
+      leadKey: 'quota@example.com|2026-07-14',
+      email: 'quota@example.com',
+      arrivalDate: '2026-07-14',
+      aiRequestCount: 0
+    },
+    {
+      [`day|${berlinDay}`]: {
+        _id: 'budget-day',
+        periodKey: `day|${berlinDay}`,
+        periodType: 'day',
+        periodLabel: berlinDay,
+        requestCount: 5000,
+        limit: 5000
+      }
+    }
+  );
+  const budgetLimitRuntime = loadFunnelRuntime({
+    secretValue: 'fixture-gemini-key',
+    wixDataImpl: budgetLimitStore,
+    fetchImpl: async () => {
+      budgetLimitFetchCalls += 1;
+      return {
+        ok: true,
+        status: 200,
+        text: async () => fakeGeminiBody()
+      };
+    }
+  });
+  const budgetLimitResult = await budgetLimitRuntime.enhanceTripPlannerPlan(fixturePayload());
+  assert.equal(budgetLimitResult.ok, false);
+  assert.equal(budgetLimitResult.reason, 'ai_budget_daily_limit');
+  assert.equal(budgetLimitResult.budget.daily.remaining, 0);
+  assert.equal(budgetLimitFetchCalls, 0, 'Gemini fetch should not run after global daily budget is exhausted');
+  assert.equal(budgetLimitStore.currentLead().aiRequestCount, 0, 'Lead quota should not be consumed when global budget is exhausted');
+
   const evidence = {
     generatedAt: new Date().toISOString(),
     missingKeyFailSoft: {
@@ -274,6 +347,15 @@ async function main() {
       thirdReason: thirdResult.reason,
       geminiFetchCalls: fetchCalls,
       updates: quotaStore.updates.length
+    },
+    budget: {
+      dailyLimit: result.budget.daily.limit,
+      dailyRemainingAfterFirst: result.budget.daily.remaining,
+      monthlyLimit: result.budget.monthly.limit,
+      monthlyRemainingAfterFirst: result.budget.monthly.remaining,
+      dailyLimitReason: budgetLimitResult.reason,
+      dailyLimitFetchCalls: budgetLimitFetchCalls,
+      leadQuotaConsumedOnBudgetLimit: budgetLimitStore.currentLead().aiRequestCount
     },
     geminiRequest: {
       url: capturedRequest.url,
