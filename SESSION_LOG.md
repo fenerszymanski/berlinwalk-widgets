@@ -2,7 +2,19 @@
 
 Rolling log of agent sessions. Most recent at top.
 
-Format for each entry — see `AGENTS.md` §9.
+## 2026-06-07 — Antigravity (East Side Gallery murals widget local image integration and blog draft cleanups)
+
+**Did:**
+- Integrated local photos onto matching card boxes in the `east-side-gallery-murals` widget.
+- Cleaned duplicate "What is nearby" sections and corrected Thomas Klingenstein's mural title to "Umleitung in den japanischen Sektor".
+- Added Berlin Wall Foundation visitor info and re-ran uploader script to patch Wix draft.
+
+**Changed:**
+- `east-side-gallery-murals/index.html` — added image fields, modernized CSS structure, and added card hover/zoom micro-animations
+- `blog-drafts/east-side-gallery-berlin-guide.md` — removed duplicate section, corrected Klingenstein title and placeholder, added visitor center information
+- `east-side-gallery-murals/images/` — added 8 optimized photos matching the famous murals
+
+**Next session should:** Yusuf needs to push the repository changes via GitHub Desktop so they deploy on GitHub Pages, verify the widget live, and publish the Wix blog post.
 
 ## 2026-06-07 — Codex (Ultimate Trip Planner Meal QA Finish)
 
