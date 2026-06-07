@@ -91,10 +91,10 @@ This mural shows a wave of faces flowing through a gap in the Wall, capturing th
 
 {{image:es-geschah-im-november}}
 
-### "Vergebt mir die Liebe" (Forgive Me Love) by Thomas Klingenstein
+### "Umleitung in den japanischen Sektor" (Detour to the Japanese Sector) by Thomas Klingenstein
 A dreamlike, orange-toned painting featuring Japanese elements and silhouettes, expressing a longing for love, peace, and distant lands during the division.
 
-{{image:vergebt-mir-die-liebe}}
+{{image:umleitung-japanischer-sektor}}
 
 ### "Berlin bei Nacht" (Berlin at Night) by Yvonne Onischke
 A colorful, stylized cityscape that depicts Berlin after dark, featuring the Spree river and the historic brick towers of the nearby Oberbaumbrücke.
@@ -111,15 +111,7 @@ A Catalan artist's tribute to hope and tolerance, featuring soft yellow and grey
 
 {{image:parlo-damor}}
 
-## What is nearby
 
-The East Side Gallery sits in one of Berlin's most enjoyable corners, so do not just walk it and leave:
-
-- **Oberbaumbrücke**, the photogenic double-deck brick bridge at the Warschauer Straße end, crosses the Spree into Kreuzberg and was itself a border crossing during the division.
-- **The Spree riverbank** and its bars are a good place to sit after the walk.
-- **Friedrichshain and Kreuzberg**, the neighbourhoods on either side, are the heart of Berlin's nightlife and street-art scene.
-
-{{image:uber-arena}}
 
 ## The honest take: gallery versus memorial
 
@@ -140,6 +132,7 @@ A few practical notes:
 - **Getting there.** Take the S-Bahn to Ostbahnhof for the quieter northern end, or the S-Bahn and U-Bahn to Warschauer Straße for the Oberbaumbrücke end. Both are a short walk. If trains still confuse you, here is my [Berlin public transport guide](https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus).
 - **How long.** Allow about 45 minutes to walk the full 1.3 kilometres and stop at the famous murals. Longer if it is busy.
 - **When to go.** Early morning is far quieter and far better for photos. By midday it is shoulder to shoulder around the famous pieces. For more timing ideas, see [Berlin's best photo spots](https://www.berlinwalk.com/post/7-best-photo-spots-in-berlin-most-tourists-walk-right-past).
+- **Visitor center and info steles.** While the gallery is entirely open-air and open 24/7, the Berlin Wall Foundation runs a small visitor center at Mühlenstraße 73 (open daily 10:00 AM – 5:00 PM) for questions and guided tours. They have also installed 15 glass information panels (steles) and large aluminum "wall angles" along the path with witness interviews and historical context.
 
 ## What is nearby
 
@@ -148,6 +141,8 @@ The East Side Gallery sits in one of Berlin's most enjoyable corners, so do not 
 - **Oberbaumbrücke**, the photogenic double-deck brick bridge at the Warschauer Straße end, crosses the Spree into Kreuzberg and was itself a border crossing during the division.
 - **The Spree riverbank** and its bars are a good place to sit after the walk.
 - **Friedrichshain and Kreuzberg**, the neighbourhoods on either side, are the heart of Berlin's nightlife and street-art scene.
+
+{{image:uber-arena}}
 
 ## The East Side Gallery and the rest of the Wall
 

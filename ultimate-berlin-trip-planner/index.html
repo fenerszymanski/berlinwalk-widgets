@@ -8025,6 +8025,12 @@
       line-height: 1.45;
     }
 
+    #bw-trip-planner .bw-block-copy .bw-place-note {
+      color: #36513A;
+      font-weight: 500;
+      margin-top: 5px;
+    }
+
     #bw-trip-planner .bw-block-tour {
       background:
         linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(255, 255, 255, 0.96)),
@@ -12057,6 +12063,57 @@
     }).join('') + '</div>';
   }
 
+  var PLACE_STEP_NOTES = {
+    alexanderplatz: 'Alexanderplatz is useful for first bearings and transport.',
+    museum_island: 'Museum Island gives you Berlin’s big museum layer in one compact area.',
+    hackescher_markt: 'Hackescher Markt works well for courtyards, cafes, and an easy finish.',
+    wall_memorial: 'The Wall Memorial shows how the Wall cut through a real neighborhood.',
+    east_side_gallery: 'East Side Gallery is the longest painted stretch of the Wall.',
+    oberbaum_bridge: 'Oberbaum Bridge connects the Spree, Kreuzberg, and Friedrichshain in one easy walk.',
+    brandenburg_gate: 'Brandenburg Gate is Berlin’s clearest symbol of division and reunification.',
+    holocaust_memorial: 'The Holocaust Memorial is a serious stop, so give it time instead of rushing past.',
+    reichstag: 'The Reichstag shows Berlin’s government quarter; book the dome if you want to go inside.',
+    gendarmenmarkt: 'Gendarmenmarkt is one of Berlin’s most elegant historic squares.',
+    nikolaiviertel: 'Nikolaiviertel is Berlin’s small reconstructed medieval quarter by the Spree.',
+    berlin_cathedral: 'Berlin Cathedral gives Museum Island a strong landmark even without entering a museum.',
+    hackesche_hofe: 'Hackesche Hofe is a maze of courtyards, shops, cafes, and old tile facades.',
+    kastanienallee: 'Kastanienallee is good for a slower Prenzlauer Berg cafe-and-shop rhythm.',
+    topography_terror: 'Topography of Terror is a free, direct history stop on the former Nazi power site.',
+    tiergarten: 'Tiergarten gives the plan open space between heavier history stops.',
+    victory_column: 'Victory Column gives you a classic Tiergarten landmark and a strong photo point.',
+    tempelhofer_feld: 'Tempelhofer Feld is a huge former airport, now one of Berlin’s best free spaces.',
+    treptower_park: 'Treptower Park adds a riverside walk and a major Soviet memorial.',
+    raw_gelande: 'RAW-Gelande is the rougher Friedrichshain nightlife and street-art layer.',
+    oranienstrasse: 'Oranienstrasse gives you Kreuzberg food, bars, and a more local street feel.',
+    simon_dach_strasse: 'Simon-Dach-Strasse is a simple Friedrichshain evening area with many bars.',
+    kulturbrauerei: 'Kulturbrauerei is an old brewery complex that now works as a relaxed culture stop.',
+    savignyplatz: 'Savignyplatz gives you a calmer West Berlin square with cafes and restaurants.',
+    lietzensee: 'Lietzensee is a quiet local lake stop when the trip needs a slower hour.',
+    sanssouci: 'Sanssouci is the main reason to choose Potsdam over another Berlin neighborhood day.',
+    charlottenburg_palace: 'Charlottenburg Palace is the easiest palace layer without leaving Berlin.'
+  };
+
+  function placeStepNote(placeId) {
+    var custom = PLACE_STEP_NOTES[placeId];
+    if (custom) return custom;
+    var place = placeFor(placeId);
+    if (!place || !place.why) return '';
+    return String(place.why).split(/[.!?]/)[0] + '.';
+  }
+
+  function blockPlaceNoteHtml(day, block, index) {
+    if (!day || !block) return '';
+    if (block.time === 'Lunch' || isDayClosingBlock(day, block, index) || isTourBlock(block)) return '';
+    if (!/^(arrival|morning|afternoon)$/i.test(String(block.time || ''))) return '';
+    var notes = [];
+    blockMapLinks(day, block, index).slice(0, 2).forEach(function (link) {
+      var note = placeStepNote(link.placeId);
+      if (note && notes.indexOf(note) === -1) notes.push(note);
+    });
+    if (!notes.length) return '';
+    return '<span class="bw-place-note">' + escapeHtml(notes.join(' ')) + '</span>';
+  }
+
   function tripRouteStops(plan, limit) {
     var seen = {};
     var stops = [];
@@ -13498,7 +13555,7 @@
     north: ['prater_biergarten', 'konnopkes_imbiss'],
     west: ['dicke_wirtin', 'schwarzes_cafe'],
     kreuzberg: ['markthalle_neun', 'mustafas_kebap', 'curry_36', 'burgermeister_schlesi'],
-    cheap: ['curry_61', 'konnopkes_imbiss', 'curry_36', 'mustafas_kebap'],
+    cheap: ['curry_61', 'curry_36', 'mustafas_kebap', 'shiso_burger', 'yamyam'],
     potsdam_backup: ['dicke_wirtin', 'schwarzes_cafe', 'maximilians']
   };
 
@@ -13540,6 +13597,30 @@
     return /charlottenburg|savignyplatz|lietzensee|west-side|west side/.test(text);
   }
 
+  function dayFoodContextText(day) {
+    return [
+      day && day.title,
+      day && day.theme,
+      day && (day.placeIds || []).join(' '),
+      day && (day.blocks || []).map(function (block) {
+        return [block.time, block.title, block.copy].join(' ');
+      }).join(' ')
+    ].join(' ').toLowerCase();
+  }
+
+  function areaLockedLunchPool(day) {
+    var text = dayFoodContextText(day);
+    if (/hackescher|world_clock/.test(text)) return FOOD_POOLS.hackescher_lunch.slice();
+    if (/charlottenburg|savignyplatz|lietzensee|west-side|west side/.test(text)) return FOOD_POOLS.west.concat(FOOD_POOLS.mitte_sit);
+    if (/east_side_gallery|oberbaum|raw_gelande|friedrichshain|oranienstrasse|kreuzberg|wall memorial|bernauer/.test(text)) return FOOD_POOLS.east.concat(FOOD_POOLS.kreuzberg);
+    if (/kulturbrauerei|kastanienallee|prenzlauer/.test(text)) return FOOD_POOLS.north.concat(FOOD_POOLS.mitte_quick);
+    if (/potsdam|sanssouci/.test(text)) return FOOD_POOLS.potsdam_backup.concat(FOOD_POOLS.west);
+    if (/tiergarten|victory_column|tempelhofer|treptower|topography|brandenburg|reichstag|holocaust|gendarmenmarkt|nikolaiviertel|museum_island|berlin_cathedral|mitte|potsdamer/.test(text)) {
+      return FOOD_POOLS.mitte_quick.concat(FOOD_POOLS.mitte_sit, FOOD_POOLS.west);
+    }
+    return [];
+  }
+
   function preferredFoodPool(day, meal) {
     var type = dayVisualType(day);
     var base = state.stayArea || 'unsure';
@@ -13552,6 +13633,10 @@
         pool = pool.filter(function (placeId) { return placeId !== 'hackescher_markt_market'; });
       }
       return pool;
+    }
+    if (meal === 'lunch') {
+      pool = areaLockedLunchPool(day);
+      if (pool.length) return validFoodIds(pool);
     }
     if (meal === 'dinner' && dayHasTour(day)) {
       return FOOD_POOLS.tour_finish_dinner.slice();
@@ -13577,18 +13662,18 @@
       if (!used[placeId]) picked.push(placeId);
     });
 
+    if (picked.length < count) {
+      ids.forEach(function (placeId) {
+        if (picked.length >= count) return;
+        if (picked.indexOf(placeId) === -1) picked.push(placeId);
+      });
+    }
+
     if (picked.length < count && allowGlobalFallback !== false) {
       allFoodIds().forEach(function (placeId) {
         if (picked.length >= count) return;
         if (!used[placeId] && picked.indexOf(placeId) === -1) picked.push(placeId);
       });
-    }
-
-    if (picked.length && allowGlobalFallback === false) {
-      picked.forEach(function (placeId) {
-        used[placeId] = true;
-      });
-      return picked.slice(0, count);
     }
 
     if (!picked.length) ids.forEach(function (placeId) {
@@ -13644,30 +13729,30 @@
     var ids = mealIdsForDay(day, 'dinner');
     var options = foodOptionText(ids);
     if (day.dayNumber === 1 && state.arrivalTime === 'evening') {
-      return 'Keep dinner close to where you sleep. ' + options + ' is enough for tonight; save the real sightseeing for a clearer day.';
+      return 'Eat close to where you sleep. ' + options + ' is enough for tonight; start sightseeing tomorrow.';
     }
     if (day.dayNumber === 1) {
-      return 'Choose ' + options + ' near your base and keep the first night easy. Arrival days work better when they end early.';
+      return 'Choose ' + options + ' near your base and keep the first night easy.';
     }
     if (dayHasTour(day)) {
-      return 'End close to the tour finish. ' + options + ' keeps dinner around Mitte or Hackescher Markt instead of turning the evening into a transfer.';
+      return 'Eat around Mitte or Hackescher Markt after the tour. ' + options + ' is an easy finish.';
     }
     if (type === 'wall' || type === 'nightlife') {
-      return 'Stay near today\'s east-side route for dinner. ' + options + ' keeps the evening simple after the heavier history layer.';
+      return 'Stay on the east side for dinner. ' + options + ' keeps the evening simple.';
     }
     if (type === 'food') {
-      return 'Let dinner belong to the same neighborhood. Choose ' + options + ' and avoid adding another transfer at the end of the day.';
+      return 'Keep dinner in the same neighborhood. Choose ' + options + ' and end the day there.';
     }
     if (dayUsesWestSide(day)) {
-      return 'Keep dinner on the west side after this route. ' + options + ' is a calmer finish than riding back across town.';
+      return 'Keep dinner on the west side. ' + options + ' is a calm finish.';
     }
     if (type === 'free') {
-      return 'Keep the low-budget day practical at night too. ' + options + ' gives you food without turning dinner into a project.';
+      return 'Keep the low-budget day simple at night too. ' + options + ' is a clear dinner choice.';
     }
     if (type === 'potsdam') {
-      return 'After Potsdam, come back and eat without adding a second Berlin mission. Use ' + options + ' if you want a clear option.';
+      return 'After Potsdam, come back and eat without adding another big plan. Use ' + options + ' if you want a clear option.';
     }
-    return 'Finish central and keep the evening uncomplicated. ' + options + ' gives you a clear dinner choice before the day gets too long.';
+    return 'Finish central and keep the evening simple. ' + options + ' gives you a clear dinner choice.';
   }
 
   function dayLunchCopy(day) {
@@ -13678,25 +13763,28 @@
       if (ids.indexOf('hackescher_markt_market') !== -1) {
         return 'After the walk, stay near Hackescher Markt for lunch. Use the market stands if they are running, or keep ' + foodOptionText(ids.filter(function (id) { return id !== 'hackescher_markt_market'; })) + ' as the easy backup.';
       }
-      return 'After the walk, eat around Hackescher Markt before you continue. ' + options + ' keeps lunch close to the tour finish.';
+      return 'After the walk, eat around Hackescher Markt before you continue. Try ' + options + '.';
+    }
+    if (day.dayNumber === 1) {
+      return 'After you reach your base, eat nearby before adding more stops. Try ' + options + '.';
     }
     if (type === 'history') {
-      return 'Keep lunch central before the next history stop. ' + options + ' gives you a real pause without changing neighborhoods.';
+      return 'Eat before the next history stop. ' + options + ' keeps lunch central.';
     }
     if (dayUsesWestSide(day)) {
-      return 'Use lunch as a west-side pause. ' + options + ' keeps the day around Charlottenburg instead of pulling you back across town.';
+      return 'Take lunch on the west side. ' + options + ' keeps the day around Charlottenburg.';
     }
     if (type === 'museums') {
-      return 'Use lunch as the museum reset. ' + options + ' gives you a real break before the next entry or exterior walk.';
+      return 'Use lunch as the museum break. ' + options + ' gives you time before the next stop.';
     }
     if (type === 'wall') {
-      return 'Eat near the Wall route before you move on. ' + options + ' keeps the day connected instead of sending you across town.';
+      return 'Eat near the Wall route before you move on. Try ' + options + '.';
     }
     if (type === 'food') {
       return 'This is the day to sit down properly. Start with ' + options + ', then let the afternoon stay in the same neighborhood.';
     }
     if (type === 'free') {
-      return 'Keep lunch cheap and practical. ' + options + ' works before the park or free history layer.';
+      return 'Keep lunch cheap and practical. ' + options + ' works before the park or the next free stop.';
     }
     if (type === 'nightlife') {
       return 'Eat properly before the evening plan. ' + options + ' is the practical move here.';
@@ -13704,7 +13792,7 @@
     if (type === 'potsdam') {
       return 'Keep lunch flexible around the station or palace route. If Potsdam feels too heavy, use ' + options + ' back in Berlin.';
     }
-    return 'Keep lunch close to today\'s area. ' + options + ' gives the day a real pause without changing neighborhoods.';
+    return 'Keep lunch close to today\'s area. Try ' + options + ' before you continue.';
   }
 
   function dayBlockCopy(day, block, index) {
@@ -14969,22 +15057,22 @@
   function focusDayMove(key, compact) {
     var moves = {
       history: {
-        time: compact ? 'History anchor' : 'Afternoon',
-        title: compact ? 'Use one free central history layer' : 'Free central history layer',
+        time: compact ? 'History stop' : 'Afternoon',
+        title: compact ? 'Choose one free central history stop' : 'Free central history stop',
         copy: compact
           ? 'Visit Brandenburg Gate, memorials, or Topography of Terror. Keep it easy.'
           : 'Stay central: see the Brandenburg Gate, memorials, or Topography of Terror.'
       },
       museums: {
         time: compact ? 'One strong stop' : 'Afternoon',
-        title: compact ? 'Choose one museum or Museum Island edge' : 'Choose one Museum Island anchor',
+        title: compact ? 'Choose one museum or Museum Island walk' : 'Choose one Museum Island stop',
         copy: compact
           ? 'Explore Museum Island. Pick one checked-open museum to visit slowly.'
           : 'Choose one checked-open museum, or explore the cathedral gardens.'
       },
       wall: {
         time: compact ? 'One strong stop' : 'Afternoon',
-        title: compact ? 'Add one Wall / Cold War anchor' : 'Add one Wall / Cold War layer',
+        title: compact ? 'Add one Wall / Cold War stop' : 'Add one Wall / Cold War stop',
         copy: compact
           ? 'Visit Bernauer Straße Wall Memorial or the Topography of Terror.'
           : 'Choose one serious Wall or Cold War stop. Keep the route simple.'
@@ -14997,8 +15085,8 @@
           : 'Stay close: explore courtyards, Spree edge, or a local market stop.'
       },
       free: {
-        time: compact ? 'Free anchor' : 'Afternoon',
-        title: compact ? 'Use free outdoor history' : 'Free outdoor history',
+        time: compact ? 'Free stop' : 'Afternoon',
+        title: compact ? 'Choose free outdoor history' : 'Free outdoor history',
         copy: compact
           ? 'Explore Brandenburg Gate, memorials, or Topography of Terror for free.'
           : 'See the Brandenburg Gate, memorials, or Topography of Terror.'
@@ -15117,12 +15205,28 @@
       });
     } else if (arrivalDayTourEligible()) {
       var arrivalSlot = arrivalDayTourSlot() || makeTourSlot(state.arrivalDate, TOUR_DEFAULT_SLOT);
+      if (arrivalSlot.startLabel === TOUR_SUMMER_AFTERNOON_SLOT.start) {
+        blocks.push({
+          time: 'Lunch',
+          window: '12:30-13:30',
+          title: 'Lunch before BerlinWalk',
+          copy: ''
+        });
+      }
       blocks.push({
         time: 'BerlinWalk',
         window: arrivalSlot.timeLabel,
         title: 'Use the walking tour as your first Berlin introduction',
         copy: 'Join BerlinWalk at ' + arrivalSlot.startLabel + ' from the World Clock for context.'
       });
+      if (arrivalSlot.startLabel === TOUR_DEFAULT_SLOT.start) {
+        blocks.push({
+          time: 'Lunch',
+          window: '13:30-14:30',
+          title: 'Lunch near Hackescher Markt',
+          copy: ''
+        });
+      }
       if (arrivalSlot.startLabel === TOUR_DEFAULT_SLOT.start) blocks.push(afterTourFocusMove());
     } else if (state.tripLength > 1) {
       if (state.arrivalTime === 'afternoon') {
@@ -15133,6 +15237,14 @@
         });
         return blocks;
       } else {
+        if (state.arrivalTime === 'morning' || state.arrivalTime === 'lateMorning' || state.arrivalTime === 'midday') {
+          blocks.push({
+            time: 'Lunch',
+            window: state.arrivalTime === 'midday' ? '14:00-15:00' : '12:30-13:30',
+            title: 'Lunch near your base',
+            copy: ''
+          });
+        }
         blocks.push({
           time: baseMove.time,
           title: baseMove.title,
@@ -15155,9 +15267,9 @@
         accent: '#1B5E20',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Brandenburg Gate walk', copy: 'Start with Brandenburg Gate and the Holocaust Memorial. Give this part time.' },
+          { time: 'Morning', title: 'Brandenburg Gate and memorials', copy: 'Start at Brandenburg Gate, then walk slowly through the memorial area.' },
           { time: 'Lunch', title: 'Lunch in Mitte', copy: '' },
-          { time: 'Afternoon', title: 'Choose one deeper history stop', copy: 'Use Topography of Terror or the Reichstag area as the second layer.' },
+          { time: 'Afternoon', title: 'Topography of Terror or Reichstag', copy: 'Choose one deeper history stop. Do not turn this into a museum race.' },
           { time: 'Evening', title: 'Dinner in Mitte', copy: '' }
         ],
         placeIds: ['brandenburg_gate', 'topography_terror', 'reichstag']
@@ -15168,9 +15280,9 @@
         accent: '#2F80ED',
         bg: '#EAF4FF',
         blocks: [
-          { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Walk Bernauer Straße to see where the Wall split this neighborhood.' },
+          { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Start at Bernauer Strasse, where the Wall cut through a real neighborhood.' },
           { time: 'Lunch', title: 'Lunch near the Wall', copy: '' },
-          { time: 'Afternoon', title: 'East Side Gallery', copy: 'See the famous murals on the longest remaining section of the Wall.' },
+          { time: 'Afternoon', title: 'East Side Gallery and Spree edge', copy: 'Use the painted Wall, then keep the rest of the afternoon nearby.' },
           { time: 'Evening', title: 'Dinner in Friedrichshain', copy: '' }
         ],
         placeIds: ['wall_memorial', 'east_side_gallery', 'oberbaum_bridge', 'raw_gelande']
@@ -15181,9 +15293,9 @@
         accent: '#F5A623',
         bg: '#FFF3D7',
         blocks: [
-          { time: 'Morning', title: 'Museum Island walk', copy: 'Walk around Museum Island. Pick one museum to explore slowly.' },
+          { time: 'Morning', title: 'Museum Island walk', copy: 'Walk Museum Island first, then choose one museum if you want to go inside.' },
           { time: 'Lunch', title: 'Lunch in Mitte', copy: '' },
-          { time: 'Afternoon', title: 'Royal Berlin sights', copy: 'Walk around Berlin Cathedral, or see the Brandenburg Gate.' },
+          { time: 'Afternoon', title: 'Royal Berlin sights', copy: 'Walk Berlin Cathedral, the river, or Brandenburg Gate without adding another big museum.' },
           { time: 'Evening', title: 'Dinner in Mitte', copy: '' }
         ],
         placeIds: ['museum_island', 'brandenburg_gate', 'reichstag']
@@ -15207,9 +15319,9 @@
         accent: '#7CB342',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Spree riverside walk', copy: 'Walk next to parliament buildings and enjoy the Spree views.' },
-          { time: 'Lunch', title: 'Lunch at Potsdamer Platz', copy: '' },
-          { time: 'Afternoon', title: 'Relax in Tiergarten', copy: 'Stroll through Tiergarten park and see the Victory Column.' },
+          { time: 'Morning', title: 'Spree and parliament walk', copy: 'Walk the river near the parliament buildings. It is free, central, and easy.' },
+          { time: 'Lunch', title: 'Lunch before the park', copy: '' },
+          { time: 'Afternoon', title: 'Tiergarten and Victory Column', copy: 'Use the park for open space after the central history stops.' },
           { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
         placeIds: ['topography_terror', 'tiergarten', 'tempelhofer_feld']
@@ -15272,7 +15384,7 @@
       history: {
         theme: 'Tour + central history',
         title: 'BerlinWalk tour, then free central history',
-        afternoonTitle: 'Use one free central history layer',
+        afternoonTitle: 'Choose one free central history stop',
         afternoonCopy: 'After lunch, stay central: Brandenburg Gate, memorials, Reichstag exterior, or Topography of Terror. Use a museum only if you explicitly want one.',
         eveningTitle: 'Simple central dinner',
         eveningCopy: 'End near Mitte, Hackescher Markt, or your base so the first day stays clear.',
@@ -15283,8 +15395,8 @@
       museums: {
         theme: 'Tour + museums',
         title: 'BerlinWalk tour, then Museum Island',
-        afternoonTitle: 'Choose one Museum Island anchor',
-        afternoonCopy: 'After lunch, pick one checked-open museum or use the cathedral/exteriors if you do not want a queue. One museum is enough today.',
+        afternoonTitle: 'Choose one Museum Island stop',
+        afternoonCopy: 'After lunch, choose one open museum, or stay outside around the Cathedral and Spree if you do not want a queue. One museum is enough today.',
         eveningTitle: 'Central dinner, no second queue',
         eveningCopy: 'Keep dinner around Mitte, Hackescher Markt, or your base so the museum day does not turn into a checklist.',
         placeIds: ['world_clock', 'museum_island', 'brandenburg_gate', 'hackescher_markt'],
@@ -15293,10 +15405,10 @@
       },
       wall: {
         theme: 'Tour + Wall / Cold War',
-        title: 'BerlinWalk tour, then one Cold War layer',
+        title: 'BerlinWalk tour, then one Cold War stop',
         afternoonTitle: hasRainConcern() ? 'Use one rain-safe Cold War stop' : 'Add one Wall / Cold War stop',
         afternoonCopy: hasRainConcern()
-          ? 'After lunch, use Topography of Terror as the rain-safe history layer, then stop. Save the Wall Memorial / East Side Gallery geography for a separate day.'
+          ? 'After lunch, use Topography of Terror as the rain-safe history stop, then stop. Save Wall Memorial or East Side Gallery for a separate day.'
           : 'After lunch, choose one serious Wall or Cold War stop. Do not try to do every Wall site today.',
         eveningTitle: 'Easy dinner after the history layer',
         eveningCopy: 'End near your base or Hackescher Markt so the day stays coherent.',
@@ -15309,7 +15421,7 @@
       food: {
         theme: 'Tour + food',
         title: 'BerlinWalk tour, then courtyards and food',
-        afternoonTitle: 'Use Hackescher Markt as the food/courtyard layer',
+        afternoonTitle: 'Stay around Hackescher Markt',
         afternoonCopy: 'After the walk, stay close: courtyards, Spree edge, one market/cafe stop, then dinner in the same area.',
         eveningTitle: 'One-area dinner',
         eveningCopy: 'Pick dinner near Hackescher Markt or your base instead of crossing the city again.',
@@ -15357,7 +15469,7 @@
       time: 'BerlinWalk',
       window: slot ? slot.timeLabel : TOUR_TIME_LABEL,
       title: 'Recommended: BerlinWalk at ' + (slot ? slot.startLabel : TOUR_START_LABEL) + ' from the World Clock',
-      copy: 'Start with the 2-hour walk, then keep the rest of this day to one nearby layer.'
+      copy: 'Start with the 2-hour walk, then keep the rest of this day nearby.'
     };
     var focusBlock = {
       time: 'Afternoon',
@@ -15569,8 +15681,9 @@
         title: 'Government quarter, memorials, and old Mitte',
         theme: 'Central history without repeats',
         blocks: [
-          { time: 'Morning', title: 'Government quarter and Holocaust Memorial', copy: 'Use a different central history edge.' },
-          { time: 'Afternoon', title: 'Gendarmenmarkt to Nikolaiviertel', copy: 'Move through old Mitte without repeating yesterday.' },
+          { time: 'Morning', title: 'Government quarter and Holocaust Memorial', copy: 'Start with the memorials and the government quarter. Keep the morning focused.' },
+          { time: 'Lunch', title: 'Lunch before old Mitte', copy: '' },
+          { time: 'Afternoon', title: 'Gendarmenmarkt to Nikolaiviertel', copy: 'Walk from Gendarmenmarkt to Nikolaiviertel to see Berlin’s older city layer.' },
           { time: 'Evening', title: 'Simple central dinner', copy: '' }
         ],
         placeIds: ['holocaust_memorial', 'gendarmenmarkt', 'nikolaiviertel']
@@ -15580,8 +15693,9 @@
         title: 'East Side Gallery and the Spree edge',
         theme: 'Wall / Cold War without repeat stops',
         blocks: [
-          { time: 'Morning', title: 'East Side Gallery', copy: 'Use the painted Wall section today.' },
-          { time: 'Afternoon', title: 'Oberbaum Bridge and Kreuzberg edge', copy: 'Keep the add-on nearby and east.' },
+          { time: 'Morning', title: 'East Side Gallery', copy: 'Walk the painted Wall section slowly. Start at the quieter end if it is busy.' },
+          { time: 'Lunch', title: 'Lunch near the Spree', copy: '' },
+          { time: 'Afternoon', title: 'Oberbaum Bridge and Kreuzberg edge', copy: 'Cross Oberbaum Bridge and keep the afternoon close to the Spree.' },
           { time: 'Evening', title: 'Dinner east', copy: '' }
         ],
         placeIds: ['east_side_gallery', 'oberbaum_bridge', 'raw_gelande']
@@ -15591,8 +15705,9 @@
         title: 'Free Berlin away from the repeat anchors',
         theme: 'Parks, open space, and cheap food',
         blocks: [
-          { time: 'Morning', title: 'Tempelhofer Feld or Tiergarten', copy: 'Choose one big free outdoor space instead of repeating the central memorial loop.' },
-          { time: 'Afternoon', title: 'Treptower Park or Victory Column edge', copy: 'Add a second free anchor only if energy holds.' },
+          { time: 'Morning', title: 'Tempelhofer Feld or Tiergarten', copy: 'Choose one big free outdoor space instead of adding more central monuments.' },
+          { time: 'Lunch', title: 'Cheap lunch nearby', copy: '' },
+          { time: 'Afternoon', title: 'Treptower Park or Victory Column', copy: 'Add a second free stop only if the day still feels easy.' },
           { time: 'Evening', title: 'Cheap food close by', copy: '' }
         ],
         placeIds: ['tempelhofer_feld', 'treptower_park', 'victory_column']
@@ -15602,8 +15717,9 @@
         title: 'Charlottenburg Palace or one west-side museum',
         theme: 'Museum day without repeating Mitte',
         blocks: [
-          { time: 'Morning', title: 'Charlottenburg Palace or one west-side anchor', copy: 'Use a west-side museum or palace layer.' },
-          { time: 'Afternoon', title: 'Savignyplatz and Lietzensee edge', copy: 'Keep the afternoon west-side and relaxed.' },
+          { time: 'Morning', title: 'Charlottenburg Palace or one west-side museum', copy: 'Use the palace or one west-side museum as the main stop.' },
+          { time: 'Lunch', title: 'Lunch in Charlottenburg', copy: '' },
+          { time: 'Afternoon', title: 'Savignyplatz and Lietzensee', copy: 'Stay west for cafes, bookstores, and a quieter lake walk.' },
           { time: 'Evening', title: 'Dinner', copy: '' }
         ],
         placeIds: ['charlottenburg_palace', 'savignyplatz', 'lietzensee']
@@ -15633,14 +15749,14 @@
     if (profile.slow) {
       var slowNoteAdded = false;
       var slowNotes = {
-        history: 'Let the memorials breathe; this is a day to read, sit, and move slowly.',
-        wall: 'One serious Wall stop is enough; the story is easier when you do not chase every site.',
+        history: 'Move slowly here; the history is easier to understand when you pause.',
+        wall: 'One serious Wall stop is enough before you add another area.',
         museums: 'One museum done calmly is better than two rushed entries.',
         food: 'Leave time to sit down; the meal is part of the day.',
         free: 'Use the open space as a real break, not just another checkbox.',
         nightlife: 'Save energy now so the evening still feels fun.',
-        local: 'Let this be a neighborhood day with cafe time built in.',
-        potsdam: 'If Potsdam feels heavy, switch to the Berlin backup without guilt.'
+        local: 'Make this a neighborhood day with cafe time built in.',
+        potsdam: 'If Potsdam feels heavy, switch to the Berlin backup.'
       };
       blocks = blocks.map(function (block) {
         if (!slowNoteAdded && /^(morning|afternoon)$/i.test(String(block.time || ''))) {
@@ -16298,10 +16414,11 @@
         var copy = dayBlockDisplayCopy(day, block, index);
         var closeClass = isDayClosingBlock(day, block, index) ? ' bw-block-close' : '';
         var tourClass = isTourBlock(block) ? ' bw-block-tour' : '';
+        var placeNote = blockPlaceNoteHtml(day, block, index);
         var mapLinks = blockMapLinksHtml(day, block, index);
         return '<div class="bw-block' + closeClass + tourClass + '">' +
           dayBlockTimeHtml(day, block, index) +
-          '<div class="bw-block-copy"><strong>' + escapeHtml(block.title) + '</strong>' + (copy ? '<span>' + escapeHtml(copy) + '</span>' : '') + mapLinks + '</div>' +
+          '<div class="bw-block-copy"><strong>' + escapeHtml(block.title) + '</strong>' + (copy ? '<span>' + escapeHtml(copy) + '</span>' : '') + placeNote + mapLinks + '</div>' +
         '</div>';
       }).join('');
       var routeCard = dayRouteCardHtml(day);
@@ -17387,7 +17504,7 @@
     rawDayStories.map(function (item) {
       return {
         dayNumber: Number(item && item.dayNumber) || 0,
-        text: cleanAiText(item && item.text, '', 240)
+        text: cleanAiText(item && item.text, '', 360)
       };
     }).filter(function (item) {
       return validDays[item.dayNumber] && item.text;
@@ -17398,7 +17515,7 @@
     var dayStories = planDays.map(function (day) {
       return {
         dayNumber: day.dayNumber,
-        text: cleanAiText(storyByDay[day.dayNumber] || mockDayStory(day, slotForStories), '', 240)
+        text: cleanAiText(storyByDay[day.dayNumber] || mockDayStory(day, slotForStories), '', 360)
       };
     }).filter(function (item) {
       return item.text;
@@ -17496,15 +17613,15 @@
   function mockRouteIntro(plan, mainFocus, slot) {
     var days = plan.days || [];
     var first = days[0] ? guideAnchorNaturalPhrase(days[0], 2) : 'your first Berlin bearings';
-    var last = days.length > 1 ? guideAnchorNaturalPhrase(days[days.length - 1], 2) : '';
+    var firstMainDay = days[1] ? guideAnchorNaturalPhrase(days[1], 2) : '';
     var tourDay = slot && slot.insideTrip
-      ? ' Use BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock, then leave the rest of that day lighter.'
+      ? ' I would keep BerlinWalk for ' + slot.dayLabel + ' at ' + slot.startLabel + '; after the walk, do lunch near Hackescher Markt and keep the afternoon nearby.'
       : '';
     var focusLine = mainFocus && mainFocus !== 'Berlin'
-      ? ' Save the bigger ' + mainFocus + ' until after you are settled.'
-      : ' Save the bigger sights until after you are settled.';
-    var ending = last && days.length > 2 ? ' Save ' + last + ' for a day when the weather and your legs still feel good.' : '';
-    return 'I would keep this plan simple. Start gently with ' + first + '.' + focusLine + tourDay + ending;
+      ? ' The bigger ' + mainFocus + ' is better after you have slept and found your rhythm.'
+      : ' The bigger sightseeing is better after you have slept and found your rhythm.';
+    var secondLine = firstMainDay ? ' The next day can start properly around ' + firstMainDay + ', instead of trying to squeeze everything into arrival day.' : '';
+    return 'Hey there, I am Yusuf, your Berlin guide. I made this plan to keep your first day simple: reach your base, eat something, and take an easy first walk around ' + first + '.' + focusLine + tourDay + secondLine;
   }
 
   function mockDayStory(day, slot) {
@@ -17516,33 +17633,33 @@
     var isTourDay = slot && slot.insideTrip && day.dayNumber === slot.offset + 1;
 
     if (day.dayNumber === 1) {
-      return 'After arrival, keep it simple: use ' + first + ' for first bearings, get food and water, and leave the heavier stops for the next day.';
+      return 'For Day 1, I would keep it very simple: arrive, eat, get water, then take a short first walk around ' + first + '.';
     }
     if (isTourDay) {
-      return 'Do BerlinWalk at ' + slot.startLabel + ' first. Starting at the World Clock makes the Mitte story easier to follow; after that, choose ' + second + ' and keep the day light.';
+      return 'This is the day I would guide you first: BerlinWalk at ' + slot.startLabel + ', lunch near Hackescher Markt, then ' + second + ' only if you still feel fresh.';
     }
     if (type === 'wall') {
-      return first + ' is the serious Wall stop. Add ' + second + ' only if you still want more Cold War history, not just because it is nearby.';
+      return 'For the Wall day, start with ' + first + '; it explains the story better than rushing between too many Cold War stops.';
     }
     if (type === 'museums') {
-      return 'Give ' + first + ' the proper slot. One museum done slowly will usually beat two rushed entries, especially if queues or rain appear.';
+      return 'For the museum day, give ' + first + ' proper time; one good museum visit is usually better than three rushed ones.';
     }
     if (type === 'history') {
-      return 'Keep this central and sober: start with ' + first + ', then use ' + second + ' for air and a different kind of Berlin history.';
+      return 'For older Berlin, start with ' + first + ', then walk toward ' + second + ' after lunch so the day has a clear story.';
     }
     if (type === 'food') {
-      return 'Let the food day move slowly. ' + first + ' and ' + second + ' work best when you leave time to sit, look around, and change your mind.';
+      return 'This is the day to slow down for food and neighborhoods; take your time around ' + first + ', then continue toward ' + second + '.';
     }
     if (type === 'free') {
-      return 'Keep this cheap and mostly outside. ' + first + ' gives you the big open Berlin feeling; add ' + second + ' only if the weather still behaves.';
+      return 'For the low-budget day, start with ' + first + '; if the weather is kind, add ' + second + ' without paying for another big entry.';
     }
     if (type === 'nightlife') {
-      return 'Save some legs for later. ' + first + ' is more fun if you do not spend the whole afternoon crossing town before ' + (third || second) + '.';
+      return 'If you want a proper Berlin night, keep the daytime light and save some energy for ' + (third || second) + '.';
     }
     if (type === 'potsdam') {
-      return 'Treat Potsdam as the nice-weather choice. If the day feels heavy, make it a shorter recovery day in Berlin instead.';
+      return 'For Potsdam, I would decide on the morning itself: go if the weather and energy are good, stay in Berlin if not.';
     }
-    return 'Use ' + first + ' and ' + second + ' as a calmer day between bigger sights. This is where the trip gets room to breathe.';
+    return 'This is a calmer day between bigger stops; start with ' + first + ', then keep ' + second + ' as the easy second move.';
   }
 
   function mockAiEnhancement(plan) {
@@ -17583,8 +17700,8 @@
     return normalizeAiEnhancement({
       provider: 'local',
       model: 'deterministic-fallback',
-      noteTitle: 'My read on this plan',
-      routeIntro: 'Start with ' + naturalGuidePhrase(firstAnchors) + ' and keep the first day light. For a ' + days + '-day visit, the order matters more than the number of famous names. Add one nearby stop only when the day still feels good.',
+      noteTitle: 'A note from Yusuf',
+      routeIntro: 'Hey there, I am Yusuf, your Berlin guide. For this ' + days + '-day plan, I would start gently around ' + naturalGuidePhrase(firstAnchors) + '. Eat, get your bearings, and let the bigger Berlin days come after you have settled in.',
       weatherSentence: tripWeatherSummary(plan),
       tourSentence: slot && slot.insideTrip
         ? 'The clean BerlinWalk fit remains ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock.'

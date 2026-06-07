@@ -116,10 +116,45 @@
       border: 1px solid var(--bw-border);
       border-radius: 12px;
       background: var(--bw-white);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    #bw-esg-murals .bw-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      border-color: var(--bw-lime);
+    }
+
+    #bw-esg-murals .bw-card-img-wrap {
+      width: 100%;
+      height: 180px;
+      overflow: hidden;
+      position: relative;
+      border-bottom: 1px solid var(--bw-border);
+      background: #FAFAF5;
+    }
+
+    #bw-esg-murals .bw-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      display: block;
+    }
+
+    #bw-esg-murals .bw-card:hover .bw-card-img {
+      transform: scale(1.04);
+    }
+
+    #bw-esg-murals .bw-card-body {
       padding: 14px 15px;
       display: flex;
       flex-direction: column;
       gap: 6px;
+      flex-grow: 1;
     }
 
     #bw-esg-murals .bw-card-theme {
@@ -262,7 +297,8 @@
           artist: 'Dmitri Vrubel',
           themes: ['politics'],
           text: 'The gallery’s most famous image: the 1979 socialist “fraternal kiss” between Soviet leader Leonid Brezhnev and East Germany’s Erich Honecker.',
-          look: 'Two grey-suited leaders kissing on the mouth.'
+          look: 'Two grey-suited leaders kissing on the mouth.',
+          image: 'images/eastsidegallery11.jpg'
         },
         {
           title: 'Test the Rest',
@@ -278,7 +314,8 @@
           artist: 'Kani Alavi',
           themes: ['fall', 'politics'],
           text: 'A wave of faces squeezing through the opened Wall on the night of 9 November 1989, fear and hope mixed together.',
-          look: 'A crowd of heads pouring through a gap.'
+          look: 'A crowd of heads pouring through a gap.',
+          image: 'images/eastsidegallery43.jpg'
         },
         {
           title: 'The Wall Jumper',
@@ -294,7 +331,8 @@
           artist: 'Thomas Klingenstein',
           themes: ['fall', 'hope'],
           text: 'Painted by an artist who, as a teenager in the GDR, dreamed of Japan. A playful fantasy of escape and faraway places.',
-          look: 'A road-sign motif pointing to a “Japanese sector”.'
+          look: 'A road-sign motif pointing to a “Japanese sector”.',
+          image: 'images/eastsidegallery31.jpg'
         },
         {
           title: 'Doin’ it Cool for the East Side',
@@ -302,7 +340,8 @@
           artist: 'Jim Avignon',
           themes: ['hope'],
           text: 'Bright, cartoonish pop figures. Avignon controversially repainted his own section in 2013, a rare living update to the gallery.',
-          look: 'Flat, comic-style characters in bold colour.'
+          look: 'Flat, comic-style characters in bold colour.',
+          image: 'images/eastsidegallery45.jpg'
         },
         {
           title: 'Curriculum Vitae',
@@ -310,7 +349,8 @@
           artist: 'Susanne Kunjappu-Jellinek',
           themes: ['hope'],
           text: 'A colourful path of a single human life, painted as a journey from birth onward.',
-          look: 'A winding life-line of small scenes.'
+          look: 'A winding life-line of small scenes.',
+          image: 'images/eastsidegallery50.jpg'
         },
         {
           title: 'Berlin by Night',
@@ -318,7 +358,8 @@
           artist: 'Yvonne Onischke',
           themes: ['hope'],
           text: 'A dark, dreamlike dragon coiling over the city, one of the gallery’s most striking nocturnal visions.',
-          look: 'A serpent-dragon stretched across a night-blue sky.'
+          look: 'A serpent-dragon stretched across a night-blue sky.',
+          image: 'images/eastsidegallery44.jpg'
         },
         {
           title: 'Tolerance',
@@ -334,7 +375,8 @@
           artist: 'Ignasi Blanch i Gisbert',
           themes: ['love'],
           text: 'Tender figures on the theme of love and human connection, painted in 1990 by a young Catalan artist.',
-          look: 'Soft outline figures reaching toward each other.'
+          look: 'Soft outline figures reaching toward each other.',
+          image: 'images/eastsidegallery53.jpg'
         },
         {
           title: 'Vaterland',
@@ -342,7 +384,8 @@
           artist: 'Günther Schaefer',
           themes: ['love', 'politics'],
           text: 'The German flag overlaid with a Star of David: a statement against intolerance and a reminder of the past. It has been vandalised and restored many times.',
-          look: 'Black-red-gold stripes behind a Star of David.'
+          look: 'Black-red-gold stripes behind a Star of David.',
+          image: 'images/eastsidegallery1.jpg'
         },
         {
           title: 'Thierry Noir’s Heads',
@@ -360,13 +403,19 @@
 
       function cardHtml(m) {
         var label = THEME_LABEL[m.themes[0]] || '';
+        var imgHtml = m.image ? 
+          '<div class="bw-card-img-wrap"><img class="bw-card-img" src="' + m.image + '" alt="' + m.title + '" loading="lazy"></div>' : 
+          '';
         return '<article class="bw-card" data-themes="' + m.themes.join(' ') + '">' +
+          imgHtml +
+          '<div class="bw-card-body">' +
           '<span class="bw-card-theme">' + label + '</span>' +
           '<div class="bw-card-title">' + m.title + '</div>' +
           (m.de ? '<div class="bw-card-de">' + m.de + '</div>' : '') +
           '<div class="bw-card-artist">' + m.artist + '</div>' +
           '<p class="bw-card-text">' + m.text + '</p>' +
           '<p class="bw-card-look"><strong>Look for:</strong> ' + m.look + '</p>' +
+          '</div>' +
           '</article>';
       }
 
