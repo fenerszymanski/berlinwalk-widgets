@@ -80,7 +80,8 @@
       "lead": "A day-by-day timeline of Berlin Pride / CSD 2026, from the city festival to the July 25 parade, with times, places and nearest U-Bahn.",
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pride-week-timeline/",
-      "embedHeight": 1180
+      "embedHeight": 1180,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-pride-week-timeline-160.png"
     },
     {
       "slug": "berlin-pride-parade-map",
@@ -88,7 +89,8 @@
       "lead": "Follow the Berlin Pride / CSD 2026 parade route on July 25, with the best viewing spots, nearest U-Bahn and the LGBTQ+ memorial near the finish.",
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pride-parade-map/",
-      "embedHeight": 900
+      "embedHeight": 900,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-pride-parade-map-160.png"
     },
     {
       "slug": "welcomecard-calculator",
@@ -240,7 +242,8 @@
       "lead": "Pick the right day trip from Berlin by interest and time, with pinned map stops, train ideas, and honest local notes.",
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-trips-finder/",
-      "embedHeight": 1900
+      "embedHeight": 1900,
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-day-trips-finder-160.png"
     },
     {
       "slug": "whats-open-in-berlin-today",
