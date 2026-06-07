@@ -23,6 +23,8 @@ These are the most famous, centrally located markets that almost every tourist v
 - **Entry Fee:** €2 (free for kids under 12, and free for everyone Monday to Friday from 11:00 to 14:00)
 - **Nearest Station:** U Hausvogteiplatz or U Stadtmitte
 
+![WeihnachtsZauber Gendarmenmarkt under the winter lights](blog-media/christmas-markets/gendarmenmarkt.jpg)
+
 **Why it is worth it:** This is widely considered Berlin’s most beautiful and elegant Christmas market. For the past few years, it was temporarily relocated to Bebelplatz due to massive construction work on the square. But in **2026, the Gendarmenmarkt market is back home** in front of the stunning, newly renovated Gendarmenmarkt square, framed by the Französischer Dom, the Deutscher Dom, and the Konzerthaus. 
 
 It features signature white-point tents, high-end artisans (glassblowers, woodcarvers, toy makers), and gourmet heated dining tents. The atmosphere feels premium and festive.
@@ -35,6 +37,8 @@ It features signature white-point tents, high-end artisans (glassblowers, woodca
 - **Location:** Near Alexanderplatz (surrounding the Neptunbrunnen)
 - **Entry Fee:** Free
 - **Nearest Station:** S+U Alexanderplatz or U Rotes Rathaus
+
+![Berliner Weihnachtszeit am Roten Rathaus with the giant Ferris wheel](blog-media/christmas-markets/rotes-rathaus.jpg)
 
 **Why it is worth it:** Set against the backdrop of Berlin's historic City Hall (Rotes Rathaus) and the towering TV Tower, this market is styled like old Berlin from the early 1900s. The highlights are the huge, circular ice-skating rink built around the Neptunbrunnen (Neptune Fountain) and the 50-meter-high Ferris wheel offering panoramic views of the city. 
 
@@ -62,6 +66,8 @@ Its biggest selling point is convenience—it is located right at Berlin's main 
 - **Entry Fee:** Free
 - **Nearest Station:** U/S Zoologischer Garten or U Kurfürstendamm
 
+![Kaiser Wilhelm Memorial Church Christmas Market at Breitscheidplatz](blog-media/christmas-markets/breitscheidplatz.jpg)
+
 **Why it is worth it:** Located in the heart of West Berlin’s shopping district, this pazar wraps around the historic ruined tower of the Kaiser Wilhelm Memorial Church. With over 100 decorated stalls, it is highly atmospheric, offering exceptional gourmet food, handmade toys, and beautiful glass ornaments. The large light installations draping the square create a beautiful winter canopy. It is also an excellent option if you are looking for things to do after Christmas Day.
 
 **The catch:** It is situated on a very busy transit and shopping junction, meaning it is constantly bustling. Finding a spot to stand with your Glühwein on a weekend evening can be a challenge.
@@ -78,6 +84,8 @@ If you want to experience something different from the standard rows of wooden s
 - **Location:** Kulturbrauerei, Prenzlauer Berg
 - **Entry Fee:** Free
 - **Nearest Station:** U Eberswalder Straße
+
+![Lucia Christmas Market at Kulturbrauerei courtyard](blog-media/christmas-markets/lucia.jpg)
 
 **Why it is worth it:** Tucked inside the historic red-brick courtyards of a 19th-century brewery, the Lucia market is dedicated to Nordic traditions. It is named after the Swedish festival of lights (Saint Lucia). You will find Scandinavian food and drinks here, like Swedish *Glögg* (mulled wine with raisins and almonds), elk meatballs, and Finnish waffles. 
 
@@ -132,6 +140,8 @@ For those seeking grand backdrops, historic romance, or unique winter sports, th
 - **Location:** Charlottenburg Palace, Charlottenburg
 - **Entry Fee:** Free
 - **Nearest Station:** U Richard-Wagner-Platz or S Westend
+
+![Weihnachtsmarkt Schloss Charlottenburg with the illuminated palace backdrop](blog-media/christmas-markets/charlottenburg.jpg)
 
 **Why it is worth it:** If you want that classic, romantic German Christmas market experience set against a majestic royal palace, this is the one to visit. Charlottenburg Palace is illuminated with spectacular light projections in the evening, and the rows of wooden cabins offer traditional crafts, gingerbread (Lebkuchen), and hot drinks. It is incredibly photogenic and feels very peaceful compared to the central Mitte markets.
 

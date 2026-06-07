@@ -2,7 +2,7 @@
 
 Slug idea: `best-christmas-markets-berlin-2026`
 
-Wix draft ID: `87e4aef9-662d-4407-8c16-606378d62fc3` (will be created or updated by the uploader script)
+Wix draft ID: `78263dec-66e8-4e9d-8707-65beb3bcd685` (will be created or updated by the uploader script)
 
 Wix draft status: `UNPUBLISHED`
 
