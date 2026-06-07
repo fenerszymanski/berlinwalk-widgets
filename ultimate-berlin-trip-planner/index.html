@@ -10973,7 +10973,7 @@
       return !isDayClosingBlock(day, block, index);
     }).length;
     var slowTrip = state.pace === 'gentle' || state.groupType === 'family' || state.groupType === 'slow';
-    var packedTrip = state.pace === 'packed';
+    var packedTrip = state.pace === 'packed' && !slowTrip;
     var risks = riskTagsForDay(day);
     var hasRainRisk = risks.some(function (tag) { return tag.key === 'rain'; }) || Boolean(latestWeather && (latestWeather.theme === 'rain' || latestWeather.theme === 'storm'));
     var status = dayStatus(day.dateKey);
@@ -11591,7 +11591,7 @@
   }
 
   function arrivalDayAfternoonTourTimeEligible() {
-    if (state.arrivalTime === 'morning' || state.arrivalTime === 'lateMorning') return state.arrivalPoint !== 'car';
+    if (state.arrivalTime === 'morning' || state.arrivalTime === 'lateMorning') return state.arrivalPoint !== 'ber' && state.arrivalPoint !== 'car';
     if (state.arrivalTime === 'midday') return state.arrivalPoint !== 'ber' && state.arrivalPoint !== 'car';
     return false;
   }
@@ -13580,7 +13580,7 @@
   }
 
   function isHackescherMarketDay(day) {
-    var dayOfWeek = day && day.dateKey ? new Date(day.dateKey).getDay() : -1;
+    var dayOfWeek = day && day.dateKey ? dateFromKey(day.dateKey).getUTCDay() : -1;
     return dayOfWeek === 4 || dayOfWeek === 6;
   }
 
@@ -14132,7 +14132,7 @@
     }
 
     var foodOrNightDay = days.find(function (day) {
-      return /food|night|dinner|bar|club/i.test(day.title + ' ' + day.theme + ' ' + day.blocks.map(function (block) { return block.title; }).join(' '));
+      return day.theme !== 'Arrival day' && (dayVisualType(day) === 'food' || dayVisualType(day) === 'nightlife');
     });
     if (foodOrNightDay && (state.mustHandle.indexOf('reservations') !== -1 || state.interests.indexOf('food') !== -1 || state.interests.indexOf('nightlife') !== -1)) {
       add({
@@ -15996,6 +15996,9 @@
           keyCursor += 1;
           if (!consumedTourFocus || key !== consumedTourFocus) break;
         }
+        // Skip the tour focus only on the day right after the tour, then release it
+        // so longer trips can still feature that theme as a full day again.
+        consumedTourFocus = '';
         if (!key) key = 'local';
         template = diversifyTemplateForUsedPlaces(dayTemplate(key), key, usedPlaceIds);
         template = personalizeDayTemplate(template, key);
@@ -16753,6 +16756,9 @@
 
   function climateWeatherForDate(dateKey) {
     var month = MONTH_CLIMATE[dateParts(dateKey).month - 1];
+    var rainDayCount = parseInt(String(month.rainDays), 10);
+    var rainProbability = Number.isFinite(rainDayCount) ? Math.round((rainDayCount / 30) * 100) : 0;
+    var avgTemp = Math.round((month.hi + month.lo) / 2);
     return {
       dateKey: dateKey,
       mode: 'Monthly average',
@@ -16760,7 +16766,7 @@
       icon: 'AVG',
       title: month.name + ' average, ' + month.hi + ' C high',
       meta: month.lo + ' C low / ' + month.rainDays + ' rainy days',
-      cue: dailyWeatherCue({ temperature: month.hi, rainProbability: 0, windSpeed: 0, weatherCode: null }, 'Monthly average')
+      cue: dailyWeatherCue({ temperature: avgTemp, rainProbability: rainProbability, windSpeed: 0, weatherCode: null }, 'Monthly average')
     };
   }
 

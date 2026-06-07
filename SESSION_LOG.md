@@ -2,6 +2,29 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-07 — Claude Code (Trip Planner logic review + 6 consistency fixes)
+
+**Did:**
+- Independent logic review of the Ultimate Berlin Trip Planner brain (`index.html` + Velo). Found 1 real bug + 5 consistency issues; fixed all 6.
+- Most critical: Hackescher Markt market-day detection used local-timezone `getDay()` (the only non-UTC date read in the file), shifting the day for negative-UTC-offset users (US visitors).
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html`:
+  - `isHackescherMarketDay` → `dateFromKey(k).getUTCDay()` instead of `new Date(k).getDay()` (timezone bug).
+  - `arrivalDayAfternoonTourTimeEligible` → BER now excluded from same-day summer 15:30 slot (matches `PLANNER_LOGIC_REVIEW.md`).
+  - `buildPlan` → `consumedTourFocus` now skips the tour theme only on the day right after the tour, then releases it (was permanently dropping that theme from the whole trip).
+  - `dayRhythmItems` → `packedTrip` now `&& !slowTrip` (consistent with `tripProfile`).
+  - `reservationRadar` → `foodOrNightDay` now uses `dayVisualType` food/nightlife excluding arrival day (was matching ubiquitous "dinner").
+  - `climateWeatherForDate` → cue rainProbability derived from monthly rain-days (was hardcoded 0); cue temp uses monthly average (was daytime high).
+
+**Verified:**
+- `node --check` on embedded script: syntax OK.
+- Isolated node test: tour-slot fix changes only the BER + 09:00-10:00 + summer case, all other arrival combos unchanged; Hackescher TZ bug reproduced under `TZ=America/Los_Angeles` (old misses Thu/Sat, new correct).
+- Preview render (BER/lateMorning/summer/3-day): clean, no console errors, plan renders.
+- `node launch-audit.mjs` → 153 pass / 0 warn / 0 block. `node velo/prepublish-gate.mjs` (key loaded) → 13 pass / 0 warn / 0 block.
+
+**Next session should:** Yusuf reviews, then pushes the widgets repo (GitHub Pages). Velo was not touched, so no Wix re-paste is needed.
+
 ## 2026-06-07 — Codex (Ultimate Trip Planner Yusuf Voice + Mobile Note Fix)
 
 **Did:**
