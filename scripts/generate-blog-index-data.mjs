@@ -181,22 +181,22 @@ const START_HERE_LINKS = [
 
 const SPOTLIGHT_TOOLS = [
   {
-    title: 'World Cup Public-Viewing Finder',
-    slug: 'watch-world-cup-2026-berlin',
-    url: `${BLOG_BASE}/tools/watch-world-cup-2026-berlin`,
-    summary: 'Find free screens, beer gardens, waterside spots and late-night-friendly venues in Berlin.',
+    title: 'East Side Gallery Mural Guide',
+    slug: 'east-side-gallery-murals',
+    url: `${BLOG_BASE}/tools/east-side-gallery-murals`,
+    summary: 'The meaning behind the most famous murals on the Wall, with theme filters and artist notes.',
   },
   {
-    title: 'World Cup Fixtures in Berlin Time',
-    slug: 'world-cup-2026-fixtures-berlin-time',
-    url: `${BLOG_BASE}/tools/world-cup-2026-fixtures-berlin-time`,
-    summary: 'See every 2026 match converted to Berlin time, with Germany and evening-friendly filters.',
+    title: 'Berlin Beer Gardens Map',
+    slug: 'berlin-beer-gardens-map',
+    url: `${BLOG_BASE}/tools/berlin-beer-gardens-map`,
+    summary: 'Find the 12 best beer gardens in Berlin, mapped by atmosphere (traditional vs. craft vs. waterfront) with transit info.',
   },
   {
-    title: 'Berlin First-Day Planner',
-    slug: 'berlin-first-day-planner',
-    url: `${BLOG_BASE}/tools/berlin-first-day-planner`,
-    summary: 'Build a realistic first-day plan around arrival time, luggage, weather, and the tour.',
+    title: 'Berlin Day Trips Finder',
+    slug: 'berlin-day-trips-finder',
+    url: `${BLOG_BASE}/tools/berlin-day-trips-finder`,
+    summary: 'Find 8 day trips from Berlin, mapped by interest and travel time, with transit and ticket info.',
   },
 ];
 
