@@ -476,12 +476,12 @@
 
   function compactFloatingCta() {
     var desktopLabel = document.querySelector('#bw-desktop-cta .bw-label-big');
-    if (desktopLabel && cleanText(desktopLabel.textContent) !== 'Book Now') {
-      desktopLabel.textContent = 'Book Now';
+    if (desktopLabel && cleanText(desktopLabel.textContent) !== 'Book Tour') {
+      desktopLabel.textContent = 'Book Tour';
     }
     var stickyBtn = document.querySelector('#bw-sticky-cta .bw-btn');
-    if (stickyBtn && cleanText(stickyBtn.textContent) !== 'Book Now') {
-      stickyBtn.textContent = 'Book Now';
+    if (stickyBtn && cleanText(stickyBtn.textContent) !== 'Book Tour') {
+      stickyBtn.textContent = 'Book Tour';
     }
   }
 

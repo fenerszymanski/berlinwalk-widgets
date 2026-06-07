@@ -3,8 +3,7 @@
  */
 (function () {
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var SUBSCRIBE_URL = 'https://www.berlinwalk.com/_functions/subscribe';
-  var DOWNLOAD_URL = 'https://12ee5ea0-70a7-492f-8020-ffb27cbb630f.usrfiles.com/ugd/5a08a3_12853b807c6947f09135e339d6ea0a57.pdf';
+  var PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner#planner';
   var IMAGE_URL = getImageUrl();
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
@@ -19,9 +18,9 @@
 
   function getImageUrl() {
     if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
-      return 'assets/exit-intent-world-clock.jpg';
+      return 'ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg';
     }
-    return 'https://fenerszymanski.github.io/berlinwalk-widgets/assets/exit-intent-world-clock.jpg';
+    return 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg';
   }
 
   function isPreviewForced() {
@@ -117,58 +116,14 @@
       '.bw-exit-title{margin:0 44px 12px 0;color:#FFFFFF;font-size:34px;line-height:1.05;font-weight:900;letter-spacing:0;}',
       '.bw-exit-copy{margin:0 0 24px;color:#FAFAF5;font-size:15px;line-height:1.55;font-weight:500;max-width:39em;}',
       '.bw-exit-actions{display:grid;gap:12px;}',
-      '.bw-exit-primary,.bw-exit-secondary,.bw-exit-submit,.bw-exit-back,.bw-exit-download{font-family:Montserrat,Arial,sans-serif;cursor:pointer;text-decoration:none;}',
-      '.bw-exit-primary,.bw-exit-submit{border:0;border-radius:8px;background:#FFE600;color:#1B5E20;font-size:15px;font-weight:900;line-height:1.2;text-align:center;padding:16px 20px;box-shadow:0 10px 24px rgba(255,230,0,.18);transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;}',
-      '.bw-exit-primary:hover,.bw-exit-submit:hover,.bw-exit-primary:focus-visible,.bw-exit-submit:focus-visible{background:#fff066;transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,230,0,.26);outline:0;}',
-      '.bw-exit-download{display:inline-flex;align-items:center;justify-content:center;width:100%;border:0;border-radius:8px;background:#FFE600;color:#1B5E20;font-size:15px;font-weight:900;line-height:1.2;text-align:center;padding:16px 20px;box-shadow:0 10px 24px rgba(255,230,0,.18);transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;}',
-      '.bw-exit-download:hover,.bw-exit-download:focus-visible{background:#fff066;transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,230,0,.26);outline:0;}',
+      '.bw-exit-primary,.bw-exit-secondary{font-family:Montserrat,Arial,sans-serif;cursor:pointer;text-decoration:none;}',
+      '.bw-exit-primary{border:0;border-radius:8px;background:#FFE600;color:#1B5E20;font-size:15px;font-weight:900;line-height:1.2;text-align:center;padding:16px 20px;box-shadow:0 10px 24px rgba(255,230,0,.18);transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;}',
+      '.bw-exit-primary:hover,.bw-exit-primary:focus-visible{background:#fff066;transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,230,0,.26);outline:0;}',
       '.bw-exit-secondary{border:1px solid rgba(250,250,245,.48);border-radius:8px;background:rgba(250,250,245,.08);color:#FAFAF5;font-size:14px;font-weight:800;text-align:center;padding:15px 18px;transition:background-color .18s ease,border-color .18s ease,color .18s ease;}',
       '.bw-exit-secondary:hover,.bw-exit-secondary:focus-visible{border-color:#C5E1A5;background:rgba(197,225,165,.14);color:#FFFFFF;outline:0;}',
-      '.bw-exit-form{margin-top:2px;}',
-      '.bw-exit-row{display:grid;grid-template-columns:minmax(0,1fr) 132px;gap:10px;}',
-      '.bw-exit-input{min-width:0;border:1px solid rgba(250,250,245,.34);border-radius:8px;background:rgba(250,250,245,.12);color:#FFFFFF;font-family:Montserrat,Arial,sans-serif;font-size:15px;font-weight:500;padding:15px 14px;outline:0;}',
-      '.bw-exit-input::placeholder{color:rgba(250,250,245,.58);}',
-      '.bw-exit-input:focus{border-color:#FFE600;background:rgba(250,250,245,.16);}',
-      '.bw-exit-submit{padding:15px 14px;box-shadow:none;}',
-      '.bw-exit-submit:disabled{opacity:.68;cursor:not-allowed;transform:none;}',
-      '.bw-exit-privacy{margin:12px 0 0;color:rgba(250,250,245,.72);font-size:11px;line-height:1.45;font-weight:500;}',
-      '.bw-exit-status{display:none;margin-top:14px;border-radius:8px;padding:11px 12px;font-size:13px;line-height:1.45;font-weight:700;}',
-      '.bw-exit-status.bw-exit-error{display:block;background:rgba(230,57,70,.13);border:1px solid rgba(230,57,70,.3);color:#FFD7D9;}',
-      '.bw-exit-back{display:inline-flex;align-items:center;margin-top:16px;padding:0;border:0;background:transparent;color:#C5E1A5;font-size:13px;font-weight:800;}',
-      '.bw-exit-back:hover,.bw-exit-back:focus-visible{color:#FFFFFF;outline:0;}',
-      '.bw-exit-check{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 0 20px;background:rgba(255,230,0,.14);color:#FFE600;border:1px solid rgba(255,230,0,.35);}',
-      '.bw-exit-check svg{width:38px;height:38px;}',
-      '@media (prefers-reduced-motion:reduce){.bw-exit-overlay,.bw-exit-card,.bw-exit-step,.bw-exit-close,.bw-exit-primary,.bw-exit-secondary,.bw-exit-submit,.bw-exit-download{transition:none!important;animation:none!important;}}'
+      '@media (prefers-reduced-motion:reduce){.bw-exit-overlay,.bw-exit-card,.bw-exit-step,.bw-exit-close,.bw-exit-primary,.bw-exit-secondary{transition:none!important;animation:none!important;}}'
     ].join('');
     document.head.appendChild(style);
-  }
-
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, function (char) {
-      return {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-      }[char];
-    });
-  }
-
-  function setStep(step) {
-    var overlay = document.getElementById(OVERLAY_ID);
-    if (!overlay) return;
-
-    currentStep = step;
-    var steps = overlay.querySelectorAll('[data-bw-exit-step]');
-    for (var i = 0; i < steps.length; i++) {
-      steps[i].classList.toggle('bw-exit-active', steps[i].getAttribute('data-bw-exit-step') === String(step));
-    }
-
-    if (step === 2) {
-      var input = overlay.querySelector('[data-bw-exit-email]');
-      if (input) setTimeout(function () { input.focus(); }, 40);
-    }
   }
 
   function closePopup(reason) {
@@ -202,7 +157,7 @@
     var overlay = document.getElementById(OVERLAY_ID);
     if (!overlay) return;
 
-    var focusable = overlay.querySelectorAll('.bw-exit-close,.bw-exit-step.bw-exit-active a[href],.bw-exit-step.bw-exit-active button:not([disabled]),.bw-exit-step.bw-exit-active input:not([disabled])');
+    var focusable = overlay.querySelectorAll('.bw-exit-close,.bw-exit-step.bw-exit-active a[href],.bw-exit-step.bw-exit-active button:not([disabled])');
     if (!focusable.length) return;
 
     var first = focusable[0];
@@ -216,10 +171,6 @@
     }
   }
 
-  function validateEmail(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
   function renderPopup() {
     injectStyles();
 
@@ -229,37 +180,16 @@
     overlay.innerHTML = [
       '<div class="bw-exit-card" role="dialog" aria-modal="true" aria-labelledby="bw-exit-title">',
       '<button class="bw-exit-close" type="button" aria-label="Close" data-bw-exit-close>&times;</button>',
-      '<div class="bw-exit-media"><img src="' + IMAGE_URL + '" alt="World Clock at Alexanderplatz, BerlinWalk meeting point" width="720" height="404"><span class="bw-exit-badge">World Clock, Alexanderplatz</span></div>',
+      '<div class="bw-exit-media"><img src="' + IMAGE_URL + '" alt="Berlin Trip Planner hero" width="720" height="404"><span class="bw-exit-badge">Berlin Trip Planner</span></div>',
       '<div class="bw-exit-inner">',
       '<section class="bw-exit-step bw-exit-active" data-bw-exit-step="1">',
-      '<p class="bw-exit-kicker">Free walking tour</p>',
-      '<h2 class="bw-exit-title" id="bw-exit-title">Don\'t leave Berlin to chance.</h2>',
-      '<p class="bw-exit-copy">Start at the World Clock, then walk Berlin\'s stories with a tip-based English tour.</p>',
+      '<p class="bw-exit-kicker">Free Travel Tool</p>',
+      '<h2 class="bw-exit-title" id="bw-exit-title">Build a realistic Berlin plan in 3 minutes.</h2>',
+      '<p class="bw-exit-copy">Yusuf here! Don\'t ruin your first day wandering aimlessly. Get a smart, weather-aware itinerary built around your arrival date.</p>',
       '<div class="bw-exit-actions">',
-      '<a class="bw-exit-primary" href="' + BOOKING_URL + '" data-bw-exit-book>Book Free Spot</a>',
-      '<button class="bw-exit-secondary" type="button" data-bw-exit-pdf>Get the Free First-Day Guide</button>',
+      '<a class="bw-exit-primary" href="' + PLANNER_URL + '" data-bw-exit-planner>Plan My Trip</a>',
+      '<a class="bw-exit-secondary" href="' + BOOKING_URL + '" data-bw-exit-book>Book Walking Tour</a>',
       '</div>',
-      '</section>',
-      '<section class="bw-exit-step" data-bw-exit-step="2" aria-live="polite">',
-      '<p class="bw-exit-kicker">Free Berlin First-Day Guide</p>',
-      '<h2 class="bw-exit-title">Send the guide to your inbox.</h2>',
-      '<p class="bw-exit-copy">Airport tickets, toilets, luggage, cash, Sunday rules, and a first walk that makes Berlin easier.</p>',
-      '<form class="bw-exit-form" novalidate data-bw-exit-form>',
-      '<div class="bw-exit-row">',
-      '<input class="bw-exit-input" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email address" required data-bw-exit-email>',
-      '<button class="bw-exit-submit" type="submit" data-bw-exit-submit>Send PDF</button>',
-      '</div>',
-      '<p class="bw-exit-privacy">No spam. Unsubscribe anytime. You will receive BerlinWalk travel notes and tour updates.</p>',
-      '<div class="bw-exit-status" role="status" data-bw-exit-status></div>',
-      '</form>',
-      '<button class="bw-exit-back" type="button" data-bw-exit-back>Back</button>',
-      '</section>',
-      '<section class="bw-exit-step" data-bw-exit-step="3" aria-live="polite">',
-      '<div class="bw-exit-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"></path></svg></div>',
-      '<p class="bw-exit-kicker">Success</p>',
-      '<h2 class="bw-exit-title">You are in.</h2>',
-      '<p class="bw-exit-copy" data-bw-exit-success>Download the Berlin First-Day Survival Guide now.</p>',
-      '<div class="bw-exit-actions"><a class="bw-exit-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener" data-bw-exit-download>Download Berlin First-Day Guide</a><button class="bw-exit-secondary" type="button" data-bw-exit-done>Done</button></div>',
       '</section>',
       '</div>',
       '</div>'
@@ -277,89 +207,23 @@
   }
 
   function bindPopupEvents(overlay) {
-    var pdfButton = overlay.querySelector('[data-bw-exit-pdf]');
-    var backButton = overlay.querySelector('[data-bw-exit-back]');
-    var doneButton = overlay.querySelector('[data-bw-exit-done]');
     var closeButton = overlay.querySelector('[data-bw-exit-close]');
     var bookButton = overlay.querySelector('[data-bw-exit-book]');
-    var form = overlay.querySelector('[data-bw-exit-form]');
-    var input = overlay.querySelector('[data-bw-exit-email]');
-    var submit = overlay.querySelector('[data-bw-exit-submit]');
-    var status = overlay.querySelector('[data-bw-exit-status]');
-    var success = overlay.querySelector('[data-bw-exit-success]');
+    var plannerButton = overlay.querySelector('[data-bw-exit-planner]');
 
     closeButton.addEventListener('click', function () {
       closePopup('x_button');
-    });
-    doneButton.addEventListener('click', function () {
-      closePopup('done_button');
     });
     bookButton.addEventListener('click', function () {
       trackEvent('bw_exit_popup_book_click', { cta_url: BOOKING_URL });
       closePopup('book_click');
     });
-    pdfButton.addEventListener('click', function () {
-      trackEvent('bw_exit_popup_pdf_click');
-      setStep(2);
-    });
-    backButton.addEventListener('click', function () {
-      status.className = 'bw-exit-status';
-      status.textContent = '';
-      setStep(1);
+    plannerButton.addEventListener('click', function () {
+      trackEvent('bw_exit_popup_planner_click', { cta_url: PLANNER_URL });
+      closePopup('planner_click');
     });
     overlay.addEventListener('click', function (event) {
       if (event.target === overlay) closePopup('overlay_click');
-    });
-
-    form.addEventListener('submit', function (event) {
-      event.preventDefault();
-
-      var email = input.value.trim();
-      status.className = 'bw-exit-status';
-      status.textContent = '';
-
-      if (!validateEmail(email)) {
-        trackEvent('bw_exit_popup_submit_error', { error_type: 'invalid_email' });
-        status.textContent = 'Please enter a valid email address.';
-        status.classList.add('bw-exit-error');
-        input.focus();
-        return;
-      }
-
-      submit.disabled = true;
-      submit.textContent = 'Sending...';
-
-      window.fetch(SUBSCRIBE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: email,
-          source: 'exit-intent-survival-map',
-          offer: 'berlin-survival-map',
-          page: window.location.pathname
-        })
-      }).then(function (response) {
-        return response.json().catch(function () {
-          return {};
-        }).then(function (data) {
-          if (!response.ok || data.success === false) {
-            throw new Error(data.error || 'subscribe_failed');
-          }
-          success.innerHTML = 'Saved for <strong>' + escapeHtml(email) + '</strong>. Download the Berlin First-Day Survival Guide now.';
-          trackEvent('bw_exit_popup_submit_success');
-          setStep(3);
-        });
-      }).catch(function (err) {
-        var message = err && err.message === 'invalid_email'
-          ? 'Please enter a valid email address.'
-          : 'Something went wrong. Please try again.';
-        trackEvent('bw_exit_popup_submit_error', { error_type: err && err.message ? err.message : 'network_or_unknown' });
-        status.textContent = message;
-        status.classList.add('bw-exit-error');
-      }).then(function () {
-        submit.disabled = false;
-        submit.textContent = 'Send PDF';
-      });
     });
 
     document.addEventListener('keydown', handleKeydown);
