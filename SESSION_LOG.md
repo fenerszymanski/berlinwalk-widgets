@@ -8,8 +8,11 @@ Format for each entry — see `AGENTS.md` §9.
 
 **Did:**
 - Simplified and shortened static block titles and descriptions in `dayTemplate` and helper functions to under 90 characters, making them flat, natural, and direct.
-- Integrated a new `Lunch` block helper `dayLunchCopy(day)` providing geographically matched dining alternatives (Mitte, Prenzlauer Berg, Friedrichshain, Potsdam, etc.) mapped between Morning and Afternoon.
-- Enhanced and rewrote the significance ('why' field) of all recommended catalog locations in `PLACE_CATALOG` to explain clearly why they should be visited.
+- Integrated a new `Lunch` block helper `dayLunchCopy(day)` providing geographically matched dining alternatives (Mitte, Prenzlauer Berg, Friedrichshain, Potsdam, etc.) mapped between Morning and Afternoon, setting deterministic timing (`12:00-13:30`) for it, and dynamically shifting it to `13:30-14:30` on walking tour days (forcing Hackescher Markt lunch recommendations).
+- Enhanced and rewrote the significance ('why' field) of all recommended catalog locations in `PLACE_CATALOG`, including newly added dining spots, to explain clearly why they should be visited.
+- Fixed Mustafa's Gemüse Kebap description (changing falafel to chicken döner) and corrected food day lunch suggestions to target Prenzlauer Berg instead of Kreuzberg.
+- Added a weekly market check for Hackescher Markt (operational only on Thursdays and Saturdays) to conditionally recommend street food stalls, and added 5 alternative Mitte dining spots (Monsieur Vuong, Shiso Burger, Curry 61, YamYam, Clärchens Ballhaus) as deterministic-random suggestions for walking tour days.
+- Enabled automatic Google Maps search links generation for all recommended lunch and dinner spots by adding them to `PLACE_CATALOG` and updating `blockMapLinks` to scan all catalog keys.
 - Fixed the "Dinner east" recommendation by removing Rüyam Gemüse Kebab (located in Schöneberg) and recommending Boxhagener Platz vegan/Vietnamese or Schlesisches Tor Burgermeister instead.
 - Refined the Velo backend Gemini prompt in `tripPlannerFunnel.js` to enforce a WhatsApp-style flat, zero-hype, non-exclamation-mark tone.
 - Replaced the subtle guide note loading green avatar pulse effect with a prominent, rotating green border spinner ring around Yusuf's avatar.
