@@ -94,6 +94,7 @@ const TOPICS = [
     description: 'Berlin history, myths, before-and-after stories, and the background that makes the city click.',
     slugs: [
       'where-was-the-berlin-wall-interactive-map',
+      'east-side-gallery-berlin-guide',
       'the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol',
       'alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos',
       'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point',
@@ -148,12 +149,12 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'where-to-watch-2026-world-cup-in-berlin',
   secondary: [
+    'east-side-gallery-berlin-guide',
     'shopping-in-berlin',
     'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
     'public-toilets-in-berlin',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'where-was-the-berlin-wall-interactive-map',
-    'free-things-to-do-in-berlin-2026',
   ],
 };
 
@@ -363,6 +364,7 @@ function relatedToolSlugFor(post) {
   if (/(weather|temperature|january|february|march|april|may|june|july|august|september|october|november|december|rain|pack|month)/.test(s)) return 'best-month-to-visit-berlin';
   if (/(free-things|free-museums|museum-island-free|reichstag)/.test(s)) return 'berlin-free-things-to-do';
   if (/(safe|safety|solo)/.test(s)) return 'berlin-safety';
+  if (/(east-side-gallery|east side gallery)/.test(s)) return 'east-side-gallery-murals';
   if (/(wall|east|west|cold-war)/.test(s)) return 'east-or-west-1989';
   if (/(lake)/.test(s)) return 'berlin-lakes';
   if (/(pool|swimming)/.test(s)) return 'berlin-pools';
