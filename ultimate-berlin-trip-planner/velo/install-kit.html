@@ -325,7 +325,7 @@
       <aside class="bw-status">
         <div>
           <p class="bw-kicker">Generated</p>
-          <p><strong>2026-06-07 04:18:42</strong></p>
+          <p><strong>2026-06-07 04:44:54</strong></p>
           <p class="bw-footer-note">Source folder: <code>ultimate-berlin-trip-planner/velo/</code></p>
         </div>
         <div class="bw-alert is-good">
@@ -389,8 +389,8 @@ node ultimate-berlin-trip-planner/launch-audit.mjs</textarea>
       <p class="bw-target">Create this backend file in Wix Developer Tools.</p>
       <p class="bw-note">Paste the full source into a new Backend file named tripPlannerFunnel.js.</p>
       <div class="bw-meta">
-        <span>989 lines</span>
-        <span>32.8 KB</span>
+        <span>991 lines</span>
+        <span>33.2 KB</span>
         <span>tripPlannerFunnel.js</span>
       </div>
       <textarea id="source-funnel" readonly spellcheck="false">import wixData from 'wix-data';
@@ -687,7 +687,9 @@ function geminiPrompt(input) {
     'The itinerary logic is already decided. Do not move days, change times, invent venues, add new map stops, or create new CTAs.',
     'Use only the provided day titles, themes, timing blocks, places, weather notes, and risk tags.',
     'Do not add new neighborhoods, meals, safety warnings, ticket claims, booking advice, or attraction names that are not in the input.',
-    'Write as Yusuf speaking directly to the guest before the trip, but in a very casual, flat, and natural tone, like a local friend sending a quick chat message.',
+    'Write as Yusuf speaking directly to the guest before the trip, but in a very casual, flat, and natural tone, like a local friend sending a quick WhatsApp text message.',
+    'Never use exclamation marks. Avoid hype or travel-agency buzzwords (e.g., avoid &quot;awesome&quot;, &quot;spectacular&quot;, &quot;perfect&quot;, &quot;vibrant&quot;, &quot;amazing&quot;, &quot;unforgettable&quot;).',
+    'Be extremely direct. Instead of formal sentences like &quot;Here is your customized itinerary based on your preferences,&quot; write something basic like &quot;Hey, looked at your trip dates and choices. Here is how I would structure your days.&quot;',
     'Use simple, conversational English. Keep sentences short and direct. It should sound like a human guide, not like travel software.',
     'Do not use marketing buzzwords, formal travel agency language, or robotic opening templates (e.g., avoid &quot;Welcome to...&quot;, &quot;I recommend...&quot;, &quot;Enjoy...&quot;, &quot;Make sure to...&quot;).',
     'Do not use a fixed template. Do not make every day sound the same.',

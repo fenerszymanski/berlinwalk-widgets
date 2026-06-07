@@ -8459,8 +8459,24 @@
     }
 
     #bw-trip-planner .bw-ai-panel.is-loading .bw-ai-avatar {
-      animation: bw-avatar-pulse 1.5s infinite ease-in-out;
-      border-color: var(--bw-green);
+      position: relative;
+      overflow: visible;
+      border-color: transparent;
+    }
+
+    #bw-trip-planner .bw-ai-panel.is-loading .bw-ai-avatar::after {
+      content: "";
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border: 3px solid rgba(27, 94, 32, 0.12);
+      border-top-color: var(--bw-green);
+      border-radius: 50%;
+      animation: bw-spin 0.8s linear infinite;
+      box-sizing: border-box;
+      z-index: 2;
     }
 
     #bw-trip-planner .bw-ai-skeleton-title {
@@ -8505,10 +8521,9 @@
       100% { opacity: 0.6; }
     }
 
-    @keyframes bw-avatar-pulse {
-      0% { box-shadow: 0 0 0 0 rgba(78, 179, 66, 0.4); }
-      70% { box-shadow: 0 0 0 6px rgba(78, 179, 66, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(78, 179, 66, 0); }
+    @keyframes bw-spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     #bw-trip-planner .bw-ai-panel.is-quota {
@@ -8548,6 +8563,7 @@
       height: 100%;
       object-fit: cover;
       width: 100%;
+      border-radius: 50%;
     }
 
     #bw-trip-planner .bw-ai-title strong,
@@ -10427,36 +10443,36 @@
   };
 
   var PLACE_CATALOG = {
-    world_clock: { label: 'World Clock', query: 'Weltzeituhr Alexanderplatz Berlin', area: 'Alexanderplatz', type: 'central landmark', lat: 52.521918, lng: 13.413215, why: 'A classic 1969 East German world time clock, which is the perfect easy-to-find meeting spot.' },
-    alexanderplatz: { label: 'Alexanderplatz', query: 'Alexanderplatz Berlin', area: 'Mitte', type: 'transport', lat: 52.5218, lng: 13.4132, why: 'Berlin’s largest public square and main transit hub, making it a bustling starting point for exploring.' },
-    museum_island: { label: 'Museum Island', query: 'Museumsinsel Berlin', area: 'Mitte', type: 'museum', lat: 52.5169, lng: 13.4017, why: 'A beautiful island on the Spree hosting five world-famous museums and grand architecture.' },
-    hackescher_markt: { label: 'Hackescher Markt', query: 'Hackescher Markt Berlin', area: 'Mitte', type: 'food', lat: 52.5221, lng: 13.4027, why: 'A lively market square full of courtyards, boutiques, and cafes, great for a Spree-side stroll.' },
-    wall_memorial: { label: 'Wall Memorial', query: 'Berlin Wall Memorial Bernauer Strasse', area: 'Wedding / Mitte', type: 'history', lat: 52.5351, lng: 13.3903, why: 'The official open-air Berlin Wall memorial preserving real border fortifications to show how the division actually worked.' },
-    east_side_gallery: { label: 'East Side Gallery', query: 'East Side Gallery Berlin', area: 'Friedrichshain', type: 'wall', lat: 52.505, lng: 13.4397, why: 'A 1.3km section of the Berlin Wall covered in famous protest murals, best paired with exploring the vibrant eastern neighborhoods.' },
-    oberbaum_bridge: { label: 'Oberbaum Bridge', query: 'Oberbaumbruecke Berlin', area: 'Friedrichshain / Kreuzberg', type: 'landmark', lat: 52.5018, lng: 13.4458, why: 'An iconic double-deck bridge linking east and west, offering great river views close to the gallery.' },
-    markthalle_neun: { label: 'Markthalle Neun', query: 'Markthalle Neun Berlin', area: 'Kreuzberg', type: 'food', lat: 52.502, lng: 13.4316, why: 'A historic covered market hall in Kreuzberg featuring local food stalls and a legendary street food scene.' },
-    brandenburg_gate: { label: 'Brandenburg Gate', query: 'Brandenburger Tor Berlin', area: 'Mitte', type: 'landmark', lat: 52.5163, lng: 13.3777, why: 'Berlin’s ultimate neoclassical landmark and symbol of unity, which is a must-see for photos.' },
-    holocaust_memorial: { label: 'Holocaust Memorial', query: 'Memorial to the Murdered Jews of Europe Berlin', area: 'Mitte', type: 'history', lat: 52.5139, lng: 13.3787, why: 'A moving memorial made of 2,711 concrete slabs near the government quarter, built for quiet reflection.' },
-    reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, why: 'The historic parliament building with a modern glass dome, offering great city views if you book a free slot ahead.' },
-    gendarmenmarkt: { label: 'Gendarmenmarkt', query: 'Gendarmenmarkt Berlin', area: 'Mitte', type: 'landmark', lat: 52.5138, lng: 13.3927, why: 'One of Berlin’s most beautiful historic squares, featuring twin cathedrals and the central Concert Hall.' },
-    nikolaiviertel: { label: 'Nikolaiviertel', query: 'Nikolaiviertel Berlin', area: 'Mitte', type: 'neighborhood', lat: 52.5169, lng: 13.4072, why: 'A reconstructed medieval-style neighborhood with narrow streets, perfect for a cozy old-Berlin stroll.' },
-    berlin_cathedral: { label: 'Berlin Cathedral', query: 'Berliner Dom Berlin', area: 'Museum Island', type: 'landmark', lat: 52.5191, lng: 13.4011, why: 'The city’s grand 19th-century Protestant cathedral, offering a striking exterior view on Museum Island.' },
-    hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'A maze of eight beautifully restored courtyard alleys filled with boutiques, cafes, and art spaces.' },
-    kastanienallee: { label: 'Kastanienallee', query: 'Kastanienallee Berlin', area: 'Prenzlauer Berg', type: 'neighborhood', lat: 52.5352, lng: 13.4102, why: 'A leafy neighborhood street in Prenzlauer Berg lined with independent shops, cozy cafes, and local life.' },
-    topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, why: 'A free indoor-outdoor museum on the former Gestapo headquarters, offering a detailed and serious history read.' },
-    tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'A massive central park with peaceful paths and beer gardens, ideal for a quiet escape from the busy sights.' },
-    victory_column: { label: 'Victory Column', query: 'Siegessaeule Berlin', area: 'Tiergarten', type: 'landmark', lat: 52.5145, lng: 13.3501, why: 'A historic golden monument in the center of Tiergarten, offering great city views from the top if you climb up.' },
-    tempelhofer_feld: { label: 'Tempelhofer Feld', query: 'Tempelhofer Feld Berlin', area: 'Neukoelln / Tempelhof', type: 'park', lat: 52.473, lng: 13.4036, why: 'A former airport turned giant public park, where locals cycle, skate, and barbecue on open runways.' },
-    treptower_park: { label: 'Treptower Park', query: 'Treptower Park Berlin', area: 'Treptow', type: 'park', lat: 52.4862, lng: 13.4691, why: 'A large riverside park featuring a massive Soviet War Memorial and scenic paths along the Spree.' },
-    raw_gelande: { label: 'RAW-Gelande', query: 'RAW-Gelaende Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5075, lng: 13.4548, why: 'An industrial railway yard covered in street art, housing alternative clubs, food stalls, and creative spaces.' },
-    oranienstrasse: { label: 'Oranienstrasse', query: 'Oranienstrasse Berlin', area: 'Kreuzberg', type: 'nightlife', lat: 52.5021, lng: 13.4219, why: 'A famous street in Kreuzberg packed with alternative bars, multicultural food, and local nightlife.' },
-    simon_dach_strasse: { label: 'Simon-Dach-Strasse', query: 'Simon-Dach-Strasse Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5103, lng: 13.4573, why: 'A lively dining and bar street in Friedrichshain, perfect for casual drinks and outdoor seating.' },
-    kulturbrauerei: { label: 'Kulturbrauerei', query: 'Kulturbrauerei Berlin', area: 'Prenzlauer Berg', type: 'culture', lat: 52.5383, lng: 13.4135, why: 'A historic 19th-century brick brewery complex turned cultural hub with cinemas, cafes, and weekly events.' },
-    savignyplatz: { label: 'Savignyplatz', query: 'Savignyplatz Berlin', area: 'Charlottenburg', type: 'neighborhood', lat: 52.5054, lng: 13.3204, why: 'An elegant west Berlin square surrounded by great restaurants and quiet bookstores.' },
-    lietzensee: { label: 'Lietzensee', query: 'Lietzensee Berlin', area: 'Charlottenburg', type: 'park', lat: 52.5082, lng: 13.2877, why: 'A peaceful lakeside park in Charlottenburg, ideal for a quiet afternoon coffee or rest.' },
-    sanssouci: { label: 'Sanssouci', query: 'Sanssouci Palace Potsdam', area: 'Potsdam', type: 'day trip', lat: 52.4033, lng: 13.0386, why: 'Potsdam’s spectacular Prussian summer palace, famous for its terraced vineyards and beautiful gardens.' },
+    world_clock: { label: 'World Clock', query: 'Weltzeituhr Alexanderplatz Berlin', area: 'Alexanderplatz', type: 'central landmark', lat: 52.521918, lng: 13.413215, why: 'It is a classic GDR world clock from 1969, and the most popular meeting spot on Alexanderplatz.' },
+    alexanderplatz: { label: 'Alexanderplatz', query: 'Alexanderplatz Berlin', area: 'Mitte', type: 'transport', lat: 52.5218, lng: 13.4132, why: 'Berlin’s biggest square and main transit hub. Great for sensing the raw, busy side of the city.' },
+    museum_island: { label: 'Museum Island', query: 'Museumsinsel Berlin', area: 'Mitte', type: 'museum', lat: 52.5169, lng: 13.4017, why: 'A stunning Spree island hosting five world-class museums. It has beautiful architecture and great grass spots to sit.' },
+    hackescher_markt: { label: 'Hackescher Markt', query: 'Hackescher Markt Berlin', area: 'Mitte', type: 'food', lat: 52.5221, lng: 13.4027, why: 'A great square to find hidden courtyards, independent boutiques, and quiet cafes right off the main streets.' },
+    wall_memorial: { label: 'Wall Memorial', query: 'Berlin Wall Memorial Bernauer Strasse', area: 'Wedding / Mitte', type: 'history', lat: 52.5351, lng: 13.3903, why: 'The best place to see the real Wall fortifications, a preserved watchtower, and understand how the division actually split families.' },
+    east_side_gallery: { label: 'East Side Gallery', query: 'East Side Gallery Berlin', area: 'Friedrichshain', type: 'wall', lat: 52.505, lng: 13.4397, why: 'The longest remaining stretch of the Wall, now covered in colorful protest murals representing freedom and art.' },
+    oberbaum_bridge: { label: 'Oberbaum Bridge', query: 'Oberbaumbruecke Berlin', area: 'Friedrichshain / Kreuzberg', type: 'landmark', lat: 52.5018, lng: 13.4458, why: 'A striking double-deck brick bridge linking east and west, offering the best Spree river sunset views.' },
+    markthalle_neun: { label: 'Markthalle Neun', query: 'Markthalle Neun Berlin', area: 'Kreuzberg', type: 'food', lat: 52.502, lng: 13.4316, why: 'A historic covered market hall in Kreuzberg, famous for its local food vendors, craft beers, and lively street food.' },
+    brandenburg_gate: { label: 'Brandenburg Gate', query: 'Brandenburger Tor Berlin', area: 'Mitte', type: 'landmark', lat: 52.5163, lng: 13.3777, why: 'Berlin\'s ultimate symbol of unity. It stood in the no-man\'s-land during the division, making it a powerful place to see.' },
+    holocaust_memorial: { label: 'Holocaust Memorial', query: 'Memorial to the Murdered Jews of Europe Berlin', area: 'Mitte', type: 'history', lat: 52.5139, lng: 13.3787, why: 'A moving labyrinth of 2,711 concrete slabs near the Brandenburg Gate, built for quiet reflection and walking through.' },
+    reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, why: 'The historic parliament building. The modern glass dome offers beautiful 360-degree views if you book ahead.' },
+    gendarmenmarkt: { label: 'Gendarmenmarkt', query: 'Gendarmenmarkt Berlin', area: 'Mitte', type: 'landmark', lat: 52.5138, lng: 13.3927, why: 'Often called Berlin\'s most beautiful historic square, famous for its twin cathedrals and the grand Concert Hall.' },
+    nikolaiviertel: { label: 'Nikolaiviertel', query: 'Nikolaiviertel Berlin', area: 'Mitte', type: 'neighborhood', lat: 52.5169, lng: 13.4072, why: 'A reconstructed medieval quarter on the Spree. It has narrow cobblestone streets, making it perfect for a quiet stroll.' },
+    berlin_cathedral: { label: 'Berlin Cathedral', query: 'Berliner Dom Berlin', area: 'Museum Island', type: 'landmark', lat: 52.5191, lng: 13.4011, why: 'A massive 19th-century Protestant cathedral with a giant green dome, offering beautiful views from the Lustgarten lawn.' },
+    hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'A famous maze of eight connected courtyards filled with unique shops, art galleries, and historic tile facades.' },
+    kastanienallee: { label: 'Kastanienallee', query: 'Kastanienallee Berlin', area: 'Prenzlauer Berg', type: 'neighborhood', lat: 52.5352, lng: 13.4102, why: 'A lovely street in Prenzlauer Berg lined with local boutiques, cozy cafes, and great spots for people-watching.' },
+    topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, why: 'A free, deep-dive historical exhibition built on the former Gestapo and SS headquarters site.' },
+    tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'A massive central park with quiet forest paths, lakes, and hidden beer gardens. Perfect for escaping the city noise.' },
+    victory_column: { label: 'Victory Column', query: 'Siegessaeule Berlin', area: 'Tiergarten', type: 'landmark', lat: 52.5145, lng: 13.3501, why: 'A golden monument in the center of Tiergarten. Climbing the stairs offers a beautiful view down the main avenues.' },
+    tempelhofer_feld: { label: 'Tempelhofer Feld', query: 'Tempelhofer Feld Berlin', area: 'Neukoelln / Tempelhof', type: 'park', lat: 52.473, lng: 13.4036, why: 'A massive former airport runways-turned-park where Berliners skate, cycle, and enjoy the sunset on the grass.' },
+    treptower_park: { label: 'Treptower Park', query: 'Treptower Park Berlin', area: 'Treptow', type: 'park', lat: 52.4862, lng: 13.4691, why: 'A scenic riverside park featuring a hidden, monumental Soviet War Memorial that has to be seen to be believed.' },
+    raw_gelande: { label: 'RAW-Gelande', query: 'RAW-Gelaende Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5075, lng: 13.4548, why: 'A gritty former railway yard covered in graffiti, now home to alternative clubs, climbing walls, and street food.' },
+    oranienstrasse: { label: 'Oranienstrasse', query: 'Oranienstrasse Berlin', area: 'Kreuzberg', type: 'nightlife', lat: 52.5021, lng: 13.4219, why: 'The heart of Kreuzberg\'s alternative scene, packed with old-school punk bars, food spots, and local bookshops.' },
+    simon_dach_strasse: { label: 'Simon-Dach-Strasse', query: 'Simon-Dach-Strasse Berlin', area: 'Friedrichshain', type: 'nightlife', lat: 52.5103, lng: 13.4573, why: 'A lively Friedrichshain street lined with bars and cafes, famous for cheap drinks and busy outdoor terraces.' },
+    kulturbrauerei: { label: 'Kulturbrauerei', query: 'Kulturbrauerei Berlin', area: 'Prenzlauer Berg', type: 'culture', lat: 52.5383, lng: 13.4135, why: 'A beautifully preserved 19th-century brick brewery complex, now a cultural hub hosting food markets and events.' },
+    savignyplatz: { label: 'Savignyplatz', query: 'Savignyplatz Berlin', area: 'Charlottenburg', type: 'neighborhood', lat: 52.5054, lng: 13.3204, why: 'A charming West Berlin square surrounded by classic restaurants, jazz bars, and independent bookstores.' },
+    lietzensee: { label: 'Lietzensee', query: 'Lietzensee Berlin', area: 'Charlottenburg', type: 'park', lat: 52.5082, lng: 13.2877, why: 'A quiet park with a beautiful central lake in Charlottenburg. A favorite local spot for a coffee break.' },
+    sanssouci: { label: 'Sanssouci', query: 'Sanssouci Palace Potsdam', area: 'Potsdam', type: 'day trip', lat: 52.4033, lng: 13.0386, why: 'Frederick the Great\'s summer palace, famous for its beautiful terraced vineyards and quiet palace park gardens.' },
     potsdam_hbf: { label: 'Potsdam Hbf', query: 'Potsdam Hauptbahnhof', area: 'Potsdam', type: 'station', lat: 52.3917, lng: 13.0664, why: 'Potsdam’s main train station, serving as the starting point for exploring the palaces and parks.' },
-    charlottenburg_palace: { label: 'Charlottenburg Palace', query: 'Schloss Charlottenburg Berlin', area: 'Charlottenburg', type: 'palace', lat: 52.5209, lng: 13.2957, why: 'Berlin’s grandest Baroque palace, featuring beautiful royal gardens and serving as a closer alternative to Potsdam.' }
+    charlottenburg_palace: { label: 'Charlottenburg Palace', query: 'Schloss Charlottenburg Berlin', area: 'Charlottenburg', type: 'palace', lat: 52.5209, lng: 13.2957, why: 'Berlin\'s grandest Baroque palace, featuring beautiful royal gardens behind it that are completely free to walk.' }
   };
 
   function track(event, params) {
@@ -11954,7 +11970,7 @@
     if (!ids.length) return [];
     if (isTourBlock(block)) {
       return ids.indexOf('world_clock') !== -1
-        ? [{ label: 'World Clock', url: placeSearchUrl('world_clock') }]
+        ? [{ placeId: 'world_clock', label: 'World Clock', url: placeSearchUrl('world_clock') }]
         : [];
     }
     var text = normalizedPlaceLabel((block.title || '') + ' ' + (block.copy || ''));
@@ -11972,7 +11988,7 @@
       if (fallbackId) picked = [{ placeId: fallbackId, place: placeFor(fallbackId), score: 0 }];
     }
     return picked.slice(0, 2).map(function (item) {
-      return { label: item.place.label, url: placeSearchUrl(item.placeId) };
+      return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId) };
     });
   }
 
@@ -13430,7 +13446,7 @@
       return 'Try traditional German food at Clärchens Ballhaus on Auguststraße or Maximilians on Friedrichstraße. For quick fresh Vietnamese street food, grab a bowl at Monsieur Vuong.';
     }
     if (type === 'wall' || type === 'nightlife') {
-      return 'Try the famous Rüyam Gemüse Kebab on Hauptstraße or Schönhauser Allee for Berlin\'s best döner. Or grab a legendary burger under the Schlesisches Tor U-Bahn tracks at Burgermeister.';
+      return 'Try fresh Vietnamese bowls at 1990 Vegan Living at Boxhagener Platz, or grab a legendary burger under the Schlesisches Tor U-Bahn tracks at Burgermeister.';
     }
     if (type === 'food') {
       return 'Visit Markthalle Neun in Kreuzberg (especially on Street Food Thursday), or find cozy cafes and local bites along Kastanienallee.';
@@ -13447,6 +13463,32 @@
     return 'Find a local spot in this area, or consult the base camp guide for neighborhood favorites.';
   }
 
+  function dayLunchCopy(day) {
+    var type = dayVisualType(day);
+    if (type === 'history' || type === 'museums') {
+      return 'Grab quick Vietnamese at Monsieur Vuong, or try local food stalls at Hackescher Markt.';
+    }
+    if (type === 'wall') {
+      return 'Try local cafes on Kastanienallee, or grab cheap currywurst at Konnopke\'s under the tracks.';
+    }
+    if (type === 'food') {
+      return 'Grab street food at Markthalle Neun, or try cozy cafe plates along Kastanienallee.';
+    }
+    if (type === 'free') {
+      return 'Try budget food courts at Mall of Berlin, or grab a quick currywurst at Curry 36.';
+    }
+    if (type === 'nightlife') {
+      return 'Grab a burger under U-Bahn tracks at Burgermeister, or check Boxhagener Platz cafes.';
+    }
+    if (type === 'local') {
+      return 'Try Dicke Wirtin near Savignyplatz in the west, or cozy cafes around Kulturbrauerei.';
+    }
+    if (type === 'potsdam') {
+      return 'Try traditional Dutch pancakes or explore cafes in the historic Potsdam Dutch Quarter.';
+    }
+    return 'Grab a quick local bite nearby or check the base camp guide for cafe recommendations.';
+  }
+
   function dayBlockCopy(day, block, index) {
     return isDayClosingBlock(day, block, index) ? '' : String(block.copy || '');
   }
@@ -13454,6 +13496,9 @@
   function dayBlockDisplayCopy(day, block, index) {
     if (isDayClosingBlock(day, block, index)) {
       return dayDiningCopy(day);
+    }
+    if (block.time === 'Lunch') {
+      return dayLunchCopy(day);
     }
     var baseCopy = String(block.copy || '');
     var links = blockMapLinks(day, block, index);
@@ -14652,28 +14697,28 @@
     var moves = {
       mitte: {
         time: 'Afternoon',
-        title: 'Keep the first walk close to your base',
-        copy: 'Use Alexanderplatz, Hackescher Markt, or one short Museum Island edge. Save the heavier central layer for the real plan day.'
+        title: 'Settle into Mitte',
+        copy: 'Walk Alexanderplatz or Hackescher Markt. Keep it light today.'
       },
       east: {
         time: 'Afternoon',
-        title: 'Settle into the east side',
-        copy: 'After bags, keep the first real walk around Kreuzberg or Friedrichshain: one food stop, one easy street, then stop.'
+        title: 'Settle into the East',
+        copy: 'Drop your bags and walk around Friedrichshain. Keep the route simple.'
       },
       north: {
         time: 'Afternoon',
         title: 'Settle into Prenzlauer Berg',
-        copy: 'After BER and bags, keep the first real walk north: Kulturbrauerei, Kollwitzkiez, Kastanienallee, or a simple dinner near your base.'
+        copy: 'Walk Kollwitzkiez or Kastanienallee, then find a cozy dinner nearby.'
       },
       west: {
         time: 'Afternoon',
         title: 'Settle into Charlottenburg',
-        copy: 'After arrival, stay west for Savignyplatz, Lietzensee, or a relaxed dinner. Do not force a central sprint today.'
+        copy: 'Walk near Savignyplatz or Lietzensee lake. Save the center for tomorrow.'
       },
       unsure: {
         time: 'Afternoon',
-        title: 'Choose one easy base-side area',
-        copy: 'Keep arrival day practical: reach your stay, save the route for tomorrow, and choose only one nearby food or photo stop.'
+        title: 'Explore your neighborhood',
+        copy: 'Reach your stay, drop bags, and walk around your neighborhood.'
       }
     };
     return moves[state.stayArea] || moves.unsure;
@@ -14682,24 +14727,24 @@
   function firstDayDinnerMove() {
     var dinners = {
       mitte: {
-        title: 'Dinner near Mitte or Hackescher Markt',
-        copy: 'Keep food close to your stay. A short dinner walk is enough after arrival.'
+        title: 'Dinner in Mitte',
+        copy: 'Find a local restaurant in Mitte. Keep the evening relaxed and short.'
       },
       east: {
-        title: 'Dinner in Kreuzberg or Friedrichshain',
-        copy: 'Choose one easy food street near your base and save the bigger Berlin route for tomorrow.'
+        title: 'Dinner in Friedrichshain',
+        copy: 'Grab a bite in Friedrichshain or Kreuzberg close to your stay.'
       },
       north: {
         title: 'Dinner in Prenzlauer Berg',
-        copy: 'Use your first evening for food near Kollwitzkiez, Kastanienallee, or your hotel/Airbnb. No sightseeing mission tonight.'
+        copy: 'Walk around Kollwitzplatz or Kastanienallee for cozy dinner spots.'
       },
       west: {
-        title: 'Dinner near Charlottenburg',
-        copy: 'Stay around Savignyplatz, Kantstrasse, or your base. Do not cross town after a late arrival.'
+        title: 'Dinner in Charlottenburg',
+        copy: 'Enjoy traditional German food or pasta near Savignyplatz.'
       },
       unsure: {
-        title: 'Dinner near where you sleep',
-        copy: 'Find food close to your base, save the hotel map, and let tomorrow carry the real plan.'
+        title: 'Dinner near your stay',
+        copy: 'Find a nice local restaurant close to your base camp and rest.'
       }
     };
     return dinners[state.stayArea] || dinners.unsure;
@@ -14739,43 +14784,43 @@
         time: compact ? 'History anchor' : 'Afternoon',
         title: compact ? 'Use one free central history layer' : 'Free central history layer',
         copy: compact
-          ? 'Use Brandenburg Gate, memorials, Reichstag exterior, or Topography of Terror. Keep museums for a separate choice only if you really want one.'
-          : 'After the walk, stay in the same central history direction: Brandenburg Gate, memorials, Reichstag exterior, or Topography of Terror. No museum queue by default.'
+          ? 'Visit Brandenburg Gate, memorials, or Topography of Terror. Keep it easy.'
+          : 'Stay central: see the Brandenburg Gate, memorials, or Topography of Terror.'
       },
       museums: {
         time: compact ? 'One strong stop' : 'Afternoon',
         title: compact ? 'Choose one museum or Museum Island edge' : 'Choose one Museum Island anchor',
         copy: compact
-          ? 'Use one checked-open museum, the cathedral exterior, or a short Museum Island loop. Do not turn the short day into four queues.'
-          : 'After the walk, choose one checked-open museum or use the cathedral/exteriors if a queue would overload the day.'
+          ? 'Explore Museum Island. Pick one checked-open museum to visit slowly.'
+          : 'Choose one checked-open museum, or explore the cathedral gardens.'
       },
       wall: {
         time: compact ? 'One strong stop' : 'Afternoon',
         title: compact ? 'Add one Wall / Cold War anchor' : 'Add one Wall / Cold War layer',
         copy: compact
-          ? 'Use Bernauer Strasse or Topography of Terror as the serious history stop. One clear Cold War layer is better than scattered fragments.'
-          : 'After the walk, choose one serious Wall or Cold War stop and keep the rest of the route in that direction.'
+          ? 'Visit Bernauer Straße Wall Memorial or the Topography of Terror.'
+          : 'Choose one serious Wall or Cold War stop. Keep the route simple.'
       },
       food: {
         time: compact ? 'Food stop' : 'Afternoon',
         title: compact ? 'Keep food close to the route' : 'Courtyards, market, or one food street',
         copy: compact
-          ? 'Use one easy food/courtyard stop near today’s route or your base, then stop before the day becomes a transit mission.'
-          : 'After the walk, stay close: courtyards, Spree edge, one market/cafe stop, then dinner in the same area.'
+          ? 'Grab a bite at Hackesche Höfe or try local cafes close to your route.'
+          : 'Stay close: explore courtyards, Spree edge, or a local market stop.'
       },
       free: {
         time: compact ? 'Free anchor' : 'Afternoon',
         title: compact ? 'Use free outdoor history' : 'Free outdoor history',
         copy: compact
-          ? 'Use Brandenburg Gate, memorials, Museum Island exteriors, or Topography of Terror instead of adding paid entry under time pressure.'
-          : 'After lunch, use Brandenburg Gate, memorials, Museum Island exteriors, or Topography of Terror instead of another paid entry.'
+          ? 'Explore Brandenburg Gate, memorials, or Topography of Terror for free.'
+          : 'See the Brandenburg Gate, memorials, or Topography of Terror.'
       },
       nightlife: {
         time: compact ? 'Energy check' : 'Afternoon',
         title: compact ? 'Protect energy for the night' : 'Rest, food, and one compact culture stop',
         copy: compact
-          ? 'Keep the sightseeing short, eat properly, and save the ride-home plan before any late night.'
-          : 'After the walk, avoid an overloaded afternoon. Eat properly, rest, then choose one night area with a ride-home backup.'
+          ? 'Keep sightseeing short, rest, and save your ride-home plan.'
+          : 'Avoid an overloaded afternoon. Rest, eat, and prepare for the night.'
       }
     };
     return moves[key] || moves.history;
@@ -14801,23 +14846,23 @@
   function firstDayArrivalCopy() {
     var base = baseCampProfile();
     if (state.arrivalPoint === 'ber') {
-      if (state.arrivalTime === 'evening') return 'Use ABC from BER, reach your base, then keep tonight to check-in, food, water, and sleep.';
-      if (state.arrivalTime === 'afternoon') return 'Use ABC from BER, drop bags if needed, then keep dinner close to your base.';
-      if (arrivalDayTourEligible()) return 'Use ABC from BER, drop bags if needed, then keep the first walk central.';
-      return 'Use ABC from BER, drop bags if needed, then keep the first real walk near ' + base.title.replace(/ \/.*$/, '') + '.';
+      if (state.arrivalTime === 'evening') return 'Use ABC train from BER to reach your base. Keep tonight to food and rest.';
+      if (state.arrivalTime === 'afternoon') return 'Use ABC train from BER, drop your bags, and find dinner near your stay.';
+      if (arrivalDayTourEligible()) return 'Use ABC train from BER, drop your bags, and head to the center.';
+      return 'Use ABC train from BER, drop bags, and walk near your base camp.';
     }
     if (state.arrivalPoint === 'hbf') {
-      if (state.arrivalTime === 'evening') return 'Use Hauptbahnhof cleanly, reach your base, then keep tonight to dinner and rest.';
-      if (state.arrivalTime === 'afternoon') return 'Use Hauptbahnhof cleanly, reach your base first, then keep dinner nearby.';
+      if (state.arrivalTime === 'evening') return 'Arrive at Hauptbahnhof, reach your base, and rest.';
+      if (state.arrivalTime === 'afternoon') return 'Arrive at Hauptbahnhof, reach your base, and eat nearby.';
       return arrivalDayTourEligible()
-        ? 'Use Hauptbahnhof cleanly: store bags if needed, then ride east toward Alexanderplatz.'
-        : 'Use Hauptbahnhof cleanly, reach your base first, then add only one nearby stop.';
+        ? 'Store bags at Hauptbahnhof, then ride to Alexanderplatz.'
+        : 'Arrive at Hauptbahnhof, reach your stay, and add one stop.';
     }
-    if (state.arrivalTime === 'evening') return 'Reach your base, eat nearby, and stop. The next day carries the real Berlin plan.';
-    if (state.arrivalTime === 'afternoon') return 'Reach your base first, then keep the evening close and simple.';
-    if (state.arrivalPoint === 'alex') return 'You are already central. Loop Alexanderplatz, Marienkirche, and one nearby edge first.';
-    if (state.arrivalPoint === 'car') return 'Park at your stay or a sensible P+R first, then use transit or walking for the city.';
-    return 'Start from your stay and keep the first route close before adding central sights.';
+    if (state.arrivalTime === 'evening') return 'Reach your stay, grab a bite nearby, and rest.';
+    if (state.arrivalTime === 'afternoon') return 'Reach your stay first, then keep tonight very simple.';
+    if (state.arrivalPoint === 'alex') return 'You are central. Walk Alexanderplatz and nearby streets.';
+    if (state.arrivalPoint === 'car') return 'Park your car first, then walk or use public transit.';
+    return 'Start from your stay and keep the first walk local.';
   }
 
   function firstDayPlaceIds() {
@@ -14916,98 +14961,106 @@
   function dayTemplate(key) {
     var templates = {
       history: {
-        title: 'Free central history without museum overload',
-        theme: 'Central history day',
+        title: 'Central history day',
+        theme: 'Berlin History',
         accent: '#1B5E20',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Brandenburg Gate and memorials', copy: 'Use the central memorial layer first.' },
-          { time: 'Afternoon', title: 'Topography of Terror or Reichstag exterior', copy: 'Pick one serious free history anchor.' },
-          { time: 'Evening', title: 'Simple central dinner', copy: '' }
+          { time: 'Morning', title: 'Brandenburg Gate walk', copy: 'See the main history sights. Take your time at the gate and memorials.' },
+          { time: 'Lunch', title: 'Lunch in Mitte', copy: '' },
+          { time: 'Afternoon', title: 'Historic sights walk', copy: 'Visit Topography of Terror or see the historic Reichstag building.' },
+          { time: 'Evening', title: 'Dinner in Mitte', copy: '' }
         ],
         placeIds: ['brandenburg_gate', 'topography_terror', 'reichstag']
       },
       wall: {
-        title: 'Wall, East Berlin, and post-1989 energy',
-        theme: 'Cold War geography',
+        title: 'Cold War geography',
+        theme: 'Wall and East Berlin',
         accent: '#2F80ED',
         bg: '#EAF4FF',
         blocks: [
-          { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Start at Bernauer Strasse to understand the Wall as a system.' },
-          { time: 'Afternoon', title: 'East Side Gallery and Friedrichshain', copy: 'Walk East Side Gallery, then stay east for food or river time.' },
-          { time: 'Evening', title: 'Dinner east', copy: '' }
+          { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Walk Bernauer Straße to see where the Wall split this neighborhood.' },
+          { time: 'Lunch', title: 'Lunch near the Wall', copy: '' },
+          { time: 'Afternoon', title: 'East Side Gallery', copy: 'See the famous murals on the longest remaining section of the Wall.' },
+          { time: 'Evening', title: 'Dinner in Friedrichshain', copy: '' }
         ],
         placeIds: ['wall_memorial', 'east_side_gallery', 'oberbaum_bridge', 'markthalle_neun']
       },
       museums: {
-        title: 'Museum Island without museum overload',
-        theme: 'Museums and royal Berlin',
+        title: 'Museums and royal Berlin',
+        theme: 'Museum Island',
         accent: '#F5A623',
         bg: '#FFF3D7',
         blocks: [
-          { time: 'Morning', title: 'Pick one museum anchor', copy: 'Pick one checked-open museum. One good museum beats four rushed ones.' },
-          { time: 'Afternoon', title: 'Reichstag dome or Brandenburg Gate', copy: 'Use a booked dome slot or the open-air memorial route.' },
-          { time: 'Evening', title: 'Central dinner', copy: '' }
+          { time: 'Morning', title: 'Museum Island walk', copy: 'Walk around Museum Island. Pick one museum to explore slowly.' },
+          { time: 'Lunch', title: 'Lunch in Mitte', copy: '' },
+          { time: 'Afternoon', title: 'Royal Berlin sights', copy: 'Walk around Berlin Cathedral, or see the Brandenburg Gate.' },
+          { time: 'Evening', title: 'Dinner in Mitte', copy: '' }
         ],
         placeIds: ['museum_island', 'brandenburg_gate', 'reichstag']
       },
       food: {
-        title: 'Food, courtyards, and the lived-in city',
-        theme: 'Food and neighborhoods',
+        title: 'Food and neighborhoods',
+        theme: 'Local flavors',
         accent: '#D94D5C',
         bg: '#FFF0F3',
         blocks: [
-          { time: 'Morning', title: 'Start slow in a neighborhood', copy: 'Start in one neighborhood: Prenzlauer Berg, Kreuzberg, or Hackescher Markt.' },
-          { time: 'Afternoon', title: 'Courtyards, markets, or street food', copy: 'Use Hackesche Hofe, Markthalle Neun timing, or one relaxed local food stop.' },
-          { time: 'Evening', title: 'One-area dinner', copy: '' }
+          { time: 'Morning', title: 'Prenzlauer Berg walk', copy: 'Stroll through Prenzlauer Berg\'s quiet streets and cafes.' },
+          { time: 'Lunch', title: 'Lunch nearby', copy: '' },
+          { time: 'Afternoon', title: 'Courtyards and markets', copy: 'Browse Hackesche Höfe courtyards or head to Markthalle Neun.' },
+          { time: 'Evening', title: 'Dinner in Kreuzberg', copy: '' }
         ],
         placeIds: ['hackesche_hofe', 'markthalle_neun', 'kastanienallee']
       },
       free: {
-        title: 'Free Berlin that still feels essential',
-        theme: 'Low-budget day',
+        title: 'Low-budget day',
+        theme: 'Free Berlin',
         accent: '#7CB342',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Outdoor central history', copy: 'Use Brandenburg Gate, memorials, Museum Island exteriors, and the Spree.' },
-          { time: 'Afternoon', title: 'Reichstag dome or Topography of Terror', copy: 'Book Reichstag ahead, or use Topography of Terror as the reliable free fallback.' },
-          { time: 'Evening', title: 'Park, Spree, or cheap food', copy: '' }
+          { time: 'Morning', title: 'Spree riverside walk', copy: 'Walk next to parliament buildings and enjoy the Spree views.' },
+          { time: 'Lunch', title: 'Lunch at Potsdamer Platz', copy: '' },
+          { time: 'Afternoon', title: 'Relax in Tiergarten', copy: 'Stroll through Tiergarten park and see the Victory Column.' },
+          { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
         placeIds: ['topography_terror', 'tiergarten', 'tempelhofer_feld']
       },
       nightlife: {
-        title: 'A smart day before a Berlin night',
-        theme: 'Nightlife without burnout',
+        title: 'Nightlife without burnout',
+        theme: 'Berlin Nightlife',
         accent: '#8E6BBE',
         bg: '#F5F0FF',
         blocks: [
-          { time: 'Morning', title: 'Keep sightseeing compact', copy: 'Do one essential culture block early and avoid a 25,000-step pre-night day.' },
-          { time: 'Afternoon', title: 'Rest, food, and outfit check', copy: 'Eat properly, plan the ride back, and keep decisions out of midnight.' },
-          { time: 'Evening', title: 'Night plan + backup', copy: '' }
+          { time: 'Morning', title: 'Sleep in and relax', copy: 'Start late, keep it easy, and save your energy for the night.' },
+          { time: 'Lunch', title: 'Lunch nearby', copy: '' },
+          { time: 'Afternoon', title: 'Prep for the night', copy: 'Grab a coffee, rest, and prep before heading out to the clubs.' },
+          { time: 'Evening', title: 'Drinks and clubs', copy: '' }
         ],
         placeIds: ['raw_gelande', 'oranienstrasse', 'simon_dach_strasse']
       },
       local: {
-        title: 'Local-feeling Berlin beyond the checklist',
-        theme: 'Neighborhood day',
+        title: 'Neighborhood day',
+        theme: 'Local rhythm',
         accent: '#6D7278',
         bg: '#F1F3F4',
         blocks: [
-          { time: 'Morning', title: 'Prenzlauer Berg or Charlottenburg', copy: 'Choose one calmer area and walk slowly enough for Berlin to feel lived-in.' },
-          { time: 'Afternoon', title: 'Cafe, park, and one small museum', copy: 'Use a cafe, park, or small museum instead of another central queue.' },
+          { time: 'Morning', title: 'Local neighborhood walk', copy: 'Walk a local neighborhood, find a cozy cafe, and relax.' },
+          { time: 'Lunch', title: 'Lunch nearby', copy: '' },
+          { time: 'Afternoon', title: 'Quiet park or museum', copy: 'Walk by Lietzensee lake or explore the Kulturbrauerei complex.' },
           { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
         placeIds: ['kulturbrauerei', 'savignyplatz', 'lietzensee']
       },
       potsdam: {
-        title: 'Potsdam or a deliberate slow day',
-        theme: 'Day trip or recovery',
+        title: 'Day trip or recovery',
+        theme: 'Potsdam Palace day',
         accent: '#1B5E20',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Decide by energy and weather', copy: 'Go to Potsdam only if weather and energy both say yes.' },
-          { time: 'Afternoon', title: 'Sanssouci or Berlin backup', copy: 'Use Sanssouci with ABC, or switch to Charlottenburg, Tiergarten, or a skipped museum.' },
-          { time: 'Evening', title: 'Early return', copy: '' }
+          { time: 'Morning', title: 'Train ride to Potsdam', copy: 'Take the S-Bahn to Potsdam if you want to walk the gardens.' },
+          { time: 'Lunch', title: 'Lunch in Potsdam', copy: '' },
+          { time: 'Afternoon', title: 'Sanssouci Palace gardens', copy: 'Explore Sanssouci gardens, or visit Charlottenburg Palace.' },
+          { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
         placeIds: ['potsdam_hbf', 'sanssouci', 'charlottenburg_palace']
       }

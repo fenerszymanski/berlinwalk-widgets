@@ -4,6 +4,24 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-07 — Antigravity (Ultimate Trip Planner Copy Simplification, Lunch & East Dining Fixes)
+
+**Did:**
+- Simplified and shortened static block titles and descriptions in `dayTemplate` and helper functions to under 90 characters, making them flat, natural, and direct.
+- Integrated a new `Lunch` block helper `dayLunchCopy(day)` providing geographically matched dining alternatives (Mitte, Prenzlauer Berg, Friedrichshain, Potsdam, etc.) mapped between Morning and Afternoon.
+- Enhanced and rewrote the significance ('why' field) of all recommended catalog locations in `PLACE_CATALOG` to explain clearly why they should be visited.
+- Fixed the "Dinner east" recommendation by removing Rüyam Gemüse Kebab (located in Schöneberg) and recommending Boxhagener Platz vegan/Vietnamese or Schlesisches Tor Burgermeister instead.
+- Refined the Velo backend Gemini prompt in `tripPlannerFunnel.js` to enforce a WhatsApp-style flat, zero-hype, non-exclamation-mark tone.
+- Replaced the subtle guide note loading green avatar pulse effect with a prominent, rotating green border spinner ring around Yusuf's avatar.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — simplified templates, added `dayLunchCopy`, hooked lunch to `dayBlockDisplayCopy`, corrected dinner east mapping, updated all place catalog explanations, and replaced loading pulse with a rotating border spinner.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — refined system instruction guidelines in `geminiPrompt`.
+- `ultimate-berlin-trip-planner/velo/install-kit.html` — regenerated.
+- QA: `node ultimate-berlin-trip-planner/launch-audit.mjs` passed `153 pass`.
+
+**Next session should:** Yusuf can push the widget frontend changes and copy the newly updated backend Velo code (already on clipboard) into Wix Velo.
+
 ## 2026-06-07 — Antigravity (Ultimate Trip Planner Revisions & Audits)
 
 **Did:**
