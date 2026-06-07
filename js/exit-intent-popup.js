@@ -18,9 +18,9 @@
 
   function getImageUrl() {
     if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
-      return 'ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg';
+      return 'ultimate-berlin-trip-planner/assets/berlin-trip-planner-mockup.png';
     }
-    return 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/assets/berlin-trip-planner-hero.jpg';
+    return 'https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/assets/berlin-trip-planner-mockup.png';
   }
 
   function isPreviewForced() {
