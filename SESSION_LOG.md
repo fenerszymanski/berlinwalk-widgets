@@ -2,6 +2,26 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-07 — Codex (Ultimate Trip Planner Yusuf Voice + Mobile Note Fix)
+
+**Did:**
+- Reworked the Ultimate Trip Planner AI/Yusuf note so local mock/fallback copy sounds more like Yusuf speaking directly, while keeping route facts strict.
+- Fixed the bad “next day / World Clock” tour-summary drift by pointing post-tour language to the actual next planned day, not repeating the tour day.
+- Kept lunch blocks visible between morning/afternoon, including BerlinWalk-day lunch near Hackescher Markt, and shortened small-screen AI aside labels to avoid `WEATH ER READ` / `TOU R NOTE` wrapping.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — warmer mock/fallback route intro and day stories, “where you are staying” wording, longer visible AI day-story text, compact `Weather` / `Tour` aside labels.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — Gemini prompt loosened for freer, friendlier guide language while preserving fixed route/day/time/place constraints.
+- `ultimate-berlin-trip-planner/velo/install-kit.html` — regenerated from updated Velo backend source.
+
+**Verified:**
+- Local mobile Playwright QA at 430px on the 7-day west/mixed-interest test URL: no horizontal overflow, no old robotic strings, Day 2 tour lunch near Hackescher Markt present, lunch blocks present, and tour intro no longer repeats the tour day as “next day.”
+- `node ultimate-berlin-trip-planner/launch-audit.mjs` → `153 pass / 0 warn / 0 block`.
+- `node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs` → `13 pass / 0 warn / 0 block`.
+- `git diff --check` → clean.
+
+**Next session should:** Yusuf should review the local mock link once. If approved, push widget changes and paste/publish the regenerated `Backend/tripPlannerFunnel.js` from the install kit in Wix so live Gemini follows the same freer voice.
+
 ## 2026-06-07 — Antigravity (East Side Gallery murals widget local image integration and blog draft cleanups)
 
 **Did:**

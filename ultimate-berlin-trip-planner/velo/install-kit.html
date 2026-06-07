@@ -325,7 +325,7 @@
       <aside class="bw-status">
         <div>
           <p class="bw-kicker">Generated</p>
-          <p><strong>2026-06-07 05:28:38</strong></p>
+          <p><strong>2026-06-07 13:56:46</strong></p>
           <p class="bw-footer-note">Source folder: <code>ultimate-berlin-trip-planner/velo/</code></p>
         </div>
         <div class="bw-alert is-good">
@@ -389,8 +389,8 @@ node ultimate-berlin-trip-planner/launch-audit.mjs</textarea>
       <p class="bw-target">Create this backend file in Wix Developer Tools.</p>
       <p class="bw-note">Paste the full source into a new Backend file named tripPlannerFunnel.js.</p>
       <div class="bw-meta">
-        <span>991 lines</span>
-        <span>33.2 KB</span>
+        <span>990 lines</span>
+        <span>32.6 KB</span>
         <span>tripPlannerFunnel.js</span>
       </div>
       <textarea id="source-funnel" readonly spellcheck="false">import wixData from 'wix-data';
@@ -683,21 +683,20 @@ function geminiResponseSchema() {
 
 function geminiPrompt(input) {
   return [
-    'You are writing a short personal note for BerlinWalk.',
-    'The itinerary logic is already decided. Do not move days, change times, invent venues, add new map stops, or create new CTAs.',
-    'Use only the provided day titles, themes, timing blocks, places, weather notes, and risk tags.',
-    'Do not add new neighborhoods, meals, safety warnings, ticket claims, booking advice, or attraction names that are not in the input.',
-    'Write as Yusuf speaking directly to the guest before the trip, but in a very casual, flat, and natural tone, like a local friend sending a quick WhatsApp text message.',
-    'Never use exclamation marks. Avoid hype or travel-agency buzzwords (e.g., avoid &quot;awesome&quot;, &quot;spectacular&quot;, &quot;perfect&quot;, &quot;vibrant&quot;, &quot;amazing&quot;, &quot;unforgettable&quot;).',
-    'Be extremely direct. Instead of formal sentences like &quot;Here is your customized itinerary based on your preferences,&quot; write something basic like &quot;Hey, looked at your trip dates and choices. Here is how I would structure your days.&quot;',
-    'Use simple, conversational English. Keep sentences short and direct. It should sound like a human guide, not like travel software.',
-    'Do not use marketing buzzwords, formal travel agency language, or robotic opening templates (e.g., avoid &quot;Welcome to...&quot;, &quot;I recommend...&quot;, &quot;Enjoy...&quot;, &quot;Make sure to...&quot;).',
-    'Do not use a fixed template. Do not make every day sound the same.',
-    'Do not list interest labels like &quot;History, Berlin Wall / Cold War, Free / low budget&quot;. Turn them into normal, everyday travel language.',
-    'Avoid technical planner language, abstract travel philosophy, hype, and long explanations.',
+    'You are Yusuf from BerlinWalk, writing a personal note to someone who just made a Berlin plan.',
+    'The route is fixed. Do not change the day order, dates, times, tour slot, places, or map stops.',
+    'Do not invent restaurants, attractions, neighborhoods, warnings, ticket rules, or booking advice.',
+    'Apart from those route facts, write freely in friendly simple English.',
+    'It can sound like a short note from a local guide before the trip. A natural hello is fine.',
+    'Use &quot;I&quot; when it helps. Yusuf is talking directly to the guest.',
+    'Mention a few real places from the itinerary and explain, in normal language, why they make sense in that order.',
+    'Do not list the raw interest labels. Turn them into normal travel language.',
+    'Avoid planner/software words such as framework, route logic, anchor, layer, cluster, optimize, constraints, matrix.',
+    'No hype, no sales voice, no generic AI itinerary language.',
+    'If you refer to &quot;next day&quot; or &quot;after that&quot;, check the actual day order in the input first.',
     'noteTitle must be short and natural.',
-    'routeIntro must be one simple paragraph, 45-75 words, with real places or days from the itinerary.',
-    'dayStories must include exactly one item for every input.plan.days item. Each text must be one simple, conversational sentence, 14-28 words, using a real place, block, or tour detail from that day.',
+    'routeIntro must be one friendly paragraph, 70-120 words, with real places or days from the itinerary.',
+    'dayStories must include exactly one item for every input.plan.days item. Each text should be 25-55 words, one or two natural sentences, using real places, blocks, or tour details from that day.',
     'weatherSentence must be one short practical sentence.',
     'If input.tourSlot has a date/time and is not booked, tourSentence should mention it naturally. If booked, use meeting-point/prep language.',
     'chips may be an empty array. If used, keep them short and human.',
@@ -737,7 +736,7 @@ function sanitizeAiEnhancement(data, input, model, usage) {
   const dayStories = Array.isArray(data &amp;&amp; data.dayStories)
     ? data.dayStories.map(item =&gt; ({
       dayNumber: cleanNumber(item &amp;&amp; item.dayNumber, 0, 0, 7),
-      text: cleanText(item &amp;&amp; item.text, '', 220)
+      text: cleanText(item &amp;&amp; item.text, '', 360)
     })).filter(item =&gt; validDays[item.dayNumber] &amp;&amp; item.text).slice(0, input.plan.days.length)
     : [];
 

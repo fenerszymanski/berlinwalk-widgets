@@ -8677,7 +8677,6 @@
       padding: 7px 9px;
     }
 
-    #bw-trip-planner .bw-ai-aside b,
     #bw-trip-planner .bw-ai-aside span {
       display: block;
       min-width: 0;
@@ -8691,6 +8690,7 @@
       letter-spacing: 0.7px;
       line-height: 1.15;
       text-transform: uppercase;
+      white-space: nowrap;
     }
 
     #bw-trip-planner .bw-ai-aside span {
@@ -15125,7 +15125,7 @@
       if (state.arrivalTime === 'evening') return 'Use ABC from BER and go straight to your base. Do not add a sightseeing stop tonight.';
       if (state.arrivalTime === 'afternoon') return 'Use ABC from BER, drop your bags, and keep the first move close to your stay.';
       if (arrivalDayTourEligible()) return 'Use ABC train from BER, drop your bags, and head to the center.';
-      return 'Use ABC train from BER, drop bags, and walk near your base camp.';
+      return 'Use ABC train from BER, drop bags, and walk near where you are staying.';
     }
     if (state.arrivalPoint === 'hbf') {
       if (state.arrivalTime === 'evening') return 'Arrive at Hauptbahnhof and go straight to your base. Keep the first night small.';
@@ -17613,15 +17613,20 @@
   function mockRouteIntro(plan, mainFocus, slot) {
     var days = plan.days || [];
     var first = days[0] ? guideAnchorNaturalPhrase(days[0], 2) : 'your first Berlin bearings';
-    var firstMainDay = days[1] ? guideAnchorNaturalPhrase(days[1], 2) : '';
+    var nextDayIndex = slot && slot.insideTrip ? slot.offset + 1 : 1;
+    var nextProperDay = days[nextDayIndex] || days[1] || null;
+    var nextProperDayPhrase = nextProperDay ? guideAnchorNaturalPhrase(nextProperDay, 2) : '';
     var tourDay = slot && slot.insideTrip
-      ? ' I would keep BerlinWalk for ' + slot.dayLabel + ' at ' + slot.startLabel + '; after the walk, do lunch near Hackescher Markt and keep the afternoon nearby.'
+      ? ' I would put BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + '; after the walk, eat near Hackescher Markt and keep that day close to Mitte.'
       : '';
+    var focusSubject = mainFocus && mainFocus !== 'Berlin'
+      ? (/days$/i.test(mainFocus) ? mainFocus : mainFocus + ' days')
+      : 'sightseeing days';
     var focusLine = mainFocus && mainFocus !== 'Berlin'
-      ? ' The bigger ' + mainFocus + ' is better after you have slept and found your rhythm.'
-      : ' The bigger sightseeing is better after you have slept and found your rhythm.';
-    var secondLine = firstMainDay ? ' The next day can start properly around ' + firstMainDay + ', instead of trying to squeeze everything into arrival day.' : '';
-    return 'Hey there, I am Yusuf, your Berlin guide. I made this plan to keep your first day simple: reach your base, eat something, and take an easy first walk around ' + first + '.' + focusLine + tourDay + secondLine;
+      ? ' The bigger ' + focusSubject + ' are better after you have slept and found your rhythm.'
+      : ' The bigger sightseeing days are better after you have slept and found your rhythm.';
+    var secondLine = nextProperDayPhrase ? ' After that, the plan can move properly into ' + nextProperDayPhrase + ' without forcing it into arrival day.' : '';
+    return 'Hey there, I am Yusuf, your Berlin guide. I made this plan to keep your first day simple: get to where you are staying, eat something, and take an easy first walk around ' + first + '.' + focusLine + tourDay + secondLine;
   }
 
   function mockDayStory(day, slot) {
@@ -17633,33 +17638,33 @@
     var isTourDay = slot && slot.insideTrip && day.dayNumber === slot.offset + 1;
 
     if (day.dayNumber === 1) {
-      return 'For Day 1, I would keep it very simple: arrive, eat, get water, then take a short first walk around ' + first + '.';
+      return 'Day 1 is not the day to prove anything. Get to where you are staying, eat something, and take a short first walk around ' + first + '.';
     }
     if (isTourDay) {
-      return 'This is the day I would guide you first: BerlinWalk at ' + slot.startLabel + ', lunch near Hackescher Markt, then ' + second + ' only if you still feel fresh.';
+      return 'This is the day I would start with BerlinWalk at ' + slot.startLabel + '. After the walk, stay near Hackescher Markt for lunch and keep the next stop nearby.';
     }
     if (type === 'wall') {
-      return 'For the Wall day, start with ' + first + '; it explains the story better than rushing between too many Cold War stops.';
+      return 'Give ' + first + ' real time on the Wall day. It shows how the Wall cut through normal city life, then the next stop can add the bigger Cold War picture.';
     }
     if (type === 'museums') {
-      return 'For the museum day, give ' + first + ' proper time; one good museum visit is usually better than three rushed ones.';
+      return 'For museums, I would slow down around ' + first + '. One proper visit is usually better than running through several galleries just to tick boxes.';
     }
     if (type === 'history') {
-      return 'For older Berlin, start with ' + first + ', then walk toward ' + second + ' after lunch so the day has a clear story.';
+      return 'This is your older Berlin day. Start around ' + first + ', then walk toward ' + second + ' after lunch to see a different side of the city.';
     }
     if (type === 'food') {
-      return 'This is the day to slow down for food and neighborhoods; take your time around ' + first + ', then continue toward ' + second + '.';
+      return 'This is the day to let Berlin feel less like a checklist. Take your time around ' + first + ', eat well, then continue toward ' + second + ' without crossing town.';
     }
     if (type === 'free') {
-      return 'For the low-budget day, start with ' + first + '; if the weather is kind, add ' + second + ' without paying for another big entry.';
+      return 'This is the lighter low-cost day. Start with ' + first + ', enjoy the open-air Berlin feeling, and add ' + second + ' only if the weather still feels good.';
     }
     if (type === 'nightlife') {
-      return 'If you want a proper Berlin night, keep the daytime light and save some energy for ' + (third || second) + '.';
+      return 'If you want the evening to work, keep the daytime simple. Save some energy for ' + (third || second) + ' instead of filling every hour.';
     }
     if (type === 'potsdam') {
-      return 'For Potsdam, I would decide on the morning itself: go if the weather and energy are good, stay in Berlin if not.';
+      return 'For Potsdam, decide that morning. If the weather and energy are good, go; if the trip already feels full, stay in Berlin without guilt.';
     }
-    return 'This is a calmer day between bigger stops; start with ' + first + ', then keep ' + second + ' as the easy second move.';
+    return 'This is a calmer day between bigger stops. Stay around ' + first + ' first, then use ' + second + ' as the easy second move.';
   }
 
   function mockAiEnhancement(plan) {
@@ -17668,7 +17673,7 @@
     var focusLabels = (state.interests || []).map(function (key) { return labelFor('interests', key); }).slice(0, 3);
     var mainFocus = guideFocusPhrase(focusLabels);
     var tourSentence = slot && slot.insideTrip
-      ? 'Use BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock, then keep that day lighter afterward.'
+      ? 'BerlinWalk fits best on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock. Keep the next move nearby.'
       : slot && !slot.booked
         ? 'The tour does not land cleanly inside this plan, so I would not force it into a bad arrival day.'
         : 'Since the tour is already booked, keep the World Clock meeting point saved and arrive 5 minutes early.';
@@ -17768,13 +17773,13 @@
       storyByDay[item.dayNumber] = item.text;
     });
     var dayStoryHtml = aiVisibleDayStories(plan, storyByDay).map(function (day) {
-      var text = cleanAiText(storyByDay[day.dayNumber], '', 220);
+      var text = cleanAiText(storyByDay[day.dayNumber], '', 360);
       if (!text) return '';
       return '<article class="bw-ai-day"><b>D' + day.dayNumber + '</b><span><strong>' + escapeHtml(day.theme || day.title) + '</strong><span>' + escapeHtml(text) + '</span></span></article>';
     }).filter(Boolean).join('');
     var asideHtml = [
-      weatherSentence ? { label: 'Weather read', value: weatherSentence } : null,
-      tourSentence ? { label: 'Tour note', value: tourSentence } : null
+      weatherSentence ? { label: 'Weather', value: weatherSentence } : null,
+      tourSentence ? { label: 'Tour', value: tourSentence } : null
     ].filter(Boolean).map(function (item) {
       return '<span class="bw-ai-aside"><b>' + escapeHtml(item.label) + '</b><span>' + escapeHtml(item.value) + '</span></span>';
     }).join('');
@@ -18560,8 +18565,8 @@
       if (weather || tour) {
         var half = (contentW - 40) / 2;
         [
-          { label: 'Weather read', value: weather },
-          { label: 'Tour note', value: tour }
+          { label: 'Weather', value: weather },
+          { label: 'Tour', value: tour }
         ].filter(function (item) { return item.value; }).slice(0, 2).forEach(function (item, index) {
           var x = margin + 16 + index * (half + 8);
           fill(lightBlue);
