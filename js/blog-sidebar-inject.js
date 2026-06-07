@@ -480,8 +480,8 @@
       desktopLabel.textContent = 'Book Tour';
     }
     var stickyBtn = document.querySelector('#bw-sticky-cta .bw-btn');
-    if (stickyBtn && cleanText(stickyBtn.textContent) !== 'Book Tour') {
-      stickyBtn.textContent = 'Book Tour';
+    if (stickyBtn && cleanText(stickyBtn.textContent) !== '🚶 Book Walking Tour') {
+      stickyBtn.textContent = '🚶 Book Walking Tour';
     }
   }
 
