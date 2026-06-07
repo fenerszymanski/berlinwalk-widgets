@@ -13363,8 +13363,64 @@
     return /^(later|evening|dinner)$/i.test(String(block.time || ''));
   }
 
+  function dayDiningCopy(day) {
+    var type = dayVisualType(day);
+    var base = state.stayArea || 'unsure';
+    if (day.dayNumber === 1) {
+      if (base === 'mitte') return 'Welcome to Mitte! Stroll around Hackescher Markt or try Bavarian classics at Hofbräu Wirtshaus near Alexanderplatz.';
+      if (base === 'east') return 'Welcome to the East side! Walk down Oranienstraße and try local Turkish food or street stalls.';
+      if (base === 'north') return 'Welcome to Prenzlauer Berg! Stroll around Kollwitzplatz or Kastanienallee for cozy neighborhood dinners.';
+      if (base === 'west') return 'Welcome to Charlottenburg! Enjoy traditional German schnitzel or relax at Schwarzes Café on Kantstraße.';
+      return 'Welcome to Berlin! Keep tonight easy and find a local dinner spot close to your base camp.';
+    }
+    if (type === 'history' || type === 'museums') {
+      return 'Try traditional German food at Clärchens Ballhaus on Auguststraße or Maximilians on Friedrichstraße. For quick fresh Vietnamese street food, grab a bowl at Monsieur Vuong.';
+    }
+    if (type === 'wall' || type === 'nightlife') {
+      return 'Try the famous Rüyam Gemüse Kebab on Hauptstraße or Schönhauser Allee for Berlin\'s best döner. Or grab a legendary burger under the Schlesisches Tor U-Bahn tracks at Burgermeister.';
+    }
+    if (type === 'food') {
+      return 'Visit Markthalle Neun in Kreuzberg (especially on Street Food Thursday), or find cozy cafes and local bites along Kastanienallee.';
+    }
+    if (type === 'free') {
+      return 'Get legendary cheap Currywurst at Konnopke\'s Imbiss (under the U2 tracks since 1930) or Curry 36, or grab a falafel wrap at Mustafa\'s Gemüse Kebap.';
+    }
+    if (type === 'local') {
+      return 'If in the west, try Dicke Wirtin near Savignyplatz for a traditional cozy pub feel. If in the north, visit Prater Biergarten, Berlin\'s oldest beer garden (since 1837).';
+    }
+    if (type === 'potsdam') {
+      return 'Back in Berlin, keep it easy with dinner close to your stay area. Check the base camp guide for recommendations.';
+    }
+    return 'Find a local spot in this area, or consult the base camp guide for neighborhood favorites.';
+  }
+
   function dayBlockCopy(day, block, index) {
     return isDayClosingBlock(day, block, index) ? '' : String(block.copy || '');
+  }
+
+  function dayBlockDisplayCopy(day, block, index) {
+    if (isDayClosingBlock(day, block, index)) {
+      return dayDiningCopy(day);
+    }
+    var baseCopy = String(block.copy || '');
+    var links = blockMapLinks(day, block, index);
+    if (links && links.length > 0) {
+      var whyParts = [];
+      links.forEach(function (link) {
+        var pl = PLACE_CATALOG[link.placeId];
+        if (pl && pl.why) {
+          var cleanWhy = pl.why.replace(/[.!?]$/, '');
+          if (baseCopy.toLowerCase().indexOf(cleanWhy.toLowerCase()) === -1) {
+            whyParts.push(pl.why);
+          }
+        }
+      });
+      if (whyParts.length > 0) {
+        if (baseCopy) baseCopy += ' ';
+        baseCopy += whyParts.join(' ');
+      }
+    }
+    return baseCopy;
   }
 
   function dayActionBlockItems(day) {
@@ -15855,6 +15911,7 @@
 
     if (unlocked) requestAiEnhancement();
     renderFullPlan();
+    updateLeadPanelText(plan);
     updateUnlockUi();
     updatePlanningUi();
     track('bw_trip_planner_result', {
@@ -15919,7 +15976,7 @@
       var blocks = dayActionBlockItems(day).map(function (item) {
         var block = item.block;
         var index = item.index;
-        var copy = dayBlockCopy(day, block, index);
+        var copy = dayBlockDisplayCopy(day, block, index);
         var closeClass = isDayClosingBlock(day, block, index) ? ' bw-block-close' : '';
         var tourClass = isTourBlock(block) ? ' bw-block-tour' : '';
         var mapLinks = blockMapLinksHtml(day, block, index);
@@ -15947,6 +16004,37 @@
     renderTransportMaps(plan);
     renderShoppingPanel(plan);
     renderEssentials(plan);
+  }
+
+  function updateLeadPanelText(plan) {
+    var copyEl = root.querySelector('.bw-lead-copy');
+    if (!copyEl) return;
+    var days = plan.days.length;
+    var daysText = days + (days === 1 ? ' day' : ' days');
+    
+    var interestHighlights = [];
+    var interests = Array.isArray(state.interests) ? state.interests : [];
+    if (interests.indexOf('history') !== -1 || interests.indexOf('wall') !== -1) {
+      interestHighlights.push('Cold War & history landmarks');
+    }
+    if (interests.indexOf('museums') !== -1) {
+      interestHighlights.push('Museum Island scheduling');
+    }
+    if (interests.indexOf('food') !== -1) {
+      interestHighlights.push('curated local dining');
+    }
+    if (interests.indexOf('nightlife') !== -1) {
+      interestHighlights.push('nightlife spots');
+    }
+    
+    var highlightText = '';
+    if (interestHighlights.length > 0) {
+      highlightText = ', customized ' + interestHighlights.join(' and ') + ',';
+    } else {
+      highlightText = ' with weather-aware details,';
+    }
+    
+    copyEl.innerHTML = 'Enter your email to unlock your full <strong>' + daysText + ' plan</strong>' + highlightText + ' <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, offline <strong>public transport maps</strong>, and local <strong>shopping guides</strong>.';
   }
 
   function updateUnlockUi() {
@@ -17470,7 +17558,7 @@
       dayActionBlockItems(day).forEach(function (item) {
         var block = item.block;
         var index = item.index;
-        var copy = dayBlockCopy(day, block, index);
+        var copy = dayBlockDisplayCopy(day, block, index);
         var windowLabel = dayBlockWindow(day, block, index);
         lines.push(block.time + (windowLabel ? ' (' + windowLabel + ')' : '') + ': ' + block.title + (copy ? ' - ' + copy : ''));
       });
@@ -17581,6 +17669,9 @@
         fill([255, 255, 255]);
         stroke([220, 232, 200]);
         doc.roundedRect(margin, y, contentW, cardH, 7, 7, 'FD');
+        if (doc.link && url) {
+          doc.link(margin, y, contentW, cardH, { url: url });
+        }
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(7.5);
         setColor(muted);
@@ -17677,7 +17768,7 @@
       }
       blocks.forEach(function (item) {
         var block = item.block;
-        var copy = dayBlockCopy(day, block, item.index);
+        var copy = dayBlockDisplayCopy(day, block, item.index);
         addPageIf(42);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(9);
@@ -18096,7 +18187,7 @@
     function drawDayStep(day, item) {
       var block = item.block;
       var index = item.index;
-      var copy = dayBlockCopy(day, block, index);
+      var copy = dayBlockDisplayCopy(day, block, index);
       var windowLabel = dayBlockWindow(day, block, index);
       var links = blockMapLinks(day, block, index);
       var titleH = textHeight(block.title, contentW - 126, 9.4, 'bold', 2);
@@ -18214,6 +18305,9 @@
         fill([255, 255, 255]);
         stroke(border);
         doc.roundedRect(x, cardY, cardW, cardH, 8, 8, 'FD');
+        if (doc.link && url) {
+          doc.link(x, cardY, cardW, cardH, { url: url });
+        }
         fill(accent);
         doc.roundedRect(x, cardY, 5, cardH, 3, 3, 'F');
         setFont(6.8, 'bold', muted);
@@ -19828,7 +19922,7 @@
       var blockHeights = actionBlocks.map(function (item) {
         var block = item.block;
         var index = item.index;
-        var copy = dayBlockCopy(day, block, index);
+        var copy = dayBlockDisplayCopy(day, block, index);
         doc.setFont('helvetica', 'bold');
         doc.setFontSize(9);
         var titleLines = doc.splitTextToSize(block.title, contentW - 112);
@@ -20004,7 +20098,7 @@
       actionBlocks.forEach(function (item, blockIndex) {
         var block = item.block;
         var index = item.index;
-        var copy = dayBlockCopy(day, block, index);
+        var copy = dayBlockDisplayCopy(day, block, index);
         var windowLabel = dayBlockWindow(day, block, index);
         var blockY = y;
         fill(limeSoft);
@@ -20286,7 +20380,7 @@
     var simpleDaysHtml = plan.days.map(function (day) {
       var blocks = dayActionBlockItems(day).slice(0, 4).map(function (item) {
         var block = item.block;
-        var copy = dayBlockCopy(day, block, item.index);
+        var copy = dayBlockDisplayCopy(day, block, item.index);
         return '<li><b>' + escapeHtml(block.time) + '</b><span><strong>' + escapeHtml(block.title) + '</strong>' + (copy ? ' - ' + escapeHtml(copy) : '') + '</span></li>';
       }).join('');
       var mapLinks = dayMapPackItems(day).slice(0, 3).map(function (item) {
@@ -20411,7 +20505,7 @@
       var blocks = dayActionBlockItems(day).map(function (item) {
         var block = item.block;
         var index = item.index;
-        var copy = dayBlockCopy(day, block, index);
+        var copy = dayBlockDisplayCopy(day, block, index);
         var windowLabel = dayBlockWindow(day, block, index);
         return '<div class="block"><b><span>' + escapeHtml(block.time) + '</span>' + (windowLabel ? '<small>' + escapeHtml(windowLabel) + '</small>' : '') + '</b><div><strong>' + escapeHtml(block.title) + '</strong>' + (copy ? '<span>' + escapeHtml(copy) + '</span>' : '') + '</div></div>';
       }).join('');

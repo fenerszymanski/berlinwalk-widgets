@@ -4,6 +4,17 @@ Rolling log of agent sessions. Most recent at top.
 
 Format for each entry — see `AGENTS.md` §9.
 
+## 2026-06-07 — Antigravity (Ultimate Trip Planner Revisions & Audits)
+
+**Did:**
+- Applied revisions based on test feedback: dynamic dining recommendations for closing blocks, personalized lead gate subtitle copy, descriptive place contexts, and clickable PDF resource card links.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — updated dayBlockCopy call sites to dayBlockDisplayCopy across layout, PDF, print and share renders. Added doc.link annotations on PDF transport/shopping grids.
+- QA: `node ultimate-berlin-trip-planner/launch-audit.mjs` passed `153 pass`.
+
+**Next session should:** Yusuf can test the planner locally or push the repository to deploy these changes.
+
 ## 2026-06-06 — Codex (Ultimate mobile overflow + print cleanup)
 
 **Did:** Closed the last two Ultimate Trip Planner issues Yusuf found: mobile unlock no longer widens the branded planner page, and print/simple PDF resource sections no longer show command-like `Open PDF` / `Open map` labels.
