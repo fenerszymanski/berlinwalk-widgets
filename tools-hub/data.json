@@ -412,6 +412,14 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-beer-gardens-map/",
       "embedHeight": 620
+    },
+    {
+      "slug": "christmas-markets-map",
+      "title": "Berlin Christmas Markets Map",
+      "lead": "Map 15 of Berlin's best Christmas markets. Filter by price, size, and opening status to find the ones worth your time.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/christmas-markets-map/",
+      "embedHeight": 760
     }
   ]
 }

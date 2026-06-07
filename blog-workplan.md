@@ -1,8 +1,34 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-06-05 (Festival of Lights route draft + widget added)
+Last updated: 2026-06-07 (English tourist search-trends TODOs added)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
+
+## Search-Trends TODOs (2026-06-07)
+
+Source: `/Users/yusufucuz/Downloads/Berlin Tourist English Search Trends.docx`.
+
+Strategic read: prioritize tourist-anxiety and certainty content before generic landmark history. The strongest English search-intent clusters are short booking windows, where-to-stay/Kiez decisions, Reichstag scarcity, Christmas markets, transit validation, last-day luggage, Spati/cash/Sunday friction, club-door anxiety, vegan and sustainable food, and active walking/bike exploration.
+
+### New Post Ideas To Add
+
+- `Best Christmas Markets in Berlin 2026: Which Ones Are Actually Worth It` - upgrade the existing Christmas markets idea into a Q4 pillar with traditional vs alternative markets, dates, neighborhoods, who each market is for, and a map/widget candidate.
+- `What Is a Spati? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips` - connect Spati culture, Sunday closures, cash habits, late-night basics, and tourist survival advice.
+- `Vegan Berlin Guide 2026: Best Areas, Easy Picks, and What Tourists Should Know` - fill the food-content gap beyond currywurst, doner, and beer gardens; cover vegan-normal Berlin, neighborhoods, and practical first-timer picks.
+- `Berlin by Foot: Best Walkable Areas for First-Time Visitors` - convert walking and strolling search intent into BerlinWalk route logic; include Mitte, Museum Island, Kreuzberg/Friedrichshain, Prenzlauer Berg, Tiergarten, and East Side Gallery.
+- `If Reichstag Dome Is Sold Out: What to Do Instead` - either a standalone post or a major refresh of the Reichstag post; cover advance registration, ID checks, maintenance closures, Kafer rooftop breakfast workaround, plan-B viewpoints, and nearby walking-route links.
+- `Where to Stay in Berlin for Christmas Markets 2026` - start as a section inside the Christmas markets pillar; split into a child post only if search or performance justifies it.
+- Keep `Berlin for One Day: What to See If You Only Have 6-8 Hours` in the queue as a conversion-led itinerary article distinct from the 3-day guide.
+
+### Existing Post Refreshes
+
+- `Where to Stay in Berlin` - add a Kiez decision table: first-timers/history -> Mitte; nightlife/alternative -> Friedrichshain/Kreuzberg; families/luxury shopping -> Charlottenburg; food/local markets -> Neukolln/Prenzlauer Berg.
+- `How to Visit the Reichstag Dome for Free` - strengthen "free but scarce" framing with registration lead time, ID rules, maintenance closures, sold-out alternatives, Kafer breakfast workaround, and nearby walking-route links.
+- `Berlin Public Transport`, `Do You Really Need to Validate Your Ticket`, and `Berlin WelcomeCard` - make the open-barrier system explicit: no gates does not mean free; explain validation, fines, app tickets, AB/ABC, and tourist-safe choices.
+- `Luggage Storage in Berlin` - add station lockers vs app-based storage comparison and location blocks for Hauptbahnhof, Alexanderplatz, BER, and ZOB.
+- `Are Shops Open on Sunday in Berlin`, `Can You Use Credit Cards in Berlin`, and shopping content - cross-link into a Sunday + cash + Spati survival path.
+- `What to Wear to Berlin Clubs` - add Berghain/door-anxiety context, queue behavior, no-photo culture, and a clear "no guide can guarantee entry" note.
+- Fold "cheap flights to Berlin" and flight-price timing into `Best Time to Visit Berlin` / monthly posts only; do not create a standalone flight-search article.
 
 ## Priority Queue
 
@@ -13,7 +39,12 @@ This is the working list of new blog ideas checked against the live BerlinWalk b
 | 0 | Wix draft + widget | Best Day Trips from Berlin (Potsdam, Sachsenhausen, Spreewald) | High-volume "day trips from Berlin"; Wix draft `80b60289-cd69-4d4c-ac9b-399ce47c8155` created UNPUBLISHED and patched with 4 licensed images + SEO; local draft `blog-drafts/best-day-trips-from-berlin.md`; new `berlin-day-trips-finder` picker widget with pinned map built; QS/FAQ key `best-day-trips-from-berlin`; CMS insert `../insert-berlin-day-trips-finder.js`. Pending full visual QA, push, CMS row insert/re-save and tool icon. |
 | 0 | Wix draft + post widgets | FIBA Women's Basketball World Cup 2026 in Berlin | Seasonal/event-tie-in for September 2026 visitors and basketball fans. Wix draft `d7731e4b-c550-451c-9a1b-0d129823616c` created UNPUBLISHED; local draft `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md`; post-only widgets `basketball-worldcup-fixtures/` and `basketball-worldcup-venues-map/`; QS/FAQ key `fiba-womens-basketball-world-cup-2026-berlin`. Pending GitHub Pages push before embed review, cover/inline image selection, then visual QA/publish. |
 | 0 | Local draft + post widget | Festival of Lights Berlin 2026: Best Walking Route and Local Tips | Seasonal/event-tie-in for October visitors. Local draft `blog-drafts/festival-of-lights-berlin-2026.md`; post-only route widget `festival-lights-route/`; QS/FAQ key `festival-of-lights-berlin-2026`. Based on official 2026 programme preview, not the final map. Pending widget QA, Wix draft creation, visual selection/approval, GitHub Pages push and pre-publish recheck. |
-| 0 | Idea (A-tier, seasonal) | Best Christmas Markets in Berlin (2026) | Q4 seasonal pillar; new "Christmas markets map" widget candidate. Publish by October. |
+| 0 | Wix draft + widget | Best Christmas Markets in Berlin 2026: Which Ones Are Actually Worth It | Q4 seasonal pillar from English tourist search trends; 15 traditional vs alternative markets, dates, best areas. Wix draft `44f70724-bee8-4bc5-bde0-9225ae1eb403` created UNPUBLISHED. Local body at `blog-drafts/best-christmas-markets-berlin-2026.body.md`; embeds `{{quick-summary}}`, `{{widget:christmas-markets-map}}`, and `{{faq}}`; QS/FAQ key `best-christmas-markets-berlin-2026`. Pending push, image selection, and publish. |
+| 0 | Idea (search-trends) | What Is a Spati? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips | Tourist-friction explainer connecting Spati culture, Sunday closures, cash habits, late-night basics, and survival advice. |
+| 0 | Idea (search-trends) | Vegan Berlin Guide 2026: Best Areas, Easy Picks, and What Tourists Should Know | Food-content gap beyond currywurst/doner/beer gardens; practical first-timer vegan guide with neighborhoods and easy picks. |
+| 0 | Idea (search-trends) | Berlin by Foot: Best Walkable Areas for First-Time Visitors | Turn walking/strolling search intent into BerlinWalk route logic and conversion path. |
+| 0 | Refresh/Idea (search-trends) | If Reichstag Dome Is Sold Out: What to Do Instead | Major Reichstag refresh or child post covering scarcity, ID/registration rules, Kafer workaround, alternate viewpoints, and nearby route links. |
+| 0 | Section first (search-trends) | Where to Stay in Berlin for Christmas Markets 2026 | Add inside the Christmas markets pillar first; split into standalone child post only if demand/performance justifies it. |
 | 0 | Idea (B-tier) | Berlin Street Art Guide / Holocaust Memorial Guide / Sachsenhausen Memorial Guide / "How Many Days in Berlin?" | High-intent gaps; street-art map + `berlin-landmarks-map` reuse. |
 | 1 | Wix draft | Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange | Route-adjacent history piece. Pairs with existing old-town and GDR demolition content. Local draft at `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`; quick-summary + FAQ + `nikolaiviertel-walk` self-guided walking-tour widget wired under slug `nikolaiviertel`. Wix draft ID: `48bf0945-63d9-46cd-b9af-a8fb87ab3c75`. |
 | 2 | Wix draft | Famous Movies and TV Shows Filmed in Berlin | Screen-location master post with generated media, Quick Summary, FAQ, and `screen-mood-finder` widget. Wix draft ID: `a026aeb9-6126-4adc-bebd-2dcd5c88fb8b`. |

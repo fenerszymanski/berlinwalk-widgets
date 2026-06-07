@@ -54,7 +54,8 @@
   "fiba-womens-basketball-world-cup-2026-berlin": "fiba-womens-basketball-world-cup-2026-berlin",
   "festival-of-lights-berlin-2026": "festival-of-lights-berlin-2026",
   "berlin-pride-csd-2026": "berlin-pride-csd-2026",
-  "berlin-beer-gardens-guide": "berlin-beer-gardens-guide"
+  "berlin-beer-gardens-guide": "berlin-beer-gardens-guide",
+  "best-christmas-markets-berlin-2026": "best-christmas-markets-berlin-2026"
 };
 
   var SCHEMAS = {
@@ -2492,6 +2493,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The BerlinWalk tour ends at Hackescher Markt. From the finish line, Zollpackhof in Mitte is a 15-minute walk west along the Spree river, and Prater in Prenzlauer Berg is a quick 10-minute tram ride away on the M1 line."
+        }
+      }
+    ]
+  },
+  "best-christmas-markets-berlin-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When do the 2026 Christmas markets start in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official Christmas market season in Berlin begins on **Monday, November 23, 2026**. Most major markets run until December 26 or December 31, 2026. A few markets (like the Humboldt Forum and Rotes Rathaus markets) stay open until early January 2027, while the RAW-Gelände medieval market opens early on **November 12, 2026**."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the WeihnachtsZauber Gendarmenmarkt located in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In 2026, the WeihnachtsZauber market **returns to its historic home at Gendarmenmarkt** in Mitte. For the past few seasons, it was temporarily relocated to Bebelplatz due to massive underground renovations. Make sure to ignore older guides listing Bebelplatz as the location."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you have to pay to enter Berlin Christmas markets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most Christmas markets in Berlin are completely free to enter. The main exception is the **WeihnachtsZauber Gendarmenmarkt**, which charges a **€2 entry fee** for adults (free for children under 12, and free on weekdays from 11:00 to 14:00). The **RAW-Gelände medieval market** is free from Monday to Wednesday, but charges a **€3 entry fee** from Thursday to Sunday."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are credit cards accepted at Berlin Christmas markets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, the vast majority of food, drink, and craft stalls at Berlin Christmas markets are **cash-only**. Always carry plenty of Euros in small bills and coins. A few high-end craft stalls or large dining tents at Gendarmenmarkt accept cards, but cash remains essential."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the mug deposit (Pfand) system work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "When you buy a hot drink (like Glühwein), you pay a deposit (Pfand) of **€3 to €5** for the ceramic mug. When you return the empty mug to the stall, you get your deposit back. If you prefer to keep the mug as a unique, cheap souvenir of your trip, you can simply keep it and forfeit the deposit."
         }
       }
     ]

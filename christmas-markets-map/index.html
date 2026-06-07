@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Christmas Markets Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-christmas-markets-map">
+  <style>
+    #bw-christmas-markets-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-christmas-markets-map * { box-sizing: border-box; }
+
+    #bw-christmas-markets-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-christmas-markets-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-christmas-markets-map .bw-head-icon { font-size: 18px; line-height: 1; }
+
+    #bw-christmas-markets-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-christmas-markets-map .bw-body { background: #FAFAF5; padding: 16px 18px; }
+
+    #bw-christmas-markets-map .bw-ask {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin: 0 0 14px;
+    }
+
+    #bw-christmas-markets-map .bw-filter-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    #bw-christmas-markets-map .bw-filter-label {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--bw-muted);
+      min-width: 90px;
+      letter-spacing: 0.5px;
+    }
+
+    #bw-christmas-markets-map .bw-filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    #bw-christmas-markets-map .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-christmas-markets-map .bw-filter:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-lime-soft);
+    }
+
+    #bw-christmas-markets-map .bw-filter.active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    #bw-christmas-markets-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 14px 0;
+      line-height: 1.55;
+    }
+
+    #bw-christmas-markets-map .bw-map-container {
+      width: 100%;
+      height: 460px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-christmas-markets-map .bw-map { width: 100%; height: 100%; z-index: 1; }
+
+    #bw-christmas-markets-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-christmas-markets-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+
+    #bw-christmas-markets-map .leaflet-popup-content {
+      margin: 0;
+      width: 270px !important;
+      font-family: inherit;
+    }
+
+    #bw-christmas-markets-map .leaflet-popup-tip { box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    #bw-christmas-markets-map .bw-popup-head {
+      background: var(--bw-green);
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+    }
+
+    #bw-christmas-markets-map .bw-popup-type {
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    #bw-christmas-markets-map .bw-popup-name {
+      color: var(--bw-white);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-christmas-markets-map .bw-popup-body { padding: 12px 14px; }
+
+    #bw-christmas-markets-map .bw-popup-note {
+      font-size: 12px;
+      color: var(--bw-text);
+      line-height: 1.55;
+      margin: 0 0 10px;
+    }
+
+    #bw-christmas-markets-map .bw-popup-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11.5px;
+      color: var(--bw-text);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    #bw-christmas-markets-map .bw-popup-row:last-of-type { margin-bottom: 0; }
+
+    #bw-christmas-markets-map .bw-popup-label {
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 9px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      min-width: 58px;
+      padding-top: 1px;
+    }
+
+    #bw-christmas-markets-map .bw-popup-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+
+    #bw-christmas-markets-map .bw-popup-link:hover { background: #FFEF33; }
+
+    #bw-christmas-markets-map .bw-marker {
+      width: 30px;
+      height: 30px;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    #bw-christmas-markets-map .bw-marker-inner {
+      transform: rotate(45deg);
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    #bw-christmas-markets-map .bw-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 14px;
+      margin-top: 12px;
+      font-size: 11px;
+      color: var(--bw-muted);
+      line-height: 1.4;
+    }
+
+    #bw-christmas-markets-map .bw-legend span { display: inline-flex; align-items: center; gap: 5px; }
+
+    #bw-christmas-markets-map .bw-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--bw-green);
+      border: 2px solid var(--bw-yellow);
+      flex: 0 0 auto;
+    }
+
+    #bw-christmas-markets-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    #bw-christmas-markets-map .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    #bw-christmas-markets-map .bw-tour-note {
+      margin-top: 12px;
+      padding: 11px 14px;
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--bw-text);
+    }
+
+    #bw-christmas-markets-map .bw-tour-note strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 600px) {
+      #bw-christmas-markets-map .bw-filter-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin-bottom: 14px;
+      }
+      #bw-christmas-markets-map .bw-filter-label {
+        min-width: auto;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-christmas-markets-map { margin: 22px 0; }
+      #bw-christmas-markets-map .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-christmas-markets-map .bw-head-icon { font-size: 16px; }
+      #bw-christmas-markets-map .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-christmas-markets-map .bw-body { padding: 14px; }
+      #bw-christmas-markets-map .bw-hint { font-size: 12px; margin: 12px 0; }
+      #bw-christmas-markets-map .bw-filter { font-size: 10px; padding: 5px 10px; }
+      #bw-christmas-markets-map .bw-map-container { height: 380px; }
+      #bw-christmas-markets-map .leaflet-popup-content { width: 235px !important; }
+      #bw-christmas-markets-map .bw-popup-name { font-size: 13px; }
+      #bw-christmas-markets-map .bw-popup-row { font-size: 11px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🎄</span>
+      <span class="bw-kicker">Berlin Christmas Markets Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-ask">Filter the 2026 Markets:</p>
+      
+      <div class="bw-filter-section">
+        <span class="bw-filter-label">Admission:</span>
+        <div class="bw-filters" data-group="price">
+          <button class="bw-filter active" type="button" data-filter="all">All Markets</button>
+          <button class="bw-filter" type="button" data-filter="free">Free Admission</button>
+          <button class="bw-filter" type="button" data-filter="paid">Paid Admission</button>
+        </div>
+      </div>
+
+      <div class="bw-filter-section">
+        <span class="bw-filter-label">Market Size:</span>
+        <div class="bw-filters" data-group="size">
+          <button class="bw-filter active" type="button" data-filter="all">All Sizes</button>
+          <button class="bw-filter" type="button" data-filter="large">Large (Major Fairs)</button>
+          <button class="bw-filter" type="button" data-filter="medium">Medium (Atmospheric)</button>
+          <button class="bw-filter" type="button" data-filter="small">Small (Boutique & Cozy)</button>
+        </div>
+      </div>
+
+      <div class="bw-filter-section">
+        <span class="bw-filter-label">Schedule:</span>
+        <div class="bw-filters" data-group="schedule">
+          <button class="bw-filter active" type="button" data-filter="all">All Schedules</button>
+          <button class="bw-filter" type="button" data-filter="open-past">Open Past Dec 25</button>
+          <button class="bw-filter" type="button" data-filter="closes-24">Closes by Dec 24/25</button>
+          <button class="bw-filter" type="button" data-filter="weekend">Weekend-Only</button>
+        </div>
+      </div>
+
+      <p class="bw-hint">Tap any pin to view dates, admission fees, nearest transit, and directions. Find the perfect pazar for your Berlin winter trip.</p>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-christmas-markets-map-canvas"></div>
+      </div>
+
+      <div class="bw-legend">
+        <span><i class="bw-dot"></i> Berlin Christmas Market</span>
+      </div>
+
+      <p class="bw-count"><strong id="bw-count-num">15</strong> markets mapped</p>
+
+      <div class="bw-tour-note">
+        <strong>Local Tip:</strong> Joining the **BerlinWalk Free Tour** at 11:30? The tour finishes near **Hackescher Markt**, making the eco-friendly **Sophienstraße Market** (on Advent weekends) or a quick ride to **Rotes Rathaus** or **Gendarmenmarkt** the perfect post-tour plan!
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-christmas-markets-map');
+      if (!root) return;
+
+      var locations = [
+        {
+          name: 'WeihnachtsZauber Gendarmenmarkt',
+          type: 'Elegant & Traditional',
+          note: 'Widely considered Berlin’s most beautiful market. Returning home to the newly renovated Gendarmenmarkt square in 2026! Premium crafts, heated food tents, and live choir performances.',
+          dates: 'Nov 23 – Dec 31, 2026',
+          price: 'Paid (€2; free Mon-Fri 11:00-14:00)',
+          area: 'Mitte',
+          station: 'U Hausvogteiplatz / U Stadtmitte',
+          lat: 52.5136, lng: 13.3927,
+          cats: { price: 'paid', size: 'medium', schedule: 'open-past' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=WeihnachtsZauber+Gendarmenmarkt+Berlin'
+        },
+        {
+          name: 'Berliner Weihnachtszeit am Roten Rathaus',
+          type: 'Classic & Family',
+          note: 'Set against Berlin’s City Hall. Features a massive circular ice rink built around the Neptunbrunnen and a 50-meter-high Ferris wheel with panoramic views.',
+          dates: 'Nov 23, 2026 – Jan 3, 2027',
+          price: 'Free',
+          area: 'Mitte',
+          station: 'S+U Alexanderplatz / U Rotes Rathaus',
+          lat: 52.5197, lng: 13.4072,
+          cats: { price: 'free', size: 'large', schedule: 'open-past' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Berliner+Weihnachtszeit+Rotes+Rathaus+Berlin'
+        },
+        {
+          name: 'Weihnachtsmarkt am Alexanderplatz',
+          type: 'Commercial & Funfair',
+          note: 'Located at Berlin’s busiest transport hub. Known for its massive walk-in wooden Christmas pyramid, party huts, and casual street food.',
+          dates: 'Nov 23 – Dec 26, 2026',
+          price: 'Free',
+          area: 'Mitte',
+          station: 'S+U Alexanderplatz',
+          lat: 52.5218, lng: 13.4132,
+          cats: { price: 'free', size: 'large', schedule: 'closes-24' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Weihnachtsmarkt+Alexanderplatz+Berlin'
+        },
+        {
+          name: 'Lucia Christmas Market (Kulturbrauerei)',
+          type: 'Cozy & Nordic',
+          note: 'Dedicated to Scandinavian traditions in a historic brick brewery yard. Cozy open-air log stoves, mobile sauna coats, elk meatballs, and Swedish Glögg.',
+          dates: 'Nov 23 – Dec 22, 2026',
+          price: 'Free',
+          area: 'Prenzlauer Berg',
+          station: 'U Eberswalder Straße',
+          lat: 52.5431, lng: 13.4138,
+          cats: { price: 'free', size: 'medium', schedule: 'closes-24' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Lucia+Weihnachtsmarkt+Kulturbrauerei+Berlin'
+        },
+        {
+          name: 'Historical Christmas Market at RAW-Gelände',
+          type: 'Medieval & Gritty',
+          note: 'Set in a historic train repair yard. Illuminated by torches and open fires. Features blacksmiths, honey mead in clay mugs, fire shows, and wooden rides.',
+          dates: 'Nov 12 – Dec 22, 2026',
+          price: 'Paid (Free Mon-Wed; €3 Thu-Sun)',
+          area: 'Friedrichshain',
+          station: 'S+U Warschauer Straße',
+          lat: 52.5061, lng: 13.4534,
+          cats: { price: 'paid', size: 'medium', schedule: 'closes-24' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Historischer+Weihnachtsmarkt+RAW-Gelaende+Berlin'
+        },
+        {
+          name: 'Weihnachtsmarkt Schloss Charlottenburg',
+          type: 'Royal & Romantic',
+          note: 'Postcard-perfect romantic setting. The royal palace is bathed in gorgeous light projections while classical music drifts past wooden chalet stalls.',
+          dates: 'Nov 23 – Dec 28, 2026',
+          price: 'Free',
+          area: 'Charlottenburg',
+          station: 'U Richard-Wagner-Platz / S Westend',
+          lat: 52.5212, lng: 13.2958,
+          cats: { price: 'free', size: 'large', schedule: 'open-past' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Weihnachtsmarkt+Schloss+Charlottenburg+Berlin'
+        },
+        {
+          name: 'Umwelt- und Weihnachtsmarkt Sophienstraße',
+          type: 'Eco & Sustainable',
+          note: 'Eco-friendly market in one of Berlin’s oldest streets. Focuses on organic food, sustainable fashion, and local designer crafts. Steps from Hackescher Markt.',
+          dates: 'Advent Weekends (Nov 28-29, Dec 5-6, 12-13, 19-20, 2026)',
+          price: 'Free',
+          area: 'Mitte',
+          station: 'S Hackescher Markt',
+          lat: 52.5244, lng: 13.4014,
+          cats: { price: 'free', size: 'small', schedule: 'weekend' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Weihnachtsmarkt+Sophienstrasse+Berlin'
+        },
+        {
+          name: 'Alt-Rixdorfer Weihnachtsmarkt',
+          type: 'Nostalgic & Charity',
+          note: 'Held for one weekend in a historic bohemian village square. Lit entirely by petroleum and gas lamps. Run by local charity groups serving homecooked food.',
+          dates: 'Dec 4 – Dec 6, 2026',
+          price: 'Free',
+          area: 'Neukölln',
+          station: 'U Karl-Marx-Straße',
+          lat: 52.4735, lng: 13.4432,
+          cats: { price: 'free', size: 'small', schedule: 'weekend' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Alt-Rixdorfer+Weihnachtsmarkt+Berlin'
+        },
+        {
+          name: 'Christmas Market at Kaiser Wilhelm Memorial Church',
+          type: 'Traditional & Central',
+          note: 'Surrounds the historic ruined church tower. Highly popular West Berlin market featuring over 100 stalls, heavy decorations, and legendary gourmet huts.',
+          dates: 'Nov 23, 2026 – Jan 3, 2027',
+          price: 'Free',
+          area: 'Charlottenburg',
+          station: 'U/S Zoologischer Garten',
+          lat: 52.5048, lng: 13.3346,
+          cats: { price: 'free', size: 'large', schedule: 'open-past' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Weihnachtsmarkt+Gedaechtniskirche+Berlin'
+        },
+        {
+          name: 'Christmas Market am Humboldt Forum',
+          type: 'Modern & Grand',
+          note: 'Set in the grand inner courtyards of the newly rebuilt Berlin Palace (Schloss). Blends historic Prussian architecture with sleek festive lights and food options.',
+          dates: 'Nov 18, 2026 – Jan 3, 2027',
+          price: 'Free',
+          area: 'Mitte',
+          station: 'U Museumsinsel',
+          lat: 52.5175, lng: 13.4024,
+          cats: { price: 'free', size: 'medium', schedule: 'open-past' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Weihnachtsmarkt+Humboldt+Forum+Berlin'
+        },
+        {
+          name: 'Winter World & Christmas Market at Potsdamer Platz',
+          type: 'Alpine & Sporty',
+          note: 'Austria-themed winter village. Highlights include a 12-meter-high snow tubing slide, ice curling rink, and traditional Austrian wooden ski cabins.',
+          dates: 'Nov 23, 2026 – Jan 3, 2027 (Winterwelt opens early Nov)',
+          price: 'Free',
+          area: 'Tiergarten',
+          station: 'S+U Potsdamer Platz',
+          lat: 52.5096, lng: 13.3759,
+          cats: { price: 'free', size: 'medium', schedule: 'open-past' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Winterwelt+Potsdamer+Platz+Berlin'
+        },
+        {
+          name: 'Spandau Christmas Market',
+          type: 'Traditional Old Town',
+          note: 'Berlin’s largest continuous pazar. Completely takes over the historic pedestrian zone of Spandau’s old town. Classic wooden booths and a massive nativity scene.',
+          dates: 'Nov 23 – Dec 22, 2026',
+          price: 'Free',
+          area: 'Spandau',
+          station: 'U Altstadt Spandau / S Spandau',
+          lat: 52.5372, lng: 13.2031,
+          cats: { price: 'free', size: 'large', schedule: 'closes-24' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Weihnachtsmarkt+Spandauer+Altstadt+Berlin'
+        },
+        {
+          name: 'Lichtenberger Winterzeit',
+          type: 'Festive Funfair',
+          note: 'A massive winter carnival (Rummel) featuring spectacular rollercoasters, family rides, and funfair food. Opens exceptionally early in the season.',
+          dates: 'Oct 31 – Dec 27, 2026',
+          price: 'Free (rides charged individually)',
+          area: 'Lichtenberg',
+          station: 'Tram M6/16 Genslerstraße',
+          lat: 52.5285, lng: 13.4735,
+          cats: { price: 'free', size: 'large', schedule: 'open-past' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Lichtenberger+Winterzeit+Berlin'
+        },
+        {
+          name: 'Heissa Holzmarkt (Holzmarkt 25)',
+          type: 'Alternative & Creative',
+          note: 'Hip, riverside creative village along the Spree. Transformed into an alternative winter village with organic food, craft stalls, fires, and live music or DJs.',
+          dates: 'Advent Weekends (Fri-Sun, Late Nov – Dec 20, 2026)',
+          price: 'Free',
+          area: 'Friedrichshain',
+          station: 'S+U Jannowitzbrücke / S Ostbahnhof',
+          lat: 52.5108, lng: 13.4284,
+          cats: { price: 'free', size: 'medium', schedule: 'weekend' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Heissa+Holzmarkt+Berlin'
+        },
+        {
+          name: 'Klunkerkranich Rooftop Market',
+          type: 'Alternative & Scenic',
+          note: 'Perched on top of a parking deck in Neukölln. This alternative pazar offers panoramic views of Berlin, warming drinks, art stalls, and cozy winter vibes.',
+          dates: 'Advent Weekends (Fri-Sun, Dec 2026)',
+          price: 'Paid (roof entry fee €3-5)',
+          area: 'Neukölln',
+          station: 'U Rathaus Neukölln',
+          lat: 52.4816, lng: 13.4352,
+          cats: { price: 'paid', size: 'small', schedule: 'weekend' },
+          gmaps: 'https://www.google.com/maps/search/?api=1&query=Klunkerkranich+Berlin'
+        }
+      ];
+
+      var mapEl = document.getElementById('bw-christmas-markets-map-canvas');
+      var countEl = document.getElementById('bw-count-num');
+      
+      var map = L.map(mapEl, {
+        center: [52.510, 13.385],
+        zoom: 11,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var markers = [];
+
+      var currentFilters = {
+        price: 'all',
+        size: 'all',
+        schedule: 'all'
+      };
+
+      function createMarkerIcon(loc) {
+        var html = '<div class="bw-marker"><div class="bw-marker-inner">🎄</div></div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+      }
+
+      function createPopup(loc) {
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + loc.type + '</span>' +
+          '<div class="bw-popup-name">' + loc.name + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<p class="bw-popup-note">' + loc.note + '</p>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Dates</span><span><strong>' + loc.dates + '</strong></span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Admission</span><span>' + loc.price + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Area</span><span>' + loc.area + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Nearest</span><span>' + loc.station + '</span></div>' +
+          '<a href="' + loc.gmaps + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Google Maps →</a>' +
+          '</div>';
+      }
+
+      locations.forEach(function (loc) {
+        var marker = L.marker([loc.lat, loc.lng], {
+          icon: createMarkerIcon(loc)
+        }).bindPopup(createPopup(loc), {
+          closeButton: true,
+          maxWidth: 280,
+          className: 'bw-popup-wrapper'
+        });
+        marker.addTo(map);
+        marker._cats = loc.cats;
+        markers.push(marker);
+      });
+
+      countEl.textContent = markers.length;
+
+      function applyFilters() {
+        var visibleCount = 0;
+        var visibleMarkers = [];
+
+        markers.forEach(function (m) {
+          var matchPrice = currentFilters.price === 'all' || m._cats.price === currentFilters.price;
+          var matchSize = currentFilters.size === 'all' || m._cats.size === currentFilters.size;
+          var matchSchedule = currentFilters.schedule === 'all' || m._cats.schedule === currentFilters.schedule;
+
+          var show = matchPrice && matchSize && matchSchedule;
+
+          if (show) {
+            if (!map.hasLayer(m)) m.addTo(map);
+            visibleCount++;
+            visibleMarkers.push(m);
+          } else {
+            if (map.hasLayer(m)) map.removeLayer(m);
+          }
+        });
+
+        countEl.textContent = visibleCount;
+
+        // Fit bounds to visible markers if subset is shown
+        var hasActiveFilters = currentFilters.price !== 'all' || currentFilters.size !== 'all' || currentFilters.schedule !== 'all';
+        if (visibleMarkers.length > 0 && hasActiveFilters) {
+          var group = new L.featureGroup(visibleMarkers);
+          map.fitBounds(group.getBounds().pad(0.15));
+        } else if (!hasActiveFilters) {
+          map.setView([52.510, 13.385], 11);
+        }
+      }
+
+      // Wire filter buttons
+      var filterSections = root.querySelectorAll('.bw-filter-section');
+      filterSections.forEach(function (section) {
+        var groupName = section.querySelector('.bw-filters').getAttribute('data-group');
+        var buttons = section.querySelectorAll('.bw-filter');
+
+        buttons.forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            buttons.forEach(function (b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            
+            currentFilters[groupName] = btn.getAttribute('data-filter');
+            applyFilters();
+          });
+        });
+      });
+
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+</div>
+</body>
+</html>
