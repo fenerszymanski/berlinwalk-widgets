@@ -51,6 +51,7 @@
   function isExcludedPage() {
     var path = window.location.pathname.toLowerCase();
     return path.indexOf('/book-berlin-walking-tour') === 0 ||
+      path.indexOf('/berlin-trip-planner') === 0 ||
       path.indexOf('/thank-you') !== -1 ||
       path.indexOf('/thank_you') !== -1 ||
       path.indexOf('/booking-confirmation') !== -1 ||
