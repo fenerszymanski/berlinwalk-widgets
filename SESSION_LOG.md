@@ -2,14 +2,16 @@
 
 Rolling log of agent sessions. Most recent at top.
 
-## 2026-06-07 — Antigravity (Berlin Trip Planner exit popup mockup preview overlay)
+## 2026-06-07 — Antigravity (Berlin Trip Planner exit popup PDF preview & mobile sticky banner fixes)
 
 **Did:**
-- Added a floating macOS-style browser mockup preview card (`berlin-trip-planner-mockup.png`) overlaying the Cathedral background image on the exit-intent popup.
-- Structured the mockup preview with a clean window title bar containing window dots, modern shadows, rotation, and micro-animations on hover.
+- Replaced the browser-window mockup in the exit popup with two overlapping portrait A4 printable PDF planner pages floating and rotating beautifully over the Cathedral hero image.
+- Fixed the disappearing mobile sticky bottom banner by adding defensive CSS visibility overrides and debouncing the MutationObserver in the custom code script to prevent script crashes on slower mobile browsers.
 
 **Changed:**
-- `js/exit-intent-popup.js` — added mockup HTML overlay elements and customized browser window CSS with absolute positioning, rotations, and hover effects.
+- `js/exit-intent-popup.js` — updated layout and CSS styles to render A4-style portrait PDF preview pages overlapping with interactive float animations.
+- `ultimate-berlin-trip-planner/assets/berlin-trip-planner-pdf-page1.png` — [NEW] cover page PNG.
+- `ultimate-berlin-trip-planner/assets/berlin-trip-planner-pdf-page2.png` — [NEW] itinerary page PNG.
 
 ## 2026-06-07 — Antigravity (Berlin Trip Planner menu reorganization & layout adjustments)
 
