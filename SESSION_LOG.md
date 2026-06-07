@@ -2,6 +2,18 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-07 — Antigravity (Berlin Trip Planner voice refactored to Yusuf's guide tone)
+
+**Did:**
+- Refactored the Gemini prompt and all local fallback/static text templates in the Ultimate Berlin Trip Planner to use Yusuf's first-person singular, friendly, warm local guide voice with routing logic explanations.
+- Verified that all static text updates pass the strict 90-character prose limit and Velo prepublish gates.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — updated prompt instructions to enforce warm, first-person singular voice explaining route reasoning.
+- `ultimate-berlin-trip-planner/index.html` — updated mockRouteIntro, mockDayStory, localGuideFallback, dayTemplate, tourFrameworkFocus, firstDayBaseMove, focusDayMove, and personalization copies. Assigned focus.eveningCopy to eveningBlock.copy in tourFrameworkTemplate.
+
+**Next session should:** Verify that the updated widget and Gemini prompt function correctly on the live page after Yusuf pastes `tripPlannerFunnel.js` to Wix and pushes `index.html` via GitHub Desktop.
+
 ## 2026-06-07 — Claude Code (Trip Planner logic review + 6 consistency fixes)
 
 **Did:**
