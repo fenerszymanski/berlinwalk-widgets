@@ -58,6 +58,8 @@ So here is the honest guide from someone who walks this city every week: what th
 
 The East Side Gallery is a 1,316 metre section of the Berlin Wall, running along Mühlenstraße in Friedrichshain beside the river Spree. After the Wall fell, 118 artists from 21 countries painted this stretch in the spring of 1990, turning a symbol of division into the longest open-air gallery in the world.
 
+{{image:worlds-people}}
+
 It is free, outdoors, and open around the clock. You do not need a ticket and there is nothing to book. The official caretaker today is the [Berlin Wall Foundation](https://www.stiftung-berliner-mauer.de/en/east-side-gallery), which also runs the memorial sites across the city.
 
 One thing that surprises people: this was not the famous "front" of the Wall that the West saw. This is the eastern, inner side of the border, the part ordinary East Berliners could never get near. The artists painted it only after the border was already open.
@@ -67,6 +69,8 @@ One thing that surprises people: this was not the famous "front" of the Wall tha
 For 28 years this concrete was part of a deadly border. The stretch survived because of where it stood, hard against the Spree, just out of the way of the first wave of demolition.
 
 In 1990, with the country reunifying, artists were invited to paint the inner side. They were not painting in protest behind anyone's back; they were painting a celebration, a goodbye to the border, and a hope for what came next. The result was protected as a listed monument in 1991.
+
+{{image:vaterland}}
 
 There is a catch that honest visitors should know. The original 1990 paintings weathered badly and were covered in tags and signatures within a few years. In 2009, most of the wall was stripped and the artists were invited back to repaint their works from scratch. So what you photograph today is, in most cases, a 2009 version of a 1990 idea.
 
@@ -78,7 +82,44 @@ There are over a hundred paintings, and you do not need to study all of them. A 
 
 {{widget:east-side-gallery-murals}}
 
-The two everyone comes for: Dmitri Vrubel's "My God, Help Me to Survive This Deadly Love", the socialist "fraternal kiss" between Brezhnev and Honecker, and Birgit Kinder's "Test the Rest", the Trabant breaking through the Wall with a number plate dated the night the border opened. Give the rest a few minutes too. Kani Alavi's flood of faces and Gabriel Heimler's Wall Jumper say just as much.
+The two everyone comes for are Dmitri Vrubel's "My God, Help Me to Survive This Deadly Love", the socialist "fraternal kiss" between Brezhnev and Honecker, and Birgit Kinder's "Test the Rest", the Trabant breaking through the Wall (only a tiny edge of it remains in my photos, but you will see it in the interactive guide above).
+
+Give the rest a few minutes too. Here are the other famous murals from our guide that you should look for on your walk:
+
+### "Es geschah im November" (It Happened in November) by Kani Alavi
+This mural shows a wave of faces flowing through a gap in the Wall, capturing the intense emotions—joy, fear, and uncertainty—of the East Berliners crossing the border on November 9, 1989.
+
+{{image:es-geschah-im-november}}
+
+### "Vergebt mir die Liebe" (Forgive Me Love) by Thomas Klingenstein
+A dreamlike, orange-toned painting featuring Japanese elements and silhouettes, expressing a longing for love, peace, and distant lands during the division.
+
+{{image:vergebt-mir-die-liebe}}
+
+### "Berlin bei Nacht" (Berlin at Night) by Yvonne Onischke
+A colorful, stylized cityscape that depicts Berlin after dark, featuring the Spree river and the historic brick towers of the nearby Oberbaumbrücke.
+
+{{image:berlin-bei-nacht}}
+
+### "Doin' it cool for the East Side" by Jim Avignon
+A vivid, cartoon-like painting that represents the optimistic energy, music, and underground club culture that erupted in East Berlin right after the Wall fell.
+
+{{image:doin-it-cool}}
+
+### "Parlo d'Amor" (I Speak of Love) by Ignasi Blanch
+A Catalan artist's tribute to hope and tolerance, featuring soft yellow and grey figures, created as a memory of the international solidarity that followed the reunification.
+
+{{image:parlo-damor}}
+
+## What is nearby
+
+The East Side Gallery sits in one of Berlin's most enjoyable corners, so do not just walk it and leave:
+
+- **Oberbaumbrücke**, the photogenic double-deck brick bridge at the Warschauer Straße end, crosses the Spree into Kreuzberg and was itself a border crossing during the division.
+- **The Spree riverbank** and its bars are a good place to sit after the walk.
+- **Friedrichshain and Kreuzberg**, the neighbourhoods on either side, are the heart of Berlin's nightlife and street-art scene.
+
+{{image:uber-arena}}
 
 ## The honest take: gallery versus memorial
 
