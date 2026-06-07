@@ -7,7 +7,7 @@ const BW_TRIP_PLANNER_HOME_ROOT = (() => {
   return 'https://fenerszymanski.github.io/berlinwalk-widgets/';
 })();
 
-const BW_TRIP_PLANNER_HOME_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
+const BW_TRIP_PLANNER_HOME_URL = 'https://www.berlinwalk.com/berlin-trip-planner#planner';
 
 function bwTripPlannerHomeAsset(path) {
   return `${BW_TRIP_PLANNER_HOME_ROOT}${path}`;
