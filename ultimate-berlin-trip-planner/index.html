@@ -12004,15 +12004,15 @@
     Object.keys(PLACE_CATALOG).forEach(function (placeId) {
       var place = PLACE_CATALOG[placeId];
       if (placeId === 'world_clock') return;
-      var labelLower = place.label.toLowerCase();
-      if (text.toLowerCase().indexOf(labelLower) !== -1) {
+      var normLabel = normalizedPlaceLabel(place.label);
+      if (normLabel && text.indexOf(normLabel) !== -1) {
         found.push({ placeId: placeId, place: place });
       }
     });
 
     if (found.length > 0) {
       return found.slice(0, 2).map(function (item) {
-        return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId) };
+        return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId), score: 100 };
       });
     }
 
@@ -12022,7 +12022,7 @@
     if (!ids.length) return [];
     if (isTourBlock(block)) {
       return ids.indexOf('world_clock') !== -1
-        ? [{ placeId: 'world_clock', label: 'World Clock', url: placeSearchUrl('world_clock') }]
+        ? [{ placeId: 'world_clock', label: 'World Clock', url: placeSearchUrl('world_clock'), score: 100 }]
         : [];
     }
     var scored = ids.map(function (placeId) {
@@ -12039,7 +12039,7 @@
       if (fallbackId) picked = [{ placeId: fallbackId, place: placeFor(fallbackId), score: 0 }];
     }
     return picked.slice(0, 2).map(function (item) {
-      return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId) };
+      return { placeId: item.placeId, label: item.place.label, url: placeSearchUrl(item.placeId), score: item.score };
     });
   }
 
@@ -13487,10 +13487,10 @@
     var type = dayVisualType(day);
     var base = state.stayArea || 'unsure';
     if (day.dayNumber === 1) {
-      if (base === 'mitte') return 'Welcome to Mitte! Stroll around Hackescher Markt or try Bavarian classics at Hofbräu Wirtshaus near Alexanderplatz.';
-      if (base === 'east') return 'Welcome to the East side! Walk down Oranienstraße and try local Turkish food or street stalls.';
-      if (base === 'north') return 'Welcome to Prenzlauer Berg! Stroll around Kollwitzplatz or Kastanienallee for cozy neighborhood dinners.';
-      if (base === 'west') return 'Welcome to Charlottenburg! Enjoy traditional German schnitzel or relax at Schwarzes Café on Kantstraße.';
+      if (base === 'mitte') return 'Welcome to Mitte! Try fresh Vietnamese street food at Monsieur Vuong, or try Hofbräu Wirtshaus.';
+      if (base === 'east') return 'Welcome to the East side! Try fresh vegan bowls at 1990 Vegan Living, or grab a burger at Burgermeister.';
+      if (base === 'north') return 'Welcome to Prenzlauer Berg! Try Berlin\'s oldest beer garden at Prater Biergarten, or try Konnopke\'s Imbiss.';
+      if (base === 'west') return 'Welcome to Charlottenburg! Try traditional cozy German food at Dicke Wirtin, or relax at Schwarzes Café near Savignyplatz.';
       return 'Welcome to Berlin! Keep tonight easy and find a local dinner spot close to your base camp.';
     }
     if (type === 'history' || type === 'museums') {
@@ -13576,11 +13576,13 @@
     if (links && links.length > 0) {
       var whyParts = [];
       links.forEach(function (link) {
-        var pl = PLACE_CATALOG[link.placeId];
-        if (pl && pl.why) {
-          var cleanWhy = pl.why.replace(/[.!?]$/, '');
-          if (baseCopy.toLowerCase().indexOf(cleanWhy.toLowerCase()) === -1) {
-            whyParts.push(pl.why);
+        if (link.score > 0) {
+          var pl = PLACE_CATALOG[link.placeId];
+          if (pl && pl.why) {
+            var cleanWhy = pl.why.replace(/[.!?]$/, '');
+            if (baseCopy.toLowerCase().indexOf(cleanWhy.toLowerCase()) === -1) {
+              whyParts.push(pl.why);
+            }
           }
         }
       });
@@ -14779,7 +14781,7 @@
       north: {
         time: 'Afternoon',
         title: 'Settle into Prenzlauer Berg',
-        copy: 'Walk Kollwitzkiez or Kastanienallee, then find a cozy dinner nearby.'
+        copy: 'Walk Kollwitzkiez or Kastanienallee. Keep today local and relaxed.'
       },
       west: {
         time: 'Afternoon',
@@ -14799,19 +14801,19 @@
     var dinners = {
       mitte: {
         title: 'Dinner in Mitte',
-        copy: 'Find a local restaurant in Mitte. Keep the evening relaxed and short.'
+        copy: 'Find a local restaurant in Mitte. Try fresh Vietnamese street food at Monsieur Vuong, or try Hofbräu Wirtshaus.'
       },
       east: {
         title: 'Dinner in Friedrichshain',
-        copy: 'Grab a bite in Friedrichshain or Kreuzberg close to your stay.'
+        copy: 'Grab a bite in Friedrichshain. Try fresh vegan bowls at 1990 Vegan Living, or grab a burger at Burgermeister.'
       },
       north: {
         title: 'Dinner in Prenzlauer Berg',
-        copy: 'Walk around Kollwitzplatz or Kastanienallee for cozy dinner spots.'
+        copy: 'Walk around Prenzlauer Berg and try Berlin\'s oldest beer garden at Prater Biergarten, or try Konnopke\'s Imbiss.'
       },
       west: {
         title: 'Dinner in Charlottenburg',
-        copy: 'Enjoy traditional German food or pasta near Savignyplatz.'
+        copy: 'Enjoy traditional cozy German food at Dicke Wirtin, or relax at Schwarzes Café near Savignyplatz.'
       },
       unsure: {
         title: 'Dinner near your stay',

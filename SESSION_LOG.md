@@ -13,6 +13,9 @@ Format for each entry — see `AGENTS.md` §9.
 - Fixed Mustafa's Gemüse Kebap description (changing falafel to chicken döner) and corrected food day lunch suggestions to target Prenzlauer Berg instead of Kreuzberg.
 - Added a weekly market check for Hackescher Markt (operational only on Thursdays and Saturdays) to conditionally recommend street food stalls, and added 5 alternative Mitte dining spots (Monsieur Vuong, Shiso Burger, Curry 61, YamYam, Clärchens Ballhaus) as deterministic-random suggestions for walking tour days.
 - Enabled automatic Google Maps search links generation for all recommended lunch and dinner spots by adding them to `PLACE_CATALOG` and updating `blockMapLinks` to scan all catalog keys.
+- Fixed a text normalization bug in `blockMapLinks` where uppercase characters, German umlauts, and apostrophes prevented proper catalog matching.
+- Prevented fallback map links from incorrectly appending their descriptive explanations to block text by enforcing a `score > 0` check in `dayBlockDisplayCopy`.
+- Replaced generic Day 1 dinner strings with specific, map-linkable dining recommendations matching the stay area (Mitte, Prenzlauer Berg, Friedrichshain, Charlottenburg).
 - Fixed the "Dinner east" recommendation by removing Rüyam Gemüse Kebab (located in Schöneberg) and recommending Boxhagener Platz vegan/Vietnamese or Schlesisches Tor Burgermeister instead.
 - Refined the Velo backend Gemini prompt in `tripPlannerFunnel.js` to enforce a WhatsApp-style flat, zero-hype, non-exclamation-mark tone.
 - Replaced the subtle guide note loading green avatar pulse effect with a prominent, rotating green border spinner ring around Yusuf's avatar.
