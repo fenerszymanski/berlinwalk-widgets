@@ -7,15 +7,18 @@ endpoint'i henuz publish edilmedigi icin var.
 ## 0. Durum
 
 - Local `GEMINI_API_KEY` Keychain'de mevcut.
-- Velo prepublish gate: `12/12 pass`.
-- `TripPlannerLeads` collection hazir.
+- Velo prepublish gate temiz olmali.
+- `TripPlannerLeads` collection hazir olmali.
+- `TripPlannerAiBudget` collection hazir olmali. Bu sadece Gemini gunluk/aylik
+  sayaclarini tutar; email veya lead bilgisi tutmaz.
 - Triggered Email IDs hazir.
 - Ultimate homepage shortcut'ta degil; public release ayri adim.
 - AI modeli default olarak `gemini-2.5-flash`; cevap `maxOutputTokens: 1200`
-  ve `thinkingBudget: 0` ile sinirli. Beklenen maliyet dusuk: normal
+  ve `thinkingBudget: 0` ile sinirli. Lead basina limit `2`, gunluk global
+  limit `5000`, aylik global limit `150000`. Beklenen maliyet dusuk: normal
   planner unlock'lari icin kabaca cent'in altinda, 1.000 unlock icin yaklasik
-  birkac dolar bandi. Trafik buyumeden once resmi Gemini pricing tekrar
-  kontrol edilmeli.
+  birkac dolar bandi. Trafik buyumeden once resmi Gemini pricing tekrar kontrol
+  edilmeli.
 
 ## 1. Wix Secrets
 
@@ -45,6 +48,16 @@ ultimate-berlin-trip-planner/velo/install-kit.html
 
 Wix Developer Tools'ta:
 
+0. Terminalde `berlinwalk-widgets/` icinden iki collection helper'i calistir:
+
+   ```bash
+   source ../scripts/load-api-keys.sh
+   node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live --sync-fields
+   node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs --live --sync-fields
+   node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs
+   ```
+
+   Beklenen: `Ready for Velo paste: YES`.
 1. `Backend/tripPlannerFunnel.js` dosyasini guncelle.
 2. `Backend/http-functions.js` icine `tripPlannerLead`, `tripPlannerAi`, ve
    `tripPlannerBooking` handlerlarini merge et.

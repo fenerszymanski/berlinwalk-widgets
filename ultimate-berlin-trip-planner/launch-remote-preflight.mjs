@@ -8,6 +8,7 @@ const API_ROOT = 'https://www.wixapis.com';
 const OUTPUT_DIR = 'output/qa/ultimate-trip-planner-remote-preflight';
 const TOOL_SLUG = 'ultimate-berlin-trip-planner';
 const COLLECTION_ID = 'TripPlannerLeads';
+const AI_BUDGET_COLLECTION_ID = 'TripPlannerAiBudget';
 const TOOL_COLLECTION_ID = 'BerlinTools';
 const CRITICAL_COLLECTION_FIELDS = [
   'leadKey',
@@ -28,6 +29,16 @@ const CRITICAL_COLLECTION_FIELDS = [
   'aiLastRequestedAt',
   'aiLimitReachedAt'
 ];
+const CRITICAL_AI_BUDGET_FIELDS = [
+  'periodKey',
+  'periodType',
+  'periodLabel',
+  'requestCount',
+  'limit',
+  'createdAt',
+  'updatedAt',
+  'limitReachedAt'
+];
 
 function usage() {
   console.log(`Usage:
@@ -39,7 +50,7 @@ Non-mutating remote checks:
   - Wix dynamic tool URL reachability
   - Velo endpoint OPTIONS status
   - BerlinTools slug existence, when WIX_API_KEY is set
-  - TripPlannerLeads collection existence and critical fields, when WIX_API_KEY is set
+  - TripPlannerLeads and TripPlannerAiBudget collection existence and critical fields, when WIX_API_KEY is set
 
 Load the Wix key from the workspace root first when you want CMS checks:
   source ../scripts/load-api-keys.sh
@@ -164,17 +175,18 @@ async function getCollection(apiKey, collectionId) {
     ? fields
     : Object.entries(fields || {}).map(([key, value]) => ({ key, ...(typeof value === 'object' ? value : {}) }));
   const fieldKeys = fieldList.map((field) => field && (field.key || field.id || field.fieldKey)).filter(Boolean);
-  const missingCriticalFields = collectionId === COLLECTION_ID
-    ? CRITICAL_COLLECTION_FIELDS.filter((key) => !fieldKeys.includes(key))
-    : [];
+  const criticalFields = collectionId === COLLECTION_ID
+    ? CRITICAL_COLLECTION_FIELDS
+    : (collectionId === AI_BUDGET_COLLECTION_ID ? CRITICAL_AI_BUDGET_FIELDS : []);
+  const missingCriticalFields = criticalFields.filter((key) => !fieldKeys.includes(key));
 
   return {
     ok: result.ok,
     status: result.status,
     fieldCount: fieldList.length,
-    criticalFieldCount: collectionId === COLLECTION_ID ? CRITICAL_COLLECTION_FIELDS.length : 0,
+    criticalFieldCount: criticalFields.length,
     missingCriticalFields,
-    schemaOk: collectionId === COLLECTION_ID ? missingCriticalFields.length === 0 : result.ok,
+    schemaOk: criticalFields.length ? result.ok && missingCriticalFields.length === 0 : result.ok,
     body: result.ok ? undefined : result.body
   };
 }
@@ -231,6 +243,14 @@ function summarize(result) {
   } else {
     line('INFO', 'TripPlannerLeads collection not found yet', `HTTP ${checks.tripPlannerCollection.status}`);
   }
+
+  if (checks.tripPlannerAiBudgetCollection.ok && checks.tripPlannerAiBudgetCollection.schemaOk) {
+    line('OK', 'TripPlannerAiBudget collection exists', `${checks.tripPlannerAiBudgetCollection.fieldCount} field(s) visible via API; critical fields verified`);
+  } else if (checks.tripPlannerAiBudgetCollection.ok) {
+    line('WARN', 'TripPlannerAiBudget collection schema needs attention', `missing ${checks.tripPlannerAiBudgetCollection.missingCriticalFields.join(', ')}`);
+  } else {
+    line('INFO', 'TripPlannerAiBudget collection not found yet', `HTTP ${checks.tripPlannerAiBudgetCollection.status}`);
+  }
 }
 
 async function main() {
@@ -286,6 +306,7 @@ async function main() {
   if (wixApiKey) {
     checks.berlinToolsSlug = await queryBerlinToolsSlug(wixApiKey);
     checks.tripPlannerCollection = await getCollection(wixApiKey, COLLECTION_ID);
+    checks.tripPlannerAiBudgetCollection = await getCollection(wixApiKey, AI_BUDGET_COLLECTION_ID);
   }
 
   const result = {

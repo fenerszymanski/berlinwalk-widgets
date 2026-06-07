@@ -241,6 +241,7 @@ function run() {
   const launchRunbook = read('ultimate-berlin-trip-planner/LAUNCH_RUNBOOK.md');
   const launchControlRoom = read('ultimate-berlin-trip-planner/LAUNCH_CONTROL_ROOM.html');
   const collectionScript = read('ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs');
+  const aiBudgetCollectionScript = read('ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs');
   const prepublishGate = read('ultimate-berlin-trip-planner/velo/prepublish-gate.mjs');
   const remotePreflightSource = read('ultimate-berlin-trip-planner/launch-remote-preflight.mjs');
   const launchStatusBuilder = read('ultimate-berlin-trip-planner/build-launch-status-report.mjs');
@@ -648,6 +649,7 @@ function run() {
     /readyForVeloPaste/.test(prepublishGate) &&
       /message-ids\.local\.json/.test(prepublishGate) &&
       /CRITICAL_COLLECTION_FIELDS/.test(prepublishGate) &&
+      /CRITICAL_AI_BUDGET_FIELDS/.test(prepublishGate) &&
       /tripStyle/.test(prepublishGate) &&
       /hasAiEndpoint/.test(prepublishGate) &&
       /hasGeminiBackend/.test(prepublishGate) &&
@@ -656,8 +658,9 @@ function run() {
       /hasAiQuotaGuard/.test(prepublishGate) &&
       /AI quota guard is backend-enforced/.test(prepublishGate) &&
       /TripPlannerLeads critical fields pass remote gate/.test(prepublishGate) &&
+      /TripPlannerAiBudget critical fields pass remote gate/.test(prepublishGate) &&
       /TODO_TRIP_PLANNER/.test(prepublishGate),
-    'Expected a one-command gate that refuses Velo paste until IDs are applied, AI endpoint safeguards/privacy scrub/quota exist, and the live collection schema passes.'
+    'Expected a one-command gate that refuses Velo paste until IDs are applied, AI endpoint safeguards/privacy scrub/quota/budget caps exist, and the live collection schemas pass.'
   );
 
   block(
@@ -678,8 +681,15 @@ function run() {
       /dayStories/.test(funnel) &&
       /weatherSentence/.test(funnel) &&
       /AI_GENERATION_LIMIT\s*=\s*2/.test(funnel) &&
-      /function\s+claimAiQuota/.test(funnel) &&
+      /AI_DAILY_GENERATION_LIMIT\s*=\s*5000/.test(funnel) &&
+      /AI_MONTHLY_GENERATION_LIMIT\s*=\s*AI_DAILY_GENERATION_LIMIT\s*\*\s*30/.test(funnel) &&
+      /AI_BUDGET_COLLECTION\s*=\s*'TripPlannerAiBudget'/.test(funnel) &&
+      /function\s+checkAiLeadQuota/.test(funnel) &&
+      /function\s+claimAiLeadQuota/.test(funnel) &&
+      /function\s+claimAiBudget/.test(funnel) &&
       /ai_quota_limit/.test(funnel) &&
+      /ai_budget_daily_limit/.test(funnel) &&
+      /ai_budget_monthly_limit/.test(funnel) &&
       /thinkingBudget:\s*0/.test(funnel) &&
       /PRIVATE_TEXT_PATTERN/.test(funnel) &&
       /cleanPublicPlannerText/.test(funnel) &&
@@ -711,8 +721,10 @@ function run() {
       /assertNoPrivateText/.test(aiPrivacyFixture) &&
       /thinkingBudget/.test(aiPrivacyFixture) &&
       /responseJsonSchema/.test(aiPrivacyFixture) &&
+      /ai_budget_daily_limit/.test(aiPrivacyFixture) &&
+      /dailyLimit/.test(aiPrivacyFixture) &&
       /ai-privacy-fixture\.mjs/.test(veloReadme),
-    'Expected a local mocked-Wix fixture proving missing Gemini key is fail-soft and private-looking text is scrubbed before prompt assembly.'
+    'Expected a local mocked-Wix fixture proving missing Gemini key is fail-soft, private-looking text is scrubbed before prompt assembly, and global AI caps block Gemini before fetch.'
   );
   block(
     'Lead report summarizes funnel segments',
@@ -778,6 +790,24 @@ function run() {
       /--live/.test(collectionScript) &&
       /create-trip-planner-leads-collection\.mjs/.test(launchRunbook),
     'Expected a dry-run-first collection setup helper with admin-only permissions, schema verification, and missing-field sync.'
+  );
+  block(
+    'TripPlannerAiBudget setup helper exists',
+    /COLLECTION_ID\s*=\s*'TripPlannerAiBudget'/.test(aiBudgetCollectionScript) &&
+      /permissions:\s*\{[\s\S]*insert:\s*'ADMIN'[\s\S]*read:\s*'ADMIN'/.test(aiBudgetCollectionScript) &&
+      /\['periodKey',\s*'Period Key',\s*'TEXT'\]/.test(aiBudgetCollectionScript) &&
+      /\['periodType',\s*'Period Type',\s*'TEXT'\]/.test(aiBudgetCollectionScript) &&
+      /\['periodLabel',\s*'Period Label',\s*'TEXT'\]/.test(aiBudgetCollectionScript) &&
+      /\['requestCount',\s*'Request Count',\s*'NUMBER'\]/.test(aiBudgetCollectionScript) &&
+      /\['limit',\s*'Limit',\s*'NUMBER'\]/.test(aiBudgetCollectionScript) &&
+      /\['limitReachedAt',\s*'Limit Reached At',\s*'DATETIME'\]/.test(aiBudgetCollectionScript) &&
+      /verifyCollection/.test(aiBudgetCollectionScript) &&
+      /createCollectionField/.test(aiBudgetCollectionScript) &&
+      /\/create-field/.test(aiBudgetCollectionScript) &&
+      /--sync-fields/.test(aiBudgetCollectionScript) &&
+      /--live/.test(aiBudgetCollectionScript) &&
+      /create-trip-planner-ai-budget-collection\.mjs/.test(launchRunbook),
+    'Expected a dry-run-first AI budget collection helper for daily/monthly Gemini hard caps.'
   );
   block(
     'Hourly scheduled processor is configured',

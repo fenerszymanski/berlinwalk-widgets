@@ -209,22 +209,26 @@ In Wix Developer Tools:
 
    Use it for the copy buttons and paste order below.
 2. Create or verify the `TripPlannerLeads` collection. Prefer the
-   dry-run-first helper:
+   dry-run-first helpers:
 
    ```bash
    source ../scripts/load-api-keys.sh
    node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs
    node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live
+   node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs
+   node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs --live
    ```
 
-   If the helper reports missing fields on an existing collection, run the
+   If a helper reports missing fields on an existing collection, run the
    guarded sync pass:
 
    ```bash
    node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live --sync-fields
+   node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs --live --sync-fields
    ```
 
-   Field list also lives in `ultimate-berlin-trip-planner/velo/README.md`.
+   `TripPlannerAiBudget` stores only daily/monthly Gemini counters. Field lists
+   also live in `ultimate-berlin-trip-planner/velo/README.md`.
 3. Add `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` as
    `Backend/tripPlannerFunnel.js`.
 4. Add `GEMINI_API_KEY` in Wix Secrets Manager if the AI polish layer should run
@@ -232,7 +236,8 @@ In Wix Developer Tools:
    this secret.
    - Default model: `gemini-2.5-flash`.
    - Cost guardrail: `maxOutputTokens: 1200`, `thinkingBudget: 0`, structured
-     JSON response, and deterministic fallback if Gemini fails.
+     JSON response, lead cap `2`, daily global cap `5000`, monthly global cap
+     `150000`, and deterministic fallback if Gemini fails.
    - Expected cost is well under one cent per unlock in normal use; recheck the
      official Gemini pricing page before changing the model or sending high
      traffic.

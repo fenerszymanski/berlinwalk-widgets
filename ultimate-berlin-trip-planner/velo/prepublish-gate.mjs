@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 const SITE_ID = '12ee5ea0-70a7-492f-8020-ffb27cbb630f';
 const API_ROOT = 'https://www.wixapis.com';
 const COLLECTION_ID = 'TripPlannerLeads';
+const AI_BUDGET_COLLECTION_ID = 'TripPlannerAiBudget';
 const OUTPUT_DIR = 'output/qa/ultimate-trip-planner-prepublish-gate';
 const CRITICAL_COLLECTION_FIELDS = [
   'leadKey',
@@ -26,6 +27,16 @@ const CRITICAL_COLLECTION_FIELDS = [
   'aiRequestCount',
   'aiLastRequestedAt',
   'aiLimitReachedAt'
+];
+const CRITICAL_AI_BUDGET_FIELDS = [
+  'periodKey',
+  'periodType',
+  'periodLabel',
+  'requestCount',
+  'limit',
+  'createdAt',
+  'updatedAt',
+  'limitReachedAt'
 ];
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
@@ -179,17 +190,24 @@ function inspectSource() {
       /responseJsonSchema/.test(funnel) &&
       /maxOutputTokens:\s*1200/.test(funnel) &&
       /thinkingBudget:\s*0/.test(funnel) &&
-      /missing_api_key/.test(funnel),
+      /missing_api_key/.test(funnel) &&
+      /AI_DAILY_GENERATION_LIMIT\s*=\s*5000/.test(funnel) &&
+      /AI_MONTHLY_GENERATION_LIMIT\s*=\s*AI_DAILY_GENERATION_LIMIT\s*\*\s*30/.test(funnel),
     hasAiPrivacyScrub: /PRIVATE_TEXT_PATTERN/.test(funnel) &&
       /cleanPublicPlannerText/.test(funnel) &&
       /cleanPublicPlannerRecord/.test(aiPayloadValidator) &&
       /cleanPublicPlannerList/.test(aiPayloadValidator),
     aiPayloadAvoidsEmail: Boolean(aiPayloadValidator) && !/\bemail\b/i.test(aiPayloadValidator),
     hasAiQuotaGuard: /AI_GENERATION_LIMIT\s*=\s*2/.test(funnel) &&
-      /function\s+claimAiQuota/.test(funnel) &&
+      /AI_BUDGET_COLLECTION\s*=\s*'TripPlannerAiBudget'/.test(funnel) &&
+      /function\s+checkAiLeadQuota/.test(funnel) &&
+      /function\s+claimAiLeadQuota/.test(funnel) &&
+      /function\s+claimAiBudget/.test(funnel) &&
       /aiRequestCount/.test(funnel) &&
       /aiLastRequestedAt/.test(funnel) &&
       /aiLimitReachedAt/.test(funnel) &&
+      /ai_budget_daily_limit/.test(funnel) &&
+      /ai_budget_monthly_limit/.test(funnel) &&
       /quotaEmail/.test(funnel),
     hasScheduler: /processTripPlannerDueEmails/.test(jobsConfig) &&
       /"cronExpression"\s*:\s*"0 \* \* \* \*"/.test(jobsConfig),
@@ -209,8 +227,14 @@ async function readBody(response) {
   }
 }
 
-async function fetchCollection(apiKey) {
-  const response = await fetch(`${API_ROOT}/wix-data/v2/collections/${encodeURIComponent(COLLECTION_ID)}?consistentRead=true`, {
+function criticalFieldsFor(collectionId) {
+  if (collectionId === COLLECTION_ID) return CRITICAL_COLLECTION_FIELDS;
+  if (collectionId === AI_BUDGET_COLLECTION_ID) return CRITICAL_AI_BUDGET_FIELDS;
+  return [];
+}
+
+async function fetchCollection(apiKey, collectionId) {
+  const response = await fetch(`${API_ROOT}/wix-data/v2/collections/${encodeURIComponent(collectionId)}?consistentRead=true`, {
     method: 'GET',
     headers: {
       Authorization: apiKey,
@@ -225,12 +249,14 @@ async function fetchCollection(apiKey) {
     ? fields
     : Object.entries(fields || {}).map(([key, value]) => ({ key, ...(typeof value === 'object' ? value : {}) }));
   const fieldKeys = fieldList.map((field) => field && (field.key || field.id || field.fieldKey)).filter(Boolean);
-  const missingCriticalFields = CRITICAL_COLLECTION_FIELDS.filter((key) => !fieldKeys.includes(key));
+  const criticalFields = criticalFieldsFor(collectionId);
+  const missingCriticalFields = criticalFields.filter((key) => !fieldKeys.includes(key));
 
   return {
     ok: response.ok,
     status: response.status,
     fieldCount: fieldList.length,
+    collectionId,
     missingCriticalFields,
     schemaOk: response.ok && missingCriticalFields.length === 0,
     body: response.ok ? undefined : body
@@ -299,14 +325,21 @@ async function main() {
 
   const apiKey = String(process.env.WIX_API_KEY || '').trim();
   let collection = null;
+  let aiBudgetCollection = null;
   if (!apiKey) {
     checks.push(check('WIX_API_KEY is loaded for remote collection gate', false, 'Run: source ../scripts/load-api-keys.sh'));
   } else {
-    collection = await fetchCollection(apiKey);
+    collection = await fetchCollection(apiKey, COLLECTION_ID);
     checks.push(check(
       'TripPlannerLeads critical fields pass remote gate',
       collection.schemaOk,
       collection.schemaOk ? `${collection.fieldCount} fields visible; critical fields verified` : `HTTP ${collection.status}; missing ${collection.missingCriticalFields.join(', ') || '(unknown)'}`
+    ));
+    aiBudgetCollection = await fetchCollection(apiKey, AI_BUDGET_COLLECTION_ID);
+    checks.push(check(
+      'TripPlannerAiBudget critical fields pass remote gate',
+      aiBudgetCollection.schemaOk,
+      aiBudgetCollection.schemaOk ? `${aiBudgetCollection.fieldCount} fields visible; critical fields verified` : `HTTP ${aiBudgetCollection.status}; missing ${aiBudgetCollection.missingCriticalFields.join(', ') || '(unknown)'}`
     ));
   }
 
@@ -322,6 +355,7 @@ async function main() {
     idState,
     sourceState,
     collection,
+    aiBudgetCollection,
     checks,
     summary
   };

@@ -390,19 +390,29 @@ class BWHeaderElement extends HTMLElement {
           outline: none;
         }
 
-        .bw-header-wrap .bw-badge-new {
+        .bw-header-wrap .bw-badge-new,
+        .bw-header-mobile .bw-badge-new {
           background: var(--yellow);
           color: var(--green-dark);
           font-size: 8px;
-          font-weight: 800;
+          font-weight: 900;
           padding: 2px 5px;
-          border-radius: 4px;
+          border-radius: 999px;
           margin-left: 6px;
-          display: inline-block;
+          display: inline-flex;
+          align-items: center;
           vertical-align: middle;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.6px;
           line-height: 1;
-          text-transform: none; /* override uppercase link so badge text stays readable */
+          text-transform: uppercase;
+        }
+
+        .bw-header-mobile .bw-badge-new {
+          font-size: 9px;
+          letter-spacing: 0.7px;
+          margin-left: 8px;
+          padding: 3px 7px;
+          transform: translateY(-3px);
         }
 
         .bw-header-dropdown {

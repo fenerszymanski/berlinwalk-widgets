@@ -2,6 +2,18 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-08 — Codex (Mobile menu NEW badge polish)
+
+**Did:**
+- Fixed the mobile menu `Berlin Trip Planner` NEW label so it renders as a small yellow pill badge instead of `PlannerNEW` plain text.
+- Root cause: the mobile overlay is portaled to `<body>`, so the old `.bw-header-wrap .bw-badge-new` selector did not match mobile overlay markup.
+- Verified local mobile preview at 390px: badge is yellow, 9px text, pill radius, and visually separated from the link label.
+
+**Changed:**
+- `site-header/site-header-element.js` — added `.bw-header-mobile .bw-badge-new` styling and mobile-specific badge sizing.
+
+**Next session should:** Yusuf pushes the widgets repo; then check the live mobile menu after GitHub Pages deploy.
+
 ## 2026-06-08 — Codex (Blog CTA compact source update)
 
 **Did:**

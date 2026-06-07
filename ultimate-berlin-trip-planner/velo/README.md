@@ -8,6 +8,10 @@ Source handoff for the widget lead gate and pre-booking planner sequence.
 - `tripPlannerFunnel.js` - add as `Backend/tripPlannerFunnel.js`.
 - `jobs.config` - merge into backend scheduled jobs config.
 - `build-velo-install-kit.mjs` - regenerates the local copy/paste install kit.
+- `create-trip-planner-leads-collection.mjs` - dry-run-first setup helper for
+  `TripPlannerLeads`.
+- `create-trip-planner-ai-budget-collection.mjs` - dry-run-first setup helper
+  for the daily/monthly Gemini budget counters.
 - `install-kit.html` - local admin page with copy buttons for the Velo paste
   points.
 
@@ -34,8 +38,8 @@ node ultimate-berlin-trip-planner/velo/prepublish-gate.mjs
 It writes evidence under `output/qa/ultimate-trip-planner-prepublish-gate/` and
 exits non-zero until IDs are valid/applied, no `TODO_TRIP_PLANNER_*`
 placeholders remain, the endpoint/scheduler source is present, booked leads
-suppress future Ultimate reminders, and the live `TripPlannerLeads` critical
-fields pass.
+suppress future Ultimate reminders, and the live `TripPlannerLeads` plus
+`TripPlannerAiBudget` critical fields pass.
 
 For the optional Gemini layer, also run the local privacy/fail-soft fixture:
 
@@ -45,7 +49,8 @@ node ultimate-berlin-trip-planner/velo/ai-privacy-fixture.mjs
 
 It executes the Velo source in a mocked Wix backend, proves `missing_api_key`
 returns fail-soft, and verifies email-like text is scrubbed before Gemini prompt
-assembly.
+assembly. It also proves the global daily cap blocks Gemini before a fetch and
+does not consume the lead-level AI quota.
 
 ## Endpoints
 
@@ -72,6 +77,16 @@ weather/tour-slot labels, and the already-built day skeleton. If Gemini is
 unavailable, missing a key, quota-limited, or returns a bad response, the
 frontend falls back calmly and the deterministic plan/PDF/print flow continues
 normally.
+
+Hard caps:
+
+- Lead cap: `2` Gemini generations per `email|arrivalDate` lead.
+- Daily global cap: `5000` Gemini generations per Berlin calendar day.
+- Monthly global cap: `150000` Gemini generations per Berlin calendar month.
+
+The daily/monthly counters live in `TripPlannerAiBudget`. If that collection is
+missing, the AI endpoint fails closed and the planner keeps using the
+deterministic fallback.
 
 Add the Gemini API key in Wix Secrets Manager as `GEMINI_API_KEY`. Accepted
 fallback secret names are `GOOGLE_AI_API_KEY` and `GOOGLE_GEMINI_API_KEY`.
@@ -176,15 +191,42 @@ source ../scripts/load-api-keys.sh
 node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs
 node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live
 node ultimate-berlin-trip-planner/velo/create-trip-planner-leads-collection.mjs --live --sync-fields
+node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs
+node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs --live
+node ultimate-berlin-trip-planner/velo/create-trip-planner-ai-budget-collection.mjs --live --sync-fields
 ```
 
-The script is dry-run by default. Live mode creates `TripPlannerLeads` only if
-it is missing, then verifies the expected field keys and types. Add
-`--sync-fields` only when the collection already exists and the helper reports
-missing fields; it creates those missing field definitions through Wix Data
-`create-field`, then verifies again. The helper still keeps a `patch-field`
-fallback function available for future existing-field edits, but missing-field
-sync must use `create-field`.
+Both scripts are dry-run by default. Live mode creates the collection only if it
+is missing, then verifies the expected field keys and types. Add `--sync-fields`
+only when the collection already exists and the helper reports missing fields;
+it creates those missing field definitions through Wix Data `create-field`, then
+verifies again. The lead helper still keeps a `patch-field` fallback function
+available for future existing-field edits, but missing-field sync must use
+`create-field`.
+
+## AI Budget Collection
+
+Create a Wix Data collection with ID:
+
+```text
+TripPlannerAiBudget
+```
+
+Recommended permissions: backend/admin writes only; no public read. This
+collection stores counters only, not visitor email or lead data.
+
+Fields:
+
+| Field key | Type | Notes |
+|---|---|---|
+| `periodKey` | Text | `day|YYYY-MM-DD` or `month|YYYY-MM` |
+| `periodType` | Text | `day` or `month` |
+| `periodLabel` | Text | Human-readable period key |
+| `requestCount` | Number | Claimed Gemini generations in that period |
+| `limit` | Number | Current configured cap |
+| `createdAt` | Date/Time | First counter creation |
+| `updatedAt` | Date/Time | Last counter update |
+| `limitReachedAt` | Date/Time | Set when the period cap is hit |
 
 ## Wix Data Collection
 

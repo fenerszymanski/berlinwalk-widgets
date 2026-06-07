@@ -1,10 +1,10 @@
 # Ultimate Berlin Trip Planner Launch Status
 
-Generated: 2026-06-03T05:49:38.727Z
+Generated: 2026-06-07T22:28:36.927Z
 
 ## Verdict: WAITING FOR LIVE QA
 
-Launch audit: 152 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
+Launch audit: 154 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 
 ## Gates
 
@@ -13,8 +13,8 @@ Launch audit: 152 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 | Triggered Email IDs | PASS | All message IDs are applied. |
 | TripPlannerLeads collection | PASS | 77 fields visible via API; critical fields verified. |
 | Velo endpoints | PASS | lead OPTIONS 204, ai OPTIONS 204, booking OPTIONS 204. |
-| Live lead/booking smoke | WARN | No passing live smoke evidence found. |
-| Gemini AI polish smoke | PASS | output/qa/ultimate-trip-planner-live-smoke/live-ai-only-2026-06-02T19-43-19-550Z.json |
+| Live lead/booking smoke | PASS | output/qa/ultimate-trip-planner-live-smoke/live-direct-widget-link-2026-06-05b.json |
+| Gemini AI polish smoke | WARN | No passing tripPlannerAi smoke evidence found. |
 | Live Wix tool page | PASS | Latest remote preflight status 200. |
 | Public visibility | HOLD | Ultimate is still protected as draft. |
 | Homepage shortcut | HOLD | Homepage shortcut is not enabled yet. |
@@ -25,9 +25,9 @@ Launch audit: 152 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 ## Evidence
 
 - Latest remote preflight: `output/qa/ultimate-trip-planner-remote-preflight/remote-preflight-2026-06-03T05-49-14-482Z.json`
-- Latest passing live smoke: missing
-- Latest passing Gemini AI smoke: `output/qa/ultimate-trip-planner-live-smoke/live-ai-only-2026-06-02T19-43-19-550Z.json`
-- Latest Gemini cost estimate: gemini-2.5-flash: 853 input + 729 output tokens, est. $0.002078
+- Latest passing live smoke: `output/qa/ultimate-trip-planner-live-smoke/live-direct-widget-link-2026-06-05b.json`
+- Latest passing Gemini AI smoke: missing
+- Latest Gemini cost estimate: missing until live AI smoke passes
 - Visibility: draft/protected, homepage shortcut not enabled
 - Widget URL: https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/
 - Blog package: body draft exists; widget near top yes; quick summary yes; FAQ yes
@@ -39,8 +39,8 @@ Launch audit: 152 pass, 0 warn, 0 block (ready for manual Wix smoke tests)
 
 ## Next Actions
 
-1. Run live-smoke-trip-planner.mjs --live with a real test email.
-2. Run live-smoke-trip-planner.mjs --live --booking to prove booked-branch behavior.
+1. Add GEMINI_API_KEY in Wix Secrets Manager if it is not already present.
+2. Publish the updated tripPlannerAi Velo endpoint, then run live-smoke-trip-planner.mjs --live --ai-only.
 
 ## Command Shortcuts
 
