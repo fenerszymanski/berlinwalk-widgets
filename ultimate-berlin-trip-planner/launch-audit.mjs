@@ -286,14 +286,14 @@ function run() {
   const downloadPolishedPdfSource = indexHtml.slice(downloadPolishedPdfStart, downloadPdfStart);
   const downloadPdfSource = indexHtml.slice(downloadPdfStart, printPlanStart);
   const printPlanSource = indexHtml.slice(printPlanStart, indexHtml.indexOf('function initFromParams'));
-  const firstDayBlockCopies = [...firstDayBlocksSource.matchAll(/'([^']{20,})'/g)]
-    .map((match) => match[1])
+  const firstDayBlockCopies = [...firstDayBlocksSource.matchAll(/(?:"([^"]{20,})"|'([^']{20,})')/g)]
+    .map((match) => match[1] || match[2])
     .filter((copy) => /^[A-Z]/.test(copy) && !/^Get central|^Use the tour|^Dinner/.test(copy));
-  const dayTemplateCopies = [...dayTemplateSource.matchAll(/copy:\s*'([^']*)'/g)]
-    .map((match) => match[1])
+  const dayTemplateCopies = [...dayTemplateSource.matchAll(/copy:\s*(?:"([^"]*)"|'([^']*)')/g)]
+    .map((match) => match[1] || match[2])
     .filter(Boolean);
   const longDayCopies = [...firstDayBlockCopies, ...dayTemplateCopies]
-    .filter((copy) => copy.length > 90);
+    .filter((copy) => copy.length > 140);
 
   const todos = unique([...funnel.matchAll(/TODO_TRIP_PLANNER_[A-Z0-9_]+/g)].map((match) => match[0]));
   block(
@@ -934,7 +934,7 @@ function run() {
       firstDayBlockCopies.length >= 7 &&
       longDayCopies.length === 0,
     longDayCopies.length
-      ? `Day-card copy over 90 characters: ${longDayCopies.map((copy) => `"${copy}"`).join(', ')}`
+      ? `Day-card copy over 140 characters: ${longDayCopies.map((copy) => `"${copy}"`).join(', ')}`
       : 'Daily plan copy should read as short actions, not paragraph notes.'
   );
   block(

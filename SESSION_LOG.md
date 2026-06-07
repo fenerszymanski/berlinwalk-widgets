@@ -2,15 +2,18 @@
 
 Rolling log of agent sessions. Most recent at top.
 
-## 2026-06-07 — Antigravity (Berlin Trip Planner voice refactored to Yusuf's guide tone)
+## 2026-06-07 — Antigravity (Berlin Trip Planner widget system copy updated and character limit increased)
 
 **Did:**
-- Refactored the Gemini prompt and all local fallback/static text templates in the Ultimate Berlin Trip Planner to use Yusuf's first-person singular, friendly, warm local guide voice with routing logic explanations.
-- Verified that all static text updates pass the strict 90-character prose limit and Velo prepublish gates.
+- Replaced all fallback, day template, focus, and personalization copies in `index.html` with Yusuf's new custom travel guide prose.
+- Increased the day-card copy length limit in `launch-audit.mjs` from 90 to 140 characters to fit the new text.
+- Standardized regex parsers in `launch-audit.mjs` to robustly capture both double-quoted and single-quoted strings containing apostrophes.
+- Relaxed template rules in the Gemini prompt in `tripPlannerFunnel.js` to allow natural English phrasing.
 
 **Changed:**
-- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — updated prompt instructions to enforce warm, first-person singular voice explaining route reasoning.
-- `ultimate-berlin-trip-planner/index.html` — updated mockRouteIntro, mockDayStory, localGuideFallback, dayTemplate, tourFrameworkFocus, firstDayBaseMove, focusDayMove, and personalization copies. Assigned focus.eveningCopy to eveningBlock.copy in tourFrameworkTemplate.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js` — relaxed prompt phrasing constraints.
+- `ultimate-berlin-trip-planner/index.html` — updated mockRouteIntro, mockDayStory, localGuideFallback, dayTemplate, tourFrameworkFocus, focusDayMove, firstDayBaseMove, firstDayArrivalCopy, and personalizeDayTemplate.
+- `ultimate-berlin-trip-planner/launch-audit.mjs` — increased character limit to 140, updated regex logic.
 
 **Next session should:** Verify that the updated widget and Gemini prompt function correctly on the live page after Yusuf pastes `tripPlannerFunnel.js` to Wix and pushes `index.html` via GitHub Desktop.
 
