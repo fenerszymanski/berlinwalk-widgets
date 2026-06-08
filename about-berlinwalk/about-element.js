@@ -1,9 +1,22 @@
-const BW_ABOUT_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-const BW_ABOUT_CONTACT_URL = 'https://www.instagram.com/berlinwalkingtour/';
+const BW_ABOUT_PROFILE_IMAGE_URL = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_800,h_1067,al_c,q_85/file.jpg';
+const BW_ABOUT_GROUP_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/05-1200w.webp';
 
 class BWAboutCompanyElement extends HTMLElement {
   connectedCallback() {
     this._render();
+    this._bindEvents();
+  }
+
+  _bindEvents() {
+    const faqBtns = this.querySelectorAll('.bw-faq-btn');
+    faqBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', !expanded);
+        const content = btn.nextElementSibling;
+        content.hidden = expanded;
+      });
+    });
   }
 
   _render() {
@@ -40,14 +53,14 @@ class BWAboutCompanyElement extends HTMLElement {
 
         .bw-about-inner {
           margin: 0 auto;
-          max-width: 900px;
+          max-width: 1024px;
           padding: 64px 24px;
           width: 100%;
         }
 
         .bw-about-hero {
           text-align: center;
-          margin-bottom: 56px;
+          margin-bottom: 72px;
         }
 
         .bw-about-kicker {
@@ -77,109 +90,111 @@ class BWAboutCompanyElement extends HTMLElement {
           max-width: 640px;
         }
 
-        .bw-about-clarification {
-          background: #FFFDF0;
-          border: 1px solid var(--yellow);
-          border-left: 6px solid var(--yellow);
-          border-radius: 8px;
-          padding: 32px;
-          margin-bottom: 56px;
-          box-shadow: 0 12px 30px rgba(255, 230, 0, 0.1);
-        }
-
-        .bw-about-clarification h2 {
-          color: var(--green);
-          font-size: 24px;
-          font-weight: 800;
-          margin-bottom: 12px;
-        }
-
-        .bw-about-clarification p {
-          color: #4A4000;
-          font-size: 16px;
-          line-height: 1.6;
-          margin-bottom: 0;
-        }
-        .bw-about-clarification strong {
-          color: var(--green-dark);
-        }
-
         .bw-about-grid {
           display: grid;
-          gap: 48px;
+          gap: 56px;
           grid-template-columns: 1fr 1fr;
-          margin-bottom: 64px;
+          align-items: center;
+          margin-bottom: 80px;
         }
 
-        .bw-about-card {
+        .bw-about-grid.reverse {
+          direction: rtl;
+        }
+        .bw-about-grid.reverse > * {
+          direction: ltr;
+        }
+
+        .bw-about-image {
+          border-radius: 12px;
+          box-shadow: 0 16px 34px rgba(0, 0, 0, 0.1);
+          width: 100%;
+          aspect-ratio: 4/5;
+          object-fit: cover;
+          display: block;
+        }
+        
+        .bw-about-image.landscape {
+          aspect-ratio: 4/3;
+        }
+
+        .bw-about-copy h2 {
+          color: var(--green);
+          font-size: 32px;
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: 18px;
+        }
+
+        .bw-about-copy p {
+          color: var(--muted);
+          font-size: 16px;
+          line-height: 1.65;
+          margin-bottom: 16px;
+        }
+
+        .bw-about-faq-section {
           background: #FFFFFF;
           border-radius: 12px;
           border: 1px solid var(--light-green);
-          padding: 36px;
-          box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+          padding: 48px 40px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.02);
         }
 
-        .bw-about-card h3 {
+        .bw-about-faq-section h2 {
           color: var(--green);
-          font-size: 22px;
+          font-size: 28px;
           font-weight: 800;
-          margin-bottom: 16px;
-        }
-
-        .bw-about-card p {
-          color: var(--muted);
-          font-size: 15px;
-          line-height: 1.65;
-          margin-bottom: 0;
-        }
-
-        .bw-about-cta-banner {
-          background: var(--green);
-          border-radius: 12px;
-          color: #FFFFFF;
-          padding: 48px 32px;
+          margin-bottom: 32px;
           text-align: center;
         }
 
-        .bw-about-cta-banner h2 {
-          color: var(--yellow);
-          font-size: 32px;
+        .bw-faq-item {
+          border-bottom: 1px solid #EAF2DC;
+        }
+        .bw-faq-item:last-child {
+          border-bottom: none;
+        }
+
+        .bw-faq-btn {
+          width: 100%;
+          text-align: left;
+          background: none;
+          border: none;
+          padding: 24px 0;
+          font-family: inherit;
+          font-size: 18px;
           font-weight: 800;
-          margin-bottom: 16px;
-        }
-
-        .bw-about-cta-banner p {
-          color: rgba(255,255,255,0.9);
-          font-size: 16px;
-          line-height: 1.6;
-          margin-bottom: 32px;
-        }
-
-        .bw-about-btn {
-          align-items: center;
-          background: var(--yellow);
-          border-radius: 999px;
           color: var(--green);
-          display: inline-flex;
-          font-size: 14px;
-          font-weight: 800;
-          letter-spacing: 0.5px;
-          padding: 16px 28px;
-          text-decoration: none;
-          text-transform: uppercase;
-          transition: transform 150ms ease, background 150ms ease;
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
         }
 
-        .bw-about-btn:hover {
-          background: #FFF04A;
-          transform: translateY(-2px);
+        .bw-faq-btn::after {
+          content: '+';
+          font-size: 24px;
+          color: var(--lime);
+          transition: transform 0.2s ease;
+        }
+        .bw-faq-btn[aria-expanded="true"]::after {
+          transform: rotate(45deg);
+        }
+
+        .bw-faq-content {
+          padding: 0 0 24px 0;
+          color: var(--muted);
+          font-size: 15px;
+          line-height: 1.6;
         }
 
         @media (max-width: 768px) {
           .bw-about-hero h1 { font-size: 36px; }
-          .bw-about-grid { grid-template-columns: 1fr; gap: 24px; }
-          .bw-about-clarification { padding: 24px; }
-          .bw-about-card { padding: 24px; }
+          .bw-about-grid { grid-template-columns: 1fr; gap: 32px; }
+          .bw-about-grid.reverse { direction: ltr; }
+          .bw-about-image { aspect-ratio: 16/9; }
+          .bw-about-faq-section { padding: 32px 20px; }
         }
       </style>
 
@@ -192,27 +207,48 @@ class BWAboutCompanyElement extends HTMLElement {
             <p>An independent, locally run walking tour focused on delivering clarity, context, and a genuine human connection to Berlin's complex history.</p>
           </header>
 
-          <section class="bw-about-clarification" aria-labelledby="bw-clarification-title">
-            <h2 id="bw-clarification-title">Is BerlinWalk the same as Berlin Walks?</h2>
-            <p><strong>No.</strong> BerlinWalk is an independent, tip-based free walking tour founded and operated by Yusuf. We are a completely separate entity and are <strong>not affiliated with the older, paid-tour company "Berlin Walks"</strong> or any large international tour conglomerate. When you book with BerlinWalk, you are supporting an independent local project.</p>
+          <section class="bw-about-grid">
+            <img class="bw-about-image" src="${BW_ABOUT_PROFILE_IMAGE_URL}" alt="Yusuf, founder of BerlinWalk" loading="eager">
+            <div class="bw-about-copy">
+              <h2>Founded by Yusuf</h2>
+              <p>BerlinWalk is an independent local project created and run by Yusuf. I started this tour because I didn't want visitors to experience Berlin as just a dry checklist of historical dates.</p>
+              <p>My goal is to provide clear context, connect the dots between different eras, and give you a human sense of the city. When you join BerlinWalk, you are joining a tour built with personal passion, not a mass-produced corporate script.</p>
+            </div>
           </section>
 
-          <div class="bw-about-grid">
-            <article class="bw-about-card">
-              <h3>The Tip-Based Model</h3>
-              <p>We operate on a "free-to-join, tip-what-you-want" model. This means there is no upfront ticket price. At the end of the tour, you decide what the experience was worth to you. This keeps high-quality tours accessible to all travelers and ensures the guide is highly motivated to give an excellent performance every single day.</p>
-            </article>
+          <section class="bw-about-grid reverse">
+            <img class="bw-about-image landscape" src="${BW_ABOUT_GROUP_IMAGE_URL}" alt="BerlinWalk group tour" loading="lazy">
+            <div class="bw-about-copy">
+              <h2>The Tip-Based Philosophy</h2>
+              <p>We operate on a "free-to-join, tip-what-you-want" model. There is no upfront ticket price.</p>
+              <p>At the end of the tour, you decide what the experience was worth to you. This keeps high-quality tours accessible to all travelers and ensures that I am highly motivated to give an excellent performance every single day. If you have a great time, your tip is the best compliment.</p>
+            </div>
+          </section>
 
-            <article class="bw-about-card">
-              <h3>Our Philosophy</h3>
-              <p>Berlin is not a city that should feel like a checklist. We focus on structure and stories over dry dates and trivia. By walking the route from Alexanderplatz into the historic core, we help visitors see how the layers of medieval, Prussian, divided, and modern Berlin stack on top of one another.</p>
-            </article>
-          </div>
+          <section class="bw-about-faq-section">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="bw-faq-item">
+              <button class="bw-faq-btn" aria-expanded="false">Is BerlinWalk the same as Original Berlin Walks?</button>
+              <div class="bw-faq-content" hidden>
+                <p><strong>No.</strong> BerlinWalk is an independent, tip-based free walking tour founded and operated exclusively by Yusuf. We are a completely separate entity and are <strong>not affiliated with the older company "Original Berlin Walks"</strong> or any large international tour networks. By booking with us, you are supporting a 100% independent local guide.</p>
+              </div>
+            </div>
 
-          <section class="bw-about-cta-banner">
-            <h2>Ready to walk?</h2>
-            <p>Join the tour and see the city from a new perspective.</p>
-            <a href="${BW_ABOUT_BOOKING_URL}" class="bw-about-btn">Book Your Free Spot</a>
+            <div class="bw-faq-item">
+              <button class="bw-faq-btn" aria-expanded="false">Why is the tour free to join?</button>
+              <div class="bw-faq-content" hidden>
+                <p>We believe everyone should have access to a great walking tour, regardless of their budget. You join for free, and at the end, you tip the guide based on how much you enjoyed the experience. This model guarantees that the guide works hard to earn your appreciation on every single tour.</p>
+              </div>
+            </div>
+
+            <div class="bw-faq-item">
+              <button class="bw-faq-btn" aria-expanded="false">Do I need to book in advance?</button>
+              <div class="bw-faq-content" hidden>
+                <p>Yes, booking online in advance is highly recommended. It takes less than a minute, is completely free, and ensures we don't overcrowd the groups. It also allows us to notify you in the rare event of a severe weather cancellation.</p>
+              </div>
+            </div>
+            
           </section>
 
         </div>

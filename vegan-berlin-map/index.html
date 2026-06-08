@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vegan Berlin 2026 Guide | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-vegan-map">
+  <style>
+    #bw-vegan-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-vegan-map * { box-sizing: border-box; }
+
+    #bw-vegan-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-vegan-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-vegan-map .bw-head-icon { font-size: 18px; line-height: 1; }
+
+    #bw-vegan-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-vegan-map .bw-body { background: #FAFAF5; padding: 16px 18px; }
+
+    #bw-vegan-map .bw-ask {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin: 0 0 10px;
+    }
+
+    #bw-vegan-map .bw-filters {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    #bw-vegan-map .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-vegan-map .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+    #bw-vegan-map .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
+
+    #bw-vegan-map .bw-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    #bw-vegan-map .bw-card {
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      background: var(--bw-white);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+
+    #bw-vegan-map .bw-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+      border-color: var(--bw-lime);
+    }
+
+    #bw-vegan-map .bw-card-body {
+      padding: 14px 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex-grow: 1;
+    }
+
+    #bw-vegan-map .bw-card-theme {
+      align-self: flex-start;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      background: var(--bw-yellow);
+      border-radius: 6px;
+      padding: 3px 8px;
+    }
+
+    #bw-vegan-map .bw-card-title {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--bw-text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    #bw-vegan-map .bw-card-score {
+      font-size: 11px;
+      font-weight: 700;
+      color: #F57C00;
+      background: #FFF3E0;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    #bw-vegan-map .bw-card-district {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+    }
+
+    #bw-vegan-map .bw-card-text { font-size: 12.5px; line-height: 1.55; color: var(--bw-text); margin: 2px 0 0; }
+
+    #bw-vegan-map .bw-card-look {
+      font-size: 11.5px;
+      line-height: 1.5;
+      color: var(--bw-muted);
+      border-top: 1px dashed var(--bw-border);
+      padding-top: 8px;
+      margin-top: 2px;
+    }
+    #bw-vegan-map .bw-card-look a { color: var(--bw-green); font-weight: 700; text-decoration: none; }
+    #bw-vegan-map .bw-card-look a:hover { text-decoration: underline; }
+
+    #bw-vegan-map .bw-count { font-size: 11px; color: var(--bw-muted); margin: 14px 0 0; text-align: center; }
+    #bw-vegan-map .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      #bw-vegan-map { margin: 22px 0; }
+      #bw-vegan-map .bw-head { padding: 12px 16px; }
+      #bw-vegan-map .bw-body { padding: 14px; }
+      #bw-vegan-map .bw-grid { grid-template-columns: 1fr; }
+      #bw-vegan-map .bw-filter { font-size: 11px; padding: 7px 12px; }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🌱</span>
+      <span class="bw-kicker">BerlinWalk Vegan Guide 2026</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-ask">Filter by Cravings</p>
+      <div class="bw-filters">
+        <button class="bw-filter active" type="button" data-filter="all">Show all</button>
+        <button class="bw-filter" type="button" data-filter="fine-dining">Fine Dining & Zero Waste</button>
+        <button class="bw-filter" type="button" data-filter="asian">Asian & Tapas</button>
+        <button class="bw-filter" type="button" data-filter="comfort">German & Fast Food</button>
+        <button class="bw-filter" type="button" data-filter="brunch">Brunch</button>
+        <button class="bw-filter" type="button" data-filter="sweets">Sweets & Ice Cream</button>
+      </div>
+
+      <div class="bw-grid" id="bw-vegan-grid"></div>
+
+      <p class="bw-count">Showing <strong id="bw-count-num">20</strong> curated 100% vegan spots</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-vegan-map');
+      if (!root) return;
+
+      var THEME_LABEL = {
+        'fine-dining': 'Fine Dining & Zero Waste',
+        'asian': 'Asian & International Tapas',
+        'comfort': 'German Classics & Fast Food',
+        'brunch': 'Vegan Brunch & Cold Press',
+        'sweets': 'Sweets & Ice Cream'
+      };
+
+      var spots = [
+        // Fine Dining
+        { title: 'Cookies Cream', district: 'Mitte', themes: ['fine-dining'], text: 'A Michelin-level institution serving vegetarian and fully vegan tasting menus, hidden down an industrial alley.', mapQ: 'Cookies Cream Berlin' },
+        { title: 'FREA', district: 'Mitte', themes: ['fine-dining'], text: 'The world’s first fully vegan, zero-waste restaurant. They compost all leftovers on-site within 24 hours.', mapQ: 'FREA Berlin' },
+        { title: 'Bonvivant', district: 'Schöneberg', themes: ['fine-dining'], text: 'Michelin-starred plant-forward gourmet cuisine paired with excellent, creative cocktails.', mapQ: 'Bonvivant Cocktail Bistro' },
+        { title: 'Lucky Leek', district: 'Prenzlauer Berg', themes: ['fine-dining'], text: 'Exquisite 3-to-7 course tasting menus recognized by the Michelin Guide.', mapQ: 'Lucky Leek Berlin' },
+        { title: 'Vaust Bar & Restaurant', district: 'Neukölln', themes: ['fine-dining'], text: 'An incredible value 3-to-5 course vegan tasting menu in a new Neukölln location.', mapQ: 'Vaust Bar Restaurant Neukolln Berlin' },
+        { title: 'Happa', district: 'Kreuzberg', themes: ['fine-dining'], text: 'A seasonal, low-waste restaurant offering refined dinner menus in a beautifully designed space.', mapQ: 'Happa Berlin Kreuzberg' },
+
+        // Asian
+        { title: 'Shisomen', district: 'Mitte', themes: ['asian'], text: 'A fantastic 100% vegan Japanese ramen and cocktail bar right near the Palace of Tears.', mapQ: 'Shisomen Berlin' },
+        { title: '1990 Vegan Living', district: 'Friedrichshain', themes: ['asian'], text: 'An absolute crowd-pleaser offering small Vietnamese tapas bowls. Perfect for sharing.', mapQ: '1990 Vegan Living Berlin' },
+        { title: 'The Crazy Little Greek', district: 'Mitte', themes: ['asian'], text: 'Fully vegan Greek cuisine: plant-based moussaka, pastitsio, and incredible mezze.', mapQ: 'The Crazy Little Greek Berlin' },
+        { title: 'La Stella Nera', district: 'Neukölln', themes: ['asian'], text: 'Top 50 Pizzerias in Europe, serving authentic Neapolitan pizza with homemade vegan cheese.', mapQ: 'La Stella Nera Berlin' },
+        { title: 'Chay Long', district: 'Prenzlauer Berg', themes: ['asian'], text: 'Top-rated, fully vegan and gluten-free Vietnamese restaurant.', mapQ: 'Chay Long Prenzlauer Berg' },
+        { title: 'Secret Garden', district: 'Friedrichshain', themes: ['asian'], text: 'Highly creative, entirely plant-based sushi.', mapQ: 'Secret Garden Vegan Sushi Berlin' },
+        { title: 'Li.ke Thai Vegan', district: 'Friedrichshain', themes: ['asian'], text: 'Authentic Thai street food and dim sum, completely free of fish sauce or meat.', mapQ: 'Like Thai Vegan Berlin' },
+        { title: 'SOY', district: 'Mitte', themes: ['asian'], text: 'Famous for its Vietnamese "Asian tapas" concept, fresh herbs, and beautiful atmosphere.', mapQ: 'SOY Berlin' },
+        { title: 'Feel Seoul Good', district: 'Prenzlauer Berg', themes: ['asian'], text: 'Vegan Korean soul food, from bibimbap to ramyun.', mapQ: 'Feel Seoul Good Berlin' },
+
+        // Comfort
+        { title: 'Försters', district: 'Prenzlauer Berg', themes: ['comfort'], text: 'The ultimate spot for traditional German dishes: massive vegan chicken schnitzel and roast beef.', mapQ: 'Forsters Berlin' },
+        { title: 'Vöner', district: 'Friedrichshain', themes: ['comfort'], text: 'You can\'t visit Berlin without eating a kebab. Vöner is the iconic vegan döner institution.', mapQ: 'Voner Berlin' },
+        { title: 'Vincent Vegan', district: 'Potsdamer Platz', themes: ['comfort'], text: 'A fully vegan fast-food joint right in the heart of the city with self-service screens.', mapQ: 'Vincent Vegan Potsdamer Platz' },
+        { title: 'Let It Be', district: 'Neukölln', themes: ['comfort'], text: 'A brilliant vegan crepe and burger house with a strict zero-waste policy.', mapQ: 'Let It Be Berlin' },
+        { title: 'Froindlichst', district: 'Prenzlauer Berg', themes: ['comfort'], text: 'Hearty "comfort food," including stacked burgers, pizzas, and weekend brunch.', mapQ: 'Froindlichst Berlin' },
+        { title: 'VEG\'D', district: 'Multiple Locations', themes: ['comfort'], text: 'Known across the city for serving some of the highest-quality vegan burgers available.', mapQ: 'VEG D Berlin' },
+
+        // Brunch
+        { title: 'No Milk Today', district: 'Kreuzberg', themes: ['brunch'], text: 'A 100% vegan brunch cafe famous for its tofu scramble and quiches. Closes by 14:00.', mapQ: 'No Milk Today Berlin' },
+        { title: 'geh Veg', district: 'Wedding', themes: ['brunch'], text: 'Fantastic neighborhood vegan breakfast (apple caramel pancakes) and ice cream parlor.', mapQ: 'geh Veg Berlin' },
+        { title: 'Daluma', district: 'Mitte', themes: ['brunch'], text: 'Clean living hub offering cold-pressed juices, kombucha, and nutrient-dense bowls starting early at 8:30 AM.', mapQ: 'Daluma Berlin Mitte' },
+
+        // Sweets
+        { title: 'Brammibal\'s Donuts', district: 'Multiple Locations', themes: ['sweets'], text: 'Europe\'s most famous vegan donut chain. Find their bright pink boxes everywhere.', mapQ: 'Brammibals Donuts Berlin' },
+        { title: 'Tribeca Ice Cream', district: 'Prenzlauer Berg', themes: ['sweets'], text: 'Legendary vegan ice cream made from nut milks without refined sugars.', mapQ: 'Tribeca Ice Cream Berlin' },
+        { title: 'Green Scoop', district: 'Friedrichshain', themes: ['sweets'], text: '100% vegan and gluten-free ice cream. Their salted peanut butter scoop is a favorite.', mapQ: 'Green Scoop Berlin' },
+        { title: 'The Sanctuary', district: 'Mitte', themes: ['sweets'], text: 'High-end vegan pastries and authentic Italian sweets made without dairy.', mapQ: 'The Sanctuary Berlin' }
+      ];
+
+      var grid = document.getElementById('bw-vegan-grid');
+      var countEl = document.getElementById('bw-count-num');
+      var filterBtns = root.querySelectorAll('.bw-filter');
+
+      function cardHtml(m) {
+        var label = THEME_LABEL[m.themes[0]] || '';
+        var link = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(m.mapQ);
+        return '<article class="bw-card" data-themes="' + m.themes.join(' ') + '">' +
+          '<div class="bw-card-body">' +
+          '<span class="bw-card-theme">' + label + '</span>' +
+          '<div class="bw-card-title">' + m.title + '</div>' +
+          '<div class="bw-card-district">' + m.district + '</div>' +
+          '<p class="bw-card-text">' + m.text + '</p>' +
+          '<p class="bw-card-look"><a href="' + link + '" target="_blank" rel="noopener">Open in Google Maps →</a></p>' +
+          '</div>' +
+          '</article>';
+      }
+
+      grid.innerHTML = spots.map(cardHtml).join('');
+      var cards = grid.querySelectorAll('.bw-card');
+      countEl.textContent = spots.length;
+
+      function applyFilter(filter) {
+        var visible = 0;
+        cards.forEach(function (c) {
+          var show = filter === 'all' || c.getAttribute('data-themes').split(' ').indexOf(filter) !== -1;
+          c.style.display = show ? '' : 'none';
+          if (show) visible++;
+        });
+        countEl.textContent = visible;
+      }
+
+      filterBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          filterBtns.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          applyFilter(btn.getAttribute('data-filter'));
+        });
+      });
+    })();
+  </script>
+</div>
+</body>
+</html>

@@ -15,6 +15,17 @@ Rolling log of agent sessions. Most recent at top.
 
 **Next session should:** Do a separate Wix Contacts/Email Marketing cleanup only if Yusuf explicitly wants CRM records removed too; this pass only removed the planner sequence source rows.
 
+## 2026-06-08 — Antigravity (About Page Redesign)
+
+**Did:**
+- Redesigned the `about-berlinwalk` widget to remove the aggressive clarification box and bottom banner.
+- Added Yusuf's profile image and story.
+- Added a group tour image alongside the tip-based philosophy.
+- Integrated an accordion FAQ section at the bottom containing the bot differentiation statement mentioning "Original Berlin Walks".
+
+**Changed:**
+- `berlinwalk-widgets/about-berlinwalk/about-element.js`
+
 ## 2026-06-08 — Antigravity (Bot Differentiation & About Page)
 
 **Did:**

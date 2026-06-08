@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-06-07 (English tourist search-trends TODOs added)
+Last updated: 2026-06-08 (Checked against live sitemap)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -34,24 +34,16 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
-| 0 | Local draft + widget | Brandenburg Gate Berlin: A Visitor's Guide (2026) | A-tier head-term capture (no existing post). Honest funnel: the gate is the western edge, the tour walks the eastern core most visitors miss. Draft `blog-drafts/brandenburg-gate-berlin-visitors-guide.md`; reusable `berlin-landmarks-map` widget built + QA'd; QS/FAQ key `brandenburg-gate`; CMS insert `insert-berlin-landmarks-map.js`. Pending push + live steps. |
-| 0 | Local draft + widget | East Side Gallery: Berlin's Open-Air Wall Guide | A-tier, no dedicated post existed. Draft `blog-drafts/east-side-gallery-berlin-guide.md`; new `east-side-gallery-murals` card-guide widget (12 famous murals, theme filter) built + QA'd; QS/FAQ key `east-side-gallery`; CMS insert `insert-east-side-gallery-murals.js`. Pending push + live steps. |
-| 0 | Wix draft + widget | Best Day Trips from Berlin (Potsdam, Sachsenhausen, Spreewald) | High-volume "day trips from Berlin"; Wix draft `80b60289-cd69-4d4c-ac9b-399ce47c8155` created UNPUBLISHED and patched with 4 licensed images + SEO; local draft `blog-drafts/best-day-trips-from-berlin.md`; new `berlin-day-trips-finder` picker widget with pinned map built; QS/FAQ key `best-day-trips-from-berlin`; CMS insert `../insert-berlin-day-trips-finder.js`. Pending full visual QA, push, CMS row insert/re-save and tool icon. |
-| 0 | Wix draft + post widgets | FIBA Women's Basketball World Cup 2026 in Berlin | Seasonal/event-tie-in for September 2026 visitors and basketball fans. Wix draft `d7731e4b-c550-451c-9a1b-0d129823616c` created UNPUBLISHED; local draft `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md`; post-only widgets `basketball-worldcup-fixtures/` and `basketball-worldcup-venues-map/`; QS/FAQ key `fiba-womens-basketball-world-cup-2026-berlin`. Pending GitHub Pages push before embed review, cover/inline image selection, then visual QA/publish. |
-| 0 | Local draft + post widget | Festival of Lights Berlin 2026: Best Walking Route and Local Tips | Seasonal/event-tie-in for October visitors. Local draft `blog-drafts/festival-of-lights-berlin-2026.md`; post-only route widget `festival-lights-route/`; QS/FAQ key `festival-of-lights-berlin-2026`. Based on official 2026 programme preview, not the final map. Pending widget QA, Wix draft creation, visual selection/approval, GitHub Pages push and pre-publish recheck. |
-| 0 | Wix draft + widget | Best Christmas Markets in Berlin 2026: Which Ones Are Actually Worth It | Q4 seasonal pillar from English tourist search trends; 15 traditional vs alternative markets, dates, best areas. Wix draft `78263dec-66e8-4e9d-8707-65beb3bcd685` created UNPUBLISHED. Local body at `blog-drafts/best-christmas-markets-berlin-2026.body.md`; embeds `{{quick-summary}}`, `{{widget:christmas-markets-map}}`, and `{{faq}}`; QS/FAQ key `best-christmas-markets-berlin-2026`. Pending push, image selection, and publish. |
 | 0 | Idea (search-trends) | What Is a Spati? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips | Tourist-friction explainer connecting Spati culture, Sunday closures, cash habits, late-night basics, and survival advice. |
-| 0 | Idea (search-trends) | Vegan Berlin Guide 2026: Best Areas, Easy Picks, and What Tourists Should Know | Food-content gap beyond currywurst/doner/beer gardens; practical first-timer vegan guide with neighborhoods and easy picks. |
+| 1 | Draft v1 | Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers | Practical first-timer vegan guide with map widget at vegan-berlin-map/index.html. Local draft at blog-drafts/vegan-berlin-guide-2026.md. |
 | 0 | Idea (search-trends) | Berlin by Foot: Best Walkable Areas for First-Time Visitors | Turn walking/strolling search intent into BerlinWalk route logic and conversion path. |
 | 0 | Refresh/Idea (search-trends) | If Reichstag Dome Is Sold Out: What to Do Instead | Major Reichstag refresh or child post covering scarcity, ID/registration rules, Kafer workaround, alternate viewpoints, and nearby route links. |
 | 0 | Section first (search-trends) | Where to Stay in Berlin for Christmas Markets 2026 | Add inside the Christmas markets pillar first; split into standalone child post only if demand/performance justifies it. |
 | 0 | Idea (B-tier) | Berlin Street Art Guide / Holocaust Memorial Guide / Sachsenhausen Memorial Guide / "How Many Days in Berlin?" | High-intent gaps; street-art map + `berlin-landmarks-map` reuse. |
-| 1 | Wix draft | Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange | Route-adjacent history piece. Pairs with existing old-town and GDR demolition content. Local draft at `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`; quick-summary + FAQ + `nikolaiviertel-walk` self-guided walking-tour widget wired under slug `nikolaiviertel`. Wix draft ID: `48bf0945-63d9-46cd-b9af-a8fb87ab3c75`. |
 | 2 | Wix draft | Famous Movies and TV Shows Filmed in Berlin | Screen-location master post with generated media, Quick Summary, FAQ, and `screen-mood-finder` widget. Wix draft ID: `a026aeb9-6126-4adc-bebd-2dcd5c88fb8b`. |
 | 3 | Idea | Bebelplatz and the Nazi Book Burning Memorial: What Tourists Miss | Strong historical storytelling, close to central Berlin routes. |
 | 4 | Draft v1 | Where to Park in Berlin: Alexanderplatz, Park + Ride, and What Tourists Should Avoid | Practical guide for visitors arriving by car, now angled around the BerlinWalk tour start at the World Clock: Umweltzone, paid street parking, Park + Ride, and central garages near Alexanderplatz. Local draft at `blog-drafts/where-to-park-in-berlin-alexanderplatz-2026.md`; widgets wired under `alexanderplatz-parking-map` and `berlin-parking-calculator`. |
 | 5 | Idea | Tranenpalast: The Free Cold War Museum Tourists Shouldn't Skip | Practical and emotional museum guide, especially useful for visitors near Friedrichstrasse. |
-| 6 | Draft v1 | What to Do Near Hackescher Markt After the Tour | Post-tour conversion content: food, courtyards, Museum Island, riverside walks, coffee. Local draft at `blog-drafts/what-to-do-near-hackescher-markt-after-walking-tour.md`; quick-summary + FAQ wired under slug `hackescher-after-tour`; `hackescher-after-tour-planner/` widget added. |
 | 7 | Idea | Berlin for One Day: What to See If You Only Have 6-8 Hours | High-intent itinerary post distinct from the 3-day guide. |
 | 8 | Idea | The Best Free Views in Berlin | SEO-shaped practical list distinct from the existing "views on foot" article. |
 | 9 | Idea | Berlin Memorials That Are Free, Powerful, and Easy to Visit | Free history itinerary with Holocaust Memorial, Neue Wache, Wall Memorial, Topography of Terror, Soviet memorials, and Tranenpalast. |
@@ -66,6 +58,14 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 - `free-things-to-do-in-berlin-2026`
 - `public-toilets-in-berlin`
 - `luggage-storage-in-berlin-2026`
+- `brandenburg-gate-berlin-visitors-guide`
+- `east-side-gallery-berlin-guide`
+- `best-day-trips-from-berlin`
+- `fiba-womens-basketball-world-cup-2026-berlin`
+- `festival-of-lights-berlin-2026`
+- `best-christmas-markets-berlin-2026`
+- `nikolaiviertel-rebuilt-old-town`
+- `what-to-do-near-hackescher-markt-after-walking-tour`
 
 ## Drafts
 
@@ -80,6 +80,8 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 - `blog-drafts/nikolaiviertel-rebuilt-old-town-2026.md`
 - `blog-drafts/where-to-park-in-berlin-alexanderplatz-2026.md`
 - `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md`
+- `blog-drafts/vegan-berlin-guide-2026.md`
+- `vegan-berlin-map/`
 - `free-museums-map/`
 - `free-museums-compare/`
 - `free-things-map/`
@@ -94,5 +96,5 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 
 ## Source Notes
 
-- Live BerlinWalk blog sitemap checked on 2026-05-15: `https://www.berlinwalk.com/blog-posts-sitemap.xml`
+- Live BerlinWalk blog sitemap checked on 2026-06-08: `https://www.berlinwalk.com/blog-posts-sitemap.xml`
 - Prefer official sources for factual museum/admission claims: Museumsportal Berlin, visitBerlin, Berlin.de, official museum websites.
