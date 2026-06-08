@@ -2,6 +2,29 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-08 — Codex (Trip Planner test lead cleanup)
+
+**Did:**
+- Cleaned live `TripPlannerLeads` after test signups began receiving the hourly scheduled planner reminder emails.
+- Deleted every Trip Planner lead row whose normalized email was not `yusuf.ucuz@gmail.com` or `info@yusufucuz.com`.
+- Verified live after deletion: 19 rows remain, unexpected email count `0`.
+
+**Changed:**
+- Wix: removed 16 non-allowlisted `TripPlannerLeads` rows via Wix Data bulk remove; the hourly `processTripPlannerDueEmails()` job can no longer see those test addresses.
+- `../PROJECT_MEMORY.md` — recorded cleanup evidence path.
+
+**Next session should:** Do a separate Wix Contacts/Email Marketing cleanup only if Yusuf explicitly wants CRM records removed too; this pass only removed the planner sequence source rows.
+
+## 2026-06-08 — Antigravity (Bot Differentiation & About Page)
+
+**Did:**
+- Added an explicit entity differentiation statement to the homepage FAQ (Tour Basics tab).
+- Designed and scaffolded a new `about-berlinwalk` widget to act as a standalone company profile page.
+
+**Changed:**
+- `berlinwalk-widgets/faq/data.json` — updated `home` FAQ.
+- `berlinwalk-widgets/about-berlinwalk/` — created `index.html` and `about-element.js`.
+
 ## 2026-06-08 — Antigravity (World Cup interactive map)
 
 **Did:**
