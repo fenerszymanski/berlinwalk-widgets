@@ -2,6 +2,17 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-08 — Antigravity (World Cup venues update)
+
+**Did:**
+- Added 5 new public viewing venues (Astra Kulturhaus, Belushi's, FC Magnet Bar, Hofbräu Wirtshaus, Mauersegler) to the World Cup 2026 widget and blog draft.
+- Updated the live Wix blog post for "Where to Watch the 2026 World Cup in Berlin" via the API.
+
+**Changed:**
+- `worldcup-berlin/index.html` — added new venues to the V array.
+- `blog-drafts/where-to-watch-2026-world-cup-in-berlin.md` — added venues to the recommended list.
+- Wix: updated and published the live post (`0d25be5a-4e4a-447d-af5d-a9f1de72206a`) via API.
+
 ## 2026-06-08 — Codex (Trip Planner first-party tracking)
 
 **Did:**

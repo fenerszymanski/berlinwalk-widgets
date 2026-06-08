@@ -61,10 +61,15 @@ So if you arrive expecting a sea of flags between the Victory Column and the Bra
 
 ### Beer gardens and bars with the best atmosphere
 
+- **11 Freunde Quartier at Astra Kulturhaus (Friedrichshain)**: A massive football culture hub at the RAW grounds. They show matches kicking off between 18:00 and midnight. Free entry, but arrive early for Germany games.
+- **Belushi’s (Mitte)**: The go-to international sports bar near Rosa-Luxemburg-Platz. It guarantees a loud, passionate crowd and late-night hours for those early morning kick-offs.
 - **BRLO Brwhouse (Kreuzberg)**: craft beer meets football in a big open-air setting at Gleisdreieck.
+- **FC Magnet Bar (Mitte)**: A legendary, authentic football "Kneipe" experience in the heart of the city.
 - **Golgatha (Kreuzberg)**: a classic Berlin beer garden under the trees and fairy lights in Viktoriapark.
+- **Hofbräu Wirtshaus (Mitte)**: For a true stadium-like atmosphere with giant screens, Bavarian beer, and huge crowds (especially for Germany matches).
 - **Kulturbrauerei (Prenzlauer Berg)**: a 36 square metre LED screen in the historic courtyard, indoor backup for bad weather, plus a barbecue.
 - **Maaya at RAW (Friedrichshain)**: slightly club-like, football first and music after.
+- **Mauersegler (Prenzlauer Berg)**: A classic beer garden next to Mauerpark, perfect for a relaxed outdoor viewing experience.
 - **Studio 14, the rbb rooftop (Westend)**: panoramic city views with commentary and music for selected matches.
 - **Zollpackhof (near the main station)**: a riverside beer garden with a view across to the Chancellery.
 - **Naumanns (Schöneberg)**: long shared tables and a relaxed, conversational crowd.
