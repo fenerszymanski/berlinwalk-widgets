@@ -2,6 +2,25 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-08 — Codex (Vegan blog/tool promotion)
+
+**Did:**
+- Promoted the live Vegan Berlin Guide as the `/blog` lead story and useful-tools focus, and wired both vegan widgets into BerlinTools surfaces.
+- Created the missing live `/tools/vegan-berlin-locations-map` CMS page and refreshed `/tools/vegan-berlin-map` related-blog/related-tool fields.
+- Verified live `/blog`, homepage blog teaser, both vegan tool pages, and local blog-index preview.
+
+**Changed:**
+- `blog-index/blog-index-element.js`, `blog-index/data.json`, `scripts/generate-blog-index-data.mjs` — Vegan Guide is the lead/latest/Food & Nightlife feature; tools strip starts with the two vegan tools.
+- `tools-hub/data.json` — added `vegan-berlin-locations-map` and `vegan-berlin-map` for `/berlin-tools` and `/widgets` after push.
+- `../insert-vegan-berlin-map.js`, `../insert-vegan-berlin-locations-map.js` — durable CMS sync helpers for the two vegan pages.
+- `../PROJECT_MEMORY.md` — updated live blog/Custom Embed/BerlinTools state.
+- Wix: `BerlinWalk Vegan Blog Feature` (`7b593b94-...`) rev 2 now promotes Vegan Guide live on `/blog`; `BerlinTools Layout Fixes` rev 14 adds the two vegan icon slugs; BerlinTools CMS rows live for `vegan-berlin-map` (`63f6ecb8-...`) and `vegan-berlin-locations-map` (`538c8024-...`).
+
+**Opened:** Push `berlinwalk-widgets` so GitHub Pages serves the durable `blog-index` and `tools-hub` updates; live `/blog` and the dynamic `/tools/<slug>` pages are already patched via Wix.
+**Closed:** Vegan Guide now appears live on homepage blog teaser and `/blog`; both vegan tool pages show the related Vegan Guide card.
+
+**Next session should:** After push, verify live GitHub Pages `blog-index/*` no longer needs the temporary `/blog` feature embed; consider disabling it once the deployed asset itself promotes Vegan Guide.
+
 ## 2026-06-08 — Codex (Trip Planner test lead cleanup)
 
 **Did:**

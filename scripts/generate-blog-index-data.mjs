@@ -110,6 +110,7 @@ const TOPICS = [
     kicker: 'After the walk',
     description: 'Food, coffee, currywurst, clubs, and the useful bits of Berlin culture around eating and going out.',
     slugs: [
+      'vegan-berlin-guide-2026',
       'best-currywurst-places-in-berlin-2026',
       'what-to-eat-in-berlin-12-must-try-local-foods',
       '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
@@ -117,7 +118,7 @@ const TOPICS = [
       '5-best-coffee-shops-near-hackescher-markt-a-local-s-guide',
       'what-to-wear-to-berlin-clubs',
     ],
-    match: /(food|eat|currywurst|döner|doner|coffee|club|nightlife|menu|tip in berlin|restaurants?)/i,
+    match: /(food|eat|vegan|plant-based|plant based|currywurst|döner|doner|coffee|club|nightlife|menu|tip in berlin|restaurants?)/i,
   },
   {
     key: 'when-to-visit',
@@ -147,8 +148,9 @@ const TOPICS = [
 ];
 
 const HERO_SLUGS = {
-  lead: 'where-to-watch-2026-world-cup-in-berlin',
+  lead: 'vegan-berlin-guide-2026',
   secondary: [
+    'where-to-watch-2026-world-cup-in-berlin',
     'east-side-gallery-berlin-guide',
     'shopping-in-berlin',
     'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
@@ -181,22 +183,22 @@ const START_HERE_LINKS = [
 
 const SPOTLIGHT_TOOLS = [
   {
-    title: 'East Side Gallery Mural Guide',
-    slug: 'east-side-gallery-murals',
-    url: `${BLOG_BASE}/tools/east-side-gallery-murals`,
-    summary: 'The meaning behind the most famous murals on the Wall, with theme filters and artist notes.',
+    title: 'Vegan Berlin Interactive Map',
+    slug: 'vegan-berlin-locations-map',
+    url: `${BLOG_BASE}/tools/vegan-berlin-locations-map`,
+    summary: 'Find the best vegan spots near your hotel with a filterable Berlin map.',
   },
   {
-    title: 'Berlin Beer Gardens Map',
-    slug: 'berlin-beer-gardens-map',
-    url: `${BLOG_BASE}/tools/berlin-beer-gardens-map`,
-    summary: 'Find the 12 best beer gardens in Berlin, mapped by atmosphere (traditional vs. craft vs. waterfront) with transit info.',
+    title: 'Vegan Berlin Top Picks',
+    slug: 'vegan-berlin-map',
+    url: `${BLOG_BASE}/tools/vegan-berlin-map`,
+    summary: 'A curated list of Berlin plant-based restaurants, cafes, fine dining and sweets.',
   },
   {
-    title: 'Berlin Day Trips Finder',
-    slug: 'berlin-day-trips-finder',
-    url: `${BLOG_BASE}/tools/berlin-day-trips-finder`,
-    summary: 'Find 8 day trips from Berlin, mapped by interest and travel time, with transit and ticket info.',
+    title: 'Berlin First-Day Planner',
+    slug: 'berlin-first-day-planner',
+    url: `${BLOG_BASE}/tools/berlin-first-day-planner`,
+    summary: 'Build a realistic first-day plan around arrival time, luggage, weather, and the tour.',
   },
 ];
 
@@ -359,6 +361,7 @@ function relatedToolSlugFor(post) {
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
   if (/(welcomecard)/.test(s)) return 'welcomecard-calculator';
   if (/(shopping|shop|flea-market|vintage|souvenir)/.test(s)) return 'berlin-shopping-areas';
+  if (/(vegan|plant-based|plant based)/.test(s)) return 'vegan-berlin-locations-map';
   if (/(budget|expensive|cheap|credit|cash)/.test(s)) return 'berlin-daily-budget';
   if (/(first-time|3-days|itinerary)/.test(s)) return 'berlin-first-day-planner';
   if (/(weather|temperature|january|february|march|april|may|june|july|august|september|october|november|december|rain|pack|month)/.test(s)) return 'best-month-to-visit-berlin';

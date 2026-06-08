@@ -39,6 +39,24 @@
   ],
   "tools": [
     {
+      "slug": "vegan-berlin-locations-map",
+      "title": "Vegan Berlin Interactive Map",
+      "lead": "Find the best vegan spots near your hotel with an interactive Berlin map and neighborhood guide.",
+      "category": "Maps",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/vegan-berlin-locations-map-160.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/vegan-berlin-locations-map/",
+      "embedHeight": 640
+    },
+    {
+      "slug": "vegan-berlin-map",
+      "title": "Vegan Berlin Top Picks",
+      "lead": "A curated list of Berlin's best plant-based restaurants, cafes, fine dining, fast food, brunch, sweets, and ice cream.",
+      "category": "Discovery",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/vegan-berlin-map-160.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/vegan-berlin-map/",
+      "embedHeight": 760
+    },
+    {
       "slug": "watch-world-cup-2026-berlin",
       "title": "Where to Watch the World Cup in Berlin",
       "lead": "Free public viewing screens, beer gardens and bars to watch the 2026 World Cup in Berlin, filterable by what you want.",

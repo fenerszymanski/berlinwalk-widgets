@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-07T15:51:13.281Z",
+  "updatedAt": "2026-06-08T20:09:42.009Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 100,
@@ -43,23 +43,40 @@
   ],
   "hero": {
     "lead": {
-      "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
-      "slug": "where-to-watch-2026-world-cup-in-berlin",
-      "path": "/post/where-to-watch-2026-world-cup-in-berlin",
-      "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
-      "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
+      "title": "Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers",
+      "slug": "vegan-berlin-guide-2026",
+      "path": "/post/vegan-berlin-guide-2026",
+      "url": "https://www.berlinwalk.com/post/vegan-berlin-guide-2026",
+      "excerpt": "A curated 2026 guide to the best 100% plant-based restaurants, street food, and vegan neighborhoods in Berlin.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
       "readTime": "4 min read",
-      "publishedDate": "2026-06-03T15:51:27Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-      "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
-      "relatedToolSlug": "watch-world-cup-2026-berlin"
+      "publishedDate": "2026-06-08T16:15:49Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
+      "alt": "Beautifully plated vegan meal in a modern Berlin restaurant",
+      "relatedToolSlug": "vegan-berlin-locations-map"
     },
     "secondary": [
+      {
+        "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
+        "slug": "where-to-watch-2026-world-cup-in-berlin",
+        "path": "/post/where-to-watch-2026-world-cup-in-berlin",
+        "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
+        "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "4 min read",
+        "publishedDate": "2026-06-03T15:51:27Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+        "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
+        "relatedToolSlug": "watch-world-cup-2026-berlin"
+      },
       {
         "title": "East Side Gallery: Berlin's Open-Air Wall Guide (2026)",
         "slug": "east-side-gallery-berlin-guide",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
         "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
         "relatedToolSlug": "berlin-public-toilets"
-      },
-      {
-        "title": "Berlin Public Transport 2026: U-Bahn, S-Bahn, Tram & Bus (Tourist Guide)",
-        "slug": "berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
-        "path": "/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
-        "url": "https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
-        "excerpt": "Berlin's U-Bahn, S-Bahn, tram, and bus all use one ticket system. Learn which zones, tickets, and prices you need as a tourist in 2026 — plus where to buy, night transport, and getting to BER Airport.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-04-06T08:06:27.973Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
-        "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.",
-        "relatedToolSlug": "transport-ticket-calculator"
       }
     ]
   },
@@ -169,22 +169,22 @@
   ],
   "tools": [
     {
-      "title": "East Side Gallery Mural Guide",
-      "slug": "east-side-gallery-murals",
-      "url": "https://www.berlinwalk.com/tools/east-side-gallery-murals",
-      "summary": "The meaning behind the most famous murals on the Wall, with theme filters and artist notes."
+      "title": "Vegan Berlin Interactive Map",
+      "slug": "vegan-berlin-locations-map",
+      "url": "https://www.berlinwalk.com/tools/vegan-berlin-locations-map",
+      "summary": "Find the best vegan spots near your hotel with a filterable Berlin map."
     },
     {
-      "title": "Berlin Beer Gardens Map",
-      "slug": "berlin-beer-gardens-map",
-      "url": "https://www.berlinwalk.com/tools/berlin-beer-gardens-map",
-      "summary": "Find the 12 best beer gardens in Berlin, mapped by atmosphere (traditional vs. craft vs. waterfront) with transit info."
+      "title": "Vegan Berlin Top Picks",
+      "slug": "vegan-berlin-map",
+      "url": "https://www.berlinwalk.com/tools/vegan-berlin-map",
+      "summary": "A curated list of Berlin plant-based restaurants, cafes, fine dining and sweets."
     },
     {
-      "title": "Berlin Day Trips Finder",
-      "slug": "berlin-day-trips-finder",
-      "url": "https://www.berlinwalk.com/tools/berlin-day-trips-finder",
-      "summary": "Find 8 day trips from Berlin, mapped by interest and travel time, with transit and ticket info."
+      "title": "Berlin First-Day Planner",
+      "slug": "berlin-first-day-planner",
+      "url": "https://www.berlinwalk.com/tools/berlin-first-day-planner",
+      "summary": "Build a realistic first-day plan around arrival time, luggage, weather, and the tour."
     }
   ],
   "popular": [
@@ -223,6 +223,23 @@
       "relatedToolSlug": ""
     },
     {
+      "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
+      "slug": "where-to-watch-2026-world-cup-in-berlin",
+      "path": "/post/where-to-watch-2026-world-cup-in-berlin",
+      "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
+      "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "4 min read",
+      "publishedDate": "2026-06-03T15:51:27Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
+      "relatedToolSlug": "watch-world-cup-2026-berlin"
+    },
+    {
       "title": "Berlin Airport to Alexanderplatz: The Easy Way (2026 Guide)",
       "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
       "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
@@ -240,21 +257,21 @@
       "relatedToolSlug": "transport-ticket-calculator"
     },
     {
-      "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
-      "slug": "where-to-watch-2026-world-cup-in-berlin",
-      "path": "/post/where-to-watch-2026-world-cup-in-berlin",
-      "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
-      "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "4 min read",
-      "publishedDate": "2026-06-03T15:51:27Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-      "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
-      "relatedToolSlug": "watch-world-cup-2026-berlin"
+      "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+      "slug": "where-was-the-berlin-wall-interactive-map",
+      "path": "/post/where-was-the-berlin-wall-interactive-map",
+      "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
+      "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "6 min read",
+      "publishedDate": "2026-05-05T09:32:22.821Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+      "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+      "relatedToolSlug": "east-or-west-1989"
     },
     {
       "title": "Are Shops Open on Sunday in Berlin? What You Need to Know",
@@ -272,23 +289,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
       "alt": "Berlin walking tour group exploring historic city centre near Berlin Cathedral with local guide",
       "relatedToolSlug": "berlin-shopping-areas"
-    },
-    {
-      "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
-      "slug": "where-was-the-berlin-wall-interactive-map",
-      "path": "/post/where-was-the-berlin-wall-interactive-map",
-      "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
-      "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
-      "category": "Berlin History",
-      "categorySlug": "berlin-history",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "6 min read",
-      "publishedDate": "2026-05-05T09:32:22.821Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
-      "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
-      "relatedToolSlug": "east-or-west-1989"
     },
     {
       "title": "Public Toilets in Berlin: What Tourists Actually Need to Know",
@@ -507,8 +507,8 @@
           "topicLabel": "Practical Berlin",
           "readTime": "4 min read",
           "publishedDate": "2026-06-03T15:51:27Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+          "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
           "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
           "relatedToolSlug": "watch-world-cup-2026-berlin"
         },
@@ -1212,6 +1212,23 @@
       "description": "Food, coffee, currywurst, clubs, and the useful bits of Berlin culture around eating and going out.",
       "posts": [
         {
+          "title": "Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers",
+          "slug": "vegan-berlin-guide-2026",
+          "path": "/post/vegan-berlin-guide-2026",
+          "url": "https://www.berlinwalk.com/post/vegan-berlin-guide-2026",
+          "excerpt": "A curated 2026 guide to the best 100% plant-based restaurants, street food, and vegan neighborhoods in Berlin.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "food-nightlife",
+          "topicLabel": "Food & Nightlife",
+          "readTime": "4 min read",
+          "publishedDate": "2026-06-08T16:15:49Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
+          "alt": "Beautifully plated vegan meal in a modern Berlin restaurant",
+          "relatedToolSlug": "vegan-berlin-locations-map"
+        },
+        {
           "title": "Best Currywurst in Berlin: 8 Places to Try in 2026",
           "slug": "best-currywurst-places-in-berlin-2026",
           "path": "/post/best-currywurst-places-in-berlin-2026",
@@ -1548,6 +1565,23 @@
   ],
   "latest": [
     {
+      "title": "Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers",
+      "slug": "vegan-berlin-guide-2026",
+      "path": "/post/vegan-berlin-guide-2026",
+      "url": "https://www.berlinwalk.com/post/vegan-berlin-guide-2026",
+      "excerpt": "A curated 2026 guide to the best 100% plant-based restaurants, street food, and vegan neighborhoods in Berlin.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "4 min read",
+      "publishedDate": "2026-06-08T16:15:49Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
+      "alt": "Beautifully plated vegan meal in a modern Berlin restaurant",
+      "relatedToolSlug": "vegan-berlin-locations-map"
+    },
+    {
       "title": "East Side Gallery: Berlin's Open-Air Wall Guide (2026)",
       "slug": "east-side-gallery-berlin-guide",
       "path": "/post/east-side-gallery-berlin-guide",
@@ -1661,8 +1695,8 @@
       "topicLabel": "Practical Berlin",
       "readTime": "4 min read",
       "publishedDate": "2026-06-03T15:51:27Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
       "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
       "relatedToolSlug": "watch-world-cup-2026-berlin"
     },
@@ -1733,26 +1767,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9c4f15caade945bcae72737bf8254b5c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-karneval.jpg",
       "alt": "Colourful costumes and crowds at the Karneval der Kulturen street parade in Berlin",
       "relatedToolSlug": "best-month-to-visit-berlin"
-    },
-    {
-      "title": "Berlin in April 2027: Weather, Cherry Blossom, Long Evenings and What to Do",
-      "slug": "berlin-in-april-2027",
-      "path": "/post/berlin-in-april-2027",
-      "url": "https://www.berlinwalk.com/post/berlin-in-april-2027",
-      "excerpt": "Visiting Berlin in April 2027? Get the spring weather, cherry blossom, long evenings, Gallery Weekend, packing tips, fewer crowds and what to book early.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "when-to-visit",
-      "topicLabel": "Month-by-Month Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-05-31T20:10:04.772Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_acbc552552564126b7301ee668f2ef18~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-cherry-avenue.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_acbc552552564126b7301ee668f2ef18~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hero-cherry-avenue.jpg",
-      "alt": "An avenue of cherry blossom trees in full bloom in Berlin in April",
-      "relatedToolSlug": "best-month-to-visit-berlin"
     }
   ],
   "allPosts": [
+    {
+      "title": "Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers",
+      "slug": "vegan-berlin-guide-2026",
+      "path": "/post/vegan-berlin-guide-2026",
+      "url": "https://www.berlinwalk.com/post/vegan-berlin-guide-2026",
+      "excerpt": "A curated 2026 guide to the best 100% plant-based restaurants, street food, and vegan neighborhoods in Berlin.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "4 min read",
+      "publishedDate": "2026-06-08T16:15:49Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
+      "alt": "Beautifully plated vegan meal in a modern Berlin restaurant",
+      "relatedToolSlug": "vegan-berlin-locations-map"
+    },
     {
       "title": "East Side Gallery: Berlin's Open-Air Wall Guide (2026)",
       "slug": "east-side-gallery-berlin-guide",
@@ -1867,8 +1901,8 @@
       "topicLabel": "Practical Berlin",
       "readTime": "4 min read",
       "publishedDate": "2026-06-03T15:51:27Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_315787c56a5f45b786b052065be24932~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
       "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
       "relatedToolSlug": "watch-world-cup-2026-berlin"
     },
@@ -3434,23 +3468,6 @@
       "image": "https://static.wixstatic.com/media/nsplsh_6270786779443459597434~mv2_d_4096_2304_s_2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/wonder%20what%E2%80%99s%20up%20there.jpg",
       "thumb": "https://static.wixstatic.com/media/nsplsh_6270786779443459597434~mv2_d_4096_2304_s_2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/wonder%20what%E2%80%99s%20up%20there.jpg",
       "alt": "Confused woman",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Liebknecht Bridge: The Best View in Berlin That Nobody Talks About",
-      "slug": "liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about",
-      "path": "/post/liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about",
-      "url": "https://www.berlinwalk.com/post/liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about",
-      "excerpt": "Every city has its famous viewpoints — the spots that appear on postcards and fill Instagram feeds. Berlin has the Reichstag dome, the TV Tower observation deck, and the Victory Column. But the best view in Berlin? It’s from a bridge most tourists cross without stopping. Karl-Liebknecht-Brücke is a road bridge over the Spree River, connecting Alexanderplatz to Museum Island. Hundreds of people cross it every hour — on foot, by car, by tram — and almost none of them pause to look around. If...",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "2 min read",
-      "publishedDate": "2026-03-01T08:35:14.041Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_23ed74708d784a0e8da1f3b29094bbea~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20sidewalk%20near%20body%20of%20water%20during%20daytime.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_23ed74708d784a0e8da1f3b29094bbea~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20sidewalk%20near%20body%20of%20water%20during%20daytime.jpg",
-      "alt": "Liebknecht Bridge: The Best View in Berlin That Nobody Talks About",
       "relatedToolSlug": ""
     }
   ]
