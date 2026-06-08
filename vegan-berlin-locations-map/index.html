@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vegan Berlin 2026 Locations Map | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-vegan-locations-map">
+  <style>
+    #bw-vegan-locations-map {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164a1a;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-lime-soft: #F2F8E8;
+      font-family: Montserrat, Arial, sans-serif;
+      color: var(--bw-text);
+      margin: 28px 0;
+      max-width: 100%;
+    }
+
+    #bw-vegan-locations-map * { box-sizing: border-box; }
+
+    #bw-vegan-locations-map .bw-wrap {
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      background: var(--bw-white);
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+
+    #bw-vegan-locations-map .bw-head {
+      background: var(--bw-green);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    #bw-vegan-locations-map .bw-head-icon { font-size: 18px; line-height: 1; }
+
+    #bw-vegan-locations-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-vegan-locations-map .bw-body { background: #FAFAF5; padding: 16px 18px; }
+
+    #bw-vegan-locations-map .bw-ask {
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: var(--bw-green);
+      margin: 0 0 14px;
+    }
+
+    #bw-vegan-locations-map .bw-filters {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    #bw-vegan-locations-map .bw-filter {
+      border: 1.5px solid var(--bw-border);
+      background: var(--bw-white);
+      color: var(--bw-green);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+
+    #bw-vegan-locations-map .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
+    #bw-vegan-locations-map .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
+
+    #bw-vegan-locations-map .bw-hint {
+      font-size: 13px;
+      color: var(--bw-muted);
+      margin: 14px 0;
+      line-height: 1.55;
+    }
+
+    #bw-vegan-locations-map .bw-map-container {
+      width: 100%;
+      height: 460px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-vegan-locations-map .bw-map { width: 100%; height: 100%; z-index: 1; }
+    #bw-vegan-locations-map .leaflet-container { font-family: Montserrat, Arial, sans-serif; background: #E8EEDC; }
+
+    #bw-vegan-locations-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+      border: 1px solid var(--bw-border);
+    }
+    #bw-vegan-locations-map .leaflet-popup-content { margin: 0; width: 270px !important; font-family: inherit; }
+    #bw-vegan-locations-map .leaflet-popup-tip { box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+
+    #bw-vegan-locations-map .bw-popup-head {
+      background: var(--bw-green);
+      padding: 10px 14px;
+      border-radius: 11px 11px 0 0;
+    }
+    #bw-vegan-locations-map .bw-popup-type {
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 2px;
+    }
+    #bw-vegan-locations-map .bw-popup-name {
+      color: var(--bw-white);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.25;
+    }
+
+    #bw-vegan-locations-map .bw-popup-body { padding: 12px 14px; }
+    #bw-vegan-locations-map .bw-popup-note {
+      font-size: 12px;
+      color: var(--bw-text);
+      line-height: 1.55;
+      margin: 0 0 10px;
+    }
+    #bw-vegan-locations-map .bw-popup-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 11.5px;
+      color: var(--bw-text);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    #bw-vegan-locations-map .bw-popup-label {
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 9px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      min-width: 58px;
+      padding-top: 1px;
+    }
+    #bw-vegan-locations-map .bw-popup-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-weight: 800;
+      font-size: 11px;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.15s ease;
+    }
+    #bw-vegan-locations-map .bw-popup-link:hover { background: #FFEF33; }
+
+    #bw-vegan-locations-map .bw-marker {
+      width: 30px;
+      height: 30px;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    #bw-vegan-locations-map .bw-marker-inner {
+      transform: rotate(45deg);
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    #bw-vegan-locations-map .bw-count {
+      font-size: 11px;
+      color: var(--bw-muted);
+      margin-top: 10px;
+      text-align: center;
+    }
+    #bw-vegan-locations-map .bw-count strong { color: var(--bw-green); font-weight: 800; }
+
+    @media (max-width: 520px) {
+      #bw-vegan-locations-map { margin: 22px 0; }
+      #bw-vegan-locations-map .bw-head { padding: 12px 16px; gap: 8px; }
+      #bw-vegan-locations-map .bw-head-icon { font-size: 16px; }
+      #bw-vegan-locations-map .bw-kicker { font-size: 10px; letter-spacing: 2px; }
+      #bw-vegan-locations-map .bw-body { padding: 14px; }
+      #bw-vegan-locations-map .bw-hint { font-size: 12px; margin: 12px 0; }
+      #bw-vegan-locations-map .bw-filter { font-size: 10px; padding: 5px 10px; }
+      #bw-vegan-locations-map .bw-map-container { height: 380px; }
+      #bw-vegan-locations-map .leaflet-popup-content { width: 235px !important; }
+      #bw-vegan-locations-map .bw-popup-name { font-size: 13px; }
+      #bw-vegan-locations-map .bw-popup-row { font-size: 11px; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <div class="bw-wrap">
+    <div class="bw-head">
+      <span class="bw-head-icon" aria-hidden="true">🗺️</span>
+      <span class="bw-kicker">Vegan Berlin Locations Map</span>
+    </div>
+    <div class="bw-body">
+      <p class="bw-ask">Filter by Category:</p>
+      
+      <div class="bw-filters">
+        <button class="bw-filter active" type="button" data-filter="all">All Spots</button>
+        <button class="bw-filter" type="button" data-filter="fine-dining">Fine Dining & Zero Waste</button>
+        <button class="bw-filter" type="button" data-filter="asian">Asian & Tapas</button>
+        <button class="bw-filter" type="button" data-filter="comfort">German & Fast Food</button>
+        <button class="bw-filter" type="button" data-filter="brunch">Brunch</button>
+        <button class="bw-filter" type="button" data-filter="sweets">Sweets</button>
+      </div>
+
+      <p class="bw-hint">Tap any pin to view the restaurant details, district, and get direct directions via Google Maps.</p>
+
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-vegan-locations-map-canvas"></div>
+      </div>
+
+      <p class="bw-count"><strong id="bw-count-num">28</strong> vegan spots mapped</p>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-vegan-locations-map');
+      if (!root) return;
+
+      var THEME_LABEL = {
+        'fine-dining': 'Fine Dining & Zero Waste',
+        'asian': 'Asian & International Tapas',
+        'comfort': 'German Classics & Fast Food',
+        'brunch': 'Vegan Brunch & Cold Press',
+        'sweets': 'Sweets & Ice Cream'
+      };
+
+      var locations = [
+        // Fine Dining
+        { title: 'Cookies Cream', district: 'Mitte', themes: ['fine-dining'], text: 'A Michelin-level institution serving vegetarian and fully vegan tasting menus, hidden down an industrial alley.', lat: 52.5163833, lng: 13.3880749, mapQ: 'Cookies Cream Berlin' },
+        { title: 'FREA', district: 'Mitte', themes: ['fine-dining'], text: 'The world’s first fully vegan, zero-waste restaurant. They compost all leftovers on-site within 24 hours.', lat: 52.5301838, lng: 13.3919268, mapQ: 'FREA Berlin' },
+        { title: 'Bonvivant', district: 'Schöneberg', themes: ['fine-dining'], text: 'Michelin-starred plant-forward gourmet cuisine paired with excellent, creative cocktails.', lat: 52.4946083, lng: 13.3537347, mapQ: 'Bonvivant Cocktail Bistro' },
+        { title: 'Lucky Leek', district: 'Prenzlauer Berg', themes: ['fine-dining'], text: 'Exquisite 3-to-7 course tasting menus recognized by the Michelin Guide.', lat: 52.5348150, lng: 13.4167422, mapQ: 'Lucky Leek Berlin' },
+        { title: 'Vaust Bar & Restaurant', district: 'Neukölln', themes: ['fine-dining'], text: 'An incredible value 3-to-5 course vegan tasting menu in a new Neukölln location.', lat: 52.4820, lng: 13.4350, mapQ: 'Vaust Bar Restaurant Neukolln Berlin' },
+        { title: 'Happa', district: 'Kreuzberg', themes: ['fine-dining'], text: 'A seasonal, low-waste restaurant offering refined dinner menus in a beautifully designed space.', lat: 52.4995755, lng: 13.4451877, mapQ: 'Happa Berlin Kreuzberg' },
+
+        // Asian
+        { title: 'Shisomen', district: 'Mitte', themes: ['asian'], text: 'A fantastic 100% vegan Japanese ramen and cocktail bar right near the Palace of Tears.', lat: 52.5121111, lng: 13.3810305, mapQ: 'Shisomen Berlin' },
+        { title: '1990 Vegan Living', district: 'Friedrichshain', themes: ['asian'], text: 'An absolute crowd-pleaser offering small Vietnamese tapas bowls. Perfect for sharing.', lat: 52.5104178, lng: 13.4585114, mapQ: '1990 Vegan Living Berlin' },
+        { title: 'The Crazy Little Greek', district: 'Mitte', themes: ['asian'], text: 'Fully vegan Greek cuisine: plant-based moussaka, pastitsio, and incredible mezze.', lat: 52.5275065, lng: 13.3980924, mapQ: 'The Crazy Little Greek Berlin' },
+        { title: 'La Stella Nera', district: 'Neukölln', themes: ['asian'], text: 'Top 50 Pizzerias in Europe, serving authentic Neapolitan pizza with homemade vegan cheese.', lat: 52.4749578, lng: 13.4280181, mapQ: 'La Stella Nera Berlin' },
+        { title: 'Chay Long', district: 'Prenzlauer Berg', themes: ['asian'], text: 'Top-rated, fully vegan and gluten-free Vietnamese restaurant.', lat: 52.5416018, lng: 13.4217910, mapQ: 'Chay Long Prenzlauer Berg' },
+        { title: 'Secret Garden', district: 'Friedrichshain', themes: ['asian'], text: 'Highly creative, entirely plant-based sushi.', lat: 52.5077194, lng: 13.4500181, mapQ: 'Secret Garden Vegan Sushi Berlin' },
+        { title: 'Li.ke Thai Vegan', district: 'Friedrichshain', themes: ['asian'], text: 'Authentic Thai street food and dim sum, completely free of fish sauce or meat.', lat: 52.5110, lng: 13.4600, mapQ: 'Like Thai Vegan Berlin' },
+        { title: 'SOY', district: 'Mitte', themes: ['asian'], text: 'Famous for its Vietnamese "Asian tapas" concept, fresh herbs, and beautiful atmosphere.', lat: 52.5260245, lng: 13.4114930, mapQ: 'SOY Berlin' },
+        { title: 'Feel Seoul Good', district: 'Prenzlauer Berg', themes: ['asian'], text: 'Vegan Korean soul food, from bibimbap to ramyun.', lat: 52.5368472, lng: 13.4175202, mapQ: 'Feel Seoul Good Berlin' },
+
+        // Comfort
+        { title: 'Försters', district: 'Prenzlauer Berg', themes: ['comfort'], text: 'The ultimate spot for traditional German dishes: massive vegan chicken schnitzel and roast beef.', lat: 52.5407528, lng: 13.4194404, mapQ: 'Forsters Berlin' },
+        { title: 'Vöner', district: 'Friedrichshain', themes: ['comfort'], text: 'You can\'t visit Berlin without eating a kebab. Vöner is the iconic vegan döner institution.', lat: 52.5067290, lng: 13.4687301, mapQ: 'Voner Berlin' },
+        { title: 'Vincent Vegan', district: 'Potsdamer Platz', themes: ['comfort'], text: 'A fully vegan fast-food joint right in the heart of the city with self-service screens.', lat: 52.5096, lng: 13.3759, mapQ: 'Vincent Vegan Potsdamer Platz' },
+        { title: 'Let It Be', district: 'Neukölln', themes: ['comfort'], text: 'A brilliant vegan crepe and burger house with a strict zero-waste policy.', lat: 52.4998757, lng: 13.4226427, mapQ: 'Let It Be Berlin' },
+        { title: 'Froindlichst', district: 'Prenzlauer Berg', themes: ['comfort'], text: 'Hearty "comfort food," including stacked burgers, pizzas, and weekend brunch.', lat: 52.5330021, lng: 13.4231682, mapQ: 'Froindlichst Berlin' },
+        { title: 'VEG\'D', district: 'Multiple Locations', themes: ['comfort'], text: 'Known across the city for serving some of the highest-quality vegan burgers available.', lat: 52.5131483, lng: 13.4562964, mapQ: 'VEG D Berlin' },
+
+        // Brunch
+        { title: 'No Milk Today', district: 'Kreuzberg', themes: ['brunch'], text: 'A 100% vegan brunch cafe famous for its tofu scramble and quiches. Closes by 14:00.', lat: 52.4930, lng: 13.4000, mapQ: 'No Milk Today Berlin' },
+        { title: 'geh Veg', district: 'Wedding', themes: ['brunch'], text: 'Fantastic neighborhood vegan breakfast (apple caramel pancakes) and ice cream parlor.', lat: 52.5419017, lng: 13.3504847, mapQ: 'geh Veg Berlin' },
+        { title: 'Daluma', district: 'Mitte', themes: ['brunch'], text: 'Clean living hub offering cold-pressed juices, kombucha, and nutrient-dense bowls starting early at 8:30 AM.', lat: 52.5305126, lng: 13.4021538, mapQ: 'Daluma Berlin Mitte' },
+
+        // Sweets
+        { title: 'Brammibal\'s Donuts', district: 'Multiple Locations', themes: ['sweets'], text: 'Europe\'s most famous vegan donut chain. Find their bright pink boxes everywhere.', lat: 52.5100, lng: 13.3850, mapQ: 'Brammibals Donuts Berlin' },
+        { title: 'Tribeca Ice Cream', district: 'Prenzlauer Berg', themes: ['sweets'], text: 'Legendary vegan ice cream made from nut milks without refined sugars.', lat: 52.4942211, lng: 13.4184427, mapQ: 'Tribeca Ice Cream Berlin' },
+        { title: 'Green Scoop', district: 'Friedrichshain', themes: ['sweets'], text: '100% vegan and gluten-free ice cream. Their salted peanut butter scoop is a favorite.', lat: 52.5066820, lng: 13.4694782, mapQ: 'Green Scoop Berlin' },
+        { title: 'The Sanctuary', district: 'Mitte', themes: ['sweets'], text: 'High-end vegan pastries and authentic Italian sweets made without dairy.', lat: 52.5531093, lng: 13.4033271, mapQ: 'The Sanctuary Berlin' }
+      ];
+
+      var mapEl = document.getElementById('bw-vegan-locations-map-canvas');
+      var countEl = document.getElementById('bw-count-num');
+      
+      var map = L.map(mapEl, {
+        center: [52.515, 13.405],
+        zoom: 12,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 18
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+      var markers = [];
+      var currentFilter = 'all';
+
+      function createMarkerIcon(loc) {
+        var html = '<div class="bw-marker"><div class="bw-marker-inner">🌱</div></div>';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: html,
+          iconSize: [30, 30],
+          iconAnchor: [15, 30],
+          popupAnchor: [0, -30]
+        });
+      }
+
+      function createPopup(loc) {
+        var label = THEME_LABEL[loc.themes[0]] || '';
+        var link = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(loc.mapQ);
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + label + '</span>' +
+          '<div class="bw-popup-name">' + loc.title + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<p class="bw-popup-note">' + loc.text + '</p>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">District</span><span><strong>' + loc.district + '</strong></span></div>' +
+          '<a href="' + link + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Google Maps →</a>' +
+          '</div>';
+      }
+
+      locations.forEach(function (loc) {
+        var marker = L.marker([loc.lat, loc.lng], {
+          icon: createMarkerIcon(loc)
+        }).bindPopup(createPopup(loc), {
+          closeButton: true,
+          maxWidth: 280,
+          className: 'bw-popup-wrapper'
+        });
+        marker.addTo(map);
+        marker._themes = loc.themes;
+        markers.push(marker);
+      });
+
+      countEl.textContent = markers.length;
+
+      function applyFilter() {
+        var visibleCount = 0;
+        var visibleMarkers = [];
+
+        markers.forEach(function (m) {
+          var show = currentFilter === 'all' || m._themes.indexOf(currentFilter) !== -1;
+
+          if (show) {
+            if (!map.hasLayer(m)) m.addTo(map);
+            visibleCount++;
+            visibleMarkers.push(m);
+          } else {
+            if (map.hasLayer(m)) map.removeLayer(m);
+          }
+        });
+
+        countEl.textContent = visibleCount;
+
+        if (visibleMarkers.length > 0 && currentFilter !== 'all') {
+          var group = new L.featureGroup(visibleMarkers);
+          map.fitBounds(group.getBounds().pad(0.15));
+        } else if (currentFilter === 'all') {
+          map.setView([52.515, 13.405], 12);
+        }
+      }
+
+      var buttons = root.querySelectorAll('.bw-filter');
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          buttons.forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          currentFilter = btn.getAttribute('data-filter');
+          applyFilter();
+        });
+      });
+
+      setTimeout(function () { map.invalidateSize(); }, 200);
+    })();
+  </script>
+</div>
+</body>
+</html>
