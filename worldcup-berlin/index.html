@@ -58,7 +58,7 @@
 
     #bw-wc-berlin .bw-body { background: var(--bw-cream); padding: 16px 18px 20px; }
 
-    #bw-wc-berlin .bw-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+    #bw-wc-berlin .bw-filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
     #bw-wc-berlin .bw-filter {
       border: 1.5px solid var(--bw-border);
       background: var(--bw-white);
@@ -70,7 +70,24 @@
     #bw-wc-berlin .bw-filter:hover { border-color: var(--bw-lime); background: var(--bw-lime-soft); }
     #bw-wc-berlin .bw-filter.active { background: var(--bw-green); border-color: var(--bw-green); color: var(--bw-yellow); }
 
-    #bw-wc-berlin .bw-count { font-size: 11.5px; color: var(--bw-muted); font-weight: 700; margin: 10px 0 12px; }
+    #bw-wc-berlin .bw-map-container {
+      width: 100%; height: 350px; border-radius: 10px; overflow: hidden;
+      border: 1px solid var(--bw-border); background: #E8EEDC; margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    #bw-wc-berlin .bw-map { width: 100%; height: 100%; }
+    #bw-wc-berlin .leaflet-container { font-family: Montserrat, Arial, sans-serif; background: #E8EEDC; }
+    #bw-wc-berlin .leaflet-popup-content-wrapper { border-radius: 12px; padding: 0; box-shadow: 0 6px 20px rgba(0,0,0,0.15); border: 1px solid var(--bw-border); }
+    #bw-wc-berlin .leaflet-popup-content { margin: 0; width: 220px !important; }
+    #bw-wc-berlin .bw-popup-head { background: var(--bw-green); padding: 10px 14px; border-radius: 11px 11px 0 0; color: var(--bw-white); font-size: 14px; font-weight: 800; }
+    #bw-wc-berlin .bw-popup-body { padding: 12px 14px; font-size: 12px; color: var(--bw-text); }
+    #bw-wc-berlin .bw-popup-note { margin: 0 0 10px; line-height: 1.4; color: var(--bw-muted); }
+    #bw-wc-berlin .bw-popup-link { display: inline-flex; align-items: center; gap: 4px; padding: 6px 10px; background: var(--bw-yellow); color: var(--bw-green); font-weight: 800; font-size: 11px; text-decoration: none; border-radius: 8px; transition: background 0.15s ease; }
+    #bw-wc-berlin .bw-popup-link:hover { background: #FFEF33; }
+    #bw-wc-berlin .bw-marker { width: 30px; height: 30px; background: var(--bw-green); border: 3px solid var(--bw-yellow); border-radius: 50% 50% 50% 0; transform: rotate(-45deg); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+    #bw-wc-berlin .bw-marker-inner { transform: rotate(45deg); color: var(--bw-yellow); font-size: 12px; font-weight: 800; line-height: 1; }
+
+    #bw-wc-berlin .bw-count { font-size: 11.5px; color: var(--bw-muted); font-weight: 700; margin: 0 0 12px; }
     #bw-wc-berlin .bw-count b { color: var(--bw-green); }
 
     #bw-wc-berlin .bw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 11px; }
@@ -119,6 +136,8 @@
     }
   </style>
 
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
   <div class="bw-wrap">
     <div class="bw-head">
       <p class="bw-kicker">BerlinWalk &bull; World Cup 2026</p>
@@ -139,6 +158,10 @@
         <button class="bw-filter" data-f="latenight">Late-night OK</button>
       </div>
 
+      <div class="bw-map-container">
+        <div class="bw-map" id="bw-wc-map-canvas"></div>
+      </div>
+
       <p class="bw-count" id="bwCount"></p>
       <div class="bw-grid" id="bwGrid"></div>
 
@@ -148,117 +171,156 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
   (function () {
-    // tags: free, beergarden, water, latenight  |  feat = highlighted (official free flagship)
     var V = [
       { n: 'Center am Potsdamer Platz', hood: 'Mitte', feat: true,
         badges: [['FREE','free'], ['Shows all Germany games','de'], ['100 m² LED','plain']],
         tags: ['free'],
         desc: "The headline spot. Matches on the ~100 m² face of Germany's largest 3D LED wall, sheltered under the Center's roof. Ten games confirmed: all three Germany group matches, the opening game, both semi-finals and the final. Admission free.",
-        q: 'Center am Potsdamer Platz Berlin' },
+        lat: 52.5097, lng: 13.3765, q: 'Center am Potsdamer Platz Berlin' },
 
       { n: 'Neulich Beer Garden — Tempelhof', hood: 'Tempelhof',
         badges: [['Big screen','plain'], ['Beer garden','plain'], ['Street food','plain']],
         tags: ['beergarden','free'],
         desc: 'A public viewing party at the THF Tower on the former airport grounds: big screen, drinks, street food and a proper beer-garden atmosphere on Berlin’s most iconic open space.',
-        q: 'Neulich Biergarten THF Tower Tempelhof Berlin' },
+        lat: 52.4827, lng: 13.3857, q: 'Neulich Biergarten THF Tower Tempelhof Berlin' },
 
       { n: 'Beach Neukölln', hood: 'Neukölln',
         badges: [['City beach','plain'], ['Big screen','plain'], ['Street food','plain']],
         tags: ['water','beergarden'],
         desc: 'A city-beach venue turned screening spot, with live broadcasts and street food. Sand-under-your-feet football in the south of the city.',
-        q: 'Beach Neukölln Berlin' },
+        lat: 52.4810, lng: 13.4330, q: 'Beach Neukölln Berlin' },
 
       { n: 'Strandbad Wendenschloss', hood: 'Köpenick',
         badges: [['By the water','plain'], ['LED screen','plain'], ['Late games OK','plain']],
         tags: ['water','latenight'],
         desc: 'An LED screen set up in the open air right by the lake. Thanks to a special permit, even late kick-offs can be shown here, feet in the sand.',
-        q: 'Strandbad Wendenschloss Berlin' },
+        lat: 52.4180, lng: 13.5820, q: 'Strandbad Wendenschloss Berlin' },
 
       { n: 'BRLO Brwhouse', hood: 'Kreuzberg',
         badges: [['Craft beer','plain'], ['Beer garden','plain'], ['Gleisdreieck','plain']],
         tags: ['beergarden'],
         desc: 'Craft beer meets football in a big open-air setting at Gleisdreieck park. One of the most reliable summer screening venues in the centre.',
-        q: 'BRLO Brwhouse Gleisdreieck Berlin' },
+        lat: 52.5005, lng: 13.3764, q: 'BRLO Brwhouse Gleisdreieck Berlin' },
 
       { n: 'Golgatha Biergarten', hood: 'Kreuzberg',
         badges: [['Beer garden','plain'], ['Viktoriapark','plain']],
         tags: ['beergarden'],
         desc: 'A classic Berlin beer garden under the trees and fairy lights in Viktoriapark. Relaxed, green and very local.',
-        q: 'Golgatha Biergarten Viktoriapark Berlin' },
+        lat: 52.4885, lng: 13.3855, q: 'Golgatha Biergarten Viktoriapark Berlin' },
 
       { n: 'Kulturbrauerei', hood: 'Prenzlauer Berg',
         badges: [['36 m² LED','plain'], ['Indoor backup','plain'], ['BBQ','plain']],
         tags: ['latenight'],
         desc: 'A 36 m² LED screen in the historic brewery courtyard, with indoor space as a bad-weather backup and a barbecue. Central, atmospheric and good for later games.',
-        q: 'Kulturbrauerei Berlin' },
+        lat: 52.5390, lng: 13.4130, q: 'Kulturbrauerei Berlin' },
 
       { n: 'Maaya at RAW', hood: 'Friedrichshain',
         badges: [['Club vibe','plain'], ['Music after','plain']],
         tags: ['beergarden','latenight'],
         desc: 'A creative, slightly club-like spot on the RAW site: football first, then drinks and music. Good energy for the younger crowd and late kick-offs.',
-        q: 'Maaya RAW Gelände Berlin' },
+        lat: 52.5060, lng: 13.4540, q: 'Maaya RAW Gelände Berlin' },
 
       { n: 'Studio 14 — rbb Rooftop', hood: 'Westend',
         badges: [['Rooftop','plain'], ['City views','plain'], ['Commentary','plain']],
         tags: [],
         desc: 'A rooftop lounge on the public broadcaster’s building with panoramic city views, commentary, music and discussions around selected matches.',
-        q: 'rbb Studio 14 Masurenallee Berlin' },
+        lat: 52.5080, lng: 13.2760, q: 'rbb Studio 14 Masurenallee Berlin' },
 
       { n: 'Zollpackhof', hood: 'Wedding / Mitte',
         badges: [['Beer garden','plain'], ['Riverside','plain'], ['Chancellery view','plain']],
         tags: ['beergarden','water'],
         desc: 'A riverside beer garden with a view across the Spree to the Chancellery, a short walk from the main station. Classic Berlin summer atmosphere.',
-        q: 'Zollpackhof Berlin' },
+        lat: 52.5222, lng: 13.3644, q: 'Zollpackhof Berlin' },
 
       { n: 'Naumanns', hood: 'Schöneberg',
         badges: [['Free entry','free'], ['Beer garden','plain'], ['Long tables','plain']],
         tags: ['beergarden','free'],
         desc: 'A traditional beer garden with long shared tables and a relaxed, conversational crowd. Planning to show matches with free entry.',
-        q: 'Naumanns Biergarten Schöneberg Berlin' },
+        lat: 52.4830, lng: 13.3620, q: 'Naumanns Biergarten Schöneberg Berlin' },
 
       { n: 'Freiheit Fünfzehn', hood: 'Köpenick',
         badges: [['Riverside','plain'], ['Beer garden','plain']],
         tags: ['beergarden','water'],
         desc: 'A laid-back riverside beer garden along the Müggelspree in the leafy south-east. Worth it if you want football away from the crowds.',
-        q: 'Freiheit Fünfzehn Köpenick Berlin' },
+        lat: 52.4450, lng: 13.5730, q: 'Freiheit Fünfzehn Köpenick Berlin' },
 
       { n: '11 Freunde Quartier at Astra Kulturhaus', hood: 'Friedrichshain',
         badges: [['Free entry','free'], ['18:00 - 00:00','plain']],
         tags: ['latenight','free'],
         desc: 'A massive football culture hub at the RAW grounds. They show matches kicking off between 18:00 and midnight. Free entry, but arrive early for Germany games.',
-        q: 'Astra Kulturhaus Berlin' },
+        lat: 52.5067, lng: 13.4560, q: 'Astra Kulturhaus Berlin' },
 
       { n: 'Belushi’s', hood: 'Mitte',
         badges: [['Sports bar','plain'], ['Late games OK','plain']],
         tags: ['latenight'],
         desc: 'The go-to international sports bar near Rosa-Luxemburg-Platz. It guarantees a loud, passionate crowd and late-night hours for those early morning kick-offs.',
-        q: 'Belushis Mitte Berlin' },
+        lat: 52.5270, lng: 13.4090, q: 'Belushis Mitte Berlin' },
 
       { n: 'FC Magnet Bar', hood: 'Mitte',
         badges: [['Football pub','plain'], ['Authentic','plain']],
         tags: [],
         desc: 'A legendary, authentic football "Kneipe" experience in the heart of the city.',
-        q: 'FC Magnet Bar Berlin' },
+        lat: 52.5300, lng: 13.4020, q: 'FC Magnet Bar Berlin' },
 
       { n: 'Hofbräu Wirtshaus', hood: 'Mitte',
         badges: [['Bavarian beer','plain'], ['Big screen','plain']],
         tags: ['beergarden'],
         desc: 'For a true stadium-like atmosphere with giant screens, Bavarian beer, and huge crowds (especially for Germany matches).',
-        q: 'Hofbrau Wirtshaus Berlin' },
+        lat: 52.5220, lng: 13.4130, q: 'Hofbrau Wirtshaus Berlin' },
 
       { n: 'Mauersegler', hood: 'Prenzlauer Berg',
         badges: [['Beer garden','plain'], ['Mauerpark','plain']],
         tags: ['beergarden'],
         desc: 'A classic beer garden next to Mauerpark, perfect for a relaxed outdoor viewing experience.',
-        q: 'Mauersegler Berlin' }
+        lat: 52.5400, lng: 13.4020, q: 'Mauersegler Berlin' }
     ];
 
     var gridEl = document.getElementById('bwGrid');
     var countEl = document.getElementById('bwCount');
     var filtersEl = document.getElementById('bwFilters');
     var current = 'all';
+    
+    // Map init
+    var mapEl = document.getElementById('bw-wc-map-canvas');
+    var map = L.map(mapEl, {
+      center: [52.505, 13.405],
+      zoom: 11,
+      scrollWheelZoom: false,
+      tap: true
+    });
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 18
+    }).addTo(map);
+
+    map.once('click', function () { map.scrollWheelZoom.enable(); });
+
+    function createMarkerIcon() {
+      var html = '<div class="bw-marker"><div class="bw-marker-inner">⚽</div></div>';
+      return L.divIcon({ className: 'bw-marker-wrap', html: html, iconSize: [30, 30], iconAnchor: [15, 30], popupAnchor: [0, -30] });
+    }
+
+    var markers = [];
+
+    V.forEach(function (loc) {
+      if (!loc.lat || !loc.lng) return;
+      var popupHTML = '<div class="bw-popup-head">' + loc.n + '</div>' +
+        '<div class="bw-popup-body">' +
+        '<p class="bw-popup-note">' + loc.hood + '</p>' +
+        '<a href="https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(loc.q) + '" target="_blank" rel="noopener" class="bw-popup-link">Open in Maps →</a>' +
+        '</div>';
+      
+      var marker = L.marker([loc.lat, loc.lng], { icon: createMarkerIcon() })
+        .bindPopup(popupHTML, { closeButton: true, className: 'bw-popup-wrapper' });
+      
+      marker.addTo(map);
+      marker._tags = loc.tags;
+      markers.push(marker);
+    });
 
     function visible() {
       if (current === 'all') return V;
@@ -288,6 +350,25 @@
       var labels = { all: 'public-viewing spots across Berlin', free: 'spots with free entry',
         beergarden: 'beer gardens', water: 'spots by the water', latenight: 'spots good for late kick-offs' };
       countEl.innerHTML = 'Showing <b>' + rows.length + '</b> &middot; ' + (labels[current] || '');
+
+      // Update Map
+      var visibleMarkers = [];
+      markers.forEach(function (m) {
+        var show = current === 'all' || m._tags.indexOf(current) !== -1;
+        if (show) {
+          if (!map.hasLayer(m)) m.addTo(map);
+          visibleMarkers.push(m);
+        } else {
+          if (map.hasLayer(m)) map.removeLayer(m);
+        }
+      });
+
+      if (visibleMarkers.length > 0 && current !== 'all') {
+        var group = new L.featureGroup(visibleMarkers);
+        map.fitBounds(group.getBounds().pad(0.15));
+      } else if (current === 'all') {
+        map.setView([52.505, 13.405], 11);
+      }
     }
 
     filtersEl.addEventListener('click', function (e) {
@@ -301,6 +382,7 @@
     });
 
     render();
+    setTimeout(function () { map.invalidateSize(); }, 200);
   })();
   </script>
 </div>

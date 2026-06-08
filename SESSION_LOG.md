@@ -2,6 +2,18 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-08 — Antigravity (World Cup interactive map)
+
+**Did:**
+- Added an interactive Leaflet map to the `worldcup-berlin` widget.
+- Bound map filtering to the existing UI buttons (Free entry, Beer garden, etc.).
+- Removed the "reality check" intro paragraph from the World Cup blog draft.
+
+**Changed:**
+- `worldcup-berlin/index.html` — added map UI, Leaflet.js, and coordinate data.
+- `blog-drafts/where-to-watch-2026-world-cup-in-berlin.md` — removed intro paragraph.
+- Wix: updated and published the live post via API.
+
 ## 2026-06-08 — Antigravity (World Cup venues update)
 
 **Did:**

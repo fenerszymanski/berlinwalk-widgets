@@ -38,12 +38,6 @@ Here is the honest part most guides will not tell you up front: **there is no gi
 
 {{quick-summary}}
 
-## First, the reality check: the Cup is in North America
-
-Let's clear this up, because a lot of visitors arrive confused. **Berlin is not a host city**. No 2026 World Cup match is played in Germany at all. The tournament is shared between 16 cities across the United States, Mexico and Canada, kicking off with Mexico against South Africa on 11 June and ending with the final in New York on 19 July.
-
-What Berlin does have is a long, emotional public viewing tradition. And this year that tradition is changing shape.
-
 ## Why there is no Brandenburg Gate fan mile this year
 
 For the first time since the legendary 2006 "Sommermärchen," **Berlin has skipped its famous Fanmeile on Straße des 17. Juni**, the 72,000 square metre stretch that once packed in up to 70,000 fans for a Germany match. The city pointed to the high security cost and the awkward, late North American kick-off times, and in the end no organiser even submitted an application.
