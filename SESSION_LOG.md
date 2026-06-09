@@ -2,6 +2,42 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-09 — Codex (Späti Survival Checker)
+
+**Did:**
+- Built the post-only `Späti Survival Checker` widget for the Späti article.
+- Added the widget placeholder and GitHub Pages URL to the Späti draft's widget plan.
+- Recorded the widget in the workplan and root project memory.
+- Ran local QA: inline script/JSON/diff checks plus Chrome CDP desktop/mobile screenshots; 390px mobile had no horizontal overflow.
+
+**Changed:**
+- `spati-survival-checker/index.html` — new standalone widget with time/need/payment inputs, decision result, practical next steps, and related BerlinWalk links.
+- `blog-drafts/what-is-a-spati-berlin.md` — added `{{widget:spati-survival-checker}}` after "The Short Answer".
+- `blog-workplan.md`, `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — updated handoff state.
+- `../output/qa/spati-survival-checker-20260609/` — saved desktop/mobile QA screenshots.
+
+**Opened:** No Wix draft exists yet; repo must be pushed before GitHub Pages serves `/spati-survival-checker/`.
+**Closed:** The Späti article now has a dedicated practical widget idea implemented locally.
+
+**Next session should:** Push the repo, then create the Wix draft with Quick Summary, Späti Survival Checker, and FAQ embeds; QA auto-resize or use fixed iframe height around 740 px desktop / 1620 px narrow mobile.
+
+## 2026-06-09 — Codex (Späti blog draft)
+
+**Did:**
+- Created a local v1 blog draft for `What Is a Späti? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips`.
+- Wired `spati-berlin` Quick Summary, FAQ data, and FAQPage schema mapping.
+- Updated the blog workplan from idea to draft status.
+
+**Changed:**
+- `blog-drafts/what-is-a-spati-berlin.md` — new English draft with SEO metadata, internal links, source notes, and no standalone widget requirement.
+- `quick-summary/data.json`, `faq/data.json`, `faq/inject.js` — added `spati-berlin` support.
+- `blog-workplan.md`, `../PROJECT_MEMORY.md` — recorded draft state and next publishing context.
+
+**Opened:** No Wix draft exists yet; next step is review/cover image, then create a Wix Blog draft if Yusuf approves.
+**Closed:** Späti gap in the local blog queue is now covered by a publishable v1 draft.
+
+**Next session should:** If Yusuf likes the angle, create the Wix draft with `qsKey=spati-berlin` and `faqKey=spati-berlin`, then QA preview before publishing.
+
 ## 2026-06-09 — Codex (Footer social links)
 
 **Did:**

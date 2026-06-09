@@ -55,7 +55,9 @@
   "festival-of-lights-berlin-2026": "festival-of-lights-berlin-2026",
   "berlin-pride-csd-2026": "berlin-pride-csd-2026",
   "berlin-beer-gardens-guide": "berlin-beer-gardens-guide",
-  "best-christmas-markets-berlin-2026": "best-christmas-markets-berlin-2026"
+  "best-christmas-markets-berlin-2026": "best-christmas-markets-berlin-2026",
+  "what-is-a-spati-berlin": "spati-berlin",
+  "spati-berlin": "spati-berlin"
 };
 
   var SCHEMAS = {
@@ -2539,6 +2541,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "When you buy a hot drink (like Glühwein), you pay a deposit (Pfand) of **€3 to €5** for the ceramic mug. When you return the empty mug to the stall, you get your deposit back. If you prefer to keep the mug as a unique, cheap souvenir of your trip, you can simply keep it and forfeit the deposit."
+        }
+      }
+    ]
+  },
+  "spati-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Späti in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Späti is Berlin's late-night corner shop. The full word is **Spätkauf**, meaning roughly \"late purchase\". Spätis usually sell drinks, snacks, cigarettes, basic groceries and small emergency items, but they are also neighborhood meeting points."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Spätis open on Sundays in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some are, but do not treat every Späti as a guaranteed Sunday shop. Berlin's rules allow certain tourist supplies and goods for immediate consumption to be sold on Sundays and public holidays from **1 PM to 8 PM**, and special product ranges such as bakery goods, milk, flowers, newspapers and magazines from **7 AM to 4 PM**. Mixed-assortment Spätis can be legally complicated, so train-station and airport shops are safer for real grocery needs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need cash at a Späti?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, carry cash. Many Spätis now accept cards, but small late-night purchases can still be cash-first, card-minimum, or limited to certain card types. A few 5 or 10 euro notes and some coins make Berlin easier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Pfand mean at a Späti?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pfand is the German bottle deposit. Many cans and single-use plastic bottles have a **25 cent** deposit, while many reusable glass bottles have a smaller deposit. Return the bottle or can where accepted, or place it neatly beside a public bin so a collector can take it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you drink beer outside a Späti?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You will often see people drinking a Späti beer outside, but use judgment. Keep the doorway clear, stay quiet late at night, do not leave bottles behind, and remember that people live above many of these shops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a Späti cheaper than a supermarket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually no. A Späti is often cheaper than a bar, but more expensive than a supermarket. Use it for late, small, practical purchases, not for a full grocery shop."
         }
       }
     ]

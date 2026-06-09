@@ -136,18 +136,9 @@
       '.bw-blog-sidebar-share-label{color:#6A746A;font-size:12px;font-weight:700;margin-right:0;}',
       '.bw-blog-sidebar-share a,.bw-blog-sidebar-share button{align-items:center;background:#FFFFFF;border:1px solid rgba(27,94,32,.14);border-radius:7px;color:#1B5E20;cursor:pointer;display:inline-flex;font:700 11px/1 Montserrat,Arial,sans-serif;height:30px;justify-content:center;min-width:30px;padding:0 8px;text-decoration:none;}',
       '.bw-blog-sidebar-share a:hover,.bw-blog-sidebar-share button:hover{background:#FFE600;border-color:#FFE600;}',
-      'html body #bw-desktop-cta{left:14px!important;right:auto!important;bottom:14px!important;z-index:8000!important;transform:none!important;}',
-      'html body #bw-desktop-cta .bw-pill,html body #bw-desktop-cta .bw-pill-planner{width:140px!important;min-height:56px!important;padding:3px!important;}',
-      'html body #bw-desktop-cta .bw-pill{margin-top:6px!important;}',
-      'html body #bw-desktop-cta .bw-link,html body #bw-desktop-cta .bw-link-planner{gap:6px!important;min-height:50px!important;padding:7px 30px 7px 9px!important;}',
-      'html body #bw-desktop-cta .bw-emoji{font-size:13px!important;}',
-      'html body #bw-desktop-cta .bw-label-small,html body #bw-desktop-cta .bw-label-small-planner{font-size:7.5px!important;letter-spacing:.8px!important;line-height:1!important;}',
-      'html body #bw-desktop-cta .bw-label-big,html body #bw-desktop-cta .bw-label-big-planner{font-size:10.5px!important;line-height:1.12!important;}',
-      'body #bw-sticky-cta .bw-btn{font-size:12px!important;padding:9px 13px!important;}',
-      'body #bw-sticky-cta .bw-title{font-size:12px!important;}',
-      'body #bw-sticky-cta .bw-sub{display:none!important;}',
-      'html body #bw-desktop-cta .bw-arrow,html body #bw-desktop-cta .bw-arrow-planner{width:22px!important;height:22px!important;right:8px!important;font-size:11px!important;margin:0!important;}',
-      'html body #bw-desktop-cta .bw-close{top:-5px!important;right:-5px!important;width:18px!important;height:18px!important;font-size:12px!important;}',
+      /* The sticky CTA (#bw-desktop-cta / #bw-sticky-cta) is now owned entirely by the
+         "Sticky CTA Color Polish" Wix embed; this sidebar script no longer styles it to
+         avoid an equal-specificity conflict with the unified card design. */
       '@media (max-width:899px){.bw-blog-sidebar{display:none!important;}}'
     ].join('\n');
     document.head.appendChild(style);

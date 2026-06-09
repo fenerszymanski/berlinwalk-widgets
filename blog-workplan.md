@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-06-08 (Checked against live sitemap)
+Last updated: 2026-06-09 (Späti draft/widget added; sitemap last checked 2026-06-08)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -34,7 +34,7 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
-| 0 | Idea (search-trends) | What Is a Spati? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips | Tourist-friction explainer connecting Spati culture, Sunday closures, cash habits, late-night basics, and survival advice. |
+| 0 | Draft v1 | What Is a Späti? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips | Tourist-friction explainer connecting Späti culture, Sunday closures, cash habits, late-night basics, Pfand, etiquette, and survival advice. Local draft at `blog-drafts/what-is-a-spati-berlin.md`; post-only widget at `spati-survival-checker/`. |
 | 1 | Draft v1 | Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers | Practical first-timer vegan guide with map widget at vegan-berlin-map/index.html. Local draft at blog-drafts/vegan-berlin-guide-2026.md. |
 | 0 | Idea (search-trends) | Berlin by Foot: Best Walkable Areas for First-Time Visitors | Turn walking/strolling search intent into BerlinWalk route logic and conversion path. |
 | 0 | Refresh/Idea (search-trends) | If Reichstag Dome Is Sold Out: What to Do Instead | Major Reichstag refresh or child post covering scarcity, ID/registration rules, Kafer workaround, alternate viewpoints, and nearby route links. |
@@ -81,6 +81,8 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 - `blog-drafts/where-to-park-in-berlin-alexanderplatz-2026.md`
 - `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md`
 - `blog-drafts/vegan-berlin-guide-2026.md`
+- `blog-drafts/what-is-a-spati-berlin.md`
+- `spati-survival-checker/`
 - `vegan-berlin-map/`
 - `free-museums-map/`
 - `free-museums-compare/`
