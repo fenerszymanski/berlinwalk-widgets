@@ -12,11 +12,31 @@ const BW_SITE_FOOTER_LINKS = {
   tools: 'https://www.berlinwalk.com/berlin-tools',
   widgets: 'https://www.berlinwalk.com/widgets',
   instagram: 'https://www.instagram.com/berlinwalkingtour/',
+  facebook: 'https://www.facebook.com/berlinwalkingtour',
+  tiktok: 'https://www.tiktok.com/@berlinwalkingtour',
   transport: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   stay: 'https://www.berlinwalk.com/post/where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
   bestTime: 'https://www.berlinwalk.com/post/what-s-the-best-time-to-visit-berlin-a-month-by-month-guide',
   airport: 'https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way'
 };
+
+const BW_SITE_FOOTER_SOCIAL_LINKS = [
+  {
+    label: 'Instagram',
+    href: BW_SITE_FOOTER_LINKS.instagram,
+    icon: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"></rect><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"></circle><circle cx="17.5" cy="6.5" r="1.35" fill="currentColor"></circle></svg>'
+  },
+  {
+    label: 'Facebook',
+    href: BW_SITE_FOOTER_LINKS.facebook,
+    icon: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14.2 8.1h2.7V4.4c-.5-.1-2-.2-3.6-.2-3.5 0-5.8 2.1-5.8 6v3.1H4v4.1h3.5V24h4.3v-6.6h3.5l.6-4.1h-4.1v-2.7c0-1.1.3-2.5 2.4-2.5z"></path></svg>'
+  },
+  {
+    label: 'TikTok',
+    href: BW_SITE_FOOTER_LINKS.tiktok,
+    icon: '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M16.5 4.2c.4 1.5 1.6 2.8 3.5 3v3.5c-1.3 0-2.5-.3-3.5-1v5.4c0 3.2-2.2 5.4-5.4 5.4-2.8 0-5.1-2-5.1-4.8s2.3-4.8 5.1-4.8c.4 0 .8.1 1.1.2v3.6c-.3-.2-.7-.3-1.1-.3-1 0-1.8.7-1.8 1.7s.8 1.7 1.8 1.7c1.2 0 2-.8 2-2.4V4.2h3.4z"></path></svg>'
+  }
+];
 
 class BWSiteFooterElement extends HTMLElement {
   connectedCallback() {
@@ -126,6 +146,58 @@ class BWSiteFooterElement extends HTMLElement {
           gap: 12px;
           max-width: 430px;
           padding: 16px;
+        }
+
+        .bw-site-footer .bw-social-follow {
+          align-items: flex-start;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          margin: -4px 0 22px;
+          max-width: 430px;
+        }
+
+        .bw-site-footer .bw-social-label {
+          color: var(--yellow);
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 1px;
+          line-height: 1;
+          text-transform: uppercase;
+        }
+
+        .bw-site-footer .bw-social-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+
+        .bw-site-footer .bw-social-link {
+          align-items: center;
+          background: rgba(250, 250, 245, 0.06);
+          border: 1px solid rgba(197, 225, 165, 0.34);
+          border-radius: 999px;
+          color: var(--cream);
+          display: inline-flex;
+          height: 40px;
+          justify-content: center;
+          text-decoration: none;
+          transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+          width: 40px;
+        }
+
+        .bw-site-footer .bw-social-link:hover,
+        .bw-site-footer .bw-social-link:focus-visible {
+          background: var(--yellow);
+          border-color: var(--yellow);
+          color: var(--green-dark);
+          transform: translateY(-2px);
+        }
+
+        .bw-site-footer .bw-social-link svg {
+          display: block;
+          height: 18px;
+          width: 18px;
         }
 
         .bw-site-footer .bw-route-line {
@@ -330,6 +402,7 @@ class BWSiteFooterElement extends HTMLElement {
                 <img class="bw-logo-img" src="${BW_SITE_FOOTER_LOGO_URL}" alt="BerlinWalk" loading="lazy" decoding="async">
               </a>
               <p>Free tip-based walking tours through Berlin's historic centre, built for travellers who want the city to make sense while they are standing inside it.</p>
+              ${this._renderSocialLinks()}
               <div class="bw-route-chip" aria-label="BerlinWalk route summary">
                 <div class="bw-route-line" aria-hidden="true">
                   <span class="bw-route-dot"></span>
@@ -403,6 +476,21 @@ class BWSiteFooterElement extends HTMLElement {
             return '<li><a href="' + this._escapeAttribute(href) + '">' + labelHtml + '</a></li>';
           }).join('')}
         </ul>
+      </nav>
+    `;
+  }
+
+  _renderSocialLinks() {
+    return `
+      <nav class="bw-social-follow" aria-label="Follow BerlinWalk on social media">
+        <span class="bw-social-label">Follow me</span>
+        <div class="bw-social-list">
+          ${BW_SITE_FOOTER_SOCIAL_LINKS.map((link) => `
+            <a class="bw-social-link" href="${this._escapeAttribute(link.href)}" target="_blank" rel="noopener noreferrer" aria-label="${this._escapeAttribute(link.label)}">
+              ${link.icon}
+            </a>
+          `).join('')}
+        </div>
       </nav>
     `;
   }

@@ -2,6 +2,24 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-09 — Codex (Footer social links)
+
+**Did:**
+- Added a `Follow me` social icon row to the global site footer for Instagram, Facebook, and TikTok.
+- Created a duplicate-safe live Wix Custom Embed patch so the icons are visible before GitHub Pages receives the source update.
+- Verified live homepage and local footer preview at desktop/mobile widths with no horizontal overflow.
+
+**Changed:**
+- `site-footer/site-footer-element.js` — added social URLs, inline SVG icons, styles, and footer brand-column render helper.
+- `../berlinwalk-footer-social-links.html`, `../scripts/update-footer-social-links-embed.mjs` — live Wix patch source/updater.
+- `../PROJECT_MEMORY.md` — recorded footer social state and Custom Embed ID.
+- Wix: created `BerlinWalk Footer Social Links` (`57ef17ae-2f85-468a-9967-fd11227bef77`, revision 1).
+
+**Opened:** Push `berlinwalk-widgets` so the footer source deploys durably; live patch prevents duplicates if it remains enabled after deploy.
+**Closed:** Live footer now includes Instagram/Facebook/TikTok icon links under `Follow me`.
+
+**Next session should:** After push/GitHub Pages deploy, verify the footer still has one `.bw-social-follow` block; disable the live patch only if Yusuf wants fewer temporary embeds.
+
 ## 2026-06-08 — Codex (Vegan blog/tool promotion)
 
 **Did:**
