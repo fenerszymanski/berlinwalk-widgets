@@ -2,6 +2,23 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-11 — Codex (Blog booking teaser live-ready)
+
+**Did:**
+- Reverted the accidental Ultimate Trip Planner cleanup commit; live GitHub Pages re-served the restored planner file after cache propagation.
+- QA'd the compact blog booking teaser against the live 1237 post DOM, fixed the first-date text color conflict from blog CSS, and switched the teaser to default-on for `/post/*` with an emergency disable flag.
+
+**Changed:**
+- `js/lead-form-inject.js` — enables the compact 5-date booking teaser on blog posts by default; `?bwBlogBooking=0` or `window.BW_DISABLE_BLOG_BOOKING = true` disables it; fallback CTA now gets UTM tracking.
+- `README.md` — documented the helper as a compact booking teaser, not a full calendar embed.
+
+**QA:** `node --check js/lead-form-inject.js`; Playwright live-DOM QA with local next script on `https://www.berlinwalk.com/post/why-is-berlin-founding-year-1237`: desktop + 430px mobile card render, 5 dates, no guest/attendee params, no custom calendar/old Survival iframe, no horizontal overflow, disable param hides the card, mobile date + CTA trial clicks pass.
+
+**Opened:** Push/deploy this commit, wait for GitHub Pages, then cold-load one live `/post/*` without `?bwBlogBooking=1` and confirm the card appears.
+**Closed:** Broken live heavy calendar path and accidental Ultimate cleanup are both resolved.
+
+**Next session should:** After push, live-check one post desktop/mobile and keep `?bwBlogBooking=0` as the emergency kill switch if needed.
+
 ## 2026-06-10 — Codex (Blog booking teaser hidden live, compact local rebuild)
 
 **Did:**

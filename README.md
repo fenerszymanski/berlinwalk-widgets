@@ -159,7 +159,7 @@ Suggested Wix embed height for quick summaries:
 
 These are loaded through Wix Custom Code rather than iframe embeds:
 
-- `js/lead-form-inject.js` - injects the live BerlinWalk booking calendar mid-post. Guests choose attendee count on the native Wix booking step.
+- `js/lead-form-inject.js` - injects a compact BerlinWalk booking teaser mid-post. It shows live date buttons and sends guests to the native Wix booking step, where attendee count is chosen.
 - `js/cta-inject.js` - deprecated no-op shim that removes old global tour CTA banners if an old Wix Custom Code URL still loads it.
 - `js/blog-sidebar-inject.js` - builds a desktop-only sticky "On this page"
   sidebar from visible H2/H3 headings and puts a compact `Blog Home` /

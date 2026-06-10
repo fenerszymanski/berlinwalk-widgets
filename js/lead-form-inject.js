@@ -1,13 +1,17 @@
-/* lead-form-inject.js — optional blog-post BerlinWalk booking teaser.
+/* lead-form-inject.js — blog-post BerlinWalk booking teaser.
  *
- * Live safety: disabled by default after the 2026-06-10 blog layout issue.
- * Test locally or on a cache-busted live post with:
- *   ?bwBlogBooking=1
+ * Live safety: enabled on /post/* pages. Disable temporarily with:
+ *   ?bwBlogBooking=0
  * or set before loading this script:
- *   window.BW_ENABLE_BLOG_BOOKING = true
+ *   window.BW_DISABLE_BLOG_BOOKING = true
  */
 (function () {
-  var ENABLED = window.BW_ENABLE_BLOG_BOOKING === true || /[?&]bwBlogBooking=1(?:&|$)/.test(location.search);
+  var DISABLED = window.BW_DISABLE_BLOG_BOOKING === true || /[?&]bwBlogBooking=0(?:&|$)/.test(location.search);
+  var ENABLED = !DISABLED && (
+    location.pathname.indexOf('/post/') === 0 ||
+    window.BW_ENABLE_BLOG_BOOKING === true ||
+    /[?&]bwBlogBooking=1(?:&|$)/.test(location.search)
+  );
   if (!ENABLED) return;
 
   var AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=120&guests=1';
@@ -102,7 +106,9 @@
       '.bw-blog-booking-note{display:block;margin:8px 0 0;background:#F8FBF4;border-left:3px solid #FFE600;border-radius:5px;color:#1B5E20;font-size:11px;font-weight:900;line-height:1.25;padding:8px 10px;text-transform:uppercase;}',
       '.bw-blog-booking-dates{display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr));padding:12px;min-width:0;}',
       '.bw-blog-booking-date{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:10px;color:#1B5E20;display:grid;gap:2px;justify-items:center;min-height:76px;padding:8px 6px;text-align:center;text-decoration:none;}',
-      '.bw-blog-booking-date:first-child{background:#1B5E20;border-color:#1B5E20;color:#fff;}',
+      '.bw-blog-booking-date:first-child{background:#1B5E20;border-color:#1B5E20;color:#fff!important;}',
+      '.bw-blog-booking-date span,.bw-blog-booking-date b,.bw-blog-booking-date small{color:inherit!important;}',
+      'body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child span,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child b,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child small{color:#fff!important;}',
       '.bw-blog-booking-date span{font-size:11px;font-weight:900;line-height:1;text-transform:uppercase;}',
       '.bw-blog-booking-date b{font-size:24px;font-weight:900;line-height:1;}',
       '.bw-blog-booking-date small{font-size:11px;font-weight:800;line-height:1.1;}',
@@ -247,7 +253,7 @@
       '      </div>',
       '      <div class="bw-blog-booking-cta">',
       '        <span>You will choose the number of guests on the booking page.</span>',
-      '        <a href="' + BOOKING_URL + '" target="_top">Open booking page</a>',
+      '        <a href="' + escapeHtml(bookingHref()) + '" target="_top">Open booking page</a>',
       '      </div>',
       '    </div>',
       '  </div>',
