@@ -6,40 +6,40 @@ Do not create booked-path planner templates here; the existing booking email seq
 
 For each item: create template -> paste name -> subject -> preheader -> HTML body -> save -> paste editor URL/message ID into copy-kit.html.
 
-1. Ultimate Planner - Prep - Instant Plan
-   Branch/stage: prep.instant
+1. Ultimate Planner - Sales - Instant Plan
+   Branch/stage: sales.instant
    Placeholder: TODO_TRIP_PLANNER_INSTANT
    Subject: 🗺️ Your Berlin plan is ready
    Preheader: A calm start for your Berlin prep.
    HTML file: e0-instant-plan.html
    Wix editor URL / message ID:
 
-2. Ultimate Planner - Prep - 7 Days Before
-   Branch/stage: prep.minus7
+2. Ultimate Planner - Sales - 7 Days Before
+   Branch/stage: sales.minus7
    Placeholder: TODO_TRIP_PLANNER_MINUS_7
    Subject: 🧳 One week before Berlin
-   Preheader: Check the few things that need slots. Leave the rest flexible.
+   Preheader: Book the few things that need slots. Leave the rest flexible.
    HTML file: e1-seven-days-before.html
    Wix editor URL / message ID:
 
-3. Ultimate Planner - Prep - 3 Days Before
-   Branch/stage: prep.minus3
+3. Ultimate Planner - Sales - 3 Days Before
+   Branch/stage: sales.minus3
    Placeholder: TODO_TRIP_PLANNER_MINUS_3
    Subject: 🎫 Berlin tickets and opening days
    Preheader: A few boring checks that make arrival much easier.
    HTML file: e2-three-days-before.html
    Wix editor URL / message ID:
 
-4. Ultimate Planner - Prep - 1 Day Before
-   Branch/stage: prep.minus1
+4. Ultimate Planner - Sales - 1 Day Before
+   Branch/stage: sales.minus1
    Placeholder: TODO_TRIP_PLANNER_MINUS_1
    Subject: 🌦️ Berlin tomorrow
    Preheader: Weather, shoes, meeting point, and the first-day rule.
    HTML file: e3-one-day-before.html
    Wix editor URL / message ID:
 
-5. Ultimate Planner - Prep - Arrival Day
-   Branch/stage: prep.dayOf
+5. Ultimate Planner - Sales - Arrival Day
+   Branch/stage: sales.dayOf
    Placeholder: TODO_TRIP_PLANNER_DAY_OF
    Subject: 👋 Welcome to Berlin
    Preheader: Reach your base, eat something, and keep the first day easy.

@@ -39,42 +39,29 @@ function unique(values) {
   return [...new Set(values)].sort();
 }
 
-function latestJsonIn(relativeDir, pattern, predicate = null) {
+function latestJsonIn(relativeDir, pattern) {
   const dir = repoPath(relativeDir);
   if (!fs.existsSync(dir)) return null;
 
   const files = fs.readdirSync(dir)
     .filter((name) => pattern.test(name))
-    .map((name) => {
-      const filePath = path.join(dir, name);
-      try {
-        const json = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-        if (predicate && !predicate(json)) return null;
-        const generatedAt = json?.generatedAt ? Date.parse(json.generatedAt) : NaN;
-        return {
-          filePath,
-          relative: relative(filePath),
-          json,
-          generatedAt: Number.isFinite(generatedAt) ? generatedAt : 0
-        };
-      } catch {
-        return null;
-      }
-    })
-    .filter(Boolean)
-    .sort((a, b) => {
-      if (b.generatedAt !== a.generatedAt) return b.generatedAt - a.generatedAt;
-      return b.filePath.localeCompare(a.filePath);
-    });
+    .sort()
+    .reverse();
 
-  if (!files.length) return null;
+  for (const name of files) {
+    const filePath = path.join(dir, name);
+    try {
+      return {
+        filePath,
+        relative: relative(filePath),
+        json: JSON.parse(fs.readFileSync(filePath, 'utf8'))
+      };
+    } catch {
+      // Keep scanning older evidence.
+    }
+  }
 
-  const first = files[0];
-  return {
-    filePath: first.filePath,
-    relative: first.relative,
-    json: first.json
-  };
+  return null;
 }
 
 function latestLiveSmoke() {
@@ -87,14 +74,14 @@ function latestLiveSmoke() {
 }
 
 function latestAiSmoke() {
-  const latest = latestJsonIn('output/qa/ultimate-trip-planner-live-smoke', /^live-.*\.json$/, (json) => {
-    return json?.mode === 'live' &&
-      json?.responses?.ai?.ok === true &&
-      json?.responses?.ai?.body?.ok === true &&
-      json?.responses?.ai?.body?.enhancement;
-  });
+  const latest = latestJsonIn('output/qa/ultimate-trip-planner-live-smoke', /^live-.*\.json$/);
   if (!latest) return null;
-  return latest;
+  const result = latest.json;
+  const aiOk = result?.mode === 'live' &&
+    result?.responses?.ai?.ok === true &&
+    result?.responses?.ai?.body?.ok === true &&
+    result?.responses?.ai?.body?.enhancement;
+  return aiOk ? latest : null;
 }
 
 function aiCostSummary(aiSmoke) {

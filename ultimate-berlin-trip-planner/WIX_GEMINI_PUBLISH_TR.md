@@ -101,7 +101,7 @@ Beklenen:
 - Lead kaydi olusur.
 - Instant plan email gelir.
 - AI paneli fail-soft kalir: hata olursa deterministic plan/PDF/print yine acik.
-- Booking smoke future Ultimate planner reminder'larini suppress eder.
+- Booking smoke future Ultimate sales reminder'larini suppress eder.
 
 ## 5. Public Release Ayri
 

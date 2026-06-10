@@ -15,7 +15,7 @@ const EMAILS = [
   {
     source: 'e0-instant-plan.md',
     output: 'e0-instant-plan.html',
-    path: 'prep',
+    path: 'sales',
     stage: 'instant',
     placeholder: 'TODO_TRIP_PLANNER_INSTANT',
     eyebrow: 'Your plan'
@@ -23,7 +23,7 @@ const EMAILS = [
   {
     source: 'e1-seven-days-before.md',
     output: 'e1-seven-days-before.html',
-    path: 'prep',
+    path: 'sales',
     stage: 'minus7',
     placeholder: 'TODO_TRIP_PLANNER_MINUS_7',
     eyebrow: 'One week before'
@@ -31,7 +31,7 @@ const EMAILS = [
   {
     source: 'e2-three-days-before.md',
     output: 'e2-three-days-before.html',
-    path: 'prep',
+    path: 'sales',
     stage: 'minus3',
     placeholder: 'TODO_TRIP_PLANNER_MINUS_3',
     eyebrow: 'Three days before'
@@ -39,7 +39,7 @@ const EMAILS = [
   {
     source: 'e3-one-day-before.md',
     output: 'e3-one-day-before.html',
-    path: 'prep',
+    path: 'sales',
     stage: 'minus1',
     placeholder: 'TODO_TRIP_PLANNER_MINUS_1',
     eyebrow: 'Tomorrow'
@@ -47,7 +47,7 @@ const EMAILS = [
   {
     source: 'e4-arrival-day.md',
     output: 'e4-arrival-day.html',
-    path: 'prep',
+    path: 'sales',
     stage: 'dayOf',
     placeholder: 'TODO_TRIP_PLANNER_DAY_OF',
     eyebrow: 'Arrival day'
@@ -56,6 +56,7 @@ const EMAILS = [
 
 const LINK_LABELS = {
   planUrl: 'Open your Berlin plan',
+  bookingUrl: 'Book the free walking tour',
   meetingPointUrl: 'Open the World Clock meeting point',
   firstDayPlannerUrl: 'Open the First-Day Planner',
   ticketCalculatorUrl: 'Open the ticket calculator',
@@ -386,7 +387,7 @@ ${rows}
 - HTML is table-based with inline CSS only.
 - No \`<style>\`, \`<script>\`, \`<svg>\`, or external font tags are used.
 - Wix variables keep the \`\${var_name}\` syntax expected by Velo Triggered Emails.
-- Once a lead is already booked, the Ultimate scheduler suppresses future planner reminders and lets the existing Wix booking email sequence handle meeting-point/prep emails.
+- Once a lead books, the Ultimate scheduler suppresses future planner reminders and lets the existing Wix booking email sequence handle meeting-point/prep emails.
 `;
 }
 
@@ -462,7 +463,7 @@ function htmlBlockFrom(source) {
 }
 
 function labelFor(item) {
-  const branch = item.path === 'booked' ? 'Booked' : (item.path === 'prep' ? 'Prep' : item.path);
+  const branch = item.path === 'booked' ? 'Booked' : 'Sales';
   const labels = {
     instant: 'Instant',
     minus7: '7 days before',
@@ -474,7 +475,7 @@ function labelFor(item) {
 }
 
 function wixTemplateNameFor(item) {
-  const branch = item.path === 'booked' ? 'Booked' : (item.path === 'prep' ? 'Prep' : item.path);
+  const branch = item.path === 'booked' ? 'Booked' : 'Sales';
   const labels = {
     instant: 'Instant Plan',
     minus7: '7 Days Before',

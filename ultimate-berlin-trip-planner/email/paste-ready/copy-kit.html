@@ -518,40 +518,40 @@ Do not create booked-path planner templates here; the existing booking email seq
 
 For each item: create template -&gt; paste name -&gt; subject -&gt; preheader -&gt; HTML body -&gt; save -&gt; paste editor URL/message ID into copy-kit.html.
 
-1. Ultimate Planner - Prep - Instant Plan
-   Branch/stage: prep.instant
+1. Ultimate Planner - Sales - Instant Plan
+   Branch/stage: sales.instant
    Placeholder: TODO_TRIP_PLANNER_INSTANT
    Subject: 🗺️ Your Berlin plan is ready
    Preheader: A calm start for your Berlin prep.
    HTML file: e0-instant-plan.html
    Wix editor URL / message ID:
 
-2. Ultimate Planner - Prep - 7 Days Before
-   Branch/stage: prep.minus7
+2. Ultimate Planner - Sales - 7 Days Before
+   Branch/stage: sales.minus7
    Placeholder: TODO_TRIP_PLANNER_MINUS_7
    Subject: 🧳 One week before Berlin
-   Preheader: Check the few things that need slots. Leave the rest flexible.
+   Preheader: Book the few things that need slots. Leave the rest flexible.
    HTML file: e1-seven-days-before.html
    Wix editor URL / message ID:
 
-3. Ultimate Planner - Prep - 3 Days Before
-   Branch/stage: prep.minus3
+3. Ultimate Planner - Sales - 3 Days Before
+   Branch/stage: sales.minus3
    Placeholder: TODO_TRIP_PLANNER_MINUS_3
    Subject: 🎫 Berlin tickets and opening days
    Preheader: A few boring checks that make arrival much easier.
    HTML file: e2-three-days-before.html
    Wix editor URL / message ID:
 
-4. Ultimate Planner - Prep - 1 Day Before
-   Branch/stage: prep.minus1
+4. Ultimate Planner - Sales - 1 Day Before
+   Branch/stage: sales.minus1
    Placeholder: TODO_TRIP_PLANNER_MINUS_1
    Subject: 🌦️ Berlin tomorrow
    Preheader: Weather, shoes, meeting point, and the first-day rule.
    HTML file: e3-one-day-before.html
    Wix editor URL / message ID:
 
-5. Ultimate Planner - Prep - Arrival Day
-   Branch/stage: prep.dayOf
+5. Ultimate Planner - Sales - Arrival Day
+   Branch/stage: sales.dayOf
    Placeholder: TODO_TRIP_PLANNER_DAY_OF
    Subject: 👋 Welcome to Berlin
    Preheader: Reach your base, eat something, and keep the first day easy.
@@ -595,11 +595,11 @@ After all 5 URLs/IDs are collected:
     </section>
 
     <section class="grid">
-<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_INSTANT" data-card-index="1" data-template-name="Ultimate Planner - Prep - Instant Plan" data-placeholder="TODO_TRIP_PLANNER_INSTANT">
+<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_INSTANT" data-card-index="1" data-template-name="Ultimate Planner - Sales - Instant Plan" data-placeholder="TODO_TRIP_PLANNER_INSTANT">
       <div class="card-head">
         <div>
-          <span class="branch prep">prep</span>
-          <h2>Prep - Instant</h2>
+          <span class="branch sales">sales</span>
+          <h2>Sales - Instant</h2>
           <p>TODO_TRIP_PLANNER_INSTANT</p>
         </div>
         <div class="card-badges">
@@ -612,7 +612,7 @@ After all 5 URLs/IDs are collected:
         <label for="template-name-0">Wix template name</label>
         <button type="button" data-copy-target="template-name-0">Copy name</button>
       </div>
-      <input id="template-name-0" class="copy-input" readonly value="Ultimate Planner - Prep - Instant Plan">
+      <input id="template-name-0" class="copy-input" readonly value="Ultimate Planner - Sales - Instant Plan">
 
       <div class="field-row">
         <label for="subject-0">Subject</label>
@@ -686,7 +686,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you want the phone version later, reopen the same plan link. I am keeping this email light instead of attaching files.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you want a print version, open the plan and tap &lt;strong style=&quot;color: #1B5E20;&quot;&gt;Download PDF&lt;/strong&gt; inside the planner. I am not attaching a PDF file to this email.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -707,7 +707,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Use the World Clock meeting point as your orientation marker&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;You can reserve a free spot here&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -715,7 +715,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;background: #1B5E20; text-align: center;&quot;&gt;
-                  &lt;a href=&quot;${meetingPointUrl}&quot; style=&quot;display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;&quot;&gt;Open the World Clock meeting point&lt;/a&gt;
+                  &lt;a href=&quot;${bookingUrl}&quot; style=&quot;display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;&quot;&gt;Book the free walking tour&lt;/a&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -723,7 +723,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Over the next few days, I will send a few short Berlin prep notes: which timed entries to check, how tickets work, what to look at before you arrive, and how to keep the first day simple.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Over the next few days, I will send a few short Berlin prep notes: what to book ahead, how tickets work, what to check before you arrive, and how to keep the first day simple.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -754,18 +754,18 @@ After all 5 URLs/IDs are collected:
       <input id="message-id-0" data-message-id="TODO_TRIP_PLANNER_INSTANT" type="text" placeholder="https://manage.wix.com/.../automations/edit/{MESSAGE_ID}/content/en">
       <div class="id-status" data-id-status="TODO_TRIP_PLANNER_INSTANT">Waiting for ID.</div>
 
-      <div class="setup-checklist" aria-label="Setup checklist for Prep - Instant">
+      <div class="setup-checklist" aria-label="Setup checklist for Sales - Instant">
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_INSTANT" data-progress-kind="created"> Template created in Wix</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_INSTANT" data-progress-kind="subject"> Subject and preheader pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_INSTANT" data-progress-kind="html"> HTML block pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_INSTANT" data-progress-kind="saved"> Template saved and URL copied</label>
       </div>
     </article>
-<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_MINUS_7" data-card-index="2" data-template-name="Ultimate Planner - Prep - 7 Days Before" data-placeholder="TODO_TRIP_PLANNER_MINUS_7">
+<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_MINUS_7" data-card-index="2" data-template-name="Ultimate Planner - Sales - 7 Days Before" data-placeholder="TODO_TRIP_PLANNER_MINUS_7">
       <div class="card-head">
         <div>
-          <span class="branch prep">prep</span>
-          <h2>Prep - 7 days before</h2>
+          <span class="branch sales">sales</span>
+          <h2>Sales - 7 days before</h2>
           <p>TODO_TRIP_PLANNER_MINUS_7</p>
         </div>
         <div class="card-badges">
@@ -778,7 +778,7 @@ After all 5 URLs/IDs are collected:
         <label for="template-name-1">Wix template name</label>
         <button type="button" data-copy-target="template-name-1">Copy name</button>
       </div>
-      <input id="template-name-1" class="copy-input" readonly value="Ultimate Planner - Prep - 7 Days Before">
+      <input id="template-name-1" class="copy-input" readonly value="Ultimate Planner - Sales - 7 Days Before">
 
       <div class="field-row">
         <label for="subject-1">Subject</label>
@@ -790,13 +790,13 @@ After all 5 URLs/IDs are collected:
         <label for="preheader-1">Preheader</label>
         <button type="button" data-copy-target="preheader-1">Copy preheader</button>
       </div>
-      <textarea id="preheader-1" readonly rows="2">Check the few things that need slots. Leave the rest flexible.</textarea>
+      <textarea id="preheader-1" readonly rows="2">Book the few things that need slots. Leave the rest flexible.</textarea>
 
       <div class="field-row">
         <label for="html-block-1">HTML body block</label>
         <button type="button" data-copy-target="html-block-1">Copy HTML</button>
       </div>
-      <textarea id="html-block-1" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Check the few things that need slots. Leave the rest flexible.&lt;/div&gt;
+      <textarea id="html-block-1" readonly rows="12">&lt;div style=&quot;display: none; max-height: 0; overflow: hidden; opacity: 0; color: transparent; line-height: 1px; font-size: 1px;&quot;&gt;Book the few things that need slots. Leave the rest flexible.&lt;/div&gt;
 &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;width: 100%; max-width: 640px; margin: 0 auto; background: #FAFAF5; border-collapse: collapse; table-layout: fixed;&quot;&gt;
   &lt;tr&gt;
     &lt;td style=&quot;background: #FAFAF5; padding: 22px 24px 18px; text-align: center;&quot;&gt;
@@ -811,7 +811,7 @@ After all 5 URLs/IDs are collected:
           &lt;td style=&quot;background: #1B5E20; padding: 30px 28px 28px;&quot;&gt;
             &lt;p style=&quot;margin: 0 0 10px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; color: #FFE600;&quot;&gt;One week before&lt;/p&gt;
             &lt;h1 style=&quot;margin: 0 0 14px; font-family: Merriweather, Georgia, 'Times New Roman', serif; font-size: 28px; line-height: 1.18; font-weight: 700; color: #FFFFFF;&quot;&gt;🧳 One week before Berlin&lt;/h1&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Check the few things that need slots. Leave the rest flexible.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.65; color: #EAF3DE;&quot;&gt;Book the few things that need slots. Leave the rest flexible.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -831,7 +831,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;This is the moment when people usually open twenty tabs. I would do the opposite: lock only the things that genuinely need a slot, then leave the rest of the trip flexible.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;This is the moment when people usually open twenty tabs. I would do the opposite: book only the things that genuinely need a slot, then leave the rest of the trip flexible.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -847,7 +847,7 @@ After all 5 URLs/IDs are collected:
                   &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 17px; line-height: 1; color: #1B5E20;&quot;&gt;&amp;bull;&lt;/p&gt;
                 &lt;/td&gt;
                 &lt;td style=&quot;padding: 10px 0 12px; vertical-align: top; border-bottom: 1px solid #DCE8C8;&quot;&gt;
-                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;&lt;strong style=&quot;color: #1B5E20;&quot;&gt;Reichstag dome:&lt;/strong&gt; free, but you need a confirmed time slot from the &lt;a href=&quot;https://visite.bundestag.de/BAPWeb/pages/createBookingRequest.jsf?lang=en&quot; style=&quot;color: #1B5E20; font-weight: 700; text-decoration: underline;&quot;&gt;official Bundestag visit page&lt;/a&gt;.&lt;/p&gt;
+                  &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 14px; line-height: 1.62; color: #212121;&quot;&gt;&lt;strong style=&quot;color: #1B5E20;&quot;&gt;Reichstag dome:&lt;/strong&gt; free, but you need a confirmed time slot from the &lt;a href=&quot;https://visite.bundestag.de/BAPWeb/pages/createBookingRequest.jsf?lang=en&quot; style=&quot;color: #1B5E20; font-weight: 700; text-decoration: underline;&quot;&gt;official Bundestag visit booking&lt;/a&gt;.&lt;/p&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
               &lt;tr&gt;
@@ -863,7 +863,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you want the city to make sense before it becomes a list of sights, keep the World Clock context point early in the trip. For your plan, I would look at:&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you want the city to make sense before it becomes a list of sights, keep BerlinWalk early in the trip. For your plan, I would look at:&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -879,7 +879,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Save the World Clock meeting point here&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Reserve your free spot here&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -887,7 +887,7 @@ After all 5 URLs/IDs are collected:
             &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse;&quot;&gt;
               &lt;tr&gt;
                 &lt;td style=&quot;background: #1B5E20; text-align: center;&quot;&gt;
-                  &lt;a href=&quot;${meetingPointUrl}&quot; style=&quot;display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;&quot;&gt;Open the World Clock meeting point&lt;/a&gt;
+                  &lt;a href=&quot;${bookingUrl}&quot; style=&quot;display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;&quot;&gt;Book the free walking tour&lt;/a&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -942,18 +942,18 @@ After all 5 URLs/IDs are collected:
       <input id="message-id-1" data-message-id="TODO_TRIP_PLANNER_MINUS_7" type="text" placeholder="https://manage.wix.com/.../automations/edit/{MESSAGE_ID}/content/en">
       <div class="id-status" data-id-status="TODO_TRIP_PLANNER_MINUS_7">Waiting for ID.</div>
 
-      <div class="setup-checklist" aria-label="Setup checklist for Prep - 7 days before">
+      <div class="setup-checklist" aria-label="Setup checklist for Sales - 7 days before">
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_7" data-progress-kind="created"> Template created in Wix</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_7" data-progress-kind="subject"> Subject and preheader pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_7" data-progress-kind="html"> HTML block pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_7" data-progress-kind="saved"> Template saved and URL copied</label>
       </div>
     </article>
-<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_MINUS_3" data-card-index="3" data-template-name="Ultimate Planner - Prep - 3 Days Before" data-placeholder="TODO_TRIP_PLANNER_MINUS_3">
+<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_MINUS_3" data-card-index="3" data-template-name="Ultimate Planner - Sales - 3 Days Before" data-placeholder="TODO_TRIP_PLANNER_MINUS_3">
       <div class="card-head">
         <div>
-          <span class="branch prep">prep</span>
-          <h2>Prep - 3 days before</h2>
+          <span class="branch sales">sales</span>
+          <h2>Sales - 3 days before</h2>
           <p>TODO_TRIP_PLANNER_MINUS_3</p>
         </div>
         <div class="card-badges">
@@ -966,7 +966,7 @@ After all 5 URLs/IDs are collected:
         <label for="template-name-2">Wix template name</label>
         <button type="button" data-copy-target="template-name-2">Copy name</button>
       </div>
-      <input id="template-name-2" class="copy-input" readonly value="Ultimate Planner - Prep - 3 Days Before">
+      <input id="template-name-2" class="copy-input" readonly value="Ultimate Planner - Sales - 3 Days Before">
 
       <div class="field-row">
         <label for="subject-2">Subject</label>
@@ -1135,18 +1135,18 @@ After all 5 URLs/IDs are collected:
       <input id="message-id-2" data-message-id="TODO_TRIP_PLANNER_MINUS_3" type="text" placeholder="https://manage.wix.com/.../automations/edit/{MESSAGE_ID}/content/en">
       <div class="id-status" data-id-status="TODO_TRIP_PLANNER_MINUS_3">Waiting for ID.</div>
 
-      <div class="setup-checklist" aria-label="Setup checklist for Prep - 3 days before">
+      <div class="setup-checklist" aria-label="Setup checklist for Sales - 3 days before">
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_3" data-progress-kind="created"> Template created in Wix</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_3" data-progress-kind="subject"> Subject and preheader pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_3" data-progress-kind="html"> HTML block pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_3" data-progress-kind="saved"> Template saved and URL copied</label>
       </div>
     </article>
-<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_MINUS_1" data-card-index="4" data-template-name="Ultimate Planner - Prep - 1 Day Before" data-placeholder="TODO_TRIP_PLANNER_MINUS_1">
+<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_MINUS_1" data-card-index="4" data-template-name="Ultimate Planner - Sales - 1 Day Before" data-placeholder="TODO_TRIP_PLANNER_MINUS_1">
       <div class="card-head">
         <div>
-          <span class="branch prep">prep</span>
-          <h2>Prep - 1 day before</h2>
+          <span class="branch sales">sales</span>
+          <h2>Sales - 1 day before</h2>
           <p>TODO_TRIP_PLANNER_MINUS_1</p>
         </div>
         <div class="card-badges">
@@ -1159,7 +1159,7 @@ After all 5 URLs/IDs are collected:
         <label for="template-name-3">Wix template name</label>
         <button type="button" data-copy-target="template-name-3">Copy name</button>
       </div>
-      <input id="template-name-3" class="copy-input" readonly value="Ultimate Planner - Prep - 1 Day Before">
+      <input id="template-name-3" class="copy-input" readonly value="Ultimate Planner - Sales - 1 Day Before">
 
       <div class="field-row">
         <label for="subject-3">Subject</label>
@@ -1265,7 +1265,23 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;Whether you join the walk or just use the point for context, keep the first day gentle. Berlin has enough edges; arrival day does not need to become one of them.&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you still want to join BerlinWalk, last-minute spots are here:&lt;/p&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 4px 28px 22px;&quot;&gt;
+            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse;&quot;&gt;
+              &lt;tr&gt;
+                &lt;td style=&quot;background: #1B5E20; text-align: center;&quot;&gt;
+                  &lt;a href=&quot;${bookingUrl}&quot; style=&quot;display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;&quot;&gt;Book the free walking tour&lt;/a&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you do not join the walk, the advice is the same: keep the first day gentle. Berlin has enough edges; arrival day does not need to become one of them.&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
 
@@ -1296,18 +1312,18 @@ After all 5 URLs/IDs are collected:
       <input id="message-id-3" data-message-id="TODO_TRIP_PLANNER_MINUS_1" type="text" placeholder="https://manage.wix.com/.../automations/edit/{MESSAGE_ID}/content/en">
       <div class="id-status" data-id-status="TODO_TRIP_PLANNER_MINUS_1">Waiting for ID.</div>
 
-      <div class="setup-checklist" aria-label="Setup checklist for Prep - 1 day before">
+      <div class="setup-checklist" aria-label="Setup checklist for Sales - 1 day before">
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_1" data-progress-kind="created"> Template created in Wix</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_1" data-progress-kind="subject"> Subject and preheader pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_1" data-progress-kind="html"> HTML block pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_MINUS_1" data-progress-kind="saved"> Template saved and URL copied</label>
       </div>
     </article>
-<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_DAY_OF" data-card-index="5" data-template-name="Ultimate Planner - Prep - Arrival Day" data-placeholder="TODO_TRIP_PLANNER_DAY_OF">
+<article class="email-card" data-card-placeholder="TODO_TRIP_PLANNER_DAY_OF" data-card-index="5" data-template-name="Ultimate Planner - Sales - Arrival Day" data-placeholder="TODO_TRIP_PLANNER_DAY_OF">
       <div class="card-head">
         <div>
-          <span class="branch prep">prep</span>
-          <h2>Prep - Arrival day</h2>
+          <span class="branch sales">sales</span>
+          <h2>Sales - Arrival day</h2>
           <p>TODO_TRIP_PLANNER_DAY_OF</p>
         </div>
         <div class="card-badges">
@@ -1320,7 +1336,7 @@ After all 5 URLs/IDs are collected:
         <label for="template-name-4">Wix template name</label>
         <button type="button" data-copy-target="template-name-4">Copy name</button>
       </div>
-      <input id="template-name-4" class="copy-input" readonly value="Ultimate Planner - Prep - Arrival Day">
+      <input id="template-name-4" class="copy-input" readonly value="Ultimate Planner - Sales - Arrival Day">
 
       <div class="field-row">
         <label for="subject-4">Subject</label>
@@ -1404,7 +1420,7 @@ After all 5 URLs/IDs are collected:
         &lt;/tr&gt;
         &lt;tr&gt;
           &lt;td style=&quot;padding: 0 28px 18px;&quot;&gt;
-            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If BerlinWalk is part of your day, the meeting point is the World Clock at Alexanderplatz:&lt;/p&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 15px; line-height: 1.72; color: #212121;&quot;&gt;If you are joining BerlinWalk, the meeting point is the World Clock at Alexanderplatz:&lt;/p&gt;
           &lt;/td&gt;
         &lt;/tr&gt;
         &lt;tr&gt;
@@ -1413,6 +1429,22 @@ After all 5 URLs/IDs are collected:
               &lt;tr&gt;
                 &lt;td style=&quot;background: #1B5E20; text-align: center;&quot;&gt;
                   &lt;a href=&quot;${meetingPointUrl}&quot; style=&quot;display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;&quot;&gt;Open the World Clock meeting point&lt;/a&gt;
+                &lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 10px 28px 8px;&quot;&gt;
+            &lt;p style=&quot;margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.45; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: #1B5E20;&quot;&gt;Last-minute reservation link&lt;/p&gt;
+          &lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;td style=&quot;padding: 4px 28px 22px;&quot;&gt;
+            &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot; border=&quot;0&quot; width=&quot;100%&quot; style=&quot;border-collapse: collapse;&quot;&gt;
+              &lt;tr&gt;
+                &lt;td style=&quot;background: #1B5E20; text-align: center;&quot;&gt;
+                  &lt;a href=&quot;${bookingUrl}&quot; style=&quot;display: block; padding: 16px 18px; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 12px; line-height: 1.3; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: #FFE600; text-decoration: none;&quot;&gt;Book the free walking tour&lt;/a&gt;
                 &lt;/td&gt;
               &lt;/tr&gt;
             &lt;/table&gt;
@@ -1451,7 +1483,7 @@ After all 5 URLs/IDs are collected:
       <input id="message-id-4" data-message-id="TODO_TRIP_PLANNER_DAY_OF" type="text" placeholder="https://manage.wix.com/.../automations/edit/{MESSAGE_ID}/content/en">
       <div class="id-status" data-id-status="TODO_TRIP_PLANNER_DAY_OF">Waiting for ID.</div>
 
-      <div class="setup-checklist" aria-label="Setup checklist for Prep - Arrival day">
+      <div class="setup-checklist" aria-label="Setup checklist for Sales - Arrival day">
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_DAY_OF" data-progress-kind="created"> Template created in Wix</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_DAY_OF" data-progress-kind="subject"> Subject and preheader pasted</label>
         <label><input type="checkbox" data-progress-placeholder="TODO_TRIP_PLANNER_DAY_OF" data-progress-kind="html"> HTML block pasted</label>

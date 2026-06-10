@@ -116,12 +116,12 @@ function compareDates(left, right) {
 }
 
 function branchFor(options) {
-  return options.booked ? 'booked_suppressed_existing_sequence' : 'prep_sequence';
+  return options.booked ? 'booked_suppressed_existing_sequence' : 'sales_conversion';
 }
 
 function messagePath(stage, options) {
   if (options.booked && stage.key !== 'instant') return `existing_booking_sequence.${stage.key}`;
-  return `prep.${stage.key}`;
+  return `sales.${stage.key}`;
 }
 
 function plannedStage(stage, options) {

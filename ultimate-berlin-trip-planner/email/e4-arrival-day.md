@@ -18,9 +18,13 @@ Your plan is here:
 
 ${planUrl}
 
-If BerlinWalk is part of your day, the meeting point is the World Clock at Alexanderplatz:
+If you are joining BerlinWalk, the meeting point is the World Clock at Alexanderplatz:
 
 ${meetingPointUrl}
+
+Last-minute reservation link:
+
+${bookingUrl}
 
 Have a calm first day. Berlin gets much better when you stop trying to understand all of it immediately.
 

@@ -2,14 +2,14 @@
   {
     "source": "e0-instant-plan.md",
     "html": "e0-instant-plan.html",
-    "path": "prep",
+    "path": "sales",
     "stage": "instant",
     "placeholder": "TODO_TRIP_PLANNER_INSTANT",
     "subject": "🗺️ Your Berlin plan is ready",
     "preheader": "A calm start for your Berlin prep.",
     "variables": [
       "arrivalDate",
-      "meetingPointUrl",
+      "bookingUrl",
       "planUrl",
       "recommendedTourDay"
     ]
@@ -17,13 +17,13 @@
   {
     "source": "e1-seven-days-before.md",
     "html": "e1-seven-days-before.html",
-    "path": "prep",
+    "path": "sales",
     "stage": "minus7",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_7",
     "subject": "🧳 One week before Berlin",
-    "preheader": "Check the few things that need slots. Leave the rest flexible.",
+    "preheader": "Book the few things that need slots. Leave the rest flexible.",
     "variables": [
-      "meetingPointUrl",
+      "bookingUrl",
       "planUrl",
       "recommendedTourDay"
     ]
@@ -31,7 +31,7 @@
   {
     "source": "e2-three-days-before.md",
     "html": "e2-three-days-before.html",
-    "path": "prep",
+    "path": "sales",
     "stage": "minus3",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_3",
     "subject": "🎫 Berlin tickets and opening days",
@@ -46,12 +46,13 @@
   {
     "source": "e3-one-day-before.md",
     "html": "e3-one-day-before.html",
-    "path": "prep",
+    "path": "sales",
     "stage": "minus1",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_1",
     "subject": "🌦️ Berlin tomorrow",
     "preheader": "Weather, shoes, meeting point, and the first-day rule.",
     "variables": [
+      "bookingUrl",
       "meetingPointUrl",
       "planUrl",
       "weatherTitle"
@@ -60,12 +61,13 @@
   {
     "source": "e4-arrival-day.md",
     "html": "e4-arrival-day.html",
-    "path": "prep",
+    "path": "sales",
     "stage": "dayOf",
     "placeholder": "TODO_TRIP_PLANNER_DAY_OF",
     "subject": "👋 Welcome to Berlin",
     "preheader": "Reach your base, eat something, and keep the first day easy.",
     "variables": [
+      "bookingUrl",
       "meetingPointUrl",
       "planUrl"
     ]

@@ -28,7 +28,7 @@ Last reviewed locally: 2026-06-02
 
 | Field | Current options | Notes |
 |---|---|---|
-| Walking tour intent | `Not booked yet`, `Already booked`, `Not sure` | UI is hidden right now, but query params and lead payload can still set it. `Already booked` changes context language into meeting-point prep. |
+| Walking tour intent | `Not booked yet`, `Already booked`, `Not sure` | UI is hidden right now, but query params and lead payload can still set it. `Already booked` changes sales language into prep language. |
 
 ## 2. Tour Slot Logic
 
@@ -56,7 +56,7 @@ If same-day tour is not possible:
 
 - Planner searches the next Tue-Sat inside the trip.
 - If no slot is inside the trip, it recommends the next Tue-Sat after the trip.
-- If `tourIntent=booked`, standalone tour CTA language is suppressed and the plan uses meeting-point/prep language.
+- If `tourIntent=booked`, sales CTA is suppressed and the plan uses meeting-point/prep language.
 
 Review question:
 
@@ -588,3 +588,4 @@ Yusuf can review in this order:
 6. Should gentle mode be less repetitive with coffee pauses?
 7. Should Monday/Sunday/public holiday logic become more aggressive?
 8. Which copy feels too mechanical and should be rewritten in a warmer local voice?
+
