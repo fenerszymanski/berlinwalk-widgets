@@ -22,11 +22,7 @@ ${planUrl}
 
 ${meetingPointUrl}
 
-If you still want to join BerlinWalk, last-minute spots are here:
-
-${bookingUrl}
-
-If you do not join the walk, the advice is the same: keep the first day gentle. Berlin has enough edges; arrival day does not need to become one of them.
+Whether you join the walk or just use the point for context, keep the first day gentle. Berlin has enough edges; arrival day does not need to become one of them.
 
 Yusuf  
 BerlinWalk  

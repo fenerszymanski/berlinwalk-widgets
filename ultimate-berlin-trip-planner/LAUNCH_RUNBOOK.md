@@ -80,11 +80,11 @@ In Wix, create five Triggered Email templates from
 
 | Branch | Stage | Placeholder | HTML file |
 | --- | --- | --- | --- |
-| Sales | Instant | `TODO_TRIP_PLANNER_INSTANT` | `e0-instant-plan.html` |
-| Sales | 7 days before | `TODO_TRIP_PLANNER_MINUS_7` | `e1-seven-days-before.html` |
-| Sales | 3 days before | `TODO_TRIP_PLANNER_MINUS_3` | `e2-three-days-before.html` |
-| Sales | 1 day before | `TODO_TRIP_PLANNER_MINUS_1` | `e3-one-day-before.html` |
-| Sales | Arrival day | `TODO_TRIP_PLANNER_DAY_OF` | `e4-arrival-day.html` |
+| Prep | Instant | `TODO_TRIP_PLANNER_INSTANT` | `e0-instant-plan.html` |
+| Prep | 7 days before | `TODO_TRIP_PLANNER_MINUS_7` | `e1-seven-days-before.html` |
+| Prep | 3 days before | `TODO_TRIP_PLANNER_MINUS_3` | `e2-three-days-before.html` |
+| Prep | 1 day before | `TODO_TRIP_PLANNER_MINUS_1` | `e3-one-day-before.html` |
+| Prep | Arrival day | `TODO_TRIP_PLANNER_DAY_OF` | `e4-arrival-day.html` |
 
 Do not create a booked-path Ultimate set. Booked guests already enter the
 existing BerlinWalk booking email sequence; Ultimate only needs to suppress its

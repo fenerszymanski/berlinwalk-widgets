@@ -101,7 +101,7 @@ POST https://www.berlinwalk.com/_functions/tripPlannerBooking
 
 This marks matching leads as booked. The existing Wix Booking automation/flow
 already handles booked-guest emails; this endpoint only lets Ultimate stop its
-own future sales reminders. A Wix Booking automation can call it with at least:
+own future planner reminders. A Wix Booking automation can call it with at least:
 
 ```json
 {
@@ -169,7 +169,7 @@ follow-up. Live mode is read-only and writes evidence under
 
 ## Local Booking-Aware Fixture
 
-Before touching live Wix, run the local fixture to verify sales leads, booked
+Before touching live Wix, run the local fixture to verify prep leads, booked
 lead suppression, cancelled bookings, self-reported booked suppression, and
 booking-event scoping:
 
@@ -279,15 +279,15 @@ Fields:
 | `planSwaps` | Text | Smart Swaps / day-level move summary |
 | `dayRhythm` | Text | Day-by-day load / move / buffer / night summary |
 | `dayIntelligence` | Text | Day-by-day Route / Energy / Spend / Check summary |
-| `dayOperations` | Text | Day-by-day timing windows plus start / transit / reserve / backup summary |
+| `dayOperations` | Text | Day-by-day timing windows plus start / transit / timed-entry / backup summary |
 | `arrivalWindow` | Text | `today`, `tomorrow`, `near_forecast`, or `future_planning` |
 | `tripRisk` | Text | `low`, `medium`, or `high` |
 | `tourRecommendation` | Text | Primary CTA/tour recommendation label |
-| `intentStage` | Text | `booked`, `researching`, or `sales_ready` |
+| `intentStage` | Text | `booked`, `researching`, or `planning_ready` |
 | `familyOrSlow` | Text | `yes` or `no` |
 | `bookAheadNeeded` | Text | `yes` or `no` |
-| `conversionSignal` | Text | Compact tour-readiness score and next best action |
-| `conversionScore` | Number | Machine-readable 0-100 conversion/prep score |
+| `conversionSignal` | Text | Compact prep-readiness score and next best action |
+| `conversionScore` | Number | Machine-readable 0-100 prep score |
 | `conversionTier` | Text | `hot_tour_lead`, `warm_tour_lead`, `researching`, or `booked_prep` |
 | `conversionNextAction` | Text | Machine-readable next best action summary |
 | `conversionReasons` | Text | Comma-separated score reasons |
@@ -356,7 +356,7 @@ missing, placeholder, duplicate, or not-yet-applied IDs before publishing Velo.
 The `--write` apply step creates a timestamped local backup under
 `output/qa/ultimate-trip-planner-email-id-apply/` before replacing placeholders.
 
-Planner/sales path:
+Planner/prep path:
 
 ```js
 TODO_TRIP_PLANNER_INSTANT
@@ -424,7 +424,6 @@ Available variables:
 - `${tripStyle}`
 - `${bookingStatus}`
 - `${tourDate}`
-- `${bookingUrl}`
 - `${planUrl}`
 - `${meetingPointUrl}`
 - `${firstDayPlannerUrl}`

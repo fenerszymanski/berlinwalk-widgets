@@ -8,7 +8,6 @@ const COLLECTION = 'TripPlannerLeads';
 const AI_BUDGET_COLLECTION = 'TripPlannerAiBudget';
 const CONTACT_LABEL = 'Ultimate Berlin Trip Planner Lead';
 const TIMEZONE = 'Europe/Berlin';
-const BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
 const BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
 const DUE_QUERY_PAGE_SIZE = 100;
 const GEMINI_API_ROOT = 'https://generativelanguage.googleapis.com/v1beta/models';
@@ -292,24 +291,26 @@ function geminiResponseSchema() {
 
 function geminiPrompt(input) {
   return [
-    'You are Yusuf from BerlinWalk, writing a warm, friendly, and personal note to someone who just planned a Berlin trip.',
-    'Your voice must sound like a welcoming local guide: speak directly to the guest, be conversational, slightly humorous/witty, and enthusiastic.',
-    'GRAMMAR & VOICE: Write in a natural, friendly, and active guide voice. Always use first-person singular ("I", "my", "me") rather than "we" or "our" when referring to yourself as the guide or creator of this plan. Write naturally and idiomatically without forcing first-person pronouns into every sentence, and avoid awkward robotic phrasing like "I start you".',
+    'You are Yusuf from BerlinWalk, writing a warm, simple, practical note to someone who just planned a Berlin trip.',
+    'Your tone should sound like a helpful local guide talking to a guest in one-to-two short paragraphs.',
+    'Voice rule: use first-person singular ("I", "my", "me") for the guide perspective, and keep it natural and conversational.',
     'Explain the logic and reasoning (the "why") behind the routing and sequence of stops in this itinerary (e.g., why a light start on Day 1, why to see X before Y, why Potsdam is placed on a specific day, or why Mitte stays central).',
     'The route is fixed. Do not change the day order, dates, times, tour slot, places, or map stops.',
     'Do not invent restaurants, attractions, neighborhoods, warnings, ticket rules, or booking advice.',
-    'Apart from those route facts, write freely in friendly simple English.',
+    'Apart from those route facts, write freely in simple English without sales language.',
     'Mention a few real places from the itinerary and explain, in normal guide language, why they make sense in that order.',
+    'Write like a real person speaking to a traveler: short, clear, practical. Avoid hype words and generic AI phrases.',
     'Do not list the raw interest labels. Turn them into normal travel language.',
     'Avoid planner/software words such as framework, route logic, anchor, layer, cluster, optimize, constraints, matrix.',
     'No hype, no sales voice, no generic AI itinerary language.',
     'If you refer to "next day" or "after that", check the actual day order in the input first.',
     'noteTitle must be short, natural, and friendly.',
-    'routeIntro must be one friendly paragraph, 70-120 words, using real places or days from the itinerary, explaining the plan\'s overall reasoning.',
-    'dayStories must include exactly one item for every input.plan.days item. Each text should be 25-55 words, one or two natural sentences, explaining the "why" of that specific day\'s stop order/rhythm in Yusuf\'s personal guide voice.',
+    'routeIntro must be one friendly paragraph, 50-95 words, using real places or days from the itinerary, explaining the plan\'s overall reasoning.',
+    'dayStories must include exactly one item for every input.plan.days item. Each text should be 20-50 words, one or two natural sentences, explaining the "why" of that specific day\'s stop order/rhythm in Yusuf\'s personal guide voice.',
     'weatherSentence must be one short practical sentence.',
     'If input.tourSlot has a date/time and is not booked, tourSentence should mention it naturally. If booked, use meeting-point/prep language.',
     'chips may be an empty array. If used, keep them short, human, and fun.',
+    'Do not reuse the same day pattern for every day; each day story should focus on that day only.',
     '',
     'Return valid JSON only matching the requested schema. Do not use markdown.',
     '',
@@ -350,12 +351,29 @@ function sanitizeAiEnhancement(data, input, model, usage) {
     })).filter(item => validDays[item.dayNumber] && item.text).slice(0, input.plan.days.length)
     : [];
 
+  const fallbackDayStory = (day) => {
+    const theme = cleanText(day && day.theme, 'your route', 80);
+    const firstPlace = cleanText(Array.isArray(day && day.places) && day.places[0] ? day.places[0] : '', 'that area', 80);
+    return 'I kept Day ' + cleanNumber(day && day.dayNumber, 1, 1, 7) + ' focused on ' + theme.toLowerCase() +
+      ' so you can start at ' + firstPlace + ' and stay in one rhythm for the day.';
+  };
+  const dayStoryByDay = {};
+  dayStories.forEach(item => { dayStoryByDay[item.dayNumber] = item; });
+  const completeDayStories = input.plan.days.map((day) => {
+    const dayNumber = cleanNumber(day && day.dayNumber, 0, 0, 7);
+    const existing = dayStoryByDay[dayNumber];
+    return existing ? existing : {
+      dayNumber,
+      text: fallbackDayStory(day)
+    };
+  });
+
   return {
     provider: 'gemini',
     model,
     noteTitle: cleanText(data && (data.noteTitle || data.headline), 'Yusuf guide read', 90),
     routeIntro: cleanText(data && (data.routeIntro || data.guideNote || data.localRead), '', 620),
-    dayStories,
+    dayStories: completeDayStories,
     weatherSentence: cleanText(data && data.weatherSentence, '', 220),
     tourSentence: cleanText(data && (data.tourSentence || data.tourNote), '', 220),
     chips: Array.isArray(data && data.chips)
@@ -906,7 +924,6 @@ function emailVariables(lead, stage) {
     tripStyle: String(lead.tripStyle || ''),
     bookingStatus: String(lead.bookingStatus || ''),
     tourDate: String(lead.tourDate || ''),
-    bookingUrl: BOOKING_SHORT_URL,
     planUrl: planUrlForEmail(lead),
     meetingPointUrl: String(lead.meetingPointUrl || 'https://www.berlinwalk.com/meeting-point'),
     firstDayPlannerUrl: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',

@@ -12,11 +12,19 @@ const sourcePath = path.join(scriptDir, 'tripPlannerFunnel.js');
 const outputDir = path.join(repoRoot, 'output/qa/ultimate-trip-planner-velo');
 
 const MESSAGE_IDS = {
-  TODO_TRIP_PLANNER_INSTANT: 'sales-instant-id',
-  TODO_TRIP_PLANNER_MINUS_7: 'sales-minus7-id',
-  TODO_TRIP_PLANNER_MINUS_3: 'sales-minus3-id',
-  TODO_TRIP_PLANNER_MINUS_1: 'sales-minus1-id',
-  TODO_TRIP_PLANNER_DAY_OF: 'sales-dayof-id'
+  TODO_TRIP_PLANNER_INSTANT: 'prep-instant-id',
+  TODO_TRIP_PLANNER_MINUS_7: 'prep-minus7-id',
+  TODO_TRIP_PLANNER_MINUS_3: 'prep-minus3-id',
+  TODO_TRIP_PLANNER_MINUS_1: 'prep-minus1-id',
+  TODO_TRIP_PLANNER_DAY_OF: 'prep-dayof-id'
+};
+
+const MESSAGE_ID_BY_STAGE = {
+  instant: MESSAGE_IDS.TODO_TRIP_PLANNER_INSTANT,
+  minus7: MESSAGE_IDS.TODO_TRIP_PLANNER_MINUS_7,
+  minus3: MESSAGE_IDS.TODO_TRIP_PLANNER_MINUS_3,
+  minus1: MESSAGE_IDS.TODO_TRIP_PLANNER_MINUS_1,
+  dayOf: MESSAGE_IDS.TODO_TRIP_PLANNER_DAY_OF
 };
 
 function parseArgs() {
@@ -57,6 +65,12 @@ function transformFunnelSource() {
     .sort((a, b) => b[0].length - a[0].length);
   for (const [placeholder, messageId] of replacements) {
     source = source.replace(new RegExp(`${escapeRegExp(placeholder)}(?![A-Z0-9_])`, 'g'), messageId);
+  }
+  for (const [stageKey, messageId] of Object.entries(MESSAGE_ID_BY_STAGE)) {
+    source = source.replace(
+      new RegExp(`(key:\\s*'${escapeRegExp(stageKey)}'[\\s\\S]*?messageId:\\s*)'[^']+'`),
+      `$1'${messageId}'`
+    );
   }
 
   return `${source}
@@ -207,7 +221,7 @@ async function testBookedLeadSuppressesUltimateReminders() {
   const { db, api } = createHarness();
   const now = new Date('2026-06-05T08:00:00.000Z');
   db.items.push(
-    baseLead({ _id: 'lead-sales', email: 'sales@example.com', contactId: 'contact-sales' }),
+    baseLead({ _id: 'lead-prep', email: 'prep@example.com', contactId: 'contact-prep' }),
     baseLead({ _id: 'lead-booked', email: 'booked@example.com', contactId: 'contact-booked', bookedAt: '2026-06-04T09:00:00.000Z', bookingStatus: 'booked' })
   );
 
@@ -215,9 +229,9 @@ async function testBookedLeadSuppressesUltimateReminders() {
   assert.equal(summary.sent, 1);
   assert.equal(db.sentEmails.length, 1);
 
-  const salesEmail = db.sentEmails.find((email) => email.contactId === 'contact-sales');
-  assert.equal(salesEmail.messageId, 'sales-minus3-id');
-  assert.equal(salesEmail.variables.isBooked, 'no');
+  const prepEmail = db.sentEmails.find((email) => email.contactId === 'contact-prep');
+  assert.equal(prepEmail.messageId, 'prep-minus3-id');
+  assert.equal(prepEmail.variables.isBooked, 'no');
   assert(!db.sentEmails.some((email) => email.contactId === 'contact-booked'));
 
   return {
@@ -227,7 +241,7 @@ async function testBookedLeadSuppressesUltimateReminders() {
   };
 }
 
-async function testInactiveBookingStatusUsesSalesBranch() {
+async function testInactiveBookingStatusUsesPrepBranch() {
   const { db, api } = createHarness();
   db.items.push(baseLead({
     _id: 'lead-cancelled',
@@ -240,7 +254,7 @@ async function testInactiveBookingStatusUsesSalesBranch() {
   const summary = await api.processTripPlannerDueEmails(new Date('2026-06-05T08:00:00.000Z'));
   assert.equal(summary.sent, 1);
   assert.equal(db.sentEmails.length, 1);
-  assert.equal(db.sentEmails[0].messageId, 'sales-minus3-id');
+  assert.equal(db.sentEmails[0].messageId, 'prep-minus3-id');
   assert.equal(db.sentEmails[0].variables.isBooked, 'no');
 
   return {
@@ -306,7 +320,7 @@ async function testBookingMarkerScopesByArrivalDate() {
 
 const TESTS = [
   ['booked leads suppress Ultimate reminders', testBookedLeadSuppressesUltimateReminders],
-  ['cancelled booked markers use the sales branch', testInactiveBookingStatusUsesSalesBranch],
+  ['cancelled booked markers use the prep branch', testInactiveBookingStatusUsesPrepBranch],
   ['self-reported booked leads suppress scheduled reminders', testSelfReportedBookedSuppressesScheduledReminders],
   ['booking marker respects arrivalDate scope', testBookingMarkerScopesByArrivalDate]
 ];

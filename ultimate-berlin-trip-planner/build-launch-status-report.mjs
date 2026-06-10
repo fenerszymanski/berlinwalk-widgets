@@ -39,29 +39,42 @@ function unique(values) {
   return [...new Set(values)].sort();
 }
 
-function latestJsonIn(relativeDir, pattern) {
+function latestJsonIn(relativeDir, pattern, predicate = null) {
   const dir = repoPath(relativeDir);
   if (!fs.existsSync(dir)) return null;
 
   const files = fs.readdirSync(dir)
     .filter((name) => pattern.test(name))
-    .sort()
-    .reverse();
+    .map((name) => {
+      const filePath = path.join(dir, name);
+      try {
+        const json = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+        if (predicate && !predicate(json)) return null;
+        const generatedAt = json?.generatedAt ? Date.parse(json.generatedAt) : NaN;
+        return {
+          filePath,
+          relative: relative(filePath),
+          json,
+          generatedAt: Number.isFinite(generatedAt) ? generatedAt : 0
+        };
+      } catch {
+        return null;
+      }
+    })
+    .filter(Boolean)
+    .sort((a, b) => {
+      if (b.generatedAt !== a.generatedAt) return b.generatedAt - a.generatedAt;
+      return b.filePath.localeCompare(a.filePath);
+    });
 
-  for (const name of files) {
-    const filePath = path.join(dir, name);
-    try {
-      return {
-        filePath,
-        relative: relative(filePath),
-        json: JSON.parse(fs.readFileSync(filePath, 'utf8'))
-      };
-    } catch {
-      // Keep scanning older evidence.
-    }
-  }
+  if (!files.length) return null;
 
-  return null;
+  const first = files[0];
+  return {
+    filePath: first.filePath,
+    relative: first.relative,
+    json: first.json
+  };
 }
 
 function latestLiveSmoke() {
@@ -74,14 +87,14 @@ function latestLiveSmoke() {
 }
 
 function latestAiSmoke() {
-  const latest = latestJsonIn('output/qa/ultimate-trip-planner-live-smoke', /^live-.*\.json$/);
+  const latest = latestJsonIn('output/qa/ultimate-trip-planner-live-smoke', /^live-.*\.json$/, (json) => {
+    return json?.mode === 'live' &&
+      json?.responses?.ai?.ok === true &&
+      json?.responses?.ai?.body?.ok === true &&
+      json?.responses?.ai?.body?.enhancement;
+  });
   if (!latest) return null;
-  const result = latest.json;
-  const aiOk = result?.mode === 'live' &&
-    result?.responses?.ai?.ok === true &&
-    result?.responses?.ai?.body?.ok === true &&
-    result?.responses?.ai?.body?.enhancement;
-  return aiOk ? latest : null;
+  return latest;
 }
 
 function aiCostSummary(aiSmoke) {

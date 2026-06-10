@@ -60,15 +60,15 @@ The same checklist is also generated as `setup-checklist.txt`.
 
 | Path | Stage | Velo Placeholder | HTML | Subject |
 | --- | --- | --- | --- | --- |
-| sales | instant | `TODO_TRIP_PLANNER_INSTANT` | [e0-instant-plan.html](e0-instant-plan.html) | 🗺️ Your Berlin plan is ready |
-| sales | minus7 | `TODO_TRIP_PLANNER_MINUS_7` | [e1-seven-days-before.html](e1-seven-days-before.html) | 🧳 One week before Berlin |
-| sales | minus3 | `TODO_TRIP_PLANNER_MINUS_3` | [e2-three-days-before.html](e2-three-days-before.html) | 🎫 Berlin tickets and opening days |
-| sales | minus1 | `TODO_TRIP_PLANNER_MINUS_1` | [e3-one-day-before.html](e3-one-day-before.html) | 🌦️ Berlin tomorrow |
-| sales | dayOf | `TODO_TRIP_PLANNER_DAY_OF` | [e4-arrival-day.html](e4-arrival-day.html) | 👋 Welcome to Berlin |
+| prep | instant | `TODO_TRIP_PLANNER_INSTANT` | [e0-instant-plan.html](e0-instant-plan.html) | 🗺️ Your Berlin plan is ready |
+| prep | minus7 | `TODO_TRIP_PLANNER_MINUS_7` | [e1-seven-days-before.html](e1-seven-days-before.html) | 🧳 One week before Berlin |
+| prep | minus3 | `TODO_TRIP_PLANNER_MINUS_3` | [e2-three-days-before.html](e2-three-days-before.html) | 🎫 Berlin tickets and opening days |
+| prep | minus1 | `TODO_TRIP_PLANNER_MINUS_1` | [e3-one-day-before.html](e3-one-day-before.html) | 🌦️ Berlin tomorrow |
+| prep | dayOf | `TODO_TRIP_PLANNER_DAY_OF` | [e4-arrival-day.html](e4-arrival-day.html) | 👋 Welcome to Berlin |
 
 ## Notes
 
 - HTML is table-based with inline CSS only.
 - No `<style>`, `<script>`, `<svg>`, or external font tags are used.
 - Wix variables keep the `${var_name}` syntax expected by Velo Triggered Emails.
-- Once a lead books, the Ultimate scheduler suppresses future planner reminders and lets the existing Wix booking email sequence handle meeting-point/prep emails.
+- Once a lead is already booked, the Ultimate scheduler suppresses future planner reminders and lets the existing Wix booking email sequence handle meeting-point/prep emails.

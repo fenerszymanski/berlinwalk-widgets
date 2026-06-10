@@ -4,7 +4,7 @@ Bu dosya sadece launch icin ic operasyon notu. Public siteye konmayacak.
 
 Amaç: Wix'te 5 Triggered Email template olusturmak, her birinin message ID'sini almak ve `tripPlannerFunnel.js` icindeki `TODO_TRIP_PLANNER_*` placeholder'larini guvenli sekilde degistirmek.
 
-Not: Book eden kisiler icin yeni bir Ultimate email sequence olusturmuyoruz. Sitedeki mevcut booking email sequence zaten otomatik devreye giriyor. Ultimate sadece booking oncesi planner/sales maillerini gonderir; booking yakalaninca kendi future reminder'larini durdurur.
+Not: Book eden kisiler icin yeni bir Ultimate email sequence olusturmuyoruz. Sitedeki mevcut booking email sequence zaten otomatik devreye giriyor. Ultimate sadece planner/prep maillerini gonderir; booking yakalaninca kendi future reminder'larini durdurur.
 
 ## Simdi Yapilacak Tek Is
 
@@ -50,15 +50,15 @@ URL'nin tamamini yapistirabilirsin. Apply script ID'yi URL'den kendi cikarir.
 
 ## Template Sirasi
 
-Bu sirayla git. Sadece planner/sales path var. Booked path yok; onu mevcut booking sequence yonetiyor.
+Bu sirayla git. Sadece planner/prep path var. Booked path yok; onu mevcut booking sequence yonetiyor.
 
 | # | Wix template name | Branch | Stage | Placeholder | HTML file |
 |---|---|---|---|---|---|
-| 1 | Ultimate Planner - Sales - Instant Plan | Sales | Instant | `TODO_TRIP_PLANNER_INSTANT` | `e0-instant-plan.html` |
-| 2 | Ultimate Planner - Sales - 7 Days Before | Sales | 7 days before | `TODO_TRIP_PLANNER_MINUS_7` | `e1-seven-days-before.html` |
-| 3 | Ultimate Planner - Sales - 3 Days Before | Sales | 3 days before | `TODO_TRIP_PLANNER_MINUS_3` | `e2-three-days-before.html` |
-| 4 | Ultimate Planner - Sales - 1 Day Before | Sales | 1 day before | `TODO_TRIP_PLANNER_MINUS_1` | `e3-one-day-before.html` |
-| 5 | Ultimate Planner - Sales - Arrival Day | Sales | Arrival day | `TODO_TRIP_PLANNER_DAY_OF` | `e4-arrival-day.html` |
+| 1 | Ultimate Planner - Prep - Instant Plan | Prep | Instant | `TODO_TRIP_PLANNER_INSTANT` | `e0-instant-plan.html` |
+| 2 | Ultimate Planner - Prep - 7 Days Before | Prep | 7 days before | `TODO_TRIP_PLANNER_MINUS_7` | `e1-seven-days-before.html` |
+| 3 | Ultimate Planner - Prep - 3 Days Before | Prep | 3 days before | `TODO_TRIP_PLANNER_MINUS_3` | `e2-three-days-before.html` |
+| 4 | Ultimate Planner - Prep - 1 Day Before | Prep | 1 day before | `TODO_TRIP_PLANNER_MINUS_1` | `e3-one-day-before.html` |
+| 5 | Ultimate Planner - Prep - Arrival Day | Prep | Arrival day | `TODO_TRIP_PLANNER_DAY_OF` | `e4-arrival-day.html` |
 
 ## JSON Dosyasini Olustur
 

@@ -1,7 +1,6 @@
 # Ultimate Berlin Trip Planner Email Funnel
 
-Source copy for Wix Triggered Emails used by the pre-booking trip planner
-sequence.
+Source copy for Wix Triggered Emails used by the trip-prep planner sequence.
 
 Paste-ready HTML lives in `paste-ready/` and is generated from these markdown
 files with:
@@ -21,12 +20,12 @@ lets the existing BerlinWalk booking email sequence handle meeting-point,
 weather, and tour-day prep. Do not create a second booked-guest automation here.
 
 The current copy is intentionally compact and prep-led. It uses a small set of
-plan-specific variables, then adds useful visitor preparation: official booking
-links, ticket reminders, opening-day checks, BER zone logic, and meeting-point
-links. It should feel like Yusuf helping someone get ready for Berlin, not an
-internal planner report. Keep sales CTAs natural and limited: booked guests are
-suppressed from this sequence and should continue in the existing booking email
-automation.
+plan-specific variables, then adds useful visitor preparation: official
+timed-entry links, ticket reminders, opening-day checks, BER zone logic, and
+meeting-point links. It should feel like Yusuf helping someone get ready for
+Berlin, not an internal planner report. Keep the sequence practical and avoid
+conversion CTAs; booked guests are suppressed from this sequence and should continue
+in the existing booking email automation.
 
 Variables expected by Velo:
 
@@ -52,7 +51,7 @@ Variables expected by Velo:
 - `${planSwaps}`
 - `${dayRhythm}`
 - `${dayIntelligence}`
-- `${dayOperations}` - daily timing windows plus start / transit / reserve / backup notes
+- `${dayOperations}` - daily timing windows plus start / transit / timed-entry / backup notes
 - `${arrivalWindow}`
 - `${tripRisk}`
 - `${tourRecommendation}`
@@ -76,7 +75,6 @@ Variables expected by Velo:
 - `${tripStyle}`
 - `${bookingStatus}`
 - `${tourDate}`
-- `${bookingUrl}`
 - `${planUrl}`
 - `${meetingPointUrl}`
 - `${firstDayPlannerUrl}`

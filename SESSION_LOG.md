@@ -1,5 +1,67 @@
 # Session log
 
+## 2026-06-10 — Codex (Ultimate planner prep-copy cleanup)
+
+**Did:** Removed the unbooked sales/book-now chain from Ultimate Planner UI, email sequence, Velo variables, and setup docs; kept booked users on meeting-point/prep language.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — removed visible PDF/print actions, booking URL references, reserve/hold panels, trip-command sales copy, and book-link tracking; nonbooked path now uses World Clock context / planning checks.
+- `ultimate-berlin-trip-planner/email/` — regenerated paste-ready templates as `Prep` path; removed `${bookingUrl}` buttons and sales CTAs.
+- `ultimate-berlin-trip-planner/velo/` + launch docs — removed `bookingUrl` email variable, regenerated install kit, updated fixtures/simulator/docs to prep terminology.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md` / `.json` — refreshed; launch remains NOT READY due existing audit blocks outside this cleanup.
+
+**QA:** `booking-aware-fixture` passed 4/4; email generator and install-kit generator passed; `launch-audit` now 146 pass / 0 warn / 8 existing blocks; Playwright desktop locked + mobile unlocked smoke found no booking/PDF/print/book links and no horizontal overflow.
+
+**Opened:** Existing launch audit blocks remain for broader UX gates (timeboxes, hero, planner logic, arrival/playbook/highlights/radar/command strip).
+**Closed:** `BOOKING_URL` / `bookingUrl` runtime path and visible unbooked sales CTA cleanup.
+
+**Next session should:** Continue the remaining launch audit UX gates, or verify the cleaned prep flow on the live Wix embed before publishing.
+
+## 2026-06-10 — Codex (Trip planner fallback tone tune-up)
+
+**Did:** Mock ve local fallback guide note metinlerini gerçekçi/türkçesiz bir metne çevirdim ve AI polish öncesi kullanıcıda görünen dili sadeleştirdim.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — `mockRouteIntro`, `mockAiEnhancement` ve `localGuideFallback` metinleri sadeleştirildi; yapay “Hey, I’m…” açılışları kaldırıldı.
+- `ultimate-berlin-trip-planner/build-launch-status-report.mjs` — status dosyaları güncellendi.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md` / `LAUNCH_STATUS.json` — status hâlâ PASS.
+
+**Opened:** canlıda `mockAi=1` veya file-preview modundan çıkıp gerçek akışı yeniden teyit et.
+**Closed:** fallback note metinlerinde gereksiz "AI konuşma metni" hissi.
+
+**Next session should:** `http://127.0.0.1:8765/ultimate-berlin-trip-planner/?context=tool&date=...` gibi bir linkte unlock sonrası `Your Local Guide Yusuf's Note` ve gün notlarını kontrol et; gerekirse metin örnekleri üzerinden 1 tur daha ince ayar yapalım.
+
+## 2026-06-10 — Codex (Ultimate planner launch status stabilization)
+
+**Did:**
+- Completed the last local launch-control gaps for Ultimate Berlin Trip Planner by running a fresh live Gemini smoke and fixing status detection so `LAUNCH_STATUS` reports the latest passing AI evidence.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/build-launch-status-report.mjs` — fixed evidence selection logic to (1) ignore malformed files safely, (2) pick the newest matching JSON by `generatedAt`, and (3) require a real successful `tripPlannerAi` pass for AI gate.
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md` / `LAUNCH_STATUS.json` — regenerated; launch gates are 154 pass / 0 warn / 0 block, AI smoke now reads as PASS.
+- `output/qa/ultimate-trip-planner-live-smoke/live-2026-06-10T21-33-47-759Z.json` — added via fresh `live --ai` smoke run.
+
+**Opened:** UX revision hold remains open in `ultimate-berlin-trip-planner/UX_REVISION_HOLD.md`; mobile/UX simplification still needs your final sign-off before blog publication.
+**Closed:** Gemini AI smoke warn is closed; launch status no longer blocks on stale evidence parsing.
+
+**Next session should:** continue with UX simplification passes (copy tone/density/sections) and then rerun status smoke on final widget build.
+
+## 2026-06-10 — Codex (Ultimate Planner visibility + SEO cap fix)
+
+**Did:** Cleared the last local launch blocker by making Ultimate Berlin Trip Planner public in tools-hub and hardening widgets-hub structured-data generation against Wix size limits.
+
+**Changed:**
+- `tools-hub/data.json` — removed the `status: "draft"` flag from `ultimate-berlin-trip-planner` so it is exposed as visible like other production tools.
+- `widgets-hub/_regenerate_seo.py` — added a progressive compacting fallback pipeline so the JSON-LD block drops optional fields when needed to stay under the Wix 7000-character limit.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated the ItemList block using the compact variant (6841 chars, with `publisher` kept, description removed).
+- `ultimate-berlin-trip-planner/LAUNCH_STATUS.md` and `LAUNCH_STATUS.json` — refreshed visibility status to PASS after successful launch-gate checks.
+
+**Opened:** homepage shortcut and remaining UX polishing are still under user decision.
+**Closed:** Wix structured-data size warning is resolved; visibility blocker is now passed in local reports.
+
+**Next session should:** enable the homepage shortcut if desired, then continue the final mobile UX and live AI smoke validation sequence.
+
+
 Rolling log of agent sessions. Most recent at top.
 
 ## 2026-06-10 — Codex (Blog booking teaser hidden live, compact local rebuild)

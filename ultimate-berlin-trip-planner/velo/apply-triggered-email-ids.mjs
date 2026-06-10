@@ -22,7 +22,7 @@ The ID file can use either Velo placeholder keys:
   { "TODO_TRIP_PLANNER_INSTANT": "your-message-id" }
 
 or path/stage keys:
-  { "sales.instant": "your-message-id" }
+  { "prep.instant": "your-message-id" }
 
 Dashboard edit URLs are accepted too. The script extracts the messageId from
 URLs shaped like /automations/edit/{MESSAGE_ID}/content/en.

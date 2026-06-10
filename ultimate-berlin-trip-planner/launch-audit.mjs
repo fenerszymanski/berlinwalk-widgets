@@ -314,7 +314,7 @@ function run() {
   block(
     'All 5 planner email template drafts exist',
     missingTemplates.length === 0,
-    missingTemplates.length ? `Missing: ${missingTemplates.join(', ')}` : 'Sales/nurture path has five drafts; booked guests stay in the existing booking sequence.'
+    missingTemplates.length ? `Missing: ${missingTemplates.join(', ')}` : 'Prep path has five drafts; booked guests stay in the existing booking sequence.'
   );
 
   const templateVars = unique(emailTemplateFiles().flatMap((template) => extractTemplateVariables(read(template))));
@@ -333,7 +333,7 @@ function run() {
       /Subject:\s*🌦️ Berlin tomorrow/.test(allEmailTemplateText) &&
       /Subject:\s*👋 Welcome to Berlin/.test(allEmailTemplateText) &&
       /starting point, not as a strict schedule/.test(allEmailTemplateText) &&
-      /official Bundestag visit booking/.test(allEmailTemplateText) &&
+      /official Bundestag visit page/.test(allEmailTemplateText) &&
       /official Staatliche Museen zu Berlin ticket page/.test(allEmailTemplateText) &&
       /Official BVG ticket page/.test(allEmailTemplateText) &&
       /Zone C/.test(allEmailTemplateText) &&
@@ -369,7 +369,6 @@ function run() {
     'conversionNextAction',
     'conversionReasons',
     'tripStyle',
-    'bookingUrl',
     'planUrl',
     'meetingPointUrl'
   ];
@@ -446,7 +445,7 @@ function run() {
       /Next missing template/.test(copyKit) &&
       /setup-checklist-text/.test(copyKit) &&
       /Copy checklist/.test(copyKit) &&
-      /Ultimate Planner - Sales - Instant Plan/.test(setupChecklist) &&
+      /Ultimate Planner - Prep - Instant Plan/.test(setupChecklist) &&
       /Do not create automation workflows/.test(setupChecklist) &&
       /existing booking email sequence/.test(setupChecklist) &&
       !/TODO_TRIP_PLANNER_[A-Z0-9_]+_BOOKED/.test(copyKit) &&
@@ -753,7 +752,7 @@ function run() {
       /dueNow/.test(sequenceSimulatorSource) &&
       /booked_suppressed_existing_sequence/.test(sequenceSimulatorSource) &&
       /suppressed_after_booking/.test(sequenceSimulatorSource) &&
-      /sales_conversion/.test(sequenceSimulatorSource) &&
+      /prep_sequence/.test(sequenceSimulatorSource) &&
       /simulate-email-sequence\.mjs/.test(veloReadme) &&
       /cmd-sequence/.test(launchControlBuilder),
     'Expected dry-run simulator for 7/3/1/day-of email schedule and booked-lead suppression.'
@@ -828,14 +827,14 @@ function run() {
   );
   block(
     'Booking-aware email behavior has a local fixture',
-    /sales-minus3-id/.test(bookingAwareFixture) &&
+    /prep-minus3-id/.test(bookingAwareFixture) &&
       /bookedSuppressed/.test(bookingAwareFixture) &&
       /self-reported booked leads suppress/.test(bookingAwareFixture) &&
       /cancelled/.test(bookingAwareFixture) &&
       /markTripPlannerLeadBooked/.test(bookingAwareFixture) &&
       /ultimate-trip-planner-velo/.test(bookingAwareFixture) &&
       /booking-aware-fixture\.mjs/.test(veloReadme),
-    'Expected a local Wix mock fixture that proves booked suppression, cancelled-status sales eligibility, self-reported booked suppression, and arrivalDate-scoped booking markers.'
+    'Expected a local Wix mock fixture that proves booked suppression, cancelled-status prep eligibility, self-reported booked suppression, and arrivalDate-scoped booking markers.'
   );
 
   const ultimateTool = findUltimateTool(toolsHub);
