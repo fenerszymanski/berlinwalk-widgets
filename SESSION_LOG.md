@@ -2,6 +2,22 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-10 — Codex (Blog booking teaser hidden live, compact local rebuild)
+
+**Did:**
+- Confirmed Yusuf pushed `b196d5d`, so live `lead-form-inject.js` now has the emergency kill-switch and the broken blog booking embed is hidden.
+- Rebuilt the blog booking injection locally as a compact opt-in teaser instead of embedding the full `<bw-booking-calendar>` component inside Wix Blog.
+- Local QA passed at 430px mobile and 1280px desktop: no custom calendar element, no old iframe, no guest/attendee URL param, compact 5-date buttons, and no horizontal overflow.
+
+**Changed:**
+- `js/lead-form-inject.js` — disabled by default unless `?bwBlogBooking=1` or `window.BW_ENABLE_BLOG_BOOKING = true`; renders a compact booking card that fetches live availability and links selected dates to the native Wix booking step.
+- Local commit `211d11e` is intentionally not pushed; `origin/main` remains `b196d5d` with the live kill-switch.
+
+**Opened:** Live rollout is pending until Yusuf approves the compact teaser after visual QA on a real blog post.
+**Closed:** Broken live blog booking card is hidden.
+
+**Next session should:** Test a live post with the local compact card flow or create a preview page; only after approval push `211d11e` so `?bwBlogBooking=1` can be removed / replaced with a real enable flag.
+
 ## 2026-06-10 — Codex (Blog booking embed live fix pending)
 
 **Did:**
