@@ -2,7 +2,11 @@
 
 Slug idea: `why-is-berlin-founding-year-1237`
 
-Status: local draft v1, not pushed to Wix.
+Status: Wix draft created, UNPUBLISHED.
+
+Wix draft ID: `239d8355-2d20-4152-a809-8451074602e9`
+
+Wix edit URL: `https://manage.wix.com/dashboard/12ee5ea0-70a7-492f-8020-ffb27cbb630f/blog/drafts/239d8355-2d20-4152-a809-8451074602e9/edit`
 
 Meta title: Why Is Berlin's Founding Year 1237? | BerlinWalk
 
@@ -16,6 +20,8 @@ Primary keyword: Berlin founding year 1237
 
 Secondary keywords: Berlin founded 1237, Cölln Berlin, medieval Berlin, Berlin old town, Nikolaiviertel history, Berlin origins
 
+Cover image: Marienkirche exterior with TV Tower, uploaded to Wix Media and used for `og:image` / `twitter:image`. Source credit: [Berlin Marienkirche Exterior 0326 02.jpg](https://commons.wikimedia.org/wiki/File:Berlin_Marienkirche_Exterior_0326_02.jpg) by Dosseman, CC BY-SA 4.0.
+
 Suggested CTA: See the older city where it still survives. My Berlin Free Walking Tour starts at Alexanderplatz and follows the historic centre toward Museum Island and Hackescher Markt.
 
 ## Widget Plan
@@ -23,18 +29,18 @@ Suggested CTA: See the older city where it still survives. My Berlin Free Walkin
 Use these embeds when building the post in Wix:
 
 1. Quick summary, near the top:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-founding-year-1237`
+   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-founding-year-1237&v=20260610a`
 
 2. Twin towns map, after "Two Towns, One River":
-   `https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-twin-towns/`
+   `https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-twin-towns/?v=20260610a`
    - Recommended iframe height: 760 px desktop / 980 px mobile if fixed. The widget also posts `bw-resize` when the parent listener is available.
 
 3. Medieval Berlin Mini Walk Planner, after "Where You Can Still Touch Medieval Berlin":
-   `https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-mini-walk/`
+   `https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-mini-walk/?v=20260610a`
    - Recommended iframe height: 760 px desktop / 1180 px mobile if fixed. The widget also posts `bw-resize` when the parent listener is available.
 
 4. FAQ, near the bottom:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-founding-year-1237`
+   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-founding-year-1237&v=20260610a`
 
 ## Related Internal Links
 
@@ -65,14 +71,14 @@ So when the city celebrated its 750th birthday in 1987, the math pointed back to
 
 Here is the short timeline before the details:
 
-1. **Around 1170 to 1200:** settlements grow on both banks of the Spree, at one of the easiest crossing points in a swampy valley.
-2. **1237:** Cölln is mentioned in a document for the first time. This becomes Berlin's official founding year.
-3. **1244:** Berlin is mentioned for the first time.
-4. **1280:** Berlin's town seal shows bears for the first time, long before the bear becomes the city's most famous symbol.
-5. **1307:** Berlin and Cölln form a political union with a shared town hall.
-6. **1432:** the two towns formally merge into one municipality, though their relationship with the ruler remains tense.
-7. **1415 to 1417:** the Hohenzollerns take over Brandenburg. In 1443 they begin the palace in Cölln, on the site of today's Humboldt Forum.
-8. **1710:** Berlin, Cölln, Friedrichswerder, Dorotheenstadt, and Friedrichstadt merge into a single royal capital called Berlin.
+- **Around 1170 to 1200:** settlements grow on both banks of the Spree, at one of the easiest crossing points in a swampy valley.
+- **1237:** Cölln is mentioned in a document for the first time. This becomes Berlin's official founding year.
+- **1244:** Berlin is mentioned for the first time.
+- **1280:** Berlin's town seal shows bears for the first time, long before the bear becomes the city's most famous symbol.
+- **1307:** Berlin and Cölln form a political union with a shared town hall.
+- **1432:** the two towns formally merge into one municipality, though their relationship with the ruler remains tense.
+- **1415 to 1417:** the Hohenzollerns take over Brandenburg. In 1443 they begin the palace in Cölln, on the site of today's Humboldt Forum.
+- **1710:** Berlin, Cölln, Friedrichswerder, Dorotheenstadt, and Friedrichstadt merge into a single royal capital called Berlin.
 
 ## Two Towns, One River
 

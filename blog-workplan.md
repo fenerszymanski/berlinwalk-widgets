@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-06-10 (1237 founding-year draft/widgets added; sitemap last checked 2026-06-08)
+Last updated: 2026-06-10 (1237 founding-year Wix draft created; sitemap last checked 2026-06-08)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -34,8 +34,8 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
-| 0 | Draft v1 | Why Is Berlin's Founding Year 1237? Cölln, Medieval Berlin and the City Before 1933 | Route-linked history pillar around Berlin/Cölln origins, the 1237 documentation date, medieval survivors, and why most tours skip pre-1933 Berlin. Local draft at `blog-drafts/why-is-berlin-founding-year-1237.md`; post-only widgets at `medieval-berlin-twin-towns/` and `medieval-berlin-mini-walk/`. |
-| 0 | Draft v1 | What Is a Späti? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips | Tourist-friction explainer connecting Späti culture, Sunday closures, cash habits, late-night basics, Pfand, etiquette, and survival advice. Local draft at `blog-drafts/what-is-a-spati-berlin.md`; post-only widget at `spati-survival-checker/`. |
+| 0 | Wix draft | Why Is Berlin's Founding Year 1237? Cölln, Medieval Berlin and the City Before 1933 | Route-linked history pillar around Berlin/Cölln origins, the 1237 documentation date, medieval survivors, and why most tours skip pre-1933 Berlin. Wix draft `239d8355-2d20-4152-a809-8451074602e9` is UNPUBLISHED with SEO, cover/OG image, QS, FAQ, and two post-only widget embeds. Local source at `blog-drafts/why-is-berlin-founding-year-1237.md`; widgets at `medieval-berlin-twin-towns/` and `medieval-berlin-mini-walk/`. |
+| 0 | Wix draft | What Is a Späti? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips | Tourist-friction explainer connecting Späti culture, Sunday closures, cash habits, late-night basics, Pfand, etiquette, and survival advice. Wix draft `6f3636f2-b910-4481-a87b-82dd5bd91ba4` is UNPUBLISHED with cover + 3 inline images, QS, Späti Survival Checker, FAQ, image credits, SEO, and tags. Local source at `blog-drafts/what-is-a-spati-berlin.md`; post-only widget at `spati-survival-checker/`. |
 | 1 | Draft v1 | Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers | Practical first-timer vegan guide with map widget at vegan-berlin-map/index.html. Local draft at blog-drafts/vegan-berlin-guide-2026.md. |
 | 0 | Idea (search-trends) | Berlin by Foot: Best Walkable Areas for First-Time Visitors | Turn walking/strolling search intent into BerlinWalk route logic and conversion path. |
 | 0 | Refresh/Idea (search-trends) | If Reichstag Dome Is Sold Out: What to Do Instead | Major Reichstag refresh or child post covering scarcity, ID/registration rules, Kafer workaround, alternate viewpoints, and nearby route links. |

@@ -2,6 +2,44 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-10 — Codex (Späti Wix draft + images)
+
+**Did:**
+- Sourced 4 Wikimedia Commons Späti candidates, selected 3 CC BY-SA 4.0 Berlin-specific images, optimized them, and added the selected set to the Späti article.
+- Created the unpublished Wix Blog draft for `What Is a Späti?` with Quick Summary, Späti Survival Checker, FAQ, cover media, 3 inline images, Image Credits, SEO, and tags.
+- Verified live GitHub Pages embed/data URLs and Wix readback.
+
+**Changed:**
+- `blog-drafts/what-is-a-spati-berlin.md` — status now points to Wix draft `6f3636f2-b910-4481-a87b-82dd5bd91ba4`; added image plan, 3 markdown images, and Image Credits.
+- `blog-drafts/images/spati-berlin/` — new raw/optimized image folder with Commons metadata and `visual-sources.md`.
+- `blog-workplan.md`, `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — Späti status moved to Wix draft.
+- `../scripts/create-wix-spati-blog-draft.js` — one-off image-upload + draft create/update helper.
+- Wix: draft `6f3636f2-b910-4481-a87b-82dd5bd91ba4` is UNPUBLISHED with 268 Ricos nodes, 3 IMAGE nodes, 3 HTML embeds, 1 ordered list, 3 tags, Tourist Tips category, cover media, Image Credits present, and Source Notes excluded.
+
+**Opened:** Visual preview in Wix before publish; watch the Späti Survival Checker iframe height on mobile.
+**Closed:** Previous Späti image/draft request: images are sourced, optimized, credited, uploaded, and the Wix draft exists.
+
+**Next session should:** Open the Wix draft, proof images/credits/iframe heights, then publish if the preview is clean.
+
+## 2026-06-10 — Codex (Berlin 1237 Wix draft + SEO)
+
+**Did:**
+- Created the unpublished Wix Blog draft for `Why Is Berlin's Founding Year 1237?` using the local markdown source, Quick Summary, FAQ, and both post-only widgets.
+- Added a licensed Marienkirche cover image to Wix Media and wired it into cover media, `og:image`, `twitter:image`, image alt, and an image-credit block.
+- Reverified live GitHub Pages widget/data URLs and Wix readback.
+
+**Changed:**
+- `blog-drafts/why-is-berlin-founding-year-1237.md` — status now points to Wix draft `239d8355-2d20-4152-a809-8451074602e9`, edit URL, cover credit, and cache-busted embed URLs.
+- `blog-workplan.md` — 1237 post status moved from `Draft v1` to `Wix draft`.
+- `../berlinwalk-content-app/create-berlin-1237-draft.mjs`, `../berlinwalk-content-app/add-berlin-1237-cover.mjs` — one-off draft and cover/SEO image scripts.
+- `../output/wix-drafts/berlin-1237-draft-20260610.json`, `../output/wix-drafts/berlin-1237-cover-20260610.json` — Wix API verification outputs.
+- Wix: draft `239d8355-2d20-4152-a809-8451074602e9` is UNPUBLISHED with 90 Ricos nodes, 4 HTML embeds, 5 tags, Berlin History category, 12 SEO tags, focus keyword, cover media, `og:image`, `twitter:image`, and no `[IMAGE]` placeholders.
+
+**Opened:** Final visual preview in Wix before publish; optional later improvement is adding inline original photos for wall/route atmosphere.
+**Closed:** Previous "create the Wix draft after deploy" TODO for the 1237 post.
+
+**Next session should:** Preview the Wix draft in the editor and publish only after the cover crop and iframe heights look right.
+
 ## 2026-06-10 — Codex (Berlin 1237 founding-year post/widgets)
 
 **Did:**

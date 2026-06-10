@@ -2,7 +2,7 @@
 
 Slug idea: `what-is-a-spati-berlin`
 
-Status: local draft v1, not pushed to Wix.
+Status: Wix draft created, unpublished. Draft ID: `6f3636f2-b910-4481-a87b-82dd5bd91ba4`.
 
 Meta title: What Is a Späti? Berlin Late-Night Shops & Sunday Tips
 
@@ -29,6 +29,21 @@ Use these embeds when building the post in Wix:
 3. Späti Survival Checker, after "The Short Answer":
    `https://fenerszymanski.github.io/berlinwalk-widgets/spati-survival-checker/`
    - Recommended iframe height: 740 px desktop / 1620 px narrow mobile if the embed is fixed. The widget also reports `bw-resize` when the Wix parent listener is available.
+
+## Image Plan
+
+Use these optimized local images when creating the Wix draft:
+
+1. Cover and first inline image:
+   `berlinwalk-widgets/blog-drafts/images/spati-berlin/01-spati-kreuzberg-cover.jpg`
+
+2. Inline image after "Why Berlin Has So Many Spätis":
+   `berlinwalk-widgets/blog-drafts/images/spati-berlin/02-spati-tag-nacht-storefront.jpg`
+
+3. Inline image in "The Pfand Rule":
+   `berlinwalk-widgets/blog-drafts/images/spati-berlin/03-spati-interior-bottles.jpg`
+
+All three selected images are Wikimedia Commons CC BY-SA 4.0 files and need attribution. Source/credit details are saved in `blog-drafts/images/spati-berlin/visual-sources.md`.
 
 This article should work as a clear practical explainer and internal-link bridge between Sunday shopping, cash/card, beer gardens, public transport, and first-day planning content.
 
@@ -64,6 +79,8 @@ Then someone says: "Just go to a Späti."
 A Späti is Berlin's late-night corner shop. But if you only translate it as "convenience store", you miss the point. In Berlin, a Späti is part emergency shop, part neighborhood signal, part cultural shortcut.
 
 It tells you something about how the city works after normal opening hours.
+
+![A Berlin Späti storefront in Kreuzberg with drinks, signs, benches, and a Lotto sign outside.](berlinwalk-widgets/blog-drafts/images/spati-berlin/01-spati-kreuzberg-cover.jpg)
 
 {{quick-summary}}
 
@@ -112,6 +129,8 @@ After reunification, the word and the habit spread across the whole city.
 That history matters because the Späti does not feel like a polished chain-store concept. It feels more improvised. One shop may be clean, bright, and card-friendly. Another may look like it has been holding the neighborhood together since 1998. A third may sell coffee, DHL parcel service, club flyers, incense, lottery tickets, and a suspiciously large number of phone chargers.
 
 This is Berlin. Systems exist, but they often come with improvisation attached.
+
+![A Tag und Nacht Spätkauf storefront on Potsdamer Straße in Berlin.](berlinwalk-widgets/blog-drafts/images/spati-berlin/02-spati-tag-nacht-storefront.jpg)
 
 ## Why Locals Stand Outside Spätis
 
@@ -229,6 +248,8 @@ This is not only a Späti issue. It is part of the wider Berlin money pattern. F
 ## The Pfand Rule: Your Bottle Is Not Just Trash
 
 If you buy a beer, water, soft drink, or can at a Späti, you may pay Pfand, the German bottle deposit.
+
+![Bottles and drinks inside a Berlin Spätkauf, useful for understanding Pfand and late-night drink purchases.](berlinwalk-widgets/blog-drafts/images/spati-berlin/03-spati-interior-bottles.jpg)
 
 That deposit is usually:
 
@@ -384,6 +405,14 @@ If you want Berlin to click faster, start with my [Berlin Free Walking Tour](htt
 
 {{faq}}
 
+## Image Credits
+
+Images via Wikimedia Commons:
+
+- [Spätkauf in Berlin](https://commons.wikimedia.org/wiki/File:Sp%C3%A4tkauf_in_Berlin.jpg) by Nicolas Bouliane, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), cropped and resized.
+- [Berlin Tag Nacht Spätkauf](https://commons.wikimedia.org/wiki/File:Berlin_Tag_Nacht_Sp%C3%A4tkauf.jpg) by ChickSR, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), resized.
+- [Spätkauf Berlin 2011](https://commons.wikimedia.org/wiki/File:Sp%C3%A4tkauf_Berlin_2011.jpg) by Lukas Uhde, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), resized.
+
 ## Source Notes to Check Before Publishing
 
 - Berlin.de Späti explainer, including culture, GDR origin, and Sunday opening categories: https://www.berlin.de/en/shopping/4971123-2947095-spaeti-meeting-point-and-supermarket.en.html
@@ -393,3 +422,5 @@ If you want Berlin to click faster, start with my [Berlin Free Walking Tour](htt
 - visitBerlin business hours overview: https://www.visitberlin.de/en/shopping-business-hours
 - Existing BerlinWalk Sunday-shopping guide for internal consistency: https://www.berlinwalk.com/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know
 - Existing BerlinWalk card/cash guide for internal consistency: https://www.berlinwalk.com/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany
+
+Wix draft ID: `6f3636f2-b910-4481-a87b-82dd5bd91ba4`
