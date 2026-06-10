@@ -1,20 +1,23 @@
-/* lead-form-inject.js — auto-injects the BerlinWalk lead-form widget into every
+/* lead-form-inject.js — auto-injects the BerlinWalk booking calendar into every
  * blog post body. Loaded site-wide via Wix Custom Code.
  *
  * Wix's blog post body is rendered by React. A naive one-shot injection gets
- * removed on the next reconciliation (the iframe appears for ~1s and is then
+ * removed on the next reconciliation (the card appears for ~1s and is then
  * yanked out as "an element React didn't render"). This script handles that:
  *
  *   1. Waits a moment for React to hydrate before the first attempt.
- *   2. Uses a MutationObserver to detect when our iframe disappears and
+ *   2. Uses a MutationObserver to detect when our card disappears and
  *      re-injects it (debounced).
  *   3. Caps total re-injections so we don't infinite-loop if Wix is hostile.
  *   4. Re-runs everything on SPA navigation between posts.
  */
 (function () {
-  var LEAD_FORM_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/lead-form/?source=survival-map-blog-post';
-  var MARKER = 'data-bw-leadform';
-  var LOG = '[BW lead-form]';
+  var CALENDAR_SCRIPT_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/booking-calendar/booking-calendar-element.js';
+  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var MARKER = 'data-bw-blog-booking';
+  var STYLE_ID = 'bw-blog-booking-inject-style';
+  var SCRIPT_MARKER = 'data-bw-booking-calendar-script';
+  var LOG = '[BW blog booking]';
   var MAX_REINJECTS = 12;
   var REINJECT_DEBOUNCE_MS = 400;
 
@@ -84,6 +87,82 @@
     return null;
   }
 
+  function ensureStyles() {
+    if (document.getElementById(STYLE_ID)) return;
+    var style = document.createElement('style');
+    style.id = STYLE_ID;
+    style.textContent = [
+      '.bw-blog-booking-card{box-sizing:border-box;margin:34px 0;max-width:100%;min-width:0;padding:18px;background:#FAFAF5;border:1px solid #CFE4C8;border-left:8px solid #1B5E20;border-radius:14px;box-shadow:0 14px 34px rgba(27,94,32,.11);font-family:Montserrat,Arial,sans-serif;color:#212121;}',
+      '.bw-blog-booking-card *{box-sizing:border-box;}',
+      '.bw-blog-booking-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(280px,1.1fr);gap:18px;align-items:start;min-width:0;}',
+      '.bw-blog-booking-copy{min-width:0;}',
+      '.bw-blog-booking-kicker{display:inline-flex;align-items:center;gap:6px;margin:0 0 8px;color:#1B5E20;font-size:12px;font-weight:900;letter-spacing:.12em;line-height:1;text-transform:uppercase;}',
+      '.bw-blog-booking-title{margin:0 0 9px;color:#1B5E20;font-size:28px;font-weight:900;line-height:1.08;letter-spacing:0;}',
+      '.bw-blog-booking-text{margin:0;color:#4E5A4E;font-size:16px;font-weight:500;line-height:1.5;}',
+      '.bw-blog-booking-facts{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;list-style:none;}',
+      '.bw-blog-booking-facts li{border:1px solid #DCE3DD;border-radius:999px;background:#fff;color:#1B5E20;font-size:12px;font-weight:800;line-height:1;padding:8px 10px;white-space:nowrap;}',
+      '.bw-blog-booking-panel{min-width:0;}',
+      '.bw-blog-booking-card .bw-cal-next-note{display:none;}',
+      '.bw-blog-booking-note{margin:10px 0 0;color:#4E5A4E;font-size:13px;font-weight:600;line-height:1.4;}',
+      '.bw-blog-booking-fallback{display:none;margin-top:10px;}',
+      '.bw-blog-booking-fallback a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 18px;border-radius:999px;background:#FFE600;color:#1B5E20;font-weight:900;text-decoration:none;}',
+      '.bw-blog-booking-card.is-calendar-error .bw-blog-booking-fallback{display:block;}',
+      '@media(max-width:760px){.bw-blog-booking-card{margin:28px 0;padding:14px;border-left-width:6px;border-radius:12px;}.bw-blog-booking-grid{grid-template-columns:1fr;gap:14px;}.bw-blog-booking-title{font-size:24px;}.bw-blog-booking-text{font-size:15px;}.bw-blog-booking-facts li{font-size:11px;}}'
+    ].join('');
+    document.head.appendChild(style);
+  }
+
+  function ensureCalendarScript(wrapper) {
+    if (window.customElements && window.customElements.get && window.customElements.get('bw-booking-calendar')) return;
+    if (document.querySelector('script[' + SCRIPT_MARKER + ']')) return;
+    var script = document.createElement('script');
+    script.src = CALENDAR_SCRIPT_URL;
+    script.async = true;
+    script.setAttribute(SCRIPT_MARKER, '1');
+    script.onerror = function () {
+      if (wrapper) wrapper.classList.add('is-calendar-error');
+      console.warn(LOG, 'calendar script failed to load');
+    };
+    document.head.appendChild(script);
+  }
+
+  function buildBookingCard() {
+    ensureStyles();
+
+    var wrapper = document.createElement('section');
+    wrapper.setAttribute(MARKER, '1');
+    wrapper.className = 'bw-blog-booking-card';
+    wrapper.setAttribute('aria-label', 'Book the BerlinWalk walking tour');
+
+    wrapper.innerHTML = [
+      '<div class="bw-blog-booking-grid">',
+      '  <div class="bw-blog-booking-copy">',
+      '    <p class="bw-blog-booking-kicker">BerlinWalk tour</p>',
+      '    <h2 class="bw-blog-booking-title">Pick your walking tour date</h2>',
+      '    <p class="bw-blog-booking-text">Join my free, tip-based Berlin walk from the World Clock at Alexanderplatz. Choose a date here, then finish the reservation on the next step.</p>',
+      '    <ul class="bw-blog-booking-facts" aria-label="Tour facts">',
+      '      <li>Free to book</li>',
+      '      <li>Tip-based</li>',
+      '      <li>~2h walk</li>',
+      '    </ul>',
+      '  </div>',
+      '  <div class="bw-blog-booking-panel">',
+      '    <bw-booking-calendar',
+      '      service-title="Choose a tour date"',
+      '      availability-days="120"',
+      '      cta-label="Reserve your spot"',
+      '      booking-url="' + BOOKING_URL + '">',
+      '    </bw-booking-calendar>',
+      '    <p class="bw-blog-booking-note">You will choose the number of guests on the next step. Booking is free; you tip at the end of the walk.</p>',
+      '    <p class="bw-blog-booking-fallback"><a href="' + BOOKING_URL + '">Open booking page</a></p>',
+      '  </div>',
+      '</div>'
+    ].join('');
+
+    ensureCalendarScript(wrapper);
+    return wrapper;
+  }
+
   function inject() {
     if (!isPostPage()) return false;
     if (document.querySelector('[' + MARKER + ']')) return false; // already there
@@ -96,18 +175,7 @@
     var anchor = findInsertionAnchor(body);
     if (!anchor) return false;
 
-    var wrapper = document.createElement('div');
-    wrapper.setAttribute(MARKER, '1');
-    wrapper.style.cssText = 'margin: 32px 0; max-width: 100%;';
-
-    var iframe = document.createElement('iframe');
-    iframe.src = LEAD_FORM_URL;
-    iframe.title = 'Get the BerlinWalk Berlin First-Day Survival Guide';
-    iframe.setAttribute('height', '320');
-    iframe.setAttribute('scrolling', 'no');
-    iframe.setAttribute('loading', 'lazy');
-    iframe.style.cssText = 'width: 100%; border: 0; display: block;';
-    wrapper.appendChild(iframe);
+    var wrapper = buildBookingCard();
 
     anchor.parentNode.insertBefore(wrapper, anchor.nextSibling);
     injections++;

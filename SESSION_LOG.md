@@ -2,6 +2,62 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-10 — Codex (Blog booking calendar injection)
+
+**Did:**
+- Replaced the global mid-post Survival Guide iframe injection with a compact live BerlinWalk booking calendar card.
+- Kept attendee count out of the blog card; the injected copy now says guests are chosen on the next Wix booking step.
+- Hid the calendar component's duplicate internal "next step" note inside the blog card, so the guest-count explanation appears once below the calendar.
+
+**Changed:**
+- `js/lead-form-inject.js` — now injects a branded booking card, lazy-loads `booking-calendar/booking-calendar-element.js`, and links selected slots to the canonical Wix booking service URL.
+- `README.md` — updated the helper description so the legacy filename is no longer mistaken for a lead-form injector.
+- `../PROJECT_MEMORY.md` — recorded that blog posts now use booking calendar injection, not the old Survival Guide iframe.
+
+**Opened:** Push/deploy and live-QA one Wix blog post on desktop/mobile after GitHub Pages updates.
+**Closed:** Yusuf's decision to standard-replace the Survival Guide mid-post embed with the booking calendar is implemented locally. Local QA on `/post/test` confirmed: calendar card injects, no old iframe, no guest selector, no `guests=` booking URL param, no horizontal overflow at 430px mobile width.
+
+**Next session should:** Push/deploy, then verify one live `/post/*` page after GitHub Pages updates; confirm the CTA lands on the native Wix booking form where guest count is selected.
+
+## 2026-06-10 — Codex (1237 publish distribution)
+
+**Did:**
+- Promoted the published 1237 post through local `/blog` data and related-tool logic.
+- Promoted `medieval-berlin-mini-walk` from post widget to BerlinTools/tool hub, with live CMS page and temporary Wix hub bridge.
+- Checked Search Console URL Inspection API status for the published post.
+
+**Changed:**
+- `blog-index/data.json`, `scripts/generate-blog-index-data.mjs` — 1237 is the lead story, protected as a required slug, first in the Berlin History shelf, and related to `medieval-berlin-mini-walk`.
+- `tools-hub/data.json` — added `medieval-berlin-mini-walk` after `berlin-landmarks-map`.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated ItemList SEO to include Medieval Berlin Mini Walk Planner.
+- Wix: BerlinTools CMS item `1f62dedb-a1a5-4ce2-aef0-0be6ecf5072a` is live at `/tools/medieval-berlin-mini-walk`; `BerlinWalk 1237 Blog Feature` custom embed revision 3 and `BerlinWalk 1237 Tools Hub Feature` revision 1 bridge live `/blog` and `/berlin-tools` until push; `BerlinTools Layout Fixes` is revision 16.
+- QA: Playwright live checks confirmed `/blog` renders the 1237 lead and mini-walk tool, `/berlin-tools` renders the mini-walk card/link, and `/tools/medieval-berlin-mini-walk` renders the page and widget URL. `/widgets` is iframe-backed and did not show the new card before GitHub Pages data is pushed.
+- External: Search Console URL Inspection API reported `URL is unknown to Google`; normal blog-post request-indexing must be done manually in the Search Console UI. UI attempt redirected to Google sign-in, so Codex could not click `Request indexing` in this session.
+
+**Opened:** Push `berlinwalk-widgets` so GitHub Pages serves refreshed `blog-index/data.json`, `tools-hub/data.json`, and widgets SEO data; after push, smoke-check `/widgets` and remove or disable the temporary 1237 bridge embeds if they are no longer needed. Manually request indexing for the 1237 post in Search Console UI.
+**Closed:** 1237 post distribution and Medieval Berlin Mini Walk BerlinTools promotion are live.
+
+**Next session should:** Push/deploy, then smoke-check `/blog`, `/berlin-tools`, `/widgets`, and `/tools/medieval-berlin-mini-walk`; submit the 1237 URL through the Search Console UI.
+
+## 2026-06-10 — Codex (Späti publish distribution)
+
+**Did:**
+- Added the published Späti post to local blog-index logic/data and promoted Späti Survival Checker from post-only widget to BerlinTools.
+- Submitted the published post to Google Search Console Request indexing after a successful live URL test.
+
+**Changed:**
+- `blog-index/data.json`, `scripts/generate-blog-index-data.mjs` — Späti is Latest #1, related to `spati-survival-checker`, included in First Day/Practical/Food shelves, and protected from Wix query lag with required-slug fetching.
+- `tools-hub/data.json` — added `spati-survival-checker` with image, widget URL, category Maps, and embed height 760.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated ItemList SEO to include Späti Survival Checker.
+- `../berlinwalk-content-app/upsert-spati-survival-checker-tool.mjs` — one-off CMS upsert helper.
+- Wix: BerlinTools CMS item `c3e52ab1-c663-456a-9b0f-3031625f122f` is live at `/tools/spati-survival-checker`; `BerlinTools Layout Fixes` custom embed updated to revision 15.
+- External: Search Console live test said the URL is available to Google and page can be indexed; Request indexing returned `Indexing requested`.
+
+**Opened:** Push `berlinwalk-widgets` so live GitHub Pages serves the refreshed `blog-index/data.json`, `tools-hub/data.json`, and widgets SEO data; until then, the dynamic tool page is live but hub/grid data is local only.
+**Closed:** Späti post distribution and Search Console indexing request are done.
+
+**Next session should:** Push/deploy, then verify `/blog`, `/berlin-tools`, `/tools`, `/widgets`, and `/tools/spati-survival-checker`.
+
 ## 2026-06-10 — Codex (Trip Planner subscription backfill)
 
 **Did:**
