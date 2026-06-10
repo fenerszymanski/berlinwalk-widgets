@@ -31,9 +31,10 @@ const TOPICS = [
       'luggage-storage-in-berlin-2026',
       'public-toilets-in-berlin',
       'are-shops-open-on-sunday-in-berlin',
+      'what-is-a-spati-berlin',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     ],
-    match: /(first-time|airport|alexanderplatz|luggage|toilet|sunday|transport|ticket|welcome|tap water|drinking water|safe|cash|credit card)/i,
+    match: /(first-time|airport|alexanderplatz|luggage|toilet|sunday|späti|spaeti|spati|transport|ticket|welcome|tap water|drinking water|safe|cash|credit card)/i,
   },
   {
     key: 'practical',
@@ -49,10 +50,11 @@ const TOPICS = [
       'is-berlin-safe-to-visit-an-honest-2026-guide',
       'can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany',
       'shopping-in-berlin',
+      'what-is-a-spati-berlin',
       'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
     ],
-    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
+    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
   },
   {
     key: 'free-budget',
@@ -93,6 +95,7 @@ const TOPICS = [
     kicker: 'Context',
     description: 'Berlin history, myths, before-and-after stories, and the background that makes the city click.',
     slugs: [
+      'why-is-berlin-founding-year-1237',
       'where-was-the-berlin-wall-interactive-map',
       'east-side-gallery-berlin-guide',
       'the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol',
@@ -111,6 +114,7 @@ const TOPICS = [
     description: 'Food, coffee, currywurst, clubs, and the useful bits of Berlin culture around eating and going out.',
     slugs: [
       'vegan-berlin-guide-2026',
+      'what-is-a-spati-berlin',
       'best-currywurst-places-in-berlin-2026',
       'what-to-eat-in-berlin-12-must-try-local-foods',
       '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
@@ -118,7 +122,7 @@ const TOPICS = [
       '5-best-coffee-shops-near-hackescher-markt-a-local-s-guide',
       'what-to-wear-to-berlin-clubs',
     ],
-    match: /(food|eat|vegan|plant-based|plant based|currywurst|döner|doner|coffee|club|nightlife|menu|tip in berlin|restaurants?)/i,
+    match: /(food|eat|vegan|plant-based|plant based|currywurst|döner|doner|coffee|club|nightlife|späti|spaeti|spati|menu|tip in berlin|restaurants?)/i,
   },
   {
     key: 'when-to-visit',
@@ -148,17 +152,23 @@ const TOPICS = [
 ];
 
 const HERO_SLUGS = {
-  lead: 'vegan-berlin-guide-2026',
+  lead: 'why-is-berlin-founding-year-1237',
   secondary: [
-    'where-to-watch-2026-world-cup-in-berlin',
+    'nikolaiviertel-rebuilt-old-town',
     'east-side-gallery-berlin-guide',
-    'shopping-in-berlin',
-    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
-    'public-toilets-in-berlin',
-    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'where-was-the-berlin-wall-interactive-map',
+    'brandenburg-gate-berlin-visitors-guide',
+    'vegan-berlin-guide-2026',
+    'what-is-a-spati-berlin',
+    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
+    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   ],
 };
+
+const REQUIRED_SLUGS = [
+  'what-is-a-spati-berlin',
+  'why-is-berlin-founding-year-1237',
+];
 
 const START_HERE_LINKS = [
   {
@@ -183,16 +193,28 @@ const START_HERE_LINKS = [
 
 const SPOTLIGHT_TOOLS = [
   {
+    title: 'Medieval Berlin Mini Walk Planner',
+    slug: 'medieval-berlin-mini-walk',
+    url: `${BLOG_BASE}/tools/medieval-berlin-mini-walk`,
+    summary: 'Trace Berlin and Cölln around Alexanderplatz, Nikolaiviertel and Museum Island.',
+  },
+  {
+    title: 'Berlin Landmarks Map',
+    slug: 'berlin-landmarks-map',
+    url: `${BLOG_BASE}/tools/berlin-landmarks-map`,
+    summary: 'Find the central landmarks, memorials, museums and viewpoints that frame the historic core.',
+  },
+  {
+    title: 'Späti Survival Checker',
+    slug: 'spati-survival-checker',
+    url: `${BLOG_BASE}/tools/spati-survival-checker`,
+    summary: 'Check whether a Späti, station shop, pharmacy, toilet finder, or supermarket is the right fix.',
+  },
+  {
     title: 'Vegan Berlin Interactive Map',
     slug: 'vegan-berlin-locations-map',
     url: `${BLOG_BASE}/tools/vegan-berlin-locations-map`,
     summary: 'Find the best vegan spots near your hotel with a filterable Berlin map.',
-  },
-  {
-    title: 'Vegan Berlin Top Picks',
-    slug: 'vegan-berlin-map',
-    url: `${BLOG_BASE}/tools/vegan-berlin-map`,
-    summary: 'A curated list of Berlin plant-based restaurants, cafes, fine dining and sweets.',
   },
   {
     title: 'Berlin First-Day Planner',
@@ -320,6 +342,44 @@ async function getPopularPosts(siteId, maxPosts = 20) {
   }
 }
 
+async function getPostsBySlug(siteId, slugs) {
+  const posts = [];
+  for (const slug of slugs) {
+    try {
+      const data = await wixFetch('/blog/v3/posts/query', {
+        method: 'POST',
+        siteId,
+        body: {
+          query: {
+            filter: { slug },
+            paging: { limit: 1, offset: 0 },
+          },
+          fieldsets: ['URL'],
+        },
+      });
+      if (data.posts?.[0]) posts.push(data.posts[0]);
+    } catch (error) {
+      console.warn(`Could not fetch required slug ${slug}: ${error.message}`);
+    }
+  }
+  return posts;
+}
+
+function mergePosts(primaryPosts, requiredPosts) {
+  const byIdOrSlug = new Map();
+  for (const post of requiredPosts) {
+    byIdOrSlug.set(post.id || post.slug, post);
+  }
+  for (const post of primaryPosts) {
+    byIdOrSlug.set(post.id || post.slug, post);
+  }
+  return [...byIdOrSlug.values()].sort((a, b) => {
+    const aTime = Date.parse(a.firstPublishedDate || a.publishedDate || '') || 0;
+    const bTime = Date.parse(b.firstPublishedDate || b.publishedDate || '') || 0;
+    return bTime - aTime;
+  });
+}
+
 function cleanText(value) {
   return String(value || '').replace(/\s+/g, ' ').trim();
 }
@@ -352,10 +412,12 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(1237|founding|cölln|colln|medieval|nikolaiviertel|old-town|old town)/.test(s)) return 'medieval-berlin-mini-walk';
   if (/(world-cup|world cup|public viewing|fan mile|football|soccer)/.test(s)) return 'watch-world-cup-2026-berlin';
   if (/(day-trip|day trip|potsdam|sachsenhausen|spreewald|dresden|leipzig|wittenberg|tropical-islands|bastei)/.test(s)) return 'berlin-day-trips-finder';
   if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) return 'best-month-to-visit-berlin';
   if (/(toilet)/.test(s)) return 'berlin-public-toilets';
+  if (/(späti|spaeti|spati|late-night|late night|sunday rules|corner shop)/.test(s)) return 'spati-survival-checker';
   if (/(luggage|storage|suitcase)/.test(s)) return 'berlin-luggage-storage';
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
@@ -471,12 +533,13 @@ async function main() {
   const repoRoot = path.resolve(__dirname, '..');
   const outPath = path.resolve(repoRoot, args.out);
 
-  const [categories, rawPosts, rawPopularPosts] = await Promise.all([
+  const [categories, rawPosts, rawPopularPosts, requiredPosts] = await Promise.all([
     getCategories(args.siteId),
     getPosts(args.siteId, args.limit),
     getPopularPosts(args.siteId, 20),
+    getPostsBySlug(args.siteId, REQUIRED_SLUGS),
   ]);
-  const posts = rawPosts.map((post) => normalizePost(post, categories));
+  const posts = mergePosts(rawPosts, requiredPosts).map((post) => normalizePost(post, categories));
   const popularPosts = rawPopularPosts.map((post) => normalizePost(post, categories));
   const data = buildData(posts, popularPosts);
 
