@@ -2,6 +2,23 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-10 — Codex (Blog booking embed live fix pending)
+
+**Did:**
+- Diagnosed the broken live injected booking card: the live `lead-form-inject.js` still renders a blog-card `h2`, and the live calendar element still renders `h2.bw-cal-title`, so Wix blog heading CSS makes the calendar title huge.
+- Added a local compact embed fix and a CSS safety override so the blog card stays readable even if the calendar element is cached.
+- Local mock blog QA passed on desktop and 430px mobile: injected card renders, no old iframe, no blog-card `h2`, calendar title stays 18px, no `guests=` CTA param, and no horizontal overflow.
+
+**Changed:**
+- `js/lead-form-inject.js` — blog-card heading is now a `div` heading role, grid is more compact, and calendar title styles are forced inside the blog card.
+- `booking-calendar/booking-calendar-element.js` — calendar title is now a `div` heading role with defensive heading styles.
+- Local HEAD commit `Compact blog booking calendar embed` is one commit ahead of `origin/main`.
+
+**Opened:** Push is blocked by GitHub auth in Codex (`Username for 'https://github.com':` prompt; connector update returned 403). Live GitHub Pages still serves the old files until Yusuf pushes.
+**Closed:** Live breakage root cause identified and fixed locally; local render QA passed.
+
+**Next session should:** Push from an authenticated terminal: `cd "/Users/yusufucuz/Documents/New project/berlinwalk-widgets" && git push origin main`; then live-QA a `/post/*` page and confirm no giant `Choose a tour date` heading, no guest selector, and CTA opens the native Wix booking form.
+
 ## 2026-06-10 — Codex (Blog booking calendar injection)
 
 **Did:**

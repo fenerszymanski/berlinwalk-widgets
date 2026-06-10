@@ -58,10 +58,13 @@ const BW_BOOKING_CALENDAR_STYLES = `
 
   .bw-cal-title {
     color: var(--green);
-    font-size: 18px;
-    font-weight: 800;
-    line-height: 1.12;
-    margin: 0;
+    display: block;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    letter-spacing: 0 !important;
+    line-height: 1.12 !important;
+    margin: 0 !important;
+    text-transform: none !important;
   }
 
   .bw-cal-note {
@@ -638,7 +641,7 @@ class BWBookingCalendarElement extends HTMLElement {
       <section class="bw-booking-calendar" aria-label="BerlinWalk booking calendar">
         <div class="bw-cal-shell">
           <header class="bw-cal-head">
-            <h2 class="bw-cal-title">${this._escape(serviceTitle)}</h2>
+            <div class="bw-cal-title" role="heading" aria-level="3">${this._escape(serviceTitle)}</div>
             <span class="bw-cal-note">Free reservation, no upfront payment</span>
           </header>
           <div class="bw-cal-body">
