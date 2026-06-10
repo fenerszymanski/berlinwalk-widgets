@@ -1,6 +1,6 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-06-09 (Späti draft/widget added; sitemap last checked 2026-06-08)
+Last updated: 2026-06-10 (1237 founding-year draft/widgets added; sitemap last checked 2026-06-08)
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
@@ -34,6 +34,7 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
+| 0 | Draft v1 | Why Is Berlin's Founding Year 1237? Cölln, Medieval Berlin and the City Before 1933 | Route-linked history pillar around Berlin/Cölln origins, the 1237 documentation date, medieval survivors, and why most tours skip pre-1933 Berlin. Local draft at `blog-drafts/why-is-berlin-founding-year-1237.md`; post-only widgets at `medieval-berlin-twin-towns/` and `medieval-berlin-mini-walk/`. |
 | 0 | Draft v1 | What Is a Späti? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips | Tourist-friction explainer connecting Späti culture, Sunday closures, cash habits, late-night basics, Pfand, etiquette, and survival advice. Local draft at `blog-drafts/what-is-a-spati-berlin.md`; post-only widget at `spati-survival-checker/`. |
 | 1 | Draft v1 | Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers | Practical first-timer vegan guide with map widget at vegan-berlin-map/index.html. Local draft at blog-drafts/vegan-berlin-guide-2026.md. |
 | 0 | Idea (search-trends) | Berlin by Foot: Best Walkable Areas for First-Time Visitors | Turn walking/strolling search intent into BerlinWalk route logic and conversion path. |
@@ -82,7 +83,10 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 - `blog-drafts/fiba-womens-basketball-world-cup-2026-berlin.md`
 - `blog-drafts/vegan-berlin-guide-2026.md`
 - `blog-drafts/what-is-a-spati-berlin.md`
+- `blog-drafts/why-is-berlin-founding-year-1237.md`
 - `spati-survival-checker/`
+- `medieval-berlin-twin-towns/`
+- `medieval-berlin-mini-walk/`
 - `vegan-berlin-map/`
 - `free-museums-map/`
 - `free-museums-compare/`

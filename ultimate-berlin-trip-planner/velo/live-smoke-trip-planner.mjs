@@ -487,6 +487,10 @@ async function main() {
     result.responses.lead = await postJson(`${baseUrl}/_functions/tripPlannerLead`, leadPayload);
     assertResult('tripPlannerLead', result.responses.lead, (body) => {
       if (!body.leadId) throw new Error('tripPlannerLead response missing leadId');
+      if (body.subscribed !== true) {
+        const detail = body.subscriptionDebug ? JSON.stringify(body.subscriptionDebug) : 'missing subscriptionDebug';
+        throw new Error(`tripPlannerLead did not subscribe Email Marketing contact: ${detail}`);
+      }
     });
   }
 

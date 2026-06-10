@@ -2,6 +2,7 @@ import wixData from 'wix-data';
 import { contacts, triggeredEmails } from 'wix-crm-backend';
 import { getSecret } from 'wix-secrets-backend';
 import { fetch } from 'wix-fetch';
+import { subscribeEmailMarketing } from 'backend/emailMarketingSubscription';
 
 const COLLECTION = 'TripPlannerLeads';
 const AI_BUDGET_COLLECTION = 'TripPlannerAiBudget';
@@ -799,6 +800,18 @@ async function ensureContact(email) {
   return contactId;
 }
 
+async function subscribeLeadEmailMarketing(email) {
+  try {
+    return await subscribeEmailMarketing(email);
+  } catch (error) {
+    return {
+      ok: false,
+      reason: 'subscription_exception',
+      message: String(error && error.message ? error.message : error).slice(0, 500)
+    };
+  }
+}
+
 async function findExistingLead(key) {
   const results = await wixData.query(COLLECTION)
     .eq('leadKey', key)
@@ -963,6 +976,7 @@ async function sendInstantIfDue(lead, now) {
 export async function saveTripPlannerLead(payload) {
   const lead = validateLeadPayload(payload);
   const contactId = await ensureContact(lead.email);
+  const subscriptionDebug = await subscribeLeadEmailMarketing(lead.email);
   const key = leadKey(lead.email, lead.arrivalDate);
   const now = new Date();
   const existing = await findExistingLead(key);
@@ -1051,6 +1065,8 @@ export async function saveTripPlannerLead(payload) {
     leadId: saved._id,
     created,
     updated: !created,
+    subscribed: subscriptionDebug && subscriptionDebug.ok === true,
+    subscriptionDebug,
     instant
   };
 }

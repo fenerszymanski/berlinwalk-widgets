@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Medieval Berlin Mini Walk Planner | BerlinWalk</title>
+  <meta name="description" content="Choose a short walking plan for seeing the medieval traces of Berlin around Alexanderplatz, Nikolaiviertel and Littenstraße.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-medieval-walk">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-medieval-walk {
+      --green: #1B5E20;
+      --green-dark: #123C16;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --light-green: #C5E1A5;
+      --cream: #FAFAF5;
+      --text: #212121;
+      --muted: #4E5A4E;
+      --white: #FFFFFF;
+      --border: #DCE8C8;
+      --red: #E63946;
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-medieval-walk *,
+    #bw-medieval-walk *::before,
+    #bw-medieval-walk *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-medieval-walk .bw-shell {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-medieval-walk .bw-head {
+      background: var(--green);
+      color: var(--white);
+      padding: 18px 20px;
+    }
+
+    #bw-medieval-walk .bw-kicker {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-medieval-walk h2,
+    #bw-medieval-walk h3,
+    #bw-medieval-walk p {
+      margin-top: 0;
+    }
+
+    #bw-medieval-walk .bw-title {
+      color: var(--white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-medieval-walk .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-medieval-walk .bw-body {
+      background: var(--cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 0.74fr) minmax(0, 1fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-medieval-walk .bw-panel,
+    #bw-medieval-walk .bw-result {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-medieval-walk .bw-label {
+      color: var(--green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      line-height: 1.3;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+    }
+
+    #bw-medieval-walk .bw-options {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-medieval-walk button,
+    #bw-medieval-walk a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #bw-medieval-walk button {
+      font: inherit;
+    }
+
+    #bw-medieval-walk .bw-option {
+      align-items: center;
+      background: #F8FBF1;
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 56px minmax(0, 1fr);
+      min-height: 62px;
+      padding: 10px;
+      text-align: left;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      width: 100%;
+    }
+
+    #bw-medieval-walk .bw-option:hover {
+      background: #EEF7DF;
+      border-color: var(--lime);
+      transform: translateY(-1px);
+    }
+
+    #bw-medieval-walk .bw-option.is-active {
+      background: linear-gradient(135deg, var(--yellow), #FFF78A);
+      border-color: var(--green);
+      box-shadow: inset 0 0 0 1px rgba(27, 94, 32, 0.14);
+    }
+
+    #bw-medieval-walk .bw-option:focus-visible,
+    #bw-medieval-walk .bw-link:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.85);
+      outline-offset: 2px;
+    }
+
+    #bw-medieval-walk .bw-time {
+      background: var(--green);
+      border-radius: 8px;
+      color: var(--yellow);
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1;
+      padding: 13px 6px;
+      text-align: center;
+    }
+
+    #bw-medieval-walk .bw-option strong {
+      color: var(--text);
+      display: block;
+      font-size: 13.5px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    #bw-medieval-walk .bw-option span:last-child {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    #bw-medieval-walk .bw-note {
+      background: #F8FBF1;
+      border: 1px solid #E5EFD5;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.52;
+      margin: 13px 0 0;
+      padding: 11px;
+    }
+
+    #bw-medieval-walk .bw-result {
+      display: grid;
+      gap: 13px;
+    }
+
+    #bw-medieval-walk .bw-result-head {
+      align-items: start;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    #bw-medieval-walk .bw-result h3 {
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1.12;
+      margin: 0 0 5px;
+    }
+
+    #bw-medieval-walk .bw-result-copy {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #bw-medieval-walk .bw-distance {
+      background: var(--green);
+      border-radius: 8px;
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      min-width: 88px;
+      padding: 10px 8px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    #bw-medieval-walk .bw-distance strong {
+      color: var(--yellow);
+      display: block;
+      font-size: 18px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    #bw-medieval-walk .bw-stops {
+      display: grid;
+      gap: 9px;
+    }
+
+    #bw-medieval-walk .bw-stop {
+      align-items: start;
+      background: #F8FBF1;
+      border: 1px solid #E5EFD5;
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 34px minmax(0, 1fr);
+      padding: 10px;
+    }
+
+    #bw-medieval-walk .bw-number {
+      align-items: center;
+      background: var(--yellow);
+      border: 2px solid var(--green);
+      border-radius: 50%;
+      color: var(--text);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 900;
+      height: 31px;
+      justify-content: center;
+      line-height: 1;
+      width: 31px;
+    }
+
+    #bw-medieval-walk .bw-stop strong {
+      color: var(--text);
+      display: block;
+      font-size: 13.5px;
+      font-weight: 900;
+      line-height: 1.24;
+      margin-bottom: 3px;
+    }
+
+    #bw-medieval-walk .bw-stop span {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    #bw-medieval-walk .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-medieval-walk .bw-link {
+      align-items: center;
+      border-radius: 8px;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1.2;
+      min-height: 40px;
+      padding: 10px 12px;
+      text-decoration: none;
+    }
+
+    #bw-medieval-walk .bw-link.primary {
+      background: var(--green);
+      color: var(--white);
+    }
+
+    #bw-medieval-walk .bw-link.secondary {
+      background: var(--yellow);
+      color: var(--text);
+    }
+
+    @media (max-width: 760px) {
+      #bw-medieval-walk .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-medieval-walk .bw-head {
+        padding: 16px 14px;
+      }
+
+      #bw-medieval-walk .bw-title {
+        font-size: 22px;
+      }
+
+      #bw-medieval-walk .bw-result-head {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-medieval-walk .bw-distance {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 430px) {
+      #bw-medieval-walk .bw-option {
+        grid-template-columns: 48px minmax(0, 1fr);
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-miniwalk-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk mini planner</p>
+      <h2 class="bw-title" id="bw-miniwalk-title">Find the medieval Berlin you can still walk to</h2>
+      <p class="bw-sub">Choose how much time you have around Alexanderplatz. The planner turns scattered medieval fragments into a clean short walk.</p>
+    </header>
+
+    <div class="bw-body">
+      <aside class="bw-panel">
+        <span class="bw-label">How much time do you have?</span>
+        <div class="bw-options" role="radiogroup" aria-label="Walk duration">
+          <button class="bw-option is-active" type="button" data-plan="short" role="radio" aria-checked="true">
+            <span class="bw-time">30m</span>
+            <span><strong>Fast core</strong><span>Best if you are near Alexanderplatz and want the old story quickly.</span></span>
+          </button>
+          <button class="bw-option" type="button" data-plan="classic" role="radio" aria-checked="false">
+            <span class="bw-time">60m</span>
+            <span><strong>Best first pass</strong><span>The strongest balance of old churches, street plan and surviving wall.</span></span>
+          </button>
+          <button class="bw-option" type="button" data-plan="deep" role="radio" aria-checked="false">
+            <span class="bw-time">90m</span>
+            <span><strong>Slow history loop</strong><span>Add the Cölln side and the palace site, then finish with the wall fragment.</span></span>
+          </button>
+        </div>
+        <p class="bw-note">Distances are intentionally conservative. Berlin's centre has crossings, construction, traffic lights and tempting detours.</p>
+      </aside>
+
+      <div class="bw-result" aria-live="polite">
+        <div class="bw-result-head">
+          <div>
+            <h3 data-title>30-minute medieval core</h3>
+            <p class="bw-result-copy" data-copy>Start at Marienkirche, cross toward Nikolaiviertel, then read the Spree crossing that made the two towns useful.</p>
+          </div>
+          <div class="bw-distance"><strong data-distance>1.2 km</strong><span data-time>30 min</span></div>
+        </div>
+
+        <div class="bw-stops" data-stops></div>
+
+        <div class="bw-links">
+          <a class="bw-link primary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Book the tour</a>
+          <a class="bw-link secondary" href="https://www.berlinwalk.com/berlin-walking-tour-route" target="_blank" rel="noopener">See the full route</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-medieval-walk');
+      if (!root) return;
+
+      var plans = {
+        short: {
+          title: '30-minute medieval core',
+          copy: 'Start at Marienkirche, cross toward Nikolaiviertel, then read the Spree crossing that made the two towns useful.',
+          distance: '1.2 km',
+          time: '30 min',
+          stops: [
+            ['Marienkirche', 'A medieval survivor standing almost absurdly beside the TV Tower. First mentioned in 1292.'],
+            ['Rotes Rathaus edge', 'Stand near the modern city hall and remember that Berlin-Cölln town power sat in this area.'],
+            ['Nikolaiviertel lanes', 'The buildings are mostly 1980s reconstructions, but the street pattern still carries the old quarter.'],
+            ['Mühlendamm view', 'Read the river crossing. This was the useful bottleneck, not a scenic accident.']
+          ]
+        },
+        classic: {
+          title: '60-minute best first pass',
+          copy: 'This is the cleanest self-guided loop if you want the old city without turning the afternoon into a museum project.',
+          distance: '2.4 km',
+          time: '60 min',
+          stops: [
+            ['Marienkirche', 'Start with the church and, if open, look for the late-15th-century Dance of Death mural.'],
+            ['Nikolaikirche', 'Berlin\'s oldest church anchors the rebuilt Nikolaiviertel and the eastern-bank settlement.'],
+            ['Mühlendamm crossing', 'The practical reason the towns grew here: tolls, traffic, trade and a reliable river crossing.'],
+            ['Humboldt Forum side', 'This was old Cölln territory and later the Hohenzollern palace site from 1443.'],
+            ['Klosterkirche ruin', 'A quiet 13th-century Franciscan monastery ruin left open to the sky.'],
+            ['Littenstraße city wall', 'Finish with the medieval city wall fragment hiding behind modern office blocks.']
+          ]
+        },
+        deep: {
+          title: '90-minute slow history loop',
+          copy: 'Use this when you want the Cölln side, palace story and medieval fragments to line up in one mental map.',
+          distance: '3.5 km',
+          time: '90 min',
+          stops: [
+            ['World Clock to Marienkirche', 'Begin where many visitors meet today, then step straight into the older layer of Berlin.'],
+            ['Marienkirche', 'A medieval church in the TV Tower shadow, with one of Berlin\'s strongest old-city contrasts.'],
+            ['Nikolaiviertel', 'Read it as a rebuilt memory of the old quarter, not as an untouched medieval town.'],
+            ['Mühlendamm', 'The crossing explains why merchants, tolls and settlement all collected here.'],
+            ['Petriplatz and Cölln side', 'Old Cölln lived around this island area before the name faded into the larger city.'],
+            ['Humboldt Forum', 'The palace site shows how the merchant town became a ruler\'s residence city.'],
+            ['Klosterkirche ruin', 'A rare open-air medieval fragment, calmer than almost everything around Alexanderplatz.'],
+            ['Littenstraße city wall', 'End at a hard surviving edge of medieval Berlin: brick, not myth.']
+          ]
+        }
+      };
+
+      var buttons = Array.prototype.slice.call(root.querySelectorAll('[data-plan]'));
+      var title = root.querySelector('[data-title]');
+      var copy = root.querySelector('[data-copy]');
+      var distance = root.querySelector('[data-distance]');
+      var time = root.querySelector('[data-time]');
+      var stops = root.querySelector('[data-stops]');
+
+      function render(planKey) {
+        var plan = plans[planKey] || plans.short;
+        buttons.forEach(function (button) {
+          var active = button.getAttribute('data-plan') === planKey;
+          button.classList.toggle('is-active', active);
+          button.setAttribute('aria-checked', active ? 'true' : 'false');
+        });
+        title.textContent = plan.title;
+        copy.textContent = plan.copy;
+        distance.textContent = plan.distance;
+        time.textContent = plan.time;
+        stops.innerHTML = plan.stops.map(function (stop, index) {
+          return '<div class="bw-stop"><span class="bw-number">' + (index + 1) + '</span><span><strong>' + stop[0] + '</strong><span>' + stop[1] + '</span></span></div>';
+        }).join('');
+        if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.resize === 'function') {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          render(button.getAttribute('data-plan'));
+        });
+      });
+
+      render('short');
+    })();
+  </script>
+</div>
+</body>
+</html>

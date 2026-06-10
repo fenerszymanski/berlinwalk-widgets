@@ -2,6 +2,43 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-10 — Codex (Berlin 1237 founding-year post/widgets)
+
+**Did:**
+- Completed the local `Why Is Berlin's Founding Year 1237?` blog package with corrected Cölln/Berlin timeline, Quick Summary, FAQ, SEO fields, image plan, sources, and embeds.
+- Built two post-only widgets: `medieval-berlin-twin-towns` interactive schematic map and `medieval-berlin-mini-walk` route planner.
+- QA'd widgets and embeds locally at desktop and 390px mobile.
+
+**Changed:**
+- `blog-drafts/why-is-berlin-founding-year-1237.md` — new Wix-ready local draft with `{{quick-summary}}`, both widget embeds, and `{{faq}}`.
+- `medieval-berlin-twin-towns/index.html`, `medieval-berlin-mini-walk/index.html` — new post-only widgets.
+- `quick-summary/data.json`, `faq/data.json`, `faq/inject.js` — added `berlin-founding-year-1237`.
+- `blog-workplan.md`, `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — recorded draft/widget status.
+- `../output/qa/berlin-1237-widgets-20260610/` — saved desktop/mobile QA screenshots.
+
+**Opened:** No Wix draft was created; push `berlinwalk-widgets` first so the new widget URLs resolve on GitHub Pages, then create the Wix draft with `qsKey=berlin-founding-year-1237`, `faqKey=berlin-founding-year-1237`, and two widget embeds.
+**Closed:** The 1237 article now has a complete local draft plus the planned map widget and an extra mini-walk widget.
+
+**Next session should:** Push/deploy the widget repo, create the Wix draft, add/choose images (especially Marienkirche + city wall), then preview-QA before publishing.
+
+## 2026-06-09 — Codex (Ultimate Email Marketing subscribe fix)
+
+**Did:**
+- Wired Ultimate Trip Planner consenting leads into Wix Email Marketing subscription instead of only creating contacts/labels.
+- Added subscription debug output to the lead endpoint and tightened live smoke/prepublish checks so `Never subscribed` regressions are caught.
+- Regenerated the Velo install kit and verified launch/prepublish gates.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/velo/emailMarketingSubscription.js` — new helper copied from the live-tested First-Day subscription flow.
+- `ultimate-berlin-trip-planner/velo/tripPlannerFunnel.js`, `ultimate-berlin-trip-planner/velo/http-functions.js` — lead save calls `subscribeEmailMarketing()` and returns `subscribed` / `subscriptionDebug`.
+- `ultimate-berlin-trip-planner/velo/build-velo-install-kit.mjs`, `ultimate-berlin-trip-planner/velo/install-kit.html`, `ultimate-berlin-trip-planner/velo/prepublish-gate.mjs`, `ultimate-berlin-trip-planner/velo/live-smoke-trip-planner.mjs` — install and QA gates include the subscription helper.
+- `../PROJECT_MEMORY.md` — recorded the Ultimate subscription fix handoff.
+
+**Opened:** Paste/publish the refreshed Velo files in Wix, then run live smoke; old `Never subscribed` Ultimate leads still need optional backfill if Yusuf wants them repaired.
+**Closed:** Local Ultimate Velo package now contains the missing Email Marketing subscription call.
+
+**Next session should:** After Wix publish, submit a real test lead and confirm `subscribed:true` / `SUBSCRIBED` in the endpoint response and Wix contact status.
+
 ## 2026-06-09 — Codex (Späti Survival Checker)
 
 **Did:**

@@ -10,6 +10,14 @@ const outFile = path.join(scriptDir, 'install-kit.html');
 
 const SOURCES = [
   {
+    id: 'email-marketing',
+    title: 'Backend/emailMarketingSubscription.js',
+    badge: 'Add helper',
+    source: 'emailMarketingSubscription.js',
+    target: 'Create this backend helper if it is not already installed from the First-Day Guide setup.',
+    note: 'This helper subscribes consenting planner leads to Wix Email Marketing. It reads the existing WIX_API_KEY / berlinwalk-wix-api-key secret.'
+  },
+  {
     id: 'funnel',
     title: 'Backend/tripPlannerFunnel.js',
     badge: 'Add file',
@@ -93,6 +101,7 @@ function checklistHtml(todoCount) {
       ${idWarning}
       <li>Confirm <code>TripPlannerLeads</code> passes remote preflight with all critical fields verified.</li>
       <li>Add <code>GEMINI_API_KEY</code> in Wix Secrets Manager if the optional AI polish endpoint should run live.</li>
+      <li>Create <code>Backend/emailMarketingSubscription.js</code> if missing, then paste the helper source below.</li>
       <li>Create <code>Backend/tripPlannerFunnel.js</code> in Wix and paste the full source below.</li>
       <li>Merge the <code>tripPlannerLead</code>, <code>tripPlannerAi</code>, and <code>tripPlannerBooking</code> handlers into live <code>Backend/http-functions.js</code>.</li>
       <li>Merge the hourly <code>processTripPlannerDueEmails</code> entry into <code>jobs.config</code>.</li>

@@ -35,6 +35,8 @@ export async function post_tripPlannerLead(request) {
         leadId: result.leadId,
         created: result.created,
         updated: result.updated,
+        subscribed: result.subscribed,
+        subscriptionDebug: result.subscriptionDebug,
         instant: result.instant
       }
     });

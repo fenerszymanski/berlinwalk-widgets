@@ -46,6 +46,7 @@ const defaultIdsPath = path.join(widgetRoot, 'email/paste-ready/message-ids.loca
 const funnelPath = path.join(scriptDir, 'tripPlannerFunnel.js');
 const httpFunctionsPath = path.join(scriptDir, 'http-functions.js');
 const jobsConfigPath = path.join(scriptDir, 'jobs.config');
+const emailMarketingSubscriptionPath = path.join(scriptDir, 'emailMarketingSubscription.js');
 
 function usage() {
   console.log(`Usage:
@@ -168,6 +169,9 @@ function inspectSource() {
   const funnel = fs.readFileSync(funnelPath, 'utf8');
   const httpFunctions = fs.readFileSync(httpFunctionsPath, 'utf8');
   const jobsConfig = fs.readFileSync(jobsConfigPath, 'utf8');
+  const emailMarketingSubscription = fs.existsSync(emailMarketingSubscriptionPath)
+    ? fs.readFileSync(emailMarketingSubscriptionPath, 'utf8')
+    : '';
   const todos = [...new Set([...funnel.matchAll(/TODO_TRIP_PLANNER_[A-Z0-9_]+/g)].map((match) => match[0]))].sort();
   const aiPayloadValidatorStart = funnel.indexOf('function validateAiEnhancementPayload');
   const aiPayloadValidatorEnd = funnel.indexOf('async function readFirstSecret', aiPayloadValidatorStart);
@@ -184,6 +188,13 @@ function inspectSource() {
       /enhanceTripPlannerPlan/.test(httpFunctions),
     hasBookingEndpoint: /export\s+async\s+function\s+post_tripPlannerBooking/.test(httpFunctions) &&
       /export\s+function\s+options_tripPlannerBooking/.test(httpFunctions),
+    hasEmailMarketingSubscription: /import\s+\{\s*subscribeEmailMarketing\s*\}\s+from\s+['"]backend\/emailMarketingSubscription['"]/.test(funnel) &&
+      /subscribeLeadEmailMarketing/.test(funnel) &&
+      /subscriptionDebug/.test(funnel) &&
+      /subscribed/.test(funnel) &&
+      /export\s+async\s+function\s+subscribeEmailMarketing/.test(emailMarketingSubscription) &&
+      /email-marketing\/v1\/email-subscriptions/.test(emailMarketingSubscription) &&
+      /subscriptionStatus:\s*'SUBSCRIBED'/.test(emailMarketingSubscription),
     hasGeminiBackend: /export\s+async\s+function\s+enhanceTripPlannerPlan/.test(funnel) &&
       /GEMINI_API_KEY/.test(funnel) &&
       /gemini-2\.5-flash/.test(funnel) &&
@@ -314,6 +325,7 @@ async function main() {
     check('All 5 IDs are applied in tripPlannerFunnel.js', idState.applied === idState.total, `${idState.applied}/${idState.total} applied`),
     check('No TODO_TRIP_PLANNER placeholders remain', sourceState.todos.length === 0, sourceState.todos.length ? sourceState.todos.join(', ') : 'no placeholders found'),
     check('Velo HTTP endpoints are present', sourceState.hasLeadEndpoint && sourceState.hasBookingEndpoint, 'tripPlannerLead and tripPlannerBooking handlers'),
+    check('Email Marketing subscription helper is wired', sourceState.hasEmailMarketingSubscription, 'consenting leads call subscribeEmailMarketing and expose subscriptionDebug'),
     check('Velo AI polish endpoint is present', sourceState.hasAiEndpoint, 'tripPlannerAi options/post handlers call enhanceTripPlannerPlan'),
     check('Gemini backend is fail-soft and bounded', sourceState.hasGeminiBackend, 'Gemini 2.5 Flash, backend-only secret names, responseJsonSchema, maxOutputTokens 1200, thinkingBudget 0, missing-key fallback'),
     check('AI enhancement payload is privacy-scrubbed', sourceState.hasAiPrivacyScrub, 'Gemini-bound text fields drop private-looking text before prompt assembly'),

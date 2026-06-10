@@ -57,7 +57,9 @@
   "berlin-beer-gardens-guide": "berlin-beer-gardens-guide",
   "best-christmas-markets-berlin-2026": "best-christmas-markets-berlin-2026",
   "what-is-a-spati-berlin": "spati-berlin",
-  "spati-berlin": "spati-berlin"
+  "spati-berlin": "spati-berlin",
+  "why-is-berlin-founding-year-1237": "berlin-founding-year-1237",
+  "berlin-founding-year-1237": "berlin-founding-year-1237"
 };
 
   var SCHEMAS = {
@@ -340,7 +342,7 @@
         "name": "Is the Pergamon Museum open in 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. The Pergamon Museum's main building has been completely closed since October 23, 2023 and will remain closed until at least spring 2027, when the North Wing is expected to partially reopen. The South Wing — including the Ishtar Gate — won't be accessible until the 2030s."
+          "text": "No. The Pergamon Museum's main building has been completely closed since **October 23, 2023** and will remain closed until at least **spring 2027**, when the North Wing is expected to partially reopen. The South Wing — including the Ishtar Gate — won't be accessible until the **2030s**."
         }
       },
       {
@@ -348,7 +350,7 @@
         "name": "Where can I see the Pergamon Altar right now?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Visit Pergamonmuseum. Das Panorama at Am Kupfergraben 2, just across the canal from Museum Island. It features around 80 original sculptures from the Pergamon collection plus a 360° immersive panorama of ancient Pergamon as it appeared in 129 AD. Tickets are €14 for adults, €7 for concessions."
+          "text": "Visit **Pergamonmuseum. Das Panorama** at Am Kupfergraben 2, just across the canal from Museum Island. It features around 80 original sculptures from the Pergamon collection plus a 360° immersive panorama of ancient Pergamon as it appeared in 129 AD. Tickets are **€14** for adults, €7 for concessions."
         }
       },
       {
@@ -356,7 +358,7 @@
         "name": "Is Nefertiti in the Pergamon Museum?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No — this is a very common misconception. The bust of Nefertiti is in the Neues Museum, which is right next door on Museum Island and is fully open. You can walk in today and see the original 3,300-year-old bust."
+          "text": "No — this is a very common misconception. The bust of Nefertiti is in the **Neues Museum**, which is right next door on Museum Island and is fully open. You can walk in today and see the original 3,300-year-old bust."
         }
       },
       {
@@ -364,7 +366,7 @@
         "name": "When will the Pergamon Museum fully reopen?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Full completion of the renovation and the new fourth wing is expected 2037–2043. The North Wing (Pergamon Altar) reopens in spring 2027. The South Wing (Ishtar Gate, Market Gate of Miletus) reopens in the 2030s. This is one of the largest museum renovation projects in the world."
+          "text": "Full completion of the renovation and the new fourth wing is expected **2037–2043**. The North Wing (Pergamon Altar) reopens in spring 2027. The South Wing (Ishtar Gate, Market Gate of Miletus) reopens in the 2030s. This is one of the largest museum renovation projects in the world."
         }
       },
       {
@@ -372,7 +374,7 @@
         "name": "Is Museum Island still worth visiting without the Pergamon?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Absolutely. Four of the five museums are fully open: the Neues Museum (Nefertiti), Altes Museum, Alte Nationalgalerie, and Bode-Museum. Combined with Das Panorama across the canal, a day on Museum Island in 2026 is still one of the most culturally rich experiences in Europe."
+          "text": "Absolutely. Four of the five museums are fully open: the **Neues Museum** (Nefertiti), **Altes Museum**, **Alte Nationalgalerie**, and **Bode-Museum**. Combined with Das Panorama across the canal, a day on Museum Island in 2026 is still one of the most culturally rich experiences in Europe."
         }
       }
     ]
@@ -394,7 +396,7 @@
         "name": "How long should I spend at Alexanderplatz?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "At minimum, 30 minutes to properly see the World Clock, the TV Tower from ground level, and the surrounding architecture. If you're joining our walking tour, the starting point is at the World Clock — the tour covers Alexanderplatz and 11 more stops over about 2 hours."
+          "text": "At minimum, **30 minutes** to properly see the World Clock, the TV Tower from ground level, and the surrounding architecture. If you're joining our walking tour, the starting point is at the World Clock — the tour covers Alexanderplatz and 11 more stops over about 2 hours."
         }
       },
       {
@@ -402,7 +404,7 @@
         "name": "What's the best time to visit Alexanderplatz?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Early morning (before 9 AM) if you want photos without crowds. Late afternoon for the best light on the TV Tower. Avoid midday in summer when it's hot with no shade on the open square."
+          "text": "**Early morning (before 9 AM)** if you want photos without crowds. **Late afternoon** for the best light on the TV Tower. Avoid midday in summer when it's hot with no shade on the open square."
         }
       },
       {
@@ -410,7 +412,7 @@
         "name": "Is the TV Tower worth going up?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Depends on your budget. Tickets cost around €24.50 for adults (timed entry). The 360° panoramic view is genuinely impressive and you can see the entire city. Book online in advance to avoid the queue — waits can reach 60+ minutes. If you're on a budget, the free view from Park Inn hotel's rooftop terrace (across the square) is a solid alternative."
+          "text": "Depends on your budget. Tickets cost around **€24.50** for adults (timed entry). The 360° panoramic view is genuinely impressive and you can see the entire city. Book online in advance to avoid the queue — waits can reach 60+ minutes. If you're on a budget, the free view from Park Inn hotel's rooftop terrace (across the square) is a solid alternative."
         }
       },
       {
@@ -418,7 +420,7 @@
         "name": "Where does the Berlin Walk free tour start?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "At the World Clock (Weltzeituhr) on Alexanderplatz. It's the large rotating globe sculpture in the center of the square — you can't miss it. From there, we walk through 12 stops to Hackescher Markt, covering 800 years of Berlin history."
+          "text": "At the **World Clock (Weltzeituhr)** on Alexanderplatz. It's the large rotating globe sculpture in the center of the square — you can't miss it. From there, we walk through 12 stops to Hackescher Markt, covering 800 years of Berlin history."
         }
       }
     ]
@@ -432,7 +434,7 @@
         "name": "Are Berlin's public drinking fountains safe?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. They're operated by the Berliner Wasserbetriebe and connected directly to the city's fresh water network. The water quality is constantly monitored and meets Germany's strict drinking water standards — which are more rigorous than EU bottled water regulations."
+          "text": "Yes. They're operated by the **Berliner Wasserbetriebe** and connected directly to the city's fresh water network. The water quality is constantly monitored and meets Germany's strict drinking water standards — which are more rigorous than EU bottled water regulations."
         }
       },
       {
@@ -440,7 +442,7 @@
         "name": "When are the Trinkbrunnen open in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "May to October. They're shut off and winterized from November through April to prevent frost damage. During winter, use Refill stations, hotel taps, or train station shops instead."
+          "text": "**May to October.** They're shut off and winterized from November through April to prevent frost damage. During winter, use Refill stations, hotel taps, or train station shops instead."
         }
       },
       {
@@ -448,7 +450,7 @@
         "name": "What is Refill Deutschland?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A nationwide program where participating businesses display a blue sticker offering free tap water refills to anyone — no purchase required. Cafés, restaurants, shops, and pharmacies across Berlin participate. Find locations on the interactive map at refill-deutschland.de/karte/."
+          "text": "A nationwide program where participating businesses display a blue sticker offering **free tap water refills** to anyone — no purchase required. Cafés, restaurants, shops, and pharmacies across Berlin participate. Find locations on the interactive map at refill-deutschland.de/karte/."
         }
       },
       {
@@ -456,7 +458,7 @@
         "name": "Where can I find a map of Berlin's drinking fountains?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Berliner Wasserbetriebe publishes an interactive map at bwb.de/de/trinkbrunnen.php showing all 240+ fountain locations, types, and current status. Save it to your phone before your trip."
+          "text": "The Berliner Wasserbetriebe publishes an interactive map at **bwb.de/de/trinkbrunnen.php** showing all 240+ fountain locations, types, and current status. Save it to your phone before your trip."
         }
       },
       {
@@ -464,7 +466,7 @@
         "name": "Can I get free water in Berlin during winter?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, but not from public fountains. Use Refill Deutschland stations (year-round), fill from your hotel tap, or visit Berlin Hauptbahnhof where shops are open daily including Sundays."
+          "text": "Yes, but not from public fountains. Use **Refill Deutschland** stations (year-round), fill from your hotel tap, or visit Berlin Hauptbahnhof where shops are open daily including Sundays."
         }
       }
     ]
@@ -478,7 +480,7 @@
         "name": "How much does it cost to enter the Berliner Dom?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Entry costs €9 for adults and includes access to the main church, the dome climb (270 steps), and the Hohenzollern Crypt. An audio guide is available for an additional €4."
+          "text": "Entry costs **€9** for adults and includes access to the main church, the dome climb (270 steps), and the Hohenzollern Crypt. An audio guide is available for an additional €4."
         }
       },
       {
@@ -486,7 +488,7 @@
         "name": "Is the dome climb worth it?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. The 270-step climb leads to an open-air walkway with 360-degree views of Museum Island, the Spree River, Humboldt Forum, and the TV Tower. At €9 it's far cheaper and less crowded than the TV Tower (€22.50+)."
+          "text": "Yes. The 270-step climb leads to an open-air walkway with **360-degree views** of Museum Island, the Spree River, Humboldt Forum, and the TV Tower. At €9 it's far cheaper and less crowded than the TV Tower (€22.50+)."
         }
       },
       {
@@ -494,7 +496,7 @@
         "name": "What is the Hohenzollern Crypt?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A burial vault beneath the cathedral containing over 90 members of the Prussian royal family in elaborately decorated sarcophagi spanning four centuries. Included in the standard entry ticket."
+          "text": "A burial vault beneath the cathedral containing **over 90 members of the Prussian royal family** in elaborately decorated sarcophagi spanning four centuries. Included in the standard entry ticket."
         }
       },
       {
@@ -502,7 +504,7 @@
         "name": "Where is the best photo spot for the Berliner Dom?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Liebknecht Bridge, about a 3-minute walk west. You can capture the dome alongside the Humboldt Forum and TV Tower with the Spree River below. For reflections, try Monbijou Park's riverside path early in the morning."
+          "text": "**Liebknecht Bridge**, about a 3-minute walk west. You can capture the dome alongside the Humboldt Forum and TV Tower with the Spree River below. For reflections, try Monbijou Park's riverside path early in the morning."
         }
       },
       {
@@ -510,7 +512,7 @@
         "name": "Is the Berliner Dom included in the Museum Island pass?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. The Berliner Dom has its own €9 entry ticket. The Museum Island day pass (€25) and Museumspass Berlin (€32) do not include the cathedral."
+          "text": "**No.** The Berliner Dom has its own €9 entry ticket. The Museum Island day pass (€25) and Museumspass Berlin (€32) do not include the cathedral."
         }
       }
     ]
@@ -524,7 +526,7 @@
         "name": "How much does the train from BER airport to Alexanderplatz cost?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A single ABC zone ticket costs €5 in 2026. This covers both the FEX airport express and the S9 S-Bahn, including any transfers within Berlin. The ticket is valid for 2 hours from validation."
+          "text": "A single **ABC zone ticket costs €5** in 2026. This covers both the FEX airport express and the S9 S-Bahn, including any transfers within Berlin. The ticket is valid for 2 hours from validation."
         }
       },
       {
@@ -532,7 +534,7 @@
         "name": "What is the fastest way from BER to Alexanderplatz?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The FEX airport express to Hauptbahnhof (23 minutes) followed by an S-Bahn or U-Bahn to Alexanderplatz (7–10 minutes). Total: about 35 minutes. The S9 is slower (~43 min) but goes directly with no transfer needed."
+          "text": "The **FEX airport express** to Hauptbahnhof (23 minutes) followed by an S-Bahn or U-Bahn to Alexanderplatz (7–10 minutes). Total: about **35 minutes**. The S9 is slower (~43 min) but goes directly with no transfer needed."
         }
       },
       {
@@ -540,7 +542,7 @@
         "name": "Is there a direct train from BER to Alexanderplatz?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. The S9 S-Bahn runs directly from BER airport to Alexanderplatz with no transfers needed. It departs every 20 minutes and takes about 43 minutes. On Friday and Saturday nights, the S9 runs all night every 30 minutes."
+          "text": "Yes. The **S9 S-Bahn** runs directly from BER airport to Alexanderplatz with no transfers needed. It departs every 20 minutes and takes about 43 minutes. On Friday and Saturday nights, the S9 runs all night every 30 minutes."
         }
       },
       {
@@ -548,7 +550,7 @@
         "name": "How do I get from BER to Berlin late at night?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "On Friday and Saturday nights, the S9 runs all night every 30 minutes. On other nights, the FEX operates until about 1:00 AM. After that, night buses N7 and N60 connect the airport to central Berlin every 30 minutes, or you can take a taxi (€60–80 to Alexanderplatz)."
+          "text": "On Friday and Saturday nights, the S9 runs all night every 30 minutes. On other nights, the FEX operates until about 1:00 AM. After that, **night buses N7 and N60** connect the airport to central Berlin every 30 minutes, or you can take a taxi (€60–80 to Alexanderplatz)."
         }
       },
       {
@@ -556,7 +558,7 @@
         "name": "Do I need to validate my ticket at BER airport?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "If you buy a paper ticket from a machine, yes — you must stamp it in the yellow or red validation boxes on the platform before boarding. If you buy on the BVG app, it validates automatically. An unvalidated paper ticket is treated as no ticket — the fine is €60."
+          "text": "If you buy a paper ticket from a machine, **yes** — you must stamp it in the yellow or red validation boxes on the platform before boarding. If you buy on the BVG app, it validates automatically. An unvalidated paper ticket is treated as no ticket — the fine is €60."
         }
       }
     ]
@@ -570,7 +572,7 @@
         "name": "Are Berliners rude to tourists?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Not necessarily. What many visitors read as rudeness is often just Berlin's direct communication style. People are usually being honest and efficient, not hostile."
+          "text": "Not necessarily. What many visitors read as rudeness is often just Berlin's **direct communication style**. People are usually being honest and efficient, not hostile."
         }
       },
       {
@@ -578,7 +580,7 @@
         "name": "What is Berliner Schnauze?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Berliner Schnauze is the nickname for Berlin's blunt, dry, no-nonsense way of speaking. Quick, sometimes funny, sometimes sharp — but rarely meant personally."
+          "text": "**Berliner Schnauze** is the nickname for Berlin's blunt, dry, no-nonsense way of speaking. Quick, sometimes funny, sometimes sharp — but rarely meant personally."
         }
       },
       {
@@ -594,7 +596,7 @@
         "name": "Why does service in Berlin feel cold sometimes?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Because service is often more functional than overly friendly. Waiters give you space, cashiers don't make small talk, and interactions are short. That doesn't always mean bad intentions — it's usually just how the city operates."
+          "text": "Because service is often more **functional than overly friendly**. Waiters give you space, cashiers don't make small talk, and interactions are short. That doesn't always mean bad intentions — it's usually just how the city operates."
         }
       },
       {
@@ -602,7 +604,7 @@
         "name": "How should I respond to Berlin directness?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Stay calm, don't take it personally, and keep your own communication simple and polite. A short answer is not always anger; a neutral face is not always hostility."
+          "text": "Stay calm, don't take it personally, and keep your own communication **simple and polite**. A short answer is not always anger; a neutral face is not always hostility."
         }
       }
     ]
@@ -708,7 +710,7 @@
         "name": "How much does the Berlin WelcomeCard cost in 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Classic version starts at €28.50 for 48 hours, rising to around €52 for 6 days. The Museum Island version (72 hours only) starts at €62. The All-Inclusive card with 30+ free attractions and a hop-on/off bus starts at €99. A Basic discount-only version (no transport) costs €9 for 72 hours. Exact prices depend on zone (AB = Berlin only, ABC = includes Potsdam and BER airport)."
+          "text": "The Classic version starts at **€28.50 for 48 hours**, rising to around €52 for 6 days. The Museum Island version (72 hours only) starts at **€62**. The All-Inclusive card with 30+ free attractions and a hop-on/off bus starts at **€99**. A Basic discount-only version (no transport) costs **€9 for 72 hours**. Exact prices depend on zone (AB = Berlin only, ABC = includes Potsdam and BER airport)."
         }
       },
       {
@@ -716,7 +718,7 @@
         "name": "Is the Berlin WelcomeCard actually worth buying?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It depends on your trip. The WelcomeCard is worth it if you plan to visit multiple paid museums (especially Museum Island), use public transport daily, and stay 3+ days. It's not worth it if you focus on free sights (Reichstag, Holocaust Memorial, East Side Gallery), walk most places, or already have a Deutschlandticket. Use the calculator above to run the numbers for your actual plan."
+          "text": "It depends on your trip. The WelcomeCard is **worth it** if you plan to visit multiple paid museums (especially Museum Island), use public transport daily, and stay 3+ days. It's **not worth it** if you focus on free sights (Reichstag, Holocaust Memorial, East Side Gallery), walk most places, or already have a Deutschlandticket. Use the calculator above to run the numbers for your actual plan."
         }
       },
       {
@@ -724,7 +726,7 @@
         "name": "What's the difference between WelcomeCard and Museum Pass?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The 3-Day Museum Pass Berlin (€36) gives free entry to 30+ museums (including all of Museum Island) but no transport. The Museum Island WelcomeCard (€62) includes free entry to the 5 Museum Island museums plus unlimited transport plus discounts at 170+ partners. If you're a museum-heavy traveler who won't use much transport, the Museum Pass wins. If you're mixing museums with getting around the city, the WelcomeCard Museum Island version usually wins."
+          "text": "The **3-Day Museum Pass Berlin (€36)** gives free entry to 30+ museums (including all of Museum Island) but no transport. The **Museum Island WelcomeCard (€62)** includes free entry to the 5 Museum Island museums plus unlimited transport plus discounts at 170+ partners. If you're a museum-heavy traveler who won't use much transport, the Museum Pass wins. If you're mixing museums with getting around the city, the WelcomeCard Museum Island version usually wins."
         }
       },
       {
@@ -732,7 +734,7 @@
         "name": "Does the WelcomeCard cover the BER airport train?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Only if you buy the Zone ABC version. BER airport is in Zone C, so the standard Zone AB card (city center only) doesn't cover it. With Zone ABC, your airport transfer is essentially included — a single BER→city ticket normally costs €5. For most travelers, the small price difference between AB and ABC is worth it just for the airport coverage."
+          "text": "Only if you buy the **Zone ABC version**. BER airport is in Zone C, so the standard Zone AB card (city center only) doesn't cover it. With Zone ABC, your airport transfer is essentially included — a single BER→city ticket normally costs €5. For most travelers, the small price difference between AB and ABC is worth it just for the airport coverage."
         }
       },
       {
@@ -740,7 +742,7 @@
         "name": "Where should I buy the Berlin WelcomeCard?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Buy it from the official site (berlin-welcomecard.de), visitberlin.de, or at BVG/S-Bahn ticket machines and counters at major stations. Avoid unofficial resellers — the price is the same or higher, and you miss out on the official app. You can choose between a digital ticket or a paper ticket that must be validated before your first ride. Phone screenshots of digital tickets are not accepted as valid tickets."
+          "text": "Buy it from the **official site (berlin-welcomecard.de)**, visitberlin.de, or at BVG/S-Bahn ticket machines and counters at major stations. Avoid unofficial resellers — the price is the same or higher, and you miss out on the official app. You can choose between a digital ticket or a paper ticket that must be validated before your first ride. Phone screenshots of digital tickets are **not** accepted as valid tickets."
         }
       }
     ]
@@ -754,7 +756,7 @@
         "name": "Are supermarkets open on Sunday in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Regular neighborhood supermarkets like REWE, Edeka, Lidl, and Aldi are closed on Sundays. But supermarkets inside major train stations and at BER airport are open 365 days a year — including REWE at Hauptbahnhof (until 10pm), Edeka at Friedrichstraße, REWE at Ostbahnhof (until midnight), and REWE at BER airport (open 24/7). See the full list in the article above."
+          "text": "Regular neighborhood supermarkets like REWE, Edeka, Lidl, and Aldi are closed on Sundays. But supermarkets inside major train stations and at BER airport are open 365 days a year — including **REWE at Hauptbahnhof** (until 10pm), **Edeka at Friedrichstraße**, **REWE at Ostbahnhof** (until midnight), and **REWE at BER airport** (open 24/7). See the full list in the article above."
         }
       },
       {
@@ -762,7 +764,7 @@
         "name": "What is there to do in Berlin on a Sunday?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sundays in Berlin are for brunch, museums, flea markets, and long walks. Most museums are open, the famous Mauerpark Flea Market runs every Sunday, and restaurants are fully open. Brunch culture is huge — especially in Kreuzberg and Neukölln. It's also a popular day for free walking tours through the historic center."
+          "text": "Sundays in Berlin are for brunch, museums, flea markets, and long walks. Most museums are open, the famous **Mauerpark Flea Market** runs every Sunday, and restaurants are fully open. Brunch culture is huge — especially in Kreuzberg and Neukölln. It's also a popular day for free walking tours through the historic center."
         }
       },
       {
@@ -770,7 +772,7 @@
         "name": "Are all shops closed, or are there exceptions?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Almost all regular retail is closed on Sunday, but there are three main exceptions: train station and airport supermarkets (open 365 days), emergency businesses (pharmacies on rotation, gas stations, Spätis), and Verkaufsoffene Sonntage — 6 to 8 designated Sundays per year when all shops can open from 1pm to 8pm. Dates are announced on Berlin.de."
+          "text": "Almost all regular retail is closed on Sunday, but there are three main exceptions: **train station and airport supermarkets** (open 365 days), **emergency businesses** (pharmacies on rotation, gas stations, Spätis), and **Verkaufsoffene Sonntage** — 6 to 8 designated Sundays per year when all shops can open from 1pm to 8pm. Dates are announced on Berlin.de."
         }
       },
       {
@@ -960,7 +962,7 @@
         "name": "What's the difference between U-Bahn, S-Bahn, tram, and bus in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "U-Bahn is the underground metro — fastest in central areas. S-Bahn is suburban rail, mostly above ground, covers longer distances and connects BER airport. Tram (Straßenbahn) runs mainly in former East Berlin neighborhoods. Bus fills the gaps where rail doesn't go. All four use the same ticket — no separate fares."
+          "text": "**U-Bahn** is the underground metro — fastest in central areas. **S-Bahn** is suburban rail, mostly above ground, covers longer distances and connects BER airport. **Tram (Straßenbahn)** runs mainly in former East Berlin neighborhoods. **Bus** fills the gaps where rail doesn't go. All four use the same ticket — no separate fares."
         }
       },
       {
@@ -968,7 +970,7 @@
         "name": "What ticket should I buy as a tourist in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For most visitors, the 24-hour day ticket (€11.20 for Zone AB) is the best value — it pays for itself after just 3 rides. Buy a Zone ABC ticket if you're going to BER airport or Potsdam. Use the BVG Fahrinfo Plus app to skip the validation hassle altogether."
+          "text": "For most visitors, the **24-hour day ticket** (€11.20 for Zone AB) is the best value — it pays for itself after just 3 rides. Buy a **Zone ABC ticket** if you're going to BER airport or Potsdam. Use the **BVG Fahrinfo Plus** app to skip the validation hassle altogether."
         }
       },
       {
@@ -976,7 +978,7 @@
         "name": "Do I need to validate my paper ticket on Berlin trains?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, always. Stamp paper tickets in the yellow or red validation boxes (Entwerter) on the platform before you board. App tickets validate automatically. The fine for an unvalidated ticket is €60 — no exceptions for tourists."
+          "text": "**Yes, always.** Stamp paper tickets in the yellow or red validation boxes (Entwerter) on the platform before you board. App tickets validate automatically. The fine for an unvalidated ticket is **€60** — no exceptions for tourists."
         }
       },
       {
@@ -984,7 +986,7 @@
         "name": "Does Berlin public transport run all night?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "On Friday and Saturday nights, yes. Most U-Bahn and S-Bahn lines run every 30 minutes overnight. On weekday nights, U-Bahn and S-Bahn stop around 1:00 AM and night buses (N-lines) take over until morning service resumes around 4:30 AM."
+          "text": "**On Friday and Saturday nights, yes.** Most U-Bahn and S-Bahn lines run every 30 minutes overnight. On weekday nights, U-Bahn and S-Bahn stop around 1:00 AM and night buses (N-lines) take over until morning service resumes around 4:30 AM."
         }
       },
       {
@@ -992,7 +994,7 @@
         "name": "How do I get from BER airport to central Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The S9 S-Bahn runs directly from BER to Alexanderplatz in about 43 minutes — no transfers needed. The faster option is the FEX express train to Hauptbahnhof (23 minutes) plus a quick S-Bahn or U-Bahn to your destination. Both cost €5 with a Zone ABC ticket."
+          "text": "The **S9 S-Bahn** runs directly from BER to Alexanderplatz in about 43 minutes — no transfers needed. The faster option is the **FEX express train** to Hauptbahnhof (23 minutes) plus a quick S-Bahn or U-Bahn to your destination. Both cost €5 with a Zone ABC ticket."
         }
       }
     ]
@@ -1006,7 +1008,7 @@
         "name": "What is Currywurst and where should I try it?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Currywurst is Berlin's most iconic street food — a grilled pork sausage sliced and drenched in spiced ketchup with curry powder. Eat it standing up at an Imbiss (street stall) for the authentic experience. Budget €3–4 and avoid the tourist traps right on Alexanderplatz."
+          "text": "**Currywurst** is Berlin's most iconic street food — a grilled pork sausage sliced and drenched in spiced ketchup with curry powder. Eat it standing up at an Imbiss (street stall) for the authentic experience. Budget €3–4 and avoid the tourist traps right on Alexanderplatz."
         }
       },
       {
@@ -1014,7 +1016,7 @@
         "name": "Is döner kebab really better in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes — Berlin reinvented döner. The city's Turkish community transformed it from a small Turkish snack into a full sandwich meal in the 1970s. Berlin döner is genuinely different from anywhere else in the world. The version with grilled vegetables (Gemüsekebab) is a local specialty."
+          "text": "**Yes — Berlin reinvented döner.** The city's Turkish community transformed it from a small Turkish snack into a full sandwich meal in the 1970s. Berlin döner is genuinely different from anywhere else in the world. The version with grilled vegetables (Gemüsekebab) is a local specialty."
         }
       },
       {
@@ -1022,7 +1024,7 @@
         "name": "What's the most affordable way to try Berlin's local food?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most iconic Berlin foods cost under €5. Currywurst (€3–4), Döner (€7), Laugenbrezel/pretzel (€1–2), Schrippe with butter (€2). The best eating happens at street stalls and market stands — not sit-down restaurants on tourist squares."
+          "text": "**Most iconic Berlin foods cost under €5.** Currywurst (€3–4), Döner (€7), Laugenbrezel/pretzel (€1–2), Schrippe with butter (€2). The best eating happens at street stalls and market stands — not sit-down restaurants on tourist squares."
         }
       },
       {
@@ -1030,7 +1032,7 @@
         "name": "What's a typical German breakfast in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A proper Berlin breakfast usually includes a fresh Schrippe (bread roll) or Laugenbrezel (pretzel) with butter, cold cuts, cheese, jam, and a soft-boiled egg, plus coffee. Germany has over 300 bread varieties, and Berlin's bakeries take it seriously — find one that opens early."
+          "text": "A proper Berlin breakfast usually includes **a fresh Schrippe (bread roll) or Laugenbrezel (pretzel)** with butter, cold cuts, cheese, jam, and a soft-boiled egg, plus coffee. Germany has over 300 bread varieties, and Berlin's bakeries take it seriously — find one that opens early."
         }
       },
       {
@@ -1038,7 +1040,7 @@
         "name": "Where should I eat near Alexanderplatz without getting ripped off?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Don't eat on Alexanderplatz itself — the chains there are tourist traps. Walk 5 minutes to Hackescher Markt (the last stop on our tour) for excellent street food markets, beer gardens, and authentic neighborhood spots. Rosenthaler Platz is another safe bet."
+          "text": "**Don't eat on Alexanderplatz itself** — the chains there are tourist traps. Walk 5 minutes to **Hackescher Markt** (the last stop on our tour) for excellent street food markets, beer gardens, and authentic neighborhood spots. Rosenthaler Platz is another safe bet."
         }
       }
     ]
@@ -1052,7 +1054,7 @@
         "name": "Which Berlin neighborhood is best for first-time visitors?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Mitte — the historic heart of the city. You'll be walking distance from Brandenburg Gate, Museum Island, and Alexanderplatz, where our free walking tour starts. Most major sights are within 15 minutes on foot. Hotels are pricier here but the convenience is unmatched."
+          "text": "**Mitte** — the historic heart of the city. You'll be walking distance from Brandenburg Gate, Museum Island, and Alexanderplatz, where our free walking tour starts. Most major sights are within 15 minutes on foot. Hotels are pricier here but the convenience is unmatched."
         }
       },
       {
@@ -1060,7 +1062,7 @@
         "name": "Where should I stay in Berlin on a budget?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Friedrichshain has Berlin's cheapest hostels and a vibrant young-local scene. You're a 15-minute U-Bahn ride from Alexanderplatz, surrounded by the East Side Gallery, cheap restaurants, and the Boxhagener Platz weekend markets. Great value for backpackers and budget travelers."
+          "text": "**Friedrichshain** has Berlin's cheapest hostels and a vibrant young-local scene. You're a 15-minute U-Bahn ride from Alexanderplatz, surrounded by the East Side Gallery, cheap restaurants, and the Boxhagener Platz weekend markets. Great value for backpackers and budget travelers."
         }
       },
       {
@@ -1068,7 +1070,7 @@
         "name": "What's the best Berlin neighborhood for nightlife?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Kreuzberg is Berlin's bar and club capital. Around Kottbusser Tor and Schlesisches Tor you'll find an edgy, multicultural mix of late-night spots, Turkish food, art galleries, and some of Europe's most famous techno clubs. Stay here if you plan to be out past midnight."
+          "text": "**Kreuzberg** is Berlin's bar and club capital. Around Kottbusser Tor and Schlesisches Tor you'll find an edgy, multicultural mix of late-night spots, Turkish food, art galleries, and some of Europe's most famous techno clubs. Stay here if you plan to be out past midnight."
         }
       },
       {
@@ -1076,7 +1078,7 @@
         "name": "Is Berlin safe for families with kids?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes — Prenzlauer Berg is the family-friendly choice. Leafy streets, playgrounds on every corner, family cafés, the Mauerpark Sunday flea market, and a calm residential vibe. It's well-connected by tram to central Berlin. Charlottenburg in the west is also a quiet, safe option."
+          "text": "**Yes — Prenzlauer Berg is the family-friendly choice.** Leafy streets, playgrounds on every corner, family cafés, the Mauerpark Sunday flea market, and a calm residential vibe. It's well-connected by tram to central Berlin. Charlottenburg in the west is also a quiet, safe option."
         }
       },
       {
@@ -1084,7 +1086,7 @@
         "name": "How do I choose between Mitte, Kreuzberg, and Prenzlauer Berg?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Mitte for sightseeing, Kreuzberg for nightlife, Prenzlauer Berg for atmosphere. If you only have 2–3 days in Berlin, Mitte saves you the most travel time. If you want to feel the city's contemporary side, pick Kreuzberg or Friedrichshain. For a longer, more relaxed stay, Prenzlauer Berg is hard to beat."
+          "text": "**Mitte for sightseeing, Kreuzberg for nightlife, Prenzlauer Berg for atmosphere.** If you only have 2–3 days in Berlin, Mitte saves you the most travel time. If you want to feel the city's contemporary side, pick Kreuzberg or Friedrichshain. For a longer, more relaxed stay, Prenzlauer Berg is hard to beat."
         }
       }
     ]
@@ -1098,7 +1100,7 @@
         "name": "How long is the BerlinWalk free walking tour?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The tour is approximately 3 km long and takes about 2 hours. The route is flat and easy — no rushing. Every stop has time for photos, questions, and a bit of breathing room before the next part of the city."
+          "text": "The tour is approximately **3 km long and takes about 2 hours**. The route is flat and easy — no rushing. Every stop has time for photos, questions, and a bit of breathing room before the next part of the city."
         }
       },
       {
@@ -1106,7 +1108,7 @@
         "name": "Where does the walking tour start and end?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "We start at the World Clock (Weltzeituhr) on Alexanderplatz — the rotating globe sculpture in the middle of the square, easy to find. The tour ends at Hackescher Markt, one of Berlin's most charming neighborhoods — perfect for food and drinks afterwards."
+          "text": "We start at the **World Clock (Weltzeituhr) on Alexanderplatz** — the rotating globe sculpture in the middle of the square, easy to find. The tour ends at **Hackescher Markt**, one of Berlin's most charming neighborhoods — perfect for food and drinks afterwards."
         }
       },
       {
@@ -1114,7 +1116,7 @@
         "name": "Is the BerlinWalk tour really free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes — it's tip-based, not free-but-not-really. There's no fixed price and no credit card required. At the end, you tip what the experience was worth to you. Most guests tip €10–20 per person depending on group size and budget, but it's entirely up to you."
+          "text": "**Yes — it's tip-based, not free-but-not-really.** There's no fixed price and no credit card required. At the end, you tip what the experience was worth to you. Most guests tip €10–20 per person depending on group size and budget, but it's entirely up to you."
         }
       },
       {
@@ -1122,7 +1124,7 @@
         "name": "What will I see on the 12-stop walking tour?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The route covers 800 years of Berlin history through the city's oldest quarter — Alexanderplatz, the World Clock, the TV Tower (and the famous \"Pope's Revenge\"), the Hohenzollern Crypt beneath the Berliner Dom, UNESCO Museum Island, and Berlin's hidden medieval neighborhood. Most other Berlin tours skip this part of the city entirely."
+          "text": "The route covers **800 years of Berlin history** through the city's oldest quarter — Alexanderplatz, the World Clock, the TV Tower (and the famous \"Pope's Revenge\"), the Hohenzollern Crypt beneath the Berliner Dom, UNESCO Museum Island, and Berlin's hidden medieval neighborhood. Most other Berlin tours skip this part of the city entirely."
         }
       },
       {
@@ -1130,7 +1132,7 @@
         "name": "Do I need to book the walking tour in advance?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes — please book your free spot online so we can plan group sizes. It only takes a minute on berlinwalk.com. Booking is free and doesn't require a credit card. Walk-ups are welcome only if there's space, but on busy days the tour can fill up."
+          "text": "**Yes — please book your free spot online** so we can plan group sizes. It only takes a minute on **berlinwalk.com**. Booking is free and doesn't require a credit card. Walk-ups are welcome only if there's space, but on busy days the tour can fill up."
         }
       }
     ]
@@ -1144,7 +1146,7 @@
         "name": "How much does a daily trip to Berlin cost in 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most travelers spend between €120 and €250 per day, not counting flights. Backpackers can manage on €60–90/day; comfort travelers spend €370–500/day. Accommodation is the biggest variable."
+          "text": "Most travelers spend between **€120 and €250 per day**, not counting flights. Backpackers can manage on **€60–90/day**; comfort travelers spend **€370–500/day**. Accommodation is the biggest variable."
         }
       },
       {
@@ -1152,7 +1154,7 @@
         "name": "Is Berlin still cheap compared to other European capitals?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Berlin is noticeably cheaper than Paris, London, Zurich, Copenhagen, or Amsterdam — but more expensive than Prague, Budapest, or Warsaw. Among German cities, it's similar to Hamburg, cheaper than Munich, but pricier than Leipzig or Dresden."
+          "text": "Berlin is **noticeably cheaper than Paris, London, Zurich, Copenhagen, or Amsterdam** — but more expensive than **Prague, Budapest, or Warsaw**. Among German cities, it's similar to Hamburg, cheaper than Munich, but pricier than Leipzig or Dresden."
         }
       },
       {
@@ -1160,7 +1162,7 @@
         "name": "What's the cheapest way to get from BER airport to central Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The FEX airport express train costs €5 and reaches the city center in about 30 minutes. A taxi for the same trip is €50–65. The Zone ABC ticket (€3.80 single or €12.90 day ticket) covers any train option."
+          "text": "The **FEX airport express train costs €5** and reaches the city center in about 30 minutes. A taxi for the same trip is €50–65. The Zone ABC ticket (€3.80 single or €12.90 day ticket) covers any train option."
         }
       },
       {
@@ -1168,7 +1170,7 @@
         "name": "How can I save money in Berlin without missing the experience?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Take a free walking tour (tip-based), eat your big meal at lunch (Mittagstisch menus are dramatically cheaper than dinner), drink at Spätis instead of bars (€2 beers vs. €5+), book the Reichstag dome 2 weeks ahead (free, replaces the €28 TV Tower), and carry a refillable water bottle."
+          "text": "Take a **free walking tour** (tip-based), eat your big meal at lunch (Mittagstisch menus are dramatically cheaper than dinner), drink at Spätis instead of bars (€2 beers vs. €5+), book the **Reichstag dome 2 weeks ahead** (free, replaces the €28 TV Tower), and carry a refillable water bottle."
         }
       },
       {
@@ -1176,7 +1178,7 @@
         "name": "What's the most overrated tourist expense in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The TV Tower observation deck at €28 — the Reichstag dome offers a similar view for free with advance booking. Tourist river cruises (€20–30) are also skippable; the same Spree views are free from any bridge or riverside walk."
+          "text": "The **TV Tower observation deck** at €28 — the Reichstag dome offers a similar view for free with advance booking. **Tourist river cruises** (€20–30) are also skippable; the same Spree views are free from any bridge or riverside walk."
         }
       }
     ]
@@ -1252,7 +1254,7 @@
         "name": "How much does it cost to swim at a Berlin public pool?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Single tickets range from about €4.50 to €11.50 depending on the pool's category (1, 2, or 3 — based on the facilities) and the length of stay you book (90 minutes, 150 minutes, or full day). Outdoor pools sit at the cheaper end; flagship indoor pools like Stadtbad Lankwitz or Stadtbad Neukölln at the higher end. If you're staying 2+ weeks in summer and plan to visit outdoor pools regularly, the Sommermehrfachkarte gives you 20 entries for €80 (or €70 pre-season before May 1). All tickets can be booked online up to 7 days in advance via berlinerbaeder.de."
+          "text": "Single tickets range from about **€4.50 to €11.50** depending on the pool's category (1, 2, or 3 — based on the facilities) and the length of stay you book (90 minutes, 150 minutes, or full day). Outdoor pools sit at the cheaper end; flagship indoor pools like Stadtbad Lankwitz or Stadtbad Neukölln at the higher end. If you're staying 2+ weeks in summer and plan to visit outdoor pools regularly, the **Sommermehrfachkarte** gives you 20 entries for €80 (or €70 pre-season before May 1). All tickets can be booked online up to 7 days in advance via [berlinerbaeder.de](https://www.berlinerbaeder.de/)."
         }
       },
       {
@@ -1260,7 +1262,7 @@
         "name": "Do I need to book a Berlin pool in advance?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For indoor pools, almost never — walk-ins are usually fine. For outdoor pools (Sommerbäder) on hot summer weekends, absolutely yes. Sommerbad Kreuzberg (Prinzenbad) regularly has 45-minute queues without a pre-booked ticket on 30°C weekends. Online pre-booking takes two minutes and gives you a QR code that skips the queue. The Berliner Bäder website also shows a real-time crowd indicator (green/yellow/red traffic light) for each Sommerbad — check before you leave the hotel."
+          "text": "For **indoor pools**, almost never — walk-ins are usually fine. For **outdoor pools** (Sommerbäder) on hot summer weekends, absolutely yes. Sommerbad Kreuzberg (Prinzenbad) regularly has 45-minute queues without a pre-booked ticket on 30°C weekends. Online pre-booking takes two minutes and gives you a QR code that skips the queue. The Berliner Bäder website also shows a real-time crowd indicator (green/yellow/red traffic light) for each Sommerbad — check before you leave the hotel."
         }
       },
       {
@@ -1268,7 +1270,7 @@
         "name": "Which is the most beautiful public pool in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Stadtbad Neukölln, by consensus. Opened in 1914, designed in a Roman bath revival style — vaulted ceilings, mosaic tiles, marble columns, statuary along the upper gallery. It's a listed historic monument that you can swim in. The runner-up is Stadtbad Charlottenburg's Alte Halle (1898), the oldest still-operating indoor pool in Berlin, with original tile work and a long-hall design that's quieter than Neukölln. Both are far more impressive than the typical tourist itinerary suggests."
+          "text": "**Stadtbad Neukölln**, by consensus. Opened in 1914, designed in a Roman bath revival style — vaulted ceilings, mosaic tiles, marble columns, statuary along the upper gallery. It's a listed historic monument that you can swim in. The runner-up is **Stadtbad Charlottenburg's Alte Halle** (1898), the oldest still-operating indoor pool in Berlin, with original tile work and a long-hall design that's quieter than Neukölln. Both are far more impressive than the typical tourist itinerary suggests."
         }
       },
       {
@@ -1276,7 +1278,7 @@
         "name": "What are the rules and etiquette at a Berlin pool?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The big ones: pre-shower thoroughly with soap before entering the water — this is non-negotiable and lifeguards will enforce it. No shoes past the changing area. Lockers usually need a €1 or €2 returnable coin. Some fast lanes require a swim cap (Badekappe) — bring one if you have long hair. Lap lane direction discipline: swim on the right side, don't stop in the middle. Sauna areas are FKK (naked) by default; you sit on a towel, never directly on the wood. Photography in changing rooms or saunas is illegal and gets you ejected immediately."
+          "text": "The big ones: **pre-shower thoroughly with soap** before entering the water — this is non-negotiable and lifeguards will enforce it. No shoes past the changing area. Lockers usually need a **€1 or €2 returnable coin**. Some fast lanes require a swim cap (Badekappe) — bring one if you have long hair. Lap lane direction discipline: swim on the right side, don't stop in the middle. **Sauna areas are FKK** (naked) by default; you sit on a towel, never directly on the wood. Photography in changing rooms or saunas is illegal and gets you ejected immediately."
         }
       },
       {
@@ -1284,7 +1286,7 @@
         "name": "When does the Berlin outdoor pool season start?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "May 1 each year is when the first batch of Sommerbäder open — typically Strandbad Wannsee, Strandbad Grünau, and Sommerbad Kreuzberg. Most other outdoor pools follow within the next 2–3 weeks. The full official outdoor season runs to mid-September, though some pools stay open into late September if weather holds. Indoor pools (Hallenbäder) run year-round. Note for 2026: Sommerbad Spandau Süd and Sommerbad Lichterfelde are both closed for renovation. Always check berlinerbaeder.de for the current schedule before planning a specific trip."
+          "text": "**May 1** each year is when the first batch of Sommerbäder open — typically Strandbad Wannsee, Strandbad Grünau, and Sommerbad Kreuzberg. Most other outdoor pools follow within the next 2–3 weeks. The full official outdoor season runs to **mid-September**, though some pools stay open into late September if weather holds. Indoor pools (Hallenbäder) run year-round. Note for 2026: Sommerbad Spandau Süd and Sommerbad Lichterfelde are both closed for renovation. Always check [berlinerbaeder.de](https://www.berlinerbaeder.de/) for the current schedule before planning a specific trip."
         }
       }
     ]
@@ -1298,7 +1300,7 @@
         "name": "Do I have to pay to swim in Berlin lakes?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Almost never. Most Berlin lakes have free public shores where you can swim — you walk up, lay down a towel, and get in. The exceptions are the Strandbäder (lidos) like Strandbad Wannsee, Strandbad Müggelsee, and Strandbad Tegelsee, which charge €5–7 for sand, lifeguards, showers, and food kiosks. You're paying for the infrastructure, not the water. Walk a few minutes along the shore in either direction and you'll usually find a free entry point."
+          "text": "Almost never. Most Berlin lakes have **free public shores** where you can swim — you walk up, lay down a towel, and get in. The exceptions are the **Strandbäder** (lidos) like Strandbad Wannsee, Strandbad Müggelsee, and Strandbad Tegelsee, which charge **€5–7** for sand, lifeguards, showers, and food kiosks. You're paying for the infrastructure, not the water. Walk a few minutes along the shore in either direction and you'll usually find a free entry point."
         }
       },
       {
@@ -1306,7 +1308,7 @@
         "name": "Are Berlin lakes safe to swim in?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, with one caveat. Berlin's State Office for Health monitors 39 official bathing sites every two weeks and publishes results at badegewaesser.berlin.de. Almost all sites are rated suitable for swimming throughout the season. The Lower Havel sites occasionally flag for elevated bacteria after heavy rain, and any warm shallow lake can develop a temporary blue-green algae bloom (Blaualgen) in late summer. Lifeguards are present only at the Strandbäder, so if you're swimming from a free shore, common-sense rules apply: don't swim alone, don't go far out, watch for boats."
+          "text": "Yes, with one caveat. Berlin's State Office for Health monitors **39 official bathing sites** every two weeks and publishes results at **badegewaesser.berlin.de**. Almost all sites are rated suitable for swimming throughout the season. The Lower Havel sites occasionally flag for elevated bacteria after heavy rain, and any warm shallow lake can develop a temporary blue-green algae bloom (Blaualgen) in late summer. Lifeguards are present only at the Strandbäder, so if you're swimming from a free shore, common-sense rules apply: don't swim alone, don't go far out, watch for boats."
         }
       },
       {
@@ -1314,7 +1316,7 @@
         "name": "What does FKK mean and is it everywhere in Berlin lakes?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "FKK stands for Freikörperkultur — \"free body culture\" — and refers to the German tradition of nude bathing, which has been mainstream here since the 1920s. Some Berlin lakes have official FKK sections (parts of Müggelsee and Wannsee). Teufelsee in the Grunewald forest is predominantly FKK. At most lidos and city lakes, the default is textile (clothed) bathing. You'll never be required to undress, and Germans don't stare. If you wander into a clearly FKK area in clothes, just settle further along the shore."
+          "text": "FKK stands for **Freikörperkultur** — \"free body culture\" — and refers to the German tradition of nude bathing, which has been mainstream here since the 1920s. Some Berlin lakes have official FKK sections (parts of Müggelsee and Wannsee). **Teufelsee** in the Grunewald forest is predominantly FKK. At most lidos and city lakes, the default is **textile** (clothed) bathing. You'll never be required to undress, and Germans don't stare. If you wander into a clearly FKK area in clothes, just settle further along the shore."
         }
       },
       {
@@ -1322,7 +1324,7 @@
         "name": "What's the closest lake to Alexanderplatz for swimming?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Plötzensee in Wedding, about 15 minutes by U9 to Amrumer Straße. It has a sandy beach with a wooden jetty, a small lido, free shore access, and the attached Volkspark Rehberge for shade. For a more classic lake experience, Schlachtensee or Großer Wannsee are 35–40 minutes by S-Bahn from central Berlin and well worth the slightly longer trip."
+          "text": "**Plötzensee** in Wedding, about **15 minutes by U9** to Amrumer Straße. It has a sandy beach with a wooden jetty, a small lido, free shore access, and the attached Volkspark Rehberge for shade. For a more classic lake experience, **Schlachtensee** or **Großer Wannsee** are 35–40 minutes by S-Bahn from central Berlin and well worth the slightly longer trip."
         }
       },
       {
@@ -1330,7 +1332,7 @@
         "name": "Can I bring food and alcohol to Berlin lakes?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes — picnicking is the entire point. Bring a blanket, snacks, and drinks. The rules: no glass bottles (banned at most bathing sites), pack out all your trash, and keep music at low volume after 18:00. Alcohol is legal in public in Germany, but obvious drunkenness draws attention. BBQs and open fires are forbidden everywhere except in designated Grillplätze — the surrounding forests have serious wildfire risk in dry summers, and the fines start at €50."
+          "text": "Yes — picnicking is the entire point. Bring a blanket, snacks, and drinks. The rules: **no glass bottles** (banned at most bathing sites), pack out all your trash, and keep music at low volume after 18:00. Alcohol is legal in public in Germany, but obvious drunkenness draws attention. **BBQs and open fires are forbidden** everywhere except in designated Grillplätze — the surrounding forests have serious wildfire risk in dry summers, and the fines start at **€50**."
         }
       }
     ]
@@ -1536,7 +1538,7 @@
         "name": "What is the weather like in Berlin in July?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Berlin.de lists July averages of 23.3°C daytime maximum, 12.3°C minimum, about 7 hours of sunshine per day, 8 rainy days, and 48 mm of rain. In real life, pack for warm days, cooler evenings, and sudden showers."
+          "text": "Berlin.de lists July averages of **23.3°C daytime maximum**, **12.3°C minimum**, about **7 hours of sunshine per day**, **8 rainy days**, and **48 mm of rain**. In real life, pack for warm days, cooler evenings, and sudden showers."
         }
       },
       {
@@ -1552,7 +1554,7 @@
         "name": "What major events happen in Berlin in July 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Confirmed dates include Berlin Fashion Week from July 2-5, Classic Open Air from July 9-14, Berlin Brettspiel Con from July 10-12, and CSD Berlin on July 24-25. Check official event pages before publishing or booking, because schedules can still change."
+          "text": "Confirmed dates include **Berlin Fashion Week from July 2-5**, **Classic Open Air from July 9-14**, **Berlin Brettspiel Con from July 10-12**, and **CSD Berlin on July 24-25**. Check official event pages before publishing or booking, because schedules can still change."
         }
       },
       {
@@ -1582,7 +1584,7 @@
         "name": "What is the weather like in Berlin in August?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Berlin.de lists August as Berlin's warmest month, with an average daily maximum of 23.4°C, an average minimum of 12.1°C, about 6.7 hours of sunshine per day, 8 rainy days, and 51 mm of rain. Heatwaves and sudden thunderstorms are both realistic."
+          "text": "Berlin.de lists August as Berlin's warmest month, with an average daily maximum of **23.4°C**, an average minimum of **12.1°C**, about **6.7 hours of sunshine per day**, **8 rainy days**, and **51 mm of rain**. Heatwaves and sudden thunderstorms are both realistic."
         }
       },
       {
@@ -1598,7 +1600,7 @@
         "name": "What major events happen in Berlin in August 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Useful dates include the partial solar eclipse and Long Night of Astronomy on August 12, Tanz im August from August 13-29, and Long Night of Museums on August 29. Event programs can change, so check the official pages before booking around a specific performance or venue."
+          "text": "Useful dates include the partial solar eclipse and Long Night of Astronomy on **August 12**, Tanz im August from **August 13-29**, and Long Night of Museums on **August 29**. Event programs can change, so check the official pages before booking around a specific performance or venue."
         }
       },
       {
@@ -1628,7 +1630,7 @@
         "name": "What is the weather like in Berlin in September?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Berlin.de lists September averages of 19.5°C daytime maximum, 9.5°C minimum, about 5 hours of sunshine per day, 8 rainy days, and 51 mm of rain. Pack layers, because warm afternoons and cool evenings can happen on the same day."
+          "text": "Berlin.de lists September averages of **19.5°C daytime maximum**, **9.5°C minimum**, about **5 hours of sunshine per day**, **8 rainy days**, and **51 mm of rain**. Pack layers, because warm afternoons and cool evenings can happen on the same day."
         }
       },
       {
@@ -1636,7 +1638,7 @@
         "name": "What major events happen in Berlin in September 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Useful dates include IFA Berlin from September 4-8, Berlin Art Week from September 9-13, Open Monument Day on September 13, and the BMW Berlin Marathon on September 27. Marathon weekend especially affects hotels, transport, and central routes."
+          "text": "Useful dates include **IFA Berlin from September 4-8**, **Berlin Art Week from September 9-13**, **Open Monument Day on September 13**, and the **BMW Berlin Marathon on September 27**. Marathon weekend especially affects hotels, transport, and central routes."
         }
       },
       {
@@ -1836,7 +1838,7 @@
         "name": "What does mit Darm or ohne Darm mean?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Mit Darm means the sausage has casing, so it has more snap when you bite it. Ohne Darm means skinless, which is very common in Berlin currywurst. If you are curious, try both once and decide which texture you prefer."
+          "text": "`Mit Darm` means the sausage has casing, so it has more snap when you bite it. `Ohne Darm` means skinless, which is very common in Berlin currywurst. If you are curious, try both once and decide which texture you prefer."
         }
       },
       {
@@ -1912,7 +1914,7 @@
         "name": "What famous movies were filmed in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Famous movies connected to Berlin include Run Lola Run, Wings of Desire, Christiane F., Good Bye, Lenin!, The Lives of Others, Victoria, The Bourne Supremacy, and parts of The Hunger Games: Mockingjay - Part 2. Some use Berlin as itself; others use Berlin or the Berlin-Brandenburg region as a stand-in for another place."
+          "text": "Famous movies connected to Berlin include **Run Lola Run**, **Wings of Desire**, **Christiane F.**, **Good Bye, Lenin!**, **The Lives of Others**, **Victoria**, **The Bourne Supremacy**, and parts of **The Hunger Games: Mockingjay - Part 2**. Some use Berlin as itself; others use Berlin or the Berlin-Brandenburg region as a stand-in for another place."
         }
       },
       {
@@ -1920,7 +1922,7 @@
         "name": "Which TV shows were filmed in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Major series connected to Berlin include Babylon Berlin, Dark, Homeland Season 5, Berlin Station, Sense8, Deutschland 83, The Queen's Gambit, and Unorthodox. In some cases Berlin is the story setting; in others, Berlin and nearby Brandenburg provide architecture, studios, streets, or landscapes."
+          "text": "Major series connected to Berlin include **Babylon Berlin**, **Dark**, **Homeland** Season 5, **Berlin Station**, **Sense8**, **Deutschland 83**, **The Queen's Gambit**, and **Unorthodox**. In some cases Berlin is the story setting; in others, Berlin and nearby Brandenburg provide architecture, studios, streets, or landscapes."
         }
       },
       {
@@ -1928,7 +1930,7 @@
         "name": "Can I visit the exact filming locations in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sometimes, but not always. Berlin filming can involve real streets, studio sets, edited-together locations, and places that double for another city. It is better to think in screen moods and neighborhoods: Oberbaumbrücke for Run Lola Run energy, Karl-Marx-Allee for socialist architecture, Bahnhof Zoo for West Berlin memory, and Alexanderplatz for modern transit and spy stories."
+          "text": "Sometimes, but not always. Berlin filming can involve real streets, studio sets, edited-together locations, and places that double for another city. It is better to think in **screen moods** and neighborhoods: Oberbaumbrücke for Run Lola Run energy, Karl-Marx-Allee for socialist architecture, Bahnhof Zoo for West Berlin memory, and Alexanderplatz for modern transit and spy stories."
         }
       },
       {
@@ -1936,7 +1938,7 @@
         "name": "Was The Hunger Games filmed in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Parts of The Hunger Games: Mockingjay - Part 2 were filmed in the Berlin-Brandenburg region, especially through the production world around Studio Babelsberg in Potsdam. Berlin is not simply playing Berlin here; the region becomes part of a dystopian screen world."
+          "text": "Parts of **The Hunger Games: Mockingjay - Part 2** were filmed in the Berlin-Brandenburg region, especially through the production world around **Studio Babelsberg** in Potsdam. Berlin is not simply playing Berlin here; the region becomes part of a dystopian screen world."
         }
       },
       {
@@ -1944,7 +1946,7 @@
         "name": "What are the best Berlin film locations to visit on a first trip?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Start with Alexanderplatz, Oberbaumbrücke, Karl-Marx-Allee, Bahnhof Zoo, and Wannsee. If you have extra time, add Potsdam-Babelsberg for film production history. These places help you understand why Berlin works so well for stories about surveillance, reinvention, division, nightlife, and escape."
+          "text": "Start with **Alexanderplatz**, **Oberbaumbrücke**, **Karl-Marx-Allee**, **Bahnhof Zoo**, and **Wannsee**. If you have extra time, add **Potsdam-Babelsberg** for film production history. These places help you understand why Berlin works so well for stories about surveillance, reinvention, division, nightlife, and escape."
         }
       },
       {
@@ -1952,7 +1954,7 @@
         "name": "Does the BerlinWalk tour cover movie locations?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The tour is not a pure film-location tour, but it covers the real city layers that make Berlin so cinematic: Alexanderplatz, historic Mitte, Museum Island, GDR architecture, Cold War memory, and the streets filmmakers keep returning to. It is a strong starting point if you want to see the real Berlin behind the screen image."
+          "text": "The tour is not a pure film-location tour, but it covers the real city layers that make Berlin so cinematic: **Alexanderplatz**, historic Mitte, Museum Island, GDR architecture, Cold War memory, and the streets filmmakers keep returning to. It is a strong starting point if you want to see the real Berlin behind the screen image."
         }
       }
     ]
@@ -1966,7 +1968,7 @@
         "name": "Where should I park if I am joining the BerlinWalk tour?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Use a central garage near Alexanderplatz and walk to the World Clock. RathausPassagen, ALEXA, and Q-Park Am Alexanderplatz are the most practical options. Arrive 20-30 minutes early so parking does not make you late."
+          "text": "Use a central garage near **Alexanderplatz** and walk to the **World Clock**. RathausPassagen, ALEXA, and Q-Park Am Alexanderplatz are the most practical options. Arrive 20-30 minutes early so parking does not make you late."
         }
       },
       {
@@ -1974,7 +1976,7 @@
         "name": "Is Alexanderplatz inside Berlin's Umweltzone?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Alexanderplatz is inside Berlin's low-emission zone. If you drive into the center, check whether your car needs the green environmental sticker, including foreign-registered vehicles."
+          "text": "Yes. Alexanderplatz is inside Berlin's low-emission zone. If you drive into the center, check whether your car needs the **green environmental sticker**, including foreign-registered vehicles."
         }
       },
       {
@@ -1982,7 +1984,7 @@
         "name": "Is street parking near Alexanderplatz worth trying?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "I would not rely on it. Mitte has managed paid parking zones, spaces can be hard to find, and central street parking can cost around €4 per hour in key zones. For a timed tour, a garage is much calmer."
+          "text": "I would not rely on it. Mitte has managed paid parking zones, spaces can be hard to find, and central street parking can cost around **€4 per hour** in key zones. For a timed tour, a garage is much calmer."
         }
       },
       {
@@ -1998,7 +2000,7 @@
         "name": "How early should I arrive if I am parking before the tour?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Plan to arrive in the parking area 20-30 minutes before the tour starts. You need time to enter the garage, find a space, remember the exit, pay if needed, and walk to the World Clock."
+          "text": "Plan to arrive in the parking area **20-30 minutes before the tour starts**. You need time to enter the garage, find a space, remember the exit, pay if needed, and walk to the World Clock."
         }
       }
     ]
@@ -2152,7 +2154,7 @@
         "name": "Can you still see the Berlin Wall today?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, but you have to know where to look. The Wall was mostly torn down between 1989 and 1992, but several sections and memorials survive. The main places are the East Side Gallery (1.3 km of murals on original Wall concrete in Friedrichshain), the Berlin Wall Memorial on Bernauer Straße (preserved death strip and documentation center), the Topography of Terror (200 m section next to a free museum), and a few shorter sections near Potsdamer Platz and Mauerpark."
+          "text": "Yes, but you have to know where to look. The Wall was mostly torn down between 1989 and 1992, but several sections and memorials survive. The main places are the **East Side Gallery** (1.3 km of murals on original Wall concrete in Friedrichshain), the **Berlin Wall Memorial on Bernauer Straße** (preserved death strip and documentation center), the **Topography of Terror** (200 m section next to a free museum), and a few shorter sections near Potsdamer Platz and Mauerpark."
         }
       },
       {
@@ -2160,7 +2162,7 @@
         "name": "What is the best place to see the Berlin Wall in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Berlin Wall Memorial on Bernauer Straße is the most historically complete site — it shows both walls, the death strip, a guard tower, and the original death strip width. The free documentation center has a viewing tower. If you want scale and murals, the East Side Gallery (1.3 km of painted Wall along the Spree) is the most visited site. For historical context connecting the Wall to the Nazi period, the Topography of Terror is the strongest choice."
+          "text": "The **Berlin Wall Memorial on Bernauer Straße** is the most historically complete site — it shows both walls, the death strip, a guard tower, and the original death strip width. The free documentation center has a viewing tower. If you want scale and murals, the **East Side Gallery** (1.3 km of painted Wall along the Spree) is the most visited site. For historical context connecting the Wall to the Nazi period, the **Topography of Terror** is the strongest choice."
         }
       },
       {
@@ -2184,7 +2186,7 @@
         "name": "How long was the Berlin Wall?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Berlin Wall was 155 kilometers long in total. It completely encircled West Berlin, which meant it was not a line dividing the city in half but a ring around the Western enclave inside East Germany. Of that 155 km, less than 3 km of original concrete survives today."
+          "text": "The Berlin Wall was **155 kilometers long** in total. It completely encircled West Berlin, which meant it was not a line dividing the city in half but a ring around the Western enclave inside East Germany. Of that 155 km, less than 3 km of original concrete survives today."
         }
       },
       {
@@ -2192,7 +2194,7 @@
         "name": "When was the Berlin Wall built and when did it fall?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Construction began on August 13, 1961 — a Sunday morning — when East Germany sealed the border with barbed wire. Concrete replaced the wire over the following years. The Wall fell on November 9, 1989, when East Germany announced citizens could cross freely. Crowds gathered at crossing points across the city and the Wall was opened that same night."
+          "text": "Construction began on **August 13, 1961** — a Sunday morning — when East Germany sealed the border with barbed wire. Concrete replaced the wire over the following years. The Wall fell on **November 9, 1989**, when East Germany announced citizens could cross freely. Crowds gathered at crossing points across the city and the Wall was opened that same night."
         }
       },
       {
@@ -2200,7 +2202,7 @@
         "name": "How many people died at the Berlin Wall?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "At least 140 people died at the Berlin Wall between 1961 and 1989, according to research by the Berlin Wall Memorial. Deaths occurred from gunshot wounds, accidents during escape attempts, and drowning in border waterways. The exact number is still debated by historians; some research puts the figure higher."
+          "text": "At least **140 people died at the Berlin Wall** between 1961 and 1989, according to research by the Berlin Wall Memorial. Deaths occurred from gunshot wounds, accidents during escape attempts, and drowning in border waterways. The exact number is still debated by historians; some research puts the figure higher."
         }
       },
       {
@@ -2208,7 +2210,7 @@
         "name": "What is the cobblestone line running through Berlin streets?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "A double row of cobblestones set into the pavement marks the former course of the Berlin Wall across the city. It runs for around 220 km and crosses roads, squares, parks, and pavements throughout the urban area. Look for two parallel lines of dark stone embedded in the ground — you will find them in most central districts, including Mitte, Kreuzberg, and Friedrichshain."
+          "text": "A double row of cobblestones set into the pavement marks the former course of the Berlin Wall across the city. It runs for around **220 km** and crosses roads, squares, parks, and pavements throughout the urban area. Look for two parallel lines of dark stone embedded in the ground — you will find them in most central districts, including Mitte, Kreuzberg, and Friedrichshain."
         }
       }
     ]
@@ -2222,7 +2224,7 @@
         "name": "Where does the BerlinWalk tour end?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The BerlinWalk tour ends near Hackescher Markt in central Berlin. From there you are close to the S-Bahn station, trams, Hackesche Höfe, Museum Island, the Spree, and plenty of food options."
+          "text": "The BerlinWalk tour ends near **Hackescher Markt** in central Berlin. From there you are close to the S-Bahn station, trams, Hackesche Höfe, Museum Island, the Spree, and plenty of food options."
         }
       },
       {
@@ -2230,7 +2232,7 @@
         "name": "What is the best thing to do immediately after the walking tour?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Eat or take a short break first. Then choose between Hackesche Höfe, Haus Schwarzenberg, the Spree riverbank, one museum, or an evening plan. Most people make better decisions after food or coffee."
+          "text": "Eat or take a short break first. Then choose between **Hackesche Höfe**, **Haus Schwarzenberg**, the Spree riverbank, one museum, or an evening plan. Most people make better decisions after food or coffee."
         }
       },
       {
@@ -2246,7 +2248,7 @@
         "name": "Can I walk from Hackescher Markt to Museum Island?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. Museum Island is a short walk from Hackescher Markt. After a 2-hour walking tour, the smarter plan is usually to choose one museum or walk the outside of Museum Island for free."
+          "text": "Yes. Museum Island is a short walk from Hackescher Markt. After a **2-hour** walking tour, the smarter plan is usually to choose one museum or walk the outside of Museum Island for free."
         }
       },
       {
@@ -2254,7 +2256,7 @@
         "name": "What can I do near Hackescher Markt when it rains?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Good rainy-day options include the DDR Museum, Museum Otto Weidt's Workshop for the Blind, Anne Frank Zentrum, KW Institute for Contemporary Art, Neue Synagoge - Centrum Judaicum, Chamäleon Berlin, and the Museum Island museums."
+          "text": "Good rainy-day options include the **DDR Museum**, **Museum Otto Weidt's Workshop for the Blind**, **Anne Frank Zentrum**, **KW Institute for Contemporary Art**, **Neue Synagoge - Centrum Judaicum**, **Chamäleon Berlin**, and the Museum Island museums."
         }
       },
       {
@@ -2292,7 +2294,7 @@
         "name": "How many days in Berlin does the planner cover?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It covers 1 to 7 days. One day stays tightly focused on the central highlights. Three days uses the classic first-time structure: Mitte, Wall/East Berlin, and museums or neighborhoods. Longer trips add slower local days, food, nightlife, free sights, or Potsdam."
+          "text": "It covers **1 to 7 days**. One day stays tightly focused on the central highlights. Three days uses the classic first-time structure: Mitte, Wall/East Berlin, and museums or neighborhoods. Longer trips add slower local days, food, nightlife, free sights, or Potsdam."
         }
       },
       {
@@ -2316,7 +2318,7 @@
         "name": "When should I take the BerlinWalk tour during my trip?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For most first-time visitors, take the BerlinWalk tour as early as possible, ideally on arrival day if you arrive early enough or the next morning at 11:30. The tour lasts about 2 hours and gives the historic center a structure before you choose museums, Wall sites, food, or nightlife."
+          "text": "For most first-time visitors, take the BerlinWalk tour as early as possible, ideally on arrival day if you arrive early enough or the next morning at 11:30. The tour lasts about **2 hours** and gives the historic center a structure before you choose museums, Wall sites, food, or nightlife."
         }
       },
       {
@@ -2333,6 +2335,364 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Use it as a planning framework, not a live reservation system. Always check paid attractions, timed museum entries, restaurants, and special events directly before you go."
+        }
+      }
+    ]
+  },
+  "berlin-in-october-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is October a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. October is one of Berlin's best months for walking, museums and atmosphere. You get golden autumn light and fewer crowds than summer, in exchange for cooler, shorter and sometimes wet days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in October?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists October averages of **14.1°C** daytime maximum, **5.7°C** minimum, about **3.5 hours of sunshine** per day, **7 rainy days**, and **29 mm of rain**. Pack warm layers and a rain jacket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When do the clocks change in Berlin in October 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Daylight saving time ends on **Sunday, October 25, 2026**, when the clocks go back one hour. After that, sunset is much earlier, around **4:35 pm** by October 31, so plan outdoor sights earlier in the day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Festival of Lights?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The **Festival of Lights** (October 9-18, 2026) turns more than 40 Berlin landmarks into giant light-art installations each evening, usually from around 7 pm. October's early darkness means you do not have to stay up late to see it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I pack for Berlin in October?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Warm layers, a sweater or fleece, a water-resistant warm jacket, a compact umbrella, a scarf and light gloves for late in the month, and waterproof walking shoes."
+        }
+      }
+    ]
+  },
+  "berlin-in-november-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is November a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you come for atmosphere and value rather than weather. November is Berlin's quietest, cheapest, most atmospheric month, ideal for museums, history and the first Christmas markets, in exchange for cold, grey, short days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in November?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists November averages of **7.5°C** maximum, **1.8°C** minimum, just **1.9 hours of sunshine** per day, **8 rainy days**, and **38 mm of rain**. It is cold, damp and short on sun. Pack a warm waterproof coat."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When do the Christmas markets open in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most major Berlin Christmas markets open in the **last week of November**, with many starting around **November 23** and running through December. If your trip is in late November, you can catch them before the December crowds."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I pack for Berlin in November?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A warm waterproof winter coat, warm layers, a sweater, a hat, scarf and gloves, a compact umbrella, and warm waterproof shoes. November is winter in everything but the calendar."
+        }
+      }
+    ]
+  },
+  "berlin-in-december-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is December a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you come for the Christmas markets and festive atmosphere. December is dark and cold, but the markets, lights, mulled wine and New Year's Eve make it one of the most memorable times to visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in December?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists December averages of **3.6°C** maximum, **-1.3°C** minimum, only **1.3 hours of sunshine** per day, **9 rainy days**, and **41 mm of rain**, the lowest sunshine of the year. Snow is possible but not guaranteed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is anything closed in Berlin over Christmas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. **December 24, 25 and 26** are the quietest days, with many shops, restaurants and some sights closed or on holiday hours, and reduced public transport. Plan food and sightseeing carefully if your trip overlaps the holiday."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens on New Year's Eve in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin holds a huge celebration, including a major party and fireworks at the **Brandenburg Gate** along the Straße des 17. Juni. Entry to the main zone is usually free but ticketed, and the night gets loud, so plan where you want to be."
+        }
+      }
+    ]
+  },
+  "berlin-in-january-2027": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is January a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you come for value and culture. January is the coldest, quietest and cheapest month, ideal for a low-cost, museum-heavy trip, in exchange for short, cold days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in January?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists January averages of **2.4°C** maximum, **-3°C** minimum, just **1.5 hours of sunshine** per day, **9 rainy days**, and **33 mm of rain**. It is the coldest month, and east winds can make it feel colder."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is January cheap in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. January is generally the **cheapest month** to visit Berlin, with the lowest crowds and calmest museums of the year. It is the best month for a low-budget city break built around indoor culture."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I pack for Berlin in January?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A warm waterproof winter coat, thermal base layers, a sweater, a hat, scarf and gloves, and warm waterproof shoes or boots with grip. Dress for the coldest month of the year."
+        }
+      }
+    ]
+  },
+  "berlin-in-february-2027": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is February a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, with the right expectations. February is still cold winter, but it has low prices, calm museums, lengthening days and the Berlinale film festival, which is open to the public."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in February?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists February averages of **3.8°C** maximum, **-2.5°C** minimum, about **2.5 hours of sunshine** per day, **7 rainy days**, and **31 mm of rain**. It is cold and often grey, but the days lengthen quickly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the Berlinale in 2027?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The **Berlinale**, the Berlin International Film Festival, runs from **February 10 to 21, 2027**. It is one of Europe's biggest film festivals and sells tickets to the general public, so you can attend screenings, often with directors present."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I pack for Berlin in February?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A warm waterproof winter coat, warm layers, a sweater, a hat, scarf and gloves, and warm waterproof shoes. Add a smarter outfit if you plan Berlinale screenings or nice dinners."
+        }
+      }
+    ]
+  },
+  "berlin-in-march-2027": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is March a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you value spring energy and low crowds over guaranteed warmth. March is changeable but clearly waking up, with longer days, fewer crowds and lower prices than summer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in March?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists March averages of **8.2°C** maximum, **0.4°C** minimum, about **3.8 hours of sunshine** per day, **8 rainy days**, and **38 mm of rain**. The weather is unpredictable, swinging from mild and bright to cold and wet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When do the clocks change in Berlin in March 2027?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Daylight saving time begins on **Sunday, March 28, 2027**, when the clocks go forward one hour. After that, sunset jumps to nearly **8 pm**, so the second half of March has much longer evenings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is Easter in Berlin in 2027?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In 2027, Easter falls in **late March**: Good Friday is **March 26**, Easter Sunday is **March 28**, and Easter Monday is **March 29**. These are public holidays, so expect some closures and book popular meals early."
+        }
+      }
+    ]
+  },
+  "berlin-in-april-2027": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is April a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. April is one of the nicer months, with cherry blossom, green parks and long evenings, in exchange for famously changeable weather. Pack for sun and rain and it is a beautiful month."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in April?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists April averages of **13.3°C** maximum, **3.4°C** minimum, about **5.3 hours of sunshine** per day, **9 rainy days**, and **40 mm of rain**. Anything from bright sunshine to cold rain is possible, often on the same day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I see cherry blossom in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin's cherry blossom is famous along the former **Berlin Wall trail**, where thousands of cherry trees were planted after the Wall fell, plus several parks and avenues. The peak is usually **mid to late April** and lasts only a couple of weeks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I pack for Berlin in April?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A warm but light jacket, layers, a reliable rain jacket or umbrella, comfortable water-resistant walking shoes, sunglasses for bright days, and a lighter top for warm afternoons."
+        }
+      }
+    ]
+  },
+  "berlin-in-may-2027": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is May a good time to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, May is one of the best months. You get friendly weather, long days, festivals and beer gardens, before the peak-summer heat and crowds. The only catch is that the lakes are still warming up."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the weather like in Berlin in May?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists May averages of **18.8°C** maximum, **7.7°C** minimum, about **7 hours of sunshine** per day, **9 rainy days**, and **47 mm of rain**. It calls May a good time to visit: friendly weather, and the city not yet too crowded."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Carnival of Cultures?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The **Karneval der Kulturen** is a huge, free four-day street festival over the **Pentecost weekend** (around **May 14 to 17, 2027**), centred on Kreuzberg, with a colourful costumed parade, music and food from around the world."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I pack for Berlin in May?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Comfortable walking shoes, layers for warm days and cool evenings, a light jacket, a rain layer, plus sunglasses and sunscreen. Mornings and nights can still be cool even when afternoons are warm."
+        }
+      }
+    ]
+  },
+  "world-cup-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the 2026 World Cup being held in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All matches are played in the United States, Canada and Mexico between 11 June and 19 July 2026. Berlin does not host any games, but it has plenty of public viewing, from free big screens to beer gardens and bars."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a fan mile at the Brandenburg Gate in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. For the first time since 2006, Berlin is not setting up its Fanmeile on Straße des 17. Juni. The city cited high security costs and the late North American kick-off times, and in the end no organiser applied to run it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I watch Germany's matches in Berlin for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Center am Potsdamer Platz shows all three of Germany's group matches, plus the opening game, both semi-finals and the final, on a roughly 100 square metre LED wall. Admission is free and the screen sits sheltered under the Center's roof."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time do the World Cup matches start in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most kick off in the evening or overnight in Central European Summer Time. About half fall in the convenient 6 pm to midnight window, and the rest run from midnight into the early morning. Germany's opener against Curaçao on 14 June is at 7 pm Berlin time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I watch matches outdoors late at night in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin has a special exemption that allows outdoor public viewing for matches kicking off by 10 pm, despite the usual quiet-hours rules. A few venues with special permits can show later games outdoors; otherwise the very late kick-offs move indoors to bars."
         }
       }
     ]
@@ -2508,7 +2868,7 @@
         "name": "When do the 2026 Christmas markets start in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The official Christmas market season in Berlin begins on **Monday, November 23, 2026**. Most major markets run until December 26 or December 31, 2026. A few markets (like the Humboldt Forum and Rotes Rathaus markets) stay open until early January 2027, while the RAW-Gelände medieval market opens early on **November 12, 2026**."
+          "text": "The traditional Christmas market season in Berlin begins on **Monday, November 23, 2026**. However, some markets open much earlier: the **Lichtenberger Winterzeit** funfair opens exceptionally early on **October 31, 2026**, and the **RAW-Gelände medieval market** starts on **November 12, 2026**. Most major markets run until December 26 or December 31, 2026, with a few remaining open until early January 2027."
         }
       },
       {
@@ -2524,7 +2884,7 @@
         "name": "Do you have to pay to enter Berlin Christmas markets?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Most Christmas markets in Berlin are completely free to enter. The main exception is the **WeihnachtsZauber Gendarmenmarkt**, which charges a **€2 entry fee** for adults (free for children under 12, and free on weekdays from 11:00 to 14:00). The **RAW-Gelände medieval market** is free from Monday to Wednesday, but charges a **€3 entry fee** from Thursday to Sunday."
+          "text": "Most Christmas markets in Berlin are completely free to enter. The main exceptions are **WeihnachtsZauber Gendarmenmarkt** (€2 entry fee; free Mon-Fri 11:00-14:00), the **RAW-Gelände medieval market** (free Mon-Wed, €3 Thu-Sun), and the **Klunkerkranich rooftop market** (requires paying the rooftop cultural entry fee of €3-5)."
         }
       },
       {
@@ -2595,6 +2955,90 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Usually no. A Späti is often cheaper than a bar, but more expensive than a supermarket. Use it for late, small, practical purchases, not for a full grocery shop."
+        }
+      }
+    ]
+  },
+  "vegan-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is vegan food expensive in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not necessarily. While fine dining spots like FREA or Cookies Cream are premium experiences, you can easily find incredible vegan döner, burgers, or Asian tapas for €7 to €12. It is very affordable compared to other major European cities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do regular (non-vegan) restaurants in Berlin have vegan options?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes! Almost every restaurant in central Berlin (especially in Friedrichshain, Kreuzberg, and Mitte) will have at least one clearly marked, high-quality vegan option. It is rarely just a \"side salad\"."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it easy to find vegan breakfast or brunch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Extremely easy. Berlin has a massive brunch culture, and places like No Milk Today or geh Veg offer 100% plant-based brunch menus including tofu scrambles and vegan pancakes."
+        }
+      }
+    ]
+  },
+  "berlin-founding-year-1237": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When was Berlin founded?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin's official founding year is **1237**. That date comes from the oldest surviving document mentioning **Cölln**, Berlin's twin settlement on the Spree. Berlin itself is first mentioned in **1244**."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Berlin use 1237 if Berlin was first mentioned in 1244?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin uses 1237 because Cölln and Berlin later formed the double town that became modern Berlin. The oldest surviving paper trail belongs to Cölln, so the official city birthday follows that date."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What was Cölln?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cölln was Berlin's medieval twin town on the Spree island. It stood around today's **Petriplatz, Fischerinsel, and palace/Humboldt Forum area**, opposite old Berlin on the eastern bank."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you still see medieval Berlin today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but in fragments. The best traces near Alexanderplatz are **Marienkirche**, **Nikolaikirche**, the **Nikolaiviertel** street pattern, the medieval city wall on **Littenstraße**, and the **Franciscan monastery ruin**."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin named after a bear?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Probably not. The name Berlin is commonly linked to a Slavic root connected with swamp or marshland. The bear likely came later through German wordplay and medieval heraldry; bears appear on the town seal by **1280**."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why doesn't Berlin have a beautiful old town?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin did have a medieval old town, but war damage, postwar clearance, and GDR urban planning removed much of it. What remains is scattered through the historic centre rather than preserved as one postcard-perfect old quarter."
         }
       }
     ]
