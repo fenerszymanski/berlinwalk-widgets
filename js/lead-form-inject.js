@@ -12,6 +12,10 @@
  *   4. Re-runs everything on SPA navigation between posts.
  */
 (function () {
+  // Emergency kill switch: hide the blog-post booking embed while the live
+  // layout issue is investigated.
+  return;
+
   var CALENDAR_SCRIPT_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/booking-calendar/booking-calendar-element.js';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var MARKER = 'data-bw-blog-booking';
