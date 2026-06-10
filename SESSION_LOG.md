@@ -2,6 +2,71 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-10 — Codex (Trip Planner subscription backfill)
+
+**Did:**
+- Backfilled four Ultimate Berlin Trip Planner contacts from `NOT_SET` to `SUBSCRIBED` through the Wix Email Marketing bulk subscription API.
+- Explicitly excluded Mauricio Rodríguez / Rodrigues from the update.
+
+**Changed:**
+- Wix: `info@tripess.com`, `chenyeeming@gmail.com`, `tam.boug@free.fr`, and `cecilierumler@hotmail.com` now verify as subscribed; no unsubscribed contacts were forced back in.
+
+**Opened:** None.
+**Closed:** Manual contact subscription backfill requested by Yusuf is done.
+
+**Next session should:** Continue with the next Trip Planner/widget QA item; future leads should be handled by the newly published auto-subscribe backend path.
+
+## 2026-06-10 — Codex (Berlin 1237 images + real-map widget)
+
+**Did:**
+- Added 4 inline images to the unpublished Wix 1237 draft and removed broken list rendering by rebuilding the body with paragraph-based timeline/fragments.
+- Replaced the draft's twin-towns iframe area with an uploaded annotated 1652/1720 Berlin-Cölln map image, so the article no longer depends on GitHub Pages deployment for that visual.
+- Reworked local `medieval-berlin-twin-towns` from a schematic SVG into a real old-map overlay version for later reuse.
+- Ran Wix API readback and local desktop/mobile widget screenshot QA.
+
+**Changed:**
+- `blog-drafts/why-is-berlin-founding-year-1237.md` — embed URLs now use `v=20260610b`, image sources are recorded, and body list blocks were converted to plain paragraphs.
+- `blog-drafts/images/berlin-1237/` — new optimized inline image assets: Pexels Nikolaiviertel/TV Tower, old Berlin-Cölln map, annotated map render/PNG, Marienkirche/TV Tower, and Littenstraße city wall.
+- `medieval-berlin-twin-towns/index.html`, `medieval-berlin-twin-towns/assets/berlin-coelln-1652-map.jpg` — real old-map background plus active overlay labels; inactive labels hidden.
+- `blog-workplan.md`, `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — recorded the latest Wix draft state.
+- Wix: draft `239d8355-2d20-4152-a809-8451074602e9` is still UNPUBLISHED; final readback confirmed 120 nodes, 4 IMAGE nodes, 3 embeds, 0 list nodes, annotated map present, twin-towns iframe absent, image credits, alt text, and no `[IMAGE]` placeholders.
+- QA: local widget screenshots saved under `../output/qa/berlin-1237-refresh-20260610/`; desktop/mobile old-map overlay looks clean. The local widget can still be pushed later, but the Wix draft no longer needs it for this article.
+
+**Opened:** Final visual preview in Wix before publish.
+**Closed:** Wix draft image gap, broken list-node issue, and ss1 map-widget-area visual issue.
+
+**Next session should:** Preview the Wix draft and publish only after the annotated map crop and remaining mini-walk iframe height look right.
+
+## 2026-06-10 — Codex (Späti link/image pass)
+
+**Did:**
+- Added a fourth lower-section Späti image (`04-spati-moabit-sign.jpg`) and expanded internal/external links throughout the Späti article.
+- Refreshed the unpublished Wix Blog draft and verified readback counts.
+
+**Changed:**
+- `blog-drafts/what-is-a-spati-berlin.md` — added the Moabit Spätkauf sign image, Image Credits entry, extra BerlinWalk internal links, and official external reference links.
+- `blog-drafts/images/spati-berlin/04-spati-moabit-sign.jpg`, `blog-drafts/images/spati-berlin/visual-sources.md` — added/recorded the fourth optimized Commons image.
+- `blog-workplan.md`, `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — updated Späti status from 3 to 4 inline images and recorded link/readback counts.
+- Wix: draft `6f3636f2-b910-4481-a87b-82dd5bd91ba4` remains UNPUBLISHED with 276 Ricos nodes, 4 IMAGE nodes, 3 HTML embeds, 1 ordered list, 23 unique links (11 internal, 12 external), cover media, and Image Credits present.
+
+**Opened:** Final visual preview in Wix before publish; check new image crop and iframe height on mobile.
+**Closed:** Yusuf's request for more links and one more lower article image is complete.
+
+**Next session should:** Preview the Wix draft, then publish only after the image/link layout and embeds look right.
+
+## 2026-06-10 — Antigravity (Forward UTM / fbclid query params to planner iframe)
+
+**Did:**
+- Added UTM parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_content`, `utm_term`) and `fbclid` to the keys list in `berlin-trip-planner-page-element.js` so they are successfully forwarded into the embedded planner iframe for tracking.
+
+**Changed:**
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — added parameters to the forwarded query parameters array.
+
+**Opened:** None.
+**Closed:** Fixed the UTM forwarding bug that caused all campaign attributions in `TripPlannerEvents` to show as `(none)`.
+
+**Next session should:** Verify that UTM campaigns are correctly attributed in the Trip Planner dashboard after pushing this change and testing with a UTM URL.
+
 ## 2026-06-10 — Codex (Späti Wix draft + images)
 
 **Did:**

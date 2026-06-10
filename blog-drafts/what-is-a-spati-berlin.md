@@ -43,7 +43,10 @@ Use these optimized local images when creating the Wix draft:
 3. Inline image in "The Pfand Rule":
    `berlinwalk-widgets/blog-drafts/images/spati-berlin/03-spati-interior-bottles.jpg`
 
-All three selected images are Wikimedia Commons CC BY-SA 4.0 files and need attribution. Source/credit details are saved in `blog-drafts/images/spati-berlin/visual-sources.md`.
+4. Inline image after "Where Are Spätis Most Useful?":
+   `berlinwalk-widgets/blog-drafts/images/spati-berlin/04-spati-moabit-sign.jpg`
+
+All four selected images are Wikimedia Commons CC BY-SA 4.0 files and need attribution. Source/credit details are saved in `blog-drafts/images/spati-berlin/visual-sources.md`.
 
 This article should work as a clear practical explainer and internal-link bridge between Sunday shopping, cash/card, beer gardens, public transport, and first-day planning content.
 
@@ -55,6 +58,10 @@ This article should work as a clear practical explainer and internal-link bridge
 - Berlin beer gardens: https://www.berlinwalk.com/post/berlin-beer-gardens-guide
 - Berlin public transport: https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus
 - Berlin daily budget: https://www.berlinwalk.com/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists
+- Public toilets: https://www.berlinwalk.com/post/public-toilets-in-berlin
+- Public toilet finder: https://www.berlinwalk.com/tools/berlin-public-toilets
+- First-day planner: https://www.berlinwalk.com/tools/berlin-first-day-planner
+- Meeting point: https://www.berlinwalk.com/meeting-point
 - Booking CTA: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
 
 ## Quick Summary
@@ -122,7 +129,7 @@ Not every late-night problem is a Späti problem. Use this quick checker before 
 
 ## Why Berlin Has So Many Spätis
 
-Berlin.de describes Spätis as a Berlin speciality, with around 1000 of them in the city, mostly in central areas. The roots go back to Spätverkaufsstellen, late shops associated with the former GDR, where workers needed basic supplies after normal shop hours.
+The official [Berlin.de Späti overview](https://www.berlin.de/en/shopping/4971123-2947095-spaeti-meeting-point-and-supermarket.en.html) describes Spätis as a Berlin speciality, with around 1000 of them in the city, mostly in central areas. The roots go back to Spätverkaufsstellen, late shops associated with the former GDR, where workers needed basic supplies after normal shop hours.
 
 After reunification, the word and the habit spread across the whole city.
 
@@ -167,13 +174,13 @@ The classic tourist Späti purchases are simple:
 
 If you are arriving in Berlin late, a Späti can save your first night. If your hotel room has no water, no kettle, and no nearby supermarket, look for one before you give up.
 
-If you are joining my Berlin Free Walking Tour the next morning, the practical move is very simple: buy water before you arrive at the World Clock. Berlin is walkable, but two hours feel better when you are not thirsty.
+If you are joining my Berlin Free Walking Tour the next morning, the practical move is very simple: buy water before you arrive at the [World Clock meeting point](https://www.berlinwalk.com/meeting-point). Berlin is walkable, but two hours feel better when you are not thirsty.
 
 ## Is a Späti Cheaper Than a Supermarket?
 
 Usually no.
 
-A Späti is often cheaper than a bar, especially for beer or soft drinks, but more expensive than a supermarket. You are paying for convenience, late hours, location, and the fact that someone is still behind the counter when most retail has closed.
+A Späti is often cheaper than a bar, especially for beer or soft drinks, but more expensive than a supermarket. You are paying for convenience, late hours, location, and the fact that someone is still behind the counter when most retail has closed. For the bigger money picture, my [Berlin daily budget guide](https://www.berlinwalk.com/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists) is a better place to compare food, drinks, transport, and museum costs.
 
 For a tourist, that is still often worth it.
 
@@ -185,13 +192,15 @@ Think of it this way:
 
 The mistake is using a Späti like a full grocery shop. It is not built for that.
 
+If the goal is atmosphere rather than a quick bottle, use a beer garden or bar instead. My [Berlin beer gardens guide](https://www.berlinwalk.com/post/berlin-beer-gardens-guide) is a better fit for that kind of evening.
+
 ## How Late Are Spätis Open?
 
 There is no single Späti closing time.
 
 Some close around midnight. Some stay open until 2 AM or 3 AM. Some are 24 hours. Some change their hours depending on the neighborhood, the owner, the season, staffing, local pressure, or enforcement.
 
-From Monday to Saturday, Berlin has very flexible shop opening rules compared with many parts of Germany. In practice, normal supermarkets usually close somewhere around 8 PM to 10 PM, while Spätis often stay open later.
+From Monday to Saturday, Berlin has very flexible shop opening rules compared with many parts of Germany. In practice, normal supermarkets usually close somewhere around 8 PM to 10 PM, while Spätis often stay open later. visitBerlin's [shopping and business-hours overview](https://www.visitberlin.de/en/shopping-business-hours) is a useful official starting point for the general pattern.
 
 The best tourist rule is:
 
@@ -207,7 +216,7 @@ This is the part tourists get wrong.
 
 Normal shops and supermarkets in Berlin are generally closed on Sundays and public holidays. That is why Spätis feel so important. But "Späti" does not automatically mean "legally open all Sunday selling everything".
 
-Berlin's shop opening rules make distinctions between product types and exceptions. The official Berlin.de Späti page explains that shops selling certain tourist supplies and goods for immediate consumption may open on Sundays and public holidays from 1 PM to 8 PM. It also notes a separate 7 AM to 4 PM window for shops with special product ranges such as flowers, newspapers, bakery products, and milk.
+Berlin's shop opening rules make distinctions between product types and exceptions. The official Berlin.de Späti page explains that shops selling certain tourist supplies and goods for immediate consumption may open on Sundays and public holidays from 1 PM to 8 PM. It also notes a separate 7 AM to 4 PM window for shops with special product ranges such as flowers, newspapers, bakery products, and milk. For the official legal exception framework, see the Berlin service page on [shop-opening exceptions for Sundays and public holidays](https://service.berlin.de/dienstleistung/327974/en/).
 
 The uncomfortable detail is that many Spätis sell mixed assortments. If a shop mixes different product categories, Sunday opening can become legally complicated.
 
@@ -218,7 +227,7 @@ For visitors, the practical version is:
 - If you only need water, snacks, or a drink, you will often find a Späti in central neighborhoods.
 - If you need proper supermarket shopping, plan it Monday to Saturday.
 
-I wrote a full guide to this because it catches visitors every week: [Are shops open on Sunday in Berlin?](https://www.berlinwalk.com/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know)
+I wrote a full guide to this because it catches visitors every week: [Are shops open on Sunday in Berlin?](https://www.berlinwalk.com/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know). For official station-supermarket examples, Berlin.de also keeps a page on [supermarkets open on Sundays](https://www.berlin.de/en/shopping/sunday/supermarkets/).
 
 ## What About Public Holidays?
 
@@ -226,7 +235,7 @@ Public holidays usually feel like Sundays in Berlin retail life.
 
 Supermarkets and normal shops are generally closed. Restaurants, cafes, museums, stations, airports, and some small shops may still operate. Spätis can help, but they are not a guaranteed replacement for planning.
 
-If your arrival day is Easter, Christmas, New Year's Day, May 1, or another German public holiday, do your serious shopping before the holiday or use a major station.
+If your arrival day is Easter, Christmas, New Year's Day, May 1, or another German public holiday, do your serious shopping before the holiday or use a major station. For the general tourist overview, Berlin.de's [Sunday shopping page](https://www.berlin.de/en/shopping/sunday/) is worth checking before you travel.
 
 A Späti is a backup. It is not a strategy for feeding a family for two days.
 
@@ -234,7 +243,7 @@ A Späti is a backup. It is not a strategy for feeding a family for two days.
 
 Berlin has become more card-friendly, but cash still matters.
 
-Spätis are exactly the kind of place where tourists should not assume a foreign credit card will work for a small purchase at midnight. Some accept cards. Some accept card only above a minimum amount. Some accept Girocard but not every international card. Some are cash-first.
+Spätis are exactly the kind of place where tourists should not assume a foreign credit card will work for a small purchase at midnight. Some accept cards. Some accept card only above a minimum amount. Some accept Girocard but not every international card. Some are cash-first. This sits inside the wider pattern I explain in my [Berlin cash and card guide](https://www.berlinwalk.com/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany).
 
 My honest advice:
 
@@ -243,7 +252,7 @@ My honest advice:
 - Ask before opening a drink if you plan to pay by card.
 - Do not be surprised if a small shop prefers cash.
 
-This is not only a Späti issue. It is part of the wider Berlin money pattern. For the full version, read my guide to [using credit cards in Berlin](https://www.berlinwalk.com/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany).
+This is not only a Späti issue. It is part of the wider Berlin money pattern.
 
 ## The Pfand Rule: Your Bottle Is Not Just Trash
 
@@ -321,6 +330,10 @@ Near big tourist sights, the Späti density can vary. Around Alexanderplatz, Hac
 
 This is one reason I tell visitors not to judge Berlin only by landmark zones. The city makes more sense when you understand the Kiez, the lived-in neighborhood. Spätis are a small but very clear part of that.
 
+![A yellow Spätkauf late-night shop sign on a Berlin street.](berlinwalk-widgets/blog-drafts/images/spati-berlin/04-spati-moabit-sign.jpg)
+
+If you are choosing where to walk, eat, or stay, this overlaps with broader neighborhood planning. My [Berlin shopping guide](https://www.berlinwalk.com/post/shopping-in-berlin) explains the difference between polished retail areas and more everyday Kiez streets, while the [Berlin public transport guide](https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) helps you understand why Spätis cluster around busy U-Bahn and S-Bahn movement.
+
 ## What Not to Expect From a Späti
 
 A Späti is useful, but it is not magic.
@@ -337,7 +350,9 @@ Do not expect:
 - official tourist information
 - medicine or pharmacy products
 
-For medicine, look for an Apotheke, and outside normal hours search for Notapotheke, the emergency pharmacy system. For toilets, use stations, malls, museums, cafes, or the Berliner Toilette system. For proper groceries, use a supermarket before Sunday.
+For medicine, look for an Apotheke, and outside normal hours search for Notapotheke, the emergency pharmacy system. Berlin.de has an English overview of [emergency services and pharmacies](https://www.berlin.de/en/tourism/travel-information/1748526-2862820-emergency-services-pharmacies.en.html), and the Apothekerkammer Berlin runs a [Notdienstfinder](https://www.akberlin.de/patientinnen/notdienstfinder) for emergency pharmacies.
+
+For toilets, use stations, malls, museums, cafes, or the Berliner Toilette system. My [public toilets in Berlin guide](https://www.berlinwalk.com/post/public-toilets-in-berlin) and the [Berlin public toilet finder](https://www.berlinwalk.com/tools/berlin-public-toilets) are more useful than hoping a Späti has a bathroom. For proper groceries, use a supermarket before Sunday.
 
 A Späti solves small problems. It does not replace the rest of the city.
 
@@ -354,7 +369,7 @@ If you arrive in Berlin in the evening and do not know the neighborhood yet, do 
 
 This sounds almost too simple, but it saves a surprising number of first nights.
 
-Berlin can feel hard on arrival because the city does not over-explain itself. Once you learn a few patterns, it becomes much easier.
+Berlin can feel hard on arrival because the city does not over-explain itself. Once you learn a few patterns, it becomes much easier. If you want a wider first-day checklist, use my [Berlin First-Day Planner](https://www.berlinwalk.com/tools/berlin-first-day-planner) before you arrive.
 
 ## Späti Etiquette in One Minute
 
@@ -412,6 +427,7 @@ Images via Wikimedia Commons:
 - [Spätkauf in Berlin](https://commons.wikimedia.org/wiki/File:Sp%C3%A4tkauf_in_Berlin.jpg) by Nicolas Bouliane, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), cropped and resized.
 - [Berlin Tag Nacht Spätkauf](https://commons.wikimedia.org/wiki/File:Berlin_Tag_Nacht_Sp%C3%A4tkauf.jpg) by ChickSR, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), resized.
 - [Spätkauf Berlin 2011](https://commons.wikimedia.org/wiki/File:Sp%C3%A4tkauf_Berlin_2011.jpg) by Lukas Uhde, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), resized.
+- [Spätkauf Late Night Shop](https://commons.wikimedia.org/wiki/File:Sp%C3%A4tkauf_Late_Night_Shop.jpg) by ChickSR, [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), resized and orientation-normalized.
 
 ## Source Notes to Check Before Publishing
 

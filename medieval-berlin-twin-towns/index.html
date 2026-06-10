@@ -117,14 +117,122 @@
       padding: 12px;
     }
 
-    #bw-twin-towns .bw-map {
+    #bw-twin-towns .bw-map-frame {
       background: #F8FBF1;
-      border: 1px solid #E5EFD5;
+      border: 1px solid #D6DEC9;
       border-radius: 8px;
-      display: block;
-      height: auto;
-      max-width: 100%;
+      overflow: hidden;
+      position: relative;
       width: 100%;
+    }
+
+    #bw-twin-towns .bw-map-frame::after {
+      background:
+        linear-gradient(180deg, rgba(18, 60, 22, 0.08), rgba(18, 60, 22, 0.02)),
+        radial-gradient(circle at 54% 55%, rgba(255, 230, 0, 0.12), transparent 36%);
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+    }
+
+    #bw-twin-towns .bw-map-img {
+      display: block;
+      filter: sepia(0.08) contrast(1.04);
+      height: auto;
+      width: 100%;
+    }
+
+    #bw-twin-towns .bw-zone,
+    #bw-twin-towns .bw-map-label {
+      opacity: 0;
+      position: absolute;
+      transition: opacity 0.18s ease;
+      z-index: 2;
+    }
+
+    #bw-twin-towns .bw-zone {
+      border: 3px solid var(--green);
+      border-radius: 999px;
+      box-shadow: 0 0 0 999px rgba(255, 230, 0, 0);
+      pointer-events: none;
+    }
+
+    #bw-twin-towns .bw-zone.berlin {
+      background: rgba(197, 225, 165, 0.22);
+      height: 30%;
+      left: 36%;
+      top: 31%;
+      transform: rotate(-4deg);
+      width: 24%;
+    }
+
+    #bw-twin-towns .bw-zone.coelln {
+      background: rgba(255, 230, 0, 0.18);
+      height: 25%;
+      left: 47%;
+      top: 55%;
+      transform: rotate(-8deg);
+      width: 22%;
+    }
+
+    #bw-twin-towns .bw-map-label {
+      background: rgba(255, 255, 255, 0.94);
+      border: 1.5px solid rgba(27, 94, 32, 0.28);
+      border-radius: 8px;
+      box-shadow: 0 5px 18px rgba(0, 0, 0, 0.14);
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.25;
+      max-width: 180px;
+      padding: 8px 9px;
+    }
+
+    #bw-twin-towns .bw-map-label strong {
+      color: var(--green);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 950;
+      margin-bottom: 2px;
+    }
+
+    #bw-twin-towns .bw-map-label::before {
+      background: var(--yellow);
+      border: 2px solid var(--green);
+      border-radius: 999px;
+      content: "";
+      height: 12px;
+      left: -7px;
+      position: absolute;
+      top: 13px;
+      width: 12px;
+    }
+
+    #bw-twin-towns .label-berlin {
+      left: 51%;
+      top: 34%;
+    }
+
+    #bw-twin-towns .label-coelln {
+      left: 60%;
+      top: 61%;
+    }
+
+    #bw-twin-towns .label-record {
+      left: 33%;
+      top: 63%;
+    }
+
+    #bw-twin-towns .label-crossing {
+      left: 48%;
+      top: 50%;
+    }
+
+    #bw-twin-towns .label-palace {
+      left: 32%;
+      top: 72%;
     }
 
     #bw-twin-towns .bw-caption {
@@ -284,39 +392,11 @@
       color: var(--text);
     }
 
-    #bw-twin-towns .map-era {
-      opacity: 0.24;
-      transition: opacity 0.18s ease, transform 0.18s ease;
-      transform-origin: center;
-    }
-
     #bw-twin-towns[data-era="settlements"] .era-settlements,
     #bw-twin-towns[data-era="document"] .era-document,
     #bw-twin-towns[data-era="union"] .era-union,
     #bw-twin-towns[data-era="capital"] .era-capital {
       opacity: 1;
-    }
-
-    #bw-twin-towns[data-era="document"] .era-document,
-    #bw-twin-towns[data-era="union"] .era-union,
-    #bw-twin-towns[data-era="capital"] .era-capital {
-      transform: scale(1.015);
-    }
-
-    #bw-twin-towns .map-label {
-      fill: var(--green-dark);
-      font-family: Montserrat, Arial, sans-serif;
-      font-size: 13px;
-      font-weight: 900;
-      letter-spacing: 0;
-    }
-
-    #bw-twin-towns .map-small {
-      fill: #415041;
-      font-family: Montserrat, Arial, sans-serif;
-      font-size: 9.5px;
-      font-weight: 800;
-      letter-spacing: 0;
     }
 
     @media (max-width: 720px) {
@@ -340,6 +420,41 @@
       #bw-twin-towns .bw-fact {
         grid-template-columns: 46px minmax(0, 1fr);
       }
+
+      #bw-twin-towns .bw-map-label {
+        font-size: 10.5px;
+        max-width: 138px;
+        padding: 6px 7px;
+      }
+
+      #bw-twin-towns .bw-map-label strong {
+        font-size: 11px;
+      }
+
+      #bw-twin-towns .label-berlin {
+        left: 47%;
+        top: 28%;
+      }
+
+      #bw-twin-towns .label-coelln {
+        left: 48%;
+        top: 65%;
+      }
+
+      #bw-twin-towns .label-record {
+        left: 16%;
+        top: 64%;
+      }
+
+      #bw-twin-towns .label-crossing {
+        left: 38%;
+        top: 48%;
+      }
+
+      #bw-twin-towns .label-palace {
+        left: 12%;
+        top: 75%;
+      }
     }
   </style>
 
@@ -352,60 +467,17 @@
 
     <div class="bw-body">
       <div class="bw-map-card">
-        <svg class="bw-map" viewBox="0 0 720 510" role="img" aria-labelledby="bw-map-title bw-map-desc">
-          <title id="bw-map-title">Simplified medieval map of Berlin and Cölln</title>
-          <desc id="bw-map-desc">A schematic map showing Cölln on the Spree island, Berlin on the eastern bank, the Mühlendamm crossing, churches, wall line and later palace site.</desc>
-
-          <rect x="0" y="0" width="720" height="510" fill="#F8FBF1"></rect>
-          <path d="M238 0 C204 80 198 138 224 200 C252 268 252 325 215 410 C199 448 194 482 205 510 L56 510 C36 427 49 349 93 276 C126 221 123 171 92 118 C66 73 63 34 79 0 Z" fill="#D8ECF7"></path>
-          <path d="M444 0 C407 68 405 135 439 196 C481 270 476 338 428 411 C405 446 394 477 401 510 L258 510 C238 456 251 404 295 353 C343 298 344 251 302 196 C266 149 267 78 306 0 Z" fill="#C8E5F1"></path>
-          <path d="M333 42 C294 109 291 173 324 227 C352 273 349 326 315 382 C295 415 290 449 302 481 C365 464 411 421 435 354 C459 286 449 218 408 151 C384 111 388 70 414 31 Z" fill="#EEF7DF" stroke="#7CB342" stroke-width="3"></path>
-
-          <g class="map-era era-settlements">
-            <ellipse cx="378" cy="270" rx="70" ry="98" fill="rgba(255,230,0,0.42)" stroke="#1B5E20" stroke-width="3"></ellipse>
-            <ellipse cx="516" cy="254" rx="78" ry="100" fill="rgba(197,225,165,0.72)" stroke="#1B5E20" stroke-width="3"></ellipse>
-            <text class="map-label" x="340" y="253">Cölln</text>
-            <text class="map-small" x="330" y="270">Spree island</text>
-            <text class="map-label" x="488" y="238">Berlin</text>
-            <text class="map-small" x="475" y="255">east bank</text>
-          </g>
-
-          <g class="map-era era-document">
-            <rect x="304" y="301" width="86" height="54" rx="8" fill="#FFFFFF" stroke="#1B5E20" stroke-width="3"></rect>
-            <path d="M318 320 H375 M318 333 H368 M318 346 H358" stroke="#7CB342" stroke-width="4" stroke-linecap="round"></path>
-            <circle cx="381" cy="347" r="13" fill="#E63946"></circle>
-            <text class="map-small" x="283" y="381">1237: Cölln appears in writing</text>
-            <rect x="470" y="320" width="84" height="48" rx="8" fill="#FFFFFF" stroke="#7CB342" stroke-width="3"></rect>
-            <text class="map-small" x="452" y="392">1244: Berlin appears in writing</text>
-          </g>
-
-          <g class="map-era era-union">
-            <path d="M391 270 C430 255 463 252 498 264" fill="none" stroke="#FFE600" stroke-width="14" stroke-linecap="round"></path>
-            <path d="M391 270 C430 255 463 252 498 264" fill="none" stroke="#1B5E20" stroke-width="4" stroke-linecap="round"></path>
-            <rect x="417" y="235" width="48" height="28" rx="5" fill="#1B5E20"></rect>
-            <text class="map-small" x="400" y="223">Mühlendamm crossing</text>
-            <text class="map-small" x="398" y="430">1307: political union and shared town hall</text>
-          </g>
-
-          <g class="map-era era-capital">
-            <rect x="342" y="190" width="82" height="64" rx="6" fill="#FFFFFF" stroke="#1B5E20" stroke-width="4"></rect>
-            <path d="M356 190 V170 H410 V190" fill="#FFE600" stroke="#1B5E20" stroke-width="4" stroke-linejoin="round"></path>
-            <text class="map-small" x="326" y="164">1443 palace site</text>
-            <path d="M280 136 C354 96 492 109 580 169 C648 216 649 329 586 389 C503 468 359 458 286 389 C220 326 215 191 280 136 Z" fill="none" stroke="#1B5E20" stroke-width="4" stroke-dasharray="8 8"></path>
-            <text class="map-small" x="412" y="463">1710: royal capital of Berlin</text>
-          </g>
-
-          <path d="M71 58 C142 110 153 180 112 254 C71 327 63 411 99 487" fill="none" stroke="#78B9D7" stroke-width="16" stroke-linecap="round" opacity="0.72"></path>
-          <path d="M306 0 C267 74 268 148 307 204 C349 264 347 319 301 374 C263 420 253 464 276 510" fill="none" stroke="#78B9D7" stroke-width="12" stroke-linecap="round" opacity="0.38"></path>
-
-          <text class="map-small" x="62" y="43">Spree valley</text>
-          <text class="map-small" x="330" y="42">Spree island</text>
-          <text class="map-small" x="535" y="104">Nikolaiviertel area</text>
-          <circle cx="534" cy="284" r="7" fill="#1B5E20"></circle>
-          <circle cx="361" cy="305" r="7" fill="#1B5E20"></circle>
-          <circle cx="386" cy="218" r="6" fill="#FFE600" stroke="#1B5E20" stroke-width="3"></circle>
-        </svg>
-        <p class="bw-caption">Schematic, not a survey map. The point is the relationship: Cölln on the island, Berlin on the eastern bank, and the crossing between them.</p>
+        <div class="bw-map-frame" role="img" aria-label="Annotated 1652 map of Berlin and Cölln showing the two towns, the Spree island and the crossing between them">
+          <img class="bw-map-img" src="assets/berlin-coelln-1652-map.jpg" alt="">
+          <span class="bw-zone berlin era-settlements" aria-hidden="true"></span>
+          <span class="bw-zone coelln era-settlements" aria-hidden="true"></span>
+          <span class="bw-map-label label-berlin era-settlements"><strong>Berlin</strong>eastern town around today's Nikolaiviertel</span>
+          <span class="bw-map-label label-coelln era-settlements"><strong>Cölln</strong>Spree island, the older paper trail</span>
+          <span class="bw-map-label label-record era-document"><strong>1237 / 1244</strong>Cölln first, Berlin seven years later</span>
+          <span class="bw-map-label label-crossing era-union"><strong>Mühlendamm</strong>crossing, tolls and shared town hall logic</span>
+          <span class="bw-map-label label-palace era-capital"><strong>Palace side</strong>power settles on the Cölln side from 1443</span>
+        </div>
+        <p class="bw-caption">Base map: Johann Gregor Memhardt / Gabriel Bodenehr plan of Berlin and Cölln, 1652/1720, public domain. BerlinWalk overlay highlights the relationship behind the 1237 founding year.</p>
       </div>
 
       <aside class="bw-panel">

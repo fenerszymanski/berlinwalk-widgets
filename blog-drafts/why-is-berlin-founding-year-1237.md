@@ -22,6 +22,15 @@ Secondary keywords: Berlin founded 1237, Cölln Berlin, medieval Berlin, Berlin 
 
 Cover image: Marienkirche exterior with TV Tower, uploaded to Wix Media and used for `og:image` / `twitter:image`. Source credit: [Berlin Marienkirche Exterior 0326 02.jpg](https://commons.wikimedia.org/wiki/File:Berlin_Marienkirche_Exterior_0326_02.jpg) by Dosseman, CC BY-SA 4.0.
 
+Wix readback: 4 inline image nodes, 3 HTML embeds, 0 list nodes, 0 `[IMAGE]` placeholders.
+
+Inline images in Wix draft:
+
+1. Nikolaiviertel 1237 sign and TV Tower, Pexels / Manuel Kapunkt.
+2. Annotated 1652/1720 Berlin and Cölln map, Memhardt/Bodenehr base map, public domain, with BerlinWalk overlay.
+3. Marienkirche and TV Tower, Wikimedia / Dosseman, CC BY-SA 4.0.
+4. Medieval city wall on Littenstraße, Wikimedia / Ulrichhobby, CC BY-SA 4.0.
+
 Suggested CTA: See the older city where it still survives. My Berlin Free Walking Tour starts at Alexanderplatz and follows the historic centre toward Museum Island and Hackescher Markt.
 
 ## Widget Plan
@@ -29,18 +38,17 @@ Suggested CTA: See the older city where it still survives. My Berlin Free Walkin
 Use these embeds when building the post in Wix:
 
 1. Quick summary, near the top:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-founding-year-1237&v=20260610a`
+   `https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-founding-year-1237&v=20260610b`
 
 2. Twin towns map, after "Two Towns, One River":
-   `https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-twin-towns/?v=20260610a`
-   - Recommended iframe height: 760 px desktop / 980 px mobile if fixed. The widget also posts `bw-resize` when the parent listener is available.
+   The Wix draft uses the uploaded annotated map image instead of the iframe, so the article does not depend on GitHub Pages deployment for this visual. Local widget source at `medieval-berlin-twin-towns/` was also updated to a real old-map version for later reuse.
 
 3. Medieval Berlin Mini Walk Planner, after "Where You Can Still Touch Medieval Berlin":
-   `https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-mini-walk/?v=20260610a`
+   `https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-mini-walk/?v=20260610b`
    - Recommended iframe height: 760 px desktop / 1180 px mobile if fixed. The widget also posts `bw-resize` when the parent listener is available.
 
 4. FAQ, near the bottom:
-   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-founding-year-1237&v=20260610a`
+   `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-founding-year-1237&v=20260610b`
 
 ## Related Internal Links
 
@@ -71,14 +79,21 @@ So when the city celebrated its 750th birthday in 1987, the math pointed back to
 
 Here is the short timeline before the details:
 
-- **Around 1170 to 1200:** settlements grow on both banks of the Spree, at one of the easiest crossing points in a swampy valley.
-- **1237:** Cölln is mentioned in a document for the first time. This becomes Berlin's official founding year.
-- **1244:** Berlin is mentioned for the first time.
-- **1280:** Berlin's town seal shows bears for the first time, long before the bear becomes the city's most famous symbol.
-- **1307:** Berlin and Cölln form a political union with a shared town hall.
-- **1432:** the two towns formally merge into one municipality, though their relationship with the ruler remains tense.
-- **1415 to 1417:** the Hohenzollerns take over Brandenburg. In 1443 they begin the palace in Cölln, on the site of today's Humboldt Forum.
-- **1710:** Berlin, Cölln, Friedrichswerder, Dorotheenstadt, and Friedrichstadt merge into a single royal capital called Berlin.
+**Around 1170 to 1200:** settlements grow on both banks of the Spree, at one of the easiest crossing points in a swampy valley.
+
+**1237:** Cölln is mentioned in a document for the first time. This becomes Berlin's official founding year.
+
+**1244:** Berlin is mentioned for the first time.
+
+**1280:** Berlin's town seal shows bears for the first time, long before the bear becomes the city's most famous symbol.
+
+**1307:** Berlin and Cölln form a political union with a shared town hall.
+
+**1432:** the two towns formally merge into one municipality, though their relationship with the ruler remains tense.
+
+**1415 to 1417:** the Hohenzollerns take over Brandenburg. In 1443 they begin the palace in Cölln, on the site of today's Humboldt Forum.
+
+**1710:** Berlin, Cölln, Friedrichswerder, Dorotheenstadt, and Friedrichstadt merge into a single royal capital called Berlin.
 
 ## Two Towns, One River
 
@@ -87,8 +102,6 @@ Medieval Berlin was not one city. It was two.
 [IMAGE 2: Twin towns map illustration]
 
 Cölln sat on the Spree island, around today's Petriplatz, Fischerinsel, and the later palace/Humboldt Forum side. Berlin sat on the eastern bank, roughly where the Nikolaiviertel stands today. The northern part of the same island is what visitors now know as Museum Island, which is why the old Cölln story is often hidden under museum language.
-
-{{widget:medieval-berlin-twin-towns}}
 
 A mill dam and river crossing connected the two settlements. That crossing is the entire reason the city exists.
 
@@ -130,12 +143,17 @@ People assume nothing survived the 20th century. More survived than you think, a
 
 [IMAGE 5: Marienkirche with TV Tower]
 
-- **St. Mary's Church (Marienkirche):** probably built after 1250, first mentioned in 1292, and still standing in the shadow of the TV Tower. Inside is a late-15th-century Dance of Death mural. This is a stop on my tour.
-- **Nikolaikirche:** Berlin's oldest church, begun around 1230, now the centrepiece of the rebuilt Nikolaiviertel.
-- **The medieval city wall:** a fragment of the 13th-century town wall survives on Littenstraße, hiding in plain sight behind office buildings.
-- **Zur Letzten Instanz:** a restaurant tracing its hospitality history to 1621, built against the line of the old wall.
-- **The Franciscan monastery ruin (Klosterkirche):** a 13th-century brick ruin left open to the sky, one of the quietest places in the city centre.
-- **The street plan itself:** the curve of streets in the Nikolaiviertel still follows the medieval layout, even though most buildings are reconstructions.
+**St. Mary's Church (Marienkirche):** probably built after 1250, first mentioned in 1292, and still standing in the shadow of the TV Tower. Inside is a late-15th-century Dance of Death mural. This is a stop on my tour.
+
+**Nikolaikirche:** Berlin's oldest church, begun around 1230, now the centrepiece of the rebuilt Nikolaiviertel.
+
+**The medieval city wall:** a fragment of the 13th-century town wall survives on Littenstraße, hiding in plain sight behind office buildings.
+
+**Zur Letzten Instanz:** a restaurant tracing its hospitality history to 1621, built against the line of the old wall.
+
+**The Franciscan monastery ruin (Klosterkirche):** a 13th-century brick ruin left open to the sky, one of the quietest places in the city centre.
+
+**The street plan itself:** the curve of streets in the Nikolaiviertel still follows the medieval layout, even though most buildings are reconstructions.
 
 {{widget:medieval-berlin-mini-walk}}
 

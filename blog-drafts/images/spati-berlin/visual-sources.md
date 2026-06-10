@@ -23,13 +23,12 @@
    - Use: inline image in the Pfand section
    - Edits: resized to 1600 px max, JPEG compressed
 
-## Unused Candidate
-
-- `_src/04-spati-moabit-source.jpg`
+4. `04-spati-moabit-sign.jpg`
   - Source file: [Spätkauf Late Night Shop](https://commons.wikimedia.org/wiki/File:Sp%C3%A4tkauf_Late_Night_Shop.jpg)
   - Author: ChickSR
   - License: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0)
-  - Reason not used: good sign detail, but weaker as a blog inline image than the selected storefront/interior set.
+  - Use: inline image after the neighborhood/usefulness section
+  - Edits: resized to 1200 x 1600, JPEG compressed, EXIF orientation normalized
 
 ## Notes
 

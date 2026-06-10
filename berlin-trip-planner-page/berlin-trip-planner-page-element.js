@@ -82,7 +82,13 @@
         'resetUnlock',
         'forceLeadError',
         'forceAiError',
-        'mockAi'
+        'mockAi',
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_content',
+        'utm_term',
+        'fbclid'
       ];
       keys.forEach((key) => {
         if (current.has(key)) url.searchParams.set(key, current.get(key));
