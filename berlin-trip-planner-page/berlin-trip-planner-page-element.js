@@ -95,6 +95,8 @@
       });
       if (!url.searchParams.has('context')) url.searchParams.set('context', 'tool');
       url.searchParams.set('source', current.get('source') || 'berlin_trip_planner_page');
+      url.searchParams.set('parent_path', window.location.pathname || '/berlin-trip-planner');
+      url.searchParams.set('parent_url', window.location.href);
       url.searchParams.set('attribution', 'none');
       return url.toString();
     }
@@ -354,13 +356,37 @@
         });
       };
 
+      const validTripPlannerEvent = (name) => /^bw_trip_planner_[a-z0-9_]{1,90}$/.test(String(name || ''));
+
+      const pushPlannerAnalyticsEvent = (eventName, payload) => {
+        const detail = payload && typeof payload === 'object' ? payload : {};
+        const analyticsPayload = Object.assign({}, detail, {
+          parent_path: window.location.pathname || '/berlin-trip-planner',
+          parent_location: window.location.href,
+          event_source: 'ultimate_berlin_trip_planner_iframe'
+        });
+        try {
+          window.dataLayer = window.dataLayer || [];
+          if (Array.isArray(window.dataLayer)) {
+            window.dataLayer.push(Object.assign({}, analyticsPayload, { event: eventName }));
+          }
+          if (typeof window.gtag === 'function') window.gtag('event', eventName, analyticsPayload);
+          if (typeof window.fbq === 'function') window.fbq('trackCustom', eventName, analyticsPayload);
+        } catch (error) {}
+      };
+
       this._messageHandler = (event) => {
         if (!event.data) return;
         const isResize = event.data.type === 'bw-resize' && validHeight(event.data.height);
         const isScroll = event.data.type === 'bw-scroll-to' && validScrollTop(event.data.top);
-        if (!isResize && !isScroll) return;
+        const isTrackingEvent = event.data.type === 'bw-trip-planner-event' && validTripPlannerEvent(event.data.event);
+        if (!isResize && !isScroll && !isTrackingEvent) return;
         if (!isPlannerMessage(event)) return;
 
+        if (isTrackingEvent) {
+          pushPlannerAnalyticsEvent(event.data.event, event.data.payload);
+          return;
+        }
         if (isResize) {
           setHeight(event.data.height);
           scheduleHeightChecks();

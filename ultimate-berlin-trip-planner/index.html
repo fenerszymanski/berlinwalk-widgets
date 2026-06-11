@@ -9872,6 +9872,25 @@
           </div>
         </div>
 
+        <section class="bw-build-card" aria-label="Build Berlin trip plan">
+          <div class="bw-build-copy">
+            <strong>Get the quick preview first</strong>
+            <span>Start with the essentials. I will use realistic defaults for the rest, and you can fine-tune the plan below if you want.</span>
+          </div>
+          <button class="bw-build-button" type="button" data-build-plan><span data-build-plan-label>Build my Berlin plan</span></button>
+          <p class="bw-build-note" data-build-note>Most visitors only need these basics to get a useful first Berlin route.</p>
+        </section>
+
+        <details class="bw-advanced" data-advanced-panel>
+          <summary class="bw-advanced-summary">
+            <span>
+              <span class="bw-advanced-title">Fine-tune my plan</span>
+              <span class="bw-advanced-copy" data-advanced-summary>Solo, balanced, History + Berlin Wall, Rain backup.</span>
+            </span>
+            <span class="bw-advanced-toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="bw-advanced-body" data-advanced-options>
+
         <div class="bw-question">
           <span class="bw-label">Arrival point</span>
           <div class="bw-options cols-5" data-group="arrivalPoint">
@@ -9894,7 +9913,6 @@
           </div>
         </div>
 
-        <div class="bw-advanced-body" data-advanced-options>
         <div class="bw-question">
           <span class="bw-label">Who is traveling?</span>
           <div class="bw-options cols-4" data-group="groupType">
@@ -9953,9 +9971,8 @@
             <button class="bw-option" type="button" data-value="packed"><span class="bw-opt-icon">MAX</span><span class="bw-opt-copy"><span class="bw-opt-title">Packed</span><span class="bw-opt-sub">Use long days</span></span></button>
           </div>
         </div>
-        </div>
 
-        <div class="bw-question" data-tour-intent-question hidden>
+        <div class="bw-question" data-tour-intent-question>
           <span class="bw-label">Walking tour</span>
           <div class="bw-options cols-3" data-group="tourIntent">
             <button class="bw-option active" type="button" data-value="considering"><span class="bw-opt-icon">NO</span><span class="bw-opt-copy"><span class="bw-opt-title">Not booked yet</span><span class="bw-opt-sub">Keep one good slot</span></span></button>
@@ -9963,15 +9980,8 @@
             <button class="bw-option" type="button" data-value="maybe"><span class="bw-opt-icon">?</span><span class="bw-opt-copy"><span class="bw-opt-title">Not sure</span><span class="bw-opt-sub">Keep it light</span></span></button>
           </div>
         </div>
-
-        <section class="bw-build-card" aria-label="Build Berlin trip plan">
-          <div class="bw-build-copy">
-            <strong>Ready when you are</strong>
-            <span>Fill the basics above, then generate a calmer preview. The full day-by-day plan, maps, PDF, and print view stay behind email consent.</span>
           </div>
-          <button class="bw-build-button" type="button" data-build-plan><span data-build-plan-label>Build my Berlin plan</span></button>
-          <p class="bw-build-note" data-build-note>Planning takes a few seconds so the result feels intentional, not like another instant wall of text.</p>
-        </section>
+        </details>
       </form>
 
       <section class="bw-planning-card" data-planning-card aria-live="polite" hidden>
@@ -10557,13 +10567,41 @@
     }
   }
 
+  function parentPagePathParam() {
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      var path = params.get('parent_path') || params.get('parentPath') || '';
+      if (/^\/[^\s]*$/.test(path)) return path.slice(0, 400);
+      return '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function parentPageUrlParam() {
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      var raw = params.get('parent_url') || params.get('parentUrl') || '';
+      if (!raw) return '';
+      var url = new URL(raw);
+      if (/(^|\.)berlinwalk\.com$/i.test(url.hostname)) return url.toString().slice(0, 700);
+      return '';
+    } catch (error) {
+      return '';
+    }
+  }
+
   function visiblePagePath() {
+    var parentPath = parentPagePathParam();
+    if (parentPath) return parentPath;
     var ref = referrerUrl();
     if (ref && /(^|\.)berlinwalk\.com$/i.test(ref.hostname)) return ref.pathname || '/';
     return window.location.pathname || '/';
   }
 
   function visiblePageUrl() {
+    var parentUrl = parentPageUrlParam();
+    if (parentUrl) return parentUrl;
     var ref = referrerUrl();
     if (ref && /(^|\.)berlinwalk\.com$/i.test(ref.hostname)) return ref.toString();
     return window.location.href;
@@ -10614,7 +10652,10 @@
       Object.keys(current).forEach(function (key) {
         if (current[key]) merged[key] = current[key];
       });
-      if (hasCurrentAttribution) merged.landingPage = stored.landingPage || visiblePageUrl();
+      if (hasCurrentAttribution) {
+        merged.landingPage = visiblePageUrl();
+        merged.firstPage = visiblePagePath();
+      }
     }
 
     merged.isPaid = trackingPaidSignal(merged);
@@ -10641,6 +10682,41 @@
       plan_generated: planGenerated,
       unlocked: unlocked
     }, extra || {});
+  }
+
+  function tripPlannerAnalyticsPayload(payload) {
+    var tracking = tripPlannerTracking || initTripPlannerTracking();
+    tripPlannerTracking = tracking;
+    return Object.assign({}, payload || {}, {
+      page_path: visiblePagePath(),
+      page_location: visiblePageUrl(),
+      landing_page: tracking.landingPage || '',
+      first_page: tracking.firstPage || '',
+      utm_source: tracking.utm_source || '',
+      utm_medium: tracking.utm_medium || '',
+      utm_campaign: tracking.utm_campaign || '',
+      utm_content: tracking.utm_content || '',
+      utm_term: tracking.utm_term || '',
+      fbclid: tracking.fbclid || '',
+      is_paid: Boolean(tracking.isPaid),
+      source_context: 'ultimate_berlin_trip_planner'
+    });
+  }
+
+  function parentTrackingOrigin() {
+    var ref = referrerUrl();
+    return ref && ref.origin ? ref.origin : '*';
+  }
+
+  function postParentTrackingEvent(event, payload) {
+    try {
+      if (!window.parent || window.parent === window) return;
+      window.parent.postMessage({
+        type: 'bw-trip-planner-event',
+        event: event,
+        payload: payload || {}
+      }, parentTrackingOrigin());
+    } catch (error) {}
   }
 
   function sendTripPlannerTrackingEvent(event, payload) {
@@ -10705,12 +10781,14 @@
 
   function track(event, params) {
     var payload = tripPlannerStatePayload(params || {});
+    var analyticsPayload = tripPlannerAnalyticsPayload(payload);
     try {
       window.dataLayer = window.dataLayer || [];
-      if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: event }, payload));
-      if (typeof window.gtag === 'function') window.gtag('event', event, payload);
-      if (typeof window.fbq === 'function') window.fbq('trackCustom', event, payload);
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: event }, analyticsPayload));
+      if (typeof window.gtag === 'function') window.gtag('event', event, analyticsPayload);
+      if (typeof window.fbq === 'function') window.fbq('trackCustom', event, analyticsPayload);
     } catch (error) {}
+    postParentTrackingEvent(event, analyticsPayload);
     sendTripPlannerTrackingEvent(event, payload);
   }
 
@@ -16463,8 +16541,8 @@
     if (buildLabel) buildLabel.textContent = planningInProgress ? 'Planning...' : (planGenerated ? 'Update my Berlin plan' : 'Build my Berlin plan');
     if (buildNote) {
       buildNote.textContent = planningInProgress
-        ? 'This takes about 6 seconds. I am checking the plan shape, not opening the full itinerary yet.'
-        : (planGenerated ? 'Change any answer above, then update the preview.' : 'Planning takes a few seconds so the result feels intentional, not like another instant wall of text.');
+        ? 'This takes about 6 seconds. I am checking arrival timing, route shape, weather, and tour fit.'
+        : (planGenerated ? 'Change any answer above or in Fine-tune, then update the preview.' : 'Use the quick defaults now. Open Fine-tune only if you want a more specific route.');
     }
   }
 
