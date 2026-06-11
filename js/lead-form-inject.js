@@ -1,4 +1,9 @@
-/* lead-form-inject.js — blog-post BerlinWalk booking teaser.
+/* lead-form-inject.js — blog-post BerlinWalk booking card.
+ *
+ * GetYourGuide-style activity card: promo photo, title, rating, free/tip-based
+ * price slot, horizontally scrollable live date chips, and a full-width
+ * "Check availability" CTA. Date chips carry real Wix Bookings session IDs,
+ * so a click lands on the native Wix booking step with that date selected.
  *
  * Live safety: enabled on /post/* pages. Disable temporarily with:
  *   ?bwBlogBooking=0
@@ -91,34 +96,41 @@
     var style = document.createElement('style');
     style.id = STYLE_ID;
     style.textContent = [
-      '.bw-blog-booking-card{box-sizing:border-box;margin:34px 0;max-width:100%;min-width:0;padding:18px;background:#FAFAF5;border:1px solid #CFE4C8;border-left:8px solid #1B5E20;border-radius:14px;box-shadow:0 14px 34px rgba(27,94,32,.11);font-family:Montserrat,Arial,sans-serif;color:#212121;overflow:hidden;}',
+      '.bw-blog-booking-card{box-sizing:border-box;display:flex;margin:34px 0;max-width:100%;min-width:0;padding:0;background:#fff;border:1px solid #DCE3DD;border-radius:16px;box-shadow:0 12px 30px rgba(27,94,32,.10);font-family:Montserrat,Arial,sans-serif;color:#212121;overflow:hidden;}',
       '.bw-blog-booking-card *{box-sizing:border-box;}',
-      '.bw-blog-booking-grid{display:grid;grid-template-columns:minmax(220px,.82fr) minmax(280px,1.18fr);gap:18px;align-items:start;min-width:0;}',
-      '.bw-blog-booking-copy,.bw-blog-booking-panel{min-width:0;}',
-      '.bw-blog-booking-kicker{display:block;margin:0 0 8px;color:#1B5E20;font-size:12px;font-weight:900;letter-spacing:.12em;line-height:1;text-transform:uppercase;}',
-      '.bw-blog-booking-title{display:block;margin:0 0 10px!important;color:#1B5E20!important;font-size:24px!important;font-weight:900!important;line-height:1.12!important;letter-spacing:0!important;text-transform:none!important;}',
-      '.bw-blog-booking-text{margin:0;color:#4E5A4E;font-size:16px;font-weight:500;line-height:1.48;}',
-      '.bw-blog-booking-facts{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 0;padding:0;list-style:none;}',
-      '.bw-blog-booking-facts li{border:1px solid #DCE3DD;border-radius:999px;background:#fff;color:#1B5E20;font-size:12px;font-weight:800;line-height:1;padding:8px 10px;white-space:nowrap;}',
-      '.bw-blog-booking-mini{background:#fff;border:1px solid #DCE3DD;border-radius:12px;box-shadow:0 8px 20px rgba(27,94,32,.08);overflow:hidden;min-width:0;}',
-      '.bw-blog-booking-mini-head{border-bottom:1px solid #DCE3DD;padding:12px;}',
-      '.bw-blog-booking-mini-title{display:block;margin:0;color:#1B5E20!important;font-size:18px!important;font-weight:900!important;line-height:1.15!important;letter-spacing:0!important;text-transform:none!important;}',
-      '.bw-blog-booking-note{display:block;margin:8px 0 0;background:#F8FBF4;border-left:3px solid #FFE600;border-radius:5px;color:#1B5E20;font-size:11px;font-weight:900;line-height:1.25;padding:8px 10px;text-transform:uppercase;}',
-      '.bw-blog-booking-dates{display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr));padding:12px;min-width:0;}',
-      '.bw-blog-booking-date{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:10px;color:#1B5E20;display:grid;gap:2px;justify-items:center;min-height:76px;padding:8px 6px;text-align:center;text-decoration:none;}',
+      '.bw-blog-booking-media{flex:0 0 230px;min-width:0;position:relative;}',
+      '.bw-blog-booking-media img{display:block;width:100%;height:100%;min-height:100%;object-fit:cover;margin:0!important;border-radius:0!important;}',
+      '.bw-blog-booking-flag{position:absolute;top:10px;left:10px;background:#FFE600;border-radius:999px;color:#1B5E20!important;font-size:11px;font-weight:900;letter-spacing:.08em;line-height:1;padding:7px 10px;text-transform:uppercase;}',
+      '.bw-blog-booking-body{display:flex;flex:1 1 auto;flex-direction:column;gap:10px;min-width:0;padding:16px 18px;}',
+      '.bw-blog-booking-toprow{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;min-width:0;}',
+      '.bw-blog-booking-headgroup{min-width:0;}',
+      '.bw-blog-booking-title{display:block;margin:0 0 4px!important;color:#212121!important;font-size:20px!important;font-weight:900!important;line-height:1.18!important;letter-spacing:0!important;text-transform:none!important;}',
+      '.bw-blog-booking-rating{display:flex;align-items:center;gap:5px;color:#4E5A4E;font-size:13px;font-weight:700;line-height:1;}',
+      '.bw-blog-booking-rating .bw-star{color:#F5A623;font-size:15px;line-height:1;}',
+      '.bw-blog-booking-rating b{color:#212121;font-weight:900;}',
+      '.bw-blog-booking-price{flex:0 0 auto;text-align:right;}',
+      '.bw-blog-booking-price b{display:block;color:#1B5E20!important;font-size:16px;font-weight:900;line-height:1.15;white-space:nowrap;}',
+      '.bw-blog-booking-price span{display:block;margin-top:3px;color:#4E5A4E;font-size:11px;font-weight:700;line-height:1.2;white-space:nowrap;}',
+      '.bw-blog-booking-text{margin:0!important;color:#4E5A4E!important;font-size:14px!important;font-weight:500!important;line-height:1.45!important;}',
+      '.bw-blog-booking-dates{display:flex;gap:8px;min-width:0;overflow-x:auto;padding:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}',
+      '.bw-blog-booking-dates::-webkit-scrollbar{display:none;}',
+      '.bw-blog-booking-date{align-items:center;background:#fff;border:1px solid #CFE4C8;border-radius:12px;color:#1B5E20!important;display:grid;flex:0 0 auto;gap:2px;justify-items:center;min-height:68px;min-width:62px;padding:8px 6px;text-align:center;text-decoration:none!important;}',
       '.bw-blog-booking-date:first-child{background:#1B5E20;border-color:#1B5E20;color:#fff!important;}',
       '.bw-blog-booking-date span,.bw-blog-booking-date b,.bw-blog-booking-date small{color:inherit!important;}',
       'body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child span,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child b,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child small{color:#fff!important;}',
-      '.bw-blog-booking-date span{font-size:11px;font-weight:900;line-height:1;text-transform:uppercase;}',
-      '.bw-blog-booking-date b{font-size:24px;font-weight:900;line-height:1;}',
-      '.bw-blog-booking-date small{font-size:11px;font-weight:800;line-height:1.1;}',
+      '.bw-blog-booking-date span{font-size:10px;font-weight:900;line-height:1;text-transform:uppercase;}',
+      '.bw-blog-booking-date b{font-size:21px;font-weight:900;line-height:1;}',
+      '.bw-blog-booking-date small{font-size:10px;font-weight:800;line-height:1.1;}',
       '.bw-blog-booking-date:hover,.bw-blog-booking-date:focus-visible{outline:2px solid #FFE600;outline-offset:2px;}',
-      '.bw-blog-booking-loading,.bw-blog-booking-empty{color:#4E5A4E;font-size:14px;font-weight:700;line-height:1.4;padding:14px 12px;}',
-      '.bw-blog-booking-cta{display:flex;gap:10px;align-items:center;justify-content:space-between;border-top:1px solid #DCE3DD;padding:12px;}',
-      '.bw-blog-booking-cta span{color:#4E5A4E;font-size:13px;font-weight:600;line-height:1.35;}',
-      '.bw-blog-booking-cta a{align-items:center;background:#FFE600;border-radius:999px;color:#1B5E20;display:inline-flex;flex:0 0 auto;font-size:13px;font-weight:900;justify-content:center;min-height:42px;padding:0 16px;text-decoration:none;}',
-      '@media(max-width:900px){.bw-blog-booking-grid{grid-template-columns:1fr;gap:14px;}.bw-blog-booking-title{font-size:24px!important;}}',
-      '@media(max-width:760px){.bw-blog-booking-card{margin:28px 0;padding:14px;border-left-width:6px;border-radius:12px;}.bw-blog-booking-title{font-size:22px!important;}.bw-blog-booking-text{font-size:15px;}.bw-blog-booking-dates{grid-template-columns:repeat(2,minmax(0,1fr));}.bw-blog-booking-cta{align-items:stretch;flex-direction:column;}.bw-blog-booking-cta a{width:100%;}}'
+      '.bw-blog-booking-more{align-items:center;background:#F8FBF4;border:1px solid #CFE4C8;border-radius:12px;color:#1B5E20!important;display:flex;flex:0 0 auto;justify-content:center;min-height:68px;min-width:52px;text-decoration:none!important;}',
+      '.bw-blog-booking-more svg{display:block;width:22px;height:22px;}',
+      '.bw-blog-booking-more:hover,.bw-blog-booking-more:focus-visible{outline:2px solid #FFE600;outline-offset:2px;}',
+      '.bw-blog-booking-loading,.bw-blog-booking-empty{color:#4E5A4E;font-size:13px;font-weight:700;line-height:1.4;padding:10px 2px;}',
+      '.bw-blog-booking-cta{display:block;margin-top:2px;}',
+      '.bw-blog-booking-cta a{align-items:center;background:#FFE600;border-radius:999px;color:#1B5E20!important;display:flex;font-size:15px;font-weight:900;justify-content:center;min-height:48px;padding:0 16px;text-decoration:none!important;width:100%;}',
+      '.bw-blog-booking-cta a:hover,.bw-blog-booking-cta a:focus-visible{outline:2px solid #1B5E20;outline-offset:2px;}',
+      '.bw-blog-booking-note{display:block;margin:0;color:#4E5A4E;font-size:12px;font-weight:600;line-height:1.35;text-align:center;}',
+      '@media(max-width:640px){.bw-blog-booking-card{flex-direction:column;margin:28px 0;border-radius:14px;}.bw-blog-booking-media{flex:0 0 auto;}.bw-blog-booking-media img{height:170px;min-height:0;}.bw-blog-booking-body{padding:14px;}.bw-blog-booking-toprow{flex-direction:column;gap:6px;}.bw-blog-booking-price{text-align:left;}.bw-blog-booking-title{font-size:19px!important;}}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -191,12 +203,25 @@
         dateKey: key
       };
     });
-    return Object.keys(byDate).sort().map(function (key) { return byDate[key]; }).slice(0, 5);
+    return Object.keys(byDate).sort().map(function (key) { return byDate[key]; }).slice(0, 8);
+  }
+
+  function moreDatesChip() {
+    return [
+      '<a class="bw-blog-booking-more" href="' + escapeHtml(bookingHref()) + '" target="_top" aria-label="See all tour dates">',
+      '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">',
+      '<rect x="3" y="5" width="18" height="16" rx="2"></rect>',
+      '<line x1="3" y1="10" x2="21" y2="10"></line>',
+      '<line x1="8" y1="3" x2="8" y2="7"></line>',
+      '<line x1="16" y1="3" x2="16" y2="7"></line>',
+      '</svg>',
+      '</a>'
+    ].join('');
   }
 
   function renderDates(panel, slots) {
     if (!slots.length) {
-      panel.querySelector('[data-bw-booking-dates]').innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still open the booking page.</div>';
+      panel.querySelector('[data-bw-booking-dates]').innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still check availability below.</div>';
       return;
     }
     panel.querySelector('[data-bw-booking-dates]').innerHTML = slots.map(function (slot) {
@@ -208,7 +233,7 @@
         '<small>' + escapeHtml(parts.month) + '</small>',
         '</a>'
       ].join('');
-    }).join('');
+    }).join('') + moreDatesChip();
   }
 
   function loadDates(panel) {
@@ -218,7 +243,7 @@
         renderDates(panel, normalizeSlots(data && data.slots));
       })
       .catch(function () {
-        panel.querySelector('[data-bw-booking-dates]').innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still open the booking page.</div>';
+        panel.querySelector('[data-bw-booking-dates]').innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still check availability below.</div>';
       });
   }
 
@@ -230,33 +255,33 @@
     wrapper.className = 'bw-blog-booking-card';
     wrapper.setAttribute('aria-label', 'Book the BerlinWalk walking tour');
 
+    var IMG_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/09-800w';
+    var IMG_ALT = 'Berlin walking tour group selfie near Alexanderplatz with the TV Tower in the background';
+
     wrapper.innerHTML = [
-      '<div class="bw-blog-booking-grid">',
-      '  <div class="bw-blog-booking-copy">',
-      '    <p class="bw-blog-booking-kicker">BerlinWalk tour</p>',
-      '    <div class="bw-blog-booking-title" role="heading" aria-level="2">Pick your walking tour date</div>',
-      '    <p class="bw-blog-booking-text">Join my free, tip-based Berlin walk from the World Clock at Alexanderplatz. Pick a date here, then choose the number of guests on the next step.</p>',
-      '    <ul class="bw-blog-booking-facts" aria-label="Tour facts">',
-      '      <li>Free to book</li>',
-      '      <li>Tip-based</li>',
-      '      <li>2h walk</li>',
-      '    </ul>',
-      '  </div>',
-      '  <div class="bw-blog-booking-panel">',
-      '    <div class="bw-blog-booking-mini">',
-      '      <div class="bw-blog-booking-mini-head">',
-      '        <div class="bw-blog-booking-mini-title" role="heading" aria-level="3">Choose a tour date</div>',
-      '        <span class="bw-blog-booking-note">Free reservation, no upfront payment</span>',
-      '      </div>',
-      '      <div class="bw-blog-booking-dates" data-bw-booking-dates>',
-      '        <div class="bw-blog-booking-loading">Loading live tour dates...</div>',
-      '      </div>',
-      '      <div class="bw-blog-booking-cta">',
-      '        <span>You will choose the number of guests on the booking page.</span>',
-      '        <a href="' + escapeHtml(bookingHref()) + '" target="_top">Open booking page</a>',
-      '      </div>',
+      '<div class="bw-blog-booking-media">',
+      '  <picture>',
+      '    <source srcset="' + IMG_BASE + '.webp" type="image/webp">',
+      '    <img src="' + IMG_BASE + '.jpg" alt="' + escapeHtml(IMG_ALT) + '" loading="lazy">',
+      '  </picture>',
+      '  <span class="bw-blog-booking-flag">Free tour</span>',
+      '</div>',
+      '<div class="bw-blog-booking-body">',
+      '  <div class="bw-blog-booking-toprow">',
+      '    <div class="bw-blog-booking-headgroup">',
+      '      <div class="bw-blog-booking-title" role="heading" aria-level="2">Berlin: Free Walking Tour of the Historic Centre</div>',
+      '      <div class="bw-blog-booking-rating"><span class="bw-star" aria-hidden="true">&#9733;</span><b>9.8</b><span>/ 10 on FreeTour</span></div>',
       '    </div>',
+      '    <div class="bw-blog-booking-price"><b>Free &middot; tip-based</b><span>no upfront payment</span></div>',
       '  </div>',
+      '  <p class="bw-blog-booking-text">Join my 2-hour walk from the World Clock at Alexanderplatz: 12 stops through the streets where Berlin began.</p>',
+      '  <div class="bw-blog-booking-dates" data-bw-booking-dates>',
+      '    <div class="bw-blog-booking-loading">Loading live tour dates...</div>',
+      '  </div>',
+      '  <div class="bw-blog-booking-cta">',
+      '    <a href="' + escapeHtml(bookingHref()) + '" target="_top">Check availability</a>',
+      '  </div>',
+      '  <span class="bw-blog-booking-note">Free reservation &middot; you choose the number of guests on the next step</span>',
       '</div>'
     ].join('');
 
