@@ -1,0 +1,581 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Tip Calculator | BerlinWalk</title>
+  <meta name="description" content="Calculate a normal Berlin tip for restaurants, cafes, bars, taxis, hotels, and walking tours.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-tip-calculator">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-tip-calculator {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-tip-calculator *,
+    #bw-tip-calculator *::before,
+    #bw-tip-calculator *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-tip-calculator .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      max-width: 100%;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-tip-calculator .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.12)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 18px 20px;
+    }
+
+    #bw-tip-calculator .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-tip-calculator h2,
+    #bw-tip-calculator h3,
+    #bw-tip-calculator p {
+      margin-top: 0;
+    }
+
+    #bw-tip-calculator .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-tip-calculator .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-tip-calculator .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-tip-calculator .bw-panel,
+    #bw-tip-calculator .bw-result {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-tip-calculator .bw-form {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    #bw-tip-calculator .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-tip-calculator .bw-input-row {
+      align-items: center;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) 116px;
+    }
+
+    #bw-tip-calculator input[type="range"] {
+      accent-color: var(--bw-green);
+      display: block;
+      width: 100%;
+    }
+
+    #bw-tip-calculator input[type="number"],
+    #bw-tip-calculator select {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 800;
+      min-height: 44px;
+      padding: 9px 10px;
+      width: 100%;
+    }
+
+    #bw-tip-calculator .bw-options {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-tip-calculator button {
+      -webkit-tap-highlight-color: transparent;
+      font: inherit;
+    }
+
+    #bw-tip-calculator .bw-option {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      min-height: 58px;
+      padding: 9px 10px;
+      text-align: left;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      width: 100%;
+    }
+
+    #bw-tip-calculator .bw-option:hover {
+      background: var(--bw-soft);
+      border-color: var(--bw-lime);
+      transform: translateY(-1px);
+    }
+
+    #bw-tip-calculator .bw-option.is-active {
+      background: linear-gradient(135deg, var(--bw-yellow), #FFF78A);
+      border-color: var(--bw-green);
+      box-shadow: inset 0 0 0 1px rgba(27, 94, 32, 0.14);
+    }
+
+    #bw-tip-calculator .bw-option strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    #bw-tip-calculator .bw-option span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    #bw-tip-calculator .bw-option.is-active span,
+    #bw-tip-calculator .bw-option.is-active strong {
+      color: var(--bw-green);
+    }
+
+    #bw-tip-calculator .bw-option:focus-visible,
+    #bw-tip-calculator input:focus-visible,
+    #bw-tip-calculator select:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.8);
+      outline-offset: 2px;
+    }
+
+    #bw-tip-calculator .bw-result {
+      align-self: start;
+      border-color: rgba(27, 94, 32, 0.25);
+      position: sticky;
+      top: 12px;
+    }
+
+    #bw-tip-calculator .bw-badge {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      padding: 5px 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-tip-calculator .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.22;
+      margin: 0 0 8px;
+    }
+
+    #bw-tip-calculator .bw-money-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin: 12px 0;
+    }
+
+    #bw-tip-calculator .bw-money {
+      background: var(--bw-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    #bw-tip-calculator .bw-money span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-tip-calculator .bw-money strong {
+      color: var(--bw-text);
+      display: block;
+      font-size: 23px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    #bw-tip-calculator .bw-phrase {
+      background: #163F18;
+      border-radius: 8px;
+      color: var(--bw-white);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.45;
+      margin: 12px 0;
+      padding: 12px;
+    }
+
+    #bw-tip-calculator .bw-phrase span {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    #bw-tip-calculator .bw-note,
+    #bw-tip-calculator .bw-tip-list li {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+    }
+
+    #bw-tip-calculator .bw-note {
+      margin: 0;
+    }
+
+    #bw-tip-calculator .bw-tip-list {
+      display: grid;
+      gap: 7px;
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+    }
+
+    #bw-tip-calculator .bw-tip-list li {
+      background: var(--bw-cream);
+      border-left: 4px solid var(--bw-lime);
+      border-radius: 7px;
+      padding: 8px 10px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-tip-calculator .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-tip-calculator .bw-result {
+        position: static;
+      }
+
+      #bw-tip-calculator .bw-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-tip-calculator {
+        margin: 18px 0;
+      }
+
+      #bw-tip-calculator .bw-head {
+        padding: 16px;
+      }
+
+      #bw-tip-calculator .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-tip-calculator .bw-input-row,
+      #bw-tip-calculator .bw-money-grid,
+      #bw-tip-calculator .bw-options {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk Tool</p>
+      <h2 class="bw-title">Berlin Tip Calculator</h2>
+      <p class="bw-sub">Choose the situation, bill size, and service level. Get a Berlin-style tip, total amount, and the exact phrase to say when paying.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-form" aria-label="Tip inputs">
+        <div class="bw-panel">
+          <label class="bw-label" for="bw-tip-scenario">What are you paying for?</label>
+          <select id="bw-tip-scenario">
+            <option value="restaurant">Sit-down restaurant or cafe</option>
+            <option value="bar">Bar, counter coffee, or beer garden</option>
+            <option value="taxi">Taxi</option>
+            <option value="hotel">Hotel help</option>
+            <option value="tour">Walking tour or guide</option>
+          </select>
+        </div>
+
+        <div class="bw-panel" id="bw-bill-panel">
+          <label class="bw-label" for="bw-tip-bill">Bill amount</label>
+          <div class="bw-input-row">
+            <input id="bw-tip-range" type="range" min="5" max="250" value="38" step="1">
+            <input id="bw-tip-bill" type="number" min="1" max="1000" value="38" inputmode="decimal" aria-label="Bill amount in euros">
+          </div>
+        </div>
+
+        <div class="bw-panel">
+          <span class="bw-label">Service level</span>
+          <div class="bw-options" data-group="service">
+            <button class="bw-option" type="button" data-value="round"><strong>Fine</strong><span>Round up only</span></button>
+            <button class="bw-option is-active" type="button" data-value="good"><strong>Good</strong><span>Normal Berlin tip</span></button>
+            <button class="bw-option" type="button" data-value="great"><strong>Great</strong><span>Generous, still local</span></button>
+          </div>
+        </div>
+
+        <div class="bw-panel">
+          <span class="bw-label">Payment method</span>
+          <div class="bw-options" data-group="payment">
+            <button class="bw-option is-active" type="button" data-value="cash"><strong>Cash</strong><span>Easy for tips</span></button>
+            <button class="bw-option" type="button" data-value="card"><strong>Card</strong><span>Say total first</span></button>
+            <button class="bw-option" type="button" data-value="unsure"><strong>Unsure</strong><span>Carry small euros</span></button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="bw-result" aria-live="polite">
+        <span class="bw-badge" id="bw-tip-badge">Customary, not compulsory</span>
+        <h3 id="bw-tip-headline">Round to EUR 42</h3>
+        <p class="bw-note" id="bw-tip-context">For a normal sit-down meal in Berlin, this is roughly a 5-10% tip.</p>
+        <div class="bw-money-grid">
+          <div class="bw-money">
+            <span>Tip</span>
+            <strong id="bw-tip-amount">EUR 4</strong>
+          </div>
+          <div class="bw-money">
+            <span>Total</span>
+            <strong id="bw-tip-total">EUR 42</strong>
+          </div>
+        </div>
+        <div class="bw-phrase">
+          <span>Say this</span>
+          <div id="bw-tip-phrase">Make it EUR 42, please.</div>
+        </div>
+        <ul class="bw-tip-list" id="bw-tip-list"></ul>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.getElementById('bw-tip-calculator');
+      const scenario = root.querySelector('#bw-tip-scenario');
+      const range = root.querySelector('#bw-tip-range');
+      const billInput = root.querySelector('#bw-tip-bill');
+      const billPanel = root.querySelector('#bw-bill-panel');
+      const state = { service: 'good', payment: 'cash' };
+
+      const copy = {
+        restaurant: {
+          label: 'Customary, not compulsory',
+          context: 'For a normal sit-down meal in Berlin, 5-10% is a local range when service was good.',
+          tips: [
+            'Do not leave and walk away from cash on the table. Tell the server the total while paying.',
+            'If you pay by card, say the total before the terminal is processed.',
+            'If service was poor, no tip is required.'
+          ],
+          percent: { round: 0.03, good: 0.08, great: 0.10 }
+        },
+        bar: {
+          label: 'Coins or small rounding',
+          context: 'At casual bars, coffee counters, and beer gardens, a few coins or a small round-up is enough.',
+          tips: [
+            'Counter service is lighter than table service.',
+            'Tip jars are normal in casual places, but you do not need to treat them like a rule.',
+            'Cash is useful because small Berlin places may still be cash-only.'
+          ],
+          percent: { round: 0.00, good: 0.05, great: 0.08 }
+        },
+        taxi: {
+          label: 'Round up the fare',
+          context: 'For Berlin taxis, locals usually round up. Add a euro or two for luggage or unusually helpful service.',
+          tips: [
+            'Official Berlin taxis use the taximeter inside the city unless you chose the fixed-price option before the ride.',
+            'Card payment is common, but carrying some cash is still sensible.',
+            'Ask for a receipt if there is any issue or if you might forget something in the car.'
+          ],
+          percent: { round: 0.00, good: 0.05, great: 0.08 }
+        },
+        hotel: {
+          label: 'Small fixed amounts',
+          context: 'For hotel help, Berlin etiquette is based on small euro amounts rather than a percentage.',
+          tips: [
+            'Porter: about EUR 1-2 per bag.',
+            'Housekeeping: about EUR 2-3 per day if you want to tip.',
+            'Hostels and budget stays do not require a hotel tip.'
+          ],
+          fixed: { round: 0, good: 2, great: 5 }
+        },
+        tour: {
+          label: 'Tip-based tour logic',
+          context: 'On a tip-based walking tour, there is no fixed price. Tip what the experience was worth to you.',
+          tips: [
+            'Most guests bring cash because it is the simplest way to tip at the end.',
+            'Think about value, group size, and your budget rather than a strict percentage.',
+            'For BerlinWalk, the public tour lasts about 2 hours from Alexanderplatz to Hackescher Markt.'
+          ],
+          fixed: { round: 5, good: 10, great: 20 }
+        }
+      };
+
+      function euro(value) {
+        return `EUR ${Number(value).toLocaleString('en-GB', { maximumFractionDigits: 2 }).replace(/\\.00$/, '')}`;
+      }
+
+      function roundTotal(base, desiredTip) {
+        const raw = base + desiredTip;
+        if (raw <= 20) return Math.ceil(raw);
+        if (raw <= 80) return Math.ceil(raw / 2) * 2;
+        return Math.ceil(raw / 5) * 5;
+      }
+
+      function calculate() {
+        const type = scenario.value;
+        const bill = Math.max(1, Number(billInput.value) || 1);
+        const rules = copy[type];
+        const usesFixed = Boolean(rules.fixed);
+        billPanel.style.display = usesFixed && type === 'hotel' ? 'none' : '';
+
+        let tip;
+        let total;
+        if (usesFixed) {
+          tip = rules.fixed[state.service];
+          total = type === 'tour' ? tip : bill + tip;
+        } else {
+          const desired = bill * rules.percent[state.service];
+          total = state.service === 'round' ? Math.ceil(bill) : roundTotal(bill, desired);
+          tip = Math.max(0, total - bill);
+        }
+
+        const phraseTotal = type === 'tour' ? tip : total;
+        const phrase = state.payment === 'cash'
+          ? `Make it ${euro(phraseTotal)}, please.`
+          : state.payment === 'card'
+            ? `Can you make the total ${euro(phraseTotal)}, please?`
+            : `Do you take card? If not, I can pay ${euro(phraseTotal)} in cash.`;
+
+        root.querySelector('#bw-tip-badge').textContent = rules.label;
+        root.querySelector('#bw-tip-headline').textContent =
+          type === 'tour'
+            ? `A fair tip is ${euro(tip)}`
+            : type === 'hotel'
+              ? `Tip around ${euro(tip)}`
+              : `Round to ${euro(total)}`;
+        root.querySelector('#bw-tip-context').textContent = rules.context;
+        root.querySelector('#bw-tip-amount').textContent = euro(tip);
+        root.querySelector('#bw-tip-total').textContent = type === 'tour' ? 'No bill' : euro(total);
+        root.querySelector('#bw-tip-phrase').textContent = phrase;
+        root.querySelector('#bw-tip-list').innerHTML = rules.tips.map((item) => `<li>${item}</li>`).join('');
+      }
+
+      root.querySelectorAll('.bw-options').forEach((group) => {
+        group.addEventListener('click', (event) => {
+          const button = event.target.closest('.bw-option');
+          if (!button) return;
+          state[group.dataset.group] = button.dataset.value;
+          group.querySelectorAll('.bw-option').forEach((node) => node.classList.toggle('is-active', node === button));
+          calculate();
+        });
+      });
+
+      scenario.addEventListener('change', calculate);
+      range.addEventListener('input', () => {
+        billInput.value = range.value;
+        calculate();
+      });
+      billInput.addEventListener('input', () => {
+        const value = Math.max(1, Math.min(1000, Number(billInput.value) || 1));
+        range.value = Math.max(Number(range.min), Math.min(Number(range.max), value));
+        calculate();
+      });
+
+      calculate();
+    })();
+  </script>
+</div>
+</body>
+</html>

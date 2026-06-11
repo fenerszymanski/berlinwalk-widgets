@@ -59,7 +59,8 @@
   "what-is-a-spati-berlin": "spati-berlin",
   "spati-berlin": "spati-berlin",
   "why-is-berlin-founding-year-1237": "berlin-founding-year-1237",
-  "berlin-founding-year-1237": "berlin-founding-year-1237"
+  "berlin-founding-year-1237": "berlin-founding-year-1237",
+  "tipping-in-berlin": "tipping-in-berlin"
 };
 
   var SCHEMAS = {
@@ -3039,6 +3040,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Berlin did have a medieval old town, but war damage, postwar clearance, and GDR urban planning removed much of it. What remains is scattered through the historic centre rather than preserved as one postcard-perfect old quarter."
+        }
+      }
+    ]
+  },
+  "tipping-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is tipping expected in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tipping in Berlin is normal but voluntary. It is a way to show satisfaction with service, not a compulsory extra charge. If service was poor, you can simply pay the bill."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should I tip in a Berlin restaurant?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a sit-down restaurant or cafe, round up or tip about **5-10%** when service was good. A EUR 27.60 bill becoming EUR 30 feels normal; 15-20% is not the Berlin default."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I leave the tip on the table in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually no. In restaurants, tell the server the final amount while paying, for example: **“Make it EUR 30, please.”** If paying by card, say the total before the terminal is processed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I tip taxi drivers in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You do not have to tip Berlin taxi drivers. Locals usually round up to the next euro if the ride was pleasant, or add one or two euros if the driver helped with luggage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need cash for tips in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it is smart to carry small euro notes and coins. Many places accept cards, but smaller cafes, bars, market stalls and casual food spots may still prefer or require cash."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should I tip on a free walking tour in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a tip-based walking tour, there is no fixed price. As a practical guide, EUR 5 is modest, EUR 10 is a solid common tip, and EUR 15-20 is generous for a guide who made the city click."
         }
       }
     ]

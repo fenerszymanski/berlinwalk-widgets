@@ -26,7 +26,7 @@ def build_schema(tools):
         "@type": "CollectionPage",
         "url": "https://www.berlinwalk.com/widgets",
         "name": "Embed Free Berlin Planning Tools",
-        "description": "Free embeddable Berlin planning tools for travel sites, hotels, and bloggers: interactive tools built by a local walking-tour guide. Auto-resize, mobile-friendly, attribution-only.",
+        "description": "Free embeddable Berlin planning tools for travel sites, hotels, and bloggers. Auto-resize, mobile-friendly, attribution-only.",
         "inLanguage": "en",
         "publisher": {
             "@type": "TravelAgency",

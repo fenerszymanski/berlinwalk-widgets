@@ -2,22 +2,42 @@
 
 Rolling log of agent sessions. Most recent at top.
 
-## 2026-06-11 — Codex (Blog booking teaser live-ready)
+## 2026-06-11 — Codex (Daily blog draft: tipping)
+
+**Did:**
+- Created the `Tipping in Berlin` unpublished Wix Blog draft package with official-source research, Wikimedia images, Quick Summary, FAQ, and the post-specific `Berlin Tip Calculator`.
+- Added `berlin-tip-calculator` to local Tools Hub and widgets SEO, and inserted the matching BerlinTools CMS item.
+- Local browser QA passed for the calculator at desktop and 390px mobile, including interaction state change for walking-tour tips.
+
+**Changed:**
+- `blog-drafts/tipping-in-berlin.md`, `blog-drafts/images/tipping-in-berlin/` — local draft, source notes, raw/optimized images.
+- `berlin-tip-calculator/index.html` — new standalone widget.
+- `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`, `tools-hub/data.json`, `widgets-hub/_regenerate_seo.py`, `widgets-hub/SEO_ADDITIONAL_TAGS.md` — supporting data/schema/hub wiring.
+- Wix: draft `e7ef8b53-18fd-4bc6-bced-1f0482310588` remains `UNPUBLISHED`; BerlinTools item `87cc58d0-73b2-44bb-9642-f9825d79723e` created for `/tools/berlin-tip-calculator`.
+
+**QA:** `node --check` for helper scripts; JSON parse checks; FAQ injector parse check; Browser local QA on `http://127.0.0.1:4188/berlin-tip-calculator/` desktop + 390px mobile, no horizontal overflow; Wix API readback confirmed 3 embeds, 3 inline images, alt text, focus keyword placement, robots, canonical, and BlogPosting JSON-LD.
+
+**Opened:** Push/deploy is needed before GitHub Pages serves the new widget/QS/FAQ data to the Wix draft preview and hub grids.
+**Closed:** Daily blog draft automation run produced a complete unpublished draft and matching tool.
+
+**Next session should:** Push `berlinwalk-widgets`, wait for GitHub Pages, then visually preview the Wix draft for image crops and iframe heights before publishing.
+
+## 2026-06-11 — Codex (Blog booking teaser live)
 
 **Did:**
 - Reverted the accidental Ultimate Trip Planner cleanup commit; live GitHub Pages re-served the restored planner file after cache propagation.
-- QA'd the compact blog booking teaser against the live 1237 post DOM, fixed the first-date text color conflict from blog CSS, and switched the teaser to default-on for `/post/*` with an emergency disable flag.
+- QA'd the compact blog booking teaser against the live 1237 post DOM, fixed the first-date text color conflict from blog CSS, switched the teaser to default-on for `/post/*`, and verified the pushed GitHub Pages asset live.
 
 **Changed:**
 - `js/lead-form-inject.js` — enables the compact 5-date booking teaser on blog posts by default; `?bwBlogBooking=0` or `window.BW_DISABLE_BLOG_BOOKING = true` disables it; fallback CTA now gets UTM tracking.
 - `README.md` — documented the helper as a compact booking teaser, not a full calendar embed.
 
-**QA:** `node --check js/lead-form-inject.js`; Playwright live-DOM QA with local next script on `https://www.berlinwalk.com/post/why-is-berlin-founding-year-1237`: desktop + 430px mobile card render, 5 dates, no guest/attendee params, no custom calendar/old Survival iframe, no horizontal overflow, disable param hides the card, mobile date + CTA trial clicks pass.
+**QA:** `node --check js/lead-form-inject.js`; Playwright live QA on `https://www.berlinwalk.com/post/why-is-berlin-founding-year-1237`: desktop + 430px mobile card render by default, 5 dates, no guest/attendee params, no custom calendar/old Survival iframe, no horizontal overflow, first date text is white/readable, mobile date + CTA trial clicks pass, and `?bwBlogBooking=0` hides the card.
 
-**Opened:** Push/deploy this commit, wait for GitHub Pages, then cold-load one live `/post/*` without `?bwBlogBooking=1` and confirm the card appears.
+**Opened:** None for this rollout; keep monitoring real user behavior in analytics.
 **Closed:** Broken live heavy calendar path and accidental Ultimate cleanup are both resolved.
 
-**Next session should:** After push, live-check one post desktop/mobile and keep `?bwBlogBooking=0` as the emergency kill switch if needed.
+**Next session should:** Leave the compact blog booking teaser live unless Yusuf sees a visual issue; use `?bwBlogBooking=0` as the emergency kill switch if needed.
 
 ## 2026-06-10 — Codex (Blog booking teaser hidden live, compact local rebuild)
 
