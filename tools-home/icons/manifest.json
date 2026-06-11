@@ -326,5 +326,13 @@
     "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/vegan-berlin-locations-map.png",
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/vegan-berlin-locations-map-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/vegan-berlin-locations-map-160.png"
+  },
+  {
+    "slug": "berlin-boat-tour-finder",
+    "source": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/berlin-boat-tour-finder-chatgpt.png",
+    "model": "Gemini Image Generator",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-boat-tour-finder.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-boat-tour-finder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-boat-tour-finder-160.png"
   }
 ]

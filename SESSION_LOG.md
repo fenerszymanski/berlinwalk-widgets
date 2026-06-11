@@ -2,6 +2,59 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-11 — Claude Code (Blog booking card → GetYourGuide style)
+
+**Did:**
+- Redesigned the `/post/*` booking card in `js/lead-form-inject.js` into a GetYourGuide-style activity card: promo photo (gallery image 09, `FREE TOUR` badge), title, `★ 9.8 / 10 on FreeTour`, `Free · tip-based` price slot, 8 horizontally scrollable live date chips + calendar-icon "more dates" chip, full-width yellow `Check availability` CTA, guests-on-next-step note.
+- Date chips keep the existing live availability fetch and `bookings_sessionId` deep links into the native Wix booking step; injection/observer/kill-switch logic untouched.
+
+**Changed:**
+- `js/lead-form-inject.js` — card markup/CSS rewrite (commit `8a3dd7e`). Added `!important` color/size guards: harness QA reproduced Wix-blog-style `a`/`p` CSS turning chip text red and inflating promo text.
+- `output/qa/blog-booking-card-gyg/` — QA harness (`/post/` static site + hostile blog CSS) and evidence README (commit `cc6c6f9`).
+
+**QA:** `node --check`; local harness served at `/post/` in Claude preview browser: desktop 1280 + mobile 375, card injected mid-article, 8 chips with real sessionIds + calendar chip, first chip green/white, others brand green, image loaded, UTM-tagged CTA, horizontal overflow 0 at both widths.
+
+**Opened:** Needs Yusuf's push (GitHub Desktop → Push origin), then live-QA one real post after GitHub Pages cache (~10 min). Kill switch unchanged: `?bwBlogBooking=0`.
+**Closed:** Compact SS1 teaser design replaced.
+
+**Next session should:** Live-QA a real post desktop+mobile after the push; if a CSS clash appears on live Wix, extend the `!important` guards rather than reverting.
+
+## 2026-06-11 — Codex (Trip Planner live QA after push)
+
+**Did:**
+- Verified GitHub raw/main contains the new Trip Planner files and GitHub Pages now serves the new widget UI.
+- Opened live `/berlin-trip-planner` with canonical Meta UTM params and confirmed the iframe receives `parent_path=/berlin-trip-planner` plus parent URL.
+- Clicked `Build my Berlin plan` with `/api/tp-event` mocked, confirming no live test row was written.
+
+**Changed:**
+- `../PROJECT_MEMORY.md` — recorded live QA passed.
+
+**QA:** Live Playwright passed: visible first-screen questions are `Arrival date`, `Trip length`, `Arrival time`; `Fine-tune my plan` starts closed; `Get the quick preview first` is present and old `Ready when you are` copy is gone; overflow `0`; parent `dataLayer` received page_view/start/build/gate/result events; `build_click` carried `utm_campaign=bw_trip_planner_launch_jun2026`, `utm_content=flow_mapped_route_card`, `utm_term=tp_broad_travel_planning`, `page_path=/berlin-trip-planner`, and `event_source=ultimate_berlin_trip_planner_iframe`.
+
+**Opened:** Monitor real paid traffic before scaling the Meta budget.
+**Closed:** Live deploy QA for this Trip Planner recovery update.
+
+**Next session should:** Compare the next full paid day against the pre-change baseline: build/session, unlock/build, and bookClick/unlock.
+
+## 2026-06-11 — Codex (Trip Planner first screen + parent tracking)
+
+**Did:**
+- Reduced Ultimate Berlin Trip Planner's first screen to `Arrival date`, `Trip length`, `Arrival time`, then the build CTA.
+- Moved arrival point, stay area, traveler type, first-time flag, interests, mode, needs, pace, and walking-tour intent into closed `Fine-tune my plan` while preserving defaults.
+- Added parent-path/parent-url attribution and a postMessage bridge so iframe `bw_trip_planner_*` events also hit parent `dataLayer`, `gtag`, and `fbq`.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — quick-preview build card now appears before Fine-tune; tracking payload prefers parent path/url and posts analytics events upward.
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — passes `parent_path`/`parent_url` into the iframe and validates/bridges Trip Planner events.
+- `../scripts/trip-planner-events-report.mjs` — Campaign Chain table now shows campaign-level sessions, page visits, builds, gates, unlocks, book clicks, and rates.
+
+**QA:** `node --check` for wrapper/report scripts; inline HTML scripts parsed; `git diff --check`; Playwright local desktop + 390px mobile passed for 3-question first screen, closed/open Fine-tune, defaults, build result, and overflow `0`; wrapper QA passed with mocked `/api/tp-event`, confirming parent `dataLayer` receives page_view/build_click under `bw_trip_planner_launch_jun2026`.
+
+**Opened:** Push/deploy and live-QA the canonical paid URL before scaling the Meta budget.
+**Closed:** Local UI simplification and tracking-chain implementation.
+
+**Next session should:** After push, check live `/berlin-trip-planner?utm_source=meta&utm_medium=paid_social&utm_campaign=bw_trip_planner_launch_jun2026&utm_content=flow_mapped_route_card&utm_term=tp_broad_travel_planning&fbclid=TEST#planner` for parent `dataLayer` events and first-party rows.
+
 ## 2026-06-11 — Codex (Daily blog draft: tipping)
 
 **Did:**
