@@ -24,3 +24,15 @@ preselects the slot from it) — verified chip hrefs in the harness and a live
 `/booking-form` deep link with a real sessionId returning HTTP 200. Promo
 photo swapped from gallery 09 (group selfie) to gallery 01 (Yusuf
 storytelling outside the Altes Museum); load verified in the harness.
+
+Second follow-up same day (select-then-reserve logic): date chips are now
+`<button>` selectors, not links — clicking a date no longer navigates.
+Selecting a date reveals a `START TIME` pill row (e.g. `11:30`), an
+availability meta line (`Spots available for Fri 19 Jun · about 2 hours,
+ends near Hackescher Markt`), and rewrites the CTA to
+`Reserve Fri 19 Jun · 11:30` pointing at `/booking-form` with that slot's
+`bookings_sessionId`. The CTA only says `Check availability` (service page)
+while dates are loading or if the fetch fails. Harness QA: chip click keeps
+the page URL, toggles `.bw-selected` + `aria-pressed`, sessionIds differ per
+date (335-char ids, distinct tails), first date auto-selected, desktop 1280 +
+mobile 375 render with overflow 0.

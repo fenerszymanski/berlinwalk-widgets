@@ -117,10 +117,10 @@
       '.bw-blog-booking-text{margin:0!important;color:#4E5A4E!important;font-size:14px!important;font-weight:500!important;line-height:1.45!important;}',
       '.bw-blog-booking-dates{display:flex;gap:8px;min-width:0;overflow-x:auto;padding:2px;scrollbar-width:none;-webkit-overflow-scrolling:touch;}',
       '.bw-blog-booking-dates::-webkit-scrollbar{display:none;}',
-      '.bw-blog-booking-date{align-items:center;background:#fff;border:1px solid #CFE4C8;border-radius:12px;color:#1B5E20!important;display:grid;flex:0 0 auto;gap:2px;justify-items:center;min-height:68px;min-width:62px;padding:8px 6px;text-align:center;text-decoration:none!important;}',
-      '.bw-blog-booking-date:first-child{background:#1B5E20;border-color:#1B5E20;color:#fff!important;}',
+      '.bw-blog-booking-date{align-items:center;appearance:none;-webkit-appearance:none;background:#fff;border:1px solid #CFE4C8;border-radius:12px;color:#1B5E20!important;cursor:pointer;display:grid;flex:0 0 auto;font-family:inherit;gap:2px;justify-items:center;margin:0;min-height:68px;min-width:62px;padding:8px 6px;text-align:center;text-decoration:none!important;}',
+      '.bw-blog-booking-date.bw-selected{background:#1B5E20;border-color:#1B5E20;color:#fff!important;}',
       '.bw-blog-booking-date span,.bw-blog-booking-date b,.bw-blog-booking-date small{color:inherit!important;}',
-      'body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child span,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child b,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date:first-child small{color:#fff!important;}',
+      'body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date.bw-selected,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date.bw-selected span,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date.bw-selected b,body .bw-blog-booking-card .bw-blog-booking-dates .bw-blog-booking-date.bw-selected small{color:#fff!important;}',
       '.bw-blog-booking-date span{font-size:10px;font-weight:900;line-height:1;text-transform:uppercase;}',
       '.bw-blog-booking-date b{font-size:21px;font-weight:900;line-height:1;}',
       '.bw-blog-booking-date small{font-size:10px;font-weight:800;line-height:1.1;}',
@@ -129,6 +129,13 @@
       '.bw-blog-booking-more svg{display:block;width:22px;height:22px;}',
       '.bw-blog-booking-more:hover,.bw-blog-booking-more:focus-visible{outline:2px solid #FFE600;outline-offset:2px;}',
       '.bw-blog-booking-loading,.bw-blog-booking-empty{color:#4E5A4E;font-size:13px;font-weight:700;line-height:1.4;padding:10px 2px;}',
+      '.bw-blog-booking-day{align-items:center;display:flex;flex-wrap:wrap;gap:8px;min-width:0;}',
+      '.bw-blog-booking-times-label{color:#4E5A4E!important;font-size:11px;font-weight:900;letter-spacing:.06em;line-height:1;text-transform:uppercase;}',
+      '.bw-blog-booking-times{display:flex;flex-wrap:wrap;gap:8px;}',
+      '.bw-blog-booking-time{appearance:none;-webkit-appearance:none;background:#fff;border:1px solid #CFE4C8;border-radius:999px;color:#1B5E20!important;cursor:pointer;font-family:inherit;font-size:13px;font-weight:900;line-height:1;margin:0;padding:9px 14px;}',
+      '.bw-blog-booking-time.bw-selected{background:#1B5E20;border-color:#1B5E20;color:#fff!important;}',
+      '.bw-blog-booking-time:hover,.bw-blog-booking-time:focus-visible{outline:2px solid #FFE600;outline-offset:2px;}',
+      '.bw-blog-booking-meta{color:#4E5A4E!important;flex:1 1 100%;font-size:12px;font-weight:600;line-height:1.35;margin:0;}',
       '.bw-blog-booking-cta{display:block;margin-top:2px;}',
       '.bw-blog-booking-cta a{align-items:center;background:#FFE600;border-radius:999px;color:#1B5E20!important;display:flex;font-size:15px;font-weight:900;justify-content:center;min-height:48px;padding:0 16px;text-decoration:none!important;width:100%;}',
       '.bw-blog-booking-cta a:hover,.bw-blog-booking-cta a:focus-visible{outline:2px solid #1B5E20;outline-offset:2px;}',
@@ -193,8 +200,9 @@
     (Array.isArray(slots) ? slots : []).forEach(function (slot, index) {
       var startDate = slot.startDate || slot.start || slot.localStartDate;
       var key = dateKey(startDate);
-      if (!key || byDate[key]) return;
-      byDate[key] = {
+      if (!key) return;
+      if (!byDate[key]) byDate[key] = [];
+      byDate[key].push({
         id: String(slot.id || slot.eventId || startDate || index),
         eventId: slot.eventId || '',
         sessionId: slot.sessionId || slot.eventId || '',
@@ -202,11 +210,29 @@
         locationId: slot.locationId || '',
         bookingUrl: slot.bookingUrl || '',
         timezone: slot.timezone || 'Europe/Berlin',
+        openSpots: typeof slot.openSpots === 'number' ? slot.openSpots : null,
         startDate: startDate,
         dateKey: key
+      });
+    });
+    return Object.keys(byDate).sort().slice(0, 8).map(function (key) {
+      return {
+        dateKey: key,
+        slots: byDate[key].sort(function (a, b) {
+          return new Date(a.startDate) - new Date(b.startDate);
+        })
       };
     });
-    return Object.keys(byDate).sort().map(function (key) { return byDate[key]; }).slice(0, 8);
+  }
+
+  function formatTime(value) {
+    var date = new Date(value);
+    if (Number.isNaN(date.getTime())) return '';
+    return new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Europe/Berlin',
+      hour: '2-digit',
+      minute: '2-digit'
+    }).format(date);
   }
 
   function moreDatesChip() {
@@ -222,28 +248,79 @@
     ].join('');
   }
 
-  function renderDates(panel, slots) {
-    if (!slots.length) {
-      panel.querySelector('[data-bw-booking-dates]').innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still check availability below.</div>';
+  function renderSelection(panel, state) {
+    var day = state.days[state.dayIndex];
+    if (!day) return;
+    if (state.slotIndex >= day.slots.length) state.slotIndex = 0;
+    var slot = day.slots[state.slotIndex];
+    var parts = formatDateParts(day.dateKey);
+    var startTime = formatTime(slot.startDate);
+
+    var chips = panel.querySelectorAll('[data-bw-day-index]');
+    for (var i = 0; i < chips.length; i++) {
+      var selected = Number(chips[i].getAttribute('data-bw-day-index')) === state.dayIndex;
+      chips[i].classList.toggle('bw-selected', selected);
+      chips[i].setAttribute('aria-pressed', selected ? 'true' : 'false');
+    }
+
+    panel.querySelector('[data-bw-booking-day]').hidden = false;
+    panel.querySelector('[data-bw-booking-times]').innerHTML = day.slots.map(function (daySlot, index) {
+      var isSelected = index === state.slotIndex;
+      return '<button type="button" class="bw-blog-booking-time' + (isSelected ? ' bw-selected' : '') + '" data-bw-slot-index="' + index + '" aria-pressed="' + (isSelected ? 'true' : 'false') + '">' + escapeHtml(formatTime(daySlot.startDate) || 'Time TBC') + '</button>';
+    }).join('');
+
+    var dateLabel = parts.weekday + ' ' + parts.day + ' ' + parts.month;
+    panel.querySelector('[data-bw-booking-meta]').textContent =
+      (slot.openSpots === null || slot.openSpots > 0 ? 'Spots available' : 'Few spots left') +
+      ' for ' + dateLabel + ' · about 2 hours, ends near Hackescher Markt';
+
+    var cta = panel.querySelector('[data-bw-booking-cta]');
+    cta.setAttribute('href', bookingHref(slot));
+    cta.textContent = 'Reserve ' + dateLabel + (startTime ? ' · ' + startTime : '');
+  }
+
+  function setupPicker(panel, days) {
+    var datesEl = panel.querySelector('[data-bw-booking-dates]');
+    if (!days.length) {
+      datesEl.innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still check availability below.</div>';
       return;
     }
-    panel.querySelector('[data-bw-booking-dates]').innerHTML = slots.map(function (slot) {
-      var parts = formatDateParts(slot.dateKey);
+    var state = { days: days, dayIndex: 0, slotIndex: 0 };
+
+    datesEl.innerHTML = days.map(function (day, index) {
+      var parts = formatDateParts(day.dateKey);
       return [
-        '<a class="bw-blog-booking-date" href="' + escapeHtml(bookingHref(slot)) + '" target="_top">',
+        '<button type="button" class="bw-blog-booking-date" data-bw-day-index="' + index + '">',
         '<span>' + escapeHtml(parts.weekday) + '</span>',
         '<b>' + escapeHtml(parts.day) + '</b>',
         '<small>' + escapeHtml(parts.month) + '</small>',
-        '</a>'
+        '</button>'
       ].join('');
     }).join('') + moreDatesChip();
+
+    datesEl.addEventListener('click', function (event) {
+      var chip = event.target.closest('[data-bw-day-index]');
+      if (!chip) return;
+      state.dayIndex = Number(chip.getAttribute('data-bw-day-index')) || 0;
+      state.slotIndex = 0;
+      renderSelection(panel, state);
+    });
+
+    panel.querySelector('[data-bw-booking-times]').addEventListener('click', function (event) {
+      var pill = event.target.closest('[data-bw-slot-index]');
+      if (!pill) return;
+      state.slotIndex = Number(pill.getAttribute('data-bw-slot-index')) || 0;
+      renderSelection(panel, state);
+    });
+
+    renderSelection(panel, state);
   }
 
   function loadDates(panel) {
     fetch(AVAILABILITY_URL, { cache: 'no-cache' })
       .then(function (response) { return response.json(); })
       .then(function (data) {
-        renderDates(panel, normalizeSlots(data && data.slots));
+        setupPicker(panel, normalizeSlots(data && data.slots));
       })
       .catch(function () {
         panel.querySelector('[data-bw-booking-dates]').innerHTML = '<div class="bw-blog-booking-empty">Dates are loading slowly. You can still check availability below.</div>';
@@ -278,11 +355,16 @@
       '    <div class="bw-blog-booking-price"><b>Free &middot; tip-based</b><span>no upfront payment</span></div>',
       '  </div>',
       '  <p class="bw-blog-booking-text">Join my 2-hour walk from the World Clock at Alexanderplatz: 12 stops through the streets where Berlin began.</p>',
-      '  <div class="bw-blog-booking-dates" data-bw-booking-dates>',
+      '  <div class="bw-blog-booking-dates" data-bw-booking-dates aria-label="Pick a tour date">',
       '    <div class="bw-blog-booking-loading">Loading live tour dates...</div>',
       '  </div>',
+      '  <div class="bw-blog-booking-day" data-bw-booking-day hidden>',
+      '    <span class="bw-blog-booking-times-label">Start time</span>',
+      '    <div class="bw-blog-booking-times" data-bw-booking-times></div>',
+      '    <span class="bw-blog-booking-meta" data-bw-booking-meta></span>',
+      '  </div>',
       '  <div class="bw-blog-booking-cta">',
-      '    <a href="' + escapeHtml(bookingHref()) + '" target="_top">Check availability</a>',
+      '    <a href="' + escapeHtml(bookingHref()) + '" target="_top" data-bw-booking-cta>Check availability</a>',
       '  </div>',
       '  <span class="bw-blog-booking-note">Free reservation &middot; you choose the number of guests on the next step</span>',
       '</div>'
