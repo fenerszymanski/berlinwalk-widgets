@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BW blog booking card QA harness</title>
+<style>
+  /* Hostile Wix-blog-like CSS to make sure the injected card defends itself. */
+  body { margin: 0; font-family: Georgia, serif; color: #333; background: #fff; }
+  .post-content { max-width: 740px; margin: 40px auto; padding: 0 20px; }
+  .post-content h2 { font-size: 38px; font-weight: 400; letter-spacing: .06em; text-transform: uppercase; color: #7a2048; }
+  .post-content p { font-size: 19px; line-height: 1.8; }
+  .post-content a { color: #c0392b; text-decoration: underline; }
+  .post-content img { border-radius: 30px; margin: 20px 0; }
+</style>
+</head>
+<body>
+<!-- Serve this file at /post/ so the injector's path guard passes. -->
+<article class="post-content" data-hook="post-content">
+  <h2>Why Berlin's founding year matters</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Berlin's documented history starts with a merchant settlement on the Spree.</p>
+  <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; the twin towns of Berlin and Coelln grew together.</p>
+  <h2>The medieval core around Marienkirche</h2>
+  <p>Suspendisse potenti. Nullam ac urna eu felis dapibus condimentum sit amet a augue. The Marienviertel held the oldest streets of the city.</p>
+  <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Most of it vanished in the twentieth century.</p>
+  <h2>What you can still see today</h2>
+  <p>Donec sed odio dui. Cras mattis consectetur purus sit amet fermentum. The bronze city model near Marienkirche shows the lost quarter.</p>
+  <p>Maecenas faucibus mollis interdum. Sed posuere consectetur est at lobortis. Walking the area makes the old layout legible again.</p>
+  <h2>Planning your visit</h2>
+  <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Start at Alexanderplatz and walk west.</p>
+  <p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Two hours is enough for the historic core.</p>
+</article>
+<script src="/js/lead-form-inject.js"></script>
+</body>
+</html>
