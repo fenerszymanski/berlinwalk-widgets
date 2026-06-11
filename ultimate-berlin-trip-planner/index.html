@@ -7518,6 +7518,59 @@
       width: fit-content;
     }
 
+    #bw-trip-planner .bw-guide-glance {
+      display: grid;
+      gap: 10px;
+    }
+
+    #bw-trip-planner .bw-guide-glance-head strong,
+    #bw-trip-planner .bw-guide-glance-head span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-guide-glance-head strong {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-guide-glance-head span {
+      color: var(--bw-muted);
+      font-size: 10.5px;
+      font-weight: 750;
+      line-height: 1.35;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-guide-glance-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    #bw-trip-planner .bw-guide-glance .bw-plan-index-card {
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    #bw-trip-planner .bw-guide-glance .bw-plan-index-photo {
+      min-height: 86px;
+    }
+
+    #bw-trip-planner .bw-plan-index-note {
+      background: rgba(242, 248, 232, 0.8);
+      border: 1px solid rgba(27, 94, 32, 0.1);
+      border-radius: 8px;
+      color: var(--bw-text) !important;
+      font-size: 10.4px !important;
+      font-weight: 650 !important;
+      line-height: 1.36 !important;
+      margin-top: 7px !important;
+      padding: 7px 8px;
+    }
+
     #bw-trip-planner .bw-preview-day .bw-route-reel {
       margin-top: 8px;
     }
@@ -9667,6 +9720,10 @@
       #bw-trip-planner .bw-ai-head {
         align-items: flex-start;
         flex-direction: column;
+      }
+
+      #bw-trip-planner .bw-guide-glance-grid {
+        grid-template-columns: 1fr;
       }
 
       #bw-trip-planner .bw-ai-pill {
@@ -13231,7 +13288,7 @@
     return selected;
   }
 
-  function dayJumpBarHtml(plan) {
+  function guidePlanGlanceHtml(plan, storyByDay) {
     var days = (plan && plan.days) || [];
     var selected = normalizeDayJump(plan);
     if (!days.length || !selected) return '';
@@ -13242,22 +13299,21 @@
       var photo = dayPhotoForType(type);
       var anchors = dayMapLinks(day).slice(0, 3).map(function (link) { return link.label; }).join(' / ');
       var tourPill = tourSlot ? '<span class="bw-plan-index-tour">Tour ' + escapeHtml(tourSlot.startLabel) + '</span>' : '';
+      var story = cleanAiText(storyByDay && storyByDay[day.dayNumber], '', 230);
       return '<button class="bw-plan-index-card' + (active ? ' is-active' : '') + '" type="button" data-day-jump-day="' + day.dayNumber + '" aria-pressed="' + (active ? 'true' : 'false') + '" style="--index-accent:' + escapeHtml(day.accent || '#7CB342') + ';--index-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
         '<span class="bw-plan-index-photo"><img src="' + escapeHtml(assetUrl(photo.src)) + '" alt="' + escapeHtml(photo.alt) + '" loading="eager" decoding="async"><span class="bw-plan-index-badge">D' + day.dayNumber + '</span></span>' +
-        '<span class="bw-plan-index-copy"><strong>' + escapeHtml(day.theme || day.title) + '</strong><span>' + escapeHtml(formatDisplayDate(day.dateKey)) + '</span><em>' + escapeHtml(anchors || dayVisualDetail(day, type)) + '</em>' + tourPill + '</span>' +
+        '<span class="bw-plan-index-copy"><strong>' + escapeHtml(day.theme || day.title) + '</strong><span>' + escapeHtml(formatDisplayDate(day.dateKey)) + '</span><em>' + escapeHtml(anchors || dayVisualDetail(day, type)) + '</em>' + (story ? '<span class="bw-plan-index-note">' + escapeHtml(story) + '</span>' : '') + tourPill + '</span>' +
       '</button>';
     }).join('');
-    return '<section class="bw-plan-index" aria-label="Plan at a glance">' +
-      '<div class="bw-plan-index-head">' +
-        '<div class="bw-plan-index-title"><strong>Plan at a glance</strong><span>Tap a day to jump to the full itinerary.</span></div>' +
-      '</div>' +
-      '<div class="bw-plan-index-grid">' + buttons + '</div>' +
-    '</section>';
+    return '<div class="bw-guide-glance" aria-label="Your Berlin plan at a glance">' +
+      '<div class="bw-guide-glance-head"><strong>Your Berlin plan at a glance</strong><span>Yusuf\'s quick read of each day. Tap a card to jump to the full itinerary.</span></div>' +
+      '<div class="bw-guide-glance-grid">' + buttons + '</div>' +
+    '</div>';
   }
 
   function renderDayJumpBar(plan) {
     var target = root.querySelector('[data-day-jump-bar]');
-    if (target) target.innerHTML = unlocked ? dayJumpBarHtml(plan) : '';
+    if (target) target.innerHTML = '';
   }
 
   function focusDayCard(dayNumber, scroll) {
@@ -18016,6 +18072,37 @@
     return text;
   }
 
+  function cleanGuidePublicText(value, fallback, maxLength) {
+    var text = cleanAiText(value, fallback, maxLength)
+      .replace(/[—–]/g, ' - ')
+      .replace(/\bWe['’]re\s+kicking things off\b/g, 'I would start')
+      .replace(/\bwe['’]re\s+kicking things off\b/g, 'I would start')
+      .replace(/\bWe['’]ll\s+start\b/g, 'I would start')
+      .replace(/\bwe['’]ll\s+start\b/g, 'I would start')
+      .replace(/\bWe['’]ll\b/g, 'I would')
+      .replace(/\bwe['’]ll\b/g, 'I would')
+      .replace(/\bWe will\b/g, 'I would')
+      .replace(/\bwe will\b/g, 'I would')
+      .replace(/\bWe['’]re\b/g, 'I am')
+      .replace(/\bwe['’]re\b/g, 'I am')
+      .replace(/\bWe are\b/g, 'I am')
+      .replace(/\bwe are\b/g, 'I am')
+      .replace(/\bWe['’]ve\b/g, 'I have')
+      .replace(/\bwe['’]ve\b/g, 'I have')
+      .replace(/\bWe have\b/g, 'I have')
+      .replace(/\bwe have\b/g, 'I have')
+      .replace(/\bOur\b/g, 'My')
+      .replace(/\bour\b/g, 'my')
+      .replace(/\bUs\b/g, 'Me')
+      .replace(/\bus\b/g, 'me')
+      .replace(/\bWe\b/g, 'I')
+      .replace(/\bwe\b/g, 'I')
+      .replace(/\s+-\s+/g, ' - ')
+      .replace(/\s{2,}/g, ' ')
+      .trim();
+    return cleanAiText(text, '', maxLength);
+  }
+
   function normalizeAiEnhancement(raw, plan) {
     var validDays = {};
     var planDays = plan.days || [];
@@ -18035,7 +18122,7 @@
     rawDayStories.map(function (item) {
       return {
         dayNumber: Number(item && item.dayNumber) || 0,
-        text: cleanAiText(item && item.text, '', 360)
+        text: cleanGuidePublicText(item && item.text, '', 360)
       };
     }).filter(function (item) {
       return validDays[item.dayNumber] && item.text;
@@ -18046,7 +18133,7 @@
     var dayStories = planDays.map(function (day) {
       return {
         dayNumber: day.dayNumber,
-        text: cleanAiText(storyByDay[day.dayNumber] || mockDayStory(day, slotForStories), '', 360)
+        text: cleanGuidePublicText(storyByDay[day.dayNumber] || mockDayStory(day, slotForStories), '', 360)
       };
     }).filter(function (item) {
       return item.text;
@@ -18055,8 +18142,8 @@
       return {
         dayNumber: Number(item && item.dayNumber) || 0,
         headline: cleanAiText(item && item.headline, '', 80),
-        note: cleanAiText(item && item.note, '', 240),
-        nextMove: cleanAiText(item && item.nextMove, '', 160)
+        note: cleanGuidePublicText(item && item.note, '', 240),
+        nextMove: cleanGuidePublicText(item && item.nextMove, '', 160)
       };
     }).filter(function (item) {
       return validDays[item.dayNumber] && item.headline && item.note;
@@ -18065,23 +18152,23 @@
       provider: cleanAiText(raw && raw.provider, 'gemini', 40),
       model: cleanAiText(raw && raw.model, 'gemini-2.5-flash', 80),
       noteTitle: cleanAiText(raw && (raw.noteTitle || raw.headline), 'Yusuf guide read', 90),
-      routeIntro: cleanAiText(raw && (raw.routeIntro || raw.guideNote || raw.localRead), '', 680),
-      guideNote: cleanAiText(raw && (raw.guideNote || raw.localRead), '', 620),
-      weatherSentence: cleanAiText(raw && raw.weatherSentence, '', 220),
-      tourSentence: cleanAiText(raw && (raw.tourSentence || raw.tourNote), '', 220),
+      routeIntro: cleanGuidePublicText(raw && (raw.routeIntro || raw.guideNote || raw.localRead), '', 680),
+      guideNote: cleanGuidePublicText(raw && (raw.guideNote || raw.localRead), '', 620),
+      weatherSentence: cleanGuidePublicText(raw && raw.weatherSentence, '', 220),
+      tourSentence: cleanGuidePublicText(raw && (raw.tourSentence || raw.tourNote), '', 220),
       quotaMessage: cleanAiText(raw && raw.quotaMessage, '', 180),
       chips: Array.isArray(raw && raw.chips) ? raw.chips.map(function (item) {
         return {
           label: cleanAiText(item && item.label, '', 34),
-          value: cleanAiText(item && item.value, '', 90)
+          value: cleanGuidePublicText(item && item.value, '', 90)
         };
       }).filter(function (item) {
         return item.label && item.value;
       }).slice(0, 3) : [],
       headline: cleanAiText(raw && raw.headline, 'Local guide read', 90),
-      localRead: cleanAiText(raw && raw.localRead, '', 420),
-      watchOut: cleanAiText(raw && raw.watchOut, '', 280),
-      tourNote: cleanAiText(raw && raw.tourNote, '', 220),
+      localRead: cleanGuidePublicText(raw && raw.localRead, '', 420),
+      watchOut: cleanGuidePublicText(raw && raw.watchOut, '', 280),
+      tourNote: cleanGuidePublicText(raw && raw.tourNote, '', 220),
       dayStories: dayStories,
       dayNotes: dayNotes
     };
@@ -18154,7 +18241,7 @@
       ? (/days$/i.test(mainFocus) ? mainFocus : mainFocus + ' days')
       : 'sightseeing days';
     var secondLine = nextProperDayPhrase ? ' After that, I move the route smoothly into ' + nextProperDayPhrase + ' so you do not force too much on arrival day.' : '';
-    return "Welcome to Berlin! I’m Yusuf, your personal local guide (and unofficial time-saver). I built this plan so you don't ruin your first day wandering aimlessly with heavy bags. Drop your luggage, grab a quick bite, and take a lazy stroll around " + first + ". I’ve hidden the heavy " + focusSubject + " stuff for later—because nobody appreciates history when they are jet-lagged and hangry." + tourDay + secondLine;
+    return "Welcome to Berlin! I’m Yusuf, your personal local guide and unofficial time-saver. I built this plan so you don't ruin your first day wandering aimlessly with heavy bags. Drop your luggage, grab a quick bite, and take a lazy stroll around " + first + ". I keep the heavy " + focusSubject + " stuff for later because nobody appreciates history when they are jet-lagged and hangry." + tourDay + secondLine;
   }
 
   function mockDayStory(day, slot) {
@@ -18166,33 +18253,33 @@
     var isTourDay = slot && slot.insideTrip && day.dayNumber === slot.offset + 1;
 
     if (day.dayNumber === 1) {
-      return "Day 1 is your grace period. Please, do not try to conquer Berlin today—Berlin always wins. Drop your bags, grab a warm pretzel (or a Döner!), and just wander around " + first + " to make sure your legs still work.";
+      return "Day 1 is your grace period. Please, do not try to conquer Berlin today. Berlin always wins. Drop your bags, grab a warm pretzel or a Döner, and wander around " + first + " to make sure your legs still work.";
     }
     if (isTourDay) {
-      return "Showtime! We’re kicking things off with my BerlinWalk tour at " + slot.startLabel + " by the World Clock. I'll do the talking, you do the walking. Afterward, reward yourself around Hackescher Markt with a long lunch—you’ve earned it.";
+      return "Showtime. I would start with my BerlinWalk tour at " + slot.startLabel + " by the World Clock. I'll do the talking, you do the walking. Afterward, reward yourself around Hackescher Markt with a long lunch. You have earned it.";
     }
     if (type === 'wall') {
-      return "Take a deep breath at " + first + ". It’s mind-blowing to see how the Berlin Wall just sliced through people's backyards. Take your time digesting that, then we'll head to " + second + " to see the bigger Cold War picture without burning you out.";
+      return "Take a deep breath at " + first + ". It’s mind-blowing to see how the Berlin Wall just sliced through people's backyards. Take your time digesting that, then continue to " + second + " for the bigger Cold War picture without burning out.";
     }
     if (type === 'museums') {
       return "Museum Island is a marathon, not a sprint. Sinking deep into " + first + " is a million times better than running through five galleries just to buy the gift shop magnets. Trust me, your feet (and your brain) will thank me.";
     }
     if (type === 'history') {
-      return "Today is the heavy stuff—classic Berlin history. We'll start at " + first + ", and after you’ve had enough coffee, we'll walk toward " + second + " to see how royal Prussia turned into the crazy capital we love today.";
+      return "Today is the heavy stuff: classic Berlin history. I would start at " + first + ", then continue toward " + second + " after enough coffee to see how royal Prussia became the restless capital Berlin is today.";
     }
     if (type === 'food') {
       return "Throw the itinerary out the window today. Start near " + first + " and just eat your way through the neighborhood. Dieting in Berlin is illegal anyway. Drift toward " + second + " at a food-coma pace.";
     }
     if (type === 'free') {
-      return "Berlin can be surprisingly cheap if you know where to look. Start at " + first + " for that unbeatable open-air vibe. Keep your wallet safe in your pocket, and let's only head to " + second + " if it’s not pouring rain!";
+      return "Berlin can be surprisingly cheap if you know where to look. Start at " + first + " for that unbeatable open-air vibe. Keep your wallet safe in your pocket, and add " + second + " only if it is not pouring rain.";
     }
     if (type === 'nightlife') {
       return "If you want to survive a Berlin club night, you need tactical laziness today. Keep the daytime extremely breezy so you aren't falling asleep in the queue for " + (third || second) + " at 2 AM.";
     }
     if (type === 'potsdam') {
-      return "Let’s play this by ear. If the sun is out and you feel like royalty, go explore the palaces in Potsdam. If you're feeling sluggish, stay in Berlin, find a cozy pub, and order a local beer. No judgment here!";
+      return "I would play this by ear. If the sun is out and you feel like royalty, go explore the palaces in Potsdam. If you're feeling sluggish, stay in Berlin, find a cozy pub, and order a local beer. No judgment here.";
     }
-    return "Think of today as your half-time break. Start with a slow, aimless stroll around " + first + ", and let’s make " + second + " your only other 'must-do' today. Chill mode activated.";
+    return "Think of today as your half-time break. Start with a slow, aimless stroll around " + first + ", and make " + second + " your only other must-do today. Chill mode activated.";
   }
 
   function mockAiEnhancement(plan) {
@@ -18271,7 +18358,7 @@
     if (!unlocked || !planGenerated) return '';
     if (aiStatus === 'loading') {
       return '<section class="bw-ai-panel is-loading" aria-label="Local guide polish loading">' +
-        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>Reading the plan in simple English. The route and times stay unchanged.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
+        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Berlin plan at a glance</strong><span>Building Yusuf\'s quick read of each day. The route and times stay unchanged.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
         '<div class="bw-ai-body" style="margin-top:14px;padding:8px 0">' +
           '<div class="bw-ai-skeleton-title"></div>' +
           '<div class="bw-ai-skeleton-text line-1"></div>' +
@@ -18287,7 +18374,7 @@
     if (aiStatus === 'error') {
       if (!isLocalPreviewSurface()) return '';
       return '<section class="bw-ai-panel" aria-label="Local guide polish unavailable">' +
-        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>Gemini is backend-only. Use localhost/live, or add mockAi=1 for local visual QA.</span></div></div><span class="bw-ai-pill">Preview</span></div>' +
+        '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Berlin plan at a glance</strong><span>Gemini is backend-only. Use localhost/live, or add mockAi=1 for local visual QA.</span></div></div><span class="bw-ai-pill">Preview</span></div>' +
       '</section>';
     }
     if (!aiEnhancement || (aiStatus !== 'ready' && aiStatus !== 'quota')) return '';
@@ -18300,11 +18387,7 @@
     (aiEnhancement.dayStories || []).forEach(function (item) {
       storyByDay[item.dayNumber] = item.text;
     });
-    var dayStoryHtml = aiVisibleDayStories(plan, storyByDay).map(function (day) {
-      var text = cleanAiText(storyByDay[day.dayNumber], '', 360);
-      if (!text) return '';
-      return '<article class="bw-ai-day"><b>D' + day.dayNumber + '</b><span><strong>' + escapeHtml(day.theme || day.title) + '</strong><span>' + escapeHtml(text) + '</span></span></article>';
-    }).filter(Boolean).join('');
+    var glanceHtml = guidePlanGlanceHtml(plan, storyByDay);
     var asideHtml = [
       weatherSentence ? { label: 'Weather', value: weatherSentence } : null,
       tourSentence ? { label: 'Tour', value: tourSentence } : null
@@ -18315,12 +18398,12 @@
       return '<span><b>' + escapeHtml(chip.label) + '</b><em>' + escapeHtml(chip.value) + '</em></span>';
     }).join('') + '</div>' : '';
     return '<section class="bw-ai-panel" aria-label="Local guide polish">' +
-      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Local Guide Yusuf\'s Note</strong><span>A simple read before you start. Dates, stops, and tour time stay unchanged.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
+      '<div class="bw-ai-head"><div class="bw-ai-title">' + aiAvatarHtml() + '<div><strong>Your Berlin plan at a glance</strong><span>Yusuf\'s route read, daily cards, maps, and tour fit in one place.</span></div></div><span class="bw-ai-pill">Yusuf note</span></div>' +
       '<div class="bw-ai-body">' +
         '<div class="bw-ai-copy"><strong>' + escapeHtml(noteTitle) + '</strong>' +
           (routeIntro ? '<span>' + escapeHtml(routeIntro) + '</span>' : '') +
         '</div>' +
-        (dayStoryHtml ? '<div class="bw-ai-days">' + dayStoryHtml + '</div>' : '') +
+        glanceHtml +
         (asideHtml ? '<div class="bw-ai-asides">' + asideHtml + '</div>' : '') +
         chipHtml +
       '</div>' +
@@ -21623,6 +21706,7 @@
       var selectedJump = selectedDayByNumber(planForJump, dayJumpDay);
       if (selectedJump) dayJumpDay = selectedJump.dayNumber;
       routeDeckDay = dayJumpDay;
+      renderAiEnhancement(planForJump);
       renderDayJumpBar(planForJump);
       renderRouteDeck(planForJump);
       focusDayCard(dayJumpDay, true);
@@ -21640,7 +21724,9 @@
       var jumpDay = Number(routeJump.getAttribute('data-route-jump-day')) || routeDeckDay;
       dayJumpDay = jumpDay;
       routeDeckDay = jumpDay;
-      renderDayJumpBar(latestPlan || buildPlan());
+      var routeJumpPlan = latestPlan || buildPlan();
+      renderAiEnhancement(routeJumpPlan);
+      renderDayJumpBar(routeJumpPlan);
       focusDayCard(dayJumpDay, true);
       track('bw_trip_planner_route_deck_jump', {
         arrival_date: state.arrivalDate,

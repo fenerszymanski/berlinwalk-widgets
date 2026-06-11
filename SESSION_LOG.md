@@ -2,6 +2,24 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-11 — Codex (Trip Planner guide glance merge)
+
+**Did:**
+- Merged the unlocked `Plan at a glance` cards into the Yusuf guide-note panel.
+- Kept the day-card click behavior for jumping/focusing the full itinerary.
+- Tightened visible guide copy normalization so Gemini/mock guide text preserves Yusuf-led singular voice.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `bw-guide-glance`, moved visual day cards into `Your Berlin plan at a glance`, injected per-day Yusuf notes into each card, made `data-day-jump-bar` render empty, rerendered the guide panel on day-jump clicks, and added `cleanGuidePublicText()` for visible guide output.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — mirrored local pending state.
+
+**QA:** Inline script parse passed; `git diff --check` passed; Browser local QA at `127.0.0.1:4186` passed desktop and 390px mobile with `qaUnlock=1&mockAi=1&weather=off`: 3 merged guide cards, old separate plan-index `0`, old `.bw-ai-day` cards `0`, full-day count `3`, D2 card click focuses Day 2 and sets status, mobile grid one column (`303px`), overflow `0`, no visible collective `we/our/us` or em dash in the merged guide panel.
+
+**Opened:** Push/deploy/live-QA the merged panel on live `/berlin-trip-planner`.
+**Closed:** Local merge of Yusuf note + visual plan glance.
+
+**Next session should:** After pushing `berlinwalk-widgets`, live-QA the unlocked full plan on `/berlin-trip-planner#planner` desktop/mobile and confirm GitHub Pages serves the new `ultimate-berlin-trip-planner/index.html`.
+
 ## 2026-06-11 — Codex (Blog booking card live QA)
 
 **Did:**
