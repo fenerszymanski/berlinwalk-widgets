@@ -422,6 +422,7 @@ function relatedToolSlugFor(post) {
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
   if (/(welcomecard)/.test(s)) return 'welcomecard-calculator';
+  if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(shopping|shop|flea-market|vintage|souvenir)/.test(s)) return 'berlin-shopping-areas';
   if (/(vegan|plant-based|plant based)/.test(s)) return 'vegan-berlin-locations-map';
   if (/(budget|expensive|cheap|credit|cash)/.test(s)) return 'berlin-daily-budget';

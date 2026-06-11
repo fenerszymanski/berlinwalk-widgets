@@ -5,7 +5,7 @@ Rolling log of agent sessions. Most recent at top.
 ## 2026-06-11 — Codex (Daily blog draft: tipping)
 
 **Did:**
-- Created the `Tipping in Berlin` unpublished Wix Blog draft package with official-source research, Wikimedia images, Quick Summary, FAQ, and the post-specific `Berlin Tip Calculator`.
+- Created the `Tipping in Berlin` Wix Blog package with official-source research, Wikimedia images, Quick Summary, FAQ, and the post-specific `Berlin Tip Calculator`; Yusuf later published it live.
 - Added `berlin-tip-calculator` to local Tools Hub and widgets SEO, and inserted the matching BerlinTools CMS item.
 - Local browser QA passed for the calculator at desktop and 390px mobile, including interaction state change for walking-tour tips.
 
@@ -13,14 +13,14 @@ Rolling log of agent sessions. Most recent at top.
 - `blog-drafts/tipping-in-berlin.md`, `blog-drafts/images/tipping-in-berlin/` — local draft, source notes, raw/optimized images.
 - `berlin-tip-calculator/index.html` — new standalone widget.
 - `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`, `tools-hub/data.json`, `widgets-hub/_regenerate_seo.py`, `widgets-hub/SEO_ADDITIONAL_TAGS.md` — supporting data/schema/hub wiring.
-- Wix: draft `e7ef8b53-18fd-4bc6-bced-1f0482310588` remains `UNPUBLISHED`; BerlinTools item `87cc58d0-73b2-44bb-9642-f9825d79723e` created for `/tools/berlin-tip-calculator`.
+- Wix: post `e7ef8b53-18fd-4bc6-bced-1f0482310588` is published at `/post/tipping-in-berlin`; BerlinTools item `87cc58d0-73b2-44bb-9642-f9825d79723e` created for `/tools/berlin-tip-calculator`.
 
 **QA:** `node --check` for helper scripts; JSON parse checks; FAQ injector parse check; Browser local QA on `http://127.0.0.1:4188/berlin-tip-calculator/` desktop + 390px mobile, no horizontal overflow; Wix API readback confirmed 3 embeds, 3 inline images, alt text, focus keyword placement, robots, canonical, and BlogPosting JSON-LD.
 
-**Opened:** Push/deploy is needed before GitHub Pages serves the new widget/QS/FAQ data to the Wix draft preview and hub grids.
-**Closed:** Daily blog draft automation run produced a complete unpublished draft and matching tool.
+**Opened:** Request Search Console indexing and run final live visual QA for image crops/iframe heights.
+**Closed:** Daily blog draft automation run produced a complete post and matching tool; GitHub Pages serves the widget/QS/FAQ data.
 
-**Next session should:** Push `berlinwalk-widgets`, wait for GitHub Pages, then visually preview the Wix draft for image crops and iframe heights before publishing.
+**Next session should:** Live-QA `/post/tipping-in-berlin`, then request indexing and promote through `/blog`/tool surfaces if the page looks clean.
 
 ## 2026-06-11 — Codex (Blog booking teaser live)
 
