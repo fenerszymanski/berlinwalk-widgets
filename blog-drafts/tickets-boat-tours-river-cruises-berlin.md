@@ -42,3 +42,15 @@ Use these embeds when building the post in Wix:
 - Berlin in the rain: https://www.berlinwalk.com/post/berlin-in-the-rain-what-to-do-on-a-rainy-day
 - Berlin walking tour route: https://www.berlinwalk.com/berlin-walking-tour-route
 - Booking CTA: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+
+## Official Boat Booking Links Used
+
+- Stern und Kreis tickets: https://www.sternundkreis.de/en/shop/ship-tours/
+- Winkler City Tour 1: https://www.reedereiwinkler.de/en/citytouren/city-tour-1
+- Winkler City Tour 2: https://www.reedereiwinkler.de/en/citytouren/city-tour-2
+- Winkler City Tour 3: https://www.reedereiwinkler.de/en/citytouren/city-tour-3
+- Winkler Sundowner: https://www.reedereiwinkler.de/en/citytouren/sundowner-tour
+- Winkler evening tour: https://www.reedereiwinkler.de/en/citytouren/evening-citytour-2
+- Reederei Riedel official booking engine: https://fareharbor.com/embeds/book/reederei-riedel/items/?flow=403457&full-items=yes
+- BWSG schedule and tickets: https://bwsg-berlin.de/en/schedule-tickets/
+- Reederei Becker dinner cruise: https://www.reedereibecker.com/

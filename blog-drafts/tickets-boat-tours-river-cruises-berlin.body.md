@@ -67,6 +67,18 @@ You do not need to worry too much about which operator you choose, as the routes
 - **Reederei Riedel:** Known for environmentally friendly solar-electric boats on some routes. Highly active on the Landwehr Canal.
 - **BWSG (Berliner Wassertaxi):** Great for hop-on-hop-off style tickets and shorter city runs.
 
+## Official Booking Links by Route
+
+Use these official pages after you have chosen the route type above:
+
+- **Short 1-hour city cruise:** [Stern und Kreis official tickets](https://www.sternundkreis.de/en/shop/ship-tours/), [Winkler City Tour 1](https://www.reedereiwinkler.de/en/citytouren/city-tour-1), or [Reederei Riedel official booking](https://fareharbor.com/embeds/book/reederei-riedel/items/?flow=403457&full-items=yes).
+- **2 to 2.5-hour extended city cruise:** [Winkler City Tour 2](https://www.reedereiwinkler.de/en/citytouren/city-tour-2), [Stern und Kreis official tickets](https://www.sternundkreis.de/en/shop/ship-tours/), or [BWSG schedule and tickets](https://bwsg-berlin.de/en/schedule-tickets/).
+- **3 to 3.5-hour Spree and Landwehrkanal bridge tour:** [Stern und Kreis official tickets](https://www.sternundkreis.de/en/shop/ship-tours/), [Winkler City Tour 3](https://www.reedereiwinkler.de/en/citytouren/city-tour-3), or [Reederei Riedel official booking](https://fareharbor.com/embeds/book/reederei-riedel/items/?flow=403457&full-items=yes).
+- **Lakes, Havel, Wannsee, Tegel, or Müggelsee:** [Stern und Kreis official tickets](https://www.sternundkreis.de/en/shop/ship-tours/), [BWSG schedule and tickets](https://bwsg-berlin.de/en/schedule-tickets/), or [Reederei Riedel official booking](https://fareharbor.com/embeds/book/reederei-riedel/items/?flow=403457&full-items=yes).
+- **Sundowner, evening, brunch, or dinner cruise:** [Winkler Sundowner](https://www.reedereiwinkler.de/en/citytouren/sundowner-tour), [Winkler evening tour](https://www.reedereiwinkler.de/en/citytouren/evening-citytour-2), [Reederei Becker dinner cruise](https://www.reedereibecker.com/), or [Stern und Kreis official tickets](https://www.sternundkreis.de/en/shop/ship-tours/).
+
+Always check the live date, departure dock, and discount rules on the operator page before paying. WelcomeCard discounts can be useful, but some operators redeem them at the dock rather than inside the online checkout.
+
 ## Docks and Starting Points
 
 The main docks are all located near major train stations, making them easy to reach:

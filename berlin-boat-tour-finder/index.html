@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Boat Tour Finder | BerlinWalk</title>
-  <meta name="description" content="Match your Berlin trip with the right Spree cruise, Landwehr canal bridge tour, Wannsee lake cruise, or evening dinner boat ride.">
+  <meta name="description" content="Match your Berlin trip with the right Spree cruise, Landwehrkanal bridge tour, Wannsee lake cruise, or evening dinner boat ride, then go to official booking pages.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -339,11 +339,21 @@
       min-height: 34px;
       padding: 9px 12px;
       text-decoration: none;
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    #bw-boat-finder .bw-link:hover {
+      background: var(--bw-green-dark);
+      transform: translateY(-1px);
     }
 
     #bw-boat-finder .bw-link.secondary {
       background: var(--bw-yellow);
       color: var(--bw-green);
+    }
+
+    #bw-boat-finder .bw-link.secondary:hover {
+      background: #FFF78A;
     }
 
     #bw-boat-finder .bw-note {
@@ -387,53 +397,53 @@
 
   <div class="bw-wrap">
     <header class="bw-head">
-      <p class="bw-kicker">Berlin Cruise Matcher</p>
+      <p class="bw-kicker">Berlin Boat Tour Matcher</p>
       <h2 class="bw-title">Find Your Perfect Boat Tour</h2>
-      <p class="bw-sub">Choose your time and style preferences, and we will match you with the best Spree or canal cruise route.</p>
+      <p class="bw-sub">Choose your route shape and travel mood, then jump to official booking pages for the tours that actually fit.</p>
     </header>
 
     <div class="bw-body">
       <section class="bw-form" aria-label="Boat finder inputs">
         <div class="bw-question">
-          <span class="bw-label" id="duration-label">How much time do you have?</span>
+          <span class="bw-label" id="duration-label">Which route shape fits your plan?</span>
           <div class="bw-options" role="group" aria-labelledby="duration-label" data-group="duration">
             <button class="bw-option is-active" type="button" data-value="short" aria-pressed="true">
               <span class="bw-ico" aria-hidden="true">⏱️</span>
-              <span class="bw-option-text"><span class="bw-main">1 to 1.5 hours</span><span class="bw-mini">Quick highlights</span></span>
+              <span class="bw-option-text"><span class="bw-main">Quick city cruise</span><span class="bw-mini">1 to 1.5 hours</span></span>
             </button>
             <button class="bw-option" type="button" data-value="medium" aria-pressed="false">
               <span class="bw-ico" aria-hidden="true">🗺️</span>
-              <span class="bw-option-text"><span class="bw-main">2 to 3.5 hours</span><span class="bw-mini">In-depth neighborhood loop</span></span>
+              <span class="bw-option-text"><span class="bw-main">Longer city loop</span><span class="bw-mini">2 to 2.5 hours</span></span>
             </button>
             <button class="bw-option" type="button" data-value="long" aria-pressed="false">
               <span class="bw-ico" aria-hidden="true">🌲</span>
-              <span class="bw-option-text"><span class="bw-main">3.5+ hours / Day trip</span><span class="bw-mini">Lakes & palaces escape</span></span>
+              <span class="bw-option-text"><span class="bw-main">Bridge tour / lake escape</span><span class="bw-mini">3+ hours</span></span>
             </button>
             <button class="bw-option" type="button" data-value="evening" aria-pressed="false">
               <span class="bw-ico" aria-hidden="true">🌙</span>
-              <span class="bw-option-text"><span class="bw-main">Sunset / Dinner</span><span class="bw-mini">Evening food & lights</span></span>
+              <span class="bw-option-text"><span class="bw-main">Evening or dinner</span><span class="bw-mini">Sunset, food, city lights</span></span>
             </button>
           </div>
         </div>
 
         <div class="bw-question">
-          <span class="bw-label" id="vibe-label">What is your travel style?</span>
+          <span class="bw-label" id="vibe-label">What do you care about most?</span>
           <div class="bw-options" role="group" aria-labelledby="vibe-label" data-group="vibe">
             <button class="bw-option is-active" type="button" data-value="sightseeing" aria-pressed="true">
               <span class="bw-ico" aria-hidden="true">🏛️</span>
-              <span class="bw-option-text"><span class="bw-main">Classic Sightseeing</span><span class="bw-mini">Government district & museums</span></span>
+              <span class="bw-option-text"><span class="bw-main">Classic landmarks</span><span class="bw-mini">Reichstag, museums, cathedral</span></span>
             </button>
             <button class="bw-option" type="button" data-value="neighborhood" aria-pressed="false">
               <span class="bw-ico" aria-hidden="true">🏘️</span>
-              <span class="bw-option-text"><span class="bw-main">Local Vibe</span><span class="bw-mini">Kreuzberg bridges & canal locks</span></span>
+              <span class="bw-option-text"><span class="bw-main">Canals & neighborhoods</span><span class="bw-mini">Landwehrkanal, locks, bridges</span></span>
             </button>
             <button class="bw-option" type="button" data-value="nature" aria-pressed="false">
               <span class="bw-ico" aria-hidden="true">⛵</span>
-              <span class="bw-option-text"><span class="bw-main">Nature & Parks</span><span class="bw-mini">Waterfront palaces & lakes</span></span>
+              <span class="bw-option-text"><span class="bw-main">Lakes & parks</span><span class="bw-mini">Wannsee, Havel, green Spree</span></span>
             </button>
             <button class="bw-option" type="button" data-value="leisure" aria-pressed="false">
               <span class="bw-ico" aria-hidden="true">🍻</span>
-              <span class="bw-option-text"><span class="bw-main">Food & Drinks</span><span class="bw-mini">Brunch, beer, or dinner</span></span>
+              <span class="bw-option-text"><span class="bw-main">Food, drinks, relaxed pace</span><span class="bw-mini">Brunch, beer, dinner</span></span>
             </button>
           </div>
         </div>
@@ -445,7 +455,7 @@
         <p class="bw-result-copy" data-result-copy>The classic city center cruise, passing the Reichstag, government district, and Museum Island. Best if you have limited time.</p>
         <ul class="bw-steps" data-result-steps></ul>
         <div class="bw-links" data-result-links></div>
-        <p class="bw-note">Pricing is estimated. Remember that the Berlin WelcomeCard offers a 25% discount on ticket prices with most operators.</p>
+        <p class="bw-note">Official schedules change by season. If you rely on a WelcomeCard discount, check the operator rules before paying online; some discounts are redeemed at the dock.</p>
       </aside>
     </div>
   </div>
@@ -461,13 +471,50 @@
       };
 
       var links = {
-        welcomecard: {
-          label: 'Check WelcomeCard Math',
-          url: 'https://www.berlinwalk.com/tools/welcomecard-calculator'
+        stern: {
+          label: 'Stern + Kreis official tickets',
+          url: 'https://www.sternundkreis.de/en/shop/ship-tours/',
+          kind: 'official'
         },
-        tour: {
-          label: 'Book Walking Tour',
-          url: 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based'
+        winkler1: {
+          label: 'Winkler City Tour 1',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/city-tour-1',
+          kind: 'official'
+        },
+        winkler2: {
+          label: 'Winkler City Tour 2',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/city-tour-2',
+          kind: 'official'
+        },
+        winkler3: {
+          label: 'Winkler Bridge Tour',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/city-tour-3',
+          kind: 'official'
+        },
+        winklerEvening: {
+          label: 'Winkler evening tour',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/evening-citytour-2',
+          kind: 'official'
+        },
+        winklerSundowner: {
+          label: 'Winkler Sundowner',
+          url: 'https://www.reedereiwinkler.de/en/citytouren/sundowner-tour',
+          kind: 'official'
+        },
+        riedel: {
+          label: 'Riedel official booking',
+          url: 'https://fareharbor.com/embeds/book/reederei-riedel/items/?flow=403457&full-items=yes',
+          kind: 'official'
+        },
+        bwsg: {
+          label: 'BWSG schedule & tickets',
+          url: 'https://bwsg-berlin.de/en/schedule-tickets/',
+          kind: 'official'
+        },
+        becker: {
+          label: 'Becker dinner cruise',
+          url: 'https://www.reedereibecker.com/',
+          kind: 'official'
         }
       };
 
@@ -475,68 +522,153 @@
         return { title: title, copy: copy, steps: steps, linkKeys: linkKeys || [] };
       }
 
-      function evaluate() {
-        // Evening or Leisure vibe pointing to Sunset/Dinner
-        if (state.duration === 'evening' || state.vibe === 'leisure') {
-          return baseResult(
-            'Sunset, Dinner, or Brunch Cruise',
-            'Sightseeing at sunset paired with a cold beer, brunch, or a plated German dinner on the water.',
-            [
-              'Duration: 2.5 to 3 hours',
-              'Route: City center loops on the Spree',
-              'Main Docks: Friedrichstraße, Nikolaiviertel, or Jannowitzbrücke',
-              'Price: €25 - €35 (drinks only) to €45 - €85 (with full buffet)',
-              'WelcomeCard: Discounts rarely apply to full dinner packages. Best to check individual operators.'
-            ],
-            ['welcomecard', 'tour']
-          );
-        }
-
-        // Long duration or Nature vibe pointing to Wannsee/Potsdam lakes
-        if (state.duration === 'long' || state.vibe === 'nature') {
-          return baseResult(
-            'Wannsee, Potsdam & Havel Lakes Cruise',
-            'Escape the concrete center to explore southwest Berlin’s massive lakes, royal Potsdam palaces, and deep forests.',
-            [
-              'Duration: 3 to 5 hours (Day trip scale)',
-              'Route: Lake Wannsee, Tegeler See, or Potsdam palaces loop',
-              'Main Docks: S-Bahn Wannsee (southwest) or Greenwichpromenade (Tegel, north)',
-              'Price: €25 - €35 per ticket',
-              'WelcomeCard: 25% discount is valid on major lake lines run by Stern & Kreis.'
-            ],
-            ['welcomecard', 'tour']
-          );
-        }
-
-        // Medium duration or Neighborhood vibe pointing to Bridge Tour (Brückenfahrt)
-        if (state.duration === 'medium' || state.vibe === 'neighborhood') {
-          return baseResult(
-            'Spree & Landwehrkanal Bridge Tour',
-            'The famous "Brückenfahrt" loop. You will travel down the Landwehr Canal through Kreuzberg and Neukölln, return via the government district, and cross historic locks.',
-            [
-              'Duration: 3 to 3.5 hours',
-              'Route: Complete loop through Mitte, Kreuzberg, and Tiergarten',
-              'Main Docks: Nikolaiviertel or Jannowitzbrücke',
-              'Price: €28 - €35 per ticket',
-              'WelcomeCard: 25% discount is valid with major operators (saves ~€7 per ticket).'
-            ],
-            ['welcomecard', 'tour']
-          );
-        }
-
-        // Default: Short duration / Sightseeing vibe pointing to central Spree cruise
-        return baseResult(
-          'Historic City Centre Spree Cruise',
-          'The classic central sightseeing cruise. You will pass Museum Island, the Reichstag dome, the Berlin Cathedral, and the government district.',
+      var results = {
+        classic: baseResult(
+          '1-Hour Historic Spree City Cruise',
+          'The realistic best match for a short first-time Berlin boat ride: central landmarks, frequent departures, and no long detour away from Mitte.',
           [
             'Duration: 1 to 1.5 hours',
-            'Route: Nikolaiviertel to Hauptbahnhof loop (Spree only)',
-            'Main Docks: Nikolaiviertel, Friedrichstraße (Weidendammer Brücke), or Hauptbahnhof',
-            'Price: €18 - €22 per ticket',
-            'WelcomeCard: 25% discount is fully valid (saves ~€5 per ticket).'
+            'Route: Friedrichstraße, Nikolaiviertel, Museum Island, Reichstag, government district',
+            'Best for: First-time visitors, families, and anyone with a tight afternoon',
+            'Book ahead when: It is a sunny summer weekend or you need a specific departure time',
+            'WelcomeCard: Useful for some operators, but check whether the discount is online or dock-only'
           ],
-          ['welcomecard', 'tour']
-        );
+          ['stern', 'winkler1', 'riedel']
+        ),
+        extended: baseResult(
+          '2 to 2.5-Hour Extended City Cruise',
+          'A better fit when you want more than the short Spree loop, but do not want to spend half a day on the water.',
+          [
+            'Duration: 2 to 2.5 hours',
+            'Route: Central Spree plus longer western or eastern stretches, depending on operator',
+            'Best for: More context, fewer rushed photos, and a calmer pace',
+            'Main docks: Friedrichstraße, Schlossbrücke, Alte Börse / Hackescher Markt, or Jannowitzbrücke',
+            'Trade-off: Not the full Landwehrkanal bridge loop; choose 3+ hours for that'
+          ],
+          ['winkler2', 'stern', 'bwsg']
+        ),
+        shortCanal: baseResult(
+          'Closest Short Fit: East Side or Extended Spree Cruise',
+          'A true Landwehrkanal bridge tour is not a 1-hour product. If you want neighborhood texture without losing half a day, choose an East Side or 2 to 2.5-hour city route.',
+          [
+            'Duration: Usually 1.5 to 2.5 hours',
+            'Route: East Side, green Spree, or an extended central city loop',
+            'Best for: More local feeling than the classic 1-hour landmark loop',
+            'Reality check: The proper bridge tour needs about 3 to 3.5 hours',
+            'Book ahead when: You want a specific East Side, evening, or weekend slot'
+          ],
+          ['bwsg', 'winkler2', 'stern']
+        ),
+        bridge: baseResult(
+          'Spree & Landwehrkanal Bridge Tour',
+          'This is the route I would choose if you have the time: canals, locks, Kreuzberg edges, Tiergarten, government district, and many more bridges.',
+          [
+            'Duration: 3 to 3.5 hours',
+            'Route: Spree and Landwehrkanal loop through Mitte, Kreuzberg, Tiergarten, and Charlottenburg',
+            'Best for: Neighborhood texture, engineering, locks, and a less generic Berlin view',
+            'Book ahead when: It is July, August, a weekend, or you want a late-afternoon departure',
+            'Avoid if: You only have one hour; the real bridge tour cannot be compressed'
+          ],
+          ['stern', 'winkler3', 'riedel']
+        ),
+        natureShort: baseResult(
+          'Short Green Spree or Havel Cruise',
+          'You want water, air, and greener banks without committing to a full lake day. This is the better match than forcing a long Wannsee trip into a short slot.',
+          [
+            'Duration: 1.5 to 2.5 hours',
+            'Route: Green Spree, East Side, Tegel / Havel, or another outer-water route depending on date',
+            'Best for: A quieter break from Mitte, parks, river bends, and less dense sightseeing',
+            'Main docks: Uber Platz / East Side, Alte Börse, Tegel, or other seasonal docks',
+            'Check first: Nature routes are more seasonal than the central city cruise'
+          ],
+          ['stern', 'bwsg', 'winkler2']
+        ),
+        lakes: baseResult(
+          'Wannsee, Havel, Tegel, or Müggelsee Lake Cruise',
+          'The right choice when the boat ride is the plan, not just a quick break between museums.',
+          [
+            'Duration: 2 to 5+ hours depending on lake route',
+            'Route: Wannsee and Potsdam palaces, Tegel / Oberhavel, Müggelsee, or southeast Berlin waterways',
+            'Best for: Longer stays, sunny days, palaces, forests, and a proper day-trip feeling',
+            'Main docks: Wannsee, Tegel Greenwichpromenade, Treptow, Köpenick, or Potsdam depending on route',
+            'Transport note: Add travel time to the dock; these are not quick Mitte add-ons'
+          ],
+          ['stern', 'bwsg', 'riedel']
+        ),
+        relaxedShort: baseResult(
+          'Short Sundowner or City Cruise with Drinks',
+          'For a short relaxed ride, pick a sundowner or simple city cruise and keep dinner for another night.',
+          [
+            'Duration: 1 to 1.5 hours',
+            'Route: Central Spree, East Side, or a short evening route depending on date',
+            'Best for: A beer on board, golden light, and a quick reset after walking',
+            'Trade-off: Full brunch and dinner products usually need about 2.5 hours',
+            'Book ahead when: You want a sunset slot or a weekend evening'
+          ],
+          ['winklerSundowner', 'stern', 'winkler1']
+        ),
+        relaxedLong: baseResult(
+          'Longer Relaxed Lake or Dinner Plan',
+          'If 3+ hours is fixed, choose a lake/day route with onboard drinks. If dinner is the real goal, switch to an evening dinner cruise and expect about 2.5 hours.',
+          [
+            'Duration: 2.5 hours for dinner, 3+ hours for lake and day routes',
+            'Route: Central dinner cruise, Havel lakes, Wannsee, Müggelsee, or longer seasonal water routes',
+            'Best for: Slow travel, a seated break, and less pressure to photograph every landmark',
+            'Decision point: Pick dinner for atmosphere; pick lakes for a true half-day plan',
+            'Book ahead when: Food, a table, or a summer weekend matters'
+          ],
+          ['becker', 'stern', 'riedel']
+        ),
+        evening: baseResult(
+          'Sundowner, Evening City, or Dinner Cruise',
+          'Choose this when the mood matters more than maximum sightseeing: golden light, drinks, dinner, or a slower evening on the Spree.',
+          [
+            'Duration: 1 hour for sundowner, 2 to 2.5 hours for evening city tours, about 2.5 hours for dinner',
+            'Route: Usually central Spree or an evening city loop; dinner cruises prioritize atmosphere',
+            'Best for: Couples, slow evenings, birthdays, and post-walking-tour relaxation',
+            'Book ahead when: You want dinner, brunch, or a table-style experience',
+            'Photo tip: For landmark photos, choose daytime; for atmosphere, choose sunset'
+          ],
+          ['becker', 'winklerSundowner', 'winklerEvening', 'stern']
+        )
+      };
+
+      function evaluate() {
+        if (state.duration === 'evening') {
+          return results.evening;
+        }
+
+        if (state.vibe === 'leisure') {
+          if (state.duration === 'short') return results.relaxedShort;
+          if (state.duration === 'long') return results.relaxedLong;
+          return results.evening;
+        }
+
+        if (state.vibe === 'nature') {
+          return state.duration === 'long' ? results.lakes : results.natureShort;
+        }
+
+        if (state.vibe === 'neighborhood') {
+          if (state.duration === 'short') return results.shortCanal;
+          if (state.duration === 'long') return results.bridge;
+          return results.extended;
+        }
+
+        if (state.duration === 'long') return results.bridge;
+        if (state.duration === 'medium') return results.extended;
+        return results.classic;
+      }
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, function (char) {
+          return {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+          }[char];
+        });
       }
 
       function render() {
@@ -552,16 +684,16 @@
         steps.innerHTML = result.steps.map(function (step) {
           var parts = step.split(': ');
           if (parts.length > 1) {
-            return '<li class="bw-step"><span class="bw-step-mark">✓</span><p class="bw-step-text"><strong>' + parts[0] + ':</strong> ' + parts[1] + '</p></li>';
+            return '<li class="bw-step"><span class="bw-step-mark">✓</span><p class="bw-step-text"><strong>' + escapeHtml(parts[0]) + ':</strong> ' + escapeHtml(parts.slice(1).join(': ')) + '</p></li>';
           }
-          return '<li class="bw-step"><span class="bw-step-mark">✓</span><p class="bw-step-text">' + step + '</p></li>';
+          return '<li class="bw-step"><span class="bw-step-mark">✓</span><p class="bw-step-text">' + escapeHtml(step) + '</p></li>';
         }).join('');
 
-        linkWrap.innerHTML = result.linkKeys.map(function (key, index) {
+        linkWrap.innerHTML = result.linkKeys.map(function (key) {
           var link = links[key];
           if (!link) return '';
-          var className = index === 0 ? 'bw-link secondary' : 'bw-link';
-          return '<a class="' + className + '" href="' + link.url + '" target="_blank" rel="noopener">' + link.label + ' →</a>';
+          var className = link.kind === 'guide' ? 'bw-link secondary' : 'bw-link';
+          return '<a class="' + className + '" href="' + escapeHtml(link.url) + '" target="_blank" rel="noopener">' + escapeHtml(link.label) + ' →</a>';
         }).join('');
       }
 

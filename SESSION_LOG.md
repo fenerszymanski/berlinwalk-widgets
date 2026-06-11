@@ -2,6 +2,42 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-11 — Codex (Boat Tour Finder official booking links)
+
+**Did:**
+- Reworked `berlin-boat-tour-finder` so result logic matches route shape + mood combinations instead of broad OR rules.
+- Replaced the old WelcomeCard calculator / walking-tour CTA links with result-specific official booking links.
+- Added route-based official booking links to the boat tour blog draft source.
+
+**Changed:**
+- `berlin-boat-tour-finder/index.html` — clearer option labels, honest conflict handling for short+canal / food+long choices, official operator links, no final free-tour CTA, no WelcomeCard calculator button.
+- `blog-drafts/tickets-boat-tours-river-cruises-berlin.body.md`, `blog-drafts/tickets-boat-tours-river-cruises-berlin.md` — added official booking links by route; WelcomeCard calculator stays in the blog copy.
+- `tools-hub/data.json` — raised `berlin-boat-tour-finder` embed height to `920`.
+
+**QA:** Inline script parse passed; JSON parse passed; `git diff --check` passed; Browser local QA passed on desktop and 390px mobile with overflow `0`; default, short+canal, evening, and long+nature combinations return matching official links; all external booking URLs returned HTTP 200. The unpublished BerlinWalk boat post URL currently returns 404, so no blog button is linked from the live widget yet.
+
+**Opened:** Push/deploy this local widget change; after the Wix boat post is published, optionally add its public URL as a result/link or supporting CTA.
+**Closed:** Mismatched Boat Tour Finder results and irrelevant widget CTAs.
+
+**Next session should:** Push `berlinwalk-widgets`, then live-QA `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-boat-tour-finder/` after GitHub Pages cache updates.
+
+## 2026-06-11 — Codex (Trip Planner result layout + locked preview)
+
+**Did:**
+- Removed the desktop split-screen behavior after `Build my full Berlin plan`; the result now renders in the same single-column flow instead of as a sticky side panel.
+- Replaced the weak locked Day 1 preview with a richer teaser: route hint, two preview blocks, existing route-flow cue, and a clear unlock cue.
+- Removed the old cut postcard from locked preview so raw default copy does not leak `our/we` wording.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — `.bw-body` is one centered grid column, `.bw-result` is static, and locked preview now renders through `previewDayTeaserHtml()`.
+
+**QA:** Inline script parse passed; `git diff --check` passed; local Playwright desktop QA passed with one grid track, static result, 2 preview blocks, no `our/we` in locked preview, overflow `0`; 390px mobile QA passed with one preview-block column, result width `364`, overflow `0`; `/api/tp-event` was mocked and build/result/gate requests carried `utm_campaign=bw_trip_planner_launch_jun2026` plus the two-step hidden defaults.
+
+**Opened:** Push/deploy/live-QA this local refinement.
+**Closed:** Build-result split-screen and low-value locked preview.
+
+**Next session should:** Live-QA `/berlin-trip-planner` desktop/mobile after push, then monitor unlock/build rate.
+
 ## 2026-06-11 — Codex (Trip Planner two-step details flow)
 
 **Did:**
@@ -24,13 +60,14 @@ Rolling log of agent sessions. Most recent at top.
 
 **Did:**
 - Redesigned the `/post/*` booking card in `js/lead-form-inject.js` into a GetYourGuide-style activity card: promo photo (`FREE TOUR` badge), title, `★ 9.8 / 10 on FreeTour`, `Free · tip-based` price slot, 8 horizontally scrollable live date chips + calendar-icon "more dates" chip, full-width yellow `Check availability` CTA, guests-on-next-step note.
-- Follow-up per Yusuf: date chips now use `https://www.berlinwalk.com/booking-form` as the deep-link base (the service-page calendar ignores `bookings_sessionId`; the Booking Form preselects the clicked date/time from it), and the promo photo is gallery 01 (Yusuf storytelling outside the Altes Museum) instead of the 09 group selfie. Injection/observer/kill-switch logic untouched.
+- Follow-up per Yusuf: promo photo is gallery 01 (Yusuf storytelling outside the Altes Museum) instead of the 09 group selfie; slot deep links use `https://www.berlinwalk.com/booking-form` (the service-page calendar ignores `bookings_sessionId`; the Booking Form preselects the clicked date/time from it).
+- Second follow-up per Yusuf (select-then-reserve): date chips are now `<button>` selectors — clicking a date selects it in-card instead of navigating. The selected date shows a `START TIME` pill row (11:30) plus `Spots available for <date> · about 2 hours, ends near Hackescher Markt`, and the CTA rewrites to `Reserve <Day> <DD> <Mon> · 11:30` with that slot's sessionId. `Check availability` label/href (service page) only remains while loading or on fetch failure. Injection/observer/kill-switch logic untouched.
 
 **Changed:**
-- `js/lead-form-inject.js` — card markup/CSS rewrite (commit `8a3dd7e`); `/booking-form` slot deep links + photo swap (commit `37b0daa`). Added `!important` color/size guards: harness QA reproduced Wix-blog-style `a`/`p` CSS turning chip text red and inflating promo text.
-- `output/qa/blog-booking-card-gyg/` — QA harness (`/post/` static site + hostile blog CSS) and evidence README (commits `cc6c6f9`, `37b0daa`).
+- `js/lead-form-inject.js` — card markup/CSS rewrite (commit `8a3dd7e`); `/booking-form` slot deep links + photo swap (commit `37b0daa`); select-then-reserve logic with per-day slot grouping, time pills, meta line, dynamic CTA (commit `adea1cd`). Added `!important` color/size guards: harness QA reproduced Wix-blog-style `a`/`p` CSS turning chip text red and inflating promo text.
+- `output/qa/blog-booking-card-gyg/` — QA harness (`/post/` static site + hostile blog CSS) and evidence README (commits `cc6c6f9`, `37b0daa`, `adea1cd`).
 
-**QA:** `node --check`; local harness served at `/post/` in Claude preview browser: desktop 1280 + mobile 375, card injected mid-article, 8 chips with real sessionIds + calendar chip, first chip green/white, others brand green, image loaded, UTM-tagged CTA, horizontal overflow 0 at both widths. Slot deep-link spot check: live `/booking-form?...bookings_sessionId=<real>` returned HTTP 200.
+**QA:** `node --check`; local harness served at `/post/` in Claude preview browser: desktop 1280 + mobile 375, card injected mid-article, 8 date-chip buttons + calendar chip, first date auto-selected, chip click keeps page URL and toggles `.bw-selected`/`aria-pressed`, sessionIds distinct per date, time pill 11:30 renders, CTA label/href update per selection, image loaded, horizontal overflow 0 at both widths. Slot deep-link spot check: live `/booking-form?...bookings_sessionId=<real>` returned HTTP 200.
 
 **Opened:** Needs Yusuf's push (GitHub Desktop → Push origin), then live-QA one real post after GitHub Pages cache (~10 min). Kill switch unchanged: `?bwBlogBooking=0`.
 **Closed:** Compact SS1 teaser design replaced.
