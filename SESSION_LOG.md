@@ -2,17 +2,35 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-11 — Codex (Trip Planner two-step details flow)
+
+**Did:**
+- Reworked the paid Trip Planner first-screen flow so the first CTA is honest: `Start building my plan` opens the required details step instead of generating the plan.
+- Replaced the hidden `Fine-tune my plan` panel with visible `Step 2 of 2 · Required details`.
+- Kept the 3-question fast start, but made the remaining 9 route-shaping questions visible before the real build.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — added `data-start-plan`, `data-plan-details`, `detailsStepStarted`, `bw_trip_planner_details_view`, and `flow=two_step_required_details`; real `bw_trip_planner_build_click` now fires only from `Build my full Berlin plan`.
+- Copy now summarizes assumptions as `Currently: BER Airport, Mitte / Alexanderplatz, Solo, Balanced, History + Berlin Wall / Cold War, Rain backup.`
+
+**QA:** Inline script parse passed; `git diff --check` passed; local desktop widget QA passed with `/api/tp-event` mocked; 390px wrapper QA passed with parent `dataLayer` bridging `details_view` and then `build_click`, no build click before the second CTA, campaign attribution preserved, result renders, overflow `0`, and no console errors.
+
+**Opened:** Push/deploy/live-QA this local change.
+**Closed:** Hidden-default/Fine-tune ambiguity from the previous first-screen simplification.
+
+**Next session should:** After push, live-QA the canonical UTM URL and confirm `details_view -> build_click -> gate_view -> result` under the same campaign.
+
 ## 2026-06-11 — Claude Code (Blog booking card → GetYourGuide style)
 
 **Did:**
-- Redesigned the `/post/*` booking card in `js/lead-form-inject.js` into a GetYourGuide-style activity card: promo photo (gallery image 09, `FREE TOUR` badge), title, `★ 9.8 / 10 on FreeTour`, `Free · tip-based` price slot, 8 horizontally scrollable live date chips + calendar-icon "more dates" chip, full-width yellow `Check availability` CTA, guests-on-next-step note.
-- Date chips keep the existing live availability fetch and `bookings_sessionId` deep links into the native Wix booking step; injection/observer/kill-switch logic untouched.
+- Redesigned the `/post/*` booking card in `js/lead-form-inject.js` into a GetYourGuide-style activity card: promo photo (`FREE TOUR` badge), title, `★ 9.8 / 10 on FreeTour`, `Free · tip-based` price slot, 8 horizontally scrollable live date chips + calendar-icon "more dates" chip, full-width yellow `Check availability` CTA, guests-on-next-step note.
+- Follow-up per Yusuf: date chips now use `https://www.berlinwalk.com/booking-form` as the deep-link base (the service-page calendar ignores `bookings_sessionId`; the Booking Form preselects the clicked date/time from it), and the promo photo is gallery 01 (Yusuf storytelling outside the Altes Museum) instead of the 09 group selfie. Injection/observer/kill-switch logic untouched.
 
 **Changed:**
-- `js/lead-form-inject.js` — card markup/CSS rewrite (commit `8a3dd7e`). Added `!important` color/size guards: harness QA reproduced Wix-blog-style `a`/`p` CSS turning chip text red and inflating promo text.
-- `output/qa/blog-booking-card-gyg/` — QA harness (`/post/` static site + hostile blog CSS) and evidence README (commit `cc6c6f9`).
+- `js/lead-form-inject.js` — card markup/CSS rewrite (commit `8a3dd7e`); `/booking-form` slot deep links + photo swap (commit `37b0daa`). Added `!important` color/size guards: harness QA reproduced Wix-blog-style `a`/`p` CSS turning chip text red and inflating promo text.
+- `output/qa/blog-booking-card-gyg/` — QA harness (`/post/` static site + hostile blog CSS) and evidence README (commits `cc6c6f9`, `37b0daa`).
 
-**QA:** `node --check`; local harness served at `/post/` in Claude preview browser: desktop 1280 + mobile 375, card injected mid-article, 8 chips with real sessionIds + calendar chip, first chip green/white, others brand green, image loaded, UTM-tagged CTA, horizontal overflow 0 at both widths.
+**QA:** `node --check`; local harness served at `/post/` in Claude preview browser: desktop 1280 + mobile 375, card injected mid-article, 8 chips with real sessionIds + calendar chip, first chip green/white, others brand green, image loaded, UTM-tagged CTA, horizontal overflow 0 at both widths. Slot deep-link spot check: live `/booking-form?...bookings_sessionId=<real>` returned HTTP 200.
 
 **Opened:** Needs Yusuf's push (GitHub Desktop → Push origin), then live-QA one real post after GitHub Pages cache (~10 min). Kill switch unchanged: `?bwBlogBooking=0`.
 **Closed:** Compact SS1 teaser design replaced.
