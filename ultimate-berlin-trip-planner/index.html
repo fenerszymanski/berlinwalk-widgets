@@ -719,6 +719,7 @@
       min-width: 0;
     }
 
+    #bw-trip-planner .bw-start-card,
     #bw-trip-planner .bw-build-card,
     #bw-trip-planner .bw-planning-card {
       background:
@@ -731,6 +732,7 @@
       padding: 14px;
     }
 
+    #bw-trip-planner .bw-start-card,
     #bw-trip-planner .bw-build-card {
       border-color: rgba(27, 94, 32, 0.34);
     }
@@ -1362,6 +1364,19 @@
 
     #bw-trip-planner .bw-advanced[open] .bw-advanced-toggle::before {
       content: "Hide";
+    }
+
+    #bw-trip-planner .bw-step-pill {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      flex: 0 0 auto;
+      font-size: 10px;
+      font-weight: 950;
+      line-height: 1.2;
+      padding: 8px 10px;
+      text-transform: uppercase;
+      white-space: nowrap;
     }
 
     #bw-trip-planner .bw-advanced-body {
@@ -6490,6 +6505,8 @@
     #bw-trip-planner .bw-unlocked-dashboard[hidden],
     #bw-trip-planner .bw-result[hidden],
     #bw-trip-planner .bw-planning-card[hidden],
+    #bw-trip-planner .bw-start-card[hidden],
+    #bw-trip-planner .bw-plan-details[hidden],
     #bw-trip-planner .bw-control-panel[hidden],
     #bw-trip-planner .bw-mobile-peek[hidden] {
       display: none;
@@ -9872,23 +9889,23 @@
           </div>
         </div>
 
-        <section class="bw-build-card" aria-label="Build Berlin trip plan">
+        <section class="bw-start-card" aria-label="Start Berlin trip plan" data-start-card>
           <div class="bw-build-copy">
-            <strong>Get the quick preview first</strong>
-            <span>Start with the essentials. I will use realistic defaults for the rest, and you can fine-tune the plan below if you want.</span>
+            <strong>Start building my plan</strong>
+            <span>First I will use these essentials. Next, you will confirm the route details that shape the actual plan.</span>
           </div>
-          <button class="bw-build-button" type="button" data-build-plan><span data-build-plan-label>Build my Berlin plan</span></button>
-          <p class="bw-build-note" data-build-note>Most visitors only need these basics to get a useful first Berlin route.</p>
+          <button class="bw-build-button" type="button" data-start-plan><span data-start-plan-label>Start building my plan</span></button>
+          <p class="bw-build-note" data-start-note>Next: start point, stay area, travel style, interests, pace, and walking tour fit.</p>
         </section>
 
-        <details class="bw-advanced" data-advanced-panel>
-          <summary class="bw-advanced-summary">
+        <section class="bw-advanced bw-plan-details" data-plan-details aria-label="Required Berlin trip plan details" hidden>
+          <div class="bw-advanced-summary">
             <span>
-              <span class="bw-advanced-title">Fine-tune my plan</span>
-              <span class="bw-advanced-copy" data-advanced-summary>Solo, balanced, History + Berlin Wall, Rain backup.</span>
+              <span class="bw-advanced-title">Step 2 of 2 · Required details</span>
+              <span class="bw-advanced-copy" data-advanced-summary>Confirm the assumptions before I build the full plan.</span>
             </span>
-            <span class="bw-advanced-toggle" aria-hidden="true"></span>
-          </summary>
+            <span class="bw-step-pill">Required</span>
+          </div>
           <div class="bw-advanced-body" data-advanced-options>
 
         <div class="bw-question">
@@ -9980,8 +9997,17 @@
             <button class="bw-option" type="button" data-value="maybe"><span class="bw-opt-icon">?</span><span class="bw-opt-copy"><span class="bw-opt-title">Not sure</span><span class="bw-opt-sub">Keep it light</span></span></button>
           </div>
         </div>
+
+        <section class="bw-build-card" aria-label="Build full Berlin trip plan">
+          <div class="bw-build-copy">
+            <strong>Build my full Berlin plan</strong>
+            <span>I will use the details above to shape the route, timing, weather backup, and BerlinWalk tour fit.</span>
           </div>
-        </details>
+          <button class="bw-build-button" type="button" data-build-plan><span data-build-plan-label>Build my full Berlin plan</span></button>
+          <p class="bw-build-note" data-build-note>All required details are visible here. Change anything that does not match your trip.</p>
+        </section>
+          </div>
+        </section>
       </form>
 
       <section class="bw-planning-card" data-planning-card aria-live="polite" hidden>
@@ -10443,6 +10469,7 @@
   var latestDailyWeather = {};
   var planGenerated = false;
   var planningInProgress = false;
+  var detailsStepStarted = false;
   var planningTimer = null;
   var routeDeckDay = 1;
   var dayJumpDay = 1;
@@ -15182,7 +15209,7 @@
     var must = String(labels.mustHandle || '').split(',').map(function (item) { return item.trim(); }).filter(Boolean);
     var interestText = interests.length ? interests.slice(0, 2).join(' + ') : 'default interests';
     var mustText = must.length ? must.slice(0, 2).join(' + ') : 'standard backup';
-    target.textContent = labels.groupType + ', ' + labels.pace + ', ' + interestText + ', ' + mustText + '.';
+    target.textContent = 'Currently: ' + labels.arrivalPoint + ', ' + labels.stayArea + ', ' + labels.groupType + ', ' + labels.pace + ', ' + interestText + ', ' + mustText + '.';
   }
 
   function updatePrimaryCta(plan) {
@@ -16525,25 +16552,54 @@
     var planning = root.querySelector('[data-planning-card]');
     var control = root.querySelector('[data-trip-control]');
     var mobile = root.querySelector('[data-mobile-peek]');
+    var startCard = root.querySelector('[data-start-card]');
+    var detailsPanel = root.querySelector('[data-plan-details]');
+    var startButton = root.querySelector('[data-start-plan]');
     var buildButton = root.querySelector('[data-build-plan]');
     var buildLabel = root.querySelector('[data-build-plan-label]');
     var buildNote = root.querySelector('[data-build-note]');
     var resultVisible = planGenerated && !unlocked;
+    var showDetails = detailsStepStarted || planGenerated || planningInProgress;
     if (body) {
       body.classList.toggle('is-result-ready', planGenerated);
       body.classList.toggle('is-result-visible', resultVisible);
+      body.classList.toggle('is-details-step', showDetails);
     }
+    if (startCard) startCard.hidden = showDetails;
+    if (detailsPanel) detailsPanel.hidden = !showDetails;
+    if (startButton) startButton.disabled = planningInProgress;
     if (result) result.hidden = !resultVisible;
     if (planning) planning.hidden = !planningInProgress;
     if (control) control.hidden = !planGenerated;
     if (mobile) mobile.hidden = !planGenerated;
     if (buildButton) buildButton.disabled = planningInProgress;
-    if (buildLabel) buildLabel.textContent = planningInProgress ? 'Planning...' : (planGenerated ? 'Update my Berlin plan' : 'Build my Berlin plan');
+    if (buildLabel) buildLabel.textContent = planningInProgress ? 'Planning...' : (planGenerated ? 'Update my Berlin plan' : 'Build my full Berlin plan');
     if (buildNote) {
       buildNote.textContent = planningInProgress
         ? 'This takes about 6 seconds. I am checking arrival timing, route shape, weather, and tour fit.'
-        : (planGenerated ? 'Change any answer above or in Fine-tune, then update the preview.' : 'Use the quick defaults now. Open Fine-tune only if you want a more specific route.');
+        : (planGenerated ? 'Change any required detail above, then update the preview.' : 'All required details are visible here. Change anything that does not match your trip.');
     }
+  }
+
+  function showPlanDetailsStep() {
+    if (planningInProgress) return;
+    detailsStepStarted = true;
+    updatePlanningUi();
+    track('bw_trip_planner_details_view', {
+      arrival_date: state.arrivalDate,
+      trip_length: state.tripLength,
+      flow: 'two_step_required_details'
+    });
+    var details = root.querySelector('[data-plan-details]');
+    syncPlannerFrame(details, true);
+  }
+
+  function requiredPlanDetailsComplete() {
+    var groups = ['arrivalPoint', 'stayArea', 'groupType', 'firstTime', 'interests', 'budgetStyle', 'mustHandle', 'pace', 'tourIntent'];
+    return groups.every(function (key) {
+      var value = state[key];
+      return Array.isArray(value) ? value.length > 0 : Boolean(value);
+    });
   }
 
   function markPlanDirty(options) {
@@ -16567,6 +16623,17 @@
 
   function startPlanning() {
     if (planningInProgress) return;
+    if (!detailsStepStarted && !planGenerated) {
+      showPlanDetailsStep();
+      return;
+    }
+    if (!requiredPlanDetailsComplete()) {
+      detailsStepStarted = true;
+      updatePlanningUi();
+      setActionStatus('Please confirm the required details before I build the plan.');
+      syncPlannerFrame(root.querySelector('[data-plan-details]'), true);
+      return;
+    }
     if (planningTimer) clearTimeout(planningTimer);
     if (shouldReapplyQueryForQaBuild()) {
       applyQueryParamsToState();
@@ -16587,7 +16654,8 @@
       arrival_date: state.arrivalDate,
       trip_length: state.tripLength,
       tour_intent: state.tourIntent,
-      pace: state.pace
+      pace: state.pace,
+      flow: 'two_step_required_details'
     });
     planningTimer = setTimeout(function () {
       planningTimer = null;
@@ -21439,6 +21507,11 @@
 
     if (event.target.closest('[data-unlock-plan]')) {
       handleUnlock();
+      return;
+    }
+
+    if (event.target.closest('[data-start-plan]')) {
+      showPlanDetailsStep();
       return;
     }
 
