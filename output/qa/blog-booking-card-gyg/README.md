@@ -17,3 +17,10 @@ card injected after mid-article paragraph, 8 live date chips with real
 other chips brand green (after adding `!important` against host link color),
 promo image loaded, CTA carries UTM params, horizontal overflow 0 at both
 widths.
+
+Follow-up same day: date chips now target `https://www.berlinwalk.com/booking-form`
+(the service-page calendar ignores `bookings_sessionId`; the Booking Form
+preselects the slot from it) — verified chip hrefs in the harness and a live
+`/booking-form` deep link with a real sessionId returning HTTP 200. Promo
+photo swapped from gallery 09 (group selfie) to gallery 01 (Yusuf
+storytelling outside the Altes Museum); load verified in the harness.

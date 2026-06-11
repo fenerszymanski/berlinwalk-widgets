@@ -21,6 +21,9 @@
 
   var AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability?days=120&guests=1';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  /* Slot deep links must use the Booking Form URL: the service-page calendar
+   * ignores bookings_sessionId, the form preselects the slot from it. */
+  var BOOKING_FORM_URL = 'https://www.berlinwalk.com/booking-form';
   var MARKER = 'data-bw-blog-booking';
   var STYLE_ID = 'bw-blog-booking-inject-style';
   var LOG = '[BW blog booking]';
@@ -170,7 +173,7 @@
   }
 
   function bookingHref(slot) {
-    var base = slot && slot.bookingUrl ? slot.bookingUrl : BOOKING_URL;
+    var base = slot ? (slot.bookingUrl || BOOKING_FORM_URL) : BOOKING_URL;
     var url = new URL(base, window.location.href);
     if (slot) {
       url.searchParams.set('bookings_timezone', slot.timezone || 'Europe/Berlin');
@@ -255,8 +258,8 @@
     wrapper.className = 'bw-blog-booking-card';
     wrapper.setAttribute('aria-label', 'Book the BerlinWalk walking tour');
 
-    var IMG_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/09-800w';
-    var IMG_ALT = 'Berlin walking tour group selfie near Alexanderplatz with the TV Tower in the background';
+    var IMG_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/01-800w';
+    var IMG_ALT = 'BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island';
 
     wrapper.innerHTML = [
       '<div class="bw-blog-booking-media">',
