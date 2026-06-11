@@ -2,6 +2,44 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-11 — Codex (Blog booking card live QA)
+
+**Did:**
+- Verified Yusuf's push/deploy of the GetYourGuide-style `/post/*` booking card on a real live Wix post.
+- Tested desktop and 390px mobile date selection, CTA rewrite, and Booking Form preselection.
+- Checked console/network for card-specific failures.
+
+**Changed:**
+- `SESSION_LOG.md` — recorded live QA result only; no code changes.
+- `../SESSION_LOG.md`, `../PROJECT_MEMORY.md` — mirrored the handoff state.
+
+**QA:** Live GitHub Pages `js/lead-form-inject.js` is byte/SHA-identical to local (`21580` bytes). On `https://www.berlinwalk.com/post/why-is-berlin-founding-year-1237`, card injected on attempt 1, rendered 8 date chips, loaded gallery image 01, kept selected chip white-on-green, had horizontal overflow `0`, and preserved UTM params. Desktop selected `Thu 18 Jun` -> CTA `Reserve Thu 18 Jun · 11:30` -> Booking Form showed `June 18, 2026 at 11:30 am`. Mobile selected `Tue 23 Jun` -> CTA `Reserve Tue 23 Jun · 11:30` -> Booking Form showed `June 23, 2026 at 11:30 am`; CTA center was not blocked by the sticky mobile bar. Evidence: `output/playwright/blog-booking-card-live-desktop.png`, `output/playwright/blog-booking-card-live-mobile-390.png`.
+
+**Opened:** Unrelated live post console issue remains: currently installed `blog-journey-inject.js?v=2` throws `Cannot read properties of undefined (reading 'then')`; booking-card flow still passes.
+**Closed:** Post-push live QA blocker for the redesigned blog booking card.
+
+**Next session should:** Keep `lead-form-inject.js` live. If cleaning blog console noise, inspect/update the stale Wix Custom Code `blog-journey-inject.js?v=2` helper separately.
+
+## 2026-06-11 — Codex (Boat Tours blog draft review)
+
+**Did:**
+- Re-reviewed the unpublished Boat Tours blog draft for current route/operator accuracy and link quality.
+- Rewrote the draft around route-first selection, official operator booking pages, and clearer WelcomeCard caveats.
+- Recreated the Wix Blog draft after local edits.
+
+**Changed:**
+- `blog-drafts/tickets-boat-tours-river-cruises-berlin.body.md` — removed the duplicated manual Quick Summary block, expanded the route chooser, corrected durations/prices, added official booking links, fixed internal links, and corrected BWSG/Riedel/WelcomeCard language.
+- `blog-drafts/tickets-boat-tours-river-cruises-berlin.md` — new Wix draft ID `037bd24b-53c3-45e8-96d3-d2e929e77ac2`, updated metadata, link list, and widget height note.
+- `quick-summary/data.json`, `faq/data.json` — Boat Tours QS/FAQ now say current WelcomeCard partner pages list Stern und Kreis, Winkler, and BWSG; Riedel's old page is archived.
+- `../create-wix-boat-tours-blog-draft.js` — Boat Finder embed height `920`, updated SEO/excerpt, read time `8`.
+
+**QA:** Official/current sources checked: Stern+Kreis, Winkler, BWSG, WelcomeCard partner pages, visitBerlin, Berlin.de. JSON parse passed; Ricos preview passed (136 nodes, 3 embeds, 26 links); all 19 body links returned HTTP 200; `git diff --check` passed; Wix API recreated the draft and readback verified 136 nodes, 3 embeds, 58 bold decorations, 26 links, slug, and `UNPUBLISHED` status.
+
+**Opened:** Visual QA in Wix editor before publishing; push/deploy pending for the earlier Boat Finder widget code change.
+**Closed:** Blog draft inaccuracies around WelcomeCard/Riedel, BWSG, old 404 internal links, and duplicated quick-summary structure.
+
+**Next session should:** Open Wix draft `037bd24b-53c3-45e8-96d3-d2e929e77ac2`, visually inspect spacing/embeds, then publish only after Yusuf approves.
+
 ## 2026-06-11 — Codex (Boat Tour Finder official booking links)
 
 **Did:**

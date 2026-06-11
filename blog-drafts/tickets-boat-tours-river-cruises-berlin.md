@@ -2,13 +2,13 @@
 
 Slug idea: `tickets-boat-tours-river-cruises-berlin`
 
-Wix draft ID: `e1bac946-e9a7-4783-8f88-40840df62c70`
+Wix draft ID: `037bd24b-53c3-45e8-96d3-d2e929e77ac2`
 
 Meta title: Tickets for Berlin Boat Tours & Spree Cruises: A Local's Guide
 
-Meta description: A local guide to Berlin boat tours and Spree cruises. Learn which routes are actually worth it, starting docks, pricing, and how to use the WelcomeCard.
+Meta description: A local guide to Berlin boat tours and Spree cruises. Choose the right route, compare official booking links, and check current WelcomeCard discounts.
 
-Excerpt: A local guide to Berlin's boat tours and river cruises. How to choose the right route, avoid tourist traps, and get the best Spree and Landwehrkanal cruises.
+Excerpt: A local guide to Berlin's boat tours and river cruises, with route advice, official booking links, starting docks, and current WelcomeCard caveats.
 
 Category: Tourist Tips
 
@@ -29,7 +29,7 @@ Use these embeds when building the post in Wix:
 
 2. Berlin Boat Tour Finder, after "How to Choose the Right Route":
    `{{widget:berlin-boat-tour-finder}}`
-   - Recommended iframe height: 760 px desktop / 1180 px mobile if fixed.
+   - Recommended iframe height: 920 px desktop / 1180 px mobile if fixed.
 
 3. FAQ, near the bottom:
    `https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=boat-tours-berlin`
@@ -38,8 +38,8 @@ Use these embeds when building the post in Wix:
 
 - WelcomeCard calculator: https://www.berlinwalk.com/tools/welcomecard-calculator
 - Transport ticket calculator: https://www.berlinwalk.com/tools/transport-ticket-calculator
-- Best month to visit Berlin: https://www.berlinwalk.com/post/best-month-to-visit-berlin
-- Berlin in the rain: https://www.berlinwalk.com/post/berlin-in-the-rain-what-to-do-on-a-rainy-day
+- Best time to visit Berlin: https://www.berlinwalk.com/post/what-s-the-best-time-to-visit-berlin-a-month-by-month-guide
+- Berlin in the rain: https://www.berlinwalk.com/post/berlin-in-the-rain
 - Berlin walking tour route: https://www.berlinwalk.com/berlin-walking-tour-route
 - Booking CTA: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
 
@@ -54,3 +54,9 @@ Use these embeds when building the post in Wix:
 - Reederei Riedel official booking engine: https://fareharbor.com/embeds/book/reederei-riedel/items/?flow=403457&full-items=yes
 - BWSG schedule and tickets: https://bwsg-berlin.de/en/schedule-tickets/
 - Reederei Becker dinner cruise: https://www.reedereibecker.com/
+- Berlin WelcomeCard Stern und Kreis partner page: https://www.berlin-welcomecard.de/en/partner/stern-und-kreisschiffahrt
+- Berlin WelcomeCard Winkler partner page: https://www.berlin-welcomecard.de/en/partner/reederei-bruno-winkler
+- Berlin WelcomeCard BWSG partner page: https://www.berlin-welcomecard.de/en/partner/bwsg-berlin-river-cruises
+- Berlin WelcomeCard Riedel archived page: https://www.berlin-welcomecard.de/en/partner/reederei-riedel
+- visitBerlin boat tours overview: https://www.visitberlin.de/en/tickets-boat-tours-river-cruises-berlin
+- Berlin.de river cruises overview: https://www.berlin.de/en/tourism/rivercruises-boattrips/
