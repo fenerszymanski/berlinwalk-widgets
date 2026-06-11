@@ -377,7 +377,8 @@
       background: var(--bw-cream);
       display: grid;
       gap: 16px;
-      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+      grid-template-columns: minmax(0, min(1120px, 100%));
+      justify-content: center;
       padding: 18px 20px 20px;
     }
 
@@ -1681,8 +1682,7 @@
       align-self: start;
       border: 2px solid var(--bw-green);
       overflow: hidden;
-      position: sticky;
-      top: 12px;
+      position: static;
     }
 
     #bw-trip-planner .bw-result-head {
@@ -6311,6 +6311,107 @@
       overflow: hidden;
     }
 
+    #bw-trip-planner .bw-preview-teaser {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    #bw-trip-planner .bw-preview-teaser-head {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+    }
+
+    #bw-trip-planner .bw-preview-teaser-head strong,
+    #bw-trip-planner .bw-preview-teaser-head span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-preview-teaser-head strong {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-preview-teaser-head span {
+      background: rgba(255, 230, 0, 0.42);
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 999px;
+      color: var(--bw-green);
+      flex: 0 0 auto;
+      font-size: 9px;
+      font-weight: 950;
+      line-height: 1.2;
+      padding: 5px 7px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #bw-trip-planner .bw-preview-blocks {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-preview-block {
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-left: 4px solid var(--bw-green);
+      border-radius: 8px;
+      display: grid;
+      gap: 4px;
+      min-width: 0;
+      padding: 8px;
+    }
+
+    #bw-trip-planner .bw-preview-block b,
+    #bw-trip-planner .bw-preview-block strong,
+    #bw-trip-planner .bw-preview-block span,
+    #bw-trip-planner .bw-preview-unlock-cue {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-preview-block b {
+      color: var(--bw-muted);
+      font-size: 9px;
+      font-weight: 950;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-preview-block strong {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-preview-block span {
+      color: var(--bw-muted);
+      font-size: 10.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    #bw-trip-planner .bw-preview-unlock-cue {
+      background: rgba(255, 230, 0, 0.22);
+      border: 1px dashed rgba(27, 94, 32, 0.28);
+      border-radius: 8px;
+      color: var(--bw-green);
+      font-size: 10.5px;
+      font-weight: 850;
+      line-height: 1.4;
+      padding: 8px;
+    }
+
     #bw-trip-planner .bw-preview-flow {
       background: rgba(250, 250, 245, 0.92);
       border: 1px solid var(--bw-border);
@@ -9499,6 +9600,15 @@
         padding: 12px;
       }
 
+      #bw-trip-planner .bw-preview-blocks {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-trip-planner .bw-preview-teaser-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
       #bw-trip-planner .bw-control-panel {
         padding: 12px;
       }
@@ -11137,6 +11247,61 @@
       '<div class="bw-preview-flow-item">' +
         '<span class="bw-preview-flow-icon" aria-hidden="true">🧭</span><span class="bw-preview-flow-copy"><b>Rest of plan</b><span>Full timings, maps, PDF, and later days unlock below.</span></span>' +
       '</div>' +
+    '</div>';
+  }
+
+  function previewBlockTeaserCopy(day, block, index) {
+    var rawCopy = dayBlockDisplayCopy(day, block, index);
+    var blockText = [block && block.time, block && block.title, rawCopy].join(' ');
+    if (/arrival|airport|station|base|hotel|bags/i.test(blockText)) {
+      return 'Get central, drop bags if needed, then make one simple orientation move.';
+    }
+    if (isTourBlock(block)) {
+      return 'Use BerlinWalk from the World Clock as the first context layer, then keep the next stop nearby.';
+    }
+    return cleanAiText(rawCopy, '', 112)
+      .replace(/\bour walking tour\b/ig, 'the BerlinWalk tour')
+      .replace(/\bour tour\b/ig, 'the BerlinWalk tour')
+      .replace(/\bwe are\b/ig, 'I am')
+      .replace(/\bwe're\b/ig, 'I am');
+  }
+
+  function previewDayTeaserHtml(day, plan) {
+    if (!day) return '';
+    var allItems = dayActionBlockItems(day);
+    var actionItems = allItems.filter(function (item) {
+      return !isDayClosingBlock(day, item.block, item.index);
+    }).slice(0, 2);
+    if (!actionItems.length) actionItems = allItems.slice(0, 2);
+
+    var blockHtml = actionItems.map(function (item) {
+      var block = item.block || {};
+      var windowLabel = dayBlockWindow(day, block, item.index);
+      var copy = previewBlockTeaserCopy(day, block, item.index);
+      return '<article class="bw-preview-block">' +
+        '<b>' + escapeHtml(block.time || 'Step') + (windowLabel ? ' - ' + escapeHtml(windowLabel) : '') + '</b>' +
+        '<strong>' + escapeHtml(block.title || 'Berlin move') + '</strong>' +
+        (copy ? '<span>' + escapeHtml(copy) + '</span>' : '') +
+      '</article>';
+    }).join('');
+
+    var routeLabels = dayMapLinks(day).slice(0, 3).map(function (link) {
+      return link.label;
+    }).filter(Boolean);
+    var routeText = routeLabels.length ? routeLabels.join(' -> ') : (day.theme || 'First Berlin route');
+    var slot = plan ? tourSlotForDay(day, plan) : null;
+    var cue = slot
+      ? 'Unlock to see exact timings, map links, food stop, and the ' + slot.timeLabel + ' BerlinWalk tour placement.'
+      : 'Unlock to see exact timings, map links, food stops, transport notes, and the rest of this day.';
+
+    return '<div class="bw-preview-teaser">' +
+      '<div class="bw-preview-teaser-head">' +
+        '<strong>Day 1 preview: ' + escapeHtml(routeText) + '</strong>' +
+        '<span>Partial preview</span>' +
+      '</div>' +
+      (blockHtml ? '<div class="bw-preview-blocks">' + blockHtml + '</div>' : '') +
+      previewDayFlowHtml(day, plan) +
+      '<span class="bw-preview-unlock-cue">' + escapeHtml(cue) + '</span>' +
     '</div>';
   }
 
@@ -16698,10 +16863,10 @@
         var previewCount = Math.min(1, plan.days.length);
         var firstPreviewDay = (plan.days || []).slice(0, previewCount)[0];
         preview.innerHTML = firstPreviewDay ? (
-          '<article class="bw-preview-day is-cut">' +
+          '<article class="bw-preview-day">' +
             '<strong>Day ' + firstPreviewDay.dayNumber + ': ' + escapeHtml(firstPreviewDay.title) + '</strong>' +
             '<span>' + escapeHtml(formatDisplayDate(firstPreviewDay.dateKey)) + ' - ' + escapeHtml(firstPreviewDay.theme) + '</span>' +
-            dayPostcardHtml(firstPreviewDay) +
+            previewDayTeaserHtml(firstPreviewDay, plan) +
           '</article>'
         ) : '';
       }
