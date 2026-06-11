@@ -151,23 +151,35 @@ const TOPICS = [
   },
 ];
 
+// Curated featured block (the hero + 5-story rail), not just the newest posts.
+// Mix: a hot/timely lead, a seasonal pick, one popular history piece, then
+// proven-popular evergreen guides. The trailing slugs are buffer fallbacks if
+// any of the top five are unpublished at regen time.
 const HERO_SLUGS = {
-  lead: 'why-is-berlin-founding-year-1237',
+  lead: 'where-to-watch-2026-world-cup-in-berlin',
   secondary: [
+    'visiting-berlin-in-june',
+    'where-was-the-berlin-wall-interactive-map',
+    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
+    '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
+    'why-is-berlin-founding-year-1237',
     'nikolaiviertel-rebuilt-old-town',
     'east-side-gallery-berlin-guide',
-    'where-was-the-berlin-wall-interactive-map',
-    'brandenburg-gate-berlin-visitors-guide',
-    'vegan-berlin-guide-2026',
-    'what-is-a-spati-berlin',
-    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
-    'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   ],
 };
 
 const REQUIRED_SLUGS = [
   'what-is-a-spati-berlin',
   'why-is-berlin-founding-year-1237',
+  // Featured curation picks: guarantee they are fetched even if older than the
+  // default window so the curated hero/rail survives a regen.
+  'where-to-watch-2026-world-cup-in-berlin',
+  'visiting-berlin-in-june',
+  'where-was-the-berlin-wall-interactive-map',
+  'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+  'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
+  '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
 ];
 
 const START_HERE_LINKS = [
