@@ -2,6 +2,41 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-12 — Codex (World Cup fixture scores + automation)
+
+**Did:** Updated the FIFA World Cup fixtures widget for the tournament start and installed a daily local score-update automation.
+
+**Changed:**
+- `worldcup-fixtures/index.html` — added optional final-score fields in the `M` array, FT display styling, score columns, winner/loss text treatment, `SCORE_UPDATED`, and the first two results: Mexico 2-0 South Africa and South Korea 2-1 Czechia.
+- `/Users/yusufucuz/.codex/automations/berlinwalk-worldcup-fixtures-update/automation.toml` — new ACTIVE daily Codex cron at 08:30 Europe/Berlin.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — mirrored durable state.
+
+**QA:** Scores verified from current web sources: AP for Mexico 2-0 South Africa; Guardian/NDTV/ESPN for South Korea 2-1 Czechia. Inline JS parse passed. In-app Browser QA passed on desktop and 390px mobile: 72 match rows, 2 final rows, correct score text, next match Canada vs Bosnia and Herzegovina, horizontal overflow `0`. `git diff --check` passed. TOML parser libraries were unavailable locally, but the automation file follows the existing Codex automation structure.
+
+**Opened:** Push/deploy required before GitHub Pages/live Wix tool page serves the scored widget.
+**Closed:** Local first-score update and daily update automation are complete.
+
+**Next session should:** After push, cache-bust and QA the live GitHub Pages widget and `/tools/world-cup-2026-fixtures-berlin-time`.
+
+## 2026-06-12 — Codex (FAQ SEO hardening)
+
+**Did:** Implemented generator-backed FAQ JSON-LD for blog posts and added a repeatable SEO audit workflow.
+
+**Changed:**
+- `faq/slug-map.json` — new source-of-truth mapping from Wix blog slugs to FAQ keys.
+- `scripts/generate-faq-inject.mjs` — builds `faq/inject.js` from `faq/data.json` + `faq/slug-map.json`, strips Markdown from schema text, validates missing mapped keys, and emits only mapped blog FAQ schemas.
+- `scripts/audit-faq-seo.mjs` — validates generated schema health, Markdown leaks, slug refs, draft/body coverage heuristics, live HTML, and rendered DOM via Playwright CLI fallback.
+- `faq/inject.js` — regenerated; fixed `was-your-berlin-address-east-or-west` mapping, kept `pfand-in-germany`, removed Markdown markers from JSON-LD answers, and reduced schema payload to 52 mapped FAQ keys.
+- `output/qa/faq-seo-audit-20260612.md`, `output/qa/faq-seo-audit-live-20260612.md`, `output/qa/faq-seo-audit-rendered-20260612.md` — saved audit reports.
+- `../berlinwalk-content-app/api/blog-generate.js`, `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — updated adjacent Content Studio prompt/memory outside this repo.
+
+**QA:** `node --check scripts/generate-faq-inject.mjs`, `node --check scripts/audit-faq-seo.mjs`, `node --check ../berlinwalk-content-app/api/blog-generate.js`, and `git diff --check` passed. Local audit verdict `PASS`: 66 FAQ data entries, 61 slug mappings, 52 injected schema entries, 0 missing refs, 0 Markdown leaks. Live HTML checks for `pfand-in-germany`, `what-is-a-spati-berlin`, and `why-is-berlin-founding-year-1237` found HTTP 200, `faq/inject.js`, and JSON-LD. Rendered DOM checks found `#bw-faq-jsonld` with `FAQPage (6)` on all three.
+
+**Opened:** Push/deploy needed before GitHub Pages serves the regenerated `faq/inject.js` and new audit/generator files.
+**Closed:** Local FAQ SEO hardening plan implementation.
+
+**Next session should:** After push, rerun `node scripts/audit-faq-seo.mjs --live --rendered --limit 5 --output output/qa/faq-seo-audit-live-postdeploy-YYYYMMDD.md` and spot-check the GitHub Pages `faq/inject.js` Last-Modified header.
+
 ## 2026-06-12 — Codex (Pfand blog indexed)
 
 **Did:** Indexed the published `pfand-in-germany` post into the local blog hub and homepage blog teaser data.
