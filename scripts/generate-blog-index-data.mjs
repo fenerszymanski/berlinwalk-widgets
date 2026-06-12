@@ -51,10 +51,11 @@ const TOPICS = [
       'can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany',
       'shopping-in-berlin',
       'what-is-a-spati-berlin',
+      'pfand-in-germany',
       'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
     ],
-    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
+    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|pfand|deposit|bottle return|recycling|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
   },
   {
     key: 'free-budget',
@@ -69,8 +70,9 @@ const TOPICS = [
       'bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about',
       'the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists',
       'is-museum-island-free-tickets-prices-and-what-to-actually-skip',
+      'pfand-in-germany',
     ],
-    match: /(free|budget|cheap|save|museum pass|welcomecard|single tickets|bus 100|reichstag)/i,
+    match: /(free|budget|cheap|save|pfand|deposit|bottle return|refund|museum pass|welcomecard|single tickets|bus 100|reichstag)/i,
   },
   {
     key: 'route-stories',
@@ -180,6 +182,7 @@ const REQUIRED_SLUGS = [
   'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
   '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
+  'pfand-in-germany',
 ];
 
 const START_HERE_LINKS = [
@@ -435,6 +438,7 @@ function relatedToolSlugFor(post) {
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
   if (/(welcomecard)/.test(s)) return 'welcomecard-calculator';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
+  if (/(pfand|bottle-deposit|bottle deposit|deposit bottle|bottle-return|bottle return|recycling)/.test(s)) return 'berlin-pfand-calculator';
   if (/(shopping|shop|flea-market|vintage|souvenir)/.test(s)) return 'berlin-shopping-areas';
   if (/(vegan|plant-based|plant based)/.test(s)) return 'vegan-berlin-locations-map';
   if (/(budget|expensive|cheap|credit|cash)/.test(s)) return 'berlin-daily-budget';
