@@ -1762,5 +1762,34 @@
         "a": "Usually yes. Most tourist boats have an onboard bar or cafe for beer, soft drinks, coffee, and simple snacks. Dinner and brunch cruises are separate products, so do not expect a full meal on a normal sightseeing cruise."
       }
     ]
+  },
+  "pfand-in-germany": {
+    "title": "Pfand in Germany FAQ",
+    "items": [
+      {
+        "q": "What does Pfand mean in Germany?",
+        "a": "Pfand means deposit. For tourists, it usually means the refundable deposit added to many drink bottles and cans. You pay it at purchase and get it back when you return the empty container."
+      },
+      {
+        "q": "How much is Pfand on bottles and cans in Berlin?",
+        "a": "Cans and single-use plastic bottles with the DPG logo are usually **0.25 EUR**. Reusable glass beer bottles are often **0.08 EUR**, while reusable water or soft-drink bottles are often **0.15 EUR**."
+      },
+      {
+        "q": "Where do tourists return Pfand bottles in Berlin?",
+        "a": "Use a supermarket bottle return machine, usually called a **Pfandautomat** or **Leergutautomat**. For mixed reusable bottles, crates or a large bag, a bigger supermarket or Getränkemarkt is easier than a small shop."
+      },
+      {
+        "q": "Can I return a bottle to any supermarket?",
+        "a": "Not always. One-way bottles and cans are widely accepted, but stores can have material and shop-size restrictions. Some discount stores mainly accept the types they sell, while REWE, Edeka and drinks markets are usually better for mixed returns."
+      },
+      {
+        "q": "Why did the Pfand machine reject my bottle?",
+        "a": "Common reasons are a damaged label or barcode, a crushed bottle, a foreign bottle, a no-deposit container, or a bottle type the shop does not accept. Try a larger supermarket or drinks market before throwing it away."
+      },
+      {
+        "q": "What should I do with a Pfand bottle if I do not want the money?",
+        "a": "The cleanest option is to hand it directly to a bottle collector or use a proper bottle holder where one exists. Do not throw deposit bottles deep into public bins, and do not leave broken glass or blocked pavements."
+      }
+    ]
   }
 }

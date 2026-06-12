@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Pfand Calculator | BerlinWalk</title>
+  <meta name="description" content="Calculate your Berlin bottle deposit refund and learn where to return cans, plastic bottles, glass bottles and crates.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-pfand-calculator">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-pfand-calculator {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #143F17;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-pfand-calculator *,
+    #bw-pfand-calculator *::before,
+    #bw-pfand-calculator *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-pfand-calculator .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      max-width: 100%;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-pfand-calculator .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.12)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 18px 20px;
+    }
+
+    #bw-pfand-calculator .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.1px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-pfand-calculator h2,
+    #bw-pfand-calculator h3,
+    #bw-pfand-calculator p {
+      margin-top: 0;
+    }
+
+    #bw-pfand-calculator .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-pfand-calculator .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-pfand-calculator .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(290px, 0.72fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-pfand-calculator .bw-panel,
+    #bw-pfand-calculator .bw-result {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-pfand-calculator .bw-form {
+      display: grid;
+      gap: 11px;
+    }
+
+    #bw-pfand-calculator .bw-row {
+      align-items: center;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) 92px;
+      padding: 10px;
+    }
+
+    #bw-pfand-calculator .bw-name {
+      color: var(--bw-green);
+      display: block;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-pfand-calculator .bw-rate {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    #bw-pfand-calculator input {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 900;
+      min-height: 42px;
+      padding: 8px 10px;
+      width: 100%;
+    }
+
+    #bw-pfand-calculator .bw-actions {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-pfand-calculator button {
+      -webkit-tap-highlight-color: transparent;
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      min-height: 44px;
+      padding: 9px 10px;
+      text-align: center;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+    }
+
+    #bw-pfand-calculator button:hover {
+      background: var(--bw-soft);
+      border-color: var(--bw-lime);
+      transform: translateY(-1px);
+    }
+
+    #bw-pfand-calculator button:focus-visible,
+    #bw-pfand-calculator input:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.8);
+      outline-offset: 2px;
+    }
+
+    #bw-pfand-calculator .bw-result {
+      align-self: start;
+      border-color: rgba(27, 94, 32, 0.25);
+      position: sticky;
+      top: 12px;
+    }
+
+    #bw-pfand-calculator .bw-badge {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      padding: 5px 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-pfand-calculator .bw-total {
+      color: var(--bw-green);
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1;
+      margin: 0 0 8px;
+    }
+
+    #bw-pfand-calculator .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.22;
+      margin: 0 0 8px;
+    }
+
+    #bw-pfand-calculator .bw-copy {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0 0 12px;
+    }
+
+    #bw-pfand-calculator .bw-steps {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-pfand-calculator .bw-step {
+      align-items: start;
+      background: var(--bw-soft);
+      border: 1px solid rgba(124, 179, 66, 0.28);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 28px minmax(0, 1fr);
+      padding: 9px;
+    }
+
+    #bw-pfand-calculator .bw-step span {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-yellow);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 900;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
+    }
+
+    #bw-pfand-calculator .bw-step p {
+      color: var(--bw-text);
+      font-size: 12.5px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-pfand-calculator .bw-note {
+      border-left: 4px solid var(--bw-yellow);
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 12px 0 0;
+      padding-left: 10px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-pfand-calculator {
+        margin: 20px 0;
+      }
+
+      #bw-pfand-calculator .bw-head,
+      #bw-pfand-calculator .bw-body {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      #bw-pfand-calculator .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-pfand-calculator .bw-body {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-pfand-calculator .bw-result {
+        position: static;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-pfand-calculator .bw-row {
+        grid-template-columns: 1fr 78px;
+      }
+
+      #bw-pfand-calculator .bw-actions {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-pfand-calculator .bw-total {
+        font-size: 36px;
+      }
+    }
+  </style>
+
+  <section class="bw-wrap" aria-labelledby="bw-pfand-title">
+    <header class="bw-head">
+      <p class="bw-kicker">Berlin tool</p>
+      <h2 class="bw-title" id="bw-pfand-title">Berlin Pfand Calculator</h2>
+      <p class="bw-sub">Add your bottles and cans, see the refund, and know whether to use a supermarket machine, a Getränkemarkt, or the cashier.</p>
+    </header>
+
+    <div class="bw-body">
+      <div class="bw-panel">
+        <div class="bw-form" aria-label="Bottle deposit calculator">
+          <label class="bw-row">
+            <span>
+              <span class="bw-name">Cans or single-use plastic bottles</span>
+              <span class="bw-rate">Einweg with DPG logo, usually 25 cents each</span>
+            </span>
+            <input data-kind="single" type="number" min="0" max="99" step="1" value="3" inputmode="numeric" aria-label="Number of cans or single-use plastic bottles">
+          </label>
+
+          <label class="bw-row">
+            <span>
+              <span class="bw-name">Reusable beer bottles</span>
+              <span class="bw-rate">Mehrweg glass, often 8 cents each</span>
+            </span>
+            <input data-kind="beer" type="number" min="0" max="99" step="1" value="2" inputmode="numeric" aria-label="Number of reusable beer bottles">
+          </label>
+
+          <label class="bw-row">
+            <span>
+              <span class="bw-name">Reusable water or soft-drink bottles</span>
+              <span class="bw-rate">Mehrweg glass or PET, often 15 cents each</span>
+            </span>
+            <input data-kind="multi" type="number" min="0" max="99" step="1" value="1" inputmode="numeric" aria-label="Number of reusable water or soft drink bottles">
+          </label>
+
+          <label class="bw-row">
+            <span>
+              <span class="bw-name">Bottle crates</span>
+              <span class="bw-rate">A full empty crate is often about 1.50 EUR</span>
+            </span>
+            <input data-kind="crate" type="number" min="0" max="20" step="1" value="0" inputmode="numeric" aria-label="Number of bottle crates">
+          </label>
+
+          <div class="bw-actions" aria-label="Common tourist presets">
+            <button type="button" data-preset="hotel">Hotel room stash</button>
+            <button type="button" data-preset="picnic">Park picnic</button>
+            <button type="button" data-preset="reset">Reset</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="bw-result" aria-live="polite">
+        <span class="bw-badge">Estimated refund</span>
+        <p class="bw-total" data-total>0.00 EUR</p>
+        <h3 data-heading>Use a supermarket Pfandautomat</h3>
+        <p class="bw-copy" data-copy>The machine prints a voucher. Take it to the checkout and ask for cash back, or use it against groceries.</p>
+        <div class="bw-steps">
+          <div class="bw-step">
+            <span>1</span>
+            <p data-step-one>Keep labels and barcodes intact. Crushed bottles often get rejected.</p>
+          </div>
+          <div class="bw-step">
+            <span>2</span>
+            <p data-step-two>Try REWE, Edeka or a Getränkemarkt if you have mixed glass and plastic.</p>
+          </div>
+          <div class="bw-step">
+            <span>3</span>
+            <p data-step-three>If you do not want the money, hand the bottle to a collector or use a visible bottle holder where one exists.</p>
+          </div>
+        </div>
+        <p class="bw-note">Exact deposits can vary for reusable bottles. The fixed one-way deposit is 0.25 EUR.</p>
+      </aside>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-pfand-calculator');
+      if (!root) return;
+
+      var rates = { single: 0.25, beer: 0.08, multi: 0.15, crate: 1.5 };
+      var presets = {
+        hotel: { single: 6, beer: 0, multi: 2, crate: 0 },
+        picnic: { single: 8, beer: 4, multi: 0, crate: 0 },
+        reset: { single: 0, beer: 0, multi: 0, crate: 0 }
+      };
+
+      var inputs = Array.prototype.slice.call(root.querySelectorAll('input[data-kind]'));
+      var totalEl = root.querySelector('[data-total]');
+      var headingEl = root.querySelector('[data-heading]');
+      var copyEl = root.querySelector('[data-copy]');
+      var stepOne = root.querySelector('[data-step-one]');
+      var stepTwo = root.querySelector('[data-step-two]');
+      var stepThree = root.querySelector('[data-step-three]');
+
+      function value(kind) {
+        var input = root.querySelector('input[data-kind="' + kind + '"]');
+        return Math.max(0, Math.min(Number(input.value || 0), Number(input.max || 99)));
+      }
+
+      function money(amount) {
+        return amount.toFixed(2) + ' EUR';
+      }
+
+      function update() {
+        var counts = {
+          single: value('single'),
+          beer: value('beer'),
+          multi: value('multi'),
+          crate: value('crate')
+        };
+        var total = Object.keys(counts).reduce(function (sum, key) {
+          return sum + counts[key] * rates[key];
+        }, 0);
+        var items = counts.single + counts.beer + counts.multi + counts.crate;
+
+        totalEl.textContent = money(total);
+
+        if (items === 0) {
+          headingEl.textContent = 'No Pfand to return yet';
+          copyEl.textContent = 'When you buy a bottle or can, check the label for Pfand, Einweg, Mehrweg, or the DPG logo before throwing it away.';
+          stepOne.textContent = 'Single-use cans and plastic bottles with the DPG logo are usually worth 0.25 EUR each.';
+          stepTwo.textContent = 'Reusable beer and water bottles are usually worth 0.08 to 0.15 EUR each.';
+          stepThree.textContent = 'If there is no Pfand mark, use normal recycling instead.';
+          return;
+        }
+
+        if (counts.beer + counts.multi + counts.crate > 0) {
+          headingEl.textContent = 'Use REWE, Edeka or a Getränkemarkt';
+          copyEl.textContent = 'Mixed reusable bottles are more likely to work at a full supermarket or drinks market than at a small discount-store machine.';
+          stepOne.textContent = 'Do not remove labels. The machine or cashier needs the bottle type.';
+          stepTwo.textContent = 'If a machine rejects glass, try the cashier or a Getränke Hoffmann-style drinks market.';
+          stepThree.textContent = 'Keep the voucher from the machine and redeem it at the checkout before you leave.';
+          return;
+        }
+
+        headingEl.textContent = 'Use almost any supermarket machine';
+        copyEl.textContent = 'For cans and single-use plastic bottles, Aldi, Lidl, REWE and Edeka machines usually work well.';
+        stepOne.textContent = 'Insert bottles slowly with the barcode visible where possible.';
+        stepTwo.textContent = 'Press the voucher button when finished.';
+        stepThree.textContent = 'Redeem the printed Pfandbon at the checkout for cash or groceries.';
+      }
+
+      inputs.forEach(function (input) {
+        input.addEventListener('input', update);
+        input.addEventListener('change', update);
+      });
+
+      root.querySelectorAll('button[data-preset]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var data = presets[button.getAttribute('data-preset')];
+          Object.keys(data).forEach(function (kind) {
+            root.querySelector('input[data-kind="' + kind + '"]').value = data[kind];
+          });
+          update();
+        });
+      });
+
+      update();
+    }());
+  </script>
+</div>
+</body>
+</html>

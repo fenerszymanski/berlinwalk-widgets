@@ -2,6 +2,24 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-12 — Codex (Daily blog draft: Pfand in Germany)
+
+**Did:** Created the `pfand-in-germany` daily blog draft package with a new `berlin-pfand-calculator/` widget, local QS/FAQ data, visual sources, and tools-hub entry.
+
+**Changed:**
+- `blog-drafts/pfand-in-germany.md`, `blog-drafts/images/pfand-in-germany/` — complete public draft and 3 optimized Wikimedia images with credits.
+- `berlin-pfand-calculator/index.html`, `quick-summary/data.json`, `faq/data.json`, `faq/inject.js`, `tools-hub/data.json` — new tool/embed support.
+- `../berlinwalk-content-app/create-pfand-in-germany-draft.mjs` — one-off Wix draft/CMS helper.
+- Wix: Blog draft `f984b28a-5a96-4b03-898e-96b5c4f990b8` is UNPUBLISHED; BerlinTools CMS item `cfc90f68-33b6-4860-91b0-3e36736f7101` returns 200.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — mirrored durable state.
+
+**QA:** Local widget QA at `127.0.0.1:4189` passed desktop and 390px mobile with horizontal overflow `0`, 4 inputs, 3 preset buttons, and no console errors. Wix draft readback confirmed 121 nodes, 3 HTML embeds, 3 image nodes with alt text, cover/social image, canonical, robots `index, follow, max-image-preview:large`, SEO keywords, and BlogPosting JSON-LD.
+
+**Opened:** Push/deploy `berlinwalk-widgets`; live GitHub Pages currently 404s `berlin-pfand-calculator/` and live QS/FAQ JSON does not include `pfand-in-germany`.
+**Closed:** Daily blog draft automation run for 2026-06-12.
+
+**Next session should:** Push the widget repo, wait for GitHub Pages, then preview the Wix draft before Yusuf publishes.
+
 ## 2026-06-11 — Codex (Trip Planner guide glance merge)
 
 **Did:**

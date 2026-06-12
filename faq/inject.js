@@ -60,7 +60,8 @@
   "spati-berlin": "spati-berlin",
   "why-is-berlin-founding-year-1237": "berlin-founding-year-1237",
   "berlin-founding-year-1237": "berlin-founding-year-1237",
-  "tipping-in-berlin": "tipping-in-berlin"
+  "tipping-in-berlin": "tipping-in-berlin",
+  "pfand-in-germany": "pfand-in-germany"
 };
 
   var SCHEMAS = {
@@ -3094,6 +3095,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "For a tip-based walking tour, there is no fixed price. As a practical guide, EUR 5 is modest, EUR 10 is a solid common tip, and EUR 15-20 is generous for a guide who made the city click."
+        }
+      }
+    ]
+  },
+  "pfand-in-germany": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does Pfand mean in Germany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Pfand means deposit. For tourists, it usually means the refundable deposit added to many drink bottles and cans. You pay it at purchase and get it back when you return the empty container."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is Pfand on bottles and cans in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cans and single-use plastic bottles with the DPG logo are usually **0.25 EUR**. Reusable glass beer bottles are often **0.08 EUR**, while reusable water or soft-drink bottles are often **0.15 EUR**."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do tourists return Pfand bottles in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use a supermarket bottle return machine, usually called a **Pfandautomat** or **Leergutautomat**. For mixed reusable bottles, crates or a large bag, a bigger supermarket or Getränkemarkt is easier than a small shop."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I return a bottle to any supermarket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always. One-way bottles and cans are widely accepted, but stores can have material and shop-size restrictions. Some discount stores mainly accept the types they sell, while REWE, Edeka and drinks markets are usually better for mixed returns."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did the Pfand machine reject my bottle?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Common reasons are a damaged label or barcode, a crushed bottle, a foreign bottle, a no-deposit container, or a bottle type the shop does not accept. Try a larger supermarket or drinks market before throwing it away."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do with a Pfand bottle if I do not want the money?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The cleanest option is to hand it directly to a bottle collector or use a proper bottle holder where one exists. Do not throw deposit bottles deep into public bins, and do not leave broken glass or blocked pavements."
         }
       }
     ]

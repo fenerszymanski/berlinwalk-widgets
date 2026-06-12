@@ -477,6 +477,14 @@
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-boat-tour-finder/",
       "embedHeight": 920,
       "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-boat-tour-finder-160.png"
+    },
+    {
+      "slug": "berlin-pfand-calculator",
+      "title": "Berlin Pfand Calculator",
+      "lead": "Calculate your bottle deposit refund and learn whether to return cans, plastic bottles, glass bottles or crates at a supermarket machine, cashier or drinks market.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pfand-calculator/",
+      "embedHeight": 760
     }
   ]
 }
