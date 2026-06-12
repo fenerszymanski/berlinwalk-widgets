@@ -2,6 +2,37 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-12 — Codex (World Cup score-slot automation)
+
+**Did:** Changed the World Cup score updater from daily 08:30 polling to expected post-match score-check slots.
+
+**Changed:**
+- `/Users/yusufucuz/.codex/automations/berlinwalk-worldcup-fixtures-update/automation.toml` — now runs on half-hour score-check slots derived from kick-off + about 2h30 (`00:30`, `01:30`, `02:30`, `03:30`, `04:30`, `05:30`, `06:30`, `07:30`, `08:30`, `20:30`, `21:30`, `23:30` Europe/Berlin).
+- `/Users/yusufucuz/.codex/automations/berlinwalk-worldcup-fixtures-update-0400/automation.toml` — added active 04:00 Europe/Berlin edge-slot automation for 01:30 kick-offs.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — mirrored durable state.
+
+**QA:** Automation smoke check passed for both TOML files: active status, prompt block shape, rrule presence, and no-op instruction. No widget code changed in this follow-up.
+
+**Opened:** No-op automation runs should not edit files or append logs.
+**Closed:** Daily-only score polling has been replaced with post-match slot polling.
+
+**Next session should:** After the next match finishes, confirm the score-slot automation updates only the due final score.
+
+## 2026-06-12 — Codex (Canada-Bosnia score added)
+
+**Did:** Added Canada 1-1 Bosnia and Herzegovina as the third completed FIFA World Cup fixture result.
+
+**Changed:**
+- `worldcup-fixtures/index.html` — updated `SCORE_UPDATED` to `12 Jun 2026, 23:08 CEST` and changed Canada vs Bosnia and Herzegovina to `[1,1,'FT']`.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — mirrored the score update.
+
+**QA:** Guardian full-time report and Fox play-by-play checked. Inline JS parse passed; final-score rows now count `3`; direct fixture extraction returns Mexico 2-0 South Africa, South Korea 2-1 Czechia, and Canada 1-1 Bosnia and Herzegovina. `git diff --check` passed. In-app Browser localhost QA was blocked by Browser URL policy on this follow-up.
+
+**Opened:** Push/deploy still needed for GitHub Pages/live Wix tool page.
+**Closed:** Canada-Bosnia score is added locally.
+
+**Next session should:** After push, cache-bust and verify the live `worldcup-fixtures` widget has 3 final rows.
+
 ## 2026-06-12 — Codex (World Cup fixture scores + automation)
 
 **Did:** Updated the FIFA World Cup fixtures widget for the tournament start and installed a daily local score-update automation.
