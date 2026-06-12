@@ -2,6 +2,26 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-12 — Codex (BerlinTools ChatGPT icon standard)
+
+**Did:** Rebuilt the full BerlinTools card icon family from ChatGPT browser-generated sheets and uploaded the 50-tool standard set to Wix Media.
+
+**Changed:**
+- `tools-home/icons/` — replaced canonical 512px/160px PNGs for all 50 live tools and added missing canonical slug files.
+- `tools-home/icons/_src/chatgpt-standard-20260612/` — saved the ChatGPT source sheets for tools 1-25 and 26-50.
+- `tools-home/icons/chatgpt-standard-2026-06-12/` — saved split 512px/160px category exports, `manifest.json`, `live-tools.json`, `README.md`, `contact-sheet.png`, upload cache, and `wix-upload-summary.json`.
+- `scripts/split-chatgpt-tool-icon-sheets.py` — added the reusable sheet splitter/cropper.
+- `scripts/upload-chatgpt-tool-icons-to-wix.mjs` — added the Wix Media upload + data wiring helper.
+- `tools-hub/data.json`, `tools-home/data.json`, `tools-home/icons/manifest.json` — updated image URLs to the new Wix Media files.
+- External Wix Custom Embed `BerlinTools Layout Fixes` — updated the live icon map to revision 17.
+
+**QA:** Local `tools-hub/data.json` and live GitHub Pages data both listed 50 tools before generation. Splitter output count/dimensions passed, contact sheet visual QA passed, JSON parse checks passed, upload dry-run passed, real Wix Media upload completed 50/50, and the live embed update reported no generic slugs.
+
+**Opened:** Push/deploy this repo so GitHub Pages serves the updated `tools-hub/data.json`, `tools-home/data.json`, and icon files; Wix Media assets and the live Custom Embed map are already updated.
+**Closed:** Full ChatGPT icon generation, split, Wix upload, data wiring, and live BerlinTools embed map update.
+
+**Next session should:** After push, verify `/berlin-tools`, `/widgets`, homepage tool cards, and a few `/tools/<slug>` related-card sections on desktop/mobile.
+
 ## 2026-06-12 — Codex (Daily blog draft: Pfand in Germany)
 
 **Did:** Created the `pfand-in-germany` daily blog draft package with a new `berlin-pfand-calculator/` widget, local QS/FAQ data, visual sources, and tools-hub entry.
