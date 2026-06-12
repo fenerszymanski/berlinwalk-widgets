@@ -2,6 +2,23 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-12 — Codex (Pfand blog indexed)
+
+**Did:** Indexed the published `pfand-in-germany` post into the local blog hub and homepage blog teaser data.
+
+**Changed:**
+- `scripts/generate-blog-index-data.mjs` — added `pfand-in-germany` to Practical Berlin and Free & Budget shelf rules and mapped Pfand/deposit posts to `berlin-pfand-calculator`.
+- `blog-index/data.json` — regenerated from the live Wix Blog API with 120 posts; Pfand is latest/allPosts position 1 and carries the Wix Media Pfandautomat cover.
+- `blog-home/data.json` — added Pfand as the first small note card, keeping the World Cup feature and two existing evergreen/seasonal cards.
+- `../PROJECT_MEMORY.md` and `../SESSION_LOG.md` — recorded the published/indexed state.
+
+**QA:** `https://www.berlinwalk.com/post/pfand-in-germany` returned HTTP 200. Keychain-loaded Wix API regeneration succeeded. JSON validation passed for `blog-index/data.json` and `blog-home/data.json`; `node --check scripts/generate-blog-index-data.mjs` passed. Spot check confirmed Pfand is in `latest`, `allPosts`, `practical`, and `free-budget`, with related tool `berlin-pfand-calculator`.
+
+**Opened:** Push/deploy needed before GitHub Pages serves the refreshed `/blog` and homepage blog data.
+**Closed:** Local indexing for the published Pfand blog.
+
+**Next session should:** After push, live-QA `/blog` and the homepage blog teaser with a cache-bust query.
+
 ## 2026-06-12 — Codex (BerlinTools ChatGPT icon standard)
 
 **Did:** Rebuilt the full BerlinTools card icon family from ChatGPT browser-generated sheets and uploaded the 50-tool standard set to Wix Media.
