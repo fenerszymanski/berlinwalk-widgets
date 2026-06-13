@@ -23,6 +23,7 @@ class BWFAQElement extends HTMLElement {
 
   connectedCallback() {
     this._controller = new AbortController();
+    this._ensureAnchorId();
     this._renderLoading();
     this._loadDataAndRender();
   }
@@ -36,7 +37,10 @@ class BWFAQElement extends HTMLElement {
 
   attributeChangedCallback(name, oldValue, newValue) {
     if (oldValue === newValue || !this.isConnected || !this._data) return;
-    if (name === 'post' || name === 'heading') this._renderFromData();
+    if (name === 'post' || name === 'heading') {
+      this._ensureAnchorId();
+      this._renderFromData();
+    }
   }
 
   async _loadDataAndRender() {
@@ -82,6 +86,31 @@ class BWFAQElement extends HTMLElement {
     this._appendSchema();
     this._setupInteractions();
     this._setupAnimations();
+    this._scrollIntoViewIfTargeted();
+  }
+
+  _ensureAnchorId() {
+    if ((this.getAttribute('post') || 'home') === 'home' && !this.id) {
+      this.id = 'faq';
+    }
+  }
+
+  _scrollIntoViewIfTargeted() {
+    if ((this.getAttribute('post') || 'home') !== 'home') return;
+    if (window.location.hash !== '#faq') return;
+
+    let attempts = 0;
+    const scrollToTarget = () => {
+      if (this.isConnected && window.location.hash === '#faq') {
+        this.scrollIntoView({ block: 'start', behavior: 'auto' });
+      }
+      attempts += 1;
+      if (attempts < 48 && window.location.hash === '#faq') {
+        window.setTimeout(scrollToTarget, 250);
+      }
+    };
+
+    window.requestAnimationFrame(scrollToTarget);
   }
 
   _renderLoading() {

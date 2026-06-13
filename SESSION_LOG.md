@@ -2,6 +2,26 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (Footer link refresh)
+
+**Did:** Audited the live global footer links and target-page content, then refreshed stale/redundant items and fixed the FAQ anchor.
+
+**Changed:**
+- `site-footer/site-footer-element.js` — footer `Berlin Hacks` label is now `Berlin Tools`; Practical Berlin replaces duplicate `Meeting Point Map` with `Berlin City Tax`.
+- `faq/faq-element.js` — homepage FAQ custom element assigns `id="faq"` and repeatedly scrolls into view for `/#faq` so Wix layout shifts do not leave users above the section.
+- `../berlinwalk-footer-social-links.html`, `../scripts/update-footer-social-links-embed.mjs` — live Wix patch source/updater now also handles footer link refresh and FAQ scroll.
+- `../berlinwalk-booking-funnel-hotfix.html`, `../scripts/update-booking-funnel-hotfix-embed.mjs` — booking flow hotfix now corrects the stale `Custom Booking Calendar` browser title/meta/canonical on the footer's `Book Now` target page.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — recorded live revision and push requirement.
+- Wix: updated Custom Embed `BerlinWalk Footer Social Links` (`57ef17ae-2f85-468a-9967-fd11227bef77`) to revision 3.
+- Wix: updated Custom Embed `BerlinWalk Booking Funnel Hotfix` (`c6a6090d-3177-43ab-88a7-877abe438912`) to revision 8.
+
+**QA:** All live internal footer URLs returned 200 and rendered meaningful target content. Live homepage footer now shows `Berlin Tools` and `Berlin City Tax`, not `Berlin Hacks` or `Meeting Point Map`; social row count is 1. Live `/#faq` QA with cache-bust scrolled to the FAQ (`faqTop=0`). Live booking page now shows `Book Your Free Berlin Walking Tour | BerlinWalk`, no old `Custom Booking Calendar` title, correct meta/canonical, and the calendar still renders. Mobile 390px live footer overflow was `0`. Local `node --check` passed for footer/FAQ/update scripts, local footer preview and FAQ anchor test passed, and `git diff --check` passed.
+
+**Opened:** Push/deploy this repo so GitHub Pages serves the footer link refresh and FAQ anchor fix durably; the live Wix Custom Embed already patches current production.
+**Closed:** Footer link/content refresh is live via Wix patch and ready locally for durable deploy.
+
+**Next session should:** After push, cold-load the live homepage footer and `/#faq`; keep the patch enabled unless duplicate behavior appears.
+
 ## 2026-06-13 — Codex (Booking calendar UTM preservation)
 
 **Did:** Checked the published direct booking campaign UTM chain and fixed a local creative-level attribution weakness in the reusable booking calendar.

@@ -17,7 +17,8 @@ const BW_SITE_FOOTER_LINKS = {
   transport: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   stay: 'https://www.berlinwalk.com/post/where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
   bestTime: 'https://www.berlinwalk.com/post/what-s-the-best-time-to-visit-berlin-a-month-by-month-guide',
-  airport: 'https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way'
+  airport: 'https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
+  cityTax: 'https://www.berlinwalk.com/post/berlin-city-tax'
 };
 
 const BW_SITE_FOOTER_SOCIAL_LINKS = [
@@ -431,7 +432,7 @@ class BWSiteFooterElement extends HTMLElement {
               ['The Guide', BW_SITE_FOOTER_LINKS.guide],
               ['Blog', BW_SITE_FOOTER_LINKS.blog],
               ['Berlin Trip Planner', BW_SITE_FOOTER_LINKS.planner],
-              ['Berlin Hacks', BW_SITE_FOOTER_LINKS.tools],
+              ['Berlin Tools', BW_SITE_FOOTER_LINKS.tools],
               ['Embed Berlin Tools', BW_SITE_FOOTER_LINKS.widgets],
               ['Instagram', BW_SITE_FOOTER_LINKS.instagram]
             ])}
@@ -441,7 +442,7 @@ class BWSiteFooterElement extends HTMLElement {
               ['Where to Stay', BW_SITE_FOOTER_LINKS.stay],
               ['Best Time to Visit', BW_SITE_FOOTER_LINKS.bestTime],
               ['Airport to Alexanderplatz', BW_SITE_FOOTER_LINKS.airport],
-              ['Meeting Point Map', BW_SITE_FOOTER_LINKS.meetingPoint]
+              ['Berlin City Tax', BW_SITE_FOOTER_LINKS.cityTax]
             ])}
           </div>
 
