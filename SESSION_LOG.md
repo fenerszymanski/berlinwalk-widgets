@@ -2,6 +2,21 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (Trip Planner second post-push QA)
+
+**Did:** Re-tested live `/berlin-trip-planner` after Yusuf pushed again.
+
+**Changed:**
+- `../SESSION_LOG.md`, `../PROJECT_MEMORY.md`, automation memory — recorded the repeated live QA.
+- Wix Data: deleted 7 live test `TripPlannerEvents` rows tagged `utm_content=codex_second_push_20260613`; remaining test rows `0`.
+
+**QA:** `origin/main` matched local `main` at `4fe2337`, GitHub Pages still served the form-first `is-page-embed` widget HTML, and 390px live mobile QA passed. Iframe starts directly on `Arrival date`, duplicate internal hero is gone, hero CTA scrolls iframe to `top=1`, overflow is `0`, parent `dataLayer` receives `page_view/start/weather/details_view/build_click/result/gate_view`, and console has no errors.
+
+**Opened:** Monitor real paid traffic for engaged starts/builds, not raw widget-load starts.
+**Closed:** Second post-push live QA confirmed the fix remains live.
+
+**Next session should:** Review dashboard metrics after new Meta sessions accrue.
+
 ## 2026-06-13 — Codex (Trip Planner post-push live QA passed)
 
 **Did:** Re-tested live `/berlin-trip-planner` after Yusuf pushed the missing widget commit.
