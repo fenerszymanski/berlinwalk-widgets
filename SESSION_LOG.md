@@ -2,6 +2,21 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (Booking calendar UTM preservation)
+
+**Did:** Checked the published direct booking campaign UTM chain and fixed a local creative-level attribution weakness in the reusable booking calendar.
+
+**Changed:**
+- `booking-calendar/booking-calendar-element.js` — `_bookingHref()` now preserves incoming `utm_content` when building `/booking-form` links and only falls back to `booking_calendar` when no incoming content exists.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — recorded that campaign-level and landing-page tracking are aligned, and this widget fix still needs push/deploy.
+
+**QA:** `node --check booking-calendar/booking-calendar-element.js` passed. Meta readback showed all 8 direct booking ads active with matching campaign/content/term URL tags, and Wix `PaidFunnelEvents` already had 16 landing-page rows under `bw_booking_direct_conversion_jun2026` split across the four `bd_*` creative slugs and both ad set terms. Live GitHub Pages still serves the old calendar JS, so this fix is not live until push.
+
+**Opened:** Push `berlinwalk-widgets` and verify the deployed `booking-calendar-element.js` no longer sets `utm_content=booking_calendar` before copying incoming UTMs.
+**Closed:** Local booking calendar now preserves ad creative UTM content through the booking-form link.
+
+**Next session should:** After deploy, click a live paid-landing calendar link with a test UTM and confirm `/booking-form` keeps the original `utm_content`.
+
 ## 2026-06-13 — Codex (City Tax icon standard fix)
 
 **Did:** Replaced the Berlin City Tax Calculator card icon with a matching BerlinTools glossy 3D icon and tightened future icon rules.

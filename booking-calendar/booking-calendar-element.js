@@ -916,15 +916,14 @@ class BWBookingCalendarElement extends HTMLElement {
       if (slot.locationId) url.searchParams.set('bookings_locationId', slot.locationId);
       if (slot.sessionId || slot.eventId) url.searchParams.set('bookings_sessionId', slot.sessionId || slot.eventId);
     }
-    url.searchParams.set('utm_content', 'booking_calendar');
-
     const incoming = new URL(window.location.href);
-    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'].forEach((param) => {
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'].forEach((param) => {
       if (incoming.searchParams.has(param)) url.searchParams.set(param, incoming.searchParams.get(param));
     });
     if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
     if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'booking_calendar');
     if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', 'direct_booking');
+    if (!url.searchParams.has('utm_content')) url.searchParams.set('utm_content', 'booking_calendar');
     return url.toString();
   }
 
