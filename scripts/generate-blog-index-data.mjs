@@ -52,10 +52,11 @@ const TOPICS = [
       'shopping-in-berlin',
       'what-is-a-spati-berlin',
       'pfand-in-germany',
+      'berlin-city-tax',
       'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
     ],
-    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|pfand|deposit|bottle return|recycling|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
+    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|city tax|accommodation tax|hotel tax|tourist tax|pfand|deposit|bottle return|recycling|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
   },
   {
     key: 'free-budget',
@@ -183,6 +184,7 @@ const REQUIRED_SLUGS = [
   'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
   '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
   'pfand-in-germany',
+  'berlin-city-tax',
 ];
 
 const START_HERE_LINKS = [
@@ -437,6 +439,7 @@ function relatedToolSlugFor(post) {
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
   if (/(welcomecard)/.test(s)) return 'welcomecard-calculator';
+  if (/(city-tax|city tax|accommodation-tax|accommodation tax|hotel-tax|hotel tax|tourist-tax|tourist tax)/.test(s)) return 'berlin-city-tax-calculator';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(pfand|bottle-deposit|bottle deposit|deposit bottle|bottle-return|bottle return|recycling)/.test(s)) return 'berlin-pfand-calculator';
   if (/(shopping|shop|flea-market|vintage|souvenir)/.test(s)) return 'berlin-shopping-areas';

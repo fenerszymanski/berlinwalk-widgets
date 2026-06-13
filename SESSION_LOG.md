@@ -2,6 +2,23 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (City Tax post-publish index)
+
+**Did:** Finished post-publish follow-up for the live Berlin City Tax article.
+
+**Changed:**
+- `scripts/generate-blog-index-data.mjs` — added `berlin-city-tax` to Practical Berlin rules/required slugs and mapped City Tax/accommodation tax terms to `berlin-city-tax-calculator`.
+- `blog-index/data.json` — regenerated from live Wix Blog with 120 posts; City Tax is Latest #1, All Posts #1, and in the Practical Berlin shelf.
+- `output/qa/faq-seo-audit-city-tax-live-20260613.md` — saved live FAQ audit output.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md`, automation memory — recorded post-publish verification and new visual-source preference.
+
+**QA:** Live post HTML contains Quick Summary, calculator, FAQ, `faq/inject.js`, canonical, robots `max-image-preview:large`, and title keyword. GitHub Pages serves `berlin-city-tax-calculator/`, `quick-summary/`, `faq/`, and `faq/inject.js`; the live injector includes `berlin-city-tax`. `git diff --check` passed.
+
+**Opened:** Push/deploy needed for the refreshed `/blog` index data and generator rules.
+**Closed:** City Tax live post has working deployed widget/QS/FAQ assets.
+
+**Next session should:** After push, verify `/blog` shows City Tax in Latest and Practical Berlin.
+
 ## 2026-06-13 — Codex (Trip Planner second post-push QA)
 
 **Did:** Re-tested live `/berlin-trip-planner` after Yusuf pushed again.
