@@ -488,6 +488,14 @@
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pfand-calculator/",
       "embedHeight": 760,
       "image": "https://static.wixstatic.com/media/5a08a3_098bc194854f41929e8aa4c96e0d95d3~mv2.png"
+    },
+    {
+      "slug": "berlin-city-tax-calculator",
+      "title": "Berlin City Tax Calculator",
+      "lead": "Estimate Berlin's 7.5% accommodation tax for hotels, hostels and apartments before you check in.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-city-tax-calculator/",
+      "embedHeight": 760
     }
   ]
 }

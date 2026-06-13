@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin City Tax Calculator | BerlinWalk</title>
+  <meta name="description" content="Estimate Berlin's 7.5% accommodation tax for hotels, hostels and apartments before you check in.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-city-tax">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-city-tax {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-city-tax *,
+    #bw-city-tax *::before,
+    #bw-city-tax *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-city-tax .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-city-tax .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.12)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 18px 20px;
+    }
+
+    #bw-city-tax .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-city-tax h2,
+    #bw-city-tax h3,
+    #bw-city-tax p {
+      margin-top: 0;
+    }
+
+    #bw-city-tax .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-city-tax .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-city-tax .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-city-tax .bw-panel,
+    #bw-city-tax .bw-result {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-city-tax .bw-form {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    #bw-city-tax .bw-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-city-tax label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-city-tax .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-city-tax input,
+    #bw-city-tax select {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 850;
+      min-height: 44px;
+      padding: 9px 10px;
+      width: 100%;
+    }
+
+    #bw-city-tax input:focus-visible,
+    #bw-city-tax select:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-city-tax .bw-note {
+      background: var(--bw-soft);
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-city-tax .bw-result {
+      align-self: start;
+      border-color: rgba(27, 94, 32, 0.25);
+      position: sticky;
+      top: 12px;
+    }
+
+    #bw-city-tax .bw-badge {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      padding: 5px 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-city-tax .bw-total {
+      color: var(--bw-green);
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1;
+      margin: 0 0 8px;
+    }
+
+    #bw-city-tax .bw-copy {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0 0 12px;
+    }
+
+    #bw-city-tax .bw-breakdown {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-city-tax .bw-line {
+      align-items: center;
+      background: var(--bw-soft);
+      border: 1px solid rgba(124, 179, 66, 0.26);
+      border-radius: 8px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 9px 10px;
+    }
+
+    #bw-city-tax .bw-line span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    #bw-city-tax .bw-line strong {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    #bw-city-tax .bw-footer {
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin-top: 12px;
+      padding-top: 10px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-city-tax .bw-body {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-city-tax .bw-result {
+        position: static;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-city-tax {
+        margin: 22px 0;
+      }
+
+      #bw-city-tax .bw-head {
+        padding: 16px 18px;
+      }
+
+      #bw-city-tax .bw-title {
+        font-size: 22px;
+      }
+
+      #bw-city-tax .bw-body {
+        gap: 12px;
+        padding: 14px;
+      }
+
+      #bw-city-tax .bw-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-city-tax .bw-total {
+        font-size: 36px;
+      }
+    }
+  </style>
+
+  <section class="bw-wrap" aria-label="Berlin City Tax calculator">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk.com • Money tool</p>
+      <h2 class="bw-title">Berlin City Tax Calculator</h2>
+      <p class="bw-sub">Estimate the 7.5% Berlin accommodation tax on hotels, hostels, guesthouses and short-stay apartments before the invoice surprise.</p>
+    </header>
+
+    <div class="bw-body">
+      <div class="bw-panel">
+        <form class="bw-form" onsubmit="return false;">
+          <div class="bw-grid">
+            <label>
+              <span class="bw-label">Room price per night</span>
+              <input data-field="price" type="number" min="0" step="1" value="120" inputmode="decimal" aria-label="Room price per night in euros">
+            </label>
+            <label>
+              <span class="bw-label">Price type</span>
+              <select data-field="priceType" aria-label="Whether your price is net or gross">
+                <option value="gross">Gross, including 7% VAT</option>
+                <option value="net">Net room price</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="bw-grid">
+            <label>
+              <span class="bw-label">Nights</span>
+              <input data-field="nights" type="number" min="1" step="1" value="3" inputmode="numeric" aria-label="Number of nights">
+            </label>
+            <label>
+              <span class="bw-label">Rooms</span>
+              <input data-field="rooms" type="number" min="1" step="1" value="1" inputmode="numeric" aria-label="Number of rooms">
+            </label>
+          </div>
+
+          <div class="bw-grid">
+            <label>
+              <span class="bw-label">Breakfast/extras per night</span>
+              <input data-field="extras" type="number" min="0" step="1" value="0" inputmode="decimal" aria-label="Breakfast and extra services per night">
+            </label>
+            <label>
+              <span class="bw-label">Traveler type</span>
+              <select data-field="traveler" aria-label="Traveler type">
+                <option value="normal">Regular visitor</option>
+                <option value="school">School or study trip</option>
+                <option value="ask">Not sure, ask the hotel</option>
+              </select>
+            </label>
+          </div>
+
+          <p class="bw-note">Berlin calculates City Tax on the net accommodation price, not on breakfast or hotel extras. If your booking page only shows a gross price, this tool first removes the usual 7% accommodation VAT estimate.</p>
+        </form>
+      </div>
+
+      <aside class="bw-result" aria-live="polite">
+        <span class="bw-badge">Estimated tax</span>
+        <p class="bw-total" data-field="taxTotal">EUR 25.23</p>
+        <h3 data-field="resultTitle">Likely invoice add-on</h3>
+        <p class="bw-copy" data-field="resultCopy">For this stay, expect roughly EUR 25.23 in Berlin City Tax. The hotel or host collects it and shows it on the invoice.</p>
+        <div class="bw-breakdown">
+          <div class="bw-line"><span>Taxable net stay</span><strong data-field="baseTotal">EUR 336.45</strong></div>
+          <div class="bw-line"><span>Rate used</span><strong>7.5%</strong></div>
+          <div class="bw-line"><span>Per night average</span><strong data-field="perNight">EUR 8.41</strong></div>
+        </div>
+        <p class="bw-footer" data-field="caveat">This is a planning estimate, not tax advice. The final invoice depends on how your accommodation itemizes room price, VAT, breakfast and extras.</p>
+      </aside>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-city-tax');
+      var fields = {
+        price: root.querySelector('[data-field="price"]'),
+        priceType: root.querySelector('[data-field="priceType"]'),
+        nights: root.querySelector('[data-field="nights"]'),
+        rooms: root.querySelector('[data-field="rooms"]'),
+        extras: root.querySelector('[data-field="extras"]'),
+        traveler: root.querySelector('[data-field="traveler"]'),
+        taxTotal: root.querySelector('[data-field="taxTotal"]'),
+        baseTotal: root.querySelector('[data-field="baseTotal"]'),
+        perNight: root.querySelector('[data-field="perNight"]'),
+        resultTitle: root.querySelector('[data-field="resultTitle"]'),
+        resultCopy: root.querySelector('[data-field="resultCopy"]'),
+        caveat: root.querySelector('[data-field="caveat"]')
+      };
+
+      function money(value) {
+        return 'EUR ' + Math.max(0, value).toFixed(2);
+      }
+
+      function num(input, fallback) {
+        var value = parseFloat(input.value);
+        return Number.isFinite(value) ? Math.max(0, value) : fallback;
+      }
+
+      function calculate() {
+        var price = num(fields.price, 0);
+        var nights = Math.max(1, Math.round(num(fields.nights, 1)));
+        var rooms = Math.max(1, Math.round(num(fields.rooms, 1)));
+        fields.nights.value = nights;
+        fields.rooms.value = rooms;
+
+        var extras = num(fields.extras, 0);
+        var netNight = fields.priceType.value === 'gross' ? price / 1.07 : price;
+        var netExtras = fields.priceType.value === 'gross' ? extras / 1.07 : extras;
+        var taxablePerRoomNight = Math.max(0, netNight - netExtras);
+        var baseTotal = taxablePerRoomNight * nights * rooms;
+        var tax = baseTotal * 0.075;
+        var perNight = tax / nights / rooms;
+
+        fields.taxTotal.textContent = money(tax);
+        fields.baseTotal.textContent = money(baseTotal);
+        fields.perNight.textContent = money(perNight);
+
+        if (fields.traveler.value === 'school') {
+          fields.resultTitle.textContent = 'Check before you pay';
+          fields.resultCopy.textContent = 'School and study trips can have special paperwork. Ask the accommodation before arrival, because the normal tourist invoice may still show City Tax.';
+          fields.caveat.textContent = 'Berlin has official City Tax forms for school and study trips. The hotel decides what documentation it needs before removing or correcting the charge.';
+        } else if (fields.traveler.value === 'ask') {
+          fields.resultTitle.textContent = 'Ask for the itemized base';
+          fields.resultCopy.textContent = 'This estimate is useful, but the clean answer is on the hotel invoice: net room price, breakfast/extras, and City Tax should be separated.';
+          fields.caveat.textContent = 'If the number looks too high, ask whether breakfast, cleaning or other extras were accidentally included in the taxable room base.';
+        } else {
+          fields.resultTitle.textContent = 'Likely invoice add-on';
+          fields.resultCopy.textContent = 'For this stay, expect roughly ' + money(tax) + ' in Berlin City Tax. The hotel or host collects it and shows it on the invoice.';
+          fields.caveat.textContent = 'This is a planning estimate, not tax advice. The final invoice depends on how your accommodation itemizes room price, VAT, breakfast and extras.';
+        }
+
+        if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.postResize === 'function') {
+          window.BerlinWalkBrand.postResize();
+        }
+      }
+
+      ['input', 'change'].forEach(function (eventName) {
+        root.addEventListener(eventName, calculate);
+      });
+      calculate();
+    })();
+  </script>
+</div>
+</body>
+</html>

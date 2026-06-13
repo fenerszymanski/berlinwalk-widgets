@@ -1791,5 +1791,35 @@
         "a": "The cleanest option is to hand it directly to a bottle collector or use a proper bottle holder where one exists. Do not throw deposit bottles deep into public bins, and do not leave broken glass or blocked pavements."
       }
     ]
+  },
+  "berlin-city-tax": {
+    "title": "Berlin City Tax FAQ",
+    "subtitle": "Quick answers about Berlin accommodation tax for tourists.",
+    "items": [
+      {
+        "q": "What is Berlin City Tax?",
+        "a": "Berlin City Tax is the local accommodation tax on paid overnight stays in Berlin. You may also see it called accommodation tax, bed tax, tourism tax or Übernachtungssteuer."
+      },
+      {
+        "q": "How much is Berlin City Tax in 2026?",
+        "a": "The current rate is **7.5% of the net overnight accommodation price**. It should be calculated on the room or bed price, not on breakfast or other hotel extras."
+      },
+      {
+        "q": "Do tourists pay Berlin City Tax at hotels and hostels?",
+        "a": "Yes. Normal leisure visitors should expect to pay it when staying in paid Berlin accommodation such as hotels, hostels, guesthouses, youth hostels or short-stay apartments."
+      },
+      {
+        "q": "Is Berlin City Tax included when I book online?",
+        "a": "Sometimes. Some booking pages include it in the total, while others say local tax is payable at the property. Check the final price breakdown and the hotel invoice."
+      },
+      {
+        "q": "Is Berlin City Tax the same as VAT?",
+        "a": "No. VAT and City Tax are separate. Berlin City Tax is calculated from the net overnight accommodation price, which is why it may not equal 7.5% of the headline gross booking price."
+      },
+      {
+        "q": "Can I avoid Berlin City Tax by booking an apartment instead of a hotel?",
+        "a": "Usually no. The tax applies broadly to paid short-term accommodation in Berlin, including hotels, hostels, guesthouses and private short-stay accommodation."
+      }
+    ]
   }
 }

@@ -2,6 +2,72 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (Trip Planner paid-start regression tested)
+
+**Did:** Tested Yusuf's concern that Trip Planner starts dropped to zero after the two-step change, then applied a local conversion-path fix.
+
+**Changed:**
+- `ultimate-berlin-trip-planner/index.html` — detects the `/berlin-trip-planner` page embed via `source=berlin_trip_planner_page` / `parent_path=/berlin-trip-planner` and hides the duplicate internal widget hero so the form starts immediately inside the iframe.
+- `berlin-trip-planner-page/berlin-trip-planner-page-element.js` — hero `Build my plan` anchors now scroll directly to the widget shell instead of the wrapper section heading.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — recorded the test and pending deploy note.
+
+**QA:** Live test showed the technical chain works: direct widget and Wix wrapper both emit `details_view`, `build_click`, `gate_view`, and `result` into tracking when clicked. The real problem was UX depth: live mobile first load had the iframe at `top=1360px`, and after hero CTA the iframe still sat at `top=353px` with a second internal hero before the form. Local fixed preview at 390px moves the iframe to `top=1px` after hero CTA and starts the iframe on `Arrival date`; parent `dataLayer` still receives `page_view/start/weather/details_view/build_click/gate_view/result`, and horizontal overflow is `0`. Test TripPlannerEvents rows with `utm_content=codex_live_test` / `codex_live_wrapper` were deleted from Wix; remaining test rows `0`. Inline JS parse and `git diff --check` passed for the touched files.
+
+**Opened:** Push/deploy `berlinwalk-widgets`; live Wix still has the old deeper paid-start path until GitHub Pages updates.
+**Closed:** The zero-start drop was not a broken click handler or event bridge; it was mostly the paid page burying the actual start behind scroll + duplicate iframe hero + extra click.
+
+**Next session should:** After push, cache-bust `/berlin-trip-planner` and verify mobile hero CTA lands with the planner form immediately visible.
+
+## 2026-06-13 — Codex (World Cup score automation reduced)
+
+**Did:** Reduced the World Cup fixture score updater to three daily runs.
+
+**Changed:**
+- `/Users/yusufucuz/.codex/automations/berlinwalk-worldcup-fixtures-update/automation.toml` — now runs at `08:30`, `16:30`, and `23:30` Europe/Berlin.
+- `/Users/yusufucuz/.codex/automations/berlinwalk-worldcup-fixtures-update-0400/automation.toml` — old 04:00 edge-slot automation is `PAUSED`.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — mirrored durable status.
+
+**QA:** Checked TOML status/rrule shape after edits; the active prompt now prioritizes due scores from the last 10 hours to fit the three daily runs. No widget files were changed for this scheduling-only update.
+
+**Opened:** Existing unpushed widget score changes still need push/deploy before live users see them.
+**Closed:** Half-hour score polling is replaced by three daily checks.
+
+**Next session should:** Use the active three-run automation for future score additions.
+
+## 2026-06-13 — Codex (World Cup USA-Paraguay score added)
+
+**Did:** Added United States 4-1 Paraguay as the fourth completed FIFA World Cup fixture result.
+
+**Changed:**
+- `worldcup-fixtures/index.html` — updated `SCORE_UPDATED` to `13 Jun 2026, 05:31 CEST` and changed United States vs Paraguay to `[4,1,'FT']`.
+- `../SESSION_LOG.md` — mirrored the score update.
+
+**QA:** Due-window check found only the 03:00 Berlin kick-off as newly score-check-due. FIFA match centre was checked but did not expose a final score in accessible HTML; AP, Guardian, and U.S. Soccer all matched on `4-1`. Inline M-array smoke returned 72 fixtures, 4 scored rows, and no overdue unscored rows. Extracted script syntax passed; Playwright local QA at 1280px and 390px showed 4 `.bw-match.final` rows and overflow `0`. `git diff --check` passed.
+
+**Opened:** Push/deploy still needed for GitHub Pages/live Wix to show the fourth score.
+**Closed:** United States-Paraguay score is added locally.
+
+**Next session should:** Keep the automation no-op unless another match is final and past kick-off + about 2h30.
+
+## 2026-06-13 — Codex (Berlin City Tax draft/tool)
+
+**Did:** Built the daily blog draft widget package for `Berlin City Tax: What Tourists Pay on Hotels in 2026`.
+
+**Changed:**
+- `berlin-city-tax-calculator/index.html` — new responsive calculator for Berlin's 7.5% accommodation tax, with gross/net price handling and mobile-safe layout.
+- `blog-drafts/berlin-city-tax.md` — full local Wix Blog markdown draft with Quick Summary, calculator, FAQ, official source links, image credits, and internal links.
+- `blog-drafts/images/berlin-city-tax/` — raw and optimized Wikimedia Commons images plus `visual-sources.md`.
+- `quick-summary/data.json`, `faq/data.json`, `faq/slug-map.json`, `faq/inject.js` — added `berlin-city-tax` data and regenerated parent-page FAQ JSON-LD.
+- `tools-hub/data.json` — added `berlin-city-tax-calculator` under Money; not added to `tools-home`.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md` — recorded Wix draft/tool IDs and push requirement.
+
+**QA:** Local browser QA at 1280px and 390px passed for the calculator: correct EUR 25.23 default estimate, attribution badge present, horizontal overflow `0`, console errors `0`. Local Quick Summary and FAQ URLs render 5 items / 6 questions on mobile with overflow `0`. `node scripts/audit-faq-seo.mjs` passed with no missing slug refs or Markdown leaks.
+
+**Opened:** Push/deploy required before GitHub Pages serves the new widget and updated QS/FAQ/tool data to the Wix draft embeds.
+**Closed:** Local widget/data package for the City Tax draft is complete.
+
+**Next session should:** After push, cold-load `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-city-tax-calculator/?cb=YYYYMMDD` and verify `/tools/berlin-city-tax-calculator`.
+
 ## 2026-06-12 — Codex (World Cup score-slot automation)
 
 **Did:** Changed the World Cup score updater from daily 08:30 polling to expected post-match score-check slots.

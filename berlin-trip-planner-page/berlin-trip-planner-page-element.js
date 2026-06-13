@@ -268,7 +268,10 @@
           const target = this.querySelector(link.getAttribute('href'));
           if (!target) return;
           event.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const scrollTarget = target.id === 'planner'
+            ? target.querySelector('.bw-trip-widget-shell') || target
+            : target;
+          scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
       });
     }

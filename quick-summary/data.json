@@ -854,5 +854,17 @@
       "Return bottles at a supermarket **Pfandautomat** or a Getränkemarkt, then redeem the printed voucher at the checkout.",
       "If a machine rejects a bottle, try a bigger supermarket or drinks market. Damaged labels, crushed bottles and foreign bottles often fail."
     ]
+  },
+  "berlin-city-tax": {
+    "title": "Berlin City Tax - Quick Summary",
+    "icon": "EUR",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**Berlin City Tax** is the local accommodation tax on paid overnight stays in Berlin hotels, hostels, guesthouses and short-stay apartments.",
+      "As of 2026, the rate is **7.5% of the net overnight accommodation price**, not the full gross booking price.",
+      "**Breakfast and other hotel extras** should not be part of the taxable City Tax base.",
+      "The accommodation provider collects the tax through the invoice. It may be included in the booking total or added at check-in/check-out.",
+      "Use the calculator below to estimate the likely add-on before you book, then check the hotel invoice for the final itemized number."
+    ]
   }
 }
