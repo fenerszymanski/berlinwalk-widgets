@@ -2,6 +2,21 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (Trip Planner post-push live QA passed)
+
+**Did:** Re-tested live `/berlin-trip-planner` after Yusuf pushed the missing widget commit.
+
+**Changed:**
+- `../SESSION_LOG.md`, `../PROJECT_MEMORY.md`, automation memory — recorded the successful post-push QA.
+- Wix Data: deleted 7 live test `TripPlannerEvents` rows tagged `utm_content=codex_after_push_20260613`; remaining test rows `0`.
+
+**QA:** `origin/main` now matches local `main`; GitHub Pages serves `ultimate-berlin-trip-planner/index.html` with `is-page-embed` (`Last-Modified: 2026-06-13 05:43:11 GMT`). Mobile live QA at 390px passed: iframe starts directly at `Arrival date`, duplicate internal hero is gone, hero CTA scrolls to iframe `top≈1px`, overflow is `0`, and parent `dataLayer` received `page_view/start/weather/details_view/build_click/gate_view/result`. Console had no errors, only Wix preload warnings.
+
+**Opened:** Monitor real paid sessions for engaged starts/builds; raw `bw_trip_planner_start` is still a widget-load event, not a true engagement event.
+**Closed:** Post-push live Trip Planner form-first path is verified.
+
+**Next session should:** Review the Trip Planner dashboard after fresh traffic and compare passive loads with engaged starts/builds.
+
 ## 2026-06-13 — Codex (Trip Planner live publish QA)
 
 **Did:** Re-tested the live Wix `/berlin-trip-planner` page after Yusuf said it was published.
