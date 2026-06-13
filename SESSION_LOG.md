@@ -2,6 +2,21 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (Trip Planner live publish QA)
+
+**Did:** Re-tested the live Wix `/berlin-trip-planner` page after Yusuf said it was published.
+
+**Changed:**
+- `../SESSION_LOG.md`, `../PROJECT_MEMORY.md`, automation memory — recorded the live QA result.
+- Wix Data: deleted 3 live test `TripPlannerEvents` rows tagged `utm_content=codex_after_publish_20260613`; remaining test rows `0`.
+
+**QA:** Mobile 390px live QA showed the wrapper hero `Build my plan` CTA now scrolls to the iframe top (`top≈1px`), but the live GitHub Pages widget HTML still lacks the local `is-page-embed` change and still shows the duplicate internal `Ultimate Berlin Trip Planner` hero before the form. `main` is clean locally but `main...origin/main [ahead 1]`; commit `eb6942d Update index.html` has the missing `ultimate-berlin-trip-planner/index.html` fix.
+
+**Opened:** Push `eb6942d` to GitHub, wait for GitHub Pages, cache-bust the live page, then verify the iframe begins directly at `Arrival date`. Review that `bw_trip_planner_start` currently fired on first widget load during QA, before a manual click.
+**Closed:** Confirmed the remaining live issue is deploy/push state, not a new Wix wrapper break.
+
+**Next session should:** Push/sync the ahead commit and re-run the mobile live QA.
+
 ## 2026-06-13 — Codex (Trip Planner paid-start regression tested)
 
 **Did:** Tested Yusuf's concern that Trip Planner starts dropped to zero after the two-step change, then applied a local conversion-path fix.
