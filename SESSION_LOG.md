@@ -2,6 +2,22 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (City Tax icon standard fix)
+
+**Did:** Replaced the Berlin City Tax Calculator card icon with a matching BerlinTools glossy 3D icon and tightened future icon rules.
+
+**Changed:**
+- `tools-home/icons/` — added City Tax 512/160 RGBA PNGs, ChatGPT browser source output, prompt note, standard-set copies, manifest entries, and Wix Media upload cache/summary.
+- `tools-hub/data.json` — wired `berlin-city-tax-calculator` to the uploaded Wix Media icon URL.
+- `AGENTS.md`, `../BERLINWALK_BRAND_REFERENCE.md`, `../PROJECT_MEMORY.md`, automation memory — recorded that BerlinTools icons are mandatory and must match the single glossy 3D family.
+
+**QA:** Final selected icon has transparent/cream corners, no black vignette, no text/letters/numbers, 512/160 RGBA output, a green glossy tile, yellow medallion, and receipt/bed/percent motif matching Tip/Parking/Connectivity. Wix Media upload created `5a08a3_7b199fe54d6a4f9d86224419e105cc51~mv2.png`. Local tools hub QA found 51 cards, City Tax image loaded at 512x512 into a 56x56 card slot, and overflow was `0`. Wix Custom Embed `BerlinTools Layout Fixes` icon map updated to revision 18 with `berlin-city-tax-calculator`; live `/berlin-tools` verified the City Tax card now loads the new Wix Media icon at 512x512. JSON parse checks and `git diff --check` passed.
+
+**Opened:** Push/deploy still needed so the repo/data source includes the new icon and strict icon-rule updates; live `/berlin-tools` already shows the icon through the updated Wix embed.
+**Closed:** City Tax card now has a standard BerlinTools icon locally and in Wix Media.
+
+**Next session should:** After push, cold-load `/berlin-tools` and verify the City Tax card icon.
+
 ## 2026-06-13 — Codex (City Tax post-publish index)
 
 **Did:** Finished post-publish follow-up for the live Berlin City Tax article.

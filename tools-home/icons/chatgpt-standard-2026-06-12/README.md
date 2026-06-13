@@ -8,12 +8,14 @@ Files:
 - Original ChatGPT sheets live in `tools-home/icons/_src/chatgpt-standard-20260612/`.
 
 Design standard:
-- One family only: glossy 3D app-style icon tiles.
+- Strict rule: one family only. Every BerlinTools icon must use this glossy 3D app-style tile family.
 - Cream page background, rounded BerlinWalk green tile, centered yellow medallion.
 - One clear symbolic object per tool.
 - Avoid mixed photos, flat vectors, text-heavy icons, one-off colors, or AI sheets that cannot be cleanly cropped.
+- Final files must be RGBA PNGs with clean transparent/cream outer corners, no black/vignette corners, no visible text, and must remain readable at 64-160px.
+- For every new tool icon, save the source prompt/output, create canonical `tools-home/icons/<slug>.png` and `<slug>-160.png`, update both icon manifests, and wire the tool card image. Do not ship fallback letters or one-off visual styles.
 
-Tool count: 50
+Tool count: 51
 
 - `spati-survival-checker` - Späti Survival Checker (Maps)
 - `vegan-berlin-locations-map` - Vegan Berlin Interactive Map (Maps)
@@ -65,3 +67,4 @@ Tool count: 50
 - `christmas-markets-map` - Berlin Christmas Markets Map (Discovery)
 - `berlin-boat-tour-finder` - Berlin Boat Tour Finder (Discovery)
 - `berlin-pfand-calculator` - Berlin Pfand Calculator (Money)
+- `berlin-city-tax-calculator` - Berlin City Tax Calculator (Money)
