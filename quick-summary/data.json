@@ -866,5 +866,17 @@
       "The accommodation provider collects the tax through the invoice. It may be included in the booking total or added at check-in/check-out.",
       "Use the calculator below to estimate the likely add-on before you book, then check the hotel invoice for the final itemized number."
     ]
+  },
+  "taxi-in-berlin": {
+    "title": "Taxi in Berlin - Quick Summary",
+    "icon": "TAXI",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**Taxi in Berlin is convenient but rarely the cheapest option.** Public transport is the better default for most central sightseeing routes.",
+      "Official Berlin taxis use a **regulated meter tariff**: EUR 4.30 start, then distance-based kilometre rates and EUR 39 per hour waiting time.",
+      "For **BER Airport**, use only the signed taxi ranks outside Terminal 1. Berlin.de lists example airport rides around EUR 58 from Alexanderplatz and EUR 63 from the western city centre.",
+      "**Uber works in Berlin**, but often as a way to request licensed taxis or app-based rides with upfront pricing. Do not assume it is automatically cheaper.",
+      "Carry some cash, ask about card payment before the ride starts, and request a receipt if anything feels off."
+    ]
   }
 }

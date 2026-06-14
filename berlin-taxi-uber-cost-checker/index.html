@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Taxi or Uber Cost Checker | BerlinWalk</title>
+  <meta name="description" content="Estimate a Berlin taxi fare, compare it with public transport, and decide when Uber or a licensed taxi makes sense.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-taxi-checker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-taxi-checker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-taxi-checker *,
+    #bw-taxi-checker *::before,
+    #bw-taxi-checker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-taxi-checker .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      max-width: 100%;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-taxi-checker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.14)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 18px 20px;
+    }
+
+    #bw-taxi-checker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-taxi-checker h2,
+    #bw-taxi-checker h3,
+    #bw-taxi-checker p {
+      margin-top: 0;
+    }
+
+    #bw-taxi-checker .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-taxi-checker .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 600;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 780px;
+    }
+
+    #bw-taxi-checker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-taxi-checker .bw-panel,
+    #bw-taxi-checker .bw-result {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-taxi-checker .bw-form {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    #bw-taxi-checker .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-taxi-checker .bw-input-row {
+      align-items: center;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) 112px;
+    }
+
+    #bw-taxi-checker input[type="range"] {
+      accent-color: var(--bw-green);
+      display: block;
+      width: 100%;
+    }
+
+    #bw-taxi-checker input[type="number"],
+    #bw-taxi-checker select {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 800;
+      min-height: 44px;
+      padding: 9px 10px;
+      width: 100%;
+    }
+
+    #bw-taxi-checker .bw-options {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-taxi-checker button {
+      -webkit-tap-highlight-color: transparent;
+      font: inherit;
+    }
+
+    #bw-taxi-checker .bw-option {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      min-height: 58px;
+      padding: 9px 10px;
+      text-align: left;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      width: 100%;
+    }
+
+    #bw-taxi-checker .bw-option:hover {
+      background: var(--bw-soft);
+      border-color: var(--bw-lime);
+      transform: translateY(-1px);
+    }
+
+    #bw-taxi-checker .bw-option.is-active {
+      background: linear-gradient(135deg, var(--bw-yellow), #FFF78A);
+      border-color: var(--bw-green);
+      box-shadow: inset 0 0 0 1px rgba(27, 94, 32, 0.14);
+    }
+
+    #bw-taxi-checker .bw-option strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    #bw-taxi-checker .bw-option span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    #bw-taxi-checker .bw-option:focus-visible,
+    #bw-taxi-checker input:focus-visible,
+    #bw-taxi-checker select:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.8);
+      outline-offset: 2px;
+    }
+
+    #bw-taxi-checker .bw-result {
+      align-self: start;
+      border-color: rgba(27, 94, 32, 0.25);
+      position: sticky;
+      top: 12px;
+    }
+
+    #bw-taxi-checker .bw-badge {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      padding: 6px 9px;
+      text-transform: uppercase;
+    }
+
+    #bw-taxi-checker .bw-result-title {
+      color: var(--bw-green);
+      font-size: 21px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0 0 6px;
+    }
+
+    #bw-taxi-checker .bw-result-copy {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.55;
+      margin: 0 0 13px;
+    }
+
+    #bw-taxi-checker .bw-money-row {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-bottom: 12px;
+    }
+
+    #bw-taxi-checker .bw-money {
+      background: var(--bw-soft);
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-taxi-checker .bw-money span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.3;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-taxi-checker .bw-money strong {
+      color: var(--bw-text);
+      display: block;
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    #bw-taxi-checker .bw-callout {
+      background: #fffdf0;
+      border: 1px solid rgba(255, 230, 0, 0.7);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      padding: 10px;
+    }
+
+    #bw-taxi-checker .bw-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-taxi-checker .bw-list li {
+      color: var(--bw-muted);
+      display: grid;
+      font-size: 12px;
+      font-weight: 650;
+      gap: 7px;
+      grid-template-columns: 18px minmax(0, 1fr);
+      line-height: 1.45;
+      list-style: none;
+      min-width: 0;
+    }
+
+    #bw-taxi-checker .bw-list li::before {
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: var(--bw-yellow);
+      content: "✓";
+      display: inline-grid;
+      font-size: 10px;
+      font-weight: 900;
+      height: 18px;
+      line-height: 1;
+      place-items: center;
+      width: 18px;
+    }
+
+    #bw-taxi-checker .bw-note {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 12px 0 0;
+    }
+
+    @media (max-width: 760px) {
+      #bw-taxi-checker {
+        margin: 18px 0;
+      }
+
+      #bw-taxi-checker .bw-head {
+        padding: 16px;
+      }
+
+      #bw-taxi-checker .bw-title {
+        font-size: 22px;
+      }
+
+      #bw-taxi-checker .bw-body {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 14px;
+      }
+
+      #bw-taxi-checker .bw-options,
+      #bw-taxi-checker .bw-money-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #bw-taxi-checker .bw-result {
+        position: static;
+      }
+    }
+
+    @media (max-width: 430px) {
+      #bw-taxi-checker .bw-input-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+
+  <div class="bw-wrap">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk tool</p>
+      <h2 class="bw-title">Berlin Taxi or Uber Cost Checker</h2>
+      <p class="bw-sub">Estimate the official Berlin taxi meter, compare it with public transport, and decide when an app quote is worth checking.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Trip details">
+        <div class="bw-form">
+          <div>
+            <label class="bw-label" for="bw-distance">Trip distance</label>
+            <div class="bw-input-row">
+              <input id="bw-distance" type="range" min="1" max="35" step="1" value="9">
+              <input id="bw-distance-number" type="number" min="1" max="35" step="1" value="9" aria-label="Trip distance in kilometers">
+            </div>
+          </div>
+
+          <div>
+            <span class="bw-label">Trip type</span>
+            <div class="bw-options" role="group" aria-label="Trip type">
+              <button class="bw-option is-active" type="button" data-trip="city">
+                <strong>City ride</strong>
+                <span>Hotel, restaurant, museum, station</span>
+              </button>
+              <button class="bw-option" type="button" data-trip="airport">
+                <strong>BER airport</strong>
+                <span>Adds the official airport taxi surcharge</span>
+              </button>
+              <button class="bw-option" type="button" data-trip="late">
+                <strong>Late night</strong>
+                <span>Same taxi tariff, app availability can help</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <label class="bw-label" for="bw-passengers">Passengers</label>
+            <select id="bw-passengers">
+              <option value="1">1 person</option>
+              <option value="2" selected>2 people</option>
+              <option value="3">3 people</option>
+              <option value="4">4 people</option>
+              <option value="5">5 people, large taxi</option>
+              <option value="6">6 people, large taxi</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="bw-label" for="bw-traffic">Extra traffic or waiting time</label>
+            <div class="bw-input-row">
+              <input id="bw-traffic" type="range" min="0" max="30" step="5" value="5">
+              <input id="bw-traffic-number" type="number" min="0" max="30" step="5" value="5" aria-label="Extra traffic or waiting minutes">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="bw-result" aria-live="polite">
+        <span class="bw-badge" id="bw-verdict-badge">Taxi makes sense</span>
+        <h3 class="bw-result-title" id="bw-verdict-title">Use a taxi if luggage or timing matters.</h3>
+        <p class="bw-result-copy" id="bw-verdict-copy">For this trip, the taxi is much more expensive than transit but still reasonable if you are carrying bags, arriving late, or splitting the cost.</p>
+
+        <div class="bw-money-row">
+          <div class="bw-money">
+            <span>Estimated taxi meter</span>
+            <strong id="bw-taxi-price">EUR 31</strong>
+          </div>
+          <div class="bw-money">
+            <span>Public transport</span>
+            <strong id="bw-transit-price">EUR 8</strong>
+          </div>
+        </div>
+
+        <p class="bw-callout" id="bw-app-note">Check Uber or Free Now if you want upfront pricing, but use the official taxi rank at BER.</p>
+
+        <ul class="bw-list" id="bw-list">
+          <li>Official Berlin taxis use fixed city tariffs and a taximeter.</li>
+          <li>At BER, only use the signed taxi ranks outside Terminal 1.</li>
+          <li>Paper public transport tickets must be validated before travel.</li>
+        </ul>
+
+        <p class="bw-note">This is an estimate, not a live quote. Berlin taxi fares are metered, and app prices can change by time, traffic, vehicle type and availability.</p>
+      </aside>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-taxi-checker');
+      if (!root) return;
+
+      var state = {
+        distance: 9,
+        traffic: 5,
+        passengers: 2,
+        trip: 'city'
+      };
+
+      var els = {
+        distance: root.querySelector('#bw-distance'),
+        distanceNumber: root.querySelector('#bw-distance-number'),
+        traffic: root.querySelector('#bw-traffic'),
+        trafficNumber: root.querySelector('#bw-traffic-number'),
+        passengers: root.querySelector('#bw-passengers'),
+        options: Array.prototype.slice.call(root.querySelectorAll('.bw-option')),
+        badge: root.querySelector('#bw-verdict-badge'),
+        title: root.querySelector('#bw-verdict-title'),
+        copy: root.querySelector('#bw-verdict-copy'),
+        taxiPrice: root.querySelector('#bw-taxi-price'),
+        transitPrice: root.querySelector('#bw-transit-price'),
+        appNote: root.querySelector('#bw-app-note'),
+        list: root.querySelector('#bw-list')
+      };
+
+      function eur(value) {
+        return 'EUR ' + Math.round(value);
+      }
+
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, Number(value) || min));
+      }
+
+      function taxiFare(km, trafficMinutes, passengers, trip) {
+        var fare = 4.3;
+        fare += Math.min(km, 3) * 2.8;
+        fare += Math.max(0, Math.min(km - 3, 4)) * 2.6;
+        fare += Math.max(0, km - 7) * 2.1;
+        fare += trafficMinutes * 0.65;
+        if (trip === 'airport') fare += 1.5;
+        if (passengers >= 5) fare += passengers * 6;
+        return fare;
+      }
+
+      function transitFare(passengers, trip) {
+        return passengers * (trip === 'airport' ? 5 : 4);
+      }
+
+      function update() {
+        var taxi = taxiFare(state.distance, state.traffic, state.passengers, state.trip);
+        var transit = transitFare(state.passengers, state.trip);
+        var split = taxi / state.passengers;
+        var saving = taxi - transit;
+
+        els.taxiPrice.textContent = eur(taxi);
+        els.transitPrice.textContent = eur(transit);
+
+        if (state.trip === 'airport') {
+          els.badge.textContent = state.passengers >= 4 ? 'Split taxi is plausible' : 'Train is usually best';
+          els.title.textContent = state.passengers >= 4 ? 'Taxi can make sense for a full car from BER.' : 'Use the train unless luggage or mobility changes the decision.';
+          els.copy.textContent = 'An ABC public transport ticket is EUR 5 per person from BER. A taxi is easier door to door, but the train is usually the value choice for one to three people.';
+          els.appNote.textContent = 'At BER, ignore ride offers inside the terminal and use the official taxi ranks. Check an app only if it gives a clear pickup point and upfront price.';
+        } else if (saving > 25 && state.passengers <= 2) {
+          els.badge.textContent = 'Transit wins';
+          els.title.textContent = 'Public transport is the better default.';
+          els.copy.textContent = 'For this trip, the taxi premium is high. Use a taxi if you have luggage, limited mobility, very late timing, or a destination far from rail.';
+          els.appNote.textContent = 'If you still want a car, compare a licensed taxi app quote with the meter estimate before booking.';
+        } else if (split <= 12 || state.passengers >= 4) {
+          els.badge.textContent = 'Taxi makes sense';
+          els.title.textContent = 'A taxi is reasonable when you split it.';
+          els.copy.textContent = 'The total is higher than transit, but the per-person cost is manageable for your group size.';
+          els.appNote.textContent = 'A street taxi, taxi rank, Uber Taxi, Free Now or Bolt Taxi can all be practical. Pick the clearest pickup and price.';
+        } else {
+          els.badge.textContent = 'Depends on timing';
+          els.title.textContent = 'Compare comfort against the price gap.';
+          els.copy.textContent = 'The taxi is a convenience purchase here. It is not bad value if it saves a transfer or late-night wait.';
+          els.appNote.textContent = 'Use an app if you want upfront pricing or cashless payment, but keep some cash for normal taxis.';
+        }
+
+        var tips = [
+          'Estimated taxi split: ' + eur(split) + ' per person.',
+          state.trip === 'airport' ? 'BER airport trips need a public transport ABC ticket, currently EUR 5 per adult.' : 'Most inner-city public transport trips need an AB ticket, currently EUR 4 per adult.',
+          state.passengers >= 5 ? 'Large-capacity taxi surcharge is included in this estimate.' : 'Standard taxis usually fit up to four passengers.',
+          state.traffic >= 15 ? 'Heavy traffic adds waiting-time cost, so an app fixed price may be worth checking.' : 'Light traffic keeps the metered fare closer to the distance estimate.'
+        ];
+
+        els.list.innerHTML = tips.map(function (tip) {
+          return '<li>' + tip + '</li>';
+        }).join('');
+      }
+
+      function syncDistance(value) {
+        state.distance = clamp(value, 1, 35);
+        els.distance.value = state.distance;
+        els.distanceNumber.value = state.distance;
+        update();
+      }
+
+      function syncTraffic(value) {
+        state.traffic = clamp(value, 0, 30);
+        els.traffic.value = state.traffic;
+        els.trafficNumber.value = state.traffic;
+        update();
+      }
+
+      els.distance.addEventListener('input', function (event) { syncDistance(event.target.value); });
+      els.distanceNumber.addEventListener('input', function (event) { syncDistance(event.target.value); });
+      els.traffic.addEventListener('input', function (event) { syncTraffic(event.target.value); });
+      els.trafficNumber.addEventListener('input', function (event) { syncTraffic(event.target.value); });
+      els.passengers.addEventListener('change', function (event) {
+        state.passengers = Number(event.target.value);
+        update();
+      });
+      els.options.forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.trip = button.getAttribute('data-trip');
+          els.options.forEach(function (item) { item.classList.toggle('is-active', item === button); });
+          update();
+        });
+      });
+
+      update();
+    }());
+  </script>
+</div>
+</body>
+</html>

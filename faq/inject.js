@@ -62,7 +62,8 @@
   "berlin-founding-year-1237": "berlin-founding-year-1237",
   "tipping-in-berlin": "tipping-in-berlin",
   "pfand-in-germany": "pfand-in-germany",
-  "berlin-city-tax": "berlin-city-tax"
+  "berlin-city-tax": "berlin-city-tax",
+  "taxi-in-berlin": "taxi-in-berlin"
 };
 
   var SCHEMAS = {
@@ -2716,6 +2717,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Usually no. The tax applies broadly to paid short-term accommodation in Berlin, including hotels, hostels, guesthouses and private short-stay accommodation."
+        }
+      }
+    ]
+  },
+  "taxi-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is taxi in Berlin expensive?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A taxi in Berlin is more expensive than public transport, but not unreasonable when several people split the fare or when luggage, late timing or mobility matters. Public transport is usually better for one or two people moving around central Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is a taxi from BER Airport to central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de gives rough examples of about EUR 58 from Alexanderplatz and about EUR 63 from the western city centre around Kurfürstendamm or Zoologischer Garten. The final fare depends on distance, traffic and the meter."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Uber available in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Uber is available in Berlin, and Uber's own Berlin taxi page says you can request local taxis through the app with upfront pricing and cashless payment. Still compare the app price with public transport and the rough taxi meter estimate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I pay by card in Berlin taxis?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de says taxi fares can be paid in cash or by debit and credit card, but drivers are not required to accept every card type. If you need card payment, say it before the ride starts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I tip a Berlin taxi driver?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tipping is not required. Locals often round up to the next euro for a pleasant ride, or add one or two euros if the driver helped with luggage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I avoid taxi scams at BER Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use only the official taxi ranks outside Terminal 1 and get into a clearly marked taxi. BER Airport warns that fraudulent suppliers can appear outside the designated taxi areas."
         }
       }
     ]
