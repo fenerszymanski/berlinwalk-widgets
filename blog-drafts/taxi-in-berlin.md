@@ -71,22 +71,22 @@ The train is much cheaper. BER is in fare zone C, so you need an ABC ticket to c
 
 ## Uber in Berlin: is it the same as a taxi?
 
-Uber exists in Berlin, but do not assume it works exactly like it does in the United States or the UK. [Uber's own Berlin taxi page](https://www.uber.com/de/en/r/cities/taxi/berlin-be-de/) says you can request local taxis through the Uber app, get cashless payments, see upfront prices, and be matched with a licensed taxi driver.
+Uber works in Berlin, but not the way it does in the US or the UK. According to [Uber's own Berlin taxi page](https://www.uber.com/de/en/r/cities/taxi/berlin-be-de/), the app connects you with licensed local taxis: cashless payment, upfront prices, and a matched, licensed driver.
 
-That is the practical tourist takeaway: in Berlin, Uber can be useful as a taxi-request app. It is not automatically a bargain. Before accepting a ride, compare the app price with the rough taxi estimate and the public transport fare.
+So here's the practical tourist takeaway: in Berlin, Uber is useful as a taxi-request app, not as a discount. Before you accept a ride, compare the app price against a rough taxi estimate and the public transport fare.
 
-Other apps such as Free Now and Bolt Taxi can also be useful, especially when you want cashless payment or a clearer pickup point. If the app price looks high, check another app or take a normal taxi from a rank.
+Other apps like Free Now and Bolt Taxi work the same way, and they're handy when you want cashless payment or a clearer pickup point. If a price looks high, check another app or grab a normal taxi from a rank.
 
-## Taxi vs public transport in Berlin
+## Taxi vs. public transport in Berlin
 
-Public transport is the default winner for most tourist routes. [Berlin.de lists the 2026 single ticket](https://www.berlin.de/en/public-transportation/1772016-2913840-tickets-fares-and-route-maps.en.html) as EUR 4 for AB and EUR 5 for ABC. A valid Berlin ticket covers U-Bahn, S-Bahn, tram, bus and some ferries, so you are not buying separate tickets for each mode.
+For most tourist routes, [public transport](https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus) wins by default. [Berlin.de lists the 2026 single ticket](https://www.berlin.de/en/public-transportation/1772016-2913840-tickets-fares-and-route-maps.en.html) at EUR 4 for AB and EUR 5 for ABC. One valid ticket covers U-Bahn, S-Bahn, tram, bus and some ferries, so you're not buying a separate ticket every time you change mode.
 
 Use public transport for:
 
 - Alexanderplatz to Brandenburg Gate.
 - Museum Island to Hackescher Markt.
 - Hauptbahnhof to most central hotels.
-- BER Airport to Alexanderplatz, Friedrichstraße, Hauptbahnhof or Ostkreuz when you can handle your luggage.
+- BER Airport to Alexanderplatz, Friedrichstraße, Hauptbahnhof or Ostkreuz, when you can manage your luggage.
 - Daytime sightseeing when stations are close.
 
 Use a taxi for:
@@ -95,57 +95,57 @@ Use a taxi for:
 - Late-night trips with awkward transfers.
 - Rainy evenings after dinner.
 - Mobility needs.
-- A group of three or four where the fare split is reasonable.
-- A tight connection where saving 15 minutes matters.
+- A group of three or four, where splitting the fare adds up.
+- A tight connection where saving 15 minutes actually matters.
 
-For the walking tour route, public transport usually wins. The tour starts at Alexanderplatz and ends near Hackescher Markt, both well connected. If you want to understand how those stops fit together, the [BerlinWalk route page](https://www.berlinwalk.com/berlin-walking-tour-route) gives the full 12-stop story map.
+For the walking tour route, public transport almost always wins. The tour starts at Alexanderplatz and ends near Hackescher Markt, both extremely well connected. If you want to see how the stops fit together, the [BerlinWalk route page](https://www.berlinwalk.com/berlin-walking-tour-route) lays out the full 12-stop story map.
 
 ## Can you pay by card in Berlin taxis?
 
-Berlin.de says passengers can pay taxi fares in cash or by debit and credit card. It also notes that drivers are not required to accept every card type, so carrying some cash is still smart.
+[Berlin.de says passengers can pay taxi fares](https://www.berlin.de/en/public-transportation/1756978-2913840-taxi-phone-numbers-fares-rules.en.html) in cash or by debit and credit card. But it also notes that drivers don't have to accept every card type, so carrying some cash is still smart.
 
-My practical advice is simple: if you need card payment, say **card please** before the taxi starts moving. If the driver says card is not possible and you do not have cash, take another taxi or use an app. At a taxi stand, you are allowed to choose any taxi, although taking the first in line is customary.
+My advice is simple: if you need to pay by card, say **"card, please"** before the taxi moves. If the driver says card isn't possible and you have no cash, take another taxi or use an app. At a taxi stand you're free to pick any taxi, though taking the first in line is the local custom.
 
 ## Do you tip taxi drivers in Berlin?
 
-Tipping taxi drivers in Berlin is not required. Locals often round up to the next euro if the ride was pleasant. If the driver helped with luggage or made a difficult airport arrival easier, one or two euros is a nice gesture.
+Tipping taxi drivers in Berlin isn't required. Locals usually just round up to the next euro if the ride was pleasant. If the driver helped with luggage or smoothed out a stressful airport arrival, one or two euros is a nice gesture.
 
-Do not copy North American taxi tipping percentages here. Berlin tipping culture is more modest. I explain the broader pattern in the [BerlinWalk tipping guide](https://www.berlinwalk.com/post/tipping-in-berlin), but for taxis the short version is: round up, keep it calm, and do not feel pressured.
+Don't bring North American tipping percentages here: Berlin tipping culture is far more modest. I explain the bigger picture in the [BerlinWalk tipping guide](https://www.berlinwalk.com/post/tipping-in-berlin), but for taxis the short version is: round up, keep it relaxed, and don't feel pressured.
 
 ## Tourist traps and red flags
 
-Most Berlin taxi rides are normal. The problem is usually not the taxi system itself, but tired visitors making quick decisions at airports, stations or nightlife areas.
+Most Berlin taxi rides are completely normal. The risk usually isn't the taxi system: it's tired visitors making fast decisions at airports, stations and nightlife spots.
 
 Watch for these red flags:
 
 - Someone approaches you inside the terminal offering a ride.
-- The car is not clearly marked as a licensed taxi.
+- The car isn't clearly marked as a licensed taxi.
 - The driver refuses to use the meter inside Berlin.
 - The quoted cash price sounds vague or rushed.
-- You are told card payment is impossible only after the ride starts.
-- The route looks wildly indirect and no explanation is given.
+- You're told card payment is "impossible" only after the ride starts.
+- The route looks wildly indirect with no explanation.
 
-At BER, use the official rank. In the city, use a taxi rank, hail a marked taxi, call a reputable taxi number, or use a known app. If something feels wrong before you get in, do not get in.
+At BER, use the [official rank](https://ber.berlin-airport.de/en/orientation/getting-here/taxi.html). In the city, use a taxi rank, hail a marked taxi, call a reputable taxi number, or use a known app. If something feels off before you get in, don't get in.
 
 ## Useful taxi phrases in Berlin
 
 Most drivers working tourist routes understand basic English, but a few German phrases help:
 
-- **Zum Alexanderplatz, bitte.** To Alexanderplatz, please.
-- **Mit Karte, bitte.** By card, please.
-- **Mit Quittung, bitte.** With a receipt, please.
-- **Kurzstrecke, bitte.** Short-distance fare, please.
-- **Können Sie hier halten?** Can you stop here?
+- **Zum Alexanderplatz, bitte.** - To Alexanderplatz, please.
+- **Mit Karte, bitte.** - By card, please.
+- **Mit Quittung, bitte.** - With a receipt, please.
+- **Kurzstrecke, bitte.** - Short-distance fare, please.
+- **Können Sie hier halten?** - Can you stop here?
 
-Ask for a receipt if there is any issue, if you need to expense the trip, or if you might forget something. Berlin.de notes that taxi passengers are entitled to a receipt.
+Ask for a receipt if there's any issue, if you need to expense the trip, or in case you leave something behind. [Berlin.de confirms taxi passengers are entitled to one](https://www.berlin.de/en/public-transportation/1756978-2913840-taxi-phone-numbers-fares-rules.en.html).
 
 ## My honest recommendation
 
-For most Berlin visitors, taxis are a backup tool, not the main transport plan. Learn the public transport basics first, then use taxis strategically.
+For most visitors, taxis are a backup tool, not the main plan. Learn the public transport basics first, then use taxis strategically.
 
-If you are flying into BER with light luggage and daylight energy, take the train. If you are landing late with bags and a hotel door to find, take a taxi from the official rank. If you are moving around central Berlin during the day, use public transport or walk.
+Flying into BER with light luggage and daylight to spare? Take the train. Landing late with bags and a hotel door to find? Take a taxi from the official rank. Moving around central Berlin during the day? Use public transport or walk.
 
-And if you are coming to the BerlinWalk tour, save the taxi money for coffee, lunch or a better evening. Alexanderplatz is one of the easiest places in Berlin to reach without a car.
+And if you're joining the [BerlinWalk tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based), save the taxi money for coffee, lunch, or a better evening. Alexanderplatz is one of the easiest places in Berlin to reach without a car.
 
 {{faq}}
 

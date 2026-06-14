@@ -2,6 +2,20 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (World Cup score update)
+
+**Did:** Added the morning final scores for the World Cup fixtures widget.
+
+**Changed:**
+- `worldcup-fixtures/index.html` — Brazil vs Morocco is now `1-1 FT`, Haiti vs Scotland is now `0-1 FT`, Australia vs Türkiye is now `2-0 FT`; `SCORE_UPDATED` is `14 Jun 2026, 08:58 CEST`.
+
+**QA:** Berlin time was `2026-06-14 08:58 CEST`; those three unscored matches were due for score check. FIFA match report/round-up supported the Brazil/Morocco and Scotland/Haiti results, and Guardian, SBS, FOX/Bleacher Report plus ESPN/Guardian cross-checks agreed on the final scores. Local JS parse/smoke, final-row count (`8`), desktop/mobile overflow checks, and `git diff --check` passed after the edit.
+
+**Opened:** Push/deploy still needed before GitHub Pages serves these scores live.
+**Closed:** Three newly completed due matches were scored locally.
+
+**Next session should:** Continue with the next scheduled score window and leave existing scored rows untouched unless a verified correction appears.
+
 ## 2026-06-14 — Codex (Trip Planner quiz flow implementation)
 
 Implemented the Ultimate Berlin Trip Planner one-question-at-a-time quiz flow in `ultimate-berlin-trip-planner/index.html`: quiz progress shell, 12-step sequencing, Back/Next controls, single-choice auto-advance, multi-choice manual Next, final build CTA, and quiz tracking events. QA passed with local browser full-flow assertion, mobile 390px no-overflow check, inline script parse, and `git diff --check`; no live Wix, Meta, Google, ads, budgets, email, or social systems were changed. Next: push/deploy `berlinwalk-widgets`, cold-load `/berlin-trip-planner`, and monitor quiz-step/build/unlock events before adding paid pressure.
