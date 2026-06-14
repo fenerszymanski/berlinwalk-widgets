@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-13T11:19:34.490Z",
+  "updatedAt": "2026-06-14T07:25:27.965Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 120,
+  "totalPosts": 125,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -252,23 +252,6 @@
       "relatedToolSlug": ""
     },
     {
-      "title": "Berlin Airport to Alexanderplatz: The Easy Way (2026 Guide)",
-      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-03-03T12:12:58.270Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "alt": "sbahn berlin",
-      "relatedToolSlug": "transport-ticket-calculator"
-    },
-    {
       "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "slug": "where-was-the-berlin-wall-interactive-map",
       "path": "/post/where-was-the-berlin-wall-interactive-map",
@@ -284,6 +267,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
       "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "relatedToolSlug": "east-or-west-1989"
+    },
+    {
+      "title": "Berlin Airport to Alexanderplatz: The Easy Way (2026 Guide)",
+      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-03-03T12:12:58.270Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "alt": "sbahn berlin",
+      "relatedToolSlug": "transport-ticket-calculator"
     },
     {
       "title": "Public Toilets in Berlin: What Tourists Actually Need to Know",
@@ -559,6 +559,23 @@
           "relatedToolSlug": "transport-ticket-calculator"
         },
         {
+          "title": "Taxi in Berlin: Uber, Airport Rides, Fares and Tourist Traps",
+          "slug": "taxi-in-berlin",
+          "path": "/post/taxi-in-berlin",
+          "url": "https://www.berlinwalk.com/post/taxi-in-berlin",
+          "excerpt": "A clear tourist guide to taxis in Berlin: official fares, BER airport taxi rules, Uber and taxi apps, card payments, tipping, scams, and when public transport is the smarter choice.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "practical",
+          "topicLabel": "Practical Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-14T07:13:35.397Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
+          "alt": "Berlin taxi scene with Brandenburg Gate in the background for a tourist guide to taxis in Berlin",
+          "relatedToolSlug": "berlin-taxi-uber-cost-checker"
+        },
+        {
           "title": "Is Berlin Expensive? A Realistic Daily Budget for 2026 Tourists",
           "slug": "is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists",
           "path": "/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists",
@@ -659,23 +676,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_2046e113f0d241cc8c0ad3214f8f5c81~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/pfandautomat-edeka.jpg",
           "alt": "A bottle return machine at an Edeka supermarket in Berlin, where tourists can return Pfand bottles and cans",
           "relatedToolSlug": "berlin-pfand-calculator"
-        },
-        {
-          "title": "Berlin City Tax: What Tourists Pay on Hotels in 2026",
-          "slug": "berlin-city-tax",
-          "path": "/post/berlin-city-tax",
-          "url": "https://www.berlinwalk.com/post/berlin-city-tax",
-          "excerpt": "A clear tourist guide to Berlin City Tax in 2026: how the 7.5% accommodation tax works, when you pay it, what is excluded, and how to estimate it before check-in.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "6 min read",
-          "publishedDate": "2026-06-13T11:14:23.095Z",
-          "image": "https://static.wixstatic.com/media/nsplsh_36372d734f69376d56496b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Sunshine%20in%20bright%20bedroom%20in%20bungalow%20.jpg",
-          "thumb": "https://static.wixstatic.com/media/nsplsh_36372d734f69376d56496b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Sunshine%20in%20bright%20bedroom%20in%20bungalow%20.jpg",
-          "alt": "Berlin City Tax: What Tourists Pay on Hotels in 2026",
-          "relatedToolSlug": "berlin-city-tax-calculator"
         }
       ]
     },
@@ -866,6 +866,23 @@
       "description": "The places around the BerlinWalk route, explained as story layers rather than postcard stops.",
       "posts": [
         {
+          "title": "12 Stops Through Berlin’s Ancient Core: What You’ll See on Our Free Walking Tour",
+          "slug": "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
+          "path": "/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
+          "url": "https://www.berlinwalk.com/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
+          "excerpt": "Most Berlin free walking tours start at the Brandenburg Gate and head west. Ours doesn't. We begin where Berlin itself began — at Alexanderplatz — and walk through the oldest neighborhoods in the city, ending at the vibrant Hackescher Markt. Over 12 carefully chosen stops, you'll trace 800 years of history through streets that most tourists never explore. This isn't a greatest-hits tour of famous landmarks. It's a walk through the layers of Berlin — from its medieval founding to Prussian...",
+          "category": "Tour Route",
+          "categorySlug": "tour-route",
+          "topic": "route-stories",
+          "topicLabel": "Tour Route Stories",
+          "readTime": "8 min read",
+          "publishedDate": "2026-02-25T06:59:12.211Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
+          "alt": "Illustration of Berlin landmarks in green and yellow. Features buildings like the Berlin TV Tower, Brandenburg Gate, and Berlin Cathedral.",
+          "relatedToolSlug": ""
+        },
+        {
           "title": "Why Our Tour Starts at Alexanderplatz (And Not at Brandenburg Gate)",
           "slug": "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
           "path": "/post/why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
@@ -1016,23 +1033,6 @@
           "image": "https://static.wixstatic.com/media/5a08a3_6cde1d163a1e499b882d8c86fe340505~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_bbfcca86c85248e6b1bb33f67f88033f~mv2.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_6cde1d163a1e499b882d8c86fe340505~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_bbfcca86c85248e6b1bb33f67f88033f~mv2.jpg",
           "alt": "Ancient mosaic of a striding lion in beige and orange on a blue brick background. Decorative patterns above. Historic and vibrant.",
-          "relatedToolSlug": ""
-        },
-        {
-          "title": "Berlin Alte Nationalgalerie: The Greek Temple on Museum Island That Almost Disappeared",
-          "slug": "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared",
-          "path": "/post/alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared",
-          "url": "https://www.berlinwalk.com/post/alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared",
-          "excerpt": "It looks like an ancient Greek temple in the middle of Berlin. The Alte Nationalgalerie houses Europe's finest 19th-century art — from Caspar David Friedrich to Monet. Here's what's inside, what it costs, and the dramatic story of how it almost didn't survive.",
-          "category": "Tour Route",
-          "categorySlug": "tour-route",
-          "topic": "route-stories",
-          "topicLabel": "Tour Route Stories",
-          "readTime": "4 min read",
-          "publishedDate": "2026-03-22T11:10:53.060Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_cb3e095918d94d2fa11269a6e3c9b26c~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinAltesNationalGallery.jpeg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_cb3e095918d94d2fa11269a6e3c9b26c~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinAltesNationalGallery.jpeg",
-          "alt": "Historic building with columns and a horse statue on its wall, set against a blue cloudy sky. Cobblestone path in the foreground.",
           "relatedToolSlug": ""
         }
       ]
@@ -1594,6 +1594,23 @@
   ],
   "latest": [
     {
+      "title": "Taxi in Berlin: Uber, Airport Rides, Fares and Tourist Traps",
+      "slug": "taxi-in-berlin",
+      "path": "/post/taxi-in-berlin",
+      "url": "https://www.berlinwalk.com/post/taxi-in-berlin",
+      "excerpt": "A clear tourist guide to taxis in Berlin: official fares, BER airport taxi rules, Uber and taxi apps, card payments, tipping, scams, and when public transport is the smarter choice.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-14T07:13:35.397Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
+      "alt": "Berlin taxi scene with Brandenburg Gate in the background for a tourist guide to taxis in Berlin",
+      "relatedToolSlug": "berlin-taxi-uber-cost-checker"
+    },
+    {
       "title": "Berlin City Tax: What Tourists Pay on Hotels in 2026",
       "slug": "berlin-city-tax",
       "path": "/post/berlin-city-tax",
@@ -1779,26 +1796,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_b8fef771406e4a6cb2539dfcbd3ec3ec~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/festival-lights-brandenburg-gate-night.jpg",
       "alt": "Festival of Lights Berlin 2026: Best Walking Route and Local Tips",
       "relatedToolSlug": "berlin-tip-calculator"
-    },
-    {
-      "title": "FIBA Women's Basketball World Cup 2026 in Berlin: A Local Guide for Fans",
-      "slug": "fiba-womens-basketball-world-cup-2026-berlin",
-      "path": "/post/fiba-womens-basketball-world-cup-2026-berlin",
-      "url": "https://www.berlinwalk.com/post/fiba-womens-basketball-world-cup-2026-berlin",
-      "excerpt": "The FIBA Women's Basketball World Cup 2026 comes to Berlin from September 4-13. Here is the local fan guide: venues, transport, tickets, fixtures, and what to do between games.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-04T21:56:57.971Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_ea8454716f174a6a8d5990f9131542a8~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/fiba-wwc-2026-berlin-hero.jpg",
-      "alt": "Women basketball fans walking toward a warmly lit modern Berlin arena at sunset, with the TV Tower and Spree in the background",
-      "relatedToolSlug": "watch-world-cup-2026-berlin"
     }
   ],
   "allPosts": [
+    {
+      "title": "Taxi in Berlin: Uber, Airport Rides, Fares and Tourist Traps",
+      "slug": "taxi-in-berlin",
+      "path": "/post/taxi-in-berlin",
+      "url": "https://www.berlinwalk.com/post/taxi-in-berlin",
+      "excerpt": "A clear tourist guide to taxis in Berlin: official fares, BER airport taxi rules, Uber and taxi apps, card payments, tipping, scams, and when public transport is the smarter choice.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-14T07:13:35.397Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
+      "alt": "Berlin taxi scene with Brandenburg Gate in the background for a tourist guide to taxis in Berlin",
+      "relatedToolSlug": "berlin-taxi-uber-cost-checker"
+    },
     {
       "title": "Berlin City Tax: What Tourists Pay on Hotels in 2026",
       "slug": "berlin-city-tax",
@@ -3837,6 +3854,74 @@
       "image": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Boat%20on%20river%20with%20cityscape%20and%20TV%20tower.jpg",
       "thumb": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Boat%20on%20river%20with%20cityscape%20and%20TV%20tower.jpg",
       "alt": "museum island from spree river",
+      "relatedToolSlug": ""
+    },
+    {
+      "title": "5 Mistakes Tourists Make at Alexanderplatz (And What to Do Instead)",
+      "slug": "5-mistakes-tourists-make-at-alexanderplatz",
+      "path": "/post/5-mistakes-tourists-make-at-alexanderplatz",
+      "url": "https://www.berlinwalk.com/post/5-mistakes-tourists-make-at-alexanderplatz",
+      "excerpt": "Alexanderplatz is Berlin’s busiest square — and one of its most misunderstood. Here are five common mistakes tourists make here, and what you should do instead.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-02-26T14:37:36.941Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_73b3fbf73e494644a00a805c2d85e69b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinAlexanderPlatz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_73b3fbf73e494644a00a805c2d85e69b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinAlexanderPlatz.jpg",
+      "alt": "Alexanderplatz Berlin",
+      "relatedToolSlug": ""
+    },
+    {
+      "title": "Why Berliners Aren't Rude — They're Just Honest",
+      "slug": "why-berliners-aren-t-rude-they-re-just-honest",
+      "path": "/post/why-berliners-aren-t-rude-they-re-just-honest",
+      "url": "https://www.berlinwalk.com/post/why-berliners-aren-t-rude-they-re-just-honest",
+      "excerpt": "Why do Berliners seem rude to tourists? The answer lies in a cultural trait called Berliner Schnauze — a blunt communication style that’s more about honesty than hostility.",
+      "category": "Berlin Myths",
+      "categorySlug": "berlin-myths",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "4 min read",
+      "publishedDate": "2026-02-26T14:37:17.982Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_76b381ba7c8e42c798b577b29efdcac5~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/areberlinersrude.jpeg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_76b381ba7c8e42c798b577b29efdcac5~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/areberlinersrude.jpeg",
+      "alt": "A waiter takes an order from a seated woman at an outdoor café. A yellow tram passes in the background. The scene is bustling and urban.",
+      "relatedToolSlug": ""
+    },
+    {
+      "title": "The Pope's Revenge: How East Germany's TV Tower Backfired",
+      "slug": "the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
+      "path": "/post/the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
+      "url": "https://www.berlinwalk.com/post/the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
+      "excerpt": "A strange Cold War irony hidden in plain sight: Berlin’s TV Tower was built to symbolize socialist power, yet under the right sunlight it reveals a glowing cross — the famous “Pope’s Revenge.” Discover the story behind this accidental symbol, why it embarrassed East Germany, and how you can still spot it today at Alexanderplatz.",
+      "category": "Tour Route",
+      "categorySlug": "tour-route",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-02-26T14:37:02.956Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20very%20tall%20tower%20with%20a%20very%20tall%20clock%20on%20it's%20side.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20very%20tall%20tower%20with%20a%20very%20tall%20clock%20on%20it's%20side.jpg",
+      "alt": "TV Tower with a metallic sphere and antennas against a clear blue sky, flanked by two modern buildings with large windows.",
+      "relatedToolSlug": "east-or-west-1989"
+    },
+    {
+      "title": "12 Stops Through Berlin’s Ancient Core: What You’ll See on Our Free Walking Tour",
+      "slug": "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
+      "path": "/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
+      "url": "https://www.berlinwalk.com/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
+      "excerpt": "Most Berlin free walking tours start at the Brandenburg Gate and head west. Ours doesn't. We begin where Berlin itself began — at Alexanderplatz — and walk through the oldest neighborhoods in the city, ending at the vibrant Hackescher Markt. Over 12 carefully chosen stops, you'll trace 800 years of history through streets that most tourists never explore. This isn't a greatest-hits tour of famous landmarks. It's a walk through the layers of Berlin — from its medieval founding to Prussian...",
+      "category": "Tour Route",
+      "categorySlug": "tour-route",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "8 min read",
+      "publishedDate": "2026-02-25T06:59:12.211Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
+      "alt": "Illustration of Berlin landmarks in green and yellow. Features buildings like the Berlin TV Tower, Brandenburg Gate, and Berlin Cathedral.",
       "relatedToolSlug": ""
     }
   ]

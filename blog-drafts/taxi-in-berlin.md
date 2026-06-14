@@ -148,7 +148,3 @@ Flying into BER with light luggage and daylight to spare? Take the train. Landin
 And if you're joining the [BerlinWalk tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based), save the taxi money for coffee, lunch, or a better evening. Alexanderplatz is one of the easiest places in Berlin to reach without a car.
 
 {{faq}}
-
-### Image credits
-
-Photos via Wikimedia Commons: [Washingtonplatz in Berlin-Moabit](https://commons.wikimedia.org/wiki/File:Washingtonplatz_(Berlin-Moabit).jpg) by Geoprofi Lars ([CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)); [Taxi protest at BER opening](https://commons.wikimedia.org/wiki/File:Taxi_protest_at_BER_opening_2020-10-31_07.jpg) by Leonhard Lenz ([CC0](https://creativecommons.org/publicdomain/zero/1.0/)); [Taxiruf-Berlin](https://commons.wikimedia.org/wiki/File:Taxiruf-Berlin.jpg) by N-Lange.de ([CC BY-SA 3.0 DE](https://creativecommons.org/licenses/by-sa/3.0/de/deed.en)). Resized and optimized for BerlinWalk.
