@@ -1173,10 +1173,26 @@
     return lines[item.id] || 'You found your Berlin flavor.';
   }
 
+  function isLikelyMobileShareDevice() {
+    var ua = navigator.userAgent || '';
+    var platform = navigator.platform || '';
+    var touchMac = /Mac/.test(platform) && navigator.maxTouchPoints > 1;
+    return /Android|iPhone|iPad|iPod/i.test(ua) || touchMac;
+  }
+
+  function shouldUseNativeShare() {
+    return Boolean(navigator.share && isLikelyMobileShareDevice());
+  }
+
   function renderResult() {
     state.view = 'result';
     var winner = state.winner;
     var caption = resultCaption(winner);
+    var showNativeShare = shouldUseNativeShare();
+    var shareActionsHtml =
+      '<button class="bb-btn bb-btn-yellow" type="button" data-download-card>Download share card</button>' +
+      '<button class="bb-btn bb-btn-secondary" type="button" data-copy-caption>Copy text + link</button>' +
+      (showNativeShare ? '<button class="bb-btn bb-btn-secondary" type="button" data-share-result>Share result</button>' : '');
     renderShell(
       '<h1 class="bb-title">Your winner is ' + escapeHtml(winner.name) + '</h1>' +
       '<p class="bb-subtitle">' + escapeHtml(resultLine(winner)) + '</p>',
@@ -1197,9 +1213,7 @@
           '<strong class="bb-share-title">Share your result</strong>' +
           '<canvas class="bb-share-preview" data-share-canvas width="1080" height="1350" aria-label="' + escapeHtml(caption) + '"></canvas>' +
           '<div class="bb-actions">' +
-            '<button class="bb-btn bb-btn-yellow" type="button" data-download-card>Download share card</button>' +
-            '<button class="bb-btn bb-btn-secondary" type="button" data-copy-caption>Copy caption</button>' +
-            '<button class="bb-btn bb-btn-secondary" type="button" data-share-result>Share result</button>' +
+            shareActionsHtml +
           '</div>' +
           '<p class="bb-status" data-status></p>' +
         '</section>' +
@@ -1314,10 +1328,10 @@
     wrapText(ctx, winner.name, 70, 1116, 900, 78, 2);
     ctx.fillStyle = '#526052';
     ctx.font = '700 34px Montserrat, Arial, sans-serif';
-    wrapText(ctx, resultLine(winner), 70, 1250, 900, 42, 2);
+    wrapText(ctx, resultLine(winner), 70, 1220, 900, 40, 2);
     ctx.fillStyle = '#1B5E20';
     ctx.font = '900 28px Montserrat, Arial, sans-serif';
-    ctx.fillText('berlinwalk.com', 70, 1315);
+    ctx.fillText('berlinwalk.com', 70, 1318);
     ctx.fillStyle = '#FFE600';
     ctx.fillRect(760, 1288, 250, 14);
   }
@@ -1373,7 +1387,7 @@
   async function copyCaption() {
     if (!state.winner) return;
     await copyText(resultCaption(state.winner));
-    setStatus('Caption copied.');
+    setStatus('Share text and link copied.');
     track('bw_berlin_battle_copy_caption', { winner: state.winner.id });
   }
 
@@ -1383,7 +1397,10 @@
     var caption = resultCaption(winner);
     var canvas = root.querySelector('[data-share-canvas]');
     try {
-      if (navigator.share && canvas) {
+      if (!shouldUseNativeShare()) {
+        await copyText(caption);
+        setStatus('Share text copied. Paste it anywhere you want to share.');
+      } else if (navigator.share && canvas) {
         setStatus('Opening share sheet...');
         await drawShareCard(canvas, winner);
         var blob = await canvasBlob(canvas);

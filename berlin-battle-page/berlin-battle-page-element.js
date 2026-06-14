@@ -54,6 +54,7 @@
       url.searchParams.set('parent_path', window.location.pathname || '/games/berlin-battle');
       url.searchParams.set('parent_url', window.location.href);
       url.searchParams.set('attribution', 'none');
+      url.searchParams.set('v', 'label-spacing-fix-20260614');
       return url.toString();
     }
 

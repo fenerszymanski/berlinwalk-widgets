@@ -2,6 +2,40 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle result UI polish)
+
+**Did:** Cleaned up the Berlin Battle result share panel after Yusuf flagged ambiguous button copy and tight share-card spacing.
+
+**Changed:**
+- `berlin-battle/index.html` — `Copy caption` is now `Copy text + link`; desktop/non-native-share result actions show only `Download share card` and `Copy text + link`; mobile native-share devices still get `Share result`; copy status text updated.
+- `berlin-battle/index.html` — share-card result explanation moved up and `berlinwalk.com` moved slightly lower for clearer spacing.
+- `berlin-battle-page/berlin-battle-page-element.js` and `README.md` — cache-busters bumped to `label-spacing-fix-20260614`.
+- `../SESSION_LOG.md` and automation memory — recorded the polish pass.
+
+**QA:** Game inline script parse, wrapper JS syntax, and `git diff --check` passed. Local browser QA completed a desktop game to result screen: buttons were `Download share card` and `Copy text + link`, no duplicate Share button, canvas present, and horizontal overflow 0.
+
+**Opened:** Push/deploy, update/publish the Wix snippet with `?v=label-spacing-fix-20260614`, then verify live desktop/mobile result screens and card spacing.
+**Closed:** Local result button copy and share-card spacing fixes are ready.
+
+**Next session should:** Cold-load live `/games/berlin-battle` after deploy and confirm desktop/mobile button variants.
+
+## 2026-06-14 — Codex (Berlin Battle desktop share fallback)
+
+**Did:** Made Berlin Battle desktop sharing deterministic after Yusuf confirmed mobile native share works but desktop does not.
+
+**Changed:**
+- `berlin-battle/index.html` — desktop/non-mobile result button now reads `Copy share text` and copies the share caption/link directly instead of trying native `navigator.share` first.
+- `berlin-battle-page/berlin-battle-page-element.js` — game iframe URL now includes `v=desktop-share-fix-20260614`.
+- `berlin-battle-page/README.md` — Wix snippet now uses `berlin-battle-page-element.js?v=desktop-share-fix-20260614`.
+- `../SESSION_LOG.md` and automation memory — recorded the desktop fallback rule.
+
+**QA:** `node --check berlin-battle-page/berlin-battle-page-element.js`, game inline script parse, and `git diff --check` passed. Local HTTP checks confirmed the edited wrapper/game files serve the new permission/version/desktop-copy logic. Browser navigation QA timed out, so live desktop click still needs manual verification after deploy.
+
+**Opened:** Push/deploy, update/publish the Wix snippet with the new cache-buster, then verify desktop result screen shows `Copy share text` and copies the caption/link.
+**Closed:** Local desktop share behavior no longer depends on native Web Share API.
+
+**Next session should:** Cold-load the live page after deploy and confirm mobile still shows native `Share result` while desktop shows/copies `Copy share text`.
+
 ## 2026-06-14 — Codex (Berlin Battle share permission fix)
 
 **Did:** Fixed the likely cause of the live Berlin Battle `Share result` failure on the dedicated Games page.
