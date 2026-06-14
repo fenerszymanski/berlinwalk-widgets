@@ -2,6 +2,20 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-13 — Codex (World Cup score update)
+
+**Did:** Added the late-evening final score for the World Cup fixtures widget.
+
+**Changed:**
+- `worldcup-fixtures/index.html` — Qatar vs Switzerland is now `1-1 FT`; `SCORE_UPDATED` is `13 Jun 2026, 23:31 CEST`.
+
+**QA:** Berlin time was `2026-06-13 23:30 CEST`; Qatar - Switzerland was the only unscored match due for score check. FIFA pages were checked but did not expose final score text in fetched HTML; ESPN final-score metadata and Guardian live coverage/summary both supported Qatar 1-1 Switzerland. Local JS parse/smoke, final-row count, desktop/mobile overflow checks, and `git diff --check` passed after the edit.
+
+**Opened:** Push/deploy still needed before GitHub Pages serves this score live.
+**Closed:** One newly completed due match was scored locally.
+
+**Next session should:** Continue with the next scheduled score window and leave existing scored rows untouched unless a verified correction appears.
+
 ## 2026-06-13 — Codex (Footer link refresh)
 
 **Did:** Audited the live global footer links and target-page content, then refreshed stale/redundant items and fixed the FAQ anchor.
