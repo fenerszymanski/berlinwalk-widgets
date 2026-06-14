@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Battle | BerlinWalk</title>
+  <meta name="description" content="Play Berlin Battle by BerlinWalk: pick between Berlin food favorites until one winner owns your plate.">
+  <link rel="icon" href="../tools-home/icons/berlin-battle-160.png">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<main id="bw-berlin-battle" aria-live="polite">
+  <style>
+    #bw-berlin-battle {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #123F16;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-lime-soft: #EEF7E6;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #526052;
+      --bw-border: #DCE8C8;
+      --bw-shadow: 0 16px 42px rgba(18, 63, 22, 0.14);
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      max-width: 100%;
+    }
+
+    #bw-berlin-battle * {
+      box-sizing: border-box;
+    }
+
+    #bw-berlin-battle button,
+    #bw-berlin-battle a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #bw-berlin-battle .bb-shell {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.12), rgba(124, 179, 66, 0.06)),
+        var(--bw-cream);
+      border: 1px solid var(--bw-border);
+      border-radius: 14px;
+      box-shadow: var(--bw-shadow);
+      margin: 24px auto;
+      max-width: 1040px;
+      overflow: hidden;
+    }
+
+    #bw-berlin-battle .bb-hero {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.10)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 24px;
+    }
+
+    #bw-berlin-battle .bb-kicker {
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-berlin-battle h1,
+    #bw-berlin-battle h2,
+    #bw-berlin-battle p {
+      margin: 0;
+    }
+
+    #bw-berlin-battle .bb-title {
+      color: var(--bw-white);
+      font-size: clamp(30px, 5vw, 54px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 0.96;
+      max-width: 760px;
+    }
+
+    #bw-berlin-battle .bb-subtitle {
+      color: #EAF6DD;
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin-top: 12px;
+      max-width: 680px;
+    }
+
+    #bw-berlin-battle .bb-hero-mark {
+      align-items: center;
+      align-self: start;
+      aspect-ratio: 1;
+      background: var(--bw-yellow);
+      border: 8px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50%;
+      color: var(--bw-green);
+      display: grid;
+      font-size: 42px;
+      font-weight: 900;
+      height: 110px;
+      justify-content: center;
+      line-height: 1;
+      place-items: center;
+      width: 110px;
+    }
+
+    #bw-berlin-battle .bb-body {
+      padding: 20px;
+    }
+
+    #bw-berlin-battle .bb-topic-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #bw-berlin-battle .bb-topic-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      color: var(--bw-text);
+      display: grid;
+      gap: 12px;
+      min-height: 210px;
+      overflow: hidden;
+      padding: 0;
+      text-align: left;
+      text-decoration: none;
+      width: 100%;
+    }
+
+    #bw-berlin-battle button.bb-topic-card {
+      cursor: pointer;
+      font: inherit;
+    }
+
+    #bw-berlin-battle .bb-topic-card:not(.is-disabled):hover,
+    #bw-berlin-battle .bb-topic-card:not(.is-disabled):focus-visible {
+      border-color: var(--bw-green);
+      box-shadow: 0 10px 24px rgba(18, 63, 22, 0.12);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    #bw-berlin-battle .bb-topic-art {
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.88), rgba(124, 179, 66, 0.72)),
+        var(--bw-green);
+      color: var(--bw-green-dark);
+      display: flex;
+      font-size: 42px;
+      font-weight: 900;
+      height: 92px;
+      justify-content: center;
+      letter-spacing: 0;
+      line-height: 1;
+      padding: 12px;
+    }
+
+    #bw-berlin-battle .bb-topic-content {
+      display: grid;
+      gap: 8px;
+      padding: 0 14px 16px;
+    }
+
+    #bw-berlin-battle .bb-topic-kicker {
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-berlin-battle .bb-topic-title {
+      color: var(--bw-text);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.18;
+    }
+
+    #bw-berlin-battle .bb-topic-lead {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    #bw-berlin-battle .is-disabled {
+      opacity: 0.68;
+    }
+
+    #bw-berlin-battle .is-disabled .bb-topic-art {
+      background:
+        linear-gradient(135deg, rgba(27, 94, 32, 0.18), rgba(124, 179, 66, 0.16)),
+        #F4F7EE;
+      color: var(--bw-green);
+    }
+
+    #bw-berlin-battle .bb-topbar {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    #bw-berlin-battle .bb-pill {
+      align-items: center;
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      gap: 8px;
+      line-height: 1;
+      min-height: 34px;
+      padding: 9px 12px;
+      text-transform: uppercase;
+    }
+
+    #bw-berlin-battle .bb-pill-dot {
+      background: var(--bw-yellow);
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 50%;
+      display: inline-block;
+      height: 9px;
+      width: 9px;
+    }
+
+    #bw-berlin-battle .bb-back {
+      background: transparent;
+      border: 1px solid rgba(27, 94, 32, 0.20);
+      border-radius: 999px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      min-height: 36px;
+      padding: 9px 12px;
+    }
+
+    #bw-berlin-battle .bb-back:hover,
+    #bw-berlin-battle .bb-back:focus-visible {
+      background: var(--bw-lime-soft);
+      outline: none;
+    }
+
+    #bw-berlin-battle .bb-progress-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      padding: 14px;
+    }
+
+    #bw-berlin-battle .bb-progress-row {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    #bw-berlin-battle .bb-round {
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    #bw-berlin-battle .bb-counter {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    #bw-berlin-battle .bb-progress {
+      background: #E7EEDB;
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-berlin-battle .bb-progress-bar {
+      background: linear-gradient(90deg, var(--bw-green), var(--bw-lime), var(--bw-yellow));
+      border-radius: inherit;
+      height: 100%;
+      transition: width 0.22s ease;
+      width: 0%;
+    }
+
+    #bw-berlin-battle .bb-matchup {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    }
+
+    #bw-berlin-battle .bb-choice {
+      background: var(--bw-white);
+      border: 2px solid var(--bw-border);
+      border-radius: 12px;
+      box-shadow: 0 8px 22px rgba(18, 63, 22, 0.08);
+      color: inherit;
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      grid-template-rows: auto 1fr;
+      min-height: 390px;
+      overflow: hidden;
+      padding: 0;
+      text-align: left;
+      width: 100%;
+    }
+
+    #bw-berlin-battle .bb-choice:hover,
+    #bw-berlin-battle .bb-choice:focus-visible {
+      border-color: var(--bw-green);
+      box-shadow: 0 18px 38px rgba(18, 63, 22, 0.16);
+      outline: none;
+      transform: translateY(-2px);
+    }
+
+    #bw-berlin-battle .bb-choice-img {
+      aspect-ratio: 1 / 1;
+      background: #F0F4E8;
+      display: block;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    #bw-berlin-battle .bb-choice-body {
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+    }
+
+    #bw-berlin-battle .bb-choice-name {
+      color: var(--bw-text);
+      font-size: clamp(21px, 3.8vw, 32px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.06;
+    }
+
+    #bw-berlin-battle .bb-choice-line {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    #bw-berlin-battle .bb-vs {
+      align-self: center;
+      background: var(--bw-yellow);
+      border: 4px solid var(--bw-white);
+      border-radius: 50%;
+      box-shadow: 0 10px 24px rgba(18, 63, 22, 0.18);
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 900;
+      height: 58px;
+      justify-self: center;
+      line-height: 50px;
+      margin: 0 -8px;
+      position: relative;
+      text-align: center;
+      width: 58px;
+      z-index: 2;
+    }
+
+    #bw-berlin-battle .bb-path {
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      color: var(--bw-muted);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+      min-height: 48px;
+      padding: 10px;
+    }
+
+    #bw-berlin-battle .bb-path-chip {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 850;
+      line-height: 1;
+      padding: 8px 10px;
+    }
+
+    #bw-berlin-battle .bb-result {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 0.85fr) minmax(300px, 1fr);
+    }
+
+    #bw-berlin-battle .bb-result > * {
+      min-width: 0;
+    }
+
+    #bw-berlin-battle .bb-winner-panel,
+    #bw-berlin-battle .bb-share-panel {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    #bw-berlin-battle .bb-winner-img {
+      aspect-ratio: 1 / 1;
+      display: block;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    #bw-berlin-battle .bb-winner-copy {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+    }
+
+    #bw-berlin-battle .bb-winner-label {
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.6px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-berlin-battle .bb-winner-name {
+      color: var(--bw-text);
+      font-size: clamp(32px, 6vw, 58px);
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 0.96;
+    }
+
+    #bw-berlin-battle .bb-result-line {
+      color: var(--bw-muted);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    #bw-berlin-battle .bb-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    #bw-berlin-battle .bb-btn {
+      align-items: center;
+      border: 0;
+      border-radius: 999px;
+      cursor: pointer;
+      display: inline-flex;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1;
+      min-height: 40px;
+      padding: 12px 15px;
+      text-decoration: none;
+    }
+
+    #bw-berlin-battle .bb-btn-primary {
+      background: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-berlin-battle .bb-btn-primary:hover,
+    #bw-berlin-battle .bb-btn-primary:focus-visible {
+      background: var(--bw-green-dark);
+      outline: none;
+    }
+
+    #bw-berlin-battle .bb-btn-yellow {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+    }
+
+    #bw-berlin-battle .bb-btn-secondary {
+      background: var(--bw-lime-soft);
+      color: var(--bw-green);
+    }
+
+    #bw-berlin-battle .bb-share-panel {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+      padding: 16px;
+    }
+
+    #bw-berlin-battle .bb-share-title {
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    #bw-berlin-battle .bb-share-preview {
+      aspect-ratio: 4 / 5;
+      background: var(--bw-green);
+      border-radius: 10px;
+      display: block;
+      height: auto;
+      max-height: 520px;
+      max-width: 100%;
+      object-fit: contain;
+      width: 100%;
+    }
+
+    #bw-berlin-battle .bb-status {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.4;
+      min-height: 18px;
+    }
+
+    #bw-berlin-battle .bb-error {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 10px;
+      color: var(--bw-muted);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.5;
+      padding: 18px;
+    }
+
+    @media (max-width: 820px) {
+      #bw-berlin-battle .bb-shell {
+        border-radius: 12px;
+        margin: 16px auto;
+      }
+
+      #bw-berlin-battle .bb-hero {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 20px;
+      }
+
+      #bw-berlin-battle .bb-hero-mark {
+        height: 78px;
+        width: 78px;
+      }
+
+      #bw-berlin-battle .bb-body {
+        padding: 14px;
+      }
+
+      #bw-berlin-battle .bb-topic-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-berlin-battle .bb-matchup {
+        gap: 12px;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #bw-berlin-battle .bb-choice {
+        min-height: 0;
+      }
+
+      #bw-berlin-battle .bb-choice-img {
+        aspect-ratio: 16 / 10;
+      }
+
+      #bw-berlin-battle .bb-vs {
+        margin: -7px 0;
+      }
+
+      #bw-berlin-battle .bb-result {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-berlin-battle .bb-topic-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #bw-berlin-battle .bb-progress-row,
+      #bw-berlin-battle .bb-topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      #bw-berlin-battle .bb-counter {
+        white-space: normal;
+      }
+
+      #bw-berlin-battle .bb-actions {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      #bw-berlin-battle .bb-btn {
+        width: 100%;
+      }
+    }
+  </style>
+  <section class="bb-shell">
+    <div class="bb-error">Loading Berlin Battle...</div>
+  </section>
+</main>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-berlin-battle');
+  var componentStyleHtml = root.querySelector('style') ? root.querySelector('style').outerHTML : '';
+  var DATA_URL = 'data.json';
+  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_battle&utm_medium=game&utm_campaign=berlin_battle&utm_content=result_cta';
+  var SHARE_URL_BASE = 'https://www.berlinwalk.com/tools/berlin-battle';
+  var state = {
+    data: null,
+    view: 'topics',
+    topic: null,
+    roundItems: [],
+    winners: [],
+    matchIndex: 0,
+    pickCount: 0,
+    totalPicks: 0,
+    history: [],
+    winner: null
+  };
+
+  function escapeHtml(value) {
+    return String(value == null ? '' : value).replace(/[&<>"']/g, function (char) {
+      return {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char];
+    });
+  }
+
+  function topicSymbol(topic) {
+    if (topic.id === 'food') return 'BB';
+    if (topic.id === 'districts') return 'KZ';
+    if (topic.id === 'museums') return 'MS';
+    if (topic.id === 'clubs') return 'NT';
+    return 'BW';
+  }
+
+  function itemImageUrl(item) {
+    return new URL(item.image, window.location.href).href;
+  }
+
+  function shuffle(items) {
+    var copy = items.slice();
+    for (var i = copy.length - 1; i > 0; i -= 1) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = copy[i];
+      copy[i] = copy[j];
+      copy[j] = temp;
+    }
+    return copy;
+  }
+
+  function roundName(size) {
+    if (size === 16) return 'Round of 16';
+    if (size === 8) return 'Quarterfinals';
+    if (size === 4) return 'Semifinals';
+    if (size === 2) return 'Final';
+    return 'Battle Round';
+  }
+
+  function track(eventName, payload) {
+    var detail = Object.assign({
+      event_source: 'berlin_battle',
+      topic: state.topic ? state.topic.id : '',
+      page_path: window.location.pathname,
+      page_location: window.location.href
+    }, payload || {});
+    try {
+      window.dataLayer = window.dataLayer || [];
+      if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: eventName }, detail));
+      if (typeof window.gtag === 'function') window.gtag('event', eventName, detail);
+      if (typeof window.fbq === 'function') window.fbq('trackCustom', eventName, detail);
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({ type: 'bw-analytics', eventName: eventName, payload: detail }, '*');
+      }
+    } catch (error) {
+      /* Analytics is optional. */
+    }
+  }
+
+  function renderShell(heroHtml, bodyHtml) {
+    root.innerHTML = componentStyleHtml +
+      '<section class="bb-shell">' +
+        '<header class="bb-hero">' +
+          '<div>' +
+            '<span class="bb-kicker">BerlinWalk game</span>' +
+            heroHtml +
+          '</div>' +
+          '<div class="bb-hero-mark" aria-hidden="true">VS</div>' +
+        '</header>' +
+        '<div class="bb-body">' + bodyHtml + '</div>' +
+      '</section>';
+  }
+
+  function renderTopics() {
+    var topics = (state.data && state.data.topics) || [];
+    var cards = topics.map(function (topic) {
+      var disabled = topic.status !== 'active';
+      var tag = disabled ? 'article' : 'button type="button"';
+      var attrs = disabled ? '' : ' data-topic-id="' + escapeHtml(topic.id) + '"';
+      return '<' + tag + ' class="bb-topic-card' + (disabled ? ' is-disabled' : '') + '"' + attrs + '>' +
+        '<div class="bb-topic-art" aria-hidden="true">' + escapeHtml(topicSymbol(topic)) + '</div>' +
+        '<div class="bb-topic-content">' +
+          '<span class="bb-topic-kicker">' + escapeHtml(topic.kicker || '') + '</span>' +
+          '<strong class="bb-topic-title">' + escapeHtml(topic.title) + '</strong>' +
+          '<p class="bb-topic-lead">' + escapeHtml(topic.lead || '') + '</p>' +
+        '</div>' +
+      '</' + (disabled ? 'article' : 'button') + '>';
+    }).join('');
+
+    renderShell(
+      '<h1 class="bb-title">Choose your battle</h1>' +
+      '<p class="bb-subtitle">A fast this-or-that tournament for Berlin tastes, places and stories. First up: food.</p>',
+      '<div class="bb-topic-grid">' + cards + '</div>'
+    );
+    track('bw_berlin_battle_view_topics', { topic_count: topics.length });
+  }
+
+  function startTopic(topicId) {
+    var topic = state.data.topics.find(function (entry) { return entry.id === topicId; });
+    if (!topic || topic.status !== 'active') return;
+    if (!Array.isArray(topic.items) || topic.items.length < 2 || topic.items.length % 2 !== 0) {
+      renderError('This battle needs an even number of items before it can start.');
+      return;
+    }
+    state.view = 'game';
+    state.topic = topic;
+    state.roundItems = shuffle(topic.items);
+    state.winners = [];
+    state.matchIndex = 0;
+    state.pickCount = 0;
+    state.totalPicks = topic.items.length - 1;
+    state.history = [];
+    state.winner = null;
+    track('bw_berlin_battle_start', { item_count: topic.items.length });
+    renderGame();
+  }
+
+  function currentPair() {
+    var index = state.matchIndex * 2;
+    return [state.roundItems[index], state.roundItems[index + 1]];
+  }
+
+  function renderGame() {
+    var pair = currentPair();
+    var roundSize = state.roundItems.length;
+    var matchCount = roundSize / 2;
+    var percent = Math.round((state.pickCount / state.totalPicks) * 100);
+    var path = state.history.slice(-6).map(function (entry) {
+      return '<span class="bb-path-chip">' + escapeHtml(entry.winner.name) + '</span>';
+    }).join('');
+
+    renderShell(
+      '<h1 class="bb-title">' + escapeHtml(state.topic.title) + '</h1>' +
+      '<p class="bb-subtitle">Pick the food you would rather eat right now. The bracket does the rest.</p>',
+      '<div class="bb-topbar">' +
+        '<span class="bb-pill"><span class="bb-pill-dot"></span>' + escapeHtml(state.topic.theme) + '</span>' +
+        '<button type="button" class="bb-back" data-back-topics>Choose another battle</button>' +
+      '</div>' +
+      '<div class="bb-progress-wrap">' +
+        '<div class="bb-progress-row">' +
+          '<strong class="bb-round">' + escapeHtml(roundName(roundSize)) + '</strong>' +
+          '<span class="bb-counter">Choice ' + escapeHtml(state.pickCount + 1) + ' of ' + escapeHtml(state.totalPicks) + ' · Match ' + escapeHtml(state.matchIndex + 1) + ' of ' + escapeHtml(matchCount) + '</span>' +
+        '</div>' +
+        '<div class="bb-progress" aria-hidden="true"><div class="bb-progress-bar" style="width:' + percent + '%"></div></div>' +
+      '</div>' +
+      '<div class="bb-matchup">' +
+        renderChoice(pair[0]) +
+        '<div class="bb-vs" aria-hidden="true">VS</div>' +
+        renderChoice(pair[1]) +
+      '</div>' +
+      '<div class="bb-path" aria-label="Recent winners">' + (path || '<span class="bb-path-chip">Fresh bracket</span>') + '</div>'
+    );
+  }
+
+  function renderChoice(item) {
+    return '<button type="button" class="bb-choice" data-pick="' + escapeHtml(item.id) + '">' +
+      '<img class="bb-choice-img" src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.name) + '" loading="eager">' +
+      '<span class="bb-choice-body">' +
+        '<strong class="bb-choice-name">' + escapeHtml(item.name) + '</strong>' +
+        '<span class="bb-choice-line">' + escapeHtml(item.line || '') + '</span>' +
+      '</span>' +
+    '</button>';
+  }
+
+  function chooseItem(itemId) {
+    if (!state.topic || state.winner) return;
+    var pair = currentPair();
+    var winner = pair.find(function (item) { return item.id === itemId; });
+    var loser = pair.find(function (item) { return item.id !== itemId; });
+    if (!winner) return;
+
+    state.pickCount += 1;
+    state.winners.push(winner);
+    state.history.push({
+      winner: winner,
+      loser: loser,
+      round: roundName(state.roundItems.length)
+    });
+    track('bw_berlin_battle_choice', {
+      winner: winner.id,
+      loser: loser ? loser.id : '',
+      round: roundName(state.roundItems.length),
+      pick_number: state.pickCount
+    });
+
+    if (state.winners.length === state.roundItems.length / 2) {
+      if (state.winners.length === 1) {
+        state.winner = state.winners[0];
+        track('bw_berlin_battle_complete', {
+          winner: state.winner.id,
+          pick_count: state.pickCount
+        });
+        renderResult();
+        return;
+      }
+      state.roundItems = state.winners.slice();
+      state.winners = [];
+      state.matchIndex = 0;
+    } else {
+      state.matchIndex += 1;
+    }
+    renderGame();
+  }
+
+  function resultLine(item) {
+    var lines = {
+      'currywurst': 'You like Berlin fast, saucy and unapologetically street-level.',
+      'doner-kebab': 'You trust the Berlin classic that works at lunch, dinner and 2am.',
+      'falafel': 'You know Berlin is best when it is crunchy, generous and easy to share.',
+      'shawarma': 'You want the city wrapped, warm and ready to keep moving.',
+      'schnitzel': 'You chose a golden classic with no interest in being subtle.',
+      'pretzel': 'You picked the simple snack that never gets in the way of the day.',
+      'berliner-pfannkuchen': 'You found Berlin through the sweet middle of the plate.',
+      'boulette': 'You went old-school, snack-counter Berlin.',
+      'kartoffelpuffer': 'You picked market-day crunch with a soft nostalgic center.',
+      'eisbein': 'You are here for the heavy classics and the long table.',
+      'kasekuchen': 'You chose the quiet cafe version of Berlin.',
+      'apfelstrudel': 'You like your Berlin with warm pastry and a pause.',
+      'lahmacun': 'You chose the folded, spicy, walk-and-eat side of the city.',
+      'vietnamese-pho': 'You understand Berlin as a global appetite in one bowl.',
+      'spati-snack-run': 'You are loyal to the late-night snack run.',
+      'berliner-weisse': 'You picked tart, bright Berlin summer energy.'
+    };
+    return lines[item.id] || 'You found your Berlin flavor.';
+  }
+
+  function renderResult() {
+    var winner = state.winner;
+    var caption = resultCaption(winner);
+    renderShell(
+      '<h1 class="bb-title">Your winner is ' + escapeHtml(winner.name) + '</h1>' +
+      '<p class="bb-subtitle">' + escapeHtml(resultLine(winner)) + '</p>',
+      '<div class="bb-result">' +
+        '<section class="bb-winner-panel">' +
+          '<img class="bb-winner-img" src="' + escapeHtml(winner.image) + '" alt="' + escapeHtml(winner.name) + '">' +
+          '<div class="bb-winner-copy">' +
+            '<span class="bb-winner-label">' + escapeHtml(state.topic.resultPrefix || 'Your winner') + '</span>' +
+            '<strong class="bb-winner-name">' + escapeHtml(winner.name) + '</strong>' +
+            '<p class="bb-result-line">' + escapeHtml(resultLine(winner)) + '</p>' +
+            '<div class="bb-actions">' +
+              '<a class="bb-btn bb-btn-primary" data-booking-link href="' + escapeHtml(BOOKING_URL) + '" target="_blank" rel="noopener">Walk Berlin with me</a>' +
+              '<button class="bb-btn bb-btn-secondary" type="button" data-restart>Play again</button>' +
+            '</div>' +
+          '</div>' +
+        '</section>' +
+        '<section class="bb-share-panel">' +
+          '<strong class="bb-share-title">Share your result</strong>' +
+          '<canvas class="bb-share-preview" data-share-canvas width="1080" height="1350" aria-label="' + escapeHtml(caption) + '"></canvas>' +
+          '<div class="bb-actions">' +
+            '<button class="bb-btn bb-btn-yellow" type="button" data-download-card>Download share card</button>' +
+            '<button class="bb-btn bb-btn-secondary" type="button" data-copy-caption>Copy caption</button>' +
+            '<button class="bb-btn bb-btn-secondary" type="button" data-share-result>Share result</button>' +
+          '</div>' +
+          '<p class="bb-status" data-status></p>' +
+        '</section>' +
+      '</div>'
+    );
+    var canvas = root.querySelector('[data-share-canvas]');
+    drawShareCard(canvas, winner).catch(function () {
+      setStatus('Share card preview could not load yet. Try downloading again.');
+    });
+  }
+
+  function resultShareUrl(winner) {
+    var url = new URL(SHARE_URL_BASE);
+    url.searchParams.set('winner', winner.id);
+    url.searchParams.set('utm_source', 'share');
+    url.searchParams.set('utm_medium', 'game');
+    url.searchParams.set('utm_campaign', 'berlin_battle');
+    url.searchParams.set('utm_content', winner.id);
+    return url.toString();
+  }
+
+  function resultCaption(winner) {
+    return 'My Berlin Food Battle winner is ' + winner.name + '. Play your own Berlin Battle by BerlinWalk: ' + resultShareUrl(winner);
+  }
+
+  function setStatus(message) {
+    var status = root.querySelector('[data-status]');
+    if (status) status.textContent = message || '';
+  }
+
+  function loadImage(src) {
+    return new Promise(function (resolve, reject) {
+      var image = new Image();
+      image.onload = function () { resolve(image); };
+      image.onerror = reject;
+      image.src = src;
+    });
+  }
+
+  function drawCover(ctx, image, x, y, width, height) {
+    var ratio = Math.max(width / image.width, height / image.height);
+    var drawW = image.width * ratio;
+    var drawH = image.height * ratio;
+    var dx = x + (width - drawW) / 2;
+    var dy = y + (height - drawH) / 2;
+    ctx.drawImage(image, dx, dy, drawW, drawH);
+  }
+
+  function roundedRect(ctx, x, y, width, height, radius) {
+    var r = Math.min(radius, width / 2, height / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + width, y, x + width, y + height, r);
+    ctx.arcTo(x + width, y + height, x, y + height, r);
+    ctx.arcTo(x, y + height, x, y, r);
+    ctx.arcTo(x, y, x + width, y, r);
+    ctx.closePath();
+  }
+
+  function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+    var words = String(text).split(/\s+/);
+    var line = '';
+    var lines = [];
+    words.forEach(function (word) {
+      var test = line ? line + ' ' + word : word;
+      if (ctx.measureText(test).width > maxWidth && line) {
+        lines.push(line);
+        line = word;
+      } else {
+        line = test;
+      }
+    });
+    if (line) lines.push(line);
+    lines.slice(0, maxLines || lines.length).forEach(function (entry, index) {
+      ctx.fillText(entry, x, y + index * lineHeight);
+    });
+    return Math.min(lines.length, maxLines || lines.length) * lineHeight;
+  }
+
+  async function drawShareCard(canvas, winner) {
+    var ctx = canvas.getContext('2d');
+    var width = canvas.width;
+    var height = canvas.height;
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#FAFAF5';
+    ctx.fillRect(0, 0, width, height);
+    ctx.fillStyle = '#1B5E20';
+    ctx.fillRect(0, 0, width, 315);
+    ctx.fillStyle = '#FFE600';
+    ctx.fillRect(0, 315, width, 18);
+    ctx.fillStyle = '#7CB342';
+    ctx.fillRect(0, 333, width, 10);
+
+    ctx.fillStyle = '#FFE600';
+    ctx.font = '900 34px Montserrat, Arial, sans-serif';
+    ctx.fillText('BERLIN FOOD BATTLE', 70, 92);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '900 74px Montserrat, Arial, sans-serif';
+    wrapText(ctx, 'My winner is', 70, 188, 900, 82, 2);
+
+    var image = await loadImage(itemImageUrl(winner));
+    ctx.save();
+    roundedRect(ctx, 70, 395, 940, 610, 36);
+    ctx.clip();
+    drawCover(ctx, image, 70, 395, 940, 610);
+    ctx.restore();
+
+    ctx.fillStyle = '#1B5E20';
+    ctx.font = '900 76px Montserrat, Arial, sans-serif';
+    wrapText(ctx, winner.name, 70, 1116, 900, 78, 2);
+    ctx.fillStyle = '#526052';
+    ctx.font = '700 34px Montserrat, Arial, sans-serif';
+    wrapText(ctx, resultLine(winner), 70, 1250, 900, 42, 2);
+    ctx.fillStyle = '#1B5E20';
+    ctx.font = '900 28px Montserrat, Arial, sans-serif';
+    ctx.fillText('berlinwalk.com', 70, 1315);
+    ctx.fillStyle = '#FFE600';
+    ctx.fillRect(760, 1288, 250, 14);
+  }
+
+  function canvasBlob(canvas) {
+    return new Promise(function (resolve) {
+      canvas.toBlob(resolve, 'image/png', 0.92);
+    });
+  }
+
+  async function downloadShareCard() {
+    if (!state.winner) return;
+    var canvas = root.querySelector('[data-share-canvas]');
+    if (!canvas) return;
+    await drawShareCard(canvas, state.winner);
+    var blob = await canvasBlob(canvas);
+    if (!blob) {
+      setStatus('Share card could not be created in this browser.');
+      return;
+    }
+    var link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'berlin-food-battle-' + state.winner.id + '.png';
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    setTimeout(function () { URL.revokeObjectURL(link.href); }, 1500);
+    setStatus('Share card downloaded.');
+    track('bw_berlin_battle_share_download', { winner: state.winner.id });
+  }
+
+  function copyText(value) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(value);
+    return new Promise(function (resolve, reject) {
+      var textarea = document.createElement('textarea');
+      textarea.value = value;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'fixed';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand('copy');
+        resolve();
+      } catch (error) {
+        reject(error);
+      } finally {
+        textarea.remove();
+      }
+    });
+  }
+
+  async function copyCaption() {
+    if (!state.winner) return;
+    await copyText(resultCaption(state.winner));
+    setStatus('Caption copied.');
+    track('bw_berlin_battle_copy_caption', { winner: state.winner.id });
+  }
+
+  async function shareResult() {
+    if (!state.winner) return;
+    var winner = state.winner;
+    var caption = resultCaption(winner);
+    var canvas = root.querySelector('[data-share-canvas]');
+    try {
+      if (navigator.share && canvas) {
+        setStatus('Opening share sheet...');
+        await drawShareCard(canvas, winner);
+        var blob = await canvasBlob(canvas);
+        var file = blob ? new File([blob], 'berlin-food-battle-' + winner.id + '.png', { type: 'image/png' }) : null;
+        if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: 'Berlin Food Battle',
+            text: caption,
+            files: [file]
+          });
+        } else {
+          await navigator.share({
+            title: 'Berlin Food Battle',
+            text: caption,
+            url: resultShareUrl(winner)
+          });
+        }
+        setStatus('Share sheet opened.');
+      } else {
+        await copyText(caption);
+        setStatus('Share is not available here, so the caption was copied.');
+      }
+      track('bw_berlin_battle_share_result', { winner: winner.id });
+    } catch (error) {
+      try {
+        await copyText(caption);
+        setStatus('Sharing was unavailable, so the caption was copied.');
+        track('bw_berlin_battle_share_fallback_copy', { winner: winner.id });
+      } catch (copyError) {
+        setStatus('Sharing was cancelled or unavailable.');
+      }
+    }
+  }
+
+  function renderError(message) {
+    root.innerHTML = componentStyleHtml +
+      '<section class="bb-shell"><div class="bb-body"><div class="bb-error">' + escapeHtml(message) + '</div></div></section>';
+  }
+
+  async function init() {
+    try {
+      var response = await fetch(DATA_URL, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Data request failed');
+      state.data = await response.json();
+      renderTopics();
+    } catch (error) {
+      renderError('Berlin Battle could not load its data. Please try again in a moment.');
+    }
+  }
+
+  root.addEventListener('click', function (event) {
+    var topicButton = event.target.closest('[data-topic-id]');
+    if (topicButton) {
+      startTopic(topicButton.getAttribute('data-topic-id'));
+      return;
+    }
+
+    var pickButton = event.target.closest('[data-pick]');
+    if (pickButton) {
+      chooseItem(pickButton.getAttribute('data-pick'));
+      return;
+    }
+
+    if (event.target.closest('[data-back-topics]')) {
+      state.view = 'topics';
+      state.topic = null;
+      renderTopics();
+      return;
+    }
+
+    if (event.target.closest('[data-restart]')) {
+      if (state.topic) startTopic(state.topic.id);
+      return;
+    }
+
+    if (event.target.closest('[data-download-card]')) {
+      downloadShareCard().catch(function () {
+        setStatus('Share card could not be downloaded here.');
+      });
+      return;
+    }
+
+    if (event.target.closest('[data-copy-caption]')) {
+      copyCaption().catch(function () {
+        setStatus('Caption could not be copied here.');
+      });
+      return;
+    }
+
+    if (event.target.closest('[data-share-result]')) {
+      shareResult().catch(function () {
+        setStatus('Sharing was cancelled or unavailable.');
+      });
+      return;
+    }
+
+    if (event.target.closest('[data-booking-link]')) {
+      track('bw_berlin_battle_booking_click', { winner: state.winner ? state.winner.id : '' });
+    }
+  });
+
+  init();
+}());
+</script>
+</body>
+</html>

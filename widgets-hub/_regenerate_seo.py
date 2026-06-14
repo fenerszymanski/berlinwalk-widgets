@@ -4,9 +4,9 @@ widgets-hub/SEO_ADDITIONAL_TAGS.md from tools-hub/data.json.
 
 Wix Advanced SEO structured data has a ~7000 character limit, so we emit a
 minified single-line JSON-LD with a slim CollectionPage + ItemList. Each item
-is the minimal valid ListItem (position + name + url). Run whenever
-tools-hub/data.json gains a new widget; the script preserves character count
-under ~3500 even with double the current widget count.
+is a minimal ListItem (position + url); per-item names are omitted because the
+current 50+ tool count exceeds Wix's limit when titles are included. Run
+whenever tools-hub/data.json gains a new widget.
 
 Usage:  python3 widgets-hub/_regenerate_seo.py
 """
@@ -35,14 +35,11 @@ def build_schema(tools):
         },
         "mainEntity": {
             "@type": "ItemList",
-            "name": "Free Berlin planning tools",
             "numberOfItems": len(tools),
-            "itemListOrder": "https://schema.org/ItemListOrderAscending",
             "itemListElement": [
                 {
                     "@type": "ListItem",
                     "position": pos,
-                    "name": t.get("title", t["slug"]),
                     "url": f"https://www.berlinwalk.com/tools/{t['slug']}",
                 }
                 for pos, t in enumerate(tools, start=1)

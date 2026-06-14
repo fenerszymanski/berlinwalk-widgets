@@ -2,6 +2,24 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle MVP)
+
+**Did:** Built the first `Berlin Battle` tournament widget with playable `Berlin Food Battle`, coming-soon topic cards, 16 generated food assets, result share card, and BerlinTools integration.
+
+**Changed:**
+- `berlin-battle/` — added standalone `index.html`, `data.json`, 16 `assets/cards/*.webp`, source image/prompt notes, randomized bracket flow, analytics events, booking CTA, and download/copy/share result actions.
+- `tools-hub/data.json` — added `Berlin Battle` under Discovery.
+- `tools-home/icons/` — added generated standard-style Berlin Battle icons and manifest/cache/summary entries; Wix Media icon is `5a08a3_fc6b345c36174e69abc9bb38bed99552~mv2.png`.
+- `widgets-hub/_regenerate_seo.py` and `widgets-hub/SEO_ADDITIONAL_TAGS.md` — compacted JSON-LD output to 5625 chars for Wix's 7000-char limit.
+- Wix/CMS from root scripts: BerlinTools Layout Fixes updated to revision 20; BerlinTools CMS row inserted as `9faf024a-3614-4da2-a25d-a28947e3090e`.
+
+**QA:** Data validation, inline script parse, 16 card dimensions, 512/160 icon dimensions, `git diff --check`, and Playwright desktop/mobile QA passed. Browser/Playwright confirmed 15 choices, unique first-round 16 items, loaded images, final winner, nonblank share-card canvas, downloadable PNG, copied caption, no horizontal overflow, and no console errors. Live Wix tool page returns 200, but the GitHub Pages widget target still needs deploy.
+
+**Opened:** Push/deploy this repo before `/berlin-battle/` and the hub data/icon updates are live on GitHub Pages.
+**Closed:** Berlin Battle MVP is ready locally and wired into Wix CMS/icon/layout surfaces.
+
+**Next session should:** Push/deploy, then cold-load `/tools/berlin-battle`, `/berlin-tools`, and the GitHub Pages `/berlin-battle/` widget URL.
+
 ## 2026-06-14 — Codex (World Cup score update)
 
 **Did:** Added the morning final scores for the World Cup fixtures widget.

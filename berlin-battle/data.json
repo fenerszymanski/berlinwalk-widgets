@@ -1,0 +1,138 @@
+{
+  "version": "2026-06-14",
+  "defaultTopic": "food",
+  "topics": [
+    {
+      "id": "food",
+      "title": "Berlin Food Battle",
+      "kicker": "First playable battle",
+      "lead": "Pick between Berlin food favorites until one winner owns your plate.",
+      "status": "active",
+      "theme": "Food",
+      "shareTitle": "My Berlin Food Battle winner",
+      "resultPrefix": "Your Berlin taste says:",
+      "items": [
+        {
+          "id": "currywurst",
+          "name": "Currywurst",
+          "line": "Saucy, fast, very Berlin.",
+          "image": "assets/cards/currywurst.webp"
+        },
+        {
+          "id": "doner-kebab",
+          "name": "Döner Kebab",
+          "line": "The midnight legend with salad crunch.",
+          "image": "assets/cards/doner-kebab.webp"
+        },
+        {
+          "id": "falafel",
+          "name": "Falafel",
+          "line": "Crisp, cheap, and built for street corners.",
+          "image": "assets/cards/falafel.webp"
+        },
+        {
+          "id": "shawarma",
+          "name": "Shawarma",
+          "line": "Warm wrap energy for a long Berlin day.",
+          "image": "assets/cards/shawarma.webp"
+        },
+        {
+          "id": "schnitzel",
+          "name": "Schnitzel",
+          "line": "Golden, loud, and impossible to ignore.",
+          "image": "assets/cards/schnitzel.webp"
+        },
+        {
+          "id": "pretzel",
+          "name": "Pretzel",
+          "line": "Simple, salty, always ready.",
+          "image": "assets/cards/pretzel.webp"
+        },
+        {
+          "id": "berliner-pfannkuchen",
+          "name": "Berliner Pfannkuchen",
+          "line": "Jam-filled proof that Berlin can be soft.",
+          "image": "assets/cards/berliner-pfannkuchen.webp"
+        },
+        {
+          "id": "boulette",
+          "name": "Boulette",
+          "line": "Old-school snack counter comfort.",
+          "image": "assets/cards/boulette.webp"
+        },
+        {
+          "id": "kartoffelpuffer",
+          "name": "Kartoffelpuffer",
+          "line": "Crispy potato with market-day nostalgia.",
+          "image": "assets/cards/kartoffelpuffer.webp"
+        },
+        {
+          "id": "eisbein",
+          "name": "Eisbein",
+          "line": "Heavy classic for serious appetites.",
+          "image": "assets/cards/eisbein.webp"
+        },
+        {
+          "id": "kasekuchen",
+          "name": "Käsekuchen",
+          "line": "Quiet cafe happiness on a small plate.",
+          "image": "assets/cards/kasekuchen.webp"
+        },
+        {
+          "id": "apfelstrudel",
+          "name": "Apfelstrudel",
+          "line": "Warm apple, pastry, and a pause.",
+          "image": "assets/cards/apfelstrudel.webp"
+        },
+        {
+          "id": "lahmacun",
+          "name": "Lahmacun",
+          "line": "Thin, spicy, folded for the street.",
+          "image": "assets/cards/lahmacun.webp"
+        },
+        {
+          "id": "vietnamese-pho",
+          "name": "Vietnamese Pho",
+          "line": "Broth, herbs, and Berlin's global appetite.",
+          "image": "assets/cards/vietnamese-pho.webp"
+        },
+        {
+          "id": "spati-snack-run",
+          "name": "Späti Snack Run",
+          "line": "Late-night chaos, chosen proudly.",
+          "image": "assets/cards/spati-snack-run.webp"
+        },
+        {
+          "id": "berliner-weisse",
+          "name": "Berliner Weiße",
+          "line": "Tart, bright, and made for summer tables.",
+          "image": "assets/cards/berliner-weisse.webp"
+        }
+      ]
+    },
+    {
+      "id": "districts",
+      "title": "Berlin District Battle",
+      "kicker": "Coming soon",
+      "lead": "Kreuzberg, Mitte, Neukölln and the rest of the city go head to head.",
+      "status": "coming-soon",
+      "theme": "Districts"
+    },
+    {
+      "id": "museums",
+      "title": "Berlin Museum Battle",
+      "kicker": "Coming soon",
+      "lead": "A playful museum bracket for culture-heavy Berlin days.",
+      "status": "coming-soon",
+      "theme": "Museums"
+    },
+    {
+      "id": "clubs",
+      "title": "Berlin Night Battle",
+      "kicker": "Coming soon",
+      "lead": "A nightlife bracket built around mood, not official rankings.",
+      "status": "coming-soon",
+      "theme": "Nightlife"
+    }
+  ]
+}
