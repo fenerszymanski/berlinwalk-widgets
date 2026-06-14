@@ -119,6 +119,7 @@
                 <iframe
                   data-bw-battle-frame
                   src="${this._gameSrc()}"
+                  allow="web-share; clipboard-write"
                   title="Berlin Battle game"
                   loading="eager"
                   scrolling="no"></iframe>

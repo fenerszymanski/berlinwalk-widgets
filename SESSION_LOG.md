@@ -2,6 +2,22 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle share permission fix)
+
+**Did:** Fixed the likely cause of the live Berlin Battle `Share result` failure on the dedicated Games page.
+
+**Changed:**
+- `berlin-battle-page/berlin-battle-page-element.js` — added `allow="web-share; clipboard-write"` to the embedded game iframe.
+- `berlin-battle-page/README.md` — changed the Wix script snippet to `?v=share-fix-20260614` so the page can bust cached JS after deploy.
+- `../SESSION_LOG.md` and automation memory — recorded the fix.
+
+**QA:** `node --check berlin-battle-page/berlin-battle-page-element.js` and `git diff --check` passed. Local browser QA confirmed the rendered iframe has `allow: "web-share; clipboard-write"`, `scrolling="no"`, and horizontal overflow 0.
+
+**Opened:** Push/deploy this repo, then update/publish the Wix `/games/berlin-battle` custom code with the cache-busted script URL and verify Share result on a real mobile browser.
+**Closed:** Local iframe permission fix is ready.
+
+**Next session should:** After deploy, cold-load `/games/berlin-battle` and confirm the game iframe allow attribute plus result share/copy behavior.
+
 ## 2026-06-14 — Codex (Berlin Battle page wrapper)
 
 **Did:** Built the short custom-element wrapper for the dedicated Wix `/games/berlin-battle` page, not the future Games hub.
