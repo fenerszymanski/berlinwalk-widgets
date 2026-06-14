@@ -68,6 +68,34 @@ Cells in exact order left-to-right, top-to-bottom:
 Output only the final 2x2 image sheet. No labels or text inside the image.
 ```
 
+## Berlin Battle Social / Featured Image
+
+Added 2026-06-14 for the Wix `/games/berlin-battle` social share / featured image.
+
+Final files:
+
+- Source: `berlin-battle-social-og-source-20260614.png`
+- Optimized social JPG: `../social/berlin-battle-social-1200x630.jpg`
+- Optimized PNG backup: `../social/berlin-battle-social-1200x630.png`
+- Wix Media: `5a08a3_4238f52e31c8461097da1d276ce6f8e4~mv2.jpg`
+- Wix URL: `https://static.wixstatic.com/media/5a08a3_4238f52e31c8461097da1d276ce6f8e4~mv2.jpg`
+
+Prompt:
+
+```text
+Use case: stylized-concept
+Asset type: social share / featured image for a BerlinWalk Games page, Open Graph landscape crop, no text.
+Primary request: Create a premium BerlinWalk "Berlin Battle" social image that communicates a multi-mode this-or-that game for visitors to Berlin.
+Scene/backdrop: A playful Berlin game arena with four visual zones blending together: Berlin street food game pieces, a district map-board with pins, museum/culture artifacts, and nightlife/disco energy. The zones should feel like one dynamic game world, not a collage.
+Subject: Centered versus-game energy with two or more abstract card/game pieces facing each other, glowing rings, sparks, motion streaks, subtle Berlin skyline cues such as TV Tower and Brandenburg Gate silhouettes, but not a literal tourist photo.
+Style/medium: polished cinematic game-cover illustration, premium 3D/editorial concept art, same family as BerlinWalk Games cover art.
+Composition/framing: wide 1.91:1 social share composition, crop-safe for 1200x630, strong focal center, readable at small social-preview size, no important details at extreme edges.
+Lighting/mood: energetic but polished, green/yellow glow, soft depth, studio-quality highlights.
+Color palette: BerlinWalk deep green #1B5E20, bright yellow #FFE600, lime #7CB342, cream #FAFAF5, white highlights, tiny Berlin red only as a small accent.
+Text: no text, no labels, no letters, no numbers.
+Constraints: no logos, no watermark, no UI screenshots, no flat vector art, no black vignette corners, no random real-photo collage, no distorted typography. Must look like a high-quality featured/social image for a polished travel game page.
+```
+
 ## BerlinTools Icon
 
 Source files:

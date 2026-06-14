@@ -2,6 +2,38 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle page wrapper)
+
+**Did:** Built the short custom-element wrapper for the dedicated Wix `/games/berlin-battle` page, not the future Games hub.
+
+**Changed:**
+- `berlin-battle-page/` — added `index.html`, `berlin-battle-page-element.js`, `README.md`, and `SEO_SETTINGS.md`.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md`, and automation memory — recorded the wrapper snippet and deployment state.
+
+**QA:** `node --check berlin-battle-page/berlin-battle-page-element.js` and `git diff --check` passed. Browser QA at 1280x720 and 390x844 showed no horizontal overflow, correct game iframe URL, 3 loaded images, 3 mode cards, correct route/booking links, and fixed mobile final CTA sizing. Live `https://www.berlinwalk.com/games/berlin-battle` returned 200 before the new wrapper was embedded.
+
+**Opened:** Push/deploy this repo, then paste the README snippet into Wix `/games/berlin-battle` and verify the live page.
+**Closed:** The dedicated Berlin Battle page wrapper is ready locally.
+
+**Next session should:** Deploy GitHub Pages, cold-load `/berlin-battle-page/`, then verify the Wix page after custom code installation.
+
+## 2026-06-14 — Codex (Berlin Battle social image)
+
+**Did:** Created the social/featured image for the `Berlin Battle` Games page.
+
+**Changed:**
+- `berlin-battle/assets/social/berlin-battle-social-1200x630.jpg` and `.png` — final Open Graph image exports.
+- `berlin-battle/assets/source/berlin-battle-social-og-source-20260614.png` and `PROMPTS.md` — source image and prompt notes.
+- Wix Media: uploaded image `5a08a3_4238f52e31c8461097da1d276ce6f8e4~mv2.jpg`.
+- `../PROJECT_MEMORY.md`, `../SESSION_LOG.md`, and automation memory — recorded the image ID and URL.
+
+**QA:** Final JPG is 1200x630, 209KB, visually checked, and Wix static URL returned 200 `image/jpeg`.
+
+**Opened:** Choose the uploaded Wix Media image in the `/games/berlin-battle` Social Share panel, then verify live OG tags after publish.
+**Closed:** Social/featured image asset is ready for the Berlin Battle page.
+
+**Next session should:** Push/deploy the widget repo, publish the Wix Games page, then verify the live social preview.
+
 ## 2026-06-14 — Codex (Berlin Battle cover/scroll correction)
 
 **Did:** Replaced the mixed opening-game visuals with standardized generated Games cover art and tightened the embed layout to avoid internal scrolling on the opening screen.
