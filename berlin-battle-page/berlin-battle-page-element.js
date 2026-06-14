@@ -54,7 +54,7 @@
       url.searchParams.set('parent_path', window.location.pathname || '/games/berlin-battle');
       url.searchParams.set('parent_url', window.location.href);
       url.searchParams.set('attribution', 'none');
-      url.searchParams.set('v', 'share-hero-fix-20260614');
+      url.searchParams.set('v', 'share-hero-overlay-fix-20260614');
       return url.toString();
     }
 
@@ -318,10 +318,14 @@
         }
 
         .bw-battle-strip {
-          background: var(--bw-green);
-          border-top: 8px solid var(--bw-yellow);
+          background:
+            linear-gradient(180deg, rgba(18, 63, 22, 0) 0%, rgba(27, 94, 32, 0.92) 58%, var(--bw-green) 100%);
+          border-top: 0;
           color: var(--bw-white);
-          padding: 14px 0;
+          margin-top: -86px;
+          padding: 0 0 18px;
+          position: relative;
+          z-index: 3;
         }
 
         .bw-battle-mode-grid {
@@ -332,9 +336,10 @@
 
         .bw-battle-mode-grid article {
           align-items: center;
-          background: rgba(255, 255, 255, 0.10);
-          border: 1px solid rgba(255, 255, 255, 0.18);
+          background: rgba(27, 94, 32, 0.88);
+          border: 1px solid rgba(255, 255, 255, 0.24);
           border-radius: 10px;
+          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
           display: grid;
           gap: 12px;
           grid-template-columns: 76px minmax(0, 1fr);
@@ -462,6 +467,10 @@
             grid-template-columns: minmax(0, 1fr);
           }
 
+          .bw-battle-strip {
+            margin-top: -58px;
+          }
+
           .bw-battle-game-head,
           .bw-battle-final-box {
             grid-template-columns: minmax(0, 1fr);
@@ -499,6 +508,10 @@
 
           .bw-battle-mode-grid article {
             grid-template-columns: 68px minmax(0, 1fr);
+          }
+
+          .bw-battle-strip {
+            margin-top: -44px;
           }
 
           .bw-battle-mode-grid img {
