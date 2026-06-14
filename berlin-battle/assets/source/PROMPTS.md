@@ -25,6 +25,49 @@ Constraints: each cell must clearly represent the named food in the order listed
 
 The sheet was cropped into `assets/cards/*.webp` at 640x640.
 
+## BerlinWalk Games Topic Cover Standard
+
+Added 2026-06-14 after Yusuf's feedback on the opening Games cards.
+
+Standard:
+
+- Use one generated sprite sheet per game surface when possible so topic covers share one lighting/style family.
+- Crop each topic cover to `16:10` landscape and save optimized `.webp` files at `960x600`.
+- Store finished covers under `berlin-battle/assets/topics/`.
+- Store the raw generated sheet and a small review contact sheet under `berlin-battle/assets/source/`.
+- Visual language: premium playful game-cover art, dynamic but clean, BerlinWalk green/yellow/lime/cream palette, glow rings, VS energy, motion streaks or spark particles, soft depth, and clear Berlin/topic cues.
+- Avoid text, letters, numbers, logos, watermarks, flat vector art, unrelated AI styles, black vignette backgrounds, and random photo sources mixed with generated game art.
+
+Current source files:
+
+- `berlin-games-topic-covers-sheet-20260614.png`
+- `berlin-games-topic-covers-contact-sheet-20260614.jpg`
+
+Current finished covers:
+
+- `../topics/food-battle-cover.webp`
+- `../topics/district-battle-cover.webp`
+- `../topics/museum-battle-cover.webp`
+- `../topics/night-battle-cover.webp`
+
+Prompt:
+
+```text
+Create one 2x2 sprite sheet of four standardized website game cover images for BerlinWalk Games. Use case: stylized-concept. Asset type: responsive game topic card cover art, no text.
+
+Overall style: polished playful game-cover art, dynamic but premium, BerlinWalk brand palette with deep green #1B5E20, bright yellow #FFE600, lime #7CB342, cream #FAFAF5, white highlights, tiny Berlin red only as a small accent. Add subtle game effects: glow rings, versus energy, motion streaks, spark particles, soft depth, cinematic studio lighting. Must feel like one coherent family, not four unrelated images. No visible words, no letters, no numbers, no logos, no watermarks, no UI buttons.
+
+Composition: exact 2 by 2 grid, equal rectangular cells in landscape 16:10 ratio, each cell crop-safe with generous edge margin. Clear separation between cells. Each cell should work as a standalone card cover in a web grid.
+
+Cells in exact order left-to-right, top-to-bottom:
+1. Berlin Food Battle: appetizing Berlin street-food duel with stylized döner/currywurst/pretzel elements as game pieces, yellow-green energy burst, no brand logos.
+2. Berlin District Battle: playful map-board battle of Berlin neighborhoods with colorful district tiles, mini landmarks, location pins, game-board energy.
+3. Berlin Museum Battle: museum/culture battle with classical column, Pergamon/Museum Island mood, ticket/card artifacts, puzzle/game glow, not a real photo.
+4. Berlin Night Battle: Berlin nightlife mood with disco ball, neon green/yellow glow, club lights, abstract dance-floor energy, no club logos.
+
+Output only the final 2x2 image sheet. No labels or text inside the image.
+```
+
 ## BerlinTools Icon
 
 Source files:

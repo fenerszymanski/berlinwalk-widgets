@@ -2,6 +2,24 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle cover/scroll correction)
+
+**Did:** Replaced the mixed opening-game visuals with standardized generated Games cover art and tightened the embed layout to avoid internal scrolling on the opening screen.
+
+**Changed:**
+- `berlin-battle/assets/topics/` — added 4 optimized 960x600 `.webp` topic covers for Food, District, Museum, and Night battles.
+- `berlin-battle/assets/source/` — saved the raw generated sprite sheet, contact sheet, and prompt/standard notes.
+- `berlin-battle/data.json` — wired the four topic cards to the new generated cover art.
+- `berlin-battle/index.html` — changed the opening grid to a compact Games shelf, added explicit parent `bw-resize` posts after render/image/canvas changes, and prepared share/result URLs for `/games/berlin-battle`.
+- `../BERLINWALK_BRAND_REFERENCE.md`, `../PROJECT_MEMORY.md`, and automation memory — recorded the BerlinWalk Games cover-art standard.
+
+**QA:** JSON parse, inline JS syntax, 960x600 image dimensions, and `git diff --check` passed. Browser QA passed locally: 1280x720 opening shell is 435px with 4 loaded topic images, no internal scroll and horizontal overflow 0; 390x844 opening shell is 526px, two-column cards, no internal scroll and horizontal overflow 0; playable game flow completed 15 choices with result canvas present. Local iframe embed simulation resized from 320px to 460px on load and 741px after starting the game.
+
+**Opened:** Push/deploy still needed before GitHub Pages and Wix embeds show the new cover art/layout. Wix `/games/berlin-battle` page still needs to be created/published in Wix Editor before the prepared Games URL works publicly.
+**Closed:** Opening game cards no longer mix food photos, tool icons, and route photos; the opening embed screen no longer scrolls in local/iframe QA.
+
+**Next session should:** Push/deploy this repo, then create the Wix Games page and verify `/games/berlin-battle` before replacing or redirecting `/tools/berlin-battle`.
+
 ## 2026-06-14 — Codex (Berlin Battle Games/layout revision)
 
 **Did:** Revised Berlin Battle so it no longer feels like a normal BerlinTools directory item, and fixed Yusuf's opening-screen/matchup layout feedback.
