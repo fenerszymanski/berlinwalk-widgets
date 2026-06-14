@@ -728,6 +728,174 @@
       min-width: 0;
     }
 
+    #bw-trip-planner .bw-quiz-shell {
+      background:
+        linear-gradient(135deg, rgba(27, 94, 32, 0.96), rgba(20, 63, 23, 0.98)),
+        var(--bw-green);
+      border: 1px solid rgba(255, 230, 0, 0.34);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: grid;
+      gap: 12px;
+      overflow: hidden;
+      padding: 14px;
+      position: relative;
+    }
+
+    #bw-trip-planner .bw-quiz-shell::before {
+      background: var(--bw-yellow);
+      content: "";
+      height: 5px;
+      left: 14px;
+      position: absolute;
+      right: 14px;
+      top: 0;
+    }
+
+    #bw-trip-planner .bw-quiz-top {
+      align-items: start;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding-top: 7px;
+    }
+
+    #bw-trip-planner .bw-quiz-copy {
+      display: grid;
+      gap: 5px;
+      min-width: 0;
+    }
+
+    #bw-trip-planner .bw-quiz-copy strong,
+    #bw-trip-planner .bw-quiz-copy span,
+    #bw-trip-planner .bw-quiz-count,
+    #bw-trip-planner .bw-quiz-preview {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-quiz-copy strong {
+      color: var(--bw-yellow);
+      font-size: 13.5px;
+      font-weight: 950;
+      letter-spacing: 1.1px;
+      line-height: 1.15;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-quiz-copy span {
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 11.2px;
+      font-weight: 650;
+      line-height: 1.38;
+    }
+
+    #bw-trip-planner .bw-quiz-count {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      flex: 0 0 auto;
+      font-size: 10px;
+      font-weight: 950;
+      line-height: 1.1;
+      padding: 8px 10px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #bw-trip-planner .bw-quiz-track {
+      background: rgba(255, 255, 255, 0.17);
+      border-radius: 999px;
+      height: 9px;
+      overflow: hidden;
+    }
+
+    #bw-trip-planner .bw-quiz-track span {
+      background: linear-gradient(90deg, var(--bw-yellow), var(--bw-lime));
+      border-radius: inherit;
+      display: block;
+      height: 100%;
+      transition: width 0.2s ease;
+      width: var(--quiz-progress, 8%);
+    }
+
+    #bw-trip-planner .bw-quiz-preview {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 8px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 10.8px;
+      font-weight: 750;
+      line-height: 1.35;
+      padding: 9px 10px;
+    }
+
+    #bw-trip-planner .bw-quiz-nav {
+      align-items: center;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    #bw-trip-planner .bw-quiz-back,
+    #bw-trip-planner .bw-quiz-next {
+      align-items: center;
+      border: 0;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 11.5px;
+      font-weight: 950;
+      justify-content: center;
+      line-height: 1.15;
+      min-height: 46px;
+      padding: 12px 14px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-quiz-back {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--bw-white);
+    }
+
+    #bw-trip-planner .bw-quiz-back:disabled {
+      cursor: default;
+      opacity: 0.42;
+    }
+
+    #bw-trip-planner .bw-quiz-next {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      justify-self: stretch;
+      letter-spacing: 0.7px;
+    }
+
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-start-card,
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-build-card,
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-input-guide,
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-trip-presets,
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-advanced-summary {
+      display: none !important;
+    }
+
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-question {
+      display: none;
+    }
+
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-question.is-quiz-active {
+      display: block;
+    }
+
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-plan-details {
+      gap: 0;
+    }
+
+    #bw-trip-planner .bw-form.is-quiz-flow .bw-advanced-body {
+      display: grid;
+      gap: 13px;
+    }
+
     #bw-trip-planner .bw-start-card,
     #bw-trip-planner .bw-build-card,
     #bw-trip-planner .bw-planning-card {
@@ -10030,6 +10198,18 @@
         <section class="bw-input-guide" data-input-guide aria-label="Selected trip inputs"></section>
         <section class="bw-trip-presets" data-trip-presets aria-label="Trip style shortcuts"></section>
 
+        <section class="bw-quiz-shell" data-quiz-shell aria-label="Berlin trip planner quiz progress">
+          <div class="bw-quiz-top">
+            <div class="bw-quiz-copy">
+              <strong data-quiz-title>Build your Berlin plan</strong>
+              <span data-quiz-subtitle>Answer one thing at a time. I will use the defaults where you skip nothing.</span>
+            </div>
+            <span class="bw-quiz-count" data-quiz-count>Step 1 of 12</span>
+          </div>
+          <div class="bw-quiz-track" aria-hidden="true"><span data-quiz-progress></span></div>
+          <span class="bw-quiz-preview" data-quiz-preview>So far: 3 days, first time, history and Wall context.</span>
+        </section>
+
         <div class="bw-question">
           <span class="bw-label">Arrival date</span>
           <div class="bw-date-row">
@@ -10165,11 +10345,11 @@
         </div>
 
         <div class="bw-question" data-tour-intent-question>
-          <span class="bw-label">Walking tour</span>
+          <span class="bw-label">Walking-tour fit</span>
           <div class="bw-options cols-3" data-group="tourIntent">
-            <button class="bw-option active" type="button" data-value="considering"><span class="bw-opt-icon">NO</span><span class="bw-opt-copy"><span class="bw-opt-title">Not booked yet</span><span class="bw-opt-sub">Keep one good slot</span></span></button>
+            <button class="bw-option active" type="button" data-value="considering"><span class="bw-opt-icon">YES</span><span class="bw-opt-copy"><span class="bw-opt-title">Suggest a good slot</span><span class="bw-opt-sub">After the plan makes sense</span></span></button>
             <button class="bw-option" type="button" data-value="booked"><span class="bw-opt-icon">OK</span><span class="bw-opt-copy"><span class="bw-opt-title">Already booked</span><span class="bw-opt-sub">Show prep notes</span></span></button>
-            <button class="bw-option" type="button" data-value="maybe"><span class="bw-opt-icon">?</span><span class="bw-opt-copy"><span class="bw-opt-title">Not sure</span><span class="bw-opt-sub">Keep it light</span></span></button>
+            <button class="bw-option" type="button" data-value="maybe"><span class="bw-opt-icon">?</span><span class="bw-opt-copy"><span class="bw-opt-title">Maybe later</span><span class="bw-opt-sub">Keep it light</span></span></button>
           </div>
         </div>
 
@@ -10182,6 +10362,10 @@
           <p class="bw-build-note" data-build-note>All required details are visible here. Change anything that does not match your trip.</p>
         </section>
           </div>
+        </section>
+        <section class="bw-quiz-nav" data-quiz-nav aria-label="Quiz navigation">
+          <button class="bw-quiz-back" type="button" data-quiz-back>Back</button>
+          <button class="bw-quiz-next" type="button" data-quiz-next>Next question</button>
         </section>
       </form>
 
@@ -10494,6 +10678,98 @@
     pace: 'balanced',
     tourIntent: 'considering'
   };
+  var quizFlowEnabled = true;
+  var quizCurrentStep = 0;
+  var quizAdvanceTimer = null;
+  var quizStepViews = {};
+  var QUIZ_STEPS = [
+    {
+      key: 'arrivalDate',
+      selector: '[data-arrival-date]',
+      title: 'When are you coming to Berlin?',
+      subtitle: 'This sets the weather, opening-day warnings, and first realistic tour slot.',
+      next: 'Next: trip length'
+    },
+    {
+      key: 'tripLength',
+      group: 'tripLength',
+      title: 'How many days do you have?',
+      subtitle: 'I will keep the plan realistic for the time you actually have.',
+      next: 'Next: arrival time'
+    },
+    {
+      key: 'arrivalTime',
+      group: 'arrivalTime',
+      title: 'What time do you arrive?',
+      subtitle: 'Your first day should feel useful, not overloaded.',
+      next: 'Next: start point'
+    },
+    {
+      key: 'arrivalPoint',
+      group: 'arrivalPoint',
+      title: 'Where do you start from?',
+      subtitle: 'Airport, train station, hotel, and car arrivals need different first moves.',
+      next: 'Next: stay area'
+    },
+    {
+      key: 'stayArea',
+      group: 'stayArea',
+      title: 'Where are you staying?',
+      subtitle: 'This shapes dinner, transit, and how much city-crossing the plan should avoid.',
+      next: 'Next: who is traveling'
+    },
+    {
+      key: 'groupType',
+      group: 'groupType',
+      title: 'Who is traveling?',
+      subtitle: 'Solo, family, friends, and slower trips need different pacing.',
+      next: 'Next: first-time status'
+    },
+    {
+      key: 'firstTime',
+      group: 'firstTime',
+      title: 'Is this your first time in Berlin?',
+      subtitle: 'First-timers usually need the city to click before adding more stops.',
+      next: 'Next: interests'
+    },
+    {
+      key: 'interests',
+      group: 'interests',
+      title: 'What do you care about most?',
+      subtitle: 'Choose a few. This is the main signal for your day themes.',
+      next: 'Next: trip mode',
+      multi: true
+    },
+    {
+      key: 'budgetStyle',
+      group: 'budgetStyle',
+      title: 'What trip mode fits you?',
+      subtitle: 'This controls how many paid anchors, comfort choices, and reservation checks appear.',
+      next: 'Next: plan needs'
+    },
+    {
+      key: 'mustHandle',
+      group: 'mustHandle',
+      title: 'What should the plan handle?',
+      subtitle: 'Pick practical constraints now so the route does not break later.',
+      next: 'Next: pace',
+      multi: true
+    },
+    {
+      key: 'pace',
+      group: 'pace',
+      title: 'How full should each day feel?',
+      subtitle: 'Balanced is the safest default for Berlin on foot and public transport.',
+      next: 'Next: tour fit'
+    },
+    {
+      key: 'tourIntent',
+      group: 'tourIntent',
+      title: 'Do you want a walking-tour-friendly plan?',
+      subtitle: 'I will only place the tour after the plan has already given you value.',
+      next: 'Build my Berlin plan'
+    }
+  ];
   var TRIP_PRESETS = [
     {
       key: 'classic',
@@ -12008,6 +12284,139 @@
       pace: labelFor('pace', state.pace),
       tourIntent: labelFor('tourIntent', state.tourIntent)
     };
+  }
+
+  function quizStepElement(step) {
+    if (!step) return null;
+    if (step.selector) {
+      var input = root.querySelector(step.selector);
+      return input ? input.closest('.bw-question') : null;
+    }
+    if (step.group) {
+      var group = root.querySelector('[data-group="' + step.group + '"]');
+      return group ? group.closest('.bw-question') : null;
+    }
+    return null;
+  }
+
+  function quizStepIndexForKey(key) {
+    for (var index = 0; index < QUIZ_STEPS.length; index += 1) {
+      if (QUIZ_STEPS[index].key === key) return index;
+    }
+    return -1;
+  }
+
+  function quizValueForStep(step) {
+    if (!step) return '';
+    if (step.key === 'arrivalDate') return state.arrivalDate;
+    var value = state[step.key];
+    return Array.isArray(value) ? value.join(',') : String(value || '');
+  }
+
+  function quizPreviewText() {
+    var labels = selectedLabels();
+    var interests = labels.interests || 'History';
+    var needs = labels.mustHandle || 'Rain backup';
+    return 'So far: ' + labels.tripLength + ', ' + labels.arrivalTime + ', ' + labels.firstTime.toLowerCase() + ', ' + interests + '. Needs: ' + needs + '.';
+  }
+
+  function trackQuizStepView(step) {
+    if (!quizFlowEnabled || !step) return;
+    var key = step.key;
+    if (quizStepViews[key]) return;
+    quizStepViews[key] = true;
+    track('bw_trip_planner_quiz_step_view', {
+      flow: 'one_question_quiz',
+      step_index: quizCurrentStep + 1,
+      step_count: QUIZ_STEPS.length,
+      step_key: key,
+      value: quizValueForStep(step)
+    });
+  }
+
+  function updateQuizUi() {
+    if (!quizFlowEnabled) return;
+    var form = root.querySelector('#bw-trip-inputs');
+    var detailsPanel = root.querySelector('[data-plan-details]');
+    var shell = root.querySelector('[data-quiz-shell]');
+    var nav = root.querySelector('[data-quiz-nav]');
+    if (form) {
+      form.classList.add('is-quiz-flow');
+      form.classList.toggle('is-quiz-complete', quizCurrentStep >= QUIZ_STEPS.length - 1);
+    }
+    if (detailsPanel) detailsPanel.hidden = false;
+    if (shell) shell.hidden = Boolean(planningInProgress);
+    if (nav) nav.hidden = Boolean(planningInProgress);
+
+    QUIZ_STEPS.forEach(function (step, index) {
+      var question = quizStepElement(step);
+      if (!question) return;
+      question.classList.toggle('is-quiz-active', index === quizCurrentStep && !planningInProgress);
+      question.setAttribute('data-quiz-step', String(index + 1));
+      var label = question.querySelector('.bw-label');
+      if (label) label.textContent = step.title;
+      var note = question.querySelector('.bw-label-note');
+      if (note && step.multi) note.textContent = 'Choose any that apply';
+    });
+
+    var step = QUIZ_STEPS[quizCurrentStep] || QUIZ_STEPS[0];
+    var progress = QUIZ_STEPS.length ? Math.round(((quizCurrentStep + 1) / QUIZ_STEPS.length) * 100) : 100;
+    setText('[data-quiz-title]', step ? step.title : 'Build your Berlin plan');
+    setText('[data-quiz-subtitle]', step ? step.subtitle : 'Answer one thing at a time.');
+    setText('[data-quiz-count]', 'Step ' + (quizCurrentStep + 1) + ' of ' + QUIZ_STEPS.length);
+    setText('[data-quiz-preview]', quizPreviewText());
+    var progressBar = root.querySelector('[data-quiz-progress]');
+    if (progressBar) progressBar.style.width = progress + '%';
+    var back = root.querySelector('[data-quiz-back]');
+    if (back) back.disabled = quizCurrentStep <= 0 || planningInProgress;
+    var next = root.querySelector('[data-quiz-next]');
+    if (next) {
+      next.disabled = planningInProgress;
+      next.textContent = quizCurrentStep >= QUIZ_STEPS.length - 1
+        ? (planGenerated ? 'Update my Berlin plan' : 'Build my Berlin plan')
+        : (step && step.next ? step.next : 'Next question');
+    }
+    trackQuizStepView(step);
+  }
+
+  function setQuizStep(index, options) {
+    if (!quizFlowEnabled || !QUIZ_STEPS.length) return;
+    var nextIndex = Math.max(0, Math.min(QUIZ_STEPS.length - 1, Number(index) || 0));
+    quizCurrentStep = nextIndex;
+    updateQuizUi();
+    if (!options || options.scroll !== false) {
+      syncPlannerFrame(root.querySelector('[data-quiz-shell]') || quizStepElement(QUIZ_STEPS[quizCurrentStep]), true);
+    }
+  }
+
+  function advanceQuizStep() {
+    if (!quizFlowEnabled || planningInProgress) return;
+    if (quizCurrentStep >= QUIZ_STEPS.length - 1) {
+      detailsStepStarted = true;
+      track('bw_trip_planner_quiz_complete', {
+        flow: 'one_question_quiz',
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength
+      });
+      startPlanning();
+      return;
+    }
+    setQuizStep(quizCurrentStep + 1);
+  }
+
+  function retreatQuizStep() {
+    if (!quizFlowEnabled || planningInProgress) return;
+    setQuizStep(quizCurrentStep - 1);
+  }
+
+  function scheduleQuizAdvance() {
+    if (!quizFlowEnabled || planGenerated || planningInProgress) return;
+    if (quizCurrentStep >= QUIZ_STEPS.length - 1) return;
+    if (quizAdvanceTimer) clearTimeout(quizAdvanceTimer);
+    quizAdvanceTimer = setTimeout(function () {
+      quizAdvanceTimer = null;
+      advanceQuizStep();
+    }, 180);
   }
 
   function sortedArray(values) {
@@ -16800,14 +17209,14 @@
     var buildLabel = root.querySelector('[data-build-plan-label]');
     var buildNote = root.querySelector('[data-build-note]');
     var resultVisible = planGenerated && !unlocked;
-    var showDetails = detailsStepStarted || planGenerated || planningInProgress;
+    var showDetails = quizFlowEnabled || detailsStepStarted || planGenerated || planningInProgress;
     if (body) {
       body.classList.toggle('is-result-ready', planGenerated);
       body.classList.toggle('is-result-visible', resultVisible);
       body.classList.toggle('is-details-step', showDetails);
     }
-    if (startCard) startCard.hidden = showDetails;
-    if (detailsPanel) detailsPanel.hidden = !showDetails;
+    if (startCard) startCard.hidden = quizFlowEnabled || showDetails;
+    if (detailsPanel) detailsPanel.hidden = quizFlowEnabled ? false : !showDetails;
     if (startButton) startButton.disabled = planningInProgress;
     if (result) result.hidden = !resultVisible;
     if (planning) planning.hidden = !planningInProgress;
@@ -16820,6 +17229,7 @@
         ? 'This takes about 6 seconds. I am checking arrival timing, route shape, weather, and tour fit.'
         : (planGenerated ? 'Change any required detail above, then update the preview.' : 'All required details are visible here. Change anything that does not match your trip.');
     }
+    updateQuizUi();
   }
 
   function showPlanDetailsStep() {
@@ -16829,9 +17239,9 @@
     track('bw_trip_planner_details_view', {
       arrival_date: state.arrivalDate,
       trip_length: state.tripLength,
-      flow: 'two_step_required_details'
+      flow: quizFlowEnabled ? 'one_question_quiz' : 'two_step_required_details'
     });
-    var details = root.querySelector('[data-plan-details]');
+    var details = quizFlowEnabled ? (root.querySelector('[data-quiz-shell]') || quizStepElement(QUIZ_STEPS[quizCurrentStep])) : root.querySelector('[data-plan-details]');
     syncPlannerFrame(details, true);
   }
 
@@ -16896,7 +17306,7 @@
       trip_length: state.tripLength,
       tour_intent: state.tourIntent,
       pace: state.pace,
-      flow: 'two_step_required_details'
+      flow: quizFlowEnabled ? 'one_question_quiz' : 'two_step_required_details'
     });
     planningTimer = setTimeout(function () {
       planningTimer = null;
@@ -21662,8 +22072,9 @@
       var key = group && group.getAttribute('data-group');
       if (!key) return;
       var value = option.getAttribute('data-value');
+      var isMulti = group.getAttribute('data-multi') === 'true';
       trackFormStart(key);
-      if (group.getAttribute('data-multi') === 'true') {
+      if (isMulti) {
         option.classList.toggle('active');
         state[key] = Array.prototype.slice.call(group.querySelectorAll('.bw-option.active')).map(function (button) {
           return button.getAttribute('data-value');
@@ -21684,6 +22095,19 @@
       var reloadWeather = key === 'tripLength';
       markPlanDirty();
       if (reloadWeather) loadWeather();
+      var quizStepIndex = quizStepIndexForKey(key);
+      if (quizFlowEnabled && quizStepIndex !== -1) {
+        track('bw_trip_planner_quiz_answer', {
+          flow: 'one_question_quiz',
+          step_index: quizStepIndex + 1,
+          step_count: QUIZ_STEPS.length,
+          step_key: key,
+          value: Array.isArray(state[key]) ? state[key].join(',') : String(state[key] || ''),
+          selected_count: Array.isArray(state[key]) ? state[key].length : 1
+        });
+        updateQuizUi();
+        if (!isMulti) scheduleQuizAdvance();
+      }
       return;
     }
 
@@ -21783,6 +22207,16 @@
 
     if (event.target.closest('[data-start-plan]')) {
       showPlanDetailsStep();
+      return;
+    }
+
+    if (event.target.closest('[data-quiz-back]')) {
+      retreatQuizStep();
+      return;
+    }
+
+    if (event.target.closest('[data-quiz-next]')) {
+      advanceQuizStep();
       return;
     }
 
@@ -21901,6 +22335,17 @@
       setActionStatus('');
       markPlanDirty();
       loadWeather();
+      if (quizFlowEnabled) {
+        track('bw_trip_planner_quiz_answer', {
+          flow: 'one_question_quiz',
+          step_index: quizStepIndexForKey('arrivalDate') + 1,
+          step_count: QUIZ_STEPS.length,
+          step_key: 'arrivalDate',
+          value: state.arrivalDate,
+          selected_count: 1
+        });
+        updateQuizUi();
+      }
     }
   });
 
@@ -21909,6 +22354,7 @@
 
   upgradeOptionIcons();
   initFromParams();
+  if (quizFlowEnabled) detailsStepStarted = true;
   renderPlanChrome(buildPlan());
   updatePlanningUi();
   updateUnlockUi();

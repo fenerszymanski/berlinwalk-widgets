@@ -2,6 +2,10 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Trip Planner quiz flow implementation)
+
+Implemented the Ultimate Berlin Trip Planner one-question-at-a-time quiz flow in `ultimate-berlin-trip-planner/index.html`: quiz progress shell, 12-step sequencing, Back/Next controls, single-choice auto-advance, multi-choice manual Next, final build CTA, and quiz tracking events. QA passed with local browser full-flow assertion, mobile 390px no-overflow check, inline script parse, and `git diff --check`; no live Wix, Meta, Google, ads, budgets, email, or social systems were changed. Next: push/deploy `berlinwalk-widgets`, cold-load `/berlin-trip-planner`, and monitor quiz-step/build/unlock events before adding paid pressure.
+
 ## 2026-06-13 — Codex (World Cup score update)
 
 **Did:** Added the late-evening final score for the World Cup fixtures widget.
