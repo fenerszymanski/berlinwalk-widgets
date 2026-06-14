@@ -2,6 +2,21 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle post-push QA)
+
+**Did:** Verified Yusuf's push/deploy for the Berlin Battle widget.
+
+**Changed:**
+- `../PROJECT_MEMORY.md` and `../SESSION_LOG.md` — recorded the live deployment verification.
+- `SESSION_LOG.md` — added this widget-repo verification note.
+
+**QA:** Local `main` and `origin/main` both point to `15c1c08`. GitHub Pages returns 200 for `/berlin-battle/`, `/berlin-battle/data.json`, and `/tools-hub/data.json`; deployed `data.json` has 4 topics and 16 food items. Live Playwright QA passed for direct GitHub Pages widget: 15 choices, unique first-round 16 items, final winner, 15 choice events + 1 complete event, nonblank canvas, loaded images, and no overflow. Live `/tools/berlin-battle` embeds the GitHub Pages iframe; desktop/mobile overflow is 0. Live `/berlin-tools` shows the Berlin Battle card and loads the 512px Wix icon.
+
+**Opened:** none
+**Closed:** Berlin Battle is live on GitHub Pages and embedded correctly in Wix.
+
+**Next session should:** Monitor usage/share behavior, then choose/build the next battle topic.
+
 ## 2026-06-14 — Codex (Berlin Battle MVP)
 
 **Did:** Built the first `Berlin Battle` tournament widget with playable `Berlin Food Battle`, coming-soon topic cards, 16 generated food assets, result share card, and BerlinTools integration.
