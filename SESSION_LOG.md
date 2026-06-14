@@ -2,6 +2,23 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle hero overlay fix)
+
+**Did:** Revised the Berlin Battle hero/mode-card transition so the cards overlay the hero instead of sitting in a detached green band.
+
+**Changed:**
+- `berlin-battle-page/berlin-battle-page-element.js` — `.bw-battle-strip` now uses a transparent-to-green overlay gradient, negative top margin, stronger card backgrounds, and shadows.
+- `berlin-battle-page/berlin-battle-page-element.js` — game iframe cache-buster bumped to `share-hero-overlay-fix-20260614`.
+- `berlin-battle-page/README.md` — Wix snippet bumped to `?v=share-hero-overlay-fix-20260614`.
+- `../SESSION_LOG.md` and automation memory — recorded the overlay fix.
+
+**QA:** Wrapper JS syntax, game inline script parse, and `git diff --check` passed. Local server logs confirmed wrapper loads the new game iframe URL with `v=share-hero-overlay-fix-20260614`; deeper Browser QA timed out, so live visual still needs post-deploy manual check.
+
+**Opened:** Push/deploy and update/publish the Wix snippet with `?v=share-hero-overlay-fix-20260614`, then verify the live hero transition and mobile Share result.
+**Closed:** Local overlay-style hero fix is ready.
+
+**Next session should:** Cold-load live `/games/berlin-battle` after deploy and visually inspect the hero/mode-card transition.
+
 ## 2026-06-14 — Codex (Trip Planner preview + email gate)
 
 **Did:** Implemented the Trip Planner conversion tweak Yusuf approved: long form stays, Day 1 gives more value before the gate, and the gate now feels like emailing the finished plan to yourself. **Changed:** `ultimate-berlin-trip-planner/index.html` now renders 3 Day 1 preview cards when possible, adds a `Why this Day 1 works` route/weather/watch-out proof block, fills the locked preview from the generated plan (`Day 2`, `Day 3`, remaining days, maps, backups, PDF), and changes visible gate copy to `Send the full Berlin plan to yourself` / `Email me my full plan`; `ultimate-berlin-trip-planner/launch-audit.mjs` now checks the new preview/gate behavior. **QA:** Inline JS parse passed, `git diff --check` passed, launch audit passed the updated Trip Planner checks but still has 4 unrelated existing blockers, and local Browser QA on desktop 1280px plus mobile 390px confirmed 3 preview cards, 3 proof items, 6 dynamic locked rows, correct CTA, and no horizontal overflow. **Opened:** deploy/publish and watch gate-to-email conversion. **Closed:** local preview/gate optimization is ready.
