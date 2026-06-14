@@ -31,7 +31,7 @@
 
 ## Body
 
-Taxi in Berlin is useful, but it is rarely the cheapest way to move around the city. For most visitors, the best default is public transport. A taxi becomes worth it when you are arriving tired from BER Airport, carrying luggage, travelling late, splitting the fare with three or four people, or going somewhere awkward by train.
+Taxi in Berlin is useful, but it is rarely the cheapest way to move around the city. For most visitors, the best default is [public transport](https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus). A taxi becomes worth it when you are arriving tired from BER Airport, carrying luggage, travelling late, splitting the fare with three or four people, or going somewhere awkward by train.
 
 The mistake is treating Berlin like a city where every short ride should be a cab. Berlin's U-Bahn, S-Bahn, trams and buses are too good for that. The other mistake is treating every app car as automatically cheaper or safer than a normal taxi. In Berlin, licensed taxis are regulated, metered and widely available, while apps are useful mainly because they give you a pickup point, cashless payment and sometimes an upfront price.
 
@@ -49,13 +49,13 @@ My simple rule:
 - **Late night and tired:** taxi or an app can be worth it.
 - **Short central trip under 2 km:** walk unless weather, luggage or mobility says otherwise.
 
-If you are joining the BerlinWalk tour, the start at the World Clock on Alexanderplatz is easy by public transport. A taxi is only worth it if your hotel is awkwardly placed, you are short on time, or you are arriving with luggage before storing it.
+If you are joining the [BerlinWalk tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based), the start at the World Clock on Alexanderplatz is easy by public transport. A taxi is only worth it if your hotel is awkwardly placed, you are short on time, or you are arriving with luggage before storing it.
 
 {{widget:berlin-taxi-uber-cost-checker}}
 
 ## How much does a taxi in Berlin cost?
 
-Berlin taxis use an official tariff. According to Berlin.de, the regular taxi meter starts with an initial charge of EUR 4.30. The first three kilometres cost EUR 2.80 per kilometre, kilometres three to seven cost EUR 2.60 per kilometre, and distance after seven kilometres costs EUR 2.10 per kilometre. Waiting time is charged at EUR 39 per hour, including traffic-related waiting.
+Berlin taxis use an official tariff. According to [Berlin.de](https://www.berlin.de/en/public-transportation/1756978-2913840-taxi-phone-numbers-fares-rules.en.html), the regular taxi meter starts with an initial charge of EUR 4.30. The first three kilometres cost EUR 2.80 per kilometre, kilometres three to seven cost EUR 2.60 per kilometre, and distance after seven kilometres costs EUR 2.10 per kilometre. Waiting time is charged at EUR 39 per hour, including traffic-related waiting.
 
 That means a short city ride is often more expensive than tourists expect. A 3 km ride is not just three times the kilometre price because the initial charge comes first. A longer ride across the city can still be reasonable when several people split it.
 
@@ -63,15 +63,15 @@ Berlin also has a short-distance fare: if you hail a taxi on the street, a ride 
 
 ## BER Airport taxi: what tourists should know
 
-At BER Airport, the safest move is boring: follow the official signs and use the taxi ranks outside Terminal 1 on Level E0. The airport's own guidance warns passengers to only get into vehicles marked as taxis at the designated stands because fraudulent suppliers can appear outside those areas.
+At BER Airport, the safest move is boring: follow the official signs and use the taxi ranks outside Terminal 1 on Level E0. The [airport's own guidance](https://ber.berlin-airport.de/en/orientation/getting-here/taxi.html) warns passengers to only get into vehicles marked as taxis at the designated stands because fraudulent suppliers can appear outside those areas.
 
 Berlin.de gives rough official examples for airport rides: about EUR 58 from Alexanderplatz to BER and about EUR 63 from the western city centre around Kurfürstendamm or Zoologischer Garten. There is also a EUR 1.50 surcharge for journeys from BER Airport.
 
-The train is much cheaper. BER is in fare zone C, so you need an ABC ticket to central Berlin. VBB states that from January 1, 2026, the single ABC ticket is EUR 5. For one or two people, the train is usually the value choice. For four people with luggage, a taxi can feel much more reasonable.
+The train is much cheaper. BER is in fare zone C, so you need an ABC ticket to central Berlin. [VBB](https://www.vbb.de/en/driving-information/ber-airport/) states that from January 1, 2026, the single ABC ticket is EUR 5. For one or two people, the train is usually the value choice. For four people with luggage, a taxi can feel much more reasonable.
 
 ## Uber in Berlin: is it the same as a taxi?
 
-Uber exists in Berlin, but do not assume it works exactly like it does in the United States or the UK. Uber's own Berlin taxi page says you can request local taxis through the Uber app, get cashless payments, see upfront prices, and be matched with a licensed taxi driver.
+Uber exists in Berlin, but do not assume it works exactly like it does in the United States or the UK. [Uber's own Berlin taxi page](https://www.uber.com/de/en/r/cities/taxi/berlin-be-de/) says you can request local taxis through the Uber app, get cashless payments, see upfront prices, and be matched with a licensed taxi driver.
 
 That is the practical tourist takeaway: in Berlin, Uber can be useful as a taxi-request app. It is not automatically a bargain. Before accepting a ride, compare the app price with the rough taxi estimate and the public transport fare.
 
@@ -79,7 +79,7 @@ Other apps such as Free Now and Bolt Taxi can also be useful, especially when yo
 
 ## Taxi vs public transport in Berlin
 
-Public transport is the default winner for most tourist routes. Berlin.de lists the 2026 single ticket as EUR 4 for AB and EUR 5 for ABC. A valid Berlin ticket covers U-Bahn, S-Bahn, tram, bus and some ferries, so you are not buying separate tickets for each mode.
+Public transport is the default winner for most tourist routes. [Berlin.de lists the 2026 single ticket](https://www.berlin.de/en/public-transportation/1772016-2913840-tickets-fares-and-route-maps.en.html) as EUR 4 for AB and EUR 5 for ABC. A valid Berlin ticket covers U-Bahn, S-Bahn, tram, bus and some ferries, so you are not buying separate tickets for each mode.
 
 Use public transport for:
 
@@ -98,7 +98,7 @@ Use a taxi for:
 - A group of three or four where the fare split is reasonable.
 - A tight connection where saving 15 minutes matters.
 
-For the walking tour route, public transport usually wins. The tour starts at Alexanderplatz and ends near Hackescher Markt, both well connected. If you want to understand how those stops fit together, the BerlinWalk route page gives the full 12-stop story map.
+For the walking tour route, public transport usually wins. The tour starts at Alexanderplatz and ends near Hackescher Markt, both well connected. If you want to understand how those stops fit together, the [BerlinWalk route page](https://www.berlinwalk.com/berlin-walking-tour-route) gives the full 12-stop story map.
 
 ## Can you pay by card in Berlin taxis?
 
@@ -110,7 +110,7 @@ My practical advice is simple: if you need card payment, say **card please** bef
 
 Tipping taxi drivers in Berlin is not required. Locals often round up to the next euro if the ride was pleasant. If the driver helped with luggage or made a difficult airport arrival easier, one or two euros is a nice gesture.
 
-Do not copy North American taxi tipping percentages here. Berlin tipping culture is more modest. I explain the broader pattern in the BerlinWalk tipping guide, but for taxis the short version is: round up, keep it calm, and do not feel pressured.
+Do not copy North American taxi tipping percentages here. Berlin tipping culture is more modest. I explain the broader pattern in the [BerlinWalk tipping guide](https://www.berlinwalk.com/post/tipping-in-berlin), but for taxis the short version is: round up, keep it calm, and do not feel pressured.
 
 ## Tourist traps and red flags
 
