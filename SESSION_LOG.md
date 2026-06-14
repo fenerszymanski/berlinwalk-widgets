@@ -2,6 +2,23 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle share restore + hero gap)
+
+**Did:** Restored the visible `Share result` button on Berlin Battle results and tightened the dedicated Games page hero spacing.
+
+**Changed:**
+- `berlin-battle/index.html` — result actions always include `Share result`; mobile/native-share still uses Web Share, desktop fallback-copies text + link with a clear status.
+- `berlin-battle-page/berlin-battle-page-element.js` — hero height/padding and mode-strip padding tightened; iframe game cache-buster set to `share-hero-fix-20260614`.
+- `berlin-battle-page/README.md` — Wix snippet bumped to `?v=share-hero-fix-20260614`.
+- `../SESSION_LOG.md` and automation memory — recorded the fix.
+
+**QA:** Game inline script parse, wrapper JS syntax, and `git diff --check` passed. Local browser QA measured hero-to-strip gap 0, iframe version `share-hero-fix-20260614`, overflow 0; completed 15-choice game and result buttons were `Download share card`, `Copy text + link`, `Share result`.
+
+**Opened:** Push/deploy and update/publish the Wix snippet with `?v=share-hero-fix-20260614`, then verify live mobile share and desktop fallback.
+**Closed:** Local share-button visibility and hero-gap fixes are ready.
+
+**Next session should:** Cold-load live `/games/berlin-battle` after deploy on mobile and desktop.
+
 ## 2026-06-14 — Codex (Berlin Battle result UI polish)
 
 **Did:** Cleaned up the Berlin Battle result share panel after Yusuf flagged ambiguous button copy and tight share-card spacing.

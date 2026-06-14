@@ -992,11 +992,15 @@ function run() {
     /function\s+dayBlockWindow/.test(indexHtml) &&
       /function\s+dayBlockTimeHtml/.test(indexHtml) &&
       /bw-block-time-main/.test(indexHtml) &&
-      /Full timings, maps, PDF, and later days unlock below\./.test(indexHtml) &&
+      /Later days, map links, PDF, and arrival reminders continue after email\./.test(indexHtml) &&
+      /function\s+previewDayProofHtml/.test(indexHtml) &&
+      /function\s+lockedPlanPreviewHtml/.test(indexHtml) &&
+      /Why this Day 1 works/.test(indexHtml) &&
+      /Email me my full plan/.test(indexHtml) &&
       /dayBlockWindow\(day,\s*block,\s*index\)/.test(indexHtml) &&
       /09:30-12:00/.test(indexHtml) &&
       /Next 11:30/.test(indexHtml),
-    'Expected the locked preview to hint at timings and the unlocked itinerary/print/PDF/text export to expose deterministic time windows.'
+    'Expected Day 1 to show useful preview proof, email-to-self gate copy, and deterministic time windows in unlocked itinerary/print/PDF/text export.'
   );
   block(
     'Trip calendar export is available',

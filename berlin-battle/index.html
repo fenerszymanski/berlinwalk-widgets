@@ -1188,11 +1188,10 @@
     state.view = 'result';
     var winner = state.winner;
     var caption = resultCaption(winner);
-    var showNativeShare = shouldUseNativeShare();
     var shareActionsHtml =
       '<button class="bb-btn bb-btn-yellow" type="button" data-download-card>Download share card</button>' +
       '<button class="bb-btn bb-btn-secondary" type="button" data-copy-caption>Copy text + link</button>' +
-      (showNativeShare ? '<button class="bb-btn bb-btn-secondary" type="button" data-share-result>Share result</button>' : '');
+      '<button class="bb-btn bb-btn-secondary" type="button" data-share-result>Share result</button>';
     renderShell(
       '<h1 class="bb-title">Your winner is ' + escapeHtml(winner.name) + '</h1>' +
       '<p class="bb-subtitle">' + escapeHtml(resultLine(winner)) + '</p>',
@@ -1399,7 +1398,7 @@
     try {
       if (!shouldUseNativeShare()) {
         await copyText(caption);
-        setStatus('Share text copied. Paste it anywhere you want to share.');
+        setStatus('Desktop sharing is limited, so the text + link were copied.');
       } else if (navigator.share && canvas) {
         setStatus('Opening share sheet...');
         await drawShareCard(canvas, winner);

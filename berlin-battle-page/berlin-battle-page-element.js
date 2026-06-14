@@ -54,7 +54,7 @@
       url.searchParams.set('parent_path', window.location.pathname || '/games/berlin-battle');
       url.searchParams.set('parent_url', window.location.href);
       url.searchParams.set('attribution', 'none');
-      url.searchParams.set('v', 'label-spacing-fix-20260614');
+      url.searchParams.set('v', 'share-hero-fix-20260614');
       return url.toString();
     }
 
@@ -217,7 +217,7 @@
         }
 
         .bw-battle-hero {
-          min-height: clamp(430px, 58vw, 620px);
+          min-height: clamp(390px, 48vw, 560px);
           position: relative;
           display: grid;
           align-items: end;
@@ -245,7 +245,7 @@
         }
 
         .bw-battle-hero-inner {
-          padding: clamp(84px, 11vw, 128px) 0 clamp(34px, 7vw, 66px);
+          padding: clamp(76px, 9vw, 112px) 0 clamp(28px, 4vw, 42px);
         }
 
         .bw-battle-kicker,
@@ -321,7 +321,7 @@
           background: var(--bw-green);
           border-top: 8px solid var(--bw-yellow);
           color: var(--bw-white);
-          padding: 18px 0;
+          padding: 14px 0;
         }
 
         .bw-battle-mode-grid {
@@ -450,7 +450,7 @@
           }
 
           .bw-battle-hero {
-            min-height: 520px;
+            min-height: 480px;
           }
 
           .bw-battle-hero-overlay {
@@ -474,7 +474,7 @@
 
         @media (max-width: 520px) {
           .bw-battle-hero {
-            min-height: 500px;
+            min-height: 460px;
           }
 
           .bw-battle-hero-inner {

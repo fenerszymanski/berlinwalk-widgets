@@ -6650,6 +6650,103 @@
       margin-top: 2px;
     }
 
+    #bw-trip-planner .bw-preview-proof {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      padding: 8px;
+    }
+
+    #bw-trip-planner .bw-preview-proof-head {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+    }
+
+    #bw-trip-planner .bw-preview-proof-head strong,
+    #bw-trip-planner .bw-preview-proof-head span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-preview-proof-head strong {
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-preview-proof-head span {
+      color: var(--bw-muted);
+      font-size: 10.5px;
+      font-weight: 800;
+      line-height: 1.3;
+      text-align: right;
+    }
+
+    #bw-trip-planner .bw-preview-proof-grid {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-preview-proof-item {
+      background: var(--bw-lime-soft);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 7px;
+      grid-template-columns: 26px minmax(0, 1fr);
+      min-height: 58px;
+      padding: 7px;
+    }
+
+    #bw-trip-planner .bw-preview-proof-icon {
+      align-items: center;
+      background: var(--bw-white);
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 7px;
+      color: var(--bw-green);
+      display: inline-flex;
+      height: 26px;
+      justify-content: center;
+      width: 26px;
+    }
+
+    #bw-trip-planner .bw-preview-proof-icon .bw-svg-icon {
+      height: 14px;
+      width: 14px;
+    }
+
+    #bw-trip-planner .bw-preview-proof-copy,
+    #bw-trip-planner .bw-preview-proof-copy b,
+    #bw-trip-planner .bw-preview-proof-copy span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-preview-proof-copy b {
+      color: var(--bw-green);
+      font-size: 10.2px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-trip-planner .bw-preview-proof-copy span {
+      color: var(--bw-muted);
+      font-size: 9.8px;
+      font-weight: 760;
+      line-height: 1.28;
+      margin-top: 2px;
+    }
+
     #bw-trip-planner .bw-lock {
       background:
         linear-gradient(135deg, rgba(255, 230, 0, 0.2), rgba(124, 179, 66, 0.12)),
@@ -6691,6 +6788,33 @@
       position: relative;
     }
 
+    #bw-trip-planner .bw-preview-fade-head {
+      position: relative;
+      z-index: 2;
+    }
+
+    #bw-trip-planner .bw-preview-fade-head strong,
+    #bw-trip-planner .bw-preview-fade-head span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-preview-fade-head strong {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-preview-fade-head span {
+      color: var(--bw-muted);
+      font-size: 10.4px;
+      font-weight: 760;
+      line-height: 1.3;
+      margin-top: 2px;
+    }
+
     #bw-trip-planner .bw-preview-fade::after {
       background:
         linear-gradient(180deg, rgba(250, 250, 245, 0.16), rgba(250, 250, 245, 0.94) 58%, rgba(250, 250, 245, 0.98)),
@@ -6717,6 +6841,8 @@
       min-height: 54px;
       opacity: 0.62;
       padding: 8px;
+      position: relative;
+      z-index: 2;
     }
 
     #bw-trip-planner .bw-preview-fade-icon {
@@ -9833,6 +9959,10 @@
         grid-template-columns: 1fr;
       }
 
+      #bw-trip-planner .bw-preview-proof-grid {
+        grid-template-columns: 1fr;
+      }
+
       #bw-trip-planner .bw-preview-teaser-head {
         align-items: flex-start;
         flex-direction: column;
@@ -10417,27 +10547,23 @@
           <div class="bw-preview-fade bw-locked-only" data-lock-box>
             <div class="bw-preview-fade-row">
               <span class="bw-preview-fade-icon" aria-hidden="true">📋</span>
-              <span class="bw-preview-fade-copy"><b>Rest of Day 1</b><strong>Timing, first route, and arrival notes</strong><span>The detail starts right after unlock.</span></span>
-            </div>
-            <div class="bw-preview-fade-row">
-              <span class="bw-preview-fade-icon" aria-hidden="true">🗺️</span>
-              <span class="bw-preview-fade-copy"><b>Later days</b><strong>Day 2 onward, maps, PDF, and print</strong><span>The full plan continues below.</span></span>
+              <span class="bw-preview-fade-copy"><b>Full plan</b><strong>Later days, maps, PDF, and arrival reminders</strong><span>The personalized plan continues after email.</span></span>
             </div>
           </div>
 
           <div class="bw-lead-panel bw-locked-only" data-lead-panel>
             <div>
-              <h3 class="bw-lead-title">Unlock the full phone-ready plan + PDF</h3>
-              <p class="bw-lead-copy">Enter your email and the rest of this Berlin plan opens here.</p>
+              <h3 class="bw-lead-title">Send the full Berlin plan to yourself</h3>
+              <p class="bw-lead-copy">You already built the plan. Email yourself the full version so you do not lose it.</p>
             </div>
             <input class="bw-lead-input" data-lead-email type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email address" required>
-            <button class="bw-lead-submit" type="button" data-unlock-plan>Send plan + unlock PDF</button>
-            <p class="bw-lead-legal">By sending your email, you agree to receive this plan and Berlin arrival tips, and accept our terms and conditions. No spam; unsubscribe anytime.</p>
-            <div class="bw-delivery-grid" aria-label="What unlocks with email">
-              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">📄</span><span><strong>PDF</strong><span>Print version</span></span></div>
-              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">🔗</span><span><strong>Link</strong><span>Saved choices</span></span></div>
+            <button class="bw-lead-submit" type="button" data-unlock-plan>Email me my full plan</button>
+            <p class="bw-lead-legal">No spam. Just your plan and useful arrival reminders. You can unsubscribe anytime.</p>
+            <div class="bw-delivery-grid" aria-label="What arrives by email">
+              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">📆</span><span><strong>Full days</strong><span>Day 2 onward</span></span></div>
               <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">🗺️</span><span><strong>Maps</strong><span>Route links</span></span></div>
-              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">💌</span><span><strong>Tips</strong><span>Arrival emails</span></span></div>
+              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">🌦️</span><span><strong>Backups</strong><span>Weather/openings</span></span></div>
+              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">📄</span><span><strong>PDF</strong><span>Print version</span></span></div>
             </div>
             <div class="bw-reminder-flow" aria-label="Arrival reminder timeline">
               <div class="bw-reminder-head">
@@ -10478,7 +10604,7 @@
       <div class="bw-full-head">
         <div>
           <h2 class="bw-full-title">Your full Berlin plan</h2>
-          <p class="bw-full-sub" data-full-sub>Unlocked plan appears here.</p>
+          <p class="bw-full-sub" data-full-sub>Your full plan appears here.</p>
         </div>
       </div>
       <div data-ai-polish-panel></div>
@@ -11592,13 +11718,13 @@
     }
     return '<div class="bw-preview-flow" aria-label="Day ' + escapeHtml(day.dayNumber) + ' simple preview">' +
       '<div class="bw-preview-flow-item">' +
-        '<span class="bw-preview-flow-icon" aria-hidden="true">📍</span><span class="bw-preview-flow-copy"><b>Start simple</b><span>' + escapeHtml(anchorCopy) + '</span></span>' +
+        '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('pin') + '</span><span class="bw-preview-flow-copy"><b>Start simple</b><span>' + escapeHtml(anchorCopy) + '</span></span>' +
       '</div>' +
       '<div class="bw-preview-flow-item">' +
-        '<span class="bw-preview-flow-icon" aria-hidden="true">🚶</span><span class="bw-preview-flow-copy"><b>First useful anchor</b><span>' + escapeHtml(tourCopy) + '</span></span>' +
+        '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('route') + '</span><span class="bw-preview-flow-copy"><b>First useful anchor</b><span>' + escapeHtml(tourCopy) + '</span></span>' +
       '</div>' +
       '<div class="bw-preview-flow-item">' +
-        '<span class="bw-preview-flow-icon" aria-hidden="true">🧭</span><span class="bw-preview-flow-copy"><b>Rest of plan</b><span>Full timings, maps, PDF, and later days unlock below.</span></span>' +
+        '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('calendar') + '</span><span class="bw-preview-flow-copy"><b>Full plan</b><span>Later days, map links, PDF, and arrival reminders continue after email.</span></span>' +
       '</div>' +
     '</div>';
   }
@@ -11619,15 +11745,64 @@
       .replace(/\bwe're\b/ig, 'I am');
   }
 
+  function previewProofItemHtml(icon, title, copy) {
+    return '<article class="bw-preview-proof-item">' +
+      '<span class="bw-preview-proof-icon">' + iconSvg(icon) + '</span>' +
+      '<span class="bw-preview-proof-copy"><b>' + escapeHtml(title) + '</b><span>' + escapeHtml(copy) + '</span></span>' +
+    '</article>';
+  }
+
+  function previewDayProofHtml(day, plan) {
+    var routeLabels = dayMapLinks(day).slice(0, 2).map(function (link) {
+      return link.label;
+    }).filter(Boolean);
+    var routeCopy = routeLabels.length ? routeLabels.join(' + ') : (day.theme || selectedLabels().stayArea);
+    var slot = plan ? tourSlotForDay(day, plan) : null;
+    var weather = dayWeatherFor(day);
+    var risks = riskTagsForDay(day);
+    var risk = risks[0];
+    var routeDetail = slot
+      ? slot.timeLabel + ' BerlinWalk becomes the context anchor; the rest of the day stays nearby.'
+      : 'The first day stays around ' + routeCopy + ', so arrival does not turn into a checklist.';
+    var weatherDetail = weather
+      ? cleanAiText(weather.cue, 'Keep one covered backup close to the same area.', 118)
+      : 'Keep one covered backup close to the same area instead of crossing town.';
+    var riskDetail = risk
+      ? cleanAiText(risk.detail, 'One practical guardrail is already built into this day.', 118)
+      : 'One practical guardrail is already built into this day, so the route stays realistic.';
+
+    return '<div class="bw-preview-proof" aria-label="Why this Day 1 works">' +
+      '<div class="bw-preview-proof-head"><strong>Why this Day 1 works</strong><span>Enough to trust the route before you email the full plan.</span></div>' +
+      '<div class="bw-preview-proof-grid">' +
+        previewProofItemHtml(slot ? 'calendar' : 'route', slot ? 'Tour placement' : 'Route shape', routeDetail) +
+        previewProofItemHtml(weather ? weatherIconName(weather.icon) : 'umbrella', weather ? weather.title : 'Weather backup', weatherDetail) +
+        previewProofItemHtml(risk ? riskIconName(risk.key) : 'shield', risk ? risk.label : 'Watch-out', riskDetail) +
+      '</div>' +
+    '</div>';
+  }
+
   function previewDayTeaserHtml(day, plan) {
     if (!day) return '';
     var allItems = dayActionBlockItems(day);
-    var actionItems = allItems.filter(function (item) {
+    var actionItems = [];
+    function addPreviewItem(item) {
+      if (!item || !item.block || actionItems.some(function (existing) { return existing.index === item.index; })) return;
+      actionItems.push(item);
+    }
+    allItems.filter(function (item) {
       return !isDayClosingBlock(day, item.block, item.index);
-    }).slice(0, 2);
-    if (!actionItems.length) actionItems = allItems.slice(0, 2);
+    }).slice(0, 2).forEach(addPreviewItem);
+    addPreviewItem(dayClosingBlockItem(day));
+    allItems.forEach(function (item) {
+      if (actionItems.length < 3) addPreviewItem(item);
+    });
+    actionItems = actionItems.slice(0, 3);
 
-    var blockHtml = actionItems.map(function (item) {
+    var routeLabels = dayMapLinks(day).slice(0, 3).map(function (link) {
+      return link.label;
+    }).filter(Boolean);
+    var routeText = routeLabels.length ? routeLabels.join(' -> ') : (day.theme || 'First Berlin route');
+    var blockCards = actionItems.map(function (item) {
       var block = item.block || {};
       var windowLabel = dayBlockWindow(day, block, item.index);
       var copy = previewBlockTeaserCopy(day, block, item.index);
@@ -11636,26 +11811,91 @@
         '<strong>' + escapeHtml(block.title || 'Berlin move') + '</strong>' +
         (copy ? '<span>' + escapeHtml(copy) + '</span>' : '') +
       '</article>';
-    }).join('');
+    });
 
-    var routeLabels = dayMapLinks(day).slice(0, 3).map(function (link) {
-      return link.label;
-    }).filter(Boolean);
-    var routeText = routeLabels.length ? routeLabels.join(' -> ') : (day.theme || 'First Berlin route');
+    if (blockCards.length < 3) {
+      blockCards.push('<article class="bw-preview-block">' +
+        '<b>Route shape - Keep compact</b>' +
+        '<strong>One small orientation route</strong>' +
+        '<span>' + escapeHtml('Use ' + routeText + ' as the spine, then stop before the first day becomes work.') + '</span>' +
+      '</article>');
+    }
+
+    var blockHtml = blockCards.slice(0, 3).join('');
     var slot = plan ? tourSlotForDay(day, plan) : null;
     var cue = slot
-      ? 'Unlock to see exact timings, map links, food stop, and the ' + slot.timeLabel + ' BerlinWalk tour placement.'
-      : 'Unlock to see exact timings, map links, food stops, transport notes, and the rest of this day.';
+      ? 'Email yourself the plan for exact map links, the rest of Day 1, later days, PDF, and the ' + slot.timeLabel + ' BerlinWalk placement.'
+      : 'Email yourself the plan for exact map links, the rest of Day 1, later days, PDF, and arrival reminders.';
 
     return '<div class="bw-preview-teaser">' +
       '<div class="bw-preview-teaser-head">' +
         '<strong>Day 1 preview: ' + escapeHtml(routeText) + '</strong>' +
-        '<span>Partial preview</span>' +
+        '<span>Useful preview</span>' +
       '</div>' +
       (blockHtml ? '<div class="bw-preview-blocks">' + blockHtml + '</div>' : '') +
       previewDayFlowHtml(day, plan) +
+      previewDayProofHtml(day, plan) +
       '<span class="bw-preview-unlock-cue">' + escapeHtml(cue) + '</span>' +
     '</div>';
+  }
+
+  function lockedPlanPreviewHtml(plan) {
+    var days = (plan && plan.days) || [];
+    var items = [];
+
+    days.slice(1, 3).forEach(function (day) {
+      items.push({
+        icon: dayIconName(day),
+        label: 'Day ' + day.dayNumber,
+        title: day.theme || day.title || 'Next Berlin day',
+        detail: formatDisplayDate(day.dateKey) + ' - exact timings, maps, food, and backup notes.'
+      });
+    });
+
+    if (days.length === 1 && days[0]) {
+      items.push({
+        icon: 'route',
+        label: 'Exact Day 1',
+        title: 'Map links and timing',
+        detail: 'The preview proves the shape. The full phone version keeps route links and reminders together.'
+      });
+    }
+
+    if (days.length > 3) {
+      items.push({
+        icon: 'calendar',
+        label: days.length === 4 ? 'Day 4' : 'Days 4-' + days.length,
+        title: days.length === 4 ? 'Final day is ready' : 'Remaining days are ready',
+        detail: 'The full itinerary keeps later days grouped by area instead of scattered across Berlin.'
+      });
+    }
+
+    items.push({
+      icon: 'map',
+      label: 'Map pack',
+      title: 'Google Maps route links',
+      detail: Math.max(3, days.length * 3) + '+ stops organized by day for phone use.'
+    });
+    items.push({
+      icon: state.mustHandle.indexOf('rain') !== -1 ? 'umbrella' : 'shield',
+      label: 'Backup layer',
+      title: 'Weather and opening checks',
+      detail: 'Rain, Sunday/Monday, breaks, and reservation notes stay attached to the route.'
+    });
+    items.push({
+      icon: 'download',
+      label: 'Carry pack',
+      title: 'PDF and print version',
+      detail: 'Send it once and keep a travel-ready version for the trip.'
+    });
+
+    return '<div class="bw-preview-fade-head"><strong>Your full plan is already shaped</strong><span>This is your Berlin plan, not a generic sample.</span></div>' +
+      items.slice(0, 6).map(function (item) {
+        return '<div class="bw-preview-fade-row">' +
+          '<span class="bw-preview-fade-icon" aria-hidden="true">' + iconSvg(item.icon) + '</span>' +
+          '<span class="bw-preview-fade-copy"><b>' + escapeHtml(item.label) + '</b><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + '</span></span>' +
+        '</div>';
+      }).join('');
   }
 
   function dayVisualType(day) {
@@ -17357,6 +17597,10 @@
         ) : '';
       }
     }
+    var lockBox = root.querySelector('[data-lock-box]');
+    if (lockBox) {
+      lockBox.innerHTML = unlocked ? '' : lockedPlanPreviewHtml(plan);
+    }
 
     if (unlocked) requestAiEnhancement();
     renderFullPlan();
@@ -17460,7 +17704,7 @@
     var copyEl = root.querySelector('.bw-lead-copy');
     if (!copyEl) return;
     var days = plan.days.length;
-    var daysText = days + (days === 1 ? ' day' : ' days');
+    var daysText = days === 1 ? '1-day' : days + '-day';
     
     var interestHighlights = [];
     var interests = Array.isArray(state.interests) ? state.interests : [];
@@ -17477,14 +17721,11 @@
       interestHighlights.push('nightlife spots');
     }
     
-    var highlightText = '';
-    if (interestHighlights.length > 0) {
-      highlightText = ', customized ' + interestHighlights.join(' and ') + ',';
-    } else {
-      highlightText = ' with weather-aware details,';
-    }
-    
-    copyEl.innerHTML = 'Enter your email to unlock your full <strong>' + daysText + ' plan</strong>' + highlightText + ' <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, offline <strong>public transport maps</strong>, and local <strong>shopping guides</strong>.';
+    var highlightText = interestHighlights.length > 0
+      ? ' with ' + interestHighlights.join(' and ')
+      : ' with weather-aware details';
+
+    copyEl.innerHTML = 'Your Day 1 preview is ready. Email yourself the full <strong>' + daysText + ' plan</strong>' + highlightText + ', <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, offline <strong>public transport maps</strong>, and local <strong>shopping guides</strong>.';
   }
 
   function updateUnlockUi() {
@@ -18947,7 +19188,7 @@
     updateUnlockUi();
     if (planGenerated) renderPlan();
     setLeadMessage('', false);
-    setActionStatus(method === 'lead_error' ? 'Email save had a hiccup, so the plan is unlocked this time.' : 'Your full plan is unlocked.');
+    setActionStatus(method === 'lead_error' ? 'Email save had a hiccup, so the full plan is ready this time.' : 'Your full plan is ready.');
     requestAiEnhancement();
     syncPlannerFrame(root.querySelector('[data-full-plan]'), true);
   }
@@ -18961,7 +19202,7 @@
       trip_length: state.tripLength
     });
     if (!validEmail(email)) {
-      setLeadMessage('Add a valid email address to unlock the full plan.', true);
+      setLeadMessage('Add a valid email address so I can send the full plan.', true);
       if (input) input.focus();
       return;
     }
@@ -18976,7 +19217,7 @@
 
     if (button) {
       button.disabled = true;
-      button.textContent = 'Unlocking...';
+      button.textContent = 'Sending...';
     }
     setLeadMessage('Saving your trip plan...', false);
 
@@ -19009,7 +19250,7 @@
     }).finally(function () {
       if (button) {
         button.disabled = false;
-        button.textContent = 'Send plan + unlock PDF';
+        button.textContent = 'Email me my full plan';
       }
     });
   }
@@ -22323,7 +22564,7 @@
     if (!emailValidTracked && event.target && event.target.matches('[data-lead-email]') && validEmail(event.target.value)) {
       emailValidTracked = true;
       track('bw_trip_planner_email_valid', { arrival_date: state.arrivalDate, trip_length: state.tripLength });
-      setLeadMessage('Looks good. Send it to unlock the full plan.', false);
+      setLeadMessage('Looks good. I can send the full plan now.', false);
     }
   });
 
