@@ -2,6 +2,10 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Trip Planner preview + email gate)
+
+**Did:** Implemented the Trip Planner conversion tweak Yusuf approved: long form stays, Day 1 gives more value before the gate, and the gate now feels like emailing the finished plan to yourself. **Changed:** `ultimate-berlin-trip-planner/index.html` now renders 3 Day 1 preview cards when possible, adds a `Why this Day 1 works` route/weather/watch-out proof block, fills the locked preview from the generated plan (`Day 2`, `Day 3`, remaining days, maps, backups, PDF), and changes visible gate copy to `Send the full Berlin plan to yourself` / `Email me my full plan`; `ultimate-berlin-trip-planner/launch-audit.mjs` now checks the new preview/gate behavior. **QA:** Inline JS parse passed, `git diff --check` passed, launch audit passed the updated Trip Planner checks but still has 4 unrelated existing blockers, and local Browser QA on desktop 1280px plus mobile 390px confirmed 3 preview cards, 3 proof items, 6 dynamic locked rows, correct CTA, and no horizontal overflow. **Opened:** deploy/publish and watch gate-to-email conversion. **Closed:** local preview/gate optimization is ready.
+
 ## 2026-06-14 — Codex (Berlin Battle share restore + hero gap)
 
 **Did:** Restored the visible `Share result` button on Berlin Battle results and tightened the dedicated Games page hero spacing.
