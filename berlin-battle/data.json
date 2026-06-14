@@ -7,6 +7,7 @@
       "title": "Berlin Food Battle",
       "kicker": "First playable battle",
       "lead": "Pick between Berlin food favorites until one winner owns your plate.",
+      "image": "assets/cards/doner-kebab.webp",
       "status": "active",
       "theme": "Food",
       "shareTitle": "My Berlin Food Battle winner",
@@ -115,6 +116,7 @@
       "title": "Berlin District Battle",
       "kicker": "Coming soon",
       "lead": "Kreuzberg, Mitte, Neukölln and the rest of the city go head to head.",
+      "image": "../tools-home/icons/berlin-landmarks-map.png",
       "status": "coming-soon",
       "theme": "Districts"
     },
@@ -123,6 +125,7 @@
       "title": "Berlin Museum Battle",
       "kicker": "Coming soon",
       "lead": "A playful museum bracket for culture-heavy Berlin days.",
+      "image": "../gallery/images/hero-home-museum-island-800w.webp",
       "status": "coming-soon",
       "theme": "Museums"
     },
@@ -131,6 +134,7 @@
       "title": "Berlin Night Battle",
       "kicker": "Coming soon",
       "lead": "A nightlife bracket built around mood, not official rankings.",
+      "image": "../tools-home/icons/berlin-club-picker.png",
       "status": "coming-soon",
       "theme": "Nightlife"
     }

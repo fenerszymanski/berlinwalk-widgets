@@ -46,20 +46,39 @@
       border: 1px solid var(--bw-border);
       border-radius: 14px;
       box-shadow: var(--bw-shadow);
-      margin: 24px auto;
-      max-width: 1040px;
+      margin: 16px auto;
+      max-width: 1120px;
       overflow: hidden;
     }
 
     #bw-berlin-battle .bb-hero {
       background:
-        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.10)),
+        linear-gradient(135deg, rgba(255, 230, 0, 0.20), rgba(124, 179, 66, 0.12)),
         var(--bw-green);
       color: var(--bw-white);
       display: grid;
       gap: 16px;
-      grid-template-columns: minmax(0, 1fr) auto;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 0.34fr);
+      min-height: 218px;
       padding: 24px;
+      position: relative;
+      z-index: 0;
+    }
+
+    #bw-berlin-battle .bb-hero::after {
+      background: linear-gradient(90deg, rgba(255, 230, 0, 0.96), rgba(124, 179, 66, 0.82));
+      bottom: 0;
+      content: "";
+      height: 8px;
+      left: 0;
+      position: absolute;
+      right: 0;
+      z-index: 0;
+    }
+
+    #bw-berlin-battle .bb-hero > * {
+      position: relative;
+      z-index: 1;
     }
 
     #bw-berlin-battle .bb-kicker {
@@ -97,22 +116,95 @@
       max-width: 680px;
     }
 
-    #bw-berlin-battle .bb-hero-mark {
+    #bw-berlin-battle .bb-hero-visual {
       align-items: center;
-      align-self: start;
-      aspect-ratio: 1;
+      align-self: stretch;
+      display: grid;
+      justify-content: center;
+      min-height: 170px;
+      min-width: 230px;
+      position: relative;
+    }
+
+    #bw-berlin-battle .bb-hero-tile {
+      background-position: center;
+      background-size: cover;
+      border: 3px solid rgba(255, 255, 255, 0.36);
+      border-radius: 10px;
+      box-shadow: 0 18px 34px rgba(0, 0, 0, 0.24);
+      display: block;
+      position: absolute;
+    }
+
+    #bw-berlin-battle .bb-hero-tile.is-a {
+      background-image: url("assets/cards/doner-kebab.webp");
+      height: 120px;
+      left: 0;
+      top: 6px;
+      transform: rotate(-5deg);
+      width: 168px;
+    }
+
+    #bw-berlin-battle .bb-hero-tile.is-b {
+      background-image: url("assets/cards/currywurst.webp");
+      bottom: 4px;
+      height: 118px;
+      right: 4px;
+      transform: rotate(5deg);
+      width: 166px;
+    }
+
+    #bw-berlin-battle .bb-hero-vs {
+      align-items: center;
       background: var(--bw-yellow);
-      border: 8px solid rgba(255, 255, 255, 0.18);
+      border: 7px solid rgba(255, 255, 255, 0.82);
       border-radius: 50%;
       color: var(--bw-green);
       display: grid;
-      font-size: 42px;
+      font-size: 32px;
       font-weight: 900;
-      height: 110px;
-      justify-content: center;
+      height: 92px;
+      left: 50%;
       line-height: 1;
       place-items: center;
-      width: 110px;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 92px;
+      z-index: 2;
+    }
+
+    #bw-berlin-battle .bb-shell.is-game .bb-hero {
+      grid-template-columns: minmax(0, 1fr) auto;
+      min-height: 0;
+      padding: 16px 18px;
+    }
+
+    #bw-berlin-battle .bb-shell.is-game .bb-hero-visual {
+      min-height: 74px;
+      min-width: 74px;
+    }
+
+    #bw-berlin-battle .bb-shell.is-game .bb-hero-tile {
+      display: none;
+    }
+
+    #bw-berlin-battle .bb-shell.is-game .bb-hero-vs {
+      border-width: 6px;
+      font-size: 24px;
+      height: 68px;
+      position: static;
+      transform: none;
+      width: 68px;
+    }
+
+    #bw-berlin-battle .bb-shell.is-game .bb-title {
+      font-size: clamp(26px, 4vw, 42px);
+      line-height: 1;
+    }
+
+    #bw-berlin-battle .bb-shell.is-game .bb-subtitle {
+      display: none;
     }
 
     #bw-berlin-battle .bb-body {
@@ -122,7 +214,7 @@
     #bw-berlin-battle .bb-topic-grid {
       display: grid;
       gap: 14px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     #bw-berlin-battle .bb-topic-card {
@@ -132,7 +224,7 @@
       color: var(--bw-text);
       display: grid;
       gap: 12px;
-      min-height: 210px;
+      min-height: 270px;
       overflow: hidden;
       padding: 0;
       text-align: left;
@@ -154,19 +246,32 @@
     }
 
     #bw-berlin-battle .bb-topic-art {
-      align-items: center;
-      background:
-        linear-gradient(135deg, rgba(255, 230, 0, 0.88), rgba(124, 179, 66, 0.72)),
-        var(--bw-green);
-      color: var(--bw-green-dark);
-      display: flex;
-      font-size: 42px;
-      font-weight: 900;
-      height: 92px;
-      justify-content: center;
-      letter-spacing: 0;
-      line-height: 1;
-      padding: 12px;
+      background: #EAF1DF;
+      height: 154px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-berlin-battle .bb-topic-art::after {
+      background: linear-gradient(180deg, rgba(18, 63, 22, 0.02), rgba(18, 63, 22, 0.28));
+      content: "";
+      inset: 0;
+      position: absolute;
+      z-index: 1;
+    }
+
+    #bw-berlin-battle .bb-topic-img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.01);
+      transition: transform 0.2s ease;
+      width: 100%;
+    }
+
+    #bw-berlin-battle .bb-topic-card:not(.is-disabled):hover .bb-topic-img,
+    #bw-berlin-battle .bb-topic-card:not(.is-disabled):focus-visible .bb-topic-img {
+      transform: scale(1.05);
     }
 
     #bw-berlin-battle .bb-topic-content {
@@ -204,10 +309,12 @@
     }
 
     #bw-berlin-battle .is-disabled .bb-topic-art {
-      background:
-        linear-gradient(135deg, rgba(27, 94, 32, 0.18), rgba(124, 179, 66, 0.16)),
-        #F4F7EE;
-      color: var(--bw-green);
+      background: #EEF4E6;
+    }
+
+    #bw-berlin-battle .is-disabled .bb-topic-img {
+      filter: saturate(0.68) contrast(0.94);
+      opacity: 0.82;
     }
 
     #bw-berlin-battle .bb-topbar {
@@ -309,6 +416,7 @@
     }
 
     #bw-berlin-battle .bb-matchup {
+      align-items: stretch;
       display: grid;
       gap: 16px;
       grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
@@ -324,7 +432,7 @@
       display: grid;
       font: inherit;
       grid-template-rows: auto 1fr;
-      min-height: 390px;
+      min-height: 0;
       overflow: hidden;
       padding: 0;
       text-align: left;
@@ -340,7 +448,7 @@
     }
 
     #bw-berlin-battle .bb-choice-img {
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 16 / 10;
       background: #F0F4E8;
       display: block;
       object-fit: cover;
@@ -355,7 +463,7 @@
 
     #bw-berlin-battle .bb-choice-name {
       color: var(--bw-text);
-      font-size: clamp(21px, 3.8vw, 32px);
+      font-size: clamp(18px, 2.8vw, 30px);
       font-weight: 900;
       letter-spacing: 0;
       line-height: 1.06;
@@ -563,37 +671,48 @@
 
       #bw-berlin-battle .bb-hero {
         grid-template-columns: minmax(0, 1fr);
+        min-height: 0;
         padding: 20px;
       }
 
-      #bw-berlin-battle .bb-hero-mark {
-        height: 78px;
-        width: 78px;
+      #bw-berlin-battle .bb-hero-visual {
+        display: none;
       }
 
       #bw-berlin-battle .bb-body {
         padding: 14px;
       }
 
-      #bw-berlin-battle .bb-topic-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
       #bw-berlin-battle .bb-matchup {
-        gap: 12px;
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      #bw-berlin-battle .bb-choice {
-        min-height: 0;
+        gap: 8px;
+        grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
       }
 
       #bw-berlin-battle .bb-choice-img {
-        aspect-ratio: 16 / 10;
+        aspect-ratio: 1 / 1;
+      }
+
+      #bw-berlin-battle .bb-choice-body {
+        gap: 6px;
+        padding: 12px;
+      }
+
+      #bw-berlin-battle .bb-choice-name {
+        font-size: clamp(15px, 3.4vw, 24px);
+      }
+
+      #bw-berlin-battle .bb-choice-line {
+        font-size: 11px;
+        line-height: 1.35;
       }
 
       #bw-berlin-battle .bb-vs {
-        margin: -7px 0;
+        border-width: 4px;
+        font-size: 14px;
+        height: 46px;
+        line-height: 38px;
+        margin: 0 -6px;
+        width: 46px;
       }
 
       #bw-berlin-battle .bb-result {
@@ -606,14 +725,119 @@
         grid-template-columns: minmax(0, 1fr);
       }
 
-      #bw-berlin-battle .bb-progress-row,
-      #bw-berlin-battle .bb-topbar {
+      #bw-berlin-battle .bb-topic-card {
+        min-height: 0;
+      }
+
+      #bw-berlin-battle .bb-topic-art {
+        height: 138px;
+      }
+
+      #bw-berlin-battle .bb-progress-row {
         align-items: flex-start;
         flex-direction: column;
       }
 
+      #bw-berlin-battle .bb-topbar {
+        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+      }
+
       #bw-berlin-battle .bb-counter {
         white-space: normal;
+      }
+
+      #bw-berlin-battle .bb-shell.is-game .bb-hero {
+        padding: 13px 12px;
+      }
+
+      #bw-berlin-battle .bb-shell.is-game .bb-title {
+        font-size: clamp(21px, 7vw, 28px);
+        line-height: 1;
+      }
+
+      #bw-berlin-battle .bb-shell.is-game .bb-body {
+        padding: 10px 8px 12px;
+      }
+
+      #bw-berlin-battle .bb-pill {
+        font-size: 10px;
+        min-height: 30px;
+        padding: 7px 10px;
+      }
+
+      #bw-berlin-battle .bb-back {
+        font-size: 10px;
+        min-height: 30px;
+        padding: 7px 10px;
+      }
+
+      #bw-berlin-battle .bb-progress-wrap {
+        border-radius: 8px;
+        margin-bottom: 8px;
+        padding: 9px;
+      }
+
+      #bw-berlin-battle .bb-progress-row {
+        gap: 4px;
+        margin-bottom: 7px;
+      }
+
+      #bw-berlin-battle .bb-round {
+        font-size: 14px;
+      }
+
+      #bw-berlin-battle .bb-counter {
+        font-size: 10px;
+      }
+
+      #bw-berlin-battle .bb-progress {
+        height: 7px;
+      }
+
+      #bw-berlin-battle .bb-matchup {
+        gap: 4px;
+        grid-template-columns: minmax(0, 1fr) 30px minmax(0, 1fr);
+      }
+
+      #bw-berlin-battle .bb-choice {
+        border-radius: 9px;
+        border-width: 1px;
+        box-shadow: 0 6px 16px rgba(18, 63, 22, 0.08);
+      }
+
+      #bw-berlin-battle .bb-choice-body {
+        gap: 4px;
+        padding: 8px 6px;
+      }
+
+      #bw-berlin-battle .bb-choice-name {
+        font-size: clamp(12px, 3.9vw, 17px);
+        line-height: 1.08;
+      }
+
+      #bw-berlin-battle .bb-choice-line {
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        display: -webkit-box;
+        font-size: 9.5px;
+        line-height: 1.24;
+        overflow: hidden;
+      }
+
+      #bw-berlin-battle .bb-vs {
+        border-width: 3px;
+        font-size: 11px;
+        height: 34px;
+        line-height: 28px;
+        margin: 0 -4px;
+        width: 34px;
+      }
+
+      #bw-berlin-battle .bb-shell.is-game .bb-path {
+        display: none;
       }
 
       #bw-berlin-battle .bb-actions {
@@ -663,12 +887,14 @@
     });
   }
 
-  function topicSymbol(topic) {
-    if (topic.id === 'food') return 'BB';
-    if (topic.id === 'districts') return 'KZ';
-    if (topic.id === 'museums') return 'MS';
-    if (topic.id === 'clubs') return 'NT';
-    return 'BW';
+  function safeViewClass() {
+    return String(state.view || 'topics').replace(/[^a-z0-9_-]/gi, '');
+  }
+
+  function topicImage(topic) {
+    if (topic && topic.image) return topic.image;
+    if (topic && Array.isArray(topic.items) && topic.items[0] && topic.items[0].image) return topic.items[0].image;
+    return '../tools-home/icons/berlin-battle.png';
   }
 
   function itemImageUrl(item) {
@@ -716,26 +942,33 @@
 
   function renderShell(heroHtml, bodyHtml) {
     root.innerHTML = componentStyleHtml +
-      '<section class="bb-shell">' +
+      '<section class="bb-shell is-' + escapeHtml(safeViewClass()) + '">' +
         '<header class="bb-hero">' +
           '<div>' +
-            '<span class="bb-kicker">BerlinWalk game</span>' +
+            '<span class="bb-kicker">BerlinWalk Games</span>' +
             heroHtml +
           '</div>' +
-          '<div class="bb-hero-mark" aria-hidden="true">VS</div>' +
+          '<div class="bb-hero-visual" aria-hidden="true">' +
+            '<span class="bb-hero-tile is-a"></span>' +
+            '<span class="bb-hero-tile is-b"></span>' +
+            '<span class="bb-hero-vs">VS</span>' +
+          '</div>' +
         '</header>' +
         '<div class="bb-body">' + bodyHtml + '</div>' +
       '</section>';
   }
 
   function renderTopics() {
+    state.view = 'topics';
     var topics = (state.data && state.data.topics) || [];
     var cards = topics.map(function (topic) {
       var disabled = topic.status !== 'active';
       var tag = disabled ? 'article' : 'button type="button"';
       var attrs = disabled ? '' : ' data-topic-id="' + escapeHtml(topic.id) + '"';
       return '<' + tag + ' class="bb-topic-card' + (disabled ? ' is-disabled' : '') + '"' + attrs + '>' +
-        '<div class="bb-topic-art" aria-hidden="true">' + escapeHtml(topicSymbol(topic)) + '</div>' +
+        '<div class="bb-topic-art" aria-hidden="true">' +
+          '<img class="bb-topic-img" src="' + escapeHtml(topicImage(topic)) + '" alt="" loading="lazy" decoding="async">' +
+        '</div>' +
         '<div class="bb-topic-content">' +
           '<span class="bb-topic-kicker">' + escapeHtml(topic.kicker || '') + '</span>' +
           '<strong class="bb-topic-title">' + escapeHtml(topic.title) + '</strong>' +
@@ -882,6 +1115,7 @@
   }
 
   function renderResult() {
+    state.view = 'result';
     var winner = state.winner;
     var caption = resultCaption(winner);
     renderShell(

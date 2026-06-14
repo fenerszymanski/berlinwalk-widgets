@@ -2,6 +2,24 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-14 — Codex (Berlin Battle Games/layout revision)
+
+**Did:** Revised Berlin Battle so it no longer feels like a normal BerlinTools directory item, and fixed Yusuf's opening-screen/matchup layout feedback.
+
+**Changed:**
+- `berlin-battle/index.html` — compact Games-style hero, image-based topic cards, smaller game header, desktop/mobile side-by-side VS matchup grid, and mobile path hiding.
+- `berlin-battle/data.json` — added topic image paths for food, districts, museums, and nightlife.
+- `tools-hub/data.json` — marked `berlin-battle` as `hidden` and `surface: "Games"` so it will disappear from BerlinTools/widgets listings after deploy.
+- `widgets-hub/SEO_ADDITIONAL_TAGS.md` — regenerated visible widget ItemList from 52 to 51.
+- `../SESSION_LOG.md` and `../PROJECT_MEMORY.md` — recorded the local revision and open Wix Games-page step.
+
+**QA:** Data validation, inline script parse, and `git diff --check` passed. Local browser QA passed at `http://127.0.0.1:8765/berlin-battle/`: topic screen has 4 loaded images and no initial letters; desktop 1280x720 matchup cards are side-by-side and fully visible; mobile 390x844 matchup cards stay side-by-side with VS centered, no path clutter, and overflow 0. Terminal Playwright smoke completed 15 choices, first-round 16 unique items, final winner, 15 choice events + 1 complete event, and nonblank 1080x1350 share canvas.
+
+**Opened:** Push/deploy this repo. Then create/publish a dedicated Wix Games surface (`/games/berlin-battle` or `/games`) and only then decide what to do with the existing `/tools/berlin-battle` CMS route.
+**Closed:** Initial Berlin Battle opening-screen and mobile/desktop matchup layout issues are fixed locally.
+
+**Next session should:** Deploy, cold-load `/berlin-battle/`, `/berlin-tools`, and `/widgets`, then wire the Wix Games page if approved.
+
 ## 2026-06-14 — Codex (Berlin Battle post-push QA)
 
 **Did:** Verified Yusuf's push/deploy for the Berlin Battle widget.

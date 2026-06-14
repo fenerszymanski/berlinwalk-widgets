@@ -440,6 +440,8 @@
       "title": "Berlin Battle",
       "lead": "A fast this-or-that tournament game for Berlin tastes. Start with 16 food favorites and share your winner.",
       "category": "Discovery",
+      "hidden": true,
+      "surface": "Games",
       "image": "https://static.wixstatic.com/media/5a08a3_fc6b345c36174e69abc9bb38bed99552~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle/",
       "embedHeight": 1180
