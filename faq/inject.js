@@ -68,7 +68,8 @@
   "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol": "the-ampelmann",
   "can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany": "credit-cards-berlin",
   "bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about": "bus-100-berlin",
-  "what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time": "berlin-rainy-day-activities"
+  "what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time": "berlin-rainy-day-activities",
+  "7-best-photo-spots-in-berlin-most-tourists-walk-right-past": "berlin-photo-spots"
 };
 
   var SCHEMAS = {
@@ -3014,6 +3015,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The DDR Museum, Markthalle Neun, KaDeWe and Tempelhof Airport tours are usually easier with restless visitors than a long silent museum day. Choose one main stop and keep transfers short."
+        }
+      }
+    ]
+  },
+  "berlin-photo-spots": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best photo spot in central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For one strong central shot, choose Liebknecht Bridge. It gives you the Spree, Berliner Dom, Humboldt Forum and often the TV Tower in one layered frame, especially around golden hour or blue hour."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I take less crowded photos in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Try Friedrichsbrücke, the Altes Museum colonnade, James Simon Galerie, Marienviertel and the inner courtyards of Hackesche Höfe. They are close to famous sights but usually calmer than the main postcard spots."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time of day is best for Berlin photography?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Early morning is best for clean architecture shots with fewer people. Golden hour and blue hour are best for Spree reflections, warm stone, the TV Tower and city lights."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Marx-Engels-Forum still a good photo spot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Treat it as a bonus rather than a guaranteed stop in 2026. The Rathausforum and Marx-Engels-Forum area is being redesigned, so access and sightlines can change. The Rotes Rathaus and St. Mary's Church area is the safer TV Tower angle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see these photo spots on a walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Many of these spots sit close to the BerlinWalk route from Alexanderplatz to Hackescher Markt, including Marienviertel, Liebknecht Bridge, Museum Island and Hackesche Höfe."
         }
       }
     ]
