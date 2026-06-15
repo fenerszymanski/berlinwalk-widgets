@@ -276,7 +276,9 @@ Batch order:
 - Food 1: Currywurst; Döner Kebab; Falafel; Shawarma.
 - Food 2: Schnitzel; Pretzel; Berliner Pfannkuchen; Boulette.
 - Food 3: Kartoffelpuffer; Eisbein; Käsekuchen; Apfelstrudel.
-- Food 4: Lahmacun; Vietnamese Pho; Späti Snack Run; Berliner Weiße.
+- Food 4: Lahmacun; Vietnamese Pho; Späti Snack Run; Berliner Weiße. Source file
+  uses the `food-batch-4-corrected-...` name because the first attempt repeated
+  the previous food batch and was discarded.
 - District 1: Mitte; Kreuzberg; Friedrichshain; Neukölln.
 - District 2: Prenzlauer Berg; Charlottenburg; Schöneberg; Wedding.
 - District 3: Moabit; Tiergarten; Tempelhof; Köpenick.
