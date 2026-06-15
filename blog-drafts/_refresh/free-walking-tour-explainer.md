@@ -304,7 +304,7 @@ When that exchange is honest, it can be one of the best ways to meet Berlin.
 
 ## Want to Try It in Berlin?
 
-My Berlin walking tour is a **2 hours**, **12-stop**, tip-based introduction to the historic centre, from Alexanderplatz toward Hackescher Markt.
+My Berlin walking tour lasts **2 hours**, covers **12 stops**, and gives you a tip-based introduction to the historic centre, from Alexanderplatz toward Hackescher Markt.
 
 There is no fixed upfront price. You decide at the end what the tour was worth.
 
