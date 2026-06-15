@@ -87,7 +87,8 @@
   "the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists": "cheap-berlin-2026",
   "5-best-coffee-shops-near-hackescher-markt-a-local-s-guide": "coffee-shops-hackescher-markt",
   "marx-and-engels-are-still-standing-in-berlin-here-s-why": "marx-engels-still-standing",
-  "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown": "berliner-dom-before-after-wwii"
+  "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown": "berliner-dom-before-after-wwii",
+  "the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark": "tv-tower-10-things"
 };
 
   var SCHEMAS = {
@@ -3949,6 +3950,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes if you want the interior, crypt and dome view. If your time is short, the outside story from the Lustgarten is already strong and free."
+        }
+      }
+    ]
+  },
+  "tv-tower-10-things": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How tall is the Berlin TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Berlin TV Tower is 368 metres high, making it the tallest structure in Germany and one of Berlin's clearest skyline markers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When did the Berlin TV Tower open?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The TV Tower opened on 3 October 1969, shortly before the 20th birthday of the GDR."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was it built at Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Early plans considered the Mueggelberge hills, but airport safety problems pushed the project away from that site. Alexanderplatz gave the GDR a highly visible central symbol."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Pope's Revenge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Pope's Revenge is the nickname for the cross-shaped reflection that appears on the TV Tower sphere when sunlight hits it from the right angle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How high is the observation deck?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The observation deck is at 203 metres. The restaurant is higher, at about 207 metres."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berlin TV Tower barrier-free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de notes that the TV Tower is not barrier-free for safety reasons, so visitors with limited mobility should check official accessibility information before planning a visit."
         }
       }
     ]
