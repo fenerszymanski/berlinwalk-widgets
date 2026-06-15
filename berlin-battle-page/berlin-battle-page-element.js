@@ -54,7 +54,7 @@
       url.searchParams.set('parent_path', window.location.pathname || '/games/berlin-battle');
       url.searchParams.set('parent_url', window.location.href);
       url.searchParams.set('attribution', 'none');
-      url.searchParams.set('v', 'share-hero-overlay-fix-20260614');
+      url.searchParams.set('v', 'dashboard-tracking-20260615');
       return url.toString();
     }
 

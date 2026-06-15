@@ -899,6 +899,12 @@
   var DATA_URL = 'data.json';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_battle&utm_medium=game&utm_campaign=berlin_battle&utm_content=result_cta';
   var SHARE_URL_BASE = 'https://www.berlinwalk.com/games/berlin-battle';
+  var TRACKING_ENDPOINT_PROD = 'https://berlinwalk-content-app.vercel.app/api/battle-event';
+  var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/battle-event';
+  var TRACKING_SESSION_KEY = 'bw_berlin_battle_session_id';
+  var TRACKING_VISITOR_KEY = 'bw_berlin_battle_visitor_id';
+  var TRACKING_LANDING_KEY = 'bw_berlin_battle_landing_page';
+  var trackingSequence = 0;
   var state = {
     data: null,
     view: 'topics',
@@ -936,6 +942,159 @@
 
   function itemImageUrl(item) {
     return new URL(item.image, window.location.href).href;
+  }
+
+  function storageGet(key) {
+    try {
+      return window.localStorage ? window.localStorage.getItem(key) : '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function storageSet(key, value) {
+    try {
+      if (window.localStorage) window.localStorage.setItem(key, value);
+    } catch (error) {
+      /* Storage is optional. */
+    }
+  }
+
+  function sessionGet(key) {
+    try {
+      return window.sessionStorage ? window.sessionStorage.getItem(key) : '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function sessionSet(key, value) {
+    try {
+      if (window.sessionStorage) window.sessionStorage.setItem(key, value);
+    } catch (error) {
+      /* Storage is optional. */
+    }
+  }
+
+  function randomId(prefix) {
+    var cryptoObj = window.crypto || window.msCrypto;
+    if (cryptoObj && cryptoObj.getRandomValues) {
+      var values = new Uint32Array(4);
+      cryptoObj.getRandomValues(values);
+      return prefix + '_' + Array.prototype.map.call(values, function (value) {
+        return value.toString(16).padStart(8, '0');
+      }).join('');
+    }
+    return prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+  }
+
+  function trackingSessionId() {
+    var existing = sessionGet(TRACKING_SESSION_KEY);
+    if (existing) return existing;
+    var value = randomId('bbs');
+    sessionSet(TRACKING_SESSION_KEY, value);
+    return value;
+  }
+
+  function trackingVisitorId() {
+    var existing = storageGet(TRACKING_VISITOR_KEY);
+    if (existing) return existing;
+    var value = randomId('bbv');
+    storageSet(TRACKING_VISITOR_KEY, value);
+    return value;
+  }
+
+  function trackingLandingPage() {
+    var existing = sessionGet(TRACKING_LANDING_KEY);
+    if (existing) return existing;
+    var value = window.location.href;
+    sessionSet(TRACKING_LANDING_KEY, value);
+    return value;
+  }
+
+  function urlParam(key) {
+    try {
+      return new URLSearchParams(window.location.search || '').get(key) || '';
+    } catch (error) {
+      return '';
+    }
+  }
+
+  function isPaidAttribution(utmMedium, utmCampaign) {
+    var medium = String(utmMedium || '').toLowerCase();
+    var campaign = String(utmCampaign || '').toLowerCase();
+    return /paid|cpc|ppc|ad|ads|meta|facebook|instagram/.test(medium) ||
+      /paid|campaign|lead|conversion|meta|facebook|instagram/.test(campaign) ||
+      Boolean(urlParam('fbclid'));
+  }
+
+  function trackingEndpoint() {
+    if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
+      if (urlParam('tracking') === 'local' || urlParam('local_tracking') === '1') return TRACKING_ENDPOINT_LOCAL;
+      return '';
+    }
+    return TRACKING_ENDPOINT_PROD;
+  }
+
+  function sendFirstPartyEvent(eventName, detail) {
+    var endpoint = trackingEndpoint();
+    if (!endpoint) return;
+    var timestamp = new Date().toISOString();
+    var utmSource = urlParam('utm_source');
+    var utmMedium = urlParam('utm_medium');
+    var utmCampaign = urlParam('utm_campaign');
+    var parentPath = urlParam('parent_path');
+    var parentUrl = urlParam('parent_url');
+    var body = {
+      eventName: eventName,
+      eventId: trackingSessionId() + ':' + eventName + ':' + (++trackingSequence),
+      sessionId: trackingSessionId(),
+      visitorId: trackingVisitorId(),
+      timestamp: timestamp,
+      eventDate: timestamp.slice(0, 10),
+      pagePath: parentPath || window.location.pathname,
+      pageUrl: parentUrl || window.location.href,
+      parentPath: parentPath,
+      parentUrl: parentUrl,
+      referrer: document.referrer || '',
+      landingPage: trackingLandingPage(),
+      firstPage: trackingLandingPage(),
+      utmSource: utmSource,
+      utmMedium: utmMedium,
+      utmCampaign: utmCampaign,
+      utmContent: urlParam('utm_content'),
+      utmTerm: urlParam('utm_term'),
+      fbclid: urlParam('fbclid'),
+      isPaid: isPaidAttribution(utmMedium, utmCampaign),
+      sourceContext: urlParam('source') || 'berlin_battle_widget',
+      screenWidth: String(window.screen && window.screen.width ? window.screen.width : ''),
+      viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
+      payload: Object.assign({}, detail || {}, {
+        parent_path: parentPath,
+        parent_url: parentUrl,
+        source: urlParam('source') || 'berlin_battle_widget'
+      })
+    };
+    var json = JSON.stringify(body);
+    try {
+      if (navigator.sendBeacon && window.Blob) {
+        var blob = new Blob([json], { type: 'application/json' });
+        if (navigator.sendBeacon(endpoint, blob)) return;
+      }
+    } catch (error) {
+      /* Fall through to fetch. */
+    }
+    try {
+      window.fetch(endpoint, {
+        method: 'POST',
+        mode: 'cors',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: json
+      }).catch(function () {});
+    } catch (error) {
+      /* First-party tracking must never block the game. */
+    }
   }
 
   function requestParentResize() {
@@ -990,6 +1149,7 @@
     } catch (error) {
       /* Analytics is optional. */
     }
+    sendFirstPartyEvent(eventName, detail);
   }
 
   function renderShell(heroHtml, bodyHtml) {
@@ -1359,7 +1519,7 @@
     link.remove();
     setTimeout(function () { URL.revokeObjectURL(link.href); }, 1500);
     setStatus('Share card downloaded.');
-    track('bw_berlin_battle_share_download', { winner: state.winner.id });
+    track('bw_berlin_battle_share_download', { winner: state.winner.id, method: 'download_card' });
   }
 
   function copyText(value) {
@@ -1387,7 +1547,7 @@
     if (!state.winner) return;
     await copyText(resultCaption(state.winner));
     setStatus('Share text and link copied.');
-    track('bw_berlin_battle_copy_caption', { winner: state.winner.id });
+    track('bw_berlin_battle_copy_caption', { winner: state.winner.id, method: 'copy_text_link' });
   }
 
   async function shareResult() {
@@ -1395,9 +1555,11 @@
     var winner = state.winner;
     var caption = resultCaption(winner);
     var canvas = root.querySelector('[data-share-canvas]');
+    var shareMethod = 'copy_fallback';
     try {
       if (!shouldUseNativeShare()) {
         await copyText(caption);
+        shareMethod = 'desktop_copy';
         setStatus('Desktop sharing is limited, so the text + link were copied.');
       } else if (navigator.share && canvas) {
         setStatus('Opening share sheet...');
@@ -1405,12 +1567,14 @@
         var blob = await canvasBlob(canvas);
         var file = blob ? new File([blob], 'berlin-food-battle-' + winner.id + '.png', { type: 'image/png' }) : null;
         if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+          shareMethod = 'native_file';
           await navigator.share({
             title: 'Berlin Food Battle',
             text: caption,
             files: [file]
           });
         } else {
+          shareMethod = 'native_url';
           await navigator.share({
             title: 'Berlin Food Battle',
             text: caption,
@@ -1420,14 +1584,15 @@
         setStatus('Share sheet opened.');
       } else {
         await copyText(caption);
+        shareMethod = 'copy_unavailable';
         setStatus('Share is not available here, so the caption was copied.');
       }
-      track('bw_berlin_battle_share_result', { winner: winner.id });
+      track('bw_berlin_battle_share_result', { winner: winner.id, method: shareMethod });
     } catch (error) {
       try {
         await copyText(caption);
         setStatus('Sharing was unavailable, so the caption was copied.');
-        track('bw_berlin_battle_share_fallback_copy', { winner: winner.id });
+        track('bw_berlin_battle_share_fallback_copy', { winner: winner.id, method: 'error_copy_fallback' });
       } catch (copyError) {
         setStatus('Sharing was cancelled or unavailable.');
       }
@@ -1445,6 +1610,7 @@
       var response = await fetch(DATA_URL, { cache: 'no-store' });
       if (!response.ok) throw new Error('Data request failed');
       state.data = await response.json();
+      track('bw_berlin_battle_page_view', { topic_count: (state.data.topics || []).length });
       renderTopics();
     } catch (error) {
       renderError('Berlin Battle could not load its data. Please try again in a moment.');
@@ -1472,7 +1638,13 @@
     }
 
     if (event.target.closest('[data-restart]')) {
-      if (state.topic) startTopic(state.topic.id);
+      if (state.topic) {
+        track('bw_berlin_battle_restart', {
+          winner: state.winner ? state.winner.id : '',
+          pick_count: state.pickCount
+        });
+        startTopic(state.topic.id);
+      }
       return;
     }
 
