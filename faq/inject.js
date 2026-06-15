@@ -74,7 +74,8 @@
   "do-i-need-to-speak-german-to-visit-berlin": "speak-german-berlin",
   "is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026": "berlin-tv-tower-worth-it",
   "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now": "reichstag-dome-free",
-  "the-humboldt-forum-berlin-s-most-controversial-building": "humboldt-forum"
+  "the-humboldt-forum-berlin-s-most-controversial-building": "humboldt-forum",
+  "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood": "hackescher-markt-before-after"
 };
 
   var SCHEMAS = {
@@ -3258,6 +3259,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Sometimes the roof terrace can still be visited when the glass dome itself is closed. Check the official Bundestag page before planning, especially around listed maintenance periods."
+        }
+      }
+    ]
+  },
+  "hackescher-markt-before-after": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Hackescher Markt worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It is touristy, but still useful. In a small area you can see S-Bahn arches, restored courtyards, Jewish Berlin, street art, food, the Spree and the route toward Museum Island."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the Hackesche Hoefe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hackesche Hoefe is an eight-courtyard complex opposite Hackescher Markt. It opened in 1906 and is famous for its restored Art Nouveau details, mixed-use courtyard layout, shops, cinema, theatre and cafes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was Hackescher Markt destroyed in World War II?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The wider neighbourhood was badly damaged by war, but the story is not only bombing. Nazi persecution had already destroyed much of the Jewish life around Spandauer Vorstadt and Scheunenviertel before the physical damage of the war."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Hackescher Markt part of Jewish Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but carefully. The surrounding Spandauer Vorstadt and Scheunenviertel were deeply connected to Jewish life in Berlin. The nearby Neue Synagoge and Museum Otto Weidt are important places for understanding that history."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the BerlinWalk tour end near Hackescher Markt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is practical and meaningful. After about 2 hours of history, Hackescher Markt gives you food, transport, courtyards, the Spree, Museum Island and several small museums without forcing one more fixed stop."
         }
       }
     ]
