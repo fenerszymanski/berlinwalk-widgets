@@ -82,7 +82,8 @@
   "why-marx-and-engels-face-west-the-statues-berlin-almost-removed": "marx-engels-face-west",
   "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate": "alexanderplatz-tour-start",
   "berlin-slang-10-words-you-ll-only-hear-in-this-city": "berlin-slang",
-  "cold-war-berlin-in-5-key-locations-you-can-still-visit": "cold-war-berlin-locations"
+  "cold-war-berlin-in-5-key-locations-you-can-still-visit": "cold-war-berlin-locations",
+  "10-german-words-every-tourist-should-know-before-visiting-berlin": "german-tourist-words"
 };
 
   var SCHEMAS = {
@@ -3674,6 +3675,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The outdoor Berlin Wall Memorial, Tränenpalast, Tempelhofer Feld, Glienicke Bridge and many Wall remnants are free. The Stasi Museum usually requires a ticket."
+        }
+      }
+    ]
+  },
+  "german-tourist-words": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need to speak German to visit Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. You can visit Berlin with English, especially in central tourist areas. But simple words like Hallo, Danke, Bitte and Entschuldigung make everyday interactions smoother."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the most useful German phrase for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entschuldigung, sprechen Sie Englisch? means excuse me, do you speak English? It is polite, practical and useful when you need help."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I ask for the bill in German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Say Die Rechnung, bitte or Zahlen, bitte. In Germany, the bill often does not arrive until you ask for it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Stimmt so mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Stimmt so means the amount is fine or keep the change. It is a common phrase when you pay and want the server to keep the remaining amount as a tip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Karte mean in German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Karte can mean card, menu, map or ticket depending on context. Mit Karte means by card, while Speisekarte means menu."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin-specific German words should tourists recognise?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Useful Berlin words include Späti for late-night corner shop, Kiez for local neighbourhood, and Pfand for bottle deposit."
         }
       }
     ]
