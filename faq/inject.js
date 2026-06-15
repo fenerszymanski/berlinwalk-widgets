@@ -109,7 +109,8 @@
   "rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism": "rotes-rathaus-berlin",
   "berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia": "berlin-lost-neighborhood",
   "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower": "st-marys-church-berlin",
-  "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared": "alte-nationalgalerie-berlin"
+  "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared": "alte-nationalgalerie-berlin",
+  "friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story": "friedrichsbruecke-berlin"
 };
 
   var SCHEMAS = {
@@ -5159,6 +5160,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Choose it if you love paintings, Romantic landscapes or Impressionism. If you want ancient Egypt or archaeology first, the Neues Museum or Altes Museum may fit better."
+        }
+      }
+    ]
+  },
+  "friedrichsbruecke-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is Friedrichsbrücke in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Friedrichsbrücke crosses the Spree beside Museum Island. It links the Bodestraße side of the island with central Mitte toward Anna-Louisa-Karsch-Straße and Hackescher Markt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Friedrichsbrücke worth stopping at?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It gives you a compact view of Museum Island, the Spree, Berliner Dom, the modern James Simon Galerie area and the route toward Hackescher Markt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How old is Friedrichsbrücke?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The first bridge here was built in 1703. The current structure is modern, but it carries the memory of several earlier bridges."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was Friedrichsbrücke destroyed in World War II?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. In 1945, the Wehrmacht blew up the middle part of the bridge during the Battle of Berlin. A temporary wooden bridge followed in 1950/51."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Friedrichsbrücke only for pedestrians?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Today it works as a calm pedestrian and cycling crossing. The 1982 rebuilding gave up regular vehicle traffic and made the bridge part of the Museum Island walking landscape."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I look for on Friedrichsbrücke?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Look for the obelisks, the stone balustrades, the line into the Museum Island colonnade, and the contrast between historic museum architecture and the rebuilt modern bridge."
         }
       }
     ]
