@@ -78,7 +78,8 @@
   "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood": "hackescher-markt-before-after",
   "how-berlin-was-divided-a-simple-guide-to-east-vs-west": "berlin-east-west-guide",
   "berlin-tv-tower-construction-before-during-and-after": "berlin-tv-tower-construction",
-  "is-berlin-safe-for-solo-travelers-an-honest-local-perspective": "berlin-solo-travel-safety"
+  "is-berlin-safe-for-solo-travelers-an-honest-local-perspective": "berlin-solo-travel-safety",
+  "why-marx-and-engels-face-west-the-statues-berlin-almost-removed": "marx-engels-face-west"
 };
 
   var SCHEMAS = {
@@ -3454,6 +3455,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Call 110 for police emergencies and 112 for medical emergencies or fire. If cards or phones are stolen, the German blocking hotline is 116 116."
+        }
+      }
+    ]
+  },
+  "marx-engels-face-west": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do Marx and Engels face west in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The west-facing story comes mainly from the 2010 U5 construction move, when the figures were shifted and rotated. That made the local joke work: Marx and Engels could finally look toward capitalism."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When was the Marx-Engels-Forum built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The monument was inaugurated in April 1986, only three years before the Berlin Wall fell. It was created as part of the GDR-era redesign of central East Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Were the Marx and Engels statues almost removed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, their future was debated after reunification, like many GDR monuments. Berlin ultimately kept them because they show an important layer of the city rather than simply celebrating it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit the Marx-Engels-Forum in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can usually see the area, but construction can limit close access. The Rathaus- and Marx-Engels-Forum is being redesigned through 2027, so expect fences, changed paths and flexible photo angles."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I look for besides the statues?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Look for the stainless-steel photo steles and the bronze and marble reliefs. They show the GDR's official story of workers, socialism, exploitation and a promised future."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Marx-Engels-Forum on the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it sits near the central route from Alexanderplatz toward Museum Island and Hackescher Markt. I use it to explain GDR memory, reunification and Berlin's habit of keeping awkward history visible."
         }
       }
     ]
