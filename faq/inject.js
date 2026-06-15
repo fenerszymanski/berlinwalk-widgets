@@ -83,7 +83,8 @@
   "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate": "alexanderplatz-tour-start",
   "berlin-slang-10-words-you-ll-only-hear-in-this-city": "berlin-slang",
   "cold-war-berlin-in-5-key-locations-you-can-still-visit": "cold-war-berlin-locations",
-  "10-german-words-every-tourist-should-know-before-visiting-berlin": "german-tourist-words"
+  "10-german-words-every-tourist-should-know-before-visiting-berlin": "german-tourist-words",
+  "the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists": "cheap-berlin-2026"
 };
 
   var SCHEMAS = {
@@ -3729,6 +3730,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Useful Berlin words include Späti for late-night corner shop, Kiez for local neighbourhood, and Pfand for bottle deposit."
+        }
+      }
+    ]
+  },
+  "cheap-berlin-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Berlin still cheap in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not in the old sense. Berlin is no longer the low-rent bargain city people remember from the 2000s, but it can still be very good value for visitors who use public transport, walk a lot and focus on free sights."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did Berlin get more expensive?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin became more desirable after 2010, with more residents, visitors, startups, international workers and investors. Demand rose faster than the city could absorb, especially in housing and central neighborhoods."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What costs the most on a Berlin trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Accommodation is usually the biggest variable. Transport is still relatively predictable, food can be flexible, and many major sights cost nothing. A last-minute hotel in summer can change the whole budget."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is public transport in Berlin in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Official 2026 fare listings show the AB single ticket at EUR 4, the AB 24-hour ticket at EUR 11.20 and the AB 24-hour small group ticket at EUR 35.30 for up to five people."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Berlin have a tourist city tax?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin City Tax is 7.5 percent on paid overnight stays. Accommodation providers collect it, and breakfast or other hotel amenities are treated separately."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best-value first experience in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A walking tour is one of the best-value first experiences because Berlin is so readable on foot. My free, tip-based tour lasts about 2 hours and connects the main historic sights with the stories behind them."
         }
       }
     ]
