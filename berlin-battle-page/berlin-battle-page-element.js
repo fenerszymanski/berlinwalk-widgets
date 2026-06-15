@@ -54,7 +54,7 @@
       url.searchParams.set('parent_path', window.location.pathname || '/games/berlin-battle');
       url.searchParams.set('parent_url', window.location.href);
       url.searchParams.set('attribution', 'none');
-      url.searchParams.set('v', 'dashboard-tracking-20260615');
+      url.searchParams.set('v', 'all-modes-chatgpt-assets-20260615');
       return url.toString();
     }
 
@@ -63,6 +63,7 @@
       const foodImage = asset('berlin-battle/assets/topics/food-battle-cover.webp');
       const districtImage = asset('berlin-battle/assets/topics/district-battle-cover.webp');
       const museumImage = asset('berlin-battle/assets/topics/museum-battle-cover.webp');
+      const nightImage = asset('berlin-battle/assets/topics/night-battle-cover.webp');
 
       this.innerHTML = `
         <style>${this._styles()}</style>
@@ -73,7 +74,7 @@
             <div class="bw-battle-inner bw-battle-hero-inner">
               <p class="bw-battle-kicker">BerlinWalk game</p>
               <h1 id="bw-battle-title">Berlin Battle</h1>
-              <p class="bw-battle-lead">A quick this-or-that game for Berlin tastes, places and stories. First playable mode: food.</p>
+              <p class="bw-battle-lead">A quick this-or-that game for Berlin tastes, neighborhoods, museums and nights.</p>
               <div class="bw-battle-actions">
                 <a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a>
                 <a class="bw-battle-btn bw-battle-btn-ghost" href="${ROUTE_URL}">See the walking route</a>
@@ -93,15 +94,22 @@
               <article>
                 <img src="${districtImage}" alt="">
                 <div>
-                  <span>Next modes</span>
-                  <strong>Districts and neighborhoods</strong>
+                  <span>Live mode</span>
+                  <strong>Berlin District Battle</strong>
                 </div>
               </article>
               <article>
                 <img src="${museumImage}" alt="">
                 <div>
-                  <span>Built for visitors</span>
-                  <strong>Fast, playful, shareable</strong>
+                  <span>Live mode</span>
+                  <strong>Berlin Museum Battle</strong>
+                </div>
+              </article>
+              <article>
+                <img src="${nightImage}" alt="">
+                <div>
+                  <span>Live mode</span>
+                  <strong>Berlin Night Battle</strong>
                 </div>
               </article>
             </div>
@@ -114,7 +122,7 @@
                   <p class="bw-battle-section-kicker">Play the game</p>
                   <h2>Choose your winner.</h2>
                 </div>
-                <p>Pick between two Berlin options until one favorite survives the bracket.</p>
+                <p>Pick a mode, choose between two Berlin options, and let the bracket find your winner.</p>
               </div>
               <div class="bw-battle-game-shell">
                 <iframe
@@ -331,7 +339,7 @@
         .bw-battle-mode-grid {
           display: grid;
           gap: 12px;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
+          grid-template-columns: repeat(4, minmax(0, 1fr));
         }
 
         .bw-battle-mode-grid article {

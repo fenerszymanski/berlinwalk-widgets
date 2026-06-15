@@ -11,7 +11,7 @@ Berlin Battle: This-or-That Game for Visitors | BerlinWalk
 Meta description:
 
 ```text
-Play Berlin Battle, a quick this-or-that game for Berlin tastes, places and stories. Choose your favorites, find your winner, and explore the city with BerlinWalk.
+Play Berlin Battle, a quick this-or-that game for Berlin food, neighborhoods, museums and night-out moods. Choose your favorites, find your winner, and explore the city with BerlinWalk.
 ```
 
 Social title:
@@ -23,7 +23,7 @@ Berlin Battle: This-or-That Game for Visitors | BerlinWalk
 Social description:
 
 ```text
-Choose between Berlin tastes, places and stories in a quick BerlinWalk game. Pick your favorites, find your winner, and share the result.
+Choose between Berlin food, neighborhoods, museums and night-out moods in a quick BerlinWalk game. Pick your favorites, find your winner, and share the result.
 ```
 
 Social image:
@@ -49,7 +49,7 @@ Structured data:
       "@id": "https://www.berlinwalk.com/games/berlin-battle#webpage",
       "url": "https://www.berlinwalk.com/games/berlin-battle",
       "name": "Berlin Battle: This-or-That Game for Visitors | BerlinWalk",
-      "description": "Play Berlin Battle, a quick this-or-that game for Berlin tastes, places and stories. Choose your favorites, find your winner, and explore the city with BerlinWalk.",
+      "description": "Play Berlin Battle, a quick this-or-that game for Berlin food, neighborhoods, museums and night-out moods. Choose your favorites, find your winner, and explore the city with BerlinWalk.",
       "inLanguage": "en",
       "isPartOf": {
         "@type": "WebSite",

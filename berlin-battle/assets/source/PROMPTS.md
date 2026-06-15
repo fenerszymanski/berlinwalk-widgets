@@ -96,6 +96,136 @@ Text: no text, no labels, no letters, no numbers.
 Constraints: no logos, no watermark, no UI screenshots, no flat vector art, no black vignette corners, no random real-photo collage, no distorted typography. Must look like a high-quality featured/social image for a polished travel game page.
 ```
 
+## District / Museum / Night Card Sprite Sheets
+
+Added 2026-06-15 for the three new playable Berlin Battle modes. Generated in
+Yusuf's logged-in ChatGPT session through the Codex in-app browser. No paid API,
+Gemini, OpenAI image API, Sora, Veo, or Content Studio paid image channel was
+used.
+
+Finished source sheets:
+
+- `berlin-districts-battle-sheet-chatgpt-20260615.png`
+- `berlin-museums-battle-sheet-chatgpt-20260615.png`
+- `berlin-night-battle-sheet-chatgpt-20260615.png`
+
+Contact sheets:
+
+- `berlin-districts-battle-contact-sheet-chatgpt-20260615.jpg`
+- `berlin-museums-battle-contact-sheet-chatgpt-20260615.jpg`
+- `berlin-night-battle-contact-sheet-chatgpt-20260615.jpg`
+- `berlin-night-battle-contact-sheet-chatgpt-20260615-compare.jpg` records the rejected alternate night sheet beside the chosen one.
+
+The sheets were cropped into:
+
+- `../cards/districts/*.webp`
+- `../cards/museums/*.webp`
+- `../cards/night/*.webp`
+
+District prompt:
+
+```text
+Create one image: a clean 4x4 sprite sheet of 16 separate Berlin neighborhood game-card artworks for BerlinWalk "Berlin District Battle".
+
+Use case: website game card images. Style: appetizing premium travel-game illustration, not flat icons, not UI icons. Polished semi-realistic editorial illustration / game cover art, consistent lighting and style across all cells.
+
+Format and composition: exact 4 by 4 grid, equal square cells, one centered scene/object per cell, clear separation between cells, generous crop-safe margins. Each cell must work when cropped to a 640x640 square card. No overlapping between cells.
+
+Brand palette: deep BerlinWalk green #1B5E20, bright yellow #FFE600, lime #7CB342, cream #FAFAF5, white highlights, tiny Berlin red #E63946 only as an accent. Use rich Berlin street / architecture / city textures, soft depth, playful versus-game energy, subtle glow rings or particles.
+
+Cells in exact order left-to-right, top-to-bottom:
+1 Mitte: TV Tower / Museum Island / central landmark mood
+2 Kreuzberg: canal bridge, street-art wall, food-market energy
+3 Friedrichshain: East Side Gallery / warehouse nightlife / tram energy
+4 Neukölln: market street, canal, multicultural cafe mood
+5 Prenzlauer Berg: leafy street, old apartment facade, Sunday market mood
+6 Charlottenburg: elegant old-west avenue, palace garden mood
+7 Schöneberg: queer history, neighborhood square, warm nightlife mood
+8 Wedding: canal, gritty brick, underrated local Berlin mood
+9 Moabit: island neighborhood, market hall, railway/river hints
+10 Tiergarten: big park, paths, monument silhouettes
+11 Tempelhof: airport runway park, huge sky, kites
+12 Köpenick: water, old town, castle-like riverside mood
+13 Spandau: citadel, old streets, western edge mood
+14 Pankow: leafy villa street, quiet north Berlin mood
+15 Lichtenberg: tram lines, east Berlin residential texture
+16 Treptow: river park, boats, after-work green space
+
+Text constraints: no text, no labels, no letters, no numbers, no logos, no watermark, no fake signage. Do not put neighborhood names in the image.
+
+Output only the final 4x4 image sheet.
+```
+
+Museum prompt:
+
+```text
+Create one image: a clean 4x4 sprite sheet of 16 separate Berlin museum game-card artworks for BerlinWalk "Berlin Museum Battle".
+
+Use case: website game card images. Style: premium travel-game illustration, polished semi-realistic editorial / cinematic concept art, not flat icons, not UI icons. Consistent lighting and style across all cells.
+
+Format and composition: exact 4 by 4 grid, equal square cells, one centered museum scene or artifact per cell, clear separation between cells, generous crop-safe margins. Each cell must work when cropped to a 640x640 square card. No overlapping between cells.
+
+Brand palette: deep BerlinWalk green #1B5E20, bright yellow #FFE600, lime #7CB342, cream #FAFAF5, white highlights, tiny Berlin red #E63946 only as an accent. Use museum interiors, architecture details, artifacts, frames, tickets, columns, soft spotlight, subtle glow rings or game-particles. It should feel like a coherent BerlinWalk Games family.
+
+Cells in exact order left-to-right, top-to-bottom:
+1 Neues Museum: ancient Egyptian atmosphere, rebuilt museum architecture, elegant bust-like silhouette but not a direct copy of a real artifact
+2 Altes Museum: classical columns, rotunda, calm antiquity mood
+3 Alte Nationalgalerie: old master painting gallery, grand staircase / framed art mood
+4 Bode-Museum: dome, sculpture hall, river-island museum mood
+5 Humboldt Forum: palace facade details, global collection objects, central Berlin mood
+6 Jewish Museum Berlin: angular zinc-like architecture, memory, zigzag geometry, respectful abstract mood
+7 Berlinische Galerie: modern Berlin art, photography, city identity, clean white gallery
+8 Hamburger Bahnhof: contemporary art in former railway station, large hall
+9 Gemäldegalerie: old master paintings, warm frame, quiet gallery
+10 DDR Museum: everyday objects, retro East German apartment details, interactive history mood
+11 Topography of Terror: documentary panels, sober archive wall, respectful and non-sensational
+12 Museum für Naturkunde: dinosaur skeleton, fossils, science hall
+13 Deutsches Technikmuseum: plane, train, machine hall, engineering mood
+14 Futurium: futuristic orb, clean architecture, what-if energy
+15 Urban Nation: street-art museum, mural wall, bold contemporary color
+16 Museum for Communication: envelopes, signals, media history, playful connection mood
+
+Text constraints: no text, no labels, no letters, no numbers, no logos, no watermark, no fake signage. Do not put museum names in the image.
+
+Output only the final 4x4 image sheet.
+```
+
+Night prompt:
+
+```text
+Create one image: a clean 4x4 sprite sheet of 16 separate Berlin nightlife game-card artworks for BerlinWalk "Berlin Night Battle".
+
+Use case: website game card images. Style: premium travel-game / nightlife-game illustration, polished cinematic semi-realistic concept art, not flat icons, not UI icons. Consistent lighting and style across all cells.
+
+Format and composition: exact 4 by 4 grid, equal square cells, one centered scene/mood per cell, clear separation between cells, generous crop-safe margins. Each cell must work when cropped to a 640x640 square card. No overlapping between cells.
+
+Important: this is a mood battle, not official club rankings. Do not show real club logos or real venue names.
+
+Brand palette: deep BerlinWalk green #1B5E20, bright yellow #FFE600, lime #7CB342, cream #FAFAF5, white highlights, tiny Berlin red #E63946 only as an accent. Use Berlin night textures, neon green/yellow glow, soft cinematic depth, dancefloor haze, street corners, riverside reflections, subtle glow rings or game particles. Premium and playful, not sleazy.
+
+Cells in exact order left-to-right, top-to-bottom:
+1 Techno Warehouse: dark industrial room, speaker stacks, yellow-green lights, no logo
+2 Riverside Club: river reflection, club lights, boat/bridge mood
+3 Queer Dancefloor: expressive inclusive dancefloor, rainbow light accents, no flags with text
+4 Punk Show: small stage, guitar, rough basement energy
+5 Jazz Cellar: saxophone, low light, close tables
+6 Open-Air Rave: summer night, moon, park edge, small stage lights
+7 Karaoke Bar: microphone, small room, playful friends energy
+8 Kneipe Crawl: cozy local pub, wooden table, beer glasses
+9 Späti Corner: late-night corner shop mood, bottles, pavement talk, no readable signs
+10 Cocktail Bar: elegant glass, dim lights, green/yellow reflections
+11 Rooftop Sunset: city skyline, sunset, rooftop drink mood
+12 Comedy Night: small spotlight stage, microphone, basement comedy club
+13 Late Döner Stop: glowing snack counter, wrap, night street, no readable signs
+14 Night Bus Ride: yellow Berlin-style bus mood, window reflections, late route home
+15 Gallery Opening: white-wall art space, night crowd, small glasses, contemporary art
+16 Afterhours Breakfast: coffee, pastry, early daylight after a long night
+
+Text constraints: no text, no labels, no letters, no numbers, no logos, no watermark, no readable signage. Do not put item names in the image.
+
+Output only the final 4x4 image sheet.
+```
+
 ## BerlinTools Icon
 
 Source files:

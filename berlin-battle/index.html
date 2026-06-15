@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Battle | BerlinWalk</title>
-  <meta name="description" content="Play Berlin Battle by BerlinWalk: pick between Berlin food favorites until one winner owns your plate.">
+  <meta name="description" content="Play Berlin Battle by BerlinWalk: choose between Berlin food, neighborhoods, museums and night-out moods until one winner survives.">
   <link rel="icon" href="../tools-home/icons/berlin-battle-160.png">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -145,7 +145,7 @@
     }
 
     #bw-berlin-battle .bb-hero-tile.is-a {
-      background-image: url("assets/cards/doner-kebab.webp");
+      background-image: url("assets/topics/district-battle-cover.webp");
       height: 96px;
       left: 0;
       top: 6px;
@@ -154,7 +154,7 @@
     }
 
     #bw-berlin-battle .bb-hero-tile.is-b {
-      background-image: url("assets/cards/currywurst.webp");
+      background-image: url("assets/topics/night-battle-cover.webp");
       bottom: 4px;
       height: 96px;
       right: 4px;
@@ -1198,7 +1198,7 @@
 
     renderShell(
       '<h1 class="bb-title">Choose your battle</h1>' +
-      '<p class="bb-subtitle">A fast this-or-that tournament for Berlin tastes, places and stories. First up: food.</p>',
+      '<p class="bb-subtitle">Fast this-or-that tournaments for Berlin tastes, neighborhoods, museums and nights.</p>',
       '<div class="bb-topic-grid">' + cards + '</div>'
     );
     track('bw_berlin_battle_view_topics', { topic_count: topics.length });
@@ -1240,7 +1240,7 @@
 
     renderShell(
       '<h1 class="bb-title">' + escapeHtml(state.topic.title) + '</h1>' +
-      '<p class="bb-subtitle">Pick the food you would rather eat right now. The bracket does the rest.</p>',
+      '<p class="bb-subtitle">' + escapeHtml(state.topic.gamePrompt || state.topic.lead || 'Pick the one you want more. The bracket does the rest.') + '</p>',
       '<div class="bb-topbar">' +
         '<span class="bb-pill"><span class="bb-pill-dot"></span>' + escapeHtml(state.topic.theme) + '</span>' +
         '<button type="button" class="bb-back" data-back-topics>Choose another battle</button>' +
@@ -1312,6 +1312,7 @@
   }
 
   function resultLine(item) {
+    if (item && item.resultLine) return item.resultLine;
     var lines = {
       'currywurst': 'You like Berlin fast, saucy and unapologetically street-level.',
       'doner-kebab': 'You trust the Berlin classic that works at lunch, dinner and 2am.',
@@ -1330,7 +1331,7 @@
       'spati-snack-run': 'You are loyal to the late-night snack run.',
       'berliner-weisse': 'You picked tart, bright Berlin summer energy.'
     };
-    return lines[item.id] || 'You found your Berlin flavor.';
+    return lines[item.id] || (state.topic && state.topic.resultFallback) || 'You found your Berlin favorite.';
   }
 
   function isLikelyMobileShareDevice() {
@@ -1388,16 +1389,18 @@
 
   function resultShareUrl(winner) {
     var url = new URL(SHARE_URL_BASE);
+    if (state.topic && state.topic.id) url.searchParams.set('topic', state.topic.id);
     url.searchParams.set('winner', winner.id);
     url.searchParams.set('utm_source', 'share');
     url.searchParams.set('utm_medium', 'game');
     url.searchParams.set('utm_campaign', 'berlin_battle');
-    url.searchParams.set('utm_content', winner.id);
+    url.searchParams.set('utm_content', ((state.topic && state.topic.id) || 'battle') + '_' + winner.id);
     return url.toString();
   }
 
   function resultCaption(winner) {
-    return 'My Berlin Food Battle winner is ' + winner.name + '. Play your own Berlin Battle by BerlinWalk: ' + resultShareUrl(winner);
+    var shareTitle = (state.topic && state.topic.shareTitle) || 'My Berlin Battle winner';
+    return shareTitle + ' is ' + winner.name + '. Play your own Berlin Battle by BerlinWalk: ' + resultShareUrl(winner);
   }
 
   function setStatus(message) {
@@ -1470,7 +1473,8 @@
 
     ctx.fillStyle = '#FFE600';
     ctx.font = '900 34px Montserrat, Arial, sans-serif';
-    ctx.fillText('BERLIN FOOD BATTLE', 70, 92);
+    var topicTitle = (state.topic && state.topic.title) || 'Berlin Battle';
+    ctx.fillText(topicTitle.toUpperCase(), 70, 92);
     ctx.fillStyle = '#FFFFFF';
     ctx.font = '900 74px Montserrat, Arial, sans-serif';
     wrapText(ctx, 'My winner is', 70, 188, 900, 82, 2);
@@ -1513,7 +1517,7 @@
     }
     var link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = 'berlin-food-battle-' + state.winner.id + '.png';
+    link.download = 'berlin-battle-' + ((state.topic && state.topic.id) || 'result') + '-' + state.winner.id + '.png';
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -1565,18 +1569,18 @@
         setStatus('Opening share sheet...');
         await drawShareCard(canvas, winner);
         var blob = await canvasBlob(canvas);
-        var file = blob ? new File([blob], 'berlin-food-battle-' + winner.id + '.png', { type: 'image/png' }) : null;
+        var file = blob ? new File([blob], 'berlin-battle-' + ((state.topic && state.topic.id) || 'result') + '-' + winner.id + '.png', { type: 'image/png' }) : null;
         if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
           shareMethod = 'native_file';
           await navigator.share({
-            title: 'Berlin Food Battle',
+            title: (state.topic && state.topic.title) || 'Berlin Battle',
             text: caption,
             files: [file]
           });
         } else {
           shareMethod = 'native_url';
           await navigator.share({
-            title: 'Berlin Food Battle',
+            title: (state.topic && state.topic.title) || 'Berlin Battle',
             text: caption,
             url: resultShareUrl(winner)
           });

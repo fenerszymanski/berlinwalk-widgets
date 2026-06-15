@@ -2,6 +2,46 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-15 — Codex (Berlin Battle all modes)
+
+**Did:** Made the next three Berlin Battle modes playable after the dashboard work: District, Museum, and Night now join Food on the same game screen. **Changed:** `berlin-battle/data.json` now has 4 active topics and 64 total items; `berlin-battle/assets/cards/{districts,museums,night}/` adds 48 ChatGPT-browser card crops; `berlin-battle/index.html` uses topic-aware game prompts, result lines, share captions, filenames, native-share titles, and share-card heading; `berlin-battle-page/` wrapper copy/snippet/cache-buster now use `all-modes-chatgpt-assets-20260615`; `berlin-battle/assets/source/PROMPTS.md` records exact ChatGPT browser prompts and source sheets. No paid image API or Content Studio paid generation was used. **QA:** Data validation passed: 4 active topics, 64 items, all images present. JS/HTML parse checks and `git diff --check` passed. Playwright local QA completed Food, District, Museum, and Night in exactly 15 choices each, confirmed nonblank 1080x1350 share canvases, restart to 2 choices, no image failures, and overflow 0. Mobile 390px QA confirmed opening grid at 2 columns and each matchup remains side-by-side at `167px 30px 167px`; wrapper local QA confirmed 4 live mode cards and iframe `v=all-modes-chatgpt-assets-20260615`. **Opened:** Push/deploy and live-cache verification for `/games/berlin-battle`; old `/tools/berlin-battle` redirect/unpublish decision remains. **Closed:** District, Museum, and Night modes are ready for live.
+
+## 2026-06-15 — Codex (Berlin Battle final live mobile QA)
+
+**Did:** Closed the Berlin Battle tracking/dashboard run with a final live mobile check. **Changed:** Handoff notes only; no widget code changed in this final pass. **QA:** Live Wix `/games/berlin-battle?utm_content=codex_smoke` at 390px loaded the Games wrapper/game iframe with `dashboard-tracking-20260615`, clicked Food Battle, showed the matchup side-by-side at `154px 30px 154px`, loaded both visible food images from 640px assets, and kept iframe plus parent horizontal overflow at 0. Final syntax checks passed for the dashboard server, Content Studio tracking endpoint/server, wrapper element, and game inline script; `git diff --check` passed. **Opened:** Decide redirect/unpublish handling for the old `/tools/berlin-battle` CMS route. **Closed:** Dedicated Games page, gameplay, share/replay, production tracking, event storage, and local dashboard are ready.
+
+## 2026-06-15 — Codex (Berlin Battle tracking + dashboard)
+
+**Did:** Added first-party tracking hooks for Berlin Battle and documented the local internal stats dashboard for the dedicated Games page.
+
+**Changed:**
+- `berlin-battle/index.html` — sends `bw_berlin_battle_*` events to production `/api/battle-event`, uses session-scoped game session IDs, keeps persistent visitor IDs, adds restart/share method tracking, and stays silent in local previews unless `tracking=local` is present.
+- `berlin-battle-page/berlin-battle-page-element.js` — game iframe cache-buster bumped to `dashboard-tracking-20260615`.
+- `berlin-battle-page/README.md` — Wix snippet bumped and dashboard/local-tracking notes added.
+- `../berlinwalk-content-app/api/track-trip-planner-event.js`, `../berlinwalk-content-app/server.js`, `../berlinwalk-content-app/vercel.json`, `../scripts/setup-berlin-battle-events-collection.mjs`, `../scripts/berlin-battle-dashboard-server.mjs`, `../PROJECT_MEMORY.md`, and `../SESSION_LOG.md` — recorded/implemented the tracking endpoint, Wix collection setup, credential-aware CORS, dashboard, and default QA smoke-event filtering.
+
+**QA:** Data validation passed: 4 topics, one active `food`, 16 unique food items, no missing images. Syntax checks passed for the endpoint/server/dashboard/wrapper and game inline script; `git diff --check` passed. Local dashboard rendered desktop and 390px mobile with `Ready`, 6 metrics, panels, and overflow 0. Playwright completed the local game in exactly 15 choices, created a nonblank 1080x1350 canvas, downloaded `berlin-food-battle-pretzel.png`, copied caption/link, confirmed `Share result` desktop fallback copies text/link, restarted to a fresh 2-choice matchup, and confirmed 390px VS layout remains side-by-side (`154px 30px 154px`) with loaded images and overflow 0. Content Studio production `/api/battle-event` was deployed and live-smoked. GitHub Pages serves the new wrapper/game tracking build. Live Wix `/games/berlin-battle?utm_content=codex_smoke` QA passed: iframe version `dashboard-tracking-20260615`, 15 choices, final winner, share fallback, restart, parent/iframe overflow 0, and no battle-event/CORS console errors. The dashboard excludes `codex_smoke` rows by default and shows them with `includeQa=1`; the live QA run produced 33 events after final mobile checks, including 15 choices, 1 complete, 1 share, and 1 restart.
+
+**Opened:** Decide whether to redirect/unpublish the old `/tools/berlin-battle` CMS route and optionally update the Wix custom-code script URL to the README `?v=dashboard-tracking-20260615` snippet for clarity.
+**Closed:** Local/live gameplay, share/replay flow, Content Studio production tracking endpoint, Games wrapper tracking build, and dashboard docs are ready.
+
+**Next session should:** Monitor real, non-QA `BerlinBattleEvents` after visitors play and decide redirect/unpublish handling for the old `/tools/berlin-battle` CMS route.
+
+## 2026-06-14 — Codex (World Cup fixture score update)
+
+**Did:** Added the newly final Group E score for Germany vs Curaçao to the World Cup fixtures widget.
+
+**Changed:**
+- `worldcup-fixtures/index.html` — added Germany 7-1 Curaçao as `FT`.
+- `worldcup-fixtures/index.html` — updated `SCORE_UPDATED` to `14 Jun 2026, 23:31 CEST`.
+
+**QA:** Due-match check found Germany vs Curaçao eligible at this run; FIFA match centre was checked but did not expose an accessible final score, so FOX Sports and Sky Sports were used as agreeing final-score sources. Inline script/data parse passed with 72 matches and 9 scored fixtures; Playwright local QA found `.bw-match.final` count 9 and horizontal overflow 0 at desktop 1280px and mobile 390px; `git diff --check` passed. Local favicon 404 was the only console error.
+
+**Opened:** Push/deploy still needed for GitHub Pages to serve the updated live widget.
+**Closed:** Local Germany vs Curaçao final score update is complete.
+
+**Next session should:** Continue with the next score-check-due unscored match only after its kickoff + ~2h30 window.
+
 ## 2026-06-14 — Codex (Berlin Battle hero overlay fix)
 
 **Did:** Revised the Berlin Battle hero/mode-card transition so the cards overlay the hero instead of sitting in a detached green band.
