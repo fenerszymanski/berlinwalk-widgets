@@ -504,23 +504,28 @@
     ]
   },
   "humboldt-forum": {
-    "subtitle": "Quick answers about visiting the Humboldt Forum.",
+    "title": "Humboldt Forum FAQ",
+    "subtitle": "Quick answers about tickets, free areas, opening hours, the palace reconstruction and why the Humboldt Forum is so controversial.",
     "items": [
       {
         "q": "Is the Humboldt Forum free?",
-        "a": "Partially. The Palace Cellar, Sculpture Hall, Video Panorama, Humboldt Lab, and stairwell exhibitions are all free. The main exhibitions (Ethnological Museum, Asian Art, BERLIN GLOBAL) require a €14 day ticket. Under 19 is always free for everything."
+        "a": "Partly. Public spaces and selected areas such as the courtyard, Humboldt Laboratory, stairwell exhibitions, castle cellar, sculpture hall and video panorama are free. The main exhibitions are usually ticketed."
       },
       {
-        "q": "How much does the Humboldt Forum cost?",
-        "a": "€14 for a day ticket, €18 for a two-day ticket, or €9 for BERLIN GLOBAL only. The Museum Pass Berlin (€32 for 3 days) also covers the Ethnological Museum and Museum of Asian Art."
+        "q": "How much does the Humboldt Forum cost in 2026?",
+        "a": "The official admission page currently lists the Humboldt Forum day ticket at EUR 14, reduced EUR 7, and the two-day ticket at EUR 18, reduced EUR 9. BERLIN GLOBAL can also be visited with a separate EUR 9 ticket. The roof terrace is listed at EUR 3, reduced EUR 1.50."
       },
       {
-        "q": "Why was the Humboldt Forum built?",
-        "a": "To give Berlin's ethnological and Asian art collections a central home (they were previously in suburban Dahlem), to restore the historic city center's architectural identity after the GDR demolished the original palace, and to create a cultural forum for global dialogue. The decision was debated for over a decade before construction began."
+        "q": "Why is the Humboldt Forum controversial?",
+        "a": "It reconstructs the facade of a Prussian royal palace on the site where East Germany built the Palast der Republik, which was later demolished after reunification. Inside, it also displays major non-European collections in a setting tied to imperial architecture."
       },
       {
-        "q": "What happened to the Benin Bronzes?",
-        "a": "Germany has pledged to return its Benin Bronzes to Nigeria. Most have been officially transferred, though around 40 remain on display in the Humboldt Forum as loans, alongside an exhibition explaining the restitution process. It's an ongoing conversation between Germany and Nigeria"
+        "q": "What happened to the Benin Bronzes in Berlin?",
+        "a": "In 2022, the Prussian Cultural Heritage Foundation transferred ownership of 512 Berlin Benin objects to Nigeria. About a third remain in Berlin on loan for an initial ten-year period and are shown in the Humboldt Forum with restitution context."
+      },
+      {
+        "q": "Is the Humboldt Forum worth visiting?",
+        "a": "Yes, at least from the outside and courtyard. It is not a simple feel-good attraction, but it explains monarchy, GDR memory, reunification politics and colonial museum debates in one place."
       }
     ]
   },

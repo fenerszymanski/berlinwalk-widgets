@@ -73,7 +73,8 @@
   "berlin-in-3-days-the-perfect-itinerary-from-a-local-guide": "berlin-in-3-days",
   "do-i-need-to-speak-german-to-visit-berlin": "speak-german-berlin",
   "is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026": "berlin-tv-tower-worth-it",
-  "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now": "reichstag-dome-free"
+  "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now": "reichstag-dome-free",
+  "the-humboldt-forum-berlin-s-most-controversial-building": "humboldt-forum"
 };
 
   var SCHEMAS = {
@@ -846,31 +847,39 @@
         "name": "Is the Humboldt Forum free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Partially. The Palace Cellar, Sculpture Hall, Video Panorama, Humboldt Lab, and stairwell exhibitions are all free. The main exhibitions (Ethnological Museum, Asian Art, BERLIN GLOBAL) require a €14 day ticket. Under 19 is always free for everything."
+          "text": "Partly. Public spaces and selected areas such as the courtyard, Humboldt Laboratory, stairwell exhibitions, castle cellar, sculpture hall and video panorama are free. The main exhibitions are usually ticketed."
         }
       },
       {
         "@type": "Question",
-        "name": "How much does the Humboldt Forum cost?",
+        "name": "How much does the Humboldt Forum cost in 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "€14 for a day ticket, €18 for a two-day ticket, or €9 for BERLIN GLOBAL only. The Museum Pass Berlin (€32 for 3 days) also covers the Ethnological Museum and Museum of Asian Art."
+          "text": "The official admission page currently lists the Humboldt Forum day ticket at EUR 14, reduced EUR 7, and the two-day ticket at EUR 18, reduced EUR 9. BERLIN GLOBAL can also be visited with a separate EUR 9 ticket. The roof terrace is listed at EUR 3, reduced EUR 1.50."
         }
       },
       {
         "@type": "Question",
-        "name": "Why was the Humboldt Forum built?",
+        "name": "Why is the Humboldt Forum controversial?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "To give Berlin's ethnological and Asian art collections a central home (they were previously in suburban Dahlem), to restore the historic city center's architectural identity after the GDR demolished the original palace, and to create a cultural forum for global dialogue. The decision was debated for over a decade before construction began."
+          "text": "It reconstructs the facade of a Prussian royal palace on the site where East Germany built the Palast der Republik, which was later demolished after reunification. Inside, it also displays major non-European collections in a setting tied to imperial architecture."
         }
       },
       {
         "@type": "Question",
-        "name": "What happened to the Benin Bronzes?",
+        "name": "What happened to the Benin Bronzes in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Germany has pledged to return its Benin Bronzes to Nigeria. Most have been officially transferred, though around 40 remain on display in the Humboldt Forum as loans, alongside an exhibition explaining the restitution process. It's an ongoing conversation between Germany and Nigeria"
+          "text": "In 2022, the Prussian Cultural Heritage Foundation transferred ownership of 512 Berlin Benin objects to Nigeria. About a third remain in Berlin on loan for an initial ten-year period and are shown in the Humboldt Forum with restitution context."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Humboldt Forum worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, at least from the outside and courtyard. It is not a simple feel-good attraction, but it explains monarchy, GDR memory, reunification politics and colonial museum debates in one place."
         }
       }
     ]
