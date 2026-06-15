@@ -89,7 +89,8 @@
   "marx-and-engels-are-still-standing-in-berlin-here-s-why": "marx-engels-still-standing",
   "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown": "berliner-dom-before-after-wwii",
   "the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark": "tv-tower-10-things",
-  "museum-island-before-and-after-wwii-the-destruction-nobody-expected": "museum-island-before-after-wwii"
+  "museum-island-before-and-after-wwii-the-destruction-nobody-expected": "museum-island-before-after-wwii",
+  "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth": "jfk-jelly-donut-myth"
 };
 
   var SCHEMAS = {
@@ -4059,6 +4060,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The walking tour reaches Museum Island near the end of the route, after Alexanderplatz, the old city centre, the Humboldt Forum and the Berliner Dom."
+        }
+      }
+    ]
+  },
+  "jfk-jelly-donut-myth": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Did JFK really say he was a jelly donut?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. JFK said \"Ich bin ein Berliner\", which was correct for the symbolic solidarity message he wanted to make in West Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do people think Berliner means jelly donut?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In some German-speaking regions, Berliner can mean a jam-filled pastry. In Berlin itself, that pastry is usually called Pfannkuchen, so the joke misses the local context."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was the word ein a mistake?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Dropping ein would fit a literal statement of origin, but Kennedy was speaking figuratively. With a symbolic identity claim, \"Ich bin ein Berliner\" works."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Did the Berlin crowd laugh at Kennedy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The line was understood and cheered. The laughter people sometimes hear relates to Kennedy joking about the interpreter translating his German."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where did JFK give the speech?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "He gave it at Rudolph-Wilde-Platz in front of Rathaus Schöneberg, the West Berlin city hall. The square is now John-F.-Kennedy-Platz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I order in a Berlin bakery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you want the jam-filled pastry in Berlin, ask for a Pfannkuchen. In many other parts of Germany, the same pastry may be called Berliner or Krapfen."
         }
       }
     ]
