@@ -80,7 +80,8 @@
   "berlin-tv-tower-construction-before-during-and-after": "berlin-tv-tower-construction",
   "is-berlin-safe-for-solo-travelers-an-honest-local-perspective": "berlin-solo-travel-safety",
   "why-marx-and-engels-face-west-the-statues-berlin-almost-removed": "marx-engels-face-west",
-  "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate": "alexanderplatz-tour-start"
+  "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate": "alexanderplatz-tour-start",
+  "berlin-slang-10-words-you-ll-only-hear-in-this-city": "berlin-slang"
 };
 
   var SCHEMAS = {
@@ -3564,6 +3565,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The tour ends near Hackescher Markt, close to cafes, food, courtyards, Museum Island, trams and S-Bahn. It is a useful place to continue your day instead of looping back to the start."
+        }
+      }
+    ]
+  },
+  "berlin-slang": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Berlinerisch?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlinerisch is the traditional Berlin dialect or city speech. It changes sounds like ich to ick, das to dit and gut to jut, and it carries Berlin's dry, direct style."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to speak Berlinerisch in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Visitors do not need to speak Berlinerisch. It is more useful to recognise a few words than to perform the dialect. Standard German, simple polite phrases and English are enough for most tourist situations."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Kiez mean in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kiez means your local neighbourhood or home patch. It is smaller and more personal than a district name, usually the few streets where daily life happens."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a Späti?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Späti is a late-night corner shop, short for Spätkauf. Berliners use Spätis for drinks, snacks, small emergencies and casual pavement social life."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Berliner Schnauze mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berliner Schnauze is Berlin's blunt, dry and direct communication style. It can sound rude at first, but it is often humour and efficiency rather than real hostility."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin slang words are safest for visitors to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kiez, Späti, Pfand, Schrippe and Wegbier are safe, practical words. Dialect forms like ick, dit and keene are better for recognition unless you are speaking casually with friends."
         }
       }
     ]
