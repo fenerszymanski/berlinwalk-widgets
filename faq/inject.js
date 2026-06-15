@@ -99,7 +99,8 @@
   "was-berlin-really-the-most-decadent-city-in-the-1920s": "weimar-berlin-decadence",
   "why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan": "berlin-wide-streets",
   "the-neues-museum-from-bombed-ruin-to-nefertiti-s-home": "neues-museum-berlin",
-  "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point": "berlin-no-old-town"
+  "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point": "berlin-no-old-town",
+  "hackescher-markt-where-our-tour-ends-and-your-berlin-adventure-begins": "hackescher-tour-end"
 };
 
   var SCHEMAS = {
@@ -4609,6 +4610,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The free, tip-based walking tour starts at Alexanderplatz and follows the historic centre toward Hackescher Markt, showing where old Berlin survived, disappeared and was rebuilt."
+        }
+      }
+    ]
+  },
+  "hackescher-tour-end": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where does the BerlinWalk tour end?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The BerlinWalk free walking tour ends at Hackescher Markt in Mitte, close to the S-Bahn station, Hackesche Höfe, Museum Island, Monbijoupark and many food and coffee options."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why end the tour at Hackescher Markt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hackescher Markt is a practical finish point. After about 2 hours of walking, it gives guests food, coffee, transport, courtyards, shopping, museums and riverside options without needing a new start."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do first after the tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you still have energy, walk through Hackesche Höfe first. If you are tired or hungry, choose food or coffee nearby, but look one or two side streets away before settling."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Hackesche Höfe the same as Haus Schwarzenberg?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Hackesche Höfe is the restored Jugendstil courtyard complex. Haus Schwarzenberg is the rougher street-art courtyard nearby. Both are worth seeing, but they feel very different."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Hackescher Markt good for food?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but the most obvious restaurants on the square can be tourist-oriented. For a better chance, check the side streets around Rosenthaler Straße, Weinmeisterstraße, Alte Schönhauser Straße and Sophienstraße."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I go to Museum Island from Hackescher Markt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Museum Island is an easy walk from Hackescher Markt, which makes the area a good finish point if you want one more cultural stop after the walking tour."
         }
       }
     ]
