@@ -60,10 +60,6 @@
 
     _render() {
       const heroImage = asset('berlin-battle/assets/social/berlin-battle-social-1200x630.jpg');
-      const foodImage = asset('berlin-battle/assets/topics/food-battle-cover.webp');
-      const districtImage = asset('berlin-battle/assets/topics/district-battle-cover.webp');
-      const museumImage = asset('berlin-battle/assets/topics/museum-battle-cover.webp');
-      const nightImage = asset('berlin-battle/assets/topics/night-battle-cover.webp');
 
       this.innerHTML = `
         <style>${this._styles()}</style>
@@ -79,39 +75,6 @@
                 <a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a>
                 <a class="bw-battle-btn bw-battle-btn-ghost" href="${ROUTE_URL}">See the walking route</a>
               </div>
-            </div>
-          </section>
-
-          <section class="bw-battle-strip" aria-label="Berlin Battle modes">
-            <div class="bw-battle-inner bw-battle-mode-grid">
-              <article>
-                <img src="${foodImage}" alt="">
-                <div>
-                  <span>Live mode</span>
-                  <strong>Berlin Food Battle</strong>
-                </div>
-              </article>
-              <article>
-                <img src="${districtImage}" alt="">
-                <div>
-                  <span>Live mode</span>
-                  <strong>Berlin District Battle</strong>
-                </div>
-              </article>
-              <article>
-                <img src="${museumImage}" alt="">
-                <div>
-                  <span>Live mode</span>
-                  <strong>Berlin Museum Battle</strong>
-                </div>
-              </article>
-              <article>
-                <img src="${nightImage}" alt="">
-                <div>
-                  <span>Live mode</span>
-                  <strong>Berlin Night Battle</strong>
-                </div>
-              </article>
             </div>
           </section>
 
@@ -325,62 +288,6 @@
           color: var(--bw-white);
         }
 
-        .bw-battle-strip {
-          background: var(--bw-green);
-          border-top: 0;
-          color: var(--bw-white);
-          margin-top: 0;
-          padding: 18px 0;
-          position: relative;
-          z-index: 3;
-        }
-
-        .bw-battle-mode-grid {
-          display: grid;
-          gap: 12px;
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-        }
-
-        .bw-battle-mode-grid article {
-          align-items: center;
-          background: rgba(27, 94, 32, 0.88);
-          border: 1px solid rgba(255, 255, 255, 0.24);
-          border-radius: 10px;
-          box-shadow: 0 14px 34px rgba(0, 0, 0, 0.16);
-          display: grid;
-          gap: 12px;
-          grid-template-columns: 76px minmax(0, 1fr);
-          min-width: 0;
-          padding: 10px;
-        }
-
-        .bw-battle-mode-grid img {
-          aspect-ratio: 16 / 10;
-          border-radius: 8px;
-          display: block;
-          object-fit: cover;
-          width: 76px;
-        }
-
-        .bw-battle-mode-grid span {
-          color: var(--bw-yellow);
-          display: block;
-          font-size: 10px;
-          font-weight: 900;
-          letter-spacing: 1.2px;
-          line-height: 1.2;
-          text-transform: uppercase;
-        }
-
-        .bw-battle-mode-grid strong {
-          color: var(--bw-white);
-          display: block;
-          font-size: 15px;
-          font-weight: 900;
-          line-height: 1.18;
-          margin-top: 4px;
-        }
-
         .bw-battle-game-band {
           padding: clamp(28px, 5vw, 54px) 0;
         }
@@ -456,12 +363,6 @@
           color: var(--bw-white);
         }
 
-        @media (max-width: 1100px) {
-          .bw-battle-mode-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-          }
-        }
-
         @media (max-width: 820px) {
           .bw-battle-inner {
             width: min(100% - 24px, 1120px);
@@ -474,10 +375,6 @@
           .bw-battle-hero-overlay {
             background:
               linear-gradient(0deg, rgba(18, 63, 22, 0.92) 0%, rgba(18, 63, 22, 0.54) 62%, rgba(18, 63, 22, 0.14) 100%);
-          }
-
-          .bw-battle-mode-grid {
-            grid-template-columns: minmax(0, 1fr);
           }
 
           .bw-battle-game-head,
@@ -513,14 +410,6 @@
             max-width: 100%;
             min-width: 0;
             width: auto;
-          }
-
-          .bw-battle-mode-grid article {
-            grid-template-columns: 68px minmax(0, 1fr);
-          }
-
-          .bw-battle-mode-grid img {
-            width: 68px;
           }
 
           .bw-battle-game-shell {

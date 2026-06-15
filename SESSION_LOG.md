@@ -2,6 +2,10 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-15 — Codex (Berlin Battle mode strip removed)
+
+**Did:** Removed the redundant/misleading four-card `Live mode` strip from the dedicated Berlin Battle Games page wrapper. **Changed:** `berlin-battle-page/berlin-battle-page-element.js` no longer renders or styles `.bw-battle-strip` / `.bw-battle-mode-grid`; unused topic-cover constants were removed. `berlin-battle-page/README.md` snippet cache-buster is now `no-mode-strip-20260615`; root `PROJECT_MEMORY.md` records the product decision. **QA:** Wrapper JS syntax and `git diff --check -- berlin-battle-page` passed. Local Browser QA at 1280px and 390px confirmed no strip/mode-grid/`Live mode` text, hero flows directly into the game band with gap 0, and horizontal overflow is 0. **Opened:** Push/deploy and verify live `/games/berlin-battle` after GitHub Pages cache updates. **Closed:** The misleading strip is removed locally.
+
 ## 2026-06-15 — Codex (Berlin Battle header/footer links)
 
 **Did:** Added Berlin Battle to the global Custom Element navigation. **Changed:** `site-header/site-header-element.js` now has a `Games` nav link to `/games/berlin-battle` on desktop and mobile; compact breakpoint moved from 880px to 980px to prevent nav crowding. `site-footer/site-footer-element.js` now has a separate `Play` column with `Berlin Battle`; footer desktop grid supports four link columns. `README.md`, `AGENTS.md`, and root project memory were updated to match. **QA:** Header/footer JS syntax and `git diff --check` passed. Local Browser QA confirmed `Games` appears with the correct link on desktop/mobile, `Play > Berlin Battle` appears in footer, 900/980/1000/1280px header breakpoints have horizontal overflow 0, and footer desktop/mobile overflow is 0. **Opened:** Push/deploy, then wait for GitHub Pages/Wix cache before checking live menu. **Closed:** Local header/footer game navigation is ready.
