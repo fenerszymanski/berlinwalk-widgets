@@ -2737,5 +2737,35 @@
         "a": "Plan less than you think. Pick one main area per half-day, leave time between stops, and use live listings for one current event rather than chasing everything at once."
       }
     ]
+  },
+  "weimar-berlin-decadence": {
+    "title": "1920s Berlin FAQ",
+    "subtitle": "Quick answers about Weimar Berlin, cabaret, queer nightlife, hyperinflation and what remains today.",
+    "items": [
+      {
+        "q": "Was 1920s Berlin really decadent?",
+        "a": "Yes, but only partly. Berlin had famous cabarets, queer bars, nightlife and experimental art, but the same city also had poverty, inflation, political violence and a fragile democracy."
+      },
+      {
+        "q": "When were Berlin's Golden Twenties?",
+        "a": "The classic Golden Twenties period was mostly **1924 to 1929**, after the currency stabilized and before the Wall Street crash pushed Germany back into crisis."
+      },
+      {
+        "q": "Why was Berlin so important for queer history?",
+        "a": "Weimar Berlin had a visible queer scene, political associations and Magnus Hirschfeld's Institute for Sexual Science. VisitBerlin notes around **170 gay and lesbian clubs, bars and pubs** in the 1920s."
+      },
+      {
+        "q": "What happened to Berlin's cabarets after 1933?",
+        "a": "After the Nazi takeover, independent cabaret, queer nightlife and avant-garde culture were attacked, censored or forced into conformity. Many artists fled or were persecuted."
+      },
+      {
+        "q": "Can I still see 1920s Berlin today?",
+        "a": "Some traces remain, including Babylon cinema, KaDeWe, Schoneberg queer geography, Bebelplatz and parts of Alexanderplatz. Many original venues were destroyed, renamed or rebuilt."
+      },
+      {
+        "q": "Is Babylon Berlin historically accurate?",
+        "a": "It captures the atmosphere of crisis, glamour and danger, but it is drama, not a guidebook. The real history is messier, shorter and more politically fragile."
+      }
+    ]
   }
 }

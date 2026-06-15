@@ -95,7 +95,8 @@
   "the-lustgarten-from-royal-garden-to-nazi-rally-ground-to-berlin-s-favorite-picnic-spot": "lustgarten-berlin",
   "kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture": "kaffee-vs-coffee",
   "the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church": "totentanz-berlin",
-  "what-s-happening-in-berlin-this-weekend-your-ultimate-guide": "berlin-weekend-guide"
+  "what-s-happening-in-berlin-this-weekend-your-ultimate-guide": "berlin-weekend-guide",
+  "was-berlin-really-the-most-decadent-city-in-the-1920s": "weimar-berlin-decadence"
 };
 
   var SCHEMAS = {
@@ -4389,6 +4390,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Plan less than you think. Pick one main area per half-day, leave time between stops, and use live listings for one current event rather than chasing everything at once."
+        }
+      }
+    ]
+  },
+  "weimar-berlin-decadence": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Was 1920s Berlin really decadent?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but only partly. Berlin had famous cabarets, queer bars, nightlife and experimental art, but the same city also had poverty, inflation, political violence and a fragile democracy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When were Berlin's Golden Twenties?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The classic Golden Twenties period was mostly 1924 to 1929, after the currency stabilized and before the Wall Street crash pushed Germany back into crisis."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was Berlin so important for queer history?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Weimar Berlin had a visible queer scene, political associations and Magnus Hirschfeld's Institute for Sexual Science. VisitBerlin notes around 170 gay and lesbian clubs, bars and pubs in the 1920s."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happened to Berlin's cabarets after 1933?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After the Nazi takeover, independent cabaret, queer nightlife and avant-garde culture were attacked, censored or forced into conformity. Many artists fled or were persecuted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I still see 1920s Berlin today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some traces remain, including Babylon cinema, KaDeWe, Schoneberg queer geography, Bebelplatz and parts of Alexanderplatz. Many original venues were destroyed, renamed or rebuilt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Babylon Berlin historically accurate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It captures the atmosphere of crisis, glamour and danger, but it is drama, not a guidebook. The real history is messier, shorter and more politically fragile."
         }
       }
     ]
