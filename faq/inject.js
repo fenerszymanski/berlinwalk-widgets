@@ -66,7 +66,8 @@
   "taxi-in-berlin": "taxi-in-berlin",
   "berlin-public-holidays-2026": "berlin-public-holidays-2026",
   "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol": "the-ampelmann",
-  "can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany": "credit-cards-berlin"
+  "can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany": "credit-cards-berlin",
+  "bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about": "bus-100-berlin"
 };
 
   var SCHEMAS = {
@@ -2920,6 +2921,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, ATMs are easy to find. Use bank-operated ATMs such as Sparkasse, Deutsche Bank, Commerzbank, Volksbank or Postbank when possible, and avoid expensive tourist-area independent ATMs if you have a better option."
+        }
+      }
+    ]
+  },
+  "bus-100-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Bus 100 in Berlin a tourist bus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Bus 100 is a normal BVG public bus route between Zoologischer Garten and Alexanderplatz. It is useful for tourists because it passes many famous sights, but it has no guide, no audio commentary and no special tourist ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does Bus 100 cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bus 100 uses normal Berlin public transport tickets. In 2026 a standard Berlin AB single ticket costs EUR 4 and is valid for one person for a two-hour one-way journey. If you plan more public transport that day, a 24-hour AB ticket may be easier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best direction to ride Bus 100?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a first visit, ride from Zoologischer Garten toward Alexanderplatz. It gives a clear west-to-east overview through City West, Tiergarten, the government quarter, Brandenburg Gate, Unter den Linden, Museum Island and the TV Tower area."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I hop on and off Bus 100?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can interrupt a valid single-ticket journey in the same direction within the ticket time, but the single ticket does not cover a round trip or return journey. If you want to get off several times or come back later, use a day ticket or another valid ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Bus 100 better than a hop-on hop-off tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bus 100 is much cheaper and more authentic, but it has no commentary and covers a regular public transport route. Choose it for a low-cost overview. Choose a guided tour or walking tour if you want the stories behind the landmarks."
         }
       }
     ]
