@@ -86,7 +86,8 @@
   "10-german-words-every-tourist-should-know-before-visiting-berlin": "german-tourist-words",
   "the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists": "cheap-berlin-2026",
   "5-best-coffee-shops-near-hackescher-markt-a-local-s-guide": "coffee-shops-hackescher-markt",
-  "marx-and-engels-are-still-standing-in-berlin-here-s-why": "marx-engels-still-standing"
+  "marx-and-engels-are-still-standing-in-berlin-here-s-why": "marx-engels-still-standing",
+  "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown": "berliner-dom-before-after-wwii"
 };
 
   var SCHEMAS = {
@@ -3894,6 +3895,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "They are at the Marx-Engels-Forum near Karl-Liebknecht-Strasse 2, between Alexanderplatz, the Rotes Rathaus and the Spree."
+        }
+      }
+    ]
+  },
+  "berliner-dom-before-after-wwii": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Berliner Dom today the original building?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is the same historic building, but not the same 1905 silhouette. War damage, the demolition of the Memorial Church and later reconstruction changed its size, dome landscape and proportions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happened to the Berliner Dom in World War II?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On 24 May 1944, a bomb hit the dome lantern and set fire to the outer dome. The lantern collapsed, smashed through the inner stone dome and damaged the church and Hohenzollern crypt below."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What part of the Berliner Dom is missing today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The missing part is the northern Memorial Church, or Denkmalskirche. The official Dom history says roughly one third of the old building is absent today."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was the Memorial Church demolished?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It was demolished in 1975 during GDR-era reconstruction. The result was a simplified cathedral without one of its most imperial and dynastic parts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When did the Berliner Dom reopen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The cathedral was re-inaugurated in 1993, but restoration continued. Altar windows were reconstructed by 1999, and precious stone mosaics were recreated up to 2002."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berliner Dom worth visiting inside?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes if you want the interior, crypt and dome view. If your time is short, the outside story from the Lustgarten is already strong and free."
         }
       }
     ]
