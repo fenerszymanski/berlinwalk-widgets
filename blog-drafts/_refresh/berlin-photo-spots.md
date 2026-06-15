@@ -117,7 +117,7 @@ This spot also works in rain because the colonnade gives partial cover.
 
 The James Simon Galerie is the entrance building for Museum Island, designed by David Chipperfield and opened in 2019.
 
-David Chipperfield Architects describes it as the new entrance building for Museum Island, completing the ensemble between the Kupfergraben canal and the Neues Museum. That is exactly why it photographs so well: it is modern, but it speaks to the older museum architecture around it.
+[David Chipperfield Architects](https://davidchipperfield.com/projects/james-simon-galerie) describes it as the new entrance building for Museum Island, completing the ensemble between the Kupfergraben canal and the Neues Museum. That is exactly why it photographs so well: it is modern, but it speaks to the older museum architecture around it.
 
 Most tourists treat it as a passageway. Photographers should treat it as a subject.
 
@@ -155,7 +155,7 @@ Photo tip:
 - Shoot after rain for texture and reflections.
 - Try black and white if the sky is flat.
 
-The area around Rathausforum and Marx-Engels-Forum is being redesigned. Grün Berlin describes the project as a major redevelopment of the open space between the TV Tower and the Spree. That means some angles can change or be fenced off, so stay flexible.
+The area around Rathausforum and Marx-Engels-Forum is being redesigned. [Grün Berlin](https://gruen-berlin.de/en/projects/urban-open-spaces/rathaus-and-marx-engels-forum/about-the-project) describes the project as a major redevelopment of the open space between the TV Tower and the Spree. That means some angles can change or be fenced off, so stay flexible.
 
 In 2026, I would treat Marienviertel as the reliable photo idea, and Marx-Engels-Forum as a bonus if access and sightlines are good.
 
@@ -171,7 +171,7 @@ Hackesche Höfe is one of Berlin's easiest places to photograph badly and one of
 
 Everyone stops in the first courtyard. That is fair, because the Jugendstil tile facade is beautiful. But the real trick is to keep moving through the courtyards and use the doorways as frames.
 
-Berlin.de notes that the inhabited courtyards close every evening while the front courtyards remain open, and that the complex includes small shops, restaurants, cafés, a cinema and the Chamäleon theatre. So come during the day if you want the full courtyard sequence.
+[Berlin.de notes](https://www.berlin.de/en/attractions-and-sights/3560128-3104052-hackesche-hoefe.en.html) that the inhabited courtyards close every evening while the front courtyards remain open, and that the complex includes small shops, restaurants, cafés, a cinema and the Chamäleon theatre. So come during the day if you want the full courtyard sequence.
 
 Photo tip:
 
