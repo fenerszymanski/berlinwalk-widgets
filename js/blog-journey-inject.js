@@ -24,6 +24,7 @@
   var observer = null;
   var lastPath = location.pathname;
   var backTopScrollHandler = null;
+  var bootAt = Date.now();
 
   var BLOG_CATEGORIES = [
     { slug: 'tourist-tips', label: 'Tourist Tips', url: 'https://www.berlinwalk.com/blog/categories/tourist-tips' },
@@ -479,7 +480,19 @@
     return null;
   }
 
+  function toolPromptSettled() {
+    // Wait until the page has finished loading and a short buffer has passed, so
+    // Wix has had time to inject the article's real tool iframes. Inserting the
+    // fallback "Useful now" prompt before those iframes exist and then removing
+    // it once they load (hasEmbeddedArticleTool flips to true) is what caused the
+    // visible blink right after the first/second paragraph. Almost every post
+    // embeds its own tool, so once settled the prompt is correctly suppressed and
+    // never paints; genuinely tool-less posts just get it a moment later.
+    return document.readyState === 'complete' && (Date.now() - bootAt) >= 1200;
+  }
+
   function insertToolPrompt(body, data, items) {
+    if (!toolPromptSettled()) return;
     var old = document.querySelector('[' + TOOL_MARKER + ']');
     if (old) old.remove();
     if (!body) return;
@@ -773,6 +786,7 @@
   }
 
   function boot() {
+    bootAt = Date.now();
     if (isPostPage()) injectStyle();
     [0, 80, 220, 520, 1100, 2400, 4200, 7000].forEach(function (delay) {
       setTimeout(render, delay);
