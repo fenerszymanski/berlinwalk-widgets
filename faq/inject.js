@@ -90,7 +90,8 @@
   "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown": "berliner-dom-before-after-wwii",
   "the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark": "tv-tower-10-things",
   "museum-island-before-and-after-wwii-the-destruction-nobody-expected": "museum-island-before-after-wwii",
-  "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth": "jfk-jelly-donut-myth"
+  "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth": "jfk-jelly-donut-myth",
+  "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos": "alexanderplatz-then-now"
 };
 
   var SCHEMAS = {
@@ -4114,6 +4115,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "If you want the jam-filled pastry in Berlin, ask for a Pfannkuchen. In many other parts of Germany, the same pastry may be called Berliner or Krapfen."
+        }
+      }
+    ]
+  },
+  "alexanderplatz-then-now": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is Alexanderplatz called Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The square was renamed in 1805 in honour of Russian Tsar Alexander I after his visit to Berlin. Before that, the area had older names linked to the city gate and the royal approach into town."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was Alexanderplatz really a medieval market?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, the area began as a practical market and gathering space outside the old town, close to the approach into medieval Berlin. It was an edge before it became a centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Alexanderplatz look so different from older European squares?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The older urban fabric was badly damaged in World War II, then East German planners rebuilt the area as a wide socialist city centre. That is why Alex feels open, exposed and more modernist than intimate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What did the GDR add to Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most important GDR-era landmarks are the TV Tower and the World Clock, both introduced in 1969 as part of the socialist redesign of the square and wider city centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was Alexanderplatz important in 1989?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On 4 November 1989, hundreds of thousands of East Berliners gathered at Alexanderplatz to demand freedom of speech, freedom of the press and political reform. Five days later, the Berlin Wall opened."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Alexanderplatz worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you visit it with context. It is not Berlin's prettiest square, but it is one of the best places to understand the city's layers: medieval trade, Weimar energy, wartime destruction, GDR planning and reunified Berlin."
         }
       }
     ]
