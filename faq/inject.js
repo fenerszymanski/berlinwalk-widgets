@@ -94,7 +94,8 @@
   "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos": "alexanderplatz-then-now",
   "the-lustgarten-from-royal-garden-to-nazi-rally-ground-to-berlin-s-favorite-picnic-spot": "lustgarten-berlin",
   "kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture": "kaffee-vs-coffee",
-  "the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church": "totentanz-berlin"
+  "the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church": "totentanz-berlin",
+  "what-s-happening-in-berlin-this-weekend-your-ultimate-guide": "berlin-weekend-guide"
 };
 
   var SCHEMAS = {
@@ -4334,6 +4335,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It shows a medieval Berlin that many visitors miss. A 15th-century image about death survives beside the TV Tower, making the city's deepest layers visible in one small place."
+        }
+      }
+    ]
+  },
+  "berlin-weekend-guide": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where can I find what is happening in Berlin this weekend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use Berlin.de Weekend Tips, the visitBerlin event calendar, Berlin.de events pages and the official website of any venue or festival before you go."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do first on a Berlin weekend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with one orientation anchor. For most first-time visitors, a 2-hour walking tour from Alexanderplatz to Hackescher Markt makes the rest of the weekend easier to understand."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are shops open in Berlin on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most normal shops close on Sundays. Exceptions include some shops in large train stations and airports, selected supermarkets, flea markets and occasional official shopping Sundays."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Mauerpark worth visiting on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you like busy flea markets and street energy. The flea market usually runs on Sundays from 10:00 to 18:00, and karaoke is a classic spring-to-autumn afternoon scene."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Berlin public transport run all night on weekends?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. On the nights from Friday to Saturday and Saturday to Sunday, S-Bahn and U-Bahn services run through the night with reduced intervals."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should I plan for one weekend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan less than you think. Pick one main area per half-day, leave time between stops, and use live listings for one current event rather than chasing everything at once."
         }
       }
     ]

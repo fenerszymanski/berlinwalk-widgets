@@ -2707,5 +2707,35 @@
         "a": "It shows a medieval Berlin that many visitors miss. A 15th-century image about death survives beside the TV Tower, making the city's deepest layers visible in one small place."
       }
     ]
+  },
+  "berlin-weekend-guide": {
+    "title": "Berlin Weekend FAQ",
+    "subtitle": "Quick answers for planning a Friday-to-Sunday Berlin trip, finding current events and avoiding common weekend mistakes.",
+    "items": [
+      {
+        "q": "Where can I find what is happening in Berlin this weekend?",
+        "a": "Use **Berlin.de Weekend Tips**, the **visitBerlin event calendar**, Berlin.de events pages and the official website of any venue or festival before you go."
+      },
+      {
+        "q": "What should I do first on a Berlin weekend?",
+        "a": "Start with one orientation anchor. For most first-time visitors, a **2-hour walking tour from Alexanderplatz to Hackescher Markt** makes the rest of the weekend easier to understand."
+      },
+      {
+        "q": "Are shops open in Berlin on Sunday?",
+        "a": "Most normal shops close on Sundays. Exceptions include some shops in large train stations and airports, selected supermarkets, flea markets and occasional official shopping Sundays."
+      },
+      {
+        "q": "Is Mauerpark worth visiting on Sunday?",
+        "a": "Yes, if you like busy flea markets and street energy. The flea market usually runs on Sundays from **10:00 to 18:00**, and karaoke is a classic spring-to-autumn afternoon scene."
+      },
+      {
+        "q": "Does Berlin public transport run all night on weekends?",
+        "a": "Yes. On the nights from **Friday to Saturday** and **Saturday to Sunday**, S-Bahn and U-Bahn services run through the night with reduced intervals."
+      },
+      {
+        "q": "How much should I plan for one weekend?",
+        "a": "Plan less than you think. Pick one main area per half-day, leave time between stops, and use live listings for one current event rather than chasing everything at once."
+      }
+    ]
   }
 }
