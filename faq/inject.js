@@ -72,7 +72,8 @@
   "7-best-photo-spots-in-berlin-most-tourists-walk-right-past": "berlin-photo-spots",
   "berlin-in-3-days-the-perfect-itinerary-from-a-local-guide": "berlin-in-3-days",
   "do-i-need-to-speak-german-to-visit-berlin": "speak-german-berlin",
-  "is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026": "berlin-tv-tower-worth-it"
+  "is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026": "berlin-tv-tower-worth-it",
+  "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now": "reichstag-dome-free"
 };
 
   var SCHEMAS = {
@@ -3202,6 +3203,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. The official TV Tower accessibility information says the tower is not barrier-free because people with severe mobility issues could not be evacuated safely in an emergency."
+        }
+      }
+    ]
+  },
+  "reichstag-dome-free": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Reichstag dome free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Admission to the Reichstag dome and roof terrace is free, but advance registration through the official Bundestag visitor system is required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far ahead should I book the Reichstag dome?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Book as soon as your travel dates are available in the official system. The Bundestag booking form usually accepts requests for the current month and the following month only, and popular times can disappear quickly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I need to bring for the Reichstag dome visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bring your booking confirmation and valid photo ID for every visitor. Arrive early enough for security checks, and avoid bringing large luggage."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Reichstag dome better than the TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The TV Tower is higher, but the Reichstag dome is free and historically richer. For most first-time visitors, I would choose the Reichstag dome if only one viewpoint fits the trip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit when the dome is closed for maintenance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes the roof terrace can still be visited when the glass dome itself is closed. Check the official Bundestag page before planning, especially around listed maintenance periods."
         }
       }
     ]
