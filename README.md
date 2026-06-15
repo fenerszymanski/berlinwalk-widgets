@@ -37,6 +37,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `testimonials/` - `bw-testimonials` homepage testimonial carousel Custom Element.
 - `gallery/` - `bw-gallery` homepage gallery Custom Element.
 - `tools-hub/` - `bw-tools-hub` tools hub Custom Element.
+- `site-header/` - `bw-site-header` global header Custom Element with Tour, The Guide, Reviews, Trip Planner, Games, Resources, and booking CTA.
 - `site-footer/` - `bw-site-footer` site footer Custom Element.
 - `why/` - `bw-why` homepage "Why Walk With Me?" Custom Element.
 - `route/` - `bw-route` interactive illustrated route map Custom Element with a route-story preview section.
@@ -74,7 +75,8 @@ Current homepage Custom Element source URLs:
 | Testimonials | `bw-testimonials` | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | Trust strip shows FreeTour.com only. |
 | Gallery | `bw-gallery` | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | Homepage image gallery. |
 | Tools Hub | `bw-tools-hub` | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/tools-hub-element.js` | Useful tools hub. |
-| Site Footer | `bw-site-footer` | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | Global footer with booking CTA, meeting point, planning links, and partner tools link. |
+| Site Header | `bw-site-header` | `https://fenerszymanski.github.io/berlinwalk-widgets/site-header/site-header-element.js` | Global header with Games link to Berlin Battle. |
+| Site Footer | `bw-site-footer` | `https://fenerszymanski.github.io/berlinwalk-widgets/site-footer/site-footer-element.js` | Global footer with booking CTA, meeting point, Play link to Berlin Battle, planning links, and partner tools link. |
 | The Guide | `bw-the-guide` | `https://fenerszymanski.github.io/berlinwalk-widgets/the-guide/the-guide-element.js` | Standalone guide profile/trust page for `/the-guide`. |
 | Route Story | `bw-route-story` | `https://fenerszymanski.github.io/berlinwalk-widgets/route-story/route-story-element.js` | Standalone `/berlin-walking-tour-route` page with a 12-stop story map built around what visitors understand at each stop. |
 | Thank You | `bw-thank-you` | `https://fenerszymanski.github.io/berlinwalk-widgets/thank-you/thank-you-element.js` | Post-booking confirmation page for `/thank-you-page`; hides the global sticky booking CTA and Wix's forced `#thankYouPage1` confirmation section, shows Google Calendar + Apple/Outlook `.ics` links when Wix exposes a parseable booking date/time, renders a Tour Day Assistant with countdown, Open-Meteo forecast, outfit advice, and meeting-point map, and shows a change/cancel card that uses a detected or attributed manage-booking URL when available. |

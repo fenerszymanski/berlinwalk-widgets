@@ -9,6 +9,7 @@ const BW_SITE_FOOTER_LINKS = {
   guide: 'https://www.berlinwalk.com/the-guide',
   blog: 'https://www.berlinwalk.com/blog',
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
+  battle: 'https://www.berlinwalk.com/games/berlin-battle',
   tools: 'https://www.berlinwalk.com/berlin-tools',
   widgets: 'https://www.berlinwalk.com/widgets',
   instagram: 'https://www.instagram.com/berlinwalkingtour/',
@@ -107,7 +108,7 @@ class BWSiteFooterElement extends HTMLElement {
         .bw-site-footer .bw-footer-main {
           display: grid;
           gap: 34px;
-          grid-template-columns: minmax(280px, 1.2fr) repeat(3, minmax(150px, 0.65fr));
+          grid-template-columns: minmax(280px, 1.2fr) repeat(4, minmax(120px, 0.55fr));
         }
 
         .bw-site-footer .bw-footer-brand {
@@ -426,6 +427,10 @@ class BWSiteFooterElement extends HTMLElement {
               ['The Route', BW_SITE_FOOTER_LINKS.route],
               ['Reviews', BW_SITE_FOOTER_LINKS.reviews],
               ['FAQ', BW_SITE_FOOTER_LINKS.faq]
+            ])}
+
+            ${this._renderLinkColumn('Play', [
+              ['Berlin Battle', BW_SITE_FOOTER_LINKS.battle]
             ])}
 
             ${this._renderLinkColumn('Explore', [

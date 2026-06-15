@@ -9,6 +9,7 @@ const BW_HEADER_LINKS = {
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
   plan: 'https://www.berlinwalk.com/berlin-tools',
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
+  games: 'https://www.berlinwalk.com/games/berlin-battle',
   blog: 'https://www.berlinwalk.com/blog',
   widgets: 'https://www.berlinwalk.com/widgets',
   faq: 'https://www.berlinwalk.com/#faq'
@@ -742,8 +743,8 @@ class BWHeaderElement extends HTMLElement {
           font-weight: 800;
         }
 
-        /* Mobile breakpoint */
-        @media (max-width: 880px) {
+        /* Compact breakpoint */
+        @media (max-width: 980px) {
           .bw-header-top {
             display: none !important;
           }
@@ -821,6 +822,7 @@ class BWHeaderElement extends HTMLElement {
                 <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
                 <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
                 <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a></li>
+                <li><a href="${BW_HEADER_LINKS.games}">Games</a></li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
                     Resources <span class="bw-header-caret" aria-hidden="true">⌄</span>
@@ -861,6 +863,7 @@ class BWHeaderElement extends HTMLElement {
               <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
               <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
               <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a>
+              <a href="${BW_HEADER_LINKS.games}">Games</a>
 
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Resources</div>
