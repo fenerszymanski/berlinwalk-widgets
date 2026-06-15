@@ -114,7 +114,8 @@
   "the-altes-museum-how-one-building-made-berlin-a-cultural-capital": "altes-museum-berlin",
   "the-berliner-dom-a-cathedral-that-survived-everything": "berliner-dom-survived",
   "museum-island-why-prussia-built-an-entire-island-of-museums": "museum-island-prussia",
-  "how-much-should-you-tip-on-a-free-walking-tour-in-berlin": "free-walking-tour-tip"
+  "how-much-should-you-tip-on-a-free-walking-tour-in-berlin": "free-walking-tour-tip",
+  "neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin": "neptune-fountain-berlin"
 };
 
   var SCHEMAS = {
@@ -5434,6 +5435,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Then tip less or nothing. The point of a tip-based tour is that the guide earns the tip through the quality of the experience."
+        }
+      }
+    ]
+  },
+  "neptune-fountain-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is the Neptune Fountain in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Neptune Fountain stands near the Rotes Rathaus, between St. Mary’s Church, the TV Tower area and Alexanderplatz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who made the Neptune Fountain?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Reinhold Begas designed the Neptunbrunnen. It was built between 1888 and 1891 in a dramatic neo-baroque imperial style."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did the Neptune Fountain move?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It originally stood by the Berlin Palace. After the palace was demolished in the GDR period, the fountain was rebuilt in 1969 at its current location near the Rotes Rathaus."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do the four women around Neptune represent?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They represent the Rhine, Elbe, Oder and Vistula, the four major rivers of Prussia at the time the fountain was made."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Neptune Fountain visible in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not always clearly. The fountain is undergoing a major restoration in 2026, with completion planned by the end of 2026, so scaffolding or restricted views are possible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Neptune Fountain on the BerlinWalk route?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It sits close to the BerlinWalk route through Alexanderplatz, the Rotes Rathaus, St. Mary’s Church and the old city-centre landscape."
         }
       }
     ]
