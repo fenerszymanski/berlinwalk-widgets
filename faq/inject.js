@@ -81,7 +81,8 @@
   "is-berlin-safe-for-solo-travelers-an-honest-local-perspective": "berlin-solo-travel-safety",
   "why-marx-and-engels-face-west-the-statues-berlin-almost-removed": "marx-engels-face-west",
   "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate": "alexanderplatz-tour-start",
-  "berlin-slang-10-words-you-ll-only-hear-in-this-city": "berlin-slang"
+  "berlin-slang-10-words-you-ll-only-hear-in-this-city": "berlin-slang",
+  "cold-war-berlin-in-5-key-locations-you-can-still-visit": "cold-war-berlin-locations"
 };
 
   var SCHEMAS = {
@@ -3619,6 +3620,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Kiez, Späti, Pfand, Schrippe and Wegbier are safe, practical words. Dialect forms like ick, dit and keene are better for recognition unless you are speaking casually with friends."
+        }
+      }
+    ]
+  },
+  "cold-war-berlin-locations": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best Cold War site in Berlin for a first visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Berlin Wall Memorial at Bernauer Straße is the best first choice. It shows the Wall as a complete border system, with preserved Wall sections, the former death strip, memorial space and documentation."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Tränenpalast worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Tränenpalast is small, central, free and emotionally powerful. It explains the human side of divided Berlin through the Friedrichstraße border crossing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I learn about the Stasi in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Visit the Stasi Museum in Lichtenberg. It is located in House 1 of the former Stasi headquarters, where Erich Mielke had his office suite."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you still visit the Bridge of Spies?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. You can freely walk across Glienicke Bridge today. During the Cold War it was a restricted border crossing and a site of prisoner and spy exchanges."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Tempelhof important for Cold War history?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tempelhof Airport was a main stage of the Berlin Airlift in 1948 and 1949, when Western planes supplied West Berlin during the Soviet blockade."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Cold War sites in Berlin are free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The outdoor Berlin Wall Memorial, Tränenpalast, Tempelhofer Feld, Glienicke Bridge and many Wall remnants are free. The Stasi Museum usually requires a ticket."
         }
       }
     ]
