@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neues Museum Timeline | BerlinWalk</title>
+  <meta name="description" content="A compact timeline of the Neues Museum, from 19th-century Museum Island showpiece to war ruin, Chipperfield restoration and Nefertiti's return.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-neues-museum">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-neues-museum {
+      --green: #1B5E20;
+      --green-dark: #123C16;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --soft: #F4F7EC;
+      --text: #212121;
+      --muted: #4F5B4D;
+      --line: #DCE6C9;
+      --white: #FFFFFF;
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-neues-museum *,
+    #bw-neues-museum *::before,
+    #bw-neues-museum *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-neues-museum .bw-shell {
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-neues-museum .bw-head {
+      background: var(--green);
+      color: var(--white);
+      padding: 18px 20px;
+    }
+
+    #bw-neues-museum .bw-kicker {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-neues-museum h2,
+    #bw-neues-museum h3,
+    #bw-neues-museum p {
+      margin-top: 0;
+    }
+
+    #bw-neues-museum .bw-title {
+      color: var(--white);
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-neues-museum .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-neues-museum .bw-body {
+      display: grid;
+      gap: 0;
+      padding: 17px 18px 18px;
+    }
+
+    #bw-neues-museum .bw-row {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 92px 24px minmax(0, 1fr);
+      min-width: 0;
+      position: relative;
+    }
+
+    #bw-neues-museum .bw-row + .bw-row {
+      margin-top: 2px;
+    }
+
+    #bw-neues-museum .bw-year {
+      align-self: start;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--green-dark);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1;
+      padding: 13px 8px;
+      text-align: center;
+      width: 92px;
+    }
+
+    #bw-neues-museum .bw-dotline {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+      padding-top: 12px;
+    }
+
+    #bw-neues-museum .bw-dot {
+      background: var(--yellow);
+      border: 4px solid var(--green);
+      border-radius: 999px;
+      flex: 0 0 auto;
+      height: 18px;
+      width: 18px;
+    }
+
+    #bw-neues-museum .bw-stem {
+      background: var(--line);
+      flex: 1 1 auto;
+      margin-top: 6px;
+      min-height: 58px;
+      width: 2px;
+    }
+
+    #bw-neues-museum .bw-row:last-child .bw-stem {
+      display: none;
+    }
+
+    #bw-neues-museum .bw-copy {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 13px 14px;
+    }
+
+    #bw-neues-museum .bw-copy h3 {
+      color: var(--green-dark);
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.25;
+      margin: 0 0 5px;
+    }
+
+    #bw-neues-museum .bw-copy p {
+      color: var(--muted);
+      font-size: 12.8px;
+      font-weight: 650;
+      line-height: 1.52;
+      margin: 0;
+    }
+
+    #bw-neues-museum .bw-chip {
+      background: var(--soft);
+      border: 1px solid #E3ECD3;
+      border-radius: 999px;
+      color: var(--green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      line-height: 1;
+      margin-bottom: 8px;
+      padding: 7px 9px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    #bw-neues-museum .bw-foot {
+      background: #F7FAEF;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.55;
+      padding: 13px 18px;
+    }
+
+    #bw-neues-museum .bw-foot strong {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    @media (max-width: 680px) {
+      #bw-neues-museum { margin: 22px 0; }
+      #bw-neues-museum .bw-head { padding: 16px; }
+      #bw-neues-museum .bw-title { font-size: 22px; }
+      #bw-neues-museum .bw-body { padding: 14px; }
+      #bw-neues-museum .bw-row {
+        gap: 9px;
+        grid-template-columns: 70px 18px minmax(0, 1fr);
+      }
+      #bw-neues-museum .bw-year {
+        font-size: 14px;
+        padding: 12px 4px;
+        width: 70px;
+      }
+      #bw-neues-museum .bw-dotline { padding-top: 10px; }
+      #bw-neues-museum .bw-dot {
+        border-width: 3px;
+        height: 15px;
+        width: 15px;
+      }
+      #bw-neues-museum .bw-copy {
+        padding: 12px;
+      }
+      #bw-neues-museum .bw-copy h3 {
+        font-size: 15px;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-neues-museum-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk timeline</p>
+      <h2 class="bw-title" id="bw-neues-museum-title">The Neues Museum in Six Turning Points</h2>
+      <p class="bw-sub">A quick timeline for reading the building before you go inside: Prussian ambition, Nefertiti, war damage, decades as a ruin and the restoration that kept the scars visible.</p>
+    </header>
+
+    <div class="bw-body">
+      <article class="bw-row">
+        <div class="bw-year">1859</div>
+        <div class="bw-dotline"><span class="bw-dot"></span><span class="bw-stem"></span></div>
+        <div class="bw-copy">
+          <span class="bw-chip">Museum Island</span>
+          <h3>The new museum opens</h3>
+          <p>Friedrich August Stuler's building becomes the second museum on today's Museum Island and a stage for Egyptian, prehistoric and classical collections.</p>
+        </div>
+      </article>
+
+      <article class="bw-row">
+        <div class="bw-year">1913</div>
+        <div class="bw-dotline"><span class="bw-dot"></span><span class="bw-stem"></span></div>
+        <div class="bw-copy">
+          <span class="bw-chip">Nefertiti</span>
+          <h3>The queen arrives in Berlin</h3>
+          <p>The Amarna finds enter Berlin after the excavations funded by James Simon. The famous bust is later donated to the Egyptian Museum in 1920.</p>
+        </div>
+      </article>
+
+      <article class="bw-row">
+        <div class="bw-year">1924</div>
+        <div class="bw-dotline"><span class="bw-dot"></span><span class="bw-stem"></span></div>
+        <div class="bw-copy">
+          <span class="bw-chip">First display</span>
+          <h3>Nefertiti becomes a museum star</h3>
+          <p>The bust goes on public display in the converted Amarna Courtyard, beginning the Berlin museum career that still shapes the building today.</p>
+        </div>
+      </article>
+
+      <article class="bw-row">
+        <div class="bw-year">1943/45</div>
+        <div class="bw-dotline"><span class="bw-dot"></span><span class="bw-stem"></span></div>
+        <div class="bw-copy">
+          <span class="bw-chip">War damage</span>
+          <h3>The museum is badly hit</h3>
+          <p>Bombing destroys major parts of the building. For decades, the Neues Museum remains the most dramatic ruin on Museum Island.</p>
+        </div>
+      </article>
+
+      <article class="bw-row">
+        <div class="bw-year">1997</div>
+        <div class="bw-dotline"><span class="bw-dot"></span><span class="bw-stem"></span></div>
+        <div class="bw-copy">
+          <span class="bw-chip">Restoration</span>
+          <h3>Chipperfield gets the commission</h3>
+          <p>David Chipperfield Architects and Julian Harrap develop a careful restoration: new material fills gaps without pretending the damage never happened.</p>
+        </div>
+      </article>
+
+      <article class="bw-row">
+        <div class="bw-year">2009</div>
+        <div class="bw-dotline"><span class="bw-dot"></span><span class="bw-stem"></span></div>
+        <div class="bw-copy">
+          <span class="bw-chip">Reopening</span>
+          <h3>The ruin becomes a museum again</h3>
+          <p>The Neues Museum reopens, Nefertiti returns to the building and Museum Island has all five exhibition venues open again for the first time since 1939.</p>
+        </div>
+      </article>
+    </div>
+
+    <footer class="bw-foot">
+      <strong>Walking tip:</strong> before entering, look at the facade from the colonnades. The building is not trying to look untouched; it is showing you exactly where Berlin was broken and rebuilt.
+    </footer>
+  </section>
+</div>
+</body>
+</html>

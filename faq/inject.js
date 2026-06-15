@@ -97,7 +97,8 @@
   "the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church": "totentanz-berlin",
   "what-s-happening-in-berlin-this-weekend-your-ultimate-guide": "berlin-weekend-guide",
   "was-berlin-really-the-most-decadent-city-in-the-1920s": "weimar-berlin-decadence",
-  "why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan": "berlin-wide-streets"
+  "why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan": "berlin-wide-streets",
+  "the-neues-museum-from-bombed-ruin-to-nefertiti-s-home": "neues-museum-berlin"
 };
 
   var SCHEMAS = {
@@ -4499,6 +4500,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The church once stood inside a dense old quarter. After wartime damage and late-1960s clearance, the surrounding medieval street plan disappeared, leaving the church in a much more open landscape."
+        }
+      }
+    ]
+  },
+  "neues-museum-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When did the Neues Museum open?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Neues Museum opened in 1859 after construction began in the 1840s. It was the second museum on today's Museum Island after the Altes Museum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was the Neues Museum a ruin for so long?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The building was badly damaged in World War II, especially in 1943 and 1945. It stood in East Berlin after the war and remained damaged for decades before the major restoration after reunification."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who restored the Neues Museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The restoration was led by David Chipperfield Architects with restoration architect Julian Harrap. The museum reopened in 2009 with old damage and new repairs intentionally visible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is Nefertiti in the Neues Museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The bust of Nefertiti is displayed in the North Dome Room on the second floor. The museum stages the visit so you approach her after the Egyptian sculpture and Amarna rooms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you take photos of Nefertiti?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Photography is not allowed inside the North Dome Room itself. The museum says this rule exists so visitors can experience the bust without camera and flash interruptions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the BerlinWalk tour go inside the Neues Museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The free walking tour passes Museum Island and explains the building from the outside. It is good context before visiting the museum independently."
         }
       }
     ]
