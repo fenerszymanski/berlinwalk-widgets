@@ -30,6 +30,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `hackescher-after-tour-planner/` - BerlinTools/homepage/blog widget for the Hackescher Markt after-tour article; asks time, need, and energy, then returns one practical next move with route/map link and booking CTA.
 - `berlin-first-day-planner/` - BerlinTools/homepage widget for first-day visitors; asks arrival date/time, start point, energy, priority, and luggage, then returns a booking-first 24-hour plan with Open-Meteo forecast or monthly climate average, Sunday/holiday logic, ticket nudges, lead-gated PDF download, and lead-gated print view. Velo handoff code and funnel email copy live in its `velo/` and `email/` folders.
 - `ultimate-berlin-trip-planner/` - BerlinTools/homepage/blog widget for pre-trip planning and tour conversion; asks arrival date, trip length, arrival point/time, stay area, group type, first-time status, interests, trip mode, must-handle filters, pace, and tour intent, then returns a visual 1-7 day plan with weather/opening-day logic, Google Maps anchors, Berlin essentials, lead-gated full plan/PDF/print, and booking-aware Velo/email handoff in `velo/` and `email/`.
+- `berlin-battle-home/` - `bw-berlin-battle-home` homepage teaser section for the Berlin Battle game, using real battle card assets and CTAs to `/games/berlin-battle` plus booking.
 - `stats/` - deprecated hidden no-op; remove the old Stats section from Wix because hero now carries the facts.
 - `how-it-works/` - `bw-how-it-works` homepage 3-step walking timeline Custom Element.
 - `tools-home/` - `bw-tools-home` homepage tools preview Custom Element.
@@ -68,6 +69,7 @@ Current homepage Custom Element source URLs:
 | Blog Guide Note | `bw-blog-guide-note` | `https://fenerszymanski.github.io/berlinwalk-widgets/blog-guide-note/blog-guide-note-element.js` | Compact right-column editorial note for the Wix blog index, using Yusuf's tour photo. |
 | Guide Home | `bw-guide-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/guide-home/guide-home-element.js` | Homepage "Meet Yusuf" teaser linking to `/the-guide`. |
 | Trip Planner Home | `bw-trip-planner-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/trip-planner-home/trip-planner-home-element.js?v=20260606` | Compact homepage teaser linking to the standalone `/berlin-trip-planner` page. |
+| Berlin Battle Home | `bw-berlin-battle-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-home/berlin-battle-home-element.js?v=20260615` | Homepage game teaser linking to `/games/berlin-battle` and booking. |
 | Tools Home | `bw-tools-home` | `https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/tools-home-element.js` | Homepage tools preview. |
 | Testimonials | `bw-testimonials` | `https://fenerszymanski.github.io/berlinwalk-widgets/testimonials/testimonials-element.js` | Trust strip shows FreeTour.com only. |
 | Gallery | `bw-gallery` | `https://fenerszymanski.github.io/berlinwalk-widgets/gallery/gallery-element.js` | Homepage image gallery. |

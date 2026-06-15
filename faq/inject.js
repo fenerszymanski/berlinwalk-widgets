@@ -73,7 +73,12 @@
   "berlin-in-3-days-the-perfect-itinerary-from-a-local-guide": "berlin-in-3-days",
   "do-i-need-to-speak-german-to-visit-berlin": "speak-german-berlin",
   "is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026": "berlin-tv-tower-worth-it",
-  "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now": "reichstag-dome-free"
+  "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now": "reichstag-dome-free",
+  "the-humboldt-forum-berlin-s-most-controversial-building": "humboldt-forum",
+  "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood": "hackescher-markt-before-after",
+  "how-berlin-was-divided-a-simple-guide-to-east-vs-west": "berlin-east-west-guide",
+  "berlin-tv-tower-construction-before-during-and-after": "berlin-tv-tower-construction",
+  "is-berlin-safe-for-solo-travelers-an-honest-local-perspective": "berlin-solo-travel-safety"
 };
 
   var SCHEMAS = {
@@ -846,31 +851,39 @@
         "name": "Is the Humboldt Forum free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Partially. The Palace Cellar, Sculpture Hall, Video Panorama, Humboldt Lab, and stairwell exhibitions are all free. The main exhibitions (Ethnological Museum, Asian Art, BERLIN GLOBAL) require a €14 day ticket. Under 19 is always free for everything."
+          "text": "Partly. Public spaces and selected areas such as the courtyard, Humboldt Laboratory, stairwell exhibitions, castle cellar, sculpture hall and video panorama are free. The main exhibitions are usually ticketed."
         }
       },
       {
         "@type": "Question",
-        "name": "How much does the Humboldt Forum cost?",
+        "name": "How much does the Humboldt Forum cost in 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "€14 for a day ticket, €18 for a two-day ticket, or €9 for BERLIN GLOBAL only. The Museum Pass Berlin (€32 for 3 days) also covers the Ethnological Museum and Museum of Asian Art."
+          "text": "The official admission page currently lists the Humboldt Forum day ticket at EUR 14, reduced EUR 7, and the two-day ticket at EUR 18, reduced EUR 9. BERLIN GLOBAL can also be visited with a separate EUR 9 ticket. The roof terrace is listed at EUR 3, reduced EUR 1.50."
         }
       },
       {
         "@type": "Question",
-        "name": "Why was the Humboldt Forum built?",
+        "name": "Why is the Humboldt Forum controversial?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "To give Berlin's ethnological and Asian art collections a central home (they were previously in suburban Dahlem), to restore the historic city center's architectural identity after the GDR demolished the original palace, and to create a cultural forum for global dialogue. The decision was debated for over a decade before construction began."
+          "text": "It reconstructs the facade of a Prussian royal palace on the site where East Germany built the Palast der Republik, which was later demolished after reunification. Inside, it also displays major non-European collections in a setting tied to imperial architecture."
         }
       },
       {
         "@type": "Question",
-        "name": "What happened to the Benin Bronzes?",
+        "name": "What happened to the Benin Bronzes in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Germany has pledged to return its Benin Bronzes to Nigeria. Most have been officially transferred, though around 40 remain on display in the Humboldt Forum as loans, alongside an exhibition explaining the restitution process. It's an ongoing conversation between Germany and Nigeria"
+          "text": "In 2022, the Prussian Cultural Heritage Foundation transferred ownership of 512 Berlin Benin objects to Nigeria. About a third remain in Berlin on loan for an initial ten-year period and are shown in the Humboldt Forum with restitution context."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Humboldt Forum worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, at least from the outside and courtyard. It is not a simple feel-good attraction, but it explains monarchy, GDR memory, reunification politics and colonial museum debates in one place."
         }
       }
     ]
@@ -3249,6 +3262,198 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Sometimes the roof terrace can still be visited when the glass dome itself is closed. Check the official Bundestag page before planning, especially around listed maintenance periods."
+        }
+      }
+    ]
+  },
+  "hackescher-markt-before-after": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Hackescher Markt worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It is touristy, but still useful. In a small area you can see S-Bahn arches, restored courtyards, Jewish Berlin, street art, food, the Spree and the route toward Museum Island."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the Hackesche Hoefe?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hackesche Hoefe is an eight-courtyard complex opposite Hackescher Markt. It opened in 1906 and is famous for its restored Art Nouveau details, mixed-use courtyard layout, shops, cinema, theatre and cafes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was Hackescher Markt destroyed in World War II?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The wider neighbourhood was badly damaged by war, but the story is not only bombing. Nazi persecution had already destroyed much of the Jewish life around Spandauer Vorstadt and Scheunenviertel before the physical damage of the war."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Hackescher Markt part of Jewish Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but carefully. The surrounding Spandauer Vorstadt and Scheunenviertel were deeply connected to Jewish life in Berlin. The nearby Neue Synagoge and Museum Otto Weidt are important places for understanding that history."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the BerlinWalk tour end near Hackescher Markt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is practical and meaningful. After about 2 hours of history, Hackescher Markt gives you food, transport, courtyards, the Spree, Museum Island and several small museums without forcing one more fixed stop."
+        }
+      }
+    ]
+  },
+  "berlin-east-west-guide": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Was the Brandenburg Gate in East or West Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Brandenburg Gate stood in East Berlin territory, directly at the border. The Wall and death strip sealed it off, so neither ordinary East Berliners nor West Berliners could approach it freely during division."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was West Berlin completely surrounded by East Germany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. West Berlin was an Allied-controlled enclave inside East Germany. The Berlin Wall did not only cut through the city centre; it also surrounded West Berlin for 155 kilometres."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did East Germany build the Berlin Wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The GDR built the Wall to stop people leaving East Germany through Berlin. Before 1961, Berlin was the easiest escape route from East to West."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which famous Berlin sights were in East Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Alexanderplatz, the TV Tower, Museum Island, Unter den Linden, Bebelplatz, Humboldt University, Hackescher Markt and the Brandenburg Gate were all in the former East Berlin centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I tell East from West Berlin today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use several clues together: the cobblestone Wall line, Ampelmann signals, GDR-era street names, socialist architecture, tram routes and the difference between Alexanderplatz/Unter den Linden and Zoo/Ku'damm."
+        }
+      }
+    ]
+  },
+  "berlin-tv-tower-construction": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When was the Berlin TV Tower built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Construction began on 4 August 1965 and the tower was officially opened on 3 October 1969. The public could visit from 7 October 1969, the GDR's 20th anniversary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was the Berlin TV Tower built at Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The GDR needed a powerful broadcasting tower, but the central location also made it a political landmark. Earlier plans near the Mueggelberge hills were dropped because the tower would have interfered with the approach to Schoenefeld Airport."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who designed the Berlin TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The project involved several East German architects and engineers. Hermann Henselmann is closely associated with the original slender form, while VEB IPRO Berlin and figures such as Fritz Dieter, Gunter Franke and Werner Neumann worked on the wider project."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much did the Berlin TV Tower cost to build?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The final construction cost rose to over 132 million East German marks, around four times the original plan. That made the tower both a prestige project and an expensive technical challenge."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Pope's Revenge on the Berlin TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Pope's Revenge is the nickname for the cross-shaped reflection that appears on the TV Tower sphere in sunlight. The joke became famous because the tower was built by an officially atheist socialist state."
+        }
+      }
+    ]
+  },
+  "berlin-solo-travel-safety": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Berlin safe for solo travelers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Berlin is generally safe for solo travelers who use normal big-city awareness. The main practical risk for visitors is pickpocketing, especially in crowded tourist areas and on busy public transport."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin safe for solo female travelers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin is a good city for solo female travelers, but late-night caution still matters. Stay on lit streets, avoid shortcuts through parks after dark, keep enough phone battery, and leave any place where someone ignores a clear no."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is public transport safe at night in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually yes. Weekend night transport runs through the night, and night buses/trams cover many weekday gaps. Sit near other passengers, move carriages if needed, and take a taxi if you feel too tired, lost or uncomfortable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which areas should solo travelers be careful in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most central areas are fine. Be more aware around Alexanderplatz for pickpockets, Kottbusser Tor late at night, Gorlitzer Park after dark, and unlit parts of large parks such as Tiergarten."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What scams should I watch for in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The common ones are fake petition clipboards, distraction tricks, fake police approaches, and people demanding money after photos or costumes near tourist sights. A firm no, thanks and walking away is usually enough."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the emergency numbers in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Call 110 for police emergencies and 112 for medical emergencies or fire. If cards or phones are stolen, the German blocking hotline is 116 116."
         }
       }
     ]
