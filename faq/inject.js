@@ -101,7 +101,8 @@
   "the-neues-museum-from-bombed-ruin-to-nefertiti-s-home": "neues-museum-berlin",
   "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point": "berlin-no-old-town",
   "hackescher-markt-where-our-tour-ends-and-your-berlin-adventure-begins": "hackescher-tour-end",
-  "exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing": "checkpoint-charlie-berlin"
+  "exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing": "checkpoint-charlie-berlin",
+  "the-weltzeituhr-why-alexanderplatz-has-a-world-clock": "weltzeituhr-berlin"
 };
 
   var SCHEMAS = {
@@ -4719,6 +4720,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It depends on your interest in escape stories. For a first Cold War visit, the article recommends starting with the free outdoor panels, then choosing Bernauer Strasse or Tränenpalast for deeper context."
+        }
+      }
+    ]
+  },
+  "weltzeituhr-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is the Weltzeituhr in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Weltzeituhr stands on Alexanderplatz 1, directly under the TV Tower and close to the U-Bahn, S-Bahn, tram and bus stops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When was the Weltzeituhr built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It was presented to the public on 30 September 1969, just before the 20th anniversary of the GDR."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who designed the Weltzeituhr?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The clock was designed by Erich John, a product and industrial designer connected with the Berlin-Weissensee art school."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did East Berlin build a world clock?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Alexanderplatz was redesigned as a modern socialist showcase square. The clock made the square look international, technical and open to the world, even though GDR travel was heavily restricted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How does the Weltzeituhr work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A rotating hour ring moves around city names grouped by 24 time zones, so visitors can compare Berlin time with places around the world."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Weltzeituhr protected?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The clock was restored after reunification and has been listed as a protected Berlin monument since July 2015."
         }
       }
     ]
