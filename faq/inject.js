@@ -106,7 +106,8 @@
   "where-to-eat-near-alexanderplatz-without-getting-ripped-off": "alexanderplatz-food",
   "feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation": "german-untranslatable-words",
   "liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about": "liebknecht-bridge-view",
-  "rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism": "rotes-rathaus-berlin"
+  "rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism": "rotes-rathaus-berlin",
+  "berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia": "berlin-lost-neighborhood"
 };
 
   var SCHEMAS = {
@@ -4994,6 +4995,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. It fits naturally near Alexanderplatz and helps explain medieval Berlin, 19th-century civic power, Cold War division and reunification."
+        }
+      }
+    ]
+  },
+  "berlin-lost-neighborhood": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What was Berlin's lost neighborhood?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It was the Marienviertel, the old quarter around St. Mary's Church near today's TV Tower, Alexanderplatz and Rotes Rathaus."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Did the GDR destroy the whole neighborhood?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The area had already suffered from Nazi-era demolition plans and World War II damage, but the GDR cleared the remaining buildings in the late 1960s and removed the medieval street plan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What replaced the Marienviertel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A socialist capital landscape replaced it: the Rathausforum, Marx-Engels-Forum, TV Tower axis, Neptune Fountain, lawns and broad open spaces."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can you still see traces of the old neighborhood?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but mostly as fragments and absences. St. Mary's Church, the Rotes Rathaus, Nikolaiviertel and the empty space itself help you read what used to be there."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Nikolaiviertel an original medieval quarter?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Its location is historic, but today's Nikolaiviertel is largely a 1987 GDR reconstruction made for Berlin's 750th anniversary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this area on the BerlinWalk route?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The route starts at Alexanderplatz and passes this lost old-centre landscape before continuing toward Museum Island and Hackescher Markt."
         }
       }
     ]
