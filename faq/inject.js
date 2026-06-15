@@ -67,7 +67,8 @@
   "berlin-public-holidays-2026": "berlin-public-holidays-2026",
   "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol": "the-ampelmann",
   "can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany": "credit-cards-berlin",
-  "bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about": "bus-100-berlin"
+  "bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about": "bus-100-berlin",
+  "what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time": "berlin-rainy-day-activities"
 };
 
   var SCHEMAS = {
@@ -2967,6 +2968,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Bus 100 is much cheaper and more authentic, but it has no commentary and covers a regular public transport route. Choose it for a low-cost overview. Choose a guided tour or walking tour if you want the stories behind the landmarks."
+        }
+      }
+    ]
+  },
+  "berlin-rainy-day-activities": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best thing to do in Berlin when it rains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a first visit, the best rainy-day plan is Museum Island plus the Humboldt Forum or Berliner Dom, because they are close together in the historic centre and work well without long wet transfers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Museum Island worth it when the Pergamon Museum is closed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The main Pergamonmuseum is closed for construction, but Museum Island still has strong options such as the Neues Museum, Altes Museum, Bode Museum, Alte Nationalgalerie and Pergamonmuseum. Das Panorama. Check the official ticket page before you go."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can I do in Berlin for free when it rains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Topography of Terror is the strongest free indoor history option. Parts of the Humboldt Forum are also free, and light-rain options such as Hackescher Höfe or a café stop can keep the day low-cost."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a Berlin walking tour still worth it in the rain?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In light rain, yes. The crowds are thinner and the historic centre can feel more atmospheric. In heavy rain, it is smarter to choose an indoor museum or market hall and walk later."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I go with kids on a rainy day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The DDR Museum, Markthalle Neun, KaDeWe and Tempelhof Airport tours are usually easier with restless visitors than a long silent museum day. Choose one main stop and keep transfers short."
         }
       }
     ]

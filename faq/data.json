@@ -1958,5 +1958,31 @@
         "a": "Bus 100 is much cheaper and more authentic, but it has no commentary and covers a regular public transport route. Choose it for a low-cost overview. Choose a guided tour or walking tour if you want the stories behind the landmarks."
       }
     ]
+  },
+  "berlin-rainy-day-activities": {
+    "title": "Rainy Day Berlin FAQ",
+    "subtitle": "Quick answers for choosing what to do in Berlin when the weather turns wet.",
+    "items": [
+      {
+        "q": "What is the best thing to do in Berlin when it rains?",
+        "a": "For a first visit, the best rainy-day plan is Museum Island plus the Humboldt Forum or Berliner Dom, because they are close together in the historic centre and work well without long wet transfers."
+      },
+      {
+        "q": "Is Museum Island worth it when the Pergamon Museum is closed?",
+        "a": "Yes. The main Pergamonmuseum is closed for construction, but Museum Island still has strong options such as the Neues Museum, Altes Museum, Bode Museum, Alte Nationalgalerie and Pergamonmuseum. Das Panorama. Check the official ticket page before you go."
+      },
+      {
+        "q": "What can I do in Berlin for free when it rains?",
+        "a": "Topography of Terror is the strongest free indoor history option. Parts of the Humboldt Forum are also free, and light-rain options such as Hackescher Höfe or a café stop can keep the day low-cost."
+      },
+      {
+        "q": "Is a Berlin walking tour still worth it in the rain?",
+        "a": "In light rain, yes. The crowds are thinner and the historic centre can feel more atmospheric. In heavy rain, it is smarter to choose an indoor museum or market hall and walk later."
+      },
+      {
+        "q": "Where should I go with kids on a rainy day in Berlin?",
+        "a": "The DDR Museum, Markthalle Neun, KaDeWe and Tempelhof Airport tours are usually easier with restless visitors than a long silent museum day. Choose one main stop and keep transfers short."
+      }
+    ]
   }
 }
