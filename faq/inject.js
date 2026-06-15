@@ -102,7 +102,8 @@
   "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point": "berlin-no-old-town",
   "hackescher-markt-where-our-tour-ends-and-your-berlin-adventure-begins": "hackescher-tour-end",
   "exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing": "checkpoint-charlie-berlin",
-  "the-weltzeituhr-why-alexanderplatz-has-a-world-clock": "weltzeituhr-berlin"
+  "the-weltzeituhr-why-alexanderplatz-has-a-world-clock": "weltzeituhr-berlin",
+  "where-to-eat-near-alexanderplatz-without-getting-ripped-off": "alexanderplatz-food"
 };
 
   var SCHEMAS = {
@@ -4774,6 +4775,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The clock was restored after reunification and has been listed as a protected Berlin monument since July 2015."
+        }
+      }
+    ]
+  },
+  "alexanderplatz-food": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Should I eat directly on Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually no. Use Alexanderplatz as a meeting point, then walk five to ten minutes toward Hackescher Markt, Rosa-Luxemburg-Straße or Alte Schönhauser Straße for better choices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best quick snack near Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Curry 61 is the easiest Berlin snack answer near the square. It has a World Clock/Alexanderplatz location and another branch near Hackescher Markt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I go after the BerlinWalk tour if I am hungry?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Hackescher Markt is the easiest area after the tour. Das Lemke works for beer and German food, while Monsieur Vuong, Curry 61 and nearby cafés cover faster or lighter choices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can vegetarians or vegans eat near Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SOY is the clearest vegan sit-down choice near Rosa-Luxemburg-Straße. Dolores also has many vegan and vegetarian combinations, and Curry 61 lists vegan currywurst options."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I get coffee or brunch near Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Walk toward Münzstraße or Alte Schönhauser Straße. Father Carpenter is best for a proper coffee/brunch pause, while Zeit für Brot is better for bakery, coffee and cinnamon rolls."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I spot a tourist-trap restaurant in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Be careful with huge photo menus, too many unrelated cuisines, staff pulling people in from the pavement and places selling a view rather than a focused kitchen."
         }
       }
     ]
