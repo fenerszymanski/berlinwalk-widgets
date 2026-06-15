@@ -77,7 +77,8 @@
   "the-humboldt-forum-berlin-s-most-controversial-building": "humboldt-forum",
   "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood": "hackescher-markt-before-after",
   "how-berlin-was-divided-a-simple-guide-to-east-vs-west": "berlin-east-west-guide",
-  "berlin-tv-tower-construction-before-during-and-after": "berlin-tv-tower-construction"
+  "berlin-tv-tower-construction-before-during-and-after": "berlin-tv-tower-construction",
+  "is-berlin-safe-for-solo-travelers-an-honest-local-perspective": "berlin-solo-travel-safety"
 };
 
   var SCHEMAS = {
@@ -3399,6 +3400,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The Pope's Revenge is the nickname for the cross-shaped reflection that appears on the TV Tower sphere in sunlight. The joke became famous because the tower was built by an officially atheist socialist state."
+        }
+      }
+    ]
+  },
+  "berlin-solo-travel-safety": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Berlin safe for solo travelers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Berlin is generally safe for solo travelers who use normal big-city awareness. The main practical risk for visitors is pickpocketing, especially in crowded tourist areas and on busy public transport."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin safe for solo female travelers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin is a good city for solo female travelers, but late-night caution still matters. Stay on lit streets, avoid shortcuts through parks after dark, keep enough phone battery, and leave any place where someone ignores a clear no."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is public transport safe at night in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually yes. Weekend night transport runs through the night, and night buses/trams cover many weekday gaps. Sit near other passengers, move carriages if needed, and take a taxi if you feel too tired, lost or uncomfortable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which areas should solo travelers be careful in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most central areas are fine. Be more aware around Alexanderplatz for pickpockets, Kottbusser Tor late at night, Gorlitzer Park after dark, and unlit parts of large parks such as Tiergarten."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What scams should I watch for in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The common ones are fake petition clipboards, distraction tricks, fake police approaches, and people demanding money after photos or costumes near tourist sights. A firm no, thanks and walking away is usually enough."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the emergency numbers in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Call 110 for police emergencies and 112 for medical emergencies or fire. If cards or phones are stolen, the German blocking hotline is 116 116."
         }
       }
     ]
