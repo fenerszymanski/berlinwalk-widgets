@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Public Holiday Checker | BerlinWalk</title>
+  <meta name="description" content="Check whether your Berlin travel dates hit a 2026 public holiday, and see what closes, what stays open, and how to plan around it.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-holiday-checker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-holiday-checker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-holiday-checker *,
+    #bw-holiday-checker *::before,
+    #bw-holiday-checker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-holiday-checker .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-holiday-checker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.14)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 18px 20px;
+    }
+
+    #bw-holiday-checker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-holiday-checker h2,
+    #bw-holiday-checker h3,
+    #bw-holiday-checker p {
+      margin-top: 0;
+    }
+
+    #bw-holiday-checker .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-holiday-checker .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 790px;
+    }
+
+    #bw-holiday-checker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 0.78fr) minmax(310px, 1fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-holiday-checker .bw-panel,
+    #bw-holiday-checker .bw-result,
+    #bw-holiday-checker .bw-calendar {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-holiday-checker .bw-form {
+      display: grid;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    #bw-holiday-checker .bw-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-holiday-checker label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-holiday-checker .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-holiday-checker input,
+    #bw-holiday-checker select {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 850;
+      min-height: 44px;
+      padding: 9px 10px;
+      width: 100%;
+    }
+
+    #bw-holiday-checker input:focus-visible,
+    #bw-holiday-checker select:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-holiday-checker .bw-presets {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-holiday-checker button {
+      background: var(--bw-soft);
+      border: 1px solid rgba(124, 179, 66, 0.38);
+      border-radius: 8px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 9px 10px;
+      text-align: center;
+    }
+
+    #bw-holiday-checker button:hover {
+      background: #E9F4DA;
+    }
+
+    #bw-holiday-checker button:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-holiday-checker .bw-note {
+      background: var(--bw-soft);
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-holiday-checker .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+    }
+
+    #bw-holiday-checker .bw-badge {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      padding: 5px 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-holiday-checker .bw-result-title {
+      color: var(--bw-green);
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1.08;
+      margin: 0 0 8px;
+    }
+
+    #bw-holiday-checker .bw-copy {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0 0 12px;
+    }
+
+    #bw-holiday-checker .bw-alert {
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.5;
+      margin: 0 0 12px;
+      padding: 11px;
+    }
+
+    #bw-holiday-checker .bw-alert.warn {
+      background: rgba(230, 57, 70, 0.09);
+      border: 1px solid rgba(230, 57, 70, 0.24);
+      color: #7A1F27;
+    }
+
+    #bw-holiday-checker .bw-alert.ok {
+      background: rgba(124, 179, 66, 0.16);
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      color: var(--bw-green);
+    }
+
+    #bw-holiday-checker .bw-chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin: 0 0 12px;
+    }
+
+    #bw-holiday-checker .bw-chip {
+      background: #F8FAF1;
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 850;
+      line-height: 1.25;
+      padding: 6px 8px;
+    }
+
+    #bw-holiday-checker .bw-impact {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-holiday-checker .bw-impact-card {
+      background: #F8FAF1;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    #bw-holiday-checker .bw-impact-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 900;
+      margin-bottom: 4px;
+    }
+
+    #bw-holiday-checker .bw-impact-card span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12.3px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    #bw-holiday-checker .bw-calendar {
+      grid-column: 1 / -1;
+    }
+
+    #bw-holiday-checker .bw-calendar h3 {
+      color: var(--bw-green);
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0 0 10px;
+    }
+
+    #bw-holiday-checker .bw-holiday-list {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-holiday-checker .bw-holiday {
+      align-items: center;
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 72px minmax(0, 1fr);
+      padding: 9px;
+    }
+
+    #bw-holiday-checker .bw-date {
+      background: var(--bw-green);
+      border-radius: 7px;
+      color: var(--bw-white);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 8px 6px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    #bw-holiday-checker .bw-holiday.active .bw-date {
+      background: var(--bw-red);
+    }
+
+    #bw-holiday-checker .bw-holiday-name {
+      color: var(--bw-text);
+      display: block;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-holiday-checker .bw-holiday-tip {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.7px;
+      font-weight: 650;
+      line-height: 1.4;
+      margin-top: 3px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-holiday-checker {
+        margin: 18px 0;
+      }
+
+      #bw-holiday-checker .bw-head {
+        padding: 16px;
+      }
+
+      #bw-holiday-checker .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-holiday-checker .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-holiday-checker .bw-grid,
+      #bw-holiday-checker .bw-presets,
+      #bw-holiday-checker .bw-holiday-list {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-holiday-checker .bw-result-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+
+  <section class="bw-wrap" aria-labelledby="bw-holiday-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk travel tool</p>
+      <h2 class="bw-title" id="bw-holiday-title">Berlin Public Holiday Checker</h2>
+      <p class="bw-sub">Enter your 2026 Berlin dates and see whether a public holiday changes shopping, museums, transport or first-day plans.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Trip dates">
+        <div class="bw-form">
+          <div class="bw-grid">
+            <label>
+              <span class="bw-label">Arrival date</span>
+              <input type="date" id="bw-start" min="2026-01-01" max="2026-12-31">
+            </label>
+            <label>
+              <span class="bw-label">Departure date</span>
+              <input type="date" id="bw-end" min="2026-01-01" max="2026-12-31">
+            </label>
+          </div>
+
+          <label>
+            <span class="bw-label">Main concern</span>
+            <select id="bw-concern">
+              <option value="first-day">First day logistics</option>
+              <option value="shopping">Groceries and shopping</option>
+              <option value="museums">Museums and attractions</option>
+              <option value="transport">Public transport</option>
+            </select>
+          </label>
+
+          <div class="bw-presets" aria-label="Example dates">
+            <button type="button" data-preset-start="2026-04-03" data-preset-end="2026-04-06">Easter weekend</button>
+            <button type="button" data-preset-start="2026-05-01" data-preset-end="2026-05-03">May 1 weekend</button>
+            <button type="button" data-preset-start="2026-05-14" data-preset-end="2026-05-17">Ascension break</button>
+            <button type="button" data-preset-start="2026-12-24" data-preset-end="2026-12-27">Christmas trip</button>
+          </div>
+
+          <p class="bw-note">This tool uses Berlin's official 2026 public holiday list. Always check the exact opening page for a museum, restaurant or shop before a special trip.</p>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <span class="bw-badge" id="bw-status">Checking dates</span>
+        <h3 class="bw-result-title" id="bw-result-title">Pick your Berlin dates.</h3>
+        <p class="bw-copy" id="bw-result-copy">The checker will flag any public holiday inside your stay and translate it into practical tourist advice.</p>
+        <div class="bw-chip-row" id="bw-chip-row"></div>
+        <div id="bw-alert"></div>
+        <div class="bw-impact" id="bw-impact"></div>
+      </section>
+
+      <section class="bw-calendar" aria-label="Berlin public holidays 2026">
+        <h3>Berlin public holidays in 2026</h3>
+        <div class="bw-holiday-list" id="bw-holiday-list"></div>
+      </section>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const holidays = [
+        { date: '2026-01-01', label: "New Year's Day", tip: 'Shops close; museums and restaurants vary.' },
+        { date: '2026-03-08', label: "International Women's Day", tip: 'Berlin-only holiday; in 2026 it falls on Sunday.' },
+        { date: '2026-04-03', label: 'Good Friday', tip: 'Quiet holiday; shops close, nightlife may be calmer.' },
+        { date: '2026-04-06', label: 'Easter Monday', tip: 'Shops close; plan food and museums ahead.' },
+        { date: '2026-05-01', label: 'Labour Day', tip: 'Shops close; demonstrations and street events are common.' },
+        { date: '2026-05-14', label: 'Ascension Day', tip: 'Public holiday; parks, brunch and walks work well.' },
+        { date: '2026-05-25', label: 'Whit Monday', tip: 'Shops close; check museums individually.' },
+        { date: '2026-10-03', label: 'German Unity Day', tip: 'National holiday; in 2026 it falls on Saturday.' },
+        { date: '2026-12-25', label: 'Christmas Day', tip: 'Major closure day; transport runs with holiday patterns.' },
+        { date: '2026-12-26', label: 'Boxing Day', tip: 'Second Christmas holiday; shops stay closed.' }
+      ];
+
+      const startInput = document.getElementById('bw-start');
+      const endInput = document.getElementById('bw-end');
+      const concernInput = document.getElementById('bw-concern');
+      const statusEl = document.getElementById('bw-status');
+      const titleEl = document.getElementById('bw-result-title');
+      const copyEl = document.getElementById('bw-result-copy');
+      const chipsEl = document.getElementById('bw-chip-row');
+      const alertEl = document.getElementById('bw-alert');
+      const impactEl = document.getElementById('bw-impact');
+      const listEl = document.getElementById('bw-holiday-list');
+
+      const toDate = (value) => new Date(value + 'T12:00:00');
+      const fmt = (value) => new Intl.DateTimeFormat('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }).format(toDate(value));
+
+      function defaultDates() {
+        const now = new Date();
+        const berlin = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'Europe/Berlin',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }).format(now);
+        const base = berlin.startsWith('2026-') ? berlin : '2026-05-01';
+        const end = new Date(toDate(base).getTime() + 3 * 86400000).toISOString().slice(0, 10);
+        startInput.value = base;
+        endInput.value = end > '2026-12-31' ? '2026-12-31' : end;
+      }
+
+      function impacts(matches, concern) {
+        const hasHoliday = matches.length > 0;
+        const base = [
+          ['Shops', hasHoliday ? 'Regular supermarkets, malls and fashion stores usually close. Use station or airport shops for essentials.' : 'No public holiday inside this range, but Sundays still close most regular shops.'],
+          ['Museums', hasHoliday ? 'Many museums open, but hours can change. Staatliche Museen sites generally use Sunday-style holiday hours.' : 'Use normal opening days, but remember many museums close on Mondays.'],
+          ['Transport', hasHoliday ? 'Public transport runs, often with holiday/weekend rhythm. Check BVG for late trips and Christmas timing.' : 'Normal weekday/weekend logic applies. Night service still depends on day of week.'],
+          ['Best move', hasHoliday ? 'Do errands before the holiday, then use the day for walking, parks, brunch, landmarks and selected museums.' : 'Keep the plan flexible and save shopping/admin for a non-Sunday weekday.']
+        ];
+        if (concern === 'shopping') base.unshift(['Your priority', hasHoliday ? 'Buy groceries the day before. Do not build a holiday around normal retail shopping.' : 'Your dates are not blocked by a public holiday, but check Sundays separately.']);
+        if (concern === 'museums') base.unshift(['Your priority', hasHoliday ? 'Book/check the one museum that matters most instead of assuming every museum is open.' : 'No public-holiday museum issue, but Monday closures can still catch visitors.']);
+        if (concern === 'transport') base.unshift(['Your priority', hasHoliday ? 'Transport still works. The risk is timing, not complete shutdown.' : 'No public-holiday transport warning for this range.']);
+        if (concern === 'first-day') base.unshift(['Your priority', hasHoliday ? 'If you arrive on the holiday, handle SIM, snacks, medicine and groceries at the station/airport first.' : 'Your arrival range avoids Berlin public holidays; plan normal first-day logistics.']);
+        return base;
+      }
+
+      function renderList(activeDates) {
+        listEl.innerHTML = holidays.map((item) => `
+          <div class="bw-holiday ${activeDates.has(item.date) ? 'active' : ''}">
+            <span class="bw-date">${fmt(item.date)}</span>
+            <span>
+              <span class="bw-holiday-name">${item.label}</span>
+              <span class="bw-holiday-tip">${item.tip}</span>
+            </span>
+          </div>
+        `).join('');
+      }
+
+      function update() {
+        let start = startInput.value;
+        let end = endInput.value;
+        if (!start || !end) return;
+        if (end < start) {
+          end = start;
+          endInput.value = end;
+        }
+        const matches = holidays.filter((item) => item.date >= start && item.date <= end);
+        const active = new Set(matches.map((item) => item.date));
+        const hasHoliday = matches.length > 0;
+        statusEl.textContent = hasHoliday ? 'Holiday found' : 'No holiday in range';
+        titleEl.textContent = hasHoliday
+          ? `${matches.length} public holiday${matches.length > 1 ? 's' : ''} inside your stay.`
+          : 'No Berlin public holiday inside your stay.';
+        copyEl.textContent = hasHoliday
+          ? matches.map((item) => `${fmt(item.date)}: ${item.label}`).join('  ')
+          : 'This date range avoids Berlin public holidays. Sundays can still affect shopping, so check your exact weekdays.';
+        chipsEl.innerHTML = [
+          `${fmt(start)} to ${fmt(end)}`,
+          hasHoliday ? 'Plan errands early' : 'Normal holiday risk',
+          concernInput.options[concernInput.selectedIndex].text
+        ].map((text) => `<span class="bw-chip">${text}</span>`).join('');
+        alertEl.innerHTML = `<p class="bw-alert ${hasHoliday ? 'warn' : 'ok'}">${hasHoliday
+          ? 'Do not treat this like a normal shopping day. Build the day around outdoor sights, food backups, transport checks and pre-booked museums.'
+          : "You still need to watch Sundays and Monday museum closures, but your range does not hit one of Berlin's 2026 public holidays."}</p>`;
+        impactEl.innerHTML = impacts(matches, concernInput.value).slice(0, 5).map(([label, text]) => `
+          <div class="bw-impact-card"><strong>${label}</strong><span>${text}</span></div>
+        `).join('');
+        renderList(active);
+        setTimeout(() => window.dispatchEvent(new Event('resize')), 40);
+      }
+
+      defaultDates();
+      document.querySelectorAll('#bw-holiday-checker [data-preset-start]').forEach((button) => {
+        button.addEventListener('click', () => {
+          startInput.value = button.dataset.presetStart;
+          endInput.value = button.dataset.presetEnd;
+          update();
+        });
+      });
+      [startInput, endInput, concernInput].forEach((input) => input.addEventListener('input', update));
+      update();
+    })();
+  </script>
+</div>
+</body>
+</html>

@@ -63,7 +63,9 @@
   "tipping-in-berlin": "tipping-in-berlin",
   "pfand-in-germany": "pfand-in-germany",
   "berlin-city-tax": "berlin-city-tax",
-  "taxi-in-berlin": "taxi-in-berlin"
+  "taxi-in-berlin": "taxi-in-berlin",
+  "berlin-public-holidays-2026": "berlin-public-holidays-2026",
+  "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol": "the-ampelmann"
 };
 
   var SCHEMAS = {
@@ -2771,6 +2773,106 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Use only the official taxi ranks outside Terminal 1 and get into a clearly marked taxi. BER Airport warns that fraudulent suppliers can appear outside the designated taxi areas."
+        }
+      }
+    ]
+  },
+  "berlin-public-holidays-2026": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many public holidays does Berlin have in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin has 10 public holidays in 2026: New Year's Day, International Women's Day, Good Friday, Easter Monday, Labour Day, Ascension Day, Whit Monday, German Unity Day, Christmas Day and Boxing Day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are shops closed on Berlin public holidays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually yes. Regular supermarkets, malls and most shops close on public holidays. The practical exceptions are selected supermarkets and shops inside major train stations and BER Airport, plus some bakeries, Spätis, restaurants and tourist services."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is public transport running on public holidays in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. U-Bahn, S-Bahn, tram and bus services still run, but the timetable can feel more like a weekend or holiday timetable. Around Christmas and New Year, always check BVG or the VBB journey planner before relying on a late connection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin museums open on public holidays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many are open, but do not guess. The Staatliche Museen zu Berlin say their museums are generally open as on Sundays on public holidays, with exceptions announced separately. Christmas Eve and New Year's Eve often have wider closures or special hours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin public holiday causes the biggest tourist surprise?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "May 1 is the one I would plan most carefully. It is Labour Day, shops close, and some neighborhoods have demonstrations or street events. It can still be a good day in Berlin, but it is not a normal shopping or errand day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I still visit Berlin over a public holiday weekend?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you plan around it. Use public holidays for walking, landmarks, parks, brunch, selected museums and the BerlinWalk route, then do normal shopping or admin on a regular weekday."
+        }
+      }
+    ]
+  },
+  "the-ampelmann": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does Berlin have a special traffic light man?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because an East German traffic psychologist, Karl Peglau, redesigned the pedestrian signal in 1961 to be impossible to ignore. He gave it a friendly hat-wearing figure that filled the lens with light, which made the signal easier to see and easier to obey."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between the East and West Ampelmännchen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Eastern figure is the chunky, hat-wearing man designed in the GDR. The Western signal is a plainer, thinner figure. After reunification the Eastern design survived and even spread west, but you still mostly find the hatted Ampelmännchen in the former East Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I see the Ampelmännchen in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Look down in the former East. He is common along Unter den Linden, around Alexanderplatz and through Mitte. His first crossing, from 1969, was at Unter den Linden and Friedrichstraße, which is a fitting place to spot him."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where are the AMPELMANN shops?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The flagship store is at Unter den Linden 35, between the Brandenburg Gate and Museum Island. There is also a popular shop in the Hackesche Höfe near Hackescher Markt, plus smaller shops and cafés at the Alexa mall and on the Kurfürstendamm."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did the Ampelmann almost disappear?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After reunification, authorities standardised East German signals to the Western design and began removing the GDR figure. He was saved by designer Markus Heckhausen, who turned the old light covers into the AMPELMANN brand around 1995, and by a public campaign to keep him."
         }
       }
     ]

@@ -517,6 +517,15 @@
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-taxi-uber-cost-checker/",
       "embedHeight": 880,
       "image": "https://static.wixstatic.com/media/5a08a3_a74bc97a23f94947b9740fddfdddeadd~mv2.png"
+    },
+    {
+      "slug": "berlin-public-holiday-checker",
+      "title": "Berlin Public Holiday Checker",
+      "lead": "Check whether your Berlin travel dates hit a 2026 public holiday, and see what closes, what stays open, and how to plan around it.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-public-holiday-checker/",
+      "embedHeight": 760,
+      "image": "https://static.wixstatic.com/media/5a08a3_3d550b710c754ec185c975dbcb1465f3~mv2.png"
     }
   ]
 }
