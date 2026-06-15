@@ -99,7 +99,7 @@ This is the unglamorous reason, but it matters.
 
 People do not enjoy starting a tour already stressed.
 
-Alexanderplatz is one of Berlin's easiest places to reach by public transport. The station connects U-Bahn, S-Bahn, trams, buses and regional trains. Berlin.de's public transport guide notes that U-Bahn tickets also work across buses, S-Bahn and trams, which makes the city much easier once you understand the system.
+Alexanderplatz is one of Berlin's easiest places to reach by public transport. The station connects U-Bahn, S-Bahn, trams, buses and regional trains. [Berlin.de's public transport guide](https://www.berlin.de/en/public-transportation/1742343-2913840-underground-subway.en.html) notes that U-Bahn tickets also work across buses, S-Bahn and trams, which makes the city much easier once you understand the system.
 
 For visitors, that means fewer transfer mistakes.
 
