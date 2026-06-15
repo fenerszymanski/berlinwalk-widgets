@@ -65,7 +65,8 @@
   "berlin-city-tax": "berlin-city-tax",
   "taxi-in-berlin": "taxi-in-berlin",
   "berlin-public-holidays-2026": "berlin-public-holidays-2026",
-  "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol": "the-ampelmann"
+  "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol": "the-ampelmann",
+  "can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany": "credit-cards-berlin"
 };
 
   var SCHEMAS = {
@@ -2873,6 +2874,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "After reunification, authorities standardised East German signals to the Western design and began removing the GDR figure. He was saved by designer Markus Heckhausen, who turned the old light covers into the AMPELMANN brand around 1995, and by a public campaign to keep him."
+        }
+      }
+    ]
+  },
+  "credit-cards-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can tourists use credit cards in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, tourists can use credit cards in many Berlin places, especially hotels, supermarkets, museums, chain shops and modern restaurants. But smaller cafes, bars, food stalls, markets and late-night kiosks may still be cash-only or cash-first."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much cash should I carry in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a normal sightseeing day, carry about EUR 20 to EUR 50 in small notes and coins. That covers coffee, snacks, toilets, markets, tips and cash-only surprises without making you carry too much money."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Apple Pay and Google Pay work in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, Apple Pay and Google Pay usually work where contactless Visa or Mastercard is accepted. They do not work in places that are cash-only or that only accept German Girocard."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin taxis accept credit cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin taxis can take cash and card payments, but not every driver has to accept every card type. If you need to pay by card, say it before the taxi starts moving or use a ride app for cashless payment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are ATMs easy to find in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, ATMs are easy to find. Use bank-operated ATMs such as Sparkasse, Deutsche Bank, Commerzbank, Volksbank or Postbank when possible, and avoid expensive tourist-area independent ATMs if you have a better option."
         }
       }
     ]
