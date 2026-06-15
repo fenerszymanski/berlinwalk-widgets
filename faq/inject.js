@@ -113,7 +113,8 @@
   "friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story": "friedrichsbruecke-berlin",
   "the-altes-museum-how-one-building-made-berlin-a-cultural-capital": "altes-museum-berlin",
   "the-berliner-dom-a-cathedral-that-survived-everything": "berliner-dom-survived",
-  "museum-island-why-prussia-built-an-entire-island-of-museums": "museum-island-prussia"
+  "museum-island-why-prussia-built-an-entire-island-of-museums": "museum-island-prussia",
+  "how-much-should-you-tip-on-a-free-walking-tour-in-berlin": "free-walking-tour-tip"
 };
 
   var SCHEMAS = {
@@ -5379,6 +5380,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The main Pergamonmuseum is closed for renovation. Official visitor sources point to a partial reopening on 4 June 2027, so check current status before planning around it."
+        }
+      }
+    ]
+  },
+  "free-walking-tour-tip": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much should I tip on a free walking tour in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a good 2 hours tour, EUR 10-15 per person is a fair normal tip. EUR 5 is modest but acceptable on a tight budget, and EUR 20+ is generous."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a free walking tour really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no fixed upfront price. The tour is tip-based, which means you join without prepaying and decide at the end what the experience was worth to you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need cash for a free walking tour tip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cash is the easiest option in Berlin. Some guides may accept card or PayPal, but you should not rely on that unless the tour page says so clearly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is EUR 5 too little for a free walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EUR 5 is a modest tip, not a rude one. If your budget is tight, it is better to join, learn and tip modestly than skip the tour because you feel anxious about the amount."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should children tip on a free walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For small children, usually no. For teenagers who fully join the tour like adults, many guests tip a smaller amount or include them in the family total."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I did not enjoy the tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Then tip less or nothing. The point of a tip-based tour is that the guide earns the tip through the quality of the experience."
         }
       }
     ]
