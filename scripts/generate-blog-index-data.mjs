@@ -161,16 +161,16 @@ const TOPICS = [
 // proven-popular evergreen guides. The trailing slugs are buffer fallbacks if
 // any of the top five are unpublished at regen time.
 const HERO_SLUGS = {
-  lead: 'where-to-watch-2026-world-cup-in-berlin',
+  lead: 'what-is-a-free-walking-tour-how-tip-based-tours-actually-work',
   secondary: [
-    'visiting-berlin-in-june',
-    'where-was-the-berlin-wall-interactive-map',
+    'how-much-should-you-tip-on-a-free-walking-tour-in-berlin',
+    'the-best-views-in-berlin-you-can-find-on-foot',
+    'the-spree-river-the-waterway-that-built-berlin',
+    'museum-island-why-prussia-built-an-entire-island-of-museums',
+    'the-weltzeituhr-why-alexanderplatz-has-a-world-clock',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
-    '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
-    'why-is-berlin-founding-year-1237',
-    'nikolaiviertel-rebuilt-old-town',
-    'east-side-gallery-berlin-guide',
+    'berlin-public-holidays-2026',
+    'where-was-the-berlin-wall-interactive-map',
   ],
 };
 
@@ -179,6 +179,12 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'what-is-a-free-walking-tour-how-tip-based-tours-actually-work',
+  'how-much-should-you-tip-on-a-free-walking-tour-in-berlin',
+  'the-best-views-in-berlin-you-can-find-on-foot',
+  'the-spree-river-the-waterway-that-built-berlin',
+  'museum-island-why-prussia-built-an-entire-island-of-museums',
+  'the-weltzeituhr-why-alexanderplatz-has-a-world-clock',
   'where-to-watch-2026-world-cup-in-berlin',
   'visiting-berlin-in-june',
   'where-was-the-berlin-wall-interactive-map',
@@ -434,6 +440,8 @@ function topicFor(post) {
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
   if (/(1237|founding|cölln|colln|medieval|nikolaiviertel|old-town|old town)/.test(s)) return 'medieval-berlin-mini-walk';
+  if (/(spree|boat-tour|boat tour|river-cruise|river cruise)/.test(s)) return 'berlin-boat-tour-finder';
+  if (/(best-views|best views|viewpoint|landmark|weltzeituhr|world clock|alexanderplatz|museum-island|museum island|berliner-dom|berliner dom)/.test(s)) return 'berlin-landmarks-map';
   if (/(world-cup|world cup|public viewing|fan mile|football|soccer)/.test(s)) return 'watch-world-cup-2026-berlin';
   if (/(day-trip|day trip|potsdam|sachsenhausen|spreewald|dresden|leipzig|wittenberg|tropical-islands|bastei)/.test(s)) return 'berlin-day-trips-finder';
   if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) return 'best-month-to-visit-berlin';
