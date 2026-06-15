@@ -110,7 +110,8 @@
   "berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia": "berlin-lost-neighborhood",
   "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower": "st-marys-church-berlin",
   "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared": "alte-nationalgalerie-berlin",
-  "friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story": "friedrichsbruecke-berlin"
+  "friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story": "friedrichsbruecke-berlin",
+  "the-altes-museum-how-one-building-made-berlin-a-cultural-capital": "altes-museum-berlin"
 };
 
   var SCHEMAS = {
@@ -5214,6 +5215,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Look for the obelisks, the stone balustrades, the line into the Museum Island colonnade, and the contrast between historic museum architecture and the rebuilt modern bridge."
+        }
+      }
+    ]
+  },
+  "altes-museum-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the Altes Museum in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Altes Museum is Berlin’s first museum building on Museum Island. It opened in 1830 and now houses the Antikensammlung, the Collection of Classical Antiquities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who designed the Altes Museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Karl Friedrich Schinkel designed the Altes Museum. It is one of Berlin’s major Neoclassical buildings, with 18 Ionic columns and a rotunda inspired by the Pantheon in Rome."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What can I see inside the Altes Museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The permanent display covers Greeks, Etruscans and Romans, with sculpture, vases, Roman portraits, ancient coins and highlights such as the Praying Boy and the Berlin Goddess."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is the Altes Museum ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As of the checked 2026 official listing, the Altes Museum ticket is EUR 14, reduced EUR 7. The Museum Island day ticket is EUR 24, reduced EUR 12."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Altes Museum open on Mondays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The current public listing shows Monday closed, Tuesday to Friday 10:00 to 17:00, and Saturday to Sunday 10:00 to 18:00. Always re-check before visiting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Altes Museum worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you like classical architecture or ancient objects. If you only want Nefertiti or big archaeology spectacles, the Neues Museum or Pergamon-related displays may fit better."
         }
       }
     ]
