@@ -31,7 +31,7 @@ Instead of paying before the experience, you tip at the end based on:
 - your travel budget
 - how much value the guide gave you
 
-For a good **2 hours** free walking tour in Berlin, **EUR 10-15 per person is a fair normal tip**. EUR 5 is modest but acceptable on a tight budget. EUR 20 or more is generous if the guide made the city click for you.
+For a good **2 hours** free walking tour in Berlin, **EUR 10 per person is the minimum fair tip**. EUR 15 is a strong thank-you. EUR 20 or more is generous if the guide made the city click for you.
 
 That is the practical answer.
 
@@ -113,7 +113,7 @@ The downside is uncertainty. Weather, no-shows, small groups, and confused expec
 
 For travellers, the advantage is flexibility.
 
-You can join a city introduction early in your trip without committing to a high fixed price. You can decide afterward whether the tour deserved EUR 5, EUR 10, EUR 15, EUR 20 or more.
+You can join a city introduction early in your trip without committing to a high fixed price. You can decide afterward whether the tour deserved EUR 10, EUR 15, EUR 20 or more.
 
 That makes the model especially useful for:
 
@@ -131,8 +131,7 @@ That can make a tour feel more personal.
 
 For Berlin, my simple recommendation is:
 
-- **EUR 5:** modest, budget-friendly, acceptable if money is tight or the tour was only okay
-- **EUR 10:** fair normal tip for a good tour
+- **EUR 10:** minimum fair tip for a good **2 hours** tour
 - **EUR 15:** strong tip for a very good tour
 - **EUR 20+:** generous when the tour was a highlight
 
@@ -156,11 +155,11 @@ Tip based on value, not panic.
 
 ## Is EUR 5 Too Little?
 
-EUR 5 is modest.
+For a good **2 hours** walking tour, yes: EUR 5 is below the fair minimum.
 
-It is not rude if your budget is genuinely tight, if you are a student, or if the tour was only okay.
+That does not mean it is rude in every situation. If your budget is genuinely tight, if you are a student, or if the tour was only okay, give what you can without embarrassment.
 
-But if a guide gave a strong, well-researched, energetic **2 hours** tour and you had the budget, EUR 5 is low. It may still be accepted with a smile, but it is not the amount I would call fair for a very good experience.
+But if a guide gave a strong, well-researched, energetic **2 hours** tour and you had the budget, EUR 10 should be the floor. EUR 15 is a better thank-you for a very good experience.
 
 The point is not to shame anyone.
 
@@ -177,7 +176,7 @@ Some guides may accept card, PayPal, Revolut or another mobile payment method, b
 The simple setup:
 
 - bring one EUR 10 note for a normal tip
-- bring one EUR 5 note for flexibility
+- bring an extra EUR 5 or EUR 10 if you might go higher
 - keep small coins for toilets, lockers, bakeries or snacks
 
 Berlin is more card-friendly than it used to be, but cash still helps in small everyday situations. My [credit cards in Berlin guide](https://www.berlinwalk.com/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany) explains that wider payment picture.
