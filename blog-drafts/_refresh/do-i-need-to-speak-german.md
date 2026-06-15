@@ -26,7 +26,7 @@ That does not mean every person wants to hold a long conversation in English.
 
 It means the basic tourist situations are normally manageable: checking in, ordering food, buying a ticket, asking for directions, booking a museum slot, paying, and finding the right train platform.
 
-Berlin is also a genuinely international city. The official Berlin Business Location Center lists roughly 976,000 foreign residents from more than 190 nations in 2025, out of a city of about 3.9 million people.
+Berlin is also a genuinely international city. The official [Berlin Business Location Center demographic data](https://www.businesslocationcenter.de/en/business-location/berlin-at-a-glance/demographic-data) lists roughly 976,000 foreign residents from more than 190 nations in 2025, out of a city of about 3.9 million people.
 
 That matters for visitors because English often becomes the shared language between people who do not have the same first language.
 
