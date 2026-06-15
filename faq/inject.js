@@ -93,7 +93,8 @@
   "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth": "jfk-jelly-donut-myth",
   "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos": "alexanderplatz-then-now",
   "the-lustgarten-from-royal-garden-to-nazi-rally-ground-to-berlin-s-favorite-picnic-spot": "lustgarten-berlin",
-  "kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture": "kaffee-vs-coffee"
+  "kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture": "kaffee-vs-coffee",
+  "the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church": "totentanz-berlin"
 };
 
   var SCHEMAS = {
@@ -4279,6 +4280,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The tour ends near Hackescher Markt, close to several useful café options. Ben Rahim is good for specialty coffee, Father Carpenter for brunch and coffee, and Princess Cheesecake for Kaffee und Kuchen."
+        }
+      }
+    ]
+  },
+  "totentanz-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does Totentanz mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Totentanz means Dance of Death. It is a medieval image type showing Death leading living people from every social rank in a final dance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the Totentanz in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin's Totentanz is inside St. Mary's Church (Marienkirche) near Alexanderplatz, in the tower hall or entrance area behind protective glass."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How old is the Berlin Totentanz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is usually dated to around 1484, which makes it one of the oldest surviving artworks you can still see in central Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How big is the fresco?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The fresco is over 22 metres long and about 2 metres high, though it now survives only in faded fragments."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit the Totentanz for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entry to St. Mary's Church is usually free, but the church can close for services, events or restoration work. Check current opening times before making a special trip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does the Totentanz matter today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It shows a medieval Berlin that many visitors miss. A 15th-century image about death survives beside the TV Tower, making the city's deepest layers visible in one small place."
         }
       }
     ]
