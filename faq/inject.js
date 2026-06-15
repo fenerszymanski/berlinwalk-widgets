@@ -78,7 +78,9 @@
   "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood": "hackescher-markt-before-after",
   "how-berlin-was-divided-a-simple-guide-to-east-vs-west": "berlin-east-west-guide",
   "berlin-tv-tower-construction-before-during-and-after": "berlin-tv-tower-construction",
-  "is-berlin-safe-for-solo-travelers-an-honest-local-perspective": "berlin-solo-travel-safety"
+  "is-berlin-safe-for-solo-travelers-an-honest-local-perspective": "berlin-solo-travel-safety",
+  "why-marx-and-engels-face-west-the-statues-berlin-almost-removed": "marx-engels-face-west",
+  "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate": "alexanderplatz-tour-start"
 };
 
   var SCHEMAS = {
@@ -3454,6 +3456,114 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Call 110 for police emergencies and 112 for medical emergencies or fire. If cards or phones are stolen, the German blocking hotline is 116 116."
+        }
+      }
+    ]
+  },
+  "marx-engels-face-west": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do Marx and Engels face west in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The west-facing story comes mainly from the 2010 U5 construction move, when the figures were shifted and rotated. That made the local joke work: Marx and Engels could finally look toward capitalism."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When was the Marx-Engels-Forum built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The monument was inaugurated in April 1986, only three years before the Berlin Wall fell. It was created as part of the GDR-era redesign of central East Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Were the Marx and Engels statues almost removed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, their future was debated after reunification, like many GDR monuments. Berlin ultimately kept them because they show an important layer of the city rather than simply celebrating it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit the Marx-Engels-Forum in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can usually see the area, but construction can limit close access. The Rathaus- and Marx-Engels-Forum is being redesigned through 2027, so expect fences, changed paths and flexible photo angles."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I look for besides the statues?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Look for the stainless-steel photo steles and the bronze and marble reliefs. They show the GDR's official story of workers, socialism, exploitation and a promised future."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Marx-Engels-Forum on the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, it sits near the central route from Alexanderplatz toward Museum Island and Hackescher Markt. I use it to explain GDR memory, reunification and Berlin's habit of keeping awkward history visible."
+        }
+      }
+    ]
+  },
+  "alexanderplatz-tour-start": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does the BerlinWalk tour start at Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Alexanderplatz gives the route a stronger story order. It starts with the World Clock, the TV Tower and the eastern centre, then moves into medieval Berlin, GDR memory, Museum Island and Hackescher Markt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where exactly is the meeting point?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The meeting point is the Weltzeituhr / World Clock in the open square at Alexanderplatz. Look for the BerlinWalk guide with the green umbrella and arrive about 5 minutes early."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why not start at Brandenburg Gate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Brandenburg Gate is important, but it is more of a symbolic climax than a beginning. Starting there can pull the story too quickly into Prussia, the Wall and reunification, while Alexanderplatz gives more of Berlin's older and eastern layers first."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the tour include Brandenburg Gate?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This route focuses on the historic centre from Alexanderplatz to Hackescher Markt, so the Brandenburg Gate is better visited separately before or after. That keeps the tour tighter and gives the older city room to breathe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long is the walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tour takes about 2 hours and covers 12 stops from Alexanderplatz through Berlin's historic centre to Hackescher Markt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where does the tour end?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tour ends near Hackescher Markt, close to cafes, food, courtyards, Museum Island, trams and S-Bahn. It is a useful place to continue your day instead of looping back to the start."
         }
       }
     ]
