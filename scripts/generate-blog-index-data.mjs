@@ -157,20 +157,19 @@ const TOPICS = [
 ];
 
 // Curated featured block (the hero + 5-story rail), not just the newest posts.
-// Mix: a hot/timely lead, a seasonal pick, one popular history piece, then
-// proven-popular evergreen guides. The trailing slugs are buffer fallbacks if
-// any of the top five are unpublished at regen time.
+// Mix: current/timely topics, proven-popular posts, and the newest practical
+// guides. The homepage blog teaser uses a different set so the two surfaces
+// do not repeat each other.
 const HERO_SLUGS = {
-  lead: 'what-is-a-free-walking-tour-how-tip-based-tours-actually-work',
+  lead: 'berlin-public-holidays-2026',
   secondary: [
-    'how-much-should-you-tip-on-a-free-walking-tour-in-berlin',
-    'the-best-views-in-berlin-you-can-find-on-foot',
-    'the-spree-river-the-waterway-that-built-berlin',
-    'museum-island-why-prussia-built-an-entire-island-of-museums',
-    'the-weltzeituhr-why-alexanderplatz-has-a-world-clock',
+    'where-to-watch-2026-world-cup-in-berlin',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-    'berlin-public-holidays-2026',
     'where-was-the-berlin-wall-interactive-map',
+    'taxi-in-berlin',
+    'berlin-city-tax',
+    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
+    'public-toilets-in-berlin',
   ],
 };
 
@@ -179,22 +178,25 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'berlin-public-holidays-2026',
+  'where-to-watch-2026-world-cup-in-berlin',
+  'where-was-the-berlin-wall-interactive-map',
+  'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+  'taxi-in-berlin',
+  'berlin-city-tax',
+  'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
+  'public-toilets-in-berlin',
+  // Homepage teaser uses these non-overlapping picks.
+  'pfand-in-germany',
+  'tipping-in-berlin',
+  'what-is-a-spati-berlin',
+  'why-is-berlin-founding-year-1237',
+  // Other protected topical/shelf picks.
   'what-is-a-free-walking-tour-how-tip-based-tours-actually-work',
   'how-much-should-you-tip-on-a-free-walking-tour-in-berlin',
   'the-best-views-in-berlin-you-can-find-on-foot',
-  'the-spree-river-the-waterway-that-built-berlin',
-  'museum-island-why-prussia-built-an-entire-island-of-museums',
-  'the-weltzeituhr-why-alexanderplatz-has-a-world-clock',
-  'where-to-watch-2026-world-cup-in-berlin',
   'visiting-berlin-in-june',
-  'where-was-the-berlin-wall-interactive-map',
-  'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-  'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
   '5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026',
-  'pfand-in-germany',
-  'berlin-city-tax',
-  'taxi-in-berlin',
-  'berlin-public-holidays-2026',
 ];
 
 const START_HERE_LINKS = [

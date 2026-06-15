@@ -5,76 +5,11 @@ const BW_BLOG_INDEX_BASE_URL = (() => {
 const BW_BLOG_INDEX_DATA_URL = new URL('./data.json', BW_BLOG_INDEX_BASE_URL).href;
 const BW_BLOG_INDEX_LOGO_URL = `${new URL('./assets/berlin-travel-history-notes-logo.png', BW_BLOG_INDEX_BASE_URL).href}?v=20260529`;
 const BW_BLOG_INDEX_NATIVE_FEED_STYLE_ID = 'bw-blog-index-native-feed-suppressor';
-const BW_BLOG_INDEX_FEATURED_POST = {
-  title: 'Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers',
-  slug: 'vegan-berlin-guide-2026',
-  path: '/post/vegan-berlin-guide-2026',
-  url: 'https://www.berlinwalk.com/post/vegan-berlin-guide-2026',
-  excerpt: 'Berlin is the vegan capital of Europe. A curated 2026 guide to the best 100% plant-based restaurants, street food, zero-waste fine dining, and vegan neighborhoods.',
-  category: 'Tourist Tips',
-  categorySlug: 'tourist-tips',
-  topic: 'food-nightlife',
-  topicLabel: 'Food & Nightlife',
-  readTime: '4 min read',
-  publishedDate: '2026-06-08T16:15:49.465Z',
-  image: 'https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg',
-  thumb: 'https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg',
-  alt: 'Beautifully plated vegan meal in a modern Berlin restaurant',
-  relatedToolSlug: 'vegan-berlin-locations-map',
-};
-const BW_BLOG_INDEX_FEATURED_TOOLS = [
-  {
-    title: 'Vegan Berlin Interactive Map',
-    slug: 'vegan-berlin-locations-map',
-    url: 'https://www.berlinwalk.com/tools/vegan-berlin-locations-map',
-    summary: 'Find the best vegan spots near your hotel with a filterable Berlin map.',
-  },
-  {
-    title: 'Vegan Berlin Top Picks',
-    slug: 'vegan-berlin-map',
-    url: 'https://www.berlinwalk.com/tools/vegan-berlin-map',
-    summary: 'A curated list of Berlin plant-based restaurants, cafes, fine dining and sweets.',
-  },
-  {
-    title: 'Berlin First-Day Planner',
-    slug: 'berlin-first-day-planner',
-    url: 'https://www.berlinwalk.com/tools/berlin-first-day-planner',
-    summary: 'Build a realistic first-day plan around arrival time, luggage, weather, and the tour.',
-  },
-];
-
-function bwWithoutFeaturedPost(posts = []) {
-  return posts.filter((post) => post?.slug !== BW_BLOG_INDEX_FEATURED_POST.slug);
-}
-
 function bwApplyFeaturedPost(data) {
-  const next = {
+  return {
     ...BW_BLOG_INDEX_FALLBACK,
     ...(data || {}),
   };
-  const heroSecondaryCandidates = [
-    next.hero?.lead,
-    ...(next.hero?.secondary || []),
-    ...(next.latest || []),
-  ].filter(Boolean);
-
-  next.hero = {
-    ...(next.hero || {}),
-    lead: BW_BLOG_INDEX_FEATURED_POST,
-    secondary: bwWithoutFeaturedPost(heroSecondaryCandidates).slice(0, 5),
-  };
-  next.tools = BW_BLOG_INDEX_FEATURED_TOOLS;
-  next.latest = [BW_BLOG_INDEX_FEATURED_POST, ...bwWithoutFeaturedPost(next.latest || [])].slice(0, 12);
-  next.allPosts = [BW_BLOG_INDEX_FEATURED_POST, ...bwWithoutFeaturedPost(next.allPosts || [])];
-  next.totalPosts = Math.max(Number(next.totalPosts || 0), next.allPosts.length);
-  next.shelves = (next.shelves || []).map((shelf) => {
-    if (shelf.key !== 'food-nightlife') return shelf;
-    return {
-      ...shelf,
-      posts: [BW_BLOG_INDEX_FEATURED_POST, ...bwWithoutFeaturedPost(shelf.posts || [])].slice(0, 10),
-    };
-  });
-  return next;
 }
 
 function bwInstallBlogIndexNativeFeedPrehide() {
