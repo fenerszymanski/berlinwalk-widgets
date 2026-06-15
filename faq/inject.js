@@ -103,7 +103,8 @@
   "hackescher-markt-where-our-tour-ends-and-your-berlin-adventure-begins": "hackescher-tour-end",
   "exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing": "checkpoint-charlie-berlin",
   "the-weltzeituhr-why-alexanderplatz-has-a-world-clock": "weltzeituhr-berlin",
-  "where-to-eat-near-alexanderplatz-without-getting-ripped-off": "alexanderplatz-food"
+  "where-to-eat-near-alexanderplatz-without-getting-ripped-off": "alexanderplatz-food",
+  "feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation": "german-untranslatable-words"
 };
 
   var SCHEMAS = {
@@ -4829,6 +4830,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Be careful with huge photo menus, too many unrelated cuisines, staff pulling people in from the pavement and places selling a view rather than a focused kitchen."
+        }
+      }
+    ]
+  },
+  "german-untranslatable-words": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Are these German words really untranslatable?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not literally. They can be explained in English, but most do not have one clean English word with the same emotional weight."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Feierabend mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Feierabend means the end of the working day and the free time that follows. It is both a practical time marker and a cultural boundary around personal life."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Fernweh and wanderlust?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fernweh is a longing or ache for faraway places. Wanderlust sounds more active, while Fernweh often feels more emotional or melancholic."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Schadenfreude a bad feeling?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It names a slightly ugly but very human feeling: pleasure at someone else's mishap or misfortune. The word is honest, not flattering."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is doch hard for English speakers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Doch has several conversational jobs. It can contradict a negative statement, add emphasis, soften an invitation or confirm something the speaker expects."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which word is most useful for visitors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Feierabend is the most practical everyday word, especially if you spend evenings in Berlin. Gemütlich is also useful in cafés, pubs and homes."
         }
       }
     ]
