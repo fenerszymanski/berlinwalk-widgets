@@ -47,6 +47,7 @@ const TOPICS = [
       'best-day-trips-from-berlin',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
       'taxi-in-berlin',
+      'berlin-public-holidays-2026',
       'is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists',
       'is-berlin-safe-to-visit-an-honest-2026-guide',
       'can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany',
@@ -57,7 +58,7 @@ const TOPICS = [
       'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
     ],
-    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|city tax|accommodation tax|hotel tax|tourist tax|pfand|deposit|bottle return|recycling|taxi|uber|bolt taxi|free now|rideshare|ride-hailing|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
+    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|city tax|accommodation tax|hotel tax|tourist tax|public holiday|public holidays|bank holiday|shop closures?|holiday closures?|pfand|deposit|bottle return|recycling|taxi|uber|bolt taxi|free now|rideshare|ride-hailing|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
   },
   {
     key: 'free-budget',
@@ -187,6 +188,7 @@ const REQUIRED_SLUGS = [
   'pfand-in-germany',
   'berlin-city-tax',
   'taxi-in-berlin',
+  'berlin-public-holidays-2026',
 ];
 
 const START_HERE_LINKS = [
@@ -247,7 +249,7 @@ function parseArgs(argv) {
   const args = {
     siteId: process.env.WIX_SITE_ID || DEFAULT_SITE_ID,
     out: 'blog-index/data.json',
-    limit: 100,
+    limit: 150,
   };
 
   for (let i = 0; i < argv.length; i += 1) {
@@ -441,6 +443,7 @@ function relatedToolSlugFor(post) {
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';
+  if (/(public-holiday|public holiday|public-holidays|public holidays|bank-holiday|bank holiday|holiday-closures|holiday closures|shop-closures|shop closures|shops-closed|shops closed)/.test(s)) return 'berlin-public-holiday-checker';
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
   if (/(welcomecard)/.test(s)) return 'welcomecard-calculator';
   if (/(city-tax|city tax|accommodation-tax|accommodation tax|hotel-tax|hotel tax|tourist-tax|tourist tax)/.test(s)) return 'berlin-city-tax-calculator';
