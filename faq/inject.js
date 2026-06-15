@@ -108,7 +108,8 @@
   "liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about": "liebknecht-bridge-view",
   "rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism": "rotes-rathaus-berlin",
   "berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia": "berlin-lost-neighborhood",
-  "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower": "st-marys-church-berlin"
+  "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower": "st-marys-church-berlin",
+  "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared": "alte-nationalgalerie-berlin"
 };
 
   var SCHEMAS = {
@@ -5104,6 +5105,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. It is one of the best places on the route for understanding medieval Berlin, the vanished Marienviertel and the GDR city centre around the TV Tower."
+        }
+      }
+    ]
+  },
+  "alte-nationalgalerie-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the Alte Nationalgalerie in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Alte Nationalgalerie is Museum Island’s 19th-century art museum. It shows Romanticism, Realism, Impressionism, sculpture and the bridge toward modern art."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does it look like a Greek temple?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The temple form was intentional. Friedrich Wilhelm IV wanted a raised sanctuary for art and science, and Stüler developed the temple-like design."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the must-see works?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with Caspar David Friedrich, especially the Friedrich room, then look for Adolph Menzel, Schinkel, Schadow’s Princess Group and the Impressionist rooms."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is the Alte Nationalgalerie ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As of the checked 2026 source, the museum ticket for Alte Nationalgalerie plus Cassirer is EUR 16, reduced EUR 8; Museum Island is EUR 24, reduced EUR 12."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Alte Nationalgalerie open on Mondays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The current public listing shows Monday closed and Tuesday to Sunday, 10:00 to 18:00. Always re-check before visiting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it worth visiting if I only have one Museum Island stop?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose it if you love paintings, Romantic landscapes or Impressionism. If you want ancient Egypt or archaeology first, the Neues Museum or Altes Museum may fit better."
         }
       }
     ]
