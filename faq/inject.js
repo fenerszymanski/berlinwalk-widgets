@@ -91,7 +91,8 @@
   "the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark": "tv-tower-10-things",
   "museum-island-before-and-after-wwii-the-destruction-nobody-expected": "museum-island-before-after-wwii",
   "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth": "jfk-jelly-donut-myth",
-  "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos": "alexanderplatz-then-now"
+  "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos": "alexanderplatz-then-now",
+  "the-lustgarten-from-royal-garden-to-nazi-rally-ground-to-berlin-s-favorite-picnic-spot": "lustgarten-berlin"
 };
 
   var SCHEMAS = {
@@ -4169,6 +4170,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, if you visit it with context. It is not Berlin's prettiest square, but it is one of the best places to understand the city's layers: medieval trade, Weimar energy, wartime destruction, GDR planning and reunified Berlin."
+        }
+      }
+    ]
+  },
+  "lustgarten-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does Lustgarten mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Lustgarten means pleasure garden. In Berlin, the name refers to the open garden square beside the former royal palace and the Altes Museum on Museum Island."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was the Lustgarten really a royal garden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The site began in 1573 as a practical palace garden with fruit, herbs and vegetables, then became a more formal pleasure garden under the Great Elector."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the granite bowl in the Lustgarten famous?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The huge polished granite bowl was made by Christian Gottlieb Cantian in the early 1830s from a boulder found near Fürstenwalde. It is almost 7 metres wide and was treated as a technical marvel in its time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happened in the Lustgarten during the Nazi era?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Nazis removed much of the garden layout and used the space for mass rallies and propaganda. On 1 May 1933, the Lustgarten was part of the staged Day of National Labor spectacle; the next day, independent trade unions were destroyed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was it called Marx-Engels-Platz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After World War II, the wider area around the former palace site became part of Marx-Engels-Platz in East Berlin. After reunification, the historic Lustgarten name returned."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Lustgarten worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It is a short, easy stop between the Berliner Dom, Altes Museum and Humboldt Forum, and it gives you one of the clearest examples of how Berlin layers very different political eras on the same ground."
         }
       }
     ]
