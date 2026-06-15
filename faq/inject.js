@@ -112,7 +112,8 @@
   "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared": "alte-nationalgalerie-berlin",
   "friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story": "friedrichsbruecke-berlin",
   "the-altes-museum-how-one-building-made-berlin-a-cultural-capital": "altes-museum-berlin",
-  "the-berliner-dom-a-cathedral-that-survived-everything": "berliner-dom-survived"
+  "the-berliner-dom-a-cathedral-that-survived-everything": "berliner-dom-survived",
+  "museum-island-why-prussia-built-an-entire-island-of-museums": "museum-island-prussia"
 };
 
   var SCHEMAS = {
@@ -5324,6 +5325,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes if you want the interior, audio guide, Hohenzollern Crypt and the 50-metre dome view. If time is tight, the outside from the Lustgarten is still a strong free stop."
+        }
+      }
+    ]
+  },
+  "museum-island-prussia": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why did Prussia build Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Prussia used Museum Island to present itself as a cultured European power. The island turned royal collections, scholarship and architecture into a public statement in the heart of Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which five museums are on Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The five historic museums are the Altes Museum, Neues Museum, Alte Nationalgalerie, Bode-Museum and Pergamonmuseum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When was Museum Island built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "UNESCO describes the ensemble as five museums built between 1824 and 1930. The Altes Museum opened in 1830, and the Pergamonmuseum completed the historic sequence in the 20th century."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Museum Island a UNESCO World Heritage Site?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is listed because the five museums form an exceptional ensemble showing the evolution of museum design and Prussia’s cultural ambitions over more than a century."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Museum Island free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The island, courtyards and outside architecture are free to walk through. Museum entry is paid unless a special free programme, pass or concession applies."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Pergamonmuseum open?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The main Pergamonmuseum is closed for renovation. Official visitor sources point to a partial reopening on 4 June 2027, so check current status before planning around it."
         }
       }
     ]
