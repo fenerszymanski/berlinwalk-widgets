@@ -92,7 +92,8 @@
   "museum-island-before-and-after-wwii-the-destruction-nobody-expected": "museum-island-before-after-wwii",
   "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth": "jfk-jelly-donut-myth",
   "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos": "alexanderplatz-then-now",
-  "the-lustgarten-from-royal-garden-to-nazi-rally-ground-to-berlin-s-favorite-picnic-spot": "lustgarten-berlin"
+  "the-lustgarten-from-royal-garden-to-nazi-rally-ground-to-berlin-s-favorite-picnic-spot": "lustgarten-berlin",
+  "kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture": "kaffee-vs-coffee"
 };
 
   var SCHEMAS = {
@@ -4224,6 +4225,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. It is a short, easy stop between the Berliner Dom, Altes Museum and Humboldt Forum, and it gives you one of the clearest examples of how Berlin layers very different political eras on the same ground."
+        }
+      }
+    ]
+  },
+  "kaffee-vs-coffee": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between Kaffee and Café?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kaffee usually means the drink. Café usually means the place where you drink it. That is why a German menu can use both words in different ways."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I order first in a Berlin café?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A cappuccino, Milchkaffee or filter coffee is the easiest start. If you want a surprise, order Eiskaffee, but remember that it usually comes with vanilla ice cream and whipped cream."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Kaffee und Kuchen?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Kaffee und Kuchen means afternoon coffee and cake, usually around 3 to 5 PM. It is less about speed and more about sitting down, talking and taking a proper pause."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin cafés take cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many do, but not all. Some small cafés and bakeries are still cash-only or have card minimums, so carrying EUR 20 to EUR 30 in small cash is still smart."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should I tip in a Berlin café?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For table service, rounding up or adding 5 to 10 percent is normal. At a counter-service coffee shop, a few coins in the tip jar are enough."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I go for coffee after a BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The tour ends near Hackescher Markt, close to several useful café options. Ben Rahim is good for specialty coffee, Father Carpenter for brunch and coffee, and Princess Cheesecake for Kaffee und Kuchen."
         }
       }
     ]
