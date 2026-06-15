@@ -104,7 +104,8 @@
   "exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing": "checkpoint-charlie-berlin",
   "the-weltzeituhr-why-alexanderplatz-has-a-world-clock": "weltzeituhr-berlin",
   "where-to-eat-near-alexanderplatz-without-getting-ripped-off": "alexanderplatz-food",
-  "feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation": "german-untranslatable-words"
+  "feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation": "german-untranslatable-words",
+  "liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about": "liebknecht-bridge-view"
 };
 
   var SCHEMAS = {
@@ -4884,6 +4885,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Feierabend is the most practical everyday word, especially if you spend evenings in Berlin. Gemütlich is also useful in cafés, pubs and homes."
+        }
+      }
+    ]
+  },
+  "liebknecht-bridge-view": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is Liebknecht Bridge in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Liebknecht Bridge crosses the Spree between Alexanderplatz and Museum Island. It carries Karl-Liebknecht-Straße toward the Berliner Dom and Humboldt Forum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Liebknecht Bridge worth stopping at?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It gives you several Berlin layers in one view: the Cathedral, Humboldt Forum, Spree, TV Tower, tram lines and the route back toward Alexanderplatz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best thing to photograph from the bridge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The strongest shot usually includes the Spree plus at least two landmarks, such as the Berliner Dom and Humboldt Forum or the Cathedral and TV Tower."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who was Karl Liebknecht?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Karl Liebknecht was a German socialist politician and anti-war revolutionary. He proclaimed a socialist republic in Berlin on 9 November 1918 and was murdered in January 1919."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the best time to visit Liebknecht Bridge?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Late afternoon and early evening are usually best for warm light on the Cathedral, Humboldt Forum and Spree. Morning is quieter."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Liebknecht Bridge on the BerlinWalk tour route?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It fits naturally into the walk from Alexanderplatz toward Museum Island and Hackescher Markt, and it helps explain how Berlin's centre changed over time."
         }
       }
     ]
