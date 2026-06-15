@@ -88,7 +88,8 @@
   "5-best-coffee-shops-near-hackescher-markt-a-local-s-guide": "coffee-shops-hackescher-markt",
   "marx-and-engels-are-still-standing-in-berlin-here-s-why": "marx-engels-still-standing",
   "berliner-dom-before-and-after-wwii-the-cathedral-that-lost-its-crown": "berliner-dom-before-after-wwii",
-  "the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark": "tv-tower-10-things"
+  "the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark": "tv-tower-10-things",
+  "museum-island-before-and-after-wwii-the-destruction-nobody-expected": "museum-island-before-after-wwii"
 };
 
   var SCHEMAS = {
@@ -4004,6 +4005,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Berlin.de notes that the TV Tower is not barrier-free for safety reasons, so visitors with limited mobility should check official accessibility information before planning a visit."
+        }
+      }
+    ]
+  },
+  "museum-island-before-after-wwii": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Was Museum Island destroyed in World War II?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It was not completely destroyed, but all five museum buildings were damaged in different ways. The Neues Museum was the most visibly devastated and stayed partly ruined for decades."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Museum Island building suffered the longest damage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Neues Museum is the clearest example. Parts of it were exposed to weather for more than 60 years, and it did not reopen until 2009."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When did Museum Island become a UNESCO World Heritage Site?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "UNESCO listed Museum Island in 1999 because the five museums represent an exceptional century-long development of museum architecture and public culture."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Pergamonmuseum open now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The main Pergamonmuseum building is closed for renovation. Official visitor information says a large part is scheduled to reopen on 4 June 2027."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I notice when walking around Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Look for the contrast between restored classical facades and visible repair. The Neues Museum is especially important because its reconstruction intentionally keeps traces of damage readable."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see Museum Island on the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The walking tour reaches Museum Island near the end of the route, after Alexanderplatz, the old city centre, the Humboldt Forum and the Berliner Dom."
         }
       }
     ]
