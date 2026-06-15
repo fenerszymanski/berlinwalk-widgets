@@ -76,7 +76,8 @@
   "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now": "reichstag-dome-free",
   "the-humboldt-forum-berlin-s-most-controversial-building": "humboldt-forum",
   "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood": "hackescher-markt-before-after",
-  "how-berlin-was-divided-a-simple-guide-to-east-vs-west": "berlin-east-west-guide"
+  "how-berlin-was-divided-a-simple-guide-to-east-vs-west": "berlin-east-west-guide",
+  "berlin-tv-tower-construction-before-during-and-after": "berlin-tv-tower-construction"
 };
 
   var SCHEMAS = {
@@ -3352,6 +3353,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Use several clues together: the cobblestone Wall line, Ampelmann signals, GDR-era street names, socialist architecture, tram routes and the difference between Alexanderplatz/Unter den Linden and Zoo/Ku'damm."
+        }
+      }
+    ]
+  },
+  "berlin-tv-tower-construction": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When was the Berlin TV Tower built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Construction began on 4 August 1965 and the tower was officially opened on 3 October 1969. The public could visit from 7 October 1969, the GDR's 20th anniversary."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why was the Berlin TV Tower built at Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The GDR needed a powerful broadcasting tower, but the central location also made it a political landmark. Earlier plans near the Mueggelberge hills were dropped because the tower would have interfered with the approach to Schoenefeld Airport."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Who designed the Berlin TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The project involved several East German architects and engineers. Hermann Henselmann is closely associated with the original slender form, while VEB IPRO Berlin and figures such as Fritz Dieter, Gunter Franke and Werner Neumann worked on the wider project."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much did the Berlin TV Tower cost to build?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The final construction cost rose to over 132 million East German marks, around four times the original plan. That made the tower both a prestige project and an expensive technical challenge."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Pope's Revenge on the Berlin TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Pope's Revenge is the nickname for the cross-shaped reflection that appears on the TV Tower sphere in sunlight. The joke became famous because the tower was built by an officially atheist socialist state."
         }
       }
     ]
