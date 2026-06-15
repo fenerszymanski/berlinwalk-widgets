@@ -71,7 +71,8 @@
   "what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time": "berlin-rainy-day-activities",
   "7-best-photo-spots-in-berlin-most-tourists-walk-right-past": "berlin-photo-spots",
   "berlin-in-3-days-the-perfect-itinerary-from-a-local-guide": "berlin-in-3-days",
-  "do-i-need-to-speak-german-to-visit-berlin": "speak-german-berlin"
+  "do-i-need-to-speak-german-to-visit-berlin": "speak-german-berlin",
+  "is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026": "berlin-tv-tower-worth-it"
 };
 
   var SCHEMAS = {
@@ -3155,6 +3156,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Usually no. If someone switches to English after hearing your accent, they are normally trying to make the interaction faster and easier. Accept the switch and continue politely."
+        }
+      }
+    ]
+  },
+  "berlin-tv-tower-worth-it": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much does the Berlin TV Tower cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official TV Tower site lists standard admission from about EUR 28.50. Packages with drinks, restaurant access or extra experiences cost more, so check the official ticket page before booking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berlin TV Tower worth it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is worth it if the weather is clear, you love high viewpoints and the ticket price feels acceptable. It is not the best value if you are on a budget, short on time, or mainly want photos of the tower itself."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best free alternative to the TV Tower?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Reichstag dome is the strongest free alternative. It is lower than the TV Tower, but the view over the government quarter is excellent and the political context is much richer. Advance registration is required."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I photograph the TV Tower for free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Try Liebknecht Bridge near Museum Island. You can frame the TV Tower with the Berliner Dom, Humboldt Forum and Spree in one classic Berlin view. Park Inn rooftop is also useful, but it is paid."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the TV Tower accessible for wheelchair users?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The official TV Tower accessibility information says the tower is not barrier-free because people with severe mobility issues could not be evacuated safely in an emergency."
         }
       }
     ]
