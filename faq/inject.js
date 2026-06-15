@@ -69,7 +69,8 @@
   "can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany": "credit-cards-berlin",
   "bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about": "bus-100-berlin",
   "what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time": "berlin-rainy-day-activities",
-  "7-best-photo-spots-in-berlin-most-tourists-walk-right-past": "berlin-photo-spots"
+  "7-best-photo-spots-in-berlin-most-tourists-walk-right-past": "berlin-photo-spots",
+  "berlin-in-3-days-the-perfect-itinerary-from-a-local-guide": "berlin-in-3-days"
 };
 
   var SCHEMAS = {
@@ -3061,6 +3062,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Many of these spots sit close to the BerlinWalk route from Alexanderplatz to Hackescher Markt, including Marienviertel, Liebknecht Bridge, Museum Island and Hackesche Höfe."
+        }
+      }
+    ]
+  },
+  "berlin-in-3-days": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is 3 days enough for Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, three days is enough for a strong first visit if you focus. Use one day for the historic center, one day for the Wall and major memorials, and one day for neighborhoods such as Friedrichshain, Kreuzberg, Prenzlauer Berg or Charlottenburg."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I book in advance for 3 days in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Book the Reichstag dome first because visits are free but require registration. Timed museum tickets can also help on Museum Island, especially for popular museums and special exhibitions."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I visit Potsdam on a 3-day Berlin trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a first visit, I would usually skip Potsdam unless palaces are your main reason for coming. Potsdam is beautiful, but it takes most of a day and Berlin itself needs the time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which area is best to stay in for this itinerary?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mitte is the easiest base for a first visit. Prenzlauer Berg is calmer, Friedrichshain is good for nightlife and the East Side Gallery, and Kreuzberg is best for food, bars and a more lived-in feeling."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best first thing to do in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start at Alexanderplatz and take a guided walk through the historic center. It gives you the city structure first, which makes Museum Island, the Wall sights and the neighborhoods easier to understand afterward."
         }
       }
     ]
