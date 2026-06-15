@@ -75,7 +75,8 @@
   "is-the-berlin-tv-tower-worth-it-an-honest-guide-for-2026": "berlin-tv-tower-worth-it",
   "how-to-visit-the-reichstag-dome-for-free-and-why-you-should-book-now": "reichstag-dome-free",
   "the-humboldt-forum-berlin-s-most-controversial-building": "humboldt-forum",
-  "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood": "hackescher-markt-before-after"
+  "hackescher-markt-before-and-after-from-rubble-to-berlin-s-coolest-neighborhood": "hackescher-markt-before-after",
+  "how-berlin-was-divided-a-simple-guide-to-east-vs-west": "berlin-east-west-guide"
 };
 
   var SCHEMAS = {
@@ -3305,6 +3306,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It is practical and meaningful. After about 2 hours of history, Hackescher Markt gives you food, transport, courtyards, the Spree, Museum Island and several small museums without forcing one more fixed stop."
+        }
+      }
+    ]
+  },
+  "berlin-east-west-guide": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Was the Brandenburg Gate in East or West Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Brandenburg Gate stood in East Berlin territory, directly at the border. The Wall and death strip sealed it off, so neither ordinary East Berliners nor West Berliners could approach it freely during division."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was West Berlin completely surrounded by East Germany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. West Berlin was an Allied-controlled enclave inside East Germany. The Berlin Wall did not only cut through the city centre; it also surrounded West Berlin for 155 kilometres."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did East Germany build the Berlin Wall?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The GDR built the Wall to stop people leaving East Germany through Berlin. Before 1961, Berlin was the easiest escape route from East to West."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which famous Berlin sights were in East Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Alexanderplatz, the TV Tower, Museum Island, Unter den Linden, Bebelplatz, Humboldt University, Hackescher Markt and the Brandenburg Gate were all in the former East Berlin centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I tell East from West Berlin today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use several clues together: the cobblestone Wall line, Ampelmann signals, GDR-era street names, socialist architecture, tram routes and the difference between Alexanderplatz/Unter den Linden and Zoo/Ku'damm."
         }
       }
     ]
