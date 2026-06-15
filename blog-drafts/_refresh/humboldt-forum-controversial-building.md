@@ -4,7 +4,7 @@ The Humboldt Forum looks old from one side and new from another.
 
 That is not a design accident.
 
-Standing on Museum Island, opposite the Berliner Dom, it looks at first like a restored royal palace. Baroque facades, grand portals, stone ornament, a dome, a cross, an imperial silhouette.
+Standing on [Museum Island](https://www.berlinwalk.com/post/is-museum-island-free-tickets-prices-and-what-to-actually-skip), opposite the [Berliner Dom](https://www.berlinwalk.com/post/7-things-most-tourists-dont-know-about-the-berliner-dom), it looks at first like a restored royal palace. Baroque facades, grand portals, stone ornament, a dome, a cross, an imperial silhouette.
 
 Then you walk around and see the modern side.
 
@@ -138,7 +138,7 @@ It preserves it in stone.
 
 The second major controversy is inside the building.
 
-The Humboldt Forum houses major collections from the Ethnological Museum and the Museum of Asian Art. The Staatliche Museen zu Berlin describes the permanent exhibition as around 20,000 exhibits across more than 16,000 square meters, spanning Africa, the Americas, Asia, Australia and Oceania.
+The Humboldt Forum houses major collections from the Ethnological Museum and the Museum of Asian Art. The [Staatliche Museen zu Berlin](https://www.smb.museum/en/exhibitions/detail/ethnological-collections-and-asian-art/) describes the permanent exhibition as around 20,000 exhibits across more than 16,000 square meters, spanning Africa, the Americas, Asia, Australia and Oceania.
 
 Many of these collections have histories connected to European colonialism, unequal power and violent acquisition.
 
@@ -150,7 +150,7 @@ The Humboldt Forum has tried to respond through provenance research, collaborati
 
 The most famous case is the Benin Bronzes.
 
-The Prussian Cultural Heritage Foundation says 512 Berlin Benin objects were transferred to Nigerian ownership in 2022. About a third remain in Berlin on loan and are exhibited in the Humboldt Forum.
+The [Prussian Cultural Heritage Foundation](https://www.preussischer-kulturbesitz.de/en/news-detail/article/2022/08/25/512-berliner-benin-bronzen-wieder-nigerianisches-eigentum.html) says 512 Berlin Benin objects were transferred to Nigerian ownership in 2022. About a third remain in Berlin on loan and are exhibited in the Humboldt Forum.
 
 That is important progress.
 
@@ -298,7 +298,7 @@ Here is the simple version:
 - **Best quick visit:** courtyard, free areas and roof terrace.
 - **Best deeper visit:** ticketed exhibitions plus time for labels and context.
 
-For nearby context, combine it with Museum Island, Berliner Dom, the Lustgarten and the old medieval center around Nikolaiviertel.
+For nearby context, combine it with Museum Island, Berliner Dom, the Lustgarten and the old medieval center around [Nikolaiviertel](https://www.berlinwalk.com/post/nikolaiviertel-rebuilt-old-town).
 
 If you are planning a wider first visit, it fits naturally into my [Berlin in 3 Days itinerary](https://www.berlinwalk.com/post/berlin-in-3-days-the-perfect-itinerary-from-a-local-guide).
 
