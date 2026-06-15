@@ -107,7 +107,8 @@
   "feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation": "german-untranslatable-words",
   "liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about": "liebknecht-bridge-view",
   "rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism": "rotes-rathaus-berlin",
-  "berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia": "berlin-lost-neighborhood"
+  "berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia": "berlin-lost-neighborhood",
+  "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower": "st-marys-church-berlin"
 };
 
   var SCHEMAS = {
@@ -5049,6 +5050,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The route starts at Alexanderplatz and passes this lost old-centre landscape before continuing toward Museum Island and Hackescher Markt."
+        }
+      }
+    ]
+  },
+  "st-marys-church-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is St. Mary's Church in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "St. Mary's Church, or Marienkirche, stands near Alexanderplatz between the TV Tower, Rotes Rathaus and Rathausforum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How old is St. Mary's Church?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The church belongs to Berlin's medieval layer and is first documented in 1292. It is one of the city's oldest surviving church buildings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does it look so isolated today?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It once stood inside the dense Marienviertel. War damage, clearance and GDR planning removed much of the old street pattern around it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Totentanz inside St. Mary's Church?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Totentanz is a late-medieval Dance of Death fresco in the tower hall. VisitBerlin describes it as more than 22 metres long and about 2 metres high."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is St. Mary's Church free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entry is usually free, but it is an active church. Check current opening times and respect services, events or restoration closures."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is St. Mary's Church on the BerlinWalk route?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. It is one of the best places on the route for understanding medieval Berlin, the vanished Marienviertel and the GDR city centre around the TV Tower."
         }
       }
     ]
