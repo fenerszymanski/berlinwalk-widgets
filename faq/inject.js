@@ -117,7 +117,8 @@
   "how-much-should-you-tip-on-a-free-walking-tour-in-berlin": "free-walking-tour-tip",
   "neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin": "neptune-fountain-berlin",
   "the-best-views-in-berlin-you-can-find-on-foot": "best-views-foot",
-  "what-is-a-free-walking-tour-how-tip-based-tours-actually-work": "free-walking-tour-explainer"
+  "what-is-a-free-walking-tour-how-tip-based-tours-actually-work": "free-walking-tour-explainer",
+  "the-spree-river-the-waterway-that-built-berlin": "spree-river-berlin"
 };
 
   var SCHEMAS = {
@@ -5599,6 +5600,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Tip-based means you take the tour first and decide afterward what the experience was worth. There is no fixed ticket price before the walk starts."
+        }
+      }
+    ]
+  },
+  "spree-river-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why is the Spree River important to Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Spree shaped the original settlement, trade routes, bridge crossings, Spree Island, Museum Island and the symbolic centre around the palace and Cathedral."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the best place to see the Spree in central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For one strong view, choose Liebknecht Bridge. It gives you the Spree, Berliner Dom, Humboldt Forum, Museum Island and often the TV Tower in one frame."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Museum Island actually an island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Museum Island sits between branches of the Spree and its channels, which is why the museums feel separated from the rest of the historic centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was the Spree part of the Berlin Wall border?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In some sections of divided Berlin, the Spree formed part of the border landscape, with banks, restricted zones and patrol areas turning the river into part of the Cold War divide."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a Spree boat tour worth it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you want a relaxed second perspective after walking. A boat tour is good for views of bridges, Museum Island and the government quarter, but it should not replace walking the historic centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I follow the Spree on foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A simple route runs from Alexanderplatz through Nikolaiviertel to Liebknecht Bridge, Museum Island, Friedrichsbruecke and Hackescher Markt."
         }
       }
     ]
