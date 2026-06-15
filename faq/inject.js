@@ -70,7 +70,8 @@
   "bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about": "bus-100-berlin",
   "what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time": "berlin-rainy-day-activities",
   "7-best-photo-spots-in-berlin-most-tourists-walk-right-past": "berlin-photo-spots",
-  "berlin-in-3-days-the-perfect-itinerary-from-a-local-guide": "berlin-in-3-days"
+  "berlin-in-3-days-the-perfect-itinerary-from-a-local-guide": "berlin-in-3-days",
+  "do-i-need-to-speak-german-to-visit-berlin": "speak-german-berlin"
 };
 
   var SCHEMAS = {
@@ -3108,6 +3109,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Start at Alexanderplatz and take a guided walk through the historic center. It gives you the city structure first, which makes Museum Island, the Wall sights and the neighborhoods easier to understand afterward."
+        }
+      }
+    ]
+  },
+  "speak-german-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I visit Berlin if I only speak English?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. In central Berlin, English is usually enough for hotels, museums, restaurants, major sights, public transport apps and guided tours. A few German greetings still make interactions smoother."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What German phrase should I learn first?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Learn Entschuldigung, sprechen Sie Englisch? It means \"Excuse me, do you speak English?\" and is much more polite than starting every interaction directly in English."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is English less reliable in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "English is less reliable in outer districts, small local shops, pharmacies, doctors' offices, government offices and with some older Berliners. Translation apps and simple phrases help a lot there."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin restaurants have English menus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many central restaurants do, especially near tourist areas. Smaller local restaurants may not. Translation camera apps are useful, but learning words like Rechnung, Karte, bar, zusammen and getrennt helps at the end of the meal."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berliners rude if they switch to English immediately?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually no. If someone switches to English after hearing your accent, they are normally trying to make the interaction faster and easier. Accept the switch and continue politely."
         }
       }
     ]
