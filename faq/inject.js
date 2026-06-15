@@ -84,7 +84,8 @@
   "berlin-slang-10-words-you-ll-only-hear-in-this-city": "berlin-slang",
   "cold-war-berlin-in-5-key-locations-you-can-still-visit": "cold-war-berlin-locations",
   "10-german-words-every-tourist-should-know-before-visiting-berlin": "german-tourist-words",
-  "the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists": "cheap-berlin-2026"
+  "the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists": "cheap-berlin-2026",
+  "5-best-coffee-shops-near-hackescher-markt-a-local-s-guide": "coffee-shops-hackescher-markt"
 };
 
   var SCHEMAS = {
@@ -3784,6 +3785,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "A walking tour is one of the best-value first experiences because Berlin is so readable on foot. My free, tip-based tour lasts about 2 hours and connects the main historic sights with the stories behind them."
+        }
+      }
+    ]
+  },
+  "coffee-shops-hackescher-markt": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best coffee shop near Hackescher Markt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For the most reliable specialty coffee, choose The Barn Hackescher Markt. For atmosphere, choose Ben Rahim inside Hackesche Hoefe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I go for brunch near Hackescher Markt?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Father Carpenter is the best choice in this guide for brunch and a slower sit-down break. It is hidden in a courtyard on Muenzstrasse and works well when coffee alone is not enough."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which cafe has the best hidden courtyard atmosphere?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ben Rahim is the strongest hidden-courtyard pick. It sits inside Hackesche Hoefe and has a distinctive North African coffee influence, including cezwe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I go for coffee and cake?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Princess Cheesecake is the cake-first choice. The coffee is not the main reason to go; the handmade cheesecake is."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best coffee stop after the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After my 2-hour walking tour, choose Father Carpenter if you are hungry, The Barn if you want reliable coffee, Ben Rahim if you want atmosphere, or Princess Cheesecake if the group wants cake."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do cafes near Hackescher Markt take cards?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Payment habits vary. Ben Rahim says it is cashless, while smaller Berlin places can still surprise you in the other direction, so it is smart to carry a backup card and a little cash."
         }
       }
     ]
