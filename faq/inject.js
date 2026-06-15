@@ -96,7 +96,8 @@
   "kaffee-vs-coffee-a-beginner-s-guide-to-german-café-culture": "kaffee-vs-coffee",
   "the-totentanz-a-700-year-old-dance-of-death-inside-berlin-s-oldest-church": "totentanz-berlin",
   "what-s-happening-in-berlin-this-weekend-your-ultimate-guide": "berlin-weekend-guide",
-  "was-berlin-really-the-most-decadent-city-in-the-1920s": "weimar-berlin-decadence"
+  "was-berlin-really-the-most-decadent-city-in-the-1920s": "weimar-berlin-decadence",
+  "why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan": "berlin-wide-streets"
 };
 
   var SCHEMAS = {
@@ -4444,6 +4445,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It captures the atmosphere of crisis, glamour and danger, but it is drama, not a guidebook. The real history is messier, shorter and more politically fragile."
+        }
+      }
+    ]
+  },
+  "berlin-wide-streets": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Were Berlin streets always this wide?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Parts of central Berlin, especially around the old Marienviertel near St. Mary's Church, were once much denser. Many wide spaces today came from wartime destruction, clearance and post-war redesign."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Alexanderplatz feel so open?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Alexanderplatz and the area around the TV Tower were reshaped as part of East Berlin's socialist capital. The old street pattern around the Marienviertel was removed and replaced by open space, axes and representative buildings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How wide is Karl-Marx-Allee?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de gives the key number: Karl-Marx-Allee, formerly Stalinallee, was widened to 90 metres so it could act as a monumental socialist boulevard and parade route."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Did World War II make Berlin streets wide?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "War damage was the starting point, but it was not the only reason. The bigger change came when post-war planners cleared damaged areas and rebuilt parts of the city centre at a new political and architectural scale."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I see this story on foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start at Alexanderplatz, look at St. Mary's Church and Rathausforum, then continue toward Karl-Liebknecht-Strasse, Strausberger Platz and Karl-Marx-Allee. The width becomes easier to read step by step."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does St. Mary's Church look isolated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The church once stood inside a dense old quarter. After wartime damage and late-1960s clearance, the surrounding medieval street plan disappeared, leaving the church in a much more open landscape."
         }
       }
     ]
