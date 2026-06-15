@@ -100,7 +100,8 @@
   "why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan": "berlin-wide-streets",
   "the-neues-museum-from-bombed-ruin-to-nefertiti-s-home": "neues-museum-berlin",
   "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point": "berlin-no-old-town",
-  "hackescher-markt-where-our-tour-ends-and-your-berlin-adventure-begins": "hackescher-tour-end"
+  "hackescher-markt-where-our-tour-ends-and-your-berlin-adventure-begins": "hackescher-tour-end",
+  "exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing": "checkpoint-charlie-berlin"
 };
 
   var SCHEMAS = {
@@ -4664,6 +4665,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Museum Island is an easy walk from Hackescher Markt, which makes the area a good finish point if you want one more cultural stop after the walking tour."
+        }
+      }
+    ]
+  },
+  "checkpoint-charlie-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Checkpoint Charlie worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but keep expectations realistic. Checkpoint Charlie is worth a short visit for the location, the symbolism and the free outdoor panels, not because the hut is an original preserved checkpoint."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Checkpoint Charlie guardhouse original?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The guardhouse on Friedrichstrasse is a replica. The last surviving Allied guardhouse is connected with the Allied Museum, while the street scene today works mainly as a visual marker."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is it called Checkpoint Charlie?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The name comes from the NATO phonetic alphabet. After Checkpoint Alpha and Checkpoint Bravo, the Berlin crossing was the third Allied checkpoint, so it became Charlie."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happened at Checkpoint Charlie in 1961?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In October 1961, a dispute over Allied access escalated until U.S. and Soviet tanks faced each other at the crossing. The standoff lasted about 16 hours and ended without shots being fired."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a ticket to see Checkpoint Charlie?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The outdoor site is free. You can see the replica hut, the famous sign, the Wall line and the information panels without buying a ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I visit the Checkpoint Charlie Museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your interest in escape stories. For a first Cold War visit, the article recommends starting with the free outdoor panels, then choosing Bernauer Strasse or Tränenpalast for deeper context."
         }
       }
     ]

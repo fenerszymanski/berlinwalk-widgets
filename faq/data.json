@@ -2887,5 +2887,35 @@
         "a": "Yes. Museum Island is an easy walk from Hackescher Markt, which makes the area a good finish point if you want one more cultural stop after the walking tour."
       }
     ]
+  },
+  "checkpoint-charlie-berlin": {
+    "title": "Checkpoint Charlie FAQ",
+    "subtitle": "Quick answers about what is real, what is reconstructed and how to visit Checkpoint Charlie well.",
+    "items": [
+      {
+        "q": "Is Checkpoint Charlie worth visiting?",
+        "a": "Yes, but keep expectations realistic. **Checkpoint Charlie is worth a short visit** for the location, the symbolism and the free outdoor panels, not because the hut is an original preserved checkpoint."
+      },
+      {
+        "q": "Is the Checkpoint Charlie guardhouse original?",
+        "a": "No. **The guardhouse on Friedrichstrasse is a replica**. The last surviving Allied guardhouse is connected with the Allied Museum, while the street scene today works mainly as a visual marker."
+      },
+      {
+        "q": "Why is it called Checkpoint Charlie?",
+        "a": "The name comes from the NATO phonetic alphabet. After **Checkpoint Alpha** and **Checkpoint Bravo**, the Berlin crossing was the third Allied checkpoint, so it became Charlie."
+      },
+      {
+        "q": "What happened at Checkpoint Charlie in 1961?",
+        "a": "In October 1961, a dispute over Allied access escalated until **U.S. and Soviet tanks faced each other** at the crossing. The standoff lasted about 16 hours and ended without shots being fired."
+      },
+      {
+        "q": "Do I need a ticket to see Checkpoint Charlie?",
+        "a": "No. The outdoor site is free. You can see the replica hut, the famous sign, the Wall line and the information panels without buying a ticket."
+      },
+      {
+        "q": "Should I visit the Checkpoint Charlie Museum?",
+        "a": "It depends on your interest in escape stories. For a first Cold War visit, the article recommends starting with the free outdoor panels, then choosing Bernauer Strasse or Tränenpalast for deeper context."
+      }
+    ]
   }
 }
