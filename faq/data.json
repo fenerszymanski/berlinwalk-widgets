@@ -3367,5 +3367,35 @@
         "a": "Yes. Start at Alexanderplatz, walk through the Rotes Rathaus and Neptune Fountain area, continue to Liebknecht Bridge, follow the Spree to Friedrichsbruecke, and finish around Museum Island or Hackescher Markt."
       }
     ]
+  },
+  "free-walking-tour-explainer": {
+    "title": "Free Walking Tours FAQ",
+    "subtitle": "Quick answers about how tip-based walking tours work in Berlin.",
+    "items": [
+      {
+        "q": "Is a free walking tour really free?",
+        "a": "There is no fixed upfront price, so it is free to join. But the guide is normally paid by guest tips at the end, which is why tip-based is the more honest phrase."
+      },
+      {
+        "q": "How much should I tip on a free walking tour in Berlin?",
+        "a": "For a good **2 hours** Berlin walking tour, **EUR 10-15 per person** is a fair normal tip. EUR 5 is modest, and EUR 20+ is generous."
+      },
+      {
+        "q": "Do I have to tip if the free walking tour is bad?",
+        "a": "No. The model lets you tip less or nothing if the tour was genuinely poor. A good guide should earn the tip through the quality of the walk."
+      },
+      {
+        "q": "Should I bring cash?",
+        "a": "Yes. Cash is the easiest option in Berlin. Some guides may accept card or mobile payments, but you should not rely on that unless the tour page says so."
+      },
+      {
+        "q": "Is a free walking tour good for a first day in Berlin?",
+        "a": "Yes, if the guide and route are good. A first-day walking tour can give you a mental map of the city centre and help you understand what to revisit later."
+      },
+      {
+        "q": "What does tip-based mean?",
+        "a": "Tip-based means you take the tour first and decide afterward what the experience was worth. There is no fixed ticket price before the walk starts."
+      }
+    ]
   }
 }

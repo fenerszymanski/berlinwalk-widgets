@@ -116,7 +116,8 @@
   "museum-island-why-prussia-built-an-entire-island-of-museums": "museum-island-prussia",
   "how-much-should-you-tip-on-a-free-walking-tour-in-berlin": "free-walking-tour-tip",
   "neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin": "neptune-fountain-berlin",
-  "the-best-views-in-berlin-you-can-find-on-foot": "best-views-foot"
+  "the-best-views-in-berlin-you-can-find-on-foot": "best-views-foot",
+  "what-is-a-free-walking-tour-how-tip-based-tours-actually-work": "free-walking-tour-explainer"
 };
 
   var SCHEMAS = {
@@ -5544,6 +5545,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Start at Alexanderplatz, walk through the Rotes Rathaus and Neptune Fountain area, continue to Liebknecht Bridge, follow the Spree to Friedrichsbruecke, and finish around Museum Island or Hackescher Markt."
+        }
+      }
+    ]
+  },
+  "free-walking-tour-explainer": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is a free walking tour really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no fixed upfront price, so it is free to join. But the guide is normally paid by guest tips at the end, which is why tip-based is the more honest phrase."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much should I tip on a free walking tour in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a good 2 hours Berlin walking tour, EUR 10-15 per person is a fair normal tip. EUR 5 is modest, and EUR 20+ is generous."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I have to tip if the free walking tour is bad?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The model lets you tip less or nothing if the tour was genuinely poor. A good guide should earn the tip through the quality of the walk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I bring cash?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Cash is the easiest option in Berlin. Some guides may accept card or mobile payments, but you should not rely on that unless the tour page says so."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a free walking tour good for a first day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if the guide and route are good. A first-day walking tour can give you a mental map of the city centre and help you understand what to revisit later."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does tip-based mean?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tip-based means you take the tour first and decide afterward what the experience was worth. There is no fixed ticket price before the walk starts."
         }
       }
     ]
