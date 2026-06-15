@@ -111,7 +111,8 @@
   "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower": "st-marys-church-berlin",
   "alte-nationalgalerie-berlin-the-greek-temple-on-museum-island-that-almost-disappeared": "alte-nationalgalerie-berlin",
   "friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story": "friedrichsbruecke-berlin",
-  "the-altes-museum-how-one-building-made-berlin-a-cultural-capital": "altes-museum-berlin"
+  "the-altes-museum-how-one-building-made-berlin-a-cultural-capital": "altes-museum-berlin",
+  "the-berliner-dom-a-cathedral-that-survived-everything": "berliner-dom-survived"
 };
 
   var SCHEMAS = {
@@ -5269,6 +5270,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, if you like classical architecture or ancient objects. If you only want Nefertiti or big archaeology spectacles, the Neues Museum or Pergamon-related displays may fit better."
+        }
+      }
+    ]
+  },
+  "berliner-dom-survived": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the Berliner Dom?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Berliner Dom is Berlin’s largest Protestant church and one of the most visible landmarks beside Museum Island and the Lustgarten."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When was the current Berliner Dom built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The older building was demolished in 1893, and the current cathedral was inaugurated on 27 February 1905 under Kaiser Wilhelm II."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What happened to the Berliner Dom in World War II?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On 24 May 1944, a bomb hit the dome lantern and started a fire. The collapse damaged the Sermon Church and the Hohenzollern Crypt below."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berliner Dom today the same as the 1905 building?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not exactly. The main building survived, but the dome was rebuilt lower and the northern Memorial Church was demolished during GDR-era reconstruction."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does the Berliner Dom cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As of the checked official visitor page, the standard ticket is EUR 15, concession EUR 12, and Berlin WelcomeCard EUR 11."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berliner Dom worth visiting inside?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes if you want the interior, audio guide, Hohenzollern Crypt and the 50-metre dome view. If time is tight, the outside from the Lustgarten is still a strong free stop."
         }
       }
     ]
