@@ -98,7 +98,8 @@
   "what-s-happening-in-berlin-this-weekend-your-ultimate-guide": "berlin-weekend-guide",
   "was-berlin-really-the-most-decadent-city-in-the-1920s": "weimar-berlin-decadence",
   "why-berlin-s-streets-are-so-wide-it-wasn-t-always-the-plan": "berlin-wide-streets",
-  "the-neues-museum-from-bombed-ruin-to-nefertiti-s-home": "neues-museum-berlin"
+  "the-neues-museum-from-bombed-ruin-to-nefertiti-s-home": "neues-museum-berlin",
+  "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point": "berlin-no-old-town"
 };
 
   var SCHEMAS = {
@@ -4554,6 +4555,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. The free walking tour passes Museum Island and explains the building from the outside. It is good context before visiting the museum independently."
+        }
+      }
+    ]
+  },
+  "berlin-no-old-town": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Did Berlin ever have a medieval old town?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin began as the medieval twin settlements of Berlin and Cölln on the Spree. Cölln is first documented in 1237, Berlin in 1244, and the Nikolaikirche goes back to around 1230."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Was Berlin's old town destroyed in World War II?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "World War II caused enormous destruction in central Berlin, but it is too simple to say the bombs destroyed everything. Some buildings, ruins and street traces survived. Later political planning also shaped what disappeared."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why did East Berlin not rebuild the old centre?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The historic centre lay mostly in East Berlin. GDR planners wanted a socialist capital with broad spaces, modern roads, state buildings and symbolic new views, not a restored Prussian or medieval centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Nikolaiviertel Berlin's old town?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Nikolaiviertel stands on Berlin's oldest ground, but today's quarter is largely a 1987 reconstruction made for Berlin's 750th anniversary. It is old in location and memory, but not a fully preserved medieval old town."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I still see traces of old Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with Nikolaiviertel, the Nikolaikirche, St. Mary's Church, Rathausforum, Schlossplatz, Museum Island and the Lustgarten. These places make most sense together on foot."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the BerlinWalk tour explain the missing old town?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The free, tip-based walking tour starts at Alexanderplatz and follows the historic centre toward Hackescher Markt, showing where old Berlin survived, disappeared and was rebuilt."
         }
       }
     ]
