@@ -85,7 +85,8 @@
   "cold-war-berlin-in-5-key-locations-you-can-still-visit": "cold-war-berlin-locations",
   "10-german-words-every-tourist-should-know-before-visiting-berlin": "german-tourist-words",
   "the-myth-of-cheap-berlin-what-changed-and-why-it-still-matters-for-tourists": "cheap-berlin-2026",
-  "5-best-coffee-shops-near-hackescher-markt-a-local-s-guide": "coffee-shops-hackescher-markt"
+  "5-best-coffee-shops-near-hackescher-markt-a-local-s-guide": "coffee-shops-hackescher-markt",
+  "marx-and-engels-are-still-standing-in-berlin-here-s-why": "marx-engels-still-standing"
 };
 
   var SCHEMAS = {
@@ -3839,6 +3840,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Payment habits vary. Ben Rahim says it is cashless, while smaller Berlin places can still surprise you in the other direction, so it is smart to carry a backup card and a little cash."
+        }
+      }
+    ]
+  },
+  "marx-engels-still-standing": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why are Marx and Engels still standing in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin kept the statues because they are now useful as visible historical evidence. They show how the GDR wanted to present itself in the centre of East Berlin, without asking visitors to endorse that message today."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When was the Marx-Engels-Forum built?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The monument was inaugurated in April 1986, only three years before the Berlin Wall fell. It was built according to plans by sculptor Ludwig Engelhardt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does keeping the statues mean Berlin supports the GDR?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Keeping the statues does not excuse the GDR. It keeps a visible trace of East German history in public, where it can be questioned and interpreted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Were all communist monuments kept after reunification?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The Lenin monument in Friedrichshain was dismantled after reunification. Marx and Engels survived because they fell into a more complicated category: thinkers claimed by a regime, not the regime leaders themselves."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can tourists still visit the Marx and Engels statues in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but the area may be affected by redesign work around the Rathaus- and Marx-Engels-Forum. The statues are planned to remain in place, but paths, fences and photo angles can change."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where are the Marx and Engels statues?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They are at the Marx-Engels-Forum near Karl-Liebknecht-Strasse 2, between Alexanderplatz, the Rotes Rathaus and the Spree."
         }
       }
     ]
