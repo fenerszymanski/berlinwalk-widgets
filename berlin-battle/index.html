@@ -896,7 +896,9 @@
 (function () {
   var root = document.getElementById('bw-berlin-battle');
   var componentStyleHtml = root.querySelector('style') ? root.querySelector('style').outerHTML : '';
-  var DATA_URL = 'data.json';
+  var URL_PARAMS = new URLSearchParams(window.location.search || '');
+  var ASSET_BUILD = URL_PARAMS.get('v') || 'highres-layout-fix-20260615';
+  var DATA_URL = 'data.json?v=' + encodeURIComponent(ASSET_BUILD);
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_battle&utm_medium=game&utm_campaign=berlin_battle&utm_content=result_cta';
   var SHARE_URL_BASE = 'https://www.berlinwalk.com/games/berlin-battle';
   var TRACKING_ENDPOINT_PROD = 'https://berlinwalk-content-app.vercel.app/api/battle-event';
@@ -934,6 +936,18 @@
     return String(state.view || 'topics').replace(/[^a-z0-9_-]/gi, '');
   }
 
+  function assetVersion() {
+    var version = state.data && state.data.version ? state.data.version : ASSET_BUILD;
+    return String(version || '').replace(/[^a-z0-9_.-]/gi, '');
+  }
+
+  function versionedAsset(src) {
+    if (!src || /^data:/i.test(src)) return src;
+    var version = assetVersion();
+    if (!version) return src;
+    return src + (src.indexOf('?') === -1 ? '?' : '&') + 'v=' + encodeURIComponent(version);
+  }
+
   function topicImage(topic) {
     if (topic && topic.image) return topic.image;
     if (topic && Array.isArray(topic.items) && topic.items[0] && topic.items[0].image) return topic.items[0].image;
@@ -941,7 +955,7 @@
   }
 
   function itemImageUrl(item) {
-    return new URL(item.image, window.location.href).href;
+    return new URL(versionedAsset(item.image), window.location.href).href;
   }
 
   function storageGet(key) {
@@ -1186,7 +1200,7 @@
       var attrs = disabled ? '' : ' data-topic-id="' + escapeHtml(topic.id) + '"';
       return '<' + tag + ' class="bb-topic-card' + (disabled ? ' is-disabled' : '') + '"' + attrs + '>' +
         '<div class="bb-topic-art" aria-hidden="true">' +
-          '<img class="bb-topic-img" src="' + escapeHtml(topicImage(topic)) + '" alt="" loading="lazy" decoding="async">' +
+          '<img class="bb-topic-img" src="' + escapeHtml(versionedAsset(topicImage(topic))) + '" alt="" loading="lazy" decoding="async">' +
         '</div>' +
         '<div class="bb-topic-content">' +
           '<span class="bb-topic-kicker">' + escapeHtml(topic.kicker || '') + '</span>' +
@@ -1263,7 +1277,7 @@
 
   function renderChoice(item) {
     return '<button type="button" class="bb-choice" data-pick="' + escapeHtml(item.id) + '">' +
-      '<img class="bb-choice-img" src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.name) + '" loading="eager">' +
+      '<img class="bb-choice-img" src="' + escapeHtml(versionedAsset(item.image)) + '" alt="' + escapeHtml(item.name) + '" loading="eager">' +
       '<span class="bb-choice-body">' +
         '<strong class="bb-choice-name">' + escapeHtml(item.name) + '</strong>' +
         '<span class="bb-choice-line">' + escapeHtml(item.line || '') + '</span>' +
@@ -1358,7 +1372,7 @@
       '<p class="bb-subtitle">' + escapeHtml(resultLine(winner)) + '</p>',
       '<div class="bb-result">' +
         '<section class="bb-winner-panel">' +
-          '<img class="bb-winner-img" src="' + escapeHtml(winner.image) + '" alt="' + escapeHtml(winner.name) + '">' +
+          '<img class="bb-winner-img" src="' + escapeHtml(versionedAsset(winner.image)) + '" alt="' + escapeHtml(winner.name) + '">' +
           '<div class="bb-winner-copy">' +
             '<span class="bb-winner-label">' + escapeHtml(state.topic.resultPrefix || 'Your winner') + '</span>' +
             '<strong class="bb-winner-name">' + escapeHtml(winner.name) + '</strong>' +

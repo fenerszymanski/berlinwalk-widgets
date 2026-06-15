@@ -226,6 +226,70 @@ Text constraints: no text, no labels, no letters, no numbers, no logos, no water
 Output only the final 4x4 image sheet.
 ```
 
+## High-Resolution 2x2 Card Replacements
+
+Added 2026-06-15 after live desktop QA showed the 4x4 sprite-sheet crops were
+too soft when the game cards were enlarged. Yusuf asked to generate fewer images
+per prompt directly in the logged-in ChatGPT browser session. No paid API,
+Gemini, OpenAI image API, Sora, Veo, or Content Studio paid image channel was
+used.
+
+Source folder:
+
+- `highres-batches/`
+
+Generation format:
+
+- 16 total 2x2 sheets, 4 images per sheet.
+- Source sheet size from ChatGPT was `1254x1254`, giving about `627x627` source
+  pixels per card before the final `640x640` WebP export.
+- Finished card paths stayed the same so `data.json` did not need item-image
+  rewiring; the game now appends the `data.json` version to image URLs for cache
+  busting.
+
+Reusable prompt shell:
+
+```text
+Create one image: a clean 2x2 sprite sheet of 4 separate BerlinWalk "[MODE]" game-card artworks.
+
+Use case: website this-or-that battle card images. Style: premium polished semi-realistic editorial illustration / photo-illustration hybrid, appetizing or atmospheric as appropriate, consistent lighting and style across all four cells.
+
+Format and composition: exact 2 by 2 grid, equal square cells, one centered subject per cell, clear separation between cells, generous crop-safe margins. Each cell must work when cropped to a 640x640 square card. No overlapping between cells.
+
+Brand palette: deep BerlinWalk green #1B5E20, bright yellow #FFE600, lime #7CB342, cream #FAFAF5, white highlights, tiny Berlin red #E63946 only as a small accent. Add subtle travel-game energy: glow rings, soft particles, depth, polished lighting.
+
+Mode direction: [MODE-SPECIFIC DIRECTION]
+
+Cells in exact order left-to-right, top-to-bottom:
+1 [ITEM 1]
+2 [ITEM 2]
+3 [ITEM 3]
+4 [ITEM 4]
+
+Text constraints: no text, no labels, no letters, no numbers, no logos, no watermark, no readable signage. Do not put item names in the image.
+
+Output only the final 2x2 image sheet.
+```
+
+Batch order:
+
+- Food 1: Currywurst; Döner Kebab; Falafel; Shawarma.
+- Food 2: Schnitzel; Pretzel; Berliner Pfannkuchen; Boulette.
+- Food 3: Kartoffelpuffer; Eisbein; Käsekuchen; Apfelstrudel.
+- Food 4: Lahmacun; Vietnamese Pho; Späti Snack Run; Berliner Weiße.
+- District 1: Mitte; Kreuzberg; Friedrichshain; Neukölln.
+- District 2: Prenzlauer Berg; Charlottenburg; Schöneberg; Wedding.
+- District 3: Moabit; Tiergarten; Tempelhof; Köpenick.
+- District 4: Spandau; Pankow; Lichtenberg; Treptow.
+- Museum 1: Neues Museum; Altes Museum; Alte Nationalgalerie; Bode-Museum.
+- Museum 2: Humboldt Forum; Jewish Museum Berlin; Berlinische Galerie; Hamburger Bahnhof.
+- Museum 3: Gemäldegalerie; DDR Museum; Topography of Terror; Museum für Naturkunde.
+- Museum 4: Deutsches Technikmuseum; Futurium; Urban Nation; Museum for Communication.
+- Night 1: Techno Warehouse; Riverside Club; Queer Dancefloor; Punk Show.
+- Night 2: Jazz Cellar; Open-Air Rave; Karaoke Bar; Kneipe Crawl.
+- Night 3: Späti Corner; Cocktail Bar; Rooftop Sunset; Comedy Night.
+- Night 4: Late Döner Stop; Night Bus Ride; Gallery Opening; Afterhours Breakfast.
+
 ## BerlinTools Icon
 
 Source files:

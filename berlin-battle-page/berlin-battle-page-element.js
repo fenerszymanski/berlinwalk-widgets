@@ -54,7 +54,7 @@
       url.searchParams.set('parent_path', window.location.pathname || '/games/berlin-battle');
       url.searchParams.set('parent_url', window.location.href);
       url.searchParams.set('attribution', 'none');
-      url.searchParams.set('v', 'all-modes-chatgpt-assets-20260615');
+      url.searchParams.set('v', 'highres-layout-fix-20260615');
       return url.toString();
     }
 
@@ -326,12 +326,11 @@
         }
 
         .bw-battle-strip {
-          background:
-            linear-gradient(180deg, rgba(18, 63, 22, 0) 0%, rgba(27, 94, 32, 0.92) 58%, var(--bw-green) 100%);
+          background: var(--bw-green);
           border-top: 0;
           color: var(--bw-white);
-          margin-top: -86px;
-          padding: 0 0 18px;
+          margin-top: 0;
+          padding: 18px 0;
           position: relative;
           z-index: 3;
         }
@@ -457,6 +456,12 @@
           color: var(--bw-white);
         }
 
+        @media (max-width: 1100px) {
+          .bw-battle-mode-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+          }
+        }
+
         @media (max-width: 820px) {
           .bw-battle-inner {
             width: min(100% - 24px, 1120px);
@@ -473,10 +478,6 @@
 
           .bw-battle-mode-grid {
             grid-template-columns: minmax(0, 1fr);
-          }
-
-          .bw-battle-strip {
-            margin-top: -58px;
           }
 
           .bw-battle-game-head,
@@ -516,10 +517,6 @@
 
           .bw-battle-mode-grid article {
             grid-template-columns: 68px minmax(0, 1fr);
-          }
-
-          .bw-battle-strip {
-            margin-top: -44px;
           }
 
           .bw-battle-mode-grid img {
