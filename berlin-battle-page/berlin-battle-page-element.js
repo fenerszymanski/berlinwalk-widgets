@@ -5,12 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ROUTE_URL = 'https://www.berlinwalk.com/berlin-walking-tour-route';
-  const ASSET_BUILD = 'editorial-illustration-20260616';
-  const IMAGE_VERSION = '2026-06-16-editorial-illustration';
-
-  const asset = (path) => new URL(path, BASE_URL).toString();
-  const versionedAsset = (path) => `${asset(path)}?v=${IMAGE_VERSION}`;
+  const ASSET_BUILD = 'editorial-all-battles-20260616';
 
   function ensureFont() {
     if (document.querySelector('link[data-bw-battle-page-font]')) return;
@@ -62,31 +57,6 @@
     }
 
     _render() {
-      const topics = [
-        {
-          title: 'Food Battle',
-          image: versionedAsset('berlin-battle/assets/topics/food-battle-cover.webp'),
-        },
-        {
-          title: 'District Battle',
-          image: versionedAsset('berlin-battle/assets/topics/district-battle-cover.webp'),
-        },
-        {
-          title: 'Museum Battle',
-          image: versionedAsset('berlin-battle/assets/topics/museum-battle-cover.webp'),
-        },
-        {
-          title: 'Night Battle',
-          image: versionedAsset('berlin-battle/assets/topics/night-battle-cover.webp'),
-        },
-      ];
-      const topicCards = topics.map((topic) => `
-        <a class="bw-battle-art-card" href="#battle-game">
-          <img src="${topic.image}" alt="" width="960" height="600" loading="eager" decoding="async">
-          <span>${topic.title}</span>
-        </a>
-      `).join('');
-
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="bw-battle-page" aria-labelledby="bw-battle-title">
@@ -98,11 +68,7 @@
                 <p class="bw-battle-lead">Pick between Berlin food, districts, museums and nights. Get a personal winner, then meet the real city on the walking route.</p>
                 <div class="bw-battle-actions">
                   <a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a>
-                  <a class="bw-battle-btn bw-battle-btn-ghost" href="${ROUTE_URL}">See the walking route</a>
                 </div>
-              </div>
-              <div class="bw-battle-hero-art" aria-label="Berlin Battle topics">
-                ${topicCards}
               </div>
             </div>
           </section>
@@ -218,9 +184,10 @@
 
         .bw-battle-hero {
           background:
-            linear-gradient(115deg, var(--bw-cream) 0%, var(--bw-cream) 54%, var(--bw-green-dark) 54%, var(--bw-green-dark) 100%);
+            linear-gradient(0deg, rgba(27, 94, 32, 0.04), rgba(27, 94, 32, 0)),
+            var(--bw-cream);
           overflow: hidden;
-          padding: clamp(48px, 7vw, 82px) 0 clamp(34px, 5vw, 60px);
+          padding: clamp(42px, 7vw, 78px) 0 clamp(28px, 5vw, 46px);
           position: relative;
           isolation: isolate;
         }
@@ -236,16 +203,13 @@
         }
 
         .bw-battle-hero-inner {
-          align-items: center;
-          display: grid;
-          gap: clamp(28px, 5vw, 58px);
-          grid-template-columns: minmax(0, 0.86fr) minmax(360px, 0.74fr);
-          min-height: clamp(390px, 42vw, 520px);
+          min-height: clamp(260px, 30vw, 360px);
           position: relative;
           z-index: 1;
         }
 
         .bw-battle-hero-copy {
+          max-width: 760px;
           min-width: 0;
         }
 
@@ -287,78 +251,6 @@
           margin-top: 24px;
         }
 
-        .bw-battle-hero-art {
-          display: grid;
-          gap: 14px;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          min-width: 0;
-          position: relative;
-        }
-
-        .bw-battle-hero-art::before {
-          background: rgba(255, 255, 255, 0.30);
-          border: 1px solid rgba(255, 255, 255, 0.22);
-          content: "";
-          inset: 20px -12px -14px 24px;
-          position: absolute;
-          transform: rotate(-2deg);
-          z-index: -1;
-        }
-
-        .bw-battle-art-card {
-          background: var(--bw-white);
-          border: 1px solid rgba(27, 94, 32, 0.18);
-          border-radius: 8px;
-          box-shadow: 0 18px 34px rgba(0, 0, 0, 0.18);
-          color: var(--bw-green);
-          display: block;
-          min-width: 0;
-          overflow: hidden;
-          text-decoration: none;
-          transition: transform 0.18s ease, box-shadow 0.18s ease;
-        }
-
-        .bw-battle-art-card:nth-child(1) {
-          transform: rotate(-2deg) translateY(8px);
-        }
-
-        .bw-battle-art-card:nth-child(2) {
-          transform: rotate(1.5deg);
-        }
-
-        .bw-battle-art-card:nth-child(3) {
-          transform: rotate(1deg);
-        }
-
-        .bw-battle-art-card:nth-child(4) {
-          transform: rotate(-1.5deg) translateY(-8px);
-        }
-
-        .bw-battle-art-card:hover,
-        .bw-battle-art-card:focus-visible {
-          box-shadow: 0 22px 42px rgba(0, 0, 0, 0.22);
-          outline: none;
-          transform: translateY(-4px);
-        }
-
-        .bw-battle-art-card img {
-          aspect-ratio: 16 / 10;
-          display: block;
-          height: auto;
-          object-fit: cover;
-          width: 100%;
-        }
-
-        .bw-battle-art-card span {
-          background: var(--bw-white);
-          display: block;
-          font-size: 14px;
-          font-weight: 900;
-          line-height: 1.18;
-          min-height: 42px;
-          padding: 11px 12px;
-        }
-
         .bw-battle-btn {
           align-items: center;
           border-radius: 999px;
@@ -382,12 +274,6 @@
           background: var(--bw-yellow);
           color: var(--bw-green);
           box-shadow: 0 14px 30px rgba(27, 94, 32, 0.18);
-        }
-
-        .bw-battle-btn-ghost {
-          background: var(--bw-white);
-          border: 1px solid var(--bw-light-green);
-          color: var(--bw-green);
         }
 
         .bw-battle-game-band {
@@ -476,13 +362,8 @@
           }
 
           .bw-battle-game-head,
-          .bw-battle-hero-inner,
           .bw-battle-final-box {
             grid-template-columns: minmax(0, 1fr);
-          }
-
-          .bw-battle-hero-inner {
-            min-height: 0;
           }
 
           .bw-battle-final-box .bw-battle-btn {
@@ -493,10 +374,6 @@
         @media (max-width: 520px) {
           .bw-battle-hero {
             padding-top: 34px;
-          }
-
-          .bw-battle-hero-art {
-            gap: 8px;
           }
 
           .bw-battle-actions,
@@ -519,11 +396,6 @@
             border-radius: 8px;
           }
 
-          .bw-battle-art-card span {
-            font-size: 12px;
-            min-height: 38px;
-            padding: 10px;
-          }
         }
       `;
     }

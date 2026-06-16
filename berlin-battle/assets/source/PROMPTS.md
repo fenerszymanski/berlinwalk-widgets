@@ -296,8 +296,10 @@ Batch order:
 
 Added 2026-06-16 after Yusuf said the first promotional prompt direction felt
 too futuristic/space-like and the realistic phone-demo direction felt too real.
-Food Battle was intentionally left unchanged. District, Museum and Night Battle
-card art was refreshed in a middle-ground editorial illustration style.
+The first pass refreshed District, Museum and Night Battle in a middle-ground
+editorial illustration style while Food Battle was left unchanged. A follow-up
+the same day refreshed Food Battle too, because the old Food art stood apart
+from the other three modes.
 
 Generation mode:
 
@@ -308,11 +310,11 @@ Generation mode:
 
 Finished outputs:
 
-- 48 refreshed card files under `../cards/districts/`, `../cards/museums/` and
-  `../cards/night/`, all exported as `640x640` WebP.
-- 3 refreshed textless topic covers under `../topics/`:
-  `district-battle-cover.webp`, `museum-battle-cover.webp` and
-  `night-battle-cover.webp`, all `960x600` WebP.
+- 64 refreshed card files under `../cards/`, `../cards/districts/`,
+  `../cards/museums/` and `../cards/night/`, all exported as `640x640` WebP.
+- 4 refreshed textless topic covers under `../topics/`:
+  `food-battle-cover.webp`, `district-battle-cover.webp`,
+  `museum-battle-cover.webp` and `night-battle-cover.webp`, all `960x600` WebP.
 - QA contact sheets under `editorial-20260616/contact-sheets/`.
 - Reproducible crop/composite script:
   `../../../scripts/crop-berlin-battle-editorial-assets.py`.
@@ -344,6 +346,10 @@ and sensational history imagery.
 
 Batch order:
 
+- Food 1: Currywurst; Döner Kebab; Falafel; Shawarma.
+- Food 2: Schnitzel; Pretzel; Berliner Pfannkuchen; Boulette.
+- Food 3: Kartoffelpuffer; Eisbein; Käsekuchen; Apfelstrudel.
+- Food 4: Lahmacun; Vietnamese Pho; Späti Snack Run; Berliner Weiße.
 - District 1: Mitte; Kreuzberg; Friedrichshain; Neukölln.
 - District 2: Prenzlauer Berg; Charlottenburg; Schöneberg; Wedding.
 - District 3: Moabit; Tiergarten; Tempelhof; Köpenick.

@@ -9,7 +9,7 @@ const BW_BATTLE_HOME_ROOT = (() => {
 
 const BW_BATTLE_HOME_GAME_URL = 'https://www.berlinwalk.com/games/berlin-battle?utm_source=home&utm_medium=section&utm_campaign=berlin_battle_home&utm_content=play';
 const BW_BATTLE_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlin_battle_home&utm_content=book';
-const BW_BATTLE_HOME_ASSET_VERSION = '2026-06-16-editorial-illustration';
+const BW_BATTLE_HOME_ASSET_VERSION = '2026-06-16-editorial-all-battles';
 
 function bwBattleHomeAsset(path, version = BW_BATTLE_HOME_ASSET_VERSION) {
   const separator = path.includes('?') ? '&' : '?';
@@ -36,9 +36,6 @@ class BWBerlinBattleHomeElement extends HTMLElement {
     const districtCover = bwBattleHomeAsset('berlin-battle/assets/topics/district-battle-cover.webp');
     const museumCover = bwBattleHomeAsset('berlin-battle/assets/topics/museum-battle-cover.webp');
     const nightCover = bwBattleHomeAsset('berlin-battle/assets/topics/night-battle-cover.webp');
-    const districtCard = bwBattleHomeAsset('berlin-battle/assets/cards/districts/kreuzberg.webp');
-    const museumCard = bwBattleHomeAsset('berlin-battle/assets/cards/museums/neues-museum.webp');
-    const nightCard = bwBattleHomeAsset('berlin-battle/assets/cards/night/rooftop-sunset.webp');
 
     this.innerHTML = `
       <style>
@@ -82,14 +79,15 @@ class BWBerlinBattleHomeElement extends HTMLElement {
 
         .bw-battle-home-inner {
           display: grid;
-          gap: 34px;
-          grid-template-columns: minmax(0, 0.86fr) minmax(420px, 0.74fr);
+          gap: 28px;
+          grid-template-columns: minmax(0, 1fr);
           margin: 0 auto;
           max-width: 1160px;
         }
 
         .bw-battle-home-copy {
           align-self: center;
+          max-width: 780px;
           min-width: 0;
         }
 
@@ -128,7 +126,6 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           display: flex;
           flex-wrap: wrap;
           gap: 12px;
-          margin-bottom: 22px;
         }
 
         .bw-battle-home-btn {
@@ -169,201 +166,16 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           transform: translateY(-2px);
         }
 
-        .bw-battle-home-proof {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 8px;
-        }
-
-        .bw-battle-home-proof span {
-          align-items: center;
-          background: #FFFFFF;
-          border: 1px solid #C5E1A5;
-          border-radius: 999px;
-          color: var(--green);
-          display: inline-flex;
-          font-size: 13px;
-          font-weight: 850;
-          min-height: 34px;
-          padding: 0 12px;
-        }
-
-        .bw-battle-home-visual {
-          align-self: stretch;
-          background:
-            linear-gradient(135deg, var(--green-dark) 0%, var(--green) 56%, var(--cream) 56%, var(--cream) 100%);
-          border: 1px solid rgba(27, 94, 32, 0.22);
-          border-radius: 8px;
-          box-shadow: 0 22px 50px rgba(18, 63, 22, 0.18);
-          color: #FFFFFF;
-          min-height: 420px;
-          overflow: hidden;
-          position: relative;
-        }
-
-        .bw-battle-home-visual-bg {
-          bottom: 0;
-          left: 0;
-          position: absolute;
-          right: 0;
-          top: 0;
-        }
-
-        .bw-battle-home-visual-bg::before {
-          background: rgba(255, 255, 255, 0.14);
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          content: "";
-          inset: 24px 28px 24px 18px;
-          position: absolute;
-          transform: rotate(-2deg);
-        }
-
-        .bw-battle-home-visual-bg::after {
-          background:
-            linear-gradient(180deg, rgba(7, 59, 22, 0.12), rgba(7, 59, 22, 0.34)),
-            repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.08) 0, rgba(255, 255, 255, 0.08) 1px, transparent 1px, transparent 52px);
-          bottom: 0;
-          content: "";
-          left: 0;
-          position: absolute;
-          right: 0;
-          top: 0;
-        }
-
-        .bw-battle-home-preview {
-          display: grid;
-          gap: 16px;
-          grid-template-rows: auto minmax(0, 1fr) auto;
-          min-height: 420px;
-          padding: 18px;
-          position: relative;
-          z-index: 1;
-        }
-
-        .bw-battle-home-preview-top {
-          align-items: center;
-          display: flex;
-          justify-content: space-between;
-          gap: 12px;
-        }
-
-        .bw-battle-home-preview-top strong {
-          color: var(--yellow);
-          font-size: 13px;
-          font-weight: 900;
-          letter-spacing: 0;
-          line-height: 1.2;
-          text-transform: uppercase;
-        }
-
-        .bw-battle-home-preview-top span {
-          color: rgba(255, 255, 255, 0.84);
-          font-size: 13px;
-          font-weight: 800;
-          line-height: 1.2;
-        }
-
-        .bw-battle-home-card-board {
-          display: grid;
-          gap: 12px;
-          grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-          grid-template-rows: repeat(2, minmax(120px, 1fr));
-          min-height: 0;
-        }
-
-        .bw-battle-home-feature-card {
-          background: #FFFFFF;
-          border: 1px solid rgba(27, 94, 32, 0.16);
-          border-radius: 8px;
-          color: var(--text);
-          display: grid;
-          grid-template-rows: minmax(0, 1fr) auto;
-          height: 100%;
-          min-width: 0;
-          opacity: 0;
-          overflow: hidden;
-          transform: translateY(14px);
-          transition: opacity 460ms ease-out, transform 460ms ease-out;
-        }
-
-        .bw-battle-home-feature-card:first-child {
-          grid-row: 1 / -1;
-          transform: rotate(-1.5deg) translateY(14px);
-        }
-
-        .bw-battle-home-feature-card:nth-child(2) {
-          transform: rotate(1deg) translateY(14px);
-        }
-
-        .bw-battle-home-feature-card:nth-child(3) {
-          transform: rotate(-0.8deg) translateY(14px);
-        }
-
-        .bw-battle-home.ready .bw-battle-home-feature-card,
         .bw-battle-home.ready .bw-battle-mode {
           opacity: 1;
           transform: translateY(0);
         }
 
-        .bw-battle-home-feature-card:nth-child(1) {
-          transition-delay: 80ms;
-        }
-
-        .bw-battle-home-feature-card:nth-child(2) {
-          transition-delay: 160ms;
-        }
-
-        .bw-battle-home-feature-card:nth-child(3) {
-          transition-delay: 240ms;
-        }
-
-        .bw-battle-home-feature-card img {
-          display: block;
-          height: 100%;
-          min-height: 0;
-          object-fit: cover;
-          width: 100%;
-        }
-
-        .bw-battle-home-feature-card span {
-          color: var(--green);
-          display: block;
-          font-size: 14px;
-          font-weight: 900;
-          line-height: 1.18;
-          padding: 11px 12px;
-        }
-
-        .bw-battle-home-result {
-          background: rgba(255, 255, 255, 0.92);
-          border-left: 6px solid var(--yellow);
-          border-radius: 8px;
-          color: var(--green);
-          padding: 14px 16px;
-        }
-
-        .bw-battle-home-result span {
-          display: block;
-          font-size: 12px;
-          font-weight: 900;
-          line-height: 1.25;
-          margin-bottom: 4px;
-          text-transform: uppercase;
-        }
-
-        .bw-battle-home-result strong {
-          display: block;
-          font-size: 24px;
-          font-weight: 900;
-          line-height: 1.1;
-        }
-
         .bw-battle-home-modes {
           display: grid;
           gap: 12px;
-          grid-column: 1 / -1;
           grid-template-columns: repeat(4, minmax(0, 1fr));
-          margin-top: 4px;
+          margin-top: 6px;
         }
 
         .bw-battle-mode {
@@ -413,16 +225,8 @@ class BWBerlinBattleHomeElement extends HTMLElement {
             padding: 58px 18px;
           }
 
-          .bw-battle-home-inner {
-            grid-template-columns: minmax(0, 1fr);
-          }
-
-          .bw-battle-home-visual {
-            min-height: 390px;
-          }
-
-          .bw-battle-home-preview {
-            min-height: 390px;
+          .bw-battle-home-modes {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
 
@@ -443,31 +247,6 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           .bw-battle-home-btn {
             padding-left: 14px;
             padding-right: 14px;
-          }
-
-          .bw-battle-home-preview {
-            gap: 14px;
-            padding: 14px;
-          }
-
-          .bw-battle-home-card-board {
-            gap: 8px;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
-            grid-template-rows: minmax(136px, 1fr);
-          }
-
-          .bw-battle-home-feature-card:first-child {
-            grid-row: auto;
-          }
-
-          .bw-battle-home-feature-card span {
-            font-size: 12px;
-            min-height: 40px;
-            padding: 9px;
-          }
-
-          .bw-battle-home-modes {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
 
           .bw-battle-mode span {
@@ -494,38 +273,6 @@ class BWBerlinBattleHomeElement extends HTMLElement {
             <div class="bw-battle-home-actions">
               <a class="bw-battle-home-btn bw-battle-home-btn-primary" href="${BW_BATTLE_HOME_GAME_URL}">Play Berlin Battle</a>
               <a class="bw-battle-home-btn bw-battle-home-btn-secondary" href="${BW_BATTLE_HOME_BOOKING_URL}">Book the walking tour</a>
-            </div>
-            <div class="bw-battle-home-proof" aria-label="Berlin Battle quick facts">
-              <span>Four battles</span>
-              <span>Personal winner</span>
-              <span>Share card</span>
-            </div>
-          </div>
-          <div class="bw-battle-home-visual" aria-label="Berlin Battle preview">
-            <div class="bw-battle-home-visual-bg" aria-hidden="true"></div>
-            <div class="bw-battle-home-preview">
-              <div class="bw-battle-home-preview-top">
-                <strong>Berlin Battle</strong>
-                <span>Choose a Berlin mood</span>
-              </div>
-              <div class="bw-battle-home-card-board" aria-hidden="true">
-                <div class="bw-battle-home-feature-card">
-                  <img src="${districtCard}" alt="" width="640" height="640" loading="lazy" decoding="async">
-                  <span>District mood</span>
-                </div>
-                <div class="bw-battle-home-feature-card">
-                  <img src="${museumCard}" alt="" width="640" height="640" loading="lazy" decoding="async">
-                  <span>Museum day</span>
-                </div>
-                <div class="bw-battle-home-feature-card">
-                  <img src="${nightCard}" alt="" width="640" height="640" loading="lazy" decoding="async">
-                  <span>Berlin night</span>
-                </div>
-              </div>
-              <div class="bw-battle-home-result">
-                <span>Your result card</span>
-                <strong>My Berlin winner</strong>
-              </div>
             </div>
           </div>
           <div class="bw-battle-home-modes" aria-label="Berlin Battle modes">

@@ -19,6 +19,12 @@ COVER_SIZE = (960, 600)
 
 
 BATCHES = {
+    "food": [
+        ("food-batch-1.png", ["currywurst", "doner-kebab", "falafel", "shawarma"]),
+        ("food-batch-2.png", ["schnitzel", "pretzel", "berliner-pfannkuchen", "boulette"]),
+        ("food-batch-3.png", ["kartoffelpuffer", "eisbein", "kasekuchen", "apfelstrudel"]),
+        ("food-batch-4.png", ["lahmacun", "vietnamese-pho", "spati-snack-run", "berliner-weisse"]),
+    ],
     "districts": [
         ("districts-batch-1.png", ["mitte", "kreuzberg", "friedrichshain", "neukolln"]),
         ("districts-batch-2.png", ["prenzlauer-berg", "charlottenburg", "schoneberg", "wedding"]),
@@ -41,6 +47,10 @@ BATCHES = {
 
 
 COVER_CARDS = {
+    "food": {
+        "file": "food-battle-cover.webp",
+        "cards": ["currywurst", "doner-kebab", "pretzel", "berliner-weisse"],
+    },
     "districts": {
         "file": "district-battle-cover.webp",
         "cards": ["mitte", "kreuzberg", "tempelhof", "kopenick"],
@@ -62,6 +72,8 @@ def font(size: int, bold: bool = True) -> ImageFont.FreeTypeFont:
 
 
 def out_path(topic: str, slug: str) -> Path:
+    if topic == "food":
+        return CARDS / f"{slug}.webp"
     if topic == "districts":
         return CARDS / "districts" / f"{slug}.webp"
     if topic == "museums":
@@ -168,7 +180,7 @@ def main() -> None:
     for topic, spec in COVER_CARDS.items():
         cover_paths.append(make_cover(topic, spec))
 
-    cover_contact = Image.new("RGB", (3 * 320, 200), "#FAFAF5")
+    cover_contact = Image.new("RGB", (len(cover_paths) * 320, 200), "#FAFAF5")
     for i, path in enumerate(cover_paths):
         img = Image.open(path).convert("RGB").resize((320, 200), Image.Resampling.LANCZOS)
         cover_contact.paste(img, (i * 320, 0))
