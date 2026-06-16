@@ -118,7 +118,8 @@
   "neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin": "neptune-fountain-berlin",
   "the-best-views-in-berlin-you-can-find-on-foot": "best-views-foot",
   "what-is-a-free-walking-tour-how-tip-based-tours-actually-work": "free-walking-tour-explainer",
-  "the-spree-river-the-waterway-that-built-berlin": "spree-river-berlin"
+  "the-spree-river-the-waterway-that-built-berlin": "spree-river-berlin",
+  "berlin-hauptbahnhof-guide": "berlin-hauptbahnhof-guide"
 };
 
   var SCHEMAS = {
@@ -2671,7 +2672,7 @@
         "name": "How much should I tip on a free walking tour in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For a tip-based walking tour, there is no fixed price. As a practical guide, EUR 5 is modest, EUR 10 is a solid common tip, and EUR 15-20 is generous for a guide who made the city click."
+          "text": "For a tip-based walking tour, there is no fixed price. As a practical guide, EUR 10 is the minimum fair tip for a good 2 hours tour, EUR 15 is strong, and EUR 20+ is generous for a guide who made the city click."
         }
       }
     ]
@@ -5397,7 +5398,7 @@
         "name": "How much should I tip on a free walking tour in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For a good 2 hours tour, EUR 10-15 per person is a fair normal tip. EUR 5 is modest but acceptable on a tight budget, and EUR 20+ is generous."
+          "text": "For a good 2 hours tour, EUR 10 per person is the minimum fair tip. EUR 15 is strong, and EUR 20+ is generous."
         }
       },
       {
@@ -5421,7 +5422,7 @@
         "name": "Is EUR 5 too little for a free walking tour?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "EUR 5 is a modest tip, not a rude one. If your budget is tight, it is better to join, learn and tip modestly than skip the tour because you feel anxious about the amount."
+          "text": "For a good 2 hours tour, EUR 5 is below the fair minimum. If your budget is genuinely tight or the tour was only okay, give what you can without embarrassment."
         }
       },
       {
@@ -5567,7 +5568,7 @@
         "name": "How much should I tip on a free walking tour in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For a good 2 hours Berlin walking tour, EUR 10-15 per person is a fair normal tip. EUR 5 is modest, and EUR 20+ is generous."
+          "text": "For a good 2 hours Berlin walking tour, EUR 10 per person is the minimum fair tip. EUR 15 is strong, and EUR 20+ is generous."
         }
       },
       {
@@ -5654,6 +5655,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. A simple route runs from Alexanderplatz through Nikolaiviertel to Liebknecht Bridge, Museum Island, Friedrichsbruecke and Hackescher Markt."
+        }
+      }
+    ]
+  },
+  "berlin-hauptbahnhof-guide": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Berlin Hauptbahnhof the same as Berlin Central Station?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin Hauptbahnhof means Berlin Central Station. It is the main long-distance rail station in Berlin and also connects to regional trains, S-Bahn, U-Bahn, trams, buses, taxis and station services."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which exit should I use at Berlin Hauptbahnhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use Europaplatz for the north side, trams, buses and many nearby hotels. Use Washingtonplatz for taxis, the Spree, the government district, the Reichstag area and walking toward Brandenburg Gate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are there luggage lockers at Berlin Hauptbahnhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin.de lists lockers at Hauptbahnhof, including car park area C and another option near the upper platforms. The Berlin.de Hauptbahnhof page gives a rough cost of EUR 4 to 6 per day depending on locker size."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get from Berlin Hauptbahnhof to Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the S-Bahn eastbound or the U5. Berlin.de says Alexanderplatz is about 10 minutes from Hauptbahnhof by S-Bahn. The U5 is also useful for Museum Island, Rotes Rathaus and the BerlinWalk meeting area."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need an AB or ABC ticket from Berlin Hauptbahnhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most central Berlin trips from Hauptbahnhof, AB is enough. Use ABC if your route includes BER Airport or Potsdam. Berlin.de lists the 2026 single ticket at EUR 4.00 for AB and EUR 5.00 for ABC."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I take a taxi from Berlin Hauptbahnhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take a taxi if you have heavy luggage, mobility needs, small children, a late arrival or a hotel that is awkward by public transport. For central sightseeing, public transport is usually the better default because Hauptbahnhof is very well connected."
         }
       }
     ]

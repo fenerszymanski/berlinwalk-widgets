@@ -525,7 +525,16 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-public-holiday-checker/",
       "embedHeight": 760,
-      "image": "https://static.wixstatic.com/media/5a08a3_1d40f7c29fc945c1bd1f3ce562050030~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_55c996d3aa9a40f8b41e7a609541cd81~mv2.png"
+    },
+    {
+      "slug": "berlin-station-arrival-planner",
+      "title": "Berlin Station Arrival Planner",
+      "lead": "Choose your Berlin arrival station, luggage situation and first destination, then get a practical first-move plan.",
+      "category": "Discovery",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-station-arrival-planner/",
+      "embedHeight": 900,
+      "image": "https://static.wixstatic.com/media/5a08a3_005e1b31e1b64d03a5c6b8cdc4ea2136~mv2.png"
     }
   ]
 }
