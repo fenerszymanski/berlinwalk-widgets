@@ -841,7 +841,7 @@
     #bw-trip-planner .bw-quiz-back,
     #bw-trip-planner .bw-quiz-next {
       align-items: center;
-      border: 0;
+      border: 1px solid transparent;
       border-radius: 8px;
       cursor: pointer;
       display: inline-flex;
@@ -855,8 +855,9 @@
     }
 
     #bw-trip-planner .bw-quiz-back {
-      background: rgba(255, 255, 255, 0.12);
-      color: var(--bw-white);
+      background: #F2F8E8;
+      border-color: var(--bw-light-green);
+      color: var(--bw-green);
     }
 
     #bw-trip-planner .bw-quiz-back:disabled {
@@ -869,6 +870,29 @@
       color: var(--bw-green);
       justify-self: stretch;
       letter-spacing: 0.7px;
+    }
+
+    #bw-trip-planner .bw-form.is-quiz-flow.is-quiz-complete.is-plan-generated .bw-quiz-nav {
+      grid-template-columns: auto auto;
+      justify-content: space-between;
+    }
+
+    #bw-trip-planner .bw-form.is-quiz-flow.is-quiz-complete.is-plan-generated .bw-quiz-next {
+      border-color: rgba(27, 94, 32, 0.18);
+      box-shadow: none;
+      font-size: 10.4px;
+      justify-self: end;
+      min-height: 38px;
+      padding: 9px 13px;
+      width: auto;
+    }
+
+    #bw-trip-planner .bw-form.is-quiz-flow.is-quiz-complete.is-plan-generated .bw-quiz-next:disabled {
+      background: #F2F8E8;
+      border-color: var(--bw-light-green);
+      color: var(--bw-muted);
+      cursor: default;
+      opacity: 0.74;
     }
 
     #bw-trip-planner .bw-form.is-quiz-flow .bw-start-card,
@@ -11057,6 +11081,7 @@
   var latestWeather = null;
   var latestDailyWeather = {};
   var planGenerated = false;
+  var planNeedsUpdate = false;
   var planningInProgress = false;
   var detailsStepStarted = false;
   var planningTimer = null;
@@ -12583,6 +12608,8 @@
     if (form) {
       form.classList.add('is-quiz-flow');
       form.classList.toggle('is-quiz-complete', quizCurrentStep >= QUIZ_STEPS.length - 1);
+      form.classList.toggle('is-plan-generated', planGenerated);
+      form.classList.toggle('is-plan-dirty', planNeedsUpdate);
     }
     if (detailsPanel) detailsPanel.hidden = false;
     if (shell) shell.hidden = Boolean(planningInProgress);
@@ -12601,19 +12628,20 @@
 
     var step = QUIZ_STEPS[quizCurrentStep] || QUIZ_STEPS[0];
     var progress = QUIZ_STEPS.length ? Math.round(((quizCurrentStep + 1) / QUIZ_STEPS.length) * 100) : 100;
+    var isLastStep = quizCurrentStep >= QUIZ_STEPS.length - 1;
     setText('[data-quiz-title]', step ? step.title : 'Build your Berlin plan');
-    setText('[data-quiz-subtitle]', step ? step.subtitle : 'Answer one thing at a time.');
+    setText('[data-quiz-subtitle]', planNeedsUpdate ? 'Changes are ready for a fresh preview.' : (step ? step.subtitle : 'Answer one thing at a time.'));
     setText('[data-quiz-count]', 'Step ' + (quizCurrentStep + 1) + ' of ' + QUIZ_STEPS.length);
-    setText('[data-quiz-preview]', quizPreviewText());
+    setText('[data-quiz-preview]', quizPreviewText() + (planNeedsUpdate ? ' Preview needs update.' : ''));
     var progressBar = root.querySelector('[data-quiz-progress]');
     if (progressBar) progressBar.style.width = progress + '%';
     var back = root.querySelector('[data-quiz-back]');
     if (back) back.disabled = quizCurrentStep <= 0 || planningInProgress;
     var next = root.querySelector('[data-quiz-next]');
     if (next) {
-      next.disabled = planningInProgress;
-      next.textContent = quizCurrentStep >= QUIZ_STEPS.length - 1
-        ? (planGenerated ? 'Update my Berlin plan' : 'Build my Berlin plan')
+      next.disabled = planningInProgress || (isLastStep && planGenerated && !planNeedsUpdate);
+      next.textContent = isLastStep
+        ? (planGenerated ? (planNeedsUpdate ? 'Update preview' : 'Preview is current') : 'Build my Berlin plan')
         : (step && step.next ? step.next : 'Next question');
     }
     trackQuizStepView(step);
@@ -17499,6 +17527,17 @@
       planningTimer = null;
     }
     planningInProgress = false;
+    if (planGenerated) {
+      planNeedsUpdate = true;
+      aiEnhancement = null;
+      aiStatus = 'idle';
+      aiRequestId += 1;
+      updatePlanningUi();
+      updateUnlockUi();
+      if (!options || !options.keepStatus) setActionStatus('');
+      return;
+    }
+    planNeedsUpdate = false;
     planGenerated = false;
     latestPlan = null;
     aiEnhancement = null;
@@ -17532,6 +17571,7 @@
     }
     planningInProgress = true;
     planGenerated = false;
+    planNeedsUpdate = false;
     latestPlan = null;
     aiEnhancement = null;
     aiStatus = 'idle';
@@ -17552,6 +17592,7 @@
       planningTimer = null;
       planningInProgress = false;
       planGenerated = true;
+      planNeedsUpdate = false;
       dayJumpDay = 1;
       routeDeckDay = 1;
       boardLens = 'route';
@@ -17605,6 +17646,7 @@
     if (unlocked) requestAiEnhancement();
     renderFullPlan();
     updateLeadPanelText(plan);
+    planNeedsUpdate = false;
     updateUnlockUi();
     updatePlanningUi();
     track('bw_trip_planner_result', {
@@ -17750,6 +17792,11 @@
     var print = root.querySelector('[data-print-plan]');
     if (pdf) pdf.disabled = !fullPlanContentReady();
     if (print) print.disabled = !fullPlanContentReady();
+    var unlockButton = root.querySelector('[data-unlock-plan]');
+    if (unlockButton) {
+      unlockButton.disabled = Boolean(planNeedsUpdate);
+      unlockButton.textContent = planNeedsUpdate ? 'Update preview first' : 'Save full plan + PDF';
+    }
     renderFullPlan();
   }
 
@@ -19197,6 +19244,11 @@
     var input = root.querySelector('[data-lead-email]');
     var button = root.querySelector('[data-unlock-plan]');
     var email = input ? input.value.trim() : '';
+    if (planNeedsUpdate) {
+      setLeadMessage('Update the preview first so the saved plan matches your latest answers.', true);
+      syncPlannerFrame(root.querySelector('[data-quiz-nav]') || root.querySelector('[data-quiz-shell]'), true);
+      return;
+    }
     track('bw_trip_planner_unlock_attempt', {
       arrival_date: state.arrivalDate,
       trip_length: state.tripLength
@@ -22285,6 +22337,7 @@
     if (!shouldOpenEmailPlan()) return;
     planningInProgress = false;
     planGenerated = true;
+    planNeedsUpdate = false;
     dayJumpDay = 1;
     routeDeckDay = 1;
     boardLens = 'route';
