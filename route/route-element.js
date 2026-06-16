@@ -78,7 +78,7 @@ class BWRouteElement extends HTMLElement {
     const localAssetBase = new URL('./assets/', BW_ROUTE_LOCAL_DATA_URL).href;
     const remoteAssetBase = 'https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/';
 
-    ['src', 'src2x'].forEach(key => {
+    ['src', 'srcMedium', 'src2x'].forEach(key => {
       if (typeof this._data.image[key] === 'string') {
         this._data.image[key] = this._data.image[key].replace(remoteAssetBase, localAssetBase);
       }
@@ -142,9 +142,13 @@ class BWRouteElement extends HTMLElement {
               <img
                 class="bw-route-map-image"
                 src="${this._escapeAttr(image.src)}"
-                srcset="${this._escapeAttr(image.src)} 1x, ${this._escapeAttr(image.src2x)} 2x"
+                srcset="${this._escapeAttr(this._imageSrcset(image))}"
+                sizes="(min-width: 1264px) 1200px, (max-width: 640px) calc(100vw - 42px), calc(100vw - 64px)"
+                width="${this._escapeAttr(image.width || 1200)}"
+                height="${this._escapeAttr(image.height || 670)}"
                 alt="${this._escapeAttr(image.alt)}"
                 loading="lazy"
+                decoding="async"
               >
               <svg class="bw-route-path-overlay" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
                 <path class="bw-route-path" d="${this._escapeAttr(this._pathD(stops))}" fill="none" />
@@ -445,6 +449,17 @@ class BWRouteElement extends HTMLElement {
 
   _compactDistance(distance) {
     return this._escapeHTML(String(distance || '~3 km').replace(/\s+/g, ''));
+  }
+
+  _imageSrcset(image) {
+    if (image.srcMedium) {
+      return [
+        `${image.src} 720w`,
+        `${image.srcMedium} 960w`,
+        `${image.src2x || image.srcMedium} 1200w`
+      ].join(', ');
+    }
+    return `${image.src} 1x, ${image.src2x || image.src} 2x`;
   }
 
   _escapeHTML(value) {

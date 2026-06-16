@@ -813,7 +813,7 @@ class BWHeaderElement extends HTMLElement {
         <header class="bw-header" role="banner">
           <div class="bw-header-inner bw-header-main">
             <a class="bw-header-logo" href="${BW_HEADER_LINKS.home}" aria-label="BerlinWalk home">
-              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" loading="eager" decoding="async">
+              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="1080" height="450" loading="eager" decoding="async">
             </a>
 
             <nav class="bw-header-nav" aria-label="Primary">
@@ -854,7 +854,7 @@ class BWHeaderElement extends HTMLElement {
         <div id="bw-header-mobile-menu" class="bw-header-mobile" aria-hidden="true" aria-label="Mobile menu">
           <div class="bw-header-mobile-inner">
             <div class="bw-header-mobile-head">
-              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk">
+              <img src="${BW_HEADER_LOGO_URL}" alt="BerlinWalk" width="1080" height="450">
               <button class="bw-header-mobile-close" type="button" aria-label="Close menu">×</button>
             </div>
 

@@ -9,7 +9,22 @@ const BW_HERO_HOME_ASSET_BASE = (() => {
 
 class BWHeroHomeElement extends HTMLElement {
   connectedCallback() {
+    this._ensureHeroPreload();
     this._render();
+  }
+
+  _ensureHeroPreload() {
+    if (!document.head || document.head.querySelector('link[data-bw-hero-home-preload]')) return;
+    const link = document.createElement('link');
+    link.setAttribute('data-bw-hero-home-preload', 'true');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = `${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.webp`;
+    link.type = 'image/webp';
+    link.setAttribute('imagesrcset', `${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.webp 800w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1200w.webp 1200w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.webp 1600w`);
+    link.setAttribute('imagesizes', '100vw');
+    link.setAttribute('fetchpriority', 'high');
+    document.head.appendChild(link);
   }
 
   _render() {
@@ -297,7 +312,7 @@ class BWHeroHomeElement extends HTMLElement {
 
         @media (max-width: 920px) {
           .bw-hero-home {
-            min-height: auto;
+            min-height: 720px;
           }
 
           .bw-hero-home .bw-hero-picture img {
@@ -311,7 +326,7 @@ class BWHeroHomeElement extends HTMLElement {
           }
 
           .bw-hero-home .bw-hero-inner {
-            min-height: 720px;
+            min-height: inherit;
             padding-top: 58px;
           }
 
@@ -331,6 +346,10 @@ class BWHeroHomeElement extends HTMLElement {
         }
 
         @media (max-width: 640px) {
+          .bw-hero-home {
+            min-height: 810px;
+          }
+
           .bw-hero-home .bw-hero-picture img {
             object-position: 58% center;
           }
@@ -342,7 +361,7 @@ class BWHeroHomeElement extends HTMLElement {
           }
 
           .bw-hero-home .bw-hero-inner {
-            min-height: 760px;
+            min-height: inherit;
             padding: 44px 16px 22px;
           }
 
@@ -427,9 +446,12 @@ class BWHeroHomeElement extends HTMLElement {
             src="${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.jpg"
             srcset="${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-800w.jpg 800w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1200w.jpg 1200w, ${BW_HERO_HOME_ASSET_BASE}hero-home-museum-island-1600w.jpg 1600w"
             sizes="100vw"
+            width="1600"
+            height="900"
             alt="BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island"
             loading="eager"
-            decoding="async">
+            decoding="async"
+            fetchpriority="high">
         </picture>
         <div class="bw-hero-overlay" aria-hidden="true"></div>
 

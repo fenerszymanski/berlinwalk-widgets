@@ -1,8 +1,11 @@
 {
   "image": {
-    "src": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration.png",
-    "src2x": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration@2x.png",
+    "src": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-720w.webp",
+    "srcMedium": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-960w.webp",
+    "src2x": "https://fenerszymanski.github.io/berlinwalk-widgets/route/assets/berlin-mitte-illustration-1200w.webp",
     "alt": "Illustrated map of central Berlin Mitte showing the BerlinWalk tour route from Alexanderplatz to Hackescher Markt",
+    "width": 1200,
+    "height": 670,
     "aspectRatio": "16:9"
   },
   "stops": [
