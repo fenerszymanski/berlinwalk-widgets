@@ -292,6 +292,75 @@ Batch order:
 - Night 3: Späti Corner; Cocktail Bar; Rooftop Sunset; Comedy Night.
 - Night 4: Late Döner Stop; Night Bus Ride; Gallery Opening; Afterhours Breakfast.
 
+## Grounded Editorial Illustration Refresh
+
+Added 2026-06-16 after Yusuf said the first promotional prompt direction felt
+too futuristic/space-like and the realistic phone-demo direction felt too real.
+Food Battle was intentionally left unchanged. District, Museum and Night Battle
+card art was refreshed in a middle-ground editorial illustration style.
+
+Generation mode:
+
+- Built-in Codex `image_gen` tool, not CLI/API fallback.
+- No OpenAI/Gemini/Sora/Veo/Content Studio paid channel was used directly.
+- Source sheets copied from the built-in generated-images folder into
+  `editorial-20260616/sheets/`.
+
+Finished outputs:
+
+- 48 refreshed card files under `../cards/districts/`, `../cards/museums/` and
+  `../cards/night/`, all exported as `640x640` WebP.
+- 3 refreshed textless topic covers under `../topics/`:
+  `district-battle-cover.webp`, `museum-battle-cover.webp` and
+  `night-battle-cover.webp`, all `960x600` WebP.
+- QA contact sheets under `editorial-20260616/contact-sheets/`.
+- Reproducible crop/composite script:
+  `../../../scripts/crop-berlin-battle-editorial-assets.py`.
+
+Reusable prompt direction:
+
+```text
+Grounded editorial illustration, modern travel poster, hand-finished drawing.
+Use visible painterly brush texture, paper grain, softened outlines, stylized
+but believable Berlin scenes/objects, warm shadows. It should clearly look
+illustrated, not like a photograph or 3D render. Premium but human.
+
+Composition: exact 2 by 2 grid, equal square cells, clear separation between
+cells, generous crop-safe margins. Each cell must work when cropped to a
+standalone 640x640 game card.
+
+Palette: BerlinWalk deep green #1B5E20, bright yellow #FFE600, lime #7CB342,
+cream #FAFAF5 and white highlights as restrained accents. Natural daylight,
+warm museum light, or warm evening. Avoid cosmic neon.
+
+Text constraints: no text, no labels, no letters, no numbers, no logos, no
+watermark, no readable signs or plaques. Do not put item names in the image.
+
+Avoid: photorealistic look, 3D render look, cyberpunk, spaceship/game arena,
+holograms, excessive glow, futuristic UI, black vignette, random real-photo
+collage, flat vector icons, distorted architecture/people, real venue logos,
+and sensational history imagery.
+```
+
+Batch order:
+
+- District 1: Mitte; Kreuzberg; Friedrichshain; Neukölln.
+- District 2: Prenzlauer Berg; Charlottenburg; Schöneberg; Wedding.
+- District 3: Moabit; Tiergarten; Tempelhof; Köpenick.
+- District 4: Spandau; Pankow; Lichtenberg; Treptow.
+- Museum 1: Neues Museum; Altes Museum; Alte Nationalgalerie; Bode-Museum.
+- Museum 2: Humboldt Forum; Jewish Museum Berlin; Berlinische Galerie;
+  Hamburger Bahnhof.
+- Museum 3: Gemäldegalerie; DDR Museum; Topography of Terror; Museum für
+  Naturkunde.
+- Museum 4: Deutsches Technikmuseum; Futurium; Urban Nation; Museum for
+  Communication.
+- Night 1: Techno Warehouse; Riverside Club; Queer Dancefloor; Punk Show.
+- Night 2: Jazz Cellar; Open-Air Rave; Karaoke Bar; Kneipe Crawl.
+- Night 3: Späti Corner; Cocktail Bar; Rooftop Sunset; Comedy Night.
+- Night 4: Late Döner Stop; Night Bus Ride; Gallery Opening; Afterhours
+  Breakfast.
+
 ## BerlinTools Icon
 
 Source files:
