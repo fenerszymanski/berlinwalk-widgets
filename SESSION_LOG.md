@@ -2,6 +2,10 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-16 — Codex (Hauptbahnhof widget deploy verified)
+
+**Did:** Verified Yusuf's publish/deploy follow-up for the Hauptbahnhof blog/tool set. **Changed:** No widget code changes; repo was clean and `main` matched `origin/main`. **QA:** GitHub Pages returned 200 for `berlin-station-arrival-planner`, Quick Summary and FAQ with `Last-Modified: Tue, 16 Jun 2026 04:24:38 GMT`; live Wix post contains all 3 widget iframes; live `/tools/berlin-station-arrival-planner` loads the station planner iframe after Wix late render; live `/berlin-tools` card links to the tool and displays dedicated icon `5a08a3_005e1b31e1b64d03a5c6b8cdc4ea2136~mv2.png` with real horizontal overflow 0. **Opened:** None. **Closed:** Hauptbahnhof widget/tool deployment is verified live.
+
 ## 2026-06-16 — Codex (Daily blog draft: Berlin Hauptbahnhof Guide)
 
 **Did:** Created local widget/blog assets for unpublished Wix draft `Berlin Hauptbahnhof Guide: Arrival, Tickets, Luggage and What to Do First`. **Changed:** Added `blog-drafts/berlin-hauptbahnhof-guide.md`, image/source pack under `blog-drafts/images/berlin-hauptbahnhof-guide/`, Quick Summary/FAQ key `berlin-hauptbahnhof-guide`, regenerated `faq/inject.js`, added post widget `berlin-station-arrival-planner/`, wired `tools-hub/data.json`, and added dedicated ChatGPT-browser icon files/manifests for `berlin-station-arrival-planner`. Wix draft ID `7298f86f-7ed4-42c2-a939-5b204a5f845a` remains `UNPUBLISHED`; BerlinTools CMS item `0e5cc8ee-ff2a-4472-9935-f61b0c34d3a2` and Layout Fixes icon map revision 22 were created/updated. **QA:** Local widget Browser QA passed desktop and 390px mobile with overflow 0; JSON/JS checks passed; Wix readback confirmed 3 embeds, 3 images including cover, alt text, SEO/social/canonical/robots/BlogPosting fields. **Opened:** Push/deploy this repo before Wix preview/live embeds serve the new QS/FAQ/widget/icon assets from GitHub Pages. **Closed:** Local widget/tool assets for the Hauptbahnhof draft are ready.
