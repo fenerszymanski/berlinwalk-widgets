@@ -275,6 +275,10 @@ class BWHeroHomeElement extends HTMLElement {
           margin-bottom: 0;
         }
 
+        .bw-hero-home .bw-route-copy-mobile {
+          display: none;
+        }
+
         .bw-hero-home .bw-hero-route strong {
           color: #FFFFFF;
           font-weight: 800;
@@ -347,7 +351,7 @@ class BWHeroHomeElement extends HTMLElement {
 
         @media (max-width: 640px) {
           .bw-hero-home {
-            min-height: 810px;
+            min-height: 930px;
           }
 
           .bw-hero-home .bw-hero-picture img {
@@ -362,7 +366,7 @@ class BWHeroHomeElement extends HTMLElement {
 
           .bw-hero-home .bw-hero-inner {
             min-height: inherit;
-            padding: 44px 16px 22px;
+            padding: 44px 16px calc(250px + env(safe-area-inset-bottom));
           }
 
           .bw-hero-home .bw-hero-content {
@@ -407,23 +411,36 @@ class BWHeroHomeElement extends HTMLElement {
             font-size: 22px;
           }
 
+          .bw-hero-home .bw-hero-bottom {
+            transform: translateY(-16px);
+          }
+
           .bw-hero-home .bw-hero-route {
-            align-items: flex-start;
-            flex-wrap: wrap;
-            padding: 12px;
+            align-items: center;
+            flex-wrap: nowrap;
+            padding: 10px 12px;
           }
 
           .bw-hero-home .bw-route-line {
             flex-basis: 40px;
-            margin-top: 4px;
           }
 
           .bw-hero-home .bw-hero-route p {
-            flex: 1 1 100%;
+            flex: 1 1 auto;
+            font-size: 12px;
+            line-height: 1.25;
+          }
+
+          .bw-hero-home .bw-route-copy-full {
+            display: none;
+          }
+
+          .bw-hero-home .bw-route-copy-mobile {
+            display: inline;
           }
 
           .bw-hero-home .bw-hero-review {
-            width: 100%;
+            display: none;
           }
         }
 
@@ -491,7 +508,7 @@ class BWHeroHomeElement extends HTMLElement {
               <span class="bw-route-dot" aria-hidden="true"></span>
               <span class="bw-route-line" aria-hidden="true"></span>
               <span class="bw-route-dot" aria-hidden="true"></span>
-              <p><strong>Starts:</strong> World Clock, Alexanderplatz. <strong>Ends:</strong> near Hackescher Markt.</p>
+              <p><span class="bw-route-copy-full"><strong>Starts:</strong> World Clock, Alexanderplatz. <strong>Ends:</strong> near Hackescher Markt.</span><span class="bw-route-copy-mobile"><strong>World Clock</strong> to <strong>Hackescher Markt</strong></span></p>
             </div>
             <a class="bw-hero-review" href="https://www.berlinwalk.com/reviews" target="_top">
               <span class="bw-hero-stars" aria-hidden="true">★★★★★</span>
