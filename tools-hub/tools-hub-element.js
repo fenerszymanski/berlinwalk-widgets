@@ -694,7 +694,7 @@ class BWToolsHubElement extends HTMLElement {
         entry.target.classList.add('visible');
         this._observer.unobserve(entry.target);
       });
-    }, { threshold: 0.3 });
+    }, { rootMargin: '0px 0px 160px 0px', threshold: 0.01 });
 
     sections.forEach((section, index) => {
       section.style.transitionDelay = `${index * 80}ms`;
