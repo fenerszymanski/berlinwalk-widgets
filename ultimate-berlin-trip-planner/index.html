@@ -10547,17 +10547,17 @@
           <div class="bw-preview-fade bw-locked-only" data-lock-box>
             <div class="bw-preview-fade-row">
               <span class="bw-preview-fade-icon" aria-hidden="true">📋</span>
-              <span class="bw-preview-fade-copy"><b>Full plan</b><strong>Later days, maps, PDF, and arrival reminders</strong><span>The personalized plan continues after email.</span></span>
+              <span class="bw-preview-fade-copy"><b>Save the full plan</b><strong>Later days, maps, PDF, and arrival reminders</strong><span>Your Day 1 preview is free here. Email only unlocks the saved phone/PDF version.</span></span>
             </div>
           </div>
 
           <div class="bw-lead-panel bw-locked-only" data-lead-panel>
             <div>
-              <h3 class="bw-lead-title">Send the full Berlin plan to yourself</h3>
-              <p class="bw-lead-copy">You already built the plan. Email yourself the full version so you do not lose it.</p>
+              <h3 class="bw-lead-title">Save the full Berlin plan</h3>
+              <p class="bw-lead-copy">Your Day 1 preview is ready below. Email yourself the full version only if you want the later days, map links, PDF, and reminders.</p>
             </div>
             <input class="bw-lead-input" data-lead-email type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email address" required>
-            <button class="bw-lead-submit" type="button" data-unlock-plan>Email me my full plan</button>
+            <button class="bw-lead-submit" type="button" data-unlock-plan>Save full plan + PDF</button>
             <p class="bw-lead-legal">No spam. Just your plan and useful arrival reminders. You can unsubscribe anytime.</p>
             <div class="bw-delivery-grid" aria-label="What arrives by email">
               <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">📆</span><span><strong>Full days</strong><span>Day 2 onward</span></span></div>
@@ -11724,7 +11724,7 @@
         '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('route') + '</span><span class="bw-preview-flow-copy"><b>First useful anchor</b><span>' + escapeHtml(tourCopy) + '</span></span>' +
       '</div>' +
       '<div class="bw-preview-flow-item">' +
-        '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('calendar') + '</span><span class="bw-preview-flow-copy"><b>Full plan</b><span>Later days, map links, PDF, and arrival reminders continue after email.</span></span>' +
+        '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('calendar') + '</span><span class="bw-preview-flow-copy"><b>Save if useful</b><span>Day 1 is visible here. Email saves later days, map links, PDF, and arrival reminders.</span></span>' +
       '</div>' +
     '</div>';
   }
@@ -11824,8 +11824,8 @@
     var blockHtml = blockCards.slice(0, 3).join('');
     var slot = plan ? tourSlotForDay(day, plan) : null;
     var cue = slot
-      ? 'Email yourself the plan for exact map links, the rest of Day 1, later days, PDF, and the ' + slot.timeLabel + ' BerlinWalk placement.'
-      : 'Email yourself the plan for exact map links, the rest of Day 1, later days, PDF, and arrival reminders.';
+      ? 'If this Day 1 looks useful, save the full phone/PDF plan for exact map links, later days, and the ' + slot.timeLabel + ' BerlinWalk placement.'
+      : 'If this Day 1 looks useful, save the full phone/PDF plan for exact map links, later days, and arrival reminders.';
 
     return '<div class="bw-preview-teaser">' +
       '<div class="bw-preview-teaser-head">' +
@@ -17725,7 +17725,7 @@
       ? ' with ' + interestHighlights.join(' and ')
       : ' with weather-aware details';
 
-    copyEl.innerHTML = 'Your Day 1 preview is ready. Email yourself the full <strong>' + daysText + ' plan</strong>' + highlightText + ', <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, offline <strong>public transport maps</strong>, and local <strong>shopping guides</strong>.';
+    copyEl.innerHTML = 'Your Day 1 preview is ready below. If it looks useful, save the full <strong>' + daysText + ' phone/PDF plan</strong>' + highlightText + ', <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, offline <strong>public transport maps</strong>, and local <strong>shopping guides</strong>.';
   }
 
   function updateUnlockUi() {
@@ -19250,7 +19250,7 @@
     }).finally(function () {
       if (button) {
         button.disabled = false;
-        button.textContent = 'Email me my full plan';
+        button.textContent = 'Save full plan + PDF';
       }
     });
   }
