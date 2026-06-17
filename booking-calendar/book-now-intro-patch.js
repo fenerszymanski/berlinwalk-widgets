@@ -35,6 +35,40 @@
     document.head.appendChild(style);
   }
 
+  function preserveAttribution(href) {
+    var url = new URL(href, window.location.href);
+    var incoming = new URL(window.location.href);
+    [
+      'utm_source',
+      'utm_medium',
+      'utm_campaign',
+      'utm_content',
+      'utm_term',
+      'utm_id',
+      'fbclid',
+      'fbc',
+      'fbp',
+    ].forEach(function (param) {
+      if (incoming.searchParams.has(param)) {
+        url.searchParams.set(param, incoming.searchParams.get(param));
+      }
+    });
+    return url.toString();
+  }
+
+  function patchBookingHref() {
+    if (!window.customElements || !customElements.get('bw-booking-calendar')) return false;
+    var Ctor = customElements.get('bw-booking-calendar');
+    var proto = Ctor && Ctor.prototype;
+    if (!proto || proto.__bwIntroHrefPatch || typeof proto._bookingHref !== 'function') return Boolean(proto && proto.__bwIntroHrefPatch);
+    var original = proto._bookingHref;
+    proto._bookingHref = function (slot) {
+      return preserveAttribution(original.call(this, slot));
+    };
+    proto.__bwIntroHrefPatch = true;
+    return true;
+  }
+
   function applyIntro() {
     var calendar = document.querySelector('bw-booking-calendar[navigation-mode="event"]:not([hide-intro])');
     if (!calendar) return false;
@@ -59,12 +93,14 @@
       if (cta.textContent.trim() === 'Reserve your spot') {
         cta.textContent = 'Continue to free reservation';
       }
+      if (cta.href) cta.href = preserveAttribution(cta.href);
     });
     return true;
   }
 
   function start() {
     installStyles();
+    patchBookingHref();
 
     var observer = null;
     function watch() {
@@ -78,7 +114,10 @@
     }
 
     if (window.customElements && customElements.whenDefined) {
-      customElements.whenDefined('bw-booking-calendar').then(watch).catch(function () {});
+      customElements.whenDefined('bw-booking-calendar').then(function () {
+        patchBookingHref();
+        watch();
+      }).catch(function () {});
     }
 
     var tries = 0;
