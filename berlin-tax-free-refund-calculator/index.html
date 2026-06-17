@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Berlin Tax Free Refund Checker | BerlinWalk</title>
+  <title>Berlin Tax Free Refund Calculator | BerlinWalk</title>
   <meta name="description" content="Check whether a Berlin shopping receipt is likely eligible for a tourist VAT refund and see what to do at BER Airport.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
-<div id="bw-taxfree-checker">
+<div id="bw-taxfree-calculator">
   <style>
     html,
     body {
@@ -22,7 +22,7 @@
       width: 100%;
     }
 
-    #bw-taxfree-checker {
+    #bw-taxfree-calculator {
       --bw-green: #1B5E20;
       --bw-green-dark: #143F17;
       --bw-yellow: #FFE600;
@@ -42,13 +42,13 @@
       width: 100%;
     }
 
-    #bw-taxfree-checker *,
-    #bw-taxfree-checker *::before,
-    #bw-taxfree-checker *::after {
+    #bw-taxfree-calculator *,
+    #bw-taxfree-calculator *::before,
+    #bw-taxfree-calculator *::after {
       box-sizing: border-box;
     }
 
-    #bw-taxfree-checker .bw-wrap {
+    #bw-taxfree-calculator .bw-wrap {
       background: var(--bw-white);
       border: 1px solid var(--bw-border);
       border-radius: 8px;
@@ -58,7 +58,7 @@
       width: 100%;
     }
 
-    #bw-taxfree-checker .bw-head {
+    #bw-taxfree-calculator .bw-head {
       background:
         linear-gradient(135deg, rgba(255, 230, 0, 0.2), rgba(124, 179, 66, 0.16)),
         var(--bw-green);
@@ -66,7 +66,7 @@
       padding: 18px 20px;
     }
 
-    #bw-taxfree-checker .bw-kicker {
+    #bw-taxfree-calculator .bw-kicker {
       color: var(--bw-yellow);
       font-size: 10px;
       font-weight: 900;
@@ -76,13 +76,13 @@
       text-transform: uppercase;
     }
 
-    #bw-taxfree-checker h2,
-    #bw-taxfree-checker h3,
-    #bw-taxfree-checker p {
+    #bw-taxfree-calculator h2,
+    #bw-taxfree-calculator h3,
+    #bw-taxfree-calculator p {
       margin-top: 0;
     }
 
-    #bw-taxfree-checker .bw-title {
+    #bw-taxfree-calculator .bw-title {
       color: var(--bw-white);
       font-size: 27px;
       font-weight: 900;
@@ -91,7 +91,7 @@
       margin: 0;
     }
 
-    #bw-taxfree-checker .bw-sub {
+    #bw-taxfree-calculator .bw-sub {
       color: #DDEFC7;
       font-size: 13.5px;
       font-weight: 650;
@@ -100,7 +100,7 @@
       max-width: 780px;
     }
 
-    #bw-taxfree-checker .bw-body {
+    #bw-taxfree-calculator .bw-body {
       background: var(--bw-cream);
       display: grid;
       gap: 16px;
@@ -108,8 +108,8 @@
       padding: 18px 20px 20px;
     }
 
-    #bw-taxfree-checker .bw-panel,
-    #bw-taxfree-checker .bw-result {
+    #bw-taxfree-calculator .bw-panel,
+    #bw-taxfree-calculator .bw-result {
       background: var(--bw-white);
       border: 1px solid var(--bw-border);
       border-radius: 8px;
@@ -117,23 +117,23 @@
       padding: 14px;
     }
 
-    #bw-taxfree-checker .bw-form {
+    #bw-taxfree-calculator .bw-form {
       display: grid;
       gap: 12px;
     }
 
-    #bw-taxfree-checker .bw-grid {
+    #bw-taxfree-calculator .bw-grid {
       display: grid;
       gap: 10px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    #bw-taxfree-checker label {
+    #bw-taxfree-calculator label {
       display: block;
       min-width: 0;
     }
 
-    #bw-taxfree-checker .bw-label {
+    #bw-taxfree-calculator .bw-label {
       color: var(--bw-green);
       display: block;
       font-size: 11px;
@@ -144,8 +144,8 @@
       text-transform: uppercase;
     }
 
-    #bw-taxfree-checker input,
-    #bw-taxfree-checker select {
+    #bw-taxfree-calculator input,
+    #bw-taxfree-calculator select {
       background: var(--bw-white);
       border: 1.5px solid var(--bw-border);
       border-radius: 8px;
@@ -158,13 +158,13 @@
       width: 100%;
     }
 
-    #bw-taxfree-checker .bw-rate-row {
+    #bw-taxfree-calculator .bw-rate-row {
       display: grid;
       gap: 8px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    #bw-taxfree-checker button {
+    #bw-taxfree-calculator button {
       -webkit-tap-highlight-color: transparent;
       background: var(--bw-white);
       border: 1.5px solid var(--bw-border);
@@ -180,26 +180,26 @@
       width: 100%;
     }
 
-    #bw-taxfree-checker button:hover {
+    #bw-taxfree-calculator button:hover {
       background: var(--bw-soft);
       border-color: var(--bw-lime);
       transform: translateY(-1px);
     }
 
-    #bw-taxfree-checker button.is-active {
+    #bw-taxfree-calculator button.is-active {
       background: var(--bw-green);
       border-color: var(--bw-green);
       color: var(--bw-white);
     }
 
-    #bw-taxfree-checker button:focus-visible,
-    #bw-taxfree-checker input:focus-visible,
-    #bw-taxfree-checker select:focus-visible {
+    #bw-taxfree-calculator button:focus-visible,
+    #bw-taxfree-calculator input:focus-visible,
+    #bw-taxfree-calculator select:focus-visible {
       outline: 3px solid rgba(255, 230, 0, 0.82);
       outline-offset: 2px;
     }
 
-    #bw-taxfree-checker .bw-note {
+    #bw-taxfree-calculator .bw-note {
       background: var(--bw-soft);
       border: 1px solid rgba(124, 179, 66, 0.32);
       border-radius: 8px;
@@ -211,14 +211,14 @@
       padding: 10px;
     }
 
-    #bw-taxfree-checker .bw-result {
+    #bw-taxfree-calculator .bw-result {
       align-self: start;
       border-color: rgba(27, 94, 32, 0.25);
       position: sticky;
       top: 12px;
     }
 
-    #bw-taxfree-checker .bw-badge {
+    #bw-taxfree-calculator .bw-badge {
       background: var(--bw-yellow);
       border-radius: 999px;
       color: var(--bw-green);
@@ -232,12 +232,12 @@
       text-transform: uppercase;
     }
 
-    #bw-taxfree-checker .bw-badge.is-no {
+    #bw-taxfree-calculator .bw-badge.is-no {
       background: #FFE1E5;
       color: var(--bw-red);
     }
 
-    #bw-taxfree-checker .bw-total {
+    #bw-taxfree-calculator .bw-total {
       color: var(--bw-green);
       font-size: 42px;
       font-weight: 900;
@@ -246,7 +246,7 @@
       margin: 0 0 8px;
     }
 
-    #bw-taxfree-checker .bw-result h3 {
+    #bw-taxfree-calculator .bw-result h3 {
       color: var(--bw-green);
       font-size: 18px;
       font-weight: 900;
@@ -254,7 +254,7 @@
       margin: 0 0 8px;
     }
 
-    #bw-taxfree-checker .bw-copy {
+    #bw-taxfree-calculator .bw-copy {
       color: var(--bw-muted);
       font-size: 13px;
       font-weight: 650;
@@ -262,13 +262,13 @@
       margin: 0 0 12px;
     }
 
-    #bw-taxfree-checker .bw-lines {
+    #bw-taxfree-calculator .bw-lines {
       display: grid;
       gap: 8px;
       margin-bottom: 12px;
     }
 
-    #bw-taxfree-checker .bw-line {
+    #bw-taxfree-calculator .bw-line {
       align-items: center;
       background: var(--bw-soft);
       border: 1px solid rgba(124, 179, 66, 0.26);
@@ -279,28 +279,28 @@
       padding: 9px 10px;
     }
 
-    #bw-taxfree-checker .bw-line span {
+    #bw-taxfree-calculator .bw-line span {
       color: var(--bw-muted);
       font-size: 12px;
       font-weight: 750;
       line-height: 1.35;
     }
 
-    #bw-taxfree-checker .bw-line strong {
+    #bw-taxfree-calculator .bw-line strong {
       color: var(--bw-green);
       font-size: 13px;
       font-weight: 900;
       white-space: nowrap;
     }
 
-    #bw-taxfree-checker .bw-steps {
+    #bw-taxfree-calculator .bw-steps {
       display: grid;
       gap: 8px;
       margin: 0;
       padding: 0;
     }
 
-    #bw-taxfree-checker .bw-step {
+    #bw-taxfree-calculator .bw-step {
       align-items: start;
       background: #FFFFFF;
       border: 1px solid rgba(124, 179, 66, 0.28);
@@ -311,7 +311,7 @@
       padding: 9px;
     }
 
-    #bw-taxfree-checker .bw-step span {
+    #bw-taxfree-calculator .bw-step span {
       align-items: center;
       background: var(--bw-green);
       border-radius: 8px;
@@ -324,7 +324,7 @@
       width: 28px;
     }
 
-    #bw-taxfree-checker .bw-step p {
+    #bw-taxfree-calculator .bw-step p {
       color: var(--bw-text);
       font-size: 12.5px;
       font-weight: 750;
@@ -332,7 +332,7 @@
       margin: 0;
     }
 
-    #bw-taxfree-checker .bw-footer {
+    #bw-taxfree-calculator .bw-footer {
       border-top: 1px solid var(--bw-border);
       color: var(--bw-muted);
       font-size: 11.5px;
@@ -343,54 +343,54 @@
     }
 
     @media (max-width: 760px) {
-      #bw-taxfree-checker .bw-body {
+      #bw-taxfree-calculator .bw-body {
         grid-template-columns: 1fr;
       }
 
-      #bw-taxfree-checker .bw-result {
+      #bw-taxfree-calculator .bw-result {
         position: static;
       }
     }
 
     @media (max-width: 520px) {
-      #bw-taxfree-checker {
+      #bw-taxfree-calculator {
         margin: 22px 0;
       }
 
-      #bw-taxfree-checker .bw-head {
+      #bw-taxfree-calculator .bw-head {
         padding: 16px 18px;
       }
 
-      #bw-taxfree-checker .bw-title {
+      #bw-taxfree-calculator .bw-title {
         font-size: 22px;
       }
 
-      #bw-taxfree-checker .bw-body {
+      #bw-taxfree-calculator .bw-body {
         gap: 12px;
         padding: 14px;
       }
 
-      #bw-taxfree-checker .bw-grid,
-      #bw-taxfree-checker .bw-rate-row {
+      #bw-taxfree-calculator .bw-grid,
+      #bw-taxfree-calculator .bw-rate-row {
         grid-template-columns: 1fr;
       }
 
-      #bw-taxfree-checker .bw-total {
+      #bw-taxfree-calculator .bw-total {
         font-size: 36px;
       }
 
-      #bw-taxfree-checker .bw-line {
+      #bw-taxfree-calculator .bw-line {
         align-items: flex-start;
         flex-direction: column;
       }
     }
   </style>
 
-  <section class="bw-wrap" aria-label="Berlin Tax Free refund checker">
+  <section class="bw-wrap" aria-label="Berlin Tax Free refund calculator">
     <header class="bw-head">
       <p class="bw-kicker">BerlinWalk.com • Money tool</p>
-      <h2 class="bw-title">Berlin Tax Free Refund Checker</h2>
-      <p class="bw-sub">Enter one receipt and your exit situation. The checker tells you whether a Berlin VAT refund is likely worth chasing and where the customs step belongs.</p>
+      <h2 class="bw-title">Berlin Tax Free Refund Calculator</h2>
+      <p class="bw-sub">Enter one receipt and your exit situation. The calculator estimates the VAT inside the price, checks the key eligibility rules and shows where the customs step belongs.</p>
     </header>
 
     <div class="bw-body">
@@ -440,7 +440,7 @@
             </label>
           </div>
 
-          <p class="bw-note">Germany's tourist VAT refund only works for eligible goods exported in personal luggage. One receipt must be at least EUR 50.01 including VAT, and customs validation is mandatory.</p>
+          <p class="bw-note">Germany's tourist VAT refund only applies to eligible retail goods that non-EU residents export in personal luggage. Each receipt must be at least EUR 50.01 including VAT, and customs must validate the export before the shop or refund operator can pay the refund.</p>
         </form>
       </div>
 
@@ -474,7 +474,7 @@
 
   <script>
     (function () {
-      var root = document.getElementById('bw-taxfree-checker');
+      var root = document.getElementById('bw-taxfree-calculator');
       if (!root) return;
 
       var state = { rate: 19 };
@@ -530,7 +530,7 @@
         fields.stepOne.textContent = 'Do not rely on the refund until the shop confirms it can issue the correct form.';
         fields.stepTwo.textContent = 'Keep every receipt anyway if you are still shopping around Berlin.';
         fields.stepThree.textContent = stepThree || 'If the case is not eligible, customs will not fix it later.';
-        fields.footer.textContent = 'This checker is a planning aid, not tax advice. The shop, customs and refund operator decide the actual outcome.';
+        fields.footer.textContent = 'This calculator is a planning aid, not tax advice. The shop, customs and refund operator decide the actual outcome.';
       }
 
       function update() {

@@ -22,7 +22,7 @@ Social description: Non-EU visitor? Here is how German VAT refunds work in Berli
 
 ## Widget Ideas
 
-- Refund eligibility checker: helps a tourist decide whether one Berlin receipt is worth taking through the tax-free process. Selected.
+- Refund calculator: helps a tourist estimate the VAT inside one Berlin receipt and decide whether it is worth taking through the tax-free process. Selected.
 - BER customs route helper: helps a tourist choose the right airport location depending on checked luggage, hand luggage and EU transfer.
 - Receipt checklist builder: helps a tourist pack receipt, form, passport, goods and travel documents before leaving for the airport.
 
@@ -105,9 +105,9 @@ First, VAT is included inside the gross price. A EUR 119 purchase at 19% VAT doe
 
 Second, refund operators and shop systems may deduct fees or pay according to their own refund table. So the amount you receive is usually lower than the maximum VAT inside the price.
 
-Use this checker before you get too excited about a receipt.
+Use this calculator before you get too excited about a receipt.
 
-{{widget:berlin-tax-free-refund-checker}}
+{{widget:berlin-tax-free-refund-calculator}}
 
 The number to remember: Tax Free is worth the effort for bigger receipts, especially if you are already leaving through the airport with time to spare. For one small purchase near the EUR 50.01 threshold, the paperwork may be more trouble than the payout.
 
