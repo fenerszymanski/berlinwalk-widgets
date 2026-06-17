@@ -642,7 +642,7 @@ class BWBookingCalendarElement extends HTMLElement {
         <div class="bw-cal-shell">
           <header class="bw-cal-head">
             <div class="bw-cal-title" role="heading" aria-level="3">${this._escape(serviceTitle)}</div>
-            <span class="bw-cal-note">Free reservation, no upfront payment</span>
+            <span class="bw-cal-note">Free reservation. Tip at the end. Phone is only for tour-day coordination.</span>
           </header>
           <div class="bw-cal-body">
             ${loading ? '<div class="bw-cal-message">Loading real tour availability...</div>' : ''}
@@ -674,7 +674,7 @@ class BWBookingCalendarElement extends HTMLElement {
           </div>
           <footer class="bw-cal-summary">
             <span class="bw-cal-selected">${selectedText}</span>
-            <span class="bw-cal-next-note">You'll choose the number of attendees on the next step.</span>
+            <span class="bw-cal-next-note">Attendees + phone on the next step. Phone is only for tour-day coordination.</span>
             ${selectedSlot
               ? `<a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</a>`
               : `<span class="bw-cal-cta is-disabled" aria-disabled="true">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</span>`}

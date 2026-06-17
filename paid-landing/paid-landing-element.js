@@ -78,7 +78,7 @@
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="bw-paid-landing" style="--bw-paid-hero-image: url('${heroImage}'); --bw-paid-route-image: url('${routeImage}'); --bw-paid-guide-image: url('${guideImage}');">
-          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Free to reserve - Daily 11:30 - World Clock, Alexanderplatz</div>
+          <div class="bw-paid-top-strip">9.8 / 10 on FreeTour - Free reservation - ~2h - Tue-Sat 11:30 - From 3 July 2026: 11:30 + 15:30</div>
 
           <section class="bw-paid-hero" id="bw-paid-book">
             <div class="bw-paid-inner">
@@ -108,7 +108,7 @@
                 <aside class="bw-paid-booking-panel" id="bw-paid-calendar" aria-label="Pick your tour date">
                   <div class="bw-paid-booking-above">
                     <strong>Live availability</strong>
-                    <span>Free reservation, details next</span>
+                    <span>Free reservation. Tip at the end. Phone is only for tour-day coordination.</span>
                   </div>
                   <bw-booking-calendar
                     availability-days="${this.getAttribute('availability-days') || '365'}"
