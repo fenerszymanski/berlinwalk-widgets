@@ -1553,6 +1553,19 @@
       "Use the station arrival planner below if you are choosing between hotel, luggage, sightseeing, the tour meeting point or BER Airport."
     ]
   },
+  "tax-free-shopping-berlin-vat-refund": {
+    "title": "Tax Free Shopping in Berlin - Quick Summary",
+    "icon": "🧾",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**Tax Free shopping in Berlin means a VAT refund on eligible goods, not an automatic 19% discount at the till.**",
+      "**You usually need permanent residence outside the EU, a participating shop, eligible retail goods and one receipt of at least EUR 50.01 including VAT.**",
+      "**Services do not count:** hotels, restaurants, train tickets, tours, museum tickets and food eaten in Germany are not normal Tax Free shopping purchases.",
+      "**Ask for the tax-free form before or during purchase,** then keep the form, receipt, passport, travel documents and unused goods together.",
+      "**Customs validation is mandatory before leaving the EU.** At BER, checked baggage and hand luggage can send you to different customs points, so decide before packing.",
+      "**Your real payout is usually lower than the VAT inside the price,** because shops or refund operators may deduct fees."
+    ]
+  },
   "berlin-with-kids": {
     "title": "Berlin with Kids - Quick Summary",
     "icon": "🧒",

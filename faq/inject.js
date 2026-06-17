@@ -120,7 +120,8 @@
   "what-is-a-free-walking-tour-how-tip-based-tours-actually-work": "free-walking-tour-explainer",
   "the-spree-river-the-waterway-that-built-berlin": "spree-river-berlin",
   "berlin-hauptbahnhof-guide": "berlin-hauptbahnhof-guide",
-  "berlin-with-kids": "berlin-with-kids"
+  "berlin-with-kids": "berlin-with-kids",
+  "tax-free-shopping-berlin-vat-refund": "tax-free-shopping-berlin-vat-refund"
 };
 
   var SCHEMAS = {
@@ -5710,6 +5711,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Take a taxi if you have heavy luggage, mobility needs, small children, a late arrival or a hotel that is awkward by public transport. For central sightseeing, public transport is usually the better default because Hauptbahnhof is very well connected."
+        }
+      }
+    ]
+  },
+  "tax-free-shopping-berlin-vat-refund": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can tourists get a VAT refund when shopping in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if they meet the conditions. The usual case is a traveler whose permanent residence is outside the EU, buying eligible retail goods from a participating shop, with one receipt of at least EUR 50.01 including VAT and customs validation before leaving the EU."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I get the full 19% VAT back?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually no. German standard VAT is 19%, but VAT is already inside the gross price, and refund companies or shop systems may deduct fees. Treat Tax Free shopping as a partial refund, not a clean 19% discount."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What purchases do not qualify for Tax Free shopping?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Services and things used in Germany normally do not qualify. Hotels, restaurants, cafe bills, train tickets, tours, museum tickets, club nights and food eaten in Berlin are not standard Tax Free shopping purchases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I ask for the tax-free form?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ask before or during the purchase. A retailer's refund process is voluntary, so do not assume you can return days later and get the paperwork fixed. Check your receipt and form before leaving the shop."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I validate a VAT refund at BER Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your luggage and route. If the goods are in checked baggage, handle customs before the bag disappears. If BER is your last EU airport and the goods are in hand luggage, follow the airport customs and refund-counter signs after security. If you transfer through another EU airport with the goods in hand luggage, validation usually belongs at the last EU exit airport."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to show the goods to customs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, you should be ready to show the unused goods, receipt, tax-free form, passport and travel documents. If the goods are already checked in or already used, your refund can fail."
         }
       }
     ]

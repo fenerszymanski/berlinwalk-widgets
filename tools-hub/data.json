@@ -510,6 +510,16 @@
       "image": "https://static.wixstatic.com/media/5a08a3_7b199fe54d6a4f9d86224419e105cc51~mv2.png"
     },
     {
+      "slug": "berlin-tax-free-refund-checker",
+      "title": "Berlin Tax Free Refund Checker",
+      "lead": "Check whether a Berlin shopping receipt is likely eligible for a tourist VAT refund and see the customs step before you leave Germany.",
+      "category": "Money",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-tax-free-refund-checker/",
+      "embedHeight": 920,
+      "status": "draft",
+      "published": false
+    },
+    {
       "slug": "berlin-taxi-uber-cost-checker",
       "title": "Berlin Taxi or Uber Cost Checker",
       "lead": "Estimate a Berlin taxi fare, compare it with public transport, and decide when an app quote is worth checking.",

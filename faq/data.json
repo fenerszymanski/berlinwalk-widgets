@@ -3457,6 +3457,35 @@
       }
     ]
   },
+  "tax-free-shopping-berlin-vat-refund": {
+    "title": "Tax Free Shopping in Berlin - FAQ",
+    "items": [
+      {
+        "q": "Can tourists get a VAT refund when shopping in Berlin?",
+        "a": "Yes, if they meet the conditions. The usual case is a traveler whose permanent residence is outside the EU, buying eligible retail goods from a participating shop, with one receipt of at least **EUR 50.01 including VAT** and customs validation before leaving the EU."
+      },
+      {
+        "q": "Do I get the full 19% VAT back?",
+        "a": "Usually no. German standard VAT is **19%**, but VAT is already inside the gross price, and refund companies or shop systems may deduct fees. Treat Tax Free shopping as a partial refund, not a clean 19% discount."
+      },
+      {
+        "q": "What purchases do not qualify for Tax Free shopping?",
+        "a": "Services and things used in Germany normally do not qualify. Hotels, restaurants, cafe bills, train tickets, tours, museum tickets, club nights and food eaten in Berlin are not standard Tax Free shopping purchases."
+      },
+      {
+        "q": "When should I ask for the tax-free form?",
+        "a": "Ask before or during the purchase. A retailer's refund process is voluntary, so do not assume you can return days later and get the paperwork fixed. Check your receipt and form before leaving the shop."
+      },
+      {
+        "q": "Where do I validate a VAT refund at BER Airport?",
+        "a": "It depends on your luggage and route. If the goods are in checked baggage, handle customs before the bag disappears. If BER is your last EU airport and the goods are in hand luggage, follow the airport customs and refund-counter signs after security. If you transfer through another EU airport with the goods in hand luggage, validation usually belongs at the last EU exit airport."
+      },
+      {
+        "q": "Do I need to show the goods to customs?",
+        "a": "Yes, you should be ready to show the unused goods, receipt, tax-free form, passport and travel documents. If the goods are already checked in or already used, your refund can fail."
+      }
+    ]
+  },
   "berlin-with-kids": {
     "title": "Berlin with Kids - FAQ",
     "items": [

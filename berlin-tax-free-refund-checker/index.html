@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Tax Free Refund Checker | BerlinWalk</title>
+  <meta name="description" content="Check whether a Berlin shopping receipt is likely eligible for a tourist VAT refund and see what to do at BER Airport.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-taxfree-checker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-taxfree-checker {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #143F17;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-soft: #F2F8E8;
+      --bw-border: #DCE8C8;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-cream: #FAFAF5;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-taxfree-checker *,
+    #bw-taxfree-checker *::before,
+    #bw-taxfree-checker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-taxfree-checker .bw-wrap {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      max-width: 100%;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-taxfree-checker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.2), rgba(124, 179, 66, 0.16)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 18px 20px;
+    }
+
+    #bw-taxfree-checker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-taxfree-checker h2,
+    #bw-taxfree-checker h3,
+    #bw-taxfree-checker p {
+      margin-top: 0;
+    }
+
+    #bw-taxfree-checker .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-taxfree-checker .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 780px;
+    }
+
+    #bw-taxfree-checker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.74fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-taxfree-checker .bw-panel,
+    #bw-taxfree-checker .bw-result {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-taxfree-checker .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-taxfree-checker .bw-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-taxfree-checker label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-taxfree-checker .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.05px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-taxfree-checker input,
+    #bw-taxfree-checker select {
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 850;
+      min-height: 44px;
+      padding: 9px 10px;
+      width: 100%;
+    }
+
+    #bw-taxfree-checker .bw-rate-row {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-taxfree-checker button {
+      -webkit-tap-highlight-color: transparent;
+      background: var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 900;
+      min-height: 44px;
+      padding: 9px 10px;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+      width: 100%;
+    }
+
+    #bw-taxfree-checker button:hover {
+      background: var(--bw-soft);
+      border-color: var(--bw-lime);
+      transform: translateY(-1px);
+    }
+
+    #bw-taxfree-checker button.is-active {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-taxfree-checker button:focus-visible,
+    #bw-taxfree-checker input:focus-visible,
+    #bw-taxfree-checker select:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-taxfree-checker .bw-note {
+      background: var(--bw-soft);
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-taxfree-checker .bw-result {
+      align-self: start;
+      border-color: rgba(27, 94, 32, 0.25);
+      position: sticky;
+      top: 12px;
+    }
+
+    #bw-taxfree-checker .bw-badge {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+      padding: 5px 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-taxfree-checker .bw-badge.is-no {
+      background: #FFE1E5;
+      color: var(--bw-red);
+    }
+
+    #bw-taxfree-checker .bw-total {
+      color: var(--bw-green);
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1;
+      margin: 0 0 8px;
+    }
+
+    #bw-taxfree-checker .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 900;
+      line-height: 1.22;
+      margin: 0 0 8px;
+    }
+
+    #bw-taxfree-checker .bw-copy {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0 0 12px;
+    }
+
+    #bw-taxfree-checker .bw-lines {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    #bw-taxfree-checker .bw-line {
+      align-items: center;
+      background: var(--bw-soft);
+      border: 1px solid rgba(124, 179, 66, 0.26);
+      border-radius: 8px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      padding: 9px 10px;
+    }
+
+    #bw-taxfree-checker .bw-line span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    #bw-taxfree-checker .bw-line strong {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    #bw-taxfree-checker .bw-steps {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-taxfree-checker .bw-step {
+      align-items: start;
+      background: #FFFFFF;
+      border: 1px solid rgba(124, 179, 66, 0.28);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 28px minmax(0, 1fr);
+      padding: 9px;
+    }
+
+    #bw-taxfree-checker .bw-step span {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-yellow);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 900;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
+    }
+
+    #bw-taxfree-checker .bw-step p {
+      color: var(--bw-text);
+      font-size: 12.5px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-taxfree-checker .bw-footer {
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 12px 0 0;
+      padding-top: 10px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-taxfree-checker .bw-body {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-taxfree-checker .bw-result {
+        position: static;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-taxfree-checker {
+        margin: 22px 0;
+      }
+
+      #bw-taxfree-checker .bw-head {
+        padding: 16px 18px;
+      }
+
+      #bw-taxfree-checker .bw-title {
+        font-size: 22px;
+      }
+
+      #bw-taxfree-checker .bw-body {
+        gap: 12px;
+        padding: 14px;
+      }
+
+      #bw-taxfree-checker .bw-grid,
+      #bw-taxfree-checker .bw-rate-row {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-taxfree-checker .bw-total {
+        font-size: 36px;
+      }
+
+      #bw-taxfree-checker .bw-line {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <section class="bw-wrap" aria-label="Berlin Tax Free refund checker">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk.com • Money tool</p>
+      <h2 class="bw-title">Berlin Tax Free Refund Checker</h2>
+      <p class="bw-sub">Enter one receipt and your exit situation. The checker tells you whether a Berlin VAT refund is likely worth chasing and where the customs step belongs.</p>
+    </header>
+
+    <div class="bw-body">
+      <div class="bw-panel">
+        <form class="bw-form" onsubmit="return false;">
+          <div class="bw-grid">
+            <label>
+              <span class="bw-label">Receipt total</span>
+              <input data-field="amount" type="number" min="0" step="1" value="120" inputmode="decimal" aria-label="Receipt total in euros including VAT">
+            </label>
+            <label>
+              <span class="bw-label">Traveler residence</span>
+              <select data-field="residence" aria-label="Permanent residence">
+                <option value="non-eu">Outside the EU</option>
+                <option value="eu">EU resident</option>
+                <option value="ni">Northern Ireland resident</option>
+                <option value="permit">German residence permit over 3 months</option>
+              </select>
+            </label>
+          </div>
+
+          <div>
+            <span class="bw-label">VAT rate on the receipt</span>
+            <div class="bw-rate-row" role="group" aria-label="VAT rate">
+              <button type="button" class="is-active" data-rate="19">19% standard goods</button>
+              <button type="button" data-rate="7">7% reduced goods</button>
+            </div>
+          </div>
+
+          <div class="bw-grid">
+            <label>
+              <span class="bw-label">Purchase type</span>
+              <select data-field="purchaseType" aria-label="Purchase type">
+                <option value="goods">Unused retail goods</option>
+                <option value="used">Goods already used in Germany</option>
+                <option value="services">Services, hotel, food eaten, tours</option>
+              </select>
+            </label>
+            <label>
+              <span class="bw-label">Exit and luggage</span>
+              <select data-field="exitType" aria-label="Exit route and luggage">
+                <option value="ber-hand">BER is my last EU airport, hand luggage</option>
+                <option value="ber-checked">BER checked luggage or oversized baggage</option>
+                <option value="eu-transfer">I transfer through another EU airport</option>
+                <option value="unsure">Not sure yet</option>
+              </select>
+            </label>
+          </div>
+
+          <p class="bw-note">Germany's tourist VAT refund only works for eligible goods exported in personal luggage. One receipt must be at least EUR 50.01 including VAT, and customs validation is mandatory.</p>
+        </form>
+      </div>
+
+      <aside class="bw-result" aria-live="polite">
+        <span class="bw-badge" data-field="badge">Likely eligible</span>
+        <p class="bw-total" data-field="vatValue">EUR 19.16</p>
+        <h3 data-field="resultTitle">Maximum VAT inside this receipt</h3>
+        <p class="bw-copy" data-field="resultCopy">This is the VAT included in the price before refund-company or shop fees. Your real payout is usually lower.</p>
+        <div class="bw-lines">
+          <div class="bw-line"><span>Receipt threshold</span><strong data-field="threshold">Passes</strong></div>
+          <div class="bw-line"><span>Reader action</span><strong data-field="action">Ask for the form</strong></div>
+        </div>
+        <div class="bw-steps">
+          <div class="bw-step">
+            <span>1</span>
+            <p data-field="stepOne">Ask the shop for a tax-free form before or during purchase.</p>
+          </div>
+          <div class="bw-step">
+            <span>2</span>
+            <p data-field="stepTwo">Keep the receipt, form, passport, travel documents and unused goods together.</p>
+          </div>
+          <div class="bw-step">
+            <span>3</span>
+            <p data-field="stepThree">At BER, validate before you leave the EU, then use the refund counter or mail/app process.</p>
+          </div>
+        </div>
+        <p class="bw-footer" data-field="footer">The shop must participate. Customs validates export; the shop or refund operator pays the refund.</p>
+      </aside>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-taxfree-checker');
+      if (!root) return;
+
+      var state = { rate: 19 };
+      var fields = {
+        amount: root.querySelector('[data-field="amount"]'),
+        residence: root.querySelector('[data-field="residence"]'),
+        purchaseType: root.querySelector('[data-field="purchaseType"]'),
+        exitType: root.querySelector('[data-field="exitType"]'),
+        badge: root.querySelector('[data-field="badge"]'),
+        vatValue: root.querySelector('[data-field="vatValue"]'),
+        resultTitle: root.querySelector('[data-field="resultTitle"]'),
+        resultCopy: root.querySelector('[data-field="resultCopy"]'),
+        threshold: root.querySelector('[data-field="threshold"]'),
+        action: root.querySelector('[data-field="action"]'),
+        stepOne: root.querySelector('[data-field="stepOne"]'),
+        stepTwo: root.querySelector('[data-field="stepTwo"]'),
+        stepThree: root.querySelector('[data-field="stepThree"]'),
+        footer: root.querySelector('[data-field="footer"]')
+      };
+
+      function money(value) {
+        return 'EUR ' + Math.max(0, value).toFixed(2);
+      }
+
+      function amount() {
+        var value = parseFloat(fields.amount.value);
+        return Number.isFinite(value) ? Math.max(0, value) : 0;
+      }
+
+      function setBadge(ok, text) {
+        fields.badge.textContent = text;
+        fields.badge.classList.toggle('is-no', !ok);
+      }
+
+      function routeAdvice(exitType) {
+        if (exitType === 'ber-checked') {
+          return 'For checked or oversized baggage at BER, start at the customs office in Terminal 1, level E2 Gallery after check-in, before the bag disappears.';
+        }
+        if (exitType === 'eu-transfer') {
+          return 'If your goods stay in hand luggage and you transfer through another EU airport, customs validation usually belongs at your last EU airport, not at BER.';
+        }
+        if (exitType === 'unsure') {
+          return 'Decide before packing: checked baggage needs customs before bag drop; hand luggage is validated at the last EU exit airport.';
+        }
+        return 'If BER is your last EU airport and the goods are in hand luggage, follow the airport signs for customs and the refund counters after security.';
+      }
+
+      function fail(message, action, stepThree) {
+        setBadge(false, 'Check first');
+        fields.resultTitle.textContent = 'Not a clean refund case';
+        fields.resultCopy.textContent = message;
+        fields.action.textContent = action;
+        fields.stepOne.textContent = 'Do not rely on the refund until the shop confirms it can issue the correct form.';
+        fields.stepTwo.textContent = 'Keep every receipt anyway if you are still shopping around Berlin.';
+        fields.stepThree.textContent = stepThree || 'If the case is not eligible, customs will not fix it later.';
+        fields.footer.textContent = 'This checker is a planning aid, not tax advice. The shop, customs and refund operator decide the actual outcome.';
+      }
+
+      function update() {
+        var gross = amount();
+        var maxVat = gross * state.rate / (100 + state.rate);
+        var residence = fields.residence.value;
+        var purchaseType = fields.purchaseType.value;
+        var exitType = fields.exitType.value;
+        var overThreshold = gross >= 50.01;
+
+        fields.vatValue.textContent = money(maxVat);
+        fields.threshold.textContent = overThreshold ? 'Passes' : 'Too low';
+
+        if (!overThreshold) {
+          fail('A single German receipt must be at least EUR 50.01 including VAT. Combining separate receipts is not the safe assumption.', 'Skip this receipt');
+        } else if (residence !== 'non-eu') {
+          fail('Germany\'s tourist VAT refund is for travelers whose permanent residence is outside the EU. Northern Ireland and longer German residence-permit cases need special caution.', 'Probably no refund');
+        } else if (purchaseType === 'services') {
+          fail('Tax Free shopping is for eligible retail goods, not hotel stays, restaurant meals, train tickets, tours or services used in Germany.', 'No goods refund');
+        } else if (purchaseType === 'used') {
+          fail('The goods should leave Germany unused and available for customs inspection. If you already used or consumed them, the refund can fail.', 'Keep goods unused');
+        } else {
+          setBadge(true, 'Likely eligible');
+          fields.resultTitle.textContent = 'Maximum VAT inside this receipt';
+          fields.resultCopy.textContent = 'This is the VAT included in the price before refund-company or shop fees. Your real payout is usually lower.';
+          fields.action.textContent = 'Ask for the form';
+          fields.stepOne.textContent = 'Before or during purchase, ask whether the shop participates in Tax Free shopping and can issue the form.';
+          fields.stepTwo.textContent = 'Keep the receipt, tax-free form, passport, travel documents and unused goods together.';
+          fields.stepThree.textContent = routeAdvice(exitType);
+          fields.footer.textContent = 'Customs validates export; the shop or refund operator pays the refund. Export must happen within the official time limit.';
+        }
+
+        if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.postResize === 'function') {
+          window.BerlinWalkBrand.postResize();
+        }
+      }
+
+      root.querySelectorAll('button[data-rate]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.rate = Number(button.getAttribute('data-rate'));
+          root.querySelectorAll('button[data-rate]').forEach(function (other) {
+            other.classList.toggle('is-active', other === button);
+          });
+          update();
+        });
+      });
+
+      ['input', 'change'].forEach(function (eventName) {
+        root.addEventListener(eventName, update);
+      });
+
+      update();
+    }());
+  </script>
+</div>
+</body>
+</html>

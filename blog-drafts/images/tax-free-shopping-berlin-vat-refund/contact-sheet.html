@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tax Free Shopping in Berlin - Visual Contact Sheet</title>
+  <style>
+    body {
+      background: #FAFAF5;
+      color: #212121;
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+    }
+    h1 {
+      color: #1B5E20;
+      font-size: 26px;
+      line-height: 1.2;
+      margin: 0 0 18px;
+    }
+    .grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 1180px;
+    }
+    figure {
+      background: #fff;
+      border: 1px solid #DCE8C8;
+      border-radius: 8px;
+      margin: 0;
+      overflow: hidden;
+    }
+    img {
+      aspect-ratio: 16 / 9;
+      display: block;
+      height: auto;
+      object-fit: cover;
+      width: 100%;
+    }
+    figcaption {
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+      padding: 10px 12px 12px;
+    }
+    strong {
+      color: #1B5E20;
+    }
+    @media (max-width: 720px) {
+      body { padding: 14px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <h1>Tax Free Shopping in Berlin - Visual Contact Sheet</h1>
+  <div class="grid">
+    <figure>
+      <img src="assets/optimized/01-tax-free-shopping-berlin-kadewe-cover.jpg" alt="">
+      <figcaption><strong>Cover:</strong> KaDeWe shopping landmark, strong first-viewport signal.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/optimized/02-tax-free-shopping-berlin-tauentzienstrasse.jpg" alt="">
+      <figcaption><strong>Shopping area:</strong> wider west-side retail context for serious purchases.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/optimized/03-tax-free-refund-ber-airport-customs.jpg" alt="">
+      <figcaption><strong>Airport process:</strong> customs validation at BER Terminal 1.</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/optimized/04-tax-free-berlin-flea-market-warning.jpg" alt="">
+      <figcaption><strong>Non-clean case:</strong> flea markets are good Berlin experiences, not reliable refund paperwork.</figcaption>
+    </figure>
+  </div>
+</body>
+</html>
