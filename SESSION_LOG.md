@@ -2,6 +2,10 @@
 
 Rolling log of agent sessions. Most recent at top.
 
+## 2026-06-17 — Codex (World Cup fixtures late score)
+
+**Did:** World Cup fixtures widget için Berlin saati 23:31 skor kontrolünde 1 yeni final skor eklendi: Portugal 1-1 DR Congo. **Changed:** `worldcup-fixtures/index.html` içindeki Portugal-DR Congo `M` satırı 8 alanlı `FT` satıra çevrildi; `SCORE_UPDATED` `17 Jun 2026, 23:31 CEST` yapıldı. **QA:** FIFA match centre bulundu; ESPN final score, Guardian match report/live ve FOX Sports box score 1-1 finalini doğruladı. Inline JS parse smoke 72 maç / 21 skorlu satır geçti; yerel Playwright desktop ve 390px mobilde `.bw-match.final` = 21, Portugal 1-1 DR Congo görünür, horizontal overflow = 0; tek konsol hatası lokal favicon 404; `git diff --check` temiz. **Opened:** Live GitHub Pages için push/deploy gerekiyor. **Closed:** 17 Haziran geç akşam skoru yerel widget kaynak dosyasında güncel.
+
 ## 2026-06-17 — Codex (Tax Free calculator published)
 
 **Did:** Published the Tax Free Shopping post and completed the renamed `Berlin Tax Free Refund Calculator` BerlinTools workflow. **Changed:** Renamed/wired `berlin-tax-free-refund-calculator/`, updated `tools-hub/data.json` from draft to public with Wix icon `https://static.wixstatic.com/media/5a08a3_7fd32bcdfd414f80b268136e09ec22da~mv2.png`, regenerated `blog-index/data.json` with 129 posts, added ChatGPT-browser glossy icon source/output plus 512/160 PNGs, updated both icon manifests and Wix upload cache/summary, and added live QA screenshots under `output/playwright/`. Root Wix work created BerlinTools CMS item `da2b343f-338e-4bf9-8831-b3c7d0cd85f7`, updated BerlinTools Layout Fixes embed to revision `25`, and published the Wix site. Commits `97842f9` and `ac39fbe` were pushed to `origin/main`. **QA:** JSON/inline script/diff checks passed; GitHub Pages readback served the new public tool data; live post/tool/hub mobile QA passed with calculator iframe/card/icon and horizontal overflow `0`. **Opened:** Sitewide live blog console has unrelated `blog-journey-inject.js` TypeError noise. **Closed:** Tax Free calculator is public on GitHub Pages and live in BerlinTools.
