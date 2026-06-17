@@ -13,15 +13,18 @@ Social description: Museums, playgrounds, transport rules and a realistic family
 
 ## Image plan
 
-1. **HERO / cover** - `01-berlin-with-kids-naturkundemuseum-cover.jpg`
-   - Alt text: `Dinosaur skeletons inside the Museum fur Naturkunde in Berlin, a strong first stop for families visiting Berlin with kids`
+1. **HERO / cover** - `01-berlin-with-kids-family-alexanderplatz-cover.jpg`
+   - Alt text: `A family walking through Alexanderplatz at golden hour with the Berlin TV Tower above them`
+   - Credit: Rajeev Singh / Pexels
+2. **Inline image** - `02-berlin-with-kids-naturkundemuseum-dinosaur-hall.jpg`
+   - Alt text: `Dinosaur skeletons inside the Museum fur Naturkunde in Berlin, a strong indoor stop for families visiting Berlin with kids`
    - Credit: Raimond Spekking / Wikimedia Commons / CC BY-SA 4.0
-2. **Inline image** - `02-berlin-with-kids-playground.jpg`
-   - Alt text: `A modern playground structure in a Berlin park, useful for planning breaks when visiting Berlin with kids`
-   - Credit: Hans Keim / Pexels
-3. **Inline image** - `03-berlin-with-kids-zoo-gate.jpg`
-   - Alt text: `The decorative Elephant Gate at Zoo Berlin, one of the classic family attractions in Berlin`
-   - Credit: Manfred Bruckels / Wikimedia Commons / CC BY-SA 3.0
+3. **Inline image** - `03-berlin-with-kids-urban-playground.jpg`
+   - Alt text: `A bright urban playground with slides and open space, useful for planning family breaks in Berlin`
+   - Credit: Murat Halici / Pexels
+4. **Inline image** - `04-berlin-with-kids-zoo-gate.jpg`
+   - Alt text: `The ornate Elephant Gate at Zoo Berlin, one of the classic family attractions in Berlin`
+   - Credit: Sebastian Luna / Pexels
 
 ## Widget Plan
 
@@ -29,6 +32,10 @@ Social description: Museums, playgrounds, transport rules and a realistic family
 - FAQ key: `berlin-with-kids`
 - Post-specific widget: `berlin-family-day-planner`
 - Tool category: Discovery
+- Widget ideas considered:
+  - `berlin-family-day-planner`: lets parents choose age range, weather, base area and energy level, then returns a realistic half-day or full-day plan. Chosen because it directly supports the article's main decision.
+  - `berlin-kids-transport-ticket-helper`: would explain child ticket rules and AB/ABC zone choices for family groups, but overlaps existing transport/ticket tools.
+  - `berlin-family-rain-plan-switcher`: would turn an outdoor family day into a low-transfer rainy-day version, useful but narrower than the planner.
 
 ## Draft
 
@@ -182,4 +189,4 @@ For a first city-centre history layer, my route from Alexanderplatz to Hackesche
 
 ## Image Credits
 
-Cover image: Museum fur Naturkunde dinosaur hall by Raimond Spekking, via Wikimedia Commons, CC BY-SA 4.0. Playground image: Hans Keim, via Pexels. Zoo Berlin Elephant Gate image: Manfred Bruckels, via Wikimedia Commons, CC BY-SA 3.0.
+Cover image: family at Alexanderplatz by Rajeev Singh, via Pexels. Museum fur Naturkunde dinosaur hall by Raimond Spekking, via Wikimedia Commons, CC BY-SA 4.0. Playground image by Murat Halici, via Pexels. Zoo Berlin Elephant Gate by Sebastian Luna, via Pexels.

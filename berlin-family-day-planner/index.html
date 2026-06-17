@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Family Day Planner | BerlinWalk</title>
-  <meta name="description" content="Build a kid-friendly Berlin day plan by age, weather, pace and starting area.">
+  <meta name="description" content="Build a kid-friendly Berlin day plan by age, weather, pace, day type and starting area.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -76,6 +76,7 @@
 
     #bw-family-planner h2,
     #bw-family-planner h3,
+    #bw-family-planner h4,
     #bw-family-planner p {
       margin-top: 0;
     }
@@ -95,30 +96,39 @@
       font-weight: 650;
       line-height: 1.55;
       margin: 9px 0 0;
-      max-width: 840px;
+      max-width: 860px;
     }
 
     #bw-family-planner .bw-body {
       background: var(--bw-cream);
       display: grid;
       gap: 16px;
-      grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.18fr);
+      grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
       padding: 18px 20px 20px;
     }
 
     #bw-family-planner .bw-panel,
     #bw-family-planner .bw-result,
-    #bw-family-planner .bw-card {
+    #bw-family-planner .bw-card,
+    #bw-family-planner .bw-health-card {
       background: var(--bw-white);
       border: 1px solid var(--bw-border);
       border-radius: 8px;
       min-width: 0;
+    }
+
+    #bw-family-planner .bw-panel,
+    #bw-family-planner .bw-result {
       padding: 14px;
     }
 
     #bw-family-planner .bw-form {
       display: grid;
       gap: 12px;
+    }
+
+    #bw-family-planner .bw-panel {
+      align-self: start;
     }
 
     #bw-family-planner label {
@@ -147,7 +157,7 @@
       border-radius: 8px;
       color: var(--bw-text);
       font: inherit;
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 850;
       line-height: 1.25;
       min-height: 44px;
@@ -156,7 +166,8 @@
     }
 
     #bw-family-planner select:focus-visible,
-    #bw-family-planner button:focus-visible {
+    #bw-family-planner button:focus-visible,
+    #bw-family-planner a:focus-visible {
       outline: 3px solid rgba(255, 230, 0, 0.82);
       outline-offset: 2px;
     }
@@ -167,19 +178,28 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    #bw-family-planner button {
-      background: var(--bw-white);
-      border: 1px solid rgba(124, 179, 66, 0.45);
+    #bw-family-planner button,
+    #bw-family-planner .bw-map-link,
+    #bw-family-planner .bw-cta {
+      align-items: center;
       border-radius: 8px;
-      color: var(--bw-green);
       cursor: pointer;
+      display: inline-flex;
       font: inherit;
       font-size: 12px;
       font-weight: 900;
+      justify-content: center;
       line-height: 1.25;
-      min-height: 42px;
+      min-height: 40px;
       padding: 9px 10px;
       text-align: center;
+      text-decoration: none;
+    }
+
+    #bw-family-planner button {
+      background: var(--bw-white);
+      border: 1px solid rgba(124, 179, 66, 0.45);
+      color: var(--bw-green);
     }
 
     #bw-family-planner button[aria-pressed="true"] {
@@ -239,6 +259,37 @@
       margin: 0;
     }
 
+    #bw-family-planner .bw-health {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-family-planner .bw-health-card {
+      background: #FBFDF7;
+      padding: 10px;
+    }
+
+    #bw-family-planner .bw-health-card span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      line-height: 1.25;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    #bw-family-planner .bw-health-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 16px;
+      font-weight: 950;
+      line-height: 1.2;
+      word-break: normal;
+    }
+
     #bw-family-planner .bw-plan {
       display: grid;
       gap: 10px;
@@ -273,7 +324,7 @@
       font-size: 14px;
       font-weight: 900;
       line-height: 1.25;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
     #bw-family-planner .bw-meta {
@@ -281,18 +332,31 @@
       font-size: 12.5px;
       font-weight: 650;
       line-height: 1.45;
-      margin: 0;
+      margin: 0 0 8px;
+    }
+
+    #bw-family-planner .bw-map-link {
+      background: rgba(197, 225, 165, 0.42);
+      border: 1px solid rgba(124, 179, 66, 0.38);
+      color: var(--bw-green);
+      min-height: 32px;
+      padding: 7px 10px;
+      width: fit-content;
     }
 
     #bw-family-planner .bw-tips {
       display: grid;
       gap: 10px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #bw-family-planner .bw-card {
+      padding: 12px;
     }
 
     #bw-family-planner .bw-card h4 {
       color: var(--bw-green);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 900;
       letter-spacing: 0.5px;
       line-height: 1.25;
@@ -301,44 +365,53 @@
     }
 
     #bw-family-planner .bw-card p {
-      font-size: 12.5px;
-      line-height: 1.5;
+      font-size: 12.3px;
+      line-height: 1.48;
       margin: 0;
     }
 
-    #bw-family-planner .bw-book {
-      align-items: center;
+    #bw-family-planner .bw-actions {
+      align-items: stretch;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    #bw-family-planner .bw-copy {
+      border-color: rgba(27, 94, 32, 0.3);
+      min-height: 46px;
+    }
+
+    #bw-family-planner .bw-cta {
       background: var(--bw-green);
-      border-radius: 8px;
+      border: 1px solid var(--bw-green);
       color: var(--bw-white);
-      display: flex;
-      gap: 12px;
-      justify-content: space-between;
-      padding: 12px 13px;
-    }
-
-    #bw-family-planner .bw-book span {
-      color: #DDEFC7;
-      display: block;
-      font-size: 12.5px;
-      font-weight: 700;
-      line-height: 1.45;
-    }
-
-    #bw-family-planner .bw-book a {
-      background: var(--bw-yellow);
-      border-radius: 999px;
-      color: var(--bw-green);
-      flex: 0 0 auto;
-      font-size: 12px;
-      font-weight: 900;
-      line-height: 1.2;
-      padding: 10px 12px;
-      text-decoration: none;
+      min-height: 46px;
+      padding-left: 14px;
+      padding-right: 14px;
       white-space: nowrap;
     }
 
-    @media (max-width: 760px) {
+    #bw-family-planner .bw-status {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.4;
+      min-height: 16px;
+      margin: -4px 0 0;
+    }
+
+    @media (max-width: 860px) {
+      #bw-family-planner .bw-body {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-family-planner .bw-tips {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
       #bw-family-planner {
         margin: 18px 0;
       }
@@ -352,12 +425,13 @@
       }
 
       #bw-family-planner .bw-body {
-        grid-template-columns: 1fr;
         padding: 14px;
       }
 
       #bw-family-planner .bw-choice-grid,
-      #bw-family-planner .bw-tips {
+      #bw-family-planner .bw-health,
+      #bw-family-planner .bw-tips,
+      #bw-family-planner .bw-actions {
         grid-template-columns: 1fr;
       }
 
@@ -365,13 +439,9 @@
         grid-template-columns: 54px minmax(0, 1fr);
       }
 
-      #bw-family-planner .bw-book {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      #bw-family-planner .bw-book a {
-        text-align: center;
+      #bw-family-planner .bw-cta,
+      #bw-family-planner .bw-copy {
+        width: 100%;
       }
     }
   </style>
@@ -380,7 +450,7 @@
     <header class="bw-head">
       <p class="bw-kicker">BerlinWalk Tool</p>
       <h2 class="bw-title">Berlin Family Day Planner</h2>
-      <p class="bw-sub">Choose ages, weather, pace and your starting area. Get one practical Berlin day that avoids overpacking the schedule.</p>
+      <p class="bw-sub">Choose ages, weather, day type, pace and your starting area. Get a realistic Berlin day with a clear anchor, a food stop, a movement break and an exit ramp.</p>
     </header>
 
     <div class="bw-body">
@@ -392,6 +462,16 @@
               <option value="little">0-5: stroller or short legs</option>
               <option value="school" selected>6-11: curious, needs breaks</option>
               <option value="teen">12+: bigger sights, more independence</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Main goal</span>
+            <select id="bw-goal">
+              <option value="dinosaurs" selected>Dinosaurs or indoor museum</option>
+              <option value="animals">Zoo or aquarium</option>
+              <option value="history">Historic centre story</option>
+              <option value="parks">Parks, playgrounds and cafes</option>
             </select>
           </label>
 
@@ -413,6 +493,15 @@
             </select>
           </label>
 
+          <label>
+            <span class="bw-label">Day type</span>
+            <select id="bw-day">
+              <option value="normal" selected>Normal weekday / Saturday</option>
+              <option value="monday">Monday museum caution</option>
+              <option value="sunday">Sunday or public holiday</option>
+            </select>
+          </label>
+
           <div>
             <span class="bw-label">Pace</span>
             <div class="bw-choice-grid" role="group" aria-label="Pace">
@@ -421,7 +510,7 @@
             </div>
           </div>
 
-          <p class="bw-note">This is a planning shortcut, not a live booking engine. Always check opening hours for the exact date, especially Mondays and public holidays.</p>
+          <p class="bw-note">Use this as a planning shortcut. Before you promise a child one specific museum, always check the official opening page for your exact date.</p>
         </div>
       </section>
 
@@ -429,25 +518,48 @@
         <span class="bw-pill" id="bw-pill">Easy family plan</span>
         <h3 id="bw-plan-title">Museum, playground, short walk</h3>
         <p id="bw-plan-summary">A balanced first Berlin day for school-age kids: one big indoor win, one movement break, then a short historic walk if energy stays good.</p>
+
+        <div class="bw-health" aria-label="Plan health">
+          <div class="bw-health-card">
+            <span>Plan health</span>
+            <strong id="bw-health">Balanced</strong>
+          </div>
+          <div class="bw-health-card">
+            <span>Transit load</span>
+            <strong id="bw-transit">Low</strong>
+          </div>
+          <div class="bw-health-card">
+            <span>Stop point</span>
+            <strong id="bw-stop">After block 3</strong>
+          </div>
+        </div>
+
         <div class="bw-plan" id="bw-plan"></div>
+
         <div class="bw-tips">
           <article class="bw-card">
             <h4>Ticket note</h4>
-            <p id="bw-ticket">Children under 6 do not need a Berlin public transport ticket. Ages 6 to 14 use reduced fare.</p>
+            <p id="bw-ticket">Most central family days are zone AB. BER Airport and Potsdam usually need ABC.</p>
           </article>
           <article class="bw-card">
-            <h4>Break rule</h4>
-            <p id="bw-break">Plan one snack or playground pause every 90 minutes. Berlin days fail when adults try to stack too many museums.</p>
+            <h4>Food & toilets</h4>
+            <p id="bw-food">Eat before everyone is hungry. Museums, department stores and larger stations are the safest toilet stops.</p>
           </article>
           <article class="bw-card">
-            <h4>Backup</h4>
-            <p id="bw-backup">If energy drops, stop after the first two blocks and save the landmark walk for tomorrow morning.</p>
+            <h4>Date check</h4>
+            <p id="bw-date">Check opening hours on the official venue page, especially near holidays.</p>
+          </article>
+          <article class="bw-card">
+            <h4>Smart swap</h4>
+            <p id="bw-swap">If energy drops, cut the final block and keep tomorrow morning simple.</p>
           </article>
         </div>
-        <div class="bw-book">
-          <span>A 2 hours walking tour can work with older kids if you keep the rest of the day light.</span>
-          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=embed&utm_medium=widget&utm_campaign=berlin-family-day-planner&utm_content=planner-cta" target="_blank" rel="noopener">Check tour times</a>
+
+        <div class="bw-actions">
+          <button class="bw-copy" type="button" id="bw-copy">Copy this plan</button>
+          <a class="bw-cta" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=embed&utm_medium=widget&utm_campaign=berlin-family-day-planner&utm_content=planner-cta" target="_blank" rel="noopener">Check tour times</a>
         </div>
+        <p class="bw-status" id="bw-status" aria-live="polite"></p>
       </section>
     </div>
   </div>
@@ -459,108 +571,240 @@
 
       var state = {
         age: 'school',
+        goal: 'dinosaurs',
         weather: 'dry',
         base: 'mitte',
+        day: 'normal',
         pace: 'easy'
       };
 
-      var plans = {
-        mitte: {
-          dry: [
-            ['10:00', 'Museum fur Naturkunde', 'Start with dinosaurs, minerals and a clear indoor win. Book a time slot if the day is busy.'],
-            ['12:15', 'Lunch and reset', 'Choose a simple cafe or bakery nearby rather than crossing the city hungry.'],
-            ['13:30', 'Monbijoupark or James-Simon-Park', 'Give kids space before adding another sight. Both keep you near Museum Island.'],
-            ['15:00', 'Short BerlinWalk route preview', 'Walk Alexanderplatz to Museum Island, then stop before everyone is tired.']
-          ],
-          hot: [
-            ['09:30', 'Outdoor sights early', 'Do the TV Tower area, Rotes Rathaus and Museum Island before the stones heat up.'],
-            ['11:30', 'Shaded playground break', 'Use James-Simon-Park, Monbijoupark or a nearby cafe as the main reset.'],
-            ['13:00', 'Indoor museum block', 'Move into Naturkundemuseum, DDR Museum or another airier indoor stop.'],
-            ['16:00', 'Ice cream, then done', 'Do not turn a hot day into a forced marathon. Save big parks for evening.']
-          ],
-          rain: [
-            ['10:00', 'Museum fur Naturkunde', 'Make this the anchor. It is the easiest rainy-day win for many families.'],
-            ['12:30', 'Transit-light lunch', 'Stay near the U6 or tram so the next move is painless.'],
-            ['14:00', 'Humboldt Forum or DDR Museum', 'Choose one second indoor stop, not both, unless your kids still have energy.'],
-            ['16:00', 'Hotel break', 'Berlin is better after a dry-socks reset than after one more tired attraction.']
-          ]
-        },
-        west: {
-          dry: [
-            ['09:45', 'Zoo Berlin or Aquarium', 'Use the west side as the main anchor instead of crossing to Mitte immediately.'],
-            ['12:30', 'Tiergarten picnic edge', 'Let the day breathe with shade, snacks and a short walk.'],
-            ['14:30', 'Bus 100 landmark ride', 'See major sights from the upper deck without adding too much walking.'],
-            ['16:00', 'Brandenburg Gate short stop', 'Finish with one famous photo, then leave before the late-afternoon crash.']
-          ],
-          hot: [
-            ['09:30', 'Zoo early entry', 'Animals, shade and fewer crowds work best before lunch.'],
-            ['12:30', 'Aquarium or indoor lunch', 'Move indoors when the heat peaks.'],
-            ['15:00', 'Tiergarten shade', 'Keep it flexible: playground, ice cream, or simply a slow walk.'],
-            ['17:00', 'Optional Bus 100', 'Use the bus only if everyone still wants a city overview.']
-          ],
-          rain: [
-            ['10:00', 'Aquarium Berlin', 'A compact rainy-day choice that does not require much walking.'],
-            ['12:00', 'KaDeWe food hall backup', 'Useful for toilets, food choices and a controlled reset.'],
-            ['14:00', 'Bus 100 to Mitte', 'Good landmark overview with minimal weather exposure.'],
-            ['15:30', 'Early finish', 'Rainy family days are won by stopping early, not by adding one more sight.']
-          ]
-        },
-        east: {
-          dry: [
-            ['10:00', 'Prenzlauer Berg playground cafe loop', 'Start local and easy before moving toward the big landmarks.'],
-            ['12:00', 'Mauerpark or Kollwitzkiez lunch', 'Keep lunch simple and close to green space.'],
-            ['14:00', 'Tram to Alexanderplatz', 'Use the tram as a low-stress city introduction.'],
-            ['15:00', 'Museum Island short walk', 'Add one historic centre block if energy is still good.']
-          ],
-          hot: [
-            ['09:30', 'Neighborhood playground early', 'Get movement done before the hottest part of the day.'],
-            ['11:30', 'Long lunch break', 'Choose shade, water and toilets over squeezing in another attraction.'],
-            ['14:00', 'Indoor museum or hotel pause', 'Naturkundemuseum is the strongest cross-age fallback.'],
-            ['17:00', 'Evening park time', 'A later playground or park walk works better than hot midday sightseeing.']
-          ],
-          rain: [
-            ['10:00', 'Local cafe and tram start', 'Keep transfers simple and avoid long exposed walks.'],
-            ['11:30', 'Museum fur Naturkunde', 'One strong indoor anchor is better than three wet short stops.'],
-            ['14:00', 'Bookshop, cafe or hotel reset', 'Use the afternoon for recovery if kids are saturated.'],
-            ['16:00', 'Optional short landmark', 'Only add Alexanderplatz or Museum Island if the weather clears.']
-          ]
-        }
-      };
-
-      var ageNotes = {
+      var ageProfiles = {
         little: {
-          title: 'Stroller-safe, short-block Berlin',
-          summary: 'For small children, keep the day built around one anchor and one open-space reset. Avoid long museum chains.',
-          breakText: 'Use one serious pause every 60 to 75 minutes. Elevators and toilets matter more than squeezing in landmarks.'
+          title: 'Short blocks, real breaks',
+          summary: 'For small children, build the day around one anchor and one open-space reset. Stroller exits, toilets and food matter more than extra sights.',
+          breakRule: 'Use a real pause every 60 to 75 minutes. If a lift is broken or the street is cobbled, the day gets slower.',
+          stop: 'After block 2'
         },
         school: {
           title: 'Museum, playground, short walk',
-          summary: 'A balanced first Berlin day for school-age kids: one big indoor win, one movement break, then a short historic walk if energy stays good.',
-          breakText: 'Plan one snack or playground pause every 90 minutes. Berlin days fail when adults try to stack too many museums.'
+          summary: 'For school-age kids, choose one main attraction, then add movement and one small Berlin story if energy stays good.',
+          breakRule: 'Plan one snack or playground pause every 90 minutes. Berlin days fail when adults stack too many museums.',
+          stop: 'After block 3'
         },
         teen: {
-          title: 'Bigger sights, less hand-holding',
-          summary: 'For teens, combine one major attraction with a real neighborhood or history angle. Give them a choice in the final stop.',
-          breakText: 'Teens can handle a fuller day, but they still need food before the next serious museum or history stop.'
+          title: 'Bigger sights, stronger story',
+          summary: 'For teens, connect the day to a theme: Cold War borders, animals, street life, museums or a historic centre walk.',
+          breakRule: 'Teens can handle a fuller day, but food still needs to happen before the next serious museum or history stop.',
+          stop: 'After block 4'
         }
       };
 
+      var bases = {
+        mitte: {
+          label: 'Mitte',
+          lunch: 'Lunch near Hackescher Markt, Oranienburger Strasse or Museum Island',
+          lunchMap: 'Hackescher Markt Berlin',
+          breakSpot: 'Monbijoupark or James-Simon-Park',
+          breakMap: 'Monbijoupark Berlin',
+          finalShort: 'short walk from Alexanderplatz toward Museum Island',
+          finalMap: 'Museum Island Berlin',
+          transit: { dinosaurs: 'Low', animals: 'Medium', history: 'Low', parks: 'Low' }
+        },
+        west: {
+          label: 'West Berlin',
+          lunch: 'Lunch near Zoo, Bikini Berlin or Kurfurstendamm',
+          lunchMap: 'Bikini Berlin',
+          breakSpot: 'Tiergarten edge or a calmer cafe reset',
+          breakMap: 'Tiergarten Berlin',
+          finalShort: 'Bus 100 ride or Brandenburg Gate photo stop',
+          finalMap: 'Brandenburg Gate Berlin',
+          transit: { dinosaurs: 'Medium', animals: 'Low', history: 'Medium', parks: 'Low' }
+        },
+        east: {
+          label: 'Prenzlauer Berg / Friedrichshain',
+          lunch: 'Lunch in Kollwitzkiez, Boxhagener area or near a tram line',
+          lunchMap: 'Kollwitzplatz Berlin',
+          breakSpot: 'Mauerpark, Volkspark Friedrichshain or a neighborhood playground',
+          breakMap: 'Volkspark Friedrichshain Berlin',
+          finalShort: 'tram ride toward Alexanderplatz if energy stays good',
+          finalMap: 'Alexanderplatz Berlin',
+          transit: { dinosaurs: 'Medium', animals: 'High', history: 'Medium', parks: 'Low' }
+        }
+      };
+
+      var goals = {
+        dinosaurs: {
+          label: 'Museum day',
+          anchor: 'Museum fur Naturkunde',
+          map: 'Museum fur Naturkunde Berlin',
+          indoor: true,
+          reason: 'Start with dinosaurs, minerals and a clear indoor win before the day becomes crowded.',
+          second: 'If everyone is still fresh, add a small Museum Island or Humboldt Forum layer, not another heavy museum.'
+        },
+        animals: {
+          label: 'Animal day',
+          anchor: 'Zoo Berlin or Aquarium Berlin',
+          map: 'Zoo Berlin Elephant Gate',
+          indoor: true,
+          reason: 'Use the west side as the main family anchor. Zoo and Aquarium can easily be the day.',
+          second: 'Add Bus 100 or a Tiergarten edge only if the first block did not drain everyone.'
+        },
+        history: {
+          label: 'History day',
+          anchor: 'Alexanderplatz to Museum Island story walk',
+          map: 'Alexanderplatz World Clock Berlin',
+          indoor: false,
+          reason: 'Keep the historic centre compact: World Clock, Rotes Rathaus, Spree and Museum Island.',
+          second: 'Turn the story into one short route, then stop before it becomes an adult checklist.'
+        },
+        parks: {
+          label: 'Park day',
+          anchor: 'Playground and cafe loop',
+          map: 'Monbijoupark Berlin',
+          indoor: false,
+          reason: 'Make movement the plan, not the leftover. Parks and playgrounds buy you the next two hours.',
+          second: 'Add one landmark only after the break, and only if the day still feels easy.'
+        }
+      };
+
+      var dayNotes = {
+        normal: 'Check opening hours anyway, because school holidays, special exhibitions and events can change the day.',
+        monday: 'Monday is the danger day. Many museums close or vary hours, so check the official page before building the day around a museum.',
+        sunday: 'Sunday and public holidays need food planning. Regular supermarkets are mostly closed, so use station shops or plan meals earlier.'
+      };
+
+      function mapUrl(query) {
+        return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(query);
+      }
+
+      function chooseAnchor() {
+        var base = bases[state.base];
+        var goal = goals[state.goal];
+        if (state.goal === 'parks') {
+          if (state.base === 'west') return { title: 'Tiergarten edge and playground time', map: 'Tiergarten Berlin playground', text: goal.reason };
+          if (state.base === 'east') return { title: 'Mauerpark or Volkspark Friedrichshain', map: 'Volkspark Friedrichshain playground', text: goal.reason };
+          return { title: 'Monbijoupark or James-Simon-Park', map: 'Monbijoupark Berlin', text: goal.reason };
+        }
+        if (state.weather === 'rain' && state.goal === 'history') {
+          return { title: 'Humboldt Forum or DDR Museum', map: 'Humboldt Forum Berlin', text: 'Keep the history layer indoors and near the historic centre. Choose one indoor stop, not three.' };
+        }
+        if (state.weather === 'rain' && state.goal === 'parks') {
+          return { title: 'Museum fur Naturkunde', map: 'Museum fur Naturkunde Berlin', text: 'Rain changes the park plan. Use a strong indoor anchor, then add a cafe or hotel reset.' };
+        }
+        return { title: goal.anchor, map: goal.map, text: goal.reason + ' ' + base.label + ' is your starting logic.' };
+      }
+
+      function planSteps() {
+        var base = bases[state.base];
+        var goal = goals[state.goal];
+        var anchor = chooseAnchor();
+        var steps;
+
+        if (state.weather === 'hot') {
+          steps = [
+            ['09:30', state.goal === 'history' || state.goal === 'parks' ? anchor.title : 'Outdoor sights before heat peaks', state.goal === 'history' || state.goal === 'parks' ? anchor.text : 'Do the simple outside layer early, then move the serious attraction away from the hottest hour.', anchor.map],
+            ['11:30', 'Water, shade and lunch', base.lunch + '. Choose shade and toilets over crossing town hungry.', base.lunchMap],
+            ['13:00', goal.indoor ? anchor.title : 'Indoor reset', goal.indoor ? goal.reason : 'Use a museum, Aquarium or hotel pause while the city is hottest.', anchor.map],
+            ['16:30', 'Optional evening block', 'Return to ' + base.breakSpot + ' or add a small landmark only if everyone has recovered.', base.breakMap]
+          ];
+        } else if (state.weather === 'rain') {
+          steps = [
+            ['10:00', anchor.title, anchor.text, anchor.map],
+            ['12:15', 'Lunch without a long transfer', base.lunch + '. Wet jackets and hungry kids make every transfer feel longer.', base.lunchMap],
+            ['13:30', 'Second indoor choice or cafe reset', goal.second + ' If the first stop was enough, this is where you stop.', 'Berlin family cafe near ' + base.label],
+            ['15:30', 'Short covered or transit-light finish', 'Use a short landmark, bookshop, department store or hotel reset. Rainy family days are won by stopping early.', base.finalMap]
+          ];
+        } else {
+          steps = [
+            ['10:00', anchor.title, anchor.text, anchor.map],
+            ['12:15', 'Lunch before the crash', base.lunch + '. Do not wait until everyone is already angry.', base.lunchMap],
+            ['13:30', base.breakSpot, 'Treat this as a real planning block, not a backup. A movement break can save the afternoon.', base.breakMap],
+            ['15:00', goal.second, 'Keep this block short. If you join a 2 hours walking tour on the same day, keep the rest lighter.', base.finalMap]
+          ];
+        }
+
+        if (state.age === 'little') {
+          steps[0][2] += ' Keep the first block short and leave before the room turns into a negotiation.';
+        }
+        if (state.age === 'teen') {
+          steps[3][2] = 'Let teens choose between this final block, food or a neighborhood walk. Choice keeps the day from feeling forced.';
+        }
+        return state.pace === 'easy' ? steps.slice(0, 3) : steps;
+      }
+
+      function health() {
+        var risk = 0;
+        if (state.pace === 'full') risk += 1;
+        if (state.age === 'little') risk += 1;
+        if (state.weather === 'rain' || state.weather === 'hot') risk += 1;
+        if (bases[state.base].transit[state.goal] === 'High') risk += 1;
+        if (state.day !== 'normal') risk += 1;
+        if (risk >= 4) return 'Watch';
+        if (risk >= 2) return 'Balanced';
+        return 'Easy';
+      }
+
+      function foodNote() {
+        if (state.day === 'sunday') return 'Buy snacks before you need them. On Sundays and holidays, station shops are useful fallbacks.';
+        if (state.weather === 'hot') return 'Carry water and make lunch earlier than usual. Heat turns small delays into big mood drops.';
+        if (state.weather === 'rain') return 'Choose lunch close to your first stop. Wet transfers are harder with children than the map suggests.';
+        return 'Eat before everyone is hungry. Museums, department stores and larger stations are the safest toilet stops.';
+      }
+
+      function swapNote() {
+        if (state.weather === 'rain') return 'If the second indoor stop feels too much, switch to cafe or hotel reset. Do not force another museum.';
+        if (state.weather === 'hot') return 'Move parks to morning or evening. Use midday for indoor stops, shade and water.';
+        if (state.pace === 'full') return 'If the fourth block starts to feel forced, drop it. The best family plan has an exit ramp.';
+        return 'If energy drops, cut the final block and keep tomorrow morning simple.';
+      }
+
+      function ticketNote() {
+        var load = bases[state.base].transit[state.goal];
+        if (load === 'High') return 'This plan may cross the city. Most tourist trips are AB, but BER Airport and Potsdam need ABC. Under 6 is free; ages 6 to 14 use reduced fare.';
+        return 'Most central family days are AB. BER Airport and Potsdam usually need ABC. Under 6 is free; ages 6 to 14 use reduced fare.';
+      }
+
+      function plainPlan(steps) {
+        return [
+          'Berlin Family Day Plan',
+          'Pace: ' + (state.pace === 'full' ? 'Full day' : 'Easy day'),
+          'Base: ' + bases[state.base].label,
+          'Plan health: ' + health(),
+          ''
+        ].concat(steps.map(function (step) {
+          return step[0] + ' - ' + step[1] + ': ' + step[2];
+        })).join('\n');
+      }
+
       function render() {
-        var note = ageNotes[state.age];
-        var list = plans[state.base][state.weather].slice();
-        if (state.pace === 'easy') list = list.slice(0, 3);
+        var profile = ageProfiles[state.age];
+        var base = bases[state.base];
+        var goal = goals[state.goal];
+        var steps = planSteps();
+        var transit = base.transit[state.goal];
 
-        root.querySelector('#bw-pill').textContent = state.pace === 'full' ? 'Full family plan' : 'Easy family plan';
-        root.querySelector('#bw-plan-title').textContent = note.title;
-        root.querySelector('#bw-plan-summary').textContent = note.summary;
-        root.querySelector('#bw-break').textContent = note.breakText;
-        root.querySelector('#bw-backup').textContent = state.pace === 'full'
-          ? 'If the fourth block starts to feel forced, drop it. The best family plan has an exit ramp.'
-          : 'If energy drops, stop after the first two blocks and save the landmark walk for tomorrow morning.';
+        root.querySelector('#bw-pill').textContent = (state.pace === 'full' ? 'Full' : 'Easy') + ' ' + goal.label;
+        root.querySelector('#bw-plan-title').textContent = profile.title;
+        root.querySelector('#bw-plan-summary').textContent = profile.summary;
+        root.querySelector('#bw-health').textContent = health();
+        root.querySelector('#bw-transit').textContent = transit;
+        root.querySelector('#bw-stop').textContent = state.pace === 'full' && state.age !== 'little' ? 'After block 4' : profile.stop;
+        root.querySelector('#bw-ticket').textContent = ticketNote();
+        root.querySelector('#bw-food').textContent = foodNote();
+        root.querySelector('#bw-date').textContent = dayNotes[state.day];
+        root.querySelector('#bw-swap').textContent = swapNote();
+        root.querySelector('#bw-status').textContent = '';
 
-        root.querySelector('#bw-plan').innerHTML = list.map(function (step) {
-          return '<div class="bw-step"><div class="bw-time">' + step[0] + '</div><div><strong>' + step[1] + '</strong><p class="bw-meta">' + step[2] + '</p></div></div>';
+        root.querySelector('#bw-plan').innerHTML = steps.map(function (step) {
+          return '<div class="bw-step">'
+            + '<div class="bw-time">' + step[0] + '</div>'
+            + '<div><strong>' + step[1] + '</strong>'
+            + '<p class="bw-meta">' + step[2] + '</p>'
+            + '<a class="bw-map-link" target="_blank" rel="noopener" href="' + mapUrl(step[3]) + '">Open map</a>'
+            + '</div></div>';
         }).join('');
+
+        root.dataset.planText = plainPlan(steps);
 
         if (window.BerlinWalkBrand && window.BerlinWalkBrand.sendResize) {
           window.BerlinWalkBrand.sendResize();
@@ -583,6 +827,20 @@
           });
           render();
         });
+      });
+
+      root.querySelector('#bw-copy').addEventListener('click', function () {
+        var status = root.querySelector('#bw-status');
+        var text = root.dataset.planText || '';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            status.textContent = 'Plan copied.';
+          }).catch(function () {
+            status.textContent = text;
+          });
+        } else {
+          status.textContent = text;
+        }
       });
 
       render();
