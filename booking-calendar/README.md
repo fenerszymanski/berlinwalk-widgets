@@ -37,6 +37,8 @@ Useful attributes:
 - `service-title`: visible heading.
 - `demo-days`: demo-only future date window, default `180`, capped at `365`.
 - `cta-label`: CTA copy. Recommended: `Reserve your spot`.
+- `navigation-mode`: set to `event` on the standalone Wix Booking Calendar page so Velo owns the final `/booking-form` route and the compact booking intro is shown.
+- `hide-intro`: optional flag to hide the compact standalone booking intro when `navigation-mode="event"` is set.
 - `demo`: use generated demo availability.
 - `hide-future-tbd`: optional flag to hide the final disabled "TBD / dates soon" card after the last live available date.
 

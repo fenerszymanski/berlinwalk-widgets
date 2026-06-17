@@ -805,7 +805,7 @@ class BWHeaderElement extends HTMLElement {
               <span class="bw-header-top-sep" aria-hidden="true">•</span>
               <span class="bw-header-top-item">Free · Tip-based</span>
               <span class="bw-header-top-sep bw-header-top-item-hide-sm" aria-hidden="true">•</span>
-              <span class="bw-header-top-item bw-header-top-item-hide-sm">Daily 11:30 · World Clock, Alexanderplatz</span>
+              <span class="bw-header-top-item bw-header-top-item-hide-sm">Tue-Sat 11:30 · From 3 July: +15:30 · World Clock</span>
             </div>
           </div>
         </div>
@@ -877,7 +877,7 @@ class BWHeaderElement extends HTMLElement {
 
             <div class="bw-header-mobile-cta">
               <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Your Free Tour</a>
-              <p class="bw-header-mobile-trust"><strong>★ 9.8 / 10</strong> on FreeTour · Daily 11:30 at the World Clock</p>
+              <p class="bw-header-mobile-trust"><strong>★ 9.8 / 10</strong> on FreeTour · Tue-Sat 11:30 · From 3 July: +15:30</p>
             </div>
           </div>
         </div>

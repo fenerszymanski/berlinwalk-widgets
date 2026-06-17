@@ -47,6 +47,62 @@ const BW_BOOKING_CALENDAR_STYLES = `
     overflow: hidden;
   }
 
+  .bw-cal-intro {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 14px;
+    min-width: 0;
+  }
+
+  .bw-cal-intro-kicker {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .bw-cal-intro h2 {
+    color: var(--green);
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: 0 !important;
+    line-height: 1.02;
+    margin: 0;
+  }
+
+  .bw-cal-intro p {
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+    max-width: 640px;
+  }
+
+  .bw-cal-intro-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 0;
+  }
+
+  .bw-cal-intro-chip {
+    align-items: center;
+    background: #F8FBF4;
+    border: 1px solid #CFE4C8;
+    border-radius: 999px;
+    color: var(--green);
+    display: inline-flex;
+    font-size: 11px;
+    font-weight: 850;
+    line-height: 1.15;
+    min-height: 30px;
+    padding: 7px 10px;
+    white-space: normal;
+  }
+
   .bw-cal-head {
     align-items: start;
     border-bottom: 1px solid var(--line);
@@ -393,6 +449,11 @@ const BW_BOOKING_CALENDAR_STYLES = `
     width: 100%;
   }
 
+  .bw-cal-standalone .bw-cal-cta {
+    font-size: 15px;
+    height: 48px;
+  }
+
   .bw-cal-cta:hover,
   .bw-cal-cta:focus-visible {
     background: #124516;
@@ -425,6 +486,25 @@ const BW_BOOKING_CALENDAR_STYLES = `
   }
 
   @media (max-width: 520px) {
+    .bw-cal-intro {
+      margin-bottom: 12px;
+    }
+
+    .bw-cal-intro h2 {
+      font-size: 30px;
+      line-height: 1.05;
+    }
+
+    .bw-cal-intro p {
+      font-size: 14px;
+    }
+
+    .bw-cal-intro-chip {
+      font-size: 10.5px;
+      min-height: 28px;
+      padding: 6px 9px;
+    }
+
     .bw-cal-head {
       align-items: start;
       display: grid;
@@ -464,6 +544,7 @@ class BWBookingCalendarElement extends HTMLElement {
       'loading',
       'error-message',
       'cta-label',
+      'hide-intro',
       'demo',
     ];
   }
@@ -627,7 +708,9 @@ class BWBookingCalendarElement extends HTMLElement {
   _render() {
     const loading = this.hasAttribute('loading') || this._isFetchingAvailability;
     const error = this.getAttribute('error-message') || '';
-    const serviceTitle = this.getAttribute('service-title') || 'Pick your tour date';
+    const showIntro = this._shouldShowIntro();
+    const serviceTitle = showIntro ? 'Choose your date and time' : this.getAttribute('service-title') || 'Pick your tour date';
+    const ctaLabel = this._ctaLabel(showIntro);
     const selectedSlot = this._selectedSlot();
     const dates = this._availableDates();
     const months = this._availableMonths(dates);
@@ -638,7 +721,8 @@ class BWBookingCalendarElement extends HTMLElement {
 
     this.innerHTML = `
       <style>${BW_BOOKING_CALENDAR_STYLES}</style>
-      <section class="bw-booking-calendar" aria-label="BerlinWalk booking calendar">
+      <section class="bw-booking-calendar${showIntro ? ' bw-cal-standalone' : ''}" aria-label="BerlinWalk booking calendar">
+        ${showIntro ? this._introMarkup() : ''}
         <div class="bw-cal-shell">
           <header class="bw-cal-head">
             <div class="bw-cal-title" role="heading" aria-level="3">${this._escape(serviceTitle)}</div>
@@ -676,8 +760,8 @@ class BWBookingCalendarElement extends HTMLElement {
             <span class="bw-cal-selected">${selectedText}</span>
             <span class="bw-cal-next-note">Attendees + phone on the next step. Phone is only for tour-day coordination.</span>
             ${selectedSlot
-              ? `<a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</a>`
-              : `<span class="bw-cal-cta is-disabled" aria-disabled="true">${this._escape(this.getAttribute('cta-label') || 'Reserve your spot')}</span>`}
+              ? `<a class="bw-cal-cta" href="${this._escape(this._bookingHref(selectedSlot))}" target="_top" data-action="continue">${this._escape(ctaLabel)}</a>`
+              : `<span class="bw-cal-cta is-disabled" aria-disabled="true">${this._escape(ctaLabel)}</span>`}
           </footer>
         </div>
       </section>
@@ -686,6 +770,36 @@ class BWBookingCalendarElement extends HTMLElement {
     this._bind();
     this._applyDateScrollPosition();
     this._postResize();
+  }
+
+  _shouldShowIntro() {
+    return this.getAttribute('navigation-mode') === 'event' && !this.hasAttribute('hide-intro');
+  }
+
+  _ctaLabel(showIntro = this._shouldShowIntro()) {
+    const label = this.getAttribute('cta-label') || '';
+    if (showIntro && (!label || label === 'Reserve your spot')) return 'Continue to free reservation';
+    return label || 'Reserve your spot';
+  }
+
+  _introMarkup() {
+    const chips = [
+      'Free reservation',
+      'Tue-Sat 11:30',
+      'From 3 July 2026: 11:30 + 15:30',
+      'Tip at the end',
+      'Phone only for tour-day coordination',
+    ];
+    return `
+      <div class="bw-cal-intro">
+        <span class="bw-cal-intro-kicker">Book the tour</span>
+        <h2>Free Berlin Walking Tour</h2>
+        <p>Reserve your spot for a 2-hour, tip-based walk through Berlin's historic centre.</p>
+        <div class="bw-cal-intro-chips" aria-label="Tour booking details">
+          ${chips.map((chip) => `<span class="bw-cal-intro-chip">${this._escape(chip)}</span>`).join('')}
+        </div>
+      </div>
+    `;
   }
 
   _bind() {
