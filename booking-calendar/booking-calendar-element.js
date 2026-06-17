@@ -494,7 +494,7 @@ const BW_BOOKING_CALENDAR_STYLES = `
 
   @media (max-width: 520px) {
     .bw-cal-standalone {
-      padding: 18px 12px 26px;
+      padding: 18px 16px 26px;
     }
 
     .bw-cal-intro {
