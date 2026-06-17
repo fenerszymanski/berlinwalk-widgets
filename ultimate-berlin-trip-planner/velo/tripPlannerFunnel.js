@@ -855,6 +855,17 @@ function planUrlForEmail(lead) {
   }
 }
 
+function tripPackLabelForLength(length) {
+  let days = Number(length || 1);
+  if (!Number.isFinite(days)) days = 1;
+  days = Math.max(1, Math.min(7, Math.round(days)));
+  if (days <= 1) return '24-hour Berlin Trip Pack';
+  if (days === 2) return '48-hour Berlin Trip Pack';
+  if (days === 3) return '72-hour Berlin Trip Pack';
+  if (days === 4) return '96-hour Berlin Trip Pack';
+  return `${days}-day Berlin Trip Pack`;
+}
+
 function emailVariables(lead, stage) {
   const booked = isBookedLead(lead);
   return {
@@ -862,6 +873,7 @@ function emailVariables(lead, stage) {
     isBooked: booked ? 'yes' : 'no',
     arrivalDate: String(lead.arrivalDate || ''),
     tripLength: String(lead.tripLength || ''),
+    tripPackLabel: tripPackLabelForLength(lead.tripLength),
     planTitle: String(lead.planTitle || 'Ultimate Berlin trip plan'),
     recommendedTourDay: String(lead.recommendedTourDay || ''),
     recommendedTourDate: String(lead.recommendedTourDate || ''),

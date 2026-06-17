@@ -55,7 +55,7 @@ const EMAILS = [
 ];
 
 const LINK_LABELS = {
-  planUrl: 'Open your Berlin plan',
+  planUrl: 'Open your Berlin pack',
   bookingUrl: 'Book the free walking tour',
   meetingPointUrl: 'Open the World Clock meeting point',
   firstDayPlannerUrl: 'Open the First-Day Planner',
@@ -305,7 +305,7 @@ ${renderBody(parsed.bodyLines)}
               <span style="color: #7CB342;">&nbsp;|&nbsp;</span>
               <a href="${INSTAGRAM_URL}" style="color: #FFE600; text-decoration: none; font-weight: 700;">@berlinwalkingtour</a>
             </p>
-            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;">You are receiving this because you asked BerlinWalk to send your Berlin trip plan.</p>
+            <p style="margin: 0; font-family: Montserrat, 'Helvetica Neue', Arial, sans-serif; font-size: 11px; line-height: 1.5; color: #C5E1A5;">You are receiving this because you asked BerlinWalk to send your Berlin trip pack.</p>
           </td>
         </tr>
       </table>

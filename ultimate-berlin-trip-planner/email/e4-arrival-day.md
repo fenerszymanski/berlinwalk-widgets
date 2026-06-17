@@ -2,7 +2,7 @@
 
 Subject: 👋 Welcome to Berlin
 
-Preheader: Reach your base, eat something, and keep the first day easy.
+Preheader: Reach your base, eat something, and keep the pack simple today.
 
 Welcome to Berlin.
 
@@ -14,7 +14,7 @@ If you came from BER, do not worry if the first transfer felt clunky. Most peopl
 
 One last practical thing: BER is Zone C. Central Berlin is usually AB. And if you have a paper ticket, validate it before you ride.
 
-Your plan is here:
+Your ${tripPackLabel} is here:
 
 ${planUrl}
 

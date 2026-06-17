@@ -32,6 +32,7 @@ Variables expected by Velo:
 
 - `${arrivalDate}`
 - `${tripLength}`
+- `${tripPackLabel}`
 - `${planTitle}`
 - `${recommendedTourDay}`
 - `${recommendedTourDate}`

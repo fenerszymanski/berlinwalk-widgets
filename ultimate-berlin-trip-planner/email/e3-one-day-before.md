@@ -2,7 +2,7 @@
 
 Subject: 🌦️ Berlin tomorrow
 
-Preheader: Weather, shoes, meeting point, and the first-day rule.
+Preheader: Weather, shoes, meeting point, and your saved pack.
 
 Hi,
 

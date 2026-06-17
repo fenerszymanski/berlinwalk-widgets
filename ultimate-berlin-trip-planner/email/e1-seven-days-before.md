@@ -2,7 +2,7 @@
 
 Subject: 🧳 One week before Berlin
 
-Preheader: Book the few things that need slots. Leave the rest flexible.
+Preheader: Keep your ${tripPackLabel} flexible around the few timed things.
 
 Hi,
 
@@ -15,7 +15,7 @@ Two Berlin things worth checking early:
 - **Reichstag dome:** free, but you need a confirmed time slot from the [official Bundestag visit booking](https://visite.bundestag.de/BAPWeb/pages/createBookingRequest.jsf?lang=en).
 - **Museum Island:** if there is one museum you really care about, check tickets on the [official Staatliche Museen zu Berlin ticket page](https://www.smb.museum/en/plan-your-visit/tickets/).
 
-If you want the city to make sense before it becomes a list of sights, keep BerlinWalk early in the trip. For your plan, I would look at:
+If you want the city to make sense before it becomes a list of sights, keep BerlinWalk early in the trip. For your ${tripPackLabel}, I would look at:
 
 **${recommendedTourDay}**
 
@@ -23,7 +23,7 @@ Reserve your free spot here:
 
 ${bookingUrl}
 
-Your saved plan is here when you need it:
+Your saved pack is here when you need it:
 
 ${planUrl}
 

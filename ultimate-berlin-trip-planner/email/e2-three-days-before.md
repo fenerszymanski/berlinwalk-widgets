@@ -1,14 +1,14 @@
 # E2 - 3 Days Before Arrival
 
-Subject: 🎫 Berlin tickets and opening days
+Subject: 🎫 Ticket checks for your Berlin pack
 
-Preheader: A few boring checks that make arrival much easier.
+Preheader: A few boring checks that make the ${tripPackLabel} easier to use.
 
 Hi,
 
 Three days before Berlin, keep things simple. Check tickets, opening days, and your first ride from the airport.
 
-Your planner ticket note:
+Your pack ticket note:
 
 **${ticket}**
 
@@ -23,9 +23,9 @@ Useful links:
 - Official VBB ticket page: [vbb.de tickets](https://www.vbb.de/en/tickets/)
 - Opening-day check: ${whatsOpenUrl}
 
-If your plan touches museums, Reichstag, or a Sunday/Monday, check opening days once. Berlin is not hard, but it does punish assumptions.
+If your ${tripPackLabel} touches museums, Reichstag, or a Sunday/Monday, check opening days once. Berlin is not hard, but it does punish assumptions.
 
-Your plan is here:
+Your pack is here:
 
 ${planUrl}
 

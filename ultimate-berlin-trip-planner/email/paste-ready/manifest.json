@@ -5,13 +5,14 @@
     "path": "sales",
     "stage": "instant",
     "placeholder": "TODO_TRIP_PLANNER_INSTANT",
-    "subject": "🗺️ Your Berlin plan is ready",
-    "preheader": "A calm start for your Berlin prep.",
+    "subject": "🗺️ Your ${tripPackLabel} is ready",
+    "preheader": "Routes, maps, opening checks, and PDF in one place.",
     "variables": [
       "arrivalDate",
       "bookingUrl",
       "planUrl",
-      "recommendedTourDay"
+      "recommendedTourDay",
+      "tripPackLabel"
     ]
   },
   {
@@ -21,11 +22,12 @@
     "stage": "minus7",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_7",
     "subject": "🧳 One week before Berlin",
-    "preheader": "Book the few things that need slots. Leave the rest flexible.",
+    "preheader": "Keep your ${tripPackLabel} flexible around the few timed things.",
     "variables": [
       "bookingUrl",
       "planUrl",
-      "recommendedTourDay"
+      "recommendedTourDay",
+      "tripPackLabel"
     ]
   },
   {
@@ -34,12 +36,13 @@
     "path": "sales",
     "stage": "minus3",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_3",
-    "subject": "🎫 Berlin tickets and opening days",
-    "preheader": "A few boring checks that make arrival much easier.",
+    "subject": "🎫 Ticket checks for your Berlin pack",
+    "preheader": "A few boring checks that make the ${tripPackLabel} easier to use.",
     "variables": [
       "planUrl",
       "ticket",
       "ticketCalculatorUrl",
+      "tripPackLabel",
       "whatsOpenUrl"
     ]
   },
@@ -50,7 +53,7 @@
     "stage": "minus1",
     "placeholder": "TODO_TRIP_PLANNER_MINUS_1",
     "subject": "🌦️ Berlin tomorrow",
-    "preheader": "Weather, shoes, meeting point, and the first-day rule.",
+    "preheader": "Weather, shoes, meeting point, and your saved pack.",
     "variables": [
       "bookingUrl",
       "meetingPointUrl",
@@ -65,11 +68,12 @@
     "stage": "dayOf",
     "placeholder": "TODO_TRIP_PLANNER_DAY_OF",
     "subject": "👋 Welcome to Berlin",
-    "preheader": "Reach your base, eat something, and keep the first day easy.",
+    "preheader": "Reach your base, eat something, and keep the pack simple today.",
     "variables": [
       "bookingUrl",
       "meetingPointUrl",
-      "planUrl"
+      "planUrl",
+      "tripPackLabel"
     ]
   }
 ]

@@ -10571,23 +10571,23 @@
           <div class="bw-preview-fade bw-locked-only" data-lock-box>
             <div class="bw-preview-fade-row">
               <span class="bw-preview-fade-icon" aria-hidden="true">📋</span>
-              <span class="bw-preview-fade-copy"><b>Save the full plan</b><strong>Later days, maps, PDF, and arrival reminders</strong><span>Your Day 1 preview is free here. Email only unlocks the saved phone/PDF version.</span></span>
+              <span class="bw-preview-fade-copy"><b>Save your Berlin Trip Pack</b><strong>Routes, maps, PDF, and opening checks</strong><span>Your Day 1 preview is free here. Email sends the travel-ready pack.</span></span>
             </div>
           </div>
 
           <div class="bw-lead-panel bw-locked-only" data-lead-panel>
             <div>
-              <h3 class="bw-lead-title">Save the full Berlin plan</h3>
-              <p class="bw-lead-copy">Your Day 1 preview is ready below. Email yourself the full version only if you want the later days, map links, PDF, and reminders.</p>
+              <h3 class="bw-lead-title" data-pack-title>Save your Berlin Trip Pack</h3>
+              <p class="bw-lead-copy">Your Day 1 preview is ready below. Email yourself the travel-ready pack if you want routes, map links, PDF, and opening checks.</p>
             </div>
             <input class="bw-lead-input" data-lead-email type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-label="Email address" required>
-            <button class="bw-lead-submit" type="button" data-unlock-plan>Save full plan + PDF</button>
+            <button class="bw-lead-submit" type="button" data-unlock-plan>Send my Berlin Trip Pack</button>
             <p class="bw-lead-legal">No spam. Just your plan and useful arrival reminders. You can unsubscribe anytime.</p>
             <div class="bw-delivery-grid" aria-label="What arrives by email">
-              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">📆</span><span><strong>Full days</strong><span>Day 2 onward</span></span></div>
+              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">📆</span><span><strong data-pack-route-chip-title>Hour-by-hour start</strong><span data-pack-route-chip-copy>First route windows</span></span></div>
               <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">🗺️</span><span><strong>Maps</strong><span>Route links</span></span></div>
-              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">🌦️</span><span><strong>Backups</strong><span>Weather/openings</span></span></div>
-              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">📄</span><span><strong>PDF</strong><span>Print version</span></span></div>
+              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">🌦️</span><span><strong>Weather/opening checks</strong><span>Rain, Sundays, Mondays</span></span></div>
+              <div class="bw-delivery-item"><span class="bw-delivery-icon" aria-hidden="true">📄</span><span><strong>PDF</strong><span>Phone/print version</span></span></div>
             </div>
             <div class="bw-reminder-flow" aria-label="Arrival reminder timeline">
               <div class="bw-reminder-head">
@@ -11730,6 +11730,11 @@
   function previewDayFlowHtml(day, plan) {
     var anchors = dayMapLinks(day).slice(0, 3).map(function (link) { return link.label; });
     var anchorCopy = anchors.length ? anchors.join(' -> ') : 'World Clock -> Museum Island';
+    var dayCount = tripDayCount(plan && plan.days ? plan.days.length : state.tripLength);
+    var packLabel = packLabelForTripLength(dayCount);
+    var saveCopy = dayCount === 1
+      ? 'Day 1 is visible here. Email sends the ' + packLabel + ' with map links, PDF, and arrival checks.'
+      : 'Day 1 is visible here. Email sends the ' + packLabel + ' with later days, map links, PDF, and arrival checks.';
     var slot = plan ? tourSlotForPlan(plan) : null;
     var tourCopy = state.tourIntent === 'booked'
       ? 'Keep the World Clock meeting point saved and keep arrival day light.'
@@ -11749,7 +11754,7 @@
         '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('route') + '</span><span class="bw-preview-flow-copy"><b>First useful anchor</b><span>' + escapeHtml(tourCopy) + '</span></span>' +
       '</div>' +
       '<div class="bw-preview-flow-item">' +
-        '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('calendar') + '</span><span class="bw-preview-flow-copy"><b>Save if useful</b><span>Day 1 is visible here. Email saves later days, map links, PDF, and arrival reminders.</span></span>' +
+        '<span class="bw-preview-flow-icon" aria-hidden="true">' + iconSvg('calendar') + '</span><span class="bw-preview-flow-copy"><b>Save if useful</b><span>' + escapeHtml(saveCopy) + '</span></span>' +
       '</div>' +
     '</div>';
   }
@@ -11797,7 +11802,7 @@
       : 'One practical guardrail is already built into this day, so the route stays realistic.';
 
     return '<div class="bw-preview-proof" aria-label="Why this Day 1 works">' +
-      '<div class="bw-preview-proof-head"><strong>Why this Day 1 works</strong><span>Enough to trust the route before you email the full plan.</span></div>' +
+      '<div class="bw-preview-proof-head"><strong>Why this Day 1 works</strong><span>Enough to trust the route before you email the trip pack.</span></div>' +
       '<div class="bw-preview-proof-grid">' +
         previewProofItemHtml(slot ? 'calendar' : 'route', slot ? 'Tour placement' : 'Route shape', routeDetail) +
         previewProofItemHtml(weather ? weatherIconName(weather.icon) : 'umbrella', weather ? weather.title : 'Weather backup', weatherDetail) +
@@ -11848,9 +11853,11 @@
 
     var blockHtml = blockCards.slice(0, 3).join('');
     var slot = plan ? tourSlotForDay(day, plan) : null;
+    var dayCount = tripDayCount(plan && plan.days ? plan.days.length : state.tripLength);
+    var packLabel = packLabelForTripLength(dayCount);
     var cue = slot
-      ? 'If this Day 1 looks useful, save the full phone/PDF plan for exact map links, later days, and the ' + slot.timeLabel + ' BerlinWalk placement.'
-      : 'If this Day 1 looks useful, save the full phone/PDF plan for exact map links, later days, and arrival reminders.';
+      ? 'If this Day 1 looks useful, send yourself the ' + packLabel + ' for exact map links, route windows, PDF, and the ' + slot.timeLabel + ' BerlinWalk placement.'
+      : 'If this Day 1 looks useful, send yourself the ' + packLabel + ' for exact map links, route windows, PDF, and arrival checks.';
 
     return '<div class="bw-preview-teaser">' +
       '<div class="bw-preview-teaser-head">' +
@@ -11866,6 +11873,8 @@
 
   function lockedPlanPreviewHtml(plan) {
     var days = (plan && plan.days) || [];
+    var dayCount = tripDayCount(days.length || state.tripLength);
+    var packLabel = packLabelForTripLength(dayCount);
     var items = [];
 
     days.slice(1, 3).forEach(function (day) {
@@ -11873,7 +11882,7 @@
         icon: dayIconName(day),
         label: 'Day ' + day.dayNumber,
         title: day.theme || day.title || 'Next Berlin day',
-        detail: formatDisplayDate(day.dateKey) + ' - exact timings, maps, food, and backup notes.'
+        detail: formatDisplayDate(day.dateKey) + ' - route windows, map links, food notes, and backup checks.'
       });
     });
 
@@ -11881,8 +11890,8 @@
       items.push({
         icon: 'route',
         label: 'Exact Day 1',
-        title: 'Map links and timing',
-        detail: 'The preview proves the shape. The full phone version keeps route links and reminders together.'
+        title: 'Hour-by-hour route windows',
+        detail: 'The preview proves the shape. The pack keeps map links, PDF, and arrival checks together.'
       });
     }
 
@@ -11890,31 +11899,37 @@
       items.push({
         icon: 'calendar',
         label: days.length === 4 ? 'Day 4' : 'Days 4-' + days.length,
-        title: days.length === 4 ? 'Final day is ready' : 'Remaining days are ready',
-        detail: 'The full itinerary keeps later days grouped by area instead of scattered across Berlin.'
+        title: days.length === 4 ? 'Final day route is ready' : 'Remaining route days are ready',
+        detail: 'The pack keeps later days grouped by area with realistic daily map links.'
       });
     }
 
     items.push({
       icon: 'map',
       label: 'Map pack',
-      title: 'Google Maps route links',
+      title: 'Day-by-day Google Maps links',
       detail: Math.max(3, days.length * 3) + '+ stops organized by day for phone use.'
     });
     items.push({
       icon: state.mustHandle.indexOf('rain') !== -1 ? 'umbrella' : 'shield',
-      label: 'Backup layer',
-      title: 'Weather and opening checks',
+      label: 'Guardrails',
+      title: 'Weather/opening checks',
       detail: 'Rain, Sunday/Monday, breaks, and reservation notes stay attached to the route.'
     });
     items.push({
+      icon: 'ticket',
+      label: 'Essentials',
+      title: 'Transport maps and Berlin basics',
+      detail: 'Ticket zones, public transport maps, and arrival basics are kept with the plan.'
+    });
+    items.push({
       icon: 'download',
-      label: 'Carry pack',
-      title: 'PDF and print version',
+      label: 'PDF',
+      title: 'Phone and print version',
       detail: 'Send it once and keep a travel-ready version for the trip.'
     });
 
-    return '<div class="bw-preview-fade-head"><strong>Your full plan is already shaped</strong><span>This is your Berlin plan, not a generic sample.</span></div>' +
+    return '<div class="bw-preview-fade-head"><strong>Your ' + escapeHtml(packLabel) + ' is already shaped</strong><span>This is your Berlin route pack, not a generic sample.</span></div>' +
       items.slice(0, 6).map(function (item) {
         return '<div class="bw-preview-fade-row">' +
           '<span class="bw-preview-fade-icon" aria-hidden="true">' + iconSvg(item.icon) + '</span>' +
@@ -12304,6 +12319,25 @@
   function setText(selector, value) {
     var element = root.querySelector(selector);
     if (element) element.textContent = value == null ? '' : String(value);
+  }
+
+  function tripDayCount(value) {
+    var days = Number(value || state.tripLength || 1);
+    if (!Number.isFinite(days)) days = 1;
+    return Math.max(1, Math.min(7, Math.round(days)));
+  }
+
+  function packLabelForTripLength(days) {
+    var count = tripDayCount(days);
+    if (count <= 1) return '24-hour Berlin Trip Pack';
+    if (count === 2) return '48-hour Berlin Trip Pack';
+    if (count === 3) return '72-hour Berlin Trip Pack';
+    if (count === 4) return '96-hour Berlin Trip Pack';
+    return count + '-day Berlin Trip Pack';
+  }
+
+  function routeChipLabelForTripLength(days) {
+    return tripDayCount(days) >= 5 ? 'Day-by-day route' : 'Hour-by-hour start';
   }
 
   function getDateOverride() {
@@ -17746,7 +17780,8 @@
     var copyEl = root.querySelector('.bw-lead-copy');
     if (!copyEl) return;
     var days = plan.days.length;
-    var daysText = days === 1 ? '1-day' : days + '-day';
+    var packLabel = packLabelForTripLength(days);
+    var routeChipLabel = routeChipLabelForTripLength(days);
     
     var interestHighlights = [];
     var interests = Array.isArray(state.interests) ? state.interests : [];
@@ -17763,11 +17798,17 @@
       interestHighlights.push('nightlife spots');
     }
     
-    var highlightText = interestHighlights.length > 0
-      ? ' with ' + interestHighlights.join(' and ')
-      : ' with weather-aware details';
+    var focusText = interestHighlights.length > 0
+      ? ' It also keeps ' + interestHighlights.join(' and ') + ' visible.'
+      : ' Weather/opening guardrails stay attached to the route.';
+    var routePromise = days >= 5
+      ? 'day-by-day route shape'
+      : 'route windows for the start of the trip';
 
-    copyEl.innerHTML = 'Your Day 1 preview is ready below. If it looks useful, save the full <strong>' + daysText + ' phone/PDF plan</strong>' + highlightText + ', <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, offline <strong>public transport maps</strong>, and local <strong>shopping guides</strong>.';
+    setText('[data-pack-title]', 'Save your ' + packLabel);
+    setText('[data-pack-route-chip-title]', routeChipLabel);
+    setText('[data-pack-route-chip-copy]', days >= 5 ? 'Daily route shape' : 'First route windows');
+    copyEl.innerHTML = 'Your Day 1 preview is ready below. If it looks useful, send yourself the <strong>' + escapeHtml(packLabel) + '</strong>: ' + escapeHtml(routePromise) + ', <strong>Google Maps links</strong> for ' + (days * 3) + '+ stops, Berlin essentials, offline <strong>public transport maps</strong>, and weather/opening guardrails.' + escapeHtml(focusText);
   }
 
   function updateUnlockUi() {
@@ -17795,7 +17836,7 @@
     var unlockButton = root.querySelector('[data-unlock-plan]');
     if (unlockButton) {
       unlockButton.disabled = Boolean(planNeedsUpdate);
-      unlockButton.textContent = planNeedsUpdate ? 'Update preview first' : 'Save full plan + PDF';
+      unlockButton.textContent = planNeedsUpdate ? 'Update preview first' : 'Send my ' + packLabelForTripLength(state.tripLength);
     }
     renderFullPlan();
   }
@@ -19235,7 +19276,7 @@
     updateUnlockUi();
     if (planGenerated) renderPlan();
     setLeadMessage('', false);
-    setActionStatus(method === 'lead_error' ? 'Email save had a hiccup, so the full plan is ready this time.' : 'Your full plan is ready.');
+    setActionStatus(method === 'lead_error' ? 'Email save had a hiccup, so your ' + packLabelForTripLength(state.tripLength) + ' is ready this time.' : 'Your ' + packLabelForTripLength(state.tripLength) + ' is ready.');
     requestAiEnhancement();
     syncPlannerFrame(root.querySelector('[data-full-plan]'), true);
   }
@@ -19245,7 +19286,7 @@
     var button = root.querySelector('[data-unlock-plan]');
     var email = input ? input.value.trim() : '';
     if (planNeedsUpdate) {
-      setLeadMessage('Update the preview first so the saved plan matches your latest answers.', true);
+      setLeadMessage('Update the preview first so the saved pack matches your latest answers.', true);
       syncPlannerFrame(root.querySelector('[data-quiz-nav]') || root.querySelector('[data-quiz-shell]'), true);
       return;
     }
@@ -19254,7 +19295,7 @@
       trip_length: state.tripLength
     });
     if (!validEmail(email)) {
-      setLeadMessage('Add a valid email address so I can send the full plan.', true);
+      setLeadMessage('Add a valid email address so I can send your ' + packLabelForTripLength(state.tripLength) + '.', true);
       if (input) input.focus();
       return;
     }
@@ -19271,7 +19312,7 @@
       button.disabled = true;
       button.textContent = 'Sending...';
     }
-    setLeadMessage('Saving your trip plan...', false);
+    setLeadMessage('Saving your ' + packLabelForTripLength(payload.tripLength) + '...', false);
 
     var request = forceLocalLeadErrorForQa()
       ? Promise.reject(new Error('Forced local QA lead failure'))
@@ -19302,7 +19343,7 @@
     }).finally(function () {
       if (button) {
         button.disabled = false;
-        button.textContent = 'Save full plan + PDF';
+        button.textContent = 'Send my ' + packLabelForTripLength(payload.tripLength);
       }
     });
   }
@@ -22617,7 +22658,7 @@
     if (!emailValidTracked && event.target && event.target.matches('[data-lead-email]') && validEmail(event.target.value)) {
       emailValidTracked = true;
       track('bw_trip_planner_email_valid', { arrival_date: state.arrivalDate, trip_length: state.tripLength });
-      setLeadMessage('Looks good. I can send the full plan now.', false);
+      setLeadMessage('Looks good. I can send your ' + packLabelForTripLength(state.tripLength) + ' now.', false);
     }
   });
 
