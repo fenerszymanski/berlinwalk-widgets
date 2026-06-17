@@ -260,6 +260,7 @@ class BWSiteFooterElement extends HTMLElement {
         }
 
         .bw-site-footer .bw-footer-links a {
+          align-items: center;
           color: var(--muted-on-dark);
           display: inline-flex;
           font-size: 14px;
@@ -276,17 +277,22 @@ class BWSiteFooterElement extends HTMLElement {
         }
 
         .bw-site-footer .bw-badge-new {
+          align-items: center;
+          align-self: flex-start;
           background: var(--yellow);
+          border-radius: 999px;
           color: var(--green-dark);
+          display: inline-flex;
+          flex: 0 0 auto;
           font-size: 8px;
           font-weight: 800;
-          padding: 2px 5px;
-          border-radius: 4px;
-          margin-left: 6px;
-          display: inline-block;
-          vertical-align: middle;
+          justify-content: center;
           letter-spacing: 0.5px;
           line-height: 1;
+          margin-left: 6px;
+          min-height: 16px;
+          padding: 2px 6px;
+          vertical-align: middle;
         }
 
         .bw-site-footer .bw-footer-note-grid {
