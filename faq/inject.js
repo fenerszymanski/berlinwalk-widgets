@@ -119,7 +119,8 @@
   "the-best-views-in-berlin-you-can-find-on-foot": "best-views-foot",
   "what-is-a-free-walking-tour-how-tip-based-tours-actually-work": "free-walking-tour-explainer",
   "the-spree-river-the-waterway-that-built-berlin": "spree-river-berlin",
-  "berlin-hauptbahnhof-guide": "berlin-hauptbahnhof-guide"
+  "berlin-hauptbahnhof-guide": "berlin-hauptbahnhof-guide",
+  "berlin-with-kids": "berlin-with-kids"
 };
 
   var SCHEMAS = {
@@ -5709,6 +5710,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Take a taxi if you have heavy luggage, mobility needs, small children, a late arrival or a hotel that is awkward by public transport. For central sightseeing, public transport is usually the better default because Hauptbahnhof is very well connected."
+        }
+      }
+    ]
+  },
+  "berlin-with-kids": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Berlin good to visit with kids?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin is flat, public transport is extensive, and the city has strong family attractions such as Museum fur Naturkunde, Zoo Berlin, Aquarium Berlin, parks and playgrounds. The main trick is pacing: do not plan too many big sights in one day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best first attraction in Berlin with kids?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For many families, Museum fur Naturkunde is the safest first pick because the dinosaur hall is instantly interesting and works in rain, cold or heat. If you stay in the west, Zoo Berlin or Aquarium Berlin can be the better first-day anchor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do children need public transport tickets in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "According to visitBerlin public transport guidance, children under 6 do not need a ticket. Children aged 6 to 14 use reduced fare, and adults use standard fare. Always check the current ticket before buying because prices can change."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should families stay in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a first family trip, choose Mitte for the easiest sightseeing base, Prenzlauer Berg for calmer streets and playgrounds, or Charlottenburg/Zoo if Zoo Berlin, Aquarium Berlin and the west side are high priorities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin easy with a stroller?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Generally yes, because the city is mostly flat and many central routes are paved. But elevators can be out of service, older stations may be slower, and cobblestones around historic areas can be annoying. Build extra time into transfers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can kids join the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, children are welcome. The route is about 2 hours, mostly flat, and strollers can usually manage it. Older children often enjoy the visual history more than very young children, who may find the full duration challenging."
         }
       }
     ]

@@ -3456,5 +3456,34 @@
         "a": "Take a taxi if you have heavy luggage, mobility needs, small children, a late arrival or a hotel that is awkward by public transport. For central sightseeing, public transport is usually the better default because Hauptbahnhof is very well connected."
       }
     ]
+  },
+  "berlin-with-kids": {
+    "title": "Berlin with Kids - FAQ",
+    "items": [
+      {
+        "q": "Is Berlin good to visit with kids?",
+        "a": "Yes. Berlin is flat, public transport is extensive, and the city has strong family attractions such as Museum fur Naturkunde, Zoo Berlin, Aquarium Berlin, parks and playgrounds. The main trick is pacing: do not plan too many big sights in one day."
+      },
+      {
+        "q": "What is the best first attraction in Berlin with kids?",
+        "a": "For many families, **Museum fur Naturkunde** is the safest first pick because the dinosaur hall is instantly interesting and works in rain, cold or heat. If you stay in the west, **Zoo Berlin** or **Aquarium Berlin** can be the better first-day anchor."
+      },
+      {
+        "q": "Do children need public transport tickets in Berlin?",
+        "a": "According to visitBerlin public transport guidance, children **under 6** do not need a ticket. Children aged **6 to 14** use reduced fare, and adults use standard fare. Always check the current ticket before buying because prices can change."
+      },
+      {
+        "q": "Where should families stay in Berlin?",
+        "a": "For a first family trip, choose **Mitte** for the easiest sightseeing base, **Prenzlauer Berg** for calmer streets and playgrounds, or **Charlottenburg/Zoo** if Zoo Berlin, Aquarium Berlin and the west side are high priorities."
+      },
+      {
+        "q": "Is Berlin easy with a stroller?",
+        "a": "Generally yes, because the city is mostly flat and many central routes are paved. But elevators can be out of service, older stations may be slower, and cobblestones around historic areas can be annoying. Build extra time into transfers."
+      },
+      {
+        "q": "Can kids join the BerlinWalk tour?",
+        "a": "Yes, children are welcome. The route is about **2 hours**, mostly flat, and strollers can usually manage it. Older children often enjoy the visual history more than very young children, who may find the full duration challenging."
+      }
+    ]
   }
 }

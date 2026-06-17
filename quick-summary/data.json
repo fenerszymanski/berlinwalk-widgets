@@ -1552,5 +1552,17 @@
       "**For Alexanderplatz, use U5 or S-Bahn.** That is the simplest route to the BerlinWalk meeting area at the World Clock.",
       "Use the station arrival planner below if you are choosing between hotel, luggage, sightseeing, the tour meeting point or BER Airport."
     ]
+  },
+  "berlin-with-kids": {
+    "title": "Berlin with Kids - Quick Summary",
+    "icon": "🧒",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**Berlin with kids works best when you plan at child speed:** one main attraction, one food stop, one movement break and one optional extra.",
+      "**Best first picks:** Museum fur Naturkunde for dinosaurs, Zoo Berlin or Aquarium Berlin in the west, and parks/playgrounds between sightseeing blocks.",
+      "**Public transport is family-friendly:** children under 6 do not need a ticket; ages 6 to 14 use reduced fare.",
+      "**Stay central, Prenzlauer Berg, or Charlottenburg/Zoo** if you want easier days with fewer long transfers.",
+      "**Do not overpack Mondays, Sundays or public holidays.** Shops and museums can vary, so check official opening hours before promising a specific stop."
+    ]
   }
 }

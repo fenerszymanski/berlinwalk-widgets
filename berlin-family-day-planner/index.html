@@ -1,0 +1,593 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Family Day Planner | BerlinWalk</title>
+  <meta name="description" content="Build a kid-friendly Berlin day plan by age, weather, pace and starting area.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-family-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-family-planner {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-red: #E63946;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-family-planner *,
+    #bw-family-planner *::before,
+    #bw-family-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-family-planner .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-family-planner .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.2), rgba(124, 179, 66, 0.18)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-family-planner .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-family-planner h2,
+    #bw-family-planner h3,
+    #bw-family-planner p {
+      margin-top: 0;
+    }
+
+    #bw-family-planner .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-family-planner .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 840px;
+    }
+
+    #bw-family-planner .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(270px, 0.82fr) minmax(0, 1.18fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-family-planner .bw-panel,
+    #bw-family-planner .bw-result,
+    #bw-family-planner .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-family-planner .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-family-planner label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-family-planner .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-family-planner select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-family-planner select:focus-visible,
+    #bw-family-planner button:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-family-planner .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-family-planner button {
+      background: var(--bw-white);
+      border: 1px solid rgba(124, 179, 66, 0.45);
+      border-radius: 8px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 9px 10px;
+      text-align: center;
+    }
+
+    #bw-family-planner button[aria-pressed="true"] {
+      background: var(--bw-yellow);
+      border-color: rgba(27, 94, 32, 0.38);
+      color: var(--bw-green);
+      box-shadow: inset 0 -2px 0 rgba(27, 94, 32, 0.2);
+    }
+
+    #bw-family-planner .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-family-planner .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-family-planner .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-family-planner .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-family-planner .bw-result p {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin: 0;
+    }
+
+    #bw-family-planner .bw-plan {
+      display: grid;
+      gap: 10px;
+    }
+
+    #bw-family-planner .bw-step {
+      align-items: start;
+      background: #FBFDF7;
+      border: 1px solid rgba(124, 179, 66, 0.26);
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 58px minmax(0, 1fr);
+      padding: 11px;
+    }
+
+    #bw-family-planner .bw-time {
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 7px 6px;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    #bw-family-planner .bw-step strong {
+      color: var(--bw-text);
+      display: block;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    #bw-family-planner .bw-meta {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-family-planner .bw-tips {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-family-planner .bw-card h4 {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1.25;
+      margin: 0 0 6px;
+      text-transform: uppercase;
+    }
+
+    #bw-family-planner .bw-card p {
+      font-size: 12.5px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-family-planner .bw-book {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding: 12px 13px;
+    }
+
+    #bw-family-planner .bw-book span {
+      color: #DDEFC7;
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    #bw-family-planner .bw-book a {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      flex: 0 0 auto;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 10px 12px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 760px) {
+      #bw-family-planner {
+        margin: 18px 0;
+      }
+
+      #bw-family-planner .bw-head {
+        padding: 18px 16px;
+      }
+
+      #bw-family-planner .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-family-planner .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-family-planner .bw-choice-grid,
+      #bw-family-planner .bw-tips {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-family-planner .bw-step {
+        grid-template-columns: 54px minmax(0, 1fr);
+      }
+
+      #bw-family-planner .bw-book {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      #bw-family-planner .bw-book a {
+        text-align: center;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk Tool</p>
+      <h2 class="bw-title">Berlin Family Day Planner</h2>
+      <p class="bw-sub">Choose ages, weather, pace and your starting area. Get one practical Berlin day that avoids overpacking the schedule.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Family day choices">
+        <div class="bw-form">
+          <label>
+            <span class="bw-label">Kids' age range</span>
+            <select id="bw-age">
+              <option value="little">0-5: stroller or short legs</option>
+              <option value="school" selected>6-11: curious, needs breaks</option>
+              <option value="teen">12+: bigger sights, more independence</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Weather</span>
+            <select id="bw-weather">
+              <option value="dry" selected>Dry or mixed</option>
+              <option value="hot">Hot summer day</option>
+              <option value="rain">Rainy or cold</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Starting area</span>
+            <select id="bw-base">
+              <option value="mitte" selected>Mitte / Alexanderplatz</option>
+              <option value="west">Zoo / Charlottenburg</option>
+              <option value="east">Prenzlauer Berg / Friedrichshain</option>
+            </select>
+          </label>
+
+          <div>
+            <span class="bw-label">Pace</span>
+            <div class="bw-choice-grid" role="group" aria-label="Pace">
+              <button type="button" data-choice="pace" data-value="easy" aria-pressed="true">Easy day</button>
+              <button type="button" data-choice="pace" data-value="full" aria-pressed="false">Full day</button>
+            </div>
+          </div>
+
+          <p class="bw-note">This is a planning shortcut, not a live booking engine. Always check opening hours for the exact date, especially Mondays and public holidays.</p>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="bw-pill">Easy family plan</span>
+        <h3 id="bw-plan-title">Museum, playground, short walk</h3>
+        <p id="bw-plan-summary">A balanced first Berlin day for school-age kids: one big indoor win, one movement break, then a short historic walk if energy stays good.</p>
+        <div class="bw-plan" id="bw-plan"></div>
+        <div class="bw-tips">
+          <article class="bw-card">
+            <h4>Ticket note</h4>
+            <p id="bw-ticket">Children under 6 do not need a Berlin public transport ticket. Ages 6 to 14 use reduced fare.</p>
+          </article>
+          <article class="bw-card">
+            <h4>Break rule</h4>
+            <p id="bw-break">Plan one snack or playground pause every 90 minutes. Berlin days fail when adults try to stack too many museums.</p>
+          </article>
+          <article class="bw-card">
+            <h4>Backup</h4>
+            <p id="bw-backup">If energy drops, stop after the first two blocks and save the landmark walk for tomorrow morning.</p>
+          </article>
+        </div>
+        <div class="bw-book">
+          <span>A 2 hours walking tour can work with older kids if you keep the rest of the day light.</span>
+          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=embed&utm_medium=widget&utm_campaign=berlin-family-day-planner&utm_content=planner-cta" target="_blank" rel="noopener">Check tour times</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-family-planner');
+      if (!root) return;
+
+      var state = {
+        age: 'school',
+        weather: 'dry',
+        base: 'mitte',
+        pace: 'easy'
+      };
+
+      var plans = {
+        mitte: {
+          dry: [
+            ['10:00', 'Museum fur Naturkunde', 'Start with dinosaurs, minerals and a clear indoor win. Book a time slot if the day is busy.'],
+            ['12:15', 'Lunch and reset', 'Choose a simple cafe or bakery nearby rather than crossing the city hungry.'],
+            ['13:30', 'Monbijoupark or James-Simon-Park', 'Give kids space before adding another sight. Both keep you near Museum Island.'],
+            ['15:00', 'Short BerlinWalk route preview', 'Walk Alexanderplatz to Museum Island, then stop before everyone is tired.']
+          ],
+          hot: [
+            ['09:30', 'Outdoor sights early', 'Do the TV Tower area, Rotes Rathaus and Museum Island before the stones heat up.'],
+            ['11:30', 'Shaded playground break', 'Use James-Simon-Park, Monbijoupark or a nearby cafe as the main reset.'],
+            ['13:00', 'Indoor museum block', 'Move into Naturkundemuseum, DDR Museum or another airier indoor stop.'],
+            ['16:00', 'Ice cream, then done', 'Do not turn a hot day into a forced marathon. Save big parks for evening.']
+          ],
+          rain: [
+            ['10:00', 'Museum fur Naturkunde', 'Make this the anchor. It is the easiest rainy-day win for many families.'],
+            ['12:30', 'Transit-light lunch', 'Stay near the U6 or tram so the next move is painless.'],
+            ['14:00', 'Humboldt Forum or DDR Museum', 'Choose one second indoor stop, not both, unless your kids still have energy.'],
+            ['16:00', 'Hotel break', 'Berlin is better after a dry-socks reset than after one more tired attraction.']
+          ]
+        },
+        west: {
+          dry: [
+            ['09:45', 'Zoo Berlin or Aquarium', 'Use the west side as the main anchor instead of crossing to Mitte immediately.'],
+            ['12:30', 'Tiergarten picnic edge', 'Let the day breathe with shade, snacks and a short walk.'],
+            ['14:30', 'Bus 100 landmark ride', 'See major sights from the upper deck without adding too much walking.'],
+            ['16:00', 'Brandenburg Gate short stop', 'Finish with one famous photo, then leave before the late-afternoon crash.']
+          ],
+          hot: [
+            ['09:30', 'Zoo early entry', 'Animals, shade and fewer crowds work best before lunch.'],
+            ['12:30', 'Aquarium or indoor lunch', 'Move indoors when the heat peaks.'],
+            ['15:00', 'Tiergarten shade', 'Keep it flexible: playground, ice cream, or simply a slow walk.'],
+            ['17:00', 'Optional Bus 100', 'Use the bus only if everyone still wants a city overview.']
+          ],
+          rain: [
+            ['10:00', 'Aquarium Berlin', 'A compact rainy-day choice that does not require much walking.'],
+            ['12:00', 'KaDeWe food hall backup', 'Useful for toilets, food choices and a controlled reset.'],
+            ['14:00', 'Bus 100 to Mitte', 'Good landmark overview with minimal weather exposure.'],
+            ['15:30', 'Early finish', 'Rainy family days are won by stopping early, not by adding one more sight.']
+          ]
+        },
+        east: {
+          dry: [
+            ['10:00', 'Prenzlauer Berg playground cafe loop', 'Start local and easy before moving toward the big landmarks.'],
+            ['12:00', 'Mauerpark or Kollwitzkiez lunch', 'Keep lunch simple and close to green space.'],
+            ['14:00', 'Tram to Alexanderplatz', 'Use the tram as a low-stress city introduction.'],
+            ['15:00', 'Museum Island short walk', 'Add one historic centre block if energy is still good.']
+          ],
+          hot: [
+            ['09:30', 'Neighborhood playground early', 'Get movement done before the hottest part of the day.'],
+            ['11:30', 'Long lunch break', 'Choose shade, water and toilets over squeezing in another attraction.'],
+            ['14:00', 'Indoor museum or hotel pause', 'Naturkundemuseum is the strongest cross-age fallback.'],
+            ['17:00', 'Evening park time', 'A later playground or park walk works better than hot midday sightseeing.']
+          ],
+          rain: [
+            ['10:00', 'Local cafe and tram start', 'Keep transfers simple and avoid long exposed walks.'],
+            ['11:30', 'Museum fur Naturkunde', 'One strong indoor anchor is better than three wet short stops.'],
+            ['14:00', 'Bookshop, cafe or hotel reset', 'Use the afternoon for recovery if kids are saturated.'],
+            ['16:00', 'Optional short landmark', 'Only add Alexanderplatz or Museum Island if the weather clears.']
+          ]
+        }
+      };
+
+      var ageNotes = {
+        little: {
+          title: 'Stroller-safe, short-block Berlin',
+          summary: 'For small children, keep the day built around one anchor and one open-space reset. Avoid long museum chains.',
+          breakText: 'Use one serious pause every 60 to 75 minutes. Elevators and toilets matter more than squeezing in landmarks.'
+        },
+        school: {
+          title: 'Museum, playground, short walk',
+          summary: 'A balanced first Berlin day for school-age kids: one big indoor win, one movement break, then a short historic walk if energy stays good.',
+          breakText: 'Plan one snack or playground pause every 90 minutes. Berlin days fail when adults try to stack too many museums.'
+        },
+        teen: {
+          title: 'Bigger sights, less hand-holding',
+          summary: 'For teens, combine one major attraction with a real neighborhood or history angle. Give them a choice in the final stop.',
+          breakText: 'Teens can handle a fuller day, but they still need food before the next serious museum or history stop.'
+        }
+      };
+
+      function render() {
+        var note = ageNotes[state.age];
+        var list = plans[state.base][state.weather].slice();
+        if (state.pace === 'easy') list = list.slice(0, 3);
+
+        root.querySelector('#bw-pill').textContent = state.pace === 'full' ? 'Full family plan' : 'Easy family plan';
+        root.querySelector('#bw-plan-title').textContent = note.title;
+        root.querySelector('#bw-plan-summary').textContent = note.summary;
+        root.querySelector('#bw-break').textContent = note.breakText;
+        root.querySelector('#bw-backup').textContent = state.pace === 'full'
+          ? 'If the fourth block starts to feel forced, drop it. The best family plan has an exit ramp.'
+          : 'If energy drops, stop after the first two blocks and save the landmark walk for tomorrow morning.';
+
+        root.querySelector('#bw-plan').innerHTML = list.map(function (step) {
+          return '<div class="bw-step"><div class="bw-time">' + step[0] + '</div><div><strong>' + step[1] + '</strong><p class="bw-meta">' + step[2] + '</p></div></div>';
+        }).join('');
+
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.sendResize) {
+          window.BerlinWalkBrand.sendResize();
+        }
+      }
+
+      root.querySelectorAll('select').forEach(function (select) {
+        select.addEventListener('change', function () {
+          state[select.id.replace('bw-', '')] = select.value;
+          render();
+        });
+      });
+
+      root.querySelectorAll('button[data-choice]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var choice = button.getAttribute('data-choice');
+          state[choice] = button.getAttribute('data-value');
+          root.querySelectorAll('button[data-choice="' + choice + '"]').forEach(function (peer) {
+            peer.setAttribute('aria-pressed', peer === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>
