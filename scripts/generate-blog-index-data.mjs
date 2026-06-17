@@ -441,6 +441,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(with-kids|kids|family|families|children|playground|zoo|aquarium)/.test(s)) return 'berlin-family-day-planner';
   if (/(1237|founding|cölln|colln|medieval|nikolaiviertel|old-town|old town)/.test(s)) return 'medieval-berlin-mini-walk';
   if (/(spree|boat-tour|boat tour|river-cruise|river cruise)/.test(s)) return 'berlin-boat-tour-finder';
   if (/(best-views|best views|viewpoint|landmark|weltzeituhr|world clock|alexanderplatz|museum-island|museum island|berliner-dom|berliner dom)/.test(s)) return 'berlin-landmarks-map';
