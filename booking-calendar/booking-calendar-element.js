@@ -47,6 +47,13 @@ const BW_BOOKING_CALENDAR_STYLES = `
     overflow: hidden;
   }
 
+  .bw-cal-standalone {
+    box-sizing: border-box;
+    margin: 0 auto;
+    max-width: 1160px;
+    padding: 32px 24px 44px;
+  }
+
   .bw-cal-intro {
     display: grid;
     gap: 10px;
@@ -486,6 +493,10 @@ const BW_BOOKING_CALENDAR_STYLES = `
   }
 
   @media (max-width: 520px) {
+    .bw-cal-standalone {
+      padding: 18px 12px 26px;
+    }
+
     .bw-cal-intro {
       margin-bottom: 12px;
     }
