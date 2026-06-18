@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-18T05:42:28.177Z",
+  "updatedAt": "2026-06-18T17:28:40.635Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 130,
+  "totalPosts": 131,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -303,21 +303,21 @@
       "relatedToolSlug": "berlin-public-toilets"
     },
     {
-      "title": "Are Shops Open on Sunday in Berlin? What You Need to Know",
-      "slug": "are-shops-open-on-sunday-in-berlin-what-you-need-to-know",
-      "path": "/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know",
-      "url": "https://www.berlinwalk.com/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know",
-      "excerpt": "Planning to shop on a Sunday in Berlin? Most stores are closed — and it catches tourists off guard every single week. Here's exactly what's open, what's closed, and how to plan around Germany's strict Sunday shopping laws.",
+      "title": "Is Berlin Safe to Visit? An Honest 2026 Guide",
+      "slug": "is-berlin-safe-to-visit-an-honest-2026-guide",
+      "path": "/post/is-berlin-safe-to-visit-an-honest-2026-guide",
+      "url": "https://www.berlinwalk.com/post/is-berlin-safe-to-visit-an-honest-2026-guide",
+      "excerpt": "Wondering if Berlin is safe to visit? Here's an honest, no-nonsense guide from a local — covering neighborhoods, public transport, common scams, and everything you need to know before your trip.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-03-05T12:39:41.104Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_9b9fff4d69024b908f3f93226623d70d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Are%20Shops%20Open%20on%20Sunday%20in%20Berlin_%20What%20You%20Need%20to%20Know.jpg",
-      "alt": "Berlin walking tour group exploring historic city centre near Berlin Cathedral with local guide",
-      "relatedToolSlug": "berlin-shopping-areas"
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-03-26T13:11:15Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_ffb1ec9813cd4020af4d7db72a40b3bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-4wcI3YQAWpI.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_ffb1ec9813cd4020af4d7db72a40b3bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-4wcI3YQAWpI.jpg",
+      "alt": "Close-up of a blue police car light flashing in a dark, blurred city setting, creating an urgent and alert mood.",
+      "relatedToolSlug": "berlin-safety"
     }
   ],
   "shelves": [
@@ -431,6 +431,23 @@
           "relatedToolSlug": "transport-ticket-calculator"
         },
         {
+          "title": "Too Hot in Berlin? How to Plan a Smart Berlin Heatwave Day",
+          "slug": "berlin-heatwave-day-plan",
+          "path": "/post/berlin-heatwave-day-plan",
+          "url": "https://www.berlinwalk.com/post/berlin-heatwave-day-plan",
+          "excerpt": "A practical Berlin heatwave guide for tourists: when to walk, where to cool down, what to expect from public transport air conditioning, and how to use Berlin water, lake and pool tools.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-18T17:28:12.475Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
+          "alt": "The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day",
+          "relatedToolSlug": ""
+        },
+        {
           "title": "Tax Free Shopping in Berlin: VAT Refunds Explained for Tourists",
           "slug": "tax-free-shopping-berlin-vat-refund",
           "path": "/post/tax-free-shopping-berlin-vat-refund",
@@ -480,23 +497,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_ba65ce2b9671495da22d925072049547~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-hauptbahnhof-guide-cover.jpg",
           "alt": "The glass entrance of Berlin Hauptbahnhof on a clear day, used as the cover for a tourist arrival guide",
           "relatedToolSlug": "berlin-luggage-storage"
-        },
-        {
-          "title": "Tipping in Berlin: How Much to Tip in Restaurants, Taxis, Hotels and Walking Tours",
-          "slug": "tipping-in-berlin",
-          "path": "/post/tipping-in-berlin",
-          "url": "https://www.berlinwalk.com/post/tipping-in-berlin",
-          "excerpt": "A practical Berlin tipping guide for tourists: restaurants, bars, cafes, taxis, hotels, walking tours, card payments, cash tips, and what to say when paying.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "6 min read",
-          "publishedDate": "2026-06-11T06:50:08.897Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_9d522d592a2a4da5a4277e782dd77030~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tipping-in-berlin-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_9d522d592a2a4da5a4277e782dd77030~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tipping-in-berlin-cover.jpg",
-          "alt": "Cafe Moskau restaurant building in Berlin, used to illustrate tipping in Berlin restaurants and cafes",
-          "relatedToolSlug": "berlin-tip-calculator"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Too Hot in Berlin? How to Plan a Smart Berlin Heatwave Day",
+      "slug": "berlin-heatwave-day-plan",
+      "path": "/post/berlin-heatwave-day-plan",
+      "url": "https://www.berlinwalk.com/post/berlin-heatwave-day-plan",
+      "excerpt": "A practical Berlin heatwave guide for tourists: when to walk, where to cool down, what to expect from public transport air conditioning, and how to use Berlin water, lake and pool tools.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-18T17:28:12.475Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
+      "alt": "The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin on a Monday: What Is Open, What Is Closed and How to Plan the Day",
       "slug": "berlin-on-a-monday",
       "path": "/post/berlin-on-a-monday",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_5a36f32f42ba4fd9a09c87375614a024~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-1237-marienkirche-cover.jpg",
       "alt": "St. Mary's Church in central Berlin with the TV Tower rising behind it",
       "relatedToolSlug": "medieval-berlin-mini-walk"
-    },
-    {
-      "title": "Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers",
-      "slug": "vegan-berlin-guide-2026",
-      "path": "/post/vegan-berlin-guide-2026",
-      "url": "https://www.berlinwalk.com/post/vegan-berlin-guide-2026",
-      "excerpt": "A curated 2026 guide to the best 100% plant-based restaurants, street food, and vegan neighborhoods in Berlin.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "4 min read",
-      "publishedDate": "2026-06-08T16:15:49Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_93ecc45c8ef14dafbcf7a43ecfb2fae6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/vegan-cover.jpg",
-      "alt": "Beautifully plated vegan meal in a modern Berlin restaurant",
-      "relatedToolSlug": "vegan-berlin-locations-map"
     }
   ],
   "allPosts": [
+    {
+      "title": "Too Hot in Berlin? How to Plan a Smart Berlin Heatwave Day",
+      "slug": "berlin-heatwave-day-plan",
+      "path": "/post/berlin-heatwave-day-plan",
+      "url": "https://www.berlinwalk.com/post/berlin-heatwave-day-plan",
+      "excerpt": "A practical Berlin heatwave guide for tourists: when to walk, where to cool down, what to expect from public transport air conditioning, and how to use Berlin water, lake and pool tools.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-18T17:28:12.475Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
+      "alt": "The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin on a Monday: What Is Open, What Is Closed and How to Plan the Day",
       "slug": "berlin-on-a-monday",

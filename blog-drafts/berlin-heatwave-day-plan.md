@@ -79,6 +79,8 @@ That makes a refillable bottle one of the simplest heatwave tools you can carry.
 
 Use the BerlinWalk [Berlin Drinking Water Map](https://www.berlinwalk.com/tools/berlin-drinking-water) when you are already outside and need the nearest public fountain quickly.
 
+{{widget:drinking-water-map}}
+
 ## Lakes and pools: plan the escape before the afternoon
 
 Berlin is lucky: if the day is genuinely too hot, you can choose water instead of forcing another museum-square-station loop.
@@ -87,9 +89,13 @@ For lakes, use official water quality information before swimming. Berlin's [LAG
 
 Use the BerlinWalk [Berlin Lakes Map](https://www.berlinwalk.com/tools/berlin-lakes) to choose a realistic lake by travel time and mood, then check the current official status before swimming.
 
+{{widget:berlin-lakes-map}}
+
 Pools are more predictable than lakes, especially for families or visitors who want showers, lockers, lifeguards and a more controlled setup. [Berliner Bäder-Betriebe](https://www.berlinerbaeder.de/baeder/) shows current pool information, including summer pools, opening hours and occupancy. On hot weekends, pre-booking can matter.
 
 Use the BerlinWalk [Berlin Swimming Pools Map](https://www.berlinwalk.com/tools/berlin-pools) if you want a faster decision between outdoor pool, indoor pool, family option and lap-swimming option.
+
+{{widget:berlin-pools-map}}
 
 ## What to skip on a Berlin heatwave day
 
