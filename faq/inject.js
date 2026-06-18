@@ -834,7 +834,7 @@
         "name": "Are all shops closed, or are there exceptions?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Almost all regular retail is closed on Sunday, but there are three main exceptions: train station and airport supermarkets (open 365 days), emergency businesses (pharmacies on rotation, gas stations, Spätis), and Verkaufsoffene Sonntage — official shopping Sundays when stores may open from 1pm to 8pm. For 2026, Berlin has confirmed 25 January 2026 and 21 June 2026 for the first half of the year; later dates may still be added on Berlin.de."
+          "text": "Almost all regular retail is closed on Sunday, but there are three main exceptions: train station and airport supermarkets (open 365 days), emergency businesses (pharmacies on rotation, gas stations, Spätis), and Verkaufsoffene Sonntage — official shopping Sundays when stores may open from 1pm to 8pm. For 2026, Berlin has confirmed 25 January 2026 and 21 June 2026 as city-wide first-half dates; later dates may still be added. Berlin.de also lists separate shopping-centre Sundays, including Gesundbrunnen-Center on 6 September and 1 November 2026, but those are not city-wide open-shopping days."
         }
       },
       {
