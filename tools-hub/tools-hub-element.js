@@ -1,4 +1,5 @@
 const BW_TOOLS_HUB_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
+const BW_TOOLS_HUB_DATA_VERSION = '2026-06-18-dropdown-taxonomy';
 const BW_TOOLS_HUB_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 const BW_TOOLS_HUB_TYPE_ORDER = ['Planner', 'Calculator', 'Map', 'Guide', 'Audio', 'Quiz', 'Game'];
 
@@ -15,10 +16,16 @@ class BWToolsHubElement extends HTMLElement {
   }
 
   connectedCallback() {
-    this._dataUrl = this.getAttribute('data-url') || BW_TOOLS_HUB_DATA_URL;
+    this._dataUrl = this._versionDataUrl(this.getAttribute('data-url') || BW_TOOLS_HUB_DATA_URL);
     this._renderShell();
     this._bindHandlers();
     this._loadDataAndRender();
+  }
+
+  _versionDataUrl(url) {
+    if (!url || url.includes('bwHubVersion=')) return url;
+    const separator = url.includes('?') ? '&' : '?';
+    return `${url}${separator}bwHubVersion=${encodeURIComponent(BW_TOOLS_HUB_DATA_VERSION)}`;
   }
 
   _bindHandlers() {
