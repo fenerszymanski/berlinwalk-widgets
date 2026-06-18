@@ -1,47 +1,47 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260608', base).href;
+  return new URL('./data.json?v=20260618a', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
   featured: {
-    title: 'Best Day Trips from Berlin (2026): Easy Escapes by Train',
-    url: 'https://www.berlinwalk.com/post/best-day-trips-from-berlin',
-    category: 'Day Trips',
-    readTime: '8 min read',
-    label: 'New guide',
-    summary: 'Potsdam, Sachsenhausen, Spreewald, Dresden, Leipzig, Wittenberg, Tropical Islands and Bastei: what to choose and how the train logic works.',
-    image: 'https://static.wixstatic.com/media/5a08a3_53b56c6369974f5495a8493bfb0927ba~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/day-trips-sanssouci-potsdam.jpg',
-    alt: 'Sanssouci Palace in Potsdam, the easiest classic day trip from Berlin'
+    title: 'Too Hot in Berlin? How to Plan a Smart Berlin Heatwave Day',
+    url: 'https://www.berlinwalk.com/post/berlin-heatwave-day-plan',
+    category: 'Tourist Tips',
+    readTime: '6 min read',
+    label: 'Summer guide',
+    summary: 'When to walk, where to cool down, what to expect from public transport air conditioning, and how to use Berlin water, lake and pool tools.',
+    image: 'https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg',
+    alt: 'The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day'
   },
   posts: [
     {
-      title: 'Berlin Public Transport 2026: U-Bahn, S-Bahn, Tram & Bus',
-      url: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-      category: 'Practical',
+      title: 'Berlin on a Monday: What Is Open, What Is Closed and How to Plan the Day',
+      url: 'https://www.berlinwalk.com/post/berlin-on-a-monday',
+      category: 'Tourist Tips',
       readTime: '7 min read',
-      summary: 'Which zones, tickets, prices and validation rules you need before taking trains around Berlin.',
-      image: 'https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg',
-      alt: 'Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.'
+      summary: 'What closes, what stays open, which museums work, and how to plan a strong Monday without wasting time at locked doors.',
+      image: 'https://static.wixstatic.com/media/5a08a3_0027372f452e4bb6b423583d1eae963e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-on-a-monday-01-museum-island-altes-museum-cover.jpg',
+      alt: 'Altes Museum and Museum Island at sunset, a strong reminder to check Monday opening hours before planning Berlin museums'
     },
     {
-      title: 'Shopping in Berlin: Where to Actually Shop in 2026',
-      url: 'https://www.berlinwalk.com/post/shopping-in-berlin',
-      category: 'Practical',
-      readTime: '5 min read',
-      summary: 'Where to actually shop in Berlin: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.',
-      image: 'https://static.wixstatic.com/media/5a08a3_2d013476611f4015bec28e1efc033a20~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/shopping-berlin-kadewe.jpg',
-      alt: 'The KaDeWe department store facade on Tauentzienstraße, a landmark for shopping in Berlin'
+      title: 'Tax Free Shopping in Berlin: VAT Refunds Explained for Tourists',
+      url: 'https://www.berlinwalk.com/post/tax-free-shopping-berlin-vat-refund',
+      category: 'Tourist Tips',
+      readTime: '8 min read',
+      summary: 'Who is eligible, what counts, how much VAT is inside the price, what to ask at the shop, and what to do at BER Airport.',
+      image: 'https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg',
+      alt: 'The KaDeWe department store in Berlin, a classic shopping landmark where non-EU visitors may ask about Tax Free shopping'
     },
     {
-      title: 'Where Was the Berlin Wall? An Interactive Map of East and West in 1989',
-      url: 'https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map',
-      category: 'History',
-      readTime: '6 min read',
-      summary: 'The Wall ran 155 km around West Berlin. Tap any point on this interactive map to see exactly where it stood.',
-      image: 'https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/where-was-the-berlin-wall.jpg',
-      alt: 'An interactive map showing the route of the Berlin Wall around West Berlin in 1989'
+      title: 'Berlin with Kids: What to Do, Where to Stay and How to Plan an Easy Family Day',
+      url: 'https://www.berlinwalk.com/post/berlin-with-kids',
+      category: 'Tourist Tips',
+      readTime: '7 min read',
+      summary: 'Age-based planning advice, kid-friendly museums, parks, public transport rules, rainy-day backups and a family day planner.',
+      image: 'https://static.wixstatic.com/media/5a08a3_f480e636a6124ac9a34483c59b5003cb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-with-kids-01-berlin-with-kids-family-alexanderplatz-cover.jpg',
+      alt: 'A family walking through Alexanderplatz at golden hour with the Berlin TV Tower above them'
     }
   ]
 };
