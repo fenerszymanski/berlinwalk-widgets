@@ -45,7 +45,26 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_c88fd30b448e409c82dca3d0d27abbf6~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/spati-survival-checker/",
-      "embedHeight": 760
+      "embedHeight": 760,
+      "hubCategory": "Essentials",
+      "type": "Guide",
+      "priority": 30,
+      "tags": [
+        "späti",
+        "spati",
+        "late night",
+        "shop",
+        "pharmacy",
+        "toilet",
+        "supermarket",
+        "practical",
+        "open"
+      ],
+      "aliases": [
+        "late shop",
+        "kiosk",
+        "corner shop"
+      ]
     },
     {
       "slug": "vegan-berlin-locations-map",
@@ -54,7 +73,22 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_0e31e49f903e4222853fde3e240c3c07~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/vegan-berlin-locations-map/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "hubCategory": "FoodNightlife",
+      "type": "Map",
+      "priority": 22,
+      "tags": [
+        "vegan",
+        "restaurants",
+        "food",
+        "map",
+        "near hotel",
+        "plant based"
+      ],
+      "aliases": [
+        "plant based map",
+        "vegan near me"
+      ]
     },
     {
       "slug": "vegan-berlin-map",
@@ -63,7 +97,21 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_beda691e4a424dd3a87b2c9d7e2b0c21~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/vegan-berlin-map/",
-      "embedHeight": 760
+      "embedHeight": 760,
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "priority": 24,
+      "tags": [
+        "vegan",
+        "restaurants",
+        "food",
+        "top picks",
+        "plant based"
+      ],
+      "aliases": [
+        "vegan food",
+        "vegan restaurants"
+      ]
     },
     {
       "slug": "watch-world-cup-2026-berlin",
@@ -72,7 +120,27 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_54cde0513837440a95b1e62ac6e52211~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/worldcup-berlin/",
-      "embedHeight": 1480
+      "embedHeight": 1480,
+      "hubCategory": "EventsSports",
+      "type": "Map",
+      "priority": 10,
+      "seasonal": true,
+      "seasonStart": "2026-06-01",
+      "seasonEnd": "2026-07-20",
+      "seasonLabel": "World Cup 2026",
+      "tags": [
+        "world cup",
+        "football",
+        "soccer",
+        "public viewing",
+        "bars",
+        "beer gardens",
+        "events"
+      ],
+      "aliases": [
+        "where to watch football",
+        "fifa"
+      ]
     },
     {
       "slug": "world-cup-2026-fixtures-berlin-time",
@@ -81,7 +149,27 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_1bbc1544aad946e3b7a102ac2712195e~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/worldcup-fixtures/",
-      "embedHeight": 1120
+      "embedHeight": 1120,
+      "hubCategory": "EventsSports",
+      "type": "Guide",
+      "priority": 11,
+      "seasonal": true,
+      "seasonStart": "2026-06-01",
+      "seasonEnd": "2026-07-20",
+      "seasonLabel": "World Cup 2026",
+      "tags": [
+        "world cup",
+        "fixtures",
+        "football",
+        "soccer",
+        "berlin time",
+        "countdown",
+        "events"
+      ],
+      "aliases": [
+        "fifa schedule",
+        "match times"
+      ]
     },
     {
       "slug": "basketball-worldcup-fixtures",
@@ -90,7 +178,24 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_3ad116fb97d740438e43e5e859cde3f8~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/basketball-worldcup-fixtures/",
-      "embedHeight": 1160
+      "embedHeight": 1160,
+      "hubCategory": "EventsSports",
+      "type": "Guide",
+      "priority": 19,
+      "seasonal": true,
+      "seasonLabel": "World Cup 2026",
+      "tags": [
+        "basketball",
+        "world cup",
+        "fixtures",
+        "schedule",
+        "events",
+        "berlin time"
+      ],
+      "aliases": [
+        "fiba fixtures",
+        "basketball schedule"
+      ]
     },
     {
       "slug": "basketball-worldcup-venues-map",
@@ -99,7 +204,24 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_a52c708588db4f1e8b50b0a600274b1f~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/basketball-worldcup-venues-map/",
-      "embedHeight": 820
+      "embedHeight": 820,
+      "hubCategory": "EventsSports",
+      "type": "Map",
+      "priority": 20,
+      "seasonal": true,
+      "seasonLabel": "World Cup 2026",
+      "tags": [
+        "basketball",
+        "venues",
+        "arena",
+        "map",
+        "events",
+        "transit"
+      ],
+      "aliases": [
+        "fiba venues",
+        "basketball arena"
+      ]
     },
     {
       "slug": "berlin-pride-week-timeline",
@@ -108,7 +230,26 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pride-week-timeline/",
       "embedHeight": 1180,
-      "image": "https://static.wixstatic.com/media/5a08a3_fc6ab05403ad49b1b84f1a6dfa499794~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_fc6ab05403ad49b1b84f1a6dfa499794~mv2.png",
+      "hubCategory": "EventsSports",
+      "type": "Guide",
+      "priority": 16,
+      "seasonal": true,
+      "seasonStart": "2026-07-18",
+      "seasonEnd": "2026-07-26",
+      "seasonLabel": "Pride Week 2026",
+      "tags": [
+        "pride",
+        "csd",
+        "lgbtq",
+        "timeline",
+        "events",
+        "july"
+      ],
+      "aliases": [
+        "csd berlin",
+        "pride week"
+      ]
     },
     {
       "slug": "berlin-pride-parade-map",
@@ -117,7 +258,27 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pride-parade-map/",
       "embedHeight": 900,
-      "image": "https://static.wixstatic.com/media/5a08a3_716001d41010437fad8f03cede709b97~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_716001d41010437fad8f03cede709b97~mv2.png",
+      "hubCategory": "EventsSports",
+      "type": "Map",
+      "priority": 15,
+      "seasonal": true,
+      "seasonStart": "2026-07-18",
+      "seasonEnd": "2026-07-26",
+      "seasonLabel": "Pride Week 2026",
+      "tags": [
+        "pride",
+        "csd",
+        "parade",
+        "route",
+        "map",
+        "events",
+        "july"
+      ],
+      "aliases": [
+        "csd route",
+        "pride route"
+      ]
     },
     {
       "slug": "welcomecard-calculator",
@@ -126,7 +287,23 @@
       "category": "Money",
       "image": "https://static.wixstatic.com/media/5a08a3_c3a65b66e12a4f15aaca4ddae76ebd00~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/welcomecard-calculator/",
-      "embedHeight": 720
+      "embedHeight": 720,
+      "hubCategory": "Transport",
+      "type": "Calculator",
+      "priority": 9,
+      "tags": [
+        "welcome card",
+        "transport",
+        "tickets",
+        "money",
+        "museum pass",
+        "discount",
+        "calculator"
+      ],
+      "aliases": [
+        "berlin welcomecard",
+        "welcome card worth it"
+      ]
     },
     {
       "slug": "transport-ticket-calculator",
@@ -135,7 +312,28 @@
       "category": "Money",
       "image": "https://static.wixstatic.com/media/5a08a3_e11ce0787b9d4a06b33f345d9a76646f~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/transport-calculator/",
-      "embedHeight": 780
+      "embedHeight": 780,
+      "hubCategory": "Transport",
+      "type": "Calculator",
+      "priority": 1,
+      "featured": true,
+      "tags": [
+        "transport",
+        "tickets",
+        "bvg",
+        "u-bahn",
+        "s-bahn",
+        "ab",
+        "abc",
+        "airport",
+        "money",
+        "calculator"
+      ],
+      "aliases": [
+        "public transport ticket",
+        "train ticket",
+        "bvg ticket"
+      ]
     },
     {
       "slug": "berlin-daily-budget",
@@ -144,7 +342,22 @@
       "category": "Money",
       "image": "https://static.wixstatic.com/media/5a08a3_cc2084d71ac1465a94131d2d7ce385a1~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-budget-table/",
-      "embedHeight": 1120
+      "embedHeight": 1120,
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 12,
+      "tags": [
+        "budget",
+        "money",
+        "cost",
+        "daily cost",
+        "prices",
+        "calculator"
+      ],
+      "aliases": [
+        "how much money",
+        "cost of berlin"
+      ]
     },
     {
       "slug": "berlin-tip-calculator",
@@ -153,7 +366,24 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-tip-calculator/",
       "embedHeight": 760,
-      "image": "https://static.wixstatic.com/media/5a08a3_75305486e0934781bab8fa3df184a14b~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_75305486e0934781bab8fa3df184a14b~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 13,
+      "tags": [
+        "tip",
+        "tipping",
+        "restaurant",
+        "bar",
+        "taxi",
+        "walking tour",
+        "money",
+        "calculator"
+      ],
+      "aliases": [
+        "how much to tip",
+        "tour tip"
+      ]
     },
     {
       "slug": "best-month-to-visit-berlin",
@@ -162,7 +392,22 @@
       "category": "Weather",
       "image": "https://static.wixstatic.com/media/5a08a3_cb819181f8aa4390b292ad836f0d9420~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-bestmonth/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Guide",
+      "priority": 8,
+      "tags": [
+        "month",
+        "best time",
+        "weather",
+        "crowds",
+        "season",
+        "when to visit"
+      ],
+      "aliases": [
+        "best month",
+        "best time to visit"
+      ]
     },
     {
       "slug": "berlin-weather-by-month",
@@ -171,7 +416,21 @@
       "category": "Weather",
       "image": "https://static.wixstatic.com/media/5a08a3_5400b36a17ec41789fd653eddb928258~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/monthly-weather/",
-      "embedHeight": 680
+      "embedHeight": 680,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Guide",
+      "priority": 10,
+      "tags": [
+        "weather",
+        "month",
+        "temperature",
+        "rain",
+        "season"
+      ],
+      "aliases": [
+        "monthly weather",
+        "berlin temperature"
+      ]
     },
     {
       "slug": "what-to-pack-berlin",
@@ -180,7 +439,21 @@
       "category": "Weather",
       "image": "https://static.wixstatic.com/media/5a08a3_5820421c7d6748d9b0571b487746ebcd~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/avgtemp-packing/",
-      "embedHeight": 720
+      "embedHeight": 720,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Guide",
+      "priority": 6,
+      "tags": [
+        "packing",
+        "weather",
+        "clothes",
+        "what to wear",
+        "season"
+      ],
+      "aliases": [
+        "pack list",
+        "what to bring"
+      ]
     },
     {
       "slug": "berlin-daylight-hours",
@@ -189,7 +462,22 @@
       "category": "Weather",
       "image": "https://static.wixstatic.com/media/5a08a3_27048813633b4c229bfde51928939d8e~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/daylight-visualizer/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Guide",
+      "priority": 18,
+      "tags": [
+        "daylight",
+        "sunrise",
+        "sunset",
+        "winter",
+        "summer",
+        "weather"
+      ],
+      "aliases": [
+        "day length",
+        "sun hours"
+      ]
     },
     {
       "slug": "compare-berlin-months",
@@ -198,7 +486,22 @@
       "category": "Weather",
       "image": "https://static.wixstatic.com/media/5a08a3_1d39cd814abb4877aa46cbc1ece18838~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/month-comparison/",
-      "embedHeight": 720
+      "embedHeight": 720,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Guide",
+      "priority": 14,
+      "tags": [
+        "compare months",
+        "weather",
+        "crowds",
+        "prices",
+        "events",
+        "season"
+      ],
+      "aliases": [
+        "which month",
+        "month comparison"
+      ]
     },
     {
       "slug": "berlin-drinking-water",
@@ -207,7 +510,22 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_f627a0b40ecd4a77be8e99f6a47eb21a~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/drinking-water-map/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 16,
+      "tags": [
+        "water",
+        "drinking fountain",
+        "free",
+        "map",
+        "practical",
+        "summer"
+      ],
+      "aliases": [
+        "free water",
+        "water fountain"
+      ]
     },
     {
       "slug": "berlin-public-toilets",
@@ -216,7 +534,23 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_1232b3b215ab4c62be12b1fcd195a214~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/public-toilets-map/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 14,
+      "tags": [
+        "toilet",
+        "bathroom",
+        "wc",
+        "accessible",
+        "free",
+        "map",
+        "practical"
+      ],
+      "aliases": [
+        "public bathroom",
+        "restroom"
+      ]
     },
     {
       "slug": "berlin-luggage-storage",
@@ -225,7 +559,23 @@
       "category": "Maps",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/luggage-storage-map/",
       "embedHeight": 640,
-      "image": "https://static.wixstatic.com/media/5a08a3_c1a1f9eb1e294df6a87f2a6cd1961062~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_c1a1f9eb1e294df6a87f2a6cd1961062~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 11,
+      "tags": [
+        "luggage",
+        "storage",
+        "bags",
+        "station",
+        "airport",
+        "practical",
+        "map"
+      ],
+      "aliases": [
+        "bag storage",
+        "suitcase storage"
+      ]
     },
     {
       "slug": "berlin-currywurst-finder",
@@ -234,7 +584,21 @@
       "category": "Maps",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/currywurst-finder/",
       "embedHeight": 720,
-      "image": "https://static.wixstatic.com/media/5a08a3_64981428e0eb4df58019e9bb44a6e5f0~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_64981428e0eb4df58019e9bb44a6e5f0~mv2.png",
+      "hubCategory": "FoodNightlife",
+      "type": "Map",
+      "priority": 12,
+      "tags": [
+        "currywurst",
+        "food",
+        "snack",
+        "near tour",
+        "map"
+      ],
+      "aliases": [
+        "sausage",
+        "where to eat currywurst"
+      ]
     },
     {
       "slug": "berlin-sunday-shopping",
@@ -243,7 +607,24 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_f6d4ccd8b9b644e998c8b6e810a8fdb6~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/sunday-map/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 4,
+      "tags": [
+        "sunday",
+        "shopping",
+        "groceries",
+        "supermarket",
+        "open today",
+        "closed",
+        "map",
+        "practical"
+      ],
+      "aliases": [
+        "shops open sunday",
+        "sunday supermarket"
+      ]
     },
     {
       "slug": "berlin-shopping-areas",
@@ -252,7 +633,22 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_4c6eb52864ef4a59ba177bd429701e78~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-shopping-areas/",
-      "embedHeight": 820
+      "embedHeight": 820,
+      "hubCategory": "MoneyShopping",
+      "type": "Map",
+      "priority": 17,
+      "tags": [
+        "shopping",
+        "areas",
+        "fashion",
+        "vintage",
+        "souvenirs",
+        "map"
+      ],
+      "aliases": [
+        "where to shop",
+        "shopping district"
+      ]
     },
     {
       "slug": "berlin-landmarks-map",
@@ -261,7 +657,23 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_281bb22a73614ff5a35361967e907419~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-landmarks-map/",
-      "embedHeight": 820
+      "embedHeight": 820,
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 7,
+      "tags": [
+        "landmarks",
+        "memorials",
+        "museums",
+        "viewpoints",
+        "map",
+        "s-bahn",
+        "u-bahn"
+      ],
+      "aliases": [
+        "sights map",
+        "things to see"
+      ]
     },
     {
       "slug": "medieval-berlin-mini-walk",
@@ -270,7 +682,22 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-mini-walk/",
       "embedHeight": 760,
-      "image": "https://static.wixstatic.com/media/5a08a3_d4cb906f4eeb4649a55ff33f8707c460~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_d4cb906f4eeb4649a55ff33f8707c460~mv2.png",
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "priority": 16,
+      "tags": [
+        "medieval",
+        "history",
+        "walk",
+        "nikolaiviertel",
+        "museum island",
+        "culture"
+      ],
+      "aliases": [
+        "old berlin walk",
+        "medieval walk"
+      ]
     },
     {
       "slug": "east-side-gallery-murals",
@@ -279,7 +706,22 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_e746519e27394ad585aeb6e1ef74364b~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/east-side-gallery-murals/",
-      "embedHeight": 1980
+      "embedHeight": 1980,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 14,
+      "tags": [
+        "east side gallery",
+        "murals",
+        "wall",
+        "art",
+        "history",
+        "culture"
+      ],
+      "aliases": [
+        "wall murals",
+        "berlin wall art"
+      ]
     },
     {
       "slug": "berlin-day-trips-finder",
@@ -288,7 +730,22 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-trips-finder/",
       "embedHeight": 1900,
-      "image": "https://static.wixstatic.com/media/5a08a3_99a50a17b6fb4348980bc27724270aea~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_99a50a17b6fb4348980bc27724270aea~mv2.png",
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 15,
+      "tags": [
+        "day trip",
+        "itinerary",
+        "train",
+        "potsdam",
+        "outside berlin",
+        "planner"
+      ],
+      "aliases": [
+        "day trips from berlin",
+        "one day trip"
+      ]
     },
     {
       "slug": "whats-open-in-berlin-today",
@@ -297,7 +754,27 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_3d550b710c754ec185c975dbcb1465f3~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-today/",
-      "embedHeight": 1280
+      "embedHeight": 1280,
+      "hubCategory": "Essentials",
+      "type": "Guide",
+      "priority": 1,
+      "featured": true,
+      "tags": [
+        "open today",
+        "today",
+        "public holiday",
+        "sunday",
+        "supermarket",
+        "museum",
+        "transport",
+        "bank",
+        "practical"
+      ],
+      "aliases": [
+        "what is open",
+        "closed today",
+        "shops open"
+      ]
     },
     {
       "slug": "ultimate-berlin-trip-planner",
@@ -307,7 +784,24 @@
       "image": "https://static.wixstatic.com/media/5a08a3_2ce36b06e4354d7db943e072d10f6dd0~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/",
       "embedHeight": 2400,
-      "status": "draft"
+      "status": "draft",
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 1,
+      "featured": true,
+      "tags": [
+        "trip planner",
+        "itinerary",
+        "arrival",
+        "weather",
+        "opening days",
+        "tour",
+        "first day"
+      ],
+      "aliases": [
+        "berlin trip planner",
+        "ultimate planner"
+      ]
     },
     {
       "slug": "berlin-first-day-planner",
@@ -316,7 +810,25 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_592aa7ec14f543708051cd10faf55a0a~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-first-day-planner/",
-      "embedHeight": 1280
+      "embedHeight": 1280,
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 2,
+      "featured": true,
+      "tags": [
+        "first day",
+        "arrival",
+        "today",
+        "weather",
+        "transport",
+        "open today",
+        "tour",
+        "planner"
+      ],
+      "aliases": [
+        "arriving today",
+        "first day in berlin"
+      ]
     },
     {
       "slug": "hackescher-after-tour-planner",
@@ -325,7 +837,24 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_692bf8c409bf4fe388bdf8b8923fe2f4~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/hackescher-after-tour-planner/",
-      "embedHeight": 1180
+      "embedHeight": 1180,
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 6,
+      "tags": [
+        "after tour",
+        "hackescher markt",
+        "food",
+        "courtyards",
+        "museums",
+        "rain",
+        "evening",
+        "planner"
+      ],
+      "aliases": [
+        "post tour",
+        "after walking tour"
+      ]
     },
     {
       "slug": "free-berlin-audio-tour",
@@ -334,7 +863,22 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_07be42aa668d40609b76729420f587b0~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/audio-tour/",
-      "embedHeight": 700
+      "embedHeight": 700,
+      "hubCategory": "TripPlans",
+      "type": "Audio",
+      "priority": 9,
+      "tags": [
+        "audio tour",
+        "alexanderplatz",
+        "hackescher markt",
+        "walk",
+        "free",
+        "tour"
+      ],
+      "aliases": [
+        "self guided audio",
+        "9 minute tour"
+      ]
     },
     {
       "slug": "berlin-free-things-to-do",
@@ -343,7 +887,21 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_f65239c2a19e420f9361fa2156b20a4f~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/free-things-map/",
-      "embedHeight": 700
+      "embedHeight": 700,
+      "hubCategory": "Essentials",
+      "type": "Guide",
+      "priority": 18,
+      "tags": [
+        "free things",
+        "free",
+        "budget",
+        "things to do",
+        "practical"
+      ],
+      "aliases": [
+        "free activities",
+        "free attractions"
+      ]
     },
     {
       "slug": "berlin-safety",
@@ -352,7 +910,22 @@
       "category": "Maps",
       "image": "https://static.wixstatic.com/media/5a08a3_d3980698098e41138225ff923c247bb8~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/safety-map/",
-      "embedHeight": 720
+      "embedHeight": 720,
+      "hubCategory": "Essentials",
+      "type": "Map",
+      "priority": 17,
+      "tags": [
+        "safety",
+        "safe areas",
+        "scams",
+        "map",
+        "neighborhood",
+        "practical"
+      ],
+      "aliases": [
+        "is berlin safe",
+        "safety map"
+      ]
     },
     {
       "slug": "berlin-lakes",
@@ -361,7 +934,26 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_21ff6966771644e9936357fbb54c6eee~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-lakes-map/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Map",
+      "priority": 22,
+      "seasonal": true,
+      "seasonStart": "2026-05-01",
+      "seasonEnd": "2026-09-30",
+      "seasonLabel": "Summer",
+      "tags": [
+        "lakes",
+        "swimming",
+        "summer",
+        "water",
+        "map",
+        "seasonal"
+      ],
+      "aliases": [
+        "swimming lake",
+        "beach"
+      ]
     },
     {
       "slug": "berlin-pools",
@@ -370,7 +962,27 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_260c896b1fdd4a0d96c912e36b428ade~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pools-map/",
-      "embedHeight": 640
+      "embedHeight": 640,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Map",
+      "priority": 23,
+      "seasonal": true,
+      "seasonStart": "2026-05-01",
+      "seasonEnd": "2026-09-30",
+      "seasonLabel": "Summer",
+      "tags": [
+        "pools",
+        "swimming",
+        "summer",
+        "family",
+        "indoor",
+        "outdoor",
+        "seasonal"
+      ],
+      "aliases": [
+        "swimming pool",
+        "outdoor pool"
+      ]
     },
     {
       "slug": "east-or-west-1989",
@@ -379,7 +991,23 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_3ba7253342d84a5ab5404c24b7f0d842~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/east-west-1989/",
-      "embedHeight": 700
+      "embedHeight": 700,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 8,
+      "tags": [
+        "east berlin",
+        "west berlin",
+        "1989",
+        "wall",
+        "history",
+        "landmark",
+        "culture"
+      ],
+      "aliases": [
+        "which side of the wall",
+        "cold war"
+      ]
     },
     {
       "slug": "berlin-3-day-itinerary",
@@ -388,7 +1016,22 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_1ca55c0f3ed649d79d7389bd15da3196~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/itinerary-card/",
-      "embedHeight": 900
+      "embedHeight": 900,
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 4,
+      "tags": [
+        "3 days",
+        "itinerary",
+        "neighborhood",
+        "planner",
+        "route",
+        "first trip"
+      ],
+      "aliases": [
+        "three day plan",
+        "72 hours"
+      ]
     },
     {
       "slug": "alex-mistakes",
@@ -397,7 +1040,21 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_d9197628db1b48f3a9d9ce3e1bd7372e~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/alex-mistakes/",
-      "embedHeight": 700
+      "embedHeight": 700,
+      "hubCategory": "CultureLandmarks",
+      "type": "Guide",
+      "priority": 20,
+      "tags": [
+        "alexanderplatz",
+        "mistakes",
+        "tourist",
+        "local tips",
+        "culture"
+      ],
+      "aliases": [
+        "alexanderplatz tips",
+        "tourist mistakes"
+      ]
     },
     {
       "slug": "alexanderplatz-parking-map",
@@ -406,7 +1063,21 @@
       "category": "Maps",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/alexanderplatz-parking-map/",
       "embedHeight": 660,
-      "image": "https://static.wixstatic.com/media/5a08a3_db231dd74a18440aaa1f3045bd0c27c2~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_db231dd74a18440aaa1f3045bd0c27c2~mv2.png",
+      "hubCategory": "Transport",
+      "type": "Map",
+      "priority": 22,
+      "tags": [
+        "parking",
+        "alexanderplatz",
+        "car",
+        "garage",
+        "map"
+      ],
+      "aliases": [
+        "alex parking",
+        "where to park"
+      ]
     },
     {
       "slug": "berlin-parking-calculator",
@@ -415,7 +1086,22 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-parking-calculator/",
       "embedHeight": 720,
-      "image": "https://static.wixstatic.com/media/5a08a3_910b23dc026d4b919387ecb902ee8b84~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_910b23dc026d4b919387ecb902ee8b84~mv2.png",
+      "hubCategory": "Transport",
+      "type": "Calculator",
+      "priority": 20,
+      "tags": [
+        "parking",
+        "car",
+        "park and ride",
+        "public transport",
+        "money",
+        "calculator"
+      ],
+      "aliases": [
+        "parking cost",
+        "garage vs p+r"
+      ]
     },
     {
       "slug": "berlin-connectivity-picker",
@@ -424,7 +1110,22 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/connectivity-picker/",
       "embedHeight": 900,
-      "image": "https://static.wixstatic.com/media/5a08a3_dcf8d0fa22ef4072a94c2a2de20238d9~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_dcf8d0fa22ef4072a94c2a2de20238d9~mv2.png",
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "priority": 18,
+      "tags": [
+        "esim",
+        "sim card",
+        "wifi",
+        "mobile data",
+        "connectivity",
+        "money"
+      ],
+      "aliases": [
+        "phone internet",
+        "data plan"
+      ]
     },
     {
       "slug": "berlin-club-picker",
@@ -433,7 +1134,22 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/club-picker/",
       "embedHeight": 1180,
-      "image": "https://static.wixstatic.com/media/5a08a3_e49abafb1533424b86113b2f853d2535~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_e49abafb1533424b86113b2f853d2535~mv2.png",
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "priority": 18,
+      "tags": [
+        "clubs",
+        "nightlife",
+        "door policy",
+        "outfit",
+        "party",
+        "food"
+      ],
+      "aliases": [
+        "which club",
+        "berlin nightlife"
+      ]
     },
     {
       "slug": "berlin-battle",
@@ -444,7 +1160,20 @@
       "surface": "Games",
       "image": "https://static.wixstatic.com/media/5a08a3_fc6b345c36174e69abc9bb38bed99552~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle/",
-      "embedHeight": 1180
+      "embedHeight": 1180,
+      "hubCategory": "CultureLandmarks",
+      "type": "Game",
+      "priority": 30,
+      "tags": [
+        "game",
+        "quiz",
+        "preferences",
+        "berlin battle",
+        "play"
+      ],
+      "aliases": [
+        "berlin game"
+      ]
     },
     {
       "slug": "berlin-wall-remnants",
@@ -453,7 +1182,22 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-map/",
       "embedHeight": 660,
-      "image": "https://static.wixstatic.com/media/5a08a3_77a4d1d07d434f53bda86e9f415fd62f~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_77a4d1d07d434f53bda86e9f415fd62f~mv2.png",
+      "hubCategory": "CultureLandmarks",
+      "type": "Map",
+      "priority": 6,
+      "tags": [
+        "berlin wall",
+        "wall remnants",
+        "history",
+        "map",
+        "cold war",
+        "culture"
+      ],
+      "aliases": [
+        "where to see the wall",
+        "wall sites"
+      ]
     },
     {
       "slug": "german-phrases-quiz",
@@ -462,7 +1206,21 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/german-phrases-quiz/",
       "embedHeight": 540,
-      "image": "https://static.wixstatic.com/media/5a08a3_8df6f6a4c3344ed2b4a07c4b4f34cabf~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_8df6f6a4c3344ed2b4a07c4b4f34cabf~mv2.png",
+      "hubCategory": "CultureLandmarks",
+      "type": "Quiz",
+      "priority": 22,
+      "tags": [
+        "german",
+        "phrases",
+        "language",
+        "quiz",
+        "tourist words"
+      ],
+      "aliases": [
+        "german quiz",
+        "useful german"
+      ]
     },
     {
       "slug": "berlin-beer-gardens-map",
@@ -471,7 +1229,26 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-beer-gardens-map/",
       "embedHeight": 620,
-      "image": "https://static.wixstatic.com/media/5a08a3_c48c839f81524615927e8030406c3eb0~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_c48c839f81524615927e8030406c3eb0~mv2.png",
+      "hubCategory": "FoodNightlife",
+      "type": "Map",
+      "priority": 16,
+      "seasonal": true,
+      "seasonStart": "2026-04-01",
+      "seasonEnd": "2026-10-15",
+      "seasonLabel": "Beer garden season",
+      "tags": [
+        "beer garden",
+        "beer",
+        "food",
+        "summer",
+        "waterfront",
+        "map"
+      ],
+      "aliases": [
+        "biergarten",
+        "beer gardens"
+      ]
     },
     {
       "slug": "christmas-markets-map",
@@ -480,7 +1257,26 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/christmas-markets-map/",
       "embedHeight": 760,
-      "image": "https://static.wixstatic.com/media/5a08a3_ca381d5a0aab4882be2ff56bf9d0caf3~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_ca381d5a0aab4882be2ff56bf9d0caf3~mv2.png",
+      "hubCategory": "EventsSports",
+      "type": "Map",
+      "priority": 30,
+      "seasonal": true,
+      "seasonStart": "2026-11-20",
+      "seasonEnd": "2026-12-31",
+      "seasonLabel": "Christmas Markets",
+      "tags": [
+        "christmas markets",
+        "winter",
+        "markets",
+        "seasonal",
+        "map",
+        "events"
+      ],
+      "aliases": [
+        "xmas markets",
+        "weihnachtsmarkt"
+      ]
     },
     {
       "slug": "berlin-boat-tour-finder",
@@ -489,7 +1285,22 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-boat-tour-finder/",
       "embedHeight": 920,
-      "image": "https://static.wixstatic.com/media/5a08a3_964af6a74ee94db18db56ada52e90544~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_964af6a74ee94db18db56ada52e90544~mv2.png",
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "priority": 20,
+      "tags": [
+        "boat tour",
+        "spree",
+        "canal",
+        "cruise",
+        "evening",
+        "food"
+      ],
+      "aliases": [
+        "river cruise",
+        "spree boat"
+      ]
     },
     {
       "slug": "berlin-pfand-calculator",
@@ -498,7 +1309,22 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pfand-calculator/",
       "embedHeight": 760,
-      "image": "https://static.wixstatic.com/media/5a08a3_098bc194854f41929e8aa4c96e0d95d3~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_098bc194854f41929e8aa4c96e0d95d3~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 24,
+      "tags": [
+        "pfand",
+        "bottle deposit",
+        "refund",
+        "supermarket",
+        "money",
+        "calculator"
+      ],
+      "aliases": [
+        "bottle return",
+        "deposit refund"
+      ]
     },
     {
       "slug": "berlin-city-tax-calculator",
@@ -507,7 +1333,22 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-city-tax-calculator/",
       "embedHeight": 760,
-      "image": "https://static.wixstatic.com/media/5a08a3_7b199fe54d6a4f9d86224419e105cc51~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_7b199fe54d6a4f9d86224419e105cc51~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 16,
+      "tags": [
+        "city tax",
+        "hotel",
+        "accommodation",
+        "tax",
+        "money",
+        "calculator"
+      ],
+      "aliases": [
+        "hotel tax",
+        "accommodation tax"
+      ]
     },
     {
       "slug": "berlin-tax-free-refund-calculator",
@@ -516,7 +1357,23 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-tax-free-refund-calculator/",
       "embedHeight": 920,
-      "image": "https://static.wixstatic.com/media/5a08a3_7fd32bcdfd414f80b268136e09ec22da~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_7fd32bcdfd414f80b268136e09ec22da~mv2.png",
+      "hubCategory": "MoneyShopping",
+      "type": "Calculator",
+      "priority": 15,
+      "tags": [
+        "tax free",
+        "vat refund",
+        "shopping",
+        "customs",
+        "airport",
+        "money",
+        "calculator"
+      ],
+      "aliases": [
+        "vat refund",
+        "tax refund"
+      ]
     },
     {
       "slug": "berlin-taxi-uber-cost-checker",
@@ -525,7 +1382,24 @@
       "category": "Money",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-taxi-uber-cost-checker/",
       "embedHeight": 880,
-      "image": "https://static.wixstatic.com/media/5a08a3_a74bc97a23f94947b9740fddfdddeadd~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_a74bc97a23f94947b9740fddfdddeadd~mv2.png",
+      "hubCategory": "Transport",
+      "type": "Calculator",
+      "priority": 17,
+      "tags": [
+        "taxi",
+        "uber",
+        "cost",
+        "fare",
+        "airport",
+        "transport",
+        "money",
+        "calculator"
+      ],
+      "aliases": [
+        "cab fare",
+        "ride cost"
+      ]
     },
     {
       "slug": "berlin-public-holiday-checker",
@@ -534,7 +1408,26 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-public-holiday-checker/",
       "embedHeight": 760,
-      "image": "https://static.wixstatic.com/media/5a08a3_55c996d3aa9a40f8b41e7a609541cd81~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_55c996d3aa9a40f8b41e7a609541cd81~mv2.png",
+      "hubCategory": "Essentials",
+      "type": "Guide",
+      "priority": 3,
+      "featured": true,
+      "seasonal": true,
+      "seasonLabel": "Public holidays",
+      "tags": [
+        "public holiday",
+        "holiday",
+        "closed",
+        "open today",
+        "shops",
+        "museums",
+        "events"
+      ],
+      "aliases": [
+        "bank holiday",
+        "holiday checker"
+      ]
     },
     {
       "slug": "berlin-station-arrival-planner",
@@ -543,7 +1436,24 @@
       "category": "Discovery",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-station-arrival-planner/",
       "embedHeight": 900,
-      "image": "https://static.wixstatic.com/media/5a08a3_005e1b31e1b64d03a5c6b8cdc4ea2136~mv2.png"
+      "image": "https://static.wixstatic.com/media/5a08a3_005e1b31e1b64d03a5c6b8cdc4ea2136~mv2.png",
+      "hubCategory": "Transport",
+      "type": "Planner",
+      "priority": 3,
+      "featured": true,
+      "tags": [
+        "arrival",
+        "station",
+        "hauptbahnhof",
+        "luggage",
+        "first move",
+        "transport",
+        "planner"
+      ],
+      "aliases": [
+        "train station arrival",
+        "first move"
+      ]
     },
     {
       "slug": "berlin-family-day-planner",
@@ -552,7 +1462,23 @@
       "category": "Discovery",
       "image": "https://static.wixstatic.com/media/5a08a3_8907b6aa962b443e822e5dcd535c1d74~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-family-day-planner/",
-      "embedHeight": 1250
+      "embedHeight": 1250,
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 5,
+      "tags": [
+        "kids",
+        "family",
+        "children",
+        "rain",
+        "pace",
+        "day plan",
+        "planner"
+      ],
+      "aliases": [
+        "with kids",
+        "family day"
+      ]
     },
     {
       "slug": "berlin-monday-plan-checker",
@@ -565,7 +1491,73 @@
       "published": true,
       "iconStatus": "live-wix-media",
       "relatedBlog": "/post/berlin-on-a-monday",
-      "cmsItemId": "771e6d86-7404-400c-936b-86aa842db148"
+      "cmsItemId": "771e6d86-7404-400c-936b-86aa842db148",
+      "hubCategory": "Essentials",
+      "type": "Planner",
+      "priority": 2,
+      "featured": true,
+      "tags": [
+        "monday",
+        "closed museums",
+        "open today",
+        "museum",
+        "day plan",
+        "planner"
+      ],
+      "aliases": [
+        "what to do monday",
+        "monday in berlin"
+      ]
+    }
+  ],
+  "hubCategories": [
+    {
+      "key": "TripPlans",
+      "label": "Trip Plans & First Day",
+      "icon": "🧭",
+      "blurb": "Itineraries, first-day choices, family plans, day trips, after-tour ideas, and audio routes."
+    },
+    {
+      "key": "Transport",
+      "label": "Transport, Tickets & Arrival",
+      "icon": "🚇",
+      "blurb": "BVG tickets, WelcomeCard decisions, station arrivals, taxis, parking, mobile data, and first transit moves."
+    },
+    {
+      "key": "MoneyShopping",
+      "label": "Money, Shopping & Costs",
+      "icon": "💶",
+      "blurb": "Daily budgets, tips, city tax, VAT refunds, Pfand deposits, and where to shop."
+    },
+    {
+      "key": "Essentials",
+      "label": "Open Today & Essentials",
+      "icon": "✅",
+      "blurb": "Open/closed checks, holidays, Mondays, Spätis, luggage, toilets, water, safety, and free things."
+    },
+    {
+      "key": "WeatherOutdoor",
+      "label": "Weather, Seasons & Outdoors",
+      "icon": "☀️",
+      "blurb": "Month timing, daylight, packing, lakes, pools, and weather-sensitive planning."
+    },
+    {
+      "key": "FoodNightlife",
+      "label": "Food, Drink & Nights Out",
+      "icon": "🍽️",
+      "blurb": "Vegan food, currywurst, beer gardens, clubs, boat evenings, and after-dark decisions."
+    },
+    {
+      "key": "EventsSports",
+      "label": "Events, Sports & Festivals",
+      "icon": "📅",
+      "blurb": "World Cup, basketball, Pride, Christmas markets, public-viewing routes, and dated event planning."
+    },
+    {
+      "key": "CultureLandmarks",
+      "label": "History, Culture & Landmarks",
+      "icon": "🏛️",
+      "blurb": "Wall sites, landmarks, East/West context, galleries, old Berlin, language, and quick culture tools."
     }
   ]
 }

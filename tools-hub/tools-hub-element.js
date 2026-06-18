@@ -1,20 +1,64 @@
 const BW_TOOLS_HUB_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
 const BW_TOOLS_HUB_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
+const BW_TOOLS_HUB_TYPE_ORDER = ['Planner', 'Calculator', 'Map', 'Guide', 'Audio', 'Quiz', 'Game'];
 
 class BWToolsHubElement extends HTMLElement {
   constructor() {
     super();
-    this._animated = false;
-    this._observer = null;
+    this._categories = [];
+    this._tools = [];
+    this._query = '';
+    this._activeCategory = '';
+    this._activeType = '';
+    this._bound = false;
+    this._dataUrl = BW_TOOLS_HUB_DATA_URL;
   }
 
   connectedCallback() {
+    this._dataUrl = this.getAttribute('data-url') || BW_TOOLS_HUB_DATA_URL;
     this._renderShell();
+    this._bindHandlers();
     this._loadDataAndRender();
   }
 
-  disconnectedCallback() {
-    if (this._observer) this._observer.disconnect();
+  _bindHandlers() {
+    if (this._bound) return;
+    this._bound = true;
+
+    this.addEventListener('input', (event) => {
+      const input = event.target.closest('[data-bw-tools-search]');
+      if (!input) return;
+      this._query = input.value || '';
+      this._updateResults();
+    });
+
+    this.addEventListener('change', (event) => {
+      const categorySelect = event.target.closest('[data-bw-category-select]');
+      if (categorySelect) {
+        this._activeCategory = categorySelect.value || '';
+        this._updateResults();
+        return;
+      }
+
+      const typeSelect = event.target.closest('[data-bw-type-select]');
+      if (typeSelect) {
+        this._activeType = typeSelect.value || '';
+        this._updateResults();
+      }
+    });
+
+    this.addEventListener('click', (event) => {
+      const clear = event.target.closest('[data-bw-tools-clear]');
+      if (clear) {
+        event.preventDefault();
+        this._query = '';
+        this._activeCategory = '';
+        this._activeType = '';
+        const input = this.querySelector('[data-bw-tools-search]');
+        if (input) input.value = '';
+        this._updateResults();
+      }
+    });
   }
 
   _renderShell() {
@@ -26,9 +70,17 @@ class BWToolsHubElement extends HTMLElement {
         }
 
         .bw-tools-hub {
-          --serif: Merriweather, Georgia, serif;
-          background: #FAFAF5;
-          color: #212121;
+          --bw-green: #1B5E20;
+          --bw-yellow: #FFE600;
+          --bw-lime: #7CB342;
+          --bw-light-green: #C5E1A5;
+          --bw-cream: #FAFAF5;
+          --bw-text: #212121;
+          --bw-muted: #4E5A4E;
+          --bw-white: #FFFFFF;
+          --bw-serif: Merriweather, Georgia, serif;
+          background: var(--bw-cream);
+          color: var(--bw-text);
           font-family: Montserrat, Arial, sans-serif;
           margin: 0;
           max-width: 100%;
@@ -41,9 +93,16 @@ class BWToolsHubElement extends HTMLElement {
           box-sizing: border-box;
         }
 
+        .bw-tools-hub h1,
+        .bw-tools-hub h2,
+        .bw-tools-hub h3,
+        .bw-tools-hub p {
+          margin-top: 0;
+        }
+
         .bw-tools-hub .bw-hub-hero {
-          background: #1B5E20;
-          color: #FFFFFF;
+          background: var(--bw-green);
+          color: var(--bw-white);
           padding: 56px 28px 46px;
           position: relative;
           text-align: center;
@@ -52,7 +111,7 @@ class BWToolsHubElement extends HTMLElement {
         .bw-tools-hub .bw-hub-hero::after,
         .bw-tools-hub .bw-hub-footer::before,
         .bw-tools-hub .bw-hub-footer::after {
-          background: linear-gradient(90deg, #FFE600, #7CB342);
+          background: linear-gradient(90deg, var(--bw-yellow), var(--bw-lime));
           content: "";
           display: block;
           height: 4px;
@@ -71,15 +130,8 @@ class BWToolsHubElement extends HTMLElement {
           max-width: 1120px;
         }
 
-        .bw-tools-hub h1,
-        .bw-tools-hub h2,
-        .bw-tools-hub h3,
-        .bw-tools-hub p {
-          margin-top: 0;
-        }
-
         .bw-tools-hub h1 {
-          color: #FFFFFF;
+          color: var(--bw-white);
           font-size: 36px;
           font-weight: 800;
           line-height: 1.14;
@@ -88,12 +140,12 @@ class BWToolsHubElement extends HTMLElement {
         }
 
         .bw-tools-hub .bw-highlight {
-          color: #FFE600;
+          color: var(--bw-yellow);
         }
 
         .bw-tools-hub .bw-hero-lead {
           color: rgba(255, 255, 255, 0.9);
-          font-family: var(--serif);
+          font-family: var(--bw-serif);
           font-size: 17px;
           line-height: 1.6;
           margin: 0 auto;
@@ -101,25 +153,352 @@ class BWToolsHubElement extends HTMLElement {
         }
 
         .bw-tools-hub .bw-hub-main {
-          padding: 44px 24px 48px;
+          padding: 34px 24px 48px;
+        }
+
+        .bw-tools-hub .bw-finder {
+          background: var(--bw-white);
+          border: 1px solid rgba(27, 94, 32, 0.16);
+          border-radius: 8px;
+          margin-bottom: 24px;
+          padding: 18px;
+        }
+
+        .bw-tools-hub .bw-finder-top {
+          align-items: end;
+          display: grid;
+          gap: 12px;
+          grid-template-columns: minmax(0, 1fr) auto;
+        }
+
+        .bw-tools-hub .bw-search-label {
+          color: var(--bw-green);
+          display: block;
+          font-size: 14px;
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: 8px;
+        }
+
+        .bw-tools-hub .bw-search-wrap {
+          position: relative;
+        }
+
+        .bw-tools-hub .bw-search-icon {
+          color: var(--bw-green);
+          font-size: 18px;
+          left: 15px;
+          line-height: 1;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .bw-tools-hub .bw-search-input {
+          background: #FCFFF7;
+          border: 2px solid var(--bw-light-green);
+          border-radius: 8px;
+          color: var(--bw-text);
+          font: inherit;
+          font-size: 16px;
+          min-height: 50px;
+          outline: none;
+          padding: 13px 14px 13px 44px;
+          width: 100%;
+        }
+
+        .bw-tools-hub .bw-search-input:focus {
+          border-color: var(--bw-green);
+          box-shadow: 0 0 0 3px rgba(255, 230, 0, 0.42);
+        }
+
+        .bw-tools-hub .bw-clear-btn {
+          align-items: center;
+          background: var(--bw-green);
+          border: 2px solid var(--bw-green);
+          border-radius: 8px;
+          color: var(--bw-white);
+          cursor: pointer;
+          display: inline-flex;
+          font: inherit;
+          font-size: 13px;
+          font-weight: 800;
+          justify-content: center;
+          letter-spacing: 0;
+          min-height: 50px;
+          padding: 0 16px;
+        }
+
+        .bw-tools-hub .bw-clear-btn[hidden] {
+          display: none;
+        }
+
+        .bw-tools-hub .bw-filter-groups {
+          display: grid;
+          gap: 12px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          margin-top: 14px;
+          min-width: 0;
+        }
+
+        .bw-tools-hub .bw-filter-group {
+          min-width: 0;
+        }
+
+        .bw-tools-hub .bw-filter-label {
+          color: var(--bw-muted);
+          display: block;
+          font-size: 12px;
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: 7px;
+          text-transform: uppercase;
+        }
+
+        .bw-tools-hub .bw-select-wrap {
+          display: block;
+          position: relative;
+        }
+
+        .bw-tools-hub .bw-select-wrap::after {
+          color: var(--bw-green);
+          content: "\\25BE";
+          font-size: 13px;
+          font-weight: 800;
+          pointer-events: none;
+          position: absolute;
+          right: 14px;
+          top: 50%;
+          transform: translateY(-50%);
+        }
+
+        .bw-tools-hub .bw-filter-select {
+          appearance: none;
+          background: #F5FAEC;
+          border: 1px solid rgba(27, 94, 32, 0.2);
+          border-radius: 8px;
+          color: var(--bw-green);
+          cursor: pointer;
+          font: inherit;
+          font-size: 15px;
+          font-weight: 800;
+          letter-spacing: 0;
+          min-height: 46px;
+          outline: none;
+          padding: 11px 42px 11px 13px;
+          text-overflow: ellipsis;
+          width: 100%;
+        }
+
+        .bw-tools-hub .bw-filter-select:hover,
+        .bw-tools-hub .bw-filter-select:focus {
+          border-color: var(--bw-green);
+          box-shadow: 0 0 0 3px rgba(255, 230, 0, 0.28);
+        }
+
+        .bw-tools-hub .bw-result-count {
+          color: var(--bw-muted);
+          font-family: var(--bw-serif);
+          font-size: 14.5px;
+          line-height: 1.55;
+          margin: 12px 0 0;
+        }
+
+        .bw-tools-hub .bw-section-heading,
+        .bw-tools-hub .bw-category-heading {
+          align-items: center;
+          color: var(--bw-green);
+          display: flex;
+          font-size: 26px;
+          font-weight: 800;
+          gap: 10px;
+          line-height: 1.2;
+          margin-bottom: 8px;
+        }
+
+        .bw-tools-hub .bw-section-kicker {
+          color: var(--bw-muted);
+          font-family: var(--bw-serif);
+          font-size: 15px;
+          line-height: 1.6;
+          margin-bottom: 16px;
+          max-width: 700px;
+        }
+
+        .bw-tools-hub .bw-featured-section,
+        .bw-tools-hub .bw-category-section,
+        .bw-tools-hub .bw-matches-section {
+          margin-bottom: 34px;
+        }
+
+        .bw-tools-hub .bw-category-section:last-child {
+          margin-bottom: 0;
+        }
+
+        .bw-tools-hub .bw-category-icon {
+          font-size: 30px;
+          line-height: 1;
+        }
+
+        .bw-tools-hub .bw-category-blurb {
+          color: var(--bw-muted);
+          font-family: var(--bw-serif);
+          font-size: 15.5px;
+          line-height: 1.6;
+          margin-bottom: 16px;
+          max-width: 650px;
+        }
+
+        .bw-tools-hub .bw-featured-grid,
+        .bw-tools-hub .bw-tools-grid {
+          display: grid;
+          gap: 14px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .bw-tools-hub .bw-tool-card {
+          background: var(--bw-white);
+          border: 1px solid var(--bw-light-green);
+          border-radius: 8px;
+          color: inherit;
+          display: flex;
+          flex-direction: column;
+          min-height: 178px;
+          min-width: 0;
+          padding: 18px;
+          text-decoration: none;
+          transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+        }
+
+        .bw-tools-hub .bw-featured-grid .bw-tool-card {
+          border-color: rgba(27, 94, 32, 0.32);
+          box-shadow: 0 8px 20px rgba(27, 94, 32, 0.08);
+        }
+
+        .bw-tools-hub .bw-tool-card:hover,
+        .bw-tools-hub .bw-tool-card:focus-visible {
+          border-color: var(--bw-green);
+          box-shadow: 0 10px 24px rgba(27, 94, 32, 0.12);
+          transform: translateY(-2px);
+        }
+
+        .bw-tools-hub .bw-tool-card:focus-visible,
+        .bw-tools-hub .bw-clear-btn:focus-visible,
+        .bw-tools-hub .bw-filter-select:focus-visible {
+          outline: 3px solid rgba(255, 230, 0, 0.9);
+          outline-offset: 2px;
+        }
+
+        .bw-tools-hub .bw-tool-card-head {
+          align-items: flex-start;
+          display: flex;
+          gap: 12px;
+          margin-bottom: 10px;
+          min-height: 58px;
+        }
+
+        .bw-tools-hub .bw-tool-icon {
+          align-items: center;
+          background: #F5FAEC;
+          border: 1px solid rgba(27, 94, 32, 0.14);
+          border-radius: 8px;
+          display: flex;
+          flex: 0 0 56px;
+          height: 56px;
+          justify-content: center;
+          overflow: hidden;
+          width: 56px;
+        }
+
+        .bw-tools-hub .bw-tool-icon img {
+          display: block;
+          height: 56px;
+          object-fit: cover;
+          width: 56px;
+        }
+
+        .bw-tools-hub .bw-tool-title-wrap {
+          min-width: 0;
+        }
+
+        .bw-tools-hub .bw-tool-card h3 {
+          color: var(--bw-green);
+          font-size: 18px;
+          font-weight: 800;
+          line-height: 1.25;
+          margin-bottom: 7px;
+          overflow-wrap: break-word;
+        }
+
+        .bw-tools-hub .bw-tool-type {
+          background: rgba(124, 179, 66, 0.16);
+          border-radius: 999px;
+          color: var(--bw-green);
+          display: inline-block;
+          font-size: 12px;
+          font-weight: 800;
+          line-height: 1;
+          padding: 5px 8px;
+        }
+
+        .bw-tools-hub .bw-season-label {
+          background: rgba(255, 230, 0, 0.32);
+          border-radius: 999px;
+          color: var(--bw-green);
+          display: inline-block;
+          font-size: 12px;
+          font-weight: 800;
+          line-height: 1;
+          margin-left: 5px;
+          padding: 5px 8px;
+        }
+
+        .bw-tools-hub .bw-tool-card p {
+          color: var(--bw-text);
+          font-family: var(--bw-serif);
+          font-size: 14.5px;
+          line-height: 1.48;
+          margin-bottom: 16px;
+          overflow-wrap: break-word;
+        }
+
+        .bw-tools-hub .bw-tool-cta {
+          color: var(--bw-green);
+          display: inline-block;
+          font-size: 13px;
+          font-weight: 800;
+          letter-spacing: 0;
+          margin-top: auto;
+        }
+
+        .bw-tools-hub .bw-no-results {
+          background: var(--bw-white);
+          border: 1px solid var(--bw-light-green);
+          border-radius: 8px;
+          color: var(--bw-muted);
+          font-family: var(--bw-serif);
+          font-size: 16px;
+          line-height: 1.6;
+          margin: 0 0 32px;
+          padding: 24px;
+          text-align: center;
         }
 
         .bw-tools-hub .bw-embed-cta {
           align-items: center;
-          background: #FFFFFF;
-          border: 1px solid #C5E1A5;
-          border-left: 5px solid #1B5E20;
-          border-radius: 12px;
-          box-shadow: 0 10px 24px rgba(27, 94, 32, 0.08);
+          background: var(--bw-white);
+          border: 1px solid var(--bw-light-green);
+          border-left: 5px solid var(--bw-green);
+          border-radius: 8px;
           display: flex;
           gap: 22px;
           justify-content: space-between;
-          margin: 44px 0 0;
+          margin: 42px 0 0;
           padding: 22px 24px;
         }
 
         .bw-tools-hub .bw-embed-cta h2 {
-          color: #1B5E20;
+          color: var(--bw-green);
           font-size: 21px;
           font-weight: 800;
           line-height: 1.25;
@@ -127,194 +506,43 @@ class BWToolsHubElement extends HTMLElement {
         }
 
         .bw-tools-hub .bw-embed-cta p {
-          color: #4E5A4E;
-          font-family: var(--serif);
+          color: var(--bw-muted);
+          font-family: var(--bw-serif);
           font-size: 15px;
           line-height: 1.55;
           margin-bottom: 0;
           max-width: 680px;
         }
 
-        .bw-tools-hub .bw-btn-secondary {
-          border: 2px solid #1B5E20;
-          border-radius: 10px;
-          color: #1B5E20;
-          display: inline-block;
-          flex: 0 0 auto;
-          font-size: 13px;
+        .bw-tools-hub .bw-btn-secondary,
+        .bw-tools-hub .bw-btn-primary {
+          align-items: center;
+          border-radius: 8px;
+          display: inline-flex;
+          font-size: 14px;
           font-weight: 800;
-          letter-spacing: 0.7px;
+          justify-content: center;
+          letter-spacing: 0;
+          min-height: 44px;
           padding: 12px 18px;
           text-decoration: none;
-          text-transform: uppercase;
-          transition: background 160ms ease, color 160ms ease, transform 160ms ease;
+        }
+
+        .bw-tools-hub .bw-btn-secondary {
+          border: 2px solid var(--bw-green);
+          color: var(--bw-green);
+          flex: 0 0 auto;
         }
 
         .bw-tools-hub .bw-btn-secondary:hover,
         .bw-tools-hub .bw-btn-secondary:focus-visible {
-          background: #1B5E20;
-          color: #FFFFFF;
-          transform: translateY(-1px);
-        }
-
-        .bw-tools-hub .bw-category-section {
-          margin-bottom: 42px;
-          opacity: 0;
-          transform: translateY(12px);
-          transition: opacity 400ms ease-out, transform 400ms ease-out;
-        }
-
-        .bw-tools-hub .bw-category-section.visible {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        .bw-tools-hub .bw-category-section:last-child {
-          margin-bottom: 0;
-        }
-
-        .bw-tools-hub .bw-category-banner {
-          aspect-ratio: 4 / 1;
-          background: #F5FAEC;
-          border: 1px solid rgba(27, 94, 32, 0.14);
-          border-radius: 8px;
-          display: block;
-          margin-bottom: 18px;
-          overflow: hidden;
-          width: 100%;
-        }
-
-        .bw-tools-hub .bw-category-banner img {
-          display: block;
-          height: 100%;
-          object-fit: cover;
-          width: 100%;
-        }
-
-        .bw-tools-hub .bw-category-heading {
-          align-items: center;
-          color: #1B5E20;
-          display: flex;
-          font-size: 28px;
-          font-weight: 800;
-          gap: 10px;
-          line-height: 1.2;
-          margin-bottom: 8px;
-        }
-
-        .bw-tools-hub .bw-category-icon {
-          font-size: 32px;
-          line-height: 1;
-        }
-
-        .bw-tools-hub .bw-category-blurb {
-          color: #4E5A4E;
-          font-family: var(--serif);
-          font-size: 15.5px;
-          line-height: 1.6;
-          margin-bottom: 18px;
-          max-width: 600px;
-        }
-
-        .bw-tools-hub .bw-tools-grid {
-          display: grid;
-          gap: 16px;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-        }
-
-        .bw-tools-hub .bw-tool-card {
-          background: #FFFFFF;
-          border: 1px solid #C5E1A5;
-          border-radius: 12px;
-          color: inherit;
-          display: flex;
-          flex-direction: column;
-          min-height: 190px;
-          min-width: 0;
-          padding: 22px 24px;
-          text-decoration: none;
-          transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
-        }
-
-        .bw-tools-hub .bw-tool-card:hover,
-        .bw-tools-hub .bw-tool-card:focus-visible {
-          border-color: #1B5E20;
-          box-shadow: 0 10px 24px rgba(27, 94, 32, 0.12);
-          transform: translateY(-2px);
-        }
-
-        .bw-tools-hub .bw-tool-card:focus-visible {
-          outline: 3px solid rgba(255, 230, 0, 0.9);
-          outline-offset: 2px;
-        }
-
-        .bw-tools-hub .bw-tool-card h3 {
-          color: #1B5E20;
-          font-size: 19px;
-          font-weight: 800;
-          line-height: 1.25;
-          margin-bottom: 0;
-          min-width: 0;
-          overflow-wrap: break-word;
-        }
-
-        .bw-tools-hub .bw-tool-card-head {
-          align-items: flex-start;
-          display: flex;
-          gap: 14px;
-          margin-bottom: 12px;
-          min-height: 66px;
-        }
-
-        .bw-tools-hub .bw-tool-icon {
-          align-items: center;
-          background: #F5FAEC;
-          border: 1px solid rgba(27, 94, 32, 0.14);
-          border-radius: 12px;
-          display: flex;
-          flex: 0 0 64px;
-          height: 64px;
-          justify-content: center;
-          overflow: hidden;
-          width: 64px;
-        }
-
-        .bw-tools-hub .bw-tool-icon img {
-          display: block;
-          height: 64px;
-          object-fit: cover;
-          width: 64px;
-        }
-
-        .bw-tools-hub .bw-tool-icon-fallback {
-          background: linear-gradient(135deg, #FFE600, #7CB342);
-          color: #1B5E20;
-          font-size: 24px;
-          font-weight: 900;
-        }
-
-        .bw-tools-hub .bw-tool-card p {
-          color: #212121;
-          font-family: var(--serif);
-          font-size: 14.5px;
-          line-height: 1.5;
-          margin-bottom: 18px;
-          overflow-wrap: break-word;
-        }
-
-        .bw-tools-hub .bw-tool-cta {
-          color: #1B5E20;
-          display: inline-block;
-          font-size: 13px;
-          font-weight: 800;
-          letter-spacing: 0.8px;
-          margin-top: auto;
-          text-transform: uppercase;
+          background: var(--bw-green);
+          color: var(--bw-white);
         }
 
         .bw-tools-hub .bw-hub-footer {
-          background: #1B5E20;
-          color: #FFFFFF;
+          background: var(--bw-green);
+          color: var(--bw-white);
           margin: 0 auto;
           overflow: hidden;
           padding: 38px 24px 42px;
@@ -331,7 +559,7 @@ class BWToolsHubElement extends HTMLElement {
         }
 
         .bw-tools-hub .bw-hub-footer h2 {
-          color: #FFFFFF;
+          color: var(--bw-white);
           font-size: 28px;
           font-weight: 800;
           line-height: 1.2;
@@ -340,7 +568,7 @@ class BWToolsHubElement extends HTMLElement {
 
         .bw-tools-hub .bw-hub-footer p {
           color: rgba(255, 255, 255, 0.88);
-          font-family: var(--serif);
+          font-family: var(--bw-serif);
           font-size: 15px;
           line-height: 1.6;
           margin: 0 auto 20px;
@@ -348,72 +576,25 @@ class BWToolsHubElement extends HTMLElement {
         }
 
         .bw-tools-hub .bw-btn-primary {
-          background: #FFE600;
-          border-radius: 10px;
-          color: #1B5E20;
-          display: inline-block;
-          font-size: 14px;
-          font-weight: 800;
-          letter-spacing: 0.6px;
-          padding: 14px 24px;
-          text-decoration: none;
-          transition: background 160ms ease, transform 160ms ease;
+          background: var(--bw-yellow);
+          color: var(--bw-green);
         }
 
-        .bw-tools-hub .bw-btn-primary:hover,
-        .bw-tools-hub .bw-btn-primary:focus-visible {
-          background: #fff04a;
-          transform: translateY(-1px);
-        }
-
-        .bw-tools-hub .bw-btn-primary:focus-visible {
-          outline: 3px solid rgba(255, 255, 255, 0.9);
-          outline-offset: 3px;
-        }
-
-        .bw-tools-hub .bw-btn-secondary:focus-visible {
-          outline: 3px solid rgba(255, 230, 0, 0.9);
-          outline-offset: 3px;
-        }
-
-        .bw-tools-hub .bw-tools-error {
-          color: #4E5A4E;
-          font-family: var(--serif);
+        .bw-tools-hub .bw-tools-error,
+        .bw-tools-hub .bw-skeleton-text {
+          color: var(--bw-muted);
+          font-family: var(--bw-serif);
           font-size: 16px;
-          padding: 12px 0;
+          padding: 16px 0;
           text-align: center;
         }
 
-        .bw-tools-hub .bw-skeleton-section {
-          margin-bottom: 42px;
-        }
-
-        .bw-tools-hub .bw-skeleton-heading,
-        .bw-tools-hub .bw-skeleton-line,
         .bw-tools-hub .bw-skeleton-card {
           animation: bw-tools-hub-shimmer 1200ms linear infinite;
           background: linear-gradient(90deg, #F2F8E8 0%, #FFFFFF 45%, #F2F8E8 90%);
           background-size: 220% 100%;
-          border-radius: 999px;
-        }
-
-        .bw-tools-hub .bw-skeleton-heading {
-          display: block;
-          height: 28px;
-          margin-bottom: 12px;
-          max-width: 280px;
-        }
-
-        .bw-tools-hub .bw-skeleton-line {
-          display: block;
-          height: 14px;
-          margin-bottom: 18px;
-          max-width: 520px;
-        }
-
-        .bw-tools-hub .bw-skeleton-card {
-          border-radius: 12px;
-          height: 190px;
+          border-radius: 8px;
+          height: 178px;
         }
 
         @keyframes bw-tools-hub-shimmer {
@@ -422,12 +603,27 @@ class BWToolsHubElement extends HTMLElement {
         }
 
         @media (max-width: 1024px) {
+          .bw-tools-hub .bw-featured-grid,
           .bw-tools-hub .bw-tools-grid {
             grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
 
         @media (max-width: 700px) {
+          .bw-tools-hub .bw-finder-top {
+            align-items: stretch;
+            grid-template-columns: 1fr;
+          }
+
+          .bw-tools-hub .bw-filter-groups {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-tools-hub .bw-clear-btn {
+            min-height: 42px;
+          }
+
+          .bw-tools-hub .bw-featured-grid,
           .bw-tools-hub .bw-tools-grid {
             grid-template-columns: 1fr;
           }
@@ -435,10 +631,6 @@ class BWToolsHubElement extends HTMLElement {
           .bw-tools-hub .bw-embed-cta {
             align-items: flex-start;
             flex-direction: column;
-          }
-
-          .bw-tools-hub .bw-tool-card {
-            min-height: 0;
           }
         }
 
@@ -456,53 +648,72 @@ class BWToolsHubElement extends HTMLElement {
           }
 
           .bw-tools-hub .bw-hub-main {
-            padding: 32px 16px 36px;
+            padding: 22px 16px 36px;
           }
 
-          .bw-tools-hub .bw-category-section {
-            margin-bottom: 34px;
+          .bw-tools-hub .bw-finder {
+            margin-bottom: 18px;
+            padding: 14px;
           }
 
-          .bw-tools-hub .bw-category-banner {
-            border-radius: 6px;
-            margin-bottom: 14px;
-          }
-
+          .bw-tools-hub .bw-section-heading,
           .bw-tools-hub .bw-category-heading {
             font-size: 22px;
           }
 
-          .bw-tools-hub .bw-category-icon {
-            font-size: 28px;
-          }
-
-          .bw-tools-hub .bw-category-blurb {
+          .bw-tools-hub .bw-category-blurb,
+          .bw-tools-hub .bw-section-kicker {
             font-size: 14.5px;
           }
 
           .bw-tools-hub .bw-tool-card {
-            padding: 16px;
+            min-height: 0;
+            padding: 14px;
+            position: relative;
           }
 
-          .bw-tools-hub .bw-tool-card h3 {
-            font-size: 18px;
+          .bw-tools-hub .bw-tool-card::after {
+            color: var(--bw-green);
+            content: "\\2192";
+            font-size: 20px;
+            font-weight: 800;
+            position: absolute;
+            right: 14px;
+            top: 22px;
           }
 
           .bw-tools-hub .bw-tool-card-head {
-            gap: 12px;
-            min-height: 58px;
+            margin-bottom: 8px;
+            min-height: 48px;
+            padding-right: 22px;
           }
 
           .bw-tools-hub .bw-tool-icon {
-            border-radius: 10px;
-            flex-basis: 56px;
-            height: 56px;
-            width: 56px;
+            flex-basis: 48px;
+            height: 48px;
+            width: 48px;
           }
 
           .bw-tools-hub .bw-tool-icon img {
-            height: 56px;
-            width: 56px;
+            height: 48px;
+            width: 48px;
+          }
+
+          .bw-tools-hub .bw-tool-card h3 {
+            font-size: 17px;
+          }
+
+          .bw-tools-hub .bw-tool-card p {
+            display: -webkit-box;
+            font-size: 14px;
+            margin-bottom: 12px;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+          }
+
+          .bw-tools-hub .bw-tool-cta {
+            font-size: 12.5px;
           }
 
           .bw-tools-hub .bw-hub-footer {
@@ -515,19 +726,11 @@ class BWToolsHubElement extends HTMLElement {
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .bw-tools-hub .bw-category-section,
           .bw-tools-hub .bw-tool-card,
-          .bw-tools-hub .bw-btn-primary,
-          .bw-tools-hub .bw-skeleton-heading,
-          .bw-tools-hub .bw-skeleton-line,
           .bw-tools-hub .bw-skeleton-card {
             animation: none;
             transition: none;
             transform: none;
-          }
-
-          .bw-tools-hub .bw-category-section {
-            opacity: 1;
           }
         }
       </style>
@@ -556,7 +759,7 @@ class BWToolsHubElement extends HTMLElement {
 
         <div class="bw-hub-footer">
           <h2>Want a real local with you?</h2>
-          <p>Our 2-hour walking tour covers Berlin's historic center and East Berlin stories. Tip-based, no fixed price.</p>
+          <p>The 2-hour walking tour covers Berlin's historic center and East Berlin stories. Tip-based, no fixed price.</p>
           <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" class="bw-btn-primary">Reserve your spot</a>
         </div>
       </section>
@@ -564,26 +767,22 @@ class BWToolsHubElement extends HTMLElement {
   }
 
   _renderSkeleton() {
-    return Array.from({ length: 4 }).map(() => `
-      <section class="bw-skeleton-section" aria-hidden="true">
-        <span class="bw-skeleton-heading"></span>
-        <span class="bw-skeleton-line"></span>
-        <div class="bw-tools-grid">
-          <span class="bw-skeleton-card"></span>
-          <span class="bw-skeleton-card"></span>
-          <span class="bw-skeleton-card"></span>
-        </div>
-      </section>
-    `).join('');
+    return `
+      <p class="bw-skeleton-text">Loading tools...</p>
+      <div class="bw-tools-grid" aria-hidden="true">
+        <span class="bw-skeleton-card"></span>
+        <span class="bw-skeleton-card"></span>
+        <span class="bw-skeleton-card"></span>
+      </div>
+    `;
   }
 
   async _loadDataAndRender() {
     try {
-      const response = await fetch(BW_TOOLS_HUB_DATA_URL);
+      const response = await fetch(this._dataUrl);
       if (!response.ok) throw new Error('Could not load tools');
       const data = await response.json();
       this._renderHub(data);
-      this._setupAnimations();
     } catch (error) {
       this._renderError();
     }
@@ -591,28 +790,221 @@ class BWToolsHubElement extends HTMLElement {
 
   _renderHub(data) {
     const root = this.querySelector('.bw-tools-root');
-    const categories = data && Array.isArray(data.categories) ? data.categories : [];
     const tools = data && Array.isArray(data.tools)
       ? data.tools.filter(tool => this._isVisibleTool(tool))
       : [];
+    const categories = data && Array.isArray(data.hubCategories) && data.hubCategories.length
+      ? data.hubCategories
+      : (data && Array.isArray(data.categories) ? data.categories : []);
+
     if (!root || !categories.length || !tools.length) {
       this._renderError();
       return;
     }
 
+    this._categories = categories;
+    this._tools = tools;
     root.removeAttribute('aria-live');
-    root.innerHTML = categories.map(category => this._renderCategory(category, tools)).join('');
+    root.innerHTML = `
+      ${this._renderFinder()}
+      <div class="bw-featured-root"></div>
+      <div class="bw-catalog-root"></div>
+    `;
+    this._updateResults();
+  }
+
+  _renderFinder() {
+    return `
+      <section class="bw-finder" aria-labelledby="bw-tool-finder-title">
+        <div class="bw-finder-top">
+          <div>
+            <label class="bw-search-label" id="bw-tool-finder-title" for="bw-tool-search">Find the right Berlin tool</label>
+            <div class="bw-search-wrap">
+              <span class="bw-search-icon" aria-hidden="true">&#128269;</span>
+              <input id="bw-tool-search" class="bw-search-input" data-bw-tools-search type="search" autocomplete="off" placeholder="Search tickets, Sunday, luggage, weather, airport...">
+            </div>
+          </div>
+          <button class="bw-clear-btn" type="button" data-bw-tools-clear hidden>Reset</button>
+        </div>
+        <div class="bw-filter-groups">
+          <label class="bw-filter-group" for="bw-tool-category-filter">
+            <span class="bw-filter-label">Category</span>
+            <span class="bw-select-wrap">
+              <select id="bw-tool-category-filter" class="bw-filter-select" data-bw-category-select>
+                ${this._renderCategoryOptions()}
+              </select>
+            </span>
+          </label>
+          <label class="bw-filter-group" for="bw-tool-type-filter">
+            <span class="bw-filter-label">Tool type</span>
+            <span class="bw-select-wrap">
+              <select id="bw-tool-type-filter" class="bw-filter-select" data-bw-type-select>
+                ${this._renderTypeOptions()}
+              </select>
+            </span>
+          </label>
+        </div>
+        <p class="bw-result-count" data-bw-result-count></p>
+      </section>
+    `;
+  }
+
+  _renderCategoryOptions() {
+    const allOption = this._renderSelectOption({
+      value: '',
+      label: 'All categories',
+      count: this._tools.length
+    });
+
+    const categoryOptions = this._categories.map(category => {
+      const count = this._countToolsForCategory(category.key);
+      if (!count) return '';
+      return this._renderSelectOption({
+        value: category.key,
+        label: `${category.icon || ''} ${category.label || ''}`.trim(),
+        count
+      });
+    }).join('');
+
+    return `${allOption}${categoryOptions}`;
+  }
+
+  _renderTypeOptions() {
+    const types = this._getToolTypes();
+    const allOption = this._renderSelectOption({
+      value: '',
+      label: 'All types',
+      count: this._tools.length
+    });
+
+    return `${allOption}${types.map(type => this._renderSelectOption({
+      value: type,
+      label: type,
+      count: this._countToolsForType(type)
+    })).join('')}`;
+  }
+
+  _renderSelectOption({ value, label, count }) {
+    return `<option value="${this._escapeAttribute(value)}">${this._escapeHtml(`${label} (${count})`)}</option>`;
+  }
+
+  _updateResults() {
+    const active = Boolean(this._query.trim() || this._activeCategory || this._activeType);
+    const filteredTools = this._getFilteredTools();
+    const sortedTools = this._sortTools(filteredTools);
+
+    this._updateFinderState(sortedTools.length, active);
+    this._renderFeatured(active);
+    this._renderCatalog(sortedTools, active);
+  }
+
+  _updateFinderState(count, active) {
+    const clear = this.querySelector('[data-bw-tools-clear]');
+    if (clear) clear.hidden = !active;
+
+    const input = this.querySelector('[data-bw-tools-search]');
+    if (input && input.value !== this._query) input.value = this._query;
+
+    const categorySelect = this.querySelector('[data-bw-category-select]');
+    if (categorySelect && categorySelect.value !== this._activeCategory) {
+      categorySelect.value = this._activeCategory;
+    }
+
+    const typeSelect = this.querySelector('[data-bw-type-select]');
+    if (typeSelect && typeSelect.value !== this._activeType) {
+      typeSelect.value = this._activeType;
+    }
+
+    const countEl = this.querySelector('[data-bw-result-count]');
+    if (!countEl) return;
+    if (!active) {
+      countEl.textContent = `${this._tools.length} free Berlin tools in ${this._categories.length} categories. Choose a category, filter by type, or search.`;
+    } else if (count === 0) {
+      countEl.textContent = 'No matching tool yet. Try tickets, Sunday, weather, luggage, or first day.';
+    } else {
+      const scopes = [];
+      if (this._activeCategory) scopes.push(`in ${this._categoryLabel(this._activeCategory)}`);
+      if (this._activeType) scopes.push(`type: ${this._activeType}`);
+      if (this._query.trim()) scopes.push(`matching "${this._query.trim()}"`);
+      countEl.textContent = `${count} ${count === 1 ? 'tool' : 'tools'}${scopes.length ? ` ${scopes.join(' · ')}` : ''}.`;
+    }
+  }
+
+  _renderFeatured(active) {
+    const root = this.querySelector('.bw-featured-root');
+    if (!root) return;
+    if (active) {
+      root.innerHTML = '';
+      return;
+    }
+
+    const featured = this._sortTools(this._tools.filter(tool => tool.featured)).slice(0, 6);
+    if (!featured.length) {
+      root.innerHTML = '';
+      return;
+    }
+
+    root.innerHTML = `
+      <section class="bw-featured-section" aria-labelledby="bw-featured-tools-title">
+        <h2 class="bw-section-heading" id="bw-featured-tools-title">Start here</h2>
+        <p class="bw-section-kicker">The fastest tools for common first-trip questions: tickets, what is open, arrival moves, Mondays, and holidays.</p>
+        <div class="bw-featured-grid">
+          ${featured.map(tool => this._renderTool(tool)).join('')}
+        </div>
+      </section>
+    `;
+  }
+
+  _renderCatalog(tools, active) {
+    const root = this.querySelector('.bw-catalog-root');
+    if (!root) return;
+
+    if (!tools.length) {
+      root.innerHTML = `<p class="bw-no-results">No matching tool yet. Try tickets, Sunday, weather, luggage, or first day.</p>`;
+      return;
+    }
+
+    if (this._activeCategory) {
+      const category = this._getCategory(this._activeCategory);
+      const id = `bw-tools-${String(this._activeCategory || 'matches').toLowerCase()}`;
+      root.innerHTML = `
+        <section class="bw-matches-section" id="${this._escapeAttribute(id)}" aria-labelledby="${this._escapeAttribute(id)}-title">
+          <h2 class="bw-section-heading" id="${this._escapeAttribute(id)}-title">
+            <span class="bw-category-icon" aria-hidden="true">${this._escapeHtml((category && category.icon) || '')}</span>
+            ${this._escapeHtml((category && category.label) || 'Matching tools')}
+          </h2>
+          ${category && category.blurb ? `<p class="bw-section-kicker">${this._escapeHtml(category.blurb)}</p>` : ''}
+          <div class="bw-tools-grid">
+            ${tools.map(tool => this._renderTool(tool)).join('')}
+          </div>
+        </section>
+      `;
+      return;
+    }
+
+    if (active) {
+      root.innerHTML = `
+        <section class="bw-matches-section" aria-labelledby="bw-matching-tools-title">
+          <h2 class="bw-section-heading" id="bw-matching-tools-title">Matching tools</h2>
+          <div class="bw-tools-grid">
+            ${tools.map(tool => this._renderTool(tool)).join('')}
+          </div>
+        </section>
+      `;
+      return;
+    }
+
+    root.innerHTML = this._categories.map(category => this._renderCategory(category, tools)).join('');
   }
 
   _renderCategory(category, tools) {
-    const categoryTools = tools.filter(tool => tool.category === category.key);
-    const id = `bw-category-${String(category.key || '').toLowerCase()}`;
+    const categoryTools = this._sortTools(tools.filter(tool => this._toolCategory(tool) === category.key));
+    const id = `bw-tools-${String(category.key || '').toLowerCase()}`;
     if (!categoryTools.length) return '';
 
     return `
-      <section class="bw-category-section" aria-labelledby="${this._escapeAttribute(id)}">
-        ${this._renderCategoryBanner(category)}
-        <h2 class="bw-category-heading" id="${this._escapeAttribute(id)}">
+      <section class="bw-category-section" id="${this._escapeAttribute(id)}" aria-labelledby="${this._escapeAttribute(id)}-title">
+        <h2 class="bw-category-heading" id="${this._escapeAttribute(id)}-title">
           <span class="bw-category-icon" aria-hidden="true">${this._escapeHtml(category.icon || '')}</span>
           ${this._escapeHtml(category.label || '')}
         </h2>
@@ -624,27 +1016,18 @@ class BWToolsHubElement extends HTMLElement {
     `;
   }
 
-  _renderCategoryBanner(category) {
-    const source = category && category.bannerImage ? this._resolveAssetUrl(category.bannerImage) : '';
-    const fallback = category && (category.bannerFallbackImage || category.bannerImage)
-      ? this._resolveAssetUrl(category.bannerFallbackImage || category.bannerImage)
-      : '';
-    if (!source && !fallback) return '';
-
-    return `
-      <picture class="bw-category-banner">
-        ${source ? `<source srcset="${this._escapeAttribute(source)}" type="image/webp">` : ''}
-        <img src="${this._escapeAttribute(fallback || source)}" alt="${this._escapeAttribute(category.bannerAlt || '')}" loading="eager" decoding="async">
-      </picture>
-    `;
-  }
-
   _renderTool(tool) {
+    const seasonLabel = this._isSeasonRelevant(tool) && tool.seasonLabel
+      ? `<span class="bw-season-label">${this._escapeHtml(tool.seasonLabel)}</span>`
+      : '';
     return `
       <a class="bw-tool-card" href="https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}">
         <div class="bw-tool-card-head">
           ${this._renderToolIcon(tool)}
-          <h3>${this._escapeHtml(tool.title || '')}</h3>
+          <div class="bw-tool-title-wrap">
+            <h3>${this._escapeHtml(tool.title || '')}</h3>
+            <span class="bw-tool-type">${this._escapeHtml(tool.type || 'Tool')}</span>${seasonLabel}
+          </div>
         </div>
         <p>${this._escapeHtml(tool.lead || '')}</p>
         <span class="bw-tool-cta">Open tool</span>
@@ -663,43 +1046,92 @@ class BWToolsHubElement extends HTMLElement {
     `;
   }
 
-  _resolveAssetUrl(value) {
-    if (!value) return '';
-    try {
-      return new URL(value, BW_TOOLS_HUB_DATA_URL).href;
-    } catch (error) {
-      return value;
-    }
+  _getFilteredTools() {
+    const query = this._query.trim().toLowerCase();
+    return this._tools.filter(tool => {
+      if (this._activeCategory && this._toolCategory(tool) !== this._activeCategory) return false;
+      if (this._activeType && String(tool.type || '') !== this._activeType) return false;
+      if (query && !this._matchesSearch(tool, query)) return false;
+      return true;
+    });
+  }
+
+  _matchesSearch(tool, query) {
+    return this._searchText(tool).includes(query);
+  }
+
+  _searchText(tool) {
+    return [
+      tool.title,
+      tool.lead,
+      tool.slug,
+      tool.type,
+      this._toolCategory(tool),
+      this._categoryLabel(this._toolCategory(tool)),
+      ...(Array.isArray(tool.tags) ? tool.tags : []),
+      ...(Array.isArray(tool.aliases) ? tool.aliases : [])
+    ].filter(Boolean).join(' ').toLowerCase();
+  }
+
+  _getToolTypes() {
+    const found = new Set(this._tools.map(tool => String(tool.type || '').trim()).filter(Boolean));
+    return [
+      ...BW_TOOLS_HUB_TYPE_ORDER.filter(type => found.has(type)),
+      ...[...found].filter(type => !BW_TOOLS_HUB_TYPE_ORDER.includes(type)).sort()
+    ];
+  }
+
+  _countToolsForCategory(categoryKey) {
+    return this._tools.filter(tool => this._toolCategory(tool) === categoryKey).length;
+  }
+
+  _countToolsForType(type) {
+    return this._tools.filter(tool => String(tool.type || '') === type).length;
+  }
+
+  _getCategory(categoryKey) {
+    return this._categories.find(category => category && category.key === categoryKey) || null;
+  }
+
+  _categoryLabel(categoryKey) {
+    const category = this._getCategory(categoryKey);
+    return category && category.label ? category.label : categoryKey;
+  }
+
+  _sortTools(tools) {
+    return [...tools].sort((a, b) => {
+      const priorityDiff = this._sortPriority(a) - this._sortPriority(b);
+      if (priorityDiff) return priorityDiff;
+      return String(a.title || '').localeCompare(String(b.title || ''));
+    });
+  }
+
+  _sortPriority(tool) {
+    return this._priority(tool) - (this._isSeasonRelevant(tool) ? 8 : 0);
+  }
+
+  _isSeasonRelevant(tool) {
+    if (!tool || !tool.seasonal || !tool.seasonStart || !tool.seasonEnd) return false;
+    const now = new Date();
+    const start = new Date(`${tool.seasonStart}T00:00:00`);
+    const end = new Date(`${tool.seasonEnd}T23:59:59`);
+    if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime())) return false;
+    const nearStart = new Date(start.getTime() - 21 * 24 * 60 * 60 * 1000);
+    return now >= nearStart && now <= end;
+  }
+
+  _priority(tool) {
+    return typeof tool.priority === 'number' ? tool.priority : 50;
+  }
+
+  _toolCategory(tool) {
+    return tool.hubCategory || tool.category || '';
   }
 
   _isVisibleTool(tool) {
     if (!tool || !tool.widgetUrl) return false;
     const status = String(tool.status || '').toLowerCase();
     return tool.hidden !== true && tool.published !== false && status !== 'draft';
-  }
-
-  _setupAnimations() {
-    const sections = Array.from(this.querySelectorAll('.bw-category-section'));
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      this._animated = true;
-      sections.forEach(section => section.classList.add('visible'));
-      return;
-    }
-
-    this._observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('visible');
-        this._observer.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px 160px 0px', threshold: 0.01 });
-
-    sections.forEach((section, index) => {
-      section.style.transitionDelay = `${index * 80}ms`;
-      this._observer.observe(section);
-    });
   }
 
   _renderError() {
