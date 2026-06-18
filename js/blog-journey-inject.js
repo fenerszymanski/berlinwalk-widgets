@@ -267,7 +267,7 @@
       '.bw-blog-back-top:hover{background:#1B5E20;}',
       '.bw-blog-back-top-visible{opacity:1;pointer-events:auto;transform:translateY(0);visibility:visible;}',
       '[' + NATIVE_END_MARKER + '="1"]{display:none!important;}',
-      '@media (max-width:899px){html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) [data-hook="post"],html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) article{opacity:0!important;pointer-events:none!important;}}',
+      '@media (max-width:899px){html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) [data-hook="post"],html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) article{opacity:0!important;pointer-events:none!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:not(:has(> .bw-blog-mobile-nav)) > [data-hook="post"]{margin-top:270px!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:has(> .bw-blog-mobile-nav) > [data-hook="post"]{margin-top:0!important;}}',
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
       '@media (max-width:899px){body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{font-size:clamp(32px,8.4vw,35px)!important;line-height:1.06!important;margin-top:18px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-bottom:2px solid #212121;display:block;margin:0 0 28px;padding:24px 0 20px;position:relative;}.bw-blog-mobile-nav:before{background:#1B5E20;content:"";display:block;height:5px;left:0;position:absolute;right:0;top:0;}.bw-blog-mobile-nav:after{background:#212121;content:"";display:block;height:2px;left:0;position:absolute;right:0;top:86px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-journey-card-walk-it{display:none!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
     ].join('\n');
@@ -570,8 +570,8 @@
       shouldScroll = updateMobileBlogNavActive(nav, active);
     }
     var article = body.closest('article');
-    if (article && article.contains(body)) {
-      if (article.firstElementChild !== nav) article.insertBefore(nav, article.firstElementChild || body);
+    if (article && article.contains(body) && article.parentNode && article.parentNode !== document.body) {
+      if (nav.parentNode !== article.parentNode || nav.nextSibling !== article) article.parentNode.insertBefore(nav, article);
     } else {
       if (body.firstElementChild !== nav) body.insertBefore(nav, body.firstElementChild || null);
     }
