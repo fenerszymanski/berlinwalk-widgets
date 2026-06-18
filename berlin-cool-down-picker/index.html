@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Cool-Down Picker | BerlinWalk</title>
+  <meta name="description" content="Pick the right Berlin cool-down move for a hot day: swim, shade, indoor cooling, quick refresh or evening plan.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-cool-picker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-cool-picker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 26px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-cool-picker *,
+    #bw-cool-picker *::before,
+    #bw-cool-picker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-cool-picker .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-cool-picker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.16)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px 22px;
+    }
+
+    #bw-cool-picker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-cool-picker h2,
+    #bw-cool-picker h3,
+    #bw-cool-picker p {
+      margin-top: 0;
+    }
+
+    #bw-cool-picker .bw-title {
+      color: var(--bw-white);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-cool-picker .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 780px;
+    }
+
+    #bw-cool-picker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    #bw-cool-picker .bw-options {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    #bw-cool-picker button {
+      -webkit-tap-highlight-color: transparent;
+      align-items: start;
+      background: var(--bw-white);
+      border: 1.5px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      display: grid;
+      font: inherit;
+      gap: 7px;
+      min-height: 122px;
+      padding: 13px 12px;
+      text-align: left;
+    }
+
+    #bw-cool-picker button:focus-visible,
+    #bw-cool-picker a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-cool-picker button[aria-pressed="true"] {
+      background: var(--bw-yellow);
+      border-color: rgba(27, 94, 32, 0.34);
+      box-shadow: inset 0 -3px 0 rgba(27, 94, 32, 0.18);
+    }
+
+    #bw-cool-picker .bw-emoji {
+      align-items: center;
+      background: #F2F8E8;
+      border: 1px solid rgba(27, 94, 32, 0.12);
+      border-radius: 8px;
+      display: inline-flex;
+      font-size: 23px;
+      height: 42px;
+      justify-content: center;
+      line-height: 1;
+      width: 42px;
+    }
+
+    #bw-cool-picker button[aria-pressed="true"] .bw-emoji {
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    #bw-cool-picker .bw-card-title {
+      color: var(--bw-green);
+      display: block;
+      font-size: 14px;
+      font-weight: 900;
+      line-height: 1.18;
+    }
+
+    #bw-cool-picker .bw-card-copy {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    #bw-cool-picker .bw-result {
+      background: var(--bw-white);
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      border-radius: 8px;
+      display: grid;
+      gap: 12px;
+      padding: 15px;
+    }
+
+    #bw-cool-picker .bw-result-top {
+      align-items: start;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    #bw-cool-picker .bw-pill {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-cool-picker .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.16;
+      margin: 0;
+    }
+
+    #bw-cool-picker .bw-copy-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-cool-picker .bw-copy-box {
+      background: #F7FAF0;
+      border: 1px solid rgba(124, 179, 66, 0.26);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 11px;
+    }
+
+    #bw-cool-picker .bw-copy-box strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    #bw-cool-picker .bw-copy-box span {
+      color: var(--bw-text);
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    #bw-cool-picker .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-cool-picker .bw-links a {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+      min-height: 38px;
+      padding: 9px 11px;
+      text-decoration: none;
+    }
+
+    #bw-cool-picker .bw-links a.secondary {
+      background: var(--bw-white);
+      border: 1px solid rgba(27, 94, 32, 0.24);
+      color: var(--bw-green);
+    }
+
+    @media (max-width: 900px) {
+      #bw-cool-picker .bw-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-cool-picker .bw-copy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 460px) {
+      #bw-cool-picker {
+        margin: 20px 0;
+      }
+
+      #bw-cool-picker .bw-head {
+        padding: 18px 16px;
+      }
+
+      #bw-cool-picker .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-cool-picker .bw-options,
+      #bw-cool-picker .bw-result-top {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-cool-picker button {
+        min-height: 94px;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-head">
+      <p class="bw-kicker">Berlin hot-day picker</p>
+      <h2 class="bw-title">What kind of cool-down do you need?</h2>
+      <p class="bw-sub">Pick one mood. The widget turns the usual hot-day list into one clear Berlin move, one backup and the right BerlinWalk tool.</p>
+    </header>
+
+    <main class="bw-body">
+      <section class="bw-options" aria-label="Cool-down choices">
+        <button type="button" data-mode="swim" aria-pressed="true">
+          <span class="bw-emoji" aria-hidden="true">🏊</span>
+          <span class="bw-card-title">I want to swim</span>
+          <span class="bw-card-copy">Lakes, lidos, pools</span>
+        </button>
+        <button type="button" data-mode="shade" aria-pressed="false">
+          <span class="bw-emoji" aria-hidden="true">🌳</span>
+          <span class="bw-card-title">I need shade</span>
+          <span class="bw-card-copy">Parks, beer gardens</span>
+        </button>
+        <button type="button" data-mode="indoor" aria-pressed="false">
+          <span class="bw-emoji" aria-hidden="true">🏛️</span>
+          <span class="bw-card-title">I need indoor cooling</span>
+          <span class="bw-card-copy">Museums, cinemas, malls</span>
+        </button>
+        <button type="button" data-mode="quick" aria-pressed="false">
+          <span class="bw-emoji" aria-hidden="true">💧</span>
+          <span class="bw-card-title">I need a quick refresh</span>
+          <span class="bw-card-copy">Water, ice cream</span>
+        </button>
+        <button type="button" data-mode="evening" aria-pressed="false">
+          <span class="bw-emoji" aria-hidden="true">🌙</span>
+          <span class="bw-card-title">I have the evening free</span>
+          <span class="bw-card-copy">Open-air cinema, lake walk, beer garden</span>
+        </button>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-result-top">
+          <h3 id="bw-result-title">Choose water as the main plan</h3>
+          <span class="bw-pill" id="bw-result-pill">Swim plan</span>
+        </div>
+        <div class="bw-copy-grid">
+          <div class="bw-copy-box">
+            <strong>Best move</strong>
+            <span id="bw-best">Choose a lake if you have half a day and do not mind the extra travel.</span>
+          </div>
+          <div class="bw-copy-box">
+            <strong>Good backup</strong>
+            <span id="bw-backup">Choose a pool or lido if you want lockers, showers and easier facilities.</span>
+          </div>
+          <div class="bw-copy-box">
+            <strong>Hot-day note</strong>
+            <span id="bw-note">Check water quality, tickets and opening hours before you leave.</span>
+          </div>
+        </div>
+        <nav class="bw-links" id="bw-links" aria-label="Related tools"></nav>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById('bw-cool-picker');
+      const modes = {
+        swim: {
+          title: 'Choose water as the main plan',
+          pill: 'Swim plan',
+          best: 'Choose a lake if you have half a day and do not mind the extra travel.',
+          backup: 'Choose a pool or lido if you want lockers, showers and easier facilities.',
+          note: 'Check water quality, tickets and opening hours before you leave.',
+          links: [
+            ['Berlin Lakes Map', 'https://www.berlinwalk.com/tools/berlin-lakes'],
+            ['Berlin Pools Map', 'https://www.berlinwalk.com/tools/berlin-pools']
+          ]
+        },
+        shade: {
+          title: 'Slow the day down in shade',
+          pill: 'Shade plan',
+          best: 'Pick a park, canal edge or beer garden and make it a real break.',
+          backup: 'Use a shaded courtyard or station hall if the group is already tired.',
+          note: 'Shade is useful only if you sit, drink and stop rushing.',
+          links: [
+            ['Free Things Map', 'https://www.berlinwalk.com/tools/berlin-free-things-to-do'],
+            ['First-Day Planner', 'https://www.berlinwalk.com/tools/berlin-first-day-planner']
+          ]
+        },
+        indoor: {
+          title: 'Move the middle of the day indoors',
+          pill: 'Indoor plan',
+          best: 'Use museums, cinemas or a mall during the hardest 12:00 to 16:30 window.',
+          backup: 'Humboldt Forum or Hauptbahnhof can work as central reset points.',
+          note: 'Do not rely on the U-Bahn as your cooling room.',
+          links: [
+            ['What’s Open Today', 'https://www.berlinwalk.com/tools/whats-open-in-berlin-today'],
+            ['First-Day Planner', 'https://www.berlinwalk.com/tools/berlin-first-day-planner']
+          ]
+        },
+        quick: {
+          title: 'Fix the next 20 minutes',
+          pill: 'Quick refresh',
+          best: 'Refill water first, then find ice cream, a kiosk or a shaded bench.',
+          backup: 'If the bottle is empty before a U-Bahn ride, refill before going underground.',
+          note: 'A quick refresh is not a full plan; use it before the next decision.',
+          links: [
+            ['Drinking Water Map', 'https://www.berlinwalk.com/tools/berlin-drinking-water'],
+            ['Daily Budget Calculator', 'https://www.berlinwalk.com/tools/berlin-daily-budget']
+          ]
+        },
+        evening: {
+          title: 'Save the fun part for after the heat',
+          pill: 'Evening plan',
+          best: 'Use open-air cinema, a beer garden, a river walk or a lake edge after the city cools.',
+          backup: 'If the day was heavy, keep it close to your hotel and skip the long transfer.',
+          note: 'The best hot-day plans often peak after 18:00.',
+          links: [
+            ['Berlin Lakes Map', 'https://www.berlinwalk.com/tools/berlin-lakes'],
+            ['BerlinWalk Route', 'https://www.berlinwalk.com/berlin-walking-tour-route']
+          ]
+        }
+      };
+
+      function render(modeKey) {
+        const mode = modes[modeKey] || modes.swim;
+        root.querySelector('#bw-result-title').textContent = mode.title;
+        root.querySelector('#bw-result-pill').textContent = mode.pill;
+        root.querySelector('#bw-best').textContent = mode.best;
+        root.querySelector('#bw-backup').textContent = mode.backup;
+        root.querySelector('#bw-note').textContent = mode.note;
+        root.querySelector('#bw-links').innerHTML = mode.links.map((link, index) => {
+          const cls = index === 0 ? '' : ' class="secondary"';
+          return `<a${cls} href="${link[1]}" target="_blank" rel="noopener">${link[0]}</a>`;
+        }).join('');
+      }
+
+      root.querySelectorAll('[data-mode]').forEach((button) => {
+        button.addEventListener('click', () => {
+          root.querySelectorAll('[data-mode]').forEach((item) => {
+            item.setAttribute('aria-pressed', String(item === button));
+          });
+          render(button.dataset.mode);
+        });
+      });
+
+      render('swim');
+    })();
+  </script>
+</div>
+</body>
+</html>

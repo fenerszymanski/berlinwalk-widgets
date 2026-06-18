@@ -5,13 +5,13 @@ Slug: berlin-heatwave-day-plan
 Focus keyword: Berlin heatwave
 Category: Tourist Tips
 Search intent: tourists already in Berlin or arriving during very hot weather who need a practical day plan, water options, realistic transport expectations and cool-down alternatives.
-Post-specific widget: berlin-cool-down-route-builder
+Post-specific widget: berlin-cool-down-picker
 
 ## Widget Ideas Considered
 
-1. Berlin Cool-Down Route Builder: start area + heat level + energy + goal gives a realistic morning, midday and evening plan. Chosen because it makes a decision instead of duplicating existing water/lake maps.
-2. Berlin Transit AC Reality Checker: line/mode lookup for transport comfort. Useful, but too narrow for the whole article.
-3. Berlin Heat Escape Picker: choose lake, pool, museum or cafe by group type. Useful, but overlaps more strongly with the existing lake and pool tools.
+1. Berlin Cool-Down Picker: one-tap choice between swim, shade, indoor cooling, quick refresh and evening plan. Chosen because it combines the classic hot-day ideas without becoming another map or dense planner.
+2. Berlin Heat Swap Cards: "too hot for this -> do this instead" cards. Strong editorial idea, but less useful as a reusable Berlin Tool.
+3. Berlin Transit AC Reality Checker: line/mode lookup for transport comfort. Useful, but too narrow for the whole article.
 
 ## Body
 
@@ -39,7 +39,7 @@ A strong hot-day rhythm looks like this:
 
 The mistake is trying to keep the same itinerary and simply "drink more water." Water helps, but planning matters more.
 
-{{widget:berlin-cool-down-route-builder}}
+{{widget:berlin-cool-down-picker}}
 
 ## Do not count on the U-Bahn for air conditioning
 
