@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Monday Plan Checker | BerlinWalk</title>
+  <meta name="description" content="Choose your Monday travel style and see what to do in Berlin when many museums are closed.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-monday-checker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-monday-checker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-red: #E63946;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-monday-checker *,
+    #bw-monday-checker *::before,
+    #bw-monday-checker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-monday-checker .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-monday-checker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.18)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-monday-checker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-monday-checker h2,
+    #bw-monday-checker h3,
+    #bw-monday-checker p {
+      margin-top: 0;
+    }
+
+    #bw-monday-checker .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-monday-checker .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 820px;
+    }
+
+    #bw-monday-checker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(270px, 0.78fr) minmax(0, 1.22fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-monday-checker .bw-panel,
+    #bw-monday-checker .bw-result,
+    #bw-monday-checker .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-monday-checker .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-monday-checker label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-monday-checker .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-monday-checker select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-monday-checker select:focus-visible,
+    #bw-monday-checker button:focus-visible,
+    #bw-monday-checker a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-monday-checker .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-monday-checker button {
+      background: var(--bw-white);
+      border: 1px solid rgba(124, 179, 66, 0.45);
+      border-radius: 8px;
+      color: var(--bw-green);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 9px 10px;
+      text-align: center;
+    }
+
+    #bw-monday-checker button[aria-pressed="true"] {
+      background: var(--bw-yellow);
+      border-color: rgba(27, 94, 32, 0.38);
+      color: var(--bw-green);
+      box-shadow: inset 0 -2px 0 rgba(27, 94, 32, 0.2);
+    }
+
+    #bw-monday-checker .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-monday-checker .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-monday-checker .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-monday-checker .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-monday-checker .bw-result p,
+    #bw-monday-checker li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-monday-checker .bw-route {
+      display: grid;
+      gap: 9px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-monday-checker .bw-route li {
+      background: #F7FAF0;
+      border: 1px solid rgba(124, 179, 66, 0.26);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-weight: 760;
+      min-height: 46px;
+      padding: 10px;
+    }
+
+    #bw-monday-checker .bw-status-grid {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-monday-checker .bw-status {
+      background: #F7FAF0;
+      border: 1px solid rgba(124, 179, 66, 0.22);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-monday-checker .bw-status strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 5px;
+    }
+
+    #bw-monday-checker .bw-status span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    #bw-monday-checker .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-monday-checker .bw-links a {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1.25;
+      min-height: 40px;
+      padding: 9px 11px;
+      text-decoration: none;
+    }
+
+    #bw-monday-checker .bw-links a.secondary {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+    }
+
+    #bw-monday-checker .bw-warning {
+      background: rgba(230, 57, 70, 0.08);
+      border: 1px solid rgba(230, 57, 70, 0.22);
+      border-radius: 8px;
+      color: #7A1F27;
+      font-size: 12.5px;
+      font-weight: 760;
+      line-height: 1.5;
+      margin: 0;
+      padding: 10px;
+    }
+
+    @media (max-width: 720px) {
+      #bw-monday-checker {
+        margin: 22px 0;
+      }
+
+      #bw-monday-checker .bw-head {
+        padding: 17px 16px;
+      }
+
+      #bw-monday-checker .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-monday-checker .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-monday-checker .bw-choice-grid,
+      #bw-monday-checker .bw-status-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk Tool</p>
+      <h2 class="bw-title">Berlin Monday Plan Checker</h2>
+      <p class="bw-sub">Pick the kind of Monday you want, then get a realistic plan that avoids the classic closed-museum trap.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Monday plan inputs">
+        <div class="bw-form">
+          <label>
+            <span class="bw-label">Your main goal</span>
+            <select id="goal">
+              <option value="classic">Classic sights without a museum ticket</option>
+              <option value="museum">A museum that is actually open</option>
+              <option value="rain">Rain-safe indoor day</option>
+              <option value="lowcost">Free or low-cost Monday</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Start area</span>
+            <select id="start">
+              <option value="alex">Alexanderplatz / Mitte</option>
+              <option value="hbf">Hauptbahnhof / government quarter</option>
+              <option value="kreuzberg">Kreuzberg / south Mitte</option>
+              <option value="west">Zoo / west Berlin</option>
+            </select>
+          </label>
+
+          <div>
+            <span class="bw-label">Energy level</span>
+            <div class="bw-choice-grid" id="pace" role="group" aria-label="Energy level">
+              <button type="button" data-value="easy" aria-pressed="false">Easy</button>
+              <button type="button" data-value="normal" aria-pressed="true">Normal</button>
+              <button type="button" data-value="full" aria-pressed="false">Full day</button>
+              <button type="button" data-value="kids" aria-pressed="false">With kids</button>
+            </div>
+          </div>
+
+          <p class="bw-note">Opening hours can change for holidays, strikes, maintenance and special events. Use this as a planning filter, then check the official page before buying tickets.</p>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="verdict">Best Monday route</span>
+        <h3 id="title">Start with the historic centre, then choose one open anchor</h3>
+        <p id="summary">A Monday in Berlin is not a wasted day. Keep Museum Island exteriors for the walk, then use Humboldt Forum, Futurium, Berlinische Galerie, the Reichstag dome or the TV Tower as your open anchor.</p>
+
+        <div class="bw-status-grid" id="statusGrid"></div>
+        <ol class="bw-route" id="route"></ol>
+        <p class="bw-warning" id="warning">Do not build a Monday around the Altes Museum, Neues Museum, Bode-Museum, Alte Nationalgalerie or James-Simon-Galerie unless the official opening-hours page says otherwise.</p>
+        <div class="bw-links">
+          <a href="https://www.berlinwalk.com/berlin-walking-tour-route" target="_blank" rel="noopener">See the route story</a>
+          <a class="secondary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Book the 2 hours walk</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      const plans = {
+        classic: {
+          verdict: 'Best Monday route',
+          title: 'Walk the historic centre, then use one open viewpoint',
+          summary: 'This is the safest first-time Monday: you still see the landmarks that make Berlin legible, without depending on closed Museum Island interiors.',
+          status: [
+            ['Museum Island interiors', 'Usually closed Monday'],
+            ['Outdoor landmarks', 'Good all day'],
+            ['Open anchor', 'Reichstag, TV Tower or Humboldt Forum']
+          ],
+          route: [
+            'Start at Alexanderplatz and the World Clock, then walk toward Rotes Rathaus and St. Mary’s Church.',
+            'Use Museum Island from outside: Lustgarten, Altes Museum colonnade, Berliner Dom views and the Spree bridges.',
+            'Choose one open anchor: Reichstag dome if you booked ahead, TV Tower for a paid high view, or Humboldt Forum for a central indoor stop.'
+          ]
+        },
+        museum: {
+          verdict: 'Museum day that works',
+          title: 'Skip the closed state museums and pick a Monday-open museum',
+          summary: 'The Monday mistake is buying a museum-heavy plan before checking opening hours. Choose institutions that normally close on Tuesday instead.',
+          status: [
+            ['Humboldt Forum', 'Open Monday, Tuesday closed'],
+            ['Berlinische Galerie', 'Open Monday, Tuesday closed'],
+            ['Futurium', 'Open Monday, Tuesday closed']
+          ],
+          route: [
+            'If you are central, start with Humboldt Forum because it fits naturally between Museum Island, Unter den Linden and Nikolaiviertel.',
+            'For modern art and photography, go to Berlinische Galerie, then add Kreuzberg or the Jewish Museum area nearby.',
+            'For a free, practical indoor stop near Hauptbahnhof, choose Futurium and combine it with the government quarter.'
+          ]
+        },
+        rain: {
+          verdict: 'Rain-safe Monday',
+          title: 'Keep transfers short and avoid outdoor overplanning',
+          summary: 'On a wet Monday, choose one indoor anchor and one flexible cafe or food break. Do not cross the city for three uncertain stops.',
+          status: [
+            ['Futurium', 'Good near Hauptbahnhof'],
+            ['Humboldt Forum', 'Good in Mitte'],
+            ['Berlinische Galerie', 'Good near Kreuzberg']
+          ],
+          route: [
+            'Start with the indoor anchor closest to where you are staying.',
+            'Add one nearby dry food stop instead of chasing another museum across town.',
+            'If the rain breaks, use the Spree, Museum Island exteriors or the Reichstag area as your short outdoor layer.'
+          ]
+        },
+        lowcost: {
+          verdict: 'Low-cost Monday',
+          title: 'Use free sights, free interiors and one paid choice only if it matters',
+          summary: 'A cheap Monday in Berlin can still be strong: the city centre is an open-air history route, and several good institutions are free or low-cost.',
+          status: [
+            ['Futurium', 'Free admission'],
+            ['Reichstag dome', 'Free with registration'],
+            ['Historic centre walk', 'Free outdoors']
+          ],
+          route: [
+            'Walk Alexanderplatz, St. Mary’s Church, the Spree, Museum Island exteriors and Unter den Linden.',
+            'Add Futurium if you want a free indoor stop, especially from Hauptbahnhof.',
+            'Use paid choices sparingly: TV Tower for the view, Berlinische Galerie for art, or a boat tour if the weather is good.'
+          ]
+        }
+      };
+
+      const startHints = {
+        alex: 'From Alexanderplatz, the easiest route is World Clock → Rotes Rathaus → Museum Island exteriors → Humboldt Forum.',
+        hbf: 'From Hauptbahnhof, Futurium and the Reichstag dome are the cleanest first moves before you head east.',
+        kreuzberg: 'From Kreuzberg or south Mitte, Berlinische Galerie is the most natural Monday-open museum anchor.',
+        west: 'From the west, keep transfers realistic: start with Zoo/Kudamm if needed, then pick one central anchor by S-Bahn or U-Bahn.'
+      };
+
+      const paceHints = {
+        easy: 'Easy pace: choose one anchor and one walk. Stop before the day turns into transfer work.',
+        normal: 'Normal pace: one walk, one indoor anchor and one food break is enough.',
+        full: 'Full day: add a viewpoint or evening stop after the main anchor, but still verify hours.',
+        kids: 'With kids: keep the route short, add food early and do not promise a closed museum.'
+      };
+
+      const root = document.getElementById('bw-monday-checker');
+      const goal = root.querySelector('#goal');
+      const start = root.querySelector('#start');
+      const pace = root.querySelector('#pace');
+      const verdict = root.querySelector('#verdict');
+      const title = root.querySelector('#title');
+      const summary = root.querySelector('#summary');
+      const statusGrid = root.querySelector('#statusGrid');
+      const route = root.querySelector('#route');
+      let paceValue = 'normal';
+
+      function render() {
+        const plan = plans[goal.value];
+        verdict.textContent = plan.verdict;
+        title.textContent = plan.title;
+        summary.textContent = `${plan.summary} ${startHints[start.value]} ${paceHints[paceValue]}`;
+        statusGrid.innerHTML = plan.status.map(([head, text]) => `<div class="bw-status"><strong>${head}</strong><span>${text}</span></div>`).join('');
+        route.innerHTML = plan.route.map((item) => `<li>${item}</li>`).join('');
+        if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.resize === 'function') {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      pace.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-value]');
+        if (!button) return;
+        paceValue = button.dataset.value;
+        pace.querySelectorAll('button').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        render();
+      });
+      goal.addEventListener('change', render);
+      start.addEventListener('change', render);
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

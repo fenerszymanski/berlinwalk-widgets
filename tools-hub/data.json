@@ -553,6 +553,20 @@
       "image": "https://static.wixstatic.com/media/5a08a3_8907b6aa962b443e822e5dcd535c1d74~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-family-day-planner/",
       "embedHeight": 1250
+    },
+    {
+      "slug": "berlin-monday-plan-checker",
+      "title": "Berlin Monday Plan Checker",
+      "lead": "Choose your Monday travel style and get a plan that avoids closed museums.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_eed64e0eac3a458a8b5f46731e9f387a~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-monday-plan-checker/",
+      "embedHeight": 820,
+      "draft": true,
+      "published": false,
+      "iconStatus": "uploaded-wix-media",
+      "relatedBlog": "/post/berlin-on-a-monday",
+      "cmsItemId": "771e6d86-7404-400c-936b-86aa842db148"
     }
   ]
 }

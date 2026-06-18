@@ -325,7 +325,7 @@
       <aside class="bw-status">
         <div>
           <p class="bw-kicker">Generated</p>
-          <p><strong>2026-06-09 18:30:47</strong></p>
+          <p><strong>2026-06-17 22:54:33</strong></p>
           <p class="bw-footer-note">Source folder: <code>ultimate-berlin-trip-planner/velo/</code></p>
         </div>
         <div class="bw-alert is-good">
@@ -512,8 +512,8 @@ export async function subscribeEmailMarketing(email) {
       <p class="bw-target">Create this backend file in Wix Developer Tools.</p>
       <p class="bw-note">Paste the full source into a new Backend file named tripPlannerFunnel.js.</p>
       <div class="bw-meta">
-        <span>1178 lines</span>
-        <span>38.0 KB</span>
+        <span>1190 lines</span>
+        <span>38.4 KB</span>
         <span>tripPlannerFunnel.js</span>
       </div>
       <textarea id="source-funnel" readonly spellcheck="false">import wixData from 'wix-data';
@@ -1373,6 +1373,17 @@ function planUrlForEmail(lead) {
   }
 }
 
+function tripPackLabelForLength(length) {
+  let days = Number(length || 1);
+  if (!Number.isFinite(days)) days = 1;
+  days = Math.max(1, Math.min(7, Math.round(days)));
+  if (days &lt;= 1) return '24-hour Berlin Trip Pack';
+  if (days === 2) return '48-hour Berlin Trip Pack';
+  if (days === 3) return '72-hour Berlin Trip Pack';
+  if (days === 4) return '96-hour Berlin Trip Pack';
+  return `${days}-day Berlin Trip Pack`;
+}
+
 function emailVariables(lead, stage) {
   const booked = isBookedLead(lead);
   return {
@@ -1380,6 +1391,7 @@ function emailVariables(lead, stage) {
     isBooked: booked ? 'yes' : 'no',
     arrivalDate: String(lead.arrivalDate || ''),
     tripLength: String(lead.tripLength || ''),
+    tripPackLabel: tripPackLabelForLength(lead.tripLength),
     planTitle: String(lead.planTitle || 'Ultimate Berlin trip plan'),
     recommendedTourDay: String(lead.recommendedTourDay || ''),
     recommendedTourDate: String(lead.recommendedTourDate || ''),
