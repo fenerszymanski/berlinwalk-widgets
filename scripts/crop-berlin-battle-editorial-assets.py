@@ -8,7 +8,7 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 ROOT = Path(__file__).resolve().parents[1]
 BATTLE = ROOT / "berlin-battle"
-SOURCE = BATTLE / "assets" / "source" / "editorial-20260616"
+SOURCE = BATTLE / "assets" / "source" / "expanded-20260618"
 SHEETS = SOURCE / "sheets"
 CONTACTS = SOURCE / "contact-sheets"
 CARDS = BATTLE / "assets" / "cards"
@@ -43,6 +43,38 @@ BATCHES = {
         ("clubs-batch-3.png", ["spati-corner", "cocktail-bar", "rooftop-sunset", "comedy-night"]),
         ("clubs-batch-4.png", ["late-doner-stop", "night-bus-ride", "gallery-opening", "afterhours-breakfast"]),
     ],
+    "transport": [
+        ("transport-batch-1.png", ["u-bahn-ride", "s-bahn-ring", "tram-glide", "double-decker-bus"]),
+        ("transport-batch-2.png", ["airport-train", "ferry-crossing", "bike-lane", "walking-route"]),
+        ("transport-batch-3.png", ["night-bus", "regional-train", "taxi-ride", "escooter-hop"]),
+        ("transport-batch-4.png", ["ticket-machine", "platform-bakery", "station-shortcut", "rainy-tram-window"]),
+    ],
+    "techno-clubs": [
+        ("techno-clubs-batch-1.png", ["berghain", "tresor", "rso", "sisyphos"]),
+        ("techno-clubs-batch-2.png", ["kater-blau", "about-blank", "kitkatclub", "renate"]),
+        ("techno-clubs-batch-3.png", ["club-der-visionaere", "ritter-butzke", "heidegluehen", "anomalie-art-club"]),
+        ("techno-clubs-batch-4.png", ["oxi", "aeden", "ohm", "gretchen"]),
+    ],
+    "doner-shops": [
+        ("doner-shops-batch-1.png", ["dunya-gemuse-kebab", "goltz-kebap", "oggis-gemusekebab", "ruyam-gemuse-kebab"]),
+        ("doner-shops-batch-2.png", ["muca-kebap", "mustafas-gemuse-kebap", "imren-grill", "tadim"]),
+    ],
+    "currywurst-shops": [
+        ("currywurst-shops-batch-1.png", ["curry-baude", "curry-61", "zur-bratpfanne", "curry-und-chili"]),
+        ("currywurst-shops-batch-2.png", ["konnopkes-imbiss", "curry-36", "wittys", "krasselts-imbiss"]),
+    ],
+    "parks-lakes": [
+        ("parks-lakes-batch-1.png", ["tiergarten", "tempelhofer-feld", "mauerpark", "treptower-park"]),
+        ("parks-lakes-batch-2.png", ["viktoriapark", "volkspark-friedrichshain", "park-am-gleisdreieck", "schlossgarten-charlottenburg"]),
+        ("parks-lakes-batch-3.png", ["grunewald", "teufelsberg", "schlachtensee", "muggelsee"]),
+        ("parks-lakes-batch-4.png", ["wannsee", "plotzensee", "krumme-lanke", "tegeler-see"]),
+    ],
+    "ubahn-sbahn-lines": [
+        ("lines-batch-1.png", ["u1", "u2", "u3", "u5"]),
+        ("lines-batch-2.png", ["u6", "u7", "u8", "u9"]),
+        ("lines-batch-3.png", ["s1", "s2", "s3", "s5"]),
+        ("lines-batch-4.png", ["s7", "s9", "s41", "s42"]),
+    ],
 }
 
 
@@ -63,6 +95,30 @@ COVER_CARDS = {
         "file": "night-battle-cover.webp",
         "cards": ["techno-warehouse", "spati-corner", "night-bus-ride", "afterhours-breakfast"],
     },
+    "transport": {
+        "file": "transport-battle-cover.webp",
+        "cards": ["u-bahn-ride", "tram-glide", "ferry-crossing", "rainy-tram-window"],
+    },
+    "techno-clubs": {
+        "file": "techno-club-battle-cover.webp",
+        "cards": ["berghain", "tresor", "sisyphos", "ohm"],
+    },
+    "doner-shops": {
+        "file": "doner-shops-battle-cover.webp",
+        "cards": ["dunya-gemuse-kebab", "ruyam-gemuse-kebab", "mustafas-gemuse-kebap", "imren-grill"],
+    },
+    "currywurst-shops": {
+        "file": "currywurst-shops-battle-cover.webp",
+        "cards": ["curry-baude", "curry-61", "konnopkes-imbiss", "curry-36"],
+    },
+    "parks-lakes": {
+        "file": "parks-lakes-battle-cover.webp",
+        "cards": ["tiergarten", "tempelhofer-feld", "schlachtensee", "wannsee"],
+    },
+    "ubahn-sbahn-lines": {
+        "file": "lines-battle-cover.webp",
+        "cards": ["u1", "u8", "s7", "s41"],
+    },
 }
 
 
@@ -80,6 +136,16 @@ def out_path(topic: str, slug: str) -> Path:
         return CARDS / "museums" / f"{slug}.webp"
     if topic == "clubs":
         return CARDS / "night" / f"{slug}.webp"
+    if topic in {
+        "transport",
+        "techno-clubs",
+        "doner-shops",
+        "currywurst-shops",
+        "parks-lakes",
+        "ubahn-sbahn-lines",
+    }:
+        folder = "lines" if topic == "ubahn-sbahn-lines" else topic
+        return CARDS / folder / f"{slug}.webp"
     raise ValueError(topic)
 
 

@@ -897,7 +897,7 @@
   var root = document.getElementById('bw-berlin-battle');
   var componentStyleHtml = root.querySelector('style') ? root.querySelector('style').outerHTML : '';
   var URL_PARAMS = new URLSearchParams(window.location.search || '');
-  var ASSET_BUILD = URL_PARAMS.get('v') || 'editorial-all-battles-20260616';
+  var ASSET_BUILD = URL_PARAMS.get('v') || 'expanded-battles-20260618';
   var DATA_URL = 'data.json?v=' + encodeURIComponent(ASSET_BUILD);
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_battle&utm_medium=game&utm_campaign=berlin_battle&utm_content=result_cta';
   var SHARE_URL_BASE = 'https://www.berlinwalk.com/games/berlin-battle';
@@ -1212,7 +1212,7 @@
 
     renderShell(
       '<h1 class="bb-title">Choose your battle</h1>' +
-      '<p class="bb-subtitle">Fast this-or-that tournaments for Berlin tastes, neighborhoods, museums and nights.</p>',
+      '<p class="bb-subtitle">Fast this-or-that tournaments for Berlin tastes, transport, clubs, parks, lines and nights.</p>',
       '<div class="bb-topic-grid">' + cards + '</div>'
     );
     track('bw_berlin_battle_view_topics', { topic_count: topics.length });

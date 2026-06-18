@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'editorial-all-battles-20260616';
+  const ASSET_BUILD = 'expanded-battles-20260618';
 
   function ensureFont() {
     if (document.querySelector('link[data-bw-battle-page-font]')) return;
@@ -65,7 +65,7 @@
               <div class="bw-battle-hero-copy">
                 <p class="bw-battle-kicker">BerlinWalk game</p>
                 <h1 id="bw-battle-title">Berlin Battle</h1>
-                <p class="bw-battle-lead">Pick between Berlin food, districts, museums and nights. Get a personal winner, then meet the real city on the walking route.</p>
+                <p class="bw-battle-lead">Pick between Berlin food, districts, transport, clubs, parks, lines and nights. Get a personal winner, then meet the real city on the walking route.</p>
                 <div class="bw-battle-actions">
                   <a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a>
                 </div>

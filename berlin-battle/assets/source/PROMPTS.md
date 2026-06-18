@@ -367,6 +367,84 @@ Batch order:
 - Night 4: Late Döner Stop; Night Bus Ride; Gallery Opening; Afterhours
   Breakfast.
 
+## Expanded Battles Refresh
+
+Added 2026-06-18 for six new playable Berlin Battle modes requested by Yusuf:
+Berlin Transport Battle, Berlin Techno Club Battle, Döner Shops Battle,
+Currywurst Shops Battle, Berlin Park & Lakes Battle, and Berlin U-Bahn &
+S-Bahn Lines Battle.
+
+Generation mode:
+
+- Built-in Codex `image_gen` tool, not CLI/API fallback.
+- No OpenAI/Gemini/Sora/Veo/Content Studio paid channel was used directly.
+- The 2026-06-16 source sheets were copied into `expanded-20260618/sheets/`,
+  and 20 new 2x2 source sheets were added there for the expanded modes.
+
+Finished outputs:
+
+- `berlin-battle/data.json` version: `2026-06-18-expanded-battles`.
+- 144 total card files under `../cards/` and subfolders, all exported as
+  `640x640` WebP.
+- 10 textless topic covers under `../topics/`, all `960x600` WebP.
+- QA contact sheets under `expanded-20260618/contact-sheets/`.
+- Reproducible crop/composite script:
+  `../../../scripts/crop-berlin-battle-editorial-assets.py`.
+
+Reusable prompt direction:
+
+```text
+Grounded editorial illustration, modern Berlin travel poster, hand-finished
+drawing. Use visible painterly brush texture, paper grain, softened outlines,
+stylized but believable Berlin scenes/objects, warm shadows. It should clearly
+look illustrated, not like a photograph or 3D render. Premium but human.
+
+Composition: exact 2 by 2 grid, equal square cells, clear separation between
+cells, generous crop-safe margins. Each cell must work when cropped to a
+standalone 640x640 game card.
+
+Palette: BerlinWalk deep green #1B5E20, bright yellow #FFE600, lime #7CB342,
+cream #FAFAF5 and white highlights as restrained accents. Natural food colors,
+U-Bahn yellow, S-Bahn red/yellow, greens/blues for parks and lakes, and warm
+club lighting as appropriate.
+
+Text constraints: no text, no labels, no letters, no numbers, no logos, no
+watermark, no readable station names, route signs, menus, plaques, or venue
+signage. Do not put item names in the image.
+
+Avoid: photorealistic look, 3D render look, cyberpunk, spaceship/game arena,
+holograms, excessive glow, futuristic UI, black vignette, random real-photo
+collage, flat vector icons, distorted architecture/vehicles/people, real venue
+logos, and explicit nightlife imagery.
+```
+
+Batch order:
+
+- Transport 1: U-Bahn Ride; S-Bahn Ring; Tram Glide; Double-Decker Bus.
+- Transport 2: Airport Train; Ferry Crossing; Bike Lane; Walking Route.
+- Transport 3: Night Bus; Regional Train; Taxi Ride; E-Scooter Hop.
+- Transport 4: Ticket Machine; Platform Bakery; Station Shortcut; Rainy Tram
+  Window.
+- Techno Clubs 1: Berghain; Tresor; RSO; Sisyphos.
+- Techno Clubs 2: Kater Blau; ://about blank; KitKatClub; Renate.
+- Techno Clubs 3: Club der Visionaere; Ritter Butzke; Heideglühen; Anomalie
+  Art Club.
+- Techno Clubs 4: OXI; ÆDEN; OHM; Gretchen.
+- Döner Shops 1: Dunya Gemüse Kebab; Golt'z Kebap; Oggi's Gemüsekebab; Rüyam
+  Gemüse Kebab.
+- Döner Shops 2: Muca Kebap; Mustafa's Gemüse Kebap; Imren Grill; Tadim.
+- Currywurst Shops 1: Curry Baude; Curry 61; Zur Bratpfanne; Curry & Chili.
+- Currywurst Shops 2: Konnopke's Imbiss; Curry 36; Witty's; Krasselt's Imbiss.
+- Parks & Lakes 1: Tiergarten; Tempelhofer Feld; Mauerpark; Treptower Park.
+- Parks & Lakes 2: Viktoriapark; Volkspark Friedrichshain; Park am
+  Gleisdreieck; Schlossgarten Charlottenburg.
+- Parks & Lakes 3: Grunewald; Teufelsberg; Schlachtensee; Müggelsee.
+- Parks & Lakes 4: Wannsee; Plötzensee; Krumme Lanke; Tegeler See.
+- Lines 1: U1; U2; U3; U5.
+- Lines 2: U6; U7; U8; U9.
+- Lines 3: S1; S2; S3; S5.
+- Lines 4: S7; S9; S41; S42.
+
 ## BerlinTools Icon
 
 Source files:

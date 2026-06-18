@@ -9,7 +9,7 @@ const BW_BATTLE_HOME_ROOT = (() => {
 
 const BW_BATTLE_HOME_GAME_URL = 'https://www.berlinwalk.com/games/berlin-battle?utm_source=home&utm_medium=section&utm_campaign=berlin_battle_home&utm_content=play';
 const BW_BATTLE_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlin_battle_home&utm_content=book';
-const BW_BATTLE_HOME_ASSET_VERSION = '2026-06-16-editorial-all-battles';
+const BW_BATTLE_HOME_ASSET_VERSION = 'expanded-battles-20260618';
 
 function bwBattleHomeAsset(path, version = BW_BATTLE_HOME_ASSET_VERSION) {
   const separator = path.includes('?') ? '&' : '?';
@@ -269,7 +269,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           <div class="bw-battle-home-copy">
             <span class="bw-battle-home-kicker">BerlinWalk game</span>
             <h2 class="bw-battle-home-title" id="bw-battle-home-title">Find your Berlin winner before the walk.</h2>
-            <p class="bw-battle-home-lead">Pick between Berlin food, districts, museums and nights. Get a personal winner, then come walk the real city with me.</p>
+            <p class="bw-battle-home-lead">Pick between Berlin food, districts, transport, clubs, parks, lines and nights. Get a personal winner, then come walk the real city with me.</p>
             <div class="bw-battle-home-actions">
               <a class="bw-battle-home-btn bw-battle-home-btn-primary" href="${BW_BATTLE_HOME_GAME_URL}">Play Berlin Battle</a>
               <a class="bw-battle-home-btn bw-battle-home-btn-secondary" href="${BW_BATTLE_HOME_BOOKING_URL}">Book the walking tour</a>
