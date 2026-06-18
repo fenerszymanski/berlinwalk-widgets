@@ -3544,5 +3544,35 @@
         "a": "Yes, Monday is a good day for a **2 hours** historic-centre walk because the route uses outdoor landmarks and city layers, not museum interiors. Book the current date and time on berlinwalk.com."
       }
     ]
+  },
+  "berlin-heatwave-day-plan": {
+    "title": "Berlin Heatwave Day Plan - FAQ",
+    "subtitle": "Quick answers for tourists planning Berlin in very hot weather.",
+    "items": [
+      {
+        "q": "Is Berlin too hot to visit in summer?",
+        "a": "Berlin can still be enjoyable in very hot weather if you move the day around the heat: walk early, cool down properly at midday and return outside in the evening. On official heat-warning days, shorten the plan and check current heat guidance."
+      },
+      {
+        "q": "Does the Berlin U-Bahn have air conditioning?",
+        "a": "No. BVG says Berlin U-Bahn trains do not have air conditioning. They use ventilation, but the U-Bahn should be treated as fast transport, not as a cool-down space."
+      },
+      {
+        "q": "Which Berlin public transport is best on a hot day?",
+        "a": "Buses and most trams are more likely to have air conditioning, although the effect is limited in strong heat. Some newer S-Bahn trains, especially the 483/484 series on S41/S42, S46, S47 and S8, have air conditioning. The U-Bahn is useful for speed but not for cooling."
+      },
+      {
+        "q": "Where can I find free drinking water in Berlin?",
+        "a": "Berlin has public drinking fountains managed by Berliner Wasserbetriebe, and the BerlinWalk Drinking Water Map helps you find a nearby refill point quickly. Refill before a long walk, before taking the U-Bahn and before heading into parks or lake areas."
+      },
+      {
+        "q": "Should I choose a Berlin lake or swimming pool during a heatwave?",
+        "a": "Choose a lake if you want a bigger outdoor escape and you have checked official water quality. Choose a pool if you want more facilities, showers, lockers and predictable access. On hot weekends, check tickets, occupancy and opening hours first."
+      },
+      {
+        "q": "Can I still join BerlinWalk on a hot day?",
+        "a": "Usually yes, if the weather and your health make it sensible. BerlinWalk is a focused **2 hours** historic-centre walk, so it can work as the morning outdoor part of the day. Bring water, refill before the start and reduce the rest of the itinerary if the heat feels heavy."
+      }
+    ]
   }
 }

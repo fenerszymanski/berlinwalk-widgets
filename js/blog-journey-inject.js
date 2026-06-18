@@ -203,7 +203,8 @@
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"]{color:#212121;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + EMPTY_PARAGRAPH_MARKER + '="1"]{display:none!important;height:0!important;line-height:0!important;margin:0!important;min-height:0!important;padding:0!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-family:Merriweather,Georgia,serif!important;font-size:18px!important;line-height:1.74!important;margin:0 0 18px!important;}',
-      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-family:Montserrat,Arial,sans-serif!important;font-weight:900!important;letter-spacing:0!important;color:#212121!important;scroll-margin-top:96px;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-family:Montserrat,Arial,sans-serif!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;color:#212121!important;scroll-margin-top:96px;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2 *,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3 *{color:inherit!important;font-family:inherit!important;font-size:inherit!important;font-style:normal!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;line-height:inherit!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{border-top:2px solid #212121;font-size:clamp(28px,4vw,38px)!important;line-height:1.06!important;margin:42px 0 14px!important;padding-top:24px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-size:clamp(21px,3vw,26px)!important;line-height:1.12!important;margin:30px 0 10px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] a:not(.bw-blog-mobile-nav-home):not(.bw-blog-mobile-nav-item):not(.bw-blog-mobile-guide-list a):not(.bw-blog-tool-button):not(.bw-blog-journey-card){color:#1B5E20!important;text-decoration-color:#FFE600!important;text-decoration-thickness:3px!important;text-underline-offset:3px!important;}',
@@ -212,12 +213,16 @@
       '.bw-blog-mobile-nav,.bw-blog-mobile-guide,.bw-blog-tool-prompt,.bw-blog-journey,.bw-blog-back-top{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;color:#212121;}',
       '.bw-blog-mobile-nav *,.bw-blog-mobile-guide *,.bw-blog-tool-prompt *,.bw-blog-journey *{box-sizing:border-box;}',
       '.bw-blog-mobile-nav{display:none;}',
-      '.bw-blog-mobile-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;border-radius:4px;color:#FFFFFF!important;display:inline-flex;font-size:12px;font-weight:900;line-height:1;min-height:34px;padding:0 14px;text-decoration:none!important;white-space:nowrap;}',
-      '.bw-blog-mobile-nav-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.35px;line-height:1;margin:13px 0 9px;text-transform:uppercase;}',
-      '.bw-blog-mobile-nav-list{display:flex;gap:8px;list-style:none;margin:0;overflow-x:auto;padding:0 0 4px;scrollbar-width:none;}',
+      '.bw-blog-mobile-nav-head{align-items:center;display:flex;gap:10px;justify-content:space-between;margin:0 0 10px;}',
+      '.bw-blog-mobile-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;border-radius:999px;color:#FFFFFF!important;display:inline-flex;font-size:11px;font-weight:900;line-height:1;min-height:30px;padding:0 12px;text-decoration:none!important;white-space:nowrap;}',
+      '.bw-blog-mobile-nav-title{color:#4E5A4E;display:block;font-size:10px;font-weight:900;letter-spacing:1.25px;line-height:1;text-transform:uppercase;white-space:nowrap;}',
+      '.bw-blog-mobile-nav-scroll{margin:0;overflow:hidden;position:relative;}',
+      '.bw-blog-mobile-nav-scroll:after{background:linear-gradient(90deg,rgba(250,250,245,0),#FAFAF5 80%);content:"";display:block;height:100%;pointer-events:none;position:absolute;right:0;top:0;width:28px;}',
+      '.bw-blog-mobile-nav-label{color:#1B5E20;display:block;font-size:9px;font-weight:900;letter-spacing:1.2px;line-height:1;margin:0 0 8px;text-transform:uppercase;}',
+      '.bw-blog-mobile-nav-list{display:flex;gap:7px;list-style:none;margin:0;overflow-x:auto;padding:0 22px 2px 0;scrollbar-width:none;}',
       '.bw-blog-mobile-nav-list::-webkit-scrollbar{display:none;}',
-      '.bw-blog-mobile-nav-list a{align-items:center;background:#FFFFFF;border:1px solid #D7D7CF;border-radius:4px;color:#1B5E20!important;display:inline-flex;font-size:12px;font-weight:900;line-height:1;min-height:33px;padding:0 11px;text-decoration:none!important;white-space:nowrap;}',
-      '.bw-blog-mobile-nav-list a.bw-blog-mobile-nav-active{background:#FFE600;border-color:#FFE600;color:#212121!important;}',
+      '.bw-blog-mobile-nav-list a{align-items:center;background:#FFFFFF;border:1px solid rgba(27,94,32,.18);border-radius:999px;color:#1B5E20!important;display:inline-flex;font-size:11px;font-weight:900;line-height:1;min-height:31px;padding:0 11px;text-decoration:none!important;white-space:nowrap;}',
+      '.bw-blog-mobile-nav-list a.bw-blog-mobile-nav-active{background:#FFE600;border-color:#FFE600;color:#212121!important;box-shadow:inset 0 0 0 1px rgba(33,33,33,.12);}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav a{text-decoration:none!important;text-decoration-color:transparent!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav .bw-blog-mobile-nav-home{color:#FFFFFF!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav-list a{color:#212121!important;}',
@@ -258,7 +263,7 @@
       '.bw-blog-back-top-visible{opacity:1;pointer-events:auto;transform:translateY(0);visibility:visible;}',
       '[' + NATIVE_END_MARKER + '="1"]{display:none!important;}',
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
-      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}.bw-blog-mobile-nav{background:#FFFDF1;border:1px solid #D7D7CF;border-left:5px solid #FFE600;box-shadow:0 10px 24px rgba(27,94,32,.07);display:block;margin:0 0 22px;padding:14px 14px 12px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-journey-card-walk-it{display:none!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
+      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-top:4px solid #1B5E20;border-bottom:1px solid rgba(27,94,32,.16);display:block;margin:0 0 24px;padding:12px 0 14px;position:relative;}.bw-blog-mobile-nav:before{background:#FFE600;content:"";display:block;height:4px;left:0;position:absolute;top:-4px;width:34%;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-journey-card-walk-it{display:none!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
     ].join('\n');
     (document.head || document.documentElement).appendChild(style);
   }
@@ -286,6 +291,7 @@
         dataCache = { allPosts: [], tools: [], toolsHub: [], bookingUrl: 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based' };
         return dataCache;
       });
+    return dataPromise;
   }
 
   function currentPost(data) {
@@ -367,6 +373,28 @@
     });
   }
 
+  function normalizeHeadingTypography(body) {
+    if (!body) return;
+    body.querySelectorAll('h2, h3').forEach(function (heading) {
+      if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) return;
+      heading.style.setProperty('font-family', 'Montserrat, Arial, sans-serif', 'important');
+      heading.style.setProperty('font-weight', '900', 'important');
+      heading.style.setProperty('font-variation-settings', '"wght" 900', 'important');
+      heading.style.setProperty('letter-spacing', '0', 'important');
+      heading.style.setProperty('color', '#212121', 'important');
+      heading.querySelectorAll('*').forEach(function (node) {
+        node.style.setProperty('color', 'inherit', 'important');
+        node.style.setProperty('font-family', 'inherit', 'important');
+        node.style.setProperty('font-size', 'inherit', 'important');
+        node.style.setProperty('font-style', 'normal', 'important');
+        node.style.setProperty('font-weight', '900', 'important');
+        node.style.setProperty('font-variation-settings', '"wght" 900', 'important');
+        node.style.setProperty('letter-spacing', '0', 'important');
+        node.style.setProperty('line-height', 'inherit', 'important');
+      });
+    });
+  }
+
   function markPostBody(body) {
     document.body.classList.add('bw-blog-post-enhanced');
     document.querySelectorAll('[' + POST_BODY_MARKER + ']').forEach(function (oldBody) {
@@ -388,14 +416,19 @@
   }
 
   function mobileBlogNavHtml(active) {
-    return '<a class="bw-blog-mobile-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
-      '<span class="bw-blog-mobile-nav-label">Categories</span>' +
+    return '<div class="bw-blog-mobile-nav-head">' +
+      '<a class="bw-blog-mobile-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
+      '<span class="bw-blog-mobile-nav-title">Berlin travel notes</span>' +
+      '</div>' +
+      '<div class="bw-blog-mobile-nav-scroll">' +
+      '<span class="bw-blog-mobile-nav-label">Topics</span>' +
       '<ul class="bw-blog-mobile-nav-list">' +
       BLOG_CATEGORIES.map(function (category) {
         var cls = ' class="bw-blog-mobile-nav-item' + (category.slug === active ? ' bw-blog-mobile-nav-active' : '') + '"';
         return '<li><a' + cls + ' href="' + escapeAttr(category.url) + '" target="_top" data-bw-blog-category="' + escapeAttr(category.slug) + '">' + escapeHtml(category.label) + '</a></li>';
       }).join('') +
-      '</ul>';
+      '</ul>' +
+      '</div>';
   }
 
   function updateMobileBlogNavActive(nav, active) {
@@ -404,6 +437,16 @@
       link.classList.toggle('bw-blog-mobile-nav-active', link.getAttribute('data-bw-blog-category') === active);
     });
     nav.setAttribute('data-bw-blog-mobile-active', active);
+  }
+
+  function scrollMobileBlogNavToActive(nav) {
+    if (!nav || (window.innerWidth || document.documentElement.clientWidth) >= MIN_MOBILE_WIDTH) return;
+    var list = nav.querySelector('.bw-blog-mobile-nav-list');
+    var active = nav.querySelector('.bw-blog-mobile-nav-active');
+    if (!list || !active) return;
+    setTimeout(function () {
+      list.scrollLeft = Math.max(0, active.offsetLeft - 12);
+    }, 0);
   }
 
   function insertMobileBlogNav(body, data) {
@@ -423,6 +466,7 @@
     } else {
       updateMobileBlogNavActive(nav, active);
     }
+    scrollMobileBlogNavToActive(nav);
     var article = body.closest('article');
     if (article && article.contains(body)) {
       if (article.firstElementChild !== nav) article.insertBefore(nav, article.firstElementChild || body);
@@ -743,6 +787,7 @@
     if (!body) return;
     markPostBody(body);
     normalizePostSpacing(body);
+    normalizeHeadingTypography(body);
     insertBackToTop();
     var items = collectHeadings(body);
     insertMobileBlogNav(body, dataCache);
@@ -796,6 +841,7 @@
       if (!isPostPage()) return;
       var body = findPostBody();
       if (body) normalizePostSpacing(body);
+      if (body) normalizeHeadingTypography(body);
       hideNativeEndMatter();
       var needsMobileGuide = body && collectHeadings(body).length >= 2;
       if (!document.querySelector('[' + JOURNEY_MARKER + ']') || !document.querySelector('[' + MOBILE_NAV_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {

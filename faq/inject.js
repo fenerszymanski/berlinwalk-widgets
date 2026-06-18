@@ -121,7 +121,9 @@
   "the-spree-river-the-waterway-that-built-berlin": "spree-river-berlin",
   "berlin-hauptbahnhof-guide": "berlin-hauptbahnhof-guide",
   "berlin-with-kids": "berlin-with-kids",
-  "tax-free-shopping-berlin-vat-refund": "tax-free-shopping-berlin-vat-refund"
+  "tax-free-shopping-berlin-vat-refund": "tax-free-shopping-berlin-vat-refund",
+  "berlin-heatwave-day-plan": "berlin-heatwave-day-plan",
+  "too-hot-in-berlin": "berlin-heatwave-day-plan"
 };
 
   var SCHEMAS = {
@@ -5819,6 +5821,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, children are welcome. The route is about 2 hours, mostly flat, and strollers can usually manage it. Older children often enjoy the visual history more than very young children, who may find the full duration challenging."
+        }
+      }
+    ]
+  },
+  "berlin-heatwave-day-plan": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Berlin too hot to visit in summer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin can still be enjoyable in very hot weather if you move the day around the heat: walk early, cool down properly at midday and return outside in the evening. On official heat-warning days, shorten the plan and check current heat guidance."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Berlin U-Bahn have air conditioning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. BVG says Berlin U-Bahn trains do not have air conditioning. They use ventilation, but the U-Bahn should be treated as fast transport, not as a cool-down space."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin public transport is best on a hot day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Buses and most trams are more likely to have air conditioning, although the effect is limited in strong heat. Some newer S-Bahn trains, especially the 483/484 series on S41/S42, S46, S47 and S8, have air conditioning. The U-Bahn is useful for speed but not for cooling."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I find free drinking water in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin has public drinking fountains managed by Berliner Wasserbetriebe, and the BerlinWalk Drinking Water Map helps you find a nearby refill point quickly. Refill before a long walk, before taking the U-Bahn and before heading into parks or lake areas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I choose a Berlin lake or swimming pool during a heatwave?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose a lake if you want a bigger outdoor escape and you have checked official water quality. Choose a pool if you want more facilities, showers, lockers and predictable access. On hot weekends, check tickets, occupancy and opening hours first."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I still join BerlinWalk on a hot day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually yes, if the weather and your health make it sensible. BerlinWalk is a focused 2 hours historic-centre walk, so it can work as the morning outdoor part of the day. Bring water, refill before the start and reduce the rest of the itinerary if the heat feels heavy."
         }
       }
     ]
