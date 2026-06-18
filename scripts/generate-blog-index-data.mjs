@@ -158,18 +158,18 @@ const TOPICS = [
 
 // Curated featured block (the hero + 5-story rail), not just the newest posts.
 // Mix: current/timely topics, proven-popular posts, and the newest practical
-// guides. The homepage blog teaser uses a different set so the two surfaces
-// do not repeat each other.
+// guides. Keep this curated because the /blog hero is the first editorial
+// signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'berlin-public-holidays-2026',
+  lead: 'berlin-heatwave-day-plan',
   secondary: [
+    'berlin-on-a-monday',
+    'tax-free-shopping-berlin-vat-refund',
+    'berlin-with-kids',
+    'berlin-hauptbahnhof-guide',
+    'berlin-public-holidays-2026',
     'where-to-watch-2026-world-cup-in-berlin',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
-    'where-was-the-berlin-wall-interactive-map',
-    'taxi-in-berlin',
-    'berlin-city-tax',
-    'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
-    'public-toilets-in-berlin',
   ],
 };
 
@@ -178,15 +178,20 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'berlin-heatwave-day-plan',
+  'berlin-on-a-monday',
+  'tax-free-shopping-berlin-vat-refund',
+  'berlin-with-kids',
+  'berlin-hauptbahnhof-guide',
   'berlin-public-holidays-2026',
   'where-to-watch-2026-world-cup-in-berlin',
-  'where-was-the-berlin-wall-interactive-map',
   'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+  'where-was-the-berlin-wall-interactive-map',
   'taxi-in-berlin',
   'berlin-city-tax',
   'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
   'public-toilets-in-berlin',
-  // Homepage teaser uses these non-overlapping picks.
+  // Durable shelf/homepage picks.
   'pfand-in-germany',
   'tipping-in-berlin',
   'what-is-a-spati-berlin',
