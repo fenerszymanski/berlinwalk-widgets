@@ -7,6 +7,7 @@
   var TOOLS_DATA_URL = window.BW_TOOLS_DATA_URL || 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
   var STYLE_ID = 'bw-blog-journey-style';
   var POST_BODY_MARKER = 'data-bw-blog-post-body';
+  var POST_TITLE_MARKER = 'data-bw-blog-post-title';
   var MOBILE_NAV_MARKER = 'data-bw-blog-mobile-nav';
   var MOBILE_MARKER = 'data-bw-blog-mobile-guide';
   var TOOL_MARKER = 'data-bw-blog-tool-prompt';
@@ -203,6 +204,8 @@
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"]{color:#212121;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + EMPTY_PARAGRAPH_MARKER + '="1"]{display:none!important;height:0!important;line-height:0!important;margin:0!important;min-height:0!important;padding:0!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-family:Merriweather,Georgia,serif!important;font-size:18px!important;line-height:1.74!important;margin:0 0 18px!important;}',
+      'body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{color:#212121!important;font-family:Montserrat,Arial,sans-serif!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;}',
+      'body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"] *{color:inherit!important;font-family:inherit!important;font-size:inherit!important;font-style:normal!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;line-height:inherit!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-family:Montserrat,Arial,sans-serif!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;color:#212121!important;scroll-margin-top:96px;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2 *,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3 *{color:inherit!important;font-family:inherit!important;font-size:inherit!important;font-style:normal!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;line-height:inherit!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{border-top:2px solid #212121;font-size:clamp(28px,4vw,38px)!important;line-height:1.06!important;margin:42px 0 14px!important;padding-top:24px!important;}',
@@ -213,16 +216,16 @@
       '.bw-blog-mobile-nav,.bw-blog-mobile-guide,.bw-blog-tool-prompt,.bw-blog-journey,.bw-blog-back-top{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;color:#212121;}',
       '.bw-blog-mobile-nav *,.bw-blog-mobile-guide *,.bw-blog-tool-prompt *,.bw-blog-journey *{box-sizing:border-box;}',
       '.bw-blog-mobile-nav{display:none;}',
-      '.bw-blog-mobile-nav-head{align-items:center;display:flex;gap:10px;justify-content:space-between;margin:0 0 10px;}',
-      '.bw-blog-mobile-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;border-radius:999px;color:#FFFFFF!important;display:inline-flex;font-size:11px;font-weight:900;line-height:1;min-height:30px;padding:0 12px;text-decoration:none!important;white-space:nowrap;}',
-      '.bw-blog-mobile-nav-title{color:#4E5A4E;display:block;font-size:10px;font-weight:900;letter-spacing:1.25px;line-height:1;text-transform:uppercase;white-space:nowrap;}',
+      '.bw-blog-mobile-nav-brand{align-items:center;background:#FFE600;color:#212121;display:inline-flex;font-size:12px;font-weight:900;letter-spacing:1.25px;line-height:1;max-width:100%;min-height:34px;padding:0 12px;text-transform:uppercase;white-space:nowrap;}',
+      '.bw-blog-mobile-nav-divider{border-top:2px solid #212121;height:0;margin:18px 0 24px;}',
+      '.bw-blog-mobile-nav-home{align-items:center;background:#1B5E20;border:1px solid #1B5E20;border-radius:0;color:#FFFFFF!important;display:inline-flex;font-size:13px;font-weight:900;line-height:1;min-height:36px;padding:0 16px;text-decoration:none!important;white-space:nowrap;}',
       '.bw-blog-mobile-nav-scroll{margin:0;overflow:hidden;position:relative;}',
       '.bw-blog-mobile-nav-scroll:after{background:linear-gradient(90deg,rgba(250,250,245,0),#FAFAF5 80%);content:"";display:block;height:100%;pointer-events:none;position:absolute;right:0;top:0;width:28px;}',
-      '.bw-blog-mobile-nav-label{color:#1B5E20;display:block;font-size:9px;font-weight:900;letter-spacing:1.2px;line-height:1;margin:0 0 8px;text-transform:uppercase;}',
-      '.bw-blog-mobile-nav-list{display:flex;gap:7px;list-style:none;margin:0;overflow-x:auto;padding:0 22px 2px 0;scrollbar-width:none;}',
+      '.bw-blog-mobile-nav-label{color:#1B5E20;display:block;font-size:11px;font-weight:900;letter-spacing:2px;line-height:1;margin:22px 0 11px;text-transform:uppercase;}',
+      '.bw-blog-mobile-nav-list{display:flex;gap:9px;list-style:none;margin:0;overflow-x:auto;padding:0 28px 2px 0;scrollbar-width:none;}',
       '.bw-blog-mobile-nav-list::-webkit-scrollbar{display:none;}',
-      '.bw-blog-mobile-nav-list a{align-items:center;background:#FFFFFF;border:1px solid rgba(27,94,32,.18);border-radius:999px;color:#1B5E20!important;display:inline-flex;font-size:11px;font-weight:900;line-height:1;min-height:31px;padding:0 11px;text-decoration:none!important;white-space:nowrap;}',
-      '.bw-blog-mobile-nav-list a.bw-blog-mobile-nav-active{background:#FFE600;border-color:#FFE600;color:#212121!important;box-shadow:inset 0 0 0 1px rgba(33,33,33,.12);}',
+      '.bw-blog-mobile-nav-list a{align-items:center;background:#FFFFFF;border:2px solid #212121;border-radius:0;color:#212121!important;display:inline-flex;font-size:12px;font-weight:900;line-height:1;min-height:36px;padding:0 13px;text-decoration:none!important;white-space:nowrap;}',
+      '.bw-blog-mobile-nav-list a.bw-blog-mobile-nav-active{background:#FFE600;border-color:#212121;color:#212121!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav a{text-decoration:none!important;text-decoration-color:transparent!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav .bw-blog-mobile-nav-home{color:#FFFFFF!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-mobile-nav-list a{color:#212121!important;}',
@@ -263,7 +266,7 @@
       '.bw-blog-back-top-visible{opacity:1;pointer-events:auto;transform:translateY(0);visibility:visible;}',
       '[' + NATIVE_END_MARKER + '="1"]{display:none!important;}',
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
-      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-top:4px solid #1B5E20;border-bottom:1px solid rgba(27,94,32,.16);display:block;margin:0 0 24px;padding:12px 0 14px;position:relative;}.bw-blog-mobile-nav:before{background:#FFE600;content:"";display:block;height:4px;left:0;position:absolute;top:-4px;width:34%;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-journey-card-walk-it{display:none!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
+      '@media (max-width:899px){body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{font-size:clamp(42px,12vw,58px)!important;line-height:.95!important;margin-top:24px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-bottom:2px solid #212121;display:block;margin:0 0 28px;padding:24px 0 20px;position:relative;}.bw-blog-mobile-nav:before{background:#1B5E20;content:"";display:block;height:5px;left:0;position:absolute;right:0;top:0;}.bw-blog-mobile-nav:after{background:#212121;content:"";display:block;height:2px;left:0;position:absolute;right:0;top:86px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-journey-card-walk-it{display:none!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
     ].join('\n');
     (document.head || document.documentElement).appendChild(style);
   }
@@ -373,6 +376,41 @@
     });
   }
 
+  function findPostTitle() {
+    var headings = document.querySelectorAll('h1');
+    for (var i = 0; i < headings.length; i++) {
+      var heading = headings[i];
+      if (heading.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) continue;
+      if (!isVisible(heading)) continue;
+      if (cleanText(heading.textContent).length > 8) return heading;
+    }
+    return null;
+  }
+
+  function normalizePostTitleTypography() {
+    var title = findPostTitle();
+    document.querySelectorAll('[' + POST_TITLE_MARKER + ']').forEach(function (oldTitle) {
+      if (oldTitle !== title) oldTitle.removeAttribute(POST_TITLE_MARKER);
+    });
+    if (!title) return;
+    title.setAttribute(POST_TITLE_MARKER, '1');
+    title.style.setProperty('font-family', 'Montserrat, Arial, sans-serif', 'important');
+    title.style.setProperty('font-weight', '900', 'important');
+    title.style.setProperty('font-variation-settings', '"wght" 900', 'important');
+    title.style.setProperty('letter-spacing', '0', 'important');
+    title.style.setProperty('color', '#212121', 'important');
+    title.querySelectorAll('*').forEach(function (node) {
+      node.style.setProperty('color', 'inherit', 'important');
+      node.style.setProperty('font-family', 'inherit', 'important');
+      node.style.setProperty('font-size', 'inherit', 'important');
+      node.style.setProperty('font-style', 'normal', 'important');
+      node.style.setProperty('font-weight', '900', 'important');
+      node.style.setProperty('font-variation-settings', '"wght" 900', 'important');
+      node.style.setProperty('letter-spacing', '0', 'important');
+      node.style.setProperty('line-height', 'inherit', 'important');
+    });
+  }
+
   function normalizeHeadingTypography(body) {
     if (!body) return;
     body.querySelectorAll('h2, h3').forEach(function (heading) {
@@ -405,7 +443,7 @@
 
   function activeCategorySlug(data) {
     var post = currentPost(data || {});
-    if (post && post.categorySlug) return post.categorySlug;
+    if (post && post.categorySlug && categorySlugExists(post.categorySlug)) return post.categorySlug;
     var path = location.pathname.toLowerCase();
     if (/(german|language|speak)/.test(path)) return 'german-language';
     if (/(before-after|then-and-now|then-now|rebuilt|changed)/.test(path)) return 'before-after';
@@ -415,13 +453,18 @@
     return 'tourist-tips';
   }
 
+  function categorySlugExists(slug) {
+    return BLOG_CATEGORIES.some(function (category) {
+      return category.slug === slug;
+    });
+  }
+
   function mobileBlogNavHtml(active) {
-    return '<div class="bw-blog-mobile-nav-head">' +
+    return '<span class="bw-blog-mobile-nav-brand">Berlin Travel &amp; History Notes</span>' +
+      '<div class="bw-blog-mobile-nav-divider" aria-hidden="true"></div>' +
       '<a class="bw-blog-mobile-nav-home" href="https://www.berlinwalk.com/blog" target="_top">Blog Home</a>' +
-      '<span class="bw-blog-mobile-nav-title">Berlin travel notes</span>' +
-      '</div>' +
       '<div class="bw-blog-mobile-nav-scroll">' +
-      '<span class="bw-blog-mobile-nav-label">Topics</span>' +
+      '<span class="bw-blog-mobile-nav-label">Categories</span>' +
       '<ul class="bw-blog-mobile-nav-list">' +
       BLOG_CATEGORIES.map(function (category) {
         var cls = ' class="bw-blog-mobile-nav-item' + (category.slug === active ? ' bw-blog-mobile-nav-active' : '') + '"';
@@ -432,18 +475,22 @@
   }
 
   function updateMobileBlogNavActive(nav, active) {
-    if (!nav || nav.getAttribute('data-bw-blog-mobile-active') === active) return;
+    if (!nav || nav.getAttribute('data-bw-blog-mobile-active') === active) return false;
     nav.querySelectorAll('.bw-blog-mobile-nav-item').forEach(function (link) {
       link.classList.toggle('bw-blog-mobile-nav-active', link.getAttribute('data-bw-blog-category') === active);
     });
     nav.setAttribute('data-bw-blog-mobile-active', active);
+    return true;
   }
 
-  function scrollMobileBlogNavToActive(nav) {
+  function scrollMobileBlogNavToActive(nav, force) {
     if (!nav || (window.innerWidth || document.documentElement.clientWidth) >= MIN_MOBILE_WIDTH) return;
     var list = nav.querySelector('.bw-blog-mobile-nav-list');
     var active = nav.querySelector('.bw-blog-mobile-nav-active');
     if (!list || !active) return;
+    var activeSlug = active.getAttribute('data-bw-blog-category') || '';
+    if (!force && nav.getAttribute('data-bw-blog-mobile-scroll-active') === activeSlug) return;
+    nav.setAttribute('data-bw-blog-mobile-scroll-active', activeSlug);
     setTimeout(function () {
       list.scrollLeft = Math.max(0, active.offsetLeft - 12);
     }, 0);
@@ -453,6 +500,7 @@
     if (!body) return;
     var active = activeCategorySlug(data);
     var nav = document.querySelector('[' + MOBILE_NAV_MARKER + ']');
+    var shouldScroll = false;
     if (!nav) {
       nav = document.createElement('nav');
       nav.className = 'bw-blog-mobile-nav';
@@ -460,19 +508,21 @@
       nav.setAttribute('aria-label', 'Blog navigation');
       nav.innerHTML = mobileBlogNavHtml(active);
       nav.setAttribute('data-bw-blog-mobile-active', active);
+      shouldScroll = true;
     } else if (!nav.querySelector('.bw-blog-mobile-nav-item')) {
       nav.innerHTML = mobileBlogNavHtml(active);
       nav.setAttribute('data-bw-blog-mobile-active', active);
+      shouldScroll = true;
     } else {
-      updateMobileBlogNavActive(nav, active);
+      shouldScroll = updateMobileBlogNavActive(nav, active);
     }
-    scrollMobileBlogNavToActive(nav);
     var article = body.closest('article');
     if (article && article.contains(body)) {
       if (article.firstElementChild !== nav) article.insertBefore(nav, article.firstElementChild || body);
     } else {
       if (body.firstElementChild !== nav) body.insertBefore(nav, body.firstElementChild || null);
     }
+    scrollMobileBlogNavToActive(nav, shouldScroll);
   }
 
   function hasExistingToolReference(body, tool) {
@@ -538,17 +588,26 @@
   function insertToolPrompt(body, data, items) {
     if (!toolPromptSettled()) return;
     var old = document.querySelector('[' + TOOL_MARKER + ']');
-    if (old) old.remove();
-    if (!body) return;
+    if (!body) {
+      if (old) old.remove();
+      return;
+    }
     var post = currentPost(data);
     var tool = relatedTool(data, post);
-    if (!tool || !tool.url || hasEmbeddedArticleTool(body, tool)) return;
+    if (!tool || !tool.url || hasEmbeddedArticleTool(body, tool)) {
+      if (old) old.remove();
+      return;
+    }
+    var promptKey = tool.slug || tool.url;
+    if (old && old.getAttribute('data-bw-blog-tool-key') === promptKey) return;
+    if (old) old.remove();
     var point = findToolInsertionPoint(body, items);
     if (!point || !point.parent || !point.after) return;
 
     var prompt = document.createElement('aside');
     prompt.className = 'bw-blog-tool-prompt';
     prompt.setAttribute(TOOL_MARKER, '1');
+    prompt.setAttribute('data-bw-blog-tool-key', promptKey);
     prompt.setAttribute('aria-label', 'Useful Berlin tool');
     prompt.innerHTML =
       '<div>' +
@@ -577,12 +636,18 @@
 
   function insertMobileGuide(body, items) {
     var old = document.querySelector('[' + MOBILE_MARKER + ']');
+    if (!body || !items || items.length < 2) {
+      if (old) old.remove();
+      return;
+    }
+    var guideKey = items.map(function (item) { return item.id; }).join('|');
+    if (old && old.getAttribute('data-bw-blog-mobile-guide-key') === guideKey) return;
     if (old) old.remove();
-    if (!body || !items || items.length < 2) return;
     var firstHeading = items[0].node;
     var nav = document.createElement('nav');
     nav.className = 'bw-blog-mobile-guide';
     nav.setAttribute(MOBILE_MARKER, '1');
+    nav.setAttribute('data-bw-blog-mobile-guide-key', guideKey);
     nav.setAttribute('aria-label', 'In this guide');
     nav.innerHTML =
       '<p class="bw-blog-mobile-guide-title">In this guide</p>' +
@@ -632,13 +697,19 @@
   }
 
   function insertJourney(body, data) {
-    var old = document.querySelector('[' + JOURNEY_MARKER + ']');
-    if (old) old.remove();
     if (!body) return;
     var post = currentPost(data);
     var posts = relatedPosts(data, post, 7);
     var tool = relatedTool(data, post);
     var bookingUrl = data.bookingUrl || 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+    var journeyKey = [
+      post && post.slug,
+      tool && (tool.slug || tool.url),
+      posts.map(function (related) { return related.slug || related.url; }).join(',')
+    ].join('|');
+    var old = document.querySelector('[' + JOURNEY_MARKER + ']');
+    if (old && old.getAttribute('data-bw-blog-journey-key') === journeyKey) return;
+    if (old) old.remove();
     var cards = [
       {
         label: 'Walk it',
@@ -668,6 +739,7 @@
     var section = document.createElement('section');
     section.className = 'bw-blog-journey';
     section.setAttribute(JOURNEY_MARKER, '1');
+    section.setAttribute('data-bw-blog-journey-key', journeyKey);
     section.setAttribute('aria-label', 'Next steps from this guide');
     section.innerHTML =
       '<span class="bw-blog-journey-kicker">Next step</span>' +
@@ -786,6 +858,7 @@
     var body = findPostBody();
     if (!body) return;
     markPostBody(body);
+    normalizePostTitleTypography();
     normalizePostSpacing(body);
     normalizeHeadingTypography(body);
     insertBackToTop();
@@ -819,6 +892,9 @@
     document.querySelectorAll('[' + POST_BODY_MARKER + ']').forEach(function (oldBody) {
       oldBody.removeAttribute(POST_BODY_MARKER);
     });
+    document.querySelectorAll('[' + POST_TITLE_MARKER + ']').forEach(function (oldTitle) {
+      oldTitle.removeAttribute(POST_TITLE_MARKER);
+    });
     document.querySelectorAll('[' + NATIVE_END_MARKER + ']').forEach(function (el) {
       el.removeAttribute(NATIVE_END_MARKER);
       el.removeAttribute('aria-hidden');
@@ -840,6 +916,7 @@
     observer = new MutationObserver(function () {
       if (!isPostPage()) return;
       var body = findPostBody();
+      normalizePostTitleTypography();
       if (body) normalizePostSpacing(body);
       if (body) normalizeHeadingTypography(body);
       hideNativeEndMatter();
