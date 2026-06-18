@@ -981,8 +981,18 @@
       if (body) normalizePostSpacing(body);
       if (body) normalizeHeadingTypography(body);
       hideNativeEndMatter();
+      // Gap-free top-nav restore: Wix/React repeatedly wipes nodes it does not
+      // own while the post page hydrates, including our top mobile nav. Restoring
+      // it via scheduleRender() (an 80ms macrotask) let at least one paint happen
+      // with the nav gone, which read as a "blink" on mobile and bounced the post
+      // body by the 270px reserve margin. Re-insert it synchronously here instead:
+      // the observer callback is a microtask that runs before the next paint, so
+      // the removed frame is never shown.
+      if (body && !document.querySelector('[' + MOBILE_NAV_MARKER + ']')) {
+        insertMobileBlogNav(body, dataCache);
+      }
       var needsMobileGuide = body && collectHeadings(body).length >= 2;
-      if (!document.querySelector('[' + JOURNEY_MARKER + ']') || !document.querySelector('[' + MOBILE_NAV_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {
+      if (!document.querySelector('[' + JOURNEY_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {
         scheduleRender();
       }
     });
