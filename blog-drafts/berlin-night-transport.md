@@ -10,10 +10,11 @@
 - Tags: Berlin Night Transport, Berlin Public Transport, Berlin Night Bus, Berlin Travel Tips, Berlin Taxi
 - Chosen angle: a practical late-night return guide, narrower than the existing full public transport guide and more action-oriented for tourists after bars, concerts, clubs, airport arrivals, or late dinners.
 - Widget ideas considered:
-  1. Berlin Night Transport Checker - helps decide train, night bus, Metrotram or taxi fallback by night/time/area/group mood. Selected because it is a clear Berlin Tool.
+  1. Berlin Night Transport Timeline - shows the weekday train gap, weekend all-night service, night bus/Metrotram window, tickets and taxi fallback in one visual timeline. Selected after the first checker felt too complex and did not give enough value.
   2. Last Train Panic Timer - asks current time and destination zone, but would imply live timetable accuracy without an API.
   3. Night Bus Route Explainer - useful but too static and less decision-oriented.
-- Selected widget: berlin-night-transport-checker
+- Selected widget: berlin-night-transport-checker, public title `Berlin Night Transport Timeline`
+- Follow-up revision 2026-06-19: Yusuf said the first checker version was too generic, then the expanded checker became too complicated. The widget was replaced with a simpler visual timeline: two service rows, four practical action cards, ticket-zone reminder, and late-night fallback filter. Wix draft embed updated to `?v=20260619c` with height `980`; draft remains unpublished.
 - Official/current sources checked on 2026-06-19:
   - Berlin.de night transport: https://www.berlin.de/en/public-transportation/1859225-2913840-night-buses-public-transport-at-night.en.html
   - BVG tourist FAQ: https://www.bvg.de/en/tourists/faq-tourists
@@ -27,7 +28,7 @@
 
 - SEO title: Berlin Night Transport: U-Bahn, S-Bahn, Night Buses and Taxis
 - Meta description: Berlin night transport explained for tourists: when U-Bahn and S-Bahn run all night, how night buses work, what tickets cover, and when a taxi is smarter.
-- Excerpt: A practical tourist guide to Berlin night transport after midnight, with weekday vs weekend rules, night buses, tickets, safety habits, taxi fallbacks and a simple route checker.
+- Excerpt: A practical tourist guide to Berlin night transport after midnight, with weekday vs weekend rules, night buses, tickets, safety habits, taxi fallbacks and a visual timeline.
 - Social title: Berlin Night Transport After Midnight
 - Social description: How to get back by U-Bahn, S-Bahn, night bus, tram or taxi without guessing.
 
@@ -53,13 +54,13 @@ During the week, the same page says U-Bahn and S-Bahn trains normally operate on
 
 That means the same late journey can feel easy on Saturday at 2:00 AM and awkward on Tuesday at 2:00 AM.
 
-## Use this Berlin Night Transport Checker first
+## Use this Berlin Night Transport Timeline first
 
-Before you memorize routes, make the practical decision: should you check the train first, switch to night bus, look for a tram, or keep money ready for a taxi?
+Before you memorize routes, look at the pattern: weekday nights have a train gap, weekend nights are train-first, and the final stretch is often the part that decides whether public transport still makes sense.
 
 {{widget:berlin-night-transport-checker}}
 
-The checker is deliberately simple because late-night travel is not the moment for a complicated map. It is meant to point you toward the right first check, not replace the official route planner.
+The timeline is deliberately visual because late-night travel is not the moment for a complicated map. It shows the service pattern first, then points you toward the right official route search.
 
 ## Weekend nights: U-Bahn and S-Bahn first
 
