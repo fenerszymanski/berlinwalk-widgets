@@ -9,7 +9,7 @@ const BW_BATTLE_HOME_ROOT = (() => {
 
 const BW_BATTLE_HOME_GAME_URL = 'https://www.berlinwalk.com/games/berlin-battle?utm_source=home&utm_medium=section&utm_campaign=berlin_battle_home&utm_content=play';
 const BW_BATTLE_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlin_battle_home&utm_content=book';
-const BW_BATTLE_HOME_ASSET_VERSION = 'home-categories-20260619';
+const BW_BATTLE_HOME_ASSET_VERSION = 'unique-topic-covers-20260619';
 
 const BW_BATTLE_HOME_MODES = [
   {

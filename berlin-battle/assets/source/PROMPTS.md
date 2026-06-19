@@ -31,7 +31,8 @@ Added 2026-06-14 after Yusuf's feedback on the opening Games cards.
 
 Standard:
 
-- Use one generated sprite sheet per game surface when possible so topic covers share one lighting/style family.
+- Topic covers must be recognizable as one BerlinWalk family through palette, polish, dimensions and no-text rules, but each battle needs its own visual language in the opening grid.
+- Do not force all topic covers into the same green blurred background, mini-card collage or four-card layout. Repetition is acceptable inside one battle's item cards, not across the topic covers.
 - Crop each topic cover to `16:10` landscape and save optimized `.webp` files at `960x600`.
 - Store finished covers under `berlin-battle/assets/topics/`.
 - Store the raw generated sheet and a small review contact sheet under `berlin-battle/assets/source/`.
@@ -444,6 +445,43 @@ Batch order:
 - Lines 2: U6; U7; U8; U9.
 - Lines 3: S1; S2; S3; S5.
 - Lines 4: S7; S9; S41; S42.
+
+## Unique Topic Cover Remix
+
+Added 2026-06-19 after Yusuf noted the opening grid made all battle covers feel
+too similar at first glance.
+
+Generation mode:
+
+- Local deterministic Pillow remix script, no paid API and no new generated
+  image model call.
+- Source images are the already-approved Berlin Battle item cards from
+  `../cards/` and subfolders.
+- Reproducible script:
+  `generate-topic-cover-remix-20260619.py`.
+
+Finished outputs:
+
+- `berlin-battle/data.json` version: `2026-06-19-unique-topic-covers`.
+- 10 refreshed textless topic covers under `../topics/`, all `960x600` WebP.
+- QA contact sheet:
+  `berlin-battle-topic-covers-unique-contact-sheet-20260619.jpg`.
+
+Differentiation rule:
+
+- Food: warm table collage with circular plate energy.
+- Districts: map-board route composition with pins and district tiles.
+- Museums: gallery-wall/framed-art composition.
+- Night: dark neon dancefloor mood with circular light focus.
+- Transport: light transit-map route diagram with route lines.
+- Techno clubs: dark speaker/equalizer basement poster.
+- Döner shops: kraft-paper snack-counter board.
+- Currywurst shops: red/cream checker tray and sauce treatment.
+- Parks & lakes: open-air water/green postcard composition.
+- U-Bahn & S-Bahn lines: route-map ribbons and train-window panels.
+
+The topic grid should read as one BerlinWalk game family, but not as ten copies
+of the same green blurred mini-card collage.
 
 ## BerlinTools Icon
 

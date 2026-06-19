@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'home-categories-20260619';
+  const ASSET_BUILD = 'unique-topic-covers-20260619';
 
   function ensureFont() {
     if (document.querySelector('link[data-bw-battle-page-font]')) return;
