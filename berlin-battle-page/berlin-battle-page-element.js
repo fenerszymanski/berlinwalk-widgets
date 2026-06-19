@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'expanded-battles-20260618';
+  const ASSET_BUILD = 'home-categories-20260619';
 
   function ensureFont() {
     if (document.querySelector('link[data-bw-battle-page-font]')) return;
@@ -45,7 +45,7 @@
     _gameSrc() {
       const url = new URL(GAME_PATH, BASE_URL);
       const current = new URLSearchParams(window.location.search || '');
-      ['winner', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach((key) => {
+      ['topic', 'winner', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach((key) => {
         if (current.has(key)) url.searchParams.set(key, current.get(key));
       });
       url.searchParams.set('source', current.get('source') || 'berlin_battle_page');

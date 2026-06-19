@@ -1629,6 +1629,13 @@
       if (!response.ok) throw new Error('Data request failed');
       state.data = await response.json();
       track('bw_berlin_battle_page_view', { topic_count: (state.data.topics || []).length });
+      var requestedTopic = (URL_PARAMS.get('topic') || '').replace(/[^a-z0-9_-]/gi, '');
+      if (requestedTopic && (state.data.topics || []).some(function (topic) {
+        return topic.id === requestedTopic && topic.status === 'active';
+      })) {
+        startTopic(requestedTopic);
+        return;
+      }
       renderTopics();
     } catch (error) {
       renderError('Berlin Battle could not load its data. Please try again in a moment.');
