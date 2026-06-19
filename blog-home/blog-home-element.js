@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260618a', base).href;
+  return new URL('./data.json?v=20260619a', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
@@ -15,6 +15,32 @@ const BW_BLOG_HOME_FALLBACK = {
     image: 'https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg',
     alt: 'The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day'
   },
+  miniPosts: [
+    {
+      title: 'Berlin Night Transport After Midnight',
+      url: 'https://www.berlinwalk.com/post/berlin-night-transport',
+      category: 'Tourist Tips',
+      readTime: '6 min read'
+    },
+    {
+      title: 'Berlin Hauptbahnhof Arrival Guide',
+      url: 'https://www.berlinwalk.com/post/berlin-hauptbahnhof-guide',
+      category: 'Tourist Tips',
+      readTime: '6 min read'
+    },
+    {
+      title: 'Berlin Public Holidays 2026',
+      url: 'https://www.berlinwalk.com/post/berlin-public-holidays-2026',
+      category: 'Tourist Tips',
+      readTime: '7 min read'
+    },
+    {
+      title: 'Berlin Public Transport Tourist Guide',
+      url: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
+      category: 'Tourist Tips',
+      readTime: '7 min read'
+    }
+  ],
   posts: [
     {
       title: 'Berlin on a Monday: What Is Open, What Is Closed and How to Plan the Day',
@@ -165,8 +191,16 @@ class BWBlogHomeElement extends HTMLElement {
           grid-template-columns: minmax(0, 1.1fr) minmax(340px, 0.9fr);
         }
 
+        .bw-blog-home .bw-feature-column {
+          align-content: start;
+          display: grid;
+          gap: 14px;
+          min-width: 0;
+        }
+
         .bw-blog-home .bw-feature-card,
-        .bw-blog-home .bw-note-card {
+        .bw-blog-home .bw-note-card,
+        .bw-blog-home .bw-mini-posts {
           color: inherit;
           opacity: 0;
           text-decoration: none;
@@ -175,7 +209,8 @@ class BWBlogHomeElement extends HTMLElement {
         }
 
         .bw-blog-home .bw-feature-card.visible,
-        .bw-blog-home .bw-note-card.visible {
+        .bw-blog-home .bw-note-card.visible,
+        .bw-blog-home .bw-mini-posts.visible {
           opacity: 1;
           transform: translateY(0);
         }
@@ -208,6 +243,7 @@ class BWBlogHomeElement extends HTMLElement {
 
         .bw-blog-home .bw-feature-card:focus-visible,
         .bw-blog-home .bw-note-card:focus-visible,
+        .bw-blog-home .bw-mini-link:focus-visible,
         .bw-blog-home .bw-blog-home-cta:focus-visible {
           outline: 3px solid rgba(255, 230, 0, 0.9);
           outline-offset: 3px;
@@ -287,6 +323,57 @@ class BWBlogHomeElement extends HTMLElement {
 
         .bw-blog-home .bw-feature-card p {
           font-size: 16px;
+        }
+
+        .bw-blog-home .bw-mini-posts {
+          background: #FAFAF5;
+          border: 1px solid #C5E1A5;
+          border-radius: 8px;
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          overflow: hidden;
+        }
+
+        .bw-blog-home .bw-mini-link {
+          color: #1B5E20;
+          display: flex;
+          flex-direction: column;
+          gap: 6px;
+          min-height: 86px;
+          min-width: 0;
+          padding: 14px 16px;
+          text-decoration: none;
+          transition: background 160ms ease, color 160ms ease;
+        }
+
+        .bw-blog-home .bw-mini-link:nth-child(odd) {
+          border-right: 1px solid rgba(124, 179, 66, 0.34);
+        }
+
+        .bw-blog-home .bw-mini-link:nth-child(n + 3) {
+          border-top: 1px solid rgba(124, 179, 66, 0.34);
+        }
+
+        .bw-blog-home .bw-mini-link:hover,
+        .bw-blog-home .bw-mini-link:focus-visible {
+          background: #FFFFFF;
+        }
+
+        .bw-blog-home .bw-mini-meta {
+          color: #4E5A4E;
+          font-size: 10px;
+          font-weight: 800;
+          letter-spacing: 0.7px;
+          line-height: 1.2;
+          text-transform: uppercase;
+        }
+
+        .bw-blog-home .bw-mini-title {
+          display: block;
+          font-size: 14px;
+          font-weight: 800;
+          line-height: 1.24;
+          overflow-wrap: break-word;
         }
 
         .bw-blog-home .bw-note-stack {
@@ -385,6 +472,10 @@ class BWBlogHomeElement extends HTMLElement {
             grid-template-columns: 1fr;
           }
 
+          .bw-blog-home .bw-feature-column {
+            gap: 16px;
+          }
+
           .bw-blog-home .bw-feature-card {
             grid-template-rows: 330px auto;
           }
@@ -424,6 +515,15 @@ class BWBlogHomeElement extends HTMLElement {
             font-size: 24px;
           }
 
+          .bw-blog-home .bw-mini-link {
+            min-height: 82px;
+            padding: 13px 14px;
+          }
+
+          .bw-blog-home .bw-mini-title {
+            font-size: 13px;
+          }
+
           .bw-blog-home .bw-note-card {
             grid-template-columns: 104px minmax(0, 1fr);
             min-height: 180px;
@@ -461,6 +561,18 @@ class BWBlogHomeElement extends HTMLElement {
         }
 
         @media (max-width: 400px) {
+          .bw-blog-home .bw-mini-posts {
+            grid-template-columns: 1fr;
+          }
+
+          .bw-blog-home .bw-mini-link:nth-child(odd) {
+            border-right: 0;
+          }
+
+          .bw-blog-home .bw-mini-link:nth-child(n + 2) {
+            border-top: 1px solid rgba(124, 179, 66, 0.34);
+          }
+
           .bw-blog-home .bw-note-card {
             grid-template-columns: 92px minmax(0, 1fr);
           }
@@ -469,6 +581,7 @@ class BWBlogHomeElement extends HTMLElement {
         @media (prefers-reduced-motion: reduce) {
           .bw-blog-home .bw-feature-card,
           .bw-blog-home .bw-note-card,
+          .bw-blog-home .bw-mini-posts,
           .bw-blog-home .bw-feature-card:hover,
           .bw-blog-home .bw-note-card:hover,
           .bw-blog-home .bw-blog-home-cta {
@@ -517,13 +630,17 @@ class BWBlogHomeElement extends HTMLElement {
   _renderPosts(data) {
     const featured = data && data.featured ? data.featured : BW_BLOG_HOME_FALLBACK.featured;
     const posts = data && Array.isArray(data.posts) ? data.posts.slice(0, 3) : BW_BLOG_HOME_FALLBACK.posts;
+    const miniPosts = data && Array.isArray(data.miniPosts) ? data.miniPosts.slice(0, 4) : BW_BLOG_HOME_FALLBACK.miniPosts;
     const root = this.querySelector('.bw-blog-home-root');
     if (!root) return;
 
     root.removeAttribute('aria-live');
     root.innerHTML = `
       <div class="bw-blog-home-grid">
-        ${this._renderFeatured(featured)}
+        <div class="bw-feature-column">
+          ${this._renderFeatured(featured)}
+          ${this._renderMiniPosts(miniPosts)}
+        </div>
         <div class="bw-note-stack" aria-label="More Berlin travel notes">
           ${posts.map(post => this._renderPost(post)).join('')}
         </div>
@@ -574,6 +691,29 @@ class BWBlogHomeElement extends HTMLElement {
     `;
   }
 
+  _renderMiniPosts(posts) {
+    if (!Array.isArray(posts) || !posts.length) return '';
+
+    return `
+      <div class="bw-mini-posts" aria-label="Quick Berlin reads">
+        ${posts.map(post => this._renderMiniPost(post)).join('')}
+      </div>
+    `;
+  }
+
+  _renderMiniPost(post) {
+    const title = this._escapeHtml(post.title || '');
+    const metaParts = [post.category, post.readTime].filter(Boolean).map(part => this._escapeHtml(part));
+    const meta = metaParts.join(' / ');
+
+    return `
+      <a class="bw-mini-link" href="${this._escapeAttribute(post.url || '#')}" target="_top">
+        <span class="bw-mini-meta">${meta}</span>
+        <b class="bw-mini-title">${title}</b>
+      </a>
+    `;
+  }
+
   _renderMeta(post) {
     return `
       <span class="bw-meta">
@@ -588,7 +728,7 @@ class BWBlogHomeElement extends HTMLElement {
     const section = this.querySelector('.bw-blog-home');
     if (!section) return;
 
-    const cards = this.querySelectorAll('.bw-feature-card, .bw-note-card');
+    const cards = this.querySelectorAll('.bw-feature-card, .bw-note-card, .bw-mini-posts');
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) {
       this._animated = true;
@@ -615,7 +755,7 @@ class BWBlogHomeElement extends HTMLElement {
   }
 
   _playAnimations() {
-    this.querySelectorAll('.bw-feature-card, .bw-note-card').forEach((card, index) => {
+    this.querySelectorAll('.bw-feature-card, .bw-note-card, .bw-mini-posts').forEach((card, index) => {
       setTimeout(() => {
         card.classList.add('visible');
       }, index * 80);
