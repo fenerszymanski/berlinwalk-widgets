@@ -163,7 +163,7 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'berlin-heatwave-day-plan',
   secondary: [
-    'berlin-on-a-monday',
+    'berlin-night-transport',
     'tax-free-shopping-berlin-vat-refund',
     'berlin-with-kids',
     'berlin-hauptbahnhof-guide',
@@ -179,7 +179,7 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'berlin-heatwave-day-plan',
-  'berlin-on-a-monday',
+  'berlin-night-transport',
   'tax-free-shopping-berlin-vat-refund',
   'berlin-with-kids',
   'berlin-hauptbahnhof-guide',

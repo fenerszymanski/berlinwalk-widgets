@@ -1,7 +1,7 @@
 const BW_BLOG_HOME_DATA_URL = (() => {
   const script = document.currentScript;
   const base = script && script.src ? script.src : window.location.href;
-  return new URL('./data.json?v=20260619a', base).href;
+  return new URL('./data.json?v=20260619b', base).href;
 })();
 
 const BW_BLOG_HOME_FALLBACK = {
@@ -16,12 +16,6 @@ const BW_BLOG_HOME_FALLBACK = {
     alt: 'The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day'
   },
   miniPosts: [
-    {
-      title: 'Berlin Night Transport After Midnight',
-      url: 'https://www.berlinwalk.com/post/berlin-night-transport',
-      category: 'Tourist Tips',
-      readTime: '6 min read'
-    },
     {
       title: 'Berlin Hauptbahnhof Arrival Guide',
       url: 'https://www.berlinwalk.com/post/berlin-hauptbahnhof-guide',
@@ -39,17 +33,23 @@ const BW_BLOG_HOME_FALLBACK = {
       url: 'https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
       category: 'Tourist Tips',
       readTime: '7 min read'
+    },
+    {
+      title: 'Taxi in Berlin: Uber, Airport Rides and Fares',
+      url: 'https://www.berlinwalk.com/post/taxi-in-berlin',
+      category: 'Tourist Tips',
+      readTime: '6 min read'
     }
   ],
   posts: [
     {
-      title: 'Berlin on a Monday: What Is Open, What Is Closed and How to Plan the Day',
-      url: 'https://www.berlinwalk.com/post/berlin-on-a-monday',
+      title: 'Berlin Night Transport: How to Get Around After Midnight',
+      url: 'https://www.berlinwalk.com/post/berlin-night-transport',
       category: 'Tourist Tips',
-      readTime: '7 min read',
-      summary: 'What closes, what stays open, which museums work, and how to plan a strong Monday without wasting time at locked doors.',
-      image: 'https://static.wixstatic.com/media/5a08a3_0027372f452e4bb6b423583d1eae963e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-on-a-monday-01-museum-island-altes-museum-cover.jpg',
-      alt: 'Altes Museum and Museum Island at sunset, a strong reminder to check Monday opening hours before planning Berlin museums'
+      readTime: '6 min read',
+      summary: 'Weekday vs weekend service, night buses, tickets, safety habits, taxi fallbacks and a simple visual timeline for late arrivals.',
+      image: 'https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg',
+      alt: 'Alexanderplatz at night with U-Bahn sign, TV Tower and blurred tram, showing Berlin night transport'
     },
     {
       title: 'Tax Free Shopping in Berlin: VAT Refunds Explained for Tourists',
