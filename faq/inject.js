@@ -1,6 +1,7 @@
 /* Auto-generated from /faq/data.json and /faq/slug-map.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
+  "berlin-night-transport": "berlin-night-transport",
   "best-day-trips-from-berlin": "best-day-trips-from-berlin",
   "east-side-gallery-berlin-guide": "east-side-gallery",
   "brandenburg-gate-berlin-visitors-guide": "brandenburg-gate",
@@ -127,6 +128,60 @@
 };
 
   var SCHEMAS = {
+  "berlin-night-transport": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does Berlin public transport run all night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On Friday-to-Saturday and Saturday-to-Sunday nights, U-Bahn and S-Bahn trains normally run through the night. On Sunday-to-Thursday nights, U-Bahn and S-Bahn usually stop around 1:00 to 1:30 AM, and night buses plus Metrotrams cover the gap."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do Berlin night buses work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin night buses are marked with an N before the route number. The N1, N2, N3, N5, N6, N7, N8 and N9 broadly follow the corresponding U-Bahn routes during the weekday-night gap."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use a normal Berlin ticket at night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. A valid Berlin public transport ticket works across S-Bahn, U-Bahn, tram, bus and ferry inside the fare zones you bought. The night service is not a separate ticket system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the safest way to get back to a hotel late in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan the route before you leave, check the current BVG or S-Bahn app, use well-lit main stops when possible, and save a taxi or ride-hail fallback if the next night bus connection is awkward."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a taxi better than night transport in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use night transport first when the route is simple, especially on weekend nights. A taxi or ride-hail makes more sense if the app shows long waits, multiple late transfers, heavy luggage, or a very tired group."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use Berlin night transport after the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually yes, although the BerlinWalk route ends much earlier than the night network becomes relevant. The tour lasts about 2 hours and ends near Hackescher Markt, where S-Bahn, tram and bus options are close by."
+        }
+      }
+    ]
+  },
   "berlin-pride-csd-2026": {
     "@context": "https://schema.org",
     "@type": "FAQPage",

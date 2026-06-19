@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Night Transport Checker | BerlinWalk</title>
+  <meta name="description" content="Check whether to use Berlin U-Bahn, S-Bahn, night bus, tram, or a taxi fallback late at night.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-night-transport">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-night-transport {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 26px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-night-transport *,
+    #bw-night-transport *::before,
+    #bw-night-transport *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-night-transport .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-night-transport .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.18)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px 22px;
+    }
+
+    #bw-night-transport .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.6px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-night-transport h2,
+    #bw-night-transport h3,
+    #bw-night-transport p {
+      margin-top: 0;
+    }
+
+    #bw-night-transport .bw-title {
+      color: var(--bw-white);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-night-transport .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 790px;
+    }
+
+    #bw-night-transport .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(270px, 0.84fr) minmax(0, 1.16fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-night-transport .bw-panel,
+    #bw-night-transport .bw-result,
+    #bw-night-transport .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-night-transport .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-night-transport label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-night-transport .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-night-transport select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 14px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-night-transport select:focus-visible,
+    #bw-night-transport button:focus-visible,
+    #bw-night-transport a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-night-transport .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-night-transport .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-night-transport .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-night-transport .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-night-transport .bw-result p,
+    #bw-night-transport li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-night-transport ul {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    #bw-night-transport .bw-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-night-transport .bw-card h4 {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.25;
+      margin: 0 0 6px;
+    }
+
+    #bw-night-transport .bw-card p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-night-transport .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-night-transport .bw-link {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+      min-height: 39px;
+      padding: 9px 11px;
+      text-decoration: none;
+    }
+
+    #bw-night-transport .bw-link.secondary {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+    }
+
+    @media (max-width: 780px) {
+      #bw-night-transport .bw-body,
+      #bw-night-transport .bw-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      #bw-night-transport {
+        margin: 18px 0;
+      }
+
+      #bw-night-transport .bw-head {
+        padding: 18px 16px;
+      }
+
+      #bw-night-transport .bw-title {
+        font-size: 24px;
+      }
+
+      #bw-night-transport .bw-body {
+        padding: 14px;
+      }
+
+      #bw-night-transport .bw-link {
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-night-title">
+    <div class="bw-head">
+      <p class="bw-kicker">Late-night route check</p>
+      <h2 class="bw-title" id="bw-night-title">Berlin Night Transport Checker</h2>
+      <p class="bw-sub">Choose when you are coming back, what kind of area you are in, and how tired your group is. The result gives you the safest simple option to check first.</p>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-panel">
+        <div class="bw-form">
+          <label>
+            <span class="bw-label">Night</span>
+            <select id="bw-night-day">
+              <option value="weekday">Sunday to Thursday night</option>
+              <option value="weekend">Friday or Saturday night</option>
+              <option value="holiday">Night before a public holiday</option>
+            </select>
+          </label>
+          <label>
+            <span class="bw-label">Time</span>
+            <select id="bw-night-time">
+              <option value="early">Before 1:00 AM</option>
+              <option value="gap">1:00 to 4:00 AM</option>
+              <option value="late">After 4:00 AM</option>
+            </select>
+          </label>
+          <label>
+            <span class="bw-label">Where are you?</span>
+            <select id="bw-night-area">
+              <option value="central">Central Berlin or inside the Ring</option>
+              <option value="tram">East/north area with tram lines</option>
+              <option value="outer">Outer district or unclear suburb</option>
+              <option value="airport">BER airport or Potsdam direction</option>
+            </select>
+          </label>
+          <label>
+            <span class="bw-label">Group mood</span>
+            <select id="bw-night-group">
+              <option value="normal">Fine with one transfer</option>
+              <option value="tired">Tired, solo, or carrying luggage</option>
+              <option value="budget">Budget matters most</option>
+            </select>
+          </label>
+          <p class="bw-note">This is a planning shortcut, not live timetable data. Always confirm the final route in the BVG, S-Bahn, VBB or Google Maps app before you leave.</p>
+        </div>
+      </div>
+
+      <div class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="bw-night-pill">Best first check</span>
+        <h3 id="bw-night-heading">Use the app, then take the normal train if it still runs.</h3>
+        <p id="bw-night-copy">Before the weekday-night gap, the U-Bahn and S-Bahn are often still the simplest answer. Check the last train time and avoid building a plan around a connection that departs in two minutes.</p>
+        <ul id="bw-night-steps"></ul>
+        <div class="bw-grid" aria-label="Planning notes">
+          <div class="bw-card">
+            <h4>Ticket</h4>
+            <p id="bw-night-ticket">A valid AB or ABC ticket covers the same public transport modes at night.</p>
+          </div>
+          <div class="bw-card">
+            <h4>Transfer rule</h4>
+            <p id="bw-night-transfer">One clean transfer is fine. Two late transfers usually deserve a taxi fallback.</p>
+          </div>
+          <div class="bw-card">
+            <h4>Backup</h4>
+            <p id="bw-night-backup">Save a taxi or ride-hail option before your phone battery gets low.</p>
+          </div>
+        </div>
+        <div class="bw-links">
+          <a class="bw-link" href="https://www.bvg.de/en/connections/connection-search" target="_blank" rel="noopener">Open BVG route search</a>
+          <a class="bw-link secondary" href="https://www.berlinwalk.com/tools/transport-ticket-calculator" target="_blank" rel="noopener">Check ticket choice</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-night-transport');
+      if (!root) return;
+
+      var data = {
+        weekday: {
+          early: {
+            heading: 'Use the normal train if it still runs.',
+            copy: 'Before the weekday-night gap, U-Bahn and S-Bahn are often still the simplest answer. Check the last departure and do not rely on a tight final train.',
+            steps: ['Search the exact route now, not after one more drink.', 'Prefer a direct S-Bahn or U-Bahn over a clever shortcut.', 'If the app shows the last train, walk to the station immediately.']
+          },
+          gap: {
+            heading: 'Switch your first check to night bus or Metrotram.',
+            copy: 'On Sunday-to-Thursday nights, the rail network usually pauses after about 1:00 to 1:30 AM. Night buses and Metrotrams are the normal public-transport answer in the gap.',
+            steps: ['Look for N routes in the app.', 'If you are near an U-Bahn corridor, check the matching N night bus.', 'Avoid routes with two long waits unless budget matters more than time.']
+          },
+          late: {
+            heading: 'Morning service is coming back, but check the first train.',
+            copy: 'After 4:00 AM, normal service starts returning. The first train can still be sparse, so check live departures before walking to a quiet station.',
+            steps: ['Search for the first rail connection and compare it with the next night bus.', 'Choose the option with the shorter wait in a well-lit area.', 'If you are alone and tired, use a taxi for the final stretch.']
+          }
+        },
+        weekend: {
+          early: {
+            heading: 'Train first: weekend nights are the easy mode.',
+            copy: 'On Friday and Saturday nights, U-Bahn and S-Bahn normally run through the night. Frequency is lower than daytime, but the rail network is usually the best first check.',
+            steps: ['Search the direct train route first.', 'Expect longer gaps than daytime service.', 'Use night buses for the last local leg if the station is not close.']
+          },
+          gap: {
+            heading: 'Stay with U-Bahn or S-Bahn if the app gives a clean route.',
+            copy: 'The 1:00 to 4:00 AM window is much easier on weekend nights than on weekdays. Trains usually keep running, though waiting times are longer.',
+            steps: ['Use rail first inside the Ring.', 'If the next train is far away, compare a night bus.', 'For outer districts, avoid multiple late transfers.']
+          },
+          late: {
+            heading: 'Use the overnight train or wait for normal morning rhythm.',
+            copy: 'Late weekend returns usually still work by U-Bahn or S-Bahn. If the next departure is awkward, waiting for the morning rhythm may beat a complicated detour.',
+            steps: ['Check whether the route is direct.', 'Pick a main station or busy stop for waiting.', 'Use taxi only if the public option has a long or exposed transfer.']
+          }
+        },
+        holiday: {
+          early: {
+            heading: 'Treat it like a weekend night, then verify disruptions.',
+            copy: 'Nights before public holidays often use the all-night pattern, but special events and construction can change the clean answer.',
+            steps: ['Search the live route before leaving.', 'Check whether central stations are skipped during major events.', 'Keep a taxi fallback for late holiday crowds.']
+          },
+          gap: {
+            heading: 'Train first, but do not ignore event closures.',
+            copy: 'Public-holiday eves are usually better than normal weeknights for rail service. The risk is not the basic night network, but event closures, crowd control and construction.',
+            steps: ['Use the app with the exact date.', 'Avoid assuming Alexanderplatz, Brandenburg Gate or Warschauer Strasse works normally during big events.', 'If the route is messy, move one stop away from the crowd before ordering a ride.']
+          },
+          late: {
+            heading: 'Check live departures and use the simplest main-line route.',
+            copy: 'The safest late holiday plan is boring: one main train line, one clear bus or tram, or a taxi. Do not stack several uncertain transfers.',
+            steps: ['Choose the route with the fewest transfers.', 'Wait at a main stop if possible.', 'Keep the fallback budget ready if the app changes.']
+          }
+        }
+      };
+
+      function value(id) {
+        return root.querySelector(id).value;
+      }
+
+      function update() {
+        var day = value('#bw-night-day');
+        var time = value('#bw-night-time');
+        var area = value('#bw-night-area');
+        var group = value('#bw-night-group');
+        var result = data[day][time];
+        var heading = result.heading;
+        var copy = result.copy;
+        var steps = result.steps.slice();
+        var ticket = 'A valid AB or ABC ticket covers the same public transport modes at night.';
+        var transfer = 'One clean transfer is fine. Two late transfers usually deserve a taxi fallback.';
+        var backup = 'Save a taxi or ride-hail option before your phone battery gets low.';
+        var pill = day === 'weekday' && time === 'gap' ? 'Night bus window' : 'Best first check';
+
+        if (area === 'tram') {
+          steps.push('In tram-heavy areas, compare Metrotram before walking to a distant U-Bahn stop.');
+          transfer = 'A direct Metrotram can be better than a train route with a long walk.';
+        }
+
+        if (area === 'outer') {
+          steps.push('For outer districts, check the last stretch carefully before committing.');
+          backup = 'If the final leg is a 20-minute walk from a quiet stop, budget for a taxi.';
+        }
+
+        if (area === 'airport') {
+          ticket = 'BER and Potsdam need ABC coverage, not just AB.';
+          steps.push('For BER or Potsdam direction, confirm ABC fare zone and regional/S-Bahn timing.');
+        }
+
+        if (group === 'tired') {
+          heading = heading.replace('Use', 'Use');
+          steps.push('If the group is tired, pay to remove the worst transfer rather than forcing a perfect public route.');
+          backup = 'Set a taxi fallback at a main stop, not in a side street.';
+        }
+
+        if (group === 'budget') {
+          steps.push('If budget matters most, wait for the cleaner public route instead of chasing a faster taxi.');
+          backup = 'Your fallback is a better-lit wait, not necessarily a car.';
+        }
+
+        root.querySelector('#bw-night-pill').textContent = pill;
+        root.querySelector('#bw-night-heading').textContent = heading;
+        root.querySelector('#bw-night-copy').textContent = copy;
+        root.querySelector('#bw-night-ticket').textContent = ticket;
+        root.querySelector('#bw-night-transfer').textContent = transfer;
+        root.querySelector('#bw-night-backup').textContent = backup;
+        root.querySelector('#bw-night-steps').innerHTML = steps.map(function (step) {
+          return '<li>' + step + '</li>';
+        }).join('');
+
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      root.querySelectorAll('select').forEach(function (select) {
+        select.addEventListener('change', update);
+      });
+
+      update();
+    })();
+  </script>
+</div>
+</body>
+</html>
