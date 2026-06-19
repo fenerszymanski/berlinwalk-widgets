@@ -454,6 +454,7 @@ function relatedToolSlugFor(post) {
   if (/(day-trip|day trip|potsdam|sachsenhausen|spreewald|dresden|leipzig|wittenberg|tropical-islands|bastei)/.test(s)) return 'berlin-day-trips-finder';
   if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) return 'best-month-to-visit-berlin';
   if (/(toilet)/.test(s)) return 'berlin-public-toilets';
+  if (/(night-transport|night transport|after-midnight|after midnight|night-bus|night bus|night tram)/.test(s)) return 'berlin-night-transport-checker';
   if (/(späti|spaeti|spati|late-night|late night|sunday rules|corner shop)/.test(s)) return 'spati-survival-checker';
   if (/(luggage|storage|suitcase)/.test(s)) return 'berlin-luggage-storage';
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
