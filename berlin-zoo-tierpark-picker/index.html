@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Zoo Berlin or Tierpark Berlin Picker | BerlinWalk</title>
+  <meta name="description" content="A quick Berlin visitor tool to choose between Zoo Berlin, Zoo Berlin plus Aquarium, and Tierpark Berlin.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-zoo-picker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-zoo-picker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-text: #212121;
+      --bw-muted: #526252;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-zoo-picker *,
+    #bw-zoo-picker *::before,
+    #bw-zoo-picker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-zoo-picker .bw-shell {
+      background: var(--bw-cream);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-zoo-picker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.15), rgba(124, 179, 66, 0.22)),
+        var(--bw-green);
+      color: #fff;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1.2fr) minmax(210px, 0.8fr);
+      padding: 22px;
+    }
+
+    #bw-zoo-picker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-zoo-picker h2 {
+      color: #fff;
+      font-size: 29px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-zoo-picker .bw-sub {
+      color: #E8F3DB;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+    }
+
+    #bw-zoo-picker .bw-fast-rule {
+      align-self: stretch;
+      background: rgba(250, 250, 245, 0.97);
+      border: 1px solid rgba(255, 230, 0, 0.42);
+      border-radius: 8px;
+      color: var(--bw-text);
+      padding: 14px;
+    }
+
+    #bw-zoo-picker .bw-fast-rule strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 16px;
+      font-weight: 950;
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+
+    #bw-zoo-picker .bw-fast-rule span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    #bw-zoo-picker .bw-body {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
+      padding: 18px;
+    }
+
+    #bw-zoo-picker .bw-panel,
+    #bw-zoo-picker .bw-result {
+      background: #fff;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+    }
+
+    #bw-zoo-picker .bw-panel {
+      padding: 16px;
+    }
+
+    #bw-zoo-picker .bw-field {
+      margin-bottom: 14px;
+    }
+
+    #bw-zoo-picker .bw-field:last-child {
+      margin-bottom: 0;
+    }
+
+    #bw-zoo-picker .bw-label {
+      align-items: center;
+      color: var(--bw-green);
+      display: flex;
+      font-size: 12px;
+      font-weight: 950;
+      gap: 7px;
+      justify-content: space-between;
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+
+    #bw-zoo-picker .bw-options {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-zoo-picker button {
+      appearance: none;
+      background: #F7FAF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      min-height: 58px;
+      padding: 9px 8px;
+      text-align: left;
+      transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+    }
+
+    #bw-zoo-picker button:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.85);
+      outline-offset: 2px;
+    }
+
+    #bw-zoo-picker button[aria-pressed="true"] {
+      background: #FFFDE6;
+      border-color: var(--bw-green);
+      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.15);
+    }
+
+    #bw-zoo-picker button:hover {
+      transform: translateY(-1px);
+    }
+
+    #bw-zoo-picker .bw-opt-icon {
+      display: block;
+      font-size: 18px;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    #bw-zoo-picker .bw-opt-title {
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    #bw-zoo-picker .bw-opt-note {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10.5px;
+      font-weight: 750;
+      line-height: 1.25;
+      margin-top: 3px;
+    }
+
+    #bw-zoo-picker .bw-result {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      overflow: hidden;
+    }
+
+    #bw-zoo-picker .bw-result-head {
+      background:
+        linear-gradient(135deg, rgba(27, 94, 32, 0.08), rgba(255, 230, 0, 0.16)),
+        #fff;
+      border-bottom: 1px solid var(--bw-border);
+      padding: 16px;
+    }
+
+    #bw-zoo-picker .bw-badge {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .2px;
+      line-height: 1;
+      padding: 7px 10px;
+    }
+
+    #bw-zoo-picker .bw-pick {
+      color: var(--bw-green);
+      font-size: 24px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 10px 0 6px;
+    }
+
+    #bw-zoo-picker .bw-reason {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.52;
+      margin: 0;
+    }
+
+    #bw-zoo-picker .bw-result-body {
+      display: grid;
+      gap: 12px;
+      padding: 14px 16px 16px;
+    }
+
+    #bw-zoo-picker .bw-score-row {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: 96px minmax(0, 1fr) 34px;
+      align-items: center;
+    }
+
+    #bw-zoo-picker .bw-score-row span {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    #bw-zoo-picker .bw-bar {
+      background: #EAF2E1;
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    #bw-zoo-picker .bw-fill {
+      background: linear-gradient(90deg, var(--bw-green), var(--bw-lime));
+      border-radius: 999px;
+      height: 100%;
+      transition: width .22s ease;
+      width: 50%;
+    }
+
+    #bw-zoo-picker .bw-steps {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-zoo-picker .bw-step {
+      background: #F7FAF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    #bw-zoo-picker .bw-step strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
+    #bw-zoo-picker .bw-step span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    #bw-zoo-picker .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-zoo-picker .bw-links a {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: #fff;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1;
+      min-height: 34px;
+      padding: 9px 12px;
+      text-decoration: none;
+    }
+
+    #bw-zoo-picker .bw-links a.secondary {
+      background: #EEF6E7;
+      color: var(--bw-green);
+    }
+
+    #bw-zoo-picker .bw-note {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    @media (max-width: 760px) {
+      #bw-zoo-picker {
+        margin: 14px 0;
+      }
+
+      #bw-zoo-picker .bw-head,
+      #bw-zoo-picker .bw-body {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-zoo-picker .bw-head {
+        padding: 18px;
+      }
+
+      #bw-zoo-picker h2 {
+        font-size: 24px;
+      }
+
+      #bw-zoo-picker .bw-body {
+        padding: 14px;
+      }
+
+      #bw-zoo-picker .bw-options,
+      #bw-zoo-picker .bw-steps {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-zoo-picker button {
+        min-height: 52px;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-head">
+      <div>
+        <p class="bw-kicker">Berlin animal park picker</p>
+        <h2>Zoo Berlin or Tierpark Berlin?</h2>
+        <p class="bw-sub">Answer three quick questions and get the better pick for your Berlin day: central Zoo, Zoo plus Aquarium, or the larger Tierpark.</p>
+      </div>
+      <div class="bw-fast-rule">
+        <strong>Fast rule</strong>
+        <span>Zoo Berlin is the easy central choice. Tierpark Berlin is the spacious full-day choice.</span>
+      </div>
+    </header>
+
+    <section class="bw-body" aria-label="Zoo Berlin vs Tierpark Berlin picker">
+      <div class="bw-panel" id="bw-controls"></div>
+      <article class="bw-result" aria-live="polite">
+        <div class="bw-result-head">
+          <span class="bw-badge" id="bw-badge">Best fit</span>
+          <h3 class="bw-pick" id="bw-pick">Zoo Berlin</h3>
+          <p class="bw-reason" id="bw-reason">The central zoo is the simplest choice for a first Berlin visit, especially when time is limited.</p>
+        </div>
+        <div class="bw-result-body">
+          <div id="bw-scores"></div>
+          <div class="bw-steps" id="bw-steps"></div>
+          <div class="bw-links" id="bw-links"></div>
+          <p class="bw-note">Check official opening hours and dated online ticket prices before you buy. Prices and animal-house access can change.</p>
+        </div>
+      </article>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var groups = [
+        {
+          key: 'start',
+          label: 'Where are you starting?',
+          options: [
+            { key: 'west', icon: '🚇', title: 'West / Zoo', note: 'Charlottenburg' },
+            { key: 'centre', icon: '📍', title: 'Mitte', note: 'Flexible' },
+            { key: 'east', icon: '🌳', title: 'East side', note: 'Closer to Tierpark' }
+          ]
+        },
+        {
+          key: 'goal',
+          label: 'What matters most?',
+          options: [
+            { key: 'classic', icon: '🦁', title: 'Classic animals', note: 'First visit' },
+            { key: 'aquarium', icon: '🐠', title: 'Aquarium', note: 'Indoor backup' },
+            { key: 'space', icon: '🌿', title: 'Space', note: 'Big park day' }
+          ]
+        },
+        {
+          key: 'group',
+          label: 'Who is going?',
+          options: [
+            { key: 'short', icon: '⏱', title: 'Half-day', note: 'Keep it easy' },
+            { key: 'family', icon: '🧒', title: 'Family pace', note: 'Stroller friendly' },
+            { key: 'dog', icon: '🐕', title: 'With dog', note: 'Tierpark only' }
+          ]
+        }
+      ];
+
+      var state = { start: 'centre', goal: 'classic', group: 'short' };
+      var controls = document.getElementById('bw-controls');
+
+      function score() {
+        var scores = {
+          zoo: { value: 3, label: 'Zoo Berlin' },
+          aquarium: { value: 1, label: 'Zoo + Aquarium' },
+          tierpark: { value: 2, label: 'Tierpark' }
+        };
+
+        if (state.start === 'west') scores.zoo.value += 3;
+        if (state.start === 'centre') { scores.zoo.value += 2; scores.tierpark.value += 1; }
+        if (state.start === 'east') scores.tierpark.value += 3;
+
+        if (state.goal === 'classic') scores.zoo.value += 3;
+        if (state.goal === 'aquarium') { scores.aquarium.value += 5; scores.zoo.value += 1; }
+        if (state.goal === 'space') scores.tierpark.value += 4;
+
+        if (state.group === 'short') scores.zoo.value += 3;
+        if (state.group === 'family') { scores.tierpark.value += 3; scores.zoo.value += 1; }
+        if (state.group === 'dog') scores.tierpark.value += 6;
+
+        return scores;
+      }
+
+      var copy = {
+        zoo: {
+          badge: 'Easy tourist pick',
+          title: 'Zoo Berlin',
+          reason: 'Choose Zoo Berlin for the simplest Berlin animal-park day: central location, strong classic zoo feeling, and easier public transport.',
+          steps: [
+            ['Best timing', 'Half day to relaxed day'],
+            ['Transport', 'S + U Zoologischer Garten'],
+            ['Pair with', 'Kaiser Wilhelm Memorial Church or KuDamm']
+          ],
+          links: [
+            ['Official Zoo tickets', 'https://www.zoo-berlin.de/en/tickets-service/tickets-pricing'],
+            ['Public transport guide', 'https://www.berlinwalk.com/post/berlin-public-transport-2026']
+          ]
+        },
+        aquarium: {
+          badge: 'Bad-weather pick',
+          title: 'Zoo Berlin + Aquarium',
+          reason: 'Choose the Zoo plus Aquarium ticket if you want the central Zoo day with an indoor backup for rain, heat, or kids who need a change of scene.',
+          steps: [
+            ['Best timing', 'Start early, same day only'],
+            ['Transport', 'S + U Zoologischer Garten'],
+            ['Pair with', 'A simple dinner near Charlottenburg']
+          ],
+          links: [
+            ['Official Zoo tickets', 'https://www.zoo-berlin.de/en/tickets-service/tickets-pricing'],
+            ['Rainy day guide', 'https://www.berlinwalk.com/post/what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time']
+          ]
+        },
+        tierpark: {
+          badge: 'Spacious day pick',
+          title: 'Tierpark Berlin',
+          reason: 'Choose Tierpark Berlin when you want room to walk, a slower family rhythm, a park-like setting, or you are starting from the east side.',
+          steps: [
+            ['Best timing', 'Give it most of the day'],
+            ['Transport', 'U5 to Tierpark'],
+            ['Pair with', 'A calm evening, not a packed museum day']
+          ],
+          links: [
+            ['Official Tierpark tickets', 'https://www.tierpark-berlin.de/en/tickets-service/tickets-pricing'],
+            ['Berlin with kids', 'https://www.berlinwalk.com/post/berlin-with-kids']
+          ]
+        }
+      };
+
+      function renderControls() {
+        controls.innerHTML = groups.map(function (group) {
+          return '<div class="bw-field"><div class="bw-label"><span>' + group.label + '</span></div><div class="bw-options">' +
+            group.options.map(function (option) {
+              var pressed = state[group.key] === option.key ? 'true' : 'false';
+              return '<button type="button" data-group="' + group.key + '" data-value="' + option.key + '" aria-pressed="' + pressed + '">' +
+                '<span class="bw-opt-icon" aria-hidden="true">' + option.icon + '</span>' +
+                '<span class="bw-opt-title">' + option.title + '</span>' +
+                '<span class="bw-opt-note">' + option.note + '</span>' +
+              '</button>';
+            }).join('') + '</div></div>';
+        }).join('');
+      }
+
+      function renderResult() {
+        var scores = score();
+        var winner = Object.keys(scores).sort(function (a, b) { return scores[b].value - scores[a].value; })[0];
+        var selected = copy[winner];
+        document.getElementById('bw-badge').textContent = selected.badge;
+        document.getElementById('bw-pick').textContent = selected.title;
+        document.getElementById('bw-reason').textContent = selected.reason;
+        document.getElementById('bw-scores').innerHTML = Object.keys(scores).map(function (key) {
+          var pct = Math.min(100, Math.round(scores[key].value / 12 * 100));
+          return '<div class="bw-score-row"><span>' + scores[key].label + '</span><div class="bw-bar"><div class="bw-fill" style="width:' + pct + '%"></div></div><span>' + scores[key].value + '</span></div>';
+        }).join('');
+        document.getElementById('bw-steps').innerHTML = selected.steps.map(function (step) {
+          return '<div class="bw-step"><strong>' + step[0] + '</strong><span>' + step[1] + '</span></div>';
+        }).join('');
+        document.getElementById('bw-links').innerHTML = selected.links.map(function (link, index) {
+          return '<a class="' + (index ? 'secondary' : '') + '" href="' + link[1] + '" target="_blank" rel="noopener">' + link[0] + '</a>';
+        }).join('');
+      }
+
+      controls.addEventListener('click', function (event) {
+        var button = event.target.closest('button[data-group]');
+        if (!button) return;
+        state[button.dataset.group] = button.dataset.value;
+        renderControls();
+        renderResult();
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
+      });
+
+      renderControls();
+      renderResult();
+    })();
+  </script>
+</div>
+</body>
+</html>
