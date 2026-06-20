@@ -8,11 +8,11 @@
 - Category: Tourist Tips
 - Secondary keywords: Zoo Berlin or Tierpark Berlin, Berlin Zoo vs Tierpark, Tierpark Berlin with kids, Zoo Berlin Aquarium, Berlin animal park
 - Tags: Zoo Berlin, Tierpark Berlin, Berlin With Kids, Berlin Attractions, Berlin Travel Tips
-- SEO title: Zoo Berlin vs Tierpark Berlin: Which One Should You Visit?
-- Meta description: Zoo Berlin vs Tierpark Berlin for tourists: history, pandas, Aquarium, Tierpark's 160-hectare park, kids, transport, prices, and the better choice.
+- SEO title: Zoo Berlin vs Tierpark Berlin: Ultimate Guide
+- Meta description: Compare Zoo Berlin and Tierpark Berlin for tourists: history, pandas, Aquarium, size, kids, transport, tickets, and which park fits your day.
 - Excerpt: Zoo Berlin and Tierpark Berlin are not two versions of the same day. This guide compares history, size, animals, kids, transport, tickets, and the feeling of each park so you can choose the right wild day out.
-- Social title: Zoo Berlin or Tierpark Berlin?
-- Social description: One is compact, historic, and central. The other is huge, green, and slower. Here is how to choose.
+- Social title: Zoo Berlin vs Tierpark Berlin: Choosing Your Wild Day Out
+- Social description: A practical comparison of Berlin's compact historic zoo and its vast landscape Tierpark, with a scorecard to help you choose.
 - Widget ideas considered:
   - Zoo vs Tierpark Wild Day Picker: helps the reader turn time, walking energy, weather, kids, Aquarium interest, and start area into one clear choice. Selected because it answers the main tourist decision directly.
   - Berlin Animal Park Budget Estimator: compares ticket cost by adults, children, and Aquarium choice. Rejected because prices are dynamic and official ticket pages should stay the source of truth.
