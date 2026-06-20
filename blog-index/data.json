@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-19T17:01:31.358Z",
+  "updatedAt": "2026-06-20T08:54:55.411Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 132,
+  "totalPosts": 133,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -431,6 +431,23 @@
           "relatedToolSlug": "transport-ticket-calculator"
         },
         {
+          "title": "Zoo Berlin vs Tierpark Berlin: The Ultimate Guide to Choosing Your Wild Day Out",
+          "slug": "zoo-berlin-vs-tierpark-berlin",
+          "path": "/post/zoo-berlin-vs-tierpark-berlin",
+          "url": "https://www.berlinwalk.com/post/zoo-berlin-vs-tierpark-berlin",
+          "excerpt": "Zoo Berlin and Tierpark Berlin are not two versions of the same day. This guide compares history, size, animals, kids, transport, tickets, and the feeling of each park so you can choose the right wild day out.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "9 min read",
+          "publishedDate": "2026-06-20T08:47:20.584Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
+          "alt": "Zoo Berlin Elephant Gate entrance in a Zoo Berlin vs Tierpark Berlin visitor comparison",
+          "relatedToolSlug": ""
+        },
+        {
           "title": "Berlin Night Transport: How to Get Around After Midnight",
           "slug": "berlin-night-transport",
           "path": "/post/berlin-night-transport",
@@ -480,23 +497,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg",
           "alt": "The KaDeWe department store in Berlin, a classic shopping landmark where non-EU visitors may ask about Tax Free shopping",
           "relatedToolSlug": "berlin-shopping-areas"
-        },
-        {
-          "title": "Berlin with Kids: What to Do, Where to Stay and How to Plan an Easy Family Day",
-          "slug": "berlin-with-kids",
-          "path": "/post/berlin-with-kids",
-          "url": "https://www.berlinwalk.com/post/berlin-with-kids",
-          "excerpt": "A practical Berlin family travel guide with age-based planning advice, kid-friendly museums, parks, public transport rules, rainy-day backups and an interactive family day planner.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-06-17T12:18:23.353Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_f480e636a6124ac9a34483c59b5003cb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-with-kids-01-berlin-with-kids-family-alexanderplatz-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_f480e636a6124ac9a34483c59b5003cb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-with-kids-01-berlin-with-kids-family-alexanderplatz-cover.jpg",
-          "alt": "A family walking through Alexanderplatz at golden hour with the Berlin TV Tower above them",
-          "relatedToolSlug": "berlin-family-day-planner"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Zoo Berlin vs Tierpark Berlin: The Ultimate Guide to Choosing Your Wild Day Out",
+      "slug": "zoo-berlin-vs-tierpark-berlin",
+      "path": "/post/zoo-berlin-vs-tierpark-berlin",
+      "url": "https://www.berlinwalk.com/post/zoo-berlin-vs-tierpark-berlin",
+      "excerpt": "Zoo Berlin and Tierpark Berlin are not two versions of the same day. This guide compares history, size, animals, kids, transport, tickets, and the feeling of each park so you can choose the right wild day out.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-06-20T08:47:20.584Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
+      "alt": "Zoo Berlin Elephant Gate entrance in a Zoo Berlin vs Tierpark Berlin visitor comparison",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Berlin Night Transport: How to Get Around After Midnight",
       "slug": "berlin-night-transport",
       "path": "/post/berlin-night-transport",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9d522d592a2a4da5a4277e782dd77030~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tipping-in-berlin-cover.jpg",
       "alt": "Cafe Moskau restaurant building in Berlin, used to illustrate tipping in Berlin restaurants and cafes",
       "relatedToolSlug": "berlin-tip-calculator"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "What Is a Späti? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips",
-      "slug": "what-is-a-spati-berlin",
-      "path": "/post/what-is-a-spati-berlin",
-      "url": "https://www.berlinwalk.com/post/what-is-a-spati-berlin",
-      "excerpt": "A practical tourist guide to Berlin Spätis: late-night corner shops, Sunday rules, cash, Pfand, etiquette, and what to buy when normal shops are closed.",
+      "title": "Zoo Berlin vs Tierpark Berlin: The Ultimate Guide to Choosing Your Wild Day Out",
+      "slug": "zoo-berlin-vs-tierpark-berlin",
+      "path": "/post/zoo-berlin-vs-tierpark-berlin",
+      "url": "https://www.berlinwalk.com/post/zoo-berlin-vs-tierpark-berlin",
+      "excerpt": "Zoo Berlin and Tierpark Berlin are not two versions of the same day. This guide compares history, size, animals, kids, transport, tickets, and the feeling of each park so you can choose the right wild day out.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "11 min read",
-      "publishedDate": "2026-06-10T05:57:35.181Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e69c51f5c7644ff69fc6b7302afd3c7e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spati-kreuzberg-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e69c51f5c7644ff69fc6b7302afd3c7e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spati-kreuzberg-cover.jpg",
-      "alt": "A Berlin Späti storefront in Kreuzberg with drinks, signs, benches, and a Lotto sign outside.",
-      "relatedToolSlug": "spati-survival-checker"
-    }
-  ],
-  "allPosts": [
+      "readTime": "9 min read",
+      "publishedDate": "2026-06-20T08:47:20.584Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
+      "alt": "Zoo Berlin Elephant Gate entrance in a Zoo Berlin vs Tierpark Berlin visitor comparison",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Berlin Night Transport: How to Get Around After Midnight",
       "slug": "berlin-night-transport",
