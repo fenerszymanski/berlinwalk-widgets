@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Zoo Berlin or Tierpark Berlin Picker | BerlinWalk</title>
-  <meta name="description" content="A quick Berlin visitor tool to choose between Zoo Berlin, Zoo Berlin plus Aquarium, and Tierpark Berlin.">
+  <title>Zoo Berlin vs Tierpark Berlin Wild Day Picker | BerlinWalk</title>
+  <meta name="description" content="A quick Berlin visitor tool to choose between Zoo Berlin, Zoo Berlin plus Aquarium, and Tierpark Berlin by time, weather, walking energy, and start area.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
@@ -124,6 +124,36 @@
       gap: 16px;
       grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
       padding: 18px;
+    }
+
+    #bw-zoo-picker [hidden] {
+      display: none !important;
+    }
+
+    #bw-zoo-picker .bw-mode {
+      background: #fff;
+      border-bottom: 1px solid var(--bw-border);
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 12px 18px;
+    }
+
+    #bw-zoo-picker .bw-mode button {
+      align-items: center;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      min-height: 42px;
+      padding: 8px 10px;
+      text-align: center;
+    }
+
+    #bw-zoo-picker .bw-mode button[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      box-shadow: none;
+      color: #fff;
     }
 
     #bw-zoo-picker .bw-panel,
@@ -357,13 +387,292 @@
       margin: 0;
     }
 
+    #bw-zoo-picker .bw-priority {
+      border-top: 1px solid var(--bw-border);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(280px, 0.95fr) minmax(0, 1.05fr);
+      padding: 18px;
+    }
+
+    #bw-zoo-picker .bw-priority-copy,
+    #bw-zoo-picker .bw-priority-result {
+      background: #fff;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 16px;
+    }
+
+    #bw-zoo-picker .bw-priority h3 {
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 950;
+      line-height: 1.18;
+      margin: 0 0 7px;
+    }
+
+    #bw-zoo-picker .bw-priority p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.52;
+      margin: 0;
+    }
+
+    #bw-zoo-picker .bw-chart {
+      border-bottom: 1px solid var(--bw-border);
+      display: grid;
+      gap: 10px;
+      margin: 14px 0 12px;
+      padding-bottom: 14px;
+    }
+
+    #bw-zoo-picker .bw-chart-row {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 78px minmax(0, 1fr) 42px;
+      align-items: center;
+    }
+
+    #bw-zoo-picker .bw-chart-row span {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    #bw-zoo-picker .bw-chart-track {
+      background: #EEF4EA;
+      border-radius: 999px;
+      height: 18px;
+      overflow: hidden;
+    }
+
+    #bw-zoo-picker .bw-chart-fill {
+      border-radius: 999px;
+      height: 100%;
+      transition: width .24s ease;
+      width: 50%;
+    }
+
+    #bw-zoo-picker .bw-chart-fill.zoo {
+      background: linear-gradient(90deg, #2B6CB0, #63B3ED);
+    }
+
+    #bw-zoo-picker .bw-chart-fill.tierpark {
+      background: linear-gradient(90deg, var(--bw-green), var(--bw-lime));
+    }
+
+    #bw-zoo-picker .bw-axis {
+      color: #7A877A;
+      display: flex;
+      font-size: 9.5px;
+      font-weight: 800;
+      justify-content: space-between;
+      margin: -2px 42px 0 78px;
+    }
+
+    #bw-zoo-picker .bw-metric-table {
+      border-collapse: collapse;
+      color: var(--bw-text);
+      font-size: 11.5px;
+      line-height: 1.35;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    #bw-zoo-picker .bw-metric-table th,
+    #bw-zoo-picker .bw-metric-table td {
+      border-bottom: 1px solid #E8F1DC;
+      padding: 8px 6px;
+      text-align: left;
+    }
+
+    #bw-zoo-picker .bw-metric-table th {
+      color: var(--bw-green);
+      font-size: 10.5px;
+      font-weight: 950;
+    }
+
+    #bw-zoo-picker .bw-metric-table td:nth-child(2),
+    #bw-zoo-picker .bw-metric-table td:nth-child(3),
+    #bw-zoo-picker .bw-metric-table th:nth-child(2),
+    #bw-zoo-picker .bw-metric-table th:nth-child(3) {
+      text-align: center;
+    }
+
+    #bw-zoo-picker .bw-metric-table strong {
+      color: var(--bw-green);
+      font-weight: 950;
+    }
+
+    #bw-zoo-picker .bw-recommended {
+      background: #F7FAF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      margin-top: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    #bw-zoo-picker .bw-recommended span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: .3px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-zoo-picker .bw-recommended strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 20px;
+      font-weight: 950;
+      line-height: 1.15;
+    }
+
+    #bw-zoo-picker .bw-slider-field {
+      margin-top: 14px;
+    }
+
+    #bw-zoo-picker .bw-slider-head {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    #bw-zoo-picker .bw-slider-title {
+      color: var(--bw-text);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+    }
+
+    #bw-zoo-picker .bw-slider-value {
+      background: #EEF6E7;
+      border-radius: 999px;
+      color: var(--bw-green);
+      flex: 0 0 auto;
+      font-size: 10.5px;
+      font-weight: 950;
+      line-height: 1;
+      padding: 6px 8px;
+    }
+
+    #bw-zoo-picker input[type="range"] {
+      appearance: none;
+      background: #DDEBCF;
+      border-radius: 999px;
+      height: 8px;
+      margin: 0;
+      outline: none;
+      width: 100%;
+    }
+
+    #bw-zoo-picker input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--bw-green);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(27, 94, 32, 0.22);
+      cursor: pointer;
+      height: 21px;
+      width: 21px;
+    }
+
+    #bw-zoo-picker input[type="range"]::-moz-range-thumb {
+      background: var(--bw-green);
+      border: 2px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 8px rgba(27, 94, 32, 0.22);
+      cursor: pointer;
+      height: 21px;
+      width: 21px;
+    }
+
+    #bw-zoo-picker .bw-match-bars {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    #bw-zoo-picker .bw-match-label {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    #bw-zoo-picker .bw-match-label strong {
+      color: var(--bw-text);
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    #bw-zoo-picker .bw-match-label span {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    #bw-zoo-picker .bw-match-track {
+      background: #EAF2E1;
+      border-radius: 999px;
+      height: 18px;
+      overflow: hidden;
+    }
+
+    #bw-zoo-picker .bw-match-fill {
+      border-radius: 999px;
+      height: 100%;
+      transition: width .24s ease;
+      width: 50%;
+    }
+
+    #bw-zoo-picker .bw-match-fill.zoo {
+      background: linear-gradient(90deg, #2B6CB0, #63B3ED);
+    }
+
+    #bw-zoo-picker .bw-match-fill.tierpark {
+      background: linear-gradient(90deg, var(--bw-green), var(--bw-lime));
+    }
+
+    #bw-zoo-picker .bw-priority-verdict {
+      background: #FFFDE6;
+      border: 1px solid rgba(255, 230, 0, 0.7);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.55;
+      padding: 13px;
+    }
+
+    #bw-zoo-picker .bw-priority-verdict strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.25;
+      margin-bottom: 4px;
+    }
+
     @media (max-width: 760px) {
       #bw-zoo-picker {
         margin: 14px 0;
       }
 
       #bw-zoo-picker .bw-head,
-      #bw-zoo-picker .bw-body {
+      #bw-zoo-picker .bw-body,
+      #bw-zoo-picker .bw-priority {
         grid-template-columns: 1fr;
       }
 
@@ -379,13 +688,33 @@
         padding: 14px;
       }
 
-      #bw-zoo-picker .bw-options,
+      #bw-zoo-picker .bw-priority {
+        padding: 14px;
+      }
+
+      #bw-zoo-picker .bw-mode {
+        padding: 10px 14px;
+      }
+
       #bw-zoo-picker .bw-steps {
         grid-template-columns: 1fr;
       }
 
+      #bw-zoo-picker .bw-options {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
       #bw-zoo-picker button {
         min-height: 52px;
+        padding: 8px 5px;
+      }
+
+      #bw-zoo-picker .bw-opt-title {
+        font-size: 11px;
+      }
+
+      #bw-zoo-picker .bw-opt-note {
+        display: none;
       }
     }
   </style>
@@ -394,16 +723,21 @@
     <header class="bw-head">
       <div>
         <p class="bw-kicker">Berlin animal park picker</p>
-        <h2>Zoo Berlin or Tierpark Berlin?</h2>
-        <p class="bw-sub">Answer three quick questions and get the better pick for your Berlin day: central Zoo, Zoo plus Aquarium, or the larger Tierpark.</p>
+        <h2>Choose Your Wild Berlin Day</h2>
+        <p class="bw-sub">Set the kind of day you actually want, then get one clear recommendation: the compact Zoo, the Zoo plus Aquarium, or the spacious Tierpark.</p>
       </div>
       <div class="bw-fast-rule">
         <strong>Fast rule</strong>
-        <span>Zoo Berlin is the easy central choice. Tierpark Berlin is the spacious full-day choice.</span>
+        <span>Zoo Berlin is the concentrated city classic. Tierpark Berlin is the spacious landscape day.</span>
       </div>
     </header>
 
-    <section class="bw-body" aria-label="Zoo Berlin vs Tierpark Berlin picker">
+    <nav class="bw-mode" aria-label="Widget mode">
+      <button type="button" data-mode="priority" aria-pressed="true">Priority score</button>
+      <button type="button" data-mode="quick" aria-pressed="false">Quick pick</button>
+    </nav>
+
+    <section class="bw-body" id="bw-quick-panel" aria-label="Zoo Berlin vs Tierpark Berlin picker" hidden>
       <div class="bw-panel" id="bw-controls"></div>
       <article class="bw-result" aria-live="polite">
         <div class="bw-result-head">
@@ -419,11 +753,84 @@
         </div>
       </article>
     </section>
+
+    <section class="bw-priority" id="bw-priority-panel" aria-label="Zoo Berlin vs Tierpark Berlin priority score">
+      <div class="bw-priority-copy">
+        <h3>Current match score</h3>
+        <p>The table uses rounded visitor-planning numbers. Move the sliders to change the weighted recommendation.</p>
+        <div class="bw-chart" aria-label="Current match score">
+          <div class="bw-chart-row">
+            <span>Zoo Berlin</span>
+            <div class="bw-chart-track"><div class="bw-chart-fill zoo" id="bw-zoo-chart"></div></div>
+            <span id="bw-zoo-pct">50%</span>
+          </div>
+          <div class="bw-chart-row">
+            <span>Tierpark</span>
+            <div class="bw-chart-track"><div class="bw-chart-fill tierpark" id="bw-tierpark-chart"></div></div>
+            <span id="bw-tierpark-pct">50%</span>
+          </div>
+          <div class="bw-axis" aria-hidden="true"><span>0</span><span>25</span><span>50</span><span>75</span><span>100</span></div>
+        </div>
+        <table class="bw-metric-table" aria-label="Zoo Berlin and Tierpark Berlin metric comparison">
+          <thead>
+            <tr><th>Metric</th><th>Zoo Berlin</th><th>Tierpark</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Area (ha)</td><td><strong>35</strong></td><td><strong>160</strong></td></tr>
+            <tr><td>Species count</td><td><strong>1,015</strong></td><td><strong>630</strong></td></tr>
+            <tr><td>Total animals</td><td><strong>18,800</strong></td><td><strong>7,800</strong></td></tr>
+            <tr><td>Walkability (1-10)</td><td><strong>9</strong></td><td><strong>3</strong></td></tr>
+            <tr><td>Space score (1-10)</td><td><strong>3</strong></td><td><strong>10</strong></td></tr>
+            <tr><td>Crowd density (1-10)</td><td><strong>8</strong></td><td><strong>3</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="bw-recommended">
+          <span>Recommended winner</span>
+          <strong id="bw-recommended-name">Balanced choice</strong>
+        </div>
+      </div>
+      <div class="bw-priority-result" aria-live="polite">
+        <h3>Adjust your priorities</h3>
+        <p>Set what matters most for your own visit. The score changes immediately.</p>
+        <div id="bw-sliders"></div>
+        <div class="bw-priority-verdict" id="bw-priority-verdict">
+          <strong>Balanced choice</strong>
+          Adjust the sliders to see which park better matches your priorities.
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
     (function () {
       var groups = [
+        {
+          key: 'time',
+          label: 'How much of the day can it take?',
+          options: [
+            { key: 'half', icon: '⏱', title: 'Half-day', note: 'Keep it easy' },
+            { key: 'relaxed', icon: '☕', title: 'Relaxed day', note: 'Some flexibility' },
+            { key: 'full', icon: '🌳', title: 'Full day', note: 'Main plan' }
+          ]
+        },
+        {
+          key: 'goal',
+          label: 'What would you regret missing?',
+          options: [
+            { key: 'pandas', icon: '🐼', title: 'Pandas', note: 'Zoo Berlin' },
+            { key: 'aquarium', icon: '🐠', title: 'Aquarium', note: 'Indoor backup' },
+            { key: 'palace', icon: '🏛', title: 'Palace park', note: 'Tierpark feel' }
+          ]
+        },
+        {
+          key: 'pace',
+          label: 'What movement fits your group?',
+          options: [
+            { key: 'compact', icon: '🚶', title: 'Compact walk', note: 'Short distances' },
+            { key: 'kids', icon: '🧒', title: 'Kids need space', note: 'Run + reset' },
+            { key: 'dog', icon: '🐕', title: 'Dog with you', note: 'Tierpark only' }
+          ]
+        },
         {
           key: 'start',
           label: 'Where are you starting?',
@@ -432,29 +839,15 @@
             { key: 'centre', icon: '📍', title: 'Mitte', note: 'Flexible' },
             { key: 'east', icon: '🌳', title: 'East side', note: 'Closer to Tierpark' }
           ]
-        },
-        {
-          key: 'goal',
-          label: 'What matters most?',
-          options: [
-            { key: 'classic', icon: '🦁', title: 'Classic animals', note: 'First visit' },
-            { key: 'aquarium', icon: '🐠', title: 'Aquarium', note: 'Indoor backup' },
-            { key: 'space', icon: '🌿', title: 'Space', note: 'Big park day' }
-          ]
-        },
-        {
-          key: 'group',
-          label: 'Who is going?',
-          options: [
-            { key: 'short', icon: '⏱', title: 'Half-day', note: 'Keep it easy' },
-            { key: 'family', icon: '🧒', title: 'Family pace', note: 'Stroller friendly' },
-            { key: 'dog', icon: '🐕', title: 'With dog', note: 'Tierpark only' }
-          ]
         }
       ];
 
-      var state = { start: 'centre', goal: 'classic', group: 'short' };
+      var state = { time: 'half', goal: 'pandas', pace: 'compact', start: 'centre' };
+      var priorityState = { species: 3, walk: 3, space: 3, quiet: 3 };
       var controls = document.getElementById('bw-controls');
+      var slidersEl = document.getElementById('bw-sliders');
+      var quickPanel = document.getElementById('bw-quick-panel');
+      var priorityPanel = document.getElementById('bw-priority-panel');
 
       function score() {
         var scores = {
@@ -463,17 +856,21 @@
           tierpark: { value: 2, label: 'Tierpark' }
         };
 
+        if (state.time === 'half') scores.zoo.value += 3;
+        if (state.time === 'relaxed') { scores.zoo.value += 1; scores.aquarium.value += 1; scores.tierpark.value += 1; }
+        if (state.time === 'full') scores.tierpark.value += 3;
+
+        if (state.goal === 'pandas') scores.zoo.value += 4;
+        if (state.goal === 'aquarium') { scores.aquarium.value += 5; scores.zoo.value += 1; }
+        if (state.goal === 'palace') scores.tierpark.value += 4;
+
+        if (state.pace === 'compact') scores.zoo.value += 3;
+        if (state.pace === 'kids') { scores.tierpark.value += 3; scores.zoo.value += 1; }
+        if (state.pace === 'dog') scores.tierpark.value += 7;
+
         if (state.start === 'west') scores.zoo.value += 3;
         if (state.start === 'centre') { scores.zoo.value += 2; scores.tierpark.value += 1; }
         if (state.start === 'east') scores.tierpark.value += 3;
-
-        if (state.goal === 'classic') scores.zoo.value += 3;
-        if (state.goal === 'aquarium') { scores.aquarium.value += 5; scores.zoo.value += 1; }
-        if (state.goal === 'space') scores.tierpark.value += 4;
-
-        if (state.group === 'short') scores.zoo.value += 3;
-        if (state.group === 'family') { scores.tierpark.value += 3; scores.zoo.value += 1; }
-        if (state.group === 'dog') scores.tierpark.value += 6;
 
         return scores;
       }
@@ -482,9 +879,9 @@
         zoo: {
           badge: 'Easy tourist pick',
           title: 'Zoo Berlin',
-          reason: 'Choose Zoo Berlin for the simplest Berlin animal-park day: central location, strong classic zoo feeling, and easier public transport.',
+          reason: 'Your answers point to the compact, historic city-zoo day: central location, pandas, short walking distances, and easy public transport.',
           steps: [
-            ['Best timing', 'Half day to relaxed day'],
+            ['Best timing', 'Half-day to relaxed day'],
             ['Transport', 'S + U Zoologischer Garten'],
             ['Pair with', 'Kaiser Wilhelm Memorial Church or KuDamm']
           ],
@@ -496,7 +893,7 @@
         aquarium: {
           badge: 'Bad-weather pick',
           title: 'Zoo Berlin + Aquarium',
-          reason: 'Choose the Zoo plus Aquarium ticket if you want the central Zoo day with an indoor backup for rain, heat, or kids who need a change of scene.',
+          reason: 'Your answers point to the Zoo rhythm with a useful indoor second act: good for rain, heat, winter, or children who need a change of scene.',
           steps: [
             ['Best timing', 'Start early, same day only'],
             ['Transport', 'S + U Zoologischer Garten'],
@@ -510,7 +907,7 @@
         tierpark: {
           badge: 'Spacious day pick',
           title: 'Tierpark Berlin',
-          reason: 'Choose Tierpark Berlin when you want room to walk, a slower family rhythm, a park-like setting, or you are starting from the east side.',
+          reason: 'Your answers point to the landscape-zoo day: more space, longer walks, Friedrichsfelde palace atmosphere, and a slower family or picnic rhythm.',
           steps: [
             ['Best timing', 'Give it most of the day'],
             ['Transport', 'U5 to Tierpark'],
@@ -521,6 +918,18 @@
             ['Berlin with kids', 'https://www.berlinwalk.com/post/berlin-with-kids']
           ]
         }
+      };
+
+      var sliderLabels = ['Very low', 'Low', 'Normal', 'High', 'Critical'];
+      var priorityFields = [
+        { key: 'species', title: 'Seeing many species close together' },
+        { key: 'walk', title: 'Less walking / compact layout' },
+        { key: 'space', title: 'Spacious park feeling' },
+        { key: 'quiet', title: 'Quieter paths and fewer crowd pinch points' }
+      ];
+      var priorityStats = {
+        zoo: { species: 10, walk: 9, space: 2, quiet: 3 },
+        tierpark: { species: 6, walk: 2, space: 10, quiet: 9 }
       };
 
       function renderControls() {
@@ -546,7 +955,7 @@
         document.getElementById('bw-reason').textContent = selected.reason;
         document.getElementById('bw-scores').innerHTML = Object.keys(scores).map(function (key) {
           var pct = Math.min(100, Math.round(scores[key].value / 12 * 100));
-          return '<div class="bw-score-row"><span>' + scores[key].label + '</span><div class="bw-bar"><div class="bw-fill" style="width:' + pct + '%"></div></div><span>' + scores[key].value + '</span></div>';
+          return '<div class="bw-score-row"><span>' + scores[key].label + '</span><div class="bw-bar"><div class="bw-fill" style="width:' + pct + '%"></div></div><span>' + pct + '%</span></div>';
         }).join('');
         document.getElementById('bw-steps').innerHTML = selected.steps.map(function (step) {
           return '<div class="bw-step"><strong>' + step[0] + '</strong><span>' + step[1] + '</span></div>';
@@ -554,6 +963,55 @@
         document.getElementById('bw-links').innerHTML = selected.links.map(function (link, index) {
           return '<a class="' + (index ? 'secondary' : '') + '" href="' + link[1] + '" target="_blank" rel="noopener">' + link[0] + '</a>';
         }).join('');
+      }
+
+      function renderSliders() {
+        slidersEl.innerHTML = priorityFields.map(function (field) {
+          var value = priorityState[field.key];
+          return '<div class="bw-slider-field">' +
+            '<div class="bw-slider-head"><span class="bw-slider-title">' + field.title + '</span><span class="bw-slider-value" id="bw-val-' + field.key + '">' + sliderLabels[value - 1] + '</span></div>' +
+            '<input type="range" min="1" max="5" value="' + value + '" data-priority="' + field.key + '" aria-label="' + field.title + '">' +
+          '</div>';
+        }).join('');
+      }
+
+      function renderPriorityResult() {
+        var zooScore = 0;
+        var tierparkScore = 0;
+        Object.keys(priorityState).forEach(function (key) {
+          zooScore += priorityState[key] * priorityStats.zoo[key];
+          tierparkScore += priorityState[key] * priorityStats.tierpark[key];
+        });
+        var total = zooScore + tierparkScore;
+        var zooPct = total ? Math.round((zooScore / total) * 100) : 50;
+        var tierparkPct = 100 - zooPct;
+        document.getElementById('bw-zoo-chart').style.width = zooPct + '%';
+        document.getElementById('bw-tierpark-chart').style.width = tierparkPct + '%';
+        document.getElementById('bw-zoo-pct').textContent = zooPct + '%';
+        document.getElementById('bw-tierpark-pct').textContent = tierparkPct + '%';
+
+        var verdict = document.getElementById('bw-priority-verdict');
+        var winner = document.getElementById('bw-recommended-name');
+        if (zooPct > tierparkPct + 3) {
+          winner.textContent = 'Zoo Berlin';
+          verdict.innerHTML = '<strong>Zoo Berlin fits these priorities</strong>Choose the compact city zoo if species variety, pandas, shorter distances, and easy transport matter most.';
+        } else if (tierparkPct > zooPct + 3) {
+          winner.textContent = 'Tierpark Berlin';
+          verdict.innerHTML = '<strong>Tierpark Berlin fits these priorities</strong>Choose Tierpark if space, calmer paths, longer wandering, and a full outdoor day matter most.';
+        } else {
+          winner.textContent = 'Balanced choice';
+          verdict.innerHTML = '<strong>Balanced choice</strong>Your priorities are close. Use location and weather as the tie-breaker: Zoo for Aquarium/central plans, Tierpark for a spacious full day.';
+        }
+      }
+
+      function setMode(mode) {
+        var showPriority = mode === 'priority';
+        quickPanel.hidden = showPriority;
+        priorityPanel.hidden = !showPriority;
+        Array.prototype.forEach.call(document.querySelectorAll('[data-mode]'), function (button) {
+          button.setAttribute('aria-pressed', button.dataset.mode === mode ? 'true' : 'false');
+        });
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
       }
 
       controls.addEventListener('click', function (event) {
@@ -565,8 +1023,27 @@
         if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
       });
 
+      slidersEl.addEventListener('input', function (event) {
+        var input = event.target.closest('input[data-priority]');
+        if (!input) return;
+        priorityState[input.dataset.priority] = parseInt(input.value, 10);
+        var valueLabel = document.getElementById('bw-val-' + input.dataset.priority);
+        if (valueLabel) valueLabel.textContent = sliderLabels[priorityState[input.dataset.priority] - 1];
+        renderPriorityResult();
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
+      });
+
+      document.querySelector('.bw-mode').addEventListener('click', function (event) {
+        var button = event.target.closest('button[data-mode]');
+        if (!button) return;
+        setMode(button.dataset.mode);
+      });
+
       renderControls();
       renderResult();
+      renderSliders();
+      renderPriorityResult();
+      setMode('priority');
     })();
   </script>
 </div>

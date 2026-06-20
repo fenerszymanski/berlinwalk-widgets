@@ -50,11 +50,17 @@ Run date: 2026-06-20, Europe/Berlin.
 
 ## Research Sources Used For Facts
 
+- Yusuf source draft: `/Users/yusufucuz/Downloads/Zoo Berlin vs. Tierpark Berlin_ The Ultimate Guide to Choosing Your Wild Day Out.md`
+- Note: Google Drive connector search did not surface the document title directly; the local Markdown export from Downloads was used as the editorial source text.
 - Zoo Berlin tickets and pricing: https://www.zoo-berlin.de/en/tickets-service/tickets-pricing
 - Zoo Berlin opening hours: https://www.zoo-berlin.de/en/tickets-service/opening-hours
 - Zoo Berlin numbers/dates/facts: https://www.zoo-berlin.de/en/about-the-zoo/numbers-dates-and-facts
+- Zoo Berlin history: https://www.zoo-berlin.de/en/about-the-zoo/history
+- Zoo Berlin giant pandas: https://www.zoo-berlin.de/en/explore-the-zoo/giant-panda
 - Tierpark Berlin tickets and pricing: https://www.tierpark-berlin.de/en/tickets-service/tickets-pricing
 - Tierpark Berlin opening hours: https://www.tierpark-berlin.de/en/tickets-service/opening-hours
 - Tierpark Berlin home / park scale: https://www.tierpark-berlin.de/en/
+- Tierpark Berlin history: https://www.tierpark-berlin.de/en/about-the-tierpark/history
 - Tierpark Berlin numbers/dates/facts: https://www.tierpark-berlin.de/en/about-the-tierpark/numbers-dates-and-facts
-
+- Tierpark Berlin map/highlights: https://www.tierpark-berlin.de/en/tickets-service/tierpark-map
+- Tierpark Berlin Day by the Sea playground: https://www.tierpark-berlin.de/en/animals/a-day-by-the-sea

@@ -5941,10 +5941,18 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "Is Zoo Berlin or Tierpark Berlin better for first-time tourists?",
+        "name": "Is Zoo Berlin or Tierpark Berlin better for first-time visitors?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Zoo Berlin is usually better for first-time tourists because it is central, easy to reach, and simple to combine with the Aquarium or nearby West Berlin stops. Tierpark Berlin is better when you want a slower full-day park visit."
+          "text": "Zoo Berlin is usually the better first-time tourist choice because it is central, compact, historic, and easy to combine with City West. Tierpark Berlin is better when you actively want a spacious full-day park visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Berlin have both Zoo Berlin and Tierpark Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The split comes from Berlin's divided Cold War history. Zoo Berlin was in the British sector of West Berlin, so East Berlin created Tierpark Berlin in 1955 on the grounds of Friedrichsfelde manor house."
         }
       },
       {
@@ -5952,15 +5960,15 @@
         "name": "Which one is better with children?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For a short, easy family visit, choose Zoo Berlin. For a stroller-friendly day with more space and less city pressure, choose Tierpark Berlin and give yourself more time."
+          "text": "For toddlers, short walking distances, or mixed weather, choose Zoo Berlin. For older children, picnic rhythm, handcart plans, dogs, and more space to move, choose Tierpark Berlin and give it most of the day."
         }
       },
       {
         "@type": "Question",
-        "name": "Which one is cheaper?",
+        "name": "Is Zoo Berlin or Tierpark Berlin cheaper?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Tierpark Berlin is usually the cheaper basic day ticket. Zoo Berlin can cost more, especially if you add the Aquarium. The exact online and till prices change, so check the official ticket pages before buying."
+          "text": "Tierpark Berlin is usually cheaper for a basic day ticket, while Zoo Berlin costs more if you add the Aquarium. Prices vary by date and online versus till purchase, so check the official ticket pages before buying."
         }
       },
       {
@@ -5968,23 +5976,15 @@
         "name": "Can I visit Zoo Berlin and Tierpark Berlin on the same day?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "You technically can, but it is not a good tourist plan. They sit on opposite sides of the city and each deserves time. Pick one, then use the rest of the day for a meal, a walk, or a simple Berlin route."
+          "text": "You technically can, but I would not plan it. They are on different sides of Berlin, and a double-zoo day turns into transit, repeated walking, and a rushed visit. Pick one and enjoy it properly."
         }
       },
       {
         "@type": "Question",
-        "name": "Does BerlinWalk go to either zoo?",
+        "name": "Does BerlinWalk include either zoo?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. BerlinWalk is a historic city-centre walking tour from Alexanderplatz to Hackescher Markt, lasting about 2 hours. This guide helps you choose a separate animal-park day before or after your main sightseeing."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which one should I choose in bad weather?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Zoo Berlin plus the Aquarium is usually the safer bad-weather choice. Tierpark Berlin is more exposed and works best when you want a long outdoor park day."
         }
       }
     ]

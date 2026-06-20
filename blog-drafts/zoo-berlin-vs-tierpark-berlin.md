@@ -1,4 +1,4 @@
-# Zoo Berlin vs Tierpark Berlin: Which One Should You Visit?
+# Zoo Berlin vs Tierpark Berlin: The Ultimate Guide to Choosing Your Wild Day Out
 
 ## Metadata
 
@@ -9,154 +9,194 @@
 - Secondary keywords: Zoo Berlin or Tierpark Berlin, Berlin Zoo vs Tierpark, Tierpark Berlin with kids, Zoo Berlin Aquarium, Berlin animal park
 - Tags: Zoo Berlin, Tierpark Berlin, Berlin With Kids, Berlin Attractions, Berlin Travel Tips
 - SEO title: Zoo Berlin vs Tierpark Berlin: Which One Should You Visit?
-- Meta description: Zoo Berlin vs Tierpark Berlin for tourists: central Zoo, Aquarium, prices, travel time, kids, bad weather, and the simple rule for choosing the right one.
-- Excerpt: A clear tourist guide to choosing between Zoo Berlin and Tierpark Berlin, with current official ticket and opening-hour notes, family advice, bad-weather tips, and a quick picker.
+- Meta description: Zoo Berlin vs Tierpark Berlin for tourists: history, pandas, Aquarium, Tierpark's 160-hectare park, kids, transport, prices, and the better choice.
+- Excerpt: Zoo Berlin and Tierpark Berlin are not two versions of the same day. This guide compares history, size, animals, kids, transport, tickets, and the feeling of each park so you can choose the right wild day out.
 - Social title: Zoo Berlin or Tierpark Berlin?
-- Social description: The simple tourist rule for choosing the right Berlin animal park.
+- Social description: One is compact, historic, and central. The other is huge, green, and slower. Here is how to choose.
 - Widget ideas considered:
-  - Zoo vs Tierpark Picker: helps the reader choose one animal park from start area, group type, time, Aquarium interest, and pace. Selected because it answers the core search intent.
-  - Berlin Animal Park Budget Estimator: helps compare ticket cost by adults/children/Aquarium choice. Rejected because prices are dynamic and official pages should stay the source of truth.
-  - Half-Day vs Full-Day Route Builder: helps pair the zoo day with nearby sights. Rejected because it was drifting into itinerary planning and would be less useful as a standalone Berlin Tool.
+  - Zoo vs Tierpark Wild Day Picker: helps the reader turn time, walking energy, weather, kids, Aquarium interest, and start area into one clear choice. Selected because it answers the main tourist decision directly.
+  - Berlin Animal Park Budget Estimator: compares ticket cost by adults, children, and Aquarium choice. Rejected because prices are dynamic and official ticket pages should stay the source of truth.
+  - Half-Day vs Full-Day Animal Park Route Builder: helps pair the chosen park with nearby food and sightseeing. Rejected because the article already gives sample rhythms and the tool would become too itinerary-heavy.
 
 ## Body
 
-Zoo Berlin vs Tierpark Berlin is not a question of which one is "better". It is a question of which one fits your Berlin day.
+Zoo Berlin vs Tierpark Berlin is not a simple "which zoo is better?" question. Berlin has two major animal parks because the city once had two political realities. The result is not duplication. It is two completely different days.
 
-If you are visiting Berlin for the first time, staying centrally, and want the easiest animal-park visit, choose **Zoo Berlin**. It is beside Zoologischer Garten station, easy to reach, and can be done as a half-day or relaxed day.
+**Zoo Berlin** is the classic West Berlin choice: compact, historic, central, and packed with famous animal houses. It is the one I would choose if your Berlin trip is short, your hotel is central or west, or you want the Aquarium as an indoor backup.
 
-If you want a spacious park day, have children who need room to move, or you are starting from the east side of the city, choose **Tierpark Berlin**. It sits around Schloss Friedrichsfelde and feels less like a compact city attraction and more like a full outdoor day.
+**Tierpark Berlin** is the former East Berlin choice: vast, green, slower, and built around Schloss Friedrichsfelde in Lichtenberg. It is the one I would choose if you want a full outdoor day, more space, a picnic rhythm, or a family visit where children need room to move.
 
 {{quick-summary}}
 
-## Zoo Berlin vs Tierpark Berlin: the quick answer
+## The tale of two zoos: a city divided
 
-Choose **Zoo Berlin** if you want the central, classic, low-friction option. It is the better pick when your schedule is tight, when you want the Aquarium as a bad-weather backup, or when you are already in Charlottenburg, Tiergarten, Mitte, or near the west side.
+Berlin is a city where history often left pairs behind: opera houses, university traditions, transport hubs, and cultural institutions shaped by the Cold War. For animal lovers, the clearest example is Zoo Berlin and Tierpark Berlin.
 
-Choose **Tierpark Berlin** if you want space, a slower family rhythm, and a more park-like day. It is the better pick when you can give it most of the day, you are staying in Friedrichshain, Lichtenberg, or the east side, or you want to avoid squeezing a big outdoor attraction into a rushed sightseeing plan.
+[Zoo Berlin](https://www.zoo-berlin.de/en/about-the-zoo/history) opened in 1844, making it Germany's oldest zoo. After the Second World War, it sat in the British sector of West Berlin. When the city hardened into East and West, East Berliners no longer had easy access to the old zoo.
 
-My honest recommendation for most first-time tourists: **Zoo Berlin first, Tierpark Berlin only if you specifically want a full animal-park day.**
+The East German government answered by creating its own animal park. It chose the grounds of Friedrichsfelde manor house in Lichtenberg, a huge landscape far from the dense centre of West Berlin. In 1955, [Tierpark Berlin](https://www.tierpark-berlin.de/en/about-the-tierpark/history) opened.
+
+That origin story still explains the visitor experience today. Zoo Berlin feels like a historic city zoo where something appears every few steps. Tierpark Berlin feels like a large landscaped park where animals, lawns, tree-lined paths, and palace views are part of the same day.
 
 ![Zoo Berlin Elephant Gate](./images/zoo-berlin-vs-tierpark-berlin/assets/optimized/01-zoo-berlin-elephant-gate.jpg)
 
-Caption: Zoo Berlin's Elephant Gate is the clearest visual signal for the easy central choice.
+Caption: Zoo Berlin's Elephant Gate gives the west-side zoo its most recognizable first impression.
 
-## Use the Zoo Berlin vs Tierpark Berlin Picker
+## Zoo Berlin: the classic urban jungle
 
-If you are still unsure, use this quick decision tool before buying tickets. It is deliberately simple: start area, main goal, and group type.
+Zoo Berlin sits beside Zoologischer Garten station, right in City West. That location matters. You can step off the S-Bahn, U-Bahn, regional train, or bus and be near the entrances within minutes. For visitors, this removes a lot of planning friction.
 
-{{widget:berlin-zoo-tierpark-picker}}
+The zoo itself is compact by Berlin standards, at roughly 35 hectares. But it is dense. The official Zoo Berlin pages describe it as Germany's oldest zoo and one of the most species-rich zoos in the world, with around 20,000 animals when Zoo and Aquarium are counted together.
 
-## Choose Zoo Berlin if you want the easy central day
+The feeling is very different from Tierpark. At Zoo Berlin, the rhythm is quick: elephants, birds, primates, big cats, historic animal houses, and the famous Elephant Gate all sit close to each other. This is good if you want a classic animal-park day without turning the visit into a long hike.
 
-Zoo Berlin is the practical choice for many visitors because it removes friction. You can reach it by S-Bahn, U-Bahn, regional train, bus, and taxi without turning the day into a transport project.
+### What makes Zoo Berlin stand out
 
-The [official Zoo Berlin ticket page](https://www.zoo-berlin.de/en/tickets-service/tickets-pricing) currently lists day tickets with online adult Zoo prices from EUR 16 and till prices up to EUR 25. Children aged 4 to 15 are listed from EUR 7.50 online and up to EUR 12.50 at the till. Children under 4 are free. If you add the Aquarium, the official page lists higher Zoo + Aquarium prices, and the two must be visited on the same day.
+The biggest single draw is the giant pandas. Zoo Berlin says it is home to Germany's only giant pandas, which makes the Panda Garden a real decision-maker for many visitors.
 
-The Zoo is also the stronger choice if your day has other Berlin plans around it. You can combine it with the Kaiser Wilhelm Memorial Church, Ku'damm, Bikini Berlin, or a simple dinner in Charlottenburg. You can also keep it as a flexible half-day, which matters if your Berlin trip is only two or three days long.
+The architecture also matters. The Elephant Gate, the Antelope House, the Hippo House, and other historic or rebuilt animal houses make the zoo feel like part of old West Berlin, not just a collection of enclosures.
 
-Choose Zoo Berlin when:
-
-- You are visiting Berlin for the first time.
-- You want the easiest public transport connection.
-- You care about the Aquarium.
-- You have only half a day.
-- You want a bad-weather backup.
-- You are staying west or central.
-
-## Add the Aquarium if weather is uncertain
-
-The Aquarium is the main extra reason to choose Zoo Berlin over Tierpark Berlin. If the forecast is rainy, very hot, or windy, the indoor Aquarium gives the day a useful second rhythm.
-
-Do not add it automatically just because it is available. For a tired family or a short Berlin visit, Zoo plus Aquarium can become too much. But if your children love fish, reptiles, and indoor exhibits, or if you need a plan that can survive bad weather, it is worth considering.
+Then there is [Aquarium Berlin](https://www.zoo-berlin.de/en/tickets-service/tickets-pricing), next door and available through a combined ticket. I would not add it automatically for every visitor. Zoo plus Aquarium can become a long day, especially with tired children. But in rain, wind, heat, or winter, the Aquarium gives Zoo Berlin an advantage Tierpark cannot really match. If the forecast is the main problem, my [Berlin rainy day guide](https://www.berlinwalk.com/post/what-to-do-in-berlin-when-it-rains-12-indoor-activities-worth-your-time) is the wider planning companion.
 
 ![Zoo Berlin Aquarium entrance](./images/zoo-berlin-vs-tierpark-berlin/assets/optimized/02-zoo-berlin-aquarium-entrance.jpg)
 
-Caption: The Aquarium is the main reason the Zoo can be the safer bad-weather choice.
+Caption: The Aquarium is the main reason Zoo Berlin can be the stronger bad-weather choice.
 
-## Choose Tierpark Berlin if you want space
+### The Zoo Berlin vibe
 
-Tierpark Berlin is the opposite of a quick central stop. The official Tierpark site describes it as a 160-hectare park around the historic Friedrichsfelde manor house. That is the point: Tierpark Berlin is for people who want a slower, roomier day.
+Zoo Berlin feels busy, urban, and efficient. You see more in less time. You also feel the crowds more quickly, especially around pandas, narrow paths, entrances, and popular indoor houses.
 
-The [official Tierpark ticket page](https://www.tierpark-berlin.de/en/tickets-service/tickets-pricing) currently lists adult Tierpark day tickets from EUR 14.50 online and up to EUR 22.50 at the till. Children aged 4 to 15 are listed from EUR 7 online and up to EUR 11 at the till. Children under 4 are free.
+That tradeoff is exactly the point. If your Berlin visit is three days, if your children have limited walking energy, or if you want to combine the animal park with Kaiser Wilhelm Memorial Church, Ku'damm, Bikini Berlin, or dinner in Charlottenburg, Zoo Berlin is usually the better fit.
 
-Because Tierpark is larger, it works best when you are not trying to "fit it in" between four other attractions. Go when you can walk, pause, eat, let children reset, and accept that you will not see every corner.
+## Tierpark Berlin: the sprawling landscape zoo
 
-Choose Tierpark Berlin when:
+Tierpark Berlin is not the same idea on the other side of town. It is a different philosophy.
 
-- You want a full outdoor day.
-- You are travelling with a stroller.
-- You want more space and fewer central-city pressures.
-- You are staying in Friedrichshain, Lichtenberg, or east Berlin.
-- You are visiting with a dog. Dogs are not allowed at Zoo Berlin, but they are welcome at Tierpark Berlin under the official rules.
-- You prefer a park atmosphere over a compact city zoo.
+The official Tierpark site describes it as [Europe's largest animal park](https://www.tierpark-berlin.de/en/), set in 160 hectares around Schloss Friedrichsfelde. That is almost five times the physical size of Zoo Berlin. The old inventory numbers are also useful for the comparison: Zoo Berlin and Aquarium counted 18,887 animals across 1,015 species in the 2023 headcount, while Tierpark counted 7,797 animals across 632 species.
+
+The simple interpretation is this: Zoo Berlin concentrates the animal experience. Tierpark spreads it out.
 
 ![Schloss Friedrichsfelde at Tierpark Berlin](./images/zoo-berlin-vs-tierpark-berlin/assets/optimized/03-tierpark-schloss-friedrichsfelde.jpg)
 
-Caption: Tierpark Berlin feels more like a spacious park day built around Schloss Friedrichsfelde.
+Caption: Tierpark Berlin is not only an animal visit; the park landscape and Schloss Friedrichsfelde shape the day.
 
-## Opening hours and timing
+### What makes Tierpark Berlin stand out
 
-Both Zoo Berlin and Tierpark Berlin are open every day of the year, but seasonal hours matter.
+Tierpark's centrepiece is not an entrance gate or a single superstar animal. It is the landscape itself. Schloss Friedrichsfelde, open lawns, long paths, mature trees, and wide animal areas make the park feel calmer even when many people are inside.
 
-On 20 June 2026, the official [Zoo Berlin opening-hours page](https://www.zoo-berlin.de/en/tickets-service/opening-hours) and [Tierpark Berlin opening-hours page](https://www.tierpark-berlin.de/en/tickets-service/opening-hours) showed both parks open from 09:00 to 18:30, with last admission at 17:00. Their seasonal hours shorten in winter, and animal houses and restaurants close 30 minutes before the park itself.
+The highlights are spread out. The [Rainforest House](https://www.tierpark-berlin.de/en/tickets-service/tierpark-map) in the Alfred Brehm building focuses on Southeast Asian habitats. The same official map points visitors toward Himalaya, Lemur Woods, the Giraffe Trail, polar bears, and the flight show area. Families also have the [Day by the Sea](https://www.tierpark-berlin.de/en/animals/a-day-by-the-sea) water playground, a 4,000 sqm play area that can save a hot afternoon.
 
-For tourists, the practical rule is:
+Tierpark is also more forgiving for some practical groups. Dogs are welcome at Tierpark if kept on a short lead, while Zoo Berlin does not allow dogs. The official Tierpark ticket page also lists handcart hire, which can be useful when a family brings picnic supplies or a child gets tired halfway through the day.
 
-- For **Zoo Berlin**, arrive in the morning or early afternoon if you want a calm visit.
-- For **Zoo + Aquarium**, start earlier, because the combination ticket is a same-day plan.
-- For **Tierpark Berlin**, treat it as the main activity of the day.
+### The Tierpark Berlin vibe
 
-Do not rely on an old blog post or a screenshot for hours. Check the official opening-hour page on the day you buy tickets.
+Tierpark requires stamina. You should not go there thinking, "I will just pop in for two hours." You can do a short visit, but you will miss the reason Tierpark exists.
 
-## Which one is better with kids?
-
-For young children and a short day, Zoo Berlin is easier. It has the central location, the classic zoo feeling, and the Aquarium option if the weather turns.
-
-For children who need space, breaks, and a slower pace, Tierpark Berlin can be better. It is not the "quick win", but it gives a family more room to move and breathe. If you are planning a wider family itinerary, use my [Berlin with kids guide](https://www.berlinwalk.com/post/berlin-with-kids) as the broader day-planning companion.
-
-My rule:
-
-- **One tired child, one short Berlin day:** Zoo Berlin.
-- **Stroller, picnic rhythm, full day:** Tierpark Berlin.
-- **Rainy day or heatwave day:** Zoo Berlin plus Aquarium.
-- **East-side accommodation:** Tierpark Berlin becomes much more attractive.
+It works best when you accept the slower pace: walk, pause, cross a wide green area, let children run, choose a few zones instead of trying to see everything, and leave with enough energy for a quiet evening.
 
 ![Siberian tigers at Tierpark Berlin](./images/zoo-berlin-vs-tierpark-berlin/assets/optimized/04-tierpark-siberian-tiger.jpg)
 
-Caption: Tierpark works best when you can give the animal-park day enough time and walking energy.
+Caption: Tierpark works best when you have enough time and walking energy for the full park setting.
 
-## Which one is better without kids?
+## Zoo Berlin vs Tierpark Berlin: head-to-head comparison
 
-Without children, I would choose Zoo Berlin if animals are only one part of the day. It is easier to combine with normal sightseeing, dinner, shopping, or a museum.
+Here is the practical tourist comparison.
 
-Choose Tierpark Berlin without children if you actively want a slow green day. It can be a good reset after several dense city-centre days, but it is not the most efficient choice if your Berlin list is still full of must-see landmarks.
+**Size:** Zoo Berlin is about 35 hectares. Tierpark Berlin is 160 hectares.
 
-If this is your first Berlin trip, I would not sacrifice the historic centre for a long Tierpark day unless animals are a major reason for your trip. A [2 hours BerlinWalk route from Alexanderplatz to Hackescher Markt](https://www.berlinwalk.com/berlin-walking-tour-route) gives you the city context first; then you can use a separate half-day or full day for the animal park that fits your pace.
+**Location:** Zoo Berlin is in Charlottenburg, beside Zoologischer Garten station. Tierpark Berlin is in Lichtenberg, directly on the U5 at Tierpark station.
+
+**Animals and species:** Zoo Berlin and Aquarium together had 18,887 animals across 1,015 species in the 2023 inventory. Tierpark Berlin had 7,797 animals across 632 species in the same count. Numbers change, but the pattern is stable: Zoo Berlin is denser; Tierpark is roomier.
+
+**Time needed:** Zoo Berlin can work as a strong half-day or relaxed day. Tierpark Berlin is best treated as the main event of the day.
+
+**Bad weather:** Zoo Berlin has the Aquarium advantage. Tierpark is mostly an outdoor park day.
+
+**With kids:** Zoo Berlin is easier for toddlers and short attention spans. Tierpark is better when children need space, playground time, carts, and a slower family rhythm.
+
+**My quick verdict:** Zoo Berlin is the safer first-time tourist choice. Tierpark Berlin is the better full-day park choice.
+
+## Use the Zoo Berlin vs Tierpark Berlin Picker
+
+If you are still split, use this tool before buying dated tickets. The default **Priority score** tab shows a match chart, a metric table, and sliders for the things that usually decide the choice: species density, walking distance, open space, and quiet paths. Switch to **Quick pick** if you want a faster recommendation from your day shape.
+
+{{widget:berlin-zoo-tierpark-picker}}
+
+## Which one is better for families?
+
+For families, the decision is less about animals and more about energy.
+
+### For toddlers, strollers, and short days: Zoo Berlin
+
+Zoo Berlin is usually easier with small children because the distances are shorter. You can move from one animal area to the next without turning every transition into a long walk.
+
+That does not mean Zoo Berlin is always calmer. On a busy summer weekend, the compact layout can feel crowded, especially near pandas and popular houses. But if your child is tired, if the day may turn rainy, or if you only want a half-day plan, the compactness is still useful.
+
+### For older children and full-day energy: Tierpark Berlin
+
+Tierpark Berlin is better for children who need space. The paths are wider, the day can include a picnic, and the water playground gives families a second rhythm beyond animal viewing.
+
+The catch is distance. Tierpark can become tiring if you try to cover the whole park with no plan. Pick the highlights that matter most, rent a handcart if that fits your family, and leave some parts unseen. That is not failure. That is how Tierpark works.
+
+For the wider family trip, use my [Berlin with kids guide](https://www.berlinwalk.com/post/berlin-with-kids) before you decide whether the zoo day should be the main event or just one easier half-day.
+
+## Transport, tickets, and food
+
+Zoo Berlin is the easiest transport choice for many tourists. Zoologischer Garten is a major public transport hub, with S-Bahn, U-Bahn, regional trains, buses, and taxis close by.
+
+Tierpark Berlin is farther east, but not difficult. The U5 stops at Tierpark station and connects directly across the city through Alexanderplatz, Unter den Linden, Brandenburg Gate, and Hauptbahnhof. From Mitte, the journey is usually straightforward; it just feels more like a dedicated outing.
+
+Ticket prices change by date and purchase channel, so always check the official pages before buying. On 20 June 2026, the [Zoo Berlin ticket page](https://www.zoo-berlin.de/en/tickets-service/tickets-pricing) listed adult Zoo day tickets online from EUR 16 and Zoo plus Aquarium online from EUR 24, with higher till prices. The [Tierpark Berlin ticket page](https://www.tierpark-berlin.de/en/tickets-service/tickets-pricing) listed adult Tierpark day tickets online from EUR 14.50, also with a higher till price.
+
+For food, think in the same split. Zoo Berlin is surrounded by City West options, so you can snack inside and eat properly after. Tierpark is more of an on-site or picnic day. If you choose Tierpark, bring water, check the food options in advance, and do not assume you will want to leave for lunch and come back.
+
+## Two sample itineraries
+
+Do not treat these as military schedules. Feeding times, talks, closures, weather, and animal visibility change. Use them as rhythms.
+
+### A good half-day at Zoo Berlin
+
+Start in the morning at the Elephant Gate or Lion Gate. If pandas are important to you, go early and check the official feeding and talk schedule that day.
+
+Move through the classic animal houses and the central outdoor areas before lunch. If the weather is poor or you bought the combination ticket, shift into the Aquarium while everyone still has energy.
+
+Afterwards, keep the rest of the day simple: Kaiser Wilhelm Memorial Church, Ku'damm, Bikini Berlin, or dinner nearby. Do not bolt a major museum day onto the end unless your group is unusually energetic.
+
+### A good full day at Tierpark Berlin
+
+Arrive through the U5 Tierpark side and accept that the day will involve walking. Choose a route around the Rainforest House, Himalaya or Lemur Woods, then build in a proper pause.
+
+If you have children, leave time for the Day by the Sea playground in warm weather. If architecture interests you, include Schloss Friedrichsfelde instead of treating it as background scenery.
+
+The best Tierpark day ends calmly. Plan a quiet dinner or an easy ride back, not another big attraction across town.
+
+## Conservation and animal welfare
+
+Both parks are part of the same wider Zoo and Tierpark Berlin organization, and both connect their public work to species conservation. The official pages refer to the Berlin World Wild conservation programme, and the ticket pages note a voluntary conservation contribution.
+
+For a tourist decision, I would not choose between them based on vague claims like "more ethical" or "more important." That needs more than a quick visitor guide can responsibly prove. Choose based on the kind of day you want, then read the official conservation pages if that is central to your decision.
 
 ## Can you visit both on the same day?
 
-Technically, yes. Practically, no.
+Technically, yes. Practically, I would not.
 
-Zoo Berlin and Tierpark Berlin sit on different sides of the city. Even if the transport connection works, combining both turns the day into transit, ticket checks, tired walking, and rushed animal viewing.
+Zoo Berlin and Tierpark Berlin sit on different sides of the city. A double-zoo day sounds efficient on paper and tiring in real life: two ticket checks, transit across Berlin, repeated walking, and no real time to enjoy either place.
 
-Pick one. Spend the rest of the day doing something that supports the choice:
+Pick one. If you still have energy, use the surrounding area in a way that supports the choice:
 
-- After Zoo Berlin: Memorial Church, Ku'damm, Bikini Berlin, or a simple dinner nearby.
-- After Tierpark Berlin: a calm evening, not another giant attraction.
-- Before either one: check the official tickets page, then use the [Berlin public transport guide](https://www.berlinwalk.com/post/berlin-public-transport-2026) if you are unsure about zones, tickets, or U-Bahn/S-Bahn basics.
+- After Zoo Berlin: Memorial Church, Ku'damm, Bikini Berlin, or dinner in Charlottenburg.
+- After Tierpark Berlin: a calm evening, not another large attraction.
+- Before either one: check the official opening hours and use my [Berlin public transport guide](https://www.berlinwalk.com/post/berlin-public-transport-2026) if U-Bahn, S-Bahn, or ticket zones feel confusing.
 
-## My final recommendation
+## My final verdict
 
-If you are asking "Zoo Berlin vs Tierpark Berlin" because you only have room for one, choose based on your day shape:
+If this is your first Berlin trip and animals are only one part of your visit, choose **Zoo Berlin**. It is central, historic, easy to reach, and strong even when the weather is imperfect.
 
-- **First-time Berlin visitor:** Zoo Berlin.
-- **Bad weather:** Zoo Berlin + Aquarium.
-- **Full family park day:** Tierpark Berlin.
-- **Starting from west or central Berlin:** Zoo Berlin.
-- **Starting from east Berlin:** Tierpark Berlin.
-- **Travelling with a dog:** Tierpark Berlin.
+If you have a full day, want space, are staying east, or are travelling with children who need room rather than constant close-up viewing, choose **Tierpark Berlin**.
 
-The best choice is the one that leaves you with energy afterwards. Berlin already asks tourists to walk more than they expect. Do not turn an animal-park day into another forced march.
+The wrong move is not choosing the "lesser" zoo. The wrong move is choosing the wrong rhythm. Zoo Berlin is a concentrated city classic. Tierpark Berlin is a spacious landscape day. Match the park to your actual Berlin day, and the decision becomes much easier.
+
+If you want the city story before or after your animal-park day, my [2 hours BerlinWalk route from Alexanderplatz to Hackescher Markt](https://www.berlinwalk.com/berlin-walking-tour-route) gives you the historical centre first, then you can use a separate half-day or full day for the animal park that fits your pace.
 
 ## Image Credits
 
