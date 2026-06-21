@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'direct-intro-20260621';
+  const ASSET_BUILD = 'single-game-heading-20260621';
   const TOPIC_TITLES = {
     food: 'Berlin Food Battle',
     districts: 'Berlin District Battle',
@@ -85,15 +85,7 @@
       const heroAction = isDirectPlay
         ? ''
         : '<div class="bw-battle-actions"><a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a></div>';
-      const gameHead = isDirectPlay
-        ? ''
-        : `<div class="bw-battle-game-head">
-            <div>
-              <p class="bw-battle-section-kicker">Play the game</p>
-              <h2>Pick one and start.</h2>
-            </div>
-            <p>Choose a battle, compare the cards, and keep going until one Berlin favorite wins.</p>
-          </div>`;
+      const gameHead = '';
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="${pageClass}" aria-labelledby="bw-battle-title">
