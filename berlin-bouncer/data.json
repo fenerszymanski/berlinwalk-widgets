@@ -6,16 +6,18 @@
   "questions": [
     {
       "id": "outfit",
+      "viewType": "cards",
       "question": "First, choose your outfit for the night.",
       "options": [
-        { "id": "black", "text": "All black, subtle, comfortable.", "score": 4 },
-        { "id": "rave", "text": "Neon mesh, glitter, fishnets.", "score": -2 },
-        { "id": "casual", "text": "Jeans, sneakers, casual jacket.", "score": 0 },
-        { "id": "suit", "text": "A tailored suit.", "score": -10 }
+        { "id": "black", "text": "All black, subtle.", "image": "assets/outfit_black.png", "score": 4 },
+        { "id": "rave", "text": "Neon mesh, glitter.", "image": "assets/outfit_rave.png", "score": -2 },
+        { "id": "casual", "text": "Jeans, sneakers.", "image": "assets/outfit_casual.png", "score": 0 },
+        { "id": "suit", "text": "A tailored suit.", "image": "assets/outfit_suit.png", "score": -10 }
       ]
     },
     {
       "id": "group",
+      "bouncerState": "queue",
       "question": "How many people are you queuing with?",
       "options": [
         { "id": "solo", "text": "Just me.", "score": 5 },
@@ -26,6 +28,7 @@
     },
     {
       "id": "queue",
+      "bouncerState": "queue",
       "question": "You're in the queue. It's a 3-hour wait. What are you doing?",
       "options": [
         { "id": "selfie", "text": "Taking a selfie with the building.", "score": -100 },
@@ -35,6 +38,7 @@
     },
     {
       "id": "dj",
+      "bouncerState": "idle",
       "question": "You reach the front. The bouncer looks at you. 'Wer legt heute auf?' (Who's DJing?)",
       "options": [
         { "id": "klock", "text": "Ben Klock / Norman Nodge.", "score": 4 },
@@ -45,6 +49,7 @@
     },
     {
       "id": "reason",
+      "bouncerState": "suspicious",
       "question": "He nods slightly. 'Warum wollt ihr rein?' (Why do you want to come in?)",
       "options": [
         { "id": "tanzen", "text": "Wir wollen einfach tanzen.", "score": 4 },

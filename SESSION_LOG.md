@@ -1,3 +1,8 @@
+## 2026-06-21: Upgraded 'Can You Get Into Berghain?' to Visual Novel
+- Rebuilt `berlin-bouncer/index.html` to support full-screen background states and RPG-style dialogue typing.
+- Updated `data.json` to support visual outfit cards and dynamic bouncer states.
+- Generated and added 4 outfit images and 2 bouncer state images (idle, suspicious).
+
 ## 2026-06-21: Built 'Can You Get Into Berghain?' Widget
 - Created `berlin-bouncer` directory and game logic in `data.json` and `index.html`.
 - Generated glossy 3D icon and added to `tools-hub/data.json`.

@@ -26,6 +26,9 @@
     }
     #bw-bouncer-sim {
       background: var(--bw-green-dark);
+      background-size: cover;
+      background-position: center;
+      transition: background-image 0.5s ease-in-out;
       color: var(--bw-white);
       border-radius: 14px;
       overflow: hidden;
@@ -33,21 +36,20 @@
       margin: 12px auto;
       box-shadow: 0 16px 42px rgba(0, 0, 0, 0.4);
       position: relative;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
     }
     .bouncer-hero {
       background: linear-gradient(135deg, rgba(27, 94, 32, 0.8), rgba(18, 63, 22, 1));
       padding: 40px 20px;
       text-align: center;
-      position: relative;
-    }
-    .bouncer-hero::after {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: var(--bw-yellow);
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
     }
     .kicker {
       color: var(--bw-yellow);
@@ -56,7 +58,6 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 8px;
-      display: block;
     }
     h1 {
       font-size: clamp(28px, 5vw, 42px);
@@ -89,31 +90,50 @@
     }
     
     #game-container {
-      padding: 30px 20px;
       display: none;
-      min-height: 400px;
+      flex-grow: 1;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 20px;
+      background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, transparent 100%);
+    }
+    
+    /* Dialogue Box Style */
+    .dialogue-box {
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-left: 4px solid var(--bw-yellow);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(4px);
     }
     
     .question-title {
-      font-size: 22px;
-      font-weight: 800;
-      margin-bottom: 24px;
+      font-size: 20px;
+      font-weight: 700;
+      margin: 0;
       color: var(--bw-white);
-      text-align: center;
+      line-height: 1.4;
+      min-height: 56px;
     }
     
     .options-grid {
       display: grid;
       gap: 12px;
-      max-width: 600px;
-      margin: 0 auto;
+      width: 100%;
+    }
+    
+    .options-grid.cards-view {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
     }
     
     .option-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       color: var(--bw-white);
-      padding: 16px 20px;
+      padding: 14px 20px;
       border-radius: 8px;
       font-size: 15px;
       font-weight: 600;
@@ -121,23 +141,52 @@
       cursor: pointer;
       text-align: left;
       transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
     }
     
     .option-btn:hover {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: var(--bw-yellow);
+      transform: translateX(4px);
+    }
+    
+    .card-btn {
+      background: rgba(0,0,0,0.8);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .card-btn:hover {
+      transform: scale(1.02);
       border-color: var(--bw-yellow);
     }
     
+    .card-btn img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+    
+    .card-btn .card-label {
+      padding: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      text-align: center;
+      color: var(--bw-white);
+    }
+    
     .progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
       height: 4px;
-      background: rgba(255,255,255,0.1);
-      margin: 20px auto 0;
-      max-width: 600px;
-      border-radius: 2px;
-      overflow: hidden;
+      background: rgba(0,0,0,0.5);
+      z-index: 20;
       display: none;
     }
     .progress-fill {
@@ -151,10 +200,15 @@
       display: none;
       text-align: center;
       padding: 40px 20px;
+      background: rgba(0,0,0,0.85);
+      flex-grow: 1;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     
     .result-title {
-      font-size: 32px;
+      font-size: 38px;
       font-weight: 900;
       margin-bottom: 16px;
     }
@@ -166,15 +220,7 @@
       color: var(--bw-text-muted);
       margin-bottom: 30px;
       max-width: 500px;
-      margin-inline: auto;
-    }
-    
-    .result-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 8px;
-      margin-bottom: 24px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      line-height: 1.5;
     }
     
     .restart-btn {
@@ -195,6 +241,8 @@
 </head>
 <body>
   <main id="bw-bouncer-sim">
+    <div class="progress-bar" id="progress"><div class="progress-fill" id="progress-fill"></div></div>
+    
     <div id="start-screen" class="bouncer-hero">
       <span class="kicker">Playable Now</span>
       <h1>Can You Get Into Berghain?</h1>
@@ -202,15 +250,14 @@
       <button class="btn-start" onclick="startGame()">Try to get in</button>
     </div>
     
-    <div class="progress-bar" id="progress"><div class="progress-fill" id="progress-fill"></div></div>
-    
     <div id="game-container">
-      <div class="question-title" id="question-text">Loading...</div>
+      <div class="dialogue-box">
+        <p class="question-title" id="question-text"></p>
+      </div>
       <div class="options-grid" id="options-grid"></div>
     </div>
     
     <div id="result-container">
-      <img id="result-img" class="result-image" src="" alt="Result Image">
       <h2 class="result-title" id="result-title"></h2>
       <p class="result-msg" id="result-msg"></p>
       <button class="restart-btn" onclick="location.reload()">Try Again</button>
@@ -221,6 +268,7 @@
     let gameData = null;
     let currentQuestion = 0;
     let score = 0;
+    const simContainer = document.getElementById('bw-bouncer-sim');
 
     async function loadData() {
       try {
@@ -234,11 +282,41 @@
     function startGame() {
       if (!gameData) return;
       document.getElementById('start-screen').style.display = 'none';
-      document.getElementById('game-container').style.display = 'block';
+      document.getElementById('game-container').style.display = 'flex';
       document.getElementById('progress').style.display = 'block';
       showQuestion();
     }
     
+    // Typewriter effect
+    let typeTimeout;
+    function typeText(element, text, speed = 30) {
+      clearTimeout(typeTimeout);
+      element.textContent = '';
+      let i = 0;
+      function typeWriter() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          typeTimeout = setTimeout(typeWriter, speed);
+        }
+      }
+      typeWriter();
+    }
+    
+    function setBackground(state) {
+      if (state === 'idle' || state === 'queue') {
+        simContainer.style.backgroundImage = "url('assets/bouncer_idle.png')";
+      } else if (state === 'suspicious') {
+        simContainer.style.backgroundImage = "url('assets/bouncer_suspicious.png')";
+      } else if (state === 'success') {
+        simContainer.style.backgroundImage = "url('assets/success.png')";
+      } else if (state === 'fail') {
+        simContainer.style.backgroundImage = "url('assets/fail.png')";
+      } else {
+        simContainer.style.backgroundImage = "none";
+      }
+    }
+
     function showQuestion() {
       if (currentQuestion >= gameData.questions.length) {
         showResult();
@@ -246,18 +324,34 @@
       }
       
       const q = gameData.questions[currentQuestion];
-      document.getElementById('question-text').textContent = q.question;
+      
+      setBackground(q.bouncerState || 'none');
+      
+      const qTextEl = document.getElementById('question-text');
+      typeText(qTextEl, q.question);
       
       const grid = document.getElementById('options-grid');
       grid.innerHTML = '';
       
-      q.options.forEach(opt => {
-        const btn = document.createElement('button');
-        btn.className = 'option-btn';
-        btn.textContent = opt.text;
-        btn.onclick = () => selectOption(opt.score);
-        grid.appendChild(btn);
-      });
+      if (q.viewType === 'cards') {
+        grid.className = 'options-grid cards-view';
+        q.options.forEach(opt => {
+          const btn = document.createElement('div');
+          btn.className = 'card-btn';
+          btn.onclick = () => selectOption(opt.score);
+          btn.innerHTML = `<img src="${opt.image}" alt=""><div class="card-label">${opt.text}</div>`;
+          grid.appendChild(btn);
+        });
+      } else {
+        grid.className = 'options-grid';
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.className = 'option-btn';
+          btn.textContent = opt.text;
+          btn.onclick = () => selectOption(opt.score);
+          grid.appendChild(btn);
+        });
+      }
       
       updateProgress();
     }
@@ -265,7 +359,6 @@
     function selectOption(points) {
       score += points;
       
-      // Check for instant fail (-100)
       if (points <= -100) {
         showResult(true);
         return;
@@ -282,16 +375,16 @@
       const resContainer = document.getElementById('result-container');
       const titleEl = document.getElementById('result-title');
       const msgEl = document.getElementById('result-msg');
-      const imgEl = document.getElementById('result-img');
       
-      resContainer.style.display = 'block';
+      resContainer.style.display = 'flex';
       
       let isSuccess = score >= gameData.threshold;
       if (instantFail) isSuccess = false;
       
+      setBackground(isSuccess ? 'success' : 'fail');
+      
       const resData = isSuccess ? gameData.results.success : gameData.results.fail;
       
-      imgEl.src = resData.image;
       titleEl.textContent = resData.title;
       titleEl.className = 'result-title ' + (isSuccess ? 'success' : 'fail');
       msgEl.textContent = resData.message;
