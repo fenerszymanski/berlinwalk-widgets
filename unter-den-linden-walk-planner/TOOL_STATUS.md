@@ -1,23 +1,22 @@
 # Unter den Linden Walk Planner — BerlinTools Status
 
-Status on 2026-06-21: widget built locally and embedded in Wix Blog draft, but BerlinTools directory/CMS publication is blocked.
+Status on 2026-06-21: widget built locally, embedded in the live Wix Blog post, and wired as a BerlinTools CMS/tool entry after the dedicated icon was generated.
 
 ## Done
 
 - Standalone widget: `unter-den-linden-walk-planner/index.html`
 - Blog draft embed URL planned: `https://fenerszymanski.github.io/berlinwalk-widgets/unter-den-linden-walk-planner/?v=20260621a`
 - Local desktop/mobile QA: horizontal overflow `0`; interaction updates route and stop order.
-
-## Blocked Before BerlinTools Listing
-
-- Generate a dedicated glossy 3D BerlinTools icon through the approved ChatGPT browser workflow.
-- Save source prompt/output under `tools-home/icons/_src/chatgpt-standard-20260612/unter-den-linden-walk-planner/`.
-- Create canonical files:
+- Dedicated glossy ChatGPT-browser icon generated and saved under `tools-home/icons/_src/chatgpt-standard-20260612/unter-den-linden-walk-planner/`.
+- Canonical icon files created:
   - `tools-home/icons/unter-den-linden-walk-planner.png`
   - `tools-home/icons/unter-den-linden-walk-planner-160.png`
-- Upload icon to Wix Media.
-- Add the `tools-hub/data.json` entry with the real icon URL.
-- Insert the matching `BerlinTools` CMS row with `iconUrl`.
-- Update the BerlinTools layout icon embed.
+- Wix Media icon uploaded: `https://static.wixstatic.com/media/5a08a3_91cf605a75344015913164170f6734f6~mv2.png`
+- `tools-hub/data.json` entry added with real icon URL.
+- BerlinTools CMS row inserted: `b522fccc-ae6a-47e3-9709-93aa86a23ed2`.
+- BerlinTools layout icon embed updated to revision `28`.
 
-No placeholder, reused, locally drawn, or manually assembled icon was wired live.
+## Live URLs
+
+- Tool page: `https://www.berlinwalk.com/tools/unter-den-linden-walk-planner`
+- Widget: `https://fenerszymanski.github.io/berlinwalk-widgets/unter-den-linden-walk-planner/`
