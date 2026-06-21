@@ -188,6 +188,7 @@ const REQUIRED_SLUGS = [
   'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   'where-was-the-berlin-wall-interactive-map',
   'taxi-in-berlin',
+  'alternative-transport-berlin',
   'berlin-city-tax',
   'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way',
   'public-toilets-in-berlin',
@@ -446,6 +447,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(alternative-transport|alternative transport|mobility app|miles|car sharing|bike sharing|scooter)/.test(s)) return 'berlin-mobility-app-picker';
   if (/(zoo-berlin-vs-tierpark|tierpark|zoo berlin vs tierpark)/.test(s)) return '';
   if (/(with-kids|kids|family|families|children|playground|zoo|aquarium)/.test(s)) return 'berlin-family-day-planner';
   if (/(1237|founding|cölln|colln|medieval|nikolaiviertel|old-town|old town)/.test(s)) return 'medieval-berlin-mini-walk';

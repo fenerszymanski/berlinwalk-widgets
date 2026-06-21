@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-21T04:46:38.137Z",
+  "updatedAt": "2026-06-21T06:30:23.098Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 134,
+  "totalPosts": 135,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -431,6 +431,23 @@
           "relatedToolSlug": "transport-ticket-calculator"
         },
         {
+          "title": "Alternative Transport in Berlin: MILES, Scooters, Bikes and Ride Apps",
+          "slug": "alternative-transport-berlin",
+          "path": "/post/alternative-transport-berlin",
+          "url": "https://www.berlinwalk.com/post/alternative-transport-berlin",
+          "excerpt": "A practical tourist guide to Berlin mobility apps, MILES-style car sharing, e-scooters, bike sharing, taxi apps and the map tools that make them useful.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "10 min read",
+          "publishedDate": "2026-06-21T06:24:02.326Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
+          "alt": "Mobility Hub at Berlin Sudkreuz with shared scooters, bikes, mopeds and Jelbi signage",
+          "relatedToolSlug": "berlin-mobility-app-picker"
+        },
+        {
           "title": "Zoo Berlin vs Tierpark Berlin: The Ultimate Guide to Choosing Your Wild Day Out",
           "slug": "zoo-berlin-vs-tierpark-berlin",
           "path": "/post/zoo-berlin-vs-tierpark-berlin",
@@ -480,23 +497,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
           "alt": "The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day",
           "relatedToolSlug": ""
-        },
-        {
-          "title": "Tax Free Shopping in Berlin: VAT Refunds Explained for Tourists",
-          "slug": "tax-free-shopping-berlin-vat-refund",
-          "path": "/post/tax-free-shopping-berlin-vat-refund",
-          "url": "https://www.berlinwalk.com/post/tax-free-shopping-berlin-vat-refund",
-          "excerpt": "A clear guide to Tax Free shopping in Berlin: who is eligible, what counts, how much VAT is inside the price, what to ask at the shop, and what to do at BER Airport.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "8 min read",
-          "publishedDate": "2026-06-17T19:28:19.813Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg",
-          "alt": "The KaDeWe department store in Berlin, a classic shopping landmark where non-EU visitors may ask about Tax Free shopping",
-          "relatedToolSlug": "berlin-shopping-areas"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Alternative Transport in Berlin: MILES, Scooters, Bikes and Ride Apps",
+      "slug": "alternative-transport-berlin",
+      "path": "/post/alternative-transport-berlin",
+      "url": "https://www.berlinwalk.com/post/alternative-transport-berlin",
+      "excerpt": "A practical tourist guide to Berlin mobility apps, MILES-style car sharing, e-scooters, bike sharing, taxi apps and the map tools that make them useful.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "10 min read",
+      "publishedDate": "2026-06-21T06:24:02.326Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
+      "alt": "Mobility Hub at Berlin Sudkreuz with shared scooters, bikes, mopeds and Jelbi signage",
+      "relatedToolSlug": "berlin-mobility-app-picker"
+    },
+    {
       "title": "Unter den Linden Berlin: How to Walk the Grand Boulevard Without Missing the Point",
       "slug": "unter-den-linden-berlin",
       "path": "/post/unter-den-linden-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_36372d734f69376d56496b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Sunshine%20in%20bright%20bedroom%20in%20bungalow%20.jpg",
       "alt": "Berlin City Tax: What Tourists Pay on Hotels in 2026",
       "relatedToolSlug": "berlin-city-tax-calculator"
-    },
-    {
-      "title": "Pfand in Germany: Berlin Bottle Deposits Explained for Tourists",
-      "slug": "pfand-in-germany",
-      "path": "/post/pfand-in-germany",
-      "url": "https://www.berlinwalk.com/post/pfand-in-germany",
-      "excerpt": "A simple tourist guide to Pfand in Germany: how bottle deposits work in Berlin, what 25 cents means, where to return bottles, and what to do if the machine rejects them.",
-      "category": "German Language",
-      "categorySlug": "german-language",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-06-12T07:20:12.516Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2046e113f0d241cc8c0ad3214f8f5c81~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/pfandautomat-edeka.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2046e113f0d241cc8c0ad3214f8f5c81~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/pfandautomat-edeka.jpg",
-      "alt": "A bottle return machine at an Edeka supermarket in Berlin, where tourists can return Pfand bottles and cans",
-      "relatedToolSlug": "berlin-pfand-calculator"
     }
   ],
   "allPosts": [
+    {
+      "title": "Alternative Transport in Berlin: MILES, Scooters, Bikes and Ride Apps",
+      "slug": "alternative-transport-berlin",
+      "path": "/post/alternative-transport-berlin",
+      "url": "https://www.berlinwalk.com/post/alternative-transport-berlin",
+      "excerpt": "A practical tourist guide to Berlin mobility apps, MILES-style car sharing, e-scooters, bike sharing, taxi apps and the map tools that make them useful.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "10 min read",
+      "publishedDate": "2026-06-21T06:24:02.326Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
+      "alt": "Mobility Hub at Berlin Sudkreuz with shared scooters, bikes, mopeds and Jelbi signage",
+      "relatedToolSlug": "berlin-mobility-app-picker"
+    },
     {
       "title": "Unter den Linden Berlin: How to Walk the Grand Boulevard Without Missing the Point",
       "slug": "unter-den-linden-berlin",
