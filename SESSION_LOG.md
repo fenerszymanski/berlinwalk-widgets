@@ -1,3 +1,7 @@
+## 2026-06-21 — Codex (World Cup fixtures evening score)
+
+**Did:** World Cup fixtures widget için Berlin saati 21:36 skor kontrolünde 1 yeni final skor eklendi: Spain 4-0 Saudi Arabia. **Changed:** `worldcup-fixtures/index.html` içindeki Spain-Saudi Arabia `M` satırı 8 alanlı `FT` satıra çevrildi; `SCORE_UPDATED` `21 Jun 2026, 21:36 CEST` yapıldı. Başka fixture zamanı, takım adı, filtre, stil, Wix, CMS, canlı site, reklam, booking veya root `PROJECT_MEMORY.md` değişmedi. **QA:** Due gate yalnız Spain-Saudi Arabia maçını buldu. FIFA match-centre açıldı ama shell/readback içinde açık final-score metni expose etmedi; Guardian, Yahoo Sports, Flashscore ve AS final skoru 4-0 olarak tutarlı destekledi. Inline JS parse smoke 72 maç / 37 skorlu satır / malformed `0` geçti; Playwright desktop ve 390px mobilde `.bw-match.final` = 37, horizontal overflow `0`, updated etiketi ve Spain-Saudi Arabia final satırı görünür; sadece lokal favicon 404 console noise; `git -C berlinwalk-widgets diff --check` temiz. **Opened:** Live GitHub Pages için push/deploy gerekiyor. **Closed:** 21 Haziran akşam skoru yerel widget kaynak dosyasında güncel.
+
 ## 2026-06-21: Upgraded 'Can You Get Into Berghain?' to Visual Novel
 - Rebuilt `berlin-bouncer/index.html` to support full-screen background states and RPG-style dialogue typing.
 - Updated `data.json` to support visual outfit cards and dynamic bouncer states.
