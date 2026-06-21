@@ -125,7 +125,8 @@
   "tax-free-shopping-berlin-vat-refund": "tax-free-shopping-berlin-vat-refund",
   "berlin-heatwave-day-plan": "berlin-heatwave-day-plan",
   "too-hot-in-berlin": "berlin-heatwave-day-plan",
-  "zoo-berlin-vs-tierpark-berlin": "zoo-berlin-vs-tierpark-berlin"
+  "zoo-berlin-vs-tierpark-berlin": "zoo-berlin-vs-tierpark-berlin",
+  "unter-den-linden-berlin": "unter-den-linden-berlin"
 };
 
   var SCHEMAS = {
@@ -5985,6 +5986,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. BerlinWalk is a historic city-centre walking tour from Alexanderplatz to Hackescher Markt, lasting about 2 hours. This guide helps you choose a separate animal-park day before or after your main sightseeing."
+        }
+      }
+    ]
+  },
+  "unter-den-linden-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Unter den Linden Berlin worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Unter den Linden Berlin is one of the easiest first-visit walks because it connects Brandenburg Gate, Bebelplatz, Humboldt University, Neue Wache, the Zeughaus, Schlossbruecke, the Humboldt Forum and Museum Island in one straight line."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take to walk Unter den Linden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The boulevard is about 1.5 km long. You can cross it in 20 to 25 minutes, but a useful tourist walk takes 60 to 90 minutes with photos, Bebelplatz, Neue Wache and Museum Island pauses."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which direction is better: Brandenburg Gate to Museum Island or the other way?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most first-time visitors, start at Brandenburg Gate and walk east toward Museum Island if you want the grand symbolic entrance first. Start at Museum Island and walk west if you want the story to build from old Berlin and Prussian culture toward the gate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What U-Bahn stations are useful for Unter den Linden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The U5 is the useful line. Use Brandenburger Tor for the western end, Unter den Linden for the Friedrichstrasse crossing, and Museumsinsel for the eastern end near Museum Island and the Humboldt Forum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I not miss on Unter den Linden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Do not miss Bebelplatz, Humboldt University, Neue Wache, the Zeughaus/German Historical Museum exterior, Schlossbruecke, and the view toward Museum Island. These stops turn the street from a pretty boulevard into a compact Berlin history lesson."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the BerlinWalk tour cover Unter den Linden?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The BerlinWalk route starts at Alexanderplatz and focuses on the historic centre toward Hackescher Markt, so Unter den Linden is best added before or after. The walking tour lasts about 2 hours and gives useful context for Museum Island, old Berlin and the city layers around the boulevard."
         }
       }
     ]
