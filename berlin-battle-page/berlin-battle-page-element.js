@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'fast-play-20260621';
+  const ASSET_BUILD = 'direct-intro-20260621';
   const TOPIC_TITLES = {
     food: 'Berlin Food Battle',
     districts: 'Berlin District Battle',
@@ -78,9 +78,9 @@
       const directTopicId = this._directTopicId();
       const isDirectPlay = Boolean(directTopicId);
       const pageClass = isDirectPlay ? 'bw-battle-page bw-battle-page-direct' : 'bw-battle-page';
-      const heroTitle = isDirectPlay ? TOPIC_TITLES[directTopicId] : 'Berlin Battle';
+      const heroTitle = isDirectPlay ? 'Pick your Berlin winner' : 'Berlin Battle';
       const heroLead = isDirectPlay
-        ? 'Tap one card. Keep choosing until Berlin gives you a winner.'
+        ? 'Your first match is ready below. Tap one card and keep choosing until one Berlin favorite wins.'
         : 'Pick between Berlin food, districts, transport, clubs, parks, lines and nights. Get a personal winner, then meet the real city on the walking route.';
       const heroAction = isDirectPlay
         ? ''
@@ -384,8 +384,8 @@
         }
 
         .bw-battle-page-direct .bw-battle-hero h1 {
-          font-size: clamp(28px, 4.2vw, 50px);
-          line-height: 0.98;
+          font-size: clamp(22px, 3vw, 34px);
+          line-height: 1.02;
           max-width: 980px;
         }
 
@@ -463,7 +463,7 @@
           }
 
           .bw-battle-page-direct .bw-battle-hero h1 {
-            font-size: clamp(24px, 7vw, 32px);
+            font-size: clamp(20px, 6vw, 28px);
           }
 
           .bw-battle-page-direct .bw-battle-lead {
