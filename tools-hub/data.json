@@ -563,6 +563,7 @@
       "hubCategory": "Essentials",
       "type": "Map",
       "priority": 11,
+      "featured": true,
       "tags": [
         "luggage",
         "storage",
@@ -815,7 +816,6 @@
       "hubCategory": "TripPlans",
       "type": "Planner",
       "priority": 1,
-      "featured": true,
       "tags": [
         "trip planner",
         "itinerary",
