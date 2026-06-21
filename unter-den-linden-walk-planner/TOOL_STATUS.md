@@ -15,6 +15,9 @@ Status on 2026-06-21: widget built locally, embedded in the live Wix Blog post, 
 - `tools-hub/data.json` entry added with real icon URL.
 - BerlinTools CMS row inserted: `b522fccc-ae6a-47e3-9709-93aa86a23ed2`.
 - BerlinTools layout icon embed updated to revision `28`.
+- GitHub Pages deploy for commit `0031921` completed successfully.
+- Live QA passed for `/tools/unter-den-linden-walk-planner`, `/berlin-tools`, and the direct widget URL with horizontal overflow `0` and no console warnings/errors.
+- Search Console UI indexing request submitted for `https://www.berlinwalk.com/tools/unter-den-linden-walk-planner`.
 
 ## Live URLs
 
