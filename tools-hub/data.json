@@ -965,6 +965,7 @@
       "hubCategory": "WeatherOutdoor",
       "type": "Map",
       "priority": 22,
+      "featured": true,
       "seasonal": true,
       "seasonStart": "2026-05-01",
       "seasonEnd": "2026-09-30",
@@ -1467,7 +1468,6 @@
       "hubCategory": "Transport",
       "type": "Planner",
       "priority": 3,
-      "featured": true,
       "tags": [
         "arrival",
         "station",
@@ -1522,7 +1522,6 @@
       "hubCategory": "Essentials",
       "type": "Planner",
       "priority": 2,
-      "featured": true,
       "tags": [
         "monday",
         "closed museums",
