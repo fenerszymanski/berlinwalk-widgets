@@ -1,6 +1,7 @@
 /* Auto-generated from /faq/data.json and /faq/slug-map.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
+  "alternative-transport-berlin": "alternative-transport-berlin",
   "berlin-night-transport": "berlin-night-transport",
   "best-day-trips-from-berlin": "best-day-trips-from-berlin",
   "east-side-gallery-berlin-guide": "east-side-gallery",
@@ -6040,6 +6041,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The BerlinWalk route starts at Alexanderplatz and focuses on the historic centre toward Hackescher Markt, so Unter den Linden is best added before or after. The walking tour lasts about 2 hours and gives useful context for Museum Island, old Berlin and the city layers around the boulevard."
+        }
+      }
+    ]
+  },
+  "alternative-transport-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best alternative transport app in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most visitors, start with Jelbi or BVG. Jelbi is useful because it combines Berlin public transport with sharing options such as bikes, e-scooters, cars, e-mopeds and taxis. BVG or VBB are still the cleanest choices for normal public transport routing."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is MILES good for tourists in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MILES can be useful if you genuinely need a car, are comfortable driving in Berlin, and understand the business area and parking rules. It is not a casual replacement for a taxi or the best choice for central sightseeing around Alexanderplatz, Museum Island or Brandenburg Gate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can tourists ride e-scooters on sidewalks in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. E-scooters are not allowed on sidewalks or pedestrian zones unless a sign explicitly permits them. Use cycling infrastructure where available, otherwise the road. If that route feels unsafe, choose public transport, walking, a bike or a taxi instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are rental bikes better than scooters in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Often yes. For sunny 2 to 5 km trips without luggage, a bike or e-bike is usually steadier and more pleasant than a scooter. Scooters are better only for short, simple, dry and solo last-mile hops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Uber work in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Uber works in Berlin as a way to request local taxis and see app prices, but it should be treated as a taxi app rather than an automatic bargain. Compare it with a normal taxi rank, Taxi Berlin, Free Now, Bolt Taxi or public transport when the route is easy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I use to reach the BerlinWalk tour start?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use public transport or walk. The BerlinWalk tour starts at the World Clock on Alexanderplatz and ends near Hackescher Markt, both central and well connected. The tour lasts about 2 hours, so a car is rarely useful for the tour itself."
         }
       }
     ]

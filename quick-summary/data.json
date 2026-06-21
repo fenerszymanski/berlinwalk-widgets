@@ -1638,5 +1638,18 @@
       "**Use U5 if you need a shortcut:** Brandenburger Tor, Unter den Linden and Museumsinsel stations let you start, split or rescue the walk without losing the main line.",
       "**The mistake is treating it as only pretty architecture.** The boulevard works best when you read it as Prussian power, Nazi rupture, GDR rebuilding and reunited Berlin on one street."
     ]
+  },
+  "alternative-transport-berlin": {
+    "title": "Alternative Transport in Berlin - Quick Summary",
+    "icon": "🚲",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**Public transport is still the default** for most Berlin sightseeing, but Jelbi helps you compare buses, trains, bikes, scooters, cars and taxis in one Berlin-specific mobility layer.",
+      "**MILES-style car sharing is useful for planned car needs,** not casual central sightseeing. You still have to drive, park legally and end the rental inside the allowed area.",
+      "**E-scooters are only for short, simple, sober hops** with no luggage and a legal bike-lane or road route. They are not allowed on sidewalks or pedestrian zones.",
+      "**Bike sharing is often better than scooters** for sunny 2 to 5 km trips if you are comfortable cycling in city traffic.",
+      "**Taxi and Uber-style apps are backup tools** for luggage, bad weather, late-night fatigue, awkward final legs and groups splitting the fare.",
+      "**The best app setup is small:** BVG or Jelbi, a map app, one bike/scooter app if you ride, and one taxi app for backup."
+    ]
   }
 }
