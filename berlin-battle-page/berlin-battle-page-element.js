@@ -5,7 +5,19 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'unique-topic-covers-20260619';
+  const ASSET_BUILD = 'fast-play-20260621';
+  const TOPIC_TITLES = {
+    food: 'Berlin Food Battle',
+    districts: 'Berlin District Battle',
+    museums: 'Berlin Museum Battle',
+    clubs: 'Berlin Night Battle',
+    transport: 'Berlin Transport Battle',
+    'techno-clubs': 'Berlin Techno Club Battle',
+    'doner-shops': 'D&ouml;ner Shops Battle',
+    'currywurst-shops': 'Currywurst Shops Battle',
+    'parks-lakes': 'Berlin Park &amp; Lakes Battle',
+    'ubahn-sbahn-lines': 'Berlin U-Bahn &amp; S-Bahn Lines Battle',
+  };
 
   function ensureFont() {
     if (document.querySelector('link[data-bw-battle-page-font]')) return;
@@ -56,32 +68,49 @@
       return url.toString();
     }
 
+    _directTopicId() {
+      const current = new URLSearchParams(window.location.search || '');
+      const topic = (current.get('topic') || '').replace(/[^a-z0-9_-]/gi, '');
+      return TOPIC_TITLES[topic] ? topic : '';
+    }
+
     _render() {
+      const directTopicId = this._directTopicId();
+      const isDirectPlay = Boolean(directTopicId);
+      const pageClass = isDirectPlay ? 'bw-battle-page bw-battle-page-direct' : 'bw-battle-page';
+      const heroTitle = isDirectPlay ? TOPIC_TITLES[directTopicId] : 'Berlin Battle';
+      const heroLead = isDirectPlay
+        ? 'Tap one card. Keep choosing until Berlin gives you a winner.'
+        : 'Pick between Berlin food, districts, transport, clubs, parks, lines and nights. Get a personal winner, then meet the real city on the walking route.';
+      const heroAction = isDirectPlay
+        ? ''
+        : '<div class="bw-battle-actions"><a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a></div>';
+      const gameHead = isDirectPlay
+        ? ''
+        : `<div class="bw-battle-game-head">
+            <div>
+              <p class="bw-battle-section-kicker">Play the game</p>
+              <h2>Pick one and start.</h2>
+            </div>
+            <p>Choose a battle, compare the cards, and keep going until one Berlin favorite wins.</p>
+          </div>`;
       this.innerHTML = `
         <style>${this._styles()}</style>
-        <main class="bw-battle-page" aria-labelledby="bw-battle-title">
+        <main class="${pageClass}" aria-labelledby="bw-battle-title">
           <section class="bw-battle-hero">
             <div class="bw-battle-inner bw-battle-hero-inner">
               <div class="bw-battle-hero-copy">
                 <p class="bw-battle-kicker">BerlinWalk game</p>
-                <h1 id="bw-battle-title">Berlin Battle</h1>
-                <p class="bw-battle-lead">Pick between Berlin food, districts, transport, clubs, parks, lines and nights. Get a personal winner, then meet the real city on the walking route.</p>
-                <div class="bw-battle-actions">
-                  <a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a>
-                </div>
+                <h1 id="bw-battle-title">${heroTitle}</h1>
+                <p class="bw-battle-lead">${heroLead}</p>
+                ${heroAction}
               </div>
             </div>
           </section>
 
           <section class="bw-battle-game-band" id="battle-game" aria-label="Berlin Battle game">
             <div class="bw-battle-inner">
-              <div class="bw-battle-game-head">
-                <div>
-                  <p class="bw-battle-section-kicker">Play the game</p>
-                  <h2>Pick your Berlin mood.</h2>
-                </div>
-                <p>Choose a battle, compare the cards, and keep going until one Berlin favorite wins.</p>
-              </div>
+              ${gameHead}
               <div class="bw-battle-game-shell">
                 <iframe
                   data-bw-battle-frame
@@ -330,6 +359,51 @@
           width: 100%;
         }
 
+        .bw-battle-page-direct .bw-battle-hero {
+          border-bottom: 1px solid var(--bw-border);
+          padding: 16px 0 12px;
+        }
+
+        .bw-battle-page-direct .bw-battle-hero::before {
+          background:
+            linear-gradient(90deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.08)),
+            var(--bw-cream);
+        }
+
+        .bw-battle-page-direct .bw-battle-hero-inner {
+          min-height: 0;
+        }
+
+        .bw-battle-page-direct .bw-battle-hero-copy {
+          max-width: 980px;
+        }
+
+        .bw-battle-page-direct .bw-battle-kicker {
+          font-size: 10px;
+          margin-bottom: 5px;
+        }
+
+        .bw-battle-page-direct .bw-battle-hero h1 {
+          font-size: clamp(28px, 4.2vw, 50px);
+          line-height: 0.98;
+          max-width: 980px;
+        }
+
+        .bw-battle-page-direct .bw-battle-lead {
+          font-size: clamp(13px, 1.6vw, 16px);
+          line-height: 1.35;
+          margin-top: 7px;
+          max-width: 760px;
+        }
+
+        .bw-battle-page-direct .bw-battle-game-band {
+          padding: 10px 0 clamp(24px, 4vw, 42px);
+        }
+
+        .bw-battle-page-direct .bw-battle-game-shell {
+          box-shadow: 0 10px 28px rgba(18, 63, 22, 0.11);
+        }
+
         .bw-battle-final {
           padding: 0 0 clamp(34px, 6vw, 70px);
         }
@@ -361,6 +435,10 @@
             padding-top: 42px;
           }
 
+          .bw-battle-page-direct .bw-battle-hero {
+            padding: 12px 0 10px;
+          }
+
           .bw-battle-game-head,
           .bw-battle-final-box {
             grid-template-columns: minmax(0, 1fr);
@@ -374,6 +452,26 @@
         @media (max-width: 520px) {
           .bw-battle-hero {
             padding-top: 34px;
+          }
+
+          .bw-battle-page-direct .bw-battle-inner {
+            width: min(100% - 16px, 1120px);
+          }
+
+          .bw-battle-page-direct .bw-battle-hero {
+            padding: 10px 0 8px;
+          }
+
+          .bw-battle-page-direct .bw-battle-hero h1 {
+            font-size: clamp(24px, 7vw, 32px);
+          }
+
+          .bw-battle-page-direct .bw-battle-lead {
+            font-size: 12px;
+          }
+
+          .bw-battle-page-direct .bw-battle-game-band {
+            padding-top: 8px;
           }
 
           .bw-battle-actions,

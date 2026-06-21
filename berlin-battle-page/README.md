@@ -6,12 +6,21 @@ Use on Wix:
 
 ```html
 <bw-berlin-battle-page></bw-berlin-battle-page>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-page/berlin-battle-page-element.js?v=unique-topic-covers-20260619"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-page/berlin-battle-page-element.js?v=fast-play-20260621"></script>
 ```
 
 The element renders a compact Berlin Battle page and embeds the standalone
 `berlin-battle/` game iframe with automatic `bw-resize` handling and the iframe
 permissions needed for the result share/copy actions.
+
+Fast-play campaign URL:
+
+```text
+https://www.berlinwalk.com/games/berlin-battle?topic=food&utm_source=instagram&utm_medium=story&utm_campaign=bw_berlin_battle_reels_jun2026&utm_content=link_sticker_food
+```
+
+When a valid `topic` query parameter is present, the wrapper switches to a
+short direct-play intro and the game iframe auto-starts that battle.
 
 Internal stats dashboard:
 
