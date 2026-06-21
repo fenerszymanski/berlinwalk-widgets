@@ -1,3 +1,8 @@
+## 2026-06-21: Built 'Can You Get Into Berghain?' Widget
+- Created `berlin-bouncer` directory and game logic in `data.json` and `index.html`.
+- Generated glossy 3D icon and added to `tools-hub/data.json`.
+- Generated success and fail images for the widget.
+
 # Session log
 
 Rolling log of agent sessions. Most recent at top.

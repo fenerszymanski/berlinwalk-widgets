@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Can You Get Into Berghain? | BerlinWalk</title>
+  <meta name="description" content="Test your Berlin clubbing instincts against the world's strictest door policy.">
+  <link rel="icon" href="../tools-home/icons/berlin-bouncer-160.png">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #123F16;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-white: #FFFFFF;
+      --bw-text-muted: #A5BCA5;
+      --bw-error: #E63946;
+    }
+    html, body {
+      background: transparent;
+      margin: 0;
+      padding: 0;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+    #bw-bouncer-sim {
+      background: var(--bw-green-dark);
+      color: var(--bw-white);
+      border-radius: 14px;
+      overflow: hidden;
+      max-width: 800px;
+      margin: 12px auto;
+      box-shadow: 0 16px 42px rgba(0, 0, 0, 0.4);
+      position: relative;
+    }
+    .bouncer-hero {
+      background: linear-gradient(135deg, rgba(27, 94, 32, 0.8), rgba(18, 63, 22, 1));
+      padding: 40px 20px;
+      text-align: center;
+      position: relative;
+    }
+    .bouncer-hero::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--bw-yellow);
+    }
+    .kicker {
+      color: var(--bw-yellow);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      display: block;
+    }
+    h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 900;
+      margin: 0 0 12px;
+      line-height: 1.1;
+    }
+    .lead-text {
+      color: var(--bw-text-muted);
+      font-size: 16px;
+      line-height: 1.5;
+      max-width: 500px;
+      margin: 0 auto 24px;
+    }
+    .btn-start {
+      background: var(--bw-yellow);
+      color: var(--bw-green-dark);
+      border: none;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: 800;
+      border-radius: 8px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .btn-start:hover {
+      transform: translateY(-2px);
+      background: #FFF04D;
+    }
+    
+    #game-container {
+      padding: 30px 20px;
+      display: none;
+      min-height: 400px;
+    }
+    
+    .question-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 24px;
+      color: var(--bw-white);
+      text-align: center;
+    }
+    
+    .options-grid {
+      display: grid;
+      gap: 12px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .option-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--bw-white);
+      padding: 16px 20px;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .option-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--bw-yellow);
+    }
+    
+    .progress-bar {
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      margin: 20px auto 0;
+      max-width: 600px;
+      border-radius: 2px;
+      overflow: hidden;
+      display: none;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--bw-lime);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    #result-container {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    
+    .result-title {
+      font-size: 32px;
+      font-weight: 900;
+      margin-bottom: 16px;
+    }
+    .result-title.success { color: var(--bw-lime); }
+    .result-title.fail { color: var(--bw-error); }
+    
+    .result-msg {
+      font-size: 18px;
+      color: var(--bw-text-muted);
+      margin-bottom: 30px;
+      max-width: 500px;
+      margin-inline: auto;
+    }
+    
+    .result-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+    
+    .restart-btn {
+      background: transparent;
+      border: 2px solid var(--bw-white);
+      color: var(--bw-white);
+      padding: 12px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    .restart-btn:hover {
+      background: rgba(255,255,255,0.1);
+    }
+  </style>
+</head>
+<body>
+  <main id="bw-bouncer-sim">
+    <div id="start-screen" class="bouncer-hero">
+      <span class="kicker">Playable Now</span>
+      <h1>Can You Get Into Berghain?</h1>
+      <p class="lead-text">Test your Berlin clubbing instincts against the world's strictest door policy. Make your choices and see if you make it past the bouncer.</p>
+      <button class="btn-start" onclick="startGame()">Try to get in</button>
+    </div>
+    
+    <div class="progress-bar" id="progress"><div class="progress-fill" id="progress-fill"></div></div>
+    
+    <div id="game-container">
+      <div class="question-title" id="question-text">Loading...</div>
+      <div class="options-grid" id="options-grid"></div>
+    </div>
+    
+    <div id="result-container">
+      <img id="result-img" class="result-image" src="" alt="Result Image">
+      <h2 class="result-title" id="result-title"></h2>
+      <p class="result-msg" id="result-msg"></p>
+      <button class="restart-btn" onclick="location.reload()">Try Again</button>
+    </div>
+  </main>
+
+  <script>
+    let gameData = null;
+    let currentQuestion = 0;
+    let score = 0;
+
+    async function loadData() {
+      try {
+        const response = await fetch('data.json');
+        gameData = await response.json();
+      } catch (err) {
+        console.error("Failed to load game data:", err);
+      }
+    }
+    
+    function startGame() {
+      if (!gameData) return;
+      document.getElementById('start-screen').style.display = 'none';
+      document.getElementById('game-container').style.display = 'block';
+      document.getElementById('progress').style.display = 'block';
+      showQuestion();
+    }
+    
+    function showQuestion() {
+      if (currentQuestion >= gameData.questions.length) {
+        showResult();
+        return;
+      }
+      
+      const q = gameData.questions[currentQuestion];
+      document.getElementById('question-text').textContent = q.question;
+      
+      const grid = document.getElementById('options-grid');
+      grid.innerHTML = '';
+      
+      q.options.forEach(opt => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => selectOption(opt.score);
+        grid.appendChild(btn);
+      });
+      
+      updateProgress();
+    }
+    
+    function selectOption(points) {
+      score += points;
+      
+      // Check for instant fail (-100)
+      if (points <= -100) {
+        showResult(true);
+        return;
+      }
+      
+      currentQuestion++;
+      showQuestion();
+    }
+    
+    function showResult(instantFail = false) {
+      document.getElementById('game-container').style.display = 'none';
+      document.getElementById('progress').style.display = 'none';
+      
+      const resContainer = document.getElementById('result-container');
+      const titleEl = document.getElementById('result-title');
+      const msgEl = document.getElementById('result-msg');
+      const imgEl = document.getElementById('result-img');
+      
+      resContainer.style.display = 'block';
+      
+      let isSuccess = score >= gameData.threshold;
+      if (instantFail) isSuccess = false;
+      
+      const resData = isSuccess ? gameData.results.success : gameData.results.fail;
+      
+      imgEl.src = resData.image;
+      titleEl.textContent = resData.title;
+      titleEl.className = 'result-title ' + (isSuccess ? 'success' : 'fail');
+      msgEl.textContent = resData.message;
+    }
+    
+    function updateProgress() {
+      const pct = (currentQuestion / gameData.questions.length) * 100;
+      document.getElementById('progress-fill').style.width = pct + '%';
+    }
+
+    // Init
+    loadData();
+  </script>
+</body>
+</html>

@@ -39,6 +39,29 @@
   ],
   "tools": [
     {
+      "slug": "berlin-bouncer",
+      "title": "Can You Get Into Berghain?",
+      "lead": "Test your Berlin clubbing instincts against the world's strictest door policy.",
+      "category": "Discovery",
+      "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-bouncer-160.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bouncer/",
+      "embedHeight": 760,
+      "hubCategory": "FoodNightlife",
+      "type": "Game",
+      "priority": 15,
+      "tags": [
+        "game",
+        "club",
+        "berghain",
+        "nightlife",
+        "simulator"
+      ],
+      "aliases": [
+        "bouncer simulator",
+        "door policy"
+      ]
+    },
+    {
       "slug": "spati-survival-checker",
       "title": "Späti Survival Checker",
       "lead": "Not sure if a Berlin Späti solves your problem? Check whether you need a Späti, station shop, pharmacy, toilet finder, or supermarket.",
