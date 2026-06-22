@@ -43,6 +43,7 @@ const TOPICS = [
     kicker: 'Useful now',
     description: 'Clear answers for transport, money, luggage, safety, weather, and planning decisions visitors actually search for.',
     slugs: [
+      'pharmacy-in-berlin',
       'where-to-watch-2026-world-cup-in-berlin',
       'best-day-trips-from-berlin',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',

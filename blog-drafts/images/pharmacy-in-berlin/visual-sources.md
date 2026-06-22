@@ -11,7 +11,7 @@ No paid image-generation API/CLI was used. No AI-generated article visuals were 
 ## Final Images
 
 1. `03-berlin-apotheke-oranienburger-tor.jpg`
-   - Role: cover / featured image.
+   - Role: inline image for the short-answer section.
    - Source: https://commons.wikimedia.org/wiki/File:Berlin_Apotheke_Oranienburger_Tor.JPG
    - Direct file: https://upload.wikimedia.org/wikipedia/commons/5/59/Berlin_Apotheke_Oranienburger_Tor.JPG
    - Author: Saalebaer.
@@ -19,7 +19,16 @@ No paid image-generation API/CLI was used. No AI-generated article visuals were 
    - Rationale: strongest editorial cover from the final set; clearly Berlin street context, visible red pharmacy signs, readable at card crop.
    - Alt text: `Berlin Apotheke Oranienburger Tor with red pharmacy signs on Friedrichstrasse in Berlin Mitte`
 
-2. `02-apotheke-am-leipziger-platz.jpg`
+2. `05-alexa-apotheke-berlin.jpg`
+   - Role: cover / featured image.
+   - Source: https://commons.wikimedia.org/wiki/File:Alexa-Apotheke_Berlin.JPG
+   - Direct file: https://upload.wikimedia.org/wikipedia/commons/0/0d/Alexa-Apotheke_Berlin.JPG
+   - Author: Saalebaer.
+   - License: CC0 1.0 public domain dedication.
+   - Rationale: strongest editorial featured image from the final set after post-publish review; clean indoor pharmacy context, illuminated red/green signage, stronger 16:9 cover crop and less random street-documentation feeling.
+   - Alt text: `Alexa Apotheke pharmacy in Berlin with illuminated red and green signage`
+
+3. `02-apotheke-am-leipziger-platz.jpg`
    - Role: inline image for normal pharmacy opening-hours section.
    - Source: https://commons.wikimedia.org/wiki/File:Apotheke_am_Leipziger_Platz_in_Berlin.JPG
    - Direct file: https://upload.wikimedia.org/wikipedia/commons/3/3b/Apotheke_am_Leipziger_Platz_in_Berlin.JPG
@@ -28,7 +37,7 @@ No paid image-generation API/CLI was used. No AI-generated article visuals were 
    - Rationale: clean modern pharmacy storefront near central visitor routes; uncluttered and easy to understand.
    - Alt text: `Apotheke am Leipziger Platz pharmacy storefront in central Berlin`
 
-3. `04-wilhelm-voigt-apotheke-koepenick.jpg`
+4. `04-wilhelm-voigt-apotheke-koepenick.jpg`
    - Role: inline image for emergency/daily practical pharmacy section.
    - Source: https://commons.wikimedia.org/wiki/File:Wilhelm-Voigt-Apotheke_in_Berlin-K%C3%B6penick.JPG
    - Direct file: https://upload.wikimedia.org/wikipedia/commons/9/95/Wilhelm-Voigt-Apotheke_in_Berlin-K%C3%B6penick.JPG
@@ -36,15 +45,6 @@ No paid image-generation API/CLI was used. No AI-generated article visuals were 
    - License: CC0 1.0 public domain dedication.
    - Rationale: bright pharmacy-in-station/mall style view; useful contrast to street-front Apotheke.
    - Alt text: `Wilhelm Voigt Apotheke pharmacy entrance inside a Berlin shopping area`
-
-4. `05-alexa-apotheke-berlin.jpg`
-   - Role: inline image for practical tourist search and station/mall context.
-   - Source: https://commons.wikimedia.org/wiki/File:Alexa-Apotheke_Berlin.JPG
-   - Direct file: https://upload.wikimedia.org/wikipedia/commons/0/0d/Alexa-Apotheke_Berlin.JPG
-   - Author: Saalebaer.
-   - License: CC0 1.0 public domain dedication.
-   - Rationale: visually strong indoor pharmacy sign in a recognizable tourist shopping context near Alexanderplatz.
-   - Alt text: `Alexa Apotheke pharmacy in Berlin with illuminated red and green signage`
 
 5. `01-wilhelm-busch-apotheke-neukoelln.jpg`
    - Role: inline image for neighborhood Apotheke explanation.
@@ -64,7 +64,7 @@ No paid image-generation API/CLI was used. No AI-generated article visuals were 
 
 ## Quality Notes
 
-- Cover chosen from contact-sheet crop, not only full-size inspection.
+- Cover changed post-publish from the street-corner Oranienburger Tor image to the cleaner Alexa Apotheke image after Yusuf set the new editorial featured-image rule.
 - Rejected weak/generic health-stock imagery because the post needs instantly understandable Berlin pharmacy context.
 - No protest/event-specific pharmacy images were used.
 - Attribution block included in public body because Wikimedia image credits should be transparent even when CC0 does not legally require attribution.
