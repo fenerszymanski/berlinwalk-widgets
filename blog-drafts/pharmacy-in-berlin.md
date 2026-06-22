@@ -18,6 +18,7 @@
   2. Notdienst Search Shortcut Card - useful, but too close to a static link list and not strong enough as a Berlin Tool.
   3. Medicine Packing Checklist - helpful before travel, but weaker for in-city urgent search intent.
 - Selected widget: `pharmacy-in-berlin-helper`, public title `Berlin Pharmacy Help Picker`
+- Follow-up supporting map widget: `pharmacy-in-berlin-map`, public title `Berlin Pharmacy Map Launcher`; this is a live-search launcher, not a static emergency pharmacy roster.
 - Quick Summary key: `pharmacy-in-berlin`
 - FAQ key: `pharmacy-in-berlin`
 
