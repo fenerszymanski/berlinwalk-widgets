@@ -1,3 +1,20 @@
+## 2026-06-22: UI Tweaks for 'Can You Get Into Berghain?'
+- Generated a realistic Berghain exterior image and set it as the background for the Start Screen.
+- Added a 'Share Result' button to the End Screen utilizing the Web Share API (with clipboard fallback).
+
+## 2026-06-22 — Codex (Pharmacy map render fix)
+
+**Did:** Fixed live tile/render issue in `pharmacy-in-berlin-map/` after the Wix post showed the Leaflet map collapsed into a corner.
+
+**Changed:** Removed bad Leaflet CDN SRI attributes, added scoped Leaflet positioning fallback CSS, and added repeated `invalidateSize()`/parent resize calls for Wix iframe timing. Commit `9eda270` was pushed before this log-only update. Root Wix patch republished `pharmacy-in-berlin` with all widget embeds bumped to `?v=20260622c`.
+
+**QA:** Direct live widget QA passed: pane `absolute`, 12 tiles/12 distinct positions, 9 markers, active marker `1`, overflow `0`. Live Wix post desktop QA passed with map iframe `v=20260622c`, 9 tiles/9 markers inside the frame, overflow `0`; 390px mobile had no old embed and no horizontal overflow.
+
+## 2026-06-22: Added Audio and Deep Gameplay to 'Can You Get Into Berghain?'
+- Generated German voice lines using ElevenLabs API and added a synthesized techno loop.
+- Updated `index.html` to handle Web Audio API playback for BGM and voices.
+- Updated `data.json` to feature randomized question pools and 4 multiple endings (VIP, Success, Fail, Shame).
+
 ## 2026-06-22 — Codex (World Cup fixtures morning scores)
 
 **Did:** World Cup fixtures widget için Berlin saati 08:32 skor kontrolünde 3 yeni final skor eklendi: Uruguay 2-2 Cape Verde, Belgium 0-0 Iran ve New Zealand 1-3 Egypt. **Changed:** `worldcup-fixtures/index.html` içindeki üç due `M` satırı 8 alanlı `FT` satıra çevrildi; `SCORE_UPDATED` `22 Jun 2026, 08:32 CEST` yapıldı. Başka fixture zamanı, takım adı, filtre, stil, Wix, CMS, canlı site, reklam, booking veya root `PROJECT_MEMORY.md` değişmedi. **QA:** Due gate yalnız Uruguay-Cape Verde, Belgium-Iran ve New Zealand-Egypt maçlarını buldu. FIFA match-centre kontrol edildi ama shell/readback içinde tüm final skorlar açık expose olmadı; ESPN, Guardian ve diğer dated spor/news kaynakları skorlarla tutarlıydı. Inline JS parse smoke 72 maç / 40 skorlu satır / malformed `0` geçti; Playwright desktop ve 390px mobilde `.bw-match.final` = 40, horizontal overflow `0`, updated etiketi ve üç yeni final satırı görünür; console error/warning `0`; `git diff --check` temiz. **Opened:** Live GitHub Pages için push/deploy gerekiyor. **Closed:** 22 Haziran sabah skorları yerel widget kaynak dosyasında güncel.

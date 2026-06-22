@@ -41,7 +41,9 @@
       flex-direction: column;
     }
     .bouncer-hero {
-      background: linear-gradient(135deg, rgba(27, 94, 32, 0.8), rgba(18, 63, 22, 1));
+      background: linear-gradient(135deg, rgba(27, 94, 32, 0.8), rgba(18, 63, 22, 0.95)), url('assets/berghain_exterior.png');
+      background-size: cover;
+      background-position: center;
       padding: 40px 20px;
       text-align: center;
       flex-grow: 1;
@@ -237,6 +239,22 @@
     .restart-btn:hover {
       background: rgba(255,255,255,0.1);
     }
+    
+    .share-btn {
+      background: var(--bw-yellow);
+      color: var(--bw-green-dark);
+      border-color: var(--bw-yellow);
+    }
+    .share-btn:hover {
+      background: #FFF04D;
+    }
+    
+    .action-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
   </style>
 </head>
 <body>
@@ -260,14 +278,20 @@
     <div id="result-container">
       <h2 class="result-title" id="result-title"></h2>
       <p class="result-msg" id="result-msg"></p>
-      <button class="restart-btn" onclick="location.reload()">Try Again</button>
+      <div class="action-row">
+        <button class="restart-btn share-btn" onclick="shareResult()">Share Result</button>
+        <button class="restart-btn" onclick="location.reload()">Try Again</button>
+      </div>
     </div>
   </main>
 
   <script>
     let gameData = null;
-    let currentQuestion = 0;
+    let currentPhaseIndex = 0;
     let score = 0;
+    let bgmAudio = null;
+    let currentVoiceAudio = null;
+    
     const simContainer = document.getElementById('bw-bouncer-sim');
 
     async function loadData() {
@@ -281,10 +305,17 @@
     
     function startGame() {
       if (!gameData) return;
+      
+      // Start Background Music
+      bgmAudio = new Audio('assets/audio/techno_loop.wav');
+      bgmAudio.loop = true;
+      bgmAudio.volume = 0.4;
+      bgmAudio.play().catch(e => console.log("Audio play blocked by browser:", e));
+      
       document.getElementById('start-screen').style.display = 'none';
       document.getElementById('game-container').style.display = 'flex';
       document.getElementById('progress').style.display = 'block';
-      showQuestion();
+      showPhase();
     }
     
     // Typewriter effect
@@ -308,32 +339,46 @@
         simContainer.style.backgroundImage = "url('assets/bouncer_idle.png')";
       } else if (state === 'suspicious') {
         simContainer.style.backgroundImage = "url('assets/bouncer_suspicious.png')";
-      } else if (state === 'success') {
+      } else if (state === 'success' || state === 'vip') {
         simContainer.style.backgroundImage = "url('assets/success.png')";
-      } else if (state === 'fail') {
+      } else if (state === 'fail' || state === 'shame') {
         simContainer.style.backgroundImage = "url('assets/fail.png')";
       } else {
         simContainer.style.backgroundImage = "none";
       }
     }
 
-    function showQuestion() {
-      if (currentQuestion >= gameData.questions.length) {
+    function showPhase() {
+      if (currentPhaseIndex >= gameData.phases.length) {
         showResult();
         return;
       }
       
-      const q = gameData.questions[currentQuestion];
+      const phase = gameData.phases[currentPhaseIndex];
       
-      setBackground(q.bouncerState || 'none');
+      // Handle random pool vs single question
+      let q = phase;
+      if (phase.randomPool) {
+        q = phase.randomPool[Math.floor(Math.random() * phase.randomPool.length)];
+      }
+      
+      setBackground(phase.bouncerState || q.bouncerState || 'none');
       
       const qTextEl = document.getElementById('question-text');
       typeText(qTextEl, q.question);
       
+      // Play voice if exists
+      if (currentVoiceAudio) currentVoiceAudio.pause();
+      if (q.audio) {
+        currentVoiceAudio = new Audio(q.audio);
+        currentVoiceAudio.volume = 1.0;
+        currentVoiceAudio.play().catch(e => console.log("Voice blocked:", e));
+      }
+      
       const grid = document.getElementById('options-grid');
       grid.innerHTML = '';
       
-      if (q.viewType === 'cards') {
+      if (q.viewType === 'cards' || phase.viewType === 'cards') {
         grid.className = 'options-grid cards-view';
         q.options.forEach(opt => {
           const btn = document.createElement('div');
@@ -360,15 +405,15 @@
       score += points;
       
       if (points <= -100) {
-        showResult(true);
+        showResult();
         return;
       }
       
-      currentQuestion++;
-      showQuestion();
+      currentPhaseIndex++;
+      showPhase();
     }
     
-    function showResult(instantFail = false) {
+    function showResult() {
       document.getElementById('game-container').style.display = 'none';
       document.getElementById('progress').style.display = 'none';
       
@@ -378,20 +423,72 @@
       
       resContainer.style.display = 'flex';
       
-      let isSuccess = score >= gameData.threshold;
-      if (instantFail) isSuccess = false;
+      let endingKey = 'fail';
+      if (score <= -100) {
+        endingKey = 'shame';
+      } else if (score >= gameData.vipThreshold) {
+        endingKey = 'vip';
+      } else if (score >= gameData.threshold) {
+        endingKey = 'success';
+      }
       
-      setBackground(isSuccess ? 'success' : 'fail');
+      setBackground(endingKey);
       
-      const resData = isSuccess ? gameData.results.success : gameData.results.fail;
+      const resData = gameData.results[endingKey];
+      
+      // Handle ending music / audio
+      if (bgmAudio) bgmAudio.pause();
+      if (currentVoiceAudio) currentVoiceAudio.pause();
+      
+      if (resData.audio) {
+        currentVoiceAudio = new Audio(resData.audio);
+        currentVoiceAudio.play().catch(e => console.log(e));
+      }
       
       titleEl.textContent = resData.title;
-      titleEl.className = 'result-title ' + (isSuccess ? 'success' : 'fail');
+      titleEl.className = 'result-title ' + (endingKey === 'success' || endingKey === 'vip' ? 'success' : 'fail');
       msgEl.textContent = resData.message;
+      
+      // Save endingKey globally for sharing
+      window.currentEnding = endingKey;
+    }
+    
+    function fallbackCopy(text) {
+      const fullText = `${text} Try it here: ${window.location.href}`;
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(fullText).then(() => {
+          alert('Result copied to clipboard!');
+        }).catch(() => alert('Could not copy automatically.'));
+      } else {
+        alert('Share this link: ' + window.location.href);
+      }
+    }
+
+    function shareResult() {
+      const texts = {
+        vip: "I am a Stammgast! I breezed past the world's hardest door.",
+        success: "I got in! I survived the Berlin Bouncer Simulator.",
+        fail: "Heute leider nicht. I got rejected at the Berghain door.",
+        shame: "I got kicked out of the line for being a tourist..."
+      };
+      const text = texts[window.currentEnding] || "Can you get into Berghain?";
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'Berlin Bouncer Simulator',
+          text: text,
+          url: window.location.href
+        }).catch(err => {
+          console.log('Native share not supported or cancelled:', err);
+          fallbackCopy(text);
+        });
+      } else {
+        fallbackCopy(text);
+      }
     }
     
     function updateProgress() {
-      const pct = (currentQuestion / gameData.questions.length) * 100;
+      const pct = (currentPhaseIndex / gameData.phases.length) * 100;
       document.getElementById('progress-fill').style.width = pct + '%';
     }
 

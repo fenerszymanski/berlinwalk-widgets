@@ -1,13 +1,14 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "title": "Can You Get Into Berghain?",
   "lead": "Test your Berlin clubbing instincts against the world's strictest door.",
   "threshold": 12,
-  "questions": [
+  "vipThreshold": 18,
+  "phases": [
     {
       "id": "outfit",
-      "viewType": "cards",
       "question": "First, choose your outfit for the night.",
+      "viewType": "cards",
       "options": [
         { "id": "black", "text": "All black, subtle.", "image": "assets/outfit_black.png", "score": 4 },
         { "id": "rave", "text": "Neon mesh, glitter.", "image": "assets/outfit_rave.png", "score": -2 },
@@ -22,52 +23,96 @@
       "options": [
         { "id": "solo", "text": "Just me.", "score": 5 },
         { "id": "duo", "text": "Two of us.", "score": 3 },
-        { "id": "four", "text": "Four, but we'll split up at the door.", "score": 1 },
-        { "id": "stag", "text": "A group of seven guys on a weekend trip.", "score": -100 }
+        { "id": "four", "text": "Four, but we'll split up.", "score": 1 },
+        { "id": "stag", "text": "A group of seven guys.", "score": -100 }
       ]
     },
     {
-      "id": "queue",
+      "id": "queue_action",
       "bouncerState": "queue",
-      "question": "You're in the queue. It's a 3-hour wait. What are you doing?",
-      "options": [
-        { "id": "selfie", "text": "Taking a selfie with the building.", "score": -100 },
-        { "id": "sterni", "text": "Quietly drinking a Sterni beer.", "score": 4 },
-        { "id": "loud", "text": "Laughing loudly and talking in English.", "score": -3 }
+      "randomPool": [
+        {
+          "question": "You're in the queue. It's a 3-hour wait. What are you doing?",
+          "options": [
+            { "id": "selfie", "text": "Taking a selfie with the building.", "score": -200 },
+            { "id": "sterni", "text": "Quietly drinking a Sterni beer.", "score": 4 },
+            { "id": "loud", "text": "Laughing loudly and talking in English.", "score": -5 }
+          ]
+        },
+        {
+          "question": "Someone in front of you offers a shot of Jägermeister.",
+          "options": [
+            { "id": "take", "text": "Take it, party time!", "score": -3 },
+            { "id": "decline", "text": "Politely decline.", "score": 3 }
+          ]
+        }
       ]
     },
     {
-      "id": "dj",
+      "id": "door1",
       "bouncerState": "idle",
-      "question": "You reach the front. The bouncer looks at you. 'Wer legt heute auf?' (Who's DJing?)",
-      "options": [
-        { "id": "klock", "text": "Ben Klock / Norman Nodge.", "score": 4 },
-        { "id": "guetta", "text": "David Guetta?", "score": -100 },
-        { "id": "honest", "text": "I don't know the lineup, I just want to dance.", "score": 0 },
-        { "id": "guestlist", "text": "I'm on the guest list, check the iPad.", "score": -5 }
+      "randomPool": [
+        {
+          "question": "You reach the front. The bouncer looks at you. 'Wer legt heute auf?' (Who's DJing?)",
+          "audio": "assets/audio/wer_legt_auf.mp3",
+          "options": [
+            { "id": "klock", "text": "Ben Klock / Norman Nodge.", "score": 5 },
+            { "id": "guetta", "text": "David Guetta?", "score": -100 },
+            { "id": "honest", "text": "I don't know the lineup, I just want to dance.", "score": 0 },
+            { "id": "guestlist", "text": "I'm on the guest list.", "score": -5 }
+          ]
+        },
+        {
+          "question": "You reach the front. The bouncer stares at you. 'Hast du Ausweis?'",
+          "audio": "assets/audio/hast_du_ausweis.mp3",
+          "options": [
+            { "id": "show", "text": "Hand him your ID silently.", "score": 5 },
+            { "id": "what", "text": "'English please?'", "score": -5 },
+            { "id": "no", "text": "Pat your pockets... 'I forgot it.'", "score": -100 }
+          ]
+        }
       ]
     },
     {
-      "id": "reason",
+      "id": "door2",
       "bouncerState": "suspicious",
-      "question": "He nods slightly. 'Warum wollt ihr rein?' (Why do you want to come in?)",
-      "options": [
-        { "id": "tanzen", "text": "Wir wollen einfach tanzen.", "score": 4 },
-        { "id": "birthday", "text": "To celebrate my friend's birthday!", "score": -5 },
-        { "id": "famous", "text": "To see the famous club inside.", "score": -10 }
+      "randomPool": [
+        {
+          "question": "He nods slightly. 'Warum wollt ihr rein?' (Why do you want to come in?)",
+          "audio": "assets/audio/warum_wollt_ihr_rein.mp3",
+          "options": [
+            { "id": "tanzen", "text": "Wir wollen einfach tanzen.", "score": 4 },
+            { "id": "birthday", "text": "To celebrate my friend's birthday!", "score": -5 },
+            { "id": "famous", "text": "To see the famous club inside.", "score": -10 }
+          ]
+        }
       ]
     }
   ],
   "results": {
+    "vip": {
+      "title": "Stammgast",
+      "message": "He nods with respect. You are a regular. Welcome back.",
+      "image": "assets/success.png",
+      "audio": "assets/audio/viel_spass.mp3"
+    },
     "success": {
       "title": "Viel Spaß.",
       "message": "He gestures you in. You survived the world's hardest door policy.",
-      "image": "assets/success.png"
+      "image": "assets/success.png",
+      "audio": "assets/audio/viel_spass.mp3"
     },
     "fail": {
       "title": "Heute leider nicht.",
-      "message": "He shakes his head and points to the exit path. Not tonight. Better luck next Sunday.",
-      "image": "assets/fail.png"
+      "message": "He shakes his head and points to the exit. Not tonight.",
+      "image": "assets/fail.png",
+      "audio": "assets/audio/heute_leider_nicht.mp3"
+    },
+    "shame": {
+      "title": "Raus hier.",
+      "message": "You messed up so badly you didn't even make it to the door. You are banned.",
+      "image": "assets/fail.png",
+      "audio": "assets/audio/zu_laut.mp3"
     }
   }
 }
