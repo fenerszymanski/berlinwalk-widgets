@@ -1,7 +1,5 @@
-const SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
-const BASE_URL = SCRIPT_URL
-  ? new URL('../', SCRIPT_URL).toString()
-  : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
+const SCRIPT_URL = import.meta.url;
+const BASE_URL = new URL('../', SCRIPT_URL).toString();
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
