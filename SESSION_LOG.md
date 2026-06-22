@@ -1,3 +1,18 @@
+## 2026-06-22 — Codex (Berghain bouncer footer bridge)
+
+**Did:** Closed the white gap that could appear between the `/games/berghain-bouncer` custom element and the site footer in the Atlas/Wix live render.
+
+**Changed:** `berlin-bouncer-page/berlin-bouncer-page-element.js` now uses `ASSET_BUILD=bouncer-footer-bridge-20260622`. The bouncer page host paints a 96px black bridge below itself with `box-shadow`, keeps overflow visible, and preserves the page content above it with z-index layering. Commit `f7db1b4` was pushed to `origin/main`.
+
+**QA:** `node --check` and `git diff --check` passed. Local wrapper QA confirmed iframe `v=bouncer-footer-bridge-20260622`, black host background, active 96px black `boxShadow`, no extra pseudo-element bridge, scrollHeight unchanged, and overflowX `0`. GitHub Pages served the new marker on attempt 19. Live Wix QA passed: iframe marker is current, host `boxShadow` is active, footer and bouncer host measure `visualGap=0`, overflowX `0`, and the screenshot shows the black section meeting the footer accent/green footer with no white band.
+
+**Opened:** None.
+**Closed:** Public Berghain bouncer footer gap is fixed live.
+
+## 2026-06-22 — Codex (World Cup fixtures late score)
+
+**Did:** World Cup fixtures widget için Berlin saati 23:31 skor kontrolünde 1 yeni final skor eklendi: Argentina 2-0 Austria. **Changed:** `worldcup-fixtures/index.html` içindeki Argentina-Austria due `M` satırı 8 alanlı `FT` satıra çevrildi; `SCORE_UPDATED` `22 Jun 2026, 23:31 CEST` yapıldı. Başka fixture zamanı, takım adı, filtre, stil, Wix, CMS, canlı site, reklam, booking veya root `PROJECT_MEMORY.md` değişmedi. **QA:** Due gate yalnız Argentina-Austria maçını buldu. FIFA match report, ESPN final-score sayfası ve Guardian match report skoru 2-0 FT olarak tutarlı destekledi. Inline JS parse smoke 72 maç / 41 skorlu satır / malformed `0` geçti; Playwright desktop ve 390px mobilde `.bw-match.final` = 41, horizontal overflow `0`, updated etiketi görünür; sadece lokal favicon 404 console noise; `git -C berlinwalk-widgets diff --check` temiz. **Opened:** Live GitHub Pages için push/deploy gerekiyor. **Closed:** 22 Haziran geç skor kontrolü yerel widget kaynak dosyasında güncel.
+
 ## 2026-06-22 — Codex (Berghain bouncer share + timer polish)
 
 **Did:** Removed the desktop browser `alert()` after Share Result, replaced it with in-game copy feedback, increased bouncer-question timer from 5s to 10s, and moved the countdown from the center to a clearer top-left badge.
