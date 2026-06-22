@@ -1,0 +1,203 @@
+20-  };
+21-
+22:  function ensureFont() {
+23-    if (document.querySelector('link[data-bw-battle-page-font]')) return;
+24-    const preconnect = document.createElement('link');
+25-    preconnect.rel = 'preconnect';
+26-    preconnect.href = 'https://fonts.gstatic.com';
+27-    preconnect.crossOrigin = 'anonymous';
+28-
+29-    const font = document.createElement('link');
+30-    font.rel = 'stylesheet';
+31-    font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap';
+32-    font.dataset.bwBattlePageFont = 'true';
+33-
+34-    document.head.appendChild(preconnect);
+35-    document.head.appendChild(font);
+36-  }
+37-
+38-  function isValidHeight(value) {
+39-    return typeof value === 'number' && Number.isFinite(value) && value > 300 && value < 8000;
+40-  }
+41-
+42-  class BWBerlinBattlePage extends HTMLElement {
+43-    connectedCallback() {
+44-      ensureFont();
+45-      this._render();
+46-      this._bind();
+47-      this._setupGameResize();
+48-    }
+49-
+50-    disconnectedCallback() {
+51-      if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
+52-      if (this._frameLoadHandler && this._gameFrame) this._gameFrame.removeEventListener('load', this._frameLoadHandler);
+53-      if (this._resizeObserver) this._resizeObserver.disconnect();
+54-      if (this._timers) this._timers.forEach((timer) => window.clearTimeout(timer));
+55-    }
+56-
+57-    _gameSrc() {
+58-      const url = new URL(GAME_PATH, BASE_URL);
+59-      const current = new URLSearchParams(window.location.search || '');
+60-      ['topic', 'winner', 'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fbclid'].forEach((key) => {
+61-        if (current.has(key)) url.searchParams.set(key, current.get(key));
+62-      });
+63-      url.searchParams.set('source', current.get('source') || 'berlin_battle_page');
+64-      url.searchParams.set('parent_path', window.location.pathname || '/games/berlin-battle');
+65-      url.searchParams.set('parent_url', window.location.href);
+66-      url.searchParams.set('attribution', 'none');
+67-      url.searchParams.set('v', ASSET_BUILD);
+68-      return url.toString();
+69-    }
+70-
+71-    _directTopicId() {
+72-      const current = new URLSearchParams(window.location.search || '');
+73-      const topic = (current.get('topic') || '').replace(/[^a-z0-9_-]/gi, '');
+74-      return TOPIC_TITLES[topic] ? topic : '';
+75-    }
+76-
+77-    _render() {
+78-      const directTopicId = this._directTopicId();
+79-      const isDirectPlay = Boolean(directTopicId);
+80-      const pageClass = isDirectPlay ? 'bw-battle-page bw-battle-page-direct' : 'bw-battle-page';
+81-      const heroTitle = isDirectPlay ? 'Pick your Berlin winner' : 'Berlin Battle';
+82-      const heroLead = isDirectPlay
+83-        ? 'Your first match is ready below. Tap one card and keep choosing until one Berlin favorite wins.'
+84-        : 'Pick between Berlin food, districts, transport, clubs, parks, lines and nights. Get a personal winner, then meet the real city on the walking route.';
+85-      const heroAction = isDirectPlay
+86-        ? ''
+87-        : '<div class="bw-battle-actions"><a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a></div>';
+88-      const gameHead = '';
+89-      this.innerHTML = `
+90-        <style>${this._styles()}</style>
+91-        <main class="${pageClass}" aria-labelledby="bw-battle-title">
+92-          <section class="bw-battle-hero">
+93-            <div class="bw-battle-inner bw-battle-hero-inner">
+94-              <div class="bw-battle-hero-copy">
+95-                <p class="bw-battle-kicker">BerlinWalk game</p>
+96-                <h1 id="bw-battle-title">${heroTitle}</h1>
+97-                <p class="bw-battle-lead">${heroLead}</p>
+98-                ${heroAction}
+99-              </div>
+100-            </div>
+101-          </section>
+102-
+103-          <section class="bw-battle-game-band" id="battle-game" aria-label="Berlin Battle game">
+104-            <div class="bw-battle-inner">
+105-              ${gameHead}
+106-              <div class="bw-battle-game-shell">
+107-                <iframe
+108-                  data-bw-battle-frame
+109-                  src="${this._gameSrc()}"
+110-                  allow="web-share; clipboard-write"
+111-                  title="Berlin Battle game"
+112-                  loading="eager"
+113-                  scrolling="no"></iframe>
+114-              </div>
+115-            </div>
+116-          </section>
+117-
+118-          <section class="bw-battle-final" aria-label="BerlinWalk connection">
+119-            <div class="bw-battle-inner bw-battle-final-box">
+120-              <div>
+121-                <p class="bw-battle-section-kicker">After the game</p>
+122-                <h2>Want the real city version?</h2>
+123-                <p>Berlin Battle is the playful warm-up. On the walking tour, I connect the places, stories and route stops that make Berlin start to click.</p>
+124-              </div>
+125-              <a class="bw-battle-btn bw-battle-btn-primary" href="${BOOKING_URL}">Walk Berlin with me</a>
+126-            </div>
+127-          </section>
+128-        </main>
+129-      `;
+130-    }
+131-
+132-    _bind() {
+133-      this.querySelectorAll('a[href^="#"]').forEach((link) => {
+134-        link.addEventListener('click', (event) => {
+135-          const target = this.querySelector(link.getAttribute('href'));
+136-          if (!target) return;
+137-          event.preventDefault();
+138-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+139-        });
+140-      });
+141-    }
+142-
+143-    _setupGameResize() {
+144-      this._gameFrame = this.querySelector('[data-bw-battle-frame]');
+145-      if (!this._gameFrame) return;
+146-
+147-      const setFrameHeight = (height) => {
+148-        if (!isValidHeight(height)) return;
+149-        this._gameFrame.style.height = `${Math.ceil(height)}px`;
+150-      };
+151-
+152-      this._messageHandler = (event) => {
+153-        if (!this._gameFrame || event.source !== this._gameFrame.contentWindow) return;
+154-        if (!event.data || event.data.type !== 'bw-resize') return;
+155-        setFrameHeight(event.data.height + 10);
+156-      };
+157-      window.addEventListener('message', this._messageHandler);
+158-
+159-      this._frameLoadHandler = () => {
+160-        setFrameHeight(620);
+161-      };
+162-      this._gameFrame.addEventListener('load', this._frameLoadHandler);
+163-
+164-      this._timers = [200, 800, 1800].map((delay) => window.setTimeout(() => setFrameHeight(620), delay));
+165-    }
+166-
+167-    _styles() {
+168-      return `
+169-        bw-berlin-battle-page {
+170-          --bw-green: #1B5E20;
+171-          --bw-green-dark: #123F16;
+172-          --bw-yellow: #FFE600;
+173-          --bw-lime: #7CB342;
+174-          --bw-light-green: #C5E1A5;
+175-          --bw-cream: #FAFAF5;
+176-          --bw-white: #FFFFFF;
+177-          --bw-text: #212121;
+178-          --bw-muted: #526052;
+179-          --bw-border: rgba(27, 94, 32, 0.16);
+180-          display: block;
+181-          font-family: Montserrat, Arial, sans-serif;
+182-          color: var(--bw-text);
+183-          background: var(--bw-cream);
+184-        }
+185-
+186-        bw-berlin-battle-page,
+187-        .bw-battle-page,
+188-        .bw-battle-page *,
+189-        .bw-battle-page *::before,
+190-        .bw-battle-page *::after {
+191-          box-sizing: border-box;
+192-        }
+193-
+194-        .bw-battle-page {
+195-          background: var(--bw-cream);
+196-          color: var(--bw-text);
+197-          font-family: Montserrat, Arial, sans-serif;
+198-          overflow: hidden;
+199-        }
+200-
+201-        .bw-battle-inner {
+202-          width: min(1120px, calc(100% - 32px));
+203-          margin: 0 auto;
+204-        }
+205-
+206-        .bw-battle-hero {
+207-          background:
+208-            linear-gradient(0deg, rgba(27, 94, 32, 0.04), rgba(27, 94, 32, 0)),
+209-            var(--bw-cream);
+210-          overflow: hidden;
+211-          padding: clamp(42px, 7vw, 78px) 0 clamp(28px, 5vw, 46px);
+212-          position: relative;
+213-          isolation: isolate;
+214-        }
+215-
+216-        .bw-battle-hero::before {
+217-          background:
+218-            linear-gradient(0deg, rgba(27, 94, 32, 0.05), rgba(27, 94, 32, 0)),
+219-            repeating-linear-gradient(90deg, rgba(27, 94, 32, 0.035) 0, rgba(27, 94, 32, 0.035) 1px, transparent 1px, transparent 58px);
+220-          content: "";
+221-          position: absolute;
+222-          inset: 0;

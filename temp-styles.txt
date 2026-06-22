@@ -1,0 +1,151 @@
+167:    _styles() {
+168-      return `
+169-        bw-berlin-battle-page {
+170-          --bw-green: #1B5E20;
+171-          --bw-green-dark: #123F16;
+172-          --bw-yellow: #FFE600;
+173-          --bw-lime: #7CB342;
+174-          --bw-light-green: #C5E1A5;
+175-          --bw-cream: #FAFAF5;
+176-          --bw-white: #FFFFFF;
+177-          --bw-text: #212121;
+178-          --bw-muted: #526052;
+179-          --bw-border: rgba(27, 94, 32, 0.16);
+180-          display: block;
+181-          font-family: Montserrat, Arial, sans-serif;
+182-          color: var(--bw-text);
+183-          background: var(--bw-cream);
+184-        }
+185-
+186-        bw-berlin-battle-page,
+187-        .bw-battle-page,
+188-        .bw-battle-page *,
+189-        .bw-battle-page *::before,
+190-        .bw-battle-page *::after {
+191-          box-sizing: border-box;
+192-        }
+193-
+194-        .bw-battle-page {
+195-          background: var(--bw-cream);
+196-          color: var(--bw-text);
+197-          font-family: Montserrat, Arial, sans-serif;
+198-          overflow: hidden;
+199-        }
+200-
+201-        .bw-battle-inner {
+202-          width: min(1120px, calc(100% - 32px));
+203-          margin: 0 auto;
+204-        }
+205-
+206-        .bw-battle-hero {
+207-          background:
+208-            linear-gradient(0deg, rgba(27, 94, 32, 0.04), rgba(27, 94, 32, 0)),
+209-            var(--bw-cream);
+210-          overflow: hidden;
+211-          padding: clamp(42px, 7vw, 78px) 0 clamp(28px, 5vw, 46px);
+212-          position: relative;
+213-          isolation: isolate;
+214-        }
+215-
+216-        .bw-battle-hero::before {
+217-          background:
+218-            linear-gradient(0deg, rgba(27, 94, 32, 0.05), rgba(27, 94, 32, 0)),
+219-            repeating-linear-gradient(90deg, rgba(27, 94, 32, 0.035) 0, rgba(27, 94, 32, 0.035) 1px, transparent 1px, transparent 58px);
+220-          content: "";
+221-          position: absolute;
+222-          inset: 0;
+223-          z-index: -1;
+224-        }
+225-
+226-        .bw-battle-hero-inner {
+227-          min-height: clamp(260px, 30vw, 360px);
+228-          position: relative;
+229-          z-index: 1;
+230-        }
+231-
+232-        .bw-battle-hero-copy {
+233-          max-width: 760px;
+234-          min-width: 0;
+235-        }
+236-
+237-        .bw-battle-kicker,
+238-        .bw-battle-section-kicker {
+239-          color: var(--bw-green);
+240-          display: block;
+241-          font-size: 12px;
+242-          font-weight: 900;
+243-          letter-spacing: 2px;
+244-          line-height: 1.2;
+245-          margin: 0 0 12px;
+246-          text-transform: uppercase;
+247-        }
+248-
+249-        .bw-battle-hero h1 {
+250-          color: var(--bw-green);
+251-          font-size: clamp(54px, 8vw, 104px);
+252-          font-weight: 900;
+253-          letter-spacing: 0;
+254-          line-height: 0.9;
+255-          margin: 0;
+256-          max-width: 760px;
+257-        }
+258-
+259-        .bw-battle-lead {
+260-          color: var(--bw-muted);
+261-          font-size: clamp(17px, 2vw, 23px);
+262-          font-weight: 700;
+263-          line-height: 1.42;
+264-          margin: 20px 0 0;
+265-          max-width: 720px;
+266-        }
+267-
+268-        .bw-battle-actions {
+269-          display: flex;
+270-          flex-wrap: wrap;
+271-          gap: 12px;
+272-          margin-top: 24px;
+273-        }
+274-
+275-        .bw-battle-btn {
+276-          align-items: center;
+277-          border-radius: 999px;
+278-          display: inline-flex;
+279-          font-size: 13px;
+280-          font-weight: 900;
+281-          justify-content: center;
+282-          min-height: 46px;
+283-          padding: 14px 18px;
+284-          text-decoration: none;
+285-          transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+286-        }
+287-
+288-        .bw-battle-btn:hover,
+289-        .bw-battle-btn:focus-visible {
+290-          outline: none;
+291-          transform: translateY(-1px);
+292-        }
+293-
+294-        .bw-battle-btn-primary {
+295-          background: var(--bw-yellow);
+296-          color: var(--bw-green);
+297-          box-shadow: 0 14px 30px rgba(27, 94, 32, 0.18);
+298-        }
+299-
+300-        .bw-battle-game-band {
+301-          padding: clamp(28px, 5vw, 54px) 0;
+302-        }
+303-
+304-        .bw-battle-game-head {
+305-          align-items: end;
+306-          display: grid;
+307-          gap: 18px;
+308-          grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.55fr);
+309-          margin-bottom: 18px;
+310-        }
+311-
+312-        .bw-battle-game-head .bw-battle-section-kicker,
+313-        .bw-battle-final .bw-battle-section-kicker {
+314-          color: var(--bw-green);
+315-        }
+316-
+317-        .bw-battle-game-head h2,
