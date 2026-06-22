@@ -1,3 +1,14 @@
+## 2026-06-22 — Codex (Berghain bouncer live stats)
+
+**Did:** Added mobile breathing room above the first `Playable Now` block and wired the Berghain bouncer result screen to live Wix CMS stats instead of mock totals.
+
+**Changed:** `berlin-bouncer-page/berlin-bouncer-page-element.js` now uses `ASSET_BUILD=bouncer-stats-mobile-air-20260622` and gives the mobile page layout `48px` top padding. `berlin-bouncer/index.html` now sends `bw_berlin_bouncer_start`, `bw_berlin_bouncer_result`, and `bw_berlin_bouncer_share` events to `https://berlinwalk-content-app.vercel.app/api/bouncer-event`; result events request live same-day stats and render rejected/total/top-rate copy on the final screen. Root `berlinwalk-content-app` endpoint/rewrite, `BerlinBouncerEvents` setup script, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` were updated outside this repo.
+
+**QA:** `node --check` passed for the root endpoint/server/setup files, the bouncer inline script parse passed, and `git diff --check` passed. Local endpoint smoke returned stats, local mobile game flow showed live stats on the result screen, Vercel production endpoint returned `200` with CORS for the GitHub Pages iframe origin and stats payload, and all Codex smoke rows were deleted from `BerlinBouncerEvents`.
+
+**Opened:** Push/deploy and live Wix browser QA still pending in this same session.
+**Closed:** Local widget code is ready for the live-stat build push.
+
 ## 2026-06-22 — Codex (Berghain bouncer page height fix)
 
 **Did:** Fixed and shipped `/games/berghain-bouncer` so the right-side game iframe no longer expands to 1500px+ through the sitewide Wix auto-resize listener. **Changed:** `js/brand.js` now supports `resize=none` / `autoresize=none`; `berlin-bouncer-page/berlin-bouncer-page-element.js` sends the nested game iframe with `resize=none`, uses `ASSET_BUILD=bouncer-height-fix-20260622`, and clamps the device height to `560-680px` desktop / `500-620px` mobile. Commit `9ab8af8` and this log commit were pushed. **QA:** Before fix, live desktop measurement showed `.bw-bouncer-device` `1528px` high and wrapper `1608px`; local desktop now shows device/iframe `420x560`, overflowX `0`, iframe URL includes `resize=none`; local 390px mobile shows device/iframe `350x620`, first game screen has 4 options visible and iframe overflowX `0`; reload/message test saw `0` `bw-resize` messages. GitHub Pages served the new marker on attempt 15. Live Wix QA passed: desktop 1280x768 device/iframe `420x598`, iframe URL `resize=none&v=bouncer-height-fix-20260622`, overflowX `0`; mobile 390x844 device/iframe `350x620`, overflowX `0`. `node --check` and `git diff --check` passed. **Opened:** None. **Closed:** Public Berghain bouncer page height issue is fixed live.

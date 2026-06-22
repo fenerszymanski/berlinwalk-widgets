@@ -381,8 +381,183 @@
     let currentVoiceAudio = null;
     let countdown;
     let countdownInterval;
+    let trackingSequence = 0;
     
     const simContainer = document.getElementById('bw-bouncer-sim');
+    const URL_PARAMS = new URLSearchParams(window.location.search || '');
+    const TRACKING_ENDPOINT_PROD = 'https://berlinwalk-content-app.vercel.app/api/bouncer-event';
+    const TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/bouncer-event';
+    const TRACKING_SESSION_KEY = 'bw_berlin_bouncer_session_id';
+    const TRACKING_VISITOR_KEY = 'bw_berlin_bouncer_visitor_id';
+    const TRACKING_LANDING_KEY = 'bw_berlin_bouncer_landing_page';
+
+    function storageGet(key) {
+      try {
+        return window.localStorage ? window.localStorage.getItem(key) : '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function storageSet(key, value) {
+      try {
+        if (window.localStorage) window.localStorage.setItem(key, value);
+      } catch (error) {
+        /* Storage is optional. */
+      }
+    }
+
+    function sessionGet(key) {
+      try {
+        return window.sessionStorage ? window.sessionStorage.getItem(key) : '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function sessionSet(key, value) {
+      try {
+        if (window.sessionStorage) window.sessionStorage.setItem(key, value);
+      } catch (error) {
+        /* Storage is optional. */
+      }
+    }
+
+    function randomId(prefix) {
+      const cryptoObj = window.crypto || window.msCrypto;
+      if (cryptoObj && cryptoObj.getRandomValues) {
+        const values = new Uint32Array(4);
+        cryptoObj.getRandomValues(values);
+        return prefix + '_' + Array.prototype.map.call(values, value => value.toString(16).padStart(8, '0')).join('');
+      }
+      return prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+    }
+
+    function trackingSessionId() {
+      const existing = sessionGet(TRACKING_SESSION_KEY);
+      if (existing) return existing;
+      const value = randomId('bbouncer_s');
+      sessionSet(TRACKING_SESSION_KEY, value);
+      return value;
+    }
+
+    function trackingVisitorId() {
+      const existing = storageGet(TRACKING_VISITOR_KEY);
+      if (existing) return existing;
+      const value = randomId('bbouncer_v');
+      storageSet(TRACKING_VISITOR_KEY, value);
+      return value;
+    }
+
+    function trackingLandingPage() {
+      const existing = sessionGet(TRACKING_LANDING_KEY);
+      if (existing) return existing;
+      const value = window.location.href;
+      sessionSet(TRACKING_LANDING_KEY, value);
+      return value;
+    }
+
+    function urlParam(key) {
+      try {
+        return URL_PARAMS.get(key) || '';
+      } catch (error) {
+        return '';
+      }
+    }
+
+    function berlinDatePart(date = new Date()) {
+      try {
+        const parts = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'Europe/Berlin',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit'
+        }).formatToParts(date);
+        const map = Object.fromEntries(parts.map(part => [part.type, part.value]));
+        return `${map.year}-${map.month}-${map.day}`;
+      } catch (error) {
+        return date.toISOString().slice(0, 10);
+      }
+    }
+
+    function isPaidAttribution(utmMedium, utmCampaign) {
+      const medium = String(utmMedium || '').toLowerCase();
+      const campaign = String(utmCampaign || '').toLowerCase();
+      return /paid|cpc|ppc|ad|ads|meta|facebook|instagram/.test(medium) ||
+        /paid|campaign|lead|conversion|meta|facebook|instagram/.test(campaign) ||
+        Boolean(urlParam('fbclid'));
+    }
+
+    function trackingEndpoint() {
+      if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
+        if (urlParam('tracking') === 'local' || urlParam('local_tracking') === '1') return TRACKING_ENDPOINT_LOCAL;
+        return '';
+      }
+      return TRACKING_ENDPOINT_PROD;
+    }
+
+    function sendBouncerEvent(eventName, detail = {}, options = {}) {
+      const endpoint = trackingEndpoint();
+      if (!endpoint) return Promise.resolve(null);
+      const timestamp = new Date().toISOString();
+      const utmSource = urlParam('utm_source');
+      const utmMedium = urlParam('utm_medium');
+      const utmCampaign = urlParam('utm_campaign');
+      const body = {
+        eventName,
+        eventId: `${trackingSessionId()}:${eventName}:${++trackingSequence}`,
+        sessionId: trackingSessionId(),
+        visitorId: trackingVisitorId(),
+        timestamp,
+        eventDate: berlinDatePart(new Date(timestamp)),
+        pagePath: window.location.pathname,
+        pageUrl: window.location.href,
+        parentPath: urlParam('parent_path'),
+        parentUrl: urlParam('parent_url'),
+        referrer: document.referrer || '',
+        landingPage: trackingLandingPage(),
+        firstPage: trackingLandingPage(),
+        utmSource,
+        utmMedium,
+        utmCampaign,
+        utmContent: urlParam('utm_content'),
+        utmTerm: urlParam('utm_term'),
+        fbclid: urlParam('fbclid'),
+        isPaid: isPaidAttribution(utmMedium, utmCampaign),
+        sourceContext: urlParam('source') || 'berlin_bouncer_widget',
+        screenWidth: String(window.screen && window.screen.width ? window.screen.width : ''),
+        viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
+        returnStats: Boolean(options.returnStats),
+        payload: Object.assign({
+          source: urlParam('source') || 'berlin_bouncer_widget'
+        }, detail)
+      };
+      const json = JSON.stringify(body);
+      if (!options.returnStats) {
+        try {
+          if (navigator.sendBeacon && window.Blob) {
+            const blob = new Blob([json], { type: 'application/json' });
+            if (navigator.sendBeacon(endpoint, blob)) return Promise.resolve(null);
+          }
+        } catch (error) {
+          /* Fall through to fetch. */
+        }
+      }
+      try {
+        return window.fetch(endpoint, {
+          method: 'POST',
+          mode: 'cors',
+          keepalive: !options.returnStats,
+          headers: { 'Content-Type': 'application/json' },
+          body: json
+        }).then(response => {
+          if (!options.returnStats || !response.ok) return null;
+          return response.json().catch(() => null);
+        }).catch(() => null);
+      } catch (error) {
+        return Promise.resolve(null);
+      }
+    }
 
     async function loadData() {
       try {
@@ -404,6 +579,10 @@
       
       document.getElementById('start-screen').style.display = 'none';
       document.getElementById('game-container').style.display = 'flex';
+      sendBouncerEvent('bw_berlin_bouncer_start', {
+        score_start: score,
+        step_count: stepCount
+      });
       
       showPhase();
     }
@@ -616,25 +795,33 @@
       // Save endingKey globally for sharing
       window.currentEnding = endingKey;
       
-      // Fetch Mock Global Stats
       fetchGlobalStats(endingKey === 'success' || endingKey === 'vip');
     }
     
     function fetchGlobalStats(isSuccess) {
       document.getElementById('global-stats').style.display = 'block';
-      setTimeout(() => {
-        // Mock data logic. To connect to Wix, replace this with a fetch() call to Wix Velo HTTP Function.
-        const total = 1452 + Math.floor(Math.random() * 50);
-        const rejected = Math.floor(total * 0.92);
-        const rate = ((rejected/total)*100).toFixed(1);
-        const topRate = (100 - rate).toFixed(1);
-        
-        if (isSuccess) {
-          document.getElementById('stats-text').innerHTML = `Today: ${rejected} rejected.<br>You are in the top ${topRate}%.`;
-        } else {
-          document.getElementById('stats-text').innerHTML = `Today: ${rejected} rejected.<br>You are part of the ${rate}%.`;
+      document.getElementById('stats-text').textContent = 'Updating live door stats...';
+      sendBouncerEvent('bw_berlin_bouncer_result', {
+        ending: window.currentEnding || '',
+        score,
+        step_count: stepCount,
+        success: isSuccess ? 'true' : 'false'
+      }, { returnStats: true }).then(data => {
+        const stats = data && data.stats;
+        if (!stats || !stats.total) {
+          document.getElementById('stats-text').innerHTML = isSuccess
+            ? 'Live stats just started today.<br>You are one of the first to get in.'
+            : 'Live stats just started today.<br>Your rejection has been recorded.';
+          return;
         }
-      }, 800);
+        const rate = Number(stats.rejectionRate || 0).toFixed(1);
+        const topRate = Math.max(0, 100 - Number(stats.rejectionRate || 0)).toFixed(1);
+        if (isSuccess) {
+          document.getElementById('stats-text').innerHTML = `Today: ${stats.rejected} rejected out of ${stats.total}.<br>You are in the top ${topRate}%.`;
+        } else {
+          document.getElementById('stats-text').innerHTML = `Today: ${stats.rejected} rejected out of ${stats.total}.<br>You are part of the ${rate}%.`;
+        }
+      });
     }
     
     function fallbackCopy(text) {
@@ -659,6 +846,12 @@
         shame: `I got kicked out of the line for being a tourist... ${statsText}`
       };
       const text = texts[window.currentEnding] || "Can you get into Berghain?";
+      sendBouncerEvent('bw_berlin_bouncer_share', {
+        ending: window.currentEnding || '',
+        score,
+        step_count: stepCount,
+        action: navigator.share ? 'native_share' : 'copy_fallback'
+      });
       
       if (navigator.share) {
         navigator.share({

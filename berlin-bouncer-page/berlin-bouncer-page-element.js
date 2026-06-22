@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL 
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'bouncer-height-fix-20260622';
+const ASSET_BUILD = 'bouncer-stats-mobile-air-20260622';
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
@@ -187,7 +187,7 @@ class BwBerlinBouncerPage extends HTMLElement {
               "content"
               "game"
               "cta";
-            padding: 20px;
+            padding: 48px 20px 20px;
             gap: 40px;
           }
           
