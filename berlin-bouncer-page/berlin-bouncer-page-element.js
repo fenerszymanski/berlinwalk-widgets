@@ -164,6 +164,9 @@ class BwBerlinBouncerPage extends HTMLElement {
         }
 
         .bw-bouncer-device iframe {
+          position: absolute;
+          top: 0;
+          left: 0;
           width: 100%;
           height: 100%;
           border: none;
@@ -226,6 +229,7 @@ class BwBerlinBouncerPage extends HTMLElement {
           <iframe 
             src="${new URL('berlin-bouncer/index.html?attribution=none', BASE_URL).toString()}" 
             allow="autoplay; clipboard-write; shared-storage"
+            scrolling="no"
             title="Berlin Bouncer Simulator">
           </iframe>
         </div>
