@@ -151,6 +151,7 @@ class BwBerlinBouncerPage extends HTMLElement {
         }
 
         .bw-bouncer-device {
+          grid-area: game;
           position: relative;
           width: 100%;
           max-width: 440px;
@@ -203,7 +204,7 @@ class BwBerlinBouncerPage extends HTMLElement {
           }
 
           .bw-bouncer-device {
-            height: 700px;
+            height: 550px;
             border-radius: 20px;
             box-shadow: 0 0 0 6px #222, 0 20px 40px rgba(0,0,0,0.8);
           }
