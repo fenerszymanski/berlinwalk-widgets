@@ -1,3 +1,14 @@
+## 2026-06-23 — Codex (Berghain bouncer footer air tweak)
+
+**Did:** Added a little more black breathing room before the footer on `/games/berghain-bouncer` after the prior 800px desktop shell setting felt too tight.
+
+**Changed:** `berlin-bouncer-page/berlin-bouncer-page-element.js` now uses `ASSET_BUILD=bouncer-layout-air-20260623`, and the desktop Wix shell sync target changed from `800px` to `850px`. The top `Playable Now` padding was left unchanged, and the mobile override still clears the fixed shell height. Commit `5996160` was pushed to `origin/main`.
+
+**QA:** `node --check` and `git diff --check` passed. Local desktop marker was `v=bouncer-layout-air-20260623`, `Playable Now` stayed 50px below host top, overflowX `0`. GitHub Pages served the new marker on attempt 16. Live Wix desktop QA: host `850px`, iframe marker current, CTA bottom space `108px` (previous 800px setting was `58px`, old 912px setting was `191px`), device bottom space `174px`, footer gap `-6`, overflowX `0`; footer-transition screenshot looked balanced. Live mobile QA: marker current, shell height stays in the native mobile flow, `topToEyebrow=48`, footer gap `-1`, overflowX `0`.
+
+**Opened:** None.
+**Closed:** Public Berghain bouncer footer spacing now sits between the too-tight and too-loose versions.
+
 ## 2026-06-22 — Codex (Berghain bouncer spacing balance)
 
 **Did:** Rebalanced the live `/games/berghain-bouncer` page so the `Playable Now` block has more top breathing room and the black space before the footer is shorter on desktop.
