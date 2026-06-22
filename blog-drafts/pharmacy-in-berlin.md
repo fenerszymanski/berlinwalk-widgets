@@ -119,6 +119,12 @@ When you find a result, check three things before you travel:
 
 Emergency pharmacies are for urgent medicine needs outside normal hours. They are not meant as a fun late-night shopping option, and there may be an emergency service fee. If you only need sunscreen, cosmetics or a snack, use a station shop or wait until normal hours.
 
+## Use the Berlin Pharmacy Map Launcher
+
+If you already know the area where you are starting, use this map launcher before opening ten random tabs. It does not claim to show the live emergency roster. It points you to the right official or map search from a realistic Berlin starting area.
+
+{{widget:pharmacy-in-berlin-map}}
+
 ## Use this Berlin Pharmacy Help Picker first
 
 If you are unsure whether you need a normal pharmacy, an emergency pharmacy, 116117 or 112, use the picker below. It is a decision aid, not a diagnosis.

@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Pharmacy Map Launcher | BerlinWalk</title>
+  <meta name="description" content="Pick a Berlin area and open the right live pharmacy or emergency pharmacy search map.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQFCGkqQYlBl4r3Pj0Y4iN5Yz6c8z9o=" crossorigin="">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-pharmacy-map">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-pharmacy-map {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #526052;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-pharmacy-map *,
+    #bw-pharmacy-map *::before,
+    #bw-pharmacy-map *::after { box-sizing: border-box; }
+
+    #bw-pharmacy-map .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-pharmacy-map .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.14), rgba(124, 179, 66, 0.2)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 9px;
+      padding: 20px;
+    }
+
+    #bw-pharmacy-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    #bw-pharmacy-map .bw-title {
+      color: var(--bw-white);
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-pharmacy-map .bw-sub {
+      color: #E8F4D7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 760px;
+    }
+
+    #bw-pharmacy-map .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    #bw-pharmacy-map .bw-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1.05fr) minmax(270px, 0.95fr);
+    }
+
+    #bw-pharmacy-map .bw-map-wrap,
+    #bw-pharmacy-map .bw-panel,
+    #bw-pharmacy-map .bw-note {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-pharmacy-map .bw-map {
+      background: #E8EEDC;
+      height: 450px;
+      width: 100%;
+    }
+
+    #bw-pharmacy-map .leaflet-container {
+      background: #E8EEDC;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    #bw-pharmacy-map .leaflet-control-attribution {
+      font-size: 10px;
+    }
+
+    #bw-pharmacy-map .bw-marker {
+      align-items: center;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+      color: var(--bw-yellow);
+      display: flex;
+      font-size: 15px;
+      font-weight: 950;
+      height: 34px;
+      justify-content: center;
+      line-height: 1;
+      width: 34px;
+    }
+
+    #bw-pharmacy-map .bw-marker.is-active {
+      background: var(--bw-red);
+      color: var(--bw-white);
+      transform: scale(1.08);
+    }
+
+    #bw-pharmacy-map .bw-panel {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    #bw-pharmacy-map .bw-label {
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    #bw-pharmacy-map .bw-area-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-pharmacy-map .bw-area {
+      appearance: none;
+      background: #F7FBF1;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.22;
+      min-height: 46px;
+      padding: 9px 8px;
+      text-align: left;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-pharmacy-map .bw-area:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.14);
+    }
+
+    #bw-pharmacy-map .bw-area[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-pharmacy-map .bw-result {
+      background: #FDFDF8;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 9px;
+      padding: 12px;
+    }
+
+    #bw-pharmacy-map .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 17px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-pharmacy-map .bw-result p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-pharmacy-map .bw-actions {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-pharmacy-map .bw-action {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-yellow);
+      display: flex;
+      font-size: 12px;
+      font-weight: 950;
+      justify-content: space-between;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 10px 12px;
+      text-decoration: none;
+    }
+
+    #bw-pharmacy-map .bw-action.secondary {
+      background: #EFF7E6;
+      color: var(--bw-green);
+    }
+
+    #bw-pharmacy-map .bw-action span {
+      color: inherit;
+      font-size: 16px;
+      line-height: 1;
+      margin-left: 10px;
+    }
+
+    #bw-pharmacy-map .bw-note {
+      background: #FFFBE6;
+      color: #4F4A1B;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.55;
+      padding: 12px 14px;
+    }
+
+    #bw-pharmacy-map .bw-note strong {
+      color: var(--bw-green);
+      font-weight: 950;
+    }
+
+    @media (max-width: 760px) {
+      #bw-pharmacy-map { margin: 18px 0; }
+      #bw-pharmacy-map .bw-head { padding: 16px; }
+      #bw-pharmacy-map .bw-title { font-size: 22px; }
+      #bw-pharmacy-map .bw-body { padding: 12px; }
+      #bw-pharmacy-map .bw-grid { grid-template-columns: 1fr; }
+      #bw-pharmacy-map .bw-map { height: 340px; }
+      #bw-pharmacy-map .bw-area-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-pharmacy-map-title">
+    <header class="bw-head">
+      <p class="bw-kicker">Live Search Map</p>
+      <h2 class="bw-title" id="bw-pharmacy-map-title">Berlin Pharmacy Map Launcher</h2>
+      <p class="bw-sub">Pick the area you are starting from. I will not pretend to know the live emergency roster; this opens the right official or map search for that part of Berlin.</p>
+    </header>
+
+    <div class="bw-body">
+      <div class="bw-grid">
+        <div class="bw-map-wrap" aria-label="Berlin area map">
+          <div class="bw-map" id="bw-pharmacy-leaflet"></div>
+        </div>
+
+        <aside class="bw-panel" aria-live="polite">
+          <p class="bw-label">Where are you starting?</p>
+          <div class="bw-area-grid" id="bw-area-buttons"></div>
+
+          <div class="bw-result">
+            <h3 id="bw-area-title">Alexanderplatz / Mitte</h3>
+            <p id="bw-area-copy">Best if you are around Alexanderplatz, Museum Island or the TV Tower. Start with a normal pharmacy search during the day; use the official Notdienst search at night, on Sunday or on a public holiday.</p>
+            <div class="bw-actions">
+              <a class="bw-action" id="bw-google-link" href="#" target="_blank" rel="noopener">Open normal pharmacy map <span>↗</span></a>
+              <a class="bw-action secondary" href="https://www.akberlin.de/patientinnen/notdienstfinder" target="_blank" rel="noopener">Official Berlin Notdienstfinder <span>↗</span></a>
+              <a class="bw-action secondary" href="https://www.aponet.de/notdienstsuche" target="_blank" rel="noopener">Aponet emergency pharmacy search <span>↗</span></a>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="bw-note">
+        <strong>Important:</strong> emergency pharmacy duty changes daily. This widget is a map launcher, not a live duty roster. Always check the exact duty time, address and route in the official result before travelling.
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const areas = [
+    {
+      key: 'alexanderplatz',
+      label: 'Alexanderplatz / Mitte',
+      lat: 52.5219,
+      lng: 13.4132,
+      zoom: 14,
+      query: 'Apotheke near Alexanderplatz Berlin',
+      copy: 'Best if you are around Alexanderplatz, Museum Island or the TV Tower. Start with a normal pharmacy search during the day; use the official Notdienst search at night, on Sunday or on a public holiday.'
+    },
+    {
+      key: 'hauptbahnhof',
+      label: 'Hauptbahnhof / Moabit',
+      lat: 52.5251,
+      lng: 13.3694,
+      zoom: 14,
+      query: 'Apotheke near Berlin Hauptbahnhof',
+      copy: 'Useful around the main station, government quarter and Moabit. Station-area pharmacies can help during travel hours, but emergency duty still needs the official Notdienst search.'
+    },
+    {
+      key: 'friedrichstrasse',
+      label: 'Friedrichstrasse / Museum Island',
+      lat: 52.5186,
+      lng: 13.3889,
+      zoom: 14,
+      query: 'Apotheke near Friedrichstrasse Berlin',
+      copy: 'Good for Unter den Linden, Friedrichstrasse, Museum Island and Gendarmenmarkt. Check opening hours carefully because central location does not mean late-night service.'
+    },
+    {
+      key: 'potsdamer',
+      label: 'Potsdamer Platz',
+      lat: 52.5096,
+      lng: 13.376,
+      zoom: 14,
+      query: 'Apotheke near Potsdamer Platz Berlin',
+      copy: 'A practical starting point for Potsdamer Platz, the Kulturforum and the south side of Tiergarten. If it is urgent outside normal hours, skip guesswork and use Notdienst.'
+    },
+    {
+      key: 'kudamm',
+      label: "Zoo / Ku'damm",
+      lat: 52.5033,
+      lng: 13.3286,
+      zoom: 14,
+      query: 'Apotheke near Kurfuerstendamm Berlin',
+      copy: "Use this for Zoo, Ku'damm and Charlottenburg hotels. Tourist shopping streets have many pharmacies, but Sunday and night rules still apply."
+    },
+    {
+      key: 'kreuzberg',
+      label: 'Kreuzberg',
+      lat: 52.499,
+      lng: 13.421,
+      zoom: 13,
+      query: 'Apotheke near Kreuzberg Berlin',
+      copy: 'Useful for Kreuzberg, Moritzplatz, Kottbusser Tor and the canal area. For late-night urgent medicine, check the official duty pharmacy before crossing town.'
+    },
+    {
+      key: 'friedrichshain',
+      label: 'Friedrichshain',
+      lat: 52.5158,
+      lng: 13.454,
+      zoom: 13,
+      query: 'Apotheke near Friedrichshain Berlin',
+      copy: 'Use this if you are around East Side Gallery, Warschauer Strasse or Boxhagener Platz. Google Maps is fine for normal hours; Notdienst is the safer source after hours.'
+    },
+    {
+      key: 'prenzlauer',
+      label: 'Prenzlauer Berg',
+      lat: 52.5399,
+      lng: 13.4144,
+      zoom: 13,
+      query: 'Apotheke near Prenzlauer Berg Berlin',
+      copy: 'Good for Kollwitzkiez, Eberswalder Strasse and family-heavy neighborhoods. If a child or vulnerable traveller is involved, do not rely only on pharmacy advice.'
+    },
+    {
+      key: 'neukolln',
+      label: 'Neukolln',
+      lat: 52.481,
+      lng: 13.435,
+      zoom: 13,
+      query: 'Apotheke near Neukoelln Berlin',
+      copy: 'Use this for Neukolln, Hermannplatz and Karl-Marx-Strasse. Check distance and transport route before travelling to any emergency pharmacy result.'
+    }
+  ];
+
+  const buttons = document.getElementById('bw-area-buttons');
+  const title = document.getElementById('bw-area-title');
+  const copy = document.getElementById('bw-area-copy');
+  const googleLink = document.getElementById('bw-google-link');
+  const mapEl = document.getElementById('bw-pharmacy-leaflet');
+  let map;
+  const markers = new Map();
+
+  function mapsUrl(area) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(area.query)}`;
+  }
+
+  function resizeParent() {
+    try {
+      window.dispatchEvent(new Event('resize'));
+      window.parent.postMessage({ type: 'bw-resize' }, '*');
+    } catch (_) {}
+  }
+
+  function setArea(key) {
+    const area = areas.find((item) => item.key === key) || areas[0];
+    title.textContent = area.label;
+    copy.textContent = area.copy;
+    googleLink.href = mapsUrl(area);
+    document.querySelectorAll('#bw-pharmacy-map .bw-area').forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.key === area.key));
+    });
+    markers.forEach((marker, markerKey) => {
+      const el = marker.getElement();
+      const markerEl = el && el.querySelector('.bw-marker');
+      if (markerEl) markerEl.classList.toggle('is-active', markerKey === area.key);
+    });
+    if (map) map.flyTo([area.lat, area.lng], area.zoom, { duration: 0.5 });
+    resizeParent();
+  }
+
+  function initButtons() {
+    areas.forEach((area) => {
+      const button = document.createElement('button');
+      button.className = 'bw-area';
+      button.type = 'button';
+      button.dataset.key = area.key;
+      button.textContent = area.label;
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', () => setArea(area.key));
+      buttons.appendChild(button);
+    });
+  }
+
+  function initMap() {
+    if (!window.L || !mapEl) return;
+    map = L.map(mapEl, {
+      zoomControl: true,
+      scrollWheelZoom: false,
+      dragging: true,
+      tap: true
+    }).setView([52.515, 13.405], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    areas.forEach((area, index) => {
+      const icon = L.divIcon({
+        className: '',
+        html: `<div class="bw-marker" aria-label="${area.label}">${index + 1}</div>`,
+        iconSize: [34, 34],
+        iconAnchor: [17, 17]
+      });
+      const marker = L.marker([area.lat, area.lng], { icon }).addTo(map);
+      marker.on('click', () => setArea(area.key));
+      markers.set(area.key, marker);
+    });
+    setArea(areas[0].key);
+    setTimeout(() => map.invalidateSize(), 120);
+  }
+
+  initButtons();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
+  window.addEventListener('load', () => {
+    if (!map && window.L) initMap();
+    if (map) map.invalidateSize();
+    resizeParent();
+  });
+})();
+</script>
+</body>
+</html>
