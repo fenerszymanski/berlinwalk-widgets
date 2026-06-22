@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL 
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'bouncer-layout-balance-20260622';
+const ASSET_BUILD = 'bouncer-layout-air-20260623';
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
@@ -285,8 +285,8 @@ class BwBerlinBouncerPage extends HTMLElement {
     const isDesktop = window.matchMedia('(min-width: 961px)').matches;
     targets.forEach((target) => {
       if (isDesktop) {
-        target.style.setProperty('height', '800px', 'important');
-        target.style.setProperty('min-height', '800px', 'important');
+        target.style.setProperty('height', '850px', 'important');
+        target.style.setProperty('min-height', '850px', 'important');
       } else {
         target.style.removeProperty('height');
         target.style.removeProperty('min-height');
