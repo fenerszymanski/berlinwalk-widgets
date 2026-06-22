@@ -4,91 +4,95 @@
   "lead": "Test your Berlin clubbing instincts against the world's strictest door.",
   "threshold": 12,
   "vipThreshold": 18,
-  "phases": [
-    {
-      "id": "outfit",
+  "phases": {
+    "outfit": {
       "question": "First, choose your outfit for the night.",
       "viewType": "cards",
       "options": [
-        { "id": "black", "text": "All black, subtle.", "image": "assets/outfit_black.png", "score": 4 },
-        { "id": "rave", "text": "Neon mesh, glitter.", "image": "assets/outfit_rave.png", "score": -2 },
-        { "id": "casual", "text": "Jeans, sneakers.", "image": "assets/outfit_casual.png", "score": 0 },
-        { "id": "suit", "text": "A tailored suit.", "image": "assets/outfit_suit.png", "score": -10 }
+        { "id": "black", "text": "All black, subtle.", "image": "assets/outfit_black.png", "score": 4, "next": "group" },
+        { "id": "rave", "text": "Neon mesh, glitter.", "image": "assets/outfit_rave.png", "score": -2, "next": "group" },
+        { "id": "casual", "text": "Jeans, sneakers.", "image": "assets/outfit_casual.png", "score": 0, "next": "group" },
+        { "id": "suit", "text": "A tailored suit.", "image": "assets/outfit_suit.png", "score": -10, "next": "group" }
       ]
     },
-    {
-      "id": "group",
+    "group": {
       "bouncerState": "queue",
       "question": "How many people are you queuing with?",
       "options": [
-        { "id": "solo", "text": "Just me.", "score": 5 },
-        { "id": "duo", "text": "Two of us.", "score": 3 },
-        { "id": "four", "text": "Four, but we'll split up.", "score": 1 },
-        { "id": "stag", "text": "A group of seven guys.", "score": -100 }
+        { "id": "solo", "text": "Just me.", "score": 5, "next": "queue_action" },
+        { "id": "duo", "text": "Two of us.", "score": 3, "next": "queue_action" },
+        { "id": "four", "text": "Four, but we'll split up.", "score": 1, "next": "queue_action" },
+        { "id": "stag", "text": "A group of seven guys.", "score": -100, "next": "queue_action" }
       ]
     },
-    {
-      "id": "queue_action",
+    "queue_action": {
       "bouncerState": "queue",
       "randomPool": [
         {
           "question": "You're in the queue. It's a 3-hour wait. What are you doing?",
           "options": [
-            { "id": "selfie", "text": "Taking a selfie with the building.", "score": -200 },
-            { "id": "sterni", "text": "Quietly drinking a Sterni beer.", "score": 4 },
-            { "id": "loud", "text": "Laughing loudly and talking in English.", "score": -5 }
+            { "id": "selfie", "text": "Taking a selfie with the building.", "score": -200, "next": "door1" },
+            { "id": "sterni", "text": "Quietly drinking a Sterni beer.", "score": 4, "next": "door1" },
+            { "id": "loud", "text": "Laughing loudly and talking in English.", "score": -5, "next": "door1" }
           ]
         },
         {
           "question": "Someone in front of you offers a shot of Jägermeister.",
           "options": [
-            { "id": "take", "text": "Take it, party time!", "score": -3 },
-            { "id": "decline", "text": "Politely decline.", "score": 3 }
+            { "id": "take", "text": "Take it, party time!", "score": -3, "next": "door1" },
+            { "id": "decline", "text": "Politely decline.", "score": 3, "next": "door1" }
           ]
         }
       ]
     },
-    {
-      "id": "door1",
+    "sven_encounter": {
+      "bouncerState": "sven",
+      "question": "You reach the front. The legendary Sven Marquardt steps out. 'Guten Abend. Ich habe dich hier noch nie gesehen.'",
+      "audio": "assets/audio/sven_encounter.mp3",
+      "options": [
+        { "id": "respect", "text": "Nod respectfully. 'Ich bin neu in Berlin.'", "score": 10, "next": "end" },
+        { "id": "photo", "text": "'Can I take a picture with you?'", "score": -200, "next": "end" }
+      ]
+    },
+    "door1": {
       "bouncerState": "idle",
       "randomPool": [
         {
           "question": "You reach the front. The bouncer looks at you. 'Wer legt heute auf?' (Who's DJing?)",
           "audio": "assets/audio/wer_legt_auf.mp3",
           "options": [
-            { "id": "klock", "text": "Ben Klock / Norman Nodge.", "score": 5 },
-            { "id": "guetta", "text": "David Guetta?", "score": -100 },
-            { "id": "honest", "text": "I don't know the lineup, I just want to dance.", "score": 0 },
-            { "id": "guestlist", "text": "I'm on the guest list.", "score": -5 }
+            { "id": "klock", "text": "Ben Klock / Norman Nodge.", "score": 5, "next": "door2" },
+            { "id": "guetta", "text": "David Guetta?", "score": -100, "next": "door2" },
+            { "id": "honest", "text": "I don't know the lineup, I just want to dance.", "score": 0, "next": "door2" },
+            { "id": "guestlist", "text": "I'm on the guest list.", "score": -5, "next": "door2" }
           ]
         },
         {
           "question": "You reach the front. The bouncer stares at you. 'Hast du Ausweis?'",
           "audio": "assets/audio/hast_du_ausweis.mp3",
           "options": [
-            { "id": "show", "text": "Hand him your ID silently.", "score": 5 },
-            { "id": "what", "text": "'English please?'", "score": -5 },
-            { "id": "no", "text": "Pat your pockets... 'I forgot it.'", "score": -100 }
+            { "id": "show", "text": "Hand him your ID silently.", "score": 5, "next": "door2" },
+            { "id": "what", "text": "'English please?'", "score": -5, "next": "door2" },
+            { "id": "no", "text": "Pat your pockets... 'I forgot it.'", "score": -100, "next": "door2" }
           ]
         }
       ]
     },
-    {
-      "id": "door2",
+    "door2": {
       "bouncerState": "suspicious",
       "randomPool": [
         {
           "question": "He nods slightly. 'Warum wollt ihr rein?' (Why do you want to come in?)",
           "audio": "assets/audio/warum_wollt_ihr_rein.mp3",
           "options": [
-            { "id": "tanzen", "text": "Wir wollen einfach tanzen.", "score": 4 },
-            { "id": "birthday", "text": "To celebrate my friend's birthday!", "score": -5 },
-            { "id": "famous", "text": "To see the famous club inside.", "score": -10 }
+            { "id": "tanzen", "text": "Wir wollen einfach tanzen.", "score": 4, "next": "end" },
+            { "id": "birthday", "text": "To celebrate my friend's birthday!", "score": -5, "next": "end" },
+            { "id": "famous", "text": "To see the famous club inside.", "score": -10, "next": "end" }
           ]
         }
       ]
     }
-  ],
+  },
   "results": {
     "vip": {
       "title": "Stammgast",

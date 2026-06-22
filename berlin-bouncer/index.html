@@ -10,13 +10,43 @@
   <script defer src="../js/brand.js"></script>
   <style>
     :root {
-      --bw-green: #1B5E20;
-      --bw-green-dark: #123F16;
-      --bw-yellow: #FFE600;
-      --bw-lime: #7CB342;
+      --bw-yellow: #FFFF00;
+      --bw-green-dark: #0A1C10;
       --bw-white: #FFFFFF;
-      --bw-text-muted: #A5BCA5;
-      --bw-error: #E63946;
+      --bw-error: #FF3333;
+      --bw-lime: #CCFF00;
+      --bw-text-muted: #A0AAB2;
+    }
+    
+    @keyframes shake {
+      0% { transform: translate(1px, 1px) rotate(0deg); }
+      10% { transform: translate(-1px, -2px) rotate(-1deg); }
+      20% { transform: translate(-3px, 0px) rotate(1deg); }
+      30% { transform: translate(3px, 2px) rotate(0deg); }
+      40% { transform: translate(1px, -1px) rotate(1deg); }
+      50% { transform: translate(-1px, 2px) rotate(-1deg); }
+      60% { transform: translate(-3px, 1px) rotate(0deg); }
+      70% { transform: translate(3px, 1px) rotate(-1deg); }
+      80% { transform: translate(-1px, -1px) rotate(1deg); }
+      90% { transform: translate(1px, 2px) rotate(0deg); }
+      100% { transform: translate(1px, -2px) rotate(-1deg); }
+    }
+    
+    @keyframes pulse-red {
+      0% { box-shadow: inset 0 0 50px rgba(255, 0, 0, 0); }
+      50% { box-shadow: inset 0 0 100px rgba(255, 0, 0, 0.2); }
+      100% { box-shadow: inset 0 0 50px rgba(255, 0, 0, 0); }
+    }
+    
+    .shake {
+      animation: shake 0.5s;
+    }
+    
+    .club-lights {
+      animation: pulse-red 2s infinite;
+    }
+    
+    * {--bw-error: #E63946;
     }
     html, body {
       background: transparent;
@@ -198,6 +228,37 @@
       transition: width 0.3s ease;
     }
     
+    .timer-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: rgba(0,0,0,0.8);
+      z-index: 20;
+      display: none;
+    }
+    .timer-fill {
+      height: 100%;
+      background: var(--bw-error);
+      width: 100%;
+      transition: width linear;
+    }
+    
+    #countdown-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 140px;
+      font-weight: 900;
+      color: rgba(255, 51, 51, 0.3);
+      z-index: 5;
+      display: none;
+      pointer-events: none;
+      text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+    
     #result-container {
       display: none;
       text-align: center;
@@ -223,6 +284,22 @@
       margin-bottom: 30px;
       max-width: 500px;
       line-height: 1.5;
+    }
+    
+    .global-stats {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: var(--bw-white);
+    }
+    .global-stats span {
+      display: block;
+      font-weight: 700;
+      color: var(--bw-yellow);
+      margin-bottom: 4px;
     }
     
     .restart-btn {
@@ -269,15 +346,21 @@
     </div>
     
     <div id="game-container">
+      <div id="countdown-text">5</div>
       <div class="dialogue-box">
         <p class="question-title" id="question-text"></p>
       </div>
       <div class="options-grid" id="options-grid"></div>
+      <div class="timer-bar" id="timer"><div class="timer-fill" id="timer-fill"></div></div>
     </div>
     
     <div id="result-container">
       <h2 class="result-title" id="result-title"></h2>
       <p class="result-msg" id="result-msg"></p>
+      <div class="global-stats" id="global-stats" style="display: none;">
+        <span>Global Rejection Rate</span>
+        <div id="stats-text">Loading stats...</div>
+      </div>
       <div class="action-row">
         <button class="restart-btn share-btn" onclick="shareResult()">Share Result</button>
         <button class="restart-btn" onclick="location.reload()">Try Again</button>
@@ -287,10 +370,13 @@
 
   <script>
     let gameData = null;
-    let currentPhaseIndex = 0;
+    let currentPhaseId = 'outfit';
     let score = 0;
+    let stepCount = 0;
     let bgmAudio = null;
     let currentVoiceAudio = null;
+    let countdown;
+    let countdownInterval;
     
     const simContainer = document.getElementById('bw-bouncer-sim');
 
@@ -314,7 +400,7 @@
       
       document.getElementById('start-screen').style.display = 'none';
       document.getElementById('game-container').style.display = 'flex';
-      document.getElementById('progress').style.display = 'block';
+      
       showPhase();
     }
     
@@ -334,11 +420,23 @@
       typeWriter();
     }
     
+    function triggerShake() {
+      simContainer.classList.remove('shake');
+      void simContainer.offsetWidth; // trigger reflow
+      simContainer.classList.add('shake');
+    }
+
     function setBackground(state) {
+      simContainer.classList.remove('club-lights');
       if (state === 'idle' || state === 'queue') {
         simContainer.style.backgroundImage = "url('assets/bouncer_idle.png')";
+        if (state === 'idle') simContainer.classList.add('club-lights');
       } else if (state === 'suspicious') {
         simContainer.style.backgroundImage = "url('assets/bouncer_suspicious.png')";
+        simContainer.classList.add('club-lights');
+      } else if (state === 'sven') {
+        simContainer.style.backgroundImage = "url('assets/sven_boss.png')";
+        simContainer.classList.add('club-lights');
       } else if (state === 'success' || state === 'vip') {
         simContainer.style.backgroundImage = "url('assets/success.png')";
       } else if (state === 'fail' || state === 'shame') {
@@ -347,14 +445,46 @@
         simContainer.style.backgroundImage = "none";
       }
     }
+    
+    function startTimer(durationMs) {
+      document.getElementById('timer').style.display = 'block';
+      const fill = document.getElementById('timer-fill');
+      fill.style.transition = 'none';
+      fill.style.width = '100%';
+      setTimeout(() => {
+        fill.style.transition = `width ${durationMs}ms linear`;
+        fill.style.width = '0%';
+      }, 50);
+
+      const cdText = document.getElementById('countdown-text');
+      cdText.style.display = 'block';
+      let secLeft = durationMs / 1000;
+      cdText.textContent = secLeft;
+      
+      clearInterval(countdownInterval);
+      countdownInterval = setInterval(() => {
+        secLeft--;
+        if (secLeft > 0) {
+          cdText.textContent = secLeft;
+        } else {
+          clearInterval(countdownInterval);
+        }
+      }, 1000);
+
+      clearTimeout(countdown);
+      countdown = setTimeout(() => {
+        score = -200; // instant fail
+        showResult("You froze under pressure. The bouncer stared right through you and pointed to the exit.");
+      }, durationMs);
+    }
 
     function showPhase() {
-      if (currentPhaseIndex >= gameData.phases.length) {
+      if (!gameData.phases[currentPhaseId]) {
         showResult();
         return;
       }
       
-      const phase = gameData.phases[currentPhaseIndex];
+      const phase = gameData.phases[currentPhaseId];
       
       // Handle random pool vs single question
       let q = phase;
@@ -362,7 +492,18 @@
         q = phase.randomPool[Math.floor(Math.random() * phase.randomPool.length)];
       }
       
-      setBackground(phase.bouncerState || q.bouncerState || 'none');
+      const bState = phase.bouncerState || q.bouncerState || 'none';
+      setBackground(bState);
+      
+      // Start 5s timer if facing the bouncer
+      if (bState === 'idle' || bState === 'suspicious' || bState === 'sven') {
+         startTimer(5000);
+      } else {
+         document.getElementById('timer').style.display = 'none';
+         document.getElementById('countdown-text').style.display = 'none';
+         clearTimeout(countdown);
+         clearInterval(countdownInterval);
+      }
       
       const qTextEl = document.getElementById('question-text');
       typeText(qTextEl, q.question);
@@ -383,7 +524,7 @@
         q.options.forEach(opt => {
           const btn = document.createElement('div');
           btn.className = 'card-btn';
-          btn.onclick = () => selectOption(opt.score);
+          btn.onclick = () => selectOption(opt.score, opt.next);
           btn.innerHTML = `<img src="${opt.image}" alt=""><div class="card-label">${opt.text}</div>`;
           grid.appendChild(btn);
         });
@@ -393,7 +534,7 @@
           const btn = document.createElement('button');
           btn.className = 'option-btn';
           btn.textContent = opt.text;
-          btn.onclick = () => selectOption(opt.score);
+          btn.onclick = () => selectOption(opt.score, opt.next);
           grid.appendChild(btn);
         });
       }
@@ -401,19 +542,38 @@
       updateProgress();
     }
     
-    function selectOption(points) {
+    function selectOption(points, nextPhaseId) {
+      clearTimeout(countdown);
+      clearInterval(countdownInterval);
+      document.getElementById('timer').style.display = 'none';
+      document.getElementById('countdown-text').style.display = 'none';
+      
+      if (points < 0) triggerShake();
+      
       score += points;
+      stepCount++;
       
       if (points <= -100) {
         showResult();
         return;
       }
       
-      currentPhaseIndex++;
+      if (nextPhaseId === 'end') {
+        showResult();
+        return;
+      }
+      
+      // Easter Egg Check
+      if (nextPhaseId === 'door1' && score === 13) {
+        currentPhaseId = 'sven_encounter';
+      } else {
+        currentPhaseId = nextPhaseId;
+      }
+      
       showPhase();
     }
     
-    function showResult() {
+    function showResult(customMsg = null) {
       document.getElementById('game-container').style.display = 'none';
       document.getElementById('progress').style.display = 'none';
       
@@ -447,10 +607,30 @@
       
       titleEl.textContent = resData.title;
       titleEl.className = 'result-title ' + (endingKey === 'success' || endingKey === 'vip' ? 'success' : 'fail');
-      msgEl.textContent = resData.message;
+      msgEl.textContent = customMsg ? customMsg : resData.message;
       
       // Save endingKey globally for sharing
       window.currentEnding = endingKey;
+      
+      // Fetch Mock Global Stats
+      fetchGlobalStats(endingKey === 'success' || endingKey === 'vip');
+    }
+    
+    function fetchGlobalStats(isSuccess) {
+      document.getElementById('global-stats').style.display = 'block';
+      setTimeout(() => {
+        // Mock data logic. To connect to Wix, replace this with a fetch() call to Wix Velo HTTP Function.
+        const total = 1452 + Math.floor(Math.random() * 50);
+        const rejected = Math.floor(total * 0.92);
+        const rate = ((rejected/total)*100).toFixed(1);
+        const topRate = (100 - rate).toFixed(1);
+        
+        if (isSuccess) {
+          document.getElementById('stats-text').innerHTML = `Today: ${rejected} rejected.<br>You are in the top ${topRate}%.`;
+        } else {
+          document.getElementById('stats-text').innerHTML = `Today: ${rejected} rejected.<br>You are part of the ${rate}%.`;
+        }
+      }, 800);
     }
     
     function fallbackCopy(text) {
@@ -465,11 +645,14 @@
     }
 
     function shareResult() {
+      let statsText = document.getElementById('stats-text').innerText.replace('\n', ' ');
+      if (statsText.includes("Loading")) statsText = "";
+      
       const texts = {
-        vip: "I am a Stammgast! I breezed past the world's hardest door.",
-        success: "I got in! I survived the Berlin Bouncer Simulator.",
-        fail: "Heute leider nicht. I got rejected at the Berghain door.",
-        shame: "I got kicked out of the line for being a tourist..."
+        vip: `I am a Stammgast! I breezed past the world's hardest door. ${statsText}`,
+        success: `I got in! I survived the Berlin Bouncer Simulator. ${statsText}`,
+        fail: `Heute leider nicht. I got rejected at the Berghain door. ${statsText}`,
+        shame: `I got kicked out of the line for being a tourist... ${statsText}`
       };
       const text = texts[window.currentEnding] || "Can you get into Berghain?";
       
@@ -488,10 +671,10 @@
     }
     
     function updateProgress() {
-      const pct = (currentPhaseIndex / gameData.phases.length) * 100;
-      document.getElementById('progress-fill').style.width = pct + '%';
+      const pct = (stepCount / 4) * 100; // max steps is typically 4
+      document.getElementById('progress-fill').style.width = Math.min(pct, 100) + '%';
     }
-
+    
     // Init
     loadData();
   </script>

@@ -1,3 +1,12 @@
+## 2026-06-22: Added visual countdown text
+- Overlaid a large, pulsating countdown number (5..4..) in the middle of the screen during bouncer questions to make the pressure system more obvious.
+
+## 2026-06-22: Viral Masterpiece Upgrade for 'Can You Get Into Berghain?'
+- Added 5-second countdown timer for bouncer questions. Instant fail on timeout.
+- Added Global Stats mock API to results page and sharing payload.
+- Implemented CSS animations: screen shake on bad choices and pulsating club lights.
+- Generated 'Sven' boss encounter (image + ElevenLabs audio) and added secret branching logic to `data.json`.
+
 ## 2026-06-22: UI Tweaks for 'Can You Get Into Berghain?'
 - Generated a realistic Berghain exterior image and set it as the background for the Start Screen.
 - Added a 'Share Result' button to the End Screen utilizing the Web Share API (with clipboard fallback).
