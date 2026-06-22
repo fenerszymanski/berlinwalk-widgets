@@ -1,3 +1,14 @@
+## 2026-06-22 — Codex (Berghain bouncer spacing balance)
+
+**Did:** Rebalanced the live `/games/berghain-bouncer` page so the `Playable Now` block has more top breathing room and the black space before the footer is shorter on desktop.
+
+**Changed:** `berlin-bouncer-page/berlin-bouncer-page-element.js` now uses `ASSET_BUILD=bouncer-layout-balance-20260622`. Desktop layout padding is `clamp(48px, 7svh, 56px) 20px 20px`, and the component syncs its Wix desktop shell height to `800px` on mount/resize while clearing that override below 961px. Commit `5a90681` was pushed to `origin/main`.
+
+**QA:** `node --check` and `git diff --check` passed. Local desktop QA: `Playable Now` is 50px below host top, device bottom space is 86px, CTA bottom space is 20px, overflowX `0`. Local 390px mobile QA: top padding 48px, device height 620px, overflowX `0`. GitHub Pages served the new marker on attempt 16. Live Wix desktop QA: iframe `v=bouncer-layout-balance-20260622`, host height reduced from 912px to 800px, `Playable Now` is 50px below host top, device bottom space reduced from 257px to 124px, footer gap `-6`, overflowX `0`; top and footer-transition screenshots looked clean. Live mobile QA: marker current, desktop shell override disabled, top spacing 48px, footer gap `-1`, overflowX `0`.
+
+**Opened:** None.
+**Closed:** Public Berghain bouncer hero/footer spacing balance is live-verified.
+
 ## 2026-06-22 — Codex (Berghain bouncer footer bridge)
 
 **Did:** Closed the white gap that could appear between the `/games/berghain-bouncer` custom element and the site footer in the Atlas/Wix live render.
