@@ -46,12 +46,14 @@
       animation: pulse-red 2s infinite;
     }
     
-    * {--bw-error: #E63946;
+    * {
+      box-sizing: border-box;
+      --bw-error: #E63946;
     }
     html, body {
       background: transparent;
-      margin: 0;
-      padding: 0;
+      margin: 0 !important;
+      padding: 0 !important;
       font-family: Montserrat, Arial, sans-serif;
     }
     #bw-bouncer-sim {
@@ -62,7 +64,7 @@
       color: var(--bw-white);
       margin: 0;
       width: 100%;
-      min-height: 100vh;
+      height: 100vh;
       position: relative;
       display: flex;
       flex-direction: column;
