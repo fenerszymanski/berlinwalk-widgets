@@ -228,7 +228,7 @@ class BwBerlinBouncerPage extends HTMLElement {
 
         <div class="bw-bouncer-device" id="bouncer-game">
           <iframe 
-            src="${new URL('berlin-bouncer/index.html?attribution=none', BASE_URL).toString()}" 
+            src="${new URL('berlin-bouncer/index.html?attribution=none&v=' + Date.now(), BASE_URL).toString()}" 
             allow="autoplay; clipboard-write; shared-storage"
             scrolling="no"
             title="Berlin Bouncer Simulator">
