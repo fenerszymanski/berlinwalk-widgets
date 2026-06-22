@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL 
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'bouncer-stats-mobile-air-20260622';
+const ASSET_BUILD = 'bouncer-share-timer-20260622';
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
@@ -223,7 +223,7 @@ class BwBerlinBouncerPage extends HTMLElement {
         <div class="bw-bouncer-content">
           <div class="bw-bouncer-eyebrow">Playable Now</div>
           <h1>Can You Get <span>Into Berghain?</span></h1>
-          <p>The world's strictest door policy meets a 5-second pressure cooker. Test your Berlin clubbing instincts.</p>
+          <p>The world's strictest door policy meets a 10-second pressure cooker. Test your Berlin clubbing instincts.</p>
           
           <ul class="bw-bouncer-feature-list">
             <li>Choose your outfit wisely</li>

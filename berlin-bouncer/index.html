@@ -248,16 +248,34 @@
     
     #countdown-text {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 140px;
+      top: 14px;
+      left: 14px;
+      min-width: 86px;
+      padding: 10px 12px 8px;
+      border: 2px solid rgba(255, 51, 51, 0.95);
+      border-radius: 12px;
+      background: rgba(0, 0, 0, 0.82);
+      font-size: 52px;
+      line-height: 0.9;
       font-weight: 900;
-      color: rgba(255, 51, 51, 0.3);
-      z-index: 5;
+      color: var(--bw-white);
+      text-align: center;
+      z-index: 45;
       display: none;
       pointer-events: none;
-      text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+      text-shadow: 0 0 18px rgba(255, 51, 51, 0.75);
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.08), 0 10px 30px rgba(0,0,0,0.45), 0 0 28px rgba(255,51,51,0.35);
+    }
+
+    #countdown-text::after {
+      content: "SECONDS";
+      display: block;
+      margin-top: 6px;
+      color: var(--bw-yellow);
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: 1.6px;
     }
     
     #result-container {
@@ -333,6 +351,37 @@
       justify-content: center;
       flex-wrap: wrap;
     }
+
+    .share-toast {
+      position: absolute;
+      left: 50%;
+      bottom: 18px;
+      transform: translate(-50%, 14px);
+      z-index: 70;
+      max-width: min(92vw, 420px);
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: rgba(8, 20, 10, 0.94);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: var(--bw-white);
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .share-toast.is-visible {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .share-toast.is-error {
+      border-color: rgba(230, 57, 70, 0.7);
+      color: #FFD6DA;
+    }
     
     /* Force hide brand.js auto-injected footer badge in standalone view */
     .bw-attr-badge { display: none !important; }
@@ -350,7 +399,7 @@
     </div>
     
     <div id="game-container">
-      <div id="countdown-text">5</div>
+      <div id="countdown-text">10</div>
       <div class="dialogue-box">
         <p class="question-title" id="question-text"></p>
       </div>
@@ -366,10 +415,11 @@
         <div id="stats-text">Loading stats...</div>
       </div>
       <div class="action-row">
-        <button class="restart-btn share-btn" onclick="shareResult()">Share Result</button>
+        <button class="restart-btn share-btn" id="share-result-btn" onclick="shareResult()">Share Result</button>
         <button class="restart-btn" onclick="location.reload()">Try Again</button>
       </div>
     </div>
+    <div class="share-toast" id="share-toast" role="status" aria-live="polite"></div>
   </main>
 
   <script>
@@ -381,6 +431,7 @@
     let currentVoiceAudio = null;
     let countdown;
     let countdownInterval;
+    let shareToastTimeout;
     let trackingSequence = 0;
     
     const simContainer = document.getElementById('bw-bouncer-sim');
@@ -559,6 +610,53 @@
       }
     }
 
+    function publicShareUrl() {
+      return urlParam('parent_url') || 'https://www.berlinwalk.com/games/berghain-bouncer';
+    }
+
+    function showShareToast(message, isError = false) {
+      const toast = document.getElementById('share-toast');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.toggle('is-error', isError);
+      toast.classList.add('is-visible');
+      clearTimeout(shareToastTimeout);
+      shareToastTimeout = setTimeout(() => {
+        toast.classList.remove('is-visible');
+      }, 2600);
+    }
+
+    function flashShareButton(label) {
+      const button = document.getElementById('share-result-btn');
+      if (!button) return;
+      const original = button.dataset.originalLabel || button.textContent;
+      button.dataset.originalLabel = original;
+      button.textContent = label;
+      setTimeout(() => {
+        button.textContent = button.dataset.originalLabel || 'Share Result';
+      }, 1800);
+    }
+
+    function copyViaTextArea(text) {
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.left = '-9999px';
+      area.style.top = '0';
+      document.body.appendChild(area);
+      area.select();
+      area.setSelectionRange(0, area.value.length);
+      let copied = false;
+      try {
+        copied = document.execCommand('copy');
+      } catch (error) {
+        copied = false;
+      }
+      document.body.removeChild(area);
+      return copied;
+    }
+
     async function loadData() {
       try {
         const response = await fetch('data.json');
@@ -661,6 +759,13 @@
       }, durationMs);
     }
 
+    function stopTimer() {
+      clearTimeout(countdown);
+      clearInterval(countdownInterval);
+      document.getElementById('timer').style.display = 'none';
+      document.getElementById('countdown-text').style.display = 'none';
+    }
+
     function showPhase() {
       if (!gameData.phases[currentPhaseId]) {
         showResult();
@@ -678,14 +783,11 @@
       const bState = phase.bouncerState || q.bouncerState || 'none';
       setBackground(bState);
       
-      // Start 5s timer if facing the bouncer
+      // Start 10s timer if facing the bouncer
       if (bState === 'idle' || bState === 'suspicious' || bState === 'sven') {
-         startTimer(5000);
+         startTimer(10000);
       } else {
-         document.getElementById('timer').style.display = 'none';
-         document.getElementById('countdown-text').style.display = 'none';
-         clearTimeout(countdown);
-         clearInterval(countdownInterval);
+         stopTimer();
       }
       
       const qTextEl = document.getElementById('question-text');
@@ -726,10 +828,7 @@
     }
     
     function selectOption(points, nextPhaseId) {
-      clearTimeout(countdown);
-      clearInterval(countdownInterval);
-      document.getElementById('timer').style.display = 'none';
-      document.getElementById('countdown-text').style.display = 'none';
+      stopTimer();
       
       if (points < 0) triggerShake();
       
@@ -757,6 +856,7 @@
     }
     
     function showResult(customMsg = null) {
+      stopTimer();
       document.getElementById('game-container').style.display = 'none';
       document.getElementById('progress').style.display = 'none';
       
@@ -824,14 +924,23 @@
       });
     }
     
-    function fallbackCopy(text) {
-      const fullText = `${text} Try it here: ${window.location.href}`;
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(fullText).then(() => {
-          alert('Result copied to clipboard!');
-        }).catch(() => alert('Could not copy automatically.'));
+    async function fallbackCopy(text) {
+      const fullText = `${text} Try it here: ${publicShareUrl()}`;
+      let copied = false;
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(fullText);
+          copied = true;
+        } catch (error) {
+          copied = false;
+        }
+      }
+      if (!copied) copied = copyViaTextArea(fullText);
+      if (copied) {
+        flashShareButton('Copied');
+        showShareToast('Result copied. Paste it anywhere.');
       } else {
-        alert('Share this link: ' + window.location.href);
+        showShareToast('Copy blocked. Use the page link to share your result.', true);
       }
     }
 
@@ -857,10 +966,10 @@
         navigator.share({
           title: 'Berlin Bouncer Simulator',
           text: text,
-          url: window.location.href
+          url: publicShareUrl()
         }).catch(err => {
           console.log('Native share not supported or cancelled:', err);
-          fallbackCopy(text);
+          if (!err || err.name !== 'AbortError') fallbackCopy(text);
         });
       } else {
         fallbackCopy(text);
