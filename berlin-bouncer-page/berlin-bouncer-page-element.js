@@ -1,3 +1,8 @@
+const SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
+const BASE_URL = SCRIPT_URL
+  ? new URL('../', SCRIPT_URL).toString()
+  : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
+
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
     this._ensureFont();
@@ -214,7 +219,7 @@ class BwBerlinBouncerPage extends HTMLElement {
 
         <div class="bw-bouncer-device" id="bouncer-game">
           <iframe 
-            src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bouncer/index.html" 
+            src="${new URL('berlin-bouncer/index.html?attribution=none', BASE_URL).toString()}" 
             allow="autoplay; clipboard-write; shared-storage"
             title="Berlin Bouncer Simulator">
           </iframe>
