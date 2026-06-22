@@ -32,7 +32,6 @@ class BwBerlinBouncerPage extends HTMLElement {
           font-family: 'Chakra Petch', sans-serif;
           background: var(--bw-dark);
           color: var(--bw-white);
-          min-height: 100vh;
         }
 
         bw-berlin-bouncer-page *,
@@ -43,17 +42,19 @@ class BwBerlinBouncerPage extends HTMLElement {
 
         .bw-bouncer-layout {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          max-width: 1400px;
+          grid-template-columns: 1fr 440px;
+          grid-template-areas: 
+            "content game"
+            "cta game";
+          gap: 40px 60px;
+          max-width: 1200px;
           margin: 0 auto;
-          min-height: 100vh;
-          padding: 40px;
-          gap: 60px;
           align-items: center;
+          padding: 40px 20px;
         }
 
         .bw-bouncer-content {
-          padding-right: 40px;
+          grid-area: content;
         }
 
         .bw-bouncer-eyebrow {
@@ -113,10 +114,12 @@ class BwBerlinBouncerPage extends HTMLElement {
         }
 
         .bw-bouncer-tour-cta {
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.1);
+          grid-area: cta;
+          background: #111;
           padding: 24px;
-          border-radius: 12px;
+          border-radius: 16px;
+          border-left: 4px solid var(--bw-neon);
+          align-self: start;
         }
         
         .bw-bouncer-tour-cta h3 {
@@ -171,6 +174,10 @@ class BwBerlinBouncerPage extends HTMLElement {
         @media (max-width: 960px) {
           .bw-bouncer-layout {
             grid-template-columns: 1fr;
+            grid-template-areas: 
+              "content"
+              "game"
+              "cta";
             padding: 20px;
             gap: 40px;
           }
@@ -186,6 +193,10 @@ class BwBerlinBouncerPage extends HTMLElement {
             margin-right: auto;
             text-align: left;
             max-width: 400px;
+          }
+
+          .bw-bouncer-tour-cta {
+            text-align: left;
           }
 
           .bw-bouncer-device {
@@ -209,12 +220,6 @@ class BwBerlinBouncerPage extends HTMLElement {
             <li>Face the legendary bouncers</li>
             <li>See how you rank globally</li>
           </ul>
-
-          <div class="bw-bouncer-tour-cta">
-            <h3>Survived the door?</h3>
-            <p>Now survive the city. Join my tip-based walking tour to connect the places and history that make Berlin start to click.</p>
-            <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book the Walking Tour</a>
-          </div>
         </div>
 
         <div class="bw-bouncer-device" id="bouncer-game">
@@ -223,6 +228,12 @@ class BwBerlinBouncerPage extends HTMLElement {
             allow="autoplay; clipboard-write; shared-storage"
             title="Berlin Bouncer Simulator">
           </iframe>
+        </div>
+
+        <div class="bw-bouncer-tour-cta">
+          <h3>Survived the door?</h3>
+          <p>Now survive the city. Join my tip-based walking tour to connect the places and history that make Berlin start to click.</p>
+          <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book the Walking Tour</a>
         </div>
 
       </main>
