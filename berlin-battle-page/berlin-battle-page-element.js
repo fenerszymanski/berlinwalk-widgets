@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'single-game-heading-20260621';
+  const ASSET_BUILD = 'card-duel-page-20260623';
   const TOPIC_TITLES = {
     food: 'Berlin Food Battle',
     districts: 'Berlin District Battle',
@@ -28,7 +28,7 @@
 
     const font = document.createElement('link');
     font.rel = 'stylesheet';
-    font.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Merriweather:wght@400;700&display=swap';
+    font.href = 'https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,800;9..144,900&family=Space+Grotesk:wght@400;600;700&display=swap';
     font.dataset.bwBattlePageFont = 'true';
 
     document.head.appendChild(preconnect);
@@ -79,50 +79,53 @@
       const isDirectPlay = Boolean(directTopicId);
       const pageClass = isDirectPlay ? 'bw-battle-page bw-battle-page-direct' : 'bw-battle-page';
       const heroTitle = isDirectPlay ? 'Pick your Berlin winner' : 'Berlin Battle';
+      const heroAccent = isDirectPlay ? '' : '<span>Pick Your Winner</span>';
       const heroLead = isDirectPlay
         ? 'Your first match is ready below. Tap one card and keep choosing until one Berlin favorite wins.'
-        : 'Pick between Berlin food, districts, transport, clubs, parks, lines and nights. Get a personal winner, then meet the real city on the walking route.';
+        : 'Food, districts, museums, night plans, transport lines and tiny Berlin loyalties go head to head. Pick fast, get a winner, then meet the real city outside the screen.';
       const heroAction = isDirectPlay
         ? ''
         : '<div class="bw-battle-actions"><a class="bw-battle-btn bw-battle-btn-primary" href="#battle-game">Play now</a></div>';
-      const gameHead = '';
+      const featureList = isDirectPlay
+        ? ''
+        : '<ul class="bw-battle-feature-list"><li>Choose between real Berlin favorites</li><li>Start any one of 10 battle modes</li><li>Get a shareable winner card</li><li>Turn the picks into places to visit</li></ul>';
+      const deviceLabel = isDirectPlay ? TOPIC_TITLES[directTopicId] : '10 Battle Modes';
+
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="${pageClass}" aria-labelledby="bw-battle-title">
-          <section class="bw-battle-hero">
-            <div class="bw-battle-inner bw-battle-hero-inner">
-              <div class="bw-battle-hero-copy">
-                <p class="bw-battle-kicker">BerlinWalk game</p>
-                <h1 id="bw-battle-title">${heroTitle}</h1>
+          <section class="bw-battle-stage">
+            <div class="bw-battle-layout">
+              <div class="bw-battle-copy">
+                <div class="bw-battle-eyebrow">Playable Now</div>
+                <h1 id="bw-battle-title">${heroTitle}${heroAccent}</h1>
                 <p class="bw-battle-lead">${heroLead}</p>
+                ${featureList}
                 ${heroAction}
               </div>
-            </div>
-          </section>
 
-          <section class="bw-battle-game-band" id="battle-game" aria-label="Berlin Battle game">
-            <div class="bw-battle-inner">
-              ${gameHead}
-              <div class="bw-battle-game-shell">
-                <iframe
-                  data-bw-battle-frame
-                  src="${this._gameSrc()}"
-                  allow="web-share; clipboard-write"
-                  title="Berlin Battle game"
-                  loading="eager"
-                  scrolling="no"></iframe>
+              <div class="bw-battle-device" id="battle-game">
+                <div class="bw-battle-device-label" aria-hidden="true">
+                  <span>BerlinWalk</span>
+                  <strong>${deviceLabel}</strong>
+                </div>
+                <div class="bw-battle-screen">
+                  <iframe
+                    data-bw-battle-frame
+                    data-src="${this._gameSrc()}"
+                    src="about:blank"
+                    allow="web-share; clipboard-write"
+                    title="Berlin Battle game"
+                    loading="eager"
+                    scrolling="no"></iframe>
+                </div>
               </div>
-            </div>
-          </section>
 
-          <section class="bw-battle-final" aria-label="BerlinWalk connection">
-            <div class="bw-battle-inner bw-battle-final-box">
-              <div>
-                <p class="bw-battle-section-kicker">After the game</p>
-                <h2>Want the real city version?</h2>
-                <p>Berlin Battle is the playful warm-up. On the walking tour, I connect the places, stories and route stops that make Berlin start to click.</p>
+              <div class="bw-battle-tour-cta">
+                <h3>Want the real city version?</h3>
+                <p>After your winner, come walk the streets behind the choices. Join my tip-based Berlin walking tour and turn the game into places you can stand in.</p>
+                <a href="${BOOKING_URL}">Book the Walking Tour</a>
               </div>
-              <a class="bw-battle-btn bw-battle-btn-primary" href="${BOOKING_URL}">Walk Berlin with me</a>
             </div>
           </section>
         </main>
@@ -135,7 +138,7 @@
           const target = this.querySelector(link.getAttribute('href'));
           if (!target) return;
           event.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
       });
     }
@@ -144,43 +147,53 @@
       this._gameFrame = this.querySelector('[data-bw-battle-frame]');
       if (!this._gameFrame) return;
 
-      const setFrameHeight = (height) => {
+      this._hasChildResize = false;
+
+      const setFrameHeight = (height, fromChild) => {
         if (!isValidHeight(height)) return;
+        if (!fromChild && this._hasChildResize) return;
+        if (fromChild) this._hasChildResize = true;
         this._gameFrame.style.height = `${Math.ceil(height)}px`;
       };
 
       this._messageHandler = (event) => {
         if (!this._gameFrame || event.source !== this._gameFrame.contentWindow) return;
         if (!event.data || event.data.type !== 'bw-resize') return;
-        setFrameHeight(event.data.height + 10);
+        setFrameHeight(event.data.height + 10, true);
       };
       window.addEventListener('message', this._messageHandler);
 
       this._frameLoadHandler = () => {
-        setFrameHeight(620);
+        setFrameHeight(620, false);
       };
       this._gameFrame.addEventListener('load', this._frameLoadHandler);
 
-      this._timers = [200, 800, 1800].map((delay) => window.setTimeout(() => setFrameHeight(620), delay));
+      const pendingSrc = this._gameFrame.dataset.src;
+      if (pendingSrc) this._gameFrame.src = pendingSrc;
+
+      this._timers = [200, 800, 1800].map((delay) => window.setTimeout(() => setFrameHeight(620, false), delay));
     }
 
     _styles() {
       return `
         bw-berlin-battle-page {
-          --bw-green: #1B5E20;
-          --bw-green-dark: #123F16;
-          --bw-yellow: #FFE600;
-          --bw-lime: #7CB342;
-          --bw-light-green: #C5E1A5;
-          --bw-cream: #FAFAF5;
-          --bw-white: #FFFFFF;
-          --bw-text: #212121;
-          --bw-muted: #526052;
-          --bw-border: rgba(27, 94, 32, 0.16);
+          --bb-paper: #FFF2DC;
+          --bb-paper-deep: #FFE1B5;
+          --bb-ink: #102B36;
+          --bb-ink-soft: rgba(16, 43, 54, 0.78);
+          --bb-coral: #FF5A3D;
+          --bb-coral-dark: #CF321E;
+          --bb-teal: #147B78;
+          --bb-sun: #FFD447;
+          --bb-white: #FFFCF5;
+          --bb-line: rgba(16, 43, 54, 0.18);
           display: block;
-          font-family: Montserrat, Arial, sans-serif;
-          color: var(--bw-text);
-          background: var(--bw-cream);
+          font-family: 'Space Grotesk', Arial, sans-serif;
+          color: var(--bb-ink);
+          background: var(--bb-paper);
+          overflow: visible;
+          position: relative;
+          z-index: 0;
         }
 
         bw-berlin-battle-page,
@@ -192,158 +205,230 @@
         }
 
         .bw-battle-page {
-          background: var(--bw-cream);
-          color: var(--bw-text);
-          font-family: Montserrat, Arial, sans-serif;
-          overflow: hidden;
-        }
-
-        .bw-battle-inner {
-          width: min(1120px, calc(100% - 32px));
-          margin: 0 auto;
-        }
-
-        .bw-battle-hero {
           background:
-            linear-gradient(0deg, rgba(27, 94, 32, 0.04), rgba(27, 94, 32, 0)),
-            var(--bw-cream);
+            linear-gradient(90deg, rgba(255, 90, 61, 0.08), rgba(20, 123, 120, 0.10)),
+            repeating-linear-gradient(90deg, rgba(16, 43, 54, 0.035) 0, rgba(16, 43, 54, 0.035) 1px, transparent 1px, transparent 72px),
+            var(--bb-paper);
+          color: var(--bb-ink);
+          font-family: 'Space Grotesk', Arial, sans-serif;
           overflow: hidden;
-          padding: clamp(42px, 7vw, 78px) 0 clamp(28px, 5vw, 46px);
+        }
+
+        .bw-battle-stage {
+          padding: 58px 20px 64px;
           position: relative;
-          isolation: isolate;
         }
 
-        .bw-battle-hero::before {
+        .bw-battle-stage::before {
           background:
-            linear-gradient(0deg, rgba(27, 94, 32, 0.05), rgba(27, 94, 32, 0)),
-            repeating-linear-gradient(90deg, rgba(27, 94, 32, 0.035) 0, rgba(27, 94, 32, 0.035) 1px, transparent 1px, transparent 58px);
+            linear-gradient(135deg, transparent 0, transparent 48%, rgba(255, 90, 61, 0.18) 48%, rgba(255, 90, 61, 0.18) 52%, transparent 52%),
+            linear-gradient(45deg, transparent 0, transparent 47%, rgba(20, 123, 120, 0.16) 47%, rgba(20, 123, 120, 0.16) 51%, transparent 51%);
           content: "";
-          position: absolute;
           inset: 0;
-          z-index: -1;
+          opacity: 0.6;
+          pointer-events: none;
+          position: absolute;
         }
 
-        .bw-battle-hero-inner {
-          min-height: clamp(260px, 30vw, 360px);
+        .bw-battle-layout {
+          align-items: center;
+          display: grid;
+          gap: 36px 58px;
+          grid-template-areas:
+            "content game"
+            "cta game";
+          grid-template-columns: minmax(0, 1fr) minmax(330px, 460px);
+          margin: 0 auto;
+          max-width: 1200px;
           position: relative;
           z-index: 1;
         }
 
-        .bw-battle-hero-copy {
-          max-width: 760px;
+        .bw-battle-copy {
+          grid-area: content;
+          max-width: 650px;
           min-width: 0;
         }
 
-        .bw-battle-kicker,
-        .bw-battle-section-kicker {
-          color: var(--bw-green);
-          display: block;
-          font-size: 12px;
+        .bw-battle-eyebrow {
+          background: var(--bb-sun);
+          border: 2px solid var(--bb-ink);
+          border-radius: 6px;
+          box-shadow: 5px 5px 0 rgba(16, 43, 54, 0.18);
+          color: var(--bb-ink);
+          display: inline-block;
+          font-size: 13px;
           font-weight: 900;
-          letter-spacing: 2px;
+          letter-spacing: 0;
           line-height: 1.2;
-          margin: 0 0 12px;
+          margin: 0 0 22px;
+          padding: 7px 12px;
           text-transform: uppercase;
         }
 
-        .bw-battle-hero h1 {
-          color: var(--bw-green);
-          font-size: clamp(54px, 8vw, 104px);
+        .bw-battle-copy h1 {
+          color: var(--bb-ink);
+          font-family: 'Fraunces', Georgia, serif;
+          font-size: 88px;
           font-weight: 900;
           letter-spacing: 0;
-          line-height: 0.9;
+          line-height: 0.88;
           margin: 0;
-          max-width: 760px;
+        }
+
+        .bw-battle-copy h1 span {
+          color: var(--bb-coral);
+          display: block;
+          font-family: 'Space Grotesk', Arial, sans-serif;
+          font-size: 52px;
+          font-weight: 900;
+          letter-spacing: 0;
+          line-height: 0.94;
+          margin-top: 10px;
+          text-transform: uppercase;
         }
 
         .bw-battle-lead {
-          color: var(--bw-muted);
-          font-size: clamp(17px, 2vw, 23px);
+          color: var(--bb-ink-soft);
+          font-size: 20px;
+          font-weight: 600;
+          line-height: 1.55;
+          margin: 26px 0 0;
+          max-width: 580px;
+        }
+
+        .bw-battle-feature-list {
+          display: grid;
+          gap: 12px;
+          list-style: none;
+          margin: 34px 0 0;
+          padding: 0;
+        }
+
+        .bw-battle-feature-list li {
+          align-items: center;
+          color: var(--bb-ink);
+          display: flex;
+          font-size: 16px;
           font-weight: 700;
-          line-height: 1.42;
-          margin: 20px 0 0;
-          max-width: 720px;
+          gap: 12px;
+          line-height: 1.35;
+        }
+
+        .bw-battle-feature-list li::before {
+          background: var(--bb-coral);
+          border: 2px solid var(--bb-ink);
+          content: "";
+          display: block;
+          flex: 0 0 auto;
+          height: 10px;
+          transform: rotate(45deg);
+          width: 10px;
         }
 
         .bw-battle-actions {
           display: flex;
           flex-wrap: wrap;
           gap: 12px;
-          margin-top: 24px;
+          margin-top: 34px;
         }
 
-        .bw-battle-btn {
+        .bw-battle-btn,
+        .bw-battle-tour-cta a {
           align-items: center;
-          border-radius: 999px;
+          border: 2px solid var(--bb-ink);
+          border-radius: 6px;
           display: inline-flex;
-          font-size: 13px;
+          font-size: 15px;
           font-weight: 900;
           justify-content: center;
-          min-height: 46px;
-          padding: 14px 18px;
+          letter-spacing: 0;
+          min-height: 48px;
+          padding: 13px 20px;
           text-decoration: none;
+          text-transform: uppercase;
           transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
         }
 
         .bw-battle-btn:hover,
-        .bw-battle-btn:focus-visible {
+        .bw-battle-btn:focus-visible,
+        .bw-battle-tour-cta a:hover,
+        .bw-battle-tour-cta a:focus-visible {
           outline: none;
-          transform: translateY(-1px);
+          transform: translateY(-2px);
         }
 
-        .bw-battle-btn-primary {
-          background: var(--bw-yellow);
-          color: var(--bw-green);
-          box-shadow: 0 14px 30px rgba(27, 94, 32, 0.18);
+        .bw-battle-btn-primary,
+        .bw-battle-tour-cta a {
+          background: var(--bb-coral);
+          box-shadow: 6px 6px 0 var(--bb-ink);
+          color: var(--bb-white);
         }
 
-        .bw-battle-game-band {
-          padding: clamp(28px, 5vw, 54px) 0;
+        .bw-battle-btn-primary:hover,
+        .bw-battle-btn-primary:focus-visible,
+        .bw-battle-tour-cta a:hover,
+        .bw-battle-tour-cta a:focus-visible {
+          background: var(--bb-coral-dark);
+          box-shadow: 4px 4px 0 var(--bb-ink);
         }
 
-        .bw-battle-game-head {
-          align-items: end;
-          display: grid;
-          gap: 18px;
-          grid-template-columns: minmax(0, 0.8fr) minmax(280px, 0.55fr);
-          margin-bottom: 18px;
+        .bw-battle-device {
+          background: var(--bb-ink);
+          border: 8px solid var(--bb-ink);
+          border-radius: 32px;
+          box-shadow: 20px 22px 0 rgba(20, 123, 120, 0.24), 0 28px 60px rgba(16, 43, 54, 0.22);
+          grid-area: game;
+          margin: 0 auto;
+          max-width: 460px;
+          padding: 10px;
+          position: relative;
+          width: min(100%, 460px);
         }
 
-        .bw-battle-game-head .bw-battle-section-kicker,
-        .bw-battle-final .bw-battle-section-kicker {
-          color: var(--bw-green);
+        .bw-battle-device::before {
+          border: 3px solid var(--bb-coral);
+          border-radius: 32px;
+          content: "";
+          inset: 16px -18px -18px 16px;
+          pointer-events: none;
+          position: absolute;
+          transform: rotate(1.5deg);
+          z-index: -1;
         }
 
-        .bw-battle-game-head h2,
-        .bw-battle-final h2 {
-          color: var(--bw-text);
-          font-size: clamp(30px, 4.8vw, 58px);
+        .bw-battle-device-label {
+          align-items: center;
+          background: var(--bb-sun);
+          border: 2px solid var(--bb-ink);
+          border-radius: 20px 20px 8px 8px;
+          color: var(--bb-ink);
+          display: flex;
+          font-size: 12px;
           font-weight: 900;
+          gap: 12px;
+          justify-content: space-between;
           letter-spacing: 0;
-          line-height: 0.96;
-          margin: 0;
+          line-height: 1.1;
+          padding: 10px 14px;
+          text-transform: uppercase;
         }
 
-        .bw-battle-game-head p,
-        .bw-battle-final p {
-          color: var(--bw-muted);
-          font-size: 16px;
-          font-weight: 700;
-          line-height: 1.55;
-          margin: 0;
+        .bw-battle-device-label strong {
+          color: var(--bb-teal);
+          font-size: 12px;
+          letter-spacing: 0;
+          text-align: right;
         }
 
-        .bw-battle-game-shell {
-          background:
-            linear-gradient(135deg, rgba(255, 230, 0, 0.15), rgba(124, 179, 66, 0.10)),
-            var(--bw-cream);
-          border: 1px solid var(--bw-border);
-          border-radius: 8px;
-          box-shadow: 0 18px 50px rgba(18, 63, 22, 0.13);
+        .bw-battle-screen {
+          background: var(--bb-white);
+          border-radius: 22px;
+          margin-top: 10px;
           overflow: hidden;
         }
 
-        .bw-battle-game-shell iframe {
+        .bw-battle-screen iframe {
           border: 0;
           display: block;
           height: 620px;
@@ -351,141 +436,238 @@
           width: 100%;
         }
 
-        .bw-battle-page-direct .bw-battle-hero {
-          border-bottom: 1px solid var(--bw-border);
-          padding: 16px 0 12px;
+        .bw-battle-tour-cta {
+          align-self: start;
+          background: rgba(255, 252, 245, 0.92);
+          border: 2px solid var(--bb-ink);
+          border-left: 8px solid var(--bb-coral);
+          border-radius: 8px;
+          box-shadow: 10px 10px 0 rgba(16, 43, 54, 0.12);
+          grid-area: cta;
+          max-width: 650px;
+          padding: 24px;
         }
 
-        .bw-battle-page-direct .bw-battle-hero::before {
-          background:
-            linear-gradient(90deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.08)),
-            var(--bw-cream);
+        .bw-battle-tour-cta h3 {
+          color: var(--bb-ink);
+          font-size: 19px;
+          font-weight: 900;
+          letter-spacing: 0;
+          line-height: 1.15;
+          margin: 0 0 9px;
         }
 
-        .bw-battle-page-direct .bw-battle-hero-inner {
-          min-height: 0;
+        .bw-battle-tour-cta p {
+          color: var(--bb-ink-soft);
+          font-size: 15px;
+          font-weight: 600;
+          line-height: 1.5;
+          margin: 0 0 18px;
         }
 
-        .bw-battle-page-direct .bw-battle-hero-copy {
-          max-width: 980px;
+        .bw-battle-tour-cta a {
+          min-height: 44px;
+          padding: 11px 18px;
         }
 
-        .bw-battle-page-direct .bw-battle-kicker {
-          font-size: 10px;
-          margin-bottom: 5px;
+        .bw-battle-page-direct .bw-battle-stage {
+          padding: 18px 16px 40px;
         }
 
-        .bw-battle-page-direct .bw-battle-hero h1 {
-          font-size: clamp(22px, 3vw, 34px);
-          line-height: 1.02;
-          max-width: 980px;
+        .bw-battle-page-direct .bw-battle-layout {
+          align-items: start;
+          gap: 16px;
+          grid-template-areas:
+            "content"
+            "game"
+            "cta";
+          grid-template-columns: minmax(0, 1fr);
+          max-width: 1120px;
+        }
+
+        .bw-battle-page-direct .bw-battle-copy {
+          background: rgba(255, 252, 245, 0.86);
+          border: 1px solid var(--bb-line);
+          border-left: 6px solid var(--bb-coral);
+          border-radius: 8px;
+          max-width: 100%;
+          padding: 16px 18px;
+        }
+
+        .bw-battle-page-direct .bw-battle-eyebrow {
+          box-shadow: none;
+          font-size: 11px;
+          margin-bottom: 7px;
+          padding: 5px 9px;
+        }
+
+        .bw-battle-page-direct .bw-battle-copy h1 {
+          font-family: 'Space Grotesk', Arial, sans-serif;
+          font-size: 34px;
+          line-height: 1;
+          text-transform: uppercase;
         }
 
         .bw-battle-page-direct .bw-battle-lead {
-          font-size: clamp(13px, 1.6vw, 16px);
-          line-height: 1.35;
+          font-size: 15px;
+          line-height: 1.4;
           margin-top: 7px;
           max-width: 760px;
         }
 
-        .bw-battle-page-direct .bw-battle-game-band {
-          padding: 10px 0 clamp(24px, 4vw, 42px);
+        .bw-battle-page-direct .bw-battle-feature-list,
+        .bw-battle-page-direct .bw-battle-actions {
+          display: none;
         }
 
-        .bw-battle-page-direct .bw-battle-game-shell {
-          box-shadow: 0 10px 28px rgba(18, 63, 22, 0.11);
+        .bw-battle-page-direct .bw-battle-device {
+          border-radius: 20px;
+          max-width: 1120px;
+          padding: 8px;
+          width: 100%;
         }
 
-        .bw-battle-final {
-          padding: 0 0 clamp(34px, 6vw, 70px);
+        .bw-battle-page-direct .bw-battle-device::before {
+          display: none;
         }
 
-        .bw-battle-final-box {
-          align-items: center;
-          background: var(--bw-white);
-          border: 1px solid var(--bw-border);
-          border-left: 8px solid var(--bw-yellow);
-          border-radius: 8px;
-          display: grid;
-          gap: 22px;
-          grid-template-columns: minmax(0, 1fr) auto;
-          padding: clamp(20px, 4vw, 34px);
+        .bw-battle-page-direct .bw-battle-screen {
+          border-radius: 12px;
         }
 
-        .bw-battle-final .bw-battle-btn-primary {
-          background: var(--bw-green);
-          color: var(--bw-white);
+        .bw-battle-page-direct .bw-battle-tour-cta {
+          max-width: 100%;
         }
 
-        @media (max-width: 820px) {
-          .bw-battle-inner {
-            width: min(100% - 24px, 1120px);
+        @media (max-width: 960px) {
+          .bw-battle-stage {
+            padding: 48px 18px 54px;
           }
 
-          .bw-battle-hero {
-            background: var(--bw-cream);
-            padding-top: 42px;
-          }
-
-          .bw-battle-page-direct .bw-battle-hero {
-            padding: 12px 0 10px;
-          }
-
-          .bw-battle-game-head,
-          .bw-battle-final-box {
+          .bw-battle-layout {
+            gap: 34px;
+            grid-template-areas:
+              "content"
+              "game"
+              "cta";
             grid-template-columns: minmax(0, 1fr);
           }
 
-          .bw-battle-final-box .bw-battle-btn {
-            justify-self: start;
+          .bw-battle-copy {
+            max-width: 720px;
+          }
+
+          .bw-battle-copy h1 {
+            font-size: 66px;
+          }
+
+          .bw-battle-copy h1 span {
+            font-size: 40px;
+          }
+
+          .bw-battle-lead {
+            font-size: 18px;
+            max-width: 640px;
+          }
+
+          .bw-battle-device {
+            max-width: 460px;
+          }
+
+          .bw-battle-tour-cta {
+            max-width: 720px;
           }
         }
 
-        @media (max-width: 520px) {
-          .bw-battle-hero {
-            padding-top: 34px;
+        @media (max-width: 620px) {
+          .bw-battle-stage {
+            padding: 34px 12px 42px;
           }
 
-          .bw-battle-page-direct .bw-battle-inner {
-            width: min(100% - 16px, 1120px);
+          .bw-battle-copy h1 {
+            font-size: 48px;
           }
 
-          .bw-battle-page-direct .bw-battle-hero {
-            padding: 10px 0 8px;
+          .bw-battle-copy h1 span {
+            font-size: 30px;
           }
 
-          .bw-battle-page-direct .bw-battle-hero h1 {
-            font-size: clamp(20px, 6vw, 28px);
+          .bw-battle-lead {
+            font-size: 17px;
+            line-height: 1.48;
           }
 
-          .bw-battle-page-direct .bw-battle-lead {
-            font-size: 12px;
+          .bw-battle-feature-list {
+            gap: 10px;
+            margin-top: 26px;
           }
 
-          .bw-battle-page-direct .bw-battle-game-band {
-            padding-top: 8px;
+          .bw-battle-feature-list li {
+            font-size: 15px;
           }
 
           .bw-battle-actions,
-          .bw-battle-final-box .bw-battle-btn {
+          .bw-battle-btn,
+          .bw-battle-tour-cta a {
             width: 100%;
           }
 
-          .bw-battle-btn {
-            width: 100%;
-          }
-
-          .bw-battle-final-box .bw-battle-btn {
-            justify-self: stretch;
-            max-width: 100%;
+          .bw-battle-btn,
+          .bw-battle-tour-cta a {
             min-width: 0;
-            width: auto;
           }
 
-          .bw-battle-game-shell {
-            border-radius: 8px;
+          .bw-battle-device {
+            border-width: 6px;
+            border-radius: 24px;
+            box-shadow: 10px 14px 0 rgba(20, 123, 120, 0.22), 0 18px 42px rgba(16, 43, 54, 0.18);
+            padding: 7px;
           }
 
+          .bw-battle-device::before {
+            inset: 12px -10px -10px 12px;
+          }
+
+          .bw-battle-device-label {
+            align-items: flex-start;
+            border-radius: 16px 16px 7px 7px;
+            flex-direction: column;
+            gap: 4px;
+          }
+
+          .bw-battle-device-label strong {
+            text-align: left;
+          }
+
+          .bw-battle-screen {
+            border-radius: 16px;
+          }
+
+          .bw-battle-tour-cta {
+            padding: 20px;
+          }
+
+          .bw-battle-page-direct .bw-battle-stage {
+            padding: 14px 10px 34px;
+          }
+
+          .bw-battle-page-direct .bw-battle-copy h1 {
+            font-size: 28px;
+          }
+
+          .bw-battle-page-direct .bw-battle-lead {
+            font-size: 13px;
+          }
+        }
+
+        @media (max-width: 420px) {
+          .bw-battle-copy h1 {
+            font-size: 40px;
+          }
+
+          .bw-battle-copy h1 span {
+            font-size: 25px;
+          }
         }
       `;
     }

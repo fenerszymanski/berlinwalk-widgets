@@ -6,10 +6,10 @@ Use on Wix:
 
 ```html
 <bw-berlin-battle-page></bw-berlin-battle-page>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-page/berlin-battle-page-element.js?v=single-game-heading-20260621"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-page/berlin-battle-page-element.js?v=card-duel-page-20260623"></script>
 ```
 
-The element renders a compact Berlin Battle page and embeds the standalone
+The element renders a card-duel themed Berlin Battle page and embeds the standalone
 `berlin-battle/` game iframe with automatic `bw-resize` handling and the iframe
 permissions needed for the result share/copy actions.
 
