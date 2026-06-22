@@ -2,12 +2,12 @@
 
 **Did:** Added mobile breathing room above the first `Playable Now` block and wired the Berghain bouncer result screen to live Wix CMS stats instead of mock totals.
 
-**Changed:** `berlin-bouncer-page/berlin-bouncer-page-element.js` now uses `ASSET_BUILD=bouncer-stats-mobile-air-20260622` and gives the mobile page layout `48px` top padding. `berlin-bouncer/index.html` now sends `bw_berlin_bouncer_start`, `bw_berlin_bouncer_result`, and `bw_berlin_bouncer_share` events to `https://berlinwalk-content-app.vercel.app/api/bouncer-event`; result events request live same-day stats and render rejected/total/top-rate copy on the final screen. Root `berlinwalk-content-app` endpoint/rewrite, `BerlinBouncerEvents` setup script, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` were updated outside this repo.
+**Changed:** `berlin-bouncer-page/berlin-bouncer-page-element.js` now uses `ASSET_BUILD=bouncer-stats-mobile-air-20260622` and gives the mobile page layout `48px` top padding. `berlin-bouncer/index.html` now sends `bw_berlin_bouncer_start`, `bw_berlin_bouncer_result`, and `bw_berlin_bouncer_share` events to `https://berlinwalk-content-app.vercel.app/api/bouncer-event`; result events request live same-day stats and render rejected/total/top-rate copy on the final screen. Root `berlinwalk-content-app` endpoint/rewrite, `BerlinBouncerEvents` setup script, root `PROJECT_MEMORY.md`, and root `SESSION_LOG.md` were updated outside this repo. Commit `363a497` was pushed to `origin/main`.
 
-**QA:** `node --check` passed for the root endpoint/server/setup files, the bouncer inline script parse passed, and `git diff --check` passed. Local endpoint smoke returned stats, local mobile game flow showed live stats on the result screen, Vercel production endpoint returned `200` with CORS for the GitHub Pages iframe origin and stats payload, and all Codex smoke rows were deleted from `BerlinBouncerEvents`.
+**QA:** `node --check` passed for the root endpoint/server/setup files, the bouncer inline script parse passed, and `git diff --check` passed. Local endpoint smoke returned stats, local mobile game flow showed live stats on the result screen, Vercel production endpoint returned `200` with CORS for the GitHub Pages iframe origin and stats payload, and all Codex smoke rows were deleted from `BerlinBouncerEvents`. GitHub Pages served the new marker on attempt 15. Live Wix 390px QA passed: `Playable Now` starts `48px` below the host top, layout padding is `48px`, iframe URL has `v=bouncer-stats-mobile-air-20260622`, and overflowX is `0`. Direct live game QA at 390px reached the result screen and showed `Today: 1 rejected out of 1. You are part of the 100.0%.`.
 
-**Opened:** Push/deploy and live Wix browser QA still pending in this same session.
-**Closed:** Local widget code is ready for the live-stat build push.
+**Opened:** None.
+**Closed:** Mobile spacing and live result stats are pushed, deployed, and live-verified.
 
 ## 2026-06-22 — Codex (Berghain bouncer page height fix)
 
