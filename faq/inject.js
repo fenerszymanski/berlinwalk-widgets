@@ -127,7 +127,8 @@
   "berlin-heatwave-day-plan": "berlin-heatwave-day-plan",
   "too-hot-in-berlin": "berlin-heatwave-day-plan",
   "zoo-berlin-vs-tierpark-berlin": "zoo-berlin-vs-tierpark-berlin",
-  "unter-den-linden-berlin": "unter-den-linden-berlin"
+  "unter-den-linden-berlin": "unter-den-linden-berlin",
+  "pharmacy-in-berlin": "pharmacy-in-berlin"
 };
 
   var SCHEMAS = {
@@ -6095,6 +6096,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Use public transport or walk. The BerlinWalk tour starts at the World Clock on Alexanderplatz and ends near Hackescher Markt, both central and well connected. The tour lasts about 2 hours, so a car is rarely useful for the tour itself."
+        }
+      }
+    ]
+  },
+  "pharmacy-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a pharmacy called in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A pharmacy is called an Apotheke. Look for the red A sign. For many medicines in Germany, including common over-the-counter medicines, the normal route is a licensed pharmacy rather than a supermarket or drugstore."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are pharmacies open on Sunday in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most normal pharmacies close on Sundays and public holidays. If you need urgent medicine outside normal hours, use the rotating Notdienst system to find the emergency pharmacy on duty that day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I find an emergency pharmacy in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Search for Notdienst Apotheke Berlin, use the Apothekerkammer Berlin Notdienstfinder, or use the official Aponet emergency pharmacy search. Always check the duty time and address before leaving."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I call 116117 in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Call 116117 when you need medical help today, normal doctor practices are closed, and the situation is not life-threatening. The official English page notes that the phone service is available around the clock but only in German."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I call 112 instead of going to a pharmacy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Call 112 for life-threatening symptoms, serious injury, severe breathing problems, chest pain, stroke signs, heavy bleeding, fire or ambulance emergencies. Do not delay by searching for a pharmacy first."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use a foreign prescription in a Berlin pharmacy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EU prescriptions can be valid across EU countries when they include the right information, but the medicine may not be available and German dispensing rules apply. For non-EU prescriptions, controlled medicines or essential medication, bring documentation and expect that a local doctor may be needed."
         }
       }
     ]

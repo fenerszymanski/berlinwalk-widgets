@@ -15,7 +15,7 @@ Secondary keywords: World Cup 2026 Berlin public viewing, where to watch World C
 ## Widget Plan
 
 1. Quick summary, near the top: `{{quick-summary}}` (qsKey `world-cup-berlin`)
-2. Where-to-watch venue finder, after the venues section: `{{widget:worldcup-berlin}}`
+2. Where-to-watch venue finder, after the venues section: `{{widget:worldcup-berlin?v=20260622b}}`
 3. Full fixtures in Berlin time, after the kick-off-times section: `{{widget:worldcup-fixtures}}`
 4. FAQ, near the bottom: `{{faq}}` (faqKey `world-cup-berlin`)
 
@@ -37,6 +37,10 @@ If you are visiting Berlin this June or July, you have picked a good summer. The
 Here is the honest part most guides will not tell you up front: **there is no giant fan zone at the Brandenburg Gate this year**. The good news is that the alternatives are more local, more relaxed, and often more fun. I walk these streets every week, so this is the practical version of where to actually watch.
 
 {{quick-summary}}
+
+Before your first match-night, book a **2 hours / tip-based tour** and see the city structure in daylight.
+
+[Book your spot on the Berlin Free Walking Tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based)
 
 ## Why there is no Brandenburg Gate fan mile this year
 
@@ -70,7 +74,7 @@ So if you arrive expecting a sea of flags between the Victory Column and the Bra
 
 The city has confirmed official screens at **Tempelhof, Potsdamer Platz and around 14 other locations**, with the full, updated list published on Berlin.de. Use the [World Cup public-viewing finder](https://www.berlinwalk.com/tools/watch-world-cup-2026-berlin) below to filter spots by what you are after, from free entry to a beer garden by the water.
 
-{{widget:worldcup-berlin}}
+{{widget:worldcup-berlin?v=20260622b}}
 
 ## What time are the matches in Berlin?
 

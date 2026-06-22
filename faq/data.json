@@ -3694,5 +3694,34 @@
         "a": "Use public transport or walk. The BerlinWalk tour starts at the World Clock on Alexanderplatz and ends near Hackescher Markt, both central and well connected. The tour lasts about **2 hours**, so a car is rarely useful for the tour itself."
       }
     ]
+  },
+  "pharmacy-in-berlin": {
+    "title": "Pharmacy in Berlin - FAQ",
+    "items": [
+      {
+        "q": "What is a pharmacy called in Berlin?",
+        "a": "A pharmacy is called an Apotheke. Look for the red A sign. For many medicines in Germany, including common over-the-counter medicines, the normal route is a licensed pharmacy rather than a supermarket or drugstore."
+      },
+      {
+        "q": "Are pharmacies open on Sunday in Berlin?",
+        "a": "Most normal pharmacies close on Sundays and public holidays. If you need urgent medicine outside normal hours, use the rotating Notdienst system to find the emergency pharmacy on duty that day."
+      },
+      {
+        "q": "How do I find an emergency pharmacy in Berlin?",
+        "a": "Search for Notdienst Apotheke Berlin, use the Apothekerkammer Berlin Notdienstfinder, or use the official Aponet emergency pharmacy search. Always check the duty time and address before leaving."
+      },
+      {
+        "q": "When should I call 116117 in Berlin?",
+        "a": "Call 116117 when you need medical help today, normal doctor practices are closed, and the situation is not life-threatening. The official English page notes that the phone service is available around the clock but only in German."
+      },
+      {
+        "q": "When should I call 112 instead of going to a pharmacy?",
+        "a": "Call 112 for life-threatening symptoms, serious injury, severe breathing problems, chest pain, stroke signs, heavy bleeding, fire or ambulance emergencies. Do not delay by searching for a pharmacy first."
+      },
+      {
+        "q": "Can I use a foreign prescription in a Berlin pharmacy?",
+        "a": "EU prescriptions can be valid across EU countries when they include the right information, but the medicine may not be available and German dispensing rules apply. For non-EU prescriptions, controlled medicines or essential medication, bring documentation and expect that a local doctor may be needed."
+      }
+    ]
   }
 }

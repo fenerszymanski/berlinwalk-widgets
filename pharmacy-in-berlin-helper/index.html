@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Pharmacy Help Picker | BerlinWalk</title>
+  <meta name="description" content="Choose the right Berlin pharmacy or medical help path: normal Apotheke, emergency pharmacy, 116117, 112, poison control or prescription help.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-pharmacy-helper">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-pharmacy-helper {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #526052;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-pharmacy-helper *,
+    #bw-pharmacy-helper *::before,
+    #bw-pharmacy-helper *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-pharmacy-helper h2,
+    #bw-pharmacy-helper h3,
+    #bw-pharmacy-helper p {
+      margin-top: 0;
+    }
+
+    #bw-pharmacy-helper .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-pharmacy-helper .bw-hero {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.18)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
+      padding: 22px;
+    }
+
+    #bw-pharmacy-helper .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-pharmacy-helper .bw-title {
+      color: var(--bw-white);
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-pharmacy-helper .bw-sub {
+      color: #E8F4D7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-pharmacy-helper .bw-emergency-card {
+      align-self: stretch;
+      background: rgba(250, 250, 245, 0.97);
+      border: 1px solid rgba(255, 230, 0, 0.38);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+    }
+
+    #bw-pharmacy-helper .bw-number {
+      align-items: center;
+      color: var(--bw-text);
+      display: grid;
+      gap: 7px;
+      grid-template-columns: 56px minmax(0, 1fr);
+    }
+
+    #bw-pharmacy-helper .bw-number strong {
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-yellow);
+      display: block;
+      font-size: 16px;
+      font-weight: 950;
+      line-height: 1;
+      padding: 10px 6px;
+      text-align: center;
+    }
+
+    #bw-pharmacy-helper .bw-number span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    #bw-pharmacy-helper .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-pharmacy-helper .bw-panel,
+    #bw-pharmacy-helper .bw-result,
+    #bw-pharmacy-helper .bw-links,
+    #bw-pharmacy-helper .bw-phrases {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-pharmacy-helper .bw-panel {
+      display: grid;
+      gap: 15px;
+      padding: 16px;
+    }
+
+    #bw-pharmacy-helper .bw-fieldset {
+      border: 0;
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      min-width: 0;
+      padding: 0;
+    }
+
+    #bw-pharmacy-helper .bw-label {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-pharmacy-helper .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-pharmacy-helper .bw-choice {
+      appearance: none;
+      background: #F7FBF1;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 48px;
+      padding: 10px 8px;
+      text-align: center;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-pharmacy-helper .bw-choice:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.14);
+    }
+
+    #bw-pharmacy-helper .bw-choice[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-pharmacy-helper .bw-result {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    #bw-pharmacy-helper .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 20px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-pharmacy-helper .bw-result p {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #bw-pharmacy-helper .bw-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-pharmacy-helper .bw-badge {
+      background: #EEF7E4;
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 950;
+      line-height: 1.2;
+      padding: 7px 10px;
+    }
+
+    #bw-pharmacy-helper .bw-action-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-pharmacy-helper .bw-action-list li {
+      background: #FAFCF6;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-size: 12.5px;
+      font-weight: 760;
+      line-height: 1.45;
+      list-style: none;
+      padding: 10px 11px;
+    }
+
+    #bw-pharmacy-helper .bw-warning {
+      background: #FFF4F4;
+      border: 1px solid rgba(230, 57, 70, 0.24);
+      border-radius: 8px;
+      color: #7E1E27;
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.45;
+      padding: 11px;
+    }
+
+    #bw-pharmacy-helper .bw-links,
+    #bw-pharmacy-helper .bw-phrases {
+      padding: 14px;
+    }
+
+    #bw-pharmacy-helper .bw-links h3,
+    #bw-pharmacy-helper .bw-phrases h3 {
+      color: var(--bw-green);
+      font-size: 16px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0 0 10px;
+    }
+
+    #bw-pharmacy-helper .bw-link-grid,
+    #bw-pharmacy-helper .bw-phrase-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-pharmacy-helper .bw-link,
+    #bw-pharmacy-helper .bw-phrase {
+      background: #F7FBF1;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: block;
+      font-size: 12px;
+      font-weight: 820;
+      line-height: 1.35;
+      min-width: 0;
+      padding: 10px;
+      text-decoration: none;
+    }
+
+    #bw-pharmacy-helper .bw-link strong,
+    #bw-pharmacy-helper .bw-phrase strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 950;
+      margin-bottom: 3px;
+    }
+
+    #bw-pharmacy-helper .bw-link:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.12);
+    }
+
+    #bw-pharmacy-helper .bw-footnote {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 720;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    @media (max-width: 760px) {
+      #bw-pharmacy-helper .bw-hero {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      #bw-pharmacy-helper .bw-title {
+        font-size: 24px;
+      }
+
+      #bw-pharmacy-helper .bw-body {
+        padding: 14px;
+      }
+
+      #bw-pharmacy-helper .bw-choice-grid,
+      #bw-pharmacy-helper .bw-link-grid,
+      #bw-pharmacy-helper .bw-phrase-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-label="Berlin pharmacy help picker">
+    <div class="bw-hero">
+      <div>
+        <p class="bw-kicker">BerlinWalk tool</p>
+        <h2 class="bw-title">Berlin Pharmacy Help Picker</h2>
+        <p class="bw-sub">Choose the right next step when you need medicine or medical help in Berlin. This is a practical routing tool, not medical advice.</p>
+      </div>
+      <div class="bw-emergency-card" aria-label="Emergency numbers">
+        <div class="bw-number"><strong>112</strong><span>Life-threatening medical emergency, fire or ambulance.</span></div>
+        <div class="bw-number"><strong>110</strong><span>Police emergency or immediate danger.</span></div>
+        <div class="bw-number"><strong>116117</strong><span>Urgent medical help today, not life-threatening. Phone service is German-only.</span></div>
+      </div>
+    </div>
+
+    <div class="bw-body">
+      <form class="bw-panel" id="bw-pharmacy-form">
+        <fieldset class="bw-fieldset" data-field="need">
+          <legend class="bw-label">What is the main problem?</legend>
+          <div class="bw-choice-grid">
+            <button type="button" class="bw-choice" data-value="minor" aria-pressed="true">Minor medicine need</button>
+            <button type="button" class="bw-choice" data-value="prescription" aria-pressed="false">Prescription issue</button>
+            <button type="button" class="bw-choice" data-value="urgent" aria-pressed="false">Need medical help</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="bw-fieldset" data-field="time">
+          <legend class="bw-label">When do you need help?</legend>
+          <div class="bw-choice-grid">
+            <button type="button" class="bw-choice" data-value="open" aria-pressed="true">Normal hours</button>
+            <button type="button" class="bw-choice" data-value="late" aria-pressed="false">Night or Sunday</button>
+            <button type="button" class="bw-choice" data-value="holiday" aria-pressed="false">Public holiday</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="bw-fieldset" data-field="severity">
+          <legend class="bw-label">How serious does it feel?</legend>
+          <div class="bw-choice-grid">
+            <button type="button" class="bw-choice" data-value="low" aria-pressed="true">Annoying but stable</button>
+            <button type="button" class="bw-choice" data-value="today" aria-pressed="false">Needs help today</button>
+            <button type="button" class="bw-choice" data-value="emergency" aria-pressed="false">Could be emergency</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-badge-row" id="bw-badges"></div>
+        <h3 id="bw-result-title">Start with a normal Apotheke</h3>
+        <p id="bw-result-copy">For a minor medicine need during normal hours, look for the red A sign and ask the pharmacist. Bring the package or active ingredient name if you already took something.</p>
+        <ul class="bw-action-list" id="bw-actions"></ul>
+        <div class="bw-warning" id="bw-warning">If symptoms suddenly become severe, do not keep using this tool. Call 112.</div>
+      </section>
+
+      <section class="bw-links">
+        <h3>Official shortcuts</h3>
+        <div class="bw-link-grid">
+          <a class="bw-link" href="https://www.akberlin.de/patientinnen/notdienstfinder" target="_blank" rel="noopener"><strong>Berlin Notdienstfinder</strong>Emergency pharmacies from Apothekerkammer Berlin.</a>
+          <a class="bw-link" href="https://www.aponet.de/notdienstsuche" target="_blank" rel="noopener"><strong>Aponet Notdienst</strong>Official nationwide emergency pharmacy search.</a>
+          <a class="bw-link" href="https://www.116117.de/de/englisch.php" target="_blank" rel="noopener"><strong>116117 English info</strong>When to use medical on-call service.</a>
+          <a class="bw-link" href="https://www.berlin.de/en/tourism/travel-information/1748526-2862820-emergency-services-pharmacies.en.html" target="_blank" rel="noopener"><strong>Berlin.de emergencies</strong>Emergency numbers, pharmacies and hospitals.</a>
+        </div>
+      </section>
+
+      <section class="bw-phrases">
+        <h3>Useful German words</h3>
+        <div class="bw-phrase-grid">
+          <div class="bw-phrase"><strong>Apotheke</strong>pharmacy</div>
+          <div class="bw-phrase"><strong>Notdienst</strong>emergency duty service</div>
+          <div class="bw-phrase"><strong>Rezept</strong>prescription</div>
+          <div class="bw-phrase"><strong>Ich brauche Hilfe auf Englisch.</strong>I need help in English.</div>
+        </div>
+      </section>
+
+      <p class="bw-footnote">This tool helps tourists choose the right service in Berlin. It does not diagnose symptoms or replace professional medical advice.</p>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-pharmacy-helper');
+      var state = { need: 'minor', time: 'open', severity: 'low' };
+
+      var results = {
+        emergency: {
+          badges: ['Call now', 'Do not wait'],
+          title: 'Call 112 now',
+          copy: 'If there is danger to life, severe breathing trouble, chest pain, stroke signs, heavy bleeding, major injury or another real emergency, call 112.',
+          actions: ['Call 112 for ambulance, fire or rescue.', 'Ask hotel staff, a nearby shop or a local person to help if language is a problem.', 'Do not travel across the city looking for a pharmacy first.']
+        },
+        onCall: {
+          badges: ['Night/Sunday', 'Emergency pharmacy'],
+          title: 'Use the emergency pharmacy search',
+          copy: 'For urgent medicine outside normal hours, use the Berlin Notdienstfinder or Aponet search to find the pharmacy currently on duty.',
+          actions: ['Check the exact duty time and address before leaving.', 'Bring your ID, prescription or medicine package if relevant.', 'Use public transport, taxi or a simple route. Do not assume the nearest pharmacy is on duty.']
+        },
+        doctor: {
+          badges: ['Medical help today', '116117'],
+          title: 'Use 116117 or an on-call practice',
+          copy: 'If you need medical help today but it is not life-threatening, 116117 is the official on-call medical service. The phone service is German-only.',
+          actions: ['Use 116117 for urgent non-emergency medical help outside normal practice hours.', 'Ask hotel reception or a German speaker to help with the call if needed.', 'Use 112 instead if the situation becomes life-threatening or serious.']
+        },
+        prescription: {
+          badges: ['Prescription', 'Bring documents'],
+          title: 'Go to a pharmacy, but expect rules',
+          copy: 'For prescription questions, bring the prescription, original packaging and active ingredient name. EU prescriptions may work when the required information is clear, but German dispensing rules apply.',
+          actions: ['Use a normal pharmacy during opening hours when possible.', 'For essential or controlled medication, contact a doctor, insurer or embassy route if the pharmacy cannot dispense it.', 'Do not wait until night if you know a regular medicine is running low.']
+        },
+        normal: {
+          badges: ['Normal hours', 'Apotheke'],
+          title: 'Start with a normal Apotheke',
+          copy: 'For mild symptoms or basic medicine during normal hours, look for the red A sign and ask the pharmacist.',
+          actions: ['Describe the symptom simply and show any package you already used.', 'Use a translation app for words like fever, pain, allergy or diarrhea.', 'If the pharmacist says you need a doctor, take that seriously.']
+        }
+      };
+
+      function pickResult() {
+        if (state.severity === 'emergency') return results.emergency;
+        if (state.need === 'urgent' && state.severity === 'today') return results.doctor;
+        if (state.need === 'prescription') return state.time === 'open' ? results.prescription : results.onCall;
+        if (state.time !== 'open') return results.onCall;
+        if (state.need === 'urgent') return results.doctor;
+        return results.normal;
+      }
+
+      function render() {
+        var result = pickResult();
+        root.querySelector('#bw-badges').innerHTML = result.badges.map(function (badge) {
+          return '<span class="bw-badge">' + badge + '</span>';
+        }).join('');
+        root.querySelector('#bw-result-title').textContent = result.title;
+        root.querySelector('#bw-result-copy').textContent = result.copy;
+        root.querySelector('#bw-actions').innerHTML = result.actions.map(function (action) {
+          return '<li>' + action + '</li>';
+        }).join('');
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
+      }
+
+      root.querySelectorAll('.bw-choice').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var fieldset = button.closest('[data-field]');
+          var field = fieldset.getAttribute('data-field');
+          state[field] = button.getAttribute('data-value');
+          fieldset.querySelectorAll('.bw-choice').forEach(function (choice) {
+            choice.setAttribute('aria-pressed', choice === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>
