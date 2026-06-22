@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL 
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'bouncer-share-timer-20260622';
+const ASSET_BUILD = 'bouncer-footer-bridge-20260622';
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
@@ -32,7 +32,11 @@ class BwBerlinBouncerPage extends HTMLElement {
           display: block;
           font-family: 'Chakra Petch', sans-serif;
           background: var(--bw-dark);
+          box-shadow: 0 96px 0 0 var(--bw-dark);
           color: var(--bw-white);
+          overflow: visible;
+          position: relative;
+          z-index: 0;
         }
 
         bw-berlin-bouncer-page *,
@@ -53,6 +57,8 @@ class BwBerlinBouncerPage extends HTMLElement {
           align-items: center;
           min-height: 0 !important;
           padding: clamp(24px, 4svh, 40px) 20px;
+          position: relative;
+          z-index: 1;
         }
 
         .bw-bouncer-content {
