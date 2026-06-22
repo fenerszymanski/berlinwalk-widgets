@@ -449,6 +449,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(pharmacy|apotheke|notdienst|medicine|116117)/.test(s)) return 'pharmacy-in-berlin-helper';
   if (/(alternative-transport|alternative transport|mobility app|miles|car sharing|bike sharing|scooter)/.test(s)) return 'berlin-mobility-app-picker';
   if (/(zoo-berlin-vs-tierpark|tierpark|zoo berlin vs tierpark)/.test(s)) return '';
   if (/(with-kids|kids|family|families|children|playground|zoo|aquarium)/.test(s)) return 'berlin-family-day-planner';
