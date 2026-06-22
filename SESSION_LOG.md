@@ -1,3 +1,14 @@
+## 2026-06-22 — Codex (Berghain bouncer share + timer polish)
+
+**Did:** Removed the desktop browser `alert()` after Share Result, replaced it with in-game copy feedback, increased bouncer-question timer from 5s to 10s, and moved the countdown from the center to a clearer top-left badge.
+
+**Changed:** `berlin-bouncer/index.html` now copies share text silently via Clipboard API/text-area fallback, flashes the share button to `Copied`, and shows `share-toast` instead of a blocking browser alert. Share URL now uses `parent_url` or `https://www.berlinwalk.com/games/berghain-bouncer` rather than the GitHub iframe URL. Timed door questions now call `startTimer(10000)`, and the countdown badge shows `SECONDS`. `berlin-bouncer-page/berlin-bouncer-page-element.js` uses `ASSET_BUILD=bouncer-share-timer-20260622` and the wrapper copy says `10-second pressure cooker`. Commit `66e73a7` was pushed to `origin/main`.
+
+**QA:** Inline game JS parse, wrapper `node --check`, and `git diff --check` passed. Local 390px game QA: countdown `10`, top-left `14/14`, share button `COPIED`, toast `Result copied. Paste it anywhere.`, `alertCalled=false`, overflowX `0`. Local wrapper QA: iframe `v=bouncer-share-timer-20260622`, `10-second` lead, overflowX `0`. GitHub Pages served the new marker on attempt 15. Live Wix desktop QA: iframe `v=bouncer-share-timer-20260622`, lead `10-second`, overflowX `0`. Live GitHub iframe QA: countdown `10`, top-left badge with `SECONDS`, result stats loaded, Share Result produced `COPIED` + toast, `alertCalled=false`, overflowX `0`. QA rows were deleted from `BerlinBouncerEvents`; remaining `0`.
+
+**Opened:** None.
+**Closed:** Share popup and timer polish are pushed, deployed, and live-verified.
+
 ## 2026-06-22 — Codex (Berghain bouncer live stats)
 
 **Did:** Added mobile breathing room above the first `Playable Now` block and wired the Berghain bouncer result screen to live Wix CMS stats instead of mock totals.
