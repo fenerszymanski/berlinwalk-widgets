@@ -2,13 +2,20 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL 
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'bouncer-footer-bridge-20260622';
+const ASSET_BUILD = 'bouncer-layout-balance-20260622';
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
     this._ensureFont();
     this._render();
     this._bind();
+    this._syncWixHostHeight();
+  }
+
+  disconnectedCallback() {
+    if (this._handleHostResize) {
+      window.removeEventListener('resize', this._handleHostResize);
+    }
   }
 
   _ensureFont() {
@@ -56,7 +63,7 @@ class BwBerlinBouncerPage extends HTMLElement {
           margin: 0 auto;
           align-items: center;
           min-height: 0 !important;
-          padding: clamp(24px, 4svh, 40px) 20px;
+          padding: clamp(48px, 7svh, 56px) 20px 20px;
           position: relative;
           z-index: 1;
         }
@@ -259,7 +266,32 @@ class BwBerlinBouncerPage extends HTMLElement {
   }
 
   _bind() {
-    // any extra binds
+    this._handleHostResize = () => this._syncWixHostHeight();
+    window.addEventListener('resize', this._handleHostResize, { passive: true });
+    window.setTimeout(() => this._syncWixHostHeight(), 100);
+    window.setTimeout(() => this._syncWixHostHeight(), 800);
+  }
+
+  _syncWixHostHeight() {
+    const wixShell = this.parentElement;
+    if (!wixShell || !wixShell.id || !wixShell.id.startsWith('comp-')) return;
+
+    const targets = [
+      wixShell,
+      wixShell.parentElement,
+      this.closest('section'),
+    ].filter(Boolean);
+
+    const isDesktop = window.matchMedia('(min-width: 961px)').matches;
+    targets.forEach((target) => {
+      if (isDesktop) {
+        target.style.setProperty('height', '800px', 'important');
+        target.style.setProperty('min-height', '800px', 'important');
+      } else {
+        target.style.removeProperty('height');
+        target.style.removeProperty('min-height');
+      }
+    });
   }
 }
 
