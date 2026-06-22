@@ -14,6 +14,11 @@
 (function () {
   if (window.parent === window) return; // not embedded — do nothing
 
+  try {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('resize') === 'none' || params.get('autoresize') === 'none') return;
+  } catch (e) { /* old browser, proceed with resize reporting */ }
+
   var lastReported = 0;
   var pending = false;
 

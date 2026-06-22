@@ -1,3 +1,7 @@
+## 2026-06-22 — Codex (Berghain bouncer page height fix)
+
+**Did:** Fixed the local source for `/games/berghain-bouncer` so the right-side game iframe no longer expands to 1500px+ through the sitewide Wix auto-resize listener. **Changed:** `js/brand.js` now supports `resize=none` / `autoresize=none`; `berlin-bouncer-page/berlin-bouncer-page-element.js` sends the nested game iframe with `resize=none`, uses `ASSET_BUILD=bouncer-height-fix-20260622`, and clamps the device height to `560-680px` desktop / `500-620px` mobile. **QA:** Before fix, live desktop measurement showed `.bw-bouncer-device` `1528px` high and wrapper `1608px`; local desktop now shows device/iframe `420x560`, overflowX `0`, iframe URL includes `resize=none`; local 390px mobile shows device/iframe `350x620`, first game screen has 4 options visible and iframe overflowX `0`; reload/message test saw `0` `bw-resize` messages. `node --check` and `git diff --check` passed. **Opened:** Push/deploy and live Wix QA still needed for the public page. **Closed:** Local source-level height fix is complete.
+
 ## 2026-06-22: Added visual countdown text
 - Overlaid a large, pulsating countdown number (5..4..) in the middle of the screen during bouncer questions to make the pressure system more obvious.
 

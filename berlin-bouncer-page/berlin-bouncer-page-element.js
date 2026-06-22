@@ -2,6 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL 
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
+const ASSET_BUILD = 'bouncer-height-fix-20260622';
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
@@ -42,7 +43,7 @@ class BwBerlinBouncerPage extends HTMLElement {
 
         .bw-bouncer-layout {
           display: grid;
-          grid-template-columns: 1fr 440px;
+          grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
           grid-template-areas: 
             "content game"
             "cta game";
@@ -50,7 +51,8 @@ class BwBerlinBouncerPage extends HTMLElement {
           max-width: 1200px;
           margin: 0 auto;
           align-items: center;
-          padding: 40px 20px;
+          min-height: 0 !important;
+          padding: clamp(24px, 4svh, 40px) 20px;
         }
 
         .bw-bouncer-content {
@@ -153,9 +155,11 @@ class BwBerlinBouncerPage extends HTMLElement {
         .bw-bouncer-device {
           grid-area: game;
           position: relative;
-          width: 100%;
-          max-width: 440px;
-          height: 800px;
+          width: min(100%, 420px);
+          max-width: 420px;
+          height: clamp(560px, calc(100svh - 170px), 680px) !important;
+          min-height: 0 !important;
+          max-height: 680px !important;
           margin: 0 auto;
           background: #111;
           border-radius: 40px;
@@ -169,7 +173,8 @@ class BwBerlinBouncerPage extends HTMLElement {
           top: 0;
           left: 0;
           width: 100%;
-          height: 100%;
+          height: 100% !important;
+          min-height: 0 !important;
           border: none;
           display: block;
         }
@@ -204,7 +209,9 @@ class BwBerlinBouncerPage extends HTMLElement {
           }
 
           .bw-bouncer-device {
-            height: 550px;
+            width: min(100%, 380px);
+            height: clamp(500px, calc(100svh - 88px), 620px) !important;
+            max-height: 620px !important;
             border-radius: 20px;
             box-shadow: 0 0 0 6px #222, 0 20px 40px rgba(0,0,0,0.8);
           }
@@ -228,7 +235,7 @@ class BwBerlinBouncerPage extends HTMLElement {
 
         <div class="bw-bouncer-device" id="bouncer-game">
           <iframe 
-            src="${new URL('berlin-bouncer/index.html?attribution=none&v=' + Date.now(), BASE_URL).toString()}" 
+            src="${new URL('berlin-bouncer/index.html?attribution=none&resize=none&v=' + ASSET_BUILD, BASE_URL).toString()}"
             allow="autoplay; clipboard-write; shared-storage"
             scrolling="no"
             title="Berlin Bouncer Simulator">
