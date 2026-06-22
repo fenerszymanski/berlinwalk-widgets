@@ -1,3 +1,14 @@
+## 2026-06-23 — Codex (Berlin Battle page redesign)
+
+**Did:** Redesigned the dedicated `/games/berlin-battle` wrapper so it follows the new bouncer-page landing structure without copying the bouncer theme.
+
+**Changed:** `berlin-battle-page/berlin-battle-page-element.js` now uses `ASSET_BUILD=card-duel-page-20260623`, loads Fraunces + Space Grotesk, and renders a cream/coral/deep-ink card-duel page with a large left intro, framed game device on the right, feature bullets, and a walking-tour CTA. `?topic=<id>` direct links keep the compact generic `Pick your Berlin winner` intro and still forward topic/UTM params into the iframe. The wrapper now sets iframe `src` after installing the resize listener and keeps child `bw-resize` heights from being overwritten by the 620px fallback. `berlin-battle-page/index.html` preview background and the README Wix snippet were bumped to the same marker. Commit `cf3fd00` was pushed to `origin/main`.
+
+**QA:** `node --check` and `git diff --check` passed. Local desktop and 390px Playwright QA passed: marker/font/theme current, parent overflowX `0`, iframe height matches inner content instead of clipping the 10-topic grid, and direct `topic=food` starts `Berlin Food Battle` with 2 choices. GitHub Pages served `card-duel-page-20260623` on attempt 13. Live Wix desktop QA passed: element present, `Space Grotesk`, cream background, iframe marker current, element height `1349`, overflowX `0`. Live Wix mobile QA passed: marker current, element height `2129`, overflowX `0`. Live direct Food parent QA confirmed topic forwarding; direct GitHub iframe QA confirmed `Berlin Food Battle`, `2` choices, overflowX `0`. Console had only Wix preload warnings, no widget errors.
+
+**Opened:** None.
+**Closed:** Berlin Battle page redesign is pushed, deployed, and live-verified.
+
 ## 2026-06-23 — Codex (Berghain bouncer footer air tweak)
 
 **Did:** Added a little more black breathing room before the footer on `/games/berghain-bouncer` after the prior 800px desktop shell setting felt too tight.
