@@ -6,7 +6,7 @@ Use on Wix:
 
 ```html
 <bw-berlin-smile-challenge-page></bw-berlin-smile-challenge-page>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-smile-challenge-page/berlin-smile-challenge-page-element.js?v=smile-hero-cover-20260623"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-smile-challenge-page/berlin-smile-challenge-page-element.js?v=smile-stable-flow-20260623"></script>
 ```
 
 The wrapper renders the editorial game landing page, embeds the standalone

@@ -629,7 +629,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-hero-cover-20260623';
+      const BUILD = 'smile-stable-flow-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -1198,6 +1198,8 @@
         bindEvents();
         postResize();
         setTimeout(postResize, 80);
+        setTimeout(postResize, 260);
+        setTimeout(postResize, 520);
       }
 
       function topbarHtml() {
@@ -1405,24 +1407,24 @@
       }
 
       function postResize() {
-        const height = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || app.scrollHeight);
+        const appRect = app.getBoundingClientRect();
+        const gameNode = app.querySelector('.bw-screen');
+        const gameRect = gameNode ? gameNode.getBoundingClientRect() : null;
+        const height = Math.ceil(Math.max(
+          document.documentElement.scrollHeight || 0,
+          document.body.scrollHeight || 0,
+          app.scrollHeight || 0,
+          appRect.height || 0,
+          gameRect ? gameRect.bottom - appRect.top : 0
+        )) + 6;
         window.parent.postMessage({ type: 'bw-resize', height }, '*');
       }
 
-      function postFocus(target) {
+      function postFocus() {
         requestAnimationFrame(() => {
-          const focusNode = target === 'answer'
-            ? app.querySelector('.bw-answer-stack')
-            : target === 'result'
-              ? app.querySelector('.bw-result-card')
-              : app.querySelector('.bw-scene-card');
-          const offsetTop = focusNode ? Math.round(focusNode.getBoundingClientRect().top) : 0;
-          if (target === 'answer') {
-            if (focusNode) focusNode.scrollIntoView({ block: 'nearest' });
-          } else {
-            window.scrollTo({ top: 0, behavior: 'auto' });
-          }
-          window.parent.postMessage({ type: 'bw-smile-focus', target, offsetTop }, '*');
+          postResize();
+          setTimeout(postResize, 120);
+          setTimeout(postResize, 360);
         });
       }
 
