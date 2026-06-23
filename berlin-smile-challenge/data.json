@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-23-smile-scenes-v1",
+  "version": "2026-06-23-smile-flow-results-v1",
   "title": "Can You Make a Berliner Smile?",
   "subtitle": "Seven tiny social tests. One almost impossible mission: get a Berliner to soften their face.",
   "startLabel": "Start with sound",
@@ -444,7 +444,8 @@
       "title": "Stone-Faced Tourist",
       "tagline": "The Berliner did not smile. The wall did, emotionally.",
       "body": "You tried. Berlin remained structurally unimpressed. This is not failure; this is onboarding.",
-      "shareLine": "I tried to make a Berliner smile. Berlin filed a complaint."
+      "shareLine": "I tried to make a Berliner smile. Berlin filed a complaint.",
+      "image": "assets/results/stone.webp"
     },
     {
       "id": "nod",
@@ -452,7 +453,8 @@
       "title": "Respectable Nod",
       "tagline": "A nod happened. In this city, that is basically fireworks.",
       "body": "You kept it short, mostly practical, and only slightly annoying. The Berliner respects your restraint.",
-      "shareLine": "I got a Berliner nod. I am counting it as emotional intimacy."
+      "shareLine": "I got a Berliner nod. I am counting it as emotional intimacy.",
+      "image": "assets/results/nod.webp"
     },
     {
       "id": "corner",
@@ -460,7 +462,8 @@
       "title": "Tiny Corner Smile",
       "tagline": "One side of the mouth moved. Historians are verifying.",
       "body": "You understood the assignment: dry, brief, useful, with one small crack of humanity.",
-      "shareLine": "I made a Berliner almost smile. That is basically a 5-star review."
+      "shareLine": "I made a Berliner almost smile. That is basically a 5-star review.",
+      "image": "assets/results/corner.webp"
     },
     {
       "id": "spaeti",
@@ -468,7 +471,8 @@
       "title": "Späti-Level Charisma",
       "tagline": "Berlin did not hug you. Berlin allowed you to remain nearby.",
       "body": "You are calm under social weather, suspiciously efficient, and fluent in tiny nods.",
-      "shareLine": "I made a Berliner smile. Very briefly. Please respect my privacy."
+      "shareLine": "I made a Berliner smile. Very briefly. Please respect my privacy.",
+      "image": "assets/results/spaeti.webp"
     }
   ]
 }

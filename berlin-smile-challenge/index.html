@@ -235,6 +235,8 @@
       border: 2px solid var(--ink);
       border-radius: 12px;
       box-shadow: 3px 3px 0 var(--ink);
+      display: grid;
+      gap: 6px;
       padding: 10px;
     }
 
@@ -246,8 +248,15 @@
       font-size: 11px;
       font-weight: 950;
       letter-spacing: 0.08em;
-      margin-bottom: 7px;
       text-transform: uppercase;
+    }
+
+    .bw-meter-copy {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin: 0;
     }
 
     .bw-meter-track {
@@ -294,6 +303,8 @@
       display: block;
       height: 100%;
       object-fit: cover;
+      object-position: center center;
+      transform: scale(1.035);
       width: 100%;
     }
 
@@ -370,13 +381,22 @@
       opacity: 1;
     }
 
+    .bw-answer-stack {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bw-selected-answer {
+      cursor: default;
+      transform: none !important;
+    }
+
     .bw-reaction {
       background: var(--ink);
       border-radius: 14px;
       color: var(--cream);
       display: grid;
       gap: 8px;
-      margin-top: 2px;
       padding: 16px;
     }
 
@@ -428,6 +448,25 @@
       padding: clamp(22px, 5vw, 32px);
     }
 
+    .bw-result-visual {
+      aspect-ratio: 16 / 10;
+      background: #F7F1DC;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 rgba(16, 46, 56, 0.95);
+      margin: 0;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    .bw-result-visual img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      width: 100%;
+    }
+
     .bw-result-card h1 {
       font-size: clamp(36px, 8vw, 64px);
       letter-spacing: -0.04em;
@@ -450,6 +489,35 @@
       font-weight: 750;
       line-height: 1.5;
       margin: 0;
+    }
+
+    .bw-copy-panel {
+      background: #FFFDF6;
+      border: 2px dashed rgba(16, 46, 56, 0.36);
+      border-radius: 14px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .bw-copy-panel label {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .bw-copy-panel textarea {
+      background: #FFFFFF;
+      border: 1px solid rgba(16, 46, 56, 0.24);
+      border-radius: 10px;
+      color: var(--ink);
+      font: 800 13px/1.45 Montserrat, Arial, sans-serif;
+      min-height: 112px;
+      padding: 10px;
+      resize: vertical;
+      width: 100%;
     }
 
     .bw-score-grid {
@@ -561,7 +629,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-scenes-20260623';
+      const BUILD = 'smile-flow-results-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -584,6 +652,7 @@
         selected: null,
         result: null,
         stats: null,
+        manualShareText: '',
         soundOn: localStorage.getItem('bwSmileSound') !== 'off'
       };
 
@@ -596,7 +665,7 @@
           this.cache = new Map();
         }
 
-        async enable() {
+        enable() {
           this.enabled = true;
           this.muted = false;
           state.soundOn = true;
@@ -727,7 +796,7 @@
         if (!data) return;
         const withSound = options.withSound !== false;
         if (withSound) {
-          await audio.enable();
+          audio.enable();
         } else {
           audio.enabled = false;
           audio.setMuted(true);
@@ -742,12 +811,14 @@
           patience: Number(data.initialPatience || 72),
           selected: null,
           result: null,
-          stats: null
+          stats: null,
+          manualShareText: ''
         };
         audio.preloadScene(currentScene());
         audio.preloadScene(state.scenes[1]);
         render();
-        if (withSound) audio.playAmbience(currentScene().ambience.file);
+        postFocus('game');
+        if (withSound) await audio.playAmbience(currentScene().ambience.file);
         track('bw_berlin_smile_start', {
           sound_enabled: String(withSound),
           round_count: String(state.scenes.length)
@@ -776,6 +847,7 @@
         state.smile = clamp(state.smile + Number(option.smile || 0));
         state.patience = clamp(state.patience + Number(option.patience || 0));
         render();
+        postFocus('answer');
         audio.playVoice(option.voiceFile);
         track('bw_berlin_smile_answer', {
           scene: scene.id,
@@ -801,6 +873,7 @@
         audio.preloadScene(currentScene());
         audio.preloadScene(state.scenes[state.roundIndex + 1]);
         render();
+        postFocus('game');
         audio.playAmbience(currentScene().ambience.file);
       }
 
@@ -810,6 +883,7 @@
         state.selected = null;
         audio.stopAll();
         render();
+        postFocus('result');
         const response = await track('bw_berlin_smile_result', {
           ending: state.result.id,
           score: String(state.smile),
@@ -842,14 +916,29 @@
         state.selected = null;
         state.result = null;
         state.stats = null;
+        state.manualShareText = '';
         render();
+        postFocus('start');
       }
 
       async function shareResult(method = 'share') {
         if (!state.result) return;
         const text = `${state.result.shareLine}\n\nPlay it here: ${data.shareUrl}`;
+        state.manualShareText = '';
         try {
           if (method === 'share' && navigator.share) {
+            const file = await resultCardFile().catch(() => null);
+            if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
+              await navigator.share({
+                title: data.title,
+                text,
+                url: data.shareUrl,
+                files: [file]
+              });
+              showToast('Result shared');
+              track('bw_berlin_smile_share', { method: 'native_card', ending: state.result.id, success: 'true' });
+              return;
+            }
             await navigator.share({
               title: data.title,
               text,
@@ -859,33 +948,83 @@
             track('bw_berlin_smile_share', { method: 'native', ending: state.result.id, success: 'true' });
             return;
           }
-          await copyText(text);
+          const copyMethod = await copyText(text);
           showToast('Result copied');
-          track('bw_berlin_smile_share', { method: 'clipboard', ending: state.result.id, success: 'true' });
+          track('bw_berlin_smile_share', { method: copyMethod, ending: state.result.id, success: 'true' });
         } catch (error) {
-          showToast('Copy failed');
-          track('bw_berlin_smile_share', { method: 'clipboard', ending: state.result.id, success: 'false' });
+          if (error && error.name === 'AbortError') {
+            showToast('Share cancelled');
+            track('bw_berlin_smile_share', { method: 'native', ending: state.result.id, success: 'cancelled' });
+            return;
+          }
+          state.manualShareText = text;
+          render();
+          requestAnimationFrame(() => {
+            const textarea = app.querySelector('[data-manual-copy]');
+            if (textarea) {
+              textarea.focus();
+              textarea.select();
+            }
+            showToast('Copy text below');
+          });
+          track('bw_berlin_smile_share', { method: 'manual_copy', ending: state.result.id, success: 'manual' });
         }
       }
 
       async function copyText(text) {
         if (navigator.clipboard && window.isSecureContext) {
-          await navigator.clipboard.writeText(text);
-          return;
+          try {
+            await navigator.clipboard.writeText(text);
+            return 'clipboard';
+          } catch (error) {
+            // Fall through to the legacy selection-based copy path.
+          }
         }
         const textarea = document.createElement('textarea');
         textarea.value = text;
         textarea.setAttribute('readonly', '');
         textarea.style.position = 'fixed';
         textarea.style.left = '-9999px';
+        textarea.style.top = '0';
         document.body.appendChild(textarea);
+        textarea.focus();
         textarea.select();
-        document.execCommand('copy');
+        textarea.setSelectionRange(0, textarea.value.length);
+        const copied = document.execCommand('copy');
         document.body.removeChild(textarea);
+        if (!copied) throw new Error('Legacy copy failed');
+        return 'legacy_clipboard';
       }
 
-      function downloadCard() {
+      async function downloadCard() {
         if (!state.result) return;
+        const blob = await resultCardBlob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = 'berlin-smile-challenge-result.png';
+        link.href = url;
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(url), 1200);
+        showToast('Card downloaded');
+        track('bw_berlin_smile_share', { method: 'download_card', ending: state.result.id, success: 'true' });
+      }
+
+      async function resultCardFile() {
+        const blob = await resultCardBlob();
+        return new File([blob], 'berlin-smile-challenge-result.png', { type: 'image/png' });
+      }
+
+      async function resultCardBlob() {
+        const canvas = await renderResultCardCanvas();
+        return new Promise((resolve, reject) => {
+          canvas.toBlob((blob) => {
+            if (blob) resolve(blob);
+            else reject(new Error('Card rendering failed'));
+          }, 'image/png');
+        });
+      }
+
+      async function renderResultCardCanvas() {
         const canvas = document.createElement('canvas');
         canvas.width = 1200;
         canvas.height = 630;
@@ -899,27 +1038,84 @@
         ctx.strokeStyle = '#102E38';
         ctx.lineWidth = 8;
         ctx.strokeRect(40, 70, canvas.width - 80, canvas.height - 140);
+
+        const imageSrc = resultImageSrc(state.result);
+        if (imageSrc) {
+          try {
+            const image = await loadImage(imageSrc);
+            ctx.save();
+            roundedRect(ctx, 704, 112, 400, 250, 22);
+            ctx.clip();
+            drawCoverImage(ctx, image, 704, 112, 400, 250);
+            ctx.restore();
+            ctx.strokeStyle = '#102E38';
+            ctx.lineWidth = 7;
+            roundedRect(ctx, 704, 112, 400, 250, 22);
+            ctx.stroke();
+            ctx.fillStyle = '#E63946';
+            ctx.fillRect(728, 342, 376, 12);
+          } catch (error) {
+            console.warn('[Berlin Smile] result image failed', error);
+          }
+        }
+
         ctx.fillStyle = '#102E38';
         ctx.font = '900 42px Montserrat, Arial';
         ctx.fillText('BERLINWALK GAME', 80, 130);
         ctx.fillStyle = '#E63946';
-        ctx.font = '900 78px Montserrat, Arial';
-        wrapText(ctx, state.result.title, 80, 235, 970, 82);
+        ctx.font = '900 66px Montserrat, Arial';
+        wrapText(ctx, state.result.title, 80, 220, 560, 70);
         ctx.fillStyle = '#102E38';
-        ctx.font = '800 34px Montserrat, Arial';
-        wrapText(ctx, state.result.shareLine, 80, 410, 940, 42);
+        ctx.font = '800 30px Montserrat, Arial';
+        wrapText(ctx, state.result.shareLine, 80, 392, 560, 38);
         ctx.fillStyle = '#1B5E20';
         ctx.font = '900 28px Montserrat, Arial';
         ctx.fillText(`Smile ${state.smile}/100 · Patience ${state.patience}/100`, 80, 540);
         ctx.fillStyle = '#FAFAF5';
         ctx.font = '900 25px Montserrat, Arial';
         ctx.fillText('berlinwalk.com/games/berlin-smile-challenge', 80, 610);
-        const link = document.createElement('a');
-        link.download = 'berlin-smile-challenge-result.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        showToast('Card downloaded');
-        track('bw_berlin_smile_share', { method: 'download_card', ending: state.result.id, success: 'true' });
+        return canvas;
+      }
+
+      function resultImageSrc(result) {
+        return result && result.image ? `${result.image}?v=${BUILD}` : '';
+      }
+
+      function loadImage(src) {
+        return new Promise((resolve, reject) => {
+          const image = new Image();
+          image.onload = () => resolve(image);
+          image.onerror = reject;
+          image.src = src;
+        });
+      }
+
+      function drawCoverImage(ctx, image, x, y, width, height) {
+        const sourceRatio = image.width / image.height;
+        const targetRatio = width / height;
+        let sx = 0;
+        let sy = 0;
+        let sw = image.width;
+        let sh = image.height;
+        if (sourceRatio > targetRatio) {
+          sw = image.height * targetRatio;
+          sx = (image.width - sw) / 2;
+        } else {
+          sh = image.width / targetRatio;
+          sy = (image.height - sh) / 2;
+        }
+        ctx.drawImage(image, sx, sy, sw, sh, x, y, width, height);
+      }
+
+      function roundedRect(ctx, x, y, width, height, radius) {
+        const r = Math.min(radius, width / 2, height / 2);
+        ctx.beginPath();
+        ctx.moveTo(x + r, y);
+        ctx.arcTo(x + width, y, x + width, y + height, r);
+        ctx.arcTo(x + width, y + height, x, y + height, r);
+        ctx.arcTo(x, y + height, x, y, r);
+        ctx.arcTo(x, y, x + width, y, r);
+        ctx.closePath();
       }
 
       function wrapText(ctx, text, x, y, maxWidth, lineHeight) {
@@ -1048,8 +1244,8 @@
           ${topbarHtml()}
           <section class="bw-screen bw-game-screen">
             <div class="bw-meters" aria-label="Game meters">
-              ${meterHtml('Smile meter', state.smile, '')}
-              ${meterHtml('Patience meter', state.patience, 'patience')}
+              ${meterHtml('Smile', state.smile, '', 'How close you are to a visible almost-smile.')}
+              ${meterHtml('Patience', state.patience, 'patience', 'How much Berlin social tolerance is still available.')}
             </div>
             <article class="bw-scene-card">
               ${sceneVisualHtml(scene)}
@@ -1060,17 +1256,31 @@
               <h2 class="bw-scene-title">${escapeHtml(scene.title)}</h2>
               <p class="bw-scene-setting">${escapeHtml(scene.setting)}</p>
               <p class="bw-prompt">${escapeHtml(scene.prompt)}</p>
-              <div class="bw-options">
-                ${scene.options.map((option) => `
-                  <button class="bw-option ${selected && selected.id === option.id ? 'is-selected' : ''}" type="button" data-option="${escapeAttr(option.id)}" ${selected ? 'disabled' : ''}>
-                    ${escapeHtml(option.text)}
-                  </button>
-                `).join('')}
-              </div>
-              ${selected ? reactionHtml(selected) : ''}
+              ${selected ? selectedAnswerHtml(selected) : optionsHtml(scene)}
             </article>
           </section>
           <div class="bw-toast" data-toast></div>
+        `;
+      }
+
+      function optionsHtml(scene) {
+        return `
+          <div class="bw-options">
+            ${scene.options.map((option) => `
+              <button class="bw-option" type="button" data-option="${escapeAttr(option.id)}">
+                ${escapeHtml(option.text)}
+              </button>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      function selectedAnswerHtml(option) {
+        return `
+          <div class="bw-answer-stack">
+            <div class="bw-option bw-selected-answer is-selected">${escapeHtml(option.text)}</div>
+            ${reactionHtml(option)}
+          </div>
         `;
       }
 
@@ -1083,10 +1293,11 @@
         `;
       }
 
-      function meterHtml(label, value, className) {
+      function meterHtml(label, value, className, helpText) {
         return `
           <div class="bw-meter">
             <div class="bw-meter-label"><span>${escapeHtml(label)}</span><strong>${value}/100</strong></div>
+            <p class="bw-meter-copy">${escapeHtml(helpText)}</p>
             <div class="bw-meter-track"><div class="bw-meter-fill ${className}" style="width:${value}%"></div></div>
           </div>
         `;
@@ -1117,6 +1328,7 @@
           <section class="bw-screen bw-result-screen">
             <article class="bw-result-card">
               <div class="bw-badge">Result</div>
+              ${resultVisualHtml(result)}
               <h1>${escapeHtml(result.title)}</h1>
               <p class="bw-result-tagline">${escapeHtml(result.tagline)}</p>
               <p class="bw-result-body">${escapeHtml(result.body)}</p>
@@ -1125,6 +1337,7 @@
                 <div class="bw-score-box"><span>Patience</span><strong>${state.patience}/100</strong></div>
               </div>
               <p class="bw-stat-copy">${escapeHtml(statText)}</p>
+              ${manualCopyHtml()}
               <div class="bw-actions">
                 <button class="bw-primary" type="button" data-action="share">Share result</button>
                 <button class="bw-secondary" type="button" data-action="download">Download card</button>
@@ -1134,6 +1347,26 @@
             </article>
           </section>
           <div class="bw-toast" data-toast></div>
+        `;
+      }
+
+      function resultVisualHtml(result) {
+        const image = resultImageSrc(result);
+        if (!image) return '';
+        return `
+          <figure class="bw-result-visual" aria-hidden="true">
+            <img src="${escapeAttr(image)}" alt="" loading="eager" decoding="async">
+          </figure>
+        `;
+      }
+
+      function manualCopyHtml() {
+        if (!state.manualShareText) return '';
+        return `
+          <div class="bw-copy-panel">
+            <label for="bw-manual-copy">Copy result manually</label>
+            <textarea id="bw-manual-copy" data-manual-copy readonly>${escapeHtml(state.manualShareText)}</textarea>
+          </div>
         `;
       }
 
@@ -1153,7 +1386,7 @@
         app.querySelectorAll('[data-action]').forEach((node) => {
           const action = node.dataset.action;
           if (action === 'sound') node.addEventListener('click', toggleSound);
-          if (action === 'start') node.addEventListener('click', startGame);
+          if (action === 'start') node.addEventListener('click', () => startGame());
           if (action === 'quiet-start') node.addEventListener('click', quietStart);
           if (action === 'next') node.addEventListener('click', nextRound);
           if (action === 'share') node.addEventListener('click', () => shareResult('share'));
@@ -1175,6 +1408,23 @@
       function postResize() {
         const height = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || app.scrollHeight);
         window.parent.postMessage({ type: 'bw-resize', height }, '*');
+      }
+
+      function postFocus(target) {
+        requestAnimationFrame(() => {
+          const focusNode = target === 'answer'
+            ? app.querySelector('.bw-answer-stack')
+            : target === 'result'
+              ? app.querySelector('.bw-result-card')
+              : app.querySelector('.bw-scene-card');
+          const offsetTop = focusNode ? Math.round(focusNode.getBoundingClientRect().top) : 0;
+          if (target === 'answer') {
+            if (focusNode) focusNode.scrollIntoView({ block: 'nearest' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'auto' });
+          }
+          window.parent.postMessage({ type: 'bw-smile-focus', target, offsetTop }, '*');
+        });
       }
 
       if ('ResizeObserver' in window) {

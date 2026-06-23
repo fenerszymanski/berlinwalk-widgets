@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-scenes-height-20260623';
+const ASSET_BUILD = 'smile-flow-results-20260623';
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {
@@ -317,7 +317,16 @@ class BwBerlinSmileChallengePage extends HTMLElement {
     this._framedHeight = 720;
     this._timers = [];
     this._messageHandler = (event) => {
-      if (!event.data || event.data.type !== 'bw-resize') return;
+      if (!event.data) return;
+      if (event.data.type === 'bw-smile-focus') {
+        this._queueHostSync();
+        const target = event.data.target || 'game';
+        const offsetTop = Number(event.data.offsetTop || 0);
+        this._timers.push(window.setTimeout(() => this._focusDevice(target, offsetTop), 90));
+        this._timers.push(window.setTimeout(() => this._focusDevice(target, offsetTop), 260));
+        return;
+      }
+      if (event.data.type !== 'bw-resize') return;
       const height = Number(event.data.height || 0);
       if (!height || height < 500) return;
       this._framedHeight = Math.min(Math.max(height, 680), 1080);
@@ -387,6 +396,40 @@ class BwBerlinSmileChallengePage extends HTMLElement {
     device.style.setProperty('height', `${deviceHeight}px`, 'important');
     device.style.setProperty('min-height', `${deviceHeight}px`, 'important');
     device.style.setProperty('max-height', `${deviceHeight}px`, 'important');
+  }
+
+  _focusDevice(target = 'game', offsetTop = 0) {
+    const device = this.querySelector('.bw-smile-device');
+    const iframe = this.querySelector('.bw-smile-frame');
+    if (!device) return;
+    const rect = device.getBoundingClientRect();
+    const iframeRect = iframe ? iframe.getBoundingClientRect() : null;
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 800;
+    const topOffset = target === 'answer' ? 150 : 64;
+    const bottomSlack = target === 'answer' ? 24 : 56;
+
+    if (target === 'answer' && iframeRect && offsetTop > 0) {
+      const delta = iframeRect.top + offsetTop - topOffset;
+      if (Math.abs(delta) > 12) {
+        window.scrollBy({ top: delta, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    if (target === 'result' && iframeRect && offsetTop > 0) {
+      const delta = iframeRect.top + offsetTop - 72;
+      if (Math.abs(delta) > 12) {
+        window.scrollBy({ top: delta, behavior: 'smooth' });
+      }
+      return;
+    }
+
+    const needsScroll = rect.top < topOffset || rect.bottom > viewportHeight - bottomSlack;
+    if (!needsScroll) return;
+    window.scrollBy({
+      top: rect.top - topOffset,
+      behavior: 'smooth',
+    });
   }
 }
 

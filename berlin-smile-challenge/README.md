@@ -27,6 +27,12 @@ Scene art:
 - Final game images: `assets/scenes/*.webp` (`960x600`, textless, 16:10)
 - ChatGPT source/contact sheet: `assets/source/scenes-chatgpt-20260623/`
 
+Result art:
+
+- Final result images: `assets/results/*.webp` (`960x600`, textless, 16:10)
+- ChatGPT source/contact sheet: `assets/source/results-chatgpt-20260623/`
+- Result images are also embedded into generated share/download cards.
+
 Production tracking posts to:
 
 ```text
