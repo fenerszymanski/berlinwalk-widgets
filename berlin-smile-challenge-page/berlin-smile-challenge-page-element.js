@@ -2,10 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-phone-viewport-20260623';
-const DESKTOP_FRAME_HEIGHT = 720;
-const TABLET_FRAME_HEIGHT = 700;
-const MOBILE_FRAME_HEIGHT = 680;
+const ASSET_BUILD = 'smile-bouncer-layout-20260623';
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {
@@ -23,6 +20,8 @@ class BwBerlinSmileChallengePage extends HTMLElement {
   _gameUrl() {
     const source = new URL(`${BASE_URL}berlin-smile-challenge/`);
     source.searchParams.set('v', ASSET_BUILD);
+    source.searchParams.set('attribution', 'none');
+    source.searchParams.set('resize', 'none');
     source.searchParams.set('parent_path', window.location.pathname || '/games/berlin-smile-challenge');
     source.searchParams.set('parent_url', window.location.href || 'https://www.berlinwalk.com/games/berlin-smile-challenge');
 
@@ -47,7 +46,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           color: #102E38;
           font-family: Montserrat, Arial, sans-serif;
           overflow-anchor: none;
-          overflow: hidden;
+          overflow: visible;
         }
 
         bw-berlin-smile-challenge-page *,
@@ -65,9 +64,9 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           gap: 34px 62px;
           margin: 0 auto;
           max-width: 1180px;
-          min-height: 860px;
+          min-height: 0 !important;
           overflow-anchor: none;
-          padding: clamp(54px, 7vw, 82px) 24px 42px;
+          padding: clamp(48px, 7svh, 66px) 24px 24px;
         }
 
         .bw-smile-content {
@@ -190,7 +189,9 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           box-shadow: 12px 12px 0 #E63946, 0 26px 70px rgba(16, 46, 56, 0.24);
           grid-area: game;
           max-width: 470px;
-          min-height: 720px;
+          height: clamp(560px, calc(100svh - 170px), 700px) !important;
+          min-height: 0 !important;
+          max-height: 700px !important;
           overflow-anchor: none;
           overflow: hidden;
           padding: 12px;
@@ -216,11 +217,11 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           border: 0;
           border-radius: 22px;
           display: block;
-          height: 720px;
-          min-height: 720px;
-          max-height: 720px;
+          height: 100% !important;
+          min-height: 0 !important;
+          max-height: none;
           overflow-anchor: none;
-          overflow: auto;
+          overflow: hidden;
           width: 100%;
         }
 
@@ -251,7 +252,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
               "cta";
             gap: 32px;
             min-height: 0;
-            padding: 48px 20px 38px;
+            padding: 48px 20px 28px;
           }
 
           .bw-smile-content {
@@ -264,16 +265,18 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
           .bw-smile-device {
             justify-self: center;
-            max-width: 430px;
-            min-height: 680px;
+            max-width: 390px;
+            height: clamp(500px, calc(100svh - 88px), 620px) !important;
+            min-height: 0 !important;
+            max-height: 620px !important;
             border-radius: 22px;
             box-shadow: 8px 8px 0 #E63946, 0 20px 48px rgba(16, 46, 56, 0.2);
           }
 
           .bw-smile-frame {
-            height: 700px;
-            min-height: 680px;
-            max-height: 700px;
+            height: 100% !important;
+            min-height: 0 !important;
+            max-height: none;
           }
         }
 
@@ -284,12 +287,6 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
           .bw-smile-device {
             padding: 8px;
-          }
-
-          .bw-smile-frame {
-            height: 680px;
-            min-height: 680px;
-            max-height: 680px;
           }
         }
       </style>
@@ -317,7 +314,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
             title="Can You Make a Berliner Smile?"
             loading="eager"
             allow="clipboard-write; web-share; autoplay"
-            scrolling="yes"
+            scrolling="no"
             referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </section>
 
@@ -333,89 +330,34 @@ class BwBerlinSmileChallengePage extends HTMLElement {
   _bind() {
     const iframe = this.querySelector('.bw-smile-frame');
     this._timers = [];
-    this._messageHandler = (event) => {
-      if (!event.data) return;
-      if (event.data.type === 'bw-smile-preserve-scroll') {
-        return;
-      }
-      if (event.data.type === 'bw-smile-focus') {
-        this._queueHostSync();
-        return;
-      }
-      if (event.data.type !== 'bw-resize') return;
-      this._lockInnerLayout();
-      this._queueHostSync();
-    };
-    window.addEventListener('message', this._messageHandler);
     iframe.src = this._gameUrl();
 
-    this._handleHostResize = () => this._queueHostSync();
+    this._handleHostResize = () => this._syncWixHostHeight();
     window.addEventListener('resize', this._handleHostResize, { passive: true });
-    if ('ResizeObserver' in window) {
-      this._resizeObserver = new ResizeObserver(() => this._queueHostSync());
-      const page = this.querySelector('.bw-smile-page');
-      if (page) this._resizeObserver.observe(page);
-    }
-    this._queueHostSync();
-    this._timers.push(window.setTimeout(() => this._queueHostSync(), 250));
-    this._timers.push(window.setTimeout(() => this._queueHostSync(), 1000));
-  }
-
-  _queueHostSync() {
-    window.requestAnimationFrame(() => this._syncWixHostHeight());
+    this._syncWixHostHeight();
+    this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 100));
+    this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 800));
   }
 
   _syncWixHostHeight() {
-    const page = this.querySelector('.bw-smile-page');
-    if (!page) return;
-    this._lockInnerLayout();
-    const height = Math.ceil(page.getBoundingClientRect().height + 8);
-    if (!height || height < 600) return;
-
     const wixShell = this.parentElement;
+    if (!wixShell || !wixShell.id || !wixShell.id.startsWith('comp-')) return;
     const targets = [
-      this,
       wixShell,
       wixShell && wixShell.parentElement,
       this.closest('section'),
     ].filter(Boolean);
 
-    const targetHeight = `${Math.min(Math.max(height, 720), 1900)}px`;
+    const isDesktop = window.matchMedia('(min-width: 941px)').matches;
     targets.forEach((target) => {
-      target.style.setProperty('height', targetHeight, 'important');
-      target.style.setProperty('min-height', targetHeight, 'important');
+      if (isDesktop) {
+        target.style.setProperty('height', '900px', 'important');
+        target.style.setProperty('min-height', '900px', 'important');
+      } else {
+        target.style.removeProperty('height');
+        target.style.removeProperty('min-height');
+      }
     });
-    this._lockInnerLayout();
-  }
-
-  _lockInnerLayout() {
-    const page = this.querySelector('.bw-smile-page');
-    const iframe = this.querySelector('.bw-smile-frame');
-    const device = this.querySelector('.bw-smile-device');
-    if (!page || !iframe || !device) return;
-
-    const frameHeight = this._targetFrameHeight();
-    const deviceStyle = getComputedStyle(device);
-    const devicePadding =
-      (parseFloat(deviceStyle.paddingTop) || 0) +
-      (parseFloat(deviceStyle.paddingBottom) || 0);
-    const deviceHeight = Math.ceil(frameHeight + devicePadding);
-
-    page.style.setProperty('height', 'auto', 'important');
-    page.style.setProperty('min-height', '0px', 'important');
-    iframe.style.setProperty('height', `${frameHeight}px`, 'important');
-    iframe.style.setProperty('min-height', `${frameHeight}px`, 'important');
-    iframe.style.setProperty('max-height', `${frameHeight}px`, 'important');
-    device.style.setProperty('height', `${deviceHeight}px`, 'important');
-    device.style.setProperty('min-height', `${deviceHeight}px`, 'important');
-    device.style.setProperty('max-height', `${deviceHeight}px`, 'important');
-  }
-
-  _targetFrameHeight() {
-    const width = window.innerWidth || document.documentElement.clientWidth || 1024;
-    if (width <= 520) return MOBILE_FRAME_HEIGHT;
-    if (width <= 940) return TABLET_FRAME_HEIGHT;
-    return DESKTOP_FRAME_HEIGHT;
   }
 
 }
