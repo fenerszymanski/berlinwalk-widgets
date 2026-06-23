@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'battle-list-page-20260623';
+  const ASSET_BUILD = 'battle-list-tight-20260623';
   const TOPIC_TITLES = {
     food: 'Berlin Food Battle',
     districts: 'Berlin District Battle',
@@ -227,13 +227,14 @@
         }
 
         .bw-battle-layout {
-          align-items: center;
+          align-items: start;
           display: grid;
           gap: 36px 58px;
           grid-template-areas:
             "content game"
             "cta game";
           grid-template-columns: minmax(0, 1fr) minmax(330px, 460px);
+          grid-template-rows: auto minmax(0, 1fr);
           margin: 0 auto;
           max-width: 1200px;
           position: relative;
@@ -370,6 +371,7 @@
         }
 
         .bw-battle-device {
+          align-self: start;
           background: var(--bb-ink);
           border: 8px solid var(--bb-ink);
           border-radius: 32px;
@@ -478,6 +480,7 @@
             "game"
             "cta";
           grid-template-columns: minmax(0, 1fr);
+          grid-template-rows: auto auto auto;
           max-width: 1120px;
         }
 
@@ -547,6 +550,7 @@
               "game"
               "cta";
             grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: auto auto auto;
           }
 
           .bw-battle-copy {
