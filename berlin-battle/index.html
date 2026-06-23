@@ -913,7 +913,7 @@
   var root = document.getElementById('bw-berlin-battle');
   var componentStyleHtml = root.querySelector('style') ? root.querySelector('style').outerHTML : '';
   var URL_PARAMS = new URLSearchParams(window.location.search || '');
-  var ASSET_BUILD = URL_PARAMS.get('v') || 'battle-list-page-20260623';
+  var ASSET_BUILD = URL_PARAMS.get('v') || 'battle-game-focus-20260623';
   var DATA_URL = 'data.json?v=' + encodeURIComponent(ASSET_BUILD);
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_battle&utm_medium=game&utm_campaign=berlin_battle&utm_content=result_cta';
   var SHARE_URL_BASE = 'https://www.berlinwalk.com/games/berlin-battle';
@@ -1142,6 +1142,24 @@
     });
   }
 
+  function requestParentGameFocus(reason) {
+    if (!window.parent || window.parent === window) return;
+    [80, 280].forEach(function (delay) {
+      window.setTimeout(function () {
+        if (state.view !== 'game') return;
+        try {
+          window.parent.postMessage({
+            type: 'bw-battle-focus-game',
+            reason: reason || 'topic_start',
+            topic: state.topic ? state.topic.id : ''
+          }, '*');
+        } catch (error) {
+          /* Parent focus is optional outside embeds. */
+        }
+      }, delay);
+    });
+  }
+
   function shuffle(items) {
     var copy = items.slice();
     for (var i = copy.length - 1; i > 0; i -= 1) {
@@ -1234,7 +1252,8 @@
     track('bw_berlin_battle_view_topics', { topic_count: topics.length });
   }
 
-  function startTopic(topicId) {
+  function startTopic(topicId, options) {
+    options = options || {};
     var topic = state.data.topics.find(function (entry) { return entry.id === topicId; });
     if (!topic || topic.status !== 'active') return;
     if (!Array.isArray(topic.items) || topic.items.length < 2 || topic.items.length % 2 !== 0) {
@@ -1252,6 +1271,7 @@
     state.winner = null;
     track('bw_berlin_battle_start', { item_count: topic.items.length });
     renderGame();
+    if (options.focusParent) requestParentGameFocus('topic_start');
   }
 
   function currentPair() {
@@ -1661,7 +1681,7 @@
   root.addEventListener('click', function (event) {
     var topicButton = event.target.closest('[data-topic-id]');
     if (topicButton) {
-      startTopic(topicButton.getAttribute('data-topic-id'));
+      startTopic(topicButton.getAttribute('data-topic-id'), { focusParent: true });
       return;
     }
 
@@ -1684,7 +1704,7 @@
           winner: state.winner ? state.winner.id : '',
           pick_count: state.pickCount
         });
-        startTopic(state.topic.id);
+        startTopic(state.topic.id, { focusParent: true });
       }
       return;
     }

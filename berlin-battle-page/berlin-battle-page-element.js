@@ -5,7 +5,7 @@
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  const ASSET_BUILD = 'battle-list-tight-20260623';
+  const ASSET_BUILD = 'battle-game-focus-20260623';
   const TOPIC_TITLES = {
     food: 'Berlin Food Battle',
     districts: 'Berlin District Battle',
@@ -144,6 +144,7 @@
       if (!this._gameFrame) return;
 
       this._hasChildResize = false;
+      this._timers = [];
 
       const setFrameHeight = (height, fromChild) => {
         if (!isValidHeight(height)) return;
@@ -152,10 +153,22 @@
         this._gameFrame.style.height = `${Math.ceil(height)}px`;
       };
 
+      const queueGameFocus = () => {
+        [80, 260].forEach((delay) => {
+          this._timers.push(window.setTimeout(() => this._focusGameDevice(), delay));
+        });
+      };
+
       this._messageHandler = (event) => {
         if (!this._gameFrame || event.source !== this._gameFrame.contentWindow) return;
-        if (!event.data || event.data.type !== 'bw-resize') return;
-        setFrameHeight(event.data.height + 10, true);
+        if (!event.data || !event.data.type) return;
+        if (event.data.type === 'bw-resize') {
+          setFrameHeight(event.data.height + 10, true);
+          return;
+        }
+        if (event.data.type === 'bw-battle-focus-game') {
+          queueGameFocus();
+        }
       };
       window.addEventListener('message', this._messageHandler);
 
@@ -167,7 +180,25 @@
       const pendingSrc = this._gameFrame.dataset.src;
       if (pendingSrc) this._gameFrame.src = pendingSrc;
 
-      this._timers = [200, 800, 1800].map((delay) => window.setTimeout(() => setFrameHeight(620, false), delay));
+      [200, 800, 1800].forEach((delay) => {
+        this._timers.push(window.setTimeout(() => setFrameHeight(620, false), delay));
+      });
+    }
+
+    _focusGameDevice() {
+      const device = this.querySelector('.bw-battle-device');
+      if (!device) return;
+      const rect = device.getBoundingClientRect();
+      if (!rect.height) return;
+      const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 720;
+      const scrollY = window.scrollY || window.pageYOffset || 0;
+      const visibleTop = Math.max(18, (viewportHeight - Math.min(rect.height, viewportHeight - 24)) / 2);
+      const top = Math.max(0, scrollY + rect.top - visibleTop);
+      const reducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({
+        top: Math.round(top),
+        behavior: reducedMotion ? 'auto' : 'smooth',
+      });
     }
 
     _styles() {

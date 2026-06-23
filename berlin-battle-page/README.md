@@ -6,7 +6,7 @@ Use on Wix:
 
 ```html
 <bw-berlin-battle-page></bw-berlin-battle-page>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-page/berlin-battle-page-element.js?v=battle-list-tight-20260623"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-page/berlin-battle-page-element.js?v=battle-game-focus-20260623"></script>
 ```
 
 The element renders a card-duel themed Berlin Battle page and embeds the standalone
