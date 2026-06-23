@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-launch-20260623';
+const ASSET_BUILD = 'smile-scenes-20260623';
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {
@@ -12,6 +12,9 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
   disconnectedCallback() {
     if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
+    if (this._handleHostResize) window.removeEventListener('resize', this._handleHostResize);
+    if (this._resizeObserver) this._resizeObserver.disconnect();
+    if (this._timers) this._timers.forEach((timer) => window.clearTimeout(timer));
   }
 
   _gameUrl() {
@@ -311,6 +314,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
   _bind() {
     const iframe = this.querySelector('.bw-smile-frame');
+    this._timers = [];
     this._messageHandler = (event) => {
       if (!event.data || event.data.type !== 'bw-resize') return;
       const height = Number(event.data.height || 0);
@@ -319,9 +323,46 @@ class BwBerlinSmileChallengePage extends HTMLElement {
       iframe.style.height = `${framedHeight}px`;
       const device = this.querySelector('.bw-smile-device');
       if (device) device.style.minHeight = `${framedHeight + 24}px`;
+      this._queueHostSync();
     };
     window.addEventListener('message', this._messageHandler);
     iframe.src = this._gameUrl();
+
+    this._handleHostResize = () => this._queueHostSync();
+    window.addEventListener('resize', this._handleHostResize, { passive: true });
+    if ('ResizeObserver' in window) {
+      this._resizeObserver = new ResizeObserver(() => this._queueHostSync());
+      const page = this.querySelector('.bw-smile-page');
+      if (page) this._resizeObserver.observe(page);
+    }
+    this._queueHostSync();
+    this._timers.push(window.setTimeout(() => this._queueHostSync(), 250));
+    this._timers.push(window.setTimeout(() => this._queueHostSync(), 1000));
+  }
+
+  _queueHostSync() {
+    window.requestAnimationFrame(() => this._syncWixHostHeight());
+  }
+
+  _syncWixHostHeight() {
+    const page = this.querySelector('.bw-smile-page');
+    if (!page) return;
+    const height = Math.ceil(page.getBoundingClientRect().height + 8);
+    if (!height || height < 600) return;
+
+    const wixShell = this.parentElement;
+    const targets = [
+      this,
+      wixShell,
+      wixShell && wixShell.parentElement,
+      this.closest('section'),
+    ].filter(Boolean);
+
+    const targetHeight = `${Math.min(Math.max(height, 720), 2200)}px`;
+    targets.forEach((target) => {
+      target.style.setProperty('height', targetHeight, 'important');
+      target.style.setProperty('min-height', targetHeight, 'important');
+    });
   }
 }
 

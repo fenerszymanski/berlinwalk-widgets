@@ -22,6 +22,11 @@ The script reads `data.json`, skips existing MP3 files, and writes:
 - `assets/audio/voice/*.mp3`
 - `assets/audio/GENERATION_NOTES.json`
 
+Scene art:
+
+- Final game images: `assets/scenes/*.webp` (`960x600`, textless, 16:10)
+- ChatGPT source/contact sheet: `assets/source/scenes-chatgpt-20260623/`
+
 Production tracking posts to:
 
 ```text

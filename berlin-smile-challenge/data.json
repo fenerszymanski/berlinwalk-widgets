@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-23-smile-audio-v1",
+  "version": "2026-06-23-smile-scenes-v1",
   "title": "Can You Make a Berliner Smile?",
   "subtitle": "Seven tiny social tests. One almost impossible mission: get a Berliner to soften their face.",
   "startLabel": "Start with sound",
@@ -18,6 +18,7 @@
   "scenes": [
     {
       "id": "bakery",
+      "image": "assets/scenes/bakery.webp",
       "kicker": "Bakery Counter",
       "title": "You reach the counter. The line behind you is already judging your breathing.",
       "prompt": "What do you say?",
@@ -59,6 +60,7 @@
     },
     {
       "id": "bvg",
+      "image": "assets/scenes/bvg.webp",
       "kicker": "BVG Platform",
       "title": "The train is delayed. A Berliner says nothing, but somehow very loudly.",
       "prompt": "How do you share the moment?",
@@ -100,6 +102,7 @@
     },
     {
       "id": "bike",
+      "image": "assets/scenes/bike.webp",
       "kicker": "Bike Lane",
       "title": "A bell rings behind you. You are standing exactly where Berlin patience goes to die.",
       "prompt": "Your move?",
@@ -141,6 +144,7 @@
     },
     {
       "id": "spaeti",
+      "image": "assets/scenes/spaeti.webp",
       "kicker": "Späti Counter",
       "title": "The card machine is decorative. The cashier waits for your emotional growth.",
       "prompt": "How do you react?",
@@ -182,6 +186,7 @@
     },
     {
       "id": "stairs",
+      "image": "assets/scenes/stairs.webp",
       "kicker": "Apartment Stairs",
       "title": "You meet your neighbor while carrying glass recycling after 10 p.m.",
       "prompt": "The correct survival phrase?",
@@ -223,6 +228,7 @@
     },
     {
       "id": "cafe",
+      "image": "assets/scenes/cafe.webp",
       "kicker": "Cafe Table",
       "title": "A waiter says, 'No laptop on this table.' No smile. No paragraph.",
       "prompt": "Your reply?",
@@ -264,6 +270,7 @@
     },
     {
       "id": "market",
+      "image": "assets/scenes/market.webp",
       "kicker": "Market Stall",
       "title": "You ask for one apple. The seller gives you the most serious apple in Europe.",
       "prompt": "How do you respond?",
@@ -305,6 +312,7 @@
     },
     {
       "id": "tram",
+      "image": "assets/scenes/tram.webp",
       "kicker": "Tram Stop",
       "title": "Rain starts sideways. A Berliner lights a cigarette with the calm of a lighthouse.",
       "prompt": "What do you say?",
@@ -346,6 +354,7 @@
     },
     {
       "id": "queue",
+      "image": "assets/scenes/queue.webp",
       "kicker": "Silent Queue",
       "title": "Nobody knows where the queue starts. Everybody knows when you do it wrong.",
       "prompt": "Your strategy?",
@@ -387,6 +396,7 @@
     },
     {
       "id": "compliment",
+      "image": "assets/scenes/compliment.webp",
       "kicker": "Compliment Attempt",
       "title": "You want to be friendly. This is already dangerous.",
       "prompt": "Choose your compliment.",

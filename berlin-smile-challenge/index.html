@@ -278,6 +278,25 @@
       padding: clamp(18px, 4vw, 26px);
     }
 
+    .bw-scene-visual {
+      aspect-ratio: 16 / 10;
+      background: #F7F1DC;
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      box-shadow: 4px 4px 0 rgba(16, 46, 56, 0.95);
+      margin-bottom: 2px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .bw-scene-visual img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
     .bw-roundline {
       align-items: center;
       color: var(--green);
@@ -511,6 +530,10 @@
         padding: 18px;
       }
 
+      .bw-scene-visual {
+        border-radius: 12px;
+      }
+
       .bw-start-screen,
       .bw-result-screen {
         min-height: 580px;
@@ -538,7 +561,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-launch-20260623';
+      const BUILD = 'smile-scenes-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -1029,6 +1052,7 @@
               ${meterHtml('Patience meter', state.patience, 'patience')}
             </div>
             <article class="bw-scene-card">
+              ${sceneVisualHtml(scene)}
               <div class="bw-roundline">
                 <span>${escapeHtml(scene.kicker)}</span>
                 <span>Scene ${state.roundIndex + 1} / ${state.scenes.length}</span>
@@ -1047,6 +1071,15 @@
             </article>
           </section>
           <div class="bw-toast" data-toast></div>
+        `;
+      }
+
+      function sceneVisualHtml(scene) {
+        if (!scene || !scene.image) return '';
+        return `
+          <figure class="bw-scene-visual" aria-hidden="true">
+            <img src="${escapeAttr(scene.image)}?v=${escapeAttr(BUILD)}" alt="" loading="eager" decoding="async">
+          </figure>
         `;
       }
 
