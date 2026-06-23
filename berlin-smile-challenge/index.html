@@ -614,7 +614,9 @@
       .bw-scene-visual {
         border-radius: 12px;
         box-shadow: 3px 3px 0 rgba(16, 46, 56, 0.95);
-        max-height: 112px;
+        justify-self: center;
+        max-height: none;
+        width: min(100%, 286px);
       }
 
       .bw-start-hero {
@@ -769,7 +771,9 @@
       }
 
       .bw-result-visual {
-        max-height: 88px;
+        justify-self: center;
+        max-height: none;
+        width: min(100%, 244px);
       }
 
       .bw-result-card h1 {
@@ -819,7 +823,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-only-meter-20260623';
+      const BUILD = 'smile-image-frame-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
