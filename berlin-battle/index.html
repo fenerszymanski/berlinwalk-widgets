@@ -221,20 +221,26 @@
 
     #bw-berlin-battle .bb-topic-grid {
       display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 9px;
+      grid-template-columns: minmax(0, 1fr);
+      margin: 0 auto;
+      max-width: 760px;
     }
 
     #bw-berlin-battle .bb-topic-card {
+      align-items: stretch;
       background: var(--bw-white);
       border: 1px solid var(--bw-border);
+      border-left: 5px solid var(--bw-yellow);
       border-radius: 10px;
       color: var(--bw-text);
       display: grid;
-      gap: 10px;
-      min-height: 0;
+      gap: 0;
+      grid-template-columns: 94px minmax(0, 1fr);
+      min-height: 92px;
       overflow: hidden;
       padding: 0;
+      position: relative;
       text-align: left;
       text-decoration: none;
       width: 100%;
@@ -248,14 +254,27 @@
     #bw-berlin-battle .bb-topic-card:not(.is-disabled):hover,
     #bw-berlin-battle .bb-topic-card:not(.is-disabled):focus-visible {
       border-color: var(--bw-green);
-      box-shadow: 0 10px 24px rgba(18, 63, 22, 0.12);
+      box-shadow: 0 8px 18px rgba(18, 63, 22, 0.11);
       outline: none;
       transform: translateY(-1px);
     }
 
+    #bw-berlin-battle .bb-topic-card:not(.is-disabled)::after {
+      border-right: 2px solid var(--bw-green);
+      border-top: 2px solid var(--bw-green);
+      content: "";
+      height: 8px;
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%) rotate(45deg);
+      width: 8px;
+    }
+
     #bw-berlin-battle .bb-topic-art {
       background: #EAF1DF;
-      height: 124px;
+      height: 100%;
+      min-height: 92px;
       overflow: hidden;
       position: relative;
     }
@@ -283,23 +302,24 @@
     }
 
     #bw-berlin-battle .bb-topic-content {
+      align-content: center;
       display: grid;
-      gap: 7px;
-      padding: 0 12px 14px;
+      gap: 5px;
+      padding: 12px 34px 12px 14px;
     }
 
     #bw-berlin-battle .bb-topic-kicker {
       color: var(--bw-green);
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 900;
-      letter-spacing: 1.5px;
+      letter-spacing: 0;
       line-height: 1.2;
       text-transform: uppercase;
     }
 
     #bw-berlin-battle .bb-topic-title {
       color: var(--bw-text);
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 900;
       letter-spacing: 0;
       line-height: 1.18;
@@ -307,10 +327,10 @@
 
     #bw-berlin-battle .bb-topic-lead {
       color: var(--bw-muted);
-      font-size: 11px;
+      font-size: 10.5px;
       font-weight: 650;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       display: -webkit-box;
       line-height: 1.38;
       overflow: hidden;
@@ -695,10 +715,6 @@
         padding: 12px;
       }
 
-      #bw-berlin-battle .bb-topic-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
       #bw-berlin-battle .bb-matchup {
         gap: 8px;
         grid-template-columns: minmax(0, 1fr) 42px minmax(0, 1fr);
@@ -738,35 +754,35 @@
 
     @media (max-width: 520px) {
       #bw-berlin-battle .bb-topic-grid {
-        gap: 8px;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
       }
 
       #bw-berlin-battle .bb-topic-card {
-        min-height: 0;
+        grid-template-columns: 78px minmax(0, 1fr);
+        min-height: 78px;
       }
 
       #bw-berlin-battle .bb-topic-art {
-        height: 92px;
+        min-height: 78px;
       }
 
       #bw-berlin-battle .bb-topic-content {
-        gap: 5px;
-        padding: 0 8px 10px;
+        gap: 4px;
+        padding: 9px 28px 9px 10px;
       }
 
       #bw-berlin-battle .bb-topic-kicker {
         font-size: 8px;
-        letter-spacing: 1px;
       }
 
       #bw-berlin-battle .bb-topic-title {
-        font-size: 12px;
+        font-size: 12.5px;
         line-height: 1.12;
       }
 
       #bw-berlin-battle .bb-topic-lead {
         font-size: 9.5px;
+        -webkit-line-clamp: 1;
         line-height: 1.25;
       }
 
@@ -897,7 +913,7 @@
   var root = document.getElementById('bw-berlin-battle');
   var componentStyleHtml = root.querySelector('style') ? root.querySelector('style').outerHTML : '';
   var URL_PARAMS = new URLSearchParams(window.location.search || '');
-  var ASSET_BUILD = URL_PARAMS.get('v') || 'unique-topic-covers-20260619';
+  var ASSET_BUILD = URL_PARAMS.get('v') || 'battle-list-page-20260623';
   var DATA_URL = 'data.json?v=' + encodeURIComponent(ASSET_BUILD);
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_battle&utm_medium=game&utm_campaign=berlin_battle&utm_content=result_cta';
   var SHARE_URL_BASE = 'https://www.berlinwalk.com/games/berlin-battle';
