@@ -1,4 +1,4 @@
-# Pending BerlinTools Entry: Berlin Grocery Store Picker
+# Pending BerlinTools Entry: Berlin Grocery Store Map & Picker
 
 Post: `grocery-shopping-in-berlin`
 Widget slug: `berlin-grocery-store-picker`
@@ -7,7 +7,7 @@ Target live tool URL after CMS insert: `https://www.berlinwalk.com/tools/berlin-
 
 ## Status
 
-Local widget exists and is embedded in the unpublished Wix Blog draft.
+Local map + picker widget exists and is embedded in the unpublished Wix Blog draft.
 
 The BerlinTools hub/CMS entry is intentionally not live yet because the required dedicated glossy ChatGPT-browser icon has not been generated, uploaded to Wix Media, and wired into:
 
@@ -23,11 +23,11 @@ Create a square glossy 3D app icon in the existing BerlinWalk BerlinTools icon f
 
 ## Proposed Tools Hub Data
 
-- title: `Berlin Grocery Store Picker`
-- lead: `Choose whether you need a Berlin supermarket, discount store, drugstore, organic shop, Späti, station supermarket or airport shop.`
+- title: `Berlin Grocery Store Map & Picker`
+- lead: `Choose whether you need a Berlin supermarket, discount store, drugstore, organic shop, Späti, station supermarket or airport shop, then explore an OpenStreetMap-based Berlin grocery map.`
 - legacy category: `Maps`
 - hubCategory: `Essentials`
 - type: `Guide`
-- embedHeight: `1120`
+- embedHeight: `2800`
 - tags: `grocery`, `supermarket`, `food shopping`, `Sunday`, `Späti`, `drugstore`, `Pfand`, `tourist basics`
 - aliases: `Berlin supermarket guide`, `grocery stores Berlin`, `Sunday groceries Berlin`, `food shopping Berlin`

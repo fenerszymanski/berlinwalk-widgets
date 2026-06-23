@@ -3,10 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Berlin Grocery Store Picker | BerlinWalk</title>
-  <meta name="description" content="Choose the right Berlin grocery option for tourists: supermarket, discount store, organic shop, drugstore, Späti, station supermarket or airport shop.">
+  <title>Berlin Grocery Store Map & Picker | BerlinWalk</title>
+  <meta name="description" content="Choose the right Berlin grocery option and explore an OpenStreetMap-based map of supermarkets, discount stores, organic shops, drugstores, Spätis and station shops.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
@@ -49,6 +53,7 @@
 
     #bw-grocery-picker h2,
     #bw-grocery-picker h3,
+    #bw-grocery-picker h4,
     #bw-grocery-picker p {
       margin-top: 0;
     }
@@ -69,7 +74,7 @@
       color: var(--bw-white);
       display: grid;
       gap: 18px;
-      grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+      grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
       padding: 22px;
     }
 
@@ -98,7 +103,7 @@
       font-weight: 650;
       line-height: 1.55;
       margin: 10px 0 0;
-      max-width: 760px;
+      max-width: 780px;
     }
 
     #bw-grocery-picker .bw-rule-card {
@@ -137,6 +142,7 @@
 
     #bw-grocery-picker .bw-controls,
     #bw-grocery-picker .bw-result,
+    #bw-grocery-picker .bw-map-panel,
     #bw-grocery-picker .bw-grid-card {
       background: var(--bw-white);
       border: 1px solid var(--bw-border);
@@ -164,7 +170,8 @@
       text-transform: uppercase;
     }
 
-    #bw-grocery-picker .bw-options {
+    #bw-grocery-picker .bw-options,
+    #bw-grocery-picker .bw-map-filters {
       display: grid;
       gap: 8px;
       grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -215,7 +222,8 @@
       text-transform: uppercase;
     }
 
-    #bw-grocery-picker .bw-result h3 {
+    #bw-grocery-picker .bw-result h3,
+    #bw-grocery-picker .bw-map-panel h3 {
       color: var(--bw-green);
       font-size: 24px;
       font-weight: 950;
@@ -223,7 +231,8 @@
       margin: 0;
     }
 
-    #bw-grocery-picker .bw-result p {
+    #bw-grocery-picker .bw-result p,
+    #bw-grocery-picker .bw-map-panel p {
       color: var(--bw-muted);
       font-size: 13.5px;
       font-weight: 650;
@@ -276,6 +285,183 @@
       color: var(--bw-green);
     }
 
+    #bw-grocery-picker .bw-map-panel {
+      display: grid;
+      gap: 14px;
+      overflow: hidden;
+      padding: 16px;
+    }
+
+    #bw-grocery-picker .bw-map-head {
+      display: grid;
+      gap: 8px;
+      max-width: 850px;
+    }
+
+    #bw-grocery-picker .bw-map-layout {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+    }
+
+    #bw-grocery-picker .bw-map-wrap,
+    #bw-grocery-picker .bw-map-side {
+      background: #FDFDF8;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-grocery-picker .bw-map {
+      background: #E8EEDC;
+      height: 500px;
+      width: 100%;
+    }
+
+    #bw-grocery-picker .leaflet-container {
+      background: #E8EEDC;
+      font-family: Montserrat, Arial, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-grocery-picker .leaflet-pane,
+    #bw-grocery-picker .leaflet-tile,
+    #bw-grocery-picker .leaflet-marker-icon,
+    #bw-grocery-picker .leaflet-marker-shadow,
+    #bw-grocery-picker .leaflet-tile-container,
+    #bw-grocery-picker .leaflet-pane > svg,
+    #bw-grocery-picker .leaflet-pane > canvas,
+    #bw-grocery-picker .leaflet-zoom-box,
+    #bw-grocery-picker .leaflet-image-layer,
+    #bw-grocery-picker .leaflet-layer {
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    #bw-grocery-picker .leaflet-tile-pane { z-index: 200; }
+    #bw-grocery-picker .leaflet-overlay-pane { z-index: 400; }
+    #bw-grocery-picker .leaflet-shadow-pane { z-index: 500; }
+    #bw-grocery-picker .leaflet-marker-pane { z-index: 600; }
+    #bw-grocery-picker .leaflet-tooltip-pane { z-index: 650; }
+    #bw-grocery-picker .leaflet-popup-pane { z-index: 700; }
+
+    #bw-grocery-picker .leaflet-tile {
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+
+    #bw-grocery-picker .leaflet-control-attribution {
+      font-size: 10px;
+    }
+
+    #bw-grocery-picker .marker-cluster {
+      align-items: center;
+      background: rgba(255, 230, 0, 0.42);
+      border: 2px solid rgba(27, 94, 32, 0.82);
+      border-radius: 999px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.20);
+      color: var(--bw-green);
+      display: flex;
+      font-weight: 950;
+      justify-content: center;
+    }
+
+    #bw-grocery-picker .marker-cluster div {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      display: flex;
+      height: 34px;
+      justify-content: center;
+      margin: 3px;
+      width: 34px;
+    }
+
+    #bw-grocery-picker .marker-cluster span {
+      font-size: 11px;
+      line-height: 1;
+    }
+
+    #bw-grocery-picker .bw-marker {
+      align-items: center;
+      background: var(--bw-green);
+      border: 2px solid var(--bw-yellow);
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.22);
+      color: var(--bw-white);
+      display: flex;
+      font-size: 10px;
+      font-weight: 950;
+      height: 30px;
+      justify-content: center;
+      line-height: 1;
+      width: 30px;
+    }
+
+    #bw-grocery-picker .bw-marker.discount { background: #7CB342; color: #173D17; }
+    #bw-grocery-picker .bw-marker.organic { background: #C5E1A5; color: #173D17; }
+    #bw-grocery-picker .bw-marker.drugstore { background: #E63946; color: #FFFFFF; }
+    #bw-grocery-picker .bw-marker.convenience { background: #FFE600; color: #1B5E20; border-color: #1B5E20; }
+
+    #bw-grocery-picker .bw-map-side {
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    #bw-grocery-picker .bw-map-filters {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-grocery-picker .bw-status {
+      background: #F6FAEF;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-grocery-picker .bw-store-list {
+      display: grid;
+      gap: 8px;
+      max-height: 360px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    #bw-grocery-picker .bw-store-item {
+      background: #FFFFFF;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: grid;
+      gap: 6px;
+      padding: 10px;
+      text-align: left;
+      text-decoration: none;
+    }
+
+    #bw-grocery-picker .bw-store-item strong {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-grocery-picker .bw-store-item span {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
     #bw-grocery-picker .bw-store-grid {
       display: grid;
       gap: 10px;
@@ -303,20 +489,17 @@
       line-height: 1.45;
     }
 
-    @media (max-width: 760px) {
-      #bw-grocery-picker .bw-hero {
+    @media (max-width: 820px) {
+      #bw-grocery-picker .bw-hero,
+      #bw-grocery-picker .bw-map-layout {
         grid-template-columns: 1fr;
-        padding: 18px;
       }
 
       #bw-grocery-picker .bw-title {
         font-size: 25px;
       }
 
-      #bw-grocery-picker .bw-options {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
+      #bw-grocery-picker .bw-options,
       #bw-grocery-picker .bw-store-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
@@ -327,18 +510,27 @@
         margin: 14px 0;
       }
 
-      #bw-grocery-picker .bw-body {
+      #bw-grocery-picker .bw-body,
+      #bw-grocery-picker .bw-map-panel {
         padding: 14px;
       }
 
       #bw-grocery-picker .bw-options,
+      #bw-grocery-picker .bw-map-filters,
       #bw-grocery-picker .bw-store-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       #bw-grocery-picker button {
         min-height: 42px;
-        text-align: left;
+      }
+
+      #bw-grocery-picker .bw-map {
+        height: 330px;
+      }
+
+      #bw-grocery-picker .bw-store-list {
+        max-height: 240px;
       }
 
       #bw-grocery-picker .bw-link {
@@ -351,12 +543,12 @@
     <section class="bw-hero" aria-labelledby="bw-grocery-title">
       <div>
         <p class="bw-kicker">BerlinWalk tool</p>
-        <h2 class="bw-title" id="bw-grocery-title">Berlin Grocery Store Picker</h2>
-        <p class="bw-sub">Choose the right Berlin food-and-basics stop before you waste time in the wrong shop.</p>
+        <h2 class="bw-title" id="bw-grocery-title">Berlin Grocery Store Map & Picker</h2>
+        <p class="bw-sub">Choose the right shop type, then use the OpenStreetMap-based map to find Berlin supermarkets, discount stores, organic shops, drugstores and late basics.</p>
       </div>
       <div class="bw-rule-card">
         <strong>The rule</strong>
-        <p>Supermarket, discount store, organic shop, drugstore and Späti are not interchangeable. Pick by time, need and budget first.</p>
+        <p>Use the picker for the decision. Use the map for nearby options. Always verify opening hours before you walk across town.</p>
       </div>
     </section>
 
@@ -399,8 +591,34 @@
         <p id="bw-grocery-reason">Use a normal full supermarket when you need breakfast food, picnic supplies, drinks, fruit, bread, cheese, ready meals and a clear one-stop shop.</p>
         <ul id="bw-grocery-tips"></ul>
         <div class="bw-actions">
-          <a class="bw-link" id="bw-grocery-map" href="https://www.google.com/maps/search/REWE+or+Edeka+near+me+Berlin" target="_blank" rel="noopener">Open map search</a>
+          <a class="bw-link" id="bw-grocery-map-link" href="https://www.google.com/maps/search/REWE+or+Edeka+near+me+Berlin" target="_blank" rel="noopener">Open map search</a>
           <a class="bw-link secondary" href="https://www.berlinwalk.com/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know" target="_blank" rel="noopener">Sunday rules</a>
+        </div>
+      </div>
+
+      <div class="bw-map-panel" aria-label="Berlin grocery map">
+        <div class="bw-map-head">
+          <span class="bw-badge">Open-data map</span>
+          <h3>Berlin grocery map</h3>
+          <p>This loads Berlin grocery points from OpenStreetMap through Overpass. It is broad enough for orientation, but it is not an official complete directory or opening-hours database.</p>
+        </div>
+        <div class="bw-map-layout">
+          <div class="bw-map-wrap">
+            <div class="bw-map" id="bw-grocery-map-canvas" aria-label="OpenStreetMap grocery map of Berlin"></div>
+          </div>
+          <div class="bw-map-side">
+            <div class="bw-label">Show on map</div>
+            <div class="bw-map-filters" data-map-filters>
+              <button type="button" data-filter="all" aria-pressed="true">All</button>
+              <button type="button" data-filter="supermarket" aria-pressed="false">Supermarkets</button>
+              <button type="button" data-filter="discount" aria-pressed="false">Discount</button>
+              <button type="button" data-filter="organic" aria-pressed="false">Bio</button>
+              <button type="button" data-filter="drugstore" aria-pressed="false">Drugstores</button>
+              <button type="button" data-filter="convenience" aria-pressed="false">Späti / small</button>
+            </div>
+            <p class="bw-status" id="bw-grocery-map-status">Loading Berlin grocery data...</p>
+            <div class="bw-store-list" id="bw-grocery-store-list" aria-label="Visible grocery locations"></div>
+          </div>
         </div>
       </div>
 
@@ -419,11 +637,21 @@
       if (!root) return;
 
       var state = { need: 'full', time: 'weekday', priority: 'easy' };
+      var mapState = { filter: 'all', stores: [], markers: [], map: null, layer: null, source: 'osm' };
       var choiceEl = root.querySelector('#bw-grocery-choice');
       var reasonEl = root.querySelector('#bw-grocery-reason');
       var tipsEl = root.querySelector('#bw-grocery-tips');
-      var mapEl = root.querySelector('#bw-grocery-map');
+      var mapLinkEl = root.querySelector('#bw-grocery-map-link');
       var badgeEl = root.querySelector('#bw-grocery-badge');
+      var statusEl = root.querySelector('#bw-grocery-map-status');
+      var storeListEl = root.querySelector('#bw-grocery-store-list');
+
+      var fallbackStores = [
+        { name: 'Supermarket search near Berlin Hauptbahnhof', type: 'supermarket', lat: 52.5254, lon: 13.3694, hours: 'Fallback search anchor', osm: 'fallback' },
+        { name: 'Supermarket search near Friedrichstrasse', type: 'supermarket', lat: 52.5203, lon: 13.3871, hours: 'Fallback search anchor', osm: 'fallback' },
+        { name: 'Grocery search near BER Airport', type: 'supermarket', lat: 52.3667, lon: 13.5033, hours: 'Fallback search anchor', osm: 'fallback' },
+        { name: 'Späti search in central Berlin', type: 'convenience', lat: 52.5200, lon: 13.4050, hours: 'Fallback search anchor', osm: 'fallback' }
+      ];
 
       function resultFor() {
         if (state.time === 'sunday' || state.time === 'arrival') {
@@ -433,6 +661,7 @@
               choice: 'Station supermarket, BER Airport or dm if open',
               reason: 'On Sundays and public holidays, normal supermarkets mostly close. Start with the legal exception points near big stations or the airport, then check drugstore hours separately.',
               map: 'https://www.google.com/maps/search/station+supermarket+Berlin',
+              filter: 'supermarket',
               tips: ['Search by the exact station near you: Hauptbahnhof, Friedrichstrasse, Ostbahnhof, Suedkreuz, Zoo or BER.', 'Do not assume every station shop is a full supermarket.', 'Buy tomorrow morning basics, not a complicated weekly shop.']
             };
           }
@@ -441,6 +670,7 @@
             choice: 'Station supermarket or BER Airport REWE',
             reason: 'When normal Berlin supermarkets are closed, the reliable grocery move is a supermarket inside a major transport hub. A Späti is fine for drinks and snacks, but not for a full food run.',
             map: 'https://www.google.com/maps/search/supermarket+open+Sunday+Berlin+station',
+            filter: 'supermarket',
             tips: ['Expect higher prices and crowds than a normal weekday shop.', 'For a small emergency, a Späti may be closer and faster.', 'Check the current listing before travelling across the city.']
           };
         }
@@ -451,6 +681,7 @@
             choice: 'dm or Rossmann',
             reason: 'For toothpaste, shampoo, sunscreen, baby supplies, razors and basic travel toiletries, a German drugstore is usually clearer and cheaper than a supermarket.',
             map: 'https://www.google.com/maps/search/dm+or+Rossmann+near+me+Berlin',
+            filter: 'drugstore',
             tips: ['For medicine, use an Apotheke, not dm or Rossmann.', 'Drugstores often have travel-size items and baby shelves.', 'If you need food too, pair it with a nearby supermarket.']
           };
         }
@@ -461,6 +692,7 @@
             choice: 'Aldi, Lidl, Netto or Penny',
             reason: 'Discount supermarkets are good for water, snacks, breakfast basics, fruit, bread, simple picnic food and cheap supplies, but the choice is narrower.',
             map: 'https://www.google.com/maps/search/Aldi+Lidl+Netto+Penny+near+me+Berlin',
+            filter: 'discount',
             tips: ['Bring a bag or buy one at checkout.', 'Pack fast after scanning; Berlin checkout rhythm is brisk.', 'Use REWE or Edeka instead if you need a very specific item.']
           };
         }
@@ -471,6 +703,7 @@
             choice: 'Bio Company, Alnatura or Denns',
             reason: 'Organic supermarkets are the better fit for organic food, vegan/vegetarian specialty items, gluten-free shelves and slower browsing.',
             map: 'https://www.google.com/maps/search/Bio+Company+Alnatura+Denns+near+me+Berlin',
+            filter: 'organic',
             tips: ['Prices are usually higher than discount supermarkets.', 'Check Sunday hours carefully; only some station-area branches are exceptions.', 'For a normal picnic, a regular supermarket is usually enough.']
           };
         }
@@ -481,6 +714,7 @@
             choice: 'Späti, REWE To Go or a station shop',
             reason: 'For late drinks, crisps, chocolate, cigarettes, one missing bottle of water or a quick snack, a small shop is often more realistic than hunting for a full supermarket.',
             map: 'https://www.google.com/maps/search/Späti+near+me+Berlin',
+            filter: 'convenience',
             tips: ['Selection is small and prices can be higher.', 'Do not expect proper fresh groceries.', 'If it is Sunday and you need real food, use a station supermarket instead.']
           };
         }
@@ -490,18 +724,224 @@
           choice: 'REWE or Edeka',
           reason: 'Use a normal full supermarket when you need breakfast food, picnic supplies, drinks, fruit, bread, cheese, ready meals and a clear one-stop shop.',
           map: 'https://www.google.com/maps/search/REWE+or+Edeka+near+me+Berlin',
+          filter: 'supermarket',
           tips: ['This is the safest first choice for most tourists.', 'Look for Pfand machines near the entrance if you have bottles to return.', 'For toiletries, dm or Rossmann may still be better.']
         };
       }
 
-      function render() {
+      function setMapFilter(filter) {
+        mapState.filter = filter;
+        root.querySelectorAll('[data-map-filters] button').forEach(function (btn) {
+          btn.setAttribute('aria-pressed', btn.getAttribute('data-filter') === filter ? 'true' : 'false');
+        });
+        renderMapStores();
+      }
+
+      function renderDecision() {
         var result = resultFor();
         badgeEl.textContent = result.badge;
         choiceEl.textContent = result.choice;
         reasonEl.textContent = result.reason;
-        mapEl.href = result.map;
+        mapLinkEl.href = result.map;
         tipsEl.innerHTML = result.tips.map(function (tip) { return '<li>' + tip + '</li>'; }).join('');
+        setMapFilter(result.filter || 'all');
         window.dispatchEvent(new Event('resize'));
+      }
+
+      function classify(tags) {
+        var name = String(tags.name || tags.brand || '').toLowerCase();
+        var shop = String(tags.shop || '').toLowerCase();
+        if (shop === 'chemist' || /dm|rossmann|müller|mueller/.test(name)) return 'drugstore';
+        if (shop === 'organic' || shop === 'health_food' || /bio company|alnatura|denns|veganz/.test(name)) return 'organic';
+        if (shop === 'convenience' || /späti|spaeti|spati|kiosk|late night/.test(name)) return 'convenience';
+        if (/aldi|lidl|penny|netto|norma/.test(name)) return 'discount';
+        return 'supermarket';
+      }
+
+      function labelFor(type) {
+        return {
+          supermarket: 'Supermarket',
+          discount: 'Discount',
+          organic: 'Bio / special diet',
+          drugstore: 'Drugstore',
+          convenience: 'Späti / small shop'
+        }[type] || 'Shop';
+      }
+
+      function markerLabel(type) {
+        return {
+          supermarket: 'S',
+          discount: 'D',
+          organic: 'B',
+          drugstore: 'dm',
+          convenience: 'K'
+        }[type] || 'S';
+      }
+
+      function googleMapsUrl(store) {
+        return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent((store.name || 'supermarket') + ' Berlin');
+      }
+
+      function renderStoreList(stores) {
+        var top = stores.slice(0, 24);
+        storeListEl.innerHTML = top.map(function (store) {
+          var hours = store.hours ? store.hours : 'Hours not verified in this widget';
+          return '<a class="bw-store-item" href="' + googleMapsUrl(store) + '" target="_blank" rel="noopener">' +
+            '<strong>' + escapeHtml(store.name) + '</strong>' +
+            '<span>' + labelFor(store.type) + ' · ' + escapeHtml(hours) + '</span>' +
+            '</a>';
+        }).join('');
+      }
+
+      function escapeHtml(value) {
+        return String(value || '').replace(/[&<>"']/g, function (char) {
+          return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[char];
+        });
+      }
+
+      function renderMapStores() {
+        if (!mapState.map || !window.L) return;
+        var stores = mapState.filter === 'all'
+          ? mapState.stores
+          : mapState.stores.filter(function (store) { return store.type === mapState.filter; });
+
+        mapState.layer.clearLayers();
+        var shown = stores.slice(0, 900);
+        shown.forEach(function (store) {
+          var icon = window.L.divIcon({
+            className: '',
+            html: '<span class="bw-marker ' + store.type + '">' + markerLabel(store.type) + '</span>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15],
+            popupAnchor: [0, -14]
+          });
+          var marker = window.L.marker([store.lat, store.lon], { icon: icon }).bindPopup(
+            '<strong>' + escapeHtml(store.name) + '</strong><br>' +
+            labelFor(store.type) + '<br>' +
+            '<a href="' + googleMapsUrl(store) + '" target="_blank" rel="noopener">Open in Google Maps</a>'
+          );
+          marker.addTo(mapState.layer);
+        });
+
+        if (shown.length) {
+          var bounds = window.L.latLngBounds(shown.slice(0, 120).map(function (store) { return [store.lat, store.lon]; }));
+          mapState.map.fitBounds(bounds.pad(0.12), { maxZoom: 12 });
+        }
+
+        var countText = stores.length === shown.length ? stores.length : shown.length + ' of ' + stores.length;
+        statusEl.textContent = mapState.source === 'fallback'
+          ? countText + ' fallback search anchors. Live OpenStreetMap data did not load; use these as starting points and verify hours.'
+          : countText + ' ' + (mapState.filter === 'all' ? 'grocery points' : labelFor(mapState.filter).toLowerCase() + ' points') + ' from OpenStreetMap. Verify hours before going.';
+        renderStoreList(stores);
+        window.dispatchEvent(new Event('resize'));
+      }
+
+      function normalizeElement(element) {
+        var tags = element.tags || {};
+        var lat = element.lat || (element.center && element.center.lat);
+        var lon = element.lon || (element.center && element.center.lon);
+        if (!lat || !lon) return null;
+        var type = classify(tags);
+        var name = tags.name || tags.brand || labelFor(type);
+        return {
+          id: element.type + '/' + element.id,
+          name: name,
+          type: type,
+          lat: lat,
+          lon: lon,
+          hours: tags.opening_hours || '',
+          osm: element.type + '/' + element.id
+        };
+      }
+
+      function loadOverpassData() {
+        var endpoints = [
+          'https://overpass-api.de/api/interpreter',
+          'https://overpass.kumi.systems/api/interpreter'
+        ];
+        var query = [
+          '[out:json][timeout:25];',
+          'area["name"="Berlin"]["boundary"="administrative"]["admin_level"="4"]->.berlin;',
+          '(',
+          'node["shop"~"^(supermarket|convenience|organic|chemist|greengrocer|health_food)$"](area.berlin);',
+          'way["shop"~"^(supermarket|convenience|organic|chemist|greengrocer|health_food)$"](area.berlin);',
+          'relation["shop"~"^(supermarket|convenience|organic|chemist|greengrocer|health_food)$"](area.berlin);',
+          ');',
+          'out center tags;'
+        ].join('\n');
+
+        function fetchEndpoint(index) {
+          return fetch(endpoints[index], {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+            body: 'data=' + encodeURIComponent(query)
+          })
+            .then(function (response) {
+              if (!response.ok) throw new Error('Overpass ' + response.status);
+              return response.json();
+            })
+            .catch(function (error) {
+              if (index + 1 < endpoints.length) return fetchEndpoint(index + 1);
+              throw error;
+            });
+        }
+
+        return fetchEndpoint(0)
+          .then(function (data) {
+            var seen = {};
+            var stores = (data.elements || []).map(normalizeElement).filter(Boolean).filter(function (store) {
+              var key = store.name.toLowerCase() + ':' + store.lat.toFixed(5) + ':' + store.lon.toFixed(5);
+              if (seen[key]) return false;
+              seen[key] = true;
+              return true;
+            });
+            if (!stores.length) throw new Error('No grocery stores returned');
+            mapState.source = 'osm';
+            var typeOrder = { supermarket: 1, discount: 2, organic: 3, drugstore: 4, convenience: 5 };
+            mapState.stores = stores.sort(function (a, b) {
+              return (typeOrder[a.type] || 9) - (typeOrder[b.type] || 9) || a.name.localeCompare(b.name);
+            });
+          })
+          .catch(function () {
+            mapState.source = 'fallback';
+            mapState.stores = fallbackStores;
+            statusEl.textContent = 'Live map data did not load. Showing fallback station and search anchors.';
+          });
+      }
+
+      function initMap() {
+        if (!window.L) {
+          window.setTimeout(initMap, 120);
+          return;
+        }
+        var canvas = root.querySelector('#bw-grocery-map-canvas');
+        mapState.map = window.L.map(canvas, {
+          scrollWheelZoom: false,
+          zoomControl: true
+        }).setView([52.52, 13.405], 11);
+        window.L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(mapState.map);
+        mapState.layer = window.L.markerClusterGroup
+          ? window.L.markerClusterGroup({
+            disableClusteringAtZoom: 15,
+            maxClusterRadius: 44,
+            showCoverageOnHover: false,
+            spiderfyOnMaxZoom: true
+          })
+          : window.L.layerGroup();
+        mapState.layer.addTo(mapState.map);
+
+        loadOverpassData().then(function () {
+          renderMapStores();
+          [0, 250, 800, 1600].forEach(function (delay) {
+            window.setTimeout(function () {
+              mapState.map.invalidateSize();
+              window.dispatchEvent(new Event('resize'));
+            }, delay);
+          });
+        });
       }
 
       root.querySelectorAll('.bw-options').forEach(function (group) {
@@ -513,11 +953,18 @@
           group.querySelectorAll('button').forEach(function (item) {
             item.setAttribute('aria-pressed', item === btn ? 'true' : 'false');
           });
-          render();
+          renderDecision();
         });
       });
 
-      render();
+      root.querySelector('[data-map-filters]').addEventListener('click', function (event) {
+        var btn = event.target.closest('button[data-filter]');
+        if (!btn) return;
+        setMapFilter(btn.getAttribute('data-filter'));
+      });
+
+      renderDecision();
+      initMap();
     })();
   </script>
 </div>

@@ -24,11 +24,11 @@ Existing nearby posts/tools cover Sunday shopping, Spätis, shopping areas, Pfan
 
 ## Widget Ideas Considered
 
-1. Berlin Grocery Store Picker: choose REWE/Edeka, Aldi/Lidl, dm/Rossmann, Bio shop, Späti, station supermarket or BER based on need, time and priority. Decision helped: "Where should I go right now?"
+1. Berlin Grocery Store Map & Picker: choose REWE/Edeka, Aldi/Lidl, dm/Rossmann, Bio shop, Späti, station supermarket or BER based on need and timing, then explore an OpenStreetMap-based Berlin grocery map. Decision helped: "Where should I go right now, and what options are around Berlin?"
 2. Berlin First Grocery Run Checklist: build a mini shopping list for breakfast, picnic, hotel room and Sunday backup. Decision helped: "What should I buy before everything closes?"
 3. Pfand + Checkout Simulator: explain bottle deposits, bagging speed and receipt redemption. Decision helped: "What is happening at checkout?"
 
-Selected recommendation: Berlin Grocery Store Picker, because it is broad enough to become a Berlin Tool and directly prevents the most common wasted-trip decision.
+Selected recommendation: Berlin Grocery Store Map & Picker, because it is broad enough to become a Berlin Tool and directly prevents the most common wasted-trip decision while adding a useful citywide grocery map.
 
 ## Body
 
@@ -89,6 +89,8 @@ They are usually more expensive than Aldi or Lidl. That is fine if the specific 
 A Späti is a Berlin late shop. It is part kiosk, part drink stop, part neighborhood habit. It can save you when you need a cold drink, crisps, cigarettes, a snack or something small after normal opening hours.
 
 It is not the same as a supermarket. The selection is limited, prices can be higher, and fresh food is not the point. If you want a proper grocery run, use a supermarket. If you want a small rescue stop, a Späti is often perfect. I explain the culture and Sunday limits in the [Späti guide](https://www.berlinwalk.com/post/what-is-a-spati-berlin).
+
+Use the tool below first as a decision shortcut, then as a map. The map loads Berlin grocery points from OpenStreetMap, so it is useful for orientation and discovery, not a promise that every opening hour or every branch is perfect.
 
 {{widget:berlin-grocery-store-picker}}
 
