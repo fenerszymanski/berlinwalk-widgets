@@ -10,6 +10,8 @@ const BW_SITE_FOOTER_LINKS = {
   blog: 'https://www.berlinwalk.com/blog',
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
   battle: 'https://www.berlinwalk.com/games/berlin-battle',
+  bouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
+  smile: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   tools: 'https://www.berlinwalk.com/berlin-tools',
   widgets: 'https://www.berlinwalk.com/widgets',
   instagram: 'https://www.instagram.com/berlinwalkingtour/',
@@ -436,7 +438,9 @@ class BWSiteFooterElement extends HTMLElement {
             ])}
 
             ${this._renderLinkColumn('Play', [
-              ['Berlin Battle', BW_SITE_FOOTER_LINKS.battle]
+              ['Berlin Battle', BW_SITE_FOOTER_LINKS.battle],
+              ['Berghain Bouncer', BW_SITE_FOOTER_LINKS.bouncer],
+              ['Berlin Smile Challenge', BW_SITE_FOOTER_LINKS.smile]
             ])}
 
             ${this._renderLinkColumn('Explore', [

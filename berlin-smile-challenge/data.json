@@ -1,0 +1,464 @@
+{
+  "version": "2026-06-23-smile-audio-v1",
+  "title": "Can You Make a Berliner Smile?",
+  "subtitle": "Seven tiny social tests. One almost impossible mission: get a Berliner to soften their face.",
+  "startLabel": "Start with sound",
+  "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
+  "shareUrl": "https://www.berlinwalk.com/games/berlin-smile-challenge",
+  "roundsPerRun": 7,
+  "initialSmile": 18,
+  "initialPatience": 72,
+  "audio": {
+    "voiceId": "aTTiK3YzK3dXETpuDE2h",
+    "voiceName": "Ben - Effortless and Casual",
+    "voiceModel": "eleven_multilingual_v2",
+    "voiceDirection": "Dry Berlin character voice. Short, flat, lightly amused, never shouty. English lines may carry a subtle German rhythm, but keep them clear for tourists.",
+    "ambiencePromptSuffix": "Subtle realistic Berlin ambience for a mobile web game, no music, no speech in the foreground, loop-friendly, low intensity."
+  },
+  "scenes": [
+    {
+      "id": "bakery",
+      "kicker": "Bakery Counter",
+      "title": "You reach the counter. The line behind you is already judging your breathing.",
+      "prompt": "What do you say?",
+      "setting": "A tiny bakery at 08:17. Tray sounds, paper bags, one person sighing like it is a public service.",
+      "ambience": {
+        "file": "assets/audio/ambience/bakery-counter.mp3",
+        "prompt": "Small Berlin bakery counter in the morning, paper bags, espresso machine far away, quiet line murmur, one soft impatient sigh, warm but dry atmosphere",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "direct",
+          "text": "Moin. One Schrippe, please. That's all.",
+          "reply": "Efficient. Suspicious, but efficient.",
+          "feedback": "A clean order. No speech, no biography, no pastry TED Talk.",
+          "smile": 15,
+          "patience": 6,
+          "voiceFile": "assets/audio/voice/bakery-direct.mp3"
+        },
+        {
+          "id": "story",
+          "text": "Hi! First time in Berlin, and I am so excited to try authentic local bread...",
+          "reply": "This is bread, not immigration.",
+          "feedback": "The smile meter felt something. It was not joy.",
+          "smile": -7,
+          "patience": -18,
+          "voiceFile": "assets/audio/voice/bakery-story.mp3"
+        },
+        {
+          "id": "point",
+          "text": "That one. No, the other one. Wait. The small angry one.",
+          "reply": "All bread is angry before ten.",
+          "feedback": "Chaotic, but locally descriptive.",
+          "smile": 7,
+          "patience": -4,
+          "voiceFile": "assets/audio/voice/bakery-point.mp3"
+        }
+      ]
+    },
+    {
+      "id": "bvg",
+      "kicker": "BVG Platform",
+      "title": "The train is delayed. A Berliner says nothing, but somehow very loudly.",
+      "prompt": "How do you share the moment?",
+      "setting": "An U-Bahn platform with humming lights, a far announcement, and the spiritual weight of a cancelled connection.",
+      "ambience": {
+        "file": "assets/audio/ambience/bvg-platform.mp3",
+        "prompt": "Berlin U-Bahn platform ambience, fluorescent hum, distant train rumble, soft public announcement blur, footsteps on tile, calm but impatient",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "nod",
+          "text": "You make eye contact, nod once, and look back at the track.",
+          "reply": "Correct. No further meeting required.",
+          "feedback": "In Berlin, a single nod can contain an entire friendship.",
+          "smile": 13,
+          "patience": 7,
+          "voiceFile": "assets/audio/voice/bvg-nod.mp3"
+        },
+        {
+          "id": "positive",
+          "text": "At least it gives us time to enjoy the journey!",
+          "reply": "Please do not optimize my suffering.",
+          "feedback": "Weaponized positivity detected.",
+          "smile": -10,
+          "patience": -20,
+          "voiceFile": "assets/audio/voice/bvg-positive.mp3"
+        },
+        {
+          "id": "app",
+          "text": "The app says two minutes. So... seven?",
+          "reply": "You learn quickly.",
+          "feedback": "Dry, practical, lightly doomed. Very strong.",
+          "smile": 16,
+          "patience": 3,
+          "voiceFile": "assets/audio/voice/bvg-app.mp3"
+        }
+      ]
+    },
+    {
+      "id": "bike",
+      "kicker": "Bike Lane",
+      "title": "A bell rings behind you. You are standing exactly where Berlin patience goes to die.",
+      "prompt": "Your move?",
+      "setting": "A bike lane beside a busy street, wheel hiss, bell ping, the mathematical certainty that you are in the wrong place.",
+      "ambience": {
+        "file": "assets/audio/ambience/bike-lane.mp3",
+        "prompt": "Berlin bike lane street ambience, bicycle passing sounds, one clear bicycle bell, traffic roll, shoes stepping aside, realistic and loop-friendly",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "step",
+          "text": "You step out immediately and raise one apologetic hand.",
+          "reply": "Fine. You may live.",
+          "feedback": "Fast correction beats dramatic apology.",
+          "smile": 12,
+          "patience": 8,
+          "voiceFile": "assets/audio/voice/bike-step.mp3"
+        },
+        {
+          "id": "sorry",
+          "text": "Sorry, sorry, sorry, sorry, sorry!",
+          "reply": "Move first. Literature later.",
+          "feedback": "Too many syllables while still in the danger zone.",
+          "smile": -5,
+          "patience": -16,
+          "voiceFile": "assets/audio/voice/bike-sorry.mp3"
+        },
+        {
+          "id": "debate",
+          "text": "Actually, I thought this was a pedestrian-friendly shared space.",
+          "reply": "You thought wrong in several lanes.",
+          "feedback": "Never debate infrastructure with someone already ringing a bell.",
+          "smile": -13,
+          "patience": -24,
+          "voiceFile": "assets/audio/voice/bike-debate.mp3"
+        }
+      ]
+    },
+    {
+      "id": "spaeti",
+      "kicker": "Späti Counter",
+      "title": "The card machine is decorative. The cashier waits for your emotional growth.",
+      "prompt": "How do you react?",
+      "setting": "A late Späti with fridge hum, bottle clink, a counter mat, and the oldest cash-only truth in the city.",
+      "ambience": {
+        "file": "assets/audio/ambience/spaeti-counter.mp3",
+        "prompt": "Berlin Späti late evening ambience, refrigerator hum, bottle clinks, small shop counter, plastic bag rustle, quiet street outside, loop-friendly",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "cash",
+          "text": "Of course. ATM nearby?",
+          "reply": "Around the corner. Like every lesson.",
+          "feedback": "Acceptance is the first step toward local fluency.",
+          "smile": 14,
+          "patience": 5,
+          "voiceFile": "assets/audio/voice/spaeti-cash.mp3"
+        },
+        {
+          "id": "berlin2026",
+          "text": "But it is 2026.",
+          "reply": "And yet, here we are.",
+          "feedback": "Technically correct. Socially expensive.",
+          "smile": 2,
+          "patience": -13,
+          "voiceFile": "assets/audio/voice/spaeti-berlin2026.mp3"
+        },
+        {
+          "id": "lecture",
+          "text": "In my country small businesses usually accept contactless payments.",
+          "reply": "Beautiful. Move there for this beer.",
+          "feedback": "A comparative payment lecture rarely opens hearts.",
+          "smile": -12,
+          "patience": -22,
+          "voiceFile": "assets/audio/voice/spaeti-lecture.mp3"
+        }
+      ]
+    },
+    {
+      "id": "stairs",
+      "kicker": "Apartment Stairs",
+      "title": "You meet your neighbor while carrying glass recycling after 10 p.m.",
+      "prompt": "The correct survival phrase?",
+      "setting": "A Berlin stairwell with echo, keys, glass bottles, and a house rule laminated by someone with purpose.",
+      "ambience": {
+        "file": "assets/audio/ambience/stairwell.mp3",
+        "prompt": "Berlin apartment stairwell ambience, footsteps echo, keys, distant door, a few glass bottles clinking softly, quiet residential night",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "tomorrow",
+          "text": "You're right. Tomorrow morning.",
+          "reply": "Good. The building survives.",
+          "feedback": "You respected the house peace. A rare diplomatic victory.",
+          "smile": 17,
+          "patience": 8,
+          "voiceFile": "assets/audio/voice/stairs-tomorrow.mp3"
+        },
+        {
+          "id": "justtwo",
+          "text": "It's only two bottles.",
+          "reply": "Then it can be only tomorrow.",
+          "feedback": "The number of bottles was never the emotional issue.",
+          "smile": -4,
+          "patience": -14,
+          "voiceFile": "assets/audio/voice/stairs-justtwo.mp3"
+        },
+        {
+          "id": "holiday",
+          "text": "Sorry, I'm on holiday.",
+          "reply": "The building is not.",
+          "feedback": "Holiday status does not suspend physics or quiet hours.",
+          "smile": -11,
+          "patience": -21,
+          "voiceFile": "assets/audio/voice/stairs-holiday.mp3"
+        }
+      ]
+    },
+    {
+      "id": "cafe",
+      "kicker": "Cafe Table",
+      "title": "A waiter says, 'No laptop on this table.' No smile. No paragraph.",
+      "prompt": "Your reply?",
+      "setting": "A small cafe with cups, low conversation, chair scrape, and a handwritten sign you somehow did not read.",
+      "ambience": {
+        "file": "assets/audio/ambience/cafe-table.mp3",
+        "prompt": "Small Berlin cafe ambience, cups placed on saucers, low murmur, chair scrape, espresso machine distant, cozy but firm, no foreground speech",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "close",
+          "text": "Fair. I'll close it.",
+          "reply": "Good. Coffee can continue.",
+          "feedback": "You chose peace over a portable office.",
+          "smile": 13,
+          "patience": 7,
+          "voiceFile": "assets/audio/voice/cafe-close.mp3"
+        },
+        {
+          "id": "quick",
+          "text": "Just five minutes.",
+          "reply": "Famous last words of table campers.",
+          "feedback": "No Berlin cafe believes in a five-minute laptop.",
+          "smile": -6,
+          "patience": -16,
+          "voiceFile": "assets/audio/voice/cafe-quick.mp3"
+        },
+        {
+          "id": "review",
+          "text": "That's not very customer friendly.",
+          "reply": "Correct. It is table friendly.",
+          "feedback": "The table has rights here. Apparently more than you.",
+          "smile": -3,
+          "patience": -18,
+          "voiceFile": "assets/audio/voice/cafe-review.mp3"
+        }
+      ]
+    },
+    {
+      "id": "market",
+      "kicker": "Market Stall",
+      "title": "You ask for one apple. The seller gives you the most serious apple in Europe.",
+      "prompt": "How do you respond?",
+      "setting": "A weekly market stall, paper bags, crates, coins, and fruit being treated as logistics.",
+      "ambience": {
+        "file": "assets/audio/ambience/market-stall.mp3",
+        "prompt": "Berlin weekly market ambience, paper bags, fruit crates, coins, soft crowd movement, outdoor morning, no clear speech, loop-friendly",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "thanks",
+          "text": "Perfect. Thanks.",
+          "reply": "It is an apple. But yes.",
+          "feedback": "Brief gratitude. No fruit poetry. Strong form.",
+          "smile": 12,
+          "patience": 6,
+          "voiceFile": "assets/audio/voice/market-thanks.mp3"
+        },
+        {
+          "id": "photo",
+          "text": "Can I take a photo first?",
+          "reply": "Of the apple? It has work.",
+          "feedback": "The apple did not consent to becoming content.",
+          "smile": -2,
+          "patience": -12,
+          "voiceFile": "assets/audio/voice/market-photo.mp3"
+        },
+        {
+          "id": "organic",
+          "text": "Is it organic, local, seasonal, ethical and emotionally available?",
+          "reply": "It is red.",
+          "feedback": "You asked six questions. Berlin answered one.",
+          "smile": 5,
+          "patience": -10,
+          "voiceFile": "assets/audio/voice/market-organic.mp3"
+        }
+      ]
+    },
+    {
+      "id": "tram",
+      "kicker": "Tram Stop",
+      "title": "Rain starts sideways. A Berliner lights a cigarette with the calm of a lighthouse.",
+      "prompt": "What do you say?",
+      "setting": "A tram stop in rain, traffic hiss, wet pavement, one lighter click, and everyone pretending weather is a personal choice.",
+      "ambience": {
+        "file": "assets/audio/ambience/tram-rain.mp3",
+        "prompt": "Berlin tram stop in light rain, wet traffic hiss, tram bell far away, umbrella movement, one lighter click, moody but not dramatic",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "weather",
+          "text": "Good weather for staying realistic.",
+          "reply": "Finally. Tourism with limits.",
+          "feedback": "A weather complaint wearing a dry coat. Nicely done.",
+          "smile": 16,
+          "patience": 5,
+          "voiceFile": "assets/audio/voice/tram-weather.mp3"
+        },
+        {
+          "id": "romantic",
+          "text": "Berlin is so romantic in the rain!",
+          "reply": "Your shoes will explain later.",
+          "feedback": "Romantic optimism met waterproof reality.",
+          "smile": 1,
+          "patience": -10,
+          "voiceFile": "assets/audio/voice/tram-romantic.mp3"
+        },
+        {
+          "id": "umbrella",
+          "text": "Do you know where I can buy a cute umbrella?",
+          "reply": "Cute? No. Umbrella? Maybe.",
+          "feedback": "Berlin accepts function. Cuteness must apply separately.",
+          "smile": 7,
+          "patience": -5,
+          "voiceFile": "assets/audio/voice/tram-umbrella.mp3"
+        }
+      ]
+    },
+    {
+      "id": "queue",
+      "kicker": "Silent Queue",
+      "title": "Nobody knows where the queue starts. Everybody knows when you do it wrong.",
+      "prompt": "Your strategy?",
+      "setting": "A kiosk queue with no visible line, shoe shuffles, one newspaper rustle, and silent constitutional law.",
+      "ambience": {
+        "file": "assets/audio/ambience/silent-queue.mp3",
+        "prompt": "Quiet Berlin kiosk queue, soft street ambience, shoe shuffles, newspaper rustle, tiny cough, no clear speech, dry realistic mood",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "ask",
+          "text": "Sorry, are you waiting?",
+          "reply": "A miracle. Basic civilization.",
+          "feedback": "The ancient queue spell still works.",
+          "smile": 15,
+          "patience": 6,
+          "voiceFile": "assets/audio/voice/queue-ask.mp3"
+        },
+        {
+          "id": "slide",
+          "text": "You slide forward and hope architecture protects you.",
+          "reply": "Architecture cannot save you.",
+          "feedback": "The queue noticed. The queue remembers.",
+          "smile": -12,
+          "patience": -24,
+          "voiceFile": "assets/audio/voice/queue-slide.mp3"
+        },
+        {
+          "id": "announce",
+          "text": "Is this the queue? Hello? Everyone?",
+          "reply": "Too much democracy.",
+          "feedback": "Useful question, tragic volume.",
+          "smile": 2,
+          "patience": -9,
+          "voiceFile": "assets/audio/voice/queue-announce.mp3"
+        }
+      ]
+    },
+    {
+      "id": "compliment",
+      "kicker": "Compliment Attempt",
+      "title": "You want to be friendly. This is already dangerous.",
+      "prompt": "Choose your compliment.",
+      "setting": "A street corner with a dog, a tote bag, a coat that looks expensive in a morally neutral way, and social risk.",
+      "ambience": {
+        "file": "assets/audio/ambience/street-corner.mp3",
+        "prompt": "Berlin residential street corner, distant traffic, dog leash jingle, soft footsteps, bicycle roll, calm everyday ambience, no speech",
+        "durationSeconds": 8
+      },
+      "options": [
+        {
+          "id": "coat",
+          "text": "Nice coat.",
+          "reply": "Acceptable. Brief.",
+          "feedback": "Two words. Low threat. Almost elegant.",
+          "smile": 18,
+          "patience": 4,
+          "voiceFile": "assets/audio/voice/compliment-coat.mp3"
+        },
+        {
+          "id": "vibe",
+          "text": "You have such an authentic Berlin vibe.",
+          "reply": "Please return the vibe.",
+          "feedback": "Never tell someone they look like a city concept.",
+          "smile": -10,
+          "patience": -19,
+          "voiceFile": "assets/audio/voice/compliment-vibe.mp3"
+        },
+        {
+          "id": "dog",
+          "text": "Your dog seems like it has strong opinions.",
+          "reply": "More than most people, yes.",
+          "feedback": "The dog bridge worked. Dangerous, but real.",
+          "smile": 14,
+          "patience": 2,
+          "voiceFile": "assets/audio/voice/compliment-dog.mp3"
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "stone",
+      "minSmile": 0,
+      "title": "Stone-Faced Tourist",
+      "tagline": "The Berliner did not smile. The wall did, emotionally.",
+      "body": "You tried. Berlin remained structurally unimpressed. This is not failure; this is onboarding.",
+      "shareLine": "I tried to make a Berliner smile. Berlin filed a complaint."
+    },
+    {
+      "id": "nod",
+      "minSmile": 38,
+      "title": "Respectable Nod",
+      "tagline": "A nod happened. In this city, that is basically fireworks.",
+      "body": "You kept it short, mostly practical, and only slightly annoying. The Berliner respects your restraint.",
+      "shareLine": "I got a Berliner nod. I am counting it as emotional intimacy."
+    },
+    {
+      "id": "corner",
+      "minSmile": 58,
+      "title": "Tiny Corner Smile",
+      "tagline": "One side of the mouth moved. Historians are verifying.",
+      "body": "You understood the assignment: dry, brief, useful, with one small crack of humanity.",
+      "shareLine": "I made a Berliner almost smile. That is basically a 5-star review."
+    },
+    {
+      "id": "spaeti",
+      "minSmile": 80,
+      "title": "Späti-Level Charisma",
+      "tagline": "Berlin did not hug you. Berlin allowed you to remain nearby.",
+      "body": "You are calm under social weather, suspiciously efficient, and fluent in tiny nods.",
+      "shareLine": "I made a Berliner smile. Very briefly. Please respect my privacy."
+    }
+  ]
+}
