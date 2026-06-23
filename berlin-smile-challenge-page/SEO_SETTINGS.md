@@ -19,4 +19,4 @@ Run live raw HTML readback after publishing and GitHub Pages deploy:
 
 - `og:image` should use the Wix Media image above.
 - `twitter:image` should use the Wix Media image above.
-- The game iframe should use the `smile-stable-flow-20260623` build marker.
+- The game iframe should use the `smile-scroll-lock-20260623` build marker.

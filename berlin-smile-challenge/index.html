@@ -629,7 +629,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-stable-flow-20260623';
+      const BUILD = 'smile-scroll-lock-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -838,11 +838,17 @@
         });
       }
 
-      function chooseOption(optionId) {
+      function preserveParentScroll() {
+        window.parent.postMessage({ type: 'bw-smile-preserve-scroll' }, '*');
+      }
+
+      function chooseOption(optionId, sourceNode) {
         const scene = currentScene();
         if (!scene || state.selected) return;
         const option = scene.options.find((item) => item.id === optionId);
         if (!option) return;
+        if (sourceNode && typeof sourceNode.blur === 'function') sourceNode.blur();
+        preserveParentScroll();
         state.selected = option;
         state.smile = clamp(state.smile + Number(option.smile || 0));
         state.patience = clamp(state.patience + Number(option.patience || 0));
@@ -864,6 +870,7 @@
       }
 
       function nextRound() {
+        preserveParentScroll();
         if (state.patience <= 0 || state.roundIndex >= state.scenes.length - 1) {
           finishGame(state.patience <= 0 ? 'patience_lost' : 'completed');
           return;
@@ -1382,7 +1389,10 @@
 
       function bindEvents() {
         app.querySelectorAll('[data-option]').forEach((button) => {
-          button.addEventListener('click', () => chooseOption(button.dataset.option));
+          button.addEventListener('click', (event) => {
+            event.preventDefault();
+            chooseOption(button.dataset.option, button);
+          });
         });
         app.querySelectorAll('[data-action]').forEach((node) => {
           const action = node.dataset.action;

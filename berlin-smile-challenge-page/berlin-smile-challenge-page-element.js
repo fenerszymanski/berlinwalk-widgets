@@ -2,7 +2,8 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-stable-flow-20260623';
+const ASSET_BUILD = 'smile-scroll-lock-20260623';
+const MAX_FRAME_HEIGHT = 1540;
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {
@@ -43,6 +44,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
             #FFF7E8;
           color: #102E38;
           font-family: Montserrat, Arial, sans-serif;
+          overflow-anchor: none;
           overflow: hidden;
         }
 
@@ -62,6 +64,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           margin: 0 auto;
           max-width: 1180px;
           min-height: 860px;
+          overflow-anchor: none;
           padding: clamp(54px, 7vw, 82px) 24px 42px;
         }
 
@@ -186,6 +189,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           grid-area: game;
           max-width: 470px;
           min-height: 720px;
+          overflow-anchor: none;
           overflow: hidden;
           padding: 12px;
           position: relative;
@@ -211,6 +215,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           border-radius: 22px;
           display: block;
           min-height: 720px;
+          overflow-anchor: none;
           overflow: hidden;
           width: 100%;
         }
@@ -318,6 +323,11 @@ class BwBerlinSmileChallengePage extends HTMLElement {
     this._timers = [];
     this._messageHandler = (event) => {
       if (!event.data) return;
+      if (event.data.type === 'bw-smile-preserve-scroll') {
+        this._preservedScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
+        this._restorePreservedScroll();
+        return;
+      }
       if (event.data.type === 'bw-smile-focus') {
         this._queueHostSync();
         return;
@@ -325,8 +335,9 @@ class BwBerlinSmileChallengePage extends HTMLElement {
       if (event.data.type !== 'bw-resize') return;
       const height = Number(event.data.height || 0);
       if (!height || height < 500) return;
-      this._framedHeight = Math.min(Math.max(height, 680), 1280);
+      this._framedHeight = Math.min(Math.max(height, 680), MAX_FRAME_HEIGHT);
       this._lockInnerLayout();
+      this._restorePreservedScroll();
       this._queueHostSync();
     };
     window.addEventListener('message', this._messageHandler);
@@ -377,7 +388,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
     const device = this.querySelector('.bw-smile-device');
     if (!page || !iframe || !device) return;
 
-    const frameHeight = Math.min(Math.max(Number(this._framedHeight || 720), 680), 1280);
+    const frameHeight = Math.min(Math.max(Number(this._framedHeight || 720), 680), MAX_FRAME_HEIGHT);
     const deviceStyle = getComputedStyle(device);
     const devicePadding =
       (parseFloat(deviceStyle.paddingTop) || 0) +
@@ -392,6 +403,24 @@ class BwBerlinSmileChallengePage extends HTMLElement {
     device.style.setProperty('height', `${deviceHeight}px`, 'important');
     device.style.setProperty('min-height', `${deviceHeight}px`, 'important');
     device.style.setProperty('max-height', `${deviceHeight}px`, 'important');
+  }
+
+  _restorePreservedScroll() {
+    if (!Number.isFinite(this._preservedScrollY)) return;
+    const targetY = this._preservedScrollY;
+    const restore = () => {
+      if (Math.abs((window.scrollY || 0) - targetY) > 1) {
+        window.scrollTo({ top: targetY, left: window.scrollX || 0, behavior: 'auto' });
+      }
+    };
+
+    restore();
+    [60, 160, 320].forEach((delay) => {
+      this._timers.push(window.setTimeout(restore, delay));
+    });
+    this._timers.push(window.setTimeout(() => {
+      if (this._preservedScrollY === targetY) this._preservedScrollY = null;
+    }, 520));
   }
 
 }
