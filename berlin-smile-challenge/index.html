@@ -299,6 +299,7 @@
       box-shadow: 4px 4px 0 rgba(16, 46, 56, 0.95);
       margin: 0 0 2px;
       overflow: hidden;
+      pointer-events: none;
       position: relative;
       width: 100%;
     }
@@ -833,7 +834,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-image-desktop-share-copy-fix-20260623';
+      const BUILD = 'smile-desktop-share-click-fix-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';

@@ -1,3 +1,7 @@
+## 2026-06-23 — Codex (Smile Challenge desktop share QA)
+
+**Did:** Re-tested Smile Challenge desktop answer/share flow after Yusuf reported desktop share cancellation and sticky selected-answer styling. **Changed:** `berlin-smile-challenge/index.html` now marks scene visuals as `pointer-events: none` after Playwright caught image layers intercepting option clicks; build marker is `smile-desktop-share-click-fix-20260623`. **QA:** Local Playwright desktop run completed all 7 rounds. First answer rendered `className: bw-selected-answer`, `hasBadSelectedNode:false`, scroll stayed `0/0`, result screen had no `Share cancelled`, and desktop share showed `Result copied`. **Closed:** Desktop share/click/selected-answer regression is locally verified and pushed.
+
 ## 2026-06-23 — Codex (Games section separation polish)
 
 **Did:** Strengthened the visual break between the `/games` hero and mode section, and made card row alignment more durable. **Changed:** `games-page/games-page-element.js` now uses marker `games-page-retro-v2-20260623`; the hero reads as a brighter yellow arcade poster, while the mode section starts as an overlapping white shelf with a light grid background. Game cards now stretch equally, with controlled lead/meta/how/button row behavior for future cards. **QA:** Not run; this turn did not request extra verification. **Opened:** Browser visual pass, then Wix `/games` installation plus header/footer publishing. **Closed:** Hero/mode separation now comes from depth and surface change, not only border lines.
