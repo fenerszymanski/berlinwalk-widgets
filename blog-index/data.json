@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-23T02:04:11.571Z",
+  "updatedAt": "2026-06-23T07:34:34.835Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 136,
+  "totalPosts": 137,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -431,6 +431,23 @@
           "relatedToolSlug": "transport-ticket-calculator"
         },
         {
+          "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
+          "slug": "grocery-shopping-in-berlin",
+          "path": "/post/grocery-shopping-in-berlin",
+          "url": "https://www.berlinwalk.com/post/grocery-shopping-in-berlin",
+          "excerpt": "A practical Berlin supermarket guide for tourists: where to buy food, what closes on Sunday, when to use REWE, Edeka, Aldi, Lidl, dm, a Späti or a station supermarket.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "9 min read",
+          "publishedDate": "2026-06-23T07:31:14.456Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+          "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates",
+          "relatedToolSlug": "berlin-shopping-areas"
+        },
+        {
           "title": "Alternative Transport in Berlin: MILES, Scooters, Bikes and Ride Apps",
           "slug": "alternative-transport-berlin",
           "path": "/post/alternative-transport-berlin",
@@ -480,23 +497,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg",
           "alt": "Alexanderplatz at night with U-Bahn sign, TV Tower and blurred tram, showing Berlin night transport",
           "relatedToolSlug": "berlin-night-transport-checker"
-        },
-        {
-          "title": "Too Hot in Berlin? How to Plan a Smart Berlin Heatwave Day",
-          "slug": "berlin-heatwave-day-plan",
-          "path": "/post/berlin-heatwave-day-plan",
-          "url": "https://www.berlinwalk.com/post/berlin-heatwave-day-plan",
-          "excerpt": "A practical Berlin heatwave guide for tourists: when to walk, where to cool down, what to expect from public transport air conditioning, and how to use Berlin water, lake and pool tools.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "6 min read",
-          "publishedDate": "2026-06-18T17:28:12.475Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
-          "alt": "The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day",
-          "relatedToolSlug": ""
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
+      "slug": "grocery-shopping-in-berlin",
+      "path": "/post/grocery-shopping-in-berlin",
+      "url": "https://www.berlinwalk.com/post/grocery-shopping-in-berlin",
+      "excerpt": "A practical Berlin supermarket guide for tourists: where to buy food, what closes on Sunday, when to use REWE, Edeka, Aldi, Lidl, dm, a Späti or a station supermarket.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-06-23T07:31:14.456Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+      "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates",
+      "relatedToolSlug": "berlin-shopping-areas"
+    },
+    {
       "title": "Pharmacy in Berlin: How to Find Medicine, Emergency Pharmacies and Medical Help",
       "slug": "pharmacy-in-berlin",
       "path": "/post/pharmacy-in-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_fd39177ba4ab4339808a13256579016b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin_Public_Holidays_Hero.jpg",
       "alt": "Berlin skyline with cathedral and TV tower, German flag waving, a river boat below, and pink blossoms in the foreground",
       "relatedToolSlug": "berlin-public-holiday-checker"
-    },
-    {
-      "title": "Taxi in Berlin: Uber, Airport Rides, Fares and Tourist Traps",
-      "slug": "taxi-in-berlin",
-      "path": "/post/taxi-in-berlin",
-      "url": "https://www.berlinwalk.com/post/taxi-in-berlin",
-      "excerpt": "A clear tourist guide to taxis in Berlin: official fares, BER airport taxi rules, Uber and taxi apps, card payments, tipping, scams, and when public transport is the smarter choice.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-06-14T07:13:35.397Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
-      "alt": "Berlin taxi scene with Brandenburg Gate in the background for a tourist guide to taxis in Berlin",
-      "relatedToolSlug": "berlin-taxi-uber-cost-checker"
     }
   ],
   "allPosts": [
+    {
+      "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
+      "slug": "grocery-shopping-in-berlin",
+      "path": "/post/grocery-shopping-in-berlin",
+      "url": "https://www.berlinwalk.com/post/grocery-shopping-in-berlin",
+      "excerpt": "A practical Berlin supermarket guide for tourists: where to buy food, what closes on Sunday, when to use REWE, Edeka, Aldi, Lidl, dm, a Späti or a station supermarket.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-06-23T07:31:14.456Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+      "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates",
+      "relatedToolSlug": "berlin-shopping-areas"
+    },
     {
       "title": "Pharmacy in Berlin: How to Find Medicine, Emergency Pharmacies and Medical Help",
       "slug": "pharmacy-in-berlin",
