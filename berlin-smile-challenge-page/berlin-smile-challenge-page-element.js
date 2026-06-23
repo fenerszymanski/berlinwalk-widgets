@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-scenes-20260623';
+const ASSET_BUILD = 'smile-scenes-height-20260623';
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {
@@ -314,15 +314,14 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
   _bind() {
     const iframe = this.querySelector('.bw-smile-frame');
+    this._framedHeight = 720;
     this._timers = [];
     this._messageHandler = (event) => {
       if (!event.data || event.data.type !== 'bw-resize') return;
       const height = Number(event.data.height || 0);
       if (!height || height < 500) return;
-      const framedHeight = Math.min(Math.max(height, 680), 1180);
-      iframe.style.height = `${framedHeight}px`;
-      const device = this.querySelector('.bw-smile-device');
-      if (device) device.style.minHeight = `${framedHeight + 24}px`;
+      this._framedHeight = Math.min(Math.max(height, 680), 1080);
+      this._lockInnerLayout();
       this._queueHostSync();
     };
     window.addEventListener('message', this._messageHandler);
@@ -347,6 +346,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
   _syncWixHostHeight() {
     const page = this.querySelector('.bw-smile-page');
     if (!page) return;
+    this._lockInnerLayout();
     const height = Math.ceil(page.getBoundingClientRect().height + 8);
     if (!height || height < 600) return;
 
@@ -358,11 +358,35 @@ class BwBerlinSmileChallengePage extends HTMLElement {
       this.closest('section'),
     ].filter(Boolean);
 
-    const targetHeight = `${Math.min(Math.max(height, 720), 2200)}px`;
+    const targetHeight = `${Math.min(Math.max(height, 720), 1900)}px`;
     targets.forEach((target) => {
       target.style.setProperty('height', targetHeight, 'important');
       target.style.setProperty('min-height', targetHeight, 'important');
     });
+    this._lockInnerLayout();
+  }
+
+  _lockInnerLayout() {
+    const page = this.querySelector('.bw-smile-page');
+    const iframe = this.querySelector('.bw-smile-frame');
+    const device = this.querySelector('.bw-smile-device');
+    if (!page || !iframe || !device) return;
+
+    const frameHeight = Math.min(Math.max(Number(this._framedHeight || 720), 680), 1080);
+    const deviceStyle = getComputedStyle(device);
+    const devicePadding =
+      (parseFloat(deviceStyle.paddingTop) || 0) +
+      (parseFloat(deviceStyle.paddingBottom) || 0);
+    const deviceHeight = Math.ceil(frameHeight + devicePadding);
+
+    page.style.setProperty('height', 'auto', 'important');
+    page.style.setProperty('min-height', '0px', 'important');
+    iframe.style.setProperty('height', `${frameHeight}px`, 'important');
+    iframe.style.setProperty('min-height', `${frameHeight}px`, 'important');
+    iframe.style.setProperty('max-height', `${frameHeight}px`, 'important');
+    device.style.setProperty('height', `${deviceHeight}px`, 'important');
+    device.style.setProperty('min-height', `${deviceHeight}px`, 'important');
+    device.style.setProperty('max-height', `${deviceHeight}px`, 'important');
   }
 }
 
