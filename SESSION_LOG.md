@@ -2,12 +2,23 @@
 
 **Did:** Upgraded the grocery draft's post-specific widget from a decision-only picker into `Berlin Grocery Store Map & Picker` after Yusuf suggested a citywide supermarket map.
 
-**Changed:** `berlin-grocery-store-picker/index.html` now uses Leaflet + MarkerCluster with OpenStreetMap/Overpass grocery data, filters for supermarkets, discount, bio, drugstores, and Späti/small shops, a backup Overpass endpoint, and fallback search anchors. `blog-drafts/grocery-shopping-in-berlin.md` and `tools-hub/pending-berlin-grocery-store-picker.md` were updated to describe the map + picker version and `embedHeight=2800`. Commit `96fa4a1` was pushed to `origin/main`; raw GitHub serves the new widget, while GitHub Pages was still serving the previous cached file during the first post-push polling window.
+**Changed:** `berlin-grocery-store-picker/index.html` now uses Leaflet + MarkerCluster with OpenStreetMap/Overpass grocery data, filters for supermarkets, discount, bio, drugstores, and Späti/small shops, a backup Overpass endpoint, and fallback search anchors. `blog-drafts/grocery-shopping-in-berlin.md` and `tools-hub/pending-berlin-grocery-store-picker.md` were updated to describe the map + picker version and `embedHeight=2800`. Commits `96fa4a1` and `a57afd8` were pushed to `origin/main`; raw GitHub and GitHub Pages both serve the new widget.
 
 **QA:** Inline widget script parse and scoped `git diff --check` passed. Local Playwright QA at 390px passed: `All` filter showed `900 of 2831 grocery points from OpenStreetMap`, 10 clusters, 24 list items, root height `2674`, overflowX `0`, hard console errors `0`. An earlier Overpass 504 test fell back without breaking the widget. Wix draft `7e211da5-6c04-466a-bc18-b4c870360f7d` was patched separately and remains `UNPUBLISHED` with 3 embeds at `?v=20260623b`.
 
-**Opened:** GitHub Pages propagation still needs a later readback before calling the Wix preview visually current. BerlinTools CMS/tool card remains blocked until the dedicated glossy icon exists; no placeholder tool was created.
+**Opened:** BerlinTools CMS/tool card remains blocked until the dedicated glossy icon exists; no placeholder tool was created.
 **Closed:** Grocery widget source upgrade is committed and pushed.
+
+## 2026-06-23 — Codex (Berlin Battle CTA spacing)
+
+**Did:** Tightened the default `/games/berlin-battle` landing layout so the walking-tour CTA no longer drops far below the feature list while the opening game list is tall.
+
+**Changed:** `berlin-battle-page/berlin-battle-page-element.js` now uses `ASSET_BUILD=battle-list-tight-20260623`, starts the desktop layout/device at the top, and fixes the desktop grid rows to `auto minmax(0, 1fr)` so the first row stays content-height and the CTA starts after the normal grid gap. Mobile/direct layouts keep three auto rows. `berlin-battle-page/README.md` was bumped to the same snippet marker. Commit `7db3757` was pushed to `origin/main`. Unrelated dirty grocery/worldcup files were left untouched.
+
+**QA:** `node --check`, scoped `git diff --check`, and GitHub Pages marker wait passed. Live Wix desktop QA passed: current marker, overflowX `0`, feature-list-to-CTA gap `36px`, grid rows `467.281px 639.906px`. Live 390px mobile QA passed: current marker, overflowX `0`, device-to-CTA gap `34px`.
+
+**Opened:** None.
+**Closed:** Default Berlin Battle page CTA spacing is pushed, deployed, and live-verified.
 
 ## 2026-06-23 — Codex (Berlin Battle list polish)
 
