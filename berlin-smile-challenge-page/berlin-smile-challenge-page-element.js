@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-bouncer-layout-20260623';
+const ASSET_BUILD = 'smile-only-meter-20260623';
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {
@@ -299,7 +299,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           <ul class="bw-smile-list">
             <li>Pick the least annoying thing to say</li>
             <li>Hear the dry Berlin reaction in every scene</li>
-            <li>Protect the Patience Meter before it collapses</li>
+            <li>Watch the Smile score move with every answer</li>
             <li>Leave with a shareable almost-smile result</li>
           </ul>
           <div class="bw-smile-more" aria-label="More BerlinWalk games">

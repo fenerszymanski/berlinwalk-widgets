@@ -6,13 +6,12 @@ Use on Wix:
 
 ```html
 <bw-berlin-smile-challenge-page></bw-berlin-smile-challenge-page>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-smile-challenge-page/berlin-smile-challenge-page-element.js?v=smile-bouncer-layout-20260623"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-smile-challenge-page/berlin-smile-challenge-page-element.js?v=smile-only-meter-20260623"></script>
 ```
 
 The wrapper renders the editorial game landing page, embeds the standalone
-`berlin-smile-challenge/` game iframe, forwards UTM parameters, and listens for
-`bw-resize` messages from the game so the framed device stays at the right
-height in Wix.
+`berlin-smile-challenge/` game iframe, forwards UTM parameters, and uses the
+same fixed no-scroll phone-frame pattern as the Berghain Bouncer game.
 
 Target live URL:
 

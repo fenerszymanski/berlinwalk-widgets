@@ -279,10 +279,6 @@
       transition: width 0.3s ease;
     }
 
-    .bw-meter-fill.patience {
-      background: linear-gradient(90deg, var(--red), var(--yellow), var(--green));
-    }
-
     .bw-scene-card {
       background: var(--white);
       border: 2px solid var(--ink);
@@ -528,7 +524,6 @@
 
     .bw-score-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
     }
 
@@ -668,7 +663,6 @@
       }
 
       .bw-meters {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 7px;
       }
 
@@ -801,7 +795,7 @@
       }
 
       .bw-score-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
       }
 
       .bw-result-card .bw-actions {
@@ -825,7 +819,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-bouncer-layout-20260623';
+      const BUILD = 'smile-only-meter-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -844,7 +838,6 @@
         scenes: [],
         roundIndex: 0,
         smile: 18,
-        patience: 72,
         selected: null,
         result: null,
         stats: null,
@@ -953,7 +946,6 @@
         .then((payload) => {
           data = payload;
           state.smile = Number(data.initialSmile || 18);
-          state.patience = Number(data.initialPatience || 72);
           render();
         })
         .catch((error) => {
@@ -1004,7 +996,6 @@
           scenes: shuffle(data.scenes).slice(0, data.roundsPerRun || 7),
           roundIndex: 0,
           smile: Number(data.initialSmile || 18),
-          patience: Number(data.initialPatience || 72),
           selected: null,
           result: null,
           stats: null,
@@ -1047,7 +1038,6 @@
         preserveParentScroll();
         state.selected = option;
         state.smile = clamp(state.smile + Number(option.smile || 0));
-        state.patience = clamp(state.patience + Number(option.patience || 0));
         render();
         postFocus('answer');
         audio.playVoice(option.voiceFile);
@@ -1058,7 +1048,6 @@
           answer_text: option.text,
           reply: option.reply,
           smile: String(state.smile),
-          patience: String(state.patience),
           round_number: String(state.roundIndex + 1),
           round_count: String(state.scenes.length),
           sound_enabled: String(state.soundOn)
@@ -1067,8 +1056,8 @@
 
       function nextRound() {
         preserveParentScroll();
-        if (state.patience <= 0 || state.roundIndex >= state.scenes.length - 1) {
-          finishGame(state.patience <= 0 ? 'patience_lost' : 'completed');
+        if (state.roundIndex >= state.scenes.length - 1) {
+          finishGame('completed');
           return;
         }
         state.roundIndex += 1;
@@ -1090,7 +1079,6 @@
         const response = await track('bw_berlin_smile_result', {
           ending: state.result.id,
           score: String(state.smile),
-          patience: String(state.patience),
           step_count: String(state.roundIndex + 1),
           success: String(['corner', 'spaeti'].includes(state.result.id)),
           sound_enabled: String(state.soundOn),
@@ -1102,10 +1090,7 @@
         }
       }
 
-      function pickResult(reason) {
-        if (reason === 'patience_lost' && state.smile < 58) {
-          return data.results.find((item) => item.id === 'stone') || data.results[0];
-        }
+      function pickResult() {
         return data.results
           .slice()
           .sort((a, b) => b.minSmile - a.minSmile)
@@ -1273,7 +1258,7 @@
         wrapText(ctx, state.result.shareLine, 80, 392, 560, 38);
         ctx.fillStyle = '#1B5E20';
         ctx.font = '900 28px Montserrat, Arial';
-        ctx.fillText(`Smile ${state.smile}/100 · Patience ${state.patience}/100`, 80, 540);
+        ctx.fillText(`Smile ${state.smile}/100`, 80, 540);
         ctx.fillStyle = '#FAFAF5';
         ctx.font = '900 25px Montserrat, Arial';
         ctx.fillText('berlinwalk.com/games/berlin-smile-challenge', 80, 610);
@@ -1342,8 +1327,7 @@
         track('bw_berlin_smile_booking_click', {
           action: 'book_tour',
           ending: state.result ? state.result.id : '',
-          score: String(state.smile),
-          patience: String(state.patience)
+          score: String(state.smile)
         });
       }
 
@@ -1425,7 +1409,7 @@
             <div class="bw-start-copy">
               <p class="bw-start-kicker">Berlin social weather</p>
               <h1 class="bw-start-title">Make the almost-smile happen.</h1>
-              <p class="bw-start-lead">Pick your words before the Patience Meter gives up.</p>
+              <p class="bw-start-lead">Pick your words and see if the face softens.</p>
             </div>
             <div class="bw-actions">
               <button class="bw-primary" type="button" data-action="start">${escapeHtml(data.startLabel || 'Start with sound')}</button>
@@ -1449,7 +1433,6 @@
           <section class="bw-screen bw-game-screen">
             <div class="bw-meters" aria-label="Game meters">
               ${meterHtml('Smile', state.smile, '', 'How close you are to a visible almost-smile.')}
-              ${meterHtml('Patience', state.patience, 'patience', 'How much Berlin social tolerance is still available.')}
             </div>
             <article class="bw-scene-card ${selected ? 'is-answered' : ''}">
               ${sceneVisualHtml(scene)}
@@ -1508,16 +1491,14 @@
       }
 
       function reactionHtml(option) {
-        const nextLabel = state.patience <= 0 || state.roundIndex >= state.scenes.length - 1 ? 'See result' : 'Next encounter';
+        const nextLabel = state.roundIndex >= state.scenes.length - 1 ? 'See result' : 'Next encounter';
         const smileDelta = Number(option.smile || 0);
-        const patienceDelta = Number(option.patience || 0);
         return `
           <div class="bw-reaction">
             <strong>${escapeHtml(option.reply)}</strong>
             <p>${escapeHtml(option.feedback)}</p>
             <div class="bw-delta">
               <span class="bw-pill">Smile ${smileDelta >= 0 ? '+' : ''}${smileDelta}</span>
-              <span class="bw-pill">Patience ${patienceDelta >= 0 ? '+' : ''}${patienceDelta}</span>
             </div>
             <button class="bw-primary" type="button" data-action="next">${nextLabel}</button>
           </div>
@@ -1538,7 +1519,6 @@
               <p class="bw-result-body">${escapeHtml(result.body)}</p>
               <div class="bw-score-grid">
                 <div class="bw-score-box"><span>Smile</span><strong>${state.smile}/100</strong></div>
-                <div class="bw-score-box"><span>Patience</span><strong>${state.patience}/100</strong></div>
               </div>
               <p class="bw-stat-copy">${escapeHtml(statText)}</p>
               ${manualCopyHtml()}
