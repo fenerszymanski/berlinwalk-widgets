@@ -165,6 +165,7 @@ const HERO_SLUGS = {
   lead: 'berlin-heatwave-day-plan',
   secondary: [
     'alternative-transport-berlin',
+    'pharmacy-in-berlin',
     'berlin-night-transport',
     'where-to-watch-2026-world-cup-in-berlin',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
@@ -181,6 +182,7 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'berlin-heatwave-day-plan',
+  'pharmacy-in-berlin',
   'berlin-night-transport',
   'tax-free-shopping-berlin-vat-refund',
   'berlin-with-kids',

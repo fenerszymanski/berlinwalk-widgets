@@ -1,3 +1,14 @@
+## 2026-06-23 — Codex (daily featured/listing refresh)
+
+**Did:** Refreshed the blog listing data and homepage blog teaser so the newly published Pharmacy guide is surfaced while Heatwave stays the current lead.
+
+**Changed:** `scripts/generate-blog-index-data.mjs` now includes `pharmacy-in-berlin` in the curated `/blog` rail and protected required slugs. `blog-index/data.json` was regenerated from Wix Blog API with 136 posts; hero lead remains Heatwave, rail is Alternative Transport, Pharmacy, Night Transport, World Cup, and Public Transport. `blog-home/data.json` now uses Pharmacy as the first mini post instead of Unter den Linden. Wix custom embed `BerlinWalk Blog Featured Posts` was patched from revision `9` to `10` outside this repo. Tool listing data was intentionally unchanged.
+
+**QA:** JSON parse passed for blog/tool listing data, `node --check scripts/generate-blog-index-data.mjs` passed, `node tools-hub/validate-data.mjs` passed with 63 tools / 61 visible, and `git diff --check` passed. GitHub Pages deploy and live page QA will follow after push.
+
+**Opened:** Verify GitHub Pages raw data and the four live surfaces after deploy catches up.
+**Closed:** Local featured/listing selections are current for the 2026-06-23 run.
+
 ## 2026-06-23 — Codex (Berlin Battle page redesign)
 
 **Did:** Redesigned the dedicated `/games/berlin-battle` wrapper so it follows the new bouncer-page landing structure without copying the bouncer theme.

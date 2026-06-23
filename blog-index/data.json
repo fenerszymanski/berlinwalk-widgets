@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-22T09:48:22.955Z",
+  "updatedAt": "2026-06-23T02:04:11.571Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 136,
@@ -78,6 +78,23 @@
         "relatedToolSlug": "berlin-mobility-app-picker"
       },
       {
+        "title": "Pharmacy in Berlin: How to Find Medicine, Emergency Pharmacies and Medical Help",
+        "slug": "pharmacy-in-berlin",
+        "path": "/post/pharmacy-in-berlin",
+        "url": "https://www.berlinwalk.com/post/pharmacy-in-berlin",
+        "excerpt": "A practical tourist guide to finding a pharmacy in Berlin, buying medicine, using emergency pharmacies, handling prescriptions and choosing the right medical help.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-06-22T09:29:53.079Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_e973e3219fa44daa9d7868bb6325ef73~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/pharmacy-in-berlin-05-alexa-apotheke-berlin.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_e973e3219fa44daa9d7868bb6325ef73~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/pharmacy-in-berlin-05-alexa-apotheke-berlin.jpg",
+        "alt": "Alexa Apotheke pharmacy in Berlin with illuminated red and green signage",
+        "relatedToolSlug": "pharmacy-in-berlin-helper"
+      },
+      {
         "title": "Berlin Night Transport: How to Get Around After Midnight",
         "slug": "berlin-night-transport",
         "path": "/post/berlin-night-transport",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
         "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.",
         "relatedToolSlug": "transport-ticket-calculator"
-      },
-      {
-        "title": "Berlin Public Holidays 2026: What Tourists Need to Know",
-        "slug": "berlin-public-holidays-2026",
-        "path": "/post/berlin-public-holidays-2026",
-        "url": "https://www.berlinwalk.com/post/berlin-public-holidays-2026",
-        "excerpt": "A practical tourist guide to Berlin public holidays in 2026, including exact dates, shop closures, museum hours, transport, food backups and what to do instead.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "practical",
-        "topicLabel": "Practical Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-06-15T04:50:37.270Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_fd39177ba4ab4339808a13256579016b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin_Public_Holidays_Hero.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_fd39177ba4ab4339808a13256579016b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin_Public_Holidays_Hero.jpg",
-        "alt": "Berlin skyline with cathedral and TV tower, German flag waving, a river boat below, and pink blossoms in the foreground",
-        "relatedToolSlug": "berlin-public-holiday-checker"
       }
     ]
   },
@@ -303,21 +303,21 @@
       "relatedToolSlug": "berlin-public-toilets"
     },
     {
-      "title": "Is Berlin Safe to Visit? An Honest 2026 Guide",
-      "slug": "is-berlin-safe-to-visit-an-honest-2026-guide",
-      "path": "/post/is-berlin-safe-to-visit-an-honest-2026-guide",
-      "url": "https://www.berlinwalk.com/post/is-berlin-safe-to-visit-an-honest-2026-guide",
-      "excerpt": "Wondering if Berlin is safe to visit? Here's an honest, no-nonsense guide from a local — covering neighborhoods, public transport, common scams, and everything you need to know before your trip.",
+      "title": "What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips",
+      "slug": "what-to-wear-to-berlin-clubs",
+      "path": "/post/what-to-wear-to-berlin-clubs",
+      "url": "https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs",
+      "excerpt": "Berlin does not have one club dress code. This practical guide explains what to wear to Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more, with Door Difficulty ratings and a Club Picker.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-03-26T13:11:15Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_ffb1ec9813cd4020af4d7db72a40b3bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-4wcI3YQAWpI.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_ffb1ec9813cd4020af4d7db72a40b3bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-4wcI3YQAWpI.jpg",
-      "alt": "Close-up of a blue police car light flashing in a dark, blurred city setting, creating an urgent and alert mood.",
-      "relatedToolSlug": "berlin-safety"
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "8 min read",
+      "publishedDate": "2026-05-23T19:36:48.764Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
+      "alt": "People in fetish outfits line up at a red-lit nightclub entrance, with a bouncer checking guests in a dark industrial hallway.",
+      "relatedToolSlug": "berlin-tip-calculator"
     }
   ],
   "shelves": [
