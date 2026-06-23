@@ -4,10 +4,10 @@
 
 **Changed:** `scripts/generate-blog-index-data.mjs` now includes `pharmacy-in-berlin` in the curated `/blog` rail and protected required slugs. `blog-index/data.json` was regenerated from Wix Blog API with 136 posts; hero lead remains Heatwave, rail is Alternative Transport, Pharmacy, Night Transport, World Cup, and Public Transport. `blog-home/data.json` now uses Pharmacy as the first mini post instead of Unter den Linden. Wix custom embed `BerlinWalk Blog Featured Posts` was patched from revision `9` to `10` outside this repo. Tool listing data was intentionally unchanged.
 
-**QA:** JSON parse passed for blog/tool listing data, `node --check scripts/generate-blog-index-data.mjs` passed, `node tools-hub/validate-data.mjs` passed with 63 tools / 61 visible, and `git diff --check` passed. GitHub Pages deploy and live page QA will follow after push.
+**QA:** JSON parse passed for blog/tool listing data, `node --check scripts/generate-blog-index-data.mjs` passed, `node tools-hub/validate-data.mjs` passed with 63 tools / 61 visible, and `git diff --check` passed. Commit `3290e49` was pushed to `origin/main`; GitHub Pages served the new `blog-index/data.json` with `Last-Modified: Tue, 23 Jun 2026 02:07:39 GMT`. Live Playwright DOM QA passed for homepage, `/blog`, `/berlin-tools`, and `/widgets`; all expected blog/tool titles were present and horizontal overflow was `0`.
 
-**Opened:** Verify GitHub Pages raw data and the four live surfaces after deploy catches up.
-**Closed:** Local featured/listing selections are current for the 2026-06-23 run.
+**Opened:** None.
+**Closed:** Featured/listing selections are live-current for the 2026-06-23 run.
 
 ## 2026-06-23 — Codex (Berlin Battle page redesign)
 
