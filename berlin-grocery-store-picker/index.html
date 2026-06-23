@@ -829,9 +829,13 @@
         }
 
         var countText = stores.length === shown.length ? stores.length : shown.length + ' of ' + stores.length;
-        statusEl.textContent = mapState.source === 'fallback'
-          ? countText + ' fallback search anchors. Live OpenStreetMap data did not load; use these as starting points and verify hours.'
-          : countText + ' ' + (mapState.filter === 'all' ? 'grocery points' : labelFor(mapState.filter).toLowerCase() + ' points') + ' from OpenStreetMap. Verify hours before going.';
+        if (mapState.source === 'loading') {
+          statusEl.textContent = countText + ' starter search anchors while live OpenStreetMap grocery data loads. Verify hours before going.';
+        } else if (mapState.source === 'fallback') {
+          statusEl.textContent = countText + ' fallback search anchors. Live OpenStreetMap data did not load; use these as starting points and verify hours.';
+        } else {
+          statusEl.textContent = countText + ' ' + (mapState.filter === 'all' ? 'grocery points' : labelFor(mapState.filter).toLowerCase() + ' points') + ' from OpenStreetMap. Verify hours before going.';
+        }
         renderStoreList(stores);
         window.dispatchEvent(new Event('resize'));
       }
@@ -932,6 +936,10 @@
           })
           : window.L.layerGroup();
         mapState.layer.addTo(mapState.map);
+
+        mapState.source = 'loading';
+        mapState.stores = fallbackStores;
+        renderMapStores();
 
         loadOverpassData().then(function () {
           renderMapStores();
