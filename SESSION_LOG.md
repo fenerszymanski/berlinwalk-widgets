@@ -1,3 +1,27 @@
+## 2026-06-23 — Codex (Games section separation polish)
+
+**Did:** Strengthened the visual break between the `/games` hero and mode section, and made card row alignment more durable. **Changed:** `games-page/games-page-element.js` now uses marker `games-page-retro-v2-20260623`; the hero reads as a brighter yellow arcade poster, while the mode section starts as an overlapping white shelf with a light grid background. Game cards now stretch equally, with controlled lead/meta/how/button row behavior for future cards. **QA:** Not run; this turn did not request extra verification. **Opened:** Browser visual pass, then Wix `/games` installation plus header/footer publishing. **Closed:** Hero/mode separation now comes from depth and surface change, not only border lines.
+
+## 2026-06-23 — Codex (Games hub live Wix install)
+
+**Did:** Installed the `/games` hub on the live Wix page with SEO/social image, Games dropdown, and footer Play links. **Changed:** `games-page/games-page-element.js` keeps the card row/section separation polish and adds a Wix Media-safe asset base guard. Added `games-page/assets/social/berlinwalk-games-social-1200x630.jpg`. Added `scripts/upsert-games-page-wix-embed.mjs` for the inline live `bw-games-page` embed and `scripts/upsert-games-nav-footer-embed.mjs` for the live Games nav/footer patch. Wix embeds: games hub `34cdf9b0-5eac-4d47-b5fe-a431e47bdab5` rev `3`, nav/footer `a41c00c9-4f72-44a7-a366-69fdeb2349f8` rev `2`; featured image `5a08a3_e2e905ff6b1846609bbcc8a06b2de6dc~mv2.jpg`. Repo-source header/footer now also point toward `/games`, Games dropdown, and footer `All Games`. **QA:** Wix publish returned `200`; raw live `/games` includes both custom embeds, inline custom element, SEO text, featured image id, rev3 games remount guard, and nav retry guard. Playwright live QA confirmed the page title, rendered `/games` hub/cards, desktop Games dropdown with `All Games` + 3 games, mobile Games section, and footer `All Games` + 3 games; later wrapper commands hung, so persistence fix was confirmed via raw rev3 guard readback. **Closed:** Live `/games` installation and navigation/footer updates are complete.
+
+## 2026-06-23 — Codex (Games hero simplification)
+
+**Did:** Simplified the selected `/games` hero after Yusuf rejected the game-image collage and unnecessary hero CTAs. **Changed:** `games-page/games-page-element.js` removes the hero game-image collage and both hero buttons, leaving a bright retro pattern/typography hero while game images only appear in the cards. **QA:** `node --check` passed. **Closed:** Hero now separates from the card section without repeating the game art.
+
+## 2026-06-23 — Codex (Games hub light retro adjustment)
+
+**Did:** Lightened the selected `/games` retro design after Yusuf found the hero and first mode section too dark. **Changed:** `games-page/games-page-element.js` now uses a bright retro grid/poster hero instead of a dark full-photo hero; game images sit as a right-side poster collage, and the dark green band behind the mode section was removed. **QA:** `node --check` passed and no `Play first. Walk it after.` residue remains. **Closed:** Main `/games` prototype is now in the lighter retro direction.
+
+## 2026-06-23 — Codex (Games hub retro pass)
+
+**Did:** Applied a retro gaming / arcade visual pass to the selected Spotlight Grid `/games` prototype. **Changed:** `games-page/games-page-element.js` now uses scanline/grid textures, hard yellow/cyan shadows, square cards/buttons, and dark arcade-screen framing while preserving the preferred layout. The `Play first. Walk it after.` section was removed completely. Root `PROJECT_MEMORY.md` records the updated direction. **QA:** Not run yet. **Opened:** Browser review for retro intensity and mobile/desktop polish. **Closed:** First layout now has the requested retro gaming design direction.
+
+## 2026-06-23 — Codex (Games hub Spotlight cleanup)
+
+**Did:** Cleaned up the selected Spotlight Grid `/games` prototype based on Yusuf's review. **Changed:** `games-page/games-page-element.js` now removes the hero facts strip and bottom FAQ, forces dark text on yellow buttons, removes `3`-focused public copy, and changes card metadata to `Play time / Game type / Vibe` with sub-1-minute timing. Updated `games-page/README.md`, `games-page/SEO_SETTINGS.md`, root `PROJECT_MEMORY.md`, and widget `AGENTS.md`. **QA:** Not run yet. **Opened:** Visual browser review and final polish before Wix `/games` installation. **Closed:** Main Spotlight prototype reflects Yusuf's first review.
+
 ## 2026-06-23 — Codex (Games hub second design draft)
 
 **Did:** Added the second `/games` design prototype as a Hub + Panel Custom Element. **Changed:** Added `games-page/games-hub-modal-element.js` and `games-page/hub-modal.html`; updated `games-page/README.md`, root `PROJECT_MEMORY.md`, and widget `AGENTS.md` so the two local preview directions are documented separately. **QA:** Not run yet. **Opened:** Yusuf should compare Spotlight Grid vs Hub + Panel before Wix installation and header/footer link updates. **Closed:** Second local games hub design is ready for iteration.

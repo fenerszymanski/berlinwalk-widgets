@@ -1,11 +1,9 @@
 (function () {
   const SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
-  const BASE_URL = SCRIPT_URL
+  const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-v1-20260623';
-  const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=games&utm_medium=hub&utm_campaign=berlinwalk_games&utm_content=book_tour';
-
+  const ASSET_VERSION = 'games-page-retro-v2-20260623';
   const GAMES = [
     {
       id: 'berlin-battle',
@@ -13,9 +11,9 @@
       title: 'Berlin Battle',
       lead: 'Pick your winner across food, districts, museums, nights out, transport and tiny Berlin loyalties.',
       how: 'Fast this-or-that rounds narrow the city down until one Berlin favorite survives.',
-      duration: '2-4 min',
-      difficulty: 'Easy start',
-      player: 'Solo or group',
+      duration: 'Under 1 min',
+      difficulty: 'Pick a winner',
+      player: 'Fast opinions',
       image: 'berlin-battle/assets/social/berlin-battle-social-1200x630.jpg',
       href: 'https://www.berlinwalk.com/games/berlin-battle',
       button: 'Play Berlin Battle',
@@ -27,9 +25,9 @@
       title: 'Berghain Bouncer',
       lead: 'A 10-second club-door test with outfits, answers and one very Berlin kind of judgement.',
       how: 'Choose fast, stay calm, and see if the door lets you into the night.',
-      duration: '60 sec',
-      difficulty: 'High pressure',
-      player: 'Solo challenge',
+      duration: 'Under 1 min',
+      difficulty: 'Door test',
+      player: 'Nightlife mood',
       image: 'berlin-bouncer/assets/social/berlin-bouncer-social-1200x630.jpg',
       href: 'https://www.berlinwalk.com/games/berghain-bouncer',
       button: 'Try the door',
@@ -41,9 +39,9 @@
       title: 'Berlin Smile Challenge',
       lead: 'Seven small social tests. One mission: make a Berliner almost smile without destroying the patience meter.',
       how: 'Read the room, pick the least annoying answer, and leave with a shareable result.',
-      duration: '3-5 min',
-      difficulty: 'Sneaky',
-      player: 'Best with sound',
+      duration: 'Under 1 min',
+      difficulty: 'Social puzzle',
+      player: 'Dry humor',
       image: 'berlin-smile-challenge/assets/social/berlin-smile-challenge-social-1200x630.jpg',
       href: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
       button: 'Start the challenge',
@@ -98,73 +96,26 @@
 
     _render() {
       const gameCards = GAMES.map((game, index) => this._renderGameCard(game, index)).join('');
-      const heroImages = GAMES.map((game, index) => `
-        <img
-          class="bw-games-hero-image bw-games-hero-image-${index + 1}"
-          src="${asset(game.image)}"
-          alt=""
-          width="1200"
-          height="630"
-          ${index === 0 ? 'loading="eager" fetchpriority="high"' : 'loading="lazy"'}
-          decoding="async">
-      `).join('');
-
       this.innerHTML = `
         <style>${this._styles()}</style>
         <main class="bw-games-page" aria-labelledby="bw-games-title">
           <section class="bw-games-hero">
-            <div class="bw-games-hero-media" aria-hidden="true">
-              ${heroImages}
-            </div>
             <div class="bw-games-hero-shade" aria-hidden="true"></div>
             <div class="bw-games-hero-inner">
               <p class="bw-games-kicker">Playable Berlin</p>
               <h1 id="bw-games-title">BerlinWalk Games</h1>
               <p class="bw-games-hero-lead">Quick games for the moment before you go outside and test the real city. Pick a winner, pass the door, or try to make Berlin smile.</p>
-              <div class="bw-games-actions" aria-label="Primary actions">
-                <a class="bw-games-btn bw-games-btn-primary" href="#bw-games-modes">Choose a game</a>
-                <a class="bw-games-btn bw-games-btn-secondary" href="${BOOKING_URL}">Book the walking tour</a>
-              </div>
-              <dl class="bw-games-hero-facts" aria-label="Games summary">
-                <div><dt>Games</dt><dd>3 live modes</dd></div>
-                <div><dt>Start</dt><dd>Seconds, not setup</dd></div>
-                <div><dt>Best played</dt><dd>On mobile</dd></div>
-              </dl>
             </div>
           </section>
 
           <section class="bw-games-modes" id="bw-games-modes" aria-labelledby="bw-games-modes-title">
             <div class="bw-games-section-head">
               <p class="bw-games-section-kicker">Pick your mode</p>
-              <h2 id="bw-games-modes-title">Three ways into Berlin</h2>
-              <p>Each game has a different job: taste, instinct, or social weather. They are light enough to start in a queue, but specific enough to feel like Berlin.</p>
+              <h2 id="bw-games-modes-title">Choose your way into Berlin</h2>
+              <p>Each game has a different job: taste, instinct, night pressure, or social weather. They are light enough to start in a queue, but specific enough to feel like Berlin.</p>
             </div>
             <div class="bw-games-grid">
               ${gameCards}
-            </div>
-          </section>
-
-          <section class="bw-games-why" aria-labelledby="bw-games-why-title">
-            <div class="bw-games-why-inner">
-              <div class="bw-games-why-copy">
-                <p class="bw-games-section-kicker">Why this page exists</p>
-                <h2 id="bw-games-why-title">Play first. Walk it after.</h2>
-                <p>The games give visitors a fast Berlin feeling before they commit to a plan. The walking tour gives the same curiosity a real route, real streets, and real context.</p>
-              </div>
-              <ol class="bw-games-reasons">
-                <li>
-                  <strong>Fast signal</strong>
-                  <span>Visitors understand the vibe before reading a long guide.</span>
-                </li>
-                <li>
-                  <strong>Shareable result</strong>
-                  <span>Each game ends with a result that can travel outside the page.</span>
-                </li>
-                <li>
-                  <strong>Tour bridge</strong>
-                  <span>The final step points back to the 2 hour BerlinWalk route.</span>
-                </li>
-              </ol>
             </div>
           </section>
 
@@ -182,27 +133,6 @@
                   <em>Playable now</em>
                 </a>
               `).join('')}
-            </div>
-          </section>
-
-          <section class="bw-games-faq" aria-labelledby="bw-games-faq-title">
-            <div class="bw-games-section-head">
-              <p class="bw-games-section-kicker">Quick answers</p>
-              <h2 id="bw-games-faq-title">Before you play</h2>
-            </div>
-            <div class="bw-games-faq-grid">
-              <article>
-                <h3>Are the games free?</h3>
-                <p>Yes. They are quick BerlinWalk games and do not need an account or download.</p>
-              </article>
-              <article>
-                <h3>Do they work on phones?</h3>
-                <p>Yes. The page is designed mobile-first because most people will play from Instagram, search, or a link tap.</p>
-              </article>
-              <article>
-                <h3>Is this the walking tour?</h3>
-                <p>No. The games are the playful door in. The tour is the real 2 hour route from Alexanderplatz toward Hackescher Markt.</p>
-              </article>
             </div>
           </section>
 
@@ -224,9 +154,9 @@
             <h3>${this._escapeHtml(game.title)}</h3>
             <p class="bw-game-lead">${this._escapeHtml(game.lead)}</p>
             <dl class="bw-game-meta">
-              <div><dt>Time</dt><dd>${this._escapeHtml(game.duration)}</dd></div>
-              <div><dt>Mode</dt><dd>${this._escapeHtml(game.difficulty)}</dd></div>
-              <div><dt>Best for</dt><dd>${this._escapeHtml(game.player)}</dd></div>
+              <div><dt>Play time</dt><dd>${this._escapeHtml(game.duration)}</dd></div>
+              <div><dt>Game type</dt><dd>${this._escapeHtml(game.difficulty)}</dd></div>
+              <div><dt>Vibe</dt><dd>${this._escapeHtml(game.player)}</dd></div>
             </dl>
             <p class="bw-game-how"><strong>How it plays:</strong> ${this._escapeHtml(game.how)}</p>
             <a class="bw-game-play" href="${gameUrl(game, 'card_button_' + game.id)}">${this._escapeHtml(game.button)} <span aria-hidden="true">-></span></a>
@@ -317,7 +247,10 @@
           --ink: #212121;
           --muted: #4E5A4E;
           --red: #E63946;
-          background: var(--cream);
+          --arcade: #061A0C;
+          --screen: #082A12;
+          --cyan: #34D6B4;
+          background: var(--arcade);
           color: var(--ink);
           font-family: Montserrat, Arial, sans-serif;
           margin: 0 calc((100% - 100vw) / 2);
@@ -343,55 +276,59 @@
         .bw-games-hero {
           align-items: end;
           display: grid;
-          min-height: min(760px, 82svh);
+          isolation: isolate;
+          min-height: min(520px, 68svh);
           overflow: hidden;
-          padding: clamp(98px, 12vw, 150px) 24px clamp(42px, 7vw, 70px);
+          padding: clamp(86px, 10vw, 124px) 24px clamp(44px, 7vw, 72px);
           position: relative;
+          background:
+            linear-gradient(135deg, transparent 0 43%, rgba(250, 250, 245, 0.36) 43% 52%, transparent 52%),
+            linear-gradient(45deg, transparent 0 64%, rgba(230, 57, 70, 0.16) 64% 72%, transparent 72%),
+            radial-gradient(circle at 78% 24%, rgba(250, 250, 245, 0.36), transparent 22%),
+            radial-gradient(circle at 88% 78%, rgba(52, 214, 180, 0.22), transparent 24%),
+            repeating-linear-gradient(90deg, rgba(6, 26, 12, 0.09) 0 2px, transparent 2px 34px),
+            repeating-linear-gradient(0deg, rgba(6, 26, 12, 0.06) 0 2px, transparent 2px 34px),
+            var(--yellow);
+          border-bottom: 0;
+          box-shadow: inset 0 0 0 8px var(--green), inset 0 -10px 0 rgba(250, 250, 245, 0.72);
         }
 
-        .bw-games-hero-media,
         .bw-games-hero-shade {
           inset: 0;
           position: absolute;
         }
 
-        .bw-games-hero-media {
-          background: var(--green-dark);
-          display: grid;
-          grid-template-columns: 1.25fr 0.75fr;
-          grid-template-rows: 1fr 1fr;
+        .bw-games-hero::before,
+        .bw-games-hero::after {
+          content: "";
+          inset: 0;
+          pointer-events: none;
+          position: absolute;
+          z-index: 3;
         }
 
-        .bw-games-hero-image {
-          display: block;
-          filter: saturate(1.08) contrast(1.02);
-          height: 100%;
-          object-fit: cover;
-          width: 100%;
+        .bw-games-hero::before {
+          background:
+            repeating-linear-gradient(0deg, rgba(27, 94, 32, 0.06) 0 1px, transparent 1px 7px),
+            repeating-linear-gradient(90deg, rgba(230, 57, 70, 0.055) 0 1px, transparent 1px 24px);
+          mix-blend-mode: screen;
+          opacity: 0.6;
         }
 
-        .bw-games-hero-image-1 {
-          grid-row: 1 / span 2;
-        }
-
-        .bw-games-hero-image-2,
-        .bw-games-hero-image-3 {
-          border-left: 4px solid rgba(255, 230, 0, 0.72);
-        }
-
-        .bw-games-hero-image-3 {
-          border-top: 4px solid rgba(255, 230, 0, 0.72);
+        .bw-games-hero::after {
+          border: 8px solid rgba(27, 94, 32, 0.72);
+          box-shadow: inset 0 0 0 3px rgba(255, 230, 0, 0.82);
         }
 
         .bw-games-hero-shade {
           background:
-            linear-gradient(90deg, rgba(5, 20, 9, 0.94) 0%, rgba(5, 20, 9, 0.78) 41%, rgba(5, 20, 9, 0.38) 72%, rgba(5, 20, 9, 0.58) 100%),
-            linear-gradient(0deg, rgba(5, 20, 9, 0.72) 0%, rgba(5, 20, 9, 0.06) 52%, rgba(5, 20, 9, 0.2) 100%);
+            linear-gradient(90deg, rgba(255, 230, 0, 0.16) 0%, rgba(255, 230, 0, 0.02) 62%, rgba(27, 94, 32, 0.08) 100%),
+            linear-gradient(0deg, rgba(250, 250, 245, 0.16) 0%, rgba(250, 250, 245, 0) 56%);
           z-index: 1;
         }
 
         .bw-games-hero-inner {
-          color: var(--white);
+          color: var(--green-dark);
           margin: 0 auto;
           max-width: 1180px;
           position: relative;
@@ -403,47 +340,50 @@
         .bw-games-section-kicker,
         .bw-game-kicker {
           color: var(--yellow);
-          font-size: 13px;
+          font-size: 12px;
           font-weight: 900;
           letter-spacing: 0;
           line-height: 1.2;
           text-transform: uppercase;
         }
 
-        .bw-games-hero h1 {
+        .bw-games-kicker {
+          align-items: center;
+          background: var(--green);
+          box-shadow: 5px 5px 0 var(--cyan);
           color: var(--yellow);
+          display: inline-flex;
+          min-height: 32px;
+          padding: 0 12px;
+        }
+
+        .bw-games-hero h1 {
+          color: var(--green);
           font-size: clamp(54px, 8vw, 118px);
           font-weight: 950;
           letter-spacing: 0;
           line-height: 0.88;
           margin-top: 12px;
           max-width: 880px;
-          text-shadow: 0 18px 54px rgba(0, 0, 0, 0.42);
+          text-shadow: 5px 5px 0 var(--cream), 10px 10px 0 rgba(52, 214, 180, 0.82);
         }
 
         .bw-games-hero-lead {
-          color: rgba(255, 255, 255, 0.9);
+          color: rgba(6, 26, 12, 0.78);
           font-size: clamp(18px, 2vw, 24px);
           font-weight: 700;
           line-height: 1.5;
           margin-top: 22px;
           max-width: 720px;
-          text-shadow: 0 12px 34px rgba(0, 0, 0, 0.42);
-        }
-
-        .bw-games-actions {
-          align-items: center;
-          display: flex;
-          flex-wrap: wrap;
-          gap: 12px;
-          margin-top: 30px;
         }
 
         .bw-games-btn,
         .bw-game-play,
         .bw-games-mobile-bar a {
           align-items: center;
-          border-radius: 8px;
+          border: 3px solid var(--arcade);
+          border-radius: 0;
+          box-shadow: 5px 5px 0 rgba(52, 214, 180, 0.92);
           display: inline-flex;
           font-size: 14px;
           font-weight: 900;
@@ -460,13 +400,13 @@
         .bw-game-play,
         .bw-games-mobile-bar a {
           background: var(--yellow);
-          color: var(--green-dark);
+          color: var(--green-dark) !important;
         }
 
         .bw-games-btn-secondary {
-          background: rgba(250, 250, 245, 0.12);
-          border: 1px solid rgba(255, 255, 255, 0.38);
-          color: var(--white);
+          background: rgba(250, 250, 245, 0.95);
+          border-color: var(--yellow);
+          color: var(--green-dark);
         }
 
         .bw-games-btn:hover,
@@ -481,39 +421,44 @@
           outline-offset: 3px;
         }
 
-        .bw-games-hero-facts {
-          display: grid;
-          gap: 1px;
-          grid-template-columns: repeat(3, minmax(0, 190px));
-          margin-top: 38px;
-          max-width: 620px;
+        .bw-games-modes {
+          background:
+            radial-gradient(circle at 12% 18%, rgba(255, 230, 0, 0.16), transparent 26%),
+            radial-gradient(circle at 88% 4%, rgba(52, 214, 180, 0.12), transparent 28%),
+            repeating-linear-gradient(90deg, rgba(27, 94, 32, 0.035) 0 1px, transparent 1px 36px),
+            linear-gradient(180deg, #FFFFFF 0%, var(--cream) 100%);
+          margin-top: -30px;
+          padding: clamp(78px, 8vw, 112px) 24px clamp(54px, 7vw, 86px);
+          position: relative;
+          z-index: 4;
         }
 
-        .bw-games-hero-facts div {
-          background: rgba(250, 250, 245, 0.12);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-          padding: 14px;
+        .bw-games-modes::before {
+          background:
+            linear-gradient(180deg, #FFFFFF 0%, var(--cream) 100%);
+          clip-path: polygon(0 48%, 8% 34%, 18% 48%, 30% 28%, 42% 48%, 55% 32%, 68% 48%, 80% 30%, 92% 48%, 100% 36%, 100% 100%, 0 100%);
+          content: "";
+          height: 76px;
+          inset: -44px 0 auto;
+          position: absolute;
+          z-index: -1;
         }
 
-        .bw-games-hero-facts dt {
-          color: rgba(255, 255, 255, 0.66);
-          font-size: 11px;
-          font-weight: 900;
-          line-height: 1;
-          margin-bottom: 8px;
-          text-transform: uppercase;
+        .bw-games-modes::after {
+          background:
+            linear-gradient(180deg, rgba(6, 26, 12, 0.12), transparent 38px);
+          content: "";
+          height: 72px;
+          inset: -30px 0 auto;
+          opacity: 0.24;
+          pointer-events: none;
+          position: absolute;
+          z-index: -2;
         }
 
-        .bw-games-hero-facts dd {
-          color: var(--white);
-          font-size: 14px;
-          font-weight: 900;
-          line-height: 1.25;
-        }
-
-        .bw-games-modes,
-        .bw-games-faq {
-          padding: clamp(54px, 7vw, 86px) 24px;
+        .bw-games-modes > * {
+          position: relative;
+          z-index: 1;
         }
 
         .bw-games-section-head {
@@ -523,7 +468,6 @@
         }
 
         .bw-games-section-head h2,
-        .bw-games-why-copy h2,
         .bw-games-board-copy h2 {
           color: var(--green);
           font-size: clamp(34px, 5vw, 68px);
@@ -534,7 +478,6 @@
         }
 
         .bw-games-section-head p:last-child,
-        .bw-games-why-copy p:last-child,
         .bw-games-board-copy p {
           color: var(--muted);
           font-size: clamp(16px, 1.6vw, 20px);
@@ -545,8 +488,9 @@
         }
 
         .bw-games-grid {
+          align-items: stretch;
           display: grid;
-          gap: 18px;
+          gap: 20px;
           grid-template-columns: repeat(3, minmax(0, 1fr));
           margin: 0 auto;
           max-width: 1180px;
@@ -555,11 +499,12 @@
 
         .bw-game-card {
           background: var(--white);
-          border: 1px solid rgba(27, 94, 32, 0.16);
-          border-radius: 8px;
-          box-shadow: 0 18px 52px rgba(27, 94, 32, 0.1);
+          border: 4px solid var(--arcade);
+          border-radius: 0;
+          box-shadow: 8px 8px 0 var(--yellow), 0 18px 52px rgba(27, 94, 32, 0.12);
           display: flex;
           flex-direction: column;
+          height: 100%;
           min-width: 0;
           overflow: hidden;
           transform: translateY(0);
@@ -568,6 +513,7 @@
         .bw-game-card-image {
           aspect-ratio: 16 / 10;
           background: var(--green-dark);
+          border-bottom: 4px solid var(--arcade);
           display: block;
           overflow: hidden;
         }
@@ -585,9 +531,9 @@
         }
 
         .bw-game-card-body {
-          display: flex;
+          display: grid;
           flex: 1;
-          flex-direction: column;
+          grid-template-rows: auto auto minmax(72px, auto) auto minmax(68px, auto) auto;
           padding: 22px;
         }
 
@@ -614,18 +560,24 @@
 
         .bw-game-lead {
           color: var(--muted);
+          display: -webkit-box;
           font-size: 15px;
           font-weight: 650;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
           line-height: 1.55;
           margin-top: 13px;
+          min-height: 70px;
+          overflow: hidden;
         }
 
         .bw-game-meta {
-          border-block: 1px solid rgba(27, 94, 32, 0.16);
+          border-block: 3px solid rgba(6, 26, 12, 0.16);
           display: grid;
           gap: 0;
           grid-template-columns: 1fr;
           margin-top: 18px;
+          min-height: 142px;
           padding-block: 8px;
         }
 
@@ -653,10 +605,15 @@
 
         .bw-game-how {
           color: var(--ink);
+          display: -webkit-box;
           font-size: 13px;
           font-weight: 650;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
           line-height: 1.55;
           margin-top: 16px;
+          min-height: 62px;
+          overflow: hidden;
         }
 
         .bw-game-how strong {
@@ -664,73 +621,13 @@
         }
 
         .bw-game-play {
+          align-self: end;
           margin-top: auto;
           width: 100%;
         }
 
         .bw-game-how + .bw-game-play {
           margin-top: 20px;
-        }
-
-        .bw-games-why {
-          background:
-            linear-gradient(90deg, rgba(255, 230, 0, 0.18), transparent 44%),
-            repeating-linear-gradient(90deg, rgba(27, 94, 32, 0.055) 0 1px, transparent 1px 58px),
-            #ECF5DF;
-          padding: clamp(58px, 7vw, 92px) 24px;
-        }
-
-        .bw-games-why-inner {
-          display: grid;
-          gap: 44px;
-          grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-          margin: 0 auto;
-          max-width: 1180px;
-          width: min(1180px, calc(100vw - 48px));
-        }
-
-        .bw-games-reasons {
-          counter-reset: reason;
-          display: grid;
-          gap: 18px;
-          list-style: none;
-          padding: 0;
-        }
-
-        .bw-games-reasons li {
-          align-items: start;
-          border-top: 2px solid rgba(27, 94, 32, 0.18);
-          counter-increment: reason;
-          display: grid;
-          gap: 10px;
-          grid-template-columns: 82px minmax(0, 1fr);
-          padding-top: 18px;
-        }
-
-        .bw-games-reasons li::before {
-          color: var(--red);
-          content: counter(reason, decimal-leading-zero);
-          font-family: Merriweather, Georgia, serif;
-          font-size: 42px;
-          font-weight: 700;
-          line-height: 1;
-        }
-
-        .bw-games-reasons strong {
-          color: var(--green);
-          display: block;
-          font-size: clamp(22px, 2.4vw, 32px);
-          font-weight: 950;
-          line-height: 1.05;
-        }
-
-        .bw-games-reasons span {
-          color: var(--muted);
-          display: block;
-          font-size: 15px;
-          font-weight: 650;
-          line-height: 1.55;
-          margin-top: 6px;
         }
 
         .bw-games-board {
@@ -740,6 +637,19 @@
           gap: 34px;
           grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
           padding: clamp(58px, 7vw, 86px) max(24px, calc((100vw - 1180px) / 2));
+          position: relative;
+        }
+
+        .bw-games-board::before {
+          background: repeating-linear-gradient(0deg, rgba(255, 230, 0, 0.08) 0 1px, transparent 1px 7px);
+          content: "";
+          inset: 0;
+          pointer-events: none;
+          position: absolute;
+        }
+
+        .bw-games-board > * {
+          position: relative;
         }
 
         .bw-games-board-copy h2,
@@ -759,8 +669,8 @@
         .bw-games-status-list a {
           align-items: center;
           background: rgba(250, 250, 245, 0.08);
-          border: 1px solid rgba(255, 230, 0, 0.22);
-          border-radius: 8px;
+          border: 2px solid rgba(255, 230, 0, 0.42);
+          border-radius: 0;
           display: grid;
           gap: 8px;
           grid-template-columns: 0.7fr 1fr auto;
@@ -802,69 +712,24 @@
           white-space: nowrap;
         }
 
-        .bw-games-faq-grid {
-          display: grid;
-          gap: 16px;
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          margin: 0 auto;
-          max-width: 1180px;
-          width: min(1180px, calc(100vw - 48px));
-        }
-
-        .bw-games-faq article {
-          border-top: 4px solid var(--green);
-          padding-top: 18px;
-        }
-
-        .bw-games-faq h3 {
-          color: var(--green);
-          font-size: 20px;
-          font-weight: 950;
-          line-height: 1.16;
-        }
-
-        .bw-games-faq p {
-          color: var(--muted);
-          font-size: 15px;
-          font-weight: 650;
-          line-height: 1.55;
-          margin-top: 10px;
-        }
-
         .bw-games-mobile-bar {
           display: none;
         }
 
         @media (max-width: 980px) {
           .bw-games-hero {
-            min-height: 720px;
+            min-height: 500px;
             padding-top: 108px;
-          }
-
-          .bw-games-hero-media {
-            grid-template-columns: 1fr;
-            grid-template-rows: 1fr;
-          }
-
-          .bw-games-hero-image-1 {
-            grid-row: auto;
-          }
-
-          .bw-games-hero-image-2,
-          .bw-games-hero-image-3 {
-            display: none;
           }
 
           .bw-games-hero-shade {
             background:
-              linear-gradient(0deg, rgba(5, 20, 9, 0.86) 0%, rgba(5, 20, 9, 0.58) 55%, rgba(5, 20, 9, 0.38) 100%),
-              linear-gradient(90deg, rgba(5, 20, 9, 0.88), rgba(5, 20, 9, 0.42));
+              linear-gradient(90deg, rgba(255, 230, 0, 0.18) 0%, rgba(255, 230, 0, 0.02) 62%, rgba(27, 94, 32, 0.08) 100%),
+              linear-gradient(0deg, rgba(250, 250, 245, 0.18) 0%, rgba(250, 250, 245, 0) 56%);
           }
 
           .bw-games-grid,
-          .bw-games-why-inner,
-          .bw-games-board,
-          .bw-games-faq-grid {
+          .bw-games-board {
             grid-template-columns: 1fr;
           }
 
@@ -884,15 +749,13 @@
 
         @media (max-width: 640px) {
           .bw-games-hero {
-            min-height: 680px;
-            padding: 96px 18px 34px;
+            min-height: 470px;
+            padding: 94px 18px 40px;
           }
 
           .bw-games-hero-inner,
           .bw-games-section-head,
-          .bw-games-grid,
-          .bw-games-why-inner,
-          .bw-games-faq-grid {
+          .bw-games-grid {
             width: min(100%, calc(100vw - 36px));
           }
 
@@ -900,35 +763,15 @@
             font-size: clamp(48px, 16vw, 72px);
           }
 
-          .bw-games-actions {
-            align-items: stretch;
-            flex-direction: column;
-          }
-
-          .bw-games-actions .bw-games-btn {
-            width: 100%;
-          }
-
-          .bw-games-hero-facts {
-            grid-template-columns: 1fr;
-          }
-
-          .bw-games-modes,
-          .bw-games-faq {
+          .bw-games-modes {
+            margin-top: -18px;
             padding-left: 18px;
             padding-right: 18px;
+            padding-top: 70px;
           }
 
           .bw-game-card-body {
             padding: 18px;
-          }
-
-          .bw-games-reasons li {
-            grid-template-columns: 56px minmax(0, 1fr);
-          }
-
-          .bw-games-reasons li::before {
-            font-size: 32px;
           }
 
           .bw-games-mobile-bar {

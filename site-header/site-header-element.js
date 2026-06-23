@@ -9,7 +9,10 @@ const BW_HEADER_LINKS = {
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
   plan: 'https://www.berlinwalk.com/berlin-tools',
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
-  games: 'https://www.berlinwalk.com/games/berlin-battle',
+  games: 'https://www.berlinwalk.com/games',
+  battle: 'https://www.berlinwalk.com/games/berlin-battle',
+  bouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
+  smile: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   blog: 'https://www.berlinwalk.com/blog',
   widgets: 'https://www.berlinwalk.com/widgets',
   faq: 'https://www.berlinwalk.com/#faq'
@@ -51,10 +54,19 @@ class BWHeaderElement extends HTMLElement {
       window.removeEventListener('resize', this._dropdownReposition);
       window.removeEventListener('scroll', this._dropdownReposition);
     }
+    if (this._dropdownContexts) {
+      this._dropdownContexts.forEach((context) => {
+        if (context.cancelClose) context.cancelClose();
+      });
+    }
     if (this._mobileOverlay && this._mobileOverlay.parentNode === document.body) {
       document.body.removeChild(this._mobileOverlay);
     }
-    if (this._dropdownMenu && this._dropdownMenu.parentNode === document.body) {
+    if (this._dropdownMenus) {
+      this._dropdownMenus.forEach((menu) => {
+        if (menu && menu.parentNode === document.body) document.body.removeChild(menu);
+      });
+    } else if (this._dropdownMenu && this._dropdownMenu.parentNode === document.body) {
       document.body.removeChild(this._dropdownMenu);
     }
     document.body.style.overflow = '';
@@ -180,60 +192,87 @@ class BWHeaderElement extends HTMLElement {
   }
 
   _setupDropdown() {
-    const trigger = this.querySelector('.bw-header-dropdown-trigger');
-    const menu = this.querySelector('.bw-header-submenu');
-    const wrap = this.querySelector('.bw-header-dropdown');
-    if (!trigger || !menu || !wrap) return;
+    const dropdowns = Array.from(this.querySelectorAll('.bw-header-dropdown'));
+    if (!dropdowns.length) return;
 
-    // Portal the dropdown to <body> for the same transform-ancestor reason.
-    if (menu.parentNode !== document.body) {
-      document.body.appendChild(menu);
-    }
-    this._dropdownMenu = menu;
-    const positionMenu = () => {
-      const rect = trigger.getBoundingClientRect();
-      const menuRect = menu.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const viewportW = window.innerWidth || document.documentElement.clientWidth;
-      let left = cx - menuRect.width / 2;
-      if (left < 12) left = 12;
-      if (left + menuRect.width > viewportW - 12) left = viewportW - 12 - menuRect.width;
-      menu.style.top = (rect.bottom + 10) + 'px';
-      menu.style.left = left + 'px';
+    const contexts = [];
+    this._dropdownMenus = [];
+
+    const closeAll = (except) => {
+      contexts.forEach((context) => {
+        if (context !== except) {
+          context.cancelClose();
+          context.setOpen(false);
+        }
+      });
     };
-    const setOpen = (open) => {
-      wrap.classList.toggle('bw-header-dropdown-open', open);
-      menu.classList.toggle('bw-header-submenu-open', open);
-      trigger.setAttribute('aria-expanded', String(open));
-      if (open) positionMenu();
-    };
-    let closeTimer = null;
-    const cancelClose = () => {
-      if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-    };
-    const scheduleClose = () => {
-      cancelClose();
-      closeTimer = setTimeout(() => setOpen(false), 220);
-    };
-    trigger.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      cancelClose();
-      setOpen(!wrap.classList.contains('bw-header-dropdown-open'));
-    });
-    this._docClickHandler = (e) => {
-      if (!wrap.contains(e.target) && !menu.contains(e.target)) {
-        cancelClose();
-        setOpen(false);
+
+    dropdowns.forEach((wrap) => {
+      const trigger = wrap.querySelector('.bw-header-dropdown-trigger');
+      const menu = wrap.querySelector('.bw-header-submenu');
+      if (!trigger || !menu) return;
+
+      // Portal each dropdown to <body> for the same transform-ancestor reason.
+      if (menu.parentNode !== document.body) {
+        document.body.appendChild(menu);
       }
+      this._dropdownMenus.push(menu);
+
+      const positionMenu = () => {
+        const rect = trigger.getBoundingClientRect();
+        const menuRect = menu.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const viewportW = window.innerWidth || document.documentElement.clientWidth;
+        let left = cx - menuRect.width / 2;
+        if (left < 12) left = 12;
+        if (left + menuRect.width > viewportW - 12) left = viewportW - 12 - menuRect.width;
+        menu.style.top = (rect.bottom + 10) + 'px';
+        menu.style.left = left + 'px';
+      };
+      const setOpen = (open) => {
+        wrap.classList.toggle('bw-header-dropdown-open', open);
+        menu.classList.toggle('bw-header-submenu-open', open);
+        trigger.setAttribute('aria-expanded', String(open));
+        if (open) positionMenu();
+      };
+      let closeTimer = null;
+      const cancelClose = () => {
+        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
+      };
+      const scheduleClose = () => {
+        cancelClose();
+        closeTimer = setTimeout(() => setOpen(false), 220);
+      };
+      const context = { wrap, trigger, menu, positionMenu, setOpen, cancelClose };
+      contexts.push(context);
+
+      trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        cancelClose();
+        closeAll(context);
+        setOpen(!wrap.classList.contains('bw-header-dropdown-open'));
+      });
+      wrap.addEventListener('mouseenter', () => {
+        cancelClose();
+        closeAll(context);
+        setOpen(true);
+      });
+      wrap.addEventListener('mouseleave', scheduleClose);
+      menu.addEventListener('mouseenter', cancelClose);
+      menu.addEventListener('mouseleave', scheduleClose);
+    });
+
+    this._dropdownContexts = contexts;
+    this._docClickHandler = (e) => {
+      const insideDropdown = contexts.some((context) => context.wrap.contains(e.target) || context.menu.contains(e.target));
+      if (!insideDropdown) closeAll();
     };
     document.addEventListener('click', this._docClickHandler);
-    wrap.addEventListener('mouseenter', () => { cancelClose(); setOpen(true); });
-    wrap.addEventListener('mouseleave', scheduleClose);
-    menu.addEventListener('mouseenter', cancelClose);
-    menu.addEventListener('mouseleave', scheduleClose);
     this._dropdownReposition = () => {
-      if (wrap.classList.contains('bw-header-dropdown-open')) positionMenu();
+      contexts.forEach((context) => {
+        if (context.wrap.classList.contains('bw-header-dropdown-open')) context.positionMenu();
+      });
     };
     window.addEventListener('resize', this._dropdownReposition);
     window.addEventListener('scroll', this._dropdownReposition, { passive: true });
@@ -822,7 +861,17 @@ class BWHeaderElement extends HTMLElement {
                 <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
                 <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
                 <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a></li>
-                <li><a href="${BW_HEADER_LINKS.games}">Games</a></li>
+                <li class="bw-header-dropdown">
+                  <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+                    Games <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                  </button>
+                  <ul class="bw-header-submenu" role="menu">
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.games}">All Games</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.battle}">Berlin Battle</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.smile}">Berlin Smile Challenge</a></li>
+                  </ul>
+                </li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
                     Resources <span class="bw-header-caret" aria-hidden="true">⌄</span>
@@ -863,7 +912,14 @@ class BWHeaderElement extends HTMLElement {
               <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
               <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
               <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a>
-              <a href="${BW_HEADER_LINKS.games}">Games</a>
+
+              <div class="bw-header-mobile-section">
+                <div class="bw-header-mobile-section-label">Games</div>
+                <a href="${BW_HEADER_LINKS.games}">All Games</a>
+                <a href="${BW_HEADER_LINKS.battle}">Berlin Battle</a>
+                <a href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a>
+                <a href="${BW_HEADER_LINKS.smile}">Berlin Smile Challenge</a>
+              </div>
 
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Resources</div>

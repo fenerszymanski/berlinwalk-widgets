@@ -11,7 +11,7 @@ Custom Element source for the future `/games` hub page.
 
 ## Purpose
 
-`<bw-games-page>` is a Spotlight Grid style hub for the three live BerlinWalk game modes:
+`<bw-games-page>` is a Spotlight Grid style hub for the current live BerlinWalk game modes:
 
 - Berlin Battle: `/games/berlin-battle`
 - Berghain Bouncer: `/games/berghain-bouncer`
