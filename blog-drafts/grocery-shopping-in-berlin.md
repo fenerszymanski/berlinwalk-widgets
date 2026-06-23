@@ -17,6 +17,8 @@ Social description: Supermarkets, discount stores, Sunday backups, Pfand machine
 - BerlinWalk internal link cluster: Sunday shops, Späti, Pfand, pharmacy, Berlin daily budget, public transport tickets, booking page.
 - BVG tourist ticket buying is not positioned as a supermarket job; use official apps, machines, sales points and customer centers: https://www.bvg.de/en/tourists/tickets
 - External reader-useful links planned inline: Berlin.de Sunday supermarket list, visitBerlin business hours, BVG tourist tickets.
+- Netto distinction checked against official pages: Netto Marken-Discount is the Edeka-linked red/yellow discount chain (https://www.netto-online.de/), while Netto Deutschland is the yellow/black Scottie-dog Netto under the Danish Salling Group (https://netto.de/ueber-uns/ and https://service.netto.de/hc/de/articles/360016594598-Was-ist-der-Unterschied-zwischen-Netto-und-Netto-Marken-Discount).
+- Widget QA control address: Marzahner Promenade 28 resolved through OSM/Nominatim to 52.5440463, 13.5479691; Overpass returned nearby `Netto Marken-Discount` node/249675570 at roughly 46 m, opening hours Mo-Sa 07:00-22:00.
 
 ## Dedupe Decision
 
@@ -70,6 +72,8 @@ Discount supermarkets are useful when you want basics and do not care about brow
 
 The tradeoff is choice. If you need a specific brand, special diet item, travel-sized toiletries or one unusual ingredient, a discount store can waste time. If you just want to keep your Berlin food costs down, it can be exactly right.
 
+One local detail: Berlin has two different **Netto** chains. **Netto Marken-Discount** is the red-and-yellow German discount chain connected with the Edeka group. **Netto with the Scottie dog** is the yellow-and-black Netto under Denmark's Salling Group. They are different companies, and the map tool below separates them when OpenStreetMap tags make the distinction clear.
+
 ### dm and Rossmann: the place for toiletries, not dinner
 
 Tourists often confuse German drugstores with pharmacies or supermarkets. **dm** and **Rossmann** are excellent for shampoo, sunscreen, toothpaste, deodorant, baby supplies, razors, cosmetics, tissues and some packaged snacks.
@@ -90,7 +94,7 @@ A Späti is a Berlin late shop. It is part kiosk, part drink stop, part neighbor
 
 It is not the same as a supermarket. The selection is limited, prices can be higher, and fresh food is not the point. If you want a proper grocery run, use a supermarket. If you want a small rescue stop, a Späti is often perfect. I explain the culture and Sunday limits in the [Späti guide](https://www.berlinwalk.com/post/what-is-a-spati-berlin).
 
-Use the tool below first as a decision shortcut, then as a map. The map loads Berlin grocery points from OpenStreetMap, so it is useful for orientation and discovery, not a promise that every opening hour or every branch is perfect.
+Use the tool below first as a decision shortcut, then as a map. You can enter a hotel or Berlin street address to sort nearby grocery points. The map loads Berlin grocery points from OpenStreetMap, so it is useful for orientation and discovery, not a promise that every opening hour or every branch is perfect.
 
 {{widget:berlin-grocery-store-picker}}
 

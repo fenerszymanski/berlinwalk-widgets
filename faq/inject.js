@@ -6169,6 +6169,14 @@
       },
       {
         "@type": "Question",
+        "name": "Why are there two different Netto supermarkets in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin has Netto Marken-Discount, the red-and-yellow German discount chain connected with Edeka, and Netto with the Scottie dog, the yellow-and-black Netto under Denmark's Salling Group. They are different companies, so the grocery map separates them when OpenStreetMap tags make the distinction clear."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Are Berlin supermarkets open on Sunday?",
         "acceptedAnswer": {
           "@type": "Answer",

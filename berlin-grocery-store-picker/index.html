@@ -402,6 +402,8 @@
     }
 
     #bw-grocery-picker .bw-marker.discount { background: #7CB342; color: #173D17; }
+    #bw-grocery-picker .bw-marker.netto-marken { background: #E63946; border-color: #FFE600; color: #FFFFFF; }
+    #bw-grocery-picker .bw-marker.netto-scottie { background: #FFE600; border-color: #111111; color: #111111; }
     #bw-grocery-picker .bw-marker.organic { background: #C5E1A5; color: #173D17; }
     #bw-grocery-picker .bw-marker.drugstore { background: #E63946; color: #FFFFFF; }
     #bw-grocery-picker .bw-marker.convenience { background: #FFE600; color: #1B5E20; border-color: #1B5E20; }
@@ -410,6 +412,35 @@
       display: grid;
       gap: 10px;
       padding: 12px;
+    }
+
+    #bw-grocery-picker .bw-address-box {
+      background: #F6FAEF;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+    }
+
+    #bw-grocery-picker .bw-address-row {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    #bw-grocery-picker .bw-address-row input {
+      background: #FFFFFF;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.3;
+      min-width: 0;
+      padding: 10px 11px;
+      width: 100%;
     }
 
     #bw-grocery-picker .bw-map-filters {
@@ -521,6 +552,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      #bw-grocery-picker .bw-address-row {
+        grid-template-columns: 1fr;
+      }
+
       #bw-grocery-picker button {
         min-height: 42px;
       }
@@ -600,18 +635,27 @@
         <div class="bw-map-head">
           <span class="bw-badge">Open-data map</span>
           <h3>Berlin grocery map</h3>
-          <p>This loads Berlin grocery points from OpenStreetMap through Overpass. It is broad enough for orientation, but it is not an official complete directory or opening-hours database.</p>
+          <p>This loads Berlin grocery points from OpenStreetMap through Overpass. It separates the two Netto chains when the tags allow it, but it is not an official complete directory or opening-hours database.</p>
         </div>
         <div class="bw-map-layout">
           <div class="bw-map-wrap">
             <div class="bw-map" id="bw-grocery-map-canvas" aria-label="OpenStreetMap grocery map of Berlin"></div>
           </div>
           <div class="bw-map-side">
+            <div class="bw-address-box">
+              <div class="bw-label">Find near an address</div>
+              <div class="bw-address-row">
+                <input id="bw-grocery-address" type="search" autocomplete="street-address" placeholder="Hotel or Berlin address">
+                <button type="button" data-locate-address>Find nearby</button>
+              </div>
+            </div>
             <div class="bw-label">Show on map</div>
             <div class="bw-map-filters" data-map-filters>
               <button type="button" data-filter="all" aria-pressed="true">All</button>
               <button type="button" data-filter="supermarket" aria-pressed="false">Supermarkets</button>
               <button type="button" data-filter="discount" aria-pressed="false">Discount</button>
+              <button type="button" data-filter="netto-marken" aria-pressed="false">Netto red/yellow</button>
+              <button type="button" data-filter="netto-scottie" aria-pressed="false">Netto dog</button>
               <button type="button" data-filter="organic" aria-pressed="false">Bio</button>
               <button type="button" data-filter="drugstore" aria-pressed="false">Drugstores</button>
               <button type="button" data-filter="convenience" aria-pressed="false">Späti / small</button>
@@ -637,7 +681,7 @@
       if (!root) return;
 
       var state = { need: 'full', time: 'weekday', priority: 'easy' };
-      var mapState = { filter: 'all', stores: [], markers: [], map: null, layer: null, source: 'osm' };
+      var mapState = { filter: 'all', stores: [], markers: [], map: null, layer: null, source: 'osm', origin: null, originMarker: null };
       var choiceEl = root.querySelector('#bw-grocery-choice');
       var reasonEl = root.querySelector('#bw-grocery-reason');
       var tipsEl = root.querySelector('#bw-grocery-tips');
@@ -645,6 +689,7 @@
       var badgeEl = root.querySelector('#bw-grocery-badge');
       var statusEl = root.querySelector('#bw-grocery-map-status');
       var storeListEl = root.querySelector('#bw-grocery-store-list');
+      var addressInputEl = root.querySelector('#bw-grocery-address');
 
       var fallbackStores = [
         { name: 'Supermarket search near Berlin Hauptbahnhof', type: 'supermarket', lat: 52.5254, lon: 13.3694, hours: 'Fallback search anchor', osm: 'fallback' },
@@ -744,24 +789,31 @@
         reasonEl.textContent = result.reason;
         mapLinkEl.href = result.map;
         tipsEl.innerHTML = result.tips.map(function (tip) { return '<li>' + tip + '</li>'; }).join('');
-        setMapFilter(result.filter || 'all');
         window.dispatchEvent(new Event('resize'));
       }
 
       function classify(tags) {
-        var name = String(tags.name || tags.brand || '').toLowerCase();
+        var name = String(tags.name || '').toLowerCase();
+        var brand = String(tags.brand || '').toLowerCase();
+        var operator = String(tags.operator || '').toLowerCase();
+        var wikidata = String(tags['brand:wikidata'] || '');
+        var joined = [name, brand, operator, wikidata, String(tags['brand:wikipedia'] || '').toLowerCase()].join(' ');
         var shop = String(tags.shop || '').toLowerCase();
-        if (shop === 'chemist' || /dm|rossmann|müller|mueller/.test(name)) return 'drugstore';
-        if (shop === 'organic' || shop === 'health_food' || /bio company|alnatura|denns|veganz/.test(name)) return 'organic';
-        if (shop === 'convenience' || /späti|spaeti|spati|kiosk|late night/.test(name)) return 'convenience';
-        if (/aldi|lidl|penny|netto|norma/.test(name)) return 'discount';
-        return 'supermarket';
+        if (shop === 'chemist' || /dm|rossmann|müller|mueller/.test(joined)) return { type: 'drugstore' };
+        if (shop === 'organic' || shop === 'health_food' || /bio company|alnatura|denns|veganz/.test(joined)) return { type: 'organic' };
+        if (shop === 'convenience' || /späti|spaeti|spati|kiosk|late night/.test(joined)) return { type: 'convenience' };
+        if (wikidata === 'Q879858' || /netto marken|netto city|marken-discount/.test(joined)) return { type: 'discount', subtype: 'netto-marken' };
+        if (wikidata === 'Q552652' || /netto aps|salling|dansk supermarked/.test(joined) || (name === 'netto' && !/marken/.test(joined))) return { type: 'discount', subtype: 'netto-scottie' };
+        if (/aldi|lidl|penny|netto|norma/.test(joined)) return { type: 'discount' };
+        return { type: 'supermarket' };
       }
 
       function labelFor(type) {
         return {
           supermarket: 'Supermarket',
           discount: 'Discount',
+          'netto-marken': 'Netto Marken-Discount',
+          'netto-scottie': 'Netto with Scottie dog',
           organic: 'Bio / special diet',
           drugstore: 'Drugstore',
           convenience: 'Späti / small shop'
@@ -772,23 +824,57 @@
         return {
           supermarket: 'S',
           discount: 'D',
+          'netto-marken': 'NM',
+          'netto-scottie': 'N',
           organic: 'B',
           drugstore: 'dm',
           convenience: 'K'
         }[type] || 'S';
       }
 
+      function labelForStore(store) {
+        if (store.subtype === 'netto-marken') return 'Netto Marken-Discount · red/yellow · Edeka group';
+        if (store.subtype === 'netto-scottie') return 'Netto with Scottie dog · yellow/black · Salling Group';
+        return labelFor(store.type);
+      }
+
       function googleMapsUrl(store) {
-        return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent((store.name || 'supermarket') + ' Berlin');
+        return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent((store.name || 'supermarket') + ' ' + (store.address || 'Berlin'));
+      }
+
+      function distanceMeters(a, b) {
+        if (!a || !b) return null;
+        var earth = 6371000;
+        var phi1 = a.lat * Math.PI / 180;
+        var phi2 = b.lat * Math.PI / 180;
+        var dPhi = (b.lat - a.lat) * Math.PI / 180;
+        var dLambda = (b.lon - a.lon) * Math.PI / 180;
+        var x = Math.sin(dPhi / 2) * Math.sin(dPhi / 2) +
+          Math.cos(phi1) * Math.cos(phi2) * Math.sin(dLambda / 2) * Math.sin(dLambda / 2);
+        return earth * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+      }
+
+      function distanceText(meters) {
+        if (meters === null || meters === undefined) return '';
+        if (meters < 1000) return Math.round(meters) + ' m';
+        return (meters / 1000).toFixed(meters < 10000 ? 1 : 0) + ' km';
       }
 
       function renderStoreList(stores) {
-        var top = stores.slice(0, 24);
+        var ordered = stores.slice();
+        if (mapState.origin) {
+          ordered.sort(function (a, b) {
+            return distanceMeters(mapState.origin, a) - distanceMeters(mapState.origin, b);
+          });
+        }
+        var top = ordered.slice(0, 24);
         storeListEl.innerHTML = top.map(function (store) {
           var hours = store.hours ? store.hours : 'Hours not verified in this widget';
+          var distance = mapState.origin ? distanceText(distanceMeters(mapState.origin, store)) + ' · ' : '';
+          var address = store.address ? ' · ' + escapeHtml(store.address) : '';
           return '<a class="bw-store-item" href="' + googleMapsUrl(store) + '" target="_blank" rel="noopener">' +
             '<strong>' + escapeHtml(store.name) + '</strong>' +
-            '<span>' + labelFor(store.type) + ' · ' + escapeHtml(hours) + '</span>' +
+            '<span>' + distance + escapeHtml(labelForStore(store)) + address + ' · ' + escapeHtml(hours) + '</span>' +
             '</a>';
         }).join('');
       }
@@ -801,29 +887,33 @@
 
       function renderMapStores() {
         if (!mapState.map || !window.L) return;
-        var stores = mapState.filter === 'all'
-          ? mapState.stores
-          : mapState.stores.filter(function (store) { return store.type === mapState.filter; });
+        var stores = mapState.stores.filter(function (store) {
+          if (mapState.filter === 'all') return true;
+          if (mapState.filter === 'netto-marken' || mapState.filter === 'netto-scottie') return store.subtype === mapState.filter;
+          return store.type === mapState.filter;
+        });
 
         mapState.layer.clearLayers();
         var shown = stores.slice(0, 900);
         shown.forEach(function (store) {
+          var markerType = store.subtype || store.type;
           var icon = window.L.divIcon({
             className: '',
-            html: '<span class="bw-marker ' + store.type + '">' + markerLabel(store.type) + '</span>',
+            html: '<span class="bw-marker ' + (store.subtype || store.type) + '">' + markerLabel(markerType) + '</span>',
             iconSize: [30, 30],
             iconAnchor: [15, 15],
             popupAnchor: [0, -14]
           });
           var marker = window.L.marker([store.lat, store.lon], { icon: icon }).bindPopup(
             '<strong>' + escapeHtml(store.name) + '</strong><br>' +
-            labelFor(store.type) + '<br>' +
+            escapeHtml(labelForStore(store)) + '<br>' +
+            (store.address ? escapeHtml(store.address) + '<br>' : '') +
             '<a href="' + googleMapsUrl(store) + '" target="_blank" rel="noopener">Open in Google Maps</a>'
           );
           marker.addTo(mapState.layer);
         });
 
-        if (shown.length) {
+        if (shown.length && !mapState.origin) {
           var bounds = window.L.latLngBounds(shown.slice(0, 120).map(function (store) { return [store.lat, store.lon]; }));
           mapState.map.fitBounds(bounds.pad(0.12), { maxZoom: 12 });
         }
@@ -834,7 +924,8 @@
         } else if (mapState.source === 'fallback') {
           statusEl.textContent = countText + ' fallback search anchors. Live OpenStreetMap data did not load; use these as starting points and verify hours.';
         } else {
-          statusEl.textContent = countText + ' ' + (mapState.filter === 'all' ? 'grocery points' : labelFor(mapState.filter).toLowerCase() + ' points') + ' from OpenStreetMap. Verify hours before going.';
+          var nearText = mapState.origin ? ' nearest to ' + mapState.origin.label + '.' : '.';
+          statusEl.textContent = countText + ' ' + (mapState.filter === 'all' ? 'grocery points' : labelFor(mapState.filter).toLowerCase() + ' points') + ' from OpenStreetMap' + nearText + ' Verify hours before going.';
         }
         renderStoreList(stores);
         window.dispatchEvent(new Event('resize'));
@@ -845,17 +936,59 @@
         var lat = element.lat || (element.center && element.center.lat);
         var lon = element.lon || (element.center && element.center.lon);
         if (!lat || !lon) return null;
-        var type = classify(tags);
-        var name = tags.name || tags.brand || labelFor(type);
+        var classification = classify(tags);
+        var address = [tags['addr:street'], tags['addr:housenumber']].filter(Boolean).join(' ');
+        if (address && tags['addr:postcode']) address += ', ' + tags['addr:postcode'];
+        var name = tags.name || tags.brand || labelFor(classification.type);
+        if (classification.subtype === 'netto-scottie' && name.toLowerCase() === 'netto') name = 'Netto (Scottie dog)';
         return {
           id: element.type + '/' + element.id,
           name: name,
-          type: type,
+          brand: tags.brand || '',
+          type: classification.type,
+          subtype: classification.subtype || '',
           lat: lat,
           lon: lon,
+          address: address,
           hours: tags.opening_hours || '',
           osm: element.type + '/' + element.id
         };
+      }
+
+      function locateAddress() {
+        if (!addressInputEl || !addressInputEl.value.trim()) return;
+        var typed = addressInputEl.value.trim();
+        var query = /berlin/i.test(typed) ? typed : typed + ', Berlin';
+        statusEl.textContent = 'Finding nearby grocery points for "' + typed + '"...';
+        fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=de&q=' + encodeURIComponent(query), {
+          headers: { Accept: 'application/json' }
+        })
+          .then(function (response) {
+            if (!response.ok) throw new Error('Address search ' + response.status);
+            return response.json();
+          })
+          .then(function (results) {
+            if (!results || !results.length) throw new Error('Address not found');
+            var first = results[0];
+            var lat = Number(first.lat);
+            var lon = Number(first.lon);
+            if (!lat || !lon) throw new Error('Address coordinates missing');
+            mapState.origin = { lat: lat, lon: lon, label: typed };
+            if (mapState.originMarker) mapState.map.removeLayer(mapState.originMarker);
+            mapState.originMarker = window.L.circleMarker([lat, lon], {
+              color: '#1B5E20',
+              fillColor: '#FFE600',
+              fillOpacity: 0.95,
+              radius: 8,
+              weight: 3
+            }).bindPopup('Search point: ' + escapeHtml(typed)).addTo(mapState.map);
+            mapState.map.setView([lat, lon], 15);
+            setMapFilter('all');
+          })
+          .catch(function () {
+            statusEl.textContent = 'Address search did not work. Try a shorter Berlin street name or use the map filters.';
+            window.dispatchEvent(new Event('resize'));
+          });
       }
 
       function loadOverpassData() {
@@ -970,6 +1103,16 @@
         if (!btn) return;
         setMapFilter(btn.getAttribute('data-filter'));
       });
+
+      root.querySelector('[data-locate-address]').addEventListener('click', locateAddress);
+      if (addressInputEl) {
+        addressInputEl.addEventListener('keydown', function (event) {
+          if (event.key === 'Enter') {
+            event.preventDefault();
+            locateAddress();
+          }
+        });
+      }
 
       renderDecision();
       initMap();

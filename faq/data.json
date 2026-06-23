@@ -3728,12 +3728,16 @@
     "title": "Grocery Shopping in Berlin - FAQ",
     "subtitle": "Quick answers for tourists buying food, basics and picnic supplies in Berlin.",
     "items": [
-      {
-        "q": "What is the best supermarket for grocery shopping in Berlin?",
-        "a": "For most tourists, REWE and Edeka are the easiest all-round supermarkets. Aldi, Lidl, Netto and Penny are usually better for budget basics. Bio Company, Alnatura and Denns are better when organic food matters more than price."
-      },
-      {
-        "q": "Are Berlin supermarkets open on Sunday?",
+    {
+      "q": "What is the best supermarket for grocery shopping in Berlin?",
+      "a": "For most tourists, REWE and Edeka are the easiest all-round supermarkets. Aldi, Lidl, Netto and Penny are usually better for budget basics. Bio Company, Alnatura and Denns are better when organic food matters more than price."
+    },
+    {
+      "q": "Why are there two different Netto supermarkets in Berlin?",
+      "a": "Berlin has Netto Marken-Discount, the red-and-yellow German discount chain connected with Edeka, and Netto with the Scottie dog, the yellow-and-black Netto under Denmark's Salling Group. They are different companies, so the grocery map separates them when OpenStreetMap tags make the distinction clear."
+    },
+    {
+      "q": "Are Berlin supermarkets open on Sunday?",
         "a": "Most regular Berlin supermarkets close on Sundays and public holidays. The useful exceptions are selected supermarkets at major train stations and BER Airport, plus gas stations, delivery services and Spätis for limited basics."
       },
       {
