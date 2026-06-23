@@ -944,6 +944,17 @@
       }
     }
 
+    function shouldUseNativeShare() {
+      if (!navigator.share) return false;
+      const coarsePointer = window.matchMedia && window.matchMedia('(pointer: coarse)').matches;
+      const touchCapable = (navigator.maxTouchPoints || 0) > 0 || 'ontouchstart' in window;
+      const viewportWidth = window.innerWidth || document.documentElement.clientWidth || 0;
+      const screenWidth = window.screen && window.screen.width ? window.screen.width : 0;
+      const narrowViewport = Math.max(viewportWidth, screenWidth) > 0
+        && Math.min(viewportWidth || screenWidth, screenWidth || viewportWidth) <= 900;
+      return coarsePointer || touchCapable || narrowViewport;
+    }
+
     function shareResult() {
       let statsText = document.getElementById('stats-text').innerText.replace('\n', ' ');
       if (statsText.includes("Loading")) statsText = "";
@@ -955,14 +966,15 @@
         shame: `I got kicked out of the line for being a tourist... ${statsText}`
       };
       const text = texts[window.currentEnding] || "Can you get into Berghain?";
+      const useNativeShare = shouldUseNativeShare();
       sendBouncerEvent('bw_berlin_bouncer_share', {
         ending: window.currentEnding || '',
         score,
         step_count: stepCount,
-        action: navigator.share ? 'native_share' : 'copy_fallback'
+        action: useNativeShare ? 'native_share' : 'copy_fallback'
       });
       
-      if (navigator.share) {
+      if (useNativeShare) {
         navigator.share({
           title: 'Berlin Bouncer Simulator',
           text: text,

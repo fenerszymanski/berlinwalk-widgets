@@ -16,6 +16,14 @@ If you are planning your first Berlin weekend, also read my guides to [Berlin pu
 
 {{quick-summary}}
 
+## Play the Berghain Bouncer Game
+
+If you want to test your instincts before committing to a real night out, I built a 10-second Berlin door game for this guide.
+
+Play it here: [Berghain Bouncer — can you get in?](https://www.berlinwalk.com/games/berghain-bouncer?utm_source=blog&utm_medium=article&utm_campaign=what_to_wear_to_berlin_clubs&utm_content=inline_cta)
+
+Pick your outfit, answer fast, and see if you get in.
+
 ## Find Your Berlin Club Match
 
 Before you copy somebody else's outfit, answer this first: what kind of night are you actually looking for?

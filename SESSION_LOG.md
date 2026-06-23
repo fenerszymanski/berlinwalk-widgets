@@ -1,3 +1,36 @@
+## 2026-06-23 — Codex (Smile Challenge scroll/social QA)
+
+**Did:** Finished Yusuf's three Smile Challenge follow-ups: answer/next transitions no longer move the page, native Wix Social Share uses the dedicated Smile featured image, and mobile answer states no longer cut off at the bottom. **Changed:** `berlin-smile-challenge/index.html` now sends `bw-smile-preserve-scroll` before answer/next state changes; `berlin-smile-challenge-page/berlin-smile-challenge-page-element.js` restores parent scroll, disables scroll anchoring, and raises the framed iframe cap to `1540px`. Added/pushed social image asset `berlin-smile-challenge/assets/social/berlin-smile-challenge-social-1200x630.jpg`; Wix Media ID is `5a08a3_0345dbe6993e4bc4b24f2905eeba933f~mv2.jpg`. Commits `b1f9eb2` and `96d04cd` were pushed. **QA:** `node --check`, inline script parse, and scoped `git diff --check` passed. GitHub Pages serves `smile-scroll-lock-20260623`. Live raw HTML shows `og:image` and `twitter:image` on the new Wix media image. Live 390px coordinate-click QA: `deltaAnswer:0`, `deltaNext:0`, iframe `viewportHeight:1540`, console errors `0`. **Opened:** None. **Closed:** Smile Challenge scroll jump, social preview, and mobile bottom-cut issues are live-fixed.
+
+## 2026-06-23 — Codex (What-to-wear live leak fix)
+
+**Did:** Fixed the live `what-to-wear-to-berlin-clubs` post after an internal `Sources to Recheck Before Publishing` checklist leaked into the published body. **Changed:** Updated `blog-drafts/what-to-wear-to-berlin-clubs.md` and `.body.md` so the game section is now `## Play the Berghain Bouncer Game` with the UTM game link, and removed the internal source-check section from the full local draft. The live Wix post `f4eec937-98fe-4746-87ef-6221b9a3909b` was patched/published from the clean body. Root added `scripts/validate-blog-publish-body.mjs` plus publish-body hard-gate documentation in `BLOG_POST_PRODUCTION_STANDARD.md` and `PROJECT_MEMORY.md`. **QA:** Validator passed for `.body.md`; Wix API readback shows `hasUnpublishedChanges:false`, no source leak phrases, CTA/link present, 3 HTML embeds, 242 nodes; Playwright live text QA confirmed CTA present and source-check heading absent. **Opened:** None. **Closed:** Live post leak fixed and future publish-body gate documented.
+
+## 2026-06-23 — Codex (Games hub custom element draft)
+
+**Did:** Built the first local `/games` hub Custom Element draft using the Spotlight Grid direction. **Changed:** Added `games-page/games-page-element.js`, `games-page/index.html`, `games-page/README.md`, and `games-page/SEO_SETTINGS.md`; documented the package in root `PROJECT_MEMORY.md` and widget `AGENTS.md`. The element uses existing Berlin Battle, Berghain Bouncer, and Berlin Smile Challenge social art, includes 3 mode cards, a tour bridge, status board without fake counters, FAQ, and mobile choose-game bar. **QA:** Not run yet. **Opened:** Create/publish the Wix `/games` page, install `<bw-games-page>`, then update header/footer links after the page exists. **Closed:** Local custom element draft is ready for iteration.
+
+## 2026-06-23 — Codex (What-to-wear draft CTA)
+
+**Did:** Added `Berghain Bouncer` game announcement section to the `what-to-wear-to-berlin-clubs` draft files.
+
+**Changed:** `blog-drafts/what-to-wear-to-berlin-clubs.md` and `blog-drafts/what-to-wear-to-berlin-clubs.body.md` now include `## Bonus: Can You Pass the Door?` with link `https://www.berlinwalk.com/games/berghain-bouncer?utm_source=blog&utm_medium=article&utm_campaign=what_to_wear_to_berlin_clubs&utm_content=inline_cta`.
+
+**Opened:** Live Wix publish not run.
+**Closed:** Draft copy now includes game CTA.
+
+## 2026-06-23 — Codex (Berghain Bouncer mobile share)
+
+**Did:** Split Berghain Bouncer result sharing so mobile/touch devices use the native share sheet while desktop keeps the copy fallback. **Changed:** `berlin-bouncer/index.html` now gates `navigator.share` behind `shouldUseNativeShare()` and tracks the actual chosen action; `berlin-bouncer-page/berlin-bouncer-page-element.js` uses marker `bouncer-mobile-share-20260623` and adds iframe `allow="... web-share ..."`, and legacy `berlin-bouncer/berlin-bouncer-element.js` got the same `web-share` permission plus cache-busted iframe URL. **QA:** `node --check` passed for wrapper/legacy elements, inline bouncer scripts parsed, scoped `git diff --check` passed. Local Playwright smoke: desktop 1280px with stubbed native share still copied (`shareCalls=0`, `copyCalls=1`); mobile 390px fresh reload used native share (`shareCalls=1`, `copyCalls=0`, no copy toast). **Opened:** Not committed/pushed or live-QA'd yet. **Closed:** Mobile share / desktop copy behavior is locally verified.
+
+## 2026-06-23 — Codex (Berlin Smile Challenge phone hero cover)
+
+**Did:** Replaced the duplicate landing-copy start screen inside the `/games/berlin-smile-challenge` phone mockup with a dedicated game hero/cover image. **Changed:** Added `berlin-smile-challenge/assets/hero/berlin-smile-challenge-hero.webp` plus source PNG under `assets/source/hero-chatgpt-20260623/`, changed the start screen to show the cover image with compact `Berlin social weather` / `Make the almost-smile happen.` copy, and bumped the wrapper/game marker to `smile-hero-cover-20260623`. Commit `f421b83` was pushed to `origin/main`. **QA:** GitHub Pages served wrapper/game/hero assets with the new marker. Live Wix desktop and 390px mobile QA confirmed hero natural size `960x600`, phone `Can You Make` duplicate count `0`, start buttons visible, page/iframe overflowX `0`, console error `0`; `Start quietly` still opens the first scene with scene image `960x600`, figure margin `0px 0px 2px`, and 3 options. **Opened:** None. **Closed:** Smile Challenge phone start screen now uses a real game-cover visual instead of repeating the outer page.
+
+## 2026-06-23 — Codex (Berghain Bouncer Story crop)
+
+**Did:** Created a 9:16 Instagram Story crop from the Berghain Bouncer social/featured image. **Changed:** Added `berlin-bouncer/assets/social/berlin-bouncer-story-1080x1920.jpg`; candidate crops/contact sheet were kept outside the widget repo under root `output/social-crops/berghain-bouncer-story-20260623/`. **QA:** Verified the output as a `1080x1920` progressive JPEG and visually checked that the bouncer remains the main subject with the red door light still visible. **Opened:** Not committed/pushed or uploaded to social. **Closed:** Story reference/background crop is ready.
+
 ## 2026-06-23 — Codex (Berghain Bouncer social image)
 
 **Did:** Generated and wired the native Wix Social Share / featured image for `/games/berghain-bouncer`.

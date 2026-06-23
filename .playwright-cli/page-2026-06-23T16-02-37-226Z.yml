@@ -1,0 +1,31 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - region "top of page"
+    - generic [ref=e10]:
+      - group:
+        - banner:
+          - generic [ref=e11]:
+            - group:
+              - generic [ref=e15]:
+                - group
+        - main:
+          - generic [ref=e19]:
+            - group
+        - contentinfo
+    - region "bottom of page"
+  - generic [ref=e31]:
+    - link "FREE TOOL Berlin Trip Planner" [ref=e33] [cursor=pointer]:
+      - /url: https://www.berlinwalk.com/berlin-trip-planner#planner
+      - generic [ref=e34]: 🗺️
+      - generic [ref=e35]:
+        - generic [ref=e36]: FREE TOOL
+        - generic [ref=e37]: Berlin Trip Planner
+      - generic [ref=e38]: →
+    - link "FREE TOUR Book Tour" [ref=e40] [cursor=pointer]:
+      - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+      - generic [ref=e41]: 🚶
+      - generic [ref=e42]:
+        - generic [ref=e43]: FREE TOUR
+        - generic [ref=e44]: Book Tour
+      - generic [ref=e45]: →
+    - button "Dismiss" [ref=e46] [cursor=pointer]: ×

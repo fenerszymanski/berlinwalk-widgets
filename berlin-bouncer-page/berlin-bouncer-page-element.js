@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL 
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'bouncer-layout-air-20260623';
+const ASSET_BUILD = 'bouncer-mobile-share-20260623';
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
@@ -249,7 +249,7 @@ class BwBerlinBouncerPage extends HTMLElement {
         <div class="bw-bouncer-device" id="bouncer-game">
           <iframe 
             src="${new URL('berlin-bouncer/index.html?attribution=none&resize=none&v=' + ASSET_BUILD, BASE_URL).toString()}"
-            allow="autoplay; clipboard-write; shared-storage"
+            allow="autoplay; clipboard-write; web-share; shared-storage"
             scrolling="no"
             title="Berlin Bouncer Simulator">
           </iframe>

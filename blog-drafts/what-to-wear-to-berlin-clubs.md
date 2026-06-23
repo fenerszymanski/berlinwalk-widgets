@@ -48,6 +48,14 @@ If you are planning your first Berlin weekend, also read my guides to [Berlin pu
 
 {{quick-summary}}
 
+## Play the Berghain Bouncer Game
+
+If you want to test your instincts before committing to a real night out, I built a 10-second Berlin door game for this guide.
+
+Play it here: [Berghain Bouncer — can you get in?](https://www.berlinwalk.com/games/berghain-bouncer?utm_source=blog&utm_medium=article&utm_campaign=what_to_wear_to_berlin_clubs&utm_content=inline_cta)
+
+Pick your outfit, answer fast, and see if you get in.
+
 ## Find Your Berlin Club Match
 
 Before you copy somebody else's outfit, answer this first: what kind of night are you actually looking for?
@@ -349,14 +357,3 @@ For a first serious techno night, I would put **Tresor** or **RSO** higher than 
 And if you want to understand the city before you enter its nightlife, start by walking it in daylight. My [Berlin Free Walking Tour](https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based) starts at the World Clock on Alexanderplatz and runs for about **2 hours** through the historic centre. Berlin makes more sense at night when you have met its layers by day.
 
 {{faq}}
-
-## Sources to Recheck Before Publishing
-
-- Berlin.de dress-code overview: https://www.berlin.de/clubs-und-party/dresscode/
-- Berlin.de self-confident category: https://www.berlin.de/clubs-und-party/dresscode/selbstbewusst/
-- Berlin.de casual category: https://www.berlin.de/clubs-und-party/dresscode/casual/
-- Berlin.de smart casual category: https://www.berlin.de/clubs-und-party/dresscode/smart-casual/
-- visitBerlin KitKatClub FAQ: https://www.visitberlin.de/en/kitkatclub
-- RSO house rules: https://rso.berlin/house-rules
-- Renate FAQ / official site: https://www.renate.cc/
-- Watergate closure/update context: https://www.berliner-zeitung.de/panorama/nach-schliessung-des-legendaeren-clubs-watergate-kuendigt-open-airs-in-berlin-an-li.10031129

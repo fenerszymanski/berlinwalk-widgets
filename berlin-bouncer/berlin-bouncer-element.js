@@ -18,8 +18,8 @@ class BwBerlinBouncerElement extends HTMLElement {
       </style>
       <!-- Loads the standalone game hosted on GitHub Pages -->
       <iframe 
-        src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bouncer/index.html" 
-        allow="autoplay; clipboard-write; shared-storage"
+        src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bouncer/index.html?v=bouncer-mobile-share-20260623"
+        allow="autoplay; clipboard-write; web-share; shared-storage"
         title="Berlin Bouncer Simulator">
       </iframe>
     `;

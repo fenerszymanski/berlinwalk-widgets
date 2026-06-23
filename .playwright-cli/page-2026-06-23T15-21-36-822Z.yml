@@ -1,0 +1,44 @@
+- main [ref=e3]:
+  - region "Can You Make a Berliner Smile?" [ref=e4]:
+    - generic [ref=e5]: Playable now
+    - heading "Can You Make a Berliner Smile?" [level=1] [ref=e6]:
+      - text: Can You Make
+      - generic [ref=e7]: a Berliner Smile?
+    - paragraph [ref=e8]: "Seven tiny social tests. One almost impossible mission: get a Berliner to soften their face."
+    - list [ref=e9]:
+      - listitem [ref=e10]: Pick the least annoying thing to say
+      - listitem [ref=e11]: Hear the dry Berlin reaction in every scene
+      - listitem [ref=e12]: Protect the Patience Meter before it collapses
+      - listitem [ref=e13]: Leave with a shareable almost-smile result
+    - generic "More BerlinWalk games" [ref=e14]:
+      - link "Berlin Battle" [ref=e15] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/games/berlin-battle
+      - link "Berghain Bouncer" [ref=e16] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/games/berghain-bouncer
+  - region "Berlin Smile Challenge game" [ref=e17]:
+    - iframe [ref=e18]:
+      - generic [active] [ref=f1e1]:
+        - main [ref=f1e2]:
+          - generic [ref=f1e3]:
+            - generic [ref=f1e4]: BerlinWalk Games
+            - button "Sound on" [ref=f1e5] [cursor=pointer]
+          - generic [ref=f1e6]:
+            - figure [ref=f1e7]
+            - generic [ref=f1e8]:
+              - paragraph [ref=f1e9]: Berlin social weather
+              - heading "Make the almost-smile happen." [level=1] [ref=f1e10]
+              - paragraph [ref=f1e11]: Pick your words before the Patience Meter gives up.
+            - generic [ref=f1e12]:
+              - button "Start with sound" [ref=f1e13] [cursor=pointer]
+              - button "Start quietly" [ref=f1e14] [cursor=pointer]
+        - link "Made by BerlinWalk — open berlinwalk.com" [ref=f1e15] [cursor=pointer]:
+          - /url: https://www.berlinwalk.com/?utm_source=embed&utm_medium=widget&utm_campaign=berlin-smile-challenge&utm_content=footer-badge
+          - generic [ref=f1e16]:
+            - text: by
+            - strong [ref=f1e17]: berlinwalk.com
+          - generic [ref=f1e18]: →
+  - complementary [ref=e19]:
+    - heading "If you survive the social weather..." [level=2] [ref=e20]
+    - paragraph [ref=e21]: Come walk the city with me. I run a tip-based Berlin walking tour through the places where the real city starts to make sense.
+    - link "Book the walking tour" [ref=e22] [cursor=pointer]:
+      - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
