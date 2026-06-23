@@ -23,4 +23,5 @@ It uses existing game cover/social art from the widget repo and avoids fake play
 
 - Public copy is English and uses neutral BerlinWalk / first-person-compatible tour language.
 - The element does not update the global header/footer yet. Change those only after the Wix `/games` page exists and is published.
-- Preview locally by opening `games-page/index.html` or serving the repo root and visiting `/games-page/`.
+- Preview the Spotlight Grid direction by opening `games-page/index.html` or serving the repo root and visiting `/games-page/`.
+- Preview the Hub + Panel alternative by opening `games-page/hub-modal.html`.
