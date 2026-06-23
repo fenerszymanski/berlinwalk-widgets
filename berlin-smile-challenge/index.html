@@ -834,7 +834,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-desktop-share-click-fix-20260623';
+      const BUILD = 'smile-desktop-share-click-feedback-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -1124,7 +1124,7 @@
         postFocus('start');
       }
 
-      async function shareResult(method = 'share') {
+      async function shareResult(method = 'share', triggerNode = null) {
         if (!state.result) return;
         const supportsShare = typeof navigator.share === 'function';
         const canUseNativeShare = supportsShare && (
@@ -1144,6 +1144,7 @@
                 files: [file]
               });
               showToast('Result shared');
+              showButtonFeedback(triggerNode, 'Shared');
               track('bw_berlin_smile_share', { method: 'native_card', ending: state.result.id, success: 'true' });
               return;
             }
@@ -1153,11 +1154,13 @@
               url: data.shareUrl
             });
             showToast('Result shared');
+            showButtonFeedback(triggerNode, 'Shared');
             track('bw_berlin_smile_share', { method: 'native', ending: state.result.id, success: 'true' });
             return;
           }
           const copyMethod = await copyText(text);
-          showToast('Result copied');
+          showToast('Link copied');
+          showButtonFeedback(triggerNode, 'Link copied');
           track('bw_berlin_smile_share', { method: copyMethod, ending: state.result.id, success: 'true' });
         } catch (error) {
           state.manualShareText = text;
@@ -1591,7 +1594,7 @@
           if (action === 'start') node.addEventListener('click', () => startGame());
           if (action === 'quiet-start') node.addEventListener('click', quietStart);
           if (action === 'next') node.addEventListener('click', nextRound);
-          if (action === 'share') node.addEventListener('click', () => shareResult('share'));
+          if (action === 'share') node.addEventListener('click', () => shareResult('share', node));
           if (action === 'download') node.addEventListener('click', downloadCard);
           if (action === 'restart') node.addEventListener('click', restart);
           if (action === 'book') node.addEventListener('click', bookClick);
@@ -1605,6 +1608,17 @@
         toast.classList.add('is-visible');
         window.clearTimeout(showToast._timer);
         showToast._timer = window.setTimeout(() => toast.classList.remove('is-visible'), 1700);
+      }
+
+      function showButtonFeedback(button, message) {
+        if (!button) return;
+        const original = button.dataset.originalLabel || button.textContent;
+        button.dataset.originalLabel = original;
+        button.textContent = message;
+        window.clearTimeout(button._bwFeedbackTimer);
+        button._bwFeedbackTimer = window.setTimeout(() => {
+          button.textContent = button.dataset.originalLabel || original;
+        }, 1700);
       }
 
       function postResize() {
