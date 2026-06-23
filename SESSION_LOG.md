@@ -1,3 +1,18 @@
+## 2026-06-23 — Codex (Berlin Battle game focus)
+
+**Did:** Fixed the `/games/berlin-battle` UX where choosing a battle after scrolling down the tall topic list could leave the actual game screen above the viewport.
+
+**Changed:** `berlin-battle/index.html` now posts a `bw-battle-focus-game` message to the parent after user-started topic selection and restart. `berlin-battle-page/berlin-battle-page-element.js` listens for that message and scrolls the framed game device back into the viewport after the iframe height settles. The cache marker/snippet is now `battle-game-focus-20260623`. Commit `150b907` was pushed to `origin/main`. Unrelated dirty `SESSION_LOG.md` / `worldcup-fixtures/index.html` changes were left unstaged.
+
+**QA:** `node --check`, inline script parse, and scoped `git diff --check` passed. Local desktop scroll/click QA passed with device `top=58`, `bottom=649`, iframe `508px`, title `Döner Shops Battle`, overflowX `0`; local 390px passed with device `top=150`, `bottom=694`, overflowX `0`. GitHub Pages served the marker on attempt 19. Live Wix desktop passed from deliberate `deviceTop=-319` to post-click `top=64`, `bottom=655`, iframe `508px`, overflowX `0`; live 390px passed from deliberate `deviceTop=-551` to post-click `top=157`, `bottom=687`, iframe `440px`, overflowX `0`.
+
+**Opened:** None.
+**Closed:** Berlin Battle topic selection now focuses the game screen on the live page.
+
+## 2026-06-23 — Codex (World Cup fixtures morning scores)
+
+**Did:** World Cup fixtures widget için Berlin saati 08:32 skor kontrolünde 3 yeni final skor eklendi: France 3-0 Iraq, Norway 3-2 Senegal, Jordan 1-2 Algeria. **Changed:** `worldcup-fixtures/index.html` içindeki due `M` satırları 8 alanlı `FT` satırlara çevrildi; `SCORE_UPDATED` `23 Jun 2026, 08:32 CEST` yapıldı. Başka fixture zamanı, takım adı, filtre, stil, Wix, CMS, canlı site, reklam, booking veya root `PROJECT_MEMORY.md` değişmedi. **QA:** Due gate France-Iraq, Norway-Senegal ve Jordan-Algeria maçlarını buldu. FIFA match report sayfaları ile ESPN/Guardian kaynakları skorlarla tutarlıydı. Inline JS parse smoke 72 maç / 44 skorlu satır / malformed `0` geçti; Playwright desktop ve 390px mobilde `.bw-match.final` = 44, horizontal overflow `0`, updated etiketi görünür, console issue `0`; `git -C berlinwalk-widgets diff --check` temiz. **Opened:** Live GitHub Pages için push/deploy gerekiyor. **Closed:** 23 Haziran sabah skor kontrolü yerel widget kaynak dosyasında güncel.
+
 ## 2026-06-23 — Codex (Grocery map widget upgrade)
 
 **Did:** Upgraded the grocery draft's post-specific widget from a decision-only picker into `Berlin Grocery Store Map & Picker` after Yusuf suggested a citywide supermarket map.
