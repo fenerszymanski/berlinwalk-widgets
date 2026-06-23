@@ -390,8 +390,18 @@
     }
 
     .bw-selected-answer {
+      background: #FFFDF6;
+      border: 2px solid rgba(16, 46, 56, 0.26);
+      border-radius: 12px;
+      color: var(--ink);
+      font-weight: 850;
+      line-height: 1.28;
+      min-height: 58px;
+      padding: 13px 14px;
       cursor: default;
       transform: none !important;
+      text-align: left;
+      width: 100%;
     }
 
     .bw-reaction {
@@ -823,7 +833,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-image-frame-20260623';
+      const BUILD = 'smile-image-desktop-share-copy-fix-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -1115,10 +1125,15 @@
 
       async function shareResult(method = 'share') {
         if (!state.result) return;
+        const supportsShare = typeof navigator.share === 'function';
+        const canUseNativeShare = supportsShare && (
+          typeof window.matchMedia === 'function' &&
+          (window.matchMedia('(pointer: coarse)').matches || window.matchMedia('(any-pointer: coarse)').matches)
+        );
         const text = `${state.result.shareLine}\n\nPlay it here: ${data.shareUrl}`;
         state.manualShareText = '';
         try {
-          if (method === 'share' && navigator.share) {
+          if (method === 'share' && canUseNativeShare) {
             const file = await resultCardFile().catch(() => null);
             if (file && navigator.canShare && navigator.canShare({ files: [file] })) {
               await navigator.share({
@@ -1144,11 +1159,6 @@
           showToast('Result copied');
           track('bw_berlin_smile_share', { method: copyMethod, ending: state.result.id, success: 'true' });
         } catch (error) {
-          if (error && error.name === 'AbortError') {
-            showToast('Share cancelled');
-            track('bw_berlin_smile_share', { method: 'native', ending: state.result.id, success: 'cancelled' });
-            return;
-          }
           state.manualShareText = text;
           render();
           requestAnimationFrame(() => {
@@ -1159,7 +1169,7 @@
             }
             showToast('Copy text below');
           });
-          track('bw_berlin_smile_share', { method: 'manual_copy', ending: state.result.id, success: 'manual' });
+          track('bw_berlin_smile_share', { method: canUseNativeShare ? 'fallback' : 'copy', ending: state.result.id, success: 'fallback' });
         }
       }
 
@@ -1469,7 +1479,7 @@
       function selectedAnswerHtml(option) {
         return `
           <div class="bw-answer-stack">
-            <div class="bw-option bw-selected-answer is-selected">${escapeHtml(option.text)}</div>
+            <div class="bw-selected-answer">${escapeHtml(option.text)}</div>
             ${reactionHtml(option)}
           </div>
         `;
