@@ -1,3 +1,14 @@
+## 2026-06-23 — Codex (Berghain Bouncer social image)
+
+**Did:** Generated and wired the native Wix Social Share / featured image for `/games/berghain-bouncer`.
+
+**Changed:** Added the ChatGPT/Codex source prompt and generated source image under `berlin-bouncer/assets/source/`, the optimized `1200x630` JPEG under `berlin-bouncer/assets/social/`, and `berlin-bouncer-page/SEO_SETTINGS.md`. The image was uploaded to Wix Media as `5a08a3_830a8d37e8034d8392ba48d8066adffa~mv2.jpg`, selected in Wix Studio's native Social Share panel, and published as site revision `601`. The temporary `BerlinWalk Berghain Bouncer SEO` custom embed was disabled at revision `2`; final social image delivery is native Wix, not a runtime head embed.
+
+**QA:** Wix Studio preview showed the new bouncer image. Live raw HTML readback confirmed `og:image` and `twitter:image` both point to the new `/v1/fill/w_1200,h_630,al_c/` Wix Media URL, the old Alexanderplatz social image is absent from social tags, and the temporary SEO guard embed is absent. Wix Media image returned HTTP 200.
+
+**Opened:** None.
+**Closed:** Berghain Bouncer social/featured image is live.
+
 ## 2026-06-23 — Codex (Berlin Battle game focus)
 
 **Did:** Fixed the `/games/berlin-battle` UX where choosing a battle after scrolling down the tall topic list could leave the actual game screen above the viewport.
