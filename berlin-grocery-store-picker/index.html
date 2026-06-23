@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Grocery Store Picker | BerlinWalk</title>
+  <meta name="description" content="Choose the right Berlin grocery option for tourists: supermarket, discount store, organic shop, drugstore, Späti, station supermarket or airport shop.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-grocery-picker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-grocery-picker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-grocery-picker *,
+    #bw-grocery-picker *::before,
+    #bw-grocery-picker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-grocery-picker h2,
+    #bw-grocery-picker h3,
+    #bw-grocery-picker p {
+      margin-top: 0;
+    }
+
+    #bw-grocery-picker .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-grocery-picker .bw-hero {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.20)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.15fr) minmax(240px, 0.85fr);
+      padding: 22px;
+    }
+
+    #bw-grocery-picker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-grocery-picker .bw-title {
+      color: var(--bw-white);
+      font-size: 30px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-grocery-picker .bw-sub {
+      color: #E7F4D5;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-grocery-picker .bw-rule-card {
+      align-self: stretch;
+      background: rgba(250, 250, 245, 0.96);
+      border: 1px solid rgba(255, 230, 0, 0.40);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+    }
+
+    #bw-grocery-picker .bw-rule-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-grocery-picker .bw-rule-card p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-grocery-picker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-grocery-picker .bw-controls,
+    #bw-grocery-picker .bw-result,
+    #bw-grocery-picker .bw-grid-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+    }
+
+    #bw-grocery-picker .bw-controls {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    #bw-grocery-picker .bw-control-row {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-grocery-picker .bw-label {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.7px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-grocery-picker .bw-options {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #bw-grocery-picker button {
+      -webkit-tap-highlight-color: transparent;
+      appearance: none;
+      background: #F7FAF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+
+    #bw-grocery-picker button[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+      box-shadow: inset 0 -3px 0 rgba(255, 230, 0, 0.55);
+    }
+
+    #bw-grocery-picker .bw-result {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    #bw-grocery-picker .bw-badge {
+      align-self: start;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.9px;
+      line-height: 1;
+      padding: 8px 10px;
+      text-transform: uppercase;
+    }
+
+    #bw-grocery-picker .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-grocery-picker .bw-result p {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin: 0;
+    }
+
+    #bw-grocery-picker .bw-result ul {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-grocery-picker .bw-result li {
+      background: #F8FBF2;
+      border-left: 4px solid var(--bw-lime);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-size: 13px;
+      font-weight: 720;
+      line-height: 1.48;
+      padding: 10px 11px;
+    }
+
+    #bw-grocery-picker .bw-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-grocery-picker .bw-link {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1.2;
+      min-height: 40px;
+      padding: 10px 12px;
+      text-decoration: none;
+    }
+
+    #bw-grocery-picker .bw-link.secondary {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+    }
+
+    #bw-grocery-picker .bw-store-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #bw-grocery-picker .bw-grid-card {
+      padding: 13px;
+    }
+
+    #bw-grocery-picker .bw-grid-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1.25;
+      margin-bottom: 5px;
+    }
+
+    #bw-grocery-picker .bw-grid-card span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 760px) {
+      #bw-grocery-picker .bw-hero {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      #bw-grocery-picker .bw-title {
+        font-size: 25px;
+      }
+
+      #bw-grocery-picker .bw-options {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-grocery-picker .bw-store-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 430px) {
+      #bw-grocery-picker {
+        margin: 14px 0;
+      }
+
+      #bw-grocery-picker .bw-body {
+        padding: 14px;
+      }
+
+      #bw-grocery-picker .bw-options,
+      #bw-grocery-picker .bw-store-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-grocery-picker button {
+        min-height: 42px;
+        text-align: left;
+      }
+
+      #bw-grocery-picker .bw-link {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <section class="bw-hero" aria-labelledby="bw-grocery-title">
+      <div>
+        <p class="bw-kicker">BerlinWalk tool</p>
+        <h2 class="bw-title" id="bw-grocery-title">Berlin Grocery Store Picker</h2>
+        <p class="bw-sub">Choose the right Berlin food-and-basics stop before you waste time in the wrong shop.</p>
+      </div>
+      <div class="bw-rule-card">
+        <strong>The rule</strong>
+        <p>Supermarket, discount store, organic shop, drugstore and Späti are not interchangeable. Pick by time, need and budget first.</p>
+      </div>
+    </section>
+
+    <section class="bw-body">
+      <div class="bw-controls" aria-label="Grocery decision controls">
+        <div class="bw-control-row">
+          <div class="bw-label">What do you need?</div>
+          <div class="bw-options" data-group="need">
+            <button type="button" data-value="full" aria-pressed="true">Full groceries</button>
+            <button type="button" data-value="cheap" aria-pressed="false">Cheap basics</button>
+            <button type="button" data-value="toiletries" aria-pressed="false">Toiletries</button>
+            <button type="button" data-value="snacks" aria-pressed="false">Late snacks</button>
+          </div>
+        </div>
+
+        <div class="bw-control-row">
+          <div class="bw-label">When is it?</div>
+          <div class="bw-options" data-group="time">
+            <button type="button" data-value="weekday" aria-pressed="true">Mon-Sat daytime</button>
+            <button type="button" data-value="late" aria-pressed="false">Late evening</button>
+            <button type="button" data-value="sunday" aria-pressed="false">Sunday / holiday</button>
+            <button type="button" data-value="arrival" aria-pressed="false">Airport / station arrival</button>
+          </div>
+        </div>
+
+        <div class="bw-control-row">
+          <div class="bw-label">Your priority</div>
+          <div class="bw-options" data-group="priority">
+            <button type="button" data-value="easy" aria-pressed="true">Easy & nearby</button>
+            <button type="button" data-value="budget" aria-pressed="false">Lowest price</button>
+            <button type="button" data-value="organic" aria-pressed="false">Organic / special diet</button>
+            <button type="button" data-value="small" aria-pressed="false">Small emergency run</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="bw-result" aria-live="polite">
+        <span class="bw-badge" id="bw-grocery-badge">Best match</span>
+        <h3 id="bw-grocery-choice">REWE or Edeka</h3>
+        <p id="bw-grocery-reason">Use a normal full supermarket when you need breakfast food, picnic supplies, drinks, fruit, bread, cheese, ready meals and a clear one-stop shop.</p>
+        <ul id="bw-grocery-tips"></ul>
+        <div class="bw-actions">
+          <a class="bw-link" id="bw-grocery-map" href="https://www.google.com/maps/search/REWE+or+Edeka+near+me+Berlin" target="_blank" rel="noopener">Open map search</a>
+          <a class="bw-link secondary" href="https://www.berlinwalk.com/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know" target="_blank" rel="noopener">Sunday rules</a>
+        </div>
+      </div>
+
+      <div class="bw-store-grid" aria-label="Berlin grocery shop types">
+        <div class="bw-grid-card"><strong>REWE / Edeka</strong><span>Best all-rounder for tourists who want one normal supermarket.</span></div>
+        <div class="bw-grid-card"><strong>Aldi / Lidl</strong><span>Good for budget basics, fewer choices, fast checkout rhythm.</span></div>
+        <div class="bw-grid-card"><strong>dm / Rossmann</strong><span>Toiletries, sunscreen, baby supplies, cosmetics. Not a full supermarket.</span></div>
+        <div class="bw-grid-card"><strong>Späti / station</strong><span>Useful when normal shops are closed, but expect a smaller selection.</span></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-grocery-picker');
+      if (!root) return;
+
+      var state = { need: 'full', time: 'weekday', priority: 'easy' };
+      var choiceEl = root.querySelector('#bw-grocery-choice');
+      var reasonEl = root.querySelector('#bw-grocery-reason');
+      var tipsEl = root.querySelector('#bw-grocery-tips');
+      var mapEl = root.querySelector('#bw-grocery-map');
+      var badgeEl = root.querySelector('#bw-grocery-badge');
+
+      function resultFor() {
+        if (state.time === 'sunday' || state.time === 'arrival') {
+          if (state.need === 'toiletries') {
+            return {
+              badge: 'Sunday fallback',
+              choice: 'Station supermarket, BER Airport or dm if open',
+              reason: 'On Sundays and public holidays, normal supermarkets mostly close. Start with the legal exception points near big stations or the airport, then check drugstore hours separately.',
+              map: 'https://www.google.com/maps/search/station+supermarket+Berlin',
+              tips: ['Search by the exact station near you: Hauptbahnhof, Friedrichstrasse, Ostbahnhof, Suedkreuz, Zoo or BER.', 'Do not assume every station shop is a full supermarket.', 'Buy tomorrow morning basics, not a complicated weekly shop.']
+            };
+          }
+          return {
+            badge: 'Closed-day answer',
+            choice: 'Station supermarket or BER Airport REWE',
+            reason: 'When normal Berlin supermarkets are closed, the reliable grocery move is a supermarket inside a major transport hub. A Späti is fine for drinks and snacks, but not for a full food run.',
+            map: 'https://www.google.com/maps/search/supermarket+open+Sunday+Berlin+station',
+            tips: ['Expect higher prices and crowds than a normal weekday shop.', 'For a small emergency, a Späti may be closer and faster.', 'Check the current listing before travelling across the city.']
+          };
+        }
+
+        if (state.need === 'toiletries') {
+          return {
+            badge: 'Best match',
+            choice: 'dm or Rossmann',
+            reason: 'For toothpaste, shampoo, sunscreen, baby supplies, razors and basic travel toiletries, a German drugstore is usually clearer and cheaper than a supermarket.',
+            map: 'https://www.google.com/maps/search/dm+or+Rossmann+near+me+Berlin',
+            tips: ['For medicine, use an Apotheke, not dm or Rossmann.', 'Drugstores often have travel-size items and baby shelves.', 'If you need food too, pair it with a nearby supermarket.']
+          };
+        }
+
+        if (state.need === 'cheap' || state.priority === 'budget') {
+          return {
+            badge: 'Budget pick',
+            choice: 'Aldi, Lidl, Netto or Penny',
+            reason: 'Discount supermarkets are good for water, snacks, breakfast basics, fruit, bread, simple picnic food and cheap supplies, but the choice is narrower.',
+            map: 'https://www.google.com/maps/search/Aldi+Lidl+Netto+Penny+near+me+Berlin',
+            tips: ['Bring a bag or buy one at checkout.', 'Pack fast after scanning; Berlin checkout rhythm is brisk.', 'Use REWE or Edeka instead if you need a very specific item.']
+          };
+        }
+
+        if (state.priority === 'organic') {
+          return {
+            badge: 'Special diet',
+            choice: 'Bio Company, Alnatura or Denns',
+            reason: 'Organic supermarkets are the better fit for organic food, vegan/vegetarian specialty items, gluten-free shelves and slower browsing.',
+            map: 'https://www.google.com/maps/search/Bio+Company+Alnatura+Denns+near+me+Berlin',
+            tips: ['Prices are usually higher than discount supermarkets.', 'Check Sunday hours carefully; only some station-area branches are exceptions.', 'For a normal picnic, a regular supermarket is usually enough.']
+          };
+        }
+
+        if (state.need === 'snacks' || state.time === 'late' || state.priority === 'small') {
+          return {
+            badge: 'Small run',
+            choice: 'Späti, REWE To Go or a station shop',
+            reason: 'For late drinks, crisps, chocolate, cigarettes, one missing bottle of water or a quick snack, a small shop is often more realistic than hunting for a full supermarket.',
+            map: 'https://www.google.com/maps/search/Späti+near+me+Berlin',
+            tips: ['Selection is small and prices can be higher.', 'Do not expect proper fresh groceries.', 'If it is Sunday and you need real food, use a station supermarket instead.']
+          };
+        }
+
+        return {
+          badge: 'Best match',
+          choice: 'REWE or Edeka',
+          reason: 'Use a normal full supermarket when you need breakfast food, picnic supplies, drinks, fruit, bread, cheese, ready meals and a clear one-stop shop.',
+          map: 'https://www.google.com/maps/search/REWE+or+Edeka+near+me+Berlin',
+          tips: ['This is the safest first choice for most tourists.', 'Look for Pfand machines near the entrance if you have bottles to return.', 'For toiletries, dm or Rossmann may still be better.']
+        };
+      }
+
+      function render() {
+        var result = resultFor();
+        badgeEl.textContent = result.badge;
+        choiceEl.textContent = result.choice;
+        reasonEl.textContent = result.reason;
+        mapEl.href = result.map;
+        tipsEl.innerHTML = result.tips.map(function (tip) { return '<li>' + tip + '</li>'; }).join('');
+        window.dispatchEvent(new Event('resize'));
+      }
+
+      root.querySelectorAll('.bw-options').forEach(function (group) {
+        group.addEventListener('click', function (event) {
+          var btn = event.target.closest('button[data-value]');
+          if (!btn) return;
+          var key = group.getAttribute('data-group');
+          state[key] = btn.getAttribute('data-value');
+          group.querySelectorAll('button').forEach(function (item) {
+            item.setAttribute('aria-pressed', item === btn ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

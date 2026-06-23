@@ -128,7 +128,8 @@
   "too-hot-in-berlin": "berlin-heatwave-day-plan",
   "zoo-berlin-vs-tierpark-berlin": "zoo-berlin-vs-tierpark-berlin",
   "unter-den-linden-berlin": "unter-den-linden-berlin",
-  "pharmacy-in-berlin": "pharmacy-in-berlin"
+  "pharmacy-in-berlin": "pharmacy-in-berlin",
+  "grocery-shopping-in-berlin": "grocery-shopping-in-berlin"
 };
 
   var SCHEMAS = {
@@ -6150,6 +6151,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "EU prescriptions can be valid across EU countries when they include the right information, but the medicine may not be available and German dispensing rules apply. For non-EU prescriptions, controlled medicines or essential medication, bring documentation and expect that a local doctor may be needed."
+        }
+      }
+    ]
+  },
+  "grocery-shopping-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best supermarket for grocery shopping in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most tourists, REWE and Edeka are the easiest all-round supermarkets. Aldi, Lidl, Netto and Penny are usually better for budget basics. Bio Company, Alnatura and Denns are better when organic food matters more than price."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin supermarkets open on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most regular Berlin supermarkets close on Sundays and public holidays. The useful exceptions are selected supermarkets at major train stations and BER Airport, plus gas stations, delivery services and Spätis for limited basics."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I buy medicine in a Berlin supermarket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, not in the way many visitors expect. Supermarkets and drugstores sell toiletries, sunscreen, vitamins and baby supplies, but real medicine usually means an Apotheke, which is a licensed pharmacy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need cash for Berlin supermarkets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cards are widely accepted in larger supermarkets, but cash is still useful for smaller shops, kiosks, market stalls and some edge cases. If a store has self-checkout, card payment is often the smoothest route."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should tourists know about Pfand at supermarkets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many bottles and cans include a refundable Pfand deposit. You return them at a bottle-return machine, get a receipt, and use that receipt at checkout. It is normal, not a scam or a separate tax."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where should I buy groceries near the BerlinWalk route?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Around Alexanderplatz and Hackescher Markt, use normal supermarkets or station options before Sunday becomes a problem. The BerlinWalk route lasts about 2 hours, so a small water-and-snack run before or after the walk is enough."
         }
       }
     ]
