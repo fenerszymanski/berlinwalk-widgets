@@ -616,7 +616,9 @@
             this.ambience = audio;
             await audio.play();
           } catch (error) {
-            console.warn('[Berlin Smile] ambience failed', error);
+            if (!error || error.name !== 'AbortError') {
+              console.warn('[Berlin Smile] ambience failed', error);
+            }
           }
         }
 
@@ -638,7 +640,9 @@
             await audio.play();
           } catch (error) {
             if (this.ambience && !this.muted) this.ambience.volume = 0.18;
-            console.warn('[Berlin Smile] voice failed', error);
+            if (!error || error.name !== 'AbortError') {
+              console.warn('[Berlin Smile] voice failed', error);
+            }
           }
         }
 
