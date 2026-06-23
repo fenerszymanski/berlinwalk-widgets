@@ -834,7 +834,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-desktop-share-click-feedback-20260623';
+      const BUILD = 'smile-desktop-share-instant-feedback-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -1158,9 +1158,15 @@
             track('bw_berlin_smile_share', { method: 'native', ending: state.result.id, success: 'true' });
             return;
           }
+          if (method === 'share') {
+            showToast('Link copied');
+            showButtonFeedback(triggerNode, 'Link copied');
+          }
           const copyMethod = await copyText(text);
-          showToast('Link copied');
-          showButtonFeedback(triggerNode, 'Link copied');
+          if (method !== 'share') {
+            showToast('Link copied');
+            showButtonFeedback(triggerNode, 'Link copied');
+          }
           track('bw_berlin_smile_share', { method: copyMethod, ending: state.result.id, success: 'true' });
         } catch (error) {
           state.manualShareText = text;
@@ -1611,13 +1617,14 @@
       }
 
       function showButtonFeedback(button, message) {
-        if (!button) return;
-        const original = button.dataset.originalLabel || button.textContent;
-        button.dataset.originalLabel = original;
-        button.textContent = message;
-        window.clearTimeout(button._bwFeedbackTimer);
-        button._bwFeedbackTimer = window.setTimeout(() => {
-          button.textContent = button.dataset.originalLabel || original;
+        const target = button || app.querySelector('[data-action="share"]');
+        if (!target) return;
+        const original = target.dataset.originalLabel || target.textContent;
+        target.dataset.originalLabel = original;
+        target.textContent = message;
+        window.clearTimeout(target._bwFeedbackTimer);
+        target._bwFeedbackTimer = window.setTimeout(() => {
+          target.textContent = target.dataset.originalLabel || original;
         }, 1700);
       }
 
