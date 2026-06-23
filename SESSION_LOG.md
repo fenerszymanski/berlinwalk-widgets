@@ -1,3 +1,14 @@
+## 2026-06-23 — Codex (Berlin Battle list polish)
+
+**Did:** Applied Yusuf's two follow-ups for the redesigned `/games/berlin-battle` page: removed the outer `Play now` button and changed the in-game topic picker from a card grid to a compact list.
+
+**Changed:** `berlin-battle-page/berlin-battle-page-element.js` now uses `ASSET_BUILD=battle-list-page-20260623` and no longer renders `heroAction` / `Play now`. `berlin-battle/index.html` now presents topic choices as one-column rows with thumbnail, kicker/title/short lead, and a CSS chevron; mobile rows compress to about 80px. The game default build marker and `berlin-battle-page/README.md` snippet were bumped to `battle-list-page-20260623`. Commit `7dae26f` was pushed to `origin/main`. Existing unrelated dirty files `berlin-grocery-store-picker/index.html` and `worldcup-fixtures/index.html` were left untouched and unstaged.
+
+**QA:** Wrapper `node --check`, inline game script parse, and scoped `git diff --check` passed. Local desktop and 390px QA: marker current, parent `Play now` absent, 10 topics render as a single list column, iframe height matches inner scrollHeight `1060`, overflowX `0`; direct `topic=food` still opens `Berlin Food Battle` with 2 choices. GitHub Pages served the new marker on attempt 14. Live Wix desktop/mobile QA passed: marker current, no `Play now`, overflowX `0`. Direct GitHub iframe QA passed: 10 single-column list rows, desktop first row `94px`, mobile first row `80px`, overflowX `0`; direct Food still shows `Berlin Food Battle`, 2 choices, overflowX `0`.
+
+**Opened:** None.
+**Closed:** Berlin Battle button/list polish is pushed, deployed, and live-verified.
+
 ## 2026-06-23 — Codex (daily featured/listing refresh)
 
 **Did:** Refreshed the blog listing data and homepage blog teaser so the newly published Pharmacy guide is surfaced while Heatwave stays the current lead.
