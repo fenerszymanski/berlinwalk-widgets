@@ -30,15 +30,19 @@
     html,
     body {
       background: transparent;
+      height: 100%;
       margin: 0 !important;
       min-height: 100%;
       padding: 0 !important;
+      overscroll-behavior: contain;
       overflow-x: hidden;
       font-family: Montserrat, Arial, sans-serif;
       color: var(--ink);
     }
 
     body {
+      -webkit-overflow-scrolling: touch;
+      overflow-y: auto;
       width: 100%;
     }
 
@@ -55,7 +59,7 @@
       border: 6px solid var(--ink);
       border-radius: 28px;
       box-shadow: 10px 10px 0 rgba(16, 46, 56, 0.95);
-      min-height: 680px;
+      min-height: 100%;
       overflow: hidden;
       position: relative;
       width: 100%;
@@ -629,7 +633,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-scroll-lock-20260623';
+      const BUILD = 'smile-phone-viewport-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -1421,12 +1425,10 @@
         const gameNode = app.querySelector('.bw-screen');
         const gameRect = gameNode ? gameNode.getBoundingClientRect() : null;
         const height = Math.ceil(Math.max(
-          document.documentElement.scrollHeight || 0,
-          document.body.scrollHeight || 0,
           app.scrollHeight || 0,
           appRect.height || 0,
           gameRect ? gameRect.bottom - appRect.top : 0
-        )) + 6;
+        ));
         window.parent.postMessage({ type: 'bw-resize', height }, '*');
       }
 

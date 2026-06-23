@@ -2,8 +2,10 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-scroll-lock-20260623';
-const MAX_FRAME_HEIGHT = 1540;
+const ASSET_BUILD = 'smile-phone-viewport-20260623';
+const DESKTOP_FRAME_HEIGHT = 720;
+const TABLET_FRAME_HEIGHT = 700;
+const MOBILE_FRAME_HEIGHT = 680;
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {
@@ -214,9 +216,11 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           border: 0;
           border-radius: 22px;
           display: block;
+          height: 720px;
           min-height: 720px;
+          max-height: 720px;
           overflow-anchor: none;
-          overflow: hidden;
+          overflow: auto;
           width: 100%;
         }
 
@@ -267,7 +271,9 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           }
 
           .bw-smile-frame {
+            height: 700px;
             min-height: 680px;
+            max-height: 700px;
           }
         }
 
@@ -278,6 +284,12 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
           .bw-smile-device {
             padding: 8px;
+          }
+
+          .bw-smile-frame {
+            height: 680px;
+            min-height: 680px;
+            max-height: 680px;
           }
         }
       </style>
@@ -305,6 +317,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
             title="Can You Make a Berliner Smile?"
             loading="eager"
             allow="clipboard-write; web-share; autoplay"
+            scrolling="yes"
             referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </section>
 
@@ -319,13 +332,10 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
   _bind() {
     const iframe = this.querySelector('.bw-smile-frame');
-    this._framedHeight = 720;
     this._timers = [];
     this._messageHandler = (event) => {
       if (!event.data) return;
       if (event.data.type === 'bw-smile-preserve-scroll') {
-        this._preservedScrollY = Math.max(0, window.scrollY || document.documentElement.scrollTop || 0);
-        this._restorePreservedScroll();
         return;
       }
       if (event.data.type === 'bw-smile-focus') {
@@ -333,11 +343,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
         return;
       }
       if (event.data.type !== 'bw-resize') return;
-      const height = Number(event.data.height || 0);
-      if (!height || height < 500) return;
-      this._framedHeight = Math.min(Math.max(height, 680), MAX_FRAME_HEIGHT);
       this._lockInnerLayout();
-      this._restorePreservedScroll();
       this._queueHostSync();
     };
     window.addEventListener('message', this._messageHandler);
@@ -388,7 +394,7 @@ class BwBerlinSmileChallengePage extends HTMLElement {
     const device = this.querySelector('.bw-smile-device');
     if (!page || !iframe || !device) return;
 
-    const frameHeight = Math.min(Math.max(Number(this._framedHeight || 720), 680), MAX_FRAME_HEIGHT);
+    const frameHeight = this._targetFrameHeight();
     const deviceStyle = getComputedStyle(device);
     const devicePadding =
       (parseFloat(deviceStyle.paddingTop) || 0) +
@@ -405,22 +411,11 @@ class BwBerlinSmileChallengePage extends HTMLElement {
     device.style.setProperty('max-height', `${deviceHeight}px`, 'important');
   }
 
-  _restorePreservedScroll() {
-    if (!Number.isFinite(this._preservedScrollY)) return;
-    const targetY = this._preservedScrollY;
-    const restore = () => {
-      if (Math.abs((window.scrollY || 0) - targetY) > 1) {
-        window.scrollTo({ top: targetY, left: window.scrollX || 0, behavior: 'auto' });
-      }
-    };
-
-    restore();
-    [60, 160, 320].forEach((delay) => {
-      this._timers.push(window.setTimeout(restore, delay));
-    });
-    this._timers.push(window.setTimeout(() => {
-      if (this._preservedScrollY === targetY) this._preservedScrollY = null;
-    }, 520));
+  _targetFrameHeight() {
+    const width = window.innerWidth || document.documentElement.clientWidth || 1024;
+    if (width <= 520) return MOBILE_FRAME_HEIGHT;
+    if (width <= 940) return TABLET_FRAME_HEIGHT;
+    return DESKTOP_FRAME_HEIGHT;
   }
 
 }
