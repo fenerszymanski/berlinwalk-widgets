@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-scene-fit-20260623';
+const ASSET_BUILD = 'smile-hero-cover-20260623';
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {

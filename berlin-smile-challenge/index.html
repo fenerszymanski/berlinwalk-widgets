@@ -98,8 +98,8 @@
     .bw-start-screen {
       min-height: 610px;
       display: grid;
-      align-content: center;
-      gap: 22px;
+      align-content: start;
+      gap: 16px;
     }
 
     .bw-badge {
@@ -118,57 +118,54 @@
       text-transform: uppercase;
     }
 
-    .bw-start-title {
-      font-size: clamp(40px, 10vw, 74px);
-      font-weight: 900;
-      letter-spacing: -0.04em;
-      line-height: 0.92;
+    .bw-start-hero {
+      aspect-ratio: 16 / 10;
+      background: #F7F1DC;
+      border: 2px solid var(--ink);
+      border-radius: 16px;
+      box-shadow: 4px 4px 0 var(--ink);
       margin: 0;
-      max-width: 690px;
+      overflow: hidden;
+      width: 100%;
     }
 
-    .bw-start-title span {
-      color: var(--red);
+    .bw-start-hero img {
       display: block;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      width: 100%;
+    }
+
+    .bw-start-copy {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bw-start-kicker {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 0.12em;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-start-title {
+      color: var(--red);
+      font-size: clamp(30px, 7vw, 44px);
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      line-height: 0.95;
+      margin: 0;
     }
 
     .bw-start-lead {
       color: var(--muted);
-      font-size: clamp(17px, 3vw, 21px);
-      font-weight: 750;
-      line-height: 1.45;
-      margin: 0;
-      max-width: 620px;
-    }
-
-    .bw-start-list {
-      display: grid;
-      gap: 10px;
-      list-style: none;
-      margin: 4px 0 0;
-      max-width: 560px;
-      padding: 0;
-    }
-
-    .bw-start-list li {
-      align-items: center;
-      color: var(--ink);
-      display: flex;
-      gap: 10px;
       font-size: 14px;
-      font-weight: 850;
-      line-height: 1.35;
-    }
-
-    .bw-start-list li::before {
-      background: var(--red);
-      border: 2px solid var(--ink);
-      box-shadow: 2px 2px 0 var(--ink);
-      content: "";
-      flex: 0 0 9px;
-      height: 9px;
-      transform: rotate(45deg);
-      width: 9px;
+      font-weight: 750;
+      line-height: 1.4;
+      margin: 0;
     }
 
     .bw-actions {
@@ -601,6 +598,10 @@
         border-radius: 12px;
       }
 
+      .bw-start-hero {
+        border-radius: 12px;
+      }
+
       .bw-start-screen,
       .bw-result-screen {
         min-height: 580px;
@@ -628,7 +629,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-scene-fit-20260623';
+      const BUILD = 'smile-hero-cover-20260623';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
@@ -1213,15 +1214,14 @@
         app.innerHTML = `
           ${topbarHtml()}
           <section class="bw-screen bw-start-screen">
-            <div class="bw-badge">Playable now</div>
-            <h1 class="bw-start-title">Can You Make <span>a Berliner Smile?</span></h1>
-            <p class="bw-start-lead">${escapeHtml(data.subtitle)}</p>
-            <ul class="bw-start-list">
-              <li>Choose the least annoying thing to say</li>
-              <li>Listen to tiny Berlin social weather reports</li>
-              <li>Protect the Patience Meter at all costs</li>
-              <li>Leave with a shareable result, or emotional paperwork</li>
-            </ul>
+            <figure class="bw-start-hero" aria-hidden="true">
+              <img src="assets/hero/berlin-smile-challenge-hero.webp?v=${escapeAttr(BUILD)}" alt="" loading="eager" decoding="async">
+            </figure>
+            <div class="bw-start-copy">
+              <p class="bw-start-kicker">Berlin social weather</p>
+              <h1 class="bw-start-title">Make the almost-smile happen.</h1>
+              <p class="bw-start-lead">Pick your words before the Patience Meter gives up.</p>
+            </div>
             <div class="bw-actions">
               <button class="bw-primary" type="button" data-action="start">${escapeHtml(data.startLabel || 'Start with sound')}</button>
               <button class="bw-secondary" type="button" data-action="quiet-start">Start quietly</button>
