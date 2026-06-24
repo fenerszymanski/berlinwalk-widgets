@@ -1,4 +1,4 @@
-const BW_BATTLE_HOME_ROOT = (() => {
+const BW_GAMES_HOME_ROOT = (() => {
   const script = document.currentScript;
   const src = script && script.src ? script.src : '';
   if (src.includes('/berlin-battle-home/')) {
@@ -7,82 +7,54 @@ const BW_BATTLE_HOME_ROOT = (() => {
   return 'https://fenerszymanski.github.io/berlinwalk-widgets/';
 })();
 
-const BW_BATTLE_HOME_GAME_URL = 'https://www.berlinwalk.com/games/berlin-battle?utm_source=home&utm_medium=section&utm_campaign=berlin_battle_home&utm_content=play';
-const BW_BATTLE_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlin_battle_home&utm_content=book';
-const BW_BATTLE_HOME_ASSET_VERSION = 'unique-topic-covers-20260619';
+const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
+const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-three-games-20260624';
 
-const BW_BATTLE_HOME_MODES = [
+const BW_GAMES_HOME_ITEMS = [
   {
-    id: 'food',
-    title: 'Food Battle',
-    tag: 'Taste',
-    image: 'berlin-battle/assets/topics/food-battle-cover.webp'
+    id: 'berlin-battle',
+    kicker: 'Choice battle',
+    title: 'Berlin Battle',
+    lead: 'Pick your Berlin winner across food, districts, museums, nightlife, transport and tiny city loyalties.',
+    meta: '10 battle modes',
+    href: 'https://www.berlinwalk.com/games/berlin-battle',
+    cta: 'Play Battle',
+    image: 'berlin-battle/assets/social/berlin-battle-social-1200x630.jpg'
   },
   {
-    id: 'districts',
-    title: 'District Battle',
-    tag: 'Kiez',
-    image: 'berlin-battle/assets/topics/district-battle-cover.webp'
+    id: 'berghain-bouncer',
+    kicker: 'Door test',
+    title: 'Berghain Bouncer',
+    lead: 'A quick club-door pressure game with outfits, answers and very Berlin judgement.',
+    meta: '10-second pressure',
+    href: 'https://www.berlinwalk.com/games/berghain-bouncer',
+    cta: 'Try the door',
+    image: 'berlin-bouncer/assets/social/berlin-bouncer-social-1200x630.jpg'
   },
   {
-    id: 'museums',
-    title: 'Museum Battle',
-    tag: 'Culture',
-    image: 'berlin-battle/assets/topics/museum-battle-cover.webp'
-  },
-  {
-    id: 'clubs',
-    title: 'Night Battle',
-    tag: 'After dark',
-    image: 'berlin-battle/assets/topics/night-battle-cover.webp'
-  },
-  {
-    id: 'transport',
-    title: 'Transport Battle',
-    tag: 'Move',
-    image: 'berlin-battle/assets/topics/transport-battle-cover.webp'
-  },
-  {
-    id: 'techno-clubs',
-    title: 'Techno Club Battle',
-    tag: 'Clubs',
-    image: 'berlin-battle/assets/topics/techno-club-battle-cover.webp'
-  },
-  {
-    id: 'doner-shops',
-    title: 'Döner Shops Battle',
-    tag: 'Snack',
-    image: 'berlin-battle/assets/topics/doner-shops-battle-cover.webp'
-  },
-  {
-    id: 'currywurst-shops',
-    title: 'Currywurst Battle',
-    tag: 'Classic',
-    image: 'berlin-battle/assets/topics/currywurst-shops-battle-cover.webp'
-  },
-  {
-    id: 'parks-lakes',
-    title: 'Parks & Lakes Battle',
-    tag: 'Green',
-    image: 'berlin-battle/assets/topics/parks-lakes-battle-cover.webp'
-  },
-  {
-    id: 'ubahn-sbahn-lines',
-    title: 'U-Bahn & S-Bahn Battle',
-    tag: 'Lines',
-    image: 'berlin-battle/assets/topics/lines-battle-cover.webp'
+    id: 'berlin-smile-challenge',
+    kicker: 'Social puzzle',
+    title: 'Berlin Smile Challenge',
+    lead: 'Seven small social tests. Try to make a Berliner almost smile.',
+    meta: '7 dry-humor scenes',
+    href: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
+    cta: 'Start Challenge',
+    image: 'berlin-smile-challenge/assets/social/berlin-smile-challenge-social-1200x630.jpg'
   }
 ];
 
-function bwBattleHomeAsset(path, version = BW_BATTLE_HOME_ASSET_VERSION) {
+function bwGamesHomeAsset(path, version = BW_GAMES_HOME_ASSET_VERSION) {
   const separator = path.includes('?') ? '&' : '?';
-  return `${BW_BATTLE_HOME_ROOT}${path}${version ? `${separator}v=${version}` : ''}`;
+  return `${BW_GAMES_HOME_ROOT}${path}${version ? `${separator}v=${version}` : ''}`;
 }
 
-function bwBattleHomeModeUrl(modeId) {
-  const url = new URL(BW_BATTLE_HOME_GAME_URL);
-  url.searchParams.set('topic', modeId);
-  url.searchParams.set('utm_content', `topic_${modeId}`);
+function bwGamesHomeUrl(game, content) {
+  const url = new URL(game.href);
+  url.searchParams.set('utm_source', 'home');
+  url.searchParams.set('utm_medium', 'section');
+  url.searchParams.set('utm_campaign', 'berlinwalk_games_home');
+  url.searchParams.set('utm_content', content || game.id);
   return url.toString();
 }
 
@@ -102,14 +74,21 @@ class BWBerlinBattleHomeElement extends HTMLElement {
   }
 
   _render() {
-    const modeCards = BW_BATTLE_HOME_MODES.map((mode) => `
-      <a class="bw-battle-mode" href="${bwBattleHomeModeUrl(mode.id)}" aria-label="Play ${mode.title}">
-        <img src="${bwBattleHomeAsset(mode.image)}" alt="" width="960" height="600" loading="lazy" decoding="async">
-        <span class="bw-battle-mode-copy">
-          <span class="bw-battle-mode-tag">${mode.tag}</span>
-          <strong>${mode.title}</strong>
-        </span>
-      </a>
+    const gameCards = BW_GAMES_HOME_ITEMS.map((game, index) => `
+      <article class="bw-games-home-card bw-games-home-card-${game.id}" style="--delay:${80 + index * 90}ms">
+        <a class="bw-games-home-card-image" href="${bwGamesHomeUrl(game, `image_${game.id}`)}" aria-label="${this._escapeAttribute(`Play ${game.title}`)}">
+          <img src="${bwGamesHomeAsset(game.image)}" alt="${this._escapeAttribute(`${game.title} cover art`)}" width="1200" height="630" loading="lazy" decoding="async">
+        </a>
+        <div class="bw-games-home-card-body">
+          <p class="bw-games-home-card-kicker">${this._escapeHtml(game.kicker)}</p>
+          <h3>${this._escapeHtml(game.title)}</h3>
+          <p>${this._escapeHtml(game.lead)}</p>
+          <div class="bw-games-home-card-foot">
+            <span>${this._escapeHtml(game.meta)}</span>
+            <a href="${bwGamesHomeUrl(game, `button_${game.id}`)}">${this._escapeHtml(game.cta)} <span aria-hidden="true">-&gt;</span></a>
+          </div>
+        </div>
+      </article>
     `).join('');
 
     this.innerHTML = `
@@ -119,55 +98,70 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           width: 100%;
         }
 
-        .bw-battle-home {
+        .bw-games-home {
           --green: #1B5E20;
           --green-dark: #073B16;
           --yellow: #FFE600;
           --lime: #7CB342;
           --cream: #FAFAF5;
+          --paper: #FFFFFF;
           --text: #212121;
-          --muted: #4E5A4E;
-          background: var(--cream);
+          --muted: #526052;
+          background:
+            linear-gradient(90deg, rgba(27, 94, 32, 0.07) 1px, transparent 1px),
+            linear-gradient(180deg, rgba(27, 94, 32, 0.07) 1px, transparent 1px),
+            var(--cream);
+          background-size: 34px 34px;
           box-sizing: border-box;
           color: var(--text);
           font-family: Montserrat, Arial, sans-serif;
           margin: 0 calc((100% - 100vw) / 2);
           max-width: 100vw;
           overflow: hidden;
-          padding: clamp(46px, 5vw, 64px) 24px;
+          padding: clamp(52px, 6vw, 78px) 24px;
+          position: relative;
           width: 100vw;
         }
 
-        .bw-battle-home *,
-        .bw-battle-home *::before,
-        .bw-battle-home *::after {
+        .bw-games-home::before {
+          background: var(--yellow);
+          content: "";
+          height: 4px;
+          left: 0;
+          position: absolute;
+          right: 32%;
+          top: 0;
+        }
+
+        .bw-games-home *,
+        .bw-games-home *::before,
+        .bw-games-home *::after {
           box-sizing: border-box;
         }
 
-        .bw-battle-home :where(h2, h3, p) {
+        .bw-games-home :where(h2, h3, p) {
           margin: 0;
         }
 
-        .bw-battle-home a {
+        .bw-games-home a {
           color: inherit;
         }
 
-        .bw-battle-home-inner {
+        .bw-games-home-inner {
           display: grid;
-          gap: clamp(28px, 4vw, 52px);
+          gap: clamp(28px, 4vw, 54px);
           grid-template-columns: minmax(0, 1fr);
           margin: 0 auto;
-          max-width: 1320px;
-          width: min(1320px, calc(100vw - 48px));
+          max-width: 1240px;
+          width: min(1240px, calc(100vw - 48px));
         }
 
-        .bw-battle-home-copy {
+        .bw-games-home-copy {
           align-self: center;
-          max-width: 690px;
           min-width: 0;
         }
 
-        .bw-battle-home-kicker {
+        .bw-games-home-kicker {
           color: var(--green);
           display: block;
           font-size: 13px;
@@ -178,33 +172,33 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           text-transform: uppercase;
         }
 
-        .bw-battle-home-title {
+        .bw-games-home-title {
           color: var(--green);
-          font-size: clamp(38px, 5vw, 72px);
+          font-size: clamp(40px, 5.2vw, 76px);
           font-weight: 900;
           letter-spacing: 0;
           line-height: 0.94;
           margin-bottom: 18px;
-          max-width: 680px;
+          max-width: 660px;
         }
 
-        .bw-battle-home-lead {
+        .bw-games-home-lead {
           color: var(--muted);
           font-size: clamp(17px, 1.55vw, 21px);
           font-weight: 650;
           line-height: 1.48;
-          margin-bottom: 28px;
-          max-width: 650px;
+          margin-bottom: 26px;
+          max-width: 620px;
         }
 
-        .bw-battle-home-actions {
+        .bw-games-home-actions {
           align-items: center;
           display: flex;
           flex-wrap: wrap;
           gap: 12px;
         }
 
-        .bw-battle-home-btn {
+        .bw-games-home-btn {
           align-items: center;
           border-radius: 999px;
           display: inline-flex;
@@ -219,204 +213,227 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease, transform 160ms ease;
         }
 
-        .bw-battle-home-btn:focus-visible,
-        .bw-battle-mode:focus-visible {
+        .bw-games-home-btn:focus-visible,
+        .bw-games-home-card a:focus-visible {
           outline: 3px solid rgba(255, 230, 0, 0.9);
           outline-offset: 3px;
         }
 
-        .bw-battle-home-btn-primary {
+        .bw-games-home-btn-primary {
           background: var(--yellow);
           box-shadow: 0 14px 28px rgba(27, 94, 32, 0.16);
           color: var(--green);
         }
 
-        .bw-battle-home-btn-secondary {
-          background: #FFFFFF;
+        .bw-games-home-btn-secondary {
+          background: var(--paper);
           border: 1px solid #C5E1A5;
           color: var(--green);
         }
 
-        .bw-battle-home-btn:hover,
-        .bw-battle-home-btn:focus-visible {
+        .bw-games-home-btn:hover,
+        .bw-games-home-btn:focus-visible {
           transform: translateY(-2px);
         }
 
-        .bw-battle-home.ready .bw-battle-mode {
+        .bw-games-home.ready .bw-games-home-card {
           opacity: 1;
           transform: translateY(0);
         }
 
-        .bw-battle-home-modes {
+        .bw-games-home-grid {
           display: grid;
-          gap: 12px;
-          grid-template-columns: repeat(auto-fit, minmax(min(100%, 132px), 1fr));
+          gap: 14px;
           min-width: 0;
         }
 
-        .bw-battle-mode {
-          background: #FFFFFF;
+        .bw-games-home-card {
+          background: var(--paper);
           border: 1px solid #C5E1A5;
           border-radius: 8px;
+          box-shadow: 0 16px 34px rgba(27, 94, 32, 0.1);
           color: inherit;
+          display: grid;
+          grid-template-columns: minmax(128px, 0.44fr) minmax(0, 1fr);
           min-width: 0;
           opacity: 0;
           overflow: hidden;
-          text-decoration: none;
           transform: translateY(12px);
           transition: border-color 160ms ease, box-shadow 160ms ease, opacity 420ms ease-out, transform 420ms ease-out;
+          transition-delay: var(--delay);
         }
 
-        .bw-battle-mode:nth-child(1) { transition-delay: 60ms; }
-        .bw-battle-mode:nth-child(2) { transition-delay: 120ms; }
-        .bw-battle-mode:nth-child(3) { transition-delay: 180ms; }
-        .bw-battle-mode:nth-child(4) { transition-delay: 240ms; }
-        .bw-battle-mode:nth-child(5) { transition-delay: 300ms; }
-        .bw-battle-mode:nth-child(6) { transition-delay: 360ms; }
-        .bw-battle-mode:nth-child(7) { transition-delay: 420ms; }
-        .bw-battle-mode:nth-child(8) { transition-delay: 480ms; }
-        .bw-battle-mode:nth-child(9) { transition-delay: 540ms; }
-        .bw-battle-mode:nth-child(10) { transition-delay: 600ms; }
-
-        .bw-battle-mode:hover,
-        .bw-battle-mode:focus-visible {
+        .bw-games-home-card:hover,
+        .bw-games-home-card:focus-within {
           border-color: var(--green);
-          box-shadow: 0 12px 26px rgba(27, 94, 32, 0.14);
+          box-shadow: 0 18px 38px rgba(27, 94, 32, 0.16);
           transform: translateY(-2px);
         }
 
-        .bw-battle-mode img {
-          aspect-ratio: 16 / 9;
+        .bw-games-home-card-image {
+          background: #EAF3DF;
+          color: inherit;
           display: block;
-          height: auto;
+          min-height: 100%;
+          overflow: hidden;
+          text-decoration: none;
+        }
+
+        .bw-games-home-card-image img {
+          display: block;
+          height: 100%;
+          min-height: 154px;
           object-fit: cover;
           width: 100%;
         }
 
-        .bw-battle-mode-copy {
-          align-content: start;
-          color: var(--green);
+        .bw-games-home-card-body {
           display: grid;
-          gap: 3px;
-          min-height: 54px;
-          padding: 9px 10px 10px;
+          gap: 8px;
+          min-width: 0;
+          padding: 18px 18px 16px;
         }
 
-        .bw-battle-mode-tag {
+        .bw-games-home-card-kicker {
           color: var(--lime);
-          display: block;
-          font-size: 10px;
+          font-size: 11px;
           font-weight: 900;
           letter-spacing: 0;
           line-height: 1.1;
           text-transform: uppercase;
         }
 
-        .bw-battle-mode strong {
-          display: block;
-          font-size: 13px;
+        .bw-games-home-card h3 {
+          color: var(--green);
+          font-size: clamp(20px, 2vw, 26px);
           font-weight: 900;
           letter-spacing: 0;
-          line-height: 1.18;
-          overflow-wrap: anywhere;
+          line-height: 1;
+        }
+
+        .bw-games-home-card p:not(.bw-games-home-card-kicker) {
+          color: var(--muted);
+          font-size: 14px;
+          font-weight: 650;
+          line-height: 1.4;
+        }
+
+        .bw-games-home-card-foot {
+          align-items: center;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px 14px;
+          justify-content: space-between;
+          margin-top: 4px;
+        }
+
+        .bw-games-home-card-foot span {
+          color: var(--green-dark);
+          font-size: 12px;
+          font-weight: 850;
+          line-height: 1.2;
+        }
+
+        .bw-games-home-card-foot a {
+          color: var(--green);
+          font-size: 13px;
+          font-weight: 900;
+          line-height: 1.2;
+          text-decoration: none;
         }
 
         @media (min-width: 1040px) {
-          .bw-battle-home-inner {
+          .bw-games-home-inner {
             align-items: center;
-            grid-template-columns: minmax(0, 0.88fr) minmax(510px, 1.12fr);
+            grid-template-columns: minmax(0, 0.82fr) minmax(560px, 1.18fr);
           }
 
-          .bw-battle-home-modes {
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-          }
-
-          .bw-battle-mode strong {
-            font-size: 12px;
+          .bw-games-home-card:nth-child(2) {
+            margin-left: 34px;
           }
         }
 
         @media (min-width: 1180px) {
-          .bw-battle-home-inner {
+          .bw-games-home-inner {
             margin-left: max(24px, calc((100vw - 1700px) / 2));
             margin-right: auto;
             max-width: none;
-            width: min(1400px, calc(100vw - 340px));
+            width: min(1320px, calc(100vw - 340px));
           }
         }
 
         @media (min-width: 1640px) {
-          .bw-battle-home-inner {
-            width: min(1500px, calc(100vw - 370px));
+          .bw-games-home-inner {
+            width: min(1440px, calc(100vw - 370px));
           }
         }
 
         @media (max-width: 940px) {
-          .bw-battle-home {
+          .bw-games-home {
             padding: 58px 18px;
-          }
-
-          .bw-battle-home-modes {
-            grid-template-columns: repeat(auto-fit, minmax(min(100%, 148px), 1fr));
           }
         }
 
-        @media (max-width: 620px) {
-          .bw-battle-home {
+        @media (max-width: 680px) {
+          .bw-games-home {
             padding: 48px 14px;
           }
 
-          .bw-battle-home-title {
+          .bw-games-home-inner {
+            width: min(100%, calc(100vw - 28px));
+          }
+
+          .bw-games-home-title {
             font-size: clamp(34px, 11vw, 48px);
           }
 
-          .bw-battle-home-actions,
-          .bw-battle-home-btn {
+          .bw-games-home-actions,
+          .bw-games-home-btn {
             width: 100%;
           }
 
-          .bw-battle-home-btn {
+          .bw-games-home-btn {
             padding-left: 14px;
             padding-right: 14px;
           }
 
-          .bw-battle-home-modes {
-            gap: 10px;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+          .bw-games-home-card {
+            grid-template-columns: minmax(0, 1fr);
           }
 
-          .bw-battle-mode-copy {
-            min-height: 56px;
-            padding: 9px 10px 10px;
+          .bw-games-home-card-image img {
+            aspect-ratio: 16 / 9;
+            height: auto;
+            min-height: 0;
           }
 
-          .bw-battle-mode strong {
-            font-size: 12px;
+          .bw-games-home-card-body {
+            padding: 16px 16px 15px;
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .bw-battle-home *,
-          .bw-battle-home *::before,
-          .bw-battle-home *::after {
+          .bw-games-home *,
+          .bw-games-home *::before,
+          .bw-games-home *::after {
             scroll-behavior: auto !important;
             transition-duration: 0.01ms !important;
           }
         }
       </style>
-      <section class="bw-battle-home" aria-labelledby="bw-battle-home-title">
-        <div class="bw-battle-home-inner">
-          <div class="bw-battle-home-copy">
-            <span class="bw-battle-home-kicker">BerlinWalk game</span>
-            <h2 class="bw-battle-home-title" id="bw-battle-home-title">Find your Berlin winner before the walk.</h2>
-            <p class="bw-battle-home-lead">Choose from 10 Berlin battles: food, districts, museums, nightlife, transport, clubs, döner, currywurst, parks, lakes and train lines. Get a personal winner, then come walk the real city with me.</p>
-            <div class="bw-battle-home-actions">
-              <a class="bw-battle-home-btn bw-battle-home-btn-primary" href="${BW_BATTLE_HOME_GAME_URL}">Play Berlin Battle</a>
-              <a class="bw-battle-home-btn bw-battle-home-btn-secondary" href="${BW_BATTLE_HOME_BOOKING_URL}">Book the walking tour</a>
+      <section class="bw-games-home" aria-labelledby="bw-games-home-title">
+        <div class="bw-games-home-inner">
+          <div class="bw-games-home-copy">
+            <span class="bw-games-home-kicker">BerlinWalk games</span>
+            <h2 class="bw-games-home-title" id="bw-games-home-title">Play Berlin before you walk it.</h2>
+            <p class="bw-games-home-lead">Three quick games for different Berlin moods: pick your city winner, face the club door, or try to make Berlin almost smile. Then come walk the real city with me.</p>
+            <div class="bw-games-home-actions">
+              <a class="bw-games-home-btn bw-games-home-btn-primary" href="${BW_GAMES_HOME_URL}">See all games</a>
+              <a class="bw-games-home-btn bw-games-home-btn-secondary" href="${BW_GAMES_HOME_BOOKING_URL}">Book the walking tour</a>
             </div>
           </div>
-          <div class="bw-battle-home-modes" aria-label="Berlin Battle modes">
-            ${modeCards}
+          <div class="bw-games-home-grid" aria-label="BerlinWalk games">
+            ${gameCards}
           </div>
         </div>
       </section>
@@ -424,7 +441,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
   }
 
   _observeEntrance() {
-    const section = this.querySelector('.bw-battle-home');
+    const section = this.querySelector('.bw-games-home');
     if (!section) return;
     const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion || !('IntersectionObserver' in window)) {
@@ -439,6 +456,19 @@ class BWBerlinBattleHomeElement extends HTMLElement {
       });
     }, { threshold: 0.25 });
     this._observer.observe(section);
+  }
+
+  _escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  _escapeAttribute(value) {
+    return this._escapeHtml(value);
   }
 }
 
