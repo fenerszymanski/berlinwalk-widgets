@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-24T02:03:17.819Z",
+  "updatedAt": "2026-06-24T04:55:59.744Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 137,
+  "totalPosts": 138,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -448,6 +448,23 @@
           "relatedToolSlug": "berlin-shopping-areas"
         },
         {
+          "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
+          "slug": "berlin-ber-airport-departure-guide",
+          "path": "/post/berlin-ber-airport-departure-guide",
+          "url": "https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide",
+          "excerpt": "A practical Berlin BER Airport departure guide for tourists leaving the city: timing, trains, terminals, security, liquids, power banks and the mistakes that make the last morning stressful.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "9 min read",
+          "publishedDate": "2026-06-24T04:53:16.148Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
+          "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front",
+          "relatedToolSlug": "berlin-ber-airport-departure-planner"
+        },
+        {
           "title": "Alternative Transport in Berlin: MILES, Scooters, Bikes and Ride Apps",
           "slug": "alternative-transport-berlin",
           "path": "/post/alternative-transport-berlin",
@@ -480,23 +497,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
           "alt": "Zoo Berlin Elephant Gate entrance in a Zoo Berlin vs Tierpark Berlin visitor comparison",
           "relatedToolSlug": ""
-        },
-        {
-          "title": "Berlin Night Transport: How to Get Around After Midnight",
-          "slug": "berlin-night-transport",
-          "path": "/post/berlin-night-transport",
-          "url": "https://www.berlinwalk.com/post/berlin-night-transport",
-          "excerpt": "A practical tourist guide to Berlin night transport after midnight, with weekday vs weekend rules, night buses, tickets, safety habits, taxi fallbacks and a visual timeline.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "6 min read",
-          "publishedDate": "2026-06-19T06:55:28.241Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg",
-          "alt": "Alexanderplatz at night with U-Bahn sign, TV Tower and blurred tram, showing Berlin night transport",
-          "relatedToolSlug": "berlin-night-transport-checker"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
+      "slug": "berlin-ber-airport-departure-guide",
+      "path": "/post/berlin-ber-airport-departure-guide",
+      "url": "https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide",
+      "excerpt": "A practical Berlin BER Airport departure guide for tourists leaving the city: timing, trains, terminals, security, liquids, power banks and the mistakes that make the last morning stressful.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-06-24T04:53:16.148Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
+      "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front",
+      "relatedToolSlug": "berlin-ber-airport-departure-planner"
+    },
+    {
       "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
       "slug": "grocery-shopping-in-berlin",
       "path": "/post/grocery-shopping-in-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_ba65ce2b9671495da22d925072049547~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-hauptbahnhof-guide-cover.jpg",
       "alt": "The glass entrance of Berlin Hauptbahnhof on a clear day, used as the cover for a tourist arrival guide",
       "relatedToolSlug": "berlin-luggage-storage"
-    },
-    {
-      "title": "Berlin Public Holidays 2026: What Tourists Need to Know",
-      "slug": "berlin-public-holidays-2026",
-      "path": "/post/berlin-public-holidays-2026",
-      "url": "https://www.berlinwalk.com/post/berlin-public-holidays-2026",
-      "excerpt": "A practical tourist guide to Berlin public holidays in 2026, including exact dates, shop closures, museum hours, transport, food backups and what to do instead.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-15T04:50:37.270Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_fd39177ba4ab4339808a13256579016b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin_Public_Holidays_Hero.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_fd39177ba4ab4339808a13256579016b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin_Public_Holidays_Hero.jpg",
-      "alt": "Berlin skyline with cathedral and TV tower, German flag waving, a river boat below, and pink blossoms in the foreground",
-      "relatedToolSlug": "berlin-public-holiday-checker"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
+      "slug": "berlin-ber-airport-departure-guide",
+      "path": "/post/berlin-ber-airport-departure-guide",
+      "url": "https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide",
+      "excerpt": "A practical Berlin BER Airport departure guide for tourists leaving the city: timing, trains, terminals, security, liquids, power banks and the mistakes that make the last morning stressful.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-06-24T04:53:16.148Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
+      "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front",
+      "relatedToolSlug": "berlin-ber-airport-departure-planner"
+    },
     {
       "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
       "slug": "grocery-shopping-in-berlin",

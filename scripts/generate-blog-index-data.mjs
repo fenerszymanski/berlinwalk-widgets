@@ -470,6 +470,7 @@ function relatedToolSlugFor(post) {
   if (/(späti|spaeti|spati|late-night|late night|sunday rules|corner shop)/.test(s)) return 'spati-survival-checker';
   if (/(luggage|storage|suitcase)/.test(s)) return 'berlin-luggage-storage';
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
+  if (/(berlin-ber-airport-departure-guide|ber airport departure|airport departure|berlin airport security|ber departure)/.test(s)) return 'berlin-ber-airport-departure-planner';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';
   if (/(public-holiday|public holiday|public-holidays|public holidays|bank-holiday|bank holiday|holiday-closures|holiday closures|shop-closures|shop closures|shops-closed|shops closed)/.test(s)) return 'berlin-public-holiday-checker';
