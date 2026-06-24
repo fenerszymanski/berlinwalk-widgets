@@ -3728,16 +3728,16 @@
     "title": "Grocery Shopping in Berlin - FAQ",
     "subtitle": "Quick answers for tourists buying food, basics and picnic supplies in Berlin.",
     "items": [
-    {
-      "q": "What is the best supermarket for grocery shopping in Berlin?",
-      "a": "For most tourists, REWE and Edeka are the easiest all-round supermarkets. Aldi, Lidl, Netto and Penny are usually better for budget basics. Bio Company, Alnatura and Denns are better when organic food matters more than price."
-    },
-    {
-      "q": "Why are there two different Netto supermarkets in Berlin?",
-      "a": "Berlin has Netto Marken-Discount, the red-and-yellow German discount chain connected with Edeka, and Netto with the Scottie dog, the yellow-and-black Netto under Denmark's Salling Group. They are different companies, so the grocery map separates them when OpenStreetMap tags make the distinction clear."
-    },
-    {
-      "q": "Are Berlin supermarkets open on Sunday?",
+      {
+        "q": "What is the best supermarket for grocery shopping in Berlin?",
+        "a": "For most tourists, REWE and Edeka are the easiest all-round supermarkets. Aldi, Lidl, Netto and Penny are usually better for budget basics. Bio Company, Alnatura and Denns are better when organic food matters more than price."
+      },
+      {
+        "q": "Why are there two different Netto supermarkets in Berlin?",
+        "a": "Berlin has Netto Marken-Discount, the red-and-yellow German discount chain connected with Edeka, and Netto with the Scottie dog, the yellow-and-black Netto under Denmark's Salling Group. They are different companies, so the grocery map separates them when OpenStreetMap tags make the distinction clear."
+      },
+      {
+        "q": "Are Berlin supermarkets open on Sunday?",
         "a": "Most regular Berlin supermarkets close on Sundays and public holidays. The useful exceptions are selected supermarkets at major train stations and BER Airport, plus gas stations, delivery services and Spätis for limited basics."
       },
       {
@@ -3755,6 +3755,40 @@
       {
         "q": "Where should I buy groceries near the BerlinWalk route?",
         "a": "Around Alexanderplatz and Hackescher Markt, use normal supermarkets or station options before Sunday becomes a problem. The BerlinWalk route lasts about **2 hours**, so a small water-and-snack run before or after the walk is enough."
+      }
+    ]
+  },
+  "berlin-ber-airport-departure-guide": {
+    "title": "Berlin BER Airport Departure Guide - FAQ",
+    "subtitle": "Quick answers for tourists flying out of Berlin Brandenburg Airport.",
+    "items": [
+      {
+        "q": "How early should I arrive at Berlin BER Airport?",
+        "a": "For a simple Schengen flight with hand baggage, about 2 hours before departure is a sensible target. For long-haul, non-Schengen, checked-bag, family or paperwork-heavy departures, plan closer to 2.5 to 3 hours."
+      },
+      {
+        "q": "Which train ticket do I need to get to BER Airport?",
+        "a": "BER Airport is in fare zone C. From central Berlin, most visitors need an ABC ticket unless their travel pass already includes zone C."
+      },
+      {
+        "q": "Is Terminal 2 far from the BER airport train station?",
+        "a": "The airport station is underneath Terminal 1. Terminal 2 is reachable on foot in a few minutes, but you should still add a small buffer if you have luggage, children or a tight boarding time."
+      },
+      {
+        "q": "Can I use any security control at BER?",
+        "a": "BER says passengers can use any security control in Terminal 1 or Terminal 2, and all departure gates are reachable from every security control. Check airport monitors and the BER app for current waiting-time information."
+      },
+      {
+        "q": "Do liquids still need to be 100 ml at BER Airport?",
+        "a": "The safest tourist habit is yes: pack liquids in containers of maximum 100 ml inside a 1-liter bag. Some BER lanes have newer CT scanners, but the airport still recommends following the general 100 ml rule because you cannot predict which checkpoint you will use."
+      },
+      {
+        "q": "Can electronics stay in my bag at BER security?",
+        "a": "At newer CT scanner lanes, electronics can generally stay in your hand baggage. At conventional lanes, electronics should be placed separately in the tray. Pack so you can handle either process quickly."
+      },
+      {
+        "q": "Can I visit BerlinWalk before flying out of BER?",
+        "a": "Yes, if your flight is later and your airport buffer is comfortable. The BerlinWalk tour lasts about 2 hours, so it is not a good fit before a tight midday or early-afternoon departure."
       }
     ]
   }
