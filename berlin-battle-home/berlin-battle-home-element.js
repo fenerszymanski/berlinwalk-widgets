@@ -9,7 +9,7 @@ const BW_GAMES_HOME_ROOT = (() => {
 
 const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
 const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
-const BW_GAMES_HOME_ASSET_VERSION = 'games-home-three-games-20260624';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-compact-20260624';
 
 const BW_GAMES_HOME_ITEMS = [
   {
@@ -95,7 +95,25 @@ class BWBerlinBattleHomeElement extends HTMLElement {
       <style>
         bw-berlin-battle-home {
           display: block;
+          height: auto !important;
+          min-height: 0 !important;
           width: 100%;
+        }
+
+        #comp-mqew6dkh,
+        #comp-mqew6dkh .comp-mqew6dkh-container,
+        #comp-mqew6lnt,
+        section:has(bw-berlin-battle-home),
+        section:has(bw-berlin-battle-home) > .max-width-container,
+        [id^="comp-"]:has(> bw-berlin-battle-home),
+        [id^="comp-"]:has(bw-berlin-battle-home) {
+          height: auto !important;
+          min-height: 0 !important;
+        }
+
+        #comp-mqew6dkh .comp-mqew6dkh-container,
+        section:has(bw-berlin-battle-home) > .max-width-container {
+          grid-template-rows: auto !important;
         }
 
         .bw-games-home {
@@ -118,7 +136,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           margin: 0 calc((100% - 100vw) / 2);
           max-width: 100vw;
           overflow: hidden;
-          padding: clamp(52px, 6vw, 78px) 24px;
+          padding: clamp(34px, 4.6vw, 54px) 24px;
           position: relative;
           width: 100vw;
         }
@@ -149,7 +167,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
 
         .bw-games-home-inner {
           display: grid;
-          gap: clamp(28px, 4vw, 54px);
+          gap: clamp(22px, 3vw, 34px);
           grid-template-columns: minmax(0, 1fr);
           margin: 0 auto;
           max-width: 1240px;
@@ -174,21 +192,21 @@ class BWBerlinBattleHomeElement extends HTMLElement {
 
         .bw-games-home-title {
           color: var(--green);
-          font-size: clamp(40px, 5.2vw, 76px);
+          font-size: clamp(34px, 4.2vw, 54px);
           font-weight: 900;
           letter-spacing: 0;
-          line-height: 0.94;
-          margin-bottom: 18px;
-          max-width: 660px;
+          line-height: 0.98;
+          margin-bottom: 14px;
+          max-width: 520px;
         }
 
         .bw-games-home-lead {
           color: var(--muted);
-          font-size: clamp(17px, 1.55vw, 21px);
+          font-size: clamp(16px, 1.35vw, 18px);
           font-weight: 650;
-          line-height: 1.48;
-          margin-bottom: 26px;
-          max-width: 620px;
+          line-height: 1.42;
+          margin-bottom: 20px;
+          max-width: 520px;
         }
 
         .bw-games-home-actions {
@@ -282,7 +300,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
         .bw-games-home-card-image img {
           display: block;
           height: 100%;
-          min-height: 154px;
+          min-height: 136px;
           object-fit: cover;
           width: 100%;
         }
@@ -291,7 +309,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           display: grid;
           gap: 8px;
           min-width: 0;
-          padding: 18px 18px 16px;
+          padding: 15px 16px 14px;
         }
 
         .bw-games-home-card-kicker {
@@ -345,20 +363,20 @@ class BWBerlinBattleHomeElement extends HTMLElement {
         @media (min-width: 1040px) {
           .bw-games-home-inner {
             align-items: center;
-            grid-template-columns: minmax(0, 0.82fr) minmax(560px, 1.18fr);
+            grid-template-columns: minmax(350px, 0.72fr) minmax(500px, 1.28fr);
           }
 
           .bw-games-home-card:nth-child(2) {
-            margin-left: 34px;
+            margin-left: 18px;
           }
         }
 
         @media (min-width: 1180px) {
           .bw-games-home-inner {
-            margin-left: max(24px, calc((100vw - 1700px) / 2));
+            margin-left: max(24px, calc((100vw - 1560px) / 2));
             margin-right: auto;
             max-width: none;
-            width: min(1320px, calc(100vw - 340px));
+            width: min(1180px, calc(100vw - 260px));
           }
         }
 

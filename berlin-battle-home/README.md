@@ -10,7 +10,7 @@ Use on Wix:
 
 ```html
 <bw-berlin-battle-home></bw-berlin-battle-home>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-home/berlin-battle-home-element.js?v=games-home-three-games-20260624"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-battle-home/berlin-battle-home-element.js?v=games-home-compact-20260624"></script>
 ```
 
 Recommended placement: after the planning/tools area and before the editorial
