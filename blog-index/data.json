@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-23T07:34:34.835Z",
+  "updatedAt": "2026-06-24T02:03:17.819Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 137,
@@ -78,6 +78,23 @@
         "relatedToolSlug": "berlin-mobility-app-picker"
       },
       {
+        "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
+        "slug": "grocery-shopping-in-berlin",
+        "path": "/post/grocery-shopping-in-berlin",
+        "url": "https://www.berlinwalk.com/post/grocery-shopping-in-berlin",
+        "excerpt": "A practical Berlin supermarket guide for tourists: where to buy food, what closes on Sunday, when to use REWE, Edeka, Aldi, Lidl, dm, a Späti or a station supermarket.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "9 min read",
+        "publishedDate": "2026-06-23T07:31:14.456Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+        "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates",
+        "relatedToolSlug": "berlin-shopping-areas"
+      },
+      {
         "title": "Pharmacy in Berlin: How to Find Medicine, Emergency Pharmacies and Medical Help",
         "slug": "pharmacy-in-berlin",
         "path": "/post/pharmacy-in-berlin",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
         "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
         "relatedToolSlug": "watch-world-cup-2026-berlin"
-      },
-      {
-        "title": "Berlin Public Transport 2026: U-Bahn, S-Bahn, Tram & Bus (Tourist Guide)",
-        "slug": "berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
-        "path": "/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
-        "url": "https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
-        "excerpt": "Berlin's U-Bahn, S-Bahn, tram, and bus all use one ticket system. Learn which zones, tickets, and prices you need as a tourist in 2026 — plus where to buy, night transport, and getting to BER Airport.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-04-06T08:06:27.973Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
-        "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text. Ceiling lights illuminate the platform.",
-        "relatedToolSlug": "transport-ticket-calculator"
       }
     ]
   },
@@ -307,7 +307,7 @@
       "slug": "what-to-wear-to-berlin-clubs",
       "path": "/post/what-to-wear-to-berlin-clubs",
       "url": "https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs",
-      "excerpt": "Berlin does not have one club dress code. This practical guide explains what to wear to Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more, with Door Difficulty ratings and a Club Picker.",
+      "excerpt": "A practical Berlin club dress-code guide by BerlinWalk: Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more. Includes door difficulty ratings, outfit tips, what to avoid, and a Club Picker.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "food-nightlife",
@@ -525,6 +525,23 @@
           "relatedToolSlug": "pharmacy-in-berlin-helper"
         },
         {
+          "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
+          "slug": "grocery-shopping-in-berlin",
+          "path": "/post/grocery-shopping-in-berlin",
+          "url": "https://www.berlinwalk.com/post/grocery-shopping-in-berlin",
+          "excerpt": "A practical Berlin supermarket guide for tourists: where to buy food, what closes on Sunday, when to use REWE, Edeka, Aldi, Lidl, dm, a Späti or a station supermarket.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "9 min read",
+          "publishedDate": "2026-06-23T07:31:14.456Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+          "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates",
+          "relatedToolSlug": "berlin-shopping-areas"
+        },
+        {
           "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
           "slug": "where-to-watch-2026-world-cup-in-berlin",
           "path": "/post/where-to-watch-2026-world-cup-in-berlin",
@@ -659,23 +676,6 @@
           "thumb": "https://static.wixstatic.com/media/nsplsh_a9f74043f82e4399b3a5f71cbe78fdff~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-3YSDTzqnVtQ.jpg",
           "alt": "Card Payment",
           "relatedToolSlug": "berlin-daily-budget"
-        },
-        {
-          "title": "Shopping in Berlin: Where to Actually Shop in 2026 (A Local Guide)",
-          "slug": "shopping-in-berlin",
-          "path": "/post/shopping-in-berlin",
-          "url": "https://www.berlinwalk.com/post/shopping-in-berlin",
-          "excerpt": "Forget the luxury-mall clichés. Where to actually shop in Berlin, from a local guide: famous streets, concept stores, vintage, flea markets, souvenirs, and the practical rules.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "5 min read",
-          "publishedDate": "2026-06-01T10:30:41Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_5a8c23b571f44144825e3d3c6029eb9e~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-shopping-hero.jpeg",
-          "alt": "Woman in beige coat walks down a Berlin shopping street past clothing racks, with the TV Tower in the background.",
-          "relatedToolSlug": "berlin-shopping-areas"
         }
       ]
     },
@@ -1313,7 +1313,7 @@
           "slug": "what-to-wear-to-berlin-clubs",
           "path": "/post/what-to-wear-to-berlin-clubs",
           "url": "https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs",
-          "excerpt": "Berlin does not have one club dress code. This practical guide explains what to wear to Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more, with Door Difficulty ratings and a Club Picker.",
+          "excerpt": "A practical Berlin club dress-code guide by BerlinWalk: Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more. Includes door difficulty ratings, outfit tips, what to avoid, and a Club Picker.",
           "category": "Tourist Tips",
           "categorySlug": "tourist-tips",
           "topic": "food-nightlife",
@@ -2450,7 +2450,7 @@
       "slug": "what-to-wear-to-berlin-clubs",
       "path": "/post/what-to-wear-to-berlin-clubs",
       "url": "https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs",
-      "excerpt": "Berlin does not have one club dress code. This practical guide explains what to wear to Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more, with Door Difficulty ratings and a Club Picker.",
+      "excerpt": "A practical Berlin club dress-code guide by BerlinWalk: Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more. Includes door difficulty ratings, outfit tips, what to avoid, and a Club Picker.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "food-nightlife",
