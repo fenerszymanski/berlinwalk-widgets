@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-25T12:15:51.271Z",
+  "updatedAt": "2026-06-25T21:07:34.971Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 142,
+  "totalPosts": 143,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -448,6 +448,23 @@
           "relatedToolSlug": "berlin-shopping-areas"
         },
         {
+          "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
+          "slug": "berlin-public-transport-ferries",
+          "path": "/post/berlin-public-transport-ferries",
+          "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
+          "excerpt": "A practical guide to Berlin public transport ferries: which BVG ferry tourists should choose, what tickets work, when F10 is worth it and when a Spree cruise is better.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-25T21:06:33.128Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
+          "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
+          "relatedToolSlug": "berlin-public-transport-ferry-picker"
+        },
+        {
           "title": "Tickets for Berlin Boat Tours & Spree Cruises: A Local's Guide",
           "slug": "tickets-boat-tours-river-cruises-berlin",
           "path": "/post/tickets-boat-tours-river-cruises-berlin",
@@ -480,23 +497,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
           "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front",
           "relatedToolSlug": "berlin-ber-airport-departure-planner"
-        },
-        {
-          "title": "Alternative Transport in Berlin: MILES, Scooters, Bikes and Ride Apps",
-          "slug": "alternative-transport-berlin",
-          "path": "/post/alternative-transport-berlin",
-          "url": "https://www.berlinwalk.com/post/alternative-transport-berlin",
-          "excerpt": "A practical tourist guide to Berlin mobility apps, MILES-style car sharing, e-scooters, bike sharing, taxi apps and the map tools that make them useful.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "10 min read",
-          "publishedDate": "2026-06-21T06:24:02.326Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
-          "alt": "Mobility Hub at Berlin Sudkreuz with shared scooters, bikes, mopeds and Jelbi signage",
-          "relatedToolSlug": "berlin-mobility-app-picker"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
+      "slug": "berlin-public-transport-ferries",
+      "path": "/post/berlin-public-transport-ferries",
+      "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
+      "excerpt": "A practical guide to Berlin public transport ferries: which BVG ferry tourists should choose, what tickets work, when F10 is worth it and when a Spree cruise is better.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-25T21:06:33.128Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
+      "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
+      "relatedToolSlug": "berlin-public-transport-ferry-picker"
+    },
+    {
       "title": "Tränenpalast Berlin: The Free Cold War Museum Tourists Shouldn't Skip",
       "slug": "traenenpalast-berlin",
       "path": "/post/traenenpalast-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg",
       "alt": "Alexanderplatz at night with U-Bahn sign, TV Tower and blurred tram, showing Berlin night transport",
       "relatedToolSlug": "berlin-night-transport-checker"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Too Hot in Berlin? How to Plan a Smart Berlin Heatwave Day",
-      "slug": "berlin-heatwave-day-plan",
-      "path": "/post/berlin-heatwave-day-plan",
-      "url": "https://www.berlinwalk.com/post/berlin-heatwave-day-plan",
-      "excerpt": "A practical Berlin heatwave guide for tourists: when to walk, where to cool down, what to expect from public transport air conditioning, and how to use Berlin water, lake and pool tools.",
+      "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
+      "slug": "berlin-public-transport-ferries",
+      "path": "/post/berlin-public-transport-ferries",
+      "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
+      "excerpt": "A practical guide to Berlin public transport ferries: which BVG ferry tourists should choose, what tickets work, when F10 is worth it and when a Spree cruise is better.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
       "readTime": "6 min read",
-      "publishedDate": "2026-06-18T17:28:12.475Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
-      "alt": "The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day",
-      "relatedToolSlug": ""
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-06-25T21:06:33.128Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
+      "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
+      "relatedToolSlug": "berlin-public-transport-ferry-picker"
+    },
     {
       "title": "Tränenpalast Berlin: The Free Cold War Museum Tourists Shouldn't Skip",
       "slug": "traenenpalast-berlin",

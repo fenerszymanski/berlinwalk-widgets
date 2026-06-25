@@ -189,6 +189,7 @@ const REQUIRED_SLUGS = [
   // default window so the curated hero/rail survives a regen.
   'berlin-heatwave-day-plan',
   'berlin-ber-airport-departure-guide',
+  'berlin-public-transport-ferries',
   'charlottenburg-palace-berlin',
   'grocery-shopping-in-berlin',
   'pharmacy-in-berlin',
@@ -478,6 +479,7 @@ function relatedToolSlugFor(post) {
   if (/(berlin-ber-airport-departure-guide|ber airport departure|airport departure|berlin airport security|ber departure)/.test(s)) return 'berlin-ber-airport-departure-planner';
   if (/(charlottenburg-palace-berlin|charlottenburg palace|schloss charlottenburg)/.test(s)) return 'charlottenburg-palace-visit-planner';
   if (/(traenenpalast-berlin|tränenpalast|traenenpalast|palace of tears|friedrichstrasse border crossing|friedrichstraße border crossing)/.test(s)) return 'traenenpalast-visit-planner';
+  if (/(berlin-public-transport-ferries|public transport ferries|bvg ferry|f10 ferry|wannsee ferry|f24 rowboat)/.test(s)) return 'berlin-public-transport-ferry-picker';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';
   if (/(public-holiday|public holiday|public-holidays|public holidays|bank-holiday|bank holiday|holiday-closures|holiday closures|shop-closures|shop closures|shops-closed|shops closed)/.test(s)) return 'berlin-public-holiday-checker';
