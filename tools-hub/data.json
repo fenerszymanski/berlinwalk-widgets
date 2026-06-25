@@ -1748,6 +1748,39 @@
       "iconStatus": "live-wix-media",
       "relatedBlog": "/post/charlottenburg-palace-berlin",
       "cmsItemId": "43ab7783-8556-40a8-911d-695c91dced23"
+    },
+    {
+      "slug": "traenenpalast-visit-planner",
+      "title": "Tränenpalast Visit Planner",
+      "lead": "Choose the right Cold War stop for your day: Tränenpalast, Berlin Wall Memorial, Checkpoint Charlie, Topography of Terror or East Side Gallery.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_67d7663e734c4e2f8888b3274704a9a4~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/traenenpalast-visit-planner/",
+      "embedHeight": 1120,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "priority": 14,
+      "tags": [
+        "traenenpalast",
+        "palace of tears",
+        "cold war",
+        "berlin wall",
+        "friedrichstrasse",
+        "museum",
+        "history",
+        "planner"
+      ],
+      "aliases": [
+        "palace of tears berlin",
+        "traenenpalast berlin",
+        "tränenpalast berlin",
+        "cold war museum berlin",
+        "friedrichstrasse border crossing"
+      ],
+      "published": true,
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/traenenpalast-berlin",
+      "cmsItemId": "19b71f33-58a4-4a5c-8dd0-9012d593f1da"
     }
   ],
   "hubCategories": [

@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tränenpalast Visit Planner | BerlinWalk</title>
+  <meta name="description" content="Choose whether to visit Tränenpalast, Berlin Wall Memorial, Checkpoint Charlie, Topography of Terror or East Side Gallery on your Berlin trip.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-traenenpalast-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-traenenpalast-planner {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-traenenpalast-planner *,
+    #bw-traenenpalast-planner *::before,
+    #bw-traenenpalast-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-traenenpalast-planner .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-traenenpalast-planner .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.14), rgba(124, 179, 66, 0.24)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-traenenpalast-planner .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-traenenpalast-planner h2,
+    #bw-traenenpalast-planner h3,
+    #bw-traenenpalast-planner p {
+      margin-top: 0;
+    }
+
+    #bw-traenenpalast-planner .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-traenenpalast-planner .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 820px;
+    }
+
+    #bw-traenenpalast-planner .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(260px, 0.86fr) minmax(0, 1.14fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-traenenpalast-planner .bw-panel,
+    #bw-traenenpalast-planner .bw-result,
+    #bw-traenenpalast-planner .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-traenenpalast-planner .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-traenenpalast-planner label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-traenenpalast-planner .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-traenenpalast-planner select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-traenenpalast-planner select:focus-visible,
+    #bw-traenenpalast-planner a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-traenenpalast-planner .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-traenenpalast-planner .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-traenenpalast-planner .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-traenenpalast-planner .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-traenenpalast-planner .bw-result p,
+    #bw-traenenpalast-planner li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-traenenpalast-planner .bw-stats,
+    #bw-traenenpalast-planner .bw-steps,
+    #bw-traenenpalast-planner .bw-links {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-traenenpalast-planner .bw-stat,
+    #bw-traenenpalast-planner .bw-step,
+    #bw-traenenpalast-planner .bw-link {
+      background: #F8FBF1;
+      border: 1px solid rgba(27, 94, 32, 0.12);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-traenenpalast-planner .bw-stat strong,
+    #bw-traenenpalast-planner .bw-step strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-traenenpalast-planner .bw-stat span,
+    #bw-traenenpalast-planner .bw-step span {
+      color: var(--bw-text);
+      display: block;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    #bw-traenenpalast-planner .bw-reasons {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    #bw-traenenpalast-planner .bw-map {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-traenenpalast-planner .bw-card h3 {
+      color: var(--bw-green);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0 0 6px;
+    }
+
+    #bw-traenenpalast-planner .bw-card p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-traenenpalast-planner .bw-link {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+
+    #bw-traenenpalast-planner .bw-link span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-traenenpalast-planner {
+        margin: 18px 0;
+      }
+
+      #bw-traenenpalast-planner .bw-head {
+        padding: 18px 16px;
+      }
+
+      #bw-traenenpalast-planner .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-traenenpalast-planner .bw-body {
+        display: block;
+        padding: 14px;
+      }
+
+      #bw-traenenpalast-planner .bw-panel {
+        margin-bottom: 14px;
+      }
+
+      #bw-traenenpalast-planner .bw-stats,
+      #bw-traenenpalast-planner .bw-steps,
+      #bw-traenenpalast-planner .bw-links,
+      #bw-traenenpalast-planner .bw-map {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-head">
+      <p class="bw-kicker">BERLINWALK TOOL</p>
+      <h2 class="bw-title">Tränenpalast Visit Planner</h2>
+      <p class="bw-sub">Pick your time, mood and starting point to choose the right Cold War stop: Tränenpalast, Berlin Wall Memorial, Checkpoint Charlie, Topography of Terror or East Side Gallery.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Visit inputs">
+        <form class="bw-form">
+          <label>
+            <span class="bw-label">Time today</span>
+            <select id="bw-time">
+              <option value="45">45 minutes or less</option>
+              <option value="75" selected>About 1 hour</option>
+              <option value="120">2 hours</option>
+              <option value="halfday">Half day</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">What you want most</span>
+            <select id="bw-interest">
+              <option value="human" selected>The human story of crossing</option>
+              <option value="system">The full Wall border system</option>
+              <option value="photo">The iconic photo stop</option>
+              <option value="outdoor">A mostly outdoor stop</option>
+              <option value="hardhistory">A heavier 20th-century history visit</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Starting point</span>
+            <select id="bw-start">
+              <option value="friedrich" selected>Friedrichstraße / Museum Island</option>
+              <option value="gate">Brandenburg Gate / Reichstag</option>
+              <option value="alex">Alexanderplatz / Hackescher Markt</option>
+              <option value="eastside">East Side Gallery area</option>
+              <option value="unknown">Not sure yet</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Travel style</span>
+            <select id="bw-style">
+              <option value="light" selected>Light and central</option>
+              <option value="deep">I want depth</option>
+              <option value="kids">Short attention span / kids</option>
+              <option value="rain">Rainy day backup</option>
+            </select>
+          </label>
+        </form>
+        <p class="bw-note">Opening hours can change. Treat this as a planning tool, then check the official page before you leave.</p>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="bw-pill">Best first stop</span>
+        <h3 id="bw-result-title">Start with Tränenpalast</h3>
+        <p id="bw-result-text">It is free, central, indoors and strong when you want the emotional side of divided Berlin without turning the whole day into a Wall itinerary.</p>
+
+        <div class="bw-stats" aria-label="Recommendation details">
+          <div class="bw-stat">
+            <strong>Time</strong>
+            <span id="bw-stat-time">45-75 min</span>
+          </div>
+          <div class="bw-stat">
+            <strong>Cost</strong>
+            <span id="bw-stat-cost">Free</span>
+          </div>
+          <div class="bw-stat">
+            <strong>Nearest stop</strong>
+            <span id="bw-stat-stop">S+U Friedrichstraße</span>
+          </div>
+        </div>
+
+        <ul class="bw-reasons" id="bw-reasons"></ul>
+
+        <div class="bw-steps" aria-label="Simple route">
+          <div class="bw-step">
+            <strong>Before</strong>
+            <span id="bw-before">Check today&apos;s hours.</span>
+          </div>
+          <div class="bw-step">
+            <strong>There</strong>
+            <span id="bw-there">Use the free audio guide if you want more context.</span>
+          </div>
+          <div class="bw-step">
+            <strong>After</strong>
+            <span id="bw-after">Walk toward the Spree or Museum Island.</span>
+          </div>
+        </div>
+
+        <div class="bw-links" aria-label="Helpful links">
+          <a class="bw-link" href="https://www.hdg.de/en/traenenpalast/visitor-information" target="_blank" rel="noopener">Official Tränenpalast hours<span>Haus der Geschichte</span></a>
+          <a class="bw-link" href="https://www.berlinwalk.com/post/cold-war-berlin-in-5-key-locations-you-can-still-visit" target="_blank" rel="noopener">Cold War Berlin guide<span>Compare the major stops</span></a>
+          <a class="bw-link" href="https://www.berlinwalk.com/book-berlin-walking-tour-static/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">BerlinWalk route<span>Historic centre in ~2h</span></a>
+        </div>
+      </section>
+    </div>
+
+    <section class="bw-body" aria-label="Cold War stop comparison">
+      <div class="bw-card">
+        <h3>Tränenpalast</h3>
+        <p>Best for a short, central, emotional visit about crossing, waiting and saying goodbye at Friedrichstraße.</p>
+      </div>
+      <div class="bw-card">
+        <h3>Berlin Wall Memorial</h3>
+        <p>Best for understanding the Wall as a physical border system with death strip, documentation and outdoor remains.</p>
+      </div>
+      <div class="bw-card">
+        <h3>Checkpoint Charlie</h3>
+        <p>Best when you need the famous photo stop, but it works better with context from a quieter site.</p>
+      </div>
+      <div class="bw-card">
+        <h3>East Side Gallery</h3>
+        <p>Best for murals and open-air Wall photos, not for the clearest explanation of how the border worked.</p>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      var picks = {
+        traenenpalast: {
+          pill: 'Best first stop',
+          title: 'Start with Tränenpalast',
+          text: 'It is free, central, indoors and strong when you want the emotional side of divided Berlin without turning the whole day into a Wall itinerary.',
+          time: '45-75 min',
+          cost: 'Free',
+          stop: 'S+U Friedrichstraße',
+          reasons: [
+            'Best match for a short central gap between Museum Island, Unter den Linden and the Reichstag.',
+            'The original passport-control setting makes the story personal, not abstract.',
+            'Works well on rainy days because the main visit is indoors.'
+          ],
+          before: 'Check today&apos;s hours.',
+          there: 'Use the free audio guide if you want more context.',
+          after: 'Walk toward the Spree or Museum Island.'
+        },
+        wall: {
+          pill: 'Better depth',
+          title: 'Choose Berlin Wall Memorial first',
+          text: 'Go to Bernauer Straße if your main question is how the Wall actually worked as a border system, not just what crossing felt like.',
+          time: '90-150 min',
+          cost: 'Free',
+          stop: 'S Nordbahnhof',
+          reasons: [
+            'The outdoor remains, documentation centre and viewing tower give the clearest first explanation.',
+            'It is better than Tränenpalast when you want geography, escape attempts and the death strip.',
+            'Add Tränenpalast later if you still have energy for the human crossing story.'
+          ],
+          before: 'Check documentation centre hours.',
+          there: 'Start outside, then use the exhibition.',
+          after: 'Add Tränenpalast only if you still want more.'
+        },
+        checkpoint: {
+          pill: 'Iconic photo',
+          title: 'Do Checkpoint Charlie quickly, then add context',
+          text: 'Checkpoint Charlie is the famous name, but the current street scene is not the best place to understand divided Berlin on its own.',
+          time: '20-45 min',
+          cost: 'Free outside',
+          stop: 'U Kochstraße',
+          reasons: [
+            'Useful if you mainly want the iconic border-crossing photo stop.',
+            'Keep it short unless you are choosing a paid museum nearby.',
+            'Pair it with Tränenpalast or Berlin Wall Memorial for a clearer story.'
+          ],
+          before: 'Plan it as a short stop.',
+          there: 'Read the free outdoor panels.',
+          after: 'Continue to Tränenpalast or Topography.'
+        },
+        topography: {
+          pill: 'Heavier history',
+          title: 'Choose Topography of Terror first',
+          text: 'If your day is about Nazi terror, state violence and documentation, Topography of Terror is the stronger anchor than Tränenpalast.',
+          time: '75-120 min',
+          cost: 'Free',
+          stop: 'U Kochstraße',
+          reasons: [
+            'Better when your focus is 1933-1945 and the institutions of terror.',
+            'It also has a Wall remnant outside, but it is not primarily a Wall museum.',
+            'Add Tränenpalast on another day for the Cold War crossing story.'
+          ],
+          before: 'Give it enough mental space.',
+          there: 'Read selectively; it is dense.',
+          after: 'Use Checkpoint Charlie only as a short nearby stop.'
+        },
+        eastside: {
+          pill: 'Outdoor murals',
+          title: 'Choose East Side Gallery for Wall art',
+          text: 'Go east if your priority is open-air murals and photos. Choose Tränenpalast if you want the quieter story of border paperwork and farewells.',
+          time: '45-90 min',
+          cost: 'Free',
+          stop: 'S+U Warschauer Straße',
+          reasons: [
+            'Best fit for murals, riverside walking and a looser outdoor plan.',
+            'It is not the clearest first explanation of the border system.',
+            'Bad weather or low energy makes Tränenpalast the easier choice.'
+          ],
+          before: 'Check your weather and daylight.',
+          there: 'Walk the murals slowly.',
+          after: 'Cross Oberbaum Bridge if time allows.'
+        }
+      };
+
+      var fields = {
+        time: document.getElementById('bw-time'),
+        interest: document.getElementById('bw-interest'),
+        start: document.getElementById('bw-start'),
+        style: document.getElementById('bw-style')
+      };
+
+      function choose() {
+        var time = fields.time.value;
+        var interest = fields.interest.value;
+        var start = fields.start.value;
+        var style = fields.style.value;
+
+        if (interest === 'system' || time === 'halfday' || style === 'deep') return 'wall';
+        if (interest === 'photo') return 'checkpoint';
+        if (interest === 'hardhistory') return 'topography';
+        if (interest === 'outdoor' || start === 'eastside') return 'eastside';
+        if (time === '45' || style === 'rain' || style === 'kids') return 'traenenpalast';
+        if (start === 'friedrich' || start === 'gate' || start === 'alex') return 'traenenpalast';
+        return 'traenenpalast';
+      }
+
+      function render() {
+        var pick = picks[choose()];
+        document.getElementById('bw-pill').textContent = pick.pill;
+        document.getElementById('bw-result-title').textContent = pick.title;
+        document.getElementById('bw-result-text').textContent = pick.text;
+        document.getElementById('bw-stat-time').textContent = pick.time;
+        document.getElementById('bw-stat-cost').textContent = pick.cost;
+        document.getElementById('bw-stat-stop').textContent = pick.stop;
+        document.getElementById('bw-before').innerHTML = pick.before;
+        document.getElementById('bw-there').textContent = pick.there;
+        document.getElementById('bw-after').textContent = pick.after;
+        document.getElementById('bw-reasons').innerHTML = pick.reasons.map(function (reason) {
+          return '<li>' + reason + '</li>';
+        }).join('');
+      }
+
+      Object.keys(fields).forEach(function (key) {
+        fields[key].addEventListener('change', render);
+      });
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

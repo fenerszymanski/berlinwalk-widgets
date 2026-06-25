@@ -131,7 +131,8 @@
   "pharmacy-in-berlin": "pharmacy-in-berlin",
   "grocery-shopping-in-berlin": "grocery-shopping-in-berlin",
   "berlin-flea-markets": "berlin-flea-markets",
-  "charlottenburg-palace-berlin": "charlottenburg-palace-berlin"
+  "charlottenburg-palace-berlin": "charlottenburg-palace-berlin",
+  "traenenpalast-berlin": "traenenpalast-berlin"
 };
 
   var SCHEMAS = {
@@ -6331,6 +6332,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, if your day is not too packed. BerlinWalk lasts about 2 hours from Alexanderplatz to Hackescher Markt, while Charlottenburg Palace is a separate City West half-day. It usually works better after the tour or on another day."
+        }
+      }
+    ]
+  },
+  "traenenpalast-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Tränenpalast Berlin worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you want a short, central and emotionally clear Cold War stop. Tränenpalast Berlin is especially strong for the human story of border crossings and farewells at Friedrichstraße."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Tränenpalast free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The official Haus der Geschichte visitor information lists admission to Tränenpalast as free of charge."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do you need at Tränenpalast?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most tourists should allow 45 to 75 minutes. You can go faster if you only want the main exhibition, or stay longer if you use the free audio guide carefully."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the opening hours for Tränenpalast Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The current official pattern is Tuesday to Friday 9:00-18:00, Saturday and Sunday 10:00-18:00, and Monday closed. Check the official page before leaving because holiday hours can differ."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I visit Tränenpalast or the Berlin Wall Memorial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose Tränenpalast for the personal story of crossing and saying goodbye. Choose the Berlin Wall Memorial at Bernauer Strasse if you want the clearest explanation of the Wall as a border system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I combine Tränenpalast with BerlinWalk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BerlinWalk lasts about 2 hours through the historic centre, and Tränenpalast is a practical add-on before or after the tour if you still have time and energy."
         }
       }
     ]
