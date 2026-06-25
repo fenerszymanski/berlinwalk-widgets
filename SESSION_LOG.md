@@ -1,3 +1,15 @@
+## 2026-06-25 — Codex (Berlin ferry guide publish assets)
+
+**Did:** Pushed and verified the Berlin public transport ferry guide widget/tool assets and post-publish `/blog` mapping.
+
+**Changed:** Commit `71efe4e` added `berlin-public-transport-ferry-picker/`, Quick Summary/FAQ key `berlin-public-transport-ferries`, regenerated FAQ slug mapping/inject data, blog draft/image/source notes, dedicated ferry icon assets, and `tools-hub/data.json`. Commit `f106634` refreshed `blog-index/data.json` to 143 Wix posts and added explicit ferry-post related-tool mapping.
+
+**QA:** `tools-hub/validate-data.mjs`, body leak validator, JSON/syntax checks, staged secret scan, and `git diff --check` passed before push. GitHub Pages now serves the direct widget, QS/FAQ keys, tools-hub entry/icon, and `/blog` data with ferry as Latest #1; live browser QA passed desktop/mobile post, `/blog`, `/tools/berlin-public-transport-ferry-picker`, direct widget, and widget interaction with overflow `0`.
+
+**Opened:** Search Console indexing request remains manual from root post-publish run because URL Inspection API returned `invalid_grant`.
+
+**Closed:** Widget repo deployment and live Pages surfaces for the ferry guide are complete.
+
 ## 2026-06-25 — Codex (World Cup fixtures score update)
 
 **Did:** Added final scores for the four score-check-due FIFA World Cup group matches in the 08:30 CEST automation run: Scotland 0-3 Brazil, Morocco 4-2 Haiti, Czechia 0-3 Mexico, South Africa 1-0 South Korea.
