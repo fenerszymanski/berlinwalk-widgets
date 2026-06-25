@@ -1,3 +1,15 @@
+## 2026-06-25 — Codex (World Cup fixtures score update)
+
+**Did:** Added final scores for the four score-check-due FIFA World Cup group matches in the 08:30 CEST automation run: Scotland 0-3 Brazil, Morocco 4-2 Haiti, Czechia 0-3 Mexico, South Africa 1-0 South Korea.
+
+**Changed:** `worldcup-fixtures/index.html` only: four `M` rows gained final-score fields and `SCORE_UPDATED` is now `25 Jun 2026, 08:33 CEST`.
+
+**QA:** Inline JS parse found 72 rows, 54 scored rows, and 0 malformed rows. Local Playwright QA at 1280px and 390px found `.bw-match.final = 54`, updated label visible, horizontal overflow `0`; only local favicon 404 console noise. `git diff --check` passed.
+
+**Opened:** Commit/push/deploy is still needed before GitHub Pages live widget updates.
+
+**Closed:** Due score updates are complete locally.
+
 ## 2026-06-25 — Codex (Berlin flea markets publish)
 
 **Did:** Published `Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt` live at `https://www.berlinwalk.com/post/berlin-flea-markets`; post ID `dfa7343f-4019-4d5c-ac34-d25a3a80bcd9`.
