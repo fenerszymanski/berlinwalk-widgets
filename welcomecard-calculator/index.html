@@ -368,6 +368,7 @@
           <button type="button" data-days="3" class="active">72 hours</button>
           <button type="button" data-days="4">4 days</button>
           <button type="button" data-days="5">5 days</button>
+          <button type="button" data-days="6">6 days</button>
         </div>
       </div>
 
@@ -432,11 +433,11 @@
       var root = document.getElementById('bw-wc-calc');
       if (!root) return;
 
-      // 2026 prices
+      // 2026 AB prices for the linked visitor calculator.
       var PRICES = {
-        classic: { 2: 28.50, 3: 32, 4: 38, 5: 45, 6: 52 },
+        classic: { 2: 28.50, 3: 39.50, 4: 49.50, 5: 53.50, 6: 58.50 },
         museumIsland: { 3: 62 },
-        basic: { 3: 9 },
+        basic: { 3: 10, 6: 15 },
         dayPass: 11.20,
         museumPass3Day: 36
       };
@@ -485,7 +486,7 @@
 
       function getClassicPrice(days) {
         if (PRICES.classic[days]) return PRICES.classic[days];
-        return PRICES.classic[5]; // fallback
+        return PRICES.classic[6]; // fallback
       }
 
       function calculate() {
@@ -519,7 +520,7 @@
         if (days === 3 && hasMuseumIsland) {
           var miDiscount = attractionDiscount;
           var miAttractionTotal = attractionTotal - 24; // MI becomes free
-          scenarioC = 62 + miAttractionTotal - miDiscount;
+          scenarioC = PRICES.museumIsland[3] + miAttractionTotal - miDiscount;
         }
 
         // Scenario D: Museum Pass + separate transport (only if 3 days)

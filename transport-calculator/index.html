@@ -4,74 +4,1005 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Transport Ticket Calculator | BerlinWalk</title>
+  <meta name="description" content="Compare Berlin public transport ticket options: single, short trip, 4-trip, 24-hour, group, reduced fares, bike add-ons and longer-stay choices.">
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
-<div style="font-family:'Montserrat',sans-serif;max-width:700px;margin:20px auto;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.08);">
-  <div style="background:#1B5E20;padding:14px 20px;display:flex;align-items:center;gap:10px;">
-    <span style="font-size:20px;">🧮</span>
-    <span style="color:#FFE600;font-weight:800;font-size:15px;letter-spacing:0.5px;">TICKET CALCULATOR</span>
-  </div>
-  <div style="background:#FFFFFF;padding:24px;">
-    <p style="font-size:14px;color:#555;margin:0 0 20px;">Find the cheapest option for your Berlin trip:</p>
+<div id="bw-ticket-calculator">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
 
-    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:16px;">
-      <div style="flex:1;min-width:130px;">
-        <label style="font-size:12px;font-weight:600;color:#1B5E20;display:block;margin-bottom:6px;">Days in Berlin</label>
-        <input type="range" min="1" max="7" value="2" id="bw-days" style="width:100%;accent-color:#1B5E20;" oninput="bwCalc()">
-        <span style="font-size:14px;font-weight:700;color:#212121;" id="bw-days-out">2</span>
+    #bw-ticket-calculator {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #526052;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 20px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-ticket-calculator *,
+    #bw-ticket-calculator *::before,
+    #bw-ticket-calculator *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-ticket-calculator h2,
+    #bw-ticket-calculator h3,
+    #bw-ticket-calculator p {
+      margin-top: 0;
+    }
+
+    #bw-ticket-calculator .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-ticket-calculator .bw-hero {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(124, 179, 66, 0.18)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(230px, 0.9fr);
+      padding: 22px;
+    }
+
+    #bw-ticket-calculator .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-ticket-calculator .bw-title {
+      color: var(--bw-white);
+      font-size: 30px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-ticket-calculator .bw-sub {
+      color: #E8F4D7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-ticket-calculator .bw-status-card {
+      align-self: stretch;
+      background: rgba(250, 250, 245, 0.97);
+      border: 1px solid rgba(255, 230, 0, 0.36);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+    }
+
+    #bw-ticket-calculator .bw-status-card small {
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-ticket-calculator .bw-status-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 23px;
+      font-weight: 950;
+      line-height: 1.1;
+    }
+
+    #bw-ticket-calculator .bw-status-card span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    #bw-ticket-calculator .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 14px;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-ticket-calculator .bw-panel,
+    #bw-ticket-calculator .bw-result,
+    #bw-ticket-calculator .bw-coverage,
+    #bw-ticket-calculator .bw-notes {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-ticket-calculator .bw-panel {
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    #bw-ticket-calculator .bw-row {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    #bw-ticket-calculator .bw-field {
+      background: #F9FCF4;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-ticket-calculator .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin-bottom: 7px;
+    }
+
+    #bw-ticket-calculator .bw-range-meta {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    #bw-ticket-calculator .bw-range-value {
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1;
+      min-width: 48px;
+      padding: 7px 9px;
+      text-align: center;
+    }
+
+    #bw-ticket-calculator input[type="range"] {
+      accent-color: var(--bw-green);
+      width: 100%;
+    }
+
+    #bw-ticket-calculator select {
+      appearance: none;
+      background: var(--bw-white);
+      border: 1px solid #C8DDB4;
+      border-radius: 7px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.3;
+      min-height: 42px;
+      padding: 8px 30px 8px 10px;
+      width: 100%;
+    }
+
+    #bw-ticket-calculator .bw-select-inner {
+      display: block;
+      position: relative;
+    }
+
+    #bw-ticket-calculator .bw-select-inner::after {
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--bw-green);
+      content: "";
+      pointer-events: none;
+      position: absolute;
+      right: 12px;
+      top: 18px;
+    }
+
+    #bw-ticket-calculator .bw-choice-row {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-ticket-calculator .bw-choice {
+      appearance: none;
+      background: #F6FAEF;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 9px 8px;
+      text-align: center;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-ticket-calculator .bw-choice:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.14);
+    }
+
+    #bw-ticket-calculator .bw-choice[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-ticket-calculator .bw-result-head,
+    #bw-ticket-calculator .bw-section-head {
+      background: #F6FAEF;
+      border-bottom: 1px solid var(--bw-border);
+      display: grid;
+      gap: 6px;
+      padding: 14px 15px;
+    }
+
+    #bw-ticket-calculator .bw-result-head span,
+    #bw-ticket-calculator .bw-section-head span {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-ticket-calculator .bw-result-head h3,
+    #bw-ticket-calculator .bw-section-head h3 {
+      color: var(--bw-green);
+      font-size: 21px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-ticket-calculator .bw-result-list {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    #bw-ticket-calculator .bw-ticket {
+      align-items: center;
+      background: #FAFCF6;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      min-width: 0;
+      padding: 12px;
+    }
+
+    #bw-ticket-calculator .bw-ticket[data-best="true"] {
+      background: #F6FAEF;
+      border: 2px solid var(--bw-lime);
+    }
+
+    #bw-ticket-calculator .bw-ticket[data-caveat="true"] {
+      border-style: dashed;
+    }
+
+    #bw-ticket-calculator .bw-badge {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.8px;
+      line-height: 1.2;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    #bw-ticket-calculator .bw-ticket strong {
+      color: var(--bw-text);
+      display: block;
+      font-size: 14.5px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-ticket-calculator .bw-ticket p {
+      color: var(--bw-muted);
+      font-size: 11.8px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 5px 0 0;
+    }
+
+    #bw-ticket-calculator .bw-price {
+      color: var(--bw-green);
+      font-size: 24px;
+      font-weight: 950;
+      line-height: 1;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    #bw-ticket-calculator .bw-price small {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 850;
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    #bw-ticket-calculator .bw-coverage-grid,
+    #bw-ticket-calculator .bw-note-grid {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      padding: 14px;
+    }
+
+    #bw-ticket-calculator .bw-chip,
+    #bw-ticket-calculator .bw-note-card {
+      background: #F9FCF4;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-height: 74px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-ticket-calculator .bw-chip small,
+    #bw-ticket-calculator .bw-note-card small {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-ticket-calculator .bw-chip strong,
+    #bw-ticket-calculator .bw-note-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    #bw-ticket-calculator .bw-note-card p {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 5px 0 0;
+    }
+
+    #bw-ticket-calculator .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0 14px 14px;
+    }
+
+    #bw-ticket-calculator .bw-link {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      gap: 8px;
+      line-height: 1.2;
+      min-height: 38px;
+      padding: 9px 12px;
+      text-decoration: none;
+    }
+
+    #bw-ticket-calculator .bw-link.secondary {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+    }
+
+    #bw-ticket-calculator .bw-source {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+      padding: 0 14px 14px;
+    }
+
+    #bw-ticket-calculator .bw-source a {
+      color: var(--bw-green);
+      font-weight: 900;
+    }
+
+    @media (max-width: 820px) {
+      #bw-ticket-calculator .bw-hero,
+      #bw-ticket-calculator .bw-row {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-ticket-calculator .bw-title {
+        font-size: 25px;
+      }
+
+      #bw-ticket-calculator .bw-body {
+        padding: 14px;
+      }
+
+      #bw-ticket-calculator .bw-coverage-grid,
+      #bw-ticket-calculator .bw-note-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      #bw-ticket-calculator .bw-hero {
+        padding: 18px;
+      }
+
+      #bw-ticket-calculator .bw-title {
+        font-size: 22px;
+      }
+
+      #bw-ticket-calculator .bw-choice-row,
+      #bw-ticket-calculator .bw-coverage-grid,
+      #bw-ticket-calculator .bw-note-grid,
+      #bw-ticket-calculator .bw-ticket {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-ticket-calculator .bw-price {
+        text-align: left;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-label="Berlin Transport Ticket Calculator">
+    <div class="bw-hero">
+      <div>
+        <p class="bw-kicker">BERLINWALK.COM - TRANSPORT TOOL</p>
+        <h2 class="bw-title">Berlin Transport Ticket Calculator</h2>
+        <p class="bw-sub">Compare the visitor-relevant BVG/VBB choices plus current tourist passes: single tickets, short trips, 4-trip bundles, 24-hour tickets, group tickets, reduced fares, CityTourCard, EasyCityPass, WelcomeCard, joycard and QueerCityPass.</p>
       </div>
-      <div style="flex:1;min-width:130px;">
-        <label style="font-size:12px;font-weight:600;color:#1B5E20;display:block;margin-bottom:6px;">Rides per day</label>
-        <input type="range" min="1" max="8" value="4" id="bw-rides" style="width:100%;accent-color:#1B5E20;" oninput="bwCalc()">
-        <span style="font-size:14px;font-weight:700;color:#212121;" id="bw-rides-out">4</span>
-      </div>
-      <div style="flex:1;min-width:130px;">
-        <label style="font-size:12px;font-weight:600;color:#1B5E20;display:block;margin-bottom:6px;">Travellers</label>
-        <input type="range" min="1" max="5" value="1" id="bw-people" style="width:100%;accent-color:#1B5E20;" oninput="bwCalc()">
-        <span style="font-size:14px;font-weight:700;color:#212121;" id="bw-people-out">1</span>
+      <div class="bw-status-card" aria-live="polite">
+        <small>Best current answer</small>
+        <strong id="bwBestPrice">EUR 0.00</strong>
+        <span id="bwBestLabel">Set your trip details below.</span>
       </div>
     </div>
 
-    <div style="display:flex;gap:8px;margin-bottom:20px;">
-      <button id="bw-ab" onclick="bwZone='AB';bwCalc();" style="flex:1;padding:10px;border:2px solid #1B5E20;background:#1B5E20;color:#FFE600;font-weight:700;font-size:13px;border-radius:8px;cursor:pointer;font-family:'Montserrat',sans-serif;">Zone AB — City</button>
-      <button id="bw-abc" onclick="bwZone='ABC';bwCalc();" style="flex:1;padding:10px;border:2px solid #C5E1A5;background:#fff;color:#1B5E20;font-weight:700;font-size:13px;border-radius:8px;cursor:pointer;font-family:'Montserrat',sans-serif;">Zone ABC — + Airport</button>
+    <div class="bw-body">
+      <form class="bw-panel">
+        <div class="bw-row">
+          <label class="bw-field">
+            <span class="bw-label">Fare zone</span>
+            <span class="bw-select-inner">
+              <select id="bwZone">
+                <option value="AB">AB - Berlin city</option>
+                <option value="ABC">ABC - BER Airport / Potsdam</option>
+              </select>
+            </span>
+          </label>
+
+          <label class="bw-field">
+            <span class="bw-range-meta">
+              <span class="bw-label">Days</span>
+              <span class="bw-range-value" id="bwDaysOut">2</span>
+            </span>
+            <input id="bwDays" type="range" min="1" max="7" value="2">
+          </label>
+
+          <label class="bw-field">
+            <span class="bw-range-meta">
+              <span class="bw-label">Adults 15+</span>
+              <span class="bw-range-value" id="bwAdultsOut">1</span>
+            </span>
+            <input id="bwAdults" type="range" min="0" max="5" value="1">
+          </label>
+
+          <label class="bw-field">
+            <span class="bw-range-meta">
+              <span class="bw-label">Children 6-14</span>
+              <span class="bw-range-value" id="bwChildrenOut">0</span>
+            </span>
+            <input id="bwChildren" type="range" min="0" max="5" value="0">
+          </label>
+        </div>
+
+        <div class="bw-row">
+          <label class="bw-field">
+            <span class="bw-range-meta">
+              <span class="bw-label">Normal rides / day</span>
+              <span class="bw-range-value" id="bwRidesOut">4</span>
+            </span>
+            <input id="bwRides" type="range" min="0" max="8" value="4">
+          </label>
+
+          <label class="bw-field">
+            <span class="bw-range-meta">
+              <span class="bw-label">Short trips / day</span>
+              <span class="bw-range-value" id="bwShortOut">0</span>
+            </span>
+            <input id="bwShort" type="range" min="0" max="4" value="0">
+          </label>
+
+          <label class="bw-field">
+            <span class="bw-range-meta">
+              <span class="bw-label">Bikes on transit</span>
+              <span class="bw-range-value" id="bwBikesOut">0</span>
+            </span>
+            <input id="bwBikes" type="range" min="0" max="3" value="0">
+          </label>
+
+          <div class="bw-field">
+            <span class="bw-label">Group movement</span>
+            <div class="bw-choice-row" role="group" aria-label="Group movement">
+              <button class="bw-choice" type="button" data-together="yes" aria-pressed="true">Together</button>
+              <button class="bw-choice" type="button" data-together="no" aria-pressed="false">Separate</button>
+            </div>
+          </div>
+        </div>
+      </form>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-result-head">
+          <span>Ticket ranking</span>
+          <h3 id="bwResultTitle">Best value for this trip</h3>
+        </div>
+        <div class="bw-result-list" id="bwResults"></div>
+        <p class="bw-source">Prices are local widget constants checked against official BVG, VBB and S-Bahn Berlin pages in June 2026. Recheck inside the ticket app before buying.</p>
+      </section>
+
+      <section class="bw-coverage">
+        <div class="bw-section-head">
+          <span>Now included</span>
+          <h3>Options the old widget missed</h3>
+        </div>
+        <div class="bw-coverage-grid">
+          <div class="bw-chip"><small>Short trips</small><strong>Single short trip and 4-short-trip bundles</strong></div>
+          <div class="bw-chip"><small>Reduced fare</small><strong>Children 6-14 get reduced single, 4-trip and 24h fares</strong></div>
+          <div class="bw-chip"><small>Groups</small><strong>24-hour small group ticket for 2-5 people moving together</strong></div>
+          <div class="bw-chip"><small>Longer stays</small><strong>Deutschland-Ticket caveat when it wins on paper</strong></div>
+          <div class="bw-chip"><small>Bike add-on</small><strong>24-hour bicycle ticket estimate when taking bikes on trains</strong></div>
+          <div class="bw-chip"><small>Tourist cards</small><strong>CityTourCard, EasyCityPass, WelcomeCard, joycard and QueerCityPass</strong></div>
+          <div class="bw-chip"><small>WelcomeCard variants</small><strong>Classic and Museum Island ranked; Basic and All Inclusive flagged</strong></div>
+          <div class="bw-chip"><small>Special cases</small><strong>Extension and monthly tickets are no longer invisible</strong></div>
+          <div class="bw-chip"><small>Corrected</small><strong>ABC 4-trip ticket is EUR 16.80, not the old EUR 15.40</strong></div>
+        </div>
+      </section>
+
+      <section class="bw-notes">
+        <div class="bw-section-head">
+          <span>Special cases</span>
+          <h3>Check these before buying</h3>
+        </div>
+        <div class="bw-note-grid" id="bwNotes"></div>
+        <div class="bw-links">
+          <a class="bw-link" href="https://www.bvg.de/en/subscriptions-and-tickets/all-tickets" target="_blank" rel="noopener">BVG ticket list</a>
+          <a class="bw-link" href="https://www.vbb.de/en/tickets/" target="_blank" rel="noopener">VBB ticket overview</a>
+          <a class="bw-link" href="https://sbahn.berlin/tickets/alle-tickets/alle-tickets-preise/" target="_blank" rel="noopener">S-Bahn price table</a>
+          <a class="bw-link" href="https://www.berlin-welcomecard.de/en" target="_blank" rel="noopener">WelcomeCard official</a>
+          <a class="bw-link secondary" href="https://www.berlinwalk.com/tools/welcomecard-calculator" target="_blank" rel="noopener">WelcomeCard calculator</a>
+        </div>
+      </section>
     </div>
+  </section>
 
-    <div id="bw-results"></div>
+  <script>
+    (function () {
+      var root = document.getElementById('bw-ticket-calculator');
+      var together = true;
 
-    <p style="font-size:11px;color:#999;margin:16px 0 0;">Prices as of January 2026 · Source: <a href="https://www.bvg.de/en/subscriptions-and-tickets/all-tickets" target="_blank" style="color:#7CB342;">BVG</a></p>
-  </div>
+      var PRICES = {
+        AB: {
+          single: { adult: 4.00, reduced: 2.50 },
+          short: { adult: 2.80, reduced: 2.10 },
+          four: { adult: 12.40, reduced: 7.40 },
+          fourShort: { adult: 7.80, reduced: 6.20 },
+          day: { adult: 11.20, reduced: 7.40 },
+          groupDay: 35.30,
+          bike24: 5.90,
+          monthly: 113.00
+        },
+        ABC: {
+          single: { adult: 5.00, reduced: 3.50 },
+          short: { adult: 2.80, reduced: 2.10 },
+          four: { adult: 16.80, reduced: 11.60 },
+          fourShort: { adult: 7.80, reduced: 6.20 },
+          day: { adult: 12.90, reduced: 8.00 },
+          groupDay: 37.70,
+          bike24: 6.70,
+          monthly: 132.00
+        }
+      };
+
+      var TOURIST_PASSES = [
+        {
+          name: 'Berlin CityTourCard',
+          detail: 'Transport plus sightseeing discounts at 30+ partners. Same transport rules as the tourist ticket period.',
+          prices: {
+            2: { AB: 23.80, ABC: 27.60 },
+            3: { AB: 35.60, ABC: 41.30 },
+            4: { AB: 47.50, ABC: 55.10 },
+            5: { AB: 49.80, ABC: 58.80 },
+            6: { AB: 51.00, ABC: 59.80 }
+          }
+        },
+        {
+          name: 'EasyCityPass Berlin',
+          detail: 'Transport plus partner discounts for first-time and repeat visitors.',
+          prices: {
+            2: { AB: 23.80, ABC: 27.60 },
+            3: { AB: 35.60, ABC: 41.30 },
+            4: { AB: 47.50, ABC: 55.10 },
+            5: { AB: 49.80, ABC: 58.80 },
+            6: { AB: 51.90, ABC: 59.90 }
+          }
+        },
+        {
+          name: 'Berlin WelcomeCard',
+          detail: 'Official tourist ticket with the widest discount network. Use the separate WelcomeCard calculator if attractions matter.',
+          prices: {
+            2: { AB: 28.50, ABC: 34.50 },
+            3: { AB: 39.50, ABC: 45.50 },
+            4: { AB: 49.50, ABC: 56.50 },
+            5: { AB: 53.50, ABC: 59.90 },
+            6: { AB: 58.50, ABC: 63.50 }
+          }
+        },
+        {
+          name: 'WelcomeCard Museum Island',
+          detail: '72-hour WelcomeCard variant with Museum Island entry. Only shown for 3-day trips.',
+          prices: {
+            3: { AB: 62.00, ABC: 67.00 }
+          }
+        },
+        {
+          name: 'Berlin joycard',
+          detail: 'Tourist pass where discounts can be shared with a second person.',
+          prices: {
+            2: { AB: 23.80, ABC: 27.60 },
+            3: { AB: 35.60, ABC: 41.30 },
+            4: { AB: 47.50, ABC: 55.10 },
+            5: { AB: 49.80, ABC: 58.80 },
+            6: { AB: 51.20, ABC: 58.80 }
+          }
+        },
+        {
+          name: 'QueerCityPass Berlin',
+          detail: 'LGBTIQ-focused tourist ticket with public transport plus queer-scene and city discounts.',
+          prices: {
+            2: { AB: 23.80, ABC: 27.60 },
+            3: { AB: 35.60, ABC: 41.30 },
+            4: { AB: 47.50, ABC: 55.10 },
+            5: { AB: 49.80, ABC: 58.80 },
+            6: { AB: 51.90, ABC: 59.90 }
+          }
+        }
+      ];
+
+      var selectors = [
+        'bwZone',
+        'bwDays',
+        'bwAdults',
+        'bwChildren',
+        'bwRides',
+        'bwShort',
+        'bwBikes'
+      ];
+
+      function byId(id) {
+        return root.querySelector('#' + id);
+      }
+
+      function money(value) {
+        return 'EUR ' + value.toFixed(2);
+      }
+
+      function intValue(id) {
+        return Number(byId(id).value);
+      }
+
+      function bestBundle(count, singlePrice, packPrice) {
+        if (count <= 0) {
+          return { cost: 0, packs: 0, singles: 0 };
+        }
+        var best = null;
+        for (var packs = 0; packs <= Math.ceil(count / 4); packs += 1) {
+          var singles = Math.max(0, count - packs * 4);
+          var cost = packs * packPrice + singles * singlePrice;
+          if (!best || cost < best.cost) {
+            best = { cost: cost, packs: packs, singles: singles };
+          }
+        }
+        return best;
+      }
+
+      function addBundleParts(parts, label, bundle) {
+        if (bundle.packs) {
+          parts.push(bundle.packs + ' ' + label + ' 4-pack' + (bundle.packs > 1 ? 's' : ''));
+        }
+        if (bundle.singles) {
+          parts.push(bundle.singles + ' single ' + label + ' ticket' + (bundle.singles > 1 ? 's' : ''));
+        }
+      }
+
+      function touristPassDuration(days) {
+        if (days >= 2 && days <= 6) {
+          return days;
+        }
+        return null;
+      }
+
+      function state() {
+        return {
+          zone: byId('bwZone').value,
+          days: intValue('bwDays'),
+          adults: intValue('bwAdults'),
+          children: intValue('bwChildren'),
+          rides: intValue('bwRides'),
+          shortTrips: intValue('bwShort'),
+          bikes: intValue('bwBikes'),
+          together: together
+        };
+      }
+
+      function ticketOptions(s) {
+        var p = PRICES[s.zone];
+        var totalPeople = s.adults + s.children;
+        var adultRegular = s.adults * s.rides * s.days;
+        var childRegular = s.children * s.rides * s.days;
+        var adultShort = s.adults * s.shortTrips * s.days;
+        var childShort = s.children * s.shortTrips * s.days;
+        var allTrips = adultRegular + childRegular + adultShort + childShort;
+        var bikeAddOn = s.bikes * s.days * p.bike24;
+        var options = [];
+
+        if (totalPeople === 0 || allTrips === 0) {
+          return [{
+            name: 'No paid public transport needed',
+            cost: bikeAddOn,
+            detail: s.bikes ? 'Only bicycle 24-hour add-ons are selected.' : 'Set at least one traveller and one ride if you need a ticket.',
+            caveat: false
+          }];
+        }
+
+        var singlesCost =
+          adultRegular * p.single.adult +
+          childRegular * p.single.reduced +
+          adultShort * p.short.adult +
+          childShort * p.short.reduced;
+        options.push({
+          name: 'Single + short-trip tickets',
+          cost: singlesCost + bikeAddOn,
+          detail: 'Best when you only ride a little: ' + allTrips + ' passenger rides across ' + s.days + ' day' + (s.days > 1 ? 's' : '') + '.',
+          caveat: false
+        });
+
+        var adultRegularBundle = bestBundle(adultRegular, p.single.adult, p.four.adult);
+        var childRegularBundle = bestBundle(childRegular, p.single.reduced, p.four.reduced);
+        var adultShortBundle = bestBundle(adultShort, p.short.adult, p.fourShort.adult);
+        var childShortBundle = bestBundle(childShort, p.short.reduced, p.fourShort.reduced);
+        var bundleParts = [];
+        addBundleParts(bundleParts, 'adult regular', adultRegularBundle);
+        addBundleParts(bundleParts, 'reduced regular', childRegularBundle);
+        addBundleParts(bundleParts, 'adult short-trip', adultShortBundle);
+        addBundleParts(bundleParts, 'reduced short-trip', childShortBundle);
+        options.push({
+          name: '4-trip + 4-short-trip mix',
+          cost: adultRegularBundle.cost + childRegularBundle.cost + adultShortBundle.cost + childShortBundle.cost + bikeAddOn,
+          detail: bundleParts.length ? bundleParts.join(', ') + '.' : 'No bundle needed for this input.',
+          caveat: false
+        });
+
+        var coveredChildren = Math.min(s.children, s.adults * 3);
+        var uncoveredChildren = Math.max(0, s.children - coveredChildren);
+        var dayCost = s.days * ((s.adults * p.day.adult) + (uncoveredChildren * p.day.reduced));
+        if (s.adults === 0) {
+          dayCost = s.days * s.children * p.day.reduced;
+        }
+        var childLine = coveredChildren
+          ? coveredChildren + ' child' + (coveredChildren > 1 ? 'ren' : '') + ' included through adult 24-hour ticket take-along.'
+          : 'Unlimited rides for the selected travellers.';
+        options.push({
+          name: '24-hour ticket',
+          cost: dayCost + bikeAddOn,
+          detail: childLine + ' Valid 24 hours after validation.',
+          caveat: false
+        });
+
+        if (s.together && totalPeople >= 2 && totalPeople <= 5) {
+          options.push({
+            name: '24-hour small group ticket',
+            cost: s.days * p.groupDay + bikeAddOn,
+            detail: 'For up to 5 people travelling together for unlimited rides.',
+            caveat: false
+          });
+        }
+
+        if (s.adults > 0) {
+          var reducedBest = childRegularBundle.cost + childShortBundle.cost;
+          options.push({
+            name: 'Deutschland-Ticket',
+            cost: (s.adults * 63) + reducedBest + bikeAddOn,
+            detail: 'Cheaper only if a monthly subscription and cancellation timing are OK. Not valid on ICE, IC or EC trains.',
+            caveat: true
+          });
+        }
+
+        var passDays = touristPassDuration(s.days);
+        if (passDays && s.adults > 0) {
+          TOURIST_PASSES.forEach(function (pass) {
+            if (!pass.prices[passDays]) {
+              return;
+            }
+            var passPrice = pass.prices[passDays][s.zone];
+            var coveredChildrenByPass = Math.min(s.children, s.adults * 3);
+            var childTripsNotCovered = Math.max(0, s.children - coveredChildrenByPass);
+            var childRegularFallback = bestBundle(childTripsNotCovered * s.rides * s.days, p.single.reduced, p.four.reduced);
+            var childShortFallback = bestBundle(childTripsNotCovered * s.shortTrips * s.days, p.short.reduced, p.fourShort.reduced);
+            options.push({
+              name: pass.name,
+              cost: (s.adults * passPrice) + childRegularFallback.cost + childShortFallback.cost + bikeAddOn,
+              detail: pass.detail + ' Price shown for ' + passDays + (passDays === 3 ? ' days/72h' : passDays === 2 ? ' days/48h' : ' days') + ', one adult per pass and up to 3 children per adult.',
+              caveat: false
+            });
+          });
+        }
+
+        return options.sort(function (a, b) {
+          return a.cost - b.cost;
+        });
+      }
+
+      function specialNotes(s) {
+        var p = PRICES[s.zone];
+        var notes = [
+          {
+            label: 'Tourist passes',
+            title: 'Tourist passes are in the ranking',
+            text: s.days >= 2 && s.days <= 6 ? 'The ranking includes CityTourCard, EasyCityPass, WelcomeCard, joycard and QueerCityPass for this trip length.' : 'Most Berlin tourist passes run 48h to 6 days, so this trip length needs a separate check.'
+          },
+          {
+            label: 'WelcomeCard variants',
+            title: 'Basic and All Inclusive need context',
+            text: 'WelcomeCard Basic has no public transport. WelcomeCard All Inclusive is attraction-heavy from EUR 99, so it is visible as a caveat rather than ranked as a transport-only bargain.'
+          },
+          {
+            label: 'Extension ticket',
+            title: 'Use only with an existing AB/BC ticket',
+            text: 'An extension ticket is for one extra A or C zone. It is not a normal standalone airport ticket.'
+          },
+          {
+            label: 'Monthly ticket',
+            title: money(p.monthly) + ' in zone ' + s.zone,
+            text: 'Usually not for short visitors, but it should not be confused with a 24-hour or tourist ticket.'
+          },
+          {
+            label: 'Bicycle tickets',
+            title: s.bikes ? money(s.bikes * s.days * p.bike24) + ' add-on estimate' : 'Add bikes above if needed',
+            text: 'Taking a bicycle on S-Bahn, U-Bahn, tram or regional trains often needs a separate bicycle ticket.'
+          }
+        ];
+
+        return notes;
+      }
+
+      function renderOptions(options) {
+        var best = options[0];
+        byId('bwBestPrice').textContent = money(best.cost);
+        byId('bwBestLabel').textContent = best.name + (best.caveat ? ' - caveat first' : '');
+        byId('bwResultTitle').textContent = best.caveat ? 'Cheapest on paper, with a caveat' : 'Best value for this trip';
+
+        byId('bwResults').innerHTML = options.map(function (option, index) {
+          return [
+            '<article class="bw-ticket" data-best="' + (index === 0 ? 'true' : 'false') + '" data-caveat="' + (option.caveat ? 'true' : 'false') + '">',
+            '<div>',
+            '<span class="bw-badge">' + (index === 0 ? (option.caveat ? 'Lowest price, check caveat' : 'Best value') : (option.caveat ? 'Caveat' : 'Alternative')) + '</span>',
+            '<strong>' + option.name + '</strong>',
+            '<p>' + option.detail + '</p>',
+            '</div>',
+            '<div class="bw-price">' + money(option.cost) + '<small>estimated total</small></div>',
+            '</article>'
+          ].join('');
+        }).join('');
+      }
+
+      function renderNotes(notes) {
+        byId('bwNotes').innerHTML = notes.map(function (note) {
+          return [
+            '<div class="bw-note-card">',
+            '<small>' + note.label + '</small>',
+            '<strong>' + note.title + '</strong>',
+            '<p>' + note.text + '</p>',
+            '</div>'
+          ].join('');
+        }).join('');
+      }
+
+      function updateOutputs(s) {
+        byId('bwDaysOut').textContent = s.days;
+        byId('bwAdultsOut').textContent = s.adults;
+        byId('bwChildrenOut').textContent = s.children;
+        byId('bwRidesOut').textContent = s.rides;
+        byId('bwShortOut').textContent = s.shortTrips;
+        byId('bwBikesOut').textContent = s.bikes;
+      }
+
+      function update() {
+        var s = state();
+        updateOutputs(s);
+        renderOptions(ticketOptions(s));
+        renderNotes(specialNotes(s));
+      }
+
+      root.querySelectorAll('.bw-choice').forEach(function (button) {
+        button.addEventListener('click', function () {
+          together = button.dataset.together === 'yes';
+          root.querySelectorAll('.bw-choice').forEach(function (item) {
+            item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+          });
+          update();
+        });
+      });
+
+      selectors.forEach(function (id) {
+        var field = byId(id);
+        field.addEventListener('input', update);
+        field.addEventListener('change', update);
+      });
+
+      update();
+    })();
+  </script>
 </div>
-
-<script>
-var bwZone='AB';
-function bwCalc(){
-  var d=parseInt(document.getElementById('bw-days').value);
-  var r=parseInt(document.getElementById('bw-rides').value);
-  var p=parseInt(document.getElementById('bw-people').value);
-  document.getElementById('bw-days-out').textContent=d;
-  document.getElementById('bw-rides-out').textContent=r;
-  document.getElementById('bw-people-out').textContent=p;
-  var pr=bwZone==='AB'?{s:4,d:11.2,g:35.3,f:12.4}:{s:5,d:12.9,g:37.7,f:15.4};
-  document.getElementById('bw-ab').style.background=bwZone==='AB'?'#1B5E20':'#fff';
-  document.getElementById('bw-ab').style.color=bwZone==='AB'?'#FFE600':'#1B5E20';
-  document.getElementById('bw-abc').style.background=bwZone==='ABC'?'#1B5E20':'#fff';
-  document.getElementById('bw-abc').style.color=bwZone==='ABC'?'#FFE600':'#1B5E20';
-  var tr=d*r;var opts=[];
-  opts.push({n:'Single tickets',c:Math.round(tr*pr.s*p*100)/100,t:tr*p+' tickets @ €'+pr.s.toFixed(2)});
-  var fp=Math.ceil((tr*p)/4);opts.push({n:'4-trip tickets',c:Math.round(fp*pr.f*100)/100,t:fp+' pack(s)'});
-  opts.push({n:'24h ticket ('+d+' day'+(d>1?'s':'')+')',c:Math.round(d*pr.d*p*100)/100,t:'€'+pr.d.toFixed(2)+'/day × '+p});
-  if(p>=2&&p<=5){opts.push({n:'Group day ticket',c:Math.round(d*pr.g*100)/100,t:'Up to 5 people'});}
-  opts.sort(function(a,b){return a.c-b.c;});var best=opts[0].c;var h='';
-  for(var i=0;i<opts.length;i++){var o=opts[i];var ib=o.c===best;
-    h+='<div style="background:'+(ib?'#F8FBEF':'#FAFAFA')+';border:'+(ib?'2px solid #7CB342':'1px solid #E8E8E8')+';border-radius:10px;padding:12px 16px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">';
-    h+='<div>';if(ib)h+='<span style="font-size:10px;font-weight:800;color:#1B5E20;letter-spacing:1px;">✔ BEST VALUE</span><br>';
-    h+='<span style="font-size:14px;font-weight:700;color:#212121;">'+o.n+'</span><br><span style="font-size:11px;color:#888;">'+o.t+'</span></div>';
-    h+='<span style="font-size:20px;font-weight:800;color:#1B5E20;">€'+o.c.toFixed(2)+'</span></div>';}
-  document.getElementById('bw-results').innerHTML=h;}
-bwCalc();
-</script>
 </body>
 </html>

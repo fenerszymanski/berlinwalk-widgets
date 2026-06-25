@@ -1,3 +1,15 @@
+## 2026-06-25 — Codex (transport ticket picker option audit)
+
+**Did:** Audited the Berlin public transport ticket picker against current official BVG, VBB, S-Bahn Berlin, DB Deutschland-Ticket, and Berlin WelcomeCard sources after Yusuf flagged missing LGBT/Queer ticket options.
+
+**Changed:** Rebuilt `transport-calculator/index.html` from the narrow old calculator into a broader ticket picker covering single, short trip, 4-trip, 4-short-trip, reduced fares, 24-hour, small group, bicycle add-ons, Deutschland-Ticket caveat, CityTourCard, EasyCityPass, Berlin WelcomeCard, WelcomeCard Museum Island, Berlin joycard, and QueerCityPass. Updated `transport-compare/index.html`, `tools-hub/data.json` search/tags/embed height, `welcomecard-calculator/index.html` 2026 AB Classic prices + 6-day option, and `welcomecard-compare/index.html` Basic/All Inclusive wording.
+
+**QA:** `tools-hub/data.json`/`tools-home/data.json` JSON parse passed; `node tools-hub/validate-data.mjs` passed with `65 tools, 63 visible`; inline script parse passed for `transport-calculator` and `welcomecard-calculator`; `git diff --check` passed. Local Playwright QA on `127.0.0.1:4180`: transport calculator desktop/mobile overflow `0`, QueerCityPass and joycard render, 6-day AB ranks CityTourCard first at `EUR 51.00`, ABC 72h includes Museum Island and QueerCityPass, short-trip-only case returns `EUR 2.80`; transport compare and WelcomeCard surfaces mobile overflow `0`.
+
+**Opened:** Commit/push/deploy is still needed before GitHub Pages/live Wix iframes serve the updated picker. WelcomeCard attraction discount values themselves were not fully re-audited; this run only corrected the public-transport price layer and visible variant caveats.
+
+**Closed:** The local public transport picker now exposes the missing tourist/pass families, including QueerCityPass/LGBT-relevant options, instead of hiding them behind the old narrow ticket model.
+
 ## 2026-06-25 — Codex (daily blog draft: Berlin flea markets)
 
 **Did:** Created unpublished Wix Blog draft `Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt` for focus keyword `Berlin flea markets`, category Tourist Tips. Draft ID `dfa7343f-4019-4d5c-ac34-d25a3a80bcd9`; API readback status `UNPUBLISHED`.
