@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-25T06:50:46.857Z",
+  "updatedAt": "2026-06-25T08:36:14.564Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 140,
+  "totalPosts": 141,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -448,6 +448,23 @@
           "relatedToolSlug": "berlin-shopping-areas"
         },
         {
+          "title": "Tickets for Berlin Boat Tours & Spree Cruises: A Local's Guide",
+          "slug": "tickets-boat-tours-river-cruises-berlin",
+          "path": "/post/tickets-boat-tours-river-cruises-berlin",
+          "url": "https://www.berlinwalk.com/post/tickets-boat-tours-river-cruises-berlin",
+          "excerpt": "A local guide to Berlin's boat tours and river cruises, with route advice, official booking links, starting docks, current 2026 prices, and WelcomeCard caveats.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "9 min read",
+          "publishedDate": "2026-06-25T08:35:42.732Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_1feb37922a9445e981d72f4429e6f263~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/boat-tours-berlin-cover.png",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_1feb37922a9445e981d72f4429e6f263~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/boat-tours-berlin-cover.png",
+          "alt": "A classic sightseeing boat MS Berlin cruising on the Spree River in front of the Berlin Cathedral.",
+          "relatedToolSlug": "berlin-boat-tour-finder"
+        },
+        {
           "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
           "slug": "berlin-ber-airport-departure-guide",
           "path": "/post/berlin-ber-airport-departure-guide",
@@ -480,23 +497,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
           "alt": "Mobility Hub at Berlin Sudkreuz with shared scooters, bikes, mopeds and Jelbi signage",
           "relatedToolSlug": "berlin-mobility-app-picker"
-        },
-        {
-          "title": "Zoo Berlin vs Tierpark Berlin: The Ultimate Guide to Choosing Your Wild Day Out",
-          "slug": "zoo-berlin-vs-tierpark-berlin",
-          "path": "/post/zoo-berlin-vs-tierpark-berlin",
-          "url": "https://www.berlinwalk.com/post/zoo-berlin-vs-tierpark-berlin",
-          "excerpt": "Zoo Berlin and Tierpark Berlin are not two versions of the same day. This guide compares history, size, animals, kids, transport, tickets, and the feeling of each park so you can choose the right wild day out.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "9 min read",
-          "publishedDate": "2026-06-20T08:47:20.584Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
-          "alt": "Zoo Berlin Elephant Gate entrance in a Zoo Berlin vs Tierpark Berlin visitor comparison",
-          "relatedToolSlug": ""
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Tickets for Berlin Boat Tours & Spree Cruises: A Local's Guide",
+      "slug": "tickets-boat-tours-river-cruises-berlin",
+      "path": "/post/tickets-boat-tours-river-cruises-berlin",
+      "url": "https://www.berlinwalk.com/post/tickets-boat-tours-river-cruises-berlin",
+      "excerpt": "A local guide to Berlin's boat tours and river cruises, with route advice, official booking links, starting docks, current 2026 prices, and WelcomeCard caveats.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "9 min read",
+      "publishedDate": "2026-06-25T08:35:42.732Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1feb37922a9445e981d72f4429e6f263~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/boat-tours-berlin-cover.png",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1feb37922a9445e981d72f4429e6f263~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/boat-tours-berlin-cover.png",
+      "alt": "A classic sightseeing boat MS Berlin cruising on the Spree River in front of the Berlin Cathedral.",
+      "relatedToolSlug": "berlin-boat-tour-finder"
+    },
+    {
       "title": "Charlottenburg Palace Berlin: Tickets, Gardens and What to See First",
       "slug": "charlottenburg-palace-berlin",
       "path": "/post/charlottenburg-palace-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_0027372f452e4bb6b423583d1eae963e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-on-a-monday-01-museum-island-altes-museum-cover.jpg",
       "alt": "Altes Museum and Museum Island at sunset, a strong reminder to check Monday opening hours before planning Berlin museums",
       "relatedToolSlug": ""
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Tax Free Shopping in Berlin: VAT Refunds Explained for Tourists",
-      "slug": "tax-free-shopping-berlin-vat-refund",
-      "path": "/post/tax-free-shopping-berlin-vat-refund",
-      "url": "https://www.berlinwalk.com/post/tax-free-shopping-berlin-vat-refund",
-      "excerpt": "A clear guide to Tax Free shopping in Berlin: who is eligible, what counts, how much VAT is inside the price, what to ask at the shop, and what to do at BER Airport.",
+      "title": "Tickets for Berlin Boat Tours & Spree Cruises: A Local's Guide",
+      "slug": "tickets-boat-tours-river-cruises-berlin",
+      "path": "/post/tickets-boat-tours-river-cruises-berlin",
+      "url": "https://www.berlinwalk.com/post/tickets-boat-tours-river-cruises-berlin",
+      "excerpt": "A local guide to Berlin's boat tours and river cruises, with route advice, official booking links, starting docks, current 2026 prices, and WelcomeCard caveats.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-06-17T19:28:19.813Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg",
-      "alt": "The KaDeWe department store in Berlin, a classic shopping landmark where non-EU visitors may ask about Tax Free shopping",
-      "relatedToolSlug": "berlin-shopping-areas"
-    }
-  ],
-  "allPosts": [
+      "readTime": "9 min read",
+      "publishedDate": "2026-06-25T08:35:42.732Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_1feb37922a9445e981d72f4429e6f263~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/boat-tours-berlin-cover.png",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_1feb37922a9445e981d72f4429e6f263~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/boat-tours-berlin-cover.png",
+      "alt": "A classic sightseeing boat MS Berlin cruising on the Spree River in front of the Berlin Cathedral.",
+      "relatedToolSlug": "berlin-boat-tour-finder"
+    },
     {
       "title": "Charlottenburg Palace Berlin: Tickets, Gardens and What to See First",
       "slug": "charlottenburg-palace-berlin",
