@@ -6,7 +6,7 @@
 
 Berlin is a city shaped by water. The Spree runs through the historic center, the Landwehr Canal cuts across Kreuzberg and Tiergarten, and the outer lakes pull the city toward Wannsee, Tegel, Treptow, Köpenick, and Müggelsee. One of the classic facts I share on my tours is that Berlin has more bridges than Venice, and a good boat route makes that visible very quickly.
 
-The confusing part is buying the right ticket. Berlin boat tours are sold by several shipping companies, from several docks, with route names that sound similar but are not the same. A 1-hour Spree cruise, a 2.5-hour East Side route, and a 3.25-hour bridge tour are very different experiences.
+The confusing part is buying the right ticket. Berlin boat tours are sold by several shipping companies, from several docks, with route names that sound similar but are not the same. A **1-hour Spree cruise**, a **2.5-hour East Side route**, and a **3.25 to 3.75-hour bridge tour** are very different experiences.
 
 As a local guide who walks these waterways every week, I built this guide to help you choose the right cruise, avoid a mismatched route, and book through the official operator pages when possible.
 
@@ -15,7 +15,7 @@ As a local guide who walks these waterways every week, I built this guide to hel
 If you only want the simplest answer, use this:
 
 - **First time in Berlin and short on time:** choose a **1-hour historic Spree cruise** from Friedrichstraße, Nikolaiviertel, Alte Börse, Jannowitzbrücke, or nearby central docks.
-- **Want more than the postcard sights:** choose a **2 to 2.5-hour extended city cruise**, especially a route that reaches the East Side Gallery, Westhafen, or the northern canals.
+- **Want more than the postcard sights:** choose a **2 to 2.5-hour extended city cruise**, especially a route that reaches the East Side Gallery, Westhafen, or quieter canal sections.
 - **Want my favorite all-round route:** choose a **3.25 to 3.75-hour bridge tour** on the Spree and Landwehr Canal. This is slower, longer, and much better for seeing neighborhoods.
 - **Want nature instead of Mitte:** choose a **lake or outer-water route** around Wannsee, Havel, Tegel, Treptow, Köpenick, or Müggelsee.
 
@@ -35,7 +35,7 @@ This is the classic short Berlin boat tour. It is central, easy, and packed with
 
 - **Typical route:** Reichstag, government district, Berlin Hauptbahnhof, Museum Island, Berliner Dom, Nikolaiviertel, and the TV Tower area.
 - **Best for:** First-time visitors, families with children, anyone with limited time, and anyone who wants a low-effort sightseeing break.
-- **Typical 2026 price:** around EUR 22 to 23 for standard adult tickets with major operators, though special boats and private-style cruises cost more.
+- **Typical 2026 price:** around **EUR 22 to 23** for standard adult tickets with major operators. Current examples include BWSG's 1-hour City-Spreefahrt from EUR 22, Stern und Kreis historical city tours from EUR 22.50, and Winkler City Tour 1 at EUR 23.
 - **Local tip:** These boats run frequently in season. For a normal 1-hour cruise, you can often buy at the dock, but online booking is safer on summer weekends.
 
 ### 2. Extended Spree City Tour (2 to 2.5 Hours)
@@ -44,8 +44,8 @@ This is the better middle ground if you want more context than the 1-hour route 
 
 - **Typical route:** Longer Spree sections, the government district, Museum Island, sometimes Westhafen, East Side Gallery, Oberbaumbrücke, or the northern canals, depending on the operator.
 - **Best for:** Travelers who want a proper city cruise without committing to the full bridge tour.
-- **Typical 2026 price:** usually around EUR 30 to 32 for the major 2 to 2.5-hour sightseeing routes.
-- **Local tip:** Read the route map before paying. Some 2-hour tours focus east, some focus west, and the title alone does not always make that obvious.
+- **Typical 2026 price:** usually around **EUR 30 to 32** for major 2 to 2.5-hour sightseeing routes. BWSG lists its East-Side-Tour at EUR 30, while Winkler City Tour 2 is EUR 31.
+- **Local tip:** Read the route map before paying. Some 2-hour tours focus east, some focus west, and the title alone does not always make that obvious. BWSG's 2026 East-Side-Tour, for example, is listed as a daily 14:45 to 17:15 service from late March to early November, starting and ending at Alte Börse near Hackescher Markt.
 
 ### 3. Spree and Landwehr Canal Bridge Tour (3.25 to 3.75 Hours)
 
@@ -53,7 +53,7 @@ This is the route locals are most likely to recommend. In German it is often cal
 
 - **Typical route:** Spree, Landwehr Canal, Kreuzberg, Neukölln, Tiergarten, government district, and historic locks.
 - **Best for:** Slow travelers, repeat visitors, architecture fans, and anyone who wants to see Berlin beyond the central postcard view.
-- **Typical 2026 price:** about EUR 32.50 to 35.50 for standard adult tickets, depending on the operator and departure point.
+- **Typical 2026 price:** about **EUR 32.50 to 35.50** for standard adult tickets, depending on the operator and departure point. Winkler's Grand City Tour 3 is listed at EUR 32.50, while Stern und Kreis bridge trips from Treptow or Jannowitzbrücke start from EUR 35.50.
 - **Local tip:** Book this one ahead. The longer bridge tours run less frequently than 1-hour city cruises and can sell out in July and August.
 
 ### 4. Havel, Wannsee, Tegel, Treptow, Köpenick, and Müggelsee Cruises
@@ -62,7 +62,7 @@ These are not really "Berlin sightseeing" tours in the classic Mitte sense. They
 
 - **Typical route:** Wannsee and Potsdam landscapes, Havel lakes, Tegel and the Oberhavel, or southeast routes toward Köpenick and Müggelsee.
 - **Best for:** Longer stays, warm-weather afternoons, nature breaks, and anyone who has already seen the main city center sights.
-- **Typical 2026 price:** highly route-dependent. Short lake loops can start around EUR 20.50, while long special excursions cost much more.
+- **Typical 2026 price:** highly route-dependent. Short lake loops can start around **EUR 20.50**, while long special excursions can run far higher.
 - **Local tip:** Check the dock carefully. Wannsee, Tegel, Treptow, and Köpenick are not interchangeable starting points.
 
 {{widget:berlin-boat-tour-finder}}
@@ -77,7 +77,7 @@ Use these official pages once you have chosen the route type. I would not start 
 - **Lakes, Havel, Wannsee, Tegel, or Müggelsee:** [Stern und Kreis official tickets](https://www.sternundkreis.de/en/shop/ship-tours/), [BWSG schedule and tickets](https://bwsg-berlin.de/en/schedule-tickets/), or [Reederei Riedel official booking](https://fareharbor.com/embeds/book/reederei-riedel/items/?flow=403457&full-items=yes).
 - **Sundowner, evening, brunch, or dinner cruise:** [Winkler Sundowner](https://www.reedereiwinkler.de/en/citytouren/sundowner-tour), [Winkler evening tour](https://www.reedereiwinkler.de/en/citytouren/evening-citytour-2), [Reederei Becker dinner cruise](https://www.reedereibecker.com/), or [Stern und Kreis official tickets](https://www.sternundkreis.de/en/shop/ship-tours/).
 
-For a broad official market overview, the [visitBerlin boat ticket page](https://www.visitberlin.de/en/tickets-boat-tours-river-cruises-berlin) is useful. For route ideas rather than direct booking, the [Berlin.de river cruises overview](https://www.berlin.de/en/tourism/rivercruises-boattrips/) is also helpful.
+For a broad official market overview, the [visitBerlin boat ticket page](https://www.visitberlin.de/en/tickets-boat-tours-river-cruises-berlin) is useful because it shows many ticket types side by side, including classic 1-hour cruises, East Side routes, brunch products, electric/niche boats, and private-style options. For route ideas rather than direct booking, the [Berlin.de river cruises overview](https://www.berlin.de/en/tourism/rivercruises-boattrips/) is also helpful.
 
 Always check the live date, departure dock, duration, language, and discount rules before paying. A "city tour" can mean 1 hour, 2.5 hours, or a much longer loop depending on the company.
 
@@ -114,9 +114,9 @@ Buy at the dock if:
 
 The [Berlin WelcomeCard](https://www.berlinwalk.com/tools/welcomecard-calculator) can be useful for boat tours, but do not assume every operator or every route is included.
 
-As of June 2026, the official WelcomeCard partner pages show boat discounts for **Stern und Kreis**, **Reederei Winkler**, and **BWSG**. The old WelcomeCard page for **Reederei Riedel** is currently archived and says that Riedel is no longer participating, so I would not count on a Riedel WelcomeCard discount unless the official partner page changes again.
+As of June 2026, the official WelcomeCard partner pages clearly show boat discounts for **Stern und Kreis**, **Reederei Winkler**, and **BWSG**. The Riedel situation is less clean: a general WelcomeCard summer-deals page still mentions Riedel, but the dedicated Riedel partner page is archived and says the partner is no longer participating. **I would not count on a Riedel WelcomeCard discount unless the current checkout or official partner listing confirms it on your travel date.**
 
-Also check how the discount is redeemed. Some discounts can be used online, while others require you to show the card at the dock or at a Berlin Tourist Info Centre before boarding. If the WelcomeCard is mainly for transport plus a few attractions, use my [WelcomeCard Calculator](https://www.berlinwalk.com/tools/welcomecard-calculator) and my [Berlin transport ticket calculator](https://www.berlinwalk.com/tools/transport-ticket-calculator) before buying.
+Also check how the discount is redeemed. Some discounts can be used online, while others require you to show the card at the dock or select a specific WelcomeCard ticket type before checkout. If the WelcomeCard is mainly for transport plus a few attractions, use my [WelcomeCard Calculator](https://www.berlinwalk.com/tools/welcomecard-calculator) and my [Berlin transport ticket calculator](https://www.berlinwalk.com/tools/transport-ticket-calculator) before buying.
 
 ## Docks and Starting Points
 
