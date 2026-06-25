@@ -1,0 +1,470 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Flea Market Picker | BerlinWalk</title>
+  <meta name="description" content="Choose the best Berlin flea market for your weekend plan: Mauerpark, Boxhagener Platz, Straße des 17. Juni, RAW or Bode Museum.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-flea-picker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-flea-picker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-flea-picker *,
+    #bw-flea-picker *::before,
+    #bw-flea-picker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-flea-picker .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-flea-picker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.22)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-flea-picker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-flea-picker h2,
+    #bw-flea-picker h3,
+    #bw-flea-picker p {
+      margin-top: 0;
+    }
+
+    #bw-flea-picker .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-flea-picker .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 820px;
+    }
+
+    #bw-flea-picker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.18fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-flea-picker .bw-panel,
+    #bw-flea-picker .bw-result,
+    #bw-flea-picker .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-flea-picker .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-flea-picker label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-flea-picker .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-flea-picker select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-flea-picker select:focus-visible,
+    #bw-flea-picker a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-flea-picker .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-flea-picker .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-flea-picker .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-flea-picker .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-flea-picker .bw-result p,
+    #bw-flea-picker li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-flea-picker .bw-stats,
+    #bw-flea-picker .bw-steps,
+    #bw-flea-picker .bw-links {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-flea-picker .bw-stat,
+    #bw-flea-picker .bw-step,
+    #bw-flea-picker .bw-link {
+      background: #F7FAF0;
+      border: 1px solid rgba(124, 179, 66, 0.26);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-flea-picker .bw-stat strong,
+    #bw-flea-picker .bw-step strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      line-height: 1.25;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-flea-picker .bw-link {
+      align-items: center;
+      color: var(--bw-green);
+      display: flex;
+      font-size: 12.5px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1.25;
+      min-height: 42px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    #bw-flea-picker .bw-link:hover {
+      background: var(--bw-yellow);
+    }
+
+    #bw-flea-picker .bw-steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-flea-picker .bw-step {
+      color: var(--bw-text);
+      font-weight: 760;
+    }
+
+    @media (max-width: 720px) {
+      #bw-flea-picker {
+        margin: 18px 0;
+      }
+
+      #bw-flea-picker .bw-head {
+        padding: 17px;
+      }
+
+      #bw-flea-picker .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-flea-picker .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-flea-picker .bw-stats,
+      #bw-flea-picker .bw-steps,
+      #bw-flea-picker .bw-links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-head">
+      <p class="bw-kicker">Berlin flea market picker</p>
+      <h2 class="bw-title">Choose the right market before you cross the city</h2>
+      <p class="bw-sub">Answer four quick questions and get a realistic Berlin weekend market plan: big Sunday atmosphere, antiques, books, brunch, design, or an easy central stop.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Flea market choices">
+        <div class="bw-form">
+          <label>
+            <span class="bw-label">Day</span>
+            <select id="bw-day">
+              <option value="sunday">Sunday</option>
+              <option value="saturday">Saturday</option>
+              <option value="weekday">Weekday</option>
+            </select>
+          </label>
+          <label>
+            <span class="bw-label">Main reason</span>
+            <select id="bw-goal">
+              <option value="vibe">Big Berlin atmosphere</option>
+              <option value="antiques">Antiques and serious rummaging</option>
+              <option value="brunch">Brunch, cafes and small finds</option>
+              <option value="central">Easy central sightseeing add-on</option>
+              <option value="creative">Design, handmade and younger crowd</option>
+            </select>
+          </label>
+          <label>
+            <span class="bw-label">Where are you starting?</span>
+            <select id="bw-area">
+              <option value="mitte">Mitte / Alexanderplatz</option>
+              <option value="prenzlauer">Prenzlauer Berg</option>
+              <option value="friedrichshain">Friedrichshain / Kreuzberg</option>
+              <option value="west">Zoo / Charlottenburg</option>
+              <option value="neukoelln">Neukoelln</option>
+            </select>
+          </label>
+          <label>
+            <span class="bw-label">Energy</span>
+            <select id="bw-energy">
+              <option value="halfday">I want a half-day scene</option>
+              <option value="quick">I want a quick stop</option>
+              <option value="quiet">I prefer calmer browsing</option>
+            </select>
+          </label>
+          <p class="bw-note">Tip: market hours can shift around holidays, severe weather or special events. Check the linked map before leaving your hotel.</p>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="bw-pill">Best match</span>
+        <h3 id="bw-name">Mauerpark Flea Market</h3>
+        <p id="bw-summary">The classic first-time choice when you want the big Sunday Berlin flea market mood.</p>
+        <div class="bw-stats" id="bw-stats"></div>
+        <div class="bw-steps" id="bw-steps"></div>
+        <div class="bw-links">
+          <a class="bw-link" id="bw-map" href="#" target="_blank" rel="noopener">Open map</a>
+          <a class="bw-link" href="https://www.berlinwalk.com/post/berlin-on-a-monday" target="_blank" rel="noopener">Opening-day guide</a>
+          <a class="bw-link" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Plan around the tour</a>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var markets = {
+      mauerpark: {
+        name: 'Mauerpark Flea Market',
+        pill: 'Best for atmosphere',
+        summary: 'The classic first-time choice when you want the big Sunday Berlin flea market mood: vintage, food, music, crowds and park energy.',
+        day: 'Sunday',
+        hours: '10:00-18:00',
+        area: 'Prenzlauer Berg',
+        map: 'https://www.google.com/maps/search/?api=1&query=Mauerpark%20Flea%20Market%20Berlin',
+        steps: ['Arrive before lunch for easier browsing.', 'Bring cash and a tote bag.', 'Stay for food or park people-watching.']
+      },
+      seventeen: {
+        name: 'Flea Market on Strasse des 17. Juni',
+        pill: 'Best for antiques',
+        summary: 'The stronger pick for antiques, older objects and a calmer west-side weekend route near Tiergarten.',
+        day: 'Saturday + Sunday',
+        hours: '10:00-17:00',
+        area: 'Tiergarten',
+        map: 'https://www.google.com/maps/search/?api=1&query=Flohmarkt%20Stra%C3%9Fe%20des%2017.%20Juni%20Berlin',
+        steps: ['Use S Tiergarten as the anchor.', 'Expect more professional sellers.', 'Pair it with Tiergarten or Zoo.']
+      },
+      boxi: {
+        name: 'Boxhagener Platz Flea Market',
+        pill: 'Best for brunch',
+        summary: 'A compact Friedrichshain Sunday choice for books, records, clothes, small finds and cafes around Simon-Dach-Strasse.',
+        day: 'Sunday',
+        hours: '10:00-18:00',
+        area: 'Friedrichshain',
+        map: 'https://www.google.com/maps/search/?api=1&query=Boxhagener%20Platz%20Flea%20Market%20Berlin',
+        steps: ['Start with coffee or brunch nearby.', 'Browse the square slowly.', 'Keep cash for small stalls.']
+      },
+      bode: {
+        name: 'Bode Museum Antique and Book Market',
+        pill: 'Best central add-on',
+        summary: 'The simplest central stop for books, prints and small antiques when you are already around Museum Island.',
+        day: 'Saturday + Sunday',
+        hours: '10:00-17:00',
+        area: 'Museum Island',
+        map: 'https://www.google.com/maps/search/?api=1&query=Antique%20Book%20Market%20Bode%20Museum%20Berlin',
+        steps: ['Treat it as a 30-60 minute stop.', 'Combine it with Museum Island.', 'Use it when Mauerpark is too far.']
+      },
+      raw: {
+        name: 'RAW Flea Market',
+        pill: 'Best for creative edge',
+        summary: 'A Friedrichshain Sunday option when you want street-art surroundings, a younger crowd and a rougher creative setting.',
+        day: 'Sunday',
+        hours: '08:00-17:00',
+        area: 'RAW / Friedrichshain',
+        map: 'https://www.google.com/maps/search/?api=1&query=RAW%20Flea%20Market%20Berlin',
+        steps: ['Go earlier for less chaos.', 'Pair with East Side Gallery.', 'Keep your plan flexible in bad weather.']
+      },
+      fallback: {
+        name: 'Use a market hall or museum day instead',
+        pill: 'Weekday fallback',
+        summary: 'Berlin flea markets are mostly weekend plans. On a weekday, switch to Markthalle Neun, a museum, a shopping area or a cafe route.',
+        day: 'Weekday',
+        hours: 'Check same day',
+        area: 'Depends on plan',
+        map: 'https://www.google.com/maps/search/?api=1&query=Markthalle%20Neun%20Berlin',
+        steps: ['Do not cross town for a closed flea market.', 'Use the day for museums or food halls.', 'Save flea markets for the weekend.']
+      }
+    };
+
+    function choose() {
+      var day = document.getElementById('bw-day').value;
+      var goal = document.getElementById('bw-goal').value;
+      var area = document.getElementById('bw-area').value;
+      var energy = document.getElementById('bw-energy').value;
+      if (day === 'weekday') return markets.fallback;
+      if (goal === 'central') return markets.bode;
+      if (goal === 'antiques') return markets.seventeen;
+      if (goal === 'brunch') return markets.boxi;
+      if (goal === 'creative') return area === 'neukoelln' ? markets.raw : markets.boxi;
+      if (day === 'saturday') return energy === 'quick' ? markets.bode : markets.seventeen;
+      if (area === 'friedrichshain') return markets.boxi;
+      if (area === 'west') return markets.seventeen;
+      if (energy === 'quiet') return markets.bode;
+      return markets.mauerpark;
+    }
+
+    function render() {
+      var m = choose();
+      document.getElementById('bw-pill').textContent = m.pill;
+      document.getElementById('bw-name').textContent = m.name;
+      document.getElementById('bw-summary').textContent = m.summary;
+      document.getElementById('bw-map').href = m.map;
+      document.getElementById('bw-stats').innerHTML = [
+        ['Open', m.day],
+        ['Hours', m.hours],
+        ['Area', m.area]
+      ].map(function (item) {
+        return '<div class="bw-stat"><strong>' + item[0] + '</strong><span>' + item[1] + '</span></div>';
+      }).join('');
+      document.getElementById('bw-steps').innerHTML = m.steps.map(function (step, idx) {
+        return '<div class="bw-step"><strong>Step ' + (idx + 1) + '</strong>' + step + '</div>';
+      }).join('');
+      if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('#bw-flea-picker select'), function (el) {
+      el.addEventListener('change', render);
+    });
+    render();
+  })();
+</script>
+</body>
+</html>

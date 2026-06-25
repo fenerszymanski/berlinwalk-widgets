@@ -1,6 +1,22 @@
+## 2026-06-25 — Codex (daily blog draft: Berlin flea markets)
+
+**Did:** Created unpublished Wix Blog draft `Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt` for focus keyword `Berlin flea markets`, category Tourist Tips. Draft ID `dfa7343f-4019-4d5c-ac34-d25a3a80bcd9`; API readback status `UNPUBLISHED`.
+
+**Changed:** Added local draft/body, image/source pack, Quick Summary/FAQ key `berlin-flea-markets`, regenerated `faq/inject.js`, widget `berlin-flea-market-picker/`, tools-hub entry, dedicated ChatGPT-browser icon source + 512/160 PNGs, icon manifests/upload cache, and helper scripts in the root content app. Inserted BerlinTools CMS item `e2650e90-dccf-4176-aae2-8b2b0188a1c9`, uploaded Wix icon `5a08a3_05dcee3f99224020bfef7a9d92f68043~mv2.png`, and patched BerlinTools Layout Fixes to revision `32`.
+
+**QA:** Wix draft readback confirmed 3 embeds, 5 image nodes, all alt text, SEO/social/canonical/robots `index, follow, max-image-preview:large`, 5 SEO keywords, and BlogPosting JSON-LD. 5 Wikimedia/open-license article images selected with contact sheets viewed; no paid image-generation API and no AI article visuals. Local widget/QS/FAQ desktop + 390px QA overflow `0`; `node tools-hub/validate-data.mjs`, syntax checks, body leak validator, and `git diff --check` passed. Wix tool route returns 200.
+
+**Opened:** Commit/push/deploy is still needed before GitHub Pages serves `berlin-flea-market-picker/`, Quick Summary, and FAQ for Wix preview/tool iframe; direct Pages widget URL currently returns 404.
+
+**Closed:** Local widget/tool/blog package is complete and ready to push when approved.
+
 ## 2026-06-25 — Codex (daily featured/listing refresh)
 
 **Did:** Günlük featured/listing refresh tamamlandı; Wix Blog API envanteri 138 postla yenilendi, Heatwave lead korundu, yeni BER Airport Departure Guide `/blog` rail ve homepage blog teaser'a eklendi, BER Airport Departure Planner `/berlin-tools` Start here alanına alındı. **Changed:** `scripts/generate-blog-index-data.mjs`, `blog-index/data.json`, `blog-home/data.json`, `tools-hub/data.json`; commit `18bb0dc` pushed to `origin/main`. Root Wix custom embed `BerlinWalk Blog Featured Posts` revision `12` olarak patch'lendi. **QA:** JSON parse, `node --check scripts/generate-blog-index-data.mjs`, root `node --check scripts/update-blog-feature-embed.mjs`, `node tools-hub/validate-data.mjs` (`64 tools, 62 visible`) ve `git diff --check` geçti. GitHub Pages deploy gecikmeden sonra `Last-Modified Thu, 25 Jun 2026 02:51:53/54 GMT` ile güncel data servis etti. Canlı Playwright QA: homepage BER mini post, `/blog` Heatwave + BER rail, `/berlin-tools` Start here `Transport Ticket`, `What's Open`, `First-Day`, `BER Airport Departure`, `Luggage`, `Lakes`, `/widgets` BER tool; horizontal overflow `0`. **Opened:** Bu run öncesinden kalan unrelated `.playwright-cli/console-*.log`, `SESSION_LOG.md` ve `worldcup-fixtures/index.html` kirli duruyor; refresh commit'ine dahil edilmedi. **Closed:** Discovery/listing yüzeyleri 2026-06-25 run'ı için canlıda güncel.
+
+## 2026-06-25 — Codex (World Cup fixtures score update)
+
+**Did:** Added final scores for the two score-check-due FIFA World Cup Group B matches in the 01:30 CEST automation run: Switzerland 2-1 Canada and Bosnia and Herzegovina 3-1 Qatar. **Changed:** `worldcup-fixtures/index.html` only: two `M` rows gained final-score fields and `SCORE_UPDATED` is now `25 Jun 2026, 01:36 CEST`. **QA:** Inline JS parse found 72 rows, 50 scored rows, and 0 malformed rows. Local Playwright QA at 1280px and 390px found `.bw-match.final = 50`, updated label visible, horizontal overflow `0`; only local favicon 404 console noise. `git diff --check` passed. **Opened:** Commit/push/deploy is still needed before GitHub Pages live widget updates. **Closed:** Due score updates are complete locally.
 
 ## 2026-06-24 — Codex (homepage Games compact gap fix)
 
