@@ -111,6 +111,7 @@ const TOPICS = [
       'why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point',
       'how-berlin-was-divided-a-simple-guide-to-east-vs-west',
       'did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth',
+      'charlottenburg-palace-berlin',
     ],
     match: /(history|myth|wall|cold war|gdr|east|west|before|after|then|now|wwii|nazi|prussia|ampelmann|jfk|old town|rebuilt)/i,
   },
@@ -187,6 +188,7 @@ const REQUIRED_SLUGS = [
   // default window so the curated hero/rail survives a regen.
   'berlin-heatwave-day-plan',
   'berlin-ber-airport-departure-guide',
+  'charlottenburg-palace-berlin',
   'grocery-shopping-in-berlin',
   'pharmacy-in-berlin',
   'berlin-night-transport',
@@ -473,6 +475,7 @@ function relatedToolSlugFor(post) {
   if (/(luggage|storage|suitcase)/.test(s)) return 'berlin-luggage-storage';
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
   if (/(berlin-ber-airport-departure-guide|ber airport departure|airport departure|berlin airport security|ber departure)/.test(s)) return 'berlin-ber-airport-departure-planner';
+  if (/(charlottenburg-palace-berlin|charlottenburg palace|schloss charlottenburg)/.test(s)) return 'charlottenburg-palace-visit-planner';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';
   if (/(public-holiday|public holiday|public-holidays|public holidays|bank-holiday|bank holiday|holiday-closures|holiday closures|shop-closures|shop closures|shops-closed|shops closed)/.test(s)) return 'berlin-public-holiday-checker';

@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-25T04:10:19.211Z",
+  "updatedAt": "2026-06-25T06:50:46.857Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 139,
+  "totalPosts": 140,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1147,6 +1147,23 @@
           "relatedToolSlug": ""
         },
         {
+          "title": "Charlottenburg Palace Berlin: Tickets, Gardens and What to See First",
+          "slug": "charlottenburg-palace-berlin",
+          "path": "/post/charlottenburg-palace-berlin",
+          "url": "https://www.berlinwalk.com/post/charlottenburg-palace-berlin",
+          "excerpt": "A practical, historically grounded Charlottenburg Palace Berlin guide: which ticket to buy, how long to allow, what to see first, and how to avoid the common planning mistakes.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
+          "topic": "history-myths",
+          "topicLabel": "Berlin History & Myths",
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-25T06:33:40.963Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
+          "alt": "Charlottenburg Palace in Berlin seen across water and fountains with the palace dome above",
+          "relatedToolSlug": "charlottenburg-palace-visit-planner"
+        },
+        {
           "title": "Brandenburg Gate Berlin: A Visitor's Guide (2026)",
           "slug": "brandenburg-gate-berlin-visitors-guide",
           "path": "/post/brandenburg-gate-berlin-visitors-guide",
@@ -1162,23 +1179,6 @@
           "thumb": "https://static.wixstatic.com/media/nsplsh_a606c6a5c8eb4416b0d7787e041fffd7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/A%20very%20tall%20building%20with%20a%20bunch%20of%20pillars.jpg",
           "alt": "Brandenburg Gate Berlin: A Visitor's Guide (2026)",
           "relatedToolSlug": ""
-        },
-        {
-          "title": "Nikolaiviertel: Berlin's Rebuilt Old Town and Why It Feels So Strange",
-          "slug": "nikolaiviertel-rebuilt-old-town",
-          "path": "/post/nikolaiviertel-rebuilt-old-town",
-          "url": "https://www.berlinwalk.com/post/nikolaiviertel-rebuilt-old-town",
-          "excerpt": "A Berlin guide's honest walk through the Nikolaiviertel, the GDR's 1987 rebuild of Berlin's medieval old town. What is original, what is reconstructed, and why it matters.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "history-myths",
-          "topicLabel": "Berlin History & Myths",
-          "readTime": "6 min read",
-          "publishedDate": "2026-05-24T16:53:08Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_8ab84c4b106e41728be5c080f5c94a58~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Nikolaiviertelfromabove.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_8ab84c4b106e41728be5c080f5c94a58~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Nikolaiviertelfromabove.jpg",
-          "alt": "Aerial view of a dense European city with a red-roofed church, clock tower, and winding roads beside tall apartments.",
-          "relatedToolSlug": "medieval-berlin-mini-walk"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Charlottenburg Palace Berlin: Tickets, Gardens and What to See First",
+      "slug": "charlottenburg-palace-berlin",
+      "path": "/post/charlottenburg-palace-berlin",
+      "url": "https://www.berlinwalk.com/post/charlottenburg-palace-berlin",
+      "excerpt": "A practical, historically grounded Charlottenburg Palace Berlin guide: which ticket to buy, how long to allow, what to see first, and how to avoid the common planning mistakes.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-25T06:33:40.963Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
+      "alt": "Charlottenburg Palace in Berlin seen across water and fountains with the palace dome above",
+      "relatedToolSlug": "charlottenburg-palace-visit-planner"
+    },
+    {
       "title": "Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt",
       "slug": "berlin-flea-markets",
       "path": "/post/berlin-flea-markets",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg",
       "alt": "The KaDeWe department store in Berlin, a classic shopping landmark where non-EU visitors may ask about Tax Free shopping",
       "relatedToolSlug": "berlin-shopping-areas"
-    },
-    {
-      "title": "Berlin with Kids: What to Do, Where to Stay and How to Plan an Easy Family Day",
-      "slug": "berlin-with-kids",
-      "path": "/post/berlin-with-kids",
-      "url": "https://www.berlinwalk.com/post/berlin-with-kids",
-      "excerpt": "A practical Berlin family travel guide with age-based planning advice, kid-friendly museums, parks, public transport rules, rainy-day backups and an interactive family day planner.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-17T12:18:23.353Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f480e636a6124ac9a34483c59b5003cb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-with-kids-01-berlin-with-kids-family-alexanderplatz-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f480e636a6124ac9a34483c59b5003cb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-with-kids-01-berlin-with-kids-family-alexanderplatz-cover.jpg",
-      "alt": "A family walking through Alexanderplatz at golden hour with the Berlin TV Tower above them",
-      "relatedToolSlug": "berlin-family-day-planner"
     }
   ],
   "allPosts": [
+    {
+      "title": "Charlottenburg Palace Berlin: Tickets, Gardens and What to See First",
+      "slug": "charlottenburg-palace-berlin",
+      "path": "/post/charlottenburg-palace-berlin",
+      "url": "https://www.berlinwalk.com/post/charlottenburg-palace-berlin",
+      "excerpt": "A practical, historically grounded Charlottenburg Palace Berlin guide: which ticket to buy, how long to allow, what to see first, and how to avoid the common planning mistakes.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-25T06:33:40.963Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
+      "alt": "Charlottenburg Palace in Berlin seen across water and fountains with the palace dome above",
+      "relatedToolSlug": "charlottenburg-palace-visit-planner"
+    },
     {
       "title": "Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt",
       "slug": "berlin-flea-markets",
