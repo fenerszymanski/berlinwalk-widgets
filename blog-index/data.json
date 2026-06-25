@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-25T02:48:17.842Z",
+  "updatedAt": "2026-06-25T04:10:19.211Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 138,
+  "totalPosts": 139,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt",
+      "slug": "berlin-flea-markets",
+      "path": "/post/berlin-flea-markets",
+      "url": "https://www.berlinwalk.com/post/berlin-flea-markets",
+      "excerpt": "A practical guide to Berlin flea markets for tourists: when to choose Mauerpark, Boxhagener Platz, Straße des 17. Juni, Bode Museum or RAW, and how to shop without wasting half your weekend.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-25T04:06:54.466Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_717e4dd64f2b4b2a9192b8ab7c6ad913~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-flea-markets-02-mauerpark-stalls.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_717e4dd64f2b4b2a9192b8ab7c6ad913~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-flea-markets-02-mauerpark-stalls.jpg",
+      "alt": "Antique cameras, porcelain and small vintage objects on a Berlin flea market table",
+      "relatedToolSlug": "berlin-flea-market-picker"
+    },
+    {
       "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
       "slug": "berlin-ber-airport-departure-guide",
       "path": "/post/berlin-ber-airport-departure-guide",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f480e636a6124ac9a34483c59b5003cb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-with-kids-01-berlin-with-kids-family-alexanderplatz-cover.jpg",
       "alt": "A family walking through Alexanderplatz at golden hour with the Berlin TV Tower above them",
       "relatedToolSlug": "berlin-family-day-planner"
-    },
-    {
-      "title": "Berlin Hauptbahnhof Guide: Arrival, Tickets, Luggage and What to Do First",
-      "slug": "berlin-hauptbahnhof-guide",
-      "path": "/post/berlin-hauptbahnhof-guide",
-      "url": "https://www.berlinwalk.com/post/berlin-hauptbahnhof-guide",
-      "excerpt": "A practical Berlin Hauptbahnhof guide for tourists arriving by train, with exits, tickets, luggage lockers, onward transport, food, toilets and first-hour plans.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-06-16T04:30:51.343Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_ba65ce2b9671495da22d925072049547~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-hauptbahnhof-guide-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_ba65ce2b9671495da22d925072049547~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-hauptbahnhof-guide-cover.jpg",
-      "alt": "The glass entrance of Berlin Hauptbahnhof on a clear day, used as the cover for a tourist arrival guide",
-      "relatedToolSlug": "berlin-luggage-storage"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt",
+      "slug": "berlin-flea-markets",
+      "path": "/post/berlin-flea-markets",
+      "url": "https://www.berlinwalk.com/post/berlin-flea-markets",
+      "excerpt": "A practical guide to Berlin flea markets for tourists: when to choose Mauerpark, Boxhagener Platz, Straße des 17. Juni, Bode Museum or RAW, and how to shop without wasting half your weekend.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-25T04:06:54.466Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_717e4dd64f2b4b2a9192b8ab7c6ad913~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-flea-markets-02-mauerpark-stalls.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_717e4dd64f2b4b2a9192b8ab7c6ad913~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-flea-markets-02-mauerpark-stalls.jpg",
+      "alt": "Antique cameras, porcelain and small vintage objects on a Berlin flea market table",
+      "relatedToolSlug": "berlin-flea-market-picker"
+    },
     {
       "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
       "slug": "berlin-ber-airport-departure-guide",
