@@ -167,10 +167,11 @@ const HERO_SLUGS = {
   lead: 'berlin-heatwave-day-plan',
   secondary: [
     'alternative-transport-berlin',
+    'berlin-ber-airport-departure-guide',
     'grocery-shopping-in-berlin',
     'pharmacy-in-berlin',
-    'berlin-night-transport',
     'where-to-watch-2026-world-cup-in-berlin',
+    'berlin-night-transport',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'berlin-public-holidays-2026',
     'tax-free-shopping-berlin-vat-refund',
@@ -185,6 +186,7 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'berlin-heatwave-day-plan',
+  'berlin-ber-airport-departure-guide',
   'grocery-shopping-in-berlin',
   'pharmacy-in-berlin',
   'berlin-night-transport',

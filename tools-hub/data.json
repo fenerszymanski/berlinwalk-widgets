@@ -1493,7 +1493,6 @@
       "hubCategory": "Essentials",
       "type": "Guide",
       "priority": 3,
-      "featured": true,
       "seasonal": true,
       "seasonLabel": "Public holidays",
       "tags": [
@@ -1659,7 +1658,8 @@
       "embedHeight": 1220,
       "hubCategory": "Transport",
       "type": "Planner",
-      "priority": 20,
+      "priority": 9,
+      "featured": true,
       "tags": [
         "airport",
         "ber airport",

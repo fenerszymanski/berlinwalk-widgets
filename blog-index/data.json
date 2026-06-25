@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-24T04:55:59.744Z",
+  "updatedAt": "2026-06-25T02:48:17.842Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 138,
@@ -78,6 +78,23 @@
         "relatedToolSlug": "berlin-mobility-app-picker"
       },
       {
+        "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
+        "slug": "berlin-ber-airport-departure-guide",
+        "path": "/post/berlin-ber-airport-departure-guide",
+        "url": "https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide",
+        "excerpt": "A practical Berlin BER Airport departure guide for tourists leaving the city: timing, trains, terminals, security, liquids, power banks and the mistakes that make the last morning stressful.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "9 min read",
+        "publishedDate": "2026-06-24T04:53:16.148Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
+        "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front",
+        "relatedToolSlug": "berlin-ber-airport-departure-planner"
+      },
+      {
         "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
         "slug": "grocery-shopping-in-berlin",
         "path": "/post/grocery-shopping-in-berlin",
@@ -110,23 +127,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_e973e3219fa44daa9d7868bb6325ef73~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/pharmacy-in-berlin-05-alexa-apotheke-berlin.jpg",
         "alt": "Alexa Apotheke pharmacy in Berlin with illuminated red and green signage",
         "relatedToolSlug": "pharmacy-in-berlin-helper"
-      },
-      {
-        "title": "Berlin Night Transport: How to Get Around After Midnight",
-        "slug": "berlin-night-transport",
-        "path": "/post/berlin-night-transport",
-        "url": "https://www.berlinwalk.com/post/berlin-night-transport",
-        "excerpt": "A practical tourist guide to Berlin night transport after midnight, with weekday vs weekend rules, night buses, tickets, safety habits, taxi fallbacks and a visual timeline.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-06-19T06:55:28.241Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg",
-        "alt": "Alexanderplatz at night with U-Bahn sign, TV Tower and blurred tram, showing Berlin night transport",
-        "relatedToolSlug": "berlin-night-transport-checker"
       },
       {
         "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
