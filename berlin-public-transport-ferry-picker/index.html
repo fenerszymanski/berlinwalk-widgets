@@ -1,0 +1,588 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Public Transport Ferry Picker | BerlinWalk</title>
+  <meta name="description" content="Choose the right Berlin public transport ferry: F10, F11, F12, F21, F23, F24 or a central tourist boat instead.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-ferry-picker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-ferry-picker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-ferry-picker *,
+    #bw-ferry-picker *::before,
+    #bw-ferry-picker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-ferry-picker .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-ferry-picker .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.22)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-ferry-picker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-ferry-picker h2,
+    #bw-ferry-picker h3,
+    #bw-ferry-picker p {
+      margin-top: 0;
+    }
+
+    #bw-ferry-picker .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-ferry-picker .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 820px;
+    }
+
+    #bw-ferry-picker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(250px, 0.82fr) minmax(0, 1.18fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-ferry-picker .bw-panel,
+    #bw-ferry-picker .bw-result,
+    #bw-ferry-picker .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-ferry-picker .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-ferry-picker label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-ferry-picker .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-ferry-picker select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-ferry-picker select:focus-visible,
+    #bw-ferry-picker a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-ferry-picker .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-ferry-picker .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-ferry-picker .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-ferry-picker .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-ferry-picker .bw-result p,
+    #bw-ferry-picker li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-ferry-picker .bw-stats,
+    #bw-ferry-picker .bw-links {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-ferry-picker .bw-stat,
+    #bw-ferry-picker .bw-link {
+      background: #F8FBF2;
+      border: 1px solid rgba(124, 179, 66, 0.28);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-ferry-picker .bw-stat b {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.9px;
+      line-height: 1.25;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-ferry-picker .bw-stat span {
+      color: var(--bw-text);
+      display: block;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-ferry-picker ul {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    #bw-ferry-picker .bw-link {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.35;
+      text-decoration: none;
+    }
+
+    #bw-ferry-picker .bw-link:hover {
+      background: #EEF6E1;
+    }
+
+    #bw-ferry-picker .bw-grid {
+      display: grid;
+      gap: 10px;
+      grid-column: 1 / -1;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-ferry-picker .bw-card {
+      display: grid;
+      gap: 7px;
+      padding: 12px;
+    }
+
+    #bw-ferry-picker .bw-card b {
+      color: var(--bw-green);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    #bw-ferry-picker .bw-card span {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    #bw-ferry-picker .bw-foot {
+      background: #F8FBF2;
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 12px 20px;
+    }
+
+    #bw-ferry-picker .bw-foot a {
+      color: var(--bw-green);
+      font-weight: 900;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    @media (max-width: 820px) {
+      #bw-ferry-picker .bw-body {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-ferry-picker .bw-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 560px) {
+      #bw-ferry-picker {
+        margin: 18px 0;
+      }
+
+      #bw-ferry-picker .bw-head,
+      #bw-ferry-picker .bw-body,
+      #bw-ferry-picker .bw-foot {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      #bw-ferry-picker .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-ferry-picker .bw-stats,
+      #bw-ferry-picker .bw-links,
+      #bw-ferry-picker .bw-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <div class="bw-shell" role="region" aria-label="Berlin public transport ferry picker">
+    <div class="bw-head">
+      <p class="bw-kicker">BerlinWalk Ferry Picker</p>
+      <h2 class="bw-title">Choose the right BVG ferry</h2>
+      <p class="bw-sub">A fast filter for F10, F11, F12, F21, F23, F24, or a central sightseeing boat when the ferry is the wrong tool.</p>
+    </div>
+
+    <div class="bw-body">
+      <div class="bw-panel">
+        <form class="bw-form" id="bw-ferry-form">
+          <label>
+            <span class="bw-label">Main goal</span>
+            <select id="bw-goal">
+              <option value="scenic">Cheap scenic boat ride</option>
+              <option value="local">Useful local crossing</option>
+              <option value="nature">Slow lake or forest day</option>
+              <option value="rowboat">Tiny rowboat novelty</option>
+              <option value="landmarks">Central landmarks and commentary</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Starting point</span>
+            <select id="bw-start">
+              <option value="central">Mitte, City West or first-time route</option>
+              <option value="west">Already near Wannsee or west Berlin</option>
+              <option value="southeast">Already in southeast Berlin</option>
+              <option value="unknown">Not sure yet</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">When are you going?</span>
+            <select id="bw-season">
+              <option value="warm">Spring to autumn, not Monday</option>
+              <option value="weekend">Summer weekend or public holiday</option>
+              <option value="monday">Monday</option>
+              <option value="winter">Winter or shoulder-season weekday</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Time budget</span>
+            <select id="bw-time">
+              <option value="half">Half day or more</option>
+              <option value="two">2 to 3 hours</option>
+              <option value="short">Under 1 hour</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Bike plan</span>
+            <select id="bw-bike">
+              <option value="none">No bike</option>
+              <option value="nice">Bike would be nice</option>
+              <option value="must">Bike must come with me</option>
+            </select>
+          </label>
+        </form>
+        <p class="bw-note">Ferry timetables can change for season, fog, ice, water levels and operating reasons. Check BVG before leaving.</p>
+      </div>
+
+      <div class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="bw-pill">Best fit</span>
+        <h3 id="bw-choice">F10 Wannsee to Alt-Kladow</h3>
+        <p id="bw-summary">The easiest scenic BVG ferry for most visitors: a real 20-minute public transport crossing with a lake-trip feel.</p>
+        <div class="bw-stats">
+          <div class="bw-stat"><b>Best for</b><span id="bw-best">First cheap boat ride</span></div>
+          <div class="bw-stat"><b>Time</b><span id="bw-time-result">Half day works best</span></div>
+          <div class="bw-stat"><b>Watch out</b><span id="bw-warning">Short-trip fare does not apply</span></div>
+        </div>
+        <ul id="bw-steps">
+          <li>Take the S-Bahn to Wannsee and walk to the ferry pier.</li>
+          <li>Ride across the Havel to Alt-Kladow.</li>
+          <li>Keep the plan slow: water, walk, return.</li>
+        </ul>
+        <div class="bw-links">
+          <a class="bw-link" id="bw-primary-link" href="https://www.bvg.de/en/connections/route-overview/f10" target="_blank" rel="noopener">Official BVG line page</a>
+          <a class="bw-link" href="https://www.berlinwalk.com/tools/transport-ticket-calculator" target="_blank" rel="noopener">Ticket calculator</a>
+          <a class="bw-link" href="https://www.berlinwalk.com/post/tickets-boat-tours-river-cruises-berlin" target="_blank" rel="noopener">Compare boat tours</a>
+        </div>
+      </div>
+
+      <div class="bw-grid" aria-label="Berlin BVG ferry line notes">
+        <div class="bw-card"><b>F10</b><span>Wannsee to Alt-Kladow. Best scenic first choice.</span></div>
+        <div class="bw-card"><b>F11</b><span>Very short southeast crossing. Useful, not a sightseeing detour.</span></div>
+        <div class="bw-card"><b>F12</b><span>Short Grünau/Wendenschloss crossing for a local water route.</span></div>
+        <div class="bw-card"><b>F21</b><span>Seasonal Schmöckwitz area ferry for slow lake days.</span></div>
+        <div class="bw-card"><b>F23</b><span>Seasonal Rahnsdorf/Müggelsee route with the best nature-day feel.</span></div>
+        <div class="bw-card"><b>F24</b><span>Small seasonal rowboat ferry. Charming, but plan around its limits.</span></div>
+      </div>
+    </div>
+
+    <p class="bw-foot">Current planning note: BVG lists F21/F23 seasonally for 03 Apr to 01 Nov 2026 and F24 for 01 May to 04 Oct 2026 in the checked PDFs. Verify the <a href="https://www.bvg.de/de/verbindungen/netzplaene-und-linien/faehre" target="_blank" rel="noopener">official ferry overview</a> on your travel day.</p>
+  </div>
+
+  <script>
+    (function () {
+      var ROUTES = {
+        f10: {
+          pill: 'Best fit',
+          choice: 'F10 Wannsee to Alt-Kladow',
+          summary: 'The easiest scenic BVG ferry for most visitors: a real 20-minute public transport crossing with a lake-trip feel.',
+          best: 'First cheap boat ride',
+          time: 'Half day works best',
+          warning: 'Short-trip fare does not apply',
+          steps: [
+            'Take the S-Bahn to Wannsee and walk to the ferry pier.',
+            'Ride across the Havel to Alt-Kladow.',
+            'Keep the plan slow: water, walk, return.'
+          ],
+          link: 'https://www.bvg.de/en/connections/route-overview/f10'
+        },
+        f11f12: {
+          pill: 'Local crossing',
+          choice: 'F11 or F12 in southeast Berlin',
+          summary: 'Use these when your day is already in the southeast. They are practical two-minute crossings, not a central tourist detour.',
+          best: 'Local movement',
+          time: 'Short stop',
+          warning: 'Not worth crossing town for alone',
+          steps: [
+            'Use F11 around Baumschulenstraße or F12 around Grünau/Wendenschloss.',
+            'Pair the ferry with a bike route, water walk or southeast plan.',
+            'Choose F10 instead if you want one obvious scenic visitor ride.'
+          ],
+          link: 'https://www.bvg.de/de/verbindungen/netzplaene-und-linien/faehre'
+        },
+        f23: {
+          pill: 'Nature day',
+          choice: 'F23 Rahnsdorf and Müggelsee',
+          summary: 'The strongest choice when you want water, forest edges and a slower southeast Berlin day.',
+          best: 'Müggelsee day',
+          time: 'Half day or more',
+          warning: 'Seasonal and usually no Monday service',
+          steps: [
+            'Plan a slow day around Rahnsdorf, Müggelsee or Neu Helgoland.',
+            'Check the seasonal timetable before leaving.',
+            'Keep backup transport in mind for the return.'
+          ],
+          link: 'https://www.bvg.de/de/verbindungen/netzplaene-und-linien/faehre'
+        },
+        f24: {
+          pill: 'Tiny novelty',
+          choice: 'F24 rowboat ferry',
+          summary: 'Pick this only when the small rowboat itself is the point and the current weekend or holiday timetable works.',
+          best: 'Slow curiosity',
+          time: 'Flexible day',
+          warning: 'Limited season and operating days',
+          steps: [
+            'Use F24 as a small highlight inside a Rahnsdorf day.',
+            'Do not make it your only reason to cross Berlin.',
+            'Avoid relying on bike space or tight onward connections.'
+          ],
+          link: 'https://www.bvg.de/de/verbindungen/netzplaene-und-linien/faehre'
+        },
+        cruise: {
+          pill: 'Better match',
+          choice: 'Choose a central sightseeing boat',
+          summary: 'If you want Museum Island, Reichstag-area bridges and commentary, a paid Spree cruise fits better than a BVG ferry.',
+          best: 'Landmark orientation',
+          time: '60 to 120 minutes',
+          warning: 'Not a public transport ferry',
+          steps: [
+            'Use a central Spree or canal cruise for sightseeing commentary.',
+            'Use BVG ferries for local crossings and lake atmosphere.',
+            'Do not expect F10 to show you the central landmarks.'
+          ],
+          link: 'https://www.berlinwalk.com/post/tickets-boat-tours-river-cruises-berlin'
+        }
+      };
+
+      var form = document.getElementById('bw-ferry-form');
+      var fields = {
+        goal: document.getElementById('bw-goal'),
+        start: document.getElementById('bw-start'),
+        season: document.getElementById('bw-season'),
+        time: document.getElementById('bw-time'),
+        bike: document.getElementById('bw-bike')
+      };
+      var els = {
+        pill: document.getElementById('bw-pill'),
+        choice: document.getElementById('bw-choice'),
+        summary: document.getElementById('bw-summary'),
+        best: document.getElementById('bw-best'),
+        time: document.getElementById('bw-time-result'),
+        warning: document.getElementById('bw-warning'),
+        steps: document.getElementById('bw-steps'),
+        link: document.getElementById('bw-primary-link')
+      };
+
+      function value(name) {
+        return fields[name].value;
+      }
+
+      function choose() {
+        var goal = value('goal');
+        var start = value('start');
+        var season = value('season');
+        var time = value('time');
+        var bike = value('bike');
+
+        if (goal === 'landmarks') return ROUTES.cruise;
+        if (goal === 'rowboat' && season === 'weekend' && bike !== 'must') return ROUTES.f24;
+        if (goal === 'nature' && season !== 'winter' && season !== 'monday' && time !== 'short') return ROUTES.f23;
+        if (start === 'southeast' && goal === 'local') return ROUTES.f11f12;
+        if (start === 'southeast' && time === 'short') return ROUTES.f11f12;
+        if (bike === 'must' && goal === 'rowboat') return ROUTES.f23;
+        if (season === 'winter' || season === 'monday') return ROUTES.f10;
+        if (time === 'short' && start === 'southeast') return ROUTES.f11f12;
+        return ROUTES.f10;
+      }
+
+      function render(route) {
+        els.pill.textContent = route.pill;
+        els.choice.textContent = route.choice;
+        els.summary.textContent = route.summary;
+        els.best.textContent = route.best;
+        els.time.textContent = route.time;
+        els.warning.textContent = route.warning;
+        els.steps.innerHTML = '';
+        route.steps.forEach(function (step) {
+          var li = document.createElement('li');
+          li.textContent = step;
+          els.steps.appendChild(li);
+        });
+        els.link.href = route.link;
+        els.link.textContent = route === ROUTES.cruise ? 'Boat tour guide' : 'Official BVG timetable';
+      }
+
+      function update() {
+        render(choose());
+      }
+
+      form.addEventListener('change', update);
+      update();
+    })();
+  </script>
+</div>
+</body>
+</html>
