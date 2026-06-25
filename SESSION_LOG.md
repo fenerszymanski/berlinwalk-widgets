@@ -1,3 +1,15 @@
+## 2026-06-25 — Codex (Berlin flea markets publish)
+
+**Did:** Published `Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt` live at `https://www.berlinwalk.com/post/berlin-flea-markets`; post ID `dfa7343f-4019-4d5c-ac34-d25a3a80bcd9`.
+
+**Changed:** `scripts/generate-blog-index-data.mjs` now maps flea-market posts to `berlin-flea-market-picker`; `blog-index/data.json` regenerated from Wix Blog API with 139 posts and the new post as Latest #1. Commit `425d73e` was pushed to `origin/main`.
+
+**QA:** Direct widget/QS/FAQ are live on GitHub Pages; Wix API readback confirmed `PUBLISHED`, `hasUnpublishedChanges:false`, 3 embeds, 5 images/captions, all alt text, canonical, robots and BlogPosting JSON-LD. Live browser QA passed desktop and 390px mobile for the blog post, `/tools/berlin-flea-market-picker`, and the direct widget with overflow `0`; widget interaction updated to `Flea Market on Strasse des 17. Juni`. Search Console UI returned `Indexing requested` for the blog URL and tool URL.
+
+**Opened:** GitHub Pages deploy for `425d73e` succeeded but edge `blog-index/data.json` may briefly serve old cache; recheck the cache-busted JSON if `/blog` rail looks stale.
+
+**Closed:** Flea market blog/tool package is live and post-publish QA is complete.
+
 ## 2026-06-25 — Codex (transport ticket picker option audit)
 
 **Did:** Audited the Berlin public transport ticket picker against current official BVG, VBB, S-Bahn Berlin, DB Deutschland-Ticket, and Berlin WelcomeCard sources after Yusuf flagged missing LGBT/Queer ticket options.
