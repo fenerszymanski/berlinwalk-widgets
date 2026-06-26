@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Topography of Terror Visit Planner | BerlinWalk</title>
+  <meta name="description" content="Plan a Topography of Terror Berlin visit: time needed, nearby stops, audio guide, Wall remains, family caution and what not to stack in one day.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-topography-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-topography-planner {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-border: #D9E7C8;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-topography-planner *,
+    #bw-topography-planner *::before,
+    #bw-topography-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-topography-planner .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-topography-planner .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.14), rgba(124, 179, 66, 0.22)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-topography-planner .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-topography-planner h2,
+    #bw-topography-planner h3,
+    #bw-topography-planner p {
+      margin-top: 0;
+    }
+
+    #bw-topography-planner .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-topography-planner .bw-sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 840px;
+    }
+
+    #bw-topography-planner .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-topography-planner .bw-panel,
+    #bw-topography-planner .bw-result,
+    #bw-topography-planner .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-topography-planner .bw-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-topography-planner label {
+      display: block;
+      min-width: 0;
+    }
+
+    #bw-topography-planner .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-topography-planner select {
+      appearance: none;
+      background:
+        linear-gradient(45deg, transparent 50%, var(--bw-green) 50%) right 14px center / 8px 8px no-repeat,
+        linear-gradient(135deg, var(--bw-green) 50%, transparent 50%) right 9px center / 8px 8px no-repeat,
+        var(--bw-white);
+      border: 1.5px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 850;
+      line-height: 1.25;
+      min-height: 44px;
+      padding: 9px 34px 9px 10px;
+      width: 100%;
+    }
+
+    #bw-topography-planner select:focus-visible,
+    #bw-topography-planner a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.82);
+      outline-offset: 2px;
+    }
+
+    #bw-topography-planner .bw-note {
+      background: #F2F8E8;
+      border: 1px solid rgba(124, 179, 66, 0.32);
+      border-radius: 8px;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      padding: 10px;
+    }
+
+    #bw-topography-planner .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-topography-planner .bw-pill {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 9px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-topography-planner .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-topography-planner .bw-result p,
+    #bw-topography-planner li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-topography-planner .bw-stats,
+    #bw-topography-planner .bw-steps,
+    #bw-topography-planner .bw-links {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-topography-planner .bw-stat,
+    #bw-topography-planner .bw-step,
+    #bw-topography-planner .bw-link {
+      background: #F8FBF1;
+      border: 1px solid rgba(27, 94, 32, 0.12);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 10px;
+    }
+
+    #bw-topography-planner .bw-stat strong,
+    #bw-topography-planner .bw-step strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-topography-planner .bw-stat span,
+    #bw-topography-planner .bw-step span {
+      color: var(--bw-text);
+      display: block;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    #bw-topography-planner .bw-reasons {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    #bw-topography-planner .bw-link {
+      color: var(--bw-green);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 900;
+      line-height: 1.3;
+      text-decoration: none;
+    }
+
+    #bw-topography-planner .bw-link span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.35;
+      margin-top: 4px;
+    }
+
+    #bw-topography-planner .bw-small-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-topography-planner .bw-card h3 {
+      color: var(--bw-green);
+      font-size: 14px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.25;
+      margin: 0 0 5px;
+    }
+
+    #bw-topography-planner .bw-card p {
+      color: var(--bw-muted);
+      font-size: 12.8px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    @media (max-width: 760px) {
+      #bw-topography-planner {
+        margin: 20px 0;
+      }
+
+      #bw-topography-planner .bw-head {
+        padding: 18px 16px;
+      }
+
+      #bw-topography-planner .bw-title {
+        font-size: 22px;
+      }
+
+      #bw-topography-planner .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-topography-planner .bw-stats,
+      #bw-topography-planner .bw-steps,
+      #bw-topography-planner .bw-links,
+      #bw-topography-planner .bw-small-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-topography-title">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk planning tool</p>
+      <h2 class="bw-title" id="bw-topography-title">Topography of Terror Visit Planner</h2>
+      <p class="bw-sub">Choose whether this serious free history stop fits your day, how long to give it, and what nearby site to pair or avoid.</p>
+    </header>
+
+    <div class="bw-body">
+      <aside class="bw-panel">
+        <div class="bw-form">
+          <label>
+            <span class="bw-label">Time available</span>
+            <select id="bw-time">
+              <option value="90">75 to 120 minutes</option>
+              <option value="45">30 to 45 minutes</option>
+              <option value="120">2 hours or more</option>
+              <option value="late">Arriving after 19:00</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">Starting point</span>
+            <select id="bw-start">
+              <option value="potsdamer">Potsdamer Platz / Anhalter Bahnhof</option>
+              <option value="checkpoint">Checkpoint Charlie</option>
+              <option value="brandenburg">Brandenburg Gate / Holocaust Memorial</option>
+              <option value="alex">Alexanderplatz / Hackescher Markt</option>
+            </select>
+          </label>
+
+          <label>
+            <span class="bw-label">What kind of day is it?</span>
+            <select id="bw-mood">
+              <option value="serious">I want a serious history stop</option>
+              <option value="wall">I mainly want Berlin Wall context</option>
+              <option value="rain">It is raining or too hot outside</option>
+              <option value="family">I am with younger children</option>
+              <option value="sachsenhausen">I already visited Sachsenhausen today</option>
+            </select>
+          </label>
+
+          <p class="bw-note">Baseline: admission is free, exhibitions are normally daily 10:00-20:00, and the audio guide is a good 60-minute frame. Check the official page before leaving.</p>
+        </div>
+      </aside>
+
+      <main class="bw-result" aria-live="polite">
+        <span class="bw-pill" id="bw-verdict">Best fit</span>
+        <h3 id="bw-heading">Use Topography as the serious anchor</h3>
+        <p id="bw-copy">Give the site 75 to 120 minutes, start with the indoor exhibition, then add the outdoor Wall and site-trace sections.</p>
+
+        <div class="bw-stats" aria-label="Visit summary">
+          <div class="bw-stat"><strong>Time</strong><span id="bw-stat-time">75-120 min</span></div>
+          <div class="bw-stat"><strong>Cost</strong><span id="bw-stat-cost">Free entry</span></div>
+          <div class="bw-stat"><strong>Pair with</strong><span id="bw-stat-pair">Checkpoint or Memorial</span></div>
+        </div>
+
+        <ol class="bw-reasons" id="bw-reasons"></ol>
+
+        <div class="bw-steps" aria-label="Suggested plan">
+          <div class="bw-step"><strong>First</strong><span id="bw-step-one">Orient outside</span></div>
+          <div class="bw-step"><strong>Then</strong><span id="bw-step-two">Main exhibition</span></div>
+          <div class="bw-step"><strong>After</strong><span id="bw-step-three">Keep it light</span></div>
+        </div>
+
+        <div class="bw-links" aria-label="Useful links">
+          <a class="bw-link" href="https://www.topographie.de/en/your-visit/directions-opening-hours" target="_blank" rel="noopener">Official hours<span>Topography visitor page</span></a>
+          <a class="bw-link" href="https://www.google.com/maps/search/?api=1&query=Topographie+des+Terrors+Niederkirchnerstra%C3%9Fe+8+Berlin" target="_blank" rel="noopener">Open map<span>Niederkirchnerstrasse 8</span></a>
+          <a class="bw-link" href="https://www.berlinwalk.com/post/sachsenhausen-from-berlin" target="_blank" rel="noopener">Compare Sachsenhausen<span>When to choose a half-day memorial</span></a>
+        </div>
+      </main>
+    </div>
+
+    <div class="bw-body" style="padding-top:0;">
+      <section class="bw-small-grid" aria-label="Quick comparisons">
+        <article class="bw-card">
+          <h3>Choose Topography</h3>
+          <p>Best for Nazi-era documentation, a free central museum, the Wall section on Niederkirchnerstrasse, and a serious 1-2 hour visit.</p>
+        </article>
+        <article class="bw-card">
+          <h3>Choose another stop</h3>
+          <p>Use Tranenpalast for a short Cold War museum, Bernauer Strasse for the full Wall system, or Sachsenhausen for a separate half-day memorial.</p>
+        </article>
+      </section>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const root = document.getElementById('bw-topography-planner');
+      const state = {
+        time: root.querySelector('#bw-time'),
+        start: root.querySelector('#bw-start'),
+        mood: root.querySelector('#bw-mood')
+      };
+      const out = {
+        verdict: root.querySelector('#bw-verdict'),
+        heading: root.querySelector('#bw-heading'),
+        copy: root.querySelector('#bw-copy'),
+        time: root.querySelector('#bw-stat-time'),
+        cost: root.querySelector('#bw-stat-cost'),
+        pair: root.querySelector('#bw-stat-pair'),
+        reasons: root.querySelector('#bw-reasons'),
+        one: root.querySelector('#bw-step-one'),
+        two: root.querySelector('#bw-step-two'),
+        three: root.querySelector('#bw-step-three')
+      };
+
+      const startAdvice = {
+        potsdamer: 'You are already close. Walk over, then keep the next stop simple.',
+        checkpoint: 'Walk from Checkpoint Charlie, but do not let the tourist-photo mood set the tone.',
+        brandenburg: 'Pairing with the Holocaust Memorial can work if you still have attention left.',
+        alex: 'Take U2/U5/S-Bahn toward Potsdamer Platz or Anhalter Bahnhof and avoid a rushed end-of-day visit.'
+      };
+
+      function decision() {
+        const time = state.time.value;
+        const mood = state.mood.value;
+        const start = state.start.value;
+
+        if (mood === 'sachsenhausen') {
+          return {
+            verdict: 'Do not stack it',
+            heading: 'Save Topography for another day',
+            copy: 'If you already spent the day at Sachsenhausen, adding another heavy Nazi-era documentation site will likely flatten the experience.',
+            time: 'Not today',
+            pair: 'Quiet evening',
+            reasons: [
+              'Sachsenhausen needs time to process.',
+              'Topography is strongest when you can read slowly.',
+              startAdvice[start]
+            ],
+            steps: ['Eat or rest', 'Take a calm walk', 'Visit Topography fresh tomorrow']
+          };
+        }
+
+        if (mood === 'family') {
+          return {
+            verdict: 'Use caution',
+            heading: 'Only go if the children are old enough',
+            copy: 'Topography is document-heavy and serious. It can work for older teenagers, but it is not a default young-family stop.',
+            time: time === '120' ? '60-90 min' : 'Shorter visit',
+            pair: 'Lighter stop',
+            reasons: [
+              'The subject is persecution, terror and state violence.',
+              'Younger children may find it abstract or too heavy.',
+              startAdvice[start]
+            ],
+            steps: ['Set expectations', 'Use a shorter route', 'Do something lighter next']
+          };
+        }
+
+        if (time === 'late') {
+          return {
+            verdict: 'Too late inside',
+            heading: 'Do the outside only, or come back earlier',
+            copy: 'Arriving after 19:00 leaves too little time for the indoor exhibition. Use the outside site briefly and return another day if you can.',
+            time: '20-35 min',
+            pair: 'Evening walk',
+            reasons: [
+              'The exhibitions normally close at 20:00.',
+              'The indoor exhibition deserves more than a closing-hour skim.',
+              startAdvice[start]
+            ],
+            steps: ['Check official hours', 'Walk the Wall section', 'Return earlier if interested']
+          };
+        }
+
+        if (time === '45') {
+          return {
+            verdict: 'Short version',
+            heading: 'Use the outside site and one focused section',
+            copy: 'With 30 to 45 minutes, do not pretend you saw the museum properly. Pick the Wall/site context and one part of the exhibition.',
+            time: '30-45 min',
+            pair: mood === 'wall' ? 'Checkpoint Charlie' : 'Potsdamer Platz',
+            reasons: [
+              'A full visit is better at 75 minutes or more.',
+              'The Wall and site traces still make the stop worthwhile.',
+              startAdvice[start]
+            ],
+            steps: ['Orient outside', 'Choose one section', 'Do not add another heavy site']
+          };
+        }
+
+        if (mood === 'wall') {
+          return {
+            verdict: 'Wall context',
+            heading: 'Good central Wall add-on, not the full Wall story',
+            copy: 'Topography gives a powerful Wall section beside Nazi-era documentation. For the full border system, add Bernauer Strasse on another slot.',
+            time: time === '120' ? '90-120 min' : '75-90 min',
+            pair: 'Checkpoint or Bernauer',
+            reasons: [
+              'The preserved Wall section is visible and central.',
+              'The site is mainly about Nazi terror institutions, not only the Cold War.',
+              startAdvice[start]
+            ],
+            steps: ['Start outside', 'Read the site context', 'Choose Checkpoint or Bernauer']
+          };
+        }
+
+        if (mood === 'rain') {
+          return {
+            verdict: 'Strong bad-weather choice',
+            heading: 'Use it as a serious indoor anchor',
+            copy: 'Topography works well in rain or heat because the indoor exhibition is substantial. Still leave time for the outside Wall when weather allows.',
+            time: time === '120' ? '90-120 min' : '75-90 min',
+            pair: 'Cafe or quiet walk',
+            reasons: [
+              'The main exhibition is indoors and free.',
+              'The audio guide gives a clear one-hour frame.',
+              startAdvice[start]
+            ],
+            steps: ['Check hours', 'Use the main exhibition', 'Add outside if possible']
+          };
+        }
+
+        return {
+          verdict: 'Best fit',
+          heading: 'Use Topography as the serious anchor',
+          copy: 'Give the site 75 to 120 minutes, start with the indoor exhibition, then add the outdoor Wall and site-trace sections.',
+          time: time === '120' ? '90-120 min' : '75-120 min',
+          pair: start === 'brandenburg' ? 'Holocaust Memorial' : 'Checkpoint or Memorial',
+          reasons: [
+            'It is free, central and historically specific.',
+            'The indoor exhibition and outside site work best together.',
+            startAdvice[start]
+          ],
+          steps: ['Orient outside', 'Main exhibition', 'Keep it light after']
+        };
+      }
+
+      function render() {
+        const d = decision();
+        out.verdict.textContent = d.verdict;
+        out.heading.textContent = d.heading;
+        out.copy.textContent = d.copy;
+        out.time.textContent = d.time;
+        out.cost.textContent = 'Free entry';
+        out.pair.textContent = d.pair;
+        out.one.textContent = d.steps[0];
+        out.two.textContent = d.steps[1];
+        out.three.textContent = d.steps[2];
+        out.reasons.innerHTML = d.reasons.map((item) => `<li>${item}</li>`).join('');
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) window.BerlinWalkBrand.resize();
+      }
+
+      Object.values(state).forEach((input) => input.addEventListener('change', render));
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

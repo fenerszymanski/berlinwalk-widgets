@@ -134,7 +134,8 @@
   "charlottenburg-palace-berlin": "charlottenburg-palace-berlin",
   "traenenpalast-berlin": "traenenpalast-berlin",
   "berlin-public-transport-ferries": "berlin-public-transport-ferries",
-  "sachsenhausen-from-berlin": "sachsenhausen-from-berlin"
+  "sachsenhausen-from-berlin": "sachsenhausen-from-berlin",
+  "topography-of-terror-berlin": "topography-of-terror-berlin"
 };
 
   var SCHEMAS = {
@@ -6528,6 +6529,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, but not as a rushed same-afternoon add-on. BerlinWalk lasts about 2 hours in the historic centre, so Sachsenhausen works better on a separate morning or as the main plan of another day."
+        }
+      }
+    ]
+  },
+  "topography-of-terror-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Topography of Terror Berlin free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The official visitor page lists free admission. The exhibitions are normally open daily from 10:00 to 20:00, with outdoor areas until nightfall, 20:00 at the latest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do I need at Topography of Terror?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan 75 to 120 minutes for a meaningful first visit. The main exhibition is a roughly 60-minute frame, and the outdoor Wall/site sections need extra time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is Topography of Terror about?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is a documentation centre on the former grounds of Nazi terror institutions, including the Gestapo, SS leadership and Reich Security Main Office. The main focus is how terror was organized from Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berlin Wall at Topography of Terror?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, a preserved Wall section runs beside the site. It is powerful central Wall context, but the Berlin Wall Memorial at Bernauer Strasse is better if your main goal is the full border system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I visit Topography of Terror and Sachsenhausen on the same day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I would not. Sachsenhausen is a separate half-day memorial visit outside Berlin. If you do both on one day, you are likely to rush and understand less."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Topography of Terror good for children?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is better for older teenagers and adults. The exhibition is document-heavy and deals directly with persecution, terror and state violence, so it is not a default young-family stop."
         }
       }
     ]
