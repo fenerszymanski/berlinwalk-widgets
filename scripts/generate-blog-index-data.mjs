@@ -168,11 +168,12 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'berlin-heatwave-day-plan',
   secondary: [
-    'alternative-transport-berlin',
+    'berlin-public-transport-ferries',
     'berlin-ber-airport-departure-guide',
     'grocery-shopping-in-berlin',
     'pharmacy-in-berlin',
     'where-to-watch-2026-world-cup-in-berlin',
+    'alternative-transport-berlin',
     'berlin-night-transport',
     'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
     'berlin-public-holidays-2026',

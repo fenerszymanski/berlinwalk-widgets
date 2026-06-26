@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-25T21:07:34.971Z",
+  "updatedAt": "2026-06-26T02:02:53.585Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 143,
@@ -61,21 +61,21 @@
     },
     "secondary": [
       {
-        "title": "Alternative Transport in Berlin: MILES, Scooters, Bikes and Ride Apps",
-        "slug": "alternative-transport-berlin",
-        "path": "/post/alternative-transport-berlin",
-        "url": "https://www.berlinwalk.com/post/alternative-transport-berlin",
-        "excerpt": "A practical tourist guide to Berlin mobility apps, MILES-style car sharing, e-scooters, bike sharing, taxi apps and the map tools that make them useful.",
+        "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
+        "slug": "berlin-public-transport-ferries",
+        "path": "/post/berlin-public-transport-ferries",
+        "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
+        "excerpt": "A practical guide to Berlin public transport ferries: which BVG ferry tourists should choose, what tickets work, when F10 is worth it and when a Spree cruise is better.",
         "category": "Tourist Tips",
         "categorySlug": "tourist-tips",
         "topic": "first-day",
         "topicLabel": "First Day in Berlin",
-        "readTime": "10 min read",
-        "publishedDate": "2026-06-21T06:24:02.326Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_03758fa4218e446db3fa9b115dc5a2ec~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/alternative-transport-berlin-01-mobility-hub-suedkreuz.jpg",
-        "alt": "Mobility Hub at Berlin Sudkreuz with shared scooters, bikes, mopeds and Jelbi signage",
-        "relatedToolSlug": "berlin-mobility-app-picker"
+        "readTime": "6 min read",
+        "publishedDate": "2026-06-25T21:06:33.128Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
+        "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
+        "relatedToolSlug": "berlin-public-transport-ferry-picker"
       },
       {
         "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
