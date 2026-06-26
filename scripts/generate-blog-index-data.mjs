@@ -114,6 +114,7 @@ const TOPICS = [
       'sachsenhausen-from-berlin',
       'charlottenburg-palace-berlin',
       'traenenpalast-berlin',
+      'topography-of-terror-berlin',
     ],
     match: /(history|myth|wall|cold war|gdr|east|west|before|after|then|now|wwii|nazi|prussia|ampelmann|jfk|old town|rebuilt)/i,
   },
@@ -204,6 +205,7 @@ const REQUIRED_SLUGS = [
   'where-to-watch-2026-world-cup-in-berlin',
   'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
   'where-was-the-berlin-wall-interactive-map',
+  'topography-of-terror-berlin',
   'taxi-in-berlin',
   'alternative-transport-berlin',
   'berlin-city-tax',
@@ -483,6 +485,7 @@ function relatedToolSlugFor(post) {
   if (/(berlin-ber-airport-departure-guide|ber airport departure|airport departure|berlin airport security|ber departure)/.test(s)) return 'berlin-ber-airport-departure-planner';
   if (/(charlottenburg-palace-berlin|charlottenburg palace|schloss charlottenburg)/.test(s)) return 'charlottenburg-palace-visit-planner';
   if (/(traenenpalast-berlin|tränenpalast|traenenpalast|palace of tears|friedrichstrasse border crossing|friedrichstraße border crossing)/.test(s)) return 'traenenpalast-visit-planner';
+  if (/(topography-of-terror-berlin|topography of terror|nazi terror documentation center|nazi terror museum)/.test(s)) return 'topography-of-terror-visit-planner';
   if (/(berlin-public-transport-ferries|public transport ferries|bvg ferry|f10 ferry|wannsee ferry|f24 rowboat)/.test(s)) return 'berlin-public-transport-ferry-picker';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';

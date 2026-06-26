@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-26T03:49:48.746Z",
+  "updatedAt": "2026-06-26T18:15:27.940Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 144,
+  "totalPosts": 145,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -252,23 +252,6 @@
       "relatedToolSlug": ""
     },
     {
-      "title": "Berlin Airport to Alexanderplatz: The Easy Way (2026 Guide)",
-      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
-      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-03-03T12:12:58.270Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
-      "alt": "sbahn berlin",
-      "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
       "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "slug": "where-was-the-berlin-wall-interactive-map",
       "path": "/post/where-was-the-berlin-wall-interactive-map",
@@ -284,6 +267,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
       "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "relatedToolSlug": "east-or-west-1989"
+    },
+    {
+      "title": "Berlin Airport to Alexanderplatz: The Easy Way (2026 Guide)",
+      "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "url": "https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
+      "excerpt": "Just landed at BER airport and need to get to Alexanderplatz? Here's the fastest, cheapest, and most stress-free way to get from Berlin Brandenburg Airport to the heart of the city — from a local who does this route constantly.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-03-03T12:12:58.270Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
+      "alt": "sbahn berlin",
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "Public Toilets in Berlin: What Tourists Actually Need to Know",
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Topography of Terror Berlin: Free Museum, Wall Remains and How to Visit It Right",
+      "slug": "topography-of-terror-berlin",
+      "path": "/post/topography-of-terror-berlin",
+      "url": "https://www.berlinwalk.com/post/topography-of-terror-berlin",
+      "excerpt": "A practical guide to visiting Topography of Terror Berlin: what it covers, how long to allow, free entry, opening hours, audio guide, nearby stops and mistakes to avoid.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-26T18:11:45.691Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
+      "alt": "Topography of Terror site in Berlin with the preserved Wall section, exhibition trench and documentation centre",
+      "relatedToolSlug": "topography-of-terror-visit-planner"
+    },
+    {
       "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
       "slug": "sachsenhausen-from-berlin",
       "path": "/post/sachsenhausen-from-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_bf98985572c44e1ca26711a80de8bff0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/unter-den-linden-berlin-01-unter-den-linden-boulevard.jpg",
       "alt": "Unter den Linden boulevard in Berlin with trees, the Frederick the Great statue and the TV Tower in the distance",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Zoo Berlin vs Tierpark Berlin: The Ultimate Guide to Choosing Your Wild Day Out",
-      "slug": "zoo-berlin-vs-tierpark-berlin",
-      "path": "/post/zoo-berlin-vs-tierpark-berlin",
-      "url": "https://www.berlinwalk.com/post/zoo-berlin-vs-tierpark-berlin",
-      "excerpt": "Zoo Berlin and Tierpark Berlin are not two versions of the same day. This guide compares history, size, animals, kids, transport, tickets, and the feeling of each park so you can choose the right wild day out.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-06-20T08:47:20.584Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_7324a4d91fa0495c98dfb4cc8b55b1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/zoo-berlin-vs-tierpark-berlin-01-zoo-berlin-elephant-gate.jpg",
-      "alt": "Zoo Berlin Elephant Gate entrance in a Zoo Berlin vs Tierpark Berlin visitor comparison",
-      "relatedToolSlug": ""
     }
   ],
   "allPosts": [
+    {
+      "title": "Topography of Terror Berlin: Free Museum, Wall Remains and How to Visit It Right",
+      "slug": "topography-of-terror-berlin",
+      "path": "/post/topography-of-terror-berlin",
+      "url": "https://www.berlinwalk.com/post/topography-of-terror-berlin",
+      "excerpt": "A practical guide to visiting Topography of Terror Berlin: what it covers, how long to allow, free entry, opening hours, audio guide, nearby stops and mistakes to avoid.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-26T18:11:45.691Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
+      "alt": "Topography of Terror site in Berlin with the preserved Wall section, exhibition trench and documentation centre",
+      "relatedToolSlug": "topography-of-terror-visit-planner"
+    },
     {
       "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
       "slug": "sachsenhausen-from-berlin",
