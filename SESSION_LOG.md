@@ -1,3 +1,15 @@
+## 2026-06-26 — Codex (daily featured/listing refresh)
+
+**Did:** Günlük featured/listing refresh tamamlandı; Wix Blog API envanteri 143 postla yenilendi, Heatwave lead korundu, Ferry postu `/blog` rail ve homepage mini kartlara alındı. `/berlin-tools` ve `/widgets` tool seçimleri bilerek aynı bırakıldı.
+
+**Changed:** `scripts/generate-blog-index-data.mjs`, `blog-index/data.json`, `blog-home/data.json`; commit `29b116b` origin/main'e push edildi. Root Wix custom embed `BerlinWalk Blog Featured Posts` revision `13` olarak patch'lendi.
+
+**QA:** JSON parse, `node --check scripts/generate-blog-index-data.mjs`, root `node --check scripts/update-blog-feature-embed.mjs`, `node tools-hub/validate-data.mjs` (`68 tools, 66 visible`) ve `git diff --check` geçti. GitHub Pages kısa gecikmeden sonra `Last-Modified Fri, 26 Jun 2026 02:06:32/33 GMT` ile güncel blog data'yı servis etti. Canlı Playwright QA: homepage Ferry mini kart, `/blog` Heatwave + Ferry rail, `/berlin-tools` mevcut Start here altılısı, `/widgets` aynı tool data; horizontal overflow `0`.
+
+**Opened:** Bu run dışında kalan Sachsenhausen/FAQ/Quick Summary/tool/icon değişiklikleri worktree'de kirli duruyor; refresh commit/log kapsamına alınmadı.
+
+**Closed:** Discovery/listing yüzeyleri 2026-06-26 run'ı için canlıda güncel.
+
 ## 2026-06-25 — Codex (Berlin ferry guide publish assets)
 
 **Did:** Pushed and verified the Berlin public transport ferry guide widget/tool assets and post-publish `/blog` mapping.
