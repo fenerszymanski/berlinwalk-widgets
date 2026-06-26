@@ -131,6 +131,6 @@ The best version is simple: arrive with time, slow down, read properly, step out
 
 ## Image Credits
 
-Images in this guide use Wikimedia Commons files by Arild Vågen, Josef Streichholz, Ank Kumar and Fred Romero under CC BY-SA or CC BY licenses. Full file links and license notes are recorded in the local visual sources file for this draft.
+Images in this guide use Wikimedia Commons files by Arild Vågen, Josef Streichholz, Ank Kumar and Fred Romero under CC BY-SA or CC BY licenses.
 
 {{faq}}
