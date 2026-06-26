@@ -1,3 +1,15 @@
+## 2026-06-26 — Codex (World Cup fixtures score update)
+
+**Did:** Added final scores for the six score-check-due FIFA World Cup group matches in the 08:03 CEST automation run: Curaçao 0-2 Ivory Coast, Ecuador 2-1 Germany, Japan 1-1 Sweden, Tunisia 1-3 Netherlands, Türkiye 3-2 United States, Paraguay 0-0 Australia.
+
+**Changed:** `worldcup-fixtures/index.html` only: six `M` rows gained final-score fields and `SCORE_UPDATED` is now `26 Jun 2026, 08:03 CEST`.
+
+**QA:** Inline JS parse found 72 rows, 60 scored rows, and 0 malformed rows. Local Playwright QA at 1280px and 390px found `.bw-match.final = 60`, updated label visible, horizontal overflow `0`; only local favicon 404 console noise. `git diff --check -- worldcup-fixtures/index.html` passed.
+
+**Opened:** Commit/push/deploy is still needed before GitHub Pages live widget updates.
+
+**Closed:** Due score updates are complete locally.
+
 ## 2026-06-26 — Codex (daily featured/listing refresh)
 
 **Did:** Günlük featured/listing refresh tamamlandı; Wix Blog API envanteri 143 postla yenilendi, Heatwave lead korundu, Ferry postu `/blog` rail ve homepage mini kartlara alındı. `/berlin-tools` ve `/widgets` tool seçimleri bilerek aynı bırakıldı.
