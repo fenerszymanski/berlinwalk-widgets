@@ -1815,6 +1815,38 @@
       "iconStatus": "live-wix-media",
       "relatedBlog": "/post/traenenpalast-berlin",
       "cmsItemId": "19b71f33-58a4-4a5c-8dd0-9012d593f1da"
+    },
+    {
+      "slug": "sachsenhausen-visit-planner",
+      "title": "Sachsenhausen Visit Planner",
+      "lead": "Check whether Sachsenhausen fits your Berlin day, then choose the right train, ticket zone, visit depth and guidance style.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_50e716ad8f3a4372bff935b45a8b6c63~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/sachsenhausen-visit-planner/",
+      "embedHeight": 1220,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "priority": 14,
+      "tags": [
+        "sachsenhausen",
+        "memorial",
+        "oranienburg",
+        "history",
+        "day trip",
+        "abc ticket",
+        "planner"
+      ],
+      "aliases": [
+        "sachsenhausen from berlin",
+        "sachsenhausen memorial",
+        "oranienburg memorial",
+        "concentration camp berlin",
+        "sachsenhausen train"
+      ],
+      "published": true,
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/sachsenhausen-from-berlin",
+      "cmsItemId": "8852d9c7-b488-4dfa-b6a8-a28d6c7283a1"
     }
   ],
   "hubCategories": [
