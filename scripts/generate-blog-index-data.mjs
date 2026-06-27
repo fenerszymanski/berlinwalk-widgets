@@ -482,6 +482,7 @@ function relatedToolSlugFor(post) {
   if (/(toilet)/.test(s)) return 'berlin-public-toilets';
   if (/(night-transport|night transport|after-midnight|after midnight|night-bus|night bus|night tram)/.test(s)) return 'berlin-night-transport-checker';
   if (/(späti|spaeti|spati|late-night|late night|sunday rules|corner shop)/.test(s)) return 'spati-survival-checker';
+  if (/(lost-property|lost property|fundbüro|fundburo|lost phone|lost wallet|lost passport)/.test(s)) return 'berlin-lost-item-router';
   if (/(luggage|storage|suitcase)/.test(s)) return 'berlin-luggage-storage';
   if (/(drinking-water|tap-water|water fountain)/.test(s)) return 'berlin-drinking-water';
   if (/(berlin-ber-airport-departure-guide|ber airport departure|airport departure|berlin airport security|ber departure)/.test(s)) return 'berlin-ber-airport-departure-planner';
