@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Bike Lane Reflex Checker | BerlinWalk</title>
+  <meta name="description" content="A quick Berlin tourist checker for bike lanes, sidewalks, crossings, e-scooters, bike rental and public transport.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-bike-reflex">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-bike-reflex {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #506050;
+      --bw-border: #D8E5CA;
+      --bw-warn: #B66300;
+      --bw-stop: #9B1C1C;
+      --bw-ok: #1B5E20;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 28px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-bike-reflex *,
+    #bw-bike-reflex *::before,
+    #bw-bike-reflex *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-bike-reflex .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-bike-reflex .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.24)),
+        var(--bw-green);
+      color: var(--bw-white);
+      padding: 20px;
+    }
+
+    #bw-bike-reflex .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-bike-reflex h2,
+    #bw-bike-reflex h3,
+    #bw-bike-reflex p {
+      margin-top: 0;
+    }
+
+    #bw-bike-reflex .bw-title {
+      color: var(--bw-white);
+      font-size: 27px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-bike-reflex .bw-sub {
+      color: #E2F0D1;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 860px;
+    }
+
+    #bw-bike-reflex .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(250px, 0.9fr) minmax(0, 1.1fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-bike-reflex .bw-panel,
+    #bw-bike-reflex .bw-result,
+    #bw-bike-reflex .bw-mini {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 14px;
+    }
+
+    #bw-bike-reflex .bw-panel {
+      display: grid;
+      gap: 14px;
+    }
+
+    #bw-bike-reflex .bw-label {
+      color: var(--bw-green);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-bike-reflex .bw-modes,
+    #bw-bike-reflex .bw-scenes {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-bike-reflex .bw-modes {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-bike-reflex .bw-scenes {
+      grid-template-columns: 1fr;
+    }
+
+    #bw-bike-reflex button {
+      appearance: none;
+      background: #F8FBF1;
+      border: 1.5px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      min-height: 44px;
+      min-width: 0;
+      padding: 10px;
+      text-align: left;
+      transition: background 0.16s ease, border-color 0.16s ease, transform 0.16s ease;
+      width: 100%;
+    }
+
+    #bw-bike-reflex button:hover {
+      background: #F0F7E5;
+      border-color: rgba(27, 94, 32, 0.32);
+      transform: translateY(-1px);
+    }
+
+    #bw-bike-reflex button:focus-visible,
+    #bw-bike-reflex a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.85);
+      outline-offset: 2px;
+    }
+
+    #bw-bike-reflex button[aria-pressed="true"] {
+      background: var(--bw-yellow);
+      border-color: rgba(27, 94, 32, 0.46);
+      color: var(--bw-green);
+    }
+
+    #bw-bike-reflex .bw-button-title {
+      display: block;
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.22;
+    }
+
+    #bw-bike-reflex .bw-button-note {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    #bw-bike-reflex button[aria-pressed="true"] .bw-button-note {
+      color: var(--bw-green);
+    }
+
+    #bw-bike-reflex .bw-result {
+      border-color: rgba(27, 94, 32, 0.25);
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-bike-reflex .bw-pill {
+      align-items: center;
+      border-radius: 999px;
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      padding: 6px 10px;
+      text-transform: uppercase;
+      width: fit-content;
+    }
+
+    #bw-bike-reflex .bw-pill.bw-ok {
+      background: #E5F2D7;
+      color: var(--bw-ok);
+    }
+
+    #bw-bike-reflex .bw-pill.bw-watch {
+      background: #FFF4D8;
+      color: var(--bw-warn);
+    }
+
+    #bw-bike-reflex .bw-pill.bw-stop {
+      background: #F7E0E0;
+      color: var(--bw-stop);
+    }
+
+    #bw-bike-reflex .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0;
+    }
+
+    #bw-bike-reflex .bw-result p,
+    #bw-bike-reflex li {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.58;
+      margin-bottom: 0;
+    }
+
+    #bw-bike-reflex .bw-result strong {
+      color: var(--bw-text);
+      font-weight: 900;
+    }
+
+    #bw-bike-reflex .bw-grid {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-bike-reflex .bw-mini {
+      background: #F8FBF1;
+      padding: 11px;
+    }
+
+    #bw-bike-reflex .bw-mini strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    #bw-bike-reflex .bw-mini span {
+      color: var(--bw-text);
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    #bw-bike-reflex .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-bike-reflex .bw-link {
+      background: #EEF6E3;
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 999px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+      padding: 8px 10px;
+      text-decoration: none;
+    }
+
+    #bw-bike-reflex .bw-foot {
+      background: #F3F8EA;
+      border-top: 1px solid var(--bw-border);
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.55;
+      padding: 12px 20px;
+    }
+
+    @media (max-width: 720px) {
+      #bw-bike-reflex {
+        margin: 18px 0;
+      }
+
+      #bw-bike-reflex .bw-head {
+        padding: 17px 15px;
+      }
+
+      #bw-bike-reflex .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-bike-reflex .bw-body {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      #bw-bike-reflex .bw-modes {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-bike-reflex .bw-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-bike-reflex .bw-foot {
+        padding: 11px 14px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      #bw-bike-reflex .bw-title {
+        font-size: 21px;
+      }
+
+      #bw-bike-reflex .bw-result h3 {
+        font-size: 21px;
+      }
+
+      #bw-bike-reflex button {
+        padding: 9px;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-head">
+      <p class="bw-kicker">BerlinWalk Tool</p>
+      <h2 class="bw-title">Berlin Bike Lane Reflex Checker</h2>
+      <p class="bw-sub">Pick what you are doing and what you see. The tool gives you the fast tourist move before the cyclist, scooter, car door or crossing does.</p>
+    </header>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Bike lane situation controls">
+        <div>
+          <span class="bw-label">I am...</span>
+          <div class="bw-modes" role="group" aria-label="Choose your travel mode">
+            <button type="button" data-mode="walking" aria-pressed="true">
+              <span class="bw-button-title">Walking</span>
+              <span class="bw-button-note">Photos, luggage, crossings</span>
+            </button>
+            <button type="button" data-mode="bike" aria-pressed="false">
+              <span class="bw-button-title">On a bike</span>
+              <span class="bw-button-note">Rental bike or city bike</span>
+            </button>
+            <button type="button" data-mode="scooter" aria-pressed="false">
+              <span class="bw-button-title">On an e-scooter</span>
+              <span class="bw-button-note">Ride and park choices</span>
+            </button>
+            <button type="button" data-mode="family" aria-pressed="false">
+              <span class="bw-button-title">With a child</span>
+              <span class="bw-button-note">Sidewalk exception check</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <span class="bw-label">Situation</span>
+          <div class="bw-scenes" role="group" aria-label="Choose the street situation">
+            <button type="button" data-scene="red-lane" aria-pressed="true">
+              <span class="bw-button-title">Red or painted bike lane</span>
+              <span class="bw-button-note">Looks like spare pavement</span>
+            </button>
+            <button type="button" data-scene="sidewalk" aria-pressed="false">
+              <span class="bw-button-title">Sidewalk feels easier</span>
+              <span class="bw-button-note">Traffic nearby feels stressful</span>
+            </button>
+            <button type="button" data-scene="crossing" aria-pressed="false">
+              <span class="bw-button-title">Crossing or map pause</span>
+              <span class="bw-button-note">You need to stop for a moment</span>
+            </button>
+            <button type="button" data-scene="public-transport" aria-pressed="false">
+              <span class="bw-button-title">Train, tram or station</span>
+              <span class="bw-button-note">Bike transfer or crowded platform</span>
+            </button>
+            <button type="button" data-scene="parking" aria-pressed="false">
+              <span class="bw-button-title">Parking or leaving it</span>
+              <span class="bw-button-note">Especially scooters and shared bikes</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <span id="bw-status" class="bw-pill bw-stop">Stop</span>
+        <h3 id="bw-action">Clear the lane before you pause.</h3>
+        <p id="bw-explain"><strong>Move first, decide second.</strong> A red or painted bike lane is active traffic space. Step fully onto the pedestrian pavement before checking maps, photos or luggage.</p>
+        <div class="bw-grid" aria-label="Practical details">
+          <div class="bw-mini">
+            <strong>Best move</strong>
+            <span id="bw-move">Stand on the pedestrian side, not in the painted strip.</span>
+          </div>
+          <div class="bw-mini">
+            <strong>Avoid</strong>
+            <span id="bw-avoid">Half-standing in the lane while looking at your phone.</span>
+          </div>
+          <div class="bw-mini">
+            <strong>Local cue</strong>
+            <span id="bw-cue">Bike symbol, red paint, blue sign or a separated strip.</span>
+          </div>
+          <div class="bw-mini">
+            <strong>If unsure</strong>
+            <span id="bw-unsure">Choose the option that blocks the fewest people.</span>
+          </div>
+        </div>
+        <div class="bw-links" aria-label="Related BerlinWalk guides">
+          <a class="bw-link" href="https://www.berlinwalk.com/post/alternative-transport-berlin" target="_blank" rel="noopener">Transport options</a>
+          <a class="bw-link" href="https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus" target="_blank" rel="noopener">Public transport</a>
+          <a class="bw-link" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based" target="_blank" rel="noopener">Walk first</a>
+        </div>
+      </section>
+    </div>
+
+    <p class="bw-foot">This is a practical tourist filter, not legal advice. Signs, staff instructions, temporary works and local traffic conditions always win.</p>
+  </div>
+
+  <script>
+    (function () {
+      var state = { mode: 'walking', scene: 'red-lane' };
+      var base = {
+        walking: {
+          'red-lane': ['stop', 'Clear the lane before you pause.', 'Move first, decide second. A red or painted bike lane is active traffic space. Step fully onto the pedestrian pavement before checking maps, photos or luggage.', 'Stand on the pedestrian side, not in the painted strip.', 'Half-standing in the lane while looking at your phone.', 'Bike symbol, red paint, blue sign or a separated strip.', 'Choose the option that blocks the fewest people.'],
+          sidewalk: ['ok', 'Use the pedestrian pavement, but keep it passable.', 'Walking belongs on the pavement, but narrow Berlin sidewalks still need space for wheelchairs, strollers and people leaving doorways.', 'Walk in a line when the pavement is tight.', 'Spreading across the full width beside a bike lane.', 'Cafe tables, tree pits and doorways narrow the route fast.', 'Pause beside a wall or open space, not at the curb edge.'],
+          crossing: ['watch', 'Look both ways across the bike lane first.', 'Bike lanes can run beside crossings, tram stops and turning lanes. Treat them like a small road before stepping out.', 'Stop on the pavement, then cross cleanly.', 'Waiting inside the lane while the group catches up.', 'Fast straight lanes near large streets and stations.', 'If the view is blocked, wait one second longer.'],
+          'public-transport': ['watch', 'Do not block doors, ramps or marked bike space.', 'Stations and vehicles have their own flow. People with wheelchairs, strollers and mobility needs take priority over bikes and luggage.', 'Stand clear of doors and marked priority spaces.', 'Parking luggage or a rental bike across the platform path.', 'Crowded platforms make small obstructions big.', 'Move to a wall side or less crowded carriage area.'],
+          parking: ['watch', 'Leave shared bikes and scooters out of walking lines.', 'A parked vehicle can become a sidewalk barrier. Think about wheelchairs, strollers, blind pedestrians and people turning a corner.', 'Park parallel to the edge where people can pass.', 'Blocking ramps, crossings, doors or bike lanes.', 'Dropped curbs and tactile paving need clear space.', 'If it looks convenient only for you, move it.']
+        },
+        bike: {
+          'red-lane': ['ok', 'Use the lane, but ride like junctions still matter.', 'A marked or protected bike lane is usually the right place for you, but it does not remove turning cars, doors, pedestrians or roadworks.', 'Ride predictably and keep space from parked cars.', 'Assuming paint protects every junction.', 'Door zones, turning vans and people stepping out.', 'Slow before crossings and junctions.'],
+          sidewalk: ['stop', 'Do not ride on the sidewalk as an adult tourist.', 'Sidewalk riding shifts your risk onto pedestrians. Use the road or proper cycle infrastructure unless a sign specifically allows bikes.', 'Get off and walk the bike if the road feels too stressful.', 'Riding past pedestrians because the street feels busy.', 'No blue shared-path sign means no shortcut.', 'Return the bike and use transit if the route feels wrong.'],
+          crossing: ['watch', 'Cross cleanly and do not jump red lights.', 'Berlin locals may bend habits, but tourists should not copy risky red-light moves or squeeze through unclear junctions.', 'Wait, signal where useful, then cross in one move.', 'Rolling into pedestrian space or stopping diagonally.', 'Tram tracks and turning vehicles need extra respect.', 'When confused, become a pedestrian for that crossing.'],
+          'public-transport': ['watch', 'Use marked bike areas only when there is space.', 'Bikes can travel on parts of Berlin public transport with the right ticket, but wheelchairs and strollers have priority.', 'Use marked doors and buy the bike ticket first.', 'Forcing a bike into a packed carriage.', 'Rush hour makes bike transfers difficult.', 'If the train is full, wait or ride/walk the next stretch.'],
+          parking: ['watch', 'Lock the bike without blocking the lane or pavement.', 'A parked bike is still part of the street environment. Keep crossings, ramps, shop doors and cycle lanes clear.', 'Use racks or a clear edge position.', 'Locking across a narrow pavement or tactile strip.', 'People should not have to step into traffic to pass.', 'If the pavement narrows, find a proper rack.']
+        },
+        scooter: {
+          'red-lane': ['ok', 'Use cycle infrastructure where it exists.', 'E-scooters belong closer to bike traffic than pedestrian space. Use cycle lanes or shared signed paths when available.', 'Ride steadily in the lane and keep both hands ready.', 'Zigzagging between pavement and bike lane.', 'Painted lanes can still meet turning cars.', 'If you feel unstable, park properly and walk.'],
+          sidewalk: ['stop', 'Do not ride an e-scooter on the pavement.', 'Berlin guidance says e-scooters may not be ridden on sidewalks or pedestrian zones. Use cycle infrastructure or the road where required.', 'Dismount and push it if you need the sidewalk.', 'Riding slowly past pedestrians as if that makes it fine.', 'Pedestrian zones are not scooter lanes.', 'End the ride if the street does not feel safe.'],
+          crossing: ['watch', 'Slow down before crossings and mixed space.', 'Scooters accelerate quietly, which makes them easy to misjudge. Crossings and tram-stop areas need a slower speed than open lanes.', 'Approach at walking-aware speed.', 'Threading through people at a light.', 'Tourists stepping into the lane may not hear you.', 'Use the brake early, not at the last second.'],
+          'public-transport': ['watch', 'Check operator rules before carrying a scooter.', 'Shared scooters are usually meant to be parked in the service area, not dragged through stations as luggage.', 'End and park the trip before station stairs if needed.', 'Leaving a scooter near an entrance or platform path.', 'Station crowds turn small objects into obstacles.', 'If in doubt, finish the ride outside and walk in.'],
+          parking: ['stop', 'Park it where people can pass without detouring.', 'The end of your ride is not the end of the problem. Bad scooter parking blocks ramps, crossings, doors and bike lanes.', 'Use a parking bay or a wide, clear edge.', 'Dropping it across the pavement or cycle lane.', 'Wheelchair users and strollers need a straight path.', 'Take ten extra seconds to move it properly.']
+        },
+        family: {
+          'red-lane': ['watch', 'Keep children out of the lane while waiting.', 'Children may have sidewalk cycling exceptions, but a marked bike lane is still traffic space. Stop the group fully away from the strip.', 'Hold the pause on the pedestrian side.', 'Letting the group spill into the red lane.', 'Kids follow adults into unsafe waiting spots.', 'Make one adult the lane-checker at crossings.'],
+          sidewalk: ['watch', 'Children have exceptions; adults still need care.', 'Young children have sidewalk cycling rules, and an accompanying adult may use the sidewalk in specific cases. Pedestrians must not be endangered or obstructed.', 'Ride or walk at pedestrian-aware speed.', 'Treating the sidewalk like a family bike path.', 'Doorways, dogs and strollers create sudden conflicts.', 'Dismount before crossing the road.'],
+          crossing: ['stop', 'Stop the whole group before the bike lane.', 'Family groups widen quickly. A clean pause before the lane is safer than correcting one child after someone rings a bell.', 'Line up on the pavement, then cross together.', 'One adult crossing while others wait in the lane.', 'Fast riders may appear from behind parked cars.', 'Use a simple call: stop, look, cross.'],
+          'public-transport': ['watch', 'Use transit only if the group can board calmly.', 'Bikes, children, strollers and luggage are a lot to manage in one carriage. Priority spaces still go first to wheelchairs and strollers.', 'Wait for a less crowded train if needed.', 'Rushing a family bike load through closing doors.', 'Stress makes small mistakes bigger.', 'Walk one stop if boarding feels chaotic.'],
+          parking: ['watch', 'Park family bikes where the pavement stays wide.', 'Cargo bikes and child seats take extra room. Do not make pedestrians step into bike or car traffic to pass.', 'Use racks or a generous edge space.', 'Leaving a cargo bike across a narrow path.', 'Ramps and tactile paving are not storage space.', 'If it blocks a straight path, move it.']
+        }
+      };
+
+      var statusEl = document.getElementById('bw-status');
+      var actionEl = document.getElementById('bw-action');
+      var explainEl = document.getElementById('bw-explain');
+      var moveEl = document.getElementById('bw-move');
+      var avoidEl = document.getElementById('bw-avoid');
+      var cueEl = document.getElementById('bw-cue');
+      var unsureEl = document.getElementById('bw-unsure');
+
+      function setPressed(selector, attr, value) {
+        var buttons = document.querySelectorAll(selector);
+        buttons.forEach(function (button) {
+          button.setAttribute('aria-pressed', button.getAttribute(attr) === value ? 'true' : 'false');
+        });
+      }
+
+      function render() {
+        var item = base[state.mode][state.scene] || base.walking['red-lane'];
+        statusEl.className = 'bw-pill bw-' + item[0];
+        statusEl.textContent = item[0] === 'ok' ? 'Good move' : item[0] === 'watch' ? 'Watch' : 'Stop';
+        actionEl.textContent = item[1];
+        explainEl.innerHTML = '<strong>Why it matters:</strong> ' + item[2];
+        moveEl.textContent = item[3];
+        avoidEl.textContent = item[4];
+        cueEl.textContent = item[5];
+        unsureEl.textContent = item[6];
+        setPressed('[data-mode]', 'data-mode', state.mode);
+        setPressed('[data-scene]', 'data-scene', state.scene);
+      }
+
+      document.querySelectorAll('[data-mode]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.mode = button.getAttribute('data-mode');
+          render();
+        });
+      });
+
+      document.querySelectorAll('[data-scene]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.scene = button.getAttribute('data-scene');
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

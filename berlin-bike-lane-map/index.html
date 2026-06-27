@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Bike Lane Map | BerlinWalk</title>
+  <meta name="description" content="A tourist-focused interactive Berlin bike lane map for walking, cycling, e-scooter and crossing decisions.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-bike-map">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-bike-map {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #4F604F;
+      --bw-border: #D8E5CA;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 24px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-bike-map *,
+    #bw-bike-map *::before,
+    #bw-bike-map *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-bike-map .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-bike-map .bw-head {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.14), rgba(124, 179, 66, 0.22)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 8px;
+      padding: 20px;
+    }
+
+    #bw-bike-map .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    #bw-bike-map .bw-title {
+      color: var(--bw-white);
+      font-size: 28px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-bike-map .bw-sub {
+      color: #E8F4D7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 800px;
+    }
+
+    #bw-bike-map .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 14px;
+      padding: 16px;
+    }
+
+    #bw-bike-map .bw-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+    }
+
+    #bw-bike-map .bw-map-wrap,
+    #bw-bike-map .bw-panel,
+    #bw-bike-map .bw-note {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-bike-map .bw-map {
+      background: #E8EEDC;
+      height: 470px;
+      width: 100%;
+    }
+
+    #bw-bike-map .leaflet-container {
+      background: #E8EEDC;
+      font-family: Montserrat, Arial, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-bike-map .leaflet-pane,
+    #bw-bike-map .leaflet-tile,
+    #bw-bike-map .leaflet-marker-icon,
+    #bw-bike-map .leaflet-marker-shadow,
+    #bw-bike-map .leaflet-tile-container,
+    #bw-bike-map .leaflet-pane > svg,
+    #bw-bike-map .leaflet-pane > canvas,
+    #bw-bike-map .leaflet-zoom-box,
+    #bw-bike-map .leaflet-image-layer,
+    #bw-bike-map .leaflet-layer {
+      left: 0;
+      position: absolute;
+      top: 0;
+    }
+
+    #bw-bike-map .leaflet-tile-pane { z-index: 200; }
+    #bw-bike-map .leaflet-overlay-pane { z-index: 400; }
+    #bw-bike-map .leaflet-shadow-pane { z-index: 500; }
+    #bw-bike-map .leaflet-marker-pane { z-index: 600; }
+    #bw-bike-map .leaflet-tooltip-pane { z-index: 650; }
+    #bw-bike-map .leaflet-popup-pane { z-index: 700; }
+
+    #bw-bike-map .leaflet-tile {
+      -webkit-user-drag: none;
+      user-select: none;
+    }
+
+    #bw-bike-map .leaflet-control-attribution {
+      font-size: 10px;
+    }
+
+    #bw-bike-map .bw-marker {
+      align-items: center;
+      background: var(--bw-green);
+      border: 3px solid var(--bw-yellow);
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.24);
+      color: var(--bw-yellow);
+      display: flex;
+      font-size: 13px;
+      font-weight: 950;
+      height: 34px;
+      justify-content: center;
+      line-height: 1;
+      width: 34px;
+    }
+
+    #bw-bike-map .bw-marker.is-active {
+      background: var(--bw-red);
+      color: var(--bw-white);
+      transform: scale(1.08);
+    }
+
+    #bw-bike-map .bw-panel {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    #bw-bike-map .bw-label {
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: 1px;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    #bw-bike-map .bw-mode-grid,
+    #bw-bike-map .bw-area-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-bike-map .bw-mode-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-bike-map .bw-area-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-height: 250px;
+      overflow: auto;
+      padding-right: 2px;
+    }
+
+    #bw-bike-map button {
+      appearance: none;
+      background: #F7FBF1;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      min-width: 0;
+      text-align: left;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-bike-map button:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.14);
+    }
+
+    #bw-bike-map button:focus-visible,
+    #bw-bike-map a:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.86);
+      outline-offset: 2px;
+    }
+
+    #bw-bike-map .bw-mode {
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+      min-height: 42px;
+      padding: 9px;
+      text-align: center;
+    }
+
+    #bw-bike-map .bw-area {
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.22;
+      min-height: 46px;
+      padding: 9px 8px;
+    }
+
+    #bw-bike-map button[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-bike-map .bw-result {
+      background: #FDFDF8;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 9px;
+      padding: 12px;
+    }
+
+    #bw-bike-map .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 18px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-bike-map .bw-result p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-bike-map .bw-detail-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-bike-map .bw-detail {
+      background: #F2F8E8;
+      border: 1px solid rgba(27, 94, 32, 0.1);
+      border-radius: 8px;
+      min-width: 0;
+      padding: 9px;
+    }
+
+    #bw-bike-map .bw-detail strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.9px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    #bw-bike-map .bw-detail span {
+      color: var(--bw-text);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 780;
+      line-height: 1.35;
+    }
+
+    #bw-bike-map .bw-actions {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-bike-map .bw-action {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-yellow);
+      display: flex;
+      font-size: 12px;
+      font-weight: 950;
+      justify-content: space-between;
+      line-height: 1.25;
+      min-height: 42px;
+      padding: 10px 12px;
+      text-decoration: none;
+    }
+
+    #bw-bike-map .bw-action.secondary {
+      background: #EFF7E6;
+      color: var(--bw-green);
+    }
+
+    #bw-bike-map .bw-action span {
+      color: inherit;
+      font-size: 15px;
+      line-height: 1;
+      margin-left: 10px;
+    }
+
+    #bw-bike-map .bw-note {
+      background: #FFFBE6;
+      color: #4F4A1B;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.55;
+      padding: 12px 14px;
+    }
+
+    #bw-bike-map .bw-note strong {
+      color: var(--bw-green);
+      font-weight: 950;
+    }
+
+    @media (max-width: 780px) {
+      #bw-bike-map {
+        margin: 18px 0;
+      }
+
+      #bw-bike-map .bw-head {
+        padding: 16px;
+      }
+
+      #bw-bike-map .bw-title {
+        font-size: 23px;
+      }
+
+      #bw-bike-map .bw-body {
+        padding: 12px;
+      }
+
+      #bw-bike-map .bw-grid,
+      #bw-bike-map .bw-actions,
+      #bw-bike-map .bw-detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-bike-map .bw-mode-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-bike-map .bw-area-grid {
+        grid-template-columns: 1fr;
+        max-height: none;
+      }
+
+      #bw-bike-map .bw-map {
+        height: 350px;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-bike-map-title">
+    <header class="bw-head">
+      <p class="bw-kicker">Interactive Map</p>
+      <h2 class="bw-title" id="bw-bike-map-title">Berlin Bike Lane Map for Visitors</h2>
+      <p class="bw-sub">Tap a tourist area to see the bike-lane habit that matters there. This is a practical orientation map, not a live legal infrastructure layer.</p>
+    </header>
+
+    <div class="bw-body">
+      <div class="bw-grid">
+        <div class="bw-map-wrap" aria-label="Berlin bike lane visitor map">
+          <div class="bw-map" id="bw-bike-leaflet"></div>
+        </div>
+
+        <aside class="bw-panel" aria-live="polite">
+          <p class="bw-label">What are you doing?</p>
+          <div class="bw-mode-grid" id="bw-mode-buttons"></div>
+
+          <p class="bw-label">Choose a Berlin area</p>
+          <div class="bw-area-grid" id="bw-area-buttons"></div>
+
+          <div class="bw-result">
+            <h3 id="bw-area-title">Kottbusser Damm / Kreuzberg</h3>
+            <p id="bw-area-copy">A useful place to understand red or painted bike lanes. The tourist mistake is standing in the strip while reading a phone or waiting at a crossing.</p>
+            <div class="bw-detail-grid">
+              <div class="bw-detail">
+                <strong>Watch for</strong>
+                <span id="bw-watch">Red lane, barriers, turning traffic</span>
+              </div>
+              <div class="bw-detail">
+                <strong>Your move</strong>
+                <span id="bw-move">Step fully onto the pedestrian pavement before stopping.</span>
+              </div>
+            </div>
+            <div class="bw-actions">
+              <a class="bw-action" id="bw-map-link" href="#" target="_blank" rel="noopener">Open area map <span>↗</span></a>
+              <a class="bw-action secondary" id="bw-cycle-link" href="#" target="_blank" rel="noopener">Cycling directions <span>↗</span></a>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+      <div class="bw-note">
+        <strong>Use it as a reflex map:</strong> Berlin street layouts change block by block. Follow signs, lights, construction detours and staff instructions before any general map advice.
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+(() => {
+  const modes = {
+    walking: {
+      label: 'Walking',
+      suffix: 'Pause on the pedestrian pavement before you check maps, photos or luggage.'
+    },
+    bike: {
+      label: 'Bike',
+      suffix: 'Use proper cycle space or the road; do not escape onto the sidewalk as an adult rider.'
+    },
+    scooter: {
+      label: 'E-scooter',
+      suffix: 'Use cycle infrastructure where it exists, and park without blocking pavement, ramps or bike lanes.'
+    }
+  };
+
+  const areas = [
+    {
+      key: 'kottbusser',
+      label: 'Kottbusser Damm',
+      lat: 52.4927,
+      lng: 13.4237,
+      zoom: 15,
+      path: [[52.4972, 13.4221], [52.4927, 13.4237], [52.4884, 13.4253]],
+      watch: 'Red lane, barriers, turning traffic',
+      move: 'Step fully onto the pedestrian pavement before stopping.',
+      copy: 'A useful place to understand red or painted bike lanes. The tourist mistake is standing in the strip while reading a phone or waiting at a crossing.',
+      query: 'Kottbusser Damm Berlin bike lane'
+    },
+    {
+      key: 'hasenheide',
+      label: 'Hasenheide',
+      lat: 52.4891,
+      lng: 13.4148,
+      zoom: 15,
+      path: [[52.4898, 13.4058], [52.4891, 13.4148], [52.4878, 13.4244]],
+      watch: 'Protected lane, park edge, quick riders',
+      move: 'Cross the cycle lane cleanly and avoid waiting in the green or marked strip.',
+      copy: 'Protected lanes can look calm from the sidewalk, but they are still moving traffic. Use crossings and keep the lane clear for riders.',
+      query: 'Hasenheide Berlin protected bike lane'
+    },
+    {
+      key: 'tempelhof',
+      label: 'Tempelhofer Damm',
+      lat: 52.4657,
+      lng: 13.3852,
+      zoom: 14,
+      path: [[52.4736, 13.3844], [52.4657, 13.3852], [52.4558, 13.3857]],
+      watch: 'Separated lane, traffic, side-street turns',
+      move: 'Treat the protected lane as a small road beside the pavement.',
+      copy: 'A good example of a protected lane. The separators help, but junctions and side streets still need attention.',
+      query: 'Tempelhofer Damm Berlin protected bike lane'
+    },
+    {
+      key: 'choriner',
+      label: 'Choriner Strasse',
+      lat: 52.5352,
+      lng: 13.4078,
+      zoom: 15,
+      path: [[52.5335, 13.4036], [52.5352, 13.4078], [52.5375, 13.4132]],
+      watch: 'Fahrradstrasse marking, quiet backstreet feel',
+      move: 'Do not read quiet street as pedestrian priority in the middle of the road.',
+      copy: 'Bike-priority streets can feel like sleepy local streets. The marking tells you that bikes are part of the main flow.',
+      query: 'Choriner Strasse Berlin Fahrradstrasse'
+    },
+    {
+      key: 'karlmarxallee',
+      label: 'Karl-Marx-Allee',
+      lat: 52.5183,
+      lng: 13.4342,
+      zoom: 14,
+      path: [[52.5192, 13.4245], [52.5183, 13.4342], [52.5168, 13.4518]],
+      watch: 'Wide crossings, long straight lanes',
+      move: 'Look both ways before stepping over the lane, even when the road feels open.',
+      copy: 'Wide streets make bikes and scooters appear slower than they are. Cross the lane in one deliberate move.',
+      query: 'Karl-Marx-Allee Berlin bike lane'
+    },
+    {
+      key: 'friedrichstrasse',
+      label: 'Friedrichstrasse / Museum Island',
+      lat: 52.5186,
+      lng: 13.389,
+      zoom: 15,
+      path: [[52.5205, 13.3862], [52.5186, 13.389], [52.5164, 13.3923]],
+      watch: 'Tourist groups, crossings, narrow pauses',
+      move: 'Gather the group away from curbside cycle space before looking at the next stop.',
+      copy: 'Central sightseeing areas create the classic group-spread problem. One person stops, then the whole group drifts into the lane.',
+      query: 'Friedrichstrasse Berlin cycling'
+    },
+    {
+      key: 'zoo',
+      label: "Zoo / Ku'damm",
+      lat: 52.5048,
+      lng: 13.3348,
+      zoom: 15,
+      path: [[52.5052, 13.326], [52.5048, 13.3348], [52.5039, 13.3435]],
+      watch: 'Station exits, taxis, shopping crowds',
+      move: 'Move clear of station doors and curbside bike space before regrouping.',
+      copy: 'This is where luggage, taxis, shoppers and bike traffic overlap. The first safe move is often just stepping two meters out of the flow.',
+      query: 'Zoologischer Garten Berlin cycling'
+    },
+    {
+      key: 'eastside',
+      label: 'East Side / Warschauer',
+      lat: 52.5054,
+      lng: 13.4452,
+      zoom: 15,
+      path: [[52.5034, 13.4372], [52.5054, 13.4452], [52.508, 13.4523]],
+      watch: 'Scooters, bridge approaches, event crowds',
+      move: 'If the scooter route feels messy, park properly and walk the crowded stretch.',
+      copy: 'Good for understanding why scooters are not sidewalk toys. Crowds and bridge approaches make calm riding more important than speed.',
+      query: 'Warschauer Strasse Berlin cycling scooter'
+    }
+  ];
+
+  const modeButtons = document.getElementById('bw-mode-buttons');
+  const areaButtons = document.getElementById('bw-area-buttons');
+  const title = document.getElementById('bw-area-title');
+  const copy = document.getElementById('bw-area-copy');
+  const watch = document.getElementById('bw-watch');
+  const move = document.getElementById('bw-move');
+  const mapLink = document.getElementById('bw-map-link');
+  const cycleLink = document.getElementById('bw-cycle-link');
+  const mapEl = document.getElementById('bw-bike-leaflet');
+  let selectedMode = 'walking';
+  let map;
+  let activeLine;
+  const markers = new Map();
+
+  function googleMapUrl(area) {
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(area.query)}`;
+  }
+
+  function googleCycleUrl(area) {
+    return `https://www.google.com/maps/dir/?api=1&travelmode=bicycling&destination=${area.lat},${area.lng}`;
+  }
+
+  function resizeParent() {
+    try {
+      window.dispatchEvent(new Event('resize'));
+      window.parent.postMessage({ type: 'bw-resize' }, '*');
+    } catch (_) {}
+  }
+
+  function settleMapSize() {
+    if (!map) {
+      resizeParent();
+      return;
+    }
+    [0, 120, 350, 800, 1400].forEach((delay) => {
+      setTimeout(() => {
+        map.invalidateSize();
+        resizeParent();
+      }, delay);
+    });
+  }
+
+  function setPressed(selector, key) {
+    document.querySelectorAll(selector).forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.key === key));
+    });
+  }
+
+  function setArea(key) {
+    const area = areas.find((item) => item.key === key) || areas[0];
+    const mode = modes[selectedMode];
+    title.textContent = area.label;
+    copy.textContent = `${area.copy} ${mode.suffix}`;
+    watch.textContent = area.watch;
+    move.textContent = area.move;
+    mapLink.href = googleMapUrl(area);
+    cycleLink.href = googleCycleUrl(area);
+    setPressed('#bw-bike-map .bw-area', area.key);
+    setPressed('#bw-bike-map .bw-mode', selectedMode);
+    markers.forEach((marker, markerKey) => {
+      const el = marker.getElement();
+      const markerEl = el && el.querySelector('.bw-marker');
+      if (markerEl) markerEl.classList.toggle('is-active', markerKey === area.key);
+    });
+    if (map) {
+      map.flyTo([area.lat, area.lng], area.zoom, { duration: 0.45 });
+      if (activeLine) activeLine.remove();
+      activeLine = L.polyline(area.path, {
+        color: '#E63946',
+        opacity: 0.85,
+        weight: 5
+      }).addTo(map);
+    }
+    settleMapSize();
+  }
+
+  function initButtons() {
+    Object.entries(modes).forEach(([key, mode]) => {
+      const button = document.createElement('button');
+      button.className = 'bw-mode';
+      button.type = 'button';
+      button.dataset.key = key;
+      button.textContent = mode.label;
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', () => {
+        selectedMode = key;
+        const active = document.querySelector('#bw-bike-map .bw-area[aria-pressed="true"]')?.dataset.key || areas[0].key;
+        setArea(active);
+      });
+      modeButtons.appendChild(button);
+    });
+
+    areas.forEach((area) => {
+      const button = document.createElement('button');
+      button.className = 'bw-area';
+      button.type = 'button';
+      button.dataset.key = area.key;
+      button.textContent = area.label;
+      button.setAttribute('aria-pressed', 'false');
+      button.addEventListener('click', () => setArea(area.key));
+      areaButtons.appendChild(button);
+    });
+  }
+
+  function initMap() {
+    if (!window.L || !mapEl || map) return;
+    map = L.map(mapEl, {
+      zoomControl: true,
+      scrollWheelZoom: false,
+      dragging: true,
+      tap: true
+    }).setView([52.512, 13.405], 12);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    areas.forEach((area, index) => {
+      const icon = L.divIcon({
+        className: '',
+        html: `<div class="bw-marker" aria-label="${area.label}">${index + 1}</div>`,
+        iconSize: [34, 34],
+        iconAnchor: [17, 17]
+      });
+      const marker = L.marker([area.lat, area.lng], { icon }).addTo(map);
+      marker.on('click', () => setArea(area.key));
+      markers.set(area.key, marker);
+    });
+    setArea(areas[0].key);
+    settleMapSize();
+  }
+
+  initButtons();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMap);
+  } else {
+    initMap();
+  }
+  window.addEventListener('load', () => {
+    initMap();
+    settleMapSize();
+  });
+})();
+</script>
+</body>
+</html>
