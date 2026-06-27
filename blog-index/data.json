@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-27T06:35:26.034Z",
+  "updatedAt": "2026-06-27T06:51:41.878Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 147,
@@ -61,6 +61,40 @@
     },
     "secondary": [
       {
+        "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
+        "slug": "lost-property-berlin",
+        "path": "/post/lost-property-berlin",
+        "url": "https://www.berlinwalk.com/post/lost-property-berlin",
+        "excerpt": "A calm tourist guide to Berlin lost property: BVG, S-Bahn, DB, BER Airport, the central Fundbüro, passport loss, wallet/card steps and what to write in a report.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "8 min read",
+        "publishedDate": "2026-06-27T06:30:33.886Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
+        "alt": "Berlin Hauptbahnhof exterior with the DB sign and travelers outside the main entrance",
+        "relatedToolSlug": "berlin-lost-item-router"
+      },
+      {
+        "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
+        "slug": "drink-alcohol-in-public-berlin",
+        "path": "/post/drink-alcohol-in-public-berlin",
+        "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
+        "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-06-27T06:30:33.886Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+        "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
+        "relatedToolSlug": ""
+      },
+      {
         "title": "Topography of Terror Berlin: Free Museum, Wall Remains and How to Visit It Right",
         "slug": "topography-of-terror-berlin",
         "path": "/post/topography-of-terror-berlin",
@@ -78,23 +112,6 @@
         "relatedToolSlug": "topography-of-terror-visit-planner"
       },
       {
-        "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
-        "slug": "sachsenhausen-from-berlin",
-        "path": "/post/sachsenhausen-from-berlin",
-        "url": "https://www.berlinwalk.com/post/sachsenhausen-from-berlin",
-        "excerpt": "A practical guide to visiting Sachsenhausen from Berlin: train routes, ABC tickets, opening hours, free entry, audio guides, public tours and respectful timing.",
-        "category": "Berlin History",
-        "categorySlug": "berlin-history",
-        "topic": "history-myths",
-        "topicLabel": "Berlin History & Myths",
-        "readTime": "6 min read",
-        "publishedDate": "2026-06-26T03:49:02.920Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/sachsenhausen-from-berlin-01-sachsenhausen-tower-a-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/sachsenhausen-from-berlin-01-sachsenhausen-tower-a-cover.jpg",
-        "alt": "Tower A entrance building at Sachsenhausen Memorial in Oranienburg near Berlin",
-        "relatedToolSlug": "sachsenhausen-visit-planner"
-      },
-      {
         "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
         "slug": "berlin-public-transport-ferries",
         "path": "/post/berlin-public-transport-ferries",
@@ -110,23 +127,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
         "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
         "relatedToolSlug": "berlin-public-transport-ferry-picker"
-      },
-      {
-        "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
-        "slug": "berlin-ber-airport-departure-guide",
-        "path": "/post/berlin-ber-airport-departure-guide",
-        "url": "https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide",
-        "excerpt": "A practical Berlin BER Airport departure guide for tourists leaving the city: timing, trains, terminals, security, liquids, power banks and the mistakes that make the last morning stressful.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "9 min read",
-        "publishedDate": "2026-06-24T04:53:16.148Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
-        "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front",
-        "relatedToolSlug": "berlin-ber-airport-departure-planner"
       },
       {
         "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
@@ -448,23 +448,6 @@
           "relatedToolSlug": "berlin-shopping-areas"
         },
         {
-          "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
-          "slug": "drink-alcohol-in-public-berlin",
-          "path": "/post/drink-alcohol-in-public-berlin",
-          "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
-          "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-06-27T06:30:33.886Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-          "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
-          "relatedToolSlug": ""
-        },
-        {
           "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
           "slug": "lost-property-berlin",
           "path": "/post/lost-property-berlin",
@@ -480,6 +463,23 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
           "alt": "Berlin Hauptbahnhof exterior with the DB sign and travelers outside the main entrance",
           "relatedToolSlug": "berlin-lost-item-router"
+        },
+        {
+          "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
+          "slug": "drink-alcohol-in-public-berlin",
+          "path": "/post/drink-alcohol-in-public-berlin",
+          "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
+          "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "7 min read",
+          "publishedDate": "2026-06-27T06:30:33.886Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+          "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
+          "relatedToolSlug": ""
         },
         {
           "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
@@ -540,6 +540,40 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
           "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates",
           "relatedToolSlug": "berlin-shopping-areas"
+        },
+        {
+          "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
+          "slug": "lost-property-berlin",
+          "path": "/post/lost-property-berlin",
+          "url": "https://www.berlinwalk.com/post/lost-property-berlin",
+          "excerpt": "A calm tourist guide to Berlin lost property: BVG, S-Bahn, DB, BER Airport, the central Fundbüro, passport loss, wallet/card steps and what to write in a report.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "8 min read",
+          "publishedDate": "2026-06-27T06:30:33.886Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
+          "alt": "Berlin Hauptbahnhof exterior with the DB sign and travelers outside the main entrance",
+          "relatedToolSlug": "berlin-lost-item-router"
+        },
+        {
+          "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
+          "slug": "drink-alcohol-in-public-berlin",
+          "path": "/post/drink-alcohol-in-public-berlin",
+          "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
+          "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "7 min read",
+          "publishedDate": "2026-06-27T06:30:33.886Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+          "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
+          "relatedToolSlug": ""
         },
         {
           "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
@@ -641,40 +675,6 @@
           "image": "https://static.wixstatic.com/media/5a08a3_8809f031a67b4b39b675f5c01db0de67~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_aa129bfb69be446abb460996d32cb3e1~mv2.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_8809f031a67b4b39b675f5c01db0de67~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_aa129bfb69be446abb460996d32cb3e1~mv2.jpg",
           "alt": "A yellow double-decker bus passes in front of the Victory Column statue against a clear blue sky, creating a dynamic urban scene.",
-          "relatedToolSlug": "berlin-daily-budget"
-        },
-        {
-          "title": "Is Berlin Safe to Visit? An Honest 2026 Guide",
-          "slug": "is-berlin-safe-to-visit-an-honest-2026-guide",
-          "path": "/post/is-berlin-safe-to-visit-an-honest-2026-guide",
-          "url": "https://www.berlinwalk.com/post/is-berlin-safe-to-visit-an-honest-2026-guide",
-          "excerpt": "Wondering if Berlin is safe to visit? Here's an honest, no-nonsense guide from a local — covering neighborhoods, public transport, common scams, and everything you need to know before your trip.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "6 min read",
-          "publishedDate": "2026-03-26T13:11:15Z",
-          "image": "https://static.wixstatic.com/media/nsplsh_ffb1ec9813cd4020af4d7db72a40b3bc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-4wcI3YQAWpI.jpg",
-          "thumb": "https://static.wixstatic.com/media/nsplsh_ffb1ec9813cd4020af4d7db72a40b3bc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-4wcI3YQAWpI.jpg",
-          "alt": "Close-up of a blue police car light flashing in a dark, blurred city setting, creating an urgent and alert mood.",
-          "relatedToolSlug": "berlin-safety"
-        },
-        {
-          "title": "Can You Use Credit Cards in Berlin? A Tourist's Guide to Paying in Germany",
-          "slug": "can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany",
-          "path": "/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany",
-          "url": "https://www.berlinwalk.com/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany",
-          "excerpt": "A practical Berlin payment guide for tourists: where credit cards work, where cash is still useful, how much cash to carry, ATMs, taxis and mobile payments.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-03-15T16:33:19.188Z",
-          "image": "https://static.wixstatic.com/media/nsplsh_a9f74043f82e4399b3a5f71cbe78fdff~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-3YSDTzqnVtQ.jpg",
-          "thumb": "https://static.wixstatic.com/media/nsplsh_a9f74043f82e4399b3a5f71cbe78fdff~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/unsplash-3YSDTzqnVtQ.jpg",
-          "alt": "Card Payment",
           "relatedToolSlug": "berlin-daily-budget"
         }
       ]
@@ -1577,23 +1577,6 @@
   ],
   "latest": [
     {
-      "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
-      "slug": "drink-alcohol-in-public-berlin",
-      "path": "/post/drink-alcohol-in-public-berlin",
-      "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
-      "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-27T06:30:33.886Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-      "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
-      "relatedToolSlug": ""
-    },
-    {
       "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
       "slug": "lost-property-berlin",
       "path": "/post/lost-property-berlin",
@@ -1609,6 +1592,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
       "alt": "Berlin Hauptbahnhof exterior with the DB sign and travelers outside the main entrance",
       "relatedToolSlug": "berlin-lost-item-router"
+    },
+    {
+      "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
+      "slug": "drink-alcohol-in-public-berlin",
+      "path": "/post/drink-alcohol-in-public-berlin",
+      "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
+      "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-27T06:30:33.886Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+      "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
+      "relatedToolSlug": ""
     },
     {
       "title": "Topography of Terror Berlin: Free Museum, Wall Remains and How to Visit It Right",
@@ -1783,23 +1783,6 @@
   ],
   "allPosts": [
     {
-      "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
-      "slug": "drink-alcohol-in-public-berlin",
-      "path": "/post/drink-alcohol-in-public-berlin",
-      "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
-      "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-27T06:30:33.886Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-      "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
-      "relatedToolSlug": ""
-    },
-    {
       "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
       "slug": "lost-property-berlin",
       "path": "/post/lost-property-berlin",
@@ -1815,6 +1798,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
       "alt": "Berlin Hauptbahnhof exterior with the DB sign and travelers outside the main entrance",
       "relatedToolSlug": "berlin-lost-item-router"
+    },
+    {
+      "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
+      "slug": "drink-alcohol-in-public-berlin",
+      "path": "/post/drink-alcohol-in-public-berlin",
+      "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
+      "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-27T06:30:33.886Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
+      "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
+      "relatedToolSlug": ""
     },
     {
       "title": "Topography of Terror Berlin: Free Museum, Wall Remains and How to Visit It Right",

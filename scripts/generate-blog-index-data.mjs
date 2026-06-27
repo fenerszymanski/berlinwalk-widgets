@@ -34,8 +34,10 @@ const TOPICS = [
       'what-is-a-spati-berlin',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
       'grocery-shopping-in-berlin',
+      'lost-property-berlin',
+      'drink-alcohol-in-public-berlin',
     ],
-    match: /(first-time|airport|alexanderplatz|luggage|toilet|sunday|späti|spaeti|spati|transport|ticket|welcome|tap water|drinking water|safe|cash|credit card)/i,
+    match: /(first-time|airport|alexanderplatz|luggage|lost property|lost phone|lost wallet|lost passport|toilet|sunday|späti|spaeti|spati|public drinking|transport|ticket|welcome|tap water|drinking water|safe|cash|credit card)/i,
   },
   {
     key: 'practical',
@@ -46,6 +48,8 @@ const TOPICS = [
     slugs: [
       'pharmacy-in-berlin',
       'grocery-shopping-in-berlin',
+      'lost-property-berlin',
+      'drink-alcohol-in-public-berlin',
       'where-to-watch-2026-world-cup-in-berlin',
       'best-day-trips-from-berlin',
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
@@ -61,7 +65,7 @@ const TOPICS = [
       'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
     ],
-    match: /(world cup|public viewing|fan mile|football|soccer|budget|expensive|safe|credit|cash|city tax|accommodation tax|hotel tax|tourist tax|public holiday|public holidays|bank holiday|shop closures?|holiday closures?|pfand|deposit|bottle return|recycling|taxi|uber|bolt taxi|free now|rideshare|ride-hailing|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
+    match: /(world cup|public viewing|fan mile|football|soccer|lost property|lost phone|lost wallet|lost passport|public drinking|alcohol|budget|expensive|safe|credit|cash|city tax|accommodation tax|hotel tax|tourist tax|public holiday|public holidays|bank holiday|shop closures?|holiday closures?|pfand|deposit|bottle return|recycling|taxi|uber|bolt taxi|free now|rideshare|ride-hailing|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
   },
   {
     key: 'free-budget',
@@ -170,11 +174,13 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'berlin-heatwave-day-plan',
   secondary: [
+    'lost-property-berlin',
+    'drink-alcohol-in-public-berlin',
     'topography-of-terror-berlin',
-    'sachsenhausen-from-berlin',
     'berlin-public-transport-ferries',
-    'berlin-ber-airport-departure-guide',
     'where-to-watch-2026-world-cup-in-berlin',
+    'berlin-ber-airport-departure-guide',
+    'sachsenhausen-from-berlin',
     'grocery-shopping-in-berlin',
     'pharmacy-in-berlin',
     'alternative-transport-berlin',
@@ -193,6 +199,8 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'berlin-heatwave-day-plan',
+  'lost-property-berlin',
+  'drink-alcohol-in-public-berlin',
   'berlin-ber-airport-departure-guide',
   'berlin-public-transport-ferries',
   'sachsenhausen-from-berlin',
