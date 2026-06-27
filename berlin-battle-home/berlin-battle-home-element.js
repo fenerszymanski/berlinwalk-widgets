@@ -9,7 +9,7 @@ const BW_GAMES_HOME_ROOT = (() => {
 
 const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
 const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
-const BW_GAMES_HOME_ASSET_VERSION = 'games-home-compact-20260624';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-day-survival-20260627';
 
 const BW_GAMES_HOME_ITEMS = [
   {
@@ -41,6 +41,16 @@ const BW_GAMES_HOME_ITEMS = [
     href: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
     cta: 'Start Challenge',
     image: 'berlin-smile-challenge/assets/social/berlin-smile-challenge-social-1200x630.jpg'
+  },
+  {
+    id: 'berlin-day-survival',
+    kicker: 'Day survival',
+    title: 'Berlin Day Survival',
+    lead: 'Pick a budget and survive six snack, water and energy decisions in Berlin.',
+    meta: '6 city decisions',
+    href: 'https://www.berlinwalk.com/games/berlin-day-survival',
+    cta: 'Survive the day',
+    image: 'berlin-day-survival/assets/social/berlin-day-survival-social-1200x630.jpg'
   }
 ];
 

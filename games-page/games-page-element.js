@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-retro-v2-20260623';
+  const ASSET_VERSION = 'games-page-day-survival-20260627';
   const GAMES = [
     {
       id: 'berlin-battle',
@@ -46,6 +46,20 @@
       href: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
       button: 'Start the challenge',
       accent: 'red'
+    },
+    {
+      id: 'berlin-day-survival',
+      kicker: 'Day survival',
+      title: 'Berlin Day Survival',
+      lead: 'Pick a budget, survive six small Berlin decisions, and see if your first day stays smart or turns into snack chaos.',
+      how: 'Choose EUR 10, EUR 15 or EUR 20, manage food, water and energy, then get a shareable Berlin day type.',
+      duration: 'Under 1 min',
+      difficulty: 'Budget survival',
+      player: 'First-day instincts',
+      image: 'berlin-day-survival/assets/social/berlin-day-survival-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-day-survival',
+      button: 'Survive the day',
+      accent: 'day'
     }
   ];
 
@@ -104,7 +118,7 @@
             <div class="bw-games-hero-inner">
               <p class="bw-games-kicker">Playable Berlin</p>
               <h1 id="bw-games-title">BerlinWalk Games</h1>
-              <p class="bw-games-hero-lead">Quick games for the moment before you go outside and test the real city. Pick a winner, pass the door, or try to make Berlin smile.</p>
+              <p class="bw-games-hero-lead">Quick games for the moment before you go outside and test the real city. Pick a winner, pass the door, survive the day, or try to make Berlin smile.</p>
             </div>
           </section>
 
@@ -112,7 +126,7 @@
             <div class="bw-games-section-head">
               <p class="bw-games-section-kicker">Pick your mode</p>
               <h2 id="bw-games-modes-title">Choose your way into Berlin</h2>
-              <p>Each game has a different job: taste, instinct, night pressure, or social weather. They are light enough to start in a queue, but specific enough to feel like Berlin.</p>
+              <p>Each game has a different job: taste, instinct, night pressure, first-day survival, or social weather. They are light enough to start in a queue, but specific enough to feel like Berlin.</p>
             </div>
             <div class="bw-games-grid">
               ${gameCards}
@@ -547,6 +561,10 @@
 
         .bw-game-card-red .bw-game-kicker {
           color: var(--red);
+        }
+
+        .bw-game-card-day .bw-game-kicker {
+          color: #1D8A99;
         }
 
         .bw-game-card h3 {

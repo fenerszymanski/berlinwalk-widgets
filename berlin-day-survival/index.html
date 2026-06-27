@@ -1,0 +1,1375 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Day Survival | BerlinWalk</title>
+  <meta name="description" content="A fast Berlin survival game. Pick a budget, make six small city decisions, and see if your day survives.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-dark: #073B16;
+      --green-ink: #082410;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --ink: #212121;
+      --muted: #586258;
+      --red: #E63946;
+      --sky: #1D8A99;
+      --shadow: rgba(8, 36, 16, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      background: transparent;
+      height: 100%;
+      margin: 0 !important;
+      overflow: hidden;
+      padding: 0 !important;
+    }
+
+    body {
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .bw-day-game {
+      background:
+        linear-gradient(90deg, rgba(27, 94, 32, 0.08) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(27, 94, 32, 0.08) 1px, transparent 1px),
+        var(--cream);
+      background-size: 30px 30px;
+      height: 100%;
+      isolation: isolate;
+      min-height: 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .bw-day-game::before {
+      background:
+        radial-gradient(circle at 20% 12%, rgba(255, 230, 0, 0.32), transparent 30%),
+        radial-gradient(circle at 86% 18%, rgba(29, 138, 153, 0.2), transparent 26%),
+        linear-gradient(135deg, rgba(27, 94, 32, 0.08), rgba(124, 179, 66, 0.06));
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: -1;
+    }
+
+    .bw-day-shell {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      height: 100%;
+      min-height: 0;
+      padding: 14px;
+    }
+
+    .bw-day-topbar {
+      align-items: center;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      min-height: 38px;
+    }
+
+    .bw-day-mini-logo {
+      align-items: center;
+      color: var(--green-dark);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 900;
+      gap: 8px;
+      text-transform: uppercase;
+    }
+
+    .bw-day-mini-logo span:first-child {
+      background: var(--green);
+      border: 2px solid var(--yellow);
+      border-radius: 50%;
+      box-shadow: 0 7px 16px rgba(27, 94, 32, 0.24);
+      color: var(--yellow);
+      display: grid;
+      height: 28px;
+      place-items: center;
+      width: 28px;
+    }
+
+    .bw-day-sound {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      border-radius: 999px;
+      color: var(--green-dark);
+      cursor: pointer;
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 850;
+      gap: 6px;
+      min-height: 32px;
+      padding: 0 10px;
+    }
+
+    .bw-day-panel {
+      align-self: stretch;
+      display: grid;
+      min-height: 0;
+      padding-top: 8px;
+    }
+
+    .bw-day-screen {
+      animation: bwDayIn 240ms ease both;
+      display: grid;
+      min-height: 0;
+    }
+
+    @keyframes bwDayIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .bw-day-start {
+      align-content: start;
+      gap: 14px;
+      overflow: hidden auto;
+      padding: 4px 2px 10px;
+    }
+
+    .bw-day-hero {
+      background: linear-gradient(180deg, rgba(8, 36, 16, 0.14), rgba(8, 36, 16, 0.02));
+      border: 2px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      min-height: 178px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bw-day-hero img,
+    .bw-day-art img,
+    .bw-day-result-art img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .bw-day-hero-fallback,
+    .bw-day-art-fallback {
+      align-items: end;
+      background:
+        linear-gradient(135deg, rgba(27, 94, 32, 0.92), rgba(8, 36, 16, 0.85)),
+        linear-gradient(90deg, rgba(255, 230, 0, 0.18), transparent);
+      color: white;
+      display: flex;
+      height: 100%;
+      min-height: 178px;
+      padding: 18px;
+    }
+
+    .bw-day-copy h1 {
+      color: var(--green-dark);
+      font-size: clamp(30px, 8.2vw, 42px);
+      font-weight: 950;
+      line-height: 0.96;
+      margin: 0 0 8px;
+    }
+
+    .bw-day-kicker {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 950;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    .bw-day-lead {
+      color: var(--muted);
+      font-size: 15px;
+      font-weight: 650;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .bw-day-budget-grid {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bw-day-budget {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      box-shadow: 0 10px 18px rgba(8, 36, 16, 0.08);
+      color: var(--green-dark);
+      cursor: pointer;
+      min-height: 88px;
+      padding: 10px 8px;
+      text-align: left;
+      transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+    }
+
+    .bw-day-budget[aria-pressed="true"] {
+      background: var(--yellow);
+      border-color: var(--green);
+      box-shadow: 0 14px 24px rgba(27, 94, 32, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .bw-day-budget strong,
+    .bw-day-budget span {
+      display: block;
+    }
+
+    .bw-day-budget strong {
+      font-size: 18px;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .bw-day-budget span {
+      font-size: 11px;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .bw-day-start-actions {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .bw-day-primary,
+    .bw-day-secondary,
+    .bw-day-choice,
+    .bw-day-link-btn {
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 900;
+      min-height: 48px;
+      text-decoration: none;
+    }
+
+    .bw-day-primary,
+    .bw-day-link-btn {
+      align-items: center;
+      background: var(--green);
+      border: 2px solid var(--green);
+      color: white;
+      display: inline-flex;
+      justify-content: center;
+      padding: 0 16px;
+    }
+
+    .bw-day-secondary {
+      background: white;
+      border: 2px solid rgba(27, 94, 32, 0.22);
+      color: var(--green-dark);
+    }
+
+    .bw-day-primary:disabled,
+    .bw-day-secondary:disabled {
+      cursor: not-allowed;
+      opacity: 0.52;
+    }
+
+    .bw-day-gameplay {
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
+      gap: 9px;
+      overflow: hidden;
+    }
+
+    .bw-day-progress {
+      background: rgba(255, 255, 255, 0.74);
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .bw-day-progress span {
+      background: linear-gradient(90deg, var(--green), var(--lime), var(--yellow));
+      display: block;
+      height: 100%;
+      transition: width 260ms ease;
+    }
+
+    .bw-day-meters {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bw-day-meter {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 8px;
+      padding: 7px;
+    }
+
+    .bw-day-meter small {
+      color: var(--muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 850;
+      line-height: 1;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .bw-day-meter strong {
+      color: var(--green-dark);
+      display: block;
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .bw-day-meter[data-danger="true"] strong {
+      color: var(--red);
+    }
+
+    .bw-day-content {
+      background: rgba(255, 255, 255, 0.88);
+      border: 2px solid rgba(27, 94, 32, 0.15);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-rows: auto minmax(0, 1fr);
+      min-height: 0;
+      overflow: hidden;
+      padding: 9px;
+    }
+
+    .bw-day-art {
+      aspect-ratio: 16 / 10;
+      background: rgba(27, 94, 32, 0.1);
+      border-radius: 6px;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    .bw-day-round-copy {
+      min-height: 0;
+      overflow: hidden auto;
+    }
+
+    .bw-day-round-copy h2 {
+      color: var(--green-dark);
+      font-size: clamp(20px, 5.4vw, 26px);
+      font-weight: 950;
+      line-height: 1.02;
+      margin: 0 0 7px;
+    }
+
+    .bw-day-round-copy p {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .bw-day-condition {
+      background: rgba(255, 230, 0, 0.32);
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 850;
+      line-height: 1.25;
+      margin-top: 8px;
+      padding: 8px;
+    }
+
+    .bw-day-choices {
+      display: grid;
+      gap: 8px;
+      min-height: 0;
+    }
+
+    .bw-day-choice {
+      align-items: center;
+      background: white;
+      border: 2px solid rgba(27, 94, 32, 0.16);
+      color: var(--green-dark);
+      display: grid;
+      gap: 6px;
+      grid-template-columns: 1fr auto;
+      padding: 10px 11px;
+      text-align: left;
+      transition: background 140ms ease, border-color 140ms ease, transform 140ms ease;
+    }
+
+    .bw-day-choice:hover {
+      border-color: var(--green);
+      transform: translateY(-1px);
+    }
+
+    .bw-day-choice[disabled] {
+      cursor: default;
+      transform: none;
+    }
+
+    .bw-day-choice.is-picked {
+      background: var(--yellow);
+      border-color: var(--green);
+    }
+
+    .bw-day-choice small {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .bw-day-feedback {
+      background: var(--green-dark);
+      border-radius: 8px;
+      color: white;
+      display: grid;
+      gap: 10px;
+      padding: 12px;
+    }
+
+    .bw-day-feedback p {
+      font-size: 14px;
+      font-weight: 750;
+      line-height: 1.35;
+      margin: 0;
+    }
+
+    .bw-day-feedback-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .bw-day-pill {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+      color: white;
+      font-size: 11px;
+      font-weight: 850;
+      padding: 5px 8px;
+    }
+
+    .bw-day-result {
+      align-content: start;
+      gap: 10px;
+      overflow: hidden auto;
+      padding: 2px 2px 10px;
+    }
+
+    .bw-day-result-art {
+      aspect-ratio: 16 / 10;
+      background: rgba(27, 94, 32, 0.1);
+      border: 2px solid rgba(27, 94, 32, 0.15);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .bw-day-result h2 {
+      color: var(--green-dark);
+      font-size: clamp(28px, 7.4vw, 40px);
+      font-weight: 950;
+      line-height: 0.98;
+      margin: 0;
+    }
+
+    .bw-day-result p {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.34;
+      margin: 0;
+    }
+
+    .bw-day-score-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bw-day-score {
+      background: white;
+      border: 1px solid rgba(27, 94, 32, 0.14);
+      border-radius: 8px;
+      padding: 9px;
+    }
+
+    .bw-day-score small,
+    .bw-day-score strong {
+      display: block;
+    }
+
+    .bw-day-score small {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      margin-bottom: 5px;
+      text-transform: uppercase;
+    }
+
+    .bw-day-score strong {
+      color: var(--green-dark);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .bw-day-tip {
+      background: rgba(255, 230, 0, 0.34);
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      color: var(--green-dark) !important;
+      padding: 10px;
+    }
+
+    .bw-day-result-actions {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .bw-day-result-actions .bw-day-link-btn {
+      background: var(--yellow);
+      border-color: var(--yellow);
+      color: var(--green-dark);
+    }
+
+    .bw-day-toast {
+      background: var(--green-dark);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      bottom: 14px;
+      box-shadow: 0 16px 34px rgba(0, 0, 0, 0.22);
+      color: white;
+      font-size: 12px;
+      font-weight: 850;
+      left: 14px;
+      opacity: 0;
+      padding: 10px 12px;
+      pointer-events: none;
+      position: absolute;
+      right: 14px;
+      transform: translateY(12px);
+      transition: opacity 160ms ease, transform 160ms ease;
+      z-index: 12;
+    }
+
+    .bw-day-toast.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 390px) {
+      .bw-day-shell {
+        padding: 10px;
+      }
+
+      .bw-day-budget-grid,
+      .bw-day-score-grid {
+        gap: 6px;
+      }
+
+      .bw-day-budget {
+        min-height: 82px;
+        padding: 9px 6px;
+      }
+
+      .bw-day-budget strong {
+        font-size: 16px;
+      }
+
+      .bw-day-choice {
+        min-height: 43px;
+        padding: 8px 9px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 1ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-day-game" id="app" aria-live="polite">
+    <div class="bw-day-shell">
+      <header class="bw-day-topbar">
+        <div class="bw-day-mini-logo"><span>BW</span><span>BerlinWalk Games</span></div>
+        <button class="bw-day-sound" type="button" id="soundToggle" aria-pressed="false">Sound off</button>
+      </header>
+      <section class="bw-day-panel" id="screen"></section>
+    </div>
+    <div class="bw-day-toast" id="toast" role="status"></div>
+  </main>
+
+  <script>
+    (function () {
+      const DATA_VERSION = '2026-06-27-full-v1';
+      const screen = document.getElementById('screen');
+      const toast = document.getElementById('toast');
+      const soundToggle = document.getElementById('soundToggle');
+      const params = new URLSearchParams(window.location.search);
+      const isLocal = /^localhost$|^127\.0\.0\.1$/.test(window.location.hostname);
+      const TRACKING_ENDPOINT = isLocal
+        ? (params.get('tracking') === 'local' ? 'http://127.0.0.1:5173/api/day-survival-event' : '')
+        : (params.get('tracking') === 'off' ? '' : 'https://berlinwalk-content-app.vercel.app/api/day-survival-event');
+
+      const state = {
+        data: null,
+        selectedBudgetId: 'eur15',
+        budget: null,
+        condition: null,
+        roundIndex: 0,
+        budgetLeftCents: 0,
+        energy: 0,
+        berlinSense: 0,
+        chaos: 0,
+        tags: {},
+        selectedChoice: null,
+        result: null,
+        soundEnabled: false,
+        ambience: null,
+        voice: null,
+        sequence: 0,
+        started: false
+      };
+
+      const sessionKey = 'bw_day_survival_session';
+      const visitorKey = 'bw_day_survival_visitor';
+      const storage = safeStorage();
+      const sessionId = getOrCreate(sessionKey, true);
+      const visitorId = getOrCreate(visitorKey, false);
+
+      function safeStorage() {
+        try { return window.localStorage; } catch { return null; }
+      }
+
+      function getOrCreate(key, sessionOnly) {
+        const source = sessionOnly ? window.sessionStorage : storage;
+        try {
+          const existing = source && source.getItem(key);
+          if (existing) return existing;
+          const value = `bds_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+          if (source) source.setItem(key, value);
+          return value;
+        } catch {
+          return `bds_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
+        }
+      }
+
+      function money(cents) {
+        const sign = cents < 0 ? '-' : '';
+        const value = Math.abs(cents) / 100;
+        return `${sign}EUR ${value.toFixed(value % 1 ? 2 : 0)}`;
+      }
+
+      function clamp(value, min, max) {
+        return Math.max(min, Math.min(max, value));
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? '')
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function asset(path) {
+        const url = new URL(path, window.location.href);
+        url.searchParams.set('v', DATA_VERSION);
+        return url.toString();
+      }
+
+      function makeImage(path, alt, fallbackClass = 'bw-day-art-fallback') {
+        if (!path) return `<div class="${fallbackClass}">${escapeHtml(alt)}</div>`;
+        return `<img src="${asset(path)}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async" onerror="this.replaceWith(Object.assign(document.createElement('div'), {className:'${fallbackClass}', textContent:'${escapeHtml(alt).replace(/'/g, "\\'")}' }))">`;
+      }
+
+      async function init() {
+        try {
+          const response = await fetch(`data.json?v=${DATA_VERSION}`);
+          state.data = await response.json();
+          renderStart();
+          syncHostHeight();
+        } catch (error) {
+          screen.innerHTML = `<div class="bw-day-screen bw-day-start"><p class="bw-day-kicker">Berlin Day Survival</p><h1>Game data could not load.</h1><p class="bw-day-lead">${escapeHtml(error.message)}</p></div>`;
+        }
+      }
+
+      function renderStart() {
+        const data = state.data;
+        const selected = state.selectedBudgetId;
+        screen.innerHTML = `
+          <div class="bw-day-screen bw-day-start">
+            <figure class="bw-day-hero">
+              ${makeImage(data.assets.hero, 'Berlin Day Survival illustrated snack counter', 'bw-day-hero-fallback')}
+            </figure>
+            <div class="bw-day-copy">
+              <p class="bw-day-kicker">Playable Berlin</p>
+              <h1>${escapeHtml(data.title)}</h1>
+              <p class="bw-day-lead">${escapeHtml(data.subtitle)}</p>
+            </div>
+            <div class="bw-day-budget-grid" role="group" aria-label="Choose your budget">
+              ${data.budgets.map((budget) => `
+                <button class="bw-day-budget" type="button" data-budget="${escapeHtml(budget.id)}" aria-pressed="${budget.id === selected ? 'true' : 'false'}">
+                  <strong>${escapeHtml(budget.label)}</strong>
+                  <span>${escapeHtml(budget.shortLabel)}</span>
+                  <span>${escapeHtml(budget.description)}</span>
+                </button>
+              `).join('')}
+            </div>
+            <div class="bw-day-start-actions">
+              <button class="bw-day-primary" type="button" data-start="sound">${escapeHtml(data.startLabels.sound)}</button>
+              <button class="bw-day-secondary" type="button" data-start="quiet">${escapeHtml(data.startLabels.quiet)}</button>
+            </div>
+          </div>
+        `;
+        screen.querySelectorAll('[data-budget]').forEach((button) => {
+          button.addEventListener('click', () => {
+            state.selectedBudgetId = button.dataset.budget;
+            playUi('select');
+            renderStart();
+          });
+        });
+        screen.querySelectorAll('[data-start]').forEach((button) => {
+          button.addEventListener('click', () => startGame(button.dataset.start === 'sound'));
+        });
+        syncHostHeight();
+      }
+
+      function pickCondition() {
+        const list = state.data.conditions;
+        const seed = Date.now() + Math.floor(Math.random() * 1000);
+        return list[seed % list.length];
+      }
+
+      async function startGame(withSound) {
+        const data = state.data;
+        state.budget = data.budgets.find((item) => item.id === state.selectedBudgetId) || data.budgets[1];
+        state.condition = pickCondition();
+        state.roundIndex = 0;
+        state.budgetLeftCents = state.budget.amountCents;
+        state.energy = clamp(state.budget.energy + Number(state.condition.mods.energy || 0), 0, 100);
+        state.berlinSense = clamp(state.budget.berlinSense + Number(state.condition.mods.berlinSense || 0), 0, 100);
+        state.chaos = Number(state.condition.mods.chaos || 0);
+        state.tags = {};
+        state.selectedChoice = null;
+        state.result = null;
+        state.soundEnabled = Boolean(withSound);
+        state.started = true;
+        updateSoundToggle();
+        if (state.soundEnabled) await unlockAudio();
+        track('bw_berlin_day_survival_start', {
+          budget_mode: state.budget.id,
+          budget_amount: state.budget.amountCents,
+          condition: state.condition.id,
+          sound_enabled: state.soundEnabled
+        });
+        track('bw_berlin_day_survival_budget_select', {
+          budget_mode: state.budget.id,
+          budget_amount: state.budget.amountCents
+        });
+        track('bw_berlin_day_survival_condition_show', {
+          condition: state.condition.id,
+          condition_label: state.condition.label
+        });
+        renderRound();
+      }
+
+      function renderRound() {
+        const round = state.data.rounds[state.roundIndex];
+        state.selectedChoice = null;
+        playAmbience(round);
+        const progress = ((state.roundIndex) / state.data.rounds.length) * 100;
+        screen.innerHTML = `
+          <div class="bw-day-screen bw-day-gameplay">
+            ${renderMeters(progress)}
+            <article class="bw-day-content">
+              <figure class="bw-day-art">${makeImage(round.image, `${round.kicker} scene`)}</figure>
+              <div class="bw-day-round-copy">
+                <p class="bw-day-kicker">${escapeHtml(round.kicker)}</p>
+                <h2>${escapeHtml(round.title)}</h2>
+                <p>${escapeHtml(round.prompt)}</p>
+                <div class="bw-day-condition"><strong>${escapeHtml(state.condition.label)}:</strong> ${escapeHtml(state.condition.lead)}</div>
+              </div>
+            </article>
+            <div class="bw-day-choices">
+              ${round.choices.map((choice) => `
+                <button class="bw-day-choice" type="button" data-choice="${escapeHtml(choice.id)}">
+                  <span>${escapeHtml(choice.text)}</span>
+                  <small>${choice.costCents ? `-${money(choice.costCents)}` : 'EUR 0'}</small>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        screen.querySelectorAll('[data-choice]').forEach((button) => {
+          button.addEventListener('click', () => chooseOption(round, button.dataset.choice));
+        });
+        syncHostHeight();
+      }
+
+      function renderMeters(progress) {
+        return `
+          <div>
+            <div class="bw-day-progress" aria-label="Progress"><span style="width:${Math.max(6, progress)}%"></span></div>
+          </div>
+          <div class="bw-day-meters">
+            <div class="bw-day-meter" data-danger="${state.budgetLeftCents < 0 ? 'true' : 'false'}"><small>Budget</small><strong>${money(state.budgetLeftCents)}</strong></div>
+            <div class="bw-day-meter" data-danger="${state.energy < 35 ? 'true' : 'false'}"><small>Energy</small><strong>${Math.round(state.energy)}</strong></div>
+            <div class="bw-day-meter" data-danger="${state.berlinSense < 35 ? 'true' : 'false'}"><small>Berlin Sense</small><strong>${Math.round(state.berlinSense)}</strong></div>
+          </div>
+        `;
+      }
+
+      function chooseOption(round, choiceId) {
+        if (state.selectedChoice) return;
+        const choice = round.choices.find((item) => item.id === choiceId);
+        if (!choice) return;
+        const effect = conditionEffect(choice);
+        state.selectedChoice = choice;
+        stopVoice();
+        state.budgetLeftCents -= Number(choice.costCents || 0);
+        state.energy = clamp(state.energy + Number(choice.energy || 0) + Number(effect.energy || 0), 0, 100);
+        state.berlinSense = clamp(state.berlinSense + Number(choice.berlinSense || 0) + Number(effect.berlinSense || 0), 0, 100);
+        state.chaos += Number(choice.chaos || 0) + Number(effect.chaos || 0);
+        [...(choice.tags || []), ...(effect.tags || [])].forEach((tag) => {
+          state.tags[tag] = (state.tags[tag] || 0) + 1;
+        });
+        playUi(choice.costCents > 700 || state.budgetLeftCents < 0 ? 'warning' : choice.costCents ? 'coin' : 'select');
+        playFeedbackVoice(round, choice, effect);
+        track('bw_berlin_day_survival_choice', {
+          budget_mode: state.budget.id,
+          condition: state.condition.id,
+          round: round.id,
+          round_title: round.kicker,
+          choice: choice.id,
+          choice_text: choice.text,
+          cost_cents: choice.costCents || 0,
+          budget_left_cents: state.budgetLeftCents,
+          energy: Math.round(state.energy),
+          berlin_sense: Math.round(state.berlinSense),
+          chaos: Math.round(state.chaos),
+          tags: Object.keys(state.tags).join(',')
+        });
+        renderFeedback(round, choice, effect);
+      }
+
+      function conditionEffect(choice) {
+        return (choice.conditionEffects && choice.conditionEffects[state.condition.id]) || {};
+      }
+
+      function renderFeedback(round, choice, effect) {
+        screen.querySelectorAll('[data-choice]').forEach((button) => {
+          button.disabled = true;
+          if (button.dataset.choice === choice.id) button.classList.add('is-picked');
+        });
+        const feedback = effect.feedback || choice.feedback;
+        const feedbackNode = document.createElement('div');
+        feedbackNode.className = 'bw-day-feedback';
+        feedbackNode.innerHTML = `
+          <p>${escapeHtml(feedback)}</p>
+          <div class="bw-day-feedback-stats">
+            <span class="bw-day-pill">Budget ${money(state.budgetLeftCents)}</span>
+            <span class="bw-day-pill">Energy ${Math.round(state.energy)}</span>
+            <span class="bw-day-pill">Sense ${Math.round(state.berlinSense)}</span>
+          </div>
+          <button class="bw-day-primary" type="button">${state.roundIndex + 1 >= state.data.rounds.length ? 'See result' : 'Next decision'}</button>
+        `;
+        const choices = screen.querySelector('.bw-day-choices');
+        choices.replaceWith(feedbackNode);
+        feedbackNode.querySelector('button').addEventListener('click', nextRound);
+        syncHostHeight();
+      }
+
+      function nextRound() {
+        state.roundIndex += 1;
+        if (state.roundIndex >= state.data.rounds.length) {
+          finishGame();
+          return;
+        }
+        renderRound();
+      }
+
+      function finishGame() {
+        stopAmbience();
+        stopVoice();
+        state.result = pickResult();
+        playUi('result');
+        track('bw_berlin_day_survival_complete', {
+          budget_mode: state.budget.id,
+          condition: state.condition.id,
+          result: state.result.id,
+          result_title: state.result.title,
+          budget_left_cents: state.budgetLeftCents,
+          energy: Math.round(state.energy),
+          berlin_sense: Math.round(state.berlinSense),
+          chaos: Math.round(state.chaos),
+          step_count: state.data.rounds.length,
+          tags: Object.keys(state.tags).join(',')
+        }, true);
+        renderResult();
+      }
+
+      function tagCount(tag) {
+        return state.tags[tag] || 0;
+      }
+
+      function resultById(id) {
+        return state.data.results.find((item) => item.id === id) || state.data.results[0];
+      }
+
+      function pickResult() {
+        if (tagCount('tourist_trap') >= 2 || state.budgetLeftCents <= -600) return resultById('alexanderplatz-victim');
+        if (tagCount('sunday_mistake') >= 1 || (state.condition.id === 'sunday-shops' && tagCount('supermarket') >= 2)) return resultById('sunday-casualty');
+        if (tagCount('club_mate') >= 2 || tagCount('caffeine') >= 2) return resultById('club-mate-creature');
+        if (tagCount('doner') >= 2) return resultById('doner-loyalist');
+        if (state.budgetLeftCents >= 0 && state.energy >= 70 && state.berlinSense >= 70) return resultById('smart-wanderer');
+        if (state.budgetLeftCents >= 0 && state.berlinSense >= 65) return resultById('spaeti-strategist');
+        if (state.budgetLeftCents >= 500 && state.energy < 45) return resultById('budget-saint');
+        return resultById('late-night-survivor');
+      }
+
+      function renderResult() {
+        const result = state.result;
+        const bookingUrl = new URL(state.data.bookingUrl);
+        bookingUrl.searchParams.set('utm_source', 'game');
+        bookingUrl.searchParams.set('utm_medium', 'berlin_day_survival');
+        bookingUrl.searchParams.set('utm_campaign', 'berlinwalk_games');
+        bookingUrl.searchParams.set('utm_content', result.id);
+        screen.innerHTML = `
+          <div class="bw-day-screen bw-day-result">
+            <figure class="bw-day-result-art">${makeImage(result.image, `${result.title} result art`)}</figure>
+            <p class="bw-day-kicker">Your Berlin day type</p>
+            <h2>${escapeHtml(result.title)}</h2>
+            <p>${escapeHtml(result.description)}</p>
+            <div class="bw-day-score-grid">
+              <div class="bw-day-score"><small>Budget</small><strong>${money(state.budgetLeftCents)}</strong></div>
+              <div class="bw-day-score"><small>Energy</small><strong>${Math.round(state.energy)}</strong></div>
+              <div class="bw-day-score"><small>Sense</small><strong>${Math.round(state.berlinSense)}</strong></div>
+            </div>
+            <p class="bw-day-tip">${escapeHtml(result.tip)}</p>
+            <p>You survived the day. Now let me show you the city properly. Join my ~2h Berlin walking tour.</p>
+            <div class="bw-day-result-actions">
+              <button class="bw-day-secondary" type="button" data-share="share">Share result</button>
+              <button class="bw-day-secondary" type="button" data-share="download">Download card</button>
+              <button class="bw-day-secondary" type="button" data-restart>Play again</button>
+              <a class="bw-day-link-btn" href="${bookingUrl.toString()}" data-booking>Book the tour</a>
+            </div>
+          </div>
+        `;
+        screen.querySelector('[data-share="share"]').addEventListener('click', shareResult);
+        screen.querySelector('[data-share="download"]').addEventListener('click', downloadCard);
+        screen.querySelector('[data-restart]').addEventListener('click', () => {
+          track('bw_berlin_day_survival_restart', {
+            result: result.id,
+            budget_mode: state.budget.id
+          });
+          stopAmbience();
+          stopVoice();
+          state.started = false;
+          renderStart();
+        });
+        screen.querySelector('[data-booking]').addEventListener('click', () => {
+          track('bw_berlin_day_survival_booking_click', {
+            result: result.id,
+            budget_mode: state.budget.id,
+            condition: state.condition.id,
+            action: 'book_tour'
+          });
+        });
+        syncHostHeight();
+      }
+
+      async function makeShareBlob() {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1080;
+        canvas.height = 1350;
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#FAFAF5';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#1B5E20';
+        ctx.fillRect(0, 0, canvas.width, 210);
+        ctx.fillStyle = '#FFE600';
+        ctx.fillRect(0, 210, canvas.width, 16);
+        ctx.fillStyle = '#FFE600';
+        ctx.beginPath();
+        ctx.arc(118, 104, 54, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#1B5E20';
+        ctx.font = '900 34px Montserrat, Arial, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('BW', 118, 116);
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = '900 42px Montserrat, Arial, sans-serif';
+        ctx.fillText('Berlin Day Survival', 200, 92);
+        ctx.font = '700 25px Montserrat, Arial, sans-serif';
+        ctx.fillText('Your budget was small. Berlin was hungry.', 200, 140);
+
+        const result = state.result;
+        await drawImageOnCanvas(ctx, result.image, 78, 276, 924, 578);
+        ctx.fillStyle = '#073B16';
+        wrapText(ctx, result.title, 78, 950, 920, 66, '900 72px Montserrat, Arial, sans-serif');
+        ctx.fillStyle = '#4E5A4F';
+        wrapText(ctx, result.description, 82, 1050, 900, 36, '700 34px Montserrat, Arial, sans-serif');
+
+        drawStat(ctx, 'Budget', money(state.budgetLeftCents), 82, 1166);
+        drawStat(ctx, 'Energy', String(Math.round(state.energy)), 388, 1166);
+        drawStat(ctx, 'Berlin Sense', String(Math.round(state.berlinSense)), 694, 1166);
+
+        ctx.fillStyle = '#1B5E20';
+        ctx.font = '900 28px Montserrat, Arial, sans-serif';
+        ctx.fillText('Play at berlinwalk.com/games/berlin-day-survival', 82, 1298);
+        return new Promise((resolve) => canvas.toBlob(resolve, 'image/png', 0.92));
+      }
+
+      function drawStat(ctx, label, value, x, y) {
+        ctx.fillStyle = '#FFFFFF';
+        ctx.strokeStyle = 'rgba(27,94,32,0.18)';
+        ctx.lineWidth = 3;
+        roundRect(ctx, x, y, 260, 94, 18);
+        ctx.fill();
+        ctx.stroke();
+        ctx.fillStyle = '#586258';
+        ctx.font = '900 21px Montserrat, Arial, sans-serif';
+        ctx.fillText(label.toUpperCase(), x + 22, y + 34);
+        ctx.fillStyle = '#073B16';
+        ctx.font = '900 36px Montserrat, Arial, sans-serif';
+        ctx.fillText(value, x + 22, y + 73);
+      }
+
+      function roundRect(ctx, x, y, width, height, radius) {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + width - radius, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+        ctx.lineTo(x + width, y + height - radius);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        ctx.lineTo(x + radius, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
+        ctx.closePath();
+      }
+
+      function wrapText(ctx, text, x, y, maxWidth, lineHeight, font) {
+        ctx.font = font;
+        const words = String(text).split(/\s+/);
+        let line = '';
+        let cursor = y;
+        for (const word of words) {
+          const test = line ? `${line} ${word}` : word;
+          if (ctx.measureText(test).width > maxWidth && line) {
+            ctx.fillText(line, x, cursor);
+            line = word;
+            cursor += lineHeight;
+          } else {
+            line = test;
+          }
+        }
+        if (line) ctx.fillText(line, x, cursor);
+      }
+
+      function drawImageOnCanvas(ctx, path, x, y, width, height) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.onload = () => {
+            const scale = Math.max(width / img.naturalWidth, height / img.naturalHeight);
+            const sw = width / scale;
+            const sh = height / scale;
+            const sx = (img.naturalWidth - sw) / 2;
+            const sy = (img.naturalHeight - sh) / 2;
+            roundRect(ctx, x, y, width, height, 22);
+            ctx.save();
+            ctx.clip();
+            ctx.drawImage(img, sx, sy, sw, sh, x, y, width, height);
+            ctx.restore();
+            resolve();
+          };
+          img.onerror = () => {
+            ctx.fillStyle = '#1B5E20';
+            roundRect(ctx, x, y, width, height, 22);
+            ctx.fill();
+            ctx.fillStyle = '#FFE600';
+            ctx.font = '900 58px Montserrat, Arial, sans-serif';
+            ctx.fillText('Berlin Day Survival', x + 58, y + height / 2);
+            resolve();
+          };
+          img.src = asset(path);
+        });
+      }
+
+      async function shareResult() {
+        const blob = await makeShareBlob();
+        const file = new File([blob], 'berlin-day-survival-result.png', { type: 'image/png' });
+        const shareData = {
+          title: 'Berlin Day Survival',
+          text: `I got ${state.result.title} in Berlin Day Survival.`,
+          url: state.data.shareUrl
+        };
+        try {
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share({ ...shareData, files: [file] });
+            showToast('Shared.');
+            trackShare('native_file');
+            return;
+          }
+          if (navigator.share) {
+            await navigator.share(shareData);
+            showToast('Shared.');
+            trackShare('native_url');
+            return;
+          }
+        } catch (error) {
+          if (error && error.name === 'AbortError') return;
+        }
+        try {
+          await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
+          showToast('Result copied.');
+          trackShare('clipboard');
+        } catch {
+          showToast('Share failed. Download the card instead.');
+          trackShare('failed');
+        }
+      }
+
+      async function downloadCard() {
+        const blob = await makeShareBlob();
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = 'berlin-day-survival-result.png';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 600);
+        showToast('Card downloaded.');
+        trackShare('download');
+      }
+
+      function trackShare(method) {
+        track('bw_berlin_day_survival_share', {
+          method,
+          result: state.result.id,
+          result_title: state.result.title,
+          budget_mode: state.budget.id,
+          condition: state.condition.id
+        });
+      }
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('is-visible');
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(() => toast.classList.remove('is-visible'), 2200);
+      }
+
+      async function unlockAudio() {
+        try {
+          await playUi('select');
+        } catch {
+          state.soundEnabled = false;
+          updateSoundToggle();
+        }
+      }
+
+      function updateSoundToggle() {
+        soundToggle.textContent = state.soundEnabled ? 'Sound on' : 'Sound off';
+        soundToggle.setAttribute('aria-pressed', state.soundEnabled ? 'true' : 'false');
+      }
+
+      soundToggle.addEventListener('click', async () => {
+        state.soundEnabled = !state.soundEnabled;
+        updateSoundToggle();
+        if (state.soundEnabled) {
+          await playUi('select');
+          if (state.started && state.data) playAmbience(state.data.rounds[state.roundIndex]);
+        } else {
+          stopAmbience();
+          stopVoice();
+        }
+      });
+
+      function audioPath(name) {
+        return state.data.audio.ui[name] ? asset(state.data.audio.ui[name]) : '';
+      }
+
+      async function playUi(name) {
+        if (!state.soundEnabled && name !== 'select') return;
+        const src = audioPath(name);
+        if (!src) return;
+        try {
+          const audio = new Audio(src);
+          audio.volume = name === 'warning' ? 0.28 : 0.22;
+          await audio.play();
+        } catch {
+          // Audio is optional and should never block gameplay.
+        }
+      }
+
+      function playAmbience(round) {
+        if (!state.soundEnabled || !round || !round.ambience) return;
+        const src = asset(round.ambience.file);
+        if (state.ambience && state.ambience.src === src && !state.ambience.paused) return;
+        stopAmbience();
+        try {
+          const audio = new Audio(src);
+          audio.loop = true;
+          audio.volume = 0.26;
+          state.ambience = audio;
+          audio.play().catch(() => {});
+        } catch {
+          state.ambience = null;
+        }
+      }
+
+      function stopAmbience() {
+        if (!state.ambience) return;
+        try {
+          state.ambience.pause();
+          state.ambience.currentTime = 0;
+        } catch {}
+        state.ambience = null;
+      }
+
+      function feedbackVoicePath(round, choice, effect) {
+        const suffix = effect && effect.feedback ? `-${state.condition.id}` : '';
+        return `assets/audio/voice/${round.id}-${choice.id}${suffix}.mp3`;
+      }
+
+      function playFeedbackVoice(round, choice, effect) {
+        if (!state.soundEnabled) return;
+        const src = asset(feedbackVoicePath(round, choice, effect));
+        stopVoice();
+        try {
+          const audio = new Audio(src);
+          audio.volume = 0.72;
+          state.voice = audio;
+          audio.play().catch(() => {});
+        } catch {
+          state.voice = null;
+        }
+      }
+
+      function stopVoice() {
+        if (!state.voice) return;
+        try {
+          state.voice.pause();
+          state.voice.currentTime = 0;
+        } catch {}
+        state.voice = null;
+      }
+
+      function commonTrackingPayload(eventName, payload = {}, returnStats = false) {
+        const url = new URL(window.location.href);
+        const parentUrl = params.get('parent_url') || document.referrer || '';
+        const parentPath = (() => {
+          try { return parentUrl ? new URL(parentUrl).pathname : ''; } catch { return ''; }
+        })();
+        return {
+          eventName,
+          eventId: `${sessionId}:${eventName}:${++state.sequence}`,
+          sessionId,
+          visitorId,
+          timestamp: new Date().toISOString(),
+          eventDate: new Date().toISOString().slice(0, 10),
+          pagePath: window.location.pathname,
+          pageUrl: window.location.href,
+          parentPath,
+          parentUrl,
+          referrer: document.referrer || '',
+          landingPage: window.location.href,
+          firstPage: window.location.href,
+          utmSource: url.searchParams.get('utm_source') || '',
+          utmMedium: url.searchParams.get('utm_medium') || '',
+          utmCampaign: url.searchParams.get('utm_campaign') || '',
+          utmContent: url.searchParams.get('utm_content') || '',
+          utmTerm: url.searchParams.get('utm_term') || '',
+          fbclid: url.searchParams.get('fbclid') || '',
+          fbc: readCookie('_fbc'),
+          fbp: readCookie('_fbp'),
+          isPaid: Boolean(url.searchParams.get('fbclid') || /paid|meta|facebook|instagram|cpc/i.test(url.searchParams.get('utm_medium') || '')),
+          screenWidth: String(window.screen.width || ''),
+          viewportWidth: String(window.innerWidth || ''),
+          payload: {
+            context: params.get('context') || params.get('utm_content') || '',
+            sound_enabled: state.soundEnabled,
+            ...payload
+          },
+          returnStats
+        };
+      }
+
+      async function track(eventName, payload = {}, returnStats = false) {
+        if (!TRACKING_ENDPOINT) return null;
+        try {
+          const response = await fetch(TRACKING_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(commonTrackingPayload(eventName, payload, returnStats)),
+            keepalive: !returnStats
+          });
+          if (!returnStats || !response.ok) return null;
+          return await response.json();
+        } catch (error) {
+          console.warn('[Berlin Day Survival] tracking failed', error);
+          return null;
+        }
+      }
+
+      function readCookie(name) {
+        const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/[.$?*|{}()[\]\\/+^]/g, '\\$&') + '=([^;]*)'));
+        return match ? decodeURIComponent(match[1]) : '';
+      }
+
+      function syncHostHeight() {
+        if (params.get('resize') === 'none') return;
+        window.requestAnimationFrame(() => {
+          const height = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 640);
+          window.parent.postMessage({ type: 'bw-resize', height }, '*');
+        });
+      }
+
+      window.addEventListener('resize', syncHostHeight, { passive: true });
+      init();
+    })();
+  </script>
+</body>
+</html>

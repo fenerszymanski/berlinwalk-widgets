@@ -16,6 +16,7 @@ Custom Element source for the future `/games` hub page.
 - Berlin Battle: `/games/berlin-battle`
 - Berghain Bouncer: `/games/berghain-bouncer`
 - Berlin Smile Challenge: `/games/berlin-smile-challenge`
+- Berlin Day Survival: `/games/berlin-day-survival`
 
 It uses existing game cover/social art from the widget repo and avoids fake play-count stats. The current "Game board" section is intentionally status-based so real cross-game analytics can be wired later.
 
