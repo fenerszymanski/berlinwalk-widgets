@@ -164,6 +164,7 @@
       background: linear-gradient(180deg, rgba(8, 36, 16, 0.14), rgba(8, 36, 16, 0.02));
       border: 2px solid rgba(27, 94, 32, 0.16);
       border-radius: 8px;
+      margin: 0;
       min-height: 178px;
       overflow: hidden;
       position: relative;
@@ -299,9 +300,10 @@
     }
 
     .bw-day-gameplay {
-      grid-template-rows: auto auto minmax(0, 1fr) auto;
+      grid-template-rows: auto auto auto auto;
       gap: 9px;
-      overflow: hidden;
+      overflow: hidden auto;
+      padding-bottom: 6px;
     }
 
     .bw-day-progress {
@@ -359,9 +361,9 @@
       border-radius: 8px;
       display: grid;
       gap: 8px;
-      grid-template-rows: auto minmax(0, 1fr);
+      grid-template-rows: auto auto;
       min-height: 0;
-      overflow: hidden;
+      overflow: visible;
       padding: 9px;
     }
 
@@ -369,13 +371,14 @@
       aspect-ratio: 16 / 10;
       background: rgba(27, 94, 32, 0.1);
       border-radius: 6px;
+      margin: 0;
       min-height: 0;
       overflow: hidden;
     }
 
     .bw-day-round-copy {
       min-height: 0;
-      overflow: hidden auto;
+      overflow: visible;
     }
 
     .bw-day-round-copy h2 {
@@ -491,6 +494,7 @@
       background: rgba(27, 94, 32, 0.1);
       border: 2px solid rgba(27, 94, 32, 0.15);
       border-radius: 8px;
+      margin: 0;
       overflow: hidden;
     }
 
@@ -540,6 +544,7 @@
       color: var(--green-dark);
       font-size: 18px;
       line-height: 1;
+      white-space: nowrap;
     }
 
     .bw-day-tip {
@@ -587,9 +592,62 @@
       transform: translateY(0);
     }
 
-    @media (max-width: 390px) {
+    @media (max-width: 480px) {
       .bw-day-shell {
         padding: 10px;
+      }
+
+      .bw-day-panel {
+        padding-top: 5px;
+      }
+
+      .bw-day-gameplay {
+        gap: 7px;
+      }
+
+      .bw-day-meters {
+        gap: 6px;
+      }
+
+      .bw-day-meter {
+        padding: 6px 7px;
+      }
+
+      .bw-day-meter small {
+        font-size: 9px;
+        margin-bottom: 4px;
+      }
+
+      .bw-day-meter strong {
+        font-size: 16px;
+      }
+
+      .bw-day-content {
+        gap: 7px;
+        padding: 7px;
+      }
+
+      .bw-day-art {
+        justify-self: center;
+        max-height: 128px;
+        width: min(100%, 260px);
+      }
+
+      .bw-day-round-copy h2 {
+        font-size: 19px;
+        line-height: 1.04;
+      }
+
+      .bw-day-round-copy p {
+        font-size: 12px;
+        line-height: 1.25;
+      }
+
+      .bw-day-condition {
+        font-size: 10px;
+        line-height: 1.2;
+        margin-top: 6px;
+        padding: 6px;
       }
 
       .bw-day-budget-grid,
@@ -607,8 +665,46 @@
       }
 
       .bw-day-choice {
+        font-size: 14px;
         min-height: 43px;
         padding: 8px 9px;
+      }
+
+      .bw-day-choice small {
+        font-size: 10px;
+      }
+
+      .bw-day-result {
+        gap: 8px;
+        padding: 0 2px 10px;
+      }
+
+      .bw-day-result-art {
+        justify-self: center;
+        max-height: 132px;
+        width: min(100%, 250px);
+      }
+
+      .bw-day-result h2 {
+        font-size: clamp(25px, 7vw, 32px);
+        line-height: 1;
+      }
+
+      .bw-day-result p {
+        font-size: 13px;
+        line-height: 1.28;
+      }
+
+      .bw-day-score {
+        padding: 8px 7px;
+      }
+
+      .bw-day-score strong {
+        font-size: 15px;
+      }
+
+      .bw-day-tip {
+        padding: 8px;
       }
     }
 
@@ -637,7 +733,7 @@
 
   <script>
     (function () {
-      const DATA_VERSION = '2026-06-27-chatgpt-browser-v3';
+      const DATA_VERSION = '2026-06-27-chatgpt-browser-v4';
       const screen = document.getElementById('screen');
       const toast = document.getElementById('toast');
       const soundToggle = document.getElementById('soundToggle');
