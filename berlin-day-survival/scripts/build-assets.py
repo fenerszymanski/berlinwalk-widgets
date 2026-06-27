@@ -3,6 +3,8 @@
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFilter
 import math
+import os
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 W, H = 960, 600
@@ -291,6 +293,15 @@ def contact_sheet(items, rel):
 
 
 def main():
+    if os.environ.get("ALLOW_LEGACY_DAY_SURVIVAL_PLACEHOLDERS") != "1":
+        print(
+            "Refusing to overwrite Berlin Day Survival visuals with the legacy "
+            "local placeholder generator. Current visuals must come from Yusuf's "
+            "ChatGPT browser workflow unless he explicitly approves an exception.",
+            file=sys.stderr,
+        )
+        return 2
+
     scene_map = [
         ("hero", scene_hero(), "assets/hero/berlin-day-survival-hero.webp"),
         ("morning-bakery", scene_morning(), "assets/scenes/morning-bakery.webp"),
@@ -334,4 +345,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

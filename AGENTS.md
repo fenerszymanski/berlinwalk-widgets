@@ -76,6 +76,13 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - **Fonts:** Montserrat (default), Merriweather (selective serif for editorial moments)
 - **Tone:** First-person Yusuf voice, atmospheric, historically grounded, **no em dashes**, no marketing fluff, confident but restrained
 - **Brand guide source:** `BerlinWalk_Brand_Guide_v1_2_revised.pdf` (Yusuf's downloads — not in repo)
+- **AI visual source rule:** generated game art, tool icons, blog/social AI
+  visuals, and other BerlinWalk imagery should come from Yusuf's logged-in
+  ChatGPT browser workflow by default. Do not use OpenAI/Image API, CLI image
+  generation, paid API generation, or local drawn placeholders unless Yusuf
+  explicitly asks for API-based generation or approves a specific exception.
+  Save prompts/source outputs, then crop/optimize and wire final assets before
+  treating visual work as complete.
 
 ## 5. Wix automation: 7-email booking journey
 

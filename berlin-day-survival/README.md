@@ -28,7 +28,10 @@ Visual assets:
 - Scene art: `assets/scenes/*.webp` (`960x600`, textless, 16:10)
 - Result art: `assets/results/*.webp` (`960x600`, textless, 16:10)
 - Social image: `assets/social/berlin-day-survival-social-1200x630.jpg`
-- Source prompts and contact sheets live under `assets/source/`.
+- Current source set: `assets/source/chatgpt-browser-20260627/`, generated
+  through Yusuf's logged-in ChatGPT browser account. Do not regenerate these
+  assets with API/CLI image tools or local placeholder drawing unless Yusuf
+  explicitly approves that exception.
 
 Production tracking posts to:
 
