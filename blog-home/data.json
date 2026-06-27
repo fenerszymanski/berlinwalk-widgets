@@ -11,10 +11,16 @@
   },
   "miniPosts": [
     {
-      "title": "Berlin Public Transport Ferries",
-      "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
-      "category": "Tourist Tips",
+      "title": "Topography of Terror Berlin",
+      "url": "https://www.berlinwalk.com/post/topography-of-terror-berlin",
+      "category": "Berlin History",
       "readTime": "7 min read"
+    },
+    {
+      "title": "Sachsenhausen from Berlin",
+      "url": "https://www.berlinwalk.com/post/sachsenhausen-from-berlin",
+      "category": "Berlin History",
+      "readTime": "6 min read"
     },
     {
       "title": "BER Airport Departure Guide",
@@ -23,27 +29,30 @@
       "readTime": "9 min read"
     },
     {
-      "title": "Grocery Shopping in Berlin",
-      "url": "https://www.berlinwalk.com/post/grocery-shopping-in-berlin",
+      "title": "Berlin Public Transport Ferries",
+      "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
       "category": "Tourist Tips",
-      "readTime": "8 min read"
-    },
-    {
-      "title": "Pharmacy in Berlin",
-      "url": "https://www.berlinwalk.com/post/pharmacy-in-berlin",
-      "category": "Tourist Tips",
-      "readTime": "8 min read"
+      "readTime": "6 min read"
     }
   ],
   "posts": [
     {
-      "title": "Berlin Night Transport: How to Get Around After Midnight",
-      "url": "https://www.berlinwalk.com/post/berlin-night-transport",
+      "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
+      "url": "https://www.berlinwalk.com/post/grocery-shopping-in-berlin",
       "category": "Tourist Tips",
-      "readTime": "6 min read",
-      "summary": "Weekday vs weekend service, night buses, tickets, safety habits, taxi fallbacks and a simple visual timeline for late arrivals.",
-      "image": "https://static.wixstatic.com/media/5a08a3_aa1dd493aaa845de858903fd1bb4b666~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-night-transport-01-berlin-night-transport-alexanderplatz-tram.jpg",
-      "alt": "Alexanderplatz at night with U-Bahn sign, TV Tower and blurred tram, showing Berlin night transport"
+      "readTime": "9 min read",
+      "summary": "Where to buy food, what closes on Sunday, when a station supermarket helps, and the Späti mistakes tourists make.",
+      "image": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
+      "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates"
+    },
+    {
+      "title": "Pharmacy in Berlin: How to Find Medicine, Emergency Pharmacies and Medical Help",
+      "url": "https://www.berlinwalk.com/post/pharmacy-in-berlin",
+      "category": "Tourist Tips",
+      "readTime": "7 min read",
+      "summary": "How to find medicine, use emergency pharmacies, handle prescriptions, and choose the right medical help while visiting Berlin.",
+      "image": "https://static.wixstatic.com/media/5a08a3_e973e3219fa44daa9d7868bb6325ef73~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/pharmacy-in-berlin-05-alexa-apotheke-berlin.jpg",
+      "alt": "Alexa Apotheke pharmacy in Berlin with illuminated red and green signage"
     },
     {
       "title": "Where to Watch the 2026 World Cup in Berlin",
@@ -53,15 +62,6 @@
       "summary": "Free screens, beer gardens, bars and Berlin-time kickoffs without assuming a Brandenburg Gate fan mile.",
       "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
       "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline"
-    },
-    {
-      "title": "Tax Free Shopping in Berlin: VAT Refunds Explained for Tourists",
-      "url": "https://www.berlinwalk.com/post/tax-free-shopping-berlin-vat-refund",
-      "category": "Tourist Tips",
-      "readTime": "8 min read",
-      "summary": "Who is eligible, what counts, how much VAT is inside the price, what to ask at the shop, and what to do at BER Airport.",
-      "image": "https://static.wixstatic.com/media/5a08a3_e8191b9f07f645b39ec46c09b18a309f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tax-free-shopping-berlin-01-tax-free-shopping-berlin-kadewe-cover.jpg",
-      "alt": "The KaDeWe department store in Berlin, a classic shopping landmark where non-EU visitors may ask about Tax Free shopping"
     }
   ]
 }
