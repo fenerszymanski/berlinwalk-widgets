@@ -39,15 +39,15 @@ That variety is why visitors guess wrong. A red lane can look like a clean walki
 
 The safest tourist habit is this: **if there is a bicycle symbol, a red strip, a blue bike sign, or a line separating pavement from bike traffic, step out of it before you stop.**
 
-## Use this Berlin bike lane map before you choose a rental
+## Use this Berlin cycleway network map before you choose a rental
 
-Berlin bike lanes make more sense when you see the city as a set of small street situations, not one giant cycling rule. Kottbusser Damm, Hasenheide, Tempelhofer Damm, Karl-Marx-Allee, Museum Island and Zoo all teach a slightly different reflex.
+Berlin bike lanes make more sense when you can see the actual network. The map below loads mapped OpenStreetMap cycle infrastructure for the visible area: dedicated cycle paths, painted bike lanes, bicycle streets, and shared or designated bike paths.
 
-Use the map below to pick an area and decide what to watch for as a pedestrian, cyclist or e-scooter rider. It is not a live legal layer. It is a tourist orientation map for the places where visitors most often misread the street.
+Use it like a practical pre-rental check. Jump to the part of Berlin you are considering, zoom in around your route, then load the visible area. Dense lines are useful, but they do not automatically mean the ride is calm. Junctions, tram tracks, construction, crowds, and station exits still matter.
 
 {{widget:berlin-bike-lane-map}}
 
-If you are still deciding whether to rent a bike at all, use the map as a friction check. If the first area you need already feels busy, complicated or luggage-heavy, Berlin public transport may be the calmer first move.
+If the map shows a connected route and the street layout looks readable, a rental bike may fit your day. If the first stretch already looks busy, broken, or luggage-heavy, Berlin public transport may be the calmer first move.
 
 ## If you are walking: the lane is not a waiting room
 
