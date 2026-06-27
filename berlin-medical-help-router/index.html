@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Medical Help Router | BerlinWalk</title>
+  <meta name="description" content="Choose the right first step for tourist medical help in Berlin: 112, 116117, pharmacy, doctor, hospital or insurance.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-ink: #212121;
+      --bw-red: #E63946;
+      --bw-border: rgba(27, 94, 32, .18);
+      --bw-shadow: 0 18px 38px rgba(27, 94, 32, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bw-cream);
+      color: var(--bw-ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .bw-tool {
+      width: min(100%, 940px);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .bw-shell {
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--bw-shadow);
+    }
+
+    .bw-hero {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 18px;
+      padding: 22px;
+      background:
+        linear-gradient(135deg, rgba(27, 94, 32, .97), rgba(50, 116, 43, .93)),
+        radial-gradient(circle at top right, rgba(255, 230, 0, .3), transparent 38%);
+      color: #fff;
+    }
+
+    .bw-kicker {
+      margin: 0 0 8px;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(27px, 4vw, 44px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .bw-hero p {
+      margin: 12px 0 0;
+      max-width: 64ch;
+      color: rgba(255,255,255,.88);
+      font-size: 15px;
+    }
+
+    .bw-emergency {
+      align-self: stretch;
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 8px;
+      background: rgba(255,255,255,.1);
+    }
+
+    .bw-emergency strong {
+      color: var(--bw-yellow);
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    .bw-emergency span {
+      color: rgba(255,255,255,.9);
+      font-size: 13px;
+    }
+
+    .bw-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 0;
+      min-height: 620px;
+    }
+
+    .bw-controls {
+      padding: 18px;
+      border-right: 1px solid var(--bw-border);
+      background: linear-gradient(180deg, #fff, #fbfff9);
+    }
+
+    .bw-section {
+      margin: 0 0 18px;
+    }
+
+    .bw-section h2 {
+      margin: 0 0 10px;
+      color: var(--bw-green);
+      font-size: 15px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .bw-choices {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bw-choice {
+      width: 100%;
+      min-height: 54px;
+      padding: 10px 12px;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-ink);
+      cursor: pointer;
+      font: inherit;
+      text-align: left;
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .bw-choice:hover {
+      transform: translateY(-1px);
+      border-color: rgba(27, 94, 32, .38);
+      box-shadow: 0 8px 18px rgba(27, 94, 32, .1);
+    }
+
+    .bw-choice[aria-pressed="true"] {
+      border-color: var(--bw-green);
+      background: linear-gradient(135deg, rgba(197,225,165,.55), #fff);
+      box-shadow: inset 4px 0 0 var(--bw-yellow);
+    }
+
+    .bw-choice b {
+      display: block;
+      color: var(--bw-green);
+      font-size: 14px;
+    }
+
+    .bw-choice small {
+      display: block;
+      margin-top: 2px;
+      color: #5a655a;
+      font-size: 12px;
+    }
+
+    .bw-result {
+      padding: 18px;
+      background: #fff;
+    }
+
+    .bw-output {
+      display: grid;
+      gap: 16px;
+    }
+
+    .bw-verdict {
+      padding: 18px;
+      border-radius: 8px;
+      background: var(--bw-green);
+      color: #fff;
+    }
+
+    .bw-verdict .label {
+      margin: 0 0 7px;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .bw-verdict h2 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .bw-verdict p {
+      margin: 10px 0 0;
+      color: rgba(255,255,255,.88);
+      font-size: 14px;
+    }
+
+    .bw-ladder {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .bw-step {
+      min-height: 96px;
+      padding: 10px;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      background: #fbfbf7;
+      color: #4d584d;
+    }
+
+    .bw-step.active {
+      border-color: var(--bw-green);
+      background: #fff9c9;
+      color: var(--bw-ink);
+      box-shadow: inset 0 4px 0 var(--bw-green);
+    }
+
+    .bw-step b {
+      display: block;
+      color: var(--bw-green);
+      font-size: 13px;
+    }
+
+    .bw-step span {
+      display: block;
+      margin-top: 5px;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .bw-actions {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .bw-actions li {
+      display: grid;
+      grid-template-columns: 26px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .bw-dot {
+      display: inline-grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .bw-phrase {
+      padding: 14px;
+      border-radius: 8px;
+      background: #f5f8ef;
+      border: 1px solid var(--bw-border);
+      color: #3e493e;
+      font-size: 13px;
+    }
+
+    .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .bw-link {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 9px 12px;
+      border: 1px solid var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .bw-link.primary {
+      background: var(--bw-green);
+      color: #fff;
+    }
+
+    .bw-note {
+      margin: 0;
+      color: #5b655b;
+      font-size: 12px;
+    }
+
+    @media (max-width: 760px) {
+      .bw-tool { padding: 12px; }
+      .bw-hero,
+      .bw-grid {
+        grid-template-columns: 1fr;
+      }
+      .bw-hero { padding: 18px; }
+      .bw-controls {
+        border-right: 0;
+        border-bottom: 1px solid var(--bw-border);
+      }
+      .bw-ladder {
+        grid-template-columns: 1fr;
+      }
+      .bw-step {
+        min-height: 72px;
+      }
+      .bw-verdict h2 {
+        font-size: 23px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-tool" data-widget="berlin-medical-help-router">
+    <section class="bw-shell" aria-labelledby="tool-title">
+      <div class="bw-hero">
+        <div>
+          <p class="bw-kicker">BerlinWalk Tourist Help Tool</p>
+          <h1 id="tool-title">Berlin Medical Help Router</h1>
+          <p>Choose the calm first step when you feel unwell in Berlin. This tool routes you to official help channels. It does not diagnose or treat medical problems.</p>
+        </div>
+        <div class="bw-emergency" aria-label="Emergency reminder">
+          <span>If symptoms feel severe or waiting feels unsafe</span>
+          <strong>Call 112</strong>
+          <span>Ambulance and fire emergency number in Germany.</span>
+        </div>
+      </div>
+
+      <div class="bw-grid">
+        <form class="bw-controls" id="router-form">
+          <div class="bw-section">
+            <h2>1. How urgent does it feel?</h2>
+            <div class="bw-choices" data-group="urgency">
+              <button class="bw-choice" type="button" data-value="emergency" aria-pressed="false"><b>Severe or unsafe to wait</b><small>Breathing, chest pain, heavy bleeding, major accident, collapse.</small></button>
+              <button class="bw-choice" type="button" data-value="same-day" aria-pressed="true"><b>Needs medical help today</b><small>Not ambulance-level, but waiting until tomorrow feels wrong.</small></button>
+              <button class="bw-choice" type="button" data-value="routine" aria-pressed="false"><b>Stable and can be planned</b><small>Annoying, painful or worrying, but not suddenly dangerous.</small></button>
+            </div>
+          </div>
+
+          <div class="bw-section">
+            <h2>2. When are you trying to solve it?</h2>
+            <div class="bw-choices" data-group="timing">
+              <button class="bw-choice" type="button" data-value="now" aria-pressed="true"><b>Right now</b><small>I need a first step this hour.</small></button>
+              <button class="bw-choice" type="button" data-value="night" aria-pressed="false"><b>Night, weekend or holiday</b><small>Normal practices may be closed.</small></button>
+              <button class="bw-choice" type="button" data-value="tomorrow" aria-pressed="false"><b>Tomorrow is okay</b><small>I can book or ask reception calmly.</small></button>
+            </div>
+          </div>
+
+          <div class="bw-section">
+            <h2>3. What kind of problem is it?</h2>
+            <div class="bw-choices" data-group="issue">
+              <button class="bw-choice" type="button" data-value="illness" aria-pressed="true"><b>Illness or pain</b><small>Fever, stomach, ear, rash, pain, infection worry.</small></button>
+              <button class="bw-choice" type="button" data-value="injury" aria-pressed="false"><b>Injury or accident</b><small>Fall, cut, sprain, head hit, bike or scooter issue.</small></button>
+              <button class="bw-choice" type="button" data-value="medicine" aria-pressed="false"><b>Medicine or prescription</b><small>I need pharmacy advice or a prescription route.</small></button>
+              <button class="bw-choice" type="button" data-value="documents" aria-pressed="false"><b>Passport, wallet or insurance</b><small>Health issue plus documents, cards, phone or claim paperwork.</small></button>
+            </div>
+          </div>
+        </form>
+
+        <section class="bw-result" aria-live="polite">
+          <div class="bw-output">
+            <div class="bw-verdict">
+              <p class="label">Recommended first door</p>
+              <h2 id="result-title"></h2>
+              <p id="result-copy"></p>
+            </div>
+
+            <div class="bw-ladder" id="care-ladder" aria-label="Berlin medical help ladder"></div>
+
+            <ul class="bw-actions" id="action-list"></ul>
+
+            <div class="bw-phrase" id="phrase-box"></div>
+
+            <div class="bw-links" id="link-list"></div>
+
+            <p class="bw-note">Medical safety note: this tool is not diagnosis. If symptoms are severe, sudden, frightening, or rapidly worsening, use 112 instead of waiting.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const state = {
+      urgency: 'same-day',
+      timing: 'now',
+      issue: 'illness'
+    };
+
+    const ladder = [
+      ['112', 'Emergency', 'Ambulance and immediate danger.'],
+      ['116117', 'On-call doctor', 'Urgent, not life-threatening.'],
+      ['Doctor', 'Practice', 'Stable issue, planned visit.'],
+      ['Apotheke', 'Pharmacy', 'Medicine advice and prescriptions.'],
+      ['Insurance', 'Paperwork', 'Coverage, receipts and claims.']
+    ];
+
+    const links = {
+      emergency: [
+        ['Call 112', 'tel:112', true],
+        ['Berlin emergency info', 'https://www.berlin.de/en/tourism/travel-information/1748526-2862820-emergency-services-pharmacies.en.html']
+      ],
+      oncall: [
+        ['Call 116117', 'tel:116117', true],
+        ['116117 English info', 'https://www.116117.de/de/englisch.php']
+      ],
+      doctor: [
+        ['116117 doctor help', 'https://www.116117.de/de/englisch.php', true],
+        ['EHIC guidance', 'https://europa.eu/youreurope/citizens/health/unplanned-healthcare/temporary-stays/index_en.htm']
+      ],
+      pharmacy: [
+        ['Berlin pharmacy guide', 'https://www.berlinwalk.com/post/pharmacy-in-berlin', true],
+        ['Emergency services', 'https://www.berlin.de/en/tourism/travel-information/1748526-2862820-emergency-services-pharmacies.en.html']
+      ],
+      insurance: [
+        ['Lost property guide', 'https://www.berlinwalk.com/post/lost-property-berlin', true],
+        ['EHIC guidance', 'https://europa.eu/youreurope/citizens/health/unplanned-healthcare/temporary-stays/index_en.htm']
+      ]
+    };
+
+    function route() {
+      if (state.urgency === 'emergency') {
+        return {
+          key: 'emergency',
+          active: '112',
+          title: 'Call 112 now',
+          copy: 'If waiting feels unsafe, use the emergency number. Say your location, what happened, and whether the person is conscious and breathing.',
+          actions: ['Call 112. Do not search for a hospital yourself in a real emergency.', 'Ask hotel, station, museum or restaurant staff to help with the exact address.', 'Keep passports, medication lists and insurance cards ready if someone else can fetch them.'],
+          phrase: 'Useful line: "I need an ambulance. I am at [street or landmark]. One person needs help."'
+        };
+      }
+
+      if (state.issue === 'medicine' && state.urgency !== 'same-day') {
+        return {
+          key: 'pharmacy',
+          active: 'Apotheke',
+          title: 'Start with an Apotheke',
+          copy: 'For medicine questions, minor symptoms and prescription handling, a Berlin pharmacy is often the fastest first door.',
+          actions: ['Look for the red A pharmacy sign.', 'Bring the medicine package, prescription or a photo of what you already take.', 'If symptoms are more serious than a pharmacy question, switch to 116117 or 112.'],
+          phrase: 'Useful line: "I need advice about this medicine. Do I need a doctor?"'
+        };
+      }
+
+      if (state.issue === 'documents') {
+        return {
+          key: 'insurance',
+          active: 'Insurance',
+          title: 'Treat health first, then paperwork',
+          copy: 'If documents, wallet or phone are part of the problem, separate medical help from admin. Health comes first.',
+          actions: ['Use 112 or 116117 if the health issue is urgent.', 'Call your insurer for payment or clinic instructions when it is not an emergency.', 'For passport, wallet or phone loss, use police, embassy or lost-property routes after the medical issue is stable.'],
+          phrase: 'Useful line: "I am a tourist. I need medical help and I also lost my documents."'
+        };
+      }
+
+      if (state.urgency === 'same-day' || state.timing === 'night') {
+        return {
+          key: 'oncall',
+          active: '116117',
+          title: 'Use 116117',
+          copy: 'For urgent but non-life-threatening medical help, 116117 is the official on-call medical route.',
+          actions: ['Call 116117 or use its guidance to find the right on-call route.', 'Write down when symptoms started, current medicines and allergies.', 'If symptoms become severe while waiting, switch to 112.'],
+          phrase: 'Useful line: "It is urgent but not an ambulance emergency. I need medical help today."'
+        };
+      }
+
+      return {
+        key: 'doctor',
+        active: 'Doctor',
+        title: 'Find a normal doctor',
+        copy: 'For stable problems, a normal doctor appointment is usually calmer than a hospital emergency department.',
+        actions: ['Search for Allgemeinmedizin, Hausarzt, Praxis or MVZ near your hotel.', 'Ask your hotel or insurer if they have a recommended English-speaking practice.', 'Bring EHIC or insurance details, passport ID, symptoms and medication list.'],
+        phrase: 'Useful line: "I am visiting Berlin and need a doctor appointment for a stable medical problem."'
+      };
+    }
+
+    function render() {
+      const result = route();
+      document.getElementById('result-title').textContent = result.title;
+      document.getElementById('result-copy').textContent = result.copy;
+
+      document.getElementById('care-ladder').innerHTML = ladder.map(([id, title, copy]) => `
+        <div class="bw-step ${id === result.active ? 'active' : ''}">
+          <b>${id} ${title}</b>
+          <span>${copy}</span>
+        </div>
+      `).join('');
+
+      document.getElementById('action-list').innerHTML = result.actions.map((item, index) => `
+        <li><span class="bw-dot">${index + 1}</span><span>${item}</span></li>
+      `).join('');
+
+      document.getElementById('phrase-box').textContent = result.phrase;
+
+      document.getElementById('link-list').innerHTML = links[result.key].map(([label, href, primary]) => `
+        <a class="bw-link ${primary ? 'primary' : ''}" href="${href}" target="_blank" rel="noopener">${label}</a>
+      `).join('');
+
+      window.BWBrand?.resize?.();
+    }
+
+    document.querySelectorAll('.bw-choice').forEach((button) => {
+      button.addEventListener('click', () => {
+        const group = button.closest('[data-group]').dataset.group;
+        state[group] = button.dataset.value;
+        button.closest('[data-group]').querySelectorAll('.bw-choice').forEach((choice) => {
+          choice.setAttribute('aria-pressed', String(choice === button));
+        });
+        render();
+      });
+    });
+
+    render();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

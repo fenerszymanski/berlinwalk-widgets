@@ -138,7 +138,8 @@
   "topography-of-terror-berlin": "topography-of-terror-berlin",
   "lost-property-berlin": "lost-property-berlin",
   "drink-alcohol-in-public-berlin": "drink-alcohol-in-public-berlin",
-  "berlin-bike-lanes-tourists": "berlin-bike-lanes-tourists"
+  "berlin-bike-lanes-tourists": "berlin-bike-lanes-tourists",
+  "doctor-in-berlin": "doctor-in-berlin"
 };
 
   var SCHEMAS = {
@@ -6748,6 +6749,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. The BerlinWalk route is on foot and lasts 2 hours. It is a good first orientation before you decide whether a rental bike, e-scooter, public transport or walking makes sense for the rest of your day."
+        }
+      }
+    ]
+  },
+  "doctor-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I find a doctor in Berlin as a tourist?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a stable problem, search for Allgemeinmedizin, Hausarzt, Praxis or MVZ near your hotel, ask your accommodation or insurer for help, and bring ID plus insurance details. For urgent non-emergency help, use 116117."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I call 112 in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Call 112 for real emergencies: severe chest pain, serious breathing trouble, heavy bleeding, major accident, collapse, signs of stroke, severe allergic reaction or any situation where waiting feels unsafe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is 116117 in Germany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "116117 is the medical on-call service for urgent but non-life-threatening problems, especially when normal practices are closed or the issue cannot comfortably wait until the next working day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I go to a hospital emergency department in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Go to hospital or call 112 for serious or potentially serious cases. For stable problems, a normal doctor, 116117 or a pharmacy route is often calmer than going straight to an emergency department."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use my European Health Insurance Card in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "EU visitors should carry their EHIC. It can help with medically necessary state-provided healthcare during a temporary stay, but it does not replace travel insurance or automatically cover private treatment."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a Berlin pharmacy help if I feel unwell?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, for medicine advice, minor symptoms, over-the-counter remedies and prescription handling. If symptoms are severe, worsening or not really a pharmacy question, switch to 116117 or 112."
         }
       }
     ]

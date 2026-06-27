@@ -4092,5 +4092,35 @@
         "a": "No. The BerlinWalk route is on foot and lasts **2 hours**. It is a good first orientation before you decide whether a rental bike, e-scooter, public transport or walking makes sense for the rest of your day."
       }
     ]
+  },
+  "doctor-in-berlin": {
+    "title": "Doctor in Berlin - FAQ",
+    "subtitle": "Short answers for tourists choosing between 112, 116117, doctors, pharmacies, hospitals and insurance.",
+    "items": [
+      {
+        "q": "How do I find a doctor in Berlin as a tourist?",
+        "a": "For a stable problem, search for Allgemeinmedizin, Hausarzt, Praxis or MVZ near your hotel, ask your accommodation or insurer for help, and bring ID plus insurance details. For urgent non-emergency help, use 116117."
+      },
+      {
+        "q": "When should I call 112 in Berlin?",
+        "a": "Call 112 for real emergencies: severe chest pain, serious breathing trouble, heavy bleeding, major accident, collapse, signs of stroke, severe allergic reaction or any situation where waiting feels unsafe."
+      },
+      {
+        "q": "What is 116117 in Germany?",
+        "a": "116117 is the medical on-call service for urgent but non-life-threatening problems, especially when normal practices are closed or the issue cannot comfortably wait until the next working day."
+      },
+      {
+        "q": "Should I go to a hospital emergency department in Berlin?",
+        "a": "Go to hospital or call 112 for serious or potentially serious cases. For stable problems, a normal doctor, 116117 or a pharmacy route is often calmer than going straight to an emergency department."
+      },
+      {
+        "q": "Can I use my European Health Insurance Card in Berlin?",
+        "a": "EU visitors should carry their EHIC. It can help with medically necessary state-provided healthcare during a temporary stay, but it does not replace travel insurance or automatically cover private treatment."
+      },
+      {
+        "q": "Can a Berlin pharmacy help if I feel unwell?",
+        "a": "Yes, for medicine advice, minor symptoms, over-the-counter remedies and prescription handling. If symptoms are severe, worsening or not really a pharmacy question, switch to 116117 or 112."
+      }
+    ]
   }
 }
