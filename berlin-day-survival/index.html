@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Day Survival | BerlinWalk</title>
   <meta name="description" content="A fast Berlin survival game. Pick a budget, make six small city decisions, and see if your day survives.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
   <style>
@@ -21,6 +24,8 @@
       --red: #E63946;
       --sky: #1D8A99;
       --shadow: rgba(8, 36, 16, 0.22);
+      --font-ui: "Bricolage Grotesque", Montserrat, Arial, sans-serif;
+      --font-mono: "IBM Plex Mono", "Courier New", monospace;
     }
 
     * {
@@ -38,7 +43,7 @@
 
     body {
       color: var(--ink);
-      font-family: Montserrat, Arial, sans-serif;
+      font-family: var(--font-ui);
     }
 
     button,
@@ -66,14 +71,26 @@
 
     .bw-day-game::before {
       background:
-        radial-gradient(circle at 20% 12%, rgba(255, 230, 0, 0.32), transparent 30%),
-        radial-gradient(circle at 86% 18%, rgba(29, 138, 153, 0.2), transparent 26%),
+        repeating-linear-gradient(135deg, rgba(255, 230, 0, 0.2) 0 8px, transparent 8px 18px),
         linear-gradient(135deg, rgba(27, 94, 32, 0.08), rgba(124, 179, 66, 0.06));
       content: "";
       inset: 0;
+      opacity: 0.72;
       pointer-events: none;
       position: absolute;
       z-index: -1;
+    }
+
+    .bw-day-game::after {
+      background: repeating-linear-gradient(90deg, var(--green) 0 13px, var(--yellow) 13px 24px, var(--red) 24px 31px, transparent 31px 41px);
+      bottom: 0;
+      content: "";
+      height: 5px;
+      left: 0;
+      opacity: 0.9;
+      pointer-events: none;
+      position: absolute;
+      right: 0;
     }
 
     .bw-day-shell {
@@ -96,21 +113,20 @@
       align-items: center;
       color: var(--green-dark);
       display: inline-flex;
-      font-size: 11px;
-      font-weight: 900;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 700;
       gap: 8px;
       text-transform: uppercase;
     }
 
-    .bw-day-mini-logo span:first-child {
-      background: var(--green);
-      border: 2px solid var(--yellow);
+    .bw-day-mini-logo img {
+      background: var(--yellow);
+      border: 1px solid rgba(27, 94, 32, 0.24);
       border-radius: 50%;
       box-shadow: 0 7px 16px rgba(27, 94, 32, 0.24);
-      color: var(--yellow);
-      display: grid;
       height: 28px;
-      place-items: center;
+      object-fit: contain;
       width: 28px;
     }
 
@@ -122,7 +138,8 @@
       color: var(--green-dark);
       cursor: pointer;
       display: inline-flex;
-      font-size: 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
       font-weight: 850;
       gap: 6px;
       min-height: 32px;
@@ -195,15 +212,16 @@
     .bw-day-copy h1 {
       color: var(--green-dark);
       font-size: clamp(30px, 8.2vw, 42px);
-      font-weight: 950;
+      font-weight: 800;
       line-height: 0.96;
       margin: 0 0 8px;
     }
 
     .bw-day-kicker {
       color: var(--green);
+      font-family: var(--font-mono);
       font-size: 12px;
-      font-weight: 950;
+      font-weight: 700;
       margin: 0 0 8px;
       text-transform: uppercase;
     }
@@ -231,8 +249,20 @@
       cursor: pointer;
       min-height: 88px;
       padding: 10px 8px;
+      position: relative;
       text-align: left;
       transition: border-color 150ms ease, box-shadow 150ms ease, transform 150ms ease;
+    }
+
+    .bw-day-budget::after {
+      background: repeating-linear-gradient(90deg, rgba(27, 94, 32, 0.2) 0 5px, transparent 5px 9px);
+      border-radius: 999px;
+      bottom: 7px;
+      content: "";
+      height: 3px;
+      left: 8px;
+      position: absolute;
+      right: 8px;
     }
 
     .bw-day-budget[aria-pressed="true"] {
@@ -248,6 +278,7 @@
     }
 
     .bw-day-budget strong {
+      font-family: var(--font-mono);
       font-size: 18px;
       line-height: 1;
       margin-bottom: 4px;
@@ -310,7 +341,7 @@
       background: rgba(255, 255, 255, 0.74);
       border: 1px solid rgba(27, 94, 32, 0.14);
       border-radius: 999px;
-      height: 10px;
+      height: 9px;
       overflow: hidden;
     }
 
@@ -331,24 +362,37 @@
       background: rgba(255, 255, 255, 0.82);
       border: 1px solid rgba(27, 94, 32, 0.14);
       border-radius: 8px;
-      padding: 7px;
+      box-shadow: inset 0 -3px 0 rgba(27, 94, 32, 0.08);
+      padding: 7px 7px 6px;
     }
 
     .bw-day-meter small {
       color: var(--muted);
       display: block;
-      font-size: 10px;
-      font-weight: 850;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
       line-height: 1;
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       text-transform: uppercase;
     }
 
     .bw-day-meter strong {
       color: var(--green-dark);
       display: block;
+      font-family: var(--font-mono);
       font-size: 17px;
       line-height: 1;
+    }
+
+    .bw-day-meter em {
+      color: var(--muted);
+      display: block;
+      font-size: 9px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 1.05;
+      margin-top: 5px;
     }
 
     .bw-day-meter[data-danger="true"] strong {
@@ -365,6 +409,18 @@
       min-height: 0;
       overflow: visible;
       padding: 9px;
+      position: relative;
+    }
+
+    .bw-day-content::before {
+      background: repeating-linear-gradient(90deg, var(--yellow) 0 12px, var(--green) 12px 18px, transparent 18px 24px);
+      border-radius: 999px;
+      content: "";
+      height: 4px;
+      left: 12px;
+      position: absolute;
+      right: 12px;
+      top: -3px;
     }
 
     .bw-day-art {
@@ -376,6 +432,34 @@
       overflow: hidden;
     }
 
+    .bw-day-art img {
+      object-position: center center;
+    }
+
+    .bw-day-art[data-scene="morning"] img {
+      object-position: 62% 42%;
+    }
+
+    .bw-day-art[data-scene="hydration"] img {
+      object-position: 50% 42%;
+    }
+
+    .bw-day-art[data-scene="landmark"] img {
+      object-position: 54% 40%;
+    }
+
+    .bw-day-art[data-scene="lunch"] img {
+      object-position: 52% 42%;
+    }
+
+    .bw-day-art[data-scene="afternoon"] img {
+      object-position: 50% 40%;
+    }
+
+    .bw-day-art[data-scene="night"] img {
+      object-position: 52% 42%;
+    }
+
     .bw-day-round-copy {
       min-height: 0;
       overflow: visible;
@@ -384,7 +468,7 @@
     .bw-day-round-copy h2 {
       color: var(--green-dark);
       font-size: clamp(20px, 5.4vw, 26px);
-      font-weight: 950;
+      font-weight: 800;
       line-height: 1.02;
       margin: 0 0 7px;
     }
@@ -402,8 +486,9 @@
       border: 1px solid rgba(27, 94, 32, 0.16);
       border-radius: 8px;
       color: var(--green-dark);
+      font-family: var(--font-mono);
       font-size: 11px;
-      font-weight: 850;
+      font-weight: 700;
       line-height: 1.25;
       margin-top: 8px;
       padding: 8px;
@@ -419,6 +504,7 @@
       align-items: center;
       background: white;
       border: 2px solid rgba(27, 94, 32, 0.16);
+      box-shadow: inset 0 -3px 0 rgba(8, 36, 16, 0.08);
       color: var(--green-dark);
       display: grid;
       gap: 6px;
@@ -445,8 +531,9 @@
 
     .bw-day-choice small {
       color: var(--muted);
+      font-family: var(--font-mono);
       font-size: 11px;
-      font-weight: 900;
+      font-weight: 700;
       white-space: nowrap;
     }
 
@@ -477,8 +564,9 @@
       border: 1px solid rgba(255, 255, 255, 0.18);
       border-radius: 999px;
       color: white;
+      font-family: var(--font-mono);
       font-size: 11px;
-      font-weight: 850;
+      font-weight: 700;
       padding: 5px 8px;
     }
 
@@ -501,7 +589,7 @@
     .bw-day-result h2 {
       color: var(--green-dark);
       font-size: clamp(28px, 7.4vw, 40px);
-      font-weight: 950;
+      font-weight: 800;
       line-height: 0.98;
       margin: 0;
     }
@@ -534,6 +622,7 @@
 
     .bw-day-score small {
       color: var(--muted);
+      font-family: var(--font-mono);
       font-size: 10px;
       font-weight: 900;
       margin-bottom: 5px;
@@ -542,6 +631,7 @@
 
     .bw-day-score strong {
       color: var(--green-dark);
+      font-family: var(--font-mono);
       font-size: 18px;
       line-height: 1;
       white-space: nowrap;
@@ -601,8 +691,22 @@
         padding-top: 5px;
       }
 
+      .bw-day-topbar {
+        min-height: 34px;
+      }
+
+      .bw-day-mini-logo {
+        font-size: 9px;
+        gap: 6px;
+      }
+
+      .bw-day-mini-logo img {
+        height: 26px;
+        width: 26px;
+      }
+
       .bw-day-gameplay {
-        gap: 7px;
+        gap: 8px;
       }
 
       .bw-day-meters {
@@ -614,12 +718,17 @@
       }
 
       .bw-day-meter small {
-        font-size: 9px;
+        font-size: 8px;
         margin-bottom: 4px;
       }
 
       .bw-day-meter strong {
-        font-size: 16px;
+        font-size: 15px;
+      }
+
+      .bw-day-meter em {
+        font-size: 8px;
+        margin-top: 4px;
       }
 
       .bw-day-content {
@@ -629,12 +738,12 @@
 
       .bw-day-art {
         justify-self: center;
-        max-height: 112px;
-        width: min(100%, 260px);
+        max-height: none;
+        width: min(100%, 292px);
       }
 
       .bw-day-round-copy h2 {
-        font-size: 19px;
+        font-size: 20px;
         line-height: 1.04;
       }
 
@@ -681,8 +790,8 @@
 
       .bw-day-result-art {
         justify-self: center;
-        max-height: 132px;
-        width: min(100%, 250px);
+        max-height: none;
+        width: min(100%, 292px);
       }
 
       .bw-day-result h2 {
@@ -723,7 +832,7 @@
   <main class="bw-day-game" id="app" aria-live="polite">
     <div class="bw-day-shell">
       <header class="bw-day-topbar">
-        <div class="bw-day-mini-logo"><span>BW</span><span>BerlinWalk Games</span></div>
+        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-27-day-survival-design-v6" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
         <button class="bw-day-sound" type="button" id="soundToggle" aria-pressed="false">Sound off</button>
       </header>
       <section class="bw-day-panel" id="screen"></section>
@@ -733,7 +842,7 @@
 
   <script>
     (function () {
-      const DATA_VERSION = '2026-06-27-chatgpt-browser-v5';
+      const DATA_VERSION = '2026-06-27-day-survival-design-v6';
       const screen = document.getElementById('screen');
       const toast = document.getElementById('toast');
       const soundToggle = document.getElementById('soundToggle');
@@ -916,7 +1025,7 @@
           <div class="bw-day-screen bw-day-gameplay">
             ${renderMeters(progress)}
             <article class="bw-day-content">
-              <figure class="bw-day-art">${makeImage(round.image, `${round.kicker} scene`)}</figure>
+              <figure class="bw-day-art" data-scene="${escapeHtml(round.id)}">${makeImage(round.image, `${round.kicker} scene`)}</figure>
               <div class="bw-day-round-copy">
                 <p class="bw-day-kicker">${escapeHtml(round.kicker)}</p>
                 <h2>${escapeHtml(round.title)}</h2>
@@ -946,9 +1055,9 @@
             <div class="bw-day-progress" aria-label="Progress"><span style="width:${Math.max(6, progress)}%"></span></div>
           </div>
           <div class="bw-day-meters">
-            <div class="bw-day-meter" data-danger="${state.budgetLeftCents < 0 ? 'true' : 'false'}"><small>Budget</small><strong>${money(state.budgetLeftCents)}</strong></div>
-            <div class="bw-day-meter" data-danger="${state.energy < 35 ? 'true' : 'false'}"><small>Energy</small><strong>${Math.round(state.energy)}</strong></div>
-            <div class="bw-day-meter" data-danger="${state.berlinSense < 35 ? 'true' : 'false'}"><small>Berlin Sense</small><strong>${Math.round(state.berlinSense)}</strong></div>
+            <div class="bw-day-meter" data-danger="${state.budgetLeftCents < 0 ? 'true' : 'false'}" title="Cash left after each choice"><small>Wallet</small><strong>${money(state.budgetLeftCents)}</strong><em>cash left</em></div>
+            <div class="bw-day-meter" data-danger="${state.energy < 35 ? 'true' : 'false'}" title="Your stamina for the day"><small>Fuel</small><strong>${Math.round(state.energy)}</strong><em>stamina</em></div>
+            <div class="bw-day-meter" data-danger="${state.berlinSense < 35 ? 'true' : 'false'}" title="Local instinct and trap avoidance"><small>Smarts</small><strong>${Math.round(state.berlinSense)}</strong><em>local instinct</em></div>
           </div>
         `;
       }
@@ -1001,9 +1110,9 @@
         feedbackNode.innerHTML = `
           <p>${escapeHtml(feedback)}</p>
           <div class="bw-day-feedback-stats">
-            <span class="bw-day-pill">Budget ${money(state.budgetLeftCents)}</span>
-            <span class="bw-day-pill">Energy ${Math.round(state.energy)}</span>
-            <span class="bw-day-pill">Sense ${Math.round(state.berlinSense)}</span>
+            <span class="bw-day-pill">Wallet ${money(state.budgetLeftCents)}</span>
+            <span class="bw-day-pill">Fuel ${Math.round(state.energy)}</span>
+            <span class="bw-day-pill">Smarts ${Math.round(state.berlinSense)}</span>
           </div>
           <button class="bw-day-primary" type="button">${state.roundIndex + 1 >= state.data.rounds.length ? 'See result' : 'Next decision'}</button>
         `;
@@ -1070,14 +1179,14 @@
         bookingUrl.searchParams.set('utm_content', result.id);
         screen.innerHTML = `
           <div class="bw-day-screen bw-day-result">
-            <figure class="bw-day-result-art">${makeImage(result.image, `${result.title} result art`)}</figure>
+            <figure class="bw-day-result-art" data-result="${escapeHtml(result.id)}">${makeImage(result.image, `${result.title} result art`)}</figure>
             <p class="bw-day-kicker">Your Berlin day type</p>
             <h2>${escapeHtml(result.title)}</h2>
             <p>${escapeHtml(result.description)}</p>
             <div class="bw-day-score-grid">
-              <div class="bw-day-score"><small>Budget</small><strong>${money(state.budgetLeftCents)}</strong></div>
-              <div class="bw-day-score"><small>Energy</small><strong>${Math.round(state.energy)}</strong></div>
-              <div class="bw-day-score"><small>Sense</small><strong>${Math.round(state.berlinSense)}</strong></div>
+              <div class="bw-day-score"><small>Wallet</small><strong>${money(state.budgetLeftCents)}</strong></div>
+              <div class="bw-day-score"><small>Fuel</small><strong>${Math.round(state.energy)}</strong></div>
+              <div class="bw-day-score"><small>Street Smarts</small><strong>${Math.round(state.berlinSense)}</strong></div>
             </div>
             <p class="bw-day-tip">${escapeHtml(result.tip)}</p>
             <p>You survived the day. Now let me show you the city properly. Join my ~2h Berlin walking tour.</p>
@@ -1123,34 +1232,27 @@
         ctx.fillRect(0, 0, canvas.width, 210);
         ctx.fillStyle = '#FFE600';
         ctx.fillRect(0, 210, canvas.width, 16);
-        ctx.fillStyle = '#FFE600';
-        ctx.beginPath();
-        ctx.arc(118, 104, 54, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = '#1B5E20';
-        ctx.font = '900 34px Montserrat, Arial, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText('BW', 118, 116);
+        await drawContainImageOnCanvas(ctx, 'assets/brand/berlinwalk-bw-logo.png', 64, 50, 108, 108);
         ctx.textAlign = 'left';
         ctx.fillStyle = '#FFFFFF';
-        ctx.font = '900 42px Montserrat, Arial, sans-serif';
+        ctx.font = '900 42px Bricolage Grotesque, Montserrat, Arial, sans-serif';
         ctx.fillText('Berlin Day Survival', 200, 92);
-        ctx.font = '700 25px Montserrat, Arial, sans-serif';
+        ctx.font = '700 25px Bricolage Grotesque, Montserrat, Arial, sans-serif';
         ctx.fillText('Your budget was small. Berlin was hungry.', 200, 140);
 
         const result = state.result;
         await drawImageOnCanvas(ctx, result.image, 78, 276, 924, 578);
         ctx.fillStyle = '#073B16';
-        wrapText(ctx, result.title, 78, 950, 920, 66, '900 72px Montserrat, Arial, sans-serif');
+        wrapText(ctx, result.title, 78, 950, 920, 66, '900 72px Bricolage Grotesque, Montserrat, Arial, sans-serif');
         ctx.fillStyle = '#4E5A4F';
-        wrapText(ctx, result.description, 82, 1050, 900, 36, '700 34px Montserrat, Arial, sans-serif');
+        wrapText(ctx, result.description, 82, 1050, 900, 36, '700 34px Bricolage Grotesque, Montserrat, Arial, sans-serif');
 
-        drawStat(ctx, 'Budget', money(state.budgetLeftCents), 82, 1166);
-        drawStat(ctx, 'Energy', String(Math.round(state.energy)), 388, 1166);
-        drawStat(ctx, 'Berlin Sense', String(Math.round(state.berlinSense)), 694, 1166);
+        drawStat(ctx, 'Wallet', money(state.budgetLeftCents), 82, 1166);
+        drawStat(ctx, 'Fuel', String(Math.round(state.energy)), 388, 1166);
+        drawStat(ctx, 'Street Smarts', String(Math.round(state.berlinSense)), 694, 1166);
 
         ctx.fillStyle = '#1B5E20';
-        ctx.font = '900 28px Montserrat, Arial, sans-serif';
+        ctx.font = '900 28px Bricolage Grotesque, Montserrat, Arial, sans-serif';
         ctx.fillText('Play at berlinwalk.com/games/berlin-day-survival', 82, 1298);
         return new Promise((resolve) => canvas.toBlob(resolve, 'image/png', 0.92));
       }
@@ -1163,10 +1265,10 @@
         ctx.fill();
         ctx.stroke();
         ctx.fillStyle = '#586258';
-        ctx.font = '900 21px Montserrat, Arial, sans-serif';
+        ctx.font = '900 21px IBM Plex Mono, Courier New, monospace';
         ctx.fillText(label.toUpperCase(), x + 22, y + 34);
         ctx.fillStyle = '#073B16';
-        ctx.font = '900 36px Montserrat, Arial, sans-serif';
+        ctx.font = '900 36px IBM Plex Mono, Courier New, monospace';
         ctx.fillText(value, x + 22, y + 73);
       }
 
@@ -1228,6 +1330,24 @@
             ctx.fillText('Berlin Day Survival', x + 58, y + height / 2);
             resolve();
           };
+          img.src = asset(path);
+        });
+      }
+
+      function drawContainImageOnCanvas(ctx, path, x, y, width, height) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.crossOrigin = 'anonymous';
+          img.onload = () => {
+            const scale = Math.min(width / img.naturalWidth, height / img.naturalHeight);
+            const dw = img.naturalWidth * scale;
+            const dh = img.naturalHeight * scale;
+            const dx = x + (width - dw) / 2;
+            const dy = y + (height - dh) / 2;
+            ctx.drawImage(img, dx, dy, dw, dh);
+            resolve();
+          };
+          img.onerror = () => resolve();
           img.src = asset(path);
         });
       }
