@@ -13,12 +13,16 @@ time (CEST)**.
   The quick filters, team filter and day jump reset each other so only one
   view is active at a time.
 - Match data is inlined in `index.html` as the `M` (group stage) and `KO`
-  (knockout) arrays. To edit a fixture, change the relevant row.
+  (knockout) arrays. To edit a fixture, change the relevant row. `KO` now
+  stores all 32 knockout fixtures with match number, Berlin time, seed labels,
+  matchup/slot labels, venue, and a projection flag for rows that can still
+  move while group-stage games are unfinished.
 
 **Data note:** the group-stage fixtures and kick-off times were assembled from
 public 2026 World Cup CET schedules and cross-checked against anchor matches
 (opener, Germany's three games). Reconfirm against the official FIFA schedule
-before relying on exact times. Knockout match-ups are placeholders until the
-group stage is decided.
+before relying on exact times. Knockout Round of 32 matchups use the current
+local group table where known; rows involving unfinished groups or third-place
+allocation remain marked as projected until the group stage is final.
 
 Live URL after push: `https://fenerszymanski.github.io/berlinwalk-widgets/worldcup-fixtures/`

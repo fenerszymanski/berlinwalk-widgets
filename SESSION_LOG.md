@@ -1,3 +1,31 @@
+## 2026-06-27 — Codex (daily featured/listing refresh)
+
+**Did/Changed/QA:** Daily featured/listing refresh completed from the Wix Blog API with `147` posts. `/blog` lead stays `berlin-heatwave-day-plan`; rail is now `lost-property-berlin`, `drink-alcohol-in-public-berlin`, `topography-of-terror-berlin`, `berlin-public-transport-ferries`, and `where-to-watch-2026-world-cup-in-berlin`. Homepage blog teaser keeps Heatwave featured; mini posts are Lost Property, Public Drinking, Topography, and Ferry; right rail is Sachsenhausen, BER Airport Departure Guide, and World Cup. Changed only `scripts/generate-blog-index-data.mjs`, `blog-index/data.json`, and `blog-home/data.json`; tool featured/home selections were intentionally unchanged. Root Wix custom embed `BerlinWalk Blog Featured Posts` was patched to revision `15`. Validation passed: JSON parse for listing data, `node --check scripts/generate-blog-index-data.mjs`, root `node --check scripts/update-blog-feature-embed.mjs`, `node tools-hub/validate-data.mjs` (`71 tools, 69 visible`), and `git diff --check`. Commit `ceecbfd` was pushed to `origin/main`; GitHub Pages updated after a short lag (`Last-Modified Sat, 27 Jun 2026 06:55:43/06:56:04 GMT`). Live Playwright QA desktop + 390px passed for homepage, `/blog`, `/berlin-tools`, and `/widgets`: expected new blog selections/tool data present, `/berlin-tools` Start here unchanged, `/widgets` sees Lost Item Router, horizontal overflow `0`; `/blog` still has known Wix 403 exposure noise. Existing unrelated `SESSION_LOG.md` and `worldcup-fixtures/index.html` dirty changes were not included in the refresh commit.
+
+## 2026-06-27 — Codex (World Cup fixtures knockout fill)
+
+**Did/Changed/QA:** `worldcup-fixtures` knockout section was expanded from stage placeholders into 32 match fixtures with match numbers, Berlin CEST kick-off times, seed labels, matchup/slot labels, venues, and projected markers for unresolved Round of 32 rows. Changed `worldcup-fixtures/index.html` renderer/CSS plus `worldcup-fixtures/README.md`; group score rows were not changed. QA: inline Node parse found `72` group rows, `66` final scores, `32` KO rows, `0` malformed KO rows; `git diff --check -- worldcup-fixtures/index.html worldcup-fixtures/README.md` passed; local Playwright desktop 1280 and mobile 390 showed `.bw-ko-match = 32`, all stage headers visible, horizontal overflow `0`, with only local favicon 404 console noise. GitHub Pages still needs commit/push/deploy; projected rows should be finalized after the last group games.
+
+## 2026-06-27 — Codex (Search Console indexing requested)
+
+**Did/Changed/QA:** Chrome/Search Console UI manual Request Indexing completed for `https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin`, `https://www.berlinwalk.com/post/lost-property-berlin`, and `https://www.berlinwalk.com/tools/berlin-lost-item-router`. Each URL Inspection result was `URL is not on Google / URL is unknown to Google` before submit; after `REQUEST INDEXING`, Google returned `Indexing requested` and added the URL to the priority crawl queue. Updated `output/qa/post-publish-20260627/search-console-blocker.json` to `resolved_via_chrome_browser`; no site/widget/blog content changed.
+
+## 2026-06-27 — Codex (two daily posts post-publish follow-up)
+
+**Did/Changed/QA:** Yusuf published `drink-alcohol-in-public-berlin` and `lost-property-berlin`; Wix API readback shows both `PUBLISHED` with `hasUnpublishedChanges:false`. Commit `f0106b9` was pushed to regenerate `blog-index/data.json` to 147 posts and add `lost-property-berlin` -> `berlin-lost-item-router` related-tool mapping. GitHub Pages now serves both widgets, Quick Summary and FAQ keys, plus Lost Property tools-hub/icon data; `/blog` live QA desktop + 390px mobile shows both new posts with overflow `0`; both post URLs and `/tools/berlin-lost-item-router` return 200 with expected iframes and mobile overflow `0`. Search Console URL Inspection is blocked by `invalid_grant`, so manual Request Indexing remains. Public Drinking BerlinTools CMS/tool promotion is still intentionally blocked until a required ChatGPT-browser glossy icon is generated; no placeholder entry was added.
+
+## 2026-06-27 — Codex (World Cup fixtures score update)
+
+**Did:** At 08:29 CEST automation run, final scores were added for 4 due FIFA World Cup group-stage matches: Cape Verde 0-0 Saudi Arabia, Uruguay 0-1 Spain, Egypt 1-1 Iran, New Zealand 5-1 Belgium.
+
+**Changed:** Only `worldcup-fixtures/index.html` changed. Four `M` rows were completed with final score fields and `SCORE_UPDATED` was set to `27 Jun 2026, 08:29 CEST`.
+
+**QA:** Inline JS smoke check passed with 72 rows total and 66 scored rows; `SCORE_UPDATED` label updated. Playwright desktop/mobile visual check was not run in this pass.
+
+**Opened:** GitHub Pages still needs commit/push/deploy for live widget updates.
+
+**Closed:** 2026-06-27 due score update done locally.
+
 ## 2026-06-26 — Codex (World Cup fixtures score update)
 
 **Did:** Added final scores for the two score-check-due FIFA World Cup group matches in the 23:32 CEST automation run: Norway 1-4 France, Senegal 5-0 Iraq.
