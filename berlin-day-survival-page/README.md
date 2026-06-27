@@ -6,7 +6,7 @@ Wix snippet:
 
 ```html
 <bw-berlin-day-survival-page></bw-berlin-day-survival-page>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-page/berlin-day-survival-page-element.js?v=day-survival-full-v1-20260627"></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-page/berlin-day-survival-page-element.js?v=day-survival-full-v1b-20260627"></script>
 ```
 
 Local preview:

@@ -1347,7 +1347,8 @@
             keepalive: !returnStats
           });
           if (!returnStats || !response.ok) return null;
-          return await response.json();
+          const text = await response.text();
+          return text ? JSON.parse(text) : null;
         } catch (error) {
           console.warn('[Berlin Day Survival] tracking failed', error);
           return null;

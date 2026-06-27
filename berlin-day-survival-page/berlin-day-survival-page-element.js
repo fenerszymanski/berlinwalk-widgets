@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'day-survival-full-v1-20260627';
+const ASSET_BUILD = 'day-survival-full-v1b-20260627';
 
 class BwBerlinDaySurvivalPage extends HTMLElement {
   connectedCallback() {
