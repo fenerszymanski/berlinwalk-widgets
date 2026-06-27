@@ -135,7 +135,9 @@
   "traenenpalast-berlin": "traenenpalast-berlin",
   "berlin-public-transport-ferries": "berlin-public-transport-ferries",
   "sachsenhausen-from-berlin": "sachsenhausen-from-berlin",
-  "topography-of-terror-berlin": "topography-of-terror-berlin"
+  "topography-of-terror-berlin": "topography-of-terror-berlin",
+  "lost-property-berlin": "lost-property-berlin",
+  "drink-alcohol-in-public-berlin": "drink-alcohol-in-public-berlin"
 };
 
   var SCHEMAS = {
@@ -6583,6 +6585,114 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It is better for older teenagers and adults. The exhibition is document-heavy and deals directly with persecution, terror and state violence, so it is not a default young-family stop."
+        }
+      }
+    ]
+  },
+  "lost-property-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What should I do first if I lose something in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "First secure anything that can harm the rest of your trip: passport or ID, bank cards, phone access and travel documents. Then report the item to the correct lost-property system based on where it disappeared."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I report something lost on the U-Bahn, tram or bus?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For BVG U-Bahn, tram and bus items, use the BVG lost and found page and submit an online lost items report. BVG lists its Fundbüro at Rudolfstraße 1-8 near Warschauer Straße for in-person cases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where do I report something lost on a DB train or at Berlin Hauptbahnhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For Deutsche Bahn long-distance or regional trains and DB stations, use DB Fundservice. DB says online loss reports are for items worth more than EUR 15 and that items may take hours or days to reach the system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I lose something at BER Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BER says the right contact depends on where the item was lost. Terminal, security and arrivals items go to BER lost property at Terminal 1 Level U1; items left on a plane or apron bus go to the airline; train or bus items go to the transport company."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I lose my passport in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de says the loss or theft of a passport or personal ID card must be reported to the police immediately. If you are a visitor and need travel documents, contact your country’s embassy or consulate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I go to the lost property office in person?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes, but not automatically. File the correct online report first when the official system asks for it, secure urgent documents/cards/phone access, and check current office hours before travelling across Berlin."
+        }
+      }
+    ]
+  },
+  "drink-alcohol-in-public-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can you drink alcohol in public in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually yes for adults in many outdoor public places, if you are calm, clean up after yourself and no local sign, venue rule, staff instruction or specific ban says otherwise."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I drink beer in a Berlin park?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A quiet beer in a Berlin park is normally low-key, but Berlin.de park rules still require considerate behavior and clearing away rubbish or dirt. Broken glass, loud speakers and mess are the problem."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I drink alcohol on Berlin public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The safest tourist rule is to keep alcohol closed on public transport and follow staff instructions. It is not worth arguing with BVG, S-Bahn, DB, security staff or police over an open bottle."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What changed at Bahnhof Zoo and Ostbahnhof in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "S-Bahn Berlin says DB started testing an alcohol-consumption ban at Bahnhof Zoologischer Garten and Ostbahnhof on 1 May 2026. Alcoholic drinks may not be consumed there or carried open in the station or forecourt, except inside licensed gastronomy and shops."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is drinking outside a Späti allowed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It can be tolerated in many places, but the pavement outside a Späti is still public space. Do not block the way, leave bottles, make late-night noise or ignore neighbors and staff."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the best place to drink without worrying about rules?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A bar, beer garden, licensed terrace or event area is the clearest choice. You have toilets, staff, service rules and a defined drinking area."
         }
       }
     ]

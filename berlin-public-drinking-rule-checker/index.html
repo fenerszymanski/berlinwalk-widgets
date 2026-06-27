@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Public Drinking Rule Checker | BerlinWalk</title>
+  <meta name="description" content="Check whether a beer or open alcoholic drink is sensible in a Berlin park, Späti corner, public transport station, train, memorial, bar or beer garden.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-drinking-checker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-drinking-checker {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #526052;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      --bw-red-soft: #FDEBED;
+      --bw-amber: #8A6500;
+      --bw-amber-soft: #FFF7D0;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-drinking-checker *,
+    #bw-drinking-checker *::before,
+    #bw-drinking-checker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-drinking-checker h2,
+    #bw-drinking-checker h3,
+    #bw-drinking-checker p {
+      margin-top: 0;
+    }
+
+    #bw-drinking-checker .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-drinking-checker .bw-hero {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.16)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) minmax(230px, 0.68fr);
+      padding: 22px;
+    }
+
+    #bw-drinking-checker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-drinking-checker .bw-title {
+      color: var(--bw-white);
+      font-size: 29px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-drinking-checker .bw-sub {
+      color: #E8F4D7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-drinking-checker .bw-rule-card {
+      align-self: stretch;
+      background: rgba(250, 250, 245, 0.97);
+      border: 1px solid rgba(255, 230, 0, 0.38);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: grid;
+      gap: 9px;
+      padding: 14px;
+    }
+
+    #bw-drinking-checker .bw-rule-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-drinking-checker .bw-rule-card p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-drinking-checker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-drinking-checker .bw-panel,
+    #bw-drinking-checker .bw-result,
+    #bw-drinking-checker .bw-actions {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-drinking-checker .bw-panel {
+      display: grid;
+      gap: 15px;
+      padding: 16px;
+    }
+
+    #bw-drinking-checker .bw-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-drinking-checker .bw-fieldset {
+      border: 0;
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      min-width: 0;
+      padding: 0;
+    }
+
+    #bw-drinking-checker .bw-label {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-drinking-checker .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-drinking-checker .bw-choice {
+      appearance: none;
+      background: #F7FBF1;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.22;
+      min-height: 52px;
+      padding: 10px 8px;
+      text-align: center;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-drinking-checker .bw-choice:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.14);
+    }
+
+    #bw-drinking-checker .bw-choice:focus-visible,
+    #bw-drinking-checker .bw-copy:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.8);
+      outline-offset: 2px;
+    }
+
+    #bw-drinking-checker .bw-choice[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-drinking-checker .bw-result {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    #bw-drinking-checker .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 22px;
+      font-weight: 950;
+      line-height: 1.18;
+      margin: 0;
+    }
+
+    #bw-drinking-checker .bw-result p {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #bw-drinking-checker .bw-result.is-stop {
+      border-color: rgba(230, 57, 70, 0.35);
+    }
+
+    #bw-drinking-checker .bw-result.is-stop h3 {
+      color: var(--bw-red);
+    }
+
+    #bw-drinking-checker .bw-result.is-caution {
+      border-color: rgba(255, 230, 0, 0.76);
+    }
+
+    #bw-drinking-checker .bw-result.is-caution h3 {
+      color: var(--bw-amber);
+    }
+
+    #bw-drinking-checker .bw-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-drinking-checker .bw-badge {
+      background: #EEF6E6;
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 950;
+      line-height: 1;
+      padding: 8px 10px;
+      white-space: nowrap;
+    }
+
+    #bw-drinking-checker .bw-badge.warn {
+      background: var(--bw-amber-soft);
+      border-color: rgba(255, 230, 0, 0.7);
+      color: var(--bw-amber);
+    }
+
+    #bw-drinking-checker .bw-badge.stop {
+      background: var(--bw-red-soft);
+      border-color: rgba(230, 57, 70, 0.35);
+      color: var(--bw-red);
+    }
+
+    #bw-drinking-checker .bw-actions {
+      display: grid;
+    }
+
+    #bw-drinking-checker .bw-action {
+      border-bottom: 1px solid var(--bw-border);
+      display: grid;
+      gap: 4px;
+      grid-template-columns: 26px minmax(0, 1fr);
+      padding: 11px 13px;
+    }
+
+    #bw-drinking-checker .bw-action:last-child {
+      border-bottom: 0;
+    }
+
+    #bw-drinking-checker .bw-num {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: var(--bw-yellow);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 950;
+      height: 24px;
+      justify-content: center;
+      width: 24px;
+    }
+
+    #bw-drinking-checker .bw-action strong {
+      color: var(--bw-text);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 950;
+      line-height: 1.3;
+    }
+
+    #bw-drinking-checker .bw-action span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    #bw-drinking-checker .bw-copy {
+      appearance: none;
+      background: var(--bw-green);
+      border: 0;
+      border-radius: 8px;
+      color: var(--bw-white);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 950;
+      justify-self: start;
+      line-height: 1;
+      padding: 11px 13px;
+    }
+
+    #bw-drinking-checker .bw-small-note {
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    @media (max-width: 760px) {
+      #bw-drinking-checker {
+        margin: 16px 0;
+      }
+
+      #bw-drinking-checker .bw-hero {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      #bw-drinking-checker .bw-title {
+        font-size: 24px;
+      }
+
+      #bw-drinking-checker .bw-body {
+        padding: 14px;
+      }
+
+      #bw-drinking-checker .bw-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-drinking-checker .bw-choice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-drinking-checker .bw-choice {
+        min-height: 48px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      #bw-drinking-checker .bw-choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-drinking-checker .bw-badge {
+        white-space: normal;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-hero">
+      <div>
+        <p class="bw-kicker">BERLIN RULE CHECKER</p>
+        <h2 class="bw-title">Can you drink here?</h2>
+        <p class="bw-sub">Choose the place, container and mood. Get the practical Berlin answer before you open the bottle.</p>
+      </div>
+      <aside class="bw-rule-card">
+        <strong>Short rule</strong>
+        <p>A quiet adult beer outside is often normal. Open drinks at Zoo or Ostbahnhof, loud groups, memorials and staff instructions change the answer.</p>
+      </aside>
+    </header>
+
+    <main class="bw-body">
+      <section class="bw-panel" aria-label="Berlin public drinking inputs">
+        <div class="bw-grid">
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Place</legend>
+            <div class="bw-choice-grid" data-group="place">
+              <button class="bw-choice" type="button" data-value="park" aria-pressed="true">Park or riverside</button>
+              <button class="bw-choice" type="button" data-value="spati" aria-pressed="false">Outside a Späti</button>
+              <button class="bw-choice" type="button" data-value="transport" aria-pressed="false">BVG/S-Bahn/train</button>
+              <button class="bw-choice" type="button" data-value="stationban" aria-pressed="false">Zoo or Ostbahnhof</button>
+              <button class="bw-choice" type="button" data-value="venue" aria-pressed="false">Bar or beer garden</button>
+              <button class="bw-choice" type="button" data-value="memorial" aria-pressed="false">Memorial/museum</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Container</legend>
+            <div class="bw-choice-grid" data-group="container">
+              <button class="bw-choice" type="button" data-value="sealed" aria-pressed="true">Closed bottle/can</button>
+              <button class="bw-choice" type="button" data-value="open" aria-pressed="false">Open beer</button>
+              <button class="bw-choice" type="button" data-value="glass" aria-pressed="false">Glass bottle</button>
+              <button class="bw-choice" type="button" data-value="spirits" aria-pressed="false">Spirits/cocktail</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Situation</legend>
+            <div class="bw-choice-grid" data-group="mood">
+              <button class="bw-choice" type="button" data-value="day" aria-pressed="true">Daytime / calm</button>
+              <button class="bw-choice" type="button" data-value="late" aria-pressed="false">Late near homes</button>
+              <button class="bw-choice" type="button" data-value="loud" aria-pressed="false">Group or speaker</button>
+              <button class="bw-choice" type="button" data-value="underage" aria-pressed="false">Under 18 involved</button>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="bw-result" id="bw-result" aria-live="polite">
+        <div class="bw-badge-row" id="bw-badges"></div>
+        <h3 id="bw-result-title">Usually okay, if you keep it low-key.</h3>
+        <p id="bw-result-copy">A calm adult drink in a park or by the water is common in Berlin. Keep the volume down, use bins, and do not leave glass behind.</p>
+        <button class="bw-copy" type="button" id="bw-copy">Copy result</button>
+      </section>
+
+      <section class="bw-actions" id="bw-actions" aria-label="Recommended actions"></section>
+      <p class="bw-small-note">This is a practical visitor guide, not legal advice. Signs, staff instructions and event rules always win.</p>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-drinking-checker');
+      if (!root) return;
+
+      var state = {
+        place: 'park',
+        container: 'sealed',
+        mood: 'day'
+      };
+
+      var resultEl = root.querySelector('#bw-result');
+      var titleEl = root.querySelector('#bw-result-title');
+      var copyEl = root.querySelector('#bw-result-copy');
+      var badgesEl = root.querySelector('#bw-badges');
+      var actionsEl = root.querySelector('#bw-actions');
+      var copyButton = root.querySelector('#bw-copy');
+
+      function selectedLabel(group, value) {
+        var button = root.querySelector('[data-group="' + group + '"] [data-value="' + value + '"]');
+        return button ? button.textContent.trim() : value;
+      }
+
+      function decision() {
+        var p = state.place;
+        var c = state.container;
+        var m = state.mood;
+
+        if (m === 'underage' || c === 'spirits') {
+          return {
+            level: 'stop',
+            title: 'Do not rely on Berlin being relaxed here.',
+            copy: 'Age and stronger-alcohol rules are not a vibe check. Use an adult venue with clear service rules, or skip the drink.',
+            badges: ['Age law matters', 'Venue rules can be stricter'],
+            actions: [
+              ['Check age first', 'Beer/wine and spirits have different youth-protection lines in Germany.'],
+              ['Use a licensed place', 'A bar or beer garden is clearer than guessing in public.'],
+              ['Do not argue with staff', 'If staff refuses service or asks you to leave, follow that first.']
+            ]
+          };
+        }
+
+        if (p === 'stationban') {
+          return {
+            level: 'stop',
+            title: 'Do not drink or carry it open here.',
+            copy: 'Zoo station and Ostbahnhof have a DB model-project alcohol ban from 1 May 2026. Keep drinks closed and follow signs.',
+            badges: ['2026 station ban', 'Open carry problem'],
+            actions: [
+              ['Close it before entry', 'Do not walk through the station or forecourt with an open alcoholic drink.'],
+              ['Use licensed gastronomy only', 'The exception is inside shops or gastronomy that serve alcohol commercially.'],
+              ['Move away first', 'If you want to drink, choose a normal bar, beer garden or another suitable outdoor spot.']
+            ]
+          };
+        }
+
+        if (p === 'memorial') {
+          return {
+            level: 'stop',
+            title: 'Skip the drink here.',
+            copy: 'Memorials and serious history sites are not picnic spaces. Save it for a bar, park or beer garden after the visit.',
+            badges: ['Respect first', 'Move elsewhere'],
+            actions: [
+              ['Keep the visit sober', 'A memorial visit needs attention and respect.'],
+              ['Drink water instead', 'Carry water, especially in summer.'],
+              ['Choose a better place after', 'A beer garden or Späti corner makes more sense once you leave the site.']
+            ]
+          };
+        }
+
+        if (p === 'transport') {
+          return {
+            level: 'caution',
+            title: 'Close it before you ride.',
+            copy: 'Public transport is the wrong place to test tolerance. Keep alcohol closed, keep control, and follow staff instructions.',
+            badges: ['Close container', 'Staff instructions win'],
+            actions: [
+              ['Close the bottle or can', 'Do this before entering platforms, trains, trams or buses.'],
+              ['Avoid glass and mess', 'Broken glass and spills are the fastest way to attract attention.'],
+              ['Wait until you arrive', 'Finish the transfer first, then choose a suitable place.']
+            ]
+          };
+        }
+
+        if (p === 'venue') {
+          return {
+            level: 'ok',
+            title: 'This is the cleanest option.',
+            copy: 'A bar, beer garden or licensed terrace gives you the clearest boundary, toilets and staff. Follow the venue rules.',
+            badges: ['Best choice', 'Toilets nearby'],
+            actions: [
+              ['Stay inside the boundary', 'Do not drift into the street with glass if the venue does not allow it.'],
+              ['Check payment style', 'Some Berlin places still prefer cash or card minimums.'],
+              ['Use it for groups', 'A loud group is usually better inside a venue than under apartment windows.']
+            ]
+          };
+        }
+
+        if (m === 'late' || m === 'loud') {
+          return {
+            level: 'caution',
+            title: 'Move quieter or move to a venue.',
+            copy: 'The drink may not be the issue. Noise, speakers, blocked pavement and glass near homes are the issue.',
+            badges: ['Noise risk', 'Local complaints'],
+            actions: [
+              ['Lower the volume now', 'A quiet conversation is different from a street party.'],
+              ['Avoid residential doorways', 'If people live directly above you, choose another place.'],
+              ['Use bins and Pfand returns', 'Do not leave bottles, caps or cigarette butts behind.']
+            ]
+          };
+        }
+
+        if (p === 'spati' && c === 'glass') {
+          return {
+            level: 'caution',
+            title: 'Possible, but glass and pavement matter.',
+            copy: 'A Späti drink can be normal, but the pavement is still public space. Do not block the way, leave glass or annoy residents.',
+            badges: ['Use a bin', 'Return Pfand'],
+            actions: [
+              ['Stand clear of the doorway', 'Keep the pavement usable for neighbors and passersby.'],
+              ['Return the bottle', 'Deposit bottles are not decoration.'],
+              ['Move if the corner feels tense', 'Some Späti corners are fine, some are complaint magnets.']
+            ]
+          };
+        }
+
+        return {
+          level: 'ok',
+          title: 'Usually okay, if you keep it low-key.',
+          copy: 'A calm adult drink in this kind of outdoor Berlin setting is common. Keep it quiet, clean up, and avoid signs or staff telling you otherwise.',
+          badges: ['Low-key outdoor option', 'Clean up after yourself'],
+          actions: [
+            ['Keep the volume down', 'No speaker under apartment windows.'],
+            ['Leave no bottle behind', 'Use bins or return deposit bottles.'],
+            ['Switch to water too', 'Especially in summer, do not turn a city walk into a dehydration test.']
+          ]
+        };
+      }
+
+      function render() {
+        var result = decision();
+        resultEl.classList.remove('is-stop', 'is-caution');
+        if (result.level === 'stop') resultEl.classList.add('is-stop');
+        if (result.level === 'caution') resultEl.classList.add('is-caution');
+
+        titleEl.textContent = result.title;
+        copyEl.textContent = result.copy;
+        badgesEl.innerHTML = result.badges.map(function (badge) {
+          var klass = result.level === 'stop' ? ' stop' : result.level === 'caution' ? ' warn' : '';
+          return '<span class="bw-badge' + klass + '">' + badge + '</span>';
+        }).join('');
+        actionsEl.innerHTML = result.actions.map(function (item, index) {
+          return '<div class="bw-action"><span class="bw-num">' + (index + 1) + '</span><div><strong>' + item[0] + '</strong><span>' + item[1] + '</span></div></div>';
+        }).join('');
+      }
+
+      root.querySelectorAll('.bw-choice').forEach(function (button) {
+        button.addEventListener('click', function () {
+          var group = button.closest('[data-group]').getAttribute('data-group');
+          state[group] = button.getAttribute('data-value');
+          root.querySelectorAll('[data-group="' + group + '"] .bw-choice').forEach(function (other) {
+            other.setAttribute('aria-pressed', other === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      copyButton.addEventListener('click', function () {
+        var text = 'Berlin public drinking check: ' + selectedLabel('place', state.place) + ', ' + selectedLabel('container', state.container) + ', ' + selectedLabel('mood', state.mood) + '. Result: ' + titleEl.textContent + ' ' + copyEl.textContent;
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () {
+            copyButton.textContent = 'Copied';
+            setTimeout(function () { copyButton.textContent = 'Copy result'; }, 1400);
+          }).catch(function () {
+            copyButton.textContent = 'Copy unavailable';
+            setTimeout(function () { copyButton.textContent = 'Copy result'; }, 1400);
+          });
+        }
+      });
+
+      render();
+    }());
+  </script>
+</div>
+</body>
+</html>

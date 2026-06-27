@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Lost Item Router | BerlinWalk</title>
+  <meta name="description" content="Choose the right Berlin lost-property route for a lost phone, wallet, passport, bag or keys on BVG, S-Bahn, DB, at BER Airport, in a taxi or in the city.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-lost-router">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-lost-router {
+      --bw-green: #1B5E20;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #526052;
+      --bw-border: #D9E7C8;
+      --bw-red: #E63946;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-lost-router *,
+    #bw-lost-router *::before,
+    #bw-lost-router *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-lost-router h2,
+    #bw-lost-router h3,
+    #bw-lost-router p {
+      margin-top: 0;
+    }
+
+    #bw-lost-router .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 8px 26px rgba(0, 0, 0, 0.07);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-lost-router .bw-hero {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(124, 179, 66, 0.18)),
+        var(--bw-green);
+      color: var(--bw-white);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
+      padding: 22px;
+    }
+
+    #bw-lost-router .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-lost-router .bw-title {
+      color: var(--bw-white);
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+    }
+
+    #bw-lost-router .bw-sub {
+      color: #E8F4D7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 10px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-lost-router .bw-rule-card {
+      align-self: stretch;
+      background: rgba(250, 250, 245, 0.97);
+      border: 1px solid rgba(255, 230, 0, 0.38);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: grid;
+      gap: 9px;
+      padding: 14px;
+    }
+
+    #bw-lost-router .bw-rule-card strong {
+      color: var(--bw-green);
+      display: block;
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-lost-router .bw-rule-card p {
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-lost-router .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-lost-router .bw-panel,
+    #bw-lost-router .bw-result,
+    #bw-lost-router .bw-action-list,
+    #bw-lost-router .bw-links {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-lost-router .bw-panel {
+      display: grid;
+      gap: 15px;
+      padding: 16px;
+    }
+
+    #bw-lost-router .bw-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-lost-router .bw-fieldset {
+      border: 0;
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      min-width: 0;
+      padding: 0;
+    }
+
+    #bw-lost-router .bw-label {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-lost-router .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-lost-router .bw-choice {
+      appearance: none;
+      background: #F7FBF1;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 50px;
+      padding: 10px 8px;
+      text-align: center;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-lost-router .bw-choice:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.14);
+    }
+
+    #bw-lost-router .bw-choice[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-lost-router .bw-result {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    #bw-lost-router .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 21px;
+      font-weight: 950;
+      line-height: 1.18;
+      margin: 0;
+    }
+
+    #bw-lost-router .bw-result p {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #bw-lost-router .bw-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-lost-router .bw-badge {
+      background: #EEF6E6;
+      border: 1px solid var(--bw-border);
+      border-radius: 999px;
+      color: var(--bw-green);
+      font-size: 11px;
+      font-weight: 950;
+      line-height: 1;
+      padding: 8px 10px;
+      white-space: nowrap;
+    }
+
+    #bw-lost-router .bw-badge.warn {
+      background: #FFF7D0;
+      border-color: rgba(255, 230, 0, 0.7);
+      color: #6F5600;
+    }
+
+    #bw-lost-router .bw-action-list {
+      display: grid;
+      gap: 0;
+    }
+
+    #bw-lost-router .bw-step {
+      border-bottom: 1px solid var(--bw-border);
+      display: grid;
+      gap: 5px;
+      grid-template-columns: 34px minmax(0, 1fr);
+      padding: 12px 14px;
+    }
+
+    #bw-lost-router .bw-step:last-child {
+      border-bottom: 0;
+    }
+
+    #bw-lost-router .bw-step b {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 999px;
+      color: var(--bw-yellow);
+      display: flex;
+      font-size: 12px;
+      font-weight: 950;
+      height: 26px;
+      justify-content: center;
+      line-height: 1;
+      width: 26px;
+    }
+
+    #bw-lost-router .bw-step strong {
+      color: var(--bw-text);
+      display: block;
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-lost-router .bw-step span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 700;
+      grid-column: 2;
+      line-height: 1.45;
+    }
+
+    #bw-lost-router .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 14px;
+    }
+
+    #bw-lost-router .bw-link {
+      align-items: center;
+      background: var(--bw-green);
+      border: 1px solid var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-white);
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 950;
+      justify-content: center;
+      line-height: 1.2;
+      min-height: 42px;
+      padding: 10px 12px;
+      text-decoration: none;
+    }
+
+    #bw-lost-router .bw-link.secondary {
+      background: var(--bw-white);
+      color: var(--bw-green);
+    }
+
+    #bw-lost-router .bw-note {
+      color: var(--bw-muted);
+      font-size: 11.5px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    @media (max-width: 760px) {
+      #bw-lost-router {
+        margin: 14px 0;
+      }
+
+      #bw-lost-router .bw-hero {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      #bw-lost-router .bw-title {
+        font-size: 25px;
+      }
+
+      #bw-lost-router .bw-body {
+        padding: 14px;
+      }
+
+      #bw-lost-router .bw-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-lost-router .bw-choice-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <section class="bw-shell" aria-labelledby="bw-lost-title">
+    <div class="bw-hero">
+      <div>
+        <p class="bw-kicker">BerlinWalk.com • Lost property</p>
+        <h2 class="bw-title" id="bw-lost-title">Where should your lost item report go?</h2>
+        <p class="bw-sub">Choose where it happened, what went missing and how urgent it is. The router points you to the right Berlin office first, so you do not waste a day emailing the wrong place.</p>
+      </div>
+      <div class="bw-rule-card">
+        <strong>Passport, wallet or phone?</strong>
+        <p>If documents, cards or a phone are gone, secure those first. A lost umbrella can wait. A passport or bank card should not.</p>
+      </div>
+    </div>
+
+    <div class="bw-body">
+      <form class="bw-panel" aria-label="Lost item router controls">
+        <div class="bw-grid">
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Where did it happen?</legend>
+            <div class="bw-choice-grid" data-group="place">
+              <button class="bw-choice" type="button" data-value="bvg" aria-pressed="true">BVG U-Bahn, tram or bus</button>
+              <button class="bw-choice" type="button" data-value="db" aria-pressed="false">S-Bahn, DB train or station</button>
+              <button class="bw-choice" type="button" data-value="ber" aria-pressed="false">BER airport or flight</button>
+              <button class="bw-choice" type="button" data-value="city" aria-pressed="false">Taxi, street, shop or hotel</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">What is missing?</legend>
+            <div class="bw-choice-grid" data-group="item">
+              <button class="bw-choice" type="button" data-value="documents" aria-pressed="false">Passport or ID</button>
+              <button class="bw-choice" type="button" data-value="wallet" aria-pressed="true">Wallet or cards</button>
+              <button class="bw-choice" type="button" data-value="phone" aria-pressed="false">Phone or laptop</button>
+              <button class="bw-choice" type="button" data-value="bag" aria-pressed="false">Bag, suitcase or keys</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">How urgent?</legend>
+            <div class="bw-choice-grid" data-group="urgency">
+              <button class="bw-choice" type="button" data-value="today" aria-pressed="false">Flight or checkout today</button>
+              <button class="bw-choice" type="button" data-value="soon" aria-pressed="true">Next 48 hours</button>
+              <button class="bw-choice" type="button" data-value="calm" aria-pressed="false">I can wait</button>
+              <button class="bw-choice" type="button" data-value="stolen" aria-pressed="false">Probably stolen</button>
+            </div>
+          </fieldset>
+        </div>
+      </form>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-badge-row" id="bw-badges"></div>
+        <h3 id="bw-result-title"></h3>
+        <p id="bw-result-copy"></p>
+      </section>
+
+      <section class="bw-action-list" id="bw-steps" aria-label="Recommended steps"></section>
+
+      <section class="bw-links" id="bw-links" aria-label="Useful official links"></section>
+
+      <p class="bw-note">This tool is a tourist triage helper, not a guarantee that an item has been found. Official opening hours, forms and collection rules can change, so check the linked source before travelling across Berlin.</p>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var state = { place: 'bvg', item: 'wallet', urgency: 'soon' };
+
+      var LINKS = {
+        bvg: { label: 'BVG lost items report', url: 'https://www.bvg.de/en/service-and-support/lost-and-found' },
+        berlin: { label: 'Berlin central Fundbüro', url: 'https://www.berlin.de/en/tourism/travel-information/1735948-2862820-lost-and-found-and-lost-property-offices.en.html' },
+        db: { label: 'DB lost & found', url: 'https://int.bahn.de/en/help/contact/lost-luggage' },
+        ber: { label: 'BER lost items', url: 'https://ber.berlin-airport.de/en/flying/baggage/gegenstand-verloren.html' },
+        police: { label: 'Berlin police info', url: 'https://www.berlin.de/en/tourism/travel-information/1749512-2862820-police.en.html' },
+        help: { label: 'visitBerlin help numbers', url: 'https://www.visitberlin.de/en/help-advice' }
+      };
+
+      function baseRoute() {
+        if (state.place === 'bvg') {
+          return {
+            title: 'Start with BVG lost and found',
+            copy: 'For items lost on BVG U-Bahn, tram or bus, submit a detailed online lost item report. Bulk items like umbrellas or gloves may need an in-person visit to the BVG Fundbüro at Rudolfstraße near Warschauer Straße.',
+            badges: ['BVG first', 'Online report', 'Rudolfstraße office'],
+            links: ['bvg', 'berlin'],
+            steps: [
+              ['Report online', 'Describe the item, line, date, time, direction and where you sat or stood.'],
+              ['Secure valuables', 'If cards, phone or passport are involved, block or report them before waiting for a match.'],
+              ['Do not cross town too early', 'Lost items can take time to reach the office. Use the official page before going in person.']
+            ]
+          };
+        }
+        if (state.place === 'db') {
+          return {
+            title: 'Split S-Bahn/BVG from DB long-distance',
+            copy: 'For S-Bahn Berlin and many city transport cases, use the Berlin public transport lost-property path. For DB long-distance, regional trains or DB stations, use Deutsche Bahn Fundservice.',
+            badges: ['S-Bahn or DB?', 'Train/station split', 'Value check'],
+            links: ['db', 'bvg', 'berlin'],
+            steps: [
+              ['Choose the operator', 'S-Bahn Berlin is not the same as every DB long-distance or regional train. Start with the vehicle or station where it happened.'],
+              ['Use DB for higher-value train losses', 'DB asks for online reports for items worth more than EUR 15 and may charge a handling fee when an item is returned.'],
+              ['Add exact trip details', 'Train number, platform, station, carriage position and departure time matter more than a vague description.']
+            ]
+          };
+        }
+        if (state.place === 'ber') {
+          return {
+            title: 'At BER, location decides the office',
+            copy: 'BER separates terminal items, plane/apron-bus items, transport-company items and passport documents. Do not send every airport problem to one office.',
+            badges: ['BER split', 'Terminal vs plane', 'Level U1'],
+            links: ['ber', 'db', 'bvg'],
+            steps: [
+              ['Terminal or security?', 'For items found inside BER terminals, security controls or arrivals, use the BER Lost Property Office at the Service Centre.'],
+              ['Plane or checked baggage?', 'For items left on the plane, in the apron bus, or checked baggage that did not arrive, contact the airline.'],
+              ['Train or bus to BER?', 'For items lost on FEX, regional trains, S45, S9 or buses, use the respective transport company instead.']
+            ]
+          };
+        }
+        return {
+          title: 'Use the central Berlin lost property route',
+          copy: 'For items lost in the street, a shop, park, taxi or unknown public place, Berlin.de points visitors to the Central Lost Property Office at Platz der Luftbrücke.',
+          badges: ['City Fundbüro', 'Taxi/street/shop', 'Tempelhof'],
+          links: ['berlin', 'police', 'help'],
+          steps: [
+            ['Ask the exact place first', 'If it was a hotel, shop, restaurant or app taxi, contact that operator before filing a broad city report.'],
+            ['Then use the city office', 'Berlin Central Lost Property Office handles many ordinary lost or found items outside the transport-specific systems.'],
+            ['For theft, switch route', 'If the item was stolen, report it to the police instead of treating it as a normal lost-property case.']
+          ]
+        };
+      }
+
+      function applyItemOverlay(route) {
+        if (state.item === 'documents') {
+          route.badges.push('Document priority');
+          route.steps.unshift(['Report documents fast', 'If your passport or ID is missing, report loss or theft to the police and contact your embassy or consulate if you need to travel.']);
+          route.copy += ' Passport or ID loss is not just a lost-property task; treat it as a document/security problem first.';
+          route.links = ['police', 'help'].concat(route.links);
+        } else if (state.item === 'wallet') {
+          route.badges.push('Block cards first');
+          route.steps.unshift(['Block payment cards', 'Use your bank app, card issuer or emergency card-blocking route before waiting for a lost-property match.']);
+        } else if (state.item === 'phone') {
+          route.badges.push('Account security');
+          route.steps.unshift(['Lock and locate the device', 'Use Find My/Find Device, change critical passwords if needed, and avoid sending one-time codes to anyone claiming to have it.']);
+        } else {
+          route.badges.push('Describe details');
+          route.steps.unshift(['Add identifiers', 'Bag brand, color, stickers, key tags, contents and photos make the report much easier to match.']);
+        }
+        return route;
+      }
+
+      function applyUrgency(route) {
+        if (state.urgency === 'today') {
+          route.badges.push('Travel today');
+          route.steps.unshift(['Prioritize travel-critical items', 'If you fly today, fix passport, ID, cards and phone access first. Replaceable clothes or keys can wait.']);
+        } else if (state.urgency === 'stolen') {
+          route.badges.push('Theft route');
+          route.links = ['police'].concat(route.links);
+          route.steps.unshift(['Use the police route', 'For active theft, stolen documents or cards, start with police/reporting and bank security. Lost-property offices are not an emergency service.']);
+        } else if (state.urgency === 'calm') {
+          route.badges.push('Wait for match');
+          route.steps.push(['Give the system time', 'A precise report today is usually better than visiting three offices before the item has reached any of them.']);
+        }
+        return route;
+      }
+
+      function unique(value, index, array) {
+        return array.indexOf(value) === index;
+      }
+
+      function render() {
+        var route = applyUrgency(applyItemOverlay(baseRoute()));
+        route.badges = route.badges.filter(unique).slice(0, 5);
+        route.links = route.links.filter(unique).slice(0, 4);
+        document.getElementById('bw-badges').innerHTML = route.badges.map(function (label) {
+          return '<span class="bw-badge' + (/passport|document|theft|travel|block/i.test(label) ? ' warn' : '') + '">' + label + '</span>';
+        }).join('');
+        document.getElementById('bw-result-title').textContent = route.title;
+        document.getElementById('bw-result-copy').textContent = route.copy;
+        document.getElementById('bw-steps').innerHTML = route.steps.slice(0, 5).map(function (step, index) {
+          return '<div class="bw-step"><b>' + (index + 1) + '</b><strong>' + step[0] + '</strong><span>' + step[1] + '</span></div>';
+        }).join('');
+        document.getElementById('bw-links').innerHTML = route.links.map(function (key, index) {
+          var link = LINKS[key];
+          return '<a class="bw-link' + (index ? ' secondary' : '') + '" href="' + link.url + '" target="_blank" rel="noopener">' + link.label + '</a>';
+        }).join('');
+        if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.resize === 'function') {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('#bw-lost-router .bw-choice'), function (button) {
+        button.addEventListener('click', function () {
+          var group = button.closest('[data-group]').getAttribute('data-group');
+          state[group] = button.getAttribute('data-value');
+          Array.prototype.forEach.call(button.closest('[data-group]').querySelectorAll('.bw-choice'), function (peer) {
+            peer.setAttribute('aria-pressed', peer === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

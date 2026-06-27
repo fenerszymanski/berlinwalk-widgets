@@ -1760,5 +1760,29 @@
       "Use the free audio guide or a slow self-guided route; do not treat it as a quick rainy-day filler.",
       "Pair it with Checkpoint Charlie or the Holocaust Memorial only if you have mental room. Do not stack it after Sachsenhausen on the same day."
     ]
+  },
+  "lost-property-berlin": {
+    "title": "Lost Property Berlin - Quick Summary",
+    "icon": "🔎",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**Lost property in Berlin is split by operator.** BVG, DB/S-Bahn, BER Airport, the police and the central city Fundbüro do different jobs.",
+      "**For BVG U-Bahn, tram or bus items, start with the BVG online lost items report.** Bulk items like umbrellas or gloves may need an in-person office visit.",
+      "**For DB trains or DB stations, use Deutsche Bahn Fundservice.** DB says online reports are for items worth more than EUR 15 and returned items can involve a handling fee.",
+      "**At BER Airport, location decides the route:** terminal/security/arrivals items go to BER lost property, plane/apron-bus items go to the airline, and trains/buses go to the transport company.",
+      "**Passport, ID, wallet or phone loss comes first.** Report missing documents to police/embassy routes, block cards and lock devices before waiting for a lost-property match."
+    ]
+  },
+  "drink-alcohol-in-public-berlin": {
+    "title": "Drink Alcohol in Public Berlin - Quick Summary",
+    "icon": "🍺",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**A quiet adult beer outside is often normal in Berlin.** Parks, canal edges and Späti corners can be relaxed if you keep it calm and clean.",
+      "**The big 2026 exception is Zoo station and Ostbahnhof.** S-Bahn Berlin says DB is testing a ban from 1 May 2026: no alcohol consumption and no open alcoholic drinks in the stations or forecourts.",
+      "**Public transport is not the place to test tolerance.** Keep alcohol closed on trains, trams, buses and platforms, and follow staff or security instructions.",
+      "**Parks and bridges depend on behavior.** Berlin.de park rules focus on consideration, clean benches/equipment, and clearing away rubbish or dirt.",
+      "**For groups, glass bottles, late-night noise or memorial sites, choose a bar or beer garden instead.** The drink is not always the problem; the setting is."
+    ]
   }
 }

@@ -1880,6 +1880,43 @@
       "iconStatus": "live-wix-media",
       "relatedBlog": "/post/topography-of-terror-berlin",
       "cmsItemId": "5fce74f3-4583-4248-a850-bc3445c0c310"
+    },
+    {
+      "slug": "berlin-lost-item-router",
+      "title": "Berlin Lost Item Router",
+      "lead": "Find the right lost-property route in Berlin for phones, wallets, passports, bags and keys across BVG, S-Bahn, DB, BER Airport and city offices.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_9d395f9e6f294a0d828c4a1d559b1b7e~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-lost-item-router/",
+      "embedHeight": 1120,
+      "hubCategory": "Essentials",
+      "type": "Guide",
+      "priority": 15,
+      "tags": [
+        "lost property",
+        "lost and found",
+        "fundbüro",
+        "bvg",
+        "s-bahn",
+        "db",
+        "ber airport",
+        "passport",
+        "wallet",
+        "phone",
+        "travel help"
+      ],
+      "aliases": [
+        "lost item berlin",
+        "lost phone berlin",
+        "lost wallet berlin",
+        "lost passport berlin",
+        "fundbuero berlin",
+        "fundbüro berlin",
+        "bvg lost and found"
+      ],
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/lost-property-berlin",
+      "cmsItemId": "acb9bea5-acdd-4b7c-add9-4f2a41864a84"
     }
   ],
   "hubCategories": [

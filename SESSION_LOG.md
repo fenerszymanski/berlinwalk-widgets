@@ -1,3 +1,31 @@
+## 2026-06-26 — Codex (World Cup fixtures score update)
+
+**Did:** Added final scores for the two score-check-due FIFA World Cup group matches in the 23:32 CEST automation run: Norway 1-4 France, Senegal 5-0 Iraq.
+
+**Changed:** `worldcup-fixtures/index.html` only: two `M` rows gained final-score fields and `SCORE_UPDATED` is now `26 Jun 2026, 23:32 CEST`.
+
+**QA:** Inline JS parse found 72 rows, 62 scored rows, and 0 malformed rows. Local Playwright QA at 1280px and 390px found `.bw-match.final = 62`, updated label visible, both new scores visible, horizontal overflow `0`. `git diff --check -- worldcup-fixtures/index.html` passed.
+
+**Opened:** Commit/push/deploy is still needed before GitHub Pages live widget updates.
+
+**Closed:** Due score updates are complete locally.
+
+## 2026-06-27 — Codex (daily featured/listing refresh)
+
+**Did:** Günlük featured/listing refresh tamamlandı; Wix Blog API envanteri 145 postla yenilendi, Heatwave lead korundu, Topography ve Sachsenhausen `/blog` rail ve homepage mini kartlara alındı. `/berlin-tools` ve `/widgets` tool seçimleri bilerek aynı bırakıldı.
+
+**Changed:** `scripts/generate-blog-index-data.mjs`, `blog-index/data.json`, `blog-home/data.json`; root Wix custom embed `BerlinWalk Blog Featured Posts` revision `14` olarak patch'lendi.
+
+**QA:** JSON parse, `node --check scripts/generate-blog-index-data.mjs`, root `node --check scripts/update-blog-feature-embed.mjs`, `node tools-hub/validate-data.mjs` (`71 tools, 69 visible`) ve `git diff --check` geçti. Commit `3dc6796` origin/main'e push edildi; GitHub Pages önce eski JSON'u servis etti, sonra `Last-Modified Sat, 27 Jun 2026 02:08:36/37 GMT` ile güncellendi. Canlı Playwright QA: homepage ve `/blog` Topography/Sachsenhausen/Ferry/BER/World Cup seçimlerini görüyor; `/berlin-tools` ve `/widgets` aynı Start here/tool data setini görüyor; dört URL'de horizontal overflow `0`. `/blog` console'daki `bulk/report-exposures` 403 ve blog widget route log'u mevcut Wix gürültüsü.
+
+**Opened:** Bu run dışı Lost Property/FAQ/Quick Summary/tool/icon ve World Cup değişiklikleri worktree'de kirli duruyor; refresh commit'ine alınmadı.
+
+**Closed:** Discovery/listing yüzeyleri 2026-06-27 run'ı için canlıda güncel.
+
+## 2026-06-26 — Codex (Lost Property Berlin draft assets)
+
+**Did:** Created the widget-repo package for the unpublished Wix draft `Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport`. **Changed:** Added `blog-drafts/lost-property-berlin.{body,notes,md}`, image/source pack and contact sheet under `blog-drafts/images/lost-property-berlin/`, Quick Summary/FAQ key `lost-property-berlin`, regenerated `faq/inject.js`, added widget `berlin-lost-item-router/`, generated dedicated ChatGPT-browser glossy icon source + `tools-home/icons/berlin-lost-item-router*.png`, added `tools-hub/data.json` entry with Wix Media icon `5a08a3_9d395f9e6f294a0d828c4a1d559b1b7e~mv2.png` and CMS item `acb9bea5-acdd-4b7c-add9-4f2a41864a84`; root script `update-berlintools-layout-icons-embed.mjs` now drops nonessential card transition CSS and live embed revision is `41`. **QA:** Local widget/QS/FAQ desktop + 390px mobile QA passed with overflow `0`; `node tools-hub/validate-data.mjs`, FAQ audit, body validator, syntax/JSON checks, scoped public-voice scan, and `git diff --check` passed. Wix draft readback is `UNPUBLISHED` with 3 embeds, 4 images/all alt text, 9 links, and full SEO/social/JSON-LD; Wix tool route returns 200. **Opened:** Push/deploy this repo before GitHub Pages serves the new widget/QS/FAQ/tool data; current Pages widget URL is 404 and live data lacks the key/slug. **Closed:** Local blog/widget/tool/icon package is complete and no paid image API was used.
+
 ## 2026-06-26 — Codex (Topography post-publish deploy)
 
 **Did:** Completed widget-repo publish follow-up for the live Topography of Terror post/tool package. **Changed:** Commit `fce4f93` regenerated `blog-index/data.json` to 145 posts and pinned `topography-of-terror-berlin` as Latest #1 with related tool `topography-of-terror-visit-planner`; commit `583cca2` removed draft-only Image Credits wording from the local Topography markdown/body. Original asset package remains commit `f440c55`. **QA:** `node scripts/validate-blog-publish-body.mjs`, `node tools-hub/validate-data.mjs`, syntax checks, and `git diff --check` passed. GitHub Pages serves the widget, Quick Summary/FAQ keys, tools-hub entry/icon, and `blog-index/data.json`; browser QA passed for `/blog`, `/berlin-tools`, `/tools/topography-of-terror-visit-planner`, and the live blog post desktop/mobile with overflow `0`. **Opened:** Search Console indexing is tracked in root output because the Google API token returned `invalid_grant`. **Closed:** Topography widget/tool/listing assets are pushed and live.

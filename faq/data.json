@@ -4002,5 +4002,65 @@
         "a": "It is better for older teenagers and adults. The exhibition is document-heavy and deals directly with persecution, terror and state violence, so it is not a default young-family stop."
       }
     ]
+  },
+  "lost-property-berlin": {
+    "title": "Lost Property Berlin - FAQ",
+    "subtitle": "Quick answers for tourists who lose a phone, wallet, passport, bag or keys in Berlin.",
+    "items": [
+      {
+        "q": "What should I do first if I lose something in Berlin?",
+        "a": "First secure anything that can harm the rest of your trip: passport or ID, bank cards, phone access and travel documents. Then report the item to the correct lost-property system based on where it disappeared."
+      },
+      {
+        "q": "Where do I report something lost on the U-Bahn, tram or bus?",
+        "a": "For BVG U-Bahn, tram and bus items, use the BVG lost and found page and submit an online lost items report. BVG lists its Fundbüro at Rudolfstraße 1-8 near Warschauer Straße for in-person cases."
+      },
+      {
+        "q": "Where do I report something lost on a DB train or at Berlin Hauptbahnhof?",
+        "a": "For Deutsche Bahn long-distance or regional trains and DB stations, use DB Fundservice. DB says online loss reports are for items worth more than EUR 15 and that items may take hours or days to reach the system."
+      },
+      {
+        "q": "What if I lose something at BER Airport?",
+        "a": "BER says the right contact depends on where the item was lost. Terminal, security and arrivals items go to BER lost property at Terminal 1 Level U1; items left on a plane or apron bus go to the airline; train or bus items go to the transport company."
+      },
+      {
+        "q": "What if I lose my passport in Berlin?",
+        "a": "Berlin.de says the loss or theft of a passport or personal ID card must be reported to the police immediately. If you are a visitor and need travel documents, contact your country’s embassy or consulate."
+      },
+      {
+        "q": "Should I go to the lost property office in person?",
+        "a": "Sometimes, but not automatically. File the correct online report first when the official system asks for it, secure urgent documents/cards/phone access, and check current office hours before travelling across Berlin."
+      }
+    ]
+  },
+  "drink-alcohol-in-public-berlin": {
+    "title": "Drink Alcohol in Public Berlin - FAQ",
+    "subtitle": "Short answers for visitors wondering where a public beer is fine and where it is not.",
+    "items": [
+      {
+        "q": "Can you drink alcohol in public in Berlin?",
+        "a": "Usually yes for adults in many outdoor public places, if you are calm, clean up after yourself and no local sign, venue rule, staff instruction or specific ban says otherwise."
+      },
+      {
+        "q": "Can I drink beer in a Berlin park?",
+        "a": "A quiet beer in a Berlin park is normally low-key, but Berlin.de park rules still require considerate behavior and clearing away rubbish or dirt. Broken glass, loud speakers and mess are the problem."
+      },
+      {
+        "q": "Can I drink alcohol on Berlin public transport?",
+        "a": "The safest tourist rule is to keep alcohol closed on public transport and follow staff instructions. It is not worth arguing with BVG, S-Bahn, DB, security staff or police over an open bottle."
+      },
+      {
+        "q": "What changed at Bahnhof Zoo and Ostbahnhof in 2026?",
+        "a": "S-Bahn Berlin says DB started testing an alcohol-consumption ban at Bahnhof Zoologischer Garten and Ostbahnhof on 1 May 2026. Alcoholic drinks may not be consumed there or carried open in the station or forecourt, except inside licensed gastronomy and shops."
+      },
+      {
+        "q": "Is drinking outside a Späti allowed?",
+        "a": "It can be tolerated in many places, but the pavement outside a Späti is still public space. Do not block the way, leave bottles, make late-night noise or ignore neighbors and staff."
+      },
+      {
+        "q": "Where is the best place to drink without worrying about rules?",
+        "a": "A bar, beer garden, licensed terrace or event area is the clearest choice. You have toilets, staff, service rules and a defined drinking area."
+      }
+    ]
   }
 }
