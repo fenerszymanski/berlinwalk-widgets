@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-27T06:51:41.878Z",
+  "updatedAt": "2026-06-28T00:05:09.816Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 147,
+  "totalPosts": 148,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -60,6 +60,23 @@
       "relatedToolSlug": ""
     },
     "secondary": [
+      {
+        "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
+        "slug": "doctor-in-berlin",
+        "path": "/post/doctor-in-berlin",
+        "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
+        "excerpt": "A practical tourist guide to medical help in Berlin: 112, 116117, normal doctors, pharmacies, hospitals, EHIC and travel insurance.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-06-28T00:03:38.782Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+        "alt": "Berlin ambulance and emergency vehicles on Otto-Braun-Strasse near Alexanderplatz",
+        "relatedToolSlug": "berlin-medical-help-router"
+      },
       {
         "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
         "slug": "lost-property-berlin",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
         "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
         "relatedToolSlug": "berlin-public-transport-ferry-picker"
-      },
-      {
-        "title": "Where to Watch the 2026 World Cup in Berlin (No, There's No Brandenburg Gate Fan Mile This Year)",
-        "slug": "where-to-watch-2026-world-cup-in-berlin",
-        "path": "/post/where-to-watch-2026-world-cup-in-berlin",
-        "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
-        "excerpt": "The 2026 World Cup is in North America, and Berlin has no Brandenburg Gate fan mile this year. Here is where to actually watch: free screens, beer gardens and bars, with every kick-off in Berlin time.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "practical",
-        "topicLabel": "Practical Berlin",
-        "readTime": "4 min read",
-        "publishedDate": "2026-06-03T15:51:27Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
-        "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline",
-        "relatedToolSlug": "watch-world-cup-2026-berlin"
       }
     ]
   },
@@ -465,6 +465,23 @@
           "relatedToolSlug": "berlin-lost-item-router"
         },
         {
+          "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
+          "slug": "doctor-in-berlin",
+          "path": "/post/doctor-in-berlin",
+          "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
+          "excerpt": "A practical tourist guide to medical help in Berlin: 112, 116117, normal doctors, pharmacies, hospitals, EHIC and travel insurance.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-28T00:03:38.782Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+          "alt": "Berlin ambulance and emergency vehicles on Otto-Braun-Strasse near Alexanderplatz",
+          "relatedToolSlug": "berlin-medical-help-router"
+        },
+        {
           "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
           "slug": "drink-alcohol-in-public-berlin",
           "path": "/post/drink-alcohol-in-public-berlin",
@@ -480,23 +497,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
           "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
           "relatedToolSlug": ""
-        },
-        {
-          "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
-          "slug": "berlin-public-transport-ferries",
-          "path": "/post/berlin-public-transport-ferries",
-          "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
-          "excerpt": "A practical guide to Berlin public transport ferries: which BVG ferry tourists should choose, what tickets work, when F10 is worth it and when a Spree cruise is better.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "first-day",
-          "topicLabel": "First Day in Berlin",
-          "readTime": "6 min read",
-          "publishedDate": "2026-06-25T21:06:33.128Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
-          "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
-          "relatedToolSlug": "berlin-public-transport-ferry-picker"
         }
       ]
     },
@@ -523,6 +523,23 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_e973e3219fa44daa9d7868bb6325ef73~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/pharmacy-in-berlin-05-alexa-apotheke-berlin.jpg",
           "alt": "Alexa Apotheke pharmacy in Berlin with illuminated red and green signage",
           "relatedToolSlug": "pharmacy-in-berlin-helper"
+        },
+        {
+          "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
+          "slug": "doctor-in-berlin",
+          "path": "/post/doctor-in-berlin",
+          "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
+          "excerpt": "A practical tourist guide to medical help in Berlin: 112, 116117, normal doctors, pharmacies, hospitals, EHIC and travel insurance.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "first-day",
+          "topicLabel": "First Day in Berlin",
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-28T00:03:38.782Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+          "alt": "Berlin ambulance and emergency vehicles on Otto-Braun-Strasse near Alexanderplatz",
+          "relatedToolSlug": "berlin-medical-help-router"
         },
         {
           "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
@@ -659,23 +676,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_fd39177ba4ab4339808a13256579016b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin_Public_Holidays_Hero.jpg",
           "alt": "Berlin skyline with cathedral and TV tower, German flag waving, a river boat below, and pink blossoms in the foreground",
           "relatedToolSlug": "berlin-public-holiday-checker"
-        },
-        {
-          "title": "Is Berlin Expensive? A Realistic Daily Budget for 2026 Tourists",
-          "slug": "is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists",
-          "path": "/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists",
-          "url": "https://www.berlinwalk.com/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists",
-          "excerpt": "Berlin isn't as cheap as it used to be — but it's still affordable. Here's a realistic 2026 daily budget, from backpacker (€60–90) to comfort (€370–500), with three full scenarios, a free attractions map, and real numbers for accommodation, food, transport, and drinks.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-04-30T15:16:12.837Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_8809f031a67b4b39b675f5c01db0de67~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_aa129bfb69be446abb460996d32cb3e1~mv2.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_8809f031a67b4b39b675f5c01db0de67~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_aa129bfb69be446abb460996d32cb3e1~mv2.jpg",
-          "alt": "A yellow double-decker bus passes in front of the Victory Column statue against a clear blue sky, creating a dynamic urban scene.",
-          "relatedToolSlug": "berlin-daily-budget"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
+      "slug": "doctor-in-berlin",
+      "path": "/post/doctor-in-berlin",
+      "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
+      "excerpt": "A practical tourist guide to medical help in Berlin: 112, 116117, normal doctors, pharmacies, hospitals, EHIC and travel insurance.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-28T00:03:38.782Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+      "alt": "Berlin ambulance and emergency vehicles on Otto-Braun-Strasse near Alexanderplatz",
+      "relatedToolSlug": "berlin-medical-help-router"
+    },
+    {
       "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
       "slug": "lost-property-berlin",
       "path": "/post/lost-property-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
       "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates",
       "relatedToolSlug": "berlin-shopping-areas"
-    },
-    {
-      "title": "Pharmacy in Berlin: How to Find Medicine, Emergency Pharmacies and Medical Help",
-      "slug": "pharmacy-in-berlin",
-      "path": "/post/pharmacy-in-berlin",
-      "url": "https://www.berlinwalk.com/post/pharmacy-in-berlin",
-      "excerpt": "A practical tourist guide to finding a pharmacy in Berlin, buying medicine, using emergency pharmacies, handling prescriptions and choosing the right medical help.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-22T09:29:53.079Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e973e3219fa44daa9d7868bb6325ef73~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/pharmacy-in-berlin-05-alexa-apotheke-berlin.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e973e3219fa44daa9d7868bb6325ef73~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/pharmacy-in-berlin-05-alexa-apotheke-berlin.jpg",
-      "alt": "Alexa Apotheke pharmacy in Berlin with illuminated red and green signage",
-      "relatedToolSlug": "pharmacy-in-berlin-helper"
     }
   ],
   "allPosts": [
+    {
+      "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
+      "slug": "doctor-in-berlin",
+      "path": "/post/doctor-in-berlin",
+      "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
+      "excerpt": "A practical tourist guide to medical help in Berlin: 112, 116117, normal doctors, pharmacies, hospitals, EHIC and travel insurance.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-28T00:03:38.782Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
+      "alt": "Berlin ambulance and emergency vehicles on Otto-Braun-Strasse near Alexanderplatz",
+      "relatedToolSlug": "berlin-medical-help-router"
+    },
     {
       "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
       "slug": "lost-property-berlin",

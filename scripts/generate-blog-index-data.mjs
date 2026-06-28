@@ -35,6 +35,7 @@ const TOPICS = [
       'berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus',
       'grocery-shopping-in-berlin',
       'lost-property-berlin',
+      'doctor-in-berlin',
       'drink-alcohol-in-public-berlin',
     ],
     match: /(first-time|airport|alexanderplatz|luggage|lost property|lost phone|lost wallet|lost passport|toilet|sunday|späti|spaeti|spati|public drinking|transport|ticket|welcome|tap water|drinking water|safe|cash|credit card)/i,
@@ -47,6 +48,7 @@ const TOPICS = [
     description: 'Clear answers for transport, money, luggage, safety, weather, and planning decisions visitors actually search for.',
     slugs: [
       'pharmacy-in-berlin',
+      'doctor-in-berlin',
       'grocery-shopping-in-berlin',
       'lost-property-berlin',
       'drink-alcohol-in-public-berlin',
@@ -174,6 +176,7 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'berlin-heatwave-day-plan',
   secondary: [
+    'doctor-in-berlin',
     'lost-property-berlin',
     'drink-alcohol-in-public-berlin',
     'topography-of-terror-berlin',
@@ -199,6 +202,7 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'berlin-heatwave-day-plan',
+  'doctor-in-berlin',
   'lost-property-berlin',
   'drink-alcohol-in-public-berlin',
   'berlin-ber-airport-departure-guide',
@@ -476,6 +480,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(doctor-in-berlin|doctor in berlin|feel unwell|medical help berlin)/.test(s)) return 'berlin-medical-help-router';
   if (/(pharmacy|apotheke|notdienst|medicine|116117)/.test(s)) return 'pharmacy-in-berlin-helper';
   if (/(alternative-transport|alternative transport|mobility app|miles|car sharing|bike sharing|scooter)/.test(s)) return 'berlin-mobility-app-picker';
   if (/(zoo-berlin-vs-tierpark|tierpark|zoo berlin vs tierpark)/.test(s)) return '';
