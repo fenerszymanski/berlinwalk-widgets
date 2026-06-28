@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T11:45:42.422Z",
+  "updatedAt": "2026-06-28T19:38:48.492Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 150,
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "German Signs in Berlin: The Words Tourists Actually Need",
+      "slug": "german-signs-in-berlin",
+      "path": "/post/german-signs-in-berlin",
+      "url": "https://www.berlinwalk.com/post/german-signs-in-berlin",
+      "excerpt": "A practical guide to the German signs tourists actually need in Berlin: exits, platforms, ticket validation, replacement transport, cash-only shops, Pfand and emergency words.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-06-28T19:37:15.158Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4210b7a6ac144c338eb126ab500f66b0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-signs-in-berlin-01-ausgang-exit-sign-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4210b7a6ac144c338eb126ab500f66b0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-signs-in-berlin-01-ausgang-exit-sign-cover.jpg",
+      "alt": "Green German Ausgang exit sign on a Berlin-style wall for tourists learning German signs in Berlin",
+      "relatedToolSlug": "berlin-sign-decoder"
+    },
+    {
       "title": "Breakfast in Berlin: Bakery, Brunch and Coffee Without Losing the Morning",
       "slug": "breakfast-in-berlin",
       "path": "/post/breakfast-in-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_1feb37922a9445e981d72f4429e6f263~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/boat-tours-berlin-cover.png",
       "alt": "A classic sightseeing boat MS Berlin cruising on the Spree River in front of the Berlin Cathedral.",
       "relatedToolSlug": "berlin-boat-tour-finder"
-    },
-    {
-      "title": "Charlottenburg Palace Berlin: Tickets, Gardens and What to See First",
-      "slug": "charlottenburg-palace-berlin",
-      "path": "/post/charlottenburg-palace-berlin",
-      "url": "https://www.berlinwalk.com/post/charlottenburg-palace-berlin",
-      "excerpt": "A practical, historically grounded Charlottenburg Palace Berlin guide: which ticket to buy, how long to allow, what to see first, and how to avoid the common planning mistakes.",
-      "category": "Berlin History",
-      "categorySlug": "berlin-history",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "6 min read",
-      "publishedDate": "2026-06-25T06:33:40.963Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
-      "alt": "Charlottenburg Palace in Berlin seen across water and fountains with the palace dome above",
-      "relatedToolSlug": "charlottenburg-palace-visit-planner"
     }
   ],
   "allPosts": [
+    {
+      "title": "German Signs in Berlin: The Words Tourists Actually Need",
+      "slug": "german-signs-in-berlin",
+      "path": "/post/german-signs-in-berlin",
+      "url": "https://www.berlinwalk.com/post/german-signs-in-berlin",
+      "excerpt": "A practical guide to the German signs tourists actually need in Berlin: exits, platforms, ticket validation, replacement transport, cash-only shops, Pfand and emergency words.",
+      "category": "German Language",
+      "categorySlug": "german-language",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-06-28T19:37:15.158Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4210b7a6ac144c338eb126ab500f66b0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-signs-in-berlin-01-ausgang-exit-sign-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4210b7a6ac144c338eb126ab500f66b0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-signs-in-berlin-01-ausgang-exit-sign-cover.jpg",
+      "alt": "Green German Ausgang exit sign on a Berlin-style wall for tourists learning German signs in Berlin",
+      "relatedToolSlug": "berlin-sign-decoder"
+    },
     {
       "title": "Breakfast in Berlin: Bakery, Brunch and Coffee Without Losing the Morning",
       "slug": "breakfast-in-berlin",
@@ -4314,23 +4331,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_76b381ba7c8e42c798b577b29efdcac5~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/areberlinersrude.jpeg",
       "alt": "A waiter takes an order from a seated woman at an outdoor café. A yellow tram passes in the background. The scene is bustling and urban.",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "The Pope's Revenge: How East Germany's TV Tower Backfired",
-      "slug": "the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
-      "path": "/post/the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
-      "url": "https://www.berlinwalk.com/post/the-pope-s-revenge-how-east-germany-s-tv-tower-backfired",
-      "excerpt": "A strange Cold War irony hidden in plain sight: Berlin’s TV Tower was built to symbolize socialist power, yet under the right sunlight it reveals a glowing cross — the famous “Pope’s Revenge.” Discover the story behind this accidental symbol, why it embarrassed East Germany, and how you can still spot it today at Alexanderplatz.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-02-26T14:37:02.956Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20very%20tall%20tower%20with%20a%20very%20tall%20clock%20on%20it's%20side.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20very%20tall%20tower%20with%20a%20very%20tall%20clock%20on%20it's%20side.jpg",
-      "alt": "TV Tower with a metallic sphere and antennas against a clear blue sky, flanked by two modern buildings with large windows.",
-      "relatedToolSlug": "east-or-west-1989"
     }
   ]
 }

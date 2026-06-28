@@ -486,6 +486,7 @@ function relatedToolSlugFor(post) {
   if (/(berlin-tourist-scams|tourist scams|street sense|fake police|pickpockets)/.test(s)) return 'berlin-street-sense-drill';
   if (/(doctor-in-berlin|doctor in berlin|feel unwell|medical help berlin)/.test(s)) return 'berlin-medical-help-router';
   if (/(breakfast-in-berlin|breakfast in berlin|brunch|bakery breakfast|coffee morning)/.test(s)) return 'berlin-breakfast-clock';
+  if (/(german-signs-in-berlin|german signs in berlin|ausgang|ersatzverkehr|sign decoder)/.test(s)) return 'berlin-sign-decoder';
   if (/(pharmacy|apotheke|notdienst|medicine|116117)/.test(s)) return 'pharmacy-in-berlin-helper';
   if (/(alternative-transport|alternative transport|mobility app|miles|car sharing|bike sharing|scooter)/.test(s)) return 'berlin-mobility-app-picker';
   if (/(zoo-berlin-vs-tierpark|tierpark|zoo berlin vs tierpark)/.test(s)) return '';
