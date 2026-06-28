@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-28T07:10:46.287Z",
+  "updatedAt": "2026-06-28T07:21:40.274Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 149,
+  "totalPosts": 150,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Tourist Scams: What to Ignore, What to Check and How to Stay Calm",
+      "slug": "berlin-tourist-scams",
+      "path": "/post/berlin-tourist-scams",
+      "url": "https://www.berlinwalk.com/post/berlin-tourist-scams",
+      "excerpt": "A calm, practical Berlin tourist scams guide: what to ignore, what to check, and what to do around stations, landmarks, tickets, taxis and ATMs.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-06-28T07:14:12.442Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9e4260a087a146babf453389b286404f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-tourist-scams-01-berlin-tourist-scams-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9e4260a087a146babf453389b286404f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-tourist-scams-01-berlin-tourist-scams-cover.jpg",
+      "alt": "Calm Berlin tourist at a yellow train platform holding phone and map with a subtle street-pressure moment nearby",
+      "relatedToolSlug": "berlin-street-sense-drill"
+    },
+    {
       "title": "Berlin Bike Lanes: What Tourists Must Know Before Walking or Riding",
       "slug": "berlin-bike-lanes-tourists",
       "path": "/post/berlin-bike-lanes-tourists",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_717e4dd64f2b4b2a9192b8ab7c6ad913~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-flea-markets-02-mauerpark-stalls.jpg",
       "alt": "Antique cameras, porcelain and small vintage objects on a Berlin flea market table",
       "relatedToolSlug": "berlin-flea-market-picker"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin BER Airport Departure Guide: How Early to Arrive, Security, Trains and Terminal Tips",
-      "slug": "berlin-ber-airport-departure-guide",
-      "path": "/post/berlin-ber-airport-departure-guide",
-      "url": "https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide",
-      "excerpt": "A practical Berlin BER Airport departure guide for tourists leaving the city: timing, trains, terminals, security, liquids, power banks and the mistakes that make the last morning stressful.",
+      "title": "Berlin Tourist Scams: What to Ignore, What to Check and How to Stay Calm",
+      "slug": "berlin-tourist-scams",
+      "path": "/post/berlin-tourist-scams",
+      "url": "https://www.berlinwalk.com/post/berlin-tourist-scams",
+      "excerpt": "A calm, practical Berlin tourist scams guide: what to ignore, what to check, and what to do around stations, landmarks, tickets, taxis and ATMs.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-06-24T04:53:16.148Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
-      "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front",
-      "relatedToolSlug": "berlin-ber-airport-departure-planner"
-    }
-  ],
-  "allPosts": [
+      "readTime": "5 min read",
+      "publishedDate": "2026-06-28T07:14:12.442Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9e4260a087a146babf453389b286404f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-tourist-scams-01-berlin-tourist-scams-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9e4260a087a146babf453389b286404f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-tourist-scams-01-berlin-tourist-scams-cover.jpg",
+      "alt": "Calm Berlin tourist at a yellow train platform holding phone and map with a subtle street-pressure moment nearby",
+      "relatedToolSlug": "berlin-street-sense-drill"
+    },
     {
       "title": "Berlin Bike Lanes: What Tourists Must Know Before Walking or Riding",
       "slug": "berlin-bike-lanes-tourists",
