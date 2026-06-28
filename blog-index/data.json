@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-28T07:21:40.274Z",
+  "updatedAt": "2026-06-28T11:45:42.422Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 150,
@@ -832,23 +832,6 @@
       "description": "The places around the BerlinWalk route, explained as story layers rather than postcard stops.",
       "posts": [
         {
-          "title": "12 Stops Through Berlin’s Ancient Core: What You’ll See on Our Free Walking Tour",
-          "slug": "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-          "path": "/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-          "url": "https://www.berlinwalk.com/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-          "excerpt": "Most Berlin free walking tours start at the Brandenburg Gate and head west. Ours doesn't. We begin where Berlin itself began — at Alexanderplatz — and walk through the oldest neighborhoods in the city, ending at the vibrant Hackescher Markt. Over 12 carefully chosen stops, you'll trace 800 years of history through streets that most tourists never explore. This isn't a greatest-hits tour of famous landmarks. It's a walk through the layers of Berlin — from its medieval founding to Prussian...",
-          "category": "Tour Route",
-          "categorySlug": "tour-route",
-          "topic": "route-stories",
-          "topicLabel": "Tour Route Stories",
-          "readTime": "8 min read",
-          "publishedDate": "2026-02-25T06:59:12.211Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
-          "alt": "Illustration of Berlin landmarks in green and yellow. Features buildings like the Berlin TV Tower, Brandenburg Gate, and Berlin Cathedral.",
-          "relatedToolSlug": ""
-        },
-        {
           "title": "Why My Tour Starts at Alexanderplatz (And Not at Brandenburg Gate)",
           "slug": "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
           "path": "/post/why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
@@ -1000,6 +983,23 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_0d90550575d5404cb1598b4cabf27149~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hackescher-markt-station-after-tour.jpg",
           "alt": "Hackescher Markt S-Bahn station after a Berlin walking tour",
           "relatedToolSlug": ""
+        },
+        {
+          "title": "Berlin Lakes Guide 2026: Where to Swim, Picnic, and Beat the Summer Heat",
+          "slug": "berlin-lakes-guide-2026",
+          "path": "/post/berlin-lakes-guide-2026",
+          "url": "https://www.berlinwalk.com/post/berlin-lakes-guide-2026",
+          "excerpt": "Berlin sits on a glacial outwash plain that left the city ringed with lakes. Here's where Berliners actually swim — and how to combine a lake afternoon with our walking tour.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "route-stories",
+          "topicLabel": "Tour Route Stories",
+          "readTime": "10 min read",
+          "publishedDate": "2026-05-03T10:13:22.902Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_d9cfb3a444eb4285be742e7841610f3f~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/weissensee%20(1).png",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_d9cfb3a444eb4285be742e7841610f3f~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/weissensee%20(1).png",
+          "alt": "Sandy beach area with palm trees beside a serene lake. A fountain sprays in the background under a sunny, blue sky with wispy clouds.",
+          "relatedToolSlug": "berlin-lakes"
         }
       ]
     },
@@ -1326,6 +1326,23 @@
           "relatedToolSlug": "berlin-tip-calculator"
         },
         {
+          "title": "Breakfast in Berlin: Bakery, Brunch and Coffee Without Losing the Morning",
+          "slug": "breakfast-in-berlin",
+          "path": "/post/breakfast-in-berlin",
+          "url": "https://www.berlinwalk.com/post/breakfast-in-berlin",
+          "excerpt": "A practical guide to breakfast in Berlin: when to choose a bakery, cafe, brunch, hotel buffet or station rescue so the rest of your sightseeing day still works.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "food-nightlife",
+          "topicLabel": "Food & Nightlife",
+          "readTime": "6 min read",
+          "publishedDate": "2026-06-28T11:45:02.429Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
+          "alt": "Berlin bakery counter with croissants, sandwiches and pastries ready for a quick tourist breakfast",
+          "relatedToolSlug": "berlin-breakfast-clock"
+        },
+        {
           "title": "Best Christmas Markets in Berlin 2026: Which Ones Are Actually Worth It",
           "slug": "best-christmas-markets-berlin-2026",
           "path": "/post/best-christmas-markets-berlin-2026",
@@ -1340,23 +1357,6 @@
           "image": "https://static.wixstatic.com/media/5a08a3_f8ac892c6dfd4b5eb74c6252ca2ee8a2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/gendarmenmarkt.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_f8ac892c6dfd4b5eb74c6252ca2ee8a2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/gendarmenmarkt.jpg",
           "alt": "WeihnachtsZauber Gendarmenmarkt under the winter lights",
-          "relatedToolSlug": ""
-        },
-        {
-          "title": "Was Berlin Really the Most Decadent City in the 1920s?",
-          "slug": "was-berlin-really-the-most-decadent-city-in-the-1920s",
-          "path": "/post/was-berlin-really-the-most-decadent-city-in-the-1920s",
-          "url": "https://www.berlinwalk.com/post/was-berlin-really-the-most-decadent-city-in-the-1920s",
-          "excerpt": "Was 1920s Berlin really decadent? The real Weimar story mixes cabaret, queer nightlife, art, inflation, political violence and a very short golden window.",
-          "category": "Berlin Myths",
-          "categorySlug": "berlin-myths",
-          "topic": "food-nightlife",
-          "topicLabel": "Food & Nightlife",
-          "readTime": "9 min read",
-          "publishedDate": "2026-03-05T12:40:41.941Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_3f764d8ba588410086a3f18bc3a2ef1f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/eldorado-1932.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_3f764d8ba588410086a3f18bc3a2ef1f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/eldorado-1932.jpg",
-          "alt": "The Eldorado bar in Berlin in 1932, one of Weimar Berlin's famous queer nightlife venues",
           "relatedToolSlug": ""
         }
       ]
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Breakfast in Berlin: Bakery, Brunch and Coffee Without Losing the Morning",
+      "slug": "breakfast-in-berlin",
+      "path": "/post/breakfast-in-berlin",
+      "url": "https://www.berlinwalk.com/post/breakfast-in-berlin",
+      "excerpt": "A practical guide to breakfast in Berlin: when to choose a bakery, cafe, brunch, hotel buffet or station rescue so the rest of your sightseeing day still works.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-28T11:45:02.429Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
+      "alt": "Berlin bakery counter with croissants, sandwiches and pastries ready for a quick tourist breakfast",
+      "relatedToolSlug": "berlin-breakfast-clock"
+    },
+    {
       "title": "Berlin Tourist Scams: What to Ignore, What to Check and How to Stay Calm",
       "slug": "berlin-tourist-scams",
       "path": "/post/berlin-tourist-scams",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
       "alt": "Charlottenburg Palace in Berlin seen across water and fountains with the palace dome above",
       "relatedToolSlug": "charlottenburg-palace-visit-planner"
-    },
-    {
-      "title": "Berlin Flea Markets: Mauerpark, Boxhagener Platz and the Weekend Treasure Hunt",
-      "slug": "berlin-flea-markets",
-      "path": "/post/berlin-flea-markets",
-      "url": "https://www.berlinwalk.com/post/berlin-flea-markets",
-      "excerpt": "A practical guide to Berlin flea markets for tourists: when to choose Mauerpark, Boxhagener Platz, Straße des 17. Juni, Bode Museum or RAW, and how to shop without wasting half your weekend.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-25T04:06:54.466Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_717e4dd64f2b4b2a9192b8ab7c6ad913~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-flea-markets-02-mauerpark-stalls.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_717e4dd64f2b4b2a9192b8ab7c6ad913~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-flea-markets-02-mauerpark-stalls.jpg",
-      "alt": "Antique cameras, porcelain and small vintage objects on a Berlin flea market table",
-      "relatedToolSlug": "berlin-flea-market-picker"
     }
   ],
   "allPosts": [
+    {
+      "title": "Breakfast in Berlin: Bakery, Brunch and Coffee Without Losing the Morning",
+      "slug": "breakfast-in-berlin",
+      "path": "/post/breakfast-in-berlin",
+      "url": "https://www.berlinwalk.com/post/breakfast-in-berlin",
+      "excerpt": "A practical guide to breakfast in Berlin: when to choose a bakery, cafe, brunch, hotel buffet or station rescue so the rest of your sightseeing day still works.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "6 min read",
+      "publishedDate": "2026-06-28T11:45:02.429Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
+      "alt": "Berlin bakery counter with croissants, sandwiches and pastries ready for a quick tourist breakfast",
+      "relatedToolSlug": "berlin-breakfast-clock"
+    },
     {
       "title": "Berlin Tourist Scams: What to Ignore, What to Check and How to Stay Calm",
       "slug": "berlin-tourist-scams",
@@ -4314,23 +4331,6 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_644e491769034414871b0141a6e205a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20very%20tall%20tower%20with%20a%20very%20tall%20clock%20on%20it's%20side.jpg",
       "alt": "TV Tower with a metallic sphere and antennas against a clear blue sky, flanked by two modern buildings with large windows.",
       "relatedToolSlug": "east-or-west-1989"
-    },
-    {
-      "title": "12 Stops Through Berlin’s Ancient Core: What You’ll See on Our Free Walking Tour",
-      "slug": "12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-      "path": "/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-      "url": "https://www.berlinwalk.com/post/12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour",
-      "excerpt": "Most Berlin free walking tours start at the Brandenburg Gate and head west. Ours doesn't. We begin where Berlin itself began — at Alexanderplatz — and walk through the oldest neighborhoods in the city, ending at the vibrant Hackescher Markt. Over 12 carefully chosen stops, you'll trace 800 years of history through streets that most tourists never explore. This isn't a greatest-hits tour of famous landmarks. It's a walk through the layers of Berlin — from its medieval founding to Prussian...",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "8 min read",
-      "publishedDate": "2026-02-25T06:59:12.211Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_4aee725fb5764dfb9f69f6485b9c8a36~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinFreeWalkingTour.jpeg",
-      "alt": "Illustration of Berlin landmarks in green and yellow. Features buildings like the Berlin TV Tower, Brandenburg Gate, and Berlin Cathedral.",
-      "relatedToolSlug": ""
     }
   ]
 }
