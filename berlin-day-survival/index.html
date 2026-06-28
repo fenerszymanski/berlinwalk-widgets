@@ -849,7 +849,7 @@
   <main class="bw-day-game" id="app" aria-live="polite">
     <div class="bw-day-shell">
       <header class="bw-day-topbar">
-        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-share-v7d" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
+        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-share-v7e" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
         <button class="bw-day-sound" type="button" id="soundToggle" aria-pressed="false">Sound off</button>
       </header>
       <section class="bw-day-panel" id="screen"></section>
@@ -859,7 +859,7 @@
 
   <script>
     (function () {
-      const DATA_VERSION = '2026-06-28-day-survival-share-v7d';
+      const DATA_VERSION = '2026-06-28-day-survival-share-v7e';
       const screen = document.getElementById('screen');
       const toast = document.getElementById('toast');
       const soundToggle = document.getElementById('soundToggle');
@@ -1441,6 +1441,18 @@
         return prefersNativeShare() ? 'Share result' : 'Copy result';
       }
 
+      function canUseAsyncClipboard() {
+        const policy = document.permissionsPolicy || document.featurePolicy;
+        if (policy && typeof policy.allowsFeature === 'function') {
+          try {
+            if (!policy.allowsFeature('clipboard-write')) return false;
+          } catch {
+            return false;
+          }
+        }
+        return Boolean(window.isSecureContext && navigator.clipboard && navigator.clipboard.writeText);
+      }
+
       async function shareResult() {
         if (!prefersNativeShare()) {
           await copyResult();
@@ -1470,13 +1482,15 @@
 
       async function copyResult() {
         const text = shareText();
-        try {
-          await navigator.clipboard.writeText(text);
-          showToast('Result copied.');
-          trackShare('clipboard');
-          return;
-        } catch {
-          // Fall through to the legacy copy path.
+        if (canUseAsyncClipboard()) {
+          try {
+            await navigator.clipboard.writeText(text);
+            showToast('Result copied.');
+            trackShare('clipboard');
+            return;
+          } catch {
+            // Fall through to the legacy copy path.
+          }
         }
         const textarea = document.createElement('textarea');
         textarea.value = text;
