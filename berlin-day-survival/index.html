@@ -427,9 +427,11 @@
       aspect-ratio: 16 / 10;
       background: rgba(27, 94, 32, 0.1);
       border-radius: 6px;
+      justify-self: center;
       margin: 0;
       min-height: 0;
       overflow: hidden;
+      width: min(100%, 420px);
     }
 
     .bw-day-art img {
@@ -832,7 +834,7 @@
   <main class="bw-day-game" id="app" aria-live="polite">
     <div class="bw-day-shell">
       <header class="bw-day-topbar">
-        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-27-day-survival-design-v6" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
+        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-logic-v7" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
         <button class="bw-day-sound" type="button" id="soundToggle" aria-pressed="false">Sound off</button>
       </header>
       <section class="bw-day-panel" id="screen"></section>
@@ -842,7 +844,7 @@
 
   <script>
     (function () {
-      const DATA_VERSION = '2026-06-27-day-survival-design-v6';
+      const DATA_VERSION = '2026-06-28-day-survival-logic-v7';
       const screen = document.getElementById('screen');
       const toast = document.getElementById('toast');
       const soundToggle = document.getElementById('soundToggle');
@@ -1018,6 +1020,7 @@
 
       function renderRound() {
         const round = state.data.rounds[state.roundIndex];
+        const choices = visibleChoices(round);
         state.selectedChoice = null;
         playAmbience(round);
         const progress = ((state.roundIndex) / state.data.rounds.length) * 100;
@@ -1034,12 +1037,15 @@
               </div>
             </article>
             <div class="bw-day-choices">
-              ${round.choices.map((choice) => `
+              ${choices.map((choice) => {
+                const view = effectiveChoice(choice);
+                return `
                 <button class="bw-day-choice" type="button" data-choice="${escapeHtml(choice.id)}">
-                  <span>${escapeHtml(choice.text)}</span>
-                  <small>${choice.costCents ? `-${money(choice.costCents)}` : 'EUR 0'}</small>
+                  <span>${escapeHtml(view.text)}</span>
+                  <small>${view.costCents ? `-${money(view.costCents)}` : 'EUR 0'}</small>
                 </button>
-              `).join('')}
+              `;
+              }).join('')}
             </div>
           </div>
         `;
@@ -1064,47 +1070,92 @@
 
       function chooseOption(round, choiceId) {
         if (state.selectedChoice) return;
-        const choice = round.choices.find((item) => item.id === choiceId);
+        const choice = visibleChoices(round).find((item) => item.id === choiceId);
         if (!choice) return;
-        const effect = conditionEffect(choice);
+        const view = effectiveChoice(choice);
         state.selectedChoice = choice;
         stopVoice();
-        state.budgetLeftCents -= Number(choice.costCents || 0);
-        state.energy = clamp(state.energy + Number(choice.energy || 0) + Number(effect.energy || 0), 0, 100);
-        state.berlinSense = clamp(state.berlinSense + Number(choice.berlinSense || 0) + Number(effect.berlinSense || 0), 0, 100);
-        state.chaos += Number(choice.chaos || 0) + Number(effect.chaos || 0);
-        [...(choice.tags || []), ...(effect.tags || [])].forEach((tag) => {
+        state.budgetLeftCents -= Number(view.costCents || 0);
+        state.energy = clamp(state.energy + Number(view.energy || 0), 0, 100);
+        state.berlinSense = clamp(state.berlinSense + Number(view.berlinSense || 0), 0, 100);
+        state.chaos += Number(view.chaos || 0);
+        (view.tags || []).forEach((tag) => {
           state.tags[tag] = (state.tags[tag] || 0) + 1;
         });
-        playUi(choice.costCents > 700 || state.budgetLeftCents < 0 ? 'warning' : choice.costCents ? 'coin' : 'select');
-        playFeedbackVoice(round, choice, effect);
+        playUi(view.costCents > 700 || state.budgetLeftCents < 0 ? 'warning' : view.costCents ? 'coin' : 'select');
+        playFeedbackVoice(round, choice, view.effect);
         track('bw_berlin_day_survival_choice', {
           budget_mode: state.budget.id,
           condition: state.condition.id,
           round: round.id,
           round_title: round.kicker,
           choice: choice.id,
-          choice_text: choice.text,
-          cost_cents: choice.costCents || 0,
+          choice_text: view.text,
+          cost_cents: view.costCents || 0,
           budget_left_cents: state.budgetLeftCents,
           energy: Math.round(state.energy),
           berlin_sense: Math.round(state.berlinSense),
           chaos: Math.round(state.chaos),
           tags: Object.keys(state.tags).join(',')
         });
-        renderFeedback(round, choice, effect);
+        renderFeedback(round, choice, view);
       }
 
       function conditionEffect(choice) {
         return (choice.conditionEffects && choice.conditionEffects[state.condition.id]) || {};
       }
 
-      function renderFeedback(round, choice, effect) {
+      function visibleChoices(round) {
+        const choices = (round.choices || []).filter((choice) => {
+          if (choice.showWhenConditions && !choice.showWhenConditions.includes(state.condition.id)) return false;
+          if (choice.hideWhenConditions && choice.hideWhenConditions.includes(state.condition.id)) return false;
+          if (choice.showWhenTags && !choice.showWhenTags.every((tag) => tagCount(tag) > 0)) return false;
+          if (choice.hideWhenTags && choice.hideWhenTags.some((tag) => tagCount(tag) > 0)) return false;
+          return true;
+        });
+        return choices.length ? choices : (round.choices || []);
+      }
+
+      function choiceVariant(choice) {
+        return (choice.variants || []).find((variant) => {
+          if (variant.whenCondition && variant.whenCondition !== state.condition.id) return false;
+          if (variant.whenConditions && !variant.whenConditions.includes(state.condition.id)) return false;
+          if (variant.whenTags && !variant.whenTags.every((tag) => tagCount(tag) > 0)) return false;
+          if (variant.whenMissingTags && variant.whenMissingTags.some((tag) => tagCount(tag) > 0)) return false;
+          return true;
+        }) || {};
+      }
+
+      function effectiveChoice(choice) {
+        const variant = choiceVariant(choice);
+        const effect = conditionEffect(choice);
+        const costCents = Number(effect.costCents ?? variant.costCents ?? choice.costCents ?? 0);
+        const energy = Number(variant.energy ?? choice.energy ?? 0) + Number(effect.energy || 0);
+        const berlinSense = Number(variant.berlinSense ?? choice.berlinSense ?? 0) + Number(effect.berlinSense || 0);
+        const chaos = Number(variant.chaos ?? choice.chaos ?? 0) + Number(effect.chaos || 0);
+        const tags = [
+          ...(variant.replaceTags ? [] : (choice.tags || [])),
+          ...(variant.tags || []),
+          ...(effect.tags || [])
+        ];
+        return {
+          costCents,
+          energy,
+          berlinSense,
+          chaos,
+          tags,
+          text: variant.text || effect.text || choice.text,
+          feedback: effect.feedback || variant.feedback || choice.feedback,
+          effect
+        };
+      }
+
+      function renderFeedback(round, choice, view) {
         screen.querySelectorAll('[data-choice]').forEach((button) => {
           button.disabled = true;
           if (button.dataset.choice === choice.id) button.classList.add('is-picked');
         });
-        const feedback = effect.feedback || choice.feedback;
+        const feedback = view.feedback;
         const feedbackNode = document.createElement('div');
         feedbackNode.className = 'bw-day-feedback';
         feedbackNode.innerHTML = `

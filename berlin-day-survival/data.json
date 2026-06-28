@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-27-day-survival-design-v6",
+  "version": "2026-06-28-day-survival-logic-v7",
   "title": "Berlin Day Survival",
   "subtitle": "Your budget is small. Berlin is hungry. Choose wisely.",
   "shareUrl": "https://www.berlinwalk.com/games/berlin-day-survival",
@@ -108,22 +108,35 @@
         {
           "id": "bakery-pretzel-coffee",
           "text": "Bakery pretzel + filter coffee",
-          "costCents": 420,
+          "costCents": 350,
           "energy": 16,
           "berlinSense": 12,
           "chaos": -1,
-          "tags": ["bakery", "smart", "cheap"],
+          "tags": ["bakery", "smart", "cheap", "coffee", "caffeine"],
           "feedback": "Respectable. Cheap, filling, and not tragic."
         },
         {
           "id": "supermarket-yogurt-banana",
-          "text": "Supermarket yogurt + banana",
-          "costCents": 310,
-          "energy": 12,
-          "berlinSense": 10,
+          "text": "Supermarket bakery roll + banana",
+          "costCents": 220,
+          "energy": 14,
+          "berlinSense": 14,
           "chaos": 0,
-          "tags": ["supermarket", "smart", "budget"],
-          "feedback": "Quietly effective. No romance, but the day continues."
+          "tags": ["supermarket", "bakery", "smart", "budget"],
+          "feedback": "Quietly brilliant. Backshop calories, banana insurance, day saved.",
+          "variants": [
+            {
+              "whenCondition": "sunday-shops",
+              "text": "Station bakery roll + banana",
+              "costCents": 260,
+              "energy": 13,
+              "berlinSense": 10,
+              "chaos": 1,
+              "replaceTags": true,
+              "tags": ["bakery", "smart", "budget", "sunday_fallback"],
+              "feedback": "Good Sunday adjustment. Not supermarket-cheap, but open beats imaginary."
+            }
+          ]
         },
         {
           "id": "landmark-cafe-breakfast",
@@ -170,24 +183,37 @@
           "feedback": "Excellent. Berlin has rewarded your basic survival skills."
         },
         {
+          "id": "supermarket-water",
+          "text": "Supermarket 1.5L water + Pfand",
+          "costCents": 54,
+          "energy": 14,
+          "berlinSense": 18,
+          "chaos": -2,
+          "tags": ["supermarket", "water", "smart", "budget"],
+          "feedback": "The unglamorous Berlin masterstroke: 0.29 plus Pfand and enough water to share.",
+          "variants": [
+            {
+              "whenCondition": "sunday-shops",
+              "text": "Station shop water, pricier than supermarket",
+              "costCents": 130,
+              "energy": 12,
+              "berlinSense": 10,
+              "chaos": 0,
+              "replaceTags": true,
+              "tags": ["water", "smart", "sunday_fallback"],
+              "feedback": "Not the 0.29 supermarket miracle, but you adapted before dehydration got a vote."
+            }
+          ]
+        },
+        {
           "id": "spaeti-water",
           "text": "Späti water, cold and immediate",
-          "costCents": 170,
+          "costCents": 160,
           "energy": 13,
           "berlinSense": 10,
           "chaos": -1,
           "tags": ["spaeti", "water"],
           "feedback": "Simple, fast, correct. The fridge glow did its job."
-        },
-        {
-          "id": "club-mate",
-          "text": "Club Mate. Hydration-adjacent.",
-          "costCents": 250,
-          "energy": 18,
-          "berlinSense": 11,
-          "chaos": 3,
-          "tags": ["club_mate", "caffeine", "spaeti"],
-          "feedback": "Very Berlin. Slightly caffeinated. Mostly fine."
         },
         {
           "id": "kiosk-water",
@@ -235,13 +261,26 @@
         },
         {
           "id": "supermarket-sandwich",
-          "text": "Supermarket sandwich and move on",
-          "costCents": 360,
-          "energy": 10,
-          "berlinSense": 11,
+          "text": "Supermarket sandwich or bakery corner",
+          "costCents": 320,
+          "energy": 12,
+          "berlinSense": 12,
           "chaos": 1,
-          "tags": ["supermarket", "budget"],
-          "feedback": "Not glamorous. Extremely functional. Berlin respects function."
+          "tags": ["supermarket", "bakery", "budget"],
+          "feedback": "Not glamorous. Extremely functional. Berlin respects function.",
+          "variants": [
+            {
+              "whenCondition": "sunday-shops",
+              "text": "Bakery counter outside the square",
+              "costCents": 340,
+              "energy": 12,
+              "berlinSense": 12,
+              "chaos": 0,
+              "replaceTags": true,
+              "tags": ["bakery", "budget", "sunday_fallback"],
+              "feedback": "Sunday Berlin rewards anyone who notices bakeries before panic starts."
+            }
+          ]
         },
         {
           "id": "wait-for-perfect-place",
@@ -270,7 +309,7 @@
         {
           "id": "doner",
           "text": "Döner. Reliable engineering.",
-          "costCents": 750,
+          "costCents": 690,
           "energy": 26,
           "berlinSense": 15,
           "chaos": -2,
@@ -280,7 +319,7 @@
         {
           "id": "currywurst-smart",
           "text": "Currywurst away from the postcard zone",
-          "costCents": 620,
+          "costCents": 540,
           "energy": 19,
           "berlinSense": 9,
           "chaos": 0,
@@ -289,23 +328,46 @@
         },
         {
           "id": "proper-cafe-lunch",
-          "text": "Proper cafe lunch and sit down",
-          "costCents": 1350,
-          "energy": 24,
-          "berlinSense": 6,
-          "chaos": -3,
-          "tags": ["sit_down", "expensive"],
-          "feedback": "Your feet wrote a thank-you note. Your budget did not sign it."
+          "text": "Backshop sandwich + ayran or banana",
+          "costCents": 360,
+          "energy": 18,
+          "berlinSense": 14,
+          "chaos": -1,
+          "tags": ["bakery", "supermarket", "budget", "smart"],
+          "feedback": "This is the boring-cheap Berlin move tourists discover too late.",
+          "variants": [
+            {
+              "whenCondition": "sunday-shops",
+              "text": "Bakery sandwich + ayran or banana",
+              "costCents": 380,
+              "energy": 17,
+              "berlinSense": 13,
+              "chaos": -1,
+              "replaceTags": true,
+              "tags": ["bakery", "budget", "smart", "sunday_fallback"],
+              "feedback": "Not every bakery is open, but enough are. You found one before lunch became drama."
+            }
+          ]
         },
         {
           "id": "second-coffee",
-          "text": "Second coffee. Food is a mindset.",
-          "costCents": 360,
-          "energy": 8,
-          "berlinSense": -6,
-          "chaos": 12,
+          "text": "Coffee instead of lunch. Risky theory.",
+          "costCents": 270,
+          "energy": -4,
+          "berlinSense": -8,
+          "chaos": 14,
           "tags": ["caffeine", "chaos", "energy_crash"],
-          "feedback": "This is not lunch. This is a postponement with foam."
+          "feedback": "This is not lunch. This is a postponement with foam.",
+          "variants": [
+            {
+              "whenTags": ["coffee"],
+              "text": "Second coffee. Food is a mindset.",
+              "energy": 3,
+              "berlinSense": -8,
+              "chaos": 13,
+              "feedback": "A second coffee can move the plot forward. It still cannot become lunch."
+            }
+          ]
         }
       ]
     },
@@ -324,7 +386,7 @@
         {
           "id": "bench-mate",
           "text": "Club Mate + bench reset",
-          "costCents": 250,
+          "costCents": 230,
           "energy": 18,
           "berlinSense": 13,
           "chaos": -1,
@@ -333,13 +395,26 @@
         },
         {
           "id": "bakery-rescue",
-          "text": "Cheap bakery rescue",
-          "costCents": 280,
+          "text": "Supermarket bakery rescue",
+          "costCents": 190,
           "energy": 14,
           "berlinSense": 10,
           "chaos": -1,
-          "tags": ["bakery", "budget"],
-          "feedback": "You have discovered the ancient power of bread."
+          "tags": ["bakery", "supermarket", "budget"],
+          "feedback": "You have discovered the ancient power of bread.",
+          "variants": [
+            {
+              "whenCondition": "sunday-shops",
+              "text": "Open bakery rescue",
+              "costCents": 230,
+              "energy": 13,
+              "berlinSense": 9,
+              "chaos": 0,
+              "replaceTags": true,
+              "tags": ["bakery", "budget", "sunday_fallback"],
+              "feedback": "Sunday is still playable if you stop expecting supermarkets to solve feelings."
+            }
+          ]
         },
         {
           "id": "museum-snack",
@@ -378,8 +453,8 @@
         {
           "id": "spaeti-combo",
           "text": "Späti survival combo",
-          "costCents": 520,
-          "energy": 17,
+          "costCents": 420,
+          "energy": 16,
           "berlinSense": 16,
           "chaos": 0,
           "tags": ["spaeti", "late_night", "smart"],
@@ -387,31 +462,42 @@
         },
         {
           "id": "doner-again",
-          "text": "Döner again, no shame",
-          "costCents": 750,
+          "text": "Late döner rescue, no shame",
+          "costCents": 690,
           "energy": 25,
           "berlinSense": 11,
           "chaos": -1,
           "tags": ["doner", "late_night"],
-          "feedback": "A repeat decision, but Berlin has forgiven worse."
+          "feedback": "First döner of the day. Strong emergency engineering.",
+          "variants": [
+            {
+              "whenTags": ["doner"],
+              "text": "Döner again, no shame",
+              "feedback": "A repeat decision, but Berlin has forgiven worse."
+            }
+          ]
         },
         {
           "id": "supermarket-before-closing",
-          "text": "Supermarket before closing, if it is not Sunday",
-          "costCents": 480,
-          "energy": 16,
+          "text": "Supermarket closing-time rescue",
+          "costCents": 360,
+          "energy": 15,
           "berlinSense": 12,
           "chaos": 2,
           "tags": ["supermarket", "sunday_sensitive"],
-          "conditionEffects": {
-            "sunday-shops": {
+          "variants": [
+            {
+              "whenCondition": "sunday-shops",
+              "text": "Try the supermarket anyway",
+              "costCents": 0,
               "energy": -18,
               "berlinSense": -18,
               "chaos": 12,
-              "tags": ["sunday_mistake"],
+              "replaceTags": true,
+              "tags": ["sunday_mistake", "chaos"],
               "feedback": "It is Sunday. The supermarket is a memory."
             }
-          },
+          ],
           "feedback": "Good logistics, unless Berlin's opening hours have other plans."
         },
         {
