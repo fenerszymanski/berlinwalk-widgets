@@ -11,6 +11,7 @@ const BW_HEADER_LINKS = {
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
   games: 'https://www.berlinwalk.com/games',
   battle: 'https://www.berlinwalk.com/games/berlin-battle',
+  daySurvival: 'https://www.berlinwalk.com/games/berlin-day-survival',
   bouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
   smile: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   blog: 'https://www.berlinwalk.com/blog',
@@ -868,6 +869,7 @@ class BWHeaderElement extends HTMLElement {
                   <ul class="bw-header-submenu" role="menu">
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.games}">All Games</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.battle}">Berlin Battle</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.smile}">Berlin Smile Challenge</a></li>
                   </ul>
@@ -917,6 +919,7 @@ class BWHeaderElement extends HTMLElement {
                 <div class="bw-header-mobile-section-label">Games</div>
                 <a href="${BW_HEADER_LINKS.games}">All Games</a>
                 <a href="${BW_HEADER_LINKS.battle}">Berlin Battle</a>
+                <a href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a>
                 <a href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a>
                 <a href="${BW_HEADER_LINKS.smile}">Berlin Smile Challenge</a>
               </div>
