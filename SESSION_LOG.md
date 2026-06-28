@@ -1,3 +1,9 @@
+## 2026-06-28 — Codex (git cleanup + internal credit fix)
+
+**Did/Changed/QA:** Tourist Scams canlı yazısındaki internal AI/workflow Image Credits satırı Wix'te kaldırıldı ve readback `PUBLISHED` + `hasUnpublishedChanges:false` + process leaks `[]` verdi. Repo cleanup temiz worktree üzerinden yapıldı: commit `309912b` public visual provenance leak rule + Tourist Scams body cleanup, commit `1c2c733` World Cup fixture scores, commit `6d9f2c9` Games hub responsive spacing source fix. QA: publish-body validator OK, World Cup JS parse `72` rows / `72` scored rows, Games source `node --check`, diff checks, live blog visible-text Playwright scan hits `[]`, 3 iframes, overflow `0`.
+
+**Need:** Ana çalışma klasöründeki yarım merge bu remote state'e hizalanmalı; önce backup branch alın, sonra local `main` temiz `origin/main` state'ine çekilsin.
+
 ## 2026-06-28 — Codex (Bike Lane Reflex Checker BerlinTools promotion)
 
 **Did/Changed/QA:** `berlin-bike-lane-reflex-checker` BerlinTools'a promote edildi. ChatGPT-browser workflow ile özel glossy icon üretildi; kaynak/prompt `tools-home/icons/_src/chatgpt-standard-20260612/berlin-bike-lane-reflex-checker/`, canonical 512/160 PNG'ler ve manifest/cache kayıtları eklendi. Wix Media icon `5a08a3_4be8ea9d7658487eb0dc039fac4c6a7e~mv2.png`, `tools-hub` entry + CMS item `99c88603-4a9d-4584-a8ef-528148a14262`, `/blog` relatedToolSlug mapping, ve BerlinTools Layout Fixes embed rev `44` tamamlandı. Commit `14fec67` pushed. Pages QA: icon 200, tools-hub CMS ID live, blog-index Bike Lanes related tool live; browser QA `/tools/berlin-bike-lane-reflex-checker`, `/berlin-tools`, `/widgets` overflow `0`. Search Console UI: tool URL `URL is not on Google / URL is unknown to Google`, sonra `Indexing requested`.
