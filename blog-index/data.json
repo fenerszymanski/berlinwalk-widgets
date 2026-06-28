@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-28T05:52:30.831Z",
+  "updatedAt": "2026-06-28T06:21:46.784Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 148,
+  "totalPosts": 149,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -60,6 +60,23 @@
       "relatedToolSlug": ""
     },
     "secondary": [
+      {
+        "title": "Berlin Bike Lanes: What Tourists Must Know Before Walking or Riding",
+        "slug": "berlin-bike-lanes-tourists",
+        "path": "/post/berlin-bike-lanes-tourists",
+        "url": "https://www.berlinwalk.com/post/berlin-bike-lanes-tourists",
+        "excerpt": "A practical tourist guide to Berlin bike lanes: where to walk, ride, cross, park e-scooters, take bikes on trains and avoid the classic visitor mistakes.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-06-28T06:17:11.455Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
+        "alt": "Protected Berlin bike lane with green separation kerbs, a bicycle road marking and city traffic beside it",
+        "relatedToolSlug": ""
+      },
       {
         "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
         "slug": "doctor-in-berlin",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
         "alt": "Topography of Terror site in Berlin with the preserved Wall section, exhibition trench and documentation centre",
         "relatedToolSlug": "topography-of-terror-visit-planner"
-      },
-      {
-        "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
-        "slug": "berlin-public-transport-ferries",
-        "path": "/post/berlin-public-transport-ferries",
-        "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
-        "excerpt": "A practical guide to Berlin public transport ferries: which BVG ferry tourists should choose, what tickets work, when F10 is worth it and when a Spree cruise is better.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "6 min read",
-        "publishedDate": "2026-06-25T21:06:33.128Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
-        "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
-        "relatedToolSlug": "berlin-public-transport-ferry-picker"
       }
     ]
   },
@@ -542,6 +542,23 @@
           "relatedToolSlug": "berlin-medical-help-router"
         },
         {
+          "title": "Berlin Bike Lanes: What Tourists Must Know Before Walking or Riding",
+          "slug": "berlin-bike-lanes-tourists",
+          "path": "/post/berlin-bike-lanes-tourists",
+          "url": "https://www.berlinwalk.com/post/berlin-bike-lanes-tourists",
+          "excerpt": "A practical tourist guide to Berlin bike lanes: where to walk, ride, cross, park e-scooters, take bikes on trains and avoid the classic visitor mistakes.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "practical",
+          "topicLabel": "Practical Berlin",
+          "readTime": "7 min read",
+          "publishedDate": "2026-06-28T06:17:11.455Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
+          "alt": "Protected Berlin bike lane with green separation kerbs, a bicycle road marking and city traffic beside it",
+          "relatedToolSlug": ""
+        },
+        {
           "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
           "slug": "grocery-shopping-in-berlin",
           "path": "/post/grocery-shopping-in-berlin",
@@ -659,23 +676,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_197c59d6067b496ba25b7ad680a51403~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinTaxi.png",
           "alt": "Berlin taxi scene with Brandenburg Gate in the background for a tourist guide to taxis in Berlin",
           "relatedToolSlug": "berlin-taxi-uber-cost-checker"
-        },
-        {
-          "title": "Berlin Public Holidays 2026: What Tourists Need to Know",
-          "slug": "berlin-public-holidays-2026",
-          "path": "/post/berlin-public-holidays-2026",
-          "url": "https://www.berlinwalk.com/post/berlin-public-holidays-2026",
-          "excerpt": "A practical tourist guide to Berlin public holidays in 2026, including exact dates, shop closures, museum hours, transport, food backups and what to do instead.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "practical",
-          "topicLabel": "Practical Berlin",
-          "readTime": "7 min read",
-          "publishedDate": "2026-06-15T04:50:37.270Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_fd39177ba4ab4339808a13256579016b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin_Public_Holidays_Hero.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_fd39177ba4ab4339808a13256579016b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berlin_Public_Holidays_Hero.jpg",
-          "alt": "Berlin skyline with cathedral and TV tower, German flag waving, a river boat below, and pink blossoms in the foreground",
-          "relatedToolSlug": "berlin-public-holiday-checker"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Bike Lanes: What Tourists Must Know Before Walking or Riding",
+      "slug": "berlin-bike-lanes-tourists",
+      "path": "/post/berlin-bike-lanes-tourists",
+      "url": "https://www.berlinwalk.com/post/berlin-bike-lanes-tourists",
+      "excerpt": "A practical tourist guide to Berlin bike lanes: where to walk, ride, cross, park e-scooters, take bikes on trains and avoid the classic visitor mistakes.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-28T06:17:11.455Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
+      "alt": "Protected Berlin bike lane with green separation kerbs, a bicycle road marking and city traffic beside it",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
       "slug": "doctor-in-berlin",
       "path": "/post/doctor-in-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
       "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front",
       "relatedToolSlug": "berlin-ber-airport-departure-planner"
-    },
-    {
-      "title": "Grocery Shopping in Berlin: Supermarkets, Sundays and Tourist Mistakes",
-      "slug": "grocery-shopping-in-berlin",
-      "path": "/post/grocery-shopping-in-berlin",
-      "url": "https://www.berlinwalk.com/post/grocery-shopping-in-berlin",
-      "excerpt": "A practical Berlin supermarket guide for tourists: where to buy food, what closes on Sunday, when to use REWE, Edeka, Aldi, Lidl, dm, a Späti or a station supermarket.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-06-23T07:31:14.456Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f1060ec179384717b22728cb6a0dd672~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/grocery-shopping-in-berlin-02-edeka-berlin-20240906-05.jpg",
-      "alt": "Fresh produce display inside a Berlin supermarket with prices and green vegetable crates",
-      "relatedToolSlug": "berlin-shopping-areas"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Bike Lanes: What Tourists Must Know Before Walking or Riding",
+      "slug": "berlin-bike-lanes-tourists",
+      "path": "/post/berlin-bike-lanes-tourists",
+      "url": "https://www.berlinwalk.com/post/berlin-bike-lanes-tourists",
+      "excerpt": "A practical tourist guide to Berlin bike lanes: where to walk, ride, cross, park e-scooters, take bikes on trains and avoid the classic visitor mistakes.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-28T06:17:11.455Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
+      "alt": "Protected Berlin bike lane with green separation kerbs, a bicycle road marking and city traffic beside it",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
       "slug": "doctor-in-berlin",

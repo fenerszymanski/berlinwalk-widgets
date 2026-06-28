@@ -49,6 +49,7 @@ const TOPICS = [
     slugs: [
       'pharmacy-in-berlin',
       'doctor-in-berlin',
+      'berlin-bike-lanes-tourists',
       'grocery-shopping-in-berlin',
       'lost-property-berlin',
       'drink-alcohol-in-public-berlin',
@@ -176,6 +177,7 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'berlin-heatwave-day-plan',
   secondary: [
+    'berlin-bike-lanes-tourists',
     'doctor-in-berlin',
     'lost-property-berlin',
     'drink-alcohol-in-public-berlin',
@@ -202,6 +204,7 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'berlin-heatwave-day-plan',
+  'berlin-bike-lanes-tourists',
   'doctor-in-berlin',
   'lost-property-berlin',
   'drink-alcohol-in-public-berlin',

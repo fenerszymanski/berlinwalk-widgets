@@ -11,6 +11,12 @@
   },
   "miniPosts": [
     {
+      "title": "Berlin Bike Lanes",
+      "url": "https://www.berlinwalk.com/post/berlin-bike-lanes-tourists",
+      "category": "Tourist Tips",
+      "readTime": "7 min read"
+    },
+    {
       "title": "Doctor in Berlin",
       "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
       "category": "Tourist Tips",
@@ -27,15 +33,18 @@
       "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
       "category": "Tourist Tips",
       "readTime": "7 min read"
-    },
+    }
+  ],
+  "posts": [
     {
       "title": "Topography of Terror Berlin",
       "url": "https://www.berlinwalk.com/post/topography-of-terror-berlin",
       "category": "Berlin History",
-      "readTime": "7 min read"
-    }
-  ],
-  "posts": [
+      "readTime": "7 min read",
+      "summary": "Free entry, Wall remains, exhibition timing and how to visit a heavy site without rushing through it.",
+      "image": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
+      "alt": "Topography of Terror site in Berlin with the preserved Wall section, exhibition trench and documentation centre"
+    },
     {
       "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
       "url": "https://www.berlinwalk.com/post/sachsenhausen-from-berlin",
