@@ -1,3 +1,9 @@
+## 2026-06-28 — Codex (Day Survival closed supermarket label)
+
+**Did/Changed/QA:** Follow-up fix for Yusuf's note that the Sunday night supermarket option looked like `EUR 0`. Commit `76f0b9f` pushed: `berlin-day-survival/data.json`/`index.html` bumped to `2026-06-28-day-survival-logic-v7b`; the Sunday `Try the supermarket anyway` variant now carries `costLabel: "Closed"`, and the renderer displays `costLabel` before falling back to price/`EUR 0`. Wix custom embed `BerlinWalk Berlin Day Survival Page` revision `19` points to iframe marker `day-survival-logic-v7b-20260628`. GitHub Pages v7b proof: `Last-Modified Sun, 28 Jun 2026 11:17:10 GMT`. Live Playwright forced Sunday condition verified the night supermarket option shows label `Closed`, not `EUR 0`; page/frame overflow `0`, console errors `0` except normal Wix info log.
+
+**Need:** Unrelated breakfast/FAQ/quick-summary dirty files were present and intentionally left untouched.
+
 ## 2026-06-28 — Codex (Day Survival logic v7 live)
 
 **Did/Changed/QA:** Day Survival logic v7 pushed and live. Commit `f859bda` pushed to `origin/main`; GitHub Pages serves `2026-06-28-day-survival-logic-v7` for `data.json` and `index.html` with `Last-Modified Sun, 28 Jun 2026 11:02:17 GMT`. Root Wix custom embed `BerlinWalk Berlin Day Survival Page` revision `18` now points the iframe to `?v=day-survival-logic-v7-20260628`. Wix API readback: enabled, hasV7 true, hasOldV6 false; live raw HTML has v7 marker. Live Playwright desktop EUR 10 route returned `Smart Wanderer`, wallet `EUR 0.06`, Fuel/Street Smarts `100`, no-prior-döner label `Late döner rescue`, overflow `0`. Live 390px mobile verified first choice clickable, prior coffee -> `Second coffee`, prior döner -> `Döner again`, overflow `0`, console errors `0` except normal Wix info log.
