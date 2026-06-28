@@ -433,6 +433,41 @@
       "cmsItemId": "8b121607-3e7a-48ab-8a7d-20539261618d"
     },
     {
+      "slug": "berlin-bike-lane-reflex-checker",
+      "title": "Berlin Bike Lane Reflex Checker",
+      "lead": "Practice the street reflex tourists need around Berlin bike lanes: where to stand, when to cross, how to read red lanes, and how not to block cyclists.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_4be8ea9d7658487eb0dc039fac4c6a7e~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bike-lane-reflex-checker/",
+      "embedHeight": 1180,
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "priority": 19,
+      "tags": [
+        "bike lanes",
+        "cycling",
+        "transport",
+        "street safety",
+        "red lane",
+        "tourist mistakes",
+        "crossing",
+        "sidewalk",
+        "berlin traffic"
+      ],
+      "aliases": [
+        "berlin bike lanes",
+        "bike lane tourists",
+        "berlin cycling rules",
+        "red bike lane berlin",
+        "standing in bike lane",
+        "crossing bike lanes berlin"
+      ],
+      "published": true,
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/berlin-bike-lanes-tourists",
+      "cmsItemId": "99c88603-4a9d-4584-a8ef-528148a14262"
+    },
+    {
       "slug": "berlin-daily-budget",
       "title": "Berlin Daily Budget Calculator",
       "lead": "How much does a day in Berlin actually cost in 2026? Find your number in 30 seconds.",
