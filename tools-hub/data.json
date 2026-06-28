@@ -2021,6 +2021,39 @@
       "iconStatus": "live-wix-media",
       "relatedBlog": "/post/berlin-tourist-scams",
       "cmsItemId": "ce32eb71-6993-4b5b-8885-02d1af1b7306"
+    },
+    {
+      "slug": "berlin-breakfast-clock",
+      "title": "Berlin Breakfast Clock",
+      "lead": "Choose the Berlin morning move that protects the rest of your day: bakery sprint, cafe pause, brunch block, hotel buffet, station rescue or market detour.",
+      "category": "Discovery",
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "tags": [
+        "breakfast",
+        "brunch",
+        "bakery",
+        "coffee",
+        "sunday",
+        "morning planning",
+        "tour timing",
+        "food"
+      ],
+      "aliases": [
+        "breakfast in berlin",
+        "berlin breakfast",
+        "berlin brunch",
+        "berlin bakery breakfast",
+        "berlin coffee morning",
+        "sunday breakfast berlin"
+      ],
+      "image": "https://static.wixstatic.com/media/5a08a3_4f2efe072f1e4d28b53d44db7c7cefba~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-breakfast-clock/",
+      "embedHeight": 1180,
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/breakfast-in-berlin",
+      "priority": 16,
+      "cmsItemId": "ff4f47e7-de46-4d51-be91-cb2006e22242"
     }
   ],
   "hubCategories": [

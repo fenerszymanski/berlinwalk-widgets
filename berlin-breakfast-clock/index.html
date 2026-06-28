@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Breakfast Clock | BerlinWalk</title>
+  <meta name="description" content="Choose the right Berlin breakfast move for your morning: bakery sprint, cafe pause, brunch block, hotel buffet, station rescue or market detour.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-dark: #164A1A;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-ink: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-line: rgba(27, 94, 32, .18);
+      --bw-soft: #F4F9EC;
+      --bw-shadow: 0 18px 38px rgba(27, 94, 32, .13);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bw-cream);
+      color: var(--bw-ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .bw-tool {
+      width: min(100%, 960px);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .bw-shell {
+      overflow: hidden;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--bw-shadow);
+    }
+
+    .bw-hero {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 18px;
+      padding: 24px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(27, 94, 32, .98), rgba(44, 108, 40, .92)),
+        radial-gradient(circle at 88% 18%, rgba(255, 230, 0, .36), transparent 34%);
+    }
+
+    .bw-kicker {
+      margin: 0 0 8px;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(31px, 5vw, 46px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .bw-hero p {
+      max-width: 62ch;
+      margin: 12px 0 0;
+      color: rgba(255,255,255,.9);
+      font-size: 15px;
+    }
+
+    .bw-clock-face {
+      align-self: stretch;
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.28);
+      border-radius: 8px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .bw-clock-ring {
+      width: 172px;
+      height: 172px;
+      border: 10px solid rgba(255, 230, 0, .92);
+      border-radius: 50%;
+      position: relative;
+      background: rgba(250,250,245,.12);
+    }
+
+    .bw-clock-ring::before,
+    .bw-clock-ring::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-origin: left center;
+      background: #fff;
+      border-radius: 999px;
+    }
+
+    .bw-clock-ring::before {
+      width: 50px;
+      height: 7px;
+      transform: rotate(var(--minute-angle, 12deg));
+    }
+
+    .bw-clock-ring::after {
+      width: 38px;
+      height: 9px;
+      transform: rotate(var(--hour-angle, 132deg));
+    }
+
+    .bw-clock-ring span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 18px;
+      height: 18px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: var(--bw-yellow);
+      box-shadow: 0 0 0 4px rgba(27,94,32,.34);
+    }
+
+    .bw-main {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      min-height: 650px;
+    }
+
+    .bw-controls {
+      padding: 18px;
+      border-right: 1px solid var(--bw-line);
+      background: linear-gradient(180deg, #fff, #fbfff7);
+    }
+
+    .bw-group {
+      margin: 0 0 16px;
+    }
+
+    .bw-group h2 {
+      margin: 0 0 8px;
+      color: var(--bw-green);
+      font-size: 15px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .bw-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .bw-buttons.triple {
+      grid-template-columns: 1fr;
+    }
+
+    button {
+      min-height: 46px;
+      padding: 10px 11px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-ink);
+      cursor: pointer;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: left;
+      transition: transform .14s ease, border-color .14s ease, background .14s ease;
+    }
+
+    button:hover,
+    button:focus-visible {
+      transform: translateY(-1px);
+      border-color: rgba(27, 94, 32, .45);
+      outline: none;
+    }
+
+    button[aria-pressed="true"] {
+      border-color: var(--bw-green);
+      background: linear-gradient(135deg, rgba(197,225,165,.54), #fff);
+      box-shadow: inset 4px 0 0 var(--bw-yellow);
+    }
+
+    button span {
+      display: block;
+      margin-top: 2px;
+      color: var(--bw-muted);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .bw-output {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 0;
+      min-width: 0;
+    }
+
+    .bw-result {
+      padding: 22px;
+      border-bottom: 1px solid var(--bw-line);
+      background: #fff;
+    }
+
+    .bw-label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--bw-green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bw-result h2 {
+      margin: 12px 0 8px;
+      color: var(--bw-green);
+      font-size: clamp(24px, 4vw, 34px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .bw-result p {
+      margin: 0;
+      max-width: 68ch;
+      color: var(--bw-muted);
+      font-size: 15px;
+    }
+
+    .bw-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .bw-metric {
+      min-height: 74px;
+      padding: 12px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-soft);
+    }
+
+    .bw-metric b {
+      display: block;
+      color: var(--bw-green);
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .bw-metric span {
+      display: block;
+      margin-top: 6px;
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .bw-board {
+      padding: 20px 22px 22px;
+      background: linear-gradient(180deg, #fff, #fbfff8);
+    }
+
+    .bw-board h3 {
+      margin: 0 0 12px;
+      color: var(--bw-green);
+      font-size: 17px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .bw-slots {
+      display: grid;
+      gap: 10px;
+    }
+
+    .bw-slot {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .bw-time {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .bw-slot b {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--bw-ink);
+      font-size: 14px;
+    }
+
+    .bw-slot span {
+      color: var(--bw-muted);
+      font-size: 13px;
+    }
+
+    .bw-advice {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .bw-note {
+      padding: 13px;
+      border-radius: 8px;
+      background: rgba(255, 230, 0, .18);
+      border: 1px solid rgba(27, 94, 32, .16);
+    }
+
+    .bw-note b {
+      display: block;
+      color: var(--bw-green);
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .bw-note span {
+      color: var(--bw-muted);
+      font-size: 13px;
+    }
+
+    .bw-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .bw-links a {
+      display: inline-flex;
+      align-items: center;
+      min-height: 36px;
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: var(--bw-green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .bw-links a.secondary {
+      background: #fff;
+      color: var(--bw-green);
+      border: 1px solid var(--bw-line);
+    }
+
+    @media (max-width: 780px) {
+      .bw-tool { padding: 10px; }
+      .bw-hero,
+      .bw-main {
+        grid-template-columns: 1fr;
+      }
+      .bw-clock-face { display: none; }
+      .bw-controls {
+        border-right: 0;
+        border-bottom: 1px solid var(--bw-line);
+      }
+      .bw-buttons {
+        grid-template-columns: 1fr;
+      }
+      .bw-metrics,
+      .bw-advice {
+        grid-template-columns: 1fr;
+      }
+      .bw-slot {
+        grid-template-columns: 78px 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-tool">
+    <section class="bw-shell" aria-labelledby="clock-title">
+      <header class="bw-hero">
+        <div>
+          <p class="bw-kicker">BerlinWalk Breakfast Tool</p>
+          <h1 id="clock-title">Berlin Breakfast Clock</h1>
+          <p>Pick the breakfast move that protects your morning: fast bakery, calm cafe, slow brunch, hotel buffet, station rescue or market detour.</p>
+        </div>
+        <div class="bw-clock-face" aria-hidden="true">
+          <div class="bw-clock-ring" id="clockRing"><span></span></div>
+        </div>
+      </header>
+
+      <div class="bw-main">
+        <aside class="bw-controls" aria-label="Breakfast choices">
+          <section class="bw-group">
+            <h2>Morning time</h2>
+            <div class="bw-buttons triple" data-group="time">
+              <button type="button" data-value="early" aria-pressed="false">Before 08:30<span>Early start or train day</span></button>
+              <button type="button" data-value="mid" aria-pressed="true">08:30 to 10:00<span>Normal sightseeing start</span></button>
+              <button type="button" data-value="late" aria-pressed="false">After 10:00<span>Risk of losing the morning</span></button>
+            </div>
+          </section>
+
+          <section class="bw-group">
+            <h2>Day type</h2>
+            <div class="bw-buttons" data-group="day">
+              <button type="button" data-value="normal" aria-pressed="true">Mon-Sat<span>Normal city day</span></button>
+              <button type="button" data-value="sunday" aria-pressed="false">Sunday / holiday<span>Plan around closures</span></button>
+            </div>
+          </section>
+
+          <section class="bw-group">
+            <h2>Appetite</h2>
+            <div class="bw-buttons" data-group="appetite">
+              <button type="button" data-value="light" aria-pressed="true">Light fuel<span>Walk soon</span></button>
+              <button type="button" data-value="proper" aria-pressed="false">Proper meal<span>Sit down</span></button>
+            </div>
+          </section>
+
+          <section class="bw-group">
+            <h2>Budget</h2>
+            <div class="bw-buttons" data-group="budget">
+              <button type="button" data-value="low" aria-pressed="true">Under EUR 8<span>Bakery logic</span></button>
+              <button type="button" data-value="flex" aria-pressed="false">Flexible<span>Cafe or brunch possible</span></button>
+            </div>
+          </section>
+
+          <section class="bw-group">
+            <h2>Hard start</h2>
+            <div class="bw-buttons" data-group="tour">
+              <button type="button" data-value="yes" aria-pressed="true">Yes<span>Tour, train or slot</span></button>
+              <button type="button" data-value="no" aria-pressed="false">No<span>Slow morning</span></button>
+            </div>
+          </section>
+        </aside>
+
+        <section class="bw-output" aria-live="polite">
+          <div class="bw-result">
+            <span class="bw-label" id="resultLabel">Best move</span>
+            <h2 id="resultTitle">Bakery sprint</h2>
+            <p id="resultText">Keep breakfast simple: pastry or bread roll, coffee, water, then start moving before the day clogs up.</p>
+
+            <div class="bw-metrics" aria-label="Result details">
+              <div class="bw-metric"><b id="metricTime">20 min</b><span>time budget</span></div>
+              <div class="bw-metric"><b id="metricCost">EUR 4-8</b><span>typical spend</span></div>
+              <div class="bw-metric"><b id="metricRisk">low</b><span>morning risk</span></div>
+            </div>
+          </div>
+
+          <div class="bw-board">
+            <h3>Your morning board</h3>
+            <div class="bw-slots" id="slotList"></div>
+            <div class="bw-advice">
+              <div class="bw-note"><b>Do this</b><span id="doText">Decide before the counter, buy water, and leave with enough time to walk.</span></div>
+              <div class="bw-note"><b>Avoid this</b><span id="avoidText">Do not start a full brunch if you need to be at Alexanderplatz before noon.</span></div>
+            </div>
+            <nav class="bw-links" aria-label="Related BerlinWalk links">
+              <a href="https://www.berlinwalk.com/post/are-shops-open-on-sunday-in-berlin-what-you-need-to-know" target="_blank" rel="noopener">Sunday rules</a>
+              <a class="secondary" href="https://www.berlinwalk.com/post/how-to-read-a-german-menu-without-panicking" target="_blank" rel="noopener">Menu words</a>
+              <a class="secondary" href="https://www.berlinwalk.com/meeting-point" target="_blank" rel="noopener">Meeting point</a>
+            </nav>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const state = {
+      time: 'mid',
+      day: 'normal',
+      appetite: 'light',
+      budget: 'low',
+      tour: 'yes'
+    };
+
+    const scenarios = {
+      bakery: {
+        label: 'Best move',
+        title: 'Bakery sprint',
+        text: 'Keep breakfast simple: pastry or bread roll, coffee, water, then start moving before the day clogs up.',
+        time: '20 min',
+        cost: 'EUR 4-8',
+        risk: 'low',
+        doText: 'Decide before the counter, buy water, and leave with enough time to walk.',
+        avoidText: 'Do not start a full brunch if you need to be at Alexanderplatz before noon.',
+        slots: [
+          ['08:30', 'Bakery counter', 'Pick one solid item, coffee and water. Keep the order short.'],
+          ['09:00', 'Walk or first transit move', 'Use the fresh morning for movement, not another queue.'],
+          ['10:30', 'Reset point', 'Bathroom, bottle refill, ticket check, then head to the next plan.']
+        ],
+        angles: ['132deg', '12deg']
+      },
+      cafe: {
+        label: 'Calm choice',
+        title: 'Cafe pause',
+        text: 'Use a table when you need a proper reset: coffee, toilet, weather check and 30 to 45 minutes of calm.',
+        time: '35-45 min',
+        cost: 'EUR 8-15',
+        risk: 'medium',
+        doText: 'Choose a cafe near your next route, not one across town.',
+        avoidText: 'Do not turn a cafe pause into a slow brunch by accident.',
+        slots: [
+          ['08:45', 'Sit down nearby', 'Order simply and keep your bag/phone routine calm.'],
+          ['09:25', 'Pay before the rush', 'Ask for the bill early if you have a hard start.'],
+          ['10:00', 'Move on foot', 'A short walk after coffee often beats another transit transfer.']
+        ],
+        angles: ['156deg', '42deg']
+      },
+      brunch: {
+        label: 'Slow morning',
+        title: 'Brunch block',
+        text: 'Make brunch the main event. It works best when there is no hard museum slot, train time or 11:30 tour start.',
+        time: '75-120 min',
+        cost: 'EUR 14-28',
+        risk: 'high',
+        doText: 'Book or arrive early, then protect the rest of the day by cutting one later plan.',
+        avoidText: 'Do not promise yourself a quick brunch at a popular place on a weekend.',
+        slots: [
+          ['09:30', 'Arrive early', 'Popular brunch places can queue fast on weekends.'],
+          ['10:30', 'Second coffee decision', 'If you stay longer, remove a later sightseeing stop.'],
+          ['12:00', 'New day shape', 'Treat this as a slow neighborhood day, not a packed sights day.']
+        ],
+        angles: ['186deg', '75deg']
+      },
+      hotel: {
+        label: 'Zero-stress',
+        title: 'Hotel buffet',
+        text: 'Use the buffet when the group needs one easy decision before luggage, children, airport timing or bad weather.',
+        time: '30-45 min',
+        cost: 'included',
+        risk: 'low',
+        doText: 'Eat once, refill water, check documents and leave as a group.',
+        avoidText: 'Do not skip food before a train or airport morning just to save a few minutes.',
+        slots: [
+          ['07:30', 'Hotel breakfast', 'Keep the group in one place and solve food first.'],
+          ['08:15', 'Luggage and tickets', 'Check bags, documents and transport before leaving.'],
+          ['09:00', 'Clean departure', 'The day starts calmer when the basics are finished inside.']
+        ],
+        angles: ['118deg', '348deg']
+      },
+      station: {
+        label: 'Rescue route',
+        title: 'Station bakery rescue',
+        text: 'Use a major station when it is Sunday, raining, late or you are already changing trains. Reliable beats romantic.',
+        time: '15-25 min',
+        cost: 'EUR 5-10',
+        risk: 'medium',
+        doText: 'Buy food, water and a simple backup snack in one stop.',
+        avoidText: 'Do not walk across the city for a cafe when the station already solves the morning.',
+        slots: [
+          ['Any time', 'Major station', 'Hauptbahnhof, Alexanderplatz, Friedrichstrasse, Zoo and Ostbahnhof are useful anchors.'],
+          ['Next step', 'Transit first', 'Eat after the platform decision, not while guessing where to go.'],
+          ['Backup', 'Sunday logic', 'Station shops are often the practical exception when normal shops are closed.']
+        ],
+        angles: ['95deg', '300deg']
+      },
+      market: {
+        label: 'Food detour',
+        title: 'Market detour',
+        text: 'Use this only when food exploring is part of the day. A market stop is great, but it is rarely the fastest breakfast.',
+        time: '60-90 min',
+        cost: 'EUR 10-22',
+        risk: 'medium',
+        doText: 'Check the current market day and opening hours before you travel there.',
+        avoidText: 'Do not build a first-morning plan around a market without checking that it is actually open.',
+        slots: [
+          ['Before leaving', 'Check the day', 'Markets are schedule-based, not a daily breakfast guarantee.'],
+          ['On site', 'Choose one lane', 'Pick food, coffee, then leave before the detour expands.'],
+          ['Afterward', 'Neighborhood walk', 'Pair the food stop with nearby streets rather than crossing town again.']
+        ],
+        angles: ['170deg', '110deg']
+      }
+    };
+
+    function chooseScenario() {
+      if (state.day === 'sunday' && (state.time === 'late' || state.tour === 'yes')) return 'station';
+      if (state.tour === 'yes' && state.time === 'late') return 'bakery';
+      if (state.tour === 'yes' && state.appetite === 'proper' && state.budget === 'flex' && state.time === 'early') return 'cafe';
+      if (state.tour === 'no' && state.appetite === 'proper' && state.budget === 'flex' && state.time !== 'early') return 'brunch';
+      if (state.tour === 'no' && state.day === 'normal' && state.budget === 'flex' && state.time === 'early') return 'market';
+      if (state.appetite === 'proper' && state.budget === 'low') return 'hotel';
+      if (state.budget === 'flex' && state.appetite === 'light') return 'cafe';
+      return 'bakery';
+    }
+
+    function render() {
+      const result = scenarios[chooseScenario()];
+      document.getElementById('resultLabel').textContent = result.label;
+      document.getElementById('resultTitle').textContent = result.title;
+      document.getElementById('resultText').textContent = result.text;
+      document.getElementById('metricTime').textContent = result.time;
+      document.getElementById('metricCost').textContent = result.cost;
+      document.getElementById('metricRisk').textContent = result.risk;
+      document.getElementById('doText').textContent = result.doText;
+      document.getElementById('avoidText').textContent = result.avoidText;
+      document.getElementById('clockRing').style.setProperty('--hour-angle', result.angles[0]);
+      document.getElementById('clockRing').style.setProperty('--minute-angle', result.angles[1]);
+
+      const list = document.getElementById('slotList');
+      list.innerHTML = result.slots.map(([time, title, body]) => `
+        <div class="bw-slot">
+          <div class="bw-time">${time}</div>
+          <div><b>${title}</b><span>${body}</span></div>
+        </div>
+      `).join('');
+
+      window.dispatchEvent(new Event('resize'));
+    }
+
+    document.querySelectorAll('[data-group]').forEach((group) => {
+      group.addEventListener('click', (event) => {
+        const button = event.target.closest('button[data-value]');
+        if (!button) return;
+        const key = group.dataset.group;
+        state[key] = button.dataset.value;
+        group.querySelectorAll('button').forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        render();
+      });
+    });
+
+    render();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

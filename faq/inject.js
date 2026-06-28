@@ -140,7 +140,8 @@
   "drink-alcohol-in-public-berlin": "drink-alcohol-in-public-berlin",
   "berlin-bike-lanes-tourists": "berlin-bike-lanes-tourists",
   "doctor-in-berlin": "doctor-in-berlin",
-  "berlin-tourist-scams": "berlin-tourist-scams"
+  "berlin-tourist-scams": "berlin-tourist-scams",
+  "breakfast-in-berlin": "breakfast-in-berlin"
 };
 
   var SCHEMAS = {
@@ -6858,6 +6859,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Secure the trip first: lock cards and devices, report missing documents where required, and use the correct lost-property or police route. Do not wait all day before protecting access to money, phone and travel documents."
+        }
+      }
+    ]
+  },
+  "breakfast-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the best breakfast in Berlin for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a sightseeing day, the best breakfast is usually a bakery or simple cafe stop: fast, affordable and easy to fit before museums, transport or a walking tour. Choose brunch only when you have a slow morning."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are bakeries in Berlin good for breakfast?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Berlin bakeries are one of the easiest tourist breakfast routes. Look for bread rolls, pastries, filled sandwiches, pretzels, coffee and water, then keep moving before the day gets crowded."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is brunch in Berlin worth it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if brunch is the main plan for the morning. It is less useful right before a timed museum entry, train, airport transfer or 11:30 walking tour because queues and slow service can eat the morning."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do for breakfast in Berlin on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan ahead. Regular supermarkets are usually closed on Sundays and public holidays, so use a bakery that opens, a cafe, hotel breakfast, brunch reservation, station shop or airport shop instead of relying on a normal supermarket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need cash for breakfast in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Carry a little cash, especially for small bakeries, market stalls and casual cafes. Many places accept cards, but Berlin still has cash-first edge cases and card minimums."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I eat before a Berlin walking tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Eat something simple that gives you energy without making you heavy: a bread roll, pastry, sandwich, yogurt, fruit, coffee and water. Avoid starting a slow brunch if you need to be at the World Clock before the tour."
         }
       }
     ]
