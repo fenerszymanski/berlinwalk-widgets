@@ -82,7 +82,10 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
   generation, paid API generation, or local drawn placeholders unless Yusuf
   explicitly asks for API-based generation or approves a specific exception.
   Save prompts/source outputs, then crop/optimize and wire final assets before
-  treating visual work as complete.
+  treating visual work as complete. Keep this provenance internal: never put
+  `AI-generated`, `ChatGPT`, `logged-in`, `No paid image API`, workflow,
+  prompt/source-output, Codex/Claude, automation, or local-source notes in
+  public blog/page bodies or Image Credits blocks.
 
 ## 5. Wix automation: 7-email booking journey
 

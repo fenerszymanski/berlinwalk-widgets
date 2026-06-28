@@ -92,8 +92,6 @@ If you are planning your first day, start with one clean walking route, keep val
 
 ## Image credits
 
-Cover image and Berlin Street Sense Drill icon: AI-generated via Yusuf's logged-in ChatGPT browser workflow for BerlinWalk, 28 June 2026. No paid image API was used.
-
 Supporting images: Alexanderplatz U-Bahn by Geoprofi Lars, CC BY-SA 4.0; Mauerpark flea market by Ji-Elle, CC BY-SA 3.0; Berlin taxi by O. Horbacz, CC BY 2.0; Oranienburger Strasse cafe context by Jorg Zägel, CC BY-SA 3.0.
 
 {{faq}}
