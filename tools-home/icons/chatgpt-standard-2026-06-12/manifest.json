@@ -956,5 +956,18 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-breakfast-clock-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-breakfast-clock-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_4f2efe072f1e4d28b53d44db7c7cefba~mv2.png"
+  },
+  {
+    "slug": "berlin-sign-decoder",
+    "title": "Berlin Sign Decoder",
+    "category": "Discovery",
+    "model": "ChatGPT browser image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-sign-decoder/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-sign-decoder/chatgpt-output-20260628.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-sign-decoder.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-sign-decoder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-sign-decoder-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_480adaa2df0c4fb5a1bb0a65f57c8c01~mv2.png"
   }
 ]

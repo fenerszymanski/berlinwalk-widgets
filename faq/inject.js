@@ -141,7 +141,8 @@
   "berlin-bike-lanes-tourists": "berlin-bike-lanes-tourists",
   "doctor-in-berlin": "doctor-in-berlin",
   "berlin-tourist-scams": "berlin-tourist-scams",
-  "breakfast-in-berlin": "breakfast-in-berlin"
+  "breakfast-in-berlin": "breakfast-in-berlin",
+  "german-signs-in-berlin": "german-signs-in-berlin"
 };
 
   var SCHEMAS = {
@@ -6913,6 +6914,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Eat something simple that gives you energy without making you heavy: a bread roll, pastry, sandwich, yogurt, fruit, coffee and water. Avoid starting a slow brunch if you need to be at the World Clock before the tour."
+        }
+      }
+    ]
+  },
+  "german-signs-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What German signs in Berlin should tourists learn first?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with Ausgang, Eingang, Gleis, Richtung, Umstieg, Fahrkarte, Entwerten, Ersatzverkehr, Kasse, Nur Barzahlung, Pfandautomat, WC and Apotheke. They cover exits, platforms, ticket validation, replacement routes, payment, bottle return, toilets and medicine."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Ausgang mean in Berlin stations?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ausgang means exit. In larger stations, check the street, square or landmark name under the exit sign so you do not leave from the wrong side of the station."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Gleis mean on German train signs?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Gleis means track or platform. Match the Gleis number on the station board with your app or ticket before you wait."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Ersatzverkehr mean in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ersatzverkehr means replacement service, often a bus replacing a train or tram section. If you see SEV or Ersatzverkehr, look for the replacement route instead of waiting for the normal service."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Entwerten mean on a Berlin ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entwerten means validate or stamp. If your paper ticket is not already time-stamped or digitally active, validate it before the first ride or immediately when boarding where the rules require it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Nur Barzahlung mean in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nur Barzahlung means cash only. Carry a little cash for small bakeries, kiosks, market stalls and casual places where international cards may not be accepted."
         }
       }
     ]
