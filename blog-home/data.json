@@ -11,6 +11,12 @@
   },
   "miniPosts": [
     {
+      "title": "Doctor in Berlin",
+      "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
+      "category": "Tourist Tips",
+      "readTime": "6 min read"
+    },
+    {
       "title": "Lost Property in Berlin",
       "url": "https://www.berlinwalk.com/post/lost-property-berlin",
       "category": "Tourist Tips",
@@ -27,12 +33,6 @@
       "url": "https://www.berlinwalk.com/post/topography-of-terror-berlin",
       "category": "Berlin History",
       "readTime": "7 min read"
-    },
-    {
-      "title": "Berlin Public Transport Ferries",
-      "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
-      "category": "Tourist Tips",
-      "readTime": "6 min read"
     }
   ],
   "posts": [
