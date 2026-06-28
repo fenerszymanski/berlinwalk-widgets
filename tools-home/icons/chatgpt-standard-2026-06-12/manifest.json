@@ -854,6 +854,19 @@
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_67d7663e734c4e2f8888b3274704a9a4~mv2.png"
   },
   {
+    "slug": "berlin-public-transport-ferry-picker",
+    "title": "Berlin Public Transport Ferry Picker",
+    "category": "Discovery",
+    "model": "ChatGPT browser image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-public-transport-ferry-picker/prompt.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-public-transport-ferry-picker/source-chatgpt.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-public-transport-ferry-picker.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-public-transport-ferry-picker-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-public-transport-ferry-picker-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_f34474a9cdaf48dca5edd72c0626597c~mv2.png"
+  },
+  {
     "slug": "sachsenhausen-visit-planner",
     "title": "Sachsenhausen Visit Planner",
     "category": "Discovery",
@@ -904,5 +917,18 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-medical-help-router-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-medical-help-router-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_a61e109960c04189ab9eed81b3cfb620~mv2.png"
+  },
+  {
+    "slug": "berlin-street-sense-drill",
+    "title": "Berlin Street Sense Drill",
+    "category": "Discovery",
+    "model": "ChatGPT browser image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-street-sense-drill/raw-chatgpt-browser-20260628.png",
+    "sourceCell": "single-output-response-2",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-street-sense-drill.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-street-sense-drill-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-street-sense-drill-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_1bf69b6c15f04935ac3575ded0303c44~mv2.png"
   }
 ]

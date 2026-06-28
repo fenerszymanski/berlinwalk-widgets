@@ -139,7 +139,8 @@
   "lost-property-berlin": "lost-property-berlin",
   "drink-alcohol-in-public-berlin": "drink-alcohol-in-public-berlin",
   "berlin-bike-lanes-tourists": "berlin-bike-lanes-tourists",
-  "doctor-in-berlin": "doctor-in-berlin"
+  "doctor-in-berlin": "doctor-in-berlin",
+  "berlin-tourist-scams": "berlin-tourist-scams"
 };
 
   var SCHEMAS = {
@@ -6803,6 +6804,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, for medicine advice, minor symptoms, over-the-counter remedies and prescription handling. If symptoms are severe, worsening or not really a pharmacy question, switch to 116117 or 112."
+        }
+      }
+    ]
+  },
+  "berlin-tourist-scams": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What tourist scams should I watch for in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The main tourist pressure moments are street games, clipboard or petition approaches, fake police pressure, pickpockets in crowded places, unclear taxi/payment moments and expensive currency-conversion prompts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin tourist scams common enough to worry about?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most visitors have a normal trip. The useful approach is not fear; it is quick street sense in crowded stations, tourist sights, markets, nightlife exits, taxis and ATMs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do if someone asks me to sign a petition in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Say “No, thank you” or “Nein, danke,” keep walking, and do not open your wallet or sign something you do not understand. Politeness should not keep you stopped."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I handle someone claiming to be police in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ask for official ID and do not hand over wallet, cash, card or PIN on the street. If you feel pressured or unsure, move to a staffed public place and call 110 for police verification."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can ticket inspectors in Berlin be in plain clothes?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, ticket checks can be done by inspectors who are not in obvious uniforms. You can ask for inspector ID, show your valid ticket calmly, and use official operator routes for any fine or dispute."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do if my phone, wallet or passport is stolen in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Secure the trip first: lock cards and devices, report missing documents where required, and use the correct lost-property or police route. Do not wait all day before protecting access to money, phone and travel documents."
         }
       }
     ]
