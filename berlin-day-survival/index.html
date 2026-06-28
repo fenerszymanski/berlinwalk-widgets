@@ -849,7 +849,7 @@
   <main class="bw-day-game" id="app" aria-live="polite">
     <div class="bw-day-shell">
       <header class="bw-day-topbar">
-        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-share-v7c" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
+        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-share-v7d" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
         <button class="bw-day-sound" type="button" id="soundToggle" aria-pressed="false">Sound off</button>
       </header>
       <section class="bw-day-panel" id="screen"></section>
@@ -859,7 +859,7 @@
 
   <script>
     (function () {
-      const DATA_VERSION = '2026-06-28-day-survival-share-v7c';
+      const DATA_VERSION = '2026-06-28-day-survival-share-v7d';
       const screen = document.getElementById('screen');
       const toast = document.getElementById('toast');
       const soundToggle = document.getElementById('soundToggle');
@@ -1431,7 +1431,10 @@
       }
 
       function prefersNativeShare() {
-        return Boolean(navigator.share && (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 640));
+        const coarsePointer = window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 1;
+        const mobileUserAgent = /Android|iPhone|iPod|Mobile/i.test(navigator.userAgent || '');
+        const screenWidth = Math.min(window.screen?.width || window.innerWidth, window.screen?.height || window.innerHeight);
+        return Boolean(navigator.share && (mobileUserAgent || (coarsePointer && screenWidth <= 820)));
       }
 
       function shareActionLabel() {
