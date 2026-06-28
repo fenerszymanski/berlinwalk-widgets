@@ -659,6 +659,21 @@
       color: var(--green-dark);
     }
 
+    .bw-day-manual-copy {
+      background: white;
+      border: 2px solid rgba(27, 94, 32, 0.18);
+      border-radius: 8px;
+      color: var(--green-dark);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+      min-height: 58px;
+      padding: 9px;
+      resize: none;
+      width: 100%;
+    }
+
     .bw-day-toast {
       background: var(--green-dark);
       border: 1px solid rgba(255, 255, 255, 0.14);
@@ -834,7 +849,7 @@
   <main class="bw-day-game" id="app" aria-live="polite">
     <div class="bw-day-shell">
       <header class="bw-day-topbar">
-        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-logic-v7b" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
+        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-share-v7c" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
         <button class="bw-day-sound" type="button" id="soundToggle" aria-pressed="false">Sound off</button>
       </header>
       <section class="bw-day-panel" id="screen"></section>
@@ -844,7 +859,7 @@
 
   <script>
     (function () {
-      const DATA_VERSION = '2026-06-28-day-survival-logic-v7b';
+      const DATA_VERSION = '2026-06-28-day-survival-share-v7c';
       const screen = document.getElementById('screen');
       const toast = document.getElementById('toast');
       const soundToggle = document.getElementById('soundToggle');
@@ -1243,15 +1258,13 @@
             <p class="bw-day-tip">${escapeHtml(result.tip)}</p>
             <p>You survived the day. Now let me show you the city properly. Join my ~2h Berlin walking tour.</p>
             <div class="bw-day-result-actions">
-              <button class="bw-day-secondary" type="button" data-share="share">Share result</button>
-              <button class="bw-day-secondary" type="button" data-share="download">Download card</button>
+              <button class="bw-day-secondary" type="button" data-share="smart">${escapeHtml(shareActionLabel())}</button>
               <button class="bw-day-secondary" type="button" data-restart>Play again</button>
               <a class="bw-day-link-btn" href="${bookingUrl.toString()}" data-booking>Book the tour</a>
             </div>
           </div>
         `;
-        screen.querySelector('[data-share="share"]').addEventListener('click', shareResult);
-        screen.querySelector('[data-share="download"]').addEventListener('click', downloadCard);
+        screen.querySelector('[data-share="smart"]').addEventListener('click', shareResult);
         screen.querySelector('[data-restart]').addEventListener('click', () => {
           track('bw_berlin_day_survival_restart', {
             result: result.id,
@@ -1404,15 +1417,36 @@
         });
       }
 
-      async function shareResult() {
-        const blob = await makeShareBlob();
-        const file = new File([blob], 'berlin-day-survival-result.png', { type: 'image/png' });
-        const shareData = {
+      function sharePayload() {
+        return {
           title: 'Berlin Day Survival',
           text: `I got ${state.result.title} in Berlin Day Survival.`,
           url: state.data.shareUrl
         };
+      }
+
+      function shareText() {
+        const data = sharePayload();
+        return `${data.text} ${data.url}`;
+      }
+
+      function prefersNativeShare() {
+        return Boolean(navigator.share && (window.matchMedia('(pointer: coarse)').matches || window.innerWidth <= 640));
+      }
+
+      function shareActionLabel() {
+        return prefersNativeShare() ? 'Share result' : 'Copy result';
+      }
+
+      async function shareResult() {
+        if (!prefersNativeShare()) {
+          await copyResult();
+          return;
+        }
+        const shareData = sharePayload();
         try {
+          const blob = await makeShareBlob();
+          const file = new File([blob], 'berlin-day-survival-result.png', { type: 'image/png' });
           if (navigator.canShare && navigator.canShare({ files: [file] })) {
             await navigator.share({ ...shareData, files: [file] });
             showToast('Shared.');
@@ -1428,28 +1462,57 @@
         } catch (error) {
           if (error && error.name === 'AbortError') return;
         }
-        try {
-          await navigator.clipboard.writeText(`${shareData.text} ${shareData.url}`);
-          showToast('Result copied.');
-          trackShare('clipboard');
-        } catch {
-          showToast('Share failed. Download the card instead.');
-          trackShare('failed');
-        }
+        await copyResult();
       }
 
-      async function downloadCard() {
-        const blob = await makeShareBlob();
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.href = url;
-        link.download = 'berlin-day-survival-result.png';
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        setTimeout(() => URL.revokeObjectURL(url), 600);
-        showToast('Card downloaded.');
-        trackShare('download');
+      async function copyResult() {
+        const text = shareText();
+        try {
+          await navigator.clipboard.writeText(text);
+          showToast('Result copied.');
+          trackShare('clipboard');
+          return;
+        } catch {
+          // Fall through to the legacy copy path.
+        }
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.top = '-1000px';
+        textarea.style.left = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          if (document.execCommand('copy')) {
+            showToast('Result copied.');
+            trackShare('legacy_clipboard');
+            return;
+          }
+        } catch {
+          // Manual selection fallback below.
+        } finally {
+          textarea.remove();
+        }
+        showManualCopy(text);
+        showToast('Copy the selected text.');
+        trackShare('manual_copy');
+      }
+
+      function showManualCopy(text) {
+        let box = screen.querySelector('[data-manual-copy]');
+        if (!box) {
+          box = document.createElement('textarea');
+          box.dataset.manualCopy = 'true';
+          box.className = 'bw-day-manual-copy';
+          box.setAttribute('readonly', '');
+          const actions = screen.querySelector('.bw-day-result-actions');
+          if (actions) actions.insertAdjacentElement('beforebegin', box);
+        }
+        box.value = text;
+        box.focus();
+        box.select();
+        syncHostHeight();
       }
 
       function trackShare(method) {
