@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-day-survival-20260627';
+  const ASSET_VERSION = 'games-page-header-spacing-20260628';
   const GAMES = [
     {
       id: 'berlin-battle',
@@ -224,7 +224,7 @@
         targets.push(wixShell, wixShell.parentElement, this.closest('section'));
       }
 
-      const targetHeight = `${Math.min(Math.max(height, 760), 4200)}px`;
+      const targetHeight = `${Math.min(Math.max(height, 760), 6200)}px`;
       targets.filter(Boolean).forEach((target) => {
         target.style.setProperty('height', targetHeight, 'important');
         target.style.setProperty('min-height', targetHeight, 'important');
@@ -734,6 +734,16 @@
           display: none;
         }
 
+        @media (min-width: 981px) {
+          .bw-games-hero {
+            padding-bottom: 72px;
+          }
+
+          .bw-games-hero-inner {
+            transform: translateY(12px);
+          }
+        }
+
         @media (max-width: 980px) {
           .bw-games-hero {
             min-height: 500px;
@@ -768,7 +778,7 @@
         @media (max-width: 640px) {
           .bw-games-hero {
             min-height: 470px;
-            padding: 94px 18px 40px;
+            padding: 94px 18px 58px;
           }
 
           .bw-games-hero-inner,
@@ -778,7 +788,9 @@
           }
 
           .bw-games-hero h1 {
-            font-size: clamp(48px, 16vw, 72px);
+            font-size: clamp(43px, 14.2vw, 62px);
+            max-width: 100%;
+            text-shadow: 3px 3px 0 var(--cream), 6px 6px 0 rgba(52, 214, 180, 0.82);
           }
 
           .bw-games-modes {
