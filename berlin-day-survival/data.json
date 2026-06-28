@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-28-day-survival-logic-v7",
+  "version": "2026-06-28-day-survival-logic-v7b",
   "title": "Berlin Day Survival",
   "subtitle": "Your budget is small. Berlin is hungry. Choose wisely.",
   "shareUrl": "https://www.berlinwalk.com/games/berlin-day-survival",
@@ -490,6 +490,7 @@
               "whenCondition": "sunday-shops",
               "text": "Try the supermarket anyway",
               "costCents": 0,
+              "costLabel": "Closed",
               "energy": -18,
               "berlinSense": -18,
               "chaos": 12,

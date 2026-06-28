@@ -834,7 +834,7 @@
   <main class="bw-day-game" id="app" aria-live="polite">
     <div class="bw-day-shell">
       <header class="bw-day-topbar">
-        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-logic-v7" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
+        <div class="bw-day-mini-logo"><img src="assets/brand/berlinwalk-bw-logo.png?v=2026-06-28-day-survival-logic-v7b" alt="BerlinWalk BW logo"><span>BerlinWalk Games</span></div>
         <button class="bw-day-sound" type="button" id="soundToggle" aria-pressed="false">Sound off</button>
       </header>
       <section class="bw-day-panel" id="screen"></section>
@@ -844,7 +844,7 @@
 
   <script>
     (function () {
-      const DATA_VERSION = '2026-06-28-day-survival-logic-v7';
+      const DATA_VERSION = '2026-06-28-day-survival-logic-v7b';
       const screen = document.getElementById('screen');
       const toast = document.getElementById('toast');
       const soundToggle = document.getElementById('soundToggle');
@@ -1042,7 +1042,7 @@
                 return `
                 <button class="bw-day-choice" type="button" data-choice="${escapeHtml(choice.id)}">
                   <span>${escapeHtml(view.text)}</span>
-                  <small>${view.costCents ? `-${money(view.costCents)}` : 'EUR 0'}</small>
+                  <small>${escapeHtml(view.costLabel || (view.costCents ? `-${money(view.costCents)}` : 'EUR 0'))}</small>
                 </button>
               `;
               }).join('')}
@@ -1146,6 +1146,7 @@
           tags,
           text: variant.text || effect.text || choice.text,
           feedback: effect.feedback || variant.feedback || choice.feedback,
+          costLabel: effect.costLabel || variant.costLabel || choice.costLabel || '',
           effect
         };
       }
