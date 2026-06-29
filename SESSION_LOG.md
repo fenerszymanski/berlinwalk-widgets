@@ -2,7 +2,7 @@
 
 - `berlin-museums-map/index.html` polished after Yusuf flagged the Wix CMS tool page design: hero made tighter, quick-fact chips added, sidebar controls compressed, map/list heights adjusted, and root box sizing fixed to prevent desktop overflow.
 - Commit `da6f335` (`Polish Berlin Museums Map tool design`) pushed to `origin/main`; GitHub Pages serves the updated widget with `Last-Modified Mon, 29 Jun 2026 08:33:39 GMT` and the `bw-hero-stats` marker.
-- Live Wix route also has root-side custom embed `Berlin Museums Tool Design Polish` revision `2`, which widens the dedicated tool-page iframe and improves the CMS body rhythm. Live desktop/mobile QA passed with overflowX `0` and console errors `0`.
+- Yusuf clarified the Wix page design polish should be global for the shared BerlinTools CMS detail template. Root-side `Berlin Museums Tool Design Polish` is now disabled at revision `3`; active global embed is `BerlinTools Template Design Polish` (`c17893d2-4720-418b-a16c-68f0b53fc16f`) revision `3`, guarded to `/tools/<slug>` pages, widening the iframe and improving the CMS body rhythm for all tool detail pages. Live desktop/mobile QA passed on Museums, Breakfast, and Transport with overflowX `0` and console errors `0`.
 
 ## 2026-06-29 — Codex (Breakfast icon standard fix)
 
