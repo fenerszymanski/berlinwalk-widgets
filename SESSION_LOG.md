@@ -1,3 +1,10 @@
+## 2026-06-29 - Day Survival v8 live completion
+
+- Pushed `55ecfbd` (`Fix Day Survival fail state and voiceovers`) and `f9a7171` (`Log Day Survival v8 local fix`) to `origin/main`; GitHub Pages serves `2026-06-29-day-survival-fail-audio-v8` with `Last-Modified Mon, 29 Jun 2026 11:27:30 GMT`. The currently embedded Wix iframe URL still may show the old `?v=day-survival-share-v7e-20260628` query in parent raw HTML, but that URL now returns the v8 game file from GitHub Pages.
+- Root Wix custom embed `BerlinWalk Berlin Day Survival Page` (`a567bbda-814e-4950-90fb-9affc2cc87ef`) was updated to revision `23` with v8 marker; Site Publisher API returned OK. API readback has v8/no v7e. Public parent raw marker can lag, so future QA should verify the iframe content or direct iframe URL, not only the parent shell string.
+- Live Playwright QA on the public iframe URL passed: desktop negative route gives `Budget Busted`, `data-outcome="failed"`, wallet `-EUR 40.20`, red wallet score, `You did not survive the day`, overflowX `0`, and `alexanderplatz-victim.webp` with `object-fit: contain`; mobile EUR 10 clean route gives `Smart Wanderer`, `data-outcome="survived"`, wallet `EUR 0.60`, overflowX `0`, and `smart-wanderer.webp` with `object-fit: contain`.
+- Live audio QA passed: Sunday condition requested `morning-supermarket-yogurt-banana-sunday-shops.mp3` and `hydration-supermarket-water-sunday-shops.mp3` with the v8 marker. Live `assets/audio/GENERATION_NOTES.json` shows voice `Jonas - Confident and Trustworthy` (`60UU378MZ8YbeLyaF7TI`), `force.voice=true`, and 32 generated runtime voice clips.
+
 ## 2026-06-29 - Day Survival v8 local fail/audio fix
 
 - Commit `55ecfbd` (`Fix Day Survival fail state and voiceovers`) is local only, not pushed. It changes Day Survival to fail any final wallet below `EUR 0` via `Budget Busted`, failed-result copy, red negative wallet score, and keeps the EUR 10 clean route viable (`Smart Wanderer`, `EUR 0.60` in local QA).
