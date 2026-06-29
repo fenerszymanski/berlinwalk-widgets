@@ -1,5 +1,12 @@
 ## 2026-06-29 — Codex (Breakfast icon standard fix)
 
+## 2026-06-29 - Berlin Museums Map live QA + push complete
+
+- Pushed `Add Berlin Museums Map featured tool rollout` (`c5d4f3d`) and follow-up fix `Fix BerlinTools museums spotlight render` (`0bbcbaf`) to `main`.
+- Verified GitHub Pages serves `berlin-museums-map/`, updated `tools-hub/data.json`, `tools-home/data.json`, `tools-home/icons/berlin-museums-map.png`, and SEO JSON-LD block with `/tools/berlin-museums-map` under the 7k Wix JSON limit.
+- Browser QA: direct widget page has the Berlin Museums Map UI, Leaflet map, 9 controls and 96 cards; `/berlin-tools` has the premium spotlight and links; `/tools/berlin-museums-map` has the H1, intro, data note and museum iframe; homepage has the museum-day teaser; sample blog post shows the `Museum planning shortcut` CTA.
+- Wix Blog API readback: all five target blog posts contain the CTA heading, copy and `/tools/berlin-museums-map` link, with `hasUnpublishedChanges=false`.
+
 ## 2026-06-29 - Berlin Museums Map BerlinTools placement
 
 - Wired `berlin-museums-map` into `tools-hub/data.json` with spotlight metadata, Culture/Landmarks category placement, Wix Media icon URL, widget URL, SEO title, tags and aliases.
