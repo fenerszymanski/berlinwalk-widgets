@@ -67,6 +67,7 @@ const TOPICS = [
       'berlin-city-tax',
       'where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist',
       'average-temperature-in-berlin-by-month-a-complete-climate-guide',
+      'what-to-book-in-advance-in-berlin',
     ],
     match: /(world cup|public viewing|fan mile|football|soccer|lost property|lost phone|lost wallet|lost passport|public drinking|alcohol|budget|expensive|safe|credit|cash|city tax|accommodation tax|hotel tax|tourist tax|public holiday|public holidays|bank holiday|shop closures?|holiday closures?|pfand|deposit|bottle return|recycling|taxi|uber|bolt taxi|free now|rideshare|ride-hailing|späti|spaeti|spati|shopping|shop|stores?|flea market|vintage|souvenir|where to stay|temperature|weather|transport|welcome|ticket|tip|packing)/i,
   },
@@ -483,6 +484,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(what-to-book-in-advance-in-berlin|what to book in advance in berlin|reservation guide|booking deadline)/.test(s)) return 'berlin-booking-deadline-planner';
   if (/(berlin-tourist-scams|tourist scams|street sense|fake police|pickpockets)/.test(s)) return 'berlin-street-sense-drill';
   if (/(doctor-in-berlin|doctor in berlin|feel unwell|medical help berlin)/.test(s)) return 'berlin-medical-help-router';
   if (/(breakfast-in-berlin|breakfast in berlin|brunch|bakery breakfast|coffee morning)/.test(s)) return 'berlin-breakfast-clock';
