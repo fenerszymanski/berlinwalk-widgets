@@ -1,3 +1,11 @@
+## 2026-06-29 - Hohenzollern Berlin blog/tool live
+
+- Completed the Hohenzollern package and pushed the post-dependent assets. Pre-publish commit `20075c3` added `blog-drafts/hohenzollern-berlin*`, 5 article images/contact sheet/source notes, Quick Summary/FAQ key `hohenzollern-berlin`, widget `hohenzollern-berlin-footprint-map/`, tool icon assets, and the `tools-hub/data.json` entry.
+- Wix side is live: blog post `54fb4473-415e-4aea-aec2-ed5ee11c0d1a` at `/post/hohenzollern-berlin` is `PUBLISHED` with `hasUnpublishedChanges:false`; BerlinTools CMS item `857cfd0f-635c-4b72-9c7b-959aa3c026e6` is live at `/tools/hohenzollern-berlin-footprint-map` with icon `5a08a3_88050f0309d54e469956379f69701b50~mv2.png`.
+- GitHub Pages proof: widget/index, widget hero, tools-hub data, Quick Summary/FAQ data, and icon assets served before Wix publish; widget/icon Last-Modified around `Mon, 29 Jun 2026 19:57:38-39 GMT`.
+- Post-publish commit `cd3f827` regenerated `blog-index/data.json` to 154 posts with `hohenzollern-berlin` as Latest #1 and related tool `hohenzollern-berlin-footprint-map`; Pages Last-Modified `Mon, 29 Jun 2026 20:07:27 GMT`. Follow-up commit `e761dc4` fixed direct widget mobile overflow; live 390px QA now reports overflow `0`, root width `390`, and console errors `0`.
+- Live QA passed for the blog post, tool page, `/blog`, `/berlin-tools`, and direct widget on desktop/mobile. Search Console URL Inspection API stayed blocked by `invalid_grant`; manual Request Indexing remains for the blog and tool URLs.
+
 ## 2026-06-29 - Games mobile layout and cross-promo rail
 
 - Pushed commit `a225928` (`Fix game mobile layout and cross-promos`) to `origin/main`. Changed files: Day Survival `index.html`/`data.json`, new shared `js/games-preview-rail.js`, and wrappers for Berlin Battle, Day Survival, Berghain Bouncer, and Berlin Smile Challenge.
