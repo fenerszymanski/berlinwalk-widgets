@@ -1,4 +1,4 @@
-const BW_TOOLS_HOME_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260608';
+const BW_TOOLS_HOME_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260629-museums-spotlight';
 const BW_TOOLS_HOME_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 
 class BWToolsHomeElement extends HTMLElement {
@@ -115,6 +115,73 @@ class BWToolsHomeElement extends HTMLElement {
           font-size: 14px;
           line-height: 1.55;
           margin-bottom: 14px;
+        }
+
+        .bw-tools-home .bw-tools-home-spotlight {
+          color: inherit;
+          display: grid;
+          gap: 14px;
+          grid-template-columns: 68px minmax(0, 1fr);
+          text-decoration: none;
+        }
+
+        .bw-tools-home .bw-tools-home-spotlight:hover .bw-tools-home-spotlight-cta,
+        .bw-tools-home .bw-tools-home-spotlight:focus-visible .bw-tools-home-spotlight-cta {
+          text-decoration: underline;
+        }
+
+        .bw-tools-home .bw-tools-home-spotlight:focus-visible {
+          border-radius: 8px;
+          outline: 3px solid rgba(255, 230, 0, 0.9);
+          outline-offset: 4px;
+        }
+
+        .bw-tools-home .bw-tools-home-spotlight-thumb {
+          background: #FFFFFF;
+          border: 1px solid rgba(27, 94, 32, 0.16);
+          border-radius: 14px;
+          box-shadow: 0 8px 18px rgba(27, 94, 32, 0.1);
+          height: 68px;
+          object-fit: cover;
+          width: 68px;
+        }
+
+        .bw-tools-home .bw-tools-home-spotlight-kicker {
+          color: #1B5E20;
+          display: block;
+          font-size: 11px;
+          font-weight: 800;
+          letter-spacing: 0.9px;
+          line-height: 1.2;
+          margin-bottom: 7px;
+          text-transform: uppercase;
+        }
+
+        .bw-tools-home .bw-tools-home-spotlight-title {
+          color: #1B5E20;
+          display: block;
+          font-size: 18px;
+          font-weight: 800;
+          line-height: 1.18;
+          margin-bottom: 7px;
+        }
+
+        .bw-tools-home .bw-tools-home-spotlight-copy {
+          color: #4E5A4E;
+          display: block;
+          font-family: var(--serif);
+          font-size: 13.5px;
+          line-height: 1.5;
+          margin-bottom: 10px;
+        }
+
+        .bw-tools-home .bw-tools-home-spotlight-cta {
+          color: #1B5E20;
+          display: inline-block;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
         }
 
         .bw-tools-home .bw-tools-home-tags {
@@ -377,6 +444,15 @@ class BWToolsHomeElement extends HTMLElement {
             padding: 16px;
           }
 
+          .bw-tools-home .bw-tools-home-spotlight {
+            grid-template-columns: 60px minmax(0, 1fr);
+          }
+
+          .bw-tools-home .bw-tools-home-spotlight-thumb {
+            height: 60px;
+            width: 60px;
+          }
+
           .bw-tools-home .bw-tools-grid {
             grid-template-columns: 1fr;
           }
@@ -438,7 +514,7 @@ class BWToolsHomeElement extends HTMLElement {
               <h2 id="bw-tools-home-title" class="bw-tools-home-title">Plan your Berlin visit in minutes</h2>
               <p class="bw-tools-home-lead">Quick local tools for tickets, budget, weather, water, and first-day choices before you arrive.</p>
             </div>
-            <aside class="bw-tools-home-panel" aria-label="Planning tools summary">
+            <aside class="bw-tools-home-panel" aria-label="Planning tools summary" data-bw-home-spotlight>
               <h3>Built by a local guide</h3>
               <p>Start with the questions travelers ask most, then bring the rest to the walk.</p>
               <div class="bw-tools-home-tags" aria-hidden="true">
@@ -498,6 +574,8 @@ class BWToolsHomeElement extends HTMLElement {
         return Boolean(tool && tool.hidden !== true && tool.published !== false && status !== 'draft');
       }).slice(0, 8)
       : [];
+    this._renderSpotlight(data && data.spotlightTool);
+
     const root = this.querySelector('.bw-tools-root');
     if (!root || !tools.length) {
       this._renderError();
@@ -510,6 +588,31 @@ class BWToolsHomeElement extends HTMLElement {
         ${tools.map(tool => this._renderTool(tool)).join('')}
       </div>
     `;
+  }
+
+  _renderSpotlight(spotlight) {
+    const panel = this.querySelector('[data-bw-home-spotlight]');
+    if (!panel || !spotlight || !spotlight.slug) return;
+
+    const href = 'https://www.berlinwalk.com/tools/' + this._escapeAttribute(spotlight.slug);
+    const image = typeof spotlight.image === 'string' && spotlight.image.trim() ? spotlight.image.trim() : BW_TOOLS_HOME_DEFAULT_IMAGE;
+    const label = this._escapeHtml(spotlight.label || 'Featured Tool');
+    const title = this._escapeHtml(spotlight.title || 'Open a featured Berlin planning tool');
+    const lead = this._escapeHtml(spotlight.lead || 'A quick local tool for planning smarter before you go.');
+    const cta = this._escapeHtml(spotlight.cta || 'Open tool');
+
+    panel.setAttribute('aria-label', 'Featured Berlin planning tool');
+    panel.innerHTML = [
+      '<a class="bw-tools-home-spotlight" href="' + href + '" target="_top">',
+      '  <img class="bw-tools-home-spotlight-thumb" src="' + this._escapeAttribute(image) + '" alt="" loading="lazy" decoding="async">',
+      '  <span>',
+      '    <span class="bw-tools-home-spotlight-kicker">' + label + '</span>',
+      '    <span class="bw-tools-home-spotlight-title">' + title + '</span>',
+      '    <span class="bw-tools-home-spotlight-copy">' + lead + '</span>',
+      '    <span class="bw-tools-home-spotlight-cta">' + cta + '</span>',
+      '  </span>',
+      '</a>'
+    ].join('');
   }
 
   _renderTool(tool) {
@@ -581,6 +684,10 @@ class BWToolsHomeElement extends HTMLElement {
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
   }
+  _escapeAttribute(value) {
+    return this._escapeHtml(value).replace(/'/g, '&#39;');
+  }
+
 }
 
 if (!customElements.get('bw-tools-home')) {

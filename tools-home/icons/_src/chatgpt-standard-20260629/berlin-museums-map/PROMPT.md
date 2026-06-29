@@ -1,0 +1,3 @@
+# Berlin Museums Map icon prompt
+
+Generate a square BerlinTools app icon for a BerlinWalk tool called Berlin Museums Map. 1:1 icon, glossy 3D app icon family. Use a deep BerlinWalk green rounded square tile with clean cream or transparent outer corners, a warm yellow medallion, and one central dimensional object: a small classical museum facade blended with a map pin and folded map lines. Palette: #1B5E20 deep green, #FFE600 yellow, #7CB342 lime, cream highlights. It must read clearly at 64px and 160px. No text, no letters, no numbers, no logo, no watermark, no black vignette, no photo background, no flat vector style. Polished, friendly, travel-planning utility, matching existing glossy BerlinTools icons.

@@ -1,5 +1,5 @@
 const BW_TOOLS_HUB_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json';
-const BW_TOOLS_HUB_DATA_VERSION = '2026-06-18-dropdown-taxonomy';
+const BW_TOOLS_HUB_DATA_VERSION = '2026-06-29-museums-spotlight';
 const BW_TOOLS_HUB_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 const BW_TOOLS_HUB_TYPE_ORDER = ['Planner', 'Calculator', 'Map', 'Guide', 'Audio', 'Quiz', 'Game'];
 
@@ -8,6 +8,7 @@ class BWToolsHubElement extends HTMLElement {
     super();
     this._categories = [];
     this._tools = [];
+    this._spotlightTool = null;
     this._query = '';
     this._activeCategory = '';
     this._activeType = '';
@@ -332,6 +333,120 @@ class BWToolsHubElement extends HTMLElement {
           max-width: 700px;
         }
 
+        .bw-tools-hub .bw-spotlight-section {
+          margin-bottom: 30px;
+        }
+
+        .bw-tools-hub .bw-spotlight-card {
+          align-items: center;
+          background: radial-gradient(circle at 18% 12%, rgba(255, 230, 0, 0.32), transparent 34%), linear-gradient(135deg, #0F4419 0%, #1B5E20 54%, #2E7D32 100%);
+          border: 1px solid rgba(255, 230, 0, 0.42);
+          border-radius: 12px;
+          box-shadow: 0 18px 42px rgba(27, 94, 32, 0.18);
+          color: var(--bw-white);
+          display: grid;
+          gap: 22px;
+          grid-template-columns: auto minmax(0, 1fr) auto;
+          overflow: hidden;
+          padding: 24px;
+          position: relative;
+          text-decoration: none;
+        }
+
+        .bw-tools-hub .bw-spotlight-card::after {
+          background: linear-gradient(135deg, transparent, rgba(255, 230, 0, 0.18));
+          content: "";
+          inset: 0;
+          pointer-events: none;
+          position: absolute;
+        }
+
+        .bw-tools-hub .bw-spotlight-card:hover,
+        .bw-tools-hub .bw-spotlight-card:focus-visible {
+          box-shadow: 0 20px 46px rgba(27, 94, 32, 0.24);
+          transform: translateY(-2px);
+        }
+
+        .bw-tools-hub .bw-spotlight-card:focus-visible {
+          outline: 3px solid rgba(255, 230, 0, 0.92);
+          outline-offset: 3px;
+        }
+
+        .bw-tools-hub .bw-spotlight-icon,
+        .bw-tools-hub .bw-spotlight-copy,
+        .bw-tools-hub .bw-spotlight-cta {
+          position: relative;
+          z-index: 1;
+        }
+
+        .bw-tools-hub .bw-spotlight-icon {
+          background: #FAFAF5;
+          border: 2px solid rgba(255, 230, 0, 0.78);
+          border-radius: 18px;
+          box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 12px 24px rgba(0, 0, 0, 0.18);
+          height: 92px;
+          overflow: hidden;
+          width: 92px;
+        }
+
+        .bw-tools-hub .bw-spotlight-icon img {
+          display: block;
+          height: 100%;
+          object-fit: cover;
+          width: 100%;
+        }
+
+        .bw-tools-hub .bw-spotlight-label {
+          color: var(--bw-yellow);
+          display: block;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 1px;
+          line-height: 1.2;
+          margin-bottom: 8px;
+          text-transform: uppercase;
+        }
+
+        .bw-tools-hub .bw-spotlight-card h2 {
+          color: var(--bw-white);
+          font-size: 29px;
+          font-weight: 800;
+          line-height: 1.15;
+          margin-bottom: 8px;
+        }
+
+        .bw-tools-hub .bw-spotlight-card p {
+          color: rgba(255, 255, 255, 0.9);
+          font-family: var(--bw-serif);
+          font-size: 15.5px;
+          line-height: 1.58;
+          margin-bottom: 10px;
+          max-width: 650px;
+        }
+
+        .bw-tools-hub .bw-spotlight-meta {
+          color: rgba(255, 255, 255, 0.72);
+          display: block;
+          font-size: 12px;
+          font-weight: 800;
+          letter-spacing: 0.7px;
+          text-transform: uppercase;
+        }
+
+        .bw-tools-hub .bw-spotlight-cta {
+          background: var(--bw-yellow);
+          border-radius: 999px;
+          color: var(--bw-green);
+          display: inline-flex;
+          flex: 0 0 auto;
+          font-size: 13px;
+          font-weight: 800;
+          justify-content: center;
+          min-width: 178px;
+          padding: 14px 18px;
+          text-align: center;
+        }
+
         .bw-tools-hub .bw-featured-section,
         .bw-tools-hub .bw-category-section,
         .bw-tools-hub .bw-matches-section {
@@ -639,6 +754,21 @@ class BWToolsHubElement extends HTMLElement {
             align-items: flex-start;
             flex-direction: column;
           }
+
+          .bw-tools-hub .bw-spotlight-card {
+            align-items: flex-start;
+            grid-template-columns: 1fr;
+            padding: 20px;
+          }
+
+          .bw-tools-hub .bw-spotlight-icon {
+            height: 74px;
+            width: 74px;
+          }
+
+          .bw-tools-hub .bw-spotlight-cta {
+            width: 100%;
+          }
         }
 
         @media (max-width: 520px) {
@@ -789,6 +919,7 @@ class BWToolsHubElement extends HTMLElement {
       const response = await fetch(this._dataUrl);
       if (!response.ok) throw new Error('Could not load tools');
       const data = await response.json();
+      this._spotlightTool = data && data.spotlightTool && typeof data.spotlightTool === 'object' ? data.spotlightTool : null;
       this._renderHub(data);
     } catch (error) {
       this._renderError();
@@ -814,7 +945,9 @@ class BWToolsHubElement extends HTMLElement {
     root.removeAttribute('aria-live');
     root.innerHTML = `
       ${this._renderFinder()}
-      <div class="bw-featured-root"></div>
+      <div class="bw-spotlight-root"></div>
+
+          <div class="bw-featured-root"></div>
       <div class="bw-catalog-root"></div>
     `;
     this._updateResults();
@@ -901,6 +1034,7 @@ class BWToolsHubElement extends HTMLElement {
     const sortedTools = this._sortTools(filteredTools);
 
     this._updateFinderState(sortedTools.length, active);
+    this._renderSpotlight(active);
     this._renderFeatured(active);
     this._renderCatalog(sortedTools, active);
   }

@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Museums Map | BerlinWalk</title>
+  <meta name="description" content="Filter Berlin museums by price, opening status and location on a live map.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-berlin-museums-map">
+  <style>
+    #bw-berlin-museums-map {
+      --bw-green: #1B5E20;
+      --bw-dark: #164A1A;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-light: #C5E1A5;
+      --bw-cream: #FAFAF5;
+      --bw-soft: #F4F9EC;
+      --bw-line: rgba(27, 94, 32, .18);
+      --bw-border: #DCE8C8;
+      --bw-ink: #212121;
+      --bw-muted: #4E5A4E;
+      --bw-white: #FFFFFF;
+      --bw-red: #C62828;
+      --bw-shadow: 0 18px 38px rgba(27, 94, 32, .13);
+      width: min(100%, 1180px);
+      margin: 0 auto;
+      padding: 18px;
+      color: var(--bw-ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    #bw-berlin-museums-map * { box-sizing: border-box; }
+
+    #bw-berlin-museums-map .bw-shell {
+      overflow: hidden;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-white);
+      box-shadow: var(--bw-shadow);
+    }
+
+    #bw-berlin-museums-map .bw-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 18px;
+      align-items: center;
+      min-height: 280px;
+      padding: 24px;
+      color: var(--bw-white);
+      background-image:
+        linear-gradient(90deg, rgba(14, 72, 22, .96) 0%, rgba(14, 72, 22, .84) 38%, rgba(14, 72, 22, .30) 74%, rgba(14, 72, 22, .05) 100%),
+        url("assets/hero-chatgpt.png");
+      background-position: center;
+      background-size: cover;
+    }
+
+    #bw-berlin-museums-map .bw-kicker {
+      margin: 0 0 8px;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    #bw-berlin-museums-map h1 {
+      margin: 0;
+      max-width: 620px;
+      font-size: clamp(31px, 5vw, 46px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    #bw-berlin-museums-map .bw-hero p {
+      max-width: 70ch;
+      margin: 12px 0 0;
+      color: rgba(255,255,255,.9);
+      font-size: 15px;
+      text-shadow: 0 1px 14px rgba(0,0,0,.22);
+    }
+
+    #bw-berlin-museums-map .bw-main {
+      display: grid;
+      grid-template-columns: 342px minmax(0, 1fr);
+      min-height: 720px;
+    }
+
+    #bw-berlin-museums-map .bw-sidebar {
+      padding: 18px;
+      border-right: 1px solid var(--bw-line);
+      background: linear-gradient(180deg, var(--bw-white), #fbfff7);
+    }
+
+    #bw-berlin-museums-map .bw-map-panel {
+      display: grid;
+      grid-template-rows: auto 1fr;
+      min-width: 0;
+      background: var(--bw-white);
+    }
+
+    #bw-berlin-museums-map .bw-group {
+      margin: 0 0 16px;
+    }
+
+    #bw-berlin-museums-map .bw-group h2,
+    #bw-berlin-museums-map .bw-map-top h2 {
+      margin: 0 0 8px;
+      color: var(--bw-green);
+      font-size: 15px;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+
+    #bw-berlin-museums-map .bw-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    #bw-berlin-museums-map .bw-buttons.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    #bw-berlin-museums-map button,
+    #bw-berlin-museums-map input {
+      font: inherit;
+    }
+
+    #bw-berlin-museums-map button {
+      min-height: 42px;
+      padding: 9px 10px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-white);
+      color: var(--bw-ink);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 850;
+      text-align: center;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    #bw-berlin-museums-map button:hover {
+      transform: translateY(-1px);
+      border-color: rgba(27,94,32,.35);
+      background: var(--bw-soft);
+    }
+
+    #bw-berlin-museums-map button[aria-pressed="true"] {
+      border-color: var(--bw-green);
+      background: var(--bw-green);
+      color: var(--bw-white);
+      box-shadow: inset 0 -3px 0 rgba(255,230,0,.45);
+    }
+
+    #bw-berlin-museums-map .bw-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    #bw-berlin-museums-map .bw-field label {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    #bw-berlin-museums-map input {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-white);
+      color: var(--bw-ink);
+      padding: 9px 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    #bw-berlin-museums-map .bw-price-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    #bw-berlin-museums-map .bw-note {
+      margin: 8px 0 0;
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    #bw-berlin-museums-map .bw-count {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0 0 12px;
+      padding: 10px 0 0;
+      border-top: 1px solid var(--bw-line);
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    #bw-berlin-museums-map .bw-count strong {
+      color: var(--bw-green);
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    #bw-berlin-museums-map .bw-list {
+      display: grid;
+      gap: 9px;
+      max-height: 420px;
+      overflow: auto;
+      padding-right: 3px;
+    }
+
+    #bw-berlin-museums-map .bw-card {
+      display: grid;
+      gap: 8px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-white);
+      padding: 11px;
+    }
+
+    #bw-berlin-museums-map .bw-card h3 {
+      margin: 0;
+      color: var(--bw-green);
+      font-size: 15px;
+      line-height: 1.22;
+      letter-spacing: 0;
+    }
+
+    #bw-berlin-museums-map .bw-meta {
+      margin: 0;
+      color: var(--bw-muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    #bw-berlin-museums-map .bw-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    #bw-berlin-museums-map .bw-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 23px;
+      border-radius: 999px;
+      padding: 4px 8px;
+      background: var(--bw-soft);
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    #bw-berlin-museums-map .bw-tag.open { background: #E7F6D8; }
+    #bw-berlin-museums-map .bw-tag.closed { background: #FFF0D6; color: #8B5B00; }
+    #bw-berlin-museums-map .bw-tag.unknown { background: #F3F1EA; color: #686256; }
+    #bw-berlin-museums-map .bw-tag.paid { background: var(--bw-yellow); color: var(--bw-green); }
+
+    #bw-berlin-museums-map .bw-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+
+    #bw-berlin-museums-map .bw-actions a,
+    #bw-berlin-museums-map .bw-popup-actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 31px;
+      border-radius: 8px;
+      padding: 7px 10px;
+      background: var(--bw-green);
+      color: var(--bw-white);
+      font-size: 11px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    #bw-berlin-museums-map .bw-actions a.secondary,
+    #bw-berlin-museums-map .bw-popup-actions a.secondary {
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+    }
+
+    #bw-berlin-museums-map .bw-map-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--bw-line);
+      background: var(--bw-white);
+    }
+
+    #bw-berlin-museums-map .bw-map-top p {
+      margin: 0;
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    #bw-berlin-museums-map .bw-map-wrap {
+      min-height: 600px;
+      height: 100%;
+      border-left: 0;
+      background: #E8EEDC;
+      position: relative;
+    }
+
+    #bw-berlin-museums-map .bw-map {
+      width: 100%;
+      height: 100%;
+      min-height: 600px;
+      z-index: 1;
+    }
+
+    #bw-berlin-museums-map .leaflet-container {
+      font-family: Montserrat, Arial, sans-serif;
+      background: #E8EEDC;
+    }
+
+    #bw-berlin-museums-map .leaflet-popup-content-wrapper {
+      border-radius: 12px;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid var(--bw-border);
+      box-shadow: 0 6px 20px rgba(0,0,0,.15);
+    }
+
+    #bw-berlin-museums-map .leaflet-popup-content {
+      width: 260px !important;
+      margin: 0;
+      font-family: inherit;
+    }
+
+    #bw-berlin-museums-map .bw-popup-head {
+      padding: 10px 14px;
+      background: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-berlin-museums-map .bw-popup-head.free { background: var(--bw-lime); }
+    #bw-berlin-museums-map .bw-popup-head.paid { background: var(--bw-green); }
+    #bw-berlin-museums-map .bw-popup-head.unknown { background: #6F735F; }
+
+    #bw-berlin-museums-map .bw-popup-type {
+      display: block;
+      margin: 0 0 3px;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      opacity: .9;
+    }
+
+    #bw-berlin-museums-map .bw-popup-name {
+      display: block;
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.24;
+    }
+
+    #bw-berlin-museums-map .bw-popup-body {
+      padding: 12px 14px 14px;
+      color: var(--bw-ink);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    #bw-berlin-museums-map .bw-popup-body p {
+      margin: 0 0 8px;
+    }
+
+    #bw-berlin-museums-map .bw-popup-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 9px;
+    }
+
+    #bw-berlin-museums-map .bw-marker {
+      width: 30px;
+      height: 30px;
+      border: 3px solid var(--bw-white);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,.25);
+      font-size: 11px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    #bw-berlin-museums-map .bw-marker.free { background: var(--bw-lime); color: var(--bw-white); }
+    #bw-berlin-museums-map .bw-marker.paid { background: var(--bw-green); color: var(--bw-white); }
+    #bw-berlin-museums-map .bw-marker.unknown { background: var(--bw-yellow); color: var(--bw-green); }
+
+    @media (max-width: 860px) {
+      #bw-berlin-museums-map { padding: 12px; }
+      #bw-berlin-museums-map .bw-hero { grid-template-columns: 1fr; min-height: 320px; padding: 20px; background-position: center right; }
+      #bw-berlin-museums-map .bw-main { grid-template-columns: 1fr; }
+      #bw-berlin-museums-map .bw-sidebar { border-right: 0; border-bottom: 1px solid var(--bw-line); }
+      #bw-berlin-museums-map .bw-list { max-height: 330px; }
+      #bw-berlin-museums-map .bw-map-wrap,
+      #bw-berlin-museums-map .bw-map { min-height: 430px; }
+    }
+
+    @media (max-width: 520px) {
+      #bw-berlin-museums-map { padding: 10px 0; }
+      #bw-berlin-museums-map .bw-shell { border-radius: 0; border-left: 0; border-right: 0; }
+      #bw-berlin-museums-map .bw-hero { min-height: 300px; padding: 18px 16px; background-position: center right; }
+      #bw-berlin-museums-map h1 { font-size: 30px; }
+      #bw-berlin-museums-map .bw-sidebar { padding: 16px; }
+      #bw-berlin-museums-map .bw-buttons.three { grid-template-columns: 1fr; }
+      #bw-berlin-museums-map .bw-map-top { align-items: flex-start; flex-direction: column; padding: 14px 16px; }
+      #bw-berlin-museums-map .bw-map-wrap,
+      #bw-berlin-museums-map .bw-map { min-height: 390px; }
+      #bw-berlin-museums-map .leaflet-popup-content { width: 226px !important; }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <header class="bw-hero">
+      <div>
+        <p class="bw-kicker">Berlin Museums Map</p>
+        <h1>Find a museum that fits today.</h1>
+        <p>Filter Berlin museums by entry price, opening status and location, then jump straight to tickets or directions.</p>
+      </div>
+    </header>
+
+    <section class="bw-main">
+      <aside class="bw-sidebar" aria-label="Museum filters">
+        <div class="bw-group">
+          <h2>Search</h2>
+          <div class="bw-field">
+            <label for="bwMuseumSearch">Museum name</label>
+            <input id="bwMuseumSearch" type="search" placeholder="Pergamon, Jewish Museum, Bauhaus...">
+          </div>
+        </div>
+
+        <div class="bw-group">
+          <h2>Entry price</h2>
+          <div class="bw-buttons three" data-filter-group="fee">
+            <button type="button" data-fee="all" aria-pressed="true">All</button>
+            <button type="button" data-fee="free" aria-pressed="false">Free</button>
+            <button type="button" data-fee="paid" aria-pressed="false">Paid</button>
+          </div>
+        </div>
+
+        <div class="bw-group">
+          <h2>Open now</h2>
+          <div class="bw-buttons three" data-filter-group="status">
+            <button type="button" data-status="all" aria-pressed="true">Any</button>
+            <button type="button" data-status="open" aria-pressed="false">Open</button>
+            <button type="button" data-status="closed" aria-pressed="false">Closed</button>
+          </div>
+          <p class="bw-note">Open or closed is estimated from the listed Berlin opening hours.</p>
+        </div>
+
+        <div class="bw-group">
+          <h2>Price range</h2>
+          <div class="bw-price-grid">
+            <div class="bw-field">
+              <label for="bwPriceMin">Min EUR</label>
+              <input id="bwPriceMin" type="number" min="0" max="200" value="0">
+            </div>
+            <div class="bw-field">
+              <label for="bwPriceMax">Max EUR</label>
+              <input id="bwPriceMax" type="number" min="0" max="200" value="200">
+            </div>
+          </div>
+          <p class="bw-note">Free-entry museums count as EUR 0. Museums with unclear prices stay visible unless you choose only free or only paid.</p>
+        </div>
+
+        <div class="bw-count"><span>Showing</span><strong id="bwMuseumCount">96</strong></div>
+        <div id="bwMuseumList" class="bw-list" aria-live="polite"></div>
+      </aside>
+
+      <section class="bw-map-panel" aria-label="Museum map">
+        <div class="bw-map-top">
+          <div>
+            <h2>Map view</h2>
+            <p>Every listed museum is pinned. Tap a marker for tickets and directions.</p>
+          </div>
+        </div>
+        <div class="bw-map-wrap">
+          <div id="bwMuseumsMap" class="bw-map"></div>
+        </div>
+      </section>
+    </section>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    (function(){
+      var MUSEUMS = [{"id":"akademie-der-k-nste-pariser-platz0","name":"Akademie der Künste Pariser Platz","address":"Pariser Platz 4 10117 Berlin","feeText":"Depending on the exhibition, between €3 and €15, free admission to the exhibitions for visitors under 18 and for all visitors on Tuesdays from 2 p.m. to 7 p.m.","hoursText":"Building: Monday to Sunday 10 a.m. to 8 p.m. Exhibitions: different opening hours depending on the exhibition","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5158,13.3795","website":"https://www.adk.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5158,"lng":13.3795},{"id":"allied-museum1","name":"Allied Museum","address":"Clayallee 135 14195 Berlin","feeText":"Free","hoursText":"Tuesday to Sunday from 10 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.456,13.2727","website":"https://www.alliiertenmuseum.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.456,"lng":13.2727},{"id":"alte-nationalgalerie2","name":"Alte Nationalgalerie","address":"Bodestr. 3 10178 Berlin","feeText":"€16, reduced fee €8","hoursText":"Tuesday to Sunday from 10 a.m. to 6 p.m., Monday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5207,13.3984","website":"https://www.smb.museum/en/museums-institutions/alte-nationalgalerie/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=19&group=day&at=NYbxZa7HqNc","lat":52.5207,"lng":13.3984},{"id":"altes-museum3","name":"Altes Museum","address":"Am Lustgarten 1 10178 Berlin","feeText":"€14, concessions €7","hoursText":"Tuesday to Friday from 10 a.m. to 5 p.m., Saturday and Sunday from 10 a.m. to 6 p.m., Monday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5199,13.3992","website":"https://www.smb.museum/en/museums-institutions/altes-museum/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=12&group=day&at=NYbxZa7HqNc","lat":52.5199,"lng":13.3992},{"id":"anne-frank-zentrum4","name":"Anne Frank Zentrum","address":"Rosenthaler Straße 39 10178 Berlin","feeText":"€8, concessions €4, family ticket €17. Children 10 years and under are admitted free.","hoursText":"Tuesday to Sunday from 10 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5242,13.4027","website":"https://www.annefrank.de/en/exhibition-berlin","ticketLink":"https://www.visitberlin.de/en/tickets/all-about-anne-exhibition-anne-frank-zentrum#/?utm_source=berlinde&utm_medium=website&utm_campaign=affiliate","lat":52.5242,"lng":13.4027},{"id":"anoha-children-s-world-of-the-jewish-museum5","name":"Anoha - Children's World of the Jewish Museum","address":"Lindenstraße 9-14 10969 Berlin","feeText":"Free with a time slot ticket","hoursText":"Tuesday to Friday from 9 a.m. to 4 p.m. Saturday, Sunday and public holidays from 10 a.m. to 5 p.m. Monday closed (except public holidays)","notes":"Anoha is a non-slip socks museum. Children can bring your own non-slip socks or purchase them at the museum ticket office.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5025,13.3956","website":"https://anoha.de/en","ticketLink":"https://www.berlin.de/en/events/","lat":52.5025,"lng":13.3956},{"id":"bauhaus-archive6","name":"Bauhaus Archive","address":"Klingelhöferstraße 14 10785 Berlin","feeText":"Free (The Bauhaus View)","hoursText":"The Temporary Bauhaus-Archiv: Monday to Saturday from 10 a.m. to 6 p.m. Bauhaus Archive: Closed due to renovation","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5063,13.3539","website":"https://www.bauhaus.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5063,"lng":13.3539},{"id":"berlin-story-bunker7","name":"Berlin Story Bunker","address":"Schöneberger Straße 23a 10963 Berlin","feeText":"€18 (including audio guide), reduced fee €12","hoursText":"Monday to Sunday from 10 a.m. to 7 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.503,13.3801","website":"https://www.berlinstory.de/","ticketLink":"https://www.berlin.de/en/events/","lat":52.503,"lng":13.3801},{"id":"berliner-medizinhistorisches-museum8","name":"Berliner Medizinhistorisches Museum","address":"Charitéplatz 10117 Berlin","feeText":"€10, concessions €5","hoursText":"Tuesday, Thursday, Friday and Sunday 10 a.m. to 5 p.m., Wednesday and Saturday 10 a.m. to 7 p.m.","notes":"Due to the nature of the pathological anatomical specimens, young people under the age of 16 are only admitted to the museum if accompanied by a parent or guardian. School classes are admitted to the museum from grade 10.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5236,13.378","website":"https://bmm-charite.de/en","ticketLink":"https://www.berlin.de/en/events/","lat":52.5236,"lng":13.378},{"id":"berliner-unterwelten-museum9","name":"Berliner Unterwelten Museum","address":"Brunnenstraße 105 13355 Berlin","feeText":"Varies depending on the tour, from €17","hoursText":"All year round depending on the tour","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5479,13.389","website":"https://www.berliner-unterwelten.de/en/index.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5479,"lng":13.389},{"id":"berlinische-galerie10","name":"Berlinische Galerie","address":"Alte Jakobstraße 124 10969 Berlin","feeText":"€12, reduced €7, free admission up to 18 years of age. Different prices possible for special exhibitions.","hoursText":"Wednesday to Monday from 10 a.m. to 6 p.m., Tuesday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5038,13.3987","website":"https://berlinischegalerie.de/en/","ticketLink":"https://www.visitberlin.de/en/tickets/day-ticket-berlinische-galerie-museum-modern-art?utm_source=berlinde&utm_medium=website&utm_campaign=affiliate#/","lat":52.5038,"lng":13.3987},{"id":"post-mill-in-berlin-marzahn11","name":"Post Mill in Berlin-Marzahn","address":"Hinter der Mühle 4 12685 Berlin","feeText":"Free","hoursText":"On the first Sunday of the month from April to October, from 11 a.m. to 4 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.544,13.5635","website":"https://marzahner-muehle.de/","ticketLink":"https://www.berlin.de/en/events/","lat":52.544,"lng":13.5635},{"id":"bode-museum12","name":"Bode Museum","address":"Am Kupfergraben 10117 Berlin","feeText":"€14, concessions €7","hoursText":"Tuesday to Friday from 10 a.m. to 5 p.m., Saturday and Sunday from 10 a.m. to 6 p.m., closed on Monday","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5219,13.3942","website":"https://www.smb.museum/en/museums-institutions/bode-museum/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=27&group=day&at=NYbxZa7HqNc","lat":52.5219,"lng":13.3942},{"id":"br-han-museum13","name":"Bröhan Museum","address":"Schloßstr. 1a 14059 Berlin","feeText":"€9, concessions €6, free admission for children under 18. Every first Wednesday of the month €4.","hoursText":"Tuesday to Sunday from 11 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5189,13.2952","website":"https://www.broehan-museum.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5189,"lng":13.2952},{"id":"br-cke-museum14","name":"Brücke Museum","address":"Bussardsteig 9 14195 Berlin","feeText":"€6, concessions €4","hoursText":"Wednesday to Monday from 11 a.m. to 5 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4669,13.2747","website":"https://www.bruecke-museum.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4669,"lng":13.2747},{"id":"bud-spencer-museum15","name":"Bud Spencer Museum","address":"Unter den Linden 10 10117 Berlin","feeText":"€15, concessions €12","hoursText":"Monday to Sunday from 10 a.m. to 7 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5176,13.3904","website":"https://www.budspencer-museum.com/Englischer-Titel","ticketLink":"https://www.berlin.de/en/events/","lat":52.5176,"lng":13.3904},{"id":"centrum-judaicum-new-synagogue16","name":"Centrum Judaicum - New Synagogue","address":"Oranienburger Straße 28 10117 Berlin","feeText":"€7, concessions €4.50 (admission to the exhibition and access to the dome in summer)","hoursText":"April to September: Monday to Friday from 10 a.m. to 6 p.m., Sunday from 10 a.m. to 7 p.m. October to March: Sunday to Thursday from 10 a.m. to 6 p.m., Friday from 10 a.m. to 3 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5247,13.3947","website":"https://centrumjudaicum.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5247,"lng":13.3947},{"id":"c-o-berlin17","name":"C/O Berlin","address":"Hardenbergstraße 22 10623 Berlin","feeText":"€12, concessions €6","hoursText":"Daily from 11 a.m. to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5067,13.3306","website":"https://www.co-berlin.org/en","ticketLink":"https://www.berlin.de/en/events/","lat":52.5067,"lng":13.3306},{"id":"computerspielemuseum18","name":"Computerspielemuseum","address":"Karl-Marx-Allee 93A 10243 Berlin","feeText":"€12, reduced fee €8","hoursText":"Daily from 10 a.m. to 8 p.m.","notes":"Rehber turu: Public guided tours takes place on Saturdays (in English) and Sundays (in German) at 12:30 noon.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5177,13.442","website":"https://www.computerspielemuseum.de/en/43-Homepage.htm","ticketLink":"https://www.berlin.de/en/events/","lat":52.5177,"lng":13.442},{"id":"ddr-museum19","name":"DDR Museum","address":"Karl-Liebknecht-Str. 1 10178 Berlin","feeText":"€13,50, concessions €8, children under 6 years free","hoursText":"Monday to Sunday from 9 a.m. to 9 p.m. (December 24 and 31 from 9 a.m. to 4 p.m.)","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5197,13.4023","website":"https://www.ddr-museum.de/en","ticketLink":"https://www.visitberlin.de/en/tickets/time-slot-ticket-ddr-museum-berlin?utm_source=berlinde&utm_medium=website&utm_campaign=affiliate","lat":52.5197,"lng":13.4023},{"id":"designpanoptikum-surreal-museum-for-industrial-objects20","name":"DesignPanoptikum - Surreal Museum for Industrial Objects","address":"Poststraße 7 10178 Berlin","feeText":"€ 13","hoursText":"Thursday and Saturday from 12 noon till 6 PM","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5167,13.4063","website":"https://www.designpanoptikum.com/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5167,"lng":13.4063},{"id":"deutsche-kinemathek-museum-of-film-and-television21","name":"Deutsche Kinemathek - Museum of Film and Television","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.509,13.3875","website":"https://www.berlin.de/en/museums/3176755-3104050-deutsche-kinemathek-film-television.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.509,"lng":13.3875},{"id":"deutschlandmuseum22","name":"Deutschlandmuseum","address":"Leipziger Platz 7 10117 Berlin","feeText":"€11 to €21.50, concessions €8 to €15.50. Children under 6 years of age: free admission","hoursText":"Daily from 10 a.m. to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5089,13.3786","website":"https://www.deutschlandmuseum.de/en/","ticketLink":"https://www.visitberlin.de/de/tickets/deutschlandmuseum-berlin-flex-ticket#/?utm_source=berlinde&utm_medium=website&utm_campaign=affiliate","lat":52.5089,"lng":13.3786},{"id":"disgusting-food-museum-berlin23","name":"Disgusting Food Museum Berlin","address":"Schützenstraße 70 10117 Berlin","feeText":"€10 to €17. Children and teenagers under 18 years of age: €7 to €12. Children under 6 years of age: free.","hoursText":"Friday to Tuesday from 12 noon to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5088,13.3913","website":"https://disgustingfoodmuseum.berlin/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5088,"lng":13.3913},{"id":"dokumentationszentrum-berliner-mauer24","name":"Dokumentationszentrum Berliner Mauer","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5756,13.2771","website":"https://www.berlin.de/en/museums/3110250-3104050-dokumentationszentrum-berliner-mauer.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5756,"lng":13.2771},{"id":"dom-ne-dahlem-estate-and-museum25","name":"Domäne Dahlem - Estate and Museum","address":"Königin-Luise-Straße 49 14195 Berlin","feeText":"€5, reduced €3, outdoor area free","hoursText":"Museum: Wednesday to Sunday from 10 a.m. to 5 p.m., outdoor area: daily from 7 a.m. to 10 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4583,13.2886","website":"https://www.berlin.de/en/museums/3108613-3104050-domaene-dahlem-estate-museum.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.4583,"lng":13.2886},{"id":"d-ppel-museum-village26","name":"Düppel Museum Village","address":"Clauertstr. 11 14163 Berlin","feeText":"€6, free for children under 18 years","hoursText":"Saturday, Sunday and public holidays from 10 a.m. to 6 p.m. (The 2026 season runs from March 14 to November 1)","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4246,13.2364","website":"https://www.en.stadtmuseum.de/museum-village-dueppel","ticketLink":"https://www.berlin.de/en/events/","lat":52.4246,"lng":13.2364},{"id":"ethnological-museum27","name":"Ethnological Museum","address":"Schloßplatz 10178 Berlin","feeText":"€14, reduced fee €7","hoursText":"Wednesday to Monday from 10:30 a.m. to 6:30 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5161,13.4023","website":"https://www.smb.museum/en/museums-institutions/ethnologisches-museum/home/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5161,"lng":13.4023},{"id":"fotografiska-berlin28","name":"Fotografiska Berlin","address":"Oranienburger Str. 60 10117 Berlin","feeText":"€15 (children up to 12 years free)","hoursText":"Daily from 10 a.m. to 11 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5257,13.3897","website":"https://www.berlin.de/en/museums/6940825-3104050-fotografiska.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5257,"lng":13.3897},{"id":"friedrichshain-kreuzberg-museum29","name":"Friedrichshain-Kreuzberg Museum","address":"Adalbertstraße 95A 10999 Berlin","feeText":"Free","hoursText":"Tuesday to Thursday from 12 noon to 6 p.m., Friday to Sunday from 10 a.m. to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5008,13.4181","website":"https://www.fhxb-museum.de/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5008,"lng":13.4181},{"id":"friedrichswerder-church30","name":"Friedrichswerder Church","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5154,13.3985","website":"https://www.berlin.de/en/museums/3108642-3104050-friedrichswerder-church.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5154,"lng":13.3985},{"id":"futurium-the-house-of-futures31","name":"Futurium - The House of Futures","address":"Alexanderufer 2 10117 Berlin","feeText":"Free","hoursText":"Monday, Wednesday, Friday, Saturday and Sunday from 10 a.m. to 6 p.m., Thursday from 10 a.m. to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5235,13.3738","website":"https://futurium.de/en","ticketLink":"https://www.berlin.de/en/events/","lat":52.5235,"lng":13.3738},{"id":"gaslaternen-freilichtmuseum-berlin32","name":"Gaslaternen-Freilichtmuseum Berlin","address":"","feeText":"Free","hoursText":"The gas lanterns can be viewed around the clock and are illuminated at nightfall","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5138,13.3381","website":"https://www.berlin.de/en/museums/3137608-3104050-gaslaternen-freilichtmuseum.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5138,"lng":13.3381},{"id":"gdr-museumswohnung-wbs-7033","name":"GDR Museumswohnung WBS 70","address":"Hellersdorfer Straße 179 12627 Berlin","feeText":"Free","hoursText":"Sunday 2 p.m. to 4 p.m. (except public holidays) or by appointment","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5343,13.5931","website":"https://www.stadtundland.de/Unternehmen/Museumswohnung.php","ticketLink":"https://www.berlin.de/en/events/","lat":52.5343,"lng":13.5931},{"id":"gedenkst-tte-berliner-mauer34","name":"Gedenkstätte Berliner Mauer","address":"Bernauer Straße 111 13355 Berlin","feeText":"Free","hoursText":"Visitor center and documentation center: Tuesday to Sunday from 10 a.m. to 6 p.m.; exhibition in the memorial area: Monday to Sunday from 8 a.m. to 10 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5353,13.3896","website":"https://www.stiftung-berliner-mauer.de/en/berlin-wall-memorial","ticketLink":"https://www.berlin.de/en/events/","lat":52.5353,"lng":13.3896},{"id":"berlin-hohensch-nhausen-memorial35","name":"Berlin-Hohenschönhausen Memorial","address":"Genslerstr. 66 13055 Berlin","feeText":"Exhibitions free of charge, guided tours €9, concessions €5, pupils €2.50","hoursText":"Exhibition \"Imprisoned at Hohenschönhausen\": Monday to Sunday from 10 a.m. to 6 p.m.; exhibition \"Involuntary Community\": Monday to Sunday from 10 a.m. to 4 p.m.; tour of the prison only as part of a guided tour","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5416,13.5001","website":"https://www.stiftung-hsh.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5416,"lng":13.5001},{"id":"gedenkst-tte-deutscher-widerstand36","name":"Gedenkstätte Deutscher Widerstand","address":"Stauffenbergstr. 13 10785 Berlin","feeText":"Free","hoursText":"Monday to Friday from 9 a.m. to 6 p.m. Saturday, Sunday and holidays from 10 a.m. to 6 p.m. Closed on December 24, 25, 26, and 31, and January 1","notes":"Erişilebilirlik: Free video tour in German Sign Language, a media station with in-depth video content in Sign Language, a free audio tour in seven languages, and a thematic guide to the exhibition in easy-to-read language.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5078,13.3632","website":"https://www.gdw-berlin.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5078,"lng":13.3632},{"id":"gedenkst-tte-g-nter-litfin37","name":"Gedenkstätte Günter Litfin","address":"Kieler Straße 2 10115 Berlin","feeText":"Free admission, public tours 5 euros, reduced 3 euros","hoursText":"May to October: Saturday and Sunday from 11 a.m. to 5 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4586,13.3236","website":"https://www.stiftung-berliner-mauer.de/en/guenter-litfin-memorial","ticketLink":"https://www.berlin.de/en/events/","lat":52.4586,"lng":13.3236},{"id":"gem-ldegalerie38","name":"Gemäldegalerie","address":"Johanna und Eduard Arnhold Platz 10785 Berlin","feeText":"€14, concessions €7","hoursText":"Tuesday to Sunday from 10 a.m. to 6 p.m., Monday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.509,13.3643","website":"https://www.smb.museum/en/museums-institutions/gemaeldegalerie/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=20&group=day&at=NYbxZa7HqNc","lat":52.509,"lng":13.3643},{"id":"georg-kolbe-museum39","name":"Georg Kolbe Museum","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5099,13.2549","website":"https://www.berlin.de/en/museums/3108668-3104050-georgkolbemuseum.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5099,"lng":13.2549},{"id":"german-historical-museum40","name":"German Historical Museum","address":"Hinter dem Gießhaus 3 10117 Berlin","feeText":"Solo exhibition €7, house ticket (all exhibitions) €10, free up to 18 years of age, free admission to the Day of German Unity","hoursText":"Pei-Bau: daily from 10 a.m. to 6 p.m. For the time being, the Zeughaus and the museum café will remain closed due to renovation work.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5189,13.3966","website":"https://www.dhm.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5189,"lng":13.3966},{"id":"german-museum-of-technology-berlin41","name":"German Museum of Technology Berlin","address":"Trebbiner Straße 9 10963 Berlin","feeText":"€15, concessions €9, free for children and young people under 18, free on Fridays from 1 p.m.","hoursText":"Tuesday to Friday from 9 a.m. to 5:30 p.m. Saturday and Sunday and on public holidays from 10 a.m. to 6 p.m. Monday closed May 1. December 24, 25 and 31 closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4986,13.3768","website":"https://technikmuseum.berlin/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4986,"lng":13.3768},{"id":"gropius-bau42","name":"Gropius Bau","address":"Niederkirchnerstraße 7 10963 Berlin","feeText":"€15, concessions €10","hoursText":"Monday, Wednesday, Thursday and Friday from 12 noon to 7 p.m. Saturday and Sunday from 10 a.m. to 7 p.m. Tuesday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.507,13.3819","website":"https://www.berlinerfestspiele.de/en/gropius-bau","ticketLink":"https://www.berlin.de/en/events/","lat":52.507,"lng":13.3819},{"id":"hamburger-bahnhof-museum-for-contemporary-art43","name":"Hamburger Bahnhof - Museum for Contemporary Art","address":"Invalidenstr. 50 10557 Berlin","feeText":"€16, reduced €8","hoursText":"Tuesday, Wednesday and Friday 10 AM to 6 PM, Thursday 10 AM to 8 PM, Saturday and Sunday 11 AM to 6 PM","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5279,13.3732","website":"https://www.berlin.de/en/museums/3109445-3104050-hamburger-bahnhof.en.html","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=25&group=day&at=NYbxZa7HqNc","lat":52.5279,"lng":13.3732},{"id":"hanf-museum-berlin44","name":"Hanf Museum Berlin","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5166,13.4083","website":"https://www.berlin.de/en/museums/3109454-3104050-hanf-museum-berlin.en.html","ticketLink":"https://www.visitberlin.de/en/tickets/ticket-hanf-museum-berlin-hemp-museum#/?utm_source=berlinde&utm_medium=website&utm_campaign=affiliate","lat":52.5166,"lng":13.4083},{"id":"haus-am-waldsee45","name":"Haus am Waldsee","address":"Argentinische Allee 30 14163 Berlin","feeText":"€9, concessions €6, free for children and young people under 18 of age","hoursText":"House and sculpture park: Tuesday to Sunday 11 a.m. to 6 p.m. Closed December 24 and 31. Café: Tuesday to Sunday 11 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4421,13.2385","website":"https://hausamwaldsee.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4421,"lng":13.2385},{"id":"heinrich-zille-museum46","name":"Heinrich Zille Museum","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5165,13.4064","website":"https://www.berlin.de/en/museums/3109667-3104050-heinrich-zille-museum.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5165,"lng":13.4064},{"id":"house-of-the-wannsee-conference47","name":"House of the Wannsee Conference","address":"Am Großen Wannsee 56 14109 Berlin","feeText":"Free","hoursText":"Monday to Sunday from 10 a.m. to 6 p.m.; January 1, March 8, Good Friday, May 1, Ascension Day, October 3, December 24, 25, 26 and 31 closed.","notes":"Rehber turu: Guided tours of the permanent exhibition focus on the Wannsee Conference. When possible, international groups are guided in their native language. As an alternative to a guided tour, audio guides are available at the reception in eight languages (German, English, Hebrew, French, Arabic, Italian, Polish, Spanish). The cost of borrowing an audio guide is €3.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4323,13.1663","website":"https://www.ghwk.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4323,"lng":13.1663},{"id":"humboldt-forum48","name":"Humboldt Forum","address":"Schloßplatz 10178 Berlin","feeText":"Free, varying prices depending on the exhibition. Roof terrace €3, concessions €1.50","hoursText":"Wednesday to Monday from 10:30 a.m. to 6:30 p.m. Closed on Tuesday.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5161,13.4023","website":"https://www.humboldtforum.org/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5161,"lng":13.4023},{"id":"illuseum-berlin49","name":"Illuseum Berlin","address":"Karl-Liebknecht-Straße 9 10178 Berlin","feeText":"€15, concessions €13","hoursText":"Monday to Thursday from 10 a.m. to 6 p.m., Friday and Saturday from 10 a.m. to 8 p.m., Sunday from 10 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5214,13.4065","website":"https://www.illuseum-berlin.de/en/","ticketLink":"https://www.berlin.de/tickets/freizeit/illuseum-berlin-610e449b-7a3a-494d-bd68-419d9649ffd2/ticketshop/]Buy","lat":52.5214,"lng":13.4065},{"id":"james-simon-gallery50","name":"James Simon Gallery","address":"Bodestraße 10178 Berlin","feeText":"€14, concessions €7","hoursText":"Tuesday to Sunday from 10 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5195,13.3976","website":"https://www.smb.museum/en/museums-institutions/james-simon-galerie/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=81&group=day&at=NYbxZa7HqNc","lat":52.5195,"lng":13.3976},{"id":"jewish-museum-berlin51","name":"Jewish Museum Berlin","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5025,13.3956","website":"https://www.berlin.de/en/museums/3108776-3104050-jewish-museum-berlin.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5025,"lng":13.3956},{"id":"k-the-kollwitz-museum52","name":"Käthe Kollwitz Museum","address":"Spandauer Damm 10 14059 Berlin","feeText":"€8, reduced fee €5 Euro, free for students and people under 18","hoursText":"Monday to Sunday from 11 am to 6 pm, closed on December 24 & 31","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5205,13.2921","website":"https://www.kaethe-kollwitz.berlin/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5205,"lng":13.2921},{"id":"kaiser-wilhelm-ged-chtnis-kirche53","name":"Kaiser Wilhelm Gedächtnis Kirche","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5042,13.3346","website":"https://www.berlin.de/en/museums/3110106-3104050-kaiser-wilhelm-gedaechtnis-kirche.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5042,"lng":13.3346},{"id":"konrad-adenauer-forum54","name":"Konrad Adenauer Forum","address":"Behrendstraße 18 10117 Berlin","feeText":"Free","hoursText":"Tuesday to Sunday from 11 a.m. to 5:30 p.m., closed on Mondays","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5152,13.3867","website":"https://adenauerhaus.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5152,"lng":13.3867},{"id":"kulturforum-potsdamer-platz55","name":"Kulturforum Potsdamer Platz","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5087,13.3666","website":"https://www.berlin.de/en/museums/3108848-3104050-kulturforum-potsdamer-platz.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5087,"lng":13.3666},{"id":"kunstgewerbemuseum-museum-of-decorative-arts56","name":"Kunstgewerbemuseum - Museum of Decorative Arts","address":"Matthäikirchplatz 10785 Berlin","feeText":"€10, concessions €5","hoursText":"Wednesday to Friday from 10 a.m. to 5 p.m., Saturday and Sunday from 11 a.m. to 6 p.m.. Monday and Tuesday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5086,13.3665","website":"https://www.smb.museum/en/museums-institutions/kunstgewerbemuseum/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=23&group=day&at=NYbxZa7HqNc","lat":52.5086,"lng":13.3665},{"id":"kupferstichkabinett-museum-of-prints-and-drawings57","name":"Kupferstichkabinett - Museum of Prints and Drawings","address":"Matthäikirchplatz 8 10785 Berlin","feeText":"Varies depending on the special exhibition; admission to the study hall is free of charge","hoursText":"Wednesday to Friday from 10 a.m. to 6 p.m. Saturday and Sunday from 11 a.m. to 6 p.m. Closed on Monday and Tuesday Study hall: Tuesday to Friday from 9 a.m. to 4 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5082,13.3666","website":"https://www.smb.museum/en/museums-institutions/kupferstichkabinett/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=22&group=day&at=NYbxZa7HqNc","lat":52.5082,"lng":13.3666},{"id":"kw-institute-for-contemporary-art58","name":"KW Institute for Contemporary Art","address":"Auguststraße 69 10117 Berlin","feeText":"€10, concessions €6, free for children under 18","hoursText":"Wednesday to Monday from 11 a.m. to 7 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5268,13.395","website":"https://www.kw-berlin.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5268,"lng":13.395},{"id":"labyrinth-kindermuseum-berlin59","name":"Labyrinth Kindermuseum Berlin","address":"Osloer Straße 12 13359 Berlin","feeText":"Children ages 2 and up and adults: €7","hoursText":"Friday from 1 p.m. to 6 p.m. Saturday, Sunday and holidays from 11 a.m. to 6 p.m. During Berlin school holidays: Tuesday through Friday from 10 a.m. to 6 p.m., Saturday and Sunday from 11 a.m. to 6 p.m.","notes":"The Labyrinth Kindermuseum is a sock museum. Please bring your own non-slip socks, slippers or indoor sneakers.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5561,13.386","website":"https://www.labyrinth-kindermuseum.de/en","ticketLink":"https://www.berlin.de/en/events/","lat":52.5561,"lng":13.386},{"id":"liebermann-villa60","name":"Liebermann Villa","address":"Colomierstraße 3 14109 Berlin","feeText":"€12, concessions €6","hoursText":"October to March: Wednesday to Monday from 11 a.m. to 5 p.m. April to September: Wednesday to Monday from 10 a.m. to 6 p.m. Open on all public holidays Closed on December 24 and 31","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4288,13.1649","website":"https://liebermann-villa.de/en/liebermann-villa/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4288,"lng":13.1649},{"id":"lipstick-museum61","name":"Lipstick Museum","address":"Helmstedter Straße 16 10717 Berlin","feeText":"From €35 Euro per person","hoursText":"By appointment only","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4883,13.3341","website":"https://lippenstiftmuseum.de/index.htm","ticketLink":"https://www.berlin.de/en/events/","lat":52.4883,"lng":13.3341},{"id":"m-rkisches-museum62","name":"Märkisches Museum","address":"Am Köllnischen Park 5 10179 Berlin","feeText":"","hoursText":"Closed for renovation.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5136,13.4152","website":"https://www.stadtmuseum.de/en/museum/maerkisches-museum","ticketLink":"https://www.berlin.de/en/events/","lat":52.5136,"lng":13.4152},{"id":"magicum-berlin-magic-museum63","name":"Magicum - Berlin Magic Museum","address":"Große Hamburger Strasse 17 10115 Berlin","feeText":"€16 Euro, concessions €14, free for children up to 3 years of age","hoursText":"Sunday to Friday from 11 a.m. to 6 p.m., Saturday from 11 a.m. to 7 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5248,13.399","website":"https://www.magicum-berlin.de/en/","ticketLink":"https://www.berlin.de/tickets/freizeit/magicum-berlin-magic-museum-tagesticket-a1520911-b188-4e81-b80c-6bfece1cb097/ticketshop/]Buy","lat":52.5248,"lng":13.399},{"id":"monsterkabinett64","name":"Monsterkabinett","address":"Rosenthaler Straße 39 10178 Berlin","feeText":"€12, €10 for children up to 16 years of age","hoursText":"Wednesday and Thursday from 5 p.m. to 9 p.m., Friday and Saturday from 4 p.m. to 10 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.525,13.4034","website":"https://www.monsterkabinett.de/index-en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.525,"lng":13.4034},{"id":"museum-barberini65","name":"Museum Barberini","address":"Humboldtstraße 5-6 14467 Potsdam","feeText":"Weekdays €16, concessions €10, weekends €18","hoursText":"Wednesday to Monday from 10 a.m. to 7 p.m., Tuesday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.3954,13.0621","website":"https://www.museum-barberini.de/en/","ticketLink":"https://www.visitberlin.de/en/tickets/time-slot-ticket-museum-barberini-potsdam?utm_source=berlinde&utm_medium=website&utm_campaign=affiliate#/experience/BTM00020100865114328","lat":52.3954,"lng":13.0621},{"id":"museum-berggruen66","name":"Museum Berggruen","address":"Schloßstr. 1 14059 Berlin","feeText":"","hoursText":"","notes":"The museum is expected to remain closed until 2025 due to renovation work.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5191,13.2954","website":"https://www.smb.museum/en/museums-institutions/museum-berggruen/home/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5191,"lng":13.2954},{"id":"museum-berlin-karlshorst67","name":"Museum Berlin-Karlshorst","address":"Zwieseler Str. 4 10318 Berlin","feeText":"Free","hoursText":"Tuesday to Sunday 10 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4862,13.5394","website":"https://www.museum-karlshorst.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4862,"lng":13.5394},{"id":"museum-blindenwerkstatt-otto-weidt68","name":"Museum Blindenwerkstatt Otto Weidt","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5242,13.4027","website":"https://www.berlin.de/en/museums/3109648-3104050-museum-blindenwerkstatt-otto-weidt.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5242,"lng":13.4027},{"id":"museum-ephraim-palace69","name":"Museum Ephraim Palace","address":"Poststraße 15 10178 Berlin","feeText":"€7, combo ticket €15, free admission for those under 18","hoursText":"Tuesday to Sunday from 10 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5162,13.4072","website":"https://www.stadtmuseum.de/en/museum/museum-ephraim-palais","ticketLink":"https://www.berlin.de/en/events/","lat":52.5162,"lng":13.4072},{"id":"museum-f-r-asiatische-kunst70","name":"Museum für Asiatische Kunst","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.51613,13.40225","website":"https://www.berlin.de/en/museums/3110521-3104050-museum-fuer-asiatische-kunst.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.51613,"lng":13.40225},{"id":"museum-of-communication-berlin71","name":"Museum of Communication Berlin","address":"Leipziger Straße 16 10117 Berlin","feeText":"€8, concessions €4, free admission for children and young people under 18 years of age","hoursText":"Tuesday to Friday from 9 a.m. to 5 p.m. Saturday, Sunday, public holidays from 10 a.m. to 6 p.m. Every third Wednesday of the month from 9 a.m. to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.51,13.3873","website":"https://www.mfk-berlin.de/homepage/?lang=en","ticketLink":"https://www.berlin.de/en/events/","lat":52.51,"lng":13.3873},{"id":"museum-of-european-cultures72","name":"Museum of European Cultures","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4555,13.2927","website":"https://www.berlin.de/en/museums/3108962-3104050-museum-of-european-cultures.en.html","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=3&group=day&at=NYbxZa7HqNc","lat":52.4555,"lng":13.2927},{"id":"museum-of-photography-helmut-newton-foundation73","name":"Museum of Photography - Helmut Newton Foundation","address":"Jebensstraße 2 10623 Berlin","feeText":"€12, concessions €6","hoursText":"Tuesday, Wednesday, Friday, Saturday and Sunday from 11 a.m. to 7 p.m., Thursday from 11 a.m. to 8 p.m.","notes":"İndirim: €2 discount (€1 for reduced tickets) on presentation of a valid admission ticket for C/O Berlin.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5081,13.3322","website":"https://www.smb.museum/en/museums-institutions/museum-fuer-fotografie/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=31&group=day&at=NYbxZa7HqNc","lat":52.5081,"lng":13.3322},{"id":"musical-instrument-museum74","name":"Musical Instrument Museum","address":"Tiergartenstraße 1 10785 Berlin","feeText":"€10, reduced € 5","hoursText":"Tuesday from 9 am to 1pm, Wednesday and Friday from 9 am to 5 pm, Thursday from 9 am to 8 pm, Saturday and Sunday from 10 am to 5 pm.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5102,13.3712","website":"https://www.simpk.de/en/index.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5102,"lng":13.3712},{"id":"natural-history-museum75","name":"Natural History Museum","address":"Invalidenstr. 43 10115 Berlin","feeText":"€11, concessions €5","hoursText":"Tuesday to Friday 9:30 a.m. to 6 p.m. Saturday and Sunday 10 a.m. to 6 p.m. Monday: closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.53,13.3794","website":"https://www.museumfuernaturkunde.berlin/en","ticketLink":"https://www.visitberlin.de/de/tickets/museum-fuer-naturkunde-zeitfenster-ticket?utm_source=berlinde&utm_medium=website&utm_campaign=affiliate","lat":52.53,"lng":13.3794},{"id":"neue-nationalgalerie76","name":"Neue Nationalgalerie","address":"Potsdamer Straße 50 10785 Berlin","feeText":"€20, concessions €10, free on Thursdays from 4 p.m. to 8 p.m.","hoursText":"Tuesday, Wednesday, Friday, Saturday, and Sunday from 10 a.m. to 6 p.m., Thursday from 10 a.m. to 8 p.m., closed on Monday","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5074,13.3677","website":"https://www.smb.museum/museen-einrichtungen/neue-nationalgalerie/home/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5074,"lng":13.3677},{"id":"neues-museum77","name":"Neues Museum","address":"Bodestr. 3 10178 Berlin","feeText":"€14, concessions €7, free admission for children and young people up to the age of 18","hoursText":"Tuesday to Sunday from 10 a.m. to 6 p.m., Monday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5207,13.3984","website":"https://www.smb.museum/en/museums-institutions/neues-museum/home/","ticketLink":"https://shop.smb.museum/#/tickets/time?museum_id=56&group=day&at=NYbxZa7HqNc","lat":52.5207,"lng":13.3984},{"id":"palais-populaire78","name":"Palais Populaire","address":"Unter den Linden 5 10117 Berlin","feeText":"€5, concessions €3. Mondays: free admission. Up to 18 years old: free admission.","hoursText":"Monday, Wednesday, Friday, Saturday and Sunday from 11 a.m. to 6 p.m., Thursday from 11 a.m. to 7 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.517,13.3961","website":"https://palaispopulaire.db.com/index?language_id=1","ticketLink":"https://www.berlin.de/en/events/","lat":52.517,"lng":13.3961},{"id":"pergamon-museum79","name":"Pergamon Museum","address":"Am Kupfergraben 5 10178 Berlin","feeText":"","hoursText":"","notes":"The Pergamon Museum is currently closed. The north wing of the museum and the hall with the Pergamon Altar are due to reopen in spring 2027.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5203,13.3951","website":"https://www.smb.museum/en/museums-institutions/pergamonmuseum/home/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5203,"lng":13.3951},{"id":"petri-berlin80","name":"Petri Berlin","address":"Gertraudenstraße 8 10178 Berlin","feeText":"€6, reduced €3, up to 18 years free of charge","hoursText":"Tuesday to Friday from 9 a.m. to 5 p.m. Saturday and Sunday from 10 a.m. to 6 p.m. Monday closed","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5131,13.4039","website":"https://www.berlin.de/en/museums/9727810-3104050-petri-berlin.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5131,"lng":13.4039},{"id":"pl-tzensee-memorial81","name":"Plötzensee Memorial","address":"Hüttigpfad 16 13627 Berlin","feeText":"Free","hoursText":"Daily from 9 a.m. to 5 p.m. Closed on December 24, 25, 26, and 31, and January 1.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5418,13.3224","website":"https://www.gedenkstaette-ploetzensee.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5418,"lng":13.3224},{"id":"polyrama82","name":"Polyrama","address":"Stuttgarter Platz 2 10627 Berlin","feeText":"€8, concessions €5","hoursText":"Saturday and Sunday from 12 noon to 6 p.m., Thursday from 12 noon to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5058,13.3058","website":"https://www.polyrama.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5058,"lng":13.3058},{"id":"ramones-museum-berlin83","name":"Ramones Museum Berlin","address":"Weserstraße 159 12045 Berlin","feeText":"Free","hoursText":"Monday to Sunday from 12 noon","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4825,13.4429","website":"https://www.ramonesmuseum.com/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4825,"lng":13.4429},{"id":"samurai-museum-berlin84","name":"Samurai Museum Berlin","address":"Auguststraße 68 10117 Berlin","feeText":"Variable prices. From €10, reduced from €7","hoursText":"Daily from 10 a.m. to 7 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5268,13.3953","website":"https://samuraimuseum.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5268,"lng":13.3953},{"id":"schwules-museum85","name":"Schwules Museum","address":"Lützowstraße 73 10785 Berlin","feeText":"€10, concessions €5","hoursText":"Monday, Wednesday and Friday from 12 noon to 6 p.m. Thursday from 12 noon to 8 p.m. Saturday from 2 p.m. to 7 .m. Sunday from 2 p.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5043,13.3581","website":"https://www.schwulesmuseum.de/?lang=en","ticketLink":"https://www.berlin.de/en/events/","lat":52.5043,"lng":13.3581},{"id":"german-spy-museum86","name":"German Spy Museum","address":"Leipziger Platz 9 10117 Berlin","feeText":"Depending on the time between €8 and €18.50","hoursText":"Monday to Sunday from 10 a.m. to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5096,13.3785","website":"https://www.deutsches-spionagemuseum.de/en","ticketLink":"https://www.berlin.de/en/events/","lat":52.5096,"lng":13.3785},{"id":"stasi-museum-research-and-memorial-center-at-normannenstra-e87","name":"Stasi Museum - Research and Memorial Center at Normannenstraße","address":"Ruschestr. 103 10365 Berlin","feeText":"€12, concessions €9","hoursText":"Monday to Friday from 10 a.m. to 6 p.m., Saturday, Sunday, and public holidays from 11 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5153,13.4855","website":"http://www.stasi-museum.de/en/enindex.htm","ticketLink":"https://www.berlin.de/en/events/","lat":52.5153,"lng":13.4855},{"id":"synthesizer-museum-berlin88","name":"Synthesizer Museum Berlin","address":"Skalitzer Straße 135 a 10999 Berlin","feeText":"€12","hoursText":"Wednesday to Monday from 10 a.m. to 6 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4995,13.419","website":"https://www.synthesizermuseum.info/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4995,"lng":13.419},{"id":"tchoban-foundation-museum-for-architectural-drawing89","name":"Tchoban Foundation - Museum for Architectural Drawing","address":"Christinenstraße 18 10119 Berlin","feeText":"€6, concessions €4","hoursText":"Monday to Friday from 2 p.m. to 7 p.m. Saturday and Sunday from 1 p.m. to 5 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5321,13.41","website":"http://www.tchoban-foundation.de/1-1-Home.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5321,"lng":13.41},{"id":"the-story-of-berlin90","name":"The Story of Berlin","address":"Kurfürstendamm 206 10719 Berlin","feeText":"","hoursText":"The museum is currently closed due to construction work.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5019,13.3232","website":"https://www.berlin.de/en/museums/3109026-3104050-the-story-of-berlin.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.5019,"lng":13.3232},{"id":"topography-of-terror91","name":"Topography of Terror","address":"Niederkirchnerstraße 8 10963 Berlin","feeText":"Free","hoursText":"Daily from 10 a.m. to 8 p.m., outdoor areas until dusk (8 p.m. at the latest). Closed on 24 and 31 December and 1 January.","notes":"Rehber turu: Free guided tours in German every Saturday and Sunday at 2 p.m.","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5069,13.3836","website":"https://www.topographie.de/en/","ticketLink":"https://www.berlin.de/en/events/","lat":52.5069,"lng":13.3836},{"id":"urban-nation-museum-for-urban-contemporary-art92","name":"Urban Nation: Museum for Urban Contemporary Art","address":"Bülowstraße 7 10783 Berlin","feeText":"Free","hoursText":"Tuesday and Wednesday from 10 a.m. to 6 p.m., Thursday to Sunday from 12 noon to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4987,13.3565","website":"https://urban-nation.com/","ticketLink":"https://www.berlin.de/en/events/","lat":52.4987,"lng":13.3565},{"id":"wall-museum-museum-haus-am-checkpoint-charlie93","name":"Wall Museum - Museum Haus am Checkpoint Charlie","address":"Friedrichstr. 43 10969 Berlin","feeText":"€18.50, students €14.50, pupils aged 7-18 years €12.50, children up to 6 years of age free admission","hoursText":"Monday to Sunday from 10 a.m. to 8 p.m.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.5069,13.3907","website":"https://www.mauermuseum.de/en/start/","ticketLink":"https://www.visitberlin.de/en/tickets/wall-museum-checkpoint-charlie-1-ticket-all-exhibitions?utm_source=berlinde&utm_medium=website&utm_campaign=affiliate#/","lat":52.5069,"lng":13.3907},{"id":"zeiss-gro-planetarium94","name":"Zeiss Großplanetarium","address":"Prenzlauer Allee 80 10405 Berlin","feeText":"Varies depending on the event","hoursText":"Only open during events.","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.543,13.4279","website":"https://www.planetarium.berlin/en#/","ticketLink":"https://www.berlin.de/en/events/","lat":52.543,"lng":13.4279},{"id":"zucker-museum95","name":"Zucker-Museum","address":"","feeText":"","hoursText":"","notes":"","googleMaps":"https://www.google.com/maps/search/?api=1&query=52.4986,13.3768","website":"https://www.berlin.de/en/museums/3110594-3104050-zuckermuseum.en.html","ticketLink":"https://www.berlin.de/en/events/","lat":52.4986,"lng":13.3768}];
+      var root = document.getElementById('bw-berlin-museums-map');
+      var state = { fee: 'all', status: 'all', query: '', priceMin: 0, priceMax: 200 };
+      var markerLayer;
+      var map;
+      var listEl = root.querySelector('#bwMuseumList');
+      var countEl = root.querySelector('#bwMuseumCount');
+      var searchEl = root.querySelector('#bwMuseumSearch');
+      var minEl = root.querySelector('#bwPriceMin');
+      var maxEl = root.querySelector('#bwPriceMax');
+      var DAY_TO_INDEX = { sunday:0, monday:1, tuesday:2, wednesday:3, thursday:4, friday:5, saturday:6 };
+
+      function escapeHtml(value) {
+        return String(value || '').replace(/[&<>"']/g, function(ch) {
+          return ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#039;' })[ch];
+        });
+      }
+
+      function parseFee(item) {
+        var text = String(item.feeText || '');
+        var lower = text.toLowerCase();
+        var euros = [];
+        var re = /€\s*([0-9]+(?:[.,][0-9]{1,2})?)/g;
+        var match;
+        while ((match = re.exec(text))) euros.push(Number(match[1].replace(',', '.')));
+        var freeWord = /(free|no charge|no fee|admission free)/i.test(text);
+        var min = euros.length ? Math.min.apply(null, euros) : null;
+        var max = euros.length ? Math.max.apply(null, euros) : null;
+        var isFree = freeWord || lower === 'free' || (euros.length && min === 0);
+        var isPaid = euros.length > 0 && max > 0;
+        var type = isFree && isPaid ? 'both' : isFree ? 'free' : isPaid ? 'paid' : 'unknown';
+        return { type: type, min: min, max: max };
+      }
+
+      function toMinutes(value) {
+        var m = String(value || '').toLowerCase().match(/(\d{1,2})(?::|\.)(\d{2})\s*(a\.m\.|p\.m\.|am|pm)?|(\d{1,2})\s*(a\.m\.|p\.m\.|am|pm)?/);
+        if (!m) return null;
+        var hour = Number(m[1] || m[4]);
+        var minute = Number(m[2] || 0);
+        var suffix = m[3] || m[5] || '';
+        if (suffix.charAt(0) === 'p' && hour < 12) hour += 12;
+        if (suffix.charAt(0) === 'a' && hour === 12) hour = 0;
+        return hour * 60 + minute;
+      }
+
+      function berlinNow() {
+        var parts = new Intl.DateTimeFormat('en-US', {
+          timeZone: 'Europe/Berlin', weekday: 'long', hour: '2-digit', minute: '2-digit', hour12: false
+        }).formatToParts(new Date()).reduce(function(acc, part) {
+          acc[part.type] = part.value;
+          return acc;
+        }, {});
+        return { day: DAY_TO_INDEX[String(parts.weekday || '').toLowerCase()], minutes: toMinutes(parts.hour + ':' + parts.minute) || 0 };
+      }
+
+      function expandDays(start, end) {
+        var days = [];
+        if (start <= end) {
+          for (var d = start; d <= end; d++) days.push(d);
+        } else {
+          for (var a = start; a < 7; a++) days.push(a);
+          for (var b = 0; b <= end; b++) days.push(b);
+        }
+        return days;
+      }
+
+      function parseOpenNow(hoursText) {
+        var text = String(hoursText || '').toLowerCase().replace(/\s+/g, ' ');
+        if (!text || /closed due to renovation|temporarily closed/.test(text)) return false;
+        var now = berlinNow();
+        var chunks = text.split(/;|\. (?=[a-z])/).map(function(chunk) { return chunk.trim(); }).filter(Boolean);
+        var matchedAny = false;
+        for (var i = 0; i < chunks.length; i++) {
+          var chunk = chunks[i];
+          if (chunk.indexOf('closed') !== -1 && chunk.indexOf('from') === -1) continue;
+          var times = chunk.match(/\d{1,2}(?::|\.)?\d{0,2}\s*(?:a\.m\.|p\.m\.|am|pm)/g) || [];
+          if (times.length < 2) continue;
+          var openMin = toMinutes(times[0]);
+          var closeMin = toMinutes(times[1]);
+          if (openMin === null || closeMin === null) continue;
+          var days = [];
+          var rangeRe = /(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\s*(?:to|-|through)\s*(monday|tuesday|wednesday|thursday|friday|saturday|sunday)/g;
+          var range;
+          while ((range = rangeRe.exec(chunk))) {
+            days = days.concat(expandDays(DAY_TO_INDEX[range[1]], DAY_TO_INDEX[range[2]]));
+          }
+          if (!days.length) {
+            var singles = chunk.match(/monday|tuesday|wednesday|thursday|friday|saturday|sunday/g) || [];
+            days = singles.map(function(day) { return DAY_TO_INDEX[day]; });
+          }
+          days = Array.from(new Set(days.filter(function(day) { return typeof day === 'number'; })));
+          if (!days.length && /daily|monday to sunday/.test(chunk)) days = [0,1,2,3,4,5,6];
+          if (!days.length) continue;
+          matchedAny = true;
+          if (days.indexOf(now.day) === -1) continue;
+          if (openMin <= closeMin && now.minutes >= openMin && now.minutes < closeMin) return true;
+          if (openMin > closeMin && (now.minutes >= openMin || now.minutes < closeMin)) return true;
+        }
+        return matchedAny ? false : null;
+      }
+
+      function priceLabel(item) {
+        if (item.feeType === 'free') return 'Free';
+        if (item.feeType === 'both') return item.feeMin === null || item.feeMax === null ? 'Free + paid options' : 'Free + up to €' + item.feeMax;
+        if (item.feeType === 'paid') return item.feeMin === item.feeMax ? '€' + item.feeMin : '€' + item.feeMin + ' to €' + item.feeMax;
+        return 'Price unclear';
+      }
+
+      function statusLabel(value) {
+        if (value === true) return 'Open now';
+        if (value === false) return 'Closed now';
+        return 'Hours unclear';
+      }
+
+      function markerClass(item) {
+        if (item.feeType === 'free') return 'free';
+        if (item.feeType === 'paid' || item.feeType === 'both') return 'paid';
+        return 'unknown';
+      }
+
+      function matchesFilters(item) {
+        var q = state.query.trim().toLowerCase();
+        if (q && item.name.toLowerCase().indexOf(q) === -1) return false;
+        if (state.fee === 'free' && item.feeType !== 'free' && item.feeType !== 'both') return false;
+        if (state.fee === 'paid' && item.feeType !== 'paid' && item.feeType !== 'both') return false;
+        if (state.status === 'open' && item.openNow !== true) return false;
+        if (state.status === 'closed' && item.openNow !== false) return false;
+        if (state.priceMin > state.priceMax) return false;
+        if (item.feeType === 'free') return state.priceMin <= 0 && state.priceMax >= 0;
+        if (item.feeMin === null || item.feeMax === null) return state.fee === 'all';
+        return item.feeMin <= state.priceMax && item.feeMax >= state.priceMin;
+      }
+
+      function popupHtml(item) {
+        var klass = markerClass(item);
+        var ticket = item.ticketLink ? '<a class="secondary" target="_blank" rel="noopener" href="' + escapeHtml(item.ticketLink) + '">Tickets</a>' : '';
+        var website = item.website ? '<a target="_blank" rel="noopener" href="' + escapeHtml(item.website) + '">Official site</a>' : '';
+        return '<div class="bw-popup-head ' + klass + '">' +
+          '<span class="bw-popup-type">' + escapeHtml(priceLabel(item)) + '</span>' +
+          '<span class="bw-popup-name">' + escapeHtml(item.name) + '</span>' +
+          '</div><div class="bw-popup-body">' +
+          '<p><strong>' + escapeHtml(statusLabel(item.openNow)) + '</strong></p>' +
+          '<p>' + escapeHtml(item.address || 'Address not listed') + '</p>' +
+          '<div class="bw-popup-actions"><a target="_blank" rel="noopener" href="' + escapeHtml(item.googleMaps) + '">Map</a>' + ticket + website + '</div>' +
+          '</div>';
+      }
+
+      function cardHtml(item) {
+        var statusClass = item.openNow === true ? 'open' : item.openNow === false ? 'closed' : 'unknown';
+        var priceClass = item.feeType === 'paid' || item.feeType === 'both' ? 'paid' : '';
+        var ticket = item.ticketLink ? '<a class="secondary" target="_blank" rel="noopener" href="' + escapeHtml(item.ticketLink) + '">Tickets</a>' : '';
+        var website = item.website ? '<a target="_blank" rel="noopener" href="' + escapeHtml(item.website) + '">Official site</a>' : '';
+        return '<article class="bw-card">' +
+          '<h3>' + escapeHtml(item.name) + '</h3>' +
+          '<p class="bw-meta">' + escapeHtml(item.address || 'Address not listed') + '</p>' +
+          '<div class="bw-tags"><span class="bw-tag ' + statusClass + '">' + escapeHtml(statusLabel(item.openNow)) + '</span><span class="bw-tag ' + priceClass + '">' + escapeHtml(priceLabel(item)) + '</span></div>' +
+          '<p class="bw-meta"><strong>Hours:</strong> ' + escapeHtml(item.hoursText || 'Not listed') + '</p>' +
+          '<p class="bw-meta"><strong>Admission:</strong> ' + escapeHtml(item.feeText || 'Not listed') + '</p>' +
+          (item.notes ? '<p class="bw-meta"><strong>Note:</strong> ' + escapeHtml(item.notes) + '</p>' : '') +
+          '<div class="bw-actions"><a target="_blank" rel="noopener" href="' + escapeHtml(item.googleMaps) + '">Map</a>' + ticket + website + '</div>' +
+          '</article>';
+      }
+
+      function makeIcon(item) {
+        var klass = markerClass(item);
+        return L.divIcon({
+          className: '',
+          html: '<span class="bw-marker ' + klass + '">M</span>',
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
+          popupAnchor: [0, -14]
+        });
+      }
+
+      function render() {
+        var items = MUSEUMS.filter(matchesFilters);
+        countEl.textContent = String(items.length);
+        listEl.innerHTML = items.map(cardHtml).join('');
+        markerLayer.clearLayers();
+        items.forEach(function(item) {
+          var marker = L.marker([item.lat, item.lng], { icon: makeIcon(item) }).bindPopup(popupHtml(item));
+          marker.addTo(markerLayer);
+        });
+        if (items.length && markerLayer.getBounds().isValid()) {
+          map.fitBounds(markerLayer.getBounds(), { padding: [24, 24], maxZoom: 14 });
+        }
+      }
+
+      function setPressed(group, key, value) {
+        state[key] = value;
+        group.querySelectorAll('button').forEach(function(btn) {
+          btn.setAttribute('aria-pressed', String(btn.dataset[key] === value));
+        });
+        render();
+      }
+
+      MUSEUMS = MUSEUMS.map(function(item) {
+        var fee = parseFee(item);
+        return Object.assign({}, item, { feeType: fee.type, feeMin: fee.min, feeMax: fee.max, openNow: parseOpenNow(item.hoursText) });
+      });
+
+      map = L.map(root.querySelector('#bwMuseumsMap'), { scrollWheelZoom: false }).setView([52.52, 13.405], 11);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      markerLayer = L.featureGroup().addTo(map);
+
+      root.querySelector('[data-filter-group="fee"]').addEventListener('click', function(event) {
+        if (event.target.matches('button[data-fee]')) setPressed(event.currentTarget, 'fee', event.target.dataset.fee);
+      });
+      root.querySelector('[data-filter-group="status"]').addEventListener('click', function(event) {
+        if (event.target.matches('button[data-status]')) setPressed(event.currentTarget, 'status', event.target.dataset.status);
+      });
+      searchEl.addEventListener('input', function() { state.query = searchEl.value || ''; render(); });
+      minEl.addEventListener('input', function() { state.priceMin = Number(minEl.value) || 0; render(); });
+      maxEl.addEventListener('input', function() { state.priceMax = Number(maxEl.value) || 0; render(); });
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

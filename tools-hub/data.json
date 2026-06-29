@@ -2125,6 +2125,38 @@
       "relatedBlog": "/post/what-to-book-in-advance-in-berlin",
       "priority": 18,
       "cmsItemId": "83c68816-345c-4c16-97c5-44550cb6fe47"
+    },
+    {
+      "slug": "berlin-museums-map",
+      "title": "Berlin Museums Map",
+      "seoTitle": "Berlin Museums Map: Prices, Opening Hours and Tickets",
+      "lead": "See what is open, what is free, what costs money, and where every museum is on the map.",
+      "category": "Museums",
+      "type": "Map",
+      "hubCategory": "CultureLandmarks",
+      "priority": 4,
+      "image": "https://static.wixstatic.com/media/5a08a3_b7e101502e6d495994ac39a259ca6d8a~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-museums-map/",
+      "embedHeight": 1250,
+      "tags": [
+        "museums",
+        "museum island",
+        "opening hours",
+        "prices",
+        "tickets",
+        "free museums",
+        "rainy day",
+        "monday",
+        "map",
+        "culture"
+      ],
+      "aliases": [
+        "berlin museum prices",
+        "berlin museums opening hours",
+        "berlin museums map",
+        "free museums berlin",
+        "berlin museum tickets"
+      ]
     }
   ],
   "hubCategories": [
@@ -2176,5 +2208,12 @@
       "icon": "🏛️",
       "blurb": "Wall sites, landmarks, East/West context, galleries, old Berlin, language, and quick culture tools."
     }
-  ]
+  ],
+  "spotlightTool": {
+    "slug": "berlin-museums-map",
+    "label": "Featured Tool",
+    "headline": "Plan your Berlin museum day",
+    "body": "See what is open, what is free, what costs money, and where everything is on the map.",
+    "cta": "Open the Museums Map"
+  }
 }
