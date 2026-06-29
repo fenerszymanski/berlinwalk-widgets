@@ -13,12 +13,14 @@ Audio generation:
 
 ```bash
 source ../scripts/load-api-keys.sh
-node berlin-day-survival/scripts/generate-audio.mjs
+node berlin-day-survival/scripts/generate-audio.mjs --force-voice
 ```
 
-The script reads `data.json`, skips existing ambience MP3 files, and writes:
+The script reads `data.json`, rewrites feedback voice clips when `--force-voice`
+is used, skips existing ambience MP3 files, and writes:
 
 - `assets/audio/ambience/*.mp3`
+- `assets/audio/voice/*.mp3`
 - `assets/audio/ui/*.wav`
 - `assets/audio/GENERATION_NOTES.json`
 

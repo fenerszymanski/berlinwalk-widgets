@@ -1,5 +1,5 @@
 {
-  "version": "2026-06-28-day-survival-share-v7e",
+  "version": "2026-06-29-day-survival-fail-audio-v8",
   "title": "Berlin Day Survival",
   "subtitle": "Your budget is small. Berlin is hungry. Choose wisely.",
   "shareUrl": "https://www.berlinwalk.com/games/berlin-day-survival",
@@ -9,10 +9,10 @@
     "quiet": "Start quietly"
   },
   "audio": {
-    "voiceId": "aTTiK3YzK3dXETpuDE2h",
-    "voiceName": "Ben - Effortless and Casual",
+    "voiceId": "60UU378MZ8YbeLyaF7TI",
+    "voiceName": "Jonas - Confident and Trustworthy",
     "voiceModel": "eleven_multilingual_v2",
-    "voiceDirection": "Dry Berlin guide voice. Short, lightly amused, practical, never shouty. English must stay clear for tourists.",
+    "voiceDirection": "One consistent German-accented English Berlin guide voice. Dry, lightly amused, practical, never shouty. English must stay clear for tourists.",
     "ambiencePromptSuffix": "Subtle realistic Berlin ambience for a mobile web game, no music, no foreground speech, low intensity, loop-friendly, natural city texture.",
     "ui": {
       "select": "assets/audio/ui/select.wav",
@@ -515,6 +515,14 @@
     }
   ],
   "results": [
+    {
+      "id": "budget-busted",
+      "title": "Budget Busted",
+      "image": "assets/results/alexanderplatz-victim.webp",
+      "outcome": "failed",
+      "description": "You went below zero. Berlin does not count that as surviving.",
+      "tip": "If the wallet turns red, the day is over. Rebuild the route with one cheap real meal and no landmark panic buys."
+    },
     {
       "id": "smart-wanderer",
       "title": "Smart Wanderer",

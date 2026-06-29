@@ -15,6 +15,12 @@ if (!apiKey) {
   throw new Error('Missing ELEVENLABS_API_KEY. Run from workspace root: source scripts/load-api-keys.sh');
 }
 
+const args = new Set(process.argv.slice(2));
+const forceAll = args.has('--force');
+const forceVoice = forceAll || args.has('--force-voice');
+const forceAmbience = forceAll || args.has('--force-ambience');
+const forceUi = forceAll || args.has('--force-ui');
+
 const data = JSON.parse(readFileSync(DATA_PATH, 'utf8'));
 const generated = [];
 const skipped = [];
@@ -60,7 +66,7 @@ async function elevenPost(url, body) {
 }
 
 async function generateTts(relativePath, text) {
-  if (hasAudioFile(relativePath)) {
+  if (!forceVoice && hasAudioFile(relativePath)) {
     skipped.push(relativePath);
     return;
   }
@@ -84,7 +90,7 @@ async function generateTts(relativePath, text) {
 
 async function generateAmbience(round) {
   const relativePath = round.ambience.file;
-  if (hasAudioFile(relativePath)) {
+  if (!forceAmbience && hasAudioFile(relativePath)) {
     skipped.push(relativePath);
     return;
   }
@@ -102,7 +108,7 @@ async function generateAmbience(round) {
 }
 
 function writeWav(relativePath, samples) {
-  if (hasAudioFile(relativePath, 100)) {
+  if (!forceUi && hasAudioFile(relativePath, 100)) {
     skipped.push(relativePath);
     return;
   }
@@ -165,6 +171,16 @@ function makeUiSounds() {
   ]);
 }
 
+function voiceSuffixFromVariant(variant) {
+  if (!variant || !variant.feedback) return '';
+  if (variant.voiceSuffix) return variant.voiceSuffix;
+  if (variant.whenCondition) return variant.whenCondition;
+  if (variant.whenConditions && variant.whenConditions.length) return variant.whenConditions.join('-');
+  if (variant.whenTags && variant.whenTags.length) return `with-${variant.whenTags.join('-')}`;
+  if (variant.whenMissingTags && variant.whenMissingTags.length) return `without-${variant.whenMissingTags.join('-')}`;
+  return '';
+}
+
 for (const round of data.rounds) {
   await generateAmbience(round);
 }
@@ -172,6 +188,10 @@ for (const round of data.rounds) {
 for (const round of data.rounds) {
   for (const choice of round.choices) {
     await generateTts(voicePath(round.id, choice.id), choice.feedback);
+    for (const variant of choice.variants || []) {
+      const suffix = voiceSuffixFromVariant(variant);
+      if (suffix && variant.feedback) await generateTts(voicePath(round.id, choice.id, suffix), variant.feedback);
+    }
     for (const [effectId, effect] of Object.entries(choice.conditionEffects || {})) {
       if (effect.feedback) await generateTts(voicePath(round.id, choice.id, effectId), effect.feedback);
     }
@@ -188,6 +208,11 @@ writeFileSync(notesPath, JSON.stringify({
   voiceId: data.audio.voiceId,
   voiceName: data.audio.voiceName,
   voiceDirection: data.audio.voiceDirection,
+  force: {
+    voice: forceVoice,
+    ambience: forceAmbience,
+    ui: forceUi
+  },
   generated,
   skipped,
   totalAudioFiles: generated.length + skipped.length
