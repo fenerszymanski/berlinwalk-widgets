@@ -3,6 +3,25 @@ const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString() 
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
 const ASSET_BUILD = 'bouncer-mobile-share-20260623';
+const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
+
+function loadGamesPreviewRail(callback) {
+  if (window.BerlinWalkGamesPreviewRail) {
+    callback();
+    return;
+  }
+  const existing = document.querySelector('script[data-bw-games-preview-rail]');
+  if (existing) {
+    existing.addEventListener('load', callback, { once: true });
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = new URL(`js/games-preview-rail.js?v=${GAMES_PREVIEW_BUILD}`, BASE_URL).toString();
+  script.defer = true;
+  script.dataset.bwGamesPreviewRail = 'true';
+  script.addEventListener('load', callback, { once: true });
+  document.head.appendChild(script);
+}
 
 class BwBerlinBouncerPage extends HTMLElement {
   connectedCallback() {
@@ -57,7 +76,8 @@ class BwBerlinBouncerPage extends HTMLElement {
           grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
           grid-template-areas: 
             "content game"
-            "cta game";
+            "cta game"
+            "more more";
           gap: 40px 60px;
           max-width: 1200px;
           margin: 0 auto;
@@ -136,6 +156,11 @@ class BwBerlinBouncerPage extends HTMLElement {
           border-left: 4px solid var(--bw-neon);
           align-self: start;
         }
+
+        .bw-bouncer-games-preview {
+          grid-area: more;
+          min-width: 0;
+        }
         
         .bw-bouncer-tour-cta h3 {
           margin: 0 0 8px 0;
@@ -199,7 +224,8 @@ class BwBerlinBouncerPage extends HTMLElement {
             grid-template-areas: 
               "content"
               "game"
-              "cta";
+              "cta"
+              "more";
             padding: 48px 20px 20px;
             gap: 40px;
           }
@@ -261,6 +287,8 @@ class BwBerlinBouncerPage extends HTMLElement {
           <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book the Walking Tour</a>
         </div>
 
+        <section class="bw-bouncer-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
+
       </main>
     `;
   }
@@ -268,8 +296,23 @@ class BwBerlinBouncerPage extends HTMLElement {
   _bind() {
     this._handleHostResize = () => this._syncWixHostHeight();
     window.addEventListener('resize', this._handleHostResize, { passive: true });
+    this._renderGamesPreview();
     window.setTimeout(() => this._syncWixHostHeight(), 100);
     window.setTimeout(() => this._syncWixHostHeight(), 800);
+  }
+
+  _renderGamesPreview() {
+    const target = this.querySelector('[data-bw-games-preview]');
+    if (!target) return;
+    loadGamesPreviewRail(() => {
+      if (!window.BerlinWalkGamesPreviewRail) return;
+      window.BerlinWalkGamesPreviewRail.render(target, {
+        current: 'berghain-bouncer',
+        source: 'berghain_bouncer_page',
+        theme: 'night'
+      });
+      this._syncWixHostHeight();
+    });
   }
 
   _syncWixHostHeight() {
@@ -282,11 +325,14 @@ class BwBerlinBouncerPage extends HTMLElement {
       this.closest('section'),
     ].filter(Boolean);
 
+    const layout = this.querySelector('.bw-bouncer-layout');
+    const height = layout ? Math.ceil(layout.getBoundingClientRect().height + 24) : 850;
     const isDesktop = window.matchMedia('(min-width: 961px)').matches;
     targets.forEach((target) => {
       if (isDesktop) {
-        target.style.setProperty('height', '850px', 'important');
-        target.style.setProperty('min-height', '850px', 'important');
+        const targetHeight = `${Math.min(Math.max(height, 850), 2400)}px`;
+        target.style.setProperty('height', targetHeight, 'important');
+        target.style.setProperty('min-height', targetHeight, 'important');
       } else {
         target.style.removeProperty('height');
         target.style.removeProperty('min-height');

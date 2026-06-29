@@ -6,6 +6,7 @@
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   const ASSET_BUILD = 'battle-game-focus-20260623';
+  const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
   const TOPIC_TITLES = {
     food: 'Berlin Food Battle',
     districts: 'Berlin District Battle',
@@ -33,6 +34,24 @@
 
     document.head.appendChild(preconnect);
     document.head.appendChild(font);
+  }
+
+  function loadGamesPreviewRail(callback) {
+    if (window.BerlinWalkGamesPreviewRail) {
+      callback();
+      return;
+    }
+    const existing = document.querySelector('script[data-bw-games-preview-rail]');
+    if (existing) {
+      existing.addEventListener('load', callback, { once: true });
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = new URL(`js/games-preview-rail.js?v=${GAMES_PREVIEW_BUILD}`, BASE_URL).toString();
+    script.defer = true;
+    script.dataset.bwGamesPreviewRail = 'true';
+    script.addEventListener('load', callback, { once: true });
+    document.head.appendChild(script);
   }
 
   function isValidHeight(value) {
@@ -123,6 +142,7 @@
                 <a href="${BOOKING_URL}">Book the Walking Tour</a>
               </div>
             </div>
+            <section class="bw-battle-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
           </section>
         </main>
       `;
@@ -135,6 +155,19 @@
           if (!target) return;
           event.preventDefault();
           target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      });
+      this._renderGamesPreview();
+    }
+
+    _renderGamesPreview() {
+      const target = this.querySelector('[data-bw-games-preview]');
+      if (!target) return;
+      loadGamesPreviewRail(() => {
+        if (!window.BerlinWalkGamesPreviewRail) return;
+        window.BerlinWalkGamesPreviewRail.render(target, {
+          current: 'berlin-battle',
+          source: 'berlin_battle_page'
         });
       });
     }
@@ -268,6 +301,12 @@
           grid-template-rows: auto minmax(0, 1fr);
           margin: 0 auto;
           max-width: 1200px;
+          position: relative;
+          z-index: 1;
+        }
+
+        .bw-battle-games-preview {
+          margin-top: 48px;
           position: relative;
           z-index: 1;
         }

@@ -2,7 +2,26 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'day-survival-full-v1b-20260627';
+const ASSET_BUILD = 'day-survival-mobile-copy-v8b-20260629';
+const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
+
+function loadGamesPreviewRail(callback) {
+  if (window.BerlinWalkGamesPreviewRail) {
+    callback();
+    return;
+  }
+  const existing = document.querySelector('script[data-bw-games-preview-rail]');
+  if (existing) {
+    existing.addEventListener('load', callback, { once: true });
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = new URL(`js/games-preview-rail.js?v=${GAMES_PREVIEW_BUILD}`, BASE_URL).toString();
+  script.defer = true;
+  script.dataset.bwGamesPreviewRail = 'true';
+  script.addEventListener('load', callback, { once: true });
+  document.head.appendChild(script);
+}
 
 class BwBerlinDaySurvivalPage extends HTMLElement {
   connectedCallback() {
@@ -80,7 +99,8 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
           gap: 34px 58px;
           grid-template-areas:
             "content game"
-            "cta game";
+            "cta game"
+            "more more";
           grid-template-columns: minmax(0, 1fr) minmax(360px, 460px);
           margin: 0 auto;
           max-width: 1180px;
@@ -174,6 +194,11 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
           padding: 24px;
         }
 
+        .bw-day-games-preview {
+          grid-area: more;
+          min-width: 0;
+        }
+
         .bw-day-tour-cta h2 {
           color: var(--green-dark);
           font-size: 20px;
@@ -250,7 +275,8 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
             grid-template-areas:
               "content"
               "game"
-              "cta";
+              "cta"
+              "more";
             grid-template-columns: 1fr;
             padding: 44px 18px 20px;
           }
@@ -324,6 +350,8 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
           <p>Now let me show you the city properly. Join my ~2h Berlin walking tour from Alexanderplatz and make the first day make sense.</p>
           <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=game_page&utm_medium=berlin_day_survival&utm_campaign=berlinwalk_games&utm_content=page_cta">Book the Walking Tour</a>
         </section>
+
+        <section class="bw-day-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
       </main>
     `;
   }
@@ -337,7 +365,21 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
       if (page) this._resizeObserver.observe(page);
     }
     this._timers = [120, 700, 1600].map((delay) => window.setTimeout(() => this._syncWixHostHeight(), delay));
+    this._renderGamesPreview();
     this._syncWixHostHeight();
+  }
+
+  _renderGamesPreview() {
+    const target = this.querySelector('[data-bw-games-preview]');
+    if (!target) return;
+    loadGamesPreviewRail(() => {
+      if (!window.BerlinWalkGamesPreviewRail) return;
+      window.BerlinWalkGamesPreviewRail.render(target, {
+        current: 'berlin-day-survival',
+        source: 'berlin_day_survival_page'
+      });
+      this._queueHostSync();
+    });
   }
 
   _queueHostSync() {
@@ -357,7 +399,7 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
       this.closest('section'),
     ].filter(Boolean);
 
-    const targetHeight = `${Math.min(Math.max(height + 8, 760), 1800)}px`;
+    const targetHeight = `${Math.min(Math.max(height + 8, 760), 2400)}px`;
     targets.forEach((target) => {
       target.style.setProperty('height', targetHeight, 'important');
       target.style.setProperty('min-height', targetHeight, 'important');

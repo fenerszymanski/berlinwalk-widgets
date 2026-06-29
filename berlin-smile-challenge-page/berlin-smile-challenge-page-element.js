@@ -3,6 +3,25 @@ const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
 const ASSET_BUILD = 'smile-image-frame-20260623';
+const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
+
+function loadGamesPreviewRail(callback) {
+  if (window.BerlinWalkGamesPreviewRail) {
+    callback();
+    return;
+  }
+  const existing = document.querySelector('script[data-bw-games-preview-rail]');
+  if (existing) {
+    existing.addEventListener('load', callback, { once: true });
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = new URL(`js/games-preview-rail.js?v=${GAMES_PREVIEW_BUILD}`, BASE_URL).toString();
+  script.defer = true;
+  script.dataset.bwGamesPreviewRail = 'true';
+  script.addEventListener('load', callback, { once: true });
+  document.head.appendChild(script);
+}
 
 class BwBerlinSmileChallengePage extends HTMLElement {
   connectedCallback() {
@@ -60,7 +79,8 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           grid-template-columns: minmax(0, 1fr) minmax(360px, 470px);
           grid-template-areas:
             "content game"
-            "cta game";
+            "cta game"
+            "more more";
           gap: 34px 62px;
           margin: 0 auto;
           max-width: 1180px;
@@ -151,6 +171,11 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           grid-area: cta;
           max-width: 650px;
           padding: 24px;
+        }
+
+        .bw-smile-games-preview {
+          grid-area: more;
+          min-width: 0;
         }
 
         .bw-smile-tour-cta h2 {
@@ -249,7 +274,8 @@ class BwBerlinSmileChallengePage extends HTMLElement {
             grid-template-areas:
               "content"
               "game"
-              "cta";
+              "cta"
+              "more";
             gap: 32px;
             min-height: 0;
             padding: 48px 20px 28px;
@@ -323,6 +349,8 @@ class BwBerlinSmileChallengePage extends HTMLElement {
           <p>Come walk the city with me. I run a tip-based Berlin walking tour through the places where the real city starts to make sense.</p>
           <a href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based">Book the walking tour</a>
         </aside>
+
+        <section class="bw-smile-games-preview" data-bw-games-preview aria-label="More BerlinWalk games"></section>
       </main>
     `;
   }
@@ -334,9 +362,23 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
     this._handleHostResize = () => this._syncWixHostHeight();
     window.addEventListener('resize', this._handleHostResize, { passive: true });
+    this._renderGamesPreview();
     this._syncWixHostHeight();
     this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 100));
     this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 800));
+  }
+
+  _renderGamesPreview() {
+    const target = this.querySelector('[data-bw-games-preview]');
+    if (!target) return;
+    loadGamesPreviewRail(() => {
+      if (!window.BerlinWalkGamesPreviewRail) return;
+      window.BerlinWalkGamesPreviewRail.render(target, {
+        current: 'berlin-smile-challenge',
+        source: 'berlin_smile_challenge_page'
+      });
+      this._syncWixHostHeight();
+    });
   }
 
   _syncWixHostHeight() {
@@ -348,11 +390,14 @@ class BwBerlinSmileChallengePage extends HTMLElement {
       this.closest('section'),
     ].filter(Boolean);
 
+    const page = this.querySelector('.bw-smile-page');
+    const height = page ? Math.ceil(page.getBoundingClientRect().height + 24) : 900;
     const isDesktop = window.matchMedia('(min-width: 941px)').matches;
     targets.forEach((target) => {
       if (isDesktop) {
-        target.style.setProperty('height', '900px', 'important');
-        target.style.setProperty('min-height', '900px', 'important');
+        const targetHeight = `${Math.min(Math.max(height, 900), 2400)}px`;
+        target.style.setProperty('height', targetHeight, 'important');
+        target.style.setProperty('min-height', targetHeight, 'important');
       } else {
         target.style.removeProperty('height');
         target.style.removeProperty('min-height');
