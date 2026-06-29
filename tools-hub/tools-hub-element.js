@@ -1071,6 +1071,43 @@ class BWToolsHubElement extends HTMLElement {
     }
   }
 
+  _renderSpotlight(active) {
+    const root = this.querySelector('.bw-spotlight-root');
+    if (!root) return;
+
+    const config = this._spotlightTool || {};
+    const slug = String(config.slug || '').trim();
+    const tool = slug ? this._tools.find((item) => item && item.slug === slug) : null;
+
+    if (active || !tool) {
+      root.innerHTML = '';
+      return;
+    }
+
+    const href = `https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}`;
+    const image = typeof tool.image === 'string' && tool.image.trim() ? tool.image.trim() : BW_TOOLS_HUB_DEFAULT_IMAGE;
+    const label = this._escapeHtml(config.label || 'Featured Tool');
+    const headline = this._escapeHtml(config.headline || tool.title || 'Featured Berlin tool');
+    const body = this._escapeHtml(config.body || tool.lead || 'Open the featured Berlin planning tool.');
+    const cta = this._escapeHtml(config.cta || 'Open tool');
+    const meta = [tool.type, tool.category].filter(Boolean).map((part) => this._escapeHtml(part)).join(' / ');
+
+    root.innerHTML = `
+      <section class="bw-spotlight-section" aria-label="Featured Berlin planning tool">
+        <a class="bw-spotlight-card" href="${href}" target="_top">
+          <span class="bw-spotlight-icon" aria-hidden="true"><img src="${this._escapeAttribute(image)}" alt="" loading="lazy" decoding="async"></span>
+          <span class="bw-spotlight-copy">
+            <span class="bw-spotlight-label">${label}</span>
+            <h2>${headline}</h2>
+            <p>${body}</p>
+            ${meta ? `<span class="bw-spotlight-meta">${meta}</span>` : ''}
+          </span>
+          <span class="bw-spotlight-cta">${cta}</span>
+        </a>
+      </section>
+    `;
+  }
+
   _renderFeatured(active) {
     const root = this.querySelector('.bw-featured-root');
     if (!root) return;
