@@ -1,3 +1,9 @@
+## 2026-06-29 - Day Survival v8 local fail/audio fix
+
+- Commit `55ecfbd` (`Fix Day Survival fail state and voiceovers`) is local only, not pushed. It changes Day Survival to fail any final wallet below `EUR 0` via `Budget Busted`, failed-result copy, red negative wallet score, and keeps the EUR 10 clean route viable (`Smart Wanderer`, `EUR 0.60` in local QA).
+- Images now render through full-image `object-fit: contain` scene/result panels with centered media, less aggressive background pattern, opaque result card, and share-card canvas drawing without extra crop. Local Playwright desktop negative fail and 390px mobile positive survive passed with overflowX `0`; QA screenshots are under `output/playwright/day-survival-v8-20260629/` and are intentionally untracked.
+- All 32 runtime voice clips were regenerated through ElevenLabs with `Jonas - Confident and Trustworthy` (`60UU378MZ8YbeLyaF7TI`) for one consistent German-accented English voice. Missing variant clips were added, obsolete `hydration-club-mate.mp3` was removed, and voice audit found 32 targets / 32 actual / no missing/extra/small files. Root Wix helper is locally bumped to `day-survival-fail-audio-v8-20260629`; dry-run against current custom embed revision `22` passed. Next explicit step: push commit, wait for Pages, run root upsert helper, then live desktop/mobile QA.
+
 ## 2026-06-29 - Berlin Museums Map design polish
 
 - `berlin-museums-map/index.html` polished after Yusuf flagged the Wix CMS tool page design: hero made tighter, quick-fact chips added, sidebar controls compressed, map/list heights adjusted, and root box sizing fixed to prevent desktop overflow.
