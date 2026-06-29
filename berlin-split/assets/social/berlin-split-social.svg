@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Berlin Split: The Lost Archive cover</title>
+  <desc id="desc">A stylized Berlin archive desk with divided map, files, stamps and BerlinWalk green and yellow accents.</desc>
+  <defs>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#CFE2BF" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="desk" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#FAFAF5"/>
+      <stop offset="1" stop-color="#EAF3DD"/>
+    </linearGradient>
+    <linearGradient id="map" x1="0" x2="1">
+      <stop offset="0" stop-color="#173E45"/>
+      <stop offset="1" stop-color="#0B3417"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="12" dy="12" stdDeviation="0" flood-color="#073B16" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#desk)"/>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.7"/>
+  <rect x="0" y="0" width="840" height="12" fill="#FFE600"/>
+  <rect x="62" y="70" width="505" height="408" rx="8" fill="#193A42" filter="url(#shadow)"/>
+  <path d="M126 150C178 92 298 118 344 166C394 112 500 136 546 196C584 246 534 320 574 382C514 438 416 405 354 454C286 414 190 456 132 392C72 326 84 214 126 150Z" fill="url(#map)" stroke="#FAFAF5" stroke-opacity="0.45" stroke-width="4"/>
+  <path d="M320 104C282 160 316 186 268 230C226 268 274 318 238 360C214 388 250 434 206 474" fill="none" stroke="#FFE600" stroke-width="9" stroke-linecap="round" stroke-dasharray="18 15"/>
+  <path d="M100 342C184 302 224 370 306 326C394 278 458 310 536 264" fill="none" stroke="#C5E1A5" stroke-width="12" stroke-linecap="round" opacity="0.75"/>
+  <circle cx="354" cy="236" r="28" fill="#E63946" opacity="0.22"/>
+  <circle cx="354" cy="236" r="13" fill="#E63946" stroke="#FAFAF5" stroke-width="5"/>
+  <rect x="636" y="86" width="385" height="142" rx="8" fill="#FFFFFF" stroke="#073B16" stroke-width="5" filter="url(#shadow)" transform="rotate(-4 828.5 157)"/>
+  <rect x="684" y="130" width="212" height="16" fill="#1B5E20"/>
+  <rect x="684" y="165" width="290" height="12" fill="#C5E1A5"/>
+  <rect x="684" y="193" width="238" height="12" fill="#C5E1A5"/>
+  <rect x="760" y="255" width="330" height="128" rx="8" fill="#FFFFFF" stroke="#073B16" stroke-width="5" filter="url(#shadow)" transform="rotate(5 925 319)"/>
+  <rect x="805" y="300" width="206" height="15" fill="#E63946"/>
+  <rect x="805" y="334" width="238" height="11" fill="#C5E1A5"/>
+  <rect x="805" y="360" width="166" height="11" fill="#C5E1A5"/>
+  <g transform="translate(646 404) rotate(-9)">
+    <rect width="180" height="88" rx="44" fill="#FFE600" stroke="#073B16" stroke-width="6"/>
+    <circle cx="66" cy="44" r="14" fill="#073B16"/>
+    <path d="M92 30h38v28H92z" fill="none" stroke="#073B16" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M104 24v12M118 24v12" stroke="#073B16" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <rect x="650" y="476" width="390" height="26" rx="13" fill="#073B16"/>
+  <rect x="650" y="520" width="300" height="18" rx="9" fill="#7CB342"/>
+  <rect x="650" y="556" width="220" height="18" rx="9" fill="#E63946"/>
+  <rect x="66" y="530" width="310" height="18" rx="9" fill="#073B16"/>
+  <rect x="66" y="562" width="210" height="14" rx="7" fill="#7CB342"/>
+</svg>

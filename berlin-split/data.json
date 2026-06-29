@@ -1,0 +1,304 @@
+{
+  "version": "2026-06-29-berlin-split-v1",
+  "title": "Berlin Split: The Lost Archive",
+  "subtitle": "Can you read Berlin before the Wall disappears?",
+  "shareUrl": "https://www.berlinwalk.com/games/berlin-split",
+  "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
+  "settings": {
+    "startingIntegrity": 100,
+    "startingClues": 3,
+    "cluePenalty": 5,
+    "cleanRunIntegrity": 85
+  },
+  "copy": {
+    "openWithSound": "Open with sound",
+    "openQuietly": "Open quietly",
+    "tourCta": "Walk the real city",
+    "restart": "Reopen the archive",
+    "cleanRestart": "Start a clean run",
+    "checkpoint": "Reopen last safe file"
+  },
+  "acts": [
+    {
+      "id": "simple",
+      "label": "Act 1",
+      "title": "The City Looks Simple",
+      "lead": "The first files look obvious. Berlin rarely is."
+    },
+    {
+      "id": "border",
+      "label": "Act 2",
+      "title": "The Border Gets Complicated",
+      "lead": "The line on the map starts to behave less like a line."
+    },
+    {
+      "id": "rebuilt",
+      "label": "Act 3",
+      "title": "The City Rebuilds Itself",
+      "lead": "After 1990, Berlin does not simply erase the split. It rebuilds around it."
+    }
+  ],
+  "zones": [
+    { "id": "east", "label": "East file", "short": "East", "x": 68, "y": 38 },
+    { "id": "west", "label": "West file", "short": "West", "x": 28, "y": 44 },
+    { "id": "border", "label": "Border file", "short": "Border", "x": 50, "y": 48 },
+    { "id": "rebuilt", "label": "Rebuilt file", "short": "Rebuilt", "x": 55, "y": 68 },
+    { "id": "layered", "label": "Layered file", "short": "Layered", "x": 46, "y": 30 }
+  ],
+  "archivePieces": [
+    { "id": "tv-signal", "name": "TV Tower Signal", "mark": "TV", "description": "A file for the East Berlin square that still dominates the skyline." },
+    { "id": "red-city-seal", "name": "Red City Seal", "mark": "RR", "description": "Proof that some Berlin symbols are older than the division." },
+    { "id": "island-fragment", "name": "Island Fragment", "mark": "MI", "description": "Imperial, damaged, restored, and still being interpreted." },
+    { "id": "transit-stamp", "name": "Transit Stamp", "mark": "FR", "description": "A crossing file for Friedrichstrasse and the divided railway city." },
+    { "id": "kiez-echo", "name": "Kiez Echo", "mark": "KB", "description": "A West Berlin neighborhood shaped by the nearby border." },
+    { "id": "painted-wall", "name": "Painted Wall", "mark": "WG", "description": "A border remnant that became a memorial and an image machine." },
+    { "id": "palast-shadow", "name": "Palast Shadow", "mark": "HF", "description": "A vanished GDR building beneath a rebuilt palace facade." },
+    { "id": "void-map", "name": "Void Map", "mark": "PP", "description": "A map piece from the empty zone that became a new center." },
+    { "id": "park-strip", "name": "Park Strip", "mark": "MP", "description": "A former border strip that turned into a Sunday Berlin ritual." },
+    { "id": "final-ledger", "name": "Final Ledger", "mark": "HM", "description": "The file that proves Berlin is read in layers, not sides." }
+  ],
+  "missions": [
+    {
+      "id": "alexanderplatz-signal",
+      "act": "simple",
+      "location": "Alexanderplatz",
+      "title": "Alexanderplatz Signal",
+      "kicker": "File 01",
+      "mechanic": "stamp",
+      "mapPoint": { "x": 66, "y": 37 },
+      "instruction": "Stamp the archive layer this evidence belongs to.",
+      "evidence": "A wide socialist-era square, the TV Tower above it, and the World Time Clock pulling everyone toward the same meeting point.",
+      "clue": "The square has older roots, but its tourist image was powerfully shaped by East Berlin urban planning.",
+      "piece": "tv-signal",
+      "stereotype": "East Berlin was only grey.",
+      "options": [
+        { "id": "east", "label": "East file", "detail": "The postwar image points strongly east.", "integrityLoss": 0, "quality": "clean", "feedback": "The file locks. Alexanderplatz is older than the GDR, but the version tourists read first is unmistakably East Berlin." },
+        { "id": "west", "label": "West file", "detail": "Treat it like a polished West Berlin center.", "integrityLoss": 18, "quality": "bad", "feedback": "The archive rejects the polish. This is not the Ku'damm story; it is the East Berlin center tourists still photograph." },
+        { "id": "border", "label": "Border file", "detail": "Read it as a crossing point.", "integrityLoss": 12, "quality": "partial", "feedback": "A tempting stamp, but the square was not the crossing logic. Its power is central East Berlin identity." },
+        { "id": "layered", "label": "Layered file", "detail": "Older city plus GDR image.", "integrityLoss": 4, "quality": "near", "feedback": "Good instinct. The archive accepts the nuance, but the mission file wants the East Berlin signal." }
+      ]
+    },
+    {
+      "id": "rotes-rathaus-file",
+      "act": "simple",
+      "location": "Rotes Rathaus",
+      "title": "Rotes Rathaus File",
+      "kicker": "File 02",
+      "mechanic": "stamp",
+      "mapPoint": { "x": 61, "y": 42 },
+      "instruction": "Place the seal without letting the red brick fool you.",
+      "evidence": "A red-brick city hall near Alexanderplatz. It looks like a simple East Berlin clue, but its story reaches back before the Cold War.",
+      "clue": "The building became part of East Berlin administration, but it was not born as a GDR building.",
+      "piece": "red-city-seal",
+      "stereotype": "Everything in the East-looking center is GDR architecture.",
+      "options": [
+        { "id": "layered", "label": "Layered file", "detail": "Older Berlin, later divided-city use.", "integrityLoss": 0, "quality": "clean", "feedback": "The seal holds. Rotes Rathaus is exactly the kind of building Berlin uses to trick fast readers." },
+        { "id": "east", "label": "East file", "detail": "Read it only through GDR administration.", "integrityLoss": 9, "quality": "partial", "feedback": "The archive bends, not breaks. East Berlin used it, but the building is older than that file." },
+        { "id": "west", "label": "West file", "detail": "Move it to the western civic record.", "integrityLoss": 18, "quality": "bad", "feedback": "The seal smears. This was not the West Berlin city hall story." },
+        { "id": "rebuilt", "label": "Rebuilt file", "detail": "Treat it mainly as a post-1990 symbol.", "integrityLoss": 12, "quality": "partial", "feedback": "Too late. Reunification changes the frame, but the file begins much earlier." }
+      ]
+    },
+    {
+      "id": "museum-island-scan",
+      "act": "simple",
+      "location": "Museum Island",
+      "title": "Museum Island Damage Scan",
+      "kicker": "File 03",
+      "mechanic": "stamp",
+      "mapPoint": { "x": 55, "y": 39 },
+      "instruction": "Sort the damage report into the right archive tray.",
+      "evidence": "Columns, bullet scars, royal collections, war damage, restoration choices, and tourists moving through the same stones.",
+      "clue": "This is not a clean East/West file. It is imperial Berlin, war, GDR-era restoration, and today at once.",
+      "piece": "island-fragment",
+      "stereotype": "Berlin history can be sorted into one period at a time.",
+      "options": [
+        { "id": "layered", "label": "Layered file", "detail": "Imperial, damaged, restored, and present-day.", "integrityLoss": 0, "quality": "clean", "feedback": "The scan stabilizes. Museum Island is a layered archive, not a single regime label." },
+        { "id": "east", "label": "East file", "detail": "Focus on its East Berlin location.", "integrityLoss": 10, "quality": "partial", "feedback": "The file is incomplete. Location matters, but the island carries much older and wider traces." },
+        { "id": "west", "label": "West file", "detail": "Move the museum prestige west.", "integrityLoss": 20, "quality": "bad", "feedback": "The archive rejects it. Museum Island sits in the old center, not in the West Berlin prestige file." },
+        { "id": "rebuilt", "label": "Rebuilt file", "detail": "Treat the present restoration as the main story.", "integrityLoss": 7, "quality": "near", "feedback": "Close, but too modern. Restoration is one layer, not the whole island." }
+      ]
+    },
+    {
+      "id": "friedrichstrasse-checkpoint",
+      "act": "border",
+      "location": "Friedrichstrasse",
+      "title": "Friedrichstrasse Checkpoint",
+      "kicker": "File 04",
+      "mechanic": "route",
+      "mapPoint": { "x": 47, "y": 45 },
+      "instruction": "Choose the route that keeps the transit record intact.",
+      "evidence": "A station, a border procedure, a farewell hall, and a shopping street that still looks too normal for what happened here.",
+      "clue": "Friedrichstrasse was both everyday transit and emotional border theatre.",
+      "piece": "transit-stamp",
+      "stereotype": "The Wall only mattered where you can still see concrete.",
+      "options": [
+        { "id": "station-crossing", "label": "Station crossing file", "detail": "The border hides inside transport and paperwork.", "integrityLoss": 0, "quality": "clean", "feedback": "The stamp lands. Friedrichstrasse proves the border was also a routine, a platform, and a goodbye." },
+        { "id": "shopping-street", "label": "Shopping street file", "detail": "Ignore the crossing and read the storefronts.", "integrityLoss": 16, "quality": "bad", "feedback": "The file loses pressure. The street matters, but this mission is about the border operating inside normal city movement." },
+        { "id": "wall-remnant", "label": "Concrete wall file", "detail": "Only trust visible Wall remains.", "integrityLoss": 12, "quality": "partial", "feedback": "The archive shakes. Berlin's border story is not always a slab of concrete." },
+        { "id": "post-1990", "label": "Modern street file", "detail": "Treat it as a reunified shopping corridor.", "integrityLoss": 14, "quality": "partial", "feedback": "Too clean. The modern street sits on top of a much heavier crossing file." }
+      ]
+    },
+    {
+      "id": "kreuzberg-border-echo",
+      "act": "border",
+      "location": "Kreuzberg",
+      "title": "Kreuzberg Border Echo",
+      "kicker": "File 05",
+      "mechanic": "stamp",
+      "mapPoint": { "x": 43, "y": 56 },
+      "instruction": "Mark what the neighborhood was carrying.",
+      "evidence": "A West Berlin Kiez pressed close to the Wall: cheap rents, migrant life, political edges, and streets that did not feel like postcard West Germany.",
+      "clue": "West Berlin was not a normal rich western city. It was isolated and politically strange.",
+      "piece": "kiez-echo",
+      "stereotype": "West Berlin was simply polished and comfortable.",
+      "options": [
+        { "id": "border", "label": "Border file", "detail": "A western neighborhood shaped by the edge.", "integrityLoss": 0, "quality": "clean", "feedback": "The echo is restored. Kreuzberg helps break the easy West equals polished myth." },
+        { "id": "west", "label": "West file", "detail": "File it as straightforward West Berlin.", "integrityLoss": 7, "quality": "near", "feedback": "The archive accepts the side but not the simplification. Kreuzberg was West Berlin with border pressure." },
+        { "id": "east", "label": "East file", "detail": "Read alternative culture as an East clue.", "integrityLoss": 18, "quality": "bad", "feedback": "The file jumps sides. Alternative Berlin did not map neatly onto East Berlin." },
+        { "id": "rebuilt", "label": "Rebuilt file", "detail": "Treat the Kiez as mostly post-1990 image.", "integrityLoss": 14, "quality": "partial", "feedback": "Too late again. Today's image has older border-era roots." }
+      ]
+    },
+    {
+      "id": "east-side-gallery-memory",
+      "act": "border",
+      "location": "East Side Gallery",
+      "title": "Painted Wall Memory",
+      "kicker": "File 06",
+      "mechanic": "route",
+      "mapPoint": { "x": 60, "y": 58 },
+      "instruction": "Stabilize the Wall fragment without turning it into only a photo backdrop.",
+      "evidence": "Painted concrete, crowds, river light, souvenir poses, and a memorial trying to stay louder than the Instagram frame.",
+      "clue": "This is Wall remnant, open-air gallery, memorial, tourist icon, and post-1989 transformation at once.",
+      "piece": "painted-wall",
+      "stereotype": "The Wall is only a dramatic tourist backdrop now.",
+      "options": [
+        { "id": "layered", "label": "Layered file", "detail": "Memorial, art, border remnant, and tourist symbol.", "integrityLoss": 0, "quality": "clean", "feedback": "The paint settles. The Wall survives here because the meaning keeps changing." },
+        { "id": "border", "label": "Border file", "detail": "Keep only the Cold War border layer.", "integrityLoss": 5, "quality": "near", "feedback": "Strong, but narrow. The border layer is real; the gallery layer is now part of the evidence too." },
+        { "id": "rebuilt", "label": "Rebuilt file", "detail": "Treat it mainly as a post-1989 art site.", "integrityLoss": 8, "quality": "partial", "feedback": "The archive wants more weight. The art exists because this was border concrete." },
+        { "id": "east", "label": "East file", "detail": "File it only by its eastern-side location.", "integrityLoss": 14, "quality": "partial", "feedback": "Side alone is too small. This fragment became a citywide memory object." }
+      ]
+    },
+    {
+      "id": "palast-humboldt-layer",
+      "act": "rebuilt",
+      "location": "Humboldt Forum",
+      "title": "Palast Shadow Alignment",
+      "kicker": "File 07",
+      "mechanic": "align",
+      "mapPoint": { "x": 56, "y": 42 },
+      "instruction": "Slide the vanished building shadow until the archive recognizes the present facade.",
+      "evidence": "A palace facade, a missing GDR parliament and cultural building, and a rebuilt center that still argues with itself.",
+      "clue": "The archive stabilizes when the old Palast shadow sits mostly behind the new palace file, not fully erased and not fully dominant.",
+      "piece": "palast-shadow",
+      "stereotype": "Reunified Berlin simply removed the East and moved on.",
+      "target": { "value": 74, "tolerance": 12 },
+      "successFeedback": "The shadow aligns. This site is not just a new facade; it is a public argument about what Berlin chooses to rebuild.",
+      "nearFeedback": "The image flickers. You can feel the conflict, but the Palast shadow is not quite placed.",
+      "failFeedback": "The facade tears away from the file. The point is not to erase one building or crown another; it is to read the replacement."
+    },
+    {
+      "id": "potsdamer-platz-void",
+      "act": "rebuilt",
+      "location": "Potsdamer Platz",
+      "title": "Potsdamer Platz Void",
+      "kicker": "File 08",
+      "mechanic": "stamp",
+      "mapPoint": { "x": 42, "y": 48 },
+      "instruction": "Stamp the file that explains the missing center.",
+      "evidence": "A place that once stood busy, then became border emptiness, then returned as a corporate-new city center.",
+      "clue": "The strange part is the gap: destruction, border zone, empty land, then post-1990 rebuilding.",
+      "piece": "void-map",
+      "stereotype": "Modern Berlin grew naturally from old Berlin without interruption.",
+      "options": [
+        { "id": "rebuilt", "label": "Rebuilt file", "detail": "A post-1990 center built over a void.", "integrityLoss": 0, "quality": "clean", "feedback": "The void fills in. Potsdamer Platz makes the missing years visible if you know where to look." },
+        { "id": "west", "label": "West file", "detail": "Treat it as a West Berlin business center.", "integrityLoss": 13, "quality": "partial", "feedback": "The archive refuses the shortcut. The site touched the western side, but the key evidence is the border void and rebuild." },
+        { "id": "east", "label": "East file", "detail": "Treat it as an East Berlin redevelopment.", "integrityLoss": 16, "quality": "bad", "feedback": "The pressure is off. This file is about a former center emptied by the border and remade after reunification." },
+        { "id": "border", "label": "Border file", "detail": "Keep it only in the Wall zone.", "integrityLoss": 5, "quality": "near", "feedback": "The border layer is real, but the mission needs the rebuild after the void." }
+      ]
+    },
+    {
+      "id": "mauerpark-strip",
+      "act": "rebuilt",
+      "location": "Mauerpark",
+      "title": "Mauerpark Strip",
+      "kicker": "File 09",
+      "mechanic": "route",
+      "mapPoint": { "x": 51, "y": 22 },
+      "instruction": "Recover the Sunday park without losing the border strip beneath it.",
+      "evidence": "Flea market energy, karaoke crowds, grass, families, tourists, and a name that still says Wall.",
+      "clue": "The park works because a former edge became a shared social space.",
+      "piece": "park-strip",
+      "stereotype": "If a place feels fun now, the old border story is gone.",
+      "options": [
+        { "id": "border", "label": "Border strip file", "detail": "A former edge turned into public ritual.", "integrityLoss": 0, "quality": "clean", "feedback": "The park recovers. Berlin often hides heavy history under very ordinary weekend life." },
+        { "id": "rebuilt", "label": "Rebuilt leisure file", "detail": "Focus on the post-1990 park life.", "integrityLoss": 6, "quality": "near", "feedback": "Close. The present-day park matters, but the name is still telling you what was there." },
+        { "id": "east", "label": "East file", "detail": "Read the Wall name as East Berlin only.", "integrityLoss": 15, "quality": "bad", "feedback": "The file narrows too much. The border shaped both sides of the edge." },
+        { "id": "west", "label": "West file", "detail": "Read the park as a western cultural scene.", "integrityLoss": 12, "quality": "partial", "feedback": "The archive tilts. Today's culture is real, but the old border strip is the key." }
+      ]
+    },
+    {
+      "id": "hackescher-final",
+      "act": "rebuilt",
+      "location": "Hackescher Markt",
+      "title": "Final Delivery",
+      "kicker": "File 10",
+      "mechanic": "stamp",
+      "mapPoint": { "x": 57, "y": 35 },
+      "instruction": "Seal the archive with the reading Berlin needs.",
+      "evidence": "A final walk from the old center into today's city: courtyards, trains, nightlife, restored facades, and memory under the surface.",
+      "clue": "The archive is complete only when Berlin is read as a layered city, not as a scoreboard between sides.",
+      "piece": "final-ledger",
+      "stereotype": "Berlin can be explained by picking one side.",
+      "options": [
+        { "id": "layered", "label": "Layered city file", "detail": "Berlin is read through overlapping times, borders, and rebuilds.", "integrityLoss": 0, "quality": "clean", "feedback": "The archive closes cleanly. You did not just cross Berlin; you learned how to read it." },
+        { "id": "east", "label": "East file", "detail": "Finish with the old center as an East Berlin story.", "integrityLoss": 14, "quality": "partial", "feedback": "The archive stays open. The East layer is real, but it is not the whole ending." },
+        { "id": "west", "label": "West file", "detail": "Finish with today's consumer city.", "integrityLoss": 18, "quality": "bad", "feedback": "The file loses its spine. Modern life is visible, but it sits on older lines." },
+        { "id": "rebuilt", "label": "Rebuilt file", "detail": "Finish with reunification and restoration.", "integrityLoss": 7, "quality": "near", "feedback": "Almost. Rebuild is a major layer, but Berlin keeps more than one file open." }
+      ]
+    }
+  ],
+  "endings": [
+    {
+      "id": "lost-tourist",
+      "title": "Lost Tourist",
+      "threshold": 0,
+      "description": "The archive collapsed, but Berlin did what Berlin does: it made the simple version impossible.",
+      "tip": "Retry from your last safe file and read the evidence before the side."
+    },
+    {
+      "id": "checkpoint-rookie",
+      "title": "Checkpoint Rookie",
+      "threshold": 1,
+      "description": "You crossed the story, but the archive is full of warning stamps.",
+      "tip": "A cleaner run means fewer clues and fewer rushed stamps."
+    },
+    {
+      "id": "border-reader",
+      "title": "Border Reader",
+      "threshold": 45,
+      "description": "You can spot the obvious line and some of the hidden ones.",
+      "tip": "The next level is reading places that look ordinary now."
+    },
+    {
+      "id": "wall-detective",
+      "title": "Wall Detective",
+      "threshold": 65,
+      "description": "You read the split without turning Berlin into a cartoon of East and West.",
+      "tip": "Try a run with fewer clues to protect more of the archive."
+    },
+    {
+      "id": "archive-keeper",
+      "title": "Archive Keeper",
+      "threshold": 80,
+      "description": "The files survived, the map makes sense, and the city stayed complicated.",
+      "tip": "A no-clue clean run can still unlock the top rank."
+    },
+    {
+      "id": "myth-breaker",
+      "title": "Myth Breaker",
+      "threshold": 90,
+      "description": "You broke the tourist version of Berlin and kept the archive almost intact.",
+      "tip": "This is the run worth sharing."
+    }
+  ]
+}

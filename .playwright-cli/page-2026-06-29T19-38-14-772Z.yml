@@ -1,0 +1,80 @@
+- main [ref=e3]:
+  - region "Berlin Day Survival" [ref=e4]:
+    - generic [ref=e5]: Playable now
+    - heading "Berlin Day Survival" [level=1] [ref=e6]:
+      - text: Berlin Day
+      - generic [ref=e7]: Survival
+    - paragraph [ref=e8]: Pick a budget, survive six small Berlin decisions, and find out whether your day ends as smart wandering or late-night damage control.
+    - list [ref=e9]:
+      - listitem [ref=e10]: Choose EUR 10, EUR 15 or EUR 20
+      - listitem [ref=e11]: Handle breakfast, water, lunch, benches and late-night food
+      - listitem [ref=e12]: Play with scene sounds, dry feedback voice and share cards
+  - iframe [ref=e14]:
+    - main [ref=f2e2]:
+      - generic [ref=f2e3]:
+        - generic [ref=f2e4]:
+          - generic [ref=f2e5]:
+            - img "BerlinWalk BW logo" [ref=f2e6]
+            - generic [ref=f2e7]: BerlinWalk Games
+          - button "Sound off" [ref=f2e8] [cursor=pointer]
+        - generic [ref=f2e10]:
+          - figure [ref=f2e11]:
+            - img "Berlin Day Survival illustrated snack counter" [ref=f2e12]
+          - generic [ref=f2e13]:
+            - paragraph [ref=f2e14]: Playable Berlin
+            - heading "Berlin Day Survival" [level=1] [ref=f2e15]
+            - paragraph [ref=f2e16]: Your budget is small. Berlin is hungry. Choose wisely.
+          - group "Choose your budget" [ref=f2e17]:
+            - button "EUR 10 Hard Mode Every choice matters. One landmark mistake can end the day." [ref=f2e18] [cursor=pointer]:
+              - strong [ref=f2e19]: EUR 10
+              - generic [ref=f2e20]: Hard Mode
+              - generic [ref=f2e21]: Every choice matters. One landmark mistake can end the day.
+            - button "EUR 15 Normal Mode Enough to be smart, not enough to be careless." [pressed] [ref=f2e22] [cursor=pointer]:
+              - strong [ref=f2e23]: EUR 15
+              - generic [ref=f2e24]: Normal Mode
+              - generic [ref=f2e25]: Enough to be smart, not enough to be careless.
+            - button "EUR 20 Comfort Mode A little room to breathe. Berlin can still find your wallet." [ref=f2e26] [cursor=pointer]:
+              - strong [ref=f2e27]: EUR 20
+              - generic [ref=f2e28]: Comfort Mode
+              - generic [ref=f2e29]: A little room to breathe. Berlin can still find your wallet.
+          - generic [ref=f2e30]:
+            - button "Start with sound" [ref=f2e31] [cursor=pointer]
+            - button "Start quietly" [ref=f2e32] [cursor=pointer]
+      - status
+  - generic [ref=e15]:
+    - heading "Survived the snacks?" [level=2] [ref=e16]
+    - paragraph [ref=e17]: Now let me show you the city properly. Join my ~2h Berlin walking tour from Alexanderplatz and make the first day make sense.
+    - link "Book the Walking Tour" [ref=e18] [cursor=pointer]:
+      - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=game_page&utm_medium=berlin_day_survival&utm_campaign=berlinwalk_games&utm_content=page_cta
+  - region "More BerlinWalk games" [ref=e19]:
+    - generic [ref=e20]:
+      - generic [ref=e21]:
+        - paragraph [ref=e22]: Keep playing
+        - heading "Try another Berlin game" [level=2] [ref=e23]
+      - link "All games" [ref=e24] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/games?utm_source=berlin_day_survival_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=all_games
+    - generic [ref=e25]:
+      - link "Berlin Battle preview image Choice battle Berlin Battle Pick winners across food, districts, museums, nights out and tiny Berlin loyalties. Play Battle ->" [ref=e26] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/games/berlin-battle?utm_source=berlin_day_survival_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berlin-battle
+        - img "Berlin Battle preview image" [ref=e27]
+        - generic [ref=e28]:
+          - generic [ref=e29]: Choice battle
+          - strong [ref=e30]: Berlin Battle
+          - paragraph [ref=e31]: Pick winners across food, districts, museums, nights out and tiny Berlin loyalties.
+          - emphasis [ref=e32]: Play Battle ->
+      - link "Berghain Bouncer preview image Door test Berghain Bouncer A quick club-door pressure game with outfits, answers and one hard look. Try the door ->" [ref=e33] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/games/berghain-bouncer?utm_source=berlin_day_survival_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berghain-bouncer
+        - img "Berghain Bouncer preview image" [ref=e34]
+        - generic [ref=e35]:
+          - generic [ref=e36]: Door test
+          - strong [ref=e37]: Berghain Bouncer
+          - paragraph [ref=e38]: A quick club-door pressure game with outfits, answers and one hard look.
+          - emphasis [ref=e39]: Try the door ->
+      - 'link "Berlin Smile Challenge preview image Social puzzle Berlin Smile Challenge Seven tiny social tests. One mission: make a Berliner almost smile. Start challenge ->" [ref=e40] [cursor=pointer]':
+        - /url: https://www.berlinwalk.com/games/berlin-smile-challenge?utm_source=berlin_day_survival_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berlin-smile-challenge
+        - img "Berlin Smile Challenge preview image" [ref=e41]
+        - generic [ref=e42]:
+          - generic [ref=e43]: Social puzzle
+          - strong [ref=e44]: Berlin Smile Challenge
+          - paragraph [ref=e45]: "Seven tiny social tests. One mission: make a Berliner almost smile."
+          - emphasis [ref=e46]: Start challenge ->

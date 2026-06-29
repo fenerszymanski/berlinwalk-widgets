@@ -1,0 +1,113 @@
+- main "Berlin Battle Pick Your Winner" [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - generic [ref=e7]: Playable Now
+        - heading "Berlin Battle Pick Your Winner" [level=1] [ref=e8]:
+          - text: Berlin Battle
+          - generic [ref=e9]: Pick Your Winner
+        - paragraph [ref=e10]: Food, districts, museums, night plans, transport lines and tiny Berlin loyalties go head to head. Pick fast, get a winner, then meet the real city outside the screen.
+        - list [ref=e11]:
+          - listitem [ref=e12]: Choose between real Berlin favorites
+          - listitem [ref=e13]: Start any one of 10 battle modes
+          - listitem [ref=e14]: Get a shareable winner card
+          - listitem [ref=e15]: Turn the picks into places to visit
+      - generic [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e18]: BerlinWalk
+          - strong [ref=e19]: 10 Battle Modes
+        - iframe [ref=e21]:
+          - main [ref=f2e2]:
+            - generic [ref=f2e3]:
+              - generic [ref=f2e5]:
+                - generic [ref=f2e6]: BerlinWalk Games
+                - heading "Pick one and start" [level=1] [ref=f2e7]
+                - paragraph [ref=f2e8]: Tap any Berlin battle. The first two cards appear immediately.
+              - generic [ref=f2e10]:
+                - button "Playable now Berlin Food Battle Pick between Berlin food favorites until one winner owns your plate." [ref=f2e11] [cursor=pointer]:
+                  - generic [ref=f2e13]:
+                    - generic [ref=f2e14]: Playable now
+                    - strong [ref=f2e15]: Berlin Food Battle
+                    - paragraph [ref=f2e16]: Pick between Berlin food favorites until one winner owns your plate.
+                - button "Playable now Berlin District Battle Pick the Berlin neighborhood energy you would rather spend a day inside." [ref=f2e17] [cursor=pointer]:
+                  - generic [ref=f2e19]:
+                    - generic [ref=f2e20]: Playable now
+                    - strong [ref=f2e21]: Berlin District Battle
+                    - paragraph [ref=f2e22]: Pick the Berlin neighborhood energy you would rather spend a day inside.
+                - button "Playable now Berlin Museum Battle A playful museum bracket for culture-heavy Berlin days." [ref=f2e23] [cursor=pointer]:
+                  - generic [ref=f2e25]:
+                    - generic [ref=f2e26]: Playable now
+                    - strong [ref=f2e27]: Berlin Museum Battle
+                    - paragraph [ref=f2e28]: A playful museum bracket for culture-heavy Berlin days.
+                - button "Playable now Berlin Night Battle A nightlife bracket built around mood, not official rankings." [ref=f2e29] [cursor=pointer]:
+                  - generic [ref=f2e31]:
+                    - generic [ref=f2e32]: Playable now
+                    - strong [ref=f2e33]: Berlin Night Battle
+                    - paragraph [ref=f2e34]: A nightlife bracket built around mood, not official rankings.
+                - button "New battle Berlin Transport Battle Pick the Berlin way of moving through the city that feels most like your trip." [ref=f2e35] [cursor=pointer]:
+                  - generic [ref=f2e37]:
+                    - generic [ref=f2e38]: New battle
+                    - strong [ref=f2e39]: Berlin Transport Battle
+                    - paragraph [ref=f2e40]: Pick the Berlin way of moving through the city that feels most like your trip.
+                - button "New battle Berlin Techno Club Battle A real-club name battle for Berlin nightlife moods, without pretending it is an official ranking." [ref=f2e41] [cursor=pointer]:
+                  - generic [ref=f2e43]:
+                    - generic [ref=f2e44]: New battle
+                    - strong [ref=f2e45]: Berlin Techno Club Battle
+                    - paragraph [ref=f2e46]: A real-club name battle for Berlin nightlife moods, without pretending it is an official ranking.
+                - button "New battle Döner Shops Battle Pick between Berlin döner stops by mood, not by pretending one list can settle the city." [ref=f2e47] [cursor=pointer]:
+                  - generic [ref=f2e49]:
+                    - generic [ref=f2e50]: New battle
+                    - strong [ref=f2e51]: Döner Shops Battle
+                    - paragraph [ref=f2e52]: Pick between Berlin döner stops by mood, not by pretending one list can settle the city.
+                - button "New battle Currywurst Shops Battle Pick the Berlin currywurst stop that matches your snack mood." [ref=f2e53] [cursor=pointer]:
+                  - generic [ref=f2e55]:
+                    - generic [ref=f2e56]: New battle
+                    - strong [ref=f2e57]: Currywurst Shops Battle
+                    - paragraph [ref=f2e58]: Pick the Berlin currywurst stop that matches your snack mood.
+                - button "New battle Berlin Park & Lakes Battle Pick the green or blue Berlin escape you would rather build a day around." [ref=f2e59] [cursor=pointer]:
+                  - generic [ref=f2e61]:
+                    - generic [ref=f2e62]: New battle
+                    - strong [ref=f2e63]: Berlin Park & Lakes Battle
+                    - paragraph [ref=f2e64]: Pick the green or blue Berlin escape you would rather build a day around.
+                - button "New battle Berlin U-Bahn & S-Bahn Lines Battle Pick the Berlin rail line whose route, color and city mood wins for you." [ref=f2e65] [cursor=pointer]:
+                  - generic [ref=f2e67]:
+                    - generic [ref=f2e68]: New battle
+                    - strong [ref=f2e69]: Berlin U-Bahn & S-Bahn Lines Battle
+                    - paragraph [ref=f2e70]: Pick the Berlin rail line whose route, color and city mood wins for you.
+      - generic [ref=e22]:
+        - heading "Want the real city version?" [level=3] [ref=e23]
+        - paragraph [ref=e24]: After your winner, come walk the streets behind the choices. Join my tip-based Berlin walking tour and turn the game into places you can stand in.
+        - link "Book the Walking Tour" [ref=e25] [cursor=pointer]:
+          - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+    - region "More BerlinWalk games" [ref=e26]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - paragraph [ref=e29]: Keep playing
+          - heading "Try another Berlin game" [level=2] [ref=e30]
+        - link "All games" [ref=e31] [cursor=pointer]:
+          - /url: https://www.berlinwalk.com/games?utm_source=berlin_battle_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=all_games
+      - generic [ref=e32]:
+        - link "Berlin Day Survival preview image Budget game Berlin Day Survival Choose a tiny first-day budget and see whether Berlin keeps your wallet alive. Survive the day ->" [ref=e33] [cursor=pointer]:
+          - /url: https://www.berlinwalk.com/games/berlin-day-survival?utm_source=berlin_battle_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berlin-day-survival
+          - img "Berlin Day Survival preview image" [ref=e34]
+          - generic [ref=e35]:
+            - generic [ref=e36]: Budget game
+            - strong [ref=e37]: Berlin Day Survival
+            - paragraph [ref=e38]: Choose a tiny first-day budget and see whether Berlin keeps your wallet alive.
+            - emphasis [ref=e39]: Survive the day ->
+        - link "Berghain Bouncer preview image Door test Berghain Bouncer A quick club-door pressure game with outfits, answers and one hard look. Try the door ->" [ref=e40] [cursor=pointer]:
+          - /url: https://www.berlinwalk.com/games/berghain-bouncer?utm_source=berlin_battle_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berghain-bouncer
+          - img "Berghain Bouncer preview image" [ref=e41]
+          - generic [ref=e42]:
+            - generic [ref=e43]: Door test
+            - strong [ref=e44]: Berghain Bouncer
+            - paragraph [ref=e45]: A quick club-door pressure game with outfits, answers and one hard look.
+            - emphasis [ref=e46]: Try the door ->
+        - 'link "Berlin Smile Challenge preview image Social puzzle Berlin Smile Challenge Seven tiny social tests. One mission: make a Berliner almost smile. Start challenge ->" [ref=e47] [cursor=pointer]':
+          - /url: https://www.berlinwalk.com/games/berlin-smile-challenge?utm_source=berlin_battle_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berlin-smile-challenge
+          - img "Berlin Smile Challenge preview image" [ref=e48]
+          - generic [ref=e49]:
+            - generic [ref=e50]: Social puzzle
+            - strong [ref=e51]: Berlin Smile Challenge
+            - paragraph [ref=e52]: "Seven tiny social tests. One mission: make a Berliner almost smile."
+            - emphasis [ref=e53]: Start challenge ->

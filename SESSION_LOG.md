@@ -1,9 +1,31 @@
+## 2026-06-29 - Games mobile layout and cross-promo rail
+
+- Pushed commit `a225928` (`Fix game mobile layout and cross-promos`) to `origin/main`. Changed files: Day Survival `index.html`/`data.json`, new shared `js/games-preview-rail.js`, and wrappers for Berlin Battle, Day Survival, Berghain Bouncer, and Berlin Smile Challenge.
+- Day Survival mobile order fix: round/result copy renders before the scene/result image, avoiding Yusuf's screenshot issue where text was visually left under the photo.
+- Added below-game preview rail across the four current game pages: each page shows the other three games, excludes itself, uses existing social images, and is mobile-safe.
+- Checks passed: `node --check` for changed JS/root helper, inline Day Survival script evaluation, scoped `diff --check`, secret scan, local Playwright 390px round/result/wrapper QA with overflow `0`, and live GitHub Pages proof with Last-Modified `Mon, 29 Jun 2026 19:43:41-43 GMT`.
+- Live QA passed for Battle/Bouncer/Smile pages. Day Survival Wix custom embed API is revision `24` with new build and preview rail, but the public parent page still serves the old parent marker from Wix cache; direct iframe content is already new `2026-06-29-day-survival-mobile-copy-v8b`, including when requested through the old v7e query.
+
+## 2026-06-29 - Berlin Split local implementation
+
+- Added `berlin-split/` as a standalone premium archive/map game for `/games/berlin-split`: 10 missions, 3 acts, Archive Integrity, clue spending, checkpoint retry, collapse, ranked endings, synthesized SFX, share/copy, booking CTA, and `bw_berlin_split_*` tracking calls. Mission content is in `berlin-split/data.json`; internal source links are in `berlin-split/SOURCES.md`.
+- Added `berlin-split-page/` wrapper with `<bw-berlin-split-page>`, local preview and SEO settings. Added Berlin Split to `games-page/games-page-element.js` as an `Archive game` card using `berlin-split/assets/social/berlin-split-social.svg`.
+- Root-side tracking support was also added outside this repo: `berlinwalk-content-app/api/track-trip-planner-event.js`, `berlinwalk-content-app/vercel.json`, `scripts/setup-berlin-split-events-collection.mjs`, and `scripts/berlin-battle-dashboard-server.mjs`.
+- Local QA passed: JSON/syntax/inline script checks, public quiz/provenance leak scan, desktop clean run to `Myth Breaker 100% intact` with overflow `0`, mobile collapse + checkpoint retry to `Friedrichstrasse Checkpoint` with overflow `0`, wrapper desktop/mobile iframe load, and games hub card/image load. Screenshots saved under `output/playwright/berlin-split-page-*-20260629.png`.
+- Not done: no commit/push, no GitHub Pages proof, no Wix page/publish, no Vercel deploy, and no live `BerlinSplitEvents` collection setup run.
+
 ## 2026-06-29 - Day Survival v8 live completion
 
 - Pushed `55ecfbd` (`Fix Day Survival fail state and voiceovers`) and `f9a7171` (`Log Day Survival v8 local fix`) to `origin/main`; GitHub Pages serves `2026-06-29-day-survival-fail-audio-v8` with `Last-Modified Mon, 29 Jun 2026 11:27:30 GMT`. The currently embedded Wix iframe URL still may show the old `?v=day-survival-share-v7e-20260628` query in parent raw HTML, but that URL now returns the v8 game file from GitHub Pages.
 - Root Wix custom embed `BerlinWalk Berlin Day Survival Page` (`a567bbda-814e-4950-90fb-9affc2cc87ef`) was updated to revision `23` with v8 marker; Site Publisher API returned OK. API readback has v8/no v7e. Public parent raw marker can lag, so future QA should verify the iframe content or direct iframe URL, not only the parent shell string.
 - Live Playwright QA on the public iframe URL passed: desktop negative route gives `Budget Busted`, `data-outcome="failed"`, wallet `-EUR 40.20`, red wallet score, `You did not survive the day`, overflowX `0`, and `alexanderplatz-victim.webp` with `object-fit: contain`; mobile EUR 10 clean route gives `Smart Wanderer`, `data-outcome="survived"`, wallet `EUR 0.60`, overflowX `0`, and `smart-wanderer.webp` with `object-fit: contain`.
 - Live audio QA passed: Sunday condition requested `morning-supermarket-yogurt-banana-sunday-shops.mp3` and `hydration-supermarket-water-sunday-shops.mp3` with the v8 marker. Live `assets/audio/GENERATION_NOTES.json` shows voice `Jonas - Confident and Trustworthy` (`60UU378MZ8YbeLyaF7TI`), `force.voice=true`, and 32 generated runtime voice clips.
+
+## 2026-06-29 - Hohenzollern Berlin content-only draft
+
+- Added local blog draft files only: `blog-drafts/hohenzollern-berlin.body.md`, `blog-drafts/hohenzollern-berlin.md`, and `blog-drafts/hohenzollern-berlin.notes.md`. Topic: `Hohenzollern Berlin`, category `Berlin History`, selected future widget slug `hohenzollern-berlin-footprint-map`.
+- Public body passed `node ../scripts/validate-blog-publish-body.mjs blog-drafts/hohenzollern-berlin.body.md` from the workspace root and a voice/provenance leak scan. No live widget, Quick Summary/FAQ JSON, tools-hub entry, icon, CMS item, images, Wix draft/publish, commit or push was done.
+- Next explicit step: after Mac unlock, build the required ChatGPT-browser widget hero/icon, add QS/FAQ/widget/tools-hub/CMS/assets, then run the normal pre-publish deploy and Wix publish chain.
 
 ## 2026-06-29 - Day Survival v8 local fail/audio fix
 

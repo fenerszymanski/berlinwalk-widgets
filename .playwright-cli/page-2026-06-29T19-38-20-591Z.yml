@@ -1,0 +1,58 @@
+- main [ref=e3]:
+  - generic [ref=e4]:
+    - generic [ref=e5]: Playable Now
+    - heading "Can You Get Into Berghain?" [level=1] [ref=e6]:
+      - text: Can You Get
+      - generic [ref=e7]: Into Berghain?
+    - paragraph [ref=e8]: The world's strictest door policy meets a 10-second pressure cooker. Test your Berlin clubbing instincts.
+    - list [ref=e9]:
+      - listitem [ref=e10]: ● Choose your outfit wisely
+      - listitem [ref=e11]: ● Answer under extreme time pressure
+      - listitem [ref=e12]: ● Face the legendary bouncers
+      - listitem [ref=e13]: ● See how you rank globally
+  - iframe [ref=e15]:
+    - main [ref=f4e2]:
+      - generic [ref=f4e3]:
+        - generic [ref=f4e4]: Playable Now
+        - heading "Can You Get Into Berghain?" [level=1] [ref=f4e5]
+        - paragraph [ref=f4e6]: Test your Berlin clubbing instincts against the world's strictest door policy. Make your choices and see if you make it past the bouncer.
+        - button "Try to get in" [ref=f4e7] [cursor=pointer]
+      - text: SECONDS
+      - status
+  - generic [ref=e16]:
+    - heading "Survived the door?" [level=3] [ref=e17]
+    - paragraph [ref=e18]: Now survive the city. Join my tip-based walking tour to connect the places and history that make Berlin start to click.
+    - link "Book the Walking Tour" [ref=e19] [cursor=pointer]:
+      - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+  - region "More BerlinWalk games" [ref=e20]:
+    - generic [ref=e21]:
+      - generic [ref=e22]:
+        - paragraph [ref=e23]: Keep playing
+        - heading "Try another Berlin game" [level=2] [ref=e24]
+      - link "All games" [ref=e25] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/games?utm_source=berghain_bouncer_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=all_games
+    - generic [ref=e26]:
+      - link "Berlin Battle preview image Choice battle Berlin Battle Pick winners across food, districts, museums, nights out and tiny Berlin loyalties. Play Battle ->" [ref=e27] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/games/berlin-battle?utm_source=berghain_bouncer_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berlin-battle
+        - img "Berlin Battle preview image" [ref=e28]
+        - generic [ref=e29]:
+          - generic [ref=e30]: Choice battle
+          - strong [ref=e31]: Berlin Battle
+          - paragraph [ref=e32]: Pick winners across food, districts, museums, nights out and tiny Berlin loyalties.
+          - emphasis [ref=e33]: Play Battle ->
+      - link "Berlin Day Survival preview image Budget game Berlin Day Survival Choose a tiny first-day budget and see whether Berlin keeps your wallet alive. Survive the day ->" [ref=e34] [cursor=pointer]:
+        - /url: https://www.berlinwalk.com/games/berlin-day-survival?utm_source=berghain_bouncer_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berlin-day-survival
+        - img "Berlin Day Survival preview image" [ref=e35]
+        - generic [ref=e36]:
+          - generic [ref=e37]: Budget game
+          - strong [ref=e38]: Berlin Day Survival
+          - paragraph [ref=e39]: Choose a tiny first-day budget and see whether Berlin keeps your wallet alive.
+          - emphasis [ref=e40]: Survive the day ->
+      - 'link "Berlin Smile Challenge preview image Social puzzle Berlin Smile Challenge Seven tiny social tests. One mission: make a Berliner almost smile. Start challenge ->" [ref=e41] [cursor=pointer]':
+        - /url: https://www.berlinwalk.com/games/berlin-smile-challenge?utm_source=berghain_bouncer_page&utm_medium=game_preview&utm_campaign=berlinwalk_games&utm_content=berlin-smile-challenge
+        - img "Berlin Smile Challenge preview image" [ref=e42]
+        - generic [ref=e43]:
+          - generic [ref=e44]: Social puzzle
+          - strong [ref=e45]: Berlin Smile Challenge
+          - paragraph [ref=e46]: "Seven tiny social tests. One mission: make a Berliner almost smile."
+          - emphasis [ref=e47]: Start challenge ->

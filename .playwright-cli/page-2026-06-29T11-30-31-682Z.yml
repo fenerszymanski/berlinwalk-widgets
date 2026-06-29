@@ -1,0 +1,286 @@
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - region "top of page" [active]
+    - button "Skip to Main Content"
+    - generic [ref=e10]:
+      - group:
+        - banner [ref=e11]:
+          - generic [ref=e12]:
+            - group:
+              - generic [ref=e16]:
+                - group:
+                  - generic [ref=e20]:
+                    - generic [ref=e23]:
+                      - generic [ref=e24]:
+                        - generic [ref=e25]: ★
+                        - generic [ref=e26]: 9.8 / 10 on FreeTour
+                      - generic [ref=e27]: •
+                      - generic [ref=e28]: Free · Tip-based
+                      - generic [ref=e29]: •
+                      - generic [ref=e30]: "Tue-Sat 11:30 · From 3 July: +15:30 · World Clock"
+                    - banner [ref=e31]:
+                      - generic [ref=e32]:
+                        - link "BerlinWalk home" [ref=e33] [cursor=pointer]:
+                          - /url: https://www.berlinwalk.com/
+                          - img "BerlinWalk" [ref=e34]
+                        - navigation "Primary" [ref=e35]:
+                          - list [ref=e36]:
+                            - listitem [ref=e37]:
+                              - link "Tour" [ref=e38] [cursor=pointer]:
+                                - /url: https://www.berlinwalk.com/
+                            - listitem [ref=e39]:
+                              - link "The Guide" [ref=e40] [cursor=pointer]:
+                                - /url: https://www.berlinwalk.com/the-guide
+                            - listitem [ref=e41]:
+                              - link "Reviews" [ref=e42] [cursor=pointer]:
+                                - /url: https://www.berlinwalk.com/reviews
+                            - listitem [ref=e43]:
+                              - link "Berlin Trip Planner NEW" [ref=e44] [cursor=pointer]:
+                                - /url: https://www.berlinwalk.com/berlin-trip-planner
+                                - text: Berlin Trip Planner
+                                - generic [ref=e45]: NEW
+                            - listitem [ref=e46]:
+                              - button "Games" [ref=e47] [cursor=pointer]:
+                                - text: Games
+                                - generic [ref=e48]: ⌄
+                            - listitem [ref=e49]:
+                              - button "Resources" [ref=e50] [cursor=pointer]:
+                                - text: Resources
+                                - generic [ref=e51]: ⌄
+                        - link "Book Now" [ref=e53] [cursor=pointer]:
+                          - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - heading "Berlin Day Survival" [level=1] [ref=e58]:
+              - text: Berlin Day
+              - generic [ref=e59]: Survival
+            - paragraph [ref=e60]: Your budget is small. Berlin is hungry. Choose wisely.
+            - list [ref=e61]:
+              - listitem [ref=e62]: Pick EUR 10, EUR 15 or EUR 20.
+              - listitem [ref=e63]: Survive six small Berlin decisions.
+              - listitem [ref=e64]: Get a shareable first-day survival type.
+          - iframe [ref=e66]:
+            - main [ref=f3e2]:
+              - generic [ref=f3e3]:
+                - generic [ref=f3e4]:
+                  - generic [ref=f3e5]:
+                    - img "BerlinWalk BW logo" [ref=f3e6]
+                    - generic [ref=f3e7]: BerlinWalk Games
+                  - button "Sound off" [ref=f3e8] [cursor=pointer]
+                - generic [ref=f3e10]:
+                  - figure [ref=f3e11]:
+                    - img "Berlin Day Survival illustrated snack counter" [ref=f3e12]
+                  - generic [ref=f3e13]:
+                    - paragraph [ref=f3e14]: Playable Berlin
+                    - heading "Berlin Day Survival" [level=1] [ref=f3e15]
+                    - paragraph [ref=f3e16]: Your budget is small. Berlin is hungry. Choose wisely.
+                  - group "Choose your budget" [ref=f3e17]:
+                    - button "EUR 10 Hard Mode Every choice matters. One landmark mistake can end the day." [ref=f3e18] [cursor=pointer]:
+                      - strong [ref=f3e19]: EUR 10
+                      - generic [ref=f3e20]: Hard Mode
+                      - generic [ref=f3e21]: Every choice matters. One landmark mistake can end the day.
+                    - button "EUR 15 Normal Mode Enough to be smart, not enough to be careless." [pressed] [ref=f3e22] [cursor=pointer]:
+                      - strong [ref=f3e23]: EUR 15
+                      - generic [ref=f3e24]: Normal Mode
+                      - generic [ref=f3e25]: Enough to be smart, not enough to be careless.
+                    - button "EUR 20 Comfort Mode A little room to breathe. Berlin can still find your wallet." [ref=f3e26] [cursor=pointer]:
+                      - strong [ref=f3e27]: EUR 20
+                      - generic [ref=f3e28]: Comfort Mode
+                      - generic [ref=f3e29]: A little room to breathe. Berlin can still find your wallet.
+                  - generic [ref=f3e30]:
+                    - button "Start with sound" [ref=f3e31] [cursor=pointer]
+                    - button "Start quietly" [ref=f3e32] [cursor=pointer]
+              - status
+        - contentinfo:
+          - generic "BerlinWalk site footer" [ref=e73]:
+            - generic [ref=e75]:
+              - generic [ref=e76]:
+                - generic [ref=e77]:
+                  - link "BerlinWalk home" [ref=e78] [cursor=pointer]:
+                    - /url: https://www.berlinwalk.com/
+                    - img "BerlinWalk" [ref=e79]
+                  - paragraph [ref=e80]: Free tip-based walking tours through Berlin's historic centre, built for travellers who want the city to make sense while they are standing inside it.
+                  - navigation "Follow BerlinWalk on social media" [ref=e81]:
+                    - generic [ref=e82]: Follow me
+                    - generic [ref=e83]:
+                      - link "Instagram" [ref=e84] [cursor=pointer]:
+                        - /url: https://www.instagram.com/berlinwalkingtour/
+                        - img [ref=e85]
+                      - link "Facebook" [ref=e89] [cursor=pointer]:
+                        - /url: https://www.facebook.com/berlinwalkingtour
+                        - img [ref=e90]
+                      - link "TikTok" [ref=e92] [cursor=pointer]:
+                        - /url: https://www.tiktok.com/@berlinwalkingtour
+                        - img [ref=e93]
+                  - generic "BerlinWalk route summary" [ref=e95]:
+                    - generic [ref=e102]:
+                      - generic [ref=e103]: Alexanderplatz
+                      - generic [ref=e104]: 12 stops
+                      - generic [ref=e105]: Hackescher Markt
+                - navigation "Tour" [ref=e106]:
+                  - heading "Tour" [level=3] [ref=e107]
+                  - list [ref=e108]:
+                    - listitem [ref=e109]:
+                      - link "Book Now" [ref=e110] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+                    - listitem [ref=e111]:
+                      - link "Meeting Point" [ref=e112] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/meeting-point
+                    - listitem [ref=e113]:
+                      - link "The Route" [ref=e114] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/berlin-walking-tour-route
+                    - listitem [ref=e115]:
+                      - link "Reviews" [ref=e116] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/reviews
+                    - listitem [ref=e117]:
+                      - link "FAQ" [ref=e118] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/#faq
+                - navigation "Play" [ref=e119]:
+                  - heading "Play" [level=3] [ref=e120]
+                  - list [ref=e121]:
+                    - listitem [ref=e122]:
+                      - link "All Games" [ref=e123] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/games
+                    - listitem [ref=e124]:
+                      - link "Berlin Battle" [ref=e125] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/games/berlin-battle
+                    - listitem [ref=e126]:
+                      - link "Berlin Day Survival" [ref=e127] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/games/berlin-day-survival
+                    - listitem [ref=e128]:
+                      - link "Berghain Bouncer" [ref=e129] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/games/berghain-bouncer
+                    - listitem [ref=e130]:
+                      - link "Berlin Smile Challenge" [ref=e131] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/games/berlin-smile-challenge
+                - navigation "Explore" [ref=e132]:
+                  - heading "Explore" [level=3] [ref=e133]
+                  - list [ref=e134]:
+                    - listitem [ref=e135]:
+                      - link "The Guide" [ref=e136] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/the-guide
+                    - listitem [ref=e137]:
+                      - link "Blog" [ref=e138] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/blog
+                    - listitem [ref=e139]:
+                      - link "Berlin Trip Planner NEW" [ref=e140] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/berlin-trip-planner
+                        - text: Berlin Trip Planner
+                        - generic [ref=e141]: NEW
+                    - listitem [ref=e142]:
+                      - link "Berlin Tools" [ref=e143] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/berlin-tools
+                    - listitem [ref=e144]:
+                      - link "Embed Berlin Tools" [ref=e145] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/widgets
+                    - listitem [ref=e146]:
+                      - link "Instagram" [ref=e147] [cursor=pointer]:
+                        - /url: https://www.instagram.com/berlinwalkingtour/
+                - navigation "Practical Berlin" [ref=e148]:
+                  - heading "Practical Berlin" [level=3] [ref=e149]
+                  - list [ref=e150]:
+                    - listitem [ref=e151]:
+                      - link "Berlin Transport" [ref=e152] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus
+                    - listitem [ref=e153]:
+                      - link "Where to Stay" [ref=e154] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/post/where-to-stay-in-berlin-best-neighborhoods-for-every-type-of-tourist
+                    - listitem [ref=e155]:
+                      - link "Best Time to Visit" [ref=e156] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/post/what-s-the-best-time-to-visit-berlin-a-month-by-month-guide
+                    - listitem [ref=e157]:
+                      - link "Airport to Alexanderplatz" [ref=e158] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way
+                    - listitem [ref=e159]:
+                      - link "Berlin City Tax" [ref=e160] [cursor=pointer]:
+                        - /url: https://www.berlinwalk.com/post/berlin-city-tax
+              - generic "Tour details" [ref=e161]:
+                - generic [ref=e162]:
+                  - strong [ref=e163]: Start
+                  - text: World Clock at Alexanderplatz. Look for the green umbrella.
+                - generic [ref=e164]:
+                  - strong [ref=e165]: Duration
+                  - text: About 2 hours, ending near Hackescher Markt.
+                - generic [ref=e166]:
+                  - strong [ref=e167]: Price
+                  - text: Free to book, tip based at the end of the walk.
+              - generic [ref=e168]:
+                - generic [ref=e169]: © 2026 BerlinWalk. All rights reserved.
+                - generic [ref=e170]:
+                  - link "berlinwalk.com" [ref=e171] [cursor=pointer]:
+                    - /url: https://www.berlinwalk.com/
+                  - link "@berlinwalkingtour" [ref=e172] [cursor=pointer]:
+                    - /url: https://www.instagram.com/berlinwalkingtour/
+    - region "bottom of page"
+  - generic:
+    - generic:
+      - generic:
+        - img
+        - button: ×
+      - navigation:
+        - link:
+          - /url: https://www.berlinwalk.com/
+          - text: Tour
+        - link:
+          - /url: https://www.berlinwalk.com/the-guide
+          - text: The Guide
+        - link:
+          - /url: https://www.berlinwalk.com/reviews
+          - text: Reviews
+        - link:
+          - /url: https://www.berlinwalk.com/berlin-trip-planner
+          - text: Berlin Trip Planner
+          - generic: NEW
+        - generic:
+          - generic: Games
+          - link:
+            - /url: https://www.berlinwalk.com/games
+            - text: All Games
+          - link:
+            - /url: https://www.berlinwalk.com/games/berlin-battle
+            - text: Berlin Battle
+          - link:
+            - /url: https://www.berlinwalk.com/games/berlin-day-survival
+            - text: Berlin Day Survival
+          - link:
+            - /url: https://www.berlinwalk.com/games/berghain-bouncer
+            - text: Berghain Bouncer
+          - link:
+            - /url: https://www.berlinwalk.com/games/berlin-smile-challenge
+            - text: Berlin Smile Challenge
+        - generic:
+          - generic: Resources
+          - link:
+            - /url: https://www.berlinwalk.com/meeting-point
+            - text: Meeting Point
+          - link:
+            - /url: https://www.berlinwalk.com/berlin-walking-tour-route
+            - text: Tour Route
+          - link:
+            - /url: https://www.berlinwalk.com/berlin-tools
+            - text: Berlin Hacks
+          - link:
+            - /url: https://www.berlinwalk.com/blog
+            - text: Blog
+          - link:
+            - /url: https://www.berlinwalk.com/widgets
+            - text: Embed Berlin Tools
+      - generic:
+        - link:
+          - /url: https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based
+          - text: Book Your Free Tour
+        - paragraph:
+          - strong: ★ 9.8 / 10
+          - text: "on FreeTour · Tue-Sat 11:30 · From 3 July: +15:30"
+  - menu:
+    - menuitem "All Games"
+    - menuitem "Berlin Battle"
+    - menuitem "Berlin Day Survival"
+    - menuitem "Berghain Bouncer"
+    - menuitem "Berlin Smile Challenge"
+  - menu:
+    - menuitem "Meeting Point"
+    - menuitem "Tour Route"
+    - menuitem "Berlin Hacks"
+    - menuitem "Blog"
+    - menuitem "Embed Berlin Tools"

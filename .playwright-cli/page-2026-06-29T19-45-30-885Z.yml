@@ -1,0 +1,53 @@
+- generic [ref=e3]:
+  - region "top of page"
+  - generic [ref=e10]:
+    - group:
+      - banner:
+        - generic [ref=e11]:
+          - group:
+            - generic [ref=e15]:
+              - group
+      - generic [ref=e20]:
+        - generic [ref=e21]:
+          - heading "Berlin Day Survival" [level=1] [ref=e22]:
+            - text: Berlin Day
+            - generic [ref=e23]: Survival
+          - paragraph [ref=e24]: Your budget is small. Berlin is hungry. Choose wisely.
+          - list [ref=e25]:
+            - listitem [ref=e26]: Pick EUR 10, EUR 15 or EUR 20.
+            - listitem [ref=e27]: Survive six small Berlin decisions.
+            - listitem [ref=e28]: Get a shareable first-day survival type.
+        - iframe [ref=e30]:
+          - main [ref=f1e2]:
+            - generic [ref=f1e3]:
+              - generic [ref=f1e4]:
+                - generic [ref=f1e5]:
+                  - img "BerlinWalk BW logo" [ref=f1e6]
+                  - generic [ref=f1e7]: BerlinWalk Games
+                - button "Sound off" [ref=f1e8] [cursor=pointer]
+              - generic [ref=f1e10]:
+                - figure [ref=f1e11]:
+                  - img "Berlin Day Survival illustrated snack counter" [ref=f1e12]
+                - generic [ref=f1e13]:
+                  - paragraph [ref=f1e14]: Playable Berlin
+                  - heading "Berlin Day Survival" [level=1] [ref=f1e15]
+                  - paragraph [ref=f1e16]: Your budget is small. Berlin is hungry. Choose wisely.
+                - group "Choose your budget" [ref=f1e17]:
+                  - button "EUR 10 Hard Mode Every choice matters. One landmark mistake can end the day." [ref=f1e18] [cursor=pointer]:
+                    - strong [ref=f1e19]: EUR 10
+                    - generic [ref=f1e20]: Hard Mode
+                    - generic [ref=f1e21]: Every choice matters. One landmark mistake can end the day.
+                  - button "EUR 15 Normal Mode Enough to be smart, not enough to be careless." [pressed] [ref=f1e22] [cursor=pointer]:
+                    - strong [ref=f1e23]: EUR 15
+                    - generic [ref=f1e24]: Normal Mode
+                    - generic [ref=f1e25]: Enough to be smart, not enough to be careless.
+                  - button "EUR 20 Comfort Mode A little room to breathe. Berlin can still find your wallet." [ref=f1e26] [cursor=pointer]:
+                    - strong [ref=f1e27]: EUR 20
+                    - generic [ref=f1e28]: Comfort Mode
+                    - generic [ref=f1e29]: A little room to breathe. Berlin can still find your wallet.
+                - generic [ref=f1e30]:
+                  - button "Start with sound" [ref=f1e31] [cursor=pointer]
+                  - button "Start quietly" [ref=f1e32] [cursor=pointer]
+            - status
+      - contentinfo
+  - region "bottom of page"

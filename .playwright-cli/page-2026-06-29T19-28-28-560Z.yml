@@ -1,0 +1,53 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img "BerlinWalk BW logo" [ref=e6]
+          - generic [ref=e7]: BerlinWalk Games
+        - button "Sound off" [ref=e8] [cursor=pointer]
+      - generic [ref=e37]:
+        - generic "Progress" [ref=e39]
+        - generic [ref=e41]:
+          - generic "Cash left after each choice" [ref=e42]:
+            - generic [ref=e43]: Wallet
+            - strong [ref=e44]: EUR 15
+            - emphasis [ref=e45]: cash left
+          - generic "Your stamina for the day" [ref=e46]:
+            - generic [ref=e47]: Fuel
+            - strong [ref=e48]: "56"
+            - emphasis [ref=e49]: stamina
+          - generic "Local instinct and trap avoidance" [ref=e50]:
+            - generic [ref=e51]: Smarts
+            - strong [ref=e52]: "54"
+            - emphasis [ref=e53]: local instinct
+        - article [ref=e54]:
+          - generic [ref=e55]:
+            - paragraph [ref=e56]: Morning Move
+            - heading "It is 10:30. You skipped breakfast and Berlin has noticed." [level=2] [ref=e57]
+            - paragraph [ref=e58]: What is the first save?
+            - generic [ref=e59]:
+              - strong [ref=e60]: "Heatwave Walk:"
+              - text: The sun is not decorative today. Water decisions suddenly matter.
+          - figure [ref=e61]:
+            - img "Morning Move scene" [ref=e62]
+        - generic [ref=e63]:
+          - button "Bakery pretzel + filter coffee -EUR 3.50" [ref=e64] [cursor=pointer]:
+            - generic [ref=e65]: Bakery pretzel + filter coffee
+            - generic [ref=e66]: "-EUR 3.50"
+          - button "Supermarket bakery roll + banana -EUR 2.20" [ref=e67] [cursor=pointer]:
+            - generic [ref=e68]: Supermarket bakery roll + banana
+            - generic [ref=e69]: "-EUR 2.20"
+          - button "Sit-down cafe by a landmark -EUR 11.80" [ref=e70] [cursor=pointer]:
+            - generic [ref=e71]: Sit-down cafe by a landmark
+            - generic [ref=e72]: "-EUR 11.80"
+          - button "Nothing. I am strong. EUR 0" [ref=e73] [cursor=pointer]:
+            - generic [ref=e74]: Nothing. I am strong.
+            - generic [ref=e75]: EUR 0
+    - status
+  - link "Made by BerlinWalk — open berlinwalk.com" [ref=e33] [cursor=pointer]:
+    - /url: https://www.berlinwalk.com/?utm_source=embed&utm_medium=widget&utm_campaign=berlin-day-survival&utm_content=footer-badge
+    - generic [ref=e34]:
+      - text: by
+      - strong [ref=e35]: berlinwalk.com
+    - generic [ref=e36]: →

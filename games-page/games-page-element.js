@@ -6,6 +6,20 @@
   const ASSET_VERSION = 'games-page-header-spacing-20260628';
   const GAMES = [
     {
+      id: 'berlin-split',
+      kicker: 'Archive game',
+      title: 'Berlin Split: The Lost Archive',
+      lead: 'Restore a divided-city archive by reading Berlin through East, West, border zones and rebuilt places.',
+      how: 'Inspect evidence, place files on the map, protect Archive Integrity, use clues carefully, and unlock a ranked ending.',
+      duration: '8-10 min',
+      difficulty: 'Map archive',
+      player: 'History detective',
+      image: 'berlin-split/assets/social/berlin-split-social.svg',
+      href: 'https://www.berlinwalk.com/games/berlin-split',
+      button: 'Open the archive',
+      accent: 'split'
+    },
+    {
       id: 'berlin-battle',
       kicker: 'Choice battle',
       title: 'Berlin Battle',
@@ -118,7 +132,7 @@
             <div class="bw-games-hero-inner">
               <p class="bw-games-kicker">Playable Berlin</p>
               <h1 id="bw-games-title">BerlinWalk Games</h1>
-              <p class="bw-games-hero-lead">Quick games for the moment before you go outside and test the real city. Pick a winner, pass the door, survive the day, or try to make Berlin smile.</p>
+              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Restore an archive, pick a winner, pass the door, survive the day, or try to make Berlin smile.</p>
             </div>
           </section>
 
@@ -126,7 +140,7 @@
             <div class="bw-games-section-head">
               <p class="bw-games-section-kicker">Pick your mode</p>
               <h2 id="bw-games-modes-title">Choose your way into Berlin</h2>
-              <p>Each game has a different job: taste, instinct, night pressure, first-day survival, or social weather. They are light enough to start in a queue, but specific enough to feel like Berlin.</p>
+              <p>Each game has a different job: city memory, taste, instinct, night pressure, first-day survival, or social weather. Some are quick hits; Berlin Split is the deeper archive run.</p>
             </div>
             <div class="bw-games-grid">
               ${gameCards}
@@ -565,6 +579,10 @@
 
         .bw-game-card-day .bw-game-kicker {
           color: #1D8A99;
+        }
+
+        .bw-game-card-split .bw-game-kicker {
+          color: var(--green-dark);
         }
 
         .bw-game-card h3 {
