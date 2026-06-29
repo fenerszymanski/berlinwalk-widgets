@@ -484,6 +484,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(hohenzollern-berlin|hohenzollern berlin)/.test(s)) return 'hohenzollern-berlin-footprint-map';
   if (/(what-to-book-in-advance-in-berlin|what to book in advance in berlin|reservation guide|booking deadline)/.test(s)) return 'berlin-booking-deadline-planner';
   if (/(berlin-tourist-scams|tourist scams|street sense|fake police|pickpockets)/.test(s)) return 'berlin-street-sense-drill';
   if (/(doctor-in-berlin|doctor in berlin|feel unwell|medical help berlin)/.test(s)) return 'berlin-medical-help-router';
