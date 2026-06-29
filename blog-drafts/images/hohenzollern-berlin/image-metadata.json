@@ -1,0 +1,111 @@
+[
+  {
+    "src": "blog-drafts/images/berlin-on-a-monday/assets/optimized/05-humboldt-forum-open-monday.jpg",
+    "rawSrc": "blog-drafts/images/berlin-on-a-monday/assets/raw/05-humboldt-forum-open-monday.jpg",
+    "file": "01-humboldt-forum-royal-site-cover.jpg",
+    "role": "cover",
+    "sourceType": "reused approved BerlinWalk image pack / Wikimedia Commons",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Exterior_of_Humboldt_Forum_04.jpg",
+    "credit": "Derbrauni, Creative Commons license per Wikimedia file page",
+    "license": "Creative Commons",
+    "rationale": "Best existing central royal-site signal: Humboldt Forum/old palace architecture near Museum Island, strong enough for a cover/card crop.",
+    "alt": "Humboldt Forum palace-style architecture in central Berlin, the main starting point for reading Hohenzollern Berlin on foot",
+    "caption": "Caption: Start Hohenzollern Berlin at the palace site, now the Humboldt Forum, before reading the cathedral and Museum Island around it.",
+    "rawSize": [
+      4032,
+      1816
+    ],
+    "optimizedSize": [
+      1800,
+      811
+    ],
+    "optimizedBytes": 364977
+  },
+  {
+    "src": "blog-drafts/images/hohenzollern-berlin/assets/raw/02-hohenzollern-crypt-2026.jpg",
+    "file": "02-hohenzollern-crypt-2026.jpg",
+    "role": "inline",
+    "sourceType": "Wikimedia Commons",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Berliner_Dom_Hohenzollern-krypten_2026-04-02_img01.jpg",
+    "credit": "LarsMueller, CC0",
+    "license": "CC0",
+    "rationale": "Direct post-renovation 2026 crypt image, the most specific factual image for the article.",
+    "alt": "Hohenzollern Crypt inside the Berliner Dom after its 2026 reopening",
+    "caption": "Caption: The Hohenzollern Crypt is the most direct royal-family layer below the Berliner Dom.",
+    "rawSize": [
+      4000,
+      3000
+    ],
+    "optimizedSize": [
+      1800,
+      1350
+    ],
+    "optimizedBytes": 223576
+  },
+  {
+    "src": "blog-drafts/images/unter-den-linden-berlin/assets/optimized/02-bebelplatz-staatsoper.jpg",
+    "rawSrc": "blog-drafts/images/unter-den-linden-berlin/assets/raw/02-bebelplatz-staatsoper.jpg",
+    "file": "03-bebelplatz-staatsoper-royal-stage.jpg",
+    "role": "inline",
+    "sourceType": "reused approved BerlinWalk image pack / Wikimedia Commons",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lascar_Berlin_State_Opera_building_and_St._Hedwig%27s_Cathedral_on_Bebelplatz_(4471397099).jpg",
+    "credit": "Jorge Lascar, CC BY 2.0",
+    "license": "CC BY 2.0",
+    "rationale": "Clean blue-hour Bebelplatz/Staatsoper view for the Unter den Linden royal-stage section.",
+    "alt": "Bebelplatz and the Staatsoper near Unter den Linden, part of Berlin\u2019s ceremonial royal boulevard",
+    "caption": "Caption: Unter den Linden works best as a sequence of royal, cultural and state spaces, not just a street transfer.",
+    "rawSize": [
+      3216,
+      2136
+    ],
+    "optimizedSize": [
+      1800,
+      1196
+    ],
+    "optimizedBytes": 317253
+  },
+  {
+    "src": "blog-drafts/images/what-to-book-in-advance-in-berlin/assets/optimized/03-museum-island-ticket-plan.jpg",
+    "rawSrc": "blog-drafts/images/what-to-book-in-advance-in-berlin/assets/raw/03-museum-island-ticket-plan.jpg",
+    "file": "04-museum-island-cultural-power.jpg",
+    "role": "inline",
+    "sourceType": "reused approved BerlinWalk image pack / Wikimedia Commons",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Altes_Museum_Berlin_at_sunset.jpg",
+    "credit": "Leonhard Lenz, CC BY-SA 4.0",
+    "license": "CC BY-SA 4.0",
+    "rationale": "Strong Museum Island visual with warm light, useful for the Prussian cultural-landscape section.",
+    "alt": "Altes Museum on Berlin\u2019s Museum Island at sunset, showing the cultural landscape beside royal Berlin",
+    "caption": "Caption: Museum Island makes more sense when you see it beside the palace site and cathedral.",
+    "rawSize": [
+      1600,
+      1200
+    ],
+    "optimizedSize": [
+      1600,
+      1200
+    ],
+    "optimizedBytes": 356981
+  },
+  {
+    "src": "blog-drafts/images/charlottenburg-palace-berlin/assets/optimized/01-palace-cover.jpg",
+    "rawSrc": "blog-drafts/images/charlottenburg-palace-berlin/assets/raw/01-palace-cover.jpg",
+    "file": "05-charlottenburg-palace-residence.jpg",
+    "role": "inline",
+    "sourceType": "reused approved BerlinWalk image pack / Wikimedia Commons",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Schloss_Charlottenburg_-_Flickr_-_abbilder.jpg",
+    "credit": "abbilder, CC BY 4.0",
+    "license": "CC BY 4.0",
+    "rationale": "Strong palace exterior with water depth; clear residence signal for the Charlottenburg add-on.",
+    "alt": "Charlottenburg Palace and reflecting water in Berlin, the clearest royal residence add-on for Hohenzollern history",
+    "caption": "Caption: Charlottenburg is the add-on when you want royal Berlin to feel like a residence, not only a city-centre memory layer.",
+    "rawSize": [
+      7728,
+      5152
+    ],
+    "optimizedSize": [
+      1800,
+      1200
+    ],
+    "optimizedBytes": 203810
+  }
+]

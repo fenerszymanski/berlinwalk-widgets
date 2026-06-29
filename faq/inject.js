@@ -143,7 +143,8 @@
   "berlin-tourist-scams": "berlin-tourist-scams",
   "breakfast-in-berlin": "breakfast-in-berlin",
   "german-signs-in-berlin": "german-signs-in-berlin",
-  "what-to-book-in-advance-in-berlin": "what-to-book-in-advance-in-berlin"
+  "what-to-book-in-advance-in-berlin": "what-to-book-in-advance-in-berlin",
+  "hohenzollern-berlin": "hohenzollern-berlin"
 };
 
   var SCHEMAS = {
@@ -7023,6 +7024,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. In fact, Berlin is better when you do not lock every hour. Reserve the few scarce anchors, then leave room for weather, food, neighborhoods, outdoor sights and the kind of detours that make the city feel less like homework."
+        }
+      }
+    ]
+  },
+  "hohenzollern-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Who were the Hohenzollerns in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Hohenzollerns were the ruling family of Brandenburg, Prussia and later the German Empire. In Berlin, their legacy is visible in the palace site, Berliner Dom, Museum Island, Unter den Linden, Brandenburg Gate and Charlottenburg Palace."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I see Hohenzollern history in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start at Schlossplatz and the Humboldt Forum, then visit the Berliner Dom and Hohenzollern Crypt, walk Unter den Linden toward Brandenburg Gate, and consider Charlottenburg Palace for a more complete royal-residence experience."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Hohenzollern Crypt open to visitors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Berliner Dom states that the Hohenzollern Crypt reopened on 1 March 2026 after extensive renovation. Check current opening times and ticket details on the Berliner Dom website before visiting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Hohenzollern Berlin only about Prussian kings?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The kings are part of it, but the better visitor angle is how royal power shaped space: palace, cathedral, museums, boulevard, gate, residence and later memory politics."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see Hohenzollern Berlin on foot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The strongest central walk runs from the Humboldt Forum and Berliner Dom across Museum Island and along Unter den Linden to Brandenburg Gate. Charlottenburg Palace is better as a separate U-Bahn or S-Bahn trip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much time do I need for a Hohenzollern Berlin walk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Allow about 90 minutes for the outdoor Mitte route. Add more time if you enter the Berliner Dom crypt, the Humboldt Forum, one Museum Island museum or Charlottenburg Palace."
         }
       }
     ]
