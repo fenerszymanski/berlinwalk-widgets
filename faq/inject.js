@@ -142,7 +142,8 @@
   "doctor-in-berlin": "doctor-in-berlin",
   "berlin-tourist-scams": "berlin-tourist-scams",
   "breakfast-in-berlin": "breakfast-in-berlin",
-  "german-signs-in-berlin": "german-signs-in-berlin"
+  "german-signs-in-berlin": "german-signs-in-berlin",
+  "what-to-book-in-advance-in-berlin": "what-to-book-in-advance-in-berlin"
 };
 
   var SCHEMAS = {
@@ -6968,6 +6969,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Nur Barzahlung means cash only. Carry a little cash for small bakeries, kiosks, market stalls and casual places where international cards may not be accepted."
+        }
+      }
+    ]
+  },
+  "what-to-book-in-advance-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What should I book in advance in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Book the scarce or time-specific things first: the Reichstag dome, any must-see paid attraction with a fixed time, major events, palace interiors, special exhibitions and the one restaurant you would be disappointed to lose. Keep normal sightseeing, casual food and public transport flexible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Reichstag dome really free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Reichstag dome and roof terrace are free, but the German Bundestag requires advance registration. You need accurate names and dates of birth for visitors, and every adult should bring valid photo ID."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I book the Berlin TV Tower in advance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Book the TV Tower in advance if you need a specific time, want a sunset slot, have a restaurant plan, or are visiting on a short busy trip. If your schedule is flexible, check the weather first because visibility matters more than almost anything."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book Museum Island in advance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Book ahead if one museum is a must-see, your Berlin time is short, the weather is pushing everyone indoors, or you need a precise entry window. If you are flexible, check opening days and the official ticket shop closer to the visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin public transport tickets need advance booking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Normal Berlin public transport does not work like a reserved attraction. Buy the right AB or ABC ticket when your route is clear. Berlin.de explains that ABC includes the surrounding area, BER Airport and Potsdam Central Station."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit Berlin without booking every activity?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. In fact, Berlin is better when you do not lock every hour. Reserve the few scarce anchors, then leave room for weather, food, neighborhoods, outdoor sights and the kind of detours that make the city feel less like homework."
         }
       }
     ]
