@@ -296,6 +296,85 @@
       line-height: 1.35;
     }
 
+    #bw-tempelhof-planner .bw-visual-panel {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(190px, .65fr);
+    }
+
+    #bw-tempelhof-planner .bw-plan-photo {
+      background: var(--bw-green-dark);
+      border-radius: 8px;
+      margin: 0;
+      min-height: 240px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-tempelhof-planner .bw-plan-photo img {
+      display: block;
+      height: 100%;
+      min-height: 240px;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    #bw-tempelhof-planner .bw-plan-photo figcaption {
+      background: linear-gradient(180deg, rgba(18, 63, 22, 0), rgba(18, 63, 22, .82));
+      bottom: 0;
+      color: var(--bw-white);
+      font-size: 12px;
+      font-weight: 850;
+      left: 0;
+      line-height: 1.35;
+      padding: 38px 14px 13px;
+      position: absolute;
+      right: 0;
+      text-shadow: 0 1px 12px rgba(0, 0, 0, .35);
+    }
+
+    #bw-tempelhof-planner .bw-moments {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-tempelhof-planner .bw-moment {
+      align-items: center;
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: 54px minmax(0, 1fr);
+      min-width: 0;
+      padding: 8px;
+    }
+
+    #bw-tempelhof-planner .bw-moment img {
+      border-radius: 7px;
+      display: block;
+      height: 54px;
+      object-fit: cover;
+      width: 54px;
+    }
+
+    #bw-tempelhof-planner .bw-moment strong {
+      color: var(--bw-green-dark);
+      display: block;
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+
+    #bw-tempelhof-planner .bw-moment span {
+      color: var(--bw-muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
     #bw-tempelhof-planner .bw-cards {
       display: grid;
       gap: 12px;
@@ -447,7 +526,17 @@
       #bw-tempelhof-planner .bw-main,
       #bw-tempelhof-planner .bw-result-top,
       #bw-tempelhof-planner .bw-cards,
+      #bw-tempelhof-planner .bw-visual-panel,
       #bw-tempelhof-planner .bw-stats {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-tempelhof-planner .bw-plan-photo,
+      #bw-tempelhof-planner .bw-plan-photo img {
+        min-height: 230px;
+      }
+
+      #bw-tempelhof-planner .bw-moments {
         grid-template-columns: 1fr;
       }
 
@@ -537,6 +626,14 @@
               <span>Seasonal closing</span>
             </div>
           </div>
+
+          <div class="bw-visual-panel" aria-label="Visual Tempelhof plan">
+            <figure class="bw-plan-photo">
+              <img id="bw-plan-image" src="../blog-drafts/images/tempelhof-airport-berlin/assets/optimized/tempelhof-airport-berlin-01-sunrise-runway-cover.jpg" alt="Sunset over the former runway at Tempelhofer Feld in Berlin">
+              <figcaption id="bw-plan-caption">Start with the runway scale before you try to understand the whole former airport.</figcaption>
+            </figure>
+            <div class="bw-moments" id="bw-moments" aria-label="Route moments"></div>
+          </div>
         </section>
 
         <section class="bw-route">
@@ -578,6 +675,16 @@
         weather: 'clear'
       };
 
+      var imageBase = '../blog-drafts/images/tempelhof-airport-berlin/assets/optimized/';
+      var commonMoments = {
+        runway: [imageBase + 'tempelhof-airport-berlin-01-sunrise-runway-cover.jpg', 'Runway scale', 'Stop first, then walk.'],
+        building: [imageBase + 'tempelhof-airport-berlin-03-terminal-exterior.jpg', 'Building side', 'Use for history context.'],
+        hall: [imageBase + 'tempelhof-airport-berlin-02-terminal-hall.jpg', 'Interior layer', 'Tour if this matters.'],
+        memorial: [imageBase + 'tempelhof-airport-berlin-05-airlift-memorial.jpg', 'Airlift anchor', 'Best quick history stop.'],
+        open: [imageBase + 'tempelhof-airport-berlin-04-open-runway.jpg', 'Wide loop', 'Good for motion days.'],
+        evening: [imageBase + 'tempelhof-airport-berlin-06-spring-runway.jpg', 'Slow exit', 'Leave time to look back.']
+      };
+
       var starts = {
         tempelhof: {
           label: 'Tempelhofer Damm',
@@ -601,6 +708,10 @@
           title: 'Runway First Look',
           badge: 'Best first visit',
           summary: 'Use Tempelhof as a scale experience first: airport building, runway line, open horizon and one slow loop.',
+          image: imageBase + 'tempelhof-airport-berlin-01-sunrise-runway-cover.jpg',
+          imageAlt: 'Sunset over the former runway at Tempelhofer Feld in Berlin',
+          caption: 'Start with the runway scale before you try to understand the whole former airport.',
+          moments: ['runway', 'building', 'evening'],
           decision: 'If this is your first Tempelhof visit, prioritize scale over distance. The first ten minutes on the runway explain more than a rushed lap around the entire field.',
           steps: [
             ['Find the runway line', 'Walk until the old aviation markings become the main view, then stop and look back at the building.'],
@@ -612,6 +723,10 @@
           title: 'Airport History Layer',
           badge: 'Book if needed',
           summary: 'Treat the field and the airport building as two different visits: free outdoor scale first, official tour for the interior.',
+          image: imageBase + 'tempelhof-airport-berlin-03-terminal-exterior.jpg',
+          imageAlt: 'The curved exterior of the former Berlin Tempelhof Airport building',
+          caption: 'Use the building side when the airport story matters more than a casual park walk.',
+          moments: ['memorial', 'building', 'hall'],
           decision: 'Choose this route if you want the 20th-century building story. The field is free and open-air; the hangars, bunkers and roof context need an official guided tour.',
           steps: [
             ['Start with the Airlift Memorial', 'Use Platz der Luftbrücke so the building and memorial set the tone before you enter the field.'],
@@ -623,6 +738,10 @@
           title: 'Runway Activity Loop',
           badge: 'Best with wind',
           summary: 'Use the paved strips for motion: cycling, skating, kite sports and a wide loop that feels unlike a normal city park.',
+          image: imageBase + 'tempelhof-airport-berlin-04-open-runway.jpg',
+          imageAlt: 'The former runway at Tempelhofer Feld with open grass on both sides',
+          caption: 'Active Tempelhof works best when the paved runway, weather and energy line up.',
+          moments: ['open', 'runway', 'evening'],
           decision: 'Choose activity mode when the weather is dry and you want movement, not monuments. The old runways are the point, so do not over-plan every stop.',
           steps: [
             ['Enter wide', 'Pick Tempelhofer Damm for the simplest runway access or Oderstraße for a more local park start.'],
@@ -634,6 +753,10 @@
           title: 'Picnic And Local Park Time',
           badge: 'Slow Berlin',
           summary: 'Use the edges, gardens and lawns instead of trying to conquer the whole former airport.',
+          image: imageBase + 'tempelhof-airport-berlin-06-spring-runway.jpg',
+          imageAlt: 'People crossing the former runway at Tempelhofer Feld on a spring evening',
+          caption: 'For a slower visit, stay near the edges and treat the field as local Berlin time.',
+          moments: ['evening', 'open', 'runway'],
           decision: 'This is the right plan if you want Berlin local life more than aviation detail. Bring shade, keep the field rules in mind and leave before the gates close.',
           steps: [
             ['Enter from Oderstraße', 'The Neukölln side is usually the best fit for lawns, gardens and a relaxed food stop after.'],
@@ -693,6 +816,30 @@
         root.querySelector('#bw-stat-check').textContent = checkLabel();
         root.querySelector('#bw-decision').textContent = plan.decision;
         root.querySelector('#bw-map-link').href = start.map;
+        root.querySelector('#bw-plan-image').src = plan.image;
+        root.querySelector('#bw-plan-image').alt = plan.imageAlt;
+        root.querySelector('#bw-plan-caption').textContent = plan.caption;
+        var moments = root.querySelector('#bw-moments');
+        moments.innerHTML = '';
+        plan.moments.forEach(function (key) {
+          var data = commonMoments[key];
+          var item = document.createElement('div');
+          item.className = 'bw-moment';
+          var image = document.createElement('img');
+          image.src = data[0];
+          image.alt = data[1];
+          image.loading = 'lazy';
+          var copy = document.createElement('div');
+          var title = document.createElement('strong');
+          var text = document.createElement('span');
+          title.textContent = data[1];
+          text.textContent = data[2];
+          copy.appendChild(title);
+          copy.appendChild(text);
+          item.appendChild(image);
+          item.appendChild(copy);
+          moments.appendChild(item);
+        });
         var route = root.querySelector('#bw-route-list');
         route.innerHTML = '';
         [[start.first, 'Entrance logic']].concat(plan.steps.map(function (step) {
