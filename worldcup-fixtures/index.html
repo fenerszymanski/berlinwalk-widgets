@@ -366,6 +366,7 @@
     #bw-wc-fixtures .bw-ko-side.away .bw-ko-seed { order: -1; }
     #bw-wc-fixtures .bw-ko-side.win .bw-ko-name { color: var(--bw-green); font-weight: 900; }
     #bw-wc-fixtures .bw-ko-side.loss .bw-ko-name { color: var(--bw-muted); }
+    #bw-wc-fixtures .bw-ko-side.loser .bw-ko-name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: currentColor; text-underline-offset: 2px; }
     #bw-wc-fixtures .bw-ko-name {
       min-width: 0;
       overflow: hidden;
@@ -797,6 +798,12 @@
           var pso = complete && typeof k[13] === 'number' && typeof k[14] === 'number';
           var homeWin = complete && (k[10] > k[11] || (pso && k[13] > k[14]));
           var awayWin = complete && (k[11] > k[10] || (pso && k[14] > k[13]));
+          var homeLoser = complete && !homeWin && !awayWin && pso && typeof k[13] === 'number' && typeof k[14] === 'number'
+            ? (k[13] < k[14])
+            : (complete && k[10] < k[11]);
+          var awayLoser = complete && !homeWin && !awayWin && pso && typeof k[13] === 'number' && typeof k[14] === 'number'
+            ? (k[14] < k[13])
+            : (complete && k[11] < k[10]);
           var status = complete ? (k[12] || 'FT') : '';
           var homeScore = complete ? '<span class="bw-ko-score">' + k[10] + (pso ? ' (' + k[13] + ')' : '') + '</span>' : '';
           var awayScore = complete ? '<span class="bw-ko-score">' + k[11] + (pso ? ' (' + k[14] + ')' : '') + '</span>' : '';
@@ -805,9 +812,9 @@
             '<div class="bw-ko-top"><span class="bw-ko-code">' + k[1] + (k[9] ? ' - projected' : '') + '</span>' +
               '<span class="bw-ko-when">' + fmtDay(k[2]) + ', ' + k[3] + (status ? '<span class="bw-ko-status">' + status + '</span>' : '') + '</span></div>' +
             '<div class="bw-ko-teams">' +
-              '<div class="bw-ko-side' + (homeWin ? ' win' : (awayWin ? ' loss' : '')) + '"><span class="bw-flag">' + flag(k[4]) + '</span><span class="bw-ko-name">' + k[4] + '</span><span class="bw-ko-seed">' + k[6] + '</span>' + homeScore + '</div>' +
+              '<div class="bw-ko-side' + (homeWin ? ' win' : '') + (homeLoser ? ' loser' : '') + '"><span class="bw-flag">' + flag(k[4]) + '</span><span class="bw-ko-name">' + k[4] + '</span><span class="bw-ko-seed">' + k[6] + '</span>' + homeScore + '</div>' +
               '<div class="bw-ko-vs">VS</div>' +
-              '<div class="bw-ko-side away' + (awayWin ? ' win' : (homeWin ? ' loss' : '')) + '">' + awayScore + '<span class="bw-ko-seed">' + k[7] + '</span><span class="bw-ko-name">' + k[5] + '</span><span class="bw-flag">' + flag(k[5]) + '</span></div>' +
+              '<div class="bw-ko-side away' + (awayWin ? ' win' : '') + (awayLoser ? ' loser' : '') + '">' + awayScore + '<span class="bw-ko-seed">' + k[7] + '</span><span class="bw-ko-name">' + k[5] + '</span><span class="bw-flag">' + flag(k[5]) + '</span></div>' +
             '</div>' +
             '<div class="bw-ko-place">' + k[8] + '</div>';
           listEl.appendChild(ko);

@@ -1,3 +1,39 @@
+## 2026-06-30 - Core Web Vitals desktop CLS/LCP fix
+
+**Did:** Search Console'daki 89 URL desktop Core Web Vitals uyarısı için canlı/lab tanı ve düzeltme tamamlandı.
+**Changed:**
+- `blog-index/blog-index-element.js` — `/blog` lead image eager/high priority yapıldı; commit `9bb4328`.
+- `js/blog-sidebar-inject.js` — sitewide canlı yol üzerinden custom-element ilk ekran rezervi, kısa cloak/reveal ve sayfa bazlı preload/preconnect ipuçları eklendi; son commit `5e3eb59`.
+- `js/cwv-reserve-head.js` — HEAD yedek helper aynı rezerv/preload mantığına taşındı; commit `5e3eb59`.
+- Root workspace `berlinwalk-cwv-reserve-head.html` ve Wix custom embed `BerlinWalk Core Web Vitals Reserve Head` revision `3` güncellendi; public HTML için güvenilir canlı yol hâlâ `blog-sidebar-inject.js?v=25`.
+**QA:** GitHub Pages `blog-sidebar-inject.js?v=25` marker `installCoreWebVitalsHints` servis ediyor. Cache-disabled desktop Playwright: `/berlin-tools` CLS `0.0052` LCP `1032ms`; `/games` `0.0052` / `880ms`; `/meeting-point` `0.0051` / `980ms`; `/berlin-walking-tour-route` `0.0052` / `1200ms`; `/widgets` `0.0052` / `1720ms`; `/blog` `0.0690` / `1456ms`.
+**Opened:** Search Console field/CrUX verisi hemen temizlenmez; 2026-06-30'da desktop CLS ve LCP için UI validation başlatıldı, sonuç günler/haftalar içinde izlenmeli.
+**Closed:** Canlı lab örneklerinde desktop CLS > 0.1 ve LCP > 2.5s problemi giderildi.
+
+## 2026-06-30 - Berlin Split premium visual pass
+
+**Did:** Berlin Split'in zayıf görsel katmanı için ChatGPT-browser workflow üzerinden ana harita görseli ve 10 görev görseli üretildi, optimize edildi ve yerel prototipe bağlandı.
+**Changed:**
+- `berlin-split/assets/source/visual-prompts-20260630.md` — ana harita + 10 görev için internal prompt/asset brief eklendi.
+- `berlin-split/assets/source/chatgpt-visuals-20260630/` — 11 kaynak PNG kaydedildi.
+- `berlin-split/assets/visuals/` — final `960x600` WebP seti eklendi: `berlin-split-map.webp` + 10 mission visual.
+- `berlin-split/data.json` — version `2026-06-30-berlin-split-visuals-v1`; start visual ve her mission için `visual` yolu eklendi.
+- `berlin-split/index.html` — start preview artık gerçek archive-map görselini kullanıyor; mission dossier içine geniş görsel alanı eklendi; mobilde dossier/görsel status-map panelinden önce geliyor; start/mission/checkpoint/result geçişlerinde scroll reset eklendi.
+**QA:** 11 asset yolu dosyada doğrulandı; JSON parse + inline script compile geçti; `git diff --check -- berlin-split` temiz; local `http://127.0.0.1:8766/berlin-split/?tracking=off` desktop start/mission ve 390px mobile start/mission QA'da görseller yüklü, overflow `0`, mobile mission visual first-screen içinde. Contact sheet: `output/qa/berlin-split-visuals-contact-sheet-20260630.jpg`.
+**Opened:** Oyun hâlâ live `/games` listesine alınmamalı; sonraki turda start ekranı metin yoğunluğu, oyun anlaşılırılığı, gerçek audio/voice kararı ve final social/cover asset değerlendirilmeli.
+**Closed:** Rejected local SVG/placeholder görsel yerine premium visual package yerel prototipe bağlandı.
+
+## 2026-06-30 - Berlin Split held from Games hub and clarified locally
+
+**Did:** Yusuf'un geri bildirimi üzerine Berlin Split oyununu bitmeden `/games` hub listesinden geri çektim ve yerel prototipi daha anlaşılır hale getirdim.
+**Changed:**
+- `games-page/games-page-element.js` — Berlin Split kartı, board satırı ve hero/mode metnindeki archive referansları kaldırıldı; hub artık yalnızca Berlin Battle, Berghain Bouncer, Berlin Smile Challenge ve Berlin Day Survival gösteriyor.
+- `berlin-split/index.html` + `data.json` — start ekranına 4 adımlı oyun brifingi eklendi; kötü SVG-heavy preview yerine evidence-desk/tray önizlemesi geldi; recovered file rozetleri `TV/RR/MI` yerine `01 TV Tower Signal` gibi açık adlar gösteriyor; seçenekler `East Berlin layer` / `Border zone layer` gibi daha net tray diline çekildi; ses için görünür `Turn sound on` / `Test sound` kontrolü ve daha belirgin browser SFX eklendi.
+- Root `scripts/upsert-games-page-wix-embed.mjs` — canlı eski script cache'i için URL-guarded güvenlik hotfix'i üretir hale getirildi; Wix `BerlinWalk Games Page Hub` embed revision `15` güncellendi ve site publish endpoint OK döndü.
+**QA:** JSON parse, inline script compile, `node --check`, `git diff --check`, yerel desktop + 390px mobil browser QA geçti; canlı `https://www.berlinwalk.com/games` cache-disabled QA 4 kart, Berlin Split yok, overflow `0`, console errors `0`.
+**Opened:** Berlin Split final launch için premium ChatGPT-browser görsel üretimi, gerçek audio/voice kararı ve yeni full QA gerekiyor.
+**Closed:** Berlin Split artık taze canlı `/games` renderında public listeye çıkmıyor.
+
 ## 2026-06-30 - World Cup score automation push rule
 
 **Did:** Yusuf'un yeni skor otomasyonu kuralı uygulandı: skor eklendiyse doğrulama ve loglardan sonra commit + push yapılacak; no-op koşulu dosyasız/logsuz/commit'siz kalacak.

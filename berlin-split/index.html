@@ -261,44 +261,59 @@
     }
 
     .bs-archive-preview {
-      align-self: stretch;
-      background:
-        linear-gradient(130deg, rgba(7, 59, 22, 0.96), rgba(25, 58, 66, 0.94)),
-        linear-gradient(90deg, rgba(255, 230, 0, 0.12) 1px, transparent 1px);
+      align-self: start;
+      background: #102E38;
       border: 2px solid var(--green-dark);
       border-radius: 8px;
       box-shadow: 8px 8px 0 var(--yellow);
       color: var(--paper);
       display: grid;
-      gap: 18px;
-      grid-template-rows: auto 1fr auto;
-      min-height: 460px;
+      isolation: isolate;
+      min-height: clamp(520px, 70vh, 660px);
       overflow: hidden;
-      padding: clamp(16px, 2.5vw, 24px);
+      padding: 0;
       position: relative;
     }
 
     .bs-archive-preview::before,
     .bs-archive-preview::after {
-      border: 1px solid rgba(255, 230, 0, 0.35);
       content: "";
       position: absolute;
-      transform: rotate(-8deg);
+      pointer-events: none;
     }
 
     .bs-archive-preview::before {
-      height: 118px;
-      right: 34px;
-      top: 76px;
-      width: 160px;
+      background:
+        linear-gradient(180deg, rgba(7, 59, 22, 0.08), rgba(7, 59, 22, 0.74)),
+        radial-gradient(circle at 16% 12%, rgba(255, 230, 0, 0.28), transparent 34%);
+      inset: 0;
+      z-index: 1;
     }
 
     .bs-archive-preview::after {
-      bottom: 62px;
-      height: 170px;
-      left: 38px;
-      transform: rotate(9deg);
-      width: 210px;
+      border: 1px solid rgba(255, 230, 0, 0.42);
+      inset: 14px;
+      z-index: 2;
+    }
+
+    .bs-preview-image {
+      height: 100%;
+      inset: 0;
+      object-fit: cover;
+      object-position: center;
+      position: absolute;
+      width: 100%;
+      z-index: 0;
+    }
+
+    .bs-preview-content {
+      display: grid;
+      gap: 18px;
+      grid-template-rows: auto 1fr auto;
+      min-height: inherit;
+      padding: clamp(16px, 2.5vw, 24px);
+      position: relative;
+      z-index: 3;
     }
 
     .bs-preview-top {
@@ -705,6 +720,50 @@
       text-transform: uppercase;
     }
 
+    .bs-mission-visual {
+      background: #102E38;
+      border: 2px solid var(--green-dark);
+      border-radius: 8px;
+      box-shadow: 5px 5px 0 rgba(7, 59, 22, 0.16);
+      margin: 0 0 17px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bs-mission-visual img {
+      aspect-ratio: 16 / 10;
+      display: block;
+      height: auto;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    .bs-mission-visual::after {
+      background:
+        linear-gradient(180deg, transparent 45%, rgba(7, 59, 22, 0.78)),
+        linear-gradient(90deg, rgba(255, 230, 0, 0.12), transparent 34%);
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    .bs-mission-visual figcaption {
+      background: rgba(7, 59, 22, 0.88);
+      border: 1px solid rgba(255, 230, 0, 0.54);
+      border-radius: 999px;
+      bottom: 12px;
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 950;
+      left: 12px;
+      letter-spacing: 0.02em;
+      padding: 7px 10px;
+      position: absolute;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
     .bs-instruction {
       color: var(--green-dark);
       font-size: clamp(16px, 2vw, 19px);
@@ -1081,7 +1140,7 @@
       }
 
       .bs-archive-preview {
-        min-height: 390px;
+        min-height: 520px;
       }
 
       .bs-game {
@@ -1090,6 +1149,10 @@
 
       .bs-left {
         grid-template-rows: auto auto auto auto auto auto;
+      }
+
+      .bs-right {
+        order: -1;
       }
 
       .bs-map-wrap {
@@ -1139,6 +1202,10 @@
 
       .bs-preview-route {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bs-archive-preview {
+        min-height: 480px;
       }
 
       .bs-status-bar,
@@ -1221,8 +1288,20 @@
           .replace(/'/g, '&#39;');
       }
 
+      function assetUrl(path) {
+        return escapeHtml(path || '');
+      }
+
       function clamp(value, min, max) {
         return Math.max(min, Math.min(max, value));
+      }
+
+      function scrollToTop() {
+        try {
+          window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        } catch {
+          window.scrollTo(0, 0);
+        }
       }
 
       async function init() {
@@ -1288,6 +1367,7 @@
       }
 
       function renderStart() {
+        const startVisual = state.data.visuals && state.data.visuals.start ? state.data.visuals.start : '';
         root.innerHTML = `
           <section class="bs-panel bs-start">
             <div class="bs-start-copy">
@@ -1312,31 +1392,46 @@
               </div>
             </div>
             <aside class="bs-archive-preview" aria-label="Archive desk preview">
-              <div class="bs-preview-top">
-                <span class="bs-preview-label">Evidence desk</span>
-                <span class="bs-preview-label">10 files</span>
-              </div>
-              <div class="bs-preview-desk">
-                <div class="bs-preview-evidence">
-                  <strong>Current file</strong>
-                  <span>Wide square, TV Tower, World Time Clock, older city below the surface.</span>
+              ${startVisual ? `<img class="bs-preview-image" src="${assetUrl(startVisual)}" alt="Cinematic archive desk with a divided Berlin map" loading="eager" decoding="async">` : ''}
+              <div class="bs-preview-content">
+                <div class="bs-preview-top">
+                  <span class="bs-preview-label">Evidence desk</span>
+                  <span class="bs-preview-label">10 files</span>
                 </div>
-                <div class="bs-preview-trays" aria-label="Archive trays">
-                  <div class="bs-preview-tray"><strong>East layer</strong><span>GDR-era power, planning, symbols.</span></div>
-                  <div class="bs-preview-tray"><strong>West layer</strong><span>Island city, border pressure, counterculture.</span></div>
-                  <div class="bs-preview-tray"><strong>Border layer</strong><span>Crossings, Wall zones, hidden procedures.</span></div>
-                  <div class="bs-preview-tray"><strong>Layered city</strong><span>Older Berlin, war, division, rebuild at once.</span></div>
-                </div>
-                <div class="bs-preview-route" aria-hidden="true">
-                  <span class="bs-preview-stop">File 01</span>
-                  <span class="bs-preview-stop">File 02</span>
-                  <span class="bs-preview-stop is-red">Risk</span>
-                  <span class="bs-preview-stop">Clue</span>
-                  <span class="bs-preview-stop">Rank</span>
+                <div class="bs-preview-desk">
+                  <div class="bs-preview-evidence">
+                    <strong>Current file</strong>
+                    <span>Wide square, TV Tower, World Time Clock, older city below the surface.</span>
+                  </div>
+                  <div class="bs-preview-trays" aria-label="Archive trays">
+                    <div class="bs-preview-tray"><strong>East layer</strong><span>GDR-era power, planning, symbols.</span></div>
+                    <div class="bs-preview-tray"><strong>West layer</strong><span>Island city, border pressure, counterculture.</span></div>
+                    <div class="bs-preview-tray"><strong>Border layer</strong><span>Crossings, Wall zones, hidden procedures.</span></div>
+                    <div class="bs-preview-tray"><strong>Layered city</strong><span>Older Berlin, war, division, rebuild at once.</span></div>
+                  </div>
+                  <div class="bs-preview-route" aria-hidden="true">
+                    <span class="bs-preview-stop">File 01</span>
+                    <span class="bs-preview-stop">File 02</span>
+                    <span class="bs-preview-stop is-red">Risk</span>
+                    <span class="bs-preview-stop">Clue</span>
+                    <span class="bs-preview-stop">Rank</span>
+                  </div>
                 </div>
               </div>
             </aside>
           </section>
+        `;
+      }
+
+      function renderMissionVisual(mission) {
+        if (!mission.visual) return '';
+        const caption = `${mission.kicker} / ${mission.location}`;
+        const alt = `${mission.location} archive evidence visual for ${mission.title}`;
+        return `
+          <figure class="bs-mission-visual">
+            <img src="${assetUrl(mission.visual)}" alt="${escapeHtml(alt)}" loading="eager" decoding="async">
+            <figcaption>${escapeHtml(caption)}</figcaption>
+          </figure>
         `;
       }
 
@@ -1386,6 +1481,7 @@
           mission_count: state.data.missions.length
         });
         trackMissionStart();
+        scrollToTop();
         render();
       }
 
@@ -1441,6 +1537,7 @@
                     <div class="bs-location">${escapeHtml(mission.location)}</div>
                   </div>
                 </div>
+                ${renderMissionVisual(mission)}
                 <p class="bs-instruction">${escapeHtml(mission.instruction)}</p>
                 <div class="bs-evidence">${escapeHtml(mission.evidence)}</div>
                 <div class="bs-clue ${state.clueVisible ? 'is-on' : ''}"><strong>Field clue</strong>${escapeHtml(mission.clue)}</div>
@@ -1579,6 +1676,7 @@
             step_count: state.commits
           });
           state.screen = 'collapse';
+          scrollToTop();
         }
         render();
       }
@@ -1622,11 +1720,13 @@
           saveCheckpoint();
           state.screen = 'checkpoint';
           playSound('stamp');
+          scrollToTop();
           render();
           return;
         }
 
         trackMissionStart();
+        scrollToTop();
         render();
       }
 
@@ -1654,6 +1754,7 @@
       function continueFromCheckpoint() {
         state.screen = 'mission';
         trackMissionStart();
+        scrollToTop();
         render();
       }
 
@@ -1707,6 +1808,7 @@
           collapses: state.collapses
         });
         trackMissionStart();
+        scrollToTop();
         render();
       }
 
@@ -1728,6 +1830,7 @@
           score: state.integrity,
           success: state.result.id === 'lost-tourist' ? 'false' : 'true'
         });
+        scrollToTop();
         render();
       }
 

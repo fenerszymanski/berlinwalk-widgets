@@ -18,15 +18,16 @@
 
 - Games page hub embed: `BerlinWalk Games Page Hub`
 - Embed ID: `34cdf9b0-5eac-4d47-b5fe-a431e47bdab5`
-- Current revision after inline custom-element persistence update: `3`
+- Current revision after Berlin Split hold hotfix: `15`
 - Nav/footer patch embed: `BerlinWalk Games Nav Footer Patch`
 - Embed ID: `a41c00c9-4f72-44a7-a366-69fdeb2349f8`
 - Current revision after retry fix: `2`
 - Publish API returned `200` after both embed updates.
 
-Note: The live Wix `/games` page uses a path-guarded inline `bw-games-page`
-custom element in the head embed so it does not depend on GitHub Pages cache for
-the hub render. The full repo custom element remains the richer source design.
+Note: The live Wix `/games` page loads the repo custom element and also has a
+path-guarded head embed safety layer. Revision `15` removes Berlin Split from
+the public hub if an old cached game script reappears before the prototype is
+ready for launch.
 
 ## Structured Data Draft
 
