@@ -17,6 +17,10 @@ time (CEST)**.
   stores all 32 knockout fixtures with match number, Berlin time, seed labels,
   matchup/slot labels, venue, and a projection flag for rows that can still
   move while group-stage games are unfinished.
+- Score automation rule: when verified final scores are added, update the
+  handoff logs, run the local checks, commit the widget repo changes, and push
+  `main` so GitHub Pages can deploy the live widget. If no score is due, keep
+  the run as a true no-op: no file edits, no logs, no commit and no push.
 
 **Data note:** the group-stage fixtures and kick-off times were assembled from
 public 2026 World Cup CET schedules and cross-checked against anchor matches

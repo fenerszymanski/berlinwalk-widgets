@@ -329,6 +329,10 @@
       padding: 10px;
       margin-bottom: 7px;
     }
+    #bw-wc-fixtures .bw-ko-match.complete {
+      border-color: #BFD3A2;
+      box-shadow: inset 4px 0 0 var(--bw-lime);
+    }
     #bw-wc-fixtures .bw-ko-match.final { border: 2px solid var(--bw-yellow); background: #FFFDF0; }
     #bw-wc-fixtures .bw-ko-top {
       display: flex;
@@ -360,6 +364,8 @@
     }
     #bw-wc-fixtures .bw-ko-side.away { justify-content: flex-end; text-align: right; }
     #bw-wc-fixtures .bw-ko-side.away .bw-ko-seed { order: -1; }
+    #bw-wc-fixtures .bw-ko-side.win .bw-ko-name { color: var(--bw-green); font-weight: 900; }
+    #bw-wc-fixtures .bw-ko-side.loss .bw-ko-name { color: var(--bw-muted); }
     #bw-wc-fixtures .bw-ko-name {
       min-width: 0;
       overflow: hidden;
@@ -381,6 +387,24 @@
       color: var(--bw-muted);
       font-size: 11px;
       font-weight: 900;
+    }
+    #bw-wc-fixtures .bw-ko-score {
+      color: var(--bw-text);
+      font-size: 16px;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    #bw-wc-fixtures .bw-ko-status {
+      display: inline-block;
+      margin-left: 6px;
+      border-radius: 999px;
+      background: var(--bw-yellow);
+      color: var(--bw-green-dark);
+      padding: 2px 6px;
+      font-size: 9.5px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
     }
     #bw-wc-fixtures .bw-ko-place {
       margin-top: 7px;
@@ -475,7 +499,7 @@
     // ---- Data: group stage (all 72 matches), times already in Berlin CEST ----
     // d = ISO date, t = HH:MM CEST, h/a = teams, g = group letter.
     // Optional final-score fields: home goals, away goals, status label.
-    var SCORE_UPDATED = '28 Jun 2026, 08:29 CEST';
+    var SCORE_UPDATED = '30 Jun 2026, 08:03 CEST';
     var M = [
       ['2026-06-11','21:00','Mexico','South Africa','A',2,0,'FT'],
       ['2026-06-12','04:00','South Korea','Czechia','A',2,1,'FT'],
@@ -554,11 +578,13 @@
     // ---- Knockout calendar ----
     // Round of 32 names use the current group table where known. Groups J/K/L
     // and third-place slot allocation can still move until all group games end.
+    // Optional final-score fields after projected: home goals, away goals, status,
+    // home penalty goals, away penalty goals.
     var KO = [
-      ['Round of 32','M73','2026-06-28','21:00','South Africa','Canada','2A','2B','SoFi Stadium, Inglewood',false],
-      ['Round of 32','M76','2026-06-29','19:00','Brazil','Japan','1C','2F','NRG Stadium, Houston',false],
-      ['Round of 32','M74','2026-06-29','22:30','Germany','Paraguay','1E','3D','Gillette Stadium, Foxborough',true],
-      ['Round of 32','M75','2026-06-30','03:00','Netherlands','Morocco','1F','2C','Estadio Monterrey, Guadalupe',false],
+      ['Round of 32','M73','2026-06-28','21:00','South Africa','Canada','2A','2B','SoFi Stadium, Inglewood',false,0,1,'FT'],
+      ['Round of 32','M76','2026-06-29','19:00','Brazil','Japan','1C','2F','NRG Stadium, Houston',false,2,1,'FT'],
+      ['Round of 32','M74','2026-06-29','22:30','Germany','Paraguay','1E','3D','Gillette Stadium, Foxborough',false,1,1,'PSO',3,4],
+      ['Round of 32','M75','2026-06-30','03:00','Netherlands','Morocco','1F','2C','Estadio Monterrey, Guadalupe',false,1,1,'PSO',2,3],
       ['Round of 32','M78','2026-06-30','19:00','Ivory Coast','Norway','2E','2I','AT&T Stadium, Arlington',false],
       ['Round of 32','M77','2026-06-30','23:00','France','Sweden','1I','3F','MetLife Stadium, East Rutherford',true],
       ['Round of 32','M79','2026-07-01','03:00','Mexico','Ecuador','1A','3E','Estadio Azteca, Mexico City',true],
@@ -627,6 +653,13 @@
       return { d: m[0], t: m[1], h: m[2], a: m[3], g: m[4], when: dt(m[0], m[1]), slot: slot(m[1]),
                hs: hs, as: as, status: m[7] || '', final: hs !== null && as !== null,
                de: (m[2] === 'Germany' || m[3] === 'Germany') };
+    });
+    var koMatches = KO.map(function (k) {
+      var hs = typeof k[10] === 'number' ? k[10] : null;
+      var as = typeof k[11] === 'number' ? k[11] : null;
+      return { d: k[2], t: k[3], h: k[4], a: k[5], g: k[0], when: dt(k[2], k[3]), slot: slot(k[3]),
+               hs: hs, as: as, status: k[12] || '', final: hs !== null && as !== null,
+               de: (k[4] === 'Germany' || k[5] === 'Germany'), knockout: true };
     });
 
     // Unique days in order
@@ -760,14 +793,21 @@
             listEl.appendChild(st);
           }
           var ko = document.createElement('div');
-          ko.className = 'bw-ko-match' + (k[1] === 'M104' ? ' final' : '');
+          var complete = typeof k[10] === 'number' && typeof k[11] === 'number';
+          var pso = complete && typeof k[13] === 'number' && typeof k[14] === 'number';
+          var homeWin = complete && (k[10] > k[11] || (pso && k[13] > k[14]));
+          var awayWin = complete && (k[11] > k[10] || (pso && k[14] > k[13]));
+          var status = complete ? (k[12] || 'FT') : '';
+          var homeScore = complete ? '<span class="bw-ko-score">' + k[10] + (pso ? ' (' + k[13] + ')' : '') + '</span>' : '';
+          var awayScore = complete ? '<span class="bw-ko-score">' + k[11] + (pso ? ' (' + k[14] + ')' : '') + '</span>' : '';
+          ko.className = 'bw-ko-match' + (complete ? ' complete' : '') + (k[1] === 'M104' ? ' final' : '');
           ko.innerHTML =
             '<div class="bw-ko-top"><span class="bw-ko-code">' + k[1] + (k[9] ? ' - projected' : '') + '</span>' +
-              '<span class="bw-ko-when">' + fmtDay(k[2]) + ', ' + k[3] + '</span></div>' +
+              '<span class="bw-ko-when">' + fmtDay(k[2]) + ', ' + k[3] + (status ? '<span class="bw-ko-status">' + status + '</span>' : '') + '</span></div>' +
             '<div class="bw-ko-teams">' +
-              '<div class="bw-ko-side"><span class="bw-flag">' + flag(k[4]) + '</span><span class="bw-ko-name">' + k[4] + '</span><span class="bw-ko-seed">' + k[6] + '</span></div>' +
+              '<div class="bw-ko-side' + (homeWin ? ' win' : (awayWin ? ' loss' : '')) + '"><span class="bw-flag">' + flag(k[4]) + '</span><span class="bw-ko-name">' + k[4] + '</span><span class="bw-ko-seed">' + k[6] + '</span>' + homeScore + '</div>' +
               '<div class="bw-ko-vs">VS</div>' +
-              '<div class="bw-ko-side away"><span class="bw-ko-seed">' + k[7] + '</span><span class="bw-ko-name">' + k[5] + '</span><span class="bw-flag">' + flag(k[5]) + '</span></div>' +
+              '<div class="bw-ko-side away' + (awayWin ? ' win' : (homeWin ? ' loss' : '')) + '">' + awayScore + '<span class="bw-ko-seed">' + k[7] + '</span><span class="bw-ko-name">' + k[5] + '</span><span class="bw-flag">' + flag(k[5]) + '</span></div>' +
             '</div>' +
             '<div class="bw-ko-place">' + k[8] + '</div>';
           listEl.appendChild(ko);
@@ -778,7 +818,9 @@
       var labelMap = { all: 'all 72 group-stage matches + 32 knockout fixtures', de: "Germany's group matches", evening: 'evening kick-offs (before midnight, Berlin time)', today: "today's matches" };
       var label = team ? (flag(team) + ' ' + team + "'s group matches") : (labelMap[current] || '');
       var finals = rows.filter(function (m) { return m.final; }).length;
-      var scoreNote = finals ? ' &middot; <b>' + finals + '</b> final ' + (finals === 1 ? 'score' : 'scores') : '';
+      var koFinals = current === 'all' && !team ? koMatches.filter(function (m) { return m.final; }).length : 0;
+      var scoreNote = finals ? ' &middot; <b>' + finals + '</b> group final ' + (finals === 1 ? 'score' : 'scores') : '';
+      if (koFinals) scoreNote += ' &middot; <b>' + koFinals + '</b> knockout final ' + (koFinals === 1 ? 'score' : 'scores');
       var updated = SCORE_UPDATED ? ' &middot; updated ' + SCORE_UPDATED : '';
       metaEl.innerHTML = 'Showing <b>' + rows.length + '</b> &middot; ' + label + scoreNote + updated;
     }
@@ -828,7 +870,8 @@
 
     function nextMatch() {
       var now = Date.now();
-      var up = matches.filter(function (m) { return m.when.getTime() > now; });
+      var up = matches.concat(koMatches).filter(function (m) { return m.when.getTime() > now; });
+      up.sort(function (a, b) { return a.when - b.when; });
       return up.length ? up[0] : null;
     }
 
@@ -843,9 +886,9 @@
         countEl.innerHTML = '';
         return;
       }
-      nLabel.textContent = nm.de ? 'Next up — Germany' : 'Next match';
+      nLabel.textContent = nm.de ? 'Next up - Germany' : 'Next match';
       nMatch.innerHTML = flag(nm.h) + ' ' + nm.h + ' <span style="opacity:.7;font-weight:700">vs</span> ' + flag(nm.a) + ' ' + nm.a;
-      nWhen.innerHTML = fmtDay(nm.d) + ' &middot; ' + nm.t + ' Berlin time &middot; Group ' + nm.g;
+      nWhen.innerHTML = fmtDay(nm.d) + ' &middot; ' + nm.t + ' Berlin time &middot; ' + (nm.knockout ? nm.g : ('Group ' + nm.g));
 
       var diff = Math.max(0, nm.when.getTime() - Date.now());
       var s = Math.floor(diff / 1000);

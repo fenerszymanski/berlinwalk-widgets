@@ -1,3 +1,23 @@
+## 2026-06-30 - World Cup score automation push rule
+
+**Did:** Yusuf'un yeni skor otomasyonu kuralı uygulandı: skor eklendiyse doğrulama ve loglardan sonra commit + push yapılacak; no-op koşulu dosyasız/logsuz/commit'siz kalacak.
+**Changed:**
+- `worldcup-fixtures/README.md` — yeni commit/push kuralı eklendi.
+- Repo push kapsamı Yusuf'un isteğiyle mevcut tracked değişikliklerin tamamı olarak belirlendi.
+**Opened:** GitHub Pages yayılımı push sonrası kontrol edilmeli.
+**Closed:** World Cup skor otomasyonunda "skor varsa push da yap" kuralı netleşti.
+**Next session should:** Gelecek skor otomasyonu run'larında verified score varsa commit ve push adımını varsayılan yap.
+
+## 2026-06-30 - World Cup Round of 32 scores
+
+**Did:** `worldcup-fixtures` KO skor güncellemesi tamamlandı; önceki no-op sebebi `M` grup dizisinin dolu, Round of 32 maçlarının ise `KO` dizisinde olmasıydı.
+**Changed:**
+- `worldcup-fixtures/index.html` — 4 Round of 32 final skoru eklendi: South Africa 0-1 Canada, Brazil 2-1 Japan, Germany 1-1 Paraguay (Paraguay 4-3 pens), Netherlands 1-1 Morocco (Morocco 3-2 pens).
+- `worldcup-fixtures/index.html` — `KO` satırları opsiyonel home/away goals, status ve penaltı skorlarını render ediyor; `Next match` artık grup aşaması bittikten sonra KO maçlarını da sayıyor; `SCORE_UPDATED` `30 Jun 2026, 08:03 CEST`.
+**Opened:** Canlı GitHub Pages için push/deploy gerekiyor.
+**Closed:** R32 ilk dört biten maç widget kaynak dosyasında skorlandı.
+**Next session should:** Push sonrası `https://fenerszymanski.github.io/berlinwalk-widgets/worldcup-fixtures/` üzerinde `SCORE_UPDATED` ve KO skorlarının yayıldığını kontrol et.
+
 ## 2026-06-30 — Codex (widget git cleanup + log push)
 
 **Did:** `berlinwalk-widgets` repo state was cleaned without touching tracked source/data work.

@@ -166,6 +166,50 @@
       width: 10px;
     }
 
+    .bs-start-briefing {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      max-width: 760px;
+    }
+
+    .bs-briefing-card {
+      background: rgba(255, 255, 255, 0.72);
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      color: var(--green-dark);
+      display: grid;
+      gap: 5px;
+      min-height: 106px;
+      padding: 13px;
+    }
+
+    .bs-briefing-card strong {
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bs-briefing-card span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 760;
+      line-height: 1.35;
+    }
+
+    .bs-sound-card {
+      background: rgba(255, 230, 0, 0.16);
+      border: 2px dashed rgba(7, 59, 22, 0.42);
+      border-radius: 8px;
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.42;
+      max-width: 740px;
+      padding: 12px 14px;
+    }
+
     .bs-start-actions,
     .bs-actions {
       display: flex;
@@ -272,10 +316,98 @@
       text-transform: uppercase;
     }
 
-    .bs-preview-map {
-      align-self: center;
+    .bs-preview-desk {
+      align-self: stretch;
+      display: grid;
+      gap: 12px;
+      grid-template-rows: auto 1fr auto;
+      min-height: 300px;
       position: relative;
       z-index: 1;
+    }
+
+    .bs-preview-evidence {
+      background: rgba(250, 250, 245, 0.92);
+      border: 2px solid rgba(255, 230, 0, 0.82);
+      border-radius: 8px;
+      box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.22);
+      color: var(--green-dark);
+      display: grid;
+      gap: 7px;
+      justify-self: start;
+      max-width: 320px;
+      padding: 13px;
+      transform: rotate(-2deg);
+    }
+
+    .bs-preview-evidence strong {
+      font-size: 13px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bs-preview-evidence span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 780;
+      line-height: 1.35;
+    }
+
+    .bs-preview-trays {
+      align-self: center;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bs-preview-tray {
+      background: rgba(250, 250, 245, 0.1);
+      border: 1px solid rgba(255, 230, 0, 0.34);
+      border-radius: 8px;
+      min-height: 68px;
+      padding: 10px;
+    }
+
+    .bs-preview-tray strong {
+      color: var(--yellow);
+      display: block;
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bs-preview-tray span {
+      color: rgba(250, 250, 245, 0.76);
+      display: block;
+      font-size: 11px;
+      font-weight: 760;
+      line-height: 1.25;
+      margin-top: 4px;
+    }
+
+    .bs-preview-route {
+      align-items: center;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    .bs-preview-stop {
+      background: rgba(255, 230, 0, 0.92);
+      border: 2px solid var(--green-dark);
+      border-radius: 999px;
+      color: var(--green-dark);
+      display: grid;
+      font-size: 10px;
+      font-weight: 950;
+      min-height: 38px;
+      place-items: center;
+      text-align: center;
+    }
+
+    .bs-preview-stop.is-red {
+      background: var(--red);
+      color: var(--paper);
     }
 
     .bs-map {
@@ -334,7 +466,7 @@
       color: var(--paper);
       display: grid;
       gap: 14px;
-      grid-template-rows: auto auto 1fr auto;
+      grid-template-rows: auto auto auto auto 1fr auto;
       min-width: 0;
       padding: 16px;
     }
@@ -343,6 +475,37 @@
       display: grid;
       gap: 10px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bs-sound-strip {
+      align-items: center;
+      background: rgba(250, 250, 245, 0.08);
+      border: 1px dashed rgba(255, 230, 0, 0.34);
+      border-radius: 6px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      padding: 9px 10px;
+    }
+
+    .bs-sound-strip span {
+      color: rgba(250, 250, 245, 0.76);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bs-sound-mini {
+      background: rgba(255, 230, 0, 0.96);
+      border: 1px solid var(--green-dark);
+      border-radius: 999px;
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 950;
+      min-height: 30px;
+      padding: 5px 10px;
+      text-transform: uppercase;
     }
 
     .bs-meter {
@@ -460,21 +623,35 @@
     .bs-pieces {
       display: grid;
       gap: 8px;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .bs-piece {
-      align-items: center;
+      align-items: start;
       background: rgba(250, 250, 245, 0.09);
       border: 1px solid rgba(250, 250, 245, 0.22);
       border-radius: 6px;
       color: rgba(250, 250, 245, 0.48);
-      display: flex;
-      font-size: 11px;
+      display: grid;
+      gap: 3px;
+      font-size: 10px;
       font-weight: 950;
-      justify-content: center;
-      min-height: 42px;
-      text-align: center;
+      justify-content: stretch;
+      min-height: 58px;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .bs-piece strong {
+      color: rgba(255, 230, 0, 0.62);
+      font-size: 10px;
+      line-height: 1;
+    }
+
+    .bs-piece span {
+      color: rgba(250, 250, 245, 0.66);
+      font-size: 11px;
+      line-height: 1.18;
     }
 
     .bs-piece.is-on {
@@ -482,6 +659,11 @@
       border-color: var(--yellow);
       color: var(--green-dark);
       box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.25);
+    }
+
+    .bs-piece.is-on strong,
+    .bs-piece.is-on span {
+      color: var(--green-dark);
     }
 
     .bs-right {
@@ -565,6 +747,16 @@
       display: grid;
       gap: 10px;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bs-decision-label {
+      color: var(--green-dark);
+      display: block;
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0.02em;
+      margin: 0 0 10px;
+      text-transform: uppercase;
     }
 
     .bs-option {
@@ -897,7 +1089,7 @@
       }
 
       .bs-left {
-        grid-template-rows: auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto;
       }
 
       .bs-map-wrap {
@@ -935,9 +1127,17 @@
         font-size: 40px;
       }
 
-      .bs-preview-files,
       .bs-pieces,
       .bs-result-pieces {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .bs-start-briefing,
+      .bs-preview-trays {
+        grid-template-columns: 1fr;
+      }
+
+      .bs-preview-route {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
@@ -1093,12 +1293,19 @@
             <div class="bs-start-copy">
               <span class="bs-kicker">Divided-city archive game</span>
               <h1>Berlin Split <span>The Lost Archive</span></h1>
-              <p class="bs-start-lead">${escapeHtml(state.data.subtitle)}</p>
+              <p class="bs-start-lead">You are restoring ten lost Berlin files. Read each piece of evidence, choose the archive tray it belongs in, and keep the city from collapsing into a simple East-vs-West story.</p>
+              <div class="bs-start-briefing" aria-label="How Berlin Split works">
+                <div class="bs-briefing-card"><strong>1. Read the file</strong><span>Each stop gives you one Berlin clue: a square, station, museum, Wall fragment, or rebuilt site.</span></div>
+                <div class="bs-briefing-card"><strong>2. Choose a tray</strong><span>Place the file into East Berlin, West Berlin, Border, Rebuilt, or Layered city logic.</span></div>
+                <div class="bs-briefing-card"><strong>3. Protect integrity</strong><span>Wrong shortcuts damage the archive. Clues help, but they cost integrity.</span></div>
+                <div class="bs-briefing-card"><strong>4. Replay for rank</strong><span>A messy run can still finish. A clean run unlocks the result worth sharing.</span></div>
+              </div>
               <ul class="bs-start-rules">
-                <li>Inspect map fragments, border files and rebuilt-city evidence.</li>
-                <li>Protect Archive Integrity while recovering ten lost files.</li>
-                <li>Use clues carefully: every clue makes the file easier and the final rank harder.</li>
+                <li>This is not a trivia test. It is a reading game: the evidence is on the file.</li>
+                <li>The best answer is often the one that keeps Berlin complicated.</li>
+                <li>If the archive collapses, you can retry from the last safe checkpoint.</li>
               </ul>
+              <p class="bs-sound-card">Sound effects are intentionally off until you choose them. Pick sound mode first, then use the Test sound button inside the game if your browser stays quiet.</p>
               <div class="bs-start-actions">
                 <button class="bs-btn bs-btn-primary" type="button" data-start="sound">${escapeHtml(state.data.copy.openWithSound)}</button>
                 <button class="bs-btn bs-btn-secondary" type="button" data-start="quiet">${escapeHtml(state.data.copy.openQuietly)}</button>
@@ -1106,14 +1313,27 @@
             </div>
             <aside class="bs-archive-preview" aria-label="Archive desk preview">
               <div class="bs-preview-top">
-                <span class="bs-preview-label">Archive integrity locked</span>
-                <span class="bs-preview-label">1989 / 2026</span>
+                <span class="bs-preview-label">Evidence desk</span>
+                <span class="bs-preview-label">10 files</span>
               </div>
-              <div class="bs-preview-map">${mapSvg({ x: 58, y: 42 })}</div>
-              <div class="bs-preview-files">
-                <div class="bs-preview-file"><strong>Border Record</strong><span>Friedrichstrasse file unstable</span></div>
-                <div class="bs-preview-file"><strong>Rebuild Trace</strong><span>Palast shadow mismatch</span></div>
-                <div class="bs-preview-file"><strong>City Layer</strong><span>East/West label incomplete</span></div>
+              <div class="bs-preview-desk">
+                <div class="bs-preview-evidence">
+                  <strong>Current file</strong>
+                  <span>Wide square, TV Tower, World Time Clock, older city below the surface.</span>
+                </div>
+                <div class="bs-preview-trays" aria-label="Archive trays">
+                  <div class="bs-preview-tray"><strong>East layer</strong><span>GDR-era power, planning, symbols.</span></div>
+                  <div class="bs-preview-tray"><strong>West layer</strong><span>Island city, border pressure, counterculture.</span></div>
+                  <div class="bs-preview-tray"><strong>Border layer</strong><span>Crossings, Wall zones, hidden procedures.</span></div>
+                  <div class="bs-preview-tray"><strong>Layered city</strong><span>Older Berlin, war, division, rebuild at once.</span></div>
+                </div>
+                <div class="bs-preview-route" aria-hidden="true">
+                  <span class="bs-preview-stop">File 01</span>
+                  <span class="bs-preview-stop">File 02</span>
+                  <span class="bs-preview-stop is-red">Risk</span>
+                  <span class="bs-preview-stop">Clue</span>
+                  <span class="bs-preview-stop">Rank</span>
+                </div>
               </div>
             </aside>
           </section>
@@ -1160,6 +1380,7 @@
         if (state.soundEnabled) initAudio();
         saveCheckpoint();
         playSound('open');
+        if (state.soundEnabled) window.setTimeout(() => playSound('paper'), 180);
         track('bw_berlin_split_open_archive', {
           sound_enabled: state.soundEnabled,
           mission_count: state.data.missions.length
@@ -1192,6 +1413,10 @@
                 <div class="bs-meter"><span>Clues</span><strong>${state.clues}</strong></div>
                 <div class="bs-meter"><span>Files</span><strong>${state.pieces.length}/${state.data.archivePieces.length}</strong></div>
               </div>
+              <div class="bs-sound-strip">
+                <span>Sound effects: ${state.soundEnabled ? 'on' : 'off'}</span>
+                <button class="bs-sound-mini" type="button" ${state.soundEnabled ? 'data-test-sound' : 'data-enable-sound'}>${state.soundEnabled ? 'Test sound' : 'Turn sound on'}</button>
+              </div>
               <div class="bs-progress-track" aria-label="Archive progress"><div class="bs-progress-fill" style="width:${progress}%"></div></div>
               <div class="bs-mini-head">
                 <p class="bs-act"><strong>${escapeHtml(act.label)} - ${escapeHtml(act.title)}</strong>${escapeHtml(act.lead)}</p>
@@ -1199,8 +1424,11 @@
               </div>
               <div class="bs-map-wrap">${mapSvg(mission.mapPoint)}</div>
               <div class="bs-pieces" aria-label="Recovered archive pieces">
-                ${state.data.archivePieces.map((piece) => `
-                  <div class="bs-piece ${state.pieces.includes(piece.id) ? 'is-on' : ''}" title="${escapeHtml(piece.name)}">${escapeHtml(piece.mark)}</div>
+                ${state.data.archivePieces.map((piece, index) => `
+                  <div class="bs-piece ${state.pieces.includes(piece.id) ? 'is-on' : ''}" title="${escapeHtml(piece.description)}">
+                    <strong>${String(index + 1).padStart(2, '0')}</strong>
+                    <span>${escapeHtml(piece.name)}</span>
+                  </div>
                 `).join('')}
               </div>
             </aside>
@@ -1224,8 +1452,8 @@
               <footer class="bs-footer-actions">
                 <p class="bs-note">${escapeHtml(mission.stereotype ? `Stereotype file: ${mission.stereotype}` : 'Keep the archive stable.')}</p>
                 <div class="bs-actions">
-                  <button class="bs-btn bs-btn-secondary" type="button" data-clue ${state.clues <= 0 || state.clueVisible ? 'disabled' : ''}>Spend a clue</button>
-                  <button class="bs-btn bs-btn-primary" type="button" data-commit>${state.feedback ? 'Recover next file' : 'Commit to archive'}</button>
+                  <button class="bs-btn bs-btn-secondary" type="button" data-clue ${state.clues <= 0 || state.clueVisible ? 'disabled' : ''}>Reveal guide note (-5)</button>
+                  <button class="bs-btn bs-btn-primary" type="button" data-commit>${state.feedback ? 'Recover next file' : 'Lock this file'}</button>
                 </div>
               </footer>
             </section>
@@ -1236,6 +1464,7 @@
 
       function renderOptions(mission) {
         return `
+          <span class="bs-decision-label">Choose the archive tray for this file</span>
           <div class="bs-options">
             ${mission.options.map((option) => `
               <button class="bs-option ${state.selectedOption === option.id ? 'is-selected' : ''}" type="button" data-option="${escapeHtml(option.id)}">
@@ -1301,7 +1530,7 @@
           result = evaluateAlign(mission);
         } else {
           if (!state.selectedOption) {
-            pulseFeedback('Select an archive file first.', 'File not placed');
+            pulseFeedback('Choose one archive tray before locking this file.', 'Choose a tray first');
             return;
           }
           result = mission.options.find((option) => option.id === state.selectedOption);
@@ -1589,6 +1818,10 @@
         if (clue) clue.addEventListener('click', useClue);
         const commit = root.querySelector('[data-commit]');
         if (commit) commit.addEventListener('click', commitMission);
+        const testSound = root.querySelector('[data-test-sound]');
+        if (testSound) testSound.addEventListener('click', testSoundEffects);
+        const enableSound = root.querySelector('[data-enable-sound]');
+        if (enableSound) enableSound.addEventListener('click', enableSoundEffects);
         const cont = root.querySelector('[data-continue]');
         if (cont) cont.addEventListener('click', continueFromCheckpoint);
         root.querySelectorAll('[data-clean-restart]').forEach((button) => {
@@ -1617,35 +1850,68 @@
         state.audio = new AudioContext();
       }
 
+      function enableSoundEffects() {
+        state.soundEnabled = true;
+        initAudio();
+        playSound('open');
+        track('bw_berlin_split_sound_enabled', {
+          act: currentMission() ? currentMission().act : '',
+          mission: currentMission() ? currentMission().id : '',
+          integrity: state.integrity
+        });
+        render();
+      }
+
+      function testSoundEffects() {
+        state.soundEnabled = true;
+        initAudio();
+        playSound('test');
+        track('bw_berlin_split_sound_test', {
+          act: currentMission() ? currentMission().act : '',
+          mission: currentMission() ? currentMission().id : '',
+          integrity: state.integrity
+        });
+      }
+
       function playSound(kind) {
         if (!state.soundEnabled) return;
         initAudio();
         const ctx = state.audio;
         if (!ctx) return;
-        if (ctx.state === 'suspended') ctx.resume().catch(() => {});
-        const now = ctx.currentTime;
-        const map = {
-          open: [220, 0.06, 'sine'],
-          select: [520, 0.035, 'triangle'],
-          paper: [180, 0.045, 'sawtooth'],
-          stamp: [320, 0.08, 'square'],
-          warning: [130, 0.11, 'sawtooth'],
-          recover: [720, 0.08, 'triangle'],
-          result: [440, 0.12, 'sine']
+        const schedule = () => scheduleSoundPattern(ctx, kind);
+        if (ctx.state === 'suspended') {
+          ctx.resume().then(schedule).catch(() => {});
+          return;
+        }
+        schedule();
+      }
+
+      function scheduleSoundPattern(ctx, kind) {
+        const patterns = {
+          open: [[210, 0.18, 'sine', 0], [315, 0.16, 'triangle', 0.13]],
+          select: [[520, 0.11, 'triangle', 0]],
+          paper: [[175, 0.14, 'sawtooth', 0], [118, 0.08, 'triangle', 0.08]],
+          stamp: [[280, 0.11, 'square', 0], [150, 0.09, 'sawtooth', 0.07]],
+          warning: [[125, 0.18, 'sawtooth', 0], [92, 0.12, 'square', 0.11]],
+          recover: [[640, 0.12, 'triangle', 0], [880, 0.15, 'sine', 0.1]],
+          result: [[360, 0.16, 'sine', 0], [540, 0.15, 'triangle', 0.13], [760, 0.22, 'sine', 0.26]],
+          test: [[260, 0.14, 'sine', 0], [520, 0.14, 'triangle', 0.16], [780, 0.18, 'sine', 0.32]]
         };
-        const [freq, duration, type] = map[kind] || map.select;
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = type;
-        osc.frequency.setValueAtTime(freq, now);
-        if (kind === 'result') osc.frequency.exponentialRampToValueAtTime(880, now + duration);
-        gain.gain.setValueAtTime(0.0001, now);
-        gain.gain.exponentialRampToValueAtTime(0.05, now + 0.008);
-        gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start(now);
-        osc.stop(now + duration + 0.02);
+        const sequence = patterns[kind] || patterns.select;
+        sequence.forEach(([freq, duration, type, delay]) => {
+          const now = ctx.currentTime + delay;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = type;
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.16, now + 0.014);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + duration + 0.04);
+        });
       }
 
       function sharePayload() {
