@@ -952,6 +952,27 @@
 
   function trackBookLinkClick(link, context) {
     context = link.getAttribute('data-bw-book-context') || context || 'blog_book_link';
+    var currentUrl = new URL(window.location.href);
+    var params = currentUrl.searchParams;
+    var trackingBody = {
+      eventName: 'bw_booking_pick_date_click',
+      pagePath: window.location.pathname,
+      landingPage: window.location.href,
+      referrer: document.referrer || '',
+      utmSource: params.get('utm_source') || '',
+      utmMedium: params.get('utm_medium') || '',
+      utmCampaign: params.get('utm_campaign') || '',
+      utmContent: params.get('utm_content') || '',
+      utmTerm: params.get('utm_term') || '',
+      fbclid: params.get('fbclid') || '',
+      isPaid: Boolean(params.get('utm_source') || params.get('fbclid')),
+      screenWidth: String(window.screen && window.screen.width || ''),
+      viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
+      payload: {
+        link_kind: 'blog_book_link',
+        cta_name: context
+      }
+    };
     pushEvent('bw_book_link_click', {
       cta_name: context,
       page_path: window.location.pathname
@@ -961,15 +982,7 @@
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         keepalive: true,
-        body: JSON.stringify({
-          eventName: 'bw_booking_pick_date_click',
-          pageUrl: window.location.href,
-          path: window.location.pathname,
-          payload: {
-            link_kind: 'blog_book_link',
-            cta_name: context
-          }
-        })
+        body: JSON.stringify(trackingBody)
       }).catch(function () {});
     } catch (err) {}
   }
