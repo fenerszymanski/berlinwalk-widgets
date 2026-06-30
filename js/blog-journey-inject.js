@@ -21,6 +21,9 @@
   var TOUR_IMAGE = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_700,h_420,al_c,q_86,enc_avif,quality_auto/file.jpg';
   var TOOL_ICON_BASE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/';
   var DEFAULT_TOOL_IMAGE = TOOL_ICON_BASE_URL + 'generic-tool.svg';
+  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
+  var ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'];
   var dataCache = null;
   var dataPromise = null;
   var renderTimer = null;
@@ -925,6 +928,69 @@
     if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
   }
 
+  function isBookEntryHref(href) {
+    try {
+      var url = new URL(href, window.location.href);
+      var path = url.pathname.toLowerCase();
+      return path === '/book' || path.indexOf('/book-berlin-walking-tour') === 0;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function applyBookAttribution(url, context) {
+    var incoming = new URL(window.location.href);
+    ATTRIBUTION_KEYS.forEach(function (key) {
+      if (incoming.searchParams.has(key)) url.searchParams.set(key, incoming.searchParams.get(key));
+    });
+    if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
+    if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'blog_bridge');
+    if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', 'utility_blog_booking_bridge');
+    if (!url.searchParams.has('utm_content')) url.searchParams.set('utm_content', currentSlug() + '_' + context);
+    return url;
+  }
+
+  function trackBookLinkClick(link, context) {
+    context = link.getAttribute('data-bw-book-context') || context || 'blog_book_link';
+    pushEvent('bw_book_link_click', {
+      cta_name: context,
+      page_path: window.location.pathname
+    });
+    try {
+      window.fetch(TRACK_ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          eventName: 'bw_booking_pick_date_click',
+          pageUrl: window.location.href,
+          path: window.location.pathname,
+          payload: {
+            link_kind: 'blog_book_link',
+            cta_name: context
+          }
+        })
+      }).catch(function () {});
+    } catch (err) {}
+  }
+
+  function decorateBlogBookLinks() {
+    if (!isPostPage()) return;
+    document.querySelectorAll('a[href]').forEach(function (link) {
+      var rawHref = link.getAttribute('href') || '';
+      if (!isBookEntryHref(rawHref)) return;
+      var context = link.getAttribute('data-bw-book-context') || (link.classList.contains('bw-btn') ? 'mobile_sticky_book' : 'blog_book_link');
+      link.setAttribute('data-book-link', '1');
+      link.setAttribute('data-bw-book-context', context);
+      link.href = applyBookAttribution(new URL(BOOKING_URL, window.location.href), context).toString();
+      if (link.getAttribute('data-bw-book-click-bound') === '1') return;
+      link.setAttribute('data-bw-book-click-bound', '1');
+      link.addEventListener('click', function () {
+        trackBookLinkClick(link, context);
+      });
+    });
+  }
+
   function insertBackToTop() {
     var button = document.querySelector('[' + BACK_TOP_MARKER + ']');
     if (!button) {
@@ -965,11 +1031,13 @@
     insertMobileBlogNav(body, dataCache);
     insertMobileGuide(body, items);
     markBlogReady();
+    decorateBlogBookLinks();
     loadData().then(function (data) {
       insertMobileBlogNav(body, data);
       insertToolPrompt(body, data, items);
       insertJourney(body, data);
       hideNativeEndMatter();
+      decorateBlogBookLinks();
     });
   }
 
@@ -1027,6 +1095,7 @@
       if (body) normalizePostSpacing(body);
       if (body) normalizeHeadingTypography(body);
       hideNativeEndMatter();
+      decorateBlogBookLinks();
       // Gap-free top-nav restore: Wix/React repeatedly wipes nodes it does not
       // own while the post page hydrates, including our top mobile nav. Restoring
       // it via scheduleRender() (an 80ms macrotask) let at least one paint happen
