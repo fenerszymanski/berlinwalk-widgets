@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T11:44:56.055Z",
+  "updatedAt": "2026-06-30T19:55:50.077Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 150,
@@ -1079,23 +1079,6 @@
           "relatedToolSlug": ""
         },
         {
-          "title": "Alexanderplatz Then and Now: From Medieval Market to Modern Chaos",
-          "slug": "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-          "path": "/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-          "url": "https://www.berlinwalk.com/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-          "excerpt": "Alexanderplatz then and now: how Berlin changed from medieval market edge to Weimar hub, GDR showcase, 1989 protest stage and modern chaos.",
-          "category": "Before & After",
-          "categorySlug": "before-after",
-          "topic": "history-myths",
-          "topicLabel": "Berlin History & Myths",
-          "readTime": "10 min read",
-          "publishedDate": "2026-02-26T14:43:48.550Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
-          "alt": "Alexanderplatz photo in 1889",
-          "relatedToolSlug": "medieval-berlin-mini-walk"
-        },
-        {
           "title": "Why Berlin Doesn't Have a Beautiful Old Town (And Why That's the Point)",
           "slug": "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
           "path": "/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
@@ -1179,6 +1162,23 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_38a5398327814054a24c8a865b3a4acc~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/charlottenburg-palace-berlin-01-palace-cover.jpg",
           "alt": "Charlottenburg Palace in Berlin seen across water and fountains with the palace dome above",
           "relatedToolSlug": "charlottenburg-palace-visit-planner"
+        },
+        {
+          "title": "Tränenpalast Berlin: The Free Cold War Museum Tourists Shouldn't Skip",
+          "slug": "traenenpalast-berlin",
+          "path": "/post/traenenpalast-berlin",
+          "url": "https://www.berlinwalk.com/post/traenenpalast-berlin",
+          "excerpt": "A practical guide to Tränenpalast Berlin, the free Palace of Tears museum at Friedrichstraße: what it is, how long to spend and when to choose it over other Cold War stops.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
+          "topic": "history-myths",
+          "topicLabel": "Berlin History & Myths",
+          "readTime": "5 min read",
+          "publishedDate": "2026-06-25T12:12:21.585Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_4e82650eed3741c5b150278473f327d2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/traenenpalast-berlin-01-traenenpalast-berlin-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_4e82650eed3741c5b150278473f327d2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/traenenpalast-berlin-01-traenenpalast-berlin-cover.jpg",
+          "alt": "Tränenpalast Berlin glowing at dusk beside Friedrichstraße station",
+          "relatedToolSlug": "traenenpalast-visit-planner"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Tempelhof Airport Berlin: Field, Tours and What to Do",
+      "slug": "tempelhof-airport-berlin",
+      "path": "/post/tempelhof-airport-berlin",
+      "url": "https://www.berlinwalk.com/post/tempelhof-airport-berlin",
+      "excerpt": "A clear tourist guide to Tempelhof Airport Berlin and Tempelhofer Feld: field vs building, entrances, opening hours, tours, rules and the best first-visit plan.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-06-30T19:54:56.677Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_47cdba7486c24c55bdd56ef3a599d1f1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tempelhof-airport-berlin-01-sunrise-runway-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_47cdba7486c24c55bdd56ef3a599d1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tempelhof-airport-berlin-01-sunrise-runway-cover.jpg",
+      "alt": "Sunset over the former runway at Tempelhofer Feld in Berlin",
+      "relatedToolSlug": "tempelhof-field-planner"
+    },
+    {
       "title": "Potsdamer Platz Berlin: Wall Trace, Skyline and What to See Today",
       "slug": "potsdamer-platz-berlin",
       "path": "/post/potsdamer-platz-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
       "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
       "relatedToolSlug": ""
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Topography of Terror Berlin: Free Museum, Wall Remains and How to Visit It Right",
-      "slug": "topography-of-terror-berlin",
-      "path": "/post/topography-of-terror-berlin",
-      "url": "https://www.berlinwalk.com/post/topography-of-terror-berlin",
-      "excerpt": "A practical guide to visiting Topography of Terror Berlin: what it covers, how long to allow, free entry, opening hours, audio guide, nearby stops and mistakes to avoid.",
+      "title": "Tempelhof Airport Berlin: Field, Tours and What to Do",
+      "slug": "tempelhof-airport-berlin",
+      "path": "/post/tempelhof-airport-berlin",
+      "url": "https://www.berlinwalk.com/post/tempelhof-airport-berlin",
+      "excerpt": "A clear tourist guide to Tempelhof Airport Berlin and Tempelhofer Feld: field vs building, entrances, opening hours, tours, rules and the best first-visit plan.",
       "category": "Berlin History",
       "categorySlug": "berlin-history",
       "topic": "history-myths",
       "topicLabel": "Berlin History & Myths",
       "readTime": "7 min read",
-      "publishedDate": "2026-06-26T18:11:45.691Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
-      "alt": "Topography of Terror site in Berlin with the preserved Wall section, exhibition trench and documentation centre",
-      "relatedToolSlug": "topography-of-terror-visit-planner"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-06-30T19:54:56.677Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_47cdba7486c24c55bdd56ef3a599d1f1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tempelhof-airport-berlin-01-sunrise-runway-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_47cdba7486c24c55bdd56ef3a599d1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tempelhof-airport-berlin-01-sunrise-runway-cover.jpg",
+      "alt": "Sunset over the former runway at Tempelhofer Feld in Berlin",
+      "relatedToolSlug": "tempelhof-field-planner"
+    },
     {
       "title": "Potsdamer Platz Berlin: Wall Trace, Skyline and What to See Today",
       "slug": "potsdamer-platz-berlin",
@@ -4314,23 +4331,6 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_7a1723d95fbd40129e7e14039803ec91~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20street%20during%20daytime.jpg",
       "alt": "Guide speaking to a walking tour group near a historic European landmark",
       "relatedToolSlug": "berlin-tip-calculator"
-    },
-    {
-      "title": "Alexanderplatz Then and Now: From Medieval Market to Modern Chaos",
-      "slug": "alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-      "path": "/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-      "url": "https://www.berlinwalk.com/post/alexanderplatz-then-and-now-from-medieval-market-to-modern-chaos",
-      "excerpt": "Alexanderplatz then and now: how Berlin changed from medieval market edge to Weimar hub, GDR showcase, 1989 protest stage and modern chaos.",
-      "category": "Before & After",
-      "categorySlug": "before-after",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "10 min read",
-      "publishedDate": "2026-02-26T14:43:48.550Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d800723c43a94bf2ace1623c83b07f1c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Markt-auf-dem-Alexanderplatz-1889_edited.jpg",
-      "alt": "Alexanderplatz photo in 1889",
-      "relatedToolSlug": "medieval-berlin-mini-walk"
     }
   ]
 }

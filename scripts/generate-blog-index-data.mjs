@@ -123,6 +123,7 @@ const TOPICS = [
       'charlottenburg-palace-berlin',
       'traenenpalast-berlin',
       'topography-of-terror-berlin',
+      'tempelhof-airport-berlin',
     ],
     match: /(history|myth|wall|cold war|gdr|east|west|before|after|then|now|wwii|nazi|prussia|ampelmann|jfk|old town|rebuilt)/i,
   },
@@ -501,6 +502,7 @@ function relatedToolSlugFor(post) {
   if (/(world-cup|world cup|public viewing|fan mile|football|soccer)/.test(s)) return 'watch-world-cup-2026-berlin';
   if (/(sachsenhausen-from-berlin|sachsenhausen memorial|oranienburg memorial)/.test(s)) return 'sachsenhausen-visit-planner';
   if (/(potsdamer-platz-berlin|potsdamer platz berlin|potsdamer platz)/.test(s)) return 'potsdamer-platz-time-layer-walk';
+  if (/(tempelhof-airport-berlin|tempelhof airport berlin|tempelhofer feld|tempelhof airport tours)/.test(s)) return 'tempelhof-field-planner';
   if (/(day-trip|day trip|potsdam|sachsenhausen|spreewald|dresden|leipzig|wittenberg|tropical-islands|bastei)/.test(s)) return 'berlin-day-trips-finder';
   if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) return 'best-month-to-visit-berlin';
   if (/(toilet)/.test(s)) return 'berlin-public-toilets';
