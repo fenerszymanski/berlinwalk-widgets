@@ -426,11 +426,44 @@
     }
 
     .bs-map {
-      background: rgba(250, 250, 245, 0.08);
-      border: 1px solid rgba(255, 230, 0, 0.35);
+      aspect-ratio: 16 / 10;
+      background: #102E38;
+      border: 1px solid rgba(255, 230, 0, 0.42);
       border-radius: 8px;
       display: block;
-      height: auto;
+      isolation: isolate;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .bs-map::before {
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255, 230, 0, 0.1), transparent 34%),
+        linear-gradient(180deg, rgba(7, 59, 22, 0.02), rgba(7, 59, 22, 0.36));
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .bs-map::after {
+      border: 1px solid rgba(255, 230, 0, 0.36);
+      border-radius: 6px;
+      content: "";
+      inset: 10px;
+      pointer-events: none;
+      position: absolute;
+      z-index: 3;
+    }
+
+    .bs-map img {
+      display: block;
+      filter: saturate(0.96) contrast(1.04) brightness(0.96);
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
       width: 100%;
     }
 
@@ -593,46 +626,46 @@
       min-height: 260px;
     }
 
-    .bs-map .wall {
-      fill: none;
-      stroke: #FFE600;
-      stroke-dasharray: 8 7;
-      stroke-linecap: round;
-      stroke-width: 4;
+    .bs-map-current-pin {
+      background: var(--red);
+      border: 4px solid var(--paper);
+      border-radius: 999px;
+      box-shadow:
+        0 0 0 11px rgba(230, 57, 70, 0.26),
+        0 8px 20px rgba(0, 0, 0, 0.46);
+      height: 24px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 24px;
+      z-index: 4;
     }
 
-    .bs-map .river {
-      fill: none;
-      stroke: rgba(197, 225, 165, 0.72);
-      stroke-linecap: round;
-      stroke-width: 7;
+    .bs-map-current-pin::after {
+      background: rgba(255, 230, 0, 0.72);
+      border-radius: 999px;
+      content: "";
+      height: 6px;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 6px;
     }
 
-    .bs-map .district {
-      fill: rgba(250, 250, 245, 0.1);
-      stroke: rgba(250, 250, 245, 0.3);
-      stroke-width: 1.4;
-    }
-
-    .bs-map .map-label {
-      fill: rgba(250, 250, 245, 0.78);
-      font: 800 11px Montserrat, Arial, sans-serif;
-    }
-
-    .bs-map .pin {
-      fill: var(--red);
-      stroke: var(--paper);
-      stroke-width: 3;
-    }
-
-    .bs-map .pin-halo {
-      fill: rgba(230, 57, 70, 0.18);
-    }
-
-    .bs-map .pin-line {
-      stroke: var(--red);
-      stroke-dasharray: 3 4;
-      stroke-width: 2;
+    .bs-map-credit {
+      background: rgba(250, 250, 245, 0.84);
+      border-radius: 999px;
+      bottom: 8px;
+      color: rgba(7, 59, 22, 0.82);
+      font-size: 9px;
+      font-weight: 800;
+      line-height: 1;
+      padding: 5px 7px;
+      position: absolute;
+      right: 8px;
+      z-index: 4;
     }
 
     .bs-pieces {
@@ -1351,18 +1384,20 @@
 
       function mapSvg(point) {
         const pin = point || { x: 56, y: 40 };
+        const x = clamp(Number(pin.x) || 56, 6, 94);
+        const y = clamp(Number(pin.y) || 40, 8, 92);
+        const mapImage = state.data && state.data.visuals && (state.data.visuals.map || state.data.visuals.start)
+          ? (state.data.visuals.map || state.data.visuals.start)
+          : 'assets/visuals/berlin-split-real-berlin-map.webp';
+        const mapAttribution = state.data && state.data.visuals && state.data.visuals.mapAttribution
+          ? state.data.visuals.mapAttribution
+          : '';
         return `
-          <svg class="bs-map" viewBox="0 0 420 300" role="img" aria-label="Stylized divided Berlin map">
-            <path class="district" d="M56 62 C92 22 174 38 204 72 C238 35 312 46 352 88 C386 124 350 188 386 228 C340 272 265 248 226 270 C174 248 106 270 66 224 C30 180 42 112 56 62Z"/>
-            <path class="river" d="M34 170 C92 148 125 188 178 164 C232 138 273 154 314 130 C354 108 374 126 398 112"/>
-            <path class="wall" d="M205 22 C178 60 198 83 166 112 C138 138 166 170 145 202 C130 226 150 252 120 280"/>
-            <text class="map-label" x="88" y="84">West</text>
-            <text class="map-label" x="286" y="92">East</text>
-            <text class="map-label" x="190" y="246">Rebuilt</text>
-            <line class="pin-line" x1="${pin.x * 4.2}" y1="${pin.y * 3}" x2="210" y2="150"></line>
-            <circle class="pin-halo" cx="${pin.x * 4.2}" cy="${pin.y * 3}" r="20"></circle>
-            <circle class="pin" cx="${pin.x * 4.2}" cy="${pin.y * 3}" r="8"></circle>
-          </svg>
+          <div class="bs-map" role="img" aria-label="Realistic Berlin map with current file pin">
+            <img src="${assetUrl(mapImage)}" alt="" aria-hidden="true" loading="eager" decoding="async">
+            <span class="bs-map-current-pin" style="left:${x}%; top:${y}%"></span>
+            ${mapAttribution ? `<span class="bs-map-credit">${escapeHtml(mapAttribution)}</span>` : ''}
+          </div>
         `;
       }
 

@@ -1,3 +1,10 @@
+## 2026-06-30 - AI visual source rule updated
+
+**Did:** Root workspace visual policy now makes built-in Codex image generation the first target for BerlinWalk generated visuals, with Yusuf's logged-in ChatGPT account through Chrome, Atlas, or the Codex browser as fallback.
+**Changed:** `../AGENTS.md`, `../PROJECT_MEMORY.md`, `../BERLINWALK_BRAND_REFERENCE.md`, `../BLOG_POST_PRODUCTION_STANDARD.md`, and `AGENTS.md` were updated so new game art, BerlinTools icons, blog/social AI visuals, and widget hero visuals follow the same source order.
+**QA:** Text rule sweep confirmed the active standards no longer say ChatGPT browser is the default; old historical session entries were left unchanged as history.
+**Closed:** Paid/API image generation, CLI image generation, and local placeholders still require Yusuf's explicit API/exception request.
+
 ## 2026-06-30 - Core Web Vitals desktop CLS/LCP fix
 
 **Did:** Search Console'daki 89 URL desktop Core Web Vitals uyarısı için canlı/lab tanı ve düzeltme tamamlandı.
@@ -9,6 +16,29 @@
 **QA:** GitHub Pages `blog-sidebar-inject.js?v=25` marker `installCoreWebVitalsHints` servis ediyor. Cache-disabled desktop Playwright: `/berlin-tools` CLS `0.0052` LCP `1032ms`; `/games` `0.0052` / `880ms`; `/meeting-point` `0.0051` / `980ms`; `/berlin-walking-tour-route` `0.0052` / `1200ms`; `/widgets` `0.0052` / `1720ms`; `/blog` `0.0690` / `1456ms`.
 **Opened:** Search Console field/CrUX verisi hemen temizlenmez; 2026-06-30'da desktop CLS ve LCP için UI validation başlatıldı, sonuç günler/haftalar içinde izlenmeli.
 **Closed:** Canlı lab örneklerinde desktop CLS > 0.1 ve LCP > 2.5s problemi giderildi.
+
+## 2026-06-30 - Berlin Split real Berlin map replacement
+
+**Did:** Yusuf'un "gerçekçi harita ama gerçekçi Berlin haritası olsun" düzeltmesi uygulandı; mini-map artık AI arşiv masasından kırpılmış uydurma harita değil, OpenStreetMap tabanlı gerçek Berlin merkez haritası.
+**Changed:**
+- `berlin-split/assets/source/osm-real-map-20260630/` — central Berlin OSM tile source (`960x600`, center `52.5208,13.4074`, zoom `13`) ve source README eklendi.
+- `berlin-split/assets/visuals/berlin-split-real-berlin-map.webp` — hafif archive-styled ama gerçek Berlin sokak/Spree/mahalle dokusunu koruyan final map asset eklendi.
+- `berlin-split/data.json` — `visuals.map`, `visuals.mapAttribution` ve 10 mission için gerçek konumdan hesaplanmış mapPoint yüzdeleri eklendi.
+- `berlin-split/index.html` — mini-map artık `visuals.map` kullanıyor; aria label `Realistic Berlin map with current file pin`; OSM attribution görünür render ediliyor.
+- `berlin-split/SOURCES.md` — OSM attribution/source notu eklendi.
+**QA:** JSON parse + inline script compile geçti; tüm visual asset yolları mevcut; `git diff --check -- berlin-split` temiz; local desktop ve 390px mobile QA'da map image `assets/visuals/berlin-split-real-berlin-map.webp`, attribution `© OpenStreetMap contributors`, pin yüzdeleri doğru, overflow `0`.
+**Opened:** Berlin Split hâlâ public `/games` listesine alınmamalı; sonraki turda oyun anlaşılırılığı/start metin yoğunluğu/audio/social-cover devam etmeli.
+**Closed:** Mini-map artık gerçek Berlin merkez haritasına dayalı.
+
+## 2026-06-30 - Berlin Split realistic mini-map fix
+
+**Did:** Yusuf'un rahatsız olduğu cartoon/SVG mini-map kaldırıldı ve mission/status panelindeki harita gerçekçi archive-map görseli üzerine pin koyan bir case-map paneline çevrildi.
+**Changed:**
+- `berlin-split/index.html` — `mapSvg()` artık SVG çizimi üretmiyor; `assets/visuals/berlin-split-map.webp` görselini kullanıyor ve current file pin'ini CSS ile konumlandırıyor.
+- Eski `West`, `East`, `Rebuilt`, cartoon river/wall çizimleri ve SVG map sınıfları kaldırıldı.
+**QA:** JSON parse + inline script compile geçti; `git diff --check -- berlin-split/index.html` temiz; local desktop ve 390px mobile QA'da `.bs-map` artık `DIV`, SVG yok, map image yüklü, overflow `0`.
+**Opened:** Haritanın daha da doğru coğrafi hissedilmesi istenirse sonraki turda ayrı bir gerçek Berlin route-map görseli üretilebilir; mevcut hızlı düzeltme prototype cartoon hissini kaldırdı.
+**Closed:** Mission ekranındaki en göze batan gerçekçi olmayan mini-map kaldırıldı.
 
 ## 2026-06-30 - Berlin Split premium visual pass
 

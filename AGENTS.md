@@ -77,12 +77,14 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - **Tone:** First-person Yusuf voice, atmospheric, historically grounded, **no em dashes**, no marketing fluff, confident but restrained
 - **Brand guide source:** `BerlinWalk_Brand_Guide_v1_2_revised.pdf` (Yusuf's downloads — not in repo)
 - **AI visual source rule:** generated game art, tool icons, blog/social AI
-  visuals, and other BerlinWalk imagery should come from Yusuf's logged-in
-  ChatGPT browser workflow by default. Do not use OpenAI/Image API, CLI image
-  generation, paid API generation, or local drawn placeholders unless Yusuf
-  explicitly asks for API-based generation or approves a specific exception.
-  Save prompts/source outputs, then crop/optimize and wire final assets before
-  treating visual work as complete. Keep this provenance internal: never put
+  visuals, and other BerlinWalk imagery should use built-in Codex image
+  generation first. If that path is unavailable or unsuitable, use Yusuf's
+  logged-in ChatGPT account through Chrome, Atlas, or the Codex browser as the
+  fallback. Do not use OpenAI/Image API, CLI image generation, paid API
+  generation, or local drawn placeholders unless Yusuf explicitly asks for
+  API-based generation or approves a specific exception. Save prompts/source
+  outputs, then crop/optimize and wire final assets before treating visual work
+  as complete. Keep this provenance internal: never put
   `AI-generated`, `ChatGPT`, `logged-in`, `No paid image API`, workflow,
   prompt/source-output, Codex/Claude, automation, or local-source notes in
   public blog/page bodies or Image Credits blocks.
@@ -117,7 +119,7 @@ Every new tool widget must:
 
 1. **Live as a standalone HTML at `<slug-folder>/index.html`** that links `../css/brand.css` and `../js/brand.js`. brand.js will auto-inject the attribution badge — no per-widget badge code needed.
 2. **Be added to `tools-hub/data.json`** with: `slug`, `title`, `lead`, legacy `category` (Money / Weather / Maps / Discovery, still used by `/widgets`), BerlinTools `hubCategory`, `type`, `tags`, `aliases`, and the two embed fields **`widgetUrl`** (full GitHub Pages URL ending in `/`) and **`embedHeight`** (recommended iframe height in px). `hubCategory` must be one of the keys in `hubCategories`; the current public directory categories are Trip Plans & First Day, Transport/Tickets/Arrival, Money/Shopping/Costs, Open Today & Essentials, Weather/Seasons/Outdoors, Food/Drink/Nights Out, Events/Sports/Festivals, and History/Culture/Landmarks. Once the category is selected in `data.json`, `/berlin-tools` automatically renders the new tool under that category and makes it filterable; no renderer code change is needed.
-3. **Have a standard `image`** for the tool card. BerlinTools icons are no longer optional: use the single ChatGPT-browser-generated glossy 3D app-icon family documented in `tools-home/icons/chatgpt-standard-2026-06-12/README.md` and `../BERLINWALK_BRAND_REFERENCE.md`. Create canonical `tools-home/icons/<slug>.png` and `<slug>-160.png`, keep clean RGBA/transparent or cream outer corners, no text/letters/numbers, no black vignette corners, no flat vectors or one-off AI styles, save the prompt/source output, update both icon manifests, and wire the `image` field before treating the tool as visually complete. A new tool must not be pushed or wired live with a reused/generic placeholder, locally drawn, or manually assembled fallback icon.
+3. **Have a standard `image`** for the tool card. BerlinTools icons are no longer optional: use the single glossy 3D app-icon family documented in `tools-home/icons/chatgpt-standard-2026-06-12/README.md` and `../BERLINWALK_BRAND_REFERENCE.md`, extending it with the current AI visual source rule: built-in Codex image generation first, then Yusuf's logged-in ChatGPT account through Chrome, Atlas, or the Codex browser as fallback. Create canonical `tools-home/icons/<slug>.png` and `<slug>-160.png`, keep clean RGBA/transparent or cream outer corners, no text/letters/numbers, no black vignette corners, no flat vectors or one-off AI styles, save the prompt/source output, update both icon manifests, and wire the `image` field before treating the tool as visually complete. A new tool must not be pushed or wired live with a reused/generic placeholder, locally drawn, or manually assembled fallback icon.
 4. **Have a matching BerlinTools CMS item** for the dynamic `/tools/<slug>` page (see public-toilets and luggage-storage as templates). Fields: `slug`, `title`, `h1`, `lead`, `secondary`, `intro`, `seoTitle`, `seoDescription`, `jsonLd` (WebApplication schema), `widgetUrl`, `bodyContent` (Ricos), `relatedTool1*` / `relatedTool2*`, `relatedBlog*`, `link-berlin-tools-title` (= `/tools/<slug>`).
 5. **Optionally be added to a related blog post's FAQ + quick-summary** under matching slugs in `faq/data.json`, `quick-summary/data.json`, and the SLUG_MAP + SCHEMAS in `faq/inject.js`.
 

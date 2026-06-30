@@ -10,3 +10,6 @@ and does not show source/provenance notes.
 - Alexanderplatz overview: https://www.berlin.de/en/attractions-and-sights/3560266-3104052-alexanderplatz.en.html
 - Museum Island overview: https://www.visitberlin.de/en/museum-island-berlin
 - Mauerpark overview: https://www.berlin.de/en/parks-and-gardens/3560220-4407152-mauerpark.en.html
+- Mini-map raster source: OpenStreetMap contributors, generated from
+  `https://tile.openstreetmap.org/{z}/{x}/{y}.png`; keep visible
+  `© OpenStreetMap contributors` attribution with any public map display.
