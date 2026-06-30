@@ -982,5 +982,18 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-plug-adapter-checker-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-plug-adapter-checker-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_d92f7da2b2144e609639c6f883e088f7~mv2.png"
+  },
+  {
+    "slug": "potsdamer-platz-time-layer-walk",
+    "title": "Potsdamer Platz Time-Layer Walk",
+    "category": "Discovery",
+    "model": "ChatGPT browser image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/potsdamer-platz-time-layer-walk/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/potsdamer-platz-time-layer-walk/raw-chatgpt-browser.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/potsdamer-platz-time-layer-walk.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/potsdamer-platz-time-layer-walk-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/potsdamer-platz-time-layer-walk-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_2b5708b217ce4f549fe61200e9e9be50~mv2.png"
   }
 ]
