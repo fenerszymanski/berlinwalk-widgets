@@ -1,0 +1,565 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Plug Adapter Checker | BerlinWalk</title>
+  <meta name="description" content="Check whether your charger, laptop, hair tool or power bank needs a Berlin plug adapter, voltage check or safer packing plan.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-plug-checker">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-plug-checker {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164A1A;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #536052;
+      --bw-border: #D9E7C8;
+      --bw-warn: #B45F06;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-plug-checker *,
+    #bw-plug-checker *::before,
+    #bw-plug-checker *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-plug-checker h2,
+    #bw-plug-checker h3,
+    #bw-plug-checker p {
+      margin-top: 0;
+    }
+
+    #bw-plug-checker .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-plug-checker .bw-hero {
+      background: var(--bw-green);
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(260px, 1.05fr);
+      min-height: 310px;
+      overflow: hidden;
+    }
+
+    #bw-plug-checker .bw-hero-copy {
+      align-content: center;
+      background:
+        radial-gradient(circle at 18% 0%, rgba(255, 230, 0, 0.22), transparent 34%),
+        linear-gradient(135deg, rgba(124, 179, 66, 0.22), rgba(27, 94, 32, 0.98));
+      color: var(--bw-white);
+      display: grid;
+      gap: 11px;
+      padding: 26px 24px;
+    }
+
+    #bw-plug-checker .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    #bw-plug-checker .bw-title {
+      color: var(--bw-white);
+      font-size: 32px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+      max-width: 11ch;
+    }
+
+    #bw-plug-checker .bw-sub {
+      color: #EAF5DA;
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 460px;
+    }
+
+    #bw-plug-checker .bw-hero-img {
+      background: #102C14;
+      min-height: 310px;
+      position: relative;
+    }
+
+    #bw-plug-checker .bw-hero-img img {
+      display: block;
+      height: 100%;
+      inset: 0;
+      object-fit: cover;
+      position: absolute;
+      width: 100%;
+    }
+
+    #bw-plug-checker .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-plug-checker .bw-panel,
+    #bw-plug-checker .bw-result,
+    #bw-plug-checker .bw-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+    }
+
+    #bw-plug-checker .bw-panel {
+      display: grid;
+      gap: 15px;
+      padding: 16px;
+    }
+
+    #bw-plug-checker .bw-grid {
+      display: grid;
+      gap: 13px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-plug-checker .bw-fieldset {
+      border: 0;
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      min-width: 0;
+      padding: 0;
+    }
+
+    #bw-plug-checker .bw-label {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-plug-checker .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-plug-checker .bw-choice {
+      appearance: none;
+      background: #F8FBF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 54px;
+      padding: 10px 8px;
+      text-align: center;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-plug-checker .bw-choice:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.16);
+    }
+
+    #bw-plug-checker .bw-choice[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-plug-checker .bw-result {
+      display: grid;
+      gap: 13px;
+      padding: 17px;
+    }
+
+    #bw-plug-checker .bw-verdict {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    #bw-plug-checker .bw-badge {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 8px;
+      color: var(--bw-green-dark);
+      display: inline-flex;
+      font-size: 20px;
+      font-weight: 950;
+      height: 44px;
+      justify-content: center;
+      width: 44px;
+    }
+
+    #bw-plug-checker .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.16;
+      margin: 0;
+    }
+
+    #bw-plug-checker .bw-result p {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-plug-checker .bw-list {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-plug-checker .bw-list li {
+      background: #F8FBF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 1.45;
+      padding: 10px 11px;
+    }
+
+    #bw-plug-checker .bw-cards {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-plug-checker .bw-card {
+      display: grid;
+      gap: 7px;
+      padding: 13px;
+    }
+
+    #bw-plug-checker .bw-card strong {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-plug-checker .bw-card span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    #bw-plug-checker .bw-note {
+      background: #FFFBE1;
+      border: 1px solid rgba(255, 230, 0, 0.85);
+      border-radius: 8px;
+      color: var(--bw-green-dark);
+      font-size: 12.5px;
+      font-weight: 850;
+      line-height: 1.45;
+      padding: 12px;
+    }
+
+    #bw-plug-checker a {
+      color: var(--bw-green);
+      font-weight: 950;
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-plug-checker {
+        margin: 14px 0;
+      }
+
+      #bw-plug-checker .bw-hero,
+      #bw-plug-checker .bw-grid,
+      #bw-plug-checker .bw-cards {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-plug-checker .bw-hero {
+        min-height: 0;
+      }
+
+      #bw-plug-checker .bw-hero-copy {
+        padding: 22px 18px;
+      }
+
+      #bw-plug-checker .bw-title {
+        font-size: 27px;
+        max-width: 13ch;
+      }
+
+      #bw-plug-checker .bw-hero-img {
+        min-height: 230px;
+      }
+
+      #bw-plug-checker .bw-body {
+        padding: 14px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      #bw-plug-checker .bw-choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-plug-checker .bw-choice {
+        min-height: 48px;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <section class="bw-hero" aria-labelledby="bw-plug-title">
+      <div class="bw-hero-copy">
+        <p class="bw-kicker">BerlinWalk tool</p>
+        <h2 class="bw-title" id="bw-plug-title">Berlin Plug Adapter Checker</h2>
+        <p class="bw-sub">Pick your home plug and device type. Get the simple Berlin answer: adapter only, voltage check, or leave the risky thing at home.</p>
+      </div>
+      <div class="bw-hero-img" aria-hidden="true">
+        <img src="assets/hero-chatgpt.png" alt="">
+      </div>
+    </section>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Plug adapter inputs">
+        <div class="bw-grid">
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Your usual plug</legend>
+            <div class="bw-choice-grid" data-group="origin">
+              <button class="bw-choice" type="button" data-value="us">US / Canada / Japan</button>
+              <button class="bw-choice" type="button" data-value="uk">UK / Ireland</button>
+              <button class="bw-choice" type="button" data-value="aus">Australia / NZ / China</button>
+              <button class="bw-choice" type="button" data-value="eu">EU two-pin / Schuko</button>
+              <button class="bw-choice" type="button" data-value="mixed">Switzerland / Italy / Denmark</button>
+              <button class="bw-choice" type="button" data-value="unknown">Not sure</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Main thing you need to charge</legend>
+            <div class="bw-choice-grid" data-group="device">
+              <button class="bw-choice" type="button" data-value="phone">Phone / tablet</button>
+              <button class="bw-choice" type="button" data-value="laptop">Laptop / camera</button>
+              <button class="bw-choice" type="button" data-value="hair">Hair dryer / straightener</button>
+              <button class="bw-choice" type="button" data-value="medical">Medical device</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="bw-grid">
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Your label says</legend>
+            <div class="bw-choice-grid" data-group="voltage">
+              <button class="bw-choice" type="button" data-value="dual">100-240V</button>
+              <button class="bw-choice" type="button" data-value="single">110/120V only</button>
+              <button class="bw-choice" type="button" data-value="unknown">I have not checked</button>
+              <button class="bw-choice" type="button" data-value="usb">USB only</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Power bank?</legend>
+            <div class="bw-choice-grid" data-group="powerbank">
+              <button class="bw-choice" type="button" data-value="yes">Yes, flying with one</button>
+              <button class="bw-choice" type="button" data-value="no">No</button>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-verdict">
+          <span class="bw-badge" id="bw-plug-badge">✓</span>
+          <div>
+            <h3 id="bw-plug-verdict">Start with your plug and device.</h3>
+            <p id="bw-plug-summary">The safest Berlin charging plan is usually a Type F travel adapter plus a quick voltage-label check on anything that heats, spins or has medical importance.</p>
+          </div>
+        </div>
+        <ul class="bw-list" id="bw-plug-actions"></ul>
+        <div class="bw-cards">
+          <div class="bw-card">
+            <strong>Berlin socket</strong>
+            <span>Germany uses Type F / Schuko sockets with 230V, 50Hz power.</span>
+          </div>
+          <div class="bw-card">
+            <strong>Adapter vs converter</strong>
+            <span>An adapter changes the plug shape. A converter changes voltage. They are not the same thing.</span>
+          </div>
+          <div class="bw-card">
+            <strong>Buy in Berlin</strong>
+            <span>Try airport shops, big stations, electronics stores or larger drugstores. Hotel desks sometimes lend one.</span>
+          </div>
+        </div>
+        <div class="bw-note" id="bw-plug-note">Tip: if your charger label says "Input: 100-240V, 50/60Hz", you usually need only the right plug shape for Berlin.</div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var state = {
+        origin: 'us',
+        device: 'phone',
+        voltage: 'unknown',
+        powerbank: 'no'
+      };
+
+      var originText = {
+        us: 'Your Type A/B plug will not fit a normal Berlin wall socket.',
+        uk: 'Your Type G plug will not fit a normal Berlin wall socket.',
+        aus: 'Your Type I plug will not fit a normal Berlin wall socket.',
+        eu: 'Your EU two-pin or Schuko plug is usually already compatible in Berlin.',
+        mixed: 'Some nearby European plug shapes are close but not identical. Pack a small Europe/Type F adapter.',
+        unknown: 'If you are not sure, pack a compact universal adapter with a Type F / Europe setting.'
+      };
+
+      function needsAdapter() {
+        return state.origin !== 'eu';
+      }
+
+      function voltageRisk() {
+        return state.device === 'hair' || state.device === 'medical' || state.voltage === 'single' || state.voltage === 'unknown';
+      }
+
+      function verdict() {
+        if (state.voltage === 'single') {
+          return {
+            badge: '!',
+            title: 'Do not plug this in yet.',
+            summary: 'A 110/120V-only device is not ready for Berlin 230V power. A shape adapter alone is not enough.',
+            note: 'For high-heat devices, the practical Berlin answer is usually: bring a dual-voltage model, use the hotel option, or buy locally.'
+          };
+        }
+        if (state.device === 'hair' && state.voltage !== 'dual') {
+          return {
+            badge: '!',
+            title: 'High-heat device: check the label first.',
+            summary: 'Hair dryers and straighteners are the classic travel mistake. Confirm 100-240V before using any adapter in Berlin.',
+            note: 'Many hotels already provide a hair dryer. For straighteners, dual-voltage is the safer packing choice.'
+          };
+        }
+        if (state.device === 'medical') {
+          return {
+            badge: '✓',
+            title: 'Bring the adapter, then protect the routine.',
+            summary: 'Most medical power bricks still need the right plug shape in Berlin. Check the label, pack a spare adapter and keep cables in hand luggage.',
+            note: 'For CPAP or similar devices, confirm power details with the manufacturer before travel.'
+          };
+        }
+        if (!needsAdapter() && (state.voltage === 'dual' || state.voltage === 'usb')) {
+          return {
+            badge: '✓',
+            title: 'You are probably set for Berlin.',
+            summary: 'Your plug shape and voltage look compatible. Keep one USB-C wall charger handy for hotel and cafe charging.',
+            note: 'If your plug is a flat Europlug, it normally fits. If it is a thicker grounded plug from a different country, check before relying on it.'
+          };
+        }
+        return {
+          badge: '✓',
+          title: needsAdapter() ? 'Pack a Type F / Europe adapter.' : 'Check the charger label once.',
+          summary: needsAdapter()
+            ? originText[state.origin] + ' A simple Type F / Europe travel adapter is usually enough for phones, tablets and laptops with dual-voltage chargers.'
+            : 'Berlin sockets are usually friendly to EU two-pin and Schuko plugs, but the voltage label still matters for anything beyond basic charging.',
+          note: 'Adapter only changes the shape. The magic label is still "Input: 100-240V, 50/60Hz".'
+        };
+      }
+
+      function actionList() {
+        var out = [];
+        out.push(originText[state.origin]);
+        if (needsAdapter()) out.push('Pack one compact Type F / Europe adapter per person, or one multi-port adapter for a hotel room.');
+        else out.push('If you already use a Schuko or slim two-pin Europlug, you may not need an extra wall adapter.');
+        if (state.voltage === 'dual' || state.voltage === 'usb') out.push('Your voltage label looks Berlin-ready for normal charging.');
+        if (voltageRisk()) out.push('Read the input label before use. Berlin wall power is 230V at 50Hz.');
+        if (state.device === 'hair') out.push('Avoid bulky voltage converters for high-heat tools unless the manufacturer clearly allows them.');
+        if (state.powerbank === 'yes') out.push('Keep power banks in hand luggage when flying. Do not pack them in checked luggage.');
+        out.push('If you forgot one, try airport shops, Hauptbahnhof, Alexanderplatz, electronics stores or larger drugstores.');
+        return out;
+      }
+
+      function render() {
+        var v = verdict();
+        document.getElementById('bw-plug-badge').textContent = v.badge;
+        document.getElementById('bw-plug-verdict').textContent = v.title;
+        document.getElementById('bw-plug-summary').textContent = v.summary;
+        document.getElementById('bw-plug-note').textContent = v.note;
+        var list = document.getElementById('bw-plug-actions');
+        list.innerHTML = '';
+        actionList().forEach(function (item) {
+          var li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      }
+
+      function select(group, value) {
+        state[group] = value;
+        var root = document.querySelector('[data-group="' + group + '"]');
+        root.querySelectorAll('.bw-choice').forEach(function (button) {
+          button.setAttribute('aria-pressed', button.dataset.value === value ? 'true' : 'false');
+        });
+        render();
+      }
+
+      document.querySelectorAll('#bw-plug-checker [data-group]').forEach(function (groupEl) {
+        var group = groupEl.dataset.group;
+        groupEl.querySelectorAll('.bw-choice').forEach(function (button) {
+          button.addEventListener('click', function () {
+            select(group, button.dataset.value);
+          });
+        });
+        var initial = state[group];
+        if (initial) select(group, initial);
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

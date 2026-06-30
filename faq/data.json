@@ -4272,5 +4272,35 @@
         "a": "Allow about **90 minutes** for the outdoor Mitte route. Add more time if you enter the Berliner Dom crypt, the Humboldt Forum, one Museum Island museum or Charlottenburg Palace."
       }
     ]
+  },
+  "berlin-plug-adapter": {
+    "title": "Berlin Plug Adapter - FAQ",
+    "subtitle": "Quick answers about Berlin sockets, Germany voltage, travel adapters, USB-C chargers and power banks.",
+    "items": [
+      {
+        "q": "What plug adapter do I need for Berlin?",
+        "a": "Most tourists from outside continental Europe need a **Type F / Europe plug adapter** for Berlin. Germany uses Type F / Schuko sockets. If your charger already has a slim two-pin Europlug or German-style Schuko plug, it will usually fit."
+      },
+      {
+        "q": "Do I need a voltage converter in Berlin?",
+        "a": "You usually do **not** need a voltage converter for modern phone, laptop, tablet and camera chargers if the label says **Input: 100-240V, 50/60Hz**. You do need caution if a device says only 110V or 120V, because Berlin wall power is 230V."
+      },
+      {
+        "q": "Will my iPhone or laptop charger work in Berlin?",
+        "a": "Most modern phone and laptop chargers work with Berlin voltage, but the wall plug may not fit. Check the charger brick for 100-240V. If it has that range, use a Type F adapter or buy a Berlin-compatible USB-C wall charger."
+      },
+      {
+        "q": "Can I use my hair dryer or straightener in Berlin?",
+        "a": "Only if the label clearly supports 220-240V or 100-240V. Hair dryers and straighteners draw a lot of power, so a small plug adapter alone is not enough for a 110/120V-only model. The safer plan is a dual-voltage tool, the hotel dryer, or buying locally."
+      },
+      {
+        "q": "Can I bring a power bank to Berlin?",
+        "a": "Yes, but keep it in hand luggage when flying. Lithium power banks are normally not allowed in checked luggage. Check your airline limits for very large batteries."
+      },
+      {
+        "q": "Where can I buy a plug adapter in Berlin?",
+        "a": "Try BER airport shops, Berlin Hauptbahnhof, Alexanderplatz, electronics stores, larger drugstores and hotel reception. A Späti may help with a cable, but it is not a reliable plan for the exact adapter you need."
+      }
+    ]
   }
 }

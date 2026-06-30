@@ -144,7 +144,8 @@
   "breakfast-in-berlin": "breakfast-in-berlin",
   "german-signs-in-berlin": "german-signs-in-berlin",
   "what-to-book-in-advance-in-berlin": "what-to-book-in-advance-in-berlin",
-  "hohenzollern-berlin": "hohenzollern-berlin"
+  "hohenzollern-berlin": "hohenzollern-berlin",
+  "berlin-plug-adapter": "berlin-plug-adapter"
 };
 
   var SCHEMAS = {
@@ -7078,6 +7079,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Allow about 90 minutes for the outdoor Mitte route. Add more time if you enter the Berliner Dom crypt, the Humboldt Forum, one Museum Island museum or Charlottenburg Palace."
+        }
+      }
+    ]
+  },
+  "berlin-plug-adapter": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What plug adapter do I need for Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most tourists from outside continental Europe need a Type F / Europe plug adapter for Berlin. Germany uses Type F / Schuko sockets. If your charger already has a slim two-pin Europlug or German-style Schuko plug, it will usually fit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a voltage converter in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You usually do not need a voltage converter for modern phone, laptop, tablet and camera chargers if the label says Input: 100-240V, 50/60Hz. You do need caution if a device says only 110V or 120V, because Berlin wall power is 230V."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my iPhone or laptop charger work in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most modern phone and laptop chargers work with Berlin voltage, but the wall plug may not fit. Check the charger brick for 100-240V. If it has that range, use a Type F adapter or buy a Berlin-compatible USB-C wall charger."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use my hair dryer or straightener in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only if the label clearly supports 220-240V or 100-240V. Hair dryers and straighteners draw a lot of power, so a small plug adapter alone is not enough for a 110/120V-only model. The safer plan is a dual-voltage tool, the hotel dryer, or buying locally."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I bring a power bank to Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but keep it in hand luggage when flying. Lithium power banks are normally not allowed in checked luggage. Check your airline limits for very large batteries."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I buy a plug adapter in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Try BER airport shops, Berlin Hauptbahnhof, Alexanderplatz, electronics stores, larger drugstores and hotel reception. A Späti may help with a cable, but it is not a reliable plan for the exact adapter you need."
         }
       }
     ]

@@ -2186,6 +2186,40 @@
         "berlin royal family",
         "palace site berlin"
       ]
+    },
+    {
+      "slug": "berlin-plug-adapter-checker",
+      "title": "Berlin Plug Adapter Checker",
+      "lead": "Check your home plug, device type, voltage label and power bank before you pack or buy a Berlin travel adapter.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_d92f7da2b2144e609639c6f883e088f7~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-plug-adapter-checker/",
+      "embedHeight": 1280,
+      "hubCategory": "Essentials",
+      "type": "Guide",
+      "priority": 24,
+      "tags": [
+        "plug adapter",
+        "travel adapter",
+        "charger",
+        "socket",
+        "voltage",
+        "power bank",
+        "usb-c",
+        "packing",
+        "tourist tips"
+      ],
+      "aliases": [
+        "berlin plug adapter",
+        "germany plug adapter",
+        "berlin sockets",
+        "type f adapter",
+        "berlin voltage",
+        "charging in berlin"
+      ],
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/berlin-plug-adapter",
+      "cmsItemId": "397e1a91-8c9d-4799-9d63-c2d4230409af"
     }
   ],
   "hubCategories": [

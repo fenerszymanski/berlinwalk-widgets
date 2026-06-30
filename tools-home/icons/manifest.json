@@ -1005,5 +1005,18 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hohenzollern-berlin-footprint-map-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/hohenzollern-berlin-footprint-map-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_88050f0309d54e469956379f69701b50~mv2.png"
+  },
+  {
+    "slug": "berlin-plug-adapter-checker",
+    "title": "Berlin Plug Adapter Checker",
+    "category": "Essentials",
+    "model": "ChatGPT browser image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-plug-adapter-checker/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-plug-adapter-checker/chatgpt-output-20260630.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-plug-adapter-checker.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-plug-adapter-checker-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-plug-adapter-checker-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_d92f7da2b2144e609639c6f883e088f7~mv2.png"
   }
 ]
