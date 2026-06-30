@@ -500,6 +500,7 @@ function relatedToolSlugFor(post) {
   if (/(best-views|best views|viewpoint|landmark|weltzeituhr|world clock|alexanderplatz|museum-island|museum island|berliner-dom|berliner dom)/.test(s)) return 'berlin-landmarks-map';
   if (/(world-cup|world cup|public viewing|fan mile|football|soccer)/.test(s)) return 'watch-world-cup-2026-berlin';
   if (/(sachsenhausen-from-berlin|sachsenhausen memorial|oranienburg memorial)/.test(s)) return 'sachsenhausen-visit-planner';
+  if (/(potsdamer-platz-berlin|potsdamer platz berlin|potsdamer platz)/.test(s)) return 'potsdamer-platz-time-layer-walk';
   if (/(day-trip|day trip|potsdam|sachsenhausen|spreewald|dresden|leipzig|wittenberg|tropical-islands|bastei)/.test(s)) return 'berlin-day-trips-finder';
   if (/^(berlin-in-|visiting-berlin-in-)/.test(post.slug || '')) return 'best-month-to-visit-berlin';
   if (/(toilet)/.test(s)) return 'berlin-public-toilets';
