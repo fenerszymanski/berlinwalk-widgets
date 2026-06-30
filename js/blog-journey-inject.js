@@ -15,6 +15,7 @@
   var JOURNEY_MARKER = 'data-bw-blog-journey';
   var BACK_TOP_MARKER = 'data-bw-blog-back-top';
   var EMPTY_PARAGRAPH_MARKER = 'data-bw-empty-paragraph';
+  var WIDGET_BLOCK_MARKER = 'data-bw-blog-widget-block';
   var NATIVE_END_MARKER = 'data-bw-native-blog-end-hidden';
   var MIN_MOBILE_WIDTH = 900;
   var TOUR_IMAGE = 'https://static.wixstatic.com/media/5a08a3_ac78d5df37b2486ab6662cf3872ea9a6~mv2.jpg/v1/fill/w_700,h_420,al_c,q_86,enc_avif,quality_auto/file.jpg';
@@ -214,6 +215,7 @@
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-size:clamp(21px,3vw,26px)!important;line-height:1.12!important;margin:30px 0 10px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] a:not(.bw-blog-mobile-nav-home):not(.bw-blog-mobile-nav-item):not(.bw-blog-mobile-guide-list a):not(.bw-blog-tool-button):not(.bw-blog-journey-card){color:#1B5E20!important;text-decoration-color:#FFE600!important;text-decoration-thickness:3px!important;text-underline-offset:3px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] img{max-width:100%;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + WIDGET_BLOCK_MARKER + '="1"]{display:block!important;margin-bottom:34px!important;}',
       'body.bw-blog-post-enhanced [data-bw-leadform]{margin:38px 0!important;}',
       '.bw-blog-mobile-nav,.bw-blog-mobile-guide,.bw-blog-tool-prompt,.bw-blog-journey,.bw-blog-back-top{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;color:#212121;}',
       '.bw-blog-mobile-nav *,.bw-blog-mobile-guide *,.bw-blog-tool-prompt *,.bw-blog-journey *{box-sizing:border-box;}',
@@ -269,6 +271,7 @@
       '[' + NATIVE_END_MARKER + '="1"]{display:none!important;}',
       '@media (max-width:899px){html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) [data-hook="post"],html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) article{opacity:0!important;pointer-events:none!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:not(:has(> .bw-blog-mobile-nav)) > [data-hook="post"]{margin-top:270px!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:has(> .bw-blog-mobile-nav) > [data-hook="post"]{margin-top:0!important;}}',
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
+      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + WIDGET_BLOCK_MARKER + '="1"]{margin-bottom:28px!important;}}',
       '@media (max-width:899px){body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{font-size:clamp(32px,8.4vw,35px)!important;line-height:1.06!important;margin-top:18px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-bottom:2px solid #212121;display:block;margin:0 0 28px;padding:24px 0 20px;position:relative;}.bw-blog-mobile-nav:before{background:#1B5E20;content:"";display:block;height:5px;left:0;position:absolute;right:0;top:0;}.bw-blog-mobile-nav:after{background:#212121;content:"";display:block;height:2px;left:0;position:absolute;right:0;top:86px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-journey-card-walk-it{display:none!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
     ].join('\n');
     (document.head || document.documentElement).appendChild(style);
@@ -404,6 +407,46 @@
         paragraph.removeAttribute(EMPTY_PARAGRAPH_MARKER);
         paragraph.removeAttribute('aria-hidden');
       }
+    });
+    normalizeWidgetFrameSpacing(body);
+  }
+
+  function widgetContentChildren(parent, frameBlock) {
+    return Array.prototype.filter.call(parent.children || [], function (child) {
+      if (child === frameBlock) return true;
+      var tag = (child.tagName || '').toUpperCase();
+      if (tag === 'SCRIPT' || tag === 'STYLE') return false;
+      var hasMedia = child.querySelector && child.querySelector('img,iframe,video,svg,canvas,button,audio');
+      var text = String(child.textContent || '').replace(/\u00a0/g, ' ').trim();
+      if (!hasMedia && !text) return false;
+      return true;
+    });
+  }
+
+  function findWidgetFrameBlock(frame, body) {
+    var block = frame;
+    var parent = frame.parentElement;
+    var depth = 0;
+    while (parent && parent !== body && depth < 5) {
+      var tag = (parent.tagName || '').toUpperCase();
+      if (tag === 'BODY' || tag === 'MAIN' || tag === 'ARTICLE' || tag === 'SECTION') break;
+      var contentChildren = widgetContentChildren(parent, block);
+      if (contentChildren.length !== 1 || contentChildren[0] !== block) break;
+      block = parent;
+      parent = parent.parentElement;
+      depth++;
+    }
+    return block;
+  }
+
+  function normalizeWidgetFrameSpacing(body) {
+    if (!body) return;
+    body.querySelectorAll('[' + WIDGET_BLOCK_MARKER + ']').forEach(function (oldBlock) {
+      oldBlock.removeAttribute(WIDGET_BLOCK_MARKER);
+    });
+    body.querySelectorAll('iframe[src*="fenerszymanski.github.io/berlinwalk-widgets/"]').forEach(function (frame) {
+      if (frame.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) return;
+      findWidgetFrameBlock(frame, body).setAttribute(WIDGET_BLOCK_MARKER, '1');
     });
   }
 
