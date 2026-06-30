@@ -62,6 +62,7 @@
     'html.bw-cwv-route #comp-mpljwtm6 .comp-mpljwtm6-container,html.bw-cwv-route #comp-mpljwtm6 .max-width-container{',
     'align-content:start!important;align-items:start!important;grid-template-rows:auto!important;',
     'height:auto!important;max-height:none!important;min-height:var(--bw-cwv-first-screen-reserve)!important}',
+    'html.bw-cwv-tools .bw-embed-cta,html.bw-cwv-tools .bw-hub-footer{display:none!important}',
     'html.bw-cwv-tools #comp-mp3h6ahr,html.bw-cwv-games #comp-mqrk2nfy,',
     'html.bw-cwv-meeting #comp-mpbnyd6v,html.bw-cwv-widgets #comp-mp9s5n32,html.bw-cwv-route #comp-mpljz1bj{',
     'align-self:start!important;justify-self:center!important;margin-top:0!important}',

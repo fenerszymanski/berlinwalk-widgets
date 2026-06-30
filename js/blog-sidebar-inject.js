@@ -15,6 +15,27 @@
     if (!routeClass || document.getElementById('bw-cwv-reserve-sidebar-css')) return;
     document.documentElement.classList.add('bw-cwv-reserve-sidebar', routeClass);
 
+    var cloakSelectors = {
+      '/berlin-tools': ['#comp-mp3h654p', '#comp-mp3h6ahr', '#comp-mp0cm5gq', '#comp-mp0cm5gq_r_comp-kbgakgyt', '#comp-mp0cm5gq_r_comp-mpbor0ei', '.bw-embed-cta', '.bw-hub-footer'],
+      '/games': ['#comp-mqe2hccz', '#comp-mqrk2nfy', '#comp-mqe2hcf5', '#comp-mqe2hcf5_r_comp-kbgakgyt', '#comp-mqe2hcf5_r_comp-mpbor0ei'],
+      '/meeting-point': ['#comp-mpbnpbye', '#comp-mpbnyd6v', '#comp-mpbnpbzu', '#comp-mpbnpbzu_r_comp-kbgakgyt', '#comp-mpbnpbzu_r_comp-mpbor0ei'],
+      '/berlin-walking-tour-route': ['#comp-mpljwtm6', '#comp-mpljz1bj', '#comp-mpljwto4', '#comp-mpljwto4_r_comp-kbgakgyt', '#comp-mpljwto4_r_comp-mpbor0ei'],
+      '/widgets': ['#comp-mp9s515e', '#comp-mp9s5n32', '#comp-mp9s517q', '#comp-mp9s517q_r_comp-kbgakgyt', '#comp-mp9s517q_r_comp-mpbor0ei']
+    };
+    var cloaked = [];
+    (cloakSelectors[route] || []).forEach(function (selector) {
+      document.querySelectorAll(selector).forEach(function (el) {
+        cloaked.push([el, el.style.visibility]);
+        el.style.visibility = 'hidden';
+      });
+    });
+    function revealCloaked() {
+      while (cloaked.length) {
+        var item = cloaked.shift();
+        item[0].style.visibility = item[1] || '';
+      }
+    }
+
     var style = document.createElement('style');
     style.id = 'bw-cwv-reserve-sidebar-css';
     style.textContent = [
@@ -33,12 +54,17 @@
       'html.bw-cwv-route #comp-mpljwtm6 .comp-mpljwtm6-container,html.bw-cwv-route #comp-mpljwtm6 .max-width-container{',
       'align-content:start!important;align-items:start!important;grid-template-rows:auto!important;',
       'height:auto!important;max-height:none!important;min-height:var(--bw-cwv-first-screen-reserve)!important}',
+      'html.bw-cwv-tools .bw-embed-cta,html.bw-cwv-tools .bw-hub-footer{display:none!important}',
       'html.bw-cwv-tools #comp-mp3h6ahr,html.bw-cwv-games #comp-mqrk2nfy,',
       'html.bw-cwv-meeting #comp-mpbnyd6v,html.bw-cwv-widgets #comp-mp9s5n32,html.bw-cwv-route #comp-mpljz1bj{',
       'align-self:start!important;justify-self:center!important;margin-top:0!important}',
       '}'
     ].join('');
     (document.head || document.documentElement).appendChild(style);
+    requestAnimationFrame(function () {
+      requestAnimationFrame(revealCloaked);
+    });
+    setTimeout(revealCloaked, 700);
   }
 
   installCoreWebVitalsReserve();
