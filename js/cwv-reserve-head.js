@@ -1,5 +1,8 @@
 (function () {
   var route = window.location.pathname.replace(/\/+$/, '') || '/';
+  var widgetOrigin = 'https://fenerszymanski.github.io';
+  var widgetBase = widgetOrigin + '/berlinwalk-widgets/';
+  var blogDataUrl = widgetBase + 'blog-index/data.json?v=20260619b';
   var routeClass = {
     '/berlin-tools': 'bw-cwv-tools',
     '/games': 'bw-cwv-games',
@@ -7,10 +10,6 @@
     '/berlin-walking-tour-route': 'bw-cwv-route',
     '/widgets': 'bw-cwv-widgets'
   }[route];
-
-  if (!routeClass || document.getElementById('bw-cwv-reserve-external-css')) return;
-
-  document.documentElement.classList.add('bw-cwv-reserve-external', routeClass);
 
   function appendToHead(node) {
     (document.head || document.documentElement).appendChild(node);
@@ -30,19 +29,73 @@
     appendToHead(link);
   }
 
-  addLink('preconnect', 'https://fenerszymanski.github.io', { crossorigin: '' });
-  if (route === '/meeting-point') {
-    addLink('preload', 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.webp', {
+  function preloadScript(src) {
+    addLink('preload', src, { as: 'script' });
+  }
+
+  function preloadFetch(src) {
+    addLink('preload', src, { as: 'fetch', crossorigin: 'anonymous' });
+  }
+
+  function preloadImage(src) {
+    addLink('preload', src, {
       as: 'image',
       fetchpriority: 'high'
     });
   }
-  if (route === '/berlin-walking-tour-route') {
-    addLink('preload', 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1600w.webp', {
-      as: 'image',
-      fetchpriority: 'high'
-    });
+
+  function preloadBlogLeadImage() {
+    fetch(blogDataUrl, { cache: 'force-cache' })
+      .then(function (response) { return response.ok ? response.json() : null; })
+      .then(function (data) {
+        var image = data && data.hero && data.hero.lead && data.hero.lead.image;
+        preloadImage(image);
+      })
+      .catch(function () {});
   }
+
+  function installHints() {
+    var hints = {
+      '/berlin-tools': {
+        scripts: ['tools-hub/tools-hub-element.js'],
+        fetches: ['tools-hub/data.json?bwHubVersion=2026-06-29-museums-spotlight']
+      },
+      '/games': {
+        scripts: ['games-page/games-page-element.js?v=games-page-retro-v2-20260623']
+      },
+      '/meeting-point': {
+        scripts: ['meeting-point/meeting-point-element.js'],
+        images: ['gallery/images/06-1200w.webp']
+      },
+      '/berlin-walking-tour-route': {
+        scripts: ['route-story/route-story-element.js'],
+        images: ['gallery/images/06-1600w.webp']
+      },
+      '/widgets': {
+        scripts: ['widgets-hub/widgets-hub-element.js'],
+        fetches: ['tools-hub/data.json']
+      },
+      '/blog': {
+        scripts: ['blog-index/blog-index-element.js'],
+        fetches: ['blog-index/data.json?v=20260619b'],
+        blogLeadImage: true
+      }
+    }[route];
+
+    if (!hints) return;
+    addLink('preconnect', widgetOrigin, { crossorigin: '' });
+    addLink('preconnect', 'https://static.wixstatic.com', { crossorigin: '' });
+    (hints.scripts || []).forEach(function (src) { preloadScript(widgetBase + src); });
+    (hints.fetches || []).forEach(function (src) { preloadFetch(widgetBase + src); });
+    (hints.images || []).forEach(function (src) { preloadImage(widgetBase + src); });
+    if (hints.blogLeadImage) preloadBlogLeadImage();
+  }
+
+  installHints();
+
+  if (!routeClass || document.getElementById('bw-cwv-reserve-external-css')) return;
+
+  document.documentElement.classList.add('bw-cwv-reserve-external', routeClass);
 
   var style = document.createElement('style');
   style.id = 'bw-cwv-reserve-external-css';
