@@ -146,7 +146,8 @@
   "what-to-book-in-advance-in-berlin": "what-to-book-in-advance-in-berlin",
   "hohenzollern-berlin": "hohenzollern-berlin",
   "berlin-plug-adapter": "berlin-plug-adapter",
-  "potsdamer-platz-berlin": "potsdamer-platz-berlin"
+  "potsdamer-platz-berlin": "potsdamer-platz-berlin",
+  "tempelhof-airport-berlin": "tempelhof-airport-berlin"
 };
 
   var SCHEMAS = {
@@ -7188,6 +7189,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. It works well before or after Brandenburg Gate, the Holocaust Memorial, Topography of Terror, Checkpoint Charlie or a broader Berlin Wall walk. For the BerlinWalk core route, treat it as a separate add-on rather than the main 2 hours route."
+        }
+      }
+    ]
+  },
+  "tempelhof-airport-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Tempelhof Airport Berlin worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you want one of Berlin's most unusual open spaces or a deeper airport/history layer. For a first visit, start with the free field. Book a building tour only if the airport interior is a real interest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Tempelhofer Feld free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The official Tempelhofer Feld visitor page lists free admission. The airport building is different: official guided tours are separate and should be checked or booked before you go."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which entrance is best for Tempelhofer Feld?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use S+U Tempelhof / Tempelhofer Damm for the easiest first runway look. Use Platz der Luftbrücke for the airport building and Airlift Memorial. Use the Oderstraße / Neukölln side for local park life, lawns and food after."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are Tempelhofer Feld opening hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The field has seasonal opening hours. When this guide was checked, June and July were listed as 6:00 AM to 11:00 PM, August as 6:00 AM to 10:30 PM, and December as 7:30 AM to 5:00 PM. Check the official page before a sunset or late visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do I need at Tempelhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan 45 minutes for a quick runway look, 90 minutes for a comfortable first loop, or 2 to 3 hours if you add a longer field visit or an official airport tour."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit Tempelhof with luggage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A small backpack is fine, but a suitcase makes Tempelhof awkward. The field is huge, exposed and not a good luggage walk. Use station lockers or luggage storage first, especially if you are arriving through Hauptbahnhof."
         }
       }
     ]
