@@ -1,3 +1,23 @@
+## 2026-06-30 — Codex (widget git cleanup + log push)
+
+**Did:** `berlinwalk-widgets` repo state was cleaned without touching tracked source/data work.
+**Changed:**
+- Removed only untracked transient QA artifacts: the new `.playwright-cli` console/page files, `output/playwright/hohenzollern-post-publish-20260629/`, and the accidental older nested copy `berlinwalk-widgets/blog-index/`.
+- `SESSION_LOG.md` now includes the pending daily featured listing handoff plus this cleanup note; source files and GitHub Pages data were not regenerated.
+**Opened:** None.
+**Closed:** Local git noise from recent listing/Hohenzollern QA runs; repo is ready to push as a small log-only commit.
+**Next session should:** Treat `blog-index/data.json` on `origin/main` as the canonical listing source; ignore the removed nested duplicate path.
+
+## 2026-06-30 — Codex (Daily featured listing refresh)
+
+**Did:** `/blog` listesi güncel Wix API envanteriyle yeniden üretildi ve `berlinwalk-widgets/blog-index/data.json` güncellendi.
+**Changed:**
+- `blog-index/data.json` — hero/yan liste güncellendi ve `updatedAt` yenilendi; `tools-home` ve `tools-hub` veri dosyalarına elle dokunulmadı.
+- Push edildi: `785597d` (`Refresh daily featured blog index`) to `origin/main`.
+**Opened:** GitHub Pages `blog-index/data.json` yayın gecikmesi.
+**Closed:** araç seçimleri mevcut haliyle kaldı.
+**Next session should:** GH Pages `Last-Modified`/`updatedAt` doğrulaması tamamlanınca `/blog` ve `/berlin-tools` için hızlı canlı kontrol yap.
+
 ## 2026-06-29 - Hohenzollern Berlin blog/tool live
 
 - Completed the Hohenzollern package and pushed the post-dependent assets. Pre-publish commit `20075c3` added `blog-drafts/hohenzollern-berlin*`, 5 article images/contact sheet/source notes, Quick Summary/FAQ key `hohenzollern-berlin`, widget `hohenzollern-berlin-footprint-map/`, tool icon assets, and the `tools-hub/data.json` entry.
