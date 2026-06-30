@@ -365,7 +365,12 @@
     #bw-wc-fixtures .bw-ko-side.away { justify-content: flex-end; text-align: right; }
     #bw-wc-fixtures .bw-ko-side.away .bw-ko-seed { order: -1; }
     #bw-wc-fixtures .bw-ko-side.win .bw-ko-name { color: var(--bw-green); font-weight: 900; }
-    #bw-wc-fixtures .bw-ko-side.loss .bw-ko-name { color: var(--bw-muted); }
+    #bw-wc-fixtures .bw-ko-side.loss .bw-ko-name {
+      color: var(--bw-muted);
+      text-decoration: line-through;
+      text-decoration-thickness: 2px;
+      text-decoration-color: rgba(78, 90, 78, 0.72);
+    }
     #bw-wc-fixtures .bw-ko-side.loser .bw-ko-name { text-decoration: line-through; text-decoration-thickness: 2px; text-decoration-color: currentColor; text-underline-offset: 2px; }
     #bw-wc-fixtures .bw-ko-name {
       min-width: 0;

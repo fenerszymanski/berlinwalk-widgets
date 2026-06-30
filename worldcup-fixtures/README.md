@@ -21,6 +21,8 @@ time (CEST)**.
   handoff logs, run the local checks, commit the widget repo changes, and push
   `main` so GitHub Pages can deploy the live widget. If no score is due, keep
   the run as a true no-op: no file edits, no logs, no commit and no push.
+- Knockout display rule: eliminated teams must be visually crossed out in final
+  knockout cards, including matches decided by penalty shootout.
 
 **Data note:** the group-stage fixtures and kick-off times were assembled from
 public 2026 World Cup CET schedules and cross-checked against anchor matches

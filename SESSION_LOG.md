@@ -34,6 +34,16 @@
 **Opened:** Berlin Split final launch için premium ChatGPT-browser görsel üretimi, gerçek audio/voice kararı ve yeni full QA gerekiyor.
 **Closed:** Berlin Split artık taze canlı `/games` renderında public listeye çıkmıyor.
 
+## 2026-06-30 - World Cup knockout loser styling
+
+**Did:** KO final kartlarında elenen takım adları çizilecek şekilde düzeltildi; penaltı kaybedenleri mevcut PSO winner/loss mantığıyla aynı stili alıyor.
+**Changed:**
+- `worldcup-fixtures/index.html` — `.bw-ko-side.loss .bw-ko-name` artık muted + line-through.
+- `worldcup-fixtures/README.md` — KO display kuralı eklendi.
+**Opened:** GitHub Pages yayılımı push sonrası kontrol edilmeli.
+**Closed:** Penaltılarda elenen takımın sadece gri kalıp çizilmemesi sorunu.
+**Next session should:** Canlı widget'ta M74/M75 kaybeden adlarının çizildiğini kontrol et.
+
 ## 2026-06-30 - World Cup score automation push rule
 
 **Did:** Yusuf'un yeni skor otomasyonu kuralı uygulandı: skor eklendiyse doğrulama ve loglardan sonra commit + push yapılacak; no-op koşulu dosyasız/logsuz/commit'siz kalacak.
