@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-06-30T05:42:22.256Z",
+  "updatedAt": "2026-06-30T06:27:13.519Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 150,
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Plug Adapter: Sockets, Voltage and Charging Tips for Tourists",
+      "slug": "berlin-plug-adapter",
+      "path": "/post/berlin-plug-adapter",
+      "url": "https://www.berlinwalk.com/post/berlin-plug-adapter",
+      "excerpt": "A practical Berlin plug adapter guide for tourists: Germany Type F sockets, 230V power, USB-C charging, power banks, hair-tool cautions and where to buy adapters.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-06-30T06:24:08.573Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_bd4e8436f80b47a08b6657bd52f9b4e0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-plug-adapter-01-berlin-plug-adapter-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_bd4e8436f80b47a08b6657bd52f9b4e0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-plug-adapter-01-berlin-plug-adapter-cover.jpg",
+      "alt": "Berlin hotel desk with a Type F wall socket, travel plug adapter, phone, charger and power bank",
+      "relatedToolSlug": "berlin-plug-adapter-checker"
+    },
+    {
       "title": "Hohenzollern Berlin: The Royal Family Behind the City's Grandest Streets",
       "slug": "hohenzollern-berlin",
       "path": "/post/hohenzollern-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/sachsenhausen-from-berlin-01-sachsenhausen-tower-a-cover.jpg",
       "alt": "Tower A entrance building at Sachsenhausen Memorial in Oranienburg near Berlin",
       "relatedToolSlug": "sachsenhausen-visit-planner"
-    },
-    {
-      "title": "Berlin Public Transport Ferries: The Cheap Boat Ride Tourists Miss",
-      "slug": "berlin-public-transport-ferries",
-      "path": "/post/berlin-public-transport-ferries",
-      "url": "https://www.berlinwalk.com/post/berlin-public-transport-ferries",
-      "excerpt": "A practical guide to Berlin public transport ferries: which BVG ferry tourists should choose, what tickets work, when F10 is worth it and when a Spree cruise is better.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-06-25T21:06:33.128Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_c79a439906af4e5a978b19f0f63b0b76~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-public-transport-ferries-02-f11-baumschulenstrasse.jpg",
-      "alt": "Small BVG public transport ferry at a green waterside pier in Berlin",
-      "relatedToolSlug": "berlin-public-transport-ferry-picker"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Plug Adapter: Sockets, Voltage and Charging Tips for Tourists",
+      "slug": "berlin-plug-adapter",
+      "path": "/post/berlin-plug-adapter",
+      "url": "https://www.berlinwalk.com/post/berlin-plug-adapter",
+      "excerpt": "A practical Berlin plug adapter guide for tourists: Germany Type F sockets, 230V power, USB-C charging, power banks, hair-tool cautions and where to buy adapters.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "practical",
+      "topicLabel": "Practical Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-06-30T06:24:08.573Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_bd4e8436f80b47a08b6657bd52f9b4e0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-plug-adapter-01-berlin-plug-adapter-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_bd4e8436f80b47a08b6657bd52f9b4e0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-plug-adapter-01-berlin-plug-adapter-cover.jpg",
+      "alt": "Berlin hotel desk with a Type F wall socket, travel plug adapter, phone, charger and power bank",
+      "relatedToolSlug": "berlin-plug-adapter-checker"
+    },
     {
       "title": "Hohenzollern Berlin: The Royal Family Behind the City's Grandest Streets",
       "slug": "hohenzollern-berlin",
@@ -4314,23 +4331,6 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_4d8cbfe279ae44afafc90bd121d63210~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Humboldt%20Forum%20Building%2C%20Berlin%2C%20Germany.%20History_%20East%20Germans%20later%20demolished%20Humboldt%20Forum%2C%20a%2015th-century%20royal%20and%20imperial%20palace%20in.jpg",
       "alt": "humboldt forum berlin",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Museum Island: Why Prussia Built an Entire Island of Museums",
-      "slug": "museum-island-why-prussia-built-an-entire-island-of-museums",
-      "path": "/post/museum-island-why-prussia-built-an-entire-island-of-museums",
-      "url": "https://www.berlinwalk.com/post/museum-island-why-prussia-built-an-entire-island-of-museums",
-      "excerpt": "Why Prussia built Museum Island: the five museums, UNESCO status, war damage, restoration, tickets and how to read the island on foot.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "10 min read",
-      "publishedDate": "2026-02-26T14:37:52.312Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Boat%20on%20river%20with%20cityscape%20and%20TV%20tower.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_f83d2c2ec63f4e978cea87bd171d6b55~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Boat%20on%20river%20with%20cityscape%20and%20TV%20tower.jpg",
-      "alt": "Museum Island and the Bode Museum seen from the Spree with the TV Tower behind",
-      "relatedToolSlug": "berlin-landmarks-map"
     }
   ]
 }
