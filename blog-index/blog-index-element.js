@@ -1611,7 +1611,7 @@ class BWBlogIndexElement extends HTMLElement {
   _renderLeadCard(post) {
     return `
       <a class="bw-lead-card" href="${this._escapeAttribute(post.url)}" target="_top">
-        ${this._renderMedia(post, 'image')}
+        ${this._renderMedia(post, 'image', { priority: true })}
         <span class="bw-lead-copy">
           ${this._renderMeta(post)}
           <span class="bw-lead-title">${this._escapeHtml(post.title)}</span>
@@ -1767,13 +1767,15 @@ class BWBlogIndexElement extends HTMLElement {
     `;
   }
 
-  _renderMedia(post, field) {
+  _renderMedia(post, field, options = {}) {
     const src = post[field] || post.image || post.thumb || '';
     const alt = post.alt || post.title || '';
     if (!src) return '<span class="bw-media"><span class="bw-placeholder" aria-hidden="true">BW</span></span>';
+    const loading = options.priority ? 'eager' : 'lazy';
+    const fetchPriority = options.priority ? ' fetchpriority="high"' : '';
     return `
       <span class="bw-media">
-        <img src="${this._escapeAttribute(src)}" alt="${this._escapeAttribute(alt)}" loading="lazy" decoding="async">
+        <img src="${this._escapeAttribute(src)}" alt="${this._escapeAttribute(alt)}" loading="${loading}" decoding="async"${fetchPriority}>
       </span>
     `;
   }
