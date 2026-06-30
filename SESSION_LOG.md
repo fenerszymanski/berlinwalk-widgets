@@ -3,10 +3,11 @@
 **Did:** `berlinwalk-widgets` repo state was cleaned without touching tracked source/data work.
 **Changed:**
 - Removed only untracked transient QA artifacts: the new `.playwright-cli` console/page files, `output/playwright/hohenzollern-post-publish-20260629/`, and the accidental older nested copy `berlinwalk-widgets/blog-index/`.
+- Preserved newly discovered `berlin-plug-adapter-checker` visual assets instead of deleting them: widget hero, matching raw blog hero copy, ChatGPT source icon, and canonical 512/160 icon PNGs. No widget HTML, `tools-hub`, CMS, or live page wiring was created.
 - `SESSION_LOG.md` now includes the pending daily featured listing handoff plus this cleanup note; source files and GitHub Pages data were not regenerated.
 **Opened:** None.
-**Closed:** Local git noise from recent listing/Hohenzollern QA runs; repo is ready to push as a small log-only commit.
-**Next session should:** Treat `blog-index/data.json` on `origin/main` as the canonical listing source; ignore the removed nested duplicate path.
+**Closed:** Local git noise from recent listing/Hohenzollern QA runs, while preserving meaningful plug-adapter visual work.
+**Next session should:** Treat `blog-index/data.json` on `origin/main` as the canonical listing source; use the plug-adapter files as visual-only starting assets if that package resumes.
 
 ## 2026-06-30 — Codex (Daily featured listing refresh)
 
