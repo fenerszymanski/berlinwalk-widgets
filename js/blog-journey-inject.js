@@ -783,7 +783,8 @@
   function renderJourneyCard(card) {
     var image = cardImage(card);
     var key = slugify(card.label || card.title);
-    return '<a class="bw-blog-journey-card bw-blog-journey-card-' + escapeAttr(key) + '" href="' + escapeAttr(card.url) + '" target="_top" data-bw-blog-journey-click="' + escapeAttr(card.label) + '">' +
+    var bookAttrs = card.bookLink ? ' data-book-link="1" data-bw-book-context="' + escapeAttr(card.bookContext || key) + '"' : '';
+    return '<a class="bw-blog-journey-card bw-blog-journey-card-' + escapeAttr(key) + '" href="' + escapeAttr(card.url) + '" target="_top" data-bw-blog-journey-click="' + escapeAttr(card.label) + '"' + bookAttrs + '>' +
       '<span class="bw-blog-journey-image" aria-hidden="true"><img src="' + escapeAttr(image) + '" alt="" loading="lazy"></span>' +
       '<span class="bw-blog-journey-content">' +
         '<span class="bw-blog-journey-label">' + escapeHtml(card.label) + '</span>' +
@@ -811,7 +812,9 @@
         label: 'Walk it',
         title: 'Book the free Berlin walk',
         url: bookingUrl,
-        image: TOUR_IMAGE
+        image: TOUR_IMAGE,
+        bookLink: true,
+        bookContext: 'blog_journey_walk_it'
       }
     ];
     if (tool) {

@@ -15919,14 +15919,33 @@
   }
 
   function renderTourAnchor(plan) {
-    return '';
+    var cta = ctaForPlan(plan);
+    var slot = tourSlotForPlan(plan);
+    var timing = state.tourIntent === 'booked'
+      ? 'World Clock meeting point'
+      : (slot && slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : 'Tue-Sat at 11:30');
+    var copy = state.tourIntent === 'booked'
+      ? 'Keep the meeting point handy so the first historic-centre walk in your plan stays easy on arrival.'
+      : 'Use this plan for the whole trip, then let me anchor the historic centre on foot at the start.';
+    return '<article class="bw-tour-card" data-tour-anchor>' +
+      '<span class="bw-tour-symbol" aria-hidden="true">' + iconSvg('route') + '</span>' +
+      '<div class="bw-tour-copy">' +
+        '<strong>' + escapeHtml(timing) + '</strong>' +
+        '<span>' + escapeHtml(copy) + '</span>' +
+      '</div>' +
+      '<div class="bw-tour-links">' +
+        '<a class="bw-tour-link primary" href="' + escapeHtml(cta.href) + '" target="' + escapeHtml(cta.target || '_top') + '" data-book-link data-cta-kind="' + escapeHtml(cta.kind) + '">' + iconSvg('calendar') + '<span>' + escapeHtml(cta.label) + '</span></a>' +
+        '<a class="bw-tour-link" href="' + escapeHtml(meetingPointUrl()) + '" target="_blank" rel="noopener" data-meeting-link>' + iconSvg('pin') + '<span>World Clock meeting point</span></a>' +
+      '</div>' +
+    '</article>';
   }
 
   function renderTourActions(plan) {
     var target = root.querySelector('[data-tour-actions]');
     if (!target) return;
-    target.innerHTML = renderTourAnchor(plan);
-    target.hidden = true;
+    var html = renderTourAnchor(plan);
+    target.innerHTML = html;
+    target.hidden = !html;
   }
 
   function ctaForPlan(plan) {
@@ -16172,6 +16191,29 @@
     link.href = cta.href;
     link.target = cta.target;
     link.setAttribute('data-cta-kind', cta.kind);
+  }
+
+  function isPlannerBookHref(href) {
+    try {
+      var url = new URL(href, window.location.href);
+      var path = url.pathname.toLowerCase();
+      return path === '/book' || path.indexOf('/book-berlin-walking-tour/') === 0;
+    } catch (err) {
+      return false;
+    }
+  }
+
+  function decoratePlannerBookLinks(plan) {
+    var cta = ctaForPlan(plan || latestPlan || buildPlan());
+    root.querySelectorAll('a[href]').forEach(function (link) {
+      if (!isPlannerBookHref(link.getAttribute('href') || '')) return;
+      link.setAttribute('data-book-link', '1');
+      if (!link.getAttribute('data-cta-kind')) link.setAttribute('data-cta-kind', cta.kind || 'planner_book');
+      try {
+        var url = new URL(link.href, window.location.href);
+        if (url.pathname.toLowerCase() === '/book') link.href = cta.href;
+      } catch (err) {}
+    });
   }
 
   function planBoard(plan) {
@@ -17455,7 +17497,15 @@
     if (planGenerated) {
       renderTripControl(plan);
       renderMobilePeek(plan);
+      renderTourActions(plan);
+    } else {
+      var tourActions = root.querySelector('[data-tour-actions]');
+      if (tourActions) {
+        tourActions.innerHTML = '';
+        tourActions.hidden = true;
+      }
     }
+    decoratePlannerBookLinks(plan);
   }
 
   function clearUnlockedResultPanels() {
@@ -17496,6 +17546,7 @@
     renderCarryPack(plan);
     renderRouteDeck(plan);
     renderPlanBoard(plan);
+    decoratePlannerBookLinks(plan);
   }
 
   function updatePlanningUi() {

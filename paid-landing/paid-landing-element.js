@@ -1113,13 +1113,14 @@
           .bw-paid-hero {
             padding-left: 10px;
             padding-right: 10px;
+            padding-top: 10px;
           }
 
           .bw-paid-mini-nav {
             align-items: start;
             display: grid;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 7px;
+            margin-bottom: 10px;
           }
 
           .bw-paid-mini-nav span {
@@ -1127,27 +1128,41 @@
           }
 
           .bw-paid-logo {
-            width: 142px;
+            padding: 6px 11px;
+            width: 132px;
+          }
+
+          .bw-paid-hero-grid {
+            gap: 12px;
+          }
+
+          .bw-paid-hero-copy {
+            background: rgba(10, 34, 13, 0.84);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 8px;
+            padding: 14px;
           }
 
           .bw-paid-hero h1 {
-            font-size: 38px;
+            font-size: 30px;
+            line-height: 1;
+            max-width: none;
           }
 
           .bw-paid-lead {
-            font-size: 15px;
-            line-height: 1.4;
-            margin-top: 12px;
+            font-size: 13.5px;
+            line-height: 1.35;
+            margin-top: 9px;
           }
 
           .bw-paid-facts {
             gap: 6px;
-            margin-top: 16px;
+            margin-top: 10px;
           }
 
           .bw-paid-facts span {
-            font-size: 11px;
-            padding: 9px 10px;
+            font-size: 10px;
+            padding: 7px 8px;
           }
 
           .bw-paid-actions,
@@ -1161,6 +1176,7 @@
 
           .bw-paid-booking-panel {
             max-width: none;
+            order: -1;
           }
 
           .bw-paid-booking-above {
@@ -1168,10 +1184,73 @@
             display: grid;
             gap: 2px;
             justify-content: start;
+            padding: 8px 10px;
           }
 
           .bw-paid-booking-above span {
+            font-size: 10px;
             text-align: left;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-head {
+            gap: 5px;
+            padding: 8px 10px 7px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-title {
+            font-size: 16px !important;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-note {
+            display: none;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-body {
+            gap: 7px;
+            padding: 8px 10px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-date-tools {
+            gap: 6px;
+            grid-template-columns: minmax(0, 1fr) minmax(116px, auto);
+            margin-bottom: 5px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-days {
+            gap: 6px;
+            padding-bottom: 3px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-day {
+            flex-basis: 54px;
+            min-height: 54px;
+            padding: 6px 5px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-day b {
+            font-size: 18px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-slots {
+            gap: 6px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-slot {
+            min-height: 38px;
+            padding: 6px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-summary {
+            gap: 6px;
+            padding: 8px 10px 10px;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-next-note {
+            display: none;
+          }
+
+          .bw-paid-booking-panel bw-booking-calendar .bw-cal-cta {
+            height: 44px;
           }
 
           .bw-paid-trust-grid,
