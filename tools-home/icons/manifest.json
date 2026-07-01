@@ -1044,5 +1044,18 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/tempelhof-field-planner-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/tempelhof-field-planner-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_c8948d95cbca4fdcb8e772b85a719e40~mv2.png"
+  },
+  {
+    "slug": "berlin-step-free-planner",
+    "title": "Berlin Step-Free Planner",
+    "category": "Transport",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-step-free-planner/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-step-free-planner/icon-source.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-step-free-planner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-step-free-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-step-free-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_7307e53737454fd5af4cd386ab19706a~mv2.png"
   }
 ]

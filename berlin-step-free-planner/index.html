@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Step-Free Planner | BerlinWalk</title>
+  <meta name="description" content="Plan a calmer Berlin day with wheelchair, stroller, luggage or limited-mobility needs: transport checks, route surfaces and backup choices.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-stepfree">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-stepfree {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #164A1A;
+      --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
+      --bw-cream: #FAFAF5;
+      --bw-white: #FFFFFF;
+      --bw-text: #212121;
+      --bw-muted: #50614F;
+      --bw-border: #D9E7C8;
+      --bw-soft: #F4F8EA;
+      --bw-warn: #9E5A00;
+      color: var(--bw-text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 22px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-stepfree *,
+    #bw-stepfree *::before,
+    #bw-stepfree *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-stepfree h2,
+    #bw-stepfree h3,
+    #bw-stepfree h4,
+    #bw-stepfree p {
+      margin-top: 0;
+    }
+
+    #bw-stepfree .bw-shell {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-stepfree .bw-hero {
+      background: var(--bw-green-dark);
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+      min-height: 330px;
+      overflow: hidden;
+    }
+
+    #bw-stepfree .bw-hero-copy {
+      align-content: center;
+      background:
+        radial-gradient(circle at 12% 0%, rgba(255, 230, 0, 0.25), transparent 33%),
+        linear-gradient(135deg, rgba(124, 179, 66, 0.24), rgba(22, 74, 26, 0.98));
+      color: var(--bw-white);
+      display: grid;
+      gap: 12px;
+      padding: 27px 24px;
+    }
+
+    #bw-stepfree .bw-kicker {
+      color: var(--bw-yellow);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 1.4px;
+      line-height: 1.2;
+      margin: 0;
+      text-transform: uppercase;
+    }
+
+    #bw-stepfree .bw-title {
+      color: var(--bw-white);
+      font-size: 32px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.08;
+      margin: 0;
+      max-width: 12ch;
+    }
+
+    #bw-stepfree .bw-sub {
+      color: #EAF5DA;
+      font-size: 13.5px;
+      font-weight: 750;
+      line-height: 1.55;
+      margin: 0;
+      max-width: 450px;
+    }
+
+    #bw-stepfree .bw-hero-img {
+      background: #102C14;
+      min-height: 330px;
+      position: relative;
+    }
+
+    #bw-stepfree .bw-hero-img img {
+      display: block;
+      height: 100%;
+      inset: 0;
+      object-fit: cover;
+      position: absolute;
+      width: 100%;
+    }
+
+    #bw-stepfree .bw-body {
+      background: var(--bw-cream);
+      display: grid;
+      gap: 16px;
+      padding: 18px 20px 20px;
+    }
+
+    #bw-stepfree .bw-panel,
+    #bw-stepfree .bw-result,
+    #bw-stepfree .bw-card,
+    #bw-stepfree .bw-link-card {
+      background: var(--bw-white);
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      min-width: 0;
+    }
+
+    #bw-stepfree .bw-panel {
+      display: grid;
+      gap: 15px;
+      padding: 16px;
+    }
+
+    #bw-stepfree .bw-grid {
+      display: grid;
+      gap: 13px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-stepfree .bw-fieldset {
+      border: 0;
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      min-width: 0;
+      padding: 0;
+    }
+
+    #bw-stepfree .bw-label {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-stepfree .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-stepfree .bw-choice {
+      appearance: none;
+      background: #F8FBF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      cursor: pointer;
+      font: inherit;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.25;
+      min-height: 54px;
+      padding: 10px 8px;
+      text-align: center;
+      transition: background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    }
+
+    #bw-stepfree .bw-choice:hover {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.16);
+    }
+
+    #bw-stepfree .bw-choice[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-white);
+    }
+
+    #bw-stepfree .bw-result {
+      display: grid;
+      gap: 14px;
+      padding: 17px;
+    }
+
+    #bw-stepfree .bw-verdict {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: auto minmax(0, 1fr);
+    }
+
+    #bw-stepfree .bw-badge {
+      align-items: center;
+      background: var(--bw-yellow);
+      border-radius: 8px;
+      color: var(--bw-green-dark);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 950;
+      height: 48px;
+      justify-content: center;
+      line-height: 1;
+      text-transform: uppercase;
+      width: 54px;
+    }
+
+    #bw-stepfree .bw-result h3 {
+      color: var(--bw-green);
+      font-size: 22px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.16;
+      margin: 0;
+    }
+
+    #bw-stepfree .bw-result p {
+      color: var(--bw-muted);
+      font-size: 13.5px;
+      font-weight: 750;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-stepfree .bw-meter {
+      background: #E5EFD7;
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-stepfree .bw-meter span {
+      background: linear-gradient(90deg, var(--bw-lime), var(--bw-green));
+      display: block;
+      height: 100%;
+      transition: width 180ms ease;
+      width: 60%;
+    }
+
+    #bw-stepfree .bw-list {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-stepfree .bw-list li {
+      background: #F8FBF2;
+      border: 1px solid var(--bw-border);
+      border-radius: 8px;
+      color: var(--bw-text);
+      font-size: 12.5px;
+      font-weight: 800;
+      line-height: 1.45;
+      padding: 10px 11px;
+    }
+
+    #bw-stepfree .bw-plan-grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-stepfree .bw-card {
+      display: grid;
+      gap: 7px;
+      padding: 13px;
+    }
+
+    #bw-stepfree .bw-card strong,
+    #bw-stepfree .bw-link-card strong {
+      color: var(--bw-green);
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-stepfree .bw-card span,
+    #bw-stepfree .bw-link-card span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    #bw-stepfree .bw-official {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-stepfree .bw-link-card {
+      color: var(--bw-text);
+      display: grid;
+      gap: 6px;
+      padding: 13px;
+      text-decoration: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    #bw-stepfree .bw-link-card:hover,
+    #bw-stepfree .bw-link-card:focus {
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.16);
+      outline: none;
+      transform: translateY(-1px);
+    }
+
+    #bw-stepfree .bw-note {
+      background: #FFFBE1;
+      border: 1px solid rgba(255, 230, 0, 0.85);
+      border-radius: 8px;
+      color: var(--bw-green-dark);
+      font-size: 12.5px;
+      font-weight: 850;
+      line-height: 1.45;
+      padding: 12px;
+    }
+
+    @media (max-width: 800px) {
+      #bw-stepfree {
+        margin: 14px 0;
+      }
+
+      #bw-stepfree .bw-hero,
+      #bw-stepfree .bw-grid,
+      #bw-stepfree .bw-plan-grid,
+      #bw-stepfree .bw-official {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-stepfree .bw-hero {
+        min-height: 0;
+      }
+
+      #bw-stepfree .bw-hero-copy {
+        padding: 22px 18px;
+      }
+
+      #bw-stepfree .bw-title {
+        font-size: 27px;
+        max-width: 13ch;
+      }
+
+      #bw-stepfree .bw-hero-img {
+        min-height: 230px;
+      }
+
+      #bw-stepfree .bw-body {
+        padding: 14px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      #bw-stepfree .bw-choice-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-stepfree .bw-choice {
+        min-height: 48px;
+      }
+    }
+  </style>
+
+  <div class="bw-shell">
+    <section class="bw-hero" aria-labelledby="bw-stepfree-title">
+      <div class="bw-hero-copy">
+        <p class="bw-kicker">BerlinWalk tool</p>
+        <h2 class="bw-title" id="bw-stepfree-title">Berlin Step-Free Planner</h2>
+        <p class="bw-sub">Choose your mobility need, day shape and transfer tolerance. Get a practical Berlin plan: official checks, safer transport choices and a realistic backup.</p>
+      </div>
+      <div class="bw-hero-img" aria-hidden="true">
+        <img src="assets/visuals/berlin-step-free-planner-hero.jpg" alt="">
+      </div>
+    </section>
+
+    <div class="bw-body">
+      <section class="bw-panel" aria-label="Step-free planning inputs">
+        <div class="bw-grid">
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Main need</legend>
+            <div class="bw-choice-grid" data-group="need">
+              <button class="bw-choice" type="button" data-value="wheelchair">Wheelchair or rollator</button>
+              <button class="bw-choice" type="button" data-value="stroller">Stroller or small child</button>
+              <button class="bw-choice" type="button" data-value="luggage">Heavy luggage</button>
+              <button class="bw-choice" type="button" data-value="energy">Limited energy or injury</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Day shape</legend>
+            <div class="bw-choice-grid" data-group="day">
+              <button class="bw-choice" type="button" data-value="arrival">Arrival day</button>
+              <button class="bw-choice" type="button" data-value="classic">Classic Mitte sights</button>
+              <button class="bw-choice" type="button" data-value="museums">Museum Island or Reichstag</button>
+              <button class="bw-choice" type="button" data-value="evening">Evening return</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="bw-grid">
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">If an elevator fails</legend>
+            <div class="bw-choice-grid" data-group="risk">
+              <button class="bw-choice" type="button" data-value="critical">Trip breaks</button>
+              <button class="bw-choice" type="button" data-value="flexible">Can adapt</button>
+            </div>
+          </fieldset>
+
+          <fieldset class="bw-fieldset">
+            <legend class="bw-label">Transfer appetite</legend>
+            <div class="bw-choice-grid" data-group="transfer">
+              <button class="bw-choice" type="button" data-value="lowest">Fewest changes</button>
+              <button class="bw-choice" type="button" data-value="balanced">Balanced route</button>
+              <button class="bw-choice" type="button" data-value="walklight">Less walking</button>
+              <button class="bw-choice" type="button" data-value="taxibackup">Taxi backup ok</button>
+            </div>
+          </fieldset>
+        </div>
+      </section>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-verdict">
+          <span class="bw-badge" id="bw-stepfree-badge">Plan</span>
+          <div>
+            <h3 id="bw-stepfree-verdict">Build the route around reliability.</h3>
+            <p id="bw-stepfree-summary">For Berlin accessibility, the best plan is usually not the shortest map route. It is the route with fewer fragile links.</p>
+          </div>
+        </div>
+
+        <div>
+          <div class="bw-meter" aria-hidden="true"><span id="bw-stepfree-meter"></span></div>
+          <p id="bw-stepfree-meter-label">Planning confidence: medium until lift status is checked.</p>
+        </div>
+
+        <div class="bw-plan-grid">
+          <div class="bw-card">
+            <strong>Best first move</strong>
+            <span id="bw-stepfree-first">Use a barrier-free route search, then check lift outages before leaving.</span>
+          </div>
+          <div class="bw-card">
+            <strong>Route shape</strong>
+            <span id="bw-stepfree-route">Favor fewer transfers and one compact sightseeing area.</span>
+          </div>
+          <div class="bw-card">
+            <strong>Backup</strong>
+            <span id="bw-stepfree-backup">Keep a bus, tram or taxi fallback if one elevator controls the day.</span>
+          </div>
+        </div>
+
+        <ul class="bw-list" id="bw-stepfree-actions"></ul>
+
+        <div class="bw-official" aria-label="Official accessibility links">
+          <a class="bw-link-card" href="https://www.bvg.de/en/service-and-support/barrier-free-travel/faq" target="_blank" rel="noopener">
+            <strong>BVG route filter</strong>
+            <span>Set barrier-free access before choosing a U-Bahn, tram or bus route.</span>
+          </a>
+          <a class="bw-link-card" href="https://www.vbb.de/en/accessible-travel/elevators/" target="_blank" rel="noopener">
+            <strong>VBB lift check</strong>
+            <span>Check whether defective lifts affect the connection you plan to use.</span>
+          </a>
+          <a class="bw-link-card" href="https://sbahn.berlin/en/plan-a-journey/rail-stations/accessible-travel/elevator-and-escalator-outages/" target="_blank" rel="noopener">
+            <strong>S-Bahn outages</strong>
+            <span>Review current S-Bahn elevator and escalator outages before departure.</span>
+          </a>
+        </div>
+
+        <div class="bw-note" id="bw-stepfree-note">Local rule: if the day depends on one lift, treat that lift as unconfirmed until you check it the same day.</div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var state = {
+        need: 'wheelchair',
+        day: 'classic',
+        risk: 'critical',
+        transfer: 'lowest'
+      };
+
+      var needText = {
+        wheelchair: 'Protect a complete step-free chain: platform, lift, street crossing and entrance.',
+        stroller: 'Use lifts when they save effort, but buses and trams can be easier than station transfers.',
+        luggage: 'Avoid station changes with stairs, long corridors and broken lifts. Arrival days need slack.',
+        energy: 'Shorter walking distance matters as much as step-free access. Build in seated breaks.'
+      };
+
+      var dayText = {
+        arrival: 'Start with the hotel or luggage stop, not the first landmark. Keep the first plan simple.',
+        classic: 'Classic Mitte works best as a compact area: Brandenburg Gate, Reichstag, Unter den Linden and Museum Island.',
+        museums: 'Book or check the sight first, then shape transport around the accessible entrance and timed slot.',
+        evening: 'Check the return route before dinner. A broken lift late at night is harder to solve.'
+      };
+
+      function score() {
+        var value = 68;
+        if (state.risk === 'critical') value -= 18;
+        if (state.transfer === 'lowest' || state.transfer === 'taxibackup') value += 10;
+        if (state.transfer === 'walklight') value += 4;
+        if (state.day === 'arrival') value -= 6;
+        if (state.day === 'museums') value += 5;
+        if (state.need === 'luggage') value += 3;
+        return Math.max(38, Math.min(92, value));
+      }
+
+      function verdict() {
+        if (state.risk === 'critical') {
+          return {
+            badge: 'Check',
+            title: 'Use an elevator-critical plan.',
+            summary: 'Your route should survive real Berlin conditions: official barrier-free filter first, outage check second, backup stop third.',
+            note: 'If one lift failure would trap the day, build the route around a bus/tram backup or a taxi fallback from the start.'
+          };
+        }
+        if (state.need === 'stroller') {
+          return {
+            badge: 'Easy',
+            title: 'Use flexible step-free choices.',
+            summary: 'For strollers, a calm route with buses, trams and fewer platform changes usually beats the fastest train connection.',
+            note: 'At busy times, let wheelchair users board first and keep door areas clear.'
+          };
+        }
+        if (state.day === 'arrival') {
+          return {
+            badge: 'Buffer',
+            title: 'Make arrival day boring on purpose.',
+            summary: 'With luggage or tired travelers, a direct route to the hotel plus one nearby sight is better than a transfer-heavy first day.',
+            note: 'Berlin Hauptbahnhof and BER both work better when you decide the step-free route before you are carrying bags.'
+          };
+        }
+        return {
+          badge: 'Plan',
+          title: 'Keep the day compact and checkable.',
+          summary: 'Choose one main area, verify the transport chain, and keep an official link open for live lift changes.',
+          note: 'Berlin accessibility is often manageable when you reduce transfers and avoid depending on a single fragile station.'
+        };
+      }
+
+      function firstMove() {
+        if (state.day === 'museums') return 'Check Reichstag or museum accessibility before transport, then plan the route to the correct entrance.';
+        if (state.day === 'arrival') return 'Set hotel or luggage storage as the first destination, then choose the simplest step-free connection.';
+        return 'Use BVG or VBB barrier-free routing, then verify elevator outages before leaving.';
+      }
+
+      function routeShape() {
+        if (state.transfer === 'walklight') return 'Trade one extra tram or bus leg for shorter walking at each end.';
+        if (state.transfer === 'taxibackup') return 'Use public transport for the main leg, but pre-decide the taxi fallback point.';
+        if (state.transfer === 'balanced') return 'Allow one simple transfer only if both stations are confirmed accessible.';
+        return 'Prefer one direct line or one compact sightseeing area over a perfect-looking multi-transfer route.';
+      }
+
+      function backupText() {
+        if (state.risk === 'critical') return 'Choose the backup before leaving: nearby bus/tram stop, alternate station, or taxi pickup point.';
+        if (state.need === 'stroller') return 'If a lift fails, a bus or tram is usually the least stressful stroller backup.';
+        if (state.need === 'luggage') return 'If the station gets awkward, stop chasing the fastest route and use a taxi for the luggage leg.';
+        return 'Keep a seated break, bus option or shorter loop ready if energy drops.';
+      }
+
+      function actions() {
+        var out = [];
+        out.push(needText[state.need]);
+        out.push(dayText[state.day]);
+        out.push('Check the route in BVG or VBB with barrier-free access selected.');
+        out.push('Check S-Bahn and VBB lift/outage pages shortly before departure, not only the night before.');
+        if (state.day === 'museums') out.push('For Reichstag, register in advance and use the accessible entrance information from the Bundestag. For Museum Island, check each museum page before booking.');
+        if (state.day === 'classic') out.push('For central sights, buses 100/200-style routes and U5 stations can be useful, but lift status still decides the final route.');
+        if (state.day === 'evening') out.push('For evening returns, save the route before dinner and avoid isolated station changes if you are tired.');
+        if (state.need === 'wheelchair') out.push('Avoid the TV Tower for severe mobility needs; the official TV Tower page says it is not barrier-free for emergency reasons.');
+        if (state.transfer === 'lowest') out.push('If a route adds two transfers to save five minutes, reject it.');
+        out.push('Keep the plan honest: a simpler accessible day is better than a crowded schedule that fails at one lift.');
+        return out;
+      }
+
+      function render() {
+        var v = verdict();
+        var pct = score();
+        document.getElementById('bw-stepfree-badge').textContent = v.badge;
+        document.getElementById('bw-stepfree-verdict').textContent = v.title;
+        document.getElementById('bw-stepfree-summary').textContent = v.summary;
+        document.getElementById('bw-stepfree-note').textContent = v.note;
+        document.getElementById('bw-stepfree-first').textContent = firstMove();
+        document.getElementById('bw-stepfree-route').textContent = routeShape();
+        document.getElementById('bw-stepfree-backup').textContent = backupText();
+        document.getElementById('bw-stepfree-meter').style.width = pct + '%';
+        document.getElementById('bw-stepfree-meter-label').textContent = 'Planning confidence: ' + pct + '% after same-day route and lift checks.';
+        var list = document.getElementById('bw-stepfree-actions');
+        list.innerHTML = '';
+        actions().forEach(function (item) {
+          var li = document.createElement('li');
+          li.textContent = item;
+          list.appendChild(li);
+        });
+      }
+
+      function select(group, value) {
+        state[group] = value;
+        var root = document.querySelector('[data-group="' + group + '"]');
+        root.querySelectorAll('.bw-choice').forEach(function (button) {
+          button.setAttribute('aria-pressed', button.dataset.value === value ? 'true' : 'false');
+        });
+        render();
+      }
+
+      document.querySelectorAll('#bw-stepfree [data-group]').forEach(function (groupEl) {
+        var group = groupEl.dataset.group;
+        groupEl.querySelectorAll('.bw-choice').forEach(function (button) {
+          button.addEventListener('click', function () {
+            select(group, button.dataset.value);
+          });
+        });
+        select(group, state[group]);
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

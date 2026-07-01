@@ -147,7 +147,9 @@
   "hohenzollern-berlin": "hohenzollern-berlin",
   "berlin-plug-adapter": "berlin-plug-adapter",
   "potsdamer-platz-berlin": "potsdamer-platz-berlin",
-  "tempelhof-airport-berlin": "tempelhof-airport-berlin"
+  "tempelhof-airport-berlin": "tempelhof-airport-berlin",
+  "berlin-accessibility": "berlin-accessibility",
+  "berlin-accessibility-step-free-transport-museums-and-route-tips": "berlin-accessibility"
 };
 
   var SCHEMAS = {
@@ -7243,6 +7245,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "A small backpack is fine, but a suitcase makes Tempelhof awkward. The field is huge, exposed and not a good luggage walk. Use station lockers or luggage storage first, especially if you are arriving through Hauptbahnhof."
+        }
+      }
+    ]
+  },
+  "berlin-accessibility": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Berlin wheelchair accessible for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin is partly accessible and improving, but it is not a city where you should improvise every route. Use official barrier-free route filters, check elevator status before travel, and choose plans with fewer transfers when step-free access is essential."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I plan step-free public transport in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use the BVG or VBB route planner with barrier-free settings, then check current elevator and escalator outages for U-Bahn and S-Bahn stations. If an elevator is essential, keep a bus, tram or taxi fallback."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin buses and trams accessible?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Buses and modern trams are often useful step-free backups, especially when a station elevator is out. Still check the exact stop, crowding, ramp use and walking distance at both ends of the trip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin sights are better for accessible planning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Reichstag dome is a strong option with advance registration and accessible entry. Museum Island also publishes accessible services, while the TV Tower is not barrier-free for visitors with severe mobility issues."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the BerlinWalk route accessible for wheelchairs or strollers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The core route is mostly flat and paved, with some cobblestones, bridges and normal city obstacles. If accessibility is a key concern, contact before booking so the day can be planned honestly."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the safest accessibility rule for a first Berlin day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Choose one main area, avoid unnecessary transfers, check lifts shortly before departure, and keep a realistic backup. A simpler day usually beats a perfect route that depends on one elevator."
         }
       }
     ]

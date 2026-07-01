@@ -4362,5 +4362,35 @@
         "a": "A small backpack is fine, but a suitcase makes Tempelhof awkward. The field is huge, exposed and not a good luggage walk. Use station lockers or luggage storage first, especially if you are arriving through Hauptbahnhof."
       }
     ]
+  },
+  "berlin-accessibility": {
+    "title": "Berlin Accessibility - FAQ",
+    "subtitle": "Quick answers for visitors planning step-free Berlin transport, sights and walking routes.",
+    "items": [
+      {
+        "q": "Is Berlin wheelchair accessible for tourists?",
+        "a": "Berlin is partly accessible and improving, but it is not a city where you should improvise every route. Use official barrier-free route filters, check elevator status before travel, and choose plans with fewer transfers when step-free access is essential."
+      },
+      {
+        "q": "How do I plan step-free public transport in Berlin?",
+        "a": "Use the BVG or VBB route planner with barrier-free settings, then check current elevator and escalator outages for U-Bahn and S-Bahn stations. If an elevator is essential, keep a bus, tram or taxi fallback."
+      },
+      {
+        "q": "Are Berlin buses and trams accessible?",
+        "a": "Buses and modern trams are often useful step-free backups, especially when a station elevator is out. Still check the exact stop, crowding, ramp use and walking distance at both ends of the trip."
+      },
+      {
+        "q": "Which Berlin sights are better for accessible planning?",
+        "a": "The Reichstag dome is a strong option with advance registration and accessible entry. Museum Island also publishes accessible services, while the TV Tower is not barrier-free for visitors with severe mobility issues."
+      },
+      {
+        "q": "Is the BerlinWalk route accessible for wheelchairs or strollers?",
+        "a": "The core route is mostly flat and paved, with some cobblestones, bridges and normal city obstacles. If accessibility is a key concern, contact before booking so the day can be planned honestly."
+      },
+      {
+        "q": "What is the safest accessibility rule for a first Berlin day?",
+        "a": "Choose one main area, avoid unnecessary transfers, check lifts shortly before departure, and keep a realistic backup. A simpler day usually beats a perfect route that depends on one elevator."
+      }
+    ]
   }
 }
