@@ -1509,9 +1509,9 @@ function run() {
     'BerlinTools CMS insert helper targets Ultimate correctly',
     /slug:\s*"ultimate-berlin-trip-planner"/.test(cmsInsertSource) &&
       /widgetUrl:\s*"https:\/\/fenerszymanski\.github\.io\/berlinwalk-widgets\/ultimate-berlin-trip-planner\/"/.test(cmsInsertSource) &&
-      /relatedBlogUrl:\s*"https:\/\/www\.berlinwalk\.com\/post\/ultimate-berlin-trip-planner"/.test(cmsInsertSource) &&
+      /relatedBlogUrl:\s*"https:\/\/www\.berlinwalk\.com\/berlin-trip-planner"/.test(cmsInsertSource) &&
       /"@type":\s*"WebApplication"/.test(cmsInsertSource),
-    'CMS helper should use the final slug, GitHub widget URL, related blog URL, and WebApplication schema.'
+    'CMS helper should use the final slug, GitHub widget URL, live planner URL, and WebApplication schema.'
   );
 
   const smokeEvidence = liveSmokeEvidence();
