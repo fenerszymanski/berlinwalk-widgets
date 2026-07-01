@@ -151,7 +151,9 @@
   "berlin-accessibility": "berlin-accessibility",
   "berlin-accessibility-step-free-transport-museums-and-route-tips": "berlin-accessibility",
   "victory-column-berlin": "victory-column-berlin",
-  "victory-column-berlin-view-tickets-and-climb-tips": "victory-column-berlin"
+  "victory-column-berlin-view-tickets-and-climb-tips": "victory-column-berlin",
+  "berlin-by-foot": "berlin-by-foot",
+  "berlin-by-foot-best-walkable-areas-for-first-time-visitors": "berlin-by-foot"
 };
 
   var SCHEMAS = {
@@ -7355,6 +7357,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Do not cross the Großer Stern traffic circle at street level. Use the pedestrian tunnels from the edge of the roundabout, then climb only if stairs and tight spaces are realistic for you."
+        }
+      }
+    ]
+  },
+  "berlin-by-foot": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Berlin a walkable city for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin is walkable in selected areas, but it is not one compact old town. Walk inside strong zones such as Museum Island, Unter den Linden, Tiergarten, Landwehr Canal or East Side Gallery, then use public transport between far-apart districts."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best Berlin walk for first-time visitors?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most first-time visitors, the best Berlin by foot route is the historic centre from Museum Island or Alexanderplatz toward Unter den Linden, Brandenburg Gate and the Reichstag area. It gives the most orientation and history in one walk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I walk from Museum Island to East Side Gallery?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can, but it is usually not the best use of energy. Museum Island and East Side Gallery are both worth walking, but the connector between them can become a long transfer. Use S-Bahn, U-Bahn, tram or bus when the next interesting stretch is far away."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should I plan for a Berlin walking area?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan about 45 minutes for a focused short walk, 90 minutes for a useful first-time route, and a half day only if you add museums, cafes, parks or several pauses. Berlin walking days work better with breaks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin area is best for a relaxed walk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tiergarten is the easiest central green walk, Landwehr Canal is good for a local Kreuzberg feeling, and Prenzlauer Berg around Kollwitzplatz works well for cafes and calmer neighbourhood streets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I join a walking tour or walk alone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Do both if you have time. A guided 2 hours historic-centre walk gives you structure and context, then a self-guided area walk lets you slow down and follow your own mood."
         }
       }
     ]
