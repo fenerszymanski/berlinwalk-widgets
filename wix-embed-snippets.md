@@ -106,14 +106,13 @@ Add this through Wix Custom Code in Body-end on all pages:
 
 `exit-intent-popup.js` waits 30 seconds, then opens a desktop-only exit-intent
 dialog once per session when the cursor leaves the top of the viewport. It
-skips `/book-berlin-walking-tour` and sub-routes, links the primary CTA to the
-free walking tour booking page, and posts Berlin First-Day Survival Guide
-signups to the live Velo subscribe endpoint.
+skips `/book-berlin-walking-tour`, `/berlin-trip-planner`, and confirmation
+routes, links the primary CTA to the free walking tour booking page, and keeps
+Trip Planner as the secondary option.
 
 Analytics events are sent to `dataLayer` and, when available, `gtag`:
-`bw_exit_popup_view`, `bw_exit_popup_book_click`, `bw_exit_popup_pdf_click`,
-`bw_exit_popup_submit_success`, `bw_exit_popup_submit_error`, and
-`bw_exit_popup_close`.
+`bw_exit_popup_view`, `bw_exit_popup_book_click`,
+`bw_exit_popup_planner_click`, and `bw_exit_popup_close`.
 
 ## Lead Form
 

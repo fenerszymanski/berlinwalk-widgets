@@ -44,7 +44,7 @@ deployable through GitHub Pages, and make homepage content visible in rendered D
 - `faq/` - `bw-faq` homepage FAQ Custom Element, plus existing iframe FAQ files for blog posts.
 - `js/blog-sidebar-inject.js` - sitewide Wix Custom Code helper for desktop blog post "On this page" sidebars.
 - `js/blog-journey-inject.js` - sitewide Wix Custom Code helper for post typography polish, mobile blog/category nav, mobile guide chips, inline tool prompts, topic-aware next-step cards, and a back-to-top arrow.
-- `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking CTA and Berlin First-Day Survival Guide signup.
+- `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup with booking-first CTA and secondary Trip Planner link.
 
 ## Project Memory
 
@@ -189,5 +189,5 @@ These are loaded through Wix Custom Code rather than iframe embeds:
   non-`/post/` URLs.
 - `js/exit-intent-popup.js` - sitewide desktop-only exit-intent popup for
   non-booking pages. It waits 30 seconds, opens once per session through
-  `sessionStorage`, links the primary CTA to the booking route, and posts the
-  Berlin First-Day Survival Guide signup to `https://www.berlinwalk.com/_functions/subscribe`.
+  `sessionStorage`, links the primary CTA to the booking route, and keeps Trip
+  Planner as the secondary option.
