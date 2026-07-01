@@ -516,6 +516,7 @@ function relatedToolSlugFor(post) {
   if (/(traenenpalast-berlin|tränenpalast|traenenpalast|palace of tears|friedrichstrasse border crossing|friedrichstraße border crossing)/.test(s)) return 'traenenpalast-visit-planner';
   if (/(topography-of-terror-berlin|topography of terror|nazi terror documentation center|nazi terror museum)/.test(s)) return 'topography-of-terror-visit-planner';
   if (/(berlin-public-transport-ferries|public transport ferries|bvg ferry|f10 ferry|wannsee ferry|f24 rowboat)/.test(s)) return 'berlin-public-transport-ferry-picker';
+  if (/(berlin-accessibility|step-free|step free|wheelchair|accessible berlin|accessibility)/.test(s)) return 'berlin-step-free-planner';
   if (/(berlin-bike-lanes-tourists|bike lanes|bike-lane|cycle lane|red bike lane|cycling rules)/.test(s)) return 'berlin-bike-lane-reflex-checker';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';

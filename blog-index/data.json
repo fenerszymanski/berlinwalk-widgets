@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-06-30T19:55:50.077Z",
+  "updatedAt": "2026-07-01T03:43:00.308Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 150,
+  "totalPosts": 151,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Accessibility: Step-Free Transport, Museums and Route Tips",
+      "slug": "berlin-accessibility",
+      "path": "/post/berlin-accessibility",
+      "url": "https://www.berlinwalk.com/post/berlin-accessibility",
+      "excerpt": "A practical Berlin accessibility guide for tourists: step-free public transport, lift-status checks, wheelchair/stroller route tips, museums, Reichstag and TV Tower limits.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-01T03:40:58.886Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4fe9c70f4f22487db4e5d27163c00ce1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-accessibility-00-berlin-accessibility-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4fe9c70f4f22487db4e5d27163c00ce1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-accessibility-00-berlin-accessibility-cover.jpg",
+      "alt": "Wheelchair user beside a step-free Berlin station lift with a bus and Museum Island skyline in the background",
+      "relatedToolSlug": "berlin-step-free-planner"
+    },
+    {
       "title": "Tempelhof Airport Berlin: Field, Tours and What to Do",
       "slug": "tempelhof-airport-berlin",
       "path": "/post/tempelhof-airport-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
       "alt": "Berlin Hauptbahnhof exterior with the DB sign and travelers outside the main entrance",
       "relatedToolSlug": "berlin-lost-item-router"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Can You Drink Alcohol in Public in Berlin? Rules Tourists Should Know",
-      "slug": "drink-alcohol-in-public-berlin",
-      "path": "/post/drink-alcohol-in-public-berlin",
-      "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
-      "excerpt": "A practical Berlin tourist guide to public drinking: parks, Spätis, public transport, beer gardens, youth rules, and the 2026 Zoo/Ostbahnhof station exception.",
+      "title": "Berlin Accessibility: Step-Free Transport, Museums and Route Tips",
+      "slug": "berlin-accessibility",
+      "path": "/post/berlin-accessibility",
+      "url": "https://www.berlinwalk.com/post/berlin-accessibility",
+      "excerpt": "A practical Berlin accessibility guide for tourists: step-free public transport, lift-status checks, wheelchair/stroller route tips, museums, Reichstag and TV Tower limits.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
       "readTime": "7 min read",
-      "publishedDate": "2026-06-27T06:30:33.886Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_08df2967779745edb1a653ebd530bf12~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/drink-alcohol-in-public-berlin-01-james-simon-park-cover.jpg",
-      "alt": "People sitting on the grass in James-Simon-Park near Museum Island and the Berlin TV Tower",
-      "relatedToolSlug": ""
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-07-01T03:40:58.886Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_4fe9c70f4f22487db4e5d27163c00ce1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-accessibility-00-berlin-accessibility-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_4fe9c70f4f22487db4e5d27163c00ce1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-accessibility-00-berlin-accessibility-cover.jpg",
+      "alt": "Wheelchair user beside a step-free Berlin station lift with a bus and Museum Island skyline in the background",
+      "relatedToolSlug": "berlin-step-free-planner"
+    },
     {
       "title": "Tempelhof Airport Berlin: Field, Tours and What to Do",
       "slug": "tempelhof-airport-berlin",
