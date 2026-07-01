@@ -796,16 +796,16 @@ class BWBookingCalendarElement extends HTMLElement {
   _introMarkup() {
     const chips = [
       'Free reservation',
-      'Tue-Sat 11:30',
-      'From 3 July 2026: 11:30 + 15:30',
-      'Tip at the end',
-      'Phone only for tour-day coordination',
+      'No payment now',
+      '~2h walk',
+      'World Clock meeting point',
+      'Guided by Yusuf',
     ];
     return `
       <div class="bw-cal-intro">
         <span class="bw-cal-intro-kicker">Book the tour</span>
-        <h2>Free Berlin Walking Tour</h2>
-        <p>Reserve your spot for a 2-hour, tip-based walk through Berlin's historic centre.</p>
+        <h2>Reserve your free spot</h2>
+        <p>No upfront payment. My walk is ~2h, tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>
         <div class="bw-cal-intro-chips" aria-label="Tour booking details">
           ${chips.map((chip) => `<span class="bw-cal-intro-chip">${this._escape(chip)}</span>`).join('')}
         </div>
