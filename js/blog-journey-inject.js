@@ -1133,6 +1133,9 @@
     var params = currentUrl.searchParams;
     var trackingBody = {
       eventName: 'bw_booking_pick_date_click',
+      consentGranted: true,
+      analyticsConsent: true,
+      consent: { analytics: true },
       pagePath: window.location.pathname,
       landingPage: window.location.href,
       referrer: document.referrer || '',
