@@ -502,7 +502,16 @@ class BWSiteFooterElement extends HTMLElement {
   }
 
   _openConsentSettings(event) {
-    if (event) event.preventDefault();
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    try {
+      if (typeof window.BWOpenConsentSettings === 'function') {
+        window.BWOpenConsentSettings(event);
+        return;
+      }
+    } catch (err) {}
     try {
       if (window.UC_UI && typeof window.UC_UI.showSecondLayer === 'function') {
         window.UC_UI.showSecondLayer();
@@ -519,6 +528,9 @@ class BWSiteFooterElement extends HTMLElement {
       if (window.__ucCmp && typeof window.__ucCmp.showFirstLayer === 'function') {
         window.__ucCmp.showFirstLayer();
       }
+    } catch (err) {}
+    try {
+      document.dispatchEvent(new CustomEvent('bwOpenConsentSettings'));
     } catch (err) {}
   }
 
