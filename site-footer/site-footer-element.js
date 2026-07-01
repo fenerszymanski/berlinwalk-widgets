@@ -47,6 +47,7 @@ const BW_SITE_FOOTER_SOCIAL_LINKS = [
 class BWSiteFooterElement extends HTMLElement {
   connectedCallback() {
     this._render();
+    this._bindPrivacySettingsLink();
   }
 
   _render() {
@@ -492,6 +493,33 @@ class BWSiteFooterElement extends HTMLElement {
         </div>
       </footer>
     `;
+  }
+
+  _bindPrivacySettingsLink() {
+    var button = this.querySelector('[data-bw-privacy-settings]');
+    if (!button) return;
+    button.addEventListener('click', this._openConsentSettings.bind(this));
+  }
+
+  _openConsentSettings(event) {
+    if (event) event.preventDefault();
+    try {
+      if (window.UC_UI && typeof window.UC_UI.showSecondLayer === 'function') {
+        window.UC_UI.showSecondLayer();
+        return;
+      }
+      if (window.__ucCmp && typeof window.__ucCmp.showSecondLayer === 'function') {
+        window.__ucCmp.showSecondLayer();
+        return;
+      }
+      if (window.UC_UI && typeof window.UC_UI.showFirstLayer === 'function') {
+        window.UC_UI.showFirstLayer();
+        return;
+      }
+      if (window.__ucCmp && typeof window.__ucCmp.showFirstLayer === 'function') {
+        window.__ucCmp.showFirstLayer();
+      }
+    } catch (err) {}
   }
 
   _renderLinkColumn(title, links) {

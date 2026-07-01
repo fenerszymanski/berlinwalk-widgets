@@ -464,8 +464,16 @@
           window.UC_UI.showSecondLayer();
           return;
         }
+        if (window.__ucCmp && typeof window.__ucCmp.showSecondLayer === 'function') {
+          window.__ucCmp.showSecondLayer();
+          return;
+        }
         if (window.UC_UI && typeof window.UC_UI.showFirstLayer === 'function') {
           window.UC_UI.showFirstLayer();
+          return;
+        }
+        if (window.__ucCmp && typeof window.__ucCmp.showFirstLayer === 'function') {
+          window.__ucCmp.showFirstLayer();
           return;
         }
       } catch (err) {}
