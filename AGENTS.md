@@ -76,6 +76,15 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - **Fonts:** Montserrat (default), Merriweather (selective serif for editorial moments)
 - **Tone:** First-person Yusuf voice, atmospheric, historically grounded, **no em dashes**, no marketing fluff, confident but restrained
 - **Brand guide source:** `BerlinWalk_Brand_Guide_v1_2_revised.pdf` (Yusuf's downloads — not in repo)
+- **Daily blog publishing approval:** Daily blog automation may complete the
+  full package, deploy required widget/data/icon assets, and QA the Wix draft,
+  but it must not publish the Wix Blog post without Yusuf's explicit approval
+  for that specific draft.
+- **Daily blog widget originality:** New daily-blog widgets must not start by
+  copying an existing BerlinWalk widget's visual or interaction style. Design
+  the interaction from the article's specific reader problem, and do not ship
+  manually drawn, locally assembled, or code-drawn illustrations as widget
+  hero, tool icon, or primary visuals.
 - **AI visual source rule:** generated game art, tool icons, blog/social AI
   visuals, and other BerlinWalk imagery should use built-in Codex image
   generation first. If that path is unavailable or unsuitable, use Yusuf's

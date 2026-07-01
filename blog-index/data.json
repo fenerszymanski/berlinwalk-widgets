@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-01T19:41:45.762Z",
+  "updatedAt": "2026-07-01T21:17:05.695Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 151,
@@ -832,23 +832,6 @@
       "description": "The places around the BerlinWalk route, explained as story layers rather than postcard stops.",
       "posts": [
         {
-          "title": "Berlin by Foot: Best Walkable Areas for First-Time Visitors",
-          "slug": "berlin-by-foot",
-          "path": "/post/berlin-by-foot",
-          "url": "https://www.berlinwalk.com/post/berlin-by-foot",
-          "excerpt": "A practical first-time guide to Berlin by foot: the best walkable areas, how long to allow, and when to stop walking and ride.",
-          "category": "Tour Route",
-          "categorySlug": "tour-route",
-          "topic": "route-stories",
-          "topicLabel": "Tour Route Stories",
-          "readTime": "8 min read",
-          "publishedDate": "2026-07-01T19:41:18.139Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_c8f25ef82c244674b7ad3321cf64bc64~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower-1600.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_c8f25ef82c244674b7ad3321cf64bc64~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower-1600.jpg",
-          "alt": "Museum Island and the TV Tower from the Spree in central Berlin",
-          "relatedToolSlug": "berlin-walkable-areas-planner"
-        },
-        {
           "title": "Why My Tour Starts at Alexanderplatz (And Not at Brandenburg Gate)",
           "slug": "why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
           "path": "/post/why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate",
@@ -1000,6 +983,23 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_0d90550575d5404cb1598b4cabf27149~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hackescher-markt-station-after-tour.jpg",
           "alt": "Hackescher Markt S-Bahn station after a Berlin walking tour",
           "relatedToolSlug": ""
+        },
+        {
+          "title": "Berlin Lakes Guide 2026: Where to Swim, Picnic, and Beat the Summer Heat",
+          "slug": "berlin-lakes-guide-2026",
+          "path": "/post/berlin-lakes-guide-2026",
+          "url": "https://www.berlinwalk.com/post/berlin-lakes-guide-2026",
+          "excerpt": "Berlin sits on a glacial outwash plain that left the city ringed with lakes. Here's where Berliners actually swim — and how to combine a lake afternoon with our walking tour.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "route-stories",
+          "topicLabel": "Tour Route Stories",
+          "readTime": "10 min read",
+          "publishedDate": "2026-05-03T10:13:22.902Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_d9cfb3a444eb4285be742e7841610f3f~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/weissensee%20(1).png",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_d9cfb3a444eb4285be742e7841610f3f~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/weissensee%20(1).png",
+          "alt": "Sandy beach area with palm trees beside a serene lake. A fountain sprays in the background under a sunny, blue sky with wispy clouds.",
+          "relatedToolSlug": "berlin-lakes"
         }
       ]
     },
@@ -1577,23 +1577,6 @@
   ],
   "latest": [
     {
-      "title": "Berlin by Foot: Best Walkable Areas for First-Time Visitors",
-      "slug": "berlin-by-foot",
-      "path": "/post/berlin-by-foot",
-      "url": "https://www.berlinwalk.com/post/berlin-by-foot",
-      "excerpt": "A practical first-time guide to Berlin by foot: the best walkable areas, how long to allow, and when to stop walking and ride.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "8 min read",
-      "publishedDate": "2026-07-01T19:41:18.139Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_c8f25ef82c244674b7ad3321cf64bc64~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower-1600.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_c8f25ef82c244674b7ad3321cf64bc64~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower-1600.jpg",
-      "alt": "Museum Island and the TV Tower from the Spree in central Berlin",
-      "relatedToolSlug": "berlin-walkable-areas-planner"
-    },
-    {
       "title": "Berlin Accessibility: Step-Free Transport, Museums and Route Tips",
       "slug": "berlin-accessibility",
       "path": "/post/berlin-accessibility",
@@ -1779,26 +1762,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
       "alt": "Berlin ambulance and emergency vehicles on Otto-Braun-Strasse near Alexanderplatz",
       "relatedToolSlug": "berlin-medical-help-router"
+    },
+    {
+      "title": "Lost Property in Berlin: What to Do if You Lose Your Phone, Wallet or Passport",
+      "slug": "lost-property-berlin",
+      "path": "/post/lost-property-berlin",
+      "url": "https://www.berlinwalk.com/post/lost-property-berlin",
+      "excerpt": "A calm tourist guide to Berlin lost property: BVG, S-Bahn, DB, BER Airport, the central Fundbüro, passport loss, wallet/card steps and what to write in a report.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-06-27T06:30:33.886Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_537047bae9694f398e7bf6367fc348e3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/lost-property-berlin-01-berlin-hauptbahnhof-lost-property-cover.jpg",
+      "alt": "Berlin Hauptbahnhof exterior with the DB sign and travelers outside the main entrance",
+      "relatedToolSlug": "berlin-lost-item-router"
     }
   ],
   "allPosts": [
-    {
-      "title": "Berlin by Foot: Best Walkable Areas for First-Time Visitors",
-      "slug": "berlin-by-foot",
-      "path": "/post/berlin-by-foot",
-      "url": "https://www.berlinwalk.com/post/berlin-by-foot",
-      "excerpt": "A practical first-time guide to Berlin by foot: the best walkable areas, how long to allow, and when to stop walking and ride.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "8 min read",
-      "publishedDate": "2026-07-01T19:41:18.139Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_c8f25ef82c244674b7ad3321cf64bc64~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower-1600.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_c8f25ef82c244674b7ad3321cf64bc64~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-museum-island-tv-tower-1600.jpg",
-      "alt": "Museum Island and the TV Tower from the Spree in central Berlin",
-      "relatedToolSlug": "berlin-walkable-areas-planner"
-    },
     {
       "title": "Berlin Accessibility: Step-Free Transport, Museums and Route Tips",
       "slug": "berlin-accessibility",
@@ -4331,6 +4314,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_0d90550575d5404cb1598b4cabf27149~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hackescher-markt-station-after-tour.jpg",
       "alt": "Hackescher Markt S-Bahn station after a Berlin walking tour",
       "relatedToolSlug": ""
+    },
+    {
+      "title": "The Berliner Dom: A Cathedral That Survived Everything",
+      "slug": "the-berliner-dom-a-cathedral-that-survived-everything",
+      "path": "/post/the-berliner-dom-a-cathedral-that-survived-everything",
+      "url": "https://www.berlinwalk.com/post/the-berliner-dom-a-cathedral-that-survived-everything",
+      "excerpt": "Why the Berliner Dom survived by changing: imperial ambition, World War II damage, GDR reconstruction, Hohenzollern Crypt, tickets and dome view.",
+      "category": "Tour Route",
+      "categorySlug": "tour-route",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "10 min read",
+      "publishedDate": "2026-02-26T14:44:19.180Z",
+      "image": "https://static.wixstatic.com/media/nsplsh_5a722d5a6e544e656b4559~mv2_d_5446_4000_s_4_2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berliner%20Dom.jpg",
+      "thumb": "https://static.wixstatic.com/media/nsplsh_5a722d5a6e544e656b4559~mv2_d_5446_4000_s_4_2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Berliner%20Dom.jpg",
+      "alt": "Berliner Dom with its green dome and the TV Tower behind it on Museum Island",
+      "relatedToolSlug": "berlin-landmarks-map"
     },
     {
       "title": "What Is a Free Walking Tour? How Tip-Based Tours Actually Work",

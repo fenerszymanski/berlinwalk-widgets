@@ -2389,8 +2389,13 @@
         "berlin on foot"
       ],
       "iconStatus": "live-wix-media",
-      "relatedBlog": "/post/berlin-by-foot",
-      "cmsItemId": "627da588-6c3a-4d2f-9bf6-4341d7a7e70a"
+      "status": "draft",
+      "hidden": true,
+      "published": false,
+      "qaStatus": "rejected-by-yusuf-2026-07-01",
+      "retractionNote": "Retracted after Yusuf QA: post was published without approval, inline image captions were missing, widget style repeated earlier tools, and manual/generated illustration was rejected.",
+      "cmsItemIdDeletedAt": "2026-07-01T23:14:00+02:00",
+      "deletedCmsItemId": "627da588-6c3a-4d2f-9bf6-4341d7a7e70a"
     }
   ],
   "hubCategories": [

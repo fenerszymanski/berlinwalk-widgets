@@ -95,7 +95,6 @@ const TOPICS = [
     kicker: 'Walk the core',
     description: 'The places around the BerlinWalk route, explained as story layers rather than postcard stops.',
     slugs: [
-      'berlin-by-foot',
       '12-stops-through-berlin-s-ancient-core-what-you-ll-see-on-our-free-walking-tour',
       'why-our-tour-starts-at-alexanderplatz-and-not-at-brandenburg-gate',
       'the-weltzeituhr-why-alexanderplatz-has-a-world-clock',
@@ -486,7 +485,6 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
-  if (/(berlin-by-foot|berlin by foot|walkable areas|walkable berlin|walking areas)/.test(s)) return 'berlin-walkable-areas-planner';
   if (/(hohenzollern-berlin|hohenzollern berlin)/.test(s)) return 'hohenzollern-berlin-footprint-map';
   if (/(what-to-book-in-advance-in-berlin|what to book in advance in berlin|reservation guide|booking deadline)/.test(s)) return 'berlin-booking-deadline-planner';
   if (/(berlin-tourist-scams|tourist scams|street sense|fake police|pickpockets)/.test(s)) return 'berlin-street-sense-drill';
