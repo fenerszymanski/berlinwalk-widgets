@@ -8,7 +8,7 @@
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
   var FORM_CARD_ID = 'bw-booking-form-trust-card';
   var TERMS_HELPER_ID = 'bw-booking-terms-helper';
-  var INTRO_VERSION = 'booking-form-trust-20260701c';
+  var INTRO_VERSION = 'booking-form-trust-20260701d';
   var TERMS_LABEL = 'I agree to the free reservation terms listed below.';
   var INTRO_HTML = [
     "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
@@ -45,13 +45,17 @@
       '#'+FORM_CARD_ID+' p{color:#4E5A4E!important;display:block!important;font-family:Montserrat,Arial,sans-serif!important;font-size:13px!important;font-weight:700!important;line-height:1.45!important;margin:0 0 8px!important}',
       '#'+FORM_CARD_ID+' .bw-form-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}',
       '#'+FORM_CARD_ID+' .bw-form-chip{background:#fff;border:1px solid #CFE4C8;color:#1B5E20;font-size:10.5px;font-weight:900;line-height:1.2;padding:6px 8px}',
-      '#'+TERMS_HELPER_ID+'{background:#F8FBF4;border-left:4px solid #1B5E20;color:#4E5A4E;font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:750;line-height:1.45;margin:8px 0 18px 34px;max-width:660px;padding:9px 11px}',
+      'html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:8px!important}',
+      'html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:8px!important}',
+      'html.bw-booking-form-trust-active .bw-booking-terms-field{margin-bottom:0!important;padding-bottom:0!important}',
+      'html.bw-booking-form-trust-active .bw-booking-terms-field [data-hook="checkbox-wrapper"]{margin-bottom:0!important;padding-bottom:0!important}',
+      '#'+TERMS_HELPER_ID+'{background:#F8FBF4;border-left:4px solid #1B5E20;color:#4E5A4E;font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:750;line-height:1.45;margin:8px 0 6px 34px;max-width:660px;padding:9px 11px}',
       '#' + NUDGE_ID + '{align-items:center;background:#1B5E20;bottom:0;box-shadow:0 -12px 28px rgba(0,0,0,.18);color:#fff;display:none;font-family:Montserrat,Arial,sans-serif;gap:12px;left:0;padding:12px 14px calc(12px + env(safe-area-inset-bottom));position:fixed;right:0;z-index:2147483646}',
       '#' + NUDGE_ID + '.is-visible{display:flex}',
       '#' + NUDGE_ID + ' strong{color:#FFE600;display:block;font-size:13px;font-weight:900;line-height:1.2}',
       '#' + NUDGE_ID + ' span{display:block;font-size:11px;font-weight:750;line-height:1.35;margin-top:2px}',
       '#' + NUDGE_ID + ' button{background:#FFE600;border:0;border-radius:0;color:#1B5E20;cursor:pointer;font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:900;margin-left:auto;min-height:42px;padding:10px 13px;text-transform:uppercase}',
-      '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h2{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}#'+FORM_CARD_ID+'{margin-bottom:16px;padding:13px 13px}#'+FORM_CARD_ID+' strong{font-size:17px}#'+FORM_CARD_ID+' p{font-size:12px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin-left:32px;padding:8px 10px}}',
+      '@media(max-width:640px){bw-booking-calendar .bw-cal-standalone{padding:18px 16px 26px}bw-booking-calendar .bw-cal-intro h2{font-size:30px;line-height:1.05}bw-booking-calendar .bw-cal-intro p{font-size:14px}bw-booking-calendar .bw-cal-intro-chip{font-size:10.5px;min-height:28px;padding:6px 9px}#'+FORM_CARD_ID+'{margin-bottom:16px;padding:13px 13px}#'+FORM_CARD_ID+' strong{font-size:17px}#'+FORM_CARD_ID+' p{font-size:12px!important}#'+TERMS_HELPER_ID+'{font-size:11.5px;margin:7px 0 4px 32px;padding:8px 10px}html.bw-booking-form-trust-active .bw-booking-form-stack{margin-bottom:6px!important}html.bw-booking-form-trust-active .bw-booking-details-stack,html.bw-booking-form-trust-active .bw-booking-submit-stack{margin-top:6px!important}}',
       '@media(min-width:641px){#' + NUDGE_ID + '{display:none!important}}',
     ].join('');
     document.head.appendChild(style);
@@ -232,6 +236,40 @@
     return null;
   }
 
+  function markSiblingStack(fromNode, matcher, className) {
+    var current = fromNode;
+    while (current && current !== document.body) {
+      var parent = current.parentElement;
+      if (!parent || !parent.children) {
+        current = parent;
+        continue;
+      }
+      for (var i = 0; i < parent.children.length; i += 1) {
+        var sibling = parent.children[i];
+        if (sibling === current) continue;
+        if (matcher(textOf(sibling))) {
+          current.classList.add('bw-booking-form-stack');
+          sibling.classList.add(className);
+          return true;
+        }
+      }
+      current = parent;
+    }
+    return false;
+  }
+
+  function tightenBookingFormSpacing(anchor) {
+    if (!anchor) return;
+    var termsField = anchor.closest && anchor.closest('[data-hook^="form-field-"]');
+    if (termsField) termsField.classList.add('bw-booking-terms-field');
+    markSiblingStack(anchor, function (text) {
+      return /^Booking Details\b/i.test(text);
+    }, 'bw-booking-details-stack');
+    markSiblingStack(anchor, function (text) {
+      return /^By completing your booking\b/i.test(text) || /\bBook Now\b/i.test(text);
+    }, 'bw-booking-submit-stack');
+  }
+
   function applyBookingFormTrust() {
     if (!isBookingForm) return false;
     document.documentElement.classList.add('bw-booking-form-trust-active');
@@ -254,6 +292,7 @@
         helper.textContent = 'Free reservation terms: no upfront payment, tip-based at the end, and please cancel from your confirmation email if plans change.';
         termsRow.insertAdjacentElement('afterend', helper);
       }
+      tightenBookingFormSpacing(document.getElementById(TERMS_HELPER_ID) || termsRow);
     }
 
     return Boolean(introWrap || termsText);
