@@ -149,7 +149,9 @@
   "potsdamer-platz-berlin": "potsdamer-platz-berlin",
   "tempelhof-airport-berlin": "tempelhof-airport-berlin",
   "berlin-accessibility": "berlin-accessibility",
-  "berlin-accessibility-step-free-transport-museums-and-route-tips": "berlin-accessibility"
+  "berlin-accessibility-step-free-transport-museums-and-route-tips": "berlin-accessibility",
+  "victory-column-berlin": "victory-column-berlin",
+  "victory-column-berlin-view-tickets-and-climb-tips": "victory-column-berlin"
 };
 
   var SCHEMAS = {
@@ -7299,6 +7301,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Choose one main area, avoid unnecessary transfers, check lifts shortly before departure, and keep a realistic backup. A simpler day usually beats a perfect route that depends on one elevator."
+        }
+      }
+    ]
+  },
+  "victory-column-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Victory Column Berlin worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you want a classic Berlin viewpoint, a Tiergarten stop and a short but physical climb. It is less useful if the weather is grey, stairs are difficult or you only have a few hours for the historic centre."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How many steps are inside the Victory Column?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "VisitBerlin describes the climb as a spiral staircase of 285 steps leading to the viewing platform below the golden Victoria statue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does the Victory Column cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de lists admission as EUR 4.50 for adults and EUR 3.50 reduced, cash only. Check the official page before going in case prices or payment rules change."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are Victory Column opening hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Berlin.de currently lists summer hours from 9:30 AM to 7:00 PM, winter hours from 9:30 AM to 5:30 PM, and closure on 24 December. Always recheck before a late visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Victory Column accessible?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, not for the climb. Berlin.de states that the ascent to the lookout point is not wheelchair accessible and is not suitable for people with limited mobility or weak constitution."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I reach the Victory Column safely?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Do not cross the Großer Stern traffic circle at street level. Use the pedestrian tunnels from the edge of the roundabout, then climb only if stairs and tight spaces are realistic for you."
         }
       }
     ]

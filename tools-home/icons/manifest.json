@@ -1057,5 +1057,19 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-step-free-planner-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-step-free-planner-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_7307e53737454fd5af4cd386ab19706a~mv2.png"
+  },
+  {
+    "slug": "victory-column-climb-planner",
+    "title": "Victory Column Climb Planner",
+    "category": "Discovery",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourcePrompt": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/victory-column-climb-planner/PROMPT.md",
+    "sourceFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/victory-column-climb-planner/codex-imagegen-icon.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/victory-column-climb-planner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/victory-column-climb-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/victory-column-climb-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_f0b428afbcb542bf890bd760db4e3044~mv2.png",
+    "wixId": "5a08a3_f0b428afbcb542bf890bd760db4e3044~mv2.png"
   }
 ]
