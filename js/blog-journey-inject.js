@@ -37,6 +37,7 @@
 
   installDelayedConsentGuard();
   loadBookingNextActionPatch();
+  installConsentGatedBookingAnalytics();
 
   function installDelayedConsentGuard() {
     if (window.__bwDelayedConsentGuard) return;
@@ -168,6 +169,209 @@
     script.src = BOOKING_NEXT_ACTION_PATCH_URL;
     script.defer = true;
     document.head.appendChild(script);
+  }
+
+  function installConsentGatedBookingAnalytics() {
+    if (window.__bwConsentAnalyticsEventsInstalled) return;
+    window.__bwConsentAnalyticsEventsInstalled = true;
+
+    var path = window.location.pathname.toLowerCase();
+    var isBookingService = path === '/book-berlin-walking-tour' || path.indexOf('/book-berlin-walking-tour/') === 0;
+    var isBookingForm = path.indexOf('/booking-form') === 0;
+    var isThankYou = path.indexOf('/thank-you-page') === 0;
+    var isBookingFlow = isBookingService || isBookingForm || path.indexOf('/booking-confirmation') === 0 || isThankYou;
+    if (!isBookingFlow) return;
+
+    var params = new URLSearchParams(window.location.search || '');
+    var storeKey = 'bwPaidTracking.v1';
+    var visitorKey = 'bwVisitorId.v1';
+    var sessionKey = 'bwSessionId.v1';
+    var tracking = null;
+    var sent = {};
+
+    function policy() {
+      var current = currentConsentPolicy();
+      return current && Object.keys(current).length ? current : {};
+    }
+
+    function analyticsAllowed() {
+      return policy().analytics === true;
+    }
+
+    function randomId(prefix) {
+      return prefix + '_' + Math.random().toString(36).slice(2) + '_' + Date.now().toString(36);
+    }
+
+    function readJSON(storage, key) {
+      try {
+        var raw = storage.getItem(key);
+        return raw ? JSON.parse(raw) : null;
+      } catch (err) {
+        return null;
+      }
+    }
+
+    function writeJSON(storage, key, value) {
+      try { storage.setItem(key, JSON.stringify(value)); } catch (err) {}
+    }
+
+    function getOrCreateId(storage, key, prefix) {
+      try {
+        var existing = storage.getItem(key);
+        if (existing) return existing;
+        var value = randomId(prefix);
+        storage.setItem(key, value);
+        return value;
+      } catch (err) {
+        return randomId(prefix);
+      }
+    }
+
+    function hasPaidSignal(data) {
+      var joined = [data.utm_source, data.utm_medium, data.utm_campaign].join(' ').toLowerCase();
+      return /(^|[^a-z])(meta|facebook|instagram|fb|ig|paid|cpc|paid_social)([^a-z]|$)/i.test(joined);
+    }
+
+    function initTracking() {
+      if (!analyticsAllowed()) return null;
+      var stored = readJSON(window.localStorage, storeKey) || {};
+      var current = {
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || '',
+        utm_content: params.get('utm_content') || '',
+        utm_term: params.get('utm_term') || ''
+      };
+      var hasCurrent = Boolean(current.utm_source || current.utm_medium || current.utm_campaign || current.utm_content || current.utm_term);
+      var merged = Object.assign({}, stored);
+      if (!merged.visitorId) merged.visitorId = getOrCreateId(window.localStorage, visitorKey, 'bw_v');
+      merged.sessionId = getOrCreateId(window.sessionStorage, sessionKey, 'bw_s');
+      if (!merged.firstPage) merged.firstPage = window.location.pathname;
+      if (!merged.landingPage) merged.landingPage = window.location.href;
+      if (!merged.createdAt) merged.createdAt = new Date().toISOString();
+      if (hasCurrent || !stored.utm_source) {
+        Object.keys(current).forEach(function (key) {
+          if (current[key]) merged[key] = current[key];
+        });
+        merged.landingPage = stored.landingPage || window.location.href;
+      }
+      delete merged.fbclid;
+      delete merged.fbc;
+      delete merged.fbp;
+      merged.isPaid = hasPaidSignal(merged);
+      merged.updatedAt = new Date().toISOString();
+      writeJSON(window.localStorage, storeKey, merged);
+      return merged;
+    }
+
+    function ensureTracking() {
+      if (!tracking) tracking = initTracking();
+      return tracking;
+    }
+
+    function serverEventName(name) {
+      return name === 'bw_book_link_click' ? 'bw_booking_pick_date_click' : name;
+    }
+
+    function sendEndpoint(name, payload, state) {
+      var body = JSON.stringify({
+        eventName: serverEventName(name),
+        eventId: randomId('bw_e'),
+        consentGranted: true,
+        analyticsConsent: true,
+        consent: { analytics: true },
+        timestamp: new Date().toISOString(),
+        eventDate: new Date().toISOString().slice(0, 10),
+        sessionId: state.sessionId,
+        visitorId: state.visitorId,
+        isPaid: Boolean(state.isPaid),
+        pagePath: window.location.pathname,
+        pageUrl: window.location.href,
+        referrer: document.referrer || '',
+        landingPage: state.landingPage || '',
+        firstPage: state.firstPage || '',
+        utmSource: state.utm_source || '',
+        utmMedium: state.utm_medium || '',
+        utmCampaign: state.utm_campaign || '',
+        utmContent: state.utm_content || '',
+        utmTerm: state.utm_term || '',
+        screenWidth: String(window.screen && window.screen.width || ''),
+        viewportWidth: String(window.innerWidth || ''),
+        payload: payload || {}
+      });
+
+      function beaconFallback() {
+        try {
+          if (navigator.sendBeacon) {
+            navigator.sendBeacon(TRACK_ENDPOINT, new Blob([body], { type: 'application/json' }));
+          }
+        } catch (err) {}
+      }
+
+      try {
+        if (window.fetch) {
+          window.fetch(TRACK_ENDPOINT, {
+            method: 'POST',
+            mode: 'cors',
+            keepalive: true,
+            headers: { 'Content-Type': 'application/json' },
+            body: body
+          }).then(function (response) {
+            if (!response || !response.ok) beaconFallback();
+          }).catch(beaconFallback);
+          return;
+        }
+      } catch (err) {
+        beaconFallback();
+        return;
+      }
+      beaconFallback();
+    }
+
+    function sendEvent(name, detail) {
+      if (!analyticsAllowed()) return false;
+      var state = ensureTracking();
+      if (!state) return false;
+      var payload = Object.assign({
+        page_path: window.location.pathname,
+        utm_source: state.utm_source || params.get('utm_source') || '',
+        utm_medium: state.utm_medium || params.get('utm_medium') || '',
+        utm_campaign: state.utm_campaign || params.get('utm_campaign') || ''
+      }, detail || {});
+      try {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push(Object.assign({ event: name }, payload));
+      } catch (err) {}
+      try {
+        if (typeof window.gtag === 'function') window.gtag('event', name, payload);
+      } catch (err) {}
+      sendEndpoint(name, payload, state);
+      return true;
+    }
+
+    function once(key, name, detail) {
+      if (sent[key]) return;
+      if (sendEvent(name, detail)) sent[key] = true;
+    }
+
+    function sendInitialBookingEvents() {
+      if (isBookingService) once('booking_page_view', 'bw_booking_page_view', {});
+      if (isBookingForm) once('booking_form_view', 'bw_booking_form_view', {});
+      if (isThankYou) once('booking_complete', 'bw_booking_complete', {});
+    }
+
+    document.addEventListener('bwBookingFunnelEvent', function (event) {
+      var detail = event.detail || {};
+      if (detail.name) sendEvent(detail.name, detail.payload || {});
+    });
+    document.addEventListener('bwStickyCtaEvent', function (event) {
+      var detail = event.detail || {};
+      if (detail.name) sendEvent(detail.name, detail.payload || {});
+    });
+    document.addEventListener('consentPolicyChanged', sendInitialBookingEvents);
+    document.addEventListener('consentPolicyInitialized', sendInitialBookingEvents);
+    sendInitialBookingEvents();
+    window.setTimeout(sendInitialBookingEvents, 800);
   }
 
   var BLOG_CATEGORIES = [
