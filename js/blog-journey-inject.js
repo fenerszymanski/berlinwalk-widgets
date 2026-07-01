@@ -35,7 +35,126 @@
   var bootAt = Date.now();
   var readyTimer = null;
 
+  installDelayedConsentGuard();
   loadBookingNextActionPatch();
+
+  function installDelayedConsentGuard() {
+    if (window.__bwDelayedConsentGuard) return;
+    window.__bwDelayedConsentGuard = true;
+
+    var analyticsKeys = {
+      'bwPaidTracking.v1': true,
+      'bwVisitorId.v1': true,
+      'bwSessionId.v1': true,
+      'bwTripPlannerTracking.v1': true,
+      'bwTripPlannerVisitorId.v1': true,
+      'bwTripPlannerSessionId.v1': true
+    };
+    var functionalKeys = {
+      'bwStickyCtaDismissed.v1': true,
+      'bwStickyCtaMinimized.v1': true,
+      'bw_sticky_cta_closed': true,
+      'bw_desktop_cta_dismissed': true
+    };
+    var firstPartyEventRe = /berlinwalk-content-app\.vercel\.app\/api\/(?:pf-event|tp-event)/i;
+    var metaEventRe = /(?:facebook\.com\/tr|connect\.facebook\.net|\/_serverless\/analytics-reporter\/facebook\/event)/i;
+
+    function readCookiePolicy() {
+      try {
+        var match = document.cookie.match(/(?:^|;\s*)consent-policy=([^;]+)/);
+        return match ? JSON.parse(decodeURIComponent(match[1])) : {};
+      } catch (err) {
+        return {};
+      }
+    }
+
+    function policy() {
+      var current = currentConsentPolicy();
+      return current && Object.keys(current).length ? current : readCookiePolicy();
+    }
+
+    function hasConsent(kind) {
+      var current = policy();
+      if (kind === 'analytics') return current.analytics === true || current.anl === true || current.anl === 1;
+      if (kind === 'advertising') return current.advertising === true || current.adv === true || current.adv === 1;
+      if (kind === 'functional') return current.functional === true || current.func === true || current.func === 1;
+      return false;
+    }
+
+    function urlFrom(input) {
+      try {
+        if (typeof input === 'string') return input;
+        if (input && typeof input.url === 'string') return input.url;
+      } catch (err) {}
+      return '';
+    }
+
+    function shouldBlock(url) {
+      if (!url) return false;
+      if (firstPartyEventRe.test(url)) return !hasConsent('analytics');
+      if (metaEventRe.test(url)) return !hasConsent('advertising');
+      return false;
+    }
+
+    function okResponse() {
+      if (typeof Response === 'function') return new Response(null, { status: 204, statusText: 'Blocked by BerlinWalk consent guard' });
+      return { ok: true, status: 204, text: function () { return Promise.resolve(''); }, json: function () { return Promise.resolve({}); } };
+    }
+
+    function guardStorage(storage, keyMap, consentKind) {
+      var guardMap = window.__bwDelayedConsentStorageGuards || (window.__bwDelayedConsentStorageGuards = {});
+      var guardKey = (storage === window.localStorage ? 'local' : 'session') + ':' + consentKind;
+      if (!storage || !storage.setItem || guardMap[guardKey]) return;
+      var nativeSetItem = storage.setItem;
+      var nativeRemoveItem = storage.removeItem;
+      storage.setItem = function (key) {
+        var name = String(key || '');
+        if (keyMap[name] && !hasConsent(consentKind)) return undefined;
+        return nativeSetItem.apply(this, arguments);
+      };
+      guardMap[guardKey] = true;
+
+      function clearBlockedKeys() {
+        if (hasConsent(consentKind)) return;
+        Object.keys(keyMap).forEach(function (key) {
+          try { nativeRemoveItem.call(storage, key); } catch (err) {}
+        });
+      }
+
+      clearBlockedKeys();
+      [250, 1000, 3000, 7000].forEach(function (delay) {
+        window.setTimeout(clearBlockedKeys, delay);
+      });
+      window.addEventListener('consentPolicyChanged', clearBlockedKeys);
+      window.addEventListener('consentPolicyInitialized', clearBlockedKeys);
+      window.addEventListener('ucConsentEvent', clearBlockedKeys);
+    }
+
+    guardStorage(window.localStorage, analyticsKeys, 'analytics');
+    guardStorage(window.sessionStorage, analyticsKeys, 'analytics');
+    guardStorage(window.localStorage, functionalKeys, 'functional');
+    guardStorage(window.sessionStorage, functionalKeys, 'functional');
+
+    if (window.fetch && !window.fetch.__bwDelayedConsentGuarded) {
+      var nativeFetch = window.fetch;
+      var guardedFetch = function (input, init) {
+        if (shouldBlock(urlFrom(input))) return Promise.resolve(okResponse());
+        return nativeFetch.apply(this, arguments);
+      };
+      guardedFetch.__bwDelayedConsentGuarded = true;
+      window.fetch = guardedFetch;
+    }
+
+    if (navigator.sendBeacon && !navigator.sendBeacon.__bwDelayedConsentGuarded) {
+      var nativeSendBeacon = navigator.sendBeacon.bind(navigator);
+      var guardedSendBeacon = function (url, data) {
+        if (shouldBlock(urlFrom(url))) return true;
+        return nativeSendBeacon(url, data);
+      };
+      guardedSendBeacon.__bwDelayedConsentGuarded = true;
+      navigator.sendBeacon = guardedSendBeacon;
+    }
+  }
 
   function isBookingFlowPatchPage() {
     var path = location.pathname.toLowerCase();
