@@ -8,6 +8,31 @@
 
   const asset = (path) => new URL(path, BASE_URL).toString();
 
+  function currentConsentPolicy() {
+    try {
+      const manager = window.consentPolicyManager;
+      const current = manager && typeof manager.getCurrentConsentPolicy === 'function'
+        ? manager.getCurrentConsentPolicy()
+        : null;
+      return current && (current.policy || current) || {};
+    } catch (error) {
+      return {};
+    }
+  }
+
+  function analyticsConsent() {
+    return currentConsentPolicy().analytics === true;
+  }
+
+  function advertisingConsent() {
+    const policy = currentConsentPolicy();
+    return policy.advertising === true || policy.marketing === true;
+  }
+
+  function functionalConsent() {
+    return currentConsentPolicy().functional === true;
+  }
+
   function ensureFont() {
     if (document.querySelector('link[data-bw-trip-page-font]')) return;
     const preconnect = document.createElement('link');
@@ -43,6 +68,10 @@
 
     disconnectedCallback() {
       if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
+      if (this._consentHandler) {
+        document.removeEventListener('consentPolicyChanged', this._consentHandler);
+        document.removeEventListener('consentPolicyInitialized', this._consentHandler);
+      }
       if (this._resizeObserver) this._resizeObserver.disconnect();
       if (this._plannerFrameLoadHandler && this._plannerFrame) this._plannerFrame.removeEventListener('load', this._plannerFrameLoadHandler);
       if (this._plannerResizeHandler) {
@@ -98,6 +127,9 @@
       url.searchParams.set('parent_path', window.location.pathname || '/berlin-trip-planner');
       url.searchParams.set('parent_url', window.location.href);
       url.searchParams.set('attribution', 'none');
+      url.searchParams.set('analytics_consent', analyticsConsent() ? '1' : '0');
+      url.searchParams.set('advertising_consent', advertisingConsent() ? '1' : '0');
+      url.searchParams.set('functional_consent', functionalConsent() ? '1' : '0');
       return url.toString();
     }
 
@@ -361,7 +393,22 @@
 
       const validTripPlannerEvent = (name) => /^bw_trip_planner_[a-z0-9_]{1,90}$/.test(String(name || ''));
 
+      const sendConsentToPlanner = () => {
+        try {
+          if (!frame.contentWindow) return;
+          frame.contentWindow.postMessage({
+            type: 'bw-consent-update',
+            analytics: analyticsConsent(),
+            advertising: advertisingConsent(),
+            functional: functionalConsent()
+          }, plannerOrigin() || '*');
+        } catch (error) {}
+      };
+
       const pushPlannerAnalyticsEvent = (eventName, payload) => {
+        const allowAnalytics = analyticsConsent();
+        const allowAdvertising = advertisingConsent();
+        if (!allowAnalytics && !allowAdvertising) return;
         const detail = payload && typeof payload === 'object' ? payload : {};
         const analyticsPayload = Object.assign({}, detail, {
           parent_path: window.location.pathname || '/berlin-trip-planner',
@@ -369,12 +416,14 @@
           event_source: 'ultimate_berlin_trip_planner_iframe'
         });
         try {
-          window.dataLayer = window.dataLayer || [];
-          if (Array.isArray(window.dataLayer)) {
-            window.dataLayer.push(Object.assign({}, analyticsPayload, { event: eventName }));
+          if (allowAnalytics) {
+            window.dataLayer = window.dataLayer || [];
+            if (Array.isArray(window.dataLayer)) {
+              window.dataLayer.push(Object.assign({}, analyticsPayload, { event: eventName }));
+            }
+            if (typeof window.gtag === 'function') window.gtag('event', eventName, analyticsPayload);
           }
-          if (typeof window.gtag === 'function') window.gtag('event', eventName, analyticsPayload);
-          if (typeof window.fbq === 'function') window.fbq('trackCustom', eventName, analyticsPayload);
+          if (allowAdvertising && typeof window.fbq === 'function') window.fbq('trackCustom', eventName, analyticsPayload);
         } catch (error) {}
       };
 
@@ -403,6 +452,9 @@
       };
 
       window.addEventListener('message', this._messageHandler);
+      this._consentHandler = sendConsentToPlanner;
+      document.addEventListener('consentPolicyChanged', this._consentHandler);
+      document.addEventListener('consentPolicyInitialized', this._consentHandler);
       this._plannerFrameLoadHandler = () => {
         if (this._plannerContentObserver) {
           this._plannerContentObserver.disconnect();
@@ -410,6 +462,7 @@
         }
         watchReadableFrame();
         scheduleHeightChecks();
+        sendConsentToPlanner();
       };
       frame.addEventListener('load', this._plannerFrameLoadHandler);
       this._plannerResizeHandler = scheduleHeightChecks;
@@ -417,6 +470,7 @@
       if (window.visualViewport) window.visualViewport.addEventListener('resize', this._plannerResizeHandler);
       setHeight(1900);
       scheduleHeightChecks();
+      window.setTimeout(sendConsentToPlanner, 800);
     }
 
     _setupWixTopGapGuard() {

@@ -11156,6 +11156,50 @@
   };
 
   var tripPlannerTracking = null;
+  var trackingConsent = (function () {
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      return {
+        analytics: params.get('analytics_consent') === '1',
+        advertising: params.get('advertising_consent') === '1',
+        functional: params.get('functional_consent') === '1'
+      };
+    } catch (error) {
+      return { analytics: false, advertising: false, functional: false };
+    }
+  })();
+
+  function analyticsAllowed() {
+    return trackingConsent.analytics === true;
+  }
+
+  function advertisingAllowed() {
+    return trackingConsent.advertising === true;
+  }
+
+  function functionalAllowed() {
+    return trackingConsent.functional === true;
+  }
+
+  function trustedConsentMessage(event) {
+    try {
+      if (!event || !event.origin) return false;
+      var origin = new URL(event.origin);
+      var ref = referrerUrl();
+      if (ref && origin.origin === ref.origin) return true;
+      return /(^|\.)berlinwalk\.com$/i.test(origin.hostname);
+    } catch (error) {
+      return false;
+    }
+  }
+
+  window.addEventListener('message', function (event) {
+    if (!event.data || event.data.type !== 'bw-consent-update' || !trustedConsentMessage(event)) return;
+    trackingConsent.analytics = event.data.analytics === true;
+    trackingConsent.advertising = event.data.advertising === true;
+    trackingConsent.functional = event.data.functional === true;
+    if (!trackingConsent.analytics) tripPlannerTracking = null;
+  });
 
   function randomTrackingId(prefix) {
     return prefix + '_' + Math.random().toString(36).slice(2) + '_' + Date.now().toString(36);
@@ -11174,17 +11218,6 @@
     try {
       if (storage) storage.setItem(key, JSON.stringify(value));
     } catch (error) {}
-  }
-
-  function getTrackingCookie(name) {
-    try {
-      var parts = String(document.cookie || '').split(';');
-      for (var i = 0; i < parts.length; i += 1) {
-        var pair = parts[i].split('=');
-        if (pair[0] && pair[0].trim() === name) return decodeURIComponent(pair.slice(1).join('=') || '');
-      }
-    } catch (error) {}
-    return '';
   }
 
   function getOrCreateTrackingId(storage, key, prefix) {
@@ -11253,15 +11286,13 @@
     var joined = [
       data.utm_source,
       data.utm_medium,
-      data.utm_campaign,
-      data.fbclid,
-      data.fbc,
-      data.fbp
+      data.utm_campaign
     ].join(' ').toLowerCase();
-    return /(^|[^a-z])(meta|facebook|instagram|fb|ig|paid|cpc|paid_social)([^a-z]|$)/i.test(joined) || Boolean(data.fbclid);
+    return /(^|[^a-z])(meta|facebook|instagram|fb|ig|paid|cpc|paid_social)([^a-z]|$)/i.test(joined);
   }
 
   function initTripPlannerTracking() {
+    if (!analyticsAllowed()) return null;
     var params = new URLSearchParams(window.location.search || '');
     var stored = readTrackingJson(window.localStorage, TRACK_STORAGE_KEY) || {};
     var current = {
@@ -11269,18 +11300,14 @@
       utm_medium: params.get('utm_medium') || '',
       utm_campaign: params.get('utm_campaign') || '',
       utm_content: params.get('utm_content') || '',
-      utm_term: params.get('utm_term') || '',
-      fbclid: params.get('fbclid') || '',
-      fbc: getTrackingCookie('_fbc'),
-      fbp: getTrackingCookie('_fbp')
+      utm_term: params.get('utm_term') || ''
     };
     var hasCurrentAttribution = Boolean(
       current.utm_source ||
       current.utm_medium ||
       current.utm_campaign ||
       current.utm_content ||
-      current.utm_term ||
-      current.fbclid
+      current.utm_term
     );
     var merged = Object.assign({}, stored);
 
@@ -11300,6 +11327,9 @@
       }
     }
 
+    delete merged.fbclid;
+    delete merged.fbc;
+    delete merged.fbp;
     merged.isPaid = trackingPaidSignal(merged);
     merged.updatedAt = new Date().toISOString();
     writeTrackingJson(window.localStorage, TRACK_STORAGE_KEY, merged);
@@ -11327,20 +11357,25 @@
   }
 
   function tripPlannerAnalyticsPayload(payload) {
-    var tracking = tripPlannerTracking || initTripPlannerTracking();
-    tripPlannerTracking = tracking;
+    var params = new URLSearchParams(window.location.search || '');
+    var tracking = analyticsAllowed() ? (tripPlannerTracking || initTripPlannerTracking()) : null;
+    if (tracking) tripPlannerTracking = tracking;
     return Object.assign({}, payload || {}, {
       page_path: visiblePagePath(),
       page_location: visiblePageUrl(),
-      landing_page: tracking.landingPage || '',
-      first_page: tracking.firstPage || '',
-      utm_source: tracking.utm_source || '',
-      utm_medium: tracking.utm_medium || '',
-      utm_campaign: tracking.utm_campaign || '',
-      utm_content: tracking.utm_content || '',
-      utm_term: tracking.utm_term || '',
-      fbclid: tracking.fbclid || '',
-      is_paid: Boolean(tracking.isPaid),
+      landing_page: tracking ? tracking.landingPage || '' : '',
+      first_page: tracking ? tracking.firstPage || '' : '',
+      utm_source: tracking ? tracking.utm_source || '' : params.get('utm_source') || '',
+      utm_medium: tracking ? tracking.utm_medium || '' : params.get('utm_medium') || '',
+      utm_campaign: tracking ? tracking.utm_campaign || '' : params.get('utm_campaign') || '',
+      utm_content: tracking ? tracking.utm_content || '' : params.get('utm_content') || '',
+      utm_term: tracking ? tracking.utm_term || '' : params.get('utm_term') || '',
+      fbclid: '',
+      is_paid: Boolean(tracking ? tracking.isPaid : trackingPaidSignal({
+        utm_source: params.get('utm_source') || '',
+        utm_medium: params.get('utm_medium') || '',
+        utm_campaign: params.get('utm_campaign') || ''
+      })),
       source_context: 'ultimate_berlin_trip_planner'
     });
   }
@@ -11363,7 +11398,9 @@
 
   function sendTripPlannerTrackingEvent(event, payload) {
     if (!/^bw_trip_planner_[a-z0-9_]{1,90}$/.test(String(event || ''))) return;
+    if (!analyticsAllowed()) return;
     var tracking = tripPlannerTracking || initTripPlannerTracking();
+    if (!tracking) return;
     tripPlannerTracking = tracking;
     var body = JSON.stringify({
       eventName: event,
@@ -11383,9 +11420,9 @@
       utmCampaign: tracking.utm_campaign || '',
       utmContent: tracking.utm_content || '',
       utmTerm: tracking.utm_term || '',
-      fbclid: tracking.fbclid || '',
-      fbc: tracking.fbc || '',
-      fbp: tracking.fbp || '',
+      fbclid: '',
+      fbc: '',
+      fbp: '',
       screenWidth: String(window.screen && window.screen.width || ''),
       viewportWidth: String(window.innerWidth || ''),
       payload: payload || {}
@@ -11422,16 +11459,21 @@
   }
 
   function track(event, params) {
+    var allowAnalytics = analyticsAllowed();
+    var allowAdvertising = advertisingAllowed();
+    if (!allowAnalytics && !allowAdvertising) return;
     var payload = tripPlannerStatePayload(params || {});
     var analyticsPayload = tripPlannerAnalyticsPayload(payload);
     try {
-      window.dataLayer = window.dataLayer || [];
-      if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: event }, analyticsPayload));
-      if (typeof window.gtag === 'function') window.gtag('event', event, analyticsPayload);
-      if (typeof window.fbq === 'function') window.fbq('trackCustom', event, analyticsPayload);
+      if (allowAnalytics) {
+        window.dataLayer = window.dataLayer || [];
+        if (Array.isArray(window.dataLayer)) window.dataLayer.push(Object.assign({ event: event }, analyticsPayload));
+        if (typeof window.gtag === 'function') window.gtag('event', event, analyticsPayload);
+      }
+      if (allowAdvertising && typeof window.fbq === 'function') window.fbq('trackCustom', event, analyticsPayload);
     } catch (error) {}
     postParentTrackingEvent(event, analyticsPayload);
-    sendTripPlannerTrackingEvent(event, payload);
+    if (allowAnalytics) sendTripPlannerTrackingEvent(event, payload);
   }
 
   function trackFormStart(field) {
@@ -18624,6 +18666,7 @@
   }
 
   function unlockRecord() {
+    if (!functionalAllowed()) return null;
     try {
       if (window.localStorage) window.localStorage.removeItem(LEGACY_UNLOCK_KEY);
       var raw = window.sessionStorage && window.sessionStorage.getItem(UNLOCK_KEY);
@@ -18647,6 +18690,7 @@
   }
 
   function rememberUnlock(email) {
+    if (!functionalAllowed()) return;
     try {
       if (!window.sessionStorage) return;
       window.sessionStorage.setItem(UNLOCK_KEY, JSON.stringify({
@@ -18657,6 +18701,7 @@
   }
 
   function resetLocalUnlockForQa() {
+    if (!functionalAllowed() && !isLocalPreviewSurface()) return;
     try {
       var params = new URLSearchParams(window.location.search);
       if (window.localStorage) window.localStorage.removeItem(LEGACY_UNLOCK_KEY);

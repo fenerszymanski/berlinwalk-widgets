@@ -1081,10 +1081,28 @@
     }
   }
 
+  function currentConsentPolicy() {
+    try {
+      var manager = window.consentPolicyManager;
+      var current = manager && typeof manager.getCurrentConsentPolicy === 'function'
+        ? manager.getCurrentConsentPolicy()
+        : null;
+      return current && (current.policy || current) || {};
+    } catch (err) {
+      return {};
+    }
+  }
+
+  function analyticsConsent() {
+    return currentConsentPolicy().analytics === true;
+  }
+
   function pushEvent(name, params) {
+    if (!analyticsConsent()) return false;
     window.dataLayer = window.dataLayer || [];
     window.dataLayer.push(Object.assign({ event: name }, params || {}));
     if (typeof window.gtag === 'function') window.gtag('event', name, params || {});
+    return true;
   }
 
   function isBookEntryHref(href) {
@@ -1123,8 +1141,8 @@
       utmCampaign: params.get('utm_campaign') || '',
       utmContent: params.get('utm_content') || '',
       utmTerm: params.get('utm_term') || '',
-      fbclid: params.get('fbclid') || '',
-      isPaid: Boolean(params.get('utm_source') || params.get('fbclid')),
+      fbclid: '',
+      isPaid: Boolean(params.get('utm_source')),
       screenWidth: String(window.screen && window.screen.width || ''),
       viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
       payload: {
@@ -1132,10 +1150,10 @@
         cta_name: context
       }
     };
-    pushEvent('bw_book_link_click', {
+    if (!pushEvent('bw_book_link_click', {
       cta_name: context,
       page_path: window.location.pathname
-    });
+    })) return;
     try {
       window.fetch(TRACK_ENDPOINT, {
         method: 'POST',
