@@ -22,7 +22,7 @@
   var TOOL_ICON_BASE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/';
   var DEFAULT_TOOL_IMAGE = TOOL_ICON_BASE_URL + 'generic-tool.svg';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var BOOKING_NEXT_ACTION_PATCH_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/booking-calendar/book-now-intro-patch.js?v=booking-next-20260701';
+  var BOOKING_NEXT_ACTION_PATCH_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/booking-calendar/book-now-intro-patch.js?v=booking-next-20260701b';
   var TRIP_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
   var ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'];

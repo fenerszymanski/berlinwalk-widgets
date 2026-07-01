@@ -4,8 +4,9 @@
 
   var STYLE_ID = 'bw-book-now-intro-patch-css';
   var NUDGE_ID = 'bw-booking-calendar-next-nudge';
+  var INTRO_VERSION = 'booking-next-20260701b';
   var INTRO_HTML = [
-    "<div class='bw-cal-intro'>",
+    "<div class='bw-cal-intro' data-bw-booking-intro-version='" + INTRO_VERSION + "'>",
     "<span class='bw-cal-intro-kicker'>Book the tour</span>",
     '<h2>Reserve your free spot</h2>',
     "<p>No upfront payment. My walk is ~2h, tip-based at the end, and starts at the World Clock on Alexanderplatz.</p>",
@@ -149,10 +150,15 @@
 
     section.classList.add('bw-cal-standalone');
 
-    if (!calendar.querySelector('.bw-cal-intro')) {
+    var intro = calendar.querySelector('.bw-cal-intro');
+    if (!intro || intro.getAttribute('data-bw-booking-intro-version') !== INTRO_VERSION) {
       var wrapper = document.createElement('div');
       wrapper.innerHTML = INTRO_HTML;
-      section.insertBefore(wrapper.firstElementChild, shell);
+      if (intro) {
+        intro.replaceWith(wrapper.firstElementChild);
+      } else {
+        section.insertBefore(wrapper.firstElementChild, shell);
+      }
     }
 
     var title = calendar.querySelector('.bw-cal-title');
