@@ -344,13 +344,23 @@ class BWSiteFooterElement extends HTMLElement {
           gap: 14px;
         }
 
-        .bw-site-footer .bw-footer-bottom a {
+        .bw-site-footer .bw-footer-bottom a,
+        .bw-site-footer .bw-footer-bottom button {
+          background: transparent;
+          border: 0;
+          color: inherit;
+          cursor: pointer;
+          font: inherit;
+          font-weight: 700;
+          padding: 0;
           text-decoration: none;
           transition: color 160ms ease;
         }
 
         .bw-site-footer .bw-footer-bottom a:hover,
-        .bw-site-footer .bw-footer-bottom a:focus-visible {
+        .bw-site-footer .bw-footer-bottom a:focus-visible,
+        .bw-site-footer .bw-footer-bottom button:hover,
+        .bw-site-footer .bw-footer-bottom button:focus-visible {
           color: var(--white);
         }
 
@@ -476,6 +486,7 @@ class BWSiteFooterElement extends HTMLElement {
             <div class="bw-footer-bottom-links">
               <a href="${BW_SITE_FOOTER_LINKS.home}">berlinwalk.com</a>
               <a href="${BW_SITE_FOOTER_LINKS.instagram}">@berlinwalkingtour</a>
+              <button type="button" data-bw-privacy-settings="true">Privacy Settings</button>
             </div>
           </div>
         </div>

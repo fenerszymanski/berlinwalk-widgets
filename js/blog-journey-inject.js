@@ -38,6 +38,7 @@
   installDelayedConsentGuard();
   loadBookingNextActionPatch();
   installConsentGatedBookingAnalytics();
+  installConsentSettingsUi();
 
   function installDelayedConsentGuard() {
     if (window.__bwDelayedConsentGuard) return;
@@ -372,6 +373,137 @@
     document.addEventListener('consentPolicyInitialized', sendInitialBookingEvents);
     sendInitialBookingEvents();
     window.setTimeout(sendInitialBookingEvents, 800);
+  }
+
+  function installConsentSettingsUi() {
+    if (window.__bwConsentSettingsUiInstalled) return;
+    window.__bwConsentSettingsUiInstalled = true;
+
+    var STYLE_MARKER = 'bw-consent-settings-ui-style';
+    var LINK_MARKER = 'data-bw-privacy-settings';
+    var HIDE_SELECTORS = [
+      '[data-testid="uc-privacy-button"]',
+      '[data-testid*="privacy-button"]',
+      '[data-testid*="PrivacyButton"]',
+      '.uc-privacy-button',
+      '.uc-privacy-icon',
+      'button[aria-label="Privacy Settings"]',
+      'button[aria-label="Privacy settings"]',
+      'button[aria-label="Open Privacy Settings"]'
+    ].join(',');
+
+    function addStyle(root) {
+      try {
+        if (!root || root.getElementById && root.getElementById(STYLE_MARKER)) return;
+        if (!root.querySelector || root.querySelector('#' + STYLE_MARKER)) return;
+        var style = document.createElement('style');
+        style.id = STYLE_MARKER;
+        style.textContent = [
+          HIDE_SELECTORS + '{display:none!important;visibility:hidden!important;opacity:0!important;pointer-events:none!important}',
+          '.bw-privacy-settings-link{background:transparent;border:0;color:inherit;cursor:pointer;font:inherit;font-weight:700;padding:0;text-decoration:none}',
+          '.bw-privacy-settings-link:hover,.bw-privacy-settings-link:focus-visible{color:#fff;outline:0;text-decoration:none}',
+          '.bw-privacy-settings-link:focus-visible{box-shadow:0 2px 0 #FFE600}'
+        ].join('');
+        (root.head || root).appendChild(style);
+      } catch (err) {}
+    }
+
+    function looksLikePrivacyButton(el) {
+      if (!el || el.nodeType !== 1) return false;
+      if (el.hasAttribute && el.hasAttribute(LINK_MARKER)) return false;
+      var label = [
+        el.getAttribute('aria-label') || '',
+        el.getAttribute('title') || '',
+        el.getAttribute('data-testid') || '',
+        el.className || '',
+        el.textContent || ''
+      ].join(' ').toLowerCase();
+      if (label.indexOf('privacy') === -1 && label.indexOf('consent') === -1 && label.indexOf('uc-') === -1) return false;
+      var rect = el.getBoundingClientRect ? el.getBoundingClientRect() : { width: 0, height: 0 };
+      return rect.width <= 90 && rect.height <= 90;
+    }
+
+    function collectConsentRoots() {
+      var roots = [document];
+      try {
+        document.querySelectorAll('#usercentrics-root,[id*="usercentrics"],[class*="usercentrics"],[data-testid*="uc-"]').forEach(function (el) {
+          roots.push(el);
+          if (el.shadowRoot) roots.push(el.shadowRoot);
+        });
+        Array.prototype.forEach.call(document.body ? document.body.children : [], function (el) {
+          if (el.shadowRoot) roots.push(el.shadowRoot);
+        });
+      } catch (err) {}
+      return roots.filter(function (root, index, list) {
+        return root && list.indexOf(root) === index;
+      });
+    }
+
+    function hidePrivacyButtons(root) {
+      try {
+        if (!root || !root.querySelectorAll) return;
+        addStyle(root);
+        root.querySelectorAll(HIDE_SELECTORS).forEach(function (el) {
+          el.style.setProperty('display', 'none', 'important');
+          el.style.setProperty('visibility', 'hidden', 'important');
+          el.style.setProperty('pointer-events', 'none', 'important');
+        });
+        root.querySelectorAll('button,[role="button"],a').forEach(function (el) {
+          if (!looksLikePrivacyButton(el)) return;
+          el.style.setProperty('display', 'none', 'important');
+          el.style.setProperty('visibility', 'hidden', 'important');
+          el.style.setProperty('pointer-events', 'none', 'important');
+        });
+      } catch (err) {}
+    }
+
+    function openConsentSettings(event) {
+      if (event) event.preventDefault();
+      try {
+        if (window.UC_UI && typeof window.UC_UI.showSecondLayer === 'function') {
+          window.UC_UI.showSecondLayer();
+          return;
+        }
+        if (window.UC_UI && typeof window.UC_UI.showFirstLayer === 'function') {
+          window.UC_UI.showFirstLayer();
+          return;
+        }
+      } catch (err) {}
+      try {
+        document.dispatchEvent(new CustomEvent('bwOpenConsentSettings'));
+      } catch (err) {}
+    }
+
+    function addFooterLink() {
+      try {
+        if (document.querySelector('[' + LINK_MARKER + ']')) return;
+        var footerLinks = document.querySelector('.bw-site-footer .bw-footer-bottom-links');
+        var footer = footerLinks || document.querySelector('.bw-site-footer footer, .bw-site-footer, footer');
+        if (!footer) return;
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'bw-privacy-settings-link';
+        button.setAttribute(LINK_MARKER, 'true');
+        button.textContent = 'Privacy Settings';
+        button.addEventListener('click', openConsentSettings);
+        footer.appendChild(button);
+      } catch (err) {}
+    }
+
+    function run() {
+      addStyle(document);
+      collectConsentRoots().forEach(hidePrivacyButtons);
+      addFooterLink();
+    }
+
+    document.addEventListener('click', function (event) {
+      var target = event.target && event.target.closest ? event.target.closest('[' + LINK_MARKER + ']') : null;
+      if (target) openConsentSettings(event);
+    });
+    run();
+    [250, 1000, 3000, 7000, 12000].forEach(function (delay) {
+      window.setTimeout(run, delay);
+    });
   }
 
   var BLOG_CATEGORIES = [
