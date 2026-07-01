@@ -326,13 +326,13 @@ class BWBookHeroElement extends HTMLElement {
               <div>
                 <span class="bw-book-eyebrow">Book the tour</span>
                 <h1>Pick a date. Meet at the <span class="bw-book-highlight">World Clock</span>. Walk Berlin with a local.</h1>
-                <p class="bw-book-hero-lead">A small-group walk through Berlin's historic centre, with stories most visitors miss. Free to book, tip-based at the end, runs in English daily.</p>
+                <p class="bw-book-hero-lead">A small-group walk through Berlin's historic centre, guided by Yusuf. Reserving is free, there is no upfront payment, and you tip at the end based on the value you got.</p>
 
                 <div class="bw-book-meta" aria-label="Tour key facts">
                   <span class="bw-book-meta-chip">Free · Tip-based</span>
                   <span class="bw-book-meta-chip">~2 hours</span>
                   <span class="bw-book-meta-chip">English</span>
-                  <span class="bw-book-meta-chip">Daily</span>
+                  <span class="bw-book-meta-chip">Tue-Sat</span>
                 </div>
 
                 <div class="bw-book-actions">
@@ -355,7 +355,7 @@ class BWBookHeroElement extends HTMLElement {
                   <div><dt>Ends near</dt><dd>Hackescher Markt</dd></div>
                   <div><dt>Language</dt><dd>English</dd></div>
                 </dl>
-                <p class="bw-book-hero-card-foot">No payment to book. Tip your guide at the end based on what the walk was worth to you.</p>
+                <p class="bw-book-hero-card-foot">No payment to book. A fair thank-you for a good 2-hour walk is usually 10€-20€ per adult.</p>
               </aside>
             </div>
           </div>
@@ -717,8 +717,8 @@ class BWBookDetailsElement extends HTMLElement {
             <aside class="bw-book-explainer" aria-labelledby="bw-book-tip-title">
               <span class="bw-book-eyebrow">Free, tip-based — what that means</span>
               <h2 id="bw-book-tip-title">No payment to book. Tip the guide at the end based on what the walk was worth to you.</h2>
-              <p>You reserve a spot for free. After the walk, you decide what to tip — based on the value you got, your budget, and how it compares to a paid tour. This is how I make a living, and how the tour stays accessible to travellers on every kind of budget.</p>
-              <p>Most guests tip between 10€ and 20€ per person. There is no minimum, no pressure, and no awkward handover script at the end.</p>
+              <p>You reserve a spot for free. After the walk, you decide what to tip based on the value you got, your budget, and how it compares to a paid tour. This is how I make a living, and how the tour stays accessible to travellers on every kind of budget.</p>
+              <p>For a good 2-hour walk, 10€ per adult is the fair minimum thank-you, 15€ is strong, and 20€+ is generous. There is no upfront payment and no awkward handover script at the end.</p>
             </aside>
           </div>
         </div>
@@ -732,7 +732,7 @@ class BWBookDetailsElement extends HTMLElement {
             <div class="bw-book-faq">
               <details>
                 <summary>Is the tour really free?</summary>
-                <p>Yes. There is no charge to book or join. At the end of the walk you decide what to tip based on the value you got — there is no minimum and no pressure.</p>
+                <p>Yes. There is no charge to book or join. At the end of the walk you decide what to tip based on the value you got; for a good 2-hour tour, most guests treat 10€ per adult as the fair minimum thank-you.</p>
               </details>
               <details>
                 <summary>What does the tour cover?</summary>
@@ -756,7 +756,7 @@ class BWBookDetailsElement extends HTMLElement {
               </details>
               <details>
                 <summary>How much should I tip?</summary>
-                <p>Whatever the walk was worth to you. Most guests tip between 10€ and 20€ per person. Cash is easiest, card works too.</p>
+                <p>Whatever the walk was worth to you. For a good 2-hour walk, 10€ per adult is the fair minimum thank-you, 15€ is strong, and 20€+ is generous. Cash is easiest, card works too.</p>
               </details>
             </div>
           </div>

@@ -10721,6 +10721,7 @@
   var imageDataUrlPromises = {};
   var pdfEnginePromise = null;
   var plannerFrameResizeObserver = null;
+  var tourRecommendationViewKey = '';
 
   function plannerContentHeight() {
     if (!document.body || !document.body.children || !document.body.children.length) return 0;
@@ -15864,6 +15865,41 @@
     return conversionSignal(plan).summary;
   }
 
+  function tourBridgeSignal(plan) {
+    var slot = tourSlotForPlan(plan);
+    var signal = conversionSignal(plan);
+    var diff = daysFromToday(state.arrivalDate);
+    var interests = Array.isArray(state.interests) ? state.interests : [];
+    var firstTimer = state.firstTime === 'yes' || state.firstTime === 'longago';
+    var historyFit = interests.indexOf('history') !== -1 || interests.indexOf('wall') !== -1 || interests.indexOf('museums') !== -1;
+    var tripLengthFit = state.tripLength >= 2 && state.tripLength <= 7;
+    var nearArrival = diff >= 0 && diff <= 21;
+    var availableSlot = Boolean(slot && !slot.booked && (slot.insideTrip || diff <= 7));
+    var show = state.tourIntent !== 'booked' &&
+      availableSlot &&
+      tripLengthFit &&
+      nearArrival &&
+      (signal.score >= 62 || (firstTimer && historyFit));
+    var reason = signal.reasons && signal.reasons.length
+      ? signal.reasons.slice(0, 3).join(', ')
+      : 'Berlin context fits this plan';
+
+    return {
+      show: show,
+      score: signal.score,
+      tier: signal.tier,
+      label: signal.label,
+      reason: reason,
+      firstTimer: firstTimer,
+      historyFit: historyFit,
+      tripLengthFit: tripLengthFit,
+      nearArrival: nearArrival,
+      availableSlot: availableSlot,
+      arrivalWindowDays: diff,
+      slot: slot
+    };
+  }
+
   function renderTravelMode(plan) {
     var mode = travelModeForPlan(plan);
     if (!mode) return '';
@@ -15919,15 +15955,15 @@
   }
 
   function renderTourAnchor(plan) {
+    var bridge = tourBridgeSignal(plan);
+    if (!bridge.show) return '';
     var cta = ctaForPlan(plan);
-    var slot = tourSlotForPlan(plan);
+    var slot = bridge.slot || tourSlotForPlan(plan);
     var timing = state.tourIntent === 'booked'
       ? 'World Clock meeting point'
       : (slot && slot.insideTrip ? slot.dayLabel + ' at ' + slot.startLabel : 'Tue-Sat at 11:30');
-    var copy = state.tourIntent === 'booked'
-      ? 'Keep the meeting point handy so the first historic-centre walk in your plan stays easy on arrival.'
-      : 'Use this plan for the whole trip, then let me anchor the historic centre on foot at the start.';
-    return '<article class="bw-tour-card" data-tour-anchor>' +
+    var copy = 'Your plan is strongest if you get the city context early. This match is based on ' + bridge.reason + '.';
+    return '<article class="bw-tour-card" data-tour-anchor data-tour-tier="' + escapeHtml(bridge.tier) + '">' +
       '<span class="bw-tour-symbol" aria-hidden="true">' + iconSvg('route') + '</span>' +
       '<div class="bw-tour-copy">' +
         '<strong>' + escapeHtml(timing) + '</strong>' +
@@ -15943,9 +15979,38 @@
   function renderTourActions(plan) {
     var target = root.querySelector('[data-tour-actions]');
     if (!target) return;
+    var bridge = tourBridgeSignal(plan);
+    if (!bridge.show) {
+      target.innerHTML = '';
+      target.hidden = true;
+      return;
+    }
     var html = renderTourAnchor(plan);
     target.innerHTML = html;
     target.hidden = !html;
+    var cta = ctaForPlan(plan);
+    var slot = bridge.slot || tourSlotForPlan(plan);
+    var viewKey = [
+      state.arrivalDate,
+      state.tripLength,
+      state.firstTime,
+      state.tourIntent,
+      (state.interests || []).join(','),
+      cta.kind,
+      bridge.tier,
+      slot && slot.dateKey
+    ].join('|');
+    if (html && tourRecommendationViewKey !== viewKey) {
+      tourRecommendationViewKey = viewKey;
+      track('bw_trip_planner_tour_recommendation_view', {
+        cta_kind: cta.kind,
+        tour_score: bridge.score,
+        tour_tier: bridge.tier,
+        tour_reason: bridge.reason,
+        recommended_tour_date: slot && slot.dateKey || '',
+        recommended_tour_time: slot && slot.timeLabel || ''
+      });
+    }
   }
 
   function ctaForPlan(plan) {
@@ -22689,6 +22754,18 @@
     }
 
     if (event.target.closest('[data-book-link]')) {
+      if (event.target.closest('[data-tour-anchor]')) {
+        var bridge = tourBridgeSignal(latestPlan || buildPlan());
+        var cta = event.target.closest('[data-book-link]').getAttribute('data-cta-kind') || '';
+        track('bw_trip_planner_tour_recommendation_click', {
+          arrival_date: state.arrivalDate,
+          trip_length: state.tripLength,
+          cta_kind: cta,
+          tour_score: bridge.score,
+          tour_tier: bridge.tier,
+          tour_reason: bridge.reason
+        });
+      }
       track('bw_trip_planner_book_click', {
         arrival_date: state.arrivalDate,
         trip_length: state.tripLength,
