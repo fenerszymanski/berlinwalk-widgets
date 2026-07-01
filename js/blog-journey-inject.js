@@ -22,7 +22,7 @@
   var TOOL_ICON_BASE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/';
   var DEFAULT_TOOL_IMAGE = TOOL_ICON_BASE_URL + 'generic-tool.svg';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var BOOKING_NEXT_ACTION_PATCH_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/booking-calendar/book-now-intro-patch.js?v=booking-next-20260701b';
+  var BOOKING_NEXT_ACTION_PATCH_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/booking-calendar/book-now-intro-patch.js?v=booking-form-trust-20260701c';
   var TRIP_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
   var ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'];
@@ -37,12 +37,13 @@
 
   loadBookingNextActionPatch();
 
-  function isBookingServicePage() {
-    return location.pathname.toLowerCase().indexOf('/book-berlin-walking-tour/') === 0;
+  function isBookingFlowPatchPage() {
+    var path = location.pathname.toLowerCase();
+    return path.indexOf('/book-berlin-walking-tour/') === 0 || path.indexOf('/booking-form') === 0;
   }
 
   function loadBookingNextActionPatch() {
-    if (!isBookingServicePage()) return;
+    if (!isBookingFlowPatchPage()) return;
     if (document.querySelector('script[src="' + BOOKING_NEXT_ACTION_PATCH_URL + '"]')) return;
     var script = document.createElement('script');
     script.src = BOOKING_NEXT_ACTION_PATCH_URL;
