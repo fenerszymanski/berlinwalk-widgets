@@ -101,7 +101,7 @@ events.
 Add this through Wix Custom Code in Body-end on all pages:
 
 ```html
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/js/exit-intent-popup.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@315d38f/js/exit-intent-popup.js" defer></script>
 ```
 
 `exit-intent-popup.js` waits 30 seconds, then opens a desktop-only exit-intent
