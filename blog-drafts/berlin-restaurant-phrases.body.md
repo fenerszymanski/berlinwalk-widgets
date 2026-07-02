@@ -1,5 +1,3 @@
-# Berlin Restaurant Phrases: How to Order, Pay and Handle Allergies
-
 You do not need fluent German to eat well in Berlin. You need a few **Berlin restaurant phrases** that work under pressure: at a bakery counter, in a busy cafe, at a street-food window, or when the bill arrives and you suddenly forget every word you learned on the plane.
 
 Berlin is used to English. Central restaurants, coffee shops, museum cafes and many bars will often switch languages before you finish your first sentence. VisitBerlin's [restaurant overview](https://www.visitberlin.de/en/restaurants-berlin) gives a good sense of how broad the city's food scene is, from German classics to international kitchens. But the small German lines below still matter. They make the interaction warmer, help when staff are busy, and are especially useful for allergy, payment and take-away moments where pointing is not enough.
