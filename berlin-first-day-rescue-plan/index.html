@@ -781,20 +781,21 @@
       if (!root) return;
 
       var params = new URLSearchParams(window.location.search);
+      var referrerParams = referrerSearchParams();
       var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
-      var API_URL = params.get('api') || (isLocal
+      var API_URL = getParam('api') || (isLocal
         ? 'http://127.0.0.1:5173/api/rescue-plan'
         : 'https://berlinwalk-content-app.vercel.app/api/rescue-plan');
       var BOOK_URL = 'https://www.berlinwalk.com/book?utm_source=rescue_plan&utm_medium=product&utm_campaign=first_day_rescue_plan&utm_content=tour_cta';
       var state = {
-        scenario: params.get('scenario') || 'classic',
+        scenario: getParam('scenario') || 'classic',
         energy: 'medium',
         priority: 'smooth_arrival',
         sessionId: sessionId(),
         visitorId: visitorId(),
         plan: null,
-        orderId: params.get('order') || '',
-        token: params.get('token') || '',
+        orderId: getParam('order') || '',
+        token: getParam('token') || '',
       };
 
       var entry = root.querySelector('[data-entry]');
@@ -908,7 +909,7 @@
         try {
           var response = await post({
             action: 'startCheckout',
-            mock: isLocal && (params.get('mock') === '1' || params.get('mock') === 'true'),
+            mock: isLocal && (getParam('mock') === '1' || getParam('mock') === 'true'),
             pageUrl: pageUrlWithoutAccess(),
             successUrl: pageUrlWithoutAccess(),
             ...payload,
@@ -917,7 +918,7 @@
             throw new Error(response.error || 'Checkout could not start.');
           }
           track('rescue_payment_started', { scenario: payload.scenario, orderId: response.orderId || '', mock: Boolean(response.mock) });
-          window.location.href = response.checkoutUrl;
+          navigateTo(response.checkoutUrl);
         } catch (error) {
           setBusy(false);
           showStatus(error.message || 'Checkout could not start. Please try again.');
@@ -931,18 +932,18 @@
         result.classList.add('show');
         result.innerHTML = loadingMarkup('Opening your plan...');
         try {
-          var action = params.get('session_id') ? 'claimPlan' : 'getPlan';
+          var action = getParam('session_id') ? 'claimPlan' : 'getPlan';
           var payload = {
             action: action,
             orderId: state.orderId,
             accessToken: state.token,
-            stripeSessionId: params.get('session_id') || '',
+            stripeSessionId: getParam('session_id') || '',
             pageUrl: pageUrlWithoutAccess(),
           };
           var response = await post(payload);
           if (!response.ok || !response.plan) throw new Error(response.error || 'Plan could not be opened.');
           state.plan = response.plan;
-          renderPlan(response.plan, response.accessUrl || window.location.href, response.emailStatus || '');
+          renderPlan(response.plan, response.accessUrl || preferredPageUrl(), response.emailStatus || '');
         } catch (error) {
           result.innerHTML = errorMarkup(error.message || 'Plan could not be opened.');
         }
@@ -953,16 +954,16 @@
           ...body,
           sessionId: state.sessionId,
           visitorId: state.visitorId,
-          pagePath: window.location.pathname,
-          pageUrl: window.location.href,
+          pagePath: preferredPagePath(),
+          pageUrl: preferredPageUrl(),
           referrer: document.referrer || '',
-          landingPage: localStorage.getItem('bwRescueLandingPage') || window.location.href,
-          utmSource: params.get('utm_source') || '',
-          utmMedium: params.get('utm_medium') || '',
-          utmCampaign: params.get('utm_campaign') || '',
-          utmContent: params.get('utm_content') || '',
-          utmTerm: params.get('utm_term') || '',
-          fbclid: params.get('fbclid') || '',
+          landingPage: localStorage.getItem('bwRescueLandingPage') || preferredPageUrl(),
+          utmSource: getParam('utm_source') || '',
+          utmMedium: getParam('utm_medium') || '',
+          utmCampaign: getParam('utm_campaign') || '',
+          utmContent: getParam('utm_content') || '',
+          utmTerm: getParam('utm_term') || '',
+          fbclid: getParam('fbclid') || '',
           screenWidth: String(window.screen && window.screen.width || ''),
           viewportWidth: String(window.innerWidth || ''),
           sourceContext: 'first_day_rescue_plan',
@@ -988,21 +989,21 @@
           orderId: state.orderId || '',
           sessionId: state.sessionId,
           visitorId: state.visitorId,
-          pagePath: window.location.pathname,
-          pageUrl: window.location.href,
+          pagePath: preferredPagePath(),
+          pageUrl: preferredPageUrl(),
           referrer: document.referrer || '',
-          landingPage: localStorage.getItem('bwRescueLandingPage') || window.location.href,
-          utmSource: params.get('utm_source') || '',
-          utmMedium: params.get('utm_medium') || '',
-          utmCampaign: params.get('utm_campaign') || '',
-          utmContent: params.get('utm_content') || '',
-          utmTerm: params.get('utm_term') || '',
-          fbclid: params.get('fbclid') || '',
+          landingPage: localStorage.getItem('bwRescueLandingPage') || preferredPageUrl(),
+          utmSource: getParam('utm_source') || '',
+          utmMedium: getParam('utm_medium') || '',
+          utmCampaign: getParam('utm_campaign') || '',
+          utmContent: getParam('utm_content') || '',
+          utmTerm: getParam('utm_term') || '',
+          fbclid: getParam('fbclid') || '',
           viewportWidth: String(window.innerWidth || ''),
           sourceContext: 'first_day_rescue_plan',
         };
         try {
-          if (!localStorage.getItem('bwRescueLandingPage')) localStorage.setItem('bwRescueLandingPage', window.location.href);
+          if (!localStorage.getItem('bwRescueLandingPage')) localStorage.setItem('bwRescueLandingPage', preferredPageUrl());
           var blob = new Blob([JSON.stringify(body)], { type: 'application/json' });
           if (navigator.sendBeacon && navigator.sendBeacon(API_URL, blob)) return;
           fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), keepalive: true }).catch(function () {});
@@ -1167,9 +1168,48 @@
       }
 
       function pageUrlWithoutAccess() {
-        var url = new URL(window.location.href);
+        var url = new URL(preferredPageUrl());
         ['order', 'token', 'session_id', 'checkout'].forEach(function (key) { url.searchParams.delete(key); });
         return url.toString();
+      }
+
+      function referrerSearchParams() {
+        try {
+          if (!document.referrer) return new URLSearchParams();
+          var url = new URL(document.referrer);
+          if (!/berlinwalk\.com$/i.test(url.hostname)) return new URLSearchParams();
+          return url.searchParams;
+        } catch (_) {
+          return new URLSearchParams();
+        }
+      }
+
+      function getParam(name) {
+        return params.get(name) || referrerParams.get(name) || '';
+      }
+
+      function preferredPageUrl() {
+        try {
+          if (document.referrer) {
+            var ref = new URL(document.referrer);
+            if (/berlinwalk\.com$/i.test(ref.hostname) && /\/tools\/berlin-first-day-rescue-plan\/?$/i.test(ref.pathname)) return ref.toString();
+          }
+        } catch (_) {}
+        return window.location.href;
+      }
+
+      function preferredPagePath() {
+        try { return new URL(preferredPageUrl()).pathname; } catch (_) { return window.location.pathname; }
+      }
+
+      function navigateTo(url) {
+        try {
+          if (window.top && window.top !== window) {
+            window.top.location.href = url;
+            return;
+          }
+        } catch (_) {}
+        window.location.href = url;
       }
 
       function todayKey() {
