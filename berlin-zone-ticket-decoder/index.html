@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Zone Ticket Decoder | BerlinWalk</title>
-  <meta name="description" content="Choose city, airport and day-trip stops to see whether a Berlin AB or ABC public transport ticket fits your tourist route.">
+  <meta name="description" content="Choose the farthest stop in your Berlin day and see whether tourists need an AB, ABC or wider route ticket.">
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
-<div id="bw-zone-decoder">
+<div id="bw-zone-decoder" data-version="20260702c">
   <style>
     html,
     body {
@@ -31,6 +31,7 @@
       --text: #212121;
       --muted: #526052;
       --border: #D9E7C8;
+      --soft: #F1F8EA;
       --red: #E63946;
       color: var(--text);
       font-family: Montserrat, Arial, sans-serif;
@@ -46,8 +47,7 @@
       box-sizing: border-box;
     }
 
-    #bw-zone-decoder button,
-    #bw-zone-decoder select {
+    #bw-zone-decoder button {
       font: inherit;
     }
 
@@ -61,24 +61,28 @@
     }
 
     #bw-zone-decoder .hero {
-      background:
-        linear-gradient(100deg, rgba(27, 94, 32, 0.94), rgba(27, 94, 32, 0.72)),
-        url("../blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized/01-berlin-ab-abc-ticket-zones-cover.jpg") center/cover;
+      background: #0F3B15;
       color: #fff;
       display: grid;
-      gap: 20px;
-      grid-template-columns: minmax(0, 1fr) minmax(240px, 0.7fr);
-      min-height: 310px;
-      padding: 26px;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 0.78fr);
+      min-height: 340px;
+      overflow: hidden;
+    }
+
+    #bw-zone-decoder .hero-copy {
+      display: grid;
+      gap: 18px;
+      padding: 28px;
+      place-content: center start;
     }
 
     #bw-zone-decoder .kicker {
       color: var(--yellow);
       font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.2px;
+      font-weight: 950;
+      letter-spacing: 1px;
       line-height: 1.2;
-      margin: 0 0 10px;
+      margin: 0;
       text-transform: uppercase;
     }
 
@@ -89,141 +93,173 @@
       letter-spacing: 0;
       line-height: 1.04;
       margin: 0;
-      max-width: 760px;
+      max-width: 720px;
     }
 
-    #bw-zone-decoder .hero p {
+    #bw-zone-decoder .hero-copy p {
       color: #ECF7DE;
       font-size: 14px;
-      font-weight: 650;
+      font-weight: 700;
       line-height: 1.55;
-      margin: 12px 0 0;
-      max-width: 680px;
+      margin: 0;
+      max-width: 640px;
     }
 
-    #bw-zone-decoder .result {
-      align-self: stretch;
-      background: rgba(250, 250, 245, 0.96);
-      border: 1px solid rgba(255, 230, 0, 0.46);
-      border-radius: 8px;
-      color: var(--text);
+    #bw-zone-decoder .mini-rule {
+      align-items: stretch;
       display: grid;
-      gap: 9px;
-      padding: 16px;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      max-width: 560px;
     }
 
-    #bw-zone-decoder .ticket-face {
+    #bw-zone-decoder .mini-rule span {
+      background: rgba(255, 255, 255, 0.11);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 8px;
+      color: #fff;
+      display: grid;
+      font-size: 12px;
+      font-weight: 900;
+      gap: 4px;
+      min-height: 66px;
+      padding: 10px;
+    }
+
+    #bw-zone-decoder .mini-rule b {
+      color: var(--yellow);
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    #bw-zone-decoder .hero-visual {
+      min-height: 340px;
+      position: relative;
+    }
+
+    #bw-zone-decoder .hero-visual img {
+      display: block;
+      height: 100%;
+      inset: 0;
+      object-fit: cover;
+      position: absolute;
+      width: 100%;
+    }
+
+    #bw-zone-decoder .hero-visual::after {
+      background: linear-gradient(90deg, rgba(15, 59, 21, 0.2), rgba(15, 59, 21, 0.74));
+      content: "";
+      inset: 0;
+      position: absolute;
+    }
+
+    #bw-zone-decoder .ticket-stack {
+      bottom: 22px;
+      display: grid;
+      gap: 10px;
+      max-width: 280px;
+      position: absolute;
+      right: 22px;
+      width: calc(100% - 44px);
+      z-index: 2;
+    }
+
+    #bw-zone-decoder .ticket-card {
       background:
         radial-gradient(circle at 14px 50%, rgba(27, 94, 32, 0.18) 0 5px, transparent 6px),
         radial-gradient(circle at calc(100% - 14px) 50%, rgba(27, 94, 32, 0.18) 0 5px, transparent 6px),
         linear-gradient(135deg, #fff 0%, #FFF8A8 100%);
-      border: 1px solid rgba(27, 94, 32, 0.22);
+      border: 1px solid rgba(255, 230, 0, 0.74);
       border-radius: 8px;
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.24);
+      color: var(--text);
       display: grid;
-      gap: 9px;
-      margin-top: 6px;
-      padding: 12px;
+      gap: 10px;
+      min-height: 150px;
+      padding: 14px 14px 14px 54px;
       position: relative;
     }
 
-    #bw-zone-decoder .ticket-face::before {
-      background-image: linear-gradient(to bottom, rgba(27, 94, 32, 0.26) 40%, transparent 0);
-      background-size: 1px 7px;
+    #bw-zone-decoder .ticket-card::before {
+      background-image: linear-gradient(to bottom, rgba(27, 94, 32, 0.34) 45%, transparent 0);
+      background-size: 1px 8px;
       content: "";
-      height: calc(100% - 18px);
-      left: 44px;
+      height: calc(100% - 22px);
+      left: 42px;
       position: absolute;
-      top: 9px;
+      top: 11px;
       width: 1px;
     }
 
-    #bw-zone-decoder .ticket-topline {
-      align-items: center;
-      display: flex;
-      gap: 8px;
-      justify-content: space-between;
-      min-width: 0;
-    }
-
-    #bw-zone-decoder .ticket-label {
+    #bw-zone-decoder .ticket-card small {
       color: var(--green);
       font-size: 10px;
       font-weight: 950;
       letter-spacing: 0.8px;
+      line-height: 1.2;
       text-transform: uppercase;
     }
 
-    #bw-zone-decoder .ticket-chip {
-      background: var(--green);
-      border-radius: 999px;
-      color: var(--yellow);
-      font-size: 11px;
-      font-weight: 950;
-      padding: 5px 9px;
-      white-space: nowrap;
-    }
-
-    #bw-zone-decoder .zone-track {
+    #bw-zone-decoder .ticket-zones {
       display: grid;
       gap: 6px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    #bw-zone-decoder .track-step {
+    #bw-zone-decoder .ticket-zones span {
       align-items: center;
-      background: rgba(255, 255, 255, 0.78);
-      border: 1px solid rgba(27, 94, 32, 0.16);
+      background: #fff;
+      border: 1px solid rgba(27, 94, 32, 0.18);
       border-radius: 999px;
-      color: var(--muted);
-      display: flex;
-      font-size: 11px;
-      font-weight: 900;
-      gap: 6px;
+      color: var(--green);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 950;
       justify-content: center;
-      min-height: 30px;
-      padding: 5px 6px;
+      min-height: 34px;
     }
 
-    #bw-zone-decoder .track-step::before {
-      background: var(--light);
-      border-radius: 999px;
-      content: "";
-      height: 8px;
-      width: 8px;
-    }
-
-    #bw-zone-decoder .track-step.is-active {
+    #bw-zone-decoder .ticket-zones span.is-city,
+    #bw-zone-decoder .ticket-zones span.is-c {
       background: var(--green);
       border-color: var(--green);
       color: #fff;
     }
 
-    #bw-zone-decoder .track-step.is-active::before {
-      background: var(--yellow);
+    #bw-zone-decoder .ticket-zones span.is-c {
+      color: var(--yellow);
     }
 
-    #bw-zone-decoder .result small {
-      color: var(--muted);
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
+    #bw-zone-decoder .icon-row {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
-    #bw-zone-decoder .result strong {
+    #bw-zone-decoder .icon-tile {
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 8px;
       color: var(--green);
-      display: block;
-      font-size: 32px;
+      display: grid;
+      font-size: 10px;
       font-weight: 950;
-      line-height: 1;
+      gap: 5px;
+      min-height: 64px;
+      padding: 8px;
+      place-items: center;
+      text-align: center;
     }
 
-    #bw-zone-decoder .result span {
-      color: var(--muted);
-      display: block;
-      font-size: 12.5px;
-      font-weight: 750;
-      line-height: 1.45;
+    #bw-zone-decoder .icon-tile b {
+      align-items: center;
+      background: var(--yellow);
+      border-radius: 999px;
+      color: var(--green);
+      display: inline-flex;
+      font-size: 13px;
+      height: 28px;
+      justify-content: center;
+      width: 28px;
     }
 
     #bw-zone-decoder .body {
@@ -232,291 +268,26 @@
       padding: 18px;
     }
 
-    #bw-zone-decoder .toolbar {
-      align-items: end;
-      display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    #bw-zone-decoder label {
-      color: var(--muted);
-      display: grid;
-      font-size: 11px;
-      font-weight: 900;
-      gap: 6px;
-      letter-spacing: 0.4px;
-      text-transform: uppercase;
-    }
-
-    #bw-zone-decoder select {
-      appearance: none;
+    #bw-zone-decoder .zone-map {
       background: #fff;
       border: 1px solid var(--border);
       border-radius: 8px;
-      color: var(--text);
-      min-height: 44px;
-      padding: 10px 34px 10px 12px;
-      width: 100%;
-    }
-
-    #bw-zone-decoder .zone-board {
       display: grid;
       gap: 10px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      padding: 14px;
     }
 
-    #bw-zone-decoder .zone-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      display: grid;
-      gap: 8px;
-      min-width: 0;
-      padding: 13px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    #bw-zone-decoder .zone-card::after {
-      background: var(--card-color, var(--light));
-      border-radius: 999px;
-      content: "";
-      height: 54px;
-      opacity: 0.16;
-      position: absolute;
-      right: -16px;
-      top: -16px;
-      width: 54px;
-    }
-
-    #bw-zone-decoder .zone-card.is-active {
-      border-color: var(--green);
-      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.08);
-    }
-
-    #bw-zone-decoder .zone-card strong {
+    #bw-zone-decoder .map-title {
       align-items: center;
-      color: var(--green);
       display: flex;
-      font-size: 15px;
-      font-weight: 950;
-      gap: 8px;
-      line-height: 1.1;
-      position: relative;
-      z-index: 1;
-    }
-
-    #bw-zone-decoder .zone-card strong span {
-      align-items: center;
-      background: var(--green);
-      border-radius: 999px;
-      color: var(--yellow);
-      display: inline-flex;
-      flex: 0 0 auto;
-      height: 30px;
-      justify-content: center;
-      width: 30px;
-    }
-
-    #bw-zone-decoder .zone-card p {
-      color: var(--muted);
-      font-size: 11.5px;
-      font-weight: 700;
-      line-height: 1.35;
-      margin: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    #bw-zone-decoder .grid {
-      display: grid;
-      gap: 16px;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.74fr);
-    }
-
-    #bw-zone-decoder .panel {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      min-width: 0;
-      overflow: hidden;
-    }
-
-    #bw-zone-decoder .panel-head {
-      background: linear-gradient(90deg, rgba(255, 230, 0, 0.34), rgba(124, 179, 66, 0.15));
-      border-bottom: 1px solid var(--border);
-      padding: 14px 16px;
-    }
-
-    #bw-zone-decoder .panel-head h3 {
-      color: var(--green);
-      font-size: 17px;
-      font-weight: 950;
-      line-height: 1.2;
-      margin: 0;
-    }
-
-    #bw-zone-decoder .panel-head p {
-      color: var(--muted);
-      font-size: 12.5px;
-      font-weight: 650;
-      line-height: 1.45;
-      margin: 5px 0 0;
-    }
-
-    #bw-zone-decoder .chips {
-      display: grid;
       gap: 10px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      padding: 14px;
-    }
-
-    #bw-zone-decoder .chip {
-      background: var(--cream);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--text);
-      cursor: pointer;
-      display: grid;
-      gap: 8px;
-      grid-template-columns: 42px 1fr;
-      min-height: 78px;
-      padding: 12px;
-      text-align: left;
-      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
-    }
-
-    #bw-zone-decoder .chip[aria-pressed="true"] {
-      background: #F3F9EA;
-      border-color: var(--green);
-      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.08);
-    }
-
-    #bw-zone-decoder .chip:focus-visible {
-      outline: 3px solid rgba(255, 230, 0, 0.9);
-      outline-offset: 2px;
-    }
-
-    #bw-zone-decoder .chip:hover {
-      transform: translateY(-1px);
-    }
-
-    #bw-zone-decoder .chip-icon {
-      align-items: center;
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      color: var(--green);
-      display: inline-flex;
-      font-size: 22px;
-      font-weight: 900;
-      height: 42px;
-      justify-content: center;
-      line-height: 1;
-      width: 42px;
-    }
-
-    #bw-zone-decoder .chip-text {
+      justify-content: space-between;
       min-width: 0;
     }
 
-    #bw-zone-decoder .chip b {
-      color: var(--green);
-      display: block;
-      font-size: 13px;
-      font-weight: 950;
-      line-height: 1.2;
-    }
-
-    #bw-zone-decoder .chip span {
-      color: var(--muted);
-      display: block;
-      font-size: 11.5px;
-      font-weight: 650;
-      line-height: 1.38;
-      margin-top: 5px;
-    }
-
-    #bw-zone-decoder .route {
-      display: grid;
-      gap: 12px;
-      padding: 14px;
-    }
-
-    #bw-zone-decoder .zone-strip {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      display: grid;
-      gap: 8px;
-      padding: 12px;
-    }
-
-    #bw-zone-decoder .line {
-      align-items: center;
-      display: grid;
-      gap: 10px;
-      grid-template-columns: 42px minmax(0, 1fr) auto;
-    }
-
-    #bw-zone-decoder .line .badge {
-      align-items: center;
-      background: var(--green);
-      border-radius: 999px;
-      color: var(--yellow);
-      display: inline-flex;
-      font-size: 13px;
-      font-weight: 950;
-      height: 42px;
-      justify-content: center;
-      width: 42px;
-    }
-
-    #bw-zone-decoder .line-copy {
-      display: grid;
-      gap: 4px;
-      min-width: 0;
-    }
-
-    #bw-zone-decoder .line b {
-      color: var(--text);
-      display: block;
-      font-size: 13px;
-      font-weight: 900;
-      line-height: 1.2;
-    }
-
-    #bw-zone-decoder .line-copy span {
-      color: var(--muted);
-      display: block;
-      font-size: 11.5px;
-      font-weight: 700;
-      line-height: 1.3;
-    }
-
-    #bw-zone-decoder .line .pill {
-      background: rgba(124, 179, 66, 0.16);
-      border: 1px solid rgba(124, 179, 66, 0.36);
-      border-radius: 999px;
-      color: var(--green);
-      display: inline-flex;
-      font-size: 11px;
-      font-weight: 950;
-      padding: 5px 8px;
-      white-space: nowrap;
-    }
-
-    #bw-zone-decoder .advice {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      display: grid;
-      gap: 10px;
-      padding: 14px;
-    }
-
-    #bw-zone-decoder .advice h3 {
+    #bw-zone-decoder .map-title h3,
+    #bw-zone-decoder .choices h3,
+    #bw-zone-decoder .result-panel h3 {
       color: var(--green);
       font-size: 18px;
       font-weight: 950;
@@ -524,50 +295,340 @@
       margin: 0;
     }
 
-    #bw-zone-decoder .advice p,
-    #bw-zone-decoder .advice li {
+    #bw-zone-decoder .map-title span {
       color: var(--muted);
-      font-size: 12.5px;
-      font-weight: 650;
-      line-height: 1.5;
-      margin: 0;
+      font-size: 11px;
+      font-weight: 900;
+      line-height: 1.25;
+      text-align: right;
     }
 
-    #bw-zone-decoder .advice ul {
-      display: grid;
-      gap: 7px;
-      margin: 0;
-      padding-left: 18px;
-    }
-
-    #bw-zone-decoder .fare-grid {
+    #bw-zone-decoder .zone-lanes {
       display: grid;
       gap: 8px;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    #bw-zone-decoder .fare {
-      background: var(--cream);
+    #bw-zone-decoder .zone-lane {
+      align-items: center;
+      background: var(--soft);
       border: 1px solid var(--border);
       border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 50px minmax(0, 1fr) 88px;
+      min-height: 70px;
+      overflow: hidden;
       padding: 10px;
     }
 
-    #bw-zone-decoder .fare small {
-      color: var(--muted);
-      display: block;
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
+    #bw-zone-decoder .zone-lane[data-zone="c"] {
+      background: #FFF4F2;
+      border-color: rgba(230, 57, 70, 0.24);
     }
 
-    #bw-zone-decoder .fare strong {
-      color: var(--green);
-      display: block;
-      font-size: 19px;
+    #bw-zone-decoder .zone-letter {
+      align-items: center;
+      background: var(--green);
+      border-radius: 999px;
+      color: var(--yellow);
+      display: inline-flex;
+      font-size: 20px;
       font-weight: 950;
-      margin-top: 2px;
+      height: 48px;
+      justify-content: center;
+      width: 48px;
+    }
+
+    #bw-zone-decoder .zone-copy {
+      display: grid;
+      gap: 3px;
+      min-width: 0;
+    }
+
+    #bw-zone-decoder .zone-copy b {
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-zone-decoder .zone-copy span {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    #bw-zone-decoder .zone-photo {
+      border-radius: 8px;
+      height: 54px;
+      object-fit: cover;
+      width: 88px;
+    }
+
+    #bw-zone-decoder .choices {
+      display: grid;
+      gap: 12px;
+    }
+
+    #bw-zone-decoder .choice-head {
+      align-items: end;
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+    }
+
+    #bw-zone-decoder .choice-head p {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.4;
+      margin: 0;
+      max-width: 520px;
+      text-align: right;
+    }
+
+    #bw-zone-decoder .choice-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-zone-decoder .choice {
+      align-items: stretch;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: 112px minmax(0, 1fr);
+      min-height: 112px;
+      overflow: hidden;
+      padding: 0;
+      text-align: left;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    #bw-zone-decoder .choice:hover {
+      transform: translateY(-1px);
+    }
+
+    #bw-zone-decoder .choice:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.94);
+      outline-offset: 2px;
+    }
+
+    #bw-zone-decoder .choice[aria-pressed="true"] {
+      border-color: var(--green);
+      box-shadow: 0 0 0 2px rgba(27, 94, 32, 0.1), 0 10px 22px rgba(27, 94, 32, 0.08);
+    }
+
+    #bw-zone-decoder .choice-image {
+      background: var(--green);
+      min-width: 0;
+      position: relative;
+    }
+
+    #bw-zone-decoder .choice-image img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    #bw-zone-decoder .zone-badge {
+      align-items: center;
+      background: var(--green);
+      border: 2px solid #fff;
+      border-radius: 999px;
+      color: var(--yellow);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 950;
+      height: 42px;
+      justify-content: center;
+      left: 10px;
+      position: absolute;
+      top: 10px;
+      width: 42px;
+    }
+
+    #bw-zone-decoder .zone-badge.is-wide {
+      font-size: 11px;
+      width: 58px;
+    }
+
+    #bw-zone-decoder .choice-copy {
+      display: grid;
+      gap: 6px;
+      min-width: 0;
+      padding: 12px;
+      place-content: center start;
+    }
+
+    #bw-zone-decoder .choice-copy b {
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 950;
+      line-height: 1.15;
+    }
+
+    #bw-zone-decoder .choice-copy span {
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    #bw-zone-decoder .result-panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 14px;
+      min-height: 210px;
+      padding: 16px;
+    }
+
+    #bw-zone-decoder .result-panel.is-empty {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.16), rgba(197, 225, 165, 0.2)),
+        #fff;
+      place-items: center;
+      text-align: center;
+    }
+
+    #bw-zone-decoder .empty-state {
+      display: grid;
+      gap: 8px;
+      max-width: 520px;
+    }
+
+    #bw-zone-decoder .empty-state b {
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-zone-decoder .empty-state span {
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    #bw-zone-decoder .answer-grid {
+      align-items: stretch;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(190px, 0.42fr) minmax(0, 1fr);
+    }
+
+    #bw-zone-decoder .answer-ticket {
+      background:
+        radial-gradient(circle at 18px 50%, rgba(255, 255, 255, 0.95) 0 7px, transparent 8px),
+        radial-gradient(circle at calc(100% - 18px) 50%, rgba(255, 255, 255, 0.95) 0 7px, transparent 8px),
+        linear-gradient(135deg, var(--green), #2F7B25);
+      border-radius: 8px;
+      color: #fff;
+      display: grid;
+      gap: 10px;
+      min-height: 190px;
+      overflow: hidden;
+      padding: 18px;
+      position: relative;
+    }
+
+    #bw-zone-decoder .answer-ticket::after {
+      background: rgba(255, 230, 0, 0.2);
+      border-radius: 999px;
+      content: "";
+      height: 120px;
+      position: absolute;
+      right: -38px;
+      top: -38px;
+      width: 120px;
+    }
+
+    #bw-zone-decoder .answer-ticket small {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    #bw-zone-decoder .answer-ticket strong {
+      color: #fff;
+      font-size: 54px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 0.95;
+      z-index: 1;
+    }
+
+    #bw-zone-decoder .answer-ticket strong.is-wide {
+      font-size: 34px;
+      line-height: 1.05;
+    }
+
+    #bw-zone-decoder .answer-ticket span {
+      color: #EAF7DF;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.35;
+      z-index: 1;
+    }
+
+    #bw-zone-decoder .answer-copy {
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    #bw-zone-decoder .answer-copy p {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    #bw-zone-decoder .why-list {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-zone-decoder .why-list li {
+      align-items: start;
+      color: var(--text);
+      display: grid;
+      font-size: 12.5px;
+      font-weight: 760;
+      gap: 8px;
+      grid-template-columns: 26px minmax(0, 1fr);
+      line-height: 1.4;
+      list-style: none;
+    }
+
+    #bw-zone-decoder .why-list li::before {
+      align-items: center;
+      background: var(--yellow);
+      border-radius: 999px;
+      color: var(--green);
+      content: attr(data-icon);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 950;
+      height: 24px;
+      justify-content: center;
+      margin-top: -2px;
+      width: 24px;
     }
 
     #bw-zone-decoder .reset {
@@ -577,15 +638,16 @@
       color: #fff;
       cursor: pointer;
       font-size: 12px;
-      font-weight: 900;
+      font-weight: 950;
+      justify-self: start;
       min-height: 44px;
+      min-width: 156px;
       padding: 10px 14px;
     }
 
-    #bw-zone-decoder .advice .reset {
-      justify-self: start;
-      margin-top: 2px;
-      min-width: 170px;
+    #bw-zone-decoder .reset:hover,
+    #bw-zone-decoder .reset:focus-visible {
+      background: #124818;
     }
 
     @media (max-width: 760px) {
@@ -593,15 +655,11 @@
         margin: 12px 0;
       }
 
-      #bw-zone-decoder .hero,
-      #bw-zone-decoder .toolbar,
-      #bw-zone-decoder .grid,
-      #bw-zone-decoder .zone-board {
+      #bw-zone-decoder .hero {
         grid-template-columns: 1fr;
       }
 
-      #bw-zone-decoder .hero {
-        min-height: 0;
+      #bw-zone-decoder .hero-copy {
         padding: 22px 18px;
       }
 
@@ -609,111 +667,194 @@
         font-size: 28px;
       }
 
+      #bw-zone-decoder .mini-rule {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      #bw-zone-decoder .mini-rule span {
+        font-size: 10px;
+        min-height: 46px;
+        padding: 8px 6px;
+      }
+
+      #bw-zone-decoder .mini-rule b {
+        font-size: 13px;
+      }
+
+      #bw-zone-decoder .hero-visual {
+        min-height: 166px;
+      }
+
+      #bw-zone-decoder .ticket-stack {
+        bottom: 14px;
+        right: 14px;
+        width: calc(100% - 28px);
+      }
+
       #bw-zone-decoder .body {
         padding: 14px;
       }
 
-      #bw-zone-decoder .line {
-        grid-template-columns: 42px minmax(0, 1fr);
+      #bw-zone-decoder .map-title,
+      #bw-zone-decoder .choice-head {
+        align-items: start;
+        display: grid;
       }
 
-      #bw-zone-decoder .line .pill {
-        grid-column: 2;
-        justify-self: start;
+      #bw-zone-decoder .map-title span,
+      #bw-zone-decoder .choice-head p {
+        text-align: left;
+      }
+
+      #bw-zone-decoder .zone-lanes {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      #bw-zone-decoder .zone-lane {
+        align-content: start;
+        gap: 7px;
+        grid-template-columns: 1fr;
+        min-height: 120px;
+        padding: 9px;
+      }
+
+      #bw-zone-decoder .zone-photo {
+        display: none;
+      }
+
+      #bw-zone-decoder .zone-letter {
+        height: 38px;
+        width: 38px;
+      }
+
+      #bw-zone-decoder .choice {
+        display: grid;
+        grid-template-columns: 1fr;
+        min-height: 0;
+      }
+
+      #bw-zone-decoder .choice-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-zone-decoder .choice-image {
+        height: 64px;
+      }
+
+      #bw-zone-decoder .choice-copy {
+        min-height: 74px;
+        padding: 10px;
+        place-content: start;
+      }
+
+      #bw-zone-decoder .choice-copy span {
+        display: none;
+      }
+
+      #bw-zone-decoder .zone-badge {
+        height: 34px;
+        left: 8px;
+        top: 8px;
+        width: 34px;
+      }
+
+      #bw-zone-decoder .zone-badge.is-wide {
+        width: 48px;
+      }
+
+      #bw-zone-decoder .answer-ticket {
+        align-content: center;
+        min-height: 128px;
+        padding: 14px;
+      }
+
+      #bw-zone-decoder .answer-grid {
+        grid-template-columns: 118px minmax(0, 1fr);
+      }
+
+      #bw-zone-decoder .answer-copy p {
+        font-size: 12px;
+      }
+
+      #bw-zone-decoder .why-list li {
+        font-size: 11.5px;
+        grid-template-columns: 22px minmax(0, 1fr);
+      }
+
+      #bw-zone-decoder .why-list li::before {
+        height: 20px;
+        width: 20px;
+      }
+
+      #bw-zone-decoder .why-list li:nth-child(3) {
+        display: none;
+      }
+
+      #bw-zone-decoder .answer-ticket strong {
+        font-size: 36px;
+      }
+
+      #bw-zone-decoder .answer-ticket strong.is-wide {
+        font-size: 24px;
       }
     }
 
-    @media (max-width: 360px) {
-      #bw-zone-decoder .chips {
-        grid-template-columns: 1fr;
+    @media (max-width: 390px) {
+      #bw-zone-decoder .choice-copy b {
+        font-size: 13px;
+      }
+
+      #bw-zone-decoder .choice-copy span {
+        font-size: 11px;
       }
     }
   </style>
 
   <section class="shell" aria-label="Berlin Zone Ticket Decoder">
     <div class="hero">
-      <div>
+      <div class="hero-copy">
         <p class="kicker">BerlinWalk tool</p>
         <h2>Berlin Zone Ticket Decoder</h2>
-        <p>Build a tourist day from city sights, BER Airport, Potsdam and other common stops. The tool tells you whether AB is enough or ABC is the safer ticket zone.</p>
+        <p>Pick the farthest place in your day. The answer appears at the end, where you can see the zone ticket to buy.</p>
+        <div class="mini-rule" aria-label="Berlin ticket zone rule">
+          <span><b>AB</b>Berlin city</span>
+          <span><b>ABC</b>Airport and Potsdam</span>
+          <span><b>Route app</b>Other cities</span>
+        </div>
       </div>
-      <div class="result" aria-live="polite">
-        <small>Current recommendation</small>
-        <strong data-zone-result>AB</strong>
-        <span data-zone-copy>City sightseeing only. Stay with AB unless your route leaves Berlin city.</span>
-        <div class="ticket-face" aria-hidden="true">
-          <div class="ticket-topline">
-            <span class="ticket-label">Ticket zone</span>
-            <span class="ticket-chip" data-ticket-chip>AB</span>
-          </div>
-          <div class="zone-track" data-zone-track>
-            <span class="track-step is-active" data-track-zone="A">A</span>
-            <span class="track-step is-active" data-track-zone="B">B</span>
-            <span class="track-step" data-track-zone="C">C</span>
+      <div class="hero-visual" aria-hidden="true">
+        <img src="../blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized/01-berlin-ab-abc-ticket-zones-cover.jpg" alt="">
+        <div class="ticket-stack">
+          <div class="ticket-card">
+            <small>Fare zones</small>
+            <div class="ticket-zones">
+              <span class="is-city">A</span>
+              <span class="is-city">B</span>
+              <span class="is-c">C</span>
+            </div>
+            <div class="icon-row">
+              <span class="icon-tile"><b>U</b>Centre</span>
+              <span class="icon-tile"><b>S</b>City</span>
+              <span class="icon-tile"><b>C</b>Airport</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="body">
-      <div class="toolbar">
-        <label>
-          Day shape
-          <select data-day-shape>
-            <option value="city">City sightseeing day</option>
-            <option value="arrival">Arrival or departure day</option>
-            <option value="daytrip">Day trip from Berlin</option>
-          </select>
-        </label>
-        <label>
-          Group
-          <select data-group>
-            <option value="solo">1 adult</option>
-            <option value="pair">2 adults</option>
-            <option value="group">3 to 5 people together</option>
-          </select>
-        </label>
+      <div class="choices">
+        <div class="choice-head">
+          <h3>Farthest stop in your day</h3>
+          <p>Choose one. City-only means AB; airport, Potsdam or Oranienburg means ABC.</p>
+        </div>
+        <div class="choice-grid" data-choices></div>
       </div>
 
-      <div class="zone-board" data-zone-board aria-label="Berlin fare zone visual guide">
-        <div class="zone-card is-active" data-zone-card="A" style="--card-color:#FFE600">
-          <strong><span>A</span> Central sights</strong>
-          <p>Ringbahn core, Museum Island, Alexanderplatz and the historic centre.</p>
-        </div>
-        <div class="zone-card is-active" data-zone-card="B" style="--card-color:#7CB342">
-          <strong><span>B</span> Berlin city</strong>
-          <p>Most hotels, neighborhoods and everyday visitor routes inside Berlin.</p>
-        </div>
-        <div class="zone-card" data-zone-card="C" style="--card-color:#E63946">
-          <strong><span>C</span> Airport & day trips</strong>
-          <p>BER Airport, Potsdam, Oranienburg and common zone C mistakes.</p>
-        </div>
-      </div>
-
-      <div class="grid">
-        <div class="panel">
-          <div class="panel-head">
-            <h3>Add the stops in your day</h3>
-            <p>Tap every destination that appears in your real plan. If any zone C stop is active, the result changes.</p>
-          </div>
-          <div class="chips" data-chips></div>
-        </div>
-
-        <div class="panel">
-          <div class="panel-head">
-            <h3>Your route logic</h3>
-            <p>Use this before buying in the app or at a machine. It is a zone sanity check, not a live fare sale.</p>
-          </div>
-          <div class="route">
-            <div class="zone-strip" data-zone-strip></div>
-            <div class="advice">
-              <h3 data-advice-title>AB is enough for this route.</h3>
-              <p data-advice-body>Normal central Berlin sightseeing stays inside AB. Buy before boarding and validate paper tickets.</p>
-              <div class="fare-grid" data-fares></div>
-              <ul data-tips></ul>
-              <button class="reset" type="button" data-reset>Reset route</button>
-            </div>
-          </div>
+      <div class="result-panel is-empty" data-result-panel aria-live="polite">
+        <div class="empty-state">
+          <b>Your ticket answer will appear here.</b>
+          <span>The result stays after the choices so the top of the tool does not give advice before your route is clear.</span>
         </div>
       </div>
     </div>
@@ -724,158 +865,127 @@
       var root = document.getElementById('bw-zone-decoder');
       if (!root) return;
 
-      var stops = [
-        { id: 'center', label: 'Historic centre', note: 'Alexanderplatz, Museum Island, Brandenburg Gate', zone: 'AB', icon: 'A', defaultOn: true },
-        { id: 'hotel', label: 'Hotel inside Berlin', note: 'Most visitor hotels and neighborhoods', zone: 'AB', icon: 'H', defaultOn: true },
-        { id: 'east', label: 'East Side Gallery or Zoo', note: 'Still normal Berlin city travel', zone: 'AB', icon: 'E' },
-        { id: 'ber', label: 'BER Airport', note: 'Airport station is in zone C', zone: 'ABC', icon: 'BER', hot: true },
-        { id: 'potsdam', label: 'Potsdam', note: 'Sanssouci and Potsdam city are zone C', zone: 'ABC', icon: 'P' },
-        { id: 'oranienburg', label: 'Oranienburg / Sachsenhausen', note: 'Memorial route goes beyond Berlin city', zone: 'ABC', icon: 'O', hot: true },
-        { id: 'regional', label: 'Dresden, Leipzig or Spreewald', note: 'Not solved by a normal Berlin city ticket', zone: 'REGIONAL', icon: 'R', hot: true },
-        { id: 'edge', label: 'Unsure edge hotel', note: 'Check the exact station in BVG/VBB first', zone: 'CHECK', icon: '?' }
+      var imageBase = '../blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized/';
+      var choices = [
+        {
+          id: 'city',
+          zone: 'AB',
+          badge: 'AB',
+          label: 'Berlin city only',
+          note: 'Historic centre, Museum Island, Alexanderplatz, Zoo, East Side Gallery.',
+          image: imageBase + '02-sbahn-hauptbahnhof-berlin.jpg',
+          title: 'Buy AB',
+          ticketNote: 'Berlin city ticket',
+          body: 'AB is enough for normal sightseeing inside Berlin city. This covers the historic centre and most visitor hotels.',
+          bullets: ['A+B cover central Berlin and the rest of the city.', 'BER Airport, Potsdam and Oranienburg are not city-only stops.', 'Paper tickets still need validation before travel.']
+        },
+        {
+          id: 'zone-c',
+          zone: 'ABC',
+          badge: 'ABC',
+          label: 'Airport, Potsdam, Oranienburg',
+          note: 'BER Airport, Potsdam/Sanssouci, Sachsenhausen or Oranienburg.',
+          image: imageBase + '03-ber-airport-station-zone-c.jpg',
+          title: 'Buy ABC',
+          ticketNote: 'Zone C stop included',
+          body: 'If your day includes BER Airport, Potsdam or Oranienburg, buy ABC. It covers A, B and C in one ticket.',
+          bullets: ['ABC includes A, B and C in one ticket.', 'This is the common airport-zone mistake.', 'If you already have AB, check whether an extension ticket fits a single extra leg.']
+        },
+        {
+          id: 'regional',
+          zone: 'ROUTE',
+          badge: 'DB',
+          label: 'Dresden, Leipzig, Spreewald',
+          note: 'A wider day trip beyond the Berlin fare-zone decision.',
+          image: imageBase + '02-sbahn-hauptbahnhof-berlin.jpg',
+          title: 'Use route app',
+          ticketNote: 'Beyond AB/ABC',
+          body: 'This is no longer a simple Berlin AB or ABC decision. Use DB, VBB or BVG route results before paying.',
+          bullets: ['Berlin city tickets do not automatically cover another city.', 'Deutschlandticket rules depend on train type.', 'Do not use ICE, IC or EC trains with a local-only ticket.']
+        },
+        {
+          id: 'edge',
+          zone: 'CHECK',
+          badge: '?',
+          label: 'Unsure edge hotel',
+          note: 'Hotel or station near the city boundary.',
+          image: imageBase + '04-bvg-ticket-machine.jpg',
+          title: 'Check station',
+          ticketNote: 'Exact stop matters',
+          body: 'Most hotels are inside AB, but edge cases exist. Search the exact station name in BVG or VBB before buying.',
+          bullets: ['Do not guess from the neighborhood name alone.', 'If BER, Potsdam or Oranienburg appears, switch to ABC.', 'Use the official route result when the station is near the boundary.']
+        }
       ];
 
-      var selected = new Set(stops.filter(function (stop) { return stop.defaultOn; }).map(function (stop) { return stop.id; }));
-      var chips = root.querySelector('[data-chips]');
-      var strip = root.querySelector('[data-zone-strip]');
-      var result = root.querySelector('[data-zone-result]');
-      var resultCopy = root.querySelector('[data-zone-copy]');
-      var adviceTitle = root.querySelector('[data-advice-title]');
-      var adviceBody = root.querySelector('[data-advice-body]');
-      var fares = root.querySelector('[data-fares]');
-      var tips = root.querySelector('[data-tips]');
-      var dayShape = root.querySelector('[data-day-shape]');
-      var group = root.querySelector('[data-group]');
-      var ticketChip = root.querySelector('[data-ticket-chip]');
-      var trackSteps = Array.prototype.slice.call(root.querySelectorAll('[data-track-zone]'));
-      var zoneCards = Array.prototype.slice.call(root.querySelectorAll('[data-zone-card]'));
+      var selected = null;
+      var choicesEl = root.querySelector('[data-choices]');
+      var resultPanel = root.querySelector('[data-result-panel]');
 
-      function buttonFor(stop) {
-        var button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'chip';
-        button.setAttribute('aria-pressed', selected.has(stop.id) ? 'true' : 'false');
-        button.dataset.stop = stop.id;
-        button.innerHTML = '<span class="chip-icon" aria-hidden="true">' + stop.icon + '</span><span class="chip-text"><b>' + stop.label + '</b><span>' + stop.note + '</span></span>';
-        button.addEventListener('click', function () {
-          if (selected.has(stop.id)) selected.delete(stop.id);
-          else selected.add(stop.id);
-          update();
-        });
-        return button;
-      }
-
-      function zoneState() {
-        var active = stops.filter(function (stop) { return selected.has(stop.id); });
-        if (active.some(function (stop) { return stop.zone === 'REGIONAL'; })) return 'REGIONAL';
-        if (active.some(function (stop) { return stop.zone === 'ABC'; })) return 'ABC';
-        if (active.some(function (stop) { return stop.zone === 'CHECK'; })) return 'CHECK';
-        return 'AB';
-      }
-
-      function fareHtml(zone) {
-        var price = zone === 'ABC' ? ['EUR 5.00', 'EUR 12.90'] : ['EUR 4.00', 'EUR 11.20'];
-        return [
-          '<div class="fare"><small>Single ticket ' + zone + '</small><strong>' + price[0] + '</strong></div>',
-          '<div class="fare"><small>24-hour ticket ' + zone + '</small><strong>' + price[1] + '</strong></div>'
-        ].join('');
-      }
-
-      function renderStrip() {
-        var active = stops.filter(function (stop) { return selected.has(stop.id); });
-        if (!active.length) active = [stops[0]];
-        strip.innerHTML = active.map(function (stop) {
-          var pill = stop.zone === 'REGIONAL' ? 'Regional' : stop.zone === 'CHECK' ? 'Check' : stop.zone;
-          return '<div class="line"><span class="badge">' + pill[0] + '</span><div class="line-copy"><b>' + stop.label + '</b><span>' + stop.note + '</span></div><span class="pill">' + pill + '</span></div>';
-        }).join('');
-      }
-
-      function renderZoneVisual(zone) {
-        var visibleZone = zone === 'REGIONAL' ? 'Route app' : zone === 'CHECK' ? 'Check' : zone;
-        ticketChip.textContent = visibleZone;
-        trackSteps.forEach(function (step) {
-          var stepZone = step.dataset.trackZone;
-          var active = stepZone === 'A' || stepZone === 'B' || zone === 'ABC' || zone === 'REGIONAL';
-          step.classList.toggle('is-active', active);
-        });
-        zoneCards.forEach(function (card) {
-          var cardZone = card.dataset.zoneCard;
-          var active = cardZone === 'A' || cardZone === 'B' || zone === 'ABC' || zone === 'REGIONAL';
-          card.classList.toggle('is-active', active);
-        });
-      }
-
-      function setAdvice(zone) {
-        var shape = dayShape.value;
-        var people = group.value;
-        var title = '';
-        var body = '';
-        var list = [];
-
-        if (zone === 'REGIONAL') {
-          result.textContent = 'Check DB/VBB';
-          resultCopy.textContent = 'This route leaves the normal Berlin AB/ABC decision. Use the route result before buying.';
-          title = 'This is not just an AB or ABC day.';
-          body = 'Dresden, Leipzig, Spreewald and similar trips need regional or long-distance ticket logic. Check the route result in DB, VBB or BVG before paying.';
-          fares.innerHTML = '<div class="fare"><small>Berlin ticket</small><strong>Not enough</strong></div><div class="fare"><small>Next step</small><strong>Route app</strong></div>';
-          list = ['Do not assume a Berlin city ticket covers Brandenburg or Saxony trips.', 'Deutschlandticket can help on regional/local trains, but not ICE, IC or EC trains.', 'Buy the ticket type shown by the official route result.'];
-        } else if (zone === 'ABC') {
-          result.textContent = 'ABC';
-          resultCopy.textContent = 'At least one selected stop is in zone C. Buy ABC unless an extension ticket clearly fits a single extra leg.';
-          title = 'ABC is the safe tourist choice here.';
-          body = shape === 'arrival'
-            ? 'Airport days are where most zone mistakes happen. BER is in zone C, so central Berlin to or from BER needs ABC.'
-            : 'Your route includes a zone C destination such as BER, Potsdam or Oranienburg. ABC covers A, B and C in one ticket.';
-          fares.innerHTML = fareHtml('ABC');
-          list = ['If you already hold AB and only make one C-zone leg, check the extension ticket.', 'For repeated rides in 24 hours, compare the 24-hour ABC ticket.', 'Paper tickets still need validation before travel.'];
-        } else if (zone === 'CHECK') {
-          result.textContent = 'Check stop';
-          resultCopy.textContent = 'Your route may still be AB, but verify the exact station before buying.';
-          title = 'Check the exact station name first.';
-          body = 'Most Berlin hotels are AB, but edge cases exist. Search the station in the official route app and buy the zone combination it shows.';
-          fares.innerHTML = fareHtml('AB');
-          list = ['Do not guess from neighborhood names alone.', 'If BER, Potsdam or Oranienburg appears later in the day, switch to ABC.', 'Use the app result when your hotel is near the city boundary.'];
-        } else {
-          result.textContent = 'AB';
-          resultCopy.textContent = 'City sightseeing only. Stay with AB unless your route leaves Berlin city.';
-          title = 'AB is enough for this route.';
-          body = 'Normal central Berlin sightseeing stays inside AB. This covers most first-day visitor routes, including the BerlinWalk meeting point at Alexanderplatz.';
-          fares.innerHTML = fareHtml('AB');
-          list = ['Three or more rides often make a 24-hour ticket easier.', 'Airport, Potsdam or Oranienburg changes this to ABC.', 'Buy before boarding and validate paper tickets.'];
-        }
-
-        if (people === 'group' && zone !== 'REGIONAL') {
-          list.unshift('For 3 to 5 people traveling together, check the small-group 24-hour ticket before buying individual tickets.');
-        }
-
-        renderZoneVisual(zone);
-        adviceTitle.textContent = title;
-        adviceBody.textContent = body;
-        tips.innerHTML = list.map(function (item) { return '<li>' + item + '</li>'; }).join('');
-      }
-
-      function update() {
-        chips.querySelectorAll('[data-stop]').forEach(function (button) {
-          button.setAttribute('aria-pressed', selected.has(button.dataset.stop) ? 'true' : 'false');
-        });
-        var zone = zoneState();
-        renderStrip();
-        setAdvice(zone);
+      function resize() {
         if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.resize === 'function') {
           window.BerlinWalkBrand.resize();
         }
       }
 
-      stops.forEach(function (stop) { chips.appendChild(buttonFor(stop)); });
-      root.querySelector('[data-reset]').addEventListener('click', function () {
-        selected = new Set(['center', 'hotel']);
-        dayShape.value = 'city';
-        group.value = 'solo';
-        update();
+      function renderChoices() {
+        choicesEl.innerHTML = choices.map(function (choice) {
+          var wide = choice.badge.length > 2 ? ' is-wide' : '';
+          return [
+            '<button class="choice" type="button" data-choice="' + choice.id + '" aria-pressed="' + (selected === choice.id ? 'true' : 'false') + '">',
+            '<span class="choice-image"><img src="' + choice.image + '" alt=""><span class="zone-badge' + wide + '">' + choice.badge + '</span></span>',
+            '<span class="choice-copy"><b>' + choice.label + '</b><span>' + choice.note + '</span></span>',
+            '</button>'
+          ].join('');
+        }).join('');
+      }
+
+      function emptyResult() {
+        resultPanel.className = 'result-panel is-empty';
+        resultPanel.innerHTML = '<div class="empty-state"><b>Your ticket answer will appear here.</b><span>The result stays after the choices so the top of the tool does not give advice before your route is clear.</span></div>';
+      }
+
+      function renderResult(choice) {
+        var zoneClass = choice.zone === 'ROUTE' || choice.zone === 'CHECK' ? 'is-wide' : '';
+        resultPanel.className = 'result-panel';
+        resultPanel.innerHTML = [
+          '<div class="answer-grid">',
+          '<div class="answer-ticket">',
+          '<small>Result</small>',
+          '<strong class="' + zoneClass + '">' + choice.title.replace('Buy ', '') + '</strong>',
+          '<span>' + choice.ticketNote + '</span>',
+          '</div>',
+          '<div class="answer-copy">',
+          '<h3>' + choice.title + '</h3>',
+          '<p>' + choice.body + '</p>',
+          '<ul class="why-list">' + choice.bullets.map(function (item, index) {
+            return '<li data-icon="' + (index + 1) + '">' + item + '</li>';
+          }).join('') + '</ul>',
+          '<button class="reset" type="button" data-reset>Reset route</button>',
+          '</div>',
+          '</div>'
+        ].join('');
+      }
+
+      choicesEl.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-choice]');
+        if (!button) return;
+        selected = button.dataset.choice;
+        renderChoices();
+        renderResult(choices.find(function (choice) { return choice.id === selected; }));
+        resize();
       });
-      dayShape.addEventListener('change', update);
-      group.addEventListener('change', update);
-      update();
+
+      resultPanel.addEventListener('click', function (event) {
+        if (!event.target.closest('[data-reset]')) return;
+        selected = null;
+        renderChoices();
+        emptyResult();
+        resize();
+      });
+
+      renderChoices();
+      emptyResult();
+      resize();
     })();
   </script>
 </div>
