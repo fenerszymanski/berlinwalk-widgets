@@ -1,8 +1,8 @@
 [
   {
     "slug": "spati-survival-checker",
-    "title": "Sp\u00e4ti Survival Checker",
-    "lead": "Not sure if a Berlin Sp\u00e4ti solves your problem? Check whether you need a Sp\u00e4ti, station shop, pharmacy, toilet finder, or supermarket.",
+    "title": "Späti Survival Checker",
+    "lead": "Not sure if a Berlin Späti solves your problem? Check whether you need a Späti, station shop, pharmacy, toilet finder, or supermarket.",
     "category": "Maps",
     "image": "https://static.wixstatic.com/media/5a08a3_e69c51f5c7644ff69fc6b7302afd3c7e~mv2.jpg/v1/fill/w_320,h_320,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-spati-kreuzberg-cover.jpg",
     "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/spati-survival-checker/",
@@ -181,7 +181,7 @@
   {
     "slug": "berlin-luggage-storage",
     "title": "Berlin Luggage Storage Map",
-    "lead": "Find the nearest place to drop your suitcase in Berlin: stations, the Hauptbahnhof Gep\u00e4ckcenter, the airport, and app pickup zones.",
+    "lead": "Find the nearest place to drop your suitcase in Berlin: stations, the Hauptbahnhof Gepäckcenter, the airport, and app pickup zones.",
     "category": "Maps",
     "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/luggage-storage-map/",
     "embedHeight": 640,
@@ -226,7 +226,7 @@
   {
     "slug": "medieval-berlin-mini-walk",
     "title": "Medieval Berlin Mini Walk Planner",
-    "lead": "Trace Berlin and C\u00f6lln around Alexanderplatz, Nikolaiviertel, Museum Island and the old city wall.",
+    "lead": "Trace Berlin and Cölln around Alexanderplatz, Nikolaiviertel, Museum Island and the old city wall.",
     "category": "Discovery",
     "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/medieval-berlin-mini-walk/",
     "embedHeight": 760
@@ -252,7 +252,7 @@
   {
     "slug": "whats-open-in-berlin-today",
     "title": "What's Open in Berlin Today",
-    "lead": "Live daily check: today's date, public holidays, what's open and closed across Berlin \u2014 supermarkets, museums, transport, banks.",
+    "lead": "Live daily check: today's date, public holidays, what's open and closed across Berlin — supermarkets, museums, transport, banks.",
     "category": "Maps",
     "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/whats-open-in-berlin-today-160.png",
     "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-today/",
@@ -289,7 +289,7 @@
   {
     "slug": "free-berlin-audio-tour",
     "title": "Berlin in 9 Minutes (Free Audio Tour)",
-    "lead": "A 9-minute audio walk from Alexanderplatz to Hackescher Markt \u2014 recorded by the guide who leads the free tour every day at 11:30.",
+    "lead": "A 9-minute audio walk from Alexanderplatz to Hackescher Markt — recorded by the guide who leads the free tour every day at 11:30.",
     "category": "Discovery",
     "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/free-berlin-audio-tour-160.png",
     "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/audio-tour/",
@@ -325,7 +325,7 @@
   {
     "slug": "berlin-pools",
     "title": "Berlin Swimming Pools Map",
-    "lead": "Find the right Berlin pool \u2014 indoor, outdoor, family, lap-swimming.",
+    "lead": "Find the right Berlin pool — indoor, outdoor, family, lap-swimming.",
     "category": "Discovery",
     "image": "https://static.wixstatic.com/media/5a08a3_660274d9cff941f09efefd3eb6ba304d~mv2.png",
     "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pools-map/",
@@ -397,7 +397,7 @@
   {
     "slug": "berlin-wall-remnants",
     "title": "Berlin Wall Remnants Map",
-    "lead": "Find where to see the Berlin Wall today \u2014 8 sites mapped with addresses, transport, and what's actually there.",
+    "lead": "Find where to see the Berlin Wall today — 8 sites mapped with addresses, transport, and what's actually there.",
     "category": "Discovery",
     "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-map/",
     "embedHeight": 660,
@@ -446,5 +446,14 @@
     "category": "Money",
     "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-pfand-calculator/",
     "embedHeight": 760
+  },
+  {
+    "slug": "berlin-last-day-buffer-planner",
+    "title": "Berlin Last-Day Buffer Planner",
+    "lead": "Build a calm final Berlin plan before a flight, train or bus: luggage first, one close city anchor, then a safe departure buffer.",
+    "category": "Discovery",
+    "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-last-day-buffer-planner/",
+    "embedHeight": 1280,
+    "image": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-last-day-buffer-planner-160.png"
   }
 ]

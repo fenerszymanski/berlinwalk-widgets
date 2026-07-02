@@ -1,0 +1,706 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Last-Day Buffer Planner | BerlinWalk</title>
+  <meta name="description" content="Build a calm Berlin last-day plan before a flight, train or bus departure: luggage, final city anchor, transit and safe buffer.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-green-2: #2f7a34;
+      --bw-lime: #7CB342;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-ink: #212121;
+      --bw-red: #E63946;
+      --bw-sky: #dcecef;
+      --bw-line: rgba(27, 94, 32, 0.18);
+      color-scheme: light;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: transparent;
+      color: var(--bw-ink);
+    }
+
+    .bw-lastday {
+      max-width: 1180px;
+      margin: 0 auto;
+      background: var(--bw-cream);
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 18px 50px rgba(27, 94, 32, 0.13);
+    }
+
+    .bw-hero {
+      min-height: 330px;
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      background:
+        linear-gradient(90deg, rgba(11, 52, 21, 0.94), rgba(11, 52, 21, 0.74) 42%, rgba(11, 52, 21, 0.10)),
+        url("assets/berlin-last-day-buffer-hero.jpg") center / cover no-repeat;
+      color: #fff;
+    }
+
+    .bw-hero-copy {
+      padding: 34px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .bw-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-kicker::before {
+      content: "";
+      width: 26px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--bw-yellow);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 620px;
+      font-size: 34px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .bw-hero p {
+      margin: 0;
+      max-width: 560px;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 16px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .bw-status-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: var(--bw-line);
+      border-bottom: 1px solid var(--bw-line);
+    }
+
+    .bw-stat {
+      min-height: 82px;
+      padding: 16px;
+      background: #fff;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+    }
+
+    .bw-stat strong {
+      color: var(--bw-green);
+      font-size: 18px;
+      line-height: 1.15;
+    }
+
+    .bw-stat span {
+      font-size: 12px;
+      line-height: 1.35;
+      color: #53625a;
+      font-weight: 700;
+    }
+
+    .bw-panel {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.74fr) minmax(0, 1.26fr);
+      gap: 20px;
+      padding: 22px;
+      align-items: start;
+    }
+
+    .bw-controls,
+    .bw-result {
+      background: #fff;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .bw-controls {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+      position: sticky;
+      top: 12px;
+    }
+
+    .bw-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--bw-green);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    select {
+      width: 100%;
+      min-height: 44px;
+      border: 1px solid rgba(27, 94, 32, 0.28);
+      border-radius: 8px;
+      padding: 0 12px;
+      background: #fff;
+      color: var(--bw-ink);
+      font: 700 14px/1.2 Montserrat, Arial, sans-serif;
+    }
+
+    .bw-build {
+      min-height: 46px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--bw-green);
+      color: #fff;
+      font: 800 14px/1 Montserrat, Arial, sans-serif;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 8px 18px rgba(27, 94, 32, 0.20);
+    }
+
+    .bw-build:hover {
+      background: #154d1a;
+    }
+
+    .bw-result-head {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      background: linear-gradient(135deg, #f7fbf5, #fffceb);
+      border-bottom: 1px solid var(--bw-line);
+    }
+
+    .bw-result-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: 0;
+      color: var(--bw-green);
+    }
+
+    .bw-result-head p {
+      margin: 6px 0 0;
+      color: #4f5d55;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .bw-badge {
+      min-width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background: var(--bw-green);
+      color: #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 12px;
+      box-shadow: inset 0 0 0 7px rgba(255, 230, 0, 0.28);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    .bw-badge strong {
+      display: block;
+      color: var(--bw-yellow);
+      font-size: 21px;
+      line-height: 1;
+    }
+
+    .bw-rail {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+      background: #fff;
+    }
+
+    .bw-stop {
+      min-height: 126px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      padding: 12px;
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 8px;
+      background: #fbfcf8;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bw-stop::before {
+      content: "";
+      width: 100%;
+      height: 5px;
+      background: var(--bw-lime);
+      position: absolute;
+      inset: 0 0 auto;
+    }
+
+    .bw-stop.warn::before {
+      background: var(--bw-yellow);
+    }
+
+    .bw-stop.hard::before {
+      background: var(--bw-red);
+    }
+
+    .bw-stop b {
+      font-size: 12px;
+      color: var(--bw-green);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .bw-stop strong {
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .bw-stop span {
+      font-size: 12px;
+      line-height: 1.35;
+      color: #526058;
+      font-weight: 600;
+    }
+
+    .bw-advice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      padding: 0 18px 18px;
+    }
+
+    .bw-advice {
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+      display: grid;
+      gap: 8px;
+      min-height: 130px;
+    }
+
+    .bw-advice h3 {
+      margin: 0;
+      color: var(--bw-green);
+      font-size: 14px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .bw-advice p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #3d4b43;
+      font-weight: 600;
+    }
+
+    .bw-do-dont {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      padding: 0 18px 18px;
+    }
+
+    .bw-list {
+      border-radius: 8px;
+      padding: 14px 16px;
+      background: #f7fbf5;
+      border: 1px solid var(--bw-line);
+    }
+
+    .bw-list h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--bw-green);
+    }
+
+    .bw-list ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .bw-list li {
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .bw-note {
+      margin: 0 18px 18px;
+      border-left: 5px solid var(--bw-yellow);
+      background: #fffceb;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 700;
+      color: #39443e;
+    }
+
+    @media (max-width: 880px) {
+      .bw-hero {
+        grid-template-columns: 1fr;
+        min-height: 300px;
+        background:
+          linear-gradient(180deg, rgba(11, 52, 21, 0.92), rgba(11, 52, 21, 0.48)),
+          url("assets/berlin-last-day-buffer-hero.jpg") center / cover no-repeat;
+      }
+
+      .bw-hero-copy {
+        padding: 28px 20px;
+      }
+
+      h1 {
+        font-size: 29px;
+      }
+
+      .bw-status-strip,
+      .bw-panel,
+      .bw-advice-grid,
+      .bw-do-dont {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-controls {
+        position: static;
+      }
+
+      .bw-rail {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-stop {
+        min-height: 96px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .bw-lastday {
+        border-radius: 0;
+      }
+
+      .bw-panel {
+        padding: 14px;
+      }
+
+      .bw-result-head {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-badge {
+        width: 92px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-lastday" data-widget>
+    <section class="bw-hero">
+      <div class="bw-hero-copy">
+        <span class="bw-kicker">BerlinWalk tool</span>
+        <h1>Berlin Last-Day Buffer Planner</h1>
+        <p>Choose your departure, luggage and free time. Get one calm final Berlin move, then protect the route out.</p>
+      </div>
+    </section>
+
+    <section class="bw-status-strip" aria-label="Last-day rules">
+      <div class="bw-stat"><strong>1 anchor</strong><span>One final city move beats a rushed zigzag.</span></div>
+      <div class="bw-stat"><strong>Bags first</strong><span>Store luggage before the nice part of the day.</span></div>
+      <div class="bw-stat"><strong>Buffer early</strong><span>Protect the airport, train or bus phase.</span></div>
+      <div class="bw-stat"><strong>Phone ready</strong><span>Keep tickets, maps and battery safe.</span></div>
+    </section>
+
+    <section class="bw-panel">
+      <form class="bw-controls" data-controls>
+        <div class="bw-field">
+          <label for="depart">Departure</label>
+          <select id="depart" name="depart">
+            <option value="flight-schengen">BER flight, simple Schengen</option>
+            <option value="flight-checked">BER flight with checked bag</option>
+            <option value="flight-complex">BER non-Schengen, long-haul or extra checks</option>
+            <option value="train">Long-distance train</option>
+            <option value="bus">Long-distance bus or coach</option>
+          </select>
+        </div>
+
+        <div class="bw-field">
+          <label for="hours">Free time after checkout</label>
+          <select id="hours" name="hours">
+            <option value="3">About 3 hours</option>
+            <option value="5" selected>About 5 hours</option>
+            <option value="8">8 hours or more</option>
+          </select>
+        </div>
+
+        <div class="bw-field">
+          <label for="area">Where you start</label>
+          <select id="area" name="area">
+            <option value="hbf">Near Hauptbahnhof</option>
+            <option value="alex">Alexanderplatz or Mitte east</option>
+            <option value="hackescher">Hackescher Markt or Museum Island</option>
+            <option value="west">Zoo, Ku'damm or Charlottenburg</option>
+            <option value="airport">Already on the BER route</option>
+          </select>
+        </div>
+
+        <div class="bw-field">
+          <label for="bags">Luggage</label>
+          <select id="bags" name="bags">
+            <option value="none">No luggage</option>
+            <option value="small">Small backpack only</option>
+            <option value="suitcase" selected>Rolling suitcase</option>
+            <option value="family">Family or several bags</option>
+          </select>
+        </div>
+
+        <div class="bw-field">
+          <label for="pace">Energy</label>
+          <select id="pace" name="pace">
+            <option value="calm" selected>Calm final walk</option>
+            <option value="food">Meal or cafe priority</option>
+            <option value="culture">One cultural stop</option>
+            <option value="low">Tired, keep it simple</option>
+          </select>
+        </div>
+
+        <button class="bw-build" type="submit">Build my buffer</button>
+      </form>
+
+      <section class="bw-result" aria-live="polite">
+        <div class="bw-result-head">
+          <div>
+            <h2 data-title>One anchor, then the exit route</h2>
+            <p data-summary>Store luggage first, enjoy one central final move, then protect the airport or station buffer.</p>
+          </div>
+          <div class="bw-badge"><span>Buffer</span><strong data-buffer>2h30</strong></div>
+        </div>
+
+        <div class="bw-rail" data-rail></div>
+
+        <div class="bw-advice-grid">
+          <article class="bw-advice">
+            <h3>Best final anchor</h3>
+            <p data-anchor>Spree and Reichstag exterior near Hauptbahnhof, then return before the station starts to feel tight.</p>
+          </article>
+          <article class="bw-advice">
+            <h3>Luggage move</h3>
+            <p data-luggage>Use hotel storage or station lockers before sightseeing. Do not drag a suitcase into the final walk.</p>
+          </article>
+          <article class="bw-advice">
+            <h3>Tour fit</h3>
+            <p data-tour>Possible only if the departure is late and you can stay luggage-free for the 2 hours walk.</p>
+          </article>
+        </div>
+
+        <div class="bw-do-dont">
+          <div class="bw-list">
+            <h3>Do</h3>
+            <ul data-do></ul>
+          </div>
+          <div class="bw-list">
+            <h3>Avoid</h3>
+            <ul data-dont></ul>
+          </div>
+        </div>
+
+        <p class="bw-note" data-note>Last-day plans should be conservative. A calm final memory is better than one extra sight followed by a stressed transfer.</p>
+      </section>
+    </section>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      const root = document.querySelector('[data-widget]');
+      const form = root.querySelector('[data-controls]');
+      const rail = root.querySelector('[data-rail]');
+
+      const areaAnchors = {
+        hbf: {
+          anchor: 'Spree and Reichstag exterior near Hauptbahnhof, then return before the station starts to feel tight.',
+          short: 'Station coffee, Spree bridge, then platform.',
+        },
+        alex: {
+          anchor: 'World Clock, Marienkirche and the old-city edge toward Hackescher Markt. Keep the return route direct.',
+          short: 'World Clock, Marienkirche, then S-Bahn.',
+        },
+        hackescher: {
+          anchor: 'Hackesche Hofe, Museum Island edges and a final cafe. This works well because S-Bahn and tram links stay close.',
+          short: 'Courtyards, coffee, then S-Bahn or tram.',
+        },
+        west: {
+          anchor: 'Kaiser Wilhelm Memorial Church, a Ku-damm cafe or a short City West walk before the final transit leg.',
+          short: 'City West cafe, then train or airport route.',
+        },
+        airport: {
+          anchor: 'Move toward BER early, then use the airport phase as the calm part of the day instead of fighting time.',
+          short: 'Airport route first, then food or lounge time.',
+        },
+      };
+
+      const departProfiles = {
+        'flight-schengen': { label: 'Flight', buffer: 150, exit: 'Be at BER before the airport phase begins.', hard: 'Security and gate' },
+        'flight-checked': { label: 'Checked flight', buffer: 180, exit: 'Allow bag drop, security and gate movement.', hard: 'Bag drop and security' },
+        'flight-complex': { label: 'Complex flight', buffer: 210, exit: 'Treat the airport as the main appointment.', hard: 'Extra airport checks' },
+        train: { label: 'Train', buffer: 50, exit: 'Be at the station early enough to find the platform calmly.', hard: 'Platform and boarding' },
+        bus: { label: 'Bus', buffer: 65, exit: 'Get to the coach station early and keep ticket screens ready.', hard: 'Coach gate' },
+      };
+
+      function formState() {
+        return Object.fromEntries(new FormData(form).entries());
+      }
+
+      function bufferLabel(minutes) {
+        const h = Math.floor(minutes / 60);
+        const m = minutes % 60;
+        if (h && m) return `${h}h${m}`;
+        if (h) return `${h}h`;
+        return `${m}m`;
+      }
+
+      function planRisk(hours, depart, bags) {
+        if (depart === 'flight-complex') return hours >= 8 ? 'amber' : 'red';
+        if (bags === 'family' && hours <= 5) return 'red';
+        if (hours <= 3) return 'red';
+        if (hours <= 5 || bags === 'suitcase') return 'amber';
+        return 'green';
+      }
+
+      function luggageAdvice(bags) {
+        if (bags === 'none') return 'Stay flexible, but keep your documents, charger and departure ticket accessible.';
+        if (bags === 'small') return 'A backpack is fine for a short walk. Avoid crowded museums or long standing queues.';
+        if (bags === 'family') return 'Store bags before the city move. With several bags, choose station or hotel storage over improvising.';
+        return 'Use hotel storage or station lockers before sightseeing. Do not drag a suitcase into the final walk.';
+      }
+
+      function tourFit(hours, depart, bags) {
+        if (hours >= 8 && bags !== 'family' && depart !== 'flight-complex') {
+          return 'Possible if departure is late and you can stay luggage-free for the 2 hours walk.';
+        }
+        if (hours >= 5 && bags === 'none' && depart === 'train') {
+          return 'Possible only with a later train and a simple station return.';
+        }
+        return 'Skip the tour today unless your departure is much later. Keep the final day simple.';
+      }
+
+      function titleFor(risk) {
+        if (risk === 'green') return 'You have room for a real final half-day';
+        if (risk === 'amber') return 'Choose one anchor and stop early';
+        return 'Keep the day close to the exit route';
+      }
+
+      function summaryFor(risk, profile) {
+        if (risk === 'green') return `Plan a real final move, but finish it before the protected ${profile.label.toLowerCase()} buffer.`;
+        if (risk === 'amber') return `One useful city anchor works. Two distant stops will make the ${profile.label.toLowerCase()} phase fragile.`;
+        return `${profile.exit} Put luggage and departure timing ahead of sightseeing.`;
+      }
+
+      function railStops(state, profile, area, risk) {
+        const bagStop = state.bags === 'none' || state.bags === 'small'
+          ? ['Now', 'Keep essentials ready', 'Ticket, charger, ID and route saved offline.']
+          : ['First', 'Drop or store luggage', 'Hotel storage, station locker or airport storage before the nice part.'];
+        const cityText = risk === 'red' ? area.short : area.anchor;
+        return [
+          bagStop,
+          ['City pocket', risk === 'green' ? 'Real final half-day' : 'One close anchor', cityText],
+          ['Transit', 'Start moving early', 'Use a direct route. Avoid a final transfer chain if the clock is tight.'],
+          [`T-${bufferLabel(profile.buffer)}`, profile.hard, profile.exit],
+          ['Departure', 'No last-minute tasks', 'Food, toilets, platform or gate after the buffer is protected.'],
+        ];
+      }
+
+      function adviceLists(state, risk) {
+        const doItems = [
+          'Save the departure route before leaving Wi-Fi.',
+          'Keep one final anchor close to S-Bahn, U-Bahn or station links.',
+          state.bags === 'none' ? 'Use your luggage-free advantage for a calmer walk.' : 'Solve luggage before choosing the pleasant part.',
+        ];
+        const dontItems = [
+          'Do not add a distant neighborhood as a bonus stop.',
+          'Do not rely on old BER Runway slot-reservation advice.',
+          risk === 'green' ? 'Do not spend the whole buffer because the morning felt easy.' : 'Do not start a museum or long meal if the exit route is already tight.',
+        ];
+        return { doItems, dontItems };
+      }
+
+      function renderList(target, items) {
+        target.innerHTML = items.map((item) => `<li>${item}</li>`).join('');
+      }
+
+      function render() {
+        const state = formState();
+        const hours = Number(state.hours);
+        const profile = departProfiles[state.depart];
+        const area = areaAnchors[state.area];
+        const risk = planRisk(hours, state.depart, state.bags);
+        const stops = railStops(state, profile, area, risk);
+        const lists = adviceLists(state, risk);
+
+        root.querySelector('[data-title]').textContent = titleFor(risk);
+        root.querySelector('[data-summary]').textContent = summaryFor(risk, profile);
+        root.querySelector('[data-buffer]').textContent = bufferLabel(profile.buffer);
+        root.querySelector('[data-anchor]').textContent = risk === 'red' ? area.short : area.anchor;
+        root.querySelector('[data-luggage]').textContent = luggageAdvice(state.bags);
+        root.querySelector('[data-tour]').textContent = tourFit(hours, state.depart, state.bags);
+        root.querySelector('[data-note]').textContent = risk === 'green'
+          ? 'You have enough time for a better final memory, but only if you stop the ambitious part early.'
+          : 'Last-day plans should be conservative. A calm final memory is better than one extra sight followed by a stressed transfer.';
+
+        rail.innerHTML = stops.map((stop, index) => {
+          const klass = index >= 3 ? 'hard' : risk === 'red' || index === 2 ? 'warn' : '';
+          return `<article class="bw-stop ${klass}"><b>${stop[0]}</b><strong>${stop[1]}</strong><span>${stop[2]}</span></article>`;
+        }).join('');
+        renderList(root.querySelector('[data-do]'), lists.doItems);
+        renderList(root.querySelector('[data-dont]'), lists.dontItems);
+        window.dispatchEvent(new Event('resize'));
+      }
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        render();
+      });
+      form.addEventListener('change', render);
+      render();
+    })();
+  </script>
+</body>
+</html>

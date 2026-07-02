@@ -157,7 +157,9 @@
   "berlin-restaurant-phrases": "berlin-restaurant-phrases",
   "berlin-restaurant-phrases-how-to-order-pay-and-handle-allergies": "berlin-restaurant-phrases",
   "berlin-ab-abc-ticket-zones": "berlin-ab-abc-ticket-zones",
-  "berlin-ab-or-abc-ticket-which-zone-do-tourists-need": "berlin-ab-abc-ticket-zones"
+  "berlin-ab-or-abc-ticket-which-zone-do-tourists-need": "berlin-ab-abc-ticket-zones",
+  "berlin-last-day": "berlin-last-day",
+  "berlin-last-day-what-to-do-before-your-flight-or-train": "berlin-last-day"
 };
 
   var SCHEMAS = {
@@ -7523,6 +7525,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. The BerlinWalk route is a normal AB city route. It starts at Alexanderplatz, stays in the historic center and lasts about 2 hours. ABC matters for airport travel or day trips before or after the walk."
+        }
+      }
+    ]
+  },
+  "berlin-last-day": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What should I do on my last day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On your Berlin last day, solve luggage first, choose one close final anchor, then protect the airport, train or bus buffer. Good low-risk plans are a Spree walk near Hauptbahnhof, Hackescher Markt and Museum Island edges, Alexanderplatz old-city layers, or a cafe close to your departure route."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I store luggage in Berlin after checkout?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with your hotel if they offer storage after checkout. If not, use station lockers, city lockers, BER Terminal 1 storage, or a reputable app-based luggage network. Berlin.de lists lockers and luggage storage options, including Hauptbahnhof and BER."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How early should I leave central Berlin for BER Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your airline, baggage and route, but be conservative. A simple hand-luggage Schengen flight needs less time than a checked-bag, non-Schengen, family or long-haul departure. BER says to check airline times and go to security immediately after check-in."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I still book a BER Runway security slot?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. BER announced that BER Runway slot reservations were discontinued after 26 May 2026 because the newer CT security lanes reduced demand for the separate slot system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I join a walking tour on my last day in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if your departure is late enough and you can be luggage-free. The BerlinWalk route lasts about 2 hours, starts at Alexanderplatz and ends near Hackescher Markt, so it can work before an evening train or flight. Skip it if your departure window is tight."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the biggest Berlin last-day mistake?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The biggest mistake is trying to add one more distant neighborhood while still carrying luggage or relying on a fragile final transfer. Keep the day close, practical and easy to exit."
         }
       }
     ]
