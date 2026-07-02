@@ -5,8 +5,9 @@ time (CEST)**.
 
 - `index.html` — self-contained widget (scoped CSS + JS, links `../css/brand.css`
   and `../js/brand.js`). No build step.
-- Shows all 72 group-stage matches grouped by day, plus the knockout calendar
-  (Round of 32 → Final). Times are pre-converted to **Berlin time (CEST, UTC+2)**.
+- Shows all 72 group-stage matches grouped by day, plus a FotMob-style
+  knockout bracket tree (Round of 32 → Final). Times are pre-converted to
+  **Berlin time (CEST, UTC+2)**.
 - Features: live "next match" countdown, quick filters (All / Germany 🇩🇪 /
   Evening-friendly / Today), a "filter by team" select (all 48 teams), a
   "jump to a day" select, and 🟢 evening / 🌙 late / 🌅 morning slot tags.
@@ -22,7 +23,19 @@ time (CEST)**.
   `main` so GitHub Pages can deploy the live widget. If no score is due, keep
   the run as a true no-op: no file edits, no logs, no commit and no push.
 - Knockout display rule: eliminated teams must be visually crossed out in final
-  knockout cards, including matches decided by penalty shootout.
+  knockout cards, including matches decided by penalty shootout. The knockout
+  stage renders as a two-sided bracket tree with connector lines; do not revert
+  it to a chronological card list unless Yusuf explicitly asks.
+- Local API-Football audit helper: from `berlinwalk-widgets/`, run
+  `source ../scripts/load-api-keys.sh && node scripts/check-worldcup-api-football.mjs`.
+  The script uses the API-SPORTS key stored in macOS Keychain service
+  `berlinwalk-apisports-api-key` and compares API-Football `league=1`,
+  `season=2026` fixtures against local `M`/`KO` rows without editing files.
+  Use `--status` to check the connected account/plan without fetching
+  fixtures. Current account state checked on 2026-07-02: Free plan is active
+  with 100 requests/day, but the 2026 World Cup season endpoint is blocked by
+  the plan (`try from 2022 to 2024`), so official/FotMob/news cross-checking
+  is still required for routine score updates unless the API plan changes.
 
 **Data note:** the group-stage fixtures and kick-off times were assembled from
 public 2026 World Cup CET schedules and cross-checked against anchor matches
