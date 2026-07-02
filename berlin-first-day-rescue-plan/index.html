@@ -684,9 +684,9 @@
       <div>
         <p class="kicker">Berlin First-Day Rescue Plan</p>
         <h1>Your first hours in Berlin, sorted.</h1>
-        <p class="sub">Choose your arrival scenario, answer five quick questions, pay USD 1, and open a short mobile plan immediately.</p>
+        <p class="sub">Choose your arrival scenario, answer five quick questions, pay EUR 9, and open a short mobile plan immediately.</p>
       </div>
-      <div class="price"><span>Instant plan</span>USD 1</div>
+      <div class="price"><span>Instant plan</span>EUR 9</div>
     </section>
 
     <section class="body" data-entry>
@@ -757,7 +757,7 @@
 
           <div class="pay">
             <p class="micro">Main delivery is the instant plan screen. PDF is only a backup export.</p>
-            <button class="primary" type="submit" data-submit>Pay USD 1 and open plan</button>
+            <button class="primary" type="submit" data-submit>Pay EUR 9 and open plan</button>
           </div>
           <div class="status" data-status></div>
         </form>
@@ -945,7 +945,7 @@
           state.plan = response.plan;
           renderPlan(response.plan, response.accessUrl || preferredPageUrl(), response.emailStatus || '');
         } catch (error) {
-          result.innerHTML = errorMarkup(error.message || 'Plan could not be opened.');
+          result.innerHTML = errorMarkup(friendlyError(error.message || 'Plan could not be opened.'));
         }
       }
 
@@ -1060,9 +1060,16 @@
         return '<section class="panel"><h2>Plan could not open</h2><p class="micro">' + escapeHtml(message) + '</p><p style="margin-top:12px;"><a class="secondary" href="' + escapeAttr(pageUrlWithoutAccess()) + '">Start again</a></p></section>';
       }
 
+      function friendlyError(message) {
+        if (/Stripe GET|checkout\\.session|resource_missing|CHECKOUT_SESSION_ID|stripe_error/i.test(String(message || ''))) {
+          return 'Payment was received, but the return link needs a refresh. Refresh this page once; if it still does not open, use the backup email link.';
+        }
+        return message;
+      }
+
       function setBusy(isBusy, message) {
         submit.disabled = isBusy;
-        submit.textContent = isBusy ? 'Opening checkout...' : 'Pay USD 1 and open plan';
+        submit.textContent = isBusy ? 'Opening checkout...' : 'Pay EUR 9 and open plan';
         if (message) showStatus(message);
         if (!isBusy && !message) hideStatus();
       }
