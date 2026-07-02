@@ -12,4 +12,3 @@ Primary request: Create one glossy 3D app icon for a tool named "Berlin Last-Day
 - Workspace source: `codex-imagegen-icon.png`
 - Canonical 512: `tools-home/icons/berlin-last-day-buffer-planner.png`
 - Canonical 160: `tools-home/icons/berlin-last-day-buffer-planner-160.png`
-

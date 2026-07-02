@@ -61,4 +61,3 @@ Verdict: PASS
 | berlin-club-dress-code | berlin-club-dress-code | no_local_source | 0/8 | - |
 | the-berlin-wall-where-it-stood-and-what-s-left-in-2026 | berlin-wall-locations | no_local_source | 0/8 | - |
 | what-to-do-near-hackescher-markt-after-the-tour | hackescher-after-tour | no_local_source | 0/7 | - |
-

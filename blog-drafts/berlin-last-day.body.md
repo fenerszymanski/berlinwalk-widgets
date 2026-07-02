@@ -134,4 +134,3 @@ The safest last-day mindset is simple: **one anchor, one meal or coffee, one cle
 - Berlin Hauptbahnhof interior: Daderot, CC0 1.0, via Wikimedia Commons.
 - BER Terminal 1 check-in hall: Alexander Migl, CC BY-SA 3.0 DE, via Wikimedia Commons.
 - Flughafen BER station platform: Tbachner, CC BY-SA 4.0, via Wikimedia Commons.
-

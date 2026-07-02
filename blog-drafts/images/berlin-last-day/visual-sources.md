@@ -94,4 +94,3 @@ No paid image/video generation API was used. No AI-generated article visuals wer
   - Canonical 512: `tools-home/icons/berlin-last-day-buffer-planner.png`
   - Canonical 160: `tools-home/icons/berlin-last-day-buffer-planner-160.png`
 - Prompt saved in `tools-home/icons/_src/chatgpt-standard-20260612/berlin-last-day-buffer-planner/PROMPT.md`.
-

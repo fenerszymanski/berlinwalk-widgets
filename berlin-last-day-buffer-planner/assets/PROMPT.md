@@ -11,4 +11,3 @@ Primary request: Create a polished editorial hero visual for a tourist tool call
 - Original output: `/Users/yusufucuz/.codex/generated_images/019f2434-f535-7520-9984-925172242519/ig_0cb92d5ada0333f5016a46b6c6e444819a8765f8ace8fe4d86.png`
 - Workspace source: `hero-source-codex-imagegen.png`
 - Optimized hero: `berlin-last-day-buffer-hero.jpg`
-
