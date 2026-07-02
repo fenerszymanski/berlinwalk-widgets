@@ -1,0 +1,18 @@
+Berlin First-Day Rescue Plan email setup checklist
+
+1. Create one Wix Triggered Email.
+2. Subject:
+   Your Berlin First-Day Rescue Plan is ready
+3. Preheader:
+   Open your mobile plan and keep the first hours simple.
+4. Paste rescue-plan-backup.html into the HTML block.
+5. Copy the Wix messageId.
+6. Add Wix Secret RESCUE_PLAN_EMAIL_MESSAGE_ID with that messageId.
+7. Add Wix Secret RESCUE_EMAIL_WEBHOOK_SECRET.
+8. Add Velo backend file rescuePlanEmail.js.
+9. Add or merge the HTTP function post_rescuePlanEmail.
+10. Publish Wix.
+11. Add Vercel env RESCUE_EMAIL_WEBHOOK_URL:
+    https://www.berlinwalk.com/_functions/rescuePlanEmail
+12. Add matching Vercel env RESCUE_EMAIL_WEBHOOK_SECRET.
+13. Run one local mock claim and one real Stripe claim before Meta campaign setup.
