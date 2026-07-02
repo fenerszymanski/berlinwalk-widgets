@@ -906,7 +906,7 @@
         try {
           var response = await post({
             action: 'startCheckout',
-            mock: params.get('mock') === '1' || params.get('mock') === 'true',
+            mock: isLocal && (params.get('mock') === '1' || params.get('mock') === 'true'),
             pageUrl: pageUrlWithoutAccess(),
             successUrl: pageUrlWithoutAccess(),
             ...payload,
