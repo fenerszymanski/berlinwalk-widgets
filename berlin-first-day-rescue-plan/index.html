@@ -1,0 +1,1225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin First-Day Rescue Plan | BerlinWalk</title>
+  <meta name="description" content="Get a short, practical Berlin arrival plan for your first hours in the city.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<main id="bw-rescue-plan">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-rescue-plan {
+      --green: #1B5E20;
+      --green-dark: #143F17;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --white: #FFFFFF;
+      --text: #212121;
+      --muted: #566156;
+      --border: #DCE8C8;
+      --soft: #F3F8EA;
+      --blue: #2F80ED;
+      --blue-soft: #E7F3FF;
+      --amber: #B46A00;
+      --amber-soft: #FFF4D9;
+      --rose: #C73E55;
+      --rose-soft: #FFE8EC;
+      --shadow: 0 10px 28px rgba(20, 63, 23, 0.09);
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 24px 0;
+      max-width: 100%;
+    }
+
+    #bw-rescue-plan *,
+    #bw-rescue-plan *::before,
+    #bw-rescue-plan *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-rescue-plan button,
+    #bw-rescue-plan input,
+    #bw-rescue-plan select,
+    #bw-rescue-plan textarea {
+      font: inherit;
+    }
+
+    #bw-rescue-plan button,
+    #bw-rescue-plan a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    #bw-rescue-plan .shell {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    #bw-rescue-plan .top {
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.18), rgba(47, 128, 237, 0.08)),
+        var(--green);
+      color: var(--white);
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 20px 22px;
+    }
+
+    #bw-rescue-plan .kicker {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2.4px;
+      line-height: 1.2;
+      margin: 0 0 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-rescue-plan h1,
+    #bw-rescue-plan h2,
+    #bw-rescue-plan h3,
+    #bw-rescue-plan p {
+      margin-top: 0;
+    }
+
+    #bw-rescue-plan h1 {
+      color: var(--white);
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.12;
+      margin: 0;
+    }
+
+    #bw-rescue-plan .sub {
+      color: #DDEFC7;
+      font-size: 13.5px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 9px 0 0;
+      max-width: 760px;
+    }
+
+    #bw-rescue-plan .price {
+      align-self: start;
+      background: var(--yellow);
+      border-radius: 8px;
+      color: var(--green-dark);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.2;
+      min-width: 92px;
+      padding: 11px 12px;
+      text-align: center;
+    }
+
+    #bw-rescue-plan .price span {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+    }
+
+    #bw-rescue-plan .body {
+      background: var(--cream);
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) minmax(310px, 0.64fr);
+      padding: 18px 20px 20px;
+    }
+
+    #bw-rescue-plan .panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    #bw-rescue-plan .panel h2 {
+      color: var(--green);
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    #bw-rescue-plan .micro {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-rescue-plan .scenario-grid {
+      display: grid;
+      gap: 9px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 13px;
+    }
+
+    #bw-rescue-plan .scenario {
+      background: linear-gradient(90deg, var(--soft), var(--white));
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      min-height: 86px;
+      padding: 12px;
+      text-align: left;
+      transition: border-color 0.16s ease, box-shadow 0.16s ease, transform 0.16s ease;
+    }
+
+    #bw-rescue-plan .scenario:hover,
+    #bw-rescue-plan .scenario:focus-visible {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(255, 230, 0, 0.5);
+      outline: none;
+    }
+
+    #bw-rescue-plan .scenario[aria-pressed="true"] {
+      background: linear-gradient(90deg, rgba(255, 230, 0, 0.28), var(--white));
+      border-color: var(--green);
+      transform: translateY(-1px);
+    }
+
+    #bw-rescue-plan .scenario b {
+      color: var(--green-dark);
+      display: block;
+      font-size: 13.5px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 5px;
+    }
+
+    #bw-rescue-plan .scenario span {
+      color: var(--muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.35;
+    }
+
+    #bw-rescue-plan .form {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    #bw-rescue-plan .field-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-rescue-plan label {
+      color: var(--green);
+      display: block;
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.3;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    #bw-rescue-plan input,
+    #bw-rescue-plan select {
+      appearance: none;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 750;
+      min-height: 46px;
+      padding: 10px 11px;
+      width: 100%;
+    }
+
+    #bw-rescue-plan input:focus,
+    #bw-rescue-plan select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.16);
+      outline: none;
+    }
+
+    #bw-rescue-plan .seg {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-rescue-plan .seg button {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 850;
+      min-height: 42px;
+      padding: 9px 6px;
+    }
+
+    #bw-rescue-plan .seg button[aria-pressed="true"] {
+      background: var(--blue-soft);
+      border-color: var(--blue);
+      color: #154C96;
+    }
+
+    #bw-rescue-plan .priority-grid {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+
+    #bw-rescue-plan .pay {
+      align-items: center;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      margin-top: 4px;
+    }
+
+    #bw-rescue-plan .primary,
+    #bw-rescue-plan .secondary,
+    #bw-rescue-plan .quiet {
+      align-items: center;
+      border-radius: 8px;
+      cursor: pointer;
+      display: inline-flex;
+      font-weight: 900;
+      gap: 8px;
+      justify-content: center;
+      min-height: 46px;
+      padding: 11px 14px;
+      text-decoration: none;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+      white-space: normal;
+    }
+
+    #bw-rescue-plan .primary {
+      background: var(--yellow);
+      border: 1.5px solid var(--yellow);
+      color: var(--green-dark);
+      min-width: 154px;
+    }
+
+    #bw-rescue-plan .secondary {
+      background: var(--green);
+      border: 1.5px solid var(--green);
+      color: var(--white);
+    }
+
+    #bw-rescue-plan .quiet {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      color: var(--green);
+    }
+
+    #bw-rescue-plan .primary:hover,
+    #bw-rescue-plan .secondary:hover,
+    #bw-rescue-plan .quiet:hover {
+      box-shadow: 0 6px 14px rgba(20, 63, 23, 0.14);
+      transform: translateY(-1px);
+    }
+
+    #bw-rescue-plan .primary:disabled {
+      cursor: progress;
+      opacity: 0.65;
+      transform: none;
+    }
+
+    #bw-rescue-plan .trust {
+      display: grid;
+      gap: 9px;
+    }
+
+    #bw-rescue-plan .trust-row {
+      align-items: start;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 9px;
+      grid-template-columns: 8px minmax(0, 1fr);
+      padding: 11px;
+    }
+
+    #bw-rescue-plan .trust-row::before {
+      background: var(--blue);
+      border-radius: 99px;
+      content: "";
+      display: block;
+      height: 8px;
+      margin-top: 6px;
+      width: 8px;
+    }
+
+    #bw-rescue-plan .trust-row:nth-child(2)::before { background: var(--amber); }
+    #bw-rescue-plan .trust-row:nth-child(3)::before { background: var(--rose); }
+
+    #bw-rescue-plan .trust-row b {
+      color: var(--green-dark);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 900;
+      line-height: 1.25;
+      margin-bottom: 3px;
+    }
+
+    #bw-rescue-plan .trust-row span {
+      color: var(--muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    #bw-rescue-plan .status {
+      background: var(--amber-soft);
+      border: 1px solid rgba(180, 106, 0, 0.26);
+      border-radius: 8px;
+      color: #694000;
+      display: none;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin-top: 12px;
+      padding: 10px 12px;
+    }
+
+    #bw-rescue-plan .status.show {
+      display: block;
+    }
+
+    #bw-rescue-plan .result {
+      display: none;
+      grid-column: 1 / -1;
+    }
+
+    #bw-rescue-plan .result.show {
+      display: grid;
+      gap: 14px;
+    }
+
+    #bw-rescue-plan .result-head {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      padding: 16px;
+    }
+
+    #bw-rescue-plan .result-head h2 {
+      color: var(--green);
+      font-size: 23px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.15;
+      margin: 0 0 7px;
+    }
+
+    #bw-rescue-plan .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    #bw-rescue-plan .badge {
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--green-dark);
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      line-height: 1.1;
+      padding: 7px 9px;
+      text-transform: uppercase;
+    }
+
+    #bw-rescue-plan .actions {
+      align-items: start;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    #bw-rescue-plan .plan-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.42fr);
+    }
+
+    #bw-rescue-plan .move-list {
+      counter-reset: moves;
+      display: grid;
+      gap: 10px;
+    }
+
+    #bw-rescue-plan .move {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 42px minmax(0, 1fr);
+      padding: 13px;
+    }
+
+    #bw-rescue-plan .move::before {
+      align-items: center;
+      background: var(--green);
+      border-radius: 8px;
+      color: var(--yellow);
+      content: counter(moves);
+      counter-increment: moves;
+      display: flex;
+      font-size: 18px;
+      font-weight: 900;
+      height: 42px;
+      justify-content: center;
+      width: 42px;
+    }
+
+    #bw-rescue-plan .move h3 {
+      color: var(--green-dark);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.24;
+      margin: 0 0 5px;
+    }
+
+    #bw-rescue-plan .move .time {
+      color: var(--blue);
+      display: block;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-rescue-plan .move p {
+      color: var(--text);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.52;
+      margin: 0 0 7px;
+    }
+
+    #bw-rescue-plan .move small {
+      color: var(--muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    #bw-rescue-plan .side {
+      display: grid;
+      gap: 10px;
+      align-content: start;
+    }
+
+    #bw-rescue-plan .note-box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 13px;
+    }
+
+    #bw-rescue-plan .note-box.accent {
+      background: var(--blue-soft);
+      border-color: rgba(47, 128, 237, 0.25);
+    }
+
+    #bw-rescue-plan .note-box.warn {
+      background: var(--amber-soft);
+      border-color: rgba(180, 106, 0, 0.25);
+    }
+
+    #bw-rescue-plan .note-box h3 {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 0;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    #bw-rescue-plan .note-box ul {
+      display: grid;
+      gap: 7px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-rescue-plan .note-box li,
+    #bw-rescue-plan .note-box p {
+      color: var(--text);
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    #bw-rescue-plan .note-box a {
+      color: #154C96;
+      font-weight: 850;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    #bw-rescue-plan .feedback {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+    }
+
+    #bw-rescue-plan .feedback p {
+      margin: 0;
+    }
+
+    #bw-rescue-plan .feedback-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    #bw-rescue-plan .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 760px) {
+      #bw-rescue-plan {
+        margin: 12px 0;
+      }
+
+      #bw-rescue-plan .top,
+      #bw-rescue-plan .body,
+      #bw-rescue-plan .result-head,
+      #bw-rescue-plan .plan-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-rescue-plan .top {
+        padding: 18px 16px;
+      }
+
+      #bw-rescue-plan h1 {
+        font-size: 24px;
+      }
+
+      #bw-rescue-plan .price {
+        justify-self: start;
+      }
+
+      #bw-rescue-plan .body {
+        padding: 14px;
+      }
+
+      #bw-rescue-plan .scenario-grid,
+      #bw-rescue-plan .field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-rescue-plan .priority-grid,
+      #bw-rescue-plan .seg {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-rescue-plan .pay {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-rescue-plan .primary {
+        width: 100%;
+      }
+
+      #bw-rescue-plan .actions {
+        justify-content: stretch;
+      }
+
+      #bw-rescue-plan .actions a,
+      #bw-rescue-plan .actions button {
+        flex: 1 1 150px;
+      }
+
+      #bw-rescue-plan .move {
+        grid-template-columns: 36px minmax(0, 1fr);
+      }
+
+      #bw-rescue-plan .move::before {
+        height: 36px;
+        width: 36px;
+      }
+    }
+  </style>
+
+  <div class="shell" data-shell>
+    <section class="top">
+      <div>
+        <p class="kicker">Berlin First-Day Rescue Plan</p>
+        <h1>Your first hours in Berlin, sorted.</h1>
+        <p class="sub">Choose your arrival scenario, answer five quick questions, pay EUR 9, and open a short mobile plan immediately.</p>
+      </div>
+      <div class="price"><span>Instant plan</span>EUR 9</div>
+    </section>
+
+    <section class="body" data-entry>
+      <div class="panel">
+        <h2>Pick the situation</h2>
+        <p class="micro">The plan adapts to arrival time, start point, luggage, energy, weather, and Sunday friction.</p>
+
+        <div class="scenario-grid" role="group" aria-label="Arrival scenario">
+          <button class="scenario" type="button" data-scenario="classic" aria-pressed="true"><b>Classic</b><span>Normal arrival, one calm first route.</span></button>
+          <button class="scenario" type="button" data-scenario="sunday" aria-pressed="false"><b>Sunday</b><span>Retail and supermarket assumptions reduced.</span></button>
+          <button class="scenario" type="button" data-scenario="rainy" aria-pressed="false"><b>Rainy</b><span>Covered stops and shorter outdoor exposure.</span></button>
+          <button class="scenario" type="button" data-scenario="luggage" aria-pressed="false"><b>With luggage</b><span>Bag, hotel, and storage logic comes first.</span></button>
+        </div>
+
+        <form class="form" data-form>
+          <div class="field-grid">
+            <div>
+              <label for="arrival-date">Arrival date</label>
+              <input id="arrival-date" name="arrivalDate" type="date" required>
+            </div>
+            <div>
+              <label for="arrival-time">Arrival time</label>
+              <input id="arrival-time" name="arrivalTime" type="time" required>
+            </div>
+          </div>
+
+          <div>
+            <label for="start-point">Starting point</label>
+            <input id="start-point" name="startPoint" type="text" required placeholder="BER Airport, Hauptbahnhof, hotel area...">
+          </div>
+
+          <div class="field-grid">
+            <div>
+              <label for="luggage">Luggage</label>
+              <select id="luggage" name="luggage">
+                <option value="none">No luggage</option>
+                <option value="small">Small bag</option>
+                <option value="large">Large suitcase</option>
+                <option value="hotel">Need hotel/check-in first</option>
+                <option value="storage_needed">Need storage idea</option>
+              </select>
+            </div>
+            <div>
+              <label for="email">Email for backup link</label>
+              <input id="email" name="email" type="email" autocomplete="email" required placeholder="you@example.com">
+            </div>
+          </div>
+
+          <div>
+            <label>Energy</label>
+            <div class="seg" role="group" aria-label="Energy level" data-energy>
+              <button type="button" data-value="low" aria-pressed="false">Low</button>
+              <button type="button" data-value="medium" aria-pressed="true">Medium</button>
+              <button type="button" data-value="high" aria-pressed="false">High</button>
+            </div>
+          </div>
+
+          <div>
+            <label>Priority</label>
+            <div class="seg priority-grid" role="group" aria-label="Priority" data-priority>
+              <button type="button" data-value="smooth_arrival" aria-pressed="true">Smooth</button>
+              <button type="button" data-value="food" aria-pressed="false">Food</button>
+              <button type="button" data-value="iconic_sights" aria-pressed="false">Sights</button>
+              <button type="button" data-value="local_feel" aria-pressed="false">Local</button>
+              <button type="button" data-value="family_easy" aria-pressed="false">Easy</button>
+            </div>
+          </div>
+
+          <div class="pay">
+            <p class="micro">Main delivery is the instant plan screen. PDF is only a backup export.</p>
+            <button class="primary" type="submit" data-submit>Pay EUR 9 and open plan</button>
+          </div>
+          <div class="status" data-status></div>
+        </form>
+      </div>
+
+      <aside class="trust" aria-label="Product notes">
+        <div class="trust-row"><div><b>Built for arrival pressure</b><span>Three to five first moves, not a giant itinerary.</span></div></div>
+        <div class="trust-row"><div><b>Guardrails first</b><span>Sunday, rain, luggage, and BER ticket warnings are rule-based.</span></div></div>
+        <div class="trust-row"><div><b>No false certainty</b><span>Official check links are included for current details.</span></div></div>
+      </aside>
+
+      <section class="result" data-result aria-live="polite"></section>
+    </section>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var root = document.getElementById('bw-rescue-plan');
+      if (!root) return;
+
+      var params = new URLSearchParams(window.location.search);
+      var isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.protocol === 'file:';
+      var API_URL = params.get('api') || (isLocal
+        ? 'http://127.0.0.1:5173/api/rescue-plan'
+        : 'https://berlinwalk-content-app.vercel.app/api/rescue-plan');
+      var BOOK_URL = 'https://www.berlinwalk.com/book?utm_source=rescue_plan&utm_medium=product&utm_campaign=first_day_rescue_plan&utm_content=tour_cta';
+      var state = {
+        scenario: params.get('scenario') || 'classic',
+        energy: 'medium',
+        priority: 'smooth_arrival',
+        sessionId: sessionId(),
+        visitorId: visitorId(),
+        plan: null,
+        orderId: params.get('order') || '',
+        token: params.get('token') || '',
+      };
+
+      var entry = root.querySelector('[data-entry]');
+      var form = root.querySelector('[data-form]');
+      var status = root.querySelector('[data-status]');
+      var submit = root.querySelector('[data-submit]');
+      var result = root.querySelector('[data-result]');
+      var dateInput = root.querySelector('#arrival-date');
+      var timeInput = root.querySelector('#arrival-time');
+      var luggageInput = root.querySelector('#luggage');
+
+      dateInput.value = todayKey();
+      timeInput.value = defaultTime();
+
+      setScenario(state.scenario);
+      wireSegment(root.querySelector('[data-energy]'), 'energy');
+      wireSegment(root.querySelector('[data-priority]'), 'priority');
+
+      root.querySelectorAll('[data-scenario]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          setScenario(button.getAttribute('data-scenario'));
+          track('rescue_scenario_select', { scenario: state.scenario });
+        });
+      });
+
+      ['arrival-date', 'arrival-time', 'start-point', 'luggage', 'email'].forEach(function (id) {
+        var input = root.querySelector('#' + id);
+        if (!input) return;
+        input.addEventListener('focus', once(function () {
+          track('rescue_intake_start', { field: id });
+        }));
+      });
+
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        startCheckout();
+      });
+
+      result.addEventListener('click', function (event) {
+        var pdfButton = event.target.closest('[data-pdf]');
+        if (pdfButton) {
+          downloadPdf();
+          return;
+        }
+        var printButton = event.target.closest('[data-print]');
+        if (printButton) {
+          track('rescue_pdf_download', { method: 'print' });
+          window.print();
+          return;
+        }
+        var copyButton = event.target.closest('[data-copy]');
+        if (copyButton) {
+          copyPlanLink();
+          return;
+        }
+        var usefulButton = event.target.closest('[data-feedback]');
+        if (usefulButton) {
+          sendFeedback(usefulButton.getAttribute('data-feedback') === 'useful');
+          return;
+        }
+        var tour = event.target.closest('[data-tour-cta]');
+        if (tour) {
+          track('rescue_tour_cta_click', { orderId: state.orderId || '', scenario: state.scenario });
+        }
+      });
+
+      track('rescue_landing_view', { scenario: state.scenario });
+      bootFromParams();
+
+      function setScenario(value) {
+        state.scenario = ['classic', 'sunday', 'rainy', 'luggage'].indexOf(value) === -1 ? 'classic' : value;
+        root.querySelectorAll('[data-scenario]').forEach(function (button) {
+          var active = button.getAttribute('data-scenario') === state.scenario;
+          button.setAttribute('aria-pressed', active ? 'true' : 'false');
+        });
+        if (state.scenario === 'luggage' && luggageInput.value === 'none') luggageInput.value = 'large';
+      }
+
+      function wireSegment(container, key) {
+        if (!container) return;
+        container.querySelectorAll('button').forEach(function (button) {
+          button.addEventListener('click', function () {
+            state[key] = button.getAttribute('data-value');
+            container.querySelectorAll('button').forEach(function (item) {
+              item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+            });
+          });
+        });
+      }
+
+      function intakePayload() {
+        return {
+          scenario: state.scenario,
+          arrivalDate: root.querySelector('#arrival-date').value,
+          arrivalTime: root.querySelector('#arrival-time').value,
+          startPoint: root.querySelector('#start-point').value.trim(),
+          luggage: root.querySelector('#luggage').value,
+          energy: state.energy,
+          priority: state.priority,
+          email: root.querySelector('#email').value.trim(),
+        };
+      }
+
+      async function startCheckout() {
+        if (!form.reportValidity()) return;
+        var payload = intakePayload();
+        setBusy(true, 'Preparing secure checkout...');
+        track('rescue_intake_submit', cleanPayload(payload));
+        try {
+          var response = await post({
+            action: 'startCheckout',
+            mock: params.get('mock') === '1' || params.get('mock') === 'true',
+            pageUrl: pageUrlWithoutAccess(),
+            successUrl: pageUrlWithoutAccess(),
+            ...payload,
+          });
+          if (!response.ok || !response.checkoutUrl) {
+            throw new Error(response.error || 'Checkout could not start.');
+          }
+          track('rescue_payment_started', { scenario: payload.scenario, orderId: response.orderId || '', mock: Boolean(response.mock) });
+          window.location.href = response.checkoutUrl;
+        } catch (error) {
+          setBusy(false);
+          showStatus(error.message || 'Checkout could not start. Please try again.');
+        }
+      }
+
+      async function bootFromParams() {
+        if (!state.orderId || !state.token) return;
+        entry.classList.add('hidden');
+        result.classList.add('show');
+        result.innerHTML = loadingMarkup('Opening your plan...');
+        try {
+          var action = params.get('session_id') ? 'claimPlan' : 'getPlan';
+          var payload = {
+            action: action,
+            orderId: state.orderId,
+            accessToken: state.token,
+            stripeSessionId: params.get('session_id') || '',
+            pageUrl: pageUrlWithoutAccess(),
+          };
+          var response = await post(payload);
+          if (!response.ok || !response.plan) throw new Error(response.error || 'Plan could not be opened.');
+          state.plan = response.plan;
+          renderPlan(response.plan, response.accessUrl || window.location.href, response.emailStatus || '');
+        } catch (error) {
+          result.innerHTML = errorMarkup(error.message || 'Plan could not be opened.');
+        }
+      }
+
+      async function post(body) {
+        var payload = {
+          ...body,
+          sessionId: state.sessionId,
+          visitorId: state.visitorId,
+          pagePath: window.location.pathname,
+          pageUrl: window.location.href,
+          referrer: document.referrer || '',
+          landingPage: localStorage.getItem('bwRescueLandingPage') || window.location.href,
+          utmSource: params.get('utm_source') || '',
+          utmMedium: params.get('utm_medium') || '',
+          utmCampaign: params.get('utm_campaign') || '',
+          utmContent: params.get('utm_content') || '',
+          utmTerm: params.get('utm_term') || '',
+          fbclid: params.get('fbclid') || '',
+          screenWidth: String(window.screen && window.screen.width || ''),
+          viewportWidth: String(window.innerWidth || ''),
+          sourceContext: 'first_day_rescue_plan',
+        };
+        var res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+        var text = await res.text();
+        var json = {};
+        try { json = text ? JSON.parse(text) : {}; } catch (_) { json = { error: text }; }
+        if (!res.ok && !json.error) json.error = 'Request failed.';
+        return json.ok === undefined ? { ...json, ok: res.ok } : json;
+      }
+
+      function track(eventName, payload) {
+        var body = {
+          action: 'track',
+          eventName: eventName,
+          payload: payload || {},
+          scenario: state.scenario,
+          orderId: state.orderId || '',
+          sessionId: state.sessionId,
+          visitorId: state.visitorId,
+          pagePath: window.location.pathname,
+          pageUrl: window.location.href,
+          referrer: document.referrer || '',
+          landingPage: localStorage.getItem('bwRescueLandingPage') || window.location.href,
+          utmSource: params.get('utm_source') || '',
+          utmMedium: params.get('utm_medium') || '',
+          utmCampaign: params.get('utm_campaign') || '',
+          utmContent: params.get('utm_content') || '',
+          utmTerm: params.get('utm_term') || '',
+          fbclid: params.get('fbclid') || '',
+          viewportWidth: String(window.innerWidth || ''),
+          sourceContext: 'first_day_rescue_plan',
+        };
+        try {
+          if (!localStorage.getItem('bwRescueLandingPage')) localStorage.setItem('bwRescueLandingPage', window.location.href);
+          var blob = new Blob([JSON.stringify(body)], { type: 'application/json' });
+          if (navigator.sendBeacon && navigator.sendBeacon(API_URL, blob)) return;
+          fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), keepalive: true }).catch(function () {});
+        } catch (_) {}
+      }
+
+      function renderPlan(plan, accessUrl, emailStatus) {
+        state.plan = plan;
+        var badges = (plan.badges || []).map(function (badge) {
+          return '<span class="badge">' + escapeHtml(badge) + '</span>';
+        }).join('');
+        var moves = (plan.moves || []).map(function (move) {
+          return '<article class="move"><div><span class="time">' + escapeHtml(move.time || '') + '</span><h3>' + escapeHtml(move.title || '') + '</h3><p>' + escapeHtml(move.body || '') + '</p><small>' + escapeHtml(move.why || '') + '</small></div></article>';
+        }).join('');
+        var notes = listMarkup(plan.notes || []);
+        var avoid = listMarkup(plan.avoid || []);
+        var links = (plan.officialLinks || []).map(function (link) {
+          return '<li><a href="' + escapeAttr(link.url) + '" target="_blank" rel="noopener">' + escapeHtml(link.label) + '</a></li>';
+        }).join('');
+        var emailLine = emailStatus === 'sent'
+          ? 'Backup email sent.'
+          : 'Backup email is queued/not configured; keep this link handy.';
+        result.innerHTML =
+          '<section class="result-head">' +
+            '<div><p class="kicker" style="color:#1B5E20;">Plan ready</p><h2>' + escapeHtml(plan.title || 'Your first hours in Berlin, sorted') + '</h2><p class="micro">' + escapeHtml(plan.summary || '') + '</p><div class="badges">' + badges + '</div></div>' +
+            '<div class="actions"><button class="quiet" type="button" data-copy>Copy link</button><button class="quiet" type="button" data-print>Print</button><button class="primary" type="button" data-pdf>Download PDF</button></div>' +
+          '</section>' +
+          '<section class="plan-grid">' +
+            '<div class="move-list">' + moves + '</div>' +
+            '<aside class="side">' +
+              '<div class="note-box accent"><h3>Ticket and route notes</h3>' + notes + '</div>' +
+              '<div class="note-box warn"><h3>What not to do</h3>' + avoid + '</div>' +
+              '<div class="note-box"><h3>Official checks</h3><ul>' + links + '</ul></div>' +
+              '<div class="note-box"><h3>' + escapeHtml(plan.backup && plan.backup.title || 'Backup') + '</h3><p>' + escapeHtml(plan.backup && plan.backup.body || '') + '</p></div>' +
+              '<div class="note-box accent"><h3>' + escapeHtml(plan.tourCta && plan.tourCta.title || 'Want the city to make sense tomorrow?') + '</h3><p>' + escapeHtml(plan.tourCta && plan.tourCta.body || '') + '</p><p style="margin-top:10px;"><a class="secondary" href="' + BOOK_URL + '" target="_blank" rel="noopener" data-tour-cta>Book a BerlinWalk tour</a></p></div>' +
+              '<div class="note-box"><h3>Backup link</h3><p>' + escapeHtml(emailLine) + '</p><p style="margin-top:7px;"><a href="' + escapeAttr(accessUrl) + '">' + escapeHtml(accessUrl) + '</a></p></div>' +
+              '<div class="note-box feedback"><p class="micro">Was this useful?</p><div class="feedback-actions"><button class="quiet" type="button" data-feedback="useful">Yes</button><button class="quiet" type="button" data-feedback="not_useful">No</button></div></div>' +
+            '</aside>' +
+          '</section>' +
+          '<section class="note-box"><p>' + escapeHtml(plan.disclaimer || '') + '</p></section>';
+      }
+
+      function listMarkup(items) {
+        return '<ul>' + (items || []).map(function (item) {
+          return '<li>' + escapeHtml(item) + '</li>';
+        }).join('') + '</ul>';
+      }
+
+      function loadingMarkup(message) {
+        return '<section class="panel"><h2>' + escapeHtml(message) + '</h2><p class="micro">This usually takes only a few seconds.</p></section>';
+      }
+
+      function errorMarkup(message) {
+        return '<section class="panel"><h2>Plan could not open</h2><p class="micro">' + escapeHtml(message) + '</p><p style="margin-top:12px;"><a class="secondary" href="' + escapeAttr(pageUrlWithoutAccess()) + '">Start again</a></p></section>';
+      }
+
+      function setBusy(isBusy, message) {
+        submit.disabled = isBusy;
+        submit.textContent = isBusy ? 'Opening checkout...' : 'Pay EUR 9 and open plan';
+        if (message) showStatus(message);
+        if (!isBusy && !message) hideStatus();
+      }
+
+      function showStatus(message) {
+        status.textContent = message;
+        status.classList.add('show');
+      }
+
+      function hideStatus() {
+        status.textContent = '';
+        status.classList.remove('show');
+      }
+
+      async function sendFeedback(useful) {
+        try {
+          await post({
+            action: 'feedback',
+            orderId: state.orderId,
+            accessToken: state.token,
+            useful: useful,
+            scenario: state.plan && state.plan.scenario || state.scenario,
+          });
+          var box = result.querySelector('.feedback');
+          if (box) box.innerHTML = '<p class="micro">Thanks. That helps improve the rescue plan.</p>';
+        } catch (_) {}
+      }
+
+      function downloadPdf() {
+        if (!state.plan || !window.jspdf || !window.jspdf.jsPDF) {
+          track('rescue_pdf_download', { success: false, reason: 'jspdf_unavailable' });
+          window.print();
+          return;
+        }
+        try {
+          var doc = new window.jspdf.jsPDF({ unit: 'pt', format: 'a4' });
+          var x = 44;
+          var y = 52;
+          var width = 508;
+          doc.setFont('helvetica', 'bold');
+          doc.setTextColor(27, 94, 32);
+          doc.setFontSize(20);
+          doc.text('Berlin First-Day Rescue Plan', x, y);
+          y += 26;
+          doc.setFont('helvetica', 'normal');
+          doc.setTextColor(33, 33, 33);
+          doc.setFontSize(11);
+          y = writeWrapped(doc, state.plan.summary || '', x, y, width, 15);
+          y += 12;
+          (state.plan.moves || []).forEach(function (move, index) {
+            if (y > 700) { doc.addPage(); y = 52; }
+            doc.setFont('helvetica', 'bold');
+            doc.setTextColor(27, 94, 32);
+            doc.text((index + 1) + '. ' + (move.title || ''), x, y);
+            y += 16;
+            doc.setFont('helvetica', 'normal');
+            doc.setTextColor(33, 33, 33);
+            y = writeWrapped(doc, (move.time ? move.time + ': ' : '') + (move.body || ''), x, y, width, 14);
+            y += 8;
+          });
+          doc.setFontSize(9);
+          doc.setTextColor(86, 97, 86);
+          y = writeWrapped(doc, state.plan.disclaimer || '', x, Math.min(y + 10, 760), width, 12);
+          doc.save('berlin-first-day-rescue-plan.pdf');
+          track('rescue_pdf_download', { success: true });
+        } catch (error) {
+          track('rescue_pdf_download', { success: false, reason: 'pdf_exception' });
+          window.print();
+        }
+      }
+
+      function writeWrapped(doc, text, x, y, width, lineHeight) {
+        var lines = doc.splitTextToSize(String(text || ''), width);
+        lines.forEach(function (line) {
+          doc.text(line, x, y);
+          y += lineHeight;
+        });
+        return y;
+      }
+
+      async function copyPlanLink() {
+        try {
+          await navigator.clipboard.writeText(window.location.href);
+          track('rescue_plan_opened', { action: 'copy_link' });
+          var copy = result.querySelector('[data-copy]');
+          if (copy) {
+            copy.textContent = 'Copied';
+            setTimeout(function () { copy.textContent = 'Copy link'; }, 1600);
+          }
+        } catch (_) {}
+      }
+
+      function cleanPayload(payload) {
+        return {
+          scenario: payload.scenario,
+          arrivalDate: payload.arrivalDate,
+          arrivalTime: payload.arrivalTime,
+          startPoint: payload.startPoint,
+          luggage: payload.luggage,
+          energy: payload.energy,
+          priority: payload.priority,
+        };
+      }
+
+      function pageUrlWithoutAccess() {
+        var url = new URL(window.location.href);
+        ['order', 'token', 'session_id', 'checkout'].forEach(function (key) { url.searchParams.delete(key); });
+        return url.toString();
+      }
+
+      function todayKey() {
+        var date = new Date();
+        var tzOffset = date.getTimezoneOffset() * 60000;
+        return new Date(date.getTime() - tzOffset).toISOString().slice(0, 10);
+      }
+
+      function defaultTime() {
+        var date = new Date(Date.now() + 60 * 60 * 1000);
+        return String(date.getHours()).padStart(2, '0') + ':' + String(date.getMinutes()).padStart(2, '0');
+      }
+
+      function sessionId() {
+        return storedId(sessionStorage, 'bwRescueSessionId', 'bw_rps');
+      }
+
+      function visitorId() {
+        return storedId(localStorage, 'bwRescueVisitorId', 'bw_rpv');
+      }
+
+      function storedId(storage, key, prefix) {
+        try {
+          var existing = storage.getItem(key);
+          if (existing) return existing;
+          var value = prefix + '_' + Math.random().toString(36).slice(2) + Date.now().toString(36);
+          storage.setItem(key, value);
+          return value;
+        } catch (_) {
+          return prefix + '_' + Date.now().toString(36);
+        }
+      }
+
+      function once(fn) {
+        var done = false;
+        return function () {
+          if (done) return;
+          done = true;
+          fn.apply(this, arguments);
+        };
+      }
+
+      function escapeHtml(value) {
+        return String(value || '').replace(/[&<>"']/g, function (char) {
+          return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char];
+        });
+      }
+
+      function escapeAttr(value) {
+        return escapeHtml(value).replace(/`/g, '&#96;');
+      }
+    })();
+  </script>
+</main>
+</body>
+</html>
