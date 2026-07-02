@@ -684,9 +684,9 @@
       <div>
         <p class="kicker">Berlin First-Day Rescue Plan</p>
         <h1>Your first hours in Berlin, sorted.</h1>
-        <p class="sub">Choose your arrival scenario, answer five quick questions, pay EUR 9, and open a short mobile plan immediately.</p>
+        <p class="sub">Choose your arrival scenario, answer five quick questions, pay USD 1, and open a short mobile plan immediately.</p>
       </div>
-      <div class="price"><span>Instant plan</span>EUR 9</div>
+      <div class="price"><span>Instant plan</span>USD 1</div>
     </section>
 
     <section class="body" data-entry>
@@ -757,7 +757,7 @@
 
           <div class="pay">
             <p class="micro">Main delivery is the instant plan screen. PDF is only a backup export.</p>
-            <button class="primary" type="submit" data-submit>Pay EUR 9 and open plan</button>
+            <button class="primary" type="submit" data-submit>Pay USD 1 and open plan</button>
           </div>
           <div class="status" data-status></div>
         </form>
@@ -1062,7 +1062,7 @@
 
       function setBusy(isBusy, message) {
         submit.disabled = isBusy;
-        submit.textContent = isBusy ? 'Opening checkout...' : 'Pay EUR 9 and open plan';
+        submit.textContent = isBusy ? 'Opening checkout...' : 'Pay USD 1 and open plan';
         if (message) showStatus(message);
         if (!isBusy && !message) hideStatus();
       }
