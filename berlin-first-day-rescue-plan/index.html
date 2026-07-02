@@ -798,6 +798,8 @@
       };
 
       var entry = root.querySelector('[data-entry]');
+      var intakePanel = entry && entry.querySelector(':scope > .panel');
+      var trustPanel = entry && entry.querySelector(':scope > .trust');
       var form = root.querySelector('[data-form]');
       var status = root.querySelector('[data-status]');
       var submit = root.querySelector('[data-submit]');
@@ -924,7 +926,8 @@
 
       async function bootFromParams() {
         if (!state.orderId || !state.token) return;
-        entry.classList.add('hidden');
+        if (intakePanel) intakePanel.classList.add('hidden');
+        if (trustPanel) trustPanel.classList.add('hidden');
         result.classList.add('show');
         result.innerHTML = loadingMarkup('Opening your plan...');
         try {
