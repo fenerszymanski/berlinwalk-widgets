@@ -10,7 +10,7 @@
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
-<div id="bw-zone-decoder" data-version="20260702d">
+<div id="bw-zone-decoder" data-version="20260702e">
   <style>
     html,
     body {
@@ -165,10 +165,7 @@
     }
 
     #bw-zone-decoder .ticket-card {
-      background:
-        radial-gradient(circle at 14px 50%, rgba(27, 94, 32, 0.18) 0 5px, transparent 6px),
-        radial-gradient(circle at calc(100% - 14px) 50%, rgba(27, 94, 32, 0.18) 0 5px, transparent 6px),
-        linear-gradient(135deg, #fff 0%, #FFF8A8 100%);
+      background: linear-gradient(135deg, #fff 0%, #FFF8A8 100%);
       border: 1px solid rgba(255, 230, 0, 0.74);
       border-radius: 8px;
       box-shadow: 0 18px 36px rgba(0, 0, 0, 0.24);
@@ -176,19 +173,8 @@
       display: grid;
       gap: 10px;
       min-height: 150px;
-      padding: 14px 14px 14px 54px;
+      padding: 14px;
       position: relative;
-    }
-
-    #bw-zone-decoder .ticket-card::before {
-      background-image: linear-gradient(to bottom, rgba(27, 94, 32, 0.34) 45%, transparent 0);
-      background-size: 1px 8px;
-      content: "";
-      height: calc(100% - 22px);
-      left: 42px;
-      position: absolute;
-      top: 11px;
-      width: 1px;
     }
 
     #bw-zone-decoder .ticket-card small {
@@ -210,56 +196,49 @@
       align-items: center;
       background: #fff;
       border: 1px solid rgba(27, 94, 32, 0.18);
-      border-radius: 999px;
+      border-radius: 8px;
       color: var(--green);
-      display: inline-flex;
-      font-size: 13px;
+      display: grid;
       font-weight: 950;
       justify-content: center;
-      min-height: 34px;
+      min-height: 58px;
+      padding: 7px 5px;
+      text-align: center;
     }
 
-    #bw-zone-decoder .ticket-zones span.is-city,
-    #bw-zone-decoder .ticket-zones span.is-c {
+    #bw-zone-decoder .ticket-zones b {
+      font-size: 21px;
+      line-height: 1;
+    }
+
+    #bw-zone-decoder .ticket-zones em {
+      color: var(--muted);
+      font-size: 9.5px;
+      font-style: normal;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    #bw-zone-decoder .ticket-zones span.is-city {
       background: var(--green);
       border-color: var(--green);
       color: #fff;
     }
 
-    #bw-zone-decoder .ticket-zones span.is-c {
+    #bw-zone-decoder .ticket-zones span.is-city em {
+      color: #EAF7DF;
+    }
+
+    #bw-zone-decoder .ticket-zones span.is-c b {
       color: var(--yellow);
     }
 
-    #bw-zone-decoder .icon-row {
-      display: grid;
-      gap: 10px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    #bw-zone-decoder .icon-tile {
-      background: rgba(255, 255, 255, 0.92);
-      border-radius: 8px;
+    #bw-zone-decoder .ticket-hint {
       color: var(--green);
-      display: grid;
-      font-size: 10px;
-      font-weight: 950;
-      gap: 5px;
-      min-height: 64px;
-      padding: 8px;
-      place-items: center;
-      text-align: center;
-    }
-
-    #bw-zone-decoder .icon-tile b {
-      align-items: center;
-      background: var(--yellow);
-      border-radius: 999px;
-      color: var(--green);
-      display: inline-flex;
-      font-size: 13px;
-      height: 28px;
-      justify-content: center;
-      width: 28px;
+      font-size: 11px;
+      font-weight: 850;
+      line-height: 1.3;
+      margin: 0;
     }
 
     #bw-zone-decoder .body {
@@ -402,7 +381,7 @@
       color: var(--text);
       cursor: pointer;
       display: grid;
-      grid-template-columns: 112px minmax(0, 1fr);
+      grid-template-columns: 126px minmax(0, 1fr);
       min-height: 112px;
       overflow: hidden;
       padding: 0;
@@ -437,28 +416,6 @@
       width: 100%;
     }
 
-    #bw-zone-decoder .zone-badge {
-      align-items: center;
-      background: var(--green);
-      border: 2px solid #fff;
-      border-radius: 999px;
-      color: var(--yellow);
-      display: inline-flex;
-      font-size: 13px;
-      font-weight: 950;
-      height: 42px;
-      justify-content: center;
-      left: 10px;
-      position: absolute;
-      top: 10px;
-      width: 42px;
-    }
-
-    #bw-zone-decoder .zone-badge.is-wide {
-      font-size: 11px;
-      width: 58px;
-    }
-
     #bw-zone-decoder .choice-copy {
       display: grid;
       gap: 6px;
@@ -479,6 +436,20 @@
       font-size: 11.5px;
       font-weight: 700;
       line-height: 1.35;
+    }
+
+    #bw-zone-decoder .choice-type {
+      align-items: center;
+      background: var(--soft);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--green);
+      display: inline-flex;
+      font-size: 10px;
+      font-weight: 950;
+      justify-self: start;
+      line-height: 1;
+      padding: 6px 8px;
     }
 
     #bw-zone-decoder .result-panel {
@@ -527,10 +498,7 @@
     }
 
     #bw-zone-decoder .answer-ticket {
-      background:
-        radial-gradient(circle at 18px 50%, rgba(255, 255, 255, 0.95) 0 7px, transparent 8px),
-        radial-gradient(circle at calc(100% - 18px) 50%, rgba(255, 255, 255, 0.95) 0 7px, transparent 8px),
-        linear-gradient(135deg, var(--green), #2F7B25);
+      background: linear-gradient(135deg, var(--green), #2F7B25);
       border-radius: 8px;
       color: #fff;
       display: grid;
@@ -546,10 +514,12 @@
       border-radius: 999px;
       content: "";
       height: 120px;
+      pointer-events: none;
       position: absolute;
       right: -38px;
       top: -38px;
       width: 120px;
+      z-index: 0;
     }
 
     #bw-zone-decoder .answer-ticket small {
@@ -751,17 +721,6 @@
         display: none;
       }
 
-      #bw-zone-decoder .zone-badge {
-        height: 34px;
-        left: 8px;
-        top: 8px;
-        width: 34px;
-      }
-
-      #bw-zone-decoder .zone-badge.is-wide {
-        width: 48px;
-      }
-
       #bw-zone-decoder .answer-ticket {
         align-content: center;
         min-height: 128px;
@@ -902,11 +861,11 @@
       <div class="hero-copy">
         <p class="kicker">BerlinWalk tool</p>
         <h2>Berlin Zone Ticket Decoder</h2>
-        <p>Pick the farthest place in your day. The answer appears at the end, where you can see the zone ticket to buy.</p>
+        <p>Pick the farthest place in your day. The ticket answer appears only after your choice.</p>
         <div class="mini-rule" aria-label="Berlin ticket zone rule">
-          <span><b>AB</b>Berlin city</span>
-          <span><b>ABC</b>Airport and Potsdam</span>
-          <span><b>Route app</b>Other cities</span>
+          <span><b>City</b>inside Berlin</span>
+          <span><b>Airport</b>outer zone</span>
+          <span><b>Day trip</b>check the farthest stop</span>
         </div>
       </div>
       <div class="hero-visual" aria-hidden="true">
@@ -915,15 +874,11 @@
           <div class="ticket-card">
             <small>Fare zones</small>
             <div class="ticket-zones">
-              <span class="is-city">A</span>
-              <span class="is-city">B</span>
-              <span class="is-c">C</span>
+              <span class="is-city"><b>A</b><em>centre</em></span>
+              <span class="is-city"><b>B</b><em>Berlin city</em></span>
+              <span class="is-c"><b>C</b><em>airport & outer trips</em></span>
             </div>
-            <div class="icon-row">
-              <span class="icon-tile"><b>U</b>Centre</span>
-              <span class="icon-tile"><b>S</b>City</span>
-              <span class="icon-tile"><b>C</b>Airport</span>
-            </div>
+            <p class="ticket-hint">Choose your farthest stop below. No advice is shown before that.</p>
           </div>
         </div>
       </div>
@@ -933,7 +888,7 @@
       <div class="choices">
         <div class="choice-head">
           <h3>Farthest stop in your day</h3>
-          <p>Choose one. City-only means AB; airport, Potsdam or Oranienburg means ABC.</p>
+          <p>Choose one simple route picture. The result comes after the cards.</p>
         </div>
         <div class="choice-grid" data-choices></div>
       </div>
@@ -941,7 +896,7 @@
       <div class="result-panel is-empty" data-result-panel aria-live="polite">
         <div class="empty-state">
           <b>Your ticket answer will appear here.</b>
-          <span>The result stays after the choices so the top of the tool does not give advice before your route is clear.</span>
+          <span>Start with the farthest place. Then check the short ticket note here.</span>
         </div>
       </div>
     </div>
@@ -957,50 +912,54 @@
         {
           id: 'city',
           zone: 'AB',
-          badge: 'AB',
+          type: 'City sightseeing',
           label: 'Berlin city only',
           note: 'Historic centre, Museum Island, Alexanderplatz, Zoo, East Side Gallery.',
           image: imageBase + '02-sbahn-hauptbahnhof-berlin.jpg',
           title: 'Buy AB',
+          resultMark: 'AB',
           ticketNote: 'Berlin city ticket',
           body: 'AB is enough for normal sightseeing inside Berlin city. This covers the historic centre and most visitor hotels.',
           bullets: ['A+B cover central Berlin and the rest of the city.', 'BER Airport, Potsdam and Oranienburg are not city-only stops.', 'Paper tickets still need validation before travel.']
         },
         {
-          id: 'zone-c',
+          id: 'airport',
           zone: 'ABC',
-          badge: 'ABC',
-          label: 'Airport, Potsdam, Oranienburg',
-          note: 'BER Airport, Potsdam/Sanssouci, Sachsenhausen or Oranienburg.',
+          type: 'Airport route',
+          label: 'BER Airport',
+          note: 'Arrival or departure at Berlin Brandenburg Airport.',
           image: imageBase + '03-ber-airport-station-zone-c.jpg',
           title: 'Buy ABC',
+          resultMark: 'ABC',
           ticketNote: 'Zone C stop included',
-          body: 'If your day includes BER Airport, Potsdam or Oranienburg, buy ABC. It covers A, B and C in one ticket.',
+          body: 'If your day includes BER Airport, buy ABC. The airport is in zone C, outside the normal city-only AB ticket.',
           bullets: ['ABC includes A, B and C in one ticket.', 'This is the common airport-zone mistake.', 'If you already have AB, check whether an extension ticket fits a single extra leg.']
         },
         {
-          id: 'regional',
-          zone: 'ROUTE',
-          badge: 'DB',
-          label: 'Dresden, Leipzig, Spreewald',
-          note: 'A wider day trip beyond the Berlin fare-zone decision.',
-          image: imageBase + '02-sbahn-hauptbahnhof-berlin.jpg',
-          title: 'Use route app',
-          ticketNote: 'Beyond AB/ABC',
-          body: 'This is no longer a simple Berlin AB or ABC decision. Use DB, VBB or BVG route results before paying.',
-          bullets: ['Berlin city tickets do not automatically cover another city.', 'Deutschlandticket rules depend on train type.', 'Do not use ICE, IC or EC trains with a local-only ticket.']
+          id: 'day-trip',
+          zone: 'ABC',
+          type: 'Classic day trip',
+          label: 'Potsdam or Oranienburg',
+          note: 'Sanssouci, Potsdam city, Sachsenhausen or Oranienburg.',
+          image: imageBase + '05-sanssouci-potsdam-zone-c.jpg',
+          title: 'Buy ABC',
+          resultMark: 'ABC',
+          ticketNote: 'Zone C day trip',
+          body: 'Potsdam and Oranienburg sit in zone C, so a normal Berlin city-only AB ticket is not enough for those trips.',
+          bullets: ['ABC covers the Berlin city zones plus zone C.', 'Use it for common tourist day trips to Potsdam or Oranienburg.', 'Check the exact route if you are adding long-distance trains.']
         },
         {
-          id: 'edge',
+          id: 'check',
           zone: 'CHECK',
-          badge: '?',
-          label: 'Unsure edge hotel',
-          note: 'Hotel or station near the city boundary.',
+          type: 'Not a simple zone choice',
+          label: 'Another city or unsure station',
+          note: 'Dresden, Leipzig, Spreewald, or a hotel near the boundary.',
           image: imageBase + '04-bvg-ticket-machine.jpg',
-          title: 'Check station',
+          title: 'Check route first',
+          resultMark: 'CHECK',
           ticketNote: 'Exact stop matters',
-          body: 'Most hotels are inside AB, but edge cases exist. Search the exact station name in BVG or VBB before buying.',
-          bullets: ['Do not guess from the neighborhood name alone.', 'If BER, Potsdam or Oranienburg appears, switch to ABC.', 'Use the official route result when the station is near the boundary.']
+          body: 'If the stop is outside the normal Berlin zone system, or you are unsure of the exact station, check the route result before buying.',
+          bullets: ['Do not guess from a neighborhood or city name alone.', 'For Dresden, Leipzig or Spreewald, check DB/VBB route rules.', 'For boundary hotels, search the exact station in BVG or VBB.']
         }
       ];
 
@@ -1016,11 +975,10 @@
 
       function renderChoices() {
         choicesEl.innerHTML = choices.map(function (choice) {
-          var wide = choice.badge.length > 2 ? ' is-wide' : '';
           return [
             '<button class="choice" type="button" data-choice="' + choice.id + '" aria-pressed="' + (selected === choice.id ? 'true' : 'false') + '">',
-            '<span class="choice-image"><img src="' + choice.image + '" alt=""><span class="zone-badge' + wide + '">' + choice.badge + '</span></span>',
-            '<span class="choice-copy"><b>' + choice.label + '</b><span>' + choice.note + '</span></span>',
+            '<span class="choice-image"><img src="' + choice.image + '" alt=""></span>',
+            '<span class="choice-copy"><span class="choice-type">' + choice.type + '</span><b>' + choice.label + '</b><span>' + choice.note + '</span></span>',
             '</button>'
           ].join('');
         }).join('');
@@ -1028,7 +986,7 @@
 
       function emptyResult() {
         resultPanel.className = 'result-panel is-empty';
-        resultPanel.innerHTML = '<div class="empty-state"><b>Your ticket answer will appear here.</b><span>The result stays after the choices so the top of the tool does not give advice before your route is clear.</span></div>';
+        resultPanel.innerHTML = '<div class="empty-state"><b>Your ticket answer will appear here.</b><span>Start with the farthest place. Then check the short ticket note here.</span></div>';
       }
 
       function renderResult(choice) {
@@ -1038,7 +996,7 @@
           '<div class="answer-grid">',
           '<div class="answer-ticket">',
           '<small>Result</small>',
-          '<strong class="' + zoneClass + '">' + choice.title.replace('Buy ', '') + '</strong>',
+          '<strong class="' + zoneClass + '">' + choice.resultMark + '</strong>',
           '<span>' + choice.ticketNote + '</span>',
           '</div>',
           '<div class="answer-copy">',
