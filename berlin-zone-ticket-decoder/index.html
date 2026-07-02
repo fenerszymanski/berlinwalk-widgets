@@ -112,6 +112,96 @@
       padding: 16px;
     }
 
+    #bw-zone-decoder .ticket-face {
+      background:
+        radial-gradient(circle at 14px 50%, rgba(27, 94, 32, 0.18) 0 5px, transparent 6px),
+        radial-gradient(circle at calc(100% - 14px) 50%, rgba(27, 94, 32, 0.18) 0 5px, transparent 6px),
+        linear-gradient(135deg, #fff 0%, #FFF8A8 100%);
+      border: 1px solid rgba(27, 94, 32, 0.22);
+      border-radius: 8px;
+      display: grid;
+      gap: 9px;
+      margin-top: 6px;
+      padding: 12px;
+      position: relative;
+    }
+
+    #bw-zone-decoder .ticket-face::before {
+      background-image: linear-gradient(to bottom, rgba(27, 94, 32, 0.26) 40%, transparent 0);
+      background-size: 1px 7px;
+      content: "";
+      height: calc(100% - 18px);
+      left: 44px;
+      position: absolute;
+      top: 9px;
+      width: 1px;
+    }
+
+    #bw-zone-decoder .ticket-topline {
+      align-items: center;
+      display: flex;
+      gap: 8px;
+      justify-content: space-between;
+      min-width: 0;
+    }
+
+    #bw-zone-decoder .ticket-label {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 950;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    #bw-zone-decoder .ticket-chip {
+      background: var(--green);
+      border-radius: 999px;
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 950;
+      padding: 5px 9px;
+      white-space: nowrap;
+    }
+
+    #bw-zone-decoder .zone-track {
+      display: grid;
+      gap: 6px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-zone-decoder .track-step {
+      align-items: center;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 999px;
+      color: var(--muted);
+      display: flex;
+      font-size: 11px;
+      font-weight: 900;
+      gap: 6px;
+      justify-content: center;
+      min-height: 30px;
+      padding: 5px 6px;
+    }
+
+    #bw-zone-decoder .track-step::before {
+      background: var(--light);
+      border-radius: 999px;
+      content: "";
+      height: 8px;
+      width: 8px;
+    }
+
+    #bw-zone-decoder .track-step.is-active {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    #bw-zone-decoder .track-step.is-active::before {
+      background: var(--yellow);
+    }
+
     #bw-zone-decoder .result small {
       color: var(--muted);
       font-size: 10px;
@@ -146,7 +236,7 @@
       align-items: end;
       display: grid;
       gap: 12px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     #bw-zone-decoder label {
@@ -168,6 +258,75 @@
       min-height: 44px;
       padding: 10px 34px 10px 12px;
       width: 100%;
+    }
+
+    #bw-zone-decoder .zone-board {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-zone-decoder .zone-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      min-width: 0;
+      padding: 13px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #bw-zone-decoder .zone-card::after {
+      background: var(--card-color, var(--light));
+      border-radius: 999px;
+      content: "";
+      height: 54px;
+      opacity: 0.16;
+      position: absolute;
+      right: -16px;
+      top: -16px;
+      width: 54px;
+    }
+
+    #bw-zone-decoder .zone-card.is-active {
+      border-color: var(--green);
+      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.08);
+    }
+
+    #bw-zone-decoder .zone-card strong {
+      align-items: center;
+      color: var(--green);
+      display: flex;
+      font-size: 15px;
+      font-weight: 950;
+      gap: 8px;
+      line-height: 1.1;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-zone-decoder .zone-card strong span {
+      align-items: center;
+      background: var(--green);
+      border-radius: 999px;
+      color: var(--yellow);
+      display: inline-flex;
+      flex: 0 0 auto;
+      height: 30px;
+      justify-content: center;
+      width: 30px;
+    }
+
+    #bw-zone-decoder .zone-card p {
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.35;
+      margin: 0;
+      position: relative;
+      z-index: 1;
     }
 
     #bw-zone-decoder .grid {
@@ -219,6 +378,9 @@
       border-radius: 8px;
       color: var(--text);
       cursor: pointer;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 42px 1fr;
       min-height: 78px;
       padding: 12px;
       text-align: left;
@@ -238,6 +400,25 @@
 
     #bw-zone-decoder .chip:hover {
       transform: translateY(-1px);
+    }
+
+    #bw-zone-decoder .chip-icon {
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--green);
+      display: inline-flex;
+      font-size: 22px;
+      font-weight: 900;
+      height: 42px;
+      justify-content: center;
+      line-height: 1;
+      width: 42px;
+    }
+
+    #bw-zone-decoder .chip-text {
+      min-width: 0;
     }
 
     #bw-zone-decoder .chip b {
@@ -275,11 +456,11 @@
     #bw-zone-decoder .line {
       align-items: center;
       display: grid;
-      gap: 8px;
-      grid-template-columns: 34px 1fr auto;
+      gap: 10px;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
     }
 
-    #bw-zone-decoder .badge {
+    #bw-zone-decoder .line .badge {
       align-items: center;
       background: var(--green);
       border-radius: 999px;
@@ -287,30 +468,39 @@
       display: inline-flex;
       font-size: 13px;
       font-weight: 950;
-      height: 34px;
+      height: 42px;
       justify-content: center;
-      width: 34px;
+      width: 42px;
+    }
+
+    #bw-zone-decoder .line-copy {
+      display: grid;
+      gap: 4px;
+      min-width: 0;
     }
 
     #bw-zone-decoder .line b {
       color: var(--text);
+      display: block;
       font-size: 13px;
       font-weight: 900;
       line-height: 1.2;
     }
 
-    #bw-zone-decoder .line span {
+    #bw-zone-decoder .line-copy span {
       color: var(--muted);
+      display: block;
       font-size: 11.5px;
       font-weight: 700;
       line-height: 1.3;
     }
 
-    #bw-zone-decoder .pill {
+    #bw-zone-decoder .line .pill {
       background: rgba(124, 179, 66, 0.16);
       border: 1px solid rgba(124, 179, 66, 0.36);
       border-radius: 999px;
       color: var(--green);
+      display: inline-flex;
       font-size: 11px;
       font-weight: 950;
       padding: 5px 8px;
@@ -392,6 +582,12 @@
       padding: 10px 14px;
     }
 
+    #bw-zone-decoder .advice .reset {
+      justify-self: start;
+      margin-top: 2px;
+      min-width: 170px;
+    }
+
     @media (max-width: 760px) {
       #bw-zone-decoder {
         margin: 12px 0;
@@ -400,7 +596,7 @@
       #bw-zone-decoder .hero,
       #bw-zone-decoder .toolbar,
       #bw-zone-decoder .grid,
-      #bw-zone-decoder .chips {
+      #bw-zone-decoder .zone-board {
         grid-template-columns: 1fr;
       }
 
@@ -416,6 +612,21 @@
       #bw-zone-decoder .body {
         padding: 14px;
       }
+
+      #bw-zone-decoder .line {
+        grid-template-columns: 42px minmax(0, 1fr);
+      }
+
+      #bw-zone-decoder .line .pill {
+        grid-column: 2;
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 360px) {
+      #bw-zone-decoder .chips {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 
@@ -430,6 +641,17 @@
         <small>Current recommendation</small>
         <strong data-zone-result>AB</strong>
         <span data-zone-copy>City sightseeing only. Stay with AB unless your route leaves Berlin city.</span>
+        <div class="ticket-face" aria-hidden="true">
+          <div class="ticket-topline">
+            <span class="ticket-label">Ticket zone</span>
+            <span class="ticket-chip" data-ticket-chip>AB</span>
+          </div>
+          <div class="zone-track" data-zone-track>
+            <span class="track-step is-active" data-track-zone="A">A</span>
+            <span class="track-step is-active" data-track-zone="B">B</span>
+            <span class="track-step" data-track-zone="C">C</span>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -451,7 +673,21 @@
             <option value="group">3 to 5 people together</option>
           </select>
         </label>
-        <button class="reset" type="button" data-reset>Reset route</button>
+      </div>
+
+      <div class="zone-board" data-zone-board aria-label="Berlin fare zone visual guide">
+        <div class="zone-card is-active" data-zone-card="A" style="--card-color:#FFE600">
+          <strong><span>A</span> Central sights</strong>
+          <p>Ringbahn core, Museum Island, Alexanderplatz and the historic centre.</p>
+        </div>
+        <div class="zone-card is-active" data-zone-card="B" style="--card-color:#7CB342">
+          <strong><span>B</span> Berlin city</strong>
+          <p>Most hotels, neighborhoods and everyday visitor routes inside Berlin.</p>
+        </div>
+        <div class="zone-card" data-zone-card="C" style="--card-color:#E63946">
+          <strong><span>C</span> Airport & day trips</strong>
+          <p>BER Airport, Potsdam, Oranienburg and common zone C mistakes.</p>
+        </div>
       </div>
 
       <div class="grid">
@@ -475,6 +711,7 @@
               <p data-advice-body>Normal central Berlin sightseeing stays inside AB. Buy before boarding and validate paper tickets.</p>
               <div class="fare-grid" data-fares></div>
               <ul data-tips></ul>
+              <button class="reset" type="button" data-reset>Reset route</button>
             </div>
           </div>
         </div>
@@ -488,14 +725,14 @@
       if (!root) return;
 
       var stops = [
-        { id: 'center', label: 'Historic centre', note: 'Alexanderplatz, Museum Island, Brandenburg Gate', zone: 'AB', defaultOn: true },
-        { id: 'hotel', label: 'Hotel inside Berlin', note: 'Most visitor hotels and neighborhoods', zone: 'AB', defaultOn: true },
-        { id: 'east', label: 'East Side Gallery or Zoo', note: 'Still normal Berlin city travel', zone: 'AB' },
-        { id: 'ber', label: 'BER Airport', note: 'Airport station is in zone C', zone: 'ABC', hot: true },
-        { id: 'potsdam', label: 'Potsdam', note: 'Sanssouci and Potsdam city are zone C', zone: 'ABC', hot: true },
-        { id: 'oranienburg', label: 'Oranienburg / Sachsenhausen', note: 'Memorial route goes beyond Berlin city', zone: 'ABC', hot: true },
-        { id: 'regional', label: 'Dresden, Leipzig or Spreewald', note: 'Not solved by a normal Berlin city ticket', zone: 'REGIONAL', hot: true },
-        { id: 'edge', label: 'Unsure edge hotel', note: 'Check the exact station in BVG/VBB first', zone: 'CHECK' }
+        { id: 'center', label: 'Historic centre', note: 'Alexanderplatz, Museum Island, Brandenburg Gate', zone: 'AB', icon: 'A', defaultOn: true },
+        { id: 'hotel', label: 'Hotel inside Berlin', note: 'Most visitor hotels and neighborhoods', zone: 'AB', icon: 'H', defaultOn: true },
+        { id: 'east', label: 'East Side Gallery or Zoo', note: 'Still normal Berlin city travel', zone: 'AB', icon: 'E' },
+        { id: 'ber', label: 'BER Airport', note: 'Airport station is in zone C', zone: 'ABC', icon: 'BER', hot: true },
+        { id: 'potsdam', label: 'Potsdam', note: 'Sanssouci and Potsdam city are zone C', zone: 'ABC', icon: 'P' },
+        { id: 'oranienburg', label: 'Oranienburg / Sachsenhausen', note: 'Memorial route goes beyond Berlin city', zone: 'ABC', icon: 'O', hot: true },
+        { id: 'regional', label: 'Dresden, Leipzig or Spreewald', note: 'Not solved by a normal Berlin city ticket', zone: 'REGIONAL', icon: 'R', hot: true },
+        { id: 'edge', label: 'Unsure edge hotel', note: 'Check the exact station in BVG/VBB first', zone: 'CHECK', icon: '?' }
       ];
 
       var selected = new Set(stops.filter(function (stop) { return stop.defaultOn; }).map(function (stop) { return stop.id; }));
@@ -509,6 +746,9 @@
       var tips = root.querySelector('[data-tips]');
       var dayShape = root.querySelector('[data-day-shape]');
       var group = root.querySelector('[data-group]');
+      var ticketChip = root.querySelector('[data-ticket-chip]');
+      var trackSteps = Array.prototype.slice.call(root.querySelectorAll('[data-track-zone]'));
+      var zoneCards = Array.prototype.slice.call(root.querySelectorAll('[data-zone-card]'));
 
       function buttonFor(stop) {
         var button = document.createElement('button');
@@ -516,7 +756,7 @@
         button.className = 'chip';
         button.setAttribute('aria-pressed', selected.has(stop.id) ? 'true' : 'false');
         button.dataset.stop = stop.id;
-        button.innerHTML = '<b>' + stop.label + '</b><span>' + stop.note + '</span>';
+        button.innerHTML = '<span class="chip-icon" aria-hidden="true">' + stop.icon + '</span><span class="chip-text"><b>' + stop.label + '</b><span>' + stop.note + '</span></span>';
         button.addEventListener('click', function () {
           if (selected.has(stop.id)) selected.delete(stop.id);
           else selected.add(stop.id);
@@ -546,8 +786,23 @@
         if (!active.length) active = [stops[0]];
         strip.innerHTML = active.map(function (stop) {
           var pill = stop.zone === 'REGIONAL' ? 'Regional' : stop.zone === 'CHECK' ? 'Check' : stop.zone;
-          return '<div class="line"><span class="badge">' + pill[0] + '</span><div><b>' + stop.label + '</b><span>' + stop.note + '</span></div><span class="pill">' + pill + '</span></div>';
+          return '<div class="line"><span class="badge">' + pill[0] + '</span><div class="line-copy"><b>' + stop.label + '</b><span>' + stop.note + '</span></div><span class="pill">' + pill + '</span></div>';
         }).join('');
+      }
+
+      function renderZoneVisual(zone) {
+        var visibleZone = zone === 'REGIONAL' ? 'Route app' : zone === 'CHECK' ? 'Check' : zone;
+        ticketChip.textContent = visibleZone;
+        trackSteps.forEach(function (step) {
+          var stepZone = step.dataset.trackZone;
+          var active = stepZone === 'A' || stepZone === 'B' || zone === 'ABC' || zone === 'REGIONAL';
+          step.classList.toggle('is-active', active);
+        });
+        zoneCards.forEach(function (card) {
+          var cardZone = card.dataset.zoneCard;
+          var active = cardZone === 'A' || cardZone === 'B' || zone === 'ABC' || zone === 'REGIONAL';
+          card.classList.toggle('is-active', active);
+        });
       }
 
       function setAdvice(zone) {
@@ -593,6 +848,7 @@
           list.unshift('For 3 to 5 people traveling together, check the small-group 24-hour ticket before buying individual tickets.');
         }
 
+        renderZoneVisual(zone);
         adviceTitle.textContent = title;
         adviceBody.textContent = body;
         tips.innerHTML = list.map(function (item) { return '<li>' + item + '</li>'; }).join('');
