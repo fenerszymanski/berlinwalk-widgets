@@ -142,6 +142,7 @@ const TOPICS = [
       'where-to-eat-near-alexanderplatz-without-getting-ripped-off',
       '5-best-coffee-shops-near-hackescher-markt-a-local-s-guide',
       'what-to-wear-to-berlin-clubs',
+      'berlin-restaurant-phrases',
     ],
     match: /(food|eat|vegan|plant-based|plant based|currywurst|döner|doner|coffee|club|nightlife|späti|spaeti|spati|menu|tip in berlin|restaurants?)/i,
   },
@@ -519,6 +520,7 @@ function relatedToolSlugFor(post) {
   if (/(berlin-accessibility|step-free|step free|wheelchair|accessible berlin|accessibility)/.test(s)) return 'berlin-step-free-planner';
   if (/(berlin-bike-lanes-tourists|bike lanes|bike-lane|cycle lane|red bike lane|cycling rules)/.test(s)) return 'berlin-bike-lane-reflex-checker';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
+  if (/(berlin-restaurant-phrases|restaurant phrases|german restaurant phrases|ordering food|ask for the bill|berlin cafe phrases)/.test(s)) return 'berlin-restaurant-phrase-card';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';
   if (/(public-holiday|public holiday|public-holidays|public holidays|bank-holiday|bank holiday|holiday-closures|holiday closures|shop-closures|shop closures|shops-closed|shops closed)/.test(s)) return 'berlin-public-holiday-checker';
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
