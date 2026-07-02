@@ -119,9 +119,25 @@
     }
 
     .bw-hero-icons b {
-      color: var(--bw-yellow);
-      font-size: 17px;
-      line-height: 1;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(255, 252, 235, 0.96);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+      overflow: hidden;
+    }
+
+    .bw-hero-icons img,
+    .bw-visual-symbol img,
+    .bw-stop-icon img,
+    .bw-advice-icon img,
+    .bw-link-symbol img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
     }
 
     .bw-status-strip {
@@ -256,15 +272,14 @@
       bottom: 10px;
       width: 40px;
       height: 40px;
-      border-radius: 50%;
+      border-radius: 12px;
       display: grid;
       place-items: center;
-      background: rgba(27, 94, 32, 0.92);
-      color: var(--bw-yellow);
-      border: 2px solid rgba(255, 230, 0, 0.62);
-      font-size: 20px;
-      line-height: 1;
+      background: rgba(255, 252, 235, 0.94);
+      border: 1px solid rgba(255, 230, 0, 0.72);
+      padding: 4px;
       z-index: 2;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.20);
     }
 
     .bw-path-body {
@@ -477,17 +492,15 @@
     }
 
     .bw-stop-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
-      background: var(--bw-green);
-      color: var(--bw-yellow);
-      font-size: 20px;
-      font-weight: 900;
-      letter-spacing: 0;
-      box-shadow: inset 0 0 0 4px rgba(255, 230, 0, 0.14);
+      background: #fffceb;
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      padding: 4px;
+      box-shadow: 0 8px 18px rgba(27, 94, 32, 0.10);
     }
 
     .bw-stop strong {
@@ -533,13 +546,12 @@
     .bw-advice-icon {
       width: 30px;
       height: 30px;
-      border-radius: 50%;
+      border-radius: 9px;
       display: grid;
       place-items: center;
-      background: #f0f7ec;
-      color: var(--bw-green);
+      background: #fffceb;
       border: 1px solid rgba(27, 94, 32, 0.18);
-      font-size: 16px;
+      padding: 3px;
       flex: 0 0 auto;
     }
 
@@ -625,14 +637,14 @@
     }
 
     .bw-link-symbol {
-      width: 34px;
-      height: 34px;
+      width: 40px;
+      height: 40px;
       border-radius: 8px;
       display: grid;
       place-items: center;
-      background: var(--bw-green);
-      color: var(--bw-yellow);
-      font-size: 18px;
+      background: #fffceb;
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      padding: 4px;
     }
 
     .bw-link-text {
@@ -740,10 +752,10 @@
         <h1>The Perfect Last Day in Berlin</h1>
         <p>Don't let travel logistics ruin your final hours. Keep the plan simple, ditch the bags early, and protect your airport or station time.</p>
         <div class="bw-hero-icons" aria-label="Last-day priorities">
-          <span><b aria-hidden="true">&#128188;</b>Bags first</span>
-          <span><b aria-hidden="true">&#128205;</b>Stay central</span>
-          <span><b aria-hidden="true">&#128646;</b>Direct transit</span>
-          <span><b aria-hidden="true">&#9201;</b>Buffer locked</span>
+          <span><b aria-hidden="true"><img src="assets/icons/last-day-bag.png" alt=""></b>Bags first</span>
+          <span><b aria-hidden="true"><img src="assets/icons/last-day-pin.png" alt=""></b>Stay central</span>
+          <span><b aria-hidden="true"><img src="assets/icons/last-day-train.png" alt=""></b>Direct transit</span>
+          <span><b aria-hidden="true"><img src="assets/icons/last-day-clock.png" alt=""></b>Buffer locked</span>
         </div>
       </div>
     </section>
@@ -767,7 +779,7 @@
         <article class="bw-path-step">
           <div class="bw-path-media">
             <img src="assets/step-bags.jpg" alt="Rolling suitcases at Berlin Hauptbahnhof.">
-            <span class="bw-visual-symbol" aria-hidden="true">&#128188;</span>
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-bag.png" alt=""></span>
           </div>
           <div class="bw-path-body">
             <span class="bw-step-num">1</span><strong>Ditch the bags</strong><span>Hotel desk, station locker, storage app, or airport storage first.</span>
@@ -776,7 +788,7 @@
         <article class="bw-path-step">
           <div class="bw-path-media">
             <img src="assets/step-central.jpg" alt="Berlin Hauptbahnhof exterior, a central final-day anchor.">
-            <span class="bw-visual-symbol" aria-hidden="true">&#128205;</span>
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-pin.png" alt=""></span>
           </div>
           <div class="bw-path-body">
             <span class="bw-step-num">2</span><strong>Stay central</strong><span>Spree, Reichstag, Hackescher Markt or Museum Island edges.</span>
@@ -785,7 +797,7 @@
         <article class="bw-path-step">
           <div class="bw-path-media">
             <img src="assets/step-train.jpg" alt="Berlin Hauptbahnhof interior levels and platforms.">
-            <span class="bw-visual-symbol" aria-hidden="true">&#128646;</span>
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-train.png" alt=""></span>
           </div>
           <div class="bw-path-body">
             <span class="bw-step-num">3</span><strong>Catch transit early</strong><span>Use the cleanest route before the clock starts shouting.</span>
@@ -794,7 +806,7 @@
         <article class="bw-path-step">
           <div class="bw-path-media">
             <img src="assets/step-airport.jpg" alt="Check-in counters inside BER Terminal 1.">
-            <span class="bw-visual-symbol" aria-hidden="true">&#9201;</span>
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-clock.png" alt=""></span>
           </div>
           <div class="bw-path-body">
             <span class="bw-step-num">4</span><strong>Lock the buffer</strong><span>BER door, station concourse or coach gate before anything extra.</span>
@@ -803,7 +815,7 @@
         <article class="bw-path-step">
           <div class="bw-path-media">
             <img src="assets/step-gate.jpg" alt="Flughafen BER rail station platform under the airport.">
-            <span class="bw-visual-symbol" aria-hidden="true">&#9749;</span>
+            <span class="bw-visual-symbol" aria-hidden="true"><img src="assets/icons/last-day-coffee.png" alt=""></span>
           </div>
           <div class="bw-path-body">
             <span class="bw-step-num">5</span><strong>Then relax</strong><span>Pretzels, souvenirs and restrooms are safer after the buffer.</span>
@@ -882,15 +894,15 @@
 
         <div class="bw-advice-grid">
           <article class="bw-advice">
-            <h3><span class="bw-advice-icon" aria-hidden="true">&#128205;</span>Best final area</h3>
+            <h3><span class="bw-advice-icon" aria-hidden="true"><img src="assets/icons/last-day-pin.png" alt=""></span>Best final area</h3>
             <p data-anchor>Spree and Reichstag exterior near Hauptbahnhof: beautiful, central, and easy to leave from.</p>
           </article>
           <article class="bw-advice">
-            <h3><span class="bw-advice-icon" aria-hidden="true">&#128188;</span>Bags first</h3>
+            <h3><span class="bw-advice-icon" aria-hidden="true"><img src="assets/icons/last-day-bag.png" alt=""></span>Bags first</h3>
             <p data-luggage>Use hotel storage or station lockers before sightseeing. Do not drag a suitcase into the final walk.</p>
           </article>
           <article class="bw-advice">
-            <h3><span class="bw-advice-icon" aria-hidden="true">&#128694;</span>Tour today?</h3>
+            <h3><span class="bw-advice-icon" aria-hidden="true"><img src="assets/icons/last-day-walk.png" alt=""></span>Tour today?</h3>
             <p data-tour>Only if your departure is late and you can stay luggage-free for the 2 hours walk.</p>
           </article>
         </div>
@@ -909,9 +921,9 @@
         <p class="bw-note" data-note>A calm final coffee or walk is better than one extra distant stop followed by a stressed transfer.</p>
 
         <nav class="bw-related" aria-label="Related BerlinWalk guides">
-          <a href="https://www.berlinwalk.com/post/luggage-storage-in-berlin-2026" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true">&#128188;</span><span class="bw-link-text"><small>Related guide</small>Where to store luggage in Berlin</span></a>
-          <a href="https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true">&#9992;</span><span class="bw-link-text"><small>Airport guide</small>BER departure timing and security</span></a>
-          <a href="https://www.berlinwalk.com/tools/berlin-luggage-storage" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true">&#128506;</span><span class="bw-link-text"><small>Free tool</small>Berlin luggage storage map</span></a>
+          <a href="https://www.berlinwalk.com/post/luggage-storage-in-berlin-2026" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true"><img src="assets/icons/last-day-bag.png" alt=""></span><span class="bw-link-text"><small>Related guide</small>Where to store luggage in Berlin</span></a>
+          <a href="https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true"><img src="assets/icons/last-day-plane.png" alt=""></span><span class="bw-link-text"><small>Airport guide</small>BER departure timing and security</span></a>
+          <a href="https://www.berlinwalk.com/tools/berlin-luggage-storage" target="_blank" rel="noopener"><span class="bw-link-symbol" aria-hidden="true"><img src="assets/icons/last-day-map.png" alt=""></span><span class="bw-link-text"><small>Free tool</small>Berlin luggage storage map</span></a>
         </nav>
       </section>
     </section>
@@ -1006,15 +1018,15 @@
 
       function railStops(state, profile, area, risk) {
         const bagStop = state.bags === 'none' || state.bags === 'small'
-          ? ['1', 'Keep essentials ready', 'Ticket, charger, ID and route saved offline.', '&#127915;']
-          : ['1', 'Ditch the bags first', 'Hotel storage, station locker, storage app or airport storage before the fun part.', '&#128188;'];
+          ? ['1', 'Keep essentials ready', 'Ticket, charger, ID and route saved offline.', 'map']
+          : ['1', 'Ditch the bags first', 'Hotel storage, station locker, storage app or airport storage before the fun part.', 'bag'];
         const cityText = risk === 'red' ? area.short : area.anchor;
         return [
           bagStop,
-          ['2', risk === 'green' ? 'Pick one great area' : 'Stay central', cityText, '&#128205;'],
-          ['3', 'Catch transit early', 'Use a direct route. Avoid frantic train transfers when the clock is ticking.', '&#128646;'],
-          [`T-${bufferLabel(profile.buffer)}`, profile.hard, profile.exit, '&#9201;'],
-          ['5', 'Save errands for later', 'Pretzels, souvenirs and restrooms are safer after security, platform or gate time is locked in.', '&#9749;'],
+          ['2', risk === 'green' ? 'Pick one great area' : 'Stay central', cityText, 'pin'],
+          ['3', 'Catch transit early', 'Use a direct route. Avoid frantic train transfers when the clock is ticking.', 'train'],
+          [`T-${bufferLabel(profile.buffer)}`, profile.hard, profile.exit, 'clock'],
+          ['5', 'Save errands for later', 'Pretzels, souvenirs and restrooms are safer after security, platform or gate time is locked in.', 'coffee'],
         ];
       }
 
@@ -1057,7 +1069,7 @@
 
         rail.innerHTML = stops.map((stop, index) => {
           const klass = index >= 3 ? 'hard' : risk === 'red' || index === 2 ? 'warn' : '';
-          return `<article class="bw-stop ${klass}"><b>${stop[0]}</b><span class="bw-stop-icon" aria-hidden="true">${stop[3]}</span><strong>${stop[1]}</strong><span>${stop[2]}</span></article>`;
+          return `<article class="bw-stop ${klass}"><b>${stop[0]}</b><span class="bw-stop-icon" aria-hidden="true"><img src="assets/icons/last-day-${stop[3]}.png" alt=""></span><strong>${stop[1]}</strong><span>${stop[2]}</span></article>`;
         }).join('');
         renderList(root.querySelector('[data-do]'), lists.doItems);
         renderList(root.querySelector('[data-dont]'), lists.dontItems);

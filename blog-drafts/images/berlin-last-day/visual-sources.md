@@ -87,6 +87,24 @@ No paid image/video generation API was used. No AI-generated article visuals wer
 - These are derived from the already accepted article images listed above; no new AI generation or paid image/video API was used for this refresh.
 - Because the widget now displays CC BY / CC BY-SA images directly, a compact public photo-credit line was added inside the widget.
 
+### Widget icon set refresh
+
+- 2026-07-02 second feedback pass: the dark-green emoji badges in the widget were replaced with a cohesive glossy icon set created with built-in Codex image generation and saved as a single source sprite sheet.
+- Source/prompt files:
+  - `berlin-last-day-buffer-planner/assets/_src/icon-set-20260702/PROMPT.md`
+  - `berlin-last-day-buffer-planner/assets/_src/icon-set-20260702/last-day-icon-sprite-source.png`
+  - `berlin-last-day-buffer-planner/assets/_src/icon-set-20260702/last-day-icon-sprite-alpha.png`
+- Final derived icons:
+  - `berlin-last-day-buffer-planner/assets/icons/last-day-bag.png`
+  - `berlin-last-day-buffer-planner/assets/icons/last-day-pin.png`
+  - `berlin-last-day-buffer-planner/assets/icons/last-day-train.png`
+  - `berlin-last-day-buffer-planner/assets/icons/last-day-clock.png`
+  - `berlin-last-day-buffer-planner/assets/icons/last-day-coffee.png`
+  - `berlin-last-day-buffer-planner/assets/icons/last-day-walk.png`
+  - `berlin-last-day-buffer-planner/assets/icons/last-day-plane.png`
+  - `berlin-last-day-buffer-planner/assets/icons/last-day-map.png`
+- Public widget copy does not mention the AI workflow.
+
 ### Widget hero
 
 - Source output copied from built-in Codex image generation:
