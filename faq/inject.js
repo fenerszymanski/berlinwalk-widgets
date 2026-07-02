@@ -153,7 +153,9 @@
   "victory-column-berlin": "victory-column-berlin",
   "victory-column-berlin-view-tickets-and-climb-tips": "victory-column-berlin",
   "berlin-by-foot": "berlin-by-foot",
-  "berlin-by-foot-best-walkable-areas-for-first-time-visitors": "berlin-by-foot"
+  "berlin-by-foot-best-walkable-areas-for-first-time-visitors": "berlin-by-foot",
+  "berlin-restaurant-phrases": "berlin-restaurant-phrases",
+  "berlin-restaurant-phrases-how-to-order-pay-and-handle-allergies": "berlin-restaurant-phrases"
 };
 
   var SCHEMAS = {
@@ -7411,6 +7413,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Do both if you have time. A guided 2 hours historic-centre walk gives you structure and context, then a self-guided area walk lets you slow down and follow your own mood."
+        }
+      }
+    ]
+  },
+  "berlin-restaurant-phrases": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the most useful German restaurant phrase in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The most useful all-purpose line is \"Ich hätte gern...\", meaning \"I would like...\". It works in cafes, bakeries, snack bars and many casual restaurants."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I ask for the bill in German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Say \"Die Rechnung bitte.\" It means \"The bill, please.\" If you want the server to keep the change when paying cash, say \"Stimmt so\" as you hand over the rounded amount."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I ask whether I can pay by card in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Say \"Kann ich mit Karte zahlen?\" Berlin is much more card-friendly than it used to be, but some small bakeries, kiosks and snack bars still prefer cash."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I say for a food allergy in German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use \"Ich bin allergisch gegen...\" followed by the allergen, then ask \"Können Sie das bitte prüfen?\" If a mistake would be serious, show the written phrase and wait for a clear answer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is English enough in Berlin restaurants?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Often yes, especially in central tourist areas, but a few short German phrases make the interaction smoother and help at fast counters where staff are busy."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use these phrases before or after the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The BerlinWalk tour lasts about 2 hours and ends near Hackescher Markt, where cafes, bakeries and restaurants are close by. A few ordering and payment phrases are useful right after the walk."
         }
       }
     ]
