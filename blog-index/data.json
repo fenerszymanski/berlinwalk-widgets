@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-02T03:42:31.378Z",
+  "updatedAt": "2026-07-02T19:16:25.402Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 159,
+  "totalPosts": 161,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -235,23 +235,6 @@
       "relatedToolSlug": "transport-ticket-calculator"
     },
     {
-      "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
-      "slug": "where-was-the-berlin-wall-interactive-map",
-      "path": "/post/where-was-the-berlin-wall-interactive-map",
-      "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
-      "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
-      "category": "Berlin History",
-      "categorySlug": "berlin-history",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "7 min read",
-      "publishedDate": "2026-05-05T09:32:22.821Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
-      "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
-      "relatedToolSlug": "east-or-west-1989"
-    },
-    {
       "title": "What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips",
       "slug": "what-to-wear-to-berlin-clubs",
       "path": "/post/what-to-wear-to-berlin-clubs",
@@ -267,6 +250,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
       "alt": "People in fetish outfits line up at a red-lit nightclub entrance, with a bouncer checking guests in a dark industrial hallway.",
       "relatedToolSlug": "berlin-tip-calculator"
+    },
+    {
+      "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+      "slug": "where-was-the-berlin-wall-interactive-map",
+      "path": "/post/where-was-the-berlin-wall-interactive-map",
+      "url": "https://www.berlinwalk.com/post/where-was-the-berlin-wall-interactive-map",
+      "excerpt": "The Berlin Wall ran 155 kilometers around West Berlin. Tap any point on this interactive map to see exactly where it stood and which side an address was on in 1989.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
+      "readTime": "7 min read",
+      "publishedDate": "2026-05-05T09:32:22.821Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
+      "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
+      "relatedToolSlug": "east-or-west-1989"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try in 2026",
@@ -1577,6 +1577,40 @@
   ],
   "latest": [
     {
+      "title": "Berlin AB or ABC Ticket: Which Zone Do Tourists Need?",
+      "slug": "berlin-ab-abc-ticket-zones",
+      "path": "/post/berlin-ab-abc-ticket-zones",
+      "url": "https://www.berlinwalk.com/post/berlin-ab-abc-ticket-zones",
+      "excerpt": "A clear Berlin ticket-zone guide for tourists deciding between AB and ABC: city sightseeing, BER Airport, Potsdam, Oranienburg, 24-hour tickets and extension tickets.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-07-02T19:13:31.345Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f3d94e900def41519ed6616b1729d109~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ab-abc-ticket-zones-01-berlin-ab-abc-ticket-zones-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f3d94e900def41519ed6616b1729d109~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ab-abc-ticket-zones-01-berlin-ab-abc-ticket-zones-cover.jpg",
+      "alt": "Yellow U-Bahn train at Museumsinsel station in central Berlin",
+      "relatedToolSlug": "berlin-zone-ticket-decoder"
+    },
+    {
+      "title": "Victory Column Berlin: View, Tickets and Climb Tips",
+      "slug": "victory-column-berlin",
+      "path": "/post/victory-column-berlin",
+      "url": "https://www.berlinwalk.com/post/victory-column-berlin",
+      "excerpt": "A practical guide to the Berlin Victory Column: whether to climb it, current ticket and opening-hour checks, stairs, accessibility, safe access and nearby route ideas.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-07-02T06:08:50.241Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_de77d2d617484aea9972b239de8e0fbe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/victory-column-berlin-00-victory-column-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_de77d2d617484aea9972b239de8e0fbe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/victory-column-berlin-00-victory-column-berlin-cover.jpg",
+      "alt": "Golden Victory Column rising above Tiergarten and Großer Stern in Berlin at warm evening light",
+      "relatedToolSlug": "victory-column-climb-planner"
+    },
+    {
       "title": "Berlin Restaurant Phrases: How to Order, Pay and Handle Allergies",
       "slug": "berlin-restaurant-phrases",
       "path": "/post/berlin-restaurant-phrases",
@@ -1745,43 +1779,43 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_9e4260a087a146babf453389b286404f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-tourist-scams-01-berlin-tourist-scams-cover.jpg",
       "alt": "Calm Berlin tourist at a yellow train platform holding phone and map with a subtle street-pressure moment nearby",
       "relatedToolSlug": "berlin-street-sense-drill"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Bike Lanes: What Tourists Must Know Before Walking or Riding",
-      "slug": "berlin-bike-lanes-tourists",
-      "path": "/post/berlin-bike-lanes-tourists",
-      "url": "https://www.berlinwalk.com/post/berlin-bike-lanes-tourists",
-      "excerpt": "A practical tourist guide to Berlin bike lanes: where to walk, ride, cross, park e-scooters, take bikes on trains and avoid the classic visitor mistakes.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-06-28T06:17:11.455Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d8d80330ee754e6ca310e3ebb768dabb~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-bike-lanes-tourists-06-bike-lane-separation-kerb.jpg",
-      "alt": "Protected Berlin bike lane with green separation kerbs, a bicycle road marking and city traffic beside it",
-      "relatedToolSlug": "berlin-bike-lane-reflex-checker"
-    },
-    {
-      "title": "Doctor in Berlin: What Tourists Should Do When They Feel Unwell",
-      "slug": "doctor-in-berlin",
-      "path": "/post/doctor-in-berlin",
-      "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
-      "excerpt": "A practical tourist guide to medical help in Berlin: 112, 116117, normal doctors, pharmacies, hospitals, EHIC and travel insurance.",
+      "title": "Berlin AB or ABC Ticket: Which Zone Do Tourists Need?",
+      "slug": "berlin-ab-abc-ticket-zones",
+      "path": "/post/berlin-ab-abc-ticket-zones",
+      "url": "https://www.berlinwalk.com/post/berlin-ab-abc-ticket-zones",
+      "excerpt": "A clear Berlin ticket-zone guide for tourists deciding between AB and ABC: city sightseeing, BER Airport, Potsdam, Oranienburg, 24-hour tickets and extension tickets.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
-      "readTime": "6 min read",
-      "publishedDate": "2026-06-28T00:03:38.782Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_86de3ed5448c445bacfed34fee7b31b7~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/doctor-in-berlin-01-doctor-in-berlin-ambulance-cover.jpg",
-      "alt": "Berlin ambulance and emergency vehicles on Otto-Braun-Strasse near Alexanderplatz",
-      "relatedToolSlug": "berlin-medical-help-router"
-    }
-  ],
-  "allPosts": [
+      "readTime": "5 min read",
+      "publishedDate": "2026-07-02T19:13:31.345Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f3d94e900def41519ed6616b1729d109~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ab-abc-ticket-zones-01-berlin-ab-abc-ticket-zones-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f3d94e900def41519ed6616b1729d109~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ab-abc-ticket-zones-01-berlin-ab-abc-ticket-zones-cover.jpg",
+      "alt": "Yellow U-Bahn train at Museumsinsel station in central Berlin",
+      "relatedToolSlug": "berlin-zone-ticket-decoder"
+    },
+    {
+      "title": "Victory Column Berlin: View, Tickets and Climb Tips",
+      "slug": "victory-column-berlin",
+      "path": "/post/victory-column-berlin",
+      "url": "https://www.berlinwalk.com/post/victory-column-berlin",
+      "excerpt": "A practical guide to the Berlin Victory Column: whether to climb it, current ticket and opening-hour checks, stairs, accessibility, safe access and nearby route ideas.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "8 min read",
+      "publishedDate": "2026-07-02T06:08:50.241Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_de77d2d617484aea9972b239de8e0fbe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/victory-column-berlin-00-victory-column-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_de77d2d617484aea9972b239de8e0fbe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/victory-column-berlin-00-victory-column-berlin-cover.jpg",
+      "alt": "Golden Victory Column rising above Tiergarten and Großer Stern in Berlin at warm evening light",
+      "relatedToolSlug": "victory-column-climb-planner"
+    },
     {
       "title": "Berlin Restaurant Phrases: How to Order, Pay and Handle Allergies",
       "slug": "berlin-restaurant-phrases",
