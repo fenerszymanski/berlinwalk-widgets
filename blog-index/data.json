@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-02T19:16:25.402Z",
+  "updatedAt": "2026-07-02T21:28:47.199Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 161,
+  "totalPosts": 162,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Last Day: What to Do Before Your Flight or Train",
+      "slug": "berlin-last-day",
+      "path": "/post/berlin-last-day",
+      "url": "https://www.berlinwalk.com/post/berlin-last-day",
+      "excerpt": "A practical Berlin last day plan for tourists with a flight, train or bus later: solve luggage first, choose one close final anchor, and leave with a safe buffer.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-07-02T21:28:08.073Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9b5f475d4a024a24a3412f045ca17573~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-last-day-01-berlin-last-day-hauptbahnhof-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9b5f475d4a024a24a3412f045ca17573~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-last-day-01-berlin-last-day-hauptbahnhof-cover.jpg",
+      "alt": "Berlin Hauptbahnhof exterior with the DB sign, a practical final-day departure anchor for Berlin tourists.",
+      "relatedToolSlug": "berlin-last-day-buffer-planner"
+    },
+    {
       "title": "Berlin AB or ABC Ticket: Which Zone Do Tourists Need?",
       "slug": "berlin-ab-abc-ticket-zones",
       "path": "/post/berlin-ab-abc-ticket-zones",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
       "alt": "Berlin bakery counter with croissants, sandwiches and pastries ready for a quick tourist breakfast",
       "relatedToolSlug": "berlin-breakfast-clock"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Tourist Scams: What to Ignore, What to Check and How to Stay Calm",
-      "slug": "berlin-tourist-scams",
-      "path": "/post/berlin-tourist-scams",
-      "url": "https://www.berlinwalk.com/post/berlin-tourist-scams",
-      "excerpt": "A calm, practical Berlin tourist scams guide: what to ignore, what to check, and what to do around stations, landmarks, tickets, taxis and ATMs.",
+      "title": "Berlin Last Day: What to Do Before Your Flight or Train",
+      "slug": "berlin-last-day",
+      "path": "/post/berlin-last-day",
+      "url": "https://www.berlinwalk.com/post/berlin-last-day",
+      "excerpt": "A practical Berlin last day plan for tourists with a flight, train or bus later: solve luggage first, choose one close final anchor, and leave with a safe buffer.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
       "readTime": "5 min read",
-      "publishedDate": "2026-06-28T07:14:12.442Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_9e4260a087a146babf453389b286404f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-tourist-scams-01-berlin-tourist-scams-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_9e4260a087a146babf453389b286404f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-tourist-scams-01-berlin-tourist-scams-cover.jpg",
-      "alt": "Calm Berlin tourist at a yellow train platform holding phone and map with a subtle street-pressure moment nearby",
-      "relatedToolSlug": "berlin-street-sense-drill"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-07-02T21:28:08.073Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_9b5f475d4a024a24a3412f045ca17573~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-last-day-01-berlin-last-day-hauptbahnhof-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_9b5f475d4a024a24a3412f045ca17573~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-last-day-01-berlin-last-day-hauptbahnhof-cover.jpg",
+      "alt": "Berlin Hauptbahnhof exterior with the DB sign, a practical final-day departure anchor for Berlin tourists.",
+      "relatedToolSlug": "berlin-last-day-buffer-planner"
+    },
     {
       "title": "Berlin AB or ABC Ticket: Which Zone Do Tourists Need?",
       "slug": "berlin-ab-abc-ticket-zones",

@@ -486,6 +486,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(berlin-last-day|berlin last day|before your flight or train|checkout day)/.test(s)) return 'berlin-last-day-buffer-planner';
   if (/(berlin-ab-abc-ticket-zones|berlin ab or abc ticket|berlin ticket zones|berlin fare zones|bvg ticket zones)/.test(s)) return 'berlin-zone-ticket-decoder';
   if (/(victory-column-berlin|victory column berlin|siegessaeule|siegessäule)/.test(s)) return 'victory-column-climb-planner';
   if (/(hohenzollern-berlin|hohenzollern berlin)/.test(s)) return 'hohenzollern-berlin-footprint-map';
