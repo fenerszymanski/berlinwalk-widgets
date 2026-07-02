@@ -76,7 +76,16 @@ No paid image/video generation API was used. No AI-generated article visuals wer
 - Local QA contact sheet: `contact-sheet.jpg`
 - Visual gate result: passed. The cover is the strongest general last-day signal; the support set covers luggage, rail, airport check-in, and airport train timing without generic stock.
 
-## Generated Widget/Icon Visuals
+## Widget Visual Refresh
+
+- 2026-07-02 feedback pass: the widget path cards now reuse the five optimized article images as local widget assets:
+  - `berlin-last-day-buffer-planner/assets/step-bags.jpg`
+  - `berlin-last-day-buffer-planner/assets/step-central.jpg`
+  - `berlin-last-day-buffer-planner/assets/step-train.jpg`
+  - `berlin-last-day-buffer-planner/assets/step-airport.jpg`
+  - `berlin-last-day-buffer-planner/assets/step-gate.jpg`
+- These are derived from the already accepted article images listed above; no new AI generation or paid image/video API was used for this refresh.
+- Because the widget now displays CC BY / CC BY-SA images directly, a compact public photo-credit line was added inside the widget.
 
 ### Widget hero
 
