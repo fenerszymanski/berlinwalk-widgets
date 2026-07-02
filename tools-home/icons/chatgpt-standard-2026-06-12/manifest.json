@@ -971,6 +971,42 @@
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_480adaa2df0c4fb5a1bb0a65f57c8c01~mv2.png"
   },
   {
+    "slug": "berlin-booking-deadline-planner",
+    "title": "Berlin Booking Deadline Planner",
+    "category": "TripPlans",
+    "model": "ChatGPT browser image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-booking-deadline-planner/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-booking-deadline-planner/raw-chatgpt-browser-20260629.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-booking-deadline-planner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-booking-deadline-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-booking-deadline-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_818b6eb807a749b5a7eda381a94b95db~mv2.png"
+  },
+  {
+    "slug": "berlin-museums-map",
+    "title": "Berlin Museums Map",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-museums-map.png",
+    "githubPages160Url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-museums-map-160.png",
+    "localPath": "tools-home/icons/berlin-museums-map.png",
+    "local160Path": "tools-home/icons/berlin-museums-map-160.png",
+    "source": "browser-generated-standard-icon-2026-06-29",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_b7e101502e6d495994ac39a259ca6d8a~mv2.png"
+  },
+  {
+    "slug": "hohenzollern-berlin-footprint-map",
+    "title": "Hohenzollern Berlin Footprint Map",
+    "category": "Discovery",
+    "model": "ChatGPT browser image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourceSheet": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/hohenzollern-berlin-footprint-map/raw-chatgpt-browser-20260629.png",
+    "sourceCell": null,
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hohenzollern-berlin-footprint-map.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hohenzollern-berlin-footprint-map-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/hohenzollern-berlin-footprint-map-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_68b58375580a49f3ace0a883b20035f9~mv2.png"
+  },
+  {
     "slug": "berlin-plug-adapter-checker",
     "title": "Berlin Plug Adapter Checker",
     "category": "Essentials",
@@ -994,7 +1030,7 @@
     "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/potsdamer-platz-time-layer-walk.png",
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/potsdamer-platz-time-layer-walk-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/potsdamer-platz-time-layer-walk-160.png",
-    "wixUrl": "https://static.wixstatic.com/media/5a08a3_2b5708b217ce4f549fe61200e9e9be50~mv2.png"
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_d2d0314f061e47e38e16ecfccc0258ca~mv2.png"
   },
   {
     "slug": "tempelhof-field-planner",
@@ -1008,6 +1044,33 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/tempelhof-field-planner-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/tempelhof-field-planner-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_c8948d95cbca4fdcb8e772b85a719e40~mv2.png"
+  },
+  {
+    "slug": "berlin-step-free-planner",
+    "title": "Berlin Step-Free Planner",
+    "category": "Transport",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-step-free-planner/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-step-free-planner/icon-source.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-step-free-planner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-step-free-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-step-free-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_e9b93d4801624002bcf25b16fd14df5f~mv2.png"
+  },
+  {
+    "slug": "victory-column-climb-planner",
+    "title": "Victory Column Climb Planner",
+    "category": "Discovery",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "sourcePrompt": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/victory-column-climb-planner/PROMPT.md",
+    "sourceFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/victory-column-climb-planner/codex-imagegen-icon.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/victory-column-climb-planner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/victory-column-climb-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/victory-column-climb-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_f0b428afbcb542bf890bd760db4e3044~mv2.png",
+    "wixId": "5a08a3_f0b428afbcb542bf890bd760db4e3044~mv2.png"
   },
   {
     "slug": "berlin-walkable-areas-planner",
@@ -1034,5 +1097,18 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-restaurant-phrase-card-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-restaurant-phrase-card-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_dbcc6820feb345e68b2394523253f713~mv2.png"
+  },
+  {
+    "slug": "berlin-zone-ticket-decoder",
+    "title": "Berlin Zone Ticket Decoder",
+    "category": "Transport",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-zone-ticket-decoder/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-zone-ticket-decoder/codex-imagegen-icon.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-zone-ticket-decoder.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-zone-ticket-decoder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-zone-ticket-decoder-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_77707d99b416428cbdda6a9632663f8b~mv2.png"
   }
 ]

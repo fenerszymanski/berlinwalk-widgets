@@ -609,10 +609,11 @@
   },
   "potsdamer-platz-time-layer-walk": {
     "slug": "potsdamer-platz-time-layer-walk",
-    "title": "Potsdamer Platz Time-Layer Walk",
-    "wixUrl": "https://static.wixstatic.com/media/5a08a3_2b5708b217ce4f549fe61200e9e9be50~mv2.png",
-    "fileName": "berlinwalk-tool-icon-chatgpt-20260630-potsdamer-platz-time-layer-walk.png",
-    "uploadedAt": "2026-06-30T11:23:51.420Z"
+    "id": "5a08a3_d2d0314f061e47e38e16ecfccc0258ca~mv2.png",
+    "url": "https://static.wixstatic.com/media/5a08a3_d2d0314f061e47e38e16ecfccc0258ca~mv2.png",
+    "fileName": "berlinwalk-tool-icon-chatgpt-20260612-potsdamer-platz-time-layer-walk.png",
+    "width": 512,
+    "height": 512
   },
   "tempelhof-field-planner": {
     "slug": "tempelhof-field-planner",
@@ -644,6 +645,38 @@
     "id": "5a08a3_dbcc6820feb345e68b2394523253f713~mv2.png",
     "url": "https://static.wixstatic.com/media/5a08a3_dbcc6820feb345e68b2394523253f713~mv2.png",
     "fileName": "berlinwalk-tool-icon-chatgpt-20260612-berlin-restaurant-phrase-card.png",
+    "width": 512,
+    "height": 512
+  },
+  "berlin-booking-deadline-planner": {
+    "slug": "berlin-booking-deadline-planner",
+    "id": "5a08a3_818b6eb807a749b5a7eda381a94b95db~mv2.png",
+    "url": "https://static.wixstatic.com/media/5a08a3_818b6eb807a749b5a7eda381a94b95db~mv2.png",
+    "fileName": "berlinwalk-tool-icon-chatgpt-20260612-berlin-booking-deadline-planner.png",
+    "width": 512,
+    "height": 512
+  },
+  "hohenzollern-berlin-footprint-map": {
+    "slug": "hohenzollern-berlin-footprint-map",
+    "id": "5a08a3_68b58375580a49f3ace0a883b20035f9~mv2.png",
+    "url": "https://static.wixstatic.com/media/5a08a3_68b58375580a49f3ace0a883b20035f9~mv2.png",
+    "fileName": "berlinwalk-tool-icon-chatgpt-20260612-hohenzollern-berlin-footprint-map.png",
+    "width": 512,
+    "height": 512
+  },
+  "berlin-step-free-planner": {
+    "slug": "berlin-step-free-planner",
+    "id": "5a08a3_e9b93d4801624002bcf25b16fd14df5f~mv2.png",
+    "url": "https://static.wixstatic.com/media/5a08a3_e9b93d4801624002bcf25b16fd14df5f~mv2.png",
+    "fileName": "berlinwalk-tool-icon-chatgpt-20260612-berlin-step-free-planner.png",
+    "width": 512,
+    "height": 512
+  },
+  "berlin-zone-ticket-decoder": {
+    "slug": "berlin-zone-ticket-decoder",
+    "id": "5a08a3_77707d99b416428cbdda6a9632663f8b~mv2.png",
+    "url": "https://static.wixstatic.com/media/5a08a3_77707d99b416428cbdda6a9632663f8b~mv2.png",
+    "fileName": "berlinwalk-tool-icon-chatgpt-20260612-berlin-zone-ticket-decoder.png",
     "width": 512,
     "height": 512
   }

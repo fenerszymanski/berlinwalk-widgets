@@ -155,7 +155,9 @@
   "berlin-by-foot": "berlin-by-foot",
   "berlin-by-foot-best-walkable-areas-for-first-time-visitors": "berlin-by-foot",
   "berlin-restaurant-phrases": "berlin-restaurant-phrases",
-  "berlin-restaurant-phrases-how-to-order-pay-and-handle-allergies": "berlin-restaurant-phrases"
+  "berlin-restaurant-phrases-how-to-order-pay-and-handle-allergies": "berlin-restaurant-phrases",
+  "berlin-ab-abc-ticket-zones": "berlin-ab-abc-ticket-zones",
+  "berlin-ab-or-abc-ticket-which-zone-do-tourists-need": "berlin-ab-abc-ticket-zones"
 };
 
   var SCHEMAS = {
@@ -7467,6 +7469,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The BerlinWalk tour lasts about 2 hours and ends near Hackescher Markt, where cafes, bakeries and restaurants are close by. A few ordering and payment phrases are useful right after the walk."
+        }
+      }
+    ]
+  },
+  "berlin-ab-abc-ticket-zones": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do tourists usually need a Berlin AB or ABC ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most tourists need Berlin AB for normal city sightseeing. Choose Berlin ABC when your route includes BER Airport, Potsdam, Oranienburg, Sachsenhausen Memorial or another zone C destination."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is BER Airport in Berlin AB or ABC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BER Airport is in fare zone C, so a trip between central Berlin and BER usually needs a Berlin ABC ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Potsdam included in a Berlin ABC ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Potsdam is in zone C, so a Berlin ABC ticket is usually the right public transport ticket for a Berlin to Potsdam day trip. Palace admissions are separate."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I add zone C to an AB ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Often yes, with an extension ticket for the missing zone. It can fit one extra C-zone leg, but if your day includes several rides across zones, buying ABC from the start is simpler."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much are Berlin AB and ABC tickets in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "VBB lists the 2026 single ticket at EUR 4.00 for Berlin AB and EUR 5.00 for Berlin ABC. The 24-hour ticket is EUR 11.20 for AB and EUR 12.90 for ABC. Check the official app before travel because fares can change."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the BerlinWalk tour need an ABC ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The BerlinWalk route is a normal AB city route. It starts at Alexanderplatz, stays in the historic center and lasts about 2 hours. ABC matters for airport travel or day trips before or after the walk."
         }
       }
     ]

@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Zone Ticket Decoder | BerlinWalk</title>
+  <meta name="description" content="Choose city, airport and day-trip stops to see whether a Berlin AB or ABC public transport ticket fits your tourist route.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-zone-decoder">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-zone-decoder {
+      --green: #1B5E20;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --light: #C5E1A5;
+      --cream: #FAFAF5;
+      --text: #212121;
+      --muted: #526052;
+      --border: #D9E7C8;
+      --red: #E63946;
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 18px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-zone-decoder *,
+    #bw-zone-decoder *::before,
+    #bw-zone-decoder *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-zone-decoder button,
+    #bw-zone-decoder select {
+      font: inherit;
+    }
+
+    #bw-zone-decoder .shell {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-zone-decoder .hero {
+      background:
+        linear-gradient(100deg, rgba(27, 94, 32, 0.94), rgba(27, 94, 32, 0.72)),
+        url("../blog-drafts/images/berlin-ab-abc-ticket-zones/assets/optimized/01-berlin-ab-abc-ticket-zones-cover.jpg") center/cover;
+      color: #fff;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 0.7fr);
+      min-height: 310px;
+      padding: 26px;
+    }
+
+    #bw-zone-decoder .kicker {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      line-height: 1.2;
+      margin: 0 0 10px;
+      text-transform: uppercase;
+    }
+
+    #bw-zone-decoder h2 {
+      color: #fff;
+      font-size: 34px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.04;
+      margin: 0;
+      max-width: 760px;
+    }
+
+    #bw-zone-decoder .hero p {
+      color: #ECF7DE;
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 12px 0 0;
+      max-width: 680px;
+    }
+
+    #bw-zone-decoder .result {
+      align-self: stretch;
+      background: rgba(250, 250, 245, 0.96);
+      border: 1px solid rgba(255, 230, 0, 0.46);
+      border-radius: 8px;
+      color: var(--text);
+      display: grid;
+      gap: 9px;
+      padding: 16px;
+    }
+
+    #bw-zone-decoder .result small {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    #bw-zone-decoder .result strong {
+      color: var(--green);
+      display: block;
+      font-size: 32px;
+      font-weight: 950;
+      line-height: 1;
+    }
+
+    #bw-zone-decoder .result span {
+      color: var(--muted);
+      display: block;
+      font-size: 12.5px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
+    #bw-zone-decoder .body {
+      display: grid;
+      gap: 16px;
+      padding: 18px;
+    }
+
+    #bw-zone-decoder .toolbar {
+      align-items: end;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-zone-decoder label {
+      color: var(--muted);
+      display: grid;
+      font-size: 11px;
+      font-weight: 900;
+      gap: 6px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+    }
+
+    #bw-zone-decoder select {
+      appearance: none;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      min-height: 44px;
+      padding: 10px 34px 10px 12px;
+      width: 100%;
+    }
+
+    #bw-zone-decoder .grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.74fr);
+    }
+
+    #bw-zone-decoder .panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    #bw-zone-decoder .panel-head {
+      background: linear-gradient(90deg, rgba(255, 230, 0, 0.34), rgba(124, 179, 66, 0.15));
+      border-bottom: 1px solid var(--border);
+      padding: 14px 16px;
+    }
+
+    #bw-zone-decoder .panel-head h3 {
+      color: var(--green);
+      font-size: 17px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-zone-decoder .panel-head p {
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 5px 0 0;
+    }
+
+    #bw-zone-decoder .chips {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      padding: 14px;
+    }
+
+    #bw-zone-decoder .chip {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      min-height: 78px;
+      padding: 12px;
+      text-align: left;
+      transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+    }
+
+    #bw-zone-decoder .chip[aria-pressed="true"] {
+      background: #F3F9EA;
+      border-color: var(--green);
+      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.08);
+    }
+
+    #bw-zone-decoder .chip:focus-visible {
+      outline: 3px solid rgba(255, 230, 0, 0.9);
+      outline-offset: 2px;
+    }
+
+    #bw-zone-decoder .chip:hover {
+      transform: translateY(-1px);
+    }
+
+    #bw-zone-decoder .chip b {
+      color: var(--green);
+      display: block;
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-zone-decoder .chip span {
+      color: var(--muted);
+      display: block;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.38;
+      margin-top: 5px;
+    }
+
+    #bw-zone-decoder .route {
+      display: grid;
+      gap: 12px;
+      padding: 14px;
+    }
+
+    #bw-zone-decoder .zone-strip {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    #bw-zone-decoder .line {
+      align-items: center;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 34px 1fr auto;
+    }
+
+    #bw-zone-decoder .badge {
+      align-items: center;
+      background: var(--green);
+      border-radius: 999px;
+      color: var(--yellow);
+      display: inline-flex;
+      font-size: 13px;
+      font-weight: 950;
+      height: 34px;
+      justify-content: center;
+      width: 34px;
+    }
+
+    #bw-zone-decoder .line b {
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    #bw-zone-decoder .line span {
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    #bw-zone-decoder .pill {
+      background: rgba(124, 179, 66, 0.16);
+      border: 1px solid rgba(124, 179, 66, 0.36);
+      border-radius: 999px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 950;
+      padding: 5px 8px;
+      white-space: nowrap;
+    }
+
+    #bw-zone-decoder .advice {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+    }
+
+    #bw-zone-decoder .advice h3 {
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-zone-decoder .advice p,
+    #bw-zone-decoder .advice li {
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    #bw-zone-decoder .advice ul {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    #bw-zone-decoder .fare-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-zone-decoder .fare {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    #bw-zone-decoder .fare small {
+      color: var(--muted);
+      display: block;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    #bw-zone-decoder .fare strong {
+      color: var(--green);
+      display: block;
+      font-size: 19px;
+      font-weight: 950;
+      margin-top: 2px;
+    }
+
+    #bw-zone-decoder .reset {
+      background: var(--green);
+      border: 0;
+      border-radius: 8px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 900;
+      min-height: 44px;
+      padding: 10px 14px;
+    }
+
+    @media (max-width: 760px) {
+      #bw-zone-decoder {
+        margin: 12px 0;
+      }
+
+      #bw-zone-decoder .hero,
+      #bw-zone-decoder .toolbar,
+      #bw-zone-decoder .grid,
+      #bw-zone-decoder .chips {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-zone-decoder .hero {
+        min-height: 0;
+        padding: 22px 18px;
+      }
+
+      #bw-zone-decoder h2 {
+        font-size: 28px;
+      }
+
+      #bw-zone-decoder .body {
+        padding: 14px;
+      }
+    }
+  </style>
+
+  <section class="shell" aria-label="Berlin Zone Ticket Decoder">
+    <div class="hero">
+      <div>
+        <p class="kicker">BerlinWalk tool</p>
+        <h2>Berlin Zone Ticket Decoder</h2>
+        <p>Build a tourist day from city sights, BER Airport, Potsdam and other common stops. The tool tells you whether AB is enough or ABC is the safer ticket zone.</p>
+      </div>
+      <div class="result" aria-live="polite">
+        <small>Current recommendation</small>
+        <strong data-zone-result>AB</strong>
+        <span data-zone-copy>City sightseeing only. Stay with AB unless your route leaves Berlin city.</span>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="toolbar">
+        <label>
+          Day shape
+          <select data-day-shape>
+            <option value="city">City sightseeing day</option>
+            <option value="arrival">Arrival or departure day</option>
+            <option value="daytrip">Day trip from Berlin</option>
+          </select>
+        </label>
+        <label>
+          Group
+          <select data-group>
+            <option value="solo">1 adult</option>
+            <option value="pair">2 adults</option>
+            <option value="group">3 to 5 people together</option>
+          </select>
+        </label>
+        <button class="reset" type="button" data-reset>Reset route</button>
+      </div>
+
+      <div class="grid">
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Add the stops in your day</h3>
+            <p>Tap every destination that appears in your real plan. If any zone C stop is active, the result changes.</p>
+          </div>
+          <div class="chips" data-chips></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <h3>Your route logic</h3>
+            <p>Use this before buying in the app or at a machine. It is a zone sanity check, not a live fare sale.</p>
+          </div>
+          <div class="route">
+            <div class="zone-strip" data-zone-strip></div>
+            <div class="advice">
+              <h3 data-advice-title>AB is enough for this route.</h3>
+              <p data-advice-body>Normal central Berlin sightseeing stays inside AB. Buy before boarding and validate paper tickets.</p>
+              <div class="fare-grid" data-fares></div>
+              <ul data-tips></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var root = document.getElementById('bw-zone-decoder');
+      if (!root) return;
+
+      var stops = [
+        { id: 'center', label: 'Historic centre', note: 'Alexanderplatz, Museum Island, Brandenburg Gate', zone: 'AB', defaultOn: true },
+        { id: 'hotel', label: 'Hotel inside Berlin', note: 'Most visitor hotels and neighborhoods', zone: 'AB', defaultOn: true },
+        { id: 'east', label: 'East Side Gallery or Zoo', note: 'Still normal Berlin city travel', zone: 'AB' },
+        { id: 'ber', label: 'BER Airport', note: 'Airport station is in zone C', zone: 'ABC', hot: true },
+        { id: 'potsdam', label: 'Potsdam', note: 'Sanssouci and Potsdam city are zone C', zone: 'ABC', hot: true },
+        { id: 'oranienburg', label: 'Oranienburg / Sachsenhausen', note: 'Memorial route goes beyond Berlin city', zone: 'ABC', hot: true },
+        { id: 'regional', label: 'Dresden, Leipzig or Spreewald', note: 'Not solved by a normal Berlin city ticket', zone: 'REGIONAL', hot: true },
+        { id: 'edge', label: 'Unsure edge hotel', note: 'Check the exact station in BVG/VBB first', zone: 'CHECK' }
+      ];
+
+      var selected = new Set(stops.filter(function (stop) { return stop.defaultOn; }).map(function (stop) { return stop.id; }));
+      var chips = root.querySelector('[data-chips]');
+      var strip = root.querySelector('[data-zone-strip]');
+      var result = root.querySelector('[data-zone-result]');
+      var resultCopy = root.querySelector('[data-zone-copy]');
+      var adviceTitle = root.querySelector('[data-advice-title]');
+      var adviceBody = root.querySelector('[data-advice-body]');
+      var fares = root.querySelector('[data-fares]');
+      var tips = root.querySelector('[data-tips]');
+      var dayShape = root.querySelector('[data-day-shape]');
+      var group = root.querySelector('[data-group]');
+
+      function buttonFor(stop) {
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'chip';
+        button.setAttribute('aria-pressed', selected.has(stop.id) ? 'true' : 'false');
+        button.dataset.stop = stop.id;
+        button.innerHTML = '<b>' + stop.label + '</b><span>' + stop.note + '</span>';
+        button.addEventListener('click', function () {
+          if (selected.has(stop.id)) selected.delete(stop.id);
+          else selected.add(stop.id);
+          update();
+        });
+        return button;
+      }
+
+      function zoneState() {
+        var active = stops.filter(function (stop) { return selected.has(stop.id); });
+        if (active.some(function (stop) { return stop.zone === 'REGIONAL'; })) return 'REGIONAL';
+        if (active.some(function (stop) { return stop.zone === 'ABC'; })) return 'ABC';
+        if (active.some(function (stop) { return stop.zone === 'CHECK'; })) return 'CHECK';
+        return 'AB';
+      }
+
+      function fareHtml(zone) {
+        var price = zone === 'ABC' ? ['EUR 5.00', 'EUR 12.90'] : ['EUR 4.00', 'EUR 11.20'];
+        return [
+          '<div class="fare"><small>Single ticket ' + zone + '</small><strong>' + price[0] + '</strong></div>',
+          '<div class="fare"><small>24-hour ticket ' + zone + '</small><strong>' + price[1] + '</strong></div>'
+        ].join('');
+      }
+
+      function renderStrip() {
+        var active = stops.filter(function (stop) { return selected.has(stop.id); });
+        if (!active.length) active = [stops[0]];
+        strip.innerHTML = active.map(function (stop) {
+          var pill = stop.zone === 'REGIONAL' ? 'Regional' : stop.zone === 'CHECK' ? 'Check' : stop.zone;
+          return '<div class="line"><span class="badge">' + pill[0] + '</span><div><b>' + stop.label + '</b><span>' + stop.note + '</span></div><span class="pill">' + pill + '</span></div>';
+        }).join('');
+      }
+
+      function setAdvice(zone) {
+        var shape = dayShape.value;
+        var people = group.value;
+        var title = '';
+        var body = '';
+        var list = [];
+
+        if (zone === 'REGIONAL') {
+          result.textContent = 'Check DB/VBB';
+          resultCopy.textContent = 'This route leaves the normal Berlin AB/ABC decision. Use the route result before buying.';
+          title = 'This is not just an AB or ABC day.';
+          body = 'Dresden, Leipzig, Spreewald and similar trips need regional or long-distance ticket logic. Check the route result in DB, VBB or BVG before paying.';
+          fares.innerHTML = '<div class="fare"><small>Berlin ticket</small><strong>Not enough</strong></div><div class="fare"><small>Next step</small><strong>Route app</strong></div>';
+          list = ['Do not assume a Berlin city ticket covers Brandenburg or Saxony trips.', 'Deutschlandticket can help on regional/local trains, but not ICE, IC or EC trains.', 'Buy the ticket type shown by the official route result.'];
+        } else if (zone === 'ABC') {
+          result.textContent = 'ABC';
+          resultCopy.textContent = 'At least one selected stop is in zone C. Buy ABC unless an extension ticket clearly fits a single extra leg.';
+          title = 'ABC is the safe tourist choice here.';
+          body = shape === 'arrival'
+            ? 'Airport days are where most zone mistakes happen. BER is in zone C, so central Berlin to or from BER needs ABC.'
+            : 'Your route includes a zone C destination such as BER, Potsdam or Oranienburg. ABC covers A, B and C in one ticket.';
+          fares.innerHTML = fareHtml('ABC');
+          list = ['If you already hold AB and only make one C-zone leg, check the extension ticket.', 'For repeated rides in 24 hours, compare the 24-hour ABC ticket.', 'Paper tickets still need validation before travel.'];
+        } else if (zone === 'CHECK') {
+          result.textContent = 'Check stop';
+          resultCopy.textContent = 'Your route may still be AB, but verify the exact station before buying.';
+          title = 'Check the exact station name first.';
+          body = 'Most Berlin hotels are AB, but edge cases exist. Search the station in the official route app and buy the zone combination it shows.';
+          fares.innerHTML = fareHtml('AB');
+          list = ['Do not guess from neighborhood names alone.', 'If BER, Potsdam or Oranienburg appears later in the day, switch to ABC.', 'Use the app result when your hotel is near the city boundary.'];
+        } else {
+          result.textContent = 'AB';
+          resultCopy.textContent = 'City sightseeing only. Stay with AB unless your route leaves Berlin city.';
+          title = 'AB is enough for this route.';
+          body = 'Normal central Berlin sightseeing stays inside AB. This covers most first-day visitor routes, including the BerlinWalk meeting point at Alexanderplatz.';
+          fares.innerHTML = fareHtml('AB');
+          list = ['Three or more rides often make a 24-hour ticket easier.', 'Airport, Potsdam or Oranienburg changes this to ABC.', 'Buy before boarding and validate paper tickets.'];
+        }
+
+        if (people === 'group' && zone !== 'REGIONAL') {
+          list.unshift('For 3 to 5 people traveling together, check the small-group 24-hour ticket before buying individual tickets.');
+        }
+
+        adviceTitle.textContent = title;
+        adviceBody.textContent = body;
+        tips.innerHTML = list.map(function (item) { return '<li>' + item + '</li>'; }).join('');
+      }
+
+      function update() {
+        chips.querySelectorAll('[data-stop]').forEach(function (button) {
+          button.setAttribute('aria-pressed', selected.has(button.dataset.stop) ? 'true' : 'false');
+        });
+        var zone = zoneState();
+        renderStrip();
+        setAdvice(zone);
+        if (window.BerlinWalkBrand && typeof window.BerlinWalkBrand.resize === 'function') {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      stops.forEach(function (stop) { chips.appendChild(buttonFor(stop)); });
+      root.querySelector('[data-reset]').addEventListener('click', function () {
+        selected = new Set(['center', 'hotel']);
+        dayShape.value = 'city';
+        group.value = 'solo';
+        update();
+      });
+      dayShape.addEventListener('change', update);
+      group.addEventListener('change', update);
+      update();
+    })();
+  </script>
+</div>
+</body>
+</html>
