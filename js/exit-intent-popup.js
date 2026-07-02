@@ -5,8 +5,6 @@
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner#planner';
   var HERO_IMAGE_URL = getImageUrl('hero');
-  var PDF_PAGE1_URL = getImageUrl('pdf1');
-  var PDF_PAGE2_URL = getImageUrl('pdf2');
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
   var STYLE_ID = 'bw-exit-intent-styles';
@@ -20,9 +18,6 @@
 
   function getImageUrl(type) {
     var file = 'berlin-trip-planner-hero.jpg';
-    if (type === 'pdf1') file = 'berlin-trip-planner-pdf-page1.png';
-    else if (type === 'pdf2') file = 'berlin-trip-planner-pdf-page2.png';
-    else if (type === 'mockup') file = 'berlin-trip-planner-mockup.png';
 
     if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname)) {
       return 'ultimate-berlin-trip-planner/assets/' + file;
@@ -113,13 +108,6 @@
       '.bw-exit-media{position:relative;aspect-ratio:16/7;min-height:210px;overflow:hidden;background:#123d16;}',
       '.bw-exit-media img{width:100%;height:100%;display:block;object-fit:cover;}',
       '.bw-exit-media:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,9,0) 28%,rgba(8,20,9,.42) 100%);}',
-      '.bw-exit-preview-overlay{position:absolute!important;bottom:12px!important;right:28px!important;width:190px!important;height:155px!important;z-index:3!important;pointer-events:auto!important;}',
-      '.bw-exit-pdf-page{position:absolute!important;width:100px!important;aspect-ratio:0.707!important;background:#ffffff!important;border:1px solid rgba(0,0,0,0.12)!important;border-radius:4px!important;overflow:hidden!important;box-shadow:0 10px 25px rgba(0,0,0,0.35)!important;transition:transform 0.28s cubic-bezier(0.2,0.8,0.2,1),box-shadow 0.28s ease!important;}',
-      '.bw-exit-pdf-page img{width:100%!important;height:100%!important;object-fit:cover!important;display:block!important;}',
-      '.bw-exit-pdf-page-1{bottom:8px!important;right:65px!important;transform:rotate(-8deg)!important;z-index:4!important;}',
-      '.bw-exit-pdf-page-2{bottom:16px!important;right:12px!important;transform:rotate(5deg)!important;z-index:5!important;}',
-      '.bw-exit-preview-overlay:hover .bw-exit-pdf-page-1{transform:rotate(-4deg) translate(-5px,-5px) scale(1.05)!important;box-shadow:0 15px 35px rgba(0,0,0,0.4)!important;}',
-      '.bw-exit-preview-overlay:hover .bw-exit-pdf-page-2{transform:rotate(2deg) translate(5px,-3px) scale(1.05)!important;box-shadow:0 20px 45px rgba(0,0,0,0.45)!important;}',
       '.bw-exit-badge{position:absolute;left:22px;bottom:18px;z-index:2;max-width:calc(100% - 44px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;border-radius:999px;background:rgba(27,94,32,.88);color:#FFE600;border:1px solid rgba(255,230,0,.32);padding:8px 12px;font-size:11px;font-weight:900;letter-spacing:1.3px;text-transform:uppercase;box-shadow:0 10px 24px rgba(0,0,0,.24);}',
       '.bw-exit-inner{position:relative;padding:28px 38px 34px;text-align:left;}',
       '.bw-exit-close{position:absolute;top:14px;right:14px;width:36px;height:36px;border:0;border-radius:50%;background:rgba(250,250,245,.1);color:#FAFAF5;font:800 24px/1 Arial,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0;transition:background-color .18s ease,transform .18s ease;}',
@@ -197,14 +185,6 @@
       '<button class="bw-exit-close" type="button" aria-label="Close" data-bw-exit-close>&times;</button>',
       '<div class="bw-exit-media">',
         '<img src="' + HERO_IMAGE_URL + '" alt="Berlin Cathedral illustration" width="720" height="404">',
-        '<div class="bw-exit-preview-overlay">',
-          '<div class="bw-exit-pdf-page bw-exit-pdf-page-1">',
-            '<img src="' + PDF_PAGE1_URL + '" alt="Berlin Trip Planner PDF Cover">',
-          '</div>',
-          '<div class="bw-exit-pdf-page bw-exit-pdf-page-2">',
-            '<img src="' + PDF_PAGE2_URL + '" alt="Berlin Trip Planner PDF Itinerary">',
-          '</div>',
-        '</div>',
         '<span class="bw-exit-badge">Free Berlin Walking Tour</span>',
       '</div>',
       '<div class="bw-exit-inner">',
