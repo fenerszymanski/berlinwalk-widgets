@@ -160,7 +160,8 @@
   "berlin-ab-abc-ticket-zones": "berlin-ab-abc-ticket-zones",
   "berlin-ab-or-abc-ticket-which-zone-do-tourists-need": "berlin-ab-abc-ticket-zones",
   "berlin-last-day": "berlin-last-day",
-  "berlin-last-day-what-to-do-before-your-flight-or-train": "berlin-last-day"
+  "berlin-last-day-what-to-do-before-your-flight-or-train": "berlin-last-day",
+  "berlin-museum-bag-rules": "berlin-museum-bag-rules"
 };
 
   var SCHEMAS = {
@@ -7642,6 +7643,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The biggest mistake is trying to add one more distant neighborhood while still carrying luggage or relying on a fragile final transfer. Keep the day close, practical and easy to exit."
+        }
+      }
+    ]
+  },
+  "berlin-museum-bag-rules": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Can I bring a backpack into Berlin museums?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes, but do not assume every backpack is allowed in exhibition rooms. At Museum Island museums, bags larger than 30 x 20 x 10 cm must be checked into the cloakroom or stored in a locker. A small flat bag is safer than a full day backpack."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I bring a suitcase into a Berlin museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I would not plan on it. Museum storage is limited, and several official rules warn that larger luggage may not be accepted. If you have a suitcase, use your hotel, a station locker or a luggage-storage service before visiting the museum."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Humboldt Forum have a cloakroom?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Humboldt Forum visitor information says jackets, coats and bags larger than A4 should be left in the ground-floor cloakroom or lockers, and the cloakroom is free of charge. Its house rules also warn that storage for bags, backpacks and suitcases is very limited."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Topography of Terror have luggage lockers?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official FAQ says lockers for carry-on luggage are available in the foyer area. That makes it more realistic for a carry-on stop than many museums, but oversized luggage should still be solved before arrival."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do with luggage before Museum Island?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Store it before the museum if it is more than a small day bag. Hauptbahnhof, Friedrichstrasse, Alexanderplatz, Potsdamer Platz and other major stations have locker options, but always check your route and leave time to collect the bag later."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I keep with me inside a museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Keep only essentials: phone, ticket, wallet, ID, glasses, medication and maybe a small power bank. Food, large bottles, umbrellas, wet clothing and bulky bags are exactly the things that can trigger cloakroom rules."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I join the BerlinWalk tour with luggage?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A small backpack is usually fine, but a rolling suitcase is a bad idea for a walking route. The BerlinWalk tour lasts about 2 hours, so store luggage first and join with only what you can comfortably carry."
         }
       }
     ]
