@@ -1,4 +1,16 @@
 {
+  "berlin-transport-strike": {
+    "title": "Berlin Transport Strike - Quick Summary",
+    "icon": "🚧",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**First check what is actually affected:** BVG covers U-Bahn, tram, bus and ferry, while S-Bahn, regional trains and airport rail links can follow different disruption patterns.",
+      "**Use official live sources before changing the whole day:** BVG Traffic News, S-Bahn timetable changes, VBB journey planning and BER airport transport notices are the links to trust.",
+      "**If you have a flight, train or timed ticket, switch to a backup earlier than feels necessary.** A 20-minute delay can become a missed connection when platforms, luggage and crowds are involved.",
+      "**Do not assume one Berlin ticket solves every fallback.** Your valid Berlin fare still matters, but taxi, ride-hail, car sharing and long-distance rail claims follow different rules.",
+      "**Build a simple plan B before you leave the hotel:** one official status check, one alternate route, one taxi/rideshare fallback, and an extra time buffer for the route to the meeting point or airport."
+    ]
+  },
   "berlin-night-transport": {
     "title": "Berlin Night Transport - Quick Summary",
     "icon": "🌙",

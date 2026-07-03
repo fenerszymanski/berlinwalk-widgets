@@ -437,6 +437,37 @@
       "relatedBlog": "/post/berlin-ab-abc-ticket-zones"
     },
     {
+      "slug": "berlin-transport-backup-planner",
+      "title": "Berlin Transport Backup Planner",
+      "lead": "Choose what is disrupted in Berlin and get a calm backup order for U-Bahn, S-Bahn, BER Airport, buses, walking, taxi and ride-hail.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_a82d223d3a894ba5b57215167b137dd1~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-transport-backup-planner/",
+      "embedHeight": 1840,
+      "hubCategory": "Transport",
+      "type": "Planner",
+      "priority": 16,
+      "tags": [
+        "transport",
+        "strike",
+        "BVG",
+        "S-Bahn",
+        "airport",
+        "BER",
+        "backup route",
+        "disruption",
+        "public transport",
+        "tourist tips"
+      ],
+      "aliases": [
+        "berlin transport strike",
+        "BVG strike backup",
+        "S-Bahn disruption",
+        "airport transport disruption"
+      ],
+      "cmsItemId": "cdb6e636-f1a6-4904-a91d-9dfb0c810b6e"
+    },
+    {
       "slug": "berlin-public-transport-ferry-picker",
       "title": "Berlin Public Transport Ferry Picker",
       "lead": "Choose the right BVG ferry for your Berlin day: F10 Wannsee, F11, F12, F21, F23, F24 or a central sightseeing boat instead.",

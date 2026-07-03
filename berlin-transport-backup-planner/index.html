@@ -1,0 +1,787 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Transport Backup Planner | BerlinWalk</title>
+  <meta name="description" content="Choose what is disrupted in Berlin and get a tourist-safe backup order for U-Bahn, S-Bahn, BER Airport, buses, walking, taxi and ride-hail.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-2: #2f7a34;
+      --lime: #7CB342;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --ink: #212121;
+      --muted: #56645b;
+      --line: rgba(27, 94, 32, 0.18);
+      --red: #E63946;
+      --white: #fff;
+      color-scheme: light;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: transparent;
+      color: var(--ink);
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .bw-backup {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--cream);
+      box-shadow: 0 20px 54px rgba(27, 94, 32, 0.14);
+    }
+
+    .bw-hero {
+      display: grid;
+      min-height: 360px;
+      grid-template-columns: minmax(0, 0.92fr) minmax(360px, 1.08fr);
+      background:
+        linear-gradient(90deg, rgba(9, 48, 19, 0.96), rgba(9, 48, 19, 0.76) 46%, rgba(9, 48, 19, 0.18)),
+        url("assets/hauptbahnhof-sbahn.jpg") center / cover no-repeat;
+      color: var(--white);
+    }
+
+    .bw-hero-copy {
+      display: grid;
+      align-content: center;
+      gap: 14px;
+      padding: 34px 30px;
+    }
+
+    .bw-kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 9px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-kicker::before {
+      content: "";
+      width: 28px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--yellow);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 620px;
+      font-size: clamp(31px, 5vw, 54px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .bw-hero-copy p {
+      max-width: 590px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1.56;
+    }
+
+    .bw-signal-strip {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.16);
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      max-width: 660px;
+    }
+
+    .bw-signal {
+      min-height: 74px;
+      padding: 13px 12px;
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(5px);
+    }
+
+    .bw-signal strong {
+      display: block;
+      color: var(--yellow);
+      font-size: 16px;
+      line-height: 1.1;
+    }
+
+    .bw-signal span {
+      display: block;
+      margin-top: 4px;
+      color: rgba(255, 255, 255, 0.82);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .bw-control-room {
+      display: grid;
+      gap: 1px;
+      grid-template-columns: minmax(310px, 0.76fr) minmax(0, 1.24fr);
+      background: var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .bw-panel,
+    .bw-result {
+      background: var(--white);
+    }
+
+    .bw-panel {
+      padding: 22px;
+    }
+
+    .bw-panel-head {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+
+    .bw-panel-head h2 {
+      color: var(--green);
+      font-size: 24px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .bw-panel-head p {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.5;
+    }
+
+    .bw-field {
+      display: grid;
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .bw-field legend {
+      padding: 0;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .bw-field fieldset {
+      display: contents;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .bw-choice-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .bw-choice,
+    .bw-mini-choice {
+      min-height: 58px;
+      border: 1px solid rgba(27, 94, 32, 0.22);
+      border-radius: 8px;
+      background: #f9fbf4;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+      transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+    }
+
+    .bw-choice {
+      display: grid;
+      gap: 3px;
+      padding: 11px;
+    }
+
+    .bw-choice:hover,
+    .bw-mini-choice:hover {
+      transform: translateY(-1px);
+      border-color: rgba(27, 94, 32, 0.55);
+    }
+
+    .bw-choice[aria-pressed="true"],
+    .bw-mini-choice[aria-pressed="true"] {
+      border-color: var(--green);
+      background: var(--yellow);
+      box-shadow: inset 0 0 0 2px rgba(27, 94, 32, 0.16);
+    }
+
+    .bw-choice strong {
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1.2;
+    }
+
+    .bw-choice span {
+      color: #506157;
+      font-size: 11px;
+      font-weight: 750;
+      line-height: 1.3;
+    }
+
+    .bw-mini-row {
+      display: grid;
+      gap: 7px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .bw-mini-choice {
+      display: grid;
+      align-content: center;
+      min-height: 46px;
+      padding: 8px 9px;
+      color: #324238;
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .bw-result {
+      min-width: 0;
+      padding: 22px;
+    }
+
+    .bw-result-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.72fr);
+      align-items: stretch;
+    }
+
+    .bw-route-board {
+      display: grid;
+      gap: 14px;
+      min-width: 0;
+    }
+
+    .bw-status-card {
+      display: grid;
+      gap: 12px;
+      min-height: 178px;
+      padding: 20px;
+      border-radius: 8px;
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.24), transparent 34%),
+        linear-gradient(180deg, #f7fbf3, #ffffff);
+      border: 1px solid rgba(27, 94, 32, 0.18);
+    }
+
+    .bw-status-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: start;
+    }
+
+    .bw-status-card h2 {
+      color: var(--green);
+      font-size: clamp(23px, 3vw, 34px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .bw-risk {
+      display: inline-grid;
+      min-width: 96px;
+      min-height: 42px;
+      place-items: center;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .bw-status-card p {
+      color: #435047;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .bw-route-stack {
+      display: grid;
+      gap: 10px;
+      counter-reset: route-step;
+    }
+
+    .bw-step {
+      display: grid;
+      grid-template-columns: 42px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      min-height: 82px;
+      padding: 14px;
+      border: 1px solid rgba(27, 94, 32, 0.16);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(27, 94, 32, 0.07);
+    }
+
+    .bw-step::before {
+      counter-increment: route-step;
+      content: counter(route-step);
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--yellow);
+      color: var(--green);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .bw-step strong {
+      display: block;
+      color: var(--ink);
+      font-size: 15px;
+      line-height: 1.25;
+    }
+
+    .bw-step span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
+
+    .bw-side {
+      display: grid;
+      gap: 12px;
+      align-content: start;
+    }
+
+    .bw-photo {
+      position: relative;
+      min-height: 250px;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #dce7d6;
+    }
+
+    .bw-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 250px;
+      object-fit: cover;
+    }
+
+    .bw-photo figcaption {
+      position: absolute;
+      inset: auto 10px 10px;
+      border-radius: 8px;
+      background: rgba(6, 26, 12, 0.82);
+      color: #fff;
+      padding: 8px 10px;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+
+    .bw-buffer {
+      display: grid;
+      gap: 8px;
+      padding: 14px;
+      border-radius: 8px;
+      background: #0f2f18;
+      color: #fff;
+    }
+
+    .bw-buffer strong {
+      color: var(--yellow);
+      font-size: 20px;
+      line-height: 1.1;
+    }
+
+    .bw-buffer span {
+      color: rgba(255, 255, 255, 0.84);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .bw-links {
+      display: grid;
+      gap: 7px;
+    }
+
+    .bw-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 42px;
+      border: 1px solid rgba(27, 94, 32, 0.2);
+      border-radius: 8px;
+      padding: 9px 10px;
+      background: #f7fbf3;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .bw-links a::after {
+      content: "open";
+      color: #5d6a61;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bw-footnote {
+      padding: 14px 22px 18px;
+      border-top: 1px solid var(--line);
+      background: #f7fbf3;
+      color: #59665d;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 920px) {
+      .bw-hero,
+      .bw-control-room,
+      .bw-result-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-hero {
+        min-height: 420px;
+      }
+
+      .bw-result {
+        padding-top: 18px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .bw-backup {
+        border-radius: 0;
+      }
+
+      .bw-hero-copy,
+      .bw-panel,
+      .bw-result {
+        padding: 18px;
+      }
+
+      .bw-signal-strip,
+      .bw-choice-grid,
+      .bw-mini-row {
+        grid-template-columns: 1fr;
+      }
+
+      .bw-signal {
+        min-height: 58px;
+      }
+
+      .bw-step {
+        grid-template-columns: 34px minmax(0, 1fr);
+        padding: 12px;
+      }
+
+      .bw-step::before {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-backup" data-version="20260703a">
+    <section class="bw-hero" aria-labelledby="planner-title">
+      <div class="bw-hero-copy">
+        <div class="bw-kicker">Berlin disruption control room</div>
+        <h1 id="planner-title">Build a calm backup before the platform gets crowded.</h1>
+        <p>Pick the broken transport layer, your deadline and your luggage level. The planner gives you a tourist-safe order of action and the official links to check next.</p>
+        <div class="bw-signal-strip" aria-label="Planner principles">
+          <div class="bw-signal"><strong>1</strong><span>Find the affected operator.</span></div>
+          <div class="bw-signal"><strong>2</strong><span>Protect hard deadlines first.</span></div>
+          <div class="bw-signal"><strong>3</strong><span>Switch modes early.</span></div>
+          <div class="bw-signal"><strong>4</strong><span>Save proof if delayed.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bw-control-room">
+      <div class="bw-panel">
+        <div class="bw-panel-head">
+          <h2>What is going wrong?</h2>
+          <p>This is not live status data. Use it after checking BVG, S-Bahn, VBB or BER, so you choose the right backup faster.</p>
+        </div>
+
+        <div class="bw-field">
+          <fieldset>
+            <legend>Affected layer</legend>
+            <div class="bw-choice-grid" data-group="affected">
+              <button class="bw-choice" type="button" data-value="bvg" aria-pressed="true">
+                <strong>BVG hit</strong>
+                <span>U-Bahn, tram, bus or ferry</span>
+              </button>
+              <button class="bw-choice" type="button" data-value="sbahn" aria-pressed="false">
+                <strong>S-Bahn hit</strong>
+                <span>S-Bahn or regional rail</span>
+              </button>
+              <button class="bw-choice" type="button" data-value="airport" aria-pressed="false">
+                <strong>BER route unstable</strong>
+                <span>Flight or airport transfer</span>
+              </button>
+              <button class="bw-choice" type="button" data-value="wide" aria-pressed="false">
+                <strong>Citywide mess</strong>
+                <span>Unsure, strike, crowds or storm</span>
+              </button>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="bw-field">
+          <fieldset>
+            <legend>Deadline pressure</legend>
+            <div class="bw-mini-row" data-group="deadline">
+              <button class="bw-mini-choice" type="button" data-value="loose" aria-pressed="true">Sightseeing</button>
+              <button class="bw-mini-choice" type="button" data-value="timed" aria-pressed="false">Timed ticket</button>
+              <button class="bw-mini-choice" type="button" data-value="flight" aria-pressed="false">Flight/train</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="bw-field">
+          <fieldset>
+            <legend>Travel load</legend>
+            <div class="bw-mini-row" data-group="load">
+              <button class="bw-mini-choice" type="button" data-value="light" aria-pressed="true">Light bag</button>
+              <button class="bw-mini-choice" type="button" data-value="luggage" aria-pressed="false">Suitcase</button>
+              <button class="bw-mini-choice" type="button" data-value="mobility" aria-pressed="false">Step-free</button>
+            </div>
+          </fieldset>
+        </div>
+
+        <div class="bw-field">
+          <fieldset>
+            <legend>Time of day</legend>
+            <div class="bw-mini-row" data-group="time">
+              <button class="bw-mini-choice" type="button" data-value="day" aria-pressed="true">Daytime</button>
+              <button class="bw-mini-choice" type="button" data-value="night" aria-pressed="false">Late night</button>
+              <button class="bw-mini-choice" type="button" data-value="rush" aria-pressed="false">Rush hour</button>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+      <div class="bw-result" aria-live="polite">
+        <div class="bw-result-grid">
+          <div class="bw-route-board">
+            <div class="bw-status-card">
+              <div class="bw-status-top">
+                <h2 id="result-title">Use S-Bahn or regional rail as your first backup.</h2>
+                <div class="bw-risk" id="result-risk">medium</div>
+              </div>
+              <p id="result-summary">If BVG is the affected layer, stop trying to force the same U-Bahn or tram route. Look for a working S-Bahn/regional station near the destination, then finish with a walk, bike, taxi or short ride-hail.</p>
+            </div>
+
+            <div class="bw-route-stack" id="route-stack"></div>
+          </div>
+
+          <aside class="bw-side">
+            <figure class="bw-photo">
+              <img id="result-photo" src="assets/mobility-hub-suedkreuz.jpg" alt="Mobility Hub at Berlin Sudkreuz with shared bikes and scooters.">
+              <figcaption id="result-caption">Mode switching is the real backup: rail to bike, tram to walk, or train to short taxi leg.</figcaption>
+            </figure>
+            <div class="bw-buffer">
+              <strong id="buffer-title">Add 30 minutes.</strong>
+              <span id="buffer-copy">Enough for a platform change, one failed connection and a calmer walk to the final stop.</span>
+            </div>
+            <nav class="bw-links" aria-label="Official status links">
+              <a href="https://www.bvg.de/en/connections/traffic-news" target="_blank" rel="noopener">BVG Traffic News</a>
+              <a href="https://www.bvg.de/en/strike" target="_blank" rel="noopener">BVG Strike Page</a>
+              <a href="https://sbahn.berlin/en/plan-a-journey/timetable-changes/" target="_blank" rel="noopener">S-Bahn Changes</a>
+              <a href="https://www.vbb.de/en/" target="_blank" rel="noopener">VBB Journey Info</a>
+              <a href="https://ber.berlin-airport.de/en/orientation/getting-here/public-transport.html" target="_blank" rel="noopener">BER Public Transport</a>
+            </nav>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <p class="bw-footnote">This planner is a decision aid, not live operations data. Always check the official status source before leaving, especially for flights, long-distance trains, mobility needs or late-night routes.</p>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      var state = {
+        affected: 'bvg',
+        deadline: 'loose',
+        load: 'light',
+        time: 'day'
+      };
+
+      var profiles = {
+        bvg: {
+          title: 'Use S-Bahn or regional rail as your first backup.',
+          summary: 'If BVG is the affected layer, stop trying to force the same U-Bahn or tram route. Look for a working S-Bahn/regional station near the destination, then finish with a walk, bike, taxi or short ride-hail.',
+          risk: 'medium',
+          photo: 'assets/mobility-hub-suedkreuz.jpg',
+          alt: 'Mobility Hub at Berlin Sudkreuz with shared bikes and scooters.',
+          caption: 'Mode switching is the real backup: rail to bike, tram to walk, or train to short taxi leg.',
+          steps: [
+            ['Check BVG first', 'Confirm whether U-Bahn, tram, bus or ferry is actually affected.'],
+            ['Search S-Bahn/regional hubs', 'Aim for Alexanderplatz, Friedrichstrasse, Hauptbahnhof, Zoo, Ostbahnhof, Warschauer Strasse or Suedkreuz if they are near your target.'],
+            ['Finish the last gap simply', 'Walk, bike, taxi or ride-hail for the final short leg instead of waiting for a disrupted bus.']
+          ]
+        },
+        sbahn: {
+          title: 'Rebuild the trip through BVG city routes.',
+          summary: 'If S-Bahn or regional rail is unstable, search for an U-Bahn, tram or bus route that reaches the same neighborhood. Do not stand on one platform hoping the next train fixes the timetable.',
+          risk: 'medium',
+          photo: 'assets/alexanderplatz-ubahn.jpg',
+          alt: 'Yellow BVG U-Bahn train at Alexanderplatz station.',
+          caption: 'When S-Bahn is unstable, overlapping BVG routes around central hubs become useful.',
+          steps: [
+            ['Check S-Bahn changes', 'Look for cancelled sections, replacement buses and whether the disruption is line-wide or station-specific.'],
+            ['Move to BVG overlap', 'Use U-Bahn, tram or bus lines that cross the same area, even if they add walking at the end.'],
+            ['Avoid tight transfers', 'Choose one stable route over a chain of fragile connections.']
+          ]
+        },
+        airport: {
+          title: 'Protect the flight, not the perfect route.',
+          summary: 'BER journeys need a bigger buffer. Check BER, VBB and S-Bahn or DB before leaving. If the first safe rail route collapses, move to taxi or ride-hail before the last possible train window disappears.',
+          risk: 'high',
+          photo: 'assets/ber-airport-station.jpg',
+          alt: 'S-Bahn platform at Flughafen BER station under Berlin Brandenburg Airport.',
+          caption: 'Airport transfers need earlier decisions because every failed connection spends the buffer.',
+          steps: [
+            ['Check BER plus VBB', 'Confirm whether FEX, regional trains, S-Bahn or airport buses are affected.'],
+            ['Choose the simplest working line', 'A direct FEX/regional route beats a clever chain of transfers on disruption days.'],
+            ['Escalate early', 'With luggage or a flight deadline, use taxi or ride-hail before the final safe public transport option is gone.']
+          ]
+        },
+        wide: {
+          title: 'Reduce the whole plan to one reachable district.',
+          summary: 'When the citywide picture is unclear, stop optimizing. Pick one reachable district, one official source, one backup mode and a larger buffer. A smaller day beats a broken itinerary.',
+          risk: 'high',
+          photo: 'assets/night-bus.jpg',
+          alt: 'A yellow Berlin bus waiting at a stop at night.',
+          caption: 'When the whole city feels unstable, a simpler reachable plan wins.',
+          steps: [
+            ['Cancel fragile detours', 'Drop optional cross-city plans, distant restaurants and backtracking.'],
+            ['Anchor to one hub', 'Choose a district with several modes: Mitte, Alexanderplatz, Friedrichstrasse, Zoo, Warschauer Strasse or Suedkreuz.'],
+            ['Keep a paid fallback ready', 'If time matters, save taxi or ride-hail as the final option before crowds spike.']
+          ]
+        }
+      };
+
+      function byId(id) {
+        return document.getElementById(id);
+      }
+
+      function extraStep() {
+        if (state.deadline === 'flight') {
+          return ['Flight or long-distance train buffer', 'Leave 60 to 90 minutes earlier than the normal route would suggest. Stop waiting once the first safe option fails.'];
+        }
+        if (state.deadline === 'timed') {
+          return ['Timed-ticket buffer', 'Add at least 30 to 45 minutes and choose the route with the fewest transfers.'];
+        }
+        if (state.load === 'mobility') {
+          return ['Step-free check', 'Check lift status and avoid replacement-bus chains if step-free access is essential.'];
+        }
+        if (state.load === 'luggage') {
+          return ['Luggage reality check', 'Avoid bike/scooter fallbacks and prefer direct rail, bus, taxi or short walks.'];
+        }
+        if (state.time === 'night') {
+          return ['Late-night caution', 'Check night buses and avoid routes with lonely long waits at unfamiliar stops.'];
+        }
+        if (state.time === 'rush') {
+          return ['Crowd buffer', 'Expect platforms and ride-hail pickup points to be slower than the app estimate.'];
+        }
+        return ['Proof and battery', 'Keep screenshots, ticket proof and enough phone battery for rerouting.'];
+      }
+
+      function bufferText() {
+        if (state.deadline === 'flight') return ['Add 60-90 minutes.', 'Flights and long-distance trains deserve a hard buffer. Switch to paid fallback earlier than normal.'];
+        if (state.deadline === 'timed') return ['Add 30-45 minutes.', 'Timed tickets, restaurants and tour starts need enough room for one failed connection.'];
+        if (state.load === 'mobility') return ['Add step-free time.', 'A working route is not enough if lifts or replacement buses make it unusable.'];
+        if (state.time === 'rush') return ['Add crowd time.', 'Crowded platforms and busy roads make the visible delay only part of the problem.'];
+        if (state.time === 'night') return ['Add night margin.', 'Night routes are thinner and missed transfers hurt more.'];
+        return ['Add 30 minutes.', 'Enough for a platform change, one failed connection and a calmer walk to the final stop.'];
+      }
+
+      function render() {
+        var profile = profiles[state.affected];
+        byId('result-title').textContent = profile.title;
+        byId('result-summary').textContent = profile.summary;
+        byId('result-risk').textContent = profile.risk;
+        byId('result-photo').src = profile.photo;
+        byId('result-photo').alt = profile.alt;
+        byId('result-caption').textContent = profile.caption;
+
+        var steps = profile.steps.concat([extraStep()]);
+        byId('route-stack').innerHTML = steps.map(function (step) {
+          return '<div class="bw-step"><div><strong>' + step[0] + '</strong><span>' + step[1] + '</span></div></div>';
+        }).join('');
+
+        var buffer = bufferText();
+        byId('buffer-title').textContent = buffer[0];
+        byId('buffer-copy').textContent = buffer[1];
+
+        if (window.BerlinWalkBrand && window.BerlinWalkBrand.resize) {
+          window.BerlinWalkBrand.resize();
+        }
+      }
+
+      document.querySelectorAll('[data-group]').forEach(function (group) {
+        group.addEventListener('click', function (event) {
+          var button = event.target.closest('button[data-value]');
+          if (!button) return;
+          var key = group.getAttribute('data-group');
+          state[key] = button.getAttribute('data-value');
+          group.querySelectorAll('button[data-value]').forEach(function (item) {
+            item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+      window.addEventListener('load', render);
+      window.addEventListener('resize', render);
+    }());
+  </script>
+</body>
+</html>

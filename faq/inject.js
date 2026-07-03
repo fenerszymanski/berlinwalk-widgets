@@ -1,6 +1,7 @@
 /* Auto-generated from /faq/data.json and /faq/slug-map.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
+  "berlin-transport-strike": "berlin-transport-strike",
   "alternative-transport-berlin": "alternative-transport-berlin",
   "berlin-night-transport": "berlin-night-transport",
   "best-day-trips-from-berlin": "best-day-trips-from-berlin",
@@ -163,6 +164,60 @@
 };
 
   var SCHEMAS = {
+  "berlin-transport-strike": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What should tourists check first during a Berlin transport strike?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Check the affected operator first. For U-Bahn, tram, bus and ferry, start with BVG Traffic News or the BVG strike page. For S-Bahn and regional rail, check S-Bahn Berlin, VBB or DB. Do not rely only on social posts or hotel rumors."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are BVG and S-Bahn the same during a Berlin strike?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. BVG operates U-Bahn, tram, bus and ferry services, while S-Bahn and regional trains are separate. A BVG strike may not stop S-Bahn or regional trains, and an S-Bahn disruption may not stop the U-Bahn."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How early should I leave for BER Airport during a disruption?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Leave much earlier than a normal day and check BER, VBB and S-Bahn/DB before leaving. If the route has cancellations, heavy crowding or multiple transfers, move to a taxi or ride-hail fallback before the last safe train window disappears."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a taxi always the best backup in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. A taxi can be the right choice for a flight, heavy luggage or a tight deadline, but during citywide disruption roads and ride-hail prices can also get worse. Sometimes the fastest backup is S-Bahn, regional rail, walking one stop, cycling or using a different U-Bahn line."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get compensation for delays in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Passenger-rights claims depend on the operator, ticket type and length of delay. DB and S-Bahn publish passenger-rights guidance, but small city delays often do not produce useful refunds. Keep your ticket, screenshots and disruption proof if a major delay affects a paid rail journey."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I still reach the BerlinWalk tour during transport disruption?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually yes, but leave extra time. The tour starts at Alexanderplatz and lasts about 2 hours. Alexanderplatz has several U-Bahn, S-Bahn, tram and bus options, so a disruption on one mode often still leaves another route."
+        }
+      }
+    ]
+  },
   "berlin-night-transport": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
