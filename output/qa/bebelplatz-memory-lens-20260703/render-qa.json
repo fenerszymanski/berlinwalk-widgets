@@ -1,0 +1,49 @@
+{
+  "generatedAt": "2026-07-03T21:20:00+02:00",
+  "screenshots": [
+    {
+      "file": "output/qa/bebelplatz-memory-lens-20260703/faq-desktop.png",
+      "width": 1280,
+      "height": 1000,
+      "nonblank": true
+    },
+    {
+      "file": "output/qa/bebelplatz-memory-lens-20260703/faq-mobile.png",
+      "width": 390,
+      "height": 1000,
+      "nonblank": true
+    },
+    {
+      "file": "output/qa/bebelplatz-memory-lens-20260703/quick-summary-desktop.png",
+      "width": 1280,
+      "height": 900,
+      "nonblank": true
+    },
+    {
+      "file": "output/qa/bebelplatz-memory-lens-20260703/quick-summary-mobile.png",
+      "width": 390,
+      "height": 900,
+      "nonblank": true
+    },
+    {
+      "file": "output/qa/bebelplatz-memory-lens-20260703/widget-desktop.png",
+      "width": 1280,
+      "height": 1200,
+      "nonblank": true
+    },
+    {
+      "file": "output/qa/bebelplatz-memory-lens-20260703/widget-mobile.png",
+      "width": 390,
+      "height": 1860,
+      "nonblank": true
+    }
+  ],
+  "checks": {
+    "widget_has_bebelplatz": true,
+    "widget_has_brand_js": true,
+    "quick_key": true,
+    "faq_key": true,
+    "faq_inject_key": true
+  },
+  "ok": true
+}

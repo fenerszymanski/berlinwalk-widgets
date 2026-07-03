@@ -1,0 +1,635 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bebelplatz Memory Lens</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    body {
+      font-family: Montserrat, Arial, sans-serif;
+      color: #212121;
+    }
+
+    .lens,
+    .lens * {
+      box-sizing: border-box;
+    }
+
+    .lens {
+      --green: #1B5E20;
+      --green-dark: #123B15;
+      --yellow: #FFE600;
+      --cream: #FAFAF5;
+      --paper: #FFFFFF;
+      --line: #DCE8C8;
+      --ink: #212121;
+      --muted: #53624F;
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      background: var(--cream);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 16px 38px rgba(18, 59, 21, 0.12);
+    }
+
+    .hero {
+      min-height: 292px;
+      padding: 24px;
+      background:
+        linear-gradient(90deg, rgba(18, 59, 21, 0.94), rgba(18, 59, 21, 0.76) 52%, rgba(18, 59, 21, 0.28)),
+        url("assets/bebelplatz-memory-lens-hero.jpg") center / cover no-repeat;
+      color: #FFFFFF;
+      display: grid;
+      grid-template-columns: minmax(240px, 0.72fr) minmax(280px, 1fr);
+      gap: 20px;
+      align-items: end;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      padding: 7px 10px;
+      background: rgba(255, 230, 0, 0.98);
+      color: var(--green);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-radius: 999px;
+    }
+
+    .hero h1 {
+      margin: 12px 0 10px;
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1.02;
+      letter-spacing: 0;
+      max-width: 520px;
+    }
+
+    .hero p {
+      max-width: 540px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .time-strip {
+      justify-self: end;
+      width: min(100%, 470px);
+      background: rgba(250, 250, 245, 0.96);
+      color: var(--ink);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .strip-label {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .time-strip .strip-label,
+    .panel .strip-label {
+      color: var(--green);
+    }
+
+    .time-options,
+    .mode-options {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .mode-options {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .chip {
+      min-height: 42px;
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      background: #FFFFFF;
+      color: var(--green);
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.1;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .chip[aria-pressed="true"] {
+      background: var(--green);
+      color: var(--yellow);
+      border-color: var(--green);
+      box-shadow: inset 0 0 0 2px rgba(255, 230, 0, 0.24);
+    }
+
+    .body {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: minmax(290px, 0.95fr) minmax(300px, 1.05fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .lens-stage {
+      background: var(--green-dark);
+      color: #FFFFFF;
+      border-radius: 8px;
+      min-height: 520px;
+      padding: 18px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stage-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stage-kicker {
+      margin: 0 0 6px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .stage-title {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    .clock {
+      min-width: 82px;
+      padding: 8px 10px;
+      border: 1px solid rgba(255, 230, 0, 0.45);
+      border-radius: 8px;
+      text-align: center;
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .ground {
+      width: min(100%, 390px);
+      aspect-ratio: 1;
+      margin: 0 auto;
+      align-self: center;
+      position: relative;
+      border-radius: 8px;
+      background:
+        linear-gradient(45deg, rgba(255, 255, 255, 0.08) 25%, transparent 25% 50%, rgba(255, 255, 255, 0.08) 50% 75%, transparent 75%),
+        #D8C9AE;
+      background-size: 46px 46px;
+      box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18), 0 16px 34px rgba(0, 0, 0, 0.18);
+    }
+
+    .glass {
+      position: absolute;
+      inset: 18%;
+      border-radius: 8px;
+      border: 8px solid rgba(255, 255, 255, 0.56);
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(143, 207, 219, 0.42) 36%, rgba(24, 79, 84, 0.5)),
+        repeating-linear-gradient(90deg, transparent 0 26px, rgba(255, 255, 255, 0.46) 26px 30px),
+        repeating-linear-gradient(0deg, transparent 0 30px, rgba(255, 255, 255, 0.35) 30px 34px);
+      box-shadow: 0 0 0 3px rgba(18, 59, 21, 0.24), inset 0 0 38px rgba(0, 0, 0, 0.22);
+    }
+
+    .lens-ring {
+      position: absolute;
+      width: 46%;
+      aspect-ratio: 1;
+      left: 31%;
+      top: 28%;
+      border: 12px solid var(--yellow);
+      border-radius: 50%;
+      box-shadow: 0 4px 0 rgba(18, 59, 21, 0.5), inset 0 0 0 5px rgba(255, 255, 255, 0.52);
+      transform: rotate(-10deg);
+    }
+
+    .lens-ring::after {
+      content: "";
+      position: absolute;
+      width: 58%;
+      height: 16px;
+      right: -46%;
+      bottom: 4%;
+      background: var(--yellow);
+      border-radius: 999px;
+      transform: rotate(42deg);
+      transform-origin: left center;
+      box-shadow: 0 5px 0 rgba(18, 59, 21, 0.5);
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border: 3px solid var(--green-dark);
+      border-radius: 50%;
+      background: var(--yellow);
+      box-shadow: 0 0 0 5px rgba(255, 230, 0, 0.2);
+      transition: transform 0.18s ease, background 0.18s ease;
+    }
+
+    .hotspot.is-active {
+      transform: scale(1.35);
+      background: #FFFFFF;
+    }
+
+    .spot-look { left: 47%; top: 47%; }
+    .spot-read { left: 56%; top: 18%; }
+    .spot-route { right: 14%; bottom: 18%; }
+    .spot-exit { left: 16%; bottom: 16%; }
+
+    .stage-copy {
+      margin: 0;
+      position: relative;
+      z-index: 2;
+      color: rgba(255, 255, 255, 0.88);
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .planner {
+      display: grid;
+      gap: 14px;
+    }
+
+    .panel {
+      background: #FFFFFF;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .panel h2,
+    .panel h3 {
+      margin: 0 0 8px;
+      color: var(--green);
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 600;
+    }
+
+    .steps {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .steps li {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 9px;
+      align-items: start;
+      color: var(--ink);
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .num {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--green);
+      color: var(--yellow);
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    .route {
+      display: grid;
+      grid-template-columns: 1fr 24px 1fr 24px 1fr;
+      align-items: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .route-point {
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8px;
+      border-radius: 8px;
+      background: #F2F8E8;
+      color: var(--green);
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 900;
+    }
+
+    .arrow {
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .cta {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      margin-top: 12px;
+      padding: 10px 14px;
+      border-radius: 8px;
+      background: var(--green);
+      color: var(--yellow);
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    .cta:focus,
+    .cta:hover {
+      background: var(--green-dark);
+      color: var(--yellow);
+    }
+
+    @media (max-width: 760px) {
+      .hero,
+      .body {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: 0;
+        padding: 18px;
+        background:
+          linear-gradient(180deg, rgba(18, 59, 21, 0.96), rgba(18, 59, 21, 0.78)),
+          url("assets/bebelplatz-memory-lens-hero.jpg") center / cover no-repeat;
+      }
+
+      .time-strip {
+        justify-self: stretch;
+      }
+
+      .body {
+        padding: 14px;
+      }
+
+      .lens-stage {
+        min-height: 0;
+      }
+
+      .ground {
+        width: min(100%, 330px);
+      }
+
+      .mode-options {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .route {
+        grid-template-columns: 1fr;
+      }
+
+      .arrow {
+        transform: rotate(90deg);
+      }
+    }
+
+    @media (max-width: 460px) {
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      .time-options {
+        grid-template-columns: 1fr;
+      }
+
+      .chip {
+        min-height: 38px;
+      }
+
+      .stage-top {
+        display: grid;
+      }
+
+      .clock {
+        width: fit-content;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="lens" aria-labelledby="lens-title">
+    <section class="hero">
+      <div>
+        <span class="eyebrow">BerlinWalk tool</span>
+        <h1 id="lens-title">Bebelplatz Memory Lens</h1>
+        <p>Choose your time, then read the square in the right order: ground, plaque, buildings, route.</p>
+      </div>
+      <div class="time-strip" aria-label="Visit time">
+        <p class="strip-label">Time on the square</p>
+        <div class="time-options">
+          <button class="chip time-chip" type="button" data-time="10" aria-pressed="false">10 min</button>
+          <button class="chip time-chip" type="button" data-time="25" aria-pressed="true">25 min</button>
+          <button class="chip time-chip" type="button" data-time="45" aria-pressed="false">45 min</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="body">
+      <div class="lens-stage" aria-live="polite">
+        <div class="stage-top">
+          <div>
+            <p class="stage-kicker">Current lens</p>
+            <h2 class="stage-title">Look down first</h2>
+          </div>
+          <div class="clock"><span id="clock-min">25</span> min</div>
+        </div>
+        <div class="ground" aria-hidden="true">
+          <div class="glass"></div>
+          <div class="lens-ring"></div>
+          <span class="hotspot spot-look is-active"></span>
+          <span class="hotspot spot-read"></span>
+          <span class="hotspot spot-route"></span>
+          <span class="hotspot spot-exit"></span>
+        </div>
+        <p class="stage-copy">Start at the glass panel. Change your angle until the empty shelves below the paving stones become visible.</p>
+      </div>
+
+      <div class="planner">
+        <div class="panel">
+          <p class="strip-label">Pick the lens</p>
+          <div class="mode-options" aria-label="Memory lens mode">
+            <button class="chip mode-chip" type="button" data-mode="look" aria-pressed="true">Look down</button>
+            <button class="chip mode-chip" type="button" data-mode="read" aria-pressed="false">Read square</button>
+            <button class="chip mode-chip" type="button" data-mode="route" aria-pressed="false">Connect route</button>
+            <button class="chip mode-chip" type="button" data-mode="exit" aria-pressed="false">Leave well</button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2 id="plan-title">Your Bebelplatz move</h2>
+          <ul class="steps" id="steps"></ul>
+        </div>
+
+        <div class="panel">
+          <h3>Route shape</h3>
+          <p id="route-note">Bebelplatz is strongest as a pause between Museum Island and Brandenburg Gate.</p>
+          <div class="route" aria-label="Suggested route">
+            <div class="route-point" id="route-start">Museum Island</div>
+            <div class="arrow" aria-hidden="true">→</div>
+            <div class="route-point">Bebelplatz</div>
+            <div class="arrow" aria-hidden="true">→</div>
+            <div class="route-point" id="route-end">Brandenburg Gate</div>
+          </div>
+          <a class="cta" href="https://www.berlinwalk.com/post/unter-den-linden-berlin" target="_blank" rel="noopener">Open Unter den Linden guide</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    const state = { time: '25', mode: 'look' };
+
+    const modes = {
+      look: {
+        title: 'Look down first',
+        copy: 'Start at the glass panel. Change your angle until the empty shelves below the paving stones become visible.',
+        spot: 'look',
+        steps: {
+          10: ['Find the glass panel near the centre of the square.', 'Stand still long enough to see the shelves below.', 'Read the square after the memorial, not before.'],
+          25: ['Find the glass panel and adjust your angle for reflections.', 'Look for the empty shelves, then read the plaque nearby.', 'Walk one slow loop around the square before leaving.'],
+          45: ['Begin with the glass panel and stay until the shelves are clear.', 'Read the plaque and the Heine warning in place.', 'Use the remaining time to connect each side of the square with the event.']
+        }
+      },
+      read: {
+        title: 'Read the institutions',
+        copy: 'The square works because culture, power and memory are all in one place: opera, cathedral, university and library facade.',
+        spot: 'read',
+        steps: {
+          10: ['Name the buildings at the edge: opera, cathedral, university, library facade.', 'Ask why this happened in a cultural square.', 'Leave through Unter den Linden with that question, not only a photo.'],
+          25: ['Stand by the memorial, then turn slowly to each building.', 'Use the architecture as context for the public nature of the event.', 'Do not separate the beautiful surface from the history below it.'],
+          45: ['Walk the square edge by edge.', 'Compare the formal facades with the quiet ground memorial.', 'Add Humboldt University and Museum Island context before moving west.']
+        }
+      },
+      route: {
+        title: 'Connect the route',
+        copy: 'Bebelplatz is a hinge stop: Museum Island, Unter den Linden, Brandenburg Gate and Gendarmenmarkt all make sense from here.',
+        spot: 'route',
+        steps: {
+          10: ['Use Bebelplatz as the pause between Museum Island and Unter den Linden.', 'Skip extra detours if you are already tired.', 'Continue west only after you have found the memorial.'],
+          25: ['Arrive from Museum Island or the Humboldt Forum.', 'Stop at the memorial, then walk toward Brandenburg Gate.', 'Keep Gendarmenmarkt as an optional side move, not a forced add-on.'],
+          45: ['Start at Museum Island, pause deeply at Bebelplatz.', 'Walk Unter den Linden west with Neue Wache and Humboldt University in mind.', 'End at Brandenburg Gate or turn south to Gendarmenmarkt.']
+        }
+      },
+      exit: {
+        title: 'Leave without flattening it',
+        copy: 'The right exit is calm: one thought, one next stop, no rushed checklist.',
+        spot: 'exit',
+        steps: {
+          10: ['Leave by naming one thing you saw below ground.', 'Do not chase another sight just because it is nearby.', 'Choose the simplest next stop.'],
+          25: ['Take one final look from the square edge.', 'Decide whether your next move is history, architecture or a rest.', 'Use U5 or U6 if the day is getting too full.'],
+          45: ['Give yourself a quiet minute before leaving the square.', 'Connect the book burning with one later memory site if your day can hold it.', 'Stop before the route turns into too many heavy places at once.']
+        }
+      }
+    };
+
+    const routeByTime = {
+      10: ['Museum Island', 'Unter den Linden'],
+      25: ['Museum Island', 'Brandenburg Gate'],
+      45: ['Museum Island', 'Gendarmenmarkt']
+    };
+
+    const notesByTime = {
+      10: 'Use Bebelplatz as a compact pause, then keep the route simple.',
+      25: 'This is the best tourist timing: memorial, square loop, then one clear next stop.',
+      45: 'Use the extra time only if you want context, not more rushed stops.'
+    };
+
+    function setPressed(selector, value, attr) {
+      document.querySelectorAll(selector).forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset[attr] === value));
+      });
+    }
+
+    function render() {
+      const mode = modes[state.mode];
+      const steps = mode.steps[state.time];
+      document.querySelector('.stage-title').textContent = mode.title;
+      document.querySelector('.stage-copy').textContent = mode.copy;
+      document.getElementById('clock-min').textContent = state.time;
+      document.getElementById('steps').innerHTML = steps.map((step, index) => `<li><span class="num">${index + 1}</span><span>${step}</span></li>`).join('');
+      document.getElementById('route-note').textContent = notesByTime[state.time];
+      document.getElementById('route-start').textContent = routeByTime[state.time][0];
+      document.getElementById('route-end').textContent = routeByTime[state.time][1];
+      document.querySelectorAll('.hotspot').forEach((spot) => spot.classList.remove('is-active'));
+      document.querySelector(`.spot-${mode.spot}`).classList.add('is-active');
+      setPressed('.time-chip', state.time, 'time');
+      setPressed('.mode-chip', state.mode, 'mode');
+    }
+
+    document.querySelectorAll('.time-chip').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.time = button.dataset.time;
+        render();
+      });
+    });
+
+    document.querySelectorAll('.mode-chip').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.mode = button.dataset.mode;
+        render();
+      });
+    });
+
+    render();
+  </script>
+</body>
+</html>

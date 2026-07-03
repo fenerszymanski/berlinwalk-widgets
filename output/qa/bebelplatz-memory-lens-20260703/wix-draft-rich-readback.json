@@ -1,0 +1,231 @@
+{
+  "generatedAt": "2026-07-03T19:25:13.244Z",
+  "id": "37c603bb-faee-4b48-9f55-dd9ff2379a71",
+  "title": "Bebelplatz Berlin: Book-Burning Memorial, Empty Library and What Tourists Miss",
+  "status": "UNPUBLISHED",
+  "hasUnpublishedChanges": true,
+  "seoSlug": "bebelplatz-berlin",
+  "categoryIds": [
+    "5f58da11-347d-43f0-b3c3-2cb1cdeb7a79",
+    "6da64e22-3360-42ec-a558-e906e4deeb19"
+  ],
+  "tagIds": [
+    "1c7405a3-7bca-4805-866a-713e005c8fc5",
+    "340c69ef-4fb0-491e-b7ee-37742a363434",
+    "3a1ad96b-49a3-4a15-94ab-fd9912b807ed",
+    "49e47d12-8b51-47fe-a026-7405cd852ec6",
+    "e9548781-1cd9-48e1-a958-7c53474f16ca",
+    "c91e84fa-b65f-4e2c-900c-2fc456cf3b1f"
+  ],
+  "imageCount": 5,
+  "missingAlt": 0,
+  "images": [
+    {
+      "i": 1,
+      "altText": "Bebelplatz Berlin square with the State Opera, St. Hedwig's Cathedral and surrounding facades",
+      "id": "5a08a3_9d6c6b1ead7c4cc29650ad26e058da3f~mv2.jpg",
+      "width": 1800,
+      "height": 1200
+    },
+    {
+      "i": 2,
+      "altText": "The Empty Library memorial under a glass panel in the paving stones at Bebelplatz",
+      "id": "5a08a3_b99ceae1933b4d9482d4f2ce41d59c2c~mv2.jpg",
+      "width": 1800,
+      "height": 1392
+    },
+    {
+      "i": 3,
+      "altText": "Bronze memorial plaques set into the cobblestones near the Bebelplatz Empty Library",
+      "id": "5a08a3_b9be789f9ea64145b33eb61794e364ab~mv2.jpg",
+      "width": 1800,
+      "height": 1108
+    },
+    {
+      "i": 4,
+      "altText": "The Old Library facade on Bebelplatz in blue-hour light",
+      "id": "5a08a3_463ec12993b54a8fbe2d729d44f918e1~mv2.jpg",
+      "width": 1800,
+      "height": 706
+    },
+    {
+      "i": 5,
+      "altText": "Wide panorama of Bebelplatz with Humboldt University buildings and the State Opera",
+      "id": "5a08a3_d1cbfd8fcc5e4f6680ba1750318b85dc~mv2.jpg",
+      "width": 2000,
+      "height": 573
+    }
+  ],
+  "htmlCount": 3,
+  "html": [
+    {
+      "id": "quick_summary_bebelplatz_berlin",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=bebelplatz-berlin&v=20260703a",
+      "height": "660"
+    },
+    {
+      "id": "widget_bebelplatz_memory_lens",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/bebelplatz-memory-lens/?v=20260703a",
+      "height": "1360"
+    },
+    {
+      "id": "faq_bebelplatz_berlin",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=bebelplatz-berlin&v=20260703a",
+      "height": "900"
+    }
+  ],
+  "h1": 0,
+  "captions": 5,
+  "seoTagCount": 17,
+  "seoTags": [
+    {
+      "type": "title",
+      "props": null,
+      "children": "Bebelplatz Berlin: Book-Burning Memorial and Empty Library",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "name": "description",
+        "content": "Bebelplatz Berlin guide: find the book-burning memorial, understand the Empty Library, read the square and plan a meaningful Unter den Linden stop."
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "link",
+      "props": {
+        "rel": "canonical",
+        "href": "https://www.berlinwalk.com/post/bebelplatz-berlin"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "name": "robots",
+        "content": "index, follow, max-image-preview:large"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "property": "og:title",
+        "content": "What Tourists Miss at Bebelplatz Berlin"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "property": "og:description",
+        "content": "Find the Empty Library memorial, understand the 1933 book burning, and plan Bebelplatz as a meaningful Unter den Linden stop."
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "property": "og:type",
+        "content": "article"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "property": "og:url",
+        "content": "https://www.berlinwalk.com/post/bebelplatz-berlin"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "property": "og:image",
+        "content": "https://static.wixstatic.com/media/5a08a3_9d6c6b1ead7c4cc29650ad26e058da3f~mv2.jpg"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "property": "og:image:alt",
+        "content": "Bebelplatz Berlin square with the State Opera, St. Hedwig's Cathedral and surrounding facades"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "name": "twitter:card",
+        "content": "summary_large_image"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "name": "twitter:title",
+        "content": "What Tourists Miss at Bebelplatz Berlin"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "name": "twitter:description",
+        "content": "Find the Empty Library memorial, understand the 1933 book burning, and plan Bebelplatz as a meaningful Unter den Linden stop."
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "name": "twitter:image",
+        "content": "https://static.wixstatic.com/media/5a08a3_9d6c6b1ead7c4cc29650ad26e058da3f~mv2.jpg"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "meta",
+      "props": {
+        "name": "twitter:image:alt",
+        "content": "Bebelplatz Berlin square with the State Opera, St. Hedwig's Cathedral and surrounding facades"
+      },
+      "children": "",
+      "disabled": false
+    },
+    {
+      "type": "script",
+      "props": {
+        "type": "application/ld+json"
+      },
+      "children": "{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"headline\":\"Bebelplatz Berlin: Book-Burning Memorial, Empty Library and What Tourists",
+      "disabled": false
+    },
+    {
+      "type": "script",
+      "props": {
+        "type": "application/ld+json"
+      },
+      "children": "{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"What is Bebelplatz Berlin known for?\",\"accepted",
+      "disabled": false
+    }
+  ],
+  "leaks": []
+}

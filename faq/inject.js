@@ -161,7 +161,8 @@
   "berlin-ab-or-abc-ticket-which-zone-do-tourists-need": "berlin-ab-abc-ticket-zones",
   "berlin-last-day": "berlin-last-day",
   "berlin-last-day-what-to-do-before-your-flight-or-train": "berlin-last-day",
-  "berlin-museum-bag-rules": "berlin-museum-bag-rules"
+  "berlin-museum-bag-rules": "berlin-museum-bag-rules",
+  "bebelplatz-berlin": "bebelplatz-berlin"
 };
 
   var SCHEMAS = {
@@ -7705,6 +7706,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "A small backpack is usually fine, but a rolling suitcase is a bad idea for a walking route. The BerlinWalk tour lasts about 2 hours, so store luggage first and join with only what you can comfortably carry."
+        }
+      }
+    ]
+  },
+  "bebelplatz-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Bebelplatz Berlin known for?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Bebelplatz Berlin is known for the Empty Library memorial to the Nazi book burning of 10 May 1933, when more than 20,000 books were burned on the square then called Opernplatz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the book-burning memorial on Bebelplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The memorial is set into the paving stones near the centre of Bebelplatz. Look for a glass panel in the ground, then change your angle until you can see the white empty shelves below."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Bebelplatz worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, especially if you are already walking Unter den Linden, Museum Island or Brandenburg Gate. It is a free, central and meaningful stop, but it works best when you slow down instead of using it as a quick photo stop."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should I spend at Bebelplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most visitors need 15 to 25 minutes: find the Empty Library, read the plaque, look at the surrounding buildings and decide your next route. Even five focused minutes are better than walking through without noticing the memorial."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Empty Library memorial?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Empty Library is Micha Ullman's memorial, unveiled in 1995. It is an underground white room with empty shelves, visible through a glass plate in the square, symbolically leaving space for around 20,000 books."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Bebelplatz by public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Useful nearby stations are Museumsinsel on U5, Unter den Linden on U5/U6 and Hausvogteiplatz on U2. The Staatsoper bus stop is directly nearby and is served by central bus routes including 100 and 300."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I combine Bebelplatz with the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The BerlinWalk tour lasts about 2 hours and focuses on central Berlin layers around Alexanderplatz, Museum Island and the historic centre. Bebelplatz is an easy before-or-after addition on Unter den Linden."
         }
       }
     ]
