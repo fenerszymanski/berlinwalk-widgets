@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-03T09:19:16.143Z",
+  "updatedAt": "2026-07-03T12:11:02.960Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 152,
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Museum Bag Rules: Backpacks, Lockers and Luggage Tips",
+      "slug": "berlin-museum-bag-rules",
+      "path": "/post/berlin-museum-bag-rules",
+      "url": "https://www.berlinwalk.com/post/berlin-museum-bag-rules",
+      "excerpt": "A practical Berlin guide to museum backpack rules, cloakrooms, lockers and suitcase planning before Museum Island, Humboldt Forum and other museums.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-03T12:09:40.212Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_bbc8a796e5db43c48e5f4dd731a19692~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-museum-bag-rules-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_bbc8a796e5db43c48e5f4dd731a19692~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-museum-bag-rules-cover.jpg",
+      "alt": "Altes Museum and Museum Island in Berlin at sunset",
+      "relatedToolSlug": "berlin-museum-bag-planner"
+    },
+    {
       "title": "Berlin Transport Strike: How to Keep Moving When Trains Stop",
       "slug": "berlin-transport-strike",
       "path": "/post/berlin-transport-strike",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_1854e95d46734fde9a64e0371d5b8786~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/what-to-book-in-advance-in-berlin-01-reichstag-dome-booking.jpg",
       "alt": "Visitors approaching the glass Reichstag dome in Berlin, one of the key free attractions tourists should reserve in advance",
       "relatedToolSlug": "berlin-booking-deadline-planner"
-    },
-    {
-      "title": "German Signs in Berlin: The Words Tourists Actually Need",
-      "slug": "german-signs-in-berlin",
-      "path": "/post/german-signs-in-berlin",
-      "url": "https://www.berlinwalk.com/post/german-signs-in-berlin",
-      "excerpt": "A practical guide to the German signs tourists actually need in Berlin: exits, platforms, ticket validation, replacement transport, cash-only shops, Pfand and emergency words.",
-      "category": "German Language",
-      "categorySlug": "german-language",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-06-28T19:37:15.158Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_4210b7a6ac144c338eb126ab500f66b0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-signs-in-berlin-01-ausgang-exit-sign-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_4210b7a6ac144c338eb126ab500f66b0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-signs-in-berlin-01-ausgang-exit-sign-cover.jpg",
-      "alt": "Green German Ausgang exit sign on a Berlin-style wall for tourists learning German signs in Berlin",
-      "relatedToolSlug": "berlin-sign-decoder"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Museum Bag Rules: Backpacks, Lockers and Luggage Tips",
+      "slug": "berlin-museum-bag-rules",
+      "path": "/post/berlin-museum-bag-rules",
+      "url": "https://www.berlinwalk.com/post/berlin-museum-bag-rules",
+      "excerpt": "A practical Berlin guide to museum backpack rules, cloakrooms, lockers and suitcase planning before Museum Island, Humboldt Forum and other museums.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-03T12:09:40.212Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_bbc8a796e5db43c48e5f4dd731a19692~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-museum-bag-rules-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_bbc8a796e5db43c48e5f4dd731a19692~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-museum-bag-rules-cover.jpg",
+      "alt": "Altes Museum and Museum Island in Berlin at sunset",
+      "relatedToolSlug": "berlin-museum-bag-planner"
+    },
     {
       "title": "Berlin Transport Strike: How to Keep Moving When Trains Stop",
       "slug": "berlin-transport-strike",
@@ -4314,23 +4331,6 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_c3ff467d4f2a4a95af1380c59d80e738~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Marienviertel_edited.jpg",
       "alt": "Marienviertel information panel and open space near St. Mary's Church in Berlin",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "St. Mary's Church: The Medieval Survivor in the Shadow of the TV Tower",
-      "slug": "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
-      "path": "/post/st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
-      "url": "https://www.berlinwalk.com/post/st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
-      "excerpt": "St. Mary's Church near Alexanderplatz explains medieval Berlin, the vanished Marienviertel, the Totentanz and the TV Tower contrast.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-02-28T21:23:51.898Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_7b7b631e94b04e159091391249bc4906~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_7905-min.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_7b7b631e94b04e159091391249bc4906~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_7905-min.jpg",
-      "alt": "St. Mary's Church in Berlin near Alexanderplatz with autumn trees and open space",
-      "relatedToolSlug": "medieval-berlin-mini-walk"
     },
     {
       "title": "The Best Views in Berlin You Can Find on Foot",
