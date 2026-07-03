@@ -76,15 +76,20 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 - **Colors:** Green `#1B5E20` (primary), Yellow `#FFE600` (energy), Lime `#7CB342` (accent), Light Green `#C5E1A5` (soft fill), Berlin Red `#E63946` (occasional caution only)
 - **Fonts:** Montserrat (default), Merriweather (selective serif for editorial moments)
 - **Tone:** First-person Yusuf voice, atmospheric, historically grounded, **no em dashes**, no marketing fluff, confident but restrained.
-- **Project-wide editorial voice:** public widget/tool/site/game copy should
-  follow the same flexible BerlinWalk local-guide direction as the main
-  workspace: practical, concrete, lightly conversational, grounded in real
-  Berlin places/systems, and able to turn confusion into a usable city move.
-  Do not let UI copy become generic AI travel prose, over-polished marketing,
-  or a mechanical decision matrix unless the surface genuinely needs compact
-  labels. This is not a rigid style lock; Codex may make widget UI more compact,
-  operational/safety copy more direct, and game/social copy punchier when the
-  context calls for it.
+- **Project-wide editorial voice:** public widget/tool/site/game copy follows
+  Yusuf's approved 3 July 2026 Neukölln paragraph. Start from a real Berlin
+  situation, explain why it matters, add Yusuf's practical judgment, then give
+  the user one simple move. Even compact UI should prefer concrete places,
+  dates, stations, routes, habits, and small decisions over abstract labels.
+  Reference tone: `Berlin summer keeps giving locals and visitors reasons to
+  stay outside... My advice: do not try to see everything... Pick one area
+  around Rathaus Neukölln, Karl-Marx-Straße or Hermannplatz...` Avoid vague
+  travel-guide filler, forced cleverness, glossy marketing lines, and
+  checklist-only prose unless the surface truly needs compact controls.
+  The canonical standard is `../BERLINWALK_EDITORIAL_VOICE_STANDARD.md`; for a
+  full accepted blog example, use
+  `blog-drafts/berlin-transport-strike.body.md`. Widget UI can stay compact,
+  but it should still sound like a decision Yusuf would give in the city.
 - **Brand guide source:** `BerlinWalk_Brand_Guide_v1_2_revised.pdf` (Yusuf's downloads — not in repo)
 - **Daily blog publishing approval:** Daily blog automation may complete the
   full package, deploy required widget/data/icon assets, and QA the Wix draft,

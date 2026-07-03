@@ -173,7 +173,7 @@
         "name": "What should tourists check first during a Berlin transport strike?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Check which transport layer is affected. For U-Bahn, tram, bus and ferry, start with BVG Traffic News or the BVG strike page. For S-Bahn, check S-Bahn Berlin. For mixed Berlin-Brandenburg journeys, airport routes and regional trains, use VBB, BER or DB."
+          "text": "Check which transport layer is affected before changing the whole day. BVG covers U-Bahn, tram, bus and ferry. S-Bahn Berlin covers the S-Bahn. For mixed routes, airport journeys and regional trains, use VBB, BER or DB."
         }
       },
       {
@@ -189,7 +189,7 @@
         "name": "Can I just walk if transport is disrupted in central Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Often, yes. If you are around Alexanderplatz, Museum Island, Hackescher Markt, Unter den Linden or Hauptbahnhof, walking can be a realistic backup for sightseeing. It is not the answer for every hotel or airport journey, but in the centre it can save time and make the day feel calmer."
+          "text": "Often, yes. If you are around Alexanderplatz, Museum Island, Hackescher Markt, Unter den Linden or Hauptbahnhof, walking can be a real sightseeing plan, not just a backup. It is not the answer for every hotel or airport journey, but in the centre it can save the day."
         }
       },
       {
@@ -197,7 +197,7 @@
         "name": "How early should I leave for BER Airport during a disruption?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Leave earlier than a normal day and check BER, VBB, S-Bahn or DB before leaving. If Airport Express, regional rail or S-Bahn options are unstable, look at express buses or move to a taxi or ride-hail fallback before the last safe train window disappears."
+          "text": "Leave earlier than a normal day and check BER, VBB, S-Bahn or DB before leaving. If Airport Express, regional rail or S-Bahn options are unstable, compare express buses and taxi or ride-hail options before the last safe train window disappears."
         }
       },
       {
@@ -213,7 +213,7 @@
         "name": "Can I get compensation for delays in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Passenger-rights claims depend on the operator, ticket type and length of delay. DB publishes passenger-rights guidance for DB-operated services including S-Bahn, RB, RE, IC and ICE. Keep your ticket, screenshots and disruption proof if a major delay affects a paid onward journey."
+          "text": "Passenger-rights claims depend on the operator, ticket type and length of delay. DB publishes passenger-rights guidance for DB-operated services including S-Bahn, RB, RE, IC and ICE. Keep your ticket, screenshots and disruption proof if a serious delay affects a paid onward journey."
         }
       },
       {
@@ -221,7 +221,7 @@
         "name": "Can I still reach the BerlinWalk tour during transport disruption?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Usually yes, but leave extra time. The tour starts at Alexanderplatz and lasts about 2 hours. Alexanderplatz has U-Bahn, S-Bahn, tram, bus and walkable central-street options, so a problem on one layer often still leaves another way in."
+          "text": "Usually yes, but leave extra time. The tour starts at Alexanderplatz and lasts about 2 hours. That area has U-Bahn, S-Bahn, tram, bus and walkable central-street options, so a problem on one layer often still leaves another way in."
         }
       }
     ]

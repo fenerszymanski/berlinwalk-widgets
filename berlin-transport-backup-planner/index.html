@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Transport Backup Planner | BerlinWalk</title>
-  <meta name="description" content="Choose your Berlin disruption situation and get a route-first backup: walk the centre, switch transport layers, or protect BER and train timing.">
+  <meta name="description" content="A Berlin transport disruption planner that helps tourists make the city smaller, find the working layer, and protect flights, trains or tour timing.">
   <link rel="stylesheet" href="../css/brand.css">
   <style>
     :root {
@@ -633,24 +633,24 @@
   </style>
 </head>
 <body>
-  <section class="bw-rescue" data-version="20260703b" aria-label="Berlin Transport Backup Planner">
+  <section class="bw-rescue" data-version="20260703c" aria-label="Berlin Transport Backup Planner">
     <header class="bw-hero">
       <div class="bw-hero-copy">
         <p class="bw-kicker">Berlin disruption day</p>
-        <h1>Find the layer that still moves</h1>
-        <p>Pick the situation you are in now. This tool turns a transport strike or disruption into one practical Berlin move: walk the centre, switch systems, or protect the deadline.</p>
+        <h1>Make the city smaller first</h1>
+        <p>When the station board goes red, do not fight the whole map. Pick what needs saving, find the transport layer that still works, then make one practical Berlin move.</p>
         <div class="bw-hero-rules" aria-label="Planner rules">
           <div class="bw-hero-rule">
-            <strong>Check the layer</strong>
-            <span>BVG, S-Bahn, VBB, BER or DB can tell different stories.</span>
+            <strong>Read the warning</strong>
+            <span>BVG, S-Bahn, VBB, BER and DB can tell different stories.</span>
           </div>
           <div class="bw-hero-rule">
             <strong>Use the centre</strong>
-            <span>Alexanderplatz, Museum Island and Hackescher Markt are walkable.</span>
+            <span>Alexanderplatz to Museum Island can be a real plan, not a sad backup.</span>
           </div>
           <div class="bw-hero-rule">
-            <strong>Protect deadlines</strong>
-            <span>Flights, trains and tour starts need earlier backup moves.</span>
+            <strong>Move earlier</strong>
+            <span>Flights, trains and tour starts need a decision before the buffer disappears.</span>
           </div>
         </div>
       </div>
@@ -673,8 +673,8 @@
     <div class="bw-board">
       <aside class="bw-controls" aria-label="Planner controls">
         <div class="bw-control-head">
-          <h2>What needs saving?</h2>
-          <p>Choose the pressure first. A museum day, airport ride and tour start should not use the same backup.</p>
+          <h2>What is the real problem?</h2>
+          <p>A loose museum day, a flight and a tour start should not use the same backup. Choose the pressure first.</p>
         </div>
 
         <div class="bw-control-group" data-group="scene">
@@ -725,13 +725,13 @@
       <main class="bw-result" aria-live="polite">
         <div class="bw-result-photo">
           <img id="resultImage" src="assets/alexanderplatz-ubahn.jpg" alt="Yellow U-Bahn train at Alexanderplatz station" decoding="async">
-          <div class="bw-photo-caption" id="resultCaption">When sightseeing is central, a disruption can become a walking route instead of a lost hour.</div>
+          <div class="bw-photo-caption" id="resultCaption">If the day is central, a red board can become a walking route instead of a lost hour.</div>
         </div>
 
         <div class="bw-result-copy">
-          <p class="bw-mode" id="resultMode">Best move: turn the centre into the route</p>
-          <h2 id="resultTitle">Walk the useful part of Berlin</h2>
-          <p class="bw-lead" id="resultLead">If you are already around Alexanderplatz or Museum Island and the day is flexible, stop trying to force the same train. Walk west, keep the official app open, and rejoin transport from a calmer hub.</p>
+          <p class="bw-mode" id="resultMode">Best move: make central Berlin the plan</p>
+          <h2 id="resultTitle">Walk the city that is already near you</h2>
+          <p class="bw-lead" id="resultLead">If you are already around Alexanderplatz or Museum Island and the day is flexible, stop forcing the same train. Walk west, keep the official app open, and rejoin transport from a calmer hub.</p>
 
           <section class="bw-route" aria-label="Suggested route">
             <p class="bw-route-title" id="routeTitle">Route that still works</p>
@@ -758,7 +758,7 @@
 
     <section class="bw-official" aria-label="Official transport links">
       <h2>Open the official source before you move</h2>
-      <p>This tool helps with the order of decisions. Live status still belongs to the operator pages and apps.</p>
+      <p>This planner helps with the order of decisions. Live status still belongs to the operator pages and apps.</p>
       <div class="bw-link-grid">
         <a href="https://www.bvg.de/en/connections/traffic-news" target="_blank" rel="noopener">BVG Traffic News<br>U-Bahn, tram, bus, ferry</a>
         <a href="https://sbahn.berlin/en/plan-a-journey/timetable-changes/" target="_blank" rel="noopener">S-Bahn Changes<br>S-Bahn disruptions</a>
@@ -770,7 +770,7 @@
     <section class="bw-note-strip" aria-label="Berlin disruption notes">
       <article class="bw-note">
         <strong>Central Berlin</strong>
-        <span>Alexanderplatz to Museum Island to Hackescher Markt can be a real backup route, not just a detour.</span>
+        <span>Alexanderplatz to Museum Island to Hackescher Markt can be the day, not just the detour.</span>
       </article>
       <article class="bw-note">
         <strong>BVG affected</strong>
@@ -782,7 +782,7 @@
       </article>
       <article class="bw-note">
         <strong>BER or Hbf</strong>
-        <span>Hard deadlines change the rule. Switch earlier and keep screenshots of cancelled services.</span>
+        <span>Hard deadlines change the rule. Switch earlier and keep proof of cancelled services.</span>
       </article>
     </section>
   </section>
@@ -796,17 +796,17 @@
 
     const scenes = {
       central: {
-        mode: 'Best move: turn the centre into the route',
-        title: 'Walk the useful part of Berlin',
-        lead: 'If you are already around Alexanderplatz or Museum Island and the day is flexible, stop trying to force the same train. Walk west, keep the official app open, and rejoin transport from a calmer hub.',
+        mode: 'Best move: make central Berlin the plan',
+        title: 'Walk the city that is already near you',
+        lead: 'If you are already around Alexanderplatz or Museum Island and the day is flexible, stop forcing the same train. Walk west, keep the official app open, and rejoin transport from a calmer hub.',
         image: 'assets/alexanderplatz-ubahn.jpg',
         alt: 'Yellow U-Bahn train at Alexanderplatz station',
-        caption: 'When sightseeing is central, a disruption can become a walking route instead of a lost hour.',
+        caption: 'If the day is central, a red board can become a walking route instead of a lost hour.',
         routeTitle: 'Central walk that still works',
         steps: ['Alexanderplatz and the TV Tower', 'Rotes Rathaus and the Spree crossing', 'Berlin Cathedral and Museum Island', 'Hackescher Markt for S-Bahn, tram, food or a calm reset'],
-        check: 'Confirm whether the problem is BVG, S-Bahn or a wider VBB issue before changing the whole day.',
-        move: 'If the centre is close, start walking toward Museum Island or Hackescher Markt instead of waiting through three bad signs.',
-        fallback: 'Use a working rail layer to a nearby hub, then walk, bike, scooter or taxi for the awkward final part.'
+        check: 'Confirm whether the problem is BVG, S-Bahn or a wider VBB issue before you shrink the day.',
+        move: 'If the centre is close, start walking toward Museum Island or Hackescher Markt before the platform eats the morning.',
+        fallback: 'Use a working rail layer to a nearby hub, then solve the awkward final part separately.'
       },
       airport: {
         mode: 'Best move: protect the flight',
@@ -815,23 +815,23 @@
         image: 'assets/ber-airport-station.jpg',
         alt: 'Rail platform at Flughafen BER Airport station',
         caption: 'BER has rail and bus options, but flight timing needs a bigger buffer than sightseeing.',
-        routeTitle: 'Airport order',
+        routeTitle: 'Airport order I would use',
         steps: ['Check BER plus VBB or DB before leaving the hotel', 'Try a working rail hub: Hauptbahnhof, Potsdamer Platz or Südkreuz', 'Compare S9/S85 or express bus via Rudow if rail is unstable', 'Move to taxi or ride-hail before the last safe train is gone'],
         check: 'Use BER public transport and VBB or DB for the exact route, not an old screenshot from the hotel.',
-        move: 'Leave early enough that one failed train does not become a missed flight.',
-        fallback: 'For luggage, kids, mobility needs or tight check-in timing, taxi becomes a serious option earlier.'
+        move: 'Leave early enough that one failed train becomes annoying, not expensive.',
+        fallback: 'With luggage, kids, mobility needs or tight check-in timing, taxi becomes serious earlier.'
       },
       train: {
         mode: 'Best move: reach the hub first',
         title: 'Protect Hauptbahnhof or the onward train',
-        lead: 'A long-distance train changes the mood. Your target is not the prettiest cross-town route. Your target is a reliable arrival at Hauptbahnhof or the correct bus/train terminal with enough buffer to think.',
+        lead: 'A long-distance train changes the mood. Your target is not the prettiest cross-town route. Your target is a reliable arrival at Hauptbahnhof or the correct terminal with enough buffer to think.',
         image: 'assets/hauptbahnhof-sbahn.jpg',
         alt: 'Blurred S-Bahn train moving through Berlin Hauptbahnhof',
         caption: 'At a big hub, arrive early enough to recover from platform changes and crowds.',
         routeTitle: 'Hub-first route',
         steps: ['Check the affected operator and DB Navigator if an onward train is involved', 'Aim for a major hub rather than the exact original transfer', 'Build one backup station into the plan', 'Keep screenshots if a cancellation affects a paid rail journey'],
-        check: 'Use DB for the onward train and BVG/S-Bahn/VBB for the city route that gets you there.',
-        move: 'If two city connections look unstable, choose the simpler route with fewer transfers even if it is not the shortest on paper.',
+        check: 'Use DB for the onward train and BVG, S-Bahn or VBB for the city route that gets you there.',
+        move: 'If two city connections look unstable, choose fewer transfers even if the route is not shortest on paper.',
         fallback: 'Taxi for the final leg can be worth it when the missed connection costs more than the ride.'
       },
       tour: {
@@ -841,16 +841,16 @@
         image: 'assets/alexanderplatz-ubahn.jpg',
         alt: 'Yellow U-Bahn train at Alexanderplatz station',
         caption: 'Alexanderplatz works well for visitors because several transport choices overlap there.',
-        routeTitle: 'Tour-start order',
+        routeTitle: 'Tour-start order I would use',
         steps: ['Check the line before leaving the hotel', 'Choose a backup hub: Alexanderplatz, Hackescher Markt or Friedrichstraße', 'Leave enough time for a short central walk', 'If you will miss the start, rebook instead of chasing stress'],
         check: 'Use BVG, S-Bahn or VBB depending on your line. Do not assume every mode is broken.',
         move: 'If a nearby central hub still works, go there and walk to Alexanderplatz rather than waiting for the original route.',
-        fallback: 'With a hard start time, switch sooner. A simple taxi leg can be better than two uncertain transfers.'
+        fallback: 'With a hard start time, switch sooner. One simple taxi leg can beat two uncertain transfers.'
       }
     };
 
     const layerAdvice = {
-      unclear: 'First identify the layer. A BVG issue and an S-Bahn issue create different Berlin maps.',
+      unclear: 'First identify the layer. A BVG problem and an S-Bahn problem create different Berlin maps.',
       bvg: 'BVG affected: look for S-Bahn, regional rail or a walkable central hub before giving up on the day.',
       sbahn: 'S-Bahn or rail affected: rebuild through U-Bahn, tram or bus if BVG is still running.',
       wide: 'Many modes affected: reduce distance, keep the plan central, and save taxis for hard deadlines or luggage.'
