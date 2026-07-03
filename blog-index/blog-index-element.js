@@ -2,7 +2,7 @@ const BW_BLOG_INDEX_BASE_URL = (() => {
   const script = document.currentScript;
   return script && script.src ? script.src : window.location.href;
 })();
-const BW_BLOG_INDEX_DATA_URL = new URL('./data.json?v=20260619b', BW_BLOG_INDEX_BASE_URL).href;
+const BW_BLOG_INDEX_DATA_URL = new URL('./data-20260703-transport-strike.json', BW_BLOG_INDEX_BASE_URL).href;
 const BW_BLOG_INDEX_LOGO_URL = `${new URL('./assets/berlin-travel-history-notes-logo.png', BW_BLOG_INDEX_BASE_URL).href}?v=20260529`;
 const BW_BLOG_INDEX_NATIVE_FEED_STYLE_ID = 'bw-blog-index-native-feed-suppressor';
 function bwApplyFeaturedPost(data) {
