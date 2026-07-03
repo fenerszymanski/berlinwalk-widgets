@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-03T02:02:38.007Z",
+  "updatedAt": "2026-07-03T09:19:16.143Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 151,
+  "totalPosts": 152,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -235,23 +235,6 @@
       "relatedToolSlug": "transport-ticket-calculator"
     },
     {
-      "title": "What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips",
-      "slug": "what-to-wear-to-berlin-clubs",
-      "path": "/post/what-to-wear-to-berlin-clubs",
-      "url": "https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs",
-      "excerpt": "A practical Berlin club dress-code guide by BerlinWalk: Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more. Includes door difficulty ratings, outfit tips, what to avoid, and a Club Picker.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "8 min read",
-      "publishedDate": "2026-05-23T19:36:48.764Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
-      "alt": "People in fetish outfits line up at a red-lit nightclub entrance, with a bouncer checking guests in a dark industrial hallway.",
-      "relatedToolSlug": "berlin-tip-calculator"
-    },
-    {
       "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "slug": "where-was-the-berlin-wall-interactive-map",
       "path": "/post/where-was-the-berlin-wall-interactive-map",
@@ -267,6 +250,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
       "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "relatedToolSlug": "east-or-west-1989"
+    },
+    {
+      "title": "What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips",
+      "slug": "what-to-wear-to-berlin-clubs",
+      "path": "/post/what-to-wear-to-berlin-clubs",
+      "url": "https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs",
+      "excerpt": "A practical Berlin club dress-code guide by BerlinWalk: Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more. Includes door difficulty ratings, outfit tips, what to avoid, and a Club Picker.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "8 min read",
+      "publishedDate": "2026-05-23T19:36:48.764Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
+      "alt": "People in fetish outfits line up at a red-lit nightclub entrance, with a bouncer checking guests in a dark industrial hallway.",
+      "relatedToolSlug": "berlin-tip-calculator"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try in 2026",
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Transport Strike: How to Keep Moving When Trains Stop",
+      "slug": "berlin-transport-strike",
+      "path": "/post/berlin-transport-strike",
+      "url": "https://www.berlinwalk.com/post/berlin-transport-strike",
+      "excerpt": "A local Berlin guide to transport strikes and disruptions: what to check, when to walk, when to switch layers, and when to protect a hard deadline.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-03T09:17:27.477Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f24df312b79d4026bc0c33fb15fb8671~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-transport-strike-hauptbahnhof-sbahn.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f24df312b79d4026bc0c33fb15fb8671~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-transport-strike-hauptbahnhof-sbahn.jpg",
+      "alt": "Berlin Hauptbahnhof S-Bahn platforms during a disruption",
+      "relatedToolSlug": "berlin-transport-backup-planner"
+    },
+    {
       "title": "Berlin Last Day: What to Do Before Your Flight or Train",
       "slug": "berlin-last-day",
       "path": "/post/berlin-last-day",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_4210b7a6ac144c338eb126ab500f66b0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/german-signs-in-berlin-01-ausgang-exit-sign-cover.jpg",
       "alt": "Green German Ausgang exit sign on a Berlin-style wall for tourists learning German signs in Berlin",
       "relatedToolSlug": "berlin-sign-decoder"
-    },
-    {
-      "title": "Breakfast in Berlin: Bakery, Brunch and Coffee Without Losing the Morning",
-      "slug": "breakfast-in-berlin",
-      "path": "/post/breakfast-in-berlin",
-      "url": "https://www.berlinwalk.com/post/breakfast-in-berlin",
-      "excerpt": "A practical guide to breakfast in Berlin: when to choose a bakery, cafe, brunch, hotel buffet or station rescue so the rest of your sightseeing day still works.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "6 min read",
-      "publishedDate": "2026-06-28T11:45:02.429Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
-      "alt": "Berlin bakery counter with croissants, sandwiches and pastries ready for a quick tourist breakfast",
-      "relatedToolSlug": "berlin-breakfast-clock"
     }
   ],
   "allPosts": [
+    {
+      "title": "Berlin Transport Strike: How to Keep Moving When Trains Stop",
+      "slug": "berlin-transport-strike",
+      "path": "/post/berlin-transport-strike",
+      "url": "https://www.berlinwalk.com/post/berlin-transport-strike",
+      "excerpt": "A local Berlin guide to transport strikes and disruptions: what to check, when to walk, when to switch layers, and when to protect a hard deadline.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-03T09:17:27.477Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f24df312b79d4026bc0c33fb15fb8671~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-transport-strike-hauptbahnhof-sbahn.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f24df312b79d4026bc0c33fb15fb8671~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-transport-strike-hauptbahnhof-sbahn.jpg",
+      "alt": "Berlin Hauptbahnhof S-Bahn platforms during a disruption",
+      "relatedToolSlug": "berlin-transport-backup-planner"
+    },
     {
       "title": "Berlin Last Day: What to Do Before Your Flight or Train",
       "slug": "berlin-last-day",
