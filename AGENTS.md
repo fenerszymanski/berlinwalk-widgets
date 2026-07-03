@@ -75,7 +75,16 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 
 - **Colors:** Green `#1B5E20` (primary), Yellow `#FFE600` (energy), Lime `#7CB342` (accent), Light Green `#C5E1A5` (soft fill), Berlin Red `#E63946` (occasional caution only)
 - **Fonts:** Montserrat (default), Merriweather (selective serif for editorial moments)
-- **Tone:** First-person Yusuf voice, atmospheric, historically grounded, **no em dashes**, no marketing fluff, confident but restrained
+- **Tone:** First-person Yusuf voice, atmospheric, historically grounded, **no em dashes**, no marketing fluff, confident but restrained.
+- **Project-wide editorial voice:** public widget/tool/site/game copy should
+  follow the same flexible BerlinWalk local-guide direction as the main
+  workspace: practical, concrete, lightly conversational, grounded in real
+  Berlin places/systems, and able to turn confusion into a usable city move.
+  Do not let UI copy become generic AI travel prose, over-polished marketing,
+  or a mechanical decision matrix unless the surface genuinely needs compact
+  labels. This is not a rigid style lock; Codex may make widget UI more compact,
+  operational/safety copy more direct, and game/social copy punchier when the
+  context calls for it.
 - **Brand guide source:** `BerlinWalk_Brand_Guide_v1_2_revised.pdf` (Yusuf's downloads — not in repo)
 - **Daily blog publishing approval:** Daily blog automation may complete the
   full package, deploy required widget/data/icon assets, and QA the Wix draft,

@@ -1,14 +1,14 @@
 {
   "berlin-transport-strike": {
     "title": "Berlin Transport Strike - Quick Summary",
-    "icon": "🚧",
+    "icon": "🚇",
     "kicker": "BERLINWALK.COM • TOURIST TIPS",
     "items": [
-      "**First check what is actually affected:** BVG covers U-Bahn, tram, bus and ferry, while S-Bahn, regional trains and airport rail links can follow different disruption patterns.",
-      "**Use official live sources before changing the whole day:** BVG Traffic News, S-Bahn timetable changes, VBB journey planning and BER airport transport notices are the links to trust.",
-      "**If you have a flight, train or timed ticket, switch to a backup earlier than feels necessary.** A 20-minute delay can become a missed connection when platforms, luggage and crowds are involved.",
-      "**Do not assume one Berlin ticket solves every fallback.** Your valid Berlin fare still matters, but taxi, ride-hail, car sharing and long-distance rail claims follow different rules.",
-      "**Build a simple plan B before you leave the hotel:** one official status check, one alternate route, one taxi/rideshare fallback, and an extra time buffer for the route to the meeting point or airport."
+      "**Do not read a Berlin transport strike as one broken system.** BVG, S-Bahn, regional trains, airport rail and buses can fail or keep moving in different ways.",
+      "**Start with the official layer that matters:** BVG for U-Bahn, tram, bus and ferry; S-Bahn Berlin for S-Bahn; VBB/BER/DB for mixed routes, airport journeys and rail rights.",
+      "**In central Berlin, a delay can become a walk.** Alexanderplatz, Museum Island, Hackescher Markt, Unter den Linden and Hauptbahnhof are close enough that walking may save the day.",
+      "**Move earlier for hard deadlines.** A flight, long-distance train, timed ticket or tour start changes the rule: protect arrival time before the platform gets crowded.",
+      "**Use backups in pieces.** Rail to a nearby hub, then walk, bike, scooter, bus or taxi for the awkward final leg is often smarter than forcing one perfect route."
     ]
   },
   "berlin-night-transport": {

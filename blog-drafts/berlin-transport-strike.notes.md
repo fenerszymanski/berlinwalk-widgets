@@ -1,10 +1,11 @@
 # Berlin Transport Strike - Production Notes
 
 Date: 2026-07-03 Europe/Berlin
+Rewrite pass: 2026-07-03 Europe/Berlin after Yusuf chose the Gemini + Walkative-style project voice. Old body/widget language was replaced rather than lightly edited.
 
 ## Topic Decision
 
-- Chosen topic: `Berlin Transport Strike: What Tourists Should Do When Trains, U-Bahn or Buses Stop`
+- Chosen topic: `Berlin Transport Strike: How to Keep Moving When Trains Stop`
 - Focus keyword: `Berlin transport strike`
 - Slug: `berlin-transport-strike`
 - Category: `Tourist Tips`
@@ -28,8 +29,8 @@ Date: 2026-07-03 Europe/Berlin
 
 ## Source URLs
 
-- BVG traffic news/current disruptions: https://www.bvg.de/en/connections/traffic-news
-- BVG strike page, checked 2026-07-03: https://www.bvg.de/en/strike
+- BVG traffic news/current disruptions, rechecked 2026-07-03: https://www.bvg.de/en/connections/traffic-news
+- BVG strike page, rechecked 2026-07-03: https://www.bvg.de/en/strike (`Currently, no strikes are announced at the BVG.`)
 - BVG connection search/traffic news overview: https://www.bvg.de/en/connections
 - S-Bahn timetable changes and disruptions: https://sbahn.berlin/en/plan-a-journey/timetable-changes/
 - S-Bahn reasons for disruptions: https://sbahn.berlin/en/plan-a-journey/timetable-changes/reasons-for-disruptions/
@@ -53,20 +54,21 @@ Date: 2026-07-03 Europe/Berlin
 
 ## Widget Ideas
 
-1. `Berlin Transport Backup Planner`: traveler selects what is affected, where they are going, deadline pressure and luggage level. Output gives a fallback order, buffer, and official check links. Chosen because it solves the actual reader problem.
+1. `Berlin Transport Backup Planner`: traveler chooses what needs saving first: central sightseeing, BER, Hauptbahnhof/onward train, or BerlinWalk tour start. Output gives a route-first move: walk the centre, switch transport layers, or protect a hard deadline. Chosen because it matches the rewritten article's actual reader problem.
 2. `Strike Day Timeline Builder`: traveler enters flight/train/tour time and gets a leave-by timeline. Useful, but narrower and more schedule-input heavy.
 3. `Operator Split Decoder`: traveler chooses a line (U/S/RE/RB/FEX/bus/tram) and learns which official page to check. Useful, but too small to become a full BerlinTool alone.
 
 Chosen tool: `Berlin Transport Backup Planner`.
+Rewrite implementation: old widget UI was replaced with a new photo-led route board, `data-version="20260703b"`. Local Playwright proof after rewrite: desktop 1280px height about 2186 root / overflow 0; blog-width 740px height about 2354 root / overflow 0; narrow mobile 236px longest BER+hard-deadline state about 2822 root / overflow 0. Draft/widget embed height raised to `2950`.
 
 ## SEO Metadata
 
-- Title: `Berlin Transport Strike: What Tourists Should Do When Trains, U-Bahn or Buses Stop`
-- SEO title: `Berlin Transport Strike: Tourist Backup Plan for Disruptions`
-- Meta description: `What to do during a Berlin transport strike or disruption: check BVG, S-Bahn and VBB, protect airport timing, choose a backup route and avoid costly tourist mistakes.`
-- Excerpt: `A practical tourist guide to Berlin transport strikes and disruptions, with official status links, airport backup rules, and a decision tool for choosing your fastest fallback.`
-- Social title: `Berlin Transport Strike? Use This Tourist Backup Plan`
-- Social description: `If U-Bahn, S-Bahn, trams or buses stop, this Berlin guide shows what to check first, when to switch modes, and how to protect flights, trains and tours.`
+- Title: `Berlin Transport Strike: How to Keep Moving When Trains Stop`
+- SEO title: `Berlin Transport Strike: How Tourists Can Keep Moving`
+- Meta description: `Berlin transport strike guide for tourists: check the right operator, turn central delays into walks, protect BER timing, and choose a realistic backup without panic.`
+- Excerpt: `A calm Berlin guide to transport strikes and disruptions, with official status links, central walking fallbacks, BER airport timing, and a route-first backup tool.`
+- Social title: `Berlin Transport Strike? Keep the Day Moving`
+- Social description: `A local Berlin guide to checking the right transport layer, turning central delays into walks, and protecting airport or tour timing without panic.`
 - Tags: `Berlin transport strike`, `Berlin public transport`, `BVG`, `S-Bahn Berlin`, `Berlin tourist tips`, `BER Airport`
 - Secondary keywords: `BVG strike`, `S-Bahn disruption Berlin`, `Berlin public transport disruption`, `Berlin airport transport strike`, `VBB app Berlin`.
 
