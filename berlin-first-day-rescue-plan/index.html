@@ -815,6 +815,7 @@
       setScenario(state.scenario);
       wireSegment(root.querySelector('[data-energy]'), 'energy');
       wireSegment(root.querySelector('[data-priority]'), 'priority');
+      rememberLandingPage();
 
       root.querySelectorAll('[data-scenario]').forEach(function (button) {
         button.addEventListener('click', function () {
@@ -1199,10 +1200,21 @@
         try {
           if (document.referrer) {
             var ref = new URL(document.referrer);
-            if (/berlinwalk\.com$/i.test(ref.hostname) && /\/tools\/berlin-first-day-rescue-plan\/?$/i.test(ref.pathname)) return ref.toString();
+            if (/berlinwalk\.com$/i.test(ref.hostname) && /\/(tools|products)\/berlin-first-day-rescue-plan\/?$/i.test(ref.pathname)) return ref.toString();
           }
         } catch (_) {}
         return window.location.href;
+      }
+
+      function rememberLandingPage() {
+        try {
+          var landing = params.get('landing_page') || '';
+          if (landing) {
+            localStorage.setItem('bwRescueLandingPage', landing);
+            return;
+          }
+          if (!localStorage.getItem('bwRescueLandingPage')) localStorage.setItem('bwRescueLandingPage', preferredPageUrl());
+        } catch (_) {}
       }
 
       function preferredPagePath() {
