@@ -7,7 +7,7 @@ That is the reason I would not treat Bebelplatz as a quick photo stop. Give it a
 ![Bebelplatz Berlin square with the State Opera, St. Hedwig's Cathedral and surrounding facades](blog-drafts/images/bebelplatz-berlin/assets/optimized/05-bebelplatz-state-opera-square.jpg)
 _Bebelplatz looks formal and calm from the edge of the square, which is exactly why the memorial is easy to miss on a fast walk._
 
-## Bebelplatz Berlin: the short answer
+## What to know before you stop at Bebelplatz
 
 Bebelplatz Berlin is a central square just off Unter den Linden, between Museum Island and Brandenburg Gate. It is surrounded by the State Opera, St. Hedwig's Cathedral, Humboldt University buildings and the Old Library facade.
 
