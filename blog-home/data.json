@@ -1,76 +1,67 @@
 {
   "featured": {
-    "title": "Too Hot in Berlin? How to Plan a Smart Berlin Heatwave Day",
-    "url": "https://www.berlinwalk.com/post/berlin-heatwave-day-plan",
+    "title": "Berlin Transport Strike: How to Keep Moving When Trains Stop",
+    "url": "https://www.berlinwalk.com/post/berlin-transport-strike",
     "category": "Tourist Tips",
-    "readTime": "6 min read",
-    "label": "Summer guide",
-    "summary": "When to walk, where to cool down, what to expect from public transport air conditioning, and how to use Berlin water, lake and pool tools.",
-    "image": "https://static.wixstatic.com/media/5a08a3_6b63df7b04fa4d10849bfdf9e260f6d5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-heatwave-day-plan-01-alexanderplatz-world-clock-hot-day.jpg",
-    "alt": "The World Clock at Alexanderplatz in bright sun, a useful early start for a Berlin heatwave day"
+    "readTime": "7 min read",
+    "label": "Transit disruption",
+    "summary": "A practical route and transport fallback guide for blocked lines, with what to check and when to switch modes.",
+    "image": "https://static.wixstatic.com/media/5a08a3_f24df312b79d4026bc0c33fb15fb8671~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-transport-strike-hauptbahnhof-sbahn.jpg",
+    "alt": "Berlin Hauptbahnhof S-Bahn platforms during a disruption"
   },
   "miniPosts": [
     {
-      "title": "Berlin Bike Lanes",
-      "url": "https://www.berlinwalk.com/post/berlin-bike-lanes-tourists",
+      "title": "Berlin AB or ABC Ticket Zones",
+      "url": "https://www.berlinwalk.com/post/berlin-ab-abc-ticket-zones",
       "category": "Tourist Tips",
-      "readTime": "7 min read"
+      "readTime": "5 min read"
     },
     {
-      "title": "Doctor in Berlin",
-      "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
+      "title": "Museum Bag Rules for Berlin",
+      "url": "https://www.berlinwalk.com/post/berlin-museum-bag-rules",
       "category": "Tourist Tips",
       "readTime": "6 min read"
     },
     {
-      "title": "Lost Property in Berlin",
-      "url": "https://www.berlinwalk.com/post/lost-property-berlin",
+      "title": "Berlin Last Day: What to Do Before Departure",
+      "url": "https://www.berlinwalk.com/post/berlin-last-day",
       "category": "Tourist Tips",
-      "readTime": "8 min read"
+      "readTime": "5 min read"
     },
     {
-      "title": "Can You Drink Alcohol in Public in Berlin?",
-      "url": "https://www.berlinwalk.com/post/drink-alcohol-in-public-berlin",
+      "title": "Doctor in Berlin: What to Do When You Feel Unwell",
+      "url": "https://www.berlinwalk.com/post/doctor-in-berlin",
       "category": "Tourist Tips",
-      "readTime": "7 min read"
+      "readTime": "6 min read"
     }
   ],
   "posts": [
-    {
-      "title": "Topography of Terror Berlin",
-      "url": "https://www.berlinwalk.com/post/topography-of-terror-berlin",
-      "category": "Berlin History",
-      "readTime": "7 min read",
-      "summary": "Free entry, Wall remains, exhibition timing and how to visit a heavy site without rushing through it.",
-      "image": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
-      "alt": "Topography of Terror site in Berlin with the preserved Wall section, exhibition trench and documentation centre"
-    },
-    {
-      "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
-      "url": "https://www.berlinwalk.com/post/sachsenhausen-from-berlin",
-      "category": "Berlin History",
-      "readTime": "6 min read",
-      "summary": "Train routes, ABC tickets, opening hours, free entry, audio guides and the timing that keeps a memorial visit respectful.",
-      "image": "https://static.wixstatic.com/media/5a08a3_3446c472b6ac429fa4780b19ba7a40ab~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/sachsenhausen-from-berlin-01-sachsenhausen-tower-a-cover.jpg",
-      "alt": "Tower A entrance building at Sachsenhausen Memorial in Oranienburg near Berlin"
-    },
-    {
-      "title": "Berlin BER Airport Departure Guide",
-      "url": "https://www.berlinwalk.com/post/berlin-ber-airport-departure-guide",
-      "category": "Tourist Tips",
-      "readTime": "9 min read",
-      "summary": "How early to leave, which train to use, what to expect at security and what not to leave for the last morning.",
-      "image": "https://static.wixstatic.com/media/5a08a3_30d1d881a15e459aa0d00bf9688c3c0c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-ber-airport-departure-guide-01-ber-terminal-1-exterior.jpg",
-      "alt": "Berlin Brandenburg Airport Terminal 1 exterior with the glass departure level and road in front"
-    },
     {
       "title": "Where to Watch the 2026 World Cup in Berlin",
       "url": "https://www.berlinwalk.com/post/where-to-watch-2026-world-cup-in-berlin",
       "category": "Tourist Tips",
       "readTime": "4 min read",
-      "summary": "Free screens, beer gardens, bars and Berlin-time kickoffs without assuming a Brandenburg Gate fan mile.",
+      "summary": "Free screens, bars, and public viewing points that still have a practical edge in Berlin during World Cup week.",
       "image": "https://static.wixstatic.com/media/5a08a3_fef2d645c235423dab6035f42558e352~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/worldcup-berlin-hero-chatgpt.jpg",
       "alt": "A summer evening football public viewing in Berlin with a relaxed crowd, outdoor screen and TV Tower skyline"
+    },
+    {
+      "title": "Berlin Public Transport 2026: U-Bahn, S-Bahn, Tram & Bus",
+      "url": "https://www.berlinwalk.com/post/berlin-public-transport-explained-for-tourists-u-bahn-s-bahn-tram-bus",
+      "category": "Tourist Tips",
+      "readTime": "7 min read",
+      "summary": "A practical ticket and route primer for U-Bahn, S-Bahn, tram and bus connections in Berlin for tourists.",
+      "image": "https://static.wixstatic.com/media/5a08a3_09bdf461857549d291c3769973fe3a9b~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_8c97b9e50ab54e0b9a53b8d3982f4ce4~mv2.jpg",
+      "alt": "Yellow train speeding through Konstanzer Strasse station. The wall has bold stripes and text."
+    },
+    {
+      "title": "Public Toilets in Berlin: What Tourists Need to Know",
+      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
+      "category": "Tourist Tips",
+      "readTime": "5 min read",
+      "summary": "Where Berlin public toilets are, what to expect, and the official Berlin tool for nearest restroom info.",
+      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "alt": "Restroom sign with male and female symbols on a brick wall"
     }
   ]
 }

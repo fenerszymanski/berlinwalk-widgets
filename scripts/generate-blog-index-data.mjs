@@ -178,11 +178,15 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'berlin-heatwave-day-plan',
+  lead: 'berlin-transport-strike',
   secondary: [
-    'berlin-bike-lanes-tourists',
+    'berlin-museum-bag-rules',
+    'berlin-last-day',
+    'berlin-ab-abc-ticket-zones',
     'doctor-in-berlin',
+    'berlin-restaurant-phrases',
     'lost-property-berlin',
+    'berlin-bike-lanes-tourists',
     'drink-alcohol-in-public-berlin',
     'topography-of-terror-berlin',
     'berlin-public-transport-ferries',
