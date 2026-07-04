@@ -1,6 +1,6 @@
 # Holocaust Memorial Berlin — production notes
 
-Status: draft package in production on 2026-07-04, Europe/Berlin.
+Status: published on 2026-07-04 after Yusuf approval, Europe/Berlin.
 
 ## Topic
 
@@ -48,10 +48,19 @@ No dedicated local/Wix post or BerlinTools item exists for `Holocaust Memorial B
 2. `Heavy History Stack Check`: choose nearby sites already in the day and the tool warns when the day is too emotionally dense.
 3. `Brandenburg Gate Add-on Route`: choose arrival direction and fixed booking slot, then get a memorial-first or Reichstag-first walking order.
 
-Chosen tool: `Respectful Visit Planner`, slug `holocaust-memorial-visit-planner`. It is the most directly useful for a tourist already standing near Brandenburg Gate and avoids turning the memorial into a game.
+Initial chosen tool: `Respectful Visit Planner`, slug `holocaust-memorial-visit-planner`. After Yusuf review, the in-post special widget was removed from the article and replaced with a Google map embed plus clickable walking directions from Brandenburg Gate, Reichstag and Potsdamer Platz. The BerlinTools tool remains live, but the published article itself does not embed the special planner.
 
 ## Visual policy
 
 - Article images: 6 real Wikimedia Commons images, no AI article visuals.
 - AI visual count for this package: 1 total, only the BerlinTools glossy icon via built-in Codex image generation.
 - No paid image API or CLI image generation was used.
+
+## Publish QA
+
+- Wix draft/post ID: `b735852a-7e1a-491a-afa3-2262d9e5bac2`
+- Public URL: `https://www.berlinwalk.com/post/holocaust-memorial-berlin`
+- Published readback: `PUBLISHED`, `hasUnpublishedChanges:false`, 6 images, 3 embeds, body H1 `0`, 6 styled captions, 17 SEO tags.
+- Embed readback after the change: Quick Summary, Google Maps, FAQ; old `holocaust-memorial-visit-planner` article iframe absent.
+- `/blog` propagation: `blog-index/data.json` regenerated with `latest[0].slug=holocaust-memorial-berlin` and `relatedToolSlug=""`.
+- Search Console URL Inspection API: `URL is unknown to Google`; no Request Indexing submission was made.

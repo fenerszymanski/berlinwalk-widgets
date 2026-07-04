@@ -83,11 +83,13 @@ If you want deeper Nazi-era documentation, pair the Information Centre with Topo
 ![Pariser Platz sign near Brandenburg Gate](blog-drafts/images/holocaust-memorial-berlin/assets/optimized/05-brandenburg-gate-nearby.jpg)
 _Brandenburg Gate is next door, but the mood changes sharply when you walk south into the memorial field._
 
-## Use the Holocaust Memorial Visit Planner
+## Map and directions
 
-This small planner helps you choose the right visit shape before you walk in. Pick how much time you have and whether you are also dealing with a fixed booking, children or another heavy history stop.
+The Holocaust Memorial Berlin is easiest to find from Brandenburg Gate, but the entrances are open from several sides. Use the map first, then open the direction that matches where you are actually standing.
 
-{{widget:holocaust-memorial-visit-planner}}
+{{map:holocaust-memorial}}
+
+Open directions: [from Brandenburg Gate](https://www.google.com/maps/dir/?api=1&origin=Brandenburger+Tor,+Berlin&destination=Memorial+to+the+Murdered+Jews+of+Europe,+Berlin&travelmode=walking) · [from Reichstag](https://www.google.com/maps/dir/?api=1&origin=Reichstag+Building,+Berlin&destination=Memorial+to+the+Murdered+Jews+of+Europe,+Berlin&travelmode=walking) · [from Potsdamer Platz](https://www.google.com/maps/dir/?api=1&origin=Potsdamer+Platz,+Berlin&destination=Memorial+to+the+Murdered+Jews+of+Europe,+Berlin&travelmode=walking).
 
 ## If you are visiting before or after my walking tour
 

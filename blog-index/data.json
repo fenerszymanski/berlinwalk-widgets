@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T09:25:08.658Z",
+  "updatedAt": "2026-07-04T17:34:12.113Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 152,
@@ -900,6 +900,23 @@
           "relatedToolSlug": ""
         },
         {
+          "title": "Holocaust Memorial Berlin: How to Visit Respectfully and What to Know",
+          "slug": "holocaust-memorial-berlin",
+          "path": "/post/holocaust-memorial-berlin",
+          "url": "https://www.berlinwalk.com/post/holocaust-memorial-berlin",
+          "excerpt": "A practical, respectful guide to the Holocaust Memorial Berlin: what the stelae mean, how long to spend, Information Centre hours, etiquette and nearby route choices.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
+          "topic": "route-stories",
+          "topicLabel": "Tour Route Stories",
+          "readTime": "6 min read",
+          "publishedDate": "2026-07-04T17:31:49.766Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-holocaust-memorial-berlin-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-holocaust-memorial-berlin-cover.jpg",
+          "alt": "Concrete stelae at the Holocaust Memorial Berlin",
+          "relatedToolSlug": ""
+        },
+        {
           "title": "Bebelplatz Berlin: Book-Burning Memorial, Empty Library and What Tourists Miss",
           "slug": "bebelplatz-berlin",
           "path": "/post/bebelplatz-berlin",
@@ -983,23 +1000,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_0d90550575d5404cb1598b4cabf27149~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-hackescher-markt-station-after-tour.jpg",
           "alt": "Hackescher Markt S-Bahn station after a Berlin walking tour",
           "relatedToolSlug": ""
-        },
-        {
-          "title": "Berlin Lakes Guide 2026: Where to Swim, Picnic, and Beat the Summer Heat",
-          "slug": "berlin-lakes-guide-2026",
-          "path": "/post/berlin-lakes-guide-2026",
-          "url": "https://www.berlinwalk.com/post/berlin-lakes-guide-2026",
-          "excerpt": "Berlin sits on a glacial outwash plain that left the city ringed with lakes. Here's where Berliners actually swim — and how to combine a lake afternoon with our walking tour.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "route-stories",
-          "topicLabel": "Tour Route Stories",
-          "readTime": "10 min read",
-          "publishedDate": "2026-05-03T10:13:22.902Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_d9cfb3a444eb4285be742e7841610f3f~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/weissensee%20(1).png",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_d9cfb3a444eb4285be742e7841610f3f~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/weissensee%20(1).png",
-          "alt": "Sandy beach area with palm trees beside a serene lake. A fountain sprays in the background under a sunny, blue sky with wispy clouds.",
-          "relatedToolSlug": "berlin-lakes"
         }
       ]
     },
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "Holocaust Memorial Berlin: How to Visit Respectfully and What to Know",
+      "slug": "holocaust-memorial-berlin",
+      "path": "/post/holocaust-memorial-berlin",
+      "url": "https://www.berlinwalk.com/post/holocaust-memorial-berlin",
+      "excerpt": "A practical, respectful guide to the Holocaust Memorial Berlin: what the stelae mean, how long to spend, Information Centre hours, etiquette and nearby route choices.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-04T17:31:49.766Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-holocaust-memorial-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-holocaust-memorial-berlin-cover.jpg",
+      "alt": "Concrete stelae at the Holocaust Memorial Berlin",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "ATM in Berlin: Cash, Fees and Safer Withdrawal Tips for Tourists",
       "slug": "atm-in-berlin",
       "path": "/post/atm-in-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_aa19c35c29014115a9a1fc3495bcd760~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/potsdamer-platz-berlin-01-potsdamer-platz-cover.jpg",
       "alt": "Modern high-rise skyline at Potsdamer Platz in Berlin with the Kollhoff Tower and surrounding buildings",
       "relatedToolSlug": "potsdamer-platz-time-layer-walk"
-    },
-    {
-      "title": "Berlin Plug Adapter: Sockets, Voltage and Charging Tips for Tourists",
-      "slug": "berlin-plug-adapter",
-      "path": "/post/berlin-plug-adapter",
-      "url": "https://www.berlinwalk.com/post/berlin-plug-adapter",
-      "excerpt": "A practical Berlin plug adapter guide for tourists: Germany Type F sockets, 230V power, USB-C charging, power banks, hair-tool cautions and where to buy adapters.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-06-30T06:24:08.573Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_bd4e8436f80b47a08b6657bd52f9b4e0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-plug-adapter-01-berlin-plug-adapter-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_bd4e8436f80b47a08b6657bd52f9b4e0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-plug-adapter-01-berlin-plug-adapter-cover.jpg",
-      "alt": "Berlin hotel desk with a Type F wall socket, travel plug adapter, phone, charger and power bank",
-      "relatedToolSlug": "berlin-plug-adapter-checker"
     }
   ],
   "allPosts": [
+    {
+      "title": "Holocaust Memorial Berlin: How to Visit Respectfully and What to Know",
+      "slug": "holocaust-memorial-berlin",
+      "path": "/post/holocaust-memorial-berlin",
+      "url": "https://www.berlinwalk.com/post/holocaust-memorial-berlin",
+      "excerpt": "A practical, respectful guide to the Holocaust Memorial Berlin: what the stelae mean, how long to spend, Information Centre hours, etiquette and nearby route choices.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "route-stories",
+      "topicLabel": "Tour Route Stories",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-04T17:31:49.766Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-holocaust-memorial-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_35d060b00a4f4e738340348218748faa~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-holocaust-memorial-berlin-cover.jpg",
+      "alt": "Concrete stelae at the Holocaust Memorial Berlin",
+      "relatedToolSlug": ""
+    },
     {
       "title": "ATM in Berlin: Cash, Fees and Safer Withdrawal Tips for Tourists",
       "slug": "atm-in-berlin",
@@ -4313,23 +4330,6 @@
       "image": "https://static.wixstatic.com/media/nsplsh_a45f3abf367c4c529063dca91fd5b3c1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20group%20of%20people%20walking%20up%20and%20down%20some%20steps.jpg",
       "thumb": "https://static.wixstatic.com/media/nsplsh_a45f3abf367c4c529063dca91fd5b3c1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20group%20of%20people%20walking%20up%20and%20down%20some%20steps.jpg",
       "alt": "Altes Museum in Berlin with Ionic columns, staircase and blue sky above Museum Island",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Neptune Fountain: The Baroque Masterpiece That Moved Across Berlin",
-      "slug": "neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin",
-      "path": "/post/neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin",
-      "url": "https://www.berlinwalk.com/post/neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin",
-      "excerpt": "Why Berlin Neptune Fountain moved from palace symbolism to the GDR city centre, and what the 2026 restoration means for visitors.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "10 min read",
-      "publishedDate": "2026-03-01T08:34:14.724Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_96baa8ef90154861b51d758e6cf0a9b0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_8008-min.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_96baa8ef90154861b51d758e6cf0a9b0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_8008-min.jpg",
-      "alt": "Neptune Fountain statue with St Marys Church roof behind it in central Berlin",
       "relatedToolSlug": ""
     },
     {
