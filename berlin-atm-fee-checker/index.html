@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin ATM Fee Checker | BerlinWalk</title>
+  <meta name="description" content="Read an ATM screen in Berlin: fee, currency conversion, receipt and cash-buffer decision.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --bw-green: #1B5E20;
+      --bw-green-dark: #123B15;
+      --bw-yellow: #FFE600;
+      --bw-cream: #FAFAF5;
+      --bw-paper: #FFFFFF;
+      --bw-ink: #212121;
+      --bw-muted: #586756;
+      --bw-line: rgba(27, 94, 32, 0.2);
+      --bw-alert: #B74A1B;
+      --bw-safe: #2F7A34;
+      --bw-blue: #155C8A;
+      color-scheme: light;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    body {
+      color: var(--bw-ink);
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .atm-tool {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-cream);
+      box-shadow: 0 18px 48px rgba(27, 94, 32, 0.14);
+    }
+
+    .hero {
+      min-height: 360px;
+      display: grid;
+      grid-template-columns: minmax(320px, 0.9fr) minmax(380px, 1.1fr);
+      background:
+        linear-gradient(90deg, rgba(10, 43, 18, 0.96), rgba(12, 54, 23, 0.76) 48%, rgba(12, 54, 23, 0.14)),
+        url("assets/atm-screen-coach-hero.jpg") center / cover no-repeat;
+      color: #fff;
+    }
+
+    .hero-copy {
+      min-height: 360px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .kicker {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--bw-yellow);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .kicker::before {
+      content: "";
+      width: 30px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--bw-yellow);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 620px;
+      font-size: 38px;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .hero-copy p {
+      max-width: 560px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      line-height: 1.58;
+      font-weight: 650;
+    }
+
+    .screen-preview {
+      align-self: center;
+      justify-self: end;
+      width: min(100%, 440px);
+      margin: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.34);
+      border-radius: 8px;
+      background: rgba(250, 250, 245, 0.96);
+      color: var(--bw-ink);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+    }
+
+    .screen-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      background: var(--bw-green);
+      color: #fff;
+    }
+
+    .screen-top strong {
+      color: var(--bw-yellow);
+      font-size: 13px;
+      text-transform: uppercase;
+    }
+
+    .screen-top span {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .screen-body {
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .screen-row {
+      display: grid;
+      grid-template-columns: 118px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(27, 94, 32, 0.16);
+    }
+
+    .screen-row:last-child {
+      border-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .screen-row span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .screen-row b {
+      color: var(--bw-green-dark);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .tool-body {
+      padding: 24px;
+      display: grid;
+      grid-template-columns: minmax(300px, 0.96fr) minmax(320px, 1.04fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .control-panel,
+    .result-panel,
+    .route-panel {
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: var(--bw-paper);
+    }
+
+    .control-panel {
+      padding: 18px;
+      display: grid;
+      gap: 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field legend {
+      padding: 0;
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    fieldset {
+      min-width: 0;
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .choices {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .choice {
+      min-height: 46px;
+      padding: 9px 10px;
+      border: 1px solid rgba(27, 94, 32, 0.25);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-green-dark);
+      font-size: 13px;
+      line-height: 1.18;
+      font-weight: 850;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .choice[aria-pressed="true"] {
+      background: var(--bw-green);
+      border-color: var(--bw-green);
+      color: var(--bw-yellow);
+      box-shadow: inset 0 0 0 2px rgba(255, 230, 0, 0.22);
+    }
+
+    .output {
+      display: grid;
+      gap: 18px;
+    }
+
+    .result-panel {
+      padding: 20px;
+      display: grid;
+      gap: 14px;
+      border-left: 8px solid var(--bw-safe);
+    }
+
+    .result-panel[data-level="caution"] {
+      border-left-color: var(--bw-alert);
+    }
+
+    .result-panel[data-level="watch"] {
+      border-left-color: var(--bw-blue);
+    }
+
+    .result-label {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .result-panel h2 {
+      color: var(--bw-green-dark);
+      font-size: 26px;
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .result-panel p {
+      color: #333;
+      font-size: 15px;
+      line-height: 1.62;
+      font-weight: 600;
+    }
+
+    .action-list {
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .action-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 9px;
+      align-items: start;
+      color: #2e3a2d;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .action-list li::before {
+      content: attr(data-step);
+      width: 24px;
+      height: 24px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+    }
+
+    .route-panel {
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .route-panel h3 {
+      color: var(--bw-green);
+      font-size: 18px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .step-track {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .step {
+      min-height: 106px;
+      padding: 11px 10px;
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      border-radius: 8px;
+      background: #F9FBF5;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .step b {
+      color: var(--bw-green-dark);
+      font-size: 13px;
+      line-height: 1.18;
+    }
+
+    .step span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.35;
+      font-weight: 650;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 2px;
+    }
+
+    .links a {
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 11px;
+      border: 1px solid rgba(27, 94, 32, 0.2);
+      border-radius: 8px;
+      background: var(--bw-green);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .links a.secondary {
+      background: #fff;
+      color: var(--bw-green);
+    }
+
+    .note {
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .tool-body {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        background:
+          linear-gradient(180deg, rgba(10, 43, 18, 0.96), rgba(12, 54, 23, 0.76) 56%, rgba(12, 54, 23, 0.26)),
+          url("assets/atm-screen-coach-hero.jpg") center / cover no-repeat;
+      }
+
+      .hero-copy {
+        min-height: 300px;
+        padding: 24px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .screen-preview {
+        justify-self: stretch;
+        width: auto;
+        margin: 0 18px 20px;
+      }
+
+      .tool-body {
+        padding: 18px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .atm-tool {
+        border-radius: 0;
+      }
+
+      .hero-copy {
+        padding: 22px 18px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .hero-copy p,
+      .result-panel p {
+        font-size: 14px;
+      }
+
+      .choices,
+      .step-track,
+      .screen-row {
+        grid-template-columns: 1fr;
+      }
+
+      .step {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="atm-tool" aria-labelledby="atm-title">
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="kicker">BerlinWalk money tool</span>
+        <h1 id="atm-title">Berlin ATM Fee Checker</h1>
+        <p>Choose what the machine is showing you. The tool gives one clear next move before you press confirm.</p>
+      </div>
+
+      <aside class="screen-preview" aria-label="ATM screen reading order">
+        <div class="screen-top">
+          <strong>Screen order</strong>
+          <span>Do not rush</span>
+        </div>
+        <div class="screen-body">
+          <div class="screen-row">
+            <span>Machine</span>
+            <b id="screen-machine">Bank-branded ATM</b>
+          </div>
+          <div class="screen-row">
+            <span>Fee</span>
+            <b id="screen-fee">Read operator fee before accepting.</b>
+          </div>
+          <div class="screen-row">
+            <span>Currency</span>
+            <b id="screen-currency">Use euros if your card is not a euro card.</b>
+          </div>
+          <div class="screen-row">
+            <span>Cash buffer</span>
+            <b id="screen-buffer">Withdraw enough for small moments, not a thick wallet.</b>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="tool-body">
+      <form class="control-panel" aria-label="ATM decision inputs">
+        <fieldset class="field">
+          <legend>Your card currency</legend>
+          <div class="choices" data-group="card">
+            <button class="choice" type="button" data-value="non-eur" aria-pressed="true">Not a euro card</button>
+            <button class="choice" type="button" data-value="eur" aria-pressed="false">Euro card</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>ATM type</legend>
+          <div class="choices" data-group="atm">
+            <button class="choice" type="button" data-value="bank" aria-pressed="true">Bank branch or lobby</button>
+            <button class="choice" type="button" data-value="standalone" aria-pressed="false">Standalone street ATM</button>
+            <button class="choice" type="button" data-value="station" aria-pressed="false">Station or airport</button>
+            <button class="choice" type="button" data-value="unknown" aria-pressed="false">I am not sure</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>What the screen offers</legend>
+          <div class="choices" data-group="screen">
+            <button class="choice" type="button" data-value="fee" aria-pressed="true">Only a fixed fee</button>
+            <button class="choice" type="button" data-value="dcc" aria-pressed="false">Home-currency conversion</button>
+            <button class="choice" type="button" data-value="eur" aria-pressed="false">Charge in euros</button>
+            <button class="choice" type="button" data-value="confusing" aria-pressed="false">Unclear or pre-selected</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="field">
+          <legend>Cash you need</legend>
+          <div class="choices" data-group="amount">
+            <button class="choice" type="button" data-value="small" aria-pressed="false">20 to 30 euros now</button>
+            <button class="choice" type="button" data-value="buffer" aria-pressed="true">40 to 80 euro day buffer</button>
+            <button class="choice" type="button" data-value="large" aria-pressed="false">100+ euros</button>
+            <button class="choice" type="button" data-value="none" aria-pressed="false">Maybe I do not need cash</button>
+          </div>
+        </fieldset>
+      </form>
+
+      <div class="output">
+        <section class="result-panel" id="result-panel" data-level="watch" aria-live="polite">
+          <span class="result-label" id="result-label">Best move</span>
+          <h2 id="result-title">Use the ATM, but read the fee first.</h2>
+          <p id="result-copy">A bank-branded ATM with a clear euro withdrawal screen is usually fine. Your own bank may still charge a foreign withdrawal fee, so avoid making tiny repeat withdrawals.</p>
+          <ul class="action-list" id="action-list"></ul>
+        </section>
+
+        <section class="route-panel">
+          <h3>Confirm in this order</h3>
+          <div class="step-track">
+            <div class="step">
+              <b>1. Place</b>
+              <span>Prefer a bank ATM when you are calm, not a random late-night machine.</span>
+            </div>
+            <div class="step">
+              <b>2. Fee</b>
+              <span>Check the operator fee before you continue.</span>
+            </div>
+            <div class="step">
+              <b>3. Currency</b>
+              <span>For non-euro cards, reject home-currency conversion and continue in euros.</span>
+            </div>
+            <div class="step">
+              <b>4. Amount</b>
+              <span>Carry a modest cash buffer, not your whole trip budget.</span>
+            </div>
+          </div>
+          <div class="links" aria-label="Related BerlinWalk guides">
+            <a href="https://www.berlinwalk.com/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany" target="_blank" rel="noopener">Card guide</a>
+            <a class="secondary" href="https://www.berlinwalk.com/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists" target="_blank" rel="noopener">Budget guide</a>
+            <a class="secondary" href="https://www.berlinwalk.com/post/berlin-tourist-scams" target="_blank" rel="noopener">Scam guide</a>
+          </div>
+          <p class="note">This tool cannot know your bank's exact fee. It is a screen-reading guide for common Berlin tourist decisions.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      const state = {
+        card: 'non-eur',
+        atm: 'bank',
+        screen: 'fee',
+        amount: 'buffer'
+      };
+
+      const labels = {
+        bank: 'Bank-branded ATM',
+        standalone: 'Standalone street ATM',
+        station: 'Station or airport ATM',
+        unknown: 'Unclear ATM type',
+        fee: 'Read operator fee before accepting.',
+        dcc: 'Reject home-currency conversion; continue in euros if possible.',
+        eur: 'Euro charge selected; still check the fee.',
+        confusing: 'Cancel if the fee or currency choice is unclear.',
+        small: 'Small cash top-up.',
+        buffer: '40 to 80 euro day buffer.',
+        large: 'Large withdrawal; use extra caution.',
+        none: 'You may not need cash right now.'
+      };
+
+      const scenarios = [
+        {
+          match: () => state.screen === 'dcc' && state.card === 'non-eur',
+          level: 'caution',
+          label: 'Decline conversion',
+          title: 'Choose euros, not your home currency.',
+          copy: 'This is the classic dynamic currency conversion moment. Decline the conversion and continue in euros if the machine lets you. The ATM can still charge a fixed fee, but you avoid choosing a poor exchange-rate screen by mistake.',
+          actions: [
+            'Press the option that keeps the withdrawal in euros.',
+            'Check whether a separate operator fee remains.',
+            'If the machine makes the choice unclear, cancel and find another ATM.'
+          ]
+        },
+        {
+          match: () => state.screen === 'confusing',
+          level: 'caution',
+          label: 'Cancel if unclear',
+          title: 'Do not solve a confusing screen under pressure.',
+          copy: 'Berlin has enough ATMs that you rarely need the first confusing one. If currency, fee or confirmation buttons are unclear, cancel and choose a calmer machine.',
+          actions: [
+            'Cancel before the final confirmation.',
+            'Look for a bank branch or lobby ATM.',
+            'Withdraw a smaller amount only if you genuinely need cash now.'
+          ]
+        },
+        {
+          match: () => state.atm === 'standalone',
+          level: 'watch',
+          label: 'Read fee carefully',
+          title: 'A standalone ATM can work, but make the fee earn its place.',
+          copy: 'Standalone machines can be convenient, especially near tourist routes, but the operator fee and conversion screen matter more than the location. If the fee feels high and a bank ATM is nearby, walk away.',
+          actions: [
+            'Check the displayed operator fee.',
+            'Avoid home-currency conversion on non-euro cards.',
+            'Use it only for a sensible cash buffer, not a big withdrawal.'
+          ]
+        },
+        {
+          match: () => state.atm === 'station' && state.amount === 'large',
+          level: 'caution',
+          label: 'Find a calmer spot',
+          title: 'Do not make a large withdrawal while moving through a station.',
+          copy: 'Stations are useful, but they are also rushed. If you need a larger withdrawal, use a bank ATM when you can stand calmly and put the cash away without distraction.',
+          actions: [
+            'Delay the withdrawal if you have enough cash for the next hour.',
+            'Use a bank-branded machine in a calmer area.',
+            'Split cards and cash after the withdrawal.'
+          ]
+        },
+        {
+          match: () => state.amount === 'none',
+          level: 'watch',
+          label: 'Maybe skip it',
+          title: 'If card payments cover your next stop, skip the ATM.',
+          copy: 'A cash buffer is useful in Berlin, but withdrawing just because you passed a machine is not a plan. If you already have small euros and your next stop accepts cards, keep moving.',
+          actions: [
+            'Keep small notes or coins if you already have them.',
+            'Use cards for larger planned purchases where accepted.',
+            'Withdraw later from a calmer bank ATM if the day changes.'
+          ]
+        }
+      ];
+
+      const fallback = {
+        level: 'safe',
+        label: 'Best move',
+        title: 'Use the ATM, but read the fee first.',
+        copy: 'A bank-branded ATM with a clear euro withdrawal screen is usually fine. Your own bank may still charge a foreign withdrawal fee, so avoid making tiny repeat withdrawals.',
+        actions: [
+          'Confirm the operator fee.',
+          'Use euros for the transaction if your card is not a euro card.',
+          'Take a modest cash buffer for cafes, markets, tips and small purchases.'
+        ]
+      };
+
+      function activeScenario() {
+        return scenarios.find((scenario) => scenario.match()) || fallback;
+      }
+
+      function setText(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
+
+      function render() {
+        const scenario = activeScenario();
+        const panel = document.getElementById('result-panel');
+        const list = document.getElementById('action-list');
+        if (panel) panel.dataset.level = scenario.level;
+        setText('screen-machine', labels[state.atm]);
+        setText('screen-fee', state.screen === 'fee' ? labels.fee : labels[state.screen]);
+        setText('screen-currency', state.card === 'eur' ? 'Euro card: conversion is less relevant, but fee still matters.' : 'Non-euro card: choose euros, not your home currency.');
+        setText('screen-buffer', labels[state.amount]);
+        setText('result-label', scenario.label);
+        setText('result-title', scenario.title);
+        setText('result-copy', scenario.copy);
+        if (list) {
+          list.innerHTML = '';
+          scenario.actions.forEach((action, index) => {
+            const li = document.createElement('li');
+            li.dataset.step = String(index + 1);
+            li.textContent = action;
+            list.appendChild(li);
+          });
+        }
+      }
+
+      document.querySelectorAll('.choices').forEach((group) => {
+        group.addEventListener('click', (event) => {
+          const button = event.target.closest('button[data-value]');
+          if (!button) return;
+          const key = group.dataset.group;
+          state[key] = button.dataset.value;
+          group.querySelectorAll('button[data-value]').forEach((item) => {
+            item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

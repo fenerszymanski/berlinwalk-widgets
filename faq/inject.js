@@ -162,7 +162,8 @@
   "berlin-last-day": "berlin-last-day",
   "berlin-last-day-what-to-do-before-your-flight-or-train": "berlin-last-day",
   "berlin-museum-bag-rules": "berlin-museum-bag-rules",
-  "bebelplatz-berlin": "bebelplatz-berlin"
+  "bebelplatz-berlin": "bebelplatz-berlin",
+  "atm-in-berlin": "atm-in-berlin"
 };
 
   var SCHEMAS = {
@@ -7768,6 +7769,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. The BerlinWalk tour lasts about 2 hours and focuses on central Berlin layers around Alexanderplatz, Museum Island and the historic centre. Bebelplatz is an easy before-or-after addition on Unter den Linden."
+        }
+      }
+    ]
+  },
+  "atm-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Should I use an ATM in Berlin or exchange cash before I travel?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For many visitors, a bank-branded ATM in Berlin is more practical than exchanging a large amount before travel. Bring a small emergency backup if you are nervous, then make a calm city withdrawal after checking the fee and currency screen."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are ATMs in Berlin free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not necessarily. Your own bank can charge a foreign withdrawal fee, and the ATM operator can show a separate fee before you confirm. Always read the screen and avoid making several tiny withdrawals if your card charges a fixed fee each time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does dynamic currency conversion mean at a Berlin ATM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dynamic currency conversion is the screen that offers to charge your card in your home currency instead of euros. If your card is not a euro card, I would usually decline that conversion and continue in euros if the ATM allows it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much cash should I carry in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A modest buffer is usually enough. Many tourists are fine with 40 to 80 euros per person for cafes, markets, tips, toilets and small cash-only moments, then cards for larger purchases where accepted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin cash-only?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Cards are common in many restaurants, supermarkets, museums and ticket machines, but cash still appears in small food places, markets, tips, toilets and backup payment moments. Berlin works best when you have both."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the safest place to withdraw cash in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use a bank-branded ATM during a calm daytime moment when possible. Avoid rushed late-night withdrawals, cover the keypad, put cash away before leaving, and cancel if the screen or surroundings feel wrong."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need cash for the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You do not need a large amount of cash for the BerlinWalk route, which lasts about 2 hours. I would still carry a small euro buffer for cafes, toilets, tips or unexpected small payments before or after the walk."
         }
       }
     ]

@@ -1164,5 +1164,19 @@
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/bebelplatz-memory-lens-160.png",
     "source": "codex-built-in-imagegen-20260703",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_1b3b73fc41234da4835079a6ca506ac5~mv2.png"
+  },
+  {
+    "slug": "berlin-atm-fee-checker",
+    "title": "Berlin ATM Fee Checker",
+    "category": "MoneyShopping",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-atm-fee-checker/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-atm-fee-checker/codex-berlin-atm-fee-checker-icon.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-atm-fee-checker.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-atm-fee-checker-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-atm-fee-checker-160.png",
+    "source": "codex-built-in-imagegen-20260704",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_761e6dbca79d49529d253a0739eb3136~mv2.png"
   }
 ]
