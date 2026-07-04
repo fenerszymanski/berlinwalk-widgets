@@ -1,0 +1,36 @@
+{
+  "checkedAt": "2026-07-04T19:21:20.334Z",
+  "mode": "local http server on 127.0.0.1:8765",
+  "targets": [
+    {
+      "target": "quick-summary",
+      "url": "http://127.0.0.1:8765/quick-summary/?post=parking-berlin&v=localqa",
+      "desktopScreenshot": "quick-summary-desktop.png",
+      "mobileScreenshot": "quick-summary-mobile.png",
+      "marker": "Berlin Parking",
+      "markerOk": true,
+      "visualOk": true
+    },
+    {
+      "target": "alexanderplatz-parking-map",
+      "url": "http://127.0.0.1:8765/alexanderplatz-parking-map/?v=localqa",
+      "desktopScreenshot": "parking-map-desktop.png",
+      "mobileScreenshot": "parking-map-mobile.png",
+      "marker": "World Clock",
+      "markerOk": true,
+      "visualOk": true
+    },
+    {
+      "target": "faq",
+      "url": "http://127.0.0.1:8765/faq/?post=parking-berlin&v=localqa",
+      "desktopScreenshot": "faq-desktop.png",
+      "mobileScreenshot": "faq-mobile.png",
+      "marker": "parking in Berlin",
+      "markerOk": true,
+      "visualOk": true
+    }
+  ],
+  "notes": [
+    "Wix draft rich-content readback separately verified 5 caption paragraphs with CENTER alignment, 12px font size, italic style, and h1=0."
+  ]
+}

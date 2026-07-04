@@ -68,6 +68,8 @@
   "berlin-city-tax": "berlin-city-tax",
   "taxi-in-berlin": "taxi-in-berlin",
   "berlin-public-holidays-2026": "berlin-public-holidays-2026",
+  "where-to-park-in-berlin-alexanderplatz": "parking-berlin",
+  "where-to-park-in-berlin-alexanderplatz-2026": "parking-berlin",
   "the-ampelmann-how-a-traffic-light-became-berlin-s-most-beloved-symbol": "the-ampelmann",
   "can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany": "credit-cards-berlin",
   "bus-100-berlin-the-4-sightseeing-tour-locals-don-t-want-you-to-know-about": "bus-100-berlin",
@@ -2130,6 +2132,52 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. Looking at the TV Tower from Alexanderplatz is free, but going up always costs money. For a free alternative view, book the Reichstag dome or visit a public rooftop such as Klunkerkranich or the upper levels of Galeries Lafayette."
+        }
+      }
+    ]
+  },
+  "parking-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where should I park if I am joining the BerlinWalk tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use a central garage near Alexanderplatz and walk to the World Clock. RathausPassagen, ALEXA, and Q-Park Am Alexanderplatz are the most practical options. Arrive 20-30 minutes early so parking does not make you late."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Alexanderplatz inside Berlin's Umweltzone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Alexanderplatz is inside Berlin's low-emission zone. If you drive into the center, check whether your car needs the green environmental sticker, including foreign-registered vehicles."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is street parking near Alexanderplatz worth trying?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "I would not rely on it. Mitte has managed paid parking zones, spaces can be hard to find, and central street parking can cost around EUR 4 per hour in key zones. For a timed tour, a garage is much calmer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Park + Ride cheaper than parking in central Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes. P+R often makes sense for one or two people staying all day, especially if you already need public transport tickets. For a short visit or a group, central garage parking can be simpler and sometimes not much more expensive."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How early should I arrive if I am parking before the tour?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plan to arrive in the parking area 20-30 minutes before the tour starts. You need time to enter the garage, find a space, remember the exit, pay if needed, and walk to the World Clock."
         }
       }
     ]
