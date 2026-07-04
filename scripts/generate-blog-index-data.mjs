@@ -491,6 +491,7 @@ function topicFor(post) {
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
   if (/(berlin-transport-strike|transport strike|bvg strike|s-bahn disruption|transport disruption|trains stop)/.test(s)) return 'berlin-transport-backup-planner';
+  if (/(bebelplatz-berlin|bebelplatz berlin|empty library|book-burning memorial|book burning memorial)/.test(s)) return 'bebelplatz-memory-lens';
   if (/(berlin-museum-bag-rules|berlin museum bag rules|museum bag rules|museum backpack rules|museum lockers)/.test(s)) return 'berlin-museum-bag-planner';
   if (/(berlin-last-day|berlin last day|before your flight or train|checkout day)/.test(s)) return 'berlin-last-day-buffer-planner';
   if (/(berlin-ab-abc-ticket-zones|berlin ab or abc ticket|berlin ticket zones|berlin fare zones|bvg ticket zones)/.test(s)) return 'berlin-zone-ticket-decoder';
