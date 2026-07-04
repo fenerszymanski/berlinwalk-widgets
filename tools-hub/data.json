@@ -2621,7 +2621,7 @@
         "ATM near me Berlin",
         "cash machine Berlin"
       ],
-      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-atm-fee-checker/",
+      "widgetUrl": "https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@ec4fd985fa715cccd2eea836d2a89fa1e504cb8d/berlin-atm-fee-checker/index.html",
       "embedHeight": 1260,
       "image": "https://static.wixstatic.com/media/5a08a3_761e6dbca79d49529d253a0739eb3136~mv2.png",
       "relatedBlogSlug": "atm-in-berlin"
