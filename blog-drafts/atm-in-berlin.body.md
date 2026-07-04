@@ -78,9 +78,11 @@ Airport cash exchange counters and rushed arrival withdrawals are rarely the bes
 
 If you land at BER and need cash immediately, take only what solves the next few hours. Do not make your whole Berlin cash plan at the first screen you see after baggage claim.
 
-## A simple ATM in Berlin checklist
+## Find an ATM in Berlin before you walk to a random machine
 
-Use this order before you press confirm:
+If you are already in the city, use the ATM finder below first. Start with your location or a Berlin area, prefer a bank or station option when one is nearby, then open the chosen machine in Google Maps for the final walk.
+
+Once you arrive, use this order before you press confirm:
 
 1. Is the machine bank-branded or just convenient?
 2. Does the ATM show a fixed operator fee?

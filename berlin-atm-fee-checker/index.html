@@ -3,22 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Berlin ATM Fee Checker | BerlinWalk</title>
-  <meta name="description" content="Read an ATM screen in Berlin: fee, currency conversion, receipt and cash-buffer decision.">
+  <title>Berlin ATM Finder | BerlinWalk</title>
+  <meta name="description" content="Find nearby ATMs in Berlin, sort by location, and open the best option in Google Maps.">
   <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     :root {
       --bw-green: #1B5E20;
       --bw-green-dark: #123B15;
       --bw-yellow: #FFE600;
+      --bw-lime: #7CB342;
       --bw-cream: #FAFAF5;
       --bw-paper: #FFFFFF;
       --bw-ink: #212121;
       --bw-muted: #586756;
-      --bw-line: rgba(27, 94, 32, 0.2);
-      --bw-alert: #B74A1B;
-      --bw-safe: #2F7A34;
+      --bw-line: #DCE8C8;
+      --bw-soft: #F2F8E8;
       --bw-blue: #155C8A;
+      --bw-blue-soft: #EAF6F8;
+      --bw-warn: #B45309;
       color-scheme: light;
       font-family: Montserrat, Arial, sans-serif;
     }
@@ -39,696 +43,961 @@
       font-family: Montserrat, Arial, sans-serif;
     }
 
-    button {
+    button,
+    input {
       font: inherit;
     }
 
-    .atm-tool {
+    #bw-atm-finder {
       width: 100%;
       max-width: 1120px;
       margin: 0 auto;
+      color: var(--bw-ink);
+    }
+
+    #bw-atm-finder * {
+      box-sizing: border-box;
+    }
+
+    .bw-wrap {
       overflow: hidden;
       border: 1px solid var(--bw-line);
       border-radius: 8px;
-      background: var(--bw-cream);
-      box-shadow: 0 18px 48px rgba(27, 94, 32, 0.14);
+      background: var(--bw-paper);
+      box-shadow: 0 14px 34px rgba(27, 94, 32, 0.12);
     }
 
-    .hero {
-      min-height: 360px;
+    .bw-head {
       display: grid;
-      grid-template-columns: minmax(320px, 0.9fr) minmax(380px, 1.1fr);
-      background:
-        linear-gradient(90deg, rgba(10, 43, 18, 0.96), rgba(12, 54, 23, 0.76) 48%, rgba(12, 54, 23, 0.14)),
-        url("assets/atm-screen-coach-hero.jpg") center / cover no-repeat;
-      color: #fff;
-    }
-
-    .hero-copy {
-      min-height: 360px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+      grid-template-columns: minmax(260px, 1fr) auto;
       gap: 14px;
-    }
-
-    .kicker {
-      width: fit-content;
-      display: inline-flex;
       align-items: center;
-      gap: 8px;
-      color: var(--bw-yellow);
-      font-size: 12px;
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: 0;
-      text-transform: uppercase;
-    }
-
-    .kicker::before {
-      content: "";
-      width: 30px;
-      height: 4px;
-      border-radius: 999px;
-      background: var(--bw-yellow);
-    }
-
-    h1,
-    h2,
-    h3,
-    p {
-      margin: 0;
-    }
-
-    h1 {
-      max-width: 620px;
-      font-size: 38px;
-      line-height: 1.08;
-      letter-spacing: 0;
-    }
-
-    .hero-copy p {
-      max-width: 560px;
-      color: rgba(255, 255, 255, 0.9);
-      font-size: 16px;
-      line-height: 1.58;
-      font-weight: 650;
-    }
-
-    .screen-preview {
-      align-self: center;
-      justify-self: end;
-      width: min(100%, 440px);
-      margin: 28px;
-      border: 1px solid rgba(255, 255, 255, 0.34);
-      border-radius: 8px;
-      background: rgba(250, 250, 245, 0.96);
-      color: var(--bw-ink);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
-    }
-
-    .screen-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 16px;
+      padding: 18px 20px;
       background: var(--bw-green);
       color: #fff;
     }
 
-    .screen-top strong {
+    .bw-kicker {
+      display: block;
       color: var(--bw-yellow);
-      font-size: 13px;
-      text-transform: uppercase;
-    }
-
-    .screen-top span {
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .screen-body {
-      padding: 16px;
-      display: grid;
-      gap: 12px;
-    }
-
-    .screen-row {
-      display: grid;
-      grid-template-columns: 118px 1fr;
-      gap: 12px;
-      align-items: start;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(27, 94, 32, 0.16);
-    }
-
-    .screen-row:last-child {
-      border-bottom: 0;
-      padding-bottom: 0;
-    }
-
-    .screen-row span {
-      color: var(--bw-muted);
-      font-size: 12px;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .screen-row b {
-      color: var(--bw-green-dark);
-      font-size: 15px;
-      line-height: 1.35;
-    }
-
-    .tool-body {
-      padding: 24px;
-      display: grid;
-      grid-template-columns: minmax(300px, 0.96fr) minmax(320px, 1.04fr);
-      gap: 18px;
-      align-items: start;
-    }
-
-    .control-panel,
-    .result-panel,
-    .route-panel {
-      border: 1px solid var(--bw-line);
-      border-radius: 8px;
-      background: var(--bw-paper);
-    }
-
-    .control-panel {
-      padding: 18px;
-      display: grid;
-      gap: 16px;
-    }
-
-    .field {
-      display: grid;
-      gap: 8px;
-    }
-
-    .field legend {
-      padding: 0;
-      color: var(--bw-green);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 900;
       letter-spacing: 0;
+      line-height: 1.2;
       text-transform: uppercase;
     }
 
-    fieldset {
-      min-width: 0;
-      margin: 0;
-      padding: 0;
-      border: 0;
+    .bw-title {
+      margin: 4px 0 0;
+      color: #fff;
+      font-size: 26px;
+      line-height: 1.12;
+      font-weight: 950;
+      letter-spacing: 0;
     }
 
-    .choices {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .bw-live {
+      display: inline-flex;
+      align-items: center;
       gap: 8px;
+      min-height: 36px;
+      padding: 8px 11px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
     }
 
-    .choice {
-      min-height: 46px;
-      padding: 9px 10px;
-      border: 1px solid rgba(27, 94, 32, 0.25);
+    .bw-live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--bw-yellow);
+    }
+
+    .bw-body {
+      padding: 16px 18px 18px;
+      background: var(--bw-cream);
+    }
+
+    .bw-controls {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .bw-search {
+      width: 100%;
+      height: 44px;
+      padding: 0 12px;
+      border: 1.5px solid var(--bw-line);
       border-radius: 8px;
       background: #fff;
-      color: var(--bw-green-dark);
+      color: var(--bw-ink);
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .bw-search:focus {
+      outline: 0;
+      border-color: var(--bw-lime);
+      box-shadow: 0 0 0 3px rgba(124, 179, 66, 0.18);
+    }
+
+    .bw-locate {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 152px;
+      height: 44px;
+      padding: 0 14px;
+      border: 1.5px solid var(--bw-yellow);
+      border-radius: 8px;
+      background: var(--bw-yellow);
+      color: var(--bw-green);
+      cursor: pointer;
       font-size: 13px;
-      line-height: 1.18;
+      font-weight: 950;
+    }
+
+    .bw-locate:disabled {
+      cursor: wait;
+      opacity: 0.72;
+    }
+
+    .bw-areas,
+    .bw-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .bw-area,
+    .bw-filter {
+      min-height: 34px;
+      padding: 8px 11px;
+      border: 1.5px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--bw-green);
+      cursor: pointer;
+      font-size: 12px;
+      line-height: 1.1;
       font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .bw-area:hover,
+    .bw-filter:hover {
+      border-color: var(--bw-lime);
+      background: var(--bw-soft);
+    }
+
+    .bw-area.active,
+    .bw-filter.active {
+      border-color: var(--bw-green);
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+    }
+
+    .bw-map-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 310px;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .bw-map-container {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      height: 500px;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #E8EEDC;
+    }
+
+    .bw-map {
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .bw-loading {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(250, 250, 245, 0.94);
+      color: var(--bw-green);
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 850;
+    }
+
+    .bw-loading.hidden {
+      display: none;
+    }
+
+    .bw-panel {
+      overflow: hidden;
+      display: flex;
+      min-height: 0;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      background: #fff;
+      flex-direction: column;
+    }
+
+    .bw-panel-head {
+      padding: 12px 13px;
+      border-bottom: 1px solid var(--bw-line);
+    }
+
+    .bw-panel-title {
+      margin: 0;
+      color: var(--bw-green);
+      font-size: 14px;
+      line-height: 1.25;
+      font-weight: 950;
+    }
+
+    .bw-panel-sub {
+      margin: 4px 0 0;
+      color: var(--bw-muted);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .bw-list {
+      height: 440px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      overflow: auto;
+    }
+
+    .bw-item {
+      display: block;
+      width: 100%;
+      padding: 12px 13px;
+      border: 0;
+      border-bottom: 1px solid #EEF3E6;
+      background: #fff;
+      color: inherit;
       text-align: left;
       cursor: pointer;
     }
 
-    .choice[aria-pressed="true"] {
-      background: var(--bw-green);
-      border-color: var(--bw-green);
-      color: var(--bw-yellow);
-      box-shadow: inset 0 0 0 2px rgba(255, 230, 0, 0.22);
+    .bw-item:hover,
+    .bw-item.active {
+      background: var(--bw-blue-soft);
     }
 
-    .output {
-      display: grid;
-      gap: 18px;
+    .bw-item-name {
+      display: block;
+      color: var(--bw-ink);
+      font-size: 13px;
+      line-height: 1.3;
+      font-weight: 900;
     }
 
-    .result-panel {
-      padding: 20px;
-      display: grid;
-      gap: 14px;
-      border-left: 8px solid var(--bw-safe);
+    .bw-item-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 7px;
     }
 
-    .result-panel[data-level="caution"] {
-      border-left-color: var(--bw-alert);
+    .bw-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 22px;
+      padding: 5px 7px;
+      border: 1px solid #E6EDD9;
+      border-radius: 8px;
+      background: #F8FAF4;
+      color: var(--bw-muted);
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 800;
     }
 
-    .result-panel[data-level="watch"] {
-      border-left-color: var(--bw-blue);
+    .bw-chip.bank {
+      border-color: var(--bw-line);
+      background: var(--bw-soft);
+      color: var(--bw-green);
     }
 
-    .result-label {
+    .bw-chip.warn {
+      border-color: #F2D981;
+      background: #FFF6D6;
+      color: #665000;
+    }
+
+    .bw-empty {
+      margin: 0;
+      padding: 14px 13px;
+      color: var(--bw-muted);
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .bw-status {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 10px;
       color: var(--bw-muted);
       font-size: 12px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .bw-status strong {
+      color: var(--bw-green);
+      font-weight: 900;
+    }
+
+    .bw-source {
+      color: var(--bw-muted);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .bw-note {
+      margin: 10px 0 0;
+      padding: 10px 12px;
+      border: 1px solid #F2D981;
+      border-radius: 8px;
+      background: #FFF9E6;
+      color: #514008;
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .leaflet-container {
+      background: #E8EEDC;
+      font-family: Montserrat, Arial, sans-serif;
+    }
+
+    .leaflet-popup-content-wrapper {
+      overflow: hidden;
+      padding: 0;
+      border: 1px solid var(--bw-line);
+      border-radius: 8px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.16);
+    }
+
+    .leaflet-popup-content {
+      width: 260px !important;
+      margin: 0;
+      font-family: inherit;
+    }
+
+    .bw-popup-head {
+      padding: 10px 13px;
+      background: var(--bw-green);
+      color: #fff;
+    }
+
+    .bw-popup-type {
+      display: block;
+      color: var(--bw-yellow);
+      font-size: 10px;
+      line-height: 1.2;
       font-weight: 900;
       letter-spacing: 0;
       text-transform: uppercase;
     }
 
-    .result-panel h2 {
-      color: var(--bw-green-dark);
-      font-size: 26px;
-      line-height: 1.12;
-      letter-spacing: 0;
-    }
-
-    .result-panel p {
-      color: #333;
+    .bw-popup-name {
+      margin-top: 3px;
+      color: #fff;
       font-size: 15px;
-      line-height: 1.62;
-      font-weight: 600;
-    }
-
-    .action-list {
-      display: grid;
-      gap: 8px;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-    }
-
-    .action-list li {
-      display: grid;
-      grid-template-columns: 24px 1fr;
-      gap: 9px;
-      align-items: start;
-      color: #2e3a2d;
-      font-size: 14px;
-      line-height: 1.45;
-      font-weight: 650;
-    }
-
-    .action-list li::before {
-      content: attr(data-step);
-      width: 24px;
-      height: 24px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: var(--bw-yellow);
-      color: var(--bw-green);
-      font-size: 12px;
+      line-height: 1.25;
       font-weight: 950;
     }
 
-    .route-panel {
-      padding: 18px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .route-panel h3 {
-      color: var(--bw-green);
-      font-size: 18px;
-      line-height: 1.2;
-      letter-spacing: 0;
-    }
-
-    .step-track {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .step {
-      min-height: 106px;
-      padding: 11px 10px;
-      border: 1px solid rgba(27, 94, 32, 0.18);
-      border-radius: 8px;
-      background: #F9FBF5;
-      display: grid;
-      gap: 8px;
-      align-content: start;
-    }
-
-    .step b {
-      color: var(--bw-green-dark);
-      font-size: 13px;
-      line-height: 1.18;
-    }
-
-    .step span {
-      color: var(--bw-muted);
+    .bw-popup-body {
+      padding: 12px 13px 13px;
+      color: var(--bw-ink);
       font-size: 12px;
-      line-height: 1.35;
+      line-height: 1.5;
       font-weight: 650;
     }
 
-    .links {
-      display: flex;
-      flex-wrap: wrap;
+    .bw-popup-row {
+      display: grid;
+      grid-template-columns: 74px minmax(0, 1fr);
       gap: 8px;
-      margin-top: 2px;
+      margin-bottom: 7px;
     }
 
-    .links a {
-      min-height: 38px;
+    .bw-popup-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .bw-popup-label {
+      color: var(--bw-green);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .bw-popup-route {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      padding: 8px 11px;
-      border: 1px solid rgba(27, 94, 32, 0.2);
+      min-height: 34px;
+      margin-top: 9px;
+      padding: 9px 11px;
       border-radius: 8px;
-      background: var(--bw-green);
-      color: #fff;
-      text-decoration: none;
-      font-size: 13px;
-      line-height: 1.15;
-      font-weight: 900;
-    }
-
-    .links a.secondary {
-      background: #fff;
+      background: var(--bw-yellow);
       color: var(--bw-green);
-    }
-
-    .note {
-      color: var(--bw-muted);
+      text-decoration: none;
       font-size: 12px;
-      line-height: 1.45;
-      font-weight: 650;
+      line-height: 1;
+      font-weight: 950;
     }
 
-    @media (max-width: 860px) {
-      .hero,
-      .tool-body {
+    .bw-marker {
+      display: grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--bw-green);
+      color: var(--bw-yellow);
+      box-shadow: 0 2px 9px rgba(0, 0, 0, 0.28);
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 950;
+    }
+
+    .bw-marker.independent {
+      background: var(--bw-warn);
+      color: #fff;
+    }
+
+    .bw-marker.search {
+      background: var(--bw-blue);
+      color: #fff;
+    }
+
+    .bw-user-marker {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: var(--bw-blue);
+      color: #fff;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+      font-size: 10px;
+      font-weight: 950;
+    }
+
+    @media (max-width: 820px) {
+      .bw-head {
+        grid-template-columns: 1fr;
+        align-items: start;
+        padding: 15px 16px;
+      }
+
+      .bw-live {
+        width: fit-content;
+      }
+
+      .bw-title {
+        font-size: 23px;
+      }
+
+      .bw-body {
+        padding: 14px;
+      }
+
+      .bw-controls {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        min-height: auto;
-        background:
-          linear-gradient(180deg, rgba(10, 43, 18, 0.96), rgba(12, 54, 23, 0.76) 56%, rgba(12, 54, 23, 0.26)),
-          url("assets/atm-screen-coach-hero.jpg") center / cover no-repeat;
+      .bw-locate {
+        width: 100%;
       }
 
-      .hero-copy {
-        min-height: 300px;
-        padding: 24px;
-      }
-
-      h1 {
-        font-size: 32px;
-      }
-
-      .screen-preview {
-        justify-self: stretch;
-        width: auto;
-        margin: 0 18px 20px;
-      }
-
-      .tool-body {
-        padding: 18px;
-      }
-    }
-
-    @media (max-width: 620px) {
-      .atm-tool {
-        border-radius: 0;
-      }
-
-      .hero-copy {
-        padding: 22px 18px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .hero-copy p,
-      .result-panel p {
-        font-size: 14px;
-      }
-
-      .choices,
-      .step-track,
-      .screen-row {
+      .bw-map-grid {
         grid-template-columns: 1fr;
       }
 
-      .step {
-        min-height: auto;
+      .bw-map-container {
+        height: 390px;
+      }
+
+      .bw-list {
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .bw-title {
+        font-size: 21px;
+      }
+
+      .bw-popup-row {
+        grid-template-columns: 1fr;
+        gap: 2px;
+      }
+
+      .leaflet-popup-content {
+        width: 220px !important;
       }
     }
   </style>
 </head>
 <body>
-  <main class="atm-tool" aria-labelledby="atm-title">
-    <section class="hero">
-      <div class="hero-copy">
-        <span class="kicker">BerlinWalk money tool</span>
-        <h1 id="atm-title">Berlin ATM Fee Checker</h1>
-        <p>Choose what the machine is showing you. The tool gives one clear next move before you press confirm.</p>
-      </div>
-
-      <aside class="screen-preview" aria-label="ATM screen reading order">
-        <div class="screen-top">
-          <strong>Screen order</strong>
-          <span>Do not rush</span>
+  <div id="bw-atm-finder">
+    <div class="bw-wrap">
+      <header class="bw-head">
+        <div>
+          <span class="bw-kicker">Berlin ATM Finder</span>
+          <h1 class="bw-title">Find a cash machine near your route</h1>
         </div>
-        <div class="screen-body">
-          <div class="screen-row">
-            <span>Machine</span>
-            <b id="screen-machine">Bank-branded ATM</b>
-          </div>
-          <div class="screen-row">
-            <span>Fee</span>
-            <b id="screen-fee">Read operator fee before accepting.</b>
-          </div>
-          <div class="screen-row">
-            <span>Currency</span>
-            <b id="screen-currency">Use euros if your card is not a euro card.</b>
-          </div>
-          <div class="screen-row">
-            <span>Cash buffer</span>
-            <b id="screen-buffer">Withdraw enough for small moments, not a thick wallet.</b>
-          </div>
+        <div class="bw-live" aria-live="polite"><span class="bw-live-dot" aria-hidden="true"></span><span id="bw-atm-live">Loading ATM map</span></div>
+      </header>
+
+      <div class="bw-body">
+        <div class="bw-controls">
+          <input class="bw-search" id="bw-atm-search" type="search" placeholder="Search operator, station, area or bank" autocomplete="off">
+          <button class="bw-locate" id="bw-atm-locate" type="button">Use my location</button>
         </div>
-      </aside>
-    </section>
 
-    <section class="tool-body">
-      <form class="control-panel" aria-label="ATM decision inputs">
-        <fieldset class="field">
-          <legend>Your card currency</legend>
-          <div class="choices" data-group="card">
-            <button class="choice" type="button" data-value="non-eur" aria-pressed="true">Not a euro card</button>
-            <button class="choice" type="button" data-value="eur" aria-pressed="false">Euro card</button>
+        <div class="bw-areas" aria-label="Berlin area shortcuts">
+          <button class="bw-area active" type="button" data-area="center">Historic centre</button>
+          <button class="bw-area" type="button" data-area="alex">Alexanderplatz</button>
+          <button class="bw-area" type="button" data-area="hauptbahnhof">Hauptbahnhof</button>
+          <button class="bw-area" type="button" data-area="friedrich">Friedrichstrasse</button>
+          <button class="bw-area" type="button" data-area="potsdamer">Potsdamer Platz</button>
+          <button class="bw-area" type="button" data-area="zoo">Zoo / Ku'damm</button>
+          <button class="bw-area" type="button" data-area="ber">BER Airport</button>
+        </div>
+
+        <div class="bw-filters" aria-label="ATM filters">
+          <button class="bw-filter active" type="button" data-filter="all">All ATMs</button>
+          <button class="bw-filter" type="button" data-filter="bank">Bank or branch</button>
+          <button class="bw-filter" type="button" data-filter="transport">Station / airport</button>
+          <button class="bw-filter" type="button" data-filter="open">24h indicated</button>
+        </div>
+
+        <div class="bw-map-grid">
+          <div class="bw-map-container">
+            <div class="bw-map" id="bw-atm-map-canvas"></div>
+            <div class="bw-loading" id="bw-atm-loading">Loading Berlin ATM data from OpenStreetMap...</div>
           </div>
-        </fieldset>
 
-        <fieldset class="field">
-          <legend>ATM type</legend>
-          <div class="choices" data-group="atm">
-            <button class="choice" type="button" data-value="bank" aria-pressed="true">Bank branch or lobby</button>
-            <button class="choice" type="button" data-value="standalone" aria-pressed="false">Standalone street ATM</button>
-            <button class="choice" type="button" data-value="station" aria-pressed="false">Station or airport</button>
-            <button class="choice" type="button" data-value="unknown" aria-pressed="false">I am not sure</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="field">
-          <legend>What the screen offers</legend>
-          <div class="choices" data-group="screen">
-            <button class="choice" type="button" data-value="fee" aria-pressed="true">Only a fixed fee</button>
-            <button class="choice" type="button" data-value="dcc" aria-pressed="false">Home-currency conversion</button>
-            <button class="choice" type="button" data-value="eur" aria-pressed="false">Charge in euros</button>
-            <button class="choice" type="button" data-value="confusing" aria-pressed="false">Unclear or pre-selected</button>
-          </div>
-        </fieldset>
-
-        <fieldset class="field">
-          <legend>Cash you need</legend>
-          <div class="choices" data-group="amount">
-            <button class="choice" type="button" data-value="small" aria-pressed="false">20 to 30 euros now</button>
-            <button class="choice" type="button" data-value="buffer" aria-pressed="true">40 to 80 euro day buffer</button>
-            <button class="choice" type="button" data-value="large" aria-pressed="false">100+ euros</button>
-            <button class="choice" type="button" data-value="none" aria-pressed="false">Maybe I do not need cash</button>
-          </div>
-        </fieldset>
-      </form>
-
-      <div class="output">
-        <section class="result-panel" id="result-panel" data-level="watch" aria-live="polite">
-          <span class="result-label" id="result-label">Best move</span>
-          <h2 id="result-title">Use the ATM, but read the fee first.</h2>
-          <p id="result-copy">A bank-branded ATM with a clear euro withdrawal screen is usually fine. Your own bank may still charge a foreign withdrawal fee, so avoid making tiny repeat withdrawals.</p>
-          <ul class="action-list" id="action-list"></ul>
-        </section>
-
-        <section class="route-panel">
-          <h3>Confirm in this order</h3>
-          <div class="step-track">
-            <div class="step">
-              <b>1. Place</b>
-              <span>Prefer a bank ATM when you are calm, not a random late-night machine.</span>
+          <aside class="bw-panel" aria-live="polite">
+            <div class="bw-panel-head">
+              <p class="bw-panel-title" id="bw-atm-panel-title">Closest ATMs</p>
+              <p class="bw-panel-sub" id="bw-atm-panel-sub">Use your location or choose a Berlin area to sort nearby options.</p>
             </div>
-            <div class="step">
-              <b>2. Fee</b>
-              <span>Check the operator fee before you continue.</span>
-            </div>
-            <div class="step">
-              <b>3. Currency</b>
-              <span>For non-euro cards, reject home-currency conversion and continue in euros.</span>
-            </div>
-            <div class="step">
-              <b>4. Amount</b>
-              <span>Carry a modest cash buffer, not your whole trip budget.</span>
-            </div>
-          </div>
-          <div class="links" aria-label="Related BerlinWalk guides">
-            <a href="https://www.berlinwalk.com/post/can-you-use-credit-cards-in-berlin-a-tourist-s-guide-to-paying-in-germany" target="_blank" rel="noopener">Card guide</a>
-            <a class="secondary" href="https://www.berlinwalk.com/post/is-berlin-expensive-a-realistic-daily-budget-for-2026-tourists" target="_blank" rel="noopener">Budget guide</a>
-            <a class="secondary" href="https://www.berlinwalk.com/post/berlin-tourist-scams" target="_blank" rel="noopener">Scam guide</a>
-          </div>
-          <p class="note">This tool cannot know your bank's exact fee. It is a screen-reading guide for common Berlin tourist decisions.</p>
-        </section>
+            <ul class="bw-list" id="bw-atm-list"></ul>
+          </aside>
+        </div>
+
+        <div class="bw-status">
+          <span id="bw-atm-status">Preparing the map...</span>
+          <span>Source: <a class="bw-source" href="https://www.openstreetmap.org" target="_blank" rel="noopener">OpenStreetMap</a> via Overpass</span>
+        </div>
+        <p class="bw-note">ATM data can change. Use this to find a machine, then still read the fee and currency screen before withdrawing euros.</p>
       </div>
-    </section>
-  </main>
+    </div>
+  </div>
 
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
     (function () {
-      const state = {
-        card: 'non-eur',
-        atm: 'bank',
-        screen: 'fee',
-        amount: 'buffer'
+      var root = document.getElementById('bw-atm-finder');
+      if (!root || typeof L === 'undefined') return;
+
+      var BERLIN_BBOX = { south: 52.33, west: 13.05, north: 52.70, east: 13.78 };
+      var AREAS = {
+        center: { label: 'Historic centre', lat: 52.5172, lng: 13.3889, zoom: 13 },
+        alex: { label: 'Alexanderplatz', lat: 52.5219, lng: 13.4132, zoom: 15 },
+        hauptbahnhof: { label: 'Hauptbahnhof', lat: 52.5251, lng: 13.3694, zoom: 15 },
+        friedrich: { label: 'Friedrichstrasse', lat: 52.5202, lng: 13.3868, zoom: 15 },
+        potsdamer: { label: 'Potsdamer Platz', lat: 52.5096, lng: 13.3761, zoom: 15 },
+        zoo: { label: 'Zoo / Ku\'damm', lat: 52.5050, lng: 13.3350, zoom: 15 },
+        ber: { label: 'BER Airport', lat: 52.3667, lng: 13.5033, zoom: 14 }
       };
 
-      const labels = {
-        bank: 'Bank-branded ATM',
-        standalone: 'Standalone street ATM',
-        station: 'Station or airport ATM',
-        unknown: 'Unclear ATM type',
-        fee: 'Read operator fee before accepting.',
-        dcc: 'Reject home-currency conversion; continue in euros if possible.',
-        eur: 'Euro charge selected; still check the fee.',
-        confusing: 'Cancel if the fee or currency choice is unclear.',
-        small: 'Small cash top-up.',
-        buffer: '40 to 80 euro day buffer.',
-        large: 'Large withdrawal; use extra caution.',
-        none: 'You may not need cash right now.'
-      };
-
-      const scenarios = [
-        {
-          match: () => state.screen === 'dcc' && state.card === 'non-eur',
-          level: 'caution',
-          label: 'Decline conversion',
-          title: 'Choose euros, not your home currency.',
-          copy: 'This is the classic dynamic currency conversion moment. Decline the conversion and continue in euros if the machine lets you. The ATM can still charge a fixed fee, but you avoid choosing a poor exchange-rate screen by mistake.',
-          actions: [
-            'Press the option that keeps the withdrawal in euros.',
-            'Check whether a separate operator fee remains.',
-            'If the machine makes the choice unclear, cancel and find another ATM.'
-          ]
-        },
-        {
-          match: () => state.screen === 'confusing',
-          level: 'caution',
-          label: 'Cancel if unclear',
-          title: 'Do not solve a confusing screen under pressure.',
-          copy: 'Berlin has enough ATMs that you rarely need the first confusing one. If currency, fee or confirmation buttons are unclear, cancel and choose a calmer machine.',
-          actions: [
-            'Cancel before the final confirmation.',
-            'Look for a bank branch or lobby ATM.',
-            'Withdraw a smaller amount only if you genuinely need cash now.'
-          ]
-        },
-        {
-          match: () => state.atm === 'standalone',
-          level: 'watch',
-          label: 'Read fee carefully',
-          title: 'A standalone ATM can work, but make the fee earn its place.',
-          copy: 'Standalone machines can be convenient, especially near tourist routes, but the operator fee and conversion screen matter more than the location. If the fee feels high and a bank ATM is nearby, walk away.',
-          actions: [
-            'Check the displayed operator fee.',
-            'Avoid home-currency conversion on non-euro cards.',
-            'Use it only for a sensible cash buffer, not a big withdrawal.'
-          ]
-        },
-        {
-          match: () => state.atm === 'station' && state.amount === 'large',
-          level: 'caution',
-          label: 'Find a calmer spot',
-          title: 'Do not make a large withdrawal while moving through a station.',
-          copy: 'Stations are useful, but they are also rushed. If you need a larger withdrawal, use a bank ATM when you can stand calmly and put the cash away without distraction.',
-          actions: [
-            'Delay the withdrawal if you have enough cash for the next hour.',
-            'Use a bank-branded machine in a calmer area.',
-            'Split cards and cash after the withdrawal.'
-          ]
-        },
-        {
-          match: () => state.amount === 'none',
-          level: 'watch',
-          label: 'Maybe skip it',
-          title: 'If card payments cover your next stop, skip the ATM.',
-          copy: 'A cash buffer is useful in Berlin, but withdrawing just because you passed a machine is not a plan. If you already have small euros and your next stop accepts cards, keep moving.',
-          actions: [
-            'Keep small notes or coins if you already have them.',
-            'Use cards for larger planned purchases where accepted.',
-            'Withdraw later from a calmer bank ATM if the day changes.'
-          ]
-        }
+      var fallbackAtms = [
+        { id: 'fallback-alex', name: 'Search ATMs near Alexanderplatz', lat: 52.5219, lng: 13.4132, tags: { tourism_area: 'Alexanderplatz', fallback: 'yes' } },
+        { id: 'fallback-hbf', name: 'Search ATMs near Hauptbahnhof', lat: 52.5251, lng: 13.3694, tags: { tourism_area: 'Hauptbahnhof', fallback: 'yes' } },
+        { id: 'fallback-friedrich', name: 'Search ATMs near Friedrichstrasse', lat: 52.5202, lng: 13.3868, tags: { tourism_area: 'Friedrichstrasse', fallback: 'yes' } },
+        { id: 'fallback-potsdamer', name: 'Search ATMs near Potsdamer Platz', lat: 52.5096, lng: 13.3761, tags: { tourism_area: 'Potsdamer Platz', fallback: 'yes' } },
+        { id: 'fallback-zoo', name: 'Search ATMs near Zoo / Ku\'damm', lat: 52.5050, lng: 13.3350, tags: { tourism_area: 'Zoo / Ku\'damm', fallback: 'yes' } },
+        { id: 'fallback-ber', name: 'Search ATMs near BER Airport', lat: 52.3667, lng: 13.5033, tags: { tourism_area: 'BER Airport', fallback: 'yes' } }
       ];
 
-      const fallback = {
-        level: 'safe',
-        label: 'Best move',
-        title: 'Use the ATM, but read the fee first.',
-        copy: 'A bank-branded ATM with a clear euro withdrawal screen is usually fine. Your own bank may still charge a foreign withdrawal fee, so avoid making tiny repeat withdrawals.',
-        actions: [
-          'Confirm the operator fee.',
-          'Use euros for the transaction if your card is not a euro card.',
-          'Take a modest cash buffer for cafes, markets, tips and small purchases.'
-        ]
+      var state = {
+        all: [],
+        filtered: [],
+        markers: new Map(),
+        activeFilter: 'all',
+        query: '',
+        reference: AREAS.center,
+        activeId: null,
+        userMarker: null,
+        fallback: false
       };
 
-      function activeScenario() {
-        return scenarios.find((scenario) => scenario.match()) || fallback;
+      var mapEl = document.getElementById('bw-atm-map-canvas');
+      var loadingEl = document.getElementById('bw-atm-loading');
+      var listEl = document.getElementById('bw-atm-list');
+      var statusEl = document.getElementById('bw-atm-status');
+      var liveEl = document.getElementById('bw-atm-live');
+      var locateButton = document.getElementById('bw-atm-locate');
+      var searchInput = document.getElementById('bw-atm-search');
+      var panelTitle = document.getElementById('bw-atm-panel-title');
+      var panelSub = document.getElementById('bw-atm-panel-sub');
+
+      var map = L.map(mapEl, {
+        center: [AREAS.center.lat, AREAS.center.lng],
+        zoom: AREAS.center.zoom,
+        scrollWheelZoom: false,
+        tap: true
+      });
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+        maxZoom: 19
+      }).addTo(map);
+
+      map.once('click', function () { map.scrollWheelZoom.enable(); });
+      setTimeout(function () { map.invalidateSize(); }, 250);
+
+      function clean(value) {
+        return String(value || '').replace(/[<>&"]/g, function (char) {
+          return { '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[char];
+        });
       }
 
-      function setText(id, value) {
-        const el = document.getElementById(id);
-        if (el) el.textContent = value;
+      function atmName(item) {
+        var tags = item.tags || {};
+        return tags.name || tags.brand || tags.operator || tags.tourism_area || 'ATM';
       }
 
-      function render() {
-        const scenario = activeScenario();
-        const panel = document.getElementById('result-panel');
-        const list = document.getElementById('action-list');
-        if (panel) panel.dataset.level = scenario.level;
-        setText('screen-machine', labels[state.atm]);
-        setText('screen-fee', state.screen === 'fee' ? labels.fee : labels[state.screen]);
-        setText('screen-currency', state.card === 'eur' ? 'Euro card: conversion is less relevant, but fee still matters.' : 'Non-euro card: choose euros, not your home currency.');
-        setText('screen-buffer', labels[state.amount]);
-        setText('result-label', scenario.label);
-        setText('result-title', scenario.title);
-        setText('result-copy', scenario.copy);
-        if (list) {
-          list.innerHTML = '';
-          scenario.actions.forEach((action, index) => {
-            const li = document.createElement('li');
-            li.dataset.step = String(index + 1);
-            li.textContent = action;
-            list.appendChild(li);
-          });
+      function atmOperator(item) {
+        var tags = item.tags || {};
+        return tags.operator || tags.brand || tags.network || '';
+      }
+
+      function isBank(item) {
+        var text = (atmName(item) + ' ' + atmOperator(item) + ' ' + JSON.stringify(item.tags || {})).toLowerCase();
+        return item.tags?.amenity === 'bank'
+          || /sparkasse|deutsche bank|commerzbank|volksbank|postbank|berliner volksbank|targobank|santander|ing|norisbank|hypovereinsbank|unicredit|bank/.test(text);
+      }
+
+      function isTransport(item) {
+        var text = (atmName(item) + ' ' + atmOperator(item) + ' ' + JSON.stringify(item.tags || {})).toLowerCase();
+        return /bahnhof|hauptbahnhof|friedrichstrasse|friedrichstraße|alexanderplatz|potsdamer|zoologischer|airport|flughafen|terminal|station|s-bahn|u-bahn|db /.test(text);
+      }
+
+      function isOpenIndicated(item) {
+        var hours = String(item.tags?.opening_hours || '').toLowerCase();
+        return /24\/7|24-7|24h|always/.test(hours);
+      }
+
+      function itemKind(item) {
+        if (item.tags?.fallback === 'yes') return 'search';
+        if (isBank(item)) return 'bank';
+        return 'independent';
+      }
+
+      function kindLabel(item) {
+        if (item.tags?.fallback === 'yes') return 'Area search';
+        if (isBank(item)) return 'Bank / branch';
+        if (isTransport(item)) return 'Station area';
+        return 'ATM';
+      }
+
+      function gmapsUrl(item) {
+        if (item.tags?.fallback === 'yes') {
+          return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent('ATM near ' + (item.tags.tourism_area || atmName(item)) + ' Berlin');
+        }
+        return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(atmName(item) + ' ATM Berlin') + '&query_place_id=&center=' + item.lat + ',' + item.lng;
+      }
+
+      function distanceKm(a, b) {
+        var R = 6371;
+        var dLat = (b.lat - a.lat) * Math.PI / 180;
+        var dLng = (b.lng - a.lng) * Math.PI / 180;
+        var lat1 = a.lat * Math.PI / 180;
+        var lat2 = b.lat * Math.PI / 180;
+        var x = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.sin(dLng / 2) * Math.sin(dLng / 2) * Math.cos(lat1) * Math.cos(lat2);
+        return R * 2 * Math.atan2(Math.sqrt(x), Math.sqrt(1 - x));
+      }
+
+      function distanceLabel(km) {
+        if (!Number.isFinite(km)) return '';
+        if (km < 1) return Math.round(km * 1000) + ' m';
+        return km.toFixed(km < 10 ? 1 : 0) + ' km';
+      }
+
+      function overpassQuery() {
+        var box = [BERLIN_BBOX.south, BERLIN_BBOX.west, BERLIN_BBOX.north, BERLIN_BBOX.east].join(',');
+        return '[out:json][timeout:22];(' +
+          'node["amenity"="atm"](' + box + ');' +
+          'way["amenity"="atm"](' + box + ');' +
+          'relation["amenity"="atm"](' + box + ');' +
+          'node["amenity"="bank"]["atm"~"yes|customers"](' + box + ');' +
+          'way["amenity"="bank"]["atm"~"yes|customers"](' + box + ');' +
+          ');out center tags;';
+      }
+
+      async function loadAtms() {
+        try {
+          var url = 'https://overpass-api.de/api/interpreter?data=' + encodeURIComponent(overpassQuery());
+          var response = await fetch(url, { cache: 'no-store' });
+          if (!response.ok) throw new Error('Overpass returned ' + response.status);
+          var data = await response.json();
+          var items = (data.elements || [])
+            .map(function (element) {
+              var lat = element.lat || element.center?.lat;
+              var lng = element.lon || element.center?.lon;
+              if (!Number.isFinite(lat) || !Number.isFinite(lng)) return null;
+              return {
+                id: String(element.type + '-' + element.id),
+                lat: lat,
+                lng: lng,
+                tags: element.tags || {}
+              };
+            })
+            .filter(Boolean);
+          if (!items.length) throw new Error('No ATM results');
+          state.all = items;
+          state.fallback = false;
+          liveEl.textContent = items.length + ' ATMs loaded';
+          loadingEl.classList.add('hidden');
+          applyFilters();
+        } catch (error) {
+          state.all = fallbackAtms;
+          state.fallback = true;
+          liveEl.textContent = 'Fallback search mode';
+          loadingEl.classList.add('hidden');
+          statusEl.innerHTML = '<strong>Live ATM data is unavailable.</strong> Use the area searches, then check the machine screen in person.';
+          applyFilters();
         }
       }
 
-      document.querySelectorAll('.choices').forEach((group) => {
-        group.addEventListener('click', (event) => {
-          const button = event.target.closest('button[data-value]');
-          if (!button) return;
-          const key = group.dataset.group;
-          state[key] = button.dataset.value;
-          group.querySelectorAll('button[data-value]').forEach((item) => {
-            item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
-          });
-          render();
+      function matchesQuery(item) {
+        if (!state.query) return true;
+        var text = [
+          atmName(item),
+          atmOperator(item),
+          item.tags?.addr?.street,
+          item.tags?.['addr:street'],
+          item.tags?.['addr:city'],
+          item.tags?.tourism_area,
+          item.tags?.opening_hours
+        ].join(' ').toLowerCase();
+        return text.includes(state.query);
+      }
+
+      function matchesFilter(item) {
+        if (state.activeFilter === 'bank') return isBank(item);
+        if (state.activeFilter === 'transport') return isTransport(item);
+        if (state.activeFilter === 'open') return isOpenIndicated(item);
+        return true;
+      }
+
+      function createMarkerIcon(item) {
+        var kind = itemKind(item);
+        var label = kind === 'search' ? 'MAP' : 'ATM';
+        return L.divIcon({
+          className: 'bw-marker-wrap',
+          html: '<div class="bw-marker ' + kind + '">' + label + '</div>',
+          iconSize: [30, 30],
+          iconAnchor: [15, 15],
+          popupAnchor: [0, -18]
+        });
+      }
+
+      function popupHtml(item) {
+        var operator = atmOperator(item) || 'Check on site';
+        var hours = item.tags?.opening_hours || 'Not listed';
+        var fee = item.tags?.fee ? item.tags.fee : 'Read screen';
+        return '<div class="bw-popup-head">' +
+          '<span class="bw-popup-type">' + clean(kindLabel(item)) + '</span>' +
+          '<div class="bw-popup-name">' + clean(atmName(item)) + '</div>' +
+          '</div>' +
+          '<div class="bw-popup-body">' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Operator</span><span>' + clean(operator) + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Hours</span><span>' + clean(hours) + '</span></div>' +
+          '<div class="bw-popup-row"><span class="bw-popup-label">Fee</span><span>' + clean(fee) + '</span></div>' +
+          '<a class="bw-popup-route" href="' + gmapsUrl(item) + '" target="_blank" rel="noopener">Open in Google Maps</a>' +
+          '</div>';
+      }
+
+      function clearMarkers() {
+        state.markers.forEach(function (marker) { map.removeLayer(marker); });
+        state.markers.clear();
+      }
+
+      function drawMarkers(items) {
+        clearMarkers();
+        items.slice(0, 180).forEach(function (item) {
+          var marker = L.marker([item.lat, item.lng], { icon: createMarkerIcon(item) })
+            .bindPopup(popupHtml(item), { closeButton: true, maxWidth: 280 })
+            .addTo(map);
+          marker.on('click', function () { setActive(item.id, false); });
+          state.markers.set(item.id, marker);
+        });
+      }
+
+      function setActive(id, openPopup) {
+        state.activeId = id;
+        root.querySelectorAll('.bw-item').forEach(function (el) {
+          el.classList.toggle('active', el.getAttribute('data-id') === id);
+        });
+        var item = state.filtered.find(function (candidate) { return candidate.id === id; });
+        var marker = state.markers.get(id);
+        if (item && marker) {
+          map.setView([item.lat, item.lng], Math.max(map.getZoom(), 15), { animate: true });
+          if (openPopup) marker.openPopup();
+        }
+      }
+
+      function renderList(items) {
+        listEl.innerHTML = '';
+        if (!items.length) {
+          listEl.innerHTML = '<p class="bw-empty">No matching ATMs in the current filter. Try all ATMs or choose another Berlin area.</p>';
+          return;
+        }
+        items.slice(0, 24).forEach(function (item) {
+          var dist = distanceKm(state.reference, item);
+          var li = document.createElement('li');
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'bw-item';
+          button.setAttribute('data-id', item.id);
+          button.innerHTML =
+            '<span class="bw-item-name">' + clean(atmName(item)) + '</span>' +
+            '<span class="bw-item-meta">' +
+            '<span class="bw-chip">' + clean(distanceLabel(dist)) + '</span>' +
+            '<span class="bw-chip ' + (isBank(item) ? 'bank' : '') + '">' + clean(kindLabel(item)) + '</span>' +
+            (isOpenIndicated(item) ? '<span class="bw-chip bank">24h listed</span>' : '') +
+            (item.tags?.fee ? '<span class="bw-chip warn">fee: ' + clean(item.tags.fee) + '</span>' : '<span class="bw-chip warn">read fee screen</span>') +
+            '</span>';
+          button.addEventListener('click', function () { setActive(item.id, true); });
+          li.appendChild(button);
+          listEl.appendChild(li);
+        });
+      }
+
+      function updateStatus() {
+        var source = state.fallback ? 'fallback area searches' : 'OpenStreetMap ATM points';
+        var label = state.reference.label || 'selected point';
+        statusEl.innerHTML = '<strong>' + state.filtered.length + '</strong> matching results near <strong>' + clean(label) + '</strong> from ' + source + '.';
+        panelTitle.textContent = state.activeFilter === 'all' ? 'Closest ATMs' : 'Closest matching ATMs';
+        panelSub.textContent = state.fallback
+          ? 'Live data failed, so these open Google Maps area searches.'
+          : 'Tap an item for the map pin, then open it in Google Maps.';
+      }
+
+      function applyFilters() {
+        var filtered = state.all
+          .filter(matchesQuery)
+          .filter(matchesFilter)
+          .map(function (item) {
+            return Object.assign({}, item, { distance: distanceKm(state.reference, item) });
+          })
+          .sort(function (a, b) { return a.distance - b.distance; });
+        state.filtered = filtered;
+        drawMarkers(filtered);
+        renderList(filtered);
+        updateStatus();
+      }
+
+      function selectArea(key) {
+        var area = AREAS[key] || AREAS.center;
+        state.reference = area;
+        map.setView([area.lat, area.lng], area.zoom, { animate: true });
+        root.querySelectorAll('.bw-area').forEach(function (button) {
+          button.classList.toggle('active', button.getAttribute('data-area') === key);
+        });
+        applyFilters();
+      }
+
+      locateButton.addEventListener('click', function () {
+        if (!navigator.geolocation) {
+          statusEl.textContent = 'Your browser does not allow location lookup. Choose a Berlin area instead.';
+          return;
+        }
+        locateButton.disabled = true;
+        locateButton.textContent = 'Finding you...';
+        navigator.geolocation.getCurrentPosition(function (position) {
+          var point = { label: 'your location', lat: position.coords.latitude, lng: position.coords.longitude, zoom: 15 };
+          state.reference = point;
+          if (state.userMarker) map.removeLayer(state.userMarker);
+          state.userMarker = L.marker([point.lat, point.lng], {
+            icon: L.divIcon({
+              className: 'bw-user-marker-wrap',
+              html: '<div class="bw-user-marker">YOU</div>',
+              iconSize: [28, 28],
+              iconAnchor: [14, 14]
+            })
+          }).addTo(map);
+          map.setView([point.lat, point.lng], 15, { animate: true });
+          root.querySelectorAll('.bw-area').forEach(function (button) { button.classList.remove('active'); });
+          locateButton.disabled = false;
+          locateButton.textContent = 'Use my location';
+          applyFilters();
+        }, function () {
+          locateButton.disabled = false;
+          locateButton.textContent = 'Use my location';
+          statusEl.textContent = 'Location was not allowed. Choose a Berlin area instead.';
+        }, { enableHighAccuracy: true, timeout: 9000, maximumAge: 60000 });
+      });
+
+      searchInput.addEventListener('input', function () {
+        state.query = searchInput.value.trim().toLowerCase();
+        applyFilters();
+      });
+
+      root.querySelectorAll('.bw-filter').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.activeFilter = button.getAttribute('data-filter') || 'all';
+          root.querySelectorAll('.bw-filter').forEach(function (item) { item.classList.remove('active'); });
+          button.classList.add('active');
+          applyFilters();
         });
       });
 
-      render();
+      root.querySelectorAll('.bw-area').forEach(function (button) {
+        button.addEventListener('click', function () {
+          selectArea(button.getAttribute('data-area'));
+        });
+      });
+
+      loadAtms();
     })();
   </script>
-  <script src="../js/brand.js"></script>
 </body>
 </html>

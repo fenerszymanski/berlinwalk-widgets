@@ -54,17 +54,19 @@ Run date: 2026-07-04 Europe/Berlin
 
 ## Widget ideas considered
 
-1. ATM Screen Coach: user chooses card currency, ATM type, screen offer and cash need; tool gives one next move. Chosen because it solves the article's central decision at the machine.
+1. ATM Finder Map: user starts from current location or a tourist area, sees nearby ATMs, filters for bank/station/24h hints, and opens the chosen machine in Google Maps. Chosen after Yusuf feedback because visitors who need cash want a direct finder first.
 2. Cash Buffer Slider: traveller chooses day style and gets a cash amount. Rejected because it overlaps the existing daily budget calculator and is less specific.
 3. Fee Scenario Comparator: compare bank fee, operator fee and conversion markup. Rejected because exact fee math would imply precision the tool cannot know for every bank/card.
+4. ATM Screen Coach: user chooses card currency, ATM type, screen offer and cash need; tool gives one next move. Replaced because it helped with the screen decision but did not solve the immediate "find an ATM near me" tourist problem.
 
 ## Chosen tool
 
 - Tool slug: `berlin-atm-fee-checker`
 - Widget URL: `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-atm-fee-checker/`
 - Hub category: `MoneyShopping`
-- Tool type: `Guide`
-- Tool page plan: free Berlin money tool for reading ATM fees, currency conversion offers and cash-buffer decisions before withdrawing euros.
+- Tool type: `Map`
+- Public tool title: `Berlin ATM Finder`
+- Tool page plan: free Berlin money map for finding nearby cash machines from OpenStreetMap data, sorting by current location or tourist area, and opening the final ATM in Google Maps before checking the fee/currency screen.
 
 ## QA checklist targets
 

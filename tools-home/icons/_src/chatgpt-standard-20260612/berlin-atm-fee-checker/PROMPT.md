@@ -1,4 +1,4 @@
-# Berlin ATM Fee Checker Icon
+# Berlin ATM Finder Icon
 
 Generated with built-in Codex image generation on 2026-07-04. No paid API/CLI image generation.
 

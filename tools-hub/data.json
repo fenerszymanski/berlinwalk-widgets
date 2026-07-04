@@ -2589,18 +2589,23 @@
     },
     {
       "slug": "berlin-atm-fee-checker",
-      "title": "Berlin ATM Fee Checker",
-      "lead": "Read an ATM screen calmly: machine fee, currency conversion, receipt and the right euro cash buffer for your Berlin day.",
+      "title": "Berlin ATM Finder",
+      "lead": "Find nearby ATMs in Berlin, sort by your location or a tourist area, and open the calmer bank or station option in Google Maps.",
       "category": "Money",
       "hubCategory": "MoneyShopping",
-      "type": "Guide",
+      "type": "Map",
       "tags": [
         "ATM",
+        "ATM finder",
+        "ATM near me Berlin",
         "cash",
+        "cash machine Berlin",
         "withdrawal",
         "euros",
         "dynamic currency conversion",
         "fees",
+        "ATM map Berlin",
+        "bank ATM Berlin",
         "Berlin money",
         "travel money",
         "tourist tips"
@@ -2611,10 +2616,13 @@
         "cash withdrawal Berlin",
         "Berlin cash for tourists",
         "withdraw euros Berlin",
-        "dynamic currency conversion ATM"
+        "dynamic currency conversion ATM",
+        "ATM finder Berlin",
+        "ATM near me Berlin",
+        "cash machine Berlin"
       ],
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-atm-fee-checker/",
-      "embedHeight": 1300,
+      "embedHeight": 1260,
       "image": "https://static.wixstatic.com/media/5a08a3_761e6dbca79d49529d253a0739eb3136~mv2.png",
       "relatedBlogSlug": "atm-in-berlin"
     }
