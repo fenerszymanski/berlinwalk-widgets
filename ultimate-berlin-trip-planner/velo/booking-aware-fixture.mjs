@@ -19,6 +19,11 @@ const MESSAGE_IDS = {
   TODO_TRIP_PLANNER_DAY_OF: 'sales-dayof-id'
 };
 
+const EXPECTED_STAGE_MESSAGE_IDS = {
+  minus7: 'VLDvLj8',
+  minus3: 'VLDvnng'
+};
+
 function parseArgs() {
   const args = process.argv.slice(2);
   const parsed = { out: '' };
@@ -99,7 +104,7 @@ function createWixDataMock(db) {
           items = items.filter((item) => item[condition.field] === condition.value);
         }
         for (const condition of state.between) {
-          items = items.filter((item) => item[condition.field] >= condition.min && item[condition.field] <= condition.max);
+          items = items.filter((item) => item[condition.field] >= condition.min && item[condition.field] < condition.max);
         }
         return {
           items: items.slice(state.skip, state.skip + state.limit),
@@ -216,7 +221,7 @@ async function testBookedLeadSuppressesUltimateReminders() {
   assert.equal(db.sentEmails.length, 1);
 
   const salesEmail = db.sentEmails.find((email) => email.contactId === 'contact-sales');
-  assert.equal(salesEmail.messageId, 'sales-minus3-id');
+  assert.equal(salesEmail.messageId, EXPECTED_STAGE_MESSAGE_IDS.minus3);
   assert.equal(salesEmail.variables.isBooked, 'no');
   assert(!db.sentEmails.some((email) => email.contactId === 'contact-booked'));
 
@@ -240,13 +245,37 @@ async function testInactiveBookingStatusUsesSalesBranch() {
   const summary = await api.processTripPlannerDueEmails(new Date('2026-06-05T08:00:00.000Z'));
   assert.equal(summary.sent, 1);
   assert.equal(db.sentEmails.length, 1);
-  assert.equal(db.sentEmails[0].messageId, 'sales-minus3-id');
+  assert.equal(db.sentEmails[0].messageId, EXPECTED_STAGE_MESSAGE_IDS.minus3);
   assert.equal(db.sentEmails[0].variables.isBooked, 'no');
 
   return {
     bookingStatus: 'cancelled',
     messageId: db.sentEmails[0].messageId,
     isBooked: db.sentEmails[0].variables.isBooked
+  };
+}
+
+async function testMinus7UpperBoundaryCandidateIncluded() {
+  const { db, api } = createHarness();
+  db.items.push(baseLead({
+    _id: 'lead-minus7-boundary',
+    email: 'minus7-boundary@example.com',
+    contactId: 'contact-minus7-boundary',
+    arrivalDate: '2026-06-12',
+    createdAt: '2026-06-01T08:00:00.000Z',
+    lastSignupAt: '2026-06-01T08:00:00.000Z'
+  }));
+
+  const summary = await api.processTripPlannerDueEmails(new Date('2026-06-05T08:00:00.000Z'));
+  assert.equal(summary.sent, 1);
+  assert.equal(db.sentEmails.length, 1);
+  assert.equal(db.sentEmails[0].messageId, EXPECTED_STAGE_MESSAGE_IDS.minus7);
+  assert.equal(db.sentEmails[0].variables.stage, 'minus7');
+
+  return {
+    sent: summary.sent,
+    messageId: db.sentEmails[0].messageId,
+    stage: db.sentEmails[0].variables.stage
   };
 }
 
@@ -307,6 +336,7 @@ async function testBookingMarkerScopesByArrivalDate() {
 const TESTS = [
   ['booked leads suppress Ultimate reminders', testBookedLeadSuppressesUltimateReminders],
   ['cancelled booked markers use the sales branch', testInactiveBookingStatusUsesSalesBranch],
+  ['minus7 includes the upper-bound arrival date', testMinus7UpperBoundaryCandidateIncluded],
   ['self-reported booked leads suppress scheduled reminders', testSelfReportedBookedSuppressesScheduledReminders],
   ['booking marker respects arrivalDate scope', testBookingMarkerScopesByArrivalDate]
 ];

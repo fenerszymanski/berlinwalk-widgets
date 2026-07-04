@@ -325,7 +325,7 @@
       <aside class="bw-status">
         <div>
           <p class="bw-kicker">Generated</p>
-          <p><strong>2026-06-17 22:54:33</strong></p>
+          <p><strong>2026-07-04 19:14:12</strong></p>
           <p class="bw-footer-note">Source folder: <code>ultimate-berlin-trip-planner/velo/</code></p>
         </div>
         <div class="bw-alert is-good">
@@ -512,8 +512,8 @@ export async function subscribeEmailMarketing(email) {
       <p class="bw-target">Create this backend file in Wix Developer Tools.</p>
       <p class="bw-note">Paste the full source into a new Backend file named tripPlannerFunnel.js.</p>
       <div class="bw-meta">
-        <span>1190 lines</span>
-        <span>38.4 KB</span>
+        <span>1192 lines</span>
+        <span>38.6 KB</span>
         <span>tripPlannerFunnel.js</span>
       </div>
       <textarea id="source-funnel" readonly spellcheck="false">import wixData from 'wix-data';
@@ -1614,7 +1614,9 @@ function stageDueForLead(lead, stage, berlinToday, berlinHour) {
 }
 
 async function fetchDueCandidateLeads(berlinToday) {
-  const latestArrivalDate = addDays(berlinToday, 7);
+  // Wix Data between() is lower-inclusive and upper-exclusive. Use +8 so
+  // arrivalDate = today + 7 is included for the minus7 reminder.
+  const latestArrivalDate = addDays(berlinToday, 8);
   let skip = 0;
   let items = [];
 

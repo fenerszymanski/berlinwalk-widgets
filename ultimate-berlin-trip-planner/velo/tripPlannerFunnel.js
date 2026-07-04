@@ -1096,7 +1096,9 @@ function stageDueForLead(lead, stage, berlinToday, berlinHour) {
 }
 
 async function fetchDueCandidateLeads(berlinToday) {
-  const latestArrivalDate = addDays(berlinToday, 7);
+  // Wix Data between() is lower-inclusive and upper-exclusive. Use +8 so
+  // arrivalDate = today + 7 is included for the minus7 reminder.
+  const latestArrivalDate = addDays(berlinToday, 8);
   let skip = 0;
   let items = [];
 
