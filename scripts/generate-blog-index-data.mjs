@@ -529,6 +529,7 @@ function relatedToolSlugFor(post) {
   if (/(berlin-public-transport-ferries|public transport ferries|bvg ferry|f10 ferry|wannsee ferry|f24 rowboat)/.test(s)) return 'berlin-public-transport-ferry-picker';
   if (/(berlin-accessibility|step-free|step free|wheelchair|accessible berlin|accessibility)/.test(s)) return 'berlin-step-free-planner';
   if (/(berlin-bike-lanes-tourists|bike lanes|bike-lane|cycle lane|red bike lane|cycling rules)/.test(s)) return 'berlin-bike-lane-reflex-checker';
+  if (/(atm-in-berlin|atm|cash withdrawal|withdraw euros|cash machine|dynamic currency conversion)/.test(s)) return 'berlin-atm-fee-checker';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(berlin-restaurant-phrases|restaurant phrases|german restaurant phrases|ordering food|ask for the bill|berlin cafe phrases)/.test(s)) return 'berlin-restaurant-phrase-card';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';

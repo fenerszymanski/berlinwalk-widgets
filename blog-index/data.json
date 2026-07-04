@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-04T07:02:29.912Z",
+  "updatedAt": "2026-07-04T09:25:08.658Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 152,
@@ -1577,6 +1577,23 @@
   ],
   "latest": [
     {
+      "title": "ATM in Berlin: Cash, Fees and Safer Withdrawal Tips for Tourists",
+      "slug": "atm-in-berlin",
+      "path": "/post/atm-in-berlin",
+      "url": "https://www.berlinwalk.com/post/atm-in-berlin",
+      "excerpt": "A practical ATM in Berlin guide for tourists: cash, bank machines, withdrawal fees, dynamic currency conversion and how much euro cash to carry.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-04T09:23:00.778Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_59426ea63bfc429abc11d6452760ae45~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-atm-in-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_59426ea63bfc429abc11d6452760ae45~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-atm-in-berlin-cover.jpg",
+      "alt": "Tourist using an ATM in Berlin, checking the screen before withdrawing euros",
+      "relatedToolSlug": "berlin-atm-fee-checker"
+    },
+    {
       "title": "Bebelplatz Berlin: Book-Burning Memorial, Empty Library and What Tourists Miss",
       "slug": "bebelplatz-berlin",
       "path": "/post/bebelplatz-berlin",
@@ -1762,26 +1779,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_bd4e8436f80b47a08b6657bd52f9b4e0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-plug-adapter-01-berlin-plug-adapter-cover.jpg",
       "alt": "Berlin hotel desk with a Type F wall socket, travel plug adapter, phone, charger and power bank",
       "relatedToolSlug": "berlin-plug-adapter-checker"
-    },
-    {
-      "title": "Hohenzollern Berlin: The Royal Family Behind the City's Grandest Streets",
-      "slug": "hohenzollern-berlin",
-      "path": "/post/hohenzollern-berlin",
-      "url": "https://www.berlinwalk.com/post/hohenzollern-berlin",
-      "excerpt": "A walking guide to the Hohenzollern footprint in Berlin: palace site, cathedral crypt, royal boulevard, museums and the places where Prussian power still shapes the city.",
-      "category": "Berlin History",
-      "categorySlug": "berlin-history",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "8 min read",
-      "publishedDate": "2026-06-29T19:58:49.532Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_207da8cab01648dea2f634ecdb06c22b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenzollern-berlin-01-humboldt-forum-royal-site-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_207da8cab01648dea2f634ecdb06c22b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/hohenzollern-berlin-01-humboldt-forum-royal-site-cover.jpg",
-      "alt": "Humboldt Forum palace-style architecture in central Berlin, the main starting point for reading Hohenzollern Berlin on foot",
-      "relatedToolSlug": "hohenzollern-berlin-footprint-map"
     }
   ],
   "allPosts": [
+    {
+      "title": "ATM in Berlin: Cash, Fees and Safer Withdrawal Tips for Tourists",
+      "slug": "atm-in-berlin",
+      "path": "/post/atm-in-berlin",
+      "url": "https://www.berlinwalk.com/post/atm-in-berlin",
+      "excerpt": "A practical ATM in Berlin guide for tourists: cash, bank machines, withdrawal fees, dynamic currency conversion and how much euro cash to carry.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-04T09:23:00.778Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_59426ea63bfc429abc11d6452760ae45~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-atm-in-berlin-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_59426ea63bfc429abc11d6452760ae45~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-atm-in-berlin-cover.jpg",
+      "alt": "Tourist using an ATM in Berlin, checking the screen before withdrawing euros",
+      "relatedToolSlug": "berlin-atm-fee-checker"
+    },
     {
       "title": "Bebelplatz Berlin: Book-Burning Memorial, Empty Library and What Tourists Miss",
       "slug": "bebelplatz-berlin",
@@ -4313,23 +4330,6 @@
       "image": "https://static.wixstatic.com/media/5a08a3_96baa8ef90154861b51d758e6cf0a9b0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_8008-min.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_96baa8ef90154861b51d758e6cf0a9b0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_8008-min.jpg",
       "alt": "Neptune Fountain statue with St Marys Church roof behind it in central Berlin",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Rotes Rathaus: Why Berlin's City Hall Is Red (And It Has Nothing to Do With Communism)",
-      "slug": "rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism",
-      "path": "/post/rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism",
-      "url": "https://www.berlinwalk.com/post/rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism",
-      "excerpt": "The Rotes Rathaus is not red because of communism. The real story starts with brick, 1860s civic pride and a building that later survived Berlin division.",
-      "category": "Berlin Myths",
-      "categorySlug": "berlin-myths",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "9 min read",
-      "publishedDate": "2026-02-28T21:25:08.788Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_df4933cbba354030adbd3433c260eb65~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinRotesRathausCityHall.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_df4933cbba354030adbd3433c260eb65~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinRotesRathausCityHall.jpg",
-      "alt": "The red-brick facade and tower of the Rotes Rathaus in Berlin",
       "relatedToolSlug": ""
     },
     {
