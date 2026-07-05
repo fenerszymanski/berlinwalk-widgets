@@ -880,7 +880,7 @@ class BWHeaderElement extends HTMLElement {
                 <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
-                    Products <span class="bw-badge-new">New</span> <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                    Products <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul class="bw-header-submenu" role="menu">
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan <span class="bw-badge-new">New</span></a></li>
@@ -940,7 +940,7 @@ class BWHeaderElement extends HTMLElement {
               <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
 
               <div class="bw-header-mobile-section">
-                <div class="bw-header-mobile-section-label">Products <span class="bw-badge-new">New</span></div>
+                <div class="bw-header-mobile-section-label">Products</div>
                 <a href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan <span class="bw-badge-new">New</span></a>
               </div>
 
