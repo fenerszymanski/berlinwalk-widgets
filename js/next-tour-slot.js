@@ -1,6 +1,7 @@
 (function (root, factory) {
   var api = factory();
   root.bwNextTourSlot = api.bwNextTourSlot;
+  root.bwNextTourSlots = api.bwNextTourSlots;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   var TIME_ZONE = 'Europe/Berlin';
@@ -73,38 +74,73 @@
     return new Date();
   }
 
-  function findTarget(now) {
-    var today = slotInfo(now);
-    if (isTourDay(today.weekdayShort) && beforeSameDayCutoff(today)) return today;
-
-    for (var offset = 1; offset <= 8; offset += 1) {
-      var candidate = slotInfo(new Date(now.getTime() + (offset * DAY_MS)));
-      if (isTourDay(candidate.weekdayShort)) return candidate;
+  function relativeLabelFor(target, today, tomorrow) {
+    if (target.dateKey === today.dateKey) {
+      return 'Today (' + target.weekdayShort + ')';
     }
-
-    return today;
+    if (target.dateKey === tomorrow.dateKey) {
+      return 'Tomorrow (' + target.weekdayShort + ')';
+    }
+    return target.weekdayLabel;
   }
 
-  function bwNextTourSlot(input) {
+  function normalizeCount(input, fallback) {
+    var value = input && typeof input.count === 'number' ? input.count : fallback;
+    if (!Number.isFinite(value) || value < 1) return 1;
+    return Math.floor(value);
+  }
+
+  function findTargets(now, count) {
+    var today = slotInfo(now);
+    var targets = [];
+    var seen = {};
+
+    if (isTourDay(today.weekdayShort) && beforeSameDayCutoff(today)) {
+      targets.push(today);
+      seen[today.dateKey] = true;
+    }
+
+    for (var offset = 1; offset <= 14 && targets.length < count; offset += 1) {
+      var candidate = slotInfo(new Date(now.getTime() + (offset * DAY_MS)));
+      if (!isTourDay(candidate.weekdayShort) || seen[candidate.dateKey]) continue;
+      targets.push(candidate);
+      seen[candidate.dateKey] = true;
+    }
+
+    if (!targets.length) targets.push(today);
+    return targets;
+  }
+
+  function bwNextTourSlots(input, fallbackCount) {
     var now = normalizeNow(input);
     var today = slotInfo(now);
     var tomorrow = slotInfo(new Date(now.getTime() + DAY_MS));
-    var target = findTarget(now);
-    var relativeLabel = target.weekdayLabel;
+    var count = normalizeCount(input, fallbackCount || 1);
 
-    if (target.dateKey === today.dateKey) {
-      relativeLabel = 'Today (' + target.weekdayShort + ')';
-    } else if (target.dateKey === tomorrow.dateKey) {
-      relativeLabel = 'Tomorrow (' + target.weekdayShort + ')';
-    }
+    return findTargets(now, count).map(function (target) {
+      return {
+        dateKey: target.dateKey,
+        weekdayShort: target.weekdayShort,
+        weekdayLabel: target.weekdayLabel,
+        relativeLabel: relativeLabelFor(target, today, tomorrow),
+        startLabel: TOUR_START_LABEL,
+      };
+    });
+  }
 
+  function bwNextTourSlot(input) {
+    var target = bwNextTourSlots(input, 1)[0];
     return {
       dateKey: target.dateKey,
+      weekdayShort: target.weekdayShort,
       weekdayLabel: target.weekdayLabel,
-      relativeLabel: relativeLabel,
+      relativeLabel: target.relativeLabel,
       startLabel: TOUR_START_LABEL,
     };
   }
 
-  return { bwNextTourSlot: bwNextTourSlot };
+  return {
+    bwNextTourSlot: bwNextTourSlot,
+    bwNextTourSlots: bwNextTourSlots,
+  };
 });
