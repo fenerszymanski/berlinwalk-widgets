@@ -167,7 +167,9 @@
   "bebelplatz-berlin": "bebelplatz-berlin",
   "atm-in-berlin": "atm-in-berlin",
   "holocaust-memorial-berlin": "holocaust-memorial-berlin",
-  "berlin-train-stations": "berlin-train-stations"
+  "berlin-train-stations": "berlin-train-stations",
+  "berlin-before-hotel-check-in": "berlin-before-hotel-check-in",
+  "berlin-before-hotel-check-in-what-to-do-with-luggage-and-time": "berlin-before-hotel-check-in"
 };
 
   var SCHEMAS = {
@@ -7997,6 +7999,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Normal journeys inside Berlin usually use AB. BER Airport and Potsdam are in zone C, so trips there normally need ABC or a valid zone C extension."
+        }
+      }
+    ]
+  },
+  "berlin-before-hotel-check-in": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What should I do in Berlin before hotel check-in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ask your hotel whether it can store luggage before check-in, then keep the first plan close: food, a short walk, one simple sight and a return buffer. Do not drag luggage through a full sightseeing route."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Berlin hotels store luggage before check-in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Many hotels can hold luggage before the room is ready, but it is not guaranteed. Ask your accommodation before arrival, especially if it is an apartment, self-check-in stay, small guesthouse, Sunday arrival or late-night arrival."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I leave luggage in Berlin before check-in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with the hotel. If that does not work, use station lockers, city luggage-storage services or BER Airport baggage storage when the location fits your route. Berlin.de lists lockers and storage options, and DB lists lockers at Berlin Hauptbahnhof."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it worth going sightseeing with a suitcase in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually no. A small cabin bag can work for a cafe or short walk, but a rolling suitcase makes museums, cobblestones, station stairs, cafes and rain much harder. Store the bag first when possible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is a good first area before check-in in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "After bag drop, choose one easy area near your route: Alexanderplatz and the World Clock, Museum Island exteriors, Hackescher Markt, a short Spree walk or the neighborhood around your hotel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I join the BerlinWalk tour before hotel check-in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if your luggage is stored and the timing works. The tour lasts about 2 hours, starts at the World Clock on Alexanderplatz and ends near Hackescher Markt, so it can be a useful first-day orientation anchor."
         }
       }
     ]

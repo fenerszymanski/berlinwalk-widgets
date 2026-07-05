@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Check-In Gap Planner | BerlinWalk</title>
+  <meta name="description" content="Plan the hours before Berlin hotel check-in: luggage first, food, easy walk, rest, or a safer return buffer.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --ink: #212121;
+      --red: #E63946;
+      --line: rgba(33, 33, 33, .13);
+      --shadow: 0 18px 45px rgba(27, 94, 32, .16);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.45;
+    }
+
+    .bw-gap {
+      max-width: 980px;
+      margin: 0 auto;
+      background: #fffdf7;
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr);
+      min-height: 340px;
+      background: #0f3d19;
+      color: #fff;
+    }
+
+    .hero-copy {
+      padding: clamp(24px, 4vw, 44px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .kicker {
+      width: fit-content;
+      padding: 7px 10px;
+      background: var(--yellow);
+      color: var(--green);
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 640px;
+      font-size: clamp(31px, 4vw, 48px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 610px;
+      color: rgba(255,255,255,.86);
+      font-size: 16px;
+    }
+
+    .hero-visual {
+      min-height: 340px;
+      background:
+        linear-gradient(90deg, rgba(15, 61, 25, .18), rgba(15, 61, 25, .04)),
+        url("./assets/check-in-gap-hero.jpg") center / cover no-repeat;
+      border-left: 1px solid rgba(255,255,255,.18);
+    }
+
+    .panel {
+      padding: clamp(18px, 3vw, 30px);
+    }
+
+    .planner {
+      display: grid;
+      grid-template-columns: minmax(0, .95fr) minmax(310px, 1.05fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .controls {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      padding: 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .group {
+      margin-bottom: 18px;
+    }
+
+    .group:last-child { margin-bottom: 0; }
+
+    .group-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    button.choice {
+      min-height: 46px;
+      padding: 10px 11px;
+      border: 1px solid rgba(27, 94, 32, .2);
+      border-radius: 6px;
+      background: #fbfbf4;
+      color: var(--ink);
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    button.choice:hover {
+      transform: translateY(-1px);
+      border-color: var(--lime);
+      background: #f4f8ed;
+    }
+
+    button.choice[aria-pressed="true"] {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+    }
+
+    .result {
+      border: 1px solid rgba(27, 94, 32, .18);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faef 100%);
+      padding: 20px;
+      min-height: 520px;
+      box-shadow: var(--shadow);
+    }
+
+    .result-top {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 13px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .signal {
+      width: 52px;
+      height: 52px;
+      border-radius: 8px;
+      background: var(--yellow);
+      color: var(--green);
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      font-weight: 900;
+      box-shadow: inset 0 -6px 0 rgba(27, 94, 32, .08);
+    }
+
+    .result h2 {
+      margin: 0 0 4px;
+      color: var(--green);
+      font-size: 22px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .result .lede {
+      margin: 0;
+      font-size: 14px;
+      color: #4e4e4e;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 9px;
+      margin: 16px 0;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 74px 1fr;
+      gap: 12px;
+      padding: 12px;
+      border: 1px solid rgba(33,33,33,.1);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .time {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 14px;
+    }
+
+    .step span {
+      display: block;
+      color: #555;
+      font-size: 13px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .chip {
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: rgba(124, 179, 66, .15);
+      color: #285b20;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .warning {
+      margin: 14px 0 0;
+      padding: 12px;
+      border-left: 4px solid var(--red);
+      background: rgba(230, 57, 70, .07);
+      border-radius: 0 6px 6px 0;
+      color: #4d2429;
+      font-size: 13px;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .links a {
+      display: block;
+      padding: 10px 11px;
+      border-radius: 6px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .links a.secondary {
+      background: var(--yellow);
+      color: var(--green);
+    }
+
+    .source-note {
+      margin: 18px 0 0;
+      color: #6b6b6b;
+      font-size: 11px;
+    }
+
+    @media (max-width: 760px) {
+      .hero,
+      .planner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        order: -1;
+        min-height: 220px;
+        border-left: 0;
+        border-bottom: 1px solid rgba(255,255,255,.18);
+      }
+
+      .options,
+      .links {
+        grid-template-columns: 1fr;
+      }
+
+      .result {
+        min-height: auto;
+      }
+
+      .step {
+        grid-template-columns: 62px 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="bw-gap">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="kicker">Berlin arrival tool</div>
+        <h1>Check-in is later. What is the first move?</h1>
+        <p>Pick your arrival pressure and get a realistic Berlin plan for luggage, food, a short walk and the return buffer before your room is ready.</p>
+      </div>
+      <div class="hero-visual" aria-hidden="true"></div>
+    </section>
+
+    <section class="panel">
+      <div class="planner">
+        <form class="controls" aria-label="Berlin check-in gap planner controls">
+          <div class="group" data-group="arrival">
+            <span class="group-label">Where are you starting?</span>
+            <div class="options">
+              <button type="button" class="choice" data-value="hotel" aria-pressed="true">Near the hotel</button>
+              <button type="button" class="choice" data-value="hbf" aria-pressed="false">Hauptbahnhof</button>
+              <button type="button" class="choice" data-value="ber" aria-pressed="false">BER Airport</button>
+              <button type="button" class="choice" data-value="alex" aria-pressed="false">Alexanderplatz</button>
+            </div>
+          </div>
+
+          <div class="group" data-group="bags">
+            <span class="group-label">What about luggage?</span>
+            <div class="options">
+              <button type="button" class="choice" data-value="stored" aria-pressed="true">Bags already stored</button>
+              <button type="button" class="choice" data-value="carry" aria-pressed="false">Small cabin bag</button>
+              <button type="button" class="choice" data-value="heavy" aria-pressed="false">Rolling suitcase</button>
+              <button type="button" class="choice" data-value="none" aria-pressed="false">No luggage</button>
+            </div>
+          </div>
+
+          <div class="group" data-group="time">
+            <span class="group-label">How long until room ready?</span>
+            <div class="options">
+              <button type="button" class="choice" data-value="short" aria-pressed="false">Under 2 hours</button>
+              <button type="button" class="choice" data-value="medium" aria-pressed="true">2 to 4 hours</button>
+              <button type="button" class="choice" data-value="long" aria-pressed="false">4+ hours</button>
+              <button type="button" class="choice" data-value="late" aria-pressed="false">Late evening</button>
+            </div>
+          </div>
+
+          <div class="group" data-group="state">
+            <span class="group-label">How is the group doing?</span>
+            <div class="options">
+              <button type="button" class="choice" data-value="tired" aria-pressed="false">Tired or jet-lagged</button>
+              <button type="button" class="choice" data-value="hungry" aria-pressed="true">Hungry first</button>
+              <button type="button" class="choice" data-value="ready" aria-pressed="false">Ready to walk</button>
+              <button type="button" class="choice" data-value="rain" aria-pressed="false">Rain or cold</button>
+            </div>
+          </div>
+        </form>
+
+        <section class="result" aria-live="polite">
+          <div class="result-top">
+            <div class="signal" id="signal">1</div>
+            <div>
+              <h2 id="resultTitle">Store bags, then eat close by</h2>
+              <p class="lede" id="resultLede">Your best Berlin check-in gap plan is not ambitious. It protects the room reset.</p>
+            </div>
+          </div>
+          <div class="chips" id="chips"></div>
+          <div class="timeline" id="timeline"></div>
+          <p class="warning" id="warning"></p>
+          <div class="links">
+            <a id="mapLink" href="https://www.google.com/maps/search/?api=1&query=Berlin%20Hauptbahnhof%20lockers" target="_blank" rel="noopener">Open map idea</a>
+            <a class="secondary" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=widget&utm_medium=check_in_gap&utm_campaign=berlin_before_hotel_check_in" target="_blank" rel="noopener">Check tour time</a>
+          </div>
+          <p class="source-note">Use this as a planning shortcut. Hotel storage, locker availability and airport services can change, so check the live provider before you travel.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function () {
+      var state = {
+        arrival: 'hotel',
+        bags: 'stored',
+        time: 'medium',
+        state: 'hungry'
+      };
+
+      var data = {
+        hotel: {
+          title: 'Ask the hotel, then start small',
+          lede: 'If the hotel can hold bags, the rest of the day gets much easier.',
+          map: 'https://www.google.com/maps/search/?api=1&query=cafe%20near%20my%20hotel%20Berlin',
+          steps: [
+            ['Now', 'Go to the hotel first', 'Ask for luggage storage before check-in. Keep passport, wallet and medicine with you.'],
+            ['Next', 'Choose food or a short walk nearby', 'Do not cross the city before you have a room base.'],
+            ['Return', 'Come back before the room-ready time', 'A 20 to 30 minute return buffer protects the first shower and reset.']
+          ]
+        },
+        hbf: {
+          title: 'Make Hauptbahnhof a transfer, not the day',
+          lede: 'Hauptbahnhof is useful, but dragging bags through the first sights is rarely worth it.',
+          map: 'https://www.google.com/maps/search/?api=1&query=Berlin%20Hauptbahnhof%20lockers',
+          steps: [
+            ['Now', 'Check hotel route or station lockers', 'If the hotel stores bags, go there. If not, look for lockers before leaving the station.'],
+            ['Next', 'Eat before the sightseeing plan', 'A station or nearby cafe reset is better than starting hungry.'],
+            ['Then', 'Use one central area only', 'Try Spree, Reichstag edge, Museum Island exteriors or Hackescher Markt, not all of them.']
+          ]
+        },
+        ber: {
+          title: 'Get luggage into the city if you sleep in the city',
+          lede: 'Airport storage can help, but returning to BER just for bags usually wastes the day.',
+          map: 'https://www.google.com/maps/search/?api=1&query=Berlin%20hotel%20luggage%20storage',
+          steps: [
+            ['Arrival', 'Leave BER with a luggage plan', 'If the hotel can store bags, go there. If not, choose a city storage point near your later route.'],
+            ['Midday', 'Keep the first area close to the room', 'Food, a short walk and one simple sight are enough after a flight.'],
+            ['Before room', 'Protect energy', 'Return early if the flight was rough. Berlin is better after a shower.']
+          ]
+        },
+        alex: {
+          title: 'Use Alexanderplatz as a small first loop',
+          lede: 'This works best after bags are gone or when luggage is genuinely light.',
+          map: 'https://www.google.com/maps/search/?api=1&query=World%20Clock%20Alexanderplatz%20Berlin',
+          steps: [
+            ['Start', 'World Clock and St. Mary’s Church', 'Keep the first move visual and simple.'],
+            ['Next', 'Museum Island edges or Hackescher Markt', 'Pick one direction and stay close to S-Bahn or U-Bahn.'],
+            ['Return', 'Stop before the day turns heavy', 'The room reset matters more than one extra landmark.']
+          ]
+        }
+      };
+
+      function buildResult() {
+        var base = data[state.arrival];
+        var title = base.title;
+        var lede = base.lede;
+        var warning = 'Do not book a tight timed attraction before you know where the luggage will be.';
+        var chips = [];
+        var steps = base.steps.slice();
+
+        if (state.bags === 'heavy') {
+          title = 'Solve the rolling suitcase first';
+          lede = 'With a full suitcase, Berlin before hotel check-in is a luggage problem before it is a sightseeing problem.';
+          chips.push('Bag-first plan');
+          warning = 'Avoid museums, long cobblestone walks and crowded cafes until the suitcase is stored.';
+        } else if (state.bags === 'carry') {
+          chips.push('Light luggage');
+          warning = 'A cabin bag is manageable for food and a short walk, but not for a museum-heavy day.';
+        } else if (state.bags === 'none') {
+          chips.push('Free to walk');
+          warning = 'You can be more flexible, but still return before fatigue makes check-in feel late.';
+        } else {
+          chips.push('Bags stored');
+        }
+
+        if (state.time === 'short') {
+          chips.push('Short gap');
+          steps = [
+            ['Now', 'Stay close', 'Food, coffee, hotel neighborhood walk or a nearby park is enough.'],
+            ['Soon', 'Return early', 'Do not spend the whole gap in transit.'],
+            ['Room', 'Reset properly', 'Shower, charge phone and restart the day lighter.']
+          ];
+        } else if (state.time === 'long') {
+          chips.push('4+ hours');
+          steps.push(['Extra', 'Add one real anchor', 'After food and luggage, add the World Clock, Museum Island exteriors, Hackescher Markt or the walking tour if timing fits.']);
+        } else if (state.time === 'late') {
+          chips.push('Late room');
+          warning = 'For a late-evening room, prioritize storage, food, phone charge and a calm indoor fallback.';
+        } else {
+          chips.push('2 to 4 hours');
+        }
+
+        if (state.state === 'tired') {
+          chips.push('Low energy');
+          title = 'Make the day smaller';
+          lede = 'A tired arrival needs food, luggage storage and daylight, not a perfect itinerary.';
+        } else if (state.state === 'hungry') {
+          chips.push('Food first');
+        } else if (state.state === 'ready') {
+          chips.push('Walk-ready');
+        } else if (state.state === 'rain') {
+          chips.push('Weather backup');
+          warning = 'Rain makes luggage worse. Choose a cafe, hotel lobby, station storage or indoor stop before a long walk.';
+        }
+
+        return { title: title, lede: lede, warning: warning, chips: chips, steps: steps, map: base.map };
+      }
+
+      function render() {
+        var result = buildResult();
+        document.getElementById('resultTitle').textContent = result.title;
+        document.getElementById('resultLede').textContent = result.lede;
+        document.getElementById('warning').textContent = result.warning;
+        document.getElementById('mapLink').href = result.map;
+        document.getElementById('signal').textContent = state.bags === 'heavy' ? '!' : '1';
+
+        var chips = document.getElementById('chips');
+        chips.innerHTML = '';
+        result.chips.forEach(function (text) {
+          var chip = document.createElement('span');
+          chip.className = 'chip';
+          chip.textContent = text;
+          chips.appendChild(chip);
+        });
+
+        var timeline = document.getElementById('timeline');
+        timeline.innerHTML = '';
+        result.steps.forEach(function (step) {
+          var el = document.createElement('div');
+          el.className = 'step';
+          el.innerHTML = '<div class="time"></div><div><strong></strong><span></span></div>';
+          el.querySelector('.time').textContent = step[0];
+          el.querySelector('strong').textContent = step[1];
+          el.querySelector('span').textContent = step[2];
+          timeline.appendChild(el);
+        });
+
+        if (window.BWBrand && typeof window.BWBrand.resize === 'function') {
+          window.BWBrand.resize();
+        }
+      }
+
+      document.querySelectorAll('.group').forEach(function (group) {
+        group.addEventListener('click', function (event) {
+          var button = event.target.closest('button.choice');
+          if (!button) return;
+          var key = group.getAttribute('data-group');
+          state[key] = button.getAttribute('data-value');
+          group.querySelectorAll('button.choice').forEach(function (btn) {
+            btn.setAttribute('aria-pressed', btn === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</body>
+</html>

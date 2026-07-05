@@ -1,0 +1,18 @@
+{
+  "width": 390,
+  "height": 1100,
+  "scrollHeight": 2664,
+  "h1": "Check-in is later. What is the first move?",
+  "result": "Make the day smaller",
+  "pressed": [
+    "BER Airport",
+    "Rolling suitcase",
+    "4+ hours",
+    "Tired or jet-lagged"
+  ],
+  "overflow": [],
+  "heroBackground": "linear-gradient(90deg, rgba(15, 61, 25, 0.18), rgba(15, 61, 25, 0.04)), url(\"http://127.0.0.1:8787/berlin-check-in-gap-planner/assets/check-in-gap-hero.jpg\")",
+  "heroLoaded": true,
+  "hasAttribution": true,
+  "consoleMessages": []
+}
