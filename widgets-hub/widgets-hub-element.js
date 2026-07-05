@@ -752,7 +752,7 @@ class BWWidgetsHubElement extends HTMLElement {
   _isVisibleTool(tool) {
     if (!tool || !tool.widgetUrl) return false;
     const status = String(tool.status || '').toLowerCase();
-    return tool.hidden !== true && tool.published !== false && status !== 'draft';
+    return tool.hidden !== true && tool.embedHidden !== true && tool.published !== false && status !== 'draft';
   }
 
   _renderWidgetCard(tool) {

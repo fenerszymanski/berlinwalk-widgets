@@ -648,7 +648,7 @@
 
       function isVisibleTool(tool) {
         var status = String((tool && tool.status) || '').toLowerCase();
-        return Boolean(tool && tool.widgetUrl && tool.hidden !== true && tool.published !== false && status !== 'draft');
+        return Boolean(tool && tool.widgetUrl && tool.hidden !== true && tool.embedHidden !== true && tool.published !== false && status !== 'draft');
       }
 
       // Wrapper-only themes for the embed snippet. The iframe content keeps

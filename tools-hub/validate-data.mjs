@@ -64,7 +64,7 @@ for (const tool of data.tools || []) {
   if (!Array.isArray(tool.aliases)) fail(`${slug} aliases must be an array.`);
 
   const status = String(tool.status || '').toLowerCase();
-  const visible = Boolean(tool.widgetUrl) && tool.hidden !== true && tool.published !== false && status !== 'draft';
+  const visible = Boolean(tool.widgetUrl) && tool.hidden !== true && tool.embedHidden !== true && tool.published !== false && status !== 'draft';
   if (visible) {
     visibleCount += 1;
     visibleCounts.set(tool.hubCategory, (visibleCounts.get(tool.hubCategory) || 0) + 1);
