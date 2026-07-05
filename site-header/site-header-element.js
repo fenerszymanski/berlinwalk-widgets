@@ -861,7 +861,6 @@ class BWHeaderElement extends HTMLElement {
                 <li><a href="${BW_HEADER_LINKS.tour}">Tour</a></li>
                 <li><a href="${BW_HEADER_LINKS.guide}">The Guide</a></li>
                 <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
-                <li><a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a></li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
                     Games <span class="bw-header-caret" aria-hidden="true">⌄</span>
@@ -879,6 +878,7 @@ class BWHeaderElement extends HTMLElement {
                     Resources <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul class="bw-header-submenu" role="menu">
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a></li>
@@ -913,7 +913,6 @@ class BWHeaderElement extends HTMLElement {
               <a href="${BW_HEADER_LINKS.tour}">Tour</a>
               <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
               <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
-              <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a>
 
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Games</div>
@@ -926,6 +925,7 @@ class BWHeaderElement extends HTMLElement {
 
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Resources</div>
+                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
                 <a href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a>
