@@ -878,7 +878,7 @@ class BWHeaderElement extends HTMLElement {
                     Resources <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul class="bw-header-submenu" role="menu">
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a></li>
@@ -925,7 +925,7 @@ class BWHeaderElement extends HTMLElement {
 
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Resources</div>
-                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner<span class="bw-badge-new">NEW</span></a>
+                <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
                 <a href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a>

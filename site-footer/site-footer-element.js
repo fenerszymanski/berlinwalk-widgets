@@ -540,10 +540,7 @@ class BWSiteFooterElement extends HTMLElement {
         <h3>${this._escapeHtml(title)}</h3>
         <ul class="bw-footer-links">
           ${links.map(([label, href]) => {
-            var isPlanner = href.indexOf('berlin-trip-planner') !== -1;
-            var labelHtml = isPlanner 
-              ? this._escapeHtml(label) + '<span class="bw-badge-new">NEW</span>' 
-              : this._escapeHtml(label);
+            var labelHtml = this._escapeHtml(label);
             return '<li><a href="' + this._escapeAttribute(href) + '">' + labelHtml + '</a></li>';
           }).join('')}
         </ul>
