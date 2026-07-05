@@ -20,6 +20,12 @@ anchor now swap with the nearest true outdoor-safe day (`wall`, `history`,
 gets a visible opening warning and the route starts with the open-air history
 fallback. Unlocked day cards now render Sunday/Monday/holiday notes directly.
 
+Update 2026-07-05: Wave 1 copy/input pass made `Potsdam day trip` a visible
+conditional interest for 4+ day trips when arrival is not evening, and filters
+it out automatically when the trip is too short or too late. Core itinerary and
+tour-framework copy now gives one main anchor first, with fallback language
+only when opening/weather/energy makes it necessary.
+
 ## 1. User Inputs
 
 ### Visible inputs
@@ -27,13 +33,13 @@ fallback. Unlocked day cards now render Sunday/Monday/holiday notes directly.
 | Field | Current options | Notes to review |
 |---|---|---|
 | Arrival date | `YYYY-MM-DD` | Drives weather, opening-day warnings, tour day, season. |
-| Trip length | `1` to `7` days | Potsdam is currently automatic for longer trips, not visible as a user choice. |
+| Trip length | `1` to `7` days | Controls whether the conditional Potsdam interest is visible. |
 | Arrival time | `Before 09:00`, `09:00-10:00`, `10:00-14:30`, `14:30-18:00`, `After 18:00` | Used heavily for Day 1 and tour slot eligibility. |
 | Arrival point | `BER Airport`, `Hauptbahnhof`, `Alexanderplatz`, `Hotel/Airbnb`, `Car / rental` | BER and car make same-day tour stricter. |
 | Stay area | `Mitte / Alexanderplatz`, `Kreuzberg / Friedrichshain`, `Prenzlauer Berg`, `Charlottenburg / West`, `Not sure yet` | Used for base logic, food/dinner, first-day fallback. |
 | Who is traveling | `Solo`, `Couple / friends`, `Family`, `Older / slower` | Family/older/slower creates slower rhythm and breaks. |
 | First time in Berlin? | `Yes`, `No`, `Long time ago` | First timers get more core context; repeat visitors get local/food earlier. |
-| Top interests | `History`, `Berlin Wall / Cold War`, `Museums`, `Food`, `Nightlife`, `Free / low budget` | No visible `Potsdam / day trip` option yet. |
+| Top interests | `History`, `Berlin Wall / Cold War`, `Museums`, `Food`, `Nightlife`, `Free / low budget`, conditional `Potsdam day trip` | Potsdam appears only on 4+ day trips when arrival is not evening. |
 | Trip mode | `Low budget`, `Smart spend`, `Comfort` | Low budget favors free anchors; comfort/reservations push museum/timed-entry checks. |
 | Plan needs | `Rain backup`, `Low walking / breaks`, `Photo-friendly route`, `Timed entry planning` | Rain/free/covered backup and slower pace rules live here. |
 | Pace | `Gentle`, `Balanced`, `Packed` | Gentle adds coffee/rest; packed can add nearby options but still area-based. |
@@ -143,7 +149,7 @@ Day type queue:
 
 | Trigger | Adds day type(s) |
 |---|---|
-| Explicit selected interests | Adds selected types in selected/query order: `history`, `wall`, `museums`, `food`, `nightlife`, `free`. |
+| Explicit selected interests | Adds selected types in selected/query order: `history`, `wall`, `museums`, `food`, `nightlife`, `free`, plus `potsdam` when eligible. |
 | First time = yes / long ago | Adds `wall`, `history`, `museums`. |
 | First time = no | Adds `local`, `food`, and `wall` if wall was selected. |
 | Low budget | Adds `free`. |
@@ -152,14 +158,14 @@ Day type queue:
 | Photo-friendly route | Adds `free`. |
 | Family / slower / low walking | Adds `local`, `free`. |
 | Packed or nightlife selected | Adds `nightlife`. |
-| 5+ days and not evening arrival | Adds `potsdam`. |
+| 5+ days and not evening arrival | Adds `potsdam` automatically even if the visitor did not select it. |
 | Always as fallback | `wall`, `history`, `free`, `museums`, `food`, `local`. |
 | 6+ days and not slow | Adds `nightlife`. |
 | 7 days | Adds another `local`. |
 
 Review questions:
 
-- Should `Potsdam` become visible in Top interests instead of only automatic at 5+ days?
+- Should `Potsdam` stay at 4+ days, or should the chip appear only at 5+ days?
 - For repeat visitors (`firstTime=no`), should `history + wall` still start with the tour on Day 1, or should it skip central overview more often?
 - Should `food` appear earlier for low-budget repeat visitors, or is the current `local -> food -> wall/free` tendency okay?
 
@@ -247,8 +253,8 @@ Title: `Free central history without museum overload`
 | Time | Title | Copy |
 |---|---|---|
 | Morning | Brandenburg Gate and memorials | Use the central memorial layer first: Brandenburg Gate, Holocaust Memorial, and government quarter edges. |
-| Afternoon | Topography of Terror or Reichstag exterior | Choose one serious free history anchor. If rain hits, Topography of Terror is the clean backup. |
-| Evening | Simple central dinner | Mitte, Hackescher Markt, or base. No second paid entry. |
+| Afternoon | Topography of Terror | Use Topography as the serious history anchor; Reichstag exterior is the lighter fallback. |
+| Evening | Simple central dinner | Stay central or near base. No second paid entry. |
 
 Map anchors: Brandenburg Gate / Topography of Terror / Reichstag
 
@@ -271,8 +277,8 @@ Title: `Museum Island without museum overload`
 | Time | Title | Copy |
 |---|---|---|
 | Morning | Pick one museum anchor | One checked-open museum beats four rushed ones. |
-| Afternoon | Reichstag dome or Brandenburg Gate | Booked dome slot, or switch to Brandenburg Gate, Unter den Linden, memorials. |
-| Evening | Central dinner | Mitte, Hackescher Markt, or base. |
+| Afternoon | Berlin Cathedral and river edge | Keep the afternoon light around Berlin Cathedral, the Spree, and the government-quarter edge. |
+| Evening | Central dinner | Stay in Mitte, Hackescher Markt, or near base. |
 
 Map anchors: Museum Island / Brandenburg Gate / Reichstag
 
@@ -282,8 +288,8 @@ Title: `Food, courtyards, and the lived-in city`
 
 | Time | Title | Copy |
 |---|---|---|
-| Morning | Start slow in a neighborhood | Prenzlauer Berg, Kreuzberg, or Hackescher Markt. |
-| Afternoon | Courtyards, markets, or street food | Hackesche Hofe, Markthalle Neun timing, or one relaxed food stop. |
+| Morning | Prenzlauer Berg coffee walk | Use Kastanienallee and a proper coffee pause as the food-day rhythm. |
+| Afternoon | Hackesche Hofe courtyards | Use Hackesche Hofe as the afternoon anchor; stay under cover there if rain wins. |
 | Evening | One-area dinner | Dinner in same area. |
 
 Map anchors: Hackesche Hofe / Markthalle Neun / Kastanienallee
@@ -294,9 +300,9 @@ Title: `Free Berlin that still feels essential`
 
 | Time | Title | Copy |
 |---|---|---|
-| Morning | Outdoor central history | Brandenburg Gate, memorials, Museum Island exteriors, Spree. |
-| Afternoon | Reichstag dome or Topography of Terror | Book Reichstag ahead, or use Topography as free fallback. |
-| Evening | Park, Spree, or cheap food | Low-cost evening. |
+| Morning | Topography of Terror | Start with the free, serious, weather-safe anchor. |
+| Afternoon | Tiergarten and Victory Column | Use Tiergarten after lunch; shorten to a cafe/station break if weather turns. |
+| Evening | Cheap food near the route | Keep the evening low-cost and close. |
 
 Map anchors: Topography of Terror / Tiergarten / Tempelhofer Feld
 
@@ -318,20 +324,20 @@ Title: `Local-feeling Berlin beyond the checklist`
 
 | Time | Title | Copy |
 |---|---|---|
-| Morning | Prenzlauer Berg or Charlottenburg | Choose one calmer area and walk slowly. |
-| Afternoon | Cafe, park, and one small museum | Cafe/park/small museum instead of central queue. |
+| Morning | Kulturbrauerei and Prenzlauer Berg | Start around Kulturbrauerei and keep the pace slow. |
+| Afternoon | Lietzensee slow hour | Use Lietzensee as the quiet anchor; switch to a longer Kulturbrauerei loop if staying north. |
 | Evening | Dinner near base | End close to where you sleep. |
 
 Map anchors: Kulturbrauerei / Savignyplatz / Lietzensee
 
 ### `potsdam`
 
-Title: `Potsdam or a deliberate slow day`
+Title: `Potsdam palace day`
 
 | Time | Title | Copy |
 |---|---|---|
-| Morning | Decide by energy and weather | Go to Potsdam only if weather and energy both say yes. |
-| Afternoon | Sanssouci or Berlin backup | Sanssouci with ABC, or Charlottenburg/Tiergarten/skipped museum backup. |
+| Morning | Train ride to Potsdam Hbf | Take the regional train after the rush; Charlottenburg Palace is the lower-energy Berlin fallback. |
+| Afternoon | Sanssouci Palace gardens | Use Sanssouci as the main anchor; if the palace interior is closed, make the park the point. |
 | Evening | Early return | Back before the day turns into a second mission. |
 
 Map anchors: Potsdam Hbf / Sanssouci / Charlottenburg Palace
@@ -514,7 +520,7 @@ If a later day would reuse anchors:
 | History repeated | `Government quarter, memorials, and old Mitte` | Holocaust Memorial / Gendarmenmarkt / Nikolaiviertel |
 | Wall repeated | `East Side Gallery and the Spree edge` | East Side Gallery / Oberbaum Bridge / Markthalle Neun |
 | Free repeated | `Free Berlin away from the repeat anchors` | Tempelhofer Feld / Treptower Park / Victory Column |
-| Museums repeated | `Charlottenburg Palace or one west-side museum` | Charlottenburg Palace / Savignyplatz / Lietzensee |
+| Museums repeated | `Charlottenburg Palace and west-side calm` | Charlottenburg Palace / Savignyplatz / Lietzensee |
 
 Fallback place pools:
 
@@ -614,11 +620,11 @@ Budget modes:
 
 These are not bugs exactly, but deserve Yusuf review:
 
-- `Potsdam / day trip` is not visible as a user-selectable interest yet.
-- Tour focus priority may over-favor `Museums` if user selects many interests.
-- Monday museum days warn, but not every case is forcibly swapped.
+- `Potsdam day trip` is visible only when it is operationally realistic; confirm whether 4+ days is the right threshold.
+- Tour focus priority now favors `History` then `Wall` before `Museums`.
+- Monday museum days are swapped when a suitable outdoor-safe day exists; very short trips use a visible opening fallback instead.
 - Gentle mode may produce many coffee pauses across a long plan.
-- Some templates still say alternatives inside one block (`Reichstag or Brandenburg`, `Tempelhofer or Tiergarten`). This is readable, but can feel less decisive.
+- Some helper/risk copy still lists backups, but core day templates now lead with one primary anchor.
 - Long plans are now less repetitive by map anchors, but block copy can still repeat phrases like "Keep this cluster relaxed".
 - `tourIntent` is hidden, so booked-user behavior exists but is not actively chosen in the UI.
 - The former block-time overlap bug has a render-level scheduler now; future
@@ -628,7 +634,7 @@ These are not bugs exactly, but deserve Yusuf review:
 
 Yusuf can review in this order:
 
-1. Are the input choices enough? Should `Potsdam / day trip` be visible?
+1. Is the conditional `Potsdam day trip` chip clear enough at 4+ days?
 2. Are the BerlinWalk same-day / next-day tour rules correct?
 3. Are the seven core day templates good Berlin logic?
 4. Are the tour framework priorities correct?
