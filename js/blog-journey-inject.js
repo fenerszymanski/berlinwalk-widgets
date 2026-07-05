@@ -26,6 +26,7 @@
   var TRIP_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
   var ATTRIBUTION_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'utm_id', 'fbclid', 'fbc', 'fbp'];
+  var NEXT_TOUR_SLOT_URL = resolveAdjacentScriptUrl('next-tour-slot.js');
   var dataCache = null;
   var dataPromise = null;
   var renderTimer = null;
@@ -34,11 +35,41 @@
   var backTopScrollHandler = null;
   var bootAt = Date.now();
   var readyTimer = null;
+  var nextTourSlotRequested = false;
 
   installDelayedConsentGuard();
   loadBookingNextActionPatch();
   installConsentGatedBookingAnalytics();
   installConsentSettingsUi();
+
+  function resolveAdjacentScriptUrl(fileName) {
+    try {
+      if (document.currentScript && document.currentScript.src) {
+        return new URL(fileName, document.currentScript.src).toString();
+      }
+    } catch (err) {}
+    return 'https://fenerszymanski.github.io/berlinwalk-widgets/js/' + fileName;
+  }
+
+  function ensureNextTourSlotHelper() {
+    if (!isPostPage()) return;
+    if (typeof window.bwNextTourSlot === 'function') return;
+    if (nextTourSlotRequested) return;
+    nextTourSlotRequested = true;
+    var script = document.createElement('script');
+    script.src = NEXT_TOUR_SLOT_URL;
+    script.async = true;
+    script.onload = scheduleRender;
+    script.onerror = function () {};
+    document.head.appendChild(script);
+  }
+
+  function getNextTourSlot() {
+    try {
+      if (typeof window.bwNextTourSlot === 'function') return window.bwNextTourSlot();
+    } catch (err) {}
+    return null;
+  }
 
   function installDelayedConsentGuard() {
     if (window.__bwDelayedConsentGuard) return;
@@ -966,6 +997,7 @@
       '.bw-blog-journey-content{display:flex;flex:1;flex-direction:column;padding:14px 15px 16px;}',
       '.bw-blog-journey-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.2px;line-height:1;margin-bottom:9px;text-transform:uppercase;}',
       '.bw-blog-journey-card strong{color:#212121;display:block;font-size:16px;font-weight:900;line-height:1.16;overflow-wrap:break-word;}',
+      '.bw-blog-journey-card-copy{color:#4E5A4E;display:block;font-family:Merriweather,Georgia,serif;font-size:14px;line-height:1.46;margin-top:10px;}',
       '[data-bw-tourcta]{display:none!important;}',
       '.bw-blog-back-top{align-items:center;background:#212121;border:2px solid #FFE600;border-radius:999px;bottom:24px;box-shadow:0 12px 28px rgba(0,0,0,.22);color:#FFFFFF;cursor:pointer;display:flex;font-size:22px;font-weight:900;height:44px;justify-content:center;opacity:0;pointer-events:none;position:fixed;right:22px;text-decoration:none;transform:translateY(10px);transition:opacity .18s ease,transform .18s ease,background .18s ease;visibility:hidden;width:44px;z-index:8500;}',
       '.bw-blog-back-top:hover{background:#1B5E20;}',
@@ -1517,13 +1549,18 @@
   }
 
   function bookingJourneyCard(bookingUrl, title, context) {
+    var slot = getNextTourSlot();
     return {
       label: 'Free walk',
-      title: title || 'Walk this context with me in Berlin',
+      title: slot ? (slot.relativeLabel + ' at ' + slot.startLabel + ', walk Berlin with me') : (title || 'Walk this context with me in Berlin'),
+      copy: slot ? 'Free, tip-based, about 2 hours. Reserve a spot, pay nothing upfront.' : '',
       url: bookingUrl,
       image: TOUR_IMAGE,
       bookLink: true,
       bookContext: context || 'blog_journey_booking',
+      bookEvent: 'bw_blog_book_bridge_click',
+      bookLinkKind: 'booking_bridge',
+      bookOnceKey: 'bw_blog_book_bridge_click:' + (currentSlug() || 'post'),
       ctaKind: 'booking'
     };
   }
@@ -1581,8 +1618,8 @@
     var toolCard = toolJourneyCard(tool, post);
     var plannerCard = plannerJourneyCard(post);
     var readCard = relatedJourneyCard(posts && posts[0]);
-    var directBookCard = bookingJourneyCard(bookingUrl, 'Walk this context with me in Berlin', 'blog_journey_direct_booking');
-    var softBookCard = bookingJourneyCard(bookingUrl, 'Book my 2-hour Berlin orientation walk', 'blog_journey_soft_booking');
+    var directBookCard = bookingJourneyCard(bookingUrl, 'Walk this context with me in Berlin', 'blog_journey_direct_booking_nextslot');
+    var softBookCard = bookingJourneyCard(bookingUrl, 'Book my 2-hour Berlin orientation walk', 'blog_journey_soft_booking_nextslot');
     var strategy = {
       intent: intent,
       kicker: 'Next step',
@@ -1593,28 +1630,28 @@
 
     if (intent === 'direct-booking') {
       strategy.title = 'Walk this context in Berlin';
-      strategy.intro = 'If this guide made the city clearer, the easiest next step is my ~2h tip-based walk: free reservation, no upfront payment.';
-      strategy.cards = dedupeJourneyCards([directBookCard, toolCard, readCard, plannerCard], 3);
+      strategy.intro = 'If this guide made the city clearer, the easiest next step is my tip-based walk: free reservation, no upfront payment, about 2 hours.';
+      strategy.cards = dedupeJourneyCards([directBookCard, toolCard, readCard], 3);
       return strategy;
     }
 
     if (intent === 'planner-first') {
       strategy.title = 'Make the practical part easier';
       strategy.intro = 'For utility topics, start with planning help first. Book the walk later only if it fits the trip you are building.';
-      strategy.cards = dedupeJourneyCards([toolCard, plannerCard, readCard, softBookCard], 3);
+      strategy.cards = dedupeJourneyCards([toolCard, softBookCard, plannerCard, readCard], 3);
       return strategy;
     }
 
     if (intent === 'event-context') {
       strategy.title = 'Plan around this Berlin moment';
       strategy.intro = 'Use this as context for your trip, then choose whether a walk, a tool, or another guide is the useful next move.';
-      strategy.cards = dedupeJourneyCards([plannerCard, toolCard, softBookCard, readCard], 3);
+      strategy.cards = dedupeJourneyCards([plannerCard, softBookCard, toolCard, readCard], 3);
       return strategy;
     }
 
     strategy.title = 'Turn this into a Berlin day';
     strategy.intro = 'Build a route first, then keep reading or book the walk if you want the city context in person.';
-    strategy.cards = dedupeJourneyCards([plannerCard, toolCard, readCard, softBookCard], 3);
+    strategy.cards = dedupeJourneyCards([plannerCard, softBookCard, toolCard, readCard], 3);
     return strategy;
   }
 
@@ -1638,12 +1675,16 @@
     var image = cardImage(card);
     var key = slugify(card.label || card.title);
     var bookAttrs = card.bookLink ? ' data-book-link="1" data-bw-book-context="' + escapeAttr(card.bookContext || key) + '"' : '';
+    if (card.bookEvent) bookAttrs += ' data-bw-book-event="' + escapeAttr(card.bookEvent) + '"';
+    if (card.bookLinkKind) bookAttrs += ' data-bw-book-link-kind="' + escapeAttr(card.bookLinkKind) + '"';
+    if (card.bookOnceKey) bookAttrs += ' data-bw-book-once-key="' + escapeAttr(card.bookOnceKey) + '"';
     var ctaKind = card.ctaKind ? ' data-bw-journey-cta-kind="' + escapeAttr(card.ctaKind) + '"' : '';
     return '<a class="bw-blog-journey-card bw-blog-journey-card-' + escapeAttr(key) + '" href="' + escapeAttr(card.url) + '" target="_top" data-bw-blog-journey-click="' + escapeAttr(card.label) + '"' + ctaKind + bookAttrs + '>' +
       '<span class="bw-blog-journey-image" aria-hidden="true"><img src="' + escapeAttr(image) + '" alt="" loading="lazy"></span>' +
       '<span class="bw-blog-journey-content">' +
         '<span class="bw-blog-journey-label">' + escapeHtml(card.label) + '</span>' +
         '<strong>' + escapeHtml(card.title) + '</strong>' +
+        (card.copy ? '<span class="bw-blog-journey-card-copy">' + escapeHtml(card.copy) + '</span>' : '') +
       '</span>' +
     '</a>';
   }
@@ -1808,44 +1849,70 @@
     return url;
   }
 
+  function sessionOnce(key, callback) {
+    if (!key) return callback();
+    try {
+      if (window.sessionStorage && window.sessionStorage.getItem(key) === '1') return false;
+    } catch (err) {}
+    var sent = callback();
+    if (!sent) return false;
+    try {
+      if (window.sessionStorage) window.sessionStorage.setItem(key, '1');
+    } catch (err) {}
+    return true;
+  }
+
   function trackBookLinkClick(link, context) {
     context = link.getAttribute('data-bw-book-context') || context || 'blog_book_link';
-    var currentUrl = new URL(window.location.href);
-    var params = currentUrl.searchParams;
-    var trackingBody = {
-      eventName: 'bw_booking_pick_date_click',
-      consentGranted: true,
-      analyticsConsent: true,
-      consent: { analytics: true },
-      pagePath: window.location.pathname,
-      landingPage: window.location.href,
-      referrer: document.referrer || '',
-      utmSource: params.get('utm_source') || '',
-      utmMedium: params.get('utm_medium') || '',
-      utmCampaign: params.get('utm_campaign') || '',
-      utmContent: params.get('utm_content') || '',
-      utmTerm: params.get('utm_term') || '',
-      fbclid: '',
-      isPaid: Boolean(params.get('utm_source')),
-      screenWidth: String(window.screen && window.screen.width || ''),
-      viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
-      payload: {
-        link_kind: 'blog_book_link',
-        cta_name: context
-      }
-    };
-    if (!pushEvent('bw_book_link_click', {
-      cta_name: context,
-      page_path: window.location.pathname
-    })) return;
-    try {
-      window.fetch(TRACK_ENDPOINT, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        keepalive: true,
-        body: JSON.stringify(trackingBody)
-      }).catch(function () {});
-    } catch (err) {}
+    var eventName = link.getAttribute('data-bw-book-event') || 'bw_book_link_click';
+    var linkKind = link.getAttribute('data-bw-book-link-kind') || 'blog_book_link';
+    var onceKey = link.getAttribute('data-bw-book-once-key') || '';
+    var journey = link.closest('[' + JOURNEY_MARKER + ']');
+    var journeyIntent = journey ? (journey.getAttribute('data-bw-blog-journey-intent') || '') : '';
+
+    sessionOnce(onceKey, function () {
+      var currentUrl = new URL(window.location.href);
+      var params = currentUrl.searchParams;
+      var trackingBody = {
+        eventName: eventName === 'bw_book_link_click' ? 'bw_booking_pick_date_click' : eventName,
+        consentGranted: true,
+        analyticsConsent: true,
+        consent: { analytics: true },
+        pagePath: window.location.pathname,
+        landingPage: window.location.href,
+        referrer: document.referrer || '',
+        utmSource: params.get('utm_source') || '',
+        utmMedium: params.get('utm_medium') || '',
+        utmCampaign: params.get('utm_campaign') || '',
+        utmContent: params.get('utm_content') || '',
+        utmTerm: params.get('utm_term') || '',
+        fbclid: '',
+        isPaid: Boolean(params.get('utm_source')),
+        screenWidth: String(window.screen && window.screen.width || ''),
+        viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
+        payload: {
+          link_kind: linkKind,
+          cta_name: context,
+          journey_intent: journeyIntent,
+          cta_kind: link.getAttribute('data-bw-journey-cta-kind') || ''
+        }
+      };
+      if (!pushEvent(eventName, {
+        cta_name: context,
+        link_kind: linkKind,
+        journey_intent: journeyIntent,
+        page_path: window.location.pathname
+      })) return false;
+      try {
+        window.fetch(TRACK_ENDPOINT, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          keepalive: true,
+          body: JSON.stringify(trackingBody)
+        }).catch(function () {});
+      } catch (err) {}
+      return true;
+    });
   }
 
   function decorateBlogBookLinks() {
@@ -1893,6 +1960,7 @@
       removeInjected();
       return;
     }
+    ensureNextTourSlotHelper();
     injectStyle();
     var body = findPostBody();
     if (!body) return;

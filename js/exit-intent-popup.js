@@ -9,6 +9,11 @@
   var STYLE_ID = 'bw-exit-intent-styles';
   var OVERLAY_ID = 'bw-exit-intent-popup';
   var DWELL_TIME_MS = isPreviewForced() ? 500 : 30000;
+  var TOUR_START_LABEL = '11:30';
+  var SAME_DAY_CUTOFF_HOUR = 8;
+  var SAME_DAY_CUTOFF_MINUTE = 30;
+  var DAY_MS = 24 * 60 * 60 * 1000;
+  var TOUR_DAYS = { Tue: true, Wed: true, Thu: true, Fri: true, Sat: true };
 
   var dwellReady = false;
   var popupShown = false;
@@ -92,6 +97,58 @@
     }
   }
 
+  function berlinParts(date) {
+    var map = {};
+    new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Europe/Berlin',
+      weekday: 'short',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    }).formatToParts(date).forEach(function (part) {
+      if (part.type !== 'literal') map[part.type] = part.value;
+    });
+    return {
+      dateKey: map.year + '-' + map.month + '-' + map.day,
+      weekdayShort: map.weekday,
+      weekdayLabel: new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Berlin', weekday: 'long' }).format(date),
+      hour: Number(map.hour),
+      minute: Number(map.minute),
+    };
+  }
+
+  function nextTourLine() {
+    try {
+      var now = new Date();
+      var today = berlinParts(now);
+      var tomorrow = berlinParts(new Date(now.getTime() + DAY_MS));
+      var target = null;
+
+      if (TOUR_DAYS[today.weekdayShort] && (today.hour < SAME_DAY_CUTOFF_HOUR || (today.hour === SAME_DAY_CUTOFF_HOUR && today.minute < SAME_DAY_CUTOFF_MINUTE))) {
+        target = today;
+      } else {
+        for (var offset = 1; offset <= 8; offset += 1) {
+          var candidate = berlinParts(new Date(now.getTime() + (offset * DAY_MS)));
+          if (TOUR_DAYS[candidate.weekdayShort]) {
+            target = candidate;
+            break;
+          }
+        }
+      }
+
+      if (!target) return '';
+      var relativeLabel = target.weekdayLabel;
+      if (target.dateKey === today.dateKey) relativeLabel = 'Today (' + target.weekdayShort + ')';
+      else if (target.dateKey === tomorrow.dateKey) relativeLabel = 'Tomorrow (' + target.weekdayShort + ')';
+      return 'Next walk: ' + relativeLabel + ' at ' + TOUR_START_LABEL + '. Free, tip-based.';
+    } catch (err) {
+      return '';
+    }
+  }
+
   function injectStyles() {
     if (document.getElementById(STYLE_ID)) return;
 
@@ -117,6 +174,7 @@
       '@keyframes bwExitIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}',
       '.bw-exit-kicker{margin:0 0 12px;color:#FFE600;font-size:11px;font-weight:900;letter-spacing:2.1px;text-transform:uppercase;}',
       '.bw-exit-title{margin:0 44px 12px 0;color:#FFFFFF;font-size:34px;line-height:1.05;font-weight:900;letter-spacing:0;}',
+      '.bw-exit-next{margin:0 0 14px;color:#C5E1A5;font-size:14px;font-weight:800;line-height:1.4;}',
       '.bw-exit-copy{margin:0 0 24px;color:#FAFAF5;font-size:15px;line-height:1.55;font-weight:500;max-width:39em;}',
       '.bw-exit-actions{display:grid;gap:12px;}',
       '.bw-exit-primary{font-family:Montserrat,Arial,sans-serif;cursor:pointer;text-decoration:none;}',
@@ -174,6 +232,7 @@
 
   function renderPopup() {
     injectStyles();
+    var nextLine = nextTourLine();
 
     var overlay = document.createElement('div');
     overlay.id = OVERLAY_ID;
@@ -189,7 +248,8 @@
       '<section class="bw-exit-step bw-exit-active" data-bw-exit-step="1">',
       '<p class="bw-exit-kicker">Free, tip-based</p>',
       '<h2 class="bw-exit-title" id="bw-exit-title">Before you leave, book your Berlin walk.</h2>',
-      '<p class="bw-exit-copy">Yusuf here! If you want the city to make sense early in your trip, reserve a free spot on my 2-hour Berlin walk. No upfront payment, tip-based at the end.</p>',
+      (nextLine ? '<p class="bw-exit-next">' + nextLine + '</p>' : ''),
+      '<p class="bw-exit-copy">Yusuf here! If you want the city to make sense early in your trip, reserve a free spot on my Berlin walk. No upfront payment, tip-based at the end, about 2 hours.</p>',
       '<div class="bw-exit-actions">',
       '<a class="bw-exit-primary" href="' + BOOKING_URL + '" data-bw-exit-book>Book Walking Tour</a>',
       '</div>',
