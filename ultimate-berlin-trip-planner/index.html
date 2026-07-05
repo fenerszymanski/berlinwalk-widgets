@@ -8965,6 +8965,98 @@
       margin-top: 0;
     }
 
+    #bw-trip-planner .bw-rescue-bridge {
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(255, 230, 0, 0.22), rgba(242, 248, 232, 0.96)),
+        var(--bw-white);
+      border: 1px solid #E7DDBB;
+      border-left: 5px solid var(--bw-yellow);
+      border-radius: 8px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 42px minmax(0, 1fr) auto;
+      padding: 10px;
+    }
+
+    #bw-trip-planner .bw-rescue-icon {
+      align-items: center;
+      background: var(--bw-green);
+      border-radius: 8px;
+      color: var(--bw-yellow);
+      display: inline-flex;
+      height: 42px;
+      justify-content: center;
+      width: 42px;
+    }
+
+    #bw-trip-planner .bw-rescue-icon .bw-emoji-icon,
+    #bw-trip-planner .bw-rescue-icon .bw-svg-icon {
+      font-size: 22px;
+      height: 22px;
+      width: 22px;
+    }
+
+    #bw-trip-planner .bw-rescue-copy,
+    #bw-trip-planner .bw-rescue-copy strong,
+    #bw-trip-planner .bw-rescue-copy span,
+    #bw-trip-planner .bw-rescue-copy em {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-rescue-copy strong {
+      color: var(--bw-green);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-trip-planner .bw-rescue-copy span {
+      color: var(--bw-muted);
+      font-size: 10.5px;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-top: 3px;
+    }
+
+    #bw-trip-planner .bw-rescue-copy em {
+      color: #8A5A00;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      margin-bottom: 3px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-rescue-cta {
+      align-items: center;
+      background: var(--bw-yellow);
+      border: 1px solid rgba(27, 94, 32, 0.18);
+      border-radius: 8px;
+      color: var(--bw-green);
+      display: inline-flex;
+      font-size: 10.8px;
+      font-weight: 950;
+      gap: 7px;
+      justify-content: center;
+      line-height: 1.2;
+      min-height: 38px;
+      padding: 9px 11px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    #bw-trip-planner .bw-rescue-cta .bw-emoji-icon,
+    #bw-trip-planner .bw-rescue-cta .bw-svg-icon {
+      font-size: 14px;
+      height: 14px;
+      width: 14px;
+    }
+
     #bw-trip-planner .bw-after-itinerary {
       background:
         linear-gradient(135deg, var(--bw-green), #0F3F18),
@@ -9913,8 +10005,17 @@
       #bw-trip-planner .bw-delivery-grid,
       #bw-trip-planner .bw-reminder-rail,
       #bw-trip-planner .bw-tour-card,
+      #bw-trip-planner .bw-rescue-bridge,
       #bw-trip-planner .bw-essentials-grid {
         grid-template-columns: 1fr;
+      }
+
+      #bw-trip-planner .bw-rescue-icon {
+        display: none;
+      }
+
+      #bw-trip-planner .bw-rescue-cta {
+        width: 100%;
       }
 
       #bw-trip-planner .bw-planning-steps {
@@ -10791,6 +10892,7 @@
   var TOUR_DEFAULT_SLOT = { start: '11:30', end: '13:30' };
   var TOUR_SUMMER_AFTERNOON_SLOT = { start: '15:30', end: '17:30' };
   var TOUR_LOCATION = 'World Clock, Alexanderplatz, Berlin';
+  var RESCUE_PLAN_URL = 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan?utm_source=trip_planner&utm_medium=widget&utm_campaign=tp_rescue_bridge&utm_content=day1_card';
   var PDF_ENGINE_URL = 'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
   var BW_LOGO_URL = 'assets/berlinwalk-logo-wide.png';
   var YUSUF_GUIDE_PHOTO_URL = 'assets/yusuf-local-guide.jpg';
@@ -13568,6 +13670,15 @@
         '</a>' +
       '</div>' +
     '</section>';
+  }
+
+  function firstDayRescueCardHtml(day) {
+    if (!day || day.dayNumber !== 1) return '';
+    return '<aside class="bw-rescue-bridge" aria-label="Berlin First-Day Rescue Plan">' +
+      '<span class="bw-rescue-icon" aria-hidden="true">' + iconSvg('shield') + '</span>' +
+      '<span class="bw-rescue-copy"><em>First hour</em><strong>Want the exact Day 1 decisions?</strong><span>The free plan gives you the shape. If the first hour is the stressful bit, I can make it exact with live route timing, luggage logic, weather, and the first decisions after you land.</span></span>' +
+      '<a class="bw-rescue-cta" href="' + escapeHtml(RESCUE_PLAN_URL) + '" target="_top" data-rescue-cta data-rescue-surface="day1_card">' + iconSvg('zap') + '<span>Get the €9 Rescue Plan</span></a>' +
+    '</aside>';
   }
 
   function normalizedPlaceLabel(value) {
@@ -18371,6 +18482,7 @@
         '</div>';
       }).join('');
       var routeCard = dayRouteCardHtml(day);
+      var rescueCard = firstDayRescueCardHtml(day);
       var weatherChip = dayWeatherChipHtml(day);
       var openingNotes = dayOpeningStatusHtml(day);
       return '<article class="bw-day' + (activeDay ? ' is-focused' : '') + '" data-day-card="' + day.dayNumber + '" style="--day-accent:' + escapeHtml(day.accent || '#7CB342') + ';--day-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
@@ -18383,6 +18495,7 @@
           openingNotes +
           blocks +
           routeCard +
+          rescueCard +
         '</div>' +
       '</article>';
     }).join('');
@@ -23269,6 +23382,19 @@
         arrival_date: state.arrivalDate,
         trip_length: state.tripLength,
         swap_key: swapAction.getAttribute('data-swap-action') || ''
+      });
+      return;
+    }
+
+    var rescueCta = event.target.closest('[data-rescue-cta]');
+    if (rescueCta) {
+      track('bw_trip_planner_rescue_cta_click', {
+        arrival_date: state.arrivalDate,
+        trip_length: state.tripLength,
+        arrival_time: state.arrivalTime,
+        arrival_point: state.arrivalPoint,
+        stay_area: state.stayArea,
+        surface: rescueCta.getAttribute('data-rescue-surface') || 'day1_card'
       });
       return;
     }

@@ -26,6 +26,12 @@ it out automatically when the trip is too short or too late. Core itinerary and
 tour-framework copy now gives one main anchor first, with fallback language
 only when opening/weather/energy makes it necessary.
 
+Update 2026-07-05: Wave 2.1 added a restrained First-Day Rescue Plan bridge at
+the end of the unlocked Day 1 card only. It stays out of the locked preview,
+links to the branded product URL with the `tp_rescue_bridge` UTM set, and tracks
+`bw_trip_planner_rescue_cta_click` through the existing consent-gated Trip
+Planner event path.
+
 ## 1. User Inputs
 
 ### Visible inputs
