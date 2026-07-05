@@ -1289,7 +1289,7 @@
         "name": "Which Berlin neighborhood is best for first-time visitors?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Mitte — the historic heart of the city. You'll be walking distance from Brandenburg Gate, Museum Island, and Alexanderplatz, where our free walking tour starts. Most major sights are within 15 minutes on foot. Hotels are pricier here but the convenience is unmatched."
+          "text": "Mitte or the Hackescher Markt side of Mitte is usually easiest for first-time visitors because it removes daily friction around the historic core. If the trip is nightlife-led, choose Kreuzberg or Friedrichshain instead. If mornings, sleep and food matter more, look at Prenzlauer Berg, Schöneberg or Charlottenburg."
         }
       },
       {
@@ -1497,7 +1497,7 @@
         "name": "Do I need to book a Berlin pool in advance?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For indoor pools, almost never — walk-ins are usually fine. For outdoor pools (Sommerbäder) on hot summer weekends, absolutely yes. Sommerbad Kreuzberg (Prinzenbad) regularly has 45-minute queues without a pre-booked ticket on 30°C weekends. Online pre-booking takes two minutes and gives you a QR code that skips the queue. The Berliner Bäder website also shows a real-time crowd indicator (green/yellow/red traffic light) for each Sommerbad — check before you leave the hotel."
+          "text": "For indoor pools, usually not. For outdoor pools on hot summer weekends, yes: check the current pool page, ticket availability and crowd indicator before leaving the hotel. Online pre-booking gives you a QR code and can save you from standing outside a full pool gate in the heat."
         }
       },
       {
@@ -1543,7 +1543,7 @@
         "name": "Are Berlin lakes safe to swim in?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, with one caveat. Berlin's State Office for Health monitors 39 official bathing sites every two weeks and publishes results at badegewaesser.berlin.de. Almost all sites are rated suitable for swimming throughout the season. The Lower Havel sites occasionally flag for elevated bacteria after heavy rain, and any warm shallow lake can develop a temporary blue-green algae bloom (Blaualgen) in late summer. Lifeguards are present only at the Strandbäder, so if you're swimming from a free shore, common-sense rules apply: don't swim alone, don't go far out, watch for boats."
+          "text": "Yes, if you check the current official status. Berlin monitors 39 official bathing sites and publishes results at badegewaesser.berlin.de. Warm late-summer water can bring algae or cercaria issues, and early 2026 reports already appeared at Jungfernheideteich, Teufelssee and Schlachtensee. Check on the day, do not swim alone, and use lidos if you want lifeguards."
         }
       },
       {
@@ -1835,7 +1835,7 @@
         "name": "What major events happen in Berlin in August 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Useful dates include the partial solar eclipse and Long Night of Astronomy on August 12, Tanz im August from August 13-29, and Long Night of Museums on August 29. Event programs can change, so check the official pages before booking around a specific performance or venue."
+          "text": "Useful dates include the partial solar eclipse and Long Night of Astronomy on August 12, Tanz im August from August 13-29, and Long Night of Museums on August 29. Long Night of Museums tickets are scheduled to go on sale on August 3. Check official pages before booking around a specific venue or performance."
         }
       },
       {
@@ -2305,7 +2305,7 @@
         "name": "Do Berlin club tickets guarantee entry?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. For many Berlin clubs and parties, a presale ticket does not guarantee entry. The door can still refuse guests based on behavior, group fit, intoxication, event capacity, or house rules. Always have a backup plan nearby."
+          "text": "No. For many Berlin clubs and parties, a presale ticket, guest list place, strong outfit or long queue does not guarantee entry. The door can still refuse guests based on behavior, group fit, intoxication, event capacity, privacy rules or house culture. Always have a nearby backup plan."
         }
       },
       {
@@ -6043,7 +6043,7 @@
         "name": "Is Berlin too hot to visit in summer?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Berlin can still be enjoyable in very hot weather if you move the day around the heat: walk early, cool down properly at midday and return outside in the evening. On official heat-warning days, shorten the plan and check current heat guidance."
+          "text": "Berlin can still be enjoyable in very hot weather if you check official heat warnings, then move the day around the heat: walk early, cool down properly at midday and return outside in the evening. On official heat-warning days, shorten the plan and use drinking-water, shade, lake or pool stops deliberately."
         }
       },
       {

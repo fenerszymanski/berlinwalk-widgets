@@ -19,9 +19,9 @@ Last updated: 2026-07-05 (data-driven refresh + structure cleanup; previous upda
 - [x] Arrival cluster to First-Day Rescue bridge.
   Status: Done on 2026-07-05.
   Next action: Measure product-page clicks and keep the bridge restrained; do not add more arrival sales blocks unless the current links prove useful.
-- [ ] August seasonal push.
-  Status: Ready for July planning.
-  Next action: Refresh August demand pages and support posts before World Cup traffic fades.
+- [x] August seasonal push.
+  Status: Done on 2026-07-05.
+  Next action: Measure August cluster traffic and clicks after the late-summer push has had time to settle.
 - [ ] Post-World-Cup replacement path.
   Status: Planned.
   Next action: Line up Festival of Lights in October and Christmas child-post prep from September.
@@ -45,12 +45,12 @@ Any idea promoted from this historical context must be added to `Priority Queue`
 | 0 | Done | 2026-07-05 | CTR batch 2 | `berlin-in-july-2026`, `public-toilets-in-berlin`, `the-ampelmann`, `is-berlin-expensive` | Title, meta description, and opening intro refreshed live. Slugs unchanged; July/weather, toilet intent, Ampelmann identity, and Berlin budget framing tightened. |
 | 0 | Done | 2026-07-05 | CTR batch 3 | `luggage-storage`, `is-tap-water-safe`, `best-currywurst`, `average-temperature-by-month` | Title, meta description, and opening intro refreshed live. Slugs unchanged; luggage, tap-water, currywurst, and climate intent were tightened. |
 | 1 | Done | 2026-07-05 | Reichstag Dome refresh | Existing page refreshed live with request-window rules, confirmation-only booking, same-day fallback, closure caveats, no-luggage storage, West C routing, and Kafer workaround guidance. | Keep the sold-out child post deferred unless Search Console shows a distinct sold-out intent cluster. |
-| 1 | Ready | After CTR batch 1 | Where to Stay in Berlin | Add a clear Kiez decision table for first-timers, nightlife, families, and food-led stays. | Refresh neighborhood framing and tourist-intent positioning. |
+| 1 | Done | 2026-07-05 | Where to Stay in Berlin | Kiez decision table added for first-timers, nightlife-led trips, families/food-led stays, and budget/longer stays. | Body refresh is live; Quick Summary/FAQ now use the same friction-first neighborhood framing. |
 | 1 | Done | 2026-07-05 | Transport depth refresh | `Do You Really Need to Validate Your Ticket` and `Berlin WelcomeCard` should align with the open-barrier, fines, AB/ABC, and tourist-safe choice framing. | Body refresh plus Quick Summary/FAQ embed parity are now live. Keep the fine-process child post separate unless Search Console shows its own clear query cluster. |
 | 1 | Done | 2026-07-05 | Sunday and cash path refresh | `Can You Use Credit Cards in Berlin` plus the Sunday-shopping path now connects into one practical Sunday, cash, and Spati survival route. | Body refresh is live; Quick Summary/FAQ data now uses the December 2026 city-wide Sunday shopping dates and cash-first Sunday framing. |
 | 1 | Done | 2026-07-05 | Luggage Storage depth refresh | Station lockers vs app-based storage plus Hauptbahnhof, Alexanderplatz, BER, and ZOB location blocks are now in the published body. | Body refresh is live; Quick Summary/FAQ data now reflects route-based luggage choices and current Hauptbahnhof locker facts. |
-| 1 | Ready | After CTR batch 3 | Club dress-code refresh | `What to Wear to Berlin Clubs` needs stronger Berghain, queue-behavior, and no-guarantee-entry framing. | Refresh the page with honest nightlife-door guidance. |
-| 1 | Ready | Jul-Aug 2026 | August seasonal refresh set | `berlin-in-august`, lakes, pools, and `berlin-heatwave-day-plan` should carry the late-summer replacement wave. | Tighten the August cluster before World Cup traffic ends. |
+| 1 | Done | 2026-07-05 | Club dress-code refresh | `What to Wear to Berlin Clubs` now has stronger Berghain, queue-behavior, and no-guarantee-entry framing. | Body refresh is live; Quick Summary/FAQ now repeat the no-guarantee and backup-plan guardrail. |
+| 1 | Done | 2026-07-05 | August seasonal refresh set | `berlin-in-august`, lakes, pools, and `berlin-heatwave-day-plan` now carry the late-summer replacement wave. | Body refresh is live; Quick Summary/FAQ now reflect late-August events, lake safety, pool ticket/crowd checks, and heat-warning planning. |
 
 ## Priority Queue
 
