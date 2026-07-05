@@ -1,6 +1,47 @@
 # BerlinWalk Blog Workplan
 
-Last updated: 2026-06-10 (1237 founding-year Wix draft created; sitemap last checked 2026-06-08)
+Last updated: 2026-07-05 (data-driven refresh from 30-day Search Console analysis; previous update 2026-06-10)
+
+## 2026-07-05 Data-Driven Priorities (read this first)
+
+30-day GSC (Jun 5 - Jul 4): 4,576 clicks / 474K impressions / avg pos 7.5. Previous
+30 days: 825 clicks. Growth is real (~3.3x even excluding the World Cup post), but
+concentrated: `where-to-watch-2026-world-cup-in-berlin` alone is 1,834 clicks (40%)
+and dies after the July 19 final. What ranks and earns clicks is tourist-anxiety /
+practical-decision content; the March history/storytelling batch (~35 posts) has
+near-zero search visibility.
+
+Priority order for new work:
+
+1. **CTR sprint (highest ROI, no new content).** These pages have huge impressions
+   and broken CTR at good positions; rewrite title + meta description to answer the
+   query directly, and make the first paragraph snippet-worthy:
+   `is-berlin-safe-to-visit` (45K impr, 0.13% CTR, pos 5.2), `are-shops-open-on-sunday`
+   (35K, 0.23%), `berlin-public-transport-explained` (25K, 0.21%), `berlin-in-july-2026`
+   (20K, 0.48%), `pharmacy-in-berlin` (17.8K, 0.02% — retitle to hours/Sunday/English
+   intent; it matches "pharmacy near me" it can never win), `public-toilets-in-berlin`
+   (15K), `the-ampelmann` (13K), `is-berlin-expensive` (12K), `luggage-storage` (11K),
+   `is-tap-water-safe` (11K), `best-currywurst` (9.2K, pos 11), `average-temperature-by-month`
+   (8.1K). Lifting these to a normal 1.5-2% CTR is worth ~2-3K clicks/month.
+   Caveat: part of the low CTR is AI-overview absorption on question queries; the
+   counter is owning the cited snippet and targeting longer decision queries in H2s.
+2. **Post-World-Cup traffic replacement.** August push now (`berlin-in-august`,
+   lakes, pools, heatwave day plan — heatwave already does 4% CTR), then Festival of
+   Lights (Oct), then the Christmas-markets pillar (Q4 = the next World Cup-scale wave;
+   prep child posts from September).
+3. **Arrival cluster feeds the €9 First-Day Rescue Plan.** Add one restrained Rescue
+   cross-sell paragraph/link (UTM `utm_source=blog&utm_campaign=fdr_blog_bridge`) to:
+   airport-to-alexanderplatz, luggage-storage, berlin-before-hotel-check-in,
+   first-time-visitor-mistakes, public-transport, validate-ticket, berlin-in-july/august.
+   Voice rule applies; no popups, in-body only.
+4. **New posts only inside proven clusters** (see idea list in the main answer /
+   queue below): nightlife-door anxiety (club dress code post is #2 sitewide),
+   transport fines, money/cash friction, BER departure-side anxiety, Berlin Marathon
+   (Sep), Silvester (Dec). Narrative history posts are deprioritized for SEO; they
+   serve internal links and social only.
+5. **Do not chase**: generic "where to stay"/"3 days in berlin"/"best time to visit"
+   head terms (months old, zero visibility, brutal SERPs) — refresh only with a
+   differentiated angle, do not write new head-term posts.
 
 This is the working list of new blog ideas checked against the live BerlinWalk blog sitemap. Avoid duplicating existing posts unless the angle below is clearly different.
 
