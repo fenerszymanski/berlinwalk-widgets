@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-07-05T20:18:22.445Z",
+  "commit": "9003fbd",
+  "attempt": 21,
+  "results": [
+    {
+      "name": "blog-index-data",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 20:18:08 GMT",
+      "bytes": 354309,
+      "latest0": "berliner-dom-tickets",
+      "relatedToolSlug": "berliner-dom-visit-planner",
+      "totalPosts": 171,
+      "missing": []
+    }
+  ]
+}
