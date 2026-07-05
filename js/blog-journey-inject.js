@@ -1842,6 +1842,10 @@
     ATTRIBUTION_KEYS.forEach(function (key) {
       if (incoming.searchParams.has(key)) url.searchParams.set(key, incoming.searchParams.get(key));
     });
+    if (context && /nextslot/i.test(context)) {
+      var incomingContent = incoming.searchParams.get('utm_content') || currentSlug() || 'post';
+      url.searchParams.set('utm_content', slugify(incomingContent.replace(/_nextslot$/i, '') + '_nextslot'));
+    }
     if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
     if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'blog_bridge');
     if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', 'utility_blog_booking_bridge');
