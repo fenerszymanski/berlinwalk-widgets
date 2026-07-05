@@ -166,7 +166,8 @@
   "berlin-museum-bag-rules": "berlin-museum-bag-rules",
   "bebelplatz-berlin": "bebelplatz-berlin",
   "atm-in-berlin": "atm-in-berlin",
-  "holocaust-memorial-berlin": "holocaust-memorial-berlin"
+  "holocaust-memorial-berlin": "holocaust-memorial-berlin",
+  "berlin-train-stations": "berlin-train-stations"
 };
 
   var SCHEMAS = {
@@ -7942,6 +7943,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, but choose the timing carefully. The BerlinWalk tour lasts about 2 hours and covers central Berlin layers around Alexanderplatz, Museum Island and the historic centre. A quiet field visit can work before or after; the full Information Centre may be better when you have proper attention."
+        }
+      }
+    ]
+  },
+  "berlin-train-stations": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Which Berlin train station is best for tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For many first-time visitors, Berlin Hauptbahnhof is the easiest all-round station because it is central and connects to the S-Bahn, U5, buses, trams and taxis. But the best Berlin train station depends on your hotel and your next move."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Berlin Hauptbahnhof close to Alexanderplatz?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but it is usually better to take the S-Bahn or U5 rather than walk with luggage. Berlin.de notes that S-Bahn travel from Hauptbahnhof to Alexanderplatz takes about 10 minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which Berlin train station is best for BER Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Südkreuz is very strong for BER Airport. Current BER and DB Regio information lists the FEX route via Hauptbahnhof, Potsdamer Platz and Südkreuz, with Südkreuz to BER at about 14 minutes before disruption buffers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Ostbahnhof a good arrival station in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Ostbahnhof is good if you are staying in Friedrichshain, near East Side Gallery, or on the east side of the city. For classic first-time sights in Mitte, use the east-west S-Bahn line through Alexanderplatz and Friedrichstraße."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I change my train ticket to arrive at Hauptbahnhof?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not automatically. If your hotel is west, north or south, Spandau, Gesundbrunnen or Südkreuz can be smarter. If your first fixed plan is in the old centre or at the BerlinWalk meeting point, Hauptbahnhof is usually simpler."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berlin train stations need an AB or ABC ticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Normal journeys inside Berlin usually use AB. BER Airport and Potsdam are in zone C, so trips there normally need ABC or a valid zone C extension."
         }
       }
     ]
