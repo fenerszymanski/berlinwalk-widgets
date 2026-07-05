@@ -622,11 +622,11 @@
 
   function compactFloatingCta() {
     var desktopLabel = document.querySelector('#bw-desktop-cta .bw-label-big');
-    if (desktopLabel && cleanText(desktopLabel.textContent) !== 'Book Tour') {
+    if (desktopLabel && !/next tours/i.test(cleanText(desktopLabel.textContent)) && cleanText(desktopLabel.textContent) !== 'Book Tour') {
       desktopLabel.textContent = 'Book Tour';
     }
     var stickyBtn = document.querySelector('#bw-sticky-cta .bw-btn');
-    if (stickyBtn && cleanText(stickyBtn.textContent) !== '🚶 Book Walking Tour') {
+    if (stickyBtn && !/next tours/i.test(cleanText(stickyBtn.textContent)) && cleanText(stickyBtn.textContent) !== '🚶 Book Walking Tour') {
       stickyBtn.textContent = '🚶 Book Walking Tour';
     }
   }
