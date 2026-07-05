@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-07-05T19:45:40.832Z",
+  "attempt": 8,
+  "commit": "e1f355a",
+  "results": [
+    {
+      "name": "widget",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 19:45:12 GMT",
+      "bytes": 20567,
+      "missing": []
+    },
+    {
+      "name": "quick-summary",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 19:45:13 GMT",
+      "bytes": 159972,
+      "missing": []
+    },
+    {
+      "name": "faq-data",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 19:45:18 GMT",
+      "bytes": 331016,
+      "missing": []
+    },
+    {
+      "name": "faq-inject",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 19:45:18 GMT",
+      "bytes": 394930,
+      "missing": []
+    },
+    {
+      "name": "tools-hub",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 19:45:13 GMT",
+      "bytes": 95192,
+      "missing": []
+    },
+    {
+      "name": "icon-160",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 19:45:18 GMT",
+      "bytes": 49430
+    },
+    {
+      "name": "hero-image",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 19:45:13 GMT",
+      "bytes": 2576860
+    }
+  ]
+}
