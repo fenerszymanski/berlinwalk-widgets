@@ -11093,6 +11093,19 @@
   var aiEnhancement = null;
   var aiStatus = 'idle';
   var aiRequestId = 0;
+  var tripPlannerTracking = null;
+  var trackingConsent = (function () {
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      return {
+        analytics: params.get('analytics_consent') === '1',
+        advertising: params.get('advertising_consent') === '1',
+        functional: params.get('functional_consent') === '1'
+      };
+    } catch (error) {
+      return { analytics: false, advertising: false, functional: false };
+    }
+  })();
   resetLocalUnlockForQa();
   var unlocked = isUnlocked() || forceLocalUnlockForQa() || shouldOpenEmailPlan();
   var gateViewTracked = false;
@@ -11154,20 +11167,6 @@
     curry_61: { label: 'Curry 61', query: 'Curry 61 Berlin', area: 'Mitte', type: 'food', lat: 52.5231, lng: 13.4025, why: 'A famous Mitte currywurst spot serving quick, local, and crispy Berlin street food.' },
     hackescher_markt_market: { label: 'Hackescher Markt Weekly Market', query: 'Wochenmarkt Hackescher Markt Berlin', area: 'Mitte', type: 'food', lat: 52.5221, lng: 13.4027, why: 'A lively open-air street food market operating only on Thursdays and Saturdays.' }
   };
-
-  var tripPlannerTracking = null;
-  var trackingConsent = (function () {
-    try {
-      var params = new URLSearchParams(window.location.search || '');
-      return {
-        analytics: params.get('analytics_consent') === '1',
-        advertising: params.get('advertising_consent') === '1',
-        functional: params.get('functional_consent') === '1'
-      };
-    } catch (error) {
-      return { analytics: false, advertising: false, functional: false };
-    }
-  })();
 
   function analyticsAllowed() {
     return trackingConsent.analytics === true;
