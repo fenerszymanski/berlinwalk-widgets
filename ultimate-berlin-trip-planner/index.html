@@ -838,6 +838,10 @@
       grid-template-columns: auto minmax(0, 1fr);
     }
 
+    #bw-trip-planner .bw-quiz-nav.is-start-review {
+      grid-template-columns: auto;
+    }
+
     #bw-trip-planner .bw-quiz-back,
     #bw-trip-planner .bw-quiz-next {
       align-items: center;
@@ -12951,6 +12955,7 @@
     var detailsPanel = root.querySelector('[data-plan-details]');
     var shell = root.querySelector('[data-quiz-shell]');
     var nav = root.querySelector('[data-quiz-nav]');
+    var startCard = root.querySelector('[data-start-card]');
     if (!quizFlowEnabled) {
       if (nav) nav.hidden = true;
       return;
@@ -12988,7 +12993,10 @@
     var back = root.querySelector('[data-quiz-back]');
     if (back) back.disabled = quizCurrentStep <= 0 || planningInProgress;
     var next = root.querySelector('[data-quiz-next]');
+    var startCardVisible = Boolean(startCard && !startCard.hidden);
+    if (nav) nav.classList.toggle('is-start-review', startCardVisible);
     if (next) {
+      next.hidden = startCardVisible;
       next.disabled = planningInProgress || (isLastStep && planGenerated && !planNeedsUpdate);
       next.textContent = isLastStep
         ? (planGenerated ? (planNeedsUpdate ? 'Update preview' : 'Preview is current') : 'Build my Berlin plan')
