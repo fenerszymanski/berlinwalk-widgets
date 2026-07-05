@@ -3,7 +3,6 @@
  */
 (function () {
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner#planner';
   var HERO_IMAGE_URL = getImageUrl('hero');
   var SESSION_KEY = 'bw-exit-intent-triggered';
   var DESKTOP_MIN_WIDTH = 1024;
@@ -120,12 +119,10 @@
       '.bw-exit-title{margin:0 44px 12px 0;color:#FFFFFF;font-size:34px;line-height:1.05;font-weight:900;letter-spacing:0;}',
       '.bw-exit-copy{margin:0 0 24px;color:#FAFAF5;font-size:15px;line-height:1.55;font-weight:500;max-width:39em;}',
       '.bw-exit-actions{display:grid;gap:12px;}',
-      '.bw-exit-primary,.bw-exit-secondary{font-family:Montserrat,Arial,sans-serif;cursor:pointer;text-decoration:none;}',
+      '.bw-exit-primary{font-family:Montserrat,Arial,sans-serif;cursor:pointer;text-decoration:none;}',
       '.bw-exit-primary{border:0;border-radius:8px;background:#FFE600;color:#1B5E20;font-size:15px;font-weight:900;line-height:1.2;text-align:center;padding:16px 20px;box-shadow:0 10px 24px rgba(255,230,0,.18);transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease;}',
       '.bw-exit-primary:hover,.bw-exit-primary:focus-visible{background:#fff066;transform:translateY(-1px);box-shadow:0 14px 28px rgba(255,230,0,.26);outline:0;}',
-      '.bw-exit-secondary{border:1px solid rgba(250,250,245,.48);border-radius:8px;background:rgba(250,250,245,.08);color:#FAFAF5;font-size:14px;font-weight:800;text-align:center;padding:15px 18px;transition:background-color .18s ease,border-color .18s ease,color .18s ease;}',
-      '.bw-exit-secondary:hover,.bw-exit-secondary:focus-visible{border-color:#C5E1A5;background:rgba(197,225,165,.14);color:#FFFFFF;outline:0;}',
-      '@media (prefers-reduced-motion:reduce){.bw-exit-overlay,.bw-exit-card,.bw-exit-step,.bw-exit-close,.bw-exit-primary,.bw-exit-secondary{transition:none!important;animation:none!important;}}'
+      '@media (prefers-reduced-motion:reduce){.bw-exit-overlay,.bw-exit-card,.bw-exit-step,.bw-exit-close,.bw-exit-primary{transition:none!important;animation:none!important;}}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -195,7 +192,6 @@
       '<p class="bw-exit-copy">Yusuf here! If you want the city to make sense early in your trip, reserve a free spot on my 2-hour Berlin walk. No upfront payment, tip-based at the end.</p>',
       '<div class="bw-exit-actions">',
       '<a class="bw-exit-primary" href="' + BOOKING_URL + '" data-bw-exit-book>Book Walking Tour</a>',
-      '<a class="bw-exit-secondary" href="' + PLANNER_URL + '" data-bw-exit-planner>Plan first if needed</a>',
       '</div>',
       '</section>',
       '</div>',
@@ -216,7 +212,6 @@
   function bindPopupEvents(overlay) {
     var closeButton = overlay.querySelector('[data-bw-exit-close]');
     var bookButton = overlay.querySelector('[data-bw-exit-book]');
-    var plannerButton = overlay.querySelector('[data-bw-exit-planner]');
 
     closeButton.addEventListener('click', function () {
       closePopup('x_button');
@@ -224,10 +219,6 @@
     bookButton.addEventListener('click', function () {
       trackEvent('bw_exit_popup_book_click', { cta_url: BOOKING_URL });
       closePopup('book_click');
-    });
-    plannerButton.addEventListener('click', function () {
-      trackEvent('bw_exit_popup_planner_click', { cta_url: PLANNER_URL });
-      closePopup('planner_click');
     });
     overlay.addEventListener('click', function (event) {
       if (event.target === overlay) closePopup('overlay_click');

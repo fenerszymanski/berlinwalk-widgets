@@ -101,18 +101,17 @@ events.
 Add this through Wix Custom Code in Body-end on all pages:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@315d38f/js/exit-intent-popup.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@COMMIT_SHA/js/exit-intent-popup.js" defer></script>
 ```
 
 `exit-intent-popup.js` waits 30 seconds, then opens a desktop-only exit-intent
 dialog once per session when the cursor leaves the top of the viewport. It
 skips `/book-berlin-walking-tour`, `/berlin-trip-planner`, and confirmation
 routes, links the primary CTA to the free walking tour booking page, and keeps
-Trip Planner as the secondary option.
+the popup focused on that single booking action.
 
 Analytics events are sent to `dataLayer` and, when available, `gtag`:
-`bw_exit_popup_view`, `bw_exit_popup_book_click`,
-`bw_exit_popup_planner_click`, and `bw_exit_popup_close`.
+`bw_exit_popup_view`, `bw_exit_popup_book_click`, and `bw_exit_popup_close`.
 
 ## Lead Form
 
