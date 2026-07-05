@@ -496,6 +496,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(berlin-before-hotel-check-in|before hotel check-in|hotel check-in|early check-in berlin|check-in gap)/.test(s)) return 'berlin-check-in-gap-planner';
   if (/(where-to-park-in-berlin-alexanderplatz|where to park in berlin|alexanderplatz parking|parking near alexanderplatz)/.test(s)) return 'alexanderplatz-parking-map';
   if (/(berlin-train-stations|berlin train stations|hauptbahnhof|ostbahnhof|südkreuz|suedkreuz|gesundbrunnen|spandau)/.test(s)) return 'berlin-train-station-first-move';
   if (/(berlin-transport-strike|transport strike|bvg strike|s-bahn disruption|transport disruption|trains stop)/.test(s)) return 'berlin-transport-backup-planner';

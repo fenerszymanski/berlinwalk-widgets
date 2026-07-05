@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-05T05:53:30.554Z",
+  "updatedAt": "2026-07-05T13:00:21.390Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 152,
+  "totalPosts": 153,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -241,23 +241,6 @@
       "relatedToolSlug": "transport-ticket-calculator"
     },
     {
-      "title": "What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips",
-      "slug": "what-to-wear-to-berlin-clubs",
-      "path": "/post/what-to-wear-to-berlin-clubs",
-      "url": "https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs",
-      "excerpt": "A practical Berlin club dress-code guide by BerlinWalk: Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more. Includes door difficulty ratings, outfit tips, what to avoid, and a Club Picker.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "8 min read",
-      "publishedDate": "2026-05-23T19:36:48.764Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
-      "alt": "People in fetish outfits line up at a red-lit nightclub entrance, with a bouncer checking guests in a dark industrial hallway.",
-      "relatedToolSlug": "berlin-tip-calculator"
-    },
-    {
       "title": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "slug": "where-was-the-berlin-wall-interactive-map",
       "path": "/post/where-was-the-berlin-wall-interactive-map",
@@ -273,6 +256,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_e402936c668947d4ad7a3b464f5a38af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_6f4f6d714c71713574696f~mv2.jpg",
       "alt": "Where Was the Berlin Wall? An Interactive Map of East and West in 1989",
       "relatedToolSlug": "east-or-west-1989"
+    },
+    {
+      "title": "What to Wear to Berlin Clubs: Dress Codes, Door Difficulty & Club-by-Club Tips",
+      "slug": "what-to-wear-to-berlin-clubs",
+      "path": "/post/what-to-wear-to-berlin-clubs",
+      "url": "https://www.berlinwalk.com/post/what-to-wear-to-berlin-clubs",
+      "excerpt": "A practical Berlin club dress-code guide by BerlinWalk: Berghain, KitKat, Tresor, RSO, Sisyphos, Kater Blau, Renate and more. Includes door difficulty ratings, outfit tips, what to avoid, and a Club Picker.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "food-nightlife",
+      "topicLabel": "Food & Nightlife",
+      "readTime": "8 min read",
+      "publishedDate": "2026-05-23T19:36:48.764Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_d36ad16d00214f64a859cd73dac7c8e9~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/kitkatclub_editorial_scene_4x3.jpg",
+      "alt": "People in fetish outfits line up at a red-lit nightclub entrance, with a bouncer checking guests in a dark industrial hallway.",
+      "relatedToolSlug": "berlin-tip-calculator"
     },
     {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try in 2026",
@@ -1583,6 +1583,23 @@
   ],
   "latest": [
     {
+      "title": "Berlin Before Hotel Check-In: What to Do With Luggage and Time",
+      "slug": "berlin-before-hotel-check-in",
+      "path": "/post/berlin-before-hotel-check-in",
+      "url": "https://www.berlinwalk.com/post/berlin-before-hotel-check-in",
+      "excerpt": "Arriving before your Berlin room is ready? Solve luggage first, choose a small first area, and use the check-in gap without dragging bags across the city.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "7 min read",
+      "publishedDate": "2026-07-05T12:57:53.922Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e8b287f6866d45b0b94ce6393d4d6961~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-before-hotel-check-in-luggage-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e8b287f6866d45b0b94ce6393d4d6961~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-before-hotel-check-in-luggage-cover.jpg",
+      "alt": "Rolling suitcases at Berlin Hauptbahnhof, showing the luggage problem before hotel check-in in Berlin.",
+      "relatedToolSlug": "berlin-check-in-gap-planner"
+    },
+    {
       "title": "Berlin Train Stations: Hauptbahnhof, Ostbahnhof, Südkreuz and Arrival Tips",
       "slug": "berlin-train-stations",
       "path": "/post/berlin-train-stations",
@@ -1768,26 +1785,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_84346044f58c4163809f987562960b4e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-restaurant-phrases-cafe-terrace-cover-1600.jpg",
       "alt": "A quiet Berlin cafe terrace with tables, trees and a chalkboard menu",
       "relatedToolSlug": "berlin-restaurant-phrase-card"
-    },
+    }
+  ],
+  "allPosts": [
     {
-      "title": "Berlin Accessibility: Step-Free Transport, Museums and Route Tips",
-      "slug": "berlin-accessibility",
-      "path": "/post/berlin-accessibility",
-      "url": "https://www.berlinwalk.com/post/berlin-accessibility",
-      "excerpt": "A practical Berlin accessibility guide for tourists: step-free public transport, lift-status checks, wheelchair/stroller route tips, museums, Reichstag and TV Tower limits.",
+      "title": "Berlin Before Hotel Check-In: What to Do With Luggage and Time",
+      "slug": "berlin-before-hotel-check-in",
+      "path": "/post/berlin-before-hotel-check-in",
+      "url": "https://www.berlinwalk.com/post/berlin-before-hotel-check-in",
+      "excerpt": "Arriving before your Berlin room is ready? Solve luggage first, choose a small first area, and use the check-in gap without dragging bags across the city.",
       "category": "Tourist Tips",
       "categorySlug": "tourist-tips",
       "topic": "first-day",
       "topicLabel": "First Day in Berlin",
       "readTime": "7 min read",
-      "publishedDate": "2026-07-01T03:40:58.886Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_4fe9c70f4f22487db4e5d27163c00ce1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-accessibility-00-berlin-accessibility-cover.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_4fe9c70f4f22487db4e5d27163c00ce1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/berlin-accessibility-00-berlin-accessibility-cover.jpg",
-      "alt": "Wheelchair user beside a step-free Berlin station lift with a bus and Museum Island skyline in the background",
-      "relatedToolSlug": "berlin-step-free-planner"
-    }
-  ],
-  "allPosts": [
+      "publishedDate": "2026-07-05T12:57:53.922Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_e8b287f6866d45b0b94ce6393d4d6961~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-before-hotel-check-in-luggage-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_e8b287f6866d45b0b94ce6393d4d6961~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-before-hotel-check-in-luggage-cover.jpg",
+      "alt": "Rolling suitcases at Berlin Hauptbahnhof, showing the luggage problem before hotel check-in in Berlin.",
+      "relatedToolSlug": "berlin-check-in-gap-planner"
+    },
     {
       "title": "Berlin Train Stations: Hauptbahnhof, Ostbahnhof, Südkreuz and Arrival Tips",
       "slug": "berlin-train-stations",
