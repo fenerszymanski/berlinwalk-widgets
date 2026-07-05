@@ -1,0 +1,31 @@
+{
+  "checkedAt": "2026-07-05T20:04:00.384Z",
+  "commit": "e7a828a",
+  "attempt": 22,
+  "results": [
+    {
+      "name": "quick-summary",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 20:03:25 GMT",
+      "bytes": 160088,
+      "missing": []
+    },
+    {
+      "name": "faq-data",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 20:03:25 GMT",
+      "bytes": 331429,
+      "missing": []
+    },
+    {
+      "name": "faq-inject",
+      "ok": true,
+      "status": 200,
+      "lastModified": "Sun, 05 Jul 2026 20:03:51 GMT",
+      "bytes": 395447,
+      "missing": []
+    }
+  ]
+}
