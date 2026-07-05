@@ -937,7 +937,7 @@
         "name": "How much does the Berlin WelcomeCard cost in 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The Classic version starts at €28.50 for 48 hours, rising to around €52 for 6 days. The Museum Island version (72 hours only) starts at €62. The All-Inclusive card with 30+ free attractions and a hop-on/off bus starts at €99. A Basic discount-only version (no transport) costs €9 for 72 hours. Exact prices depend on zone (AB = Berlin only, ABC = includes Potsdam and BER airport)."
+          "text": "The Classic version starts at €28.50 for 48 hours, then €39.50 for 72 hours, €49.50 for 4 days, €53.50 for 5 days, and €58.50 for 6 days in AB. The Museum Island version (72 hours) starts at €62. The All-Inclusive card starts at €99. The Basic discount-only version (no transport) costs €10 for 72 hours or €15 for 6 days. Exact prices still depend on zone: AB = Berlin only, ABC = includes BER Airport, Potsdam, and Oranienburg."
         }
       },
       {
@@ -945,7 +945,7 @@
         "name": "Is the Berlin WelcomeCard actually worth buying?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "It depends on your trip. The WelcomeCard is worth it if you plan to visit multiple paid museums (especially Museum Island), use public transport daily, and stay 3+ days. It's not worth it if you focus on free sights (Reichstag, Holocaust Memorial, East Side Gallery), walk most places, or already have a Deutschlandticket. Use the calculator above to run the numbers for your actual plan."
+          "text": "It depends on your trip. The WelcomeCard is worth it when you will actually use public transport every day and pay for museums or attractions. It is not an automatic win on transport alone anymore: three separate 24-hour AB tickets cost €33.60, while the 72-hour Classic AB WelcomeCard costs €39.50. It is usually not worth it if your plan is mostly free sights, central walking, or a Deutschlandticket. Use the calculator above with your real itinerary."
         }
       },
       {
@@ -953,7 +953,7 @@
         "name": "What's the difference between WelcomeCard and Museum Pass?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The 3-Day Museum Pass Berlin (€36) gives free entry to 30+ museums (including all of Museum Island) but no transport. The Museum Island WelcomeCard (€62) includes free entry to the 5 Museum Island museums plus unlimited transport plus discounts at 170+ partners. If you're a museum-heavy traveler who won't use much transport, the Museum Pass wins. If you're mixing museums with getting around the city, the WelcomeCard Museum Island version usually wins."
+          "text": "The 3-Day Museum Pass Berlin (€32) gives free entry to 30+ museums but no transport. The Museum Island WelcomeCard (€62) includes unlimited transport plus the Museum Island group, which currently includes Altes Museum, Neues Museum, Alte Nationalgalerie, Bode Museum, PETRI Berlin, and Pergamonmuseum. Das Panorama. If your museum list is serious and your transport use is light, the Museum Pass can win. If you are mixing museums with getting around the city, the Museum Island WelcomeCard usually has the better balance."
         }
       },
       {
@@ -969,7 +969,7 @@
         "name": "Where should I buy the Berlin WelcomeCard?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Buy it from the official site (berlin-welcomecard.de), visitberlin.de, or at BVG/S-Bahn ticket machines and counters at major stations. Avoid unofficial resellers — the price is the same or higher, and you miss out on the official app. You can choose between a digital ticket or a paper ticket that must be validated before your first ride. Phone screenshots of digital tickets are not accepted as valid tickets."
+          "text": "Buy it from the official site (berlin-welcomecard.de), visitberlin.de, or at BVG/S-Bahn ticket machines and counters at major stations. Avoid unofficial resellers. One practical caveat: tickets bought through BVG sales channels currently cannot be imported into the Berlin WelcomeCard app, so if you care about the official partner app and its bundled discounts, buy through the WelcomeCard side. Paper tickets still need to be validated before the first ride, and phone screenshots are not valid tickets."
         }
       }
     ]
@@ -1105,7 +1105,7 @@
         "name": "What is the fine for riding without a ticket in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The fine is €60, with no warnings or exceptions — including for tourists. You'll need to show ID and either pay on the spot or receive a bill at your home address. If you're caught three times within 12 months, it can become a criminal offense under German law."
+          "text": "The standard fine is €60, including for tourists. In practice, an unstamped or not-yet-activated ticket can be treated the same as no valid ticket. You will usually need to show ID and either pay or receive the bill formally. For a normal visitor, the safe assumption is simple: if the ticket is not valid at the moment of inspection, the €60 risk is real."
         }
       },
       {
@@ -1113,7 +1113,7 @@
         "name": "Where are the ticket validation machines in Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The validation machines (Entwerter) are small yellow or red boxes found on U-Bahn and S-Bahn platforms — usually near the stairs, escalators, or platform entrances. They are not inside the trains. Insert your paper ticket and the machine stamps it with the date and time. If you buy a ticket on the BVG app, validation is automatic."
+          "text": "On U-Bahn and S-Bahn, the validation machines (Entwerter) are the small yellow or red boxes on the platform, usually near stairs, escalators, or entrances. But Berlin is not one single rule: on bus, tram, and ferry, paper tickets can be validated on board, and many tickets bought from tram machines are already time-stamped immediately. Always check whether the ticket already shows a date and time before assuming it still needs a separate stamp."
         }
       },
       {
@@ -1121,7 +1121,7 @@
         "name": "Do I need to validate a ticket bought on the BVG app?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "No. Tickets purchased through the BVG Fahrinfo Plus app are validated automatically at the moment of purchase. The app displays a moving QR code and countdown timer as proof of validity. Just make sure your phone is charged — a dead phone means you can't prove you have a ticket."
+          "text": "For the safe tourist rule, treat app tickets as something you must activate before the journey begins. That is the important part: do it before you board, then keep the phone ready to show the QR code. A dead battery is still a problem because you may have paid for a ticket and still be unable to prove it."
         }
       },
       {
@@ -1129,7 +1129,7 @@
         "name": "How often do ticket inspectors check on Berlin trains?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The BVG employs hundreds of plainclothes inspectors who carry out millions of checks per year. There's no fixed schedule or pattern. Central lines like U2, U5, and U8 near Alexanderplatz are checked most frequently. You might go days without a check, then get inspected multiple times in one day."
+          "text": "There is no tourist-safe pattern you can rely on. Inspections can happen on U-Bahn, S-Bahn, tram, or bus, and central routes around places like Alexanderplatz tend to catch plenty of visitors. You might go a day without a check and then get inspected twice in one afternoon, which is exactly why the open-barrier system fools people."
         }
       },
       {
@@ -1137,7 +1137,7 @@
         "name": "What is the best ticket for tourists visiting Berlin?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For most visitors, a Tageskarte (day ticket) for zones AB at around €9.50 is the best value if you'll take more than two trips in a day. For longer stays, consider the Berlin WelcomeCard or a 7-day pass. The easiest option overall is buying tickets through the BVG app, which validates automatically and eliminates the risk of forgetting to stamp."
+          "text": "For most visitors, the safest default is a 24-hour AB ticket at €11.20 if you will ride several times in a day. Buy ABC if your trip includes BER Airport, Potsdam, or Oranienburg. For longer stays, compare normal day tickets against the Berlin WelcomeCard based on your actual paid attractions. The lowest-stress option overall is still the BVG app because it removes the paper-stamp problem."
         }
       }
     ]
