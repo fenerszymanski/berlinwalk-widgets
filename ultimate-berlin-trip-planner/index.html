@@ -7367,6 +7367,12 @@
       width: 14px;
     }
 
+    #bw-trip-planner .bw-plan-tour-book {
+      letter-spacing: 0.7px;
+      min-height: 46px;
+      text-transform: uppercase;
+    }
+
     #bw-trip-planner .bw-tour-actions {
       margin-top: 10px;
     }
@@ -10602,7 +10608,7 @@
           </div>
         </div>
 
-        <section class="bw-start-card" aria-label="Start Berlin trip plan" data-start-card>
+        <section class="bw-start-card" aria-label="Start Berlin trip plan" data-start-card hidden>
           <div class="bw-build-copy">
             <strong>Start building my plan</strong>
             <span>First I will use these essentials. Next, you will confirm the route details that shape the actual plan.</span>
@@ -10847,6 +10853,7 @@
           <button class="bw-secondary" type="button" data-download-pdf disabled>Download PDF</button>
           <button class="bw-secondary" type="button" data-print-plan disabled>Print plan</button>
         </div>
+        <a class="bw-primary bw-plan-tour-book" data-plan-tour-book data-book-link data-book-surface="plan_actions" data-cta-kind="plan_actions" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=trip_planner&utm_medium=widget&utm_campaign=tp_tour_bridge&utm_content=plan_actions" target="_top" hidden>Reserve the tour spot</a>
         <div class="bw-message" data-action-status aria-live="polite"></div>
       </div>
       <div data-after-itinerary-divider></div>
@@ -10881,7 +10888,8 @@
   var TIMEZONE = 'Europe/Berlin';
   var FORECAST_MAX_DAYS = 15;
   var WEATHER_TIMEOUT_MS = 6500;
-  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlinwalk&utm_medium=widget&utm_campaign=ultimate_berlin_trip_planner&utm_content=book_free_spot';
+  var BOOKING_ROUTE_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOKING_URL = plannerBookingUrl('tour_day_card');
   var BOOKING_SHORT_URL = 'https://www.berlinwalk.com/book';
   var BOOKING_SHORT_LABEL = 'berlinwalk.com/book';
   var TICKET_CALCULATOR_URL = 'https://www.berlinwalk.com/tools/transport-ticket-calculator';
@@ -10907,6 +10915,21 @@
   var UNLOCK_KEY = 'bw_trip_planner_unlock_session_v3';
   var UNLOCK_MS = 30 * 24 * 60 * 60 * 1000;
   var BRANDED_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
+
+  function plannerBookingUrl(content) {
+    var safeContent = String(content || 'tour_day_card').replace(/[^a-z0-9_:-]/gi, '_').slice(0, 64) || 'tour_day_card';
+    try {
+      var url = new URL(BOOKING_ROUTE_URL);
+      url.searchParams.set('utm_source', 'trip_planner');
+      url.searchParams.set('utm_medium', 'widget');
+      url.searchParams.set('utm_campaign', 'tp_tour_bridge');
+      url.searchParams.set('utm_content', safeContent);
+      return url.toString();
+    } catch (error) {
+      return BOOKING_ROUTE_URL + '?utm_source=trip_planner&utm_medium=widget&utm_campaign=tp_tour_bridge&utm_content=' + encodeURIComponent(safeContent);
+    }
+  }
+
   var DAY_PHOTOS = {
     arrival: { src: 'assets/day-art/day-oil-arrival.webp', alt: 'Oil painting style Berlin arrival day with suitcase near Alexanderplatz' },
     wall: { src: 'assets/day-art/day-oil-wall.webp', alt: 'Oil painting style Berlin Wall and Cold War route' },
@@ -12741,6 +12764,14 @@
     }).format(dateFromKey(dateKey));
   }
 
+  function formatWeekday(dateKey) {
+    if (!dateKey) return '';
+    return new Intl.DateTimeFormat('en-GB', {
+      weekday: 'long',
+      timeZone: 'UTC'
+    }).format(dateFromKey(dateKey));
+  }
+
   function formatReminderDate(dateKey) {
     return new Intl.DateTimeFormat('en-GB', {
       weekday: 'short',
@@ -13068,6 +13099,7 @@
       if (nav) nav.hidden = true;
       return;
     }
+    if (startCard) startCard.hidden = true;
     if (form) {
       form.classList.add('is-quiz-flow');
       form.classList.toggle('is-quiz-complete', quizCurrentStep >= QUIZ_STEPS.length - 1);
@@ -16407,7 +16439,7 @@
   function renderTourAnchor(plan) {
     var bridge = tourBridgeSignal(plan);
     if (!bridge.show) return '';
-    var cta = ctaForPlan(plan);
+    var cta = ctaForPlan(plan, 'tour_day_card');
     var slot = bridge.slot || tourSlotForPlan(plan);
     var timing = state.tourIntent === 'booked'
       ? 'World Clock meeting point'
@@ -16420,10 +16452,32 @@
         '<span>' + escapeHtml(copy) + '</span>' +
       '</div>' +
       '<div class="bw-tour-links">' +
-        '<a class="bw-tour-link primary" href="' + escapeHtml(cta.href) + '" target="' + escapeHtml(cta.target || '_top') + '" data-book-link data-cta-kind="' + escapeHtml(cta.kind) + '">' + iconSvg('calendar') + '<span>' + escapeHtml(cta.label) + '</span></a>' +
+        '<a class="bw-tour-link primary" href="' + escapeHtml(cta.href) + '" target="' + escapeHtml(cta.target || '_top') + '" data-book-link data-book-surface="' + escapeHtml(cta.surface || 'tour_day_card') + '" data-cta-kind="' + escapeHtml(cta.kind) + '">' + iconSvg('calendar') + '<span>' + escapeHtml(cta.label) + '</span></a>' +
         '<a class="bw-tour-link" href="' + escapeHtml(meetingPointUrl()) + '" target="_blank" rel="noopener" data-meeting-link>' + iconSvg('pin') + '<span>World Clock meeting point</span></a>' +
       '</div>' +
     '</article>';
+  }
+
+  function renderPlanTourBookingCta(plan) {
+    var link = root.querySelector('[data-plan-tour-book]');
+    if (!link) return;
+    if (!plan) {
+      link.hidden = true;
+      link.removeAttribute('href');
+      return;
+    }
+    var cta = ctaForPlan(plan, 'plan_actions');
+    if (!cta || cta.kind === 'meeting') {
+      link.hidden = true;
+      link.removeAttribute('href');
+      return;
+    }
+    link.hidden = false;
+    link.href = cta.href;
+    link.target = cta.target || '_top';
+    link.setAttribute('data-book-surface', cta.surface || 'plan_actions');
+    link.setAttribute('data-cta-kind', cta.kind || 'plan_actions');
+    link.innerHTML = iconSvg('calendar') + '<span>' + escapeHtml(cta.label) + '</span>';
   }
 
   function renderTourActions(plan) {
@@ -16438,7 +16492,7 @@
     var html = renderTourAnchor(plan);
     target.innerHTML = html;
     target.hidden = !html;
-    var cta = ctaForPlan(plan);
+    var cta = ctaForPlan(plan, 'tour_day_card');
     var slot = bridge.slot || tourSlotForPlan(plan);
     var viewKey = [
       state.arrivalDate,
@@ -16463,21 +16517,21 @@
     }
   }
 
-  function ctaForPlan(plan) {
+  function ctaForPlan(plan, surface) {
     var slot = tourSlotForPlan(plan);
+    var bookingSurface = surface || 'tour_day_card';
     if (state.tourIntent === 'booked') {
-      return { label: 'Save World Clock meeting point', href: meetingPointUrl(), target: '_blank', kind: 'meeting' };
+      return { label: 'Save World Clock meeting point', href: meetingPointUrl(), target: '_blank', kind: 'meeting', surface: bookingSurface };
     }
-    if (state.tourIntent === 'maybe') {
-      return { label: 'See tour details', href: BOOKING_URL, target: '_top', kind: 'tour_details' };
-    }
+    var weekday = slot && slot.dateKey ? formatWeekday(slot.dateKey) : 'next Tue-Sat';
+    var label = 'Reserve the ' + weekday + ' ' + (slot && slot.startLabel || TOUR_START_LABEL) + ' spot';
+    var kind = state.tourIntent === 'maybe' ? 'tour_details' : 'tour_day';
     if (arrivalDayTourEligible()) {
-      return { label: 'Book arrival-day ' + slot.startLabel + ' tour', href: BOOKING_URL, target: '_top', kind: 'arrival_day' };
+      kind = 'arrival_day';
+    } else if (slot && !slot.insideTrip) {
+      kind = 'next_tour';
     }
-    if (slot && slot.insideTrip) {
-      return { label: 'Book ' + slot.dayLabel + ' at ' + slot.startLabel, href: BOOKING_URL, target: '_top', kind: 'tour_day' };
-    }
-    return { label: 'Book the next Tue-Sat tour', href: BOOKING_URL, target: '_top', kind: 'next_tour' };
+    return { label: label, href: plannerBookingUrl(bookingSurface), target: '_top', kind: kind, surface: bookingSurface };
   }
 
   function controlWatch(plan) {
@@ -16701,11 +16755,12 @@
   function updatePrimaryCta(plan) {
     var link = root.querySelector('[data-book-link]');
     if (!link) return;
-    var cta = ctaForPlan(plan);
+    var cta = ctaForPlan(plan, link.getAttribute('data-book-surface') || 'tour_day_card');
     link.textContent = cta.label;
     link.href = cta.href;
     link.target = cta.target;
     link.setAttribute('data-cta-kind', cta.kind);
+    link.setAttribute('data-book-surface', cta.surface || 'tour_day_card');
   }
 
   function isPlannerBookHref(href) {
@@ -16719,14 +16774,18 @@
   }
 
   function decoratePlannerBookLinks(plan) {
-    var cta = ctaForPlan(plan || latestPlan || buildPlan());
+    var cta = ctaForPlan(plan || latestPlan || buildPlan(), 'tour_day_card');
     root.querySelectorAll('a[href]').forEach(function (link) {
       if (!isPlannerBookHref(link.getAttribute('href') || '')) return;
       link.setAttribute('data-book-link', '1');
       if (!link.getAttribute('data-cta-kind')) link.setAttribute('data-cta-kind', cta.kind || 'planner_book');
+      var surface = link.getAttribute('data-book-surface') || link.getAttribute('data-cta-kind') || cta.surface || 'planner_book';
+      link.setAttribute('data-book-surface', surface);
       try {
         var url = new URL(link.href, window.location.href);
-        if (url.pathname.toLowerCase() === '/book') link.href = cta.href;
+        if (url.pathname.toLowerCase() === '/book' || url.pathname.toLowerCase().indexOf('/book-berlin-walking-tour/') === 0) {
+          link.href = plannerBookingUrl(surface);
+        }
       } catch (err) {}
     });
   }
@@ -18200,6 +18259,7 @@
       var el = root.querySelector(selector);
       if (el) el.innerHTML = '';
     });
+    renderPlanTourBookingCta(null);
   }
 
   function renderUnlockedResultPanels(plan) {
@@ -18442,6 +18502,7 @@
       if (routeBrief) routeBrief.innerHTML = '';
       if (jumpBar) jumpBar.innerHTML = '';
       daysEl.innerHTML = '';
+      renderPlanTourBookingCta(null);
       renderAfterItineraryDivider(plan);
       renderTransportMaps(plan);
       renderShoppingPanel(plan);
@@ -18458,6 +18519,7 @@
       if (routeBrief) routeBrief.innerHTML = '';
       if (jumpBar) jumpBar.innerHTML = '';
       daysEl.innerHTML = '';
+      renderPlanTourBookingCta(null);
       renderAfterItineraryDivider(plan);
       renderTransportMaps(plan);
       renderShoppingPanel(plan);
@@ -18504,6 +18566,7 @@
     renderTransportMaps(plan);
     renderShoppingPanel(plan);
     renderEssentials(plan);
+    renderPlanTourBookingCta(plan);
   }
 
   function updateLeadPanelText(plan) {
@@ -23460,7 +23523,7 @@
 
   try {
     var bookingLink = root.querySelector('[data-book-link]');
-    if (bookingLink) bookingLink.href = BOOKING_URL;
+    if (bookingLink) bookingLink.href = plannerBookingUrl(bookingLink.getAttribute('data-book-surface') || 'tour_day_card');
 
     upgradeOptionIcons();
     initFromParams();

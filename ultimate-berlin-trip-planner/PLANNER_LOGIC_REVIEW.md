@@ -32,6 +32,15 @@ links to the branded product URL with the `tp_rescue_bridge` UTM set, and tracks
 `bw_trip_planner_rescue_cta_click` through the existing consent-gated Trip
 Planner event path.
 
+Update 2026-07-05: Wave 2.3 tightened the tour booking bridge. The recommended
+tour card now uses one decisive `Reserve the {weekday} {time} spot` CTA pointing
+to the canonical Wix Bookings service route with `utm_campaign=tp_tour_bridge`.
+The same CTA repeats once under the unlocked plan action row with
+`utm_content=plan_actions`; no date preselect query was added because the current
+Bookings route does not expose a supported preselect contract. The legacy
+two-step start card is also hidden during one-question quiz flow so visitors do
+not see both `Start building my plan` and `Next question`.
+
 ## 1. User Inputs
 
 ### Visible inputs
