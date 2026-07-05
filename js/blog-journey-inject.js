@@ -22,6 +22,9 @@
   var TOOL_ICON_BASE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/';
   var DEFAULT_TOOL_IMAGE = TOOL_ICON_BASE_URL + 'generic-tool.svg';
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOKING_DEST_SERVICE = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var BOOKING_DEST_LANDING = 'https://www.berlinwalk.com/free-berlin-walking-tour';
+  var BOOKING_EXPERIMENT_VARIANT = 'service';
   var BOOKING_NEXT_ACTION_PATCH_URL = 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@d0ef0f3/booking-calendar/book-now-intro-patch.js';
   var TRIP_PLANNER_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var TRACK_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/pf-event';
@@ -997,6 +1000,7 @@
       '.bw-blog-journey-content{display:flex;flex:1;flex-direction:column;padding:14px 15px 16px;}',
       '.bw-blog-journey-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.2px;line-height:1;margin-bottom:9px;text-transform:uppercase;}',
       '.bw-blog-journey-card strong{color:#212121;display:block;font-size:16px;font-weight:900;line-height:1.16;overflow-wrap:break-word;}',
+      '.bw-blog-journey-proof{align-self:flex-start;background:#F3F8EF;border:1px solid #C5E1A5;border-radius:999px;color:#1B5E20;display:inline-flex;font-size:11px;font-weight:900;letter-spacing:.2px;line-height:1.2;margin-top:10px;padding:6px 9px;}',
       '.bw-blog-journey-card-copy{color:#4E5A4E;display:block;font-family:Merriweather,Georgia,serif;font-size:14px;line-height:1.46;margin-top:10px;}',
       '[data-bw-tourcta]{display:none!important;}',
       '.bw-blog-back-top{align-items:center;background:#212121;border:2px solid #FFE600;border-radius:999px;bottom:24px;box-shadow:0 12px 28px rgba(0,0,0,.22);color:#FFFFFF;cursor:pointer;display:flex;font-size:22px;font-weight:900;height:44px;justify-content:center;opacity:0;pointer-events:none;position:fixed;right:22px;text-decoration:none;transform:translateY(10px);transition:opacity .18s ease,transform .18s ease,background .18s ease;visibility:hidden;width:44px;z-index:8500;}',
@@ -1548,8 +1552,45 @@
     }
   }
 
+  function normalizeBookingVariant(value) {
+    return value === 'landing' ? 'landing' : 'service';
+  }
+
+  function activeBookingVariant() {
+    return normalizeBookingVariant(BOOKING_EXPERIMENT_VARIANT);
+  }
+
+  function resolveBookingDestination() {
+    return activeBookingVariant() === 'landing' ? BOOKING_DEST_LANDING : BOOKING_DEST_SERVICE;
+  }
+
+  function bookingVariantSuffix(variant) {
+    return normalizeBookingVariant(variant) === 'landing' ? 'landing' : 'svc';
+  }
+
+  function stripBookingContentSuffixes(value) {
+    var output = String(value || '');
+    var previous = '';
+    while (output && output !== previous) {
+      previous = output;
+      output = output.replace(/_(nextslot|svc|landing)$/i, '');
+    }
+    return output;
+  }
+
+  function bookingContentValue(context, variant) {
+    var incoming = new URL(window.location.href);
+    var incomingContent = incoming.searchParams.get('utm_content') || currentSlug() || 'post';
+    var base = slugify(stripBookingContentSuffixes(incomingContent)) || slugify(currentSlug() || 'post');
+    var suffixes = [];
+    if (context && /nextslot/i.test(context)) suffixes.push('nextslot');
+    suffixes.push(bookingVariantSuffix(variant));
+    return slugify(base + '_' + suffixes.join('_'));
+  }
+
   function bookingJourneyCard(bookingUrl, title, context) {
     var slot = getNextTourSlot();
+    var variant = activeBookingVariant();
     return {
       label: 'Free walk',
       title: slot ? (slot.relativeLabel + ' at ' + slot.startLabel + ', walk Berlin with me') : (title || 'Walk this context with me in Berlin'),
@@ -1561,6 +1602,8 @@
       bookEvent: 'bw_blog_book_bridge_click',
       bookLinkKind: 'booking_bridge',
       bookOnceKey: 'bw_blog_book_bridge_click:' + (currentSlug() || 'post'),
+      bookingVariant: variant,
+      proofChip: '9.8/10 on FreeTour',
       ctaKind: 'booking'
     };
   }
@@ -1678,12 +1721,14 @@
     if (card.bookEvent) bookAttrs += ' data-bw-book-event="' + escapeAttr(card.bookEvent) + '"';
     if (card.bookLinkKind) bookAttrs += ' data-bw-book-link-kind="' + escapeAttr(card.bookLinkKind) + '"';
     if (card.bookOnceKey) bookAttrs += ' data-bw-book-once-key="' + escapeAttr(card.bookOnceKey) + '"';
+    if (card.bookingVariant) bookAttrs += ' data-bw-book-variant="' + escapeAttr(card.bookingVariant) + '"';
     var ctaKind = card.ctaKind ? ' data-bw-journey-cta-kind="' + escapeAttr(card.ctaKind) + '"' : '';
     return '<a class="bw-blog-journey-card bw-blog-journey-card-' + escapeAttr(key) + '" href="' + escapeAttr(card.url) + '" target="_top" data-bw-blog-journey-click="' + escapeAttr(card.label) + '"' + ctaKind + bookAttrs + '>' +
       '<span class="bw-blog-journey-image" aria-hidden="true"><img src="' + escapeAttr(image) + '" alt="" loading="lazy"></span>' +
       '<span class="bw-blog-journey-content">' +
         '<span class="bw-blog-journey-label">' + escapeHtml(card.label) + '</span>' +
         '<strong>' + escapeHtml(card.title) + '</strong>' +
+        (card.proofChip ? '<span class="bw-blog-journey-proof">' + escapeHtml(card.proofChip) + '</span>' : '') +
         (card.copy ? '<span class="bw-blog-journey-card-copy">' + escapeHtml(card.copy) + '</span>' : '') +
       '</span>' +
     '</a>';
@@ -1694,7 +1739,7 @@
     var post = currentPost(data);
     var posts = relatedPosts(data, post, 7);
     var tool = relatedTool(data, post);
-    var bookingUrl = data.bookingUrl || 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+    var bookingUrl = resolveBookingDestination();
     var strategy = journeyStrategy(post, tool, posts, bookingUrl);
     var cards = strategy.cards || [];
     if (!cards.length) return;
@@ -1743,7 +1788,8 @@
         href: link.href,
         intent: section.getAttribute('data-bw-blog-journey-intent') || '',
         cta_kind: link.getAttribute('data-bw-journey-cta-kind') || '',
-        book_context: link.getAttribute('data-bw-book-context') || ''
+        book_context: link.getAttribute('data-bw-book-context') || '',
+        variant: link.getAttribute('data-bw-book-variant') || ''
       };
       pushEvent('bw_blog_journey_click', payload);
       if (link.hasAttribute('data-book-link')) pushEvent('bw_blog_journey_booking_click', payload);
@@ -1842,14 +1888,10 @@
     ATTRIBUTION_KEYS.forEach(function (key) {
       if (incoming.searchParams.has(key)) url.searchParams.set(key, incoming.searchParams.get(key));
     });
-    if (context && /nextslot/i.test(context)) {
-      var incomingContent = incoming.searchParams.get('utm_content') || currentSlug() || 'post';
-      url.searchParams.set('utm_content', slugify(incomingContent.replace(/_nextslot$/i, '') + '_nextslot'));
-    }
+    url.searchParams.set('utm_content', bookingContentValue(context, activeBookingVariant()));
     if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
     if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'blog_bridge');
     if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', 'utility_blog_booking_bridge');
-    if (!url.searchParams.has('utm_content')) url.searchParams.set('utm_content', currentSlug() + '_' + context);
     return url;
   }
 
@@ -1871,6 +1913,7 @@
     var eventName = link.getAttribute('data-bw-book-event') || 'bw_book_link_click';
     var linkKind = link.getAttribute('data-bw-book-link-kind') || 'blog_book_link';
     var onceKey = link.getAttribute('data-bw-book-once-key') || '';
+    var variant = normalizeBookingVariant(link.getAttribute('data-bw-book-variant') || activeBookingVariant());
     var journey = link.closest('[' + JOURNEY_MARKER + ']');
     var journeyIntent = journey ? (journey.getAttribute('data-bw-blog-journey-intent') || '') : '';
 
@@ -1898,14 +1941,16 @@
           link_kind: linkKind,
           cta_name: context,
           journey_intent: journeyIntent,
-          cta_kind: link.getAttribute('data-bw-journey-cta-kind') || ''
+          cta_kind: link.getAttribute('data-bw-journey-cta-kind') || '',
+          variant: variant
         }
       };
       if (!pushEvent(eventName, {
         cta_name: context,
         link_kind: linkKind,
         journey_intent: journeyIntent,
-        page_path: window.location.pathname
+        page_path: window.location.pathname,
+        variant: variant
       })) return false;
       try {
         window.fetch(TRACK_ENDPOINT, {
