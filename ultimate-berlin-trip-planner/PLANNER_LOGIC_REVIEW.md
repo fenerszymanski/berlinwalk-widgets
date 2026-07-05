@@ -6,6 +6,12 @@ finding mistakes one by one in the UI.
 
 Last reviewed locally: 2026-06-02
 
+Update 2026-07-05: Wave 0 stabilization added a small sequential block-window
+scheduler in `index.html`. Rendered time windows keep their original durations,
+but a block now starts no earlier than the previous timed block ends. This fixes
+the verified Day 1 lunch `13:30-14:30` / afternoon `14:00-16:30` overlap without
+changing the underlying day-template order.
+
 ## 1. User Inputs
 
 ### Visible inputs
@@ -575,6 +581,8 @@ These are not bugs exactly, but deserve Yusuf review:
 - Some templates still say alternatives inside one block (`Reichstag or Brandenburg`, `Tempelhofer or Tiergarten`). This is readable, but can feel less decisive.
 - Long plans are now less repetitive by map anchors, but block copy can still repeat phrases like "Keep this cluster relaxed".
 - `tourIntent` is hidden, so booked-user behavior exists but is not actively chosen in the UI.
+- The former block-time overlap bug has a render-level scheduler now; future
+  template edits should still avoid impossible windows at the source.
 
 ## 15. Suggested Review Pass
 
@@ -588,4 +596,3 @@ Yusuf can review in this order:
 6. Should gentle mode be less repetitive with coffee pauses?
 7. Should Monday/Sunday/public holiday logic become more aggressive?
 8. Which copy feels too mechanical and should be rewritten in a warmer local voice?
-

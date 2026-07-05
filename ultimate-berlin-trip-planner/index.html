@@ -993,6 +993,30 @@
       margin: 0;
     }
 
+    #bw-trip-planner .bw-load-failure {
+      background: #FFF8D8;
+      border: 1px solid rgba(230, 57, 70, 0.38);
+      border-radius: 8px;
+      color: var(--bw-text);
+      display: grid;
+      gap: 8px;
+      padding: 16px;
+    }
+
+    #bw-trip-planner .bw-load-failure strong {
+      color: var(--bw-green);
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-trip-planner .bw-load-failure span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+    }
+
     #bw-trip-planner .bw-planning-card {
       grid-column: 1 / -1;
     }
@@ -11653,7 +11677,38 @@
     return 'pin';
   }
 
-  function dayBlockWindow(day, block, index) {
+  function parseClockTimeMinutes(value) {
+    var match = /^(\d{1,2}):(\d{2})$/.exec(String(value || '').trim());
+    if (!match) return null;
+    var hours = Number(match[1]);
+    var minutes = Number(match[2]);
+    if (!Number.isFinite(hours) || !Number.isFinite(minutes)) return null;
+    if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) return null;
+    return (hours * 60) + minutes;
+  }
+
+  function parseTimeWindowMinutes(value) {
+    var match = /^(\d{1,2}:\d{2})\s*-\s*(\d{1,2}:\d{2})$/.exec(String(value || '').trim());
+    if (!match) return null;
+    var start = parseClockTimeMinutes(match[1]);
+    var end = parseClockTimeMinutes(match[2]);
+    if (start == null || end == null || end <= start) return null;
+    return { start: start, end: end, duration: end - start };
+  }
+
+  function formatClockTimeMinutes(minutes) {
+    var safe = Math.max(0, Math.round(minutes));
+    var hours = Math.floor(safe / 60);
+    var mins = safe % 60;
+    return String(hours).padStart(2, '0') + ':' + String(mins).padStart(2, '0');
+  }
+
+  function formatTimeWindowMinutes(start, duration) {
+    var safeDuration = Math.max(30, Math.round(duration || 0));
+    return formatClockTimeMinutes(start) + '-' + formatClockTimeMinutes(start + safeDuration);
+  }
+
+  function baseDayBlockWindow(day, block, index) {
     var label = String((block && block.time) || '').toLowerCase();
     var type = dayVisualType(day);
     var firstDay = day && day.dayNumber === 1;
@@ -11739,6 +11794,33 @@
     if (firstDay && label.indexOf('core') !== -1) return 'Self-guided';
     if (label.indexOf('core') !== -1) return TOUR_TIME_LABEL;
     return '';
+  }
+
+  function scheduledDayBlockWindow(day, targetIndex) {
+    var blocks = (day && day.blocks) || [];
+    var latestEnd = null;
+    var targetFallback = baseDayBlockWindow(day, blocks[targetIndex], targetIndex);
+    for (var i = 0; i <= targetIndex; i += 1) {
+      var windowLabel = baseDayBlockWindow(day, blocks[i], i);
+      var parsed = parseTimeWindowMinutes(windowLabel);
+      if (!parsed) {
+        if (i === targetIndex) return windowLabel;
+        continue;
+      }
+      var start = parsed.start;
+      if (latestEnd != null && start < latestEnd) start = latestEnd;
+      var end = start + parsed.duration;
+      latestEnd = latestEnd == null ? end : Math.max(latestEnd, end);
+      if (i === targetIndex) {
+        return start === parsed.start ? windowLabel : formatTimeWindowMinutes(start, parsed.duration);
+      }
+    }
+    return targetFallback;
+  }
+
+  function dayBlockWindow(day, block, index) {
+    if (!day || !day.blocks || !Number.isFinite(Number(index))) return baseDayBlockWindow(day, block, index);
+    return scheduledDayBlockWindow(day, Number(index));
   }
 
   function dayBlockTimeHtml(day, block, index) {
@@ -22556,6 +22638,19 @@
     });
   }
 
+  function renderPlannerLoadFailure(error) {
+    console.error('BerlinWalk Trip Planner failed to load', error);
+    var target = root.querySelector('#bw-trip-inputs') || root;
+    if (!target) return;
+    target.hidden = false;
+    target.innerHTML =
+      '<section class="bw-load-failure" role="alert">' +
+        '<strong>The planner did not load.</strong>' +
+        '<span>Refresh the page or email me via berlinwalk.com.</span>' +
+      '</section>';
+    reportPlannerHeight();
+  }
+
   root.addEventListener('error', function (event) {
     var target = event.target;
     if (!target || target.tagName !== 'IMG' || target.getAttribute('data-bw-img-fallback')) return;
@@ -22860,30 +22955,34 @@
     }
   });
 
-  var bookingLink = root.querySelector('[data-book-link]');
-  if (bookingLink) bookingLink.href = BOOKING_URL;
+  try {
+    var bookingLink = root.querySelector('[data-book-link]');
+    if (bookingLink) bookingLink.href = BOOKING_URL;
 
-  upgradeOptionIcons();
-  initFromParams();
-  if (quizFlowEnabled) detailsStepStarted = true;
-  renderPlanChrome(buildPlan());
-  updatePlanningUi();
-  updateUnlockUi();
-  loadWeather();
-  installPlannerFrameSync();
-  openEmailPlanFromLink();
-  track('bw_trip_planner_page_view', {
-    context: currentContext(),
-    arrival_date: state.arrivalDate,
-    trip_length: state.tripLength,
-    unlocked: unlocked
-  });
-  track('bw_trip_planner_start', {
-    context: currentContext(),
-    arrival_date: state.arrivalDate,
-    trip_length: state.tripLength,
-    unlocked: unlocked
-  });
+    upgradeOptionIcons();
+    initFromParams();
+    if (quizFlowEnabled) detailsStepStarted = true;
+    renderPlanChrome(buildPlan());
+    updatePlanningUi();
+    updateUnlockUi();
+    loadWeather();
+    installPlannerFrameSync();
+    openEmailPlanFromLink();
+    track('bw_trip_planner_page_view', {
+      context: currentContext(),
+      arrival_date: state.arrivalDate,
+      trip_length: state.tripLength,
+      unlocked: unlocked
+    });
+    track('bw_trip_planner_start', {
+      context: currentContext(),
+      arrival_date: state.arrivalDate,
+      trip_length: state.tripLength,
+      unlocked: unlocked
+    });
+  } catch (error) {
+    renderPlannerLoadFailure(error);
+  }
 })();
 </script>
 </body>
