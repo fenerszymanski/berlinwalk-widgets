@@ -1,0 +1,37 @@
+{
+  "slug": "berliner-dom-tickets",
+  "selectedAt": "2026-07-05 Europe/Berlin",
+  "featured": "assets/optimized/01-berliner-dom-cover-museum-island.jpg",
+  "images": [
+    {
+      "file": "assets/optimized/01-berliner-dom-cover-museum-island.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Berliner_Dom_und_Alte_Nationalgalerie.jpg",
+      "credit": "Marek Heise Fotografie, Berlin / Wikimedia Commons / CC BY-SA 4.0",
+      "use": "cover and first inline"
+    },
+    {
+      "file": "assets/optimized/02-berliner-dom-nave.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Berliner_Dom_2026-04-02_img31.jpg",
+      "credit": "LarsMueller / Wikimedia Commons / public domain",
+      "use": "nave interior"
+    },
+    {
+      "file": "assets/optimized/03-berliner-dom-dome-ceiling.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Berliner_Dom_2026-04-02_img24.jpg",
+      "credit": "LarsMueller / Wikimedia Commons / public domain",
+      "use": "dome detail"
+    },
+    {
+      "file": "assets/optimized/04-berliner-dom-crypt.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Berliner_Dom_Hohenzollern-krypten_2026-04-02_img03.jpg",
+      "credit": "LarsMueller / Wikimedia Commons / public domain",
+      "use": "crypt section"
+    },
+    {
+      "file": "assets/optimized/05-berliner-dom-lustgarten-context.jpg",
+      "source": "https://commons.wikimedia.org/wiki/File:Berliner_Dom_aus_Lustgarten.jpg",
+      "credit": "MrBenjo / Wikimedia Commons / CC BY-SA 4.0",
+      "use": "outside context"
+    }
+  ]
+}

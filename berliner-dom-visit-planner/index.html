@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berliner Dom Visit Planner | BerlinWalk</title>
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --dom-green: #1b5e20;
+      --dom-ink: #18211a;
+      --dom-sage: #dce8c8;
+      --dom-cream: #fafaf5;
+      --dom-yellow: #ffe600;
+      --dom-blue: #214f62;
+      --dom-rust: #9f4a25;
+      --dom-paper: #fffdf2;
+      --dom-line: rgba(27, 94, 32, 0.18);
+      --dom-shadow: 0 18px 48px rgba(24, 33, 26, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: transparent;
+      color: var(--dom-ink);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 0;
+    }
+
+    .planner {
+      width: min(100%, 1080px);
+      margin: 0 auto;
+      background: var(--dom-cream);
+      border: 1px solid var(--dom-line);
+      box-shadow: var(--dom-shadow);
+      overflow: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 350px;
+      display: grid;
+      align-items: end;
+      background:
+        linear-gradient(180deg, rgba(24, 33, 26, 0.08), rgba(24, 33, 26, 0.72)),
+        url("assets/berliner-dom-visit-planner-hero.png") center / cover no-repeat;
+    }
+
+    .hero__content {
+      width: min(100%, 760px);
+      padding: 118px 28px 30px;
+      color: #fffdf2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--dom-yellow);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      background: var(--dom-yellow);
+      border-radius: 999px;
+    }
+
+    h1 {
+      margin: 12px 0 10px;
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(31px, 6vw, 56px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.65;
+      font-weight: 600;
+    }
+
+    .control-band {
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+      gap: 22px;
+      padding: 26px;
+      background:
+        linear-gradient(90deg, rgba(255, 230, 0, 0.16), rgba(33, 79, 98, 0.08)),
+        var(--dom-paper);
+      border-top: 6px solid var(--dom-green);
+    }
+
+    .controls {
+      display: grid;
+      align-content: start;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .control {
+      min-width: 0;
+    }
+
+    .control__label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--dom-green);
+    }
+
+    .control__label span:last-child {
+      color: var(--dom-rust);
+      font-weight: 800;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .segmented--three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .segmented button {
+      min-height: 48px;
+      border: 1px solid rgba(27, 94, 32, 0.22);
+      background: #fff;
+      color: var(--dom-ink);
+      font: inherit;
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1.2;
+      padding: 9px 8px;
+      cursor: pointer;
+      transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+    }
+
+    .segmented button:hover,
+    .segmented button:focus {
+      border-color: var(--dom-green);
+      outline: 2px solid rgba(255, 230, 0, 0.7);
+      outline-offset: 1px;
+    }
+
+    .segmented button[aria-pressed="true"] {
+      background: var(--dom-green);
+      color: #fff;
+      border-color: var(--dom-green);
+      transform: translateY(-1px);
+    }
+
+    .outcome {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100%;
+      background: #fff;
+      border: 1px solid rgba(24, 33, 26, 0.12);
+      box-shadow: 0 12px 30px rgba(24, 33, 26, 0.08);
+    }
+
+    .outcome__top {
+      padding: 22px 22px 16px;
+      background: linear-gradient(135deg, var(--dom-green), var(--dom-blue));
+      color: #fff;
+    }
+
+    .outcome__top .label {
+      color: var(--dom-yellow);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .outcome h2 {
+      margin: 8px 0 0;
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(23px, 3.5vw, 34px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .outcome__body {
+      padding: 18px 22px 20px;
+    }
+
+    .scoreline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .score {
+      min-height: 70px;
+      padding: 11px;
+      background: var(--dom-cream);
+      border-left: 5px solid var(--dom-yellow);
+    }
+
+    .score strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--dom-green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .score span {
+      display: block;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .plan {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .plan li {
+      display: grid;
+      grid-template-columns: 62px 1fr;
+      gap: 12px;
+      align-items: start;
+      min-height: 54px;
+      padding: 12px;
+      background: #fffaf0;
+      border: 1px solid rgba(159, 74, 37, 0.18);
+    }
+
+    .plan time {
+      color: var(--dom-rust);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    .plan p {
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    .notice {
+      margin-top: 16px;
+      padding: 13px 14px;
+      background: rgba(255, 230, 0, 0.2);
+      border: 1px solid rgba(159, 74, 37, 0.22);
+      color: #3a2a10;
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 0 22px 22px;
+    }
+
+    .actions a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 14px;
+      border: 1px solid var(--dom-green);
+      background: var(--dom-green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.4px;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .actions a.secondary {
+      background: #fff;
+      color: var(--dom-green);
+    }
+
+    .route-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--dom-line);
+      background: #fff;
+    }
+
+    .route-strip div {
+      min-height: 118px;
+      padding: 18px 16px;
+      border-right: 1px solid var(--dom-line);
+    }
+
+    .route-strip div:last-child {
+      border-right: 0;
+    }
+
+    .route-strip strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--dom-green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.7px;
+      text-transform: uppercase;
+    }
+
+    .route-strip span {
+      display: block;
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 650;
+    }
+
+    @media (max-width: 820px) {
+      .planner {
+        border-left: 0;
+        border-right: 0;
+      }
+
+      .hero {
+        min-height: 310px;
+      }
+
+      .hero__content {
+        padding: 94px 18px 24px;
+      }
+
+      .control-band {
+        grid-template-columns: 1fr;
+        padding: 18px;
+      }
+
+      .route-strip {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 540px) {
+      .segmented,
+      .segmented--three {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .scoreline {
+        grid-template-columns: 1fr;
+      }
+
+      .plan li {
+        grid-template-columns: 54px 1fr;
+      }
+
+      .route-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .route-strip div {
+        border-right: 0;
+        border-bottom: 1px solid var(--dom-line);
+      }
+
+      .route-strip div:last-child {
+        border-bottom: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="planner" aria-labelledby="tool-title">
+    <section class="hero">
+      <div class="hero__content">
+        <div class="eyebrow">BerlinWalk tool</div>
+        <h1 id="tool-title">Berliner Dom Visit Planner</h1>
+        <p>Set your time, stair energy and focus. Get the right order for tickets, the dome climb, the crypt and the Museum Island walk around it.</p>
+      </div>
+    </section>
+
+    <section class="control-band" aria-label="Berliner Dom visit choices">
+      <div class="controls">
+        <div class="control" data-control="time">
+          <div class="control__label"><span>Time at the cathedral</span><span id="time-label">75 min</span></div>
+          <div class="segmented" role="group" aria-label="Time available">
+            <button type="button" data-time="30" aria-pressed="false">30 min</button>
+            <button type="button" data-time="75" aria-pressed="true">75 min</button>
+            <button type="button" data-time="105" aria-pressed="false">105 min</button>
+            <button type="button" data-time="130" aria-pressed="false">~2h</button>
+          </div>
+        </div>
+
+        <div class="control" data-control="stairs">
+          <div class="control__label"><span>Dome climb energy</span><span id="stairs-label">Maybe</span></div>
+          <div class="segmented segmented--three" role="group" aria-label="Dome climb energy">
+            <button type="button" data-stairs="skip" aria-pressed="false">Skip stairs</button>
+            <button type="button" data-stairs="maybe" aria-pressed="true">Maybe</button>
+            <button type="button" data-stairs="climb" aria-pressed="false">Climb</button>
+          </div>
+        </div>
+
+        <div class="control" data-control="focus">
+          <div class="control__label"><span>Main reason</span><span id="focus-label">History</span></div>
+          <div class="segmented" role="group" aria-label="Visit focus">
+            <button type="button" data-focus="view" aria-pressed="false">View</button>
+            <button type="button" data-focus="history" aria-pressed="true">History</button>
+            <button type="button" data-focus="quiet" aria-pressed="false">Quiet</button>
+            <button type="button" data-focus="route" aria-pressed="false">Route</button>
+          </div>
+        </div>
+
+        <div class="control" data-control="timing">
+          <div class="control__label"><span>Timing risk</span><span id="timing-label">Normal day</span></div>
+          <div class="segmented segmented--three" role="group" aria-label="Timing risk">
+            <button type="button" data-timing="normal" aria-pressed="true">Normal day</button>
+            <button type="button" data-timing="sunday" aria-pressed="false">Sunday</button>
+            <button type="button" data-timing="late" aria-pressed="false">Late entry</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="outcome" aria-live="polite">
+        <div class="outcome__top">
+          <div class="label">Your simple move</div>
+          <h2 id="result-title">Buy online, start inside, decide the dome on energy.</h2>
+        </div>
+        <div class="outcome__body">
+          <div class="scoreline">
+            <div class="score"><strong>Ticket</strong><span id="score-ticket">Check official day times</span></div>
+            <div class="score"><strong>Order</strong><span id="score-order">Nave, crypt, dome option</span></div>
+            <div class="score"><strong>Buffer</strong><span id="score-buffer">Keep 15 min spare</span></div>
+          </div>
+          <ol class="plan" id="plan-list"></ol>
+          <div class="notice" id="notice">The official calendar changes around services and events. Check the Berliner Dom dates page before buying or walking over.</div>
+        </div>
+        <div class="actions">
+          <a href="https://www.berlinerdom.de/en/dates/" target="_blank" rel="noopener">Check official times</a>
+          <a class="secondary" href="https://www.berlinerdom.de/tickets/" target="_blank" rel="noopener">Official tickets</a>
+        </div>
+      </aside>
+    </section>
+
+    <section class="route-strip" aria-label="What to pair with the visit">
+      <div><strong>Before</strong><span>Look from Lustgarten first. It makes the size and the Museum Island setting clearer.</span></div>
+      <div><strong>Inside</strong><span>Use the nave and crypt for the story, not only the photo.</span></div>
+      <div><strong>Dome</strong><span>The view is worth it when your knees and timing agree.</span></div>
+      <div><strong>After</strong><span>Walk toward Schlossplatz, Bebelplatz or Hackescher Markt instead of stacking another paid interior.</span></div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var state = { time: 75, stairs: 'maybe', focus: 'history', timing: 'normal' };
+
+      var labels = {
+        time: { 30: '30 min', 75: '75 min', 105: '105 min', 130: '~2h' },
+        stairs: { skip: 'Skip stairs', maybe: 'Maybe', climb: 'Climb' },
+        focus: { view: 'View', history: 'History', quiet: 'Quiet', route: 'Route' },
+        timing: { normal: 'Normal day', sunday: 'Sunday', late: 'Late entry' }
+      };
+
+      function press(group, key, value) {
+        document.querySelectorAll('[data-' + group + ']').forEach(function (button) {
+          button.setAttribute('aria-pressed', String(button.getAttribute('data-' + group) === String(value)));
+        });
+        var label = document.getElementById(group + '-label');
+        if (label) label.textContent = labels[group][value];
+      }
+
+      function planFor() {
+        var time = Number(state.time);
+        var canClimb = state.stairs === 'climb' || (state.stairs === 'maybe' && time >= 105 && state.focus === 'view');
+        var title = 'Buy online, start inside, decide the dome on energy.';
+        var ticket = 'Check official day times';
+        var order = 'Nave, crypt, dome option';
+        var buffer = 'Keep 15 min spare';
+        var notice = 'The official calendar changes around services and events. Check the Berliner Dom dates page before buying or walking over.';
+        var steps = [];
+
+        if (state.timing === 'late') {
+          title = 'Do not gamble on a full visit near last admission.';
+          ticket = 'Last-entry risk';
+          order = 'Official time check first';
+          buffer = 'Outside may win';
+          notice = 'Berliner Dom lists last admission before closing. If you are already late, do the exterior and save the ticket for a cleaner slot.';
+          steps = [
+            ['Now', 'Open the official dates page before you walk over.'],
+            ['If open', 'Use the nave and one quiet interior stop. Skip the dome unless the clock is generous.'],
+            ['If tight', 'Stay outside: Lustgarten, the Spree side and Museum Island context still work well.']
+          ];
+          return { title: title, ticket: ticket, order: order, buffer: buffer, notice: notice, steps: steps };
+        }
+
+        if (state.timing === 'sunday') {
+          title = 'Start with the calendar. Sunday visits often begin later.';
+          ticket = 'Service priority';
+          order = 'Check, then visit';
+          buffer = 'Add 20 min';
+          notice = 'Services and events have priority. A Sunday plan should begin with the official dates page, not a fixed assumption.';
+        }
+
+        if (time <= 30) {
+          title = 'Use the exterior. A rushed ticket is the wrong spend.';
+          ticket = 'Usually skip';
+          order = 'Lustgarten, facade, bridge view';
+          buffer = 'No interior buffer';
+          steps = [
+            ['0-8 min', 'Stand in Lustgarten and read the building from the outside.'],
+            ['8-18 min', 'Walk the Spree side for the dome, river and Museum Island line.'],
+            ['18-30 min', 'Save the official ticket page for a day with more time.']
+          ];
+        } else if (canClimb) {
+          title = 'Buy online and make the dome climb the main event.';
+          ticket = 'Worth checking';
+          order = 'Nave, dome, crypt';
+          buffer = '15-20 min';
+          steps = [
+            ['0-15 min', 'Enter calmly, orient yourself in the nave and check any posted restrictions.'],
+            ['15-55 min', 'Climb to the dome walkway while your energy is still good.'],
+            ['55-85 min', 'Come down for the crypt or museum displays, depending on the day.'],
+            ['After', 'Step outside to Lustgarten so the view connects back to the city.']
+          ];
+        } else if (state.focus === 'history') {
+          title = 'Use the ticket for the nave, crypt and imperial story.';
+          ticket = 'Good fit';
+          order = 'Nave, crypt, museum, outside';
+          buffer = '10-15 min';
+          steps = [
+            ['0-15 min', 'Begin in the nave. Look at the scale before reading every detail.'],
+            ['15-45 min', 'Give the Hohenzollern Crypt real attention now that it has reopened.'],
+            ['45-65 min', 'Use the museum or Imperial Staircase to connect the building to Prussian power.'],
+            ['65-75 min', 'Finish outside in Lustgarten instead of rushing straight to another sight.']
+          ];
+        } else if (state.focus === 'quiet') {
+          title = 'Make this a slow interior break, not another checklist stop.';
+          ticket = 'Only if open';
+          order = 'Chapel, nave, crypt';
+          buffer = 'Plenty';
+          steps = [
+            ['0-10 min', 'Check if a service, concert setup or private event changes access.'],
+            ['10-35 min', 'Use the nave and chapel quietly. Let the building reset the pace.'],
+            ['35-60 min', 'Add the crypt if your attention is still there.'],
+            ['After', 'Leave through Lustgarten and keep the next stop simple.']
+          ];
+        } else {
+          title = 'Use Berliner Dom as the Museum Island anchor.';
+          ticket = 'Optional';
+          order = 'Outside, short inside, route onward';
+          buffer = 'Route friendly';
+          steps = [
+            ['0-10 min', 'Start outside from Lustgarten and understand the setting first.'],
+            ['10-45 min', 'Go inside only if the ticket and line still make sense today.'],
+            ['45-75 min', 'Choose one onward direction: Schlossplatz, Bebelplatz or Hackescher Markt.'],
+            ['After', 'Do not overload Museum Island with too many paid interiors in one stretch.']
+          ];
+        }
+
+        if (time >= 130 && state.stairs !== 'skip') {
+          steps.push(['Extra', 'With ~2h, add the museum displays and a slower exterior loop without rushing the dome.']);
+          buffer = '20 min spare';
+        }
+
+        return { title: title, ticket: ticket, order: order, buffer: buffer, notice: notice, steps: steps };
+      }
+
+      function render() {
+        press('time', 'time', state.time);
+        press('stairs', 'stairs', state.stairs);
+        press('focus', 'focus', state.focus);
+        press('timing', 'timing', state.timing);
+
+        var plan = planFor();
+        document.getElementById('result-title').textContent = plan.title;
+        document.getElementById('score-ticket').textContent = plan.ticket;
+        document.getElementById('score-order').textContent = plan.order;
+        document.getElementById('score-buffer').textContent = plan.buffer;
+        document.getElementById('notice').textContent = plan.notice;
+        document.getElementById('plan-list').innerHTML = plan.steps.map(function (step) {
+          return '<li><time>' + step[0] + '</time><p>' + step[1] + '</p></li>';
+        }).join('');
+      }
+
+      document.addEventListener('click', function (event) {
+        var button = event.target.closest('button');
+        if (!button) return;
+        ['time', 'stairs', 'focus', 'timing'].forEach(function (group) {
+          var value = button.getAttribute('data-' + group);
+          if (value !== null) {
+            state[group] = group === 'time' ? Number(value) : value;
+            render();
+          }
+        });
+      });
+
+      render();
+    })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

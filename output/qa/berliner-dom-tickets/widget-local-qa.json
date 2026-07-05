@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-07-05T19:32:30.114Z",
+  "results": [
+    {
+      "case": "desktop",
+      "title": "Berliner Dom Visit Planner | BerlinWalk",
+      "overflowX": 0,
+      "bodyHeight": 1349,
+      "heroHasImage": true,
+      "resultTitle": "Use the ticket for the nave, crypt and imperial story.",
+      "planItems": 4,
+      "minButtonWidth": 122.75,
+      "minButtonHeight": 48,
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/berliner-dom-tickets/widget-desktop.png"
+    },
+    {
+      "case": "mobile",
+      "title": "Berliner Dom Visit Planner | BerlinWalk",
+      "overflowX": 0,
+      "bodyHeight": 2485,
+      "heroHasImage": true,
+      "resultTitle": "Use the ticket for the nave, crypt and imperial story.",
+      "planItems": 4,
+      "minButtonWidth": 173.5,
+      "minButtonHeight": 48,
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/berliner-dom-tickets/widget-mobile.png"
+    }
+  ],
+  "failures": []
+}
