@@ -74,6 +74,14 @@
     return null;
   }
 
+  function getNextTourSlots(count) {
+    try {
+      if (typeof window.bwNextTourSlots === 'function') return window.bwNextTourSlots({ count: count || 2 }) || [];
+    } catch (err) {}
+    var slot = getNextTourSlot();
+    return slot ? [slot] : [];
+  }
+
   function installDelayedConsentGuard() {
     if (window.__bwDelayedConsentGuard) return;
     window.__bwDelayedConsentGuard = true;
@@ -1589,11 +1597,20 @@
   }
 
   function bookingJourneyCard(bookingUrl, title, context) {
-    var slot = getNextTourSlot();
+    var slots = getNextTourSlots(2);
+    var slot = slots[0];
     var variant = activeBookingVariant();
+    var bookingTitle = title || 'Walk this context with me in Berlin';
+    if (slots.length >= 2) {
+      bookingTitle = 'Next tours: ' + slots.slice(0, 2).map(function (item) {
+        return item.weekdayLabel + ' ' + item.startLabel;
+      }).join(' + ');
+    } else if (slot) {
+      bookingTitle = slot.relativeLabel + ' at ' + slot.startLabel + ', walk Berlin with me';
+    }
     return {
       label: 'Free walk',
-      title: slot ? (slot.relativeLabel + ' at ' + slot.startLabel + ', walk Berlin with me') : (title || 'Walk this context with me in Berlin'),
+      title: bookingTitle,
       copy: slot ? 'Free, tip-based, about 2 hours. Reserve a spot, pay nothing upfront.' : '',
       url: bookingUrl,
       image: TOUR_IMAGE,
