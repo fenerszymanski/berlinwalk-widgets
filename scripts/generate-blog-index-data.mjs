@@ -271,6 +271,12 @@ const START_HERE_LINKS = [
 
 const SPOTLIGHT_TOOLS = [
   {
+    title: 'Berlin First-Day Rescue Plan',
+    slug: 'berlin-first-day-rescue-plan',
+    url: `${BLOG_BASE}/products/berlin-first-day-rescue-plan`,
+    summary: 'Answer 7 questions and get your first 3 hours in Berlin planned from live route times and landing-hour weather. Instant, €9.',
+  },
+  {
     title: 'Medieval Berlin Mini Walk Planner',
     slug: 'medieval-berlin-mini-walk',
     url: `${BLOG_BASE}/tools/medieval-berlin-mini-walk`,

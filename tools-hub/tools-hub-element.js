@@ -1084,7 +1084,9 @@ class BWToolsHubElement extends HTMLElement {
       return;
     }
 
-    const href = `https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}`;
+    const href = typeof tool.href === 'string' && tool.href.trim()
+      ? this._escapeAttribute(tool.href.trim())
+      : `https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}`;
     const image = typeof tool.image === 'string' && tool.image.trim() ? tool.image.trim() : BW_TOOLS_HUB_DEFAULT_IMAGE;
     const label = this._escapeHtml(config.label || 'Featured Tool');
     const headline = this._escapeHtml(config.headline || tool.title || 'Featured Berlin tool');
@@ -1199,7 +1201,7 @@ class BWToolsHubElement extends HTMLElement {
       ? `<span class="bw-season-label">${this._escapeHtml(tool.seasonLabel)}</span>`
       : '';
     return `
-      <a class="bw-tool-card" href="https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}">
+      <a class="bw-tool-card" href="${typeof tool.href === 'string' && tool.href.trim() ? this._escapeAttribute(tool.href.trim()) : `https://www.berlinwalk.com/tools/${this._escapeAttribute(tool.slug || '')}`}">
         <div class="bw-tool-card-head">
           ${this._renderToolIcon(tool)}
           <div class="bw-tool-title-wrap">

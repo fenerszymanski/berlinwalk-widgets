@@ -594,7 +594,9 @@ class BWToolsHomeElement extends HTMLElement {
     const panel = this.querySelector('[data-bw-home-spotlight]');
     if (!panel || !spotlight || !spotlight.slug) return;
 
-    const href = 'https://www.berlinwalk.com/tools/' + this._escapeAttribute(spotlight.slug);
+    const href = typeof spotlight.href === 'string' && spotlight.href.trim()
+      ? this._escapeAttribute(spotlight.href.trim())
+      : 'https://www.berlinwalk.com/tools/' + this._escapeAttribute(spotlight.slug);
     const image = typeof spotlight.image === 'string' && spotlight.image.trim() ? spotlight.image.trim() : BW_TOOLS_HOME_DEFAULT_IMAGE;
     const label = this._escapeHtml(spotlight.label || 'Featured Tool');
     const title = this._escapeHtml(spotlight.title || 'Open a featured Berlin planning tool');
@@ -616,7 +618,9 @@ class BWToolsHomeElement extends HTMLElement {
   }
 
   _renderTool(tool) {
-    const href = `https://www.berlinwalk.com/tools/${tool.slug || ''}`;
+    const href = typeof tool.href === 'string' && tool.href.trim()
+      ? this._escapeAttribute(tool.href.trim())
+      : `https://www.berlinwalk.com/tools/${tool.slug || ''}`;
     const image = typeof tool.image === 'string' && tool.image.trim() ? tool.image.trim() : BW_TOOLS_HOME_DEFAULT_IMAGE;
     const title = this._escapeHtml(tool.title || '');
     const lead = this._escapeHtml(tool.lead || '');

@@ -39,6 +39,35 @@
   ],
   "tools": [
     {
+      "slug": "berlin-first-day-rescue-plan",
+      "title": "Berlin First-Day Rescue Plan",
+      "lead": "Just landed with bags and no plan? Answer 7 questions and get your first 3 hours in Berlin planned from live route times and the weather at your landing hour. Instant, €9.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_16cbe016979141c8a40efb3c72c375fd~mv2.png",
+      "widgetUrl": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan",
+      "embedHeight": 1400,
+      "hidden": true,
+      "href": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan",
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 1,
+      "tags": [
+        "first day",
+        "arrival",
+        "airport",
+        "hotel",
+        "taxi",
+        "transit",
+        "rescue plan",
+        "BER"
+      ],
+      "aliases": [
+        "first day rescue",
+        "rescue plan",
+        "arrival plan"
+      ]
+    },
+    {
       "slug": "berlin-bouncer",
       "cmsItemId": "77e3f0b6-5117-4c28-a9d0-dbb8376735a3",
       "title": "Can You Get Into Berghain?",
@@ -2742,10 +2771,10 @@
     }
   ],
   "spotlightTool": {
-    "slug": "berlin-museums-map",
-    "label": "Featured Tool",
-    "headline": "Plan your Berlin museum day",
-    "body": "See what is open, what is free, what costs money, and where everything is on the map.",
-    "cta": "Open the Museums Map"
+    "slug": "berlin-first-day-rescue-plan",
+    "label": "New · Instant Plan",
+    "headline": "Landing in Berlin soon? Get your first 3 hours planned.",
+    "body": "Answer 7 questions and I build your route, your transport call, and a timed plan for your first 3 hours from live route times and the weather at your landing hour. Instant, €9.",
+    "cta": "Get my rescue plan"
   }
 }
