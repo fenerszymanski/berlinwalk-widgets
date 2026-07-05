@@ -6934,6 +6934,7 @@
     #bw-trip-planner .bw-planning-card[hidden],
     #bw-trip-planner .bw-start-card[hidden],
     #bw-trip-planner .bw-plan-details[hidden],
+    #bw-trip-planner .bw-quiz-nav[hidden],
     #bw-trip-planner .bw-control-panel[hidden],
     #bw-trip-planner .bw-mobile-peek[hidden] {
       display: none;
@@ -10517,7 +10518,7 @@
         </section>
           </div>
         </section>
-        <section class="bw-quiz-nav" data-quiz-nav aria-label="Quiz navigation">
+        <section class="bw-quiz-nav" data-quiz-nav aria-label="Quiz navigation" hidden>
           <button class="bw-quiz-back" type="button" data-quiz-back>Back</button>
           <button class="bw-quiz-next" type="button" data-quiz-next>Next question</button>
         </section>
@@ -12676,11 +12677,14 @@
   }
 
   function updateQuizUi() {
-    if (!quizFlowEnabled) return;
     var form = root.querySelector('#bw-trip-inputs');
     var detailsPanel = root.querySelector('[data-plan-details]');
     var shell = root.querySelector('[data-quiz-shell]');
     var nav = root.querySelector('[data-quiz-nav]');
+    if (!quizFlowEnabled) {
+      if (nav) nav.hidden = true;
+      return;
+    }
     if (form) {
       form.classList.add('is-quiz-flow');
       form.classList.toggle('is-quiz-complete', quizCurrentStep >= QUIZ_STEPS.length - 1);
