@@ -41,6 +41,13 @@ Bookings route does not expose a supported preselect contract. The legacy
 two-step start card is also hidden during one-question quiz flow so visitors do
 not see both `Start building my plan` and `Next question`.
 
+Update 2026-07-05: Wave 2.4 made one-question quiz answer tracking explicit on
+`Next question` / final build clicks. The planner already has default answers,
+so a visitor can move through the quiz without changing a selected option. Those
+default commits now send one deduped `bw_trip_planner_quiz_answer` event per
+step, which keeps the per-step funnel report from mistaking default-answer
+progress for drop-off.
+
 ## 1. User Inputs
 
 ### Visible inputs

@@ -11062,6 +11062,7 @@
   var quizCurrentStep = 0;
   var quizAdvanceTimer = null;
   var quizStepViews = {};
+  var quizStepAnswers = {};
   var QUIZ_STEPS = [
     {
       key: 'arrivalDate',
@@ -13089,6 +13090,30 @@
     });
   }
 
+  function trackQuizAnswerForKey(key, source) {
+    if (!quizFlowEnabled || !key) return;
+    var quizStepIndex = quizStepIndexForKey(key);
+    if (quizStepIndex === -1) return;
+    var step = QUIZ_STEPS[quizStepIndex];
+    var value = quizValueForStep(step);
+    if (quizStepAnswers[key] === value) return;
+    quizStepAnswers[key] = value;
+    track('bw_trip_planner_quiz_answer', {
+      flow: 'one_question_quiz',
+      source: source || 'answer',
+      step_index: quizStepIndex + 1,
+      step_count: QUIZ_STEPS.length,
+      step_key: key,
+      value: value,
+      selected_count: Array.isArray(state[key]) ? state[key].length : 1
+    });
+  }
+
+  function trackCurrentQuizAnswer(source) {
+    var step = QUIZ_STEPS[quizCurrentStep];
+    if (step) trackQuizAnswerForKey(step.key, source);
+  }
+
   function updateQuizUi() {
     var form = root.querySelector('#bw-trip-inputs');
     var detailsPanel = root.querySelector('[data-plan-details]');
@@ -13157,6 +13182,7 @@
 
   function advanceQuizStep() {
     if (!quizFlowEnabled || planningInProgress) return;
+    trackCurrentQuizAnswer(quizCurrentStep >= QUIZ_STEPS.length - 1 ? 'build_click' : 'next_click');
     if (quizCurrentStep >= QUIZ_STEPS.length - 1) {
       detailsStepStarted = true;
       track('bw_trip_planner_quiz_complete', {
@@ -23242,16 +23268,8 @@
       var reloadWeather = key === 'tripLength';
       markPlanDirty();
       if (reloadWeather) loadWeather();
-      var quizStepIndex = quizStepIndexForKey(key);
-      if (quizFlowEnabled && quizStepIndex !== -1) {
-        track('bw_trip_planner_quiz_answer', {
-          flow: 'one_question_quiz',
-          step_index: quizStepIndex + 1,
-          step_count: QUIZ_STEPS.length,
-          step_key: key,
-          value: Array.isArray(state[key]) ? state[key].join(',') : String(state[key] || ''),
-          selected_count: Array.isArray(state[key]) ? state[key].length : 1
-        });
+      if (quizFlowEnabled && quizStepIndexForKey(key) !== -1) {
+        trackQuizAnswerForKey(key, 'option_change');
         updateQuizUi();
         if (!isMulti) scheduleQuizAdvance();
       }
@@ -23508,14 +23526,7 @@
       markPlanDirty();
       loadWeather();
       if (quizFlowEnabled) {
-        track('bw_trip_planner_quiz_answer', {
-          flow: 'one_question_quiz',
-          step_index: quizStepIndexForKey('arrivalDate') + 1,
-          step_count: QUIZ_STEPS.length,
-          step_key: 'arrivalDate',
-          value: state.arrivalDate,
-          selected_count: 1
-        });
+        trackQuizAnswerForKey('arrivalDate', 'date_change');
         updateQuizUi();
       }
     }
