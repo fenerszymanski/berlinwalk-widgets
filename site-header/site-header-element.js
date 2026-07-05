@@ -16,7 +16,8 @@ const BW_HEADER_LINKS = {
   smile: 'https://www.berlinwalk.com/games/berlin-smile-challenge',
   blog: 'https://www.berlinwalk.com/blog',
   widgets: 'https://www.berlinwalk.com/widgets',
-  faq: 'https://www.berlinwalk.com/#faq'
+  faq: 'https://www.berlinwalk.com/#faq',
+  firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan'
 };
 
 class BWHeaderElement extends HTMLElement {
@@ -456,6 +457,22 @@ class BWHeaderElement extends HTMLElement {
           transform: translateY(-3px);
         }
 
+        .bw-header-submenu .bw-badge-new {
+          background: var(--yellow);
+          color: var(--green-dark);
+          font-size: 8px;
+          font-weight: 900;
+          padding: 2px 6px;
+          border-radius: 999px;
+          margin-left: 8px;
+          display: inline-flex;
+          align-items: center;
+          vertical-align: middle;
+          letter-spacing: 0.6px;
+          line-height: 1;
+          text-transform: uppercase;
+        }
+
         .bw-header-dropdown {
           position: relative;
         }
@@ -863,6 +880,14 @@ class BWHeaderElement extends HTMLElement {
                 <li><a href="${BW_HEADER_LINKS.reviews}">Reviews</a></li>
                 <li class="bw-header-dropdown">
                   <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
+                    Products <span class="bw-badge-new">New</span> <span class="bw-header-caret" aria-hidden="true">⌄</span>
+                  </button>
+                  <ul class="bw-header-submenu" role="menu">
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan <span class="bw-badge-new">New</span></a></li>
+                  </ul>
+                </li>
+                <li class="bw-header-dropdown">
+                  <button class="bw-header-dropdown-trigger" type="button" aria-haspopup="true" aria-expanded="false">
                     Games <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul class="bw-header-submenu" role="menu">
@@ -913,6 +938,11 @@ class BWHeaderElement extends HTMLElement {
               <a href="${BW_HEADER_LINKS.tour}">Tour</a>
               <a href="${BW_HEADER_LINKS.guide}">The Guide</a>
               <a href="${BW_HEADER_LINKS.reviews}">Reviews</a>
+
+              <div class="bw-header-mobile-section">
+                <div class="bw-header-mobile-section-label">Products <span class="bw-badge-new">New</span></div>
+                <a href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan <span class="bw-badge-new">New</span></a>
+              </div>
 
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Games</div>
