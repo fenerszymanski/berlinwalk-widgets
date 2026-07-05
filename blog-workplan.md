@@ -73,26 +73,40 @@ Strategic read: prioritize tourist-anxiety and certainty content before generic 
 
 ## Priority Queue
 
+Queue synced against live `blog-index/data.json` on 2026-07-05: Späti, 1237
+founding year, Vegan guide, Bebelplatz, Parking/Alexanderplatz, Tränenpalast,
+Holocaust Memorial, and Sachsenhausen are all PUBLISHED and moved to the
+Published list below. New entries from the 2026-07-05 GSC analysis added with
+cluster tags.
+
 | Priority | Status | Working title | Angle |
 |---|---|---|---|
-| 0 | Wix draft | Why Is Berlin's Founding Year 1237? Cölln, Medieval Berlin and the City Before 1933 | Route-linked history pillar around Berlin/Cölln origins, the 1237 documentation date, medieval survivors, and why most tours skip pre-1933 Berlin. Wix draft `239d8355-2d20-4152-a809-8451074602e9` is UNPUBLISHED with SEO, cover/OG image, 4 inline images, QS, FAQ, and the mini-walk widget embed; readback shows 0 list nodes. The twin-towns area is now an uploaded annotated old-map image, so it no longer depends on GitHub Pages deploy. Local source at `blog-drafts/why-is-berlin-founding-year-1237.md`; `medieval-berlin-twin-towns/` is also updated locally for later reuse. |
-| 0 | Wix draft | What Is a Späti? Berlin's Late-Night Shop Culture, Sunday Rules and Tourist Tips | Tourist-friction explainer connecting Späti culture, Sunday closures, cash habits, late-night basics, Pfand, etiquette, and survival advice. Wix draft `6f3636f2-b910-4481-a87b-82dd5bd91ba4` is UNPUBLISHED with cover + 4 inline images, 23 unique links, QS, Späti Survival Checker, FAQ, image credits, SEO, and tags. Local source at `blog-drafts/what-is-a-spati-berlin.md`; post-only widget at `spati-survival-checker/`. |
-| 1 | Draft v1 | Vegan Berlin Guide 2026: Best Areas and Easy Picks for First-Timers | Practical first-timer vegan guide with map widget at vegan-berlin-map/index.html. Local draft at blog-drafts/vegan-berlin-guide-2026.md. |
+| 0 | Idea (GSC 2026-07-05) | Caught Without a Ticket on the U-Bahn: the Fine, Step by Step | High-anxiety child post of the validate-ticket post (which already ranks); exact fine process, tourist rights, how inspectors work. Transport-fine cluster. |
+| 0 | Idea (GSC 2026-07-05) | Berghain Door Policy Explained / Berlin Techno Clubs for Beginners | Club dress-code post is #2 sitewide (311 clicks/30d); `tresor dress code` queries already landing. Nightlife-door cluster; honest `no guide can guarantee entry` note per existing rule. |
+| 0 | Idea (GSC 2026-07-05, seasonal deadline Sep 27) | Berlin Marathon 2026: Street Closures and Where to Watch | Event-driven practical post; the World Cup post formula (dated event + practical question). Prep by early September. |
+| 1 | Idea (GSC 2026-07-05) | Cash-Only Restaurants in Berlin / Where Not to Exchange Money | Money-friction cluster with the new ATM post and credit-cards post. |
+| 1 | Idea (GSC 2026-07-05) | How Early to Arrive at BER | Departure-side anxiety; pairs with existing `berlin-ber-airport-departure-planner` tool. |
 | 0 | Idea (search-trends) | Berlin by Foot: Best Walkable Areas for First-Time Visitors | Turn walking/strolling search intent into BerlinWalk route logic and conversion path. |
 | 0 | Refresh/Idea (search-trends) | If Reichstag Dome Is Sold Out: What to Do Instead | Major Reichstag refresh or child post covering scarcity, ID/registration rules, Kafer workaround, alternate viewpoints, and nearby route links. |
-| 0 | Section first (search-trends) | Where to Stay in Berlin for Christmas Markets 2026 | Add inside the Christmas markets pillar first; split into standalone child post only if demand/performance justifies it. |
-| 0 | Idea (B-tier) | Berlin Street Art Guide / Holocaust Memorial Guide / Sachsenhausen Memorial Guide / "How Many Days in Berlin?" | High-intent gaps; street-art map + `berlin-landmarks-map` reuse. |
+| 0 | Section first (search-trends, Q4) | Where to Stay in Berlin for Christmas Markets 2026 | Add inside the Christmas markets pillar first; split into standalone child post only if demand/performance justifies it. From September also prep `Christmas Markets Near Alexanderplatz` child post. |
+| 1 | Idea (B-tier) | Berlin Street Art Guide / "How Many Days in Berlin?" | High-intent gaps; street-art map + `berlin-landmarks-map` reuse. (Holocaust Memorial and Sachsenhausen entries from this line are now published.) |
 | 2 | Wix draft | Famous Movies and TV Shows Filmed in Berlin | Screen-location master post with generated media, Quick Summary, FAQ, and `screen-mood-finder` widget. Wix draft ID: `a026aeb9-6126-4adc-bebd-2dcd5c88fb8b`. |
-| 3 | Idea | Bebelplatz and the Nazi Book Burning Memorial: What Tourists Miss | Strong historical storytelling, close to central Berlin routes. |
-| 4 | Draft v1 | Where to Park in Berlin: Alexanderplatz, Park + Ride, and What Tourists Should Avoid | Practical guide for visitors arriving by car, now angled around the BerlinWalk tour start at the World Clock: Umweltzone, paid street parking, Park + Ride, and central garages near Alexanderplatz. Local draft at `blog-drafts/where-to-park-in-berlin-alexanderplatz-2026.md`; widgets wired under `alexanderplatz-parking-map` and `berlin-parking-calculator`. |
-| 5 | Idea | Tranenpalast: The Free Cold War Museum Tourists Shouldn't Skip | Practical and emotional museum guide, especially useful for visitors near Friedrichstrasse. |
+| 2 | Idea (Q4, seasonal) | Silvester in Berlin: Where to Go and What to Avoid | New Year's Eve practical post; December. |
 | 7 | Idea | Berlin for One Day: What to See If You Only Have 6-8 Hours | High-intent itinerary post distinct from the 3-day guide. |
 | 8 | Idea | The Best Free Views in Berlin | SEO-shaped practical list distinct from the existing "views on foot" article. |
-| 9 | Idea | Berlin Memorials That Are Free, Powerful, and Easy to Visit | Free history itinerary with Holocaust Memorial, Neue Wache, Wall Memorial, Topography of Terror, Soviet memorials, and Tranenpalast. |
+| 9 | Idea | Berlin Memorials That Are Free, Powerful, and Easy to Visit | Free history itinerary with Holocaust Memorial, Neue Wache, Wall Memorial, Topography of Terror, Soviet memorials, and Tranenpalast; link the published Holocaust/Tränenpalast/Sachsenhausen posts. |
 | 10 | Idea | Is Berlin Good for Kids? A Realistic Family Guide | Family travel pillar. Cover transport, toilets, playgrounds, museums, food, and walking-tour fit. |
 
 ## Published From This Queue
 
+- `what-is-a-spati-berlin`
+- `why-is-berlin-founding-year-1237`
+- `vegan-berlin-guide-2026`
+- `bebelplatz-berlin`
+- `where-to-park-in-berlin-alexanderplatz`
+- `traenenpalast-berlin`
+- `holocaust-memorial-berlin`
+- `sachsenhausen-from-berlin`
 - `which-berlin-museums-are-free-2026`
 - `berlin-in-july-2026`
 - `berlin-in-august-2026`
