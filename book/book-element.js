@@ -4,6 +4,46 @@ const BW_BOOK_THE_GUIDE_URL = 'https://www.berlinwalk.com/the-guide';
 const BW_BOOK_REVIEWS_URL = 'https://www.berlinwalk.com/reviews';
 const BW_BOOK_WORLD_CLOCK_IMAGE_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.webp';
 const BW_BOOK_WORLD_CLOCK_IMAGE_FALLBACK_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images/06-1200w.jpg';
+const BW_BOOK_NEXT_TOUR_SLOT_FALLBACK_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/js/next-tour-slot.js';
+const BW_BOOK_NEXT_TOUR_SLOT_URL = resolveBookAssetUrl('../js/next-tour-slot.js', BW_BOOK_NEXT_TOUR_SLOT_FALLBACK_URL);
+
+let bwBookNextTourSlotPromise = null;
+
+function resolveBookAssetUrl(relativePath, fallbackUrl) {
+  try {
+    if (document.currentScript && document.currentScript.src) {
+      return new URL(relativePath, document.currentScript.src).toString();
+    }
+  } catch {}
+  return fallbackUrl;
+}
+
+function ensureBookNextTourSlotHelper() {
+  if (typeof window.bwNextTourSlot === 'function') return Promise.resolve(window.bwNextTourSlot);
+  if (bwBookNextTourSlotPromise) return bwBookNextTourSlotPromise;
+  bwBookNextTourSlotPromise = new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[src="${BW_BOOK_NEXT_TOUR_SLOT_URL}"]`);
+    if (existing) {
+      existing.addEventListener('load', () => resolve(window.bwNextTourSlot), { once: true });
+      existing.addEventListener('error', reject, { once: true });
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = BW_BOOK_NEXT_TOUR_SLOT_URL;
+    script.async = true;
+    script.onload = () => resolve(window.bwNextTourSlot);
+    script.onerror = reject;
+    document.head.appendChild(script);
+  }).catch(() => null);
+  return bwBookNextTourSlotPromise;
+}
+
+function readBookNextTourSlot() {
+  try {
+    if (typeof window.bwNextTourSlot === 'function') return window.bwNextTourSlot();
+  } catch {}
+  return null;
+}
 
 const BW_BOOK_SHARED_STYLES = `
   .bw-book {
@@ -130,6 +170,7 @@ const BW_BOOK_SHARED_STYLES = `
 class BWBookHeroElement extends HTMLElement {
   connectedCallback() {
     this._render();
+    this._syncNextWalk();
   }
 
   _render() {
@@ -200,11 +241,20 @@ class BWBookHeroElement extends HTMLElement {
           text-transform: uppercase;
         }
 
-        .bw-book .bw-book-actions {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 12px;
-        }
+  .bw-book .bw-book-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .bw-book .bw-book-cta-note {
+    color: var(--green-dark);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 14px 0 0;
+    max-width: 520px;
+  }
 
         .bw-book .bw-book-trust {
           align-items: center;
@@ -339,6 +389,7 @@ class BWBookHeroElement extends HTMLElement {
                   <a class="bw-book-btn bw-book-btn-primary" href="#${BW_BOOK_ANCHOR_ID}">Pick your date ↓</a>
                   <a class="bw-book-btn bw-book-btn-ghost" href="${BW_BOOK_MEETING_POINT_URL}">Meeting point</a>
                 </div>
+                <p class="bw-book-cta-note">Free to reserve. You pay nothing upfront and tip only if the walk was worth it.</p>
 
                 <div class="bw-book-trust" aria-label="Tour rating">
                   <span class="bw-book-trust-score">9.8 / 10</span>
@@ -349,6 +400,7 @@ class BWBookHeroElement extends HTMLElement {
               <aside class="bw-book-hero-card" aria-label="Tour at a glance">
                 <h2>At a glance</h2>
                 <dl>
+                  <div data-bw-book-next-walk-row hidden><dt>Next walk</dt><dd data-bw-book-next-walk>Loading...</dd></div>
                   <div><dt>Price</dt><dd>Free · Tip-based</dd></div>
                   <div><dt>Duration</dt><dd>~2 hours</dd></div>
                   <div><dt>Meeting point</dt><dd>World Clock, Alexanderplatz</dd></div>
@@ -363,6 +415,23 @@ class BWBookHeroElement extends HTMLElement {
         <div id="${BW_BOOK_ANCHOR_ID}" class="bw-book-anchor" aria-hidden="true"></div>
       </section>
     `;
+  }
+
+  _syncNextWalk() {
+    const apply = () => {
+      const slot = readBookNextTourSlot();
+      const row = this.querySelector('[data-bw-book-next-walk-row]');
+      const value = this.querySelector('[data-bw-book-next-walk]');
+      if (!row || !value || !slot || !slot.weekdayLabel || !slot.startLabel) return false;
+      value.textContent = `${slot.weekdayLabel} ${slot.startLabel}`;
+      row.hidden = false;
+      return true;
+    };
+
+    if (apply()) return;
+    ensureBookNextTourSlotHelper().then(() => {
+      apply();
+    }).catch(() => {});
   }
 }
 
