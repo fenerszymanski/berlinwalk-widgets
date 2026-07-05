@@ -4,13 +4,21 @@ Internal review note for Yusuf. This is the current deterministic planner logic 
 `index.html`, written so we can review the itinerary brain in one pass instead of
 finding mistakes one by one in the UI.
 
-Last reviewed locally: 2026-06-02
+Last reviewed locally: 2026-07-05
 
 Update 2026-07-05: Wave 0 stabilization added a small sequential block-window
 scheduler in `index.html`. Rendered time windows keep their original durations,
 but a block now starts no earlier than the previous timed block ends. This fixes
 the verified Day 1 lunch `13:30-14:30` / afternoon `14:00-16:30` overlap without
 changing the underlying day-template order.
+
+Update 2026-07-05: Wave 1 opening guardrails added official-source-backed place
+metadata for key anchors (`closedDays`, `indoor`, `note`) and a post-generation
+opening pass. Museum-heavy days that land on Monday or on a date with a closed
+anchor now swap with the nearest true outdoor-safe day (`wall`, `history`,
+`free`, `local`) when possible. If the trip is too short to swap, the day card
+gets a visible opening warning and the route starts with the open-air history
+fallback. Unlocked day cards now render Sunday/Monday/holiday notes directly.
 
 ## 1. User Inputs
 
@@ -75,9 +83,36 @@ Date status:
 | Status | Rule | Current note |
 |---|---|---|
 | Public holiday | Berlin holiday list + one-off holidays | Sunday-style shopping rules; keep day outdoor-first. |
+| Christmas Eve | `12-24` | Early-closing warning; errands before lunch, simple route. |
 | Sunday | `getUTCDay() === 0` | Regular shops close; use stations, restaurants, museums, parks, markets, walking routes. |
 | Monday | `getUTCDay() === 1` | Museum caution; outdoor history backup. |
 | Weekday | Otherwise | Normal rhythm. |
+
+Place metadata now exists on the key planning anchors where a stable rule is
+safe to encode:
+
+- `museum_island`: indoor cluster, no blanket closure encoded, Monday caution
+  stays in `note` because the island is not a single venue.
+- `topography_terror`: indoor/outdoor history backup, daily rule, special
+  holiday exceptions in `note`.
+- `reichstag`: indoor/booking note, no weekly closure encoded.
+- `berlin_cathedral`: indoor note, Sunday/service caution.
+- `markthalle_neun`: indoor, Sunday closed.
+- `holocaust_memorial`: outdoor field as primary anchor; information-centre
+  Monday closure noted but not treated as full-anchor closure.
+- `charlottenburg_palace` and `sanssouci`: Monday palace-interior closure,
+  garden/park fallback in `note`.
+
+Post-generation opening pass:
+
+1. Detects closed anchors via `closedDays` and detects Monday museum/palace risk
+   without pretending Museum Island is one uniformly closed venue.
+2. For Days 2-7, swaps the risky museum-heavy day with the nearest true
+   outdoor-safe non-tour day.
+3. If no swap exists, inserts an `Opening backup` block and puts
+   Topography of Terror / Brandenburg Gate / Holocaust Memorial first in the
+   route.
+4. Caps slow-trip `Pause` blocks so they cannot appear on consecutive days.
 
 Weather:
 
@@ -86,9 +121,11 @@ Weather:
 - `Rain backup` selected acts like a rain concern even if live forecast is not rainy.
 - Rain concern changes risk chips, weather strategy, nearby extra copy, and some tour/day choices.
 
-Review question:
+Resolved 2026-07-05:
 
-- Monday logic currently warns, but does not aggressively reorder every museum day unless other swap logic catches it. Should Monday museum days be forcibly swapped with outdoor days?
+- Monday museum days are now forcibly swapped with outdoor-safe days when the
+  trip has one. If no swap exists, the unlocked day card shows the warning and
+  open-air fallback.
 
 ## 4. Plan Generation Order
 
@@ -99,6 +136,8 @@ Current high-level sequence:
 3. If the first viable BerlinWalk tour day is inside the trip and not Day 1, that day becomes a `tour framework` day.
 4. The focus used by the tour framework is marked as consumed so the next day does not repeat the same focus immediately.
 5. Used map anchors are remembered. Later days avoid repeated anchors and may switch to anti-repeat variants.
+6. Opening post-processing swaps risky museum/closed-anchor days off Monday or
+   injects a visible fallback warning when no safe swap exists.
 
 Day type queue:
 
@@ -303,16 +342,17 @@ Used when the BerlinWalk tour is placed on a non-arrival day, or as Day 1 focus 
 
 Tour focus priority if multiple interests are selected:
 
-1. Museums
+1. History
 2. Wall / Cold War
-3. Food
-4. Free / low budget
-5. Nightlife
-6. History
+3. Museums
+4. Food
+5. Free / low budget
+6. Nightlife
 
-Review question:
+Resolved 2026-07-05:
 
-- Is this priority right? Example: if someone selects `History + Wall + Museums`, current focus is `Museums`. Maybe `Wall` or `History` should win more often.
+- The BerlinWalk tour is strongest as a history/Wall bridge, so `History` and
+  `Wall` now outrank `Museums` when multiple interests are selected.
 
 ### Focus variants
 

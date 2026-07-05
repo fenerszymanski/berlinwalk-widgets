@@ -8059,6 +8059,75 @@
       margin-top: 4px;
     }
 
+    #bw-trip-planner .bw-day-opening-note {
+      align-items: start;
+      background:
+        linear-gradient(135deg, rgba(255, 252, 219, 0.96), rgba(255, 255, 255, 0.94)),
+        #FFFCDB;
+      border: 1px solid #EFE6A3;
+      border-left: 5px solid #F5A623;
+      border-radius: 8px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: 34px minmax(0, 1fr);
+      padding: 8px 9px;
+    }
+
+    #bw-trip-planner .bw-day-opening-note.is-high {
+      border-color: rgba(230, 57, 70, 0.34);
+      border-left-color: #E63946;
+    }
+
+    #bw-trip-planner .bw-day-opening-note-icon {
+      align-items: center;
+      background: #FFF8D6;
+      border: 1px solid #EFE6A3;
+      border-radius: 8px;
+      color: #1B5E20;
+      display: inline-flex;
+      height: 32px;
+      justify-content: center;
+      width: 32px;
+    }
+
+    #bw-trip-planner .bw-day-opening-note-icon .bw-svg-icon {
+      height: 16px;
+      width: 16px;
+    }
+
+    #bw-trip-planner .bw-day-opening-note-copy,
+    #bw-trip-planner .bw-day-opening-note-copy b,
+    #bw-trip-planner .bw-day-opening-note-copy span,
+    #bw-trip-planner .bw-day-opening-note-copy em {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-day-opening-note-copy b {
+      color: var(--bw-green);
+      font-size: 11.2px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    #bw-trip-planner .bw-day-opening-note-copy span {
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-weight: 850;
+      line-height: 1.28;
+      margin-top: 2px;
+    }
+
+    #bw-trip-planner .bw-day-opening-note-copy em {
+      color: #8A5A00;
+      font-size: 10.2px;
+      font-style: normal;
+      font-weight: 850;
+      line-height: 1.28;
+      margin-top: 4px;
+    }
+
     #bw-trip-planner .bw-day-postcard {
       align-items: center;
       background:
@@ -11146,21 +11215,21 @@
   var PLACE_CATALOG = {
     world_clock: { label: 'World Clock', query: 'Weltzeituhr Alexanderplatz Berlin', area: 'Alexanderplatz', type: 'central landmark', lat: 52.521918, lng: 13.413215, why: 'It is a classic GDR world clock from 1969, and the most popular meeting spot on Alexanderplatz.' },
     alexanderplatz: { label: 'Alexanderplatz', query: 'Alexanderplatz Berlin', area: 'Mitte', type: 'transport', lat: 52.5218, lng: 13.4132, why: 'Berlin’s biggest square and main transit hub. Great for sensing the raw, busy side of the city.' },
-    museum_island: { label: 'Museum Island', query: 'Museumsinsel Berlin', area: 'Mitte', type: 'museum', lat: 52.5169, lng: 13.4017, why: 'A stunning Spree island hosting five world-class museums. It has beautiful architecture and great grass spots to sit.' },
+    museum_island: { label: 'Museum Island', query: 'Museumsinsel Berlin', area: 'Mitte', type: 'museum', lat: 52.5169, lng: 13.4017, closedDays: [], indoor: true, note: 'Museum Island is a cluster. Many state museums close Monday, so choose the exact museum before you commit.', why: 'A stunning Spree island hosting five world-class museums. It has beautiful architecture and great grass spots to sit.' },
     hackescher_markt: { label: 'Hackescher Markt', query: 'Hackescher Markt Berlin', area: 'Mitte', type: 'food', lat: 52.5221, lng: 13.4027, why: 'A great square to find hidden courtyards, independent boutiques, and quiet cafes right off the main streets.' },
     wall_memorial: { label: 'Wall Memorial', query: 'Berlin Wall Memorial Bernauer Strasse', area: 'Wedding / Mitte', type: 'history', lat: 52.5351, lng: 13.3903, why: 'The best place to see the real Wall fortifications, a preserved watchtower, and understand how the division actually split families.' },
     east_side_gallery: { label: 'East Side Gallery', query: 'East Side Gallery Berlin', area: 'Friedrichshain', type: 'wall', lat: 52.505, lng: 13.4397, why: 'The longest remaining stretch of the Wall, now covered in colorful protest murals representing freedom and art.' },
     oberbaum_bridge: { label: 'Oberbaum Bridge', query: 'Oberbaumbruecke Berlin', area: 'Friedrichshain / Kreuzberg', type: 'landmark', lat: 52.5018, lng: 13.4458, why: 'A striking double-deck brick bridge linking east and west, offering the best Spree river sunset views.' },
-    markthalle_neun: { label: 'Markthalle Neun', query: 'Markthalle Neun Berlin', area: 'Kreuzberg', type: 'food', lat: 52.502, lng: 13.4316, why: 'A historic covered market hall in Kreuzberg, famous for its local food vendors, craft beers, and lively street food.' },
+    markthalle_neun: { label: 'Markthalle Neun', query: 'Markthalle Neun Berlin', area: 'Kreuzberg', type: 'food', lat: 52.502, lng: 13.4316, closedDays: [0], indoor: true, note: 'The hall is a strong food backup Monday to Saturday; Sunday is the weak day.', why: 'A historic covered market hall in Kreuzberg, famous for its local food vendors, craft beers, and lively street food.' },
     brandenburg_gate: { label: 'Brandenburg Gate', query: 'Brandenburger Tor Berlin', area: 'Mitte', type: 'landmark', lat: 52.5163, lng: 13.3777, why: 'Berlin\'s ultimate symbol of unity. It stood in the no-man\'s-land during the division, making it a powerful place to see.' },
-    holocaust_memorial: { label: 'Holocaust Memorial', query: 'Memorial to the Murdered Jews of Europe Berlin', area: 'Mitte', type: 'history', lat: 52.5139, lng: 13.3787, why: 'A moving labyrinth of 2,711 concrete slabs near the government quarter, built for quiet reflection and walking through.' },
-    reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, why: 'The historic parliament building. The modern glass dome offers beautiful 360-degree views if you book ahead.' },
+    holocaust_memorial: { label: 'Holocaust Memorial', query: 'Memorial to the Murdered Jews of Europe Berlin', area: 'Mitte', type: 'history', lat: 52.5139, lng: 13.3787, closedDays: [], indoor: false, note: 'The Field of Stelae is open-air and always accessible; the underground information centre closes Mondays.', why: 'A moving labyrinth of 2,711 concrete slabs near the government quarter, built for quiet reflection and walking through.' },
+    reichstag: { label: 'Reichstag', query: 'Reichstag Building Berlin', area: 'Mitte', type: 'landmark', lat: 52.5186, lng: 13.3762, closedDays: [], indoor: true, note: 'The dome needs advance registration and can close for security or maintenance.', why: 'The historic parliament building. The modern glass dome offers beautiful 360-degree views if you book ahead.' },
     gendarmenmarkt: { label: 'Gendarmenmarkt', query: 'Gendarmenmarkt Berlin', area: 'Mitte', type: 'landmark', lat: 52.5138, lng: 13.3927, why: 'Often called Berlin\'s most beautiful historic square, famous for its twin cathedrals and the grand Concert Hall.' },
     nikolaiviertel: { label: 'Nikolaiviertel', query: 'Nikolaiviertel Berlin', area: 'Mitte', type: 'neighborhood', lat: 52.5169, lng: 13.4072, why: 'A reconstructed medieval quarter on the Spree. It has narrow cobblestone streets, making it perfect for a quiet stroll.' },
-    berlin_cathedral: { label: 'Berlin Cathedral', query: 'Berliner Dom Berlin', area: 'Museum Island', type: 'landmark', lat: 52.5191, lng: 13.4011, why: 'A massive 19th-century Protestant cathedral with a giant green dome, offering beautiful views from the Lustgarten lawn.' },
+    berlin_cathedral: { label: 'Berlin Cathedral', query: 'Berliner Dom Berlin', area: 'Museum Island', type: 'landmark', lat: 52.5191, lng: 13.4011, closedDays: [], indoor: true, note: 'Visits usually run daily, but Sunday starts later and services can interrupt access.', why: 'A massive 19th-century Protestant cathedral with a giant green dome, offering beautiful views from the Lustgarten lawn.' },
     hackesche_hofe: { label: 'Hackesche Hofe', query: 'Hackesche Hoefe Berlin', area: 'Mitte', type: 'courtyards', lat: 52.5234, lng: 13.4022, why: 'A famous maze of eight connected courtyards filled with unique shops, art galleries, and historic tile facades.' },
     kastanienallee: { label: 'Kastanienallee', query: 'Kastanienallee Berlin', area: 'Prenzlauer Berg', type: 'neighborhood', lat: 52.5352, lng: 13.4102, why: 'A lovely street in Prenzlauer Berg lined with local boutiques, cozy cafes, and great spots for people-watching.' },
-    topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, why: 'A free, deep-dive historical exhibition built on the former Gestapo and SS headquarters site.' },
+    topography_terror: { label: 'Topography of Terror', query: 'Topography of Terror Berlin', area: 'Mitte / Kreuzberg', type: 'history', lat: 52.5066, lng: 13.3823, closedDays: [], indoor: true, note: 'Daily indoor and outdoor history backup; 24/31 Dec and 1 Jan are closure exceptions.', why: 'A free, deep-dive historical exhibition built on the former Gestapo and SS headquarters site.' },
     tiergarten: { label: 'Tiergarten', query: 'Tiergarten Berlin', area: 'Mitte / West', type: 'park', lat: 52.5145, lng: 13.3501, why: 'A massive central park with quiet forest paths, lakes, and hidden beer gardens. Perfect for escaping the city noise.' },
     victory_column: { label: 'Victory Column', query: 'Siegessaeule Berlin', area: 'Tiergarten', type: 'landmark', lat: 52.5145, lng: 13.3501, why: 'A golden monument in the center of Tiergarten. Climbing the stairs offers a beautiful view down the main avenues.' },
     tempelhofer_feld: { label: 'Tempelhofer Feld', query: 'Tempelhofer Feld Berlin', area: 'Neukoelln / Tempelhof', type: 'park', lat: 52.473, lng: 13.4036, why: 'A massive former airport runways-turned-park where Berliners skate, cycle, and enjoy the sunset on the grass.' },
@@ -11171,9 +11240,9 @@
     kulturbrauerei: { label: 'Kulturbrauerei', query: 'Kulturbrauerei Berlin', area: 'Prenzlauer Berg', type: 'culture', lat: 52.5383, lng: 13.4135, why: 'A beautifully preserved 19th-century brick brewery complex, now a cultural hub hosting food markets and events.' },
     savignyplatz: { label: 'Savignyplatz', query: 'Savignyplatz Berlin', area: 'Charlottenburg', type: 'neighborhood', lat: 52.5054, lng: 13.3204, why: 'A charming West Berlin square surrounded by classic restaurants, jazz bars, and independent bookstores.' },
     lietzensee: { label: 'Lietzensee', query: 'Lietzensee Berlin', area: 'Charlottenburg', type: 'park', lat: 52.5082, lng: 13.2877, why: 'A quiet park with a beautiful central lake in Charlottenburg. A favorite local spot for a coffee break.' },
-    sanssouci: { label: 'Sanssouci', query: 'Sanssouci Palace Potsdam', area: 'Potsdam', type: 'day trip', lat: 52.4033, lng: 13.0386, why: 'Frederick the Great\'s summer palace, famous for its beautiful terraced vineyards and quiet palace park gardens.' },
+    sanssouci: { label: 'Sanssouci', query: 'Sanssouci Palace Potsdam', area: 'Potsdam', type: 'day trip', lat: 52.4033, lng: 13.0386, closedDays: [1], indoor: true, note: 'Sanssouci Palace closes Monday; the park remains the open-air fallback.', why: 'Frederick the Great\'s summer palace, famous for its beautiful terraced vineyards and quiet palace park gardens.' },
     potsdam_hbf: { label: 'Potsdam Hbf', query: 'Potsdam Hauptbahnhof', area: 'Potsdam', type: 'station', lat: 52.3917, lng: 13.0664, why: 'Potsdam’s main train station, serving as the starting point for exploring the palaces and parks.' },
-    charlottenburg_palace: { label: 'Charlottenburg Palace', query: 'Schloss Charlottenburg Berlin', area: 'Charlottenburg', type: 'palace', lat: 52.5209, lng: 13.2957, why: 'Berlin\'s grandest Baroque palace, featuring beautiful royal gardens behind it that are completely free to walk.' },
+    charlottenburg_palace: { label: 'Charlottenburg Palace', query: 'Schloss Charlottenburg Berlin', area: 'Charlottenburg', type: 'palace', lat: 52.5209, lng: 13.2957, closedDays: [1], indoor: true, note: 'Palace rooms close Monday; the gardens are the open daily fallback.', why: 'Berlin\'s grandest Baroque palace, featuring beautiful royal gardens behind it that are completely free to walk.' },
     monsieur_vuong: { label: 'Monsieur Vuong', query: 'Monsieur Vuong Berlin', area: 'Mitte', type: 'food', lat: 52.5238, lng: 13.4073, why: 'A famous Mitte spot for fresh and fast Vietnamese street food bowls.' },
     claerchens_ballhaus: { label: 'Clärchens Ballhaus', query: 'Claerchens Ballhaus Berlin', area: 'Mitte', type: 'food', lat: 52.5268, lng: 13.3961, why: 'A historic 1913 ballroom serving traditional German classics in a beautiful courtyard.' },
     maximilians: { label: 'Maximilians', query: 'Maximilians Berlin', area: 'Mitte', type: 'food', lat: 52.5122, lng: 13.3888, why: 'A cozy spot on Friedrichstraße serving hearty Bavarian classics and fresh draft beer.' },
@@ -12655,6 +12724,14 @@
     var parts = dateParts(dateKey);
     var holidays = Object.assign({}, berlinHolidays(parts.year - 1), berlinHolidays(parts.year), berlinHolidays(parts.year + 1));
     var day = dateFromKey(dateKey).getUTCDay();
+    if (parts.month === 12 && parts.day === 24) {
+      return {
+        key: 'holiday',
+        short: 'Christmas Eve',
+        label: 'Christmas Eve',
+        note: 'Christmas Eve: shops often close early. Do errands before lunch and keep the route simple.'
+      };
+    }
     var holiday = holidays[dateKey] || '';
     if (holiday) {
       return {
@@ -12686,6 +12763,117 @@
       label: 'Normal weekday',
       note: ''
     };
+  }
+
+  function placeClosedDays(place) {
+    return Array.isArray(place && place.closedDays) ? place.closedDays : [];
+  }
+
+  function placeClosedOnDate(placeId, dateKey) {
+    var place = placeFor(placeId);
+    if (!place) return false;
+    return placeClosedDays(place).indexOf(dateFromKey(dateKey).getUTCDay()) !== -1;
+  }
+
+  function dayPlanType(day) {
+    return (day && (day.planKey || dayVisualType(day))) || '';
+  }
+
+  function museumMondayRisk(day) {
+    if (!day || dayStatus(day.dateKey).key !== 'monday') return false;
+    var context = [day.title, day.theme, dayPlanType(day), (day.placeIds || []).join(' ')].join(' ');
+    return /museum|royal|palace/i.test(context) || dayPlaceIds(day).indexOf('museum_island') !== -1;
+  }
+
+  function dayClosedPlaces(day) {
+    if (!day || !day.dateKey) return [];
+    return dayPlaceIds(day).filter(function (placeId) {
+      return placeClosedOnDate(placeId, day.dateKey);
+    }).map(function (placeId) {
+      return placeFor(placeId);
+    }).filter(Boolean);
+  }
+
+  function dayOpeningRisk(day) {
+    if (!day || !day.dateKey) return null;
+    var status = dayStatus(day.dateKey);
+    var closedPlaces = dayClosedPlaces(day);
+    if (closedPlaces.length) {
+      var closedNames = closedPlaces.map(function (place) { return place.label; }).join(', ');
+      return {
+        key: 'closed-place',
+        severity: 'high',
+        title: status.short + ' opening check',
+        copy: closedNames + ' is not a safe anchor for this date. Use the open-air history backup first.',
+        action: 'I moved the day where a safer swap was available.'
+      };
+    }
+    if (museumMondayRisk(day)) {
+      return {
+        key: 'monday-museum',
+        severity: 'high',
+        title: 'Monday museum check',
+        copy: 'Monday is risky for Museum Island and palace interiors. Use outdoor history first, then keep one checked-open museum only.',
+        action: 'I moved the museum-heavy day off Monday where the trip had room.'
+      };
+    }
+    return null;
+  }
+
+  function openingNoticeItems(day) {
+    var items = [];
+    var status = dayStatus(day.dateKey);
+    var warning = day && (day.openingWarning || day.openingSwap);
+    if (warning) {
+      items.push({
+        key: warning.key || 'opening-warning',
+        severity: warning.severity || 'high',
+        title: warning.title || 'Opening check',
+        copy: warning.copy || '',
+        action: warning.action || ''
+      });
+    }
+    if (day && day.note) {
+      items.push({
+        key: 'day-status',
+        severity: status.key === 'holiday' ? 'high' : 'medium',
+        title: status.short || status.label || 'Opening note',
+        copy: day.note,
+        action: ''
+      });
+    }
+    if (warning) {
+      dayPlaceIds(day).forEach(function (placeId) {
+        var place = placeFor(placeId);
+        if (!place || !place.note) return;
+        items.push({
+          key: 'place-' + placeId,
+          severity: 'low',
+          title: place.label,
+          copy: place.note,
+          action: ''
+        });
+      });
+    }
+    var seen = {};
+    return items.filter(function (item) {
+      var key = item.key + '|' + item.title + '|' + item.copy;
+      if (!item.copy || seen[key]) return false;
+      seen[key] = true;
+      return true;
+    }).slice(0, warning ? 3 : 1);
+  }
+
+  function dayOpeningStatusHtml(day) {
+    var items = openingNoticeItems(day);
+    if (!items.length) return '';
+    return items.map(function (item) {
+      var highClass = item.severity === 'high' ? ' is-high' : '';
+      return '<div class="bw-day-opening-note' + highClass + '">' +
+        '<span class="bw-day-opening-note-icon">' + iconSvg('calendar') + '</span>' +
+        '<span class="bw-day-opening-note-copy"><b>' + escapeHtml(item.title) + '</b><span>' + escapeHtml(item.copy) + '</span>' + (item.action ? '<em>' + escapeHtml(item.action) + '</em>' : '') + '</span>' +
+      '</div>';
+    }).join('');
   }
 
   function labelFor(groupKey, value) {
@@ -16629,14 +16817,14 @@
     if (state.arrivalPoint === 'ber') {
       if (state.arrivalTime === 'evening') return "Take the ABC train straight to your base. Do not attempt sightseeing tonight. Just sleep. The city isn't going anywhere.";
       if (state.arrivalTime === 'afternoon') return "Ride the train in, drop your bags, and keep your exploring strictly within a 15-minute walking radius.";
-      if (arrivalDayTourEligible()) return "Hop on the ABC train, throw your bags in your room, and race over to join our walking tour! We're waiting for you!";
+      if (arrivalDayTourEligible()) return "Hop on the ABC train, drop your bags, and head to the BerlinWalk tour. I will meet you at the World Clock.";
       return "Catch the train, dump the luggage, and take a super relaxed stroll near your bed.";
     }
     if (state.arrivalPoint === 'hbf') {
       if (state.arrivalTime === 'evening') return "Arrive at Hauptbahnhof and head directly to your hotel. Keep tonight extremely lazy.";
       if (state.arrivalTime === 'afternoon') return "Once you navigate the maze that is Hauptbahnhof, drop your bags and keep your first walk highly local.";
       return arrivalDayTourEligible()
-        ? "Stash your bags in a locker at Hauptbahnhof and jump on the train to Alexanderplatz—it's tour time!"
+        ? "Stash your bags in a locker at Hauptbahnhof and jump on the train to Alexanderplatz - it is tour time."
         : "Arrive at the main station, drop your bags, and go find a local park to stretch your legs.";
     }
     if (state.arrivalTime === 'evening') return "Check in, find the closest decent restaurant, and call it a night. Keep it tiny.";
@@ -16772,9 +16960,9 @@
         accent: '#1B5E20',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Brandenburg Gate and memorials', copy: "Let's hit the Brandenburg Gate early before the selfie-stick crowds arrive, then take a peaceful walk through the memorials." },
+          { time: 'Morning', title: 'Brandenburg Gate and memorials', copy: 'Start at the Brandenburg Gate early before the selfie-stick crowds arrive, then take a peaceful walk through the memorials.' },
           { time: 'Lunch', title: 'Lunch in Mitte', copy: '' },
-          { time: 'Afternoon', title: 'Topography of Terror or Reichstag', copy: "One heavy history stop like the Topography of Terror is enough for today. We are touring, not taking a university exam!" },
+          { time: 'Afternoon', title: 'Topography of Terror', copy: 'One heavy history stop like the Topography of Terror is enough for today. This is a city route, not a university exam.' },
           { time: 'Evening', title: 'Dinner in Mitte', copy: '' }
         ],
         placeIds: ['brandenburg_gate', 'topography_terror', 'reichstag']
@@ -16785,7 +16973,7 @@
         accent: '#2F80ED',
         bg: '#EAF4FF',
         blocks: [
-          { time: 'Morning', title: 'Berlin Wall Memorial', copy: "Start at Bernauer Strasse—it’s the absolute best spot to actually feel what the Wall did to everyday Berliners." },
+          { time: 'Morning', title: 'Berlin Wall Memorial', copy: 'Start at Bernauer Strasse. It is the clearest place to feel what the Wall did to everyday Berliners.' },
           { time: 'Lunch', title: 'Lunch near the Wall', copy: '' },
           { time: 'Afternoon', title: 'East Side Gallery and Spree edge', copy: "Check out the East Side Gallery murals, then flee to Friedrichshain for a massive slice of cake and a coffee break." },
           { time: 'Evening', title: 'Dinner in Friedrichshain', copy: '' }
@@ -16826,7 +17014,7 @@
         blocks: [
           { time: 'Morning', title: 'Spree and parliament walk', copy: "Walk the Spree river right by the parliament. Million-dollar government views for absolutely zero euros." },
           { time: 'Lunch', title: 'Lunch before the park', copy: '' },
-          { time: 'Afternoon', title: 'Tiergarten and Victory Column', copy: "Head into the massive Tiergarten park. Get lost among the trees—it’s the best therapy after all that concrete history." },
+          { time: 'Afternoon', title: 'Tiergarten and Victory Column', copy: 'Head into the massive Tiergarten park. Getting lost among the trees is the best therapy after all that concrete history.' },
           { time: 'Evening', title: 'Dinner near base', copy: '' }
         ],
         placeIds: ['topography_terror', 'tiergarten', 'tempelhofer_feld']
@@ -16863,7 +17051,7 @@
         accent: '#1B5E20',
         bg: '#F2F8E8',
         blocks: [
-          { time: 'Morning', title: 'Train ride to Potsdam', copy: "Take the S-Bahn to Potsdam, but wait until rush hour is over—unless you enjoy being squished against the train doors." },
+          { time: 'Morning', title: 'Train ride to Potsdam', copy: 'Take the S-Bahn to Potsdam, but wait until rush hour is over unless you enjoy being squeezed against the train doors.' },
           { time: 'Lunch', title: 'Lunch in Potsdam', copy: '' },
           { time: 'Afternoon', title: 'Sanssouci Palace gardens', copy: "Roam the stunning Sanssouci gardens and pretend you're Prussian royalty avoiding their duties." },
           { time: 'Evening', title: 'Dinner near base', copy: '' }
@@ -16876,7 +17064,7 @@
 
   function tourFrameworkFocusKey() {
     var selected = Array.isArray(state.interests) ? state.interests : [];
-    var priority = ['museums', 'wall', 'food', 'free', 'nightlife', 'history'];
+    var priority = ['history', 'wall', 'museums', 'food', 'free', 'nightlife'];
     for (var i = 0; i < priority.length; i += 1) {
       if (selected.indexOf(priority[i]) !== -1) return priority[i];
     }
@@ -16916,7 +17104,7 @@
           ? "Rain? Head into the Topography of Terror. Keep dry and save the outdoor Wall hunting for when you won't need a kayak."
           : "Focus on one big Wall site today, like Bernauer Strasse. Cramming them all in just turns it into a blurry history smoothie.",
         eveningTitle: 'Easy dinner after the history layer',
-        eveningCopy: "Eat near Hackescher Markt. Let's keep your evening commute to 'stumbling distance'.",
+        eveningCopy: 'Eat near Hackescher Markt. Keep your evening commute to stumbling distance.',
         placeIds: hasRainConcern()
           ? ['world_clock', 'topography_terror', 'hackescher_markt']
           : ['world_clock', 'wall_memorial', 'hackescher_markt'],
@@ -17317,7 +17505,7 @@
 
     if (profile.comfort && key === 'potsdam') {
       blocks[0] = Object.assign({}, blocks[0], {
-        copy: String(blocks[0].copy || '') + " If a full expedition to Potsdam sounds exhausting, let's pivot to Charlottenburg Palace instead. Same royal vibes, zero train stress."
+        copy: String(blocks[0].copy || '') + ' If a full expedition to Potsdam sounds exhausting, pivot to Charlottenburg Palace instead. Same royal mood, zero train stress.'
       });
     }
 
@@ -17459,6 +17647,133 @@
     return clone;
   }
 
+  function cloneDayForDate(source, target) {
+    return Object.assign({}, source, {
+      dayNumber: target.dayNumber,
+      dateKey: target.dateKey,
+      note: dayStatus(target.dateKey).note,
+      blocks: (source.blocks || []).map(function (block) {
+        return Object.assign({}, block);
+      }),
+      placeIds: (source.placeIds || []).slice(),
+      openingSwap: null,
+      openingWarning: null
+    });
+  }
+
+  function isOutdoorSafeSwapDay(day) {
+    if (!day || day.dayNumber === 1 || dayHasTour(day) || dayOpeningRisk(day)) return false;
+    var type = dayPlanType(day);
+    if (['wall', 'free', 'history', 'local'].indexOf(type) !== -1) return true;
+    if (type) return false;
+    return /wall|cold war|free|history|neighborhood|local/i.test([day.title, day.theme].join(' '));
+  }
+
+  function nearestOutdoorSafeSwapIndex(days, riskyIndex) {
+    var best = -1;
+    var bestDistance = Infinity;
+    (days || []).forEach(function (day, index) {
+      if (index === riskyIndex || !isOutdoorSafeSwapDay(day)) return;
+      var distance = Math.abs(index - riskyIndex);
+      if (distance < bestDistance) {
+        best = index;
+        bestDistance = distance;
+      }
+    });
+    return best;
+  }
+
+  function applyOpeningSwaps(days) {
+    if (!days || days.length < 2) return days;
+    for (var index = 0; index < days.length; index += 1) {
+      var riskyDay = days[index];
+      var risk = dayOpeningRisk(riskyDay);
+      if (!risk || riskyDay.dayNumber === 1) continue;
+      var swapIndex = nearestOutdoorSafeSwapIndex(days, index);
+      if (swapIndex < 0) continue;
+
+      var safeDay = days[swapIndex];
+      var safeOnRiskDate = cloneDayForDate(safeDay, riskyDay);
+      var riskOnSafeDate = cloneDayForDate(riskyDay, safeDay);
+      safeOnRiskDate.openingSwap = {
+        key: 'opening-swap-safe-day',
+        severity: 'medium',
+        title: dayStatus(riskyDay.dateKey).short + ' swap applied',
+        copy: 'I moved the museum-heavy route off this date and put this outdoor-safe day here.',
+        action: 'Use this route first; save the museum anchor for Day ' + safeDay.dayNumber + '.'
+      };
+      riskOnSafeDate.openingSwap = {
+        key: 'opening-swap-museum-day',
+        severity: 'medium',
+        title: 'Museum day moved',
+        copy: 'This museum-heavy day moved away from the risky opening date, so you can check one exact museum before you go.',
+        action: ''
+      };
+      days[index] = safeOnRiskDate;
+      days[swapIndex] = riskOnSafeDate;
+    }
+    return days;
+  }
+
+  function addOpeningFallback(day) {
+    var risk = dayOpeningRisk(day);
+    if (!risk) return day;
+    var clone = Object.assign({}, day, {
+      blocks: (day.blocks || []).map(function (block) { return Object.assign({}, block); }),
+      placeIds: (day.placeIds || []).slice()
+    });
+    clone.openingWarning = risk;
+    if (risk.key === 'monday-museum' || risk.key === 'closed-place') {
+      var fallbackIds = ['topography_terror', 'brandenburg_gate', 'holocaust_memorial'];
+      var mergedIds = [];
+      fallbackIds.concat(clone.placeIds || []).forEach(function (placeId) {
+        if (placeFor(placeId) && mergedIds.indexOf(placeId) === -1) mergedIds.push(placeId);
+      });
+      clone.placeIds = mergedIds.slice(0, 4);
+      var alreadyHasBackup = clone.blocks.some(function (block) {
+        return /opening backup/i.test(String(block.time || '') + ' ' + String(block.title || ''));
+      });
+      if (!alreadyHasBackup) {
+        clone.blocks.unshift({
+          time: 'Opening backup',
+          window: 'Start here first',
+          title: risk.key === 'monday-museum' ? 'Use open-air history before any museum door' : 'Start with the open-air backup',
+          copy: risk.key === 'monday-museum'
+            ? 'Monday is risky for museum interiors. Start with Topography of Terror, Brandenburg Gate, or the memorials, then check one exact museum before going inside.'
+            : 'This anchor has an opening risk on your date. Start with Topography of Terror, Brandenburg Gate, or the memorials before committing to an indoor ticket.'
+        });
+      }
+    }
+    return clone;
+  }
+
+  function limitConsecutivePauseBlocks(days) {
+    var lastPauseDay = -10;
+    (days || []).forEach(function (day) {
+      if (!day || !day.blocks) return;
+      var pauseIndex = day.blocks.findIndex(function (block) {
+        var text = [block.time, block.title, block.copy].join(' ');
+        return /^pause$/i.test(String(block.time || '')) && /coffee|cafe|bench|snack|pause|recovery/i.test(text);
+      });
+      if (pauseIndex < 0) return;
+      if (day.dayNumber - lastPauseDay < 2) {
+        day.blocks.splice(pauseIndex, 1);
+        return;
+      }
+      lastPauseDay = day.dayNumber;
+    });
+    return days;
+  }
+
+  function postProcessPlanDays(days) {
+    applyOpeningSwaps(days);
+    for (var index = 0; index < days.length; index += 1) {
+      days[index] = addOpeningFallback(days[index]);
+    }
+    limitConsecutivePauseBlocks(days);
+    return days;
+  }
+
   function dayKeys() {
     return planKeyQueue();
   }
@@ -17519,6 +17834,7 @@
       markUsedPlaceIds(usedPlaceIds, plannedDay);
     }
 
+    postProcessPlanDays(days);
     assignMealPlans(days);
 
     return {
@@ -18000,6 +18316,7 @@
       }).join('');
       var routeCard = dayRouteCardHtml(day);
       var weatherChip = dayWeatherChipHtml(day);
+      var openingNotes = dayOpeningStatusHtml(day);
       return '<article class="bw-day' + (activeDay ? ' is-focused' : '') + '" data-day-card="' + day.dayNumber + '" style="--day-accent:' + escapeHtml(day.accent || '#7CB342') + ';--day-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
         '<div class="bw-day-head">' +
           '<span class="bw-day-num">' + iconSvg(dayIconName(day)) + '<span>DAY ' + day.dayNumber + '</span></span>' +
@@ -18007,6 +18324,7 @@
         '</div>' +
         '<div class="bw-day-body">' +
           weatherChip +
+          openingNotes +
           blocks +
           routeCard +
         '</div>' +
@@ -19326,7 +19644,7 @@
       provider: 'local',
       model: 'deterministic-fallback',
       noteTitle: 'A note from Yusuf',
-      routeIntro: "Hey there! Yusuf here. Look, for this " + days + "-day adventure, let's ease into it around " + naturalGuidePhrase(firstAnchors) + ". Grab some food, figure out which way is North, and let Berlin's wild energy sink in before we start the hardcore sightseeing.",
+      routeIntro: "Hey there! Yusuf here. For this " + days + "-day plan, ease into it around " + naturalGuidePhrase(firstAnchors) + ". Grab some food, figure out which way is north, and let Berlin's energy sink in before the heavy sightseeing starts.",
       weatherSentence: tripWeatherSummary(plan),
       tourSentence: slot && slot.insideTrip
         ? 'I recommend joining me for BerlinWalk on ' + slot.dayLabel + ' at ' + slot.startLabel + ' from the World Clock.'
@@ -22390,7 +22708,7 @@
     } catch (error) {
       setPdfDebug(window.__tripPlannerPdfStage || 'unknown', 'legacy stage=' + String(window.__tripPlannerPdfStage || 'unknown') + ' error=' + String(error && (error.stack || error.message || error.name) || error || 'empty error'));
       console.error('tripPlanner PDF failed', error);
-      setActionStatus('PDF had a layout hiccup. Use Print plan while we fix this view.');
+      setActionStatus('PDF had a layout hiccup. Use Print plan while I fix this view.');
       track('bw_trip_planner_pdf_download', { success: false, reason: 'pdf_exception' });
     }
   }
@@ -22435,7 +22753,7 @@
       var detail = 'stage=' + String(window.__tripPlannerPdfStage || 'unknown') + ' | ' + pdfErrorDetail(error);
       setPdfDebug(window.__tripPlannerPdfStage || 'unknown', detail);
       console.error('tripPlanner PDF failed', detail, error);
-      setActionStatus('PDF had a layout hiccup. Use Print plan while we fix this view.');
+      setActionStatus('PDF had a layout hiccup. Use Print plan while I fix this view.');
       track('bw_trip_planner_pdf_download', { success: false, reason: 'pdf_exception', stage: window.__tripPlannerPdfStage || 'unknown' });
     }
   }
