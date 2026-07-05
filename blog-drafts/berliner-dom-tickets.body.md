@@ -17,7 +17,15 @@ There are three things to check.
 - **Service or event priority:** the house rules are clear that liturgical events and other events have priority, and visitor access can be restricted.
 - **Your actual energy:** the dome view requires stairs. If you are already tired, wet, hungry or carrying a bag, the ticket may still be good, but the climb may not be the right part of it.
 
-I would not buy from a random reseller just because it is the first result you see. Start with the official site, check the current price there, and use the ticket only if your timing still fits the day.
+As checked on 5 July 2026, Berliner Dom lists these visitor ticket prices, including the audio guide:
+
+- **Standard ticket:** 15 euros.
+- **Concession ticket:** 12 euros, with proof of eligibility.
+- **Berlin WelcomeCard ticket:** 11 euros.
+- **Ticket with children:** 15 euros for 1 adult with up to 4 children under 18.
+- **Concession ticket with children:** 12 euros for 1 eligible adult with up to 4 children under 18.
+
+Tickets are valid for one year from the date of purchase, and the official ticket shop describes the normal sightseeing route as about 90 minutes. I would not buy from a random reseller just because it is the first result you see. Start with the official site, then use the ticket only if your timing still fits the day.
 
 ## What the ticket actually gives you
 

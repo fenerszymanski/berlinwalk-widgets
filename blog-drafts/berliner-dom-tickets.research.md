@@ -30,6 +30,7 @@ Decision: safe to draft because the angle is practical tourist ticket/timing int
 
 - Berliner Dom visitor service: https://www.berlinerdom.de/en/visiting/service/visitors-service/
   - Visitor route includes Imperial Staircase, Pulpit Church, Baptismal and Wedding Chapel, Hohenzollern Crypt, Cathedral Museum, Shop, Cafe and dome view around 50m above the city.
+  - Checked 2026-07-05 ticket prices: standard 15 euros, concession 12 euros, Berlin WelcomeCard 11 euros, ticket with children 15 euros, concession ticket with children 12 euros. Admission includes the audio guide.
 - Berliner Dom dates calendar: https://www.berlinerdom.de/en/dates/
   - Checked 2026-07-05; July visit windows vary by day and must be checked before ticket/time advice.
 - Berliner Dom official ticket page: https://www.berlinerdom.de/tickets/
@@ -41,7 +42,7 @@ Decision: safe to draft because the angle is practical tourist ticket/timing int
 - visitBerlin Berliner Dom listing: https://www.visitberlin.de/en/berlin-cathedral
   - Useful third-party confirmation for 270 dome steps and visitor highlights.
 - Official ticket shop: https://berlinerdom.ticketfritz.de/en/Home/Index
-  - Linked from official ticket path; avoided hard-coding price because current official pricing should be checked at purchase time.
+  - Linked from official ticket path. Shop confirms 15.00 euros for the sightseeing ticket, 12.00 euros discounted, 11.00 euros WelcomeCard, validity for 1 year, approx. 90 minute tour and last admission 60 minutes before closing.
 
 ## SEO Package
 

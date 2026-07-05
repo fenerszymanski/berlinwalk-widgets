@@ -8072,6 +8072,14 @@
       },
       {
         "@type": "Question",
+        "name": "How much are Berliner Dom tickets?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As checked on 5 July 2026, Berliner Dom lists the standard visitor ticket at 15 euros, the concession ticket at 12 euros, and the Berlin WelcomeCard ticket at 11 euros. A ticket with children is 15 euros for 1 adult with up to 4 children under 18. Check the official site before buying because prices and access rules can change."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Should I buy Berliner Dom tickets in advance?",
         "acceptedAnswer": {
           "@type": "Answer",
