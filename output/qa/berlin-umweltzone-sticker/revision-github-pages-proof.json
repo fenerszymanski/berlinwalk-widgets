@@ -1,0 +1,48 @@
+{
+  "checkedAt": "2026-07-06T13:14:05.549Z",
+  "results": [
+    {
+      "name": "widget-html",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-umweltzone-sticker-checker/?v=20260706v",
+      "status": 200,
+      "ok": true,
+      "lastModified": "Mon, 06 Jul 2026 13:13:24 GMT",
+      "etag": "W/\"6a4ba9f4-5263\"",
+      "contentLength": "5863",
+      "bytes": 21091,
+      "markers": [
+        {
+          "marker": "A foreign car with a visible green sticker is allowed in the zone",
+          "present": true
+        },
+        {
+          "marker": "electric && ['unchecked', 'delivery'].includes(state.sticker)",
+          "present": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "name": "widget-raw-main",
+      "url": "https://raw.githubusercontent.com/fenerszymanski/berlinwalk-widgets/main/berlin-umweltzone-sticker-checker/index.html",
+      "status": 200,
+      "ok": true,
+      "lastModified": null,
+      "etag": "W/\"0933d24eb77fe74a5cd4afb9672f14581d633d1fc4c926b3b409335c800db993\"",
+      "contentLength": "5836",
+      "bytes": 21091,
+      "markers": [
+        {
+          "marker": "A foreign car with a visible green sticker is allowed in the zone",
+          "present": true
+        },
+        {
+          "marker": "electric && ['unchecked', 'delivery'].includes(state.sticker)",
+          "present": true
+        }
+      ],
+      "pass": true
+    }
+  ],
+  "pass": true
+}
