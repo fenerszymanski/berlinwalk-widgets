@@ -9,6 +9,7 @@
   var STYLE_ID = 'bw-exit-intent-styles';
   var OVERLAY_ID = 'bw-exit-intent-popup';
   var DWELL_TIME_MS = isPreviewForced() ? 500 : 30000;
+  var NEXT_TOUR_SLOT_URL = resolveAdjacentScriptUrl('next-tour-slot.js');
   var TOUR_START_LABEL = '11:30';
   var SAME_DAY_CUTOFF_HOUR = 8;
   var SAME_DAY_CUTOFF_MINUTE = 30;
@@ -19,6 +20,16 @@
   var popupShown = false;
   var currentStep = 1;
   var closeTracked = false;
+  var nextTourSlotRequested = false;
+
+  function resolveAdjacentScriptUrl(fileName) {
+    try {
+      if (document.currentScript && document.currentScript.src) {
+        return new URL(fileName, document.currentScript.src).toString();
+      }
+    } catch (err) {}
+    return 'https://fenerszymanski.github.io/berlinwalk-widgets/js/' + fileName;
+  }
 
   function getImageUrl(type) {
     var file = 'berlin-trip-planner-hero.jpg';
@@ -73,6 +84,16 @@
     return isDesktop() && !isExcludedPage() && !safeSessionGet(SESSION_KEY);
   }
 
+  function ensureNextTourSlotHelper() {
+    if (typeof window.bwNextTourSlot === 'function') return;
+    if (nextTourSlotRequested) return;
+    nextTourSlotRequested = true;
+    var script = document.createElement('script');
+    script.src = NEXT_TOUR_SLOT_URL;
+    script.async = true;
+    document.head.appendChild(script);
+  }
+
   function trackEvent(name, params) {
     var data = params || {};
     data.event_category = 'exit_intent_popup';
@@ -122,6 +143,12 @@
 
   function nextTourLine() {
     try {
+      if (typeof window.bwNextTourSlot === 'function') {
+        var slot = window.bwNextTourSlot();
+        if (slot && slot.relativeLabel && slot.slotsLabel) {
+          return 'Next walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel + '. Free, tip-based.';
+        }
+      }
       var now = new Date();
       var today = berlinParts(now);
       var tomorrow = berlinParts(new Date(now.getTime() + DAY_MS));
@@ -306,6 +333,7 @@
   }
 
   function boot() {
+    ensureNextTourSlotHelper();
     window.setTimeout(function () {
       dwellReady = true;
       if (isPreviewForced()) showPopup();

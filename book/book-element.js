@@ -422,8 +422,8 @@ class BWBookHeroElement extends HTMLElement {
       const slot = readBookNextTourSlot();
       const row = this.querySelector('[data-bw-book-next-walk-row]');
       const value = this.querySelector('[data-bw-book-next-walk]');
-      if (!row || !value || !slot || !slot.weekdayLabel || !slot.startLabel) return false;
-      value.textContent = `${slot.weekdayLabel} ${slot.startLabel}`;
+      if (!row || !value || !slot || !slot.relativeLabel || !slot.slotsLabel) return false;
+      value.textContent = `${slot.relativeLabel} ${slot.slotsLabel}`;
       row.hidden = false;
       return true;
     };

@@ -88,7 +88,56 @@ html, body {
   margin-left: 2px;
 }
 
+.bw-tour-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 14px 0 0;
+}
+
+.bw-tour-cta-link {
+  flex: 1 1 240px;
+  min-width: 0;
+  padding: 11px 14px 12px;
+  background: linear-gradient(135deg, #1B5E20 0%, #164a1a 100%);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.35;
+  border-radius: 0;
+  border: 1px solid var(--bw-border, #DCE8C8);
+}
+
+.bw-tour-cta-link:hover,
+.bw-tour-cta-link:focus {
+  background: linear-gradient(135deg, #164a1a 0%, #123a14 100%);
+  color: #FFFFFF;
+  outline: none;
+}
+
+.bw-tour-cta-text {
+  display: block;
+}
+
+.bw-attr-badge-inline {
+  margin: 0;
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
 @media (max-width: 460px) {
+  .bw-tour-cta-row {
+    gap: 8px;
+  }
+
+  .bw-tour-cta-link {
+    font-size: 11px;
+    padding: 10px 12px 11px;
+  }
+
   .bw-attr-badge {
     font-size: 10px;
     letter-spacing: 1.1px;
