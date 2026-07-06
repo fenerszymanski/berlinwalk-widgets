@@ -50,11 +50,48 @@ number), not the booking-page conversion rate (already fine at ~14%).
 - All tracking consent-gated; no pre-consent event writes.
 - No Meta changes. No booking-page or calendar changes (already good).
 - Reuse `js/next-tour-slot.js` (`window.bwNextTourSlot()`); never re-implement
-  slot logic.
+  slot logic. Task 0 enhances this helper; all copy consumes its output.
 - Playwright QA desktop + 390px, overflow 0, console 0, before push. QA event
   rows UTM-tagged `codex_wave_c_qa`, deleted after readback 0.
 - Tools must not regress: the bridge is one restrained block after the tool, not
   a popup, not an interstitial, and must not shift or cover the widget.
+- Never advertise a time Wix would not book. In-season copy shows `11:30 and
+  15:30`; off-season shows `11:30` only; same-day past a slot's cutoff drops that
+  slot. This is driven entirely by Task 0, not hardcoded per surface.
+
+## Task 0 (prerequisite) — Teach `next-tour-slot.js` about both summer slots
+
+Today the helper only knows the single `11:30` slot (`TOUR_START_LABEL`) and has
+no summer-season awareness. In the double-slot season each tour day runs 11:30
+AND 15:30 (live availability on 2026-07-06 confirmed both slots for 2026-07-07,
+openSpots 48 / 50). The bridge should offer both so the reader has an
+alternative time.
+
+Enhance `js/next-tour-slot.js` without breaking its current single-slot output:
+
+1. Add season constants (named, easy to change): the double-slot window. Default
+   to the planner's canonical `July 1 - September 30` (`PLANNER_LOGIC_REVIEW.md`).
+   Note in a code comment that live booking copy says "From 3 July 2026"; if
+   Yusuf wants the exact live start, adjust the constant. Never advertise a slot
+   that Wix would not actually offer, so keep the window conservative.
+2. Compute the full slot set for a given tour day: in-season `['11:30','15:30']`,
+   otherwise `['11:30']`.
+3. Per-slot same-day filtering: `findTargets` currently only keeps today if it is
+   before the single 08:30 cutoff (built for 11:30). With two slots, keep today
+   if ANY of its slots is still bookable, and drop individual slots whose cutoff
+   has passed (reuse the cutoff concept per slot: slot time minus the same lead
+   buffer). So a summer tour day at 12:00 shows only `15:30` today; after 15:30's
+   cutoff it rolls to the next day showing both.
+4. Extend the returned object (keep existing fields for the live Wave A/B
+   surfaces):
+   - `startLabel` unchanged = the first/soonest bookable slot (backward compat).
+   - add `startLabels`: array of that day's still-bookable slots, e.g.
+     `['11:30','15:30']`.
+   - add `slotsLabel`: pre-joined human string, `'11:30 and 15:30'` or `'11:30'`.
+   - add `slotCount`: `startLabels.length` (for singular/plural copy).
+5. Update/extend the unit assertions: summer future day -> two slots; off-season
+   -> one; summer same-day after 11:30 cutoff -> only 15:30; after both cutoffs
+   -> next day two slots.
 
 ## Task 1 (primary) — In-content tour bridge on `/tools/<slug>` pages
 
@@ -75,10 +112,15 @@ site-wide script.
      block; fallback to append before the footer. Verify the live DOM anchor on
      `/tools/berlin-safety` and `/tools/berlin-drinking-water` (different tools
      may differ) and pick a resilient selector.
-   - Copy (next-slot aware, works for in-Berlin-now and soon-to-arrive):
+   - Copy (next-slot aware, works for in-Berlin-now and soon-to-arrive; uses
+     `slotsLabel`/`slotCount` from Task 0 so it lists both times when the season
+     offers them):
      - Kicker: `While you are in Berlin`
-     - Title: `` `Next free walk: ${relativeLabel} at 11:30` `` e.g.
-       `Next free walk: Tomorrow (Tue) at 11:30`
+     - Title, two slots: `` `Next free walks: ${relativeLabel} at ${slotsLabel}` ``
+       e.g. `Next free walks: Tomorrow (Tue) at 11:30 and 15:30`
+     - Title, one slot: `` `Next free walk: ${relativeLabel} at ${slotsLabel}` ``
+       e.g. `Next free walk: Saturday at 11:30`
+       (pick singular/plural `walk`/`walks` from `slotCount`).
      - Line: `I meet at the World Clock on Alexanderplatz. About 2 hours,
        tip-based, reserve a spot and pay nothing upfront.`
      - CTA button: `Reserve a free spot`
@@ -107,9 +149,11 @@ Add an optional, tasteful tour line there so the highest-intent tools offer the
 walk inside the result, without a per-widget change.
 
 1. In `js/brand.js`, alongside the attribution badge, optionally render one
-   compact tour CTA line: `` `Next free Berlin walk: ${relativeLabel} 11:30` ``
-   linking to the booking service page with `utm_medium=widget_tour_cta` and
-   `utm_content=<widget-slug>_widget_nextslot`.
+   compact tour CTA line using the Task 0 output:
+   `` `Next free Berlin walks: ${relativeLabel} ${slotsLabel}` `` (singular
+   `walk` when `slotCount === 1`), e.g. `Next free Berlin walks: Tomorrow (Tue)
+   11:30 and 15:30`, linking to the booking service page with
+   `utm_medium=widget_tour_cta` and `utm_content=<widget-slug>_widget_nextslot`.
 2. **Third-party embed guard (the key risk):** only render this when the widget
    is embedded on berlinwalk.com, never on a third-party site (a booking CTA on
    someone else's page is wrong and could deter embedding). Detect first-party
@@ -143,6 +187,18 @@ alone; Task 1 is the higher-value, lower-risk half.
 - Day 7 and day 14 after deploy: append the per-surface split to the workspace
   `SESSION_LOG.md` so Yusuf sees which surface produces booking-page sessions.
 
+## Consistency follow-up (optional, Yusuf decides)
+
+Once Task 0 exposes `slotsLabel`/`slotCount`, the already-live surfaces from
+Waves A/B (blog journey booking card, sticky bar, exit popup, service-page hero
+next-walk line) can adopt the same both-slots phrasing for a consistent promise
+across the site. Those are shipped and currently show only 11:30 (a deliberate
+Wave A "one clear anchor" choice). Do NOT silently rewrite live copy; treat this
+as a small follow-up pass to run after the tool bridge is verified, and confirm
+with Yusuf whether every surface should list both slots or keep 11:30 as the
+single anchor on the smaller surfaces (sticky/exit) where two times may crowd
+the space.
+
 ## Honesty note
 
 Tool/utility and blog readers will never convert to the tour at a high rate;
@@ -151,6 +207,16 @@ themselves. Wave C widens the top of the booking funnel from the highest-intent
 owned surface that currently has no in-content offer. Judge it on incremental
 booking-page sessions from `tool_bridge`/`widget_tour_cta`, not on a big total
 conversion jump.
+
+## QA additions for the both-slots copy
+
+- Summer future day (current dates): tool bridge title reads `Next free walks:
+  Tomorrow (Tue) at 11:30 and 15:30`, plural `walks`.
+- Off-season simulation (fake clock in Nov via the helper's injectable `now`):
+  reads `Next free walk: ... at 11:30`, singular.
+- Summer same-day after 11:30 cutoff: shows only `15:30`, singular.
+- `slotsLabel` never shows a past slot; no surface prints a time the availability
+  endpoint would not return for that day.
 
 ## Explicit non-goals
 
