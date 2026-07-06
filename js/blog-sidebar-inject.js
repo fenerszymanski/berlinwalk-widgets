@@ -621,12 +621,14 @@
   }
 
   function compactFloatingCta() {
+    var desktopKicker = document.querySelector('#bw-desktop-cta .bw-label-small');
     var desktopLabel = document.querySelector('#bw-desktop-cta .bw-label-big');
-    if (desktopLabel && !/next tours/i.test(cleanText(desktopLabel.textContent)) && cleanText(desktopLabel.textContent) !== 'Book Tour') {
+    var desktopKickerText = cleanText(desktopKicker && desktopKicker.textContent);
+    if (desktopLabel && !/next tours/i.test(desktopKickerText) && !/\b\d{1,2}:\d{2}\b/.test(cleanText(desktopLabel.textContent)) && cleanText(desktopLabel.textContent) !== 'Book Tour') {
       desktopLabel.textContent = 'Book Tour';
     }
     var stickyBtn = document.querySelector('#bw-sticky-cta .bw-btn');
-    if (stickyBtn && !/next tours/i.test(cleanText(stickyBtn.textContent)) && cleanText(stickyBtn.textContent) !== '🚶 Book Walking Tour') {
+    if (stickyBtn && !/next tours/i.test(cleanText(stickyBtn.textContent)) && !/\b\d{1,2}:\d{2}\b/.test(cleanText(stickyBtn.textContent)) && cleanText(stickyBtn.textContent) !== '🚶 Book Walking Tour') {
       stickyBtn.textContent = '🚶 Book Walking Tour';
     }
   }
