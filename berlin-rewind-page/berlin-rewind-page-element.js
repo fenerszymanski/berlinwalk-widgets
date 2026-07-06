@@ -30,8 +30,7 @@ class BwBerlinRewindPage extends HTMLElement {
   }
 
   disconnectedCallback() {
-    if (this._handleHostResize) window.removeEventListener('resize', this._handleHostResize);
-    if (this._resizeObserver) this._resizeObserver.disconnect();
+    if (this._handleMessage) window.removeEventListener('message', this._handleMessage);
     if (this._timers) this._timers.forEach((timer) => window.clearTimeout(timer));
   }
 
@@ -39,7 +38,6 @@ class BwBerlinRewindPage extends HTMLElement {
     const source = new URL(`${BASE_URL}berlin-rewind/`);
     source.searchParams.set('v', ASSET_BUILD);
     source.searchParams.set('attribution', 'none');
-    source.searchParams.set('resize', 'none');
     source.searchParams.set('parent_path', window.location.pathname || '/games/berlin-rewind');
     source.searchParams.set('parent_url', window.location.href || 'https://www.berlinwalk.com/games/berlin-rewind');
     const current = new URLSearchParams(window.location.search || '');
@@ -62,6 +60,7 @@ class BwBerlinRewindPage extends HTMLElement {
           --paper: #FFFFFF;
           --ink: #212121;
           --muted: #556155;
+          --red: #E63946;
           background:
             linear-gradient(90deg, rgba(27, 94, 32, 0.07) 1px, transparent 1px),
             linear-gradient(180deg, rgba(27, 94, 32, 0.07) 1px, transparent 1px),
@@ -76,21 +75,14 @@ class BwBerlinRewindPage extends HTMLElement {
 
         .bw-rewind-page {
           display: grid;
-          gap: 32px 56px;
-          grid-template-areas:
-            "copy game"
-            "cta game"
-            "more more";
-          grid-template-columns: minmax(0, 1fr) minmax(360px, 460px);
+          gap: clamp(28px, 4vw, 44px);
           margin: 0 auto;
           max-width: 1180px;
-          padding: clamp(48px, 7svh, 64px) 24px 24px;
+          padding: clamp(36px, 6vw, 60px) clamp(16px, 4vw, 32px) clamp(40px, 6vw, 64px);
         }
 
-        .bw-rewind-copy {
-          align-self: start;
-          grid-area: copy;
-          min-width: 0;
+        .bw-rewind-hero {
+          max-width: 860px;
         }
 
         .bw-rewind-eyebrow {
@@ -103,90 +95,111 @@ class BwBerlinRewindPage extends HTMLElement {
           font-size: 12px;
           font-weight: 900;
           letter-spacing: 0.12em;
-          margin-bottom: 26px;
+          margin-bottom: 22px;
           padding: 8px 12px;
           text-transform: uppercase;
         }
 
-        .bw-rewind-copy h1 {
+        .bw-rewind-hero h1 {
           color: var(--green-dark);
           font-family: Fraunces, Georgia, serif;
-          font-size: clamp(56px, 7vw, 98px);
-          line-height: 0.92;
-          margin: 0 0 20px;
+          font-size: clamp(40px, 6vw, 72px);
+          line-height: 0.96;
+          margin: 0 0 16px;
         }
 
-        .bw-rewind-copy h1 span {
-          color: #E63946;
-          display: block;
+        .bw-rewind-hero h1 span {
+          color: var(--red);
         }
 
-        .bw-rewind-copy p {
+        .bw-rewind-hero p {
           color: var(--muted);
-          font-size: clamp(18px, 1.6vw, 22px);
+          font-size: clamp(17px, 1.5vw, 21px);
           font-weight: 700;
-          line-height: 1.56;
-          margin: 0 0 18px;
-          max-width: 620px;
+          line-height: 1.55;
+          margin: 0;
+          max-width: 720px;
         }
 
-        .bw-rewind-list {
+        .bw-rewind-features {
           display: grid;
-          gap: 12px;
+          gap: 14px;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
           list-style: none;
-          margin: 0;
-          max-width: 560px;
+          margin: 22px 0 0;
           padding: 0;
         }
 
-        .bw-rewind-list li {
-          align-items: center;
+        .bw-rewind-features li {
+          align-items: flex-start;
+          background: rgba(255, 255, 255, 0.78);
+          border: 1px solid rgba(27, 94, 32, 0.16);
+          border-radius: 14px;
           color: var(--green-dark);
           display: flex;
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 800;
           gap: 12px;
-          line-height: 1.35;
+          line-height: 1.4;
+          padding: 14px 16px;
         }
 
-        .bw-rewind-list li::before {
+        .bw-rewind-features li::before {
           background: var(--lime);
           border: 2px solid var(--green-dark);
           border-radius: 50%;
           content: "";
           flex: 0 0 12px;
           height: 12px;
+          margin-top: 3px;
           width: 12px;
         }
 
+        /* Game stage — full width, no phone frame, auto-height iframe.
+           The game document is transparent, so its own card floats on the
+           page grid and the parent scroll handles everything (no nested scroll). */
+        .bw-rewind-stage {
+          width: 100%;
+        }
+
+        .bw-rewind-frame {
+          background: transparent;
+          border: 0;
+          display: block;
+          height: 640px;
+          width: 100%;
+        }
+
         .bw-rewind-cta {
-          align-self: start;
           background: rgba(255, 255, 255, 0.82);
           border: 2px solid var(--green-dark);
-          border-left: 6px solid #E63946;
+          border-left: 6px solid var(--red);
           border-radius: 18px;
           box-shadow: 8px 8px 0 rgba(16, 36, 20, 0.16);
-          grid-area: cta;
-          padding: 22px;
+          display: grid;
+          gap: 8px;
+          padding: clamp(20px, 3vw, 28px);
         }
 
         .bw-rewind-cta h2 {
           color: var(--green-dark);
           font-family: Fraunces, Georgia, serif;
-          font-size: 24px;
-          margin: 0 0 8px;
+          font-size: clamp(22px, 2.4vw, 28px);
+          margin: 0;
         }
 
         .bw-rewind-cta p {
           color: var(--muted);
-          font-size: 14px;
+          font-size: 15px;
           font-weight: 700;
-          line-height: 1.5;
-          margin: 0 0 14px;
+          line-height: 1.55;
+          margin: 0 0 6px;
+          max-width: 760px;
         }
 
         .bw-rewind-cta a {
           align-items: center;
+          align-self: start;
           background: var(--yellow);
           border: 2px solid var(--green-dark);
           border-radius: 10px;
@@ -196,91 +209,40 @@ class BwBerlinRewindPage extends HTMLElement {
           font-size: 13px;
           font-weight: 900;
           min-height: 48px;
-          padding: 0 16px;
+          padding: 0 18px;
           text-decoration: none;
           text-transform: uppercase;
         }
 
-        .bw-rewind-device {
-          align-self: start;
-          background: var(--green-dark);
-          border-radius: 34px;
-          box-shadow: 12px 12px 0 #E63946, 0 28px 70px rgba(8, 36, 16, 0.28);
-          grid-area: game;
-          height: clamp(560px, calc(100svh - 170px), 720px) !important;
-          max-height: 720px !important;
-          max-width: 460px;
-          overflow: hidden;
-          padding: 12px;
-          position: relative;
-          width: 100%;
-        }
-
-        .bw-rewind-device::before {
-          background: var(--yellow);
-          border-radius: 999px;
-          content: "";
-          height: 16px;
-          left: 50%;
-          position: absolute;
-          top: 7px;
-          transform: translateX(-50%);
-          width: 74px;
-          z-index: 2;
-        }
-
-        .bw-rewind-device iframe {
-          background: var(--paper);
-          border: 0;
-          border-radius: 24px;
-          display: block;
-          height: 100%;
-          width: 100%;
+        .bw-rewind-cta a:hover {
+          transform: translateY(-2px);
         }
 
         .bw-rewind-more {
-          grid-area: more;
           min-width: 0;
         }
 
-        @media (max-width: 980px) {
-          .bw-rewind-page {
-            grid-template-areas:
-              "copy"
-              "game"
-              "cta"
-              "more";
+        @media (max-width: 720px) {
+          .bw-rewind-features {
             grid-template-columns: 1fr;
-          }
-
-          .bw-rewind-device {
-            justify-self: center;
-            width: min(100%, 460px);
-          }
-        }
-
-        @media (max-width: 420px) {
-          .bw-rewind-page {
-            padding-left: 14px;
-            padding-right: 14px;
           }
         }
       </style>
 
       <section class="bw-rewind-page">
-        <div class="bw-rewind-copy">
+        <header class="bw-rewind-hero">
           <span class="bw-rewind-eyebrow">Flagship daily game</span>
           <h1>Berlin <span>Rewind</span></h1>
-          <p>Berlin is one of those cities where the same corner can look like three different countries depending on the decade. This game turns that feeling into one daily habit: read the street, guess the year, guess the district, then see what story was hiding there.</p>
-          <ul class="bw-rewind-list">
+          <p>Berlin is one of those cities where the same corner can look like three different countries depending on the decade. Read the street, guess the year, guess the district, then see what story was hiding there. A new set drops after Berlin midnight.</p>
+          <ul class="bw-rewind-features">
             <li>Three archival Berlin photos per day, shared by everyone.</li>
             <li>Score comes from the year and the district, not vague vibes.</li>
-            <li>Each reveal ends with a short Berlin note in my voice, not a dry museum label.</li>
+            <li>Each reveal ends with a short Berlin note in my voice.</li>
           </ul>
-        </div>
+        </header>
 
-        <div class="bw-rewind-device">
-          <iframe src="${this._gameUrl()}" title="Berlin Rewind by BerlinWalk" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        <div class="bw-rewind-stage">
+          <iframe class="bw-rewind-frame" src="${this._gameUrl()}" title="Berlin Rewind by BerlinWalk" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" scrolling="no"></iframe>
         </div>
 
         <aside class="bw-rewind-cta">
@@ -295,6 +257,17 @@ class BwBerlinRewindPage extends HTMLElement {
   }
 
   _bind() {
+    this._frame = this.querySelector('.bw-rewind-frame');
+    this._handleMessage = (event) => {
+      if (!this._frame || event.source !== this._frame.contentWindow) return;
+      const data = event.data;
+      if (!data || data.type !== 'bw-resize') return;
+      const height = Math.round(Number(data.height) || 0);
+      if (height < 320) return;
+      this._frame.style.height = `${height}px`;
+    };
+    window.addEventListener('message', this._handleMessage);
+
     loadGamesPreviewRail(() => {
       const mount = this.querySelector('#bw-rewind-more');
       if (!mount || !window.BerlinWalkGamesPreviewRail) return;
