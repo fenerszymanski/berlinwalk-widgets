@@ -1,4 +1,4 @@
-const BW_TOOLS_HOME_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260629-museums-spotlight';
+const BW_TOOLS_HOME_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260706-homepage-focus';
 const BW_TOOLS_HOME_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 
 class BWToolsHomeElement extends HTMLElement {
@@ -59,7 +59,7 @@ class BWToolsHomeElement extends HTMLElement {
           align-items: end;
           display: grid;
           gap: 26px;
-          grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
+          grid-template-columns: minmax(0, 1fr) minmax(240px, 0.36fr);
           margin: 0 0 30px;
         }
 
@@ -512,15 +512,15 @@ class BWToolsHomeElement extends HTMLElement {
             <div>
               <span class="bw-tools-home-kicker">Plan your visit</span>
               <h2 id="bw-tools-home-title" class="bw-tools-home-title">Plan your Berlin visit in minutes</h2>
-              <p class="bw-tools-home-lead">Quick local tools for tickets, budget, weather, water, and first-day choices before you arrive.</p>
+              <p class="bw-tools-home-lead">The four planning tools I would use first: tickets, opening hours, luggage, and a realistic first-day route.</p>
             </div>
             <aside class="bw-tools-home-panel" aria-label="Planning tools summary" data-bw-home-spotlight>
-              <h3>Built by a local guide</h3>
-              <p>Start with the questions travelers ask most, then bring the rest to the walk.</p>
+              <h3>Start here</h3>
+              <p>Use these first, then open the full BerlinTools hub only if you need a more specific answer.</p>
               <div class="bw-tools-home-tags" aria-hidden="true">
                 <span class="bw-tools-home-tag">Tickets</span>
-                <span class="bw-tools-home-tag">Budget</span>
-                <span class="bw-tools-home-tag">Maps</span>
+                <span class="bw-tools-home-tag">Open now</span>
+                <span class="bw-tools-home-tag">Luggage</span>
               </div>
             </aside>
           </header>
@@ -553,7 +553,7 @@ class BWToolsHomeElement extends HTMLElement {
   _renderSkeleton() {
     return `
       <div class="bw-tools-grid" aria-label="Loading tools">
-        ${Array.from({ length: 8 }).map(() => `
+        ${Array.from({ length: 4 }).map(() => `
           <div class="bw-skeleton-card" aria-hidden="true">
             <span class="bw-skeleton-thumb"></span>
             <span class="bw-skeleton-copy">
@@ -572,7 +572,7 @@ class BWToolsHomeElement extends HTMLElement {
       ? data.featuredTools.filter((tool) => {
         const status = String((tool && tool.status) || '').toLowerCase();
         return Boolean(tool && tool.hidden !== true && tool.published !== false && status !== 'draft');
-      }).slice(0, 8)
+      }).slice(0, 4)
       : [];
     this._renderSpotlight(data && data.spotlightTool);
 
@@ -606,7 +606,7 @@ class BWToolsHomeElement extends HTMLElement {
     panel.setAttribute('aria-label', 'Featured Berlin planning tool');
     panel.innerHTML = [
       '<a class="bw-tools-home-spotlight" href="' + href + '" target="_top">',
-      '  <img class="bw-tools-home-spotlight-thumb" src="' + this._escapeAttribute(image) + '" alt="" loading="lazy" decoding="async">',
+      '  <img class="bw-tools-home-spotlight-thumb" src="' + this._escapeAttribute(image) + '" alt="' + title + '" loading="lazy" decoding="async">',
       '  <span>',
       '    <span class="bw-tools-home-spotlight-kicker">' + label + '</span>',
       '    <span class="bw-tools-home-spotlight-title">' + title + '</span>',
@@ -627,7 +627,7 @@ class BWToolsHomeElement extends HTMLElement {
 
     return `
       <a class="bw-tool-card" href="${href}" target="_top">
-        <img class="bw-tool-card-thumb" src="${image}" alt="" loading="lazy" decoding="async">
+        <img class="bw-tool-card-thumb" src="${this._escapeAttribute(image)}" alt="${title}" loading="lazy" decoding="async">
         <span class="bw-tool-card-content">
           <h3>${title}</h3>
           <p>${lead}</p>
