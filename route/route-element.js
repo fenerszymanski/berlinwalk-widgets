@@ -669,6 +669,7 @@ class BWRouteElement extends HTMLElement {
 
         .bw-route .bw-route-pin-number {
           color: currentColor;
+          font-family: Montserrat, Arial, sans-serif;
           font-size: 13px;
           font-weight: 800;
           line-height: 1;

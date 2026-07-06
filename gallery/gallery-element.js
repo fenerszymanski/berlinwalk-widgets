@@ -162,6 +162,7 @@ class BWGalleryElement extends HTMLElement {
           bottom: 0;
           color: #FFFFFF;
           display: block;
+          font-family: Montserrat, Arial, sans-serif;
           font-size: 13px;
           font-weight: 700;
           left: 0;
