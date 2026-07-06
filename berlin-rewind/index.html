@@ -747,13 +747,16 @@
       transform: translate(-50%, 0);
     }
 
-    #bw-rewind .rw-empty {
+    #bw-rewind .rw-screen.rw-empty {
       align-items: center;
-      display: grid;
       gap: 14px;
       justify-items: start;
       min-height: 260px;
       padding: 20px;
+    }
+
+    #bw-rewind .rw-screen.rw-empty.is-active {
+      display: grid;
     }
 
     #bw-rewind .rw-empty h2 {
