@@ -1,0 +1,123 @@
+{
+  "checkedAt": "2026-07-06T20:08:46.598Z",
+  "url": "https://www.berlinwalk.com/tools/berlin-deutschlandticket-checker?bwqa=1783368473784",
+  "httpStatus": 200,
+  "ok": true,
+  "title": "Berlin Deutschlandticket Checker | BerlinWalk",
+  "readyState": "complete",
+  "markerPresent": true,
+  "iframeSrcs": [
+    "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-deutschlandticket-checker/"
+  ],
+  "visibleOverflowCount": 33,
+  "visibleOverflowing": [
+    {
+      "tag": "DIV",
+      "id": "",
+      "cls": "bw-header-mobile-inner",
+      "text": "×\n            \n\n            \n              Tour\n              The Guide\n        ",
+      "left": 390,
+      "right": 780,
+      "width": 390
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "cls": "bw-header-mobile-head",
+      "text": "×",
+      "left": 414,
+      "right": 756,
+      "width": 342
+    },
+    {
+      "tag": "IMG",
+      "id": "",
+      "cls": "",
+      "text": "",
+      "left": 414,
+      "right": 507,
+      "width": 93
+    },
+    {
+      "tag": "BUTTON",
+      "id": "",
+      "cls": "bw-header-mobile-close",
+      "text": "×",
+      "left": 712,
+      "right": 756,
+      "width": 44
+    },
+    {
+      "tag": "NAV",
+      "id": "",
+      "cls": "bw-header-mobile-nav",
+      "text": "Tour\n              The Guide\n              Reviews\n\n              \n             ",
+      "left": 414,
+      "right": 756,
+      "width": 342
+    },
+    {
+      "tag": "A",
+      "id": "",
+      "cls": "",
+      "text": "Tour",
+      "left": 414,
+      "right": 756,
+      "width": 342
+    },
+    {
+      "tag": "A",
+      "id": "",
+      "cls": "",
+      "text": "The Guide",
+      "left": 414,
+      "right": 756,
+      "width": 342
+    },
+    {
+      "tag": "A",
+      "id": "",
+      "cls": "",
+      "text": "Reviews",
+      "left": 414,
+      "right": 756,
+      "width": 342
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "cls": "bw-header-mobile-section",
+      "text": "Products\n                Berlin First-Day Rescue Plan New",
+      "left": 414,
+      "right": 756,
+      "width": 342
+    },
+    {
+      "tag": "DIV",
+      "id": "",
+      "cls": "bw-header-mobile-section-label",
+      "text": "Products",
+      "left": 414,
+      "right": 756,
+      "width": 342
+    },
+    {
+      "tag": "A",
+      "id": "",
+      "cls": "",
+      "text": "Berlin First-Day Rescue Plan New",
+      "left": 414,
+      "right": 756,
+      "width": 342
+    },
+    {
+      "tag": "SPAN",
+      "id": "",
+      "cls": "bw-badge-new",
+      "text": "New",
+      "left": 696,
+      "right": 736,
+      "width": 40
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "startedAt": "2026-07-06T20:06:13.749Z",
+  "checkedAt": "2026-07-06T20:06:14.099Z",
+  "commit": "6272d9b9c95877fbb5f09ec4a3c188173545712d",
+  "pass": true,
+  "passCount": 10,
+  "total": 10,
+  "final": [
+    {
+      "name": "widget-index",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-deutschlandticket-checker/?bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:32 GMT",
+      "contentType": "text/html; charset=utf-8",
+      "contentLength": "5215",
+      "bytes": 21422,
+      "missing": [],
+      "ok": true
+    },
+    {
+      "name": "widget-hero",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-deutschlandticket-checker/hero-sbahn-hauptbahnhof.jpg?bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:32 GMT",
+      "contentType": "image/jpeg",
+      "contentLength": "338625",
+      "ok": true
+    },
+    {
+      "name": "quick-summary-data",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/data.json?bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+      "contentType": "application/json; charset=utf-8",
+      "contentLength": "56092",
+      "bytes": 165162,
+      "ok": true
+    },
+    {
+      "name": "quick-summary-render-route",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-deutschlandticket-tourists&bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+      "contentType": "text/html; charset=utf-8",
+      "contentLength": "2612",
+      "ok": true
+    },
+    {
+      "name": "faq-data",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json?bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:31 GMT",
+      "contentType": "application/json; charset=utf-8",
+      "contentLength": "103468",
+      "bytes": 339258,
+      "ok": true
+    },
+    {
+      "name": "faq-inject",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/inject.js?bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+      "contentType": "application/javascript; charset=utf-8",
+      "contentLength": "97330",
+      "bytes": 405126,
+      "missing": [],
+      "ok": true
+    },
+    {
+      "name": "faq-render-route",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-deutschlandticket-tourists&bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+      "contentType": "text/html; charset=utf-8",
+      "contentLength": "2986",
+      "ok": true
+    },
+    {
+      "name": "tools-hub-data",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json?bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+      "contentType": "application/json; charset=utf-8",
+      "contentLength": "20680",
+      "bytes": 98822,
+      "ok": true
+    },
+    {
+      "name": "icon-160",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-deutschlandticket-checker-160.png?bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+      "contentType": "image/png",
+      "contentLength": "43957",
+      "ok": true
+    },
+    {
+      "name": "icon-manifest",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/manifest.json?bwqa=1783368373748",
+      "status": 200,
+      "okStatus": true,
+      "lastModified": "Mon, 06 Jul 2026 20:03:31 GMT",
+      "contentType": "application/json; charset=utf-8",
+      "contentLength": "8120",
+      "bytes": 92075,
+      "ok": true
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "checkedAt": "2026-07-06T20:06:14.099Z",
+      "passCount": 10,
+      "results": [
+        {
+          "name": "widget-index",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-deutschlandticket-checker/?bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:32 GMT",
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": "5215",
+          "bytes": 21422,
+          "missing": [],
+          "ok": true
+        },
+        {
+          "name": "widget-hero",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-deutschlandticket-checker/hero-sbahn-hauptbahnhof.jpg?bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:32 GMT",
+          "contentType": "image/jpeg",
+          "contentLength": "338625",
+          "ok": true
+        },
+        {
+          "name": "quick-summary-data",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/data.json?bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+          "contentType": "application/json; charset=utf-8",
+          "contentLength": "56092",
+          "bytes": 165162,
+          "ok": true
+        },
+        {
+          "name": "quick-summary-render-route",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=berlin-deutschlandticket-tourists&bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": "2612",
+          "ok": true
+        },
+        {
+          "name": "faq-data",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json?bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:31 GMT",
+          "contentType": "application/json; charset=utf-8",
+          "contentLength": "103468",
+          "bytes": 339258,
+          "ok": true
+        },
+        {
+          "name": "faq-inject",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/inject.js?bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+          "contentType": "application/javascript; charset=utf-8",
+          "contentLength": "97330",
+          "bytes": 405126,
+          "missing": [],
+          "ok": true
+        },
+        {
+          "name": "faq-render-route",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=berlin-deutschlandticket-tourists&bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+          "contentType": "text/html; charset=utf-8",
+          "contentLength": "2986",
+          "ok": true
+        },
+        {
+          "name": "tools-hub-data",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json?bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+          "contentType": "application/json; charset=utf-8",
+          "contentLength": "20680",
+          "bytes": 98822,
+          "ok": true
+        },
+        {
+          "name": "icon-160",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-deutschlandticket-checker-160.png?bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:34 GMT",
+          "contentType": "image/png",
+          "contentLength": "43957",
+          "ok": true
+        },
+        {
+          "name": "icon-manifest",
+          "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/manifest.json?bwqa=1783368373748",
+          "status": 200,
+          "okStatus": true,
+          "lastModified": "Mon, 06 Jul 2026 20:03:31 GMT",
+          "contentType": "application/json; charset=utf-8",
+          "contentLength": "8120",
+          "bytes": 92075,
+          "ok": true
+        }
+      ]
+    }
+  ]
+}
