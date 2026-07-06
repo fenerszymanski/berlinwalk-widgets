@@ -1,0 +1,41 @@
+{
+  "checkedAt": "2026-07-06T19:54:12.417Z",
+  "url": "http://127.0.0.1:4179/berlin-deutschlandticket-checker/",
+  "screenshots": [
+    "widget-desktop.png",
+    "widget-mobile.png"
+  ],
+  "cases": [
+    {
+      "name": "desktop",
+      "width": 1440,
+      "height": 1100,
+      "title": "Berlin Deutschlandticket Checker | BerlinWalk",
+      "result": "For this short or central plan, single tickets, 24-hour tickets, a group ticket or a WelcomeCard comparison are usually easier.",
+      "heroBackgroundPresent": true,
+      "bodyWidth": 1440,
+      "viewportWidth": 1440,
+      "overflowCount": 0,
+      "overflowing": [],
+      "afterInputReason": "Your normal-ticket estimate is clearly above the subscription cost. Buy only from an official provider and cancel early if it is trip-only.",
+      "consoleErrors": [],
+      "pageErrors": []
+    },
+    {
+      "name": "mobile",
+      "width": 390,
+      "height": 1200,
+      "title": "Berlin Deutschlandticket Checker | BerlinWalk",
+      "result": "For this short or central plan, single tickets, 24-hour tickets, a group ticket or a WelcomeCard comparison are usually easier.",
+      "heroBackgroundPresent": true,
+      "bodyWidth": 390,
+      "viewportWidth": 390,
+      "overflowCount": 0,
+      "overflowing": [],
+      "afterInputReason": "Your normal-ticket estimate is clearly above the subscription cost. Buy only from an official provider and cancel early if it is trip-only.",
+      "consoleErrors": [],
+      "pageErrors": []
+    }
+  ],
+  "ok": true
+}

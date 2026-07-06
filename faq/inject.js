@@ -174,7 +174,8 @@
   "berlin-umweltzone-sticker": "berlin-umweltzone-sticker",
   "berlin-umweltzone-sticker-driving-rules-tourists-should-know": "berlin-umweltzone-sticker",
   "berlin-u-bahn-fine": "berlin-u-bahn-fine",
-  "berlin-u-bahn-fine-what-happens-if-you-are-caught-without-a-ticket": "berlin-u-bahn-fine"
+  "berlin-u-bahn-fine-what-happens-if-you-are-caught-without-a-ticket": "berlin-u-bahn-fine",
+  "deutschlandticket-berlin-tourists": "berlin-deutschlandticket-tourists"
 };
 
   var SCHEMAS = {
@@ -8244,6 +8245,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The normal EBE is a civil payment claim from the transport company, not automatically a criminal conviction. Repeated or fraudulent cases can become more serious, so do not ignore the receipt or deadline."
+        }
+      }
+    ]
+  },
+  "berlin-deutschlandticket-tourists": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Deutschlandticket worth it for Berlin tourists?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes. It is worth checking if you are staying longer, using public transport almost every day, and taking local or regional trips such as BER Airport, Potsdam or Oranienburg. For a short central Berlin trip, normal tickets are often simpler."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does the Deutschlandticket cost in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official 2026 price is 63 EUR per month. It is a monthly subscription and is personal, so each adult needs their own ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the Deutschlandticket cover Berlin U-Bahn, S-Bahn and BER Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes for normal local public transport and regional airport routes. In Berlin it covers U-Bahn, S-Bahn, trams, buses and regional trains such as RE/RB services. Check the route in the official app before travel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use the Deutschlandticket on ICE, IC or EC trains?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, not as the normal rule. Deutsche Bahn says the Deutschlandticket is not valid on ICE, IC or EC long-distance trains. If your day trip depends on those trains, buy a separate long-distance ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When do I need to cancel the Deutschlandticket?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Deutsche Bahn says cancellation by the 10th day of the month can end the subscription at the end of that same month. If you cancel after the 10th, it usually ends at the end of the following month. If it is only for a trip, cancel early after the ticket is active."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Deutschlandticket better than a Berlin WelcomeCard?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "They solve different problems. The Deutschlandticket is transport-only and subscription-based. The Berlin WelcomeCard is a tourist product with public transport plus attraction discounts for fixed trip lengths. If discounts matter, compare the WelcomeCard separately."
         }
       }
     ]
