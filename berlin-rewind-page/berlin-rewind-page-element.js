@@ -264,7 +264,11 @@ class BwBerlinRewindPage extends HTMLElement {
       if (!data || data.type !== 'bw-resize') return;
       const height = Math.round(Number(data.height) || 0);
       if (height < 320) return;
-      this._frame.style.height = `${height}px`;
+      // Small buffer so the iframe is always a hair taller than the game's
+      // reported content height. The game shell has a collapsing bottom margin
+      // that bw-resize does not count, which would otherwise leave a few px of
+      // internal scroll. The extra strip is transparent and blends into the page.
+      this._frame.style.height = `${height + 16}px`;
     };
     window.addEventListener('message', this._handleMessage);
 
