@@ -1,0 +1,674 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Ticket Fine Step Planner | BerlinWalk</title>
+  <meta name="description" content="Turn a Berlin U-Bahn, S-Bahn, tram or bus ticket fine receipt into the next practical step.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root {
+      --green: #1B5E20;
+      --green-dark: #123d18;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --cream: #FAFAF5;
+      --paper: #fffdf7;
+      --ink: #212121;
+      --muted: #566154;
+      --red: #C62828;
+      --amber: #B87A00;
+      --blue: #2D5F8B;
+      --line: rgba(33, 33, 33, .14);
+      --green-line: rgba(27, 94, 32, .22);
+      --shadow: 0 18px 46px rgba(18, 61, 24, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: transparent;
+      color: var(--ink);
+      font-family: Montserrat, Arial, sans-serif;
+      line-height: 1.45;
+    }
+
+    button,
+    a {
+      font: inherit;
+    }
+
+    .fine-tool {
+      max-width: 1080px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .hero {
+      min-height: 360px;
+      display: grid;
+      grid-template-columns: minmax(0, .92fr) minmax(360px, 1.08fr);
+      background:
+        linear-gradient(90deg, rgba(18, 61, 24, .98), rgba(18, 61, 24, .8) 52%, rgba(18, 61, 24, .08)),
+        url("./assets/ticket-validation-stamping.jpg") center / cover no-repeat;
+      color: #fff;
+    }
+
+    .hero-copy {
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+      padding: clamp(24px, 4vw, 46px);
+    }
+
+    .kicker {
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 4px;
+      background: var(--yellow);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 660px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .hero-copy p {
+      max-width: 610px;
+      color: rgba(255, 255, 255, .88);
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .hero-strip {
+      width: fit-content;
+      max-width: 100%;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 3px;
+    }
+
+    .hero-strip span {
+      padding: 7px 9px;
+      border: 1px solid rgba(255, 230, 0, .42);
+      border-radius: 4px;
+      color: var(--yellow);
+      background: rgba(255, 255, 255, .1);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .panel {
+      padding: clamp(18px, 3vw, 30px);
+      display: grid;
+      gap: 22px;
+    }
+
+    .receipt-desk {
+      display: grid;
+      grid-template-columns: minmax(300px, .9fr) minmax(0, 1.1fr);
+      gap: 22px;
+      align-items: start;
+    }
+
+    .input-board,
+    .receipt {
+      border: 1px solid var(--green-line);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .input-board {
+      padding: 18px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .field {
+      display: grid;
+      gap: 9px;
+    }
+
+    .field-label {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .slip-stack {
+      display: grid;
+      gap: 8px;
+    }
+
+    .slip-button {
+      width: 100%;
+      min-height: 54px;
+      display: grid;
+      grid-template-columns: 8px 1fr;
+      gap: 12px;
+      align-items: stretch;
+      padding: 0;
+      border: 1px solid rgba(27, 94, 32, .2);
+      border-radius: 6px;
+      background: #fbfbf4;
+      color: var(--ink);
+      text-align: left;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform .16s ease, border-color .16s ease, background .16s ease;
+    }
+
+    .slip-button::before {
+      content: "";
+      background: var(--lime);
+    }
+
+    .slip-button span {
+      align-self: center;
+      padding: 10px 12px 10px 0;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.25;
+    }
+
+    .slip-button:hover {
+      transform: translateY(-1px);
+      border-color: var(--lime);
+      background: #f4f8ed;
+    }
+
+    .slip-button[aria-pressed="true"] {
+      border-color: var(--green);
+      background: #eef6e7;
+    }
+
+    .slip-button[aria-pressed="true"]::before {
+      background: var(--green);
+    }
+
+    .segmented {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .segment {
+      min-height: 44px;
+      border: 1px solid rgba(27, 94, 32, .24);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: background .16s ease, color .16s ease, border-color .16s ease;
+    }
+
+    .segment[aria-pressed="true"] {
+      background: var(--green);
+      color: #fff;
+      border-color: var(--green);
+    }
+
+    .receipt {
+      position: relative;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      min-height: 650px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.98), rgba(250,250,245,.98)),
+        repeating-linear-gradient(0deg, rgba(27,94,32,.05) 0 1px, transparent 1px 30px);
+    }
+
+    .receipt-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: start;
+      padding: 20px 22px 16px;
+      border-bottom: 1px dashed rgba(33, 33, 33, .22);
+    }
+
+    .receipt-kicker {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .receipt h2 {
+      margin-top: 4px;
+      color: var(--green);
+      font-size: clamp(22px, 3vw, 30px);
+      line-height: 1.14;
+      letter-spacing: 0;
+    }
+
+    .amount {
+      min-width: 108px;
+      padding: 10px 12px;
+      border-radius: 7px;
+      background: var(--yellow);
+      color: var(--green);
+      text-align: center;
+      box-shadow: inset 0 -5px 0 rgba(27, 94, 32, .08);
+    }
+
+    .amount strong {
+      display: block;
+      font-size: 25px;
+      line-height: 1.05;
+    }
+
+    .amount span {
+      display: block;
+      margin-top: 3px;
+      font-size: 10px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .warning {
+      margin: 16px 22px 0;
+      padding: 12px 13px;
+      border-left: 5px solid var(--red);
+      background: #fff5f3;
+      color: #4b1f1b;
+      font-size: 14px;
+      font-weight: 750;
+    }
+
+    .timeline {
+      padding: 18px 22px 12px;
+      display: grid;
+      gap: 11px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 96px 1fr;
+      gap: 13px;
+      padding: 12px;
+      border: 1px solid rgba(33,33,33,.1);
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .step-mark {
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .step strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .keep-list {
+      margin: 0 22px 20px;
+      padding: 15px;
+      border: 1px solid rgba(27,94,32,.16);
+      border-radius: 8px;
+      background: #f5faee;
+    }
+
+    .keep-list h3 {
+      margin-bottom: 9px;
+      color: var(--green);
+      font-size: 14px;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .keep-list ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .keep-list li + li {
+      margin-top: 5px;
+    }
+
+    .official-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      padding: 0 22px 22px;
+    }
+
+    .official-links a {
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      border-radius: 6px;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .note-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .note {
+      border: 1px solid rgba(27,94,32,.16);
+      border-radius: 8px;
+      background: #fff;
+      padding: 14px;
+    }
+
+    .note strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--green);
+      font-size: 13px;
+    }
+
+    .note p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 850px) {
+      .hero,
+      .receipt-desk,
+      .note-row {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        background:
+          linear-gradient(180deg, rgba(18, 61, 24, .96), rgba(18, 61, 24, .78) 62%, rgba(18, 61, 24, .2)),
+          url("./assets/ticket-validation-stamping.jpg") center / cover no-repeat;
+      }
+
+      .hero-copy {
+        min-height: 420px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .panel,
+      .input-board {
+        padding: 14px;
+      }
+
+      .segmented,
+      .official-links {
+        grid-template-columns: 1fr;
+      }
+
+      .receipt-head,
+      .step {
+        grid-template-columns: 1fr;
+      }
+
+      .amount {
+        width: 100%;
+      }
+
+      .receipt {
+        min-height: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="fine-tool" aria-labelledby="tool-title">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="kicker">Berlin ticket fine planner</div>
+        <h1 id="tool-title">Turn the fine slip into the next move</h1>
+        <p>Choose what happened during a Berlin ticket check and see the practical step: pay, prove, contest, or buy a new ticket before continuing.</p>
+        <div class="hero-strip" aria-label="Key official numbers">
+          <span>EUR 60 standard EBE</span>
+          <span>14-day payment window</span>
+          <span>7 days for personal pass proof</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="receipt-desk">
+        <div class="input-board" aria-label="Fine scenario controls">
+          <div class="field">
+            <div class="field-label">What happened?</div>
+            <div class="slip-stack" data-group="scenario">
+              <button class="slip-button" type="button" data-scenario="paper" aria-pressed="true"><span>Paper ticket was not stamped before the ride</span></button>
+              <button class="slip-button" type="button" data-scenario="digital" aria-pressed="false"><span>Digital ticket was bought or activated too late</span></button>
+              <button class="slip-button" type="button" data-scenario="zone" aria-pressed="false"><span>Ticket was for the wrong zone or route</span></button>
+              <button class="slip-button" type="button" data-scenario="personal" aria-pressed="false"><span>Personal pass or subscription was forgotten</span></button>
+              <button class="slip-button" type="button" data-scenario="id" aria-pressed="false"><span>No ID, unclear inspector, or odd cash request</span></button>
+            </div>
+          </div>
+
+          <div class="field">
+            <div class="field-label">Which operator is on the slip?</div>
+            <div class="segmented" data-group="operator">
+              <button class="segment" type="button" data-operator="bvg" aria-pressed="true">BVG</button>
+              <button class="segment" type="button" data-operator="sbahn" aria-pressed="false">S-Bahn</button>
+              <button class="segment" type="button" data-operator="unknown" aria-pressed="false">Not sure</button>
+            </div>
+          </div>
+        </div>
+
+        <article class="receipt" aria-live="polite">
+          <div class="receipt-head">
+            <div>
+              <div class="receipt-kicker" id="result-kicker">Likely next step</div>
+              <h2 id="result-title"></h2>
+            </div>
+            <div class="amount">
+              <strong id="result-amount"></strong>
+              <span id="result-amount-label"></span>
+            </div>
+          </div>
+          <p class="warning" id="result-warning"></p>
+          <div class="timeline" id="result-steps"></div>
+          <div class="keep-list">
+            <h3>Keep ready</h3>
+            <ul id="result-keep"></ul>
+          </div>
+          <div class="official-links">
+            <a id="primary-link" href="https://bvg-ebe.de/en-en" target="_blank" rel="noopener">Open official EBE portal</a>
+            <a href="https://sbahn.berlin/en/tickets/the-vbb-fare-explained/ticket-control/" target="_blank" rel="noopener">S-Bahn ticket control info</a>
+          </div>
+        </article>
+      </div>
+
+      <div class="note-row">
+        <div class="note">
+          <strong>Unstamped still means invalid</strong>
+          <p>For paper tickets, buying is not enough. The stamp before travel is the part inspectors can see.</p>
+        </div>
+        <div class="note">
+          <strong>Buy a new ticket before continuing</strong>
+          <p>If the receipt does not explicitly cover the onward ride, do not keep travelling on the same mistake.</p>
+        </div>
+        <div class="note">
+          <strong>Do not hand over cash blindly</strong>
+          <p>Ask for ID and a receipt. Use the official receipt number and operator payment path.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var scenarios = {
+        paper: {
+          title: 'Treat it as an invalid-ticket EBE',
+          amount: 'EUR 60',
+          label: 'standard amount',
+          warning: 'An unstamped paper ticket is normally treated like no valid ticket. Do not spend the day arguing on the platform; protect the receipt number and the deadline.',
+          steps: [
+            ['Control', 'Take the receipt', 'Check that your name, date, operator and EBE number are readable before you leave.'],
+            ['Same day', 'Stop the mistake', 'Buy and validate a correct ticket before any further journey unless the receipt says your onward ride is covered.'],
+            ['By deadline', 'Pay or write to the operator', 'Use the operator named on the slip. BVG and S-Bahn handle their own EBE cases.']
+          ],
+          keep: ['EBE receipt number', 'Original ticket, even if unstamped', 'Any card/app payment proof', 'Photo of the validator or machine only if there was a real fault']
+        },
+        digital: {
+          title: 'Assume late activation will be treated strictly',
+          amount: 'EUR 60',
+          label: 'likely EBE',
+          warning: 'A digital ticket must be valid before the journey. A purchase or activation after boarding is a weak argument during control.',
+          steps: [
+            ['Control', 'Save the receipt', 'Do not delete the app ticket. Screenshot the ticket details after the control if the app allows it.'],
+            ['Next ride', 'Buy before moving', 'Activate the correct ticket before entering the next train, tram or bus.'],
+            ['Review', 'Use timestamps carefully', 'If the app or payment failed before boarding, collect timestamps and contact the named operator.']
+          ],
+          keep: ['EBE number', 'Digital ticket timestamp', 'Payment timestamp', 'App error screenshot, if there was a real failure']
+        },
+        zone: {
+          title: 'Fix the zone before the next platform',
+          amount: 'EUR 60',
+          label: 'possible EBE',
+          warning: 'A ticket that does not cover the route can be treated as invalid for that journey, especially around BER Airport and zone C.',
+          steps: [
+            ['Receipt', 'Check the exact reason', 'Look for wording about wrong zone, missing extension or invalid route.'],
+            ['Now', 'Buy the correct zone', 'For BER Airport you usually need ABC, not only AB. Do not continue on the same ticket.'],
+            ['Later', 'Compare with the official fare map', 'If the slip reason looks wrong, use the receipt number and fare-zone evidence in one clear message.']
+          ],
+          keep: ['The ticket you used', 'Route and station names', 'EBE number', 'Any official route screenshot from before the ride']
+        },
+        personal: {
+          title: 'Prove the personal pass within 7 days',
+          amount: 'EUR 7',
+          label: 'possible processing fee',
+          warning: 'This reduced path is for personal, non-transferable tickets or subscriptions that were valid at the time. It is not a shortcut for single tickets or day tickets.',
+          steps: [
+            ['Control', 'Accept the receipt', 'The inspector usually cannot verify a forgotten personal pass on the spot.'],
+            ['Within 7 days', 'Submit proof', 'Use the operator process and show that the personal pass belonged to you and was valid during the control.'],
+            ['After proof', 'Pay the processing fee if accepted', 'If the proof is accepted, the EBE is usually reduced to a smaller processing amount.']
+          ],
+          keep: ['Personal subscription or pass', 'Official ID', 'Receipt number', 'Proof that the pass was valid on the control date']
+        },
+        id: {
+          title: 'Slow down and verify the official path',
+          amount: 'EUR 60',
+          label: 'or extra ID fee',
+          warning: 'Real inspectors can ask for ID and issue a receipt. Be careful with cash pressure, especially if there is no official receipt or identification.',
+          steps: [
+            ['On site', 'Ask for inspector ID', 'If something feels wrong, ask calmly for identification and a written receipt.'],
+            ['Receipt', 'Use the operator name', 'The EBE number and operator are what let you pay or check the case later.'],
+            ['No ID', 'Expect extra friction', 'If you cannot identify yourself, the operator may involve police or add a small identity-check fee.']
+          ],
+          keep: ['Receipt number', 'Inspector or team number if shown', 'Payment receipt if you paid on site', 'Operator customer-service link']
+        }
+      };
+
+      var operatorText = {
+        bvg: {
+          kicker: 'BVG U-Bahn, tram or bus',
+          link: 'https://bvg-ebe.de/en-en',
+          linkText: 'Open BVG EBE portal',
+          note: 'BVG EBE access is normally available from noon on the next working day.'
+        },
+        sbahn: {
+          kicker: 'S-Bahn Berlin',
+          link: 'https://sbahn.berlin/en/tickets/the-vbb-fare-explained/ticket-control/',
+          linkText: 'Open S-Bahn control info',
+          note: 'S-Bahn notes a 14-day payment window and warns that inspectors do not demand cash without receipt.'
+        },
+        unknown: {
+          kicker: 'Check the operator on the slip',
+          link: 'https://www.bvg.de/en/subscriptions-and-tickets/ticket-control',
+          linkText: 'Open BVG ticket control info',
+          note: 'Use the company name and receipt number on the paper or digital slip.'
+        }
+      };
+
+      var state = { scenario: 'paper', operator: 'bvg' };
+
+      function setPressed(selector, attr, value) {
+        document.querySelectorAll(selector).forEach(function (button) {
+          button.setAttribute('aria-pressed', String(button.getAttribute(attr) === value));
+        });
+      }
+
+      function render() {
+        var item = scenarios[state.scenario];
+        var operator = operatorText[state.operator];
+        document.getElementById('result-kicker').textContent = operator.kicker;
+        document.getElementById('result-title').textContent = item.title;
+        document.getElementById('result-amount').textContent = item.amount;
+        document.getElementById('result-amount-label').textContent = item.label;
+        document.getElementById('result-warning').textContent = item.warning + ' ' + operator.note;
+        document.getElementById('result-steps').innerHTML = item.steps.map(function (step) {
+          return '<section class="step"><div class="step-mark">' + step[0] + '</div><div><strong>' + step[1] + '</strong><p>' + step[2] + '</p></div></section>';
+        }).join('');
+        document.getElementById('result-keep').innerHTML = item.keep.map(function (entry) {
+          return '<li>' + entry + '</li>';
+        }).join('');
+        var link = document.getElementById('primary-link');
+        link.href = operator.link;
+        link.textContent = operator.linkText;
+      }
+
+      document.querySelectorAll('[data-scenario]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.scenario = button.getAttribute('data-scenario');
+          setPressed('[data-scenario]', 'data-scenario', state.scenario);
+          render();
+        });
+      });
+
+      document.querySelectorAll('[data-operator]').forEach(function (button) {
+        button.addEventListener('click', function () {
+          state.operator = button.getAttribute('data-operator');
+          setPressed('[data-operator]', 'data-operator', state.operator);
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+  <script src="../js/brand.js"></script>
+</body>
+</html>

@@ -172,7 +172,9 @@
   "berlin-before-hotel-check-in-what-to-do-with-luggage-and-time": "berlin-before-hotel-check-in",
   "berliner-dom-tickets": "berliner-dom-tickets",
   "berlin-umweltzone-sticker": "berlin-umweltzone-sticker",
-  "berlin-umweltzone-sticker-driving-rules-tourists-should-know": "berlin-umweltzone-sticker"
+  "berlin-umweltzone-sticker-driving-rules-tourists-should-know": "berlin-umweltzone-sticker",
+  "berlin-u-bahn-fine": "berlin-u-bahn-fine",
+  "berlin-u-bahn-fine-what-happens-if-you-are-caught-without-a-ticket": "berlin-u-bahn-fine"
 };
 
   var SCHEMAS = {
@@ -8188,6 +8190,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, but I would not make the car part of the tour day unless the sticker and parking are already solved. The tour lasts about 2 hours and starts at Alexanderplatz, which is inside the Umweltzone."
+        }
+      }
+    ]
+  },
+  "berlin-u-bahn-fine": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much is the Berlin U-Bahn fine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The standard increased fare, called EBE, is 60 euros when you are checked without a valid ticket on Berlin public transport. The same basic rule applies to U-Bahn, S-Bahn, tram and bus travel inside the VBB/Berlin system."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I still get fined if I bought a ticket but forgot to validate it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, usually. A paper ticket must be validated before the journey unless it is already issued with a valid start time. An unstamped ticket is normally treated as invalid during control."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I do right after receiving a Berlin ticket fine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Keep the receipt, check the EBE number, note the operator name, and buy a valid ticket before continuing unless the receipt clearly says your onward ride is covered. Then pay or contact the operator before the deadline."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can a forgotten monthly ticket reduce the fine?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes, but only for personal, non-transferable tickets or subscriptions that were valid at the time of control. BVG and S-Bahn guidance says proof must normally be shown within 7 days, and a smaller processing fee can apply if accepted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I pay a Berlin ticket inspector in cash?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Be careful. Ask for inspector ID and an official receipt. S-Bahn specifically warns that its inspectors do not demand cash without proper receipt handling. Use the EBE number and the official operator payment path if you are unsure."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a Berlin ticket fine a criminal record?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The normal EBE is a civil payment claim from the transport company, not automatically a criminal conviction. Repeated or fraudulent cases can become more serious, so do not ignore the receipt or deadline."
         }
       }
     ]

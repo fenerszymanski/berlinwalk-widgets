@@ -2092,5 +2092,17 @@
       "**Order before the trip if you bring your own car.** Berlin's LABO page says foreign delivery can take about 7 to 14 days.",
       "**If the sticker question is not solved, park outside and ride in.** For most visitors, that is calmer than mixing paperwork, luggage and central parking."
     ]
+  },
+  "berlin-u-bahn-fine": {
+    "title": "Berlin U-Bahn Fine - Quick Summary",
+    "icon": "60",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**A Berlin U-Bahn fine is usually a EUR 60 EBE** when you cannot show a valid ticket during control. An unstamped paper ticket is normally treated as invalid.",
+      "**Keep the receipt number.** It is the key for paying, proving a forgotten personal pass, or asking the operator to review the case.",
+      "**Do not continue travelling on the same mistake.** If the receipt does not clearly cover the onward ride, buy and validate a correct ticket before the next train, tram or bus.",
+      "**Forgotten personal subscriptions are different.** If the ticket is personal and was valid at the control time, show proof within 7 days; the amount may drop to a small processing fee.",
+      "**Be careful with cash pressure.** Real controls use ID, official receipts and operator payment routes. Ask for proof if something feels wrong."
+    ]
   }
 }

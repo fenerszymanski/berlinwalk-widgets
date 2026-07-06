@@ -1257,5 +1257,18 @@
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-umweltzone-sticker-checker-160.png",
     "source": "codex-built-in-imagegen-20260706",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_da4ca7dba1a14eed92d78460ad384121~mv2.png"
+  },
+  {
+    "slug": "berlin-ticket-fine-step-planner",
+    "title": "Berlin Ticket Fine Step Planner",
+    "category": "Money",
+    "model": "Codex built-in image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-07-06",
+    "promptSource": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/blog-drafts/images/berlin-u-bahn-fine/visual-sources.md",
+    "generatedSource": "/Users/yusufucuz/.codex/generated_images/019f3716-0acb-7421-a43a-411b009c5023/ig_0711bc308e884f11016a4b8d32de248191adde730700f46cea.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-ticket-fine-step-planner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-ticket-fine-step-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-ticket-fine-step-planner-160.png",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_ac43b62bd7074f11b4871dfd429bdfa4~mv2.png"
   }
 ]

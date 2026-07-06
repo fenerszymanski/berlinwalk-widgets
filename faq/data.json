@@ -4844,5 +4844,35 @@
         "a": "Yes, but I would not make the car part of the tour day unless the sticker and parking are already solved. The tour lasts about 2 hours and starts at Alexanderplatz, which is inside the Umweltzone."
       }
     ]
+  },
+  "berlin-u-bahn-fine": {
+    "title": "Berlin U-Bahn Fine - FAQ",
+    "subtitle": "Quick answers for tourists caught without a valid Berlin public transport ticket.",
+    "items": [
+      {
+        "q": "How much is the Berlin U-Bahn fine?",
+        "a": "The standard increased fare, called EBE, is 60 euros when you are checked without a valid ticket on Berlin public transport. The same basic rule applies to U-Bahn, S-Bahn, tram and bus travel inside the VBB/Berlin system."
+      },
+      {
+        "q": "Do I still get fined if I bought a ticket but forgot to validate it?",
+        "a": "Yes, usually. A paper ticket must be validated before the journey unless it is already issued with a valid start time. An unstamped ticket is normally treated as invalid during control."
+      },
+      {
+        "q": "What should I do right after receiving a Berlin ticket fine?",
+        "a": "Keep the receipt, check the EBE number, note the operator name, and buy a valid ticket before continuing unless the receipt clearly says your onward ride is covered. Then pay or contact the operator before the deadline."
+      },
+      {
+        "q": "Can a forgotten monthly ticket reduce the fine?",
+        "a": "Sometimes, but only for personal, non-transferable tickets or subscriptions that were valid at the time of control. BVG and S-Bahn guidance says proof must normally be shown within 7 days, and a smaller processing fee can apply if accepted."
+      },
+      {
+        "q": "Should I pay a Berlin ticket inspector in cash?",
+        "a": "Be careful. Ask for inspector ID and an official receipt. S-Bahn specifically warns that its inspectors do not demand cash without proper receipt handling. Use the EBE number and the official operator payment path if you are unsure."
+      },
+      {
+        "q": "Is a Berlin ticket fine a criminal record?",
+        "a": "The normal EBE is a civil payment claim from the transport company, not automatically a criminal conviction. Repeated or fraudulent cases can become more serious, so do not ignore the receipt or deadline."
+      }
+    ]
   }
 }
