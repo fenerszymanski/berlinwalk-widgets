@@ -56,6 +56,17 @@ Monday/closed-anchor opening risk. Day cards and Smart Swaps show a visible
 `Rain swap` note. A localhost-only `mockRainDay` query parameter exists for QA
 and does not affect the public embed.
 
+Update 2026-07-06: Wave 3.3 print/PDF warning propagation now uses the same
+`openingNoticeItems()` source as the unlocked day cards. Monday, holiday,
+closed-anchor, and live rain-swap notes are included in the browser print view
+and both PDF paths instead of appearing only as short risk labels.
+
+Update 2026-07-06: Wave 3.2 route-link sanity was verified against a weather
+swap scenario. After the covered `food` day moved onto the rainy date and the
+`free` outdoor route moved away, the Google Maps direction URLs rebuilt from
+the swapped days' current place coordinates instead of keeping stale pre-swap
+anchors.
+
 ## 1. User Inputs
 
 ### Visible inputs

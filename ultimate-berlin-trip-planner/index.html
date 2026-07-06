@@ -20562,6 +20562,10 @@
         wrapped('Watch out: ' + risks, margin + 8, contentW - 16, 9.5, 'bold', muted, 13);
         y += 3;
       }
+      openingNoticeItems(day).slice(0, 3).forEach(function (item) {
+        wrapped((item.title || 'Plan note') + ': ' + item.copy + (item.action ? ' ' + item.action : ''), margin + 8, contentW - 16, 9.2, 'bold', [90, 82, 54], 12.5);
+        y += 2;
+      });
       blocks.forEach(function (item) {
         var block = item.block;
         var copy = dayBlockDisplayCopy(day, block, item.index);
@@ -22715,6 +22719,13 @@
       var mapRows = Math.max(1, Math.ceil(mapPack.length / 2));
       var placeLabels = links.slice(0, 4).map(function (link) { return link.label; });
       var riskLabels = risks.map(function (tag) { return tag.label; });
+      var noticeItems = openingNoticeItems(day).slice(0, 3);
+      var noticeHeights = noticeItems.map(function (item) {
+        var text = (item.title || 'Plan note') + ': ' + item.copy + (item.action ? ' ' + item.action : '');
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7.5);
+        return Math.max(24, doc.splitTextToSize(text, contentW - 62).length * 8.8 + 16);
+      });
       var blockHeights = actionBlocks.map(function (item) {
         var block = item.block;
         var index = item.index;
@@ -22735,9 +22746,10 @@
       var opsH = 48;
       var routeReelH = actionBlocks.length ? 52 : 0;
       var blocksH = blockHeights.reduce(function (sum, value) { return sum + value; }, 0);
+      var noticeH = noticeHeights.reduce(function (sum, value) { return sum + value + 4; }, 0);
       var closeH = closePlan ? Math.max(68, 46 + measurePillRow(closeLabels, contentW - 124, { maxWidth: 116, size: 6.8 })) : 0;
       var mapPackH = mapPack.length ? 33 + mapRows * 38 + (mapRows - 1) * 6 + 10 : 0;
-      var cardH = 60 + visualH + rhythmH + opsH + riskH + placeH + tourH + routeReelH + blocksH + closeH + mapPackH + 22;
+      var cardH = 60 + visualH + rhythmH + opsH + riskH + noticeH + placeH + tourH + routeReelH + blocksH + closeH + mapPackH + 22;
 
       ensure(cardH + 12);
       var cardY = y;
@@ -22845,6 +22857,19 @@
         var riskHDrawn = drawPillRow(riskLabels, margin + 18, y, contentW - 36, { bg: [255, 247, 230], border: [245, 210, 154], color: [128, 84, 0], maxWidth: 140 });
         y += riskHDrawn + 6;
       }
+
+      noticeItems.forEach(function (item, noticeIndex) {
+        var noticeText = (item.title || 'Plan note') + ': ' + item.copy + (item.action ? ' ' + item.action : '');
+        var boxH = noticeHeights[noticeIndex] || 24;
+        fill([255, 252, 219]);
+        stroke([239, 230, 163]);
+        doc.roundedRect(margin + 18, y, contentW - 36, boxH, 6, 6, 'FD');
+        color([90, 82, 54]);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(7.5);
+        doc.text(doc.splitTextToSize(noticeText, contentW - 62), margin + 30, y + 12);
+        y += boxH + 4;
+      });
 
       if (daySlot) {
         fill(green);
@@ -23179,12 +23204,16 @@
         var copy = dayBlockDisplayCopy(day, block, item.index);
         return '<li><b>' + escapeHtml(block.time) + '</b><span><strong>' + escapeHtml(block.title) + '</strong>' + (copy ? ' - ' + escapeHtml(copy) : '') + '</span></li>';
       }).join('');
+      var notices = openingNoticeItems(day).slice(0, 3).map(function (item) {
+        return '<p class="notice"><strong>' + escapeHtml(item.title || 'Plan note') + ':</strong> ' + escapeHtml(item.copy + (item.action ? ' ' + item.action : '')) + '</p>';
+      }).join('');
       var mapLinks = dayMapPackItems(day).slice(0, 3).map(function (item) {
         return '<a href="' + escapeHtml(item.url) + '" target="_blank" rel="noopener">' + escapeHtml(item.title) + '</a>';
       }).join('');
       var risks = riskTagsForDay(day).map(function (tag) { return tag.label; }).slice(0, 3).join(', ');
       return '<section class="day"><header><small>DAY ' + day.dayNumber + ' | ' + escapeHtml(formatDisplayDate(day.dateKey)) + '</small><h2>' + escapeHtml(day.title) + '</h2></header>' +
         (risks ? '<p class="watch"><strong>Watch out:</strong> ' + escapeHtml(risks) + '</p>' : '') +
+        notices +
         '<ol>' + blocks + '</ol>' +
         (mapLinks ? '<nav>' + mapLinks + '</nav>' : '') +
       '</section>';
@@ -23198,7 +23227,7 @@
     var shoppingHtml = SHOPPING_GROUPS.map(function (item) {
       return '<article><strong>' + escapeHtml(item.title) + '</strong><span>' + escapeHtml(item.detail) + '</span></article>';
     }).join('');
-    printWindow.document.write('<!doctype html><html><head><title>Your Berlin Trip Plan</title><style>body{background:#FAFAF5;color:#212121;font-family:Arial,sans-serif;line-height:1.45;margin:0}.hero{background:#1B5E20;color:white;padding:28px 34px}.hero small{color:#FFE600;font-weight:800;letter-spacing:1.8px}.hero h1{font-size:30px;line-height:1.05;margin:8px 0}.hero p{color:#DDEFC7;font-weight:700;margin:0}.wrap{padding:24px 34px}.meta{display:grid;gap:8px;grid-template-columns:repeat(3,1fr);margin-bottom:18px}.meta div,.day,.essentials article{background:white;border:1px solid #DCE8C8;border-radius:8px}.meta div{padding:10px}.meta b{color:#4E5A4E;display:block;font-size:10px;text-transform:uppercase}.meta span{color:#1B5E20;font-weight:800}.day{break-inside:avoid;margin:0 0 14px;overflow:hidden}.day header{background:#F2F8E8;padding:14px}.day small{color:#4E5A4E;font-weight:800}.day h2{color:#1B5E20;font-size:20px;margin:5px 0 0}.watch{background:#FFFCDB;border:1px solid #EFE6A3;border-radius:8px;color:#5A5236;margin:12px 14px 0;padding:9px 10px}ol{list-style:none;margin:0;padding:10px 14px}li{border-top:1px solid #EEF4E7;display:grid;gap:10px;grid-template-columns:86px 1fr;padding:10px 0}li:first-child{border-top:0}li b{background:#F2F8E8;border:1px solid #DCE8C8;border-radius:7px;color:#1B5E20;padding:8px;text-align:center}li span strong{display:block}nav{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 14px}a{color:#174C8A;font-weight:800;text-decoration:none}.essentials h2{color:#1B5E20;margin:0 0 8px}.essentials{display:grid;gap:8px;grid-template-columns:repeat(2,1fr);margin-bottom:16px}.essentials article{padding:10px}.essentials strong,.essentials span{display:block}.essentials strong{color:#1B5E20}.brand{color:#1B5E20;font-weight:800;margin-top:18px}@media print{body{background:white}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.day{break-inside:avoid}}@media(max-width:640px){.meta,.essentials{grid-template-columns:1fr}li{grid-template-columns:1fr}}</style></head><body><section class="hero"><small>BERLINWALK LOCAL PLANNER</small><h1>Your Berlin Trip Plan</h1><p>' + escapeHtml(plan.displayDate) + ' | ' + escapeHtml(labels.tripLength) + ' | ' + escapeHtml(labels.stayArea) + '</p></section><main class="wrap"><section class="meta"><div><b>Arrival</b><span>' + escapeHtml(labels.arrivalTime) + '</span></div><div><b>Start</b><span>' + escapeHtml(labels.arrivalPoint) + '</span></div><div><b>Pace</b><span>' + escapeHtml(labels.pace) + '</span></div></section><p>' + escapeHtml(plan.summary) + '</p>' + simpleDaysHtml + '<h2>Berlin public transport maps</h2><section class="essentials">' + transportHtml + '</section><h2>Shopping notes</h2><section class="essentials">' + shoppingHtml + '</section><h2>Berlin essentials</h2><section class="essentials">' + simpleEssentialsHtml + '</section><p class="brand">berlinwalk.com | @berlinwalkingtour</p></main></body></html>');
+    printWindow.document.write('<!doctype html><html><head><title>Your Berlin Trip Plan</title><style>body{background:#FAFAF5;color:#212121;font-family:Arial,sans-serif;line-height:1.45;margin:0}.hero{background:#1B5E20;color:white;padding:28px 34px}.hero small{color:#FFE600;font-weight:800;letter-spacing:1.8px}.hero h1{font-size:30px;line-height:1.05;margin:8px 0}.hero p{color:#DDEFC7;font-weight:700;margin:0}.wrap{padding:24px 34px}.meta{display:grid;gap:8px;grid-template-columns:repeat(3,1fr);margin-bottom:18px}.meta div,.day,.essentials article{background:white;border:1px solid #DCE8C8;border-radius:8px}.meta div{padding:10px}.meta b{color:#4E5A4E;display:block;font-size:10px;text-transform:uppercase}.meta span{color:#1B5E20;font-weight:800}.day{break-inside:avoid;margin:0 0 14px;overflow:hidden}.day header{background:#F2F8E8;padding:14px}.day small{color:#4E5A4E;font-weight:800}.day h2{color:#1B5E20;font-size:20px;margin:5px 0 0}.watch,.notice{background:#FFFCDB;border:1px solid #EFE6A3;border-radius:8px;color:#5A5236;margin:12px 14px 0;padding:9px 10px}.notice{background:#FFF7E6;border-color:#F5D29A}ol{list-style:none;margin:0;padding:10px 14px}li{border-top:1px solid #EEF4E7;display:grid;gap:10px;grid-template-columns:86px 1fr;padding:10px 0}li:first-child{border-top:0}li b{background:#F2F8E8;border:1px solid #DCE8C8;border-radius:7px;color:#1B5E20;padding:8px;text-align:center}li span strong{display:block}nav{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 14px}a{color:#174C8A;font-weight:800;text-decoration:none}.essentials h2{color:#1B5E20;margin:0 0 8px}.essentials{display:grid;gap:8px;grid-template-columns:repeat(2,1fr);margin-bottom:16px}.essentials article{padding:10px}.essentials strong,.essentials span{display:block}.essentials strong{color:#1B5E20}.brand{color:#1B5E20;font-weight:800;margin-top:18px}@media print{body{background:white}.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}.day{break-inside:avoid}}@media(max-width:640px){.meta,.essentials{grid-template-columns:1fr}li{grid-template-columns:1fr}}</style></head><body><section class="hero"><small>BERLINWALK LOCAL PLANNER</small><h1>Your Berlin Trip Plan</h1><p>' + escapeHtml(plan.displayDate) + ' | ' + escapeHtml(labels.tripLength) + ' | ' + escapeHtml(labels.stayArea) + '</p></section><main class="wrap"><section class="meta"><div><b>Arrival</b><span>' + escapeHtml(labels.arrivalTime) + '</span></div><div><b>Start</b><span>' + escapeHtml(labels.arrivalPoint) + '</span></div><div><b>Pace</b><span>' + escapeHtml(labels.pace) + '</span></div></section><p>' + escapeHtml(plan.summary) + '</p>' + simpleDaysHtml + '<h2>Berlin public transport maps</h2><section class="essentials">' + transportHtml + '</section><h2>Shopping notes</h2><section class="essentials">' + shoppingHtml + '</section><h2>Berlin essentials</h2><section class="essentials">' + simpleEssentialsHtml + '</section><p class="brand">berlinwalk.com | @berlinwalkingtour</p></main></body></html>');
     printWindow.document.close();
     printWindow.focus();
     printWindow.print();
