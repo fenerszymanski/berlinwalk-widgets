@@ -1,0 +1,239 @@
+{
+  "checkedAt": "2026-07-06T13:02:29.809Z",
+  "url": "http://127.0.0.1:8787/berlin-umweltzone-sticker-checker/?v=local-revision-20260706v",
+  "viewports": [
+    {
+      "label": "desktop",
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "url": "http://127.0.0.1:8787/berlin-umweltzone-sticker-checker/?v=local-revision-20260706v",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "horizontalOverflow": 0,
+      "results": [
+        {
+          "name": "foreign-missing-today",
+          "expect": "NO",
+          "values": {
+            "vehicle": "foreign-car",
+            "target": "inside",
+            "sticker": "missing",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "NO",
+          "pass": true,
+          "title": "Do not drive into the inner city yet",
+          "text": "The sticker question is not solved, and your plan points toward the low-emission zone. Park outside, ask the rental desk, or switch to public transport before entering.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "outside",
+          "expect": "OUT",
+          "values": {
+            "vehicle": "foreign-car",
+            "target": "outside",
+            "sticker": "missing",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "OUT",
+          "pass": true,
+          "title": "You may not need the sticker for this route",
+          "text": "If your whole drive stays outside the S-Bahn Ring, the Berlin Umweltzone is probably not the main issue. Keep checking signs before you cross into the inner city.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "electric-green",
+          "expect": "GO",
+          "values": {
+            "vehicle": "electric",
+            "target": "inside",
+            "sticker": "green",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "GO",
+          "pass": true,
+          "title": "Drive in with the visible sticker route",
+          "text": "An electric or plug-in car with a visible green sticker has a clear sticker path. If you rely on an EV exemption instead, check the official rule before entering.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "electric-unchecked",
+          "expect": "EV",
+          "values": {
+            "vehicle": "electric",
+            "target": "inside",
+            "sticker": "unchecked",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "EV",
+          "pass": true,
+          "title": "Check the electric vehicle exemption before driving in",
+          "text": "Berlin.de lists exemptions for electric vehicles and plug-in hybrids with an E plate, but foreign electric vehicles may need a blue E sticker if the exemption is not obvious.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "delivery",
+          "expect": "NO",
+          "values": {
+            "vehicle": "foreign-car",
+            "target": "inside",
+            "sticker": "delivery",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "NO",
+          "pass": true,
+          "title": "Do not drive into the inner city yet",
+          "text": "The sticker question is not solved, and your plan points toward the low-emission zone. Park outside, ask the rental desk, or switch to public transport before entering.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "not-picked",
+          "expect": "ASK",
+          "values": {
+            "vehicle": "not-picked",
+            "target": "inside",
+            "sticker": "green",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "ASK",
+          "pass": true,
+          "title": "Ask before you leave the rental desk",
+          "text": "This is the easiest moment to fix the problem. Ask whether the car can enter Berlin Umweltzone and confirm the windscreen sticker before loading luggage.",
+          "overflow": 0,
+          "overflowOffenders": []
+        }
+      ],
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/berlin-umweltzone-sticker/widget-revision-desktop.png"
+    },
+    {
+      "label": "mobile-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "url": "http://127.0.0.1:8787/berlin-umweltzone-sticker-checker/?v=local-revision-20260706v",
+      "consoleErrors": [],
+      "pageErrors": [],
+      "horizontalOverflow": 0,
+      "results": [
+        {
+          "name": "foreign-missing-today",
+          "expect": "NO",
+          "values": {
+            "vehicle": "foreign-car",
+            "target": "inside",
+            "sticker": "missing",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "NO",
+          "pass": true,
+          "title": "Do not drive into the inner city yet",
+          "text": "The sticker question is not solved, and your plan points toward the low-emission zone. Park outside, ask the rental desk, or switch to public transport before entering.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "outside",
+          "expect": "OUT",
+          "values": {
+            "vehicle": "foreign-car",
+            "target": "outside",
+            "sticker": "missing",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "OUT",
+          "pass": true,
+          "title": "You may not need the sticker for this route",
+          "text": "If your whole drive stays outside the S-Bahn Ring, the Berlin Umweltzone is probably not the main issue. Keep checking signs before you cross into the inner city.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "electric-green",
+          "expect": "GO",
+          "values": {
+            "vehicle": "electric",
+            "target": "inside",
+            "sticker": "green",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "GO",
+          "pass": true,
+          "title": "Drive in with the visible sticker route",
+          "text": "An electric or plug-in car with a visible green sticker has a clear sticker path. If you rely on an EV exemption instead, check the official rule before entering.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "electric-unchecked",
+          "expect": "EV",
+          "values": {
+            "vehicle": "electric",
+            "target": "inside",
+            "sticker": "unchecked",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "EV",
+          "pass": true,
+          "title": "Check the electric vehicle exemption before driving in",
+          "text": "Berlin.de lists exemptions for electric vehicles and plug-in hybrids with an E plate, but foreign electric vehicles may need a blue E sticker if the exemption is not obvious.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "delivery",
+          "expect": "NO",
+          "values": {
+            "vehicle": "foreign-car",
+            "target": "inside",
+            "sticker": "delivery",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "NO",
+          "pass": true,
+          "title": "Do not drive into the inner city yet",
+          "text": "The sticker question is not solved, and your plan points toward the low-emission zone. Park outside, ask the rental desk, or switch to public transport before entering.",
+          "overflow": 0,
+          "overflowOffenders": []
+        },
+        {
+          "name": "not-picked",
+          "expect": "ASK",
+          "values": {
+            "vehicle": "not-picked",
+            "target": "inside",
+            "sticker": "green",
+            "timing": "today",
+            "pressure": "bags"
+          },
+          "actual": "ASK",
+          "pass": true,
+          "title": "Ask before you leave the rental desk",
+          "text": "This is the easiest moment to fix the problem. Ask whether the car can enter Berlin Umweltzone and confirm the windscreen sticker before loading luggage.",
+          "overflow": 0,
+          "overflowOffenders": []
+        }
+      ],
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/berlin-umweltzone-sticker/widget-revision-mobile-390.png"
+    }
+  ],
+  "pass": true
+}

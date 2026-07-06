@@ -492,11 +492,30 @@
       const notPicked = state.vehicle === 'not-picked';
       const electric = state.vehicle === 'electric';
       const urgent = state.timing === 'today' || state.pressure !== 'calm';
+      const goCopy = {
+        'german-rental': {
+          title: 'Drive in only after the windscreen check',
+          text: 'A German rental with a visible green sticker is usually the simple case, but the sticker should match the vehicle before you enter the inner city.'
+        },
+        'foreign-car': {
+          title: 'Drive in only after the sticker check',
+          text: 'A foreign car with a visible green sticker is allowed in the zone, but the sticker should match the registration number before you cross the Ring.'
+        },
+        electric: {
+          title: 'Drive in with the visible sticker route',
+          text: 'An electric or plug-in car with a visible green sticker has a clear sticker path. If you rely on an EV exemption instead, check the official rule before entering.'
+        },
+        'not-picked': {
+          title: 'Ask before you leave the rental desk',
+          text: 'If you have not picked up the car yet, confirm this exact vehicle before you load luggage and head toward the inner city.'
+        }
+      };
+      const safeCopy = goCopy[state.vehicle] || goCopy['german-rental'];
 
       let mode = 'safe';
       let badge = 'GO';
-      let title = 'Drive in only after the windscreen check';
-      let text = 'A German rental with a visible green sticker is usually the simple case, but the sticker should match the vehicle before you enter the inner city.';
+      let title = safeCopy.title;
+      let text = safeCopy.text;
       let moves = [
         ['Check the sticker before the Ring', 'Look for the green emissions sticker on the windscreen before you head toward Mitte, Alexanderplatz or your hotel.'],
         ['Match the car, not the plan', 'The sticker is tied to the registration number. If it looks wrong, ask before driving.'],
@@ -515,7 +534,7 @@
           ['Use rail for the center', 'Park near a useful station and ride in when your day is mostly central sightseeing.']
         ];
         tour = 'Ride in for the tour';
-      } else if (electric && state.sticker !== 'missing') {
+      } else if (electric && ['unchecked', 'delivery'].includes(state.sticker)) {
         mode = 'check';
         badge = 'EV';
         title = 'Check the electric vehicle exemption before driving in';

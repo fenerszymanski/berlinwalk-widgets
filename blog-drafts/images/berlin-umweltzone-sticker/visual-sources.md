@@ -7,14 +7,14 @@ Checked: 2026-07-06 Europe/Berlin
 ### 1. Umweltzone sign in Berlin
 
 - Local raw: `assets/raw/01-umweltzone-berlin-sign.jpg`
-- Local optimized: `assets/optimized/01-umweltzone-berlin-sign.jpg`
+- Local optimized: `assets/optimized/01-umweltzone-berlin-sign-cover.jpg`
 - Source: https://commons.wikimedia.org/wiki/File:Umweltzone-Berlin.jpg
 - License: CC BY-SA 3.0 DE / CC BY-SA 3.0 / GFDL
 - Author: Frank M. Rauch
 - Use: Featured/cover image and first body image.
-- Alt text: `Umweltzone traffic sign marking the low-emission zone in Berlin.`
-- Caption: `The Umweltzone sign is easy to miss when you are focused on finding the hotel or car park.`
-- Visual rationale: Clear real Berlin sign, strong subject signal for the topic, more trustworthy than a generic car photo.
+- Alt text: `Close view of an Umweltzone sign marking the low-emission zone in Berlin.`
+- Caption: `A closer crop keeps the Umweltzone sign readable before you drive toward the inner S-Bahn Ring.`
+- Visual rationale: Recrop of the real Berlin sign image so the Umweltzone and frei panels stay readable in blog-card and social crops. The previous wide crop kept useful context but made the sign too small for the featured image slot.
 
 ### 2. Berlin inner ring map
 
@@ -78,4 +78,4 @@ Checked: 2026-07-06 Europe/Berlin
 ## Contact Sheet
 
 - Contact sheet: `assets/contact-sheet/berlin-umweltzone-sticker-contact-sheet.jpg`
-- Quality gate: selected images are clear, legally usable, and topic-specific. No protest/event-specific or misleading stock-style image selected.
+- Quality gate: selected images are clear, legally usable, and topic-specific. The featured image now uses the tighter sign crop after card-crop review. No protest/event-specific or misleading stock-style image selected.

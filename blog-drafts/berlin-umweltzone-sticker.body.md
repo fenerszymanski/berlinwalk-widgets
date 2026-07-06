@@ -6,12 +6,12 @@ My advice: if the green sticker or exemption is not solved before you reach the 
 
 {{quick-summary}}
 
-![Umweltzone traffic sign marking the low-emission zone in Berlin](blog-drafts/images/berlin-umweltzone-sticker/assets/optimized/01-umweltzone-berlin-sign.jpg)
-_The Umweltzone sign is easy to miss when you are focused on finding the hotel or car park._
+![Close view of an Umweltzone sign marking the low-emission zone in Berlin](blog-drafts/images/berlin-umweltzone-sticker/assets/optimized/01-umweltzone-berlin-sign-cover.jpg)
+_A closer crop keeps the Umweltzone sign readable before you drive toward the inner S-Bahn Ring._
 
 ## Berlin Umweltzone sticker: the short answer
 
-You need to care about the Berlin Umweltzone sticker if you plan to drive into the inner city with a car that is not clearly exempt. Berlin's [official low-emission zone page](https://www.berlin.de/en/tourism/travel-information/1760452-2862820-environmental-zone.en.html) says the zone covers the inner city inside the S-Bahn Ring, and since January 2010 only vehicles with a green sticker have been allowed in the zone.
+You need to care about the Berlin Umweltzone sticker if you plan to drive into the inner city with a car that is not clearly exempt. Berlin's [official low-emission zone page](https://www.berlin.de/en/tourism/travel-information/1760452-2862820-environmental-zone.en.html) says the zone covers the inner city **inside the S-Bahn Ring**, and since January 2010 only vehicles with a **green sticker** have been allowed in the zone.
 
 This includes foreign vehicles. Do not treat the green sticker as a German-only detail.
 
@@ -27,9 +27,9 @@ The sticker is not a souvenir and not a loose permit. It is tied to the vehicle 
 
 ## Where the Umweltzone is
 
-The Berlin Umweltzone is inside the S-Bahn Ring. That is the most useful map idea for visitors.
+The Berlin Umweltzone is **inside the S-Bahn Ring**. That is the most useful map idea for visitors.
 
-This is where many tourists mix up two different systems. Berlin public transport uses fare zones, usually AB or ABC. Those fare zones decide which train ticket you need for the city, BER Airport, Potsdam and wider trips. The Umweltzone is a driving rule. A public transport AB ticket does not tell you whether your car can enter the low-emission zone.
+This is where many tourists mix up two different systems. Berlin public transport uses fare zones, usually AB or ABC. Those fare zones decide which train ticket you need for the city, BER Airport, Potsdam and wider trips. The Umweltzone is a **driving rule**. A public transport AB ticket does not tell you whether your car can enter the low-emission zone.
 
 ![Map of Berlin's inner city bounded by the S-Bahn Ring](blog-drafts/images/berlin-umweltzone-sticker/assets/optimized/02-berlin-inner-ring-map.jpg)
 _The driving Umweltzone roughly follows the inner S-Bahn Ring, which is different from public transport fare zones._
@@ -42,11 +42,11 @@ The [VIZ Berlin low-emission zone page](https://viz.berlin.de/en/umwelt/low-emis
 
 Foreign cars can need the Berlin Umweltzone sticker. This is the point I would not leave until the morning you drive.
 
-Berlin's LABO page lets foreign vehicle owners [apply online for the environmental sticker](https://www.berlin.de/labo/mobilitaet/kfz-zulassung/feinstaubplakette/shop.86595.en.php). When I checked it on 6 July 2026, the page asked for vehicle documents and showed EUR 5.95 including VAT. The same official page tells foreign drivers to allow about 7 to 14 days for delivery outside Germany.
+Berlin's LABO page lets foreign vehicle owners [apply online for the environmental sticker](https://www.berlin.de/labo/mobilitaet/kfz-zulassung/feinstaubplakette/shop.86595.en.php). When I checked it on 6 July 2026, the page asked for vehicle documents and showed **EUR 5.95 including VAT**. The same official page tells foreign drivers to allow **about 7 to 14 days** for delivery outside Germany.
 
 That timing matters. If you are already in Berlin today and the car has no sticker, an online order does not fix the drive into Mitte this afternoon.
 
-For rental cars, the safest sentence is: check the actual car, not the booking category. A German rental car will often be prepared for German city rules, but you should still look at the windscreen and ask the desk if you are unsure. If you rent outside Germany and then drive to Berlin, check even earlier.
+For rental cars, the safest sentence is: **check the actual car, not the booking category**. A German rental car will often be prepared for German city rules, but you should still look at the windscreen and ask the desk if you are unsure. If you rent outside Germany and then drive to Berlin, check even earlier.
 
 Electric vehicles need a more careful read. Berlin.de says electric vehicles and plug-in hybrids with an E license plate are exempt. It also notes that foreign electric vehicles can apply for a blue E sticker if the exemption is not apparent from the foreign plate. If this applies to you, check the official rule before driving in, not after parking.
 
@@ -61,7 +61,7 @@ Use this order.
 2. Check the windscreen for a green sticker or clear exemption.
 3. If it is a rental, ask the rental desk about this exact car.
 4. If it is your own foreign car, order the sticker before the trip.
-5. If there is still doubt, do not drive into the inner city.
+5. If there is still doubt, **do not drive into the inner city**.
 
 That last step sounds strict, but it is the calm option. Central Berlin is not where I would combine legal uncertainty, luggage, unfamiliar road signs and a timed plan.
 
@@ -75,7 +75,7 @@ The tool below is for the exact moment when your plan is almost clear but one ca
 
 ## When Park and Ride is the better move
 
-If the sticker question is not solved, Park and Ride is usually better than treating central Berlin as a test. The [VIZ Berlin parking page](https://viz.berlin.de/en/traffic-in-berlin/parking/) provides maps for Park and Ride facilities, public car parks and private car parks.
+If the sticker question is not solved, **Park and Ride is usually better** than treating central Berlin as a test. The [VIZ Berlin parking page](https://viz.berlin.de/en/traffic-in-berlin/parking/) provides maps for Park and Ride facilities, public car parks and private car parks.
 
 I would consider parking outside and riding in if:
 
@@ -96,7 +96,7 @@ If your real goal is Alexanderplatz, my separate guide to [where to park near Al
 
 ### Using a train map as a driving map
 
-AB and ABC are public transport fare zones. The Umweltzone is a driving restriction. They are different systems.
+**AB and ABC are public transport fare zones**. The Umweltzone is a driving restriction. They are different systems.
 
 ### Assuming foreign plates are ignored
 
@@ -119,7 +119,7 @@ _Mitte is easy on foot but not where I would solve paperwork, parking and luggag
 
 ## How this connects to a Berlin walking day
 
-The BerlinWalk tour starts at Alexanderplatz, which is inside the Umweltzone. If you are coming by car, I would only make that part of the day if the sticker, parking and timing are already solved.
+The BerlinWalk tour starts at Alexanderplatz, which is **inside the Umweltzone**. If you are coming by car, I would only make that part of the day if the sticker, parking and timing are already solved.
 
 The tour lasts about 2 hours. That is short enough to fit into a wider Berlin day, but it is not a good reason to gamble on central driving. If the car question feels messy, leave the car outside the problem and arrive by U-Bahn, S-Bahn, tram, taxi or on foot.
 
@@ -144,7 +144,7 @@ Use the official pages if your car situation is unusual, time-sensitive or expen
 
 ## Final advice
 
-If you are driving into Berlin, solve the Umweltzone before the S-Bahn Ring. If the sticker or exemption is visible and correct, continue with a clear parking plan. If it is not, park outside and ride in.
+If you are driving into Berlin, **solve the Umweltzone before the S-Bahn Ring**. If the sticker or exemption is visible and correct, continue with a clear parking plan. If it is not, park outside and ride in.
 
 That one decision saves more stress than any clever shortcut through Mitte.
 
