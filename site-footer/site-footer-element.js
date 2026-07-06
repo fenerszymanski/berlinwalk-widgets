@@ -10,6 +10,7 @@ const BW_SITE_FOOTER_LINKS = {
   blog: 'https://www.berlinwalk.com/blog',
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
   games: 'https://www.berlinwalk.com/games',
+  rewind: 'https://www.berlinwalk.com/games/berlin-rewind',
   battle: 'https://www.berlinwalk.com/games/berlin-battle',
   daySurvival: 'https://www.berlinwalk.com/games/berlin-day-survival',
   bouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
@@ -452,6 +453,7 @@ class BWSiteFooterElement extends HTMLElement {
 
             ${this._renderLinkColumn('Play', [
               ['All Games', BW_SITE_FOOTER_LINKS.games],
+              ['Berlin Rewind', BW_SITE_FOOTER_LINKS.rewind],
               ['Berlin Battle', BW_SITE_FOOTER_LINKS.battle],
               ['Berlin Day Survival', BW_SITE_FOOTER_LINKS.daySurvival],
               ['Berghain Bouncer', BW_SITE_FOOTER_LINKS.bouncer],

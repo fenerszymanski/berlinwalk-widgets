@@ -269,14 +269,14 @@ class BWBerlinQuizElement extends HTMLElement {
           text-transform: uppercase;
         }
 
-        .bw-quiz-start-inner h1 {
+        .bw-quiz-start-inner h2 {
           color: #FFFFFF;
           font-size: 38px;
           font-weight: 900;
           line-height: 1.1;
           margin-bottom: 12px;
         }
-        .bw-quiz-start-inner h1 span {
+        .bw-quiz-start-inner h2 span {
           color: #FFE600;
         }
 
@@ -618,7 +618,7 @@ class BWBerlinQuizElement extends HTMLElement {
             max-width: 100%;
             padding: 6px 13px;
           }
-          .bw-quiz-start-inner h1 {
+          .bw-quiz-start-inner h2 {
             font-size: 29px;
             margin-bottom: 10px;
           }
@@ -667,7 +667,7 @@ class BWBerlinQuizElement extends HTMLElement {
             padding-left: 12px;
             padding-right: 12px;
           }
-          .bw-quiz-start-inner h1 {
+          .bw-quiz-start-inner h2 {
             font-size: 27px;
           }
           .bw-quiz-badge {
@@ -689,7 +689,7 @@ class BWBerlinQuizElement extends HTMLElement {
           <div class="bw-quiz-screen bw-quiz-active" id="bw-quiz-screen-start">
             <div class="bw-quiz-start-inner">
               <div class="bw-quiz-badge">★ 15 Questions · 3 Minutes</div>
-              <h1>Are You Ready<br><span>for Berlin?</span></h1>
+              <h2>Are You Ready<br><span>for Berlin?</span></h2>
               <p class="bw-quiz-start-desc">From airport transfers to medieval history — test your Berlin knowledge before you visit.</p>
               <button class="bw-quiz-btn-primary" type="button" data-bw-quiz-start>START THE QUIZ →</button>
               <div class="bw-quiz-tags">

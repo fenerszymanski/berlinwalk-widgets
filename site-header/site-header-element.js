@@ -10,6 +10,7 @@ const BW_HEADER_LINKS = {
   plan: 'https://www.berlinwalk.com/berlin-tools',
   planner: 'https://www.berlinwalk.com/berlin-trip-planner',
   games: 'https://www.berlinwalk.com/games',
+  rewind: 'https://www.berlinwalk.com/games/berlin-rewind',
   battle: 'https://www.berlinwalk.com/games/berlin-battle',
   daySurvival: 'https://www.berlinwalk.com/games/berlin-day-survival',
   bouncer: 'https://www.berlinwalk.com/games/berghain-bouncer',
@@ -862,7 +863,7 @@ class BWHeaderElement extends HTMLElement {
               <span class="bw-header-top-sep" aria-hidden="true">•</span>
               <span class="bw-header-top-item">Free · Tip-based</span>
               <span class="bw-header-top-sep bw-header-top-item-hide-sm" aria-hidden="true">•</span>
-              <span class="bw-header-top-item bw-header-top-item-hide-sm">Tue-Sat 11:30 · From 3 July: +15:30 · World Clock</span>
+              <span class="bw-header-top-item bw-header-top-item-hide-sm">Tue-Sat 11:30 & 15:30 · World Clock</span>
             </div>
           </div>
         </div>
@@ -892,6 +893,7 @@ class BWHeaderElement extends HTMLElement {
                   </button>
                   <ul class="bw-header-submenu" role="menu">
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.games}">All Games</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.rewind}">Berlin Rewind</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.battle}">Berlin Battle</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a></li>
@@ -947,6 +949,7 @@ class BWHeaderElement extends HTMLElement {
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Games</div>
                 <a href="${BW_HEADER_LINKS.games}">All Games</a>
+                <a href="${BW_HEADER_LINKS.rewind}">Berlin Rewind</a>
                 <a href="${BW_HEADER_LINKS.battle}">Berlin Battle</a>
                 <a href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a>
                 <a href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a>
@@ -966,7 +969,7 @@ class BWHeaderElement extends HTMLElement {
 
             <div class="bw-header-mobile-cta">
               <a class="bw-header-book" href="${BW_HEADER_BOOKING_URL}">Book Your Free Tour</a>
-              <p class="bw-header-mobile-trust"><strong>★ 9.8 / 10</strong> on FreeTour · Tue-Sat 11:30 · From 3 July: +15:30</p>
+              <p class="bw-header-mobile-trust"><strong>★ 9.8 / 10</strong> on FreeTour · Tue-Sat 11:30 & 15:30</p>
             </div>
           </div>
         </div>

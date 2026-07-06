@@ -12,6 +12,8 @@ The catch is simple:
 
 Every week, visitors turn up at the Reichstag without a reservation and leave disappointed. The dome is free, but it is not walk-in sightseeing.
 
+And the booking itself works more like a request window than a casual attraction ticket. The Bundestag only accepts dome requests for the current month and the following month, and even confirmed visits can still change if parliamentary business, weather or security intervene.
+
 Here is exactly how to visit the Reichstag dome for free, what to expect, and why I think it is one of the best-value experiences in Berlin.
 
 {{quick-summary}}
@@ -63,6 +65,8 @@ The safest starting point is the [Bundestag dome registration page](https://www.
 
 The direct booking form is the official [Visiting the Bundestag request page](https://visite.bundestag.de/BAPWeb/pages/createBookingRequest.jsf?lang=en).
 
+Submitting that form is not the same as having a ticket in your hand. The booking page says your visit is only booked once the Visitors' Service sends a confirmation by email.
+
 The booking process is usually:
 
 - Choose the visit type for the dome or roof terrace.
@@ -80,6 +84,8 @@ If you are booking for a group, enter every person carefully.
 
 One typo can become a problem at the entrance.
 
+If you miss the advance window, there is one fallback. The Visitors' Service runs a service centre near the Reichstag, and if free places remain, it can issue a same-day confirmation at least two hours before the visit. I would treat that as luck, not as a plan.
+
 ## When Should You Book?
 
 Book as soon as you know your Berlin dates.
@@ -87,6 +93,8 @@ Book as soon as you know your Berlin dates.
 The official booking system says requests can only be submitted for the current month and the following month, so you cannot always book far in advance. But once your dates are inside that window, do not wait.
 
 Summer, weekends, school holidays and sunset slots can disappear quickly.
+
+And even a confirmed slot is not an absolute guarantee. The official booking page says parliamentary business, special events, weather and the security situation can still force last-minute cancellations.
 
 For most visitors, these are the best times:
 
@@ -117,6 +125,8 @@ During dome closures, the Bundestag says the roof terrace can still be visited w
 
 That means a closure does not always mean "no visit at all." It may mean no spiral walk inside the glass dome, but possible access to the roof terrace.
 
+It also means you should reset your expectations slightly. The Bundestag notes that the dome audioguide is not available when the dome itself is closed, so a terrace-only visit is still useful, but not quite the full experience.
+
 Always check the official page before planning your day.
 
 Dates can change because parliamentary business, security and weather can affect visits.
@@ -137,7 +147,7 @@ You should bring:
 
 Do not bring large luggage.
 
-If you are moving between hotel and train station, store your bags elsewhere before visiting.
+If you are moving between hotel and train station, store your bags elsewhere before visiting. The Bundestag says there are no luggage storage facilities on site.
 
 Also arrive early.
 
@@ -146,6 +156,8 @@ I would aim for 20 to 30 minutes before your time slot. The old advice of arrivi
 ## Where Is the Entrance?
 
 The visitor entrance is near the Reichstag building, beside Platz der Republik.
+
+Most visitors use the standard entrance, but the Bundestag notes that people with disabilities, frailer visitors, parents with prams and rooftop restaurant guests may be routed through **West C**.
 
 The closest public transport stop is usually **Brandenburger Tor**, served by U-Bahn, S-Bahn and buses.
 
@@ -241,20 +253,23 @@ The Reichstag dome is free, but the process is serious.
 
 ## Is the Käfer Rooftop Restaurant Worth It?
 
-There is a restaurant on the roof, operated by Käfer.
+There is a restaurant on the roof, operated by Käfer, and this matters more than many visitors realise.
 
-It can be a special experience, especially if you want breakfast, lunch or dinner with a government-quarter view.
+A normal dome slot is still the cleanest option. But if the free slots are gone and you genuinely want the Reichstag experience, a Käfer reservation can be a real paid alternative.
 
-But it is separate from the basic free dome visit.
+Käfer's own site says restaurant guests enjoy access to the roof terrace and glass dome of the Bundestag. In other words, this is not a myth, but it is a separate reservation system with meal prices attached.
 
-Do not assume you can simply walk in and get a table. Restaurant reservations usually need planning, and popular times can book out.
+You use the west entrance security route, arrive about 15 minutes early, and bring your reservation confirmation plus valid photo ID.
 
-For most visitors, I would separate the two decisions:
+So treat Käfer as a workaround only if you actually want the meal. Do not book it just because somebody online told you the dome is impossible.
+
+For most visitors, I would separate the decisions like this:
 
 - **Want the view and architecture?** Book the free dome visit.
-- **Want a special meal?** Check Käfer separately and reserve early.
+- **Want a special meal with roof access?** Check Käfer separately and reserve early.
+- **Got neither?** Switch to a plan-B viewpoint instead of hovering around Platz der Republik.
 
-The dome itself does not need the restaurant to be worthwhile.
+The dome itself does not need the restaurant to be worthwhile. If both the dome slots and restaurant times are full, I would move on to a different Berlin view such as the TV Tower, Panoramapunkt, the Victory Column or a simple government-quarter walk.
 
 ## The History Most Visitors Miss
 

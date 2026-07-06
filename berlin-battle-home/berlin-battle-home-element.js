@@ -9,9 +9,19 @@ const BW_GAMES_HOME_ROOT = (() => {
 
 const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
 const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
-const BW_GAMES_HOME_ASSET_VERSION = 'games-home-day-survival-20260627';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-rewind-20260705a';
 
 const BW_GAMES_HOME_ITEMS = [
+  {
+    id: 'berlin-rewind',
+    kicker: 'Daily archive',
+    title: 'Berlin Rewind',
+    lead: 'Three historical Berlin photos per day. Guess the year and district before the archive reveals the answer.',
+    meta: '3 shared daily frames',
+    href: 'https://www.berlinwalk.com/games/berlin-rewind',
+    cta: 'Play Rewind',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Bundesarchiv_Bild_183-H1006-0001-005%2C_Berlin%2C_Blick_vom_Fernsehturm_auf_den_Alexanderplatz_bei_Nacht.jpg'
+  },
   {
     id: 'berlin-battle',
     kicker: 'Choice battle',
@@ -454,7 +464,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           <div class="bw-games-home-copy">
             <span class="bw-games-home-kicker">BerlinWalk games</span>
             <h2 class="bw-games-home-title" id="bw-games-home-title">Play Berlin before you walk it.</h2>
-            <p class="bw-games-home-lead">Three quick games for different Berlin moods: pick your city winner, face the club door, or try to make Berlin almost smile. Then come walk the real city with me.</p>
+            <p class="bw-games-home-lead">Five fast ways into Berlin: rewind the archive, pick your city winner, face the club door, survive the day, or try to make Berlin almost smile. Then come walk the real city with me.</p>
             <div class="bw-games-home-actions">
               <a class="bw-games-home-btn bw-games-home-btn-primary" href="${BW_GAMES_HOME_URL}">See all games</a>
               <a class="bw-games-home-btn bw-games-home-btn-secondary" href="${BW_GAMES_HOME_BOOKING_URL}">Book the walking tour</a>

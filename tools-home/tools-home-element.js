@@ -1,5 +1,11 @@
 const BW_TOOLS_HOME_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260629-museums-spotlight';
 const BW_TOOLS_HOME_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
+const BW_TOOLS_HOME_FEATURED_SLUGS = [
+  'transport-ticket-calculator',
+  'berlin-luggage-storage',
+  'whats-open-in-berlin-today',
+  'berlin-first-day-planner',
+];
 
 class BWToolsHomeElement extends HTMLElement {
   constructor() {
@@ -59,7 +65,7 @@ class BWToolsHomeElement extends HTMLElement {
           align-items: end;
           display: grid;
           gap: 26px;
-          grid-template-columns: minmax(0, 1fr) minmax(280px, 0.48fr);
+          grid-template-columns: minmax(0, 1fr);
           margin: 0 0 30px;
         }
 
@@ -96,6 +102,7 @@ class BWToolsHomeElement extends HTMLElement {
           border: 1px solid #C5E1A5;
           border-left: 5px solid #1B5E20;
           border-radius: 8px;
+          display: none;
           padding: 18px 20px;
         }
 
@@ -514,15 +521,6 @@ class BWToolsHomeElement extends HTMLElement {
               <h2 id="bw-tools-home-title" class="bw-tools-home-title">Plan your Berlin visit in minutes</h2>
               <p class="bw-tools-home-lead">Quick local tools for tickets, budget, weather, water, and first-day choices before you arrive.</p>
             </div>
-            <aside class="bw-tools-home-panel" aria-label="Planning tools summary" data-bw-home-spotlight>
-              <h3>Built by a local guide</h3>
-              <p>Start with the questions travelers ask most, then bring the rest to the walk.</p>
-              <div class="bw-tools-home-tags" aria-hidden="true">
-                <span class="bw-tools-home-tag">Tickets</span>
-                <span class="bw-tools-home-tag">Budget</span>
-                <span class="bw-tools-home-tag">Maps</span>
-              </div>
-            </aside>
           </header>
 
           <div class="bw-tools-root" aria-live="polite">
@@ -553,7 +551,7 @@ class BWToolsHomeElement extends HTMLElement {
   _renderSkeleton() {
     return `
       <div class="bw-tools-grid" aria-label="Loading tools">
-        ${Array.from({ length: 8 }).map(() => `
+        ${Array.from({ length: 4 }).map(() => `
           <div class="bw-skeleton-card" aria-hidden="true">
             <span class="bw-skeleton-thumb"></span>
             <span class="bw-skeleton-copy">
@@ -568,13 +566,14 @@ class BWToolsHomeElement extends HTMLElement {
   }
 
   _renderTools(data) {
-    const tools = data && Array.isArray(data.featuredTools)
+    const availableTools = data && Array.isArray(data.featuredTools)
       ? data.featuredTools.filter((tool) => {
         const status = String((tool && tool.status) || '').toLowerCase();
         return Boolean(tool && tool.hidden !== true && tool.published !== false && status !== 'draft');
-      }).slice(0, 8)
+      })
       : [];
-    this._renderSpotlight(data && data.spotlightTool);
+    const bySlug = new Map(availableTools.map((tool) => [tool.slug, tool]));
+    const tools = BW_TOOLS_HOME_FEATURED_SLUGS.map((slug) => bySlug.get(slug)).filter(Boolean);
 
     const root = this.querySelector('.bw-tools-root');
     if (!root || !tools.length) {
@@ -627,7 +626,7 @@ class BWToolsHomeElement extends HTMLElement {
 
     return `
       <a class="bw-tool-card" href="${href}" target="_top">
-        <img class="bw-tool-card-thumb" src="${image}" alt="" loading="lazy" decoding="async">
+        <img class="bw-tool-card-thumb" src="${image}" alt="${title} tool icon" loading="lazy" decoding="async">
         <span class="bw-tool-card-content">
           <h3>${title}</h3>
           <p>${lead}</p>

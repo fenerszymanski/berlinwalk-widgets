@@ -1,12 +1,6 @@
 {
   "featuredTools": [
     {
-      "slug": "berlin-first-day-planner",
-      "title": "Berlin First-Day Planner",
-      "lead": "Arriving in Berlin today? Build a realistic first-day plan with weather, transport, what is open, and the free BerlinWalk tour.",
-      "image": "https://static.wixstatic.com/media/5a08a3_592aa7ec14f543708051cd10faf55a0a~mv2.png"
-    },
-    {
       "slug": "transport-ticket-calculator",
       "title": "Berlin Transport Ticket Calculator",
       "lead": "Find the cheapest BVG ticket for your Berlin trip in under 30 seconds.",
@@ -19,34 +13,16 @@
       "image": "https://static.wixstatic.com/media/5a08a3_3d550b710c754ec185c975dbcb1465f3~mv2.png"
     },
     {
-      "slug": "berlin-public-holiday-checker",
-      "title": "Berlin Public Holiday Checker",
-      "lead": "Check whether your Berlin travel dates hit a 2026 public holiday, and see what closes, what stays open, and how to plan around it.",
-      "image": "https://static.wixstatic.com/media/5a08a3_55c996d3aa9a40f8b41e7a609541cd81~mv2.png"
-    },
-    {
-      "slug": "berlin-lakes",
-      "title": "Berlin Lakes Map",
-      "lead": "Find Berlin's best swimming lakes, water quality, and what locals actually use.",
-      "image": "https://static.wixstatic.com/media/5a08a3_21ff6966771644e9936357fbb54c6eee~mv2.png"
-    },
-    {
-      "slug": "berlin-drinking-water",
-      "title": "Berlin Drinking Water Map",
-      "lead": "Find the nearest free public drinking fountain in Berlin in 30 seconds.",
-      "image": "https://static.wixstatic.com/media/5a08a3_f627a0b40ecd4a77be8e99f6a47eb21a~mv2.png"
-    },
-    {
       "slug": "berlin-luggage-storage",
       "title": "Berlin Luggage Storage Map",
       "lead": "Find the nearest place to drop your suitcase in Berlin: stations, the Hauptbahnhof Gepäckcenter, the airport, and app pickup zones.",
       "image": "https://static.wixstatic.com/media/5a08a3_c1a1f9eb1e294df6a87f2a6cd1961062~mv2.png"
     },
     {
-      "slug": "berlin-daily-budget",
-      "title": "Berlin Daily Budget Calculator",
-      "lead": "How much does a day in Berlin actually cost in 2026? Find your number in 30 seconds.",
-      "image": "https://static.wixstatic.com/media/5a08a3_cc2084d71ac1465a94131d2d7ce385a1~mv2.png"
+      "slug": "berlin-first-day-planner",
+      "title": "Berlin First-Day Planner",
+      "lead": "Arriving in Berlin today? Build a realistic first-day plan with weather, transport, what is open, and the free BerlinWalk tour.",
+      "image": "https://static.wixstatic.com/media/5a08a3_592aa7ec14f543708051cd10faf55a0a~mv2.png"
     }
   ],
   "spotlightTool": {
