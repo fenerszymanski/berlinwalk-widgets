@@ -1,0 +1,113 @@
+{
+  "checkedAt": "2026-07-06T20:11:47.053Z",
+  "source": "blog-drafts/berlin-deutschlandticket-tourists.body.md",
+  "ok": true,
+  "cases": [
+    {
+      "viewport": "desktop",
+      "captionCount": 5,
+      "captions": [
+        {
+          "text": "The Deutschlandticket can be useful when Berlin is part of a wider local-and-regional rail trip, not just a two-day city break.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 918,
+          "overflow": false
+        },
+        {
+          "text": "Normal Berlin tickets are still easier for many short trips: buy the right zone, validate if needed, and avoid subscription admin.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 918,
+          "overflow": false
+        },
+        {
+          "text": "A Deutschlandticket removes the stamping problem, but only if you already have the active ticket ready before travel.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 918,
+          "overflow": false
+        },
+        {
+          "text": "BER Airport is where many visitors first notice the zone system; the Deutschlandticket removes that AB/ABC choice for normal local and regional airport routes.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 918,
+          "overflow": false
+        },
+        {
+          "text": "Potsdam is the kind of regional day trip where a Deutschlandticket can make sense, especially if it is part of a longer transport-heavy stay.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 918,
+          "overflow": false
+        }
+      ],
+      "overflowCount": 0,
+      "ok": true
+    },
+    {
+      "viewport": "mobile",
+      "captionCount": 5,
+      "captions": [
+        {
+          "text": "The Deutschlandticket can be useful when Berlin is part of a wider local-and-regional rail trip, not just a two-day city break.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 356,
+          "overflow": false
+        },
+        {
+          "text": "Normal Berlin tickets are still easier for many short trips: buy the right zone, validate if needed, and avoid subscription admin.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 356,
+          "overflow": false
+        },
+        {
+          "text": "A Deutschlandticket removes the stamping problem, but only if you already have the active ticket ready before travel.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 356,
+          "overflow": false
+        },
+        {
+          "text": "BER Airport is where many visitors first notice the zone system; the Deutschlandticket removes that AB/ABC choice for normal local and regional airport routes.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 356,
+          "overflow": false
+        },
+        {
+          "text": "Potsdam is the kind of regional day trip where a Deutschlandticket can make sense, especially if it is part of a longer transport-heavy stay.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "width": 356,
+          "overflow": false
+        }
+      ],
+      "overflowCount": 0,
+      "ok": true
+    }
+  ]
+}
