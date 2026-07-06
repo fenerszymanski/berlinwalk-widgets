@@ -10,9 +10,11 @@
   var OVERLAY_ID = 'bw-exit-intent-popup';
   var DWELL_TIME_MS = isPreviewForced() ? 500 : 30000;
   var NEXT_TOUR_SLOT_URL = resolveAdjacentScriptUrl('next-tour-slot.js');
-  var TOUR_START_LABEL = '11:30';
-  var SAME_DAY_CUTOFF_HOUR = 8;
-  var SAME_DAY_CUTOFF_MINUTE = 30;
+  var DEFAULT_START_LABELS = ['11:30'];
+  var SUMMER_START_LABELS = ['11:30', '15:30'];
+  var SAME_DAY_CUTOFF_LEAD_MINUTES = 180;
+  var DOUBLE_SLOT_START_MONTH_DAY = 703;
+  var DOUBLE_SLOT_END_MONTH_DAY = 930;
   var DAY_MS = 24 * 60 * 60 * 1000;
   var TOUR_DAYS = { Tue: true, Wed: true, Thu: true, Fri: true, Sat: true };
 
@@ -134,11 +136,42 @@
     });
     return {
       dateKey: map.year + '-' + map.month + '-' + map.day,
+      month: Number(map.month),
+      day: Number(map.day),
       weekdayShort: map.weekday,
       weekdayLabel: new Intl.DateTimeFormat('en-US', { timeZone: 'Europe/Berlin', weekday: 'long' }).format(date),
       hour: Number(map.hour),
       minute: Number(map.minute),
     };
+  }
+
+  function isDoubleSlotDay(parts) {
+    var key = (parts.month * 100) + parts.day;
+    return key >= DOUBLE_SLOT_START_MONTH_DAY && key <= DOUBLE_SLOT_END_MONTH_DAY;
+  }
+
+  function startLabelsForDay(parts) {
+    return isDoubleSlotDay(parts) ? SUMMER_START_LABELS.slice() : DEFAULT_START_LABELS.slice();
+  }
+
+  function minutesForLabel(label) {
+    var parts = String(label || '').split(':');
+    return (Number(parts[0]) * 60) + Number(parts[1]);
+  }
+
+  function bookableStartLabels(targetParts, todayParts) {
+    var labels = startLabelsForDay(targetParts);
+    if (!todayParts || targetParts.dateKey !== todayParts.dateKey) return labels;
+    var nowMinutes = (todayParts.hour * 60) + todayParts.minute;
+    return labels.filter(function (label) {
+      return nowMinutes < (minutesForLabel(label) - SAME_DAY_CUTOFF_LEAD_MINUTES);
+    });
+  }
+
+  function slotsLabelFor(labels) {
+    if (!labels.length) return '';
+    if (labels.length === 1) return labels[0];
+    return labels[0] + ' and ' + labels[1];
   }
 
   function nextTourLine() {
@@ -153,24 +186,30 @@
       var today = berlinParts(now);
       var tomorrow = berlinParts(new Date(now.getTime() + DAY_MS));
       var target = null;
+      var labels = [];
 
-      if (TOUR_DAYS[today.weekdayShort] && (today.hour < SAME_DAY_CUTOFF_HOUR || (today.hour === SAME_DAY_CUTOFF_HOUR && today.minute < SAME_DAY_CUTOFF_MINUTE))) {
+      if (TOUR_DAYS[today.weekdayShort]) {
+        labels = bookableStartLabels(today, today);
+      }
+      if (labels.length) {
         target = today;
       } else {
         for (var offset = 1; offset <= 8; offset += 1) {
           var candidate = berlinParts(new Date(now.getTime() + (offset * DAY_MS)));
           if (TOUR_DAYS[candidate.weekdayShort]) {
             target = candidate;
+            labels = bookableStartLabels(candidate, today);
             break;
           }
         }
       }
 
-      if (!target) return '';
+      var slotsLabel = slotsLabelFor(labels);
+      if (!target || !slotsLabel) return '';
       var relativeLabel = target.weekdayLabel;
       if (target.dateKey === today.dateKey) relativeLabel = 'Today (' + target.weekdayShort + ')';
       else if (target.dateKey === tomorrow.dateKey) relativeLabel = 'Tomorrow (' + target.weekdayShort + ')';
-      return 'Next walk: ' + relativeLabel + ' at ' + TOUR_START_LABEL + '. Free, tip-based.';
+      return 'Next walk' + (labels.length > 1 ? 's' : '') + ': ' + relativeLabel + ' at ' + slotsLabel + '. Free, tip-based.';
     } catch (err) {
       return '';
     }

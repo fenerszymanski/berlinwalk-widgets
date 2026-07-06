@@ -1943,14 +1943,10 @@
   }
 
   function toolBridgeTitle(slot) {
-    var nextToursLabel = getNextTourStartsLabel(2, false);
-    if (nextToursLabel) {
-      return 'Next tours: ' + nextToursLabel;
-    }
     if (slot && slot.relativeLabel && slot.slotsLabel) {
       return 'Next free walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel;
     }
-    return 'Next tours: Tue-Sat at 11:30';
+    return 'Next free walk: Tue-Sat at 11:30';
   }
 
   function insertToolBridge(data) {
