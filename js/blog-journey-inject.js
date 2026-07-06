@@ -82,6 +82,62 @@
     return slot ? [slot] : [];
   }
 
+  function trimRelativeLabel(label) {
+    return String(label || '').replace(/\s*\([^)]+\)/g, '').trim();
+  }
+
+  function fullStartLabel(start) {
+    if (!start) return '';
+    if (start.relativeLabel) {
+      var relative = trimRelativeLabel(start.relativeLabel);
+      if (relative) return relative;
+    }
+    if (start.weekdayLabel) return start.weekdayLabel;
+    return start.weekdayShort || '';
+  }
+
+  function compactStartLabel(start) {
+    if (!start) return '';
+    if (start.compactRelativeLabel) return start.compactRelativeLabel;
+    var relative = trimRelativeLabel(start.relativeLabel);
+    if (relative === 'Today' || relative === 'Tomorrow') return relative;
+    return start.weekdayShort || relative || '';
+  }
+
+  function startEntriesLabel(starts, compact) {
+    if (!starts || !starts.length) return '';
+    var labelFor = compact ? compactStartLabel : fullStartLabel;
+    if (starts.length === 1) {
+      return labelFor(starts[0]) + ' ' + starts[0].startLabel;
+    }
+    if (starts[0].dateKey === starts[1].dateKey) {
+      return labelFor(starts[0]) + ' ' + starts[0].startLabel + ' + ' + starts[1].startLabel;
+    }
+    return labelFor(starts[0]) + ' ' + starts[0].startLabel + ' + ' + labelFor(starts[1]) + ' ' + starts[1].startLabel;
+  }
+
+  function getNextTourStarts(count) {
+    try {
+      if (typeof window.bwNextTourStarts === 'function') return window.bwNextTourStarts({ count: count || 2 }) || [];
+    } catch (err) {}
+    var slot = getNextTourSlot();
+    if (!slot || !slot.startLabels || !slot.startLabels.length) return [];
+    return slot.startLabels.slice(0, count || 2).map(function (label, index) {
+      return {
+        dateKey: slot.dateKey,
+        weekdayShort: slot.weekdayShort,
+        weekdayLabel: slot.weekdayLabel,
+        relativeLabel: slot.relativeLabel,
+        compactRelativeLabel: index === 0 ? trimRelativeLabel(slot.relativeLabel) || slot.weekdayShort : '',
+        startLabel: label,
+      };
+    });
+  }
+
+  function getNextTourStartsLabel(count, compact) {
+    return startEntriesLabel(getNextTourStarts(count), compact !== false);
+  }
+
   function installDelayedConsentGuard() {
     if (window.__bwDelayedConsentGuard) return;
     window.__bwDelayedConsentGuard = true;
@@ -1629,10 +1685,11 @@
 
   function bookingJourneyCard(bookingUrl, title, context) {
     var slot = getNextTourSlot();
+    var nextToursLabel = getNextTourStartsLabel(2, false);
     var variant = activeBookingVariant();
     var bookingTitle = title || 'Walk this context with me in Berlin';
-    if (slot && slot.relativeLabel && slot.slotsLabel) {
-      bookingTitle = 'Next free walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel;
+    if (nextToursLabel) {
+      bookingTitle = 'Next tours: ' + nextToursLabel;
     }
     return {
       label: 'Free walk',
@@ -1886,10 +1943,14 @@
   }
 
   function toolBridgeTitle(slot) {
+    var nextToursLabel = getNextTourStartsLabel(2, false);
+    if (nextToursLabel) {
+      return 'Next tours: ' + nextToursLabel;
+    }
     if (slot && slot.relativeLabel && slot.slotsLabel) {
       return 'Next free walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel;
     }
-    return 'Next free walk: Tue-Sat at 11:30';
+    return 'Next tours: Tue-Sat at 11:30';
   }
 
   function insertToolBridge(data) {

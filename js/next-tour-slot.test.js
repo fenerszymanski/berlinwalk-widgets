@@ -1,5 +1,5 @@
 const assert = require('node:assert/strict');
-const { bwNextTourSlot, bwNextTourSlots } = require('./next-tour-slot.js');
+const { bwNextTourSlot, bwNextTourSlots, bwNextTourStarts, bwNextTourStartsLabel } = require('./next-tour-slot.js');
 
 function slot(iso) {
   return bwNextTourSlot({ now: new Date(iso) });
@@ -36,6 +36,22 @@ assert.deepEqual(upcoming[1].startLabels, ['11:30', '15:30']);
 const sameDayUpcoming = bwNextTourSlots({ now: new Date('2026-07-07T05:00:00Z'), count: 2 });
 assert.equal(sameDayUpcoming[0].relativeLabel, 'Today (Tue)');
 assert.equal(sameDayUpcoming[1].relativeLabel, 'Tomorrow (Wed)');
+
+const nextStarts = bwNextTourStarts({ now: new Date('2026-07-05T10:00:00Z'), count: 2 });
+assert.equal(nextStarts.length, 2);
+assert.equal(nextStarts[0].compactRelativeLabel, 'Tue');
+assert.equal(nextStarts[0].startLabel, '11:30');
+assert.equal(nextStarts[1].compactRelativeLabel, 'Tue');
+assert.equal(nextStarts[1].startLabel, '15:30');
+assert.equal(bwNextTourStartsLabel({ now: new Date('2026-07-05T10:00:00Z'), count: 2 }), 'Tue 11:30 + 15:30');
+
+const crossDayStarts = bwNextTourStarts({ now: new Date('2026-07-07T08:31:00Z'), count: 2 });
+assert.equal(crossDayStarts.length, 2);
+assert.equal(crossDayStarts[0].compactRelativeLabel, 'Today');
+assert.equal(crossDayStarts[0].startLabel, '15:30');
+assert.equal(crossDayStarts[1].compactRelativeLabel, 'Tomorrow');
+assert.equal(crossDayStarts[1].startLabel, '11:30');
+assert.equal(bwNextTourStartsLabel({ now: new Date('2026-07-07T08:31:00Z'), count: 2 }), 'Today 15:30 + Tomorrow 11:30');
 
 const afterFirstCutoff = bwNextTourSlot({ now: new Date('2026-07-07T08:31:00Z') });
 assert.equal(afterFirstCutoff.relativeLabel, 'Today (Tue)');

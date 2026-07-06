@@ -2,6 +2,8 @@
   var api = factory();
   root.bwNextTourSlot = api.bwNextTourSlot;
   root.bwNextTourSlots = api.bwNextTourSlots;
+  root.bwNextTourStarts = api.bwNextTourStarts;
+  root.bwNextTourStartsLabel = api.bwNextTourStartsLabel;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   var TIME_ZONE = 'Europe/Berlin';
@@ -124,6 +126,12 @@
     return target.weekdayLabel;
   }
 
+  function compactRelativeLabelFor(target, today, tomorrow) {
+    if (target.dateKey === today.dateKey) return 'Today';
+    if (target.dateKey === tomorrow.dateKey) return 'Tomorrow';
+    return target.weekdayShort;
+  }
+
   function normalizeCount(input, fallback) {
     var value = input && typeof input.count === 'number' ? input.count : fallback;
     if (!Number.isFinite(value) || value < 1) return 1;
@@ -145,6 +153,41 @@
 
     if (!targets.length) targets.push(today);
     return targets;
+  }
+
+  function findStartEntries(now, count) {
+    var today = slotInfo(now);
+    var tomorrow = slotInfo(new Date(now.getTime() + DAY_MS));
+    var entries = [];
+
+    for (var offset = 0; offset <= 14 && entries.length < count; offset += 1) {
+      var candidate = slotInfo(new Date(now.getTime() + (offset * DAY_MS)));
+      if (!isTourDay(candidate.weekdayShort)) continue;
+      bookableStartLabels(candidate, today).forEach(function (label) {
+        if (entries.length >= count) return;
+        entries.push({
+          dateKey: candidate.dateKey,
+          weekdayShort: candidate.weekdayShort,
+          weekdayLabel: candidate.weekdayLabel,
+          relativeLabel: relativeLabelFor(candidate, today, tomorrow),
+          compactRelativeLabel: compactRelativeLabelFor(candidate, today, tomorrow),
+          startLabel: label,
+        });
+      });
+    }
+
+    return entries;
+  }
+
+  function startEntriesLabelFor(entries) {
+    if (!entries.length) return '';
+    if (entries.length === 1) {
+      return entries[0].compactRelativeLabel + ' ' + entries[0].startLabel;
+    }
+    if (entries[0].dateKey === entries[1].dateKey) {
+      return entries[0].compactRelativeLabel + ' ' + entries[0].startLabel + ' + ' + entries[1].startLabel;
+    }
+    return entries[0].compactRelativeLabel + ' ' + entries[0].startLabel + ' + ' + entries[1].compactRelativeLabel + ' ' + entries[1].startLabel;
   }
 
   function bwNextTourSlots(input, fallbackCount) {
@@ -182,8 +225,20 @@
     };
   }
 
+  function bwNextTourStarts(input, fallbackCount) {
+    var now = normalizeNow(input);
+    var count = normalizeCount(input, fallbackCount || 2);
+    return findStartEntries(now, count);
+  }
+
+  function bwNextTourStartsLabel(input, fallbackCount) {
+    return startEntriesLabelFor(bwNextTourStarts(input, fallbackCount || 2));
+  }
+
   return {
     bwNextTourSlot: bwNextTourSlot,
     bwNextTourSlots: bwNextTourSlots,
+    bwNextTourStarts: bwNextTourStarts,
+    bwNextTourStartsLabel: bwNextTourStartsLabel,
   };
 });
