@@ -9063,6 +9063,92 @@
       width: 14px;
     }
 
+    #bw-trip-planner .bw-rescue-facts {
+      background: #F8FBF2;
+      border: 1px solid #DCE8C8;
+      border-left: 5px solid var(--bw-green);
+      border-radius: 8px;
+      display: grid;
+      gap: 12px;
+      margin: 0 0 14px;
+      padding: 14px;
+    }
+
+    #bw-trip-planner .bw-rescue-facts-head,
+    #bw-trip-planner .bw-rescue-facts-head strong,
+    #bw-trip-planner .bw-rescue-facts-head span,
+    #bw-trip-planner .bw-rescue-facts-head em {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-rescue-facts-head em {
+      color: var(--bw-muted);
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 900;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-rescue-facts-head strong {
+      color: var(--bw-green);
+      font-size: 16px;
+      line-height: 1.2;
+      margin-top: 3px;
+    }
+
+    #bw-trip-planner .bw-rescue-facts-head span {
+      color: var(--bw-muted);
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 4px;
+    }
+
+    #bw-trip-planner .bw-rescue-facts-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-trip-planner .bw-rescue-fact {
+      background: var(--bw-white);
+      border: 1px solid #DCE8C8;
+      border-radius: 8px;
+      display: grid;
+      gap: 4px;
+      padding: 10px;
+    }
+
+    #bw-trip-planner .bw-rescue-fact b,
+    #bw-trip-planner .bw-rescue-fact strong,
+    #bw-trip-planner .bw-rescue-fact span {
+      display: block;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    #bw-trip-planner .bw-rescue-fact b {
+      color: var(--bw-muted);
+      font-size: 10px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+    }
+
+    #bw-trip-planner .bw-rescue-fact strong {
+      color: var(--bw-green);
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    #bw-trip-planner .bw-rescue-fact span {
+      color: var(--bw-muted);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
     #bw-trip-planner .bw-after-itinerary {
       background:
         linear-gradient(135deg, var(--bw-green), #0F3F18),
@@ -9970,6 +10056,10 @@
 
       #bw-trip-planner .bw-input-guide-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #bw-trip-planner .bw-rescue-facts-grid {
+        grid-template-columns: 1fr;
       }
 
       #bw-trip-planner .bw-result {
@@ -10907,6 +10997,7 @@
   var LEAD_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerLead';
   var AI_API_URL = 'https://www.berlinwalk.com/_functions/tripPlannerAi';
   var TRACK_EVENT_URL = 'https://berlinwalk-content-app.vercel.app/api/tp-event';
+  var RESCUE_FACTS_API_URL = 'https://app.berlinwalk.com/api/rescue-plan';
   var TRACK_STORAGE_KEY = 'bwTripPlannerTracking.v1';
   var TRACK_VISITOR_KEY = 'bwTripPlannerVisitorId.v1';
   var TRACK_SESSION_KEY = 'bwTripPlannerSessionId.v1';
@@ -11320,6 +11411,10 @@
   var dayJumpDay = 1;
   var boardLens = 'route';
   var weatherRequestId = 0;
+  var rescueFactsStatus = 'idle';
+  var rescueFactsData = null;
+  var rescueFactsKey = '';
+  var rescueFactsRequestId = 0;
   var aiEnhancement = null;
   var aiStatus = 'idle';
   var aiRequestId = 0;
@@ -13737,6 +13832,75 @@
       '<span class="bw-rescue-icon" aria-hidden="true">' + iconSvg('shield') + '</span>' +
       '<span class="bw-rescue-copy"><em>First hour</em><strong>Want the exact Day 1 decisions?</strong><span>The free plan gives you the shape. If the first hour is the stressful bit, I can make it exact with live route timing, luggage logic, weather, and the first decisions after you land.</span></span>' +
       '<a class="bw-rescue-cta" href="' + escapeHtml(RESCUE_PLAN_URL) + '" target="_top" data-rescue-cta data-rescue-surface="day1_card">' + iconSvg('zap') + '<span>Get the €9 Rescue Plan</span></a>' +
+    '</aside>';
+  }
+
+  function rescueFactsCacheKey() {
+    return [
+      state.arrivalDate,
+      state.arrivalTime,
+      state.arrivalPoint,
+      state.stayArea,
+      state.groupType
+    ].join('|');
+  }
+
+  function rescueFactsPayload() {
+    return {
+      action: 'plannerDay1Facts',
+      arrivalDate: state.arrivalDate,
+      arrivalTime: state.arrivalTime,
+      arrivalPoint: state.arrivalPoint,
+      stayArea: state.stayArea,
+      groupType: state.groupType
+    };
+  }
+
+  function requestRescueFactsForPlan(plan) {
+    if (!unlocked || !planGenerated || !plan || !plan.days || !plan.days.length) return;
+    if (typeof window.fetch !== 'function') return;
+    var key = rescueFactsCacheKey();
+    if (rescueFactsKey === key && (rescueFactsStatus === 'loading' || rescueFactsStatus === 'ready' || rescueFactsStatus === 'error')) return;
+    rescueFactsKey = key;
+    rescueFactsData = null;
+    rescueFactsStatus = 'loading';
+    var requestId = ++rescueFactsRequestId;
+    window.fetch(RESCUE_FACTS_API_URL, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(rescueFactsPayload())
+    }).then(function (response) {
+      if (!response || !response.ok) throw new Error('rescue_facts_failed');
+      return response.json();
+    }).then(function (data) {
+      if (requestId !== rescueFactsRequestId) return;
+      rescueFactsData = data && data.ok ? data : null;
+      rescueFactsStatus = rescueFactsData ? 'ready' : 'error';
+      renderFullPlan();
+    }).catch(function () {
+      if (requestId !== rescueFactsRequestId) return;
+      rescueFactsData = null;
+      rescueFactsStatus = 'error';
+      renderFullPlan();
+    });
+  }
+
+  function rescueFactsCardHtml(day) {
+    if (!day || day.dayNumber !== 1 || !unlocked || !planGenerated) return '';
+    if (rescueFactsStatus === 'error') return '';
+    var loading = rescueFactsStatus === 'loading' || !rescueFactsData;
+    var items = loading ? [
+      { label: 'Route', value: 'Checking', detail: 'Live first-hour route check is loading.' },
+      { label: 'Ticket', value: state.arrivalPoint === 'ber' ? 'ABC likely' : 'AB likely', detail: 'Ticket zone check is loading.' },
+      { label: 'Weather', value: 'Checking', detail: 'Live weather check is loading.' }
+    ] : (Array.isArray(rescueFactsData.items) ? rescueFactsData.items : []).slice(0, 3);
+    if (!items.length) return '';
+    return '<aside class="bw-rescue-facts" aria-label="Live first-hour facts" data-rescue-facts>' +
+      '<div class="bw-rescue-facts-head"><em>Live Day 1 check</em><strong>' + escapeHtml(loading ? 'Checking the first-hour facts' : (rescueFactsData.title || 'Live first-hour check')) + '</strong><span>' + escapeHtml(loading ? 'I am checking route, ticket, and weather basics for the first move.' : (rescueFactsData.summary || 'The free planner confirms the shape; the paid Rescue Plan still handles exact decisions.')) + '</span></div>' +
+      '<div class="bw-rescue-facts-grid">' + items.map(function (item) {
+        return '<article class="bw-rescue-fact"><b>' + escapeHtml(item.label || 'Check') + '</b><strong>' + escapeHtml(item.value || 'Ready') + '</strong><span>' + escapeHtml(item.detail || '') + '</span></article>';
+      }).join('') + '</div>' +
     '</aside>';
   }
 
@@ -18673,6 +18837,7 @@
     }
     if (routeBrief) routeBrief.innerHTML = '';
     renderDayJumpBar(plan);
+    requestRescueFactsForPlan(plan);
     daysEl.innerHTML = plan.days.map(function (day) {
       var activeDay = day.dayNumber === dayJumpDay;
       var blocks = dayActionBlockItems(day).map(function (item) {
@@ -18690,6 +18855,7 @@
       }).join('');
       var routeCard = dayRouteCardHtml(day);
       var rescueCard = firstDayRescueCardHtml(day);
+      var rescueFactsCard = rescueFactsCardHtml(day);
       var weatherChip = dayWeatherChipHtml(day);
       var openingNotes = dayOpeningStatusHtml(day);
       return '<article class="bw-day' + (activeDay ? ' is-focused' : '') + '" data-day-card="' + day.dayNumber + '" style="--day-accent:' + escapeHtml(day.accent || '#7CB342') + ';--day-bg:' + escapeHtml(day.bg || '#F2F8E8') + '">' +
@@ -18700,6 +18866,7 @@
         '<div class="bw-day-body">' +
           weatherChip +
           openingNotes +
+          rescueFactsCard +
           blocks +
           routeCard +
           rescueCard +

@@ -4,7 +4,7 @@ Internal review note for Yusuf. This is the current deterministic planner logic 
 `index.html`, written so we can review the itinerary brain in one pass instead of
 finding mistakes one by one in the UI.
 
-Last reviewed locally: 2026-07-05
+Last reviewed locally: 2026-07-06
 
 Update 2026-07-05: Wave 0 stabilization added a small sequential block-window
 scheduler in `index.html`. Rendered time windows keep their original durations,
@@ -55,6 +55,15 @@ exposed route to the clearer date, while checking that the swap does not create
 Monday/closed-anchor opening risk. Day cards and Smart Swaps show a visible
 `Rain swap` note. A localhost-only `mockRainDay` query parameter exists for QA
 and does not affect the public embed.
+
+Update 2026-07-06: Wave 3.1 now reuses the First-Day Rescue facts layer without
+adding a new Vercel function. The existing `/api/rescue-plan` alias accepts a
+read-only `plannerDay1Facts` action, calls the Rescue `buildFactSheet()` path
+without AI, checkout, lead writes, or CMS writes, and returns only a light Day 1
+route/ticket/weather summary. The widget calls it only for unlocked plans and
+renders one `Live Day 1 check` card on Day 1 before the paid Rescue bridge. The
+paid product distinction stays explicit: the free planner confirms the shape,
+while the €9 Rescue Plan handles exact first-hour decisions.
 
 Update 2026-07-06: Wave 3.3 print/PDF warning propagation now uses the same
 `openingNoticeItems()` source as the unlocked day cards. Monday, holiday,
