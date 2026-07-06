@@ -9,7 +9,7 @@ const BW_GAMES_HOME_ROOT = (() => {
 
 const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
 const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
-const BW_GAMES_HOME_ASSET_VERSION = 'games-home-rewind-20260705a';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-rewind-cover-fix-20260706';
 
 const BW_GAMES_HOME_ITEMS = [
   {
@@ -65,8 +65,12 @@ const BW_GAMES_HOME_ITEMS = [
 ];
 
 function bwGamesHomeAsset(path, version = BW_GAMES_HOME_ASSET_VERSION) {
-  const separator = path.includes('?') ? '&' : '?';
-  return `${BW_GAMES_HOME_ROOT}${path}${version ? `${separator}v=${version}` : ''}`;
+  // Resolve against the widget root so relative paths get the base, while an
+  // absolute cover URL (e.g. an archive photo) is left intact instead of being
+  // concatenated into a broken "root + https://..." double URL.
+  const url = new URL(path, BW_GAMES_HOME_ROOT);
+  if (version) url.searchParams.set('v', version);
+  return url.toString();
 }
 
 function bwGamesHomeUrl(game, content) {
