@@ -1,9 +1,3 @@
-/* IIFE-wrapped so this script can be executed twice on one page without a
-   duplicate top-level declaration crash: the site loader executes it early
-   (before Wix hydrates) and Wix injects its own late copy from the same URL.
-   Function scope keeps the top-level consts private; the guarded
-   customElements.define below stays idempotent so the second run is a no-op. */
-(() => {
 const BW_SITE_FOOTER_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 const BW_SITE_FOOTER_LOGO_URL = 'https://static.wixstatic.com/media/5a08a3_2f62d59b419643c0994771fac5765c79~mv2.png';
 const BW_SITE_FOOTER_LINKS = {
@@ -588,4 +582,3 @@ class BWSiteFooterElement extends HTMLElement {
 if (!customElements.get('bw-site-footer')) {
   customElements.define('bw-site-footer', BWSiteFooterElement);
 }
-})();

@@ -1,9 +1,3 @@
-/* IIFE-wrapped so this script can be executed twice on one page without a
-   duplicate top-level declaration crash: the homepage loader executes it early
-   (before Wix hydrates) and Wix injects its own late copy from the same URL.
-   Function scope keeps the top-level consts private; the guarded
-   customElements.define below stays idempotent so the second run is a no-op. */
-(() => {
 const BW_HERO_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 const BW_HERO_HOME_MEETING_URL = 'https://www.berlinwalk.com/meeting-point';
 
@@ -530,4 +524,3 @@ class BWHeroHomeElement extends HTMLElement {
 if (!customElements.get('bw-hero-home')) {
   customElements.define('bw-hero-home', BWHeroHomeElement);
 }
-})();
