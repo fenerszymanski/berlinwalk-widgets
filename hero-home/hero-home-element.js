@@ -351,7 +351,7 @@ class BWHeroHomeElement extends HTMLElement {
 
         @media (max-width: 640px) {
           .bw-hero-home {
-            min-height: 930px;
+            min-height: calc(100svh - 94px);
           }
 
           .bw-hero-home .bw-hero-picture img {
@@ -366,7 +366,7 @@ class BWHeroHomeElement extends HTMLElement {
 
           .bw-hero-home .bw-hero-inner {
             min-height: inherit;
-            padding: 44px 16px calc(250px + env(safe-area-inset-bottom));
+            padding: 44px 16px calc(40px + env(safe-area-inset-bottom));
           }
 
           .bw-hero-home .bw-hero-content {
