@@ -4810,5 +4810,39 @@
         "a": "Yes. Berliner Dom is close to Museum Island, Schlossplatz, Unter den Linden and Hackescher Markt. The BerlinWalk tour lasts about **2 hours**, so I would keep the cathedral ticket before or after the tour rather than squeezing it into the tour time."
       }
     ]
+  },
+  "berlin-umweltzone-sticker": {
+    "title": "Berlin Umweltzone Sticker - FAQ",
+    "subtitle": "Quick answers about Berlin's low-emission zone, green sticker and tourist driving choices.",
+    "items": [
+      {
+        "q": "Do tourists need a Berlin Umweltzone sticker?",
+        "a": "Yes, if they drive into Berlin's low-emission zone with a vehicle that needs the green emissions sticker. The rule also matters for foreign-registered vehicles, not only German cars."
+      },
+      {
+        "q": "Where is the Berlin Umweltzone?",
+        "a": "Berlin's Umweltzone covers the inner city inside the S-Bahn Ring. This is a driving zone, not the same thing as the AB or ABC public transport fare zones."
+      },
+      {
+        "q": "Does a rental car already have the green sticker?",
+        "a": "A German rental car often has it, but do not assume. Check the windscreen before leaving the rental lot, and ask the rental desk if the registration number on the sticker matches the car."
+      },
+      {
+        "q": "Can I buy the Berlin Umweltzone sticker after I arrive?",
+        "a": "Sometimes, but that is a bad first-day plan. Berlin.de lists official authorities, emissions test centers and authorized workshops as sticker sources. If you are bringing your own foreign car, sort it before the trip because delivery can take days."
+      },
+      {
+        "q": "Do electric cars need the Umweltzone sticker?",
+        "a": "Berlin.de says electric vehicles and plug-in hybrids with an E license plate are exempt. Foreign electric vehicles may need a blue E sticker if the exemption is not obvious from the plate, so check the official guidance before driving in."
+      },
+      {
+        "q": "What should I do if I do not have the sticker?",
+        "a": "Do not drive into the inner city and hope nobody notices. Use a Park and Ride option, a station-side car park, taxi or public transport, then solve the sticker before the next central drive."
+      },
+      {
+        "q": "Can I join the BerlinWalk tour by car?",
+        "a": "Yes, but I would not make the car part of the tour day unless the sticker and parking are already solved. The tour lasts about 2 hours and starts at Alexanderplatz, which is inside the Umweltzone."
+      }
+    ]
   }
 }

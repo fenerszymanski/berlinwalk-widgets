@@ -1243,5 +1243,19 @@
     "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berliner-dom-visit-planner-160.png",
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berliner-dom-visit-planner-160.png",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_d89723ed94894eeabbb7a1116f39ff54~mv2.png"
+  },
+  {
+    "slug": "berlin-umweltzone-sticker-checker",
+    "title": "Berlin Umweltzone Sticker Checker",
+    "category": "Transport",
+    "model": "Built-in Codex image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/codex-built-in-20260706/berlin-umweltzone-sticker-checker/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/codex-built-in-20260706/berlin-umweltzone-sticker-checker/codex-imagegen-icon.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-umweltzone-sticker-checker.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-umweltzone-sticker-checker-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-umweltzone-sticker-checker-160.png",
+    "source": "codex-built-in-imagegen-20260706",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_da4ca7dba1a14eed92d78460ad384121~mv2.png"
   }
 ]

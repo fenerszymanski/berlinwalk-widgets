@@ -1,0 +1,114 @@
+{
+  "checkedAt": "2026-07-06T04:13:52.884Z",
+  "imageCount": 5,
+  "results": [
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 960,
+        "height": 1400
+      },
+      "captions": [
+        {
+          "text": "The Umweltzone sign is easy to miss when you are focused on finding the hotel or car park.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        },
+        {
+          "text": "The driving Umweltzone roughly follows the inner S-Bahn Ring, which is different from public transport fare zones.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        },
+        {
+          "text": "The green sticker is tied to the registration number, so it is not a generic souvenir sticker you can swap between cars.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        },
+        {
+          "text": "If the sticker question is not solved, parking outside the inner city and switching to rail is often the calmer move.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        },
+        {
+          "text": "Mitte is easy on foot but not where I would solve paperwork, parking and luggage at the same time.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        }
+      ]
+    },
+    {
+      "viewport": {
+        "name": "mobile",
+        "width": 390,
+        "height": 1400
+      },
+      "captions": [
+        {
+          "text": "The Umweltzone sign is easy to miss when you are focused on finding the hotel or car park.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        },
+        {
+          "text": "The driving Umweltzone roughly follows the inner S-Bahn Ring, which is different from public transport fare zones.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        },
+        {
+          "text": "The green sticker is tied to the registration number, so it is not a generic souvenir sticker you can swap between cars.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        },
+        {
+          "text": "If the sticker question is not solved, parking outside the inner city and switching to rail is often the calmer move.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        },
+        {
+          "text": "Mitte is easy on foot but not where I would solve paperwork, parking and luggage at the same time.",
+          "fontSize": "12px",
+          "fontStyle": "italic",
+          "textAlign": "center",
+          "lineHeight": "17.4px",
+          "imageComplete": true,
+          "imageWidth": 1600
+        }
+      ]
+    }
+  ]
+}

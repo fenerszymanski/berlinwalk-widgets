@@ -1,0 +1,39 @@
+{
+  "checkedAt": "2026-07-06T04:07:41.809Z",
+  "checks": [
+    {
+      "viewport": {
+        "name": "desktop",
+        "width": 1366,
+        "height": 1180
+      },
+      "consoleErrors": [],
+      "title": "Berlin Umweltzone Sticker Checker",
+      "decision": "Drive in only after the windscreen check",
+      "htmlScrollWidth": 1366,
+      "viewportWidth": 1366,
+      "overflows": [],
+      "consoleTitle": "Berlin Umweltzone Sticker Checker | BerlinWalk",
+      "badgeStyle": "rgb(27, 94, 32)",
+      "heroHasImage": true,
+      "bodyHeight": 1226
+    },
+    {
+      "viewport": {
+        "name": "mobile",
+        "width": 390,
+        "height": 1200
+      },
+      "consoleErrors": [],
+      "title": "Berlin Umweltzone Sticker Checker",
+      "decision": "Drive in only after the windscreen check",
+      "htmlScrollWidth": 390,
+      "viewportWidth": 390,
+      "overflows": [],
+      "consoleTitle": "Berlin Umweltzone Sticker Checker | BerlinWalk",
+      "badgeStyle": "rgb(27, 94, 32)",
+      "heroHasImage": true,
+      "bodyHeight": 2819
+    }
+  ]
+}
