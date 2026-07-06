@@ -414,19 +414,19 @@ class BWTripPlannerHomeElement extends HTMLElement {
 
           <div class="bw-trip-planner-panel" aria-label="Planner highlights">
             <a class="bw-trip-planner-proof" href="${BW_TRIP_PLANNER_HOME_URL}" target="_top">
-              <span class="bw-trip-planner-proof-image" aria-hidden="true"><img src="${proofIcons.plan}" alt="" loading="lazy"></span>
+              <span class="bw-trip-planner-proof-image"><img src="${proofIcons.plan}" alt="Daily route rhythm icon" loading="lazy"></span>
               <span class="bw-trip-planner-proof-copy"><strong>1 to 7 days</strong><span>Daily route rhythm</span></span>
             </a>
             <a class="bw-trip-planner-proof" href="${BW_TRIP_PLANNER_HOME_URL}" target="_top">
-              <span class="bw-trip-planner-proof-image" aria-hidden="true"><img src="${proofIcons.weather}" alt="" loading="lazy"></span>
+              <span class="bw-trip-planner-proof-image"><img src="${proofIcons.weather}" alt="Weather-aware planning icon" loading="lazy"></span>
               <span class="bw-trip-planner-proof-copy"><strong>Weather aware</strong><span>Live or monthly fallback</span></span>
             </a>
             <a class="bw-trip-planner-proof" href="${BW_TRIP_PLANNER_HOME_URL}" target="_top">
-              <span class="bw-trip-planner-proof-image" aria-hidden="true"><img src="${proofIcons.map}" alt="" loading="lazy"></span>
+              <span class="bw-trip-planner-proof-image"><img src="${proofIcons.map}" alt="Map-ready route icon" loading="lazy"></span>
               <span class="bw-trip-planner-proof-copy"><strong>Map ready</strong><span>Routes and place links</span></span>
             </a>
             <a class="bw-trip-planner-proof" href="${BW_TRIP_PLANNER_HOME_URL}" target="_top">
-              <span class="bw-trip-planner-proof-image" aria-hidden="true"><img src="${proofIcons.guide}" alt="" loading="lazy"></span>
+              <span class="bw-trip-planner-proof-image"><img src="${proofIcons.guide}" alt="Local guide route-read icon" loading="lazy"></span>
               <span class="bw-trip-planner-proof-copy"><strong>Local guide</strong><span>Yusuf's route read</span></span>
             </a>
             <div class="bw-trip-planner-mini" aria-hidden="true">
