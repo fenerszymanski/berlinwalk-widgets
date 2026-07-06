@@ -1,4 +1,6 @@
-const BW_TOOLS_HOME_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260706-homepage-focus';
+const BW_TOOLS_HOME_DATA_URL = document.currentScript && document.currentScript.src
+  ? new URL('./data.json?v=20260706-homepage-focus', document.currentScript.src).href
+  : 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260706-homepage-focus';
 const BW_TOOLS_HOME_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 
 class BWToolsHomeElement extends HTMLElement {
