@@ -211,7 +211,6 @@ class BWBerlinQuizElement extends HTMLElement {
           box-sizing: border-box;
         }
 
-        .bw-quiz-section h1,
         .bw-quiz-section h2,
         .bw-quiz-section p,
         .bw-quiz-section button {

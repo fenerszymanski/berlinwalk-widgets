@@ -100,25 +100,24 @@
  * don't need a second badge). Runs in both standalone and iframe contexts.
  */
 (function () {
+  var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
+  var nextTourSlotRequested = false;
+
   try {
     var params = new URLSearchParams(window.location.search);
     if (params.get('attribution') === 'none') return;
   } catch (e) { /* old browser, proceed */ }
 
-  // Skip badge when embedded on our own site — "by berlinwalk.com" on
-  // berlinwalk.com is redundant and the 1.4MB PNG should not load at all on
-  // internal pages. Third-party embeds (different parent origin) still get
-  // the badge so external sites carry our branding + backlink.
-  try {
-    if (document.referrer) {
-      var refHost = new URL(document.referrer).hostname.toLowerCase();
-      if (refHost === 'www.berlinwalk.com'
-          || refHost === 'berlinwalk.com'
-          || refHost.endsWith('.berlinwalk.com')) {
-        return;
+  function resolveAdjacentScriptUrl(fileName) {
+    try {
+      if (document.currentScript && document.currentScript.src) {
+        return new URL(fileName, document.currentScript.src).toString();
       }
-    }
-  } catch (e) { /* if URL parse fails, fall through and show the badge */ }
+    } catch (e) {}
+    return 'https://fenerszymanski.github.io/berlinwalk-widgets/js/' + fileName;
+  }
+
+  var NEXT_TOUR_SLOT_URL = resolveAdjacentScriptUrl('next-tour-slot.js');
 
   function widgetSlug() {
     var path = (window.location.pathname || '').replace(/\/(index\.html?)?$/, '');
@@ -126,26 +125,116 @@
     return parts[parts.length - 1] || 'unknown';
   }
 
-  function inject() {
-    if (document.querySelector('.bw-attr-badge')) return; // idempotent
-    var slug = widgetSlug();
-    var url = 'https://www.berlinwalk.com/'
+  function isFirstPartyEmbed() {
+    try {
+      var params = new URLSearchParams(window.location.search);
+      if (params.get('host') === 'berlinwalk') return true;
+    } catch (e) {}
+    try {
+      if (!document.referrer) return false;
+      var refHost = new URL(document.referrer).hostname.toLowerCase();
+      return refHost === 'www.berlinwalk.com'
+        || refHost === 'berlinwalk.com'
+        || refHost.endsWith('.berlinwalk.com');
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function badgeUrl(slug) {
+    return 'https://www.berlinwalk.com/'
       + '?utm_source=embed&utm_medium=widget'
       + '&utm_campaign=' + encodeURIComponent(slug)
       + '&utm_content=footer-badge';
+  }
+
+  function bookingUrl(slug) {
+    var url = new URL(BOOKING_URL);
+    url.searchParams.set('utm_source', 'berlinwalk');
+    url.searchParams.set('utm_medium', 'widget_tour_cta');
+    url.searchParams.set('utm_campaign', 'widget_tour_cta');
+    url.searchParams.set('utm_content', slug + '_widget_nextslot');
+    return url.toString();
+  }
+
+  function badgeNode(slug, extraClass, target) {
     var a = document.createElement('a');
-    a.className = 'bw-attr-badge';
-    a.href = url;
-    a.target = '_blank';
+    a.className = 'bw-attr-badge' + (extraClass ? ' ' + extraClass : '');
+    a.href = badgeUrl(slug);
+    a.target = target || '_blank';
     a.rel = 'noopener';
     a.setAttribute('aria-label', 'Made by BerlinWalk — open berlinwalk.com');
-    // Defensive inline sizing on the logo: if a widget ever ships without
-    // brand.css linked, the unbounded 1.4MB PNG will not blow up the layout.
     a.innerHTML =
       '<img class="bw-attr-logo" alt="" style="width:18px;height:18px;border-radius:50%;object-fit:cover;display:block;flex:0 0 18px" src="https://static.wixstatic.com/media/5a08a3_4d96e164d26241fd9eb009843ec2084a~mv2.png" loading="lazy" decoding="async">' +
       '<span class="bw-attr-text">by <strong>berlinwalk.com</strong></span>' +
       '<span class="bw-attr-arrow" aria-hidden="true">&rarr;</span>';
-    document.body.appendChild(a);
+    return a;
+  }
+
+  function injectBadgeOnly() {
+    if (document.querySelector('.bw-attr-badge')) return;
+    var slug = widgetSlug();
+    document.body.appendChild(badgeNode(slug));
+  }
+
+  function readNextTourSlot() {
+    try {
+      if (typeof window.bwNextTourSlot === 'function') return window.bwNextTourSlot();
+    } catch (e) {}
+    return null;
+  }
+
+  function ensureNextTourSlotHelper(done, fail) {
+    if (typeof window.bwNextTourSlot === 'function') {
+      if (done) done();
+      return;
+    }
+    if (nextTourSlotRequested) return;
+    nextTourSlotRequested = true;
+    var script = document.createElement('script');
+    script.src = NEXT_TOUR_SLOT_URL;
+    script.async = true;
+    script.onload = function () {
+      if (done) done();
+    };
+    script.onerror = function () {
+      if (fail) fail();
+    };
+    document.head.appendChild(script);
+  }
+
+  function tourCtaText(slot) {
+    if (slot && slot.relativeLabel && slot.slotsLabel) {
+      return 'Next free Berlin walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' ' + slot.slotsLabel;
+    }
+    return '';
+  }
+
+  function injectFirstPartyTourCta() {
+    if (document.querySelector('.bw-tour-cta-row')) return;
+    var slug = widgetSlug();
+    var slot = readNextTourSlot();
+    var text = tourCtaText(slot);
+    if (!text) {
+      injectBadgeOnly();
+      return;
+    }
+    var row = document.createElement('div');
+    row.className = 'bw-tour-cta-row';
+    row.innerHTML =
+      '<a class="bw-tour-cta-link" href="' + bookingUrl(slug) + '" target="_top" rel="noopener">\
+        <span class="bw-tour-cta-text">' + text + '</span>\
+      </a>';
+    row.appendChild(badgeNode(slug, 'bw-attr-badge-inline', '_top'));
+    document.body.appendChild(row);
+  }
+
+  function inject() {
+    if (!isFirstPartyEmbed()) {
+      injectBadgeOnly();
+      return;
+    }
+    ensureNextTourSlotHelper(injectFirstPartyTourCta, injectBadgeOnly);
   }
 
   if (document.readyState === 'loading') {

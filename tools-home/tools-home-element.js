@@ -1,9 +1,11 @@
-const BW_TOOLS_HOME_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260629-museums-spotlight';
+const BW_TOOLS_HOME_DATA_URL = document.currentScript && document.currentScript.src
+  ? new URL('./data.json?v=20260706-homepage-focus', document.currentScript.src).href
+  : 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/data.json?v=20260706-homepage-focus';
 const BW_TOOLS_HOME_DEFAULT_IMAGE = 'https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/generic-tool.svg';
 const BW_TOOLS_HOME_FEATURED_SLUGS = [
   'transport-ticket-calculator',
-  'berlin-luggage-storage',
   'whats-open-in-berlin-today',
+  'berlin-luggage-storage',
   'berlin-first-day-planner',
 ];
 
@@ -65,7 +67,7 @@ class BWToolsHomeElement extends HTMLElement {
           align-items: end;
           display: grid;
           gap: 26px;
-          grid-template-columns: minmax(0, 1fr);
+          grid-template-columns: minmax(0, 1fr) minmax(240px, 0.36fr);
           margin: 0 0 30px;
         }
 
@@ -516,12 +518,21 @@ class BWToolsHomeElement extends HTMLElement {
       <section class="bw-tools-home" aria-labelledby="bw-tools-home-title">
         <div class="bw-tools-home-inner">
           <header class="bw-tools-home-header">
-            <div>
-              <span class="bw-tools-home-kicker">Plan your visit</span>
-              <h2 id="bw-tools-home-title" class="bw-tools-home-title">Plan your Berlin visit in minutes</h2>
-              <p class="bw-tools-home-lead">Quick local tools for tickets, budget, weather, water, and first-day choices before you arrive.</p>
-            </div>
-          </header>
+              <div>
+                <span class="bw-tools-home-kicker">Plan your visit</span>
+                <h2 id="bw-tools-home-title" class="bw-tools-home-title">Plan your Berlin visit in minutes</h2>
+                <p class="bw-tools-home-lead">The four planning tools I would use first: tickets, opening hours, luggage, and a realistic first-day route.</p>
+              </div>
+             <aside class="bw-tools-home-panel" aria-label="Planning tools summary" data-bw-home-spotlight>
+               <h3>Start here</h3>
+               <p>Use these first, then open the full BerlinTools hub only if you need a more specific answer.</p>
+               <div class="bw-tools-home-tags" aria-hidden="true">
+                 <span class="bw-tools-home-tag">Tickets</span>
+                 <span class="bw-tools-home-tag">Open now</span>
+                 <span class="bw-tools-home-tag">Luggage</span>
+               </div>
+             </aside>
+            </header>
 
           <div class="bw-tools-root" aria-live="polite">
             ${this._renderSkeleton()}
@@ -605,7 +616,7 @@ class BWToolsHomeElement extends HTMLElement {
     panel.setAttribute('aria-label', 'Featured Berlin planning tool');
     panel.innerHTML = [
       '<a class="bw-tools-home-spotlight" href="' + href + '" target="_top">',
-      '  <img class="bw-tools-home-spotlight-thumb" src="' + this._escapeAttribute(image) + '" alt="" loading="lazy" decoding="async">',
+      '  <img class="bw-tools-home-spotlight-thumb" src="' + this._escapeAttribute(image) + '" alt="' + title + '" loading="lazy" decoding="async">',
       '  <span>',
       '    <span class="bw-tools-home-spotlight-kicker">' + label + '</span>',
       '    <span class="bw-tools-home-spotlight-title">' + title + '</span>',
@@ -626,7 +637,7 @@ class BWToolsHomeElement extends HTMLElement {
 
     return `
       <a class="bw-tool-card" href="${href}" target="_top">
-        <img class="bw-tool-card-thumb" src="${image}" alt="${title} tool icon" loading="lazy" decoding="async">
+        <img class="bw-tool-card-thumb" src="${this._escapeAttribute(image)}" alt="${title}" loading="lazy" decoding="async">
         <span class="bw-tool-card-content">
           <h3>${title}</h3>
           <p>${lead}</p>

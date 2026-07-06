@@ -1,4 +1,4 @@
-const BW_FAQ_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json';
+const BW_FAQ_REMOTE_DATA_URL = 'https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json';
 const BW_FAQ_LOCAL_DATA_URL = document.currentScript && document.currentScript.src
   ? new URL('./data.json', document.currentScript.src).href
   : './data.json';
@@ -53,8 +53,9 @@ class BWFAQElement extends HTMLElement {
   }
 
   async _loadData() {
-    const urls = [BW_FAQ_DATA_URL];
-    if (BW_FAQ_LOCAL_DATA_URL !== BW_FAQ_DATA_URL) urls.push(BW_FAQ_LOCAL_DATA_URL);
+    const urls = BW_FAQ_LOCAL_DATA_URL !== BW_FAQ_REMOTE_DATA_URL
+      ? [BW_FAQ_LOCAL_DATA_URL, BW_FAQ_REMOTE_DATA_URL]
+      : [BW_FAQ_REMOTE_DATA_URL];
 
     let lastError = null;
     for (const url of urls) {

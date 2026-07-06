@@ -398,7 +398,7 @@ class BWTripPlannerHomeElement extends HTMLElement {
 
       <section class="bw-trip-planner-home" aria-labelledby="bw-trip-planner-home-title">
         <div class="bw-trip-planner-bg" aria-hidden="true">
-          <img src="${heroImage}" alt="" loading="lazy">
+          <img src="${heroImage}" alt="Berlin trip planner preview with route cards and map details" loading="lazy">
         </div>
 
         <div class="bw-trip-planner-inner">

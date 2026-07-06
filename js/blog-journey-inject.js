@@ -55,7 +55,7 @@
   }
 
   function ensureNextTourSlotHelper() {
-    if (!isPostPage()) return;
+    if (!isPostPage() && !isToolPage()) return;
     if (typeof window.bwNextTourSlot === 'function') return;
     if (nextTourSlotRequested) return;
     nextTourSlotRequested = true;
@@ -859,6 +859,12 @@
     return location.pathname.indexOf('/post/') === 0;
   }
 
+  function isToolPage() {
+    var path = String(location.pathname || '').toLowerCase();
+    if (path === '/tools' || path === '/tools/') return false;
+    return path.indexOf('/tools/') === 0;
+  }
+
   function currentSlug() {
     return location.pathname.split('/').filter(Boolean).pop() || '';
   }
@@ -1010,6 +1016,10 @@
       '.bw-blog-journey-card strong{color:#212121;display:block;font-size:16px;font-weight:900;line-height:1.16;overflow-wrap:break-word;}',
       '.bw-blog-journey-proof{align-self:flex-start;background:#F3F8EF;border:1px solid #C5E1A5;border-radius:999px;color:#1B5E20;display:inline-flex;font-size:11px;font-weight:900;letter-spacing:.2px;line-height:1.2;margin-top:10px;padding:6px 9px;}',
       '.bw-blog-journey-card-copy{color:#4E5A4E;display:block;font-family:Merriweather,Georgia,serif;font-size:14px;line-height:1.46;margin-top:10px;}',
+      '.bw-tool-bridge{margin:34px 0 26px;padding:28px 28px 24px;}',
+      '.bw-tool-bridge-main{align-items:center;display:grid;gap:18px;grid-template-columns:minmax(0,1fr) auto;}',
+      '.bw-tool-bridge-book{min-height:48px;padding:0 18px;}',
+      '.bw-tool-bridge-secondary{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);margin-top:18px;}',
       '[data-bw-tourcta]{display:none!important;}',
       '.bw-blog-back-top{align-items:center;background:#212121;border:2px solid #FFE600;border-radius:999px;bottom:24px;box-shadow:0 12px 28px rgba(0,0,0,.22);color:#FFFFFF;cursor:pointer;display:flex;font-size:22px;font-weight:900;height:44px;justify-content:center;opacity:0;pointer-events:none;position:fixed;right:22px;text-decoration:none;transform:translateY(10px);transition:opacity .18s ease,transform .18s ease,background .18s ease;visibility:hidden;width:44px;z-index:8500;}',
       '.bw-blog-back-top:hover{background:#1B5E20;}',
@@ -1018,7 +1028,7 @@
       '@media (max-width:899px){html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) [data-hook="post"],html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) article{opacity:0!important;pointer-events:none!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:not(:has(> .bw-blog-mobile-nav)) > [data-hook="post"]{margin-top:270px!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:has(> .bw-blog-mobile-nav) > [data-hook="post"]{margin-top:0!important;}}',
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
       '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + WIDGET_BLOCK_MARKER + '="1"]{margin-bottom:28px!important;}}',
-      '@media (max-width:899px){body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{font-size:clamp(32px,8.4vw,35px)!important;line-height:1.06!important;margin-top:18px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-bottom:2px solid #212121;display:block;margin:0 0 28px;padding:24px 0 20px;position:relative;}.bw-blog-mobile-nav:before{background:#1B5E20;content:"";display:block;height:5px;left:0;position:absolute;right:0;top:0;}.bw-blog-mobile-nav:after{background:#212121;content:"";display:block;height:2px;left:0;position:absolute;right:0;top:86px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
+      '@media (max-width:899px){body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{font-size:clamp(32px,8.4vw,35px)!important;line-height:1.06!important;margin-top:18px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-bottom:2px solid #212121;display:block;margin:0 0 28px;padding:24px 0 20px;position:relative;}.bw-blog-mobile-nav:before{background:#1B5E20;content:"";display:block;height:5px;left:0;position:absolute;right:0;top:0;}.bw-blog-mobile-nav:after{background:#212121;content:"";display:block;height:2px;left:0;position:absolute;right:0;top:86px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button,.bw-tool-bridge-book{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-tool-bridge-main,.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}'
     ].join('\n');
     (document.head || document.documentElement).appendChild(style);
   }
@@ -1058,6 +1068,8 @@
       fetch(DATA_URL, { cache: 'no-cache' }).then(function (response) {
         if (!response.ok) throw new Error('blog data unavailable');
         return response.json();
+      }).catch(function () {
+        return { allPosts: [], tools: [], bookingUrl: BOOKING_URL };
       }),
       fetch(TOOLS_DATA_URL, { cache: 'no-cache' }).then(function (response) {
         if (!response.ok) return { tools: [] };
@@ -1069,10 +1081,6 @@
         data.toolsHub = (payloads[1] && payloads[1].tools) || [];
         dataCache = data;
         return data;
-      })
-      .catch(function () {
-        dataCache = { allPosts: [], tools: [], toolsHub: [], bookingUrl: 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based' };
-        return dataCache;
       });
     return dataPromise;
   }
@@ -1138,6 +1146,29 @@
     if (tool && !tool.summary && tool.lead) tool.summary = tool.lead;
     if (tool && tool.slug && !tool.image) tool.image = TOOL_ICON_FALLBACKS[tool.slug] || DEFAULT_TOOL_IMAGE;
     return tool;
+  }
+
+  function currentTool(data) {
+    var slug = currentSlug();
+    if (!slug) return null;
+    var match = (data.toolsHub || []).filter(function (item) { return item.slug === slug; })[0] ||
+      (data.tools || []).filter(function (item) { return item.slug === slug; })[0] ||
+      TOOL_FALLBACKS[slug];
+    var tool = cloneTool(match, slug);
+    if (!tool) return null;
+    if (!tool.url) tool.url = 'https://www.berlinwalk.com/tools/' + slug;
+    if (!tool.summary && tool.lead) tool.summary = tool.lead;
+    if (!tool.image) tool.image = TOOL_ICON_FALLBACKS[tool.slug] || DEFAULT_TOOL_IMAGE;
+    return tool;
+  }
+
+  function relatedPostForTool(data, tool) {
+    if (!tool || !tool.slug) return null;
+    var posts = data.allPosts || [];
+    for (var i = 0; i < posts.length; i++) {
+      if (posts[i].relatedToolSlug === tool.slug && posts[i].url && posts[i].title) return posts[i];
+    }
+    return null;
   }
 
   function normalizePostSpacing(body) {
@@ -1818,6 +1849,114 @@
     });
   }
 
+  function toolWidgetFrameSource(frame) {
+    return String(frame && (frame.getAttribute('src') || frame.getAttribute('data-src') || '') || '').toLowerCase();
+  }
+
+  function findToolWidgetFrame(tool) {
+    var frames = Array.prototype.slice.call(document.querySelectorAll('iframe'));
+    var widgetPath = tool && tool.widgetUrl ? String(tool.widgetUrl).toLowerCase().replace(/^https?:/, '') : '';
+    var slugPath = tool && tool.slug ? '/' + String(tool.slug).toLowerCase() + '/' : '';
+    var fallback = null;
+    for (var i = 0; i < frames.length; i++) {
+      var src = toolWidgetFrameSource(frames[i]);
+      if (!src || src.indexOf('fenerszymanski.github.io/berlinwalk-widgets/') === -1) continue;
+      if (/\/(faq|quick-summary)\//.test(src)) continue;
+      if (widgetPath && src.indexOf(widgetPath) !== -1) return frames[i];
+      if (slugPath && src.indexOf(slugPath) !== -1) return frames[i];
+      if (!fallback) fallback = frames[i];
+    }
+    return fallback;
+  }
+
+  function findToolBridgeAnchor(tool) {
+    var frame = findToolWidgetFrame(tool);
+    if (frame) {
+      var section = frame.closest('section');
+      if (section && section.parentNode) return { parent: section.parentNode, after: section };
+      var wrapper = frame.closest('div,article,main');
+      if (wrapper && wrapper.parentNode) return { parent: wrapper.parentNode, after: wrapper };
+    }
+    if (!frame && (Date.now() - bootAt) < 2500) return null;
+    var footer = document.querySelector('footer,[data-hook="footer"],[role="contentinfo"]');
+    if (footer && footer.parentNode) return { parent: footer.parentNode, before: footer };
+    var main = document.querySelector('main');
+    if (main) return { parent: main, after: main.lastElementChild };
+    return null;
+  }
+
+  function toolBridgeTitle(slot) {
+    if (slot && slot.relativeLabel && slot.slotsLabel) {
+      return 'Next free walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel;
+    }
+    return 'Next free walk: Tue-Sat at 11:30';
+  }
+
+  function insertToolBridge(data) {
+    var tool = currentTool(data);
+    if (!tool || !tool.url) return;
+    var bookingUrl = toolBridgeBookingUrl(tool);
+    var related = relatedPostForTool(data, tool);
+    var slot = getNextTourSlot();
+    var journeyKey = [
+      'tool',
+      tool.slug || currentSlug(),
+      toolBridgeTitle(slot),
+      related && related.slug || ''
+    ].join('|');
+    var old = document.querySelector('[' + JOURNEY_MARKER + ']');
+    if (old && old.getAttribute('data-bw-blog-journey-key') === journeyKey) return;
+    if (old) old.remove();
+
+    var point = findToolBridgeAnchor(tool);
+    if (!point || !point.parent) return;
+
+    var section = document.createElement('section');
+    section.className = 'bw-blog-journey bw-tool-bridge';
+    section.setAttribute(JOURNEY_MARKER, '1');
+    section.setAttribute('data-bw-blog-journey-key', journeyKey);
+    section.setAttribute('data-bw-blog-journey-intent', 'tool_bridge');
+    section.setAttribute('data-bw-blog-journey-surface', 'tool');
+    section.setAttribute('aria-label', 'Book a Berlin walking tour from this tool');
+    section.innerHTML =
+      '<span class="bw-blog-journey-kicker">While you are in Berlin</span>' +
+      '<div class="bw-tool-bridge-main">' +
+        '<div>' +
+          '<h2>' + escapeHtml(toolBridgeTitle(slot)) + '</h2>' +
+          '<p class="bw-blog-journey-intro">I meet at the World Clock on Alexanderplatz. About 2 hours, tip-based, reserve a spot and pay nothing upfront.</p>' +
+        '</div>' +
+        '<a class="bw-blog-tool-button bw-tool-bridge-book" href="' + escapeAttr(bookingUrl) + '" target="_top" data-book-link="1" data-bw-book-context="tool_bridge_booking" data-bw-book-event="bw_tool_book_bridge_click" data-bw-book-link-kind="tool_bridge" data-bw-book-once-key="bw_tool_book_bridge_click:' + escapeAttr(tool.slug || currentSlug() || 'tool') + '" data-bw-book-variant="' + escapeAttr(activeBookingVariant()) + '">Reserve a free spot</a>' +
+      '</div>' +
+      (related ? '<div class="bw-tool-bridge-secondary">' + renderJourneyCard({
+        label: 'Read next',
+        title: related.title,
+        url: related.url,
+        image: related.thumb || related.image,
+        ctaKind: 'tool_related'
+      }) + '</div>' : '');
+
+    section.addEventListener('click', function (event) {
+      var link = event.target.closest('a[href]');
+      if (!link) return;
+      if (link.hasAttribute('data-book-link')) {
+        trackBookLinkClick(link, 'tool_bridge_booking');
+      }
+    });
+
+    if (point.before) point.parent.insertBefore(section, point.before);
+    else if (point.after && point.after.parentNode === point.parent) point.parent.insertBefore(section, point.after.nextSibling);
+    else point.parent.appendChild(section);
+
+    sessionOnce('bw_tool_bridge_view:' + (tool.slug || currentSlug() || 'tool'), function () {
+      return trackPaidEvent('bw_tool_bridge_view', {
+        slug: currentSlug(),
+        tool_slug: tool.slug || '',
+        slot_count: slot && slot.slotCount || 0,
+        booking_variant: activeBookingVariant()
+      });
+    });
+  }
+
   function hideNativeEndMatter() {
     var labels = ['Related Posts', 'Comments'];
     var candidates = document.querySelectorAll('h1,h2,h3,h4,[role="heading"],p,span,div');
@@ -1895,16 +2034,63 @@
     }
   }
 
-  function applyBookAttribution(url, context) {
+  function applyBookAttribution(url, context, options) {
+    options = options || {};
     var incoming = new URL(window.location.href);
     ATTRIBUTION_KEYS.forEach(function (key) {
       if (incoming.searchParams.has(key)) url.searchParams.set(key, incoming.searchParams.get(key));
     });
-    url.searchParams.set('utm_content', bookingContentValue(context, activeBookingVariant()));
-    if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
-    if (!url.searchParams.has('utm_medium')) url.searchParams.set('utm_medium', 'blog_bridge');
-    if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', 'utility_blog_booking_bridge');
+    url.searchParams.set('utm_content', options.content || bookingContentValue(context, activeBookingVariant()));
+    if (options.forceSource) url.searchParams.set('utm_source', options.forceSource);
+    else if (!url.searchParams.has('utm_source')) url.searchParams.set('utm_source', 'berlinwalk');
+    url.searchParams.set('utm_medium', options.medium || 'blog_bridge');
+    if (options.forceCampaign) url.searchParams.set('utm_campaign', options.forceCampaign);
+    else if (!url.searchParams.has('utm_campaign')) url.searchParams.set('utm_campaign', options.campaign || 'utility_blog_booking_bridge');
     return url;
+  }
+
+  function toolBridgeBookingUrl(tool) {
+    var slug = tool && tool.slug || currentSlug() || 'tool';
+    return applyBookAttribution(new URL(resolveBookingDestination(), window.location.href), 'tool_bridge_booking', {
+      forceSource: 'berlinwalk',
+      medium: 'tool_bridge',
+      forceCampaign: 'utility_tool_booking_bridge',
+      content: slugify(slug + '_toolbridge_nextslot')
+    }).toString();
+  }
+
+  function trackPaidEvent(eventName, payload) {
+    payload = payload || {};
+    var currentUrl = new URL(window.location.href);
+    var params = currentUrl.searchParams;
+    if (!pushEvent(eventName, Object.assign({ page_path: window.location.pathname }, payload))) return false;
+    try {
+      window.fetch(TRACK_ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        keepalive: true,
+        body: JSON.stringify({
+          eventName: eventName === 'bw_book_link_click' ? 'bw_booking_pick_date_click' : eventName,
+          consentGranted: true,
+          analyticsConsent: true,
+          consent: { analytics: true },
+          pagePath: window.location.pathname,
+          landingPage: window.location.href,
+          referrer: document.referrer || '',
+          utmSource: params.get('utm_source') || '',
+          utmMedium: params.get('utm_medium') || '',
+          utmCampaign: params.get('utm_campaign') || '',
+          utmContent: params.get('utm_content') || '',
+          utmTerm: params.get('utm_term') || '',
+          fbclid: '',
+          isPaid: Boolean(params.get('utm_source')),
+          screenWidth: String(window.screen && window.screen.width || ''),
+          viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
+          payload: payload
+        })
+      }).catch(function () {});
+    } catch (err) {}
+    return true;
   }
 
   function sessionOnce(key, callback) {
@@ -1930,49 +2116,13 @@
     var journeyIntent = journey ? (journey.getAttribute('data-bw-blog-journey-intent') || '') : '';
 
     sessionOnce(onceKey, function () {
-      var currentUrl = new URL(window.location.href);
-      var params = currentUrl.searchParams;
-      var trackingBody = {
-        eventName: eventName === 'bw_book_link_click' ? 'bw_booking_pick_date_click' : eventName,
-        consentGranted: true,
-        analyticsConsent: true,
-        consent: { analytics: true },
-        pagePath: window.location.pathname,
-        landingPage: window.location.href,
-        referrer: document.referrer || '',
-        utmSource: params.get('utm_source') || '',
-        utmMedium: params.get('utm_medium') || '',
-        utmCampaign: params.get('utm_campaign') || '',
-        utmContent: params.get('utm_content') || '',
-        utmTerm: params.get('utm_term') || '',
-        fbclid: '',
-        isPaid: Boolean(params.get('utm_source')),
-        screenWidth: String(window.screen && window.screen.width || ''),
-        viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
-        payload: {
-          link_kind: linkKind,
-          cta_name: context,
-          journey_intent: journeyIntent,
-          cta_kind: link.getAttribute('data-bw-journey-cta-kind') || '',
-          variant: variant
-        }
-      };
-      if (!pushEvent(eventName, {
+      return trackPaidEvent(eventName, {
         cta_name: context,
         link_kind: linkKind,
         journey_intent: journeyIntent,
-        page_path: window.location.pathname,
+        cta_kind: link.getAttribute('data-bw-journey-cta-kind') || '',
         variant: variant
-      })) return false;
-      try {
-        window.fetch(TRACK_ENDPOINT, {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          keepalive: true,
-          body: JSON.stringify(trackingBody)
-        }).catch(function () {});
-      } catch (err) {}
-      return true;
+      });
     });
   }
 
@@ -2017,12 +2167,18 @@
   }
 
   function render() {
-    if (!isPostPage()) {
+    if (!isPostPage() && !isToolPage()) {
       removeInjected();
       return;
     }
     ensureNextTourSlotHelper();
     injectStyle();
+    if (isToolPage()) {
+      loadData().then(function (data) {
+        insertToolBridge(data);
+      });
+      return;
+    }
     var body = findPostBody();
     if (!body) return;
     markPostBody(body);
@@ -2086,31 +2242,38 @@
     if (isPostPage()) {
       injectStabilityStyle();
       injectStyle();
+    } else if (isToolPage()) {
+      injectStyle();
     }
     [0, 80, 220, 520, 1100, 2400, 4200, 7000].forEach(function (delay) {
       setTimeout(render, delay);
     });
     if (observer) observer.disconnect();
     observer = new MutationObserver(function () {
-      if (!isPostPage()) return;
-      var body = findPostBody();
-      normalizePostTitleTypography();
-      if (body) normalizePostSpacing(body);
-      if (body) normalizeHeadingTypography(body);
-      hideNativeEndMatter();
-      decorateBlogBookLinks();
-      // Gap-free top-nav restore: Wix/React repeatedly wipes nodes it does not
-      // own while the post page hydrates, including our top mobile nav. Restoring
-      // it via scheduleRender() (an 80ms macrotask) let at least one paint happen
-      // with the nav gone, which read as a "blink" on mobile and bounced the post
-      // body by the 270px reserve margin. Re-insert it synchronously here instead:
-      // the observer callback is a microtask that runs before the next paint, so
-      // the removed frame is never shown.
-      if (body && !document.querySelector('[' + MOBILE_NAV_MARKER + ']')) {
-        insertMobileBlogNav(body, dataCache);
+      if (isPostPage()) {
+        var body = findPostBody();
+        normalizePostTitleTypography();
+        if (body) normalizePostSpacing(body);
+        if (body) normalizeHeadingTypography(body);
+        hideNativeEndMatter();
+        decorateBlogBookLinks();
+        // Gap-free top-nav restore: Wix/React repeatedly wipes nodes it does not
+        // own while the post page hydrates, including our top mobile nav. Restoring
+        // it via scheduleRender() (an 80ms macrotask) let at least one paint happen
+        // with the nav gone, which read as a "blink" on mobile and bounced the post
+        // body by the 270px reserve margin. Re-insert it synchronously here instead:
+        // the observer callback is a microtask that runs before the next paint, so
+        // the removed frame is never shown.
+        if (body && !document.querySelector('[' + MOBILE_NAV_MARKER + ']')) {
+          insertMobileBlogNav(body, dataCache);
+        }
+        var needsMobileGuide = body && collectHeadings(body).length >= 2;
+        if (!document.querySelector('[' + JOURNEY_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {
+          scheduleRender();
+        }
+        return;
       }
-      var needsMobileGuide = body && collectHeadings(body).length >= 2;
-      if (!document.querySelector('[' + JOURNEY_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {
+      if (isToolPage() && !document.querySelector('[' + JOURNEY_MARKER + ']')) {
         scheduleRender();
       }
     });
@@ -2119,6 +2282,8 @@
 
   if (isPostPage()) {
     injectStabilityStyle();
+    injectStyle();
+  } else if (isToolPage()) {
     injectStyle();
   }
 

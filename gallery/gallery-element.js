@@ -479,7 +479,7 @@ class BWGalleryElement extends HTMLElement {
           <div class="bw-lightbox-frame">
             <picture class="bw-lightbox-picture">
               <source data-lightbox-source type="image/webp">
-              <img data-lightbox-img src="" alt="">
+              <img data-lightbox-img src="" alt="Selected BerlinWalk tour photo">
             </picture>
           </div>
           <button class="bw-lightbox-nav next" type="button" data-next aria-label="Next photo">&#8250;</button>

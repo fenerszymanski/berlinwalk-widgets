@@ -4,7 +4,7 @@ Internal review note for Yusuf. This is the current deterministic planner logic 
 `index.html`, written so we can review the itinerary brain in one pass instead of
 finding mistakes one by one in the UI.
 
-Last reviewed locally: 2026-07-05
+Last reviewed locally: 2026-07-06
 
 Update 2026-07-05: Wave 0 stabilization added a small sequential block-window
 scheduler in `index.html`. Rendered time windows keep their original durations,
@@ -25,6 +25,56 @@ conditional interest for 4+ day trips when arrival is not evening, and filters
 it out automatically when the trip is too short or too late. Core itinerary and
 tour-framework copy now gives one main anchor first, with fallback language
 only when opening/weather/energy makes it necessary.
+
+Update 2026-07-05: Wave 2.1 added a restrained First-Day Rescue Plan bridge at
+the end of the unlocked Day 1 card only. It stays out of the locked preview,
+links to the branded product URL with the `tp_rescue_bridge` UTM set, and tracks
+`bw_trip_planner_rescue_cta_click` through the existing consent-gated Trip
+Planner event path.
+
+Update 2026-07-05: Wave 2.3 tightened the tour booking bridge. The recommended
+tour card now uses one decisive `Reserve the {weekday} {time} spot` CTA pointing
+to the canonical Wix Bookings service route with `utm_campaign=tp_tour_bridge`.
+The same CTA repeats once under the unlocked plan action row with
+`utm_content=plan_actions`; no date preselect query was added because the current
+Bookings route does not expose a supported preselect contract. The legacy
+two-step start card is also hidden during one-question quiz flow so visitors do
+not see both `Start building my plan` and `Next question`.
+
+Update 2026-07-05: Wave 2.4 made one-question quiz answer tracking explicit on
+`Next question` / final build clicks. The planner already has default answers,
+so a visitor can move through the quiz without changing a selected option. Those
+default commits now send one deduped `bw_trip_planner_quiz_answer` event per
+step, which keeps the per-step funnel report from mistaking default-answer
+progress for drop-off.
+
+Update 2026-07-06: Wave 1.5 added live-weather day reordering. When the daily
+Open-Meteo forecast marks a trip date as clearly rainy, the post-generation pass
+now moves the nearest indoor-heavy non-tour day onto that date and moves the
+exposed route to the clearer date, while checking that the swap does not create
+Monday/closed-anchor opening risk. Day cards and Smart Swaps show a visible
+`Rain swap` note. A localhost-only `mockRainDay` query parameter exists for QA
+and does not affect the public embed.
+
+Update 2026-07-06: Wave 3.1 now reuses the First-Day Rescue facts layer without
+adding a new Vercel function. The existing `/api/rescue-plan` alias accepts a
+read-only `plannerDay1Facts` action, calls the Rescue `buildFactSheet()` path
+without AI, checkout, lead writes, or CMS writes, and returns only a light Day 1
+route/ticket/weather summary. The widget calls it only for unlocked plans and
+renders one `Live Day 1 check` card on Day 1 before the paid Rescue bridge. The
+paid product distinction stays explicit: the free planner confirms the shape,
+while the €9 Rescue Plan handles exact first-hour decisions.
+
+Update 2026-07-06: Wave 3.3 print/PDF warning propagation now uses the same
+`openingNoticeItems()` source as the unlocked day cards. Monday, holiday,
+closed-anchor, and live rain-swap notes are included in the browser print view
+and both PDF paths instead of appearing only as short risk labels.
+
+Update 2026-07-06: Wave 3.2 route-link sanity was verified against a weather
+swap scenario. After the covered `food` day moved onto the rainy date and the
+`free` outdoor route moved away, the Google Maps direction URLs rebuilt from
+the swapped days' current place coordinates instead of keeping stale pre-swap
+anchors.
 
 ## 1. User Inputs
 
@@ -126,6 +176,10 @@ Weather:
 - Monthly fallback for later dates.
 - `Rain backup` selected acts like a rain concern even if live forecast is not rainy.
 - Rain concern changes risk chips, weather strategy, nearby extra copy, and some tour/day choices.
+- If a live daily forecast inside the trip is clearly rainy, the planner prefers
+  moving an indoor-heavy day (`museums`, `food`, or indoor-metadata-heavy route)
+  onto that date and moving the exposed day away, unless that would break tour
+  placement or opening rules.
 
 Resolved 2026-07-05:
 
@@ -144,6 +198,9 @@ Current high-level sequence:
 5. Used map anchors are remembered. Later days avoid repeated anchors and may switch to anti-repeat variants.
 6. Opening post-processing swaps risky museum/closed-anchor days off Monday or
    injects a visible fallback warning when no safe swap exists.
+7. Weather post-processing can swap a covered day onto a clearly rainy live
+   forecast date, after opening swaps have already protected museum/closure
+   risks.
 
 Day type queue:
 

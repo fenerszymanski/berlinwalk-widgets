@@ -178,11 +178,15 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'berlin-transport-strike',
+  lead: 'berlin-before-hotel-check-in',
   secondary: [
+    'berliner-dom-tickets',
+    'berlin-train-stations',
+    'berlin-transport-strike',
     'berlin-museum-bag-rules',
     'berlin-last-day',
     'berlin-ab-abc-ticket-zones',
+    'where-to-park-in-berlin-alexanderplatz',
     'doctor-in-berlin',
     'berlin-restaurant-phrases',
     'lost-property-berlin',
@@ -210,6 +214,14 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'berlin-before-hotel-check-in',
+  'berliner-dom-tickets',
+  'berlin-train-stations',
+  'where-to-park-in-berlin-alexanderplatz',
+  'berlin-transport-strike',
+  'berlin-museum-bag-rules',
+  'berlin-last-day',
+  'berlin-ab-abc-ticket-zones',
   'berlin-heatwave-day-plan',
   'berlin-bike-lanes-tourists',
   'doctor-in-berlin',
@@ -499,6 +511,7 @@ function relatedToolSlugFor(post) {
   if (/(berlin-before-hotel-check-in|before hotel check-in|hotel check-in|early check-in berlin|check-in gap)/.test(s)) return 'berlin-check-in-gap-planner';
   if (/(berliner-dom-tickets|berliner dom tickets|berlin cathedral tickets|dome climb|hohenzollern crypt)/.test(s)) return 'berliner-dom-visit-planner';
   if (/(where-to-park-in-berlin-alexanderplatz|where to park in berlin|alexanderplatz parking|parking near alexanderplatz)/.test(s)) return 'alexanderplatz-parking-map';
+  if (/(luggage-storage-in-berlin-2026|luggage storage in berlin|where to find a luggage storage|suitcase storage|bag storage)/.test(s)) return 'berlin-luggage-storage';
   if (/(berlin-train-stations|berlin train stations|hauptbahnhof|ostbahnhof|südkreuz|suedkreuz|gesundbrunnen|spandau)/.test(s)) return 'berlin-train-station-first-move';
   if (/(berlin-transport-strike|transport strike|bvg strike|s-bahn disruption|transport disruption|trains stop)/.test(s)) return 'berlin-transport-backup-planner';
   if (/(bebelplatz-berlin|bebelplatz berlin|empty library|book-burning memorial|book burning memorial)/.test(s)) return 'bebelplatz-memory-lens';

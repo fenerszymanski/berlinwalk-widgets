@@ -1,0 +1,103 @@
+{
+  "checkedAt": "2026-07-06T04:23:00.114Z",
+  "commit": "b6c08de",
+  "passed": true,
+  "checks": [
+    {
+      "key": "widget",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-umweltzone-sticker-checker/?v=b6c08de",
+      "status": 200,
+      "ok": true,
+      "marker": "Berlin Umweltzone Sticker Checker",
+      "markerFound": true,
+      "contentType": "text/html; charset=utf-8",
+      "contentLength": "5660",
+      "lastModified": "Mon, 06 Jul 2026 04:22:40 GMT",
+      "sample": "<!doctype html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <title>Berlin Umweltzone Sticker Checker | BerlinWalk</title>\n  <meta name=\"descri"
+    },
+    {
+      "key": "widgetHero",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-umweltzone-sticker-checker/assets/umweltzone-sign.jpg?v=b6c08de",
+      "status": 200,
+      "ok": true,
+      "marker": null,
+      "markerFound": null,
+      "contentType": "image/jpeg",
+      "contentLength": "257387",
+      "lastModified": "Mon, 06 Jul 2026 04:22:40 GMT",
+      "sample": null
+    },
+    {
+      "key": "quickSummary",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/data.json?v=b6c08de",
+      "status": 200,
+      "ok": true,
+      "marker": "Berlin Umweltzone Sticker - Quick Summary",
+      "markerFound": true,
+      "contentType": "application/json; charset=utf-8",
+      "contentLength": "55449",
+      "lastModified": "Mon, 06 Jul 2026 04:22:43 GMT",
+      "sample": "{\n  \"berlin-transport-strike\": {\n    \"title\": \"Berlin Transport Strike - Quick Summary\",\n    \"icon\": \"🚇\",\n    \"kicker\": \"BERLINWALK.COM • TOURIST TIPS\",\n    \"items\": [\n      \"**Do not treat a Berlin transport strike as "
+    },
+    {
+      "key": "faqData",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json?v=b6c08de",
+      "status": 200,
+      "ok": true,
+      "marker": "Berlin Umweltzone Sticker - FAQ",
+      "markerFound": true,
+      "contentType": "application/json; charset=utf-8",
+      "contentLength": "102224",
+      "lastModified": "Mon, 06 Jul 2026 04:22:42 GMT",
+      "sample": "{\n  \"berlin-transport-strike\": {\n    \"title\": \"Berlin Transport Strike — FAQ\",\n    \"subtitle\": \"Quick answers for tourists keeping a Berlin day moving during strikes and disruptions.\",\n    \"items\": [\n      {\n        \"q\":"
+    },
+    {
+      "key": "faqInject",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/inject.js?v=b6c08de",
+      "status": 200,
+      "ok": true,
+      "marker": "berlin-umweltzone-sticker",
+      "markerFound": true,
+      "contentType": "application/javascript; charset=utf-8",
+      "contentLength": "96058",
+      "lastModified": "Mon, 06 Jul 2026 04:22:42 GMT",
+      "sample": "/* Auto-generated from /faq/data.json and /faq/slug-map.json - do not edit by hand. */\n(function () {\n  var SLUG_MAP = {\n  \"berlin-transport-strike\": \"berlin-transport-strike\",\n  \"alternative-transport-berlin\": \"alternat"
+    },
+    {
+      "key": "toolsHub",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json?v=b6c08de",
+      "status": 200,
+      "ok": true,
+      "marker": "Berlin Umweltzone Sticker Checker",
+      "markerFound": true,
+      "contentType": "application/json; charset=utf-8",
+      "contentLength": "20162",
+      "lastModified": "Mon, 06 Jul 2026 04:22:43 GMT",
+      "sample": "{\n  \"categories\": [\n    {\n      \"key\": \"Money\",\n      \"label\": \"Tickets & Money\",\n      \"icon\": \"💰\",\n      \"blurb\": \"Figure out the right ticket, the WelcomeCard, and your daily budget.\",\n      \"bannerImage\": \"assets/ca"
+    },
+    {
+      "key": "toolIcon160",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-umweltzone-sticker-checker-160.png?v=b6c08de",
+      "status": 200,
+      "ok": true,
+      "marker": null,
+      "markerFound": null,
+      "contentType": "image/png",
+      "contentLength": "39274",
+      "lastModified": "Mon, 06 Jul 2026 04:22:20 GMT",
+      "sample": null
+    },
+    {
+      "key": "visualSources",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/blog-drafts/images/berlin-umweltzone-sticker/visual-sources.md?v=b6c08de",
+      "status": 200,
+      "ok": true,
+      "marker": "Berlin Umweltzone Sticker - Visual Sources",
+      "markerFound": true,
+      "contentType": "text/markdown; charset=utf-8",
+      "contentLength": "1647",
+      "lastModified": "Mon, 06 Jul 2026 04:22:41 GMT",
+      "sample": "# Berlin Umweltzone Sticker - Visual Sources\n\nChecked: 2026-07-06 Europe/Berlin\n\n## Selected Images\n\n### 1. Umweltzone sign in Berlin\n\n- Local raw: `assets/raw/01-umweltzone-berlin-sign.jpg`\n- Local optimized: `assets/op"
+    }
+  ]
+}

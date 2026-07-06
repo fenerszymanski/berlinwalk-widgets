@@ -18,6 +18,10 @@ Inside the pack, keep an eye on the route windows, day-by-day map links, Berlin 
 
 If you want a print version, open the pack and tap **Download PDF** inside the planner. I am not attaching a PDF file to this email.
 
+One note for Day 1: the free pack gives you the shape, but arrival is where small mistakes get expensive. If you want me to make the first hours exact, the €9 First-Day Rescue Plan turns your arrival into a live route, luggage, weather, and food decision plan:
+
+[Get the First-Day Rescue Plan](https://www.berlinwalk.com/products/berlin-first-day-rescue-plan?utm_source=trip_planner&utm_medium=email&utm_campaign=tp_rescue_bridge&utm_content=email_instant)
+
 The main thing I would protect is the first real city context. For your dates, the BerlinWalk timing to keep in mind is:
 
 **${recommendedTourDay}**
