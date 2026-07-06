@@ -131,9 +131,9 @@ class BWRouteElement extends HTMLElement {
             <h2 id="bw-route-title" class="bw-route-title">The <span class="bw-route-title-accent">Route</span></h2>
             <p class="bw-route-subtitle">Alexanderplatz &rarr; Hackescher Markt</p>
             <div class="bw-route-meta" aria-label="${this._escapeAttr(this._metaLabel(meta))}">
-              <span class="bw-route-meta-item">&#128205; ${this._escapeHTML(meta.stopCount || stops.length)} stops</span>
-              <span class="bw-route-meta-item">&#128336; ${this._compactDuration(meta.duration)}</span>
-              <span class="bw-route-meta-item">&#128694; ${this._compactDistance(meta.distance)}</span>
+              <span class="bw-route-meta-item"><span aria-hidden="true">&#128205;</span> ${this._escapeHTML(meta.stopCount || stops.length)} stops</span>
+              <span class="bw-route-meta-item"><span aria-hidden="true">&#128336;</span> ${this._compactDuration(meta.duration)}</span>
+              <span class="bw-route-meta-item"><span aria-hidden="true">&#128694;</span> ${this._compactDistance(meta.distance)}</span>
             </div>
           </header>
 

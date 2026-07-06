@@ -105,7 +105,7 @@ class BWBerlinQuizElement extends HTMLElement {
     const q = BW_QUIZ_QUESTIONS[this._currentQ];
     const total = BW_QUIZ_QUESTIONS.length;
     this.querySelector('[data-bw-quiz-counter]').textContent = (this._currentQ + 1) + '/' + total;
-    this.querySelector('[data-bw-quiz-tag]').textContent = q.tag;
+    this._renderDecorativeTag(this.querySelector('[data-bw-quiz-tag]'), q.tag);
     this.querySelector('[data-bw-quiz-question]').textContent = q.q;
 
     const pb = this.querySelector('[data-bw-quiz-progress]');
@@ -183,6 +183,23 @@ class BWBerlinQuizElement extends HTMLElement {
     title.appendChild(span);
     this.querySelector('[data-bw-quiz-result-desc]').textContent = tier.desc;
     this._showScreen('bw-quiz-screen-result');
+  }
+
+  _renderDecorativeTag(target, value) {
+    if (!target) return;
+    const text = String(value || '').trim();
+    const parts = text.split(/\s+/);
+    const icon = parts.shift() || '';
+    const label = parts.join(' ') || text;
+    target.textContent = '';
+    target.setAttribute('aria-label', label);
+    if (icon && label !== text) {
+      const iconSpan = document.createElement('span');
+      iconSpan.setAttribute('aria-hidden', 'true');
+      iconSpan.textContent = icon + ' ';
+      target.appendChild(iconSpan);
+    }
+    target.appendChild(document.createTextNode(label));
   }
 
   _render() {
@@ -692,12 +709,12 @@ class BWBerlinQuizElement extends HTMLElement {
               <p class="bw-quiz-start-desc">From airport transfers to medieval history — test your Berlin knowledge before you visit.</p>
               <button class="bw-quiz-btn-primary" type="button" data-bw-quiz-start>START THE QUIZ →</button>
               <div class="bw-quiz-tags">
-                <span class="bw-quiz-tag-pill">✈️ Airport</span>
-                <span class="bw-quiz-tag-pill">👟 Clothing</span>
-                <span class="bw-quiz-tag-pill">💶 Tipping</span>
-                <span class="bw-quiz-tag-pill">🏛️ History</span>
-                <span class="bw-quiz-tag-pill">🍽️ Food</span>
-                <span class="bw-quiz-tag-pill">💳 Money</span>
+                <span class="bw-quiz-tag-pill" aria-label="Airport"><span aria-hidden="true">✈️ </span>Airport</span>
+                <span class="bw-quiz-tag-pill" aria-label="Clothing"><span aria-hidden="true">👟 </span>Clothing</span>
+                <span class="bw-quiz-tag-pill" aria-label="Tipping"><span aria-hidden="true">💶 </span>Tipping</span>
+                <span class="bw-quiz-tag-pill" aria-label="History"><span aria-hidden="true">🏛️ </span>History</span>
+                <span class="bw-quiz-tag-pill" aria-label="Food"><span aria-hidden="true">🍽️ </span>Food</span>
+                <span class="bw-quiz-tag-pill" aria-label="Money"><span aria-hidden="true">💳 </span>Money</span>
               </div>
               <p class="bw-quiz-watermark">berlinwalk.com — Free Walking Tours</p>
             </div>
@@ -724,7 +741,7 @@ class BWBerlinQuizElement extends HTMLElement {
 
           <div class="bw-quiz-screen" id="bw-quiz-screen-result">
             <div class="bw-quiz-result-inner">
-              <div class="bw-quiz-result-emoji" data-bw-quiz-result-emoji></div>
+              <div class="bw-quiz-result-emoji" data-bw-quiz-result-emoji aria-hidden="true"></div>
               <div class="bw-quiz-score-ring" data-bw-quiz-score-ring>
                 <span class="bw-quiz-score-num" data-bw-quiz-score-num></span>
                 <span class="bw-quiz-score-total" data-bw-quiz-score-total></span>
