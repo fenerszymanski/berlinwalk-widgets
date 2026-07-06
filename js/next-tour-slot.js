@@ -5,9 +5,13 @@
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   var TIME_ZONE = 'Europe/Berlin';
-  var TOUR_START_LABEL = '11:30';
-  var SAME_DAY_CUTOFF_HOUR = 8;
-  var SAME_DAY_CUTOFF_MINUTE = 30;
+  var DEFAULT_START_LABELS = ['11:30'];
+  var SUMMER_START_LABELS = ['11:30', '15:30'];
+  var SAME_DAY_CUTOFF_LEAD_MINUTES = 180;
+  // Live booking copy currently says "From 3 July 2026: 11:30 + 15:30".
+  // If that exact public start changes, update the window here.
+  var DOUBLE_SLOT_START_MONTH_DAY = 703;
+  var DOUBLE_SLOT_END_MONTH_DAY = 930;
   var DAY_MS = 24 * 60 * 60 * 1000;
   var TOUR_DAYS = { Tue: true, Wed: true, Thu: true, Fri: true, Sat: true };
   var BERLIN_FORMATTER = new Intl.DateTimeFormat('en-US', {
@@ -52,6 +56,8 @@
     var parts = berlinParts(date);
     return {
       dateKey: dateKey(parts),
+      month: parts.month,
+      day: parts.day,
       weekdayShort: WEEKDAY_SHORT_FORMATTER.format(date),
       weekdayLabel: WEEKDAY_LONG_FORMATTER.format(date),
       hour: parts.hour,
@@ -63,9 +69,43 @@
     return Boolean(TOUR_DAYS[weekdayShort]);
   }
 
-  function beforeSameDayCutoff(parts) {
-    return parts.hour < SAME_DAY_CUTOFF_HOUR
-      || (parts.hour === SAME_DAY_CUTOFF_HOUR && parts.minute < SAME_DAY_CUTOFF_MINUTE);
+  function monthDayKey(parts) {
+    return (parts.month * 100) + parts.day;
+  }
+
+  function isDoubleSlotSeason(parts) {
+    var key = monthDayKey(parts);
+    return key >= DOUBLE_SLOT_START_MONTH_DAY && key <= DOUBLE_SLOT_END_MONTH_DAY;
+  }
+
+  function startLabelsForDay(parts) {
+    return isDoubleSlotSeason(parts) ? SUMMER_START_LABELS.slice() : DEFAULT_START_LABELS.slice();
+  }
+
+  function minutesForLabel(label) {
+    var parts = String(label || '').split(':');
+    return (Number(parts[0]) * 60) + Number(parts[1]);
+  }
+
+  function currentMinutes(parts) {
+    return (parts.hour * 60) + parts.minute;
+  }
+
+  function bookableStartLabels(targetParts, nowParts) {
+    var labels = startLabelsForDay(targetParts);
+    if (!nowParts || targetParts.dateKey !== nowParts.dateKey) return labels;
+
+    var nowMinutes = currentMinutes(nowParts);
+    return labels.filter(function (label) {
+      return nowMinutes < (minutesForLabel(label) - SAME_DAY_CUTOFF_LEAD_MINUTES);
+    });
+  }
+
+  function slotsLabelFor(labels) {
+    if (!labels.length) return '';
+    if (labels.length === 1) return labels[0];
+    if (labels.length === 2) return labels[0] + ' and ' + labels[1];
+    return labels.slice(0, -1).join(', ') + ', and ' + labels[labels.length - 1];
   }
 
   function normalizeNow(input) {
@@ -95,14 +135,10 @@
     var targets = [];
     var seen = {};
 
-    if (isTourDay(today.weekdayShort) && beforeSameDayCutoff(today)) {
-      targets.push(today);
-      seen[today.dateKey] = true;
-    }
-
-    for (var offset = 1; offset <= 14 && targets.length < count; offset += 1) {
+    for (var offset = 0; offset <= 14 && targets.length < count; offset += 1) {
       var candidate = slotInfo(new Date(now.getTime() + (offset * DAY_MS)));
       if (!isTourDay(candidate.weekdayShort) || seen[candidate.dateKey]) continue;
+      if (!bookableStartLabels(candidate, today).length) continue;
       targets.push(candidate);
       seen[candidate.dateKey] = true;
     }
@@ -118,12 +154,16 @@
     var count = normalizeCount(input, fallbackCount || 1);
 
     return findTargets(now, count).map(function (target) {
+      var startLabels = bookableStartLabels(target, today);
       return {
         dateKey: target.dateKey,
         weekdayShort: target.weekdayShort,
         weekdayLabel: target.weekdayLabel,
         relativeLabel: relativeLabelFor(target, today, tomorrow),
-        startLabel: TOUR_START_LABEL,
+        startLabel: startLabels[0] || '',
+        startLabels: startLabels,
+        slotsLabel: slotsLabelFor(startLabels),
+        slotCount: startLabels.length,
       };
     });
   }
@@ -135,7 +175,10 @@
       weekdayShort: target.weekdayShort,
       weekdayLabel: target.weekdayLabel,
       relativeLabel: target.relativeLabel,
-      startLabel: TOUR_START_LABEL,
+      startLabel: target.startLabel,
+      startLabels: target.startLabels,
+      slotsLabel: target.slotsLabel,
+      slotCount: target.slotCount,
     };
   }
 

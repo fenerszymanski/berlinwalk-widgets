@@ -1597,16 +1597,11 @@
   }
 
   function bookingJourneyCard(bookingUrl, title, context) {
-    var slots = getNextTourSlots(2);
-    var slot = slots[0];
+    var slot = getNextTourSlot();
     var variant = activeBookingVariant();
     var bookingTitle = title || 'Walk this context with me in Berlin';
-    if (slots.length >= 2) {
-      bookingTitle = 'Next tours: ' + slots.slice(0, 2).map(function (item) {
-        return item.weekdayLabel + ' ' + item.startLabel;
-      }).join(' + ');
-    } else if (slot) {
-      bookingTitle = slot.relativeLabel + ' at ' + slot.startLabel + ', walk Berlin with me';
+    if (slot && slot.relativeLabel && slot.slotsLabel) {
+      bookingTitle = 'Next free walk' + (slot.slotCount > 1 ? 's' : '') + ': ' + slot.relativeLabel + ' at ' + slot.slotsLabel;
     }
     return {
       label: 'Free walk',
