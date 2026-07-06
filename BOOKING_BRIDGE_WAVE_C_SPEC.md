@@ -187,17 +187,50 @@ alone; Task 1 is the higher-value, lower-risk half.
 - Day 7 and day 14 after deploy: append the per-surface split to the workspace
   `SESSION_LOG.md` so Yusuf sees which surface produces booking-page sessions.
 
-## Consistency follow-up (optional, Yusuf decides)
+## Task 3 (required) — Both-slots copy on EVERY dynamic surface
 
-Once Task 0 exposes `slotsLabel`/`slotCount`, the already-live surfaces from
-Waves A/B (blog journey booking card, sticky bar, exit popup, service-page hero
-next-walk line) can adopt the same both-slots phrasing for a consistent promise
-across the site. Those are shipped and currently show only 11:30 (a deliberate
-Wave A "one clear anchor" choice). Do NOT silently rewrite live copy; treat this
-as a small follow-up pass to run after the tool bridge is verified, and confirm
-with Yusuf whether every surface should list both slots or keep 11:30 as the
-single anchor on the smaller surfaces (sticky/exit) where two times may crowd
-the space.
+Yusuf's decision (2026-07-06): show `11:30 and 15:30` everywhere in season, not
+just the tool bridge. Audit done 2026-07-06 — current live state per surface:
+
+| # | Surface | File | Current copy | Helper? | Both slots? |
+|---|---|---|---|---|---|
+| 1 | Sticky bar | `berlinwalk-sticky-cta-color-polish.html` (workspace root) | `Tue 11:30 + Wed 11:30` (next two DAYS, each 11:30) | No, own inline logic | No — shows 2 days, not 2 times |
+| 2 | Blog journey booking card | `js/blog-journey-inject.js` (~line 1609) | `Tomorrow (Wed) at 11:30, walk Berlin with me` | Yes (`bwNextTourSlot`) | No — 11:30 only |
+| 3 | Exit popup | `js/exit-intent-popup.js` (~line 146) | `Next walk: Tomorrow (Wed) at 11:30. Free, tip-based.` | No, own inline logic (`TOUR_START_LABEL='11:30'`) | No — 11:30 only |
+| 4 | Service-page hero next-walk | `book/book-element.js` (~line 426) | `Saturday 11:30` | Yes (`bwNextTourSlot`) | No — 11:30 only |
+| 5 | Site header trust line | `site-header/site-header-element.js` (866, 972) | `Tue-Sat 11:30 · From 3 July: +15:30 · World Clock` | No, static | YES already |
+| 6 | Paid landing top strip | `paid-landing/paid-landing-element.js` (~81) | `...Tue-Sat 11:30 - From 3 July 2026: 11:30 + 15:30` | No, static | YES already |
+| 7 | Booking calendar intro chips | `booking-calendar/booking-calendar-element.js` | chips `Tue-Sat 11:30`, `From 3 July 2026: 11:30 + 15:30` | No, static | YES already |
+
+Do #1-#4 (the dynamic surfaces). #5-#7 already state both slots — leave them,
+only fix wording drift if any.
+
+Per surface:
+
+- **#2 Blog journey card & #4 service hero** already call the shared helper, so
+  after Task 0 they just consume `slotsLabel`/`slotCount`:
+  - Journey card: `` `${relativeLabel} at ${slotsLabel}, walk Berlin with me` ``
+    (unchanged when one slot).
+  - Service hero: `` `${relativeLabel} ${slotsLabel}` `` (drop the plain
+    weekdayLabel-only form so it matches).
+- **#3 Exit popup** has its own inline slot logic. Either load `next-tour-slot.js`
+  (it is a plain script, popup can add it) or mirror the Task 0 season logic
+  inline. Target: `` `Next walks: ${relativeLabel} at ${slotsLabel}. Free, tip-based.` ``
+  (singular `walk` when one slot). Repin the Wix embed after push.
+- **#1 Sticky bar** is a deliberate behavior change: today it lists the next two
+  DAYS at 11:30; switch it to the next tour day with both TIMES, matching the
+  rest. It cannot easily load an external helper (minified 15KB-cap embed), so
+  mirror the Task 0 season logic inline. Target in season:
+  `Next tour · <Weekday> 11:30 and 15:30`; off-season fall back to the single
+  slot (and, if space allows, keep a second upcoming day as the alternative
+  instead). Keep desktop/mobile labels within the existing width; if
+  `11:30 and 15:30` is too wide for the compact mobile pill, use `11:30 + 15:30`.
+  `--dry-run` the embed updater first, watch the 15KB cap, then deploy + readback.
+
+Consistency rule for all four: identical season source (Task 0), identical
+singular/plural handling, never a past or out-of-season time. Ship Task 3 in the
+same wave as the tool bridge so the whole site flips to both-slots together
+rather than drifting surface by surface.
 
 ## Honesty note
 
