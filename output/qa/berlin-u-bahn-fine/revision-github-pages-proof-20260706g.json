@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-07-06T13:44:52.285Z",
+  "commit": "4b64235",
+  "results": [
+    {
+      "name": "widget",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ticket-fine-step-planner/?v=20260706g-4b64235",
+      "status": 200,
+      "ok": true,
+      "marker": "S-Bahn says its inspectors never demand cash",
+      "markerOk": true,
+      "lastModified": "Mon, 06 Jul 2026 13:44:13 GMT",
+      "etag": "W/\"6a4bb12d-53d0\"",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "widget-id",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ticket-fine-step-planner/?v=20260706g-4b64235",
+      "status": 200,
+      "ok": true,
+      "marker": "inspectors can involve the police to confirm your identity",
+      "markerOk": true,
+      "lastModified": "Mon, 06 Jul 2026 13:44:13 GMT",
+      "etag": "W/\"6a4bb12d-53d0\"",
+      "contentType": "text/html; charset=utf-8"
+    },
+    {
+      "name": "faq-data",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/data.json?v=20260706g-4b64235",
+      "status": 200,
+      "ok": true,
+      "marker": "A cash demand is a red flag",
+      "markerOk": true,
+      "lastModified": "Mon, 06 Jul 2026 13:44:34 GMT",
+      "etag": "W/\"6a4bb142-524ae\"",
+      "contentType": "application/json; charset=utf-8"
+    },
+    {
+      "name": "faq-inject",
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/inject.js?v=20260706g-4b64235",
+      "status": 200,
+      "ok": true,
+      "marker": "A cash demand is a red flag",
+      "markerOk": true,
+      "lastModified": "Mon, 06 Jul 2026 13:44:34 GMT",
+      "etag": "W/\"6a4bb142-623a8\"",
+      "contentType": "application/javascript; charset=utf-8"
+    },
+    {
+      "name": "body-raw",
+      "url": "https://raw.githubusercontent.com/fenerszymanski/berlinwalk-widgets/main/blog-drafts/berlin-u-bahn-fine.body.md",
+      "status": 200,
+      "ok": true,
+      "marker": "_erhöhtes Beförderungsentgelt_",
+      "markerOk": true,
+      "lastModified": null,
+      "etag": "W/\"cbcc81ed5918f868f420d533a943ede5bb944668256a3888feae60c2b8be1407\"",
+      "contentType": "text/plain; charset=utf-8"
+    }
+  ]
+}
