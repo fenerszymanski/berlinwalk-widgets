@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-rewind-20260705a';
+  const ASSET_VERSION = 'games-page-rewind-cover-20260706b';
   const GAMES = [
     {
       id: 'berlin-rewind',
@@ -14,7 +14,7 @@
       duration: 'About 1 min',
       difficulty: 'Photo history',
       player: 'Curious walkers',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Bundesarchiv_Bild_183-H1006-0001-005%2C_Berlin%2C_Blick_vom_Fernsehturm_auf_den_Alexanderplatz_bei_Nacht.jpg',
+      image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
       href: 'https://www.berlinwalk.com/games/berlin-rewind',
       button: 'Play Berlin Rewind',
       accent: 'archive'

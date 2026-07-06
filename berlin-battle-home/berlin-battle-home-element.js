@@ -9,7 +9,7 @@ const BW_GAMES_HOME_ROOT = (() => {
 
 const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
 const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
-const BW_GAMES_HOME_ASSET_VERSION = 'games-home-rewind-cover-fix-20260706';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-rewind-cover-20260706b';
 
 const BW_GAMES_HOME_ITEMS = [
   {
@@ -20,7 +20,7 @@ const BW_GAMES_HOME_ITEMS = [
     meta: '3 shared daily frames',
     href: 'https://www.berlinwalk.com/games/berlin-rewind',
     cta: 'Play Rewind',
-    image: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Bundesarchiv_Bild_183-H1006-0001-005%2C_Berlin%2C_Blick_vom_Fernsehturm_auf_den_Alexanderplatz_bei_Nacht.jpg'
+    image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg'
   },
   {
     id: 'berlin-battle',
