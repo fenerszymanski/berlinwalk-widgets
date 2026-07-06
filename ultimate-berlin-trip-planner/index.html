@@ -12967,7 +12967,7 @@
   function openingNoticeItems(day) {
     var items = [];
     var status = dayStatus(day.dateKey);
-    var warning = day && (day.openingWarning || day.openingSwap);
+    var warning = day && (day.openingWarning || day.openingSwap || day.weatherSwap);
     if (warning) {
       items.push({
         key: warning.key || 'opening-warning',
@@ -13013,8 +13013,9 @@
     if (!items.length) return '';
     return items.map(function (item) {
       var highClass = item.severity === 'high' ? ' is-high' : '';
+      var iconName = /rain|weather/i.test(String(item.key || '') + ' ' + String(item.title || '')) ? 'umbrella' : 'calendar';
       return '<div class="bw-day-opening-note' + highClass + '">' +
-        '<span class="bw-day-opening-note-icon">' + iconSvg('calendar') + '</span>' +
+        '<span class="bw-day-opening-note-icon">' + iconSvg(iconName) + '</span>' +
         '<span class="bw-day-opening-note-copy"><b>' + escapeHtml(item.title) + '</b><span>' + escapeHtml(item.copy) + '</span>' + (item.action ? '<em>' + escapeHtml(item.action) + '</em>' : '') + '</span>' +
       '</div>';
     }).join('');
@@ -15298,6 +15299,7 @@
     if (status.key === 'holiday') tags.push({ key: 'holiday', label: 'Public holiday', severity: 'high', detail: status.note });
     if (status.key === 'sunday') tags.push({ key: 'sunday', label: 'Sunday shops', severity: 'medium', detail: status.note });
     if (status.key === 'monday') tags.push({ key: 'monday', label: 'Museum caution', severity: 'medium', detail: status.note });
+    if (day && day.weatherSwap) tags.push({ key: 'rain', label: 'Rain swap', severity: 'medium', detail: day.weatherSwap.copy || 'Route order was adjusted for the live rainy forecast.' });
     if (state.mustHandle.indexOf('rain') !== -1 && day.theme !== 'Arrival day') tags.push({ key: 'rain', label: 'Rain backup', severity: 'medium', detail: 'Keep one museum, cafe, or covered market near the same area.' });
     if (state.mustHandle.indexOf('reservations') !== -1 || /Reichstag|museum|Museum|night/i.test(day.title + ' ' + day.theme)) tags.push({ key: 'booking', label: 'Book ahead', severity: state.mustHandle.indexOf('reservations') !== -1 ? 'medium' : 'low', detail: 'Check timed entries, Reichstag dome, restaurants, or evening plans before arrival.' });
     if (state.mustHandle.indexOf('kids') !== -1 || state.groupType === 'family' || state.groupType === 'slow' || state.pace === 'gentle') tags.push({ key: 'breaks', label: 'Break needed', severity: 'low', detail: 'Protect one cafe, park, playground, or hotel reset before evening.' });
@@ -16069,6 +16071,9 @@
 
   function smartFixesForPlan(plan) {
     var fixes = [];
+    var weatherSwappedDay = plan.days.find(function (day) {
+      return Boolean(day.weatherSwap);
+    });
     var mondayMuseum = plan.days.find(function (day) {
       return dayStatus(day.dateKey).key === 'monday' && /museum|royal/i.test(day.title + ' ' + day.theme);
     });
@@ -16085,6 +16090,14 @@
         label: 'Monday swap',
         copy: 'If Day ' + mondayMuseum.dayNumber + ' museum plans are closed, swap it with an outdoor Wall/history day and keep one checked-open museum only.',
         icon: 'calendar'
+      });
+    }
+    if (weatherSwappedDay) {
+      fixes.push({
+        key: 'live-rain-swap',
+        label: 'Live rain swap',
+        copy: 'Day ' + weatherSwappedDay.dayNumber + ' was reordered because the live forecast is clearly rainy. Keep the covered route on that date.',
+        icon: 'umbrella'
       });
     }
     if (rainDay) {
@@ -16133,6 +16146,9 @@
   function planSwapsForPlan(plan) {
     var days = plan.days || [];
     var swaps = [];
+    var weatherSwappedDay = days.find(function (day) {
+      return Boolean(day.weatherSwap && day.weatherSwap.key === 'weather-swap-covered-day');
+    });
     var mondayMuseum = days.find(function (day) {
       return dayStatus(day.dateKey).key === 'monday' && /museum|royal/i.test(day.title + ' ' + day.theme);
     });
@@ -16160,6 +16176,17 @@
         icon: 'calendar',
         actionLabel: 'Open safer Day ' + outdoorDay.dayNumber + ' route',
         actionUrl: dayRouteAction(outdoorDay).url
+      });
+    }
+
+    if (weatherSwappedDay) {
+      swaps.push({
+        key: 'live-weather-day-swap',
+        label: 'Live rain swap',
+        copy: 'The live forecast put rain on Day ' + weatherSwappedDay.dayNumber + ', so the planner moved a more covered route onto that date.',
+        icon: 'umbrella',
+        actionLabel: 'Open covered Day ' + weatherSwappedDay.dayNumber + ' route',
+        actionUrl: dayRouteAction(weatherSwappedDay).url
       });
     }
 
@@ -17909,7 +17936,8 @@
       }),
       placeIds: (source.placeIds || []).slice(),
       openingSwap: null,
-      openingWarning: null
+      openingWarning: null,
+      weatherSwap: null
     });
   }
 
@@ -17967,6 +17995,96 @@
     return days;
   }
 
+  function isLiveRainyWeather(weather) {
+    if (!weather || weather.mode !== 'Live forecast') return false;
+    return /use the covered backup|rain likely|showers possible|thunderstorms possible|drizzle/i.test([
+      weather.title,
+      weather.meta,
+      weather.cue
+    ].join(' '));
+  }
+
+  function dayIndoorScore(day) {
+    var ids = dayPlaceIds(day);
+    var indoorCount = ids.filter(function (placeId) {
+      var place = placeFor(placeId);
+      return Boolean(place && place.indoor);
+    }).length;
+    var type = dayPlanType(day);
+    var score = ids.length ? indoorCount / ids.length : 0;
+    if (type === 'museums' || type === 'food') score += 0.45;
+    if (type === 'history' && ids.indexOf('topography_terror') !== -1) score += 0.2;
+    if (type === 'potsdam') score -= 0.35;
+    if (type === 'free' || type === 'wall' || type === 'local') score -= 0.15;
+    return score;
+  }
+
+  function isIndoorHeavyDay(day) {
+    if (!day || day.dayNumber === 1 || dayHasTour(day)) return false;
+    return dayIndoorScore(day) >= 0.55;
+  }
+
+  function isOutdoorExposedDay(day) {
+    if (!day || day.dayNumber === 1 || dayHasTour(day)) return false;
+    if (isIndoorHeavyDay(day)) return false;
+    var type = dayPlanType(day);
+    if (['wall', 'free', 'local', 'potsdam'].indexOf(type) !== -1) return true;
+    return dayIndoorScore(day) < 0.4;
+  }
+
+  function weatherSwapIsOpeningSafe(days, rainyIndex, indoorIndex) {
+    var rainyDay = days[rainyIndex];
+    var indoorDay = days[indoorIndex];
+    return !dayOpeningRisk(cloneDayForDate(indoorDay, rainyDay)) &&
+      !dayOpeningRisk(cloneDayForDate(rainyDay, indoorDay));
+  }
+
+  function nearestIndoorHeavySwapIndex(days, rainyIndex) {
+    var best = -1;
+    var bestDistance = Infinity;
+    (days || []).forEach(function (day, index) {
+      if (index === rainyIndex || !isIndoorHeavyDay(day) || day.weatherSwap || day.openingWarning || day.openingSwap) return;
+      if (!weatherSwapIsOpeningSafe(days, rainyIndex, index)) return;
+      var distance = Math.abs(index - rainyIndex);
+      if (distance < bestDistance) {
+        best = index;
+        bestDistance = distance;
+      }
+    });
+    return best;
+  }
+
+  function applyWeatherSwaps(days) {
+    if (!days || days.length < 2) return days;
+    for (var index = 0; index < days.length; index += 1) {
+      var rainyDay = days[index];
+      if (!isOutdoorExposedDay(rainyDay) || !isLiveRainyWeather(dayWeatherFor(rainyDay))) continue;
+      var indoorIndex = nearestIndoorHeavySwapIndex(days, index);
+      if (indoorIndex < 0) continue;
+
+      var indoorDay = days[indoorIndex];
+      var indoorOnRain = cloneDayForDate(indoorDay, rainyDay);
+      var exposedOnClearer = cloneDayForDate(rainyDay, indoorDay);
+      indoorOnRain.weatherSwap = {
+        key: 'weather-swap-covered-day',
+        severity: 'medium',
+        title: 'Rainy day swap applied',
+        copy: 'I moved the more covered route onto this rainy forecast day.',
+        action: 'Use this indoor-heavy day first; save the exposed route for Day ' + indoorDay.dayNumber + '.'
+      };
+      exposedOnClearer.weatherSwap = {
+        key: 'weather-swap-exposed-day',
+        severity: 'medium',
+        title: 'Outdoor route moved',
+        copy: 'This more exposed route moved away from the rainy forecast day.',
+        action: ''
+      };
+      days[index] = indoorOnRain;
+      days[indoorIndex] = exposedOnClearer;
+    }
+    return days;
+  }
+
   function addOpeningFallback(day) {
     var risk = dayOpeningRisk(day);
     if (!risk) return day;
@@ -18019,6 +18137,7 @@
 
   function postProcessPlanDays(days) {
     applyOpeningSwaps(days);
+    applyWeatherSwaps(days);
     for (var index = 0; index < days.length; index += 1) {
       days[index] = addOpeningFallback(days[index]);
     }
@@ -18682,8 +18801,12 @@
     setText('[data-weather-wind]', summary.metrics[2].value);
     setText('[data-weather-advice]', summary.advice);
     if (latestPlan && planGenerated && unlocked) {
+      latestPlan = buildPlan();
+      ensureDailyWeatherForPlan(latestPlan);
+      renderPlanChrome(latestPlan);
+      renderUnlockedResultPanels(latestPlan);
       renderPlanBoard(latestPlan);
-      if (unlocked) renderFullPlan();
+      renderFullPlan();
     }
   }
 
@@ -18964,6 +19087,31 @@
     return map;
   }
 
+  function localMockRainDayMap(map) {
+    if (!isLocalPreviewSurface()) return map || {};
+    try {
+      var params = new URLSearchParams(window.location.search || '');
+      var value = params.get('mockRainDay');
+      if (!value) return map || {};
+      var keys = tripDateKeys();
+      var target = /^\d+$/.test(value) ? keys[Math.max(0, Math.min(keys.length - 1, Number(value) - 1))] : value;
+      if (keys.indexOf(target) === -1) return map || {};
+      var nextMap = Object.assign({}, map || {});
+      nextMap[target] = dailyWeatherFromForecast(target, {
+        temperature: 16,
+        low: 12,
+        rainProbability: 88,
+        precipitation: 6.4,
+        windSpeed: 18,
+        weatherCode: 63,
+        condition: 'Rain likely'
+      }, 'Live forecast');
+      return nextMap;
+    } catch (error) {
+      return map || {};
+    }
+  }
+
   function dayWeatherFor(day) {
     if (!day || !day.dateKey) return null;
     return latestDailyWeather[day.dateKey] || null;
@@ -19068,14 +19216,14 @@
     var requestId = ++weatherRequestId;
     var params = new URLSearchParams(window.location.search);
     if (params.get('weather') === 'off') {
-      setDailyWeatherMap(fallbackDailyWeatherMap());
+      setDailyWeatherMap(localMockRainDayMap(fallbackDailyWeatherMap()));
       renderWeatherFallback();
       track('bw_trip_planner_weather_fallback', { date: state.arrivalDate, reason: 'weather_off' });
       return;
     }
     var dayDiff = daysFromToday(state.arrivalDate);
     if (dayDiff > FORECAST_MAX_DAYS || dayDiff < 0) {
-      setDailyWeatherMap(climateDailyWeatherMap());
+      setDailyWeatherMap(localMockRainDayMap(climateDailyWeatherMap()));
       renderClimateWeather();
       return;
     }
@@ -19098,7 +19246,7 @@
       if (requestId !== weatherRequestId) return;
       var forecast = extractForecast(data);
       if (!forecast) throw new Error('No matching forecast');
-      setDailyWeatherMap(liveDailyWeatherMap(data));
+      setDailyWeatherMap(localMockRainDayMap(liveDailyWeatherMap(data)));
       renderWeatherForecast(forecast);
       track('bw_trip_planner_weather_view', {
         date: state.arrivalDate,
@@ -19107,7 +19255,7 @@
       });
     } catch (error) {
       if (requestId !== weatherRequestId) return;
-      setDailyWeatherMap(fallbackDailyWeatherMap());
+      setDailyWeatherMap(localMockRainDayMap(fallbackDailyWeatherMap()));
       renderWeatherFallback();
       track('bw_trip_planner_weather_fallback', { date: state.arrivalDate, reason: 'fetch_or_parse_failed' });
     }

@@ -48,6 +48,14 @@ default commits now send one deduped `bw_trip_planner_quiz_answer` event per
 step, which keeps the per-step funnel report from mistaking default-answer
 progress for drop-off.
 
+Update 2026-07-06: Wave 1.5 added live-weather day reordering. When the daily
+Open-Meteo forecast marks a trip date as clearly rainy, the post-generation pass
+now moves the nearest indoor-heavy non-tour day onto that date and moves the
+exposed route to the clearer date, while checking that the swap does not create
+Monday/closed-anchor opening risk. Day cards and Smart Swaps show a visible
+`Rain swap` note. A localhost-only `mockRainDay` query parameter exists for QA
+and does not affect the public embed.
+
 ## 1. User Inputs
 
 ### Visible inputs
@@ -148,6 +156,10 @@ Weather:
 - Monthly fallback for later dates.
 - `Rain backup` selected acts like a rain concern even if live forecast is not rainy.
 - Rain concern changes risk chips, weather strategy, nearby extra copy, and some tour/day choices.
+- If a live daily forecast inside the trip is clearly rainy, the planner prefers
+  moving an indoor-heavy day (`museums`, `food`, or indoor-metadata-heavy route)
+  onto that date and moving the exposed day away, unless that would break tour
+  placement or opening rules.
 
 Resolved 2026-07-05:
 
@@ -166,6 +178,9 @@ Current high-level sequence:
 5. Used map anchors are remembered. Later days avoid repeated anchors and may switch to anti-repeat variants.
 6. Opening post-processing swaps risky museum/closed-anchor days off Monday or
    injects a visible fallback warning when no safe swap exists.
+7. Weather post-processing can swap a covered day onto a clearly rainy live
+   forecast date, after opening swaps have already protected museum/closure
+   risks.
 
 Day type queue:
 
