@@ -8235,7 +8235,7 @@
         "name": "Should I pay a Berlin ticket inspector in cash?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Be careful. Ask for inspector ID and an official receipt. S-Bahn specifically warns that its inspectors do not demand cash without proper receipt handling. Use the EBE number and the official operator payment path if you are unsure."
+          "text": "Be careful. Ask for inspector ID and an official receipt. S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag. Use the EBE number and the official operator payment path if you are unsure."
         }
       },
       {

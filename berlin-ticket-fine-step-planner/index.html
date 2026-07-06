@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Berlin Ticket Fine Step Planner | BerlinWalk</title>
   <meta name="description" content="Turn a Berlin U-Bahn, S-Bahn, tram or bus ticket fine receipt into the next practical step.">
+  <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../css/brand.css">
   <style>
     :root {
@@ -591,12 +592,12 @@
         id: {
           title: 'Slow down and verify the official path',
           amount: 'EUR 60',
-          label: 'or extra ID fee',
+          label: 'standard amount',
           warning: 'Real inspectors can ask for ID and issue a receipt. Be careful with cash pressure, especially if there is no official receipt or identification.',
           steps: [
             ['On site', 'Ask for inspector ID', 'If something feels wrong, ask calmly for identification and a written receipt.'],
             ['Receipt', 'Use the operator name', 'The EBE number and operator are what let you pay or check the case later.'],
-            ['No ID', 'Expect extra friction', 'If you cannot identify yourself, the operator may involve police or add a small identity-check fee.']
+            ['No ID', 'Expect extra friction', 'If you cannot identify yourself, the inspectors can involve the police to confirm your identity.']
           ],
           keep: ['Receipt number', 'Inspector or team number if shown', 'Payment receipt if you paid on site', 'Operator customer-service link']
         }
@@ -613,7 +614,7 @@
           kicker: 'S-Bahn Berlin',
           link: 'https://sbahn.berlin/en/tickets/the-vbb-fare-explained/ticket-control/',
           linkText: 'Open S-Bahn control info',
-          note: 'S-Bahn notes a 14-day payment window and warns that inspectors do not demand cash without receipt.'
+          note: 'S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag.'
         },
         unknown: {
           kicker: 'Check the operator on the slip',

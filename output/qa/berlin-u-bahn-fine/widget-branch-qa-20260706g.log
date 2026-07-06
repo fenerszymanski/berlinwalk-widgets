@@ -1,0 +1,114 @@
+### Result
+{"checkedAt":"2026-07-06T13:39:22.168Z","url":"http://127.0.0.1:8796/berlin-ticket-fine-step-planner/?qa=20260706g","ok":true,"results":[{"viewport":{"name":"desktop","width":1280,"height":1200},"ok":true,"assertions":{"personalBvgEur7":true,"sbahnNoteExact":true,"idNoFeeClaim":true,"idPoliceText":true,"zoneBranch":true,"digitalBranch":true,"consoleZero":true,"overflowZero":true,"noOldPhrases":true},"personal":{"title":"Prove the personal pass within 7 days","amount":"EUR 7","label":"POSSIBLE PROCESSING FEE","warning":"This reduced path is for personal, non-transferable tickets or subscriptions that were valid at the time. It is not a shortcut for single tickets or day tickets. BVG EBE access is normally available from noon on the next working day."},"sbahnWarning":"This reduced path is for personal, non-transferable tickets or subscriptions that were valid at the time. It is not a shortcut for single tickets or day tickets. S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag.","id":{"title":"Slow down and verify the official path","amount":"EUR 60","label":"STANDARD AMOUNT"},"zone":{"title":"Fix the zone before the next platform","warning":"A ticket that does not cover the route can be treated as invalid for that journey, especially around BER Airport and zone C. S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag."},"digital":{"title":"Assume late activation will be treated strictly","warning":"A digital ticket must be valid before the journey. A purchase or activation after boarding is a weak argument during control. S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag."},"layout":{"innerWidth":1280,"scrollWidth":1280,"clientWidth":1280,"overflowX":0,"bodyTextHasOldCash":false,"bodyTextHasIdentityFee":false},"consoleErrors":[]},{"viewport":{"name":"mobile-390","width":390,"height":1100},"ok":true,"assertions":{"personalBvgEur7":true,"sbahnNoteExact":true,"idNoFeeClaim":true,"idPoliceText":true,"zoneBranch":true,"digitalBranch":true,"consoleZero":true,"overflowZero":true,"noOldPhrases":true},"personal":{"title":"Prove the personal pass within 7 days","amount":"EUR 7","label":"POSSIBLE PROCESSING FEE","warning":"This reduced path is for personal, non-transferable tickets or subscriptions that were valid at the time. It is not a shortcut for single tickets or day tickets. BVG EBE access is normally available from noon on the next working day."},"sbahnWarning":"This reduced path is for personal, non-transferable tickets or subscriptions that were valid at the time. It is not a shortcut for single tickets or day tickets. S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag.","id":{"title":"Slow down and verify the official path","amount":"EUR 60","label":"STANDARD AMOUNT"},"zone":{"title":"Fix the zone before the next platform","warning":"A ticket that does not cover the route can be treated as invalid for that journey, especially around BER Airport and zone C. S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag."},"digital":{"title":"Assume late activation will be treated strictly","warning":"A digital ticket must be valid before the journey. A purchase or activation after boarding is a weak argument during control. S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag."},"layout":{"innerWidth":390,"scrollWidth":390,"clientWidth":390,"overflowX":0,"bodyTextHasOldCash":false,"bodyTextHasIdentityFee":false},"consoleErrors":[]}]}
+### Ran Playwright code
+```js
+await (async (page) => {
+  const outDir = '/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/berlin-u-bahn-fine';
+  const url = 'http://127.0.0.1:8796/berlin-ticket-fine-step-planner/?qa=20260706g';
+  const viewports = [
+    { name: 'desktop', width: 1280, height: 1200 },
+    { name: 'mobile-390', width: 390, height: 1100 },
+  ];
+  const errors = [];
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') errors.push(msg.text());
+  });
+  page.on('pageerror', (error) => errors.push(error.message));
+
+  const results = [];
+  for (const viewport of viewports) {
+    errors.length = 0;
+    await page.setViewportSize({ width: viewport.width, height: viewport.height });
+    await page.goto(url + '&viewport=' + viewport.name, { waitUntil: 'networkidle' });
+
+    async function clickScenario(name) {
+      await page.locator(`[data-scenario="${name}"]`).click();
+      await page.waitForTimeout(80);
+    }
+
+    async function clickOperator(name) {
+      await page.locator(`[data-operator="${name}"]`).click();
+      await page.waitForTimeout(80);
+    }
+
+    async function text(selector) {
+      return (await page.locator(selector).innerText()).replace(/\s+/g, ' ').trim();
+    }
+
+    await clickScenario('personal');
+    await clickOperator('bvg');
+    const personal = {
+      title: await text('#result-title'),
+      amount: await text('#result-amount'),
+      label: await text('#result-amount-label'),
+      warning: await text('#result-warning'),
+    };
+
+    await clickOperator('sbahn');
+    const sbahnWarning = await text('#result-warning');
+
+    await clickScenario('id');
+    const idReceiptText = await text('.receipt');
+    const id = {
+      title: await text('#result-title'),
+      amount: await text('#result-amount'),
+      label: await text('#result-amount-label'),
+    };
+
+    await clickScenario('zone');
+    const zone = {
+      title: await text('#result-title'),
+      warning: await text('#result-warning'),
+    };
+
+    await clickScenario('digital');
+    const digital = {
+      title: await text('#result-title'),
+      warning: await text('#result-warning'),
+    };
+
+    const layout = await page.evaluate(() => ({
+      innerWidth,
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+      overflowX: Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth),
+      bodyTextHasOldCash: document.body.innerText.includes('do not demand cash without receipt') || document.body.innerText.includes('proper receipt handling'),
+      bodyTextHasIdentityFee: document.body.innerText.includes('identity-check fee') || document.body.innerText.includes('extra ID fee'),
+    }));
+
+    await page.screenshot({ path: `${outDir}/widget-branch-qa-${viewport.name}-20260706g.png`, fullPage: true });
+
+    const assertions = {
+      personalBvgEur7: personal.amount === 'EUR 7',
+      sbahnNoteExact: sbahnWarning.includes('S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag.'),
+      idNoFeeClaim: !idReceiptText.includes('identity-check fee') && !idReceiptText.includes('extra ID fee') && id.label.toLowerCase() === 'standard amount',
+      idPoliceText: idReceiptText.includes('inspectors can involve the police to confirm your identity'),
+      zoneBranch: zone.title.includes('Fix the zone'),
+      digitalBranch: digital.title.includes('Assume late activation'),
+      consoleZero: errors.length === 0,
+      overflowZero: layout.overflowX === 0,
+      noOldPhrases: !layout.bodyTextHasOldCash && !layout.bodyTextHasIdentityFee,
+    };
+    results.push({
+      viewport,
+      ok: Object.values(assertions).every(Boolean),
+      assertions,
+      personal,
+      sbahnWarning,
+      id,
+      zone,
+      digital,
+      layout,
+      consoleErrors: [...errors],
+    });
+  }
+
+  return {
+    checkedAt: new Date().toISOString(),
+    url,
+    ok: results.every((result) => result.ok),
+    results,
+  };
+}
+)(page);
+```

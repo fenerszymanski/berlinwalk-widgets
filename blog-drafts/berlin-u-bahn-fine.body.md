@@ -6,7 +6,7 @@ My advice is simple: do not panic, do not improvise a story, and do not keep tra
 
 ## Berlin U-Bahn fine: the short version
 
-The Berlin U-Bahn fine is officially an increased fare, usually called **EBE** from the German *erhöhtes Beförderungsentgelt*. In normal tourist terms, it means this: if you cannot show a valid ticket when checked, the transport company can ask for **60 euros**.
+The Berlin U-Bahn fine is officially an increased fare, usually called **EBE** from the German _erhöhtes Beförderungsentgelt_. In normal tourist terms, it means this: if you cannot show a valid ticket when checked, the transport company can ask for **60 euros**.
 
 This is not only about people who never bought a ticket. The most common tourist problems are:
 
@@ -46,6 +46,8 @@ For a normal Berlin public transport fine, expect **60 euros**. BVG, S-Bahn Berl
 The uncomfortable part is that honest mistakes usually still count. If you had a paper ticket but did not stamp it, the inspector is not standing there to judge your travel intentions. From the operator's point of view, the ticket was not valid during control.
 
 That is why I do not recommend a long argument on the platform. If there was a real machine failure, app failure or wrong information from staff, keep evidence and contact the operator afterward through the receipt number. But the first practical move is still to understand the receipt and stop the mistake from continuing.
+
+The normal EBE is a civil payment claim from the transport company, not automatically a criminal case. Repeated or deliberate fare evasion can become more serious, so do not ignore the receipt or the deadline.
 
 ## If you forgot to validate a paper ticket
 
@@ -112,7 +114,7 @@ The word **personal** matters. If the ticket is tied to your name and was valid 
 
 ## Do you need to pay on the spot?
 
-This depends on the operator and situation. S-Bahn Berlin explains that an EBE can be paid by card during certain checks, and if it is not paid on site the receipt must be paid within the stated deadline. BVG directs people to its EBE service portal, where the case is normally available from noon on the next working day.
+This depends on the operator and situation. S-Bahn Berlin explains that on the train or platform, on-the-spot payment is by Girocard or credit card only, and if it is not paid on site the receipt must be paid within the stated deadline. BVG directs people to its EBE service portal, where the case is normally available from noon on the next working day.
 
 The tourist rule is:
 
@@ -121,7 +123,7 @@ The tourist rule is:
 - Make sure you receive an official receipt.
 - Use the operator name and EBE number to pay or check the case.
 
-S-Bahn Berlin specifically warns about fake inspectors and says its inspectors do not demand cash without proper receipt handling. That does not mean every uncomfortable check is fake. It means the receipt and official process are your protection.
+S-Bahn says its inspectors never demand cash; on-the-spot payment is by card only. A cash demand is a red flag. That does not mean every uncomfortable check is fake. It means the receipt and official process are your protection.
 
 For broader street and transport caution, also read my [Berlin tourist scams guide](https://www.berlinwalk.com/post/berlin-tourist-scams).
 
@@ -161,9 +163,12 @@ If you want that practical first-day orientation in person, the BerlinWalk tour 
 - [S-Bahn Berlin ticket control](https://sbahn.berlin/en/tickets/the-vbb-fare-explained/ticket-control/)
 - [Berlin.de public transport tickets](https://www.berlin.de/en/public-transportation/1772016-2913840-tickets-fares-and-route-maps.en.html)
 
-## Image Credits
-
-Images in this guide use Wikimedia Commons files by IngolfBLN (CC BY-SA 2.0), Nicolas Bouliane (CC BY-SA 4.0), Orderinchaos (CC BY-SA 4.0), and Silas S. Brown (CC BY-SA 4.0). Source links and filenames are recorded in the local BerlinWalk visual source notes for this draft.
-
 {{faq}}
 
+## Image Credits
+
+- U-Bahn train at Prinzenstraße station by IngolfBLN, CC BY-SA 2.0, via Wikimedia Commons.
+- VBB ticket machine by Nicolas Bouliane, CC BY-SA 4.0, via Wikimedia Commons.
+- Ticket validation at a VBB stamping machine by Nicolas Bouliane, CC BY-SA 4.0, via Wikimedia Commons.
+- Ticket validator at U-Bahnhof Alexanderplatz by Orderinchaos, CC BY-SA 4.0, via Wikimedia Commons.
+- Two Berlin transport tickets by Silas S. Brown, CC BY-SA 4.0, via Wikimedia Commons.
