@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-image-frame-20260623';
+const ASSET_BUILD = 'smile-mobile-start-top-20260707';
 const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
 
 function loadGamesPreviewRail(callback) {

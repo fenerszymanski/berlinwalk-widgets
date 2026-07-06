@@ -599,14 +599,27 @@
     }
 
     @media (max-width: 560px) {
+      html,
+      body {
+        height: auto;
+        min-height: 100%;
+        overflow: auto;
+        overflow-x: hidden;
+        -webkit-overflow-scrolling: touch;
+      }
+
       .bw-smile-game {
         border-width: 4px;
         border-radius: 18px;
         box-shadow: 6px 6px 0 var(--ink);
-        min-height: 0;
+        height: auto;
+        min-height: 100svh;
+        overflow: visible;
       }
 
       .bw-screen {
+        flex: 0 0 auto;
+        overflow: visible;
         padding: 10px;
       }
 
@@ -641,7 +654,7 @@
       }
 
       .bw-start-screen {
-        align-content: center;
+        align-content: start;
         gap: 12px;
       }
 
@@ -771,7 +784,7 @@
       }
 
       .bw-result-screen {
-        align-content: center;
+        align-content: start;
       }
 
       .bw-result-card {
@@ -834,7 +847,7 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-desktop-share-instant-feedback-20260623';
+      const BUILD = 'smile-mobile-start-top-20260707';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
