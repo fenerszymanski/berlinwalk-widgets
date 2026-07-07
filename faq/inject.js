@@ -1,6 +1,7 @@
 /* Auto-generated from /faq/data.json and /faq/slug-map.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
+  "entschuldigung-berlin": "entschuldigung-berlin",
   "jaywalking-in-berlin": "jaywalking-in-berlin",
   "berlin-transport-strike": "berlin-transport-strike",
   "alternative-transport-berlin": "alternative-transport-berlin",
@@ -182,6 +183,60 @@
 };
 
   var SCHEMAS = {
+  "entschuldigung-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do you pronounce Entschuldigung?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Break it into four pieces: ent-SHOOL-dee-goong, with the stress on the second syllable. The ending is a soft \"goong,\" not a hard English \"gung.\" In casual speech, Berliners often shorten it to just \"'tschuldigung.\""
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Entschuldigung formal or informal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Plain Entschuldigung works in both registers and is the safe default for a visitor. Entschuldige or entschuldige bitte is informal, for someone your age or a friend. Entschuldigen Sie or Entschuldigen Sie bitte is more formal, useful with police, older Berliners, or official staff."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between Entschuldigung, Tut mir leid, and Verzeihung?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Entschuldigung is the everyday, functional word for excuse me, sorry, or pardon me, and covers almost every situation. Tut mir leid is heavier, closer to genuine regret, and better saved for moments that call for real sympathy. Verzeihung, from verzeihen (to forgive), is older and more formal; Entschuldigung works everywhere Verzeihung would."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When should I actually use Entschuldigung in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Three moments come up constantly: getting past someone (U-Bahn doors, museum corridors, market crowds), getting someone's attention (asking a Späti owner or a stranger a question), and recovering from a small mistake like stepping on someone's foot."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it rude to just say sorry in English instead?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, and most people in central Berlin will understand and answer in English anyway. It just adds a half-second of confusion before the switch happens, which makes the interaction feel slightly slower and marks you more clearly as a visitor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do Berliners really care if tourists don't speak German?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not in a way that affects how you're treated, but small effort is noticed. Using Entschuldigung at the right moment, paired with Danke and Bitte, reads as basic courtesy rather than fluency, and it is enough to make everyday interactions noticeably smoother."
+        }
+      }
+    ]
+  },
   "jaywalking-in-berlin": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
