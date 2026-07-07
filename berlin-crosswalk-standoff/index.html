@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Crosswalk Standoff | BerlinWalk</title>
+<meta name="description" content="Four real Berlin corners, one red light each time. Wait or cross — see what actually happens, then find out your patience score.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../css/brand.css">
+<script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-crosswalk">
+<style>
+  html, body {
+    background: transparent;
+    margin: 0;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 0;
+    width: 100%;
+  }
+
+  #bw-crosswalk {
+    --bw-green: #1B5E20;
+    --bw-yellow: #FFE600;
+    --bw-lime: #7CB342;
+    --bw-cream: #FAFAF5;
+    --bw-white: #FFFFFF;
+    --bw-text: #212121;
+    --bw-muted: #55665A;
+    --bw-border: #D8E5CA;
+    --bw-red: #C1272D;
+    color: var(--bw-text);
+    font-family: Montserrat, Arial, sans-serif;
+    margin: 24px auto;
+    max-width: 560px;
+    width: 100%;
+  }
+
+  #bw-crosswalk *, #bw-crosswalk *::before, #bw-crosswalk *::after {
+    box-sizing: border-box;
+  }
+
+  #bw-crosswalk .bw-shell {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-radius: 14px;
+    box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+
+  #bw-crosswalk .bw-head {
+    background: linear-gradient(135deg, var(--bw-green), #24793a);
+    color: var(--bw-white);
+    padding: 16px 18px 14px;
+  }
+
+  #bw-crosswalk .bw-kicker {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
+    color: var(--bw-yellow);
+    margin: 0 0 4px;
+  }
+
+  #bw-crosswalk .bw-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin: 0 0 4px;
+    line-height: 1.25;
+  }
+
+  #bw-crosswalk .bw-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  #bw-crosswalk .bw-body {
+    padding: 18px;
+  }
+
+  /* ---- Intro ---- */
+  #bw-crosswalk .bw-intro p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    margin: 0 0 12px;
+  }
+
+  #bw-crosswalk .bw-intro ul {
+    margin: 0 0 16px;
+    padding-left: 18px;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--bw-muted);
+  }
+
+  #bw-crosswalk .bw-btn {
+    display: inline-block;
+    width: 100%;
+    background: var(--bw-green);
+    color: var(--bw-white);
+    border: none;
+    border-radius: 9px;
+    font-family: Montserrat, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    padding: 13px 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.08s ease, background 0.15s ease;
+  }
+
+  #bw-crosswalk .bw-btn:active { transform: scale(0.98); }
+  #bw-crosswalk .bw-btn:hover { background: #164d1a; }
+
+  #bw-crosswalk .bw-btn-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  #bw-crosswalk .bw-btn-secondary {
+    background: var(--bw-white);
+    color: var(--bw-green);
+    border: 2px solid var(--bw-green);
+  }
+
+  #bw-crosswalk .bw-btn-secondary:hover { background: #f1f8f1; }
+
+  #bw-crosswalk .bw-btn-cross {
+    background: var(--bw-red);
+  }
+  #bw-crosswalk .bw-btn-cross:hover { background: #9e1f24; }
+
+  /* ---- Round scene ---- */
+  #bw-crosswalk .bw-scene {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 14px;
+  }
+
+  #bw-crosswalk .bw-scene::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.15) 45%, rgba(10,25,12,0.88) 100%);
+  }
+
+  #bw-crosswalk .bw-scene-top {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  #bw-crosswalk .bw-corner-tag {
+    background: rgba(0,0,0,0.55);
+    color: var(--bw-white);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    padding: 5px 9px;
+    border-radius: 999px;
+    backdrop-filter: blur(2px);
+  }
+
+  #bw-crosswalk .bw-signal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+  }
+
+  #bw-crosswalk .bw-signal-lamp {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--bw-red);
+    box-shadow: 0 0 12px 3px rgba(193,39,45,0.75), inset 0 0 0 3px rgba(0,0,0,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #bw-crosswalk .bw-signal-lamp.bw-lamp-go {
+    background: var(--bw-lime);
+    box-shadow: 0 0 12px 3px rgba(124,179,66,0.75), inset 0 0 0 3px rgba(0,0,0,0.35);
+  }
+
+  #bw-crosswalk .bw-signal-lamp svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--bw-white);
+  }
+
+  #bw-crosswalk .bw-timer {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--bw-white);
+    background: rgba(0,0,0,0.5);
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  #bw-crosswalk .bw-scene-bottom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    padding: 12px 14px 14px;
+  }
+
+  #bw-crosswalk .bw-scene-place {
+    color: var(--bw-yellow);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    margin: 0 0 4px;
+    text-transform: uppercase;
+  }
+
+  #bw-crosswalk .bw-scene-text {
+    color: var(--bw-white);
+    font-size: 14px;
+    line-height: 1.45;
+    margin: 0;
+  }
+
+  #bw-crosswalk .bw-timer-note {
+    font-size: 10.5px;
+    color: var(--bw-muted);
+    text-align: center;
+    margin: 0 0 10px;
+  }
+
+  #bw-crosswalk .bw-round-progress {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  #bw-crosswalk .bw-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--bw-border);
+  }
+
+  #bw-crosswalk .bw-dot.bw-dot-done { background: var(--bw-lime); }
+  #bw-crosswalk .bw-dot.bw-dot-active { background: var(--bw-green); }
+
+  /* ---- Outcome panel ---- */
+  #bw-crosswalk .bw-outcome {
+    background: var(--bw-cream);
+    border: 1px solid var(--bw-border);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 14px;
+  }
+
+  #bw-crosswalk .bw-outcome-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+
+  #bw-crosswalk .bw-outcome-tag.bw-tag-wait { background: var(--bw-lime); color: var(--bw-white); }
+  #bw-crosswalk .bw-outcome-tag.bw-tag-cross { background: var(--bw-red); color: var(--bw-white); }
+
+  #bw-crosswalk .bw-outcome-text {
+    font-size: 14px;
+    line-height: 1.55;
+    margin: 0;
+  }
+
+  #bw-crosswalk .bw-outcome-text strong { color: var(--bw-green); }
+
+  /* ---- Results ---- */
+  #bw-crosswalk .bw-score-ring {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 6px solid var(--bw-lime);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 4px auto 14px;
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--bw-green);
+  }
+
+  #bw-crosswalk .bw-verdict {
+    text-align: center;
+    font-size: 17px;
+    font-weight: 800;
+    margin: 0 0 8px;
+  }
+
+  #bw-crosswalk .bw-verdict-sub {
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--bw-muted);
+    line-height: 1.5;
+    margin: 0 0 16px;
+  }
+
+  #bw-crosswalk .bw-cta {
+    background: var(--bw-cream);
+    border: 1px solid var(--bw-border);
+    border-radius: 10px;
+    padding: 14px;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  #bw-crosswalk .bw-cta p {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0 0 10px;
+  }
+
+  #bw-crosswalk .bw-hidden { display: none !important; }
+
+  @media (max-width: 420px) {
+    #bw-crosswalk .bw-title { font-size: 18px; }
+    #bw-crosswalk .bw-btn-row { flex-direction: column; }
+  }
+</style>
+
+<div class="bw-shell">
+  <div class="bw-head">
+    <p class="bw-kicker">Berlin Crosswalk Standoff</p>
+    <p class="bw-title">Wait, or go?</p>
+    <p class="bw-sub">Four real corners from my walking route. Same red light every time. Your call.</p>
+  </div>
+
+  <div class="bw-body">
+
+    <div class="bw-screen bw-screen-intro" data-screen="intro">
+      <div class="bw-intro">
+        <p>The light is red. There is not a car in sight. A Berliner is standing next to you, waiting anyway. What do you do?</p>
+        <ul>
+          <li>4 real corners from my route: Alexanderplatz, Karl-Liebknecht-Straße, Museum Island, Hackescher Markt.</li>
+          <li>Wait it out, or cross now. Each choice has a real consequence.</li>
+          <li>Get a Patience Score at the end, and the real rule behind the habit.</li>
+        </ul>
+        <button type="button" class="bw-btn" data-action="start">Start at Corner 1</button>
+      </div>
+    </div>
+
+    <div class="bw-screen bw-screen-round bw-hidden" data-screen="round">
+      <div class="bw-round-progress" data-el="progress"></div>
+      <div class="bw-scene" data-el="scene">
+        <div class="bw-scene-top">
+          <span class="bw-corner-tag" data-el="corner-tag"></span>
+          <div class="bw-signal">
+            <div class="bw-signal-lamp" data-el="lamp">
+              <svg viewBox="0 0 24 24"><path d="M12 2c-1.1 0-2 .9-2 2v1H8a1 1 0 000 2h1v2.1c-1.7.4-3 2-3 3.9 0 .34.04.66.1.97L4 16v2h16v-2l-2.1-3.03c.06-.31.1-.63.1-.97 0-1.9-1.3-3.5-3-3.9V7h1a1 1 0 000-2h-2V4c0-1.1-.9-2-2-2z"/></svg>
+            </div>
+            <span class="bw-timer" data-el="timer">18s</span>
+          </div>
+        </div>
+        <div class="bw-scene-bottom">
+          <p class="bw-scene-place" data-el="place"></p>
+          <p class="bw-scene-text" data-el="scene-text"></p>
+        </div>
+      </div>
+      <p class="bw-timer-note">Typical wait for this kind of corner — actual signal timing varies by junction.</p>
+
+      <div data-el="choice-buttons" class="bw-btn-row">
+        <button type="button" class="bw-btn bw-btn-secondary" data-action="wait">Wait for green</button>
+        <button type="button" class="bw-btn bw-btn-cross" data-action="cross">Cross now</button>
+      </div>
+
+      <div class="bw-outcome bw-hidden" data-el="outcome">
+        <span class="bw-outcome-tag" data-el="outcome-tag"></span>
+        <p class="bw-outcome-text" data-el="outcome-text"></p>
+      </div>
+
+      <button type="button" class="bw-btn bw-hidden" data-action="next" data-el="next-btn">Next corner</button>
+    </div>
+
+    <div class="bw-screen bw-screen-result bw-hidden" data-screen="result">
+      <div class="bw-score-ring"><span data-el="score-value">0/4</span></div>
+      <p class="bw-verdict" data-el="verdict-title"></p>
+      <p class="bw-verdict-sub" data-el="verdict-sub"></p>
+      <div class="bw-cta">
+        <p>These same corners are stops on my free, tip-based walking tour — about <strong>2 hours</strong> through central Berlin.</p>
+        <a class="bw-btn" style="text-decoration:none;" href="https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=embed&utm_medium=widget&utm_campaign=berlin-crosswalk-standoff" target="_blank" rel="noopener">See the free walking tour</a>
+      </div>
+      <button type="button" class="bw-btn bw-btn-secondary" data-action="restart">Play again</button>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('bw-crosswalk');
+
+  var ROUNDS = [
+    {
+      place: 'Alexanderplatz',
+      tag: 'Corner 1 of 4',
+      scene: 'You just stepped off the tram. The square is packed, the light is red, and the crossing toward the World Clock looks completely clear.',
+      seconds: 20,
+      bg: 'assets/optimized/round-1-alexanderplatz.jpg',
+      waitFact: 'The World Clock (Weltzeituhr) behind you has shown the time in 148 cities since it was unveiled in 1969 — one of the few GDR-era landmarks every Berliner still uses as a meeting point.'
+    },
+    {
+      place: 'Karl-Liebknecht-Straße',
+      tag: 'Corner 2 of 4',
+      scene: 'Outside the Ampelmann shop, tourists are photographing the green figure statue. The real signal above your head is red.',
+      seconds: 16,
+      bg: 'assets/optimized/round-2-karl-liebknecht.jpg',
+      waitFact: 'The Ampelmann almost disappeared after reunification, when West German signal standards nearly replaced him. A public campaign in the 1990s brought him back, and he outlived the country that invented him.'
+    },
+    {
+      place: 'Museum Island',
+      tag: 'Corner 3 of 4',
+      scene: 'You are crossing toward the Bode-Museum bridge, TV Tower in view. The road is one lane, empty, and the light is still red.',
+      seconds: 14,
+      bg: 'assets/optimized/round-3-museum-island.jpg',
+      waitFact: 'Museum Island packs five major museums into one small stretch of the Spree, most of them reachable on foot in less time than it takes some Berlin lights to turn green twice.'
+    },
+    {
+      place: 'Hackescher Markt',
+      tag: 'Corner 4 of 4',
+      scene: 'The S-Bahn arches are right above you and your train just left. The next crossing light is red, and the platform stairs are close.',
+      seconds: 11,
+      bg: 'assets/optimized/round-4-hackescher-markt.jpg',
+      waitFact: 'The brick arches over Hackescher Markt have carried S-Bahn trains since 1882 — this corner has been a transit junction for longer than the pedestrian traffic light has existed anywhere in Germany.'
+    }
+  ];
+
+  var CROSS_CONSEQUENCES = [
+    'Nobody around notices. You reach the other side in five quick steps and nothing happens at all.',
+    'A woman with a pram gives you a slow, unimpressed look. She does not say anything. She does not have to.',
+    '“Vorbild!” someone mutters near the curb — the reminder that adults are expected to set the example for any child watching.',
+    'A cyclist rings their bell hard, more out of principle than actual danger.',
+    'A community officer (Ordnungsamt) happens to be right there. This is the rare case where the real fine, <strong>EUR 5 to EUR 10</strong> under German traffic law, actually gets used.',
+    'Two students laugh and cross right behind you. Not everyone waits, but you will notice you are now in the minority.'
+  ];
+
+  var state = { index: 0, score: 0, timer: null, remaining: 0, resolved: false };
+
+  function screen(name) {
+    root.querySelectorAll('.bw-screen').forEach(function (el) {
+      el.classList.toggle('bw-hidden', el.getAttribute('data-screen') !== name);
+    });
+  }
+
+  function el(sel) { return root.querySelector(sel); }
+
+  function renderProgress() {
+    var wrap = el('[data-el="progress"]');
+    wrap.innerHTML = '';
+    for (var i = 0; i < ROUNDS.length; i++) {
+      var dot = document.createElement('span');
+      dot.className = 'bw-dot' + (i < state.index ? ' bw-dot-done' : i === state.index ? ' bw-dot-active' : '');
+      wrap.appendChild(dot);
+    }
+  }
+
+  function stopTimer() {
+    if (state.timer) { clearInterval(state.timer); state.timer = null; }
+  }
+
+  function startRound() {
+    state.resolved = false;
+    var round = ROUNDS[state.index];
+    renderProgress();
+    el('[data-el="scene"]').style.backgroundImage = 'linear-gradient(0deg, rgba(0,0,0,0), rgba(0,0,0,0)), url(' + round.bg + ')';
+    el('[data-el="corner-tag"]').textContent = round.tag;
+    el('[data-el="place"]').textContent = round.place;
+    el('[data-el="scene-text"]').textContent = round.scene;
+    el('[data-el="lamp"]').classList.remove('bw-lamp-go');
+    el('[data-el="outcome"]').classList.add('bw-hidden');
+    el('[data-el="next-btn"]').classList.add('bw-hidden');
+    el('[data-el="choice-buttons"]').classList.remove('bw-hidden');
+
+    state.remaining = round.seconds;
+    el('[data-el="timer"]').textContent = state.remaining + 's';
+
+    stopTimer();
+    state.timer = setInterval(function () {
+      state.remaining -= 1;
+      if (state.remaining <= 0) {
+        el('[data-el="timer"]').textContent = '0s';
+        stopTimer();
+        resolveRound('wait', round);
+        return;
+      }
+      el('[data-el="timer"]').textContent = state.remaining + 's';
+    }, 1000);
+  }
+
+  function resolveRound(choice, round) {
+    if (state.resolved) return;
+    state.resolved = true;
+    stopTimer();
+    el('[data-el="choice-buttons"]').classList.add('bw-hidden');
+    var outcome = el('[data-el="outcome"]');
+    var tag = el('[data-el="outcome-tag"]');
+    var text = el('[data-el="outcome-text"]');
+    outcome.classList.remove('bw-hidden');
+
+    if (choice === 'wait') {
+      state.score += 1;
+      el('[data-el="lamp"]').classList.add('bw-lamp-go');
+      tag.textContent = 'You waited';
+      tag.className = 'bw-outcome-tag bw-tag-wait';
+      text.innerHTML = round.waitFact;
+    } else {
+      tag.textContent = 'You crossed early';
+      tag.className = 'bw-outcome-tag bw-tag-cross';
+      var line = CROSS_CONSEQUENCES[Math.floor(Math.random() * CROSS_CONSEQUENCES.length)];
+      text.innerHTML = line;
+    }
+    el('[data-el="next-btn"]').classList.remove('bw-hidden');
+    el('[data-el="next-btn"]').textContent = state.index < ROUNDS.length - 1 ? 'Next corner' : 'See my result';
+  }
+
+  function renderResult() {
+    var score = state.score;
+    el('[data-el="score-value"]').textContent = score + '/4';
+    var title, sub;
+    if (score === 4) {
+      title = 'You already cross like a Berliner.';
+      sub = 'Full patience, every corner, even with an empty street. You will fit right in on the tour.';
+    } else if (score >= 2) {
+      title = 'Solid instincts, a little tourist left in you.';
+      sub = 'You waited more than you jumped. Keep the same habit near kids and busy junctions and you are set.';
+    } else {
+      title = 'You will want to work on your Wartezeit.';
+      sub = 'Nothing terrible happened here, but on a real Berlin street this is exactly the habit that earns a stare, a comment, or occasionally a real EUR 5-10 fine.';
+    }
+    el('[data-el="verdict-title"]').textContent = title;
+    el('[data-el="verdict-sub"]').textContent = sub;
+  }
+
+  root.addEventListener('click', function (event) {
+    var action = event.target.getAttribute('data-action');
+    if (!action) return;
+
+    if (action === 'start') {
+      state.index = 0; state.score = 0;
+      screen('round');
+      startRound();
+    } else if (action === 'wait') {
+      resolveRound('wait', ROUNDS[state.index]);
+    } else if (action === 'cross') {
+      resolveRound('cross', ROUNDS[state.index]);
+    } else if (action === 'next') {
+      state.index += 1;
+      if (state.index >= ROUNDS.length) {
+        screen('result');
+        renderResult();
+      } else {
+        startRound();
+      }
+    } else if (action === 'restart') {
+      screen('intro');
+    }
+  });
+
+  screen('intro');
+})();
+</script>
+</body>
+</html>

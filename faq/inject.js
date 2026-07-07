@@ -1,6 +1,7 @@
 /* Auto-generated from /faq/data.json and /faq/slug-map.json - do not edit by hand. */
 (function () {
   var SLUG_MAP = {
+  "jaywalking-in-berlin": "jaywalking-in-berlin",
   "berlin-transport-strike": "berlin-transport-strike",
   "alternative-transport-berlin": "alternative-transport-berlin",
   "berlin-night-transport": "berlin-night-transport",
@@ -181,6 +182,60 @@
 };
 
   var SCHEMAS = {
+  "jaywalking-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is jaywalking actually illegal in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Germany's road traffic law, the StVO, tells pedestrians to cross at junctions or signaled crossings and to follow the signal. Crossing against a red pedestrian light is a real violation, even if the street looks completely empty."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the fine for crossing on red in Germany?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The realistic range is EUR 5 to EUR 10 for a simple crossing on red. It increases quickly if your crossing forces a driver to brake hard or causes an accident, where liability and cost shift toward you."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do tourists actually get fined for jaywalking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It happens, but it is uncommon. Officers will not waive the rule just because you are visiting, but in daily practice you are far more likely to get a disapproving look from a stranger than an actual ticket."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do Germans wait at red lights even with no cars coming?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It comes down to Vorbildfunktion, the idea that adults should model correct behavior for any child who might be watching. Many Berliners will cross an empty street alone, but the same move next to a stroller or a group of kids draws real disapproval."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is a zebra crossing the same rule as a red light?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No, and this is the detail tourists usually miss. At a marked zebra crossing (Zebrastreifen) with no signal, pedestrians already have the right of way and cars must stop. At a signal-controlled crossing (an Ampel), the light overrides how empty the road looks."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the safest habit for a Berlin walking day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Treat the signal, not the traffic, as the thing you react to. If a local next to you is waiting, wait with them. On a walking day with dozens of crossings, that habit costs a few seconds and avoids an easy, avoidable conflict."
+        }
+      }
+    ]
+  },
   "berlin-transport-strike": {
     "@context": "https://schema.org",
     "@type": "FAQPage",
