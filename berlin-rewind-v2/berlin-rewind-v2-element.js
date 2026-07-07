@@ -23,9 +23,10 @@
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'berlin-rewind-v2-20260707b';
+  var BUILD = 'berlin-rewind-v2-20260707c';
   var TAG = 'bw-berlin-rewind-v2';
   var STORE_KEY = 'bwRewindV2State';
+  var HISTORY_MAX = 14;
 
   var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
   var ASSET_BASE = SCRIPT_SRC ? SCRIPT_SRC.replace(/[^/]*$/, '') : './';
@@ -112,6 +113,16 @@
     '.bw-rw-chiprow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;}',
     '.bw-rw-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(197,225,165,.35);border-radius:999px;padding:8px 13px;font-size:13.5px;font-weight:800;color:var(--cream);}',
     '.bw-rw-chip b{color:var(--y);}',
+    // personal score table
+    '.bw-rw-table{background:rgba(0,0,0,.16);border-radius:14px;padding:4px 14px 8px;margin:0 0 16px;}',
+    '.bw-rw-table-h{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--lg);padding:11px 0 7px;}',
+    '.bw-rw-trow{display:flex;align-items:center;gap:11px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.08);}',
+    '.bw-rw-trow:last-child{border-bottom:none;}',
+    '.bw-rw-tdate{font-size:13px;color:var(--cream);width:128px;flex:0 0 auto;}',
+    '.bw-rw-trow.today .bw-rw-tdate{color:#fff;font-weight:800;}',
+    '.bw-rw-tbar{flex:1;height:8px;border-radius:5px;background:rgba(255,255,255,.12);overflow:hidden;}',
+    '.bw-rw-tbar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--lime),var(--y));}',
+    '.bw-rw-tscore{font-size:14px;font-weight:800;color:var(--y);width:66px;text-align:right;flex:0 0 auto;}',
     // top bar (round + score)
     '.bw-rw-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}',
     '.bw-rw-round{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lg);}',
@@ -220,9 +231,16 @@
   function loadState() {
     try {
       var raw = window.localStorage.getItem(STORE_KEY);
-      if (raw) { var s = JSON.parse(raw); if (s && typeof s === 'object') return s; }
+      if (raw) { var s = JSON.parse(raw); if (s && typeof s === 'object') { if (!Array.isArray(s.history)) s.history = []; return s; } }
     } catch (e) {}
-    return { lastDate: null, streak: 0, best: 0, lastScore: 0 };
+    return { lastDate: null, streak: 0, best: 0, lastScore: 0, history: [] };
+  }
+  var WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  var MO = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function fmtDate(s) {
+    var p = String(s).split('-');
+    var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    return WD[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MO[d.getUTCMonth()];
   }
   function saveState(s) { try { window.localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {} }
 
@@ -306,6 +324,23 @@
       return '<div class="bw-rw-chiprow">' + chips + '</div>';
     }
 
+    _scoreTableHtml(st) {
+      var hist = (st.history || []).slice(0, 7);
+      if (!hist.length) return '';
+      var self = this;
+      var max = ROUNDS_PER_GAME * 200;
+      var rows = hist.map(function (h) {
+        var pct = Math.max(0, Math.min(100, Math.round((h.score / max) * 100)));
+        var today = h.date === self._today;
+        return '<div class="bw-rw-trow' + (today ? ' today' : '') + '">' +
+            '<span class="bw-rw-tdate">' + fmtDate(h.date) + (today ? ' &middot; today' : '') + '</span>' +
+            '<span class="bw-rw-tbar"><span class="bw-rw-tbar-fill" style="width:' + pct + '%"></span></span>' +
+            '<span class="bw-rw-tscore">' + h.score + '</span>' +
+          '</div>';
+      }).join('');
+      return '<div class="bw-rw-table"><div class="bw-rw-table-h">Your recent Rewind scores</div>' + rows + '</div>';
+    }
+
     _renderStart(st) {
       this.innerHTML =
         '<div class="bw-rw-card">' +
@@ -315,6 +350,7 @@
             this._stripHtml() +
             '<p class="bw-rw-sub">Today’s five real Berlin archive photos. Guess the year and the district for each, keep your daily streak alive, and come back tomorrow for a new set.</p>' +
             this._streakChips(st, false) +
+            this._scoreTableHtml(st) +
             '<div class="bw-rw-btnrow">' +
               '<button type="button" class="bw-rw-btn" data-start="daily">Play today’s 5 photos</button>' +
             '</div>' +
@@ -333,10 +369,7 @@
             '<h2 class="bw-rw-title">You’ve played<br>today’s Rewind.</h2>' +
             this._stripHtml() +
             this._streakChips(st, true) +
-            '<div class="bw-rw-recap" style="margin-bottom:14px;">' +
-              '<div class="bw-rw-recap-row"><span class="bw-rw-recap-t">Today’s score</span><span class="bw-rw-recap-p">' + (st.lastScore || 0) + '/' + (ROUNDS_PER_GAME * 200) + '</span></div>' +
-              '<div class="bw-rw-recap-row"><span class="bw-rw-recap-t">Day streak</span><span class="bw-rw-recap-p">' + (st.streak || 0) + '</span></div>' +
-            '</div>' +
+            this._scoreTableHtml(st) +
             '<p class="bw-rw-tomorrow"><b>New 5 photos tomorrow.</b> Keep the streak going.</p>' +
             '<div class="bw-rw-btnrow">' +
               '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
@@ -506,6 +539,11 @@
         st.best = Math.max(st.best || 0, st.streak);
         st.lastScore = this._total;
         st.lastDate = this._today;
+        st.history = Array.isArray(st.history) ? st.history : [];
+        if (!st.history.length || st.history[0].date !== this._today) {
+          st.history.unshift({ date: this._today, score: this._total });
+          st.history = st.history.slice(0, HISTORY_MAX);
+        }
         saveState(st);
         streakLine = '<p class="bw-rw-tomorrow">🔥 Day streak <b>' + st.streak + '</b> · new 5 photos tomorrow</p>';
       } else if (this._mode === 'practice') {
@@ -533,6 +571,7 @@
             '<p class="bw-rw-r-desc">' + esc(tier.desc) + '</p>' +
             recapHtml +
             streakLine +
+            (this._mode === 'daily' ? this._scoreTableHtml(st) : '') +
             '<div class="bw-rw-btnrow">' +
               '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
               secondBtn +
