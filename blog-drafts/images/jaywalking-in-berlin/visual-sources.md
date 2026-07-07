@@ -27,12 +27,13 @@ from category page HTML. Downloaded to `raw/`, reoriented/optimized to `optimize
 - License: CC BY-SA 4.0
 - Rationale: illustrates the zebra-crossing-vs-signal distinction explained in the article body.
 
-## 4. Red and green Ampelmann signal head (technician photo)
-- File: `optimized/02-jaywalking-red-green-explainer.jpg`
-- Source: https://commons.wikimedia.org/wiki/File:Ampelm%C3%A4nnchen_rot_Ampelm%C3%A4nnchen_gr%C3%BCn_Mensch.JPG
-- Photographer: Frze
+## 4. Pedestrians waiting at a Berlin crossing (in-article, "why Berliners wait")
+- File: `optimized/06-jaywalking-pedestrians-waiting.jpg`
+- Source: https://commons.wikimedia.org/wiki/File:Crossroads_Waiting_(43990780).jpeg
+- Photographer: Sascha Kohlmann
 - License: CC BY-SA 3.0
-- Rationale: only usable real photo found that shows both the red and green Ampelmann figures lit at once, useful as the "meet the two signals" explainer image.
+- Rationale: shows real people standing at the curb of a Berlin crossing, waiting to cross. This is the literal core scene of the article (Berliners waiting even with a clear road), so it is the single most on-theme image in the set. Placed in the "why Berliners wait" section.
+- 2026-07-07 REPLACEMENT: this image replaced the previous `02-jaywalking-red-green-explainer.jpg` (a maintenance technician in an orange hi-vis jacket adjusting a signal head, `File:Ampelmännchen_rot_Ampelmännchen_grün_Mensch.JPG` by Frze, CC BY-SA 3.0). Yusuf rejected that image: the worker and hi-vis jacket dominate the frame and the shot is about signal maintenance, not crossing/pedestrian rules — off-topic for a jaywalking article. The old raw/optimized `02-*` files remain on disk but are no longer referenced by the body or Image Credits.
 
 ## 5. Green Ampelmann signal (near Potsdamer Platz)
 - File: `optimized/01-jaywalking-green-man-signal.jpg`
