@@ -1,8 +1,7 @@
 # BerlinWalk Games Home Section
 
-Homepage Custom Element teaser for the BerlinWalk Games hub and the four
-current games: Berlin Battle, Berghain Bouncer, Berlin Smile Challenge, and
-Berlin Day Survival.
+Homepage Custom Element teaser for the BerlinWalk Games hub and the three
+current games: Berlin Battle, Berghain Bouncer, and Berlin Smile Challenge.
 
 The custom element name stays `<bw-berlin-battle-home>` for live Wix embed
 compatibility.

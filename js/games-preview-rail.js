@@ -16,15 +16,6 @@
       cta: 'Play Battle'
     },
     {
-      id: 'berlin-day-survival',
-      title: 'Berlin Day Survival',
-      kicker: 'Budget game',
-      lead: 'Choose a tiny first-day budget and see whether Berlin keeps your wallet alive.',
-      image: 'berlin-day-survival/assets/social/berlin-day-survival-social-1200x630.jpg',
-      href: 'https://www.berlinwalk.com/games/berlin-day-survival',
-      cta: 'Survive the day'
-    },
-    {
       id: 'berghain-bouncer',
       title: 'Berghain Bouncer',
       kicker: 'Door test',
@@ -174,10 +165,6 @@
         height: auto;
         object-fit: cover;
         width: 100%;
-      }
-
-      .bw-games-preview-card[data-game="berlin-day-survival"] img {
-        object-position: 24% center;
       }
 
       .bw-games-preview-card[data-game="berlin-smile-challenge"] img {

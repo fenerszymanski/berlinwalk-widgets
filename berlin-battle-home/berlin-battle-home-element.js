@@ -42,16 +42,6 @@ const BW_GAMES_HOME_ITEMS = [
     cta: 'Start Challenge',
     image: 'berlin-smile-challenge/assets/social/berlin-smile-challenge-social-1200x630.jpg'
   },
-  {
-    id: 'berlin-day-survival',
-    kicker: 'Day survival',
-    title: 'Berlin Day Survival',
-    lead: 'Pick a budget and survive six snack, water and energy decisions in Berlin.',
-    meta: '6 city decisions',
-    href: 'https://www.berlinwalk.com/games/berlin-day-survival',
-    cta: 'Survive the day',
-    image: 'berlin-day-survival/assets/social/berlin-day-survival-social-1200x630.jpg'
-  }
 ];
 
 function bwGamesHomeAsset(path, version = BW_GAMES_HOME_ASSET_VERSION) {
@@ -458,7 +448,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           <div class="bw-games-home-copy">
             <span class="bw-games-home-kicker">BerlinWalk games</span>
             <h2 class="bw-games-home-title" id="bw-games-home-title">Play Berlin before you walk it.</h2>
-            <p class="bw-games-home-lead">Five fast ways into Berlin: rewind the archive, pick your city winner, face the club door, survive the day, or try to make Berlin almost smile. Then come walk the real city with me.</p>
+            <p class="bw-games-home-lead">Three fast ways into Berlin: pick your city winner, face the club door, or try to make Berlin almost smile. Then come walk the real city with me.</p>
             <div class="bw-games-home-actions">
               <a class="bw-games-home-btn bw-games-home-btn-primary" href="${BW_GAMES_HOME_URL}">See all games</a>
               <a class="bw-games-home-btn bw-games-home-btn-secondary" href="${BW_GAMES_HOME_BOOKING_URL}">Book the walking tour</a>
