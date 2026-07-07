@@ -134,7 +134,7 @@
 
   // ---- Result types --------------------------------------------------------
   var RESULTS = {
-    busted:      { emoji: '💸', title: 'Budget Busted', desc: 'You ran out of money before the day ran out of Berlin. It happens. The city is quietly expensive if you eat where the crowds are.', tip: 'Next time, eat one street back from the monument and let the supermarket carry your snacks.' },
+    busted:      { emoji: '💸', img: 'result-busted.jpg', title: 'Budget Busted', desc: 'You ran out of money before the day ran out of Berlin. It happens. The city is quietly expensive if you eat where the crowds are.', tip: 'Next time, eat one street back from the monument and let the supermarket carry your snacks.' },
     sunday:      { emoji: '🚫', title: 'Sunday Casualty', desc: 'The closed shops got you. On a Berlin Sunday the cheap moves vanish and the kiosks set the price.', tip: 'On Sundays, stock water and snacks on Saturday, or aim for a bakery and a doner shop, which do open.' },
     trap:        { emoji: '🪤', title: 'Alexanderplatz Victim', desc: 'You paid the tourist tax more than once. The square menus love visitors exactly like today.', tip: 'The rule is simple: two blocks from any famous square, the same food is cheaper and the crowd is local.' },
     doner:       { emoji: '🌯', title: 'Doner Loyalist', desc: 'When in doubt, doner. You built the whole day around the best value meal in the city, and honestly it worked.', tip: 'You already found Berlin’s cheat code. Now come learn the stories between the doner shops.' },
@@ -208,6 +208,8 @@
     '.bw-dsv-btnrow{display:flex;flex-direction:column;gap:10px;margin-top:16px;}',
     // result
     '.bw-dsv-r-emoji{font-size:66px;line-height:1;text-align:center;margin:4px 0 6px;}',
+    '.bw-dsv-r-photo{width:100%;aspect-ratio:16/9;border-radius:16px;overflow:hidden;margin:2px 0 14px;background:#0d2b11;border:1px solid rgba(255,255,255,.10);}',
+    '.bw-dsv-r-photo img{width:100%;height:100%;object-fit:cover;display:block;}',
     '.bw-dsv-r-title{font-size:28px;font-weight:800;text-align:center;color:#fff;margin:0 0 10px;letter-spacing:-.5px;}',
     '.bw-dsv-r-desc{font-size:16px;line-height:1.55;color:var(--cream);text-align:center;margin:0 0 16px;}',
     '.bw-dsv-r-stats{display:flex;gap:10px;margin-bottom:16px;}',
@@ -443,10 +445,13 @@
     var st = this.state;
     var r = computeResult(st);
     var shareText = 'Berlin Day Survival: I am a ' + r.title + '. Play free at berlinwalk.com/games';
+    var heroHtml = r.img
+      ? '<div class="bw-dsv-r-photo" data-rphoto><img alt="" data-rphoto-img src="' + ASSET_BASE + 'assets/results/' + r.img + '"></div>'
+      : '<div class="bw-dsv-r-emoji">' + r.emoji + '</div>';
     this.innerHTML =
       '<div class="bw-dsv-card">' +
         '<div class="bw-dsv-screen is-on">' +
-          '<div class="bw-dsv-r-emoji">' + r.emoji + '</div>' +
+          heroHtml +
           '<h2 class="bw-dsv-r-title">' + esc(r.title) + '</h2>' +
           '<p class="bw-dsv-r-desc">' + esc(r.desc) + '</p>' +
           '<div class="bw-dsv-r-stats">' +
@@ -464,6 +469,8 @@
         '</div>' +
       '</div>';
     var self = this;
+    var rImg = this.querySelector('[data-rphoto-img]');
+    if (rImg) rImg.addEventListener('error', function () { var c = self.querySelector('[data-rphoto]'); if (c) c.style.display = 'none'; });
     var again = this.querySelector('[data-again]');
     if (again) again.addEventListener('click', function () { self._renderStart(); });
     var copy = this.querySelector('[data-copy]');
