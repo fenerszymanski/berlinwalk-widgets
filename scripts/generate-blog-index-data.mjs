@@ -178,8 +178,9 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'berlin-before-hotel-check-in',
+  lead: 'berlin-u-bahn-fine',
   secondary: [
+    'berlin-before-hotel-check-in',
     'berliner-dom-tickets',
     'berlin-train-stations',
     'berlin-transport-strike',
@@ -214,7 +215,9 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'berlin-u-bahn-fine',
   'berlin-before-hotel-check-in',
+  'berlin-umweltzone-sticker',
   'berliner-dom-tickets',
   'berlin-train-stations',
   'where-to-park-in-berlin-alexanderplatz',
@@ -508,6 +511,8 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(berlin-u-bahn-fine|u-bahn fine|caught without a ticket|ticket fine|\bebe\b)/.test(s)) return 'berlin-ticket-fine-step-planner';
+  if (/(berlin-umweltzone-sticker|umweltzone sticker|green sticker|low-emission zone)/.test(s)) return 'berlin-umweltzone-sticker-checker';
   if (/(berlin-before-hotel-check-in|before hotel check-in|hotel check-in|early check-in berlin|check-in gap)/.test(s)) return 'berlin-check-in-gap-planner';
   if (/(berliner-dom-tickets|berliner dom tickets|berlin cathedral tickets|dome climb|hohenzollern crypt)/.test(s)) return 'berliner-dom-visit-planner';
   if (/(where-to-park-in-berlin-alexanderplatz|where to park in berlin|alexanderplatz parking|parking near alexanderplatz)/.test(s)) return 'alexanderplatz-parking-map';
