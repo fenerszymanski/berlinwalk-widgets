@@ -1,27 +1,32 @@
 /*
  * <bw-berlin-rewind-v2> — Berlin Rewind V2
  *
- * Self-contained archival photo guessing game. Light DOM, instance-scoped
- * state, no globals, no iframe, no postMessage/resize, no MutationObserver,
- * no external CSS/JS, no data fetch (photo + district data are inlined).
- * Image files load from the element script's own directory, so the same code
- * works locally and on GitHub Pages without a hardcoded origin.
+ * Daily archival photo guessing game ("arkasi yarin" style): every Berlin day
+ * serves the same deterministic set of 5 photos, tracks a play streak in
+ * localStorage, and gates you to "come back tomorrow" once today is done
+ * (with an optional practice mode that does not touch the streak).
+ *
+ * Self-contained: light DOM, instance state, no globals, no iframe, no
+ * postMessage/resize, no MutationObserver, no external CSS/JS, no data fetch
+ * (photo + district data inlined). Image files load from the element script's
+ * own directory (document.currentScript), so it works locally and on GitHub
+ * Pages with no hardcoded origin.
  *
  * Mount:
  *   <bw-berlin-rewind-v2></bw-berlin-rewind-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-20260707
+ * Build marker: berlin-rewind-v2-20260707b
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'berlin-rewind-v2-20260707';
+  var BUILD = 'berlin-rewind-v2-20260707b';
   var TAG = 'bw-berlin-rewind-v2';
+  var STORE_KEY = 'bwRewindV2State';
 
-  // Resolve the asset base from this script's own URL (works local + live).
   var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
   var ASSET_BASE = SCRIPT_SRC ? SCRIPT_SRC.replace(/[^/]*$/, '') : './';
 
@@ -96,8 +101,17 @@
     '@keyframes bwrwfade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}',
     '.bw-rw-eyebrow{font-size:13px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--y);margin:0 0 8px;}',
     '.bw-rw-title{font-size:29px;font-weight:800;line-height:1.08;letter-spacing:-.5px;margin:0 0 10px;color:#fff;}',
-    '.bw-rw-sub{font-size:16px;line-height:1.5;color:var(--lg);margin:0 0 18px;}',
+    '.bw-rw-sub{font-size:16px;line-height:1.5;color:var(--lg);margin:0 0 16px;}',
     '.bw-rw-foot{font-size:12.5px;color:var(--lg);margin-top:14px;text-align:center;opacity:.85;}',
+    // start hero filmstrip
+    '.bw-rw-strip{display:flex;gap:8px;margin:0 0 18px;}',
+    '.bw-rw-strip-thumb{flex:1;aspect-ratio:1/1;border-radius:11px;overflow:hidden;border:1px solid rgba(255,255,255,.16);background:#141414;position:relative;}',
+    '.bw-rw-strip-thumb img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.02);}',
+    '.bw-rw-strip-thumb::after{content:"?";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:800;color:rgba(255,255,255,.82);background:linear-gradient(180deg,rgba(18,63,22,.05),rgba(18,63,22,.55));}',
+    // streak / daily chips
+    '.bw-rw-chiprow{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;}',
+    '.bw-rw-chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(197,225,165,.35);border-radius:999px;padding:8px 13px;font-size:13.5px;font-weight:800;color:var(--cream);}',
+    '.bw-rw-chip b{color:var(--y);}',
     // top bar (round + score)
     '.bw-rw-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}',
     '.bw-rw-round{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lg);}',
@@ -106,9 +120,10 @@
     '.bw-rw-seg{flex:1;height:5px;border-radius:4px;background:rgba(255,255,255,.18);}',
     '.bw-rw-seg.on{background:var(--y);}',
     // photo
-    '.bw-rw-photo{position:relative;background:#141414;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.14);margin-bottom:8px;}',
+    '.bw-rw-photo{position:relative;background:#141414;border-radius:14px;overflow:hidden;border:1px solid rgba(255,255,255,.14);margin-bottom:8px;min-height:180px;}',
     '.bw-rw-photo img{display:block;width:100%;height:auto;max-height:46vh;object-fit:contain;margin:0 auto;background:#141414;}',
-    '.bw-rw-diff{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);border-radius:999px;padding:4px 10px;}',
+    '.bw-rw-diff{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:rgba(0,0,0,.55);border-radius:999px;padding:4px 10px;z-index:2;}',
+    '.bw-rw-loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--lg);font-size:13px;font-weight:700;letter-spacing:1px;}',
     '.bw-rw-ask{font-size:15px;font-weight:700;color:#fff;margin:14px 0 8px;}',
     // year control
     '.bw-rw-year{display:flex;align-items:center;justify-content:center;gap:14px;margin:2px 0 10px;}',
@@ -129,7 +144,7 @@
     '.bw-rw-dbtn.correct{background:#DFF5C8;border-color:var(--lime);color:#1B5E20;}',
     '.bw-rw-dbtn.wrong{background:#f6d9d9;border-color:var(--red);color:#7a2530;}',
     // buttons
-    '.bw-rw-btn{display:block;width:100%;background:var(--y);color:var(--gd);border:none;border-radius:14px;padding:16px;font-size:17px;font-weight:800;cursor:pointer;min-height:52px;transition:transform .05s,filter .15s;text-align:center;text-decoration:none;}',
+    '.bw-rw-btn{display:block;width:100%;background:var(--y);color:var(--gd);border:none;border-radius:14px;padding:16px;font-size:17px;font-weight:800;cursor:pointer;min-height:52px;transition:transform .05s,filter .15s;text-align:center;text-decoration:none;box-sizing:border-box;}',
     '.bw-rw-btn:hover{filter:brightness(1.03);}',
     '.bw-rw-btn:active{transform:scale(.99);}',
     '.bw-rw-btn[disabled]{opacity:.45;cursor:default;}',
@@ -148,7 +163,7 @@
     '.bw-rw-story{font-size:15px;line-height:1.55;color:var(--cream);margin:0 0 12px;}',
     '.bw-rw-credit{font-size:11px;line-height:1.4;color:var(--lg);opacity:.85;margin:0 0 4px;}',
     '.bw-rw-credit a{color:var(--lg);}',
-    // result
+    // result / gate
     '.bw-rw-r-emoji{font-size:60px;line-height:1;text-align:center;margin:2px 0 4px;}',
     '.bw-rw-r-score{font-size:44px;font-weight:800;text-align:center;color:var(--y);margin:0;line-height:1;}',
     '.bw-rw-r-scoresub{font-size:13px;text-align:center;color:var(--lg);margin:2px 0 12px;letter-spacing:1px;text-transform:uppercase;font-weight:700;}',
@@ -159,23 +174,60 @@
     '.bw-rw-recap-row:last-child{border-bottom:none;}',
     '.bw-rw-recap-t{color:var(--cream);flex:1;}',
     '.bw-rw-recap-p{color:var(--y);font-weight:800;white-space:nowrap;}',
+    '.bw-rw-tomorrow{text-align:center;font-size:14px;font-weight:700;color:var(--lg);margin:14px 0 2px;}',
+    '.bw-rw-tomorrow b{color:var(--y);}',
     '.bw-rw-copied{text-align:center;font-size:13px;color:var(--y);font-weight:700;min-height:18px;margin-top:8px;}'
   ].join('');
 
-  function shuffle(arr) {
-    var a = arr.slice();
-    for (var i = a.length - 1; i > 0; i--) {
-      var j = Math.floor(Math.random() * (i + 1));
-      var t = a[i]; a[i] = a[j]; a[j] = t;
-    }
-    return a;
-  }
+  // ---------- helpers ----------
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function clampYear(y) { return Math.max(YEAR_MIN, Math.min(YEAR_MAX, y)); }
+  function shuffle(arr, rnd) {
+    var a = arr.slice(), r = rnd || Math.random;
+    for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; }
+    return a;
+  }
+  function mulberry32(seed) {
+    var t = seed >>> 0;
+    return function () {
+      t += 0x6D2B79F5;
+      var r = t;
+      r = Math.imul(r ^ (r >>> 15), r | 1);
+      r ^= r + Math.imul(r ^ (r >>> 7), r | 61);
+      return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  function hashStr(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+
+  function berlinToday() {
+    try {
+      return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    } catch (e) {
+      return new Date().toISOString().slice(0, 10);
+    }
+  }
+  function addDays(dateStr, n) {
+    var p = dateStr.split('-');
+    var d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    d.setUTCDate(d.getUTCDate() + n);
+    return d.toISOString().slice(0, 10);
+  }
+  function dailyIndices(dateStr) {
+    var rnd = mulberry32(hashStr('rewind-' + dateStr));
+    var idx = shuffle(PHOTOS.map(function (_, i) { return i; }), rnd);
+    return idx.slice(0, ROUNDS_PER_GAME);
+  }
+  function loadState() {
+    try {
+      var raw = window.localStorage.getItem(STORE_KEY);
+      if (raw) { var s = JSON.parse(raw); if (s && typeof s === 'object') return s; }
+    } catch (e) {}
+    return { lastDate: null, streak: 0, best: 0, lastScore: 0 };
+  }
+  function saveState(s) { try { window.localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {} }
 
   function scoreYear(guess, actual, tol) {
-    var diff = Math.abs(guess - actual);
-    var eff = Math.max(0, diff - (tol || 0));
+    var eff = Math.max(0, Math.abs(guess - actual) - (tol || 0));
     return Math.max(0, Math.min(100, Math.round(100 - eff * 6)));
   }
   function yearBand(guess, actual, tol) {
@@ -188,24 +240,20 @@
   }
   function districtScore(pickKey, correctKey) {
     if (pickKey === correctKey) return { pts: 100, band: 'Exact district' };
-    var n = DISTRICTS[correctKey] && DISTRICTS[correctKey].neighbors || [];
+    var n = (DISTRICTS[correctKey] && DISTRICTS[correctKey].neighbors) || [];
     if (n.indexOf(pickKey) > -1) return { pts: 50, band: 'Next door' };
     return { pts: 0, band: 'Wrong side of town' };
   }
-
   function buildDistrictOptions(correctKey) {
     var all = Object.keys(DISTRICTS);
     var neighbors = (DISTRICTS[correctKey].neighbors || []).slice();
     var others = all.filter(function (k) { return k !== correctKey && neighbors.indexOf(k) === -1; });
     var opts = [correctKey];
-    // one neighbour for partial-credit realism
     if (neighbors.length) opts.push(shuffle(neighbors)[0]);
-    // fill the rest from non-neighbours
     var pool = shuffle(others);
-    while (opts.length < 4 && pool.length) { opts.push(pool.shift()); }
-    // if still short (tiny map), pad from remaining neighbours
+    while (opts.length < 4 && pool.length) opts.push(pool.shift());
     var extraN = shuffle(neighbors).filter(function (k) { return opts.indexOf(k) === -1; });
-    while (opts.length < 4 && extraN.length) { opts.push(extraN.shift()); }
+    while (opts.length < 4 && extraN.length) opts.push(extraN.shift());
     return shuffle(opts);
   }
 
@@ -215,10 +263,10 @@
       this._booted = true;
       this.classList.add('bw-rw');
       this.setAttribute('data-build', BUILD);
-      var override = this.getAttribute('data-asset-base');
-      this._assetBase = override || ASSET_BASE;
+      this._assetBase = this.getAttribute('data-asset-base') || ASSET_BASE;
+      this._today = berlinToday();
       this._injectCSS();
-      this._renderStart();
+      this._route();
     }
 
     _injectCSS() {
@@ -231,29 +279,82 @@
 
     _imgUrl(id) { return this._assetBase + 'assets/photos/' + id + '.jpg'; }
 
-    _renderStart() {
+    _route() {
+      var st = loadState();
+      if (st.lastDate === this._today) this._renderGate(st);
+      else this._renderStart(st);
+    }
+
+    _stripHtml() {
+      // decorative archival thumbnails that are NOT in today's set (no spoilers)
+      var daily = dailyIndices(this._today);
+      var others = PHOTOS.map(function (_, i) { return i; }).filter(function (i) { return daily.indexOf(i) === -1; });
+      var pick = shuffle(others).slice(0, 3);
+      var self = this;
+      var cells = pick.map(function (i) {
+        return '<div class="bw-rw-strip-thumb"><img alt="" loading="lazy" src="' + self._imgUrl(PHOTOS[i].id) + '"></div>';
+      }).join('');
+      return '<div class="bw-rw-strip">' + cells + '</div>';
+    }
+
+    _streakChips(st, includeToday) {
+      var s = includeToday ? st.streak : st.streak;
+      var chips = '';
+      if (s > 0) chips += '<span class="bw-rw-chip">🔥 Streak <b>' + s + '</b></span>';
+      if (st.best > 0) chips += '<span class="bw-rw-chip">Best <b>' + st.best + '</b></span>';
+      chips += '<span class="bw-rw-chip">5 new photos daily</span>';
+      return '<div class="bw-rw-chiprow">' + chips + '</div>';
+    }
+
+    _renderStart(st) {
       this.innerHTML =
         '<div class="bw-rw-card">' +
           '<div class="bw-rw-screen is-on">' +
-            '<p class="bw-rw-eyebrow">Berlin Rewind</p>' +
-            '<h2 class="bw-rw-title">Read the photo.<br>Name the year and the place.</h2>' +
-            '<p class="bw-rw-sub">Five real Berlin archive photos. For each one, guess the year and the district. I score how close you land and tell you the story behind the frame.</p>' +
+            '<p class="bw-rw-eyebrow">Berlin Rewind · Daily</p>' +
+            '<h2 class="bw-rw-title">Read the photo.<br>Name the year and place.</h2>' +
+            this._stripHtml() +
+            '<p class="bw-rw-sub">Today’s five real Berlin archive photos. Guess the year and the district for each, keep your daily streak alive, and come back tomorrow for a new set.</p>' +
+            this._streakChips(st, false) +
             '<div class="bw-rw-btnrow">' +
-              '<button type="button" class="bw-rw-btn" data-start="1">Start the reel</button>' +
+              '<button type="button" class="bw-rw-btn" data-start="daily">Play today’s 5 photos</button>' +
             '</div>' +
             '<p class="bw-rw-foot">Photos: Bundesarchiv via Wikimedia Commons, CC BY-SA 3.0 DE</p>' +
           '</div>' +
         '</div>';
       var self = this;
-      this.querySelector('[data-start]').addEventListener('click', function () { self._startGame(); });
+      this.querySelector('[data-start]').addEventListener('click', function () { self._startGame('daily'); });
     }
 
-    _startGame() {
-      this._deck = shuffle(PHOTOS).slice(0, ROUNDS_PER_GAME);
+    _renderGate(st) {
+      this.innerHTML =
+        '<div class="bw-rw-card">' +
+          '<div class="bw-rw-screen is-on">' +
+            '<p class="bw-rw-eyebrow">Berlin Rewind · Daily</p>' +
+            '<h2 class="bw-rw-title">You’ve played<br>today’s Rewind.</h2>' +
+            this._stripHtml() +
+            this._streakChips(st, true) +
+            '<div class="bw-rw-recap" style="margin-bottom:14px;">' +
+              '<div class="bw-rw-recap-row"><span class="bw-rw-recap-t">Today’s score</span><span class="bw-rw-recap-p">' + (st.lastScore || 0) + '/' + (ROUNDS_PER_GAME * 200) + '</span></div>' +
+              '<div class="bw-rw-recap-row"><span class="bw-rw-recap-t">Day streak</span><span class="bw-rw-recap-p">' + (st.streak || 0) + '</span></div>' +
+            '</div>' +
+            '<p class="bw-rw-tomorrow"><b>New 5 photos tomorrow.</b> Keep the streak going.</p>' +
+            '<div class="bw-rw-btnrow">' +
+              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
+              '<button type="button" class="bw-rw-btn ghost" data-start="practice">Practice round (no streak)</button>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+      var self = this;
+      this.querySelector('[data-start]').addEventListener('click', function () { self._startGame('practice'); });
+    }
+
+    _startGame(mode) {
+      this._mode = mode;
+      var indices = (mode === 'daily') ? dailyIndices(this._today) : shuffle(PHOTOS.map(function (_, i) { return i; })).slice(0, ROUNDS_PER_GAME);
+      this._deck = indices.map(function (i) { return PHOTOS[i]; });
       this._round = 0;
       this._total = 0;
       this._recap = [];
-      // preload selected images
       this._deck.forEach(function (p) { var im = new Image(); im.src = this._imgUrl(p.id); }, this);
       this._renderRound();
     }
@@ -266,9 +367,7 @@
       this._options = buildDistrictOptions(p.district);
 
       var progress = '<div class="bw-rw-progress">';
-      for (var i = 0; i < ROUNDS_PER_GAME; i++) {
-        progress += '<div class="bw-rw-seg' + (i < this._round ? ' on' : '') + '"></div>';
-      }
+      for (var i = 0; i < ROUNDS_PER_GAME; i++) progress += '<div class="bw-rw-seg' + (i < this._round ? ' on' : '') + '"></div>';
       progress += '</div>';
 
       var distHtml = '<div class="bw-rw-dist">';
@@ -277,17 +376,20 @@
       });
       distHtml += '</div>';
 
+      var label = (this._mode === 'practice') ? 'Practice' : 'Photo';
+
       this.innerHTML =
         '<div class="bw-rw-card">' +
           '<div class="bw-rw-screen is-on">' +
             '<div class="bw-rw-top">' +
-              '<span class="bw-rw-round">Photo ' + (this._round + 1) + ' / ' + ROUNDS_PER_GAME + '</span>' +
+              '<span class="bw-rw-round">' + label + ' ' + (this._round + 1) + ' / ' + ROUNDS_PER_GAME + '</span>' +
               '<span class="bw-rw-scorepill">' + this._total + ' pts</span>' +
             '</div>' +
             progress +
             '<div class="bw-rw-photo">' +
               '<span class="bw-rw-diff">' + esc(p.difficulty) + '</span>' +
-              '<img alt="Archival Berlin photograph to identify" src="' + this._imgUrl(p.id) + '">' +
+              '<span class="bw-rw-loading" data-loading>Loading photo…</span>' +
+              '<img alt="Archival Berlin photograph to identify" data-photo src="' + this._imgUrl(p.id) + '">' +
             '</div>' +
             '<p class="bw-rw-ask">1. What year is this?</p>' +
             '<div class="bw-rw-year">' +
@@ -302,6 +404,15 @@
             '<button type="button" class="bw-rw-btn" data-reveal="1" disabled>Pick a district to reveal</button>' +
           '</div>' +
         '</div>';
+
+      var imgEl = this.querySelector('[data-photo]');
+      var loadEl = this.querySelector('[data-loading]');
+      function hideLoader() { if (loadEl) loadEl.style.display = 'none'; }
+      if (imgEl) {
+        if (imgEl.complete && imgEl.naturalWidth > 0) hideLoader();
+        imgEl.addEventListener('load', hideLoader);
+        imgEl.addEventListener('error', function () { if (loadEl) loadEl.textContent = 'Photo unavailable'; });
+      }
 
       var slider = this.querySelector('[data-yslider]');
       var yval = this.querySelector('[data-yearval]');
@@ -336,7 +447,6 @@
       this._total += roundPts;
       this._recap.push({ title: p.title, pts: roundPts });
 
-      // lock + colour district buttons
       this.querySelectorAll('[data-dist]').forEach(function (b, idx) {
         b.setAttribute('disabled', 'disabled');
         b.classList.remove('sel');
@@ -344,7 +454,6 @@
         if (k === p.district) b.classList.add('correct');
         else if (k === self._pickedDistrict) b.classList.add('wrong');
       });
-      // disable year controls
       this.querySelectorAll('[data-ystep],[data-yslider]').forEach(function (b) { b.setAttribute('disabled', 'disabled'); });
 
       var isLast = this._round >= ROUNDS_PER_GAME - 1;
@@ -372,12 +481,11 @@
 
       var revealBtn = this.querySelector('[data-reveal]');
       revealBtn.parentNode.replaceChild(reveal, revealBtn);
-      // update score pill
       var pill = this.querySelector('.bw-rw-scorepill');
       if (pill) pill.textContent = this._total + ' pts';
 
       this.querySelector('[data-next]').addEventListener('click', function () {
-        if (isLast) { self._renderResult(); }
+        if (isLast) self._renderResult();
         else { self._round += 1; self._renderRound(); }
       });
       try { reveal.scrollIntoView({ block: 'nearest' }); } catch (e) {}
@@ -388,6 +496,22 @@
       var max = ROUNDS_PER_GAME * 200;
       var tier = TIERS[0];
       for (var i = 0; i < TIERS.length; i++) { if (this._total >= TIERS[i].min) { tier = TIERS[i]; break; } }
+
+      // streak update only for the daily run, once per Berlin day
+      var st = loadState();
+      var streakLine = '';
+      if (this._mode === 'daily' && st.lastDate !== this._today) {
+        if (st.lastDate === addDays(this._today, -1)) st.streak = (st.streak || 0) + 1;
+        else st.streak = 1;
+        st.best = Math.max(st.best || 0, st.streak);
+        st.lastScore = this._total;
+        st.lastDate = this._today;
+        saveState(st);
+        streakLine = '<p class="bw-rw-tomorrow">🔥 Day streak <b>' + st.streak + '</b> · new 5 photos tomorrow</p>';
+      } else if (this._mode === 'practice') {
+        streakLine = '<p class="bw-rw-tomorrow">Practice round · your daily streak is safe</p>';
+      }
+
       var recapHtml = '<div class="bw-rw-recap">';
       this._recap.forEach(function (r, i) {
         recapHtml += '<div class="bw-rw-recap-row"><span class="bw-rw-recap-t">' + (i + 1) + '. ' + esc(r.title) + '</span><span class="bw-rw-recap-p">' + r.pts + '/200</span></div>';
@@ -395,35 +519,45 @@
       recapHtml += '</div>';
       var shareText = 'Berlin Rewind: I scored ' + this._total + '/' + max + ' (' + tier.title + '). Play free at berlinwalk.com/games';
 
+      var secondBtn = (this._mode === 'daily')
+        ? '<button type="button" class="bw-rw-btn ghost" data-copy="1">Copy my score</button>'
+        : '<button type="button" class="bw-rw-btn ghost" data-again="1">Another practice round</button>';
+
       this.innerHTML =
         '<div class="bw-rw-card">' +
           '<div class="bw-rw-screen is-on">' +
             '<div class="bw-rw-r-emoji">' + tier.emoji + '</div>' +
             '<p class="bw-rw-r-score">' + this._total + '<span style="font-size:20px;color:var(--lg);">/' + max + '</span></p>' +
-            '<p class="bw-rw-r-scoresub">Berlin Rewind score</p>' +
+            '<p class="bw-rw-r-scoresub">' + (this._mode === 'practice' ? 'Practice score' : 'Today’s Rewind score') + '</p>' +
             '<h2 class="bw-rw-r-title">' + esc(tier.title) + '</h2>' +
             '<p class="bw-rw-r-desc">' + esc(tier.desc) + '</p>' +
             recapHtml +
+            streakLine +
             '<div class="bw-rw-btnrow">' +
               '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
-              '<button type="button" class="bw-rw-btn ghost" data-copy="1">Copy my score</button>' +
-              '<button type="button" class="bw-rw-btn link" data-again="1">Play again</button>' +
+              secondBtn +
+              (this._mode === 'practice' ? '<button type="button" class="bw-rw-btn link" data-copy2="1">Copy my score</button>' : '') +
             '</div>' +
             '<div class="bw-rw-copied" data-copied></div>' +
           '</div>' +
         '</div>';
 
-      this.querySelector('[data-again]').addEventListener('click', function () { self._startGame(); });
-      var copy = this.querySelector('[data-copy]');
-      copy.addEventListener('click', function () {
-        var note = self.querySelector('[data-copied]');
+      var again = this.querySelector('[data-again]');
+      if (again) again.addEventListener('click', function () { self._startGame('practice'); });
+      var self2 = this;
+      function doCopy() {
+        var note = self2.querySelector('[data-copied]');
         function ok() { if (note) note.textContent = 'Copied. Paste it anywhere.'; }
         function fail() { if (note) note.textContent = shareText; }
         try {
-          if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(shareText).then(ok, fail); }
-          else { fail(); }
+          if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(shareText).then(ok, fail);
+          else fail();
         } catch (e) { fail(); }
-      });
+      }
+      var copy = this.querySelector('[data-copy]');
+      if (copy) copy.addEventListener('click', doCopy);
+      var copy2 = this.querySelector('[data-copy2]');
+      if (copy2) copy2.addEventListener('click', doCopy);
       try { this.scrollIntoView({ block: 'nearest' }); } catch (e) {}
     }
   }
