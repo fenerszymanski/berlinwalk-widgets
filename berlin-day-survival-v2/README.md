@@ -9,14 +9,19 @@ because of the old iframe / resize / global-loader shell (see
 
 A one-minute first-day budget game: pick a food budget, make six real Berlin
 decisions, keep your Wallet, Fuel and Smarts alive, and get a shareable
-survival type. Negative wallet fails as **Budget Busted**.
+survival type. Negative wallet fails as **Budget Busted**. Every round opens
+with a BerlinWalk-brand editorial illustration, and every result type has its
+own illustrated hero card.
 
 ## Architecture (deliberately boring and robust)
 
 - Single custom element `<bw-day-survival-v2>`, light DOM, all state on the
   element instance, all CSS scoped under `.bw-dsv-` and injected once.
 - **No iframe. No postMessage/resize. No MutationObserver. No global loader.
-  No parent-height messaging. No external CSS/JS. No network calls.**
+  No parent-height messaging. No external CSS/JS. No data fetch.** The only
+  network requests are the local illustration JPGs, loaded from the element
+  script's own directory (`document.currentScript`) so it works local + on
+  GitHub Pages; each has a graceful `onerror` that hides the band if it fails.
 - Grows in normal document flow (no fixed `100vh` phone-frame). Buttons are
   >=44px touch targets.
 
@@ -24,6 +29,8 @@ survival type. Negative wallet fails as **Budget Busted**.
 
 - `day-survival-v2-element.js` — the whole game (data + logic + CSS).
 - `index.html` — standalone, non-indexed local preview.
+- `assets/scenes/*.jpg` — 6 per-round editorial illustrations (1000x563).
+- `assets/results/*.jpg` — 9 per-result-type illustrations (1000x563).
 
 ## Live mount (do NOT wire until Yusuf approves on a real device)
 
