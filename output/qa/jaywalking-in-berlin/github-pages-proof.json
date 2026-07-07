@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-07-07T10:46:00Z",
+  "deployRunId": 28859941826,
+  "deployStatus": "completed",
+  "deployConclusion": "success",
+  "commit": "10574bb",
+  "urls": {
+    "widget": { "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-crosswalk-standoff/", "status": 200, "lastModified": "Tue, 07 Jul 2026 10:44:13 GMT" },
+    "widgetBackgroundImage": { "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-crosswalk-standoff/assets/optimized/round-1-alexanderplatz.jpg", "status": 200, "lastModified": "Tue, 07 Jul 2026 10:44:14 GMT" },
+    "quickSummaryData": { "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/data.json", "status": 200, "lastModified": "Tue, 07 Jul 2026 10:44:14 GMT", "hasKey": true },
+    "faqInject": { "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/inject.js", "status": 200, "lastModified": "Tue, 07 Jul 2026 10:44:13 GMT", "hasSlug": true },
+    "toolsHubData": { "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json", "status": 200, "lastModified": "Tue, 07 Jul 2026 10:44:14 GMT", "hasTool": true },
+    "toolIcon": { "url": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-crosswalk-standoff.png", "status": 200, "lastModified": "Tue, 07 Jul 2026 10:44:14 GMT" }
+  },
+  "liveWixToolPage": { "url": "https://www.berlinwalk.com/tools/berlin-crosswalk-standoff", "status": 200 },
+  "liveQuickSummaryEmbed": { "url": "https://fenerszymanski.github.io/berlinwalk-widgets/quick-summary/?post=jaywalking-in-berlin", "status": 200 },
+  "liveFaqEmbed": { "url": "https://fenerszymanski.github.io/berlinwalk-widgets/faq/?post=jaywalking-in-berlin", "status": 200 }
+}

@@ -1,0 +1,13 @@
+{
+  "widget": "berlin-crosswalk-standoff",
+  "testedAt": "2026-07-07T10:30:00Z",
+  "desktopViewport": "900x800",
+  "mobileViewport": "390x844",
+  "flowTested": "intro -> round1 (cross now) -> round2 (wait) -> round3 (wait) -> round4 (cross now) -> result",
+  "consoleErrors": 0,
+  "overflowX": 0,
+  "resultScreenScore": "2/4",
+  "verdictRendered": true,
+  "ctaLinkPresent": true,
+  "notes": "All 4 rounds render correct background photo, corner label, live countdown, wait/cross buttons, and outcome reveal (fact for wait, randomized consequence line incl. real EUR 5-10 fine mention for cross). Lamp color switches red->green on wait. Progress dots update. Result screen shows score ring, verdict text, tour CTA with UTM params, and Play Again reset. Verified visually on desktop (900px) and mobile (390px) with zero horizontal overflow and zero console errors."
+}
