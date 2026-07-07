@@ -34,7 +34,7 @@ Description:
 
 Image:
 
-`https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg`
+`https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@09c237e/berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg`
 
 ## Canonical
 
@@ -57,6 +57,11 @@ Tag name:
 `bw-day-survival-landing-v2`
 
 Server URL:
+
+`https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@09c237e/berlin-day-survival-v2/day-survival-landing-v2-element.js`
+
+The GitHub Pages URL can be used after it serves build
+`day-survival-landing-v2-20260707b`:
 
 `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/day-survival-landing-v2-element.js`
 

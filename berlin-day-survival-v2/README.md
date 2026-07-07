@@ -45,14 +45,19 @@ Use this for the public landing page:
 
 ```html
 <bw-day-survival-landing-v2></bw-day-survival-landing-v2>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/day-survival-landing-v2-element.js" defer></script>
+<script src="https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@09c237e/berlin-day-survival-v2/day-survival-landing-v2-element.js" defer></script>
 ```
 
 If using Wix Studio's Custom Element panel:
 
 - Tag name: `bw-day-survival-landing-v2`
 - Server URL:
-  `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/day-survival-landing-v2-element.js`
+  `https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@09c237e/berlin-day-survival-v2/day-survival-landing-v2-element.js`
+
+GitHub Pages usually works after propagation:
+`https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/day-survival-landing-v2-element.js`.
+If it is still 404 or serving the previous build, use the commit-pinned
+jsDelivr URL above.
 
 ## Bare game mount
 
