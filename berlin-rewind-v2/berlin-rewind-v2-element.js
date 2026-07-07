@@ -23,13 +23,15 @@
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'berlin-rewind-v2-20260707c';
+  var BUILD = 'berlin-rewind-v2-20260707d';
   var TAG = 'bw-berlin-rewind-v2';
   var STORE_KEY = 'bwRewindV2State';
   var HISTORY_MAX = 14;
 
-  var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
-  var ASSET_BASE = SCRIPT_SRC ? SCRIPT_SRC.replace(/[^/]*$/, '') : './';
+  // Absolute default so photos resolve even when a host (e.g. Wix) loads this
+  // script with document.currentScript null/proxied. Overridable per-instance
+  // with data-asset-base (used by the local standalone preview).
+  var ASSET_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rewind-v2/';
 
   var YEAR_MIN = 1918;
   var YEAR_MAX = 1995;

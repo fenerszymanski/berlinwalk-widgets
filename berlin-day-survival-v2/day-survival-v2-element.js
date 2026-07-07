@@ -14,11 +14,14 @@
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'day-survival-v2-20260707b';
+  var BUILD = 'day-survival-v2-20260707c';
 
-  // Resolve asset base from this script's own URL (works local + on GitHub Pages).
-  var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
-  var ASSET_BASE = SCRIPT_SRC ? SCRIPT_SRC.replace(/[^/]*$/, '') : './';
+  // Asset base. Default to the absolute GitHub Pages folder so images resolve
+  // even when the element is mounted by a host (e.g. Wix) that loads this
+  // script in a way where document.currentScript is null or proxied. A
+  // per-instance data-asset-base attribute overrides it (used by the local
+  // standalone preview to load images relatively).
+  var ASSET_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/';
 
   // ---- Budget modes --------------------------------------------------------
   var MODES = {
@@ -265,6 +268,7 @@
   Proto.connectedCallback = function () {
     if (this._booted) return;
     this._booted = true;
+    this._assetBase = this.getAttribute('data-asset-base') || ASSET_BASE;
     this.classList.add('bw-dsv');
     this.setAttribute('data-build', BUILD);
     this._injectCSS();
@@ -364,7 +368,7 @@
     choicesHtml += '</div>';
 
     var sceneHtml = round.img
-      ? '<div class="bw-dsv-scene" data-scene><img alt="" data-scene-img src="' + ASSET_BASE + 'assets/scenes/' + round.img + '"></div>'
+      ? '<div class="bw-dsv-scene" data-scene><img alt="" data-scene-img src="' + this._assetBase + 'assets/scenes/' + round.img + '"></div>'
       : '';
 
     this.innerHTML =
@@ -446,7 +450,7 @@
     var r = computeResult(st);
     var shareText = 'Berlin Day Survival: I am a ' + r.title + '. Play free at berlinwalk.com/games';
     var heroHtml = r.img
-      ? '<div class="bw-dsv-r-photo" data-rphoto><img alt="" data-rphoto-img src="' + ASSET_BASE + 'assets/results/' + r.img + '"></div>'
+      ? '<div class="bw-dsv-r-photo" data-rphoto><img alt="" data-rphoto-img src="' + this._assetBase + 'assets/results/' + r.img + '"></div>'
       : '<div class="bw-dsv-r-emoji">' + r.emoji + '</div>';
     this.innerHTML =
       '<div class="bw-dsv-card">' +
