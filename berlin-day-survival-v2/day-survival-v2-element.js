@@ -14,7 +14,11 @@
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'day-survival-v2-20260707';
+  var BUILD = 'day-survival-v2-20260707b';
+
+  // Resolve asset base from this script's own URL (works local + on GitHub Pages).
+  var SCRIPT_SRC = (document.currentScript && document.currentScript.src) || '';
+  var ASSET_BASE = SCRIPT_SRC ? SCRIPT_SRC.replace(/[^/]*$/, '') : './';
 
   // ---- Budget modes --------------------------------------------------------
   var MODES = {
@@ -40,6 +44,7 @@
       id: 'morning',
       kicker: 'Round 1 · Morning',
       title: 'You skipped breakfast',
+      img: 'scene-morning.jpg',
       situation: 'It is 9am at Alexanderplatz. You skipped breakfast for an early train and your stomach already has opinions.',
       choices: [
         { id: 'm1', label: 'Supermarket roll + banana', micro: 'Look past the first shiny cafe', d: { w: -120, f: 14, s: 6 }, tags: ['budget', 'supermarket'],
@@ -54,6 +59,7 @@
       id: 'hydration',
       kicker: 'Round 2 · Hydration',
       title: 'Thirsty after the walk',
+      img: 'scene-hydration.jpg',
       situation: 'An hour of walking later, the sun is out and you are thirsty. Berlin tap water is fine, but you did not bring a bottle.',
       choices: [
         { id: 'h1', label: 'Supermarket 1.5L water + Pfand', micro: 'The quiet local move', d: { w: -90, f: 10, s: 8 }, tags: ['smart', 'supermarket'],
@@ -68,6 +74,7 @@
       id: 'landmark',
       kicker: 'Round 3 · The famous square',
       title: 'Every menu is in six languages',
+      img: 'scene-landmark.jpg',
       situation: 'You reach a famous square. Every restaurant has a laminated menu in six languages and a waiter waving you in.',
       choices: [
         { id: 'l1', label: 'Walk two blocks, eat local', micro: 'Distance from the monument = distance from the markup', d: { w: -350, f: 20, s: 12 }, tags: ['smart', 'doner'],
@@ -82,6 +89,7 @@
       id: 'lunch',
       kicker: 'Round 4 · Lunch',
       title: 'Your body wants a real meal',
+      img: 'scene-lunch.jpg',
       situation: 'It is 2pm and you have been running on snacks. Your body wants a real meal. Your budget wants a nap.',
       choices: [
         { id: 'u1', label: 'Proper doner with everything', micro: 'The best value lunch in Berlin', d: { w: -650, f: 26, s: 6 }, tags: ['doner'],
@@ -96,6 +104,7 @@
       id: 'afternoon',
       kicker: 'Round 5 · The crash',
       title: 'Your feet are done',
+      img: 'scene-afternoon.jpg',
       situation: 'Energy is low and your feet are finished. There is a bench, a Spaeti across the street, and a museum with a long queue.',
       choices: [
         { id: 'a1', label: 'Club Mate + bench reset', micro: 'The most Berlin thing you will do today', d: { w: -220, f: 12, s: 8 }, tags: ['spati', 'clubmate', 'outdoor'],
@@ -110,6 +119,7 @@
       id: 'night',
       kicker: 'Round 6 · Night',
       title: 'One last decision',
+      img: 'scene-night.jpg',
       situation: 'It is late. You are tired, a little hungry, and your wallet has been through a lot today. One last call.',
       choices: [
         { id: 'n1', label: 'Late doner rescue, no shame', micro: 'The late doner never judges', d: { w: -600, f: 22, s: 6 }, tags: ['doner'],
@@ -172,6 +182,8 @@
     '.bw-dsv-progress{display:flex;gap:5px;margin-bottom:14px;}',
     '.bw-dsv-seg{flex:1;height:5px;border-radius:4px;background:rgba(255,255,255,.18);}',
     '.bw-dsv-seg.on{background:var(--y);}',
+    '.bw-dsv-scene{width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;margin:0 0 16px;background:#0d2b11;border:1px solid rgba(255,255,255,.10);}',
+    '.bw-dsv-scene img{width:100%;height:100%;object-fit:cover;display:block;}',
     '.bw-dsv-situation{font-size:16.5px;line-height:1.5;color:var(--cream);margin:0 0 18px;}',
     '.bw-dsv-choices{display:flex;flex-direction:column;gap:11px;}',
     '.bw-dsv-choice{width:100%;text-align:left;background:var(--cream);border:2px solid transparent;color:var(--ink);border-radius:15px;padding:14px 16px;cursor:pointer;min-height:56px;transition:transform .05s,border-color .15s,box-shadow .15s;}',
@@ -349,11 +361,16 @@
     });
     choicesHtml += '</div>';
 
+    var sceneHtml = round.img
+      ? '<div class="bw-dsv-scene" data-scene><img alt="" data-scene-img src="' + ASSET_BASE + 'assets/scenes/' + round.img + '"></div>'
+      : '';
+
     this.innerHTML =
       '<div class="bw-dsv-card">' +
         '<div class="bw-dsv-screen is-on">' +
           this._hud() +
           progress +
+          sceneHtml +
           '<p class="bw-dsv-eyebrow">' + esc(round.kicker) + '</p>' +
           '<h2 class="bw-dsv-title" style="font-size:24px;">' + esc(round.title) + '</h2>' +
           intro +
@@ -367,6 +384,8 @@
         self._pick(parseInt(btn.getAttribute('data-choice'), 10));
       });
     });
+    var sImg = this.querySelector('[data-scene-img]');
+    if (sImg) sImg.addEventListener('error', function () { var c = self.querySelector('[data-scene]'); if (c) c.style.display = 'none'; });
     // scroll the card into a comfortable spot on small screens
     try { this.scrollIntoView({ block: 'nearest' }); } catch (e) {}
   };
