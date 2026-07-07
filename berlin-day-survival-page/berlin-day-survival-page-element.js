@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'day-survival-mobile-polish-20260707a';
+const ASSET_BUILD = 'day-survival-height-lock-20260707b';
 const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
 const NATIVE_GAME_BUILD = 'native-games-20260707a';
 

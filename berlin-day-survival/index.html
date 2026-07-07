@@ -86,6 +86,11 @@
     }
 
     html[data-bw-embedded-resize="content"] .bw-day-panel,
+    html[data-bw-embedded-resize="content"] .bw-day-screen {
+      align-self: start;
+    }
+
+    html[data-bw-embedded-resize="content"] .bw-day-panel,
     html[data-bw-embedded-resize="content"] .bw-day-start,
     html[data-bw-embedded-resize="content"] .bw-day-gameplay {
       overflow: visible;
@@ -1788,23 +1793,40 @@
       function syncHostHeight() {
         if (!embeddedResize) return;
         window.requestAnimationFrame(() => {
-          const shell = document.querySelector('.bw-day-shell');
+          const game = document.querySelector('.bw-day-game');
           const topbar = document.querySelector('.bw-day-topbar');
           const screenNode = document.getElementById('screen');
-          const shellStyle = shell ? window.getComputedStyle(shell) : null;
-          const padTop = shellStyle ? Number.parseFloat(shellStyle.paddingTop) || 0 : 0;
-          const padBottom = shellStyle ? Number.parseFloat(shellStyle.paddingBottom) || 0 : 0;
-          const screenTop = screenNode && shell ? Math.max(0, screenNode.getBoundingClientRect().top - shell.getBoundingClientRect().top) : 0;
-          const topbarHeight = topbar ? topbar.getBoundingClientRect().height : 0;
-          const natural = Math.max(
-            document.documentElement.scrollHeight || 0,
-            document.body.scrollHeight || 0,
-            screenTop + (screenNode ? screenNode.scrollHeight : 0) + padBottom,
-            padTop + topbarHeight + (screenNode ? screenNode.scrollHeight : 0) + padBottom + 8
-          );
+          if (!game) return;
+          const gameTop = game.getBoundingClientRect().top;
+          const topbarBottom = topbar ? topbar.getBoundingClientRect().bottom - gameTop : 0;
+          const screenRect = screenNode ? screenNode.getBoundingClientRect() : null;
+          const screenBottom = screenNode && screenRect ? (screenRect.top - gameTop) + screenNode.scrollHeight : 0;
+          const candidates = [
+            topbar,
+            ...(screenNode ? Array.from(screenNode.querySelectorAll([
+              '.bw-day-hero',
+              '.bw-day-copy',
+              '.budget-options',
+              '.start-actions',
+              '.bw-day-meters',
+              '.bw-day-progress',
+              '.bw-day-round',
+              '.bw-day-options',
+              '.bw-day-feedback',
+              '.bw-day-result',
+              '.bw-day-result-actions',
+              '.bw-day-manual-copy'
+            ].join(','))) : [])
+          ].filter(Boolean);
+          const contentBottom = candidates.reduce((bottom, el) => {
+            const style = window.getComputedStyle(el);
+            const rect = el.getBoundingClientRect();
+            if (style.display === 'none' || style.visibility === 'hidden' || rect.width <= 0 || rect.height <= 0) return bottom;
+            return Math.max(bottom, rect.bottom - gameTop);
+          }, Math.max(topbarBottom, screenBottom));
+          const natural = contentBottom + 18;
           const height = Math.ceil(Math.max(360, natural));
           window.parent.postMessage({ type: 'bw-day-survival-height', height }, '*');
-          window.parent.postMessage({ type: 'bw-resize', height }, '*');
         });
       }
 
