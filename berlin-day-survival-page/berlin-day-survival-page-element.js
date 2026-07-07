@@ -4,6 +4,7 @@ const BASE_URL = SCRIPT_URL
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
 const ASSET_BUILD = 'day-survival-mobile-copy-v8b-20260629';
 const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
+const NATIVE_GAME_BUILD = 'native-games-20260707a';
 
 function loadGamesPreviewRail(callback) {
   if (window.BerlinWalkGamesPreviewRail) {
@@ -19,6 +20,24 @@ function loadGamesPreviewRail(callback) {
   script.src = new URL(`js/games-preview-rail.js?v=${GAMES_PREVIEW_BUILD}`, BASE_URL).toString();
   script.defer = true;
   script.dataset.bwGamesPreviewRail = 'true';
+  script.addEventListener('load', callback, { once: true });
+  document.head.appendChild(script);
+}
+
+function loadNativeGameMount(callback) {
+  if (window.BerlinWalkNativeGameMount) {
+    callback();
+    return;
+  }
+  const existing = document.querySelector('script[data-bw-native-game-mount]');
+  if (existing) {
+    existing.addEventListener('load', callback, { once: true });
+    return;
+  }
+  const script = document.createElement('script');
+  script.src = new URL(`js/native-game-mount.js?v=${NATIVE_GAME_BUILD}`, BASE_URL).toString();
+  script.defer = true;
+  script.dataset.bwNativeGameMount = 'true';
   script.addEventListener('load', callback, { once: true });
   document.head.appendChild(script);
 }
@@ -260,7 +279,6 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
 
         .bw-day-frame {
           background: var(--cream);
-          border: 0;
           border-radius: 23px;
           display: block;
           height: 100% !important;
@@ -336,13 +354,12 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
         </section>
 
         <div class="bw-day-device" id="berlin-day-survival-game">
-          <iframe
+          <div
             class="bw-day-frame"
-            src="${this._gameUrl()}"
-            allow="autoplay; clipboard-write; web-share; shared-storage"
-            scrolling="no"
-            title="Berlin Day Survival game">
-          </iframe>
+            data-bw-native-game
+            data-game-url="${this._gameUrl()}"
+            role="application"
+            aria-label="Berlin Day Survival game"></div>
         </div>
 
         <section class="bw-day-tour-cta">
@@ -366,7 +383,22 @@ class BwBerlinDaySurvivalPage extends HTMLElement {
     }
     this._timers = [120, 700, 1600].map((delay) => window.setTimeout(() => this._syncWixHostHeight(), delay));
     this._renderGamesPreview();
+    this._mountNativeGame();
     this._syncWixHostHeight();
+  }
+
+  _mountNativeGame() {
+    const host = this.querySelector('[data-bw-native-game]');
+    if (!host) return;
+    loadNativeGameMount(() => {
+      if (!window.BerlinWalkNativeGameMount) return;
+      window.BerlinWalkNativeGameMount.mount({
+        host,
+        url: host.dataset.gameUrl,
+        baseUrl: new URL('berlin-day-survival/', BASE_URL).toString(),
+        kind: 'day-survival'
+      });
+    });
   }
 
   _renderGamesPreview() {

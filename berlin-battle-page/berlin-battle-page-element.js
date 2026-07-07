@@ -7,6 +7,7 @@
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   const ASSET_BUILD = 'battle-game-focus-20260623';
   const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
+  const NATIVE_GAME_BUILD = 'native-games-20260707a';
   const TOPIC_TITLES = {
     food: 'Berlin Food Battle',
     districts: 'Berlin District Battle',
@@ -54,8 +55,22 @@
     document.head.appendChild(script);
   }
 
-  function isValidHeight(value) {
-    return typeof value === 'number' && Number.isFinite(value) && value > 300 && value < 8000;
+  function loadNativeGameMount(callback) {
+    if (window.BerlinWalkNativeGameMount) {
+      callback();
+      return;
+    }
+    const existing = document.querySelector('script[data-bw-native-game-mount]');
+    if (existing) {
+      existing.addEventListener('load', callback, { once: true });
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = new URL(`js/native-game-mount.js?v=${NATIVE_GAME_BUILD}`, BASE_URL).toString();
+    script.defer = true;
+    script.dataset.bwNativeGameMount = 'true';
+    script.addEventListener('load', callback, { once: true });
+    document.head.appendChild(script);
   }
 
   class BWBerlinBattlePage extends HTMLElement {
@@ -63,12 +78,11 @@
       ensureFont();
       this._render();
       this._bind();
-      this._setupGameResize();
+      this._setupNativeGame();
     }
 
     disconnectedCallback() {
-      if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
-      if (this._frameLoadHandler && this._gameFrame) this._gameFrame.removeEventListener('load', this._frameLoadHandler);
+      if (this._focusHandler) window.removeEventListener('bw-battle-focus-game', this._focusHandler);
       if (this._resizeObserver) this._resizeObserver.disconnect();
       if (this._timers) this._timers.forEach((timer) => window.clearTimeout(timer));
     }
@@ -125,14 +139,12 @@
                   <strong>${deviceLabel}</strong>
                 </div>
                 <div class="bw-battle-screen">
-                  <iframe
-                    data-bw-battle-frame
-                    data-src="${this._gameSrc()}"
-                    src="about:blank"
-                    allow="web-share; clipboard-write"
-                    title="Berlin Battle game"
-                    loading="eager"
-                    scrolling="no"></iframe>
+                  <div
+                    class="bw-battle-native-game"
+                    data-bw-native-game
+                    data-game-url="${this._gameSrc()}"
+                    role="application"
+                    aria-label="Berlin Battle game"></div>
                 </div>
               </div>
 
@@ -172,19 +184,10 @@
       });
     }
 
-    _setupGameResize() {
-      this._gameFrame = this.querySelector('[data-bw-battle-frame]');
-      if (!this._gameFrame) return;
-
-      this._hasChildResize = false;
+    _setupNativeGame() {
+      this._gameHost = this.querySelector('[data-bw-native-game]');
+      if (!this._gameHost) return;
       this._timers = [];
-
-      const setFrameHeight = (height, fromChild) => {
-        if (!isValidHeight(height)) return;
-        if (!fromChild && this._hasChildResize) return;
-        if (fromChild) this._hasChildResize = true;
-        this._gameFrame.style.height = `${Math.ceil(height)}px`;
-      };
 
       const queueGameFocus = () => {
         [80, 260].forEach((delay) => {
@@ -192,29 +195,28 @@
         });
       };
 
-      this._messageHandler = (event) => {
-        if (!this._gameFrame || event.source !== this._gameFrame.contentWindow) return;
-        if (!event.data || !event.data.type) return;
-        if (event.data.type === 'bw-resize') {
-          setFrameHeight(event.data.height + 10, true);
-          return;
-        }
-        if (event.data.type === 'bw-battle-focus-game') {
-          queueGameFocus();
-        }
+      this._focusHandler = () => {
+        queueGameFocus();
       };
-      window.addEventListener('message', this._messageHandler);
+      window.addEventListener('bw-battle-focus-game', this._focusHandler);
 
-      this._frameLoadHandler = () => {
-        setFrameHeight(620, false);
-      };
-      this._gameFrame.addEventListener('load', this._frameLoadHandler);
+      loadNativeGameMount(() => {
+        if (!window.BerlinWalkNativeGameMount || !this._gameHost) return;
+        window.BerlinWalkNativeGameMount.mount({
+          host: this._gameHost,
+          url: this._gameHost.dataset.gameUrl,
+          baseUrl: new URL(GAME_PATH, BASE_URL).toString(),
+          kind: 'battle'
+        });
+      });
 
-      const pendingSrc = this._gameFrame.dataset.src;
-      if (pendingSrc) this._gameFrame.src = pendingSrc;
+      if ('ResizeObserver' in window) {
+        this._resizeObserver = new ResizeObserver(() => this._queueHostSync());
+        this._resizeObserver.observe(this);
+      }
 
-      [200, 800, 1800].forEach((delay) => {
-        this._timers.push(window.setTimeout(() => setFrameHeight(620, false), delay));
+      [160, 700, 1800, 3200].forEach((delay) => {
+        this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), delay));
       });
     }
 
@@ -231,6 +233,28 @@
       window.scrollTo({
         top: Math.round(top),
         behavior: reducedMotion ? 'auto' : 'smooth',
+      });
+    }
+
+    _queueHostSync() {
+      window.requestAnimationFrame(() => this._syncWixHostHeight());
+    }
+
+    _syncWixHostHeight() {
+      const page = this.querySelector('.bw-battle-page');
+      if (!page) return;
+      const height = Math.ceil(page.getBoundingClientRect().height);
+      const wixShell = this.parentElement;
+      if (!wixShell || !wixShell.id || !wixShell.id.startsWith('comp-')) return;
+      const targets = [
+        wixShell,
+        wixShell.parentElement,
+        this.closest('section'),
+      ].filter(Boolean);
+      const targetHeight = `${Math.min(Math.max(height + 12, 780), 3600)}px`;
+      targets.forEach((target) => {
+        target.style.setProperty('height', targetHeight, 'important');
+        target.style.setProperty('min-height', targetHeight, 'important');
       });
     }
 
@@ -496,11 +520,9 @@
           overflow: hidden;
         }
 
-        .bw-battle-screen iframe {
-          border: 0;
+        .bw-battle-native-game {
           display: block;
-          height: 620px;
-          overflow: hidden;
+          min-height: 620px;
           width: 100%;
         }
 
