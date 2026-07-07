@@ -1,0 +1,64 @@
+# Berlin Day Survival V2
+
+Native, self-contained rebuild of the Berlin Day Survival game. It replaces the
+retired `berlin-day-survival*` folders, which failed on real iOS Safari/Chrome
+because of the old iframe / resize / global-loader shell (see
+`../archive/berlin-day-survival-logic-20260707.md`).
+
+## What it is
+
+A one-minute first-day budget game: pick a food budget, make six real Berlin
+decisions, keep your Wallet, Fuel and Smarts alive, and get a shareable
+survival type. Negative wallet fails as **Budget Busted**.
+
+## Architecture (deliberately boring and robust)
+
+- Single custom element `<bw-day-survival-v2>`, light DOM, all state on the
+  element instance, all CSS scoped under `.bw-dsv-` and injected once.
+- **No iframe. No postMessage/resize. No MutationObserver. No global loader.
+  No parent-height messaging. No external CSS/JS. No network calls.**
+- Grows in normal document flow (no fixed `100vh` phone-frame). Buttons are
+  >=44px touch targets.
+
+## Files
+
+- `day-survival-v2-element.js` — the whole game (data + logic + CSS).
+- `index.html` — standalone, non-indexed local preview.
+
+## Live mount (do NOT wire until Yusuf approves on a real device)
+
+On a fresh Wix page, Custom Code (Body end):
+
+```html
+<bw-day-survival-v2></bw-day-survival-v2>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/day-survival-v2-element.js" defer></script>
+```
+
+That is the entire integration. No iframe wrapper, no loader, no resize script.
+
+## Local preview + QA
+
+```bash
+python3 -m http.server 8765 --bind 127.0.0.1   # from the repo root
+open http://127.0.0.1:8765/berlin-day-survival-v2/
+```
+
+QA driven with Playwright Chromium + WebKit at 390px: full flow, trap path =>
+Budget Busted, survivor path => a survival type, 0 console errors, 0 horizontal
+overflow, reload-safe.
+
+## Content model
+
+- 3 budgets (EUR 10 Hard / 15 Normal / 20 Comfort).
+- 6 rounds: morning, hydration, landmark, lunch, afternoon, night.
+- One random condition per game (first-day, late-arrival, heatwave, sunday-shops,
+  sunny-saturday, rainy) that shifts intro copy and a few choice outcomes.
+- Result types: Budget Busted, Sunday Casualty, Alexanderplatz Victim, Doner
+  Loyalist, Club Mate Creature, Spaeti Strategist, Budget Saint, Late-Night
+  Survivor, Smart Wanderer.
+
+## Phase 2 (intentionally deferred for stability)
+
+- Optional German-accented audio line per screen (ElevenLabs `Jonas`).
+- Downloadable / image share card.
+- Deeper Sunday and heatwave branching.
