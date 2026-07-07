@@ -14,6 +14,8 @@ Custom Element source for the future `/games` hub page.
 `<bw-games-page>` is a Spotlight Grid style hub for the current live BerlinWalk game modes:
 
 - Berlin Battle: `/games/berlin-battle`
+- Berlin Day Survival: `/games/berlin-day-survival`
+- Berlin Rewind: `/games/berlin-rewind`
 - Berghain Bouncer: `/games/berghain-bouncer`
 - Berlin Smile Challenge: `/games/berlin-smile-challenge`
 
@@ -22,6 +24,6 @@ It uses existing game cover/social art from the widget repo and avoids fake play
 ## Notes
 
 - Public copy is English and uses neutral BerlinWalk / first-person-compatible tour language.
-- The element does not update the global header/footer yet. Change those only after the Wix `/games` page exists and is published.
+- The global header/footer source and the live Wix nav/footer patch now include the live game set.
 - Preview the Spotlight Grid direction by opening `games-page/index.html` or serving the repo root and visiting `/games-page/`.
 - Preview the Hub + Panel alternative by opening `games-page/hub-modal.html`.

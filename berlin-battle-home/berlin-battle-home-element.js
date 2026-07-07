@@ -9,7 +9,7 @@ const BW_GAMES_HOME_ROOT = (() => {
 
 const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
 const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
-const BW_GAMES_HOME_ASSET_VERSION = 'games-home-no-rewind-20260707a';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-restored-day-rewind-20260708a';
 
 const BW_GAMES_HOME_ITEMS = [
   {
@@ -31,6 +31,26 @@ const BW_GAMES_HOME_ITEMS = [
     href: 'https://www.berlinwalk.com/games/berghain-bouncer',
     cta: 'Try the door',
     image: 'berlin-bouncer/assets/social/berlin-bouncer-social-1200x630.jpg'
+  },
+  {
+    id: 'berlin-day-survival',
+    kicker: 'Budget game',
+    title: 'Berlin Day Survival',
+    lead: 'Try one Berlin day on €10, €15 or €20 and see where the tiny decisions catch you.',
+    meta: '6 city choices',
+    href: 'https://www.berlinwalk.com/games/berlin-day-survival',
+    cta: 'Survive the Day',
+    image: 'berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg'
+  },
+  {
+    id: 'berlin-rewind',
+    kicker: 'Archive game',
+    title: 'Berlin Rewind',
+    lead: 'Read old Berlin photos, guess the year and district, and keep a daily streak alive.',
+    meta: 'Daily photo set',
+    href: 'https://www.berlinwalk.com/games/berlin-rewind',
+    cta: 'Play Rewind',
+    image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg'
   },
   {
     id: 'berlin-smile-challenge',
@@ -448,7 +468,7 @@ class BWBerlinBattleHomeElement extends HTMLElement {
           <div class="bw-games-home-copy">
             <span class="bw-games-home-kicker">BerlinWalk games</span>
             <h2 class="bw-games-home-title" id="bw-games-home-title">Play Berlin before you walk it.</h2>
-            <p class="bw-games-home-lead">Three fast ways into Berlin: pick your city winner, face the club door, or try to make Berlin almost smile. Then come walk the real city with me.</p>
+            <p class="bw-games-home-lead">Five fast ways into Berlin: pick your city winner, test a first-day budget, read an old photo, face the club door, or try to make Berlin almost smile. Then come walk the real city with me.</p>
             <div class="bw-games-home-actions">
               <a class="bw-games-home-btn bw-games-home-btn-primary" href="${BW_GAMES_HOME_URL}">See all games</a>
               <a class="bw-games-home-btn bw-games-home-btn-secondary" href="${BW_GAMES_HOME_BOOKING_URL}">Book the walking tour</a>

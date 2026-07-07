@@ -6,7 +6,7 @@
   const GAME_PATH = 'berlin-battle/';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   const ASSET_BUILD = 'battle-result-mobile-polish-20260707a';
-  const GAMES_PREVIEW_BUILD = 'games-preview-rail-20260629c';
+  const GAMES_PREVIEW_BUILD = 'games-preview-rail-restored-day-rewind-20260708a';
   const NATIVE_GAME_BUILD = 'native-games-20260707a';
   const TOPIC_TITLES = {
     food: 'Berlin Food Battle',

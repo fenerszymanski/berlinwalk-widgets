@@ -16,17 +16,24 @@
  *   <bw-berlin-rewind-v2></bw-berlin-rewind-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-20260707b
+ * Build marker: berlin-rewind-v2-restored-crosslinks-20260708a
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'berlin-rewind-v2-20260707d';
+  var BUILD = 'berlin-rewind-v2-restored-crosslinks-20260708a';
   var TAG = 'bw-berlin-rewind-v2';
   var STORE_KEY = 'bwRewindV2State';
   var HISTORY_MAX = 14;
+  var GAME_LINKS = [
+    { label: 'All games', href: GAMES_URL },
+    { label: 'Day Survival', href: 'https://www.berlinwalk.com/games/berlin-day-survival' },
+    { label: 'Berlin Battle', href: 'https://www.berlinwalk.com/games/berlin-battle' },
+    { label: 'Berghain Bouncer', href: 'https://www.berlinwalk.com/games/berghain-bouncer' },
+    { label: 'Smile Challenge', href: 'https://www.berlinwalk.com/games/berlin-smile-challenge' }
+  ];
 
   // Absolute default so photos resolve even when a host (e.g. Wix) loads this
   // script with document.currentScript null/proxied. Overridable per-instance
@@ -189,7 +196,12 @@
     '.bw-rw-recap-p{color:var(--y);font-weight:800;white-space:nowrap;}',
     '.bw-rw-tomorrow{text-align:center;font-size:14px;font-weight:700;color:var(--lg);margin:14px 0 2px;}',
     '.bw-rw-tomorrow b{color:var(--y);}',
-    '.bw-rw-copied{text-align:center;font-size:13px;color:var(--y);font-weight:700;min-height:18px;margin-top:8px;}'
+    '.bw-rw-copied{text-align:center;font-size:13px;color:var(--y);font-weight:700;min-height:18px;margin-top:8px;}',
+    '.bw-rw-more{margin-top:14px;padding-top:14px;border-top:1px solid rgba(197,225,165,.25);}',
+    '.bw-rw-more-k{font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--lg);margin:0 0 8px;}',
+    '.bw-rw-more-links{display:flex;gap:8px;flex-wrap:wrap;}',
+    '.bw-rw-more-links a{display:inline-flex;align-items:center;min-height:34px;border-radius:999px;border:1px solid rgba(197,225,165,.42);padding:8px 11px;color:var(--cream);font-size:12.5px;font-weight:800;text-decoration:none;background:rgba(255,255,255,.06);}',
+    '.bw-rw-more-links a:first-child{background:var(--y);border-color:var(--y);color:var(--gd);}'
   ].join('');
 
   // ---------- helpers ----------
@@ -343,6 +355,13 @@
       return '<div class="bw-rw-table"><div class="bw-rw-table-h">Your recent Rewind scores</div>' + rows + '</div>';
     }
 
+    _moreGamesHtml() {
+      var links = GAME_LINKS.map(function (item) {
+        return '<a href="' + item.href + '">' + esc(item.label) + '</a>';
+      }).join('');
+      return '<div class="bw-rw-more"><p class="bw-rw-more-k">More Berlin games</p><div class="bw-rw-more-links">' + links + '</div></div>';
+    }
+
     _renderStart(st) {
       this.innerHTML =
         '<div class="bw-rw-card">' +
@@ -356,6 +375,7 @@
             '<div class="bw-rw-btnrow">' +
               '<button type="button" class="bw-rw-btn" data-start="daily">Play today’s 5 photos</button>' +
             '</div>' +
+            this._moreGamesHtml() +
             '<p class="bw-rw-foot">Photos: Bundesarchiv via Wikimedia Commons, CC BY-SA 3.0 DE</p>' +
           '</div>' +
         '</div>';
@@ -377,6 +397,7 @@
               '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
               '<button type="button" class="bw-rw-btn ghost" data-start="practice">Practice round (no streak)</button>' +
             '</div>' +
+            this._moreGamesHtml() +
           '</div>' +
         '</div>';
       var self = this;
@@ -579,6 +600,7 @@
               secondBtn +
               (this._mode === 'practice' ? '<button type="button" class="bw-rw-btn link" data-copy2="1">Copy my score</button>' : '') +
             '</div>' +
+            this._moreGamesHtml() +
             '<div class="bw-rw-copied" data-copied></div>' +
           '</div>' +
         '</div>';

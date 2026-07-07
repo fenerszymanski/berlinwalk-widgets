@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-hub-modal-v1-20260623';
+  const ASSET_VERSION = 'games-hub-modal-restored-day-rewind-20260708a';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=games&utm_medium=hub_alt&utm_campaign=berlinwalk_games&utm_content=book_tour';
 
   const FILTERS = [
@@ -56,6 +56,48 @@
       ],
       tourBridge: 'Strongest when a Berlin nightlife article or Story needs a playful challenge link.',
       cta: 'Try the door'
+    },
+    {
+      id: 'berlin-day-survival',
+      title: 'Berlin Day Survival',
+      short: 'Can your budget survive Berlin?',
+      lane: 'Budget instinct',
+      image: 'berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-day-survival',
+      filters: ['quick', 'share'],
+      duration: 'Under 1 min',
+      start: 'Pick a budget',
+      bestFor: 'First-day visitors, budget instincts, food choices',
+      score: 'Survival result',
+      lead: 'A quick first-day budget test where water, food, tiredness and one wrong tourist move can change the whole day.',
+      rules: [
+        'Choose €10, €15 or €20.',
+        'Make six real Berlin decisions.',
+        'See whether your wallet and energy survive.'
+      ],
+      tourBridge: 'Useful for visitors who want Berlin to feel less random before they start spending money in the city.',
+      cta: 'Survive the day'
+    },
+    {
+      id: 'berlin-rewind',
+      title: 'Berlin Rewind',
+      short: 'Guess old Berlin photos.',
+      lane: 'Archive clue game',
+      image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-rewind',
+      filters: ['quick', 'share'],
+      duration: 'Under 2 min',
+      start: 'Daily set',
+      bestFor: 'History eyes, repeat visits, photo clues',
+      score: 'Daily archive score',
+      lead: 'A daily Berlin archive game: read the photo, guess the year and district, and come back for the next set.',
+      rules: [
+        'Study the archive photo.',
+        'Guess the year and Berlin district.',
+        'Keep your daily streak alive.'
+      ],
+      tourBridge: 'Best for visitors who like then-and-now Berlin and want the city to feel layered before the walk.',
+      cta: 'Play Rewind'
     },
     {
       id: 'berlin-smile-challenge',

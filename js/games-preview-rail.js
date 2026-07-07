@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const BUILD = 'games-preview-rail-no-rewind-20260707a';
+  const BUILD = 'games-preview-rail-restored-day-rewind-20260708a';
 
   const GAMES = [
     {
@@ -23,6 +23,24 @@
       image: 'berlin-bouncer/assets/social/berlin-bouncer-social-1200x630.jpg',
       href: 'https://www.berlinwalk.com/games/berghain-bouncer',
       cta: 'Try the door'
+    },
+    {
+      id: 'berlin-day-survival',
+      title: 'Berlin Day Survival',
+      kicker: 'Budget game',
+      lead: 'Try one Berlin day on €10, €15 or €20 and see what the city does to your wallet.',
+      image: 'berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-day-survival',
+      cta: 'Survive the day'
+    },
+    {
+      id: 'berlin-rewind',
+      title: 'Berlin Rewind',
+      kicker: 'Archive game',
+      lead: 'Guess the year and district from real Berlin archive photos.',
+      image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-rewind',
+      cta: 'Play Rewind'
     },
     {
       id: 'berlin-smile-challenge',
@@ -143,7 +161,7 @@
       .bw-games-preview-grid {
         display: grid;
         gap: 14px;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       }
 
       .bw-games-preview-card {
@@ -255,7 +273,7 @@
     const opts = options || {};
     const current = opts.current || '';
     const source = opts.source || current || 'game_page';
-    const items = GAMES.filter((game) => game.id !== current).slice(0, 3);
+    const items = GAMES.filter((game) => game.id !== current).slice(0, 4);
     ensureStyles();
     container.className = 'bw-games-preview-rail';
     if (opts.theme) container.dataset.theme = opts.theme;
