@@ -3,22 +3,8 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-rewind-cover-20260706b';
+  const ASSET_VERSION = 'games-page-no-rewind-20260707a';
   const GAMES = [
-    {
-      id: 'berlin-rewind',
-      kicker: 'Daily archive',
-      title: 'Berlin Rewind',
-      lead: 'Three historical Berlin photos per day. Guess the year and district before the archive answers back.',
-      how: 'Everyone gets the same daily set, so the score, streak, and emoji grid mean something when you share them.',
-      duration: 'About 1 min',
-      difficulty: 'Photo history',
-      player: 'Curious walkers',
-      image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
-      href: 'https://www.berlinwalk.com/games/berlin-rewind',
-      button: 'Play Berlin Rewind',
-      accent: 'archive'
-    },
     {
       id: 'berlin-battle',
       kicker: 'Choice battle',
@@ -132,7 +118,7 @@
             <div class="bw-games-hero-inner">
               <p class="bw-games-kicker">Playable Berlin</p>
               <h1 id="bw-games-title">BerlinWalk Games</h1>
-              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Rewind the archive, pick a winner, pass the door, survive the day, or try to make Berlin smile.</p>
+              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Pick a winner, pass the door, survive the day, or try to make Berlin smile.</p>
             </div>
           </section>
 
@@ -140,7 +126,7 @@
             <div class="bw-games-section-head">
               <p class="bw-games-section-kicker">Pick your mode</p>
               <h2 id="bw-games-modes-title">Choose your way into Berlin</h2>
-              <p>Each live game has a different job: archive memory, taste, instinct, night pressure, first-day survival, or social weather.</p>
+              <p>Each live game has a different job: taste, instinct, night pressure, first-day survival, or social weather.</p>
             </div>
             <div class="bw-games-grid">
               ${gameCards}

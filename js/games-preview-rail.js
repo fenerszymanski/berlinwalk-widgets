@@ -3,18 +3,9 @@
   const BASE_URL = SCRIPT_URL
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const BUILD = 'games-preview-rail-20260705a';
+  const BUILD = 'games-preview-rail-no-rewind-20260707a';
 
   const GAMES = [
-    {
-      id: 'berlin-rewind',
-      title: 'Berlin Rewind',
-      kicker: 'Daily archive',
-      lead: 'Three historical Berlin photos per day. Guess the year and district, then compare your score.',
-      image: 'https://upload.wikimedia.org/wikipedia/commons/3/3b/Bundesarchiv_Bild_183-H1006-0001-005%2C_Berlin%2C_Blick_vom_Fernsehturm_auf_den_Alexanderplatz_bei_Nacht.jpg',
-      href: 'https://www.berlinwalk.com/games/berlin-rewind',
-      cta: 'Play Rewind'
-    },
     {
       id: 'berlin-battle',
       title: 'Berlin Battle',
@@ -187,10 +178,6 @@
 
       .bw-games-preview-card[data-game="berlin-day-survival"] img {
         object-position: 24% center;
-      }
-
-      .bw-games-preview-card[data-game="berlin-rewind"] img {
-        object-position: center 38%;
       }
 
       .bw-games-preview-card[data-game="berlin-smile-challenge"] img {

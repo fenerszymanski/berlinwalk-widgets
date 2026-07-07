@@ -9,19 +9,9 @@ const BW_GAMES_HOME_ROOT = (() => {
 
 const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
 const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
-const BW_GAMES_HOME_ASSET_VERSION = 'games-home-rewind-cover-20260706b';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-no-rewind-20260707a';
 
 const BW_GAMES_HOME_ITEMS = [
-  {
-    id: 'berlin-rewind',
-    kicker: 'Daily archive',
-    title: 'Berlin Rewind',
-    lead: 'Three historical Berlin photos per day. Guess the year and district before the archive reveals the answer.',
-    meta: '3 shared daily frames',
-    href: 'https://www.berlinwalk.com/games/berlin-rewind',
-    cta: 'Play Rewind',
-    image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg'
-  },
   {
     id: 'berlin-battle',
     kicker: 'Choice battle',
