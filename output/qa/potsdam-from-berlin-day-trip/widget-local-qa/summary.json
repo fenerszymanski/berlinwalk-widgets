@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-07-07T06:18:45.560Z",
+  "url": "http://127.0.0.1:8777/potsdam-day-trip-planner/?attribution=none&qa=2",
+  "results": [
+    {
+      "name": "chromium-desktop",
+      "viewport": {
+        "width": 1366,
+        "height": 900
+      },
+      "metrics": {
+        "verdict": "New Garden and Glienicke Bridge with a closure check",
+        "ticket": "For three to five people moving together, check the Berlin ABC 24-hour small-group ticket first. It can be simpler than separate tickets.",
+        "warnings": [
+          "Do not promise yourself a Cecilienhof interior until the official closure notice changes.",
+          "This route is stronger for history lovers than first-time palace visitors.",
+          "Keep one easy return route open before walking toward the bridge."
+        ],
+        "overflow": 0,
+        "timelineHeight": 288,
+        "sideHeight": 618
+      },
+      "errors": []
+    },
+    {
+      "name": "chromium-mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "verdict": "New Garden and Glienicke Bridge with a closure check",
+        "ticket": "For three to five people moving together, check the Berlin ABC 24-hour small-group ticket first. It can be simpler than separate tickets.",
+        "warnings": [
+          "Do not promise yourself a Cecilienhof interior until the official closure notice changes.",
+          "This route is stronger for history lovers than first-time palace visitors.",
+          "Keep one easy return route open before walking toward the bridge."
+        ],
+        "overflow": 0,
+        "timelineHeight": 340,
+        "sideHeight": 724
+      },
+      "errors": []
+    },
+    {
+      "name": "webkit-mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "metrics": {
+        "verdict": "New Garden and Glienicke Bridge with a closure check",
+        "ticket": "For three to five people moving together, check the Berlin ABC 24-hour small-group ticket first. It can be simpler than separate tickets.",
+        "warnings": [
+          "Do not promise yourself a Cecilienhof interior until the official closure notice changes.",
+          "This route is stronger for history lovers than first-time palace visitors.",
+          "Keep one easy return route open before walking toward the bridge."
+        ],
+        "overflow": 0,
+        "timelineHeight": 340,
+        "sideHeight": 724
+      },
+      "errors": []
+    }
+  ]
+}

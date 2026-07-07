@@ -1044,6 +1044,38 @@
       ]
     },
     {
+      "slug": "potsdam-day-trip-planner",
+      "title": "Potsdam Day Trip Planner",
+      "lead": "Choose a realistic Potsdam day trip from Berlin by time, energy and main interest, with ABC ticket reminders and a calmer Sanssouci route.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_52d4bbb387c74324be29929624c5502d~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/potsdam-day-trip-planner/",
+      "embedHeight": 1360,
+      "hubCategory": "TripPlans",
+      "type": "Planner",
+      "priority": 16,
+      "tags": [
+        "potsdam",
+        "sanssouci",
+        "day trip",
+        "train",
+        "abc ticket",
+        "palace",
+        "planner",
+        "berlin day trip"
+      ],
+      "aliases": [
+        "potsdam from berlin",
+        "sanssouci day trip",
+        "potsdam train from berlin",
+        "potsdam day planner"
+      ],
+      "relatedBlog": "/post/potsdam-from-berlin-day-trip",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "34a6162d-f0e0-4d54-b2c6-5938bd44453b",
+      "published": true
+    },
+    {
       "slug": "whats-open-in-berlin-today",
       "title": "What's Open in Berlin Today",
       "lead": "Live daily check: today's date, public holidays, what's open and closed across Berlin — supermarkets, museums, transport, banks.",

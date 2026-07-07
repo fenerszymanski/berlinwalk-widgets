@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Potsdam Day Trip Planner | BerlinWalk</title>
+  <meta name="description" content="Choose a realistic Potsdam day trip from Berlin: Sanssouci, park, Dutch Quarter, New Garden, ticket zone and return rhythm.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<div id="bw-potsdam-planner">
+  <style>
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-potsdam-planner {
+      --green: #1B5E20;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --light: #C5E1A5;
+      --cream: #FAFAF5;
+      --text: #212121;
+      --muted: #586458;
+      --border: #DCE8CE;
+      --brick: #B55239;
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 20px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-potsdam-planner *,
+    #bw-potsdam-planner *::before,
+    #bw-potsdam-planner *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-potsdam-planner h2,
+    #bw-potsdam-planner h3,
+    #bw-potsdam-planner p {
+      margin-top: 0;
+    }
+
+    #bw-potsdam-planner .shell {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 12px 34px rgba(27, 94, 32, .12);
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-potsdam-planner .hero {
+      background:
+        linear-gradient(90deg, rgba(27, 94, 32, .94), rgba(27, 94, 32, .54)),
+        url("hero-sanssouci.jpg") center / cover;
+      color: #fff;
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, 1.05fr) minmax(230px, .65fr);
+      min-height: 285px;
+      padding: 25px;
+    }
+
+    #bw-potsdam-planner .kicker {
+      color: var(--yellow);
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: 1.1px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-potsdam-planner .title {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 950;
+      letter-spacing: 0;
+      line-height: 1.06;
+      margin: 0;
+      max-width: 720px;
+    }
+
+    #bw-potsdam-planner .sub {
+      color: rgba(255,255,255,.9);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 12px 0 0;
+      max-width: 700px;
+    }
+
+    #bw-potsdam-planner .ticket-tile {
+      align-self: end;
+      background: rgba(250, 250, 245, .96);
+      border: 1px solid rgba(255, 230, 0, .55);
+      border-radius: 8px;
+      color: var(--text);
+      padding: 15px;
+    }
+
+    #bw-potsdam-planner .ticket-tile small {
+      color: var(--muted);
+      display: block;
+      font-size: 10.5px;
+      font-weight: 900;
+      letter-spacing: .9px;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    #bw-potsdam-planner .ticket-tile strong {
+      color: var(--green);
+      display: block;
+      font-size: 35px;
+      font-weight: 950;
+      line-height: 1;
+      margin-top: 6px;
+    }
+
+    #bw-potsdam-planner .ticket-tile span {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin-top: 8px;
+    }
+
+    #bw-potsdam-planner .workbench {
+      background: linear-gradient(180deg, #fff 0%, var(--cream) 100%);
+      display: grid;
+      gap: 15px;
+      padding: 18px;
+    }
+
+    #bw-potsdam-planner .switchboard {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-potsdam-planner .panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    #bw-potsdam-planner .panel h3 {
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0 0 9px;
+    }
+
+    #bw-potsdam-planner .choices {
+      display: grid;
+      gap: 8px;
+    }
+
+    #bw-potsdam-planner .choice {
+      align-items: start;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      gap: 3px;
+      min-height: 68px;
+      padding: 10px 11px;
+      text-align: left;
+      width: 100%;
+      font: inherit;
+      transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+    }
+
+    #bw-potsdam-planner .choice:hover {
+      border-color: rgba(27, 94, 32, .38);
+      box-shadow: 0 8px 18px rgba(27, 94, 32, .08);
+      transform: translateY(-1px);
+    }
+
+    #bw-potsdam-planner .choice[aria-pressed="true"] {
+      background: linear-gradient(135deg, rgba(197, 225, 165, .55), #fff);
+      border-color: var(--green);
+      box-shadow: inset 4px 0 0 var(--yellow);
+    }
+
+    #bw-potsdam-planner .choice b {
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-potsdam-planner .choice span {
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.35;
+    }
+
+    #bw-potsdam-planner .result {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: minmax(0, 1.05fr) minmax(260px, .65fr);
+    }
+
+    #bw-potsdam-planner .verdict {
+      background:
+        linear-gradient(135deg, rgba(27, 94, 32, .95), rgba(53, 107, 40, .9)),
+        url("dutch-quarter.jpg") center / cover;
+      border-radius: 8px;
+      color: #fff;
+      min-height: 260px;
+      overflow: hidden;
+      padding: 20px;
+      position: relative;
+    }
+
+    #bw-potsdam-planner .verdict::after {
+      background: linear-gradient(0deg, rgba(0,0,0,.22), transparent);
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    #bw-potsdam-planner .verdict > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-potsdam-planner .verdict .tag {
+      background: var(--yellow);
+      border-radius: 999px;
+      color: var(--green);
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 950;
+      letter-spacing: .7px;
+      line-height: 1;
+      margin-bottom: 12px;
+      padding: 7px 10px;
+      text-transform: uppercase;
+    }
+
+    #bw-potsdam-planner .verdict h3 {
+      color: #fff;
+      font-size: 26px;
+      font-weight: 950;
+      line-height: 1.08;
+      margin: 0;
+      max-width: 620px;
+    }
+
+    #bw-potsdam-planner .verdict p {
+      color: rgba(255,255,255,.9);
+      font-size: 14px;
+      font-weight: 650;
+      line-height: 1.55;
+      margin: 11px 0 0;
+      max-width: 680px;
+    }
+
+    #bw-potsdam-planner .timeline {
+      align-self: start;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: grid;
+      gap: 0;
+      overflow: hidden;
+    }
+
+    #bw-potsdam-planner .step {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 78px minmax(0, 1fr);
+      padding: 13px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    #bw-potsdam-planner .step:last-child {
+      border-bottom: 0;
+    }
+
+    #bw-potsdam-planner .time {
+      align-self: start;
+      background: var(--green);
+      border-radius: 8px;
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 950;
+      line-height: 1.15;
+      min-height: 42px;
+      padding: 8px;
+      text-align: center;
+    }
+
+    #bw-potsdam-planner .step b {
+      color: var(--green);
+      display: block;
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.25;
+    }
+
+    #bw-potsdam-planner .step span {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 650;
+      line-height: 1.42;
+      margin-top: 3px;
+    }
+
+    #bw-potsdam-planner .side {
+      align-self: start;
+      display: grid;
+      gap: 14px;
+    }
+
+    #bw-potsdam-planner .note {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    #bw-potsdam-planner .note h3 {
+      color: var(--green);
+      font-size: 16px;
+      font-weight: 950;
+      line-height: 1.2;
+      margin: 0 0 8px;
+    }
+
+    #bw-potsdam-planner .note p,
+    #bw-potsdam-planner .note li {
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 650;
+      line-height: 1.5;
+    }
+
+    #bw-potsdam-planner .note p {
+      margin: 0;
+    }
+
+    #bw-potsdam-planner .note ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+
+    #bw-potsdam-planner .links {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    #bw-potsdam-planner .links a {
+      align-items: center;
+      background: var(--green);
+      border-radius: 8px;
+      color: #fff;
+      display: flex;
+      font-size: 12px;
+      font-weight: 900;
+      justify-content: center;
+      min-height: 42px;
+      padding: 9px;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    #bw-potsdam-planner .links a.secondary {
+      background: var(--brick);
+    }
+
+    #bw-potsdam-planner .fineprint {
+      color: #667166;
+      font-size: 11.5px;
+      font-weight: 650;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    @media (max-width: 760px) {
+      #bw-potsdam-planner {
+        margin: 12px 0;
+      }
+
+      #bw-potsdam-planner .hero,
+      #bw-potsdam-planner .switchboard,
+      #bw-potsdam-planner .result {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-potsdam-planner .hero {
+        min-height: 0;
+        padding: 20px;
+      }
+
+      #bw-potsdam-planner .title {
+        font-size: 25px;
+      }
+
+      #bw-potsdam-planner .ticket-tile strong {
+        font-size: 29px;
+      }
+
+      #bw-potsdam-planner .workbench {
+        padding: 13px;
+      }
+
+      #bw-potsdam-planner .choice {
+        min-height: 62px;
+      }
+
+      #bw-potsdam-planner .step {
+        grid-template-columns: 68px minmax(0, 1fr);
+        padding: 11px;
+      }
+
+      #bw-potsdam-planner .links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+
+  <section class="shell" aria-label="Potsdam day trip planning tool">
+    <div class="hero">
+      <div>
+        <div class="kicker">Potsdam Day Trip Planner</div>
+        <h2 class="title">Build the Potsdam day that will still feel good at 5pm.</h2>
+        <p class="sub">Choose your time, energy and main reason for going. The planner gives you one realistic route, the ticket zone to check, and the mistake to avoid.</p>
+      </div>
+      <div class="ticket-tile" aria-label="Ticket reminder">
+        <small>Ticket zone to check</small>
+        <strong>ABC</strong>
+        <span>Potsdam is in Berlin fare zone C. Check current fares in the official app before buying.</span>
+      </div>
+    </div>
+
+    <div class="workbench">
+      <div class="switchboard" aria-label="Potsdam day trip choices">
+        <div class="panel">
+          <h3>How much time do you really have?</h3>
+          <div class="choices" data-group="time">
+            <button class="choice" type="button" data-value="half" aria-pressed="false"><b>Half day</b><span>One anchor, no heroic park march.</span></button>
+            <button class="choice" type="button" data-value="full" aria-pressed="true"><b>Full day</b><span>Palace or park first, slower finish later.</span></button>
+            <button class="choice" type="button" data-value="late" aria-pressed="false"><b>Late start</b><span>Arriving after lunch or moving slowly.</span></button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>What do you care about most?</h3>
+          <div class="choices" data-group="mood">
+            <button class="choice" type="button" data-value="classic" aria-pressed="true"><b>Classic Sanssouci</b><span>Palace, terraces, park and old town.</span></button>
+            <button class="choice" type="button" data-value="park" aria-pressed="false"><b>Park without pressure</b><span>Less ticket stress, more open-air time.</span></button>
+            <button class="choice" type="button" data-value="history" aria-pressed="false"><b>Cold War edge</b><span>New Garden, Cecilienhof context, Glienicke Bridge.</span></button>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h3>Who is travelling?</h3>
+          <div class="choices" data-group="group">
+            <button class="choice" type="button" data-value="solo" aria-pressed="true"><b>Solo or pair</b><span>Single or 24-hour ABC can both make sense.</span></button>
+            <button class="choice" type="button" data-value="family" aria-pressed="false"><b>Family rhythm</b><span>Fewer sights, more breaks, check family ticket rules.</span></button>
+            <button class="choice" type="button" data-value="group" aria-pressed="false"><b>3 to 5 together</b><span>Check the ABC small-group 24-hour ticket first.</span></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="result">
+        <div class="timeline" id="bwTimeline" aria-live="polite"></div>
+        <div class="side">
+          <div class="verdict">
+            <span class="tag" id="bwTag">Recommended route</span>
+            <h3 id="bwTitle">Sanssouci first, Dutch Quarter later</h3>
+            <p id="bwLead">Book or check the Sanssouci slot before you leave Berlin, then let the afternoon stay flexible.</p>
+          </div>
+          <div class="note">
+            <h3>Ticket and booking note</h3>
+            <p id="bwTicket">For a full day with transport inside Potsdam, check the Berlin ABC 24-hour ticket. If you only ride there and back, compare it with two ABC singles.</p>
+          </div>
+          <div class="note">
+            <h3>Do not miss this</h3>
+            <ul id="bwWarnings"></ul>
+          </div>
+          <div class="links">
+            <a href="https://www.berlinwalk.com/post/berlin-ab-abc-ticket-zones" target="_blank" rel="noopener">ABC ticket guide</a>
+            <a class="secondary" href="https://www.berlinwalk.com/berlin-trip-planner" target="_blank" rel="noopener">Plan my Berlin days</a>
+          </div>
+          <p class="fineprint">This is a planning aid, not a live timetable. Always check the official connection and ticket app before travel.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      const state = { time: 'full', mood: 'classic', group: 'solo' };
+      const timeline = document.getElementById('bwTimeline');
+      const title = document.getElementById('bwTitle');
+      const lead = document.getElementById('bwLead');
+      const tag = document.getElementById('bwTag');
+      const ticket = document.getElementById('bwTicket');
+      const warnings = document.getElementById('bwWarnings');
+
+      const plans = {
+        classic: {
+          tag: 'Classic first visit',
+          title: 'Sanssouci first, Dutch Quarter later',
+          lead: 'Put the famous palace or terraces early, then finish in the old town when your legs are slower.',
+          steps: [
+            ['Morning', 'Berlin to Potsdam Hbf', 'Leave enough buffer for a tram, bus, taxi or walk toward Sanssouci.'],
+            ['Late AM', 'Sanssouci Palace or terraces', 'Use the booked slot if you have one. If not, make the terraces and park the anchor.'],
+            ['Midday', 'Park stretch, not park conquest', 'Walk one meaningful section instead of trying to collect every palace.'],
+            ['Afternoon', 'Dutch Quarter reset', 'Brick streets, coffee and a softer final hour before returning to Berlin.']
+          ],
+          warnings: ['Sanssouci is closed on Mondays, so check the official page first.', 'A fixed palace slot and a tight train arrival do not mix.', 'Do not add New Palace unless you really want a longer walk.']
+        },
+        park: {
+          tag: 'Low-pressure day',
+          title: 'Terraces, park and old town without ticket stress',
+          lead: 'This version is best when you want Potsdam atmosphere more than interior rooms.',
+          steps: [
+            ['Morning', 'Berlin to Potsdam', 'Aim for Potsdam Hbf, then move toward the Sanssouci side without racing.'],
+            ['Late AM', 'Terraces and park', 'Use the palace exterior and gardens as the main experience.'],
+            ['Lunch', 'Slow break', 'Do not postpone food until everyone is tired.'],
+            ['Afternoon', 'Dutch Quarter or one extra palace exterior', 'Keep the last stop easy and close enough to leave calmly.']
+          ],
+          warnings: ['Skipping palace interiors is not a failure if the day feels better.', 'The park is large, so choose a loop before you start walking.', 'Bad weather should shrink the route, not cancel the whole day.']
+        },
+        history: {
+          tag: 'History route',
+          title: 'New Garden and Glienicke Bridge with a closure check',
+          lead: 'Choose this if Potsdam Conference and Cold War geography matter more than palace interiors.',
+          steps: [
+            ['Morning', 'Berlin to Potsdam', 'Start with live route search because the history route is less linear than Sanssouci.'],
+            ['Late AM', 'New Garden', 'Use the landscape and Cecilienhof context as the anchor.'],
+            ['Midday', 'Cecilienhof exterior context', 'The official SPSG page currently lists Cecilienhof as closed for restoration, so check before planning an interior visit.'],
+            ['Afternoon', 'Glienicke Bridge', 'Finish with the border story if you still have time and energy.']
+          ],
+          warnings: ['Do not promise yourself a Cecilienhof interior until the official closure notice changes.', 'This route is stronger for history lovers than first-time palace visitors.', 'Keep one easy return route open before walking toward the bridge.']
+        }
+      };
+
+      function selectedPlan() {
+        if (state.time === 'half' && state.mood === 'history') return plans.history;
+        if (state.time === 'late' && state.mood === 'classic') return {
+          ...plans.park,
+          tag: 'Late-start save',
+          title: 'Terraces and Dutch Quarter, no palace pressure',
+          lead: 'After lunch, do not chase a full palace day. Make it a good Potsdam afternoon.'
+        };
+        return plans[state.mood];
+      }
+
+      function ticketText() {
+        if (state.group === 'group') return 'For three to five people moving together, check the Berlin ABC 24-hour small-group ticket first. It can be simpler than separate tickets.';
+        if (state.group === 'family') return 'For families, check ABC fare rules and the current Sanssouci family-ticket rules before buying. Build more breaks into the route.';
+        if (state.time === 'half') return 'For a short visit, compare two ABC single tickets with the ABC 24-hour ticket. If you use transport inside Potsdam, the 24-hour ticket may feel calmer.';
+        return 'For a full day with transport inside Potsdam, check the Berlin ABC 24-hour ticket. If you only ride there and back, compare it with two ABC singles.';
+      }
+
+      function render() {
+        const plan = selectedPlan();
+        tag.textContent = plan.tag;
+        title.textContent = plan.title;
+        lead.textContent = plan.lead;
+        ticket.textContent = ticketText();
+        timeline.innerHTML = plan.steps.map(([time, head, copy]) => (
+          `<div class="step"><div class="time">${time}</div><div><b>${head}</b><span>${copy}</span></div></div>`
+        )).join('');
+        warnings.innerHTML = plan.warnings.map((item) => `<li>${item}</li>`).join('');
+      }
+
+      document.querySelectorAll('#bw-potsdam-planner .choices').forEach((group) => {
+        group.addEventListener('click', (event) => {
+          const button = event.target.closest('.choice');
+          if (!button) return;
+          const key = group.dataset.group;
+          state[key] = button.dataset.value;
+          group.querySelectorAll('.choice').forEach((item) => {
+            item.setAttribute('aria-pressed', item === button ? 'true' : 'false');
+          });
+          render();
+        });
+      });
+
+      render();
+    })();
+  </script>
+</div>
+</body>
+</html>

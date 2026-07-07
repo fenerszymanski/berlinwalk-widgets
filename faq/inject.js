@@ -175,7 +175,9 @@
   "berlin-umweltzone-sticker-driving-rules-tourists-should-know": "berlin-umweltzone-sticker",
   "berlin-u-bahn-fine": "berlin-u-bahn-fine",
   "berlin-u-bahn-fine-what-happens-if-you-are-caught-without-a-ticket": "berlin-u-bahn-fine",
-  "deutschlandticket-berlin-tourists": "berlin-deutschlandticket-tourists"
+  "deutschlandticket-berlin-tourists": "berlin-deutschlandticket-tourists",
+  "potsdam-from-berlin-day-trip": "potsdam-from-berlin-day-trip",
+  "potsdam-from-berlin-train-tickets-and-sanssouci-day-trip-plan": "potsdam-from-berlin-day-trip"
 };
 
   var SCHEMAS = {
@@ -8299,6 +8301,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "They solve different problems. The Deutschlandticket is transport-only and subscription-based. The Berlin WelcomeCard is a tourist product with public transport plus attraction discounts for fixed trip lengths. If discounts matter, compare the WelcomeCard separately."
+        }
+      }
+    ]
+  },
+  "potsdam-from-berlin-day-trip": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Potsdam worth a day trip from Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, if you want palaces, gardens, Prussian history and a slower day outside the city. For a first visit, make Sanssouci or the park your anchor instead of trying to see every Potsdam sight."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What Berlin ticket do I need for Potsdam?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most visitors need a Berlin ABC ticket or pass because Potsdam is in fare zone C. Check the official BVG or Berlin.de fare information before buying, especially if you already have a pass."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit Sanssouci Palace and the New Palace in one day?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, but it turns the day into a longer park route. The SPSG sanssouci+ ticket includes fixed admission time slots for Sanssouci Palace and the New Palace, but you should still leave walking and break time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Sanssouci Palace closed on Mondays?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The official Potsdam tourism page lists Sanssouci Palace as closed on Mondays and says last entry is 30 minutes before closing. Always recheck the official page before planning a timed visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I visit Cecilienhof Palace on a Potsdam day trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Check first. SPSG currently says Cecilienhof Country House is closed until further notice for restoration work. You can still use the New Garden and Cold War context, but do not assume an interior visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I skip on a first Potsdam day trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Skip the everything-in-one-day plan. For a first visit, choose Sanssouci Palace or terraces, one park stretch, and the Dutch Quarter. Add New Palace or Glienicke Bridge only if you have the time and energy."
         }
       }
     ]
