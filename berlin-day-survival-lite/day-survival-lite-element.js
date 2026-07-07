@@ -243,7 +243,7 @@
         .budget strong{display:block;font-family:"IBM Plex Mono","Courier New",monospace;font-size:19px;line-height:1}
         .budget span{display:block;font-size:12px;font-weight:900;margin-top:6px}
         .actions,.result-actions{display:grid;gap:10px;grid-template-columns:1fr 1fr}
-        .primary,.secondary{align-items:center;display:flex;font-weight:950;justify-content:center;min-height:52px;padding:12px 16px;text-align:center;text-decoration:none}
+        .primary,.secondary{align-items:center;display:flex;font-size:16px;font-weight:950;justify-content:center;min-height:52px;padding:12px 16px;text-align:center;text-decoration:none}
         .primary{background:#1B5E20;border:2px solid #1B5E20;color:#fff}
         .secondary{background:#fff;border:2px solid rgba(27,94,32,.22);color:#073B16}
         .meters{display:grid;gap:8px;grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:10px}
