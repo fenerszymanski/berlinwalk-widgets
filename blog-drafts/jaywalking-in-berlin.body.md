@@ -7,7 +7,7 @@ That moment tells you more about this city than most guidebooks do. It is not re
 ![Ampelmann souvenir shop near Karl-Liebknecht-Straße with the green walking figure statue outside](blog-drafts/images/jaywalking-in-berlin/optimized/05-jaywalking-ampelmann-shop-cover.jpg)
 _The Ampelmann became a Berlin souvenir, but the two signals it represents are still a real traffic rule, not just merchandise._
 
-## The actual rule: what German law says about crossing on red
+## Is jaywalking in Berlin actually illegal? The real rule
 
 Crossing a street away from a marked crossing point, or crossing against a red pedestrian signal, is covered by Germany's road traffic regulation, the [Straßenverkehrsordnung, or StVO](https://www.gesetze-im-internet.de/stvo_2013/__25.html). Paragraph 25 tells pedestrians to use the sidewalk, and to cross at junctions, marked crossings, or signaled crossings when one is nearby, using the signal or markings that are there.
 
