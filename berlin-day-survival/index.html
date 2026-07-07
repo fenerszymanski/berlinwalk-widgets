@@ -69,6 +69,28 @@
       width: 100%;
     }
 
+    html[data-bw-embedded-resize="content"],
+    html[data-bw-embedded-resize="content"] body {
+      height: auto;
+      min-height: 0;
+    }
+
+    html[data-bw-embedded-resize="content"] .bw-day-game,
+    html[data-bw-embedded-resize="content"] .bw-day-shell {
+      height: auto;
+      min-height: 0;
+    }
+
+    html[data-bw-embedded-resize="content"] .bw-day-shell {
+      grid-template-rows: auto auto;
+    }
+
+    html[data-bw-embedded-resize="content"] .bw-day-panel,
+    html[data-bw-embedded-resize="content"] .bw-day-start,
+    html[data-bw-embedded-resize="content"] .bw-day-gameplay {
+      overflow: visible;
+    }
+
     .bw-day-game::before {
       background:
         repeating-linear-gradient(135deg, rgba(255, 230, 0, 0.2) 0 8px, transparent 8px 18px),
@@ -896,6 +918,8 @@
       const toast = document.getElementById('toast');
       const soundToggle = document.getElementById('soundToggle');
       const params = new URLSearchParams(window.location.search);
+      const embeddedResize = params.get('resize') !== 'none' && window.parent && window.parent !== window;
+      if (embeddedResize) document.documentElement.setAttribute('data-bw-embedded-resize', 'content');
       const isLocal = /^localhost$|^127\.0\.0\.1$/.test(window.location.hostname);
       const TRACKING_ENDPOINT = isLocal
         ? (params.get('tracking') === 'local' ? 'http://127.0.0.1:5173/api/day-survival-event' : '')
@@ -972,7 +996,7 @@
       function makeImage(path, alt, fallbackClass = 'bw-day-art-fallback') {
         if (!path) return `<div class="${fallbackClass}">${escapeHtml(alt)}</div>`;
         const src = asset(path);
-        return `<span class="bw-day-media-bg" aria-hidden="true" style="background-image:url('${src}')"></span><img src="${src}" alt="${escapeHtml(alt)}" loading="eager" decoding="async" onerror="this.parentElement.replaceChildren(Object.assign(document.createElement('div'), {className:'${fallbackClass}', textContent:'${escapeHtml(alt).replace(/'/g, "\\'")}' }))">`;
+        return `<span class="bw-day-media-bg" aria-hidden="true" style="background-image:url('${src}')"></span><img src="${src}" alt="${escapeHtml(alt)}" loading="eager" decoding="async" onload="window.__bwDaySurvivalSyncHeight&&window.__bwDaySurvivalSyncHeight()" onerror="this.parentElement.replaceChildren(Object.assign(document.createElement('div'), {className:'${fallbackClass}', textContent:'${escapeHtml(alt).replace(/'/g, "\\'")}' }));window.__bwDaySurvivalSyncHeight&&window.__bwDaySurvivalSyncHeight()">`;
       }
 
       async function init() {
@@ -1762,14 +1786,34 @@
       }
 
       function syncHostHeight() {
-        if (params.get('resize') === 'none') return;
+        if (!embeddedResize) return;
         window.requestAnimationFrame(() => {
-          const height = Math.ceil(document.documentElement.scrollHeight || document.body.scrollHeight || 640);
+          const shell = document.querySelector('.bw-day-shell');
+          const topbar = document.querySelector('.bw-day-topbar');
+          const screenNode = document.getElementById('screen');
+          const shellStyle = shell ? window.getComputedStyle(shell) : null;
+          const padTop = shellStyle ? Number.parseFloat(shellStyle.paddingTop) || 0 : 0;
+          const padBottom = shellStyle ? Number.parseFloat(shellStyle.paddingBottom) || 0 : 0;
+          const screenTop = screenNode && shell ? Math.max(0, screenNode.getBoundingClientRect().top - shell.getBoundingClientRect().top) : 0;
+          const topbarHeight = topbar ? topbar.getBoundingClientRect().height : 0;
+          const natural = Math.max(
+            document.documentElement.scrollHeight || 0,
+            document.body.scrollHeight || 0,
+            screenTop + (screenNode ? screenNode.scrollHeight : 0) + padBottom,
+            padTop + topbarHeight + (screenNode ? screenNode.scrollHeight : 0) + padBottom + 8
+          );
+          const height = Math.ceil(Math.max(360, natural));
+          window.parent.postMessage({ type: 'bw-day-survival-height', height }, '*');
           window.parent.postMessage({ type: 'bw-resize', height }, '*');
         });
       }
 
+      window.__bwDaySurvivalSyncHeight = syncHostHeight;
+      document.addEventListener('load', (event) => {
+        if (event.target && event.target.tagName === 'IMG') syncHostHeight();
+      }, true);
       window.addEventListener('resize', syncHostHeight, { passive: true });
+      [80, 240, 700, 1400].forEach((delay) => window.setTimeout(syncHostHeight, delay));
       init();
     })();
   </script>
