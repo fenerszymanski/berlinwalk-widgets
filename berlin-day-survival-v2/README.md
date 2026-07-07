@@ -28,11 +28,33 @@ own illustrated hero card.
 ## Files
 
 - `day-survival-v2-element.js` — the whole game (data + logic + CSS).
+- `day-survival-landing-v2-element.js` — full landing page wrapper that embeds
+  the game plus hero copy, local logic, CTA, and more-games links.
 - `index.html` — standalone, non-indexed local preview.
+- `landing.html` — standalone, non-indexed landing preview.
+- `SEO_SETTINGS.md` — Wix-ready SEO title, description, canonical, robots, and
+  JSON-LD for the final public page.
+- `assets/social/berlin-day-survival-v2-social-1200x630.jpg` — OG/social card
+  for the landing page.
 - `assets/scenes/*.jpg` — 6 per-round editorial illustrations (1000x563).
 - `assets/results/*.jpg` — 9 per-result-type illustrations (1000x563).
 
-## Live mount (do NOT wire until Yusuf approves on a real device)
+## Landing page mount
+
+Use this for the public landing page:
+
+```html
+<bw-day-survival-landing-v2></bw-day-survival-landing-v2>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/day-survival-landing-v2-element.js" defer></script>
+```
+
+If using Wix Studio's Custom Element panel:
+
+- Tag name: `bw-day-survival-landing-v2`
+- Server URL:
+  `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/day-survival-landing-v2-element.js`
+
+## Bare game mount
 
 On a fresh Wix page, Custom Code (Body end):
 

@@ -7,14 +7,14 @@
  *   <bw-day-survival-v2></bw-day-survival-v2>
  *   <script src=".../berlin-day-survival-v2/day-survival-v2-element.js" defer></script>
  *
- * Build marker: day-survival-v2-20260707
+ * Build marker: day-survival-v2-20260707d
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'day-survival-v2-20260707c';
+  var BUILD = 'day-survival-v2-20260707d';
 
   // Asset base. Default to the absolute GitHub Pages folder so images resolve
   // even when the element is mounted by a host (e.g. Wix) that loads this
@@ -168,8 +168,9 @@
     '.bw-dsv-mode:hover{border-color:var(--y);background:rgba(255,255,255,.12);}',
     '.bw-dsv-mode:active{transform:scale(.99);}',
     '.bw-dsv-mode-eur{flex:0 0 auto;width:58px;height:52px;border-radius:12px;background:var(--y);color:var(--gd);font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;}',
-    '.bw-dsv-mode-txt{flex:1;}',
+    '.bw-dsv-mode-txt{display:block;flex:1;}',
     '.bw-dsv-mode-name{font-size:17px;font-weight:800;color:#fff;}',
+    '.bw-dsv-mode-name,.bw-dsv-mode-blurb{display:block;}',
     '.bw-dsv-mode-blurb{font-size:13.5px;line-height:1.4;color:var(--lg);margin-top:2px;}',
     '.bw-dsv-foot{font-size:12.5px;color:var(--lg);margin-top:14px;text-align:center;opacity:.85;}',
     // counters
