@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-no-rewind-20260707a';
+  const ASSET_VERSION = 'games-page-restored-day-rewind-20260707a';
   const GAMES = [
     {
       id: 'berlin-battle',
@@ -32,6 +32,34 @@
       href: 'https://www.berlinwalk.com/games/berghain-bouncer',
       button: 'Try the door',
       accent: 'night'
+    },
+    {
+      id: 'berlin-day-survival',
+      kicker: 'Budget game',
+      title: 'Berlin Day Survival',
+      lead: 'Spend one Berlin day on €10, €15 or €20 without letting the city eat your wallet first.',
+      how: 'Pick a budget, make six first-day choices, and see whether your wallet and energy survive.',
+      duration: 'Under 1 min',
+      difficulty: 'Budget choices',
+      player: 'First-day instincts',
+      image: 'berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-day-survival',
+      button: 'Survive the day',
+      accent: 'day'
+    },
+    {
+      id: 'berlin-rewind',
+      kicker: 'Archive game',
+      title: 'Berlin Rewind',
+      lead: 'Read old Berlin photos, name the year and district, and keep a daily streak alive.',
+      how: 'Use tiny visual clues from real archive images and test your Berlin memory.',
+      duration: 'Under 2 min',
+      difficulty: 'Photo clues',
+      player: 'Daily archive',
+      image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-rewind',
+      button: 'Play Rewind',
+      accent: 'archive'
     },
     {
       id: 'berlin-smile-challenge',
@@ -104,7 +132,7 @@
             <div class="bw-games-hero-inner">
               <p class="bw-games-kicker">Playable Berlin</p>
               <h1 id="bw-games-title">BerlinWalk Games</h1>
-              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Pick a winner, pass the door, or try to make Berlin smile.</p>
+              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Pick a winner, survive the first day, rewind an old photo, pass the door, or try to make Berlin smile.</p>
             </div>
           </section>
 
@@ -112,7 +140,7 @@
             <div class="bw-games-section-head">
               <p class="bw-games-section-kicker">Pick your mode</p>
               <h2 id="bw-games-modes-title">Choose your way into Berlin</h2>
-              <p>Each live game has a different job: taste, instinct, night pressure, or social weather.</p>
+              <p>Each live game has a different job: taste, first-day instinct, city memory, night pressure, or social weather.</p>
             </div>
             <div class="bw-games-grid">
               ${gameCards}
