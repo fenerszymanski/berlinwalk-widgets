@@ -8,7 +8,7 @@ Central Berlin is flat and full of protected bike lanes. The hard part is pickin
 
 {{quick-summary}}
 
-## The four ways to rent a bike in Berlin
+## The four ways of renting a bike in Berlin
 
 Before you download anything, it helps to know that "bike rental" in Berlin really means four different things, and the cheapest choice depends entirely on your trip:
 
