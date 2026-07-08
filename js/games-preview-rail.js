@@ -43,15 +43,6 @@
       cta: 'Play Rewind'
     },
     {
-      id: 'berlin-pulse',
-      title: 'Berlin Pulse',
-      kicker: 'Daily mood',
-      lead: 'Guess today\'s Berlin mood and see whether your city instinct lands.',
-      image: 'berlin-pulse/assets/social/berlin-pulse-social-1200x630.jpg',
-      href: 'https://www.berlinwalk.com/games/berlin-pulse',
-      cta: 'Read the pulse'
-    },
-    {
       id: 'berlin-smile-challenge',
       title: 'Berlin Smile Challenge',
       kicker: 'Social puzzle',

@@ -53,16 +53,6 @@ const BW_GAMES_HOME_ITEMS = [
     image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg'
   },
   {
-    id: 'berlin-pulse',
-    kicker: 'Daily mood',
-    title: 'Berlin Pulse',
-    lead: 'Guess what Berlin wants today and see whether your city instinct matches the daily pulse.',
-    meta: 'Daily prediction',
-    href: 'https://www.berlinwalk.com/games/berlin-pulse',
-    cta: 'Read the Pulse',
-    image: 'berlin-pulse/assets/social/berlin-pulse-social-1200x630.jpg'
-  },
-  {
     id: 'berlin-smile-challenge',
     kicker: 'Social puzzle',
     title: 'Berlin Smile Challenge',

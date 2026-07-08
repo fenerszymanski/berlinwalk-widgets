@@ -9,7 +9,6 @@
   const FILTERS = [
     { id: 'all', label: 'All modes' },
     { id: 'quick', label: 'Quick start' },
-    { id: 'daily', label: 'Daily' },
     { id: 'share', label: 'Shareable' },
     { id: 'sound', label: 'Sound' },
     { id: 'night', label: 'Night' }
@@ -99,27 +98,6 @@
       ],
       tourBridge: 'Best for visitors who like then-and-now Berlin and want the city to feel layered before the walk.',
       cta: 'Play Rewind'
-    },
-    {
-      id: 'berlin-pulse',
-      title: 'Berlin Pulse',
-      short: 'Read today\'s Berlin mood.',
-      lane: 'Daily prediction',
-      image: 'berlin-pulse/assets/social/berlin-pulse-social-1200x630.jpg',
-      href: 'https://www.berlinwalk.com/games/berlin-pulse',
-      filters: ['quick', 'daily', 'share'],
-      duration: 'Under 1 min',
-      start: 'Daily call',
-      bestFor: 'Repeat visits, city mood, quick instincts',
-      score: 'Daily pulse result',
-      lead: 'A one-call daily game where you guess what Berlin rewards today and compare it with the city pulse.',
-      rules: [
-        'Read the Berlin situation.',
-        'Choose the mood you think wins today.',
-        'Lock your confidence and keep a daily streak alive.'
-      ],
-      tourBridge: 'Useful when visitors need one simple Berlin decision before the day turns into a checklist.',
-      cta: 'Read the pulse'
     },
     {
       id: 'berlin-smile-challenge',

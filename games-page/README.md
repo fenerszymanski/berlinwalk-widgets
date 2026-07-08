@@ -16,7 +16,6 @@ Custom Element source for the future `/games` hub page.
 - Berlin Battle: `/games/berlin-battle`
 - Berlin Day Survival: `/games/berlin-day-survival`
 - Berlin Rewind: `/games/berlin-rewind`
-- Berlin Pulse: `/games/berlin-pulse`
 - Berghain Bouncer: `/games/berghain-bouncer`
 - Berlin Smile Challenge: `/games/berlin-smile-challenge`
 
