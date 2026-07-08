@@ -2972,6 +2972,68 @@
       ],
       "relatedBlog": "/post/e-scooters-in-berlin",
       "iconStatus": "live-wix-media"
+    },
+    {
+      "slug": "berlin-bike-rental-finder",
+      "title": "Berlin Bike Rental Finder",
+      "lead": "Tell me your trip and I will point you to the right way to rent a bike in Berlin: free-floating e-bike, Nextbike, a full-day rental or a subscription, with the price trap that catches tourists.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_48a81dba2377454f9d212e34390cfb15~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-bike-rental-finder/",
+      "embedHeight": 1180,
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "tags": [
+        "bike rental",
+        "rent a bike Berlin",
+        "Nextbike",
+        "bike sharing",
+        "e-bike",
+        "Donkey Republic",
+        "Swapfiets",
+        "berlin transport",
+        "cycling"
+      ],
+      "aliases": [
+        "rent a bike Berlin",
+        "Berlin bike hire",
+        "Nextbike Berlin",
+        "bike share Berlin",
+        "best bike rental Berlin"
+      ],
+      "relatedBlog": "/post/renting-a-bike-in-berlin",
+      "iconStatus": "live-wix-media"
+    },
+    {
+      "slug": "ddr-museum-crowd-planner",
+      "title": "DDR Museum Best-Time-to-Visit Planner",
+      "lead": "The DDR Museum is small and interactive, so it clogs up fast. Pick your day and see the crowd hour by hour, plus the two calm windows I send guests to.",
+      "category": "Discovery",
+      "image": "https://static.wixstatic.com/media/5a08a3_c6b3b0ff6b3f48eb9eb9eacf690732e0~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/ddr-museum-crowd-planner/",
+      "embedHeight": 760,
+      "hubCategory": "CultureLandmarks",
+      "type": "Planner",
+      "tags": [
+        "DDR Museum",
+        "GDR museum",
+        "best time to visit",
+        "crowds",
+        "opening hours",
+        "museum island",
+        "cold war berlin",
+        "east germany",
+        "tickets"
+      ],
+      "aliases": [
+        "DDR Museum Berlin",
+        "GDR museum Berlin",
+        "DDR museum best time",
+        "DDR museum crowds",
+        "when to visit DDR museum"
+      ],
+      "relatedBlog": "/post/is-the-ddr-museum-worth-it",
+      "iconStatus": "live-wix-media"
     }
   ],
   "hubCategories": [

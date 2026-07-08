@@ -1311,5 +1311,33 @@
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-e-scooter-rule-checker-160.png",
     "source": "gemini-20260708",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_845badb22a6942a3a36bac29c2257afa~mv2.png"
+  },
+  {
+    "slug": "berlin-bike-rental-finder",
+    "title": "Berlin Bike Rental Finder",
+    "category": "Transport",
+    "model": "Nano Banana Pro (gemini-3-pro-image-preview)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/gemini-20260708b/berlin-bike-rental-finder/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/gemini-20260708b/berlin-bike-rental-finder/source-1.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-bike-rental-finder.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-bike-rental-finder-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-bike-rental-finder-160.png",
+    "source": "gemini-20260708b",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_48a81dba2377454f9d212e34390cfb15~mv2.png"
+  },
+  {
+    "slug": "ddr-museum-crowd-planner",
+    "title": "DDR Museum Best-Time-to-Visit Planner",
+    "category": "History",
+    "model": "Nano Banana Pro (gemini-3-pro-image-preview)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/gemini-20260708b/ddr-museum-crowd-planner/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/gemini-20260708b/ddr-museum-crowd-planner/source-1.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/ddr-museum-crowd-planner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/ddr-museum-crowd-planner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/ddr-museum-crowd-planner-160.png",
+    "source": "gemini-20260708b",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_c6b3b0ff6b3f48eb9eb9eacf690732e0~mv2.png"
   }
 ]
