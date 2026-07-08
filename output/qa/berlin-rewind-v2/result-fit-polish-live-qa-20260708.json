@@ -1,0 +1,97 @@
+{
+  "runAt": "2026-07-08T11:21:10+02:00",
+  "url": "https://www.berlinwalk.com/games/berlin-rewind",
+  "wixCustomCode": {
+    "name": "BerlinWalk Berlin Rewind Page",
+    "id": "ba342e48-e239-4b7c-95cb-1789839283dc",
+    "revision": "10",
+    "landingRef": "de22383",
+    "published": true
+  },
+  "builds": {
+    "landing": "berlin-rewind-landing-v2-stable-board-20260708c",
+    "game": "berlin-rewind-v2-stable-board-20260708c",
+    "activeGameTag": "bw-berlin-rewind-fit-v2"
+  },
+  "localChecks": {
+    "chromiumDesktop1280x900": {
+      "cardH": 720,
+      "cardScrollH": 720,
+      "resultDisplay": "grid",
+      "maxCardDelta": 0,
+      "maxDocumentDelta": 0,
+      "heroChipBottomGap": 64,
+      "archiveGap": 16,
+      "overflowX": 0,
+      "consoleErrors": 0
+    },
+    "chromiumMobile390x844": {
+      "cardH": 760,
+      "cardScrollH": 760,
+      "gameTopViewportRatio": 0.573,
+      "maxCardDelta": 0,
+      "maxDocumentDelta": 0,
+      "heroChipBottomGap": 42,
+      "archiveGap": 13,
+      "overflowX": 0,
+      "consoleErrors": 0
+    }
+  },
+  "liveChecks": {
+    "chromiumDesktop1280x900": {
+      "cardH": 720,
+      "cardScrollH": 720,
+      "resultH": 676,
+      "resultScrollH": 676,
+      "resultDisplay": "grid",
+      "maxCardDelta": 0,
+      "maxDocumentDelta": 0,
+      "moreBottomInsideCard": 160,
+      "heroChipBottomGap": 64,
+      "archiveGap": 16,
+      "overflowX": 0,
+      "frameCount": 0,
+      "badScrollContainers": 0,
+      "consoleErrors": 0
+    },
+    "chromiumMobile390x844": {
+      "cardH": 760,
+      "cardScrollH": 760,
+      "resultH": 728,
+      "resultScrollH": 728,
+      "gameTopViewportRatio": 0.734,
+      "maxCardDelta": 0,
+      "maxDocumentDelta": 0,
+      "moreBottomInsideCard": 183,
+      "heroChipBottomGap": 42,
+      "archiveGap": 13,
+      "overflowX": 0,
+      "frameCount": 0,
+      "badScrollContainers": 0,
+      "consoleErrors": 0
+    },
+    "webkitMobile390x844": {
+      "cardH": 760,
+      "cardScrollH": 760,
+      "resultH": 728,
+      "resultScrollH": 728,
+      "heroChipBottomGap": 42,
+      "archiveGap": 13,
+      "overflowX": 0,
+      "frameCount": 0,
+      "gameConsoleErrors": 0,
+      "siteWideExternalConsoleErrors": [
+        "GTM-N33JQJL returned 404 in WebKit",
+        "Wix panorama bulklog keepalive queue limit in WebKit"
+      ]
+    }
+  },
+  "staticChecks": {
+    "gameScrollIntoViewCount": 0,
+    "landingScrollIntoViewOnlyAnchor": true,
+    "gameFrameOrSlotCount": 0,
+    "overflowAutoInRewindSources": 0,
+    "nodeCheck": "passed",
+    "gitDiffCheck": "passed"
+  }
+}
