@@ -16,28 +16,22 @@
  *   <bw-berlin-rewind-v2></bw-berlin-rewind-v2>
  *   <bw-berlin-rewind-stable-v2></bw-berlin-rewind-stable-v2>
  *   <bw-berlin-rewind-fit-v2></bw-berlin-rewind-fit-v2>
+ *   <bw-berlin-rewind-clean-v2></bw-berlin-rewind-clean-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-stable-board-20260708c
+ * Build marker: berlin-rewind-v2-stable-board-20260708d
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'berlin-rewind-v2-stable-board-20260708c';
+  var BUILD = 'berlin-rewind-v2-stable-board-20260708d';
   var TAG = 'bw-berlin-rewind-v2';
   var STABLE_TAG = 'bw-berlin-rewind-stable-v2';
   var FIT_TAG = 'bw-berlin-rewind-fit-v2';
+  var CLEAN_TAG = 'bw-berlin-rewind-clean-v2';
   var STORE_KEY = 'bwRewindV2State';
   var HISTORY_MAX = 14;
-  var GAME_LINKS = [
-    { label: 'All games', href: GAMES_URL },
-    { label: 'Day Survival', href: 'https://www.berlinwalk.com/games/berlin-day-survival' },
-    { label: 'Berlin Battle', href: 'https://www.berlinwalk.com/games/berlin-battle' },
-    { label: 'Berghain Bouncer', href: 'https://www.berlinwalk.com/games/berghain-bouncer' },
-    { label: 'Smile Challenge', href: 'https://www.berlinwalk.com/games/berlin-smile-challenge' }
-  ];
 
   // Absolute default so photos resolve even when a host (e.g. Wix) loads this
   // script with document.currentScript null/proxied. Overridable per-instance
@@ -201,15 +195,10 @@
     '.bw-rw-tomorrow{text-align:center;font-size:14px;font-weight:700;color:var(--lg);margin:14px 0 2px;}',
     '.bw-rw-tomorrow b{color:var(--y);}',
     '.bw-rw-copied{text-align:center;font-size:13px;color:var(--y);font-weight:700;min-height:18px;margin-top:8px;}',
-    '.bw-rw-more{margin-top:14px;padding-top:14px;border-top:1px solid rgba(197,225,165,.25);}',
-    '.bw-rw-more-k{font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--lg);margin:0 0 8px;}',
-    '.bw-rw-more-links{display:flex;gap:8px;flex-wrap:wrap;}',
-    '.bw-rw-more-links a{display:inline-flex;align-items:center;min-height:34px;border-radius:999px;border:1px solid rgba(197,225,165,.42);padding:8px 11px;color:var(--cream);font-size:12.5px;font-weight:800;text-decoration:none;background:rgba(255,255,255,.06);}',
-    '.bw-rw-more-links a:first-child{background:var(--y);border-color:var(--y);color:var(--gd);}',
     '.bw-rw{max-width:1080px;padding:0;}',
     '.bw-rw-card{height:720px;border-radius:18px;padding:22px;color:var(--cream);}',
     '.bw-rw-screen.is-on{height:100%;display:flex;flex-direction:column;animation:bwrwfade .2s ease;}',
-    '.bw-rw-home-screen,.bw-rw-result-screen{max-width:720px;margin:0 auto;width:100%;justify-content:center;}',
+    '.bw-rw-home-screen,.bw-rw-result-screen{max-width:720px;margin:0 auto;width:100%;justify-content:center;padding:0 clamp(12px,2.2vw,26px);}',
     '.bw-rw-home-screen .bw-rw-strip{max-width:620px;}',
     '.bw-rw-top{margin-bottom:10px;flex:0 0 auto;}',
     '.bw-rw-progress{margin-bottom:14px;flex:0 0 auto;}',
@@ -249,11 +238,10 @@
     '.bw-rw-result-screen .bw-rw-trow{padding:5px 0;}',
     '.bw-rw-result-screen .bw-rw-btnrow{gap:8px;margin-top:0;}',
     '.bw-rw-result-screen .bw-rw-btn{min-height:46px;padding:12px 14px;font-size:15px;}',
-    '.bw-rw-result-screen .bw-rw-more{margin-top:0;padding-top:10px;}',
     '.bw-rw-result-screen .bw-rw-copied{margin-top:0;}',
-    '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-result-screen.is-on{max-width:980px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);grid-template-areas:"badge recap" "score recap" "sub recap" "title recap" "desc table" "streak table" "buttons more" "copied more";column-gap:24px;row-gap:5px;align-content:center;justify-content:stretch}.bw-rw-result-screen .bw-rw-r-emoji{grid-area:badge}.bw-rw-result-screen .bw-rw-r-score{grid-area:score}.bw-rw-result-screen .bw-rw-r-scoresub{grid-area:sub}.bw-rw-result-screen .bw-rw-r-title{grid-area:title}.bw-rw-result-screen .bw-rw-r-desc{grid-area:desc}.bw-rw-result-screen .bw-rw-recap{grid-area:recap;align-self:end;width:100%;max-width:none}.bw-rw-result-screen .bw-rw-tomorrow{grid-area:streak}.bw-rw-result-screen .bw-rw-table{grid-area:table;align-self:start;width:100%}.bw-rw-result-screen .bw-rw-btnrow{grid-area:buttons}.bw-rw-result-screen .bw-rw-more{grid-area:more;align-self:end}.bw-rw-result-screen .bw-rw-copied{grid-area:copied}}',
-    '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-dbtn{min-height:46px;font-size:12.5px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-result-screen{justify-content:flex-start}.bw-rw-result-screen .bw-rw-r-emoji{font-size:34px;margin:-2px 0 0}.bw-rw-result-screen .bw-rw-r-score{font-size:31px}.bw-rw-result-screen .bw-rw-r-score span{font-size:15px!important}.bw-rw-result-screen .bw-rw-r-scoresub{font-size:11px;margin:0 0 5px}.bw-rw-result-screen .bw-rw-r-title{font-size:20px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-r-desc{font-size:12.8px;line-height:1.34;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.bw-rw-result-screen .bw-rw-recap{padding:6px 10px;margin-bottom:0}.bw-rw-result-screen .bw-rw-recap-row{font-size:11.2px;padding:4px 0}.bw-rw-result-screen .bw-rw-tomorrow{font-size:12px;margin:6px 0}.bw-rw-result-screen .bw-rw-table{padding:2px 9px 5px;margin-bottom:0}.bw-rw-result-screen .bw-rw-table-h{font-size:9.5px;padding:7px 0 4px}.bw-rw-result-screen .bw-rw-trow{padding:4px 0}.bw-rw-result-screen .bw-rw-tdate{font-size:11px;width:104px}.bw-rw-result-screen .bw-rw-tscore{font-size:11.5px;width:44px}.bw-rw-result-screen .bw-rw-btnrow{gap:7px;margin-top:7px}.bw-rw-result-screen .bw-rw-btn{min-height:42px;padding:10px 12px;font-size:13.5px}.bw-rw-result-screen .bw-rw-more{margin-top:7px;padding-top:8px}.bw-rw-result-screen .bw-rw-more-k{font-size:9.5px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-more-links{gap:6px}.bw-rw-result-screen .bw-rw-more-links a{font-size:10.5px;min-height:28px;padding:5px 8px}.bw-rw-result-screen .bw-rw-copied{font-size:11px;min-height:13px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}.bw-rw-more-links a{font-size:11.5px;min-height:32px;padding:7px 9px}}',
-    '@media(max-width:420px){.bw-rw-card{height:760px}.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:12px}.bw-rw-more{margin-top:10px;padding-top:10px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}.bw-rw-result-screen .bw-rw-btnrow{gap:6px;margin-top:6px}.bw-rw-result-screen .bw-rw-btn{min-height:40px;padding:9px 10px;font-size:13px}.bw-rw-result-screen .bw-rw-more{margin-top:6px}.bw-rw-result-screen .bw-rw-more-links a{font-size:10px;padding:5px 7px}}'
+    '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-result-screen.is-on{max-width:980px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);grid-template-areas:"badge recap" "score recap" "sub recap" "title recap" "desc table" "streak table" "buttons table" "copied table";column-gap:24px;row-gap:5px;align-content:center;justify-content:stretch;padding-inline:26px}.bw-rw-result-screen .bw-rw-r-emoji{grid-area:badge}.bw-rw-result-screen .bw-rw-r-score{grid-area:score}.bw-rw-result-screen .bw-rw-r-scoresub{grid-area:sub}.bw-rw-result-screen .bw-rw-r-title{grid-area:title}.bw-rw-result-screen .bw-rw-r-desc{grid-area:desc}.bw-rw-result-screen .bw-rw-recap{grid-area:recap;align-self:end;width:100%;max-width:none}.bw-rw-result-screen .bw-rw-tomorrow{grid-area:streak}.bw-rw-result-screen .bw-rw-table{grid-area:table;align-self:start;width:100%}.bw-rw-result-screen .bw-rw-btnrow{grid-area:buttons}.bw-rw-result-screen .bw-rw-copied{grid-area:copied}}',
+    '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-dbtn{min-height:46px;font-size:12.5px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-home-screen{padding-inline:16px}.bw-rw-result-screen{justify-content:flex-start;padding-inline:14px}.bw-rw-result-screen .bw-rw-r-emoji{font-size:34px;margin:-2px 0 0}.bw-rw-result-screen .bw-rw-r-score{font-size:31px}.bw-rw-result-screen .bw-rw-r-score span{font-size:15px!important}.bw-rw-result-screen .bw-rw-r-scoresub{font-size:11px;margin:0 0 5px}.bw-rw-result-screen .bw-rw-r-title{font-size:20px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-r-desc{font-size:12.8px;line-height:1.34;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.bw-rw-result-screen .bw-rw-recap{padding:6px 10px;margin-bottom:0}.bw-rw-result-screen .bw-rw-recap-row{font-size:11.2px;padding:4px 0}.bw-rw-result-screen .bw-rw-tomorrow{font-size:12px;margin:6px 0}.bw-rw-result-screen .bw-rw-table{padding:2px 9px 5px;margin-bottom:0}.bw-rw-result-screen .bw-rw-table-h{font-size:9.5px;padding:7px 0 4px}.bw-rw-result-screen .bw-rw-trow{padding:4px 0}.bw-rw-result-screen .bw-rw-tdate{font-size:11px;width:104px}.bw-rw-result-screen .bw-rw-tscore{font-size:11.5px;width:44px}.bw-rw-result-screen .bw-rw-btnrow{gap:7px;margin-top:7px}.bw-rw-result-screen .bw-rw-btn{min-height:42px;padding:10px 12px;font-size:13.5px}.bw-rw-result-screen .bw-rw-copied{font-size:11px;min-height:13px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}}',
+    '@media(max-width:420px){.bw-rw-card{height:760px}.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen{padding-inline:14px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:12px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}.bw-rw-result-screen{padding-inline:13px}.bw-rw-result-screen .bw-rw-btnrow{gap:6px;margin-top:6px}.bw-rw-result-screen .bw-rw-btn{min-height:40px;padding:9px 10px;font-size:13px}}'
   ].join('');
 
   // ---------- helpers ----------
@@ -407,13 +395,6 @@
       return '<div class="bw-rw-table"><div class="bw-rw-table-h">Your recent Rewind scores</div>' + rows + '</div>';
     }
 
-    _moreGamesHtml() {
-      var links = GAME_LINKS.map(function (item) {
-        return '<a href="' + item.href + '">' + esc(item.label) + '</a>';
-      }).join('');
-      return '<div class="bw-rw-more"><p class="bw-rw-more-k">More Berlin games</p><div class="bw-rw-more-links">' + links + '</div></div>';
-    }
-
     _renderStart(st) {
       this.innerHTML =
         '<div class="bw-rw-card">' +
@@ -427,7 +408,6 @@
             '<div class="bw-rw-btnrow">' +
               '<button type="button" class="bw-rw-btn" data-start="daily">Play today’s 5 photos</button>' +
             '</div>' +
-            this._moreGamesHtml() +
             '<p class="bw-rw-foot">Photos: Bundesarchiv via Wikimedia Commons, CC BY-SA 3.0 DE</p>' +
           '</div>' +
         '</div>';
@@ -449,7 +429,6 @@
               '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
               '<button type="button" class="bw-rw-btn ghost" data-start="practice">Practice round (no streak)</button>' +
             '</div>' +
-            this._moreGamesHtml() +
           '</div>' +
         '</div>';
       var self = this;
@@ -655,7 +634,6 @@
               secondBtn +
               (this._mode === 'practice' ? '<button type="button" class="bw-rw-btn link" data-copy2="1">Copy my score</button>' : '') +
             '</div>' +
-            this._moreGamesHtml() +
             '<div class="bw-rw-copied" data-copied></div>' +
           '</div>' +
         '</div>';
@@ -690,5 +668,9 @@
   if (!customElements.get(FIT_TAG)) {
     try { customElements.define(FIT_TAG, class BWBerlinRewindFitV2 extends BWBerlinRewindV2 {}); }
     catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-fit-v2 define failed', e); } }
+  }
+  if (!customElements.get(CLEAN_TAG)) {
+    try { customElements.define(CLEAN_TAG, class BWBerlinRewindCleanV2 extends BWBerlinRewindV2 {}); }
+    catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-clean-v2 define failed', e); } }
   }
 })();
