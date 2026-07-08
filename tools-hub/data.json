@@ -2940,6 +2940,38 @@
       "image": "https://static.wixstatic.com/media/5a08a3_ac43b62bd7074f11b4871dfd429bdfa4~mv2.png",
       "relatedBlogSlug": "berlin-u-bahn-fine",
       "iconStatus": "live-wix-media"
+    },
+    {
+      "slug": "berlin-e-scooter-rule-checker",
+      "title": "Berlin E-Scooter Rule Checker",
+      "lead": "Tap what you were about to do on a rental e-scooter in Berlin and get the real rule, the fine it can cost, and what I would do instead.",
+      "category": "Maps",
+      "image": "https://static.wixstatic.com/media/5a08a3_845badb22a6942a3a36bac29c2257afa~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-e-scooter-rule-checker/",
+      "embedHeight": 1120,
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "tags": [
+        "e-scooter",
+        "rental scooter",
+        "Bolt",
+        "Lime",
+        "Voi",
+        "Dott",
+        "scooter rules",
+        "scooter fine",
+        "micromobility",
+        "berlin transport"
+      ],
+      "aliases": [
+        "e-scooter Berlin",
+        "rent a scooter Berlin",
+        "Berlin scooter rules",
+        "escooter fine Berlin",
+        "Lime Bolt Voi Dott Berlin"
+      ],
+      "relatedBlog": "/post/e-scooters-in-berlin",
+      "iconStatus": "live-wix-media"
     }
   ],
   "hubCategories": [

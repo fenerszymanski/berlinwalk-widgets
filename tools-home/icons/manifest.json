@@ -1297,5 +1297,19 @@
     "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/potsdam-day-trip-planner-160.png",
     "source": "codex-built-in-imagegen-20260707",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_52d4bbb387c74324be29929624c5502d~mv2.png"
+  },
+  {
+    "slug": "berlin-e-scooter-rule-checker",
+    "title": "Berlin E-Scooter Rule Checker",
+    "category": "Transport",
+    "model": "Nano Banana Pro (gemini-3-pro-image-preview)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/gemini-20260708/berlin-e-scooter-rule-checker/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/gemini-20260708/berlin-e-scooter-rule-checker/source-1.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-e-scooter-rule-checker.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-e-scooter-rule-checker-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-e-scooter-rule-checker-160.png",
+    "source": "gemini-20260708",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_845badb22a6942a3a36bac29c2257afa~mv2.png"
   }
 ]
