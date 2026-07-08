@@ -14,17 +14,19 @@
  *
  * Mount:
  *   <bw-berlin-rewind-v2></bw-berlin-rewind-v2>
+ *   <bw-berlin-rewind-stable-v2></bw-berlin-rewind-stable-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-stable-board-20260708a
+ * Build marker: berlin-rewind-v2-stable-board-20260708b
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'berlin-rewind-v2-stable-board-20260708a';
+  var BUILD = 'berlin-rewind-v2-stable-board-20260708b';
   var TAG = 'bw-berlin-rewind-v2';
+  var STABLE_TAG = 'bw-berlin-rewind-stable-v2';
   var STORE_KEY = 'bwRewindV2State';
   var HISTORY_MAX = 14;
   var GAME_LINKS = [
@@ -662,5 +664,9 @@
   if (!customElements.get(TAG)) {
     try { customElements.define(TAG, BWBerlinRewindV2); }
     catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-v2 define failed', e); } }
+  }
+  if (!customElements.get(STABLE_TAG)) {
+    try { customElements.define(STABLE_TAG, class BWBerlinRewindStableV2 extends BWBerlinRewindV2 {}); }
+    catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-stable-v2 define failed', e); } }
   }
 })();

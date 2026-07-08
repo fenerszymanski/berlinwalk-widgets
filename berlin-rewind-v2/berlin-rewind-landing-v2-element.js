@@ -6,14 +6,15 @@
  *   <bw-berlin-rewind-landing-v2></bw-berlin-rewind-landing-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-landing-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-landing-v2-stable-board-20260708a
+ * Build marker: berlin-rewind-landing-v2-stable-board-20260708b
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-berlin-rewind-landing-v2';
-  var BUILD = 'berlin-rewind-landing-v2-stable-board-20260708a';
-  var GAME_BUILD = 'berlin-rewind-v2-stable-board-20260708a';
+  var GAME_TAG = 'bw-berlin-rewind-stable-v2';
+  var BUILD = 'berlin-rewind-landing-v2-stable-board-20260708b';
+  var GAME_BUILD = 'berlin-rewind-v2-stable-board-20260708b';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -57,7 +58,7 @@
     '.bw-rwlp-section{padding:clamp(54px,7vw,86px) 0}.bw-rwlp-section.tight{padding-top:24px}.bw-rwlp-section h2{color:var(--green2);font-size:56px;font-weight:950;line-height:.98;margin:0 0 16px;letter-spacing:0}.bw-rwlp-sectionLead{color:var(--muted);font-size:20px;font-weight:720;line-height:1.6;max-width:780px;margin:0}',
     '.bw-rwlp-section .bw-rwlp-note{color:var(--muted);font-size:17px;line-height:1.62;font-weight:680;max-width:780px;margin:14px 0 0}',
     '.bw-rwlp-proof{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}.bw-rwlp-proof article{background:#fff;border:2px solid rgba(27,94,32,.14);border-radius:8px;padding:20px;box-shadow:0 16px 42px rgba(27,94,32,.08)}.bw-rwlp-proof b{display:block;color:var(--yellow);background:var(--green2);border-radius:8px;width:48px;height:48px;line-height:48px;text-align:center;font-size:21px;font-weight:950;margin:0 0 14px}.bw-rwlp-proof h3{font-size:20px;line-height:1.1;color:var(--green2);font-weight:950;margin:0 0 8px}.bw-rwlp-proof p{color:var(--muted);font-size:14px;font-weight:650;line-height:1.56;margin:0}',
-    '.bw-rwlp-game-band{background:linear-gradient(180deg,#f3f7ec,var(--cream));padding:clamp(30px,5vw,58px) 0 clamp(50px,7vw,84px)}.bw-rwlp-game-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin:0 0 20px}.bw-rwlp-game-head div{max-width:720px}.bw-rwlp-game-head p{margin:0;color:var(--muted);font-size:16px;line-height:1.58;font-weight:700}.bw-rwlp-game-mount{margin-top:18px}.bw-rwlp-game-mount bw-berlin-rewind-v2{display:block;width:100%;max-width:1080px;margin:0 auto;padding:0}',
+    '.bw-rwlp-game-band{background:linear-gradient(180deg,#f3f7ec,var(--cream));padding:clamp(30px,5vw,58px) 0 clamp(50px,7vw,84px)}.bw-rwlp-game-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin:0 0 20px}.bw-rwlp-game-head div{max-width:720px}.bw-rwlp-game-head p{margin:0;color:var(--muted);font-size:16px;line-height:1.58;font-weight:700}.bw-rwlp-game-mount{margin-top:18px}.bw-rwlp-game-mount '+GAME_TAG+'{display:block;width:100%;max-width:1080px;margin:0 auto;padding:0}',
     '.bw-rwlp-tour{background:linear-gradient(135deg,var(--green2),var(--green));color:#fff;padding:clamp(50px,7vw,84px) 0}.bw-rwlp-tour-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,420px);gap:28px;align-items:center}.bw-rwlp-tour h2{color:#fff;margin:0 0 14px}.bw-rwlp-tour p{color:#E8F6D8;font-size:17px;font-weight:700;line-height:1.62;margin:0;max-width:760px}.bw-rwlp-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.bw-rwlp-link{display:inline-flex;align-items:center;min-height:42px;border:1px solid rgba(255,230,0,.46);border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:13px;font-weight:950;padding:0 12px;text-decoration:none}.bw-rwlp-bookbox{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:20px}.bw-rwlp-bookbox strong{display:block;color:var(--yellow);font-size:28px;font-weight:950;line-height:1.02;margin:0 0 10px}.bw-rwlp-bookbox span{display:block;color:#F6FFE8;font-size:14px;font-weight:750;line-height:1.5;margin:0 0 16px}',
     '@media(max-width:900px){.bw-rwlp-hero{min-height:min(430px,50svh)}.bw-rwlp h1{font-size:62px}.bw-rwlp-lead{font-size:20px}.bw-rwlp-section h2{font-size:44px}.bw-rwlp-sectionLead{font-size:18px}.bw-rwlp-proof,.bw-rwlp-tour-grid{grid-template-columns:1fr}.bw-rwlp-game-head{display:block}.bw-rwlp-game-head .bw-rwlp-btn{margin-top:14px}.bw-rwlp-bookbox .bw-rwlp-btn{width:100%}}',
     '@media(max-width:620px){.bw-rwlp-wrap{width:min(100%,calc(100vw - 24px))}.bw-rwlp-hero{min-height:45svh;padding:58px 0 24px}.bw-rwlp-hero:before{background-position:center top}.bw-rwlp h1{font-size:48px;margin-bottom:10px}.bw-rwlp-lead{font-size:16.5px;margin-bottom:14px}.bw-rwlp-note{font-size:15px}.bw-rwlp-section h2{font-size:34px}.bw-rwlp-sectionLead{font-size:16px}.bw-rwlp-actions{display:grid;margin-bottom:14px}.bw-rwlp-btn{width:100%;min-height:48px}.bw-rwlp-chips{gap:8px}.bw-rwlp-chip{font-size:11px;padding:7px 9px}.bw-rwlp-section{padding:48px 0}.bw-rwlp-game-band{padding:28px 0 48px}}'
@@ -137,13 +138,13 @@
   }
 
   function ensureGameScript() {
-    if (customElements.get('bw-berlin-rewind-v2')) return;
-    var existing = document.querySelector('script[data-bw-berlin-rewind-v2-loader]');
+    if (customElements.get(GAME_TAG)) return;
+    var existing = document.querySelector('script[data-bw-berlin-rewind-stable-v2-loader]');
     if (existing) return;
     var script = document.createElement('script');
     script.src = BASE_URL + 'berlin-rewind-v2-element.js?v=' + encodeURIComponent(GAME_BUILD);
     script.defer = true;
-    script.dataset.bwBerlinRewindV2Loader = 'true';
+    script.dataset.bwBerlinRewindStableV2Loader = 'true';
     document.head.appendChild(script);
   }
 
@@ -206,7 +207,7 @@
                 '<a class="bw-rwlp-btn primary" href="' + esc(BOOK_URL) + '">Walk the real city</a>',
               '</div>',
               '<div class="bw-rwlp-game-mount">',
-                '<bw-berlin-rewind-v2 data-asset-base="' + esc(BASE_URL) + '"></bw-berlin-rewind-v2>',
+                '<' + GAME_TAG + ' data-asset-base="' + esc(BASE_URL) + '"></' + GAME_TAG + '>',
               '</div>',
             '</div>',
           '</section>',

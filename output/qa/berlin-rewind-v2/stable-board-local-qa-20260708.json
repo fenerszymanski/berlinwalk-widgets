@@ -1,28 +1,28 @@
 {
-  "runAt": "2026-07-08T08:26:52+02:00",
+  "runAt": "2026-07-08T10:36:20+02:00",
   "target": "http://127.0.0.1:8765/berlin-rewind-v2/landing.html",
   "builds": {
-    "landing": "berlin-rewind-landing-v2-stable-board-20260708a",
-    "game": "berlin-rewind-v2-stable-board-20260708a"
+    "landing": "berlin-rewind-landing-v2-stable-board-20260708b",
+    "game": "berlin-rewind-v2-stable-board-20260708b"
   },
   "chromiumDesktop1280x900": {
     "steps": [
-      { "label": "start", "cardH": 720, "docH": 2479, "gameTop": 738, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
-      { "label": "r1-guess", "cardH": 720, "docH": 2479, "gameTop": 738, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
-      { "label": "r1-reveal", "cardH": 720, "docH": 2479, "gameTop": 738, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
-      { "label": "r2-guess", "cardH": 720, "docH": 2479, "gameTop": 738, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
-      { "label": "r2-reveal", "cardH": 720, "docH": 2479, "gameTop": 738, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 }
+      { "label": "start", "cardH": 720, "docH": 2479, "gameTop": 495, "gameTopViewportRatio": 0.55, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
+      { "label": "r1-guess", "cardH": 720, "docH": 2479, "gameTop": 495, "gameTopViewportRatio": 0.55, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
+      { "label": "r1-reveal", "cardH": 720, "docH": 2479, "gameTop": 495, "gameTopViewportRatio": 0.55, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
+      { "label": "r2-guess", "cardH": 720, "docH": 2479, "gameTop": 495, "gameTopViewportRatio": 0.55, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
+      { "label": "r2-reveal", "cardH": 720, "docH": 2479, "gameTop": 495, "gameTopViewportRatio": 0.55, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 }
     ],
     "maxCardDelta": 0,
     "maxDocumentDelta": 0
   },
   "chromiumMobile390x844": {
     "steps": [
-      { "label": "start", "cardH": 760, "docH": 3320, "gameTop": 765, "gameTopViewportRatio": 0.906, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
-      { "label": "r1-guess", "cardH": 760, "docH": 3320, "gameTop": 765, "gameTopViewportRatio": 0.906, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
-      { "label": "r1-reveal", "cardH": 760, "docH": 3320, "gameTop": 765, "gameTopViewportRatio": 0.906, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
-      { "label": "r2-guess", "cardH": 760, "docH": 3320, "gameTop": 765, "gameTopViewportRatio": 0.906, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
-      { "label": "r2-reveal", "cardH": 760, "docH": 3320, "gameTop": 765, "gameTopViewportRatio": 0.906, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 }
+      { "label": "start", "cardH": 760, "docH": 3320, "gameTop": 465, "gameTopViewportRatio": 0.551, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
+      { "label": "r1-guess", "cardH": 760, "docH": 3320, "gameTop": 465, "gameTopViewportRatio": 0.551, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
+      { "label": "r1-reveal", "cardH": 760, "docH": 3320, "gameTop": 465, "gameTopViewportRatio": 0.551, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
+      { "label": "r2-guess", "cardH": 760, "docH": 3320, "gameTop": 465, "gameTopViewportRatio": 0.551, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 },
+      { "label": "r2-reveal", "cardH": 760, "docH": 3320, "gameTop": 465, "gameTopViewportRatio": 0.551, "overflowX": 0, "badScrollContainers": 0, "maxContainerDelta": 0 }
     ],
     "maxCardDelta": 0,
     "maxDocumentDelta": 0,
@@ -50,8 +50,8 @@
   },
   "webkitMobile390x844": {
     "consoleErrors": 0,
-    "start": { "cardH": 760, "docH": 3320, "gameTop": 765, "overflowX": 0 },
-    "reveal": { "cardH": 760, "docH": 3320, "overflowX": 0 },
+    "start": { "cardH": 760, "docH": 3320, "gameTop": 465, "gameTopViewportRatio": 0.551, "overflowX": 0, "badScrollContainers": 0 },
+    "reveal": { "cardH": 760, "docH": 3320, "gameTop": 465, "gameTopViewportRatio": 0.551, "overflowX": 0, "badScrollContainers": 0 },
     "cardDelta": 0,
     "documentDelta": 0,
     "frameOrSlotCount": 0
