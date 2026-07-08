@@ -183,7 +183,9 @@
   "e-scooters-in-berlin": "e-scooters-in-berlin",
   "e-scooters-in-berlin-how-to-rent-one-and-the-rules-that-actually-get-you-fined": "e-scooters-in-berlin",
   "renting-a-bike-in-berlin": "renting-a-bike-in-berlin",
-  "renting-a-bike-in-berlin-which-option-actually-fits-your-trip": "renting-a-bike-in-berlin"
+  "renting-a-bike-in-berlin-which-option-actually-fits-your-trip": "renting-a-bike-in-berlin",
+  "is-the-ddr-museum-worth-it": "is-the-ddr-museum-worth-it",
+  "is-the-ddr-museum-worth-it-tickets-queues-and-what-to-expect-in-2026": "is-the-ddr-museum-worth-it"
 };
 
   var SCHEMAS = {
@@ -8577,6 +8579,68 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "You do not need a licence to rent an ordinary bike or a rental e-bike, and helmets are not legally required for bikes, though I would wear one on cobbles. Ride in the bike lane or on the road, not the pavement, and treat a rental e-bike as a vehicle: riding after drinking is taken seriously, the same as with e-scooters."
+        }
+      }
+    ]
+  },
+  "is-the-ddr-museum-worth-it": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the DDR Museum worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, with the right expectations. The DDR Museum is a hands-on, interactive look at everyday life in East Germany - you sit in a Trabant, open cupboards, and walk through a reconstructed apartment. It is great for families, rainy days, and anyone who wants to feel daily GDR life rather than read about it. It is less suited to visitors who want a deep, sober account of the dictatorship; for that, add the Stasi Museum or the Berlin Wall Memorial."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much are DDR Museum tickets in 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A standard adult ticket is about 13.90 EUR, with a reduced rate of about 8.50 EUR for students, children aged 6 and over, and other concessions. Children under 6 enter free. You can buy at the door or online through the official DDR Museum website, and booking online lets you skip the ticket-desk queue."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the DDR Museum covered by the Museum Island ticket or Museum Pass Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The DDR Museum is privately run, so the state Museum Island ticket and the Museum Pass Berlin do not cover it. This surprises a lot of visitors. Some city tourist cards list a small discount, so if you carry a Berlin WelcomeCard, check before you pay."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the DDR Museum opening hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The DDR Museum is open every day from 09:00 to 21:00, closing early only on 24 and 31 December. That late closing time is unusual for Berlin, so it is one of the few museums you can visit in the evening after Museum Island has shut."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the best time to visit the DDR Museum to avoid crowds?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The museum is small and the rooms are narrow, so it gets very crowded midday. The two calm windows are right at the 09:00 opening and the evening after about 18:30. Avoid roughly 13:00 to 16:00, and be extra early on weekends, public holidays, and rainy days, when every indoor attraction in central Berlin fills up at once."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long do you need at the DDR Museum?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Allow about one hour to an hour and a half. The exhibition is compact but dense, packed into a series of small interactive rooms. It is an easy add-on to a Museum Island afternoon rather than a whole-day visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the DDR Museum and how do I get there?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is on the Spree promenade at Karl-Liebknecht-Strasse 1, directly opposite the Berliner Dom and a two-minute walk from Museum Island. From Alexanderplatz it is about a ten-minute walk along the river. The nearest stops are Alexanderplatz (U/S-Bahn) and Hackescher Markt (S-Bahn and tram)."
         }
       }
     ]

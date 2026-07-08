@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DDR Museum: Best Time to Visit Planner</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../css/brand.css">
+<script defer src="../js/brand.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { padding: 14px 12px 4px; margin: 0; color: var(--bw-text, #22331f); font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  .bw-cp { max-width: 640px; margin: 0 auto; background: var(--bw-white, #fff); border: 1px solid var(--bw-border, #e2e6dd); border-radius: 18px; overflow: hidden; }
+  .bw-cp-head { background: linear-gradient(135deg, var(--bw-green, #1B5E20) 0%, var(--bw-green-dark, #123f16) 100%); color: #fff; padding: 18px 18px 16px; }
+  .bw-cp-kicker { font-size: 10.5px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--bw-yellow, #FFE600); margin: 0 0 6px; }
+  .bw-cp-title { font-size: 19px; font-weight: 800; margin: 0 0 6px; line-height: 1.25; }
+  .bw-cp-sub { font-size: 13px; line-height: 1.5; margin: 0; opacity: .92; }
+  .bw-cp-body { padding: 16px 16px 8px; }
+
+  .bw-cp-q { font-size: 12.5px; font-weight: 800; color: var(--bw-green-dark, #123f16); margin: 0 0 8px; }
+  .bw-days { display: flex; gap: 7px; margin: 0 0 6px; }
+  .bw-day { flex: 1 1 0; border: 1.5px solid var(--bw-border, #e2e6dd); background: #fff; color: var(--bw-text, #26331f); border-radius: 11px; padding: 9px 8px; font-size: 12.5px; font-weight: 700; cursor: pointer; line-height: 1.2; transition: all .12s ease; text-align: center; }
+  .bw-day small { display: block; font-size: 10.5px; font-weight: 600; opacity: .7; margin-top: 2px; }
+  .bw-day:hover { border-color: var(--bw-lime, #7CB342); }
+  .bw-day[aria-pressed="true"] { background: var(--bw-green, #1B5E20); border-color: var(--bw-green, #1B5E20); color: #fff; }
+  .bw-day[aria-pressed="true"] small { opacity: .85; }
+
+  .bw-chart-wrap { margin: 14px 0 4px; }
+  .bw-chart-cap { display: flex; justify-content: space-between; font-size: 10.5px; font-weight: 700; color: var(--bw-muted, #6b7563); margin: 0 0 6px; text-transform: uppercase; letter-spacing: .5px; }
+  .bw-chart { display: flex; align-items: flex-end; gap: 3px; height: 132px; padding: 0 0 2px; border-bottom: 2px solid #e4e9dc; }
+  .bw-col { flex: 1 1 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; position: relative; }
+  .bw-bar { width: 100%; border-radius: 5px 5px 0 0; transition: height .4s ease, background .3s ease; min-height: 4px; position: relative; }
+  .bw-bar.calm { background: var(--bw-lime, #7CB342); }
+  .bw-bar.mod { background: var(--bw-yellow, #FFE600); }
+  .bw-bar.busy { background: #E86A4E; }
+  .bw-col.pick .bw-bar { outline: 2px solid var(--bw-green-dark, #123f16); outline-offset: 1px; }
+  .bw-col.pick::after { content: "✓"; position: absolute; top: -16px; font-size: 11px; font-weight: 900; color: var(--bw-green, #1B5E20); }
+  .bw-hours { display: flex; gap: 3px; margin: 5px 0 0; }
+  .bw-hr { flex: 1 1 0; text-align: center; font-size: 8.5px; font-weight: 700; color: var(--bw-muted, #8a9280); }
+  .bw-hr.mark { color: var(--bw-green-dark, #123f16); }
+
+  .bw-legend { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0 0; font-size: 11px; font-weight: 600; color: var(--bw-muted, #5c6653); }
+  .bw-legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .bw-dot { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+  .bw-dot.calm { background: var(--bw-lime, #7CB342); }
+  .bw-dot.mod { background: var(--bw-yellow, #FFE600); }
+  .bw-dot.busy { background: #E86A4E; }
+
+  .bw-verdict { margin: 14px 0 4px; border: 1px solid var(--bw-border, #e2e6dd); border-radius: 14px; background: var(--bw-cream, #f7f9f2); padding: 13px 15px; }
+  .bw-verdict-flag { font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--bw-lime, #5f9636); margin: 0 0 4px; }
+  .bw-verdict-line { font-size: 13.5px; line-height: 1.55; margin: 0; color: var(--bw-green-dark, #16351b); }
+  .bw-verdict-line b { color: var(--bw-green-dark, #123f16); }
+
+  .bw-facts { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 2px; }
+  .bw-fact { font-size: 11.5px; font-weight: 700; padding: 5px 10px; border-radius: 999px; background: #fff; border: 1px solid var(--bw-border, #e2e6dd); color: var(--bw-green-dark, #26331f); }
+  .bw-fact.price { background: var(--bw-yellow, #FFE600); border-color: #e6cf00; color: #3a3300; }
+  .bw-note { font-size: 11.5px; line-height: 1.5; color: var(--bw-muted, #5c6653); margin: 11px 2px 8px; }
+  .bw-note b { color: var(--bw-green-dark, #123f16); }
+  .bw-note a { color: var(--bw-green, #1B5E20); font-weight: 700; }
+
+  @media (max-width: 430px) {
+    .bw-day { font-size: 11.5px; padding: 8px 5px; }
+    .bw-hr { font-size: 7.5px; }
+    .bw-chart { height: 118px; }
+  }
+</style>
+</head>
+<body>
+<div class="bw-cp">
+  <div class="bw-cp-head">
+    <p class="bw-cp-kicker">BerlinWalk • Free Berlin Tool</p>
+    <h1 class="bw-cp-title">DDR Museum: When to Go So You Are Not Elbow to Elbow</h1>
+    <p class="bw-cp-sub">The DDR Museum is small and interactive, which is exactly why it clogs up. Pick your day and I'll show you the crowd by the hour, plus the two calm windows I send guests to.</p>
+  </div>
+  <div class="bw-cp-body">
+    <p class="bw-cp-q">What kind of day are you visiting?</p>
+    <div class="bw-days" id="bwDays">
+      <button class="bw-day" data-day="weekday" aria-pressed="true">Weekday<small>Mon–Fri</small></button>
+      <button class="bw-day" data-day="weekend" aria-pressed="false">Weekend / holiday<small>Sat, Sun, feiertag</small></button>
+      <button class="bw-day" data-day="rainy" aria-pressed="false">Rainy day<small>everyone heads indoors</small></button>
+    </div>
+
+    <div class="bw-chart-wrap">
+      <div class="bw-chart-cap"><span>Quiet</span><span>How busy, hour by hour</span><span>Packed</span></div>
+      <div class="bw-chart" id="bwChart"></div>
+      <div class="bw-hours" id="bwHours"></div>
+    </div>
+
+    <div class="bw-legend">
+      <span><i class="bw-dot calm"></i>Room to move</span>
+      <span><i class="bw-dot mod"></i>Filling up</span>
+      <span><i class="bw-dot busy"></i>Shoulder to shoulder</span>
+    </div>
+
+    <div class="bw-verdict">
+      <p class="bw-verdict-flag">My advice</p>
+      <p class="bw-verdict-line" id="bwVerdict"></p>
+    </div>
+
+    <div class="bw-facts">
+      <span class="bw-fact">Open daily 09:00–21:00</span>
+      <span class="bw-fact price">Adult €13.90 · reduced €8.50</span>
+      <span class="bw-fact">Allow about 1–1.5 hours</span>
+    </div>
+    <p class="bw-note"><b>Book online before you go.</b> It skips the ticket-desk queue, though the real crush is inside the small rooms, not at the till. The DDR Museum is privately run, so a Museum Island ticket or the Museum Pass Berlin does <b>not</b> cover it. Times are typical patterns, not live data.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  // Opening window 09:00 -> 20:00 (last entry ~20:30, doors close 21:00).
+  var HOURS = [9,10,11,12,13,14,15,16,17,18,19,20];
+  // Base weekday crowd index 0..100 by hour.
+  var BASE = { 9:20, 10:34, 11:54, 12:71, 13:82, 14:88, 15:83, 16:72, 17:58, 18:44, 19:30, 20:22 };
+
+  var MODELS = {
+    weekday: function (h) { return BASE[h]; },
+    weekend: function (h) {
+      // Weekends fill earlier, peak broader and higher.
+      var v = BASE[h] * 1.14 + (h >= 11 && h <= 16 ? 8 : 0) + (h <= 10 ? 6 : 0);
+      return v;
+    },
+    rainy: function (h) {
+      // Wet day: indoor attractions in Mitte overload midday/afternoon.
+      var v = BASE[h] * 1.12 + (h >= 12 && h <= 16 ? 16 : 0) + (h >= 11 && h <= 17 ? 4 : 0);
+      return v;
+    }
+  };
+
+  var VERDICTS = {
+    weekday: 'Walk in right at the <b>09:00 opening</b> or come after <b>18:30</b>. Both are calm, and on a quiet weekday you can actually sit in the Trabant and poke around the apartment without a queue. Avoid roughly 13:00–15:00, when the coach and school groups land.',
+    weekend: 'Weekends fill fast. Be at the door for the <b>09:00 opening</b>, because by noon the little rooms are packed and you shuffle more than you explore. The <b>19:00–21:00</b> evening slot is the other calm window, and it is the one most visitors forget the museum even has.',
+    rainy: 'On a wet day every indoor place in Mitte overloads and this small museum is one of the first to feel it. Your best shot is the <b>09:00 opening</b>. Skip <b>12:00–16:00</b> completely, then double back in the <b>evening after 18:30</b> when the rain crowd has drifted off to dinner.'
+  };
+
+  var chart = document.getElementById('bwChart');
+  var hoursRow = document.getElementById('bwHours');
+  var verdict = document.getElementById('bwVerdict');
+  var current = 'weekday';
+
+  function level(v) { return v < 38 ? 'calm' : (v <= 66 ? 'mod' : 'busy'); }
+
+  // Pick the two calmest hours, but only from the opening band (<=11) and evening band (>=18)
+  // so the "check" marks land on the windows I actually recommend.
+  function pickWindows(vals) {
+    var picks = [];
+    var open = HOURS.filter(function (h) { return h <= 10; });
+    var eve = HOURS.filter(function (h) { return h >= 19; });
+    open.sort(function (a, b) { return vals[a] - vals[b]; });
+    eve.sort(function (a, b) { return vals[a] - vals[b]; });
+    if (open.length) picks.push(open[0]);
+    if (eve.length) picks.push(eve[0]);
+    return picks;
+  }
+
+  function render() {
+    var model = MODELS[current];
+    var vals = {};
+    HOURS.forEach(function (h) { vals[h] = Math.max(6, Math.min(100, Math.round(model(h)))); });
+    var picks = pickWindows(vals);
+
+    chart.innerHTML = '';
+    hoursRow.innerHTML = '';
+    HOURS.forEach(function (h) {
+      var v = vals[h];
+      var col = document.createElement('div');
+      col.className = 'bw-col' + (picks.indexOf(h) > -1 ? ' pick' : '');
+      var bar = document.createElement('div');
+      bar.className = 'bw-bar ' + level(v);
+      bar.style.height = Math.round(v) + '%';
+      bar.setAttribute('title', h + ':00 — ' + (level(v) === 'calm' ? 'room to move' : level(v) === 'mod' ? 'filling up' : 'very busy'));
+      col.appendChild(bar);
+      chart.appendChild(col);
+
+      var hr = document.createElement('div');
+      hr.className = 'bw-hr' + (h % 3 === 0 ? ' mark' : '');
+      hr.textContent = (h % 3 === 0 || h === 20) ? (h + ':00').replace(/^9/, '9') : '';
+      hoursRow.appendChild(hr);
+    });
+
+    verdict.innerHTML = VERDICTS[current];
+  }
+
+  document.getElementById('bwDays').addEventListener('click', function (e) {
+    var btn = e.target.closest('.bw-day');
+    if (!btn) return;
+    current = btn.getAttribute('data-day');
+    Array.prototype.forEach.call(this.querySelectorAll('.bw-day'), function (b) {
+      b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+    });
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
