@@ -6,13 +6,13 @@
  *   <bw-day-survival-landing-v2></bw-day-survival-landing-v2>
  *   <script src=".../berlin-day-survival-v2/day-survival-landing-v2-element.js" defer></script>
  *
- * Build marker: day-survival-landing-v2-stable-frame-20260708a
+ * Build marker: day-survival-landing-v2-mobile-no-hero-cta-20260708a
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-day-survival-landing-v2';
-  var BUILD = 'day-survival-landing-v2-stable-frame-20260708a';
+  var BUILD = 'day-survival-landing-v2-mobile-no-hero-cta-20260708a';
   var GAME_BUILD = 'day-survival-v2-stable-frame-20260708a';
   var GAME_TAG = 'bw-day-survival-frame-v2';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
@@ -54,7 +54,7 @@
     '.bw-dslp-photoStack{display:grid;gap:12px}.bw-dslp-photoStack img{width:100%;border-radius:8px;object-fit:cover;border:2px solid rgba(27,94,32,.14)}.bw-dslp-photoStack img:first-child{aspect-ratio:16/10}.bw-dslp-photoRow{display:grid;grid-template-columns:1fr 1fr;gap:12px}.bw-dslp-photoRow img{aspect-ratio:1/1}',
     '.bw-dslp-final{background:linear-gradient(135deg,var(--green2),var(--green));color:#fff;padding:clamp(48px,6vw,78px) 0}.bw-dslp-finalBox{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center}.bw-dslp-final h2{color:#fff;margin:0 0 10px}.bw-dslp-final p{margin:0;color:#E8F6D8;font-size:17px;line-height:1.6;font-weight:700;max-width:720px}.bw-dslp-more{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.bw-dslp-chip{display:inline-flex;align-items:center;min-height:42px;border:1px solid rgba(255,230,0,.44);border-radius:8px;padding:0 12px;text-decoration:none;font-size:13px;font-weight:900;color:#fff;background:rgba(255,255,255,.06)}',
     '@media(max-width:980px){.bw-dslp-hero{min-height:auto}.bw-dslp-grid,.bw-dslp-flow,.bw-dslp-finalBox{grid-template-columns:1fr}.bw-dslp-copy{padding-top:0}.bw-dslp-gameShell{max-width:620px}.bw-dslp-lessons{grid-template-columns:1fr}.bw-dslp-finalBox .bw-dslp-btn{width:100%}}',
-    '@media(max-width:620px){.bw-dslp-wrap{width:min(100%,calc(100vw - 24px))}.bw-dslp-hero{padding:72px 0 28px;background-position:center top}.bw-dslp h1{font-size:clamp(42px,14vw,58px);margin-bottom:12px}.bw-dslp-lead{font-size:17px;margin-bottom:14px}.bw-dslp-note{display:none}.bw-dslp-actions{display:grid;margin-bottom:16px}.bw-dslp-btn{width:100%;min-height:48px}.bw-dslp-facts{display:none}.bw-dslp-grid{gap:18px}.bw-dslp-gameLabel{margin-bottom:8px}.bw-dslp-game{padding:6px}.bw-dslp-section{padding:48px 0}.bw-dslp-section.tight{padding-top:20px}.bw-dslp-photoRow{grid-template-columns:1fr}.bw-dslp-step{grid-template-columns:42px 1fr;padding:12px}.bw-dslp-step b{width:42px;height:42px}.bw-dslp-final{padding:44px 0}}'
+    '@media(max-width:620px){.bw-dslp-wrap{width:min(100%,calc(100vw - 24px))}.bw-dslp-hero{padding:72px 0 24px;background-position:center top}.bw-dslp h1{font-size:clamp(42px,14vw,58px);margin-bottom:12px}.bw-dslp-lead{font-size:17px;margin-bottom:14px}.bw-dslp-note{display:none}.bw-dslp-actions{display:none}.bw-dslp-btn{width:100%;min-height:48px}.bw-dslp-facts{display:none}.bw-dslp-grid{gap:16px}.bw-dslp-gameLabel{margin-bottom:8px}.bw-dslp-game{padding:6px}.bw-dslp-section{padding:48px 0}.bw-dslp-section.tight{padding-top:20px}.bw-dslp-photoRow{grid-template-columns:1fr}.bw-dslp-step{grid-template-columns:42px 1fr;padding:12px}.bw-dslp-step b{width:42px;height:42px}.bw-dslp-final{padding:44px 0}}'
   ].join('');
 
   function esc(value) {
