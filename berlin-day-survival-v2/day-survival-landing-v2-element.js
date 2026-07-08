@@ -27,7 +27,7 @@
     socialTitle: 'Berlin Day Survival Game',
     socialDescription: 'Can you get through one Berlin day on €10, €15 or €20 without the city eating your wallet first?',
     image: BASE_URL + 'assets/social/berlin-day-survival-v2-social-1200x630.jpg',
-    imageAlt: 'Berlin Day Survival game social card showing a Berlin doner scene and budget-game headline'
+    imageAlt: 'Berlin Day Survival cover art showing a Berlin doner lunch counter'
   };
 
   var CSS = [

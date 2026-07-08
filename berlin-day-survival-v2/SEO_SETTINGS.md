@@ -34,7 +34,10 @@ Description:
 
 Image:
 
-`https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@09c237e/berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg`
+`https://fenerszymanski.github.io/berlinwalk-widgets/berlin-day-survival-v2/assets/social/berlin-day-survival-v2-social-1200x630.jpg`
+
+The image should be the textless doner-counter hero cover, not the older
+headline-heavy social card.
 
 ## Canonical
 

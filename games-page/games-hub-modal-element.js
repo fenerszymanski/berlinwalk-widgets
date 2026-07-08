@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-hub-modal-restored-day-rewind-20260708a';
+  const ASSET_VERSION = 'games-hub-modal-hero-preview-20260708a';
   const BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=games&utm_medium=hub_alt&utm_campaign=berlinwalk_games&utm_content=book_tour';
 
   const FILTERS = [

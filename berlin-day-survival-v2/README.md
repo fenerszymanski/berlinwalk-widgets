@@ -34,8 +34,10 @@ own illustrated hero card.
 - `landing.html` — standalone, non-indexed landing preview.
 - `SEO_SETTINGS.md` — Wix-ready SEO title, description, canonical, robots, and
   JSON-LD for the final public page.
-- `assets/social/berlin-day-survival-v2-social-1200x630.jpg` — OG/social card
-  for the landing page.
+- `assets/social/berlin-day-survival-v2-social-1200x630.jpg` — textless
+  hero/preview cover for the landing page and games cards.
+- `assets/source/day-survival-v2-social-text-card-20260707.jpg` — archived old
+  text-heavy social card, kept only for provenance.
 - `assets/scenes/*.jpg` — 6 per-round editorial illustrations (1000x563).
 - `assets/results/*.jpg` — 9 per-result-type illustrations (1000x563).
 

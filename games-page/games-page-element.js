@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-restored-day-rewind-20260707a';
+  const ASSET_VERSION = 'games-page-hero-preview-20260708a';
   const GAMES = [
     {
       id: 'berlin-battle',

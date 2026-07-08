@@ -25,10 +25,33 @@ and the archival credit. You end with a total score and a "Berlin eye" tier.
 ## Files
 
 - `berlin-rewind-v2-element.js` — the whole game (data + logic + CSS).
+- `berlin-rewind-landing-v2-element.js` — public landing wrapper with hero
+  cover, local context, CTA sections, and the native game mount.
 - `index.html` — standalone, non-indexed local preview.
+- `landing.html` — standalone, non-indexed landing preview.
+- `SEO_SETTINGS.md` — Wix-ready SEO title, description, canonical, robots, and
+  JSON-LD for the final public page.
 - `assets/photos/ph_0xx.jpg` — 10 curated archival photos (see `CREDITS.md`).
 
-## Live mount (do NOT wire until Yusuf approves on a real device)
+## Public landing mount
+
+Use this for the public page:
+
+```html
+<bw-berlin-rewind-landing-v2></bw-berlin-rewind-landing-v2>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rewind-v2/berlin-rewind-landing-v2-element.js" defer></script>
+```
+
+If using Wix Studio's Custom Element panel:
+
+- Tag name: `bw-berlin-rewind-landing-v2`
+- Server URL:
+  `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rewind-v2/berlin-rewind-landing-v2-element.js`
+
+The landing wrapper loads the native game automatically, so the Wix page should
+not mount the bare game element as the only visible content.
+
+## Bare game mount
 
 ```html
 <bw-berlin-rewind-v2></bw-berlin-rewind-v2>

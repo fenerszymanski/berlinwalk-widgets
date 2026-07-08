@@ -3,7 +3,7 @@ const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
 const ASSET_BUILD = 'berlin-rewind-mvp-20260705';
-const GAMES_PREVIEW_BUILD = 'games-preview-rail-restored-day-rewind-20260708a';
+const GAMES_PREVIEW_BUILD = 'games-preview-rail-hero-preview-20260708a';
 
 function loadGamesPreviewRail(callback) {
   if (window.BerlinWalkGamesPreviewRail) {
