@@ -6,13 +6,15 @@
  *   <bw-day-survival-landing-v2></bw-day-survival-landing-v2>
  *   <script src=".../berlin-day-survival-v2/day-survival-landing-v2-element.js" defer></script>
  *
- * Build marker: day-survival-landing-v2-20260708a
+ * Build marker: day-survival-landing-v2-stable-frame-20260708a
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-day-survival-landing-v2';
-  var BUILD = 'day-survival-landing-v2-20260708a';
+  var BUILD = 'day-survival-landing-v2-stable-frame-20260708a';
+  var GAME_BUILD = 'day-survival-v2-stable-frame-20260708a';
+  var GAME_TAG = 'bw-day-survival-frame-v2';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -44,7 +46,7 @@
     '.bw-dslp-actions{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 22px}.bw-dslp-btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;border:2px solid transparent;border-radius:8px;padding:0 18px;font-size:15px;font-weight:900;text-decoration:none}.bw-dslp-btn.primary{background:var(--yellow);color:var(--green2)}.bw-dslp-btn.secondary{background:rgba(250,250,245,.08);border-color:rgba(255,230,0,.45);color:#fff}',
     '.bw-dslp-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:660px}.bw-dslp-fact{border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.09);padding:12px;border-radius:8px}.bw-dslp-fact b{display:block;color:var(--yellow);font-size:22px;line-height:1;font-weight:950}.bw-dslp-fact span{display:block;color:#F6FFE8;font-size:12px;font-weight:800;line-height:1.3;margin-top:6px;text-transform:uppercase}',
     '.bw-dslp-gameShell{position:relative}.bw-dslp-gameLabel{display:flex;justify-content:space-between;gap:12px;align-items:center;color:#fff;font-size:12px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;margin:0 0 10px}.bw-dslp-gameLabel span:last-child{color:var(--yellow)}',
-    '.bw-dslp-game{background:rgba(250,250,245,.12);border:1px solid rgba(255,255,255,.22);padding:10px;border-radius:8px;box-shadow:0 22px 70px rgba(0,0,0,.26)}.bw-dslp-game bw-day-survival-v2{max-width:none;width:100%;padding:0}.bw-dslp-game .bw-dsv-card{border-radius:8px}',
+    '.bw-dslp-game{background:rgba(250,250,245,.12);border:1px solid rgba(255,255,255,.22);padding:10px;border-radius:8px;box-shadow:0 22px 70px rgba(0,0,0,.26)}.bw-dslp-game ' + GAME_TAG + '{display:block;max-width:none;width:100%;padding:0}.bw-dslp-game .bw-dsv-card{border-radius:8px}',
     '.bw-dslp-scrollHint{display:block;margin:18px auto 0;color:rgba(14,53,20,.64);font-size:12px;font-weight:900;text-align:center;text-transform:uppercase;letter-spacing:1.4px}',
     '.bw-dslp-section{padding:clamp(54px,7vw,86px) 0}.bw-dslp-section.tight{padding-top:22px}.bw-dslp-section h2{color:var(--green2);font-size:clamp(32px,4.8vw,62px);font-weight:950;line-height:.98;margin:0 0 16px;letter-spacing:0}.bw-dslp-sectionLead{color:#4D5A4D;font-size:clamp(16px,1.5vw,20px);font-weight:700;line-height:1.6;max-width:760px;margin:0}',
     '.bw-dslp-lessons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:30px}.bw-dslp-lesson{background:#fff;border:2px solid rgba(27,94,32,.18);border-radius:8px;overflow:hidden;box-shadow:0 16px 42px rgba(27,94,32,.08)}.bw-dslp-lesson img{width:100%;aspect-ratio:16/9;object-fit:cover}.bw-dslp-lesson div{padding:18px}.bw-dslp-lesson h3{font-size:20px;line-height:1.1;margin:0 0 8px;color:var(--green2);font-weight:950}.bw-dslp-lesson p{font-size:14px;line-height:1.55;margin:0;color:#4D5A4D;font-weight:650}',
@@ -127,11 +129,11 @@
   }
 
   function ensureGameScript() {
-    if (customElements.get('bw-day-survival-v2')) return;
+    if (customElements.get(GAME_TAG)) return;
     var existing = document.querySelector('script[data-bw-day-survival-v2-loader]');
     if (existing) return;
     var script = document.createElement('script');
-    script.src = BASE_URL + 'day-survival-v2-element.js?v=day-survival-v2-20260707d';
+    script.src = BASE_URL + 'day-survival-v2-element.js?v=' + GAME_BUILD;
     script.defer = true;
     script.dataset.bwDaySurvivalV2Loader = 'true';
     document.head.appendChild(script);
@@ -181,7 +183,7 @@
             '<div class="bw-dslp-gameShell" id="bw-day-survival-game">',
               '<div class="bw-dslp-gameLabel"><span>Playable here</span><span>Pick your budget</span></div>',
               '<div class="bw-dslp-game">',
-                '<bw-day-survival-v2 data-asset-base="' + esc(BASE_URL) + '"></bw-day-survival-v2>',
+                '<' + GAME_TAG + ' data-asset-base="' + esc(BASE_URL) + '"></' + GAME_TAG + '>',
               '</div>',
             '</div>',
           '</div>',

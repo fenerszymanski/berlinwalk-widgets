@@ -1,5 +1,6 @@
 /*
  * <bw-day-survival-v2> — Berlin Day Survival V2
+ * <bw-day-survival-frame-v2> — stable-height landing embed
  *
  * Self-contained custom element. Light DOM, instance-scoped state, no globals,
  * no iframe, no postMessage/resize, no MutationObserver, no external CSS/JS.
@@ -7,14 +8,14 @@
  *   <bw-day-survival-v2></bw-day-survival-v2>
  *   <script src=".../berlin-day-survival-v2/day-survival-v2-element.js" defer></script>
  *
- * Build marker: day-survival-v2-20260707d
+ * Build marker: day-survival-v2-stable-frame-20260708a
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'day-survival-v2-20260707d';
+  var BUILD = 'day-survival-v2-stable-frame-20260708a';
 
   // Asset base. Default to the absolute GitHub Pages folder so images resolve
   // even when the element is mounted by a host (e.g. Wix) that loads this
@@ -222,7 +223,51 @@
     '.bw-dsv-r-stat-k{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--lg);margin-top:3px;}',
     '.bw-dsv-r-tip{background:rgba(255,255,255,.08);border-radius:14px;padding:15px 16px;font-size:15px;line-height:1.5;color:var(--cream);margin-bottom:4px;}',
     '.bw-dsv-r-tip b{color:var(--y);}',
-    '.bw-dsv-copied{text-align:center;font-size:13px;color:var(--y);font-weight:700;min-height:18px;margin-top:8px;}'
+    '.bw-dsv-copied{text-align:center;font-size:13px;color:var(--y);font-weight:700;min-height:18px;margin-top:8px;}',
+    '.bw-dsv{max-width:560px;padding:0;}',
+    '.bw-dsv-card{height:720px;border-radius:18px;padding:22px 20px;overflow:hidden;}',
+    '.bw-dsv-screen.is-on{height:100%;display:flex;flex-direction:column;animation:bwdsvfade .2s ease;}',
+    '.bw-dsv-start-screen{justify-content:center;}',
+    '.bw-dsv-start-screen .bw-dsv-title{font-size:29px;}',
+    '.bw-dsv-start-screen .bw-dsv-sub{font-size:15px;line-height:1.45;margin-bottom:14px;}',
+    '.bw-dsv-start-screen .bw-dsv-cond{margin-bottom:14px;}',
+    '.bw-dsv-start-screen .bw-dsv-modes{gap:10px;}',
+    '.bw-dsv-start-screen .bw-dsv-mode{min-height:60px;padding:13px 14px;border-radius:14px;}',
+    '.bw-dsv-start-screen .bw-dsv-mode-eur{width:54px;height:50px;border-radius:11px;font-size:21px;}',
+    '.bw-dsv-start-screen .bw-dsv-foot{margin-top:10px;}',
+    '.bw-dsv-play-screen{min-height:0;}',
+    '.bw-dsv-play-screen .bw-dsv-hud{gap:8px;margin-bottom:12px;flex:0 0 auto;}',
+    '.bw-dsv-play-screen .bw-dsv-stat{padding:8px 10px;border-radius:12px;}',
+    '.bw-dsv-play-screen .bw-dsv-stat-v{font-size:18px;}',
+    '.bw-dsv-play-screen .bw-dsv-progress{margin-bottom:12px;flex:0 0 auto;}',
+    '.bw-dsv-play-screen .bw-dsv-scene{aspect-ratio:16/7.2;border-radius:12px;margin:0 0 11px;flex:0 0 auto;}',
+    '.bw-dsv-play-screen .bw-dsv-eyebrow{font-size:11.5px;letter-spacing:2.2px;margin-bottom:5px;flex:0 0 auto;}',
+    '.bw-dsv-play-screen .bw-dsv-title{font-size:23px!important;margin-bottom:7px;flex:0 0 auto;}',
+    '.bw-dsv-play-screen .bw-dsv-situation{font-size:14.5px;line-height:1.38;margin:0 0 10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;flex:0 0 auto;}',
+    '.bw-dsv-play-screen .bw-dsv-choices{gap:8px;margin-top:auto;}',
+    '.bw-dsv-play-screen .bw-dsv-choice{min-height:49px;padding:10px 13px;border-radius:13px;}',
+    '.bw-dsv-play-screen .bw-dsv-choice-l{font-size:15px;line-height:1.2;}',
+    '.bw-dsv-play-screen .bw-dsv-choice-m{font-size:12px;line-height:1.25;margin-top:3px;}',
+    '.bw-dsv-play-screen .bw-dsv-outcome{margin-top:auto;padding:14px;border-radius:12px;}',
+    '.bw-dsv-play-screen .bw-dsv-outcome-line{font-size:14px;line-height:1.42;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}',
+    '.bw-dsv-play-screen .bw-dsv-deltas{gap:6px;margin-bottom:10px;}',
+    '.bw-dsv-play-screen .bw-dsv-delta{font-size:12px;padding:4px 8px;}',
+    '.bw-dsv-play-screen .bw-dsv-btn{min-height:46px;padding:12px 14px;font-size:15px;}',
+    '.bw-dsv-result-screen{justify-content:center;}',
+    '.bw-dsv-result-screen .bw-dsv-r-photo{height:176px;aspect-ratio:auto;border-radius:14px;margin:0 0 10px;flex:0 0 auto;}',
+    '.bw-dsv-result-screen .bw-dsv-r-emoji{font-size:42px;margin:0 0 4px;}',
+    '.bw-dsv-result-screen .bw-dsv-r-title{font-size:24px;margin-bottom:6px;}',
+    '.bw-dsv-result-screen .bw-dsv-r-desc{font-size:14px;line-height:1.38;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}',
+    '.bw-dsv-result-screen .bw-dsv-r-stats{gap:8px;margin-bottom:10px;}',
+    '.bw-dsv-result-screen .bw-dsv-r-stat{padding:9px 6px;border-radius:12px;}',
+    '.bw-dsv-result-screen .bw-dsv-r-stat-v{font-size:17px;}',
+    '.bw-dsv-result-screen .bw-dsv-r-stat-k{font-size:10px;}',
+    '.bw-dsv-result-screen .bw-dsv-r-tip{font-size:13.5px;line-height:1.38;padding:11px 12px;margin-bottom:0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}',
+    '.bw-dsv-result-screen .bw-dsv-btnrow{gap:8px;margin-top:12px;}',
+    '.bw-dsv-result-screen .bw-dsv-btn{min-height:44px;padding:11px 14px;font-size:15px;}',
+    '.bw-dsv-result-screen .bw-dsv-btn.link{min-height:38px;padding:8px 12px;font-size:13.5px;}',
+    '.bw-dsv-result-screen .bw-dsv-copied{font-size:12px;min-height:14px;margin-top:5px;}',
+    '@media(max-width:620px){.bw-dsv-card{height:760px;padding:16px;border-radius:18px}.bw-dsv-title{letter-spacing:0}.bw-dsv-start-screen .bw-dsv-title{font-size:27px}.bw-dsv-start-screen .bw-dsv-sub{font-size:14px}.bw-dsv-start-screen .bw-dsv-mode{gap:10px;padding:12px}.bw-dsv-start-screen .bw-dsv-mode-eur{width:50px;height:46px;font-size:20px}.bw-dsv-start-screen .bw-dsv-mode-name{font-size:15.5px}.bw-dsv-start-screen .bw-dsv-mode-blurb{font-size:12.5px}.bw-dsv-play-screen .bw-dsv-hud{gap:6px;margin-bottom:10px}.bw-dsv-play-screen .bw-dsv-stat{padding:8px 7px}.bw-dsv-play-screen .bw-dsv-stat-k{font-size:9.5px;letter-spacing:1px}.bw-dsv-play-screen .bw-dsv-stat-v{font-size:16px}.bw-dsv-play-screen .bw-dsv-scene{aspect-ratio:16/8.2;margin-bottom:10px}.bw-dsv-play-screen .bw-dsv-title{font-size:21px!important}.bw-dsv-play-screen .bw-dsv-situation{font-size:13.5px;line-height:1.34;-webkit-line-clamp:3}.bw-dsv-play-screen .bw-dsv-choice{min-height:48px;padding:10px 11px}.bw-dsv-play-screen .bw-dsv-choice-l{font-size:14px}.bw-dsv-play-screen .bw-dsv-choice-m{font-size:11.5px}.bw-dsv-play-screen .bw-dsv-outcome-line{font-size:13.2px;line-height:1.36}.bw-dsv-result-screen .bw-dsv-r-photo{height:142px}.bw-dsv-result-screen .bw-dsv-r-title{font-size:22px}.bw-dsv-result-screen .bw-dsv-r-desc{font-size:13px;line-height:1.34;-webkit-line-clamp:3}.bw-dsv-result-screen .bw-dsv-r-tip{font-size:12.5px;line-height:1.33;-webkit-line-clamp:3}.bw-dsv-result-screen .bw-dsv-btnrow{gap:7px;margin-top:10px}.bw-dsv-result-screen .bw-dsv-btn{min-height:42px;padding:10px 12px;font-size:13.5px}}'
   ].join('');
 
   function clamp(n) { return Math.max(0, Math.min(100, n)); }
@@ -263,6 +308,7 @@
   }
 
   var TAG = 'bw-day-survival-v2';
+  var FRAME_TAG = 'bw-day-survival-frame-v2';
 
   var Proto = Object.create(HTMLElement.prototype);
 
@@ -301,7 +347,7 @@
     });
     this.innerHTML =
       '<div class="bw-dsv-card">' +
-        '<div class="bw-dsv-screen is-on">' +
+        '<div class="bw-dsv-screen is-on bw-dsv-start-screen">' +
           '<p class="bw-dsv-eyebrow">Berlin Day Survival</p>' +
           '<h2 class="bw-dsv-title">Your budget is small.<br>Berlin is hungry.</h2>' +
           '<p class="bw-dsv-sub">Six real first-day decisions. Keep your wallet, your energy and your Berlin sense alive. Under a minute.</p>' +
@@ -374,7 +420,7 @@
 
     this.innerHTML =
       '<div class="bw-dsv-card">' +
-        '<div class="bw-dsv-screen is-on">' +
+        '<div class="bw-dsv-screen is-on bw-dsv-play-screen">' +
           this._hud() +
           progress +
           sceneHtml +
@@ -393,8 +439,6 @@
     });
     var sImg = this.querySelector('[data-scene-img]');
     if (sImg) sImg.addEventListener('error', function () { var c = self.querySelector('[data-scene]'); if (c) c.style.display = 'none'; });
-    // scroll the card into a comfortable spot on small screens
-    try { this.scrollIntoView({ block: 'nearest' }); } catch (e) {}
   };
 
   Proto._pick = function (idx) {
@@ -443,7 +487,6 @@
       if (isLast) { self._renderResult(); }
       else { st.round += 1; self._renderRound(); }
     });
-    try { out.scrollIntoView({ block: 'nearest' }); } catch (e) {}
   };
 
   Proto._renderResult = function () {
@@ -455,7 +498,7 @@
       : '<div class="bw-dsv-r-emoji">' + r.emoji + '</div>';
     this.innerHTML =
       '<div class="bw-dsv-card">' +
-        '<div class="bw-dsv-screen is-on">' +
+        '<div class="bw-dsv-screen is-on bw-dsv-result-screen">' +
           heroHtml +
           '<h2 class="bw-dsv-r-title">' + esc(r.title) + '</h2>' +
           '<p class="bw-dsv-r-desc">' + esc(r.desc) + '</p>' +
@@ -489,16 +532,19 @@
         } else { fail(); }
       } catch (e) { fail(); }
     });
-    try { this.scrollIntoView({ block: 'nearest' }); } catch (e) {}
   };
 
-  if (!customElements.get(TAG)) {
+  function defineDaySurvival(tag, warning) {
+    if (customElements.get(tag)) return;
     try {
       var Cls = class extends HTMLElement {};
       Object.assign(Cls.prototype, Proto);
-      customElements.define(TAG, Cls);
+      customElements.define(tag, Cls);
     } catch (e) {
-      if (window && window.console) { console.warn('bw-day-survival-v2 define failed', e); }
+      if (window && window.console) { console.warn(warning, e); }
     }
   }
+
+  defineDaySurvival(TAG, 'bw-day-survival-v2 define failed');
+  defineDaySurvival(FRAME_TAG, 'bw-day-survival-frame-v2 define failed');
 })();
