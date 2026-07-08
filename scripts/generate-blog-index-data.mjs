@@ -180,6 +180,8 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'berlin-u-bahn-fine',
   secondary: [
+    'deutschlandticket-berlin-tourists',
+    'potsdam-from-berlin-day-trip',
     'berlin-before-hotel-check-in',
     'berliner-dom-tickets',
     'berlin-train-stations',
@@ -216,6 +218,8 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'berlin-u-bahn-fine',
+  'deutschlandticket-berlin-tourists',
+  'potsdam-from-berlin-day-trip',
   'berlin-before-hotel-check-in',
   'berlin-umweltzone-sticker',
   'berliner-dom-tickets',
