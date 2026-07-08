@@ -6,13 +6,13 @@
  *   <bw-day-survival-landing-v2></bw-day-survival-landing-v2>
  *   <script src=".../berlin-day-survival-v2/day-survival-landing-v2-element.js" defer></script>
  *
- * Build marker: day-survival-landing-v2-20260707b
+ * Build marker: day-survival-landing-v2-20260708a
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-day-survival-landing-v2';
-  var BUILD = 'day-survival-landing-v2-20260707b';
+  var BUILD = 'day-survival-landing-v2-20260708a';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -179,7 +179,7 @@
               '</div>',
             '</div>',
             '<div class="bw-dslp-gameShell" id="bw-day-survival-game">',
-              '<div class="bw-dslp-gameLabel"><span>Playable here</span><span>No iframe</span></div>',
+              '<div class="bw-dslp-gameLabel"><span>Playable here</span><span>Pick your budget</span></div>',
               '<div class="bw-dslp-game">',
                 '<bw-day-survival-v2 data-asset-base="' + esc(BASE_URL) + '"></bw-day-survival-v2>',
               '</div>',
