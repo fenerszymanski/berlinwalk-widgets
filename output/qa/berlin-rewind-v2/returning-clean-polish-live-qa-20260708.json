@@ -1,0 +1,177 @@
+{
+  "checkedAt": "2026-07-08T11:48:00+02:00",
+  "page": "https://www.berlinwalk.com/games/berlin-rewind",
+  "wixEmbed": {
+    "name": "BerlinWalk Berlin Rewind Page",
+    "id": "ba342e48-e239-4b7c-95cb-1789839283dc",
+    "revision": "11",
+    "enabled": true,
+    "landingRef": "06344ac",
+    "published": true
+  },
+  "builds": {
+    "landing": "berlin-rewind-landing-v2-stable-board-20260708d",
+    "game": "berlin-rewind-v2-stable-board-20260708d",
+    "activeGameTag": "bw-berlin-rewind-clean-v2"
+  },
+  "sourceChecks": {
+    "jsdelivrLanding200": true,
+    "landingHasCleanTag": true,
+    "gameHasCleanTag": true,
+    "gameMoreGamesRemoved": true,
+    "dryRunHeadroom": 9234,
+    "noIframe": true,
+    "noMutationObserver": true
+  },
+  "localQa": {
+    "chromiumDesktop": {
+      "result": {
+        "moreCount": 0,
+        "hasMoreText": false,
+        "cardHeight": 720,
+        "cardScrollHeight": 720,
+        "screenScrollHeight": 676,
+        "overflowX": 0
+      },
+      "gate": {
+        "moreCount": 0,
+        "hasMoreText": false,
+        "hasPractice": true,
+        "cardHeight": 720,
+        "cardScrollHeight": 720,
+        "screenScrollHeight": 676,
+        "titleLeftGap": 206,
+        "titleRightGap": 206,
+        "tableLeftGap": 206,
+        "tableRightGap": 206,
+        "screenLeftGap": 180,
+        "screenRightGap": 180,
+        "overflowX": 0
+      }
+    },
+    "chromiumMobile390": {
+      "result": {
+        "moreCount": 0,
+        "hasMoreText": false,
+        "cardHeight": 760,
+        "cardScrollHeight": 760,
+        "screenScrollHeight": 728,
+        "overflowX": 0
+      },
+      "gate": {
+        "moreCount": 0,
+        "hasMoreText": false,
+        "hasPractice": true,
+        "cardHeight": 760,
+        "cardScrollHeight": 760,
+        "screenScrollHeight": 728,
+        "titleLeftGap": 30,
+        "titleRightGap": 30,
+        "tableLeftGap": 30,
+        "tableRightGap": 30,
+        "screenLeftGap": 16,
+        "screenRightGap": 16,
+        "overflowX": 0
+      }
+    }
+  },
+  "liveQa": {
+    "chromiumDesktop": {
+      "url": "https://www.berlinwalk.com/games/berlin-rewind?bwqa=clean-live-desktop2-1783503987",
+      "result": {
+        "htmlFlag": "berlin-rewind-landing-v2-06344ac",
+        "landingBuild": "berlin-rewind-landing-v2-stable-board-20260708d",
+        "gameBuild": "berlin-rewind-v2-stable-board-20260708d",
+        "activeTag": "bw-berlin-rewind-clean-v2",
+        "cleanCount": 1,
+        "moreCount": 0,
+        "hasMoreText": false,
+        "cardHeight": 720,
+        "cardScrollHeight": 720,
+        "screenScrollHeight": 676,
+        "overflowX": 0
+      },
+      "gate": {
+        "moreCount": 0,
+        "hasMoreText": false,
+        "hasPractice": true,
+        "cardHeight": 720,
+        "cardScrollHeight": 720,
+        "screenScrollHeight": 676,
+        "titleLeftGap": 206,
+        "titleRightGap": 206,
+        "tableLeftGap": 206,
+        "tableRightGap": 206,
+        "screenLeftGap": 180,
+        "screenRightGap": 180,
+        "overflowX": 0
+      }
+    },
+    "chromiumMobile390": {
+      "url": "https://www.berlinwalk.com/games/berlin-rewind?bwqa=clean-live-mobile-1783504023",
+      "result": {
+        "htmlFlag": "berlin-rewind-landing-v2-06344ac",
+        "landingBuild": "berlin-rewind-landing-v2-stable-board-20260708d",
+        "gameBuild": "berlin-rewind-v2-stable-board-20260708d",
+        "activeTag": "bw-berlin-rewind-clean-v2",
+        "cleanCount": 1,
+        "moreCount": 0,
+        "hasMoreText": false,
+        "cardHeight": 760,
+        "cardScrollHeight": 760,
+        "screenScrollHeight": 728,
+        "overflowX": 0
+      },
+      "gate": {
+        "moreCount": 0,
+        "hasMoreText": false,
+        "hasPractice": true,
+        "cardHeight": 760,
+        "cardScrollHeight": 760,
+        "screenScrollHeight": 728,
+        "titleLeftGap": 30,
+        "titleRightGap": 30,
+        "tableLeftGap": 30,
+        "tableRightGap": 30,
+        "screenLeftGap": 16,
+        "screenRightGap": 16,
+        "overflowX": 0
+      }
+    },
+    "webkitMobile390": {
+      "result": {
+        "htmlFlag": "berlin-rewind-landing-v2-06344ac",
+        "landingBuild": "berlin-rewind-landing-v2-stable-board-20260708d",
+        "gameBuild": "berlin-rewind-v2-stable-board-20260708d",
+        "activeTag": "bw-berlin-rewind-clean-v2",
+        "cleanCount": 1,
+        "moreCount": 0,
+        "hasMoreText": false,
+        "cardHeight": 760,
+        "cardScrollHeight": 760,
+        "screenScrollHeight": 728,
+        "overflowX": 0
+      },
+      "gate": {
+        "moreCount": 0,
+        "hasMoreText": false,
+        "hasPractice": true,
+        "cardHeight": 760,
+        "cardScrollHeight": 760,
+        "screenScrollHeight": 728,
+        "titleLeftGap": 30,
+        "titleRightGap": 30,
+        "tableLeftGap": 30,
+        "tableRightGap": 30,
+        "screenLeftGap": 16,
+        "screenRightGap": 16,
+        "overflowX": 0
+      },
+      "nonRewindConsoleNoise": [
+        "GTM-N33JQJL 404",
+        "Wix panorama keepalive queue limit from older blog-journey script"
+      ]
+    }
+  },
+  "verdict": "PASS: Returning/gate screen has safer side padding, in-game More Berlin games is removed, result and gate screens remain fixed-height with no internal overflow or horizontal page overflow on tested desktop/mobile Chromium and mobile WebKit."
+}
