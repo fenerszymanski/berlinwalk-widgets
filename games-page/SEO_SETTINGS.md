@@ -4,13 +4,13 @@
 
 - URL: `https://www.berlinwalk.com/games`
 - Title: `BerlinWalk Games: Play Quick Berlin Games`
-- Meta description: `Play quick Berlin games by BerlinWalk: choose your Berlin winner, survive one Berlin day, guess old archive photos, try the Berghain door, or make a Berliner almost smile.`
+- Meta description: `Play quick Berlin games by BerlinWalk: choose your Berlin winner, survive one Berlin day, guess old archive photos, read today's Berlin pulse, try the Berghain door, or make a Berliner almost smile.`
 - Canonical: `https://www.berlinwalk.com/games`
 
 ## Suggested Social Share
 
 - OG title: `BerlinWalk Games`
-- OG description: `Quick Berlin games: Berlin Battle, Berlin Day Survival, Berlin Rewind, Berghain Bouncer and Berlin Smile Challenge.`
+- OG description: `Quick Berlin games: Berlin Battle, Berlin Day Survival, Berlin Rewind, Berlin Pulse, Berghain Bouncer and Berlin Smile Challenge.`
 - OG image: `https://static.wixstatic.com/media/5a08a3_e2e905ff6b1846609bbcc8a06b2de6dc~mv2.jpg`
 - Local source image: `games-page/assets/social/berlinwalk-games-social-1200x630.jpg`
 
@@ -27,7 +27,7 @@
 Note: The live Wix `/games` page loads the repo custom element and also has a
 path-guarded head embed safety layer. Revision `19` removes only stale Berlin
 Split / Lost Archive content if an old cached game script reappears. It must not
-remove Day Survival or Rewind.
+remove Day Survival, Rewind, or Pulse.
 
 ## Structured Data Draft
 
@@ -69,12 +69,18 @@ Use native Wix SEO fields first. If a guarded custom embed is needed later, keep
       {
         "@type": "ListItem",
         "position": 4,
+        "url": "https://www.berlinwalk.com/games/berlin-pulse",
+        "name": "Berlin Pulse"
+      },
+      {
+        "@type": "ListItem",
+        "position": 5,
         "url": "https://www.berlinwalk.com/games/berghain-bouncer",
         "name": "Berghain Bouncer"
       },
       {
         "@type": "ListItem",
-        "position": 5,
+        "position": 6,
         "url": "https://www.berlinwalk.com/games/berlin-smile-challenge",
         "name": "Berlin Smile Challenge"
       }

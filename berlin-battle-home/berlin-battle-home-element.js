@@ -9,7 +9,7 @@ const BW_GAMES_HOME_ROOT = (() => {
 
 const BW_GAMES_HOME_URL = 'https://www.berlinwalk.com/games?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=all_games';
 const BW_GAMES_HOME_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=home&utm_medium=section&utm_campaign=berlinwalk_games_home&utm_content=book';
-const BW_GAMES_HOME_ASSET_VERSION = 'games-home-hero-preview-20260708a';
+const BW_GAMES_HOME_ASSET_VERSION = 'games-home-pulse-20260708b';
 
 const BW_GAMES_HOME_ITEMS = [
   {
@@ -51,6 +51,16 @@ const BW_GAMES_HOME_ITEMS = [
     href: 'https://www.berlinwalk.com/games/berlin-rewind',
     cta: 'Play Rewind',
     image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg'
+  },
+  {
+    id: 'berlin-pulse',
+    kicker: 'Daily mood',
+    title: 'Berlin Pulse',
+    lead: 'Guess what Berlin wants today and see whether your city instinct matches the daily pulse.',
+    meta: 'Daily prediction',
+    href: 'https://www.berlinwalk.com/games/berlin-pulse',
+    cta: 'Read the Pulse',
+    image: 'berlin-pulse/assets/social/berlin-pulse-social-1200x630.jpg'
   },
   {
     id: 'berlin-smile-challenge',

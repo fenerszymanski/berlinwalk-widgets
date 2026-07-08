@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const ASSET_VERSION = 'games-page-hero-preview-20260708a';
+  const ASSET_VERSION = 'games-page-pulse-20260708b';
   const GAMES = [
     {
       id: 'berlin-battle',
@@ -60,6 +60,20 @@
       href: 'https://www.berlinwalk.com/games/berlin-rewind',
       button: 'Play Rewind',
       accent: 'archive'
+    },
+    {
+      id: 'berlin-pulse',
+      kicker: 'Daily mood',
+      title: 'Berlin Pulse',
+      lead: 'Guess today\'s Berlin mood and see whether your city instinct matches the daily pulse.',
+      how: 'Make one daily call, lock the strength of your prediction, and come back after Berlin-local midnight.',
+      duration: 'Under 1 min',
+      difficulty: 'Daily prediction',
+      player: 'City instincts',
+      image: 'berlin-pulse/assets/social/berlin-pulse-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-pulse',
+      button: 'Read the pulse',
+      accent: 'pulse'
     },
     {
       id: 'berlin-smile-challenge',
@@ -132,7 +146,7 @@
             <div class="bw-games-hero-inner">
               <p class="bw-games-kicker">Playable Berlin</p>
               <h1 id="bw-games-title">BerlinWalk Games</h1>
-              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Pick a winner, survive the first day, rewind an old photo, pass the door, or try to make Berlin smile.</p>
+              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Pick a winner, survive the first day, rewind an old photo, read today&apos;s pulse, pass the door, or try to make Berlin smile.</p>
             </div>
           </section>
 
@@ -140,7 +154,7 @@
             <div class="bw-games-section-head">
               <p class="bw-games-section-kicker">Pick your mode</p>
               <h2 id="bw-games-modes-title">Choose your way into Berlin</h2>
-              <p>Each live game has a different job: taste, first-day instinct, city memory, night pressure, or social weather.</p>
+              <p>Each live game has a different job: taste, first-day instinct, city memory, daily mood, night pressure, or social weather.</p>
             </div>
             <div class="bw-games-grid">
               ${gameCards}

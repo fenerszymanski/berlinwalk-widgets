@@ -3,7 +3,7 @@
   const BASE_URL = SCRIPT_URL
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const BUILD = 'games-preview-rail-hero-preview-20260708a';
+  const BUILD = 'games-preview-rail-pulse-20260708b';
 
   const GAMES = [
     {
@@ -41,6 +41,15 @@
       image: 'berlin-rewind/assets/social/berlin-rewind-social-1200x630.jpg',
       href: 'https://www.berlinwalk.com/games/berlin-rewind',
       cta: 'Play Rewind'
+    },
+    {
+      id: 'berlin-pulse',
+      title: 'Berlin Pulse',
+      kicker: 'Daily mood',
+      lead: 'Guess today\'s Berlin mood and see whether your city instinct lands.',
+      image: 'berlin-pulse/assets/social/berlin-pulse-social-1200x630.jpg',
+      href: 'https://www.berlinwalk.com/games/berlin-pulse',
+      cta: 'Read the pulse'
     },
     {
       id: 'berlin-smile-challenge',
