@@ -1,0 +1,135 @@
+{
+  "checkedAt": "2026-07-08T12:30:00+02:00",
+  "page": "https://www.berlinwalk.com/games/berlin-rewind",
+  "wixEmbed": {
+    "name": "BerlinWalk Berlin Rewind Page",
+    "id": "ba342e48-e239-4b7c-95cb-1789839283dc",
+    "revision": "12",
+    "enabled": true,
+    "landingRef": "4d1376d",
+    "published": true
+  },
+  "builds": {
+    "landing": "berlin-rewind-landing-v2-stable-board-20260708e",
+    "game": "berlin-rewind-v2-stable-board-20260708e",
+    "activeGameTag": "bw-berlin-rewind-result-games-v2"
+  },
+  "change": {
+    "resultAction": "Copy my score and Play other games share the secondary action row on the final result screen.",
+    "resultGamesHref": "https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games",
+    "gateScreenUnchanged": true
+  },
+  "sourceChecks": {
+    "jsdelivrLandingHasResultGamesTag": true,
+    "jsdelivrGameHasPlayOtherGames": true,
+    "dryRunHeadroom": 9234,
+    "noIframe": true,
+    "noMutationObserver": true
+  },
+  "localQa": {
+    "chromiumDesktop": {
+      "hasPlayOther": true,
+      "playOtherText": "Play other games",
+      "copyText": "Copy my score",
+      "actionPairDisplay": "grid",
+      "cardHeight": 720,
+      "cardScrollHeight": 720,
+      "screenScrollHeight": 676,
+      "pairHeight": 48,
+      "buttonRects": {
+        "copy": {
+          "width": 191,
+          "height": 48
+        },
+        "playOther": {
+          "width": 191,
+          "height": 48
+        }
+      },
+      "overflowX": 0
+    },
+    "chromiumMobile390": {
+      "hasPlayOther": true,
+      "playOtherText": "Play other games",
+      "copyText": "Copy my score",
+      "actionPairDisplay": "grid",
+      "cardHeight": 760,
+      "cardScrollHeight": 760,
+      "screenScrollHeight": 728,
+      "pairHeight": 40,
+      "buttonRects": {
+        "copy": {
+          "width": 150,
+          "height": 40
+        },
+        "playOther": {
+          "width": 150,
+          "height": 40
+        }
+      },
+      "overflowX": 0
+    },
+    "gateHasOtherAfterReload": false
+  },
+  "liveQa": {
+    "chromiumDesktop": {
+      "htmlFlag": "berlin-rewind-landing-v2-4d1376d",
+      "hasPlayOther": true,
+      "playOtherText": "Play other games",
+      "copyText": "Copy my score",
+      "actionPairDisplay": "grid",
+      "cardHeight": 720,
+      "cardScrollHeight": 720,
+      "screenScrollHeight": 676,
+      "pairHeight": 47,
+      "buttonRects": {
+        "copy": {
+          "width": 191,
+          "height": 47
+        },
+        "playOther": {
+          "width": 191,
+          "height": 47
+        }
+      },
+      "overflowX": 0
+    },
+    "chromiumMobile390": {
+      "htmlFlag": "berlin-rewind-landing-v2-4d1376d",
+      "hasPlayOther": true,
+      "playOtherText": "Play other games",
+      "copyText": "Copy my score",
+      "actionPairDisplay": "grid",
+      "cardHeight": 760,
+      "cardScrollHeight": 760,
+      "screenScrollHeight": 728,
+      "pairHeight": 40,
+      "buttonRects": {
+        "copy": {
+          "width": 150,
+          "height": 40
+        },
+        "playOther": {
+          "width": 150,
+          "height": 40
+        }
+      },
+      "overflowX": 0
+    },
+    "webkitMobile390": {
+      "hasPlayOther": true,
+      "playOtherText": "Play other games",
+      "copyText": "Copy my score",
+      "cardHeight": 760,
+      "cardScrollHeight": 760,
+      "screenScrollHeight": 728,
+      "overflowX": 0,
+      "nonRewindConsoleNoise": [
+        "GTM-N33JQJL 404",
+        "Wix panorama keepalive queue limit from older blog-journey script"
+      ]
+    },
+    "gateHasOtherAfterReload": false
+  },
+  "verdict": "PASS: Final result screen now has Play other games beside Copy my score, without increasing fixed card height or adding the action to the returning/gate screen."
+}

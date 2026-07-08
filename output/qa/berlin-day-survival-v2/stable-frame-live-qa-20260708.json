@@ -1,0 +1,159 @@
+{
+  "checkedAt": "2026-07-08T12:45:00+02:00",
+  "page": "https://www.berlinwalk.com/games/berlin-day-survival",
+  "codeCommit": "2936edb",
+  "wixEmbed": {
+    "name": "BerlinWalk Berlin Day Survival Page",
+    "id": "1c658a4d-3145-42f7-8799-73cabf2f2731",
+    "revision": "3",
+    "enabled": true,
+    "landingRef": "2936edb",
+    "published": true
+  },
+  "builds": {
+    "landing": "day-survival-landing-v2-stable-frame-20260708a",
+    "game": "day-survival-v2-stable-frame-20260708a",
+    "activeGameTag": "bw-day-survival-frame-v2",
+    "finalEmbedFlag": "day-survival-landing-final-2936edb"
+  },
+  "change": {
+    "fixedDesktopCardHeight": 720,
+    "fixedMobileCardHeight": 760,
+    "removedGameInternalScrollIntoView": true,
+    "keptLegacyTagAvailable": "bw-day-survival-v2",
+    "mountedStableLandingTag": "bw-day-survival-frame-v2"
+  },
+  "sourceChecks": {
+    "dryRunHeadroom": 8926,
+    "pathGuard": true,
+    "hidesOldWixMain": true,
+    "seoSafetyNet": true,
+    "noIframe": true,
+    "noMutationObserver": true
+  },
+  "localQa": {
+    "chromiumDesktop1280": {
+      "landingBuild": "day-survival-landing-v2-stable-frame-20260708a",
+      "gameBuild": "day-survival-v2-stable-frame-20260708a",
+      "cardHeights": [
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720
+      ],
+      "screenScrollHeights": [
+        676
+      ],
+      "maxBottomDeltaMax": -16,
+      "overflowX": 0
+    },
+    "chromiumMobile390": {
+      "landingBuild": "day-survival-landing-v2-stable-frame-20260708a",
+      "gameBuild": "day-survival-v2-stable-frame-20260708a",
+      "cardHeights": [
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760
+      ],
+      "screenScrollHeights": [
+        728
+      ],
+      "maxBottomDeltaMax": -13,
+      "overflowX": 0
+    }
+  },
+  "liveQa": {
+    "prePublishObservedOldState": {
+      "landingRef": "09c237e",
+      "landingBuild": "day-survival-landing-v2-20260707b",
+      "gameBuild": "day-survival-v2-20260707d",
+      "naturalCardHeight": 597,
+      "overflowX": 0
+    },
+    "chromiumDesktop1280": {
+      "finalMounted": true,
+      "finalBuild": "day-survival-landing-final-2936edb",
+      "landingBuild": "day-survival-landing-v2-stable-frame-20260708a",
+      "gameBuild": "day-survival-v2-stable-frame-20260708a",
+      "visibleFrameCount": 1,
+      "cardHeights": [
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720,
+        720
+      ],
+      "screenScrollHeights": [
+        676
+      ],
+      "maxBottomDeltaMax": -19,
+      "overflowX": 0,
+      "consoleErrors": 0
+    },
+    "chromiumMobile390": {
+      "finalMounted": true,
+      "finalBuild": "day-survival-landing-final-2936edb",
+      "landingBuild": "day-survival-landing-v2-stable-frame-20260708a",
+      "gameBuild": "day-survival-v2-stable-frame-20260708a",
+      "visibleFrameCount": 1,
+      "cardHeights": [
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760,
+        760
+      ],
+      "screenScrollHeights": [
+        728
+      ],
+      "maxBottomDeltaMax": -13,
+      "overflowX": 0,
+      "consoleErrors": 0
+    },
+    "hiddenStudioCopy": {
+      "description": "The older Wix Studio main can still instantiate a hidden 0x0 copy, but the visible final host count is one and the old main is display:none.",
+      "visibleFrameCount": 1,
+      "hiddenMainDisplay": "none"
+    }
+  },
+  "verdict": "PASS: Live Day Survival now mounts the stable frame build from commit 2936edb. The visible game card remains fixed at 720px on desktop and 760px on mobile across start, all six rounds, outcomes, and result screen, with overflowX 0 and no game console errors."
+}
