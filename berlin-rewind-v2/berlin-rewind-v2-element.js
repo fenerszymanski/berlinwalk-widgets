@@ -16,14 +16,14 @@
  *   <bw-berlin-rewind-v2></bw-berlin-rewind-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-restored-crosslinks-20260708a
+ * Build marker: berlin-rewind-v2-stable-board-20260708a
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'berlin-rewind-v2-restored-crosslinks-20260708a';
+  var BUILD = 'berlin-rewind-v2-stable-board-20260708a';
   var TAG = 'bw-berlin-rewind-v2';
   var STORE_KEY = 'bwRewindV2State';
   var HISTORY_MAX = 14;
@@ -201,7 +201,39 @@
     '.bw-rw-more-k{font-size:11px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--lg);margin:0 0 8px;}',
     '.bw-rw-more-links{display:flex;gap:8px;flex-wrap:wrap;}',
     '.bw-rw-more-links a{display:inline-flex;align-items:center;min-height:34px;border-radius:999px;border:1px solid rgba(197,225,165,.42);padding:8px 11px;color:var(--cream);font-size:12.5px;font-weight:800;text-decoration:none;background:rgba(255,255,255,.06);}',
-    '.bw-rw-more-links a:first-child{background:var(--y);border-color:var(--y);color:var(--gd);}'
+    '.bw-rw-more-links a:first-child{background:var(--y);border-color:var(--y);color:var(--gd);}',
+    '.bw-rw{max-width:1080px;padding:0;}',
+    '.bw-rw-card{height:720px;border-radius:18px;padding:22px;color:var(--cream);}',
+    '.bw-rw-screen.is-on{height:100%;display:flex;flex-direction:column;animation:bwrwfade .2s ease;}',
+    '.bw-rw-home-screen,.bw-rw-result-screen{max-width:720px;margin:0 auto;width:100%;justify-content:center;}',
+    '.bw-rw-home-screen .bw-rw-strip{max-width:620px;}',
+    '.bw-rw-top{margin-bottom:10px;flex:0 0 auto;}',
+    '.bw-rw-progress{margin-bottom:14px;flex:0 0 auto;}',
+    '.bw-rw-board{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,420px);gap:18px;align-items:start;min-height:0;flex:1;}',
+    '.bw-rw-photo{aspect-ratio:4/3;min-height:0;height:auto;margin:0;border-radius:14px;}',
+    '.bw-rw-photo img{width:100%;height:100%;max-height:none;object-fit:contain;background:#141414;}',
+    '.bw-rw-swap{min-height:0;background:rgba(0,0,0,.13);border:1px solid rgba(197,225,165,.16);border-radius:16px;padding:14px;display:flex;flex-direction:column;}',
+    '.bw-rw-guess-panel,.bw-rw-answer-panel{height:100%;display:flex;flex-direction:column;min-height:0;}',
+    '.bw-rw-ask{margin:0 0 8px;font-size:14px;}',
+    '.bw-rw-year{margin:0 0 8px;gap:12px;}',
+    '.bw-rw-year-val{font-size:34px;}',
+    '.bw-rw-step{width:42px;height:42px;}',
+    '.bw-rw-scale{margin-bottom:12px;}',
+    '.bw-rw-dist{gap:8px;margin-bottom:12px;}',
+    '.bw-rw-dbtn{min-height:48px;font-size:13.5px;padding:10px 7px;}',
+    '.bw-rw-guess-panel .bw-rw-btn,.bw-rw-answer-panel .bw-rw-btn{margin-top:auto;}',
+    '.bw-rw-reveal{margin:0;}',
+    '.bw-rw-rrow{margin-bottom:10px;}',
+    '.bw-rw-rbox{padding:10px;}',
+    '.bw-rw-rbox-actual{font-size:20px;}',
+    '.bw-rw-phototitle{font-size:16px;margin:0 0 7px;}',
+    '.bw-rw-picked{font-size:12.5px;line-height:1.35;color:var(--lg);margin:0 0 8px;}',
+    '.bw-rw-story{font-size:14px;line-height:1.48;margin:0 0 9px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}',
+    '.bw-rw-credit{font-size:10.5px;margin:0 0 10px;}',
+    '.bw-rw-recap{max-width:660px;width:100%;}',
+    '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-result-screen .bw-rw-recap{align-self:center}.bw-rw-result-screen .bw-rw-table{width:100%;}}',
+    '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-dbtn{min-height:46px;font-size:12.5px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}.bw-rw-more-links a{font-size:11.5px;min-height:32px;padding:7px 9px}}',
+    '@media(max-width:420px){.bw-rw-card{height:760px}.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:12px}.bw-rw-more{margin-top:10px;padding-top:10px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}}'
   ].join('');
 
   // ---------- helpers ----------
@@ -365,7 +397,7 @@
     _renderStart(st) {
       this.innerHTML =
         '<div class="bw-rw-card">' +
-          '<div class="bw-rw-screen is-on">' +
+          '<div class="bw-rw-screen is-on bw-rw-home-screen">' +
             '<p class="bw-rw-eyebrow">Berlin Rewind · Daily</p>' +
             '<h2 class="bw-rw-title">Read the photo.<br>Name the year and place.</h2>' +
             this._stripHtml() +
@@ -386,7 +418,7 @@
     _renderGate(st) {
       this.innerHTML =
         '<div class="bw-rw-card">' +
-          '<div class="bw-rw-screen is-on">' +
+          '<div class="bw-rw-screen is-on bw-rw-home-screen">' +
             '<p class="bw-rw-eyebrow">Berlin Rewind · Daily</p>' +
             '<h2 class="bw-rw-title">You’ve played<br>today’s Rewind.</h2>' +
             this._stripHtml() +
@@ -415,6 +447,51 @@
       this._renderRound();
     }
 
+    _roundControlsHtml(distHtml) {
+      return [
+        '<div class="bw-rw-guess-panel">',
+          '<p class="bw-rw-ask">1. What year is this?</p>',
+          '<div class="bw-rw-year">',
+            '<button type="button" class="bw-rw-step" data-ystep="-1" aria-label="earlier">−</button>',
+            '<span class="bw-rw-year-val" data-yearval>1955</span>',
+            '<button type="button" class="bw-rw-step" data-ystep="1" aria-label="later">+</button>',
+          '</div>',
+          '<input type="range" class="bw-rw-slider" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="1955" step="1" data-yslider>',
+          '<div class="bw-rw-scale"><span>' + YEAR_MIN + '</span><span>' + YEAR_MAX + '</span></div>',
+          '<p class="bw-rw-ask">2. Which district?</p>',
+          distHtml,
+          '<button type="button" class="bw-rw-btn" data-reveal="1" disabled>Pick a district to reveal</button>',
+        '</div>'
+      ].join('');
+    }
+
+    _revealHtml(p, yPts, yBand, dRes, isLast) {
+      var picked = (DISTRICTS[this._pickedDistrict] && DISTRICTS[this._pickedDistrict].label) || 'No district';
+      return [
+        '<div class="bw-rw-answer-panel">',
+          '<div class="bw-rw-rrow">',
+            '<div class="bw-rw-rbox">',
+              '<div class="bw-rw-rbox-k">Year</div>',
+              '<div class="bw-rw-rbox-actual">' + p.year + '</div>',
+              '<div class="bw-rw-rbox-you">You said ' + this._year + ' · ' + yBand + '</div>',
+              '<span class="bw-rw-rbox-pts">+' + yPts + '</span>',
+            '</div>',
+            '<div class="bw-rw-rbox">',
+              '<div class="bw-rw-rbox-k">District</div>',
+              '<div class="bw-rw-rbox-actual district">' + esc(DISTRICTS[p.district].label) + '</div>',
+              '<div class="bw-rw-rbox-you">' + esc(dRes.band) + '</div>',
+              '<span class="bw-rw-rbox-pts">+' + dRes.pts + '</span>',
+            '</div>',
+          '</div>',
+          '<div class="bw-rw-phototitle">' + esc(p.title) + '</div>',
+          '<p class="bw-rw-picked">You picked ' + esc(picked) + ' · correct: ' + esc(DISTRICTS[p.district].label) + '</p>',
+          '<p class="bw-rw-story">' + esc(p.story) + '</p>',
+          '<p class="bw-rw-credit">' + esc(p.credit) + ' · <a href="' + p.sourceUrl + '" target="_blank" rel="noopener">source</a></p>',
+          '<button type="button" class="bw-rw-btn" data-next="1">' + (isLast ? 'See my Berlin eye' : 'Next photo') + '</button>',
+        '</div>'
+      ].join('');
+    }
+
     _renderRound() {
       var self = this;
       var p = this._deck[this._round];
@@ -436,28 +513,20 @@
 
       this.innerHTML =
         '<div class="bw-rw-card">' +
-          '<div class="bw-rw-screen is-on">' +
+          '<div class="bw-rw-screen is-on bw-rw-play-screen">' +
             '<div class="bw-rw-top">' +
               '<span class="bw-rw-round">' + label + ' ' + (this._round + 1) + ' / ' + ROUNDS_PER_GAME + '</span>' +
               '<span class="bw-rw-scorepill">' + this._total + ' pts</span>' +
             '</div>' +
             progress +
-            '<div class="bw-rw-photo">' +
-              '<span class="bw-rw-diff">' + esc(p.difficulty) + '</span>' +
-              '<span class="bw-rw-loading" data-loading>Loading photo…</span>' +
-              '<img alt="Archival Berlin photograph to identify" data-photo src="' + this._imgUrl(p.id) + '">' +
+            '<div class="bw-rw-board">' +
+              '<div class="bw-rw-photo">' +
+                '<span class="bw-rw-diff">' + esc(p.difficulty) + '</span>' +
+                '<span class="bw-rw-loading" data-loading>Loading photo…</span>' +
+                '<img alt="Archival Berlin photograph to identify" data-photo src="' + this._imgUrl(p.id) + '">' +
+              '</div>' +
+              '<div class="bw-rw-swap" data-swap>' + this._roundControlsHtml(distHtml) + '</div>' +
             '</div>' +
-            '<p class="bw-rw-ask">1. What year is this?</p>' +
-            '<div class="bw-rw-year">' +
-              '<button type="button" class="bw-rw-step" data-ystep="-1" aria-label="earlier">−</button>' +
-              '<span class="bw-rw-year-val" data-yearval>1955</span>' +
-              '<button type="button" class="bw-rw-step" data-ystep="1" aria-label="later">+</button>' +
-            '</div>' +
-            '<input type="range" class="bw-rw-slider" min="' + YEAR_MIN + '" max="' + YEAR_MAX + '" value="1955" step="1" data-yslider>' +
-            '<div class="bw-rw-scale"><span>' + YEAR_MIN + '</span><span>' + YEAR_MAX + '</span></div>' +
-            '<p class="bw-rw-ask">2. Which district?</p>' +
-            distHtml +
-            '<button type="button" class="bw-rw-btn" data-reveal="1" disabled>Pick a district to reveal</button>' +
           '</div>' +
         '</div>';
 
@@ -489,8 +558,6 @@
         });
       });
       revealBtn.addEventListener('click', function () { if (!revealBtn.hasAttribute('disabled')) self._reveal(); });
-
-      try { this.scrollIntoView({ block: 'nearest' }); } catch (e) {}
     }
 
     _reveal() {
@@ -503,40 +570,9 @@
       this._total += roundPts;
       this._recap.push({ title: p.title, pts: roundPts });
 
-      this.querySelectorAll('[data-dist]').forEach(function (b, idx) {
-        b.setAttribute('disabled', 'disabled');
-        b.classList.remove('sel');
-        var k = self._options[idx];
-        if (k === p.district) b.classList.add('correct');
-        else if (k === self._pickedDistrict) b.classList.add('wrong');
-      });
-      this.querySelectorAll('[data-ystep],[data-yslider]').forEach(function (b) { b.setAttribute('disabled', 'disabled'); });
-
       var isLast = this._round >= ROUNDS_PER_GAME - 1;
-      var reveal = document.createElement('div');
-      reveal.className = 'bw-rw-reveal';
-      reveal.innerHTML =
-        '<div class="bw-rw-rrow">' +
-          '<div class="bw-rw-rbox">' +
-            '<div class="bw-rw-rbox-k">Year</div>' +
-            '<div class="bw-rw-rbox-actual">' + p.year + '</div>' +
-            '<div class="bw-rw-rbox-you">You said ' + this._year + ' · ' + yBand + '</div>' +
-            '<span class="bw-rw-rbox-pts">+' + yPts + '</span>' +
-          '</div>' +
-          '<div class="bw-rw-rbox">' +
-            '<div class="bw-rw-rbox-k">District</div>' +
-            '<div class="bw-rw-rbox-actual" style="font-size:16px;">' + esc(DISTRICTS[p.district].label) + '</div>' +
-            '<div class="bw-rw-rbox-you">' + esc(dRes.band) + '</div>' +
-            '<span class="bw-rw-rbox-pts">+' + dRes.pts + '</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="bw-rw-phototitle">' + esc(p.title) + '</div>' +
-        '<p class="bw-rw-story">' + esc(p.story) + '</p>' +
-        '<p class="bw-rw-credit">' + esc(p.credit) + ' · <a href="' + p.sourceUrl + '" target="_blank" rel="noopener">source</a></p>' +
-        '<button type="button" class="bw-rw-btn" data-next="1">' + (isLast ? 'See my Berlin eye' : 'Next photo') + '</button>';
-
-      var revealBtn = this.querySelector('[data-reveal]');
-      revealBtn.parentNode.replaceChild(reveal, revealBtn);
+      var swap = this.querySelector('[data-swap]');
+      if (swap) swap.innerHTML = this._revealHtml(p, yPts, yBand, dRes, isLast);
       var pill = this.querySelector('.bw-rw-scorepill');
       if (pill) pill.textContent = this._total + ' pts';
 
@@ -544,7 +580,6 @@
         if (isLast) self._renderResult();
         else { self._round += 1; self._renderRound(); }
       });
-      try { reveal.scrollIntoView({ block: 'nearest' }); } catch (e) {}
     }
 
     _renderResult() {
@@ -586,7 +621,7 @@
 
       this.innerHTML =
         '<div class="bw-rw-card">' +
-          '<div class="bw-rw-screen is-on">' +
+          '<div class="bw-rw-screen is-on bw-rw-result-screen">' +
             '<div class="bw-rw-r-emoji">' + tier.emoji + '</div>' +
             '<p class="bw-rw-r-score">' + this._total + '<span style="font-size:20px;color:var(--lg);">/' + max + '</span></p>' +
             '<p class="bw-rw-r-scoresub">' + (this._mode === 'practice' ? 'Practice score' : 'Today’s Rewind score') + '</p>' +
@@ -621,7 +656,6 @@
       if (copy) copy.addEventListener('click', doCopy);
       var copy2 = this.querySelector('[data-copy2]');
       if (copy2) copy2.addEventListener('click', doCopy);
-      try { this.scrollIntoView({ block: 'nearest' }); } catch (e) {}
     }
   }
 
