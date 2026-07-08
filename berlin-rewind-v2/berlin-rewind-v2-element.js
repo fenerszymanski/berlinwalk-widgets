@@ -15,18 +15,20 @@
  * Mount:
  *   <bw-berlin-rewind-v2></bw-berlin-rewind-v2>
  *   <bw-berlin-rewind-stable-v2></bw-berlin-rewind-stable-v2>
+ *   <bw-berlin-rewind-fit-v2></bw-berlin-rewind-fit-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-stable-board-20260708b
+ * Build marker: berlin-rewind-v2-stable-board-20260708c
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games';
-  var BUILD = 'berlin-rewind-v2-stable-board-20260708b';
+  var BUILD = 'berlin-rewind-v2-stable-board-20260708c';
   var TAG = 'bw-berlin-rewind-v2';
   var STABLE_TAG = 'bw-berlin-rewind-stable-v2';
+  var FIT_TAG = 'bw-berlin-rewind-fit-v2';
   var STORE_KEY = 'bwRewindV2State';
   var HISTORY_MAX = 14;
   var GAME_LINKS = [
@@ -233,9 +235,25 @@
     '.bw-rw-story{font-size:14px;line-height:1.48;margin:0 0 9px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}',
     '.bw-rw-credit{font-size:10.5px;margin:0 0 10px;}',
     '.bw-rw-recap{max-width:660px;width:100%;}',
-    '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-result-screen .bw-rw-recap{align-self:center}.bw-rw-result-screen .bw-rw-table{width:100%;}}',
-    '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-dbtn{min-height:46px;font-size:12.5px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}.bw-rw-more-links a{font-size:11.5px;min-height:32px;padding:7px 9px}}',
-    '@media(max-width:420px){.bw-rw-card{height:760px}.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:12px}.bw-rw-more{margin-top:10px;padding-top:10px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}}'
+    '.bw-rw-result-screen{overflow:hidden;}',
+    '.bw-rw-result-screen .bw-rw-r-emoji{font-size:46px;margin:0 0 2px;}',
+    '.bw-rw-result-screen .bw-rw-r-score{font-size:38px;}',
+    '.bw-rw-result-screen .bw-rw-r-score span{font-size:18px!important;}',
+    '.bw-rw-result-screen .bw-rw-r-scoresub{margin:0 0 8px;}',
+    '.bw-rw-result-screen .bw-rw-r-title{font-size:24px;margin:0 0 6px;}',
+    '.bw-rw-result-screen .bw-rw-r-desc{font-size:14px;line-height:1.42;margin:0 0 10px;}',
+    '.bw-rw-result-screen .bw-rw-recap{margin:0;}',
+    '.bw-rw-result-screen .bw-rw-recap-row{font-size:12.5px;padding:5px 0;}',
+    '.bw-rw-result-screen .bw-rw-tomorrow{margin:8px 0 0;}',
+    '.bw-rw-result-screen .bw-rw-table{margin:0;padding:4px 12px 7px;}',
+    '.bw-rw-result-screen .bw-rw-trow{padding:5px 0;}',
+    '.bw-rw-result-screen .bw-rw-btnrow{gap:8px;margin-top:0;}',
+    '.bw-rw-result-screen .bw-rw-btn{min-height:46px;padding:12px 14px;font-size:15px;}',
+    '.bw-rw-result-screen .bw-rw-more{margin-top:0;padding-top:10px;}',
+    '.bw-rw-result-screen .bw-rw-copied{margin-top:0;}',
+    '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-result-screen.is-on{max-width:980px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);grid-template-areas:"badge recap" "score recap" "sub recap" "title recap" "desc table" "streak table" "buttons more" "copied more";column-gap:24px;row-gap:5px;align-content:center;justify-content:stretch}.bw-rw-result-screen .bw-rw-r-emoji{grid-area:badge}.bw-rw-result-screen .bw-rw-r-score{grid-area:score}.bw-rw-result-screen .bw-rw-r-scoresub{grid-area:sub}.bw-rw-result-screen .bw-rw-r-title{grid-area:title}.bw-rw-result-screen .bw-rw-r-desc{grid-area:desc}.bw-rw-result-screen .bw-rw-recap{grid-area:recap;align-self:end;width:100%;max-width:none}.bw-rw-result-screen .bw-rw-tomorrow{grid-area:streak}.bw-rw-result-screen .bw-rw-table{grid-area:table;align-self:start;width:100%}.bw-rw-result-screen .bw-rw-btnrow{grid-area:buttons}.bw-rw-result-screen .bw-rw-more{grid-area:more;align-self:end}.bw-rw-result-screen .bw-rw-copied{grid-area:copied}}',
+    '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-dbtn{min-height:46px;font-size:12.5px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-result-screen{justify-content:flex-start}.bw-rw-result-screen .bw-rw-r-emoji{font-size:34px;margin:-2px 0 0}.bw-rw-result-screen .bw-rw-r-score{font-size:31px}.bw-rw-result-screen .bw-rw-r-score span{font-size:15px!important}.bw-rw-result-screen .bw-rw-r-scoresub{font-size:11px;margin:0 0 5px}.bw-rw-result-screen .bw-rw-r-title{font-size:20px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-r-desc{font-size:12.8px;line-height:1.34;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.bw-rw-result-screen .bw-rw-recap{padding:6px 10px;margin-bottom:0}.bw-rw-result-screen .bw-rw-recap-row{font-size:11.2px;padding:4px 0}.bw-rw-result-screen .bw-rw-tomorrow{font-size:12px;margin:6px 0}.bw-rw-result-screen .bw-rw-table{padding:2px 9px 5px;margin-bottom:0}.bw-rw-result-screen .bw-rw-table-h{font-size:9.5px;padding:7px 0 4px}.bw-rw-result-screen .bw-rw-trow{padding:4px 0}.bw-rw-result-screen .bw-rw-tdate{font-size:11px;width:104px}.bw-rw-result-screen .bw-rw-tscore{font-size:11.5px;width:44px}.bw-rw-result-screen .bw-rw-btnrow{gap:7px;margin-top:7px}.bw-rw-result-screen .bw-rw-btn{min-height:42px;padding:10px 12px;font-size:13.5px}.bw-rw-result-screen .bw-rw-more{margin-top:7px;padding-top:8px}.bw-rw-result-screen .bw-rw-more-k{font-size:9.5px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-more-links{gap:6px}.bw-rw-result-screen .bw-rw-more-links a{font-size:10.5px;min-height:28px;padding:5px 8px}.bw-rw-result-screen .bw-rw-copied{font-size:11px;min-height:13px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}.bw-rw-more-links a{font-size:11.5px;min-height:32px;padding:7px 9px}}',
+    '@media(max-width:420px){.bw-rw-card{height:760px}.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:12px}.bw-rw-more{margin-top:10px;padding-top:10px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}.bw-rw-result-screen .bw-rw-btnrow{gap:6px;margin-top:6px}.bw-rw-result-screen .bw-rw-btn{min-height:40px;padding:9px 10px;font-size:13px}.bw-rw-result-screen .bw-rw-more{margin-top:6px}.bw-rw-result-screen .bw-rw-more-links a{font-size:10px;padding:5px 7px}}'
   ].join('');
 
   // ---------- helpers ----------
@@ -372,8 +390,8 @@
       return '<div class="bw-rw-chiprow">' + chips + '</div>';
     }
 
-    _scoreTableHtml(st) {
-      var hist = (st.history || []).slice(0, 7);
+    _scoreTableHtml(st, limit) {
+      var hist = (st.history || []).slice(0, limit || 7);
       if (!hist.length) return '';
       var self = this;
       var max = ROUNDS_PER_GAME * 200;
@@ -631,7 +649,7 @@
             '<p class="bw-rw-r-desc">' + esc(tier.desc) + '</p>' +
             recapHtml +
             streakLine +
-            (this._mode === 'daily' ? this._scoreTableHtml(st) : '') +
+            (this._mode === 'daily' ? this._scoreTableHtml(st, 3) : '') +
             '<div class="bw-rw-btnrow">' +
               '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
               secondBtn +
@@ -668,5 +686,9 @@
   if (!customElements.get(STABLE_TAG)) {
     try { customElements.define(STABLE_TAG, class BWBerlinRewindStableV2 extends BWBerlinRewindV2 {}); }
     catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-stable-v2 define failed', e); } }
+  }
+  if (!customElements.get(FIT_TAG)) {
+    try { customElements.define(FIT_TAG, class BWBerlinRewindFitV2 extends BWBerlinRewindV2 {}); }
+    catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-fit-v2 define failed', e); } }
   }
 })();
