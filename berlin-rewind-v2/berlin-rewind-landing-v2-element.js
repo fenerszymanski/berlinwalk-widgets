@@ -6,15 +6,15 @@
  *   <bw-berlin-rewind-landing-v2></bw-berlin-rewind-landing-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-landing-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-landing-v2-stable-board-20260708d
+ * Build marker: berlin-rewind-landing-v2-stable-board-20260708e
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-berlin-rewind-landing-v2';
-  var GAME_TAG = 'bw-berlin-rewind-clean-v2';
-  var BUILD = 'berlin-rewind-landing-v2-stable-board-20260708d';
-  var GAME_BUILD = 'berlin-rewind-v2-stable-board-20260708d';
+  var GAME_TAG = 'bw-berlin-rewind-result-games-v2';
+  var BUILD = 'berlin-rewind-landing-v2-stable-board-20260708e';
+  var GAME_BUILD = 'berlin-rewind-v2-stable-board-20260708e';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -139,12 +139,12 @@
 
   function ensureGameScript() {
     if (customElements.get(GAME_TAG)) return;
-    var existing = document.querySelector('script[data-bw-berlin-rewind-clean-v2-loader]');
+    var existing = document.querySelector('script[data-bw-berlin-rewind-result-games-v2-loader]');
     if (existing) return;
     var script = document.createElement('script');
     script.src = BASE_URL + 'berlin-rewind-v2-element.js?v=' + encodeURIComponent(GAME_BUILD);
     script.defer = true;
-    script.dataset.bwBerlinRewindCleanV2Loader = 'true';
+    script.dataset.bwBerlinRewindResultGamesV2Loader = 'true';
     document.head.appendChild(script);
   }
 

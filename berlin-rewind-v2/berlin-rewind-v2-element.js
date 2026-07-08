@@ -17,19 +17,22 @@
  *   <bw-berlin-rewind-stable-v2></bw-berlin-rewind-stable-v2>
  *   <bw-berlin-rewind-fit-v2></bw-berlin-rewind-fit-v2>
  *   <bw-berlin-rewind-clean-v2></bw-berlin-rewind-clean-v2>
+ *   <bw-berlin-rewind-result-games-v2></bw-berlin-rewind-result-games-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-stable-board-20260708d
+ * Build marker: berlin-rewind-v2-stable-board-20260708e
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
-  var BUILD = 'berlin-rewind-v2-stable-board-20260708d';
+  var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
+  var BUILD = 'berlin-rewind-v2-stable-board-20260708e';
   var TAG = 'bw-berlin-rewind-v2';
   var STABLE_TAG = 'bw-berlin-rewind-stable-v2';
   var FIT_TAG = 'bw-berlin-rewind-fit-v2';
   var CLEAN_TAG = 'bw-berlin-rewind-clean-v2';
+  var RESULT_GAMES_TAG = 'bw-berlin-rewind-result-games-v2';
   var STORE_KEY = 'bwRewindV2State';
   var HISTORY_MAX = 14;
 
@@ -169,6 +172,8 @@
     '.bw-rw-btn.ghost{background:transparent;color:var(--cream);border:2px solid rgba(197,225,165,.5);}',
     '.bw-rw-btn.link{background:transparent;color:var(--lg);border:none;text-decoration:underline;min-height:44px;font-size:15px;}',
     '.bw-rw-btnrow{display:flex;flex-direction:column;gap:10px;margin-top:16px;}',
+    '.bw-rw-actionpair{display:grid;grid-template-columns:1fr 1fr;gap:8px;}',
+    '.bw-rw-actionpair .bw-rw-btn{width:auto;}',
     // reveal
     '.bw-rw-reveal{margin-top:6px;}',
     '.bw-rw-rrow{display:flex;gap:10px;margin-bottom:14px;}',
@@ -617,6 +622,10 @@
       var secondBtn = (this._mode === 'daily')
         ? '<button type="button" class="bw-rw-btn ghost" data-copy="1">Copy my score</button>'
         : '<button type="button" class="bw-rw-btn ghost" data-again="1">Another practice round</button>';
+      var secondaryActions = '<div class="bw-rw-actionpair">' +
+          secondBtn +
+          '<a class="bw-rw-btn ghost" href="' + GAMES_URL + '">Play other games</a>' +
+        '</div>';
 
       this.innerHTML =
         '<div class="bw-rw-card">' +
@@ -631,7 +640,7 @@
             (this._mode === 'daily' ? this._scoreTableHtml(st, 3) : '') +
             '<div class="bw-rw-btnrow">' +
               '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
-              secondBtn +
+              secondaryActions +
               (this._mode === 'practice' ? '<button type="button" class="bw-rw-btn link" data-copy2="1">Copy my score</button>' : '') +
             '</div>' +
             '<div class="bw-rw-copied" data-copied></div>' +
@@ -672,5 +681,9 @@
   if (!customElements.get(CLEAN_TAG)) {
     try { customElements.define(CLEAN_TAG, class BWBerlinRewindCleanV2 extends BWBerlinRewindV2 {}); }
     catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-clean-v2 define failed', e); } }
+  }
+  if (!customElements.get(RESULT_GAMES_TAG)) {
+    try { customElements.define(RESULT_GAMES_TAG, class BWBerlinRewindResultGamesV2 extends BWBerlinRewindV2 {}); }
+    catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-result-games-v2 define failed', e); } }
   }
 })();
