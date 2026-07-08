@@ -49,6 +49,16 @@ class BWSiteFooterElement extends HTMLElement {
   connectedCallback() {
     this._render();
     this._bindPrivacySettingsLink();
+    this._bindFooterHeightSync();
+  }
+
+  disconnectedCallback() {
+    if (this._handleFooterHeightSync) {
+      window.removeEventListener('resize', this._handleFooterHeightSync);
+      window.removeEventListener('orientationchange', this._handleFooterHeightSync);
+    }
+    if (this._footerResizeObserver) this._footerResizeObserver.disconnect();
+    if (this._footerHeightTimers) this._footerHeightTimers.forEach((timer) => window.clearTimeout(timer));
   }
 
   _render() {
@@ -56,6 +66,9 @@ class BWSiteFooterElement extends HTMLElement {
       <style>
         bw-site-footer {
           display: block;
+          height: auto !important;
+          max-height: none !important;
+          min-height: 0 !important;
           width: 100%;
         }
 
@@ -72,8 +85,10 @@ class BWSiteFooterElement extends HTMLElement {
           background: var(--green-dark);
           color: var(--cream);
           font-family: Montserrat, Arial, sans-serif;
+          height: auto !important;
           margin: 0;
           max-width: 100%;
+          min-height: 0 !important;
           overflow: hidden;
           position: relative;
         }
@@ -501,6 +516,96 @@ class BWSiteFooterElement extends HTMLElement {
     var button = this.querySelector('[data-bw-privacy-settings]');
     if (!button) return;
     button.addEventListener('click', this._openConsentSettings.bind(this));
+  }
+
+  _bindFooterHeightSync() {
+    this._footerHeightSyncPending = false;
+    this._handleFooterHeightSync = this._scheduleFooterHeightSync.bind(this);
+    window.addEventListener('resize', this._handleFooterHeightSync, { passive: true });
+    window.addEventListener('orientationchange', this._handleFooterHeightSync, { passive: true });
+
+    if ('ResizeObserver' in window) {
+      this._footerResizeObserver = new ResizeObserver(this._handleFooterHeightSync);
+      this._footerResizeObserver.observe(this);
+    }
+
+    this._footerHeightTimers = [0, 100, 500, 1400, 3000].map((delay) => (
+      window.setTimeout(this._handleFooterHeightSync, delay)
+    ));
+  }
+
+  _scheduleFooterHeightSync() {
+    if (this._footerHeightSyncPending) return;
+    this._footerHeightSyncPending = true;
+    window.requestAnimationFrame(() => {
+      this._footerHeightSyncPending = false;
+      this._syncWixFooterHeight();
+    });
+  }
+
+  _collectWixFooterShells(footer) {
+    var shells = [this, footer];
+    var parent = this.parentElement;
+
+    for (var index = 0; parent && index < 4; index += 1) {
+      shells.push(parent);
+      if (parent.tagName === 'FOOTER') break;
+      parent = parent.parentElement;
+    }
+
+    return shells.filter(function(shell, index, list) {
+      return shell && list.indexOf(shell) === index;
+    });
+  }
+
+  _measureNaturalFooterHeight(footer) {
+    var width = Math.max(280, Math.ceil(this.getBoundingClientRect().width || window.innerWidth || 390));
+    var clone = footer.cloneNode(true);
+
+    clone.setAttribute('aria-hidden', 'true');
+    clone.removeAttribute('id');
+    clone.querySelectorAll('[id]').forEach(function(node) {
+      node.removeAttribute('id');
+    });
+    clone.style.cssText = [
+      'position:absolute!important',
+      'left:-9999px!important',
+      'top:0!important',
+      'display:block!important',
+      'visibility:hidden!important',
+      'width:' + width + 'px!important',
+      'height:auto!important',
+      'min-height:0!important',
+      'max-height:none!important',
+      'overflow:visible!important'
+    ].join(';');
+
+    document.body.appendChild(clone);
+    var height = Math.ceil(Math.max(clone.getBoundingClientRect().height, clone.scrollHeight));
+    clone.remove();
+
+    return Math.min(Math.max(height + 2, 260), 2600);
+  }
+
+  _syncWixFooterHeight() {
+    var footer = this.querySelector('.bw-site-footer');
+    if (!footer) return;
+
+    var shells = this._collectWixFooterShells(footer);
+    shells.forEach(function(shell) {
+      shell.style.setProperty('background-color', '#102414', 'important');
+      shell.style.setProperty('height', 'auto', 'important');
+      shell.style.setProperty('max-height', 'none', 'important');
+      shell.style.setProperty('min-height', '0', 'important');
+    });
+
+    var height = this._measureNaturalFooterHeight(footer) + 'px';
+    shells.forEach(function(shell) {
+      shell.style.setProperty('background-color', '#102414', 'important');
+      shell.style.setProperty('height', height, 'important');
+      shell.style.setProperty('max-height', 'none', 'important');
+      shell.style.setProperty('min-height', height, 'important');
+    });
   }
 
   _openConsentSettings(event) {

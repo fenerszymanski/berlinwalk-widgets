@@ -7,6 +7,13 @@
   <meta name="description" content="A tiny Berlin social survival game. Pick the right tone and see if you can make a Berliner almost smile.">
   <link rel="stylesheet" href="../css/brand.css">
   <script defer src="../js/brand.js"></script>
+  <script>
+    try {
+      if (window.self !== window.top) document.documentElement.dataset.bwEmbedded = 'true';
+    } catch (error) {
+      document.documentElement.dataset.bwEmbedded = 'true';
+    }
+  </script>
   <style>
     :root {
       --cream: #FAFAF5;
@@ -837,6 +844,25 @@
         min-height: 36px;
         padding: 8px 6px;
       }
+
+      html[data-bw-embedded="true"],
+      html[data-bw-embedded="true"] body {
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      html[data-bw-embedded="true"] .bw-smile-game {
+        height: 100%;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      html[data-bw-embedded="true"] .bw-screen {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+      }
     }
   </style>
 </head>
@@ -847,12 +873,15 @@
 
   <script>
     (() => {
-      const BUILD = 'smile-mobile-start-top-20260707';
+      const BUILD = 'smile-embedded-height-lock-20260708';
       const DATA_URL = `data.json?v=${BUILD}`;
       const PROD_ENDPOINT = 'https://berlinwalk-content-app.vercel.app/api/smile-event';
       const LOCAL_ENDPOINT = 'http://127.0.0.1:5173/api/smile-event';
       const app = document.getElementById('app');
       const params = new URLSearchParams(window.location.search);
+      if (params.get('resize') === 'none' || params.get('attribution') === 'none') {
+        document.documentElement.dataset.bwEmbedded = 'true';
+      }
       const isLocal = ['localhost', '127.0.0.1', ''].includes(window.location.hostname);
       const trackingEndpoint = isLocal
         ? (params.get('tracking') === 'local' ? LOCAL_ENDPOINT : '')

@@ -2,7 +2,7 @@ const SCRIPT_URL = document.currentScript && document.currentScript.src ? docume
 const BASE_URL = SCRIPT_URL
   ? new URL('../', SCRIPT_URL).toString()
   : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-const ASSET_BUILD = 'smile-mobile-start-top-20260707';
+const ASSET_BUILD = 'smile-embedded-height-lock-20260708';
 const GAMES_PREVIEW_BUILD = 'games-preview-rail-hero-preview-20260708a';
 
 function loadGamesPreviewRail(callback) {
@@ -32,6 +32,8 @@ class BwBerlinSmileChallengePage extends HTMLElement {
   disconnectedCallback() {
     if (this._messageHandler) window.removeEventListener('message', this._messageHandler);
     if (this._handleHostResize) window.removeEventListener('resize', this._handleHostResize);
+    const iframe = this.querySelector('.bw-smile-frame');
+    if (iframe && this._handleHostResize) iframe.removeEventListener('load', this._handleHostResize);
     if (this._resizeObserver) this._resizeObserver.disconnect();
     if (this._timers) this._timers.forEach((timer) => window.clearTimeout(timer));
   }
@@ -58,6 +60,8 @@ class BwBerlinSmileChallengePage extends HTMLElement {
         bw-berlin-smile-challenge-page {
           display: block;
           width: 100%;
+          height: auto !important;
+          min-height: 0 !important;
           background:
             linear-gradient(115deg, rgba(230, 57, 70, 0.12) 0 18%, transparent 18% 100%),
             repeating-linear-gradient(90deg, rgba(16, 46, 56, 0.055) 0 1px, transparent 1px 44px),
@@ -362,10 +366,18 @@ class BwBerlinSmileChallengePage extends HTMLElement {
 
     this._handleHostResize = () => this._syncWixHostHeight();
     window.addEventListener('resize', this._handleHostResize, { passive: true });
+    iframe.addEventListener('load', this._handleHostResize, { once: false });
+    const page = this.querySelector('.bw-smile-page');
+    if (page && 'ResizeObserver' in window) {
+      this._resizeObserver = new ResizeObserver(this._handleHostResize);
+      this._resizeObserver.observe(page);
+    }
     this._renderGamesPreview();
     this._syncWixHostHeight();
     this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 100));
     this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 800));
+    this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 1800));
+    this._timers.push(window.setTimeout(() => this._syncWixHostHeight(), 3200));
   }
 
   _renderGamesPreview() {
@@ -393,15 +405,14 @@ class BwBerlinSmileChallengePage extends HTMLElement {
     const page = this.querySelector('.bw-smile-page');
     const height = page ? Math.ceil(page.getBoundingClientRect().height + 24) : 900;
     const isDesktop = window.matchMedia('(min-width: 941px)').matches;
+    const minHeight = isDesktop ? 900 : Math.max(620, Math.min(height, window.innerHeight || 844));
+    const maxHeight = isDesktop ? 2400 : 3400;
+    const targetHeight = `${Math.min(Math.max(height, minHeight), maxHeight)}px`;
+
     targets.forEach((target) => {
-      if (isDesktop) {
-        const targetHeight = `${Math.min(Math.max(height, 900), 2400)}px`;
-        target.style.setProperty('height', targetHeight, 'important');
-        target.style.setProperty('min-height', targetHeight, 'important');
-      } else {
-        target.style.removeProperty('height');
-        target.style.removeProperty('min-height');
-      }
+      target.style.setProperty('height', targetHeight, 'important');
+      target.style.setProperty('min-height', targetHeight, 'important');
+      target.style.setProperty('max-height', 'none', 'important');
     });
   }
 
