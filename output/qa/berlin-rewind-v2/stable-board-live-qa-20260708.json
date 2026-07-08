@@ -1,0 +1,67 @@
+{
+  "runAt": "2026-07-08T10:40:35+02:00",
+  "url": "https://www.berlinwalk.com/games/berlin-rewind",
+  "wixCustomCode": {
+    "name": "BerlinWalk Berlin Rewind Page",
+    "id": "ba342e48-e239-4b7c-95cb-1789839283dc",
+    "revision": "9",
+    "landingRef": "c3fee01",
+    "published": true
+  },
+  "builds": {
+    "landing": "berlin-rewind-landing-v2-stable-board-20260708b",
+    "game": "berlin-rewind-v2-stable-board-20260708b",
+    "activeGameTag": "bw-berlin-rewind-stable-v2"
+  },
+  "chromiumMobile390x844": {
+    "steps": [
+      { "label": "start", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r1-guess", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r1-reveal", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r2-guess", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r2-reveal", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 }
+    ],
+    "maxCardDelta": 0,
+    "maxDocumentDelta": 0,
+    "gameTopWithinOneViewport": true,
+    "consoleErrors": 0
+  },
+  "chromiumDesktop1280x900": {
+    "steps": [
+      { "label": "start", "cardH": 720, "docH": 3276, "gameTop": 638, "gameTopViewportRatio": 0.709, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r1-guess", "cardH": 720, "docH": 3276, "gameTop": 638, "gameTopViewportRatio": 0.709, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r1-reveal", "cardH": 720, "docH": 3276, "gameTop": 638, "gameTopViewportRatio": 0.709, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r2-guess", "cardH": 720, "docH": 3276, "gameTop": 638, "gameTopViewportRatio": 0.709, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r2-reveal", "cardH": 720, "docH": 3276, "gameTop": 638, "gameTopViewportRatio": 0.709, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 }
+    ],
+    "maxCardDelta": 0,
+    "maxDocumentDelta": 0,
+    "consoleErrors": 0
+  },
+  "webkitMobile390x844": {
+    "steps": [
+      { "label": "start", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r1-guess", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r1-reveal", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r2-guess", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 },
+      { "label": "r2-reveal", "cardH": 760, "docH": 5128, "gameTop": 602, "gameTopViewportRatio": 0.713, "overflowX": 0, "frameCount": 0, "badScrollContainers": 0 }
+    ],
+    "maxCardDelta": 0,
+    "maxDocumentDelta": 0,
+    "gameTopWithinOneViewport": true,
+    "gameConsoleErrors": 0,
+    "siteWideExternalConsoleErrors": [
+      "GTM-N33JQJL returned 404 in WebKit",
+      "Wix frog/bolt-performance keepalive queue limit in WebKit"
+    ]
+  },
+  "staticAndBehaviorChecks": {
+    "gameScrollIntoViewCount": 0,
+    "landingScrollIntoViewOnlyAnchor": true,
+    "gameFrameOrSlotCount": 0,
+    "overflowAutoInRewindSources": 0,
+    "dailyGatePracticeScoreSmoke": "passed locally before publish",
+    "nodeCheck": "passed",
+    "gitDiffCheck": "passed"
+  }
+}
