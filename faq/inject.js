@@ -181,7 +181,9 @@
   "potsdam-from-berlin-day-trip": "potsdam-from-berlin-day-trip",
   "potsdam-from-berlin-train-tickets-and-sanssouci-day-trip-plan": "potsdam-from-berlin-day-trip",
   "e-scooters-in-berlin": "e-scooters-in-berlin",
-  "e-scooters-in-berlin-how-to-rent-one-and-the-rules-that-actually-get-you-fined": "e-scooters-in-berlin"
+  "e-scooters-in-berlin-how-to-rent-one-and-the-rules-that-actually-get-you-fined": "e-scooters-in-berlin",
+  "renting-a-bike-in-berlin": "renting-a-bike-in-berlin",
+  "renting-a-bike-in-berlin-which-option-actually-fits-your-trip": "renting-a-bike-in-berlin"
 };
 
   var SCHEMAS = {
@@ -8521,6 +8523,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "You do not need a driving licence to ride a rental e-scooter, and helmets are not legally required (though I would wear one). The legal minimum age to ride is 14. In practice most rental apps require you to be 18 to unlock a scooter, and you always ride one person at a time."
+        }
+      }
+    ]
+  },
+  "renting-a-bike-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the cheapest way to rent a bike in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For classic pedal bikes, Nextbike is usually the cheapest, at around 1 EUR per 15 minutes with day passes that lower the cost if you ride on and off all day. For a full day of relaxed riding, a bike-shop day rental (about 10 to 15 EUR) or Donkey Republic's day pass (from about 12 EUR) is better value than the per-minute e-bike apps."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do free-floating rental bikes work in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Operators like Bolt, Dott and Lime run electric bikes with no docking station. You download the app, add a payment card, scan the QR code on the frame to unlock, ride, then park at a normal pavement edge and end the trip in the app. Pricing is per minute, usually about a 1 EUR unlock plus roughly 20 to 30 cents a minute, so check the app before you ride."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Nextbike S-Bahn ring rule?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can always end a Nextbike ride at a Nextbike station. Within the S-Bahn ring you can also leave the bike parked on any normal public street where it is clearly visible. But if you finish the ride outside the S-Bahn ring and away from a station, the app charges an extra fee of around 20 EUR. The historic centre sits well inside the ring, so this mainly catches people who cycle out to the suburbs or a lake."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where are the best places to cycle in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tiergarten, the big central park, is a calm green crossing through the city. Tempelhofer Feld, the old airport, is a flat open runway you can actually cycle on. The Berlin Wall trail and the East Side Gallery along the Spree give you history at bike pace. Berlin has wide protected bike lanes on most main routes, but keep right, signal turns, and never ride on the pavement."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Swapfiets worth it for a short trip?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Swapfiets, the bikes with a distinctive blue front tyre, is a monthly subscription where you pay a fixed fee and get your own bike with repairs included. It is good value only if you are staying in Berlin for several weeks or longer. For a normal city break, use Nextbike, a day rental, or a free-floating e-bike instead."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a helmet or licence to rent a bike in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You do not need a licence to rent an ordinary bike or a rental e-bike, and helmets are not legally required for bikes, though I would wear one on cobbles. Ride in the bike lane or on the road, not the pavement, and treat a rental e-bike as a vehicle: riding after drinking is taken seriously, the same as with e-scooters."
         }
       }
     ]

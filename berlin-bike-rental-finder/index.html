@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Berlin Bike Rental Finder</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="../css/brand.css">
+<script defer src="../js/brand.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  body { padding: 14px 12px 4px; margin: 0; color: var(--bw-text, #22331f); font-family: Montserrat, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  .bw-brf { max-width: 620px; margin: 0 auto; background: var(--bw-white, #fff); border: 1px solid var(--bw-border, #e2e6dd); border-radius: 18px; overflow: hidden; }
+  .bw-brf-head { background: linear-gradient(135deg, var(--bw-green, #1B5E20) 0%, var(--bw-green-dark, #123f16) 100%); color: #fff; padding: 18px 18px 16px; }
+  .bw-brf-kicker { font-size: 10.5px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--bw-yellow, #FFE600); margin: 0 0 6px; }
+  .bw-brf-title { font-size: 19px; font-weight: 800; margin: 0 0 6px; line-height: 1.25; }
+  .bw-brf-sub { font-size: 13px; line-height: 1.5; margin: 0; opacity: .92; }
+  .bw-brf-body { padding: 16px 16px 6px; }
+  .bw-q { margin: 0 0 15px; }
+  .bw-q-label { font-size: 12.5px; font-weight: 800; color: var(--bw-green-dark, #123f16); margin: 0 0 8px; display: flex; gap: 7px; align-items: baseline; }
+  .bw-q-num { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; border-radius: 50%; background: var(--bw-lime, #7CB342); color: #fff; font-size: 11px; font-weight: 800; flex: none; }
+  .bw-opts { display: flex; flex-wrap: wrap; gap: 7px; }
+  .bw-opt { flex: 1 1 auto; min-width: 0; border: 1.5px solid var(--bw-border, #e2e6dd); background: #fff; color: var(--bw-text, #26331f); border-radius: 11px; padding: 9px 10px; font-size: 12.5px; font-weight: 600; cursor: pointer; line-height: 1.25; transition: all .12s ease; text-align: center; }
+  .bw-opt:hover { border-color: var(--bw-lime, #7CB342); }
+  .bw-opt[aria-pressed="true"] { background: var(--bw-green, #1B5E20); border-color: var(--bw-green, #1B5E20); color: #fff; }
+  .bw-result { margin: 4px 0 8px; border: 1px solid var(--bw-border, #e2e6dd); border-radius: 14px; overflow: hidden; background: var(--bw-cream, #f7f9f2); }
+  .bw-result-top { padding: 14px 15px 12px; border-bottom: 1px dashed var(--bw-border, #d7ddcf); }
+  .bw-pick-flag { font-size: 10.5px; font-weight: 800; letter-spacing: 1.2px; text-transform: uppercase; color: var(--bw-lime, #5f9636); margin: 0 0 3px; }
+  .bw-pick-name { font-size: 17px; font-weight: 800; color: var(--bw-green-dark, #123f16); margin: 0 0 6px; line-height: 1.2; }
+  .bw-pick-why { font-size: 13px; line-height: 1.5; margin: 0 0 9px; }
+  .bw-pick-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .bw-chip { font-size: 11.5px; font-weight: 700; padding: 4px 9px; border-radius: 999px; background: #fff; border: 1px solid var(--bw-border, #e2e6dd); }
+  .bw-chip.price { background: var(--bw-yellow, #FFE600); border-color: #e6cf00; color: #3a3300; }
+  .bw-chip.watch { background: #fff4f2; border-color: #f3c9c1; color: #a2331f; }
+  .bw-runner { padding: 10px 15px; font-size: 12px; line-height: 1.5; color: var(--bw-muted, #5c6653); }
+  .bw-runner b { color: var(--bw-green-dark, #123f16); }
+  .bw-cost { padding: 12px 15px 14px; }
+  .bw-cost-h { font-size: 11px; font-weight: 800; letter-spacing: .6px; text-transform: uppercase; color: var(--bw-green-dark, #123f16); margin: 0 0 9px; }
+  .bw-bar-row { display: flex; align-items: center; gap: 8px; margin: 0 0 7px; }
+  .bw-bar-name { width: 118px; flex: none; font-size: 11.5px; font-weight: 700; }
+  .bw-bar-track { flex: 1; height: 12px; background: #e8ede0; border-radius: 999px; overflow: hidden; }
+  .bw-bar-fill { height: 100%; border-radius: 999px; transition: width .35s ease; background: var(--bw-lime, #7CB342); }
+  .bw-bar-fill.best { background: var(--bw-green, #1B5E20); }
+  .bw-bar-fill.pricey { background: var(--bw-yellow, #FFE600); }
+  .bw-cost-note { font-size: 11px; color: var(--bw-muted, #6b7563); margin: 8px 0 0; line-height: 1.45; }
+  .bw-foot { font-size: 11.5px; line-height: 1.5; color: var(--bw-muted, #5c6653); padding: 2px 2px 10px; }
+  .bw-foot a { color: var(--bw-green, #1B5E20); font-weight: 700; }
+  @media (max-width: 430px) {
+    .bw-opt { flex: 1 1 46%; }
+    .bw-bar-name { width: 96px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<div class="bw-brf">
+  <div class="bw-brf-head">
+    <p class="bw-brf-kicker">BerlinWalk • Free Berlin Tool</p>
+    <h1 class="bw-brf-title">Berlin Bike Rental Finder</h1>
+    <p class="bw-brf-sub">Four ways to rent a bike in Berlin, and the cheapest one depends on your trip. Answer three quick questions and I'll point you to the right system.</p>
+  </div>
+  <div class="bw-brf-body">
+    <div class="bw-q" data-q="duration">
+      <p class="bw-q-label"><span class="bw-q-num">1</span> How long will you ride?</p>
+      <div class="bw-opts">
+        <button class="bw-opt" data-v="hop" aria-pressed="true">Quick hop, under 15 min</button>
+        <button class="bw-opt" data-v="hours">A few hours</button>
+        <button class="bw-opt" data-v="day">A full day</button>
+        <button class="bw-opt" data-v="weeks">Weeks in Berlin</button>
+      </div>
+    </div>
+    <div class="bw-q" data-q="type">
+      <p class="bw-q-label"><span class="bw-q-num">2</span> Electric or pedal?</p>
+      <div class="bw-opts">
+        <button class="bw-opt" data-v="any" aria-pressed="true">No preference</button>
+        <button class="bw-opt" data-v="electric">I want electric</button>
+        <button class="bw-opt" data-v="pedal">Happy to pedal</button>
+      </div>
+    </div>
+    <div class="bw-q" data-q="where">
+      <p class="bw-q-label"><span class="bw-q-num">3</span> Where are you riding?</p>
+      <div class="bw-opts">
+        <button class="bw-opt" data-v="central" aria-pressed="true">Central, inside the S-Bahn ring</button>
+        <button class="bw-opt" data-v="out">Out to a lake or the suburbs</button>
+      </div>
+    </div>
+
+    <div class="bw-result" id="bwResult"><!-- filled by JS --></div>
+
+    <p class="bw-foot">Prices are guides that shift with each operator, so always check the app before you ride. Full breakdown in my <a href="https://www.berlinwalk.com/post/renting-a-bike-in-berlin" target="_blank" rel="noopener">renting a bike in Berlin</a> guide.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  var state = { duration: 'hop', type: 'any', where: 'central' };
+
+  var OPTS = {
+    efree:   { name: 'Free-floating e-bike', price: '~1 EUR unlock + per-minute', line: 'Bolt, Dott or Lime. Unlock by app, leave it anywhere.' },
+    nextbike:{ name: 'Nextbike day pass',    price: '~1 EUR / 15 min, cheaper day passes', line: 'Station network of simple pedal bikes, best value classic ride.' },
+    dayrent: { name: 'Day rental',           price: 'Donkey ~12 EUR/day or shop ~10-15 EUR', line: 'Donkey Republic pass or a bike shop: grab it once, ride all day.' },
+    swap:    { name: 'Swapfiets subscription', price: 'Fixed monthly fee, repairs included', line: 'Your own bike for as long as you stay.' }
+  };
+
+  // qualitative cost "shape" per option at each duration (lower value = cheaper/better fit -> longer green bar)
+  // stored as a fit score 0-100 (higher = better value for that duration)
+  var FIT = {
+    hop:   { efree: 92, nextbike: 70, dayrent: 30, swap: 8 },
+    hours: { efree: 45, nextbike: 88, dayrent: 78, swap: 14 },
+    day:   { efree: 22, nextbike: 74, dayrent: 94, swap: 30 },
+    weeks: { efree: 10, nextbike: 40, dayrent: 35, swap: 96 }
+  };
+
+  function score() {
+    var base = Object.assign({}, FIT[state.duration]);
+    // type preference nudges
+    if (state.type === 'electric') { base.efree += 38; base.swap += 6; base.nextbike -= 35; base.dayrent -= 6; }
+    if (state.type === 'pedal')    { base.nextbike += 16; base.dayrent += 14; base.efree -= 30; }
+    // location: going outside the ring penalises Nextbike (drop-off fee) and free-float coverage
+    if (state.where === 'out')     { base.nextbike -= 30; base.efree -= 22; base.dayrent += 12; base.swap += 4; }
+    for (var k in base) base[k] = Math.max(2, Math.min(100, base[k]));
+    return base;
+  }
+
+  function watchFor(key) {
+    if (key === 'nextbike') {
+      return state.where === 'out'
+        ? 'Watch-out: ending outside the S-Bahn ring away from a station adds ~20 EUR.'
+        : 'Watch-out: inside the ring you can end at a normal kerb; outside it, use a station.';
+    }
+    if (key === 'efree') return 'Watch-out: great for short hops, pricey once you ride past 15-20 min.';
+    if (key === 'dayrent') return 'Watch-out: fixed for the day, so plan to keep it out and about.';
+    if (key === 'swap') return 'Watch-out: only worth it for stays of several weeks or more.';
+    return '';
+  }
+
+  function render() {
+    var s = score();
+    var ranked = Object.keys(s).sort(function (a, b) { return s[b] - s[a]; });
+    var top = ranked[0], runner = ranked[1];
+    var maxScore = s[top];
+
+    var bars = ranked.map(function (k, i) {
+      var pct = Math.round(s[k]);
+      var cls = k === top ? 'best' : (pct <= 25 ? 'pricey' : '');
+      return '<div class="bw-bar-row"><span class="bw-bar-name">' + OPTS[k].name + '</span>' +
+        '<span class="bw-bar-track"><span class="bw-bar-fill ' + cls + '" style="width:' + pct + '%"></span></span></div>';
+    }).join('');
+
+    var html =
+      '<div class="bw-result-top">' +
+        '<p class="bw-pick-flag">Best fit for your trip</p>' +
+        '<p class="bw-pick-name">' + OPTS[top].name + '</p>' +
+        '<p class="bw-pick-why">' + OPTS[top].line + '</p>' +
+        '<div class="bw-pick-meta">' +
+          '<span class="bw-chip price">' + OPTS[top].price + '</span>' +
+          '<span class="bw-chip watch">' + watchFor(top).replace('Watch-out: ', '') + '</span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="bw-runner">Close second: <b>' + OPTS[runner].name + '</b>. ' + OPTS[runner].line + '</div>' +
+      '<div class="bw-cost">' +
+        '<p class="bw-cost-h">How each option fits this trip</p>' + bars +
+        '<p class="bw-cost-note">Longer green bar = better value for what you picked. This is a rough guide from a Berlin guide, not a live price feed.</p>' +
+      '</div>';
+
+    document.getElementById('bwResult').innerHTML = html;
+  }
+
+  document.querySelectorAll('.bw-q').forEach(function (q) {
+    var key = q.getAttribute('data-q');
+    q.querySelectorAll('.bw-opt').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        q.querySelectorAll('.bw-opt').forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
+        btn.setAttribute('aria-pressed', 'true');
+        state[key] = btn.getAttribute('data-v');
+        render();
+      });
+    });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
