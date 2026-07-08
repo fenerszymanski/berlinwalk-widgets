@@ -18,7 +18,9 @@ const BW_HEADER_LINKS = {
   blog: 'https://www.berlinwalk.com/blog',
   widgets: 'https://www.berlinwalk.com/widgets',
   faq: 'https://www.berlinwalk.com/#faq',
-  firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan'
+  firstDayRescue: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
+  hiddenBerlinAudio: 'https://www.berlinwalk.com/products/hidden-berlin-audio-route',
+  deathStripAudio: 'https://www.berlinwalk.com/products/death-strip-audio-route'
 };
 
 class BWHeaderElement extends HTMLElement {
@@ -885,6 +887,8 @@ class BWHeaderElement extends HTMLElement {
                   </button>
                   <ul class="bw-header-submenu" role="menu">
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan <span class="bw-badge-new">New</span></a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.hiddenBerlinAudio}">Hidden Berlin Audio Route</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.deathStripAudio}">Berlin Wall: The Death Strip</a></li>
                   </ul>
                 </li>
                 <li class="bw-header-dropdown">
@@ -944,6 +948,8 @@ class BWHeaderElement extends HTMLElement {
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Products</div>
                 <a href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan <span class="bw-badge-new">New</span></a>
+                <a href="${BW_HEADER_LINKS.hiddenBerlinAudio}">Hidden Berlin Audio Route</a>
+                <a href="${BW_HEADER_LINKS.deathStripAudio}">Berlin Wall: The Death Strip</a>
               </div>
 
               <div class="bw-header-mobile-section">
