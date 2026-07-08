@@ -886,9 +886,9 @@ class BWHeaderElement extends HTMLElement {
                     Products <span class="bw-header-caret" aria-hidden="true">⌄</span>
                   </button>
                   <ul class="bw-header-submenu" role="menu">
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan <span class="bw-badge-new">New</span></a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.hiddenBerlinAudio}">Hidden Berlin Audio Route</a></li>
-                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.deathStripAudio}">Berlin Wall: The Death Strip</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.hiddenBerlinAudio}">🎧 Hidden Berlin Audio Route</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.deathStripAudio}">🎧 Berlin Wall: The Death Strip Audio Route</a></li>
                   </ul>
                 </li>
                 <li class="bw-header-dropdown">
@@ -947,9 +947,9 @@ class BWHeaderElement extends HTMLElement {
 
               <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Products</div>
-                <a href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan <span class="bw-badge-new">New</span></a>
-                <a href="${BW_HEADER_LINKS.hiddenBerlinAudio}">Hidden Berlin Audio Route</a>
-                <a href="${BW_HEADER_LINKS.deathStripAudio}">Berlin Wall: The Death Strip</a>
+                <a href="${BW_HEADER_LINKS.firstDayRescue}">Berlin First-Day Rescue Plan</a>
+                <a href="${BW_HEADER_LINKS.hiddenBerlinAudio}">🎧 Hidden Berlin Audio Route</a>
+                <a href="${BW_HEADER_LINKS.deathStripAudio}">🎧 Berlin Wall: The Death Strip Audio Route</a>
               </div>
 
               <div class="bw-header-mobile-section">
