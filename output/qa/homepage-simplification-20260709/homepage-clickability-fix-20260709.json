@@ -1,0 +1,280 @@
+{
+  "url": "https://www.berlinwalk.com/?bwqa=click-trial-verify-1783598828924",
+  "state": {
+    "booking": "homepage-booking-calendar-swap-20260709b",
+    "productsExplore": "homepage-products-explore-custom-20260709p",
+    "productCount": 3,
+    "exploreCount": 4,
+    "bookingCtaHref": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar",
+    "firstProductHref": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan",
+    "firstExploreHref": "https://www.berlinwalk.com/berlin-tools",
+    "overflowX": 0
+  },
+  "results": [
+    {
+      "name": "booking-day",
+      "selector": ".bw-home-booking-custom .bw-cal-day:not([disabled])",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "BUTTON",
+          "id": "",
+          "cls": "bw-cal-day is-active",
+          "text": "THU 9 Jul",
+          "pe": "auto",
+          "href": ""
+        },
+        "rect": {
+          "x": 339,
+          "y": 419,
+          "w": 62,
+          "h": 62
+        },
+        "point": {
+          "x": 370,
+          "y": 450
+        },
+        "hit": {
+          "tag": "B",
+          "id": "",
+          "cls": "",
+          "text": "9",
+          "pe": "auto",
+          "href": ""
+        },
+        "nearest": {
+          "tag": "BUTTON",
+          "id": "",
+          "cls": "bw-cal-day is-active",
+          "text": "THU 9 Jul",
+          "pe": "auto",
+          "href": ""
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    },
+    {
+      "name": "booking-cta",
+      "selector": ".bw-home-booking-custom a.bw-cal-cta[href]",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-cal-cta",
+          "text": "Reserve your spot",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar"
+        },
+        "rect": {
+          "x": 303,
+          "y": 625.03125,
+          "w": 674,
+          "h": 42
+        },
+        "point": {
+          "x": 640,
+          "y": 646.03125
+        },
+        "hit": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-cal-cta",
+          "text": "Reserve your spot",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar"
+        },
+        "nearest": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-cal-cta",
+          "text": "Reserve your spot",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar"
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    },
+    {
+      "name": "product-card",
+      "selector": "a.bw-home-product-card",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-home-product-card",
+          "text": "BEFORE YOU LAND Berlin First-Day Rescue Plan Your first day in Berlin, planned before you land: airport arrival, the rig",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan"
+        },
+        "rect": {
+          "x": 74,
+          "y": 274.890625,
+          "w": 365.328125,
+          "h": 349.90625
+        },
+        "point": {
+          "x": 256.6640625,
+          "y": 449.84375
+        },
+        "hit": {
+          "tag": "P",
+          "id": "",
+          "cls": "",
+          "text": "Your first day in Berlin, planned before you land: airport arrival, the right ticket, food near your hotel, and the day-",
+          "pe": "auto",
+          "href": ""
+        },
+        "nearest": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-home-product-card",
+          "text": "BEFORE YOU LAND Berlin First-Day Rescue Plan Your first day in Berlin, planned before you land: airport arrival, the rig",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan"
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    },
+    {
+      "name": "product-cta",
+      "selector": "a.bw-home-product-card .bw-home-product-cta",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "bw-home-product-cta",
+          "text": "Get my first-day plan",
+          "pe": "auto",
+          "href": ""
+        },
+        "rect": {
+          "x": 99,
+          "y": 553.796875,
+          "w": 184.90625,
+          "h": 44
+        },
+        "point": {
+          "x": 191.453125,
+          "y": 575.796875
+        },
+        "hit": {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "bw-home-product-cta",
+          "text": "Get my first-day plan",
+          "pe": "auto",
+          "href": ""
+        },
+        "nearest": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-home-product-card",
+          "text": "BEFORE YOU LAND Berlin First-Day Rescue Plan Your first day in Berlin, planned before you land: airport arrival, the rig",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan"
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    },
+    {
+      "name": "explore-card",
+      "selector": "a.bw-home-explore-card",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-home-explore-card",
+          "text": "Berlin Tools Free planners and checkers: tickets, fines, parking, museums. →",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/berlin-tools"
+        },
+        "rect": {
+          "x": 74,
+          "y": 345.921875,
+          "w": 272.5,
+          "h": 207.296875
+        },
+        "point": {
+          "x": 210.25,
+          "y": 449.5703125
+        },
+        "hit": {
+          "tag": "P",
+          "id": "",
+          "cls": "",
+          "text": "Free planners and checkers: tickets, fines, parking, museums.",
+          "pe": "auto",
+          "href": ""
+        },
+        "nearest": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-home-explore-card",
+          "text": "Berlin Tools Free planners and checkers: tickets, fines, parking, museums. →",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/berlin-tools"
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    },
+    {
+      "name": "explore-arrow",
+      "selector": "a.bw-home-explore-card .bw-home-explore-arrow",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "bw-home-explore-arrow",
+          "text": "→",
+          "pe": "auto",
+          "href": ""
+        },
+        "rect": {
+          "x": 97,
+          "y": 494.21875,
+          "w": 34,
+          "h": 34
+        },
+        "point": {
+          "x": 114,
+          "y": 511.21875
+        },
+        "hit": {
+          "tag": "SPAN",
+          "id": "",
+          "cls": "bw-home-explore-arrow",
+          "text": "→",
+          "pe": "auto",
+          "href": ""
+        },
+        "nearest": {
+          "tag": "A",
+          "id": "",
+          "cls": "bw-home-explore-card",
+          "text": "Berlin Tools Free planners and checkers: tickets, fines, parking, museums. →",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/berlin-tools"
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    }
+  ],
+  "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/homepage-clickability-trial-20260709.png"
+}

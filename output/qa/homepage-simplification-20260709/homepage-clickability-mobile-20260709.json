@@ -1,0 +1,153 @@
+{
+  "url": "https://www.berlinwalk.com/?bwqa=mobile-click-verify-1783598897646",
+  "state": {
+    "booking": "homepage-booking-calendar-swap-20260709b",
+    "productsExplore": "homepage-products-explore-custom-20260709p",
+    "productCount": 3,
+    "exploreCount": 4,
+    "overflowX": 0
+  },
+  "results": [
+    {
+      "name": "booking-day",
+      "selector": ".bw-home-booking-custom .bw-cal-day:not([disabled])",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "BUTTON",
+          "cls": "bw-cal-day is-active",
+          "text": "THU 9 Jul",
+          "pe": "auto",
+          "href": ""
+        },
+        "point": {
+          "x": 96,
+          "y": 422.015625
+        },
+        "hit": {
+          "tag": "B",
+          "cls": "",
+          "text": "9",
+          "pe": "auto",
+          "href": ""
+        },
+        "nearest": {
+          "tag": "BUTTON",
+          "cls": "bw-cal-day is-active",
+          "text": "THU 9 Jul",
+          "pe": "auto",
+          "href": ""
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    },
+    {
+      "name": "booking-cta",
+      "selector": ".bw-home-booking-custom a.bw-cal-cta[href]",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "A",
+          "cls": "bw-cal-cta",
+          "text": "Reserve your spot",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar"
+        },
+        "point": {
+          "x": 195,
+          "y": 632.890625
+        },
+        "hit": {
+          "tag": "A",
+          "cls": "bw-cal-cta",
+          "text": "Reserve your spot",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar"
+        },
+        "nearest": {
+          "tag": "A",
+          "cls": "bw-cal-cta",
+          "text": "Reserve your spot",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar"
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    },
+    {
+      "name": "product-card",
+      "selector": "a.bw-home-product-card",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "A",
+          "cls": "bw-home-product-card",
+          "text": "BEFORE YOU LAND Berlin First-Day Rescue Plan Your first day in Berlin, planned before you land: airp",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan"
+        },
+        "point": {
+          "x": 195,
+          "y": 421.71875
+        },
+        "hit": {
+          "tag": "P",
+          "cls": "",
+          "text": "Your first day in Berlin, planned before you land: airport arrival, the right ticket, food near your",
+          "pe": "auto",
+          "href": ""
+        },
+        "nearest": {
+          "tag": "A",
+          "cls": "bw-home-product-card",
+          "text": "BEFORE YOU LAND Berlin First-Day Rescue Plan Your first day in Berlin, planned before you land: airp",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan"
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    },
+    {
+      "name": "explore-card",
+      "selector": "a.bw-home-explore-card",
+      "exists": true,
+      "point": {
+        "element": {
+          "tag": "A",
+          "cls": "bw-home-explore-card",
+          "text": "Berlin Tools Free planners and checkers: tickets, fines, parking, museums. →",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/berlin-tools"
+        },
+        "point": {
+          "x": 195,
+          "y": 419.921875
+        },
+        "hit": {
+          "tag": "P",
+          "cls": "",
+          "text": "Free planners and checkers: tickets, fines, parking, museums.",
+          "pe": "auto",
+          "href": ""
+        },
+        "nearest": {
+          "tag": "A",
+          "cls": "bw-home-explore-card",
+          "text": "Berlin Tools Free planners and checkers: tickets, fines, parking, museums. →",
+          "pe": "auto",
+          "href": "https://www.berlinwalk.com/berlin-tools"
+        }
+      },
+      "trial": {
+        "ok": true
+      }
+    }
+  ],
+  "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/homepage-clickability-mobile-20260709.png"
+}
