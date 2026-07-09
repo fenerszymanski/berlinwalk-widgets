@@ -1,0 +1,49 @@
+{
+  "createdAt": "2026-07-09T07:48:39.047Z",
+  "note": "Wix background 400 resource logs are recorded but not treated as visible-page failures when the card/tool is present and no page exception occurs.",
+  "pages": [
+    {
+      "name": "BerlinTools grid quiz card mobile",
+      "url": "https://www.berlinwalk.com/berlin-tools?qa=1783583319059",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "overflowX": 0,
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/live-berlintools-quiz-card-mobile390.png",
+      "pageExceptions": [],
+      "consoleResourceErrors": [
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()",
+        "Failed to load resource: the server responded with a status of 400 ()"
+      ],
+      "ok": true,
+      "cardVisible": true,
+      "iconUrlVisible": true
+    },
+    {
+      "name": "BerlinTools quiz detail mobile",
+      "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?qa=1783583319059",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "overflowX": 0,
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/live-berlin-quiz-tool-mobile390.png",
+      "pageExceptions": [],
+      "consoleResourceErrors": [],
+      "ok": true,
+      "hasTitle": true,
+      "hasQuizUI": true
+    }
+  ],
+  "ok": true
+}
