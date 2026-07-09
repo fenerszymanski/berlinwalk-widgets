@@ -1,0 +1,147 @@
+{
+  "generatedAt": "2026-07-09T07:45:00.000Z",
+  "method": "Wix Studio Layers panel with Display IDs enabled, cross-checked against live homepage custom element order from scripts/audit-homepage-conversion-plan.mjs",
+  "notes": [
+    "Structural edits must be done in Wix Studio; this file maps Studio layer IDs before deletion/move work.",
+    "The two unmatched non-content sections are thin decorative separator sections and are kept."
+  ],
+  "targetOrder": [
+    "Hero",
+    "Why + How",
+    "Route + Gallery",
+    "Guide",
+    "Reviews",
+    "Booking",
+    "Products",
+    "FAQ",
+    "Explore more"
+  ],
+  "sections": [
+    {
+      "studioId": "section14",
+      "type": "decorative-separator",
+      "visualEvidence": "4px top accent strip above the header",
+      "action": "keep",
+      "reason": "Not a content section targeted by the simplification."
+    },
+    {
+      "studioId": "section3",
+      "type": "header",
+      "visualEvidence": "Header navigation with BerlinWalk logo, Tour, Guide, Reviews, Products, Games, Resources, Book Now",
+      "action": "keep"
+    },
+    {
+      "studioId": "section13",
+      "type": "hero",
+      "liveElement": "bw-hero-home",
+      "liveSectionId": "comp-lktn0mqe",
+      "action": "keep"
+    },
+    {
+      "studioId": "section44",
+      "type": "why",
+      "liveElement": "bw-why",
+      "liveSectionId": "comp-mp3itwb7",
+      "action": "keep-and-merge-how-strip"
+    },
+    {
+      "studioId": "section43",
+      "type": "how",
+      "liveElement": "bw-how-it-works",
+      "liveSectionId": "comp-mp3hjcx0",
+      "action": "delete-after-how-copy-is-merged-into-why"
+    },
+    {
+      "studioId": "section42",
+      "type": "gallery",
+      "liveElement": "bw-gallery",
+      "liveSectionId": "comp-mp3h2qrf",
+      "action": "delete-after-gallery-photos-are-merged-into-route"
+    },
+    {
+      "studioId": "section45",
+      "type": "route",
+      "liveElement": "bw-route",
+      "liveSectionId": "comp-mp3r7wr5",
+      "action": "keep-and-merge-gallery-strip"
+    },
+    {
+      "studioId": "section19",
+      "type": "guide",
+      "liveElement": "bw-guide-home",
+      "liveSectionId": "comp-mm3jgkrf",
+      "action": "keep"
+    },
+    {
+      "studioId": "section41",
+      "type": "reviews",
+      "liveElement": "bw-testimonials",
+      "liveSectionId": "comp-mp3gxo5s",
+      "action": "keep"
+    },
+    {
+      "studioId": "section33",
+      "type": "quiz",
+      "liveElement": "bw-berlin-quiz",
+      "liveSectionId": "comp-mnkmpn0o",
+      "action": "delete-after-berlintools-quiz-qa-passes"
+    },
+    {
+      "studioId": "section40",
+      "type": "tools-grid",
+      "liveElement": "bw-tools-home",
+      "liveSectionId": "comp-mp3giemf",
+      "action": "delete"
+    },
+    {
+      "studioId": "section47",
+      "type": "trip-planner",
+      "liveElement": "bw-trip-planner-home",
+      "liveSectionId": "comp-mq23e4r7",
+      "action": "delete"
+    },
+    {
+      "studioId": "section48",
+      "type": "games",
+      "liveElement": "bw-berlin-battle-home",
+      "liveSectionId": "comp-mqew6dkh",
+      "visualEvidence": "Berlin Battle, Berghain Bouncer, Berlin Day Survival cards",
+      "action": "delete"
+    },
+    {
+      "studioId": "section23",
+      "type": "blog-feed",
+      "liveElement": "bw-blog-home",
+      "liveSectionId": "comp-mm4nzzop",
+      "visualEvidence": "Travel Notes blog cards",
+      "action": "delete"
+    },
+    {
+      "studioId": "section46",
+      "type": "faq",
+      "liveElement": "bw-faq",
+      "liveSectionId": "comp-mp3uj6o4",
+      "action": "keep-and-reduce-to-five-questions"
+    },
+    {
+      "studioId": "section29",
+      "type": "booking",
+      "liveElement": "Wix Bookings calendar",
+      "liveRootId": "comp-mmp417v9",
+      "visualEvidence": "Ready to Discover Berlin booking calendar",
+      "action": "move-before-products-and-faq"
+    },
+    {
+      "studioId": "section26",
+      "type": "decorative-separator",
+      "visualEvidence": "4px accent strip above footer",
+      "action": "keep",
+      "reason": "Not a content section targeted by the simplification."
+    },
+    {
+      "studioId": "section2",
+      "type": "footer",
+      "action": "keep"
+    }
+  ]
+}

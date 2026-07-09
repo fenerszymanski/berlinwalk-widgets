@@ -1,0 +1,186 @@
+{
+  "ok": true,
+  "generatedAt": "2026-07-09T07:44:16.519Z",
+  "results": [
+    {
+      "viewport": "mobile390",
+      "key": "why",
+      "url": "http://127.0.0.1:8767/why/test-element.html",
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/local-why-mobile390.png",
+      "overflowX": 0,
+      "bodyHeight": 1230,
+      "present": [
+        {
+          "text": "Why Walk With Me?",
+          "ok": true
+        },
+        {
+          "text": "Reserve free",
+          "ok": true
+        },
+        {
+          "text": "Walk + tip what you feel",
+          "ok": true
+        }
+      ],
+      "forbidden": {
+        "oneH45m": false,
+        "weOurUs": false
+      }
+    },
+    {
+      "viewport": "mobile390",
+      "key": "route",
+      "url": "http://127.0.0.1:8767/route/test-element.html",
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/local-route-mobile390.png",
+      "overflowX": 0,
+      "bodyHeight": 1962,
+      "present": [
+        {
+          "text": "The Route",
+          "ok": true
+        },
+        {
+          "text": "Storytelling outside the Altes Museum",
+          "ok": true
+        },
+        {
+          "text": "Starting point at the World Clock",
+          "ok": true
+        }
+      ],
+      "forbidden": {
+        "oneH45m": false,
+        "weOurUs": false
+      }
+    },
+    {
+      "viewport": "mobile390",
+      "key": "faq-home",
+      "url": "http://127.0.0.1:8767/faq/?post=home",
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/local-faq-home-mobile390.png",
+      "overflowX": 0,
+      "bodyHeight": 900,
+      "present": [
+        {
+          "text": "Is the tour really free?",
+          "ok": true
+        },
+        {
+          "text": "How does tipping work?",
+          "ok": true
+        },
+        {
+          "text": "Where is the meeting point?",
+          "ok": true
+        },
+        {
+          "text": "How long is the tour?",
+          "ok": true
+        },
+        {
+          "text": "Do I need to book in advance?",
+          "ok": true
+        }
+      ],
+      "forbidden": {
+        "oneH45m": false,
+        "weOurUs": false
+      }
+    },
+    {
+      "viewport": "mobile390",
+      "consoleErrors": []
+    },
+    {
+      "viewport": "desktop1366",
+      "key": "why",
+      "url": "http://127.0.0.1:8767/why/test-element.html",
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/local-why-desktop1366.png",
+      "overflowX": 0,
+      "bodyHeight": 900,
+      "present": [
+        {
+          "text": "Why Walk With Me?",
+          "ok": true
+        },
+        {
+          "text": "Reserve free",
+          "ok": true
+        },
+        {
+          "text": "Walk + tip what you feel",
+          "ok": true
+        }
+      ],
+      "forbidden": {
+        "oneH45m": false,
+        "weOurUs": false
+      }
+    },
+    {
+      "viewport": "desktop1366",
+      "key": "route",
+      "url": "http://127.0.0.1:8767/route/test-element.html",
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/local-route-desktop1366.png",
+      "overflowX": 0,
+      "bodyHeight": 1773,
+      "present": [
+        {
+          "text": "The Route",
+          "ok": true
+        },
+        {
+          "text": "Storytelling outside the Altes Museum",
+          "ok": true
+        },
+        {
+          "text": "Starting point at the World Clock",
+          "ok": true
+        }
+      ],
+      "forbidden": {
+        "oneH45m": false,
+        "weOurUs": false
+      }
+    },
+    {
+      "viewport": "desktop1366",
+      "key": "faq-home",
+      "url": "http://127.0.0.1:8767/faq/?post=home",
+      "screenshot": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/local-faq-home-desktop1366.png",
+      "overflowX": 0,
+      "bodyHeight": 900,
+      "present": [
+        {
+          "text": "Is the tour really free?",
+          "ok": true
+        },
+        {
+          "text": "How does tipping work?",
+          "ok": true
+        },
+        {
+          "text": "Where is the meeting point?",
+          "ok": true
+        },
+        {
+          "text": "How long is the tour?",
+          "ok": true
+        },
+        {
+          "text": "Do I need to book in advance?",
+          "ok": true
+        }
+      ],
+      "forbidden": {
+        "oneH45m": false,
+        "weOurUs": false
+      }
+    },
+    {
+      "viewport": "desktop1366",
+      "consoleErrors": []
+    }
+  ]
+}

@@ -4,6 +4,29 @@ const BW_ROUTE_LOCAL_DATA_URL = document.currentScript && document.currentScript
   : './data.json';
 const BW_ROUTE_BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
 const BW_ROUTE_STORY_URL = 'https://www.berlinwalk.com/berlin-walking-tour-route';
+const BW_ROUTE_GALLERY_IMAGE_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/gallery/images';
+const BW_ROUTE_GALLERY = [
+  {
+    id: '01',
+    alt: 'BerlinWalk guide Yusuf leading guests outside the Altes Museum on Museum Island',
+    caption: 'Storytelling outside the Altes Museum'
+  },
+  {
+    id: '02',
+    alt: 'Small Berlin walking tour group smiling on a city street',
+    caption: 'A small group between city stories'
+  },
+  {
+    id: '04',
+    alt: 'Museum Island colonnade in golden light',
+    caption: 'Golden hour on Museum Island'
+  },
+  {
+    id: '06',
+    alt: 'Alexanderplatz World Clock under a blue sky',
+    caption: 'Starting point at the World Clock'
+  }
+];
 
 class BWRouteElement extends HTMLElement {
   constructor() {
@@ -159,6 +182,10 @@ class BWRouteElement extends HTMLElement {
             </div>
           </div>
 
+          <div class="bw-route-gallery-strip" aria-label="Real photos from the route">
+            ${BW_ROUTE_GALLERY.map(photo => this._renderGalleryPhoto(photo)).join('')}
+          </div>
+
           <section class="bw-route-story-preview" aria-labelledby="bw-route-story-title">
             <div class="bw-route-story-copy">
               <p class="bw-route-story-kicker">Route as story map</p>
@@ -219,6 +246,39 @@ class BWRouteElement extends HTMLElement {
       >
         <span class="bw-route-pin-number">${this._escapeHTML(stop.id)}</span>
       </button>
+    `;
+  }
+
+  _renderGalleryPhoto(photo) {
+    const src = `${BW_ROUTE_GALLERY_IMAGE_BASE}/${photo.id}-800w.jpg`;
+    const webpSrcset = [
+      `${BW_ROUTE_GALLERY_IMAGE_BASE}/${photo.id}-400w.webp 400w`,
+      `${BW_ROUTE_GALLERY_IMAGE_BASE}/${photo.id}-800w.webp 800w`,
+      `${BW_ROUTE_GALLERY_IMAGE_BASE}/${photo.id}-1200w.webp 1200w`
+    ].join(', ');
+    const jpgSrcset = [
+      `${BW_ROUTE_GALLERY_IMAGE_BASE}/${photo.id}-400w.jpg 400w`,
+      `${BW_ROUTE_GALLERY_IMAGE_BASE}/${photo.id}-800w.jpg 800w`,
+      `${BW_ROUTE_GALLERY_IMAGE_BASE}/${photo.id}-1200w.jpg 1200w`
+    ].join(', ');
+
+    return `
+      <figure class="bw-route-gallery-photo">
+        <picture>
+          <source type="image/webp" srcset="${this._escapeAttr(webpSrcset)}" sizes="(max-width: 640px) 50vw, 25vw">
+          <img
+            src="${this._escapeAttr(src)}"
+            srcset="${this._escapeAttr(jpgSrcset)}"
+            sizes="(max-width: 640px) 50vw, 25vw"
+            alt="${this._escapeAttr(photo.alt)}"
+            loading="lazy"
+            decoding="async"
+            width="800"
+            height="600"
+          >
+        </picture>
+        <figcaption>${this._escapeHTML(photo.caption)}</figcaption>
+      </figure>
     `;
   }
 
@@ -573,6 +633,43 @@ class BWRouteElement extends HTMLElement {
           width: 100%;
         }
 
+        .bw-route .bw-route-gallery-strip {
+          display: grid;
+          gap: 12px;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+          margin-top: 18px;
+        }
+
+        .bw-route .bw-route-gallery-photo {
+          background: #FFFFFF;
+          border: 1px solid #E2E8D7;
+          border-radius: 8px;
+          margin: 0;
+          min-width: 0;
+          overflow: hidden;
+        }
+
+        .bw-route .bw-route-gallery-photo picture,
+        .bw-route .bw-route-gallery-photo img {
+          display: block;
+          width: 100%;
+        }
+
+        .bw-route .bw-route-gallery-photo img {
+          aspect-ratio: 4 / 3;
+          height: auto;
+          object-fit: cover;
+        }
+
+        .bw-route .bw-route-gallery-photo figcaption {
+          color: #4E5A4E;
+          font-size: 12px;
+          font-style: italic;
+          line-height: 1.4;
+          padding: 10px 12px 12px;
+          text-align: center;
+        }
+
         .bw-route .bw-route-map {
           height: 100%;
           position: relative;
@@ -684,6 +781,12 @@ class BWRouteElement extends HTMLElement {
 
           .bw-route .bw-route-pin.active:hover {
             --pin-scale: 1.2;
+          }
+        }
+
+        @media (max-width: 760px) {
+          .bw-route .bw-route-gallery-strip {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
           }
         }
 

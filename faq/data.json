@@ -272,89 +272,27 @@
     "subtitle": "Everything you need to know about my free walking tour through Berlin's historic city center.",
     "tabs": [
       {
-        "name": "Tour Basics",
+        "name": "FAQ",
         "items": [
-          {
-            "q": "Is BerlinWalk the same as Berlin Walks?",
-            "a": "No. BerlinWalk is an independent, tip-based free walking tour operated by Yusuf. I am not affiliated with the older, paid-tour company \"Berlin Walks\"."
-          },
           {
             "q": "Is the tour really free?",
-            "a": "Yes — there is no fixed price for the tour. Berlin Walk operates on a **tip-based model**. You join the tour for free and at the end, you tip whatever you feel the experience was worth. This keeps the tour accessible to everyone while giving the guide direct motivation to deliver a great experience every time."
+            "a": "Yes. There is no fixed price and no upfront payment. You reserve a spot for free, walk with me, and decide at the end what the experience was worth to you."
           },
           {
-            "q": "What does the tour cover?",
-            "a": "The tour covers **12 stops through Berlin's historic city center**, starting at the **World Clock** at Alexanderplatz and ending at **Hackescher Markt**. You'll see the TV Tower, Rotes Rathaus, the Neptune Fountain, St. Mary's Church, Marx-Engels Forum, Humboldt Forum, Lustgarten, Berliner Dom, and Museum Island (Altes Museum, Neues Museum, and the Alte Nationalgalerie). The route covers 800 years of history — medieval origins, Prussian grandeur, GDR-era urban planning, and modern-day Berlin."
+            "q": "How does tipping work?",
+            "a": "At the end, I collect tips in cash. For a good tour of about 2 hours, €10 per person is the minimum fair tip, €15 is a strong thank-you, and €20+ is generous."
           },
           {
-            "q": "How long does the tour last?",
-            "a": "The tour lasts approximately **2 hours** and covers about 3 kilometers on foot. It's a comfortable pace with plenty of stops for stories and photos."
+            "q": "Where is the meeting point?",
+            "a": "The meeting point is the Weltzeituhr (World Clock) at Alexanderplatz. I use a green umbrella so you can spot me there. Please arrive 5 minutes before the tour starts."
           },
           {
-            "q": "What language is the tour in?",
-            "a": "The tour is conducted entirely in **English**."
+            "q": "How long is the tour?",
+            "a": "The tour lasts about 2 hours and covers about 3 kilometers on foot, from Alexanderplatz toward Hackescher Markt at a comfortable walking pace."
           },
-          {
-            "q": "Do we go inside the museums or buildings?",
-            "a": "This is an **outdoor walking tour** — we don't go inside museums or ticketed attractions. However, we stop in front of each landmark and your guide will share the history, architecture, and stories behind what you're seeing. After the tour, you're welcome to visit any of the sites on your own — your guide can recommend which ones are most worth the entrance fee."
-          },
-          {
-            "q": "Will I see the Berlin Wall on this tour?",
-            "a": "This tour focuses on Berlin's **medieval-to-modern city center** — the historic heart of the city from Alexanderplatz to Hackescher Markt. While we discuss Berlin's division, the Cold War, and the GDR throughout the tour, we do not walk past the remaining Wall sections. If you're interested in the Wall specifically, the East Side Gallery and Checkpoint Charlie are both easily reachable by public transport from our start or end points."
-          },
-          {
-            "q": "How much should I tip?",
-            "a": "There's no fixed price, but for a good 2 hours tour **€10 per person is the minimum fair tip**. €15 is a strong thank-you, and €20+ is generous if you had a fantastic time. If your budget is genuinely tight or the tour was not good, tip what feels fair. Tips are collected in cash at the end of the tour."
-          }
-        ]
-      },
-      {
-        "name": "Practical Info",
-        "items": [
-          {
-            "q": "Where exactly do we meet?",
-            "a": "We meet at the **Weltzeituhr (World Clock)** at Alexanderplatz. It's the large rotating world time clock in the center of the square — you can't miss it. The nearest U-Bahn and S-Bahn station is **Alexanderplatz** (U2, U5, U8, S5, S7, S75). Your guide will be holding a **green umbrella**. Please arrive **5 minutes before** the tour start time."
-          },
-          {
-            "q": "Does the tour run in rain or bad weather?",
-            "a": "Yes — the tour runs **rain or shine**. Berlin weather is unpredictable, and we don't cancel for light rain. We recommend bringing an umbrella or rain jacket just in case. In the rare event of severe weather (storms, extreme cold warnings), we'll notify booked participants by email in advance."
-          },
-          {
-            "q": "What should I wear or bring?",
-            "a": "Wear **comfortable walking shoes** — the tour covers about 3 km on mostly flat terrain (sidewalks, cobblestones, bridge crossings). Dress for the weather and bring water, especially in summer. A phone or camera is great for photos at the many scenic stops. And don't forget some **cash for tipping** at the end!"
-          },
-          {
-            "q": "Is the tour accessible for wheelchairs or strollers?",
-            "a": "The route is **mostly flat and paved**, so it is generally accessible for wheelchairs and strollers. There are a few short sections with cobblestones and bridge crossings, but **no stairs**. If you have specific accessibility concerns, please contact us before booking and we'll do our best to accommodate you."
-          },
-          {
-            "q": "Is the tour suitable for children?",
-            "a": "Children are welcome! The tour is designed for adults but includes stories and visual highlights that older children (**roughly 10+**) often enjoy. Younger children are also welcome but may find the nearly 2-hour walking duration challenging. Strollers are fine on the route."
-          },
-          {
-            "q": "Where does the tour end? How do I get back?",
-            "a": "The tour ends at **Hackescher Markt**, one of Berlin's liveliest squares with plenty of restaurants, cafés, and shops. The nearest S-Bahn station is **Hackescher Markt** (S5, S7, S75), just steps away. From there you can easily reach any part of Berlin by public transport. It's also **just one S-Bahn stop back to Alexanderplatz**."
-          }
-        ]
-      },
-      {
-        "name": "Booking",
-        "items": [
           {
             "q": "Do I need to book in advance?",
-            "a": "Yes, we recommend **booking online in advance** at [berlinwalk.com](https://www.berlinwalk.com). This helps us plan for group size and ensures you get a confirmed spot. Booking is **free** and takes less than a minute."
-          },
-          {
-            "q": "What if I need to cancel?",
-            "a": "Since the tour is free, there's **no cancellation fee**. However, we kindly ask that you cancel your booking if you know you won't make it — this helps us manage group sizes. You can cancel through your booking confirmation email or through **berlinwalk.com**."
-          },
-          {
-            "q": "Can I book a private tour for my group?",
-            "a": "Yes! We offer **private tours** for groups of any size — families, corporate outings, school trips, or friend groups. Private tours can be customized in terms of route, schedule, and focus areas. Reach out through **berlinwalk.com** with your group size, preferred date, and any special requests."
-          },
-          {
-            "q": "How often does the tour run?",
-            "a": "Check our **booking calendar** for the latest schedule and available dates. Tour frequency varies by season — we run more tours during spring and summer when demand is highest."
+            "a": "Yes. Please book online at [berlinwalk.com](https://www.berlinwalk.com) so I can plan the group size and you have a confirmed free spot."
           }
         ]
       }

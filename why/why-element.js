@@ -21,6 +21,12 @@ const CARDS = [
   }
 ];
 
+const FLOW_STEPS = [
+  { label: 'Reserve free', detail: 'On Freetour, no payment needed' },
+  { label: 'Show up at Alexanderplatz', detail: 'Meeting point at World Clock' },
+  { label: 'Walk + tip what you feel', detail: '12 stops, ~2 hours' }
+];
+
 class BWWhyElement extends HTMLElement {
   constructor() {
     super();
@@ -99,6 +105,45 @@ class BWWhyElement extends HTMLElement {
           grid-template-columns: repeat(4, minmax(0, 1fr));
           margin: 0;
           padding: 0;
+        }
+
+        .bw-why .bw-why-flow {
+          background: #FAFAF5;
+          border: 1px solid #E2E8D7;
+          border-radius: 8px;
+          display: grid;
+          gap: 0;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          margin-top: 18px;
+          overflow: hidden;
+        }
+
+        .bw-why .bw-why-flow-step {
+          align-items: center;
+          display: grid;
+          gap: 6px;
+          min-width: 0;
+          padding: 18px 20px;
+          position: relative;
+          text-align: left;
+        }
+
+        .bw-why .bw-why-flow-step + .bw-why-flow-step {
+          border-left: 1px solid #E2E8D7;
+        }
+
+        .bw-why .bw-why-flow-label {
+          color: #1B5E20;
+          font-size: 13px;
+          font-weight: 800;
+          line-height: 1.25;
+        }
+
+        .bw-why .bw-why-flow-detail {
+          color: #4E5A4E;
+          font-family: Merriweather, Georgia, serif;
+          font-size: 13px;
+          line-height: 1.45;
         }
 
         .bw-why .bw-why-card {
@@ -191,6 +236,20 @@ class BWWhyElement extends HTMLElement {
             grid-template-columns: 1fr;
           }
 
+          .bw-why .bw-why-flow {
+            grid-template-columns: 1fr;
+            margin-top: 14px;
+          }
+
+          .bw-why .bw-why-flow-step {
+            padding: 16px 18px;
+          }
+
+          .bw-why .bw-why-flow-step + .bw-why-flow-step {
+            border-left: 0;
+            border-top: 1px solid #E2E8D7;
+          }
+
           .bw-why .bw-why-card-body {
             padding: 24px 18px;
           }
@@ -227,6 +286,9 @@ class BWWhyElement extends HTMLElement {
           <div class="bw-why-cards" role="list">
             ${CARDS.map(card => this._renderCard(card)).join('')}
           </div>
+          <div class="bw-why-flow" aria-label="How the tour works">
+            ${FLOW_STEPS.map(step => this._renderFlowStep(step)).join('')}
+          </div>
         </div>
       </section>
     `;
@@ -242,6 +304,15 @@ class BWWhyElement extends HTMLElement {
           <p class="bw-why-card-desc">${card.desc}</p>
         </div>
       </article>
+    `;
+  }
+
+  _renderFlowStep(step) {
+    return `
+      <div class="bw-why-flow-step">
+        <strong class="bw-why-flow-label">${step.label}</strong>
+        <span class="bw-why-flow-detail">${step.detail}</span>
+      </div>
     `;
   }
 
