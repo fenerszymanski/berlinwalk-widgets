@@ -1,8 +1,9 @@
 {
   "createdAt": "2026-07-09T08:20:00.311Z",
+  "updatedAt": "2026-07-09T08:27:11.000Z",
   "status": "partial-unpublished-draft",
   "publishReady": false,
-  "note": "Physical deletion and booking move were completed in Wix Studio draft, but native Products/Explore authoring through Chrome automation was not reliable enough for final publish.",
+  "note": "Physical deletion and booking move were completed in Wix Studio draft. Products copy is visible as a plain native text block, but not as native cards/links. Explore section remains blank. Chrome/UI automation was not reliable enough for final publish.",
   "layerOrder": [
     "#page1",
     "#section14",
@@ -21,7 +22,10 @@
   ],
   "expectedRemovedAbsent": true,
   "bookingBeforeFaq": true,
-  "productsTextSeenInEditorDom": false,
+  "productsTextSeenInEditorDom": true,
+  "productsNativeCardsVerified": false,
   "exploreTextSeenInEditorDom": false,
-  "caution": "Do not publish before Products and Explore are rebuilt/verified as native visible sections."
+  "exploreSectionBlank": true,
+  "latestScreenshot": "studio-section49-empty-handoff.png",
+  "caution": "Do not publish before Products and Explore are rebuilt/verified as native visible sections/cards."
 }
