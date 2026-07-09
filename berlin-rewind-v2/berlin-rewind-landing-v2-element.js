@@ -6,14 +6,14 @@
  *   <bw-berlin-rewind-landing-v2></bw-berlin-rewind-landing-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-landing-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-landing-v2-mobile-no-hero-cta-20260709a
+ * Build marker: berlin-rewind-landing-v2-no-game-head-cta-20260709a
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-berlin-rewind-landing-v2';
   var GAME_TAG = 'bw-berlin-rewind-result-games-v2';
-  var BUILD = 'berlin-rewind-landing-v2-mobile-no-hero-cta-20260709a';
+  var BUILD = 'berlin-rewind-landing-v2-no-game-head-cta-20260709a';
   var GAME_BUILD = 'berlin-rewind-v2-stable-board-20260708e';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
@@ -204,7 +204,6 @@
                   '<h2>Play today&#039;s Rewind</h2>',
                   '<p>Guess the year with the slider, choose the district, then use the reveal to learn what the photo was hiding in plain sight.</p>',
                 '</div>',
-                '<a class="bw-rwlp-btn primary" href="' + esc(BOOK_URL) + '">Walk the real city</a>',
               '</div>',
               '<div class="bw-rwlp-game-mount">',
                 '<' + GAME_TAG + ' data-asset-base="' + esc(BASE_URL) + '"></' + GAME_TAG + '>',
