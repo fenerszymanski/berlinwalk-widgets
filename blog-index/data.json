@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-08T21:02:38.863Z",
+  "updatedAt": "2026-07-09T02:06:45.230Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 171,
+  "totalPosts": 154,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -61,6 +61,40 @@
     },
     "secondary": [
       {
+        "title": "Renting a Bike in Berlin: Which Option Actually Fits Your Trip",
+        "slug": "renting-a-bike-in-berlin",
+        "path": "/post/renting-a-bike-in-berlin",
+        "url": "https://www.berlinwalk.com/post/renting-a-bike-in-berlin",
+        "excerpt": "A Berlin guide's practical guide to renting a bike: the four systems, what each is good for, real prices, and the Nextbike ring rule that quietly costs tourists money.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "route-stories",
+        "topicLabel": "Tour Route Stories",
+        "readTime": "6 min read",
+        "publishedDate": "2026-07-08T21:01:36.651Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
+        "alt": "A group of tourists cycling together along a sunny street in central Berlin",
+        "relatedToolSlug": "berlin-bike-rental-finder"
+      },
+      {
+        "title": "Is the DDR Museum Worth It? Tickets, Queues, and What to Expect in 2026",
+        "slug": "is-the-ddr-museum-worth-it",
+        "path": "/post/is-the-ddr-museum-worth-it",
+        "url": "https://www.berlinwalk.com/post/is-the-ddr-museum-worth-it",
+        "excerpt": "A Berlin guide's honest take on the DDR Museum: what is inside, tickets and hours, why your Museum Pass will not cover it, and the two calm windows to visit before the crowds.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "5 min read",
+        "publishedDate": "2026-07-08T21:01:37.453Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_34f5861223794412a85a1cc93b5a272f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-ddr-museum-living-room.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_34f5861223794412a85a1cc93b5a272f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-ddr-museum-living-room.jpg",
+        "alt": "A reconstructed 1980s East German living room inside the DDR Museum, with a wood wall unit, boxy television, orange wallpaper and a floral sofa",
+        "relatedToolSlug": "ddr-museum-crowd-planner"
+      },
+      {
         "title": "Deutschlandticket for Berlin Tourists: When the 63 EUR Ticket Makes Sense",
         "slug": "deutschlandticket-berlin-tourists",
         "path": "/post/deutschlandticket-berlin-tourists",
@@ -110,40 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_e8b287f6866d45b0b94ce6393d4d6961~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-before-hotel-check-in-luggage-cover.jpg",
         "alt": "Rolling suitcases at Berlin Hauptbahnhof, showing the luggage problem before hotel check-in in Berlin.",
         "relatedToolSlug": "berlin-check-in-gap-planner"
-      },
-      {
-        "title": "Berliner Dom Tickets: Dome Climb, Crypt and Visit Tips",
-        "slug": "berliner-dom-tickets",
-        "path": "/post/berliner-dom-tickets",
-        "url": "https://www.berlinwalk.com/post/berliner-dom-tickets",
-        "excerpt": "Decide whether Berliner Dom tickets are worth it for your day: check official times, use the dome climb wisely, and make the crypt or Museum Island context count.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "5 min read",
-        "publishedDate": "2026-07-05T20:10:35.443Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_6e28eeb7cea94f71bf910641e1db3244~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-dom-cover-museum-island.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_6e28eeb7cea94f71bf910641e1db3244~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berliner-dom-cover-museum-island.jpg",
-        "alt": "Berliner Dom and Alte Nationalgalerie on Museum Island at sunset",
-        "relatedToolSlug": "berliner-dom-visit-planner"
-      },
-      {
-        "title": "Berlin Train Stations: Hauptbahnhof, Ostbahnhof, Südkreuz and Arrival Tips",
-        "slug": "berlin-train-stations",
-        "path": "/post/berlin-train-stations",
-        "url": "https://www.berlinwalk.com/post/berlin-train-stations",
-        "excerpt": "A practical guide to Berlin train stations for tourists: when to use Hauptbahnhof, Ostbahnhof, Südkreuz, Gesundbrunnen or Spandau, and what to do first.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "practical",
-        "topicLabel": "Practical Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-07-05T05:52:09.070Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_53884dd3159643278b0de0ffb555cd7a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-train-stations-cover-hauptbahnhof.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_53884dd3159643278b0de0ffb555cd7a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-train-stations-cover-hauptbahnhof.jpg",
-        "alt": "S-Bahn train arriving inside Berlin Hauptbahnhof, the main railway station for many tourists arriving by train.",
-        "relatedToolSlug": "berlin-train-station-first-move"
       }
     ]
   },
@@ -275,23 +275,6 @@
       "relatedToolSlug": "berlin-tip-calculator"
     },
     {
-      "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
-      "slug": "public-toilets-in-berlin",
-      "path": "/post/public-toilets-in-berlin",
-      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
-      "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-05-16T18:51:08.424Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
-      "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
-      "relatedToolSlug": "berlin-public-toilets"
-    },
-    {
       "title": "5 Best Döner Kebab Spots in Berlin You Need to Try in 2026",
       "slug": "5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
       "path": "/post/5-best-döner-kebab-spots-in-berlin-you-need-to-try-in-2026",
@@ -307,6 +290,23 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_f6946ba54fe44a2ba5ca74e810732917~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/DonerBerlin.jpeg",
       "alt": "Berlin döner kebab in flatbread with grilled vegetables, chicken meat, fresh salad and garlic sauce",
       "relatedToolSlug": ""
+    },
+    {
+      "title": "Public Toilets in Berlin: Where to Find Them, What They Cost, and Free Options",
+      "slug": "public-toilets-in-berlin",
+      "path": "/post/public-toilets-in-berlin",
+      "url": "https://www.berlinwalk.com/post/public-toilets-in-berlin",
+      "excerpt": "Need a toilet in Berlin? This tourist guide shows where to find public toilets, what they cost, where the free options are, and when stations, malls, or the Berliner Toilette app help.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "5 min read",
+      "publishedDate": "2026-05-16T18:51:08.424Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_75e950f67226457e8af15fbe3a7f46fd~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/nsplsh_7bdfcc030bd74d1d99d1624e3799f48d~mv2.jpg",
+      "alt": "Restroom sign with male and female symbols on a brick wall, pointing right. Green trees and glass buildings in the background.",
+      "relatedToolSlug": "berlin-public-toilets"
     },
     {
       "title": "Berlin Airport to Alexanderplatz: The Easy Way (2026 Guide)",
@@ -920,7 +920,7 @@
           "image": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
           "thumb": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
           "alt": "A group of tourists cycling together along a sunny street in central Berlin",
-          "relatedToolSlug": ""
+          "relatedToolSlug": "berlin-bike-rental-finder"
         },
         {
           "title": "Berlin Umweltzone Sticker: Driving Rules Tourists Should Know",
@@ -1085,23 +1085,6 @@
           "relatedToolSlug": ""
         },
         {
-          "title": "Why Berlin Doesn't Have a Beautiful Old Town (And Why That's the Point)",
-          "slug": "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
-          "path": "/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
-          "url": "https://www.berlinwalk.com/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
-          "excerpt": "Berlin has no classic beautiful old town because war, division and East Berlin planning reshaped the historic centre. That missing old town is the point.",
-          "category": "Berlin Myths",
-          "categorySlug": "berlin-myths",
-          "topic": "history-myths",
-          "topicLabel": "Berlin History & Myths",
-          "readTime": "9 min read",
-          "publishedDate": "2026-03-01T08:36:19.795Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_2311051e8d1249d5b57ad5beebbd337d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/old-berlin-nikolaiviertel-1880.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_2311051e8d1249d5b57ad5beebbd337d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/old-berlin-nikolaiviertel-1880.jpg",
-          "alt": "Nikolaiviertel in old Berlin around 1880, showing narrow streets and dense historic buildings",
-          "relatedToolSlug": "medieval-berlin-mini-walk"
-        },
-        {
           "title": "How Berlin Was Divided: A Simple Guide to East vs. West",
           "slug": "how-berlin-was-divided-a-simple-guide-to-east-vs-west",
           "path": "/post/how-berlin-was-divided-a-simple-guide-to-east-vs-west",
@@ -1117,23 +1100,6 @@
           "thumb": "https://static.wixstatic.com/media/nsplsh_5e0bfccefabe4d938ab2653b1ef9f091~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/The%20wall%20from%20the%20west%20side%2C%201980%2C%20death%20zone.jpg",
           "alt": "berlin wall",
           "relatedToolSlug": "east-or-west-1989"
-        },
-        {
-          "title": "Did JFK Really Call Himself a Jelly Donut? The Ich Bin Ein Berliner Myth",
-          "slug": "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-          "path": "/post/did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-          "url": "https://www.berlinwalk.com/post/did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-          "excerpt": "Did JFK call himself a jelly donut? No. Here is the real Ich bin ein Berliner story, the German grammar, the Berlin pastry name and why the myth spread.",
-          "category": "Berlin Myths",
-          "categorySlug": "berlin-myths",
-          "topic": "history-myths",
-          "topicLabel": "Berlin History & Myths",
-          "readTime": "7 min read",
-          "publishedDate": "2026-03-03T12:12:36.812Z",
-          "image": "https://static.wixstatic.com/media/5a08a3_42bff55d66fb465eb52d8c5d7e2d8b79~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Kennedy_12_dpa.jpg",
-          "thumb": "https://static.wixstatic.com/media/5a08a3_42bff55d66fb465eb52d8c5d7e2d8b79~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Kennedy_12_dpa.jpg",
-          "alt": "@dpa",
-          "relatedToolSlug": ""
         },
         {
           "title": "Sachsenhausen from Berlin: Train, Tickets and How to Visit Respectfully",
@@ -1185,6 +1151,40 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_4e82650eed3741c5b150278473f327d2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/traenenpalast-berlin-01-traenenpalast-berlin-cover.jpg",
           "alt": "Tränenpalast Berlin glowing at dusk beside Friedrichstraße station",
           "relatedToolSlug": "traenenpalast-visit-planner"
+        },
+        {
+          "title": "Topography of Terror Berlin: Free Museum, Wall Remains and How to Visit It Right",
+          "slug": "topography-of-terror-berlin",
+          "path": "/post/topography-of-terror-berlin",
+          "url": "https://www.berlinwalk.com/post/topography-of-terror-berlin",
+          "excerpt": "A practical guide to visiting Topography of Terror Berlin: what it covers, how long to allow, free entry, opening hours, audio guide, nearby stops and mistakes to avoid.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
+          "topic": "history-myths",
+          "topicLabel": "Berlin History & Myths",
+          "readTime": "7 min read",
+          "publishedDate": "2026-06-26T18:11:45.691Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_298ee4a95f9a480ba2ac9bc0c1051c2b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/topography-of-terror-berlin-01-topography-site-wall-cover.jpg",
+          "alt": "Topography of Terror site in Berlin with the preserved Wall section, exhibition trench and documentation centre",
+          "relatedToolSlug": "topography-of-terror-visit-planner"
+        },
+        {
+          "title": "Tempelhof Airport Berlin: Field, Tours and What to Do",
+          "slug": "tempelhof-airport-berlin",
+          "path": "/post/tempelhof-airport-berlin",
+          "url": "https://www.berlinwalk.com/post/tempelhof-airport-berlin",
+          "excerpt": "A clear tourist guide to Tempelhof Airport Berlin and Tempelhofer Feld: field vs building, entrances, opening hours, tours, rules and the best first-visit plan.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
+          "topic": "history-myths",
+          "topicLabel": "Berlin History & Myths",
+          "readTime": "7 min read",
+          "publishedDate": "2026-06-30T19:54:56.677Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_47cdba7486c24c55bdd56ef3a599d1f1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/tempelhof-airport-berlin-01-sunrise-runway-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_47cdba7486c24c55bdd56ef3a599d1f1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/tempelhof-airport-berlin-01-sunrise-runway-cover.jpg",
+          "alt": "Sunset over the former runway at Tempelhofer Feld in Berlin",
+          "relatedToolSlug": "tempelhof-field-planner"
         }
       ]
     },
@@ -1281,23 +1281,6 @@
           "relatedToolSlug": ""
         },
         {
-          "title": "Where to Eat Near Alexanderplatz Without Getting Ripped Off",
-          "slug": "where-to-eat-near-alexanderplatz-without-getting-ripped-off",
-          "path": "/post/where-to-eat-near-alexanderplatz-without-getting-ripped-off",
-          "url": "https://www.berlinwalk.com/post/where-to-eat-near-alexanderplatz-without-getting-ripped-off",
-          "excerpt": "A practical local guide to eating near Alexanderplatz: what to avoid, where to walk and the better nearby choices for snacks, brunch, vegan food, beer and dinner.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "food-nightlife",
-          "topicLabel": "Food & Nightlife",
-          "readTime": "9 min read",
-          "publishedDate": "2026-03-03T12:11:43.832Z",
-          "image": "https://static.wixstatic.com/media/nsplsh_4f727a393074366f306534~mv2_d_5472_3648_s_4_2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Dani.jpg",
-          "thumb": "https://static.wixstatic.com/media/nsplsh_4f727a393074366f306534~mv2_d_5472_3648_s_4_2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Dani.jpg",
-          "alt": "A visitor eating in a cafe, used for the Berlin food guide near Alexanderplatz",
-          "relatedToolSlug": "berlin-landmarks-map"
-        },
-        {
           "title": "5 Best Coffee Shops Near Hackescher Markt (A Local's Guide)",
           "slug": "5-best-coffee-shops-near-hackescher-markt-a-local-s-guide",
           "path": "/post/5-best-coffee-shops-near-hackescher-markt-a-local-s-guide",
@@ -1364,6 +1347,23 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_f365f5aafb6a4ae4b157a6982ec788af~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/breakfast-in-berlin-02-berlin-bakery-view.jpg",
           "alt": "Berlin bakery counter with croissants, sandwiches and pastries ready for a quick tourist breakfast",
           "relatedToolSlug": "berlin-breakfast-clock"
+        },
+        {
+          "title": "Best Christmas Markets in Berlin 2026: Which Ones Are Actually Worth It",
+          "slug": "best-christmas-markets-berlin-2026",
+          "path": "/post/best-christmas-markets-berlin-2026",
+          "url": "https://www.berlinwalk.com/post/best-christmas-markets-berlin-2026",
+          "excerpt": "A local guide's honest breakdown of the best Christmas markets in Berlin for 2026. Confirmed dates, locations, entry fees, and what to eat and drink.",
+          "category": "Tourist Tips",
+          "categorySlug": "tourist-tips",
+          "topic": "food-nightlife",
+          "topicLabel": "Food & Nightlife",
+          "readTime": "11 min read",
+          "publishedDate": "2026-06-07T10:50:14.548Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_f8ac892c6dfd4b5eb74c6252ca2ee8a2~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/gendarmenmarkt.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_f8ac892c6dfd4b5eb74c6252ca2ee8a2~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/gendarmenmarkt.jpg",
+          "alt": "WeihnachtsZauber Gendarmenmarkt under the winter lights",
+          "relatedToolSlug": ""
         }
       ]
     },
@@ -1597,7 +1597,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_34f5861223794412a85a1cc93b5a272f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-ddr-museum-living-room.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_34f5861223794412a85a1cc93b5a272f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-ddr-museum-living-room.jpg",
       "alt": "A reconstructed 1980s East German living room inside the DDR Museum, with a wood wall unit, boxy television, orange wallpaper and a floral sofa",
-      "relatedToolSlug": "transport-ticket-calculator"
+      "relatedToolSlug": "ddr-museum-crowd-planner"
     },
     {
       "title": "Renting a Bike in Berlin: Which Option Actually Fits Your Trip",
@@ -1614,7 +1614,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
       "alt": "A group of tourists cycling together along a sunny street in central Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-bike-rental-finder"
     },
     {
       "title": "E-Scooters in Berlin: How to Rent One and the Rules That Get You Fined",
@@ -1631,7 +1631,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_741e536377c9487ab9d3539060ae2d8a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-shared-scooters-lined-up-berlin.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_741e536377c9487ab9d3539060ae2d8a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-shared-scooters-lined-up-berlin.jpg",
       "alt": "A long row of teal Dott and green Lime rental e-scooters parked along a boulevard in central Berlin",
-      "relatedToolSlug": "berlin-mobility-app-picker"
+      "relatedToolSlug": "berlin-e-scooter-rule-checker"
     },
     {
       "title": "Entschuldigung: The German Word That Gets You Through Crowded Berlin",
@@ -1803,7 +1803,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_34f5861223794412a85a1cc93b5a272f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-ddr-museum-living-room.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_34f5861223794412a85a1cc93b5a272f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-ddr-museum-living-room.jpg",
       "alt": "A reconstructed 1980s East German living room inside the DDR Museum, with a wood wall unit, boxy television, orange wallpaper and a floral sofa",
-      "relatedToolSlug": "transport-ticket-calculator"
+      "relatedToolSlug": "ddr-museum-crowd-planner"
     },
     {
       "title": "Renting a Bike in Berlin: Which Option Actually Fits Your Trip",
@@ -1820,7 +1820,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
       "alt": "A group of tourists cycling together along a sunny street in central Berlin",
-      "relatedToolSlug": ""
+      "relatedToolSlug": "berlin-bike-rental-finder"
     },
     {
       "title": "E-Scooters in Berlin: How to Rent One and the Rules That Get You Fined",
@@ -1837,7 +1837,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_741e536377c9487ab9d3539060ae2d8a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-shared-scooters-lined-up-berlin.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_741e536377c9487ab9d3539060ae2d8a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-shared-scooters-lined-up-berlin.jpg",
       "alt": "A long row of teal Dott and green Lime rental e-scooters parked along a boulevard in central Berlin",
-      "relatedToolSlug": "berlin-mobility-app-picker"
+      "relatedToolSlug": "berlin-e-scooter-rule-checker"
     },
     {
       "title": "Entschuldigung: The German Word That Gets You Through Crowded Berlin",
@@ -4339,23 +4339,6 @@
       "relatedToolSlug": ""
     },
     {
-      "title": "The Neues Museum: From Bombed Ruin to Nefertiti's Home",
-      "slug": "the-neues-museum-from-bombed-ruin-to-nefertiti-s-home",
-      "path": "/post/the-neues-museum-from-bombed-ruin-to-nefertiti-s-home",
-      "url": "https://www.berlinwalk.com/post/the-neues-museum-from-bombed-ruin-to-nefertiti-s-home",
-      "excerpt": "The Neues Museum on Museum Island was a bombed-out ruin for decades. Today it houses Nefertiti and one of Berlin’s most powerful restorations.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "9 min read",
-      "publishedDate": "2026-03-03T16:18:57.771Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_b67f4b760a3c413da352bb68a0dde47e~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/neues-museum-nefertiti-bust.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_b67f4b760a3c413da352bb68a0dde47e~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/neues-museum-nefertiti-bust.jpg",
-      "alt": "The painted bust of Queen Nefertiti displayed at the Neues Museum in Berlin",
-      "relatedToolSlug": ""
-    },
-    {
       "title": "Berlin Airport to Alexanderplatz: The Easy Way (2026 Guide)",
       "slug": "how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
       "path": "/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way",
@@ -4371,142 +4354,6 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_a03121bf8b20473fb5d65a66bb71db09~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20red%20and%20yellow%20train%20traveling%20past%20a%20tall%20building.jpg",
       "alt": "sbahn berlin",
       "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
-      "title": "Did JFK Really Call Himself a Jelly Donut? The Ich Bin Ein Berliner Myth",
-      "slug": "did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-      "path": "/post/did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-      "url": "https://www.berlinwalk.com/post/did-jfk-really-call-himself-a-jelly-donut-the-ich-bin-ein-berliner-myth",
-      "excerpt": "Did JFK call himself a jelly donut? No. Here is the real Ich bin ein Berliner story, the German grammar, the Berlin pastry name and why the myth spread.",
-      "category": "Berlin Myths",
-      "categorySlug": "berlin-myths",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "7 min read",
-      "publishedDate": "2026-03-03T12:12:36.812Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_42bff55d66fb465eb52d8c5d7e2d8b79~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Kennedy_12_dpa.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_42bff55d66fb465eb52d8c5d7e2d8b79~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Kennedy_12_dpa.jpg",
-      "alt": "@dpa",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Where to Eat Near Alexanderplatz Without Getting Ripped Off",
-      "slug": "where-to-eat-near-alexanderplatz-without-getting-ripped-off",
-      "path": "/post/where-to-eat-near-alexanderplatz-without-getting-ripped-off",
-      "url": "https://www.berlinwalk.com/post/where-to-eat-near-alexanderplatz-without-getting-ripped-off",
-      "excerpt": "A practical local guide to eating near Alexanderplatz: what to avoid, where to walk and the better nearby choices for snacks, brunch, vegan food, beer and dinner.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "food-nightlife",
-      "topicLabel": "Food & Nightlife",
-      "readTime": "9 min read",
-      "publishedDate": "2026-03-03T12:11:43.832Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_4f727a393074366f306534~mv2_d_5472_3648_s_4_2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Dani.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_4f727a393074366f306534~mv2_d_5472_3648_s_4_2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Dani.jpg",
-      "alt": "A visitor eating in a cafe, used for the Berlin food guide near Alexanderplatz",
-      "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
-      "title": "Feierabend, Fernweh, Schadenfreude: 7 German Words With No English Translation",
-      "slug": "feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation",
-      "path": "/post/feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation",
-      "url": "https://www.berlinwalk.com/post/feierabend-fernweh-schadenfreude-7-german-words-with-no-english-translation",
-      "excerpt": "A visitor-friendly guide to Feierabend, Fernweh, Schadenfreude and four more German words that need more than one English word to explain.",
-      "category": "German Language",
-      "categorySlug": "german-language",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-03-03T12:10:47.515Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_85cf3adb5cf64e37beb6019f1623596d~mv2.jpeg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/GermanLanguage.jpeg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_85cf3adb5cf64e37beb6019f1623596d~mv2.jpeg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/GermanLanguage.jpeg",
-      "alt": "Illustration of seven German words including Feierabend, Fernweh and Schadenfreude",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Why Marx and Engels Face West: The Statues Berlin Almost Removed",
-      "slug": "why-marx-and-engels-face-west-the-statues-berlin-almost-removed",
-      "path": "/post/why-marx-and-engels-face-west-the-statues-berlin-almost-removed",
-      "url": "https://www.berlinwalk.com/post/why-marx-and-engels-face-west-the-statues-berlin-almost-removed",
-      "excerpt": "Why do Marx and Engels face west in Berlin? The real story of the GDR monument, the U5 move, reunification debates and the 2026 visitor update.",
-      "category": "Berlin Myths",
-      "categorySlug": "berlin-myths",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "8 min read",
-      "publishedDate": "2026-03-03T12:08:45.283Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_1024c3b22dd743288a42fea17c73426c~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/1280px-0495_1989_BERLIN_Ost_(april)_(14306709452).jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_1024c3b22dd743288a42fea17c73426c~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/1280px-0495_1989_BERLIN_Ost_(april)_(14306709452).jpg",
-      "alt": "Why Marx and Engels Face West: The Statues Berlin Almost Removed",
-      "relatedToolSlug": "east-or-west-1989"
-    },
-    {
-      "title": "The TV Tower: 10 Things You Didn't Know About Berlin's Most Famous Landmark",
-      "slug": "the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark",
-      "path": "/post/the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark",
-      "url": "https://www.berlinwalk.com/post/the-tv-tower-10-things-you-didn-t-know-about-berlin-s-most-famous-landmark",
-      "excerpt": "10 surprising Berlin TV Tower facts: 368 metres, Sputnik design, Pope's Revenge, 203m observation deck, GDR history, visitor tips and what to notice.",
-      "category": "Berlin Myths",
-      "categorySlug": "berlin-myths",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "8 min read",
-      "publishedDate": "2026-03-02T19:26:01.511Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_f435f757d489469da7dca259fae9d1c3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_7897-min.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_f435f757d489469da7dca259fae9d1c3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_7897-min.jpg",
-      "alt": "The TV Tower: 10 Things You Didn't Know About Berlin's Most Famous Landmark",
-      "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
-      "title": "The Spree River: The Waterway That Built Berlin",
-      "slug": "the-spree-river-the-waterway-that-built-berlin",
-      "path": "/post/the-spree-river-the-waterway-that-built-berlin",
-      "url": "https://www.berlinwalk.com/post/the-spree-river-the-waterway-that-built-berlin",
-      "excerpt": "A local guide to the Spree River in Berlin: old Berlin, Coelln, Museum Island, Cold War border history, boat tours and best walking views.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "10 min read",
-      "publishedDate": "2026-03-02T19:23:34.388Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_87c4d5d7683643d9b7adbfbf84754012~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/city%20buildings%20during%20night%20time.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_87c4d5d7683643d9b7adbfbf84754012~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/city%20buildings%20during%20night%20time.jpg",
-      "alt": "Berlin skyline at night with the Spree River, TV Tower and Berliner Dom",
-      "relatedToolSlug": "berlin-boat-tour-finder"
-    },
-    {
-      "title": "Friedrichsbrücke: The Quiet Bridge That Tells Berlin's Entire Story",
-      "slug": "friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story",
-      "path": "/post/friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story",
-      "url": "https://www.berlinwalk.com/post/friedrichsbrücke-the-quiet-bridge-that-tells-berlin-s-entire-story",
-      "excerpt": "A quiet bridge beside Museum Island tells the story of royal Berlin, wartime destruction, GDR rebuilding and the Spree city.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "9 min read",
-      "publishedDate": "2026-03-02T19:22:38.660Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_23ed74708d784a0e8da1f3b29094bbea~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20sidewalk%20near%20body%20of%20water%20during%20daytime.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_23ed74708d784a0e8da1f3b29094bbea~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20sidewalk%20near%20body%20of%20water%20during%20daytime.jpg",
-      "alt": "Friedrichsbruecke bridge over the Spree River near Museum Island in Berlin",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Why Berlin Doesn't Have a Beautiful Old Town (And Why That's the Point)",
-      "slug": "why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
-      "path": "/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
-      "url": "https://www.berlinwalk.com/post/why-berlin-doesn-t-have-a-beautiful-old-town-and-why-that-s-the-point",
-      "excerpt": "Berlin has no classic beautiful old town because war, division and East Berlin planning reshaped the historic centre. That missing old town is the point.",
-      "category": "Berlin Myths",
-      "categorySlug": "berlin-myths",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "9 min read",
-      "publishedDate": "2026-03-01T08:36:19.795Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_2311051e8d1249d5b57ad5beebbd337d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/old-berlin-nikolaiviertel-1880.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_2311051e8d1249d5b57ad5beebbd337d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/old-berlin-nikolaiviertel-1880.jpg",
-      "alt": "Nikolaiviertel in old Berlin around 1880, showing narrow streets and dense historic buildings",
-      "relatedToolSlug": "medieval-berlin-mini-walk"
     },
     {
       "title": "How Much Should You Tip on a Free Walking Tour in Berlin?",
@@ -4526,108 +4373,6 @@
       "relatedToolSlug": "berlin-tip-calculator"
     },
     {
-      "title": "Liebknecht Bridge: The Best View in Berlin That Nobody Talks About",
-      "slug": "liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about",
-      "path": "/post/liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about",
-      "url": "https://www.berlinwalk.com/post/liebknecht-bridge-the-best-view-in-berlin-that-nobody-talks-about",
-      "excerpt": "A quiet bridge between Alexanderplatz and Museum Island gives you one of Berlin's most revealing views.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "10 min read",
-      "publishedDate": "2026-03-01T08:35:14.041Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_23ed74708d784a0e8da1f3b29094bbea~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20sidewalk%20near%20body%20of%20water%20during%20daytime.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_23ed74708d784a0e8da1f3b29094bbea~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/people%20walking%20on%20sidewalk%20near%20body%20of%20water%20during%20daytime.jpg",
-      "alt": "View from near Liebknecht Bridge toward the Berliner Dom and the Spree in central Berlin",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "The Altes Museum: How One Building Made Berlin a Cultural Capital",
-      "slug": "the-altes-museum-how-one-building-made-berlin-a-cultural-capital",
-      "path": "/post/the-altes-museum-how-one-building-made-berlin-a-cultural-capital",
-      "url": "https://www.berlinwalk.com/post/the-altes-museum-how-one-building-made-berlin-a-cultural-capital",
-      "excerpt": "Why Schinkel’s Altes Museum matters: Berlin’s first museum building, its classical architecture, current collection, war damage and practical 2026 visit notes.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "11 min read",
-      "publishedDate": "2026-03-01T08:34:44.821Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_a45f3abf367c4c529063dca91fd5b3c1~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20group%20of%20people%20walking%20up%20and%20down%20some%20steps.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_a45f3abf367c4c529063dca91fd5b3c1~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20group%20of%20people%20walking%20up%20and%20down%20some%20steps.jpg",
-      "alt": "Altes Museum in Berlin with Ionic columns, staircase and blue sky above Museum Island",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Neptune Fountain: The Baroque Masterpiece That Moved Across Berlin",
-      "slug": "neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin",
-      "path": "/post/neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin",
-      "url": "https://www.berlinwalk.com/post/neptune-fountain-the-baroque-masterpiece-that-moved-across-berlin",
-      "excerpt": "Why Berlin Neptune Fountain moved from palace symbolism to the GDR city centre, and what the 2026 restoration means for visitors.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "10 min read",
-      "publishedDate": "2026-03-01T08:34:14.724Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_96baa8ef90154861b51d758e6cf0a9b0~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_8008-min.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_96baa8ef90154861b51d758e6cf0a9b0~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_8008-min.jpg",
-      "alt": "Neptune Fountain statue with St Marys Church roof behind it in central Berlin",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Rotes Rathaus: Why Berlin's City Hall Is Red (And It Has Nothing to Do With Communism)",
-      "slug": "rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism",
-      "path": "/post/rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism",
-      "url": "https://www.berlinwalk.com/post/rotes-rathaus-why-berlin-s-city-hall-is-red-and-it-has-nothing-to-do-with-communism",
-      "excerpt": "The Rotes Rathaus is not red because of communism. The real story starts with brick, 1860s civic pride and a building that later survived Berlin division.",
-      "category": "Berlin Myths",
-      "categorySlug": "berlin-myths",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "9 min read",
-      "publishedDate": "2026-02-28T21:25:08.788Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_df4933cbba354030adbd3433c260eb65~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinRotesRathausCityHall.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_df4933cbba354030adbd3433c260eb65~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/BerlinRotesRathausCityHall.jpg",
-      "alt": "The red-brick facade and tower of the Rotes Rathaus in Berlin",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "Berlin's Lost Neighborhood: What the GDR Demolished to Build a Socialist Utopia",
-      "slug": "berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia",
-      "path": "/post/berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia",
-      "url": "https://www.berlinwalk.com/post/berlin-s-lost-neighborhood-what-the-gdr-demolished-to-build-a-socialist-utopia",
-      "excerpt": "Berlin's lost Marienviertel explains why the space near the TV Tower feels so open: Nazi plans, war damage, GDR demolition and a vanished medieval street plan.",
-      "category": "Before & After",
-      "categorySlug": "before-after",
-      "topic": "history-myths",
-      "topicLabel": "Berlin History & Myths",
-      "readTime": "10 min read",
-      "publishedDate": "2026-02-28T21:24:29.678Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_c3ff467d4f2a4a95af1380c59d80e738~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/Marienviertel_edited.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_c3ff467d4f2a4a95af1380c59d80e738~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/Marienviertel_edited.jpg",
-      "alt": "Marienviertel information panel and open space near St. Mary's Church in Berlin",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "St. Mary's Church: The Medieval Survivor in the Shadow of the TV Tower",
-      "slug": "st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
-      "path": "/post/st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
-      "url": "https://www.berlinwalk.com/post/st-mary-s-church-the-medieval-survivor-in-the-shadow-of-the-tv-tower",
-      "excerpt": "St. Mary's Church near Alexanderplatz explains medieval Berlin, the vanished Marienviertel, the Totentanz and the TV Tower contrast.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "9 min read",
-      "publishedDate": "2026-02-28T21:23:51.898Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_7b7b631e94b04e159091391249bc4906~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_7905-min.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_7b7b631e94b04e159091391249bc4906~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_7905-min.jpg",
-      "alt": "St. Mary's Church in Berlin near Alexanderplatz with autumn trees and open space",
-      "relatedToolSlug": "medieval-berlin-mini-walk"
-    },
-    {
       "title": "The Best Views in Berlin You Can Find on Foot",
       "slug": "the-best-views-in-berlin-you-can-find-on-foot",
       "path": "/post/the-best-views-in-berlin-you-can-find-on-foot",
@@ -4643,40 +4388,6 @@
       "thumb": "https://static.wixstatic.com/media/nsplsh_50334a4954734f4c324155~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/gold%20dome%20building.jpg",
       "alt": "Berliner Dom and the Spree at night from a central Berlin bridge",
       "relatedToolSlug": "berlin-landmarks-map"
-    },
-    {
-      "title": "Marx and Engels Are Still Standing in Berlin: Here's Why",
-      "slug": "marx-and-engels-are-still-standing-in-berlin-here-s-why",
-      "path": "/post/marx-and-engels-are-still-standing-in-berlin-here-s-why",
-      "url": "https://www.berlinwalk.com/post/marx-and-engels-are-still-standing-in-berlin-here-s-why",
-      "excerpt": "Why are Marx and Engels still standing in Berlin? A clear guide to the Marx-Engels-Forum, GDR memory, reunification debates and the 2026 visitor update.",
-      "category": "Tour Route",
-      "categorySlug": "tour-route",
-      "topic": "route-stories",
-      "topicLabel": "Tour Route Stories",
-      "readTime": "8 min read",
-      "publishedDate": "2026-02-28T21:22:36.931Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_6727bf0dc1f3438b82c1e43740fdd5b7~mv2.png/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_8055_edited.png",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_6727bf0dc1f3438b82c1e43740fdd5b7~mv2.png/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/October%2031%2C%202024-IMG_8055_edited.png",
-      "alt": "Marx-Engels Statue",
-      "relatedToolSlug": ""
-    },
-    {
-      "title": "10 German Words Every Tourist Should Know Before Visiting Berlin",
-      "slug": "10-german-words-every-tourist-should-know-before-visiting-berlin",
-      "path": "/post/10-german-words-every-tourist-should-know-before-visiting-berlin",
-      "url": "https://www.berlinwalk.com/post/10-german-words-every-tourist-should-know-before-visiting-berlin",
-      "excerpt": "Learn 10 practical German words and phrases for a smoother Berlin trip, from Danke and Bitte to Stimmt so, Karte and transport signs.",
-      "category": "German Language",
-      "categorySlug": "german-language",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "7 min read",
-      "publishedDate": "2026-02-26T14:46:44.290Z",
-      "image": "https://static.wixstatic.com/media/nsplsh_f0208352f62b402b81731e60049ad692~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20flag%20on%20a%20pole.jpg",
-      "thumb": "https://static.wixstatic.com/media/nsplsh_f0208352f62b402b81731e60049ad692~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/a%20flag%20on%20a%20pole.jpg",
-      "alt": "10 German Words Every Tourist Should Know Before Visiting Berlin",
-      "relatedToolSlug": ""
     },
     {
       "title": "What Is a Free Walking Tour? How Tip-Based Tours Actually Work",

@@ -180,6 +180,8 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'berlin-u-bahn-fine',
   secondary: [
+    'renting-a-bike-in-berlin',
+    'is-the-ddr-museum-worth-it',
     'deutschlandticket-berlin-tourists',
     'potsdam-from-berlin-day-trip',
     'berlin-before-hotel-check-in',
@@ -218,6 +220,9 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'berlin-u-bahn-fine',
+  'renting-a-bike-in-berlin',
+  'is-the-ddr-museum-worth-it',
+  'e-scooters-in-berlin',
   'deutschlandticket-berlin-tourists',
   'potsdam-from-berlin-day-trip',
   'berlin-before-hotel-check-in',
@@ -516,6 +521,9 @@ function topicFor(post) {
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
   if (/(berlin-u-bahn-fine|u-bahn fine|caught without a ticket|ticket fine|\bebe\b)/.test(s)) return 'berlin-ticket-fine-step-planner';
+  if (/(renting-a-bike-in-berlin|renting a bike in berlin|bike rental|bike sharing|nextbike|donkey republic)/.test(s)) return 'berlin-bike-rental-finder';
+  if (/(is-the-ddr-museum-worth-it|ddr museum|museum pass will not cover|east german living room)/.test(s)) return 'ddr-museum-crowd-planner';
+  if (/(e-scooters-in-berlin|e-scooters in berlin|rental e-scooters|e-scooter rules|e-scooter)/.test(s)) return 'berlin-e-scooter-rule-checker';
   if (/(berlin-umweltzone-sticker|umweltzone sticker|green sticker|low-emission zone)/.test(s)) return 'berlin-umweltzone-sticker-checker';
   if (/(berlin-before-hotel-check-in|before hotel check-in|hotel check-in|early check-in berlin|check-in gap)/.test(s)) return 'berlin-check-in-gap-planner';
   if (/(berliner-dom-tickets|berliner dom tickets|berlin cathedral tickets|dome climb|hohenzollern crypt)/.test(s)) return 'berliner-dom-visit-planner';
