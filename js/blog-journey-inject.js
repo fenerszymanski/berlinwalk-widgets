@@ -13,7 +13,7 @@
   var MOBILE_MARKER = 'data-bw-blog-mobile-guide';
   var TOOL_MARKER = 'data-bw-blog-tool-prompt';
   var JOURNEY_MARKER = 'data-bw-blog-journey';
-  var JOURNEY_LAYOUT_VERSION = 'blog-journey-mobile-fullwidth-20260709a';
+  var JOURNEY_LAYOUT_VERSION = 'blog-journey-action-cards-20260709a';
   var BACK_TOP_MARKER = 'data-bw-blog-back-top';
   var EMPTY_PARAGRAPH_MARKER = 'data-bw-empty-paragraph';
   var WIDGET_BLOCK_MARKER = 'data-bw-blog-widget-block';
@@ -1066,13 +1066,16 @@
       '.bw-blog-journey-card:hover{box-shadow:0 14px 28px rgba(0,0,0,.25);transform:translateY(-2px);}',
       '.bw-blog-journey-image{aspect-ratio:16/9;background:#E8EEE6;display:block;overflow:hidden;width:100%;}',
       '.bw-blog-journey-image img{display:block;height:100%!important;object-fit:cover;width:100%!important;}',
-      '.bw-blog-journey-card-use-a-tool .bw-blog-journey-image{align-items:center;background:linear-gradient(135deg,#FFFDF1 0%,#E8F5E4 100%);display:flex;justify-content:center;padding:24px;}',
-      '.bw-blog-journey-card-use-a-tool .bw-blog-journey-image img{height:82px!important;max-height:70%;max-width:82px;object-fit:contain;width:82px!important;}',
+      '.bw-blog-journey-card-kind-tool{background:#FAFAF5;border:1px solid rgba(197,225,165,.85);position:relative;}',
+      '.bw-blog-journey-card-kind-tool .bw-blog-journey-image{align-items:center;aspect-ratio:1;background:#F3F8EF;border:1px solid #C5E1A5;border-radius:8px;display:flex;height:54px;justify-content:center;margin:16px 16px 0;overflow:hidden;padding:8px;width:54px;}',
+      '.bw-blog-journey-card-kind-tool .bw-blog-journey-image img{height:100%!important;max-height:38px;max-width:38px;object-fit:contain;width:100%!important;}',
       '.bw-blog-journey-content{display:flex;flex:1;flex-direction:column;padding:14px 15px 16px;}',
       '.bw-blog-journey-label{color:#1B5E20;display:block;font-size:10px;font-weight:900;letter-spacing:1.2px;line-height:1;margin-bottom:9px;text-transform:uppercase;}',
       '.bw-blog-journey-card strong{color:#212121;display:block;font-size:16px;font-weight:900;line-height:1.16;overflow-wrap:break-word;}',
       '.bw-blog-journey-proof{align-self:flex-start;background:#F3F8EF;border:1px solid #C5E1A5;border-radius:999px;color:#1B5E20;display:inline-flex;font-size:11px;font-weight:900;letter-spacing:.2px;line-height:1.2;margin-top:10px;padding:6px 9px;}',
       '.bw-blog-journey-card-copy{color:#4E5A4E;display:block;font-family:Merriweather,Georgia,serif;font-size:14px;line-height:1.46;margin-top:10px;}',
+      '.bw-blog-journey-card-kind-tool .bw-blog-journey-card-copy{-webkit-box-orient:vertical;-webkit-line-clamp:2;display:-webkit-box;overflow:hidden;}',
+      '.bw-blog-journey-action{align-self:flex-start;border-bottom:3px solid #FFE600;color:#1B5E20;display:inline-flex;font-size:11px;font-weight:900;letter-spacing:.7px;line-height:1;margin-top:13px;padding-bottom:3px;text-transform:uppercase;}',
       '.bw-tool-bridge{margin:34px 0 26px;padding:28px 28px 24px;}',
       '.bw-tool-bridge-main{align-items:center;display:grid;gap:18px;grid-template-columns:minmax(0,1fr) auto;}',
       '.bw-tool-bridge-book{min-height:48px;padding:0 18px;}',
@@ -1086,8 +1089,8 @@
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
       '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + WIDGET_BLOCK_MARKER + '="1"]{margin-bottom:28px!important;}}',
       '@media (max-width:899px){body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{font-size:clamp(32px,8.4vw,35px)!important;line-height:1.06!important;margin-top:18px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-bottom:2px solid #212121;display:block;margin:0 0 28px;padding:24px 0 20px;position:relative;}.bw-blog-mobile-nav:before{background:#1B5E20;content:"";display:block;height:5px;left:0;position:absolute;right:0;top:0;}.bw-blog-mobile-nav:after{background:#212121;content:"";display:block;height:2px;left:0;position:absolute;right:0;top:86px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button,.bw-tool-bridge-book{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-tool-bridge-main,.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}',
-      '@media (max-width:899px){.bw-blog-journey{background:#102414;margin:34px calc(50% - 50vw) 32px!important;max-width:100vw;overflow:hidden;padding:30px max(20px, env(safe-area-inset-right)) 34px max(20px, env(safe-area-inset-left));width:100vw;}.bw-blog-journey>*{margin-left:auto;margin-right:auto;max-width:560px;}.bw-blog-journey:before{height:6px;}.bw-blog-journey-kicker{font-size:12px;letter-spacing:1.4px;margin-bottom:12px;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey h2{font-size:28px!important;line-height:1.05!important;margin-bottom:10px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey .bw-blog-journey-intro{font-size:15px!important;line-height:1.62!important;margin-bottom:24px!important;}.bw-blog-journey-grid{gap:16px;margin-bottom:28px;}.bw-blog-related-title{font-size:13px!important;letter-spacing:1.4px!important;margin:4px auto 16px!important;}.bw-blog-related-grid{gap:16px;}.bw-blog-journey-card{border:1px solid rgba(197,225,165,.22);box-shadow:0 14px 30px rgba(0,0,0,.24);width:100%;}.bw-blog-journey-content{padding:16px 16px 18px;}.bw-blog-journey-card strong{font-size:18px;line-height:1.12;}.bw-blog-related-grid .bw-blog-journey-card{display:grid;grid-template-columns:minmax(104px,34%) minmax(0,1fr);min-height:132px;}.bw-blog-related-grid .bw-blog-journey-image{aspect-ratio:auto;height:100%;min-height:132px;}.bw-blog-related-grid .bw-blog-journey-content{justify-content:center;padding:14px 14px 15px;}.bw-blog-related-grid .bw-blog-journey-card strong{font-size:16px;line-height:1.15;}.bw-blog-related-grid .bw-blog-journey-label{font-size:10px;margin-bottom:8px;}.bw-blog-journey-card-use-a-tool .bw-blog-journey-image{min-height:132px;padding:18px;}.bw-blog-journey-card-use-a-tool .bw-blog-journey-image img{height:72px!important;width:72px!important;}}',
-      '@media (max-width:360px){.bw-blog-journey{padding-left:16px;padding-right:16px;}.bw-blog-related-grid .bw-blog-journey-card{grid-template-columns:96px minmax(0,1fr);min-height:124px;}.bw-blog-related-grid .bw-blog-journey-image{min-height:124px;}.bw-blog-related-grid .bw-blog-journey-content{padding:12px;}.bw-blog-related-grid .bw-blog-journey-card strong{font-size:15px;}}'
+      '@media (max-width:899px){.bw-blog-journey{background:#102414;margin:34px calc(50% - 50vw) 32px!important;max-width:100vw;overflow:hidden;padding:30px max(20px, env(safe-area-inset-right)) 34px max(20px, env(safe-area-inset-left));width:100vw;}.bw-blog-journey>*{margin-left:auto;margin-right:auto;max-width:560px;}.bw-blog-journey:before{height:6px;}.bw-blog-journey-kicker{font-size:12px;letter-spacing:1.4px;margin-bottom:12px;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey h2{font-size:28px!important;line-height:1.05!important;margin-bottom:10px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey .bw-blog-journey-intro{font-size:15px!important;line-height:1.62!important;margin-bottom:24px!important;}.bw-blog-journey-grid{gap:16px;margin-bottom:28px;}.bw-blog-related-title{font-size:13px!important;letter-spacing:1.4px!important;margin:4px auto 16px!important;}.bw-blog-related-grid{gap:16px;}.bw-blog-journey-card{border:1px solid rgba(197,225,165,.22);box-shadow:0 14px 30px rgba(0,0,0,.24);width:100%;}.bw-blog-journey-content{padding:16px 16px 18px;}.bw-blog-journey-card strong{font-size:18px;line-height:1.12;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool{align-items:center;background:#FAFAF5;display:grid;grid-template-columns:minmax(0,1fr) 74px;min-height:132px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-image{grid-column:2;grid-row:1;height:54px;margin:16px 16px 16px 0;width:54px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-content{grid-column:1;grid-row:1;justify-content:center;padding:16px 0 18px 16px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool strong{font-size:17px;line-height:1.12;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-card-copy{font-size:13.5px;line-height:1.42;margin-top:9px;}.bw-blog-related-grid .bw-blog-journey-card{display:grid;grid-template-columns:minmax(104px,34%) minmax(0,1fr);min-height:132px;}.bw-blog-related-grid .bw-blog-journey-image{aspect-ratio:auto;height:100%;min-height:132px;}.bw-blog-related-grid .bw-blog-journey-content{justify-content:center;padding:14px 14px 15px;}.bw-blog-related-grid .bw-blog-journey-card strong{font-size:16px;line-height:1.15;}.bw-blog-related-grid .bw-blog-journey-label{font-size:10px;margin-bottom:8px;}}',
+      '@media (max-width:360px){.bw-blog-journey{padding-left:16px;padding-right:16px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool{grid-template-columns:minmax(0,1fr) 62px;min-height:124px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-image{height:46px;margin-right:12px;width:46px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-content{padding:14px 0 15px 14px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool strong{font-size:16px;}.bw-blog-related-grid .bw-blog-journey-card{grid-template-columns:96px minmax(0,1fr);min-height:124px;}.bw-blog-related-grid .bw-blog-journey-image{min-height:124px;}.bw-blog-related-grid .bw-blog-journey-content{padding:12px;}.bw-blog-related-grid .bw-blog-journey-card strong{font-size:15px;}}'
     ].join('\n');
     (document.head || document.documentElement).appendChild(style);
   }
@@ -1717,8 +1720,10 @@
       label: 'Plan it',
       kind: 'tool',
       title: title || 'Build a Berlin Trip Pack',
+      copy: 'Turn this guide into a simple route and timing plan.',
       url: journeyUtmUrl(TRIP_PLANNER_URL, slug, context || 'trip_planner', 'blog_bridge'),
       image: TOOL_ICON_FALLBACKS['berlin-first-day-planner'] || DEFAULT_TOOL_IMAGE,
+      actionText: 'Plan route',
       ctaKind: 'trip_planner'
     };
   }
@@ -1729,8 +1734,10 @@
       label: label || 'Use a tool',
       kind: 'tool',
       title: tool.title,
+      copy: tool.summary || tool.lead || 'Use it when this detail affects what you do next.',
       url: journeyUtmUrl(tool.url, post && post.slug, 'tool_' + (tool.slug || slugify(tool.title)), 'blog_tool_bridge'),
       image: tool.image,
+      actionText: 'Open tool',
       ctaKind: 'tool'
     };
   }
@@ -1840,13 +1847,20 @@
     if (card.bookOnceKey) bookAttrs += ' data-bw-book-once-key="' + escapeAttr(card.bookOnceKey) + '"';
     if (card.bookingVariant) bookAttrs += ' data-bw-book-variant="' + escapeAttr(card.bookingVariant) + '"';
     var ctaKind = card.ctaKind ? ' data-bw-journey-cta-kind="' + escapeAttr(card.ctaKind) + '"' : '';
-    return '<a class="bw-blog-journey-card bw-blog-journey-card-' + escapeAttr(key) + '" href="' + escapeAttr(card.url) + '" target="_top" data-bw-blog-journey-click="' + escapeAttr(card.label) + '"' + ctaKind + bookAttrs + '>' +
+    var classes = [
+      'bw-blog-journey-card',
+      'bw-blog-journey-card-' + key
+    ];
+    if (card.kind) classes.push('bw-blog-journey-card-kind-' + slugify(card.kind));
+    if (card.ctaKind) classes.push('bw-blog-journey-card-' + slugify(card.ctaKind));
+    return '<a class="' + escapeAttr(classes.join(' ')) + '" href="' + escapeAttr(card.url) + '" target="_top" data-bw-blog-journey-click="' + escapeAttr(card.label) + '"' + ctaKind + bookAttrs + '>' +
       '<span class="bw-blog-journey-image" aria-hidden="true"><img src="' + escapeAttr(image) + '" alt="" loading="lazy"></span>' +
       '<span class="bw-blog-journey-content">' +
         '<span class="bw-blog-journey-label">' + escapeHtml(card.label) + '</span>' +
         '<strong>' + escapeHtml(card.title) + '</strong>' +
         (card.proofChip ? '<span class="bw-blog-journey-proof">' + escapeHtml(card.proofChip) + '</span>' : '') +
         (card.copy ? '<span class="bw-blog-journey-card-copy">' + escapeHtml(card.copy) + '</span>' : '') +
+        (card.actionText ? '<span class="bw-blog-journey-action">' + escapeHtml(card.actionText) + '</span>' : '') +
       '</span>' +
     '</a>';
   }
