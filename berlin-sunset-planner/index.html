@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Berlin Sunset Planner | BerlinWalk</title>
+  <meta name="description" content="Pick any date and get Berlin's real sunset time, golden hour and blue hour, plus the best-facing spot to watch the light for that time of year.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root{
+      --green:#1B5E20; --green2:#2e7d32; --yellow:#FFE600; --lime:#7CB342;
+      --lightgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --red:#E63946;
+      --line:rgba(33,33,33,.13); --shadow:0 18px 45px rgba(27,94,32,.16);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Montserrat,Arial,sans-serif;line-height:1.45;}
+    .wrap{max-width:780px;margin:0 auto;padding:18px 16px 8px;}
+    .card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;}
+    .head{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:18px 20px;}
+    .kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;}
+    .title{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em;}
+    .sub{margin:6px 0 0;font-size:13px;color:rgba(255,255,255,.9);}
+    .body{padding:18px 20px 20px;}
+    .lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin:2px 0 8px;display:flex;justify-content:space-between;align-items:baseline;gap:8px;}
+    .lbl .datepick{font-size:15px;font-weight:800;color:var(--ink);text-transform:none;letter-spacing:0;}
+    /* sky panel: real data readout, not decoration */
+    .sky{position:relative;height:120px;border-radius:16px;overflow:hidden;border:1px solid var(--line);margin:6px 0 4px;}
+    .sky .sun{position:absolute;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 50% 40%,#fff7cf,#ffd23f 55%,#ff9d2f 100%);box-shadow:0 0 26px 8px rgba(255,180,60,.6);transform:translate(-50%,-50%);transition:left .25s ease,top .25s ease;}
+    .sky .horizon{position:absolute;left:0;right:0;bottom:0;height:34%;background:linear-gradient(180deg,rgba(20,30,25,.15),#12251b);}
+    .sky .skyline{position:absolute;left:0;right:0;bottom:34%;height:22px;background:
+      repeating-linear-gradient(90deg,transparent 0 14px,rgba(10,20,15,.85) 14px 20px,transparent 20px 30px,rgba(10,20,15,.7) 30px 40px,transparent 40px 58px,rgba(10,20,15,.9) 58px 64px);}
+    .sliderwrap{margin:14px 0 2px;}
+    input[type=range]{width:100%;-webkit-appearance:none;appearance:none;background:transparent;margin:0;}
+    input[type=range]:focus{outline:none;}
+    input[type=range]::-webkit-slider-runnable-track{height:12px;border-radius:10px;background:linear-gradient(90deg,#9fb7d6,#cfe0b6,var(--yellow),#ffb35c,#9fb7d6);}
+    input[type=range]::-moz-range-track{height:12px;border-radius:10px;background:linear-gradient(90deg,#9fb7d6,#cfe0b6,var(--yellow),#ffb35c,#9fb7d6);}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;background:#fff;border:4px solid var(--green);box-shadow:0 4px 10px rgba(0,0,0,.25);margin-top:-8px;cursor:pointer;}
+    input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:#fff;border:4px solid var(--green);box-shadow:0 4px 10px rgba(0,0,0,.25);cursor:pointer;}
+    .months{display:flex;justify-content:space-between;font-size:10px;color:#7a7a7a;margin-top:4px;letter-spacing:.02em;}
+    .times{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0 4px;}
+    .tcell{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:12px 10px;text-align:center;}
+    .tcell .k{font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#6a6a6a;margin:0 0 4px;}
+    .tcell .v{font-size:22px;font-weight:800;color:var(--green);margin:0;line-height:1;}
+    .tcell.mid{background:var(--green);border-color:var(--green);}
+    .tcell.mid .k{color:var(--yellow);}
+    .tcell.mid .v{color:#fff;}
+    .tcell .s{display:block;font-size:10px;color:#8a8a8a;margin-top:3px;}
+    .tcell.mid .s{color:rgba(255,255,255,.8);}
+    .why{font-size:13px;color:#3a3a3a;background:#f3f8ec;border-left:4px solid var(--lime);border-radius:10px;padding:10px 12px;margin:12px 0 4px;}
+    .spotlbl{margin-top:18px;}
+    .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px;}
+    .chip{border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:999px;padding:7px 12px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:.15s;}
+    .chip[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff;box-shadow:0 8px 18px rgba(27,94,32,.22);}
+    .chip .pin{color:var(--yellow);margin-right:5px;}
+    .chip[aria-pressed="true"] .pin{color:var(--yellow);}
+    .spot{border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+    .spot-top{padding:13px 15px;background:var(--cream);border-bottom:1px solid var(--line);}
+    .spot-name{font-size:17px;font-weight:800;margin:0;color:var(--green);}
+    .spot-name .auto{font-size:11px;font-weight:700;color:#7a5;background:#eaf3dc;border-radius:6px;padding:2px 7px;margin-left:8px;vertical-align:middle;}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px;}
+    .tag{font-size:11px;font-weight:700;border-radius:6px;padding:3px 8px;background:#eef2e6;color:#4a5a3a;}
+    .tag.free{background:#e7f2da;color:#2e6b1f;}
+    .tag.fee{background:#fdf0d8;color:#8a5a12;}
+    .spot-body{padding:13px 15px 15px;}
+    .spot-why{font-size:14px;margin:0 0 10px;}
+    .move{background:#f3f8ec;border-left:4px solid var(--green);border-radius:10px;padding:11px 13px;font-size:13.5px;}
+    .move .mtag{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:3px;}
+    .getthere{font-size:12.5px;color:#555;margin:10px 2px 0;}
+    .getthere b{color:#333;}
+    .note{font-size:11.5px;color:#777;margin:14px 2px 2px;}
+    @media(max-width:430px){.times{grid-template-columns:repeat(3,1fr);gap:7px}.tcell .v{font-size:19px}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="head">
+        <p class="kicker">BerlinWalk • Sunset</p>
+        <h2 class="title">Berlin Sunset Planner</h2>
+        <p class="sub">Slide to any date to get Berlin's real sunset, golden hour and blue hour, then the best-facing spot to be standing in for that light.</p>
+      </div>
+      <div class="body">
+        <p class="lbl"><span>1 · When are you in Berlin?</span><span class="datepick" id="datelabel">9 July</span></p>
+        <div class="sky" id="sky"><div class="skyline"></div><div class="horizon"></div><div class="sun" id="sun"></div></div>
+        <div class="sliderwrap">
+          <input type="range" id="slider" min="0" max="364" step="1" value="189" aria-label="Date of year">
+          <div class="months"><span>Jan</span><span>Mar</span><span>May</span><span>Jul</span><span>Sep</span><span>Nov</span><span>Dec</span></div>
+        </div>
+
+        <div class="times">
+          <div class="tcell"><p class="k">Golden hour</p><p class="v" id="golden">20:57</p><span class="s">warm light starts</span></div>
+          <div class="tcell mid"><p class="k">Sunset</p><p class="v" id="sunset">21:29</p><span class="s">sun touches horizon</span></div>
+          <div class="tcell"><p class="k">Blue hour ends</p><p class="v" id="blue">22:17</p><span class="s">sky goes dark</span></div>
+        </div>
+        <p class="why" id="why"></p>
+
+        <p class="lbl spotlbl">2 · Where to stand</p>
+        <div class="chips" id="chips"></div>
+        <div class="spot" id="spot"></div>
+        <p class="note">Times are calculated for Berlin (52.52°N, 13.41°E) and adjust for summer/winter clock. Tempelhofer Feld and parks have official closing times near sunset in summer, so arrive with time to spare.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/brand.js"></script>
+  <script>
+  (function(){
+    var LAT=52.52, LON=13.405, rad=Math.PI/180, deg=180/Math.PI, YEAR=2026;
+    function isLeap(y){return (y%4===0&&y%100!==0)||y%400===0;}
+    function fromDOY(doy){var d=new Date(Date.UTC(YEAR,0,1));d.setUTCDate(d.getUTCDate()+doy);return {m:d.getUTCMonth()+1,d:d.getUTCDate(),mon:d.getUTCMonth()};}
+    function dayNumber(m,d){return Math.floor((Date.UTC(YEAR,m-1,d)-Date.UTC(YEAR,0,0))/86400000);}
+    function utcOffset(m,d){ // Berlin: last Sun Mar .. last Sun Oct => +2, else +1
+      function lastSun(mon){var dt=new Date(Date.UTC(YEAR,mon,31));while(dt.getUTCDay()!==0)dt.setUTCDate(dt.getUTCDate()-1);return dt.getUTCDate();}
+      var t=Date.UTC(YEAR,m-1,d),start=Date.UTC(YEAR,2,lastSun(2),1),end=Date.UTC(YEAR,9,lastSun(9),1);
+      return (t>=start&&t<end)?2:1;
+    }
+    function sunEvent(m,d,angle){
+      var n=dayNumber(m,d), gamma=2*Math.PI/365*(n-1+0.5);
+      var eq=229.18*(0.000075+0.001868*Math.cos(gamma)-0.032077*Math.sin(gamma)-0.014615*Math.cos(2*gamma)-0.040849*Math.sin(2*gamma));
+      var decl=0.006918-0.399912*Math.cos(gamma)+0.070257*Math.sin(gamma)-0.006758*Math.cos(2*gamma)+0.000907*Math.sin(2*gamma)-0.002697*Math.cos(3*gamma)+0.00148*Math.sin(3*gamma);
+      var cosH=(Math.cos((90-angle)*rad)-Math.sin(LAT*rad)*Math.sin(decl))/(Math.cos(LAT*rad)*Math.cos(decl));
+      if(cosH<-1)return null; if(cosH>1)return null;
+      var ha=Math.acos(cosH)*deg;
+      var utcMin=720-4*LON-eq+4*ha, local=utcMin+utcOffset(m,d)*60;
+      var h=Math.floor(local/60), mm=Math.round(local-h*60); if(mm===60){h++;mm=0;} h=(h+24)%24;
+      return {h:h,mm:mm,mins:local};
+    }
+    function fmt(t){return t?t.h+':'+(t.mm<10?'0':'')+t.mm:'—';}
+    var MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+    var SPOTS={
+      oberbaum:{name:'Oberbaumbrücke',
+        tags:[['Free','free'],['Water + skyline',''],['No climb','']],
+        why:'Berlin’s most cinematic bridge, with the sun dropping down the Spree between the two brick towers and a U-Bahn rattling across on top.',
+        move:'Take the stairs to the upper walkway rather than standing on the road deck. You get the arches, the water and the train line all in one frame.',
+        get:'U1/U3 Schlesisches Tor or S+U Warschauer Straße, then a 5-minute walk to the river.'},
+      tempelhof:{name:'Tempelhofer Feld',
+        tags:[['Free','free'],['Biggest sky',''],['Wide flat horizon','']],
+        why:'A former airport with nothing between you and the western sky. On the old runways the sun sets over a horizon most cities do not have, and the whole field turns out to watch it.',
+        move:'Walk out onto a runway line, not just the grass edge, and face west. Bring something to sit on and stay for the blue hour after the sun goes.',
+        get:'U6 Paradestraße, U8 Boddinstraße or S+U Tempelhof. Check the closing time on the gate in summer.'},
+      viktoria:{name:'Viktoriapark, Kreuzberg',
+        tags:[['Free','free'],['Elevated view',''],['Short climb','']],
+        why:'The highest natural hill in inner Berlin, with a waterfall, the Nationaldenkmal monument and a view over Kreuzberg’s rooftops toward the city.',
+        move:'Climb to the monument terrace and look north over the rooftops. It is central, quick and green, so it works even on an evening you did not plan around.',
+        get:'U6 Platz der Luftbrücke or U7 Yorckstraße, then a short walk up the hill.'},
+      drachenberg:{name:'Drachenberg, Grunewald',
+        tags:[['Free','free'],['360° panorama',''],['Real effort','']],
+        why:'A rubble hill on the western edge of the city with a wide panorama over the Grunewald forest. On a clear evening it is the biggest view Berlin gives you.',
+        move:'Only make the trip when the sky is clear. It is a proper walk out west and uphill, so it rewards a planned clear-weather evening, not a spur-of-the-moment one.',
+        get:'S3/S7 Grunewald, then roughly a 30-minute walk plus the climb. Good shoes help.'},
+      klunker:{name:'Klunkerkranich, Neukölln',
+        tags:[['Small fee','fee'],['Rooftop bar',''],['Drinks + DJ','']],
+        why:'A rooftop bar on top of the Neukölln Arcaden car park, with a scrappy skyline view, plants, drinks and a DJ as the sun goes down.',
+        move:'Go early to get a spot at the western railing before it fills, and check it is open and dry first, since it is weather-dependent and busiest in summer.',
+        get:'U7/U8 Rathaus Neukölln, then up through the shopping-centre car park to the roof.'},
+      landwehr:{name:'Admiralbrücke & the Landwehrkanal',
+        tags:[['Free','free'],['Low-key, local',''],['No climb','']],
+        why:'A quiet canal instead of a big view: people sit on the Admiralbrücke with drinks and a guitar while the low light comes down the water through the trees.',
+        move:'Skip the search for a viewpoint and just sit on the canal bank. This is the easy, local version of a Berlin summer evening.',
+        get:'U8 Schönleinstraße or U1/U8 Kottbusser Tor, then a couple of minutes to the bridge.'}
+    };
+    var ORDER=['oberbaum','tempelhof','viktoria','drachenberg','klunker','landwehr'];
+
+    function autoPick(mon){ // 0=Jan
+      if(mon>=4&&mon<=7)return {key:'tempelhof',note:'Long summer light: the sky stays lit late, so a wide-open horizon like this earns the trip.'};
+      if(mon===8||mon===9)return {key:'oberbaum',note:'Early-autumn evenings light up the Spree beautifully, at a comfortable, sociable time.'};
+      if(mon>=10||mon<=1)return {key:'oberbaum',note:'Winter sun sets early, so pick a central spot with no climb and go straight after lunch.'};
+      return {key:'drachenberg',note:'Clear spring evenings are made for the big western panorama, before the trees fill in.'};
+    }
+    function whyLine(mon,sunset,blue){
+      var ss=fmt(sunset), bl=fmt(blue);
+      if(mon>=4&&mon<=7)return 'In '+MONTHS[mon]+' the sun does not set until <b>'+ss+'</b>, and the sky only really goes dark around <b>'+bl+'</b>. You can have dinner and still catch the colour, so aim for the golden hour, not the exact sunset minute.';
+      if(mon>=10||mon<=1)return 'In '+MONTHS[mon]+' the sun sets early, around <b>'+ss+'</b>, with the light gone by <b>'+bl+'</b>. Plan your viewpoint for the afternoon rather than the evening, and dress warm.';
+      return 'In '+MONTHS[mon]+' sunset lands around <b>'+ss+'</b> and the sky fades by <b>'+bl+'</b>. Comfortable timing: get to your spot about 40 minutes before sunset for the best of the light.';
+    }
+
+    var state={doy:189,spot:null,manual:false};
+    var slider=document.getElementById('slider');
+
+    function sunPosition(mon){ // place sun marker: summer high & central, winter low
+      var t=(mon)/11; // 0..1 Jan..Dec, symmetric-ish
+      var season=Math.sin((state.doy/365)*Math.PI); // 0 winter .. 1 summer
+      var left=18+64*(state.doy/365); // drifts across the panel through the year
+      var top=78-52*season; // higher (smaller top%) in summer
+      return {left:left,top:top,season:season};
+    }
+    function paintSky(mon){
+      var p=sunPosition(mon), sun=document.getElementById('sun'), sky=document.getElementById('sky');
+      sun.style.left=p.left+'%'; sun.style.top=p.top+'%';
+      // warmer, longer glow in summer; cooler, more compressed band in winter
+      var s=p.season;
+      var band=Math.round(62-8*s);          // where the warm band sits
+      var glow=Math.round(150+70*s);        // warmer orange in summer
+      var warm='rgb(255,'+glow+',96)';
+      sky.style.background='linear-gradient(180deg,#2b4a6e '+(6+s*4)+'%,#6f86a8 '+(24+s*6)+'%,#f2b559 '+band+'%,'+warm+' '+(band+18)+'%,#7a4a2a 100%)';
+    }
+
+    function renderChips(){
+      var el=document.getElementById('chips'); el.innerHTML='';
+      ORDER.forEach(function(k){
+        var b=document.createElement('button'); b.className='chip'; b.type='button';
+        b.setAttribute('aria-pressed', k===state.spot);
+        b.innerHTML='<span class="pin">◉</span>'+SPOTS[k].name.split(',')[0].split(' &')[0];
+        b.addEventListener('click',function(){state.spot=k;state.manual=true;render();});
+        el.appendChild(b);
+      });
+    }
+    function renderSpot(auto){
+      var s=SPOTS[state.spot], el=document.getElementById('spot');
+      var isAuto=!state.manual&&state.spot===auto.key;
+      var tags=s.tags.map(function(t){return '<span class="tag '+(t[1]||'')+'">'+t[0]+'</span>';}).join('');
+      el.innerHTML='<div class="spot-top"><p class="spot-name">'+s.name+(isAuto?'<span class="auto">Best for this date</span>':'')+'</p>'+
+        '<div class="tags">'+tags+'</div></div>'+
+        '<div class="spot-body"><p class="spot-why">'+s.why+'</p>'+
+        '<div class="move"><span class="mtag">Yusuf’s move</span>'+s.move+'</div>'+
+        '<p class="getthere"><b>Getting there:</b> '+s.get+'</p></div>';
+    }
+    function render(){
+      var dt=fromDOY(state.doy), mon=dt.mon;
+      document.getElementById('datelabel').textContent=dt.d+' '+MONTHS[mon];
+      var sunset=sunEvent(dt.m,dt.d,-0.833), golden=sunEvent(dt.m,dt.d,6), blue=sunEvent(dt.m,dt.d,-6);
+      document.getElementById('sunset').textContent=fmt(sunset);
+      document.getElementById('golden').textContent=fmt(golden);
+      document.getElementById('blue').textContent=fmt(blue);
+      var auto=autoPick(mon);
+      if(!state.manual)state.spot=auto.key;
+      if(!state.spot)state.spot=auto.key;
+      document.getElementById('why').innerHTML=whyLine(mon,sunset,blue)+(state.manual?'':' <em style="color:#5a6a4a">'+auto.note+'</em>');
+      paintSky(mon);
+      renderChips();
+      renderSpot(auto);
+      notifyResize();
+    }
+    function notifyResize(){try{window.dispatchEvent(new Event('resize'));}catch(e){}}
+
+    // default to today if within 2026, else keep July
+    (function initDate(){
+      var now=new Date();
+      var doy=Math.floor((Date.UTC(now.getFullYear(),now.getMonth(),now.getDate())-Date.UTC(now.getFullYear(),0,0))/86400000);
+      if(doy>=1&&doy<=365){state.doy=Math.min(364,doy-1);slider.value=state.doy;}
+    })();
+    slider.addEventListener('input',function(){state.doy=+slider.value;state.manual=false;render();});
+    render();
+  })();
+  </script>
+</body>
+</html>

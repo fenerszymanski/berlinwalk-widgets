@@ -185,7 +185,8 @@
   "renting-a-bike-in-berlin": "renting-a-bike-in-berlin",
   "renting-a-bike-in-berlin-which-option-actually-fits-your-trip": "renting-a-bike-in-berlin",
   "is-the-ddr-museum-worth-it": "is-the-ddr-museum-worth-it",
-  "is-the-ddr-museum-worth-it-tickets-queues-and-what-to-expect-in-2026": "is-the-ddr-museum-worth-it"
+  "is-the-ddr-museum-worth-it-tickets-queues-and-what-to-expect-in-2026": "is-the-ddr-museum-worth-it",
+  "where-to-watch-sunset-in-berlin": "where-to-watch-sunset-in-berlin"
 };
 
   var SCHEMAS = {
@@ -8641,6 +8642,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "It is on the Spree promenade at Karl-Liebknecht-Strasse 1, directly opposite the Berliner Dom and a two-minute walk from Museum Island. From Alexanderplatz it is about a ten-minute walk along the river. The nearest stops are Alexanderplatz (U/S-Bahn) and Hackescher Markt (S-Bahn and tram)."
+        }
+      }
+    ]
+  },
+  "where-to-watch-sunset-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What time does the sun set in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It changes a lot through the year because Berlin is so far north. Sunset is around 21:30 in early July, about 21:00 by the end of July, roughly 20:30 in mid-August and near 19:00 by late September. In midwinter the sun is gone by about 16:00. Golden hour runs for the 40 to 50 minutes before sunset, and the sky stays lit for about 40 minutes after."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is the best place to watch the sunset in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no single best spot; it depends on what you want. For the biggest open sky, go to Tempelhofer Feld or the Drachenberg. For a view over water, the Oberbaumbrücke and the Spree are the most cinematic. For something central and quick, Viktoriapark or the Landwehrkanal work. For a rooftop with a drink, Klunkerkranich in Neukölln."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Tempelhofer Feld good for sunset, and does it close?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It is one of the best sunset spots in the city because the old runways give you a completely flat western horizon. It does have official closing times that follow the season, though, and in high summer it closes not long after sunset with the gates locking behind you. Check the current hours on the official Tempelhofer Feld visitor page before you go."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I watch the sunset over water in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Spree is your best bet. The Oberbaumbrücke, the double-decker brick bridge between Kreuzberg and Friedrichshain, has the sun setting straight down the river between its towers; stand on the upper walkway. A little to the east you can also see the Molecule Man sculpture in the water with the TV Tower behind it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are Berlin sunset spots free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Almost all of them are completely free, including Tempelhofer Feld, the Drachenberg, the Oberbaumbrücke, Viktoriapark and the Landwehrkanal. The main exception is the Klunkerkranich rooftop bar, which usually charges a small entry fee in the evenings and depends on the weather."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is golden hour in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Golden hour is the warm, low light in roughly the 40 to 50 minutes before the sun reaches the horizon, and it is usually more beautiful than the sunset itself. A good rule is to arrive at your chosen spot about 40 minutes before the listed sunset time, then stay for the blue hour that lingers for another 40 minutes after."
         }
       }
     ]
