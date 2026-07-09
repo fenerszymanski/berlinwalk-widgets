@@ -953,16 +953,6 @@ class BWHeaderElement extends HTMLElement {
               </div>
 
               <div class="bw-header-mobile-section">
-                <div class="bw-header-mobile-section-label">Games</div>
-                <a href="${BW_HEADER_LINKS.games}">All Games</a>
-                <a href="${BW_HEADER_LINKS.battle}">Berlin Battle</a>
-                <a href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a>
-                <a href="${BW_HEADER_LINKS.rewind}">Berlin Rewind</a>
-                <a href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a>
-                <a href="${BW_HEADER_LINKS.smile}">Berlin Smile Challenge</a>
-              </div>
-
-              <div class="bw-header-mobile-section">
                 <div class="bw-header-mobile-section-label">Resources</div>
                 <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
@@ -970,6 +960,16 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a>
                 <a href="${BW_HEADER_LINKS.blog}">Blog</a>
                 <a href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a>
+              </div>
+
+              <div class="bw-header-mobile-section">
+                <div class="bw-header-mobile-section-label">Games</div>
+                <a href="${BW_HEADER_LINKS.games}">All Games</a>
+                <a href="${BW_HEADER_LINKS.battle}">Berlin Battle</a>
+                <a href="${BW_HEADER_LINKS.daySurvival}">Berlin Day Survival</a>
+                <a href="${BW_HEADER_LINKS.rewind}">Berlin Rewind</a>
+                <a href="${BW_HEADER_LINKS.bouncer}">Berghain Bouncer</a>
+                <a href="${BW_HEADER_LINKS.smile}">Berlin Smile Challenge</a>
               </div>
             </nav>
 
