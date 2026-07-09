@@ -776,6 +776,40 @@
       ]
     },
     {
+      "slug": "berlin-sunset-planner",
+      "title": "Berlin Sunset Planner",
+      "lead": "Get Berlin's real sunset, golden hour and blue hour for any date, then the best free spot to watch the light: Tempelhofer Feld, the Oberbaumbrücke, Viktoriapark, the Drachenberg or a rooftop.",
+      "category": "Weather",
+      "hubCategory": "WeatherOutdoor",
+      "type": "Planner",
+      "tags": [
+        "sunset",
+        "golden hour",
+        "blue hour",
+        "weather",
+        "summer",
+        "viewpoint",
+        "Tempelhofer Feld",
+        "Oberbaumbrücke",
+        "Viktoriapark"
+      ],
+      "aliases": [
+        "sunset in berlin",
+        "berlin sunset",
+        "golden hour berlin",
+        "blue hour berlin",
+        "best sunset spots berlin",
+        "sunset planner"
+      ],
+      "image": "https://static.wixstatic.com/media/5a08a3_f6e7ef42b79543ed934a228a572ead05~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-sunset-planner/",
+      "embedHeight": 1180,
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/where-to-watch-sunset-in-berlin",
+      "priority": 19,
+      "cmsItemId": "d23343fc-6787-4021-8698-02f945e69a90"
+    },
+    {
       "slug": "compare-berlin-months",
       "title": "Compare Berlin Months",
       "lead": "Stuck between two months? Compare them on weather, crowds, prices, and events.",
@@ -2311,6 +2345,40 @@
       "relatedBlog": "/post/breakfast-in-berlin",
       "priority": 16,
       "cmsItemId": "ff4f47e7-de46-4d51-be91-cb2006e22242"
+    },
+    {
+      "slug": "maybachufer-market-clock",
+      "title": "Maybachufer Market Clock",
+      "lead": "Pick a market day and time to see what the Turkish Market on Maybachufer feels like at that moment: crowd, freshness, end-of-day deals and the one move to make.",
+      "category": "Discovery",
+      "hubCategory": "FoodNightlife",
+      "type": "Guide",
+      "tags": [
+        "Maybachufer",
+        "Turkish Market",
+        "market",
+        "food",
+        "Neukölln",
+        "Kreuzberg",
+        "timing",
+        "fresh produce",
+        "street food"
+      ],
+      "aliases": [
+        "turkish market berlin",
+        "maybachufer market",
+        "maybachufer turkish market",
+        "berlin market clock",
+        "neukölln market",
+        "kreuzberg market"
+      ],
+      "image": "https://static.wixstatic.com/media/5a08a3_425a968aefdc4f0592daefa90552b180~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/maybachufer-market-clock/",
+      "embedHeight": 1120,
+      "iconStatus": "live-wix-media",
+      "relatedBlog": "/post/turkish-market-berlin-maybachufer",
+      "priority": 17,
+      "cmsItemId": "7e09bc4e-f34f-43b6-8068-7c0471929a9f"
     },
     {
       "slug": "berlin-sign-decoder",
