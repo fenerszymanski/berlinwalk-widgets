@@ -1,0 +1,27 @@
+{
+  "createdAt": "2026-07-09T08:20:00.311Z",
+  "status": "partial-unpublished-draft",
+  "publishReady": false,
+  "note": "Physical deletion and booking move were completed in Wix Studio draft, but native Products/Explore authoring through Chrome automation was not reliable enough for final publish.",
+  "layerOrder": [
+    "#page1",
+    "#section14",
+    "#section3",
+    "#section13",
+    "#customElement12",
+    "#section44",
+    "#section45",
+    "#section19",
+    "#section41",
+    "#section48",
+    "#section29",
+    "#section46",
+    "#section49",
+    "#section2"
+  ],
+  "expectedRemovedAbsent": true,
+  "bookingBeforeFaq": true,
+  "productsTextSeenInEditorDom": false,
+  "exploreTextSeenInEditorDom": false,
+  "caution": "Do not publish before Products and Explore are rebuilt/verified as native visible sections."
+}
