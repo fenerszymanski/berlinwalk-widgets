@@ -1,0 +1,233 @@
+{
+  "ok": true,
+  "generatedAt": "2026-07-09T10:47:48.420Z",
+  "url": "https://www.berlinwalk.com/?bwqa=rev12-order-mobile-iab-1783594031561",
+  "customEmbed": {
+    "name": "BerlinWalk Homepage Products Explore Custom Layer",
+    "id": "db9a8f02-03ff-42e7-bdc1-e9a786003184",
+    "revision": 12,
+    "build": "homepage-products-explore-custom-20260709l",
+    "note": "User-approved deviation from native-only handoff: CSS-only custom layer stabilizes native Wix sections and fixes Wix responsive grid rows."
+  },
+  "expectedOrder": [
+    "hero",
+    "why",
+    "route",
+    "guide",
+    "reviews",
+    "booking",
+    "products",
+    "faq",
+    "explore"
+  ],
+  "desktop1366x900": {
+    "ok": true,
+    "order": [
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 760,
+        "id": "",
+        "key": "hero",
+        "overflowX": 0,
+        "text": "TIP BASED · 12 STOPS · ~2H\nFree Berlin Walking Tour.\n\nBerlin wa ",
+        "top": 147
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 545,
+        "id": "",
+        "key": "why",
+        "overflowX": 0,
+        "text": "Why Walk With Me?\n\nMore than a tour. Eight centurie  of Berlin, ",
+        "top": 907
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 1682,
+        "id": "",
+        "key": "route",
+        "overflowX": 0,
+        "text": "The Route\n\nAlexanderplatz → Hacke cher Markt\n\n📍\n12 STOPS\n🕐\n~2H",
+        "top": 1450
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 569,
+        "id": "",
+        "key": "guide",
+        "overflowX": 0,
+        "text": "YOUR LOCAL GUIDE\nON THE ROUTE\nOld photo , vani hed  treet , clea",
+        "top": 3133
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 921,
+        "id": "",
+        "key": "reviews",
+        "overflowX": 0,
+        "text": "★★★★★\n5.0 RATING\n-\nTRAVELERS FROM 18+ COUNTRIES\nWord  from peopl",
+        "top": 3715
+      },
+      {
+        "found": true,
+        "gridArea": "8 / 1 / 9 / 2",
+        "height": 839,
+        "id": "comp-mmp417v9",
+        "key": "booking",
+        "overflowX": 0,
+        "text": "Ready to Di cover Berlin?\n\nBook your free  pot today. No fixed p",
+        "top": 4637
+      },
+      {
+        "found": true,
+        "gridArea": "9 / 1 / 10 / 2",
+        "height": 1195,
+        "id": "comp-mrd7ywil",
+        "key": "products",
+        "overflowX": 0,
+        "text": "Berlin on your own  chedule\n\nThe free tour run  on  et date . Th",
+        "top": 5476
+      },
+      {
+        "found": true,
+        "gridArea": "10 / 1 / 11 / 2",
+        "height": 610,
+        "id": "comp-mp3uj6o4",
+        "key": "faqSection",
+        "overflowX": 0,
+        "text": "BERLIN WALK\nFrequently A ked Que tion \n\nEverything you need to k",
+        "top": 6671
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 610,
+        "id": "faq",
+        "key": "faq",
+        "overflowX": 0,
+        "text": "BERLIN WALK\nFrequently A ked Que tion \n\nEverything you need to k",
+        "top": 6671
+      },
+      {
+        "found": true,
+        "gridArea": "11 / 1 / 12 / 2",
+        "height": 970,
+        "id": "comp-mrd8c838",
+        "key": "explore",
+        "overflowX": 0,
+        "text": "Keep planning your trip\n\nFree planner  and checker : ticket , fi",
+        "top": 7280
+      }
+    ]
+  },
+  "mobile390x900": {
+    "ok": true,
+    "order": [
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 806,
+        "id": "",
+        "key": "hero",
+        "overflowX": 0,
+        "text": "TIP BASED · 12 STOPS · ~2H\nFree Berlin Walking Tour.\n\nBerlin wa ",
+        "top": 94
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 1160,
+        "id": "",
+        "key": "why",
+        "overflowX": 0,
+        "text": "Why Walk With Me?\n\nMore than a tour. Eight centurie  of Berlin, ",
+        "top": 900
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 1871,
+        "id": "",
+        "key": "route",
+        "overflowX": 0,
+        "text": "The Route\n\nAlexanderplatz → Hacke cher Markt\n\n📍\n12 STOPS\n🕐\n~2H",
+        "top": 2060
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 1084,
+        "id": "",
+        "key": "guide",
+        "overflowX": 0,
+        "text": "YOUR LOCAL GUIDE\nON THE ROUTE\nOld photo , vani hed  treet , clea",
+        "top": 3931
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 923,
+        "id": "",
+        "key": "reviews",
+        "overflowX": 0,
+        "text": "★★★★★\n5.0 RATING\n-\nTRAVELERS FROM 18+ COUNTRIES\nWord  from peopl",
+        "top": 5052
+      },
+      {
+        "found": true,
+        "gridArea": "8 / 1 / 9 / 2",
+        "height": 895,
+        "id": "comp-mmp417v9",
+        "key": "booking",
+        "overflowX": 0,
+        "text": "Ready to Di cover Berlin?\n\nBook your free  pot today. No fixed p",
+        "top": 5975
+      },
+      {
+        "found": true,
+        "gridArea": "9 / 1 / 10 / 2",
+        "height": 1480,
+        "id": "comp-mrd7ywil",
+        "key": "products",
+        "overflowX": 0,
+        "text": "Berlin on your own  chedule\n\nThe free tour run  on  et date . Th",
+        "top": 6869
+      },
+      {
+        "found": true,
+        "gridArea": "10 / 1 / 11 / 2",
+        "height": 633,
+        "id": "comp-mp3uj6o4",
+        "key": "faqSection",
+        "overflowX": 0,
+        "text": "BERLIN WALK\nFrequently A ked Que tion \n\nEverything you need to k",
+        "top": 8349
+      },
+      {
+        "found": true,
+        "gridArea": "auto",
+        "height": 633,
+        "id": "faq",
+        "key": "faq",
+        "overflowX": 0,
+        "text": "BERLIN WALK\nFrequently A ked Que tion \n\nEverything you need to k",
+        "top": 8349
+      },
+      {
+        "found": true,
+        "gridArea": "11 / 1 / 12 / 2",
+        "height": 1083,
+        "id": "comp-mrd8c838",
+        "key": "explore",
+        "overflowX": 0,
+        "text": "Keep planning your trip\n\nFree planner  and checker : ticket , fi",
+        "top": 8982
+      }
+    ]
+  }
+}
