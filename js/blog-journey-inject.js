@@ -1808,9 +1808,23 @@
       if (!isVisible(el)) continue;
       if (el.closest('[' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + '], [data-bw-leadform], [data-bw-tourcta]')) continue;
       if (cleanText(el.textContent).length < 24) continue;
-      return { parent: el.parentNode, after: el };
+      return journeyInsertionTarget(el, body);
     }
     return { parent: body, after: body.lastElementChild };
+  }
+
+  function journeyInsertionTarget(el, body) {
+    var list = el && el.closest && el.closest('ul,ol');
+    if (list && body.contains(list) && list.parentNode) {
+      var outer = list;
+      while (outer.parentElement) {
+        var parentList = outer.parentElement.closest && outer.parentElement.closest('ul,ol');
+        if (!parentList || !body.contains(parentList) || parentList === outer) break;
+        outer = parentList;
+      }
+      return { parent: outer.parentNode, after: outer };
+    }
+    return { parent: el.parentNode, after: el };
   }
 
   function cardImage(card) {
@@ -1848,6 +1862,7 @@
     if (!cards.length) return;
     var journeyKey = [
       post && post.slug,
+      JOURNEY_LAYOUT_VERSION,
       strategy.intent,
       tool && (tool.slug || tool.url),
       cards.map(function (card) { return (card.ctaKind || card.label) + ':' + card.title; }).join(','),
