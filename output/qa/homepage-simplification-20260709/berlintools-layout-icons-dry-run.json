@@ -1,0 +1,7 @@
+{
+  "checkedAt": "2026-07-09T07:28:04.701Z",
+  "ok": false,
+  "dryRun": true,
+  "reason": "Updated embed is 15026 chars; Wix limit is 15000",
+  "actionTaken": "Skipped Layout Fixes icon-map patch because tools-hub data and BerlinTools CMS carry the Wix Media icon directly."
+}

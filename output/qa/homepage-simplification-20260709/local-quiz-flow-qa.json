@@ -1,0 +1,38 @@
+{
+  "checkedAt": "2026-07-09T07:28:04.700Z",
+  "ok": true,
+  "measurements": [
+    {
+      "viewport": "mobile390",
+      "max": {
+        "elementHeight": 460,
+        "sectionHeight": 460,
+        "activeHeight": 396,
+        "scrollHeight": 720,
+        "overflowX": 0
+      },
+      "embedHeightChosen": 560,
+      "screenshots": [
+        "quiz-mobile390-start.png",
+        "quiz-mobile390-question.png",
+        "quiz-mobile390-result.png"
+      ]
+    },
+    {
+      "viewport": "desktop1366",
+      "max": {
+        "elementHeight": 482,
+        "sectionHeight": 482,
+        "activeHeight": 394,
+        "scrollHeight": 720,
+        "overflowX": 0
+      },
+      "embedHeightChosen": 560,
+      "screenshots": [
+        "quiz-desktop1366-start.png",
+        "quiz-desktop1366-question.png",
+        "quiz-desktop1366-result.png"
+      ]
+    }
+  ]
+}
