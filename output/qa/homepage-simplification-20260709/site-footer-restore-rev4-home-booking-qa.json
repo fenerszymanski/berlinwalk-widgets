@@ -1,0 +1,244 @@
+{
+  "checkedAt": "2026-07-09T11:45:47.980Z",
+  "browser": "Google Chrome executable via Playwright",
+  "home": {
+    "label": "homepage-footer-rev4",
+    "url": "https://www.berlinwalk.com/?bwqa=footer-rev4-1783597510634",
+    "viewport": {
+      "width": 1366,
+      "height": 900
+    },
+    "topMetrics": {
+      "scrollY": 0,
+      "docHeight": 7945,
+      "overflowX": 0,
+      "htmlBuild": "site-footer-restore-20260709d",
+      "restorePresent": true,
+      "restoreBuild": "site-footer-restore-20260709d",
+      "restoreRect": {
+        "top": 7285,
+        "left": 0,
+        "width": 1366,
+        "height": 659,
+        "bottom": 7944,
+        "absoluteTop": 7285,
+        "absoluteBottom": 7944
+      },
+      "restoreParentRect": {
+        "top": 7285,
+        "left": 0,
+        "width": 1366,
+        "height": 660,
+        "bottom": 7945,
+        "absoluteTop": 7285,
+        "absoluteBottom": 7945
+      },
+      "bookingCalendarPresent": false,
+      "bookingCalendarRect": null,
+      "calSummaryPresent": false,
+      "calSummaryHasRestore": false,
+      "calSummaryRect": null,
+      "footers": [
+        {
+          "tag": "FOOTER",
+          "id": "comp-mpbojue4",
+          "className": "comp-mpbojue4 S829f_ comp-mpbojue4-container bw-site-footer-restore-shell",
+          "hasRestore": true,
+          "insideBooking": false,
+          "rect": {
+            "top": 7285,
+            "left": 0,
+            "width": 1366,
+            "height": 660,
+            "bottom": 7945,
+            "absoluteTop": 7285,
+            "absoluteBottom": 7945
+          },
+          "text": "Free tip-based walking tours through Berlin's historic centre,built for travellers who want the city to make sense while they are standing inside it. Instagram Facebook TikTok Book your free tour TOUR Book Now Meeting Po"
+        }
+      ]
+    },
+    "bottomMetrics": {
+      "scrollY": 7045,
+      "docHeight": 7945,
+      "overflowX": 0,
+      "htmlBuild": "site-footer-restore-20260709d",
+      "restorePresent": true,
+      "restoreBuild": "site-footer-restore-20260709d",
+      "restoreRect": {
+        "top": 240,
+        "left": 0,
+        "width": 1366,
+        "height": 659,
+        "bottom": 899,
+        "absoluteTop": 7285,
+        "absoluteBottom": 7944
+      },
+      "restoreParentRect": {
+        "top": 240,
+        "left": 0,
+        "width": 1366,
+        "height": 660,
+        "bottom": 900,
+        "absoluteTop": 7285,
+        "absoluteBottom": 7945
+      },
+      "footerGapAfterRestoreParent": 0,
+      "footerGapAfterRestore": 1,
+      "calSummaryHasRestore": false,
+      "bottomPoint": {
+        "tag": "DIV",
+        "id": null,
+        "className": "bw-footer-inner",
+        "text": "Free tip-based walking tours through Berlin's historic centre,built for travellers who want the city to make sense while they are standing inside it. Instagram Facebook TikTok Book"
+      }
+    },
+    "pageErrors": [],
+    "messages": [
+      {
+        "type": "warning",
+        "text": "react-i18next:: It seems you are still using the old wait option, you may migrate to the new useSuspense behaviour."
+      },
+      {
+        "type": "warning",
+        "text": "🥺 Seems like you're trying to call `fedopsLogger.appLoadStarted` and `fedopsLogger.appLoaded` in your controller.\nWe are already logging load events for SSR and CSR environments, so you can remove these calls from your project."
+      }
+    ],
+    "screenshots": {
+      "top": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/homepage-footer-rev4-top.png",
+      "bottom": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/homepage-footer-rev4-bottom.png"
+    }
+  },
+  "booking": {
+    "label": "booking-page-footer-rev4",
+    "url": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?bwqa=footer-rev4-1783597510634",
+    "viewport": {
+      "width": 1366,
+      "height": 900
+    },
+    "topMetrics": {
+      "scrollY": 0,
+      "docHeight": 1282,
+      "overflowX": 0,
+      "htmlBuild": "site-footer-restore-20260709d",
+      "restorePresent": true,
+      "restoreBuild": "site-footer-restore-20260709d",
+      "restoreRect": {
+        "top": 622,
+        "left": 0,
+        "width": 1366,
+        "height": 659,
+        "bottom": 1281,
+        "absoluteTop": 622,
+        "absoluteBottom": 1281
+      },
+      "restoreParentRect": {
+        "top": 622,
+        "left": 0,
+        "width": 1366,
+        "height": 660,
+        "bottom": 1282,
+        "absoluteTop": 622,
+        "absoluteBottom": 1282
+      },
+      "bookingCalendarPresent": true,
+      "bookingCalendarRect": {
+        "top": 156,
+        "left": 701,
+        "width": 353,
+        "height": 391,
+        "bottom": 546,
+        "absoluteTop": 156,
+        "absoluteBottom": 546
+      },
+      "calSummaryPresent": true,
+      "calSummaryHasRestore": false,
+      "calSummaryRect": {
+        "top": 435,
+        "left": 702,
+        "width": 351,
+        "height": 110,
+        "bottom": 545,
+        "absoluteTop": 435,
+        "absoluteBottom": 545
+      },
+      "footers": [
+        {
+          "tag": "FOOTER",
+          "id": null,
+          "className": "bw-cal-summary",
+          "hasRestore": false,
+          "insideBooking": true,
+          "rect": {
+            "top": 435,
+            "left": 702,
+            "width": 351,
+            "height": 110,
+            "bottom": 545,
+            "absoluteTop": 435,
+            "absoluteBottom": 545
+          },
+          "text": "Thu 9 Jul at 15:30 You'll choose the number of attendees on the next step. Reserve your spot"
+        },
+        {
+          "tag": "FOOTER",
+          "id": "comp-mpw9apta",
+          "className": "comp-mpw9apta S829f_ comp-mpw9apta-container bw-site-footer-restore-shell",
+          "hasRestore": true,
+          "insideBooking": false,
+          "rect": {
+            "top": 622,
+            "left": 0,
+            "width": 1366,
+            "height": 660,
+            "bottom": 1282,
+            "absoluteTop": 622,
+            "absoluteBottom": 1282
+          },
+          "text": "Free tip-based walking tours through Berlin's historic centre,built for travellers who want the city to make sense while they are standing inside it. Instagram Facebook TikTok Book your free tour TOUR Book Now Meeting Po"
+        }
+      ]
+    },
+    "bottomMetrics": {
+      "scrollY": 382,
+      "docHeight": 1282,
+      "overflowX": 0,
+      "htmlBuild": "site-footer-restore-20260709d",
+      "restorePresent": true,
+      "restoreBuild": "site-footer-restore-20260709d",
+      "restoreRect": {
+        "top": 240,
+        "left": 0,
+        "width": 1366,
+        "height": 659,
+        "bottom": 899,
+        "absoluteTop": 622,
+        "absoluteBottom": 1281
+      },
+      "restoreParentRect": {
+        "top": 240,
+        "left": 0,
+        "width": 1366,
+        "height": 660,
+        "bottom": 900,
+        "absoluteTop": 622,
+        "absoluteBottom": 1282
+      },
+      "footerGapAfterRestoreParent": 0,
+      "footerGapAfterRestore": 1,
+      "calSummaryHasRestore": false,
+      "bottomPoint": {
+        "tag": "DIV",
+        "id": null,
+        "className": "bw-footer-inner",
+        "text": "Free tip-based walking tours through Berlin's historic centre,built for travellers who want the city to make sense while they are standing inside it. Instagram Facebook TikTok Book"
+      }
+    },
+    "pageErrors": [],
+    "messages": [],
+    "screenshots": {
+      "top": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/booking-page-footer-rev4-top.png",
+      "bottom": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/booking-page-footer-rev4-bottom.png"
+    }
+  }
+}

@@ -1,0 +1,188 @@
+{
+  "checkedAt": "2026-07-09T11:52:14.804Z",
+  "browser": "Google Chrome executable via Playwright",
+  "desktop": {
+    "label": "desktop1366",
+    "viewport": {
+      "width": 1366,
+      "height": 900
+    },
+    "metricsTop": {
+      "url": "https://www.berlinwalk.com/?bwqa=booking-swap-desktop1366-1783597892067",
+      "title": "Berlin Free Walking Tour — 12 Stops, ~2h, Tip-Based",
+      "viewport": {
+        "width": 1366,
+        "height": 900,
+        "scrollY": 0
+      },
+      "swapBuild": "homepage-booking-calendar-swap-20260709a",
+      "footerBuild": "site-footer-restore-20260709d",
+      "customPresent": true,
+      "customBuild": "homepage-booking-calendar-swap-20260709a",
+      "calendarPresent": true,
+      "shellPresent": true,
+      "nativeWrapperPresent": false,
+      "sectionRect": {
+        "top": 4638,
+        "left": 0,
+        "width": 1366,
+        "height": 676,
+        "bottom": 5313,
+        "absoluteTop": 4638,
+        "absoluteBottom": 5313
+      },
+      "customRect": {
+        "top": 4638,
+        "left": 0,
+        "width": 1366,
+        "height": 676,
+        "bottom": 5313,
+        "absoluteTop": 4638,
+        "absoluteBottom": 5313
+      },
+      "calendarRect": {
+        "top": 4847,
+        "left": 333,
+        "width": 700,
+        "height": 391,
+        "bottom": 5237,
+        "absoluteTop": 4847,
+        "absoluteBottom": 5237
+      },
+      "dayCount": 60,
+      "slotCount": 1,
+      "selected": "Thu 9 Jul at 15:30",
+      "ctaText": "Reserve your spot",
+      "ctaHref": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar",
+      "overflowX": 0,
+      "errorsInDom": ""
+    },
+    "footerMetrics": {
+      "restorePresent": true,
+      "restoreBuild": "site-footer-restore-20260709d",
+      "restoreRect": {
+        "top": 240,
+        "left": 0,
+        "width": 1366,
+        "height": 659,
+        "bottom": 898,
+        "absoluteTop": 7122,
+        "absoluteBottom": 7780
+      },
+      "restoreParentRect": {
+        "top": 240,
+        "left": 0,
+        "width": 1366,
+        "height": 660,
+        "bottom": 900,
+        "absoluteTop": 7122,
+        "absoluteBottom": 7782
+      },
+      "gapAfterParent": 0,
+      "overflowX": 0
+    },
+    "pageErrors": [],
+    "messages": [
+      {
+        "type": "warning",
+        "text": "react-i18next:: It seems you are still using the old wait option, you may migrate to the new useSuspense behaviour."
+      }
+    ],
+    "screenshots": {
+      "booking": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/homepage-booking-swap-rev1-desktop1366.png",
+      "footer": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/homepage-booking-swap-footer-rev1-desktop1366.png"
+    }
+  },
+  "mobile": {
+    "label": "mobile390",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "metricsTop": {
+      "url": "https://www.berlinwalk.com/?bwqa=booking-swap-mobile390-1783597914335",
+      "title": "Berlin Free Walking Tour — 12 Stops, ~2h, Tip-Based",
+      "viewport": {
+        "width": 390,
+        "height": 844,
+        "scrollY": 0
+      },
+      "swapBuild": "homepage-booking-calendar-swap-20260709a",
+      "footerBuild": "site-footer-restore-20260709d",
+      "customPresent": true,
+      "customBuild": "homepage-booking-calendar-swap-20260709a",
+      "calendarPresent": true,
+      "shellPresent": true,
+      "nativeWrapperPresent": false,
+      "sectionRect": {
+        "top": 5920,
+        "left": 0,
+        "width": 390,
+        "height": 655,
+        "bottom": 6575,
+        "absoluteTop": 5920,
+        "absoluteBottom": 6575
+      },
+      "customRect": {
+        "top": 5920,
+        "left": 0,
+        "width": 390,
+        "height": 655,
+        "bottom": 6575,
+        "absoluteTop": 5920,
+        "absoluteBottom": 6575
+      },
+      "calendarRect": {
+        "top": 6098,
+        "left": 16,
+        "width": 358,
+        "height": 439,
+        "bottom": 6537,
+        "absoluteTop": 6098,
+        "absoluteBottom": 6537
+      },
+      "dayCount": 60,
+      "slotCount": 1,
+      "selected": "Thu 9 Jul at 15:30",
+      "ctaText": "Reserve your spot",
+      "ctaHref": "https://www.berlinwalk.com/booking-form?bookings_timezone=Europe%2FBerlin&bookings_serviceId=448872c2-4bd8-4f15-8030-594f5b2162c7&bookings_locationId=b8364059-983c-40ac-8266-aa0f6a664d01&bookings_sessionId=4jOkD28c0FrsNUSgzQzuLRkA2t1rv1FLTwquKmJyctoZm00vdeKFMyH4n9cCLtmQe8wwBM8ImxtKqNiwjpAeBw4CyxSQhLhvLxlzJKeCWUft3xGvZihmIgifwni1GzvHFglPzwNlB8iPfjglMkCTUaEQVMu6bUDy0HZMeG6FdMpBlaaO0Nk7qDuFuOeWYRVR4VgNasvOqQY3xkWR3HMaSe62ojrp8UEhWXt2W129ExvLI7stbcRioSPYnMuVnPrXSOYrrZlsNB1rF8tCCvp60oqCw90emE98EgHXaPiHotR9hR4cgWeDejL8DcSGbgg8tYhgqecbUdlPx1B&utm_source=berlinwalk&utm_medium=booking_calendar&utm_campaign=direct_booking&utm_content=booking_calendar",
+      "overflowX": 0,
+      "errorsInDom": ""
+    },
+    "footerMetrics": {
+      "restorePresent": true,
+      "restoreBuild": "site-footer-restore-20260709d",
+      "restoreRect": {
+        "top": -873,
+        "left": 0,
+        "width": 390,
+        "height": 1715,
+        "bottom": 842,
+        "absoluteTop": 9438,
+        "absoluteBottom": 11153
+      },
+      "restoreParentRect": {
+        "top": -873,
+        "left": 0,
+        "width": 390,
+        "height": 1717,
+        "bottom": 844,
+        "absoluteTop": 9438,
+        "absoluteBottom": 11155
+      },
+      "gapAfterParent": 0,
+      "overflowX": 0
+    },
+    "pageErrors": [],
+    "messages": [
+      {
+        "type": "warning",
+        "text": "react-i18next:: It seems you are still using the old wait option, you may migrate to the new useSuspense behaviour."
+      }
+    ],
+    "screenshots": {
+      "booking": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/homepage-booking-swap-rev1-mobile390.png",
+      "footer": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/output/qa/homepage-simplification-20260709/homepage-booking-swap-footer-rev1-mobile390.png"
+    }
+  }
+}
