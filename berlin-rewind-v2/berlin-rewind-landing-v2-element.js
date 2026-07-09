@@ -15,7 +15,6 @@
   var GAME_TAG = 'bw-berlin-rewind-result-games-v2';
   var BUILD = 'berlin-rewind-landing-v2-no-game-head-cta-20260709a';
   var GAME_BUILD = 'berlin-rewind-v2-archive-batch-20260709a';
-  var GAME_ASSET_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rewind-v2/';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -207,7 +206,7 @@
                 '</div>',
               '</div>',
               '<div class="bw-rwlp-game-mount">',
-                '<' + GAME_TAG + ' data-asset-base="' + esc(GAME_ASSET_BASE) + '"></' + GAME_TAG + '>',
+                '<' + GAME_TAG + ' data-asset-base="' + esc(BASE_URL) + '"></' + GAME_TAG + '>',
               '</div>',
             '</div>',
           '</section>',
