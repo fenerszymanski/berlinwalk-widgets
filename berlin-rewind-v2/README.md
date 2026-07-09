@@ -16,10 +16,13 @@ and the archival credit. You end with a total score and a "Berlin eye" tier.
 - Single custom element `<bw-berlin-rewind-v2>`, light DOM, state on the
   instance, CSS scoped under `.bw-rw-` and injected once.
 - **No iframe. No postMessage/resize. No MutationObserver. No global loader.
-  No data fetch (photo + district data are inlined). No external CSS/JS.**
-- Photo files load from the element script's own directory, resolved from
-  `document.currentScript.src`, so the same code works locally and on GitHub
-  Pages with no hardcoded origin. Override with `data-asset-base` if ever needed.
+  No external CSS/JS.**
+- The current 30-day archive batch loads from `data/archive-current.json`.
+  A 10-photo inlined fallback stays in the game file so the UI still works if
+  the archive JSON is temporarily unavailable.
+- Photo files load from `assets/photos/<archive-batch>/` under the configured
+  asset base. The public default is GitHub Pages so the monthly archive can be
+  refreshed without changing the Wix embed script.
 - Full images are shown (object-fit: contain), not aggressively cropped.
 
 ## Files
@@ -27,11 +30,14 @@ and the archival credit. You end with a total score and a "Berlin eye" tier.
 - `berlin-rewind-v2-element.js` — the whole game (data + logic + CSS).
 - `berlin-rewind-landing-v2-element.js` — public landing wrapper with hero
   cover, local context, CTA sections, and the native game mount.
+- `data/archive-current.json` — current 150-photo / 30-day schedule batch.
+- `data/archive-YYYY-MM-DD.json` — archived copy of each generated batch.
 - `index.html` — standalone, non-indexed local preview.
 - `landing.html` — standalone, non-indexed landing preview.
 - `SEO_SETTINGS.md` — Wix-ready SEO title, description, canonical, robots, and
   JSON-LD for the final public page.
-- `assets/photos/ph_0xx.jpg` — 10 curated archival photos (see `CREDITS.md`).
+- `assets/photos/archive-YYYY-MM-DD/*.jpg` — current local archive photos.
+- `assets/photos/ph_0xx.jpg` — 10 curated fallback photos (see `CREDITS.md`).
 
 ## Public landing mount
 
@@ -60,14 +66,22 @@ not mount the bare game element as the only visible content.
 
 ## Photos
 
-10 Bundesarchiv images via Wikimedia Commons, CC BY-SA 3.0 DE, downloaded and
-resized locally so the game does not hotlink and stays stable on mobile. Two
-scans (`ph_003`, `ph_009`) had a baked-in caption strip with the date printed
-on it; that bottom margin was cropped so it cannot spoil the year guess. Credit
-lines stay visible in the reveal UI and in `CREDITS.md`.
+Current production target: 150 Bundesarchiv / Wikimedia Commons images per
+batch, scheduled as 30 Berlin days with 5 photos per day and no repeats within
+the batch. Credit lines stay visible in the reveal UI and in `CREDITS.md`.
 
-## Phase 2 (intentionally deferred for stability)
+Build a new batch from the workspace root:
 
-- Daily photo set + streak + localStorage.
-- Image share card.
-- Larger photo pool.
+```bash
+node scripts/build-rewind-archive-batch.mjs
+```
+
+Useful environment overrides:
+
+```bash
+BW_REWIND_ARCHIVE_START=2026-08-08 node scripts/build-rewind-archive-batch.mjs
+BW_REWIND_PHOTO_COUNT=150 BW_REWIND_DAYS=30 BW_REWIND_PER_DAY=5 node scripts/build-rewind-archive-batch.mjs
+```
+
+The generated `archive-current.json` is what the live game reads. The same
+batch is also saved as `archive-YYYY-MM-DD.json` for audit/history.

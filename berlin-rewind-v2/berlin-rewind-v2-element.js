@@ -6,11 +6,10 @@
  * localStorage, and gates you to "come back tomorrow" once today is done
  * (with an optional practice mode that does not touch the streak).
  *
- * Self-contained: light DOM, instance state, no globals, no iframe, no
- * postMessage/resize, no MutationObserver, no external CSS/JS, no data fetch
- * (photo + district data inlined). Image files load from the element script's
- * own directory (document.currentScript), so it works locally and on GitHub
- * Pages with no hardcoded origin.
+ * Self-contained UI: light DOM, instance state, no globals, no iframe, no
+ * postMessage/resize, no MutationObserver, no external CSS/JS. The 30-day
+ * photo batch loads from data/archive-current.json with a 10-photo inlined
+ * fallback if the archive file is unavailable.
  *
  * Mount:
  *   <bw-berlin-rewind-v2></bw-berlin-rewind-v2>
@@ -20,14 +19,14 @@
  *   <bw-berlin-rewind-result-games-v2></bw-berlin-rewind-result-games-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-stable-board-20260708e
+ * Build marker: berlin-rewind-v2-archive-batch-20260709a
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
-  var BUILD = 'berlin-rewind-v2-stable-board-20260708e';
+  var BUILD = 'berlin-rewind-v2-archive-batch-20260709a';
   var TAG = 'bw-berlin-rewind-v2';
   var STABLE_TAG = 'bw-berlin-rewind-stable-v2';
   var FIT_TAG = 'bw-berlin-rewind-fit-v2';
@@ -41,7 +40,7 @@
   // with data-asset-base (used by the local standalone preview).
   var ASSET_BASE = 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rewind-v2/';
 
-  var YEAR_MIN = 1918;
+  var YEAR_MIN = 1880;
   var YEAR_MAX = 1995;
   var ROUNDS_PER_GAME = 5;
 
@@ -282,10 +281,21 @@
     d.setUTCDate(d.getUTCDate() + n);
     return d.toISOString().slice(0, 10);
   }
-  function dailyIndices(dateStr) {
+  function dailyIndices(dateStr, photos, archive) {
+    photos = Array.isArray(photos) && photos.length ? photos : PHOTOS;
+    if (archive && archive.schedule && archive.schedule[dateStr]) {
+      var byId = {};
+      photos.forEach(function (photo, i) { byId[photo.id] = i; });
+      var scheduled = archive.schedule[dateStr].ids || archive.schedule[dateStr];
+      var fromSchedule = scheduled.map(function (id) { return byId[id]; }).filter(function (i) { return typeof i === 'number'; });
+      if (fromSchedule.length >= ROUNDS_PER_GAME) return fromSchedule.slice(0, ROUNDS_PER_GAME);
+    }
     var rnd = mulberry32(hashStr('rewind-' + dateStr));
-    var idx = shuffle(PHOTOS.map(function (_, i) { return i; }), rnd);
+    var idx = shuffle(photos.map(function (_, i) { return i; }), rnd);
     return idx.slice(0, ROUNDS_PER_GAME);
+  }
+  function validArchive(data) {
+    return data && Array.isArray(data.photos) && data.photos.length >= ROUNDS_PER_GAME && data.schedule && typeof data.schedule === 'object';
   }
   function loadState() {
     try {
@@ -341,9 +351,13 @@
       this.classList.add('bw-rw');
       this.setAttribute('data-build', BUILD);
       this._assetBase = this.getAttribute('data-asset-base') || ASSET_BASE;
+      if (this._assetBase.slice(-1) !== '/') this._assetBase += '/';
       this._today = berlinToday();
+      this._photos = PHOTOS;
+      this._archive = null;
       this._injectCSS();
-      this._route();
+      this._renderLoading();
+      this._loadArchive().then(() => this._route(), () => this._route());
     }
 
     _injectCSS() {
@@ -356,6 +370,35 @@
 
     _imgUrl(id) { return this._assetBase + 'assets/photos/' + id + '.jpg'; }
 
+    _photoUrl(photo) {
+      if (!photo) return '';
+      if (photo.asset) return this._assetBase + photo.asset.replace(/^\/+/, '');
+      return this._imgUrl(photo.id);
+    }
+
+    _renderLoading() {
+      this.innerHTML =
+        '<div class="bw-rw-card">' +
+          '<div class="bw-rw-screen is-on bw-rw-home-screen">' +
+            '<p class="bw-rw-eyebrow">Berlin Rewind · Daily</p>' +
+            '<h2 class="bw-rw-title">Loading today’s archive...</h2>' +
+            '<p class="bw-rw-sub">Five Berlin photos are being prepared.</p>' +
+          '</div>' +
+        '</div>';
+    }
+
+    async _loadArchive() {
+      var url = this._assetBase + 'data/archive-current.json?v=' + encodeURIComponent(this._today);
+      var res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error('archive load failed');
+      var data = await res.json();
+      if (!validArchive(data)) throw new Error('archive invalid');
+      this._archive = data;
+      this._photos = data.photos;
+      this.setAttribute('data-archive-batch', data.batchId || 'archive');
+      this.setAttribute('data-archive-count', String(data.photos.length));
+    }
+
     _route() {
       var st = loadState();
       if (st.lastDate === this._today) this._renderGate(st);
@@ -364,12 +407,13 @@
 
     _stripHtml() {
       // decorative archival thumbnails that are NOT in today's set (no spoilers)
-      var daily = dailyIndices(this._today);
-      var others = PHOTOS.map(function (_, i) { return i; }).filter(function (i) { return daily.indexOf(i) === -1; });
+      var photos = this._photos || PHOTOS;
+      var daily = dailyIndices(this._today, photos, this._archive);
+      var others = photos.map(function (_, i) { return i; }).filter(function (i) { return daily.indexOf(i) === -1; });
       var pick = shuffle(others).slice(0, 3);
       var self = this;
       var cells = pick.map(function (i) {
-        return '<div class="bw-rw-strip-thumb"><img alt="" loading="lazy" src="' + self._imgUrl(PHOTOS[i].id) + '"></div>';
+        return '<div class="bw-rw-strip-thumb"><img alt="" loading="lazy" src="' + self._photoUrl(photos[i]) + '"></div>';
       }).join('');
       return '<div class="bw-rw-strip">' + cells + '</div>';
     }
@@ -442,12 +486,13 @@
 
     _startGame(mode) {
       this._mode = mode;
-      var indices = (mode === 'daily') ? dailyIndices(this._today) : shuffle(PHOTOS.map(function (_, i) { return i; })).slice(0, ROUNDS_PER_GAME);
-      this._deck = indices.map(function (i) { return PHOTOS[i]; });
+      var photos = this._photos || PHOTOS;
+      var indices = (mode === 'daily') ? dailyIndices(this._today, photos, this._archive) : shuffle(photos.map(function (_, i) { return i; })).slice(0, ROUNDS_PER_GAME);
+      this._deck = indices.map(function (i) { return photos[i]; });
       this._round = 0;
       this._total = 0;
       this._recap = [];
-      this._deck.forEach(function (p) { var im = new Image(); im.src = this._imgUrl(p.id); }, this);
+      this._deck.forEach(function (p) { var im = new Image(); im.src = this._photoUrl(p); }, this);
       this._renderRound();
     }
 
@@ -527,7 +572,7 @@
               '<div class="bw-rw-photo">' +
                 '<span class="bw-rw-diff">' + esc(p.difficulty) + '</span>' +
                 '<span class="bw-rw-loading" data-loading>Loading photo…</span>' +
-                '<img alt="Archival Berlin photograph to identify" data-photo src="' + this._imgUrl(p.id) + '">' +
+                '<img alt="Archival Berlin photograph to identify" data-photo src="' + this._photoUrl(p) + '">' +
               '</div>' +
               '<div class="bw-rw-swap" data-swap>' + this._roundControlsHtml(distHtml) + '</div>' +
             '</div>' +
