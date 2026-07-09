@@ -87,13 +87,15 @@ There used to be a tall neo-Gothic church here, the Church of Reconciliation. Wh
 
 The chapel that stands here now was built in 2000 on the same spot, and its rammed-earth walls contain rubble from the church that was destroyed. Short services and readings for the victims are held here on weekdays. It is a small building with a very direct story: erased by the border, rebuilt on the same ground.
 
-## How I would walk the Berlin Wall Memorial
+## Walk it with me: the Death Strip audio guide
 
-Because the site is long and low-key, the order you walk it in matters. Use the walk below to move along Bernauer Strasse stop by stop, and to check whether the indoor parts and the tower are open right now before you set off. The grounds and the indoor sections keep different hours, and this tool keeps that straight for you against the current time in Berlin.
+Bernauer Strasse is long, quiet, and easy to misread. The meaning is in small markers, ground lines and gaps, and most people walk straight past the best of it without knowing what they are looking at. That is exactly why I recorded a self-guided audio walk for this stretch.
 
-{{widget:bernauer-strasse-memorial-walk}}
+It follows the route stop by stop, from the ghost station at Nordbahnhof to the preserved death strip, the escape tunnels, and the people who died trying to cross here. You go at your own pace, with my voice in your ears instead of a guidebook in your hand. Have a listen to the free sample below before you decide.
 
-Walk it roughly south to north: start with the ghost station inside Nordbahnhof, get your bearings at the Visitor Center, then take the preserved strip, the viewing tower, the Window of Remembrance, the Chapel of Reconciliation, and finally the escape-tunnel and house markers toward Schwedter Strasse. If you want to see where this fits with the rest of the divided city, my guide to [Cold War Berlin in five locations](https://www.berlinwalk.com/post/cold-war-berlin-in-5-key-locations-you-can-still-visit) and the post on [where the Wall actually stood](https://www.berlinwalk.com/post/the-berlin-wall-where-it-stood-and-what-s-left-in-2026) pair well with a Bernauer Strasse morning.
+{{widget:death-strip-audio-route-banner}}
+
+If you would rather just wander, that works too. Walk it roughly south to north: start with the ghost station inside Nordbahnhof, get your bearings at the Visitor Center, then take the preserved strip, the viewing tower, the Window of Remembrance, the Chapel of Reconciliation, and finally the escape-tunnel and house markers toward Schwedter Strasse. If you want to see where this fits with the rest of the divided city, my guide to [Cold War Berlin in five locations](https://www.berlinwalk.com/post/cold-war-berlin-in-5-key-locations-you-can-still-visit) and the post on [where the Wall actually stood](https://www.berlinwalk.com/post/the-berlin-wall-where-it-stood-and-what-s-left-in-2026) pair well with a Bernauer Strasse morning.
 
 ## Where it fits in a Berlin day
 
