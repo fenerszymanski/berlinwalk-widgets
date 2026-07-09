@@ -1,0 +1,13 @@
+{
+  "name": "berlin-rewind-reel",
+  "private": true,
+  "type": "module",
+  "description": "Generates the Berlin Rewind guess-the-year social reel (1080x1920 mp4) from the game's daily photo schedule.",
+  "scripts": {
+    "make": "node make-reel.mjs"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "playwright-core": "^1.57.0"
+  }
+}
