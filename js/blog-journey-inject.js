@@ -1066,7 +1066,7 @@
       '.bw-blog-journey-card:hover{box-shadow:0 14px 28px rgba(0,0,0,.25);transform:translateY(-2px);}',
       '.bw-blog-journey-image{aspect-ratio:16/9;background:#E8EEE6;display:block;overflow:hidden;width:100%;}',
       '.bw-blog-journey-image img{display:block;height:100%!important;object-fit:cover;width:100%!important;}',
-      '.bw-blog-journey-card-kind-tool{background:#FAFAF5;border:1px solid rgba(197,225,165,.85);position:relative;}',
+      '.bw-blog-journey-card-kind-tool{background:#FAFAF5;border:1px solid rgba(197,225,165,.85);justify-content:center;position:relative;}',
       '.bw-blog-journey-card-kind-tool .bw-blog-journey-image{align-items:center;aspect-ratio:1;background:#F3F8EF;border:1px solid #C5E1A5;border-radius:8px;display:flex;height:54px;justify-content:center;margin:16px 16px 0;overflow:hidden;padding:8px;width:54px;}',
       '.bw-blog-journey-card-kind-tool .bw-blog-journey-image img{height:100%!important;max-height:38px;max-width:38px;object-fit:contain;width:100%!important;}',
       '.bw-blog-journey-content{display:flex;flex:1;flex-direction:column;padding:14px 15px 16px;}',
