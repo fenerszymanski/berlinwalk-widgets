@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maybachufer Market Clock | BerlinWalk</title>
+  <meta name="description" content="Pick a market day and a time to see what the Turkish Market on Maybachufer feels like at that moment — crowd, produce, deals — and the one move to make.">
+  <link rel="stylesheet" href="../css/brand.css">
+  <style>
+    :root{
+      --green:#1B5E20; --green2:#2e7d32; --yellow:#FFE600; --lime:#7CB342;
+      --lightgreen:#C5E1A5; --cream:#FAFAF5; --ink:#212121; --red:#E63946;
+      --line:rgba(33,33,33,.13); --shadow:0 18px 45px rgba(27,94,32,.16);
+    }
+    *{box-sizing:border-box;}
+    body{margin:0;background:var(--cream);color:var(--ink);font-family:Montserrat,Arial,sans-serif;line-height:1.45;}
+    .wrap{max-width:760px;margin:0 auto;padding:18px 16px 8px;}
+    .card{background:#fff;border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden;}
+    .head{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:18px 20px;}
+    .kicker{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin:0 0 6px;}
+    .title{margin:0;font-size:22px;font-weight:800;letter-spacing:-.01em;}
+    .sub{margin:6px 0 0;font-size:13px;color:rgba(255,255,255,.9);}
+    .body{padding:18px 20px 20px;}
+    .lbl{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin:2px 0 8px;}
+    .days{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+    .day{flex:1 1 auto;min-width:92px;border:1.5px solid var(--line);background:#fff;color:var(--ink);
+      border-radius:12px;padding:10px 8px;cursor:pointer;text-align:center;font-family:inherit;transition:.15s;}
+    .day b{display:block;font-size:14px;font-weight:800;}
+    .day span{display:block;font-size:11px;color:#5a5a5a;margin-top:2px;}
+    .day[aria-pressed="true"]{border-color:var(--green);background:var(--green);color:#fff;box-shadow:0 8px 18px rgba(27,94,32,.22);}
+    .day[aria-pressed="true"] span{color:var(--yellow);}
+    .sliderwrap{margin:4px 0 6px;}
+    .arc{position:relative;height:14px;border-radius:10px;background:linear-gradient(90deg,#dcecc9,var(--lime),var(--yellow),var(--lime),#dcecc9);margin:10px 0 6px;}
+    input[type=range]{width:100%;-webkit-appearance:none;appearance:none;background:transparent;margin:0;}
+    input[type=range]:focus{outline:none;}
+    input[type=range]::-webkit-slider-runnable-track{height:14px;border-radius:10px;background:linear-gradient(90deg,#dcecc9,var(--lime),var(--yellow),var(--lime),#dcecc9);}
+    input[type=range]::-moz-range-track{height:14px;border-radius:10px;background:linear-gradient(90deg,#dcecc9,var(--lime),var(--yellow),var(--lime),#dcecc9);}
+    input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:30px;border-radius:50%;background:#fff;border:4px solid var(--green);box-shadow:0 4px 10px rgba(0,0,0,.25);margin-top:-8px;cursor:pointer;}
+    input[type=range]::-moz-range-thumb{width:26px;height:26px;border-radius:50%;background:#fff;border:4px solid var(--green);box-shadow:0 4px 10px rgba(0,0,0,.25);cursor:pointer;}
+    .ticks{display:flex;justify-content:space-between;font-size:11px;color:#6a6a6a;margin-top:2px;}
+    .timebig{font-size:26px;font-weight:800;color:var(--green);margin:2px 0 0;}
+    .scene{margin-top:16px;border:1px solid var(--line);border-radius:16px;overflow:hidden;}
+    .scene-top{padding:14px 16px;background:var(--cream);border-bottom:1px solid var(--line);}
+    .phase{font-size:16px;font-weight:800;margin:0;}
+    .phase .em{display:inline-block;margin-right:6px;}
+    .meter{margin:12px 0 2px;}
+    .meter-row{display:flex;align-items:center;gap:10px;margin:8px 0;}
+    .meter-row .name{flex:0 0 92px;font-size:12px;font-weight:700;color:#444;}
+    .bar{flex:1;height:12px;border-radius:8px;background:#ececec;overflow:hidden;}
+    .bar i{display:block;height:100%;border-radius:8px;transition:width .25s ease;}
+    .bar.crowd i{background:linear-gradient(90deg,var(--lime),var(--red));}
+    .bar.fresh i{background:linear-gradient(90deg,#cfe0b6,var(--green));}
+    .bar.deal i{background:linear-gradient(90deg,#efe6a6,var(--yellow));}
+    .val{flex:0 0 44px;text-align:right;font-size:12px;font-weight:700;color:#333;}
+    .scene-body{padding:14px 16px 16px;}
+    .bestfor{font-size:14px;margin:0 0 10px;}
+    .bestfor b{color:var(--green);}
+    .move{background:#f3f8ec;border-left:4px solid var(--green);border-radius:10px;padding:11px 13px;font-size:14px;}
+    .move .tag{display:block;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin-bottom:3px;}
+    .closed .move{background:#fdece0;border-left-color:var(--red);}
+    .note{font-size:12px;color:#666;margin:12px 2px 2px;}
+    .fabric .arc,.fabric input[type=range]::-webkit-slider-runnable-track{filter:hue-rotate(20deg);}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" id="app">
+      <div class="head">
+        <p class="kicker">BerlinWalk • Maybachufer</p>
+        <h2 class="title">Maybachufer Market Clock</h2>
+        <p class="sub">Pick a day and slide through the hours. The market is a different place at 11:30 than at 17:00 — this shows you which moment fits your plan.</p>
+      </div>
+      <div class="body">
+        <p class="lbl">1 · Which day are you going?</p>
+        <div class="days" id="days"></div>
+
+        <div id="timeblock">
+          <p class="lbl">2 · What time?</p>
+          <div class="sliderwrap">
+            <input type="range" id="slider" min="0" max="15" step="1" value="1" aria-label="Time of day">
+            <div class="ticks"><span>11:00</span><span>13:00</span><span>15:00</span><span>17:00</span><span>18:30</span></div>
+          </div>
+          <p class="timebig" id="timebig">11:30</p>
+        </div>
+
+        <div class="scene" id="scene"></div>
+        <p class="note">Hours: the food market runs Tuesday and Friday, 11:00–18:30. Saturday is the fabric market (Stoffmarkt), 11:00–17:00. Always bring cash.</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/brand.js"></script>
+  <script>
+    (function(){
+      var DAYS=[
+        {id:'tue',name:'Tuesday',tag:'Food market',type:'food',busy:0},
+        {id:'fri',name:'Friday',tag:'Food market',type:'food',busy:1},
+        {id:'sat',name:'Saturday',tag:'Fabric market',type:'fabric',busy:0},
+        {id:'other',name:'Mon/Wed/Thu/Sun',tag:'No street market',type:'closed',busy:0}
+      ];
+      // 16 steps: 11:00 .. 18:30 in 30-min increments
+      function stepToTime(s){var mins=11*60+s*30;var h=Math.floor(mins/60);var m=mins%60;return (h)+':' + (m<10?'0':'')+m;}
+      // Food-day phases keyed by step index (0=11:00 .. 15=18:30)
+      function foodPhase(step,busy){
+        var t=stepToTime(step);
+        var p;
+        if(step<=0){p={emoji:'🌅',name:'Just opening',crowd:1,fresh:5,deal:1,
+          best:'Stalls are still arranging. Produce is at its freshest, but not everything is out yet.',
+          move:'Come back in 30 minutes if you want the full market. Good moment only if you like it quiet.'};}
+        else if(step<=3){p={emoji:'🧺',name:'Calm browsing',crowd:2,fresh:5,deal:1,
+          best:'The easy window. You can actually reach the stalls, ask questions, and pick good produce.',
+          move:'Best slot for a first visit. Do a slow lap first, then buy on the second pass so you compare prices.'};}
+        else if(step<=7){p={emoji:'🥙',name:'Lunch and street food',crowd:3,fresh:4,deal:2,
+          best:'Warm food stalls are in full swing — gözleme, börek, falafel, fresh juice.',
+          move:'Eat first, shop second. Grab a gözleme, then browse produce with something in your hand.'};}
+        else if(step<=11){p={emoji:'👥',name:'Peak crowd',crowd:5,fresh:3,deal:2,
+          best:'Loud, shoulder-to-shoulder, full atmosphere. Slow to move, easy to lose your group.',
+          move:'Come for the energy, not for careful shopping. Keep bags in front and agree a meeting point.'};}
+        else if(step<=13){p={emoji:'🍃',name:'Winding down',crowd:3,fresh:3,deal:3,
+          best:'The crush eases. Sellers start thinking about the end of the day.',
+          move:'Good time to actually talk to a trader. Ask what is best today and you will get a real answer.'};}
+        else{p={emoji:'🏷️',name:'Last half hour',crowd:2,fresh:2,deal:5,
+          best:'Packing-up time. Selection is thin, but produce prices drop to clear the tables.',
+          move:'Bring a bag and small notes. This is when a box of tomatoes or figs gets cheap — if any are left.'};}
+        // Friday runs busier: nudge crowd up
+        if(busy){p.crowd=Math.min(5,p.crowd+1);}
+        p.time=t;return p;
+      }
+      var state={day:'tue',step:1};
+
+      function renderDays(){
+        var el=document.getElementById('days');el.innerHTML='';
+        DAYS.forEach(function(d){
+          var b=document.createElement('button');b.className='day';b.type='button';
+          b.setAttribute('aria-pressed',d.id===state.day);
+          b.innerHTML='<b>'+d.name+'</b><span>'+d.tag+'</span>';
+          b.addEventListener('click',function(){state.day=d.id;renderDays();renderScene();});
+          el.appendChild(b);
+        });
+      }
+      function bar(cls,name,val){
+        return '<div class="meter-row"><div class="name">'+name+'</div>'+
+          '<div class="bar '+cls+'"><i style="width:'+(val*20)+'%"></i></div>'+
+          '<div class="val">'+['—','Low','Low','Med','High','High'][val]+'</div></div>';
+      }
+      function renderScene(){
+        var day=DAYS.filter(function(d){return d.id===state.day;})[0];
+        var scene=document.getElementById('scene');
+        var timeblock=document.getElementById('timeblock');
+        document.getElementById('app').className='card';
+        if(day.type==='closed'){
+          timeblock.style.display='none';
+          document.getElementById('app').classList.add('closed');
+          scene.className='scene closed';
+          scene.innerHTML='<div class="scene-top"><p class="phase"><span class="em">🚫</span>No market today</p></div>'+
+            '<div class="scene-body"><p class="bestfor">The Maybachufer market only runs on <b>Tuesday</b> and <b>Friday</b> (food) and <b>Saturday</b> (fabric). The rest of the week the street is just a quiet canal-side road in Neukölln.</p>'+
+            '<div class="move"><span class="tag">Yusuf’s move</span>If your Berlin days do not line up, walk the Landwehrkanal here anyway and use a späti — then plan the market for your next Tuesday or Friday.</div></div>';
+          notifyResize();return;
+        }
+        if(day.type==='fabric'){
+          timeblock.style.display='';
+          document.getElementById('app').classList.add('fabric');
+          var slider=document.getElementById('slider');
+          if(+slider.value>12)slider.value=12; // fabric closes 17:00 (step 12)
+          slider.max=12;
+          var t=stepToTime(+slider.value);
+          document.getElementById('timebig').textContent=t;
+          scene.className='scene fabric';
+          scene.innerHTML='<div class="scene-top"><p class="phase"><span class="em">🧵</span>Saturday fabric market</p>'+
+            '<div class="meter">'+bar('crowd','Crowd',2)+bar('fresh','Choice',4)+bar('deal','Bargains',3)+'</div></div>'+
+            '<div class="scene-body"><p class="bestfor">This is the <b>Stoffmarkt</b>, 11:00–17:00 — bales of fabric, buttons, trims and haberdashery, not the Tuesday/Friday food market.</p>'+
+            '<div class="move"><span class="tag">Yusuf’s move</span>Come if you sew or want colourful photos; skip it if you came for produce and street food. For those, choose Tuesday or Friday instead.</div></div>';
+          notifyResize();return;
+        }
+        // food day
+        timeblock.style.display='';
+        var sl=document.getElementById('slider');sl.max=15;
+        var p=foodPhase(+sl.value,day.busy);
+        document.getElementById('timebig').textContent=p.time;
+        scene.className='scene';
+        scene.innerHTML='<div class="scene-top"><p class="phase"><span class="em">'+p.emoji+'</span>'+p.name+
+          (day.busy?' <span style="font-size:12px;font-weight:600;color:#7a5">· Friday runs busier</span>':'')+'</p>'+
+          '<div class="meter">'+bar('crowd','Crowd',p.crowd)+bar('fresh','Freshest',p.fresh)+bar('deal','End-day deals',p.deal)+'</div></div>'+
+          '<div class="scene-body"><p class="bestfor">'+p.best+'</p>'+
+          '<div class="move"><span class="tag">Yusuf’s move</span>'+p.move+'</div></div>';
+        notifyResize();
+      }
+      function notifyResize(){try{window.dispatchEvent(new Event('resize'));}catch(e){}}
+
+      document.getElementById('slider').addEventListener('input',function(){renderScene();});
+      renderDays();renderScene();
+    })();
+  </script>
+</body>
+</html>
