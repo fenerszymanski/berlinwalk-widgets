@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-07-09T10:46:28.101Z",
+  "generatedAt": "2026-07-09T11:27:20.011Z",
   "homeUrl": "https://www.berlinwalk.com/",
   "checks": {
     "homepageStatus": {
@@ -156,10 +156,10 @@
     "quizToolLive": {
       "ok": true,
       "details": {
-        "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783593979587",
+        "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783596432352",
         "ok": true,
         "status": 200,
-        "finalUrl": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783593979587"
+        "finalUrl": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783596432352"
       }
     },
     "faq": {
@@ -256,10 +256,10 @@
         },
         "productsExploreCustom": {
           "name": "BerlinWalk Homepage Products Explore Custom Layer",
-          "revision": "12",
+          "revision": "14",
           "enabled": true,
           "position": "BODY_END",
-          "htmlLength": 5028,
+          "htmlLength": 12313,
           "homepageProductsExploreBuild": true
         }
       }
@@ -268,7 +268,7 @@
       "ok": true,
       "details": {
         "name": "BerlinWalk Homepage Products Explore Custom Layer",
-        "revision": "12",
+        "revision": "14",
         "enabled": true,
         "position": "BODY_END",
         "homepageProductsExploreBuild": true
@@ -370,10 +370,10 @@
       }
     ],
     "quizTool": {
-      "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783593979587",
+      "url": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783596432352",
       "ok": true,
       "status": 200,
-      "finalUrl": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783593979587"
+      "finalUrl": "https://www.berlinwalk.com/tools/are-you-ready-for-berlin-quiz?bwqa=homepage-simplification-1783596432352"
     }
   },
   "embeds": {
@@ -427,10 +427,10 @@
     },
     "productsExploreCustom": {
       "name": "BerlinWalk Homepage Products Explore Custom Layer",
-      "revision": "12",
+      "revision": "14",
       "enabled": true,
       "position": "BODY_END",
-      "htmlLength": 5028,
+      "htmlLength": 12313,
       "homepageProductsExploreBuild": true
     }
   },

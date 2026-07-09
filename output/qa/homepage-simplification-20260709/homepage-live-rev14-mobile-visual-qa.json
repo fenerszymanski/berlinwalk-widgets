@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "generatedAt": "2026-07-09T11:27:43.935Z",
+  "url": "https://www.berlinwalk.com/?bwqa=rev14-mobile-1783596432433",
+  "errors": [],
+  "data": {
+    "readyState": "complete",
+    "build": "homepage-products-explore-custom-20260709o",
+    "footerBuild": "site-footer-restore-20260709a",
+    "overflowX": 0,
+    "productCardCount": 3,
+    "exploreCardCount": 4,
+    "productRect": {
+      "top": 6816,
+      "left": 0,
+      "width": 390,
+      "height": 1275,
+      "bottom": 8092
+    },
+    "exploreRect": {
+      "top": 8728,
+      "left": 0,
+      "width": 390,
+      "height": 951,
+      "bottom": 9679
+    },
+    "footerRect": {
+      "top": 9679,
+      "left": 0,
+      "width": 390,
+      "height": 1755,
+      "bottom": 11434
+    },
+    "footerPresent": true
+  }
+}
