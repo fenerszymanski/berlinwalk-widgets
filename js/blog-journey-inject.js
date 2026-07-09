@@ -9,11 +9,13 @@
   var STABILITY_STYLE_ID = 'bw-blog-journey-stability-style';
   var POST_BODY_MARKER = 'data-bw-blog-post-body';
   var POST_TITLE_MARKER = 'data-bw-blog-post-title';
+  var SHARE_MARKER = 'data-bw-blog-share-bar';
   var MOBILE_NAV_MARKER = 'data-bw-blog-mobile-nav';
   var MOBILE_MARKER = 'data-bw-blog-mobile-guide';
   var TOOL_MARKER = 'data-bw-blog-tool-prompt';
   var JOURNEY_MARKER = 'data-bw-blog-journey';
   var JOURNEY_LAYOUT_VERSION = 'blog-journey-action-cards-20260709a';
+  var SHARE_LAYOUT_VERSION = 'blog-top-share-20260709a';
   var BACK_TOP_MARKER = 'data-bw-blog-back-top';
   var EMPTY_PARAGRAPH_MARKER = 'data-bw-empty-paragraph';
   var WIDGET_BLOCK_MARKER = 'data-bw-blog-widget-block';
@@ -1020,12 +1022,18 @@
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2 *,body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3 *{color:inherit!important;font-family:inherit!important;font-size:inherit!important;font-style:normal!important;font-weight:900!important;font-variation-settings:"wght" 900!important;letter-spacing:0!important;line-height:inherit!important;-webkit-text-stroke:.12px currentColor!important;text-shadow:.12px 0 0 currentColor!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{border-top:2px solid #212121;font-size:clamp(28px,4vw,38px)!important;line-height:1.06!important;margin:42px 0 14px!important;padding-top:24px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-size:clamp(21px,3vw,26px)!important;line-height:1.12!important;margin:30px 0 10px!important;}',
-      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] a:not(.bw-blog-mobile-nav-home):not(.bw-blog-mobile-nav-item):not(.bw-blog-mobile-guide-list a):not(.bw-blog-tool-button):not(.bw-blog-journey-card){color:#1B5E20!important;text-decoration-color:#FFE600!important;text-decoration-thickness:3px!important;text-underline-offset:3px!important;}',
+      'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] a:not(.bw-blog-share-link):not(.bw-blog-mobile-nav-home):not(.bw-blog-mobile-nav-item):not(.bw-blog-mobile-guide-list a):not(.bw-blog-tool-button):not(.bw-blog-journey-card){color:#1B5E20!important;text-decoration-color:#FFE600!important;text-decoration-thickness:3px!important;text-underline-offset:3px!important;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] img{max-width:100%;}',
       'body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + WIDGET_BLOCK_MARKER + '="1"]{display:block!important;margin-bottom:34px!important;}',
       'body.bw-blog-post-enhanced [data-bw-leadform]{margin:38px 0!important;}',
-      '.bw-blog-mobile-nav,.bw-blog-mobile-guide,.bw-blog-tool-prompt,.bw-blog-journey,.bw-blog-back-top{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;color:#212121;}',
-      '.bw-blog-mobile-nav *,.bw-blog-mobile-guide *,.bw-blog-tool-prompt *,.bw-blog-journey *{box-sizing:border-box;}',
+      '.bw-blog-share-bar,.bw-blog-mobile-nav,.bw-blog-mobile-guide,.bw-blog-tool-prompt,.bw-blog-journey,.bw-blog-back-top{box-sizing:border-box;font-family:Montserrat,Arial,sans-serif;color:#212121;}',
+      '.bw-blog-share-bar *,.bw-blog-mobile-nav *,.bw-blog-mobile-guide *,.bw-blog-tool-prompt *,.bw-blog-journey *{box-sizing:border-box;}',
+      '.bw-blog-share-bar{align-items:center;border-top:1px solid #D7E2CE;border-bottom:1px solid #D7E2CE;display:grid;gap:12px;grid-template-columns:auto minmax(0,1fr);margin:16px 0 30px;padding:14px 0;}',
+      '.bw-blog-share-label{color:#1B5E20;display:block;font-size:11px;font-weight:900;letter-spacing:1.5px;line-height:1;text-transform:uppercase;white-space:nowrap;}',
+      '.bw-blog-share-actions{align-items:center;display:flex;flex-wrap:wrap;gap:8px;min-width:0;}',
+      '.bw-blog-share-link,.bw-blog-share-copy{align-items:center;background:#FFFFFF;border:1px solid #C5E1A5;border-radius:0;color:#212121!important;cursor:pointer;display:inline-flex;font-family:Montserrat,Arial,sans-serif!important;font-size:12px;font-weight:900;justify-content:center;letter-spacing:.2px;line-height:1;min-height:36px;padding:0 12px;text-decoration:none!important;white-space:nowrap;}',
+      '.bw-blog-share-link:hover,.bw-blog-share-copy:hover{background:#FAFAF5;border-color:#1B5E20;color:#1B5E20!important;}',
+      '.bw-blog-share-copy[data-bw-share-copied="1"]{background:#FFE600;border-color:#212121;color:#212121!important;}',
       '.bw-blog-mobile-nav{display:none;}',
       '.bw-blog-mobile-nav-brand{align-items:center;background:#FFE600;color:#212121;display:inline-flex;font-size:12px;font-weight:900;letter-spacing:1.25px;line-height:1;max-width:100%;min-height:34px;padding:0 12px;text-transform:uppercase;white-space:nowrap;}',
       '.bw-blog-mobile-nav-divider{border-top:2px solid #212121;height:0;margin:18px 0 24px;}',
@@ -1045,7 +1053,7 @@
       '.bw-blog-mobile-guide-list{display:flex;gap:8px;list-style:none;margin:0;overflow-x:auto;padding:1px 0 6px;scrollbar-width:none;}',
       '.bw-blog-mobile-guide-list::-webkit-scrollbar{display:none;}',
       '.bw-blog-mobile-guide-list a{background:#FFFFFF;border:1px solid #212121;border-radius:0;color:#212121;display:inline-flex;font-size:12px;font-weight:900;line-height:1.15;min-height:36px;padding:0 12px;align-items:center;text-decoration:none;white-space:nowrap;}',
-      '.bw-blog-mobile-nav a:focus-visible,.bw-blog-mobile-guide-list a:focus-visible,.bw-blog-tool-prompt a:focus-visible,.bw-blog-journey a:focus-visible,.bw-blog-back-top:focus-visible{outline:3px solid rgba(255,230,0,.9);outline-offset:3px;}',
+      '.bw-blog-share-bar a:focus-visible,.bw-blog-share-copy:focus-visible,.bw-blog-mobile-nav a:focus-visible,.bw-blog-mobile-guide-list a:focus-visible,.bw-blog-tool-prompt a:focus-visible,.bw-blog-journey a:focus-visible,.bw-blog-back-top:focus-visible{outline:3px solid rgba(255,230,0,.9);outline-offset:3px;}',
       '.bw-blog-tool-prompt{align-items:center;background:#FAFAF5;border:2px solid #212121;display:grid;gap:20px;grid-template-columns:minmax(0,1fr) auto;margin:34px 0;padding:22px;}',
       '.bw-blog-tool-kicker,.bw-blog-journey-kicker{color:#1B5E20;display:block;font-size:11px;font-weight:900;letter-spacing:1.5px;line-height:1;margin:0 0 10px;text-transform:uppercase;}',
       '.bw-blog-tool-prompt strong{color:#212121;display:block;font-size:24px;font-weight:900;line-height:1.08;margin:0 0 7px;}',
@@ -1087,7 +1095,7 @@
       '[' + NATIVE_END_MARKER + '="1"]{display:none!important;}',
       '@media (max-width:899px){html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) [data-hook="post"],html.bw-blog-mobile-preparing:not(.bw-blog-enhanced-ready):not(.bw-blog-mobile-prep-timeout) article{opacity:0!important;pointer-events:none!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:not(:has(> .bw-blog-mobile-nav)) > [data-hook="post"]{margin-top:270px!important;}body.bw-blog-post-enhanced [data-hook="post-page"] *:has(> .bw-blog-mobile-nav) > [data-hook="post"]{margin-top:0!important;}}',
       '@media (min-width:900px){.bw-blog-mobile-nav,.bw-blog-mobile-guide{display:none!important;}}',
-      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + WIDGET_BLOCK_MARKER + '="1"]{margin-bottom:28px!important;}}',
+      '@media (max-width:899px){body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] [' + WIDGET_BLOCK_MARKER + '="1"]{margin-bottom:28px!important;}.bw-blog-share-bar{display:grid;grid-template-columns:1fr;margin:8px 0 24px;padding:13px 0;}.bw-blog-share-actions{flex-wrap:nowrap;overflow-x:auto;padding-bottom:2px;scrollbar-width:none;}.bw-blog-share-actions::-webkit-scrollbar{display:none;}.bw-blog-share-link,.bw-blog-share-copy{flex:0 0 auto;min-height:36px;}}',
       '@media (max-width:899px){body.bw-blog-post-enhanced [' + POST_TITLE_MARKER + '="1"]{font-size:clamp(32px,8.4vw,35px)!important;line-height:1.06!important;margin-top:18px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] p:not(.bw-blog-mobile-guide-title):not(.bw-blog-journey-intro):not(.bw-blog-tool-copy):not([' + EMPTY_PARAGRAPH_MARKER + ']){font-size:17px!important;line-height:1.68!important;margin-bottom:17px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h2{font-size:28px!important;margin-top:34px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] h3{font-weight:900!important;}.bw-blog-mobile-nav{background:#FAFAF5;border:0;border-bottom:2px solid #212121;display:block;margin:0 0 28px;padding:24px 0 20px;position:relative;}.bw-blog-mobile-nav:before{background:#1B5E20;content:"";display:block;height:5px;left:0;position:absolute;right:0;top:0;}.bw-blog-mobile-nav:after{background:#212121;content:"";display:block;height:2px;left:0;position:absolute;right:0;top:86px;}.bw-blog-tool-prompt{align-items:start;grid-template-columns:1fr;margin:28px 0;padding:18px;}.bw-blog-tool-button,.bw-tool-bridge-book{justify-self:start;}.bw-blog-journey{margin:32px 0 28px;padding:24px 18px;}.bw-tool-bridge-main,.bw-blog-journey-grid,.bw-blog-related-grid{grid-template-columns:1fr;}.bw-blog-journey h2{font-size:26px!important;}.bw-blog-back-top{bottom:92px;right:14px;width:42px;height:42px;font-size:21px;}}',
       '@media (max-width:899px){.bw-blog-journey{background:#102414;margin:34px calc(50% - 50vw) 32px!important;max-width:100vw;overflow:hidden;padding:30px max(20px, env(safe-area-inset-right)) 34px max(20px, env(safe-area-inset-left));width:100vw;}.bw-blog-journey>*{margin-left:auto;margin-right:auto;max-width:560px;}.bw-blog-journey:before{height:6px;}.bw-blog-journey-kicker{font-size:12px;letter-spacing:1.4px;margin-bottom:12px;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey h2{font-size:28px!important;line-height:1.05!important;margin-bottom:10px!important;}body.bw-blog-post-enhanced [data-bw-blog-post-body="1"] .bw-blog-journey .bw-blog-journey-intro{font-size:15px!important;line-height:1.62!important;margin-bottom:24px!important;}.bw-blog-journey-grid{gap:16px;margin-bottom:28px;}.bw-blog-related-title{font-size:13px!important;letter-spacing:1.4px!important;margin:4px auto 16px!important;}.bw-blog-related-grid{gap:16px;}.bw-blog-journey-card{border:1px solid rgba(197,225,165,.22);box-shadow:0 14px 30px rgba(0,0,0,.24);width:100%;}.bw-blog-journey-content{padding:16px 16px 18px;}.bw-blog-journey-card strong{font-size:18px;line-height:1.12;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool{align-items:center;background:#FAFAF5;display:grid;grid-template-columns:minmax(0,1fr) 74px;min-height:132px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-image{grid-column:2;grid-row:1;height:54px;margin:16px 16px 16px 0;width:54px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-content{grid-column:1;grid-row:1;justify-content:center;padding:16px 0 18px 16px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool strong{font-size:17px;line-height:1.12;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-card-copy{font-size:13.5px;line-height:1.42;margin-top:9px;}.bw-blog-related-grid .bw-blog-journey-card{display:grid;grid-template-columns:minmax(104px,34%) minmax(0,1fr);min-height:132px;}.bw-blog-related-grid .bw-blog-journey-image{aspect-ratio:auto;height:100%;min-height:132px;}.bw-blog-related-grid .bw-blog-journey-content{justify-content:center;padding:14px 14px 15px;}.bw-blog-related-grid .bw-blog-journey-card strong{font-size:16px;line-height:1.15;}.bw-blog-related-grid .bw-blog-journey-label{font-size:10px;margin-bottom:8px;}}',
       '@media (max-width:360px){.bw-blog-journey{padding-left:16px;padding-right:16px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool{grid-template-columns:minmax(0,1fr) 62px;min-height:124px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-image{height:46px;margin-right:12px;width:46px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool .bw-blog-journey-content{padding:14px 0 15px 14px;}.bw-blog-journey-grid .bw-blog-journey-card-kind-tool strong{font-size:16px;}.bw-blog-related-grid .bw-blog-journey-card{grid-template-columns:96px minmax(0,1fr);min-height:124px;}.bw-blog-related-grid .bw-blog-journey-image{min-height:124px;}.bw-blog-related-grid .bw-blog-journey-content{padding:12px;}.bw-blog-related-grid .bw-blog-journey-card strong{font-size:15px;}}'
@@ -1340,6 +1348,119 @@
       node.style.setProperty('-webkit-text-stroke', '.18px currentColor', 'important');
       node.style.setProperty('text-shadow', '.18px 0 0 currentColor, -.18px 0 0 currentColor', 'important');
     });
+  }
+
+  function sharePageUrl() {
+    try {
+      var canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical && canonical.href && /^https?:\/\//i.test(canonical.href)) {
+        return canonical.href.split('#')[0];
+      }
+    } catch (err) {}
+    try {
+      var url = new URL(window.location.href);
+      url.search = '';
+      url.hash = '';
+      return url.toString();
+    } catch (err) {
+      return window.location.href.split('#')[0].split('?')[0];
+    }
+  }
+
+  function sharePageTitle() {
+    var title = findPostTitle();
+    var text = cleanText(title && title.textContent || '');
+    if (text) return text;
+    return cleanText((document.title || '').replace(/\s*\|\s*BerlinWalk.*$/i, '')) || 'BerlinWalk guide';
+  }
+
+  function copyToClipboard(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text).catch(function () {
+        return fallbackCopy(text);
+      });
+    }
+    return Promise.resolve(fallbackCopy(text));
+  }
+
+  function fallbackCopy(text) {
+    var box = document.createElement('textarea');
+    box.value = text;
+    box.setAttribute('readonly', 'readonly');
+    box.style.position = 'fixed';
+    box.style.left = '-9999px';
+    box.style.top = '0';
+    document.body.appendChild(box);
+    box.focus();
+    box.select();
+    try { document.execCommand('copy'); } catch (err) {}
+    box.remove();
+    return true;
+  }
+
+  function markShareCopied(button) {
+    if (!button) return;
+    var label = button.getAttribute('data-bw-share-original') || cleanText(button.textContent) || 'Copy link';
+    button.setAttribute('data-bw-share-original', label);
+    button.setAttribute('data-bw-share-copied', '1');
+    button.textContent = 'Copied';
+    window.clearTimeout(button.__bwShareCopiedTimer);
+    button.__bwShareCopiedTimer = window.setTimeout(function () {
+      button.removeAttribute('data-bw-share-copied');
+      button.textContent = label;
+    }, 1800);
+  }
+
+  function insertShareBar(body) {
+    if (!body) return;
+    var url = sharePageUrl();
+    var title = sharePageTitle();
+    var key = url + '|' + title;
+    var old = document.querySelector('[' + SHARE_MARKER + ']');
+    if (old && old.getAttribute('data-bw-blog-share-key') === key) return;
+    if (old) old.remove();
+
+    var text = title + ' ' + url;
+    var encodedUrl = encodeURIComponent(url);
+    var encodedText = encodeURIComponent(text);
+    var bar = document.createElement('aside');
+    bar.className = 'bw-blog-share-bar';
+    bar.setAttribute(SHARE_MARKER, '1');
+    bar.setAttribute('data-bw-blog-share-key', key);
+    bar.setAttribute('data-bw-blog-share-version', SHARE_LAYOUT_VERSION);
+    bar.setAttribute('aria-label', 'Share this guide');
+    bar.innerHTML =
+      '<span class="bw-blog-share-label">Share this guide</span>' +
+      '<div class="bw-blog-share-actions">' +
+        '<a class="bw-blog-share-link" href="https://wa.me/?text=' + encodedText + '" target="_blank" rel="noopener" data-bw-share-channel="whatsapp">WhatsApp</a>' +
+        '<a class="bw-blog-share-link" href="https://www.facebook.com/sharer/sharer.php?u=' + encodedUrl + '" target="_blank" rel="noopener" data-bw-share-channel="facebook">Facebook</a>' +
+        '<a class="bw-blog-share-link" href="https://twitter.com/intent/tweet?url=' + encodedUrl + '&text=' + encodeURIComponent(title) + '" target="_blank" rel="noopener" data-bw-share-channel="x">X</a>' +
+        '<button class="bw-blog-share-copy" type="button" data-bw-share-channel="copy">Copy link</button>' +
+      '</div>';
+
+    bar.addEventListener('click', function (event) {
+      var target = event.target.closest('[data-bw-share-channel]');
+      if (!target) return;
+      var channel = target.getAttribute('data-bw-share-channel') || '';
+      pushEvent('bw_blog_share_click', {
+        slug: currentSlug(),
+        channel: channel,
+        href: channel === 'copy' ? url : (target.href || '')
+      });
+      if (channel !== 'copy') return;
+      event.preventDefault();
+      copyToClipboard(url).then(function () {
+        markShareCopied(target);
+      }).catch(function () {
+        markShareCopied(target);
+      });
+    });
+
+    var first = body.firstElementChild;
+    while (first && first.matches && first.matches('[' + MOBILE_NAV_MARKER + '],[' + MOBILE_MARKER + '],[' + TOOL_MARKER + '],[' + JOURNEY_MARKER + ']')) {
+      first = first.nextElementSibling;
+    }
+    body.insertBefore(bar, first || null);
   }
 
   function normalizeHeadingTypography(body) {
@@ -2076,6 +2197,70 @@
       return node;
     }
 
+    function isFooterLike(el) {
+      if (!el || !el.closest) return false;
+      if (el.closest('footer,#SITE_FOOTER,#bw-site-footer-restore,.bw-site-footer')) return true;
+      var node = el;
+      for (var depth = 0; depth < 5 && node && node !== document.body; depth++) {
+        var haystack = ((node.id || '') + ' ' + (node.className || '')).toLowerCase();
+        if (haystack.indexOf('footer') !== -1) return true;
+        node = node.parentElement;
+      }
+      return false;
+    }
+
+    function isNativeShareControl(el) {
+      if (!el || !el.closest || el.closest('[' + SHARE_MARKER + '], [' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) return false;
+      if (isFooterLike(el)) return false;
+      var semantic = cleanText([
+        el.getAttribute('aria-label') || '',
+        el.getAttribute('title') || '',
+        el.getAttribute('data-testid') || '',
+        el.textContent || ''
+      ].join(' ')).toLowerCase();
+      var href = String(el.getAttribute('href') || '').toLowerCase();
+      if (/facebook|twitter|x\.com|whatsapp|pinterest|mailto:|print|copy link|share/.test(semantic + ' ' + href)) return true;
+      if (/^x$|^f$|^in$/.test(semantic)) return true;
+      if (/\bcopy\b/.test(semantic) && /\blink\b/.test(semantic)) return true;
+      return false;
+    }
+
+    function shareControlCount(el) {
+      if (!el || !el.querySelectorAll) return 0;
+      return Array.prototype.filter.call(el.querySelectorAll('a,button,[role="button"]'), isNativeShareControl).length;
+    }
+
+    function chooseShareContainer(control) {
+      var node = control;
+      var best = null;
+      for (var depth = 0; depth < 8 && node && node.parentElement && node.parentElement !== document.body; depth++) {
+        var parent = node.parentElement;
+        if (parent.closest('[' + SHARE_MARKER + '], [' + JOURNEY_MARKER + '], [' + MOBILE_NAV_MARKER + '], [' + MOBILE_MARKER + '], [' + TOOL_MARKER + ']')) break;
+        if (isFooterLike(parent) || isUnsafeEndMatterContainer(parent)) break;
+        var controls = shareControlCount(parent);
+        var allControls = parent.querySelectorAll('a,button,[role="button"]').length;
+        var text = cleanText(parent.textContent);
+        var rect = parent.getBoundingClientRect ? parent.getBoundingClientRect() : { width: 0, height: 0 };
+        if (controls >= 3 && allControls <= 12 && text.length < 500 && rect.width >= 80 && rect.height <= 260) {
+          best = parent;
+        }
+        node = parent;
+      }
+      return best;
+    }
+
+    function hideNativeShareBlocks() {
+      var controls = document.querySelectorAll('a,button,[role="button"]');
+      for (var j = 0; j < controls.length; j++) {
+        if (!isNativeShareControl(controls[j])) continue;
+        var shareContainer = chooseShareContainer(controls[j]);
+        if (shareContainer && !isUnsafeEndMatterContainer(shareContainer) && !isFooterLike(shareContainer)) {
+          shareContainer.setAttribute(NATIVE_END_MARKER, '1');
+          shareContainer.setAttribute('aria-hidden', 'true');
+        }
+      }
+    }
+
     for (var i = 0; i < candidates.length; i++) {
       var text = cleanText(candidates[i].textContent);
       var isCommentUnavailable = text.indexOf("Commenting on this post") !== -1 && text.length < 220;
@@ -2088,6 +2273,8 @@
         container.setAttribute('aria-hidden', 'true');
       }
     }
+
+    hideNativeShareBlocks();
   }
 
   function currentConsentPolicy() {
@@ -2276,13 +2463,16 @@
     normalizePostSpacing(body);
     normalizeHeadingTypography(body);
     insertBackToTop();
+    insertShareBar(body);
     var items = collectHeadings(body);
     insertMobileBlogNav(body, dataCache);
     insertMobileGuide(body, items);
+    hideNativeEndMatter();
     markBlogReady();
     decorateBlogBookLinks();
     loadData().then(function (data) {
       insertMobileBlogNav(body, data);
+      insertShareBar(body);
       insertToolPrompt(body, data, items);
       insertJourney(body, data);
       hideNativeEndMatter();
@@ -2293,11 +2483,13 @@
   function removeInjected() {
     var mobileNav = document.querySelector('[' + MOBILE_NAV_MARKER + ']');
     var mobile = document.querySelector('[' + MOBILE_MARKER + ']');
+    var share = document.querySelector('[' + SHARE_MARKER + ']');
     var tool = document.querySelector('[' + TOOL_MARKER + ']');
     var journey = document.querySelector('[' + JOURNEY_MARKER + ']');
     var backTop = document.querySelector('[' + BACK_TOP_MARKER + ']');
     if (mobileNav) mobileNav.remove();
     if (mobile) mobile.remove();
+    if (share) share.remove();
     if (tool) tool.remove();
     if (journey) journey.remove();
     if (backTop) backTop.remove();
@@ -2357,8 +2549,11 @@
         if (body && !document.querySelector('[' + MOBILE_NAV_MARKER + ']')) {
           insertMobileBlogNav(body, dataCache);
         }
+        if (body && !document.querySelector('[' + SHARE_MARKER + ']')) {
+          insertShareBar(body);
+        }
         var needsMobileGuide = body && collectHeadings(body).length >= 2;
-        if (!document.querySelector('[' + JOURNEY_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {
+        if (!document.querySelector('[' + JOURNEY_MARKER + ']') || !document.querySelector('[' + SHARE_MARKER + ']') || (needsMobileGuide && !document.querySelector('[' + MOBILE_MARKER + ']'))) {
           scheduleRender();
         }
         return;
