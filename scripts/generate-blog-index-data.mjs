@@ -525,6 +525,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(jewish-museum-berlin-guide|jewish museum berlin|jüdisches museum berlin|juedisches museum berlin|garden of exile|holocaust tower|libeskind building)/.test(s)) return 'jewish-museum-visit-sequence';
   if (/(air-conditioning-in-berlin|air conditioning|air-conditioning|do hotels have|no ac|no-ac|stay cool|staying cool|room heat|heatwave room)/.test(s)) return 'berlin-room-heat-check';
   if (/(berlin-u-bahn-fine|u-bahn fine|caught without a ticket|ticket fine|\bebe\b)/.test(s)) return 'berlin-ticket-fine-step-planner';
   if (/(renting-a-bike-in-berlin|renting a bike in berlin|bike rental|bike sharing|nextbike|donkey republic)/.test(s)) return 'berlin-bike-rental-finder';
