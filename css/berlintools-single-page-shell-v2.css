@@ -306,7 +306,7 @@ html.bw-tools-shell-v2 .bw-tools-shell-v2-local-note p {
 
 html.bw-tools-shell-v2 #comp-mozn18up {
   background: #FAFAF5 !important;
-  padding: 8px 24px 30px !important;
+  padding: 34px 24px 30px !important;
 }
 
 html.bw-tools-shell-v2 .bw-tools-shell-v2-accordion {
@@ -430,6 +430,10 @@ html.bw-tools-shell-v2 summary:focus-visible {
   html.bw-tools-shell-v2 #comp-mozp1zlv {
     padding-left: 16px !important;
     padding-right: 16px !important;
+  }
+
+  html.bw-tools-shell-v2 #comp-mozn18up {
+    padding-top: 28px !important;
   }
 }
 

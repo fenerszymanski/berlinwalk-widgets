@@ -1,6 +1,7 @@
 <!-- BerlinTools Single Page Shell V2 Wix HEAD embed template.
      The updater replaces __COMMIT_SHA__ with a pinned widgets-repo commit. -->
 <style id="berlintools-shell-v2-lower-layout-guard">
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {padding-top:34px!important;}
   html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container {
     align-items:stretch!important;box-sizing:border-box!important;display:flex!important;flex-direction:column!important;height:auto!important;margin:0 auto!important;max-width:960px!important;min-height:0!important;padding:0!important;width:min(100%,960px)!important;
   }
@@ -23,6 +24,9 @@
     html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up .comp-mozn18up-container,
     html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {max-width:100%!important;width:100%!important;}
     html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {grid-template-areas:'title' 'first' 'second'!important;grid-template-columns:minmax(0,1fr)!important;grid-template-rows:max-content minmax(168px,max-content) minmax(168px,max-content)!important;}
+  }
+  @media (max-width:899px) {
+    html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozn18up {padding-top:28px!important;}
   }
 </style>
 <script>
