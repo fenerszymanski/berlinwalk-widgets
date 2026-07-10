@@ -296,6 +296,24 @@
     ].join('');
   }
 
+  function setHeroOrder(hero, heading, lead, widget, secondary) {
+    if (!hero) return;
+    var order = [
+      ['[data-bw-shell-v2-hero-meta]', 1],
+      [heading, 2],
+      [lead, 3],
+      ['[data-bw-shell-v2-trust]', 4],
+      ['[data-bw-shell-v2-editorial-note]', 5],
+      ['[data-bw-shell-v2-summary]', 6],
+      [secondary, 7],
+      [widget, 8]
+    ];
+    order.forEach(function (entry) {
+      var node = typeof entry[0] === 'string' ? hero.querySelector(entry[0]) : entry[0];
+      if (node && node.style) node.style.setProperty('order', String(entry[1]), 'important');
+    });
+  }
+
   function injectLocalNote(introSection, intro, secondary) {
     if (!introSection || !secondary) return;
     var secondaryText = cleanText(secondary.textContent);
@@ -361,6 +379,7 @@
     injectHeroMeta(hero, heading, lead);
     injectEditorialNote(hero, lead);
     injectSummaryCard(hero, heading);
+    setHeroOrder(hero, heading, lead, widget, secondary);
     injectLocalNote(introSection, intro, secondary);
     return Boolean(body);
   }
