@@ -69,7 +69,8 @@
 
   function isExcludedPage() {
     var path = window.location.pathname.toLowerCase();
-    return path.indexOf('/products/') === 0 ||
+    return path.indexOf('/tools/') === 0 ||
+      path.indexOf('/products/') === 0 ||
       path.indexOf('/book-berlin-walking-tour') === 0 ||
       path.indexOf('/berlin-trip-planner') === 0 ||
       path.indexOf('/thank-you') !== -1 ||

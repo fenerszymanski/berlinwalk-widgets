@@ -1,0 +1,28 @@
+<!-- BerlinTools Single Page Shell V2 Wix HEAD embed template.
+     The updater replaces __COMMIT_SHA__ with a pinned widgets-repo commit. -->
+<script>
+  (function () {
+    var path = String(window.location.pathname || '').toLowerCase().replace(/\/{2,}/g, '/');
+    if (!/^\/tools\/[^/]+\/?$/.test(path)) return;
+    var commit = '__COMMIT_SHA__';
+    var base = 'https://fenerszymanski.github.io/berlinwalk-widgets/';
+    var cssHref = base + 'css/berlintools-single-page-shell-v2.css?commit=' + commit;
+    var jsSrc = base + 'js/berlintools-single-page-shell-v2.js?commit=' + commit;
+
+    if (!document.querySelector('link[data-bw-shell-v2-css]')) {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = cssHref;
+      link.setAttribute('data-bw-shell-v2-css', commit);
+      document.head.appendChild(link);
+    }
+
+    if (!document.querySelector('script[data-bw-shell-v2-js]')) {
+      var script = document.createElement('script');
+      script.src = jsSrc;
+      script.async = false;
+      script.setAttribute('data-bw-shell-v2-js', commit);
+      document.head.appendChild(script);
+    }
+  })();
+</script>

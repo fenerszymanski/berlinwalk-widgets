@@ -11,7 +11,7 @@
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
-<div id="bw-first-day-planner">
+<div id="bw-first-day-planner" data-bw-tool-root="berlin-first-day-planner">
   <style>
     html,
     body {
@@ -972,10 +972,54 @@
         padding: 9px;
       }
     }
+
+    html[data-bw-surface="tool-page"] #bw-first-day-planner {
+      margin: 0;
+      padding: 0;
+      text-align: left;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-first-day-planner .bw-head {
+      background: transparent;
+      height: 1px;
+      min-height: 1px;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-first-day-planner .bw-head .bw-kicker,
+    html[data-bw-surface="tool-page"] #bw-first-day-planner .bw-head .bw-sub {
+      display: none;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-first-day-planner .bw-title {
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-first-day-planner .bw-more-tools,
+    html[data-bw-surface="tool-page"] #bw-first-day-planner .bw-actions .bw-primary {
+      display: none;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-first-day-planner .bw-wrap {
+      border-radius: 0;
+      box-shadow: none;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-first-day-planner .bw-body {
+      padding-top: 14px;
+    }
   </style>
 
   <section class="bw-wrap" aria-labelledby="bw-first-day-title">
-    <header class="bw-head">
+    <header class="bw-head" data-bw-tool-header>
       <p class="bw-kicker">BerlinWalk local planner</p>
       <h1 id="bw-first-day-title" class="bw-title">Plan Your First 24 Hours in Berlin</h1>
       <p class="bw-sub">Pick your arrival date, answer five quick choices, and get a realistic first-day route with weather, transport, opening-day logic, and the easiest moment to join the free BerlinWalk tour.</p>
@@ -1117,7 +1161,7 @@
       </aside>
     </div>
 
-    <section class="bw-more-tools" aria-label="More Berlin planning tools">
+    <section class="bw-more-tools" data-bw-tool-recirculation aria-label="More Berlin planning tools">
       <h3 class="bw-more-title">More Berlin planning tools</h3>
       <div class="bw-links">
         <a class="bw-link" href="https://www.berlinwalk.com/meeting-point" target="_top" rel="noopener">Meeting point</a>

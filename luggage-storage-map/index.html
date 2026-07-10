@@ -8,7 +8,7 @@
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
-<div id="bw-luggage-map">
+<div id="bw-luggage-map" data-bw-tool-root="berlin-luggage-storage">
   <style>
     #bw-luggage-map {
       --bw-green: #1B5E20;
@@ -245,12 +245,24 @@
       #bw-luggage-map .bw-popup-name { font-size: 14px; }
       #bw-luggage-map .bw-popup-body { font-size: 12px; }
     }
+
+    html[data-bw-surface="tool-page"] #bw-luggage-map {
+      margin: 0;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-luggage-map .bw-head {
+      display: none;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-luggage-map .bw-body {
+      padding-top: 14px;
+    }
   </style>
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 
   <div class="bw-wrap">
-    <div class="bw-head">
+    <div class="bw-head" data-bw-tool-header>
       <span class="bw-head-icon" aria-hidden="true">L</span>
       <span class="bw-kicker">Where to Store Luggage in Berlin</span>
     </div>
@@ -282,7 +294,7 @@
         {
           name: 'Berlin Hauptbahnhof - DB lockers',
           type: 'station',
-          cost: '~4-6 euro / 24 h',
+          cost: '~€4–6 / 24 h',
           lat: 52.5251,
           lng: 13.3694,
           note: 'Largest locker bank in central Berlin, on two floors. Live availability shown on station screens and the DB Bahnhof app.'
@@ -290,7 +302,7 @@
         {
           name: 'Berlin Hauptbahnhof - Gepäckcenter',
           type: 'staffed',
-          cost: '~5-7 euro / piece',
+          cost: '~€5–7 / piece',
           lat: 52.5253,
           lng: 13.3697,
           note: "Staffed left-luggage centre run by Rail&Fresh inside Hauptbahnhof. Best for oversized, fragile, or valuable bags."
@@ -298,7 +310,7 @@
         {
           name: 'Friedrichstrasse Station lockers',
           type: 'station',
-          cost: '~4-6 euro / 24 h',
+          cost: '~€4–6 / 24 h',
           lat: 52.5202,
           lng: 13.3869,
           note: 'Central, very convenient if you are sightseeing along Unter den Linden. Smaller locker bank than Hauptbahnhof.'
@@ -306,7 +318,7 @@
         {
           name: 'Zoologischer Garten lockers',
           type: 'station',
-          cost: '~4-6 euro / 24 h',
+          cost: '~€4–6 / 24 h',
           lat: 52.5070,
           lng: 13.3326,
           note: 'Best base for visitors staying in the West around Bahnhof Zoo, KaDeWe, Charlottenburg, and the Tiergarten end.'
@@ -314,7 +326,7 @@
         {
           name: 'Ostbahnhof lockers',
           type: 'station',
-          cost: '~4-6 euro / 24 h',
+          cost: '~€4–6 / 24 h',
           lat: 52.5104,
           lng: 13.4339,
           note: 'Useful if you are catching a long-distance train east. Smaller locker hall than Hauptbahnhof.'
@@ -322,7 +334,7 @@
         {
           name: 'Suedkreuz lockers',
           type: 'station',
-          cost: '~4-6 euro / 24 h',
+          cost: '~€4–6 / 24 h',
           lat: 52.4757,
           lng: 13.3653,
           note: 'On the southern ring. Quieter than Hauptbahnhof and a good fit if you are heading to BER by train.'
@@ -330,7 +342,7 @@
         {
           name: 'Potsdamer Platz lockers',
           type: 'station',
-          cost: '~4-6 euro / 24 h',
+          cost: '~€4–6 / 24 h',
           lat: 52.5096,
           lng: 13.3759,
           note: 'Convenient locker bank between the Sony Center, Mall of Berlin, and the Holocaust Memorial walk.'
@@ -338,7 +350,7 @@
         {
           name: 'Alexanderplatz Station lockers',
           type: 'station',
-          cost: '~4-6 euro / 24 h',
+          cost: '~€4–6 / 24 h',
           lat: 52.5219,
           lng: 13.4111,
           note: 'Closest locker bank to where my walking tour begins. Smaller than Hauptbahnhof but central for Mitte.'
@@ -346,7 +358,7 @@
         {
           name: 'Gesundbrunnen lockers',
           type: 'station',
-          cost: '~4-6 euro / 24 h',
+          cost: '~€4–6 / 24 h',
           lat: 52.5489,
           lng: 13.3884,
           note: 'Convenient if you are staying north in Wedding or Prenzlauer Berg, or taking long-distance trains.'
@@ -354,7 +366,7 @@
         {
           name: 'BER Airport luggage storage',
           type: 'airport',
-          cost: '~6-12 euro / piece',
+          cost: '~€6–12 / piece',
           lat: 52.3650,
           lng: 13.5097,
           note: 'Manual storage in Terminal 1. Best if you fly out the same day and want to spend it in central Berlin without the suitcase.'
@@ -362,7 +374,7 @@
         {
           name: 'Bounce / Radical / Stasher: Mitte',
           type: 'app',
-          cost: '~5-8 euro / day',
+          cost: '~€5–8 / day',
           lat: 52.5230,
           lng: 13.4015,
           note: 'Dozens of app-partner hotels, cafes, and shops across Mitte. Drop is a 5-minute walk from most central sights.'
@@ -370,7 +382,7 @@
         {
           name: 'Bounce / Radical / Stasher: Kreuzberg',
           type: 'app',
-          cost: '~5-8 euro / day',
+          cost: '~€5–8 / day',
           lat: 52.4990,
           lng: 13.4030,
           note: 'Useful if your hotel will not hold bags and you are spending the day around Bergmannkiez or the East Side Gallery.'
@@ -378,7 +390,7 @@
         {
           name: 'Bounce / Radical / Stasher: Prenzlauer Berg',
           type: 'app',
-          cost: '~5-8 euro / day',
+          cost: '~€5–8 / day',
           lat: 52.5400,
           lng: 13.4150,
           note: 'Convenient drop zone if you are visiting Mauerpark, the Kulturbrauerei, or the Berlin Wall Memorial at Bernauer Strasse.'
@@ -386,7 +398,7 @@
         {
           name: 'Bounce / Radical / Stasher: Charlottenburg',
           type: 'app',
-          cost: '~5-8 euro / day',
+          cost: '~€5–8 / day',
           lat: 52.5060,
           lng: 13.3041,
           note: 'Good fit if you are sightseeing in the West around KaDeWe, the Tiergarten, and the Bahnhof Zoo end.'

@@ -1087,7 +1087,6 @@
       '.bw-tool-bridge{margin:34px 0 26px;padding:28px 28px 24px;}',
       '.bw-tool-bridge-main{align-items:center;display:grid;gap:18px;grid-template-columns:minmax(0,1fr) auto;}',
       '.bw-tool-bridge-book{min-height:48px;padding:0 18px;}',
-      '.bw-tool-bridge-secondary{display:grid;gap:14px;grid-template-columns:minmax(0,1fr);margin-top:18px;}',
       '[data-bw-tourcta]{display:none!important;}',
       '.bw-blog-back-top{align-items:center;background:#212121;border:2px solid #FFE600;border-radius:999px;bottom:24px;box-shadow:0 12px 28px rgba(0,0,0,.22);color:#FFFFFF;cursor:pointer;display:flex;font-size:22px;font-weight:900;height:44px;justify-content:center;opacity:0;pointer-events:none;position:fixed;right:22px;text-decoration:none;transform:translateY(10px);transition:opacity .18s ease,transform .18s ease,background .18s ease;visibility:hidden;width:44px;z-index:8500;}',
       '.bw-blog-back-top:hover{background:#1B5E20;}',
@@ -1230,15 +1229,6 @@
     if (!tool.summary && tool.lead) tool.summary = tool.lead;
     if (!tool.image) tool.image = TOOL_ICON_FALLBACKS[tool.slug] || DEFAULT_TOOL_IMAGE;
     return tool;
-  }
-
-  function relatedPostForTool(data, tool) {
-    if (!tool || !tool.slug) return null;
-    var posts = data.allPosts || [];
-    for (var i = 0; i < posts.length; i++) {
-      if (posts[i].relatedToolSlug === tool.slug && posts[i].url && posts[i].title) return posts[i];
-    }
-    return null;
   }
 
   function normalizePostSpacing(body) {
@@ -2065,23 +2055,39 @@
   }
 
   function findToolWidgetFrame(tool) {
+    return findToolWidgetFrames(tool)[0] || null;
+  }
+
+  function findToolWidgetFrames(tool) {
     var frames = Array.prototype.slice.call(document.querySelectorAll('iframe'));
     var widgetPath = tool && tool.widgetUrl ? String(tool.widgetUrl).toLowerCase().replace(/^https?:/, '') : '';
     var slugPath = tool && tool.slug ? '/' + String(tool.slug).toLowerCase() + '/' : '';
-    var fallback = null;
+    var matches = [];
     for (var i = 0; i < frames.length; i++) {
-      var src = toolWidgetFrameSource(frames[i]);
+      var frame = frames[i];
+      var src = toolWidgetFrameSource(frame);
       if (!src || src.indexOf('fenerszymanski.github.io/berlinwalk-widgets/') === -1) continue;
       if (/\/(faq|quick-summary)\//.test(src)) continue;
-      if (widgetPath && src.indexOf(widgetPath) !== -1) return frames[i];
-      if (slugPath && src.indexOf(slugPath) !== -1) return frames[i];
-      if (!fallback) fallback = frames[i];
+      var isToolFrame = (widgetPath && src.indexOf(widgetPath) !== -1) ||
+        (slugPath && src.indexOf(slugPath) !== -1) ||
+        (frame.closest && frame.closest('#comp-mozco5et, #comp-moznh5yl'));
+      if (isToolFrame) matches.push(frame);
     }
-    return fallback;
+    if (!matches.length) {
+      for (var j = 0; j < frames.length; j += 1) {
+        var fallbackSrc = toolWidgetFrameSource(frames[j]);
+        if (fallbackSrc && fallbackSrc.indexOf('fenerszymanski.github.io/berlinwalk-widgets/') !== -1 && !/\/(faq|quick-summary)\//.test(fallbackSrc)) {
+          matches.push(frames[j]);
+          break;
+        }
+      }
+    }
+    return matches;
   }
 
   function findToolBridgeAnchor(tool) {
-    var frame = findToolWidgetFrame(tool);
+    var frames = findToolWidgetFrames(tool);
+    var frame = frames.length ? frames[frames.length - 1] : null;
     if (frame) {
       var section = frame.closest('section');
       if (section && section.parentNode) return { parent: section.parentNode, after: section };
@@ -2107,13 +2113,11 @@
     var tool = currentTool(data);
     if (!tool || !tool.url) return;
     var bookingUrl = toolBridgeBookingUrl(tool);
-    var related = relatedPostForTool(data, tool);
     var slot = getNextTourSlot();
     var journeyKey = [
       'tool',
       tool.slug || currentSlug(),
-      toolBridgeTitle(slot),
-      related && related.slug || ''
+      toolBridgeTitle(slot)
     ].join('|');
     var old = document.querySelector('[' + JOURNEY_MARKER + ']');
     if (old && old.getAttribute('data-bw-blog-journey-key') === journeyKey) return;
@@ -2137,14 +2141,7 @@
           '<p class="bw-blog-journey-intro">I meet at the World Clock on Alexanderplatz. About 2 hours, tip-based, reserve a spot and pay nothing upfront.</p>' +
         '</div>' +
         '<a class="bw-blog-tool-button bw-tool-bridge-book" href="' + escapeAttr(bookingUrl) + '" target="_top" data-book-link="1" data-bw-book-context="tool_bridge_booking" data-bw-book-event="bw_tool_book_bridge_click" data-bw-book-link-kind="tool_bridge" data-bw-book-once-key="bw_tool_book_bridge_click:' + escapeAttr(tool.slug || currentSlug() || 'tool') + '" data-bw-book-variant="' + escapeAttr(activeBookingVariant()) + '">Reserve a free spot</a>' +
-      '</div>' +
-      (related ? '<div class="bw-tool-bridge-secondary">' + renderJourneyCard({
-        label: 'Read next',
-        title: related.title,
-        url: related.url,
-        image: related.thumb || related.image,
-        ctaKind: 'tool_related'
-      }) + '</div>' : '');
+      '</div>';
 
     section.addEventListener('click', function (event) {
       var link = event.target.closest('a[href]');

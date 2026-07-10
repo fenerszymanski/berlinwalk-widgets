@@ -10,7 +10,7 @@
   <script defer src="../js/brand.js"></script>
 </head>
 <body>
-<div id="bw-ticket-calculator">
+<div id="bw-ticket-calculator" data-bw-tool-root="transport-ticket-calculator">
   <style>
     html,
     body {
@@ -503,10 +503,63 @@
         text-align: left;
       }
     }
+
+    /* Parent BerlinTools shell mode: keep the live answer and controls, remove
+       the widget's second narrative hero and long recirculation blocks. */
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator {
+      margin: 0;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-hero {
+      background: #FAFAF5;
+      border-bottom: 1px solid #D9E7C8;
+      border-radius: 0;
+      display: block;
+      padding: 12px 14px;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-hero > div:first-child {
+      display: none;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-status-card {
+      align-items: baseline;
+      display: grid;
+      gap: 2px 10px;
+      grid-template-columns: auto auto minmax(0, 1fr);
+      margin: 0;
+      max-width: none;
+      padding: 0;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-status-card small {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-status-card strong {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-status-card span {
+      grid-column: 3;
+      grid-row: 1;
+      min-width: 0;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-body {
+      padding: 12px 14px 14px;
+    }
+
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-coverage,
+    html[data-bw-surface="tool-page"] #bw-ticket-calculator .bw-notes {
+      display: none;
+    }
   </style>
 
   <section class="bw-shell" aria-label="Berlin Transport Ticket Calculator">
-    <div class="bw-hero">
+    <div class="bw-hero" data-bw-tool-header>
       <div>
         <p class="bw-kicker">BERLINWALK.COM - TRANSPORT TOOL</p>
         <h2 class="bw-title">Berlin Transport Ticket Calculator</h2>
@@ -514,7 +567,7 @@
       </div>
       <div class="bw-status-card" aria-live="polite">
         <small>Best current answer</small>
-        <strong id="bwBestPrice">EUR 0.00</strong>
+        <strong id="bwBestPrice">€0.00</strong>
         <span id="bwBestLabel">Set your trip details below.</span>
       </div>
     </div>
@@ -615,7 +668,7 @@
           <div class="bw-chip"><small>Tourist cards</small><strong>CityTourCard, EasyCityPass, WelcomeCard, joycard and QueerCityPass</strong></div>
           <div class="bw-chip"><small>WelcomeCard variants</small><strong>Classic and Museum Island ranked; Basic and All Inclusive flagged</strong></div>
           <div class="bw-chip"><small>Special cases</small><strong>Extension and monthly tickets are no longer invisible</strong></div>
-          <div class="bw-chip"><small>Corrected</small><strong>ABC 4-trip ticket is EUR 16.80, not the old EUR 15.40</strong></div>
+          <div class="bw-chip"><small>Corrected</small><strong>ABC 4-trip ticket is €16.80, not the old €15.40</strong></div>
         </div>
       </section>
 
@@ -744,7 +797,7 @@
       }
 
       function money(value) {
-        return 'EUR ' + value.toFixed(2);
+        return '€' + value.toFixed(2);
       }
 
       function intValue(id) {
@@ -914,7 +967,7 @@
           {
             label: 'WelcomeCard variants',
             title: 'Basic and All Inclusive need context',
-            text: 'WelcomeCard Basic has no public transport. WelcomeCard All Inclusive is attraction-heavy from EUR 99, so it is visible as a caveat rather than ranked as a transport-only bargain.'
+            text: 'WelcomeCard Basic has no public transport. WelcomeCard All Inclusive is attraction-heavy from €99, so it is visible as a caveat rather than ranked as a transport-only bargain.'
           },
           {
             label: 'Extension ticket',
