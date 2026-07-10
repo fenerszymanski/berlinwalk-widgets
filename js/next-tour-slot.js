@@ -4,11 +4,16 @@
   root.bwNextTourSlots = api.bwNextTourSlots;
   root.bwNextTourStarts = api.bwNextTourStarts;
   root.bwNextTourStartsLabel = api.bwNextTourStartsLabel;
+  root.bwLiveNextTourSlot = api.bwLiveNextTourSlot;
+  root.bwLiveNextTourSlots = api.bwLiveNextTourSlots;
+  root.bwLiveNextTourStarts = api.bwLiveNextTourStarts;
+  root.bwLiveNextTourStartsLabel = api.bwLiveNextTourStartsLabel;
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
   var TIME_ZONE = 'Europe/Berlin';
   var DEFAULT_START_LABELS = ['11:30'];
   var SUMMER_START_LABELS = ['11:30', '15:30'];
+  var LIVE_AVAILABILITY_URL = 'https://berlinwalk-content-app.vercel.app/api/booking-calendar-availability';
   var SAME_DAY_CUTOFF_LEAD_MINUTES = 180;
   // Live booking copy currently says "From 3 July 2026: 11:30 + 15:30".
   // If that exact public start changes, update the window here.
@@ -34,6 +39,7 @@
     timeZone: TIME_ZONE,
     weekday: 'long',
   });
+  var liveAvailabilityPromise = null;
 
   function berlinParts(date) {
     var map = {};
@@ -190,6 +196,83 @@
     return entries[0].compactRelativeLabel + ' ' + entries[0].startLabel + ' + ' + entries[1].compactRelativeLabel + ' ' + entries[1].startLabel;
   }
 
+  function startLabelForDate(date) {
+    var parts = berlinParts(date);
+    return String(parts.hour).padStart(2, '0') + ':' + String(parts.minute).padStart(2, '0');
+  }
+
+  function availabilityEndpoint(input) {
+    if (input && input.endpoint) return String(input.endpoint);
+    var days = input && Number.isFinite(Number(input.days)) ? Math.max(1, Math.min(365, Math.floor(Number(input.days)))) : 60;
+    return LIVE_AVAILABILITY_URL + '?days=' + encodeURIComponent(days);
+  }
+
+  function fetchLiveAvailability(input) {
+    if (input && input.availability) return Promise.resolve(input.availability);
+    if (typeof fetch !== 'function') return Promise.resolve(null);
+    if (!liveAvailabilityPromise || input && input.noCache) {
+      liveAvailabilityPromise = fetch(availabilityEndpoint(input), { mode: 'cors', credentials: 'omit' })
+        .then(function (response) {
+          if (!response || !response.ok) throw new Error('availability fetch failed');
+          return response.json();
+        })
+        .catch(function () {
+          return null;
+        });
+    }
+    return liveAvailabilityPromise;
+  }
+
+  function liveStartEntriesFromAvailability(availability, now, count) {
+    var today = slotInfo(now);
+    var tomorrow = slotInfo(new Date(now.getTime() + DAY_MS));
+    var entries = availability && Array.isArray(availability.slots) ? availability.slots : [];
+    return entries
+      .map(function (slot) {
+        var startDate = slot && slot.startDate ? new Date(slot.startDate) : null;
+        if (!startDate || Number.isNaN(startDate.getTime()) || startDate.getTime() <= now.getTime()) return null;
+        var info = slotInfo(startDate);
+        return {
+          dateKey: info.dateKey,
+          weekdayShort: info.weekdayShort,
+          weekdayLabel: info.weekdayLabel,
+          relativeLabel: relativeLabelFor(info, today, tomorrow),
+          compactRelativeLabel: compactRelativeLabelFor(info, today, tomorrow),
+          startLabel: startLabelForDate(startDate),
+        };
+      })
+      .filter(Boolean)
+      .sort(function (a, b) {
+        if (a.dateKey !== b.dateKey) return a.dateKey < b.dateKey ? -1 : 1;
+        return minutesForLabel(a.startLabel) - minutesForLabel(b.startLabel);
+      })
+      .slice(0, count);
+  }
+
+  function liveSlotsFromStarts(starts) {
+    if (!starts.length) return [];
+    var grouped = [];
+    starts.forEach(function (entry) {
+      var current = grouped[grouped.length - 1];
+      if (!current || current.dateKey !== entry.dateKey) {
+        current = {
+          dateKey: entry.dateKey,
+          weekdayShort: entry.weekdayShort,
+          weekdayLabel: entry.weekdayLabel,
+          relativeLabel: entry.relativeLabel,
+          startLabel: entry.startLabel,
+          startLabels: [],
+        };
+        grouped.push(current);
+      }
+      current.startLabels.push(entry.startLabel);
+      current.startLabel = current.startLabels[0] || entry.startLabel;
+      current.slotsLabel = slotsLabelFor(current.startLabels);
+      current.slotCount = current.startLabels.length;
+    });
+    return grouped;
+  }
+
   function bwNextTourSlots(input, fallbackCount) {
     var now = normalizeNow(input);
     var today = slotInfo(now);
@@ -235,10 +318,37 @@
     return startEntriesLabelFor(bwNextTourStarts(input, fallbackCount || 2));
   }
 
+  function bwLiveNextTourStarts(input, fallbackCount) {
+    var now = normalizeNow(input);
+    var count = normalizeCount(input, fallbackCount || 2);
+    return fetchLiveAvailability(input).then(function (availability) {
+      return liveStartEntriesFromAvailability(availability, now, count);
+    });
+  }
+
+  function bwLiveNextTourStartsLabel(input, fallbackCount) {
+    return bwLiveNextTourStarts(input, fallbackCount || 2).then(startEntriesLabelFor);
+  }
+
+  function bwLiveNextTourSlots(input, fallbackCount) {
+    var count = normalizeCount(input, fallbackCount || 2);
+    return bwLiveNextTourStarts(input, count).then(liveSlotsFromStarts);
+  }
+
+  function bwLiveNextTourSlot(input) {
+    return bwLiveNextTourSlots(input, 2).then(function (slots) {
+      return slots[0] || null;
+    });
+  }
+
   return {
     bwNextTourSlot: bwNextTourSlot,
     bwNextTourSlots: bwNextTourSlots,
     bwNextTourStarts: bwNextTourStarts,
     bwNextTourStartsLabel: bwNextTourStartsLabel,
+    bwLiveNextTourSlot: bwLiveNextTourSlot,
+    bwLiveNextTourSlots: bwLiveNextTourSlots,
+    bwLiveNextTourStarts: bwLiveNextTourStarts,
+    bwLiveNextTourStartsLabel: bwLiveNextTourStartsLabel,
   };
 });

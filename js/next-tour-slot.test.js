@@ -1,5 +1,13 @@
 const assert = require('node:assert/strict');
-const { bwNextTourSlot, bwNextTourSlots, bwNextTourStarts, bwNextTourStartsLabel } = require('./next-tour-slot.js');
+const {
+  bwNextTourSlot,
+  bwNextTourSlots,
+  bwNextTourStarts,
+  bwNextTourStartsLabel,
+  bwLiveNextTourSlot,
+  bwLiveNextTourStarts,
+  bwLiveNextTourStartsLabel,
+} = require('./next-tour-slot.js');
 
 function slot(iso) {
   return bwNextTourSlot({ now: new Date(iso) });
@@ -62,4 +70,43 @@ const afterBothCutoffs = bwNextTourSlot({ now: new Date('2026-07-07T10:31:00Z') 
 assert.equal(afterBothCutoffs.relativeLabel, 'Tomorrow (Wed)');
 assert.equal(afterBothCutoffs.slotsLabel, '11:30 and 15:30');
 
-console.log('next-tour-slot tests passed');
+(async () => {
+  const liveAvailability = {
+    slots: [
+      { startDate: '2026-07-11T11:30:00.000+02:00' },
+      { startDate: '2026-07-14T11:30:00.000+02:00' },
+      { startDate: '2026-07-14T15:30:00.000+02:00' },
+      { startDate: '2026-07-15T11:30:00.000+02:00' },
+    ],
+  };
+  const liveStarts = await bwLiveNextTourStarts({
+    now: new Date('2026-07-10T18:00:00Z'),
+    availability: liveAvailability,
+    count: 2,
+  });
+  assert.deepEqual(liveStarts.map((entry) => entry.dateKey + ' ' + entry.startLabel), [
+    '2026-07-11 11:30',
+    '2026-07-14 11:30',
+  ]);
+
+  const liveNoSaturday = {
+    slots: liveAvailability.slots.slice(1),
+  };
+  const liveSlot = await bwLiveNextTourSlot({
+    now: new Date('2026-07-10T18:00:00Z'),
+    availability: liveNoSaturday,
+  });
+  assert.equal(liveSlot.dateKey, '2026-07-14');
+  assert.equal(liveSlot.relativeLabel, 'Tuesday');
+  assert.equal(liveSlot.slotsLabel, '11:30 and 15:30');
+  assert.equal(await bwLiveNextTourStartsLabel({
+    now: new Date('2026-07-10T18:00:00Z'),
+    availability: liveNoSaturday,
+    count: 2,
+  }), 'Tue 11:30 + 15:30');
+
+  console.log('next-tour-slot tests passed');
+})().catch((error) => {
+  console.error(error);
+  process.exit(1);
+});

@@ -97,16 +97,30 @@
 /* Attribution badge — injects a "by berlinwalk.com" footer link into every
  * widget so embeds on third-party sites carry our branding + backlink. Skipped
  * when ?attribution=none is in the URL (used by gallery preview iframes that
- * don't need a second badge). Runs in both standalone and iframe contexts.
+ * don't need a second badge). The first-party BerlinTools shell also passes
+ * ?surface=tool-page, which keeps resize reporting but removes the widget-level
+ * badge and booking CTA so the parent page owns the single conversion surface.
+ * Runs in both standalone and iframe contexts.
  */
 (function () {
   var BOOKING_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var nextTourSlotRequested = false;
+  var params = null;
+  var isToolPageSurface = false;
 
   try {
-    var params = new URLSearchParams(window.location.search);
-    if (params.get('attribution') === 'none') return;
+    params = new URLSearchParams(window.location.search);
+    isToolPageSurface = params.get('surface') === 'tool-page' && window.parent !== window;
   } catch (e) { /* old browser, proceed */ }
+
+  if (isToolPageSurface) {
+    try {
+      document.documentElement.setAttribute('data-bw-surface', 'tool-page');
+    } catch (e) {}
+    return;
+  }
+
+  if (params && params.get('attribution') === 'none') return;
 
   function resolveAdjacentScriptUrl(fileName) {
     try {
@@ -211,12 +225,22 @@
   }
 
   function injectFirstPartyTourCta() {
-    if (document.querySelector('.bw-tour-cta-row')) return;
     var slug = widgetSlug();
     var slot = readNextTourSlot();
     var text = tourCtaText(slot);
     if (!text) {
       injectBadgeOnly();
+      return;
+    }
+    renderFirstPartyTourCta(slug, text);
+    updateFirstPartyTourCtaFromLiveAvailability();
+  }
+
+  function renderFirstPartyTourCta(slug, text) {
+    var existing = document.querySelector('.bw-tour-cta-row');
+    if (existing) {
+      var existingText = existing.querySelector('.bw-tour-cta-text');
+      if (existingText && existingText.textContent !== text) existingText.textContent = text;
       return;
     }
     var row = document.createElement('div');
@@ -227,6 +251,17 @@
       </a>';
     row.appendChild(badgeNode(slug, 'bw-attr-badge-inline', '_top'));
     document.body.appendChild(row);
+  }
+
+  function updateFirstPartyTourCtaFromLiveAvailability() {
+    try {
+      if (typeof window.bwLiveNextTourSlot !== 'function') return;
+      window.bwLiveNextTourSlot({ days: 60 }).then(function (liveSlot) {
+        var text = tourCtaText(liveSlot);
+        var textNode = text && document.querySelector('.bw-tour-cta-row .bw-tour-cta-text');
+        if (textNode && textNode.textContent !== text) textNode.textContent = text;
+      });
+    } catch (e) {}
   }
 
   function inject() {
