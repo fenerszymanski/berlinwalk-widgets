@@ -14,13 +14,13 @@
  *
  * Designed for a Wix page with the global header and footer hidden.
  *
- * Build marker: wall-timeline-v1-20260710i
+ * Build marker: wall-timeline-v1-20260711a
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-wall-timeline';
-  var BUILD = 'wall-timeline-v1-20260710i';
+  var BUILD = 'wall-timeline-v1-20260711a';
 
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
@@ -99,10 +99,11 @@
     "@keyframes bwwt-cue{0%,100%{opacity:.3;transform:scaleY(.7)}50%{opacity:1;transform:none}}",
     ".bw-wt-step.cta .bw-wt-card{max-width:38rem;background:none;border:none}",
     ".bw-wt-step.cta h2{font-size:clamp(1.8rem,5vw,3rem);font-weight:900;text-transform:uppercase}",
-    ".bw-wt-btn{display:inline-block;margin-top:1.4rem;background:var(--yellow);color:#212121;text-decoration:none;font-weight:800;font-size:.95rem;letter-spacing:.04em;padding:.95rem 1.7rem;border-radius:3px}",
+    ".bw-wt-btn{display:inline-block;margin-top:1.4rem;background:var(--yellow);color:var(--green);text-decoration:none;font-weight:800;font-size:.95rem;letter-spacing:.04em;padding:.95rem 1.7rem;border-radius:3px}",
+    ".bw-wt a.bw-wt-btn{color:var(--green)}",
     ".bw-wt-btn:hover{background:#fff176}",
     ".bw-wt-btn:focus-visible{outline:3px solid var(--lime);outline-offset:3px}",
-    ".bw-wt-sub{margin-top:1.1rem;font-size:.78rem;color:var(--ink-faint);letter-spacing:.08em}",
+    ".bw-wt-card p.bw-wt-sub{margin-top:1.6rem;font-size:.78rem;color:var(--ink-faint);letter-spacing:.08em}",
     ".bw-wt-sub a{color:var(--ink-dim);text-decoration:underline}",
     /* hud + brand + rail (pinned inside stage) */
     ".bw-wt-hud{position:absolute;top:max(clamp(14px,3vh,34px),env(safe-area-inset-top));left:clamp(16px,4vw,48px);z-index:3}",
@@ -110,8 +111,8 @@
     ".bw-wt-year .bw-wt-tick{color:var(--red);transition:color 1s}",
     ".bw-wt.reunited .bw-wt-year .bw-wt-tick{color:var(--lime)}",
     ".bw-wt-chapter{margin-top:.4rem;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}",
-    ".bw-wt-brand{position:absolute;top:max(clamp(16px,3vh,34px),env(safe-area-inset-top));right:clamp(16px,4vw,54px);z-index:4;pointer-events:auto;font-size:.72rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);text-decoration:none}",
-    ".bw-wt-brand b{color:var(--cream)}.bw-wt-brand:hover{color:var(--cream)}",
+    ".bw-wt-brand{position:absolute;top:max(clamp(16px,3vh,34px),env(safe-area-inset-top));right:clamp(16px,4vw,54px);z-index:4;pointer-events:auto;font-family:Montserrat,'Avenir Next','Helvetica Neue',Arial,sans-serif;font-size:clamp(.78rem,1.25vw,1.15rem);font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:rgba(250,250,245,.72);text-decoration:none}",
+    ".bw-wt-brand:hover{color:var(--cream)}",
     ".bw-wt-rail{position:absolute;right:clamp(10px,2.5vw,28px);top:50%;transform:translateY(-50%);z-index:4;display:flex;flex-direction:column;gap:14px;pointer-events:auto}",
     ".bw-wt-rail button{width:10px;height:10px;border-radius:50%;border:1px solid var(--ink-faint);background:transparent;cursor:pointer;padding:0}",
     ".bw-wt-rail button.on{background:var(--red);border-color:var(--red);transform:scale(1.25)}",
@@ -135,7 +136,7 @@
     "@keyframes bwwt-march{from{transform:translateX(0)}to{transform:translateX(760px)}}",
     "@media (prefers-reduced-motion:reduce){.bw-wt .crowd-dot,.bw-wt .lamp,.bw-wt .pulse{animation:none}.bw-wt-cue:after{animation:none}.bw-wt-card,.bw-wt-photo{transition:none}}",
     "@media (min-width:641px){.bw-wt-step:not(.hero):not(.cta){padding-top:64px}.bw-wt-step.up:not(.hero):not(.cta){padding-top:380px}}",
-    "@media (max-width:640px){.bw-wt-step{padding:0 14px;align-items:flex-end;justify-content:center}.bw-wt-card{margin-bottom:12vh;max-width:100%}.bw-wt-step.hero,.bw-wt-step.cta{align-items:center}.bw-wt-step.hero .bw-wt-card,.bw-wt-step.cta .bw-wt-card{margin-bottom:0}.bw-wt-step.hero h1{font-size:clamp(2.2rem,11vw,4.2rem)}.bw-wt-rail{gap:10px}.bw-wt-rail button{width:8px;height:8px}.bw-wt-brand{font-size:.62rem;letter-spacing:.1em}.bw-wt[data-chapter=strip] .bw-wt-stage svg,.bw-wt[data-chapter=escapes] .bw-wt-stage svg{transform:translateY(10vh) scale(.94);transform-origin:center center}.bw-wt-photo{width:42vw;max-width:190px}.bw-wt-photo-up{left:14px;bottom:8%}.bw-wt-photo-escapes{right:14px;top:17%}.bw-wt-photo-fall{right:14px;top:16%}.bw-wt-photo figcaption{font-size:.44rem}}"
+    "@media (max-width:640px){.bw-wt-step{padding:0 14px;align-items:flex-end;justify-content:center}.bw-wt-card{margin-bottom:12vh;max-width:100%}.bw-wt-step.hero,.bw-wt-step.cta{align-items:center}.bw-wt-step.hero .bw-wt-card,.bw-wt-step.cta .bw-wt-card{margin-bottom:0}.bw-wt-step.hero h1{font-size:clamp(2.2rem,11vw,4.2rem)}.bw-wt-rail{gap:10px}.bw-wt-rail button{width:8px;height:8px}.bw-wt-brand{font-size:.75rem;letter-spacing:.13em}.bw-wt[data-chapter=strip] .bw-wt-stage svg,.bw-wt[data-chapter=escapes] .bw-wt-stage svg{transform:translateY(10vh) scale(.94);transform-origin:center center}.bw-wt-photo{width:42vw;max-width:190px}.bw-wt-photo-up{left:14px;bottom:8%}.bw-wt-photo-escapes{right:14px;top:17%}.bw-wt-photo-fall{right:14px;top:16%}.bw-wt-photo figcaption{font-size:.44rem}}"
   ].join('');
 
   var SVG = [
@@ -327,7 +328,7 @@
         + '</div>'
         + '<div class="bw-wt-vignette"></div>'
         + '<div class="bw-wt-hud"><div class="bw-wt-year"><span class="bw-wt-tick">19</span>45</div><div class="bw-wt-chapter">A divided city</div></div>'
-        + '<a class="bw-wt-brand" href="' + esc(HOME_URL) + '"><b>Berlin</b>Walk</a>'
+        + '<a class="bw-wt-brand" href="' + esc(HOME_URL) + '" aria-label="BerlinWalk home">BerlinWalk</a>'
         + '<nav class="bw-wt-rail" aria-label="Timeline chapters"></nav>'
         + '</div></div>'
         + '<div class="bw-wt-steps">' + steps + '</div>'
