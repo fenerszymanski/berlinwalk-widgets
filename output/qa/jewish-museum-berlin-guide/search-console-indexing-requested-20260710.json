@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-07-10T18:54:59+02:00",
+  "property": "sc-domain:berlinwalk.com",
+  "requests": [
+    {
+      "url": "https://www.berlinwalk.com/post/jewish-museum-berlin-guide",
+      "inspectionStatusBeforeRequest": "URL is not on Google",
+      "requestResult": "Indexing requested",
+      "detail": "URL was added to a priority crawl queue."
+    },
+    {
+      "url": "https://www.berlinwalk.com/tools/jewish-museum-visit-sequence",
+      "inspectionStatusBeforeRequest": "URL is not on Google",
+      "requestResult": "Indexing requested",
+      "detail": "URL was added to a priority crawl queue."
+    }
+  ]
+}
