@@ -190,7 +190,8 @@
   "berlin-wall-memorial-bernauer-strasse": "berlin-wall-memorial-bernauer-strasse",
   "air-conditioning-in-berlin": "air-conditioning-in-berlin",
   "mauerpark-berlin-sunday": "mauerpark-berlin-sunday",
-  "uber-in-berlin": "uber-in-berlin"
+  "uber-in-berlin": "uber-in-berlin",
+  "kaiser-wilhelm-memorial-church-berlin": "kaiser-wilhelm-memorial-church-berlin"
 };
 
   var SCHEMAS = {
@@ -8948,6 +8949,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Tipping is optional but appreciated. For both app rides and taxis, rounding up by about 5-10 percent is normal, for example paying EUR 20 on an EUR 18 fare. You can tip inside the Uber, Bolt or FreeNow app, or hand cash to a taxi driver. It is never compulsory, and no one will chase you for it."
+        }
+      }
+    ]
+  },
+  "kaiser-wilhelm-memorial-church-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Kaiser Wilhelm Memorial Church free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Both the modern New Church and the Memorial Hall in the base of the old tower are free to enter. A small donation is welcome but never required, and there is no ticket or booking."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the opening hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "In 2026 the New Church is open daily from about 10:00 to 18:00. The old-tower Memorial Hall opens Monday to Saturday 10:00 to 18:00 and Sunday 12:00 to 18:00. Visits pause during Sunday services (10:00 and 18:00) and during prayers or concerts, so a weekday or a Sunday afternoon is the safest bet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is the church tower broken?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The original church, built in the 1890s and named after Kaiser Wilhelm I, was gutted by a British air raid on the night of 23 November 1943. After the war Berlin chose to keep the ruined tower as a memorial rather than tear it down or rebuild it, and added a modern church beside it. Locals nickname the stump der hohle Zahn, the hollow tooth."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is inside the modern church?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The New Church, designed by Egon Eiermann and consecrated in 1961, has walls made of thousands of small blue stained-glass squares created with the Gabriel Loire workshop in Chartres, and a golden figure of Christ at the front. On a bright day the whole room glows deep blue. It is one of the calmest interiors in central Berlin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to the Kaiser Wilhelm Memorial Church?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It stands on Breitscheidplatz in City West. It is a three-minute walk from S+U Zoologischer Garten (U2, U9 and S-Bahn lines S3, S5, S7, S9, S75) and just as close to U Kurfürstendamm (U1, U9). It sits right beside KaDeWe and the Kurfürstendamm shopping streets."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Kaiser Wilhelm Memorial Church worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, and it costs nothing but about half an hour. You get the blue-glass New Church, the golden imperial mosaics and wartime photos in the old tower, and a location in the middle of the western shopping district. It pairs well with the Ku’damm, KaDeWe or a walk into the Tiergarten, and after dark it is floodlit and glowing."
         }
       }
     ]
