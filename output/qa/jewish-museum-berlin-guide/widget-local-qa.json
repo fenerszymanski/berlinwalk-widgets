@@ -19,6 +19,17 @@
       "output/playwright/jewish-museum-berlin-guide/widget-mobile390.png"
     ]
   },
+  "narrowBlogColumn": {
+    "viewportWidth": 256,
+    "scrollWidth": 256,
+    "pageHeight": 4412,
+    "resizeSafetyLimit": 5000,
+    "underResizeLimit": true,
+    "consoleErrors": 0,
+    "screenshots": [
+      "output/playwright/jewish-museum-berlin-guide/widget-mobile256-final.png"
+    ]
+  },
   "timeRail": {
     "90": {
       "readout": "1h 30m",
