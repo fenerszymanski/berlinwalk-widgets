@@ -611,7 +611,10 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-contai
   box-sizing: border-box !important;
   column-gap: 20px !important;
   display: grid !important;
+  grid-auto-rows: auto !important;
+  grid-template-areas: 'title title' 'first second' !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  grid-template-rows: max-content minmax(168px, max-content) !important;
   margin: 0 auto !important;
   max-width: 960px !important;
   min-height: 0 !important;
@@ -621,8 +624,7 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-contai
 }
 
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g {
-  grid-column: 1 / -1 !important;
-  grid-row: auto !important;
+  grid-area: title !important;
   height: auto !important;
   margin: 0 0 4px !important;
   min-height: 0 !important;
@@ -633,13 +635,19 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozpfm6g {
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp2aft,
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
   align-self: stretch !important;
-  grid-column: auto !important;
-  grid-row: auto !important;
   height: auto !important;
   justify-self: stretch !important;
   margin: 0 !important;
   min-height: 168px !important;
   width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp2aft {
+  grid-area: first !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
+  grid-area: second !important;
 }
 
 @media (max-width: 699px) {
@@ -650,6 +658,8 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv #comp-mozp3f25 {
   }
 
   html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozp1zlv .comp-mozp1zlv-container {
+    grid-template-areas: 'title' 'first' 'second' !important;
     grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: max-content minmax(168px, max-content) minmax(168px, max-content) !important;
   }
 }
