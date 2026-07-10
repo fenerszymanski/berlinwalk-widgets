@@ -1,0 +1,60 @@
+{
+  "checkedAt": "2026-07-10T15:50:48.084Z",
+  "url": "http://127.0.0.1:8793/jewish-museum-visit-sequence/",
+  "desktop": {
+    "viewportWidth": 1440,
+    "scrollWidth": 1440,
+    "pageHeight": 2907,
+    "consoleErrors": 0,
+    "screenshots": [
+      "output/playwright/jewish-museum-berlin-guide/widget-desktop.png"
+    ]
+  },
+  "mobile": {
+    "viewportWidth": 390,
+    "scrollWidth": 390,
+    "pageHeight": 4577,
+    "consoleErrors": 0,
+    "screenshots": [
+      "output/playwright/jewish-museum-berlin-guide/widget-mobile390.png"
+    ]
+  },
+  "timeRail": {
+    "90": {
+      "readout": "1h 30m",
+      "mode": "Compressed visit",
+      "allocations": [15, 30, 45, 0],
+      "finish": "+1h 30m"
+    },
+    "165": {
+      "readout": "2h 45m",
+      "mode": "Recommended depth",
+      "allocations": [20, 50, 80, 15],
+      "finish": "+2h 45m"
+    },
+    "240": {
+      "readout": "4h",
+      "mode": "Deep visit",
+      "allocations": [25, 60, 115, 40],
+      "finish": "+4h"
+    }
+  },
+  "imageCredits": {
+    "defaultHidden": true,
+    "ariaExpandedDefault": "false",
+    "itemCount": 6,
+    "position": "fixed",
+    "mobilePageHeightClosed": 4577,
+    "mobilePageHeightOpen": 4577,
+    "escapeCloses": true,
+    "outsideClickCloses": true,
+    "focusReturnsToToggle": true
+  },
+  "assets": {
+    "allImagesLoaded": true,
+    "articleImages": 6,
+    "widgetImages": 5,
+    "iconSize": "512x512"
+  },
+  "verdict": "PASS"
+}

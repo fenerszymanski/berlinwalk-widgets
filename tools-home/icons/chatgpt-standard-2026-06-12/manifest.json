@@ -1332,5 +1332,20 @@
     "generatedAt": "2026-07-09",
     "source": "codex-built-in-imagegen-20260709",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_425a968aefdc4f0592daefa90552b180~mv2.png"
+  },
+  {
+    "slug": "jewish-museum-visit-sequence",
+    "title": "Jewish Museum Visit Sequence",
+    "category": "CultureLandmarks",
+    "model": "Built-in Codex image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/jewish-museum-visit-sequence/prompt.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/jewish-museum-visit-sequence/source-output.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/jewish-museum-visit-sequence.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/jewish-museum-visit-sequence-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/jewish-museum-visit-sequence-160.png",
+    "generatedAt": "2026-07-10",
+    "source": "codex-built-in-imagegen-20260710",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_a61ea094fb424f529514abc0788e5875~mv2.png"
   }
 ]

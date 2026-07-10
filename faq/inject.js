@@ -191,7 +191,9 @@
   "air-conditioning-in-berlin": "air-conditioning-in-berlin",
   "mauerpark-berlin-sunday": "mauerpark-berlin-sunday",
   "uber-in-berlin": "uber-in-berlin",
-  "kaiser-wilhelm-memorial-church-berlin": "kaiser-wilhelm-memorial-church-berlin"
+  "kaiser-wilhelm-memorial-church-berlin": "kaiser-wilhelm-memorial-church-berlin",
+  "jewish-museum-berlin-guide": "jewish-museum-berlin-guide",
+  "jewish-museum-berlin-free-entry-how-long-and-what-to-see-2026": "jewish-museum-berlin-guide"
 };
 
   var SCHEMAS = {
@@ -9003,6 +9005,76 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes, and it costs nothing but about half an hour. You get the blue-glass New Church, the golden imperial mosaics and wartime photos in the old tower, and a location in the middle of the western shopping district. It pairs well with the Ku’damm, KaDeWe or a walk into the Tiergarten, and after dark it is floodlit and glowing."
+        }
+      }
+    ]
+  },
+  "jewish-museum-berlin-guide": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is the Jewish Museum Berlin free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The core exhibition Jewish Life in Germany: Past & Present is free for everyone, as are most presentations in the Libeskind Building. Temporary exhibitions in the Old Building can have a separate paid ticket, so check the current programme before visiting."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the Jewish Museum Berlin opening hours?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Regular museum hours are Tuesday to Sunday from 10:00 to 18:00, with last admission at 17:00. It is normally closed on Mondays and on a small number of additional annual closure dates, so check the official visitor page when your itinerary depends on one day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long should I spend at the Jewish Museum Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a first visit, allow 2.5 to 3 hours. Ninety minutes is enough only for the underground architecture and a small number of core-exhibition highlights. Four hours works if you want to read closely, use the free JMB app and take a proper pause."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What should I see first inside the Jewish Museum Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Enter through the Old Building, pass security, then begin with the three underground axes. From there, visit the Garden of Exile and Holocaust Tower if they feel right for you, then follow the Axis of Continuity upstairs into the core exhibition."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Jewish Museum Berlin only about the Holocaust?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Exile, persecution and the Shoah are central to the lower architecture and part of the exhibition, but the core exhibition covers about 1,700 years of Jewish life in Germany, including religion, family, work, music, language and contemporary identities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need to book the Jewish Museum Berlin in advance?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Advance booking is not compulsory for a normal individual visit. The museum recommends a free timed slot to reduce waiting, and walk-in tickets are available at the desk. Reserving is the calmer choice for weekends, holidays and school-break periods."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I take a backpack or suitcase into the Jewish Museum Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Security screening is mandatory. Large bags, backpacks, umbrellas and heavy coats must go to the cloakroom or lockers. Lockers can take cabin-size luggage up to about 56 × 45 × 25 cm, but the museum has no storage for larger suitcases."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Jewish Museum Berlin wheelchair accessible?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most public exhibition and event rooms are accessible by ramps or lifts, and wheelchairs can be borrowed at the cloakroom. The important exception is the Garden of Exile, where the gaps between the concrete stelae are too narrow for wheelchairs and strollers."
         }
       }
     ]

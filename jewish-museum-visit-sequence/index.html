@@ -1,0 +1,1714 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jewish Museum Visit Sequence | BerlinWalk</title>
+  <meta name="description" content="Set a 90 to 240 minute visit window and see a respectful, photo-led sequence through security, the axes, Garden of Exile, Holocaust Tower and the Jewish Museum Berlin core exhibition.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="../css/brand.css">
+  <script defer src="../js/brand.js"></script>
+</head>
+<body>
+<main id="bw-jm-sequence">
+  <style>
+    [hidden] {
+      display: none !important;
+    }
+
+    html,
+    body {
+      background: transparent;
+      margin: 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      padding: 0;
+      width: 100%;
+    }
+
+    #bw-jm-sequence {
+      --green: #1B5E20;
+      --green-deep: #123F17;
+      --yellow: #FFE600;
+      --lime: #7CB342;
+      --light: #C5E1A5;
+      --cream: #FAFAF5;
+      --paper: #F4F0E8;
+      --text: #212121;
+      --muted: #566157;
+      --border: #DCE8CE;
+      color: var(--text);
+      font-family: Montserrat, Arial, sans-serif;
+      margin: 18px 0;
+      max-width: 100%;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    #bw-jm-sequence *,
+    #bw-jm-sequence *::before,
+    #bw-jm-sequence *::after {
+      box-sizing: border-box;
+    }
+
+    #bw-jm-sequence h1,
+    #bw-jm-sequence h2,
+    #bw-jm-sequence h3,
+    #bw-jm-sequence p,
+    #bw-jm-sequence figure,
+    #bw-jm-sequence ul {
+      margin-top: 0;
+    }
+
+    #bw-jm-sequence a {
+      overflow-wrap: anywhere;
+    }
+
+    #bw-jm-sequence button,
+    #bw-jm-sequence input {
+      font: inherit;
+    }
+
+    #bw-jm-sequence button:focus-visible,
+    #bw-jm-sequence a:focus-visible,
+    #bw-jm-sequence input:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 3px;
+    }
+
+    #bw-jm-sequence .shell {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 18px 46px rgba(18, 63, 23, .14);
+      margin: 0 auto;
+      max-width: 1080px;
+      overflow: visible;
+      width: 100%;
+    }
+
+    #bw-jm-sequence .hero {
+      border-radius: 13px 13px 0 0;
+      min-height: 360px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-jm-sequence .hero img {
+      height: 100%;
+      inset: 0;
+      object-fit: cover;
+      object-position: center 48%;
+      position: absolute;
+      width: 100%;
+    }
+
+    #bw-jm-sequence .hero::after {
+      background:
+        linear-gradient(90deg, rgba(10, 31, 14, .92) 0%, rgba(10, 31, 14, .73) 46%, rgba(10, 31, 14, .12) 82%),
+        linear-gradient(0deg, rgba(10, 31, 14, .56) 0%, transparent 48%);
+      content: "";
+      inset: 0;
+      position: absolute;
+    }
+
+    #bw-jm-sequence .hero-copy {
+      color: #fff;
+      max-width: 650px;
+      padding: 64px 34px 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-jm-sequence .eyebrow {
+      align-items: center;
+      color: var(--yellow);
+      display: flex;
+      font-size: 10.5px;
+      font-weight: 900;
+      gap: 9px;
+      letter-spacing: 1.25px;
+      margin-bottom: 11px;
+      text-transform: uppercase;
+    }
+
+    #bw-jm-sequence .eyebrow::before {
+      background: var(--yellow);
+      content: "";
+      height: 3px;
+      width: 34px;
+    }
+
+    #bw-jm-sequence .hero h1 {
+      color: #fff;
+      font-size: clamp(30px, 4.4vw, 50px);
+      font-weight: 900;
+      letter-spacing: -.8px;
+      line-height: 1.02;
+      margin: 0;
+      max-width: 610px;
+      text-wrap: balance;
+    }
+
+    #bw-jm-sequence .hero p {
+      color: rgba(255, 255, 255, .92);
+      font-family: Merriweather, Georgia, serif;
+      font-size: 15px;
+      line-height: 1.62;
+      margin: 16px 0 0;
+      max-width: 590px;
+    }
+
+    #bw-jm-sequence .hero-note {
+      align-items: center;
+      background: rgba(255, 255, 255, .94);
+      border-left: 4px solid var(--yellow);
+      bottom: 20px;
+      color: var(--green-deep);
+      display: flex;
+      font-size: 11px;
+      font-weight: 850;
+      gap: 8px;
+      line-height: 1.35;
+      padding: 10px 13px;
+      position: absolute;
+      right: 20px;
+      z-index: 2;
+    }
+
+    #bw-jm-sequence .truth-strip {
+      background: var(--green-deep);
+      color: #fff;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    #bw-jm-sequence .truth {
+      border-right: 1px solid rgba(255, 255, 255, .16);
+      min-width: 0;
+      padding: 15px 18px;
+    }
+
+    #bw-jm-sequence .truth:last-child {
+      border-right: 0;
+    }
+
+    #bw-jm-sequence .truth b,
+    #bw-jm-sequence .truth span {
+      display: block;
+    }
+
+    #bw-jm-sequence .truth b {
+      color: var(--yellow);
+      font-size: 12px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin-bottom: 3px;
+    }
+
+    #bw-jm-sequence .truth span {
+      color: rgba(255, 255, 255, .84);
+      font-size: 10.5px;
+      font-weight: 650;
+      line-height: 1.45;
+    }
+
+    #bw-jm-sequence .time-studio {
+      background:
+        radial-gradient(circle at 88% 12%, rgba(197, 225, 165, .46), transparent 26%),
+        linear-gradient(180deg, #fff 0%, var(--cream) 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 26px 30px;
+    }
+
+    #bw-jm-sequence .section-kicker {
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.15px;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+    }
+
+    #bw-jm-sequence .time-studio > h2,
+    #bw-jm-sequence .sequence-heading h2,
+    #bw-jm-sequence .facts h2 {
+      color: var(--green-deep);
+      font-size: clamp(22px, 3.2vw, 32px);
+      font-weight: 900;
+      letter-spacing: -.35px;
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    #bw-jm-sequence .time-layout {
+      align-items: stretch;
+      display: grid;
+      gap: 20px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(270px, .65fr);
+      margin-top: 22px;
+    }
+
+    #bw-jm-sequence .dial-panel,
+    #bw-jm-sequence .decision-panel {
+      border-radius: 12px;
+      min-width: 0;
+    }
+
+    #bw-jm-sequence .dial-panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 21px 20px 19px;
+    }
+
+    #bw-jm-sequence .dial-head {
+      align-items: end;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    #bw-jm-sequence .dial-question {
+      color: var(--text);
+      display: block;
+      font-size: 13px;
+      font-weight: 850;
+      line-height: 1.35;
+    }
+
+    #bw-jm-sequence .time-readout {
+      color: var(--green);
+      font-size: clamp(27px, 4.5vw, 42px);
+      font-weight: 950;
+      letter-spacing: -1px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    #bw-jm-sequence .range-wrap {
+      padding: 0 3px;
+      position: relative;
+    }
+
+    #bw-jm-sequence .sweet-band {
+      background: rgba(255, 230, 0, .34);
+      border: 1px solid rgba(27, 94, 32, .18);
+      border-radius: 999px;
+      height: 34px;
+      left: 40%;
+      pointer-events: none;
+      position: absolute;
+      top: -11px;
+      width: 20%;
+    }
+
+    #bw-jm-sequence input[type="range"] {
+      --range-fill: 50%;
+      -webkit-appearance: none;
+      appearance: none;
+      background: linear-gradient(90deg, var(--green) 0 var(--range-fill), #DCE4D8 var(--range-fill) 100%);
+      border-radius: 999px;
+      cursor: pointer;
+      display: block;
+      height: 8px;
+      margin: 0;
+      position: relative;
+      width: 100%;
+      z-index: 2;
+    }
+
+    #bw-jm-sequence input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      background: var(--yellow);
+      border: 4px solid var(--green);
+      border-radius: 50%;
+      box-shadow: 0 3px 10px rgba(18, 63, 23, .28);
+      height: 28px;
+      width: 28px;
+    }
+
+    #bw-jm-sequence input[type="range"]::-moz-range-thumb {
+      background: var(--yellow);
+      border: 4px solid var(--green);
+      border-radius: 50%;
+      box-shadow: 0 3px 10px rgba(18, 63, 23, .28);
+      height: 21px;
+      width: 21px;
+    }
+
+    #bw-jm-sequence .range-labels {
+      color: var(--muted);
+      display: grid;
+      font-size: 9.5px;
+      font-weight: 750;
+      grid-template-columns: 1fr 1fr 1fr;
+      line-height: 1.35;
+      margin-top: 15px;
+    }
+
+    #bw-jm-sequence .range-labels span:nth-child(2) {
+      color: var(--green);
+      text-align: center;
+    }
+
+    #bw-jm-sequence .range-labels span:last-child {
+      text-align: right;
+    }
+
+    #bw-jm-sequence .allocation-title {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 850;
+      letter-spacing: .55px;
+      margin: 23px 0 8px;
+      text-transform: uppercase;
+    }
+
+    #bw-jm-sequence .allocation-bar {
+      background: #E5E9E1;
+      border: 1px solid #D2DBCF;
+      border-radius: 8px;
+      display: flex;
+      min-height: 54px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-jm-sequence .allocation-segment {
+      align-items: center;
+      border-right: 1px solid rgba(255, 255, 255, .56);
+      display: flex;
+      flex-basis: 25%;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      padding: 7px 4px;
+      transition: flex-basis .24s ease, opacity .2s ease;
+    }
+
+    #bw-jm-sequence .allocation-segment:last-child {
+      border-right: 0;
+    }
+
+    #bw-jm-sequence .allocation-segment[data-key="entry"] {
+      background: #DCE8CE;
+      color: var(--green-deep);
+    }
+
+    #bw-jm-sequence .allocation-segment[data-key="axes"] {
+      background: var(--green);
+      color: #fff;
+    }
+
+    #bw-jm-sequence .allocation-segment[data-key="core"] {
+      background: #23532B;
+      color: #fff;
+    }
+
+    #bw-jm-sequence .allocation-segment[data-key="pause"] {
+      background: var(--yellow);
+      color: var(--green-deep);
+    }
+
+    #bw-jm-sequence .allocation-segment.is-zero {
+      border: 0;
+      flex-basis: 0 !important;
+      opacity: 0;
+      overflow: hidden;
+      padding: 0;
+    }
+
+    #bw-jm-sequence .allocation-segment b {
+      font-size: 11px;
+      font-weight: 950;
+      line-height: 1.1;
+      white-space: nowrap;
+    }
+
+    #bw-jm-sequence .allocation-segment span {
+      font-size: 8.5px;
+      font-weight: 750;
+      line-height: 1.15;
+      margin-top: 3px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    #bw-jm-sequence .allocation-key {
+      display: grid;
+      gap: 6px 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      margin-top: 11px;
+    }
+
+    #bw-jm-sequence .key-item {
+      align-items: center;
+      color: var(--muted);
+      display: flex;
+      font-size: 9.5px;
+      font-weight: 700;
+      gap: 6px;
+      line-height: 1.35;
+      min-width: 0;
+    }
+
+    #bw-jm-sequence .key-dot {
+      background: var(--green);
+      border-radius: 50%;
+      flex: 0 0 7px;
+      height: 7px;
+      width: 7px;
+    }
+
+    #bw-jm-sequence .key-item:nth-child(1) .key-dot {
+      background: #A9C190;
+    }
+
+    #bw-jm-sequence .key-item:nth-child(3) .key-dot {
+      background: #23532B;
+    }
+
+    #bw-jm-sequence .key-item:nth-child(4) .key-dot {
+      background: var(--yellow);
+      border: 1px solid var(--green);
+    }
+
+    #bw-jm-sequence .decision-panel {
+      background: var(--green-deep);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 22px 20px;
+      position: relative;
+    }
+
+    #bw-jm-sequence .decision-panel::after {
+      border: 1px solid rgba(255, 230, 0, .46);
+      content: "";
+      inset: 8px;
+      pointer-events: none;
+      position: absolute;
+    }
+
+    #bw-jm-sequence .mode {
+      color: var(--yellow);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      margin-bottom: 9px;
+      position: relative;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+
+    #bw-jm-sequence .decision-panel h3 {
+      color: #fff;
+      font-family: Merriweather, Georgia, serif;
+      font-size: 20px;
+      line-height: 1.28;
+      margin: 0 0 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-jm-sequence .decision-panel > div > p {
+      color: rgba(255, 255, 255, .82);
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1.58;
+      margin-bottom: 17px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-jm-sequence .turn-grid {
+      display: grid;
+      gap: 8px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-jm-sequence .turn-row {
+      align-items: center;
+      border-top: 1px solid rgba(255, 255, 255, .16);
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding-top: 8px;
+    }
+
+    #bw-jm-sequence .turn-row span {
+      color: rgba(255, 255, 255, .68);
+      font-size: 9.5px;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    #bw-jm-sequence .turn-row b {
+      color: var(--yellow);
+      font-size: 11px;
+      font-weight: 950;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    #bw-jm-sequence .last-entry-warning {
+      background: rgba(255, 230, 0, .12);
+      border-left: 3px solid var(--yellow);
+      color: #fff;
+      font-size: 9.5px;
+      font-weight: 700;
+      line-height: 1.45;
+      margin: 16px 0 0;
+      padding: 9px 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #bw-jm-sequence .sequence {
+      background: #fff;
+      padding: 30px 26px 12px;
+    }
+
+    #bw-jm-sequence .sequence-heading {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(0, 1fr) minmax(250px, 390px);
+      margin-bottom: 24px;
+    }
+
+    #bw-jm-sequence .sequence-heading p {
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1.58;
+      margin: 2px 0 0;
+    }
+
+    #bw-jm-sequence .path {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      position: relative;
+    }
+
+    #bw-jm-sequence .path::before {
+      background: linear-gradient(180deg, var(--yellow) 0%, var(--green) 18%, var(--green) 82%, var(--light) 100%);
+      content: "";
+      left: 20px;
+      position: absolute;
+      top: 22px;
+      bottom: 22px;
+      width: 4px;
+    }
+
+    #bw-jm-sequence .stage {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 44px minmax(0, 1fr);
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    #bw-jm-sequence .stage:last-child {
+      margin-bottom: 8px;
+    }
+
+    #bw-jm-sequence .stage-pin {
+      align-items: center;
+      align-self: start;
+      background: var(--green);
+      border: 4px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--green);
+      color: var(--yellow);
+      display: flex;
+      font-size: 10px;
+      font-weight: 950;
+      height: 32px;
+      justify-content: center;
+      margin: 8px 0 0 6px;
+      position: relative;
+      width: 32px;
+      z-index: 1;
+    }
+
+    #bw-jm-sequence .stage-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: minmax(260px, .88fr) minmax(0, 1.12fr);
+      min-width: 0;
+      overflow: hidden;
+      transition: opacity .2s ease;
+    }
+
+    #bw-jm-sequence .stage:nth-child(even) .stage-photo {
+      order: 2;
+    }
+
+    #bw-jm-sequence .stage-photo {
+      background: #D6DED2;
+      margin: 0;
+      min-height: 260px;
+      min-width: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-jm-sequence .stage-photo > img,
+    #bw-jm-sequence .photo-pair img {
+      display: block;
+      height: 100%;
+      object-fit: cover;
+      width: 100%;
+    }
+
+    #bw-jm-sequence .stage[data-stage="entry"] .stage-photo > img {
+      object-position: center 52%;
+    }
+
+    #bw-jm-sequence .stage[data-stage="core"] .stage-photo > img {
+      object-position: center 48%;
+    }
+
+    #bw-jm-sequence .stage-photo figcaption {
+      background: linear-gradient(0deg, rgba(10, 31, 14, .88), rgba(10, 31, 14, .08));
+      bottom: 0;
+      color: #fff;
+      font-size: 9px;
+      font-style: italic;
+      font-weight: 650;
+      left: 0;
+      line-height: 1.4;
+      padding: 30px 12px 10px;
+      position: absolute;
+      right: 0;
+      text-align: center;
+    }
+
+    #bw-jm-sequence .photo-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: 100%;
+      min-height: 300px;
+    }
+
+    #bw-jm-sequence .photo-pair div {
+      min-width: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    #bw-jm-sequence .photo-pair div + div {
+      border-left: 3px solid var(--yellow);
+    }
+
+    #bw-jm-sequence .photo-pair span {
+      background: rgba(18, 63, 23, .92);
+      bottom: 8px;
+      color: #fff;
+      font-size: 8.5px;
+      font-weight: 850;
+      left: 8px;
+      line-height: 1.25;
+      padding: 5px 7px;
+      position: absolute;
+    }
+
+    #bw-jm-sequence .stage-copy {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      padding: 22px 22px 20px;
+    }
+
+    #bw-jm-sequence .stage-meta {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    #bw-jm-sequence .priority {
+      color: var(--green);
+      font-size: 9.5px;
+      font-weight: 900;
+      letter-spacing: .55px;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+
+    #bw-jm-sequence .stage-time {
+      background: var(--yellow);
+      border-radius: 999px;
+      color: var(--green-deep);
+      font-size: 10px;
+      font-weight: 950;
+      line-height: 1;
+      padding: 7px 9px;
+      white-space: nowrap;
+    }
+
+    #bw-jm-sequence .stage-copy h3 {
+      color: var(--green-deep);
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(18px, 2.5vw, 25px);
+      line-height: 1.24;
+      margin: 0 0 10px;
+    }
+
+    #bw-jm-sequence .stage-copy p {
+      color: var(--muted);
+      font-size: 11.5px;
+      font-weight: 600;
+      line-height: 1.62;
+      margin: 0 0 13px;
+    }
+
+    #bw-jm-sequence .fixed-fact {
+      background: #fff;
+      border-left: 3px solid var(--lime);
+      color: var(--text);
+      font-size: 9.5px;
+      font-weight: 700;
+      line-height: 1.5;
+      margin-top: auto;
+      padding: 9px 10px;
+    }
+
+    #bw-jm-sequence .stage-meter {
+      background: #E1E8DE;
+      border-radius: 999px;
+      height: 5px;
+      margin-top: 13px;
+      overflow: hidden;
+      width: 100%;
+    }
+
+    #bw-jm-sequence .stage-meter span {
+      background: linear-gradient(90deg, var(--green), var(--lime));
+      display: block;
+      height: 100%;
+      transition: width .24s ease;
+      width: 40%;
+    }
+
+    #bw-jm-sequence .time-window {
+      color: var(--green);
+      font-size: 9.5px;
+      font-weight: 850;
+      line-height: 1.35;
+      margin-top: 8px;
+    }
+
+    #bw-jm-sequence .stage[data-active="false"] .stage-card {
+      opacity: .58;
+    }
+
+    #bw-jm-sequence .stage[data-active="false"] .stage-pin {
+      background: #7C867C;
+      box-shadow: 0 0 0 2px #7C867C;
+      color: #fff;
+    }
+
+    #bw-jm-sequence .stage[data-active="false"] .stage-time {
+      background: #D8DDD5;
+      color: #4E584F;
+    }
+
+    #bw-jm-sequence .stage[data-active="false"] .stage-meter span {
+      width: 0 !important;
+    }
+
+    #bw-jm-sequence .facts {
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+      padding: 30px 26px 28px;
+    }
+
+    #bw-jm-sequence .facts-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+      margin-top: 20px;
+    }
+
+    #bw-jm-sequence .fact-list {
+      display: grid;
+      gap: 9px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    #bw-jm-sequence .fact-list li {
+      align-items: start;
+      background: #fff;
+      border: 1px solid var(--border);
+      display: grid;
+      font-size: 10.5px;
+      font-weight: 650;
+      gap: 10px;
+      grid-template-columns: 25px minmax(0, 1fr);
+      line-height: 1.5;
+      padding: 10px 11px;
+    }
+
+    #bw-jm-sequence .fact-list b {
+      color: var(--green-deep);
+      font-weight: 900;
+    }
+
+    #bw-jm-sequence .fact-icon {
+      align-items: center;
+      background: var(--green);
+      border-radius: 50%;
+      color: var(--yellow);
+      display: flex;
+      font-size: 9px;
+      font-weight: 950;
+      height: 25px;
+      justify-content: center;
+      width: 25px;
+    }
+
+    #bw-jm-sequence .access-card {
+      background: var(--green-deep);
+      color: #fff;
+      padding: 22px;
+      position: relative;
+    }
+
+    #bw-jm-sequence .access-card h3 {
+      color: var(--yellow);
+      font-size: 15px;
+      font-weight: 900;
+      line-height: 1.3;
+      margin: 0 0 9px;
+    }
+
+    #bw-jm-sequence .access-card p {
+      color: rgba(255, 255, 255, .84);
+      font-size: 10.5px;
+      font-weight: 600;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    #bw-jm-sequence .access-card p strong {
+      color: #fff;
+      font-weight: 900;
+    }
+
+    #bw-jm-sequence .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    #bw-jm-sequence .links a {
+      background: #fff;
+      border: 1px solid rgba(255, 255, 255, .52);
+      color: var(--green-deep);
+      font-size: 9.5px;
+      font-weight: 850;
+      line-height: 1.3;
+      padding: 8px 10px;
+      text-decoration: none;
+    }
+
+    #bw-jm-sequence .links a:first-child {
+      background: var(--yellow);
+      border-color: var(--yellow);
+    }
+
+    #bw-jm-sequence .links a:hover {
+      text-decoration: underline;
+    }
+
+    #bw-jm-sequence .widget-footer {
+      align-items: center;
+      background: #fff;
+      border-radius: 0 0 13px 13px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding: 12px 16px;
+    }
+
+    #bw-jm-sequence .footer-note {
+      color: var(--muted);
+      font-size: 8.5px;
+      font-weight: 650;
+      line-height: 1.4;
+    }
+
+    #bw-jm-sequence .credits-toggle {
+      align-items: center;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--green);
+      cursor: pointer;
+      display: inline-flex;
+      flex: 0 0 auto;
+      font-size: 9px;
+      font-weight: 900;
+      gap: 6px;
+      line-height: 1;
+      padding: 8px 10px;
+    }
+
+    #bw-jm-sequence .credits-toggle:hover {
+      background: var(--yellow);
+      border-color: var(--yellow);
+    }
+
+    #bw-jm-sequence .credits-panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-top: 5px solid var(--green);
+      bottom: 16px;
+      box-shadow: 0 18px 50px rgba(18, 63, 23, .28);
+      left: max(14px, calc(50% - 360px));
+      max-height: min(72vh, 430px);
+      max-width: 720px;
+      overflow: auto;
+      padding: 18px;
+      position: fixed;
+      right: max(14px, calc(50% - 360px));
+      z-index: 50;
+    }
+
+    #bw-jm-sequence .credits-head {
+      align-items: start;
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      margin-bottom: 11px;
+    }
+
+    #bw-jm-sequence .credits-head h2 {
+      color: var(--green-deep);
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    #bw-jm-sequence .credits-close {
+      align-items: center;
+      background: var(--green);
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      flex: 0 0 30px;
+      font-size: 18px;
+      height: 30px;
+      justify-content: center;
+      line-height: 1;
+      width: 30px;
+    }
+
+    #bw-jm-sequence .credits-list {
+      color: var(--muted);
+      font-size: 9.5px;
+      line-height: 1.5;
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    #bw-jm-sequence .credits-list li {
+      margin-bottom: 8px;
+    }
+
+    #bw-jm-sequence .credits-list a {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    @media (max-width: 780px) {
+      #bw-jm-sequence .hero {
+        min-height: 330px;
+      }
+
+      #bw-jm-sequence .hero-copy {
+        padding: 54px 24px 76px;
+      }
+
+      #bw-jm-sequence .time-layout,
+      #bw-jm-sequence .facts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-jm-sequence .sequence-heading {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-jm-sequence .stage-card {
+        grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr);
+      }
+
+      #bw-jm-sequence .stage-photo {
+        min-height: 290px;
+      }
+    }
+
+    @media (max-width: 620px) {
+      #bw-jm-sequence {
+        margin: 10px 0;
+      }
+
+      #bw-jm-sequence .shell {
+        border-radius: 10px;
+      }
+
+      #bw-jm-sequence .hero {
+        border-radius: 9px 9px 0 0;
+        min-height: 330px;
+      }
+
+      #bw-jm-sequence .hero img {
+        object-position: 62% center;
+      }
+
+      #bw-jm-sequence .hero::after {
+        background: linear-gradient(0deg, rgba(10, 31, 14, .94) 0%, rgba(10, 31, 14, .62) 68%, rgba(10, 31, 14, .15) 100%);
+      }
+
+      #bw-jm-sequence .hero-copy {
+        padding: 82px 18px 78px;
+      }
+
+      #bw-jm-sequence .hero p {
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      #bw-jm-sequence .hero-note {
+        bottom: 13px;
+        font-size: 9.5px;
+        left: 16px;
+        right: 16px;
+      }
+
+      #bw-jm-sequence .truth-strip {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-jm-sequence .truth {
+        border-bottom: 1px solid rgba(255, 255, 255, .14);
+        border-right: 0;
+        padding: 11px 16px;
+      }
+
+      #bw-jm-sequence .truth:last-child {
+        border-bottom: 0;
+      }
+
+      #bw-jm-sequence .time-studio,
+      #bw-jm-sequence .sequence,
+      #bw-jm-sequence .facts {
+        padding-left: 14px;
+        padding-right: 14px;
+      }
+
+      #bw-jm-sequence .dial-panel,
+      #bw-jm-sequence .decision-panel {
+        padding: 18px 15px;
+      }
+
+      #bw-jm-sequence .dial-head {
+        align-items: start;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      #bw-jm-sequence .allocation-segment span {
+        display: none;
+      }
+
+      #bw-jm-sequence .allocation-segment b {
+        font-size: 9px;
+      }
+
+      #bw-jm-sequence .allocation-key {
+        grid-template-columns: 1fr;
+      }
+
+      #bw-jm-sequence .path::before {
+        left: 14px;
+      }
+
+      #bw-jm-sequence .stage {
+        gap: 9px;
+        grid-template-columns: 31px minmax(0, 1fr);
+        margin-bottom: 18px;
+      }
+
+      #bw-jm-sequence .stage-pin {
+        border-width: 3px;
+        font-size: 8px;
+        height: 25px;
+        margin-left: 2px;
+        width: 25px;
+      }
+
+      #bw-jm-sequence .stage-card {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #bw-jm-sequence .stage:nth-child(even) .stage-photo {
+        order: 0;
+      }
+
+      #bw-jm-sequence .stage-photo,
+      #bw-jm-sequence .photo-pair {
+        min-height: 230px;
+      }
+
+      #bw-jm-sequence .stage-copy {
+        padding: 18px 16px 17px;
+      }
+
+      #bw-jm-sequence .stage-copy h3 {
+        font-size: 19px;
+      }
+
+      #bw-jm-sequence .photo-pair span {
+        bottom: 6px;
+        font-size: 7.5px;
+        left: 6px;
+      }
+
+      #bw-jm-sequence .widget-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      #bw-jm-sequence .credits-toggle {
+        align-self: flex-end;
+      }
+
+      #bw-jm-sequence .credits-panel {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+      }
+    }
+
+    @media (max-width: 370px) {
+      #bw-jm-sequence .hero h1 {
+        font-size: 28px;
+      }
+
+      #bw-jm-sequence .time-readout {
+        font-size: 30px;
+      }
+
+      #bw-jm-sequence .allocation-bar {
+        min-height: 48px;
+      }
+
+      #bw-jm-sequence .stage-photo,
+      #bw-jm-sequence .photo-pair {
+        min-height: 205px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      #bw-jm-sequence *,
+      #bw-jm-sequence *::before,
+      #bw-jm-sequence *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+
+  <section class="shell" aria-labelledby="widget-title">
+    <header class="hero">
+      <img src="assets/01-jewish-museum-berlin-cover.jpg" alt="Jewish Museum Berlin with the Baroque Kollegienhaus and the zinc-clad Libeskind building" width="1800" height="1012" fetchpriority="high" decoding="async">
+      <div class="hero-copy">
+        <div class="eyebrow">A visit measured in attention</div>
+        <h1 id="widget-title">Jewish Museum Visit Sequence</h1>
+        <p>Set the time you really have. The path below protects the building's three axes, gives the 1,700-year core exhibition the longest block, and leaves room to pause when the day allows it.</p>
+      </div>
+      <div class="hero-note">Recommended starting point: 2 hours 30 minutes to 3 hours</div>
+    </header>
+
+    <div class="truth-strip" aria-label="Jewish Museum Berlin essentials">
+      <div class="truth">
+        <b>Tue to Sun, 10:00 to 18:00</b>
+        <span>Last entry is 17:00. A deep visit needs an earlier arrival.</span>
+      </div>
+      <div class="truth">
+        <b>Core exhibition: free</b>
+        <span>A timed slot is recommended. Walk-ins are also possible.</span>
+      </div>
+      <div class="truth">
+        <b>Security comes first</b>
+        <span>Checks are mandatory. Large bags belong in the cloakroom.</span>
+      </div>
+    </div>
+
+    <section class="time-studio" aria-labelledby="time-heading">
+      <div class="section-kicker">Build the visit around the clock</div>
+      <h2 id="time-heading">How much attention can you give it?</h2>
+
+      <div class="time-layout">
+        <div class="dial-panel">
+          <div class="dial-head">
+            <label class="dial-question" for="visit-time">Move the time rail from a compressed visit to a deep one</label>
+            <output class="time-readout" id="time-readout" for="visit-time">2h 45m</output>
+          </div>
+
+          <div class="range-wrap">
+            <div class="sweet-band" aria-hidden="true"></div>
+            <input id="visit-time" type="range" min="90" max="240" step="15" value="165" aria-describedby="range-help" aria-valuetext="2 hours 45 minutes">
+            <div class="range-labels" id="range-help" aria-hidden="true">
+              <span>90 min compressed</span>
+              <span>2.5 to 3h recommended</span>
+              <span>4h deep visit</span>
+            </div>
+          </div>
+
+          <div class="allocation-title">Where your time goes</div>
+          <div class="allocation-bar" role="list" aria-label="Allocated visit time">
+            <div class="allocation-segment" data-key="entry" role="listitem">
+              <b id="segment-entry-minutes">20m</b>
+              <span>Entry</span>
+            </div>
+            <div class="allocation-segment" data-key="axes" role="listitem">
+              <b id="segment-axes-minutes">50m</b>
+              <span>Axes</span>
+            </div>
+            <div class="allocation-segment" data-key="core" role="listitem">
+              <b id="segment-core-minutes">80m</b>
+              <span>Core</span>
+            </div>
+            <div class="allocation-segment" data-key="pause" role="listitem">
+              <b id="segment-pause-minutes">15m</b>
+              <span>Pause</span>
+            </div>
+          </div>
+          <div class="allocation-key" aria-hidden="true">
+            <div class="key-item"><i class="key-dot"></i>Security and entry</div>
+            <div class="key-item"><i class="key-dot"></i>Axes, Garden and Tower</div>
+            <div class="key-item"><i class="key-dot"></i>Core exhibition</div>
+            <div class="key-item"><i class="key-dot"></i>Pause and Between the Lines</div>
+          </div>
+        </div>
+
+        <aside class="decision-panel" aria-live="polite" aria-atomic="true">
+          <div>
+            <div class="mode" id="plan-mode">Recommended depth</div>
+            <h3 id="plan-headline">This is the useful middle.</h3>
+            <p id="plan-advice">You can take both the Garden of Exile and Holocaust Tower seriously, follow a coherent route through the core exhibition, and still keep a short pause before leaving.</p>
+          </div>
+          <div>
+            <div class="turn-grid">
+              <div class="turn-row">
+                <span>Move into the core by</span>
+                <b id="core-turn">+1h 10m</b>
+              </div>
+              <div class="turn-row">
+                <span id="pause-label">Protected pause starts</span>
+                <b id="pause-turn">+2h 30m</b>
+              </div>
+              <div class="turn-row">
+                <span>Finish the sequence by</span>
+                <b id="finish-turn">+2h 45m</b>
+              </div>
+            </div>
+            <p class="last-entry-warning">Last entry at 17:00 leaves only one hour before closing. Do not use it for a 2.5 to 3 hour plan.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="sequence" aria-labelledby="sequence-heading">
+      <div class="sequence-heading">
+        <div>
+          <div class="section-kicker">One connected path</div>
+          <h2 id="sequence-heading">Follow the building before the checklist</h2>
+        </div>
+        <p>The minute windows update with the rail above. Treat them as turnaround points, not a demand to rush sensitive spaces.</p>
+      </div>
+
+      <ol class="path" aria-label="Jewish Museum Berlin visit sequence">
+        <li class="stage" data-stage="entry" data-active="true">
+          <div class="stage-pin" aria-hidden="true">01</div>
+          <article class="stage-card">
+            <figure class="stage-photo">
+              <img src="assets/01-jewish-museum-berlin-cover.jpg" alt="The Jewish Museum Berlin ensemble on Lindenstrasse" width="1800" height="1012" loading="lazy" decoding="async">
+              <figcaption>The visit starts in the former Collegienhaus before the route enters the Libeskind building.</figcaption>
+            </figure>
+            <div class="stage-copy">
+              <div class="stage-meta">
+                <span class="priority" id="priority-entry">Essential buffer</span>
+                <span class="stage-time" id="stage-entry-time">20 minutes</span>
+              </div>
+              <h3>Arrive with buffer, not speed</h3>
+              <p id="guidance-entry">Have your booking confirmation ready, clear security, and use the cloakroom before trying to orient yourself. Starting calm is more useful than winning five minutes here.</p>
+              <div class="fixed-fact"><strong>Mandatory:</strong> security screening applies to every visitor. Large bags must go to the cloakroom.</div>
+              <div class="stage-meter" aria-hidden="true"><span id="meter-entry"></span></div>
+              <div class="time-window" id="window-entry">Start +0m, move on by +20m</div>
+            </div>
+          </article>
+        </li>
+
+        <li class="stage" data-stage="axes" data-active="true">
+          <div class="stage-pin" aria-hidden="true">02</div>
+          <article class="stage-card">
+            <figure class="stage-photo">
+              <div class="photo-pair">
+                <div>
+                  <img src="assets/03-garden-of-exile.jpg" alt="Concrete columns in the Garden of Exile at the Jewish Museum Berlin" width="1600" height="1200" loading="lazy" decoding="async">
+                  <span>Garden of Exile</span>
+                </div>
+                <div>
+                  <img src="assets/04-holocaust-tower-light.jpg" alt="Light entering the high concrete Holocaust Tower at the Jewish Museum Berlin" width="1600" height="1200" loading="lazy" decoding="async">
+                  <span>Holocaust Tower</span>
+                </div>
+              </div>
+              <figcaption>The Garden and Tower are not photo stops. Give each space silence and enough time to register.</figcaption>
+            </figure>
+            <div class="stage-copy">
+              <div class="stage-meta">
+                <span class="priority" id="priority-axes">Spatial core</span>
+                <span class="stage-time" id="stage-axes-time">50 minutes</span>
+              </div>
+              <h3>Read the three axes before chasing exhibits</h3>
+              <p id="guidance-axes">Follow the underground axes as one connected argument. Take the Garden of Exile and Holocaust Tower without turning them into boxes to tick, then use the Axis of Continuity to move toward the core exhibition.</p>
+              <div class="fixed-fact"><strong>Orientation:</strong> the Axis of Exile, Axis of the Holocaust and Axis of Continuity form the underground route. The Axis of Continuity has 82 steps, with lifts available. The Garden of Exile is not wheelchair accessible.</div>
+              <div class="stage-meter" aria-hidden="true"><span id="meter-axes"></span></div>
+              <div class="time-window" id="window-axes">From +20m to +1h 10m</div>
+            </div>
+          </article>
+        </li>
+
+        <li class="stage" data-stage="core" data-active="true">
+          <div class="stage-pin" aria-hidden="true">03</div>
+          <article class="stage-card">
+            <figure class="stage-photo">
+              <img src="assets/06-core-exhibition.jpg" alt="Display cases, wall text and a map in the current Jewish Museum Berlin core exhibition" width="1600" height="1200" loading="lazy" decoding="async">
+              <figcaption>The current core exhibition expands the story beyond the building and beyond one period.</figcaption>
+            </figure>
+            <div class="stage-copy">
+              <div class="stage-meta">
+                <span class="priority" id="priority-core">Longest block</span>
+                <span class="stage-time" id="stage-core-time">80 minutes</span>
+              </div>
+              <h3>Give the core exhibition the longest block</h3>
+              <p id="guidance-core">Move through a coherent chronological stretch instead of sampling every display. The core exhibition spans 1,700 years of Jewish life in Germany. It is not only an exhibition about the Holocaust.</p>
+              <div class="fixed-fact"><strong>Useful frame:</strong> protect the breadth of the story. If time tightens, reduce display depth rather than skipping the historical arc.</div>
+              <div class="stage-meter" aria-hidden="true"><span id="meter-core"></span></div>
+              <div class="time-window" id="window-core">From +1h 10m to +2h 30m</div>
+            </div>
+          </article>
+        </li>
+
+        <li class="stage" data-stage="pause" data-active="true">
+          <div class="stage-pin" aria-hidden="true">04</div>
+          <article class="stage-card">
+            <figure class="stage-photo">
+              <img src="assets/05-glass-courtyard.jpg" alt="The Glass Courtyard inside the Jewish Museum Berlin" width="1600" height="1067" loading="lazy" decoding="async">
+              <figcaption>A final pause helps the building and exhibition settle before the city takes over again.</figcaption>
+            </figure>
+            <div class="stage-copy">
+              <div class="stage-meta">
+                <span class="priority" id="priority-pause">Protected pause</span>
+                <span class="stage-time" id="stage-pause-time">15 minutes</span>
+              </div>
+              <h3>Make room to absorb it</h3>
+              <p id="guidance-pause">Use the Glass Courtyard or another calm public area to stop, then look back at how Libeskind's Between the Lines design has shaped the route. This is reflection time, not leftover time.</p>
+              <div class="fixed-fact"><strong>Accessibility:</strong> public areas are otherwise accessible, with the Garden of Exile as the important exception.</div>
+              <div class="stage-meter" aria-hidden="true"><span id="meter-pause"></span></div>
+              <div class="time-window" id="window-pause">From +2h 30m to +2h 45m</div>
+            </div>
+          </article>
+        </li>
+      </ol>
+    </section>
+
+    <section class="facts" aria-labelledby="facts-heading">
+      <div class="section-kicker">Before you enter</div>
+      <h2 id="facts-heading">Keep the practical details simple</h2>
+      <div class="facts-grid">
+        <ul class="fact-list">
+          <li><span class="fact-icon">01</span><span><b>Book a timed slot when possible.</b> Walk-ins are accepted, but a slot removes one uncertainty from the day.</span></li>
+          <li><span class="fact-icon">02</span><span><b>The core exhibition is free.</b> Temporary exhibitions or special programmes may have separate conditions.</span></li>
+          <li><span class="fact-icon">03</span><span><b>Pack for security.</b> Keep large bags out of the visit path and expect the cloakroom before the exhibition.</span></li>
+        </ul>
+        <div class="access-card">
+          <h3>Check the official visitor page on the day</h3>
+          <p>Opening conditions, timed slots and temporary closures can change. The museum's own site is the final source. For broader planning, pair this sequence with BerlinWalk's free-museum and museum-bag guides.</p>
+          <div class="links">
+            <a href="https://www.jmberlin.de/en" target="_blank" rel="noopener">Official Jewish Museum Berlin</a>
+            <a href="https://www.berlinwalk.com/post/which-berlin-museums-are-free-2026" target="_blank" rel="noopener">Berlin free museums</a>
+            <a href="https://www.berlinwalk.com/post/berlin-museum-bag-rules" target="_blank" rel="noopener">Berlin museum bag rules</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="widget-footer">
+      <span class="footer-note">Time allocations are planning guidance, not an instruction to rush difficult material.</span>
+      <button class="credits-toggle" id="credits-toggle" type="button" aria-controls="credits-panel" aria-expanded="false">
+        <span aria-hidden="true">&#9673;</span> Image credits
+      </button>
+    </footer>
+  </section>
+
+  <aside class="credits-panel" id="credits-panel" role="dialog" aria-modal="false" aria-labelledby="credits-title" hidden>
+    <div class="credits-head">
+      <h2 id="credits-title">Image credits</h2>
+      <button class="credits-close" id="credits-close" type="button" aria-label="Close image credits">&times;</button>
+    </div>
+    <ul class="credits-list">
+      <li>Cover and exterior: <a href="https://commons.wikimedia.org/wiki/File:Berlin_J%C3%BCdisches_Museum_und_der_Libeskind-Bau.jpg" target="_blank" rel="noopener">Marek Śliwecki</a>, CC BY-SA 4.0.</li>
+      <li>Old Building entrance: <a href="https://commons.wikimedia.org/wiki/File:Berlin_-_Collegienhaus_J%C3%BCdisches_Museum_Berlin.jpg" target="_blank" rel="noopener">Fred Romero</a>, CC BY 2.0.</li>
+      <li>Garden of Exile: <a href="https://commons.wikimedia.org/wiki/File:Jewish_Museum_Berlin_-_Garden_of_Exile.jpg" target="_blank" rel="noopener">Avi1111 / Dr. Avishai Teicher</a>, CC BY-SA 4.0.</li>
+      <li>Holocaust Tower: <a href="https://commons.wikimedia.org/wiki/File:J%C3%BCdisches_Museum_Berlin_GLAM_2026_60.jpg" target="_blank" rel="noopener">Ansgar Wernst</a>, CC BY-SA 4.0.</li>
+      <li>Glass Courtyard: <a href="https://commons.wikimedia.org/wiki/File:J%C3%BCdisches_Museum_Berlin-5774.jpg" target="_blank" rel="noopener">GodeNehler</a>, CC BY-SA 4.0.</li>
+      <li>Core exhibition: <a href="https://commons.wikimedia.org/wiki/File:2026-04-26_Juedisches_Museum_Berlin_014.jpg" target="_blank" rel="noopener">Ziko van Dijk</a>, CC BY-SA 4.0.</li>
+    </ul>
+  </aside>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var root = document.getElementById('bw-jm-sequence');
+      if (!root) return;
+
+      var slider = root.querySelector('#visit-time');
+      var readout = root.querySelector('#time-readout');
+      var mode = root.querySelector('#plan-mode');
+      var headline = root.querySelector('#plan-headline');
+      var advice = root.querySelector('#plan-advice');
+      var coreTurn = root.querySelector('#core-turn');
+      var pauseTurn = root.querySelector('#pause-turn');
+      var pauseLabel = root.querySelector('#pause-label');
+      var finishTurn = root.querySelector('#finish-turn');
+      var creditsToggle = root.querySelector('#credits-toggle');
+      var creditsPanel = root.querySelector('#credits-panel');
+      var creditsClose = root.querySelector('#credits-close');
+
+      var allocations = {
+        90:  { entry: 15, axes: 30, core: 45,  pause: 0 },
+        105: { entry: 15, axes: 30, core: 60,  pause: 0 },
+        120: { entry: 20, axes: 35, core: 65,  pause: 0 },
+        135: { entry: 20, axes: 40, core: 75,  pause: 0 },
+        150: { entry: 20, axes: 45, core: 75,  pause: 10 },
+        165: { entry: 20, axes: 50, core: 80,  pause: 15 },
+        180: { entry: 25, axes: 50, core: 85,  pause: 20 },
+        195: { entry: 25, axes: 55, core: 90,  pause: 25 },
+        210: { entry: 25, axes: 60, core: 95,  pause: 30 },
+        225: { entry: 25, axes: 60, core: 105, pause: 35 },
+        240: { entry: 25, axes: 60, core: 115, pause: 40 }
+      };
+
+      var keys = ['entry', 'axes', 'core', 'pause'];
+
+      function shortTime(minutes) {
+        var hours = Math.floor(minutes / 60);
+        var rest = minutes % 60;
+        if (!hours) return minutes + 'm';
+        if (!rest) return hours + 'h';
+        return hours + 'h ' + rest + 'm';
+      }
+
+      function longTime(minutes) {
+        var hours = Math.floor(minutes / 60);
+        var rest = minutes % 60;
+        var parts = [];
+        if (hours) parts.push(hours + ' hour' + (hours === 1 ? '' : 's'));
+        if (rest) parts.push(rest + ' minutes');
+        return parts.join(' ');
+      }
+
+      function stageGuidance(total, plan) {
+        var result = {};
+
+        result.entry = plan.entry <= 15
+          ? 'Keep your confirmation and small items ready. Clear security, use the cloakroom only if needed, and do not spend this whole buffer reorganising bags.'
+          : 'Have your booking confirmation ready, clear security, and use the cloakroom before trying to orient yourself. Starting calm is more useful than winning five minutes here.';
+
+        if (plan.axes <= 30) {
+          result.axes = 'Read all three axes, then protect one full encounter. If security has taken longer, choose the Garden of Exile or Holocaust Tower rather than reducing both to a glance.';
+        } else if (plan.axes < 45) {
+          result.axes = 'Follow the three axes as one connected argument. Both the Garden and Tower may fit when movement is clear, but choose one if the route has already slipped.';
+        } else {
+          result.axes = 'Follow the underground axes as one connected argument. Take the Garden of Exile and Holocaust Tower without turning them into boxes to tick, then use the Axis of Continuity to move toward the core exhibition.';
+        }
+
+        if (plan.core <= 60) {
+          result.core = 'Choose one coherent chronological stretch and keep moving through the historical arc. Do not jump only to the Holocaust period. The core exhibition spans 1,700 years of Jewish life in Germany.';
+        } else if (plan.core <= 85) {
+          result.core = 'Move through a coherent chronological stretch instead of sampling every display. The core exhibition spans 1,700 years of Jewish life in Germany. It is not only an exhibition about the Holocaust.';
+        } else {
+          result.core = 'Let the chronological sections breathe. Follow objects and personal stories across the 1,700-year span, and use the extra time for context rather than trying to complete every screen and case.';
+        }
+
+        if (!plan.pause) {
+          result.pause = 'There is no formal pause in this compressed plan. If something stays with you, protect a few quiet minutes by reducing display depth in the core, not by rushing the axes.';
+        } else if (plan.pause <= 15) {
+          result.pause = 'Use the Glass Courtyard or another calm public area for a short reset, then look back at how Libeskind\'s Between the Lines design has shaped the route.';
+        } else {
+          result.pause = 'Use the Glass Courtyard or another calm public area to stop. Look back at how Libeskind\'s Between the Lines design shaped the route, then revisit one thread instead of adding a new checklist.';
+        }
+
+        return result;
+      }
+
+      function planCopy(total) {
+        if (total <= 120) {
+          return {
+            mode: 'Compressed visit',
+            headline: 'Keep the route coherent.',
+            advice: 'Protect the axes and one continuous stretch of the core exhibition. If time slips, choose between Garden and Tower instead of reducing both to photo stops.'
+          };
+        }
+        if (total <= 135) {
+          return {
+            mode: 'Short but coherent',
+            headline: 'Do not collect every room.',
+            advice: 'There is enough time to understand the building and begin the core properly. Turn toward the core on schedule and leave temporary displays for another visit.'
+          };
+        }
+        if (total <= 180) {
+          return {
+            mode: 'Recommended depth',
+            headline: 'This is the useful middle.',
+            advice: 'You can take both the Garden of Exile and Holocaust Tower seriously, follow a coherent route through the core exhibition, and still keep a short pause before leaving.'
+          };
+        }
+        if (total <= 210) {
+          return {
+            mode: 'Slow reading',
+            headline: 'Use the extra time for context.',
+            advice: 'Follow more personal stories through the core and protect a real pause. The extra minutes should deepen one thread, not multiply the number of rooms you rush through.'
+          };
+        }
+        return {
+          mode: 'Deep visit',
+          headline: 'Let the building set the pace.',
+          advice: 'You have room for the axes, a broad core exhibition route, reflection and a return to one section that stayed with you. Keep the visit deliberate rather than exhaustive.'
+        };
+      }
+
+      function updateStage(key, minutes, start, total, guidance) {
+        var stage = root.querySelector('[data-stage="' + key + '"]');
+        var timeNode = root.querySelector('#stage-' + key + '-time');
+        var windowNode = root.querySelector('#window-' + key);
+        var meter = root.querySelector('#meter-' + key);
+        var segment = root.querySelector('.allocation-segment[data-key="' + key + '"]');
+        var segmentMinutes = root.querySelector('#segment-' + key + '-minutes');
+        var guidanceNode = root.querySelector('#guidance-' + key);
+        var end = start + minutes;
+
+        stage.setAttribute('data-active', minutes > 0 ? 'true' : 'false');
+        timeNode.textContent = minutes ? minutes + ' minutes' : 'Folded into route';
+        windowNode.textContent = minutes
+          ? 'From +' + shortTime(start) + ' to +' + shortTime(end)
+          : 'No separate time block in this plan';
+        meter.style.width = minutes ? Math.max(7, Math.round((minutes / total) * 100)) + '%' : '0%';
+        segment.style.flexBasis = minutes ? ((minutes / total) * 100).toFixed(2) + '%' : '0%';
+        segment.classList.toggle('is-zero', minutes === 0);
+        segmentMinutes.textContent = minutes ? minutes + 'm' : '0m';
+        segment.setAttribute('aria-label', minutes ? key + ': ' + minutes + ' minutes' : key + ': no separate time block');
+        guidanceNode.textContent = guidance;
+        return end;
+      }
+
+      function render() {
+        var total = Number(slider.value);
+        var plan = allocations[total] || allocations[165];
+        var copy = planCopy(total);
+        var guidance = stageGuidance(total, plan);
+        var percent = ((total - Number(slider.min)) / (Number(slider.max) - Number(slider.min))) * 100;
+        var elapsed = 0;
+
+        slider.style.setProperty('--range-fill', percent.toFixed(2) + '%');
+        slider.setAttribute('aria-valuetext', longTime(total));
+        readout.textContent = shortTime(total);
+        mode.textContent = copy.mode;
+        headline.textContent = copy.headline;
+        advice.textContent = copy.advice;
+
+        elapsed = updateStage('entry', plan.entry, elapsed, total, guidance.entry);
+        elapsed = updateStage('axes', plan.axes, elapsed, total, guidance.axes);
+        coreTurn.textContent = '+' + shortTime(elapsed);
+        elapsed = updateStage('core', plan.core, elapsed, total, guidance.core);
+
+        if (plan.pause) {
+          pauseLabel.textContent = 'Protected pause starts';
+          pauseTurn.textContent = '+' + shortTime(elapsed);
+        } else {
+          pauseLabel.textContent = 'Separate pause block';
+          pauseTurn.textContent = 'Not scheduled';
+        }
+
+        elapsed = updateStage('pause', plan.pause, elapsed, total, guidance.pause);
+        finishTurn.textContent = '+' + shortTime(elapsed);
+
+        root.querySelector('#priority-pause').textContent = plan.pause ? 'Protected pause' : 'Folded into route';
+      }
+
+      function setCredits(open, returnFocus) {
+        creditsPanel.hidden = !open;
+        creditsToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (open) {
+          creditsClose.focus();
+        } else if (returnFocus) {
+          creditsToggle.focus();
+        }
+      }
+
+      slider.addEventListener('input', render);
+      slider.addEventListener('change', render);
+
+      creditsToggle.addEventListener('click', function (event) {
+        event.stopPropagation();
+        setCredits(creditsToggle.getAttribute('aria-expanded') !== 'true', false);
+      });
+
+      creditsClose.addEventListener('click', function () {
+        setCredits(false, true);
+      });
+
+      document.addEventListener('click', function (event) {
+        if (creditsPanel.hidden) return;
+        if (creditsPanel.contains(event.target) || creditsToggle.contains(event.target)) return;
+        setCredits(false, false);
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && !creditsPanel.hidden) {
+          event.preventDefault();
+          setCredits(false, true);
+        }
+      });
+
+      render();
+      setCredits(false, false);
+    })();
+  </script>
+</main>
+</body>
+</html>
