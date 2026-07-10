@@ -56,7 +56,7 @@
 
   var CSS = [
     ".bw-wt{--night:#101312;--night2:#161b18;--cream:#FAFAF5;--red:#E63946;--green:#1B5E20;--lime:#7CB342;--yellow:#FFE600;--concrete:#9BA19B;--ink-dim:rgba(250,250,245,.62);--ink-faint:rgba(250,250,245,.38);--card-bg:rgba(16,19,18,.86);--card-line:rgba(250,250,245,.14);",
-    "display:block;position:relative;width:100vw;max-width:100vw;margin:0 calc((100% - 100vw)/2);background:var(--night);color:var(--cream);font-family:Montserrat,'Avenir Next','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-size-adjust:100%;overflow-x:clip;transition:background 1.4s ease}",
+    "display:block;position:relative;width:100vw;max-width:100vw;margin:0 calc((100% - 100vw)/2);background:var(--night);color:var(--cream);font-family:Montserrat,'Avenir Next','Helvetica Neue',Arial,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;text-size-adjust:100%;overflow:visible;transition:background 1.4s ease}",
     ".bw-wt.reunited{background:#0e1a10}",
     ".bw-wt *{box-sizing:border-box}.bw-wt a{color:inherit}",
     ".bw-wt-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}",
