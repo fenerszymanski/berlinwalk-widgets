@@ -482,17 +482,32 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
 }
 
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 {
+  align-items: flex-start !important;
+  display: block !important;
   grid-column: 1 !important;
   grid-row: 2 !important;
+  justify-content: flex-start !important;
   text-align: left !important;
   width: auto !important;
 }
 
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h1,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 h2,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 span {
+  text-align: left !important;
+}
+
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is {
+  display: block !important;
   grid-column: 1 !important;
   grid-row: 3 !important;
   text-align: left !important;
   width: auto !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is p,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is span {
+  text-align: left !important;
 }
 
 html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt {
