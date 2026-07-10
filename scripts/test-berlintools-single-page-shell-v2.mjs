@@ -45,6 +45,7 @@ assert.match(shellCss, /#bw-desktop-cta/);
 assert.match(brand, /surface.*tool-page|tool-page.*surface/s);
 assert.match(loader, /__COMMIT_SHA__/);
 assert.match(loader, /berlintools-single-page-shell-v2\.js/);
+assert.match(loader, /cdn\.jsdelivr\.net\/gh\/fenerszymanski\/berlinwalk-widgets@/);
 
 for (const file of [
   'transport-calculator/index.html',

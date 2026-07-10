@@ -35,7 +35,7 @@
     var path = String(window.location.pathname || '').toLowerCase().replace(/\/{2,}/g, '/');
     if (!/^\/tools\/[^/]+\/?$/.test(path)) return;
     var commit = '__COMMIT_SHA__';
-    var base = 'https://fenerszymanski.github.io/berlinwalk-widgets/';
+    var base = 'https://cdn.jsdelivr.net/gh/fenerszymanski/berlinwalk-widgets@' + commit + '/';
     var cssHref = base + 'css/berlintools-single-page-shell-v2.css?commit=' + commit;
     var jsSrc = base + 'js/berlintools-single-page-shell-v2.js?commit=' + commit;
 
