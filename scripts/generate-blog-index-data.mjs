@@ -178,10 +178,12 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'berlin-u-bahn-fine',
+  lead: 'berlin-wall-memorial-bernauer-strasse',
   secondary: [
+    'berlin-u-bahn-fine',
     'renting-a-bike-in-berlin',
     'is-the-ddr-museum-worth-it',
+    'where-to-watch-sunset-in-berlin',
     'deutschlandticket-berlin-tourists',
     'potsdam-from-berlin-day-trip',
     'berlin-before-hotel-check-in',
@@ -219,9 +221,12 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'berlin-wall-memorial-bernauer-strasse',
   'berlin-u-bahn-fine',
   'renting-a-bike-in-berlin',
   'is-the-ddr-museum-worth-it',
+  'where-to-watch-sunset-in-berlin',
+  'turkish-market-berlin-maybachufer',
   'e-scooters-in-berlin',
   'deutschlandticket-berlin-tourists',
   'potsdam-from-berlin-day-trip',
@@ -543,6 +548,7 @@ function relatedToolSlugFor(post) {
   if (/(breakfast-in-berlin|breakfast in berlin|brunch|bakery breakfast|coffee morning)/.test(s)) return 'berlin-breakfast-clock';
   if (/(german-signs-in-berlin|german signs in berlin|ausgang|ersatzverkehr|sign decoder)/.test(s)) return 'berlin-sign-decoder';
   if (/(berlin-plug-adapter|plug adapter|travel adapter|type f|schuko|berlin sockets|charger|usb-c|power bank)/.test(s)) return 'berlin-plug-adapter-checker';
+  if (/(berlin-wall-memorial-bernauer-strasse|berlin wall memorial|bernauer strasse|bernauer straße|death strip)/.test(s)) return 'berlin-wall-remnants';
   if (/(pharmacy|apotheke|notdienst|medicine|116117)/.test(s)) return 'pharmacy-in-berlin-helper';
   if (/(alternative-transport|alternative transport|mobility app|miles|car sharing|bike sharing|scooter)/.test(s)) return 'berlin-mobility-app-picker';
   if (/(zoo-berlin-vs-tierpark|tierpark|zoo berlin vs tierpark)/.test(s)) return '';

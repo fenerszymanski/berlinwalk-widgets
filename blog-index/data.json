@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-09T20:12:27.426Z",
+  "updatedAt": "2026-07-10T02:07:19.283Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
   "totalPosts": 183,
@@ -43,23 +43,40 @@
   ],
   "hero": {
     "lead": {
-      "title": "Berlin U-Bahn Fine: What Happens If You Are Caught Without a Ticket",
-      "slug": "berlin-u-bahn-fine",
-      "path": "/post/berlin-u-bahn-fine",
-      "url": "https://www.berlinwalk.com/post/berlin-u-bahn-fine",
-      "excerpt": "A practical Berlin U-Bahn fine guide for tourists caught without a valid ticket: EUR 60 EBE, unstamped paper tickets, wrong zones, forgotten passes and official next steps.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
+      "title": "Berlin Wall Memorial (Bernauer Strasse): How to Visit the Real Wall Site (2026)",
+      "slug": "berlin-wall-memorial-bernauer-strasse",
+      "path": "/post/berlin-wall-memorial-bernauer-strasse",
+      "url": "https://www.berlinwalk.com/post/berlin-wall-memorial-bernauer-strasse",
+      "excerpt": "A Berlin guide's practical guide to the Berlin Wall Memorial on Bernauer Strasse: the preserved death strip, the viewing tower, the ghost station and the Window of Remembrance, plus hours and how to get there.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "history-myths",
+      "topicLabel": "Berlin History & Myths",
       "readTime": "7 min read",
-      "publishedDate": "2026-07-06T13:46:45.840Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_0b27ed84236c4e35adebbd0859840f85~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u-bahn-prinzenstrasse-platform.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_0b27ed84236c4e35adebbd0859840f85~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u-bahn-prinzenstrasse-platform.jpg",
-      "alt": "Yellow U-Bahn train at Prinzenstrasse station in Berlin",
-      "relatedToolSlug": "berlin-ticket-fine-step-planner"
+      "publishedDate": "2026-07-09T20:08:58.800Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
+      "alt": "The preserved Berlin Wall death strip on Bernauer Strasse seen from the viewing tower, with the TV Tower on the skyline",
+      "relatedToolSlug": "berlin-wall-remnants"
     },
     "secondary": [
+      {
+        "title": "Berlin U-Bahn Fine: What Happens If You Are Caught Without a Ticket",
+        "slug": "berlin-u-bahn-fine",
+        "path": "/post/berlin-u-bahn-fine",
+        "url": "https://www.berlinwalk.com/post/berlin-u-bahn-fine",
+        "excerpt": "A practical Berlin U-Bahn fine guide for tourists caught without a valid ticket: EUR 60 EBE, unstamped paper tickets, wrong zones, forgotten passes and official next steps.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "7 min read",
+        "publishedDate": "2026-07-06T13:46:45.840Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_0b27ed84236c4e35adebbd0859840f85~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u-bahn-prinzenstrasse-platform.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_0b27ed84236c4e35adebbd0859840f85~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-u-bahn-prinzenstrasse-platform.jpg",
+        "alt": "Yellow U-Bahn train at Prinzenstrasse station in Berlin",
+        "relatedToolSlug": "berlin-ticket-fine-step-planner"
+      },
       {
         "title": "Renting a Bike in Berlin: Which Option Actually Fits Your Trip",
         "slug": "renting-a-bike-in-berlin",
@@ -95,6 +112,23 @@
         "relatedToolSlug": "ddr-museum-crowd-planner"
       },
       {
+        "title": "Where to Watch the Sunset in Berlin: Best Spots and Real Timing (2026)",
+        "slug": "where-to-watch-sunset-in-berlin",
+        "path": "/post/where-to-watch-sunset-in-berlin",
+        "url": "https://www.berlinwalk.com/post/where-to-watch-sunset-in-berlin",
+        "excerpt": "A Berlin guide's practical guide to the sunset in Berlin: real sunset and golden-hour timing by season, and the best spots to watch the light over water, the city or a wide-open horizon.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "practical",
+        "topicLabel": "Practical Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-07-09T12:09:58.557Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_b12916e0ba6b42819129df08d0acb49b~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-oberbaumbruecke-sunset-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_b12916e0ba6b42819129df08d0acb49b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-oberbaumbruecke-sunset-cover.jpg",
+        "alt": "The sun setting through the arches of the Oberbaumbrücke over the Spree in Berlin, with a yellow U-Bahn crossing the bridge",
+        "relatedToolSlug": ""
+      },
+      {
         "title": "Deutschlandticket for Berlin Tourists: When the 63 EUR Ticket Makes Sense",
         "slug": "deutschlandticket-berlin-tourists",
         "path": "/post/deutschlandticket-berlin-tourists",
@@ -110,40 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_aaa33341f7d64cac89433a331bc0246d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-sbahn-hauptbahnhof-deutschlandticket.jpg",
         "alt": "S-Bahn train arriving inside Berlin Hauptbahnhof",
         "relatedToolSlug": "transport-ticket-calculator"
-      },
-      {
-        "title": "Potsdam from Berlin: Train, Tickets and Sanssouci Day Trip Plan",
-        "slug": "potsdam-from-berlin-day-trip",
-        "path": "/post/potsdam-from-berlin-day-trip",
-        "url": "https://www.berlinwalk.com/post/potsdam-from-berlin-day-trip",
-        "excerpt": "A practical Potsdam from Berlin day trip guide for tourists: ABC tickets, Sanssouci Palace choices, route timing, Dutch Quarter, Cecilienhof closure and what to skip.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-07-07T07:32:40.213Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_36a38dddf1e545239df55c3aab19ec8d~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-potsdam-from-berlin-sanssouci-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_36a38dddf1e545239df55c3aab19ec8d~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-potsdam-from-berlin-sanssouci-cover.jpg",
-        "alt": "Sanssouci Palace and its vineyard terraces in Potsdam",
-        "relatedToolSlug": "berlin-day-trips-finder"
-      },
-      {
-        "title": "Berlin Before Hotel Check-In: What to Do With Luggage and Time",
-        "slug": "berlin-before-hotel-check-in",
-        "path": "/post/berlin-before-hotel-check-in",
-        "url": "https://www.berlinwalk.com/post/berlin-before-hotel-check-in",
-        "excerpt": "Arriving before your Berlin room is ready? Solve luggage first, choose a small first area, and use the check-in gap without dragging bags across the city.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "first-day",
-        "topicLabel": "First Day in Berlin",
-        "readTime": "7 min read",
-        "publishedDate": "2026-07-05T12:57:53.922Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_e8b287f6866d45b0b94ce6393d4d6961~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-before-hotel-check-in-luggage-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_e8b287f6866d45b0b94ce6393d4d6961~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-before-hotel-check-in-luggage-cover.jpg",
-        "alt": "Rolling suitcases at Berlin Hauptbahnhof, showing the luggage problem before hotel check-in in Berlin.",
-        "relatedToolSlug": "berlin-check-in-gap-planner"
       }
     ]
   },
@@ -1597,7 +1597,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
       "alt": "The preserved Berlin Wall death strip on Bernauer Strasse seen from the viewing tower, with the TV Tower on the skyline",
-      "relatedToolSlug": "east-or-west-1989"
+      "relatedToolSlug": "berlin-wall-remnants"
     },
     {
       "title": "Turkish Market Berlin: How to Visit the Maybachufer Market",
@@ -1803,7 +1803,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
       "thumb": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
       "alt": "The preserved Berlin Wall death strip on Bernauer Strasse seen from the viewing tower, with the TV Tower on the skyline",
-      "relatedToolSlug": "east-or-west-1989"
+      "relatedToolSlug": "berlin-wall-remnants"
     },
     {
       "title": "Turkish Market Berlin: How to Visit the Maybachufer Market",
