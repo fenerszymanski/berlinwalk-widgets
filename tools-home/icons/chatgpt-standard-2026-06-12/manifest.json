@@ -828,6 +828,21 @@
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_05dcee3f99224020bfef7a9d92f68043~mv2.png"
   },
   {
+    "slug": "mauerpark-sunday-timeline",
+    "title": "Mauerpark Sunday Planner",
+    "category": "EventsSports",
+    "model": "Built-in Codex image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/mauerpark-sunday-timeline/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/mauerpark-sunday-timeline/codex-imagegen-icon.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/mauerpark-sunday-timeline.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/mauerpark-sunday-timeline-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/mauerpark-sunday-timeline-160.png",
+    "generatedAt": "2026-07-10",
+    "source": "codex-built-in-imagegen-20260710",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_0f33ed6c79ea406e8688cbc1d4e0537f~mv2.png"
+  },
+  {
     "slug": "charlottenburg-palace-visit-planner",
     "title": "Charlottenburg Palace Visit Planner",
     "category": "Discovery",

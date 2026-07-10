@@ -585,6 +585,7 @@ function relatedToolSlugFor(post) {
   if (/(welcomecard)/.test(s)) return 'welcomecard-calculator';
   if (/(city-tax|city tax|accommodation-tax|accommodation tax|hotel-tax|hotel tax|tourist-tax|tourist tax)/.test(s)) return 'berlin-city-tax-calculator';
   if (/(pfand|bottle-deposit|bottle deposit|deposit bottle|bottle-return|bottle return|recycling)/.test(s)) return 'berlin-pfand-calculator';
+  if (/(mauerpark-berlin-sunday|mauerpark on a sunday|bearpit karaoke|mauerpark sunday)/.test(s)) return 'mauerpark-sunday-timeline';
   if (/(berlin-flea-markets|flea market|flea-market|vintage market|mauerpark|boxhagener)/.test(s)) return 'berlin-flea-market-picker';
   if (/(shopping|shop|flea-market|vintage|souvenir)/.test(s)) return 'berlin-shopping-areas';
   if (/(vegan|plant-based|plant based)/.test(s)) return 'vegan-berlin-locations-map';

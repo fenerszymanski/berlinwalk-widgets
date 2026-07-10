@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-07-10T07:20:15Z",
+  "url": "https://www.berlinwalk.com/tools/mauerpark-sunday-timeline",
+  "title": "Mauerpark Sunday Planner | BerlinWalk",
+  "h1": "Mauerpark Sunday Planner",
+  "httpStatus": 200,
+  "desktopChecks": {
+    "iframeCount": 2,
+    "bodyHasBearpit": true,
+    "bodyHasRelatedBlog": true,
+    "bodyHasMoreTools": true
+  },
+  "mobile390SnapshotChecks": {
+    "iframeRendered": true,
+    "iframeHeading": "Plan your Mauerpark Sunday",
+    "hasChoiceButtons": true,
+    "hasNextTourCta": true
+  },
+  "seoHtmlChecks": {
+    "hasTitle": true,
+    "hasSlug": true,
+    "hasIcon": true,
+    "hasCanonical": true,
+    "hasRobots": true
+  },
+  "screenshots": {
+    "mobile390": "output/qa/mauerpark-berlin-sunday/live-tool-mobile390.png",
+    "desktop": "output/qa/mauerpark-berlin-sunday/live-tool-desktop.png"
+  }
+}
