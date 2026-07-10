@@ -45,9 +45,13 @@ welcome `VKufY4L`, owner notification `VKugjPv`.
 
 ## Current editor status
 
-Local source was updated on 2026-05-29 with the new AI-page PDF URL. The live Wix Triggered Email body still
-needs manual editor paste if the new public copy should be live immediately;
-the direct email IDs remain unchanged.
+Local source was updated on 2026-07-10 with a Berlin First-Day Rescue Plan
+cross-sell block (between the download CTA and the tour section,
+`utm_campaign=fdr_leadmagnet_bridge`). The live Wix Triggered Email `VKufY4L`
+still needs a manual editor paste of `wix-html-block.html` before the offer
+goes out to new subscribers; the direct email IDs remain unchanged.
+
+Previous update: 2026-05-29, new AI-page PDF URL.
 
 ## Files
 

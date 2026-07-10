@@ -28,6 +28,13 @@ Inside the PDF:
 - Practical survival notes: toilets, lockers, water, Sundays and cash.
 - The easiest first walk from Alexanderplatz to Hackescher Markt.
 
+Want your exact arrival planned too? The free guide covers the rules. If you
+want your specific landing handled as well, I make a paid decision sheet: your
+arrival time, luggage and first priority turned into your first Berlin hours,
+with live route times and the weather at your landing hour. Instant, and it
+costs 9 euro. See the Berlin First-Day Rescue Plan:
+https://www.berlinwalk.com/products/berlin-first-day-rescue-plan?utm_source=berlinwalk&utm_medium=email&utm_campaign=fdr_leadmagnet_bridge&utm_content=welcome_email
+
 If you want Berlin to make sense beyond logistics, join me on the free walking
 tour. We start at the World Clock on Alexanderplatz, walk 12 stops through the
 historic centre, and finish near Hackescher Markt. The tour is tip-based and

@@ -355,6 +355,22 @@
       outline-offset: 2px;
     }
 
+    .bw-next-offer {
+      display: block;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #C8D8B0;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .bw-next-offer a {
+      color: #27500A;
+      font-weight: 800;
+      text-decoration: underline;
+    }
+
     @media (max-width: 600px) {
       .bw-signup {
         max-width: 100%;
@@ -608,7 +624,9 @@
             showMessage(
               'success',
               '<strong>You are in.</strong> Download the guide now.' +
-              '<a class="bw-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener">Download Berlin First-Day Guide</a>'
+              '<a class="bw-download" href="' + DOWNLOAD_URL + '" target="_blank" rel="noopener">Download Berlin First-Day Guide</a>' +
+              '<span class="bw-next-offer">Want your exact arrival planned too? Tell me your landing time, luggage and first priority, and you get one decision sheet for your first Berlin hours. Instant, €9. ' +
+              '<a href="https://www.berlinwalk.com/products/berlin-first-day-rescue-plan?utm_source=berlinwalk&utm_medium=lead_magnet&utm_campaign=fdr_leadmagnet_bridge&utm_content=leadform_thankyou" target="_top" rel="noopener">See the First-Day Rescue Plan</a></span>'
             );
           } else {
             var errorMsg = data.error === 'invalid_email'
