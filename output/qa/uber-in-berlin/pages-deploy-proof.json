@@ -1,0 +1,57 @@
+{
+  "checkedAt": "2026-07-10T11:14:17.536Z",
+  "commit": "643a22b639c509fef043015d547c674d26228ee2",
+  "deploymentId": 5390463397,
+  "actionsRunId": 29088336842,
+  "actionsRun": {
+    "status": "completed",
+    "conclusion": "success",
+    "event": "dynamic",
+    "head_sha": "643a22b639c509fef043015d547c674d26228ee2",
+    "html_url": "https://github.com/fenerszymanski/berlinwalk-widgets/actions/runs/29088336842",
+    "updated_at": "2026-07-10T11:10:39Z"
+  },
+  "latestDeploymentState": "inactive",
+  "pagesToolsHub": {
+    "status": 200,
+    "lastModified": "Fri, 10 Jul 2026 11:11:44 GMT",
+    "found": true,
+    "slug": "berlin-ride-reckoner",
+    "title": "Berlin Ride Reckoner",
+    "image": "https://static.wixstatic.com/media/5a08a3_664dbf31d8974c3282c5b7de3d7770a6~mv2.png",
+    "cmsItemId": "56941400-9655-4ad4-9dde-778ee2d2322b"
+  },
+  "pagesIcons": {
+    "png160": {
+      "status": 200,
+      "contentLength": "40745"
+    },
+    "png512": {
+      "status": 200,
+      "contentLength": "330487"
+    }
+  },
+  "deploymentStatusHistory": [
+    {
+      "state": "inactive",
+      "created_at": "2026-07-10T11:11:32Z"
+    },
+    {
+      "state": "success",
+      "created_at": "2026-07-10T11:10:39Z"
+    },
+    {
+      "state": "in_progress",
+      "created_at": "2026-07-10T11:08:40Z"
+    },
+    {
+      "state": "queued",
+      "created_at": "2026-07-10T11:08:38Z"
+    },
+    {
+      "state": "waiting",
+      "created_at": "2026-07-10T11:08:37Z"
+    }
+  ],
+  "deploymentSucceeded": true
+}
