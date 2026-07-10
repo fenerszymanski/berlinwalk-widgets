@@ -571,4 +571,8 @@ html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-s
   html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
     margin-top: 24px !important;
   }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary {
+    margin-top: 16px !important;
+  }
 }
