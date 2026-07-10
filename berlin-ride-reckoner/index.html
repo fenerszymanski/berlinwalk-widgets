@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Berlin Ride Reckoner</title>
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  :root{
+    --green:#1B5E20; --green-d:#123f16; --yellow:#FFE600; --lime:#7CB342;
+    --soft:#C5E1A5; --ink:#1c2417; --paper:#f6f8f2; --line:#dbe6cc;
+    --uber:#2b2f36; --bolt:#2aa26a; --freenow:#e0483d; --transit:#1B5E20;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Montserrat,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:transparent;}
+  .wrap{max-width:940px;margin:0 auto;padding:16px;}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 10px 30px rgba(18,63,22,.08);}
+  .head{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;padding:18px 20px;}
+  .head .kick{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--yellow);font-weight:800;}
+  .head h2{margin:.28em 0 .22em;font-size:22px;line-height:1.16;font-weight:800;}
+  .head p{margin:0;font-size:13.5px;opacity:.93;line-height:1.5;}
+  .body{padding:16px 18px 20px;}
+  .lead{font-size:13px;font-weight:700;color:var(--green);margin:2px 0 10px;}
+  .scenarios{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+  .sc{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:9px 13px;font-size:12.5px;font-weight:700;color:#3c4a2e;cursor:pointer;transition:.14s;user-select:none;min-height:40px;display:inline-flex;align-items:center;gap:8px;}
+  .sc .ic{font-size:15px;line-height:1;}
+  .sc:hover{border-color:var(--lime);}
+  .sc[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff;box-shadow:0 4px 12px rgba(27,94,32,.22);}
+  .meta{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:14px 0 4px;font-size:11.5px;color:#5c6b4b;font-weight:700;}
+  .meta .rt{display:inline-flex;align-items:center;gap:6px;}
+  .meta .rt b{color:var(--green);}
+
+  .lanes{margin:12px 0 4px;}
+  .lane{padding:12px 12px 13px;border:1px solid var(--line);border-radius:14px;background:#fff;margin:9px 0;position:relative;transition:.18s;}
+  .lane.best{border-color:var(--lime);box-shadow:0 6px 18px rgba(124,179,66,.16);}
+  .lane-top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
+  .lane-name{font-size:14px;font-weight:800;color:var(--ink);display:inline-flex;align-items:center;gap:8px;}
+  .swatch{width:12px;height:12px;border-radius:4px;flex:0 0 auto;}
+  .lane-sub{font-size:11px;font-weight:700;color:#8a9a72;letter-spacing:.01em;}
+  .price{font-size:14.5px;font-weight:800;color:var(--ink);white-space:nowrap;}
+  .price small{font-weight:700;color:#8a9a72;font-size:11px;}
+  .badge{position:absolute;top:-9px;right:12px;background:var(--yellow);color:#3a3300;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:999px;box-shadow:0 3px 8px rgba(0,0,0,.12);opacity:0;transform:translateY(-3px);transition:.2s;}
+  .lane.best .badge{opacity:1;transform:translateY(0);}
+  .rail{position:relative;height:14px;background:#eef3e6;border-radius:8px;margin:9px 0 8px;overflow:hidden;}
+  .fill{position:absolute;top:0;bottom:0;border-radius:8px;width:0;transition:width .55s cubic-bezier(.2,.7,.2,1),left .55s cubic-bezier(.2,.7,.2,1);}
+  .wait{font-size:11.5px;color:#5c6b4b;font-weight:700;}
+  .catch{font-size:12px;color:#41502f;line-height:1.5;margin:5px 0 0;}
+  .catch b{color:var(--green);}
+
+  .verdict{margin:14px 0 2px;padding:13px 15px;border-radius:14px;background:linear-gradient(135deg,rgba(124,179,66,.16),rgba(197,225,165,.28));border:1px solid var(--soft);}
+  .verdict .vk{font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--green);}
+  .verdict p{margin:5px 0 0;font-size:13.5px;line-height:1.55;color:#25331a;font-weight:600;}
+  .foot{font-size:11px;color:#8a9a72;margin:12px 0 0;line-height:1.5;}
+  .foot b{color:#5c6b4b;}
+  @media(max-width:430px){
+    .head h2{font-size:19.5px;}
+    .sc{font-size:12px;padding:8px 11px;}
+    .lane-name{font-size:13.5px;}
+    .price{font-size:13.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <div class="head">
+      <div class="kick">Berlinwalk.com &bull; Berlin Tools</div>
+      <h2>Berlin Ride Reckoner</h2>
+      <p>Pick your situation. See what Uber, Bolt, a FreeNow taxi and the smart local option really cost in Berlin, and what the catch is before you tap "Book".</p>
+    </div>
+    <div class="body">
+      <div class="lead">1. What's the trip?</div>
+      <div class="scenarios" id="scenarios" role="tablist" aria-label="Choose your Berlin trip"></div>
+
+      <div class="meta" id="meta"></div>
+
+      <div class="lanes" id="lanes"></div>
+
+      <div class="verdict">
+        <div class="vk">My pick here</div>
+        <p id="verdict"></p>
+      </div>
+
+      <p class="foot"><b>How to read this:</b> bars show a realistic 2026 price range, not a guaranteed fare. App prices move with demand (surge), traffic and time of day. Uber and Bolt run as licensed private-hire cars in Berlin; FreeNow mostly books real metered taxis. Always check the live in-app quote before you confirm.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SC = [
+    {
+      id:'airport', ic:'✈️', label:'BER Airport to the centre', scale:90,
+      meta:['~30 km', '~30-50 min'],
+      lanes:[
+        {k:'uber', name:'Uber', sub:'private-hire car', min:55, max:80, wait:'wait ~6-12 min', catch:'The return-to-base rule keeps private-hire supply thin this far out, so pickups can be slow.'},
+        {k:'bolt', name:'Bolt', sub:'private-hire car', min:50, max:75, wait:'wait ~5-12 min', catch:'Often the cheapest app, but supply to the airport is patchy at peak times.'},
+        {k:'freenow', name:'FreeNow', sub:'metered taxi', min:55, max:70, wait:'wait ~4-8 min', catch:'Real Berlin taxis on the regulated meter, and there is always a rank at Terminal 1.'},
+        {k:'transit', name:'Train (FEX / S-Bahn)', sub:'one VBB ticket', min:4, max:5, wait:'every ~10-30 min', catch:'By far the cheapest: the Airport Express and S9/S45 run on one ABC ticket, ~30-45 min to the centre.'}
+      ],
+      best:'transit',
+      verdict:'Take the train. The FEX or the S-Bahn into central Berlin costs a few euros on one ABC ticket and is barely slower than a 70-euro car. I only reach for an app on a late-night arrival with heavy bags, and then I use FreeNow or the Terminal 1 taxi rank.'
+    },
+    {
+      id:'hop', ic:'🏙️', label:'Short hop across the centre', scale:22,
+      meta:['~5 km', '~15-25 min'],
+      lanes:[
+        {k:'uber', name:'Uber', sub:'private-hire car', min:12, max:18, wait:'wait ~4-8 min', catch:'Fine for a quick hop, but it rarely beats the U-Bahn on a 5 km central trip.'},
+        {k:'bolt', name:'Bolt', sub:'private-hire car', min:10, max:16, wait:'wait ~4-8 min', catch:'Usually the cheapest app for short central rides.'},
+        {k:'freenow', name:'FreeNow', sub:'metered taxi', min:13, max:20, wait:'wait ~3-6 min', catch:'The meter starts near 4.30 euros, so short taxi rides feel pricey per kilometre.'},
+        {k:'transit', name:'U-Bahn / tram', sub:'one AB single', min:3.8, max:3.8, wait:'every ~4-8 min', catch:'One AB single is 3.80 euros and is often faster underground than crawling through traffic.'}
+      ],
+      best:'transit',
+      verdict:'Ride the U-Bahn. A 5 km trip across the centre is 3.80 euros and usually quicker below ground. I only open an app for luggage, a mobility need, or a very late hour.'
+    },
+    {
+      id:'night', ic:'🌙', label:'Late night after the clubs', scale:32,
+      meta:['~2-5 am', 'weekend'],
+      lanes:[
+        {k:'uber', name:'Uber', sub:'private-hire car', min:15, max:30, wait:'wait ~8-20 min', catch:'Fewest private-hire cars at 4 am, so surge pricing and long waits are common.'},
+        {k:'bolt', name:'Bolt', sub:'private-hire car', min:14, max:28, wait:'wait ~8-20 min', catch:'Cheapest when a car is free, but availability drops hardest at night.'},
+        {k:'freenow', name:'FreeNow', sub:'metered taxi', min:16, max:30, wait:'wait ~5-12 min', catch:'The most reliable option at 4 am: taxis wait outside big clubs and stations.'},
+        {k:'transit', name:'Night U-Bahn / N-bus', sub:'one AB single', min:3.8, max:3.8, wait:'all night Fri/Sat', catch:'On Friday and Saturday the U-Bahn runs all night; N-buses cover the rest on a normal ticket.'}
+      ],
+      best:'freenow',
+      verdict:'On a Friday or Saturday, ride the all-night U-Bahn. If you genuinely need a car at 4 am, a taxi outside the club or booked through FreeNow is far more reliable than waiting on an UberX that may never come.'
+    },
+    {
+      id:'group', ic:'🧳', label:'Group with luggage', scale:44,
+      meta:['3-4 people', '+ bags'],
+      lanes:[
+        {k:'uber', name:'Uber XL', sub:'larger private-hire', min:20, max:40, wait:'wait ~6-14 min', catch:'Vans are scarce under the return-to-base rule, so book ahead for a group.'},
+        {k:'bolt', name:'Bolt XL', sub:'larger private-hire', min:18, max:36, wait:'wait ~6-14 min', catch:'Larger Bolt cars exist but are the first to vanish at busy times.'},
+        {k:'freenow', name:'FreeNow / rank', sub:'taxi van', min:20, max:38, wait:'wait ~4-10 min', catch:'A taxi Großraum (van) at the rank fits 4-6 with luggage, and needs no app at all.'},
+        {k:'transit', name:'S-Bahn + group ticket', sub:'VBB day group', min:4, max:9, wait:'every ~5-15 min', catch:'A VBB group day ticket moves 3-5 people all day cheaply; the trade-off is stairs and bags.'}
+      ],
+      best:'freenow',
+      verdict:'Walk to a rank and take a Großraum taxi van, or pre-book an XL. For a planned airport run with bags I book the bigger car the night before, so the return-to-base rule does not leave the group stranded on the curb.'
+    },
+    {
+      id:'rain', ic:'🌧️', label:'Rainy rush hour', scale:30,
+      meta:['weekday peak', 'in traffic'],
+      lanes:[
+        {k:'uber', name:'Uber', sub:'private-hire car', min:16, max:28, wait:'wait ~8-18 min', catch:'Rain plus rush hour is peak surge: the price and the wait spike together.'},
+        {k:'bolt', name:'Bolt', sub:'private-hire car', min:15, max:26, wait:'wait ~8-18 min', catch:'Cheapest on paper, but "no cars available" is common in the rain.'},
+        {k:'freenow', name:'FreeNow', sub:'metered taxi', min:17, max:28, wait:'wait ~6-14 min', catch:'The meter keeps running while you sit in Berlin traffic.'},
+        {k:'transit', name:'U-Bahn / S-Bahn', sub:'one AB single', min:3.8, max:3.8, wait:'every ~3-6 min', catch:'The dry, predictable option: trains skip the jams entirely for 3.80 euros.'}
+      ],
+      best:'transit',
+      verdict:'Go underground. Rain plus rush hour is exactly when surge, traffic and "no cars" all hit at once. The S-Bahn and U-Bahn stay dry, cheap and on time while the roads seize up.'
+    }
+  ];
+  var COLOR={uber:'var(--uber)',bolt:'var(--bolt)',freenow:'var(--freenow)',transit:'var(--transit)'};
+
+  var elScn=document.getElementById('scenarios');
+  var elMeta=document.getElementById('meta');
+  var elLanes=document.getElementById('lanes');
+  var elVerdict=document.getElementById('verdict');
+  var current=0;
+
+  SC.forEach(function(s,i){
+    var b=document.createElement('button');
+    b.className='sc'; b.type='button'; b.setAttribute('role','tab');
+    b.setAttribute('aria-pressed', i===0?'true':'false');
+    b.innerHTML='<span class="ic">'+s.ic+'</span>'+s.label;
+    b.addEventListener('click',function(){ select(i); });
+    elScn.appendChild(b);
+  });
+
+  function fmt(v){ return (v%1===0)? String(v) : v.toFixed(2).replace(/0$/,''); }
+
+  function render(s){
+    elMeta.innerHTML = s.meta.map(function(m){return '<span class="rt"><b>&bull;</b> '+m+'</span>';}).join('')
+      + '<span class="rt"><b>&bull;</b> price = 2026 estimate range</span>';
+    elLanes.innerHTML='';
+    s.lanes.forEach(function(l){
+      var lane=document.createElement('div');
+      lane.className='lane'+(l.k===s.best?' best':'');
+      var priceTxt = (l.min===l.max) ? ('&euro;'+fmt(l.min)) : ('&euro;'+fmt(l.min)+'<small> - </small>&euro;'+fmt(l.max));
+      lane.innerHTML=
+        '<div class="badge">Best value here</div>'+
+        '<div class="lane-top">'+
+          '<span class="lane-name"><span class="swatch" style="background:'+COLOR[l.k]+'"></span>'+l.name+' <span class="lane-sub">'+l.sub+'</span></span>'+
+          '<span class="price">'+priceTxt+'</span>'+
+        '</div>'+
+        '<div class="rail"><span class="fill" style="background:'+COLOR[l.k]+'"></span></div>'+
+        '<div class="wait">'+l.wait+'</div>'+
+        '<p class="catch">'+l.catch+'</p>';
+      elLanes.appendChild(lane);
+      var fill=lane.querySelector('.fill');
+      var left=(l.min/s.scale)*100;
+      var w=Math.max(((l.max-l.min)/s.scale)*100, 2.5);
+      // animate from 0
+      requestAnimationFrame(function(){
+        fill.style.left=left+'%';
+        fill.style.width=w+'%';
+      });
+    });
+    elVerdict.textContent=s.verdict;
+  }
+
+  function select(i){
+    current=i;
+    Array.prototype.forEach.call(elScn.children,function(b,bi){
+      b.setAttribute('aria-pressed', bi===i?'true':'false');
+    });
+    render(SC[i]);
+  }
+
+  select(0);
+})();
+</script>
+<script src="../js/brand.js"></script>
+</body>
+</html>

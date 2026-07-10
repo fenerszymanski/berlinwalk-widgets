@@ -2257,5 +2257,18 @@
       "**Crowds peak 13:00-17:00.** For a calmer visit, arrive near 10:00 or after 17:30. For the full buzzing atmosphere, come early afternoon when market, food stalls and karaoke overlap.",
       "**Getting there:** Tram M10 to Friedrich-Ludwig-Jahn-Sportpark or Wolliner Straße, U8 Bernauer Straße (~5 min walk), or U2 Eberswalder Straße from the south."
     ]
+  },
+  "uber-in-berlin": {
+    "title": "Uber in Berlin - Quick Summary",
+    "icon": "🚕",
+    "kicker": "BERLINWALK.COM • TOURIST TIPS",
+    "items": [
+      "**Yes, Uber works in Berlin, but not the way it does at home.** German law lets Uber operate only as a licensed private-hire car service, not a taxi. There are no street hails and no Uber ranks: you book in the app, and a professional driver in an ordinary car comes to you.",
+      "**Uber, Bolt and FreeNow are your three main apps.** Bolt is usually the cheapest, Uber is the most familiar, and FreeNow mostly books real Berlin **taxis** on the regulated meter with app payment and tracking.",
+      "**A hidden rule thins out supply.** Private-hire cars must return to base after each ride (the _Rückkehrpflicht_), so at night, in the rain, or far from the centre you will often see surge prices, long waits, or \"no cars available\".",
+      "**Prices are app-quoted, not metered.** Uber and Bolt show a fixed fare before you book; a taxi runs a meter from about EUR 4.30. A short central hop is roughly EUR 10-18, and **BER Airport to the centre is about EUR 50-80** by app depending on demand.",
+      "**From BER Airport, the train usually wins.** The Airport Express (FEX) and S-Bahn reach central Berlin in ~30-45 minutes on one ABC ticket for a few euros. Uber, Bolt and FreeNow all pick up at the **Terminal 1** ride-app zone if you prefer a car.",
+      "**Pay in-app or by card; tipping is optional.** Rounding up about 5-10 percent is normal and appreciated, but never compulsory. For most central sightseeing, the U-Bahn still beats a car on both price and speed."
+    ]
   }
 }

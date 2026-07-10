@@ -189,7 +189,8 @@
   "where-to-watch-sunset-in-berlin": "where-to-watch-sunset-in-berlin",
   "berlin-wall-memorial-bernauer-strasse": "berlin-wall-memorial-bernauer-strasse",
   "air-conditioning-in-berlin": "air-conditioning-in-berlin",
-  "mauerpark-berlin-sunday": "mauerpark-berlin-sunday"
+  "mauerpark-berlin-sunday": "mauerpark-berlin-sunday",
+  "uber-in-berlin": "uber-in-berlin"
 };
 
   var SCHEMAS = {
@@ -8893,6 +8894,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The surrounding Prenzlauer Berg streets around Kastanienallee and Eberswalder Straße stay open with cafés and small shops, even though most Berlin shops are legally closed on Sundays. You can also walk on to other Berlin flea markets, or pair the visit with Wall history sites in the city centre."
+        }
+      }
+    ]
+  },
+  "uber-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Does Uber work in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Uber operates across Berlin, but under German passenger-transport law it runs as a licensed private-hire service, not a taxi. You cannot flag one down or find an Uber rank: you book in the app and a professional driver picks you up in a normal car. Bolt works the same way, while FreeNow mostly dispatches regular Berlin taxis through an app."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Uber cheaper than a taxi in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sometimes, but not always. Uber and Bolt quote a fixed price before you book, and Bolt is often the cheapest of the three apps. A Berlin taxi (which is what FreeNow usually sends) runs a regulated meter from about EUR 4.30, so it can cost more on short trips but is predictable. At busy times, app surge pricing can push Uber and Bolt above the taxi meter."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which ride-hailing app is best in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There is no single winner. Bolt tends to be cheapest, Uber is the most familiar interface for visitors, and FreeNow is the most reliable when you actually need a car quickly because it books licensed taxis that are already waiting. I keep two apps installed and compare the live quote, since availability changes by hour and neighbourhood."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I get an Uber or Bolt from BER Airport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Uber, Bolt and FreeNow all serve Berlin Brandenburg Airport (BER). The Ride App Pick Up zone is at Terminal 1 ground level, and the app shows the exact meeting spot after you book. Expect roughly EUR 50-80 into central Berlin depending on demand. The Airport Express (FEX) and S-Bahn are far cheaper, at a few euros on one ABC ticket, and take about 30-45 minutes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is it sometimes so hard to get an Uber in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "German law makes private-hire cars return to their base after each ride, rather than cruising for the next fare like taxis. This return-to-base rule keeps the pool of available Uber and Bolt cars smaller, especially late at night, in the rain, and away from the city centre. That is when you see surge prices, long waits, or no cars at all, and when a taxi rank or FreeNow is often the better bet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I tip Uber and taxi drivers in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Tipping is optional but appreciated. For both app rides and taxis, rounding up by about 5-10 percent is normal, for example paying EUR 20 on an EUR 18 fare. You can tip inside the Uber, Bolt or FreeNow app, or hand cash to a taxi driver. It is never compulsory, and no one will chase you for it."
         }
       }
     ]
