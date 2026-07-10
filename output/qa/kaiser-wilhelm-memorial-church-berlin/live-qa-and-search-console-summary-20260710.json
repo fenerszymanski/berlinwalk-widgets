@@ -1,0 +1,54 @@
+{
+  "task": "kaiser-wilhelm-memorial-church-berlin",
+  "capturedAt": "2026-07-10T18:45:16.669Z",
+  "liveUrls": {
+    "post": "https://www.berlinwalk.com/post/kaiser-wilhelm-memorial-church-berlin",
+    "tool": "https://www.berlinwalk.com/tools/memorial-church-visit-planner",
+    "widget": "https://fenerszymanski.github.io/berlinwalk-widgets/memorial-church-visit-planner/",
+    "toolsHubData": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-hub/data.json",
+    "hub": "https://www.berlinwalk.com/berlin-tools"
+  },
+  "berlinTools": {
+    "cmsItemId": "1aefaf7a-14c9-484d-a46f-042e98abafd4",
+    "iconUrl": "https://static.wixstatic.com/media/5a08a3_ed3ae81ee56645e58ae77584aae6205c~mv2.png",
+    "layoutFixesRevision": 80,
+    "githubPagesDeployRun": "29114405698",
+    "githubCommit": "d34a3b7"
+  },
+  "browserQa": {
+    "toolDetailDesktop": {
+      "title": "Memorial Church Visit Planner | BerlinWalk",
+      "h1s": [
+        "Memorial Church Visit Planner"
+      ],
+      "iframeSrc": "https://fenerszymanski.github.io/berlinwalk-widgets/memorial-church-visit-planner/",
+      "relatedBlogLinkPresent": true,
+      "overflowX": false,
+      "screenshot": "live-tool-desktop-20260710.png"
+    },
+    "hubMobileCard": {
+      "title": "Free Berlin Tools: Local Guides for 2026 Travelers | BerlinWalk",
+      "cardPresent": true,
+      "linksToTool": true,
+      "iconLoaded": true,
+      "overflowX": false,
+      "screenshot": "live-berlin-tools-mobile-card-20260710.png"
+    }
+  },
+  "searchConsole": {
+    "post": {
+      "targetUrl": "https://www.berlinwalk.com/post/kaiser-wilhelm-memorial-church-berlin",
+      "beforeStatus": "URL is not on Google; Page is not indexed: Crawled - currently not indexed",
+      "requestResult": "Indexing requested; URL was added to a priority crawl queue",
+      "screenshot": "search-console-post-request-result-20260710.png",
+      "json": "search-console-post-request-result-20260710.json"
+    },
+    "tool": {
+      "targetUrl": "https://www.berlinwalk.com/tools/memorial-church-visit-planner",
+      "beforeStatus": "URL is not on Google; Page is not indexed: URL is unknown to Google",
+      "requestResult": "Indexing requested; URL was added to a priority crawl queue",
+      "screenshot": "search-console-tool-request-result-20260710.png",
+      "json": "search-console-tool-request-result-20260710.json"
+    }
+  }
+}
