@@ -19,20 +19,28 @@
  *   <bw-berlin-rewind-result-games-v2></bw-berlin-rewind-result-games-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-archive-batch-20260709a
+ * Build marker: berlin-rewind-v2-leaderboard-20260710a
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
-  var BUILD = 'berlin-rewind-v2-archive-batch-20260709a';
+  var BUILD = 'berlin-rewind-v2-leaderboard-20260710a';
+  var TRACKING_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-event';
+  var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/rewind-event';
+  var LEADERBOARD_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-leaderboard';
+  var LEADERBOARD_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/rewind-leaderboard';
   var TAG = 'bw-berlin-rewind-v2';
   var STABLE_TAG = 'bw-berlin-rewind-stable-v2';
   var FIT_TAG = 'bw-berlin-rewind-fit-v2';
   var CLEAN_TAG = 'bw-berlin-rewind-clean-v2';
   var RESULT_GAMES_TAG = 'bw-berlin-rewind-result-games-v2';
   var STORE_KEY = 'bwRewindV2State';
+  var PLAYER_KEY = 'bwRewindV2Player';
+  var VISITOR_KEY = 'bw_rewind_visitor_id';
+  var SESSION_KEY = 'bwRewindV2Session';
+  var LANDING_KEY = 'bwRewindV2Landing';
   var HISTORY_MAX = 14;
 
   // Absolute default so photos resolve even when a host (e.g. Wix) loads this
@@ -132,6 +140,22 @@
     '.bw-rw-tbar{flex:1;height:8px;border-radius:5px;background:rgba(255,255,255,.12);overflow:hidden;}',
     '.bw-rw-tbar-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--lime),var(--y));}',
     '.bw-rw-tscore{font-size:14px;font-weight:800;color:var(--y);width:66px;text-align:right;flex:0 0 auto;}',
+    // global leaderboard
+    '.bw-rw-global{background:rgba(0,0,0,.18);border:1px solid rgba(197,225,165,.18);border-radius:14px;padding:10px 12px;margin:0 0 12px;}',
+    '.bw-rw-global-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;}',
+    '.bw-rw-global-k{font-size:10px;font-weight:900;letter-spacing:1.4px;text-transform:uppercase;color:var(--lg);}',
+    '.bw-rw-global-name{border:1px solid rgba(197,225,165,.45);background:rgba(255,255,255,.07);color:var(--cream);border-radius:999px;padding:5px 9px;font-size:11px;font-weight:800;cursor:pointer;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}',
+    '.bw-rw-me{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;}',
+    '.bw-rw-me span{display:block;background:rgba(255,255,255,.07);border-radius:10px;padding:7px 8px;font-size:10px;font-weight:800;color:var(--lg);line-height:1.25;}',
+    '.bw-rw-me b{display:block;color:var(--y);font-size:14px;margin-top:2px;}',
+    '.bw-rw-lists{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.7fr);gap:8px;}',
+    '.bw-rw-ltitle{font-size:10px;font-weight:900;letter-spacing:1.2px;text-transform:uppercase;color:var(--lg);margin:0 0 4px;}',
+    '.bw-rw-lrow{display:flex;align-items:center;gap:7px;min-height:22px;font-size:11px;color:var(--cream);border-top:1px solid rgba(255,255,255,.07);padding-top:4px;}',
+    '.bw-rw-lrow:first-of-type{border-top:none;padding-top:0;}',
+    '.bw-rw-lrank{color:var(--y);font-weight:900;width:24px;flex:0 0 auto;}',
+    '.bw-rw-lname{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;flex:1;}',
+    '.bw-rw-lscore{color:var(--lg);font-weight:900;white-space:nowrap;}',
+    '.bw-rw-lmuted{font-size:11px;color:var(--lg);line-height:1.35;margin:0;}',
     // top bar (round + score)
     '.bw-rw-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}',
     '.bw-rw-round{font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--lg);}',
@@ -239,13 +263,17 @@
     '.bw-rw-result-screen .bw-rw-recap-row{font-size:12.5px;padding:5px 0;}',
     '.bw-rw-result-screen .bw-rw-tomorrow{margin:8px 0 0;}',
     '.bw-rw-result-screen .bw-rw-table{margin:0;padding:4px 12px 7px;}',
+    '.bw-rw-result-screen .bw-rw-global{margin:0;padding:8px 10px;}',
+    '.bw-rw-result-screen .bw-rw-me{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;margin-bottom:7px;}',
+    '.bw-rw-result-screen .bw-rw-me span{padding:6px 7px;font-size:9.5px;}',
+    '.bw-rw-result-screen .bw-rw-lrow{font-size:10.5px;min-height:20px;}',
     '.bw-rw-result-screen .bw-rw-trow{padding:5px 0;}',
     '.bw-rw-result-screen .bw-rw-btnrow{gap:8px;margin-top:0;}',
     '.bw-rw-result-screen .bw-rw-btn{min-height:46px;padding:12px 14px;font-size:15px;}',
     '.bw-rw-result-screen .bw-rw-copied{margin-top:0;}',
-    '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-result-screen.is-on{max-width:980px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);grid-template-areas:"badge recap" "score recap" "sub recap" "title recap" "desc table" "streak table" "buttons table" "copied table";column-gap:24px;row-gap:5px;align-content:center;justify-content:stretch;padding-inline:26px}.bw-rw-result-screen .bw-rw-r-emoji{grid-area:badge}.bw-rw-result-screen .bw-rw-r-score{grid-area:score}.bw-rw-result-screen .bw-rw-r-scoresub{grid-area:sub}.bw-rw-result-screen .bw-rw-r-title{grid-area:title}.bw-rw-result-screen .bw-rw-r-desc{grid-area:desc}.bw-rw-result-screen .bw-rw-recap{grid-area:recap;align-self:end;width:100%;max-width:none}.bw-rw-result-screen .bw-rw-tomorrow{grid-area:streak}.bw-rw-result-screen .bw-rw-table{grid-area:table;align-self:start;width:100%}.bw-rw-result-screen .bw-rw-btnrow{grid-area:buttons}.bw-rw-result-screen .bw-rw-copied{grid-area:copied}}',
+    '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-result-screen.is-on{max-width:980px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);grid-template-areas:"badge recap" "score recap" "sub recap" "title recap" "desc table" "streak table" "buttons table" "copied table";column-gap:24px;row-gap:5px;align-content:center;justify-content:stretch;padding-inline:26px}.bw-rw-result-screen .bw-rw-r-emoji{grid-area:badge}.bw-rw-result-screen .bw-rw-r-score{grid-area:score}.bw-rw-result-screen .bw-rw-r-scoresub{grid-area:sub}.bw-rw-result-screen .bw-rw-r-title{grid-area:title}.bw-rw-result-screen .bw-rw-r-desc{grid-area:desc}.bw-rw-result-screen .bw-rw-recap{grid-area:recap;align-self:end;width:100%;max-width:none}.bw-rw-result-screen .bw-rw-tomorrow{grid-area:streak}.bw-rw-result-screen .bw-rw-table,.bw-rw-result-screen .bw-rw-global{grid-area:table;align-self:start;width:100%}.bw-rw-result-screen .bw-rw-btnrow{grid-area:buttons}.bw-rw-result-screen .bw-rw-copied{grid-area:copied}}',
     '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-dbtn{min-height:46px;font-size:12.5px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-home-screen{padding-inline:16px}.bw-rw-result-screen{justify-content:flex-start;padding-inline:14px}.bw-rw-result-screen .bw-rw-r-emoji{font-size:34px;margin:-2px 0 0}.bw-rw-result-screen .bw-rw-r-score{font-size:31px}.bw-rw-result-screen .bw-rw-r-score span{font-size:15px!important}.bw-rw-result-screen .bw-rw-r-scoresub{font-size:11px;margin:0 0 5px}.bw-rw-result-screen .bw-rw-r-title{font-size:20px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-r-desc{font-size:12.8px;line-height:1.34;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.bw-rw-result-screen .bw-rw-recap{padding:6px 10px;margin-bottom:0}.bw-rw-result-screen .bw-rw-recap-row{font-size:11.2px;padding:4px 0}.bw-rw-result-screen .bw-rw-tomorrow{font-size:12px;margin:6px 0}.bw-rw-result-screen .bw-rw-table{padding:2px 9px 5px;margin-bottom:0}.bw-rw-result-screen .bw-rw-table-h{font-size:9.5px;padding:7px 0 4px}.bw-rw-result-screen .bw-rw-trow{padding:4px 0}.bw-rw-result-screen .bw-rw-tdate{font-size:11px;width:104px}.bw-rw-result-screen .bw-rw-tscore{font-size:11.5px;width:44px}.bw-rw-result-screen .bw-rw-btnrow{gap:7px;margin-top:7px}.bw-rw-result-screen .bw-rw-btn{min-height:42px;padding:10px 12px;font-size:13.5px}.bw-rw-result-screen .bw-rw-copied{font-size:11px;min-height:13px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}}',
-    '@media(max-width:420px){.bw-rw-card{height:760px}.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen{padding-inline:14px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:12px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}.bw-rw-result-screen{padding-inline:13px}.bw-rw-result-screen .bw-rw-btnrow{gap:6px;margin-top:6px}.bw-rw-result-screen .bw-rw-btn{min-height:40px;padding:9px 10px;font-size:13px}}'
+    '@media(max-width:420px){.bw-rw-card{height:760px}.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen{padding-inline:14px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:12px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}.bw-rw-global{padding:8px 9px}.bw-rw-lists{grid-template-columns:1fr}.bw-rw-lists .bw-rw-lcol:last-child{display:none}.bw-rw-result-screen{padding-inline:13px}.bw-rw-result-screen .bw-rw-global{padding:7px 8px}.bw-rw-result-screen .bw-rw-global-head{margin-bottom:5px}.bw-rw-result-screen .bw-rw-me{margin-bottom:5px}.bw-rw-result-screen .bw-rw-lrow:nth-of-type(n+5){display:none}.bw-rw-result-screen .bw-rw-btnrow{gap:6px;margin-top:6px}.bw-rw-result-screen .bw-rw-btn{min-height:40px;padding:9px 10px;font-size:13px}}'
   ].join('');
 
   // ---------- helpers ----------
@@ -312,6 +340,100 @@
     return WD[d.getUTCDay()] + ' ' + d.getUTCDate() + ' ' + MO[d.getUTCMonth()];
   }
   function saveState(s) { try { window.localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {} }
+  function readJson(key, fallback) {
+    try {
+      var raw = window.localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : fallback;
+    } catch (e) {
+      return fallback;
+    }
+  }
+  function writeJson(key, value) {
+    try { window.localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+  }
+  function storageGet(key) {
+    try { return window.localStorage.getItem(key) || ''; } catch (e) { return ''; }
+  }
+  function storageSet(key, value) {
+    try { window.localStorage.setItem(key, value); } catch (e) {}
+  }
+  function sessionGet(key) {
+    try { return window.sessionStorage.getItem(key) || ''; } catch (e) { return ''; }
+  }
+  function sessionSet(key, value) {
+    try { window.sessionStorage.setItem(key, value); } catch (e) {}
+  }
+  function randomId(prefix) {
+    return prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 10);
+  }
+  function cleanName(value) {
+    return String(value || '').replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40);
+  }
+  function defaultName(playerId) {
+    var suffix = String(playerId || '').replace(/[^a-z0-9]/gi, '').slice(-4).toUpperCase();
+    return 'Berlin Archivist ' + (suffix || '2026');
+  }
+  function playerProfile() {
+    var profile = readJson(PLAYER_KEY, null);
+    if (!profile || typeof profile !== 'object') profile = {};
+    if (!profile.playerId) profile.playerId = randomId('rewind_player');
+    profile.displayName = cleanName(profile.displayName) || defaultName(profile.playerId);
+    writeJson(PLAYER_KEY, profile);
+    return profile;
+  }
+  function setPlayerName(value) {
+    var profile = playerProfile();
+    profile.displayName = cleanName(value) || profile.displayName;
+    writeJson(PLAYER_KEY, profile);
+    return profile;
+  }
+  function trackingSessionId() {
+    var existing = sessionGet(SESSION_KEY);
+    if (existing) return existing;
+    var value = randomId('rewind_session');
+    sessionSet(SESSION_KEY, value);
+    return value;
+  }
+  function trackingVisitorId() {
+    var existing = storageGet(VISITOR_KEY);
+    if (existing) return existing;
+    var value = randomId('rewind_visitor');
+    storageSet(VISITOR_KEY, value);
+    return value;
+  }
+  function landingPage() {
+    var existing = sessionGet(LANDING_KEY);
+    if (existing) return existing;
+    var value = window.location.href || '';
+    sessionSet(LANDING_KEY, value);
+    return value;
+  }
+  function urlParam(name) {
+    try { return new URLSearchParams(window.location.search || '').get(name) || ''; } catch (e) { return ''; }
+  }
+  function cookieValue(name) {
+    try {
+      var item = document.cookie.split('; ').find(function (part) { return part.indexOf(name + '=') === 0; });
+      return item ? decodeURIComponent(item.split('=').slice(1).join('=')) : '';
+    } catch (e) {
+      return '';
+    }
+  }
+  function isPaidAttribution(utmMedium, utmCampaign) {
+    var medium = String(utmMedium || '').toLowerCase();
+    var campaign = String(utmCampaign || '').toLowerCase();
+    return /paid|cpc|ppc|ad|ads|meta|facebook|instagram/.test(medium) ||
+      /paid|campaign|lead|conversion|meta|facebook|instagram/.test(campaign) ||
+      Boolean(urlParam('fbclid'));
+  }
+  function endpoint(prod, local) {
+    if (urlParam('tracking') === 'off') return '';
+    if (/^(localhost|127\.0\.0\.1)$/.test(window.location.hostname || '')) {
+      return (urlParam('tracking') === 'local' || urlParam('local_tracking') === '1') ? local : '';
+    }
+    return prod;
+  }
+  function buildSetId(dayKey) { return 'rewind-' + dayKey; }
 
   function scoreYear(guess, actual, tol) {
     var eff = Math.max(0, Math.abs(guess - actual) - (tol || 0));
@@ -345,6 +467,15 @@
   }
 
   class BWBerlinRewindV2 extends HTMLElement {
+    constructor() {
+      super();
+      this._leaderboard = null;
+      this._trackingSequence = 0;
+      this._viewTracked = false;
+      this._submittedDailyResult = false;
+      this._player = null;
+    }
+
     connectedCallback() {
       if (this._booted) return;
       this._booted = true;
@@ -355,6 +486,7 @@
       this._today = berlinToday();
       this._photos = PHOTOS;
       this._archive = null;
+      this._player = playerProfile();
       this._injectCSS();
       this._renderLoading();
       this._loadArchive().then(() => this._route(), () => this._route());
@@ -403,6 +535,8 @@
       var st = loadState();
       if (st.lastDate === this._today) this._renderGate(st);
       else this._renderStart(st);
+      this._trackPageView();
+      this._refreshLeaderboard();
     }
 
     _stripHtml() {
@@ -444,6 +578,225 @@
       return '<div class="bw-rw-table"><div class="bw-rw-table-h">Your recent Rewind scores</div>' + rows + '</div>';
     }
 
+    _leaderboardHtml() {
+      var board = this._leaderboard || null;
+      var profile = this._player || playerProfile();
+      var name = profile.displayName || defaultName(profile.playerId);
+      if (!board) {
+        return '<div class="bw-rw-global" data-lb-board>' +
+          '<div class="bw-rw-global-head">' +
+            '<span class="bw-rw-global-k">Global ranking</span>' +
+            '<button type="button" class="bw-rw-global-name" data-lb-name title="Change leaderboard name">' + esc(name) + '</button>' +
+          '</div>' +
+          '<p class="bw-rw-lmuted">Loading the global board...</p>' +
+        '</div>';
+      }
+
+      if (board.unavailable) {
+        return '<div class="bw-rw-global" data-lb-board>' +
+          '<div class="bw-rw-global-head">' +
+            '<span class="bw-rw-global-k">Global ranking</span>' +
+            '<button type="button" class="bw-rw-global-name" data-lb-name title="Change leaderboard name">' + esc(name) + '</button>' +
+          '</div>' +
+          '<p class="bw-rw-lmuted">The global board is unavailable right now. Your score still stays on this device.</p>' +
+        '</div>';
+      }
+
+      var me = board.me || {};
+      var top = Array.isArray(board.top) ? board.top : [];
+      var today = Array.isArray(board.today) ? board.today : [];
+      function scoreLabel(row) {
+        if (!row) return '0';
+        return String(row.totalScore != null ? row.totalScore : row.score || 0);
+      }
+      function rowsHtml(rows, scoreKey) {
+        if (!rows.length) return '<p class="bw-rw-lmuted">First public scores are landing today.</p>';
+        return rows.slice(0, 5).map(function (row) {
+          var score = scoreKey === 'score' ? row.score : row.totalScore;
+          return '<div class="bw-rw-lrow">' +
+            '<span class="bw-rw-lrank">#' + esc(row.rank || '-') + '</span>' +
+            '<span class="bw-rw-lname">' + esc(row.displayName || 'Berlin Archivist') + '</span>' +
+            '<span class="bw-rw-lscore">' + esc(score || 0) + '</span>' +
+          '</div>';
+        }).join('');
+      }
+      return '<div class="bw-rw-global" data-lb-board>' +
+        '<div class="bw-rw-global-head">' +
+          '<span class="bw-rw-global-k">Global ranking</span>' +
+          '<button type="button" class="bw-rw-global-name" data-lb-name title="Change leaderboard name">' + esc(name) + '</button>' +
+        '</div>' +
+        '<div class="bw-rw-me" aria-label="Your global Rewind standing">' +
+          '<span>You<b>' + (me.rank ? '#' + esc(me.rank) : 'New') + '</b></span>' +
+          '<span>Total<b>' + esc(me.totalScore || 0) + '</b></span>' +
+          '<span>Today<b>' + (me.todayRank ? '#' + esc(me.todayRank) : (me.todayScore ? esc(me.todayScore) : '-')) + '</b></span>' +
+        '</div>' +
+        '<div class="bw-rw-lists">' +
+          '<div class="bw-rw-lcol"><p class="bw-rw-ltitle">Top 5 all-time</p>' + rowsHtml(top, 'totalScore') + '</div>' +
+          '<div class="bw-rw-lcol"><p class="bw-rw-ltitle">Today top</p>' + rowsHtml(today.slice(0, 3), 'score') + '</div>' +
+        '</div>' +
+      '</div>';
+    }
+
+    _applyLeaderboard(board) {
+      if (!board) return;
+      this._leaderboard = board;
+      var slot = this.querySelector('[data-lb-board]');
+      if (slot) {
+        slot.outerHTML = this._leaderboardHtml();
+        this._bindLeaderboardControls();
+      }
+    }
+
+    _bindLeaderboardControls() {
+      var self = this;
+      var button = this.querySelector('[data-lb-name]');
+      if (!button) return;
+      button.addEventListener('click', function () {
+        var current = (self._player || playerProfile()).displayName;
+        var next = window.prompt('Name on the global Rewind board', current);
+        if (next == null) return;
+        self._player = setPlayerName(next);
+        self._applyLeaderboard(self._leaderboard || { top: [], today: [], me: null });
+      });
+    }
+
+    _bindBookingLinks() {
+      var self = this;
+      this.querySelectorAll('[data-book]').forEach(function (link) {
+        link.addEventListener('click', function () {
+          self._track('bw_berlin_rewind_booking_click', {
+            dayKey: self._today,
+            setId: buildSetId(self._today),
+            action: link.getAttribute('data-book') || 'book_tour'
+          });
+        });
+      });
+    }
+
+    _leaderboardEndpoint() {
+      return endpoint(LEADERBOARD_ENDPOINT_PROD, LEADERBOARD_ENDPOINT_LOCAL);
+    }
+
+    _trackingEndpoint() {
+      return endpoint(TRACKING_ENDPOINT_PROD, TRACKING_ENDPOINT_LOCAL);
+    }
+
+    _refreshLeaderboard() {
+      var url = this._leaderboardEndpoint();
+      if (!url) {
+        this._applyLeaderboard({ top: [], today: [], me: null, unavailable: true });
+        return Promise.resolve(null);
+      }
+      var profile = this._player || playerProfile();
+      try {
+        return fetch(url, {
+          method: 'POST',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            playerId: profile.playerId,
+            dayKey: this._today,
+            limit: 5
+          })
+        }).then(function (response) {
+          if (!response.ok) return null;
+          return response.json().catch(function () { return null; });
+        }).then((data) => {
+          if (data && data.leaderboard) this._applyLeaderboard(data.leaderboard);
+          else this._applyLeaderboard({ top: [], today: [], me: null, unavailable: true });
+          return data;
+        }).catch(() => {
+          this._applyLeaderboard({ top: [], today: [], me: null, unavailable: true });
+          return null;
+        });
+      } catch (e) {
+        this._applyLeaderboard({ top: [], today: [], me: null, unavailable: true });
+        return Promise.resolve(null);
+      }
+    }
+
+    _track(eventName, detail, options) {
+      var url = this._trackingEndpoint();
+      if (!url) return Promise.resolve(null);
+      options = options || {};
+      var profile = this._player || playerProfile();
+      var timestamp = new Date().toISOString();
+      var utmSource = urlParam('utm_source') || 'games';
+      var utmMedium = urlParam('utm_medium') || 'rewind';
+      var utmCampaign = urlParam('utm_campaign') || 'bw_rewind';
+      var payload = Object.assign({
+        source: 'berlin_rewind_v2',
+        context: 'berlin_rewind_v2',
+        dayKey: this._today,
+        setId: buildSetId(this._today),
+        dailyMode: this._mode || '',
+        playerId: profile.playerId,
+        displayName: profile.displayName,
+        archiveBatch: this.getAttribute('data-archive-batch') || (this._archive && this._archive.batchId) || ''
+      }, detail || {});
+      var body = {
+        eventName: eventName,
+        eventId: trackingSessionId() + ':' + eventName + ':' + (++this._trackingSequence),
+        sessionId: trackingSessionId(),
+        visitorId: trackingVisitorId(),
+        timestamp: timestamp,
+        eventDate: this._today,
+        pagePath: window.location.pathname || '',
+        pageUrl: window.location.href || '',
+        parentPath: urlParam('parent_path'),
+        parentUrl: urlParam('parent_url'),
+        referrer: document.referrer || '',
+        landingPage: landingPage(),
+        firstPage: landingPage(),
+        utmSource: utmSource,
+        utmMedium: utmMedium,
+        utmCampaign: utmCampaign,
+        utmContent: urlParam('utm_content'),
+        utmTerm: urlParam('utm_term'),
+        fbclid: urlParam('fbclid'),
+        fbc: cookieValue('_fbc'),
+        fbp: cookieValue('_fbp'),
+        isPaid: isPaidAttribution(utmMedium, utmCampaign),
+        screenWidth: String(window.screen && window.screen.width ? window.screen.width : ''),
+        viewportWidth: String(window.innerWidth || document.documentElement.clientWidth || ''),
+        returnStats: Boolean(options.returnStats),
+        payload: payload
+      };
+      var json = JSON.stringify(body);
+      if (!options.returnStats) {
+        try {
+          if (navigator.sendBeacon && window.Blob) {
+            var blob = new Blob([json], { type: 'application/json' });
+            if (navigator.sendBeacon(url, blob)) return Promise.resolve(null);
+          }
+        } catch (e) {}
+      }
+      try {
+        return fetch(url, {
+          method: 'POST',
+          mode: 'cors',
+          keepalive: !options.returnStats,
+          headers: { 'Content-Type': 'application/json' },
+          body: json
+        }).then(function (response) {
+          if (!options.returnStats || !response.ok) return null;
+          return response.json().catch(function () { return null; });
+        }).catch(function () { return null; });
+      } catch (e) {
+        return Promise.resolve(null);
+      }
+    }
+
+    _trackPageView() {
+      if (this._viewTracked) return;
+      this._viewTracked = true;
+      this._track('bw_berlin_rewind_page_view', {
+        dayKey: this._today,
+        setId: buildSetId(this._today),
+        photoCount: String(ROUNDS_PER_GAME)
+      });
+    }
+
     _renderStart(st) {
       this.innerHTML =
         '<div class="bw-rw-card">' +
@@ -453,7 +806,8 @@
             this._stripHtml() +
             '<p class="bw-rw-sub">Today’s five real Berlin archive photos. Guess the year and the district for each, keep your daily streak alive, and come back tomorrow for a new set.</p>' +
             this._streakChips(st, false) +
-            this._scoreTableHtml(st) +
+            this._scoreTableHtml(st, 3) +
+            this._leaderboardHtml() +
             '<div class="bw-rw-btnrow">' +
               '<button type="button" class="bw-rw-btn" data-start="daily">Play today’s 5 photos</button>' +
             '</div>' +
@@ -462,6 +816,7 @@
         '</div>';
       var self = this;
       this.querySelector('[data-start]').addEventListener('click', function () { self._startGame('daily'); });
+      this._bindLeaderboardControls();
     }
 
     _renderGate(st) {
@@ -472,20 +827,31 @@
             '<h2 class="bw-rw-title">You’ve played<br>today’s Rewind.</h2>' +
             this._stripHtml() +
             this._streakChips(st, true) +
-            this._scoreTableHtml(st) +
+            this._leaderboardHtml() +
+            this._scoreTableHtml(st, 3) +
             '<p class="bw-rw-tomorrow"><b>New 5 photos tomorrow.</b> Keep the streak going.</p>' +
             '<div class="bw-rw-btnrow">' +
-              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
+              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener" data-book="gate">See these places on my free walk</a>' +
               '<button type="button" class="bw-rw-btn ghost" data-start="practice">Practice round (no streak)</button>' +
             '</div>' +
           '</div>' +
         '</div>';
       var self = this;
       this.querySelector('[data-start]').addEventListener('click', function () { self._startGame('practice'); });
+      this._bindLeaderboardControls();
+      this._bindBookingLinks();
     }
 
     _startGame(mode) {
       this._mode = mode;
+      if (mode === 'daily') {
+        this._submittedDailyResult = false;
+        this._track('bw_berlin_rewind_start', {
+          dayKey: this._today,
+          setId: buildSetId(this._today),
+          dailyMode: mode
+        });
+      }
       var photos = this._photos || PHOTOS;
       var indices = (mode === 'daily') ? dailyIndices(this._today, photos, this._archive) : shuffle(photos.map(function (_, i) { return i; })).slice(0, ROUNDS_PER_GAME);
       this._deck = indices.map(function (i) { return photos[i]; });
@@ -616,8 +982,41 @@
       var yBand = yearBand(this._year, p.year, p.tol);
       var dRes = districtScore(this._pickedDistrict, p.district);
       var roundPts = yPts + dRes.pts;
+      var yearDiff = Math.abs(this._year - p.year);
       this._total += roundPts;
-      this._recap.push({ title: p.title, pts: roundPts });
+      this._recap.push({
+        title: p.title,
+        pts: roundPts,
+        photoId: p.id,
+        guessYear: this._year,
+        actualYear: p.year,
+        yearDiff: yearDiff,
+        yearPoints: yPts,
+        districtGuess: this._pickedDistrict,
+        actualDistrict: p.district,
+        districtResult: dRes.band,
+        districtPoints: dRes.pts
+      });
+      if (this._mode === 'daily') {
+        this._track('bw_berlin_rewind_photo_guess', {
+          dayKey: this._today,
+          setId: buildSetId(this._today),
+          photoId: p.id,
+          photoTitle: p.title,
+          photoIndex: String(this._round + 1),
+          guessYear: String(this._year),
+          actualYear: String(p.year),
+          yearDiff: String(yearDiff),
+          yearPoints: String(yPts),
+          districtGuess: this._pickedDistrict,
+          actualDistrict: p.district,
+          districtResult: dRes.band,
+          districtPoints: String(dRes.pts),
+          totalScore: String(this._total),
+          maxScore: String(ROUNDS_PER_GAME * 200),
+          dailyMode: this._mode
+        });
+      }
 
       var isLast = this._round >= ROUNDS_PER_GAME - 1;
       var swap = this.querySelector('[data-swap]');
@@ -628,6 +1027,34 @@
       this.querySelector('[data-next]').addEventListener('click', function () {
         if (isLast) self._renderResult();
         else { self._round += 1; self._renderRound(); }
+      });
+    }
+
+    _emojiGrid() {
+      return (this._recap || []).map(function (row) {
+        if (row.pts >= 170) return '🟩';
+        if (row.pts >= 100) return '🟨';
+        if (row.pts >= 50) return '🟧';
+        return '⬛';
+      }).join(' ');
+    }
+
+    _submitDailyResult(tier, st) {
+      if (this._mode !== 'daily' || this._submittedDailyResult) return;
+      this._submittedDailyResult = true;
+      this._track('bw_berlin_rewind_complete', {
+        dayKey: this._today,
+        setId: buildSetId(this._today),
+        totalScore: String(this._total),
+        maxScore: String(ROUNDS_PER_GAME * 200),
+        title: tier.title,
+        streak: String(st.streak || 0),
+        emojiGrid: this._emojiGrid(),
+        dailyMode: 'daily',
+        archiveBatch: this.getAttribute('data-archive-batch') || (this._archive && this._archive.batchId) || ''
+      }, { returnStats: true }).then((data) => {
+        if (data && data.leaderboard) this._applyLeaderboard(data.leaderboard);
+        else this._refreshLeaderboard();
       });
     }
 
@@ -682,9 +1109,9 @@
             '<p class="bw-rw-r-desc">' + esc(tier.desc) + '</p>' +
             recapHtml +
             streakLine +
-            (this._mode === 'daily' ? this._scoreTableHtml(st, 3) : '') +
+            (this._mode === 'daily' ? this._leaderboardHtml() : '') +
             '<div class="bw-rw-btnrow">' +
-              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener">See these places on my free walk</a>' +
+              '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener" data-book="result">See these places on my free walk</a>' +
               secondaryActions +
               (this._mode === 'practice' ? '<button type="button" class="bw-rw-btn link" data-copy2="1">Copy my score</button>' : '') +
             '</div>' +
@@ -697,7 +1124,17 @@
       var self2 = this;
       function doCopy() {
         var note = self2.querySelector('[data-copied]');
-        function ok() { if (note) note.textContent = 'Copied. Paste it anywhere.'; }
+        function ok() {
+          if (note) note.textContent = 'Copied. Paste it anywhere.';
+          self2._track('bw_berlin_rewind_share', {
+            dayKey: self2._today,
+            setId: buildSetId(self2._today),
+            method: 'copy',
+            shareMethod: 'copy',
+            dailyMode: self2._mode || '',
+            success: 'true'
+          });
+        }
         function fail() { if (note) note.textContent = shareText; }
         try {
           if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(shareText).then(ok, fail);
@@ -708,6 +1145,9 @@
       if (copy) copy.addEventListener('click', doCopy);
       var copy2 = this.querySelector('[data-copy2]');
       if (copy2) copy2.addEventListener('click', doCopy);
+      this._bindLeaderboardControls();
+      this._bindBookingLinks();
+      this._submitDailyResult(tier, st);
     }
   }
 
