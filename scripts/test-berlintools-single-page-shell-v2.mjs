@@ -39,6 +39,7 @@ compile('brand JS', brand);
 compile('bridge JS', bridge);
 
 assert.match(shell, /surface|bw-tools-shell-v2/);
+assert.match(shell, /var ENABLE_ALL = true/);
 assert.match(shellCss, /#comp-mozco5et/);
 assert.match(shellCss, /#bw-desktop-cta/);
 assert.match(brand, /surface.*tool-page|tool-page.*surface/s);

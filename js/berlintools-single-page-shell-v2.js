@@ -8,8 +8,8 @@
 (function () {
   'use strict';
 
-  var VERSION = 'berlintools-shell-v2-20260710a';
-  var ENABLE_ALL = false;
+  var VERSION = 'berlintools-shell-v2-20260710b';
+  var ENABLE_ALL = true;
   var PILOT_SLUGS = [
     'berlin-first-day-planner',
     'transport-ticket-calculator',
