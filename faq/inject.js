@@ -188,7 +188,8 @@
   "is-the-ddr-museum-worth-it-tickets-queues-and-what-to-expect-in-2026": "is-the-ddr-museum-worth-it",
   "where-to-watch-sunset-in-berlin": "where-to-watch-sunset-in-berlin",
   "berlin-wall-memorial-bernauer-strasse": "berlin-wall-memorial-bernauer-strasse",
-  "air-conditioning-in-berlin": "air-conditioning-in-berlin"
+  "air-conditioning-in-berlin": "air-conditioning-in-berlin",
+  "mauerpark-berlin-sunday": "mauerpark-berlin-sunday"
 };
 
   var SCHEMAS = {
@@ -8822,6 +8823,76 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The big museums are ideal: Museum Island and the Humboldt Forum have thick walls and calm interiors that happily fill the hottest hours. Large stations and shopping centres like Berlin Hauptbahnhof or the malls at Alexanderplatz are cool and free to duck into. When indoors is not enough, do what locals do and head to the water: Berlin's lakes and outdoor pools are the smartest heat escape of all."
+        }
+      }
+    ]
+  },
+  "mauerpark-berlin-sunday": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Mauerpark and why is it famous?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Mauerpark is a public park in Berlin built on the former Berlin Wall death strip between Prenzlauer Berg and Wedding, opened in 1994. It is famous for its huge Sunday flea market and its open-air Bearpit Karaoke, which draws hundreds of people into a stone amphitheatre on summer afternoons."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What days and hours is the Mauerpark flea market open?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The flea market runs every Sunday from 10:00 to 18:00 at Bernauer Straße 63, with sellers setting up from around 09:00. It does not run on other weekdays. Entry is free."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time is the Bearpit Karaoke at Mauerpark?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On a good-weather Sunday the karaoke usually starts around 15:00 and runs into the early evening. It operates roughly from April to October and is cancelled in rain and through winter, so treat it as very likely in good weather rather than a guaranteed fixed time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Mauerpark free to visit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The park, the flea market and the Bearpit Karaoke are all free to enter. You only need money if you want to buy something at the market or grab food and drinks, and it is worth carrying some cash for the smaller sellers."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is the best time to arrive at Mauerpark?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you want the best market finds, arrive close to 10:00 when sellers are still unpacking. If you are mainly there for the karaoke and the crowd, early to mid afternoon is fine. The busiest, most crowded stretch is roughly 13:00 to 17:00, so arrive near opening or after 17:30 if you prefer it calmer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Mauerpark by public transport?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Take Tram M10 to Friedrich-Ludwig-Jahn-Sportpark or Wolliner Straße, right by the market. U8 Bernauer Straße is about a five-minute walk, and U2 Eberswalder Straße brings you in from the south. A normal Berlin AB ticket covers the trip."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I bring cash to the Mauerpark flea market?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, bring some cash. Many sellers now accept cards or instant bank transfers, but plenty of the small blanket-sellers are cash-only, and having coins and small notes also makes gentle haggling easier."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What else can I do near Mauerpark on a Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The surrounding Prenzlauer Berg streets around Kastanienallee and Eberswalder Straße stay open with cafés and small shops, even though most Berlin shops are legally closed on Sundays. You can also walk on to other Berlin flea markets, or pair the visit with Wall history sites in the city centre."
         }
       }
     ]
