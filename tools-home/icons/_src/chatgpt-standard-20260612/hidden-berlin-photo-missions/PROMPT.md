@@ -1,0 +1,3 @@
+# Hidden Berlin Photo Missions Icon Prompt
+
+Create a square glossy 3D app icon for BerlinWalk's glossy tool icon family. Deep BerlinWalk green rounded tile, centered warm yellow medallion, cream/transparent outer corners, soft studio lighting, high quality product-render look. Main object: a compact glossy 3D camera sitting partly on two stacked photo mission cards, with a tiny green map pin and subtle QR-code-like squares on one card. Palette: deep green, warm yellow, lime accents, cream highlights. No text, no letters, no numbers, no watermark, no flat vector style, no dark vignette corners. Readable at 64px and 160px.

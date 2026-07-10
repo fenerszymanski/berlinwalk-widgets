@@ -1234,6 +1234,21 @@
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_16cbe016979141c8a40efb3c72c375fd~mv2.png"
   },
   {
+    "slug": "hidden-berlin-photo-missions",
+    "title": "Hidden Berlin Photo Missions",
+    "category": "CultureLandmarks",
+    "model": "Built-in Codex image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/hidden-berlin-photo-missions/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/hidden-berlin-photo-missions/codex-imagegen-icon.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hidden-berlin-photo-missions.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/hidden-berlin-photo-missions-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/hidden-berlin-photo-missions-160.png",
+    "generatedAt": "2026-07-10",
+    "source": "codex-built-in-imagegen-20260710",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_d1f0e546c3d44f4e8023a3545f64cc2d~mv2.png"
+  },
+  {
     "slug": "berlin-check-in-gap-planner",
     "title": "Berlin Check-In Gap Planner",
     "category": "Discovery",
