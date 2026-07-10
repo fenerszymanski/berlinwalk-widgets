@@ -1,0 +1,151 @@
+{
+  "checkedAt": "2026-07-10T11:01:03.758Z",
+  "viewport": {
+    "width": 390,
+    "height": 900
+  },
+  "title": "Berlin Ride Reckoner | BerlinWalk",
+  "url": "https://www.berlinwalk.com/tools/berlin-ride-reckoner",
+  "h1": "Berlin Ride Reckoner",
+  "canonical": "https://www.berlinwalk.com/tools/berlin-ride-reckoner",
+  "robots": "max-image-preview:large",
+  "iframeCount": 2,
+  "iframeSrcs": [
+    "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ride-reckoner/",
+    ""
+  ],
+  "contains": {
+    "title": true,
+    "uber": true,
+    "bolt": true,
+    "freeNow": true,
+    "taxiGuide": true,
+    "relatedTools": true
+  },
+  "horizontalOverflow": 0,
+  "documentWidth": 390,
+  "bodyWidth": 390,
+  "links": [
+    {
+      "text": "THE GUIDE",
+      "href": "https://www.berlinwalk.com/the-guide"
+    },
+    {
+      "text": "PLAN YOUR BERLIN VISIT",
+      "href": "https://www.berlinwalk.com/berlin-tools"
+    },
+    {
+      "text": "EMBED BERLIN TOOLS",
+      "href": "https://www.berlinwalk.com/widgets"
+    },
+    {
+      "text": "PLAN YOUR BERLIN VISIT",
+      "href": "https://www.berlinwalk.com/berlin-tools"
+    },
+    {
+      "text": "EMBED BERLIN TOOLS",
+      "href": "https://www.berlinwalk.com/widgets"
+    },
+    {
+      "text": "The Guide",
+      "href": "https://www.berlinwalk.com/the-guide"
+    },
+    {
+      "text": "Berlin Hacks",
+      "href": "https://www.berlinwalk.com/berlin-tools"
+    },
+    {
+      "text": "Embed Berlin Tools",
+      "href": "https://www.berlinwalk.com/widgets"
+    },
+    {
+      "text": "The Guide",
+      "href": "https://www.berlinwalk.com/the-guide"
+    },
+    {
+      "text": "Berlin Hacks",
+      "href": "https://www.berlinwalk.com/berlin-tools"
+    },
+    {
+      "text": "Embed Berlin Tools",
+      "href": "https://www.berlinwalk.com/widgets"
+    },
+    {
+      "text": "The Guide",
+      "href": "https://www.berlinwalk.com/the-guide"
+    },
+    {
+      "text": "Read the full guide ->",
+      "href": "https://www.berlinwalk.com/post/taxi-in-berlin"
+    },
+    {
+      "text": "Open Tool ->",
+      "href": "https://www.berlinwalk.com/tools/berlin-taxi-uber-cost-checker"
+    },
+    {
+      "text": "Open Tool ->",
+      "href": "https://www.berlinwalk.com/tools/berlin-mobility-app-picker"
+    },
+    {
+      "text": "Berlin Tools",
+      "href": "https://www.berlinwalk.com/berlin-tools"
+    },
+    {
+      "text": "The Guide",
+      "href": "https://www.berlinwalk.com/the-guide"
+    },
+    {
+      "text": "Embed Berlin Tools",
+      "href": "https://www.berlinwalk.com/widgets"
+    },
+    {
+      "text": "",
+      "href": "https://www.berlinwalk.com/the-guide"
+    },
+    {
+      "text": "PLAN YOUR BERLIN VISIT",
+      "href": "https://www.berlinwalk.com/berlin-tools"
+    },
+    {
+      "text": "EMBED BERLIN TOOLS",
+      "href": "https://www.berlinwalk.com/widgets"
+    },
+    {
+      "text": "The Guide",
+      "href": "https://www.berlinwalk.com/the-guide"
+    },
+    {
+      "text": "Berlin Hacks",
+      "href": "https://www.berlinwalk.com/berlin-tools"
+    },
+    {
+      "text": "Embed Berlin Tools",
+      "href": "https://www.berlinwalk.com/widgets"
+    },
+    {
+      "text": "Berlin Hacks",
+      "href": "https://www.berlinwalk.com/berlin-tools"
+    },
+    {
+      "text": "Embed Berlin Tools",
+      "href": "https://www.berlinwalk.com/widgets"
+    }
+  ],
+  "frames": [
+    {
+      "url": "https://www.berlinwalk.com/tools/berlin-ride-reckoner",
+      "textHasRideReckoner": true,
+      "textHasUberBoltFreeNow": true
+    },
+    {
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ride-reckoner/",
+      "textHasRideReckoner": true,
+      "textHasUberBoltFreeNow": true
+    },
+    {
+      "url": "about:blank",
+      "textHasRideReckoner": false,
+      "textHasUberBoltFreeNow": false
+    }
+  ]
+}

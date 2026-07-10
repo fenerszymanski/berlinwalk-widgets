@@ -1,0 +1,45 @@
+{
+  "checkedAt": "2026-07-10T11:02:23.812Z",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "title": "Berlin Ride Reckoner | BerlinWalk",
+  "url": "https://www.berlinwalk.com/tools/berlin-ride-reckoner",
+  "h1": "Berlin Ride Reckoner",
+  "canonical": "https://www.berlinwalk.com/tools/berlin-ride-reckoner",
+  "robots": "max-image-preview:large",
+  "iframeCount": 2,
+  "iframeSrcs": [
+    "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ride-reckoner/",
+    ""
+  ],
+  "contains": {
+    "title": true,
+    "uber": true,
+    "bolt": true,
+    "freeNow": true,
+    "taxiGuide": true,
+    "relatedTools": true
+  },
+  "horizontalOverflow": 0,
+  "documentWidth": 1440,
+  "bodyWidth": 1440,
+  "frames": [
+    {
+      "url": "https://www.berlinwalk.com/tools/berlin-ride-reckoner",
+      "textHasRideReckoner": true,
+      "textHasUberBoltFreeNow": true
+    },
+    {
+      "url": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-ride-reckoner/",
+      "textHasRideReckoner": true,
+      "textHasUberBoltFreeNow": true
+    },
+    {
+      "url": "about:blank",
+      "textHasRideReckoner": false,
+      "textHasUberBoltFreeNow": false
+    }
+  ]
+}

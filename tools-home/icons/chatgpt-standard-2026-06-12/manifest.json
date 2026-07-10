@@ -676,6 +676,21 @@
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_a74bc97a23f94947b9740fddfdddeadd~mv2.png"
   },
   {
+    "slug": "berlin-ride-reckoner",
+    "title": "Berlin Ride Reckoner",
+    "category": "Transport",
+    "model": "Built-in Codex image generation",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-ride-reckoner/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-ride-reckoner/codex-imagegen-icon.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-ride-reckoner.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-ride-reckoner-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-ride-reckoner-160.png",
+    "generatedAt": "2026-07-10",
+    "source": "codex-built-in-imagegen-20260710",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_664dbf31d8974c3282c5b7de3d7770a6~mv2.png"
+  },
+  {
     "slug": "berlin-battle",
     "title": "Berlin Battle",
     "category": "Discovery",
