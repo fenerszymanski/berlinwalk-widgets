@@ -62,7 +62,8 @@
     ".bw-wt-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}",
     /* scrolly + sticky stage */
     ".bw-wt-scrolly{position:relative}",
-    ".bw-wt-stage{position:sticky;top:0;height:100vh;height:100svh;z-index:0;overflow:hidden;pointer-events:auto;background:var(--night);transition:background 1.4s ease}",
+    ".bw-wt-stage-frame{height:100vh;height:100svh;position:relative}",
+    ".bw-wt-stage{position:absolute;top:0;left:0;width:100%;height:100vh;height:100svh;z-index:0;overflow:hidden;pointer-events:auto;background:var(--night);transition:background 1.4s ease}",
     ".bw-wt.reunited .bw-wt-stage{background:#0e1a10}",
     ".bw-wt-stage svg{width:100%;height:100%;display:block}",
     ".bw-wt-vignette{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 42%,transparent 45%,rgba(0,0,0,.55) 100%);pointer-events:none}",
@@ -317,7 +318,7 @@
         + '<div class="bw-wt">'
         + '<h1 class="bw-wt-sr-only">The Berlin Wall: a scrollable timeline from 1945 to 1990</h1>'
         + '<div class="bw-wt-scrolly">'
-        + '<div class="bw-wt-stage">'
+        + '<div class="bw-wt-stage-frame"><div class="bw-wt-stage">'
         + SVG
         + '<div class="bw-wt-photo-stack" aria-hidden="true">'
         + '<figure class="bw-wt-photo bw-wt-photo-up" data-photo="up"><img src="' + esc(BASE_URL + 'assets/photos/1961-wall-build.jpg') + '" alt=""><figcaption>Bundesarchiv, Bild 173-1321 / Helmut J. Wolf / CC BY-SA 3.0 DE</figcaption></figure>'
@@ -328,7 +329,7 @@
         + '<div class="bw-wt-hud"><div class="bw-wt-year"><span class="bw-wt-tick">19</span>45</div><div class="bw-wt-chapter">A divided city</div></div>'
         + '<a class="bw-wt-brand" href="' + esc(HOME_URL) + '"><b>Berlin</b>Walk</a>'
         + '<nav class="bw-wt-rail" aria-label="Timeline chapters"></nav>'
-        + '</div>'
+        + '</div></div>'
         + '<div class="bw-wt-steps">' + steps + '</div>'
         + '</div>'
         + '<div class="bw-wt-tip" role="status"></div>'
@@ -485,6 +486,22 @@
       var r = rects[ci];
       var p = clamp((marker - r.top) / (r.height || 1));
       var root = this._root;
+      var rootRect = root.getBoundingClientRect();
+      var stageMode = rootRect.top <= 0 && rootRect.bottom >= vh ? 'fixed' : 'absolute';
+      if (this._stageMode !== stageMode) {
+        this._stageMode = stageMode;
+        if (stageMode === 'fixed') {
+          this._stage.style.position = 'fixed';
+          this._stage.style.top = '0';
+          this._stage.style.left = '0';
+          this._stage.style.width = '100vw';
+        } else {
+          this._stage.style.position = 'absolute';
+          this._stage.style.top = '0';
+          this._stage.style.left = '0';
+          this._stage.style.width = '100%';
+        }
+      }
       root.setAttribute('data-chapter', CHAPTERS[ci].key);
 
       // hud
