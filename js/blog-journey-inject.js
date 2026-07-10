@@ -1689,6 +1689,13 @@
   }
 
   var FDR_PRODUCT_URL = 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan';
+  var WALL_TIMELINE_URL = 'https://www.berlinwalk.com/berlin-wall-timeline';
+  var WALL_TIMELINE_COVER = 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/assets/social/berlin-wall-timeline-1200x630.jpg';
+  var WALL_TIMELINE_SLUGS = {
+    'the-berlin-wall-where-it-stood-and-what-s-left-in-2026': 1,
+    'where-was-the-berlin-wall-interactive-map': 1,
+    'east-side-gallery-berlin-guide': 1
+  };
   var FDR_BRIDGE_SLUGS = {
     'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way': 1,
     'berlin-before-hotel-check-in': 1,
@@ -1958,6 +1965,20 @@
     };
   }
 
+  function wallTimelineJourneyCard(post) {
+    var slug = post && post.slug || currentSlug();
+    if (!WALL_TIMELINE_SLUGS[slug]) return null;
+    return {
+      label: 'Scroll the story',
+      title: 'The Berlin Wall Timeline, 1945 to 1990',
+      copy: 'Watch the city split, the Wall rise, the death strip close in, and the border open again.',
+      url: journeyUtmUrl(WALL_TIMELINE_URL, slug, 'wall_timeline', 'blog_story_bridge'),
+      image: WALL_TIMELINE_COVER,
+      actionText: 'Open timeline',
+      ctaKind: 'wall_timeline'
+    };
+  }
+
   function dedupeJourneyCards(cards, limit) {
     var seen = {};
     var picked = [];
@@ -1976,6 +1997,7 @@
     var toolCard = toolJourneyCard(tool, post);
     var plannerCard = plannerJourneyCard(post);
     var readCard = relatedJourneyCard(posts && posts[0]);
+    var wallTimelineCard = wallTimelineJourneyCard(post);
     var directBookCard = bookingJourneyCard(bookingUrl, 'Walk this context with me in Berlin', 'blog_journey_direct_booking_nextslot');
     var softBookCard = bookingJourneyCard(bookingUrl, 'Book my 2-hour Berlin orientation walk', 'blog_journey_soft_booking_nextslot');
     var strategy = {
@@ -1989,7 +2011,7 @@
     if (intent === 'direct-booking') {
       strategy.title = 'Walk this context in Berlin';
       strategy.intro = 'If this guide made the city clearer, the easiest next step is my tip-based walk: free reservation, no upfront payment, about 2 hours.';
-      strategy.cards = dedupeJourneyCards([directBookCard, toolCard, readCard], 3);
+      strategy.cards = dedupeJourneyCards([directBookCard, wallTimelineCard, toolCard, readCard], 3);
       return strategy;
     }
 
