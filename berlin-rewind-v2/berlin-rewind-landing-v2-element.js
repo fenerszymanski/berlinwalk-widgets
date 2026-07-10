@@ -6,15 +6,15 @@
  *   <bw-berlin-rewind-landing-v2></bw-berlin-rewind-landing-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-landing-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-landing-v2-game-fit-20260710e
+ * Build marker: berlin-rewind-landing-v2-direct-play-20260710f
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-berlin-rewind-landing-v2';
   var GAME_TAG = 'bw-berlin-rewind-leaderboard-v2';
-  var BUILD = 'berlin-rewind-landing-v2-game-fit-20260710e';
-  var GAME_BUILD = 'berlin-rewind-v2-game-fit-20260710e';
+  var BUILD = 'berlin-rewind-landing-v2-direct-play-20260710f';
+  var GAME_BUILD = 'berlin-rewind-v2-direct-play-20260710f';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
@@ -24,15 +24,6 @@
 
   var FINAL_URL = 'https://www.berlinwalk.com/games/berlin-rewind';
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=book_cta';
-  var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games';
-  var LINKS = [
-    { label: 'All games', href: GAMES_URL },
-    { label: 'Day Survival', href: 'https://www.berlinwalk.com/games/berlin-day-survival?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games_day' },
-    { label: 'Berlin Battle', href: 'https://www.berlinwalk.com/games/berlin-battle?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games_battle' },
-    { label: 'Berghain Bouncer', href: 'https://www.berlinwalk.com/games/berghain-bouncer?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games_bouncer' },
-    { label: 'Smile Challenge', href: 'https://www.berlinwalk.com/games/berlin-smile-challenge?utm_source=berlin_rewind&utm_medium=game_landing&utm_campaign=berlinwalk_games&utm_content=more_games_smile' }
-  ];
-
   var SEO = {
     title: 'Berlin Rewind Game | Guess Old Berlin Photos',
     description: 'Play Berlin Rewind by BerlinWalk. Read real old Berlin photos, guess the year and district, and keep a daily streak alive.',
@@ -64,6 +55,10 @@
     '@media(max-width:900px){.bw-rwlp-hero{min-height:min(460px,53svh)}.bw-rwlp h1{font-size:62px}.bw-rwlp-lead{font-size:20px}.bw-rwlp-section h2{font-size:44px}.bw-rwlp-sectionLead{font-size:18px}.bw-rwlp-proof,.bw-rwlp-tour-grid{grid-template-columns:1fr}.bw-rwlp-game-head{display:block}.bw-rwlp-game-head .bw-rwlp-btn{margin-top:18px}.bw-rwlp-bookbox .bw-rwlp-btn{width:100%}}',
     '@media(max-width:620px){.bw-rwlp-wrap{width:min(100%,calc(100vw - 24px))}.bw-rwlp-hero{min-height:48svh;padding:58px 0 34px}.bw-rwlp-hero:before{background-position:center top}.bw-rwlp h1{font-size:48px;margin-bottom:10px}.bw-rwlp-lead{font-size:16.5px;margin-bottom:14px}.bw-rwlp-note{font-size:15px}.bw-rwlp-section h2{font-size:34px}.bw-rwlp-sectionLead{font-size:16px}.bw-rwlp-btn{width:100%;min-height:48px}.bw-rwlp-chips{gap:8px}.bw-rwlp-chip{font-size:11px;padding:7px 9px}.bw-rwlp-section{padding:48px 0}.bw-rwlp-game-band{padding:34px 0 48px}.bw-rwlp-game-head .bw-rwlp-kicker{margin-bottom:13px}.bw-rwlp-game-head h2{font-size:32px;margin-bottom:10px}}',
     '@media(max-width:420px){.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-card{height:790px}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen.is-on{justify-content:flex-start}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-title{font-size:26px;line-height:1.04;margin-bottom:8px}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-sub{font-size:14px;line-height:1.36;margin-bottom:10px}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-strip{margin-bottom:9px}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-strip-thumb{aspect-ratio:4/3}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-chiprow{margin-bottom:8px}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-table{margin-bottom:8px}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-global{margin-bottom:8px}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-lrow:nth-of-type(n+4){display:none}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-home-screen .bw-rw-foot{margin-top:8px}}'
+    ,'.bw-rwlp-sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}'
+    ,'.bw-rwlp-game-band{padding:clamp(16px,3vw,38px) 0 clamp(42px,6vw,76px)}.bw-rwlp-game-mount{margin-top:0;width:100%}.bw-rwlp-game-mount '+GAME_TAG+'{max-width:1080px}.bw-rwlp-game-mount '+GAME_TAG+' .bw-rw-card{height:auto!important;min-height:0!important}'
+    ,'.bw-rwlp-tour{padding:clamp(42px,6vw,72px) 0}.bw-rwlp-tour-inner{max-width:720px;margin:0 auto}.bw-rwlp-tour h2{font-size:clamp(28px,4vw,48px);line-height:1.02;letter-spacing:0}.bw-rwlp-tour p{margin:0 0 22px;max-width:720px}.bw-rwlp-btn{border-radius:8px}'
+    ,'@media(max-width:620px){.bw-rwlp-game-band{padding:12px 0 42px}.bw-rwlp-tour{padding:42px 0}.bw-rwlp-tour h2{font-size:30px}.bw-rwlp-tour p{font-size:16px}.bw-rwlp-btn{width:100%;min-height:48px}}'
   ].join('');
 
   function esc(value) {
@@ -158,80 +153,25 @@
       applySeoSafetyNet();
       this._render();
       ensureGameScript();
-      this._bind();
-    }
-
-    _bind() {
-      this.querySelectorAll('a[href^="#"]').forEach(function (link) {
-        link.addEventListener('click', function (event) {
-          var target = document.querySelector(link.getAttribute('href'));
-          if (!target) return;
-          event.preventDefault();
-          target.scrollIntoView({ block: 'start', behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-        });
-      });
-    }
-
-    _linksHtml() {
-      return LINKS.map(function (item) {
-        return '<a class="bw-rwlp-link" href="' + esc(item.href) + '">' + esc(item.label) + '</a>';
-      }).join('');
     }
 
     _render() {
       this.innerHTML = [
         '<style>' + CSS + '</style>',
         '<main class="bw-rwlp" aria-labelledby="bw-berlin-rewind-title">',
-          '<section class="bw-rwlp-hero">',
-            '<div class="bw-rwlp-wrap bw-rwlp-hero-copy">',
-              '<p class="bw-rwlp-kicker">Free daily Berlin game</p>',
-              '<h1 id="bw-berlin-rewind-title">Berlin Rewind</h1>',
-              '<p class="bw-rwlp-lead">Read a real old Berlin photo, guess the year and district, then see what the city was trying to tell you.</p>',
-              '<div class="bw-rwlp-chips" aria-label="Game facts">',
-                '<span class="bw-rwlp-chip">5 photos daily</span>',
-                '<span class="bw-rwlp-chip">Year + district</span>',
-                '<span class="bw-rwlp-chip">Daily streak</span>',
-              '</div>',
-            '</div>',
-          '</section>',
+          '<h1 class="bw-rwlp-sr-only" id="bw-berlin-rewind-title">Berlin Rewind</h1>',
           '<section class="bw-rwlp-game-band" id="bw-rewind-game">',
             '<div class="bw-rwlp-wrap">',
-              '<div class="bw-rwlp-game-head">',
-                '<div>',
-                  '<p class="bw-rwlp-kicker">Today&#039;s archive set</p>',
-                  '<h2>Play today&#039;s Rewind</h2>',
-                  '<p>Guess the year with the slider, choose the district, then use the reveal to learn what the photo was hiding in plain sight.</p>',
-                '</div>',
-              '</div>',
               '<div class="bw-rwlp-game-mount">',
                 '<' + GAME_TAG + ' data-asset-base="' + esc(BASE_URL) + '"></' + GAME_TAG + '>',
               '</div>',
             '</div>',
           '</section>',
-          '<section class="bw-rwlp-section tight">',
-            '<div class="bw-rwlp-wrap">',
-              '<h2>What you are reading</h2>',
-              '<p class="bw-rwlp-sectionLead">Berlin history is easier to feel when you slow down and read the street first. I use the same habit on my walk: look at the pressure in the scene, then the date starts to make sense.</p>',
-              '<p class="bw-rwlp-note">Old Berlin photos are not only dates and monuments. A crowd, a street corner, a tram line, or a blank space beside the Wall can tell you what kind of Berlin you are looking at.</p>',
-              '<div class="bw-rwlp-proof">',
-                '<article><b>1</b><h3>Read the scene</h3><p>Start with the mood before the landmark. Crowds, uniforms, cars and empty streets often give the decade away.</p></article>',
-                '<article><b>2</b><h3>Name the district</h3><p>Mitte is not always the answer. The game rewards exact district guesses, but nearby districts still count as a good Berlin instinct.</p></article>',
-                '<article><b>3</b><h3>Keep the streak</h3><p>Five new photos arrive each Berlin day. Play once, compare the clues, then come back with a sharper eye tomorrow.</p></article>',
-              '</div>',
-            '</div>',
-          '</section>',
           '<section class="bw-rwlp-tour">',
-            '<div class="bw-rwlp-wrap bw-rwlp-tour-grid">',
-              '<div>',
-                '<h2>The photo is quick. The city is better on foot.</h2>',
-                '<p>On my free Berlin walking tour, the same skill becomes useful in the real city: look at the street, connect the layers, and understand why one square can carry five different Berlins at once.</p>',
-                '<div class="bw-rwlp-links" aria-label="More BerlinWalk games">' + this._linksHtml() + '</div>',
-              '</div>',
-              '<div class="bw-rwlp-bookbox">',
-                '<strong>See the layers for real</strong>',
-                '<span>Daily tip-based Berlin walk, ~2h, starting at the World Clock near Alexanderplatz.</span>',
-                '<a class="bw-rwlp-btn primary" href="' + esc(BOOK_URL) + '">Book your free spot</a>',
-              '</div>',
+            '<div class="bw-rwlp-wrap bw-rwlp-tour-inner">',
+              '<h2>The photo is quick. The city is better on foot.</h2>',
+              '<p>On my free Berlin walking tour, the same skill becomes useful in the real city: look at the street, connect the layers, and understand why one square can carry five different Berlins at once.</p>',
+              '<a class="bw-rwlp-btn primary" href="' + esc(BOOK_URL) + '">Book your free spot</a>',
             '</div>',
           '</section>',
         '</main>'

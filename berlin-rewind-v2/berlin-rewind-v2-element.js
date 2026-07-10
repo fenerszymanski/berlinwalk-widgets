@@ -4,7 +4,9 @@
  * Daily archival photo guessing game ("arkasi yarin" style): every Berlin day
  * serves the same deterministic set of 5 photos, tracks a play streak in
  * localStorage, and gates you to "come back tomorrow" once today is done
- * (with an optional practice mode that does not touch the streak).
+ * (with an optional practice mode that does not touch the streak). Fresh
+ * visitors enter the first daily photo directly; a start event is recorded
+ * only after their first intentional game interaction.
  *
  * Self-contained UI: light DOM, instance state, no globals, no iframe, no
  * postMessage/resize, no MutationObserver, no external CSS/JS. The 30-day
@@ -19,14 +21,14 @@
  *   <bw-berlin-rewind-result-games-v2></bw-berlin-rewind-result-games-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-game-fit-20260710e
+ * Build marker: berlin-rewind-v2-direct-play-20260710f
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
-  var BUILD = 'berlin-rewind-v2-game-fit-20260710e';
+  var BUILD = 'berlin-rewind-v2-direct-play-20260710f';
   var TRACKING_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-event';
   var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/rewind-event';
   var LEADERBOARD_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-leaderboard';
@@ -225,8 +227,8 @@
     '.bw-rw-tomorrow b{color:var(--y);}',
     '.bw-rw-copied{text-align:center;font-size:13px;color:var(--y);font-weight:700;min-height:18px;margin-top:8px;}',
     '.bw-rw{max-width:1080px;padding:0;}',
-    '.bw-rw-card{height:760px;border-radius:18px;padding:22px;color:var(--cream);}',
-    '.bw-rw-screen.is-on{height:100%;display:flex;flex-direction:column;animation:bwrwfade .2s ease;}',
+    '.bw-rw-card{border-radius:18px;padding:22px;color:var(--cream);}',
+    '.bw-rw-screen.is-on{min-height:0;display:flex;flex-direction:column;animation:bwrwfade .2s ease;}',
     '.bw-rw-home-screen,.bw-rw-result-screen{max-width:720px;margin:0 auto;width:100%;justify-content:center;padding:0 clamp(12px,2.2vw,26px);}',
     '.bw-rw-home-screen .bw-rw-strip{max-width:620px;}',
     '.bw-rw-home-screen .bw-rw-table,.bw-rw-home-screen .bw-rw-global{width:100%;}',
@@ -275,7 +277,8 @@
     '.bw-rw-result-screen .bw-rw-copied{margin-top:0;}',
     '@media(min-width:901px){.bw-rw-title{font-size:34px}.bw-rw-play-screen .bw-rw-photo{align-self:start}.bw-rw-home-screen.is-on{justify-content:flex-start;padding-block:0}.bw-rw-home-screen .bw-rw-eyebrow{font-size:11px;margin-bottom:5px}.bw-rw-home-screen .bw-rw-title{font-size:30px;line-height:1.02;letter-spacing:0;margin-bottom:10px}.bw-rw-home-screen .bw-rw-strip{max-width:560px;gap:8px;margin-bottom:12px}.bw-rw-home-screen .bw-rw-strip-thumb{aspect-ratio:4/3}.bw-rw-home-screen .bw-rw-sub{font-size:14.5px;line-height:1.38;margin-bottom:11px}.bw-rw-home-screen .bw-rw-chiprow{margin-bottom:9px}.bw-rw-home-screen .bw-rw-chip{font-size:12.5px;padding:7px 11px}.bw-rw-home-screen .bw-rw-table{margin-bottom:9px;padding:3px 12px 6px}.bw-rw-home-screen .bw-rw-table-h{font-size:10px;padding:8px 0 5px}.bw-rw-home-screen .bw-rw-trow{padding:5px 0}.bw-rw-home-screen .bw-rw-global{margin-bottom:9px;padding:8px 10px}.bw-rw-home-screen .bw-rw-global-head{margin-bottom:6px}.bw-rw-home-screen .bw-rw-me{margin-bottom:6px}.bw-rw-home-screen .bw-rw-me span{padding:6px 7px}.bw-rw-home-screen .bw-rw-lrow{min-height:20px;padding-top:3px}.bw-rw-home-screen .bw-rw-tomorrow{margin:7px 0 0;font-size:13px}.bw-rw-home-screen .bw-rw-btnrow{margin-top:7px;gap:8px}.bw-rw-home-screen .bw-rw-btn{min-height:44px;padding:11px 14px;font-size:15px}.bw-rw-home-screen .bw-rw-foot{margin-top:7px;font-size:10.5px}.bw-rw-result-screen.is-on{max-width:980px;display:grid;grid-template-columns:minmax(300px,390px) minmax(0,1fr);grid-template-areas:"badge recap" "score recap" "sub recap" "title recap" "desc table" "streak table" "buttons table" "copied table";column-gap:24px;row-gap:5px;align-content:center;justify-content:stretch;padding-inline:26px}.bw-rw-result-screen .bw-rw-r-emoji{grid-area:badge}.bw-rw-result-screen .bw-rw-r-score{grid-area:score}.bw-rw-result-screen .bw-rw-r-scoresub{grid-area:sub}.bw-rw-result-screen .bw-rw-r-title{grid-area:title}.bw-rw-result-screen .bw-rw-r-desc{grid-area:desc}.bw-rw-result-screen .bw-rw-recap{grid-area:recap;align-self:end;width:100%;max-width:none}.bw-rw-result-screen .bw-rw-tomorrow{grid-area:streak}.bw-rw-result-screen .bw-rw-table,.bw-rw-result-screen .bw-rw-global{grid-area:table;align-self:start;width:100%}.bw-rw-result-screen .bw-rw-btnrow{grid-area:buttons}.bw-rw-result-screen .bw-rw-copied{grid-area:copied}}',
     '@media(max-width:900px){.bw-rw{max-width:600px}.bw-rw-card{height:780px;padding:16px;border-radius:18px}.bw-rw-title{font-size:28px}.bw-rw-sub{font-size:15px;line-height:1.42}.bw-rw-foot{font-size:11.5px}.bw-rw-board{display:block}.bw-rw-photo{margin-bottom:12px}.bw-rw-swap{padding:12px}.bw-rw-year-val{font-size:31px}.bw-rw-step{width:40px;height:40px}.bw-rw-dbtn{min-height:46px;font-size:12.5px}.bw-rw-rrow{gap:8px}.bw-rw-rbox-actual{font-size:18px}.bw-rw-rbox-actual.district{font-size:14px}.bw-rw-home-screen{padding-inline:16px}.bw-rw-result-screen{justify-content:flex-start;padding-inline:14px}.bw-rw-result-screen .bw-rw-r-emoji{font-size:34px;margin:-2px 0 0}.bw-rw-result-screen .bw-rw-r-score{font-size:31px}.bw-rw-result-screen .bw-rw-r-score span{font-size:15px!important}.bw-rw-result-screen .bw-rw-r-scoresub{font-size:11px;margin:0 0 5px}.bw-rw-result-screen .bw-rw-r-title{font-size:20px;margin-bottom:5px}.bw-rw-result-screen .bw-rw-r-desc{font-size:12.8px;line-height:1.34;margin-bottom:7px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.bw-rw-result-screen .bw-rw-recap{padding:6px 10px;margin-bottom:0}.bw-rw-result-screen .bw-rw-recap-row{font-size:11.2px;padding:4px 0}.bw-rw-result-screen .bw-rw-tomorrow{font-size:12px;margin:6px 0}.bw-rw-result-screen .bw-rw-table{padding:2px 9px 5px;margin-bottom:0}.bw-rw-result-screen .bw-rw-table-h{font-size:9.5px;padding:7px 0 4px}.bw-rw-result-screen .bw-rw-trow{padding:4px 0}.bw-rw-result-screen .bw-rw-tdate{font-size:11px;width:104px}.bw-rw-result-screen .bw-rw-tscore{font-size:11.5px;width:44px}.bw-rw-result-screen .bw-rw-btnrow{gap:7px;margin-top:7px}.bw-rw-result-screen .bw-rw-btn{min-height:42px;padding:10px 12px;font-size:13.5px}.bw-rw-result-screen .bw-rw-copied{font-size:11px;min-height:13px}.bw-rw-r-emoji{font-size:48px}.bw-rw-r-score{font-size:38px}.bw-rw-r-title{font-size:23px}.bw-rw-r-desc{font-size:14px;line-height:1.42}.bw-rw-recap-row{font-size:12.5px;padding:5px 0}.bw-rw-table{padding:4px 10px 6px}.bw-rw-trow{padding:5px 0}}',
-    '@media(max-width:420px){.bw-rw-card{height:790px}.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen{padding-inline:14px}.bw-rw-home-screen.is-on{justify-content:flex-start}.bw-rw-home-screen .bw-rw-title{font-size:26px;line-height:1.04;margin-bottom:8px}.bw-rw-home-screen .bw-rw-sub{font-size:14px;line-height:1.36;margin-bottom:10px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:9px}.bw-rw-home-screen .bw-rw-strip-thumb{aspect-ratio:4/3}.bw-rw-home-screen .bw-rw-chiprow{margin-bottom:8px}.bw-rw-home-screen .bw-rw-table{margin-bottom:8px}.bw-rw-home-screen .bw-rw-global{margin-bottom:8px}.bw-rw-home-screen .bw-rw-lrow:nth-of-type(n+4){display:none}.bw-rw-home-screen .bw-rw-foot{margin-top:8px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}.bw-rw-global{padding:8px 9px}.bw-rw-lists{grid-template-columns:1fr}.bw-rw-lists .bw-rw-lcol:last-child{display:none}.bw-rw-result-screen{padding-inline:13px}.bw-rw-result-screen .bw-rw-global{padding:7px 8px}.bw-rw-result-screen .bw-rw-global-head{margin-bottom:5px}.bw-rw-result-screen .bw-rw-me{margin-bottom:5px}.bw-rw-result-screen .bw-rw-lrow:nth-of-type(n+5){display:none}.bw-rw-result-screen .bw-rw-btnrow{gap:6px;margin-top:6px}.bw-rw-result-screen .bw-rw-btn{min-height:40px;padding:9px 10px;font-size:13px}}'
+    '@media(max-width:420px){.bw-rw-chip{font-size:12px;padding:7px 10px}.bw-rw-chiprow{gap:6px}.bw-rw-home-screen{padding-inline:14px}.bw-rw-home-screen.is-on{justify-content:flex-start}.bw-rw-home-screen .bw-rw-title{font-size:26px;line-height:1.04;margin-bottom:8px}.bw-rw-home-screen .bw-rw-sub{font-size:14px;line-height:1.36;margin-bottom:10px}.bw-rw-home-screen .bw-rw-strip{margin-bottom:9px}.bw-rw-home-screen .bw-rw-strip-thumb{aspect-ratio:4/3}.bw-rw-home-screen .bw-rw-chiprow{margin-bottom:8px}.bw-rw-home-screen .bw-rw-table{margin-bottom:8px}.bw-rw-home-screen .bw-rw-global{margin-bottom:8px}.bw-rw-home-screen .bw-rw-lrow:nth-of-type(n+4){display:none}.bw-rw-home-screen .bw-rw-foot{margin-top:8px}.bw-rw-btnrow{gap:8px;margin-top:12px}.bw-rw-btn{min-height:48px;padding:13px;font-size:15px}.bw-rw-story{font-size:13.5px;line-height:1.43}.bw-rw-credit{font-size:10px}.bw-rw-global{padding:8px 9px}.bw-rw-lists{grid-template-columns:1fr}.bw-rw-lists .bw-rw-lcol:last-child{display:none}.bw-rw-result-screen{padding-inline:13px}.bw-rw-result-screen .bw-rw-global{padding:7px 8px}.bw-rw-result-screen .bw-rw-global-head{margin-bottom:5px}.bw-rw-result-screen .bw-rw-me{margin-bottom:5px}.bw-rw-result-screen .bw-rw-lrow:nth-of-type(n+5){display:none}.bw-rw-result-screen .bw-rw-btnrow{gap:6px;margin-top:6px}.bw-rw-result-screen .bw-rw-btn{min-height:40px;padding:9px 10px;font-size:13px}}'
+    ,'.bw-rw-card{height:auto!important;min-height:0}.bw-rw-screen.is-on{height:auto;min-height:0}'
   ].join('');
 
   // ---------- helpers ----------
@@ -535,10 +538,13 @@
 
     _route() {
       var st = loadState();
-      if (st.lastDate === this._today) this._renderGate(st);
-      else this._renderStart(st);
       this._trackPageView();
-      this._refreshLeaderboard();
+      if (st.lastDate === this._today) {
+        this._renderGate(st);
+        this._refreshLeaderboard();
+      } else {
+        this._startDirectDailyGame();
+      }
     }
 
     _stripHtml() {
@@ -799,28 +805,6 @@
       });
     }
 
-    _renderStart(st) {
-      this.innerHTML =
-        '<div class="bw-rw-card">' +
-          '<div class="bw-rw-screen is-on bw-rw-home-screen">' +
-            '<p class="bw-rw-eyebrow">Berlin Rewind · Daily</p>' +
-            '<h2 class="bw-rw-title">Read the photo.<br>Name the year and place.</h2>' +
-            this._stripHtml() +
-            '<p class="bw-rw-sub">Today’s five real Berlin archive photos. Guess the year and the district for each, keep your daily streak alive, and come back tomorrow for a new set.</p>' +
-            this._streakChips(st, false) +
-            this._scoreTableHtml(st, 3) +
-            this._leaderboardHtml() +
-            '<div class="bw-rw-btnrow">' +
-              '<button type="button" class="bw-rw-btn" data-start="daily">Play today’s 5 photos</button>' +
-            '</div>' +
-            '<p class="bw-rw-foot">Photos: Bundesarchiv via Wikimedia Commons, CC BY-SA 3.0 DE</p>' +
-          '</div>' +
-        '</div>';
-      var self = this;
-      this.querySelector('[data-start]').addEventListener('click', function () { self._startGame('daily'); });
-      this._bindLeaderboardControls();
-    }
-
     _renderGate(st) {
       this.innerHTML =
         '<div class="bw-rw-card">' +
@@ -844,16 +828,10 @@
       this._bindBookingLinks();
     }
 
-    _startGame(mode) {
+    _prepareGame(mode) {
       this._mode = mode;
-      if (mode === 'daily') {
-        this._submittedDailyResult = false;
-        this._track('bw_berlin_rewind_start', {
-          dayKey: this._today,
-          setId: buildSetId(this._today),
-          dailyMode: mode
-        });
-      }
+      this._submittedDailyResult = false;
+      this._dailyStartTracked = false;
       var photos = this._photos || PHOTOS;
       var indices = (mode === 'daily') ? dailyIndices(this._today, photos, this._archive) : shuffle(photos.map(function (_, i) { return i; })).slice(0, ROUNDS_PER_GAME);
       this._deck = indices.map(function (i) { return photos[i]; });
@@ -861,6 +839,26 @@
       this._total = 0;
       this._recap = [];
       this._deck.forEach(function (p) { var im = new Image(); im.src = this._photoUrl(p); }, this);
+    }
+
+    _trackDailyStart() {
+      if (this._mode !== 'daily' || this._dailyStartTracked) return;
+      this._dailyStartTracked = true;
+      this._track('bw_berlin_rewind_start', {
+        dayKey: this._today,
+        setId: buildSetId(this._today),
+        dailyMode: 'daily'
+      });
+    }
+
+    _startDirectDailyGame() {
+      this._prepareGame('daily');
+      this._renderRound();
+    }
+
+    _startGame(mode) {
+      this._prepareGame(mode);
+      if (mode === 'daily') this._trackDailyStart();
       this._renderRound();
     }
 
@@ -959,14 +957,16 @@
       var slider = this.querySelector('[data-yslider]');
       var yval = this.querySelector('[data-yearval]');
       function setYear(y) { self._year = clampYear(y); yval.textContent = self._year; slider.value = self._year; }
-      slider.addEventListener('input', function () { setYear(parseInt(slider.value, 10)); });
+      function markDailyStart() { self._trackDailyStart(); }
+      slider.addEventListener('input', function () { markDailyStart(); setYear(parseInt(slider.value, 10)); });
       this.querySelectorAll('[data-ystep]').forEach(function (b) {
-        b.addEventListener('click', function () { setYear(self._year + parseInt(b.getAttribute('data-ystep'), 10)); });
+        b.addEventListener('click', function () { markDailyStart(); setYear(self._year + parseInt(b.getAttribute('data-ystep'), 10)); });
       });
 
       var revealBtn = this.querySelector('[data-reveal]');
       this.querySelectorAll('[data-dist]').forEach(function (b) {
         b.addEventListener('click', function () {
+          markDailyStart();
           self._pickedDistrict = self._options[parseInt(b.getAttribute('data-dist'), 10)];
           self.querySelectorAll('[data-dist]').forEach(function (x) { x.classList.remove('sel'); });
           b.classList.add('sel');
