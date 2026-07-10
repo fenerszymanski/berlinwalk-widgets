@@ -19,14 +19,14 @@
  *   <bw-berlin-rewind-result-games-v2></bw-berlin-rewind-result-games-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-leaderboard-20260710a
+ * Build marker: berlin-rewind-v2-leaderboard-20260710b
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
-  var BUILD = 'berlin-rewind-v2-leaderboard-20260710a';
+  var BUILD = 'berlin-rewind-v2-leaderboard-20260710b';
   var TRACKING_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-event';
   var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/rewind-event';
   var LEADERBOARD_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-leaderboard';
@@ -36,6 +36,7 @@
   var FIT_TAG = 'bw-berlin-rewind-fit-v2';
   var CLEAN_TAG = 'bw-berlin-rewind-clean-v2';
   var RESULT_GAMES_TAG = 'bw-berlin-rewind-result-games-v2';
+  var LEADERBOARD_TAG = 'bw-berlin-rewind-leaderboard-v2';
   var STORE_KEY = 'bwRewindV2State';
   var PLAYER_KEY = 'bwRewindV2Player';
   var VISITOR_KEY = 'bw_rewind_visitor_id';
@@ -1170,5 +1171,9 @@
   if (!customElements.get(RESULT_GAMES_TAG)) {
     try { customElements.define(RESULT_GAMES_TAG, class BWBerlinRewindResultGamesV2 extends BWBerlinRewindV2 {}); }
     catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-result-games-v2 define failed', e); } }
+  }
+  if (!customElements.get(LEADERBOARD_TAG)) {
+    try { customElements.define(LEADERBOARD_TAG, class BWBerlinRewindLeaderboardV2 extends BWBerlinRewindV2 {}); }
+    catch (e) { if (window && window.console) { console.warn('bw-berlin-rewind-leaderboard-v2 define failed', e); } }
   }
 })();
