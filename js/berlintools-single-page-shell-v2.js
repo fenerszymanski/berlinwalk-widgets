@@ -22,7 +22,50 @@
     record: null,
     decorated: false,
     richContentDone: false,
-    attempt: 0
+    attempt: 0,
+    booted: false
+  };
+
+  var COPY_MAP = {
+    'berlin-first-day-planner': {
+      title: 'Plan your first 24 hours in Berlin',
+      lead: 'Turn arrival time, luggage, energy and weather into a first-day route you can actually follow.',
+      trust: 'Free to use · No sign-up · Live weather · Built for Berlin',
+      note: 'Start with the practical decision in front of you, then let the city open up around it.',
+      summaryKicker: 'First-day planner',
+      summaryTitle: 'A calmer arrival',
+      steps: [
+        'Choose when and where you start',
+        'Match the day to your energy and bags',
+        'Get weather, transport and a route'
+      ]
+    },
+    'transport-ticket-calculator': {
+      title: 'Choose the right Berlin transport ticket',
+      lead: 'Compare AB and ABC options, short trips, day tickets and tourist passes before you board.',
+      trust: 'Free to use · No sign-up · AB / ABC ticket logic',
+      note: 'Start with zones and duration, then choose the ticket that fits your day.',
+      summaryKicker: 'Transport calculator',
+      summaryTitle: 'No ticket guesswork',
+      steps: [
+        'Set your route and travel zone',
+        'Compare the ticket types that fit',
+        'Leave with one clear recommendation'
+      ]
+    },
+    'berlin-luggage-storage': {
+      title: 'Find a practical place for your luggage in Berlin',
+      lead: 'Compare central lockers, staffed storage and airport options so your route stays light.',
+      trust: 'Free to use · No sign-up · Central Berlin map',
+      note: 'Choose the station or pickup point that keeps the rest of your route simple.',
+      summaryKicker: 'Luggage map',
+      summaryTitle: 'Keep Berlin walkable',
+      steps: [
+        'Pick the area you are heading to',
+        'Compare lockers and staffed options',
+        'Drop the bags and keep moving'
+      ]
+    }
   };
 
   function normalizedPath() {
@@ -104,6 +147,18 @@
     return cleanText(record && (record.type || record.hubCategory || record.category)) || 'Berlin tool';
   }
 
+  function copyForRecord(record) {
+    return COPY_MAP[state.slug] || {
+      title: cleanText(record && record.title) || 'A clearer way to plan Berlin',
+      lead: cleanText(record && record.lead) || 'Use a practical Berlin tool built for the decision in front of you.',
+      trust: 'Free to use · No sign-up · Built for Berlin',
+      note: 'Make one good decision first, then keep the rest of the day simple.',
+      summaryKicker: typeLabel(record),
+      summaryTitle: 'A clearer next step',
+      steps: ['Choose what matters today', 'Use Berlin rules, not guesswork', 'Leave with a plan you can follow']
+    };
+  }
+
   function catalogRecord(data) {
     var tools = data && Array.isArray(data.tools) ? data.tools : [];
     for (var i = 0; i < tools.length; i += 1) {
@@ -176,6 +231,59 @@
       trust.setAttribute('data-bw-shell-v2-trust', '1');
       appendAfter(lead, trust);
     }
+    if (trust) trust.textContent = copyForRecord(state.record).trust;
+  }
+
+  function setRichText(container, selector, value) {
+    if (!container || !value) return;
+    var target = container.querySelector(selector);
+    if (target) target.textContent = value;
+    else container.textContent = value;
+  }
+
+  function injectHeroCopy(heading, lead) {
+    var copy = copyForRecord(state.record);
+    setRichText(heading, 'h1,h2,h3,[data-hook="text"]', copy.title);
+    setRichText(lead, 'p,[data-hook="text"]', copy.lead);
+  }
+
+  function injectEditorialNote(hero, lead) {
+    if (!hero || !lead) return;
+    var note = hero.querySelector('[data-bw-shell-v2-editorial-note]');
+    if (!note) {
+      note = makeNode('p', 'bw-tools-shell-v2-editorial-note');
+      note.setAttribute('data-bw-shell-v2-editorial-note', '1');
+      var mark = makeNode('span', 'bw-tools-shell-v2-editorial-mark', '✓');
+      var copy = makeNode('span', 'bw-tools-shell-v2-editorial-copy');
+      note.appendChild(mark);
+      note.appendChild(copy);
+      appendAfter(lead, note);
+    }
+    var copyNode = note.querySelector('.bw-tools-shell-v2-editorial-copy');
+    if (copyNode) copyNode.textContent = copyForRecord(state.record).note;
+  }
+
+  function injectSummaryCard(hero, heading) {
+    if (!hero || !heading || !heading.parentNode) return;
+    var card = hero.querySelector('[data-bw-shell-v2-summary]');
+    if (!card) {
+      card = makeNode('aside', 'bw-tools-shell-v2-summary');
+      card.setAttribute('data-bw-shell-v2-summary', '1');
+      heading.parentNode.appendChild(card);
+    }
+    var copy = copyForRecord(state.record);
+    var image = catalogImage(state.record);
+    card.innerHTML = [
+      '<div class="bw-tools-shell-v2-summary-head">',
+      image ? '<img class="bw-tools-shell-v2-summary-icon" src="' + escapeHtml(image) + '" alt="" aria-hidden="true">' : '',
+      '<div><span class="bw-tools-shell-v2-summary-kicker">' + escapeHtml(copy.summaryKicker) + '</span><strong>' + escapeHtml(copy.summaryTitle) + '</strong></div>',
+      '</div>',
+      '<ol class="bw-tools-shell-v2-summary-steps">',
+      copy.steps.map(function (step, index) {
+        return '<li><span class="bw-tools-shell-v2-summary-number">' + (index + 1) + '</span><span>' + escapeHtml(step) + '</span></li>';
+      }).join(''),
+      '</ol>'
+    ].join('');
   }
 
   function injectLocalNote(introSection, intro, secondary) {
@@ -239,7 +347,10 @@
     if (related) related.classList.add('bw-tools-shell-v2-related');
     if (secondary) secondary.classList.add('bw-tools-shell-v2-secondary-copy');
 
+    injectHeroCopy(heading, lead);
     injectHeroMeta(hero, heading, lead);
+    injectEditorialNote(hero, lead);
+    injectSummaryCard(hero, heading);
     injectLocalNote(introSection, intro, secondary);
     return Boolean(body);
   }
@@ -314,20 +425,29 @@
 
   function applyCatalog(record) {
     state.record = record || state.record;
-    var hero = byId('comp-mozc935g3');
-    var heading = byId('comp-mozch2i3');
-    var lead = byId('comp-mozck6is');
-    if (hero && heading) injectHeroMeta(hero, heading, lead);
+    decorateOuterShell();
   }
 
   function start() {
+    if (state.booted) return;
+    state.booted = true;
     decorate();
-    fetchCatalog().then(applyCatalog);
+    fetchCatalog().then(function (record) {
+      applyCatalog(record);
+      decorate();
+    });
+    window.setTimeout(decorate, 500);
+    window.setTimeout(decorate, 1500);
+    window.setTimeout(decorate, 3000);
+    if (typeof MutationObserver === 'function' && document.body) {
+      var observer = new MutationObserver(function () {
+        if (!state.decorated || !document.querySelector('[data-bw-shell-v2-summary]')) decorate();
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start, { once: true });
-  } else {
-    start();
-  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
+  window.setTimeout(start, 0);
 })();

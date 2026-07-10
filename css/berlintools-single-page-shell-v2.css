@@ -23,6 +23,14 @@ html.bw-tools-shell-v2 #comp-mozc935g3 {
   padding: 38px 24px 26px !important;
 }
 
+html.bw-tools-shell-v2 #comp-mozc935g3 .comp-mozc935g3-container {
+  align-items: start !important;
+  column-gap: 48px !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.16fr) minmax(300px, .84fr) !important;
+  row-gap: 0 !important;
+}
+
 html.bw-tools-shell-v2 #comp-mozc935g3 > [data-testid="responsive-container-content"],
 html.bw-tools-shell-v2 #comp-mozc935g3 > .preview-hero-layout,
 html.bw-tools-shell-v2 #comp-mozmt2at > [data-testid="responsive-container-content"],
@@ -50,7 +58,8 @@ html.bw-tools-shell-v2 #comp-mozc935g3 .bw-tools-shell-v2-hero-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 0 auto 16px;
+  grid-column: 1;
+  margin: 0 0 16px;
   max-width: 1120px;
 }
 
@@ -91,6 +100,7 @@ html.bw-tools-shell-v2 .bw-tools-shell-v2-icon {
 html.bw-tools-shell-v2 #comp-mozch2i3 {
   color: #212121 !important;
   font: 900 clamp(32px, 4vw, 48px)/1.04 Montserrat, Arial, sans-serif !important;
+  grid-column: 1;
   letter-spacing: -.035em !important;
   margin: 0 auto 12px !important;
   max-width: 1120px !important;
@@ -108,16 +118,131 @@ html.bw-tools-shell-v2 #comp-mozn27df {
 html.bw-tools-shell-v2 #comp-mozck6is {
   color: #4E5A4E !important;
   font: 500 clamp(16px, 1.45vw, 20px)/1.55 Merriweather, Georgia, serif !important;
+  grid-column: 1;
   margin: 0 auto !important;
   max-width: 820px !important;
 }
 
 html.bw-tools-shell-v2 .bw-tools-shell-v2-trust {
   color: #1B5E20 !important;
+  grid-column: 1;
   font: 800 11px/1.4 Montserrat, Arial, sans-serif !important;
   letter-spacing: .4px;
   margin: 12px auto 0 !important;
   max-width: 1120px !important;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-editorial-note {
+  align-items: center;
+  color: #4E5A4E !important;
+  display: flex;
+  font: 500 14px/1.5 Merriweather, Georgia, serif !important;
+  gap: 12px;
+  grid-column: 1;
+  margin: 22px auto 0 !important;
+  max-width: 680px;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-editorial-mark {
+  align-items: center;
+  background: #FFE600;
+  border-radius: 50%;
+  color: #1B5E20;
+  display: inline-flex;
+  flex: 0 0 32px;
+  font: 900 17px/1 Montserrat, Arial, sans-serif;
+  height: 32px;
+  justify-content: center;
+  width: 32px;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary {
+  align-self: start;
+  background: #FFFFFF;
+  border: 1px solid #DCE8C8;
+  border-radius: 20px;
+  box-shadow: 0 16px 36px rgba(27, 94, 32, .1);
+  box-sizing: border-box;
+  grid-column: 2;
+  grid-row: 1 / span 5;
+  margin: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 30px 26px 26px;
+  position: relative;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary::before {
+  background: #FFE600;
+  border-radius: 99px;
+  content: '';
+  height: 7px;
+  left: 26px;
+  position: absolute;
+  right: 26px;
+  top: 0;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary-head {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+  padding: 4px 0 22px;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary-icon {
+  border: 1px solid #DCE8C8;
+  border-radius: 14px;
+  box-shadow: 0 5px 14px rgba(27, 94, 32, .12);
+  display: block;
+  height: 72px;
+  object-fit: cover;
+  width: 72px;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary-kicker {
+  color: #1B5E20;
+  display: block;
+  font: 900 11px/1.2 Montserrat, Arial, sans-serif;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary-head strong {
+  color: #212121;
+  display: block;
+  font: 900 23px/1.12 Montserrat, Arial, sans-serif;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary-steps {
+  border-top: 1px solid #DCE8C8;
+  list-style: none;
+  margin: 0;
+  padding: 14px 0 0;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary-steps li {
+  align-items: center;
+  color: #4E5A4E;
+  display: flex;
+  font: 800 13px/1.35 Montserrat, Arial, sans-serif;
+  gap: 12px;
+  margin: 0;
+  padding: 8px 0;
+}
+
+html.bw-tools-shell-v2 .bw-tools-shell-v2-summary-number {
+  align-items: center;
+  background: #F2F8E8;
+  border-radius: 50%;
+  color: #1B5E20;
+  display: inline-flex;
+  flex: 0 0 25px;
+  font: 900 12px/1 Montserrat, Arial, sans-serif;
+  height: 25px;
+  justify-content: center;
+  width: 25px;
 }
 
 html.bw-tools-shell-v2 .bw-tools-shell-v2-secondary-copy,
@@ -132,6 +257,7 @@ html.bw-tools-shell-v2 #comp-mozco5et {
   box-shadow: 0 10px 30px rgba(27, 94, 32, .08) !important;
   box-sizing: border-box !important;
   display: block !important;
+  grid-column: 1 / -1;
   margin: 0 auto !important;
   max-width: 1120px !important;
   min-height: 0 !important;
@@ -263,6 +389,12 @@ html.bw-tools-shell-v2 summary:focus-visible {
     padding: 26px 16px 20px !important;
   }
 
+  html.bw-tools-shell-v2 #comp-mozc935g3 .comp-mozc935g3-container {
+    column-gap: 0 !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 0 !important;
+  }
+
   html.bw-tools-shell-v2 #comp-mozch2i3 {
     font-size: clamp(30px, 8.5vw, 36px) !important;
   }
@@ -270,6 +402,17 @@ html.bw-tools-shell-v2 summary:focus-visible {
   html.bw-tools-shell-v2 #comp-mozck6is {
     font-size: 15px !important;
     line-height: 1.55 !important;
+  }
+
+  html.bw-tools-shell-v2 .bw-tools-shell-v2-summary {
+    grid-column: 1;
+    grid-row: auto;
+    margin: 24px 0 0;
+    padding: 26px 20px 22px;
+  }
+
+  html.bw-tools-shell-v2 .bw-tools-shell-v2-editorial-note {
+    margin-top: 18px !important;
   }
 
   html.bw-tools-shell-v2 .bw-tools-shell-v2-icon {
@@ -313,5 +456,104 @@ html.bw-tools-shell-v2 summary:focus-visible {
   html.bw-tools-shell-v2 .bw-tools-shell-v2-accordion summary {
     font-size: 15px;
     padding: 14px 40px 14px 15px;
+  }
+}
+
+/* The legacy BerlinTools polish embeds use very specific selectors. Keep the
+   approved shell deterministic when both surfaces are enabled on the page. */
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .comp-mozc935g3-container {
+  align-items: start !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 1.16fr) minmax(300px, .84fr) !important;
+  gap: 0 48px !important;
+  padding: 42px 24px 32px !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
+  align-self: start !important;
+  justify-self: stretch !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  position: relative !important;
+  transform: none !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3 {
+  grid-column: 1 !important;
+  grid-row: 2 !important;
+  text-align: left !important;
+  width: auto !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is {
+  grid-column: 1 !important;
+  grid-row: 3 !important;
+  text-align: left !important;
+  width: auto !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozcllqt {
+  display: none !important;
+  grid-column: 1 !important;
+  grid-row: 6 !important;
+  margin: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
+  grid-column: 1 / -1 !important;
+  grid-row: 7 !important;
+  margin: 30px 0 0 !important;
+  width: 100% !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-hero-meta,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-trust,
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-editorial-note {
+  grid-column: 1 !important;
+  justify-self: stretch !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-hero-meta {
+  grid-row: 1 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-trust {
+  grid-row: 4 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-editorial-note {
+  grid-row: 5 !important;
+}
+
+html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary {
+  grid-column: 2 !important;
+  grid-row: 1 / span 5 !important;
+  margin: 0 !important;
+}
+
+@media (max-width: 899px) {
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .comp-mozc935g3-container {
+    grid-template-columns: minmax(0, 1fr) !important;
+    padding: 26px 16px 20px !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozch2i3,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozck6is,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-hero-meta,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-trust,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-editorial-note,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 .bw-tools-shell-v2-summary,
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
+    grid-column: 1 !important;
+    grid-row: auto !important;
+  }
+
+  html.bw-tools-detail.bw-tools-shell-v2 body #comp-mozc935g3 #comp-mozco5et {
+    margin-top: 24px !important;
   }
 }
