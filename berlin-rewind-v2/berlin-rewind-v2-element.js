@@ -28,7 +28,7 @@
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
-  var BUILD = 'berlin-rewind-v2-direct-play-20260710f';
+  var BUILD = 'berlin-rewind-v2-practice-return-20260710g';
   var TRACKING_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-event';
   var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/rewind-event';
   var LEADERBOARD_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-leaderboard';
@@ -1100,6 +1100,9 @@
           secondBtn +
           '<a class="bw-rw-btn ghost" href="' + GAMES_URL + '">Play other games</a>' +
         '</div>';
+      var practiceReturn = this._mode === 'practice'
+        ? '<button type="button" class="bw-rw-btn ghost" data-return-gate="1">Back to today’s ranking</button>'
+        : '';
 
       this.innerHTML =
         '<div class="bw-rw-card">' +
@@ -1114,6 +1117,7 @@
             (this._mode === 'daily' ? this._leaderboardHtml() : '') +
             '<div class="bw-rw-btnrow">' +
               '<a class="bw-rw-btn" href="' + BOOK_URL + '" target="_blank" rel="noopener" data-book="result">See these places on my free walk</a>' +
+              practiceReturn +
               secondaryActions +
               (this._mode === 'practice' ? '<button type="button" class="bw-rw-btn link" data-copy2="1">Copy my score</button>' : '') +
             '</div>' +
@@ -1123,6 +1127,12 @@
 
       var again = this.querySelector('[data-again]');
       if (again) again.addEventListener('click', function () { self._startGame('practice'); });
+      var returnGate = this.querySelector('[data-return-gate]');
+      if (returnGate) returnGate.addEventListener('click', function () {
+        self._mode = '';
+        self._route();
+        self.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      });
       var self2 = this;
       function doCopy() {
         var note = self2.querySelector('[data-copied]');
