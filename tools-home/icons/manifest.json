@@ -1384,5 +1384,19 @@
     "generatedAt": "2026-07-09",
     "source": "codex-built-in-imagegen-20260709",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_425a968aefdc4f0592daefa90552b180~mv2.png"
+  },
+  {
+    "slug": "berlin-room-heat-check",
+    "title": "Berlin Room Heat Check",
+    "category": "WeatherOutdoor",
+    "model": "Nano Banana Pro (gemini-3-pro-image-preview)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/gemini-20260710/berlin-room-heat-check/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/gemini-20260710/berlin-room-heat-check/source-1.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-room-heat-check.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-room-heat-check-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-room-heat-check-160.png",
+    "source": "gemini-20260710",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_d261b3a17f25436a89bbb1a2cc3e9f1e~mv2.png"
   }
 ]

@@ -187,7 +187,8 @@
   "is-the-ddr-museum-worth-it": "is-the-ddr-museum-worth-it",
   "is-the-ddr-museum-worth-it-tickets-queues-and-what-to-expect-in-2026": "is-the-ddr-museum-worth-it",
   "where-to-watch-sunset-in-berlin": "where-to-watch-sunset-in-berlin",
-  "berlin-wall-memorial-bernauer-strasse": "berlin-wall-memorial-bernauer-strasse"
+  "berlin-wall-memorial-bernauer-strasse": "berlin-wall-memorial-bernauer-strasse",
+  "air-conditioning-in-berlin": "air-conditioning-in-berlin"
 };
 
   var SCHEMAS = {
@@ -8767,6 +8768,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. It is the clearest and most honest place to understand the Berlin Wall, it is free, and the open-air part is open every day. If you only visit one Wall site in Berlin, this is the one I recommend."
+        }
+      }
+    ]
+  },
+  "air-conditioning-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do Berlin hotels have air conditioning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Some do, but you cannot assume it. Big international chains, newer builds and business hotels such as Motel One, Adina and the larger Steigenberger usually have proper AC. Small family-run hotels, guesthouses, hostels and most apartment rentals in Berlin's classic old buildings often have none. If a cool room matters, use the air-conditioning filter when booking, read recent summer reviews, and email the hotel to confirm your specific room is air conditioned."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why do so many Berlin apartments and hotels not have AC?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fewer than one in twelve German homes has any active air conditioning. Berlin's tall pre-1914 Altbau buildings were designed for cold winters, with thick walls and high ceilings that stay comfortable most of the year, so cooling was never standard. Retrofitting AC into protected old buildings is expensive and often not allowed, electricity is costly, and there is a strong environmental reluctance to install energy-hungry cooling."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I keep my Berlin room cool without air conditioning?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Block the sun early by closing shutters, blinds or curtains on the sunny side before the room heats up. Keep windows shut while the outside air is hotter than the room, roughly late morning to early evening, then open them wide once the evening cools to around 13-18°C. Get a fan on the first day, point it across an open window at night, and choose a lower-floor or courtyard-facing room over a top-floor attic if you can."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the Berlin U-Bahn air conditioned?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. BVG states on its own information pages that the underground trains are not air conditioned and rely on ventilation instead. Buses and most trams do have cooling, but only bring the temperature down by a few degrees. On a very hot afternoon, an underground platform is one of the hottest places in the city, so it is not a good place to try to cool down."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need air conditioning for a summer trip to Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not necessarily. Berlin heat tends to come in short, sharp episodes rather than a steady tropical season, and shade, good window timing and a fan handle most of it. That said, if you sleep badly in heat, book a room with confirmed AC or at least a lower-floor, courtyard-facing room in a solid old building, and check the national heat warnings at warnung.bund.de a few days before you travel."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I cool down in Berlin during a heatwave?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The big museums are ideal: Museum Island and the Humboldt Forum have thick walls and calm interiors that happily fill the hottest hours. Large stations and shopping centres like Berlin Hauptbahnhof or the malls at Alexanderplatz are cool and free to duck into. When indoors is not enough, do what locals do and head to the water: Berlin's lakes and outdoor pools are the smartest heat escape of all."
         }
       }
     ]

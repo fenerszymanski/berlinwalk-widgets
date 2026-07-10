@@ -3132,6 +3132,41 @@
       ],
       "relatedBlog": "/post/is-the-ddr-museum-worth-it",
       "iconStatus": "live-wix-media"
+    },
+    {
+      "slug": "berlin-room-heat-check",
+      "title": "Berlin Room Heat Check",
+      "lead": "Most Berlin rooms have no air conditioning. Tell this tool your room type, floor, which way the windows face and the forecast, and it shows your room's summer heat risk plus the two or three moves that matter most for it.",
+      "category": "Weather",
+      "image": "https://static.wixstatic.com/media/5a08a3_d261b3a17f25436a89bbb1a2cc3e9f1e~mv2.png",
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-room-heat-check/",
+      "embedHeight": 1180,
+      "hubCategory": "WeatherOutdoor",
+      "type": "Planner",
+      "tags": [
+        "air conditioning",
+        "no AC",
+        "heatwave",
+        "summer",
+        "hotel room",
+        "staying cool",
+        "Altbau",
+        "shutters",
+        "fan",
+        "ventilation"
+      ],
+      "aliases": [
+        "air conditioning berlin",
+        "berlin hotel ac",
+        "no ac berlin",
+        "stay cool berlin",
+        "berlin heatwave room",
+        "berlin apartment hot",
+        "do berlin hotels have air conditioning"
+      ],
+      "relatedBlog": "/post/air-conditioning-in-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "b263fa0f-579f-48e1-af5c-dfd58bc5096c"
     }
   ],
   "hubCategories": [
