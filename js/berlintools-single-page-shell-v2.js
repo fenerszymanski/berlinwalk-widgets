@@ -245,6 +245,16 @@
     var copy = copyForRecord(state.record);
     setRichText(heading, 'h1,h2,h3,[data-hook="text"]', copy.title);
     setRichText(lead, 'p,[data-hook="text"]', copy.lead);
+    [heading, lead].forEach(function (node) {
+      if (!node || !node.style) return;
+      node.style.setProperty('display', 'block', 'important');
+      node.style.setProperty('align-items', 'flex-start', 'important');
+      node.style.setProperty('justify-content', 'flex-start', 'important');
+      node.style.setProperty('text-align', 'left', 'important');
+      node.querySelectorAll('h1,h2,h3,p,span').forEach(function (child) {
+        child.style.setProperty('text-align', 'left', 'important');
+      });
+    });
   }
 
   function injectEditorialNote(hero, lead) {
