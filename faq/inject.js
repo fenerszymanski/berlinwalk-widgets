@@ -193,7 +193,8 @@
   "uber-in-berlin": "uber-in-berlin",
   "kaiser-wilhelm-memorial-church-berlin": "kaiser-wilhelm-memorial-church-berlin",
   "jewish-museum-berlin-guide": "jewish-museum-berlin-guide",
-  "jewish-museum-berlin-free-entry-how-long-and-what-to-see-2026": "jewish-museum-berlin-guide"
+  "jewish-museum-berlin-free-entry-how-long-and-what-to-see-2026": "jewish-museum-berlin-guide",
+  "u-bahn-vs-s-bahn-berlin": "u-bahn-vs-s-bahn-berlin"
 };
 
   var SCHEMAS = {
@@ -9075,6 +9076,60 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Most public exhibition and event rooms are accessible by ramps or lifts, and wheelchairs can be borrowed at the cloakroom. The important exception is the Garden of Exile, where the gaps between the concrete stelae are too narrow for wheelchairs and strollers."
+        }
+      }
+    ]
+  },
+  "u-bahn-vs-s-bahn-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between the U-Bahn and the S-Bahn in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The U-Bahn is Berlin's underground metro, run by the city transit company BVG, with nine lines (U1 to U9) that burrow densely through the inner city. The S-Bahn is a mostly-overground city and suburban rail network run by Deutsche Bahn, with around 16 lines that run longer distances, cross into Brandenburg, and include the circular Ringbahn. On maps and signs the U-Bahn is a blue U and the S-Bahn is a green S. The trains look different too: U-Bahn cars are yellow, S-Bahn cars are red and cream."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a different ticket for the U-Bahn and the S-Bahn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. This is the most useful thing to know. One Berlin AB ticket covers the U-Bahn, the S-Bahn, trams and buses inside the city. You can change from a U-Bahn to an S-Bahn to a tram on a single ticket without buying anything extra. Only your fare zone matters (AB for the city, ABC if you go out to BER Airport or Potsdam), not which type of train you ride."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which is faster, the U-Bahn or the S-Bahn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It depends on your trip. For short hops between central sights, the U-Bahn is usually faster because it stops more often and its lines cover the middle of the city densely. For crossing the whole city, reaching the airport, or looping around on the Ringbahn, the S-Bahn is faster because it makes fewer, wider-spaced stops and runs above ground on longer routes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I tell the U-Bahn and S-Bahn apart at a station?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Look for the letter and colour. A blue square with a white U points to the underground U-Bahn; a green circle with a white S points to the S-Bahn. Big interchange stations like Alexanderplatz and Friedrichstrasse have both, with clear signs sending you to the right platform. If you are still unsure, the S-Bahn platforms are usually higher up or at street level, while U-Bahn platforms are deeper underground."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do the U-Bahn and S-Bahn run at night?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On Friday and Saturday nights both the U-Bahn and S-Bahn run all night, which makes weekend nights easy. On weekday nights they run roughly from 4:00 in the morning until about 1:00, and N-prefixed night buses cover the gap in between. So midweek, check the last train; at the weekend, just ride."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the Ringbahn?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The Ringbahn is the S-Bahn loop that circles Berlin's inner city, tracing the edge of fare zone A. Line S41 runs clockwise and S42 runs anticlockwise, and neither has an end stop, so you simply ride to the station you need. It is a handy way to reach neighbourhoods around the centre without going through the middle, and it is covered by a standard AB ticket."
         }
       }
     ]
