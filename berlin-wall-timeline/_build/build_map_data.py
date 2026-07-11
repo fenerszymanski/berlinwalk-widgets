@@ -26,7 +26,14 @@ SECTORS = {
     "french": {
         "label": "French sector",
         "fill": "#7CB342",
-        "names": {"Reinickendorf", "Wedding", "Gesundbrunnen"},
+        # The French sector covered the Wedding and Reinickendorf boroughs.
+        # The source is current Ortsteile, so dissolve every present-day
+        # neighbourhood that sits inside those two historical boroughs.
+        "names": {
+            "Borsigwalde", "Frohnau", "Gesundbrunnen", "Heiligensee",
+            "Hermsdorf", "Konradshöhe", "Lübars", "Märkisches Viertel",
+            "Reinickendorf", "Tegel", "Waidmannslust", "Wedding", "Wittenau",
+        },
     },
     "british": {
         "label": "British sector",

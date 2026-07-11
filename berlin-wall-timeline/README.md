@@ -50,8 +50,10 @@ name; a right-side rail lets the reader jump between chapters.
   live tile provider. If it cannot load, the original schematic scene remains
   available as a fallback.
 - `assets/map/SOURCES.md` records the Berlin Open Data, Berlin Ortsteile and
-  OpenStreetMap inputs. `_build/build_map_data.py` regenerates the package from
-  refreshed source snapshots.
+  OpenStreetMap inputs. Ortsteile are used to dissolve the four story sectors;
+  individual district outlines and labels are deliberately not rendered.
+  `_build/build_map_data.py` regenerates the package from refreshed source
+  snapshots.
 - The archival photo layer and social cover remain in `assets/` as independent
   enhancements; photos are not a map dependency.
 
@@ -74,7 +76,7 @@ same as `paid-landing`):
 
 ```html
 <bw-wall-timeline></bw-wall-timeline>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711c" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711d" defer></script>
 ```
 
 If using Wix Studio's Custom Element panel:

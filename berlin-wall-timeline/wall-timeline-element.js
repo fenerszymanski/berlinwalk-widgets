@@ -14,13 +14,13 @@
  *
  * Designed for a Wix page with the global header and footer hidden.
  *
- * Build marker: wall-timeline-v1-20260711c
+ * Build marker: wall-timeline-v1-20260711d
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-wall-timeline';
-  var BUILD = 'wall-timeline-v1-20260711c';
+  var BUILD = 'wall-timeline-v1-20260711d';
 
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
@@ -75,13 +75,14 @@
     ".bw-wt-photo-escapes{right:clamp(28px,7vw,90px);top:17%}",
     ".bw-wt-photo-fall{right:clamp(28px,7vw,90px);top:19%}",
     ".bw-wt-real-map{pointer-events:none;vector-effect:non-scaling-stroke}",
-    ".bw-wt-real-base .district{fill:rgba(250,250,245,.018);stroke:rgba(250,250,245,.11);stroke-width:1}",
     ".bw-wt-real-base .water-area{fill:rgba(72,121,147,.16);stroke:rgba(120,160,190,.18);stroke-width:1}",
     ".bw-wt-real-base .water-line{fill:none;stroke:rgba(120,160,190,.38);stroke-width:2.4;stroke-linecap:round}",
     ".bw-wt-real-base .west-fill{fill:rgba(250,250,245,.045);stroke:none}",
     ".bw-wt-real-base .east-fill{fill:rgba(230,57,70,.045);stroke:none}",
+    ".bw-wt-real-berlin-boundary{fill:none;stroke:rgba(250,250,245,.42);stroke-width:2.2;stroke-linejoin:round}",
     ".bw-wt-real-sector{stroke:rgba(250,250,245,.18);stroke-width:1.2}",
-    ".bw-wt-real-sector-label{font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;fill:rgba(250,250,245,.58)}",
+    ".bw-wt-real-sector-label{font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:800;letter-spacing:.09em;text-anchor:middle;text-transform:uppercase;fill:var(--cream);paint-order:stroke;stroke:rgba(16,19,18,.72);stroke-width:3px;stroke-linejoin:round}",
+    ".bw-wt-real-sector-label.label-dark{fill:var(--night);stroke:rgba(250,250,245,.58)}",
     ".bw-wt-real-label{font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;fill:rgba(250,250,245,.46)}",
     ".bw-wt-real-water-label{font-family:Montserrat,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:.08em;fill:rgba(160,195,210,.58)}",
     ".bw-wt-real-wall-main{fill:none;stroke:var(--red);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}",
@@ -136,6 +137,14 @@
     ".bw-wt-brand{position:absolute;top:max(clamp(16px,3vh,34px),env(safe-area-inset-top));right:clamp(16px,4vw,54px);z-index:4;pointer-events:auto;display:block;width:clamp(126px,13vw,188px);text-decoration:none;opacity:.94;transition:opacity .2s ease,transform .2s ease}",
     ".bw-wt-brand img{display:block;width:100%;height:auto}",
     ".bw-wt-brand:hover{opacity:1;transform:translateY(-1px)}",
+    ".bw-wt-sector-legend{position:absolute;top:clamp(78px,13vh,116px);right:clamp(48px,6vw,86px);z-index:5;display:grid;grid-template-columns:repeat(2,max-content);gap:8px 16px;pointer-events:none;color:var(--cream);font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:0;transform:translateY(-4px);transition:opacity .35s ease,transform .35s ease}",
+    ".bw-wt[data-chapter=sectors] .bw-wt-sector-legend{opacity:1;transform:none}",
+    ".bw-wt-sector-legend span{display:flex;align-items:center;gap:6px;white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.65)}",
+    ".bw-wt-sector-legend i{display:block;width:10px;height:10px;border-radius:2px;box-shadow:0 0 0 1px rgba(250,250,245,.38)}",
+    ".bw-wt-sector-legend .french i{background:#7CB342}",
+    ".bw-wt-sector-legend .british i{background:#FAFAF5}",
+    ".bw-wt-sector-legend .american i{background:#FFE600}",
+    ".bw-wt-sector-legend .soviet i{background:#E63946}",
     ".bw-wt-rail{position:absolute;right:clamp(10px,2.5vw,28px);top:50%;transform:translateY(-50%);z-index:4;display:flex;flex-direction:column;gap:14px;pointer-events:auto}",
     ".bw-wt-rail button{width:10px;height:10px;border-radius:50%;border:1px solid var(--ink-faint);background:transparent;cursor:pointer;padding:0}",
     ".bw-wt-rail button.on{background:var(--red);border-color:var(--red);transform:scale(1.25)}",
@@ -159,7 +168,7 @@
     "@keyframes bwwt-march{from{transform:translateX(0)}to{transform:translateX(760px)}}",
     "@media (prefers-reduced-motion:reduce){.bw-wt .crowd-dot,.bw-wt .lamp,.bw-wt .pulse{animation:none}.bw-wt-cue:after{animation:none}.bw-wt-card,.bw-wt-photo{transition:none}}",
     "@media (min-width:641px){.bw-wt-step:not(.hero):not(.cta){padding-top:64px}.bw-wt-step.up:not(.hero):not(.cta){padding-top:380px}}",
-    "@media (max-width:640px){.bw-wt-step{padding:0 14px;align-items:flex-end;justify-content:center}.bw-wt-card{margin-bottom:12vh;max-width:100%}.bw-wt-step.hero,.bw-wt-step.cta{align-items:center}.bw-wt-step.hero .bw-wt-card,.bw-wt-step.cta .bw-wt-card{margin-bottom:0}.bw-wt-step.hero h1{font-size:clamp(2.2rem,11vw,4.2rem)}.bw-wt-rail{gap:10px}.bw-wt-rail button{width:8px;height:8px}.bw-wt-brand{width:clamp(108px,32vw,138px)}.bw-wt[data-chapter=strip] .bw-wt-stage svg,.bw-wt[data-chapter=escapes] .bw-wt-stage svg{transform:translateY(10vh) scale(.94);transform-origin:center center}.bw-wt-photo{width:42vw;max-width:190px}.bw-wt-photo-up{left:14px;bottom:8%}.bw-wt-photo-escapes{right:14px;top:17%}.bw-wt-photo-fall{right:14px;top:16%}.bw-wt-photo figcaption{font-size:.44rem}}"
+    "@media (max-width:640px){.bw-wt-step{padding:0 14px;align-items:flex-end;justify-content:center}.bw-wt-card{margin-bottom:12vh;max-width:100%}.bw-wt-step.hero,.bw-wt-step.cta{align-items:center}.bw-wt-step.hero .bw-wt-card,.bw-wt-step.cta .bw-wt-card{margin-bottom:0}.bw-wt-step.hero h1{font-size:clamp(2.2rem,11vw,4.2rem)}.bw-wt-rail{gap:10px}.bw-wt-rail button{width:8px;height:8px}.bw-wt-brand{width:clamp(108px,32vw,138px)}.bw-wt-sector-legend{top:78px;right:40px;grid-template-columns:1fr;gap:5px;font-size:.52rem}.bw-wt[data-chapter=strip] .bw-wt-stage svg,.bw-wt[data-chapter=escapes] .bw-wt-stage svg{transform:translateY(10vh) scale(.94);transform-origin:center center}.bw-wt-photo{width:42vw;max-width:190px}.bw-wt-photo-up{left:14px;bottom:8%}.bw-wt-photo-escapes{right:14px;top:17%}.bw-wt-photo-fall{right:14px;top:16%}.bw-wt-photo figcaption{font-size:.44rem}}"
   ].join('');
 
   var SVG = [
@@ -353,6 +362,10 @@
         + '<div class="bw-wt-vignette"></div>'
         + '<div class="bw-wt-hud"><div class="bw-wt-year"><span class="bw-wt-tick">19</span>45</div><div class="bw-wt-chapter">A divided city</div></div>'
         + '<a class="bw-wt-brand" href="' + esc(HOME_URL) + '" aria-label="BerlinWalk home"><img src="' + esc(BASE_URL + 'assets/brand/berlinwalk-wordmark-cream.png') + '" alt=""></a>'
+        + '<div class="bw-wt-sector-legend" role="group" aria-label="Occupation sectors">'
+        + '<span class="french"><i></i>French sector</span><span class="british"><i></i>British sector</span>'
+        + '<span class="american"><i></i>American sector</span><span class="soviet"><i></i>Soviet sector</span>'
+        + '</div>'
         + '<nav class="bw-wt-rail" aria-label="Timeline chapters"></nav>'
         + '</div></div>'
         + '<div class="bw-wt-steps">' + steps + '</div>'
@@ -537,26 +550,24 @@
       data.eastBerlin.forEach(function (d) {
         base.appendChild(this._svg('path', { class: 'east-fill', d: d }));
       }, this);
-      data.districts.forEach(function (item) {
-        base.appendChild(this._svg('path', { class: 'district', d: item.d }));
+      var berlinBoundary = this._svg('g', { class: 'bw-wt-real-berlin-boundary' });
+      data.westBerlin.concat(data.eastBerlin).forEach(function (d) {
+        berlinBoundary.appendChild(this._svg('path', { d: d }));
       }, this);
-      var districtLabels = this._svg('g', { class: 'bw-wt-real-district-labels' });
-      data.labels.forEach(function (item) {
-        districtLabels.appendChild(this._svg('text', { class: 'bw-wt-real-label', x: item.x, y: item.y }, item.name));
-      }, this);
-      base.appendChild(districtLabels);
+      base.appendChild(berlinBoundary);
       base.appendChild(this._svg('text', { class: 'bw-wt-real-water-label', x: 565, y: 592 }, 'Spree'));
       base.appendChild(this._svg('text', { class: 'bw-wt-real-attribution', x: 22, y: 622 }, 'Map data © OpenStreetMap contributors · Wall data © Berlin Open Data'));
       view.appendChild(base);
       this._gRealBase = base;
-      this._gRealDistrictLabels = districtLabels;
+      this._gRealBoundary = berlinBoundary;
 
       var sectors = this._svg('g', { class: 'bw-wt-real-sectors' });
       this._realSectorGroups = [];
-      data.sectors.forEach(function (item) {
+      data.sectors.forEach(function (item, idx) {
         var group = this._svg('g', { class: 'bw-wt-real-sector-group', opacity: 0 });
         group.appendChild(this._svg('path', { class: 'bw-wt-real-sector', d: item.d, fill: item.fill }));
-        group.appendChild(this._svg('text', { class: 'bw-wt-real-sector-label', x: item.labelPoint[0], y: item.labelPoint[1] }, item.label));
+        var labelClass = 'bw-wt-real-sector-label' + (idx === 0 || idx === 1 || idx === 2 ? ' label-dark' : '');
+        group.appendChild(this._svg('text', { class: labelClass, x: item.labelPoint[0], y: item.labelPoint[1] }, item.label));
         sectors.appendChild(group);
         this._realSectorGroups.push(group);
       }, this);
@@ -710,8 +721,6 @@
       this._gRealView.setAttribute('transform', (function (camera) {
         return 'translate(' + (500 - camera.x * camera.s).toFixed(1) + ' ' + (320 - camera.y * camera.s).toFixed(1) + ') scale(' + camera.s.toFixed(3) + ')';
       })(this._realCameraFor(ci, p)));
-      this._gRealDistrictLabels.setAttribute('opacity', (ci === 0 ? .8 : (ci === 1 || ci === 2 ? .28 : (ci === 3 ? .38 : 0))).toFixed(3));
-
       var sectorOpacity = ci === 1 ? 1 : (ci === 2 ? .35 : 0);
       this._gRealSectors.setAttribute('opacity', sectorOpacity.toFixed(3));
       this._realSectorGroups.forEach(function (group, idx) {
