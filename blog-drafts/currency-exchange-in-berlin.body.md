@@ -7,7 +7,7 @@ _Berlin uses the euro. The real question is not where to exchange money, but how
 
 {{quick-summary}}
 
-## Do you even need to exchange money in Berlin?
+## Do you even need currency exchange in Berlin?
 
 For most visitors, honestly, no. Berlin uses the euro, like the rest of Germany, so if you are coming from another eurozone country there is nothing to exchange at all. If you are coming from the UK, the US, or anywhere else, the cleaner move is usually to bring a card and skip the exchange office.
 
