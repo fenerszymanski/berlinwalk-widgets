@@ -1486,5 +1486,20 @@
     "generatedAt": "2026-07-11",
     "source": "codex-built-in-imagegen-20260711",
     "wixUrl": "https://static.wixstatic.com/media/5a08a3_0c9b02c415a54a9992ce46ddb5bf3451~mv2.png"
+  },
+  {
+    "slug": "berlin-money-exchange-reality-check",
+    "title": "Berlin Money Exchange Reality Check",
+    "category": "MoneyShopping",
+    "model": "Logged-in ChatGPT image generation (Chrome)",
+    "style": "BerlinWalk glossy 3D tool icon set 2026-06-12",
+    "promptFile": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-money-exchange-reality-check/PROMPT.md",
+    "sourceImage": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/_src/chatgpt-standard-20260612/berlin-money-exchange-reality-check/berlin-money-exchange-reality-check-source.png",
+    "png512": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-money-exchange-reality-check.png",
+    "png160": "/Users/yusufucuz/Documents/New project/berlinwalk-widgets/tools-home/icons/berlin-money-exchange-reality-check-160.png",
+    "githubPagesUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/tools-home/icons/berlin-money-exchange-reality-check-160.png",
+    "generatedAt": "2026-07-12",
+    "source": "chatgpt-browser-imagegen-20260712",
+    "wixUrl": "https://static.wixstatic.com/media/5a08a3_af1f6b9d4606416dae7b81946adb0030~mv2.png"
   }
 ]
