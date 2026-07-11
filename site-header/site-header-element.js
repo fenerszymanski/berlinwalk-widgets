@@ -4,6 +4,7 @@ const BW_HEADER_LINKS = {
   home: 'https://www.berlinwalk.com/',
   tour: 'https://www.berlinwalk.com/',
   route: 'https://www.berlinwalk.com/berlin-walking-tour-route',
+  wallTimeline: 'https://www.berlinwalk.com/berlin-wall-timeline',
   guide: 'https://www.berlinwalk.com/the-guide',
   reviews: 'https://www.berlinwalk.com/reviews',
   meetingPoint: 'https://www.berlinwalk.com/meeting-point',
@@ -912,6 +913,7 @@ class BWHeaderElement extends HTMLElement {
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.route}">Tour Route</a></li>
+                    <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.blog}">Blog</a></li>
                     <li role="none"><a role="menuitem" href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a></li>
@@ -957,6 +959,7 @@ class BWHeaderElement extends HTMLElement {
                 <a href="${BW_HEADER_LINKS.planner}">Berlin Trip Planner</a>
                 <a href="${BW_HEADER_LINKS.meetingPoint}">Meeting Point</a>
                 <a href="${BW_HEADER_LINKS.route}">Tour Route</a>
+                <a href="${BW_HEADER_LINKS.wallTimeline}">Berlin Wall Timeline</a>
                 <a href="${BW_HEADER_LINKS.plan}">Berlin Hacks</a>
                 <a href="${BW_HEADER_LINKS.blog}">Blog</a>
                 <a href="${BW_HEADER_LINKS.widgets}">Embed Berlin Tools</a>

@@ -15,9 +15,9 @@ const BW_HOME_EXPLORE_LINKS = [
     href: 'https://www.berlinwalk.com/games',
   },
   {
-    title: 'Blog',
-    text: 'Practical Berlin advice from my daily notes.',
-    href: 'https://www.berlinwalk.com/blog',
+    title: 'Berlin Wall Timeline',
+    text: 'Interactive history from 1945 to 1990. Watch Berlin split, survive and reunite.',
+    href: 'https://www.berlinwalk.com/berlin-wall-timeline',
   },
 ];
 

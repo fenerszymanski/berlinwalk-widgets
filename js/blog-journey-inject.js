@@ -1751,7 +1751,9 @@
   var WALL_TIMELINE_SLUGS = {
     'the-berlin-wall-where-it-stood-and-what-s-left-in-2026': 1,
     'where-was-the-berlin-wall-interactive-map': 1,
-    'east-side-gallery-berlin-guide': 1
+    'east-side-gallery-berlin-guide': 1,
+    'berlin-wall-memorial-bernauer-strasse': 1,
+    'exploring-checkpoint-charlie-a-historical-journey-through-cold-war-berlin-s-iconic-border-crossing': 1
   };
   var FDR_BRIDGE_SLUGS = {
     'how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way': 1,
