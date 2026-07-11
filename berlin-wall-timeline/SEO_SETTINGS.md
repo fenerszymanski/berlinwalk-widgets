@@ -16,17 +16,21 @@ Wix page SEO panel so they are present in the server-rendered HTML for crawlers.
 ## SEO / meta
 
 - **Title tag:** `The Berlin Wall Timeline | Scroll Through 1945 to 1990`
-- **Meta description:** `An interactive Berlin Wall timeline from BerlinWalk. Scroll to watch Berlin split in 1945, the Wall rise in 1961, the death strip, the escapes, and the fall in 1989, then see what is left in the city today.`
+- **Meta description:** `An interactive Berlin Wall timeline from BerlinWalk. Scroll through the city split, the Wall, the death strip, escapes and the fall in 1989, then see what remains today.`
 - **Canonical:** `https://www.berlinwalk.com/berlin-wall-timeline`
 - **Robots:** `index, follow, max-image-preview:large`
 
 ## Social (Open Graph / Twitter)
 
 - **og:type:** `article`
-- **og:title:** `The Berlin Wall, 1945 to 1990`
-- **og:description:** `Scroll through the whole story of the Berlin Wall: the split, the death strip, the escapes, the fall, and what is left to walk today.`
+- **og:title:** `The Berlin Wall Timeline | Scroll Through 1945 to 1990`
+- **og:description:** `An interactive Berlin Wall timeline from BerlinWalk. Scroll through the city split, the Wall, the death strip, escapes and the fall in 1989, then see what remains today.`
 - **og:image:** `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/assets/social/berlin-wall-timeline-1200x630.jpg`
 - **twitter:card:** `summary_large_image`
+- **og:image:width:** `1200`
+- **og:image:height:** `630`
+- **og:image:alt:** `The Berlin Wall timeline cover, a divided Berlin map with the Wall line`
+- **twitter:image:alt:** `The Berlin Wall timeline cover, a divided Berlin map with the Wall line`
 
 ## JSON-LD
 
@@ -34,12 +38,13 @@ Wix page SEO panel so they are present in the server-rendered HTML for crawlers.
 {
   "@context": "https://schema.org",
   "@type": "Article",
-  "headline": "The Berlin Wall Timeline, 1945 to 1990",
-  "description": "An interactive Berlin Wall timeline from BerlinWalk. Scroll to watch Berlin split in 1945, the Wall rise in 1961, the death strip, the escapes, and the fall in 1989, then see what is left in the city today.",
+  "headline": "The Berlin Wall Timeline | Scroll Through 1945 to 1990",
+  "description": "An interactive Berlin Wall timeline from BerlinWalk. Scroll through the city split, the Wall, the death strip, escapes and the fall in 1989, then see what remains today.",
   "image": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/assets/social/berlin-wall-timeline-1200x630.jpg",
   "url": "https://www.berlinwalk.com/berlin-wall-timeline",
-  "author": { "@type": "Organization", "name": "BerlinWalk", "url": "https://www.berlinwalk.com" },
+  "author": { "@type": "Person", "name": "Yusuf Ucuz", "url": "https://www.berlinwalk.com" },
   "publisher": { "@type": "Organization", "name": "BerlinWalk", "url": "https://www.berlinwalk.com" },
-  "about": "Berlin Wall"
+  "about": "Berlin Wall",
+  "inLanguage": "en"
 }
 ```

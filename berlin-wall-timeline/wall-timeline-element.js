@@ -14,13 +14,13 @@
  *
  * Designed for a Wix page with the global header and footer hidden.
  *
- * Build marker: wall-timeline-v1-20260711f
+ * Build marker: wall-timeline-v1-20260711g
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-wall-timeline';
-  var BUILD = 'wall-timeline-v1-20260711f';
+  var BUILD = 'wall-timeline-v1-20260711g';
 
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
@@ -35,9 +35,9 @@
 
   var SEO = {
     title: 'The Berlin Wall Timeline | Scroll Through 1945 to 1990',
-    description: 'An interactive Berlin Wall timeline from BerlinWalk. Scroll to watch Berlin split in 1945, the Wall rise in 1961, the death strip, the escapes, and the fall in 1989, then see what is left in the city today.',
-    socialTitle: 'The Berlin Wall, 1945 to 1990',
-    socialDescription: 'Scroll through the whole story of the Berlin Wall: the split, the death strip, the escapes, the fall, and what is left to walk today.',
+    description: 'An interactive Berlin Wall timeline from BerlinWalk. Scroll through the city split, the Wall, the death strip, escapes and the fall in 1989, then see what remains today.',
+    socialTitle: 'The Berlin Wall Timeline | Scroll Through 1945 to 1990',
+    socialDescription: 'An interactive Berlin Wall timeline from BerlinWalk. Scroll through the city split, the Wall, the death strip, escapes and the fall in 1989, then see what remains today.',
     image: COVER_URL,
     imageAlt: 'The Berlin Wall timeline cover, a divided Berlin map with the Wall line'
   };
@@ -302,12 +302,15 @@
     upsertMeta('property', 'og:title', SEO.socialTitle);
     upsertMeta('property', 'og:description', SEO.socialDescription);
     upsertMeta('property', 'og:image', SEO.image);
+    upsertMeta('property', 'og:image:width', '1200');
+    upsertMeta('property', 'og:image:height', '630');
     upsertMeta('property', 'og:image:alt', SEO.imageAlt);
     upsertMeta('property', 'og:site_name', 'BerlinWalk');
     upsertMeta('name', 'twitter:card', 'summary_large_image');
     upsertMeta('name', 'twitter:title', SEO.socialTitle);
     upsertMeta('name', 'twitter:description', SEO.socialDescription);
     upsertMeta('name', 'twitter:image', SEO.image);
+    upsertMeta('name', 'twitter:image:alt', SEO.imageAlt);
     upsertLink('canonical', canonical);
 
     var old = document.getElementById('bw-wall-timeline-jsonld');
