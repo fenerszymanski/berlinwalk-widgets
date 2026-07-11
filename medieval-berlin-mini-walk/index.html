@@ -274,9 +274,9 @@
       border: 1px solid #E5EFD5;
       border-radius: 8px;
       display: grid;
-      gap: 14px;
-      grid-template-columns: 40px minmax(0, 1fr);
-      padding: 14px 20px;
+      gap: 10px;
+      grid-template-columns: 34px minmax(0, 1fr);
+      padding: 10px;
     }
 
     #bw-medieval-walk .bw-number {
@@ -291,7 +291,6 @@
       height: 31px;
       justify-content: center;
       line-height: 1;
-      margin: 1px 0 0 3px;
       width: 31px;
     }
 
@@ -310,6 +309,19 @@
       font-size: 12px;
       font-weight: 600;
       line-height: 1.45;
+    }
+
+    /* Keep the stop number centred: the descriptive span rule above also
+       matches this element, so its flex alignment must be reasserted here. */
+    #bw-medieval-walk .bw-stop .bw-number {
+      align-items: center;
+      display: flex;
+      font-size: 13px;
+      font-weight: 900;
+      justify-content: center;
+      line-height: 1;
+      padding: 0;
+      text-align: center;
     }
 
     #bw-medieval-walk .bw-links {
