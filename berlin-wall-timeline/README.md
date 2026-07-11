@@ -12,8 +12,8 @@ reader scrolls through nine full-screen chapters:
 1. **Hero** — `The Wall`, 1945 to 1990.
 2. **Four sectors** — Berlin's real Ortsteile resolve into the four occupation
    zones.
-3. **The Airlift** — 1948 blockade; real air corridors stream into Tempelhof,
-   Gatow and Tegel.
+3. **The Airlift** — 1948 blockade; multiple supply convoys stream through
+   real air corridors into Tempelhof, Gatow and Tegel.
 4. **The Wall goes up** — August 13, 1961; the official 1989 Wall geometry
    draws itself around West Berlin and reveals the real city as an island.
 5. **The death strip** — the map flips to a cross-section diagram; inner wall,
@@ -78,7 +78,7 @@ same as `paid-landing`):
 
 ```html
 <bw-wall-timeline></bw-wall-timeline>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711e" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711f" defer></script>
 ```
 
 If using Wix Studio's Custom Element panel:

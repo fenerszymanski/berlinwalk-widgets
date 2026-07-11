@@ -14,13 +14,13 @@
  *
  * Designed for a Wix page with the global header and footer hidden.
  *
- * Build marker: wall-timeline-v1-20260711e
+ * Build marker: wall-timeline-v1-20260711f
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-wall-timeline';
-  var BUILD = 'wall-timeline-v1-20260711e';
+  var BUILD = 'wall-timeline-v1-20260711f';
 
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
@@ -93,7 +93,10 @@
     ".bw-wt-real-marker-start{fill:var(--yellow);stroke:var(--yellow);stroke-width:2}",
     ".bw-wt-real-marker-story{fill:var(--red);stroke:var(--cream);stroke-width:1.2}",
     ".bw-wt-real-air-path{fill:none;stroke:rgba(250,250,245,.4);stroke-width:1.3;stroke-dasharray:4 7}",
-    ".bw-wt-real-air-plane{fill:var(--yellow)}",
+    ".bw-wt-real-air-plane{fill:var(--yellow);stroke:var(--cream);stroke-width:.65;stroke-linejoin:round;filter:drop-shadow(0 0 3px rgba(255,230,0,.45))}",
+    ".bw-wt-real-air-arrival-pulse{fill:none;stroke:var(--yellow);stroke-width:1.5;opacity:0;transform-box:fill-box;transform-origin:center}",
+    ".bw-wt.airlift-live .bw-wt-real-air-arrival-pulse{animation:bwwt-arrival-pulse 2.2s ease-out infinite;animation-delay:var(--pulse-delay)}",
+    "@keyframes bwwt-arrival-pulse{0%{opacity:.9;transform:scale(.45)}80%{opacity:0;transform:scale(2.1)}100%{opacity:0;transform:scale(2.1)}}",
     ".bw-wt-real-attribution{font-family:Montserrat,Arial,sans-serif;font-size:8px;letter-spacing:.04em;fill:rgba(250,250,245,.32)}",
     ".bw-wt-steps{position:relative;z-index:2;margin-top:-100vh;margin-top:-100svh;pointer-events:none}",
     ".bw-wt-step{position:relative;display:flex;padding:0 clamp(16px,6vw,80px);pointer-events:none}",
@@ -616,12 +619,26 @@
         var cy = Math.min(origin.y, target.y) - 100 - index * 28;
         var path = this._svg('path', { class: 'bw-wt-real-air-path', d: 'M ' + origin.x + ' ' + origin.y + ' Q ' + cx + ' ' + cy + ' ' + target.x + ' ' + target.y });
         airlift.appendChild(path);
-        var plane = this._svg('circle', { class: 'bw-wt-real-air-plane', r: 4, cx: origin.x, cy: origin.y, opacity: 0 });
-        airlift.appendChild(plane);
         this._realAirPaths.push(path);
-        this._realAirPlanes.push({ path: path, plane: plane });
+        for (var convoy = 0; convoy < 4; convoy++) {
+          var plane = this._svg('path', {
+            class: 'bw-wt-real-air-plane',
+            d: 'M -6 0 L -1 -1.4 L 2 -5 L 3 -5 L 2 -1 L 6 0 L 2 1 L 3 5 L 2 5 L -1 1.4 Z',
+            opacity: 0
+          });
+          airlift.appendChild(plane);
+          this._realAirPlanes.push({
+            path: path,
+            plane: plane,
+            offset: convoy * .022,
+            scale: convoy === 0 ? 1.2 : .92
+          });
+        }
       }, this);
-      data.airports.filter(function (a) { return a.role === 'arrival'; }).forEach(function (airport) {
+      data.airports.filter(function (a) { return a.role === 'arrival'; }).forEach(function (airport, index) {
+        var pulse = this._svg('circle', { class: 'bw-wt-real-air-arrival-pulse', r: 9, cx: airport.x, cy: airport.y });
+        pulse.style.setProperty('--pulse-delay', (-index * .55) + 's');
+        airlift.appendChild(pulse);
         airlift.appendChild(this._svg('circle', { class: 'bw-wt-real-marker-start', r: 5, cx: airport.x, cy: airport.y }));
         airlift.appendChild(this._svg('text', { class: 'bw-wt-real-label', x: airport.x + 8, y: airport.y - 8 }, airport.name));
       }, this);
@@ -725,11 +742,13 @@
       });
 
       this._gRealAirlift.setAttribute('opacity', (ci === 2 ? airO : 0).toFixed(3));
-      this._realAirPlanes.forEach(function (item, idx) {
+      this._realAirPlanes.forEach(function (item) {
         var length = item.path.getTotalLength ? item.path.getTotalLength() : 1000;
-        var point = item.path.getPointAtLength(length * ((p * 1.8 + idx * .3) % 1));
-        item.plane.setAttribute('cx', point.x);
-        item.plane.setAttribute('cy', point.y);
+        var f = Math.min(.998, .84 + item.offset + p * .10);
+        var point = item.path.getPointAtLength(length * f);
+        var next = item.path.getPointAtLength(length * Math.min(.999, f + .012));
+        var angle = Math.atan2(next.y - point.y, next.x - point.x) * 180 / Math.PI;
+        item.plane.setAttribute('transform', 'translate(' + point.x.toFixed(1) + ' ' + point.y.toFixed(1) + ') rotate(' + angle.toFixed(1) + ') scale(' + item.scale + ')');
         item.plane.setAttribute('opacity', ci === 2 && airO > .05 ? 1 : 0);
       });
 
@@ -865,6 +884,7 @@
       root.classList.toggle('xsec-live', ci === 4 || ci === 5);
       root.classList.toggle('fall-live', ci === 6);
       root.classList.toggle('today-live', ci === 7 || ci === 8);
+      root.classList.toggle('airlift-live', ci === 2);
 
       this._updateRealMap(ci, p, mapO, sectO, airO, ringO, ringDraw, todayO, xsecO);
       this._stage.style.opacity = ci === 8 ? String(1 - clamp((p - .1) * 1.2) * .75) : '1';
