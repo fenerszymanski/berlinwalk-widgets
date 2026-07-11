@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gendarmenmarkt Square Guide — What Are the Three Buildings?</title>
+<meta name="description" content="Tap the three buildings on Berlin's Gendarmenmarkt to see what each one really is: the French Cathedral tower, the Konzerthaus, and the German Cathedral with its free democracy exhibition. Free versus paid, time needed, and the fact most visitors miss." />
+<link rel="stylesheet" href="../css/brand.css" />
+<style>
+  .gm {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    color: var(--bw-text);
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 4px 4px 12px;
+    box-sizing: border-box;
+  }
+  .gm *, .gm *::before, .gm *::after { box-sizing: border-box; }
+  .gm__head {
+    background: var(--bw-green);
+    color: #fff;
+    border-radius: 16px 16px 0 0;
+    padding: 18px 20px 16px;
+  }
+  .gm__kicker {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--bw-yellow); margin: 0 0 6px;
+  }
+  .gm__title { font-size: 21px; font-weight: 800; margin: 0 0 5px; line-height: 1.2; }
+  .gm__sub { font-size: 13.5px; margin: 0; color: #E8F0E0; line-height: 1.5; }
+  .gm__body {
+    background: var(--bw-white);
+    border: 1px solid var(--bw-border);
+    border-top: none;
+    border-radius: 0 0 16px 16px;
+    padding: 16px 16px 18px;
+  }
+
+  .gm__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  @media (max-width: 540px) { .gm__grid { grid-template-columns: 1fr; } }
+
+  /* schematic plan */
+  .gm__plan { margin: 0; }
+  .gm__planlabel {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--bw-muted); text-align: center; margin: 0 0 6px;
+  }
+  .gm__svg { width: 100%; height: auto; display: block; }
+  .gm__zone { cursor: pointer; }
+  .gm__zone rect, .gm__zone circle, .gm__zone path { transition: fill .2s ease, stroke .2s ease; }
+  .gm__zone .b-fill { fill: #EEF2E6; stroke: var(--bw-lime); stroke-width: 1.5; }
+  .gm__zone .b-dome { fill: #DDE8CB; stroke: var(--bw-green); stroke-width: 1.5; }
+  .gm__zone.is-active .b-fill { fill: var(--bw-lime); stroke: var(--bw-green); }
+  .gm__zone.is-active .b-dome { fill: var(--bw-green); stroke: var(--bw-green); }
+  .gm__zone.is-free.is-active .b-fill { fill: var(--bw-safe); }
+  .gm__zone.is-free.is-active .b-dome { fill: var(--bw-green-dark); }
+  .gm__ztext { font-size: 8.5px; font-weight: 800; fill: var(--bw-text); pointer-events: none; }
+  .gm__zone.is-active .gm__ztext { fill: #fff; }
+  .gm__zmeta { font-size: 6.8px; font-weight: 700; fill: var(--bw-muted); pointer-events: none; letter-spacing: .04em; }
+  .gm__zone.is-active .gm__zmeta { fill: #E8F0E0; }
+  .gm__plaza { fill: var(--bw-cream); stroke: var(--bw-border); stroke-width: 1.5; }
+  .gm__statue { fill: var(--bw-yellow); stroke: var(--bw-green); stroke-width: 1; }
+  .gm__compass { font-size: 8px; font-weight: 800; fill: var(--bw-muted); }
+  .gm__tap { font-size: 11px; color: var(--bw-muted); text-align: center; margin: 8px 0 0; }
+
+  /* detail card */
+  .gm__detail { border: 1px solid var(--bw-border); border-radius: 14px; overflow: hidden; }
+  .gm__dhead { padding: 12px 14px 11px; background: var(--bw-lime-soft); border-bottom: 1px solid var(--bw-border); }
+  .gm__dname { font-size: 16px; font-weight: 800; color: var(--bw-green); margin: 0 0 3px; line-height: 1.2; }
+  .gm__dwhat { font-size: 12px; color: var(--bw-muted); margin: 0; line-height: 1.45; }
+  .gm__chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+  .gm__chip {
+    font-size: 10.5px; font-weight: 700; padding: 3px 9px; border-radius: 999px;
+    border: 1px solid var(--bw-border); background: #fff; color: var(--bw-muted);
+  }
+  .gm__chip.free { background: var(--bw-safe); color: #fff; border-color: var(--bw-safe); }
+  .gm__chip.paid { background: var(--bw-moderate); color: #3a2c00; border-color: var(--bw-moderate); }
+  .gm__dbody { padding: 13px 14px 14px; }
+  .gm__block { margin: 0 0 11px; }
+  .gm__block:last-child { margin-bottom: 0; }
+  .gm__blabel {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--bw-lime); margin: 0 0 3px;
+  }
+  .gm__blabel.surprise { color: var(--bw-moderate); }
+  .gm__blabel.tip { color: var(--bw-green); }
+  .gm__btext { font-size: 13px; line-height: 1.5; margin: 0; color: var(--bw-text); }
+  .gm__btext b { color: var(--bw-green); }
+
+  .gm__foot { font-size: 11px; color: var(--bw-muted); line-height: 1.5; margin: 14px 2px 0; text-align: center; }
+</style>
+</head>
+<body>
+<div class="gm">
+  <div class="gm__head">
+    <p class="gm__kicker">BerlinWalk · Berlin History</p>
+    <h2 class="gm__title">Gendarmenmarkt: what are the three buildings?</h2>
+    <p class="gm__sub">Most people photograph this square without knowing that two of its "cathedrals" are not cathedrals, and one of them is free inside. Tap a building to find out what you are actually looking at.</p>
+  </div>
+  <div class="gm__body">
+    <div class="gm__grid">
+      <div class="gm__plan">
+        <p class="gm__planlabel">Schematic plan · not to scale</p>
+        <svg class="gm__svg" viewBox="0 0 260 300" role="img" aria-label="Schematic plan of Gendarmenmarkt with three tappable buildings">
+          <rect class="gm__plaza" x="10" y="10" width="240" height="280" rx="14" />
+          <text class="gm__compass" x="130" y="24" text-anchor="middle">N ↑</text>
+
+          <!-- French Cathedral (north) -->
+          <g class="gm__zone is-paid" id="z-french" tabindex="0" role="button" aria-label="French Cathedral">
+            <rect class="b-fill" x="70" y="36" width="120" height="52" rx="7" />
+            <circle class="b-dome" cx="130" cy="44" r="15" />
+            <text class="gm__ztext" x="130" y="66" text-anchor="middle">French Cathedral</text>
+            <text class="gm__zmeta" x="130" y="79" text-anchor="middle">TOWER CLIMB · PAID</text>
+          </g>
+
+          <!-- Konzerthaus (centre) + Schiller statue -->
+          <g class="gm__zone is-free" id="z-konzert" tabindex="0" role="button" aria-label="Konzerthaus concert hall">
+            <rect class="b-fill" x="66" y="120" width="128" height="60" rx="7" />
+            <text class="gm__ztext" x="130" y="146" text-anchor="middle">Konzerthaus</text>
+            <text class="gm__zmeta" x="130" y="160" text-anchor="middle">STEPS FREE · CONCERTS TICKETED</text>
+          </g>
+          <circle class="gm__statue" cx="130" cy="195" r="4.5" />
+          <text class="gm__zmeta" x="130" y="209" text-anchor="middle" style="fill:var(--bw-muted)">Schiller statue</text>
+
+          <!-- German Cathedral (south) -->
+          <g class="gm__zone is-free" id="z-german" tabindex="0" role="button" aria-label="German Cathedral">
+            <rect class="b-fill" x="70" y="224" width="120" height="52" rx="7" />
+            <circle class="b-dome" cx="130" cy="268" r="15" />
+            <text class="gm__ztext" x="130" y="242" text-anchor="middle">German Cathedral</text>
+            <text class="gm__zmeta" x="130" y="255" text-anchor="middle">FREE EXHIBITION</text>
+          </g>
+        </svg>
+        <p class="gm__tap">Tap any building on the plan</p>
+      </div>
+
+      <div class="gm__detail">
+        <div class="gm__dhead">
+          <h3 class="gm__dname" id="gmName">French Cathedral (Französischer Dom)</h3>
+          <p class="gm__dwhat" id="gmWhat"></p>
+          <div class="gm__chips" id="gmChips"></div>
+        </div>
+        <div class="gm__dbody">
+          <div class="gm__block">
+            <p class="gm__blabel surprise">The fact most visitors miss</p>
+            <p class="gm__btext" id="gmSurprise"></p>
+          </div>
+          <div class="gm__block">
+            <p class="gm__blabel">Inside</p>
+            <p class="gm__btext" id="gmInside"></p>
+          </div>
+          <div class="gm__block">
+            <p class="gm__blabel tip">Yusuf's move</p>
+            <p class="gm__btext" id="gmTip"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="gm__foot">The square reopened in March 2025 after a two-year renovation and is now step-free. Hours and ticket prices move; check the official pages before a special trip. This is a plain-language orientation guide, not the ticket office.</p>
+  </div>
+</div>
+
+<script src="../js/brand.js"></script>
+<script>
+(function () {
+  var DATA = {
+    'z-french': {
+      name: 'French Cathedral (Französischer Dom)',
+      what: 'The domed building on the north side, built 1701 to 1705 for Berlin’s French-speaking Huguenot refugees.',
+      chips: [{ t: 'Tower: from €8', c: 'paid' }, { t: '254 steps · 40 m', c: '' }, { t: '30–45 min', c: '' }],
+      surprise: 'It is <b>not really a cathedral</b>. The word "Dom" here comes from the French "dôme" (dome), not from the German for cathedral. There was never a bishop and never a throne. The tall domed tower was a decorative add-on by Frederick the Great in the 1780s, bolted onto the modest refugee church.',
+      inside: 'A viewing platform 40 m up (254 steps, a paid ticket from about €8) with a straight-on view of the twin domes and the TV Tower, plus the small Huguenot Museum telling the refugee story.',
+      tip: 'Save the climb for a clear day. If the sky is grey, skip the ticket and walk straight across to the German Cathedral opposite, which is free and just as striking from the outside.'
+    },
+    'z-konzert': {
+      name: 'Konzerthaus Berlin',
+      what: 'The columned building in the centre with the marble poet on the steps out front. That is Friedrich Schiller.',
+      chips: [{ t: 'Steps: free', c: 'free' }, { t: 'Concerts ticketed', c: '' }, { t: '10 min to look', c: '' }],
+      surprise: 'It started life as a <b>theatre, not a concert hall</b>. Karl Friedrich Schinkel built it as the royal playhouse (Schauspielhaus) in 1821. Bombed flat in the war, East Germany rebuilt it and only reopened it as a concert hall in 1984.',
+      inside: 'Home of the Konzerthausorchester. Evening concerts are ticketed, but there are cheaper lunchtime and espresso concerts if you want to see the hall without a big spend.',
+      tip: 'The wide stone steps facing the square are the best free seat in the house. Sit there in the early evening with a coffee and watch the two domes catch the last light. That view costs nothing.'
+    },
+    'z-german': {
+      name: 'German Cathedral (Deutscher Dom)',
+      what: 'The matching domed building on the south side, the German twin of the French one across the square.',
+      chips: [{ t: 'Free entry', c: 'free' }, { t: 'Closed Mondays', c: '' }, { t: '45–60 min', c: '' }],
+      surprise: 'Inside it is <b>not a church at all</b> any more. It holds a free exhibition run by the German Parliament (the Bundestag) on the history of German democracy, spread over five floors. Like its French twin, the "Dom" is the dome, not a cathedral.',
+      inside: 'The Bundestag exhibition on German parliamentary history from the 1848 revolution to today. Free entry, open Tuesday to Sunday (closed Mondays), roughly 10:00 to 18:00, later in summer.',
+      tip: 'If you only have time for one building here, make it this one. It is free, quiet, calm inside on a hot or rainy afternoon, and a genuinely good half-hour that most tourists walk straight past.'
+    }
+  };
+  var ORDER = ['z-french', 'z-konzert', 'z-german'];
+
+  var nameEl = document.getElementById('gmName');
+  var whatEl = document.getElementById('gmWhat');
+  var chipsEl = document.getElementById('gmChips');
+  var surpriseEl = document.getElementById('gmSurprise');
+  var insideEl = document.getElementById('gmInside');
+  var tipEl = document.getElementById('gmTip');
+
+  function select(id) {
+    var d = DATA[id];
+    if (!d) return;
+    ORDER.forEach(function (k) {
+      var g = document.getElementById(k);
+      if (g) g.classList.toggle('is-active', k === id);
+    });
+    nameEl.textContent = d.name;
+    whatEl.textContent = d.what;
+    chipsEl.innerHTML = d.chips.map(function (c) {
+      return '<span class="gm__chip ' + (c.c || '') + '">' + c.t + '</span>';
+    }).join('');
+    surpriseEl.innerHTML = d.surprise;
+    insideEl.innerHTML = d.inside;
+    tipEl.innerHTML = d.tip;
+  }
+
+  ORDER.forEach(function (id) {
+    var g = document.getElementById(id);
+    if (!g) return;
+    g.addEventListener('click', function () { select(id); });
+    g.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(id); }
+    });
+  });
+
+  select('z-french');
+})();
+</script>
+</body>
+</html>
