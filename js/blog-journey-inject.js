@@ -64,7 +64,7 @@
 
   function ensureNextTourSlotHelper() {
     if (!isPostPage() && !isToolPage()) return;
-    if (typeof window.bwNextTourSlot === 'function') return;
+    if (typeof window.bwNextTourSlot === 'function' && typeof window.bwLiveNextTourStarts === 'function') return;
     if (nextTourSlotRequested) return;
     nextTourSlotRequested = true;
     var script = document.createElement('script');
