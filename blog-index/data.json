@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-11T20:42:00.887Z",
+  "updatedAt": "2026-07-11T23:22:55.007Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 191,
+  "totalPosts": 192,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -812,6 +812,23 @@
           "relatedToolSlug": "berlin-pfand-calculator"
         },
         {
+          "title": "Gendarmenmarkt: A Local Guide to Berlin's Most Beautiful Square (2026)",
+          "slug": "gendarmenmarkt-berlin",
+          "path": "/post/gendarmenmarkt-berlin",
+          "url": "https://www.berlinwalk.com/post/gendarmenmarkt-berlin",
+          "excerpt": "Two of Gendarmenmarkt's three landmarks are called cathedrals, and neither one is. A local guide to Berlin's most beautiful square: what each building really is, the free exhibition inside the German Cathedral, and whether the French tower climb is worth it.",
+          "category": "Berlin History",
+          "categorySlug": "berlin-history",
+          "topic": "free-budget",
+          "topicLabel": "Free & Budget",
+          "readTime": "6 min read",
+          "publishedDate": "2026-07-11T23:20:59.580Z",
+          "image": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gendarmenmarkt-berlin-square-konzerthaus-french-cathedral-cover.jpg",
+          "thumb": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gendarmenmarkt-berlin-square-konzerthaus-french-cathedral-cover.jpg",
+          "alt": "Wide view across Gendarmenmarkt in Berlin, with the Konzerthaus on the left, the Schiller monument in the middle, and the French Cathedral with its green domed tower on the right",
+          "relatedToolSlug": ""
+        },
+        {
           "title": "Jewish Museum Berlin: Free Entry, How Long and What to See (2026)",
           "slug": "jewish-museum-berlin-guide",
           "path": "/post/jewish-museum-berlin-guide",
@@ -844,23 +861,6 @@
           "thumb": "https://static.wixstatic.com/media/5a08a3_9e407dc4339c4218861c3f7820e560a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-church-night-cover.jpg",
           "alt": "The blue-lit modern church and the floodlit broken old tower of the Kaiser Wilhelm Memorial Church at night on Breitscheidplatz",
           "relatedToolSlug": "memorial-church-visit-planner"
-        },
-        {
-          "title": "The Best Views in Berlin You Can Find on Foot",
-          "slug": "the-best-views-in-berlin-you-can-find-on-foot",
-          "path": "/post/the-best-views-in-berlin-you-can-find-on-foot",
-          "url": "https://www.berlinwalk.com/post/the-best-views-in-berlin-you-can-find-on-foot",
-          "excerpt": "A local guide to the best Berlin views you can find on foot, from Spree bridges and Museum Island to free and paid dome viewpoints.",
-          "category": "Tourist Tips",
-          "categorySlug": "tourist-tips",
-          "topic": "free-budget",
-          "topicLabel": "Free & Budget",
-          "readTime": "10 min read",
-          "publishedDate": "2026-02-28T21:23:15.859Z",
-          "image": "https://static.wixstatic.com/media/nsplsh_50334a4954734f4c324155~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/gold%20dome%20building.jpg",
-          "thumb": "https://static.wixstatic.com/media/nsplsh_50334a4954734f4c324155~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/gold%20dome%20building.jpg",
-          "alt": "Berliner Dom and the Spree at night from a central Berlin bridge",
-          "relatedToolSlug": "berlin-landmarks-map"
         }
       ]
     },
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Gendarmenmarkt: A Local Guide to Berlin's Most Beautiful Square (2026)",
+      "slug": "gendarmenmarkt-berlin",
+      "path": "/post/gendarmenmarkt-berlin",
+      "url": "https://www.berlinwalk.com/post/gendarmenmarkt-berlin",
+      "excerpt": "Two of Gendarmenmarkt's three landmarks are called cathedrals, and neither one is. A local guide to Berlin's most beautiful square: what each building really is, the free exhibition inside the German Cathedral, and whether the French tower climb is worth it.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-11T23:20:59.580Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gendarmenmarkt-berlin-square-konzerthaus-french-cathedral-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gendarmenmarkt-berlin-square-konzerthaus-french-cathedral-cover.jpg",
+      "alt": "Wide view across Gendarmenmarkt in Berlin, with the Konzerthaus on the left, the Schiller monument in the middle, and the French Cathedral with its green domed tower on the right",
+      "relatedToolSlug": ""
+    },
+    {
       "title": "Currency Exchange in Berlin: Where to Change Money (and Where Not To) in 2026",
       "slug": "currency-exchange-in-berlin",
       "path": "/post/currency-exchange-in-berlin",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_b12916e0ba6b42819129df08d0acb49b~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-oberbaumbruecke-sunset-cover.jpg",
       "alt": "The sun setting through the arches of the Oberbaumbrücke over the Spree in Berlin, with a yellow U-Bahn crossing the bridge",
       "relatedToolSlug": ""
-    },
-    {
-      "title": "Is the DDR Museum Worth It? Tickets, Queues, and What to Expect in 2026",
-      "slug": "is-the-ddr-museum-worth-it",
-      "path": "/post/is-the-ddr-museum-worth-it",
-      "url": "https://www.berlinwalk.com/post/is-the-ddr-museum-worth-it",
-      "excerpt": "A Berlin guide's honest take on the DDR Museum: what is inside, tickets and hours, why your Museum Pass will not cover it, and the two calm windows to visit before the crowds.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "first-day",
-      "topicLabel": "First Day in Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-07-08T21:01:37.453Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_34f5861223794412a85a1cc93b5a272f~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-ddr-museum-living-room.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_34f5861223794412a85a1cc93b5a272f~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/03-ddr-museum-living-room.jpg",
-      "alt": "A reconstructed 1980s East German living room inside the DDR Museum, with a wood wall unit, boxy television, orange wallpaper and a floral sofa",
-      "relatedToolSlug": "ddr-museum-crowd-planner"
     }
   ],
   "allPosts": [
+    {
+      "title": "Gendarmenmarkt: A Local Guide to Berlin's Most Beautiful Square (2026)",
+      "slug": "gendarmenmarkt-berlin",
+      "path": "/post/gendarmenmarkt-berlin",
+      "url": "https://www.berlinwalk.com/post/gendarmenmarkt-berlin",
+      "excerpt": "Two of Gendarmenmarkt's three landmarks are called cathedrals, and neither one is. A local guide to Berlin's most beautiful square: what each building really is, the free exhibition inside the German Cathedral, and whether the French tower climb is worth it.",
+      "category": "Berlin History",
+      "categorySlug": "berlin-history",
+      "topic": "free-budget",
+      "topicLabel": "Free & Budget",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-11T23:20:59.580Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gendarmenmarkt-berlin-square-konzerthaus-french-cathedral-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_fedc190718194fc5bfa281a6e1c8cabe~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-gendarmenmarkt-berlin-square-konzerthaus-french-cathedral-cover.jpg",
+      "alt": "Wide view across Gendarmenmarkt in Berlin, with the Konzerthaus on the left, the Schiller monument in the middle, and the French Cathedral with its green domed tower on the right",
+      "relatedToolSlug": ""
+    },
     {
       "title": "Currency Exchange in Berlin: Where to Change Money (and Where Not To) in 2026",
       "slug": "currency-exchange-in-berlin",
