@@ -55,7 +55,7 @@ The second is the **airport exchange desk.** They are convenient, and that is ex
 
 ## If you land at BER and need cash right away
 
-Berlin Brandenburg Airport (BER) has exchange counters like Travelex and Euro Change right in the arrivals area. Skip them. Instead, walk a little further to a **bank-run ATM inside the terminal**, decline the currency conversion, and take out only what you need for the first day or two. You can top up later in the city at a better machine.
+[Berlin Brandenburg Airport (BER)](https://ber.berlin-airport.de/en.html) has exchange counters like Travelex and Euro Change right in the arrivals area. Skip them. Instead, walk a little further to a **bank-run ATM inside the terminal**, decline the currency conversion, and take out only what you need for the first day or two. You can top up later in the city at a better machine.
 
 You do not need a big pile of cash to get moving anyway. Getting from the airport into town is straightforward, and my guide on [getting from Berlin Airport to Alexanderplatz](https://www.berlinwalk.com/post/how-to-get-from-berlin-airport-to-alexanderplatz-the-easy-way) shows the simple route. A ticket machine and your card will handle the train.
 
