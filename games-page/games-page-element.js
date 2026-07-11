@@ -6,6 +6,20 @@
   const ASSET_VERSION = 'games-page-pulse-20260708b';
   const GAMES = [
     {
+      id: 'where-in-berlin',
+      kicker: 'District match',
+      title: 'Where in Berlin Do You Belong?',
+      lead: 'Six quick choices, one Berlin borough match, and a practical nudge for the kind of day you should actually have.',
+      how: 'Pick the move that feels most like you. Your choices map to one of all 12 Berlin boroughs.',
+      duration: 'Under 2 min',
+      difficulty: '6 situation calls',
+      player: 'Your city rhythm',
+      image: 'where-in-berlin/assets/social/where-in-berlin-social-1200x630.png',
+      href: 'https://www.berlinwalk.com/games/where-in-berlin',
+      button: 'Find your borough',
+      accent: 'district'
+    },
+    {
       id: 'berlin-battle',
       kicker: 'Choice battle',
       title: 'Berlin Battle',
@@ -132,7 +146,7 @@
             <div class="bw-games-hero-inner">
               <p class="bw-games-kicker">Playable Berlin</p>
               <h1 id="bw-games-title">BerlinWalk Games</h1>
-              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Pick a winner, survive the first day, rewind an old photo, pass the door, or try to make Berlin smile.</p>
+              <p class="bw-games-hero-lead">Playable Berlin for the moment before you go outside and test the real city. Find your borough, pick a winner, survive the first day, rewind an old photo, pass the door, or try to make Berlin smile.</p>
             </div>
           </section>
 
@@ -140,7 +154,7 @@
             <div class="bw-games-section-head">
               <p class="bw-games-section-kicker">Pick your mode</p>
               <h2 id="bw-games-modes-title">Choose your way into Berlin</h2>
-              <p>Each live game has a different job: taste, first-day instinct, city memory, night pressure, or social weather.</p>
+              <p>Each live game has a different job: city rhythm, taste, first-day instinct, memory, night pressure, or social weather.</p>
             </div>
             <div class="bw-games-grid">
               ${gameCards}

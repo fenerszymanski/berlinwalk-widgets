@@ -13,6 +13,16 @@ const BW_GAMES_HOME_ASSET_VERSION = 'games-home-pulse-20260708b';
 
 const BW_GAMES_HOME_ITEMS = [
   {
+    id: 'where-in-berlin',
+    kicker: 'District match',
+    title: 'Where in Berlin Do You Belong?',
+    lead: 'Six situation calls. One borough match. A useful way to choose your next Berlin day.',
+    meta: '6 visual choices',
+    href: 'https://www.berlinwalk.com/games/where-in-berlin',
+    cta: 'Find your borough',
+    image: 'where-in-berlin/assets/social/where-in-berlin-social-1200x630.png'
+  },
+  {
     id: 'berlin-battle',
     kicker: 'Choice battle',
     title: 'Berlin Battle',

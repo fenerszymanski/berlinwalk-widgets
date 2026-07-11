@@ -16,6 +16,27 @@
 
   const GAMES = [
     {
+      id: 'where-in-berlin',
+      title: 'Where in Berlin Do You Belong?',
+      short: 'Match your Berlin rhythm.',
+      lane: 'District match',
+      image: 'where-in-berlin/assets/social/where-in-berlin-social-1200x630.png',
+      href: 'https://www.berlinwalk.com/games/where-in-berlin',
+      filters: ['quick', 'share', 'sound'],
+      duration: 'Under 2 min',
+      start: 'Six situation calls',
+      bestFor: 'New visitors, Kiez curiosity, shareable identity',
+      score: 'Borough match',
+      lead: 'Six four-choice Berlin situations reveal the borough whose pace and instincts best fit you.',
+      rules: [
+        'Choose one visual answer per situation.',
+        'Let the hidden city-rhythm score do the work.',
+        'Take one borough match and a useful next move.'
+      ],
+      tourBridge: 'Best for visitors who need one clear area-led way into Berlin before they make a day too complicated.',
+      cta: 'Find your borough'
+    },
+    {
       id: 'berlin-battle',
       title: 'Berlin Battle',
       short: 'Pick your Berlin winner.',

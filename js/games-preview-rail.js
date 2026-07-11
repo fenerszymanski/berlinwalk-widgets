@@ -3,9 +3,18 @@
   const BASE_URL = SCRIPT_URL
     ? new URL('../', SCRIPT_URL).toString()
     : 'https://fenerszymanski.github.io/berlinwalk-widgets/';
-  const BUILD = 'games-preview-rail-pulse-20260708b';
+  const BUILD = 'games-preview-rail-where-polish-20260711a';
 
   const GAMES = [
+    {
+      id: 'where-in-berlin',
+      title: 'Where in Berlin Do You Belong?',
+      kicker: 'District match',
+      lead: 'Six quick choices. One Berlin borough that fits your city rhythm.',
+      image: 'where-in-berlin/assets/social/where-in-berlin-social-1200x630.png',
+      href: 'https://www.berlinwalk.com/games/where-in-berlin',
+      cta: 'Find your borough'
+    },
     {
       id: 'berlin-battle',
       title: 'Berlin Battle',
@@ -111,6 +120,25 @@
         --gp-red: #888888;
       }
 
+      .bw-games-preview-rail[data-theme="district"] {
+        --gp-card: rgba(251, 251, 246, 0.96);
+        --gp-ink: #FFFFFF;
+        --gp-muted: rgba(255, 255, 255, 0.72);
+        --gp-line: rgba(255, 255, 255, 0.20);
+        --gp-yellow: #FFE600;
+        --gp-green: #FFE600;
+        --gp-red: #FFE600;
+        margin-top: clamp(26px, 4vw, 42px);
+      }
+
+      .bw-games-preview-rail[data-theme="district"] .bw-games-preview-card {
+        --gp-ink: #06381A;
+        --gp-muted: #536257;
+        --gp-green: #0B5D28;
+        --gp-red: #E63946;
+        box-shadow: 0 20px 42px rgba(0, 0, 0, 0.26);
+      }
+
       .bw-games-preview-rail,
       .bw-games-preview-rail * {
         box-sizing: border-box;
@@ -179,6 +207,8 @@
       .bw-games-preview-card img {
         aspect-ratio: 16 / 9;
         background: rgba(27, 94, 32, 0.08);
+        background-position: center;
+        background-size: cover;
         display: block;
         height: auto;
         object-fit: cover;
@@ -273,22 +303,26 @@
     const opts = options || {};
     const current = opts.current || '';
     const source = opts.source || current || 'game_page';
-    const items = GAMES.filter((game) => game.id !== current).slice(0, 4);
+    const limit = Math.max(1, Math.min(GAMES.length, Number(opts.limit) || 4));
+    const items = GAMES.filter((game) => game.id !== current).slice(0, limit);
+    const kicker = opts.kicker || 'Keep playing';
+    const title = opts.title || 'Try another Berlin game';
+    const showAllLink = opts.showAllLink !== false;
     ensureStyles();
     container.className = 'bw-games-preview-rail';
     if (opts.theme) container.dataset.theme = opts.theme;
     container.innerHTML = `
       <div class="bw-games-preview-head">
         <div>
-          <p class="bw-games-preview-kicker">Keep playing</p>
-          <h2>Try another Berlin game</h2>
+          <p class="bw-games-preview-kicker">${escapeHtml(kicker)}</p>
+          <h2>${escapeHtml(title)}</h2>
         </div>
-        <a href="${gameUrl({ href: 'https://www.berlinwalk.com/games' }, source, 'all_games')}">All games</a>
+        ${showAllLink ? `<a href="${gameUrl({ href: 'https://www.berlinwalk.com/games' }, source, 'all_games')}">All games</a>` : ''}
       </div>
       <div class="bw-games-preview-grid">
         ${items.map((game) => `
           <a class="bw-games-preview-card" data-game="${escapeHtml(game.id)}" href="${gameUrl(game, source, game.id)}">
-            <img src="${asset(game.image)}" alt="${escapeHtml(game.title)} preview image" loading="eager" decoding="async">
+            <img src="${escapeHtml(asset(game.image))}" style="background-image:url('${escapeHtml(asset(game.image))}')" alt="${escapeHtml(game.title)} preview image" loading="eager" decoding="async">
             <span class="bw-games-preview-body">
               <span>${escapeHtml(game.kicker)}</span>
               <strong>${escapeHtml(game.title)}</strong>
