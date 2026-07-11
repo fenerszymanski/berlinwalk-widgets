@@ -194,8 +194,7 @@
   "kaiser-wilhelm-memorial-church-berlin": "kaiser-wilhelm-memorial-church-berlin",
   "jewish-museum-berlin-guide": "jewish-museum-berlin-guide",
   "jewish-museum-berlin-free-entry-how-long-and-what-to-see-2026": "jewish-museum-berlin-guide",
-  "u-bahn-vs-s-bahn-berlin": "u-bahn-vs-s-bahn-berlin",
-  "markthalle-neun-berlin": "markthalle-neun-berlin"
+  "u-bahn-vs-s-bahn-berlin": "u-bahn-vs-s-bahn-berlin"
 };
 
   var SCHEMAS = {
@@ -9131,60 +9130,6 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The Ringbahn is the S-Bahn loop that circles Berlin's inner city, tracing the edge of fare zone A. Line S41 runs clockwise and S42 runs anticlockwise, and neither has an end stop, so you simply ride to the station you need. It is a handy way to reach neighbourhoods around the centre without going through the middle, and it is covered by a standard AB ticket."
-        }
-      }
-    ]
-  },
-  "markthalle-neun-berlin": {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What is Markthalle Neun?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Markthalle Neun is a covered food market hall in Berlin-Kreuzberg, at Eisenbahnstrasse 42/43. It opened in 1891 as the ninth of Berlin’s covered market halls and was reopened by local residents in 2011 as a proper market again. Today it mixes permanent traders, like a butcher, bakery and cheese and deli counters, with weekly markets and the well-known Street Food Thursday. The original green iron columns and glass roof make it worth seeing on their own."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "When is Street Food Thursday at Markthalle Neun?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Street Food Thursday runs every Thursday from 17:00 to 22:00. It started at Markthalle Neun in 2013 as a place for cooks without their own restaurant to sell one dish they do well, and the line-up of small international stands rotates from week to week. It is the busiest and most famous time to visit, so come closer to 17:30 or 18:00 if you want to see the food before the evening crowd builds."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is Markthalle Neun open on Sunday?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Markthalle Neun is closed on Sunday, with no market and no street food, and this is the most common mistake visitors make. During the week it runs a small market from Monday to Wednesday (roughly 12:00 to 18:00), the small market plus Street Food Thursday on Thursday, the Big Market on Friday (about 12:00 to 18:00), and the Big Market again on Saturday from around 10:00 to 18:00. Saturday morning is the best daytime visit."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How do I get to Markthalle Neun?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Markthalle Neun is at Eisenbahnstrasse 42/43, 10997 Berlin-Kreuzberg. The easiest way there is the U1 to Görlitzer Bahnhof, then a five-minute walk south into a quiet residential block. Bus 140 to Wrangelstrasse also stops nearby. A normal Berlin AB ticket covers the trip, so you do not need anything special to reach it."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do I need cash at Markthalle Neun?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "It helps to have some. Many stalls now take cards, but not all of them do, and on a busy Street Food Thursday a few euros in cash saves you queueing at a stand that is card-only or cash-only. Bringing a small amount of cash is the safest approach at any Berlin market."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is Markthalle Neun worth visiting?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes, as long as you go on the right day. On a Thursday evening for Street Food Thursday, or on a Saturday morning for the Big Market, it is one of the most enjoyable and least touristy food experiences in Berlin, inside a genuinely beautiful old hall. On a Sunday it is closed, and Monday to Wednesday is quiet, so plan your visit around Thursday evening or the weekend."
         }
       }
     ]

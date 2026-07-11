@@ -6,15 +6,15 @@
  *   <bw-berlin-rewind-landing-v2></bw-berlin-rewind-landing-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-landing-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-landing-v2-direct-play-20260710f
+ * Build marker: berlin-rewind-landing-v2-archive-skin-20260711a
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-berlin-rewind-landing-v2';
-  var GAME_TAG = 'bw-berlin-rewind-leaderboard-v2';
-  var BUILD = 'berlin-rewind-landing-v2-direct-play-20260710f';
-  var GAME_BUILD = 'berlin-rewind-v2-practice-return-20260710g';
+  var GAME_TAG = 'bw-berlin-rewind-archive-v2';
+  var BUILD = 'berlin-rewind-landing-v2-archive-skin-20260711a';
+  var GAME_BUILD = 'berlin-rewind-v2-archive-skin-20260711a';
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
     ? new URL('./', SCRIPT_URL).toString()
