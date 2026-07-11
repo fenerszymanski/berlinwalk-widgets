@@ -165,7 +165,10 @@
     ".bw-wt .maplabel.big{font-size:15px;fill:var(--ink-dim)}",
     ".bw-wt .xlabel{font-family:Montserrat,Arial,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;fill:var(--ink-dim)}",
     ".bw-wt-xsec{pointer-events:none}.bw-wt-xsec.live{pointer-events:auto}",
-    ".bw-wt-xsec .layer{cursor:pointer}.bw-wt-xsec .layer:hover .xlabel{fill:var(--yellow)}",
+    ".bw-wt-xsec .layer{cursor:pointer}.bw-wt-xsec .bw-wt-hit{fill:transparent;pointer-events:all}",
+    ".bw-wt-xsec .layer:hover .xlabel,.bw-wt-xsec .layer.is-active .xlabel{fill:var(--yellow)}",
+    ".bw-wt [data-el=fall],.bw-wt [data-el=tunnel],.bw-wt [data-el=tunnelLabel]{pointer-events:none}",
+    ".bw-wt-step.strip .bw-wt-card{pointer-events:none}",
     ".bw-wt.xsec-live .lamp{animation:bwwt-lamp 2.6s ease-in-out infinite}",
     "@keyframes bwwt-lamp{0%,100%{opacity:.35}50%{opacity:.8}}",
     ".bw-wt.today-live .pulse{animation:bwwt-pulse 2s ease-out infinite;transform-origin:center;transform-box:fill-box}",
@@ -229,28 +232,36 @@
     '<text class="maplabel big" x="95" y="516">East Berlin</text>',
     '<text class="maplabel big" x="828" y="516">West Berlin</text>',
     '<g class="layer" data-tip-t="Inner wall" data-tip="The first barrier an escaper had to beat, often the back wall of their own street.">',
+    '<rect class="bw-wt-hit" x="90" y="350" width="95" height="135"/>',
     '<rect x="128" y="404" width="16" height="66" fill="var(--concrete)" opacity=".8"/><text class="xlabel" x="104" y="392">Inner wall</text></g>',
     '<g class="layer" data-tip-t="Signal fence" data-tip="Touch it and a silent alarm called the guards.">',
+    '<rect class="bw-wt-hit" x="185" y="370" width="115" height="115"/>',
     '<line x1="238" y1="418" x2="238" y2="470" stroke="var(--ink-dim)" stroke-width="2"/><line x1="252" y1="418" x2="252" y2="470" stroke="var(--ink-dim)" stroke-width="2"/>',
     '<line x1="232" y1="428" x2="258" y2="428" stroke="var(--red)" stroke-width="1.5"/><line x1="232" y1="446" x2="258" y2="446" stroke="var(--red)" stroke-width="1.5"/>',
     '<text class="xlabel" x="206" y="404">Signal fence</text></g>',
     '<g class="layer" data-tip-t="Light strip" data-tip="The death strip stayed lit all night, every night.">',
+    '<rect class="bw-wt-hit" x="300" y="355" width="125" height="130"/>',
     '<line x1="330" y1="410" x2="330" y2="470" stroke="var(--ink-dim)" stroke-width="2.5"/><circle cx="330" cy="406" r="9" fill="var(--yellow)" class="lamp"/>',
     '<line x1="392" y1="410" x2="392" y2="470" stroke="var(--ink-dim)" stroke-width="2.5"/><circle cx="392" cy="406" r="9" fill="var(--yellow)" class="lamp"/>',
     '<text class="xlabel" x="318" y="392">Lights</text></g>',
     '<g class="layer" data-tip-t="Watchtower" data-tip="Around 300 towers. Guards stood in pairs so neither could defect alone.">',
+    '<rect class="bw-wt-hit" x="425" y="300" width="100" height="185"/>',
     '<rect x="466" y="382" width="18" height="88" fill="var(--concrete)" opacity=".85"/><rect x="452" y="352" width="46" height="32" fill="var(--concrete)"/>',
     '<rect x="459" y="360" width="12" height="10" fill="var(--night)"/><rect x="479" y="360" width="12" height="10" fill="var(--night)"/>',
     '<text class="xlabel" x="438" y="340">Watchtower</text></g>',
     '<g class="layer" data-tip-t="Dog run" data-tip="Leashed dogs patrolled along 100 m wires.">',
+    '<rect class="bw-wt-hit" x="525" y="405" width="100" height="80"/>',
     '<line x1="540" y1="452" x2="612" y2="452" stroke="var(--ink-dim)" stroke-width="1.5" stroke-dasharray="5 4"/><circle cx="572" cy="459" r="5.5" fill="var(--red)"/>',
     '<text class="xlabel" x="540" y="438">Dog run</text></g>',
     '<g class="layer" data-tip-t="Control strip" data-tip="Raked sand that recorded every footprint.">',
+    '<rect class="bw-wt-hit" x="625" y="405" width="110" height="80"/>',
     '<rect x="636" y="458" width="88" height="12" fill="rgba(255,230,0,.20)"/><line x1="640" y1="462" x2="720" y2="462" stroke="rgba(255,230,0,.4)" stroke-width="1"/>',
     '<line x1="640" y1="466" x2="720" y2="466" stroke="rgba(255,230,0,.4)" stroke-width="1"/><text class="xlabel" x="628" y="444">Raked sand</text></g>',
     '<g class="layer" data-tip-t="Vehicle trench" data-tip="Stopped anyone trying to drive through the strip.">',
+    '<rect class="bw-wt-hit" x="735" y="430" width="80" height="95"/>',
     '<path d="M 748,470 L 758,486 L 778,486 L 788,470" fill="none" stroke="var(--ink-dim)" stroke-width="2"/><text class="xlabel" x="732" y="504">Trench</text></g>',
     '<g class="layer" data-tip-t="The Wall" data-tip="3.6 m of concrete with a smooth round pipe on top. Nothing to grip.">',
+    '<rect class="bw-wt-hit" x="815" y="290" width="90" height="195"/>',
     '<rect x="838" y="358" width="26" height="112" fill="#cfd2cc"/><circle cx="851" cy="352" r="17" fill="#b9bcb6"/><text class="xlabel" x="822" y="322">The Wall</text></g>',
     '<path data-el="tunnel" d="M 180,506 C 350,540 650,540 880,502" fill="none" stroke="var(--yellow)" stroke-width="2.5" stroke-dasharray="6 5" opacity="0"/>',
     '<text data-el="tunnelLabel" class="xlabel" x="470" y="560" opacity="0" style="fill:var(--yellow)">Tunnel 57, dug for months in the dark</text>',
@@ -482,12 +493,20 @@
           var y = Math.max(10, (ev.clientY || window.innerHeight / 2) - 96);
           tip.style.left = x + 'px'; tip.style.top = y + 'px';
           tip.classList.add('show');
+          self._layers.forEach(function (layer) { layer.classList.toggle('is-active', layer === l); });
           clearTimeout(tipTimer);
-          tipTimer = setTimeout(function () { tip.classList.remove('show'); }, 3200);
+          tipTimer = setTimeout(function () {
+            tip.classList.remove('show');
+            l.classList.remove('is-active');
+          }, 3200);
         }
         l.addEventListener('pointerenter', show);
         l.addEventListener('pointerdown', show);
-        l.addEventListener('pointerleave', function () { tip.classList.remove('show'); });
+        l.addEventListener('pointerleave', function (ev) {
+          if (ev.pointerType === 'touch') return;
+          tip.classList.remove('show');
+          l.classList.remove('is-active');
+        });
       });
 
       // scroll loop
