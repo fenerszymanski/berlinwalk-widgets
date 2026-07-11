@@ -538,6 +538,7 @@ function topicFor(post) {
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
   if (/(u-bahn-vs-s-bahn-berlin|u-bahn vs s-bahn|s-bahn vs u-bahn|ubahn vs sbahn|which berlin train|berlin rail decoder)/.test(s)) return 'berlin-rail-decoder';
+  if (/(markthalle-neun-berlin|markthalle neun|markthalle ix|street food thursday)/.test(s)) return 'markthalle-neun-week-planner';
   if (/(jewish-museum-berlin-guide|jewish museum berlin|jüdisches museum berlin|juedisches museum berlin|garden of exile|holocaust tower|libeskind building)/.test(s)) return 'jewish-museum-visit-sequence';
   if (/(air-conditioning-in-berlin|air conditioning|air-conditioning|do hotels have|no ac|no-ac|stay cool|staying cool|room heat|heatwave room)/.test(s)) return 'berlin-room-heat-check';
   if (/(berlin-u-bahn-fine|u-bahn fine|caught without a ticket|ticket fine|\bebe\b)/.test(s)) return 'berlin-ticket-fine-step-planner';

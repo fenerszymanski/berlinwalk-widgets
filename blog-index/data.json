@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-11T07:20:17.547Z",
+  "updatedAt": "2026-07-11T11:34:03.612Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 189,
+  "totalPosts": 190,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "Markthalle Neun: Berlin's Best Food Market and Street Food Thursday (2026)",
+      "slug": "markthalle-neun-berlin",
+      "path": "/post/markthalle-neun-berlin",
+      "url": "https://www.berlinwalk.com/post/markthalle-neun-berlin",
+      "excerpt": "Same market hall, completely different day. A local guide to Markthalle Neun in Kreuzberg: when Street Food Thursday runs, which day has the Big Market, and why you should never turn up on a Sunday.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-11T11:17:50.053Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f6d86c3ee9d943a4b15c20a2c0e7bcb6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-markthalle-neun-berlin-interior-hall-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f6d86c3ee9d943a4b15c20a2c0e7bcb6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-markthalle-neun-berlin-interior-hall-cover.jpg",
+      "alt": "The green cast-iron and glass interior of Markthalle Neun in Berlin-Kreuzberg, with hanging black-and-white portraits and food stalls under an arched roof",
+      "relatedToolSlug": "markthalle-neun-week-planner"
+    },
+    {
       "title": "U-Bahn vs S-Bahn in Berlin: What's the Difference?",
       "slug": "u-bahn-vs-s-bahn-berlin",
       "path": "/post/u-bahn-vs-s-bahn-berlin",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_a61ba52f7419412eb02ba6880166ef78~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-cyclists-group.jpg",
       "alt": "A group of tourists cycling together along a sunny street in central Berlin",
       "relatedToolSlug": "berlin-bike-rental-finder"
-    },
-    {
-      "title": "E-Scooters in Berlin: How to Rent One and the Rules That Get You Fined",
-      "slug": "e-scooters-in-berlin",
-      "path": "/post/e-scooters-in-berlin",
-      "url": "https://www.berlinwalk.com/post/e-scooters-in-berlin",
-      "excerpt": "A Berlin guide's practical guide to rental e-scooters: the four apps, where you can ride, the parking rules, and the drink-riding mistake that can cost your driving licence.",
-      "category": "Tourist Tips",
-      "categorySlug": "tourist-tips",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-07-08T06:14:54.226Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_741e536377c9487ab9d3539060ae2d8a~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-shared-scooters-lined-up-berlin.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_741e536377c9487ab9d3539060ae2d8a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-shared-scooters-lined-up-berlin.jpg",
-      "alt": "A long row of teal Dott and green Lime rental e-scooters parked along a boulevard in central Berlin",
-      "relatedToolSlug": "berlin-e-scooter-rule-checker"
     }
   ],
   "allPosts": [
+    {
+      "title": "Markthalle Neun: Berlin's Best Food Market and Street Food Thursday (2026)",
+      "slug": "markthalle-neun-berlin",
+      "path": "/post/markthalle-neun-berlin",
+      "url": "https://www.berlinwalk.com/post/markthalle-neun-berlin",
+      "excerpt": "Same market hall, completely different day. A local guide to Markthalle Neun in Kreuzberg: when Street Food Thursday runs, which day has the Big Market, and why you should never turn up on a Sunday.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-11T11:17:50.053Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_f6d86c3ee9d943a4b15c20a2c0e7bcb6~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-markthalle-neun-berlin-interior-hall-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_f6d86c3ee9d943a4b15c20a2c0e7bcb6~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-markthalle-neun-berlin-interior-hall-cover.jpg",
+      "alt": "The green cast-iron and glass interior of Markthalle Neun in Berlin-Kreuzberg, with hanging black-and-white portraits and food stalls under an arched roof",
+      "relatedToolSlug": "markthalle-neun-week-planner"
+    },
     {
       "title": "U-Bahn vs S-Bahn in Berlin: What's the Difference?",
       "slug": "u-bahn-vs-s-bahn-berlin",
