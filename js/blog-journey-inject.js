@@ -43,6 +43,10 @@
   var bootAt = Date.now();
   var readyTimer = null;
   var nextTourSlotRequested = false;
+  var liveJourneyTitlePromise = null;
+  var liveJourneyTitle = '';
+  var liveJourneyTitleUpdatedAt = 0;
+  var LIVE_JOURNEY_TITLE_TTL_MS = 15 * 60 * 1000;
 
   installDelayedConsentGuard();
   loadBookingNextActionPatch();
@@ -140,6 +144,59 @@
 
   function getNextTourStartsLabel(count, compact) {
     return startEntriesLabel(getNextTourStarts(count), compact !== false);
+  }
+
+  function liveNextTourTitle(count) {
+    var now = Date.now();
+    if (liveJourneyTitle && (now - liveJourneyTitleUpdatedAt) < LIVE_JOURNEY_TITLE_TTL_MS) {
+      return Promise.resolve(liveJourneyTitle);
+    }
+    if (typeof window.bwLiveNextTourStarts !== 'function') return Promise.resolve('');
+    if (liveJourneyTitlePromise) return liveJourneyTitlePromise;
+    liveJourneyTitlePromise = window.bwLiveNextTourStarts({ days: 60, count: count || 2 }).then(function (starts) {
+      var label = startEntriesLabel(starts || [], false);
+      if (label) {
+        liveJourneyTitle = 'Next tours: ' + label;
+        liveJourneyTitleUpdatedAt = Date.now();
+      }
+      return liveJourneyTitle;
+    }).catch(function () {
+      return '';
+    }).then(function (title) {
+      liveJourneyTitlePromise = null;
+      return title;
+    });
+    return liveJourneyTitlePromise;
+  }
+
+  function setJourneyBookingTitle(section, title, source) {
+    if (!section || !title) return;
+    var cards = section.querySelectorAll('[data-bw-journey-cta-kind="booking"][data-book-link="1"]');
+    for (var i = 0; i < cards.length; i++) {
+      var heading = cards[i].querySelector('strong');
+      if (heading && heading.textContent !== title) heading.textContent = title;
+      cards[i].setAttribute('data-bw-booking-availability', source || 'live');
+    }
+    section.setAttribute('data-bw-blog-journey-booking-availability', source || 'live');
+  }
+
+  function refreshJourneyBookingTitle(section) {
+    if (!isPostPage()) return;
+    section = section || document.querySelector('[' + JOURNEY_MARKER + ']');
+    if (!section || !section.querySelector('[data-bw-journey-cta-kind="booking"][data-book-link="1"]')) return;
+    if (liveJourneyTitle && (Date.now() - liveJourneyTitleUpdatedAt) < LIVE_JOURNEY_TITLE_TTL_MS) {
+      setJourneyBookingTitle(section, liveJourneyTitle, 'live');
+      return;
+    }
+    if (typeof window.bwLiveNextTourStarts !== 'function') {
+      ensureNextTourSlotHelper();
+      return;
+    }
+    section.setAttribute('data-bw-blog-journey-booking-availability', 'loading');
+    liveNextTourTitle(2).then(function (title) {
+      var current = document.querySelector('[' + JOURNEY_MARKER + ']');
+      if (title && current) setJourneyBookingTitle(current, title, 'live');
+    });
   }
 
   function installDelayedConsentGuard() {
@@ -2110,7 +2167,10 @@
       posts.map(function (related) { return related.slug || related.url; }).join(',')
     ].join('|');
     var old = document.querySelector('[' + JOURNEY_MARKER + ']');
-    if (old && old.getAttribute('data-bw-blog-journey-key') === journeyKey) return;
+    if (old && old.getAttribute('data-bw-blog-journey-key') === journeyKey) {
+      refreshJourneyBookingTitle(old);
+      return;
+    }
     if (old) old.remove();
 
     var section = document.createElement('section');
@@ -2159,6 +2219,7 @@
     if (point.before) point.parent.insertBefore(section, point.before);
     else if (point.after && point.after.parentNode === point.parent) point.parent.insertBefore(section, point.after.nextSibling);
     else point.parent.appendChild(section);
+    refreshJourneyBookingTitle(section);
     pushEvent('bw_blog_journey_view', {
       slug: currentSlug(),
       intent: strategy.intent,
