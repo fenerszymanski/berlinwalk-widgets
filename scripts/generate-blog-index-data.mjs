@@ -178,8 +178,13 @@ const TOPICS = [
 // guides. Keep this curated because the /blog hero is the first editorial
 // signal visitors see before the Latest shelf.
 const HERO_SLUGS = {
-  lead: 'berlin-wall-memorial-bernauer-strasse',
+  lead: 'mauerpark-berlin-sunday',
   secondary: [
+    'jewish-museum-berlin-guide',
+    'uber-in-berlin',
+    'air-conditioning-in-berlin',
+    'berlin-wall-memorial-bernauer-strasse',
+    'kaiser-wilhelm-memorial-church-berlin',
     'berlin-u-bahn-fine',
     'renting-a-bike-in-berlin',
     'is-the-ddr-museum-worth-it',
@@ -221,6 +226,11 @@ const REQUIRED_SLUGS = [
   'why-is-berlin-founding-year-1237',
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
+  'mauerpark-berlin-sunday',
+  'jewish-museum-berlin-guide',
+  'uber-in-berlin',
+  'air-conditioning-in-berlin',
+  'kaiser-wilhelm-memorial-church-berlin',
   'berlin-wall-memorial-bernauer-strasse',
   'berlin-u-bahn-fine',
   'renting-a-bike-in-berlin',
@@ -581,6 +591,7 @@ function relatedToolSlugFor(post) {
   if (/(atm-in-berlin|atm|cash withdrawal|withdraw euros|cash machine|dynamic currency conversion)/.test(s)) return 'berlin-atm-fee-checker';
   if (/(tip|tipping|gratuity)/.test(s)) return 'berlin-tip-calculator';
   if (/(berlin-restaurant-phrases|restaurant phrases|german restaurant phrases|ordering food|ask for the bill|berlin cafe phrases)/.test(s)) return 'berlin-restaurant-phrase-card';
+  if (/(uber-in-berlin|does uber work in berlin|ride-hailing apps explained)/.test(s)) return 'berlin-ride-reckoner';
   if (/(taxi|uber|bolt taxi|free-now|free now|freenow|rideshare|ride-hailing|airport taxi)/.test(s)) return 'berlin-taxi-uber-cost-checker';
   if (/(public-holiday|public holiday|public-holidays|public holidays|bank-holiday|bank holiday|holiday-closures|holiday closures|shop-closures|shop closures|shops-closed|shops closed)/.test(s)) return 'berlin-public-holiday-checker';
   if (/(airport|transport|ticket|validate|u-bahn|s-bahn|bus-100)/.test(s)) return 'transport-ticket-calculator';
