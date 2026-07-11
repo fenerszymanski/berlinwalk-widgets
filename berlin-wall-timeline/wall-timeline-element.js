@@ -14,13 +14,13 @@
  *
  * Designed for a Wix page with the global header and footer hidden.
  *
- * Build marker: wall-timeline-v1-20260711b
+ * Build marker: wall-timeline-v1-20260711c
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-wall-timeline';
-  var BUILD = 'wall-timeline-v1-20260711b';
+  var BUILD = 'wall-timeline-v1-20260711c';
 
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
@@ -74,6 +74,28 @@
     ".bw-wt-photo-up{left:clamp(26px,6vw,86px);bottom:11%}",
     ".bw-wt-photo-escapes{right:clamp(28px,7vw,90px);top:17%}",
     ".bw-wt-photo-fall{right:clamp(28px,7vw,90px);top:19%}",
+    ".bw-wt-real-map{pointer-events:none;vector-effect:non-scaling-stroke}",
+    ".bw-wt-real-base .district{fill:rgba(250,250,245,.018);stroke:rgba(250,250,245,.11);stroke-width:1}",
+    ".bw-wt-real-base .water-area{fill:rgba(72,121,147,.16);stroke:rgba(120,160,190,.18);stroke-width:1}",
+    ".bw-wt-real-base .water-line{fill:none;stroke:rgba(120,160,190,.38);stroke-width:2.4;stroke-linecap:round}",
+    ".bw-wt-real-base .west-fill{fill:rgba(250,250,245,.045);stroke:none}",
+    ".bw-wt-real-base .east-fill{fill:rgba(230,57,70,.045);stroke:none}",
+    ".bw-wt-real-sector{stroke:rgba(250,250,245,.18);stroke-width:1.2}",
+    ".bw-wt-real-sector-label{font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;fill:rgba(250,250,245,.58)}",
+    ".bw-wt-real-label{font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;fill:rgba(250,250,245,.46)}",
+    ".bw-wt-real-water-label{font-family:Montserrat,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:.08em;fill:rgba(160,195,210,.58)}",
+    ".bw-wt-real-wall-main{fill:none;stroke:var(--red);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}",
+    ".bw-wt-real-wall-rear{fill:none;stroke:rgba(250,250,245,.35);stroke-width:1.4;stroke-dasharray:2 5;stroke-linecap:round}",
+    ".bw-wt-real-wall-political{fill:none;stroke:rgba(250,250,245,.18);stroke-width:1;stroke-dasharray:2 7}",
+    ".bw-wt-real-strip{fill:rgba(230,57,70,.14);stroke:rgba(230,57,70,.35);stroke-width:1;stroke-dasharray:2 5}",
+    ".bw-wt-real-today-line{fill:none;stroke:rgba(250,250,245,.62);stroke-width:2.2;stroke-dasharray:2 9;stroke-linecap:round}",
+    ".bw-wt-real-today .bw-wt-real-label{font-size:7px;letter-spacing:.05em;opacity:.76}",
+    ".bw-wt-real-marker{fill:var(--lime);stroke:var(--cream);stroke-width:1.4}",
+    ".bw-wt-real-marker-start{fill:var(--yellow);stroke:var(--yellow);stroke-width:2}",
+    ".bw-wt-real-marker-story{fill:var(--red);stroke:var(--cream);stroke-width:1.2}",
+    ".bw-wt-real-air-path{fill:none;stroke:rgba(250,250,245,.4);stroke-width:1.3;stroke-dasharray:4 7}",
+    ".bw-wt-real-air-plane{fill:var(--yellow)}",
+    ".bw-wt-real-attribution{font-family:Montserrat,Arial,sans-serif;font-size:8px;letter-spacing:.04em;fill:rgba(250,250,245,.32)}",
     ".bw-wt-steps{position:relative;z-index:2;margin-top:-100vh;margin-top:-100svh;pointer-events:none}",
     ".bw-wt-step{position:relative;display:flex;padding:0 clamp(16px,6vw,80px);pointer-events:none}",
     ".bw-wt-h100{min-height:100vh;min-height:100svh}.bw-wt-h150{min-height:150vh;min-height:150svh}.bw-wt-h200{min-height:200vh;min-height:200svh}.bw-wt-h250{min-height:250vh;min-height:250svh}",
@@ -146,6 +168,7 @@
     '<path id="bwwt-ring" d="M 320,180 C 380,150 450,160 480,200 C 510,230 520,270 515,310 C 512,350 535,380 520,420 C 500,465 430,490 360,470 C 290,450 240,410 230,350 C 220,290 260,210 320,180 Z"/>',
     '<clipPath id="bwwt-clipWest"><use href="#bwwt-ring"/></clipPath>',
     '</defs>',
+    '<g data-el="realMap" class="bw-wt-real-map" opacity="0"><g data-el="realView"></g></g>',
     // MAP
     '<g data-el="map">',
     '<path d="M 150,320 C 160,180 320,90 520,90 C 720,90 860,170 872,320 C 860,470 700,560 500,560 C 300,560 140,460 150,320 Z" fill="rgba(250,250,245,.035)" stroke="rgba(250,250,245,.14)" stroke-width="1.5"/>',
@@ -329,7 +352,7 @@
         + '</div>'
         + '<div class="bw-wt-vignette"></div>'
         + '<div class="bw-wt-hud"><div class="bw-wt-year"><span class="bw-wt-tick">19</span>45</div><div class="bw-wt-chapter">A divided city</div></div>'
-        + '<a class="bw-wt-brand" href="' + esc(HOME_URL) + '" aria-label="BerlinWalk home"><img src="' + esc(BASE_URL + 'assets/brand/berlinwalk-wordmark-yellow.png') + '" alt=""></a>'
+        + '<a class="bw-wt-brand" href="' + esc(HOME_URL) + '" aria-label="BerlinWalk home"><img src="' + esc(BASE_URL + 'assets/brand/berlinwalk-wordmark-cream.png') + '" alt=""></a>'
         + '<nav class="bw-wt-rail" aria-label="Timeline chapters"></nav>'
         + '</div></div>'
         + '<div class="bw-wt-steps">' + steps + '</div>'
@@ -350,6 +373,9 @@
       this._chapterEl = q('.bw-wt-chapter');
       this._stage = q('.bw-wt-stage');
       this._gMap = q('[data-el="map"]');
+      this._gRealMap = q('[data-el="realMap"]');
+      this._gRealView = q('[data-el="realView"]');
+      this._realReady = false;
       this._gSectors = q('[data-el="sectors"]');
       this._gAirlift = q('[data-el="airlift"]');
       this._ring = q('[data-el="ring"]');
@@ -463,6 +489,254 @@
         }
       }
       this._update();
+      this._loadRealMap();
+    }
+
+    _svg(name, attrs, text) {
+      var NS = 'http://www.w3.org/2000/svg';
+      var el = document.createElementNS(NS, name);
+      Object.keys(attrs || {}).forEach(function (key) { el.setAttribute(key, attrs[key]); });
+      if (text != null) el.textContent = text;
+      return el;
+    }
+
+    _loadRealMap() {
+      var self = this;
+      fetch(BASE_URL + 'assets/map/map-data.json', { cache: 'force-cache' })
+        .then(function (response) {
+          if (!response.ok) throw new Error('Map data request failed: ' + response.status);
+          return response.json();
+        })
+        .then(function (data) {
+          self._buildRealMap(data);
+          self._realData = data;
+          self._realReady = true;
+          self._root.setAttribute('data-map-state', 'ready');
+          self._update();
+        })
+        .catch(function () {
+          self._realReady = false;
+          self._root.setAttribute('data-map-state', 'fallback');
+        });
+    }
+
+    _buildRealMap(data) {
+      var view = this._gRealView;
+      while (view.firstChild) view.removeChild(view.firstChild);
+
+      var base = this._svg('g', { class: 'bw-wt-real-base' });
+      data.waterAreas.forEach(function (item) {
+        base.appendChild(this._svg('path', { class: 'water-area', d: item.d }));
+      }, this);
+      data.waterLines.forEach(function (item) {
+        base.appendChild(this._svg('path', { class: 'water-line', d: item.d }));
+      }, this);
+      data.westBerlin.forEach(function (d) {
+        base.appendChild(this._svg('path', { class: 'west-fill', d: d }));
+      }, this);
+      data.eastBerlin.forEach(function (d) {
+        base.appendChild(this._svg('path', { class: 'east-fill', d: d }));
+      }, this);
+      data.districts.forEach(function (item) {
+        base.appendChild(this._svg('path', { class: 'district', d: item.d }));
+      }, this);
+      var districtLabels = this._svg('g', { class: 'bw-wt-real-district-labels' });
+      data.labels.forEach(function (item) {
+        districtLabels.appendChild(this._svg('text', { class: 'bw-wt-real-label', x: item.x, y: item.y }, item.name));
+      }, this);
+      base.appendChild(districtLabels);
+      base.appendChild(this._svg('text', { class: 'bw-wt-real-water-label', x: 565, y: 592 }, 'Spree'));
+      base.appendChild(this._svg('text', { class: 'bw-wt-real-attribution', x: 22, y: 622 }, 'Map data © OpenStreetMap contributors · Wall data © Berlin Open Data'));
+      view.appendChild(base);
+      this._gRealBase = base;
+      this._gRealDistrictLabels = districtLabels;
+
+      var sectors = this._svg('g', { class: 'bw-wt-real-sectors' });
+      this._realSectorGroups = [];
+      data.sectors.forEach(function (item) {
+        var group = this._svg('g', { class: 'bw-wt-real-sector-group', opacity: 0 });
+        group.appendChild(this._svg('path', { class: 'bw-wt-real-sector', d: item.d, fill: item.fill }));
+        group.appendChild(this._svg('text', { class: 'bw-wt-real-sector-label', x: item.labelPoint[0], y: item.labelPoint[1] }, item.label));
+        sectors.appendChild(group);
+        this._realSectorGroups.push(group);
+      }, this);
+      view.appendChild(sectors);
+      this._gRealSectors = sectors;
+
+      var strip = this._svg('g', { class: 'bw-wt-real-strip-group', opacity: 0 });
+      (data.wall.strip || []).forEach(function (d) {
+        strip.appendChild(this._svg('path', { class: 'bw-wt-real-strip', d: d }));
+      }, this);
+      view.appendChild(strip);
+      this._gRealStrip = strip;
+
+      var wall = this._svg('g', { class: 'bw-wt-real-wall-group', opacity: 0 });
+      (data.wall.political || []).forEach(function (d) {
+        wall.appendChild(this._svg('path', { class: 'bw-wt-real-wall-political', d: d }));
+      }, this);
+      (data.wall.rear || []).forEach(function (d) {
+        wall.appendChild(this._svg('path', { class: 'bw-wt-real-wall-rear', d: d }));
+      }, this);
+      this._realWallPaths = [];
+      (data.wall.main || []).forEach(function (d) {
+        var path = this._svg('path', { class: 'bw-wt-real-wall-main', d: d });
+        wall.appendChild(path);
+        this._realWallPaths.push(path);
+      }, this);
+      view.appendChild(wall);
+      this._gRealWall = wall;
+      this._realWallPaths.forEach(function (path) {
+        var length = path.getTotalLength ? path.getTotalLength() : 1000;
+        path.dataset.length = length;
+        path.style.strokeDasharray = length + ' ' + length;
+        path.style.strokeDashoffset = length;
+      });
+
+      var airlift = this._svg('g', { class: 'bw-wt-real-airlift', opacity: 0 });
+      var arrival = {};
+      var origins = [];
+      data.airports.forEach(function (airport) {
+        if (airport.role === 'arrival') arrival[airport.id] = airport;
+        if (airport.role === 'origin') origins.push(airport);
+      });
+      var airTargets = ['tegel', 'gatow', 'tempelhof'];
+      this._realAirPaths = [];
+      this._realAirPlanes = [];
+      origins.forEach(function (origin, index) {
+        var target = arrival[airTargets[index]] || arrival.tempelhof;
+        if (!target) return;
+        var cx = (origin.x + target.x) / 2;
+        var cy = Math.min(origin.y, target.y) - 100 - index * 28;
+        var path = this._svg('path', { class: 'bw-wt-real-air-path', d: 'M ' + origin.x + ' ' + origin.y + ' Q ' + cx + ' ' + cy + ' ' + target.x + ' ' + target.y });
+        airlift.appendChild(path);
+        var plane = this._svg('circle', { class: 'bw-wt-real-air-plane', r: 4, cx: origin.x, cy: origin.y, opacity: 0 });
+        airlift.appendChild(plane);
+        this._realAirPaths.push(path);
+        this._realAirPlanes.push({ path: path, plane: plane });
+      }, this);
+      data.airports.filter(function (a) { return a.role === 'arrival'; }).forEach(function (airport) {
+        airlift.appendChild(this._svg('circle', { class: 'bw-wt-real-marker-start', r: 5, cx: airport.x, cy: airport.y }));
+        airlift.appendChild(this._svg('text', { class: 'bw-wt-real-label', x: airport.x + 8, y: airport.y - 8 }, airport.name));
+      }, this);
+      view.appendChild(airlift);
+      this._gRealAirlift = airlift;
+
+      var escapes = this._svg('g', { class: 'bw-wt-real-escapes', opacity: 0 });
+      var fall = this._svg('g', { class: 'bw-wt-real-fall', opacity: 0 });
+      var pointByName = {};
+      data.points.forEach(function (point) { pointByName[point.name] = point; });
+      var bernauer = pointByName['Bernauer Straße'];
+      var bornholmer = pointByName['Bornholmer Straße'];
+      if (bernauer) {
+        escapes.appendChild(this._svg('circle', { class: 'bw-wt-real-marker-story', r: 7, cx: bernauer.x, cy: bernauer.y }));
+        escapes.appendChild(this._svg('text', { class: 'bw-wt-real-label', x: bernauer.x + 10, y: bernauer.y - 10 }, 'Tunnel 57 · Bernauer Straße'));
+      }
+      if (bornholmer) {
+        fall.appendChild(this._svg('circle', { class: 'bw-wt-real-marker-story', r: 7, cx: bornholmer.x, cy: bornholmer.y }));
+        fall.appendChild(this._svg('text', { class: 'bw-wt-real-label', x: bornholmer.x + 10, y: bornholmer.y - 10 }, 'Bornholmer Straße · 23:30'));
+      }
+      view.appendChild(escapes);
+      view.appendChild(fall);
+      this._gRealEscapes = escapes;
+      this._gRealFall = fall;
+
+      var today = this._svg('g', { class: 'bw-wt-real-today', opacity: 0 });
+      (data.wall.main || []).forEach(function (d) {
+        today.appendChild(this._svg('path', { class: 'bw-wt-real-today-line', d: d }));
+      }, this);
+      var todayNames = new Set(['Alexanderplatz', 'Brandenburg Gate', 'Checkpoint Charlie', 'East Side Gallery']);
+      var renderedTodayNames = {};
+      data.points.filter(function (point) { return point.group !== 'watchtowers' && todayNames.has(point.name); }).forEach(function (point) {
+        if (renderedTodayNames[point.name]) return;
+        renderedTodayNames[point.name] = true;
+        var cls = point.name === 'Alexanderplatz' ? 'bw-wt-real-marker-start' : (point.group === 'story' ? 'bw-wt-real-marker-story' : 'bw-wt-real-marker');
+        var radius = point.name === 'Alexanderplatz' ? 7 : (point.group === 'story' ? 5 : 4);
+        today.appendChild(this._svg('circle', { class: cls, r: radius, cx: point.x, cy: point.y }));
+        if (point.group === 'story' || point.group === 'tour_landmarks') {
+          today.appendChild(this._svg('text', { class: 'bw-wt-real-label', x: point.x + 8, y: point.y - 8 }, point.name));
+        }
+      }, this);
+      view.appendChild(today);
+      this._gRealToday = today;
+      this._realCameraTargets = pointByName;
+    }
+
+    _camera(name, scale, fallback) {
+      var point = this._realCameraTargets && this._realCameraTargets[name];
+      point = point || fallback || { x: 500, y: 320 };
+      return { x: point.x, y: point.y, s: scale };
+    }
+
+    _lerpCamera(a, b, t) {
+      return {
+        x: a.x + (b.x - a.x) * t,
+        y: a.y + (b.y - a.y) * t,
+        s: a.s + (b.s - a.s) * t
+      };
+    }
+
+    _realCameraFor(ci, p) {
+      var full = { x: 500, y: 320, s: 1 };
+      if (!this._realCameraTargets) return full;
+      var west = this._camera('Tempelhof', 1.28, full);
+      var central = this._camera('Checkpoint Charlie', 1.85, full);
+      var bernauer = this._camera('Bernauer Straße', 2.35, central);
+      var bornholmer = this._camera('Bornholmer Straße', 2.35, bernauer);
+      var today = this._camera('Alexanderplatz', 1.35, central);
+      if (ci === 2) return this._lerpCamera(full, west, ease(p));
+      if (ci === 3) return this._lerpCamera(west, central, ease(p));
+      if (ci === 4) return central;
+      if (ci === 5) return this._lerpCamera(central, bernauer, ease(p));
+      if (ci === 6) return this._lerpCamera(bernauer, bornholmer, ease(p));
+      if (ci === 7) return this._lerpCamera(bornholmer, today, ease(p));
+      if (ci === 8) return today;
+      return full;
+    }
+
+    _updateRealMap(ci, p, mapO, sectO, airO, ringO, ringDraw, todayO, xsecO) {
+      if (!this._realReady) return;
+      var realMapO = 0;
+      if (ci === 0) realMapO = .68 + .18 * ease(p);
+      if (ci === 1) realMapO = .96;
+      if (ci === 2) realMapO = .96;
+      if (ci === 3) realMapO = 1;
+      if (ci === 4) realMapO = .12 * (1 - p);
+      if (ci === 5) realMapO = .34 * (1 - clamp(p * 1.15));
+      if (ci === 6) realMapO = .18 * (1 - p);
+      if (ci === 7) realMapO = .9;
+      if (ci === 8) realMapO = .68;
+
+      this._gRealMap.setAttribute('opacity', realMapO.toFixed(3));
+      this._gRealView.setAttribute('transform', (function (camera) {
+        return 'translate(' + (500 - camera.x * camera.s).toFixed(1) + ' ' + (320 - camera.y * camera.s).toFixed(1) + ') scale(' + camera.s.toFixed(3) + ')';
+      })(this._realCameraFor(ci, p)));
+      this._gRealDistrictLabels.setAttribute('opacity', (ci === 0 ? .8 : (ci === 1 || ci === 2 ? .28 : (ci === 3 ? .38 : 0))).toFixed(3));
+
+      var sectorOpacity = ci === 1 ? 1 : (ci === 2 ? .35 : 0);
+      this._gRealSectors.setAttribute('opacity', sectorOpacity.toFixed(3));
+      this._realSectorGroups.forEach(function (group, idx) {
+        var reveal = ci === 1 ? clamp((p - idx * .14) / .18) : (ci >= 2 ? 1 : 0);
+        group.setAttribute('opacity', reveal.toFixed(3));
+      });
+
+      this._gRealAirlift.setAttribute('opacity', (ci === 2 ? airO : 0).toFixed(3));
+      this._realAirPlanes.forEach(function (item, idx) {
+        var length = item.path.getTotalLength ? item.path.getTotalLength() : 1000;
+        var point = item.path.getPointAtLength(length * ((p * 1.8 + idx * .3) % 1));
+        item.plane.setAttribute('cx', point.x);
+        item.plane.setAttribute('cy', point.y);
+        item.plane.setAttribute('opacity', ci === 2 && airO > .05 ? 1 : 0);
+      });
+
+      this._gRealWall.setAttribute('opacity', (ci >= 3 && ci <= 4 ? ringO : 0).toFixed(3));
+      this._realWallPaths.forEach(function (path) {
+        var length = Number(path.dataset.length || 1000);
+        path.style.strokeDashoffset = String(length * (1 - (ci >= 4 ? 1 : ringDraw)));
+      });
+      this._gRealStrip.setAttribute('opacity', (ci === 4 ? xsecO : (ci === 5 ? .4 : 0)).toFixed(3));
+      this._gRealEscapes.setAttribute('opacity', (ci === 5 ? clamp((p - .05) * 10) * (1 - clamp((p - .82) * 5)) : 0).toFixed(3));
+      this._gRealFall.setAttribute('opacity', (ci === 6 ? clamp((p - .06) * 8) * (1 - clamp((p - .7) * 3)) : 0).toFixed(3));
+      this._gRealToday.setAttribute('opacity', todayO.toFixed(3));
     }
 
     _yearFor(ci, p) {
@@ -528,7 +802,7 @@
       if (ci === 5) photoEscapesO = clamp((p - .12) / .2) * (1 - clamp((p - .84) / .16));
       if (ci === 6) photoFallO = clamp((p - .12) / .2) * (1 - clamp((p - .86) / .14));
 
-      this._gMap.setAttribute('opacity', mapO.toFixed(3));
+      this._gMap.setAttribute('opacity', (this._realReady ? mapO * .015 : mapO).toFixed(3));
       this._gSectors.setAttribute('opacity', sectO.toFixed(3));
       this._gAirlift.setAttribute('opacity', airO.toFixed(3));
       this._gToday.setAttribute('opacity', todayO.toFixed(3));
@@ -587,6 +861,7 @@
       root.classList.toggle('fall-live', ci === 6);
       root.classList.toggle('today-live', ci === 7 || ci === 8);
 
+      this._updateRealMap(ci, p, mapO, sectO, airO, ringO, ringDraw, todayO, xsecO);
       this._stage.style.opacity = ci === 8 ? String(1 - clamp((p - .1) * 1.2) * .75) : '1';
     }
   }

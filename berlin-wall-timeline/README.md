@@ -6,22 +6,26 @@ served from GitHub Pages, no iframe.
 
 ## What it is
 
-A single sticky stage carries an SVG scene that redraws as the reader scrolls
-through nine full-screen chapters:
+A single sticky stage carries a real-geography SVG scene that redraws as the
+reader scrolls through nine full-screen chapters:
 
 1. **Hero** — `The Wall`, 1945 to 1990.
-2. **Four sectors** — the divided-city map paints in the four occupation zones.
-3. **The Airlift** — 1948 blockade; planes stream into Tempelhof.
-4. **The Wall goes up** — August 13, 1961; the red Wall line draws itself all
-   the way around West Berlin and reveals it as an island.
+2. **Four sectors** — Berlin's real Ortsteile resolve into the four occupation
+   zones.
+3. **The Airlift** — 1948 blockade; real air corridors stream into Tempelhof,
+   Gatow and Tegel.
+4. **The Wall goes up** — August 13, 1961; the official 1989 Wall geometry
+   draws itself around West Berlin and reveals the real city as an island.
 5. **The death strip** — the map flips to a cross-section diagram; inner wall,
    signal fence, lights, watchtower, dog run, raked sand, trench, and the Wall
    build up layer by layer. Each layer is **tappable** for a one-line note.
-6. **The escapes** — counters tick up; Tunnel 57 draws under the strip.
+6. **The escapes** — the camera moves toward Bernauer Strasse and Tunnel 57;
+   counters tick up before the cross-section returns.
 7. **The fall** — November 9, 1989; the concrete panels topple, a crowd streams
    across, and the whole surface floods from Berlin-red night to brand green.
-8. **What is left** — today's map: Bernauer Strasse, East Side Gallery,
-   Checkpoint Charlie, and the tour start at Alexanderplatz.
+8. **What is left** — the real Wall trace becomes a dotted city path, with
+   Bernauer Strasse, East Side Gallery, Checkpoint Charlie, Brandenburg Gate
+   and the tour start at Alexanderplatz.
 9. **Walk it** — the free-tour booking CTA.
 
 A pinned HUD shows a live **year counter** (1945 → 2026) and the current chapter
@@ -40,14 +44,23 @@ name; a right-side rail lets the reader jump between chapters.
   whole document.
 - The colour flood, animation gates, and reduced-motion handling are all scoped
   to the element root, so nothing leaks onto the rest of the page.
-- `assets/` is reserved for the archival photo layer and social cover (see
-  "Next" below). The experience works today with the interactive SVG scenes
-  alone; photos are an enhancement, not a dependency.
+- `assets/map/map-data.json` is a compact, pre-projected real-Berlin map package
+  containing the city geometry, waterways, occupation sectors, Wall layers and
+  story landmarks. It loads once from the pinned asset bundle and never calls a
+  live tile provider. If it cannot load, the original schematic scene remains
+  available as a fallback.
+- `assets/map/SOURCES.md` records the Berlin Open Data, Berlin Ortsteile and
+  OpenStreetMap inputs. `_build/build_map_data.py` regenerates the package from
+  refreshed source snapshots.
+- The archival photo layer and social cover remain in `assets/` as independent
+  enhancements; photos are not a map dependency.
 
 ## Files
 
 - `wall-timeline-element.js` — the whole experience (data + logic + CSS + SVG).
+- `_build/build_map_data.py` — deterministic map-data build script.
 - `index.html` — standalone, non-indexed local preview.
+- `assets/map/map-data.json` — runtime real-geography path package.
 - `SEO_SETTINGS.md` — Wix-ready SEO title, description, canonical, robots, OG,
   and JSON-LD for the final public page.
 - `assets/social/berlin-wall-timeline-1200x630.jpg` — public-domain historical social cover.
@@ -61,7 +74,7 @@ same as `paid-landing`):
 
 ```html
 <bw-wall-timeline></bw-wall-timeline>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260710i" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711c" defer></script>
 ```
 
 If using Wix Studio's Custom Element panel:
