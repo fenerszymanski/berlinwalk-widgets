@@ -78,7 +78,7 @@ same as `paid-landing`):
 
 ```html
 <bw-wall-timeline></bw-wall-timeline>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711f" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711h" defer></script>
 ```
 
 If using Wix Studio's Custom Element panel:

@@ -14,13 +14,13 @@
  *
  * Designed for a Wix page with the global header and footer hidden.
  *
- * Build marker: wall-timeline-v1-20260711g
+ * Build marker: wall-timeline-v1-20260711h
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-wall-timeline';
-  var BUILD = 'wall-timeline-v1-20260711g';
+  var BUILD = 'wall-timeline-v1-20260711h';
 
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
@@ -744,15 +744,17 @@
         group.setAttribute('opacity', reveal.toFixed(3));
       });
 
-      this._gRealAirlift.setAttribute('opacity', (ci === 2 ? airO : 0).toFixed(3));
+      this._gRealAirlift.setAttribute('opacity', ((ci === 2 || (ci === 3 && p < .42)) ? airO : 0).toFixed(3));
       this._realAirPlanes.forEach(function (item) {
         var length = item.path.getTotalLength ? item.path.getTotalLength() : 1000;
-        var f = Math.min(.998, .84 + item.offset + p * .10);
+        // Keep the convoy moving through most of the chapter. The old
+        // near-arrival range made the planes appear to stop almost at once.
+        var f = Math.min(.998, .56 + item.offset + p * .38);
         var point = item.path.getPointAtLength(length * f);
         var next = item.path.getPointAtLength(length * Math.min(.999, f + .012));
         var angle = Math.atan2(next.y - point.y, next.x - point.x) * 180 / Math.PI;
         item.plane.setAttribute('transform', 'translate(' + point.x.toFixed(1) + ' ' + point.y.toFixed(1) + ') rotate(' + angle.toFixed(1) + ') scale(' + item.scale + ')');
-        item.plane.setAttribute('opacity', ci === 2 && airO > .05 ? 1 : 0);
+        item.plane.setAttribute('opacity', airO > .05 ? 1 : 0);
       });
 
       this._gRealWall.setAttribute('opacity', (ci >= 3 && ci <= 4 ? ringO : 0).toFixed(3));
@@ -817,8 +819,10 @@
       var photoUpO = 0, photoEscapesO = 0, photoFallO = 0;
       if (ci === 0) { mapO = .35 + .45 * ease(p); }
       if (ci === 1) { mapO = .9; sectO = ease(clamp(p * 1.6)); }
-      if (ci === 2) { mapO = .9; sectO = 1 - clamp((p - .6) * 3); airO = ease(clamp(p * 2)); }
-      if (ci === 3) { mapO = 1; airO = 1 - clamp(p * 4); ringO = 1; ringDraw = ease(clamp((p - .06) / .7)); islO = clamp((p - .55) * 4); }
+      if (ci === 2) { mapO = .9; sectO = 1 - clamp((p - .6) * 3); airO = 1; }
+      // Let the convoy hold over the next scene, then cut it cleanly instead
+      // of fading it away while the Wall line takes over.
+      if (ci === 3) { mapO = 1; airO = p < .42 ? 1 : 0; ringO = 1; ringDraw = ease(clamp((p - .06) / .7)); islO = clamp((p - .55) * 4); }
       if (ci === 4) { ringO = 1; ringDraw = 1; mapO = 1 - clamp(p * 3.2); xsecO = ease(clamp((p - .12) * 2.4)); }
       if (ci === 5) { xsecO = 1; }
       if (ci === 6) { xsecO = 1 - clamp(p * 5); fallO = ease(clamp((p - .1) * 2.5)); }
@@ -887,7 +891,7 @@
       root.classList.toggle('xsec-live', ci === 4 || ci === 5);
       root.classList.toggle('fall-live', ci === 6);
       root.classList.toggle('today-live', ci === 7 || ci === 8);
-      root.classList.toggle('airlift-live', ci === 2);
+      root.classList.toggle('airlift-live', ci === 2 || (ci === 3 && p < .42));
 
       this._updateRealMap(ci, p, mapO, sectO, airO, ringO, ringDraw, todayO, xsecO);
       this._stage.style.opacity = ci === 8 ? String(1 - clamp((p - .1) * 1.2) * .75) : '1';
