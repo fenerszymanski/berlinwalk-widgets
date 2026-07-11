@@ -194,7 +194,9 @@
   "kaiser-wilhelm-memorial-church-berlin": "kaiser-wilhelm-memorial-church-berlin",
   "jewish-museum-berlin-guide": "jewish-museum-berlin-guide",
   "jewish-museum-berlin-free-entry-how-long-and-what-to-see-2026": "jewish-museum-berlin-guide",
-  "u-bahn-vs-s-bahn-berlin": "u-bahn-vs-s-bahn-berlin"
+  "u-bahn-vs-s-bahn-berlin": "u-bahn-vs-s-bahn-berlin",
+  "markthalle-neun-berlin": "markthalle-neun-berlin",
+  "currency-exchange-in-berlin": "currency-exchange-in-berlin"
 };
 
   var SCHEMAS = {
@@ -9130,6 +9132,114 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "The Ringbahn is the S-Bahn loop that circles Berlin's inner city, tracing the edge of fare zone A. Line S41 runs clockwise and S42 runs anticlockwise, and neither has an end stop, so you simply ride to the station you need. It is a handy way to reach neighbourhoods around the centre without going through the middle, and it is covered by a standard AB ticket."
+        }
+      }
+    ]
+  },
+  "markthalle-neun-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Markthalle Neun?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Markthalle Neun is a covered food market hall in Berlin-Kreuzberg, at Eisenbahnstrasse 42/43. It opened in 1891 as the ninth of Berlin’s covered market halls and was reopened by local residents in 2011 as a proper market again. Today it mixes permanent traders, like a butcher, bakery and cheese and deli counters, with weekly markets and the well-known Street Food Thursday. The original green iron columns and glass roof make it worth seeing on their own."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When is Street Food Thursday at Markthalle Neun?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Street Food Thursday runs every Thursday from 17:00 to 22:00. It started at Markthalle Neun in 2013 as a place for cooks without their own restaurant to sell one dish they do well, and the line-up of small international stands rotates from week to week. It is the busiest and most famous time to visit, so come closer to 17:30 or 18:00 if you want to see the food before the evening crowd builds."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Markthalle Neun open on Sunday?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Markthalle Neun is closed on Sunday, with no market and no street food, and this is the most common mistake visitors make. During the week it runs a small market from Monday to Wednesday (roughly 12:00 to 18:00), the small market plus Street Food Thursday on Thursday, the Big Market on Friday (about 12:00 to 18:00), and the Big Market again on Saturday from around 10:00 to 18:00. Saturday morning is the best daytime visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Markthalle Neun?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Markthalle Neun is at Eisenbahnstrasse 42/43, 10997 Berlin-Kreuzberg. The easiest way there is the U1 to Görlitzer Bahnhof, then a five-minute walk south into a quiet residential block. Bus 140 to Wrangelstrasse also stops nearby. A normal Berlin AB ticket covers the trip, so you do not need anything special to reach it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need cash at Markthalle Neun?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "It helps to have some. Many stalls now take cards, but not all of them do, and on a busy Street Food Thursday a few euros in cash saves you queueing at a stand that is card-only or cash-only. Bringing a small amount of cash is the safest approach at any Berlin market."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Markthalle Neun worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, as long as you go on the right day. On a Thursday evening for Street Food Thursday, or on a Saturday morning for the Big Market, it is one of the most enjoyable and least touristy food experiences in Berlin, inside a genuinely beautiful old hall. On a Sunday it is closed, and Monday to Wednesday is quiet, so plan your visit around Thursday evening or the weekend."
+        }
+      }
+    ]
+  },
+  "currency-exchange-in-berlin": {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Where is the best place to exchange money in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most visitors the best 'exchange' is not an exchange office at all, but a bank-run ATM (Sparkasse, Volksbank, Deutsche Bank or Postbank) where you decline the currency conversion and let your own bank do the maths. That is almost always the closest you get to the real rate. If you specifically need to hand over foreign cash, the Reisebank and Euro Change counters at Hauptbahnhof, Friedrichstraße, Zoo Station and Alexanderplatz are better value than the airport and open long hours. Avoid the standalone Euronet machines by the Brandenburg Gate and the exchange desks inside the airport, which give the worst rates in the city."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Should I exchange money before I travel to Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You usually do not need to. Berlin uses the euro, and cards are widely accepted in hotels, restaurants and larger shops, so you rarely need a big pile of cash on arrival. Exchanging a large amount at home often means a poor rate too. A cleaner plan is to bring a card with no foreign-transaction fee and withdraw a small amount of euros, around €100 to €200, from a bank ATM once you land or reach the city. That covers Spätis, markets and cash-only bars without leaving you carrying, or losing money on, cash you never spend."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is it better to use cash or card in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Both, but with a bias toward card for anything larger. Berlin is more cash-loving than many capital cities: some bars, Spätis (late-night corner shops), market stalls and small imbisses are still cash-only or have a card minimum. But hotels, restaurants, supermarkets and most shops take Visa, Mastercard and often Apple or Google Pay. The practical answer is to keep a small amount of euro cash (roughly €50 to €150) for the cash-only moments and pay by card everywhere else. That way you are never stuck, and you are not exchanging or withdrawing more cash than you need."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Are the currency exchange desks at Berlin Airport (BER) a good deal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The exchange desks inside Berlin Brandenburg Airport (Travelex and Euro Change) are convenient, but their rates are among the worst you will see on the whole trip, because they know arriving travelers have limited choice. Airport currency exchange almost always builds a large margin into the rate, even when the sign says '0% commission'. If you land needing euros, skip the exchange counter, walk to a bank-run ATM in the terminal, decline the currency conversion, and withdraw only what you need for the first day or two."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is dynamic currency conversion and should I accept it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dynamic currency conversion (DCC) is when an ATM or a card terminal offers to charge you in your home currency instead of euros. It sounds helpful, but the machine or shop sets the exchange rate and adds a markup, often 5 to 13 percent worse than paying in euros. Always choose to be charged in euros (EUR) and let your own bank handle the conversion. This one habit, at every ATM and every card machine, saves you more than choosing the perfect exchange office ever could."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much cash should I bring or withdraw in Berlin?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For a typical few-day visit, around €100 to €200 in cash is plenty for most people, topped up from a bank ATM if you run low. That covers the cash-only corners of Berlin (some bars, Spätis, market stalls, tips) while you pay for hotels, restaurants and shopping by card. Withdrawing in one or two larger amounts from a bank-run ATM, rather than lots of small pulls, keeps any fixed withdrawal fees down, and declining the on-screen currency conversion keeps the rate fair."
         }
       }
     ]
