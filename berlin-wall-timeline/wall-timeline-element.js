@@ -14,13 +14,13 @@
  *
  * Designed for a Wix page with the global header and footer hidden.
  *
- * Build marker: wall-timeline-v1-20260711d
+ * Build marker: wall-timeline-v1-20260711e
  */
 (function () {
   'use strict';
 
   var TAG = 'bw-wall-timeline';
-  var BUILD = 'wall-timeline-v1-20260711d';
+  var BUILD = 'wall-timeline-v1-20260711e';
 
   var SCRIPT_URL = document.currentScript && document.currentScript.src ? document.currentScript.src : '';
   var BASE_URL = SCRIPT_URL && !/static\.wixstatic\.com/i.test(SCRIPT_URL)
@@ -30,6 +30,7 @@
   var FINAL_URL = 'https://www.berlinwalk.com/berlin-wall-timeline';
   var HOME_URL = 'https://www.berlinwalk.com/?utm_source=berlin_wall_timeline&utm_medium=story&utm_campaign=berlinwalk&utm_content=brand';
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based?utm_source=berlin_wall_timeline&utm_medium=story&utm_campaign=berlinwalk&utm_content=book_cta';
+  var AUDIO_URL = 'https://www.berlinwalk.com/products/death-strip-audio-route?utm_source=berlin_wall_timeline&utm_medium=story&utm_campaign=berlinwalk&utm_content=audio_cta';
   var COVER_URL = BASE_URL + 'assets/social/berlin-wall-timeline-1200x630.jpg';
 
   var SEO = {
@@ -75,8 +76,6 @@
     ".bw-wt-photo-escapes{right:clamp(28px,7vw,90px);top:17%}",
     ".bw-wt-photo-fall{right:clamp(28px,7vw,90px);top:19%}",
     ".bw-wt-real-map{pointer-events:none;vector-effect:non-scaling-stroke}",
-    ".bw-wt-real-base .water-area{fill:rgba(72,121,147,.16);stroke:rgba(120,160,190,.18);stroke-width:1}",
-    ".bw-wt-real-base .water-line{fill:none;stroke:rgba(120,160,190,.38);stroke-width:2.4;stroke-linecap:round}",
     ".bw-wt-real-base .west-fill{fill:rgba(250,250,245,.045);stroke:none}",
     ".bw-wt-real-base .east-fill{fill:rgba(230,57,70,.045);stroke:none}",
     ".bw-wt-real-berlin-boundary{fill:none;stroke:rgba(250,250,245,.42);stroke-width:2.2;stroke-linejoin:round}",
@@ -84,7 +83,6 @@
     ".bw-wt-real-sector-label{font-family:Montserrat,Arial,sans-serif;font-size:12px;font-weight:800;letter-spacing:.09em;text-anchor:middle;text-transform:uppercase;fill:var(--cream);paint-order:stroke;stroke:rgba(16,19,18,.72);stroke-width:3px;stroke-linejoin:round}",
     ".bw-wt-real-sector-label.label-dark{fill:var(--night);stroke:rgba(250,250,245,.58)}",
     ".bw-wt-real-label{font-family:Montserrat,Arial,sans-serif;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;fill:rgba(250,250,245,.46)}",
-    ".bw-wt-real-water-label{font-family:Montserrat,Arial,sans-serif;font-size:9px;font-weight:600;letter-spacing:.08em;fill:rgba(160,195,210,.58)}",
     ".bw-wt-real-wall-main{fill:none;stroke:var(--red);stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}",
     ".bw-wt-real-wall-rear{fill:none;stroke:rgba(250,250,245,.35);stroke-width:1.4;stroke-dasharray:2 5;stroke-linecap:round}",
     ".bw-wt-real-wall-political{fill:none;stroke:rgba(250,250,245,.18);stroke-width:1;stroke-dasharray:2 7}",
@@ -126,6 +124,11 @@
     ".bw-wt a.bw-wt-btn{color:var(--green)}",
     ".bw-wt-btn:hover{background:#fff176}",
     ".bw-wt-btn:focus-visible{outline:3px solid var(--lime);outline-offset:3px}",
+    ".bw-wt-cta-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;align-items:center}",
+    ".bw-wt-cta-actions .bw-wt-btn{margin-top:1.4rem}",
+    ".bw-wt-btn-audio{background:transparent;border:1px solid rgba(250,250,245,.55);color:var(--cream)!important}",
+    ".bw-wt-btn-audio:hover{background:var(--cream);color:var(--green)!important}",
+    ".bw-wt-price{font-size:.74em;letter-spacing:.03em;opacity:.78}",
     ".bw-wt-card p.bw-wt-sub{margin-top:1.6rem;font-size:.78rem;color:var(--ink-faint);letter-spacing:.08em}",
     ".bw-wt-sub a{color:var(--ink-dim);text-decoration:underline}",
     /* hud + brand + rail (pinned inside stage) */
@@ -168,7 +171,7 @@
     "@keyframes bwwt-march{from{transform:translateX(0)}to{transform:translateX(760px)}}",
     "@media (prefers-reduced-motion:reduce){.bw-wt .crowd-dot,.bw-wt .lamp,.bw-wt .pulse{animation:none}.bw-wt-cue:after{animation:none}.bw-wt-card,.bw-wt-photo{transition:none}}",
     "@media (min-width:641px){.bw-wt-step:not(.hero):not(.cta){padding-top:64px}.bw-wt-step.up:not(.hero):not(.cta){padding-top:380px}}",
-    "@media (max-width:640px){.bw-wt-step{padding:0 14px;align-items:flex-end;justify-content:center}.bw-wt-card{margin-bottom:12vh;max-width:100%}.bw-wt-step.hero,.bw-wt-step.cta{align-items:center}.bw-wt-step.hero .bw-wt-card,.bw-wt-step.cta .bw-wt-card{margin-bottom:0}.bw-wt-step.hero h1{font-size:clamp(2.2rem,11vw,4.2rem)}.bw-wt-rail{gap:10px}.bw-wt-rail button{width:8px;height:8px}.bw-wt-brand{width:clamp(108px,32vw,138px)}.bw-wt-sector-legend{top:78px;right:40px;grid-template-columns:1fr;gap:5px;font-size:.52rem}.bw-wt[data-chapter=strip] .bw-wt-stage svg,.bw-wt[data-chapter=escapes] .bw-wt-stage svg{transform:translateY(10vh) scale(.94);transform-origin:center center}.bw-wt-photo{width:42vw;max-width:190px}.bw-wt-photo-up{left:14px;bottom:8%}.bw-wt-photo-escapes{right:14px;top:17%}.bw-wt-photo-fall{right:14px;top:16%}.bw-wt-photo figcaption{font-size:.44rem}}"
+    "@media (max-width:640px){.bw-wt-step{padding:0 14px;align-items:flex-end;justify-content:center}.bw-wt-card{margin-bottom:12vh;max-width:100%}.bw-wt-step.hero,.bw-wt-step.cta{align-items:center}.bw-wt-step.hero .bw-wt-card,.bw-wt-step.cta .bw-wt-card{margin-bottom:0}.bw-wt-step.hero h1{font-size:clamp(2.2rem,11vw,4.2rem)}.bw-wt-rail{gap:10px}.bw-wt-rail button{width:8px;height:8px}.bw-wt-brand{width:clamp(108px,32vw,138px)}.bw-wt-sector-legend{top:78px;right:40px;grid-template-columns:1fr;gap:5px;font-size:.52rem}.bw-wt-cta-actions{flex-direction:column;align-items:stretch}.bw-wt-cta-actions .bw-wt-btn{width:100%;text-align:center}.bw-wt[data-chapter=strip] .bw-wt-stage svg,.bw-wt[data-chapter=escapes] .bw-wt-stage svg{transform:translateY(10vh) scale(.94);transform-origin:center center}.bw-wt-photo{width:42vw;max-width:190px}.bw-wt-photo-up{left:14px;bottom:8%}.bw-wt-photo-escapes{right:14px;top:17%}.bw-wt-photo-fall{right:14px;top:16%}.bw-wt-photo figcaption{font-size:.44rem}}"
   ].join('');
 
   var SVG = [
@@ -271,7 +274,7 @@
     escapes: '<p class="bw-wt-eyebrow">1961 to 1989, the escapes</p><h2>Over, under, through</h2><p>People jumped from windows, swam the Spree, dug for months in the dark. Tunnel 57 alone brought 57 people out in two nights.</p><div class="bw-wt-chips"><div class="bw-wt-chip"><b><span data-el="c1">0</span>+</b><span>made it across</span></div><div class="bw-wt-chip"><b><span data-el="c2">0</span>+</b><span>died at the Wall</span></div><div class="bw-wt-chip"><b><span data-el="c3">0</span>+</b><span>tunnels dug</span></div></div>',
     fall: '<p class="bw-wt-eyebrow">November 9, 1989</p><h2>The night it fell</h2><p>A botched press conference, one sentence about travel being free "immediately", and thousands walked to the crossings. At 23:30 the gate at Bornholmer Strasse gave way. No shots. Just crowds, tears and hammers.</p>',
     today: '<p class="bw-wt-eyebrow">Today, what is left</p><h2>The Wall is gone. The line is not.</h2><p>A double row of cobblestones traces the old border through the city. You can stand at Bernauer Strasse where the death strip is preserved, or at the East Side Gallery where 1.3 km of Wall became a canvas. My tour starts at Alexanderplatz, in the heart of what was East Berlin.</p>',
-    cta: '<h2>You scrolled 45 years.<br>Now walk it.</h2><p>I run a free walking tour lasting 2 hours through the old heart of East Berlin. Real places, real stories. You pay what you think it was worth at the end.</p><a class="bw-wt-btn" href="' + esc(BOOK_URL) + '">Book the free tour</a><p class="bw-wt-sub"><a href="' + esc(HOME_URL) + '">berlinwalk.com</a> &middot; @berlinwalkingtour</p>'
+    cta: '<h2>You scrolled 45 years.<br>Now walk it.</h2><p>I run a free walking tour lasting 2 hours through the old heart of East Berlin. Real places, real stories. You pay what you think it was worth at the end.</p><div class="bw-wt-cta-actions"><a class="bw-wt-btn" href="' + esc(BOOK_URL) + '">Book the free tour</a><a class="bw-wt-btn bw-wt-btn-audio" href="' + esc(AUDIO_URL) + '">Walk the Wall with my audio guide <span class="bw-wt-price">€8.99</span></a></div><p class="bw-wt-sub"><a href="' + esc(HOME_URL) + '">berlinwalk.com</a> &middot; @berlinwalkingtour</p>'
   };
 
   function upsertMeta(kind, key, content) {
@@ -538,12 +541,6 @@
       while (view.firstChild) view.removeChild(view.firstChild);
 
       var base = this._svg('g', { class: 'bw-wt-real-base' });
-      data.waterAreas.forEach(function (item) {
-        base.appendChild(this._svg('path', { class: 'water-area', d: item.d }));
-      }, this);
-      data.waterLines.forEach(function (item) {
-        base.appendChild(this._svg('path', { class: 'water-line', d: item.d }));
-      }, this);
       data.westBerlin.forEach(function (d) {
         base.appendChild(this._svg('path', { class: 'west-fill', d: d }));
       }, this);
@@ -555,7 +552,6 @@
         berlinBoundary.appendChild(this._svg('path', { d: d }));
       }, this);
       base.appendChild(berlinBoundary);
-      base.appendChild(this._svg('text', { class: 'bw-wt-real-water-label', x: 565, y: 592 }, 'Spree'));
       base.appendChild(this._svg('text', { class: 'bw-wt-real-attribution', x: 22, y: 622 }, 'Map data © OpenStreetMap contributors · Wall data © Berlin Open Data'));
       view.appendChild(base);
       this._gRealBase = base;

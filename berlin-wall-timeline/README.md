@@ -45,10 +45,12 @@ name; a right-side rail lets the reader jump between chapters.
 - The colour flood, animation gates, and reduced-motion handling are all scoped
   to the element root, so nothing leaks onto the rest of the page.
 - `assets/map/map-data.json` is a compact, pre-projected real-Berlin map package
-  containing the city geometry, waterways, occupation sectors, Wall layers and
-  story landmarks. It loads once from the pinned asset bundle and never calls a
-  live tile provider. If it cannot load, the original schematic scene remains
-  available as a fallback.
+  containing the city geometry, occupation sectors, Wall layers and story
+  landmarks. Waterway source data remains in the package for reproducibility,
+  but the timeline deliberately does not render rivers or canals so the sector
+  story stays visually clean. It loads once from the pinned asset bundle and
+  never calls a live tile provider. If it cannot load, the original schematic
+  scene remains available as a fallback.
 - `assets/map/SOURCES.md` records the Berlin Open Data, Berlin Ortsteile and
   OpenStreetMap inputs. Ortsteile are used to dissolve the four story sectors;
   individual district outlines and labels are deliberately not rendered.
@@ -76,7 +78,7 @@ same as `paid-landing`):
 
 ```html
 <bw-wall-timeline></bw-wall-timeline>
-<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711d" defer></script>
+<script src="https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/wall-timeline-element.js?v=wall-timeline-v1-20260711e" defer></script>
 ```
 
 If using Wix Studio's Custom Element panel:
