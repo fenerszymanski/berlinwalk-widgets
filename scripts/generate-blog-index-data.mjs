@@ -180,6 +180,7 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'mauerpark-berlin-sunday',
   secondary: [
+    'u-bahn-vs-s-bahn-berlin',
     'jewish-museum-berlin-guide',
     'uber-in-berlin',
     'air-conditioning-in-berlin',
@@ -227,6 +228,7 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'mauerpark-berlin-sunday',
+  'u-bahn-vs-s-bahn-berlin',
   'jewish-museum-berlin-guide',
   'uber-in-berlin',
   'air-conditioning-in-berlin',
@@ -535,6 +537,7 @@ function topicFor(post) {
 
 function relatedToolSlugFor(post) {
   const s = `${post.slug || ''} ${post.title || ''}`.toLowerCase();
+  if (/(u-bahn-vs-s-bahn-berlin|u-bahn vs s-bahn|s-bahn vs u-bahn|ubahn vs sbahn|which berlin train|berlin rail decoder)/.test(s)) return 'berlin-rail-decoder';
   if (/(jewish-museum-berlin-guide|jewish museum berlin|jüdisches museum berlin|juedisches museum berlin|garden of exile|holocaust tower|libeskind building)/.test(s)) return 'jewish-museum-visit-sequence';
   if (/(air-conditioning-in-berlin|air conditioning|air-conditioning|do hotels have|no ac|no-ac|stay cool|staying cool|room heat|heatwave room)/.test(s)) return 'berlin-room-heat-check';
   if (/(berlin-u-bahn-fine|u-bahn fine|caught without a ticket|ticket fine|\bebe\b)/.test(s)) return 'berlin-ticket-fine-step-planner';

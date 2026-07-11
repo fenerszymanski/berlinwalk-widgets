@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-07-11T02:09:19.166Z",
+  "updatedAt": "2026-07-11T07:20:17.547Z",
   "source": "Wix Blog API",
   "popularSource": "Wix Blog metrics.views lifetime sort",
-  "totalPosts": 188,
+  "totalPosts": 189,
   "bookingUrl": "https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based",
   "navTopics": [
     {
@@ -60,6 +60,23 @@
       "relatedToolSlug": "mauerpark-sunday-timeline"
     },
     "secondary": [
+      {
+        "title": "U-Bahn vs S-Bahn in Berlin: What's the Difference?",
+        "slug": "u-bahn-vs-s-bahn-berlin",
+        "path": "/post/u-bahn-vs-s-bahn-berlin",
+        "url": "https://www.berlinwalk.com/post/u-bahn-vs-s-bahn-berlin",
+        "excerpt": "A blue U, a green S and a row of numbers on the same wall. A local guide to the U-Bahn vs S-Bahn difference: which is which, which to take, and why one ticket covers both.",
+        "category": "Tourist Tips",
+        "categorySlug": "tourist-tips",
+        "topic": "first-day",
+        "topicLabel": "First Day in Berlin",
+        "readTime": "6 min read",
+        "publishedDate": "2026-07-11T06:53:23.589Z",
+        "image": "https://static.wixstatic.com/media/5a08a3_55f5b0bf49fd42b1bb41eb25255ef6e5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-s-bahn-hackescher-markt-viaduct-cover.jpg",
+        "thumb": "https://static.wixstatic.com/media/5a08a3_55f5b0bf49fd42b1bb41eb25255ef6e5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-s-bahn-hackescher-markt-viaduct-cover.jpg",
+        "alt": "Berlin S-Bahn train on the red-brick Stadtbahn viaduct curving past the domes and rooftops of the city centre near Hackescher Markt",
+        "relatedToolSlug": "berlin-rail-decoder"
+      },
       {
         "title": "Jewish Museum Berlin: Free Entry, How Long and What to See (2026)",
         "slug": "jewish-museum-berlin-guide",
@@ -127,23 +144,6 @@
         "thumb": "https://static.wixstatic.com/media/5a08a3_56c8fde64eb04e31828d5a7a4273fd21~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-bernauer-memorial-strip-cover.jpg",
         "alt": "The preserved Berlin Wall death strip on Bernauer Strasse seen from the viewing tower, with the TV Tower on the skyline",
         "relatedToolSlug": "berlin-wall-remnants"
-      },
-      {
-        "title": "Kaiser Wilhelm Memorial Church: How to Visit Berlin's Broken Tower (2026)",
-        "slug": "kaiser-wilhelm-memorial-church-berlin",
-        "path": "/post/kaiser-wilhelm-memorial-church-berlin",
-        "url": "https://www.berlinwalk.com/post/kaiser-wilhelm-memorial-church-berlin",
-        "excerpt": "Berlin's 'hollow tooth' is free, quick, and easy to miss the point of. A local guide to visiting the Kaiser Wilhelm Memorial Church: the two interiors, the hours that trip people up, and when to go.",
-        "category": "Tourist Tips",
-        "categorySlug": "tourist-tips",
-        "topic": "free-budget",
-        "topicLabel": "Free & Budget",
-        "readTime": "5 min read",
-        "publishedDate": "2026-07-10T16:08:12.974Z",
-        "image": "https://static.wixstatic.com/media/5a08a3_9e407dc4339c4218861c3f7820e560a3~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-church-night-cover.jpg",
-        "thumb": "https://static.wixstatic.com/media/5a08a3_9e407dc4339c4218861c3f7820e560a3~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-memorial-church-night-cover.jpg",
-        "alt": "The blue-lit modern church and the floodlit broken old tower of the Kaiser Wilhelm Memorial Church at night on Breitscheidplatz",
-        "relatedToolSlug": "memorial-church-visit-planner"
       }
     ]
   },
@@ -1617,6 +1617,23 @@
   ],
   "latest": [
     {
+      "title": "U-Bahn vs S-Bahn in Berlin: What's the Difference?",
+      "slug": "u-bahn-vs-s-bahn-berlin",
+      "path": "/post/u-bahn-vs-s-bahn-berlin",
+      "url": "https://www.berlinwalk.com/post/u-bahn-vs-s-bahn-berlin",
+      "excerpt": "A blue U, a green S and a row of numbers on the same wall. A local guide to the U-Bahn vs S-Bahn difference: which is which, which to take, and why one ticket covers both.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-11T06:53:23.589Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_55f5b0bf49fd42b1bb41eb25255ef6e5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-s-bahn-hackescher-markt-viaduct-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_55f5b0bf49fd42b1bb41eb25255ef6e5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-s-bahn-hackescher-markt-viaduct-cover.jpg",
+      "alt": "Berlin S-Bahn train on the red-brick Stadtbahn viaduct curving past the domes and rooftops of the city centre near Hackescher Markt",
+      "relatedToolSlug": "berlin-rail-decoder"
+    },
+    {
       "title": "Jewish Museum Berlin: Free Entry, How Long and What to See (2026)",
       "slug": "jewish-museum-berlin-guide",
       "path": "/post/jewish-museum-berlin-guide",
@@ -1802,26 +1819,26 @@
       "thumb": "https://static.wixstatic.com/media/5a08a3_741e536377c9487ab9d3539060ae2d8a~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/02-shared-scooters-lined-up-berlin.jpg",
       "alt": "A long row of teal Dott and green Lime rental e-scooters parked along a boulevard in central Berlin",
       "relatedToolSlug": "berlin-e-scooter-rule-checker"
-    },
-    {
-      "title": "Entschuldigung: The German Word That Gets You Through Crowded Berlin",
-      "slug": "entschuldigung-berlin",
-      "path": "/post/entschuldigung-berlin",
-      "url": "https://www.berlinwalk.com/post/entschuldigung-berlin",
-      "excerpt": "The one German word that gets you through Berlin's doors, corridors and counters faster than sorry ever will, with pronunciation, the formal/informal split, and where you will actually need it.",
-      "category": "German Language",
-      "categorySlug": "german-language",
-      "topic": "practical",
-      "topicLabel": "Practical Berlin",
-      "readTime": "5 min read",
-      "publishedDate": "2026-07-07T19:10:03.908Z",
-      "image": "https://static.wixstatic.com/media/5a08a3_d9461d426aa8431099be3eef9bd0a172~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-weltzeituhr-alexanderplatz.jpg",
-      "thumb": "https://static.wixstatic.com/media/5a08a3_d9461d426aa8431099be3eef9bd0a172~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-weltzeituhr-alexanderplatz.jpg",
-      "alt": "Alexanderplatz World Clock, the meeting point where my Berlin walking tour begins",
-      "relatedToolSlug": ""
     }
   ],
   "allPosts": [
+    {
+      "title": "U-Bahn vs S-Bahn in Berlin: What's the Difference?",
+      "slug": "u-bahn-vs-s-bahn-berlin",
+      "path": "/post/u-bahn-vs-s-bahn-berlin",
+      "url": "https://www.berlinwalk.com/post/u-bahn-vs-s-bahn-berlin",
+      "excerpt": "A blue U, a green S and a row of numbers on the same wall. A local guide to the U-Bahn vs S-Bahn difference: which is which, which to take, and why one ticket covers both.",
+      "category": "Tourist Tips",
+      "categorySlug": "tourist-tips",
+      "topic": "first-day",
+      "topicLabel": "First Day in Berlin",
+      "readTime": "6 min read",
+      "publishedDate": "2026-07-11T06:53:23.589Z",
+      "image": "https://static.wixstatic.com/media/5a08a3_55f5b0bf49fd42b1bb41eb25255ef6e5~mv2.jpg/v1/fill/w_980,h_650,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-s-bahn-hackescher-markt-viaduct-cover.jpg",
+      "thumb": "https://static.wixstatic.com/media/5a08a3_55f5b0bf49fd42b1bb41eb25255ef6e5~mv2.jpg/v1/fill/w_520,h_360,fp_0.50_0.50,q_88,enc_avif,quality_auto/01-berlin-s-bahn-hackescher-markt-viaduct-cover.jpg",
+      "alt": "Berlin S-Bahn train on the red-brick Stadtbahn viaduct curving past the domes and rooftops of the city centre near Hackescher Markt",
+      "relatedToolSlug": "berlin-rail-decoder"
+    },
     {
       "title": "Jewish Museum Berlin: Free Entry, How Long and What to See (2026)",
       "slug": "jewish-museum-berlin-guide",

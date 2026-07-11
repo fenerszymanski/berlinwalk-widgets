@@ -3341,6 +3341,43 @@
       "relatedBlog": "/post/kaiser-wilhelm-memorial-church-berlin",
       "iconStatus": "live-wix-media",
       "cmsItemId": "1aefaf7a-14c9-484d-a46f-042e98abafd4"
+    },
+    {
+      "slug": "berlin-rail-decoder",
+      "title": "Berlin Rail Decoder",
+      "lead": "Type a Berlin line label like U8, S41, M10, Bus 100, RE1 or FEX and see what it actually is, which ticket covers it, and what to expect at night.",
+      "category": "Transport",
+      "hubCategory": "Transport",
+      "type": "Guide",
+      "tags": [
+        "U-Bahn",
+        "S-Bahn",
+        "tram",
+        "bus",
+        "regional train",
+        "FEX",
+        "night transport",
+        "public transport",
+        "Berlin tickets",
+        "AB ticket",
+        "tourist tips"
+      ],
+      "aliases": [
+        "U-Bahn vs S-Bahn",
+        "Berlin rail decoder",
+        "which Berlin train",
+        "S-Bahn or U-Bahn",
+        "M10 tram or bus",
+        "FEX Berlin airport train",
+        "RE train Berlin ticket"
+      ],
+      "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/berlin-rail-decoder/",
+      "embedHeight": 1020,
+      "image": "https://static.wixstatic.com/media/5a08a3_0c9b02c415a54a9992ce46ddb5bf3451~mv2.png",
+      "relatedBlog": "/post/u-bahn-vs-s-bahn-berlin",
+      "relatedBlogSlug": "u-bahn-vs-s-bahn-berlin",
+      "iconStatus": "live-wix-media",
+      "cmsItemId": "afb6e1f7-06af-44fa-a50e-9bfdc58797c1"
     }
   ],
   "hubCategories": [
