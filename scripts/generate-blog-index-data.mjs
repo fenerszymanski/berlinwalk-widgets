@@ -180,11 +180,13 @@ const TOPICS = [
 const HERO_SLUGS = {
   lead: 'mauerpark-berlin-sunday',
   secondary: [
+    'currency-exchange-in-berlin',
     'u-bahn-vs-s-bahn-berlin',
-    'jewish-museum-berlin-guide',
-    'uber-in-berlin',
+    'gendarmenmarkt-berlin',
     'air-conditioning-in-berlin',
     'berlin-wall-memorial-bernauer-strasse',
+    'jewish-museum-berlin-guide',
+    'uber-in-berlin',
     'kaiser-wilhelm-memorial-church-berlin',
     'berlin-u-bahn-fine',
     'renting-a-bike-in-berlin',
@@ -228,7 +230,9 @@ const REQUIRED_SLUGS = [
   // Featured curation picks: guarantee they are fetched even if older than the
   // default window so the curated hero/rail survives a regen.
   'mauerpark-berlin-sunday',
+  'currency-exchange-in-berlin',
   'u-bahn-vs-s-bahn-berlin',
+  'gendarmenmarkt-berlin',
   'jewish-museum-berlin-guide',
   'uber-in-berlin',
   'air-conditioning-in-berlin',
