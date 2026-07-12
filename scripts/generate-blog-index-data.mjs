@@ -316,10 +316,10 @@ const START_HERE_LINKS = [
 
 const SPOTLIGHT_TOOLS = [
   {
-    title: 'Berlin First-Day Rescue Plan',
-    slug: 'berlin-first-day-rescue-plan',
-    url: `${BLOG_BASE}/products/berlin-first-day-rescue-plan`,
-    summary: 'Answer 7 questions and get your first 3 hours in Berlin planned from live route times and landing-hour weather. Instant, €9.',
+    title: 'Berlin Trip Planner',
+    slug: 'ultimate-berlin-trip-planner',
+    url: `${BLOG_BASE}/berlin-trip-planner`,
+    summary: 'Enter your dates and stay area to build a Berlin plan with weather, opening-day checks and practical routes between real places.',
   },
   {
     title: 'Medieval Berlin Mini Walk Planner',

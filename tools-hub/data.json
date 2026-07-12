@@ -67,35 +67,6 @@
       "relatedBlog": "/post/jaywalking-in-berlin"
     },
     {
-      "slug": "berlin-first-day-rescue-plan",
-      "title": "Berlin First-Day Rescue Plan",
-      "lead": "Just landed with bags and no plan? Answer 7 questions and get your first 3 hours in Berlin planned from live route times and the weather at your landing hour. Instant, €9.",
-      "category": "Discovery",
-      "image": "https://static.wixstatic.com/media/5a08a3_16cbe016979141c8a40efb3c72c375fd~mv2.png",
-      "widgetUrl": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan",
-      "embedHeight": 1400,
-      "href": "https://www.berlinwalk.com/products/berlin-first-day-rescue-plan",
-      "hubCategory": "TripPlans",
-      "type": "Planner",
-      "priority": 1,
-      "tags": [
-        "first day",
-        "arrival",
-        "airport",
-        "hotel",
-        "taxi",
-        "transit",
-        "rescue plan",
-        "BER"
-      ],
-      "aliases": [
-        "first day rescue",
-        "rescue plan",
-        "arrival plan"
-      ],
-      "embedHidden": true
-    },
-    {
       "slug": "hidden-berlin-photo-missions",
       "title": "Hidden Berlin Photo Missions",
       "lead": "Turn Berlin's secret center into a 10-card photo hunt from Anhalter Bahnhof to Alexanderplatz. Instant PDF, €3.99.",
@@ -1204,7 +1175,7 @@
       "image": "https://static.wixstatic.com/media/5a08a3_2ce36b06e4354d7db943e072d10f6dd0~mv2.png",
       "widgetUrl": "https://fenerszymanski.github.io/berlinwalk-widgets/ultimate-berlin-trip-planner/",
       "embedHeight": 2400,
-      "status": "draft",
+      "href": "https://www.berlinwalk.com/berlin-trip-planner",
       "hubCategory": "TripPlans",
       "type": "Planner",
       "priority": 1,
@@ -3573,10 +3544,10 @@
     }
   ],
   "spotlightTool": {
-    "slug": "berlin-first-day-rescue-plan",
-    "label": "New · Instant Plan",
-    "headline": "Landing in Berlin soon? Get your first 3 hours planned.",
-    "body": "Answer 7 questions and I build your route, your transport call, and a timed plan for your first 3 hours from live route times and the weather at your landing hour. Instant, €9.",
-    "cta": "Get my rescue plan"
+    "slug": "ultimate-berlin-trip-planner",
+    "label": "Plan before you arrive",
+    "headline": "Build your Berlin days around real places.",
+    "body": "Enter your dates and stay area. I build the days area by area, with weather, opening-day checks and practical routes between stops.",
+    "cta": "Build my Berlin plan"
   }
 }

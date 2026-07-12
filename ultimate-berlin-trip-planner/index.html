@@ -11999,7 +11999,6 @@
   var TOUR_DEFAULT_SLOT = { start: '11:30', end: '13:30' };
   var TOUR_SUMMER_AFTERNOON_SLOT = { start: '15:30', end: '17:30' };
   var TOUR_LOCATION = 'World Clock, Alexanderplatz, Berlin';
-  var RESCUE_PLAN_URL = 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan?utm_source=trip_planner&utm_medium=widget&utm_campaign=tp_rescue_bridge&utm_content=day1_card';
   var PDF_ENGINE_URL = 'https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
   var BW_LOGO_URL = 'assets/berlinwalk-logo-rounded.png';
   var BW_LOGO_ASPECT_RATIO = 1;
@@ -15052,15 +15051,6 @@
         '</a>' +
       '</div>' +
     '</section>';
-  }
-
-  function firstDayRescueCardHtml(day) {
-    if (!day || day.dayNumber !== 1) return '';
-    return '<aside class="bw-rescue-bridge" aria-label="Berlin First-Day Rescue Plan">' +
-      '<span class="bw-rescue-icon" aria-hidden="true">' + iconSvg('shield') + '</span>' +
-      '<span class="bw-rescue-copy"><em>First hour</em><strong>Want the exact Day 1 decisions?</strong><span>The free plan gives you the shape. If the first hour is the stressful bit, I can make it exact with live route timing, luggage logic, weather, and the first decisions after you land.</span></span>' +
-      '<a class="bw-rescue-cta" href="' + escapeHtml(RESCUE_PLAN_URL) + '" target="_top" data-rescue-cta data-rescue-surface="day1_card">' + iconSvg('zap') + '<span>Get the €9 Rescue Plan</span></a>' +
-    '</aside>';
   }
 
   function rescueFactsCacheKey() {
@@ -20148,7 +20138,6 @@
         '</div>';
       }).join('');
       var routeCard = dayRouteCardHtml(day);
-      var rescueCard = firstDayRescueCardHtml(day);
       var rescueFactsCard = rescueFactsCardHtml(day);
       var weatherChip = dayWeatherChipHtml(day);
       var openingNotes = dayOpeningStatusHtml(day);
@@ -20163,7 +20152,6 @@
           rescueFactsCard +
           blocks +
           routeCard +
-          rescueCard +
         '</div>' +
       '</article>';
     }).join('');

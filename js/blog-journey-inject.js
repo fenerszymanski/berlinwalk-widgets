@@ -1761,7 +1761,7 @@
     });
   }
 
-  var FDR_PRODUCT_URL = 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan';
+  var FDR_PRODUCT_URL = 'https://www.berlinwalk.com/berlin-trip-planner';
   var WALL_TIMELINE_URL = 'https://www.berlinwalk.com/berlin-wall-timeline';
   var WALL_TIMELINE_COVER = 'https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/assets/social/berlin-wall-timeline-1200x630.jpg';
   var WALL_TIMELINE_SLUGS = {
@@ -1791,17 +1791,27 @@
     var url = new URL(FDR_PRODUCT_URL);
     url.searchParams.set('utm_source', 'berlinwalk');
     url.searchParams.set('utm_medium', 'blog_bridge');
-    url.searchParams.set('utm_campaign', 'fdr_blog_bridge');
+    url.searchParams.set('utm_campaign', 'trip_planner_blog_bridge');
     url.searchParams.set('utm_content', slug || 'blog_post');
     return url.toString();
   }
 
   function hasExistingFdrReference(body) {
-    var refs = body.querySelectorAll('a[href*="/products/berlin-first-day-rescue-plan"]');
+    var refs = body.querySelectorAll('a[href*="/berlin-trip-planner"]');
     for (var i = 0; i < refs.length; i++) {
       if (!refs[i].closest('[' + FDR_BRIDGE_MARKER + '], [' + TOOL_MARKER + '], [' + JOURNEY_MARKER + ']')) return true;
     }
     return false;
+  }
+
+  function rewriteLegacyFdrReferences(body, slug) {
+    if (!body) return;
+    var links = body.querySelectorAll('a[href*="/products/berlin-first-day-rescue-plan"]');
+    for (var i = 0; i < links.length; i++) {
+      if (links[i].closest('[' + TOOL_MARKER + '], [' + JOURNEY_MARKER + ']')) continue;
+      links[i].href = fdrBridgeUrl(slug);
+      if (/first-day rescue plan/i.test(cleanText(links[i].textContent))) links[i].textContent = 'Berlin Trip Planner';
+    }
   }
 
   function findFdrInsertionPoint(body) {
@@ -1824,6 +1834,7 @@
   function insertFdrBridge(body) {
     var old = document.querySelector('[' + FDR_BRIDGE_MARKER + ']');
     var slug = currentSlug();
+    rewriteLegacyFdrReferences(body, slug);
     if (!body || !slug || !FDR_BRIDGE_SLUGS[slug] || hasExistingFdrReference(body)) {
       if (old) old.remove();
       return;
@@ -1837,23 +1848,23 @@
     bridge.className = 'bw-blog-tool-prompt bw-blog-fdr-bridge';
     bridge.setAttribute(FDR_BRIDGE_MARKER, '1');
     bridge.setAttribute('data-bw-blog-fdr-key', slug);
-    bridge.setAttribute('aria-label', 'Berlin First-Day Rescue Plan');
+    bridge.setAttribute('aria-label', 'Berlin Trip Planner');
     bridge.innerHTML =
       '<div>' +
         '<span class="bw-blog-tool-kicker">Arriving in Berlin soon?</span>' +
-        '<strong>Berlin First-Day Rescue Plan</strong>' +
-        '<p class="bw-blog-tool-copy">Landing with bags and no plan is how your first Berlin hours get wasted. Tell me your arrival time, luggage and first priority, and you get one clear decision sheet for exactly that arrival. Instant, €9.</p>' +
+        '<strong>Berlin Trip Planner</strong>' +
+        '<p class="bw-blog-tool-copy">Enter your dates and where you are staying. I build your Berlin days area by area, with weather and opening-day checks. The preview is free.</p>' +
       '</div>' +
-      '<a class="bw-blog-tool-button" href="' + escapeAttr(fdrBridgeUrl(slug)) + '" target="_top" data-bw-blog-fdr-click="1">Get my first-day plan</a>';
+      '<a class="bw-blog-tool-button" href="' + escapeAttr(fdrBridgeUrl(slug)) + '" target="_top" data-bw-blog-fdr-click="1">Build my Berlin plan</a>';
 
     bridge.addEventListener('click', function (event) {
       var link = event.target.closest('[data-bw-blog-fdr-click]');
       if (!link) return;
-      pushEvent('bw_blog_fdr_bridge_click', { slug: slug, href: link.href });
+      pushEvent('bw_blog_trip_planner_bridge_click', { slug: slug, href: link.href });
     });
 
     point.parent.insertBefore(bridge, point.after.nextSibling);
-    pushEvent('bw_blog_fdr_bridge_view', { slug: slug });
+    pushEvent('bw_blog_trip_planner_bridge_view', { slug: slug });
   }
 
   function insertMobileGuide(body, items) {

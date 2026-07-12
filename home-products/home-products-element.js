@@ -1,10 +1,10 @@
 const BW_HOME_PRODUCTS = [
   {
-    title: 'Berlin First-Day Rescue Plan',
+    title: 'Berlin Trip Planner',
     label: 'Before you land',
-    text: 'Your first day in Berlin, planned before you land: airport arrival, the right ticket, food near your hotel, and the day-one mistakes I see visitors make. I put the plan together personally.',
-    cta: 'Get my first-day plan',
-    href: 'https://www.berlinwalk.com/products/berlin-first-day-rescue-plan',
+    text: 'Enter your dates and where you are staying. I build your Berlin days area by area, with weather, opening-day checks and practical routes between real places.',
+    cta: 'Build my Berlin plan',
+    href: 'https://www.berlinwalk.com/berlin-trip-planner',
   },
   {
     title: 'Hidden Berlin Audio Route',

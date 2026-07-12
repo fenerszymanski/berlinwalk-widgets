@@ -84,7 +84,7 @@ For most city stays, the better logic is:
 - **Central station or city luggage storage** if the hotel cannot help.
 - **Airport storage** only when the airport itself remains part of your day.
 
-If this is your first Berlin arrival and you want a paid, personalized first-hour decision, the [Berlin First-Day Rescue Plan](https://www.berlinwalk.com/products/berlin-first-day-rescue-plan) is built for exactly that airport/train/hotel/luggage problem. For a normal free article plan, keep reading and use the simple rules here.
+If this is your first Berlin arrival, start with the [Berlin Trip Planner](https://www.berlinwalk.com/berlin-trip-planner). Enter your dates and stay area, then use the free preview to see how the days fit together. For the luggage decision itself, keep reading and use the simple rules here.
 
 ## Choose an easy first area
 
