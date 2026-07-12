@@ -47,9 +47,18 @@ welcome `VKufY4L`, owner notification `VKugjPv`.
 
 Local source was updated on 2026-07-10 with a Berlin First-Day Rescue Plan
 cross-sell block (between the download CTA and the tour section,
-`utm_campaign=fdr_leadmagnet_bridge`). The live Wix Triggered Email `VKufY4L`
-still needs a manual editor paste of `wix-html-block.html` before the offer
-goes out to new subscribers; the direct email IDs remain unchanged.
+`utm_campaign=fdr_leadmagnet_bridge`). The first live paste of that source left
+the old no-FDR HTML component below it. On 2026-07-10 at 23:01 CEST the old
+component was deleted in the Wix editor, the single remaining component was
+published, and the list readback showed `VKufY4L` as `Published`.
+
+A fresh lead-form test with `yusuf.ucuz+fdrqa2@gmail.com` delivered Gmail message
+`19f4dd6e3624fd24`. The delivered body was single-copy: one H1, one download
+CTA, one FDR block, one tour block, and one signature/footer; the PDF and FDR
+UTM link were correct. Wix displayed its normal unsupported-HTML sanitization
+warning; the rendered email remained intact. The test `SurvivalMapEmailLogs`
+row and Wix contact were deleted after verification. The direct email IDs remain
+unchanged.
 
 Previous update: 2026-05-29, new AI-page PDF URL.
 

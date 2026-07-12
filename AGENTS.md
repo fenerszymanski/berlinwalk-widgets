@@ -89,7 +89,12 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
   The canonical standard is `../BERLINWALK_EDITORIAL_VOICE_STANDARD.md`; for a
   full accepted blog example, use
   `blog-drafts/berlin-transport-strike.body.md`. Widget UI can stay compact,
-  but it should still sound like a decision Yusuf would give in the city.
+  but it should still sound like a decision Yusuf would give in the city. For
+  compact route/UI copy, name the real place, say what it is, and give one
+  plain thing the visitor can do there; do not use generic AI route filler
+  such as `keep walking in the same area` or `make the day easier`. This rule
+  is mandatory for every AI-generated public text too, including captions,
+  alt text, social/email copy, and product/UI microcopy.
 - **Brand guide source:** `BerlinWalk_Brand_Guide_v1_2_revised.pdf` (Yusuf's downloads — not in repo)
 - **Daily blog publishing approval:** Daily blog automation may complete the
   full package, deploy required widget/data/icon assets, and QA the Wix draft,

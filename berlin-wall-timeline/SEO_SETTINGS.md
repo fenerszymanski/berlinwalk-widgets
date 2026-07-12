@@ -26,6 +26,7 @@ Wix page SEO panel so they are present in the server-rendered HTML for crawlers.
 - **og:title:** `The Berlin Wall Timeline | Scroll Through 1945 to 1990`
 - **og:description:** `An interactive Berlin Wall timeline from BerlinWalk. Scroll through the city split, the Wall, the death strip, escapes and the fall in 1989, then see what remains today.`
 - **og:image:** `https://fenerszymanski.github.io/berlinwalk-widgets/berlin-wall-timeline/assets/social/berlin-wall-timeline-1200x630.jpg`
+- **Wix native Social Share image URL:** `https://static.wixstatic.com/media/5a08a3_e38552ecc99a42799e113d3aa0761bde~mv2.png/v1/fill/w_1731,h_909,al_c/5a08a3_e38552ecc99a42799e113d3aa0761bde~mv2.png`
 - **twitter:card:** `summary_large_image`
 - **og:image:width:** `1200`
 - **og:image:height:** `630`
