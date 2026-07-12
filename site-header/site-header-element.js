@@ -382,7 +382,7 @@ class BWHeaderElement extends HTMLElement {
           display: flex;
           gap: 24px;
           justify-content: space-between;
-          padding: 16px 24px;
+          padding: 30px 24px;
           transition: padding 200ms ease;
         }
 
@@ -830,7 +830,7 @@ class BWHeaderElement extends HTMLElement {
             flex-direction: row !important;
             gap: 12px;
             justify-content: space-between !important;
-            min-height: 76px;
+            min-height: 90px;
             padding: 10px 18px !important;
           }
           .bw-header-logo {
