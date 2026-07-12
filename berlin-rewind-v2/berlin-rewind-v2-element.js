@@ -21,14 +21,14 @@
  *   <bw-berlin-rewind-result-games-v2></bw-berlin-rewind-result-games-v2>
  *   <script src=".../berlin-rewind-v2/berlin-rewind-v2-element.js" defer></script>
  *
- * Build marker: berlin-rewind-v2-year-only-20260712
+ * Build marker: berlin-rewind-v2-year-only-rename-20260712
  */
 (function () {
   'use strict';
 
   var BOOK_URL = 'https://www.berlinwalk.com/book-berlin-walking-tour/berlin-free-walking-tour-tip-based';
   var GAMES_URL = 'https://www.berlinwalk.com/games?utm_source=berlin_rewind&utm_medium=result_screen&utm_campaign=berlinwalk_games&utm_content=play_other_games';
-  var BUILD = 'berlin-rewind-v2-year-only-20260712';
+  var BUILD = 'berlin-rewind-v2-year-only-rename-20260712';
   var TRACKING_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-event';
   var TRACKING_ENDPOINT_LOCAL = 'http://127.0.0.1:5173/api/rewind-event';
   var LEADERBOARD_ENDPOINT_PROD = 'https://app.berlinwalk.com/api/rewind-leaderboard';
@@ -152,9 +152,15 @@
     ".bw-rw-tscore{font-family:'IBM Plex Mono',SFMono-Regular,Menlo,monospace;font-size:13px;font-weight:700;color:var(--gd);width:66px;text-align:right;flex:0 0 auto;}",
     // global leaderboard
     '.bw-rw-global{background:var(--paper);border:2px solid var(--line);border-radius:14px;padding:10px 12px;margin:0 0 12px;}',
-    '.bw-rw-global-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;}',
+    '.bw-rw-global-head{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px;}',
     ".bw-rw-global-k{font-family:'IBM Plex Mono',SFMono-Regular,Menlo,monospace;font-size:10px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--lg);}",
-    ".bw-rw-global-name{border:2px solid var(--line);background:var(--cream);color:var(--gd);border-radius:999px;padding:5px 9px;font-family:'IBM Plex Mono',SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:600;cursor:pointer;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}",
+    ".bw-rw-global-name{display:inline-flex;align-items:center;gap:7px;border:none;background:var(--y);color:var(--gd);border-radius:999px;padding:4px 5px 4px 11px;font-family:'IBM Plex Mono',SFMono-Regular,Menlo,monospace;font-size:11px;font-weight:700;cursor:pointer;max-width:100%;box-shadow:0 2px 8px rgba(16,36,20,.16);}",
+    '.bw-rw-global-name:hover{filter:brightness(1.03);}',
+    '.bw-rw-global-name:active{transform:scale(.98);}',
+    '.bw-rw-gn-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:132px;}',
+    ".bw-rw-gn-edit{flex:0 0 auto;display:inline-flex;align-items:center;gap:3px;background:var(--gd);color:var(--y);border-radius:999px;padding:3px 9px;font-size:10px;font-weight:700;letter-spacing:.4px;}",
+    '.bw-rw-lhint{font-size:11.5px;line-height:1.4;color:var(--lg);margin:0 0 9px;}',
+    '.bw-rw-lhint b{color:var(--g);font-weight:700;}',
     '.bw-rw-me{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:8px;}',
     '.bw-rw-me span{display:block;background:#F3F7EC;border-radius:10px;padding:7px 8px;font-size:10px;font-weight:700;color:var(--lg);line-height:1.25;}',
     ".bw-rw-me b{display:block;color:var(--gd);font-family:'IBM Plex Mono',SFMono-Regular,Menlo,monospace;font-size:14px;margin-top:2px;}",
@@ -603,7 +609,7 @@
         return '<div class="bw-rw-global" data-lb-board>' +
           '<div class="bw-rw-global-head">' +
             '<span class="bw-rw-global-k">Global ranking</span>' +
-            '<button type="button" class="bw-rw-global-name" data-lb-name title="Change leaderboard name">' + esc(name) + '</button>' +
+            '<button type="button" class="bw-rw-global-name" data-lb-name aria-label="Change your name on the global board"><span class="bw-rw-gn-name">' + esc(name) + '</span><span class="bw-rw-gn-edit">✏️ Rename</span></button>' +
           '</div>' +
           '<p class="bw-rw-lmuted">Loading the global board...</p>' +
         '</div>';
@@ -613,8 +619,9 @@
         return '<div class="bw-rw-global" data-lb-board>' +
           '<div class="bw-rw-global-head">' +
             '<span class="bw-rw-global-k">Global ranking</span>' +
-            '<button type="button" class="bw-rw-global-name" data-lb-name title="Change leaderboard name">' + esc(name) + '</button>' +
+            '<button type="button" class="bw-rw-global-name" data-lb-name aria-label="Change your name on the global board"><span class="bw-rw-gn-name">' + esc(name) + '</span><span class="bw-rw-gn-edit">✏️ Rename</span></button>' +
           '</div>' +
+          '<p class="bw-rw-lhint">That yellow name is you on the board. Tap <b>Rename</b> to make it yours.</p>' +
           '<p class="bw-rw-lmuted">The global board is unavailable right now. Your score still stays on this device.</p>' +
         '</div>';
       }
@@ -640,8 +647,9 @@
       return '<div class="bw-rw-global" data-lb-board>' +
         '<div class="bw-rw-global-head">' +
           '<span class="bw-rw-global-k">Global ranking</span>' +
-          '<button type="button" class="bw-rw-global-name" data-lb-name title="Change leaderboard name">' + esc(name) + '</button>' +
+          '<button type="button" class="bw-rw-global-name" data-lb-name aria-label="Change your name on the global board"><span class="bw-rw-gn-name">' + esc(name) + '</span><span class="bw-rw-gn-edit">✏️ Rename</span></button>' +
         '</div>' +
+        '<p class="bw-rw-lhint">That yellow name is you on the board. Tap <b>Rename</b> to make it yours.</p>' +
         '<div class="bw-rw-me" aria-label="Your global Rewind standing">' +
           '<span>You<b>' + (me.rank ? '#' + esc(me.rank) : 'New') + '</b></span>' +
           '<span>Total<b>' + esc(me.totalScore || 0) + '</b></span>' +
