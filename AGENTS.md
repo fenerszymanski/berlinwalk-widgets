@@ -74,6 +74,7 @@ All Velo HTTP functions live in `backend/http-functions.js` on the Wix site (not
 ## 4. Brand system
 
 - **Colors:** Green `#1B5E20` (primary), Yellow `#FFE600` (energy), Lime `#7CB342` (accent), Light Green `#C5E1A5` (soft fill), Berlin Red `#E63946` (occasional caution only)
+- **Yellow contrast rule:** A yellow (`#FFE600` or equivalent brand-yellow token) button, CTA, badge, chip, or other text-bearing surface must use dark green or near-black text (`#123D18`, `#1B5E20`, or `#212121`). White text on yellow is prohibited across the project, including hover, focus, active, and visited states. For link-styled buttons, use enough selector specificity to beat generic anchor color rules and verify the final computed color in browser QA.
 - **Fonts:** Montserrat (default), Merriweather (selective serif for editorial moments)
 - **Tone:** First-person Yusuf voice, atmospheric, historically grounded, **no em dashes**, no marketing fluff, confident but restrained.
 - **Project-wide editorial voice:** public widget/tool/site/game copy follows

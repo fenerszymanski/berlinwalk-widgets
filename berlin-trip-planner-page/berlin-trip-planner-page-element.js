@@ -667,10 +667,11 @@
           outline-offset: 4px;
         }
 
-        .bw-trip-btn-primary {
+        .bw-trip-page .bw-trip-btn-primary,
+        .bw-trip-page .bw-trip-btn-primary:visited {
           background: var(--yellow);
           box-shadow: 0 12px 24px rgba(180, 155, 0, 0.18);
-          color: #123D18;
+          color: var(--green-dark);
         }
 
         .bw-trip-btn-primary:hover,
@@ -926,12 +927,15 @@
         }
 
         .bw-trip-widget-shell {
-          background: #FFFFFF;
-          border: 1px solid #D9E3CE;
-          border-radius: 18px;
-          box-shadow: 0 26px 62px rgba(27, 94, 32, 0.11);
+          background: transparent;
+          border: 0;
+          border-radius: 0;
+          box-shadow: none;
+          margin-inline: auto;
+          max-width: 900px;
           min-width: 0;
-          overflow: hidden;
+          overflow: visible;
+          width: 100%;
         }
 
         .bw-trip-widget-shell iframe {
@@ -1156,9 +1160,8 @@
           }
 
           .bw-trip-widget-shell {
-            border-left: 0;
-            border-radius: 12px;
-            border-right: 0;
+            border: 0;
+            border-radius: 0;
           }
 
           .bw-trip-section {
